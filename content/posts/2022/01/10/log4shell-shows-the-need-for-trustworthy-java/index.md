@@ -18,8 +18,8 @@ related_posts:
 frozen: false
 ---
 
-What Just Happened? {#h2-0-what-just-happened}
-----------------------------------------------
+What Just Happened?
+-------------------
 
 I believe Log4Shell is Java's biggest crisis. I reported on it in the "[New \& Noteworthy](https://betterprojectsfaster.com/guide/java-full-stack-report-2022-01-new-noteworthy)" section of [my newsletter](https://bpfnl.substack.com). A quick recap: The US cybersecurity and infrastructure agency director [called Log4Shell](https://www.zdnet.com/article/log4j-flaw-this-new-threat-is-going-to-affect-cybersecurity-for-a-long-time/) "one of the most serious that I've seen in my entire career, if not the most serious". Exploiting it may be as easy as sending an HTTP request to a Java application, with a JNDI link in the HTTP header. The last wide-spread software vulnerability of this magnitude [scored 7.5](https://nvd.nist.gov/vuln/detail/CVE-2014-0160) - Log4Shell [scored a 10](https://nvd.nist.gov/vuln/detail/CVE-2021-44228#).
 
@@ -30,8 +30,8 @@ It seems that we know how to fix Log4Shell and are busy applying the fixes. So I
 
 These are my answers. I hope they can contribute to the discussion of Log4Shell in the Java community. I'm not a security expert, and I don't have unique insights into Log4Shell. So if I wrote something wrong, or if you disagree with me, then please let me know!
 
-How Did We Handle Log4Shell? {#h2-1-how-did-we-handle-log4shell}
-----------------------------------------------------------------
+How Did We Handle Log4Shell?
+----------------------------
 
 In politics, there's a saying: "It's not the crisis that kills you. It's how you handle it." The good thing is we know how to handle a crisis like Log4Shell:
 
@@ -61,14 +61,14 @@ Put another way: When you fly, they always tell you how to evacuate in case of a
 
 **Summary:** I think the Java community handled this crisis poorly and needs to do much better next time.
 
-How Can We Prevent Another Log4Shell? {#h2-2-how-can-we-prevent-another-log4shell}
-----------------------------------------------------------------------------------
+How Can We Prevent Another Log4Shell?
+-------------------------------------
 
 In a community as big as the Java one, we **can't** prevent all vulnerabilities. What we **can** do is reduce the probability of a future crisis and lessen its impact. I'll get back to this later.
 
 Let's first look at what we did in the past as a guide for what we should do in the future. As Winston Churchill [supposedly said](https://liberalarts.vt.edu/magazine/2017/history-repeating.html), "Those that fail to learn from history are doomed to repeat it." And I'm not sure that Java can stomach another Log4Shell.
 
-### Remote JNDI Code Execution {#h3-3-remote-jndi-code-execution}
+### Remote JNDI Code Execution
 
 From what I know, Log4Shell could only happen because Java can load remote code over [JNDI](https://en.wikipedia.org/wiki/Java_Naming_and_Directory_Interface) and execute it, no questions asked. That's not a bug. That's how this feature was supposed to work - when it was designed in **1997** . Now, this sounds dangerous **today**. So why didn't Oracle do something about it?
 
@@ -81,7 +81,7 @@ So did Oracle's fixes not work? Or did the attacks simply find other security ho
 
 **Summary:** Oracle fixed remote JNDI code execution multiple times but ultimately failed.
 
-### Deserialization Attacks {#h3-4-deserialization-attacks}
+### Deserialization Attacks
 
 Now one of the reasons why Oracle's fixes didn't work was because of exploits for Java serialization. In these so-called "deserialization attacks", our code reads something different than what was initially stored. OWASP [tells us](https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html#java) how to defend against these attacks.
 
@@ -97,7 +97,7 @@ Again, it seems that these fixes didn't prevent Log4Shell, either: Deserializati
 
 **Summary:** Oracle tried multiple times to fix Java deserialization attacks but ultimately failed.
 
-### Java Security Manager {#h3-5-java-security-manager}
+### Java Security Manager
 
 Remote JNDI code execution in Java enabled Log4Shell. Another way of fixing this would be to tell Java, "Don't load code from the Internet". So why didn't Oracle do something about that?
 
@@ -113,7 +113,7 @@ Maybe the Java Security Manager was too cumbersome to use. But honestly, I think
 
 **Summary:** Java's built-in Security Manager probably could have prevented Log4Shell, but we Java developers didn't use it.
 
-### Trustworthy Java? {#h3-6-trustworthy-java}
+### Trustworthy Java?
 
 So we have this company that tried to fix security holes in its software multiple times but ultimately failed. And the developers could have written more secure code but didn't. And it all came to a head after a series of successful attacks on their software. The company was "under fire from some of its larger customers--government agencies, financial companies and others--about the security problems". So the company changed its processes and culture and launched the "Trustworthy Computing" initiative.
 
@@ -143,7 +143,7 @@ So that's **reason number four** for "Trustworthy Java": If Java doesn't get mor
 
 **Summary:** We need "Trustworthy Java" to prepare for the next crisis, to regain trust, to change the processes and culture in Java security, and to keep developers from leaving Java for more secure alternatives.
 
-### Trustworthy Java! {#h3-7-trustworthy-java}
+### Trustworthy Java!
 
 Let's assume that my wish is granted and Java gets the "Trustworthy Java" initiative. What would actually happen then?
 
@@ -202,7 +202,7 @@ Eventually, fixing Java vulnerability comes down to patching Java applications. 
 Here are two approaches for improving Java application patching that I happen to know. I'm sure there are many more!
 
 * We Java developers probably know most direct dependencies of our Java applications. But we generally don't know the dependencies of our dependencies. A "[Software bill of materials](https://en.wikipedia.org/wiki/Software_bill_of_materials)" (SBOM) solves that issue. It's a list of all components of an application. That's why an SBOM can tell us quickly if our applications are vulnerable. It seems that vendors who want to sell software to the US government [will need such an SBOM](https://www.cybersecuritydive.com/news/software-bill-of-materials-sbom-biden-executive-order-supply-chain/606846/) in the future. The ripple effects of that decision could make SBOM break through into the mainstream and change how we build our Java applications.
-* How quickly can we patch our Java applications? Well, who says that we need to do this **manually** ? Java applications increasingly run in virtual machines and containers. Imagine how much time and money we could have saved during Log4Shell if VMware, Docker \& Kubernetes had automatically updated Log4j! Sounds far-fetched? RedHat's OpenShift [apparently already does this](https://www.youtube.com/watch?v=OqxeyfTeAy4&amp;t=3121s) for "blessed Java container images".
+* How quickly can we patch our Java applications? Well, who says that we need to do this **manually** ? Java applications increasingly run in virtual machines and containers. Imagine how much time and money we could have saved during Log4Shell if VMware, Docker \& Kubernetes had automatically updated Log4j! Sounds far-fetched? RedHat's OpenShift [apparently already does this](https://www.youtube.com/watch?v=OqxeyfTeAy4&t=3121s) for "blessed Java container images".
 
 And here's how I would let the world **know** about "Trustworthy Java".
 

@@ -44,7 +44,7 @@ We are going the make the "Hello World"-equivalent of an electronics project: a 
 
 Let's get started!
 
-### Raspberry Pi {#h3-0-raspberry-pi}
+### Raspberry Pi
 
 The Raspberry Pi is a full-PC-on-a-small-board. There are different types, but we will be using a Raspberry Pi 4 Model B in this article. This board is available with 3 different memory sizes (2, 4, or 8Gb) starting from 35$. You can find a local or online reseller on the [product page](https://www.raspberrypi.org/products/raspberry-pi-4-model-b).
 
@@ -82,7 +82,7 @@ OpenJDK Server VM (build 11.0.9+11-post-Raspbian-1deb10u1, mixed mode)
 ```
 
 
-### **New Products 2020** {#h3-1-new-products-2020}
+### **New Products 2020**
 
 We need to mention two important new products released in (late) 2020!
 
@@ -138,7 +138,7 @@ This product reminded me of my very first computer 35 years ago, the Commodore 6
  </figcaption>
 </figure>
 
-### **Install additional tools** {#h3-2-install-additional-tools}
+### **Install additional tools**
 
 OK, we have a Raspberry Pi, what's next? Let's add some developer-stuff to it...
 
@@ -189,7 +189,7 @@ gpio version: 2.52
 ```
 
 
-### **The Wiring** {#h3-3-the-wiring}
+### **The Wiring**
 
 This is an electronics project, so we need to connect some components to our Raspberry Pi. I've used some basic ones which you will find in any [electronics starter kit](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313&_nkw=electronics+starter+kit&_sacat=0): LEDs and 330Ω-resistors. Combined with a breadboard and some wires, you can easily set-up a project like this. Each LED is connected to a GPIO on the plus-side and with a resistor to the shared ground for the negative side of the LED. We use the resistors because the GPIOs work with 0V for a false/off/low state and 3.3V for true/on/high state, but most LEDs are designed for lower voltages.
 
@@ -219,7 +219,7 @@ You can calculate the exact resistor value for each LED-type, but we use the sam
  </figcaption>
 </figure>
 
-### **The Application** {#h3-4-the-application}
+### **The Application**
 
 TL;DR; run these commands to build and start the application directly on your Raspberry Pi:
 
@@ -314,7 +314,7 @@ for (GpioPinPwmOutput led : leds) {
 ```
 
 
-### **Building and Running** {#h3-5-building-and-running}
+### **Building and Running**
 
 The full code contains some more LED methods, so take a look at it to find out what is already there. Get the full Maven project from GitHub, package and run it directly on the Raspberry Pi with these commands:
 
@@ -351,7 +351,7 @@ Done
 
 And there you have it, the log of the application, controlling the LEDs as you can see in the movie at the start of this article.
 
-### **What's next?** {#h3-6-what-s-next}
+### **What's next?**
 
 You have to agree, this is a perfect, fun, small project for the Christmas holiday?!
 

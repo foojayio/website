@@ -26,8 +26,8 @@ In short, it offers a single facade over multiple backend parts.
 
 Moreover, it provides each client type, *e.g.,* desktop or mobile, exactly the data that it needs and not more in the format required by this client type.
 
-The use-case {#h2-0-the-use-case}
----------------------------------
+The use-case
+------------
 
 Imagine the following use-case.
 
@@ -43,8 +43,8 @@ Depending on the client, we want more or less data. For example, on a client wit
 
 Every client requires its specific data and for performance reasons, we want to fetch them in a single call. It sounds like a use-case for .
 
-Setting up the demo {#h2-1-setting-up-the-demo}
------------------------------------------------
+Setting up the demo
+-------------------
 
 In order to simplify things, I'll keep only three sources of data: products, news and technical data. Three unrelated data sources are enough to highlight the issue.
 
@@ -72,8 +72,8 @@ At this point, everything is fine. We can provide different data depending on th
 
 As it doesn't add anything to the demo, I won't provide different data depending on the client in the following.
 
-Migrating to microservices {#h2-2-migrating-to-microservices}
--------------------------------------------------------------
+Migrating to microservices
+--------------------------
 
 At one point, the organization decides to migrate to a microservices architecture. The reason might be because the CTO read about microservices in a blog post, because the team lead wants to add microservices on its resume, or even because the development grew too big and the organization do need to evolve. In any case, the monolith has to be split in *two* microservices: a catalog providing products and a newsfeed providing... news.
 
@@ -108,8 +108,8 @@ def get_news():
 
 Now, each client needs two calls, and filter out data that are not relevant.
 
-Dedicated backend-for-frontend {#h2-3-dedicated-backend-for-frontend}
----------------------------------------------------------------------
+Dedicated backend-for-frontend
+------------------------------
 
 Because of the issues highlighted above, a solution is to develop one application that does the aggregation and filtering. There should be one for each client type, and it should be cared for by the same team as the client. Again, for this demo, it's enough to have a single one that only does aggregation.
 
@@ -135,8 +135,8 @@ def home():
 2. Get debug info
 3. The returned JSON should be designed for easy consumption on the client side. To illustrate it, I chose for the debug data to be nested instead of top-level.
 
-Backend-for-frontend at the API Gateway level {#h2-4-backend-for-frontend-at-the-api-gateway-level}
----------------------------------------------------------------------------------------------------
+Backend-for-frontend at the API Gateway level
+---------------------------------------------
 
 If you're offering APIs, whether internally or to the outside world, chances are high that you're already using an API Gateway. If not, you should probably [deeply consider](https://apisix.apache.org/docs/apisix/terminology/api-gateway/) starting to. In the following, I assume that you do use one.
 
@@ -200,8 +200,8 @@ At this point, the (single) client can query `http://localhost:9080/` and get th
 
 In a "real life" microservices-based organization, every team should be independent of each other. With this approach, each can develop its own BFF as a plugin and deploy it independently in the gateway.
 
-Bonus: a poor man's BFF {#h2-5-bonus-a-poor-man-s-bff}
-------------------------------------------------------
+Bonus: a poor man's BFF
+-----------------------
 
 The microservices architecture creates two problems for clients:
 
@@ -300,8 +300,8 @@ The response will in turn look like:
 
 It's up to the client to filter out unnecessary data. It's not as good as true BFF, but we still managed to make a single call out of 4.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 A microservices architecture brings a ton of technical issues to cope with.
 

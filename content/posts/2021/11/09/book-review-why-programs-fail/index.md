@@ -30,8 +30,8 @@ Andreas is a professor at Saarland University and as such has written a book and
 
 I used the word mostly since the book includes some more intermediate concepts and might be difficult for complete novices. My review focuses on the book since the website is a moving target and you can probably check it out faster than you can read this.
 
-What is it About {#h2-0-what-is-it-about}
------------------------------------------
+What is it About
+----------------
 
 I was mostly looking for a debugging book. This isn't a debugging book. At least not in the way I was hoping for, in fact his website is closer to what I was looking for in the first place.
 
@@ -55,8 +55,8 @@ The book doesn't stop here, it talks about reproducibility and goes deep into te
 
 The book spends a lot of time on the process surrounding the actual debugging. Issue tracking, testing, logging and defensive coding practices.
 
-What I Liked {#h2-1-what-i-liked}
----------------------------------
+What I Liked
+------------
 
 The book is filled with anecdotes and stories that I loved. A lot of them are well known (first bug, F16 etc.) but for the target audience they might be new. As the book progresses there are more personal and lesser known stories which were my personal favorites. The basic story on the Commodore 64 made me laugh out loud.
 
@@ -66,8 +66,8 @@ The explanations in the book and deduction are top notch. I particularly liked t
 
 I think the sections about process are especially important for beginners. Usually when we onboard college graduates we need to explain the tools and they eventually understand the theory behind this. This book might explain the theory beforehand so they might pick the tools more easily.
 
-What I Didn't Like {#h2-2-what-i-didn-t-like}
----------------------------------------------
+What I Didn't Like
+------------------
 
 I'd like to qualify this by saying that I like the book. I think most of the problems I had relate to me. I'm not a college student and I was looking for a book about debugging. There is one objective problem about the book though: it's out of date. This isn't too bad. It highlights how everything stays the same in some regards.
 
@@ -75,8 +75,8 @@ Whenever the book talks about tools (bugzilla anyone?) It feels a bit like a bla
 
 While the core concepts in terms of developers are surprisingly similar to the ones in the book... The industry has shifted a lot. SRE, devops and QA industries completely changed the way we handle regressions and track issues. Modern APMs, log processing tools, continuous observation tools etc. are a seismic shift in our industry.
 
-TL;DR {#h2-3-tl-dr}
--------------------
+TL;DR
+-----
 
 If you want to learn debugging as a beginner check out this site and also <https://www.debuggingbook.org/> which seems like a great resource to learn debugging. This book provides the theoretical infrastructure you need to go through the whole quality process. Viewed under that lens as a tutorial it's pretty good. The content is somewhat out of date but that doesn't matter much if the target demographic is students.
 

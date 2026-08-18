@@ -25,7 +25,7 @@ But, how can one write tests covering all variants of several operations?
 
 Read this article and learn how to use JUnit5 in conjunction with combinations, permutations, and products.
 
-### Test Support Libraries {#h3-0-test-support-libraries}
+### Test Support Libraries
 
 There are many libraries that make testing better in different aspects. Here are some of them:
 
@@ -45,7 +45,7 @@ Agitar One can automatically identify and generate tests whereas [Chronicle Test
 
 In this article we will be talking about Chronicle Test Framework.
 
-### Objective {#h3-1-objective}
+### Objective
 
 Suppose we have written a custom implementation of java.util.List called MyList and that we want to test the implementation against a reference implementation such as ArrayList.
 
@@ -53,7 +53,7 @@ Further, assume that we have a number of operations O1, O2, ..., On. that we can
 
 The question now is: how can we write tests assuring that the two objects provide the same result regardless of how the operations are applied?
 
-### Combinations, Permutations and Products {#h3-2-combinations-permutations-and-products}
+### Combinations, Permutations and Products
 
 Before we continue, we remind ourselves of what combinations, permutations, and products are from a mathematical perspective. Assume we have a set X = {A, B, C} then;
 
@@ -123,7 +123,7 @@ The product of s1 and s2 is:
 
 Products have many similarities with database "join" operations and relate to nested loops.
 
-### The Test Framework {#h3-3-the-test-framework}
+### The Test Framework
 
 In this test, we will be using open-source[Chronicle-Test-Framework](https://github.com/OpenHFT/Chronicle-Test-Framework " Chronicle-Test-Framework") that supports the aforementioned combination, permutation, and product features. Here is an example:
 
@@ -197,7 +197,7 @@ StringInteger[string=B, integer=2]
 
 In my opinion, the above is better than the default Product2Impl tuple because the record is a "nominal tuple" where the names and types of the state elements are declared in the record header compared to the Product2Impl which relies on generic types and "first" and "second" as names.
 
-### The Objective {#h3-4-the-objective}
+### The Objective
 
 Suppose that we want to make sure two java.lang.List implementations behave the same way for a number of mutating operations. Here, lists contain Integer values (ie implements List).
 
@@ -217,7 +217,7 @@ In this article, we will initially use ArrayList and LinkedList for comparison.
 
 As the reader might suspect, the List types are going to be tested against each other with all the possible sequences of operations. But, how can this be achieved?
 
-### The Solution {#h3-5-the-solution}
+### The Solution
 
 JUnit5 provides a @TestFactory annotation and DynamicTest objects, allowing a test factory to return a Stream of DynamicTest instances.
 
@@ -262,7 +262,7 @@ The reason NamedConumer is used over the standard java.util.function.Consumer is
 
 It certainly looks better in the output and provides much better debug capabilities.
 
-### Expanding the Concept {#h3-6-expanding-the-concept}
+### Expanding the Concept
 
 Suppose we have a more significant number of List implementations we'd like to test, such as:
 
@@ -328,7 +328,7 @@ Strictly, this is a bit of cheating as a single dynamic test contains several su
 
 However, It would be reasonably easy to modify the code above to flatMap() in the various assertions under separate dynamic tests. This is left to the reader as an exercise.
 
-### A Final Warning {#h3-7-a-final-warning}
+### A Final Warning
 
 Combinations, permutations, and products are potent tools that can increase test coverage, but they can also increase the time it takes to run all tests as the number of sequences explodes even with only a moderate increase in the number of input variants.
 

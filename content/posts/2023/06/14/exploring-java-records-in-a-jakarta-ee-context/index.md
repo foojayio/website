@@ -39,7 +39,7 @@ Java Records is an excellent construct for achieving these kinds of data flow in
 2. **Immutability.** By default Java Records are immutable. This means their values cannot be changed once they are created. This makes them ideal for use as data transfer objects, as they can be safely passed around between different layers of your application without the risk of their values being changed.
 3. **Interoperability.** Java Records can be used with existing Java constructs such as streams, lambdas and JSON processing. This makes them a powerful tool for building modern Java applications.
 
-### Using Java Records in a Jakarta EE Application {#h3-0-using-java-records-in-a-jakarta-ee-application}
+### Using Java Records in a Jakarta EE Application
 
 To show the use of Java Records as data transfer and projection objects, let us consider the following non-trivial Order Jakarta Persistence entity.
 

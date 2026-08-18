@@ -29,8 +29,8 @@ The idea is to run this script each day, store them in Google BigQuery and provi
 
 I'm a big fan of automation, so I'm using GitHub Actions.
 
-Accessing Google Cloud with a Service Account {#h2-0-accessing-google-cloud-with-a-service-account}
----------------------------------------------------------------------------------------------------
+Accessing Google Cloud with a Service Account
+---------------------------------------------
 
 I query the different APIs with different Python libraries. All of them allow authenticating by passing a parameter. In general, it's a token. One can store the value in a GitHub secret, get it as an environment variable in the GitHub Action and use it in the code.
 
@@ -49,8 +49,8 @@ I considered a couple of alternatives:
 
 I discarded the first option for obvious reasons; the second is because my Python skills are close to zero.
 
-Authenticate to Google Cloud {#h2-1-authenticate-to-google-cloud}
------------------------------------------------------------------
+Authenticate to Google Cloud
+----------------------------
 
 Securely authenticating to Google Cloud, or any other Cloud provider, from GitHub is a widespread concern. To manage this issue, GitHub provides the OpenID Connect flow:
 > GitHub Actions workflows are often designed to access a cloud provider (such as AWS, Azure, GCP, or HashiCorp Vault) in order to deploy software or use the cloud's services. Before the workflow can access these resources, it will supply credentials, such as a password or token, to the cloud provider. These credentials are usually stored as a secret in GitHub, and the workflow presents this secret to the cloud provider every time it runs. However, using hardcoded secrets requires you to create credentials in the cloud provider and then duplicate them in GitHub as a secret. With OpenID Connect (OIDC), you can take a different approach by configuring your workflow to request a short-lived access token directly from the cloud provider. Your cloud provider also needs to support OIDC on their end, and you must configure a trust relationship that controls which workflows are able to request the access tokens. Providers that currently support OIDC include Amazon Web Services, Azure, Google Cloud Platform, and HashiCorp Vault, among others. -- [About security hardening with OpenID Connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token)
@@ -97,8 +97,8 @@ jobs:
 
 The GitHub Action documentation contains [all information](https://github.com/marketplace/actions/authenticate-to-google-cloud#setting-up-workload-identity-federation) to set up Google Cloud for Workload Identity Federation.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I've highlighted the problem of using a Service Account file to authenticate on Google Cloud.
 

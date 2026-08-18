@@ -35,8 +35,8 @@ On the picture:
 
 Let's compare the different types of processors used for these SBCs.
 
-ARM: Efficient by Design {#h2-0-arm-efficient-by-design}
---------------------------------------------------------
+ARM: Efficient by Design
+------------------------
 
 [Arm Holdings plc](https://en.wikipedia.org/wiki/Arm_Holdings) (originally "Acorn RISC Machine", later "Advanced RISC Machines") is a British semiconductor and software design company. There primary business is the design of central processing unit (CPU) cores that implement the ARM architecture family of instruction sets. They don't manufacture the chips, but design the architecture and license it to others. This means that an application written for a [Qualcomm Snapdragon](https://en.wikipedia.org/wiki/Qualcomm_Snapdragon) processor should also work on a [Samsung Exynos](https://en.wikipedia.org/wiki/Exynos) or [Apple's M-series](https://en.wikipedia.org/wiki/Apple_M1) chip because they speak the same "ARM language".
 
@@ -48,13 +48,13 @@ The [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture_family) us
 * **Instruction set**: 32-bit in ARMv1-ARMv7, mixed 32/64-bit in ARMv8, 64-bit in ARMv9
 * **Licensing model**: Arm Holdings is the owner and it's primary business is selling licenses to manufacturers like Broadcom, Qualcomm, Apple,...
 
-### ARM on Mobile Devices {#h3-1-arm-on-mobile-devices}
+### ARM on Mobile Devices
 
 If you're reading this on a smartphone, there's a 99% chance you're holding an ARM-powered device right now. ARM has achieved almost total dominance in the mobile market. Every major manufacturer uses ARM architecture for their mobile chips.
 
 The reason? Power efficiency! The RISC architecture in an ARM processor, allows smartphones to deliver impressive performance with low power consumption, making sure your battery lasts a day...
 
-### ARM on Raspberry Pi {#h3-2-arm-on-raspberry-pi}
+### ARM on Raspberry Pi
 
 The most popular SBC is the Raspberry Pi, and it uses an ARM processor, which is integrated in the System-On-Chip (SOC) combining CPU, GPU, memory controller, USB controller, etc. For instance:
 
@@ -65,7 +65,7 @@ The most popular SBC is the Raspberry Pi, and it uses an ARM processor, which is
 
 As you can see, throughout the history of Raspberry Pi boards, newer ARM versions have been introduced with more cores and higher speeds. With the change from ARMv6 to ARMv8, it also became possible to switch to a 64-bit operating system.
 
-### ARM on Cloud Computing {#h3-3-arm-on-cloud-computing}
+### ARM on Cloud Computing
 
 ARM can also be found in the cloud! AWS uses it for their [Graviton Processors](https://aws.amazon.com/ec2/graviton/) that are ARM-based chips specifically designed for cloud workloads, and they're delivering impressive results:
 
@@ -74,7 +74,7 @@ ARM can also be found in the cloud! AWS uses it for their [Graviton Processors](
 
 Many AWS customers use Graviton to run everything from application servers and microservices to databases and high-performance computing workloads.
 
-### ARM in the Apple M-Series {#h3-4-arm-in-the-apple-m-series}
+### ARM in the Apple M-Series
 
 Perhaps the most impressive proof that ARM can compete with x86 at the high-end came in 2020 when Apple announced its M1 chip. It's an ARM-based processor for Mac computers. At that time, it was a huge gamble, as they ditched Intel processors that had powered Macs for over 10 years in favor of their own ARM-based silicon.
 
@@ -84,14 +84,14 @@ Each time I need to use a Windows laptop, I'm overwhelmed by the fan noise and t
 
 Apple's success with M-series chips has proven that ARM isn't just for mobile and embedded. It can go head-to-head with traditional desktop processors, and often wins on both performance and efficiency.
 
-### Java on ARM {#h3-5-java-on-arm}
+### Java on ARM
 
 What I love about ARM for Java development is the mature ecosystem. The JVM has been heavily optimized for ARM, and the [Pi4J library](https://www.pi4j.com/) (designed for the Raspberry Pi) works seamlessly because the hardware support is rock-solid.
 
 The entire Java ecosystem (OpenJDK, popular frameworks, and build tools) works seamlessly on ARM instances, including Apple's M-series and AWS Graviton. This means the same ARM-optimized Java code you're running on your Raspberry Pi could theoretically scale all the way up to massive cloud deployments on AWS Graviton. The architecture that powers your 20-euro Raspberry Pi Zero 2 is the same one handling enterprise-scale workloads in data centers. That's the beauty of ARM's versatility. It ranges from microcontrollers, to smart phones, to embedded systems, to cloud infrastructure, all with consistent tooling and development practices.
 
-x86: Running the Same Code Since 1985 {#h2-6-x86-running-the-same-code-since-1985}
-----------------------------------------------------------------------------------
+x86: Running the Same Code Since 1985
+-------------------------------------
 
 The x86 architecture of [Intel](https://en.wikipedia.org/wiki/Intel) (x86-64/AMD64 for modern systems) takes a different approach. It's a [CISC (Complex Instruction Set Computer)](https://en.wikipedia.org/wiki/Complex_instruction_set_computer) architecture with a rich, complex instruction set that's evolved over decades.
 
@@ -105,19 +105,19 @@ Intel-based SBCs like the LattePanda IOTA offer complete x86 compatibility. If y
 
 For Java developers, Intel means maximum compatibility with desktop tooling and slightly better performance in some JVM workloads due to decades of JIT optimization for x86.
 
-### Decades of Desktop, Laptop, and Server Dominance {#h3-7-decades-of-desktop-laptop-and-server-dominance}
+### Decades of Desktop, Laptop, and Server Dominance
 
 For most computing history, Intel's x86 architecture has been synonymous with personal computers. From the 1990s through the 2010s, if you were using a desktop, laptop, or server, you were almost certainly running on Intel silicon. At its peak, Intel controlled over 99% of the server market and dominated desktop and laptop sales with an overwhelming market share. The x86 architecture became the standard not just because of Intel's engineering prowess, but because of decades of backward compatibility. Newer x86 processors could run programs written for processors from the 1980s. This created an enormous software ecosystem where every application, every operating system, every driver was optimized for x86.
 
 When [Apple switched from PowerPC to Intel in 2006](https://en.wikipedia.org/wiki/Mac_transition_to_Intel_processors), it was validation that x86 was the only serious choice for high-performance computing (at that time). Intel's dominance extended into data centers and cloud computing, where their Xeon processors powered the infrastructure behind almost every major web service.
 
-### AMD versus Intel: Two Implementations of x86 {#h3-8-amd-versus-intel-two-implementations-of-x86}
+### AMD versus Intel: Two Implementations of x86
 
 While Intel dominated x86 for decades, [Advanced Micro Devices, Inc. (AMD)](https://en.wikipedia.org/wiki/AMD) has been its primary competitor since the 1980s. The interesting story here is that both companies make x86 processors, but through different licensing arrangements. In the early 1980s, [IBM required Intel to license x86 to a second manufacturer (AMD) to avoid single-supplier risk](https://en.wikipedia.org/wiki/AMD#Intel_partnership). Since then, both companies have independently designed their own processor architectures that implement the x86 instruction set. This means a program compiled for x86 will run on both Intel and AMD processor, they speak the same language.
 
 However, the internal designs differ significantly. AMD innovated by creating the x86-64 (AMD64) instruction set in 2003, extending x86 to 64-bit computing while maintaining backward compatibility with 32-bit software. Intel's attempt at 64-bit ([Itanium/IA-64](https://en.wikipedia.org/wiki/Itanium)) failed in the market, so Intel ended up licensing AMD's 64-bit extensions, which means, today, both companies' processors use AMD's 64-bit architecture underneath! The competition between them has been hard... AMD's recent [Ryzen](https://en.wikipedia.org/wiki/Ryzen) processors have challenged Intel's market dominance, particularly in desktop and server markets where AMD has gained significant ground. For developers and users, the practical differences come down to performance per watt, core counts, cache sizes, and pricing rather than fundamental compatibility. Your Java code will run on either.
 
-### Intel's Attempt at the Small Form Factor: NUC and x86 SBCs {#h3-9-intel-s-attempt-at-the-small-form-factor-nuc-and-x86-sbcs}
+### Intel's Attempt at the Small Form Factor: NUC and x86 SBCs
 
 Intel didn't ignore the small form factor market. With the [NUC (Next Unit of Computing)](https://en.wikipedia.org/wiki/Next_Unit_of_Computing) line launched in the early 2010s, Intel attempted to bring x86 architecture into the compact computing space. NUCs were 4x4 inch mini PCs powered by Intel processors, offering desktop-class performance in a palm-sized package. Intel also produced x86-based single board computers for industrial and embedded applications. However, these Intel-based SBCs faced fundamental challenges compared to ARM competitors like the Raspberry Pi, with power consumption being the critical issue. An Intel NUC typically draws 10-20 watts under load compared to just 2-4 watts for a Raspberry Pi 4.
 
@@ -125,12 +125,12 @@ Intel boards require active cooling with fans, adding noise and complexity. Pric
 
 In 2023, Intel discontinued the NUC line entirely. But many other companies are still building x86 SBCs for small factor desktop systems, [Network-Attached Storage (NAS)](https://en.wikipedia.org/wiki/Network-attached_storage), and [Internet of Things (IoT)](https://en.wikipedia.org/wiki/Internet_of_things) devices. And some of these do provide GPIO's (like the LattePanda IOTA).
 
-### Java on LattePanda IOTA {#h3-10-java-on-lattepanda-iota}
+### Java on LattePanda IOTA
 
 As expected, Java runs without issue on an x86 SBC, as I[documented in a video and blog post in November 2025](https://webtechie.be/post/2025-11-25-first-test-lattepanda-iota-with-ubuntu-and-java/). First experiments with Pi4J are unsuccessful because the GPIOs on the IOTA are controlled by an onboard [Raspberry Pi RP2040](https://www.raspberrypi.com/products/rp2040/), which must be addressed via a serial link. I will experiment with this in the future...
 
-RISC-V: Open Source Goes Hardware {#h2-11-risc-v-open-source-goes-hardware}
----------------------------------------------------------------------------
+RISC-V: Open Source Goes Hardware
+---------------------------------
 
 [RISC-V](https://en.wikipedia.org/wiki/RISC-V) (pronounced "risk five") is the new kid on the block, and it's shaking things up. Unlike ARM and Intel, RISC-V is an open standard, and anyone can implement it without licensing fees. Features of the ARM architecture:
 
@@ -142,7 +142,7 @@ RISC-V boards like the [StarFive VisionFive 2](https://www.starfivetech.com/en/s
 
 The big advantage of RISC-V? Complete transparency and customization potential at lower cost.
 
-### Java on RISC-V {#h3-12-java-on-risc-v}
+### Java on RISC-V
 
 As I mentioned at the start, one of my goals for 2025 is to dive deeper into Java on RISC-V. This is where things get really exciting, but also really experimental...
 
@@ -157,7 +157,7 @@ The port targets the RV64G configuration (64-bit RISC-V with the standard genera
 
 I was not able to test this myself yet, but as you can see on the pictures at the beginning of this post, they are waiting right beside me to be powered on... 🙂
 
-### Performance and Ecosystem Maturity {#h3-13-performance-and-ecosystem-maturity}
+### Performance and Ecosystem Maturity
 
 But let's be honest, as far as I understand, RISC-V is not yet competitive with ARM in terms of performance. The current RISC-V boards like the StarFive VisionFive 2 are significantly slower than equivalent ARM boards. We're talking 2-3x slower than a Raspberry Pi 4 running at the same clock speed.
 
@@ -169,7 +169,7 @@ As RISC-V is a community project, things evolve slower compared to Intel, AMD, A
 
 **Compiler maturity**: GCC and LLVM support for RISC-V is improving rapidly, but they don't generate code that's as optimized as what they produce for ARM or x86. This affects both native code and the performance of the JVM itself.
 
-### Why Java and RISC-V Are a Perfect Match (In Theory) {#h3-14-why-java-and-risc-v-are-a-perfect-match-in-theory}
+### Why Java and RISC-V Are a Perfect Match (In Theory)
 
 Despite the current performance gap, there are reasons why Java and RISC-V make sense together:
 
@@ -181,14 +181,14 @@ Despite the current performance gap, there are reasons why Java and RISC-V make 
 
 **Community-driven**: Both ecosystems thrive on community contributions and collaboration. The work being done to optimize Java for RISC-V benefits everyone, and all improvements go upstream to OpenJDK.
 
-### Pi4J on RISC-V {#h3-15-pi4j-on-risc-v}
+### Pi4J on RISC-V
 
 This is the main reason I want to try out RISC-V with Java! Pi4J will soon be released as V4 with the new [Foreign Function and Memory (FFM) API](https://openjdk.org/jeps/454) which is available since Java 22. Because of this FFM API, the library should be compatible with "any" Linux system with GPIOs. Pi4J was originally designed for the Raspberry Pi, but this new plugin should open it for more boards. And that's exactly what I'm going to try out in 2026!
 
 Does it work? No idea. Stay tuned for my 2026 experiments! 🙂
 
-Java Development Considerations {#h2-16-java-development-considerations}
-------------------------------------------------------------------------
+Java Development Considerations
+-------------------------------
 
 As a Java developer working with embedded systems, here's what matters:
 
@@ -207,8 +207,8 @@ As a Java developer working with embedded systems, here's what matters:
   * Great for contributing to open-source JVM development
   * Exciting to experiment with new hardware platforms
 
-My 2026 Experiments {#h2-17-my-2026-experiments}
-------------------------------------------------
+My 2026 Experiments
+-------------------
 
 RISC-V is promising, improving rapidly, but not yet ready to replace established platforms for most use cases. However, for developers who value openness, want to experiment with cutting-edge hardware, or need to avoid licensing constraints, RISC-V with Java is an exciting frontier.
 

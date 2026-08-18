@@ -26,8 +26,8 @@ Since I use Evernote, I was tasked with getting my notes out of Evernote.
 
 In this article, I will show you how to use the Evernote API and SDK in a Spring Boot application to retrieve data from Evernote.
 
-Starting steps {#h2-0-starting-steps}
--------------------------------------
+Starting steps
+--------------
 
 I knew nothing about what Evernote provided for developers, so I started by reading the [Evernote for Developers](https://dev.evernote.com/doc/) documentation. Evernote does seem to have some user experience bugs. Searching for answers to my questions also surfaced user frustration with missing or unreliable features. In my experience so far, things have been ok for what I need. I feel that many data APIs do not provide the best developer experience in one way or another, so I wasn't surprised by this.
 
@@ -37,8 +37,8 @@ Then, we need to utilize a provided SDK for our preferred language to call the A
 
 First, I wanted to make use of the Maven dependency to access the functionality in the SDK. I also wanted to use Spring Boot instead of the vanilla Java code. Lastly, in a future piece of this project, I will want to use the [Spring Data Neo4j](https://spring.io/projects/spring-data-neo4j) library to import the data to Neo4j. Let's start with bringing the code over to Spring Boot. The final code for this article is available in a [Github repository](https://github.com/JMHReif/evernote-api-app).
 
-Spring Boot application {#h2-1-spring-boot-application}
--------------------------------------------------------
+Spring Boot application
+-----------------------
 
 The starting place for all of my Spring Boot applications is the [Spring Initializr](https://start.spring.io/). I only changed a couple of description fields and didn't add any dependencies yet, as I'll only need one dependency added manually for now.
 
@@ -84,8 +84,8 @@ When you implement the `CommandLineRunner` interface, you need to implement the 
 
 Now I could slowly add in pieces of the sample code from the Github project.
 
-Incorporate Evernote SDK Example Code {#h2-2-incorporate-evernote-sdk-example-code}
------------------------------------------------------------------------------------
+Incorporate Evernote SDK Example Code
+-------------------------------------
 
 First, I copied in the [`main()` method from the sample code](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java#L64) to my `EvernoteDemo` class's `run()` method.
 
@@ -191,15 +191,15 @@ Notebook: First Notebook
 
 The code is working! I'm able to connect to the Evernote API and list out the notes in my account. The next piece I want to work on is getting the note contents from the note so that I can work towards importing notes into Neo4j. That will be a topic for another article, though.
 
-Wrap Up! {#h2-3-wrap-up}
-------------------------
+Wrap Up!
+--------
 
 In this article, we took the vanilla Java code from the Evernote SDK and migrated it to a Spring Boot application. We saw how copying/pasting large amounts of code and working backwards to integrate it can sometimes be overwhelming and error-prone. Instead, creating a basic piece as a starting point, and then slowly adding in small pieces can work much better and hopefully lower frustration.
 
 In a future article, we'll work on getting the note contents from the Evernote API and customizing the application to retrieve exactly what we need. Until next time, happy coding!
 
-Resources {#h2-5-resources}
----------------------------
+Resources
+---------
 
 * Github repository: [Accompanying code for this blog post](https://github.com/JMHReif/evernote-api-app)
 * Documentation: [Evernote for Developers](https://dev.evernote.com/doc/)

@@ -27,8 +27,8 @@ Understanding the shared steps in the project setup is crucial before delving in
 
 It's important to note that the technology I'll be detailing, except Vaadin, follows a similar approach. Vaadin, with its unique paradigm, really stands out among the approaches.
 
-WebJars {#h2-0-webjars}
------------------------
+WebJars
+-------
 
 WebJars is a technology [designed in 2012 by James Ward](https://jamesward.com/2012/04/25/introducing-webjars-web-libraries-as-managed-dependencies/) to handle these exact requirements.
 > WebJars are client-side web libraries (e.g. jQuery \& Bootstrap) packaged into JAR (Java Archive) files.
@@ -118,8 +118,8 @@ The WebJars Locator project aims to avoid all these issues by providing a path w
 
 I'll use this approach for every front-end technology. I'll also add the [Bootstrap](https://getbootstrap.com/) CSS library to provide a better-looking user interface.
 
-Thymeleaf {#h2-1-thymeleaf}
----------------------------
+Thymeleaf
+---------
 
 Thymeleaf is a server-side rendering technology.
 > **Thymeleaf** is a modern server-side Java template engine for both web and standalone environments.
@@ -163,8 +163,8 @@ Here is a Thymeleaf 101, in case you need to familiarise yourself with the techn
 * The `#` calls a function.
 * `th:each` allows for loops
 
-Thymeleaf integration with the front-end framework {#h2-2-thymeleaf-integration-with-the-front-end-framework}
--------------------------------------------------------------------------------------------------------------
+Thymeleaf integration with the front-end framework
+--------------------------------------------------
 
 Most, if not all, front-end frameworks work with a client-side model. We need to bridge between the server-side model and the client-side one.
 
@@ -245,8 +245,8 @@ When rendered server-side, the result is:
 ```
 
 
-Summary {#h2-3-summary}
------------------------
+Summary
+-------
 
 In this post, I've described two components I'll be using throughout the rest of this series:
 

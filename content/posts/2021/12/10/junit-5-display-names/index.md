@@ -24,8 +24,8 @@ In [Part 2](https://foojay.io/today/junit-5-testing-basics/), we looked at the b
 
 Below, we will cover some customization of names for tests. First, a justification of why names should be customized at all.
 
-Why Customize Names? {#h2-0-why-customize-names}
-------------------------------------------------
+Why Customize Names?
+--------------------
 
 When test class with a few test methods is run with JUnit, the output produced lists the name of the class and a status of execution for each method. The name of the class is used as the top level identifier:
 ![JUnitNoDisplayName](https://cgunturme.files.wordpress.com/2019/07/junitnodisplayname.png?w=840)
@@ -41,8 +41,8 @@ Clearly the latter image communicates a lot better about what was tested and wha
 
 Let's now look at how we customize the names in JUnit 5.
 
-Customizing Names in JUnit 5 {#h2-1-customizing-names-in-junit-5}
------------------------------------------------------------------
+Customizing Names in JUnit 5
+----------------------------
 
 There are primarily two ways in which JUnit5 allows for customizing names.
 
@@ -55,7 +55,7 @@ DisplayNameGeneration API: <https://junit.org/junit5/docs/5.5.0/api/org/junit/ju
 
 DisplayNameGenerator API: <https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/DisplayNameGenerator.html>
 
-### Using a DisplayName annotation {#h3-2-using-a-displayname-annotation}
+### Using a DisplayName annotation
 
 Adding a @DisplayName annotation on a given class or test method can help customize a single class or method name. Let us look at examples.
 
@@ -118,7 +118,7 @@ public class STest3PeriodsAndDurationsTest {
 ```
 
 
-### Using DisplayNameGenerator {#h3-3-using-displaynamegenerator}
+### Using DisplayNameGenerator
 
 Using a generator to modify display names is a two step process.
 
@@ -264,8 +264,8 @@ public class TestSolutionDefaultConstructorInvocation {
 ```
 
 
-Summary {#h2-4-summary}
------------------------
+Summary
+-------
 
 In this article, we saw how we can customize test classes and test method names to produce more meaningful output.
 

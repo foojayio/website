@@ -26,8 +26,8 @@ frozen: false
  <img fetchpriority="high" decoding="async" width="218" height="407" src="panama_part2.png" alt="" class="wp-image-46434" style="width:140px;height:261px">
 </figure>
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Welcome back to Part 2 of Project Panama for Newbies! If you are new to this series, check out [Part 1](https://foojay.io/today/project-panama-for-newbies-part-1/) first.
 
@@ -37,8 +37,8 @@ In Part 2, below, we will look at C language's concept of **pointers** and **str
 
 For the impatient, check out the source code of [Part 2](https://github.com/carldea/panama4newbies/tree/main/part02) on GitHub.
 
-What is a C pointer? {#h2-1-what-is-a-c-pointer}
-------------------------------------------------
+What is a C pointer?
+--------------------
 
 Pointers explained according to the *C Programming Language* book by Brian W. Kernighan \& Dennis M. Ritchie:
 > C supports the use of pointers, **a type of reference that records the address or location of an object or function in memory**. Pointers can be dereferenced to access data stored at the address pointed to, or to invoke a pointed-to function. Pointers can be manipulated using assignment or pointer arithmetic.
@@ -129,7 +129,7 @@ Pointer to the address of the variable x. Call doubleIt(): 10
 
 In the example a you will notice the output showing the actual address in memory for `&x` and `ptr`. The last two output lines show how to pass parameters to C functions **by reference** as opposed to **by value**.
 
-### How does it work? {#h3-2-how-does-it-work}
+### How does it work?
 
 The table below shows the detailed steps of the C program file `pointers.c`.
 
@@ -151,8 +151,8 @@ To keep confusion to a minimum keep the following in mind:
 
 Now that we know how to talk to a C function that accepts a variable by reference let's look at how to perform this in Panama.
 
-C Pointers Panama-fied {#h2-3-c-pointers-panama-fied}
------------------------------------------------------
+C Pointers Panama-fied
+----------------------
 
 Whenever you think of a C pointer think of it as just an **address** location in memory, that stores data (in bytes). Since Pointers point to data in memory, how do you know how much data to retrieve?   
 **Answer:** `MemoryLayout` and `ValueLayout`s
@@ -169,11 +169,11 @@ try (var arena = Arena.ofConfined()) {
 ```
 
 
-### Dereferencing a Pointer {#h3-4-dereferencing-a-pointer}
+### Dereferencing a Pointer
 
 To dereference (*accessing values from pointers*) pointers in C means to retrieve data at an address location in memory. But how do you know how much data to retrieve? A byte? 4 bytes? 8 bytes?
 
-### Base offset (size in bytes) {#h3-5-base-offset-size-in-bytes}
+### Base offset (size in bytes)
 
 In Panama you will need to specify a base **offset** (size) to properly retrieve the number of bytes at a given address location. When using FFM's `MemorySegment` to get and set data into memory code will need to specify its value layout (how bytes are stored) in C's equivalent data types.
 
@@ -247,8 +247,8 @@ To display the long representing the address in memory in hexadecimal we use the
 
 Now that you know how to deal with pointers to primitive types let's look at complex datatypes better known as C's concept of **structs**.
 
-What is a C struct? {#h2-6-what-is-a-c-struct}
-----------------------------------------------
+What is a C struct?
+-------------------
 
 To put it simply, this is the ancestor to Java's concept of classes or [records](https://foojay.io/today/records/). If you would like to go deeper into a detailed explanation such as the history of C structs, etc... head over to [Wikipedia](https://en.wikipedia.org/wiki/Struct_(C_programming_language)).
 
@@ -290,8 +290,8 @@ pt.y = 50;
 
 An interesting thing to note that in C there isn't the keyword "`new`" like in Java. Actually, in C++ it introduces the keyword `new`.
 
-C Structs Panama-fied {#h2-7-c-structs-panama-fied}
----------------------------------------------------
+C Structs Panama-fied
+---------------------
 
 Now that we know how things work in the C world, let's look at how to mimic C's concept of structs in Java Panama. To create C language's `struct` using Panama, we'll be invoking the static method `MemoryLayout.structLayout()`. This method creates an object of type `GroupLayout`. A `GroupLayout` object will describe a memory layout similar to the `Point` struct defined in C above. The method accepts `ValueLayout` and other `MemoryLayout` instances such as `C_INT` variables used for `x` and `y` coordinates of the `Point` struct. Shown below is how to create one C `Point` struct.
 
@@ -325,8 +325,8 @@ cPoint = (100, 200)
 ```
 
 
-What's a java.lang.invoke.[VarHandle](https://openjdk.java.net/jeps/193)? {#h2-8-what-s-a-java-lang-invoke-varhandle}
----------------------------------------------------------------------------------------------------------------------
+What's a java.lang.invoke.[VarHandle](https://openjdk.java.net/jeps/193)?
+-------------------------------------------------------------------------
 
 According to the Javadoc documentation:
 > A `VarHandle` is a dynamically strongly typed reference to a variable, or to a parametrically-defined family of variables, including static fields, non-static fields, array elements, or components of an off-heap data structure. Access to such variables is supported under various *access modes*, including plain read/write access, volatile read/write access, and compare-and-set.
@@ -340,8 +340,8 @@ Important Note: the API to get and set values in structs or sequence are enhance
 
 Getting back to structs, Let's learn how to create a sequence of them!
 
-Sequence of Structs {#h2-9-sequence-of-structs}
------------------------------------------------
+Sequence of Structs
+-------------------
 
 Before we look at how to create an array of structs let's look at how to define them in C. Below is a sequence or an array of 5 `Point` `struct`s. The array variable is named `points`.
 
@@ -444,8 +444,8 @@ The output is the following:
 
 There you have it, C pointers and C structs in Java!
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 In Part 2, above, we got a chance to create (mimic) C's concept of pointers.
 

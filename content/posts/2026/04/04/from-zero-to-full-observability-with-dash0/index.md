@@ -27,10 +27,10 @@ The setup is divided into two distinct phases. The first phase establishes the "
 
 The entire workflow runs without a local Docker installation. The Docker image is built and pushed via GitHub Actions, and the Kubernetes cluster runs inside a GitHub Codespace.
 
-Before: A Service with No Observability {#h2-0-before-a-service-with-no-observability}
---------------------------------------------------------------------------------------
+Before: A Service with No Observability
+---------------------------------------
 
-### Part 1: Build the Application {#h3-1-part-1-build-the-application}
+### Part 1: Build the Application
 
 The starting point is a minimal Spring Boot REST API with no observability configured at all. No OpenTelemetry, no Micrometer, no logging frameworks --- just the web starter and a controller with two endpoints. This is the "before" state: a service that is running but completely invisible.
 
@@ -102,7 +102,7 @@ mvn package -DskipTests
 
 This packages the application into a single executable JAR in the `target/` directory, which gets copied into the Docker image in the next step.
 
-### Part 2: Containerize and Publish {#h3-2-part-2-containerize-and-publish}
+### Part 2: Containerize and Publish
 
 To run the app in Kubernetes it needs to be packaged as a container image. Rather than building and pushing the Docker image locally, we use GitHub Actions to do it in the cloud. This avoids any need for a local Docker installation.
 
@@ -167,7 +167,7 @@ Push the workflow file and GitHub Actions will build and push the image to Docke
 * <https://hub.docker.com/_/azul-zulu>
 * <https://github.com/docker/build-push-action>
 
-### Part 3: Deploy to Kubernetes {#h3-3-part-3-deploy-to-kubernetes}
+### Part 3: Deploy to Kubernetes
 
 With the image on Docker Hub, we can deploy the app to Kubernetes. We use GitHub Codespaces as the environment, which gives a full Linux terminal in the browser without requiring any local tooling. From there we install kind, which spins up a cluster inside the Codespace.
 
@@ -237,7 +237,7 @@ Wait until the pod shows `Running`.
 * [https://kind.sigs.k8s.io](https://kind.sigs.k8s.io/)
 * <https://docs.github.com/en/codespaces>
 
-### Part 4: Generate Traffic (the Before State) {#h3-4-part-4-generate-traffic-the-before-state}
+### Part 4: Generate Traffic (the Before State)
 
 Because we are inside a Codespace rather than running locally, the service is not directly accessible on localhost. We use `kubectl port-forward` to bridge the gap. This is the **before** state --- the service is running and receiving traffic, but nothing appears in Dash0. No traces, no metrics, no logs.
 
@@ -255,10 +255,10 @@ while true; do curl http://localhost:8080/orders; sleep 1; done
 ```
 
 
-After: Adding Observability with the Dash0 Operator {#h2-5-after-adding-observability-with-the-dash0-operator}
---------------------------------------------------------------------------------------------------------------
+After: Adding Observability with the Dash0 Operator
+---------------------------------------------------
 
-### Part 5: Install the Dash0 Operator {#h3-6-part-5-install-the-dash0-operator}
+### Part 5: Install the Dash0 Operator
 
 Now we add observability --- without touching the application code, the pom.xml, or the Docker image. The Dash0 operator is installed into the cluster using Helm. It runs in its own namespace and is responsible for injecting instrumentation into workloads and forwarding telemetry to Dash0.
 
@@ -288,7 +288,7 @@ Wait until the operator pod shows `Running`.
 * <https://artifacthub.io/packages/helm/dash0-operator/dash0-operator>
 * <https://www.dash0.com/docs/dash0/dash0-kubernetes-operator>
 
-### Part 6: Configure the Operator {#h3-7-part-6-configure-the-operator}
+### Part 6: Configure the Operator
 
 Installing the Helm chart alone is not sufficient. The operator also needs a `Dash0OperatorConfiguration` resource to know where to send telemetry, and a `Dash0Monitoring` resource to know which namespace to instrument. Without both of these, no data will flow to Dash0.
 
@@ -333,7 +333,7 @@ EOF
 
 * <https://www.dash0.com/docs/dash0/dash0-kubernetes-operator>
 
-### Part 7: Restart and Verify {#h3-8-part-7-restart-and-verify}
+### Part 7: Restart and Verify
 
 The operator injects instrumentation at pod startup via an init container. Because the pod was already running before the monitoring resource was created, it needs to be restarted so the operator can instrument it.
 

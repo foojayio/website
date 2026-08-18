@@ -30,8 +30,8 @@ frozen: false
 
 
 
-1. The Problem {#h2-0-1-the-problem}
-------------------------------------
+1. The Problem
+--------------
 
 Large Language Models have moved from research artifacts to production infrastructure. Java applications are embedding them into customer-facing services via Spring Boot, and e.g. LangChain4J --- for document summarization, customer support, healthcare assistance, and financial guidance, to name just a few. The deployment surface is growing faster than the security tooling.
 
@@ -43,8 +43,8 @@ There is also one further challenge. Generic benchmarks test model behavior in i
 
 
 
-2. What Tiberius Does {#h2-1-2-what-tiberius-does}
---------------------------------------------------
+2. What Tiberius Does
+---------------------
 
 [Tiberius](https://github.com/tiberius-security/tiberius) is an open-source Java library for vulnerability and security testing of LLM applications. It integrates with JUnit 5 and Spring Boot, and is designed to fit naturally into a standard Java test suite.
 
@@ -52,8 +52,8 @@ The library is shaped by numerous recurring challenges encountered when testing 
 
 
 
-2.1 Fixture-Based Regression Testing {#h2-2-2-1-fixture-based-regression-testing}
----------------------------------------------------------------------------------
+2.1 Fixture-Based Regression Testing
+------------------------------------
 
 The standard unit test model --- fixed input, deterministic output, assert equality, binary testing (i.e., fail or pass) --- does not transfer to LLM testing. LLM responses are non-deterministic. The same prompt may produce different outputs across invocations, model versions, or configuration changes.
 
@@ -82,8 +82,8 @@ This is the same engineering pattern as snapshot testing in frontend development
 
 
 
-2.2 Guardrail Validation Against Real Attack Data {#h2-3-2-2-guardrail-validation-against-real-attack-data}
------------------------------------------------------------------------------------------------------------
+2.2 Guardrail Validation Against Real Attack Data
+-------------------------------------------------
 
 Most guardrail testing is done with hand-crafted inputs. A developer team writes a few example prompts, checks that the guardrail blocks them, and ships. The coverage is limited by the developer's imagination and familiarity with attack techniques. Direct prompt injection --- first systematically characterized by Perez \& Ribeiro (2022) **\[5\]** --- demonstrates how trivially this coverage can be exceeded.
 
@@ -127,8 +127,8 @@ The test is now grounded in real attack data specific to your application, not h
 
 
 
-2.3. Probabilistic Security Contracts {#h2-4-2-3-probabilistic-security-contracts}
-----------------------------------------------------------------------------------
+2.3. Probabilistic Security Contracts
+-------------------------------------
 
 This is the most architecturally novel feature.
 
@@ -168,8 +168,8 @@ contract.verify(scanner.scan());
 
 A security contract is a testable, version-controlled specification of acceptable model behavior. It fails the build when violated. Security contracts give CI/CD pipelines a concrete, testable definition of acceptable model behavior.
 
-2.4. Bias Testing {#h2-5-2-4-bias-testing}
-------------------------------------------
+2.4. Bias Testing
+-----------------
 
 Most LLM security frameworks focus exclusively on adversarial intent --- inputs crafted to cause harm. Tiberius extends the testing surface to **systemic bias**: the model's behavior on ambiguous, non-adversarial inputs where no single answer is correct, but where a fair system should not exhibit systematic preferences.
 
@@ -195,8 +195,8 @@ void modelDoesNotDefaultToGenderStereotypes(TiberiusScanner scanner) {
 
 The key insight is that bias, like security, is **probabilistic by nature**. A single response can look neutral; the signal only emerges across a distribution of responses. This makes it structurally identical to the probabilistic security contract problem --- and Tiberius applies the same multi-trial, statistical approach to both.
 
-2.5. Model Fingerprinting {#h2-6-2-5-model-fingerprinting}
-----------------------------------------------------------
+2.5. Model Fingerprinting
+-------------------------
 
 Before you can test a model, you need to know what you are testing. Tiberius includes a fingerprinting capability inspired by [Julius](https://github.com/praetorian-inc/julius) **\[2\]** that identifies the underlying model behind an API endpoint --- useful when the provider is opaque, the model version is undocumented, or you are auditing a third-party deployment.
 
@@ -227,8 +227,8 @@ void productionEndpointResistsFingerprinting(TiberiusScanner scanner) {
 
 If your guardrail fails this test, an attacker querying your API can infer the underlying model and tailor their attack accordingly. Fingerprinting resistance is a first-class security property.
 
-3. Attack Coverage {#h2-7-3-attack-coverage}
---------------------------------------------
+3. Attack Coverage
+------------------
 
 Tiberius ships with more than 200 probes across nine categories, mapped to the OWASP LLM Top 10 **\[7\]**:
 
@@ -244,8 +244,8 @@ Tiberius ships with more than 200 probes across nine categories, mapped to the O
 | `ADVERSARIAL`          | GCG, AutoDAN token attacks           | 10+    |
 | `EVASION`              | Homoglyphs, zero-width characters    | 15+    |
 
-3.1 Buff Mutations {#h2-8-3-1-buff-mutations}
----------------------------------------------
+3.1 Buff Mutations
+------------------
 
 A probe tests a single attack vector. A Buff transforms that probe --- mutating its linguistic surface to test whether the same attack succeeds when rephrased, encoded, or reframed in a different context. Where probes define what to attack, Buffs define how.
 
@@ -274,8 +274,8 @@ Note, that a guardrail that blocks `"Generate a phishing email"` will not necess
 
 
 
-4. Integration {#h2-9-4-integration}
-------------------------------------
+4. Integration
+--------------
 
 Add the dependency:
 
@@ -293,8 +293,8 @@ Tiberius supports Ollama (local), OpenAI, Anthropic, and any OpenAI-compatible R
 
 
 
-5. The Case for Shared Attack Datasets {#h2-10-5-the-case-for-shared-attack-datasets}
--------------------------------------------------------------------------------------
+5. The Case for Shared Attack Datasets
+--------------------------------------
 
 Adversarial attacks are not generic. A jailbreak effective against a legal document assistant differs structurally from one targeting a medical triage chatbot or a financial advisory system. Industry-specific context --- regulatory language, domain vocabulary, professional role-play framings --- creates attack vectors that general probe libraries do not cover.
 
@@ -319,8 +319,8 @@ A natural next step is a standardised, versioned fixture suite hosted publicly -
 
 
 
-6. Security Testing as a First-Class Engineering Concern {#h2-11-6-security-testing-as-a-first-class-engineering-concern}
--------------------------------------------------------------------------------------------------------------------------
+6. Security Testing as a First-Class Engineering Concern
+--------------------------------------------------------
 
 The software engineering community has built extensive infrastructure for testing deterministic systems. Smoke tests gate a deployment --- confirming that critical functionality holds before deeper verification begins. Property-based testing handles fuzzing. Snapshot testing handles regression. Contract testing handles API compatibility. These tools encode the insight that the test artifact --- the fixture, the contract, the property --- is as important as the test itself. Tiberius adds a missing entry to that list: security contracts as first-class CI gates, and scan fixtures as the LLM equivalent of a smoke test --- a fast, repeatable check that your model has not regressed in its resistance to known attacks.
 
@@ -330,8 +330,8 @@ Tiberius is an attempt to bring the discipline of software testing to this new c
 
 
 
-7. Getting Started {#h2-12-7-getting-started}
----------------------------------------------
+7. Getting Started
+------------------
 
 * **GitHub** : [github.com/tiberius-security/tiberius](https://github.com/tiberius-security/tiberius)
 * **Maven Central** : `io.github.tiberius-security:tiberius:1.0.0`
@@ -345,8 +345,8 @@ Contributions, issues, and feedback are welcome. The probe library in particular
 
 
 
-Acknowledgements {#h2-13-acknowledgements}
-------------------------------------------
+Acknowledgements
+----------------
 
 Thank you to **[Barbara Teruggi](https://www.linkedin.com/in/barbara-teruggi/)**, who pointed me to Augustus --- and who consistently shares critical security intelligence that keeps the community informed and ahead of emerging threats. This project started with that pointer.
 
@@ -354,8 +354,8 @@ A warm thank you to [**Mike Mannion**](https://www.linkedin.com/in/mike-franz-ma
 
 
 
-References {#h2-14-references}
-------------------------------
+References
+----------
 
 **\[1\] Augustus --- Praetorian Security, Inc. (2026)**   
 

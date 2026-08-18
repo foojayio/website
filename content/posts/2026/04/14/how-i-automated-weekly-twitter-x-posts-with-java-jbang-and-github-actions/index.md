@@ -20,8 +20,8 @@ Every Monday at 10 AM Eastern, [@javaevolved](https://x.com/javaevolved) now twe
 
 Here's how it works, and how you can do the same for your own project.
 
-The Problem {#h2-0-the-problem}
--------------------------------
+The Problem
+-----------
 
 [Java Evolved](https://javaevolved.github.io) is a static site with 113 code patterns showing the old way vs. the modern way to write Java. Each pattern has a title, summary, old/modern approach labels, JDK version, and a link to its detail page.
 
@@ -33,8 +33,8 @@ I wanted to promote each pattern on Twitter --- one per week, in random order, c
 * **Auditable** --- git history shows what was posted and when
 * **Zero infrastructure** --- no servers, no databases, no paid services
 
-The Architecture {#h2-1-the-architecture}
------------------------------------------
+The Architecture
+----------------
 
 The system has three components:
 
@@ -51,8 +51,8 @@ GitHub Actions cron → runs Post Script every Monday
 
 Everything lives in the repository. State is tracked via committed files, not external databases.
 
-Component 1: The Queue \& Tweet Generator {#h2-2-component-1-the-queue-tweet-generator}
----------------------------------------------------------------------------------------
+Component 1: The Queue \& Tweet Generator
+-----------------------------------------
 
 **File:** `html-generators/generatesocialqueue.java`
 
@@ -79,14 +79,14 @@ The tweet template looks like this:
 
 The generator also validates that every tweet fits within Twitter's 280-character limit. If a summary is too long, it's automatically truncated with an ellipsis. Of the 113 patterns, 12 needed truncation.
 
-### Handling New Patterns {#h3-3-handling-new-patterns}
+### Handling New Patterns
 
 When you re-run the generator after adding new content files, it detects new patterns and appends them to the end of the existing queue --- preserving the current order and any manual tweet edits. Deleted or renamed patterns are automatically pruned.
 
 Use `--reshuffle` to force a full reshuffle when the cycle is exhausted.
 
-Component 2: The Post Script {#h2-4-component-2-the-post-script}
-----------------------------------------------------------------
+Component 2: The Post Script
+----------------------------
 
 **File:** `html-generators/socialpost.java`
 
@@ -98,7 +98,7 @@ Another JBang script that:
 4. Posts to the Twitter API v2 using OAuth 1.0a
 5. Updates the state file **only after confirmed API success**
 
-### OAuth 1.0a in Java {#h3-5-oauth-1-0a-in-java}
+### OAuth 1.0a in Java
 
 I initially planned to use a shell script with `curl` and `openssl` for OAuth signing. That turned out to be a bad idea --- percent-encoding, signature base strings, and nonce generation are error-prone in Bash.
 
@@ -145,8 +145,8 @@ DRY RUN — not posting.
 ```
 
 
-Component 3: The GitHub Actions Workflow {#h2-6-component-3-the-github-actions-workflow}
-----------------------------------------------------------------------------------------
+Component 3: The GitHub Actions Workflow
+----------------------------------------
 
 **File:** `.github/workflows/social-post.yml`
 
@@ -195,8 +195,8 @@ A few details worth noting:
 * **Social files live in `social/`** , not `content/` --- the deploy workflow watches `content/**`, so keeping state separate avoids unnecessary site rebuilds
 * **`git pull --rebase`** before push handles the rare case where another commit lands between checkout and push
 
-The Economics {#h2-7-the-economics}
------------------------------------
+The Economics
+-------------
 
 Twitter's API pricing means each tweet costs about $0.01. With 113 patterns posted weekly:
 
@@ -205,8 +205,8 @@ Twitter's API pricing means each tweet costs about $0.01. With 113 patterns post
 
 That's essentially free for a perpetual social media presence.
 
-Built in a Single Copilot CLI Session {#h2-8-built-in-a-single-copilot-cli-session}
------------------------------------------------------------------------------------
+Built in a Single Copilot CLI Session
+-------------------------------------
 
 This entire feature --- the queue generator, the post script, the GitHub Actions workflow, the tweet drafts, the documentation updates --- was built in a single interactive session with [GitHub Copilot CLI](https://githubnext.com/projects/copilot-cli). From planning to the first live tweet, everything happened in the terminal.
 
@@ -214,14 +214,14 @@ The session included planning the architecture, getting a rubber-duck critique (
 
 You can read the full session transcript here: [gist.github.com/brunoborges/40ef1b5e9b05de279dab64e443b96a11](https://gist.github.com/brunoborges/40ef1b5e9b05de279dab64e443b96a11)
 
-What I'd Do Differently {#h2-9-what-i-d-do-differently}
--------------------------------------------------------
+What I'd Do Differently
+-----------------------
 
 * **Add Bluesky support** --- the AT Protocol API is simpler than Twitter's OAuth 1.0a. The architecture already supports it; just add a second API call in the post script.
 * **Content hash tracking** --- if a pattern's title or summary changes, the pre-drafted tweet goes stale. A hash per entry would flag which drafts need regeneration.
 
-Try It Yourself {#h2-10-try-it-yourself}
-----------------------------------------
+Try It Yourself
+---------------
 
 The entire implementation is open source at [github.com/javaevolved/javaevolved.github.io](https://github.com/javaevolved/javaevolved.github.io). You'll need:
 

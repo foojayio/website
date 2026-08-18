@@ -133,8 +133,8 @@ Base image │  eclipse-temurin:21-jre      │    0C     0H    15M    23L
 ```
 
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 In this short post, we tried Docker Scout, the Docker image vulnerability detection tool. Thanks to it, we removed one high-level CVE we introduced in the code.
 

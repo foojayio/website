@@ -60,8 +60,8 @@ The course also automatically integrates with the [Neo4j Sandbox](https://sandbo
 
 ![model](https://github.com/neo4j-graph-examples/recommendations/raw/main/documentation/img/model.png)
 
-Setup {#_setup}
----------------
+Setup
+-----
 
 We went with a traditional Java dev setup, installing Java 17 and Apache Maven via sdkman.
 
@@ -74,8 +74,8 @@ sdk install maven
 ```
 
 
-Web Framework - SparkJava {#_web_framework_sparkjava}
------------------------------------------------------
+Web Framework - SparkJava
+-------------------------
 
 You might not have heard of [SparkJava](https://sparkjava.com/) which has been around for quite some time and is the Express/Sinatra equivalent minimalistic web framework for Java.
 
@@ -144,8 +144,8 @@ public class NeoflixApp {
 ```
 
 
-Routes - AccountRoutes {#_routes_accountroutes}
------------------------------------------------
+Routes - AccountRoutes
+----------------------
 
 The routes can be grouped by root path and then handled in a simple DSL. Here is the route for getting the favorites list in `AccountRoutes`
 
@@ -160,8 +160,8 @@ get("/favorites", (req, res) -> {
 
 We first parse some params from the request URL then extract the userId from the request attributes and call the FavoriteService to query the database.
 
-Fixtures {#_fixtures}
----------------------
+Fixtures
+--------
 
 While going through the course, the implementation for using the database is added incrementally.  
 
@@ -234,8 +234,8 @@ public List<Map> all(Params params, String userId) {
 ```
 
 
-Neo4j Driver {#_neo4j_driver}
------------------------------
+Neo4j Driver
+------------
 
 The real service implementations use the official [Neo4j Java Driver](https://neo4j.com/developer/java) to query the database.  
 
@@ -261,8 +261,8 @@ static Driver initDriver() {
 ```
 
 
-Services - FavoriteService {#_services_favoriteservice}
--------------------------------------------------------
+Services - FavoriteService
+--------------------------
 
 The driver is then passed to each service on construction and can be used from there to create sessions and interact with the database.
 
@@ -331,8 +331,8 @@ public Map add(String userId, String movieId) {
 
 The `result.single()` method would fail if there is *not exactly one* result with an `NoSuchRecordException`, so we don't need to check for that within the query.
 
-Authentication {#_authentication}
----------------------------------
+Authentication
+--------------
 
 Our app also provides user management, to allow for personalization.  
 
@@ -391,8 +391,8 @@ before((req, res) -> AppUtils.handleAuthAndSetUser(req, jwtSecret));
 ```
 
 
-Java 17 Records {#_java_17_records}
------------------------------------
+Java 17 Records
+---------------
 
 Originally, we had planned to use Java 17 records throughout the course, but then we ran into two issues.
 
@@ -416,8 +416,8 @@ var movies = tx.run(query, params).list(row -> row.get("movie").toMap());
 ```
 
 
-Testing {#_testing}
--------------------
+Testing
+-------
 
 We used [JUnit 5](https://junit.org/junit5/) for testing, which was a no-brainer.
 
@@ -427,8 +427,8 @@ The course uses test execution with `mvn test -Dtest=neoflix.TestName#testMethod
 
 Some of the tests also output results that the user is expected to fill into quizzes during the course.
 
-Conclusion {#_conclusion}
--------------------------
+Conclusion
+----------
 
 For a real app, we'd could have gone with one of the larger app-frameworks, as there are more needs taken care of.
 

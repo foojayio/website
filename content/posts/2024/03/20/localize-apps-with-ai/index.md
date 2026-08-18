@@ -36,8 +36,8 @@ If you've never dealt with localization and would like to learn, it might be a g
 If you're already familiar with the basics, and just want to see AI in action, you might want to skip to [Translate texts](#translate-texts) or clone [my fork](https://github.com/flounder4130/spring-petclinic) to skim over the commits and evaluate the results.
 ![Localize Apps with AI - post banner](https://flounder.dev/img/localize-apps-with-ai-banner.png)
 
-Get the project {#h2-0-get-the-project}
----------------------------------------
+Get the project
+---------------
 
 Creating an application just for a localization experiment would be overkill, so let's fork some open-source project. I chose [Spring Petclinic](https://github.com/spring-projects/spring-petclinic), an example web app that is used to showcase the [Spring](https://spring.io) framework for Java.
 
@@ -45,8 +45,8 @@ Fork and clone Petclinic (requires GitHub CLI): `gh repo fork https://github.com
 
 If you haven't used Spring before, some code snippets might not look familiar to you, but, as I already mentioned, this discussion is technology-agnostic. The steps are roughly the same regardless of the language and framework.
 
-Localization prerequisites {#h2-1-localization-prerequisites}
--------------------------------------------------------------
+Localization prerequisites
+--------------------------
 
 Before an application can be localized, it has to be *internationalized*.
 
@@ -78,8 +78,8 @@ Examples of such libraries include *i18next* (JavaScript), *Babel* (Python), and
 
 Java supports internationalization out-of-the-box, so we don't need to bring additional dependencies into the project.
 
-Examine the sources {#h2-2-examine-the-sources}
------------------------------------------------
+Examine the sources
+-------------------
 
 Java uses files with the `.properties` extension to store localized strings for the user interface.
 
@@ -115,8 +115,8 @@ Some projects may have these texts directly hard-coded into the application logi
 
 Putting UI texts separately from application logic is a good practice with advantages beyond internationalization. It makes the code easier to maintain and promotes consistency in UI messages. If you are starting a project, consider implementing i18n as early as possible.
 
-Test run {#h2-3-test-run}
--------------------------
+Test run
+--------
 
 Let's add a way to change the locale through URL parameters. This will allow us to test if everything is fully externalized and translated to at least one language.
 
@@ -162,8 +162,8 @@ Changing the locale is reflected in the UI, which is good news.
 
 It appears, however, that changing the locale has only affected a portion of the texts. For Spanish, **Welcome** has changed to **Bienvenido**, but the links in the header remained the same, and the other pages are still in English. This means we have some work to do.
 
-Prepare for localization {#h2-4-prepare-for-localization}
----------------------------------------------------------
+Prepare for localization
+------------------------
 
 The Petclinic project generates pages using [Thymeleaf templates](https://www.thymeleaf.org), so let's inspect the template files.
 
@@ -302,8 +302,8 @@ Of course, there is more project code to internationalize; however, the rest of 
 
 mostly aligns with the examples above. For a complete review of all my changes, you are welcome to examine [the commits in my fork](https://github.com/flounder4130/spring-petclinic).
 
-Add missing keys {#h2-5-add-missing-keys}
------------------------------------------
+Add missing keys
+----------------
 
 After replacing all UI text with references to property bundle keys, we must make sure to introduce all these new keys. We don't need to translate anything at this point, just add the keys and original texts to the `messages.properties` file.
 
@@ -315,8 +315,8 @@ IntelliJ IDEA has good Thymeleaf support. It detects if a template references a 
 
 With all preparations done, we get to the most interesting part of the work. We have all the keys, and we have all the values for English. Where do we get values for the other languages?
 
-Translate texts {#translate-texts}
-----------------------------------
+Translate texts
+---------------
 
 For translating the texts, we will create a script that uses an external translation service. There are plenty of translation services available, and many ways to write such a script. I've made the following choices for the implementation:
 
@@ -431,8 +431,8 @@ Also, missing properties get added to:
 
 But what about the results? Can we see them already?
 
-Check the results {#h2-7-check-the-results}
--------------------------------------------
+Check the results
+-----------------
 
 Let's relaunch the application and test it using different `lang` parameter values. For example:
 
@@ -444,8 +444,8 @@ Let's relaunch the application and test it using different `lang` parameter valu
 Personally, I find it very satisfying to see each page correctly localized. We've put in some effort, and now it's paying off:
 ![Spring Petclinic Find Owners page in Dutch](https://flounder.dev/img/localized-nl.png)
 
-Address the issues {#h2-8-address-the-issues}
----------------------------------------------
+Address the issues
+------------------
 
 The results are impressive. However, if you take a closer look, you may discover mistakes that arise from missing context. For example:
 
@@ -486,8 +486,8 @@ As we dig deeper and consider more languages, we might come across more things t
 
 If there's one thing that's indispensable in this process, that's review and testing. Regardless of whether we improve the automation or edit its output, we will find it necessary to conduct quality control and evaluation.
 
-Beyond the scope {#h2-9-beyond-the-scope}
------------------------------------------
+Beyond the scope
+----------------
 
 Spring Petclinic is a simple, yet realistic project, just like the problems we've just solved. Of course, localization presents a lot of challenges that are out-of-scope for this article, including:
 
@@ -498,8 +498,8 @@ Spring Petclinic is a simple, yet realistic project, just like the problems we'v
 
 Each of these topics warrants a writing of its own. If you would like to read more, I will be happy to cover these topics in separate posts.
 
-Summary {#h2-10-summary}
-------------------------
+Summary
+-------
 
 All right, now that we've finished localizing our application, it's time to reflect on what we've learned:
 

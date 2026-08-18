@@ -29,17 +29,17 @@ Vaadin is an open source development platform for building modern web applicatio
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-New and Noteworthy Since Vaadin 21 {#h2-0-new-and-noteworthy-since-vaadin-21}
------------------------------------------------------------------------------
+New and Noteworthy Since Vaadin 21
+----------------------------------
 
 Here are the highlighted new and improved features in vaadin 22. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
-### Vaadin Fusion {#h3-1-vaadin-fusion}
+### Vaadin Fusion
 
 * Stateless Fusion
   * By default Fusion will not create server sessions, and use the token-based authentication mechanism. The server then is stateless, allowing easier horizontal scaling of instances and high availability of services.
 
-### Vaadin Components {#h3-2-vaadin-components}
+### Vaadin Components
 
 #### LitRenderer API for Java counterparts
 
@@ -65,36 +65,36 @@ Fixes to accessibility issues in Vaadin components, so that they can be used wit
 * Vaadin CRUD
   * Improved configurability of CRUD
 
-### Vaadin Collaboration Engine {#h3-3-vaadin-collaboration-engine}
+### Vaadin Collaboration Engine
 
 * SystemConnectionContext API
   * Support Collaboration Engine features together with external systems that are not directly associated with a specific user when they are using a Vaadin UI.
 * MessageManager API
   * Introduce a data access API to handle messages in topics. Provide a data layer access that lets you submit messages to a Topic and react when a new message is submitted to the same Topic. The developer doesn't need to use the low-level Topic API that has none of the higher level concepts.
 
-### Vaadin Quarkus {#h3-4-vaadin-quarkus}
+### Vaadin Quarkus
 
 * Official Quarkus support for Vaadin Flow
 
-Special thanks {#h2-5-special-thanks}
--------------------------------------
+Special thanks
+--------------
 
 Special thanks to @knoobie, for the invaluable help with testing, feedback, and guidance with the accessibility work!
 
-Support {#h2-6-support}
------------------------
+Support
+-------
 
 Vaadin 22 is supported for one month after Vaadin 23 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
-App starters {#h2-7-app-starters}
----------------------------------
+App starters
+------------
 
 The best way to get started with Vaadin is to go to <https://start.vaadin.com> and configure your new application by setting up your views, entities, styles, and the technology stack you're interested in.
 
-Maven Archetypes {#h2-8-maven-archetypes}
------------------------------------------
+Maven Archetypes
+----------------
 
 Maven is the de-facto build tool for Java web applications. Major IDEs also support Maven out of the box and most often you'll be using Maven via your favorite IDE.  
 
@@ -124,8 +124,8 @@ mvn -B archetype:generate \
 ```
 
 
-Manually changing Vaadin version for Java projects {#h2-9-manually-changing-vaadin-version-for-java-projects}
--------------------------------------------------------------------------------------------------------------
+Manually changing Vaadin version for Java projects
+--------------------------------------------------
 
 Add the following dependency to dependencyManagement in pom.xml.
 

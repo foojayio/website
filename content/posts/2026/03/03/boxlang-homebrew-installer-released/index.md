@@ -23,7 +23,7 @@ frozen: false
 
 We're excited to announce the official **BoxLang Homebrew tap** --- the easiest way to get BoxLang up and running on macOS (and Linux with Homebrew). One command, and you're in business.
 
-### Getting Started {#h3-0-getting-started}
+### Getting Started
 
 First, make sure you have [Homebrew installed](https://brew.sh/ "Homebrew installed"), then add our tap:
 
@@ -34,8 +34,8 @@ brew tap ortus-boxlang/boxlang
 
 From there, choose your installation path.
 
-Option 1: BVM --- BoxLang Version Manager {#h2-1-option-1-bvm-boxlang-version-manager}
---------------------------------------------------------------------------------------
+Option 1: BVM --- BoxLang Version Manager
+-----------------------------------------
 
 If you want to manage multiple BoxLang versions side by side, **BVM** is your tool.
 
@@ -55,8 +55,8 @@ boxlang --version
 
 BVM makes it trivial to switch between stable and snapshot releases, list installed versions, and stay on the cutting edge --- or the stable path --- depending on your project needs.
 
-Option 2: Quick Installer --- Zero Friction Setup {#h2-2-option-2-quick-installer-zero-friction-setup}
-------------------------------------------------------------------------------------------------------
+Option 2: Quick Installer --- Zero Friction Setup
+-------------------------------------------------
 
 Prefer a single-step setup? The **BoxLang Quick Installer** formula gets you the runtime and MiniServer in one shot.
 
@@ -95,13 +95,13 @@ boxlang-miniserver    # Start the MiniServer
 ```
 
 
-Always Up to Date {#h2-3-always-up-to-date}
--------------------------------------------
+Always Up to Date
+-----------------
 
 Our tap ships with automated GitHub Actions that update the formulas daily and immediately after every new release. That means `brew upgrade` always pulls the latest installer. And since the formulas install the installer tool --- not a pinned runtime --- you stay in control of which BoxLang version you run.
 
-Ready to Try It? {#h2-4-ready-to-try-it}
-----------------------------------------
+Ready to Try It?
+----------------
 
 Whether you're building web apps, automation scripts, or exploring a modern JVM language, BoxLang is now just a `brew install` away.
 

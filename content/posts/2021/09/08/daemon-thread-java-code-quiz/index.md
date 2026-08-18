@@ -27,8 +27,8 @@ That's what you will find out by trying out the following Java Challenge!
 
 It's time to improve your Java skills with this Daemon Thread Challenge...
 
-Daemon Thread Challenge {#h2-0-daemon-thread-challenge}
--------------------------------------------------------
+Daemon Thread Challenge
+-----------------------
 
 What will happen when running the following main method?
 

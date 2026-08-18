@@ -30,7 +30,7 @@ frozen: false
 
 #### 🔵⚪⚪⚪⚪⚪⚪⚪
 
-### 📘 Introduction: Why Use Redocusaurus for Spring Boot? {#h3-0-introduction-why-use-redocusaurus-for-spring-boot}
+### 📘 Introduction: Why Use Redocusaurus for Spring Boot?
 
 #### *Discover why clean API docs matter and how Redocusaurus makes it easy.*
 
@@ -50,7 +50,7 @@ It turns your OpenAPI file into a user-friendly website. **Best of all**, no cod
 
 #### 🔵🔵⚪⚪⚪⚪⚪⚪
 
-### 🔎 What Is Redocusaurus? {#h3-1-what-is-redocusaurus}
+### 🔎 What Is Redocusaurus?
 
 #### *Learn what Redocusaurus does and why it's perfect for Spring Boot.*
 
@@ -68,7 +68,7 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 #### 🔵🔵🔵⚪⚪⚪⚪⚪
 
-### Key Features of Redocusaurus {#h3-2-key-features-of-redocusaurus}
+### Key Features of Redocusaurus
 
 #### *See why Redocusaurus is the best choice for API docs.*
 
@@ -84,7 +84,7 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 #### 🔵🔵🔵🔵⚪⚪⚪⚪
 
-### 🛠️ Step 1: Generate Your OpenAPI File for Spring Boot Documentation {#h3-3-step-1-generate-your-openapi-file-for-spring-boot-documentation}
+### 🛠️ Step 1: Generate Your OpenAPI File for Spring Boot Documentation
 
 #### *Get your OpenAPI YAML ready from your Spring Boot app.*
 
@@ -111,7 +111,7 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 #### 🔵🔵🔵🔵🔵⚪⚪⚪
 
-### ⚙️ Step 2: Set Up Redocusaurus for Your Spring Boot Docs {#h3-4-step-2-set-up-redocusaurus-for-your-spring-boot-docs}
+### ⚙️ Step 2: Set Up Redocusaurus for Your Spring Boot Docs
 
 #### *Create your documentation website with Docusaurus and Redocusaurus.*
 
@@ -195,7 +195,7 @@ npm run start
 
 #### 🔵🔵🔵🔵🔵🔵⚪⚪
 
-### 🌍 Deploy Your Docs Anywhere with Ease {#h3-5-deploy-your-docs-anywhere-with-ease}
+### 🌍 Deploy Your Docs Anywhere with Ease
 
 #### From build to production in just one command.
 
@@ -222,7 +222,7 @@ You can deploy updates anytime by rebuilding and pushing the new files.
 
 #### 🔵🔵🔵🔵🔵🔵🔵⚪
 
-### 🏁 Wrapping Up: Effortless Spring Boot Documentation with Redocusaurus {#h3-6-wrapping-up-effortless-spring-boot-documentation-with-redocusaurus}
+### 🏁 Wrapping Up: Effortless Spring Boot Documentation with Redocusaurus
 
 #### *Quickly build interactive docs that look professional.*
 
@@ -238,7 +238,7 @@ You can deploy updates anytime by rebuilding and pushing the new files.
 
 #### 🔵🔵🔵🔵🔵🔵🔵🔵
 
-### 🔗 Helpful Resources to Master Spring Boot Documentation with Redocusaurus {#h3-7-helpful-resources-to-master-spring-boot-documentation-with-redocusaurus}
+### 🔗 Helpful Resources to Master Spring Boot Documentation with Redocusaurus
 
 #### *Explore these links to deepen your knowledge and prepare for certification.*
 

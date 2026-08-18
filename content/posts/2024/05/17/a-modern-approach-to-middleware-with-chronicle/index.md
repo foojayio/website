@@ -25,7 +25,7 @@ Point to point middleware based on TCP/IP requires extra processing power and ne
 
 Early multicast solutions such as Tibco Rendezvous used message brokers to facilitate communication and ensure reliability. In response, companies such as 29 West developed brokerless systems that reduced latency. These systems often bridged TCP/IP connections over WANs that did not allow multicast.
 
-### Challenges and limitations {#h3-0-challenges-and-limitations}
+### Challenges and limitations
 
 As systems evolved and data volumes grew, some challenges and limitations of these multicast based systems presented themselves.
 
@@ -43,7 +43,7 @@ Others look to open source messaging solutions such as Kafka. However, Kafka has
 
 For high frequency or ultra low latency trading groups needing the absolute lowest latency, it has become popular to buy the highest horsepower machines possible and pack as much infrastructure on them as possible, leveraging shared memory transport between services. These solutions are typically expensive to build, difficult to maintain, and not cloud friendly.
 
-### Chronicle's approach to microservices {#h3-1-chronicle-s-approach-to-microservices}
+### Chronicle's approach to microservices
 
 [Chronicle's approach to microservices](http://https://chronicle.software/services/ "Chronicle’s approach to microservices ")with queue replication can provide both on box latencies rivaling some of the best shared-memory implementations on the market, as well as low and predictable latency off box. [Chronicle Queue](http://https://chronicle.software/queue-enterprise/ "Chronicle Queue") (the underlying messaging system of the microservices framework) solves many of the issues that plague legacy middleware by not sacrificing flexibility, allowing both point-to-point and topic-based pub/sub communication patterns.
 
@@ -54,4 +54,4 @@ On top of this, queues are cloud-friendly with TCP/IP replication to remote back
 The below diagram is an example trading system using Chronicle Services showing chronicle queues as the "bus" in a pub/sub environment.  
 ![](Screenshot-2024-05-07-at-09.59.51-700x487.png)
 
-[Contact Chronicle](http://https://chronicle.software/contact-us/ "Contact Chronicle") today for more information, as well as for access to our [documentation](http://https://portal.chronicle.software/resources.php?_gl=1*15yr5dm*_ga*MTk1MTk4MjgzNS4xNzAxMjYzOTE1*_ga_F8RYJ50Q4J*MTcxNTA3MjI4NC4xMjUuMS4xNzE1MDcyNTM5LjAuMC4w*_ga_5XEVBSKC5K*MTcxNTA3MjI4NC4xMjUuMS4xNzE1MDcyNTM5LjAuMC4w&amp;_ga=2.240404995.1202346314.1715072285-1951982835.1701263915#docs "documentation") on Chronicle Services and Queue Enterprise.
+[Contact Chronicle](http://https://chronicle.software/contact-us/ "Contact Chronicle") today for more information, as well as for access to our [documentation](http://https://portal.chronicle.software/resources.php?_gl=1*15yr5dm*_ga*MTk1MTk4MjgzNS4xNzAxMjYzOTE1*_ga_F8RYJ50Q4J*MTcxNTA3MjI4NC4xMjUuMS4xNzE1MDcyNTM5LjAuMC4w*_ga_5XEVBSKC5K*MTcxNTA3MjI4NC4xMjUuMS4xNzE1MDcyNTM5LjAuMC4w&_ga=2.240404995.1202346314.1715072285-1951982835.1701263915#docs "documentation") on Chronicle Services and Queue Enterprise.

@@ -27,10 +27,10 @@ But this won't work for some (older) versions of the Raspberry Pi, as these use 
 
 This post will guide you through the steps to have a working Java JDK and JavaFX 11 on these Raspberry Pi board versions.
 
-Prepare a Raspberry Pi {#h2-0-prepare-a-raspberry-pi}
------------------------------------------------------
+Prepare a Raspberry Pi
+----------------------
 
-### ARMv6 Raspberry Pi board {#h3-1-armv6-raspberry-pi-board}
+### ARMv6 Raspberry Pi board
 
 For this post, I'm using an old Raspberry Pi B+ 1.2. To be sure which ARM-version is used, check the output of "cat /proc/cpuinfo" in the terminal:  
 
@@ -61,7 +61,7 @@ For a clear overview of the different board- and ARM-version, check this [table 
 * Compute Module 1
 * Zero 1.2, 1.3 and W
 
-### Prepare SD card with Raspbian OS (Full) {#h3-2-prepare-sd-card-with-raspbian-os-full}
+### Prepare SD card with Raspbian OS (Full)
 
 We start with a fresh new Raspbian OS on the SD card using the "[Imager](https://www.raspberrypi.org/downloads/)" tool.
 
@@ -76,12 +76,12 @@ Server VM is only supported on ARMv7+ VFP
 
 As expected, the default included OpenJDK for ARM is build for version 7 or higher, so doesn't work on this ARMv6-based Raspberry Pi B+ 1.2.
 
-Change the Java JDK {#h2-3-change-the-java-jdk}
------------------------------------------------
+Change the Java JDK
+-------------------
 
 The sources of Java are available through the [open-source project OpenJDK](http://openjdk.java.net/). So anyone can build Java JDK packages - yes you can even [do it yourself](https://hg.openjdk.java.net/jdk-updates/jdk9u/raw-file/tip/common/doc/building.html)! - and luckily a lot of free pre-build versions are available.
 
-### Install Java 11 for ARMv6 provided by Azul {#h3-4-install-java-11-for-armv6-provided-by-azul}
+### Install Java 11 for ARMv6 provided by Azul
 
 Only Azul seems to provide an ARMv6 version with their [Zulu builds of OpenJDK](https://www.azul.com/downloads/zulu-community), which is available for free!
 ![](azul-zulu-armv6-1024x328.png)
@@ -151,7 +151,7 @@ OpenJDK Client VM Zulu11.41+75-CA (build 11.0.8+10-LTS, mixed mode)
 
 We have a winner! We now successfully replaced the default OpenJDK 11 (which only works on ARMv7+) with the Azul Zulu JDK which works on ARMv6.
 
-### Testing with a non-compiled Java file {#h3-5-testing-with-a-non-compiled-java-file}
+### Testing with a non-compiled Java file
 
 Let's try out the newly installed Java JDK. Since Java 11, we can run Java-files directly without the need to compile them. Let's create a simple file with nano and run it.
 
@@ -172,14 +172,14 @@ Hello World
 
 Perfect! Java works as expected, but it takes about 15 seconds before the "Hello World" is shown on this old board dating from 2014.
 
-Graphical user interfaces with JavaFX {#h2-6-graphical-user-interfaces-with-javafx}
------------------------------------------------------------------------------------
+Graphical user interfaces with JavaFX
+-------------------------------------
 
 If you also want to use JavaFX user interfaces, additional steps are needed as this library is not included in the JDK 11. It is developed as an independent open-source project on [openjfx.io](https://openjfx.io/). The main contributor and maintainer is [Gluon](https://gluonhq.com/). They also offer [commercial support](https://gluonhq.com/services/javafx-support/) to companies who want to use JavaFX for desktop and mobile application development.
 
 Make sure you successfully updated to Azul Zulu JDK 11 before proceeding with the next steps.
 
-### Install JavaFX 11 for ARMv6 provided by GluonHQ {#h3-7-install-javafx-11-for-armv6-provided-by-gluonhq}
+### Install JavaFX 11 for ARMv6 provided by GluonHQ
 
 We are going to use the free public version provided by Gluon on their [download page](https://gluonhq.com/products/javafx/).
 
@@ -232,7 +232,7 @@ total 17124
 ```
 
 
-### Test with a minimal JavaFX application {#h3-8-test-with-a-minimal-javafx-application}
+### Test with a minimal JavaFX application
 
 We are going to reuse the minimal JavaFX application which was created in this post "[PiJava - Part 4 - Building a minimal JavaFX 11 application with Maven](https://webtechie.be/post/2019-04-01-pijava-part-4-building-a-minimal-javafx-11-application-with-maven/)". First, we need to clone the sources from GitHub:
 
@@ -271,8 +271,8 @@ $ sudo java --module-path /home/pi/armv6hf-sdk/lib
 And there we have it! JavaFX running on an ARMv6 Raspberry Pi B+ 1.2!!!
 ![](javafx-on-armv6-raspberrypi-1024x422.png)
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 Compared to the latest Raspberry Pi with a much faster processor and more memory, the application starts a lot slower on my 6-year old test board. But it works! Yes, really, it works 🙂
 

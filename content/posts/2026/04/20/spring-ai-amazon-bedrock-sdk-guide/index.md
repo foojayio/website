@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Artificial intelligence has rapidly expanded across every industry since the inception of ChatGPT. It represents a breakthrough in how we build and use software. Moreover, this breakthrough technology has driven major transformation. At the same time, it has created significant noise and hype.
 
@@ -31,7 +31,7 @@ From a development perspective, the software development lifecycle is evolving. 
 
 However, we must remain cautious. For example, we should not blindly trust outputs from tools like ChatGPT, GitHub Copilot, or other AI assistants. Instead, we must review and validate all generated text, code, and content. Only then should we deploy it to production for customers.
 
-### Role of Agentic AI Frameworks {#h3-1-role-of-agentic-ai-frameworks}
+### Role of Agentic AI Frameworks
 
 Meanwhile, as AI continues to evolve and deliver staggering results, many agentic AI frameworks are emerging. Consequently, developers and architects can build and experiment with use cases in a short time. In addition, these frameworks act as breakthrough technology and accelerate innovation.
 
@@ -47,7 +47,7 @@ In this article, we focus on Spring AI and its integration with the generally av
 
 <br />
 
-### What is Spring AI and Spring AI SDK? {#h3-2-what-is-spring-ai-and-spring-ai-sdk}
+### What is Spring AI and Spring AI SDK?
 
 According to **Spring AI documentation** , it is an application framework for **AI engineering** . Using this framework, developers can connect **Data and APIs with AI models**.
 
@@ -55,7 +55,7 @@ The **Spring AI AgentCore SDK** is an open-source library that brings Amazon Bed
 
 With Spring AI Builders, developers can simply add a dependency and annotate a method. The SDK then handles the rest.
 
-### What is Amazon Bedrock AgentCore and Why? {#h3-3-what-is-amazon-bedrock-agentcore-and-why}
+### What is Amazon Bedrock AgentCore and Why?
 
 According to Amazon documentation, it is an agentic AI platform that enables developers to build, deploy, and operate agents at scale using any framework and any model.
 
@@ -67,17 +67,17 @@ With Amazon Bedrock AgentCore, the platform handles the infrastructure layer. It
 
 Source: Amazon
 
-### Amazon Bedrock AgentCore Capabilties {#h3-4-amazon-bedrock-agentcore-capabilties}
+### Amazon Bedrock AgentCore Capabilties
 
 Amazon Bedrock AgentCore provides the following capabilities.
 
-### 1. AgentCore Runtime {#h3-5-1-agentcore-runtime}
+### 1. AgentCore Runtime
 
 * The execution environment where your AI agents run
 * Handles scaling, session management, and isolation automatically
 * Lets you deploy agents without managing infrastructure
 
-### 2. AgentCore Memory {#h3-6-2-agentcore-memory}
+### 2. AgentCore Memory
 
 * Helps agents remember context across interactions
 * **Supports:**
@@ -85,56 +85,56 @@ Amazon Bedrock AgentCore provides the following capabilities.
   * **Long-term memory (persistent knowledge):** It persists knowledge across sessions using multiple strategies like Semantic, User Preference, Summary, and Episodic memory strategies.
 * Enables more personalized and intelligent responses
 
-### 3. AgentCore Gateway {#h3-7-3-agentcore-gateway}
+### 3. AgentCore Gateway
 
 * Connects agents to APIs, tools, and external systems
 * Converts APIs/Lambda functions into agent-compatible tools (MCP)
 * Simplifies tool integration with minimal code
 
-### 4. AgentCore Identity {#h3-8-4-agentcore-identity}
+### 4. AgentCore Identity
 
 * Manages authentication and access control for agents
 * Integrates with existing identity providers (e.g., Cognito, Okta, OAuth2)
 * Ensures secure interactions with systems and data
 
-### 5. AgentCore Policy {#h3-9-5-agentcore-policy}
+### 5. AgentCore Policy
 
 * Defines rules and boundaries for agent behavior
 * Controls what actions an agent can perform
 * Ensures compliance and governance without slowing execution
 
-### 6. Build-inTool: Code Interpreter {#h3-10-6-build-intool-code-interpreter}
+### 6. Build-inTool: Code Interpreter
 
 * Provides a secure sandbox for executing code
 * Supports multiple languages (Python, JS, etc.)
 * Helps agents perform complex computations and tasks
 
-### 7. Build-inTool: Browser {#h3-11-7-build-intool-browser}
+### 7. Build-inTool: Browser
 
 * Allows agents to interact with websites
 * Can navigate pages, fill forms, and extract data
 * Runs in a secure, managed environment
 
-### 8. Gen AI Observability {#h3-12-8-gen-ai-observability}
+### 8. Gen AI Observability
 
 * Monitors and tracks agent performance in production
 * Provides tracing, debugging, and visualization of workflows
 * Helps identify failures and optimize performance
 * Separate feature is available in CloudWatch as a sidecar as a Gen AI Observability
 
-### 9. Evaluations {#h3-13-9-evaluations}
+### 9. Evaluations
 
 * Measures agent quality and performance
 * Evaluates correctness, reliability, and task success
 * Helps improve agents using data-driven insights
 
-### Step-by-step guide {#h3-14-step-by-step-guide}
+### Step-by-step guide
 
 We can start by creating a sample agent. Then, we can gradually add and integrate AgentCore services such as memory, gateway, identity, and policies. We can also incorporate built-in tools like the browser and code interpreter.
 
 Observability, evaluations, and advanced identity management are still evolving. These capabilities are expected in upcoming SDK releases.
 
-### Prerequisites {#h3-15-prerequisites}
+### Prerequisites
 
 1. An AWS Account
 2. Java 17 or higher (Java 25 recommended)
@@ -142,7 +142,7 @@ Observability, evaluations, and advanced identity management are still evolving.
 4. [Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/)
 5. [IntelliJ IDE](https://www.jetbrains.com/idea/) (Recommended)
 
-### Project Structure {#h3-16-project-structure}
+### Project Structure
 
 Using **[start.spring.io](https://start.spring.io/)**, you can scaffold the project structure and add the required dependencies.
 
@@ -299,14 +299,14 @@ complete `pom.xml`
 ```
 
 
-### 2. Add the below class {#h3-17-2-add-the-below-class}
+### 2. Add the below class
 
 ```java
 public record PromptRequest(String prompt){};
 ```
 
 
-### 3. Add the below Mathematical Tool class {#h3-18-3-add-the-below-mathematical-tool-class}
+### 3. Add the below Mathematical Tool class
 
 ```java
 package com.bsmlabs.springai.tools;
@@ -405,7 +405,7 @@ public class MathematicalTools {
 ```
 
 
-### 4. Create a Sample Agent {#h3-19-4-create-a-sample-agent}
+### 4. Create a Sample Agent
 
 ```java
 package com.bsmlabs.springai.agents;
@@ -477,7 +477,7 @@ return chatClient.prompt()
 
 If the LLM determines it needs a tool (e.g., to compute something), Spring AI handles the **tool-call loop automatically** behind .call() --- invoking `MathematicalTools`, feeding the result back to the model, and returning the final answer.
 
-### 5. Configure Amazon Bedrock Properties {#h3-20-5-configure-amazon-bedrock-properties}
+### 5. Configure Amazon Bedrock Properties
 
 Configure both region and model in application.properties/application.yml
 
@@ -503,7 +503,7 @@ spring:
 ```
 
 
-### 6. Verify {#h3-21-6-verify}
+### 6. Verify
 
 Since we have enabled Swagger OpenAPI, we can easily validate the APIs.
 ![Swagger OpenAPI](Screenshot-2026-04-19-at-3.42.27-PM-1024x513.png) Swagger OpenAPI
@@ -522,7 +522,7 @@ curl -X POST http://localhost:8080/invocations \ -H "Content-Type: application/j
 
 *This is an AgentCore-compatible AI agent. It requires no custom controllers, no protocol handling, and no health check implementation.*
 
-### 7. Add Streaming {#h3-22-7-add-streaming}
+### 7. Add Streaming
 
 Add the *`spring-boot-starter-webflux`* dependency and comment *spring-boot-starter-web* dependency
 
@@ -551,7 +551,7 @@ public Flux<String> streamingChat(PromptRequest request) {
 
 ![Streaming](Screenshot-2026-04-19-at-4.18.34-PM-1024x513.png) Streaming
 
-### End-to-end flow {#h3-23-end-to-end-flow}
+### End-to-end flow
 
 ```
 User Request
@@ -577,7 +577,7 @@ Final LLM response returned as String
 
 ***Happy Learning Spring AI***
 
-### References {#h3-24-references}
+### References
 
 * **Bedrock Converse API:** <https://docs.spring.io/spring-ai/reference/api/chat/bedrock-converse.html>
 * <https://spring.io/ai>

@@ -35,8 +35,8 @@ First, let's go to <https://start.spring.io/> and create a Spring Boot applicati
 >
 > so we are going to select 3.2.0 (M2) as the Spring Boot version.
 
-Create Bookmark domain class {#h2-0-create-bookmark-domain-class}
------------------------------------------------------------------
+Create Bookmark domain class
+----------------------------
 
 Let's start with creating a Java record representing a **Bookmark** as follows:
 
@@ -47,8 +47,8 @@ public record Bookmark(Long id, String title, String url, Instant createdAt) {}
 ```
 
 
-Create Flyway Migration Script {#h2-1-create-flyway-migration-script}
----------------------------------------------------------------------
+Create Flyway Migration Script
+------------------------------
 
 Let's add the following migration script under **src/main/resources/db/migration** directory.
 
@@ -65,8 +65,8 @@ create table bookmarks
 ```
 
 
-Implementing CRUD operations using JdbcClient {#h2-2-implementing-crud-operations-using-jdbcclient}
----------------------------------------------------------------------------------------------------
+Implementing CRUD operations using JdbcClient
+---------------------------------------------
 
 Let's implement CRUD operations on **Bookmark** domain class using **JdbcClient** API.
 
@@ -86,7 +86,7 @@ public class BookmarkRepository {
 ```
 
 
-### Fetch all bookmarks {#h3-3-fetch-all-bookmarks}
+### Fetch all bookmarks
 
 We can fetch all bookmarks using **JdbcClient** as follows:
 
@@ -122,7 +122,7 @@ static class BookmarkRowMapper implements RowMapper<Bookmark> {
 ```
 
 
-### Find bookmark By ID {#h3-4-find-bookmark-by-id}
+### Find bookmark By ID
 
 We can fetch a bookmark by **id** using **JdbcClient** as follows:
 
@@ -137,7 +137,7 @@ public Optional<Bookmark> findById(Long id) {
 ```
 
 
-### Create a new bookmark {#h3-5-create-a-new-bookmark}
+### Create a new bookmark
 
 We can use PostgreSQL **INSERT INTO ... RETURNING COL1, COL2** syntax and then use **KeyHolder** to get the generated primary key value.
 
@@ -158,7 +158,7 @@ public Long save(Bookmark bookmark) {
 ```
 
 
-### Update a bookmark {#h3-6-update-a-bookmark}
+### Update a bookmark
 
 We can update a bookmark as follows:
 
@@ -180,7 +180,7 @@ public void update(Bookmark bookmark) {
 
 In the **update(...)** method, I have used positional parameters **(?)** instead of using named parameters **(:title)** for the demonstration purpose. I highly recommend using named parameters over positional parameters.
 
-### Delete a bookmark {#h3-7-delete-a-bookmark}
+### Delete a bookmark
 
 We can delete a bookmark as follows:
 
@@ -196,8 +196,8 @@ public void delete(Long id) {
 ```
 
 
-Test Repository using Testcontainers {#h2-8-test-repository-using-testcontainers}
----------------------------------------------------------------------------------
+Test Repository using Testcontainers
+------------------------------------
 
 We should always make sure that the database is in a known state so that we can write predictable assertions. So, let's create **src/test/resources/test_data.sql** file with the following content:
 
@@ -318,8 +318,8 @@ class BookmarkRepositoryTest {
 
 We have used the Testcontainers special JDBC URL to start PostgreSQL database and run the tests using it.
 
-Summary {#h2-9-summary}
------------------------
+Summary
+-------
 
 The new **JdbcClient** API provides a nice fluent API to implement data access layer using JDBC.
 

@@ -22,8 +22,8 @@ frozen: false
 
 That arc was the through-line of yesterday's very well attended [Developing Crash-Proof Java Applications](https://www.wearedevelopers.com/world-congress/agenda/workshops/developing-crash-proof-java-applications-1122204) hands-on workshop at [We Are Developers World Congress Europe in Berlin](https://www.wearedevelopers.com/world-congress), on building crash-proof Java applications with Temporal, led by [principal developer advocate Tom Wheeler](https://www.wearedevelopers.com/world-congress/speakers/tom-wheeler) --- who cheerfully admitted he went through the exact same stages himself. He spent days trying to break the platform before joining the company. He couldn't.
 
-The problem: we all became distributed systems developers {#h2-0-the-problem-we-all-became-distributed-systems-developers}
---------------------------------------------------------------------------------------------------------------------------
+The problem: we all became distributed systems developers
+---------------------------------------------------------
 
 Twenty-five years ago, most applications ran on a single machine. A function call either worked or it didn't, and life was simple. Then the internet happened. Applications had to scale horizontally across machines, integrate with cloud services and third-party APIs, and split into microservices. Components that used to be a local function call became network hops --- and every network hop is an opportunity for failure.
 
@@ -31,15 +31,15 @@ The workshop's canonical example was focused on moving money between two banks. 
 
 Traditionally, you defend against this with checkpointing code, message queues, cron jobs, idempotency keys, and mountains of error-handling logic. All of that infrastructure exists because of one assumption we've internalized since our first "Hello, World": processes die, so keep execution time short and never trust in-memory state.
 
-Durable execution: crash-proof, not crash-preventing {#h2-1-durable-execution-crash-proof-not-crash-preventing}
----------------------------------------------------------------------------------------------------------------
+Durable execution: crash-proof, not crash-preventing
+----------------------------------------------------
 
 Temporal's answer is *durable execution*. The analogy used in the workshop was a waterproof watch: it doesn't stop you from falling in the lake, but if you do, the watch keeps working. Durable execution doesn't prevent crashes --- it makes them inconsequential.
 
 The mechanism is a logical execution that spans multiple physical processes. Your program starts in one process; if that process dies, execution resumes in another --- potentially on a different machine entirely. Set `x = 5`, crash the server, and when execution resumes elsewhere, x is still 5. No database writes, no manual state persistence. Your laptop could catch fire and the workflow would carry on somewhere else.
 
-How it actually works: history replay, not snapshots {#h2-2-how-it-actually-works-history-replay-not-snapshots}
----------------------------------------------------------------------------------------------------------------
+How it actually works: history replay, not snapshots
+----------------------------------------------------
 
 The first guess almost everyone makes is that Temporal must be snapshotting your process memory. It isn't --- writing gigabytes of RAM to disk every second would be catastrophically slow, and memory addresses wouldn't survive a restart anyway.
 
@@ -52,15 +52,15 @@ Instead, Temporal uses a technique called **history replay**. It records just en
 * **Activities** are where all the non-deterministic, failure-prone work lives: calling APIs, querying databases, sending emails, hitting an LLM. Activities don't get durable state, but they get automatic retries with configurable timeouts. Service down? Temporal retries until it succeeds or you cancel.  
 * **Workers** do the replays. Every time a workflow calls an activity, Temporal records the call, its parameters, and its result in an **event history** maintained by the Temporal Service. If a crash occurs, a worker replays that history against your deterministic workflow code and reconstructs the exact state --- typically in a fraction of a second. Nothing is lost, and crucially, nothing already completed is repeated. No duplicate withdrawals.
 
-The moving parts {#h2-3-the-moving-parts}
------------------------------------------
+The moving parts
+----------------
 
 The architecture has three main components. Your **workflow and activity definitions** are plain code --- in the workshop's case Java, though Temporal ships SDKs for Go, TypeScript, Python, PHP, .NET, and more, and you can mix languages freely within one system. **Workers**, provided by the SDK and run on your own infrastructure, poll task queues and execute your code.
 
 The **Temporal Service** sits separately, managing task queues and event histories --- it never runs your code and never initiates connections, which keeps firewall rules simple.
 
-Seeing is believing {#h2-4-seeing-is-believing}
------------------------------------------------
+Seeing is believing
+-------------------
 
 The Temporal Web UI got singled out as "worth the price of admission." Every workflow execution --- running or long finished --- is inspectable: inputs, outputs, timelines, per-activity details down to which process on which machine executed each step.
 ![](Timeline1-1024x590.png)
@@ -69,8 +69,8 @@ In the live demo, Tom killed the inventory service mid-order. The UI showed the 
 
 Bring the service back up, and the order completes as if nothing happened. No alerts, no manual intervention, no 3 a.m. page.
 
-Why this changes how you write software {#h2-5-why-this-changes-how-you-write-software}
----------------------------------------------------------------------------------------
+Why this changes how you write software
+---------------------------------------
 
 The deeper point of the workshop wasn't reliability --- it was simplicity. If your program can survive any crash without losing state or duplicating work, it can effectively run forever. And if it can run forever, entire categories of infrastructure become unnecessary. Need to do something in 30 days? You don't need a cron job; you can just sleep for 30 days *in your code*. Need to coordinate across services? You may not need that message queue.
 

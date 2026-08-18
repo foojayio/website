@@ -27,12 +27,12 @@ The true power of this amazing tool is hidden due to our debugging habits and ou
 
 The payoff for that mental shift is tremendous when dealing with "weird" bugs. Especially in large systems and with concurrency related issues.
 
-Before we go into this week's post I have a small favor to ask. My friend Nicolas got [suspended from Twitter](https://twitter.com/debugagent/status/1577094628347588608?s=20&amp;t=TgSSqDuqxtm86BVfjic-FQ). He could use followers and help!
+Before we go into this week's post I have a small favor to ask. My friend Nicolas got [suspended from Twitter](https://twitter.com/debugagent/status/1577094628347588608?s=20&t=TgSSqDuqxtm86BVfjic-FQ). He could use followers and help!
 
 With that out of the way, let's go back to the basics. What's a non-breaking breakpoint?
 
-Non-Breaking Breakpoint {#h2-0-non-breaking-breakpoint}
--------------------------------------------------------
+Non-Breaking Breakpoint
+-----------------------
 
 I don't like the term non-breaking breakpoint. It's an oxymoron. At Lightrun we use the term Snapshot but it makes more sense for something that has the level of context information that we provide. Google uses the term Capture which in this specific case makes a lot more sense.
 
@@ -52,8 +52,8 @@ The tracepoint lets us add a log to every breakpoint, the log can be as simple a
 
 ![](02-breakpoints-700x508.png)
 
-Beyond Tracepoints {#h2-1-beyond-tracepoints}
----------------------------------------------
+Beyond Tracepoints
+------------------
 
 Tracepoints are amazing. If you're still using printlines when debugging you should take a moment to rethink that and look into tracepoints. Notice that this isn't a replacement for logging. Logging is permanent and necessary. Printline debugging and tracepoints are ephemeral by default, they need to vanish. Tracepoints do it seamlessly, whereas we often forget printing in the code.
 
@@ -69,8 +69,8 @@ The tip of the iceberg is this, you can skip the breakpoint if the call stack in
 
 Yes. I know, it's tough to read. I'll try to write about it in a future post if there's interest. I have a second in my upcoming debugging book that covers that feature.
 
-Disable Until {#h2-2-disable-until}
------------------------------------
+Disable Until
+-------------
 
 A cool feature of non-breaking breakpoints is the way in which we can scale them. A normal breakpoint is a pain. You add it and your app stops. So you need to press the continue button repeatedly. With non-breaking you no longer have that problem and you can spread them all over. Here's a really cool example.
 
@@ -80,8 +80,8 @@ I can add a non-breaking breakpoint to method X. Then in the problematic process
 
 The one thing I wasn't able to do is change the state easily. I would like to have a tool to count the number of times a method is invoked or the duration it took to execute a method in milliseconds. This isn't hard with println debugging but isn't possible with tracepoints as far as I know. It would be great to set a variable to the current time in one tracepoint and print the difference between currentTime and the variable in the second tracepoint.
 
-Finally {#h2-3-finally}
------------------------
+Finally
+-------
 
 The debugger has many hidden gems locked within it.
 

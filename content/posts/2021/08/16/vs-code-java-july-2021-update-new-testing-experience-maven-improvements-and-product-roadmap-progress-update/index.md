@@ -24,8 +24,8 @@ With the recent release of [Visual Studio Code 1.59](https://code.visualstudio.c
 
 Let's look at some key highlights of the new testing extension:
 
-New Testing Decoration {#h2-0-new-testing-decoration}
------------------------------------------------------
+New Testing Decoration
+----------------------
 
 Developers now can access a new layout of buttons (Testing Decoration) in the left area of the editor. Those buttons provide easy access to run, debug test cases, or perform other actions.
 
@@ -33,8 +33,8 @@ More options can also be seen by right clicking in the area. Different from Code
 
 ![](Testing-Decoration.gif)
 
-More Powerful Test Explorer {#h2-1-more-powerful-test-explorer}
----------------------------------------------------------------
+More Powerful Test Explorer
+---------------------------
 
 The Test Explorer has been completely revamped. Developers can now customize the display mode and sorting order of the testing explorer for different scenarios and habits. Tests can also be directly kicked off from the test explorer.
 
@@ -44,8 +44,8 @@ In addition, the new Testing Explorer has built-in search bar support to help us
 
 ![](Test-Search-Filter.gif)
 
-Richer Test Message and Output {#h2-2-richer-test-message-and-output}
----------------------------------------------------------------------
+Richer Test Message and Output
+------------------------------
 
 By adopting the new Testing API, the developer can now directly see the test execution result directly in the editor area, making it easer to see the errors and stack trace information.
 
@@ -53,15 +53,15 @@ By adopting the new Testing API, the developer can now directly see the test exe
 
 For more detailed information on what Java Test Runner has to offer, please refer to the [official documentation here](https://code.visualstudio.com/docs/java/java-testing "official documentation here")
 
-Maven Dependency Management {#h2-3-maven-dependency-management}
----------------------------------------------------------------
+Maven Dependency Management
+---------------------------
 
 In addition to testing, we also have made several improvements on Maven dependency management. In specific, we have improved the interface of the Maven dependency tree to be more user-friendly. Also, we realized that Maven dependency conflict can be tricky to handle. Sometimes Maven might not resolve the conflicts the way we want it to, which could lead to errors when we run the application.
 
 Therefore, we have made some changes in our Maven extension to better visualize how conflicts are being resolved by Maven. For example, we will highlight the conflicts in the Maven POM as errors in the "Problems" tab of the terminal. By clicking on the error, Visual Studio Code will prompt the developer to fix the conflict and select which dependency to be used. The image below demonstrates a case how this helps the developer to quickly resolve a conflict.
 
-Project Management {#h2-4-project-management}
----------------------------------------------
+Project Management
+------------------
 
 Besides testing and dependency management, we have also made improvements to project management related features. In specific, we have fixed a few issues where the project explorer isn't working properly. Here's a list of the enhancement/bug fixes we have done:
 

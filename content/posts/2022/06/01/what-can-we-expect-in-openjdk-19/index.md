@@ -25,7 +25,7 @@ Although the Java 19 release is coming in September (2022-09-20), we already kno
 
 In this article, we'll touch on upcoming features via examples to get a sense of how valuable these can be to a project.
 
-### JEP-405: Record Patterns (Preview) {#h3-0-jep-405-record-patterns-preview}
+### JEP-405: Record Patterns (Preview)
 
 Java 14 introduced (JEP-361, Reference 2), which made it possible to use a switch as a statement or an expression. In many cases, I think it was something the community shouted for quite some time, because many other JVM languages have already provided such constructs.
 
@@ -70,7 +70,7 @@ if(r1 instanceof ExampleOne(int value, String t, Color c)){
 
 **Example 2.**: Still results in compilation error but a new build of Java SE 19 is on its way
 
-### JEP-425: Virtual Threads (Preview) {#h3-1-jep-425-virtual-threads-preview}
+### JEP-425: Virtual Threads (Preview)
 
 In one of the previously published articles (Thinking of Massive Throughput? Get to Know Virtual Threads!, Reference 8), we have already shown the uses and benefits and challenges associated with using Virtual.
 
@@ -83,7 +83,7 @@ The current release (Reference 7., Build23) shows that a lot of work has been do
  </figcaption>
 </figure>
 
-### JEP-428: Structured Concurrency (Incubator) {#h3-2-jep-428-structured-concurrency-incubator}
+### JEP-428: Structured Concurrency (Incubator)
 
 ```java
 Response handle() throws ExecutionException, InterruptedException {
@@ -122,7 +122,7 @@ Response handle() throws ExecutionException, InterruptedException {
 
 **Example 4.** : *StructureTaskScope* wraps all concurrent subtasks and processes them as a whole, even if they branch into their own threads (see **Example 2.**)
 
-### JEP-424: Foreign Function \& Memory API (Preview) {#h3-3-jep-424-foreign-function-memory-api-preview}
+### JEP-424: Foreign Function \& Memory API (Preview)
 
 The Java Platform provides incredible freedom in creating or destroying objects through an allocated stack in real memory. The Garbage Collector daemon works on such a heap to provide a sense of "unlimited" memory space that provides freedom.
 
@@ -140,17 +140,17 @@ MethodHandle radixSort = linker.downcallHandle(
 
 **Example 5.**: Finding and linking a foreign function
 
-### JEP-426: Vector API (Fourth Incubator) {#h3-4-jep-426-vector-api-fourth-incubator}
+### JEP-426: Vector API (Fourth Incubator)
 
 Implement an API for expressing vector computations that reliably compiles at runtime into optimal vector instructions on supported CPU architectures, resulting in higher performance than equivalent scalar computations (Reference 11.).
 
-### JEP-422: Linux/RISC-V Port {#h3-5-jep-422-linux-risc-v-port}
+### JEP-422: Linux/RISC-V Port
 
 RISC-V is a free and open RISC instruction set architecture (ISA) originally designed at the University of California, Berkeley and now developed in collaboration with RISC-V International.
 
 It is already supported by a wide range of language tools. With the increasing availability of RISC-V hardware, the JDK port will be valuable (Reference 10.).
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 The Java platform continues to bring more new concurrency, syntax and platform enhancements.
 
@@ -166,7 +166,7 @@ Fortunately, it was well received by the community.
 
 <br />
 
-### References {#h3-7-references}
+### References
 
 1. [JEP-405: Java SE 19, Record Patterns (Preview)](https://openjdk.java.net/jeps/405)
 2. [JEP-361, Java SE 14: Switch Expression](https://openjdk.java.net/jeps/361)

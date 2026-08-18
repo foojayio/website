@@ -40,26 +40,26 @@ To always stay up to date, the software platform includes an automatic update me
 
 In this way, around 18,000 targets could be infiltrated and compromised within a very short space of time.
 
-What does that mean for us now? {#h2-0-what-does-that-mean-for-us-now}
-----------------------------------------------------------------------
+What does that mean for us now?
+-------------------------------
 
 There are two angles here.
 
 * The first is from the consumer's point of view. However, for your own production, you must ensure that no compromised binaries are used. That means that all, and here I mean **all**, binaries used must be checked. These are the dependencies of the application and the tools used in the production process. This includes the tools such as the CI server used, e.g., Jenkins, or the operating system components of the infrastructure and Docker images.
 * The second perspective represents the point of view that one has as a software distributor, meaning anyone who distributes binaries in any form. This includes customers in the classic sense and other departments that may be considered consumers of the binaries created. The associated loss of trust can cause a company severe financial damage.
 
-What can we do to protect ourselves? {#h2-1-what-can-we-do-to-protect-ourselves}
---------------------------------------------------------------------------------
+What can we do to protect ourselves?
+------------------------------------
 
 If you look at the different approaches to arm yourself against these threats, you can see two fundamental differences.
 
-### DAST: Dynamic Application Security Testing {#h3-2-dast-dynamic-application-security-testing}
+### DAST: Dynamic Application Security Testing
 
 An application can be subjected to a black box test. This is called DAST, Dynamic Application Security Testing. Here you go the way a hacker would do it. The application is attacked via the available interaction points. Attack vectors based on the most common vulnerabilities are usually used here. SQL injection can be cited as an example. These attack patterns are initially independent of the technology used and represent typical security holes in web applications.
 
 This approach has advantages as well as disadvantages. A serious disadvantage is that the tests cannot be started until the application has been developed. This means that the measures to eliminate weak points found are more costly than is the case with other approaches. On the other hand, a significant advantage of this approach is that the dynamic context can also be checked when testing the production system. Examples include weak configurations, open ports, and more.
 
-### SAST: Static Application Security Testing {#h3-3-sast-static-application-security-testing}
+### SAST: Static Application Security Testing
 
 The counterpart to the dynamic tests is the static tests. These tests analyse the individual components of the infrastructure involved. This includes not only the applications created but also the components involved in operating and creating the application.
 
@@ -67,8 +67,8 @@ A disadvantage of the SAST method is that it can only search for known security 
 
 Another advantage of the SAST method is that it checks the licenses used. This area also contributes to the security of the company, albeit in a legal sense.
 
-So what has the most significant effect when you start with the topic of security? {#h2-4-so-what-has-the-most-significant-effect-when-you-start-with-the-topic-of-security}
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+So what has the most significant effect when you start with the topic of security?
+----------------------------------------------------------------------------------
 
 When looking at the different approaches, it becomes clear that the proportion of directly or indirectly used binaries makes up the most significant amount in a technology stack. This means that you should also start securing precisely these parts. Unfortunately, there is only one way to ensure with SAST that it is really 100% checked directly. All other methods do not achieve this coverage, or if they do, then only in sporadic exceptional cases.
 
@@ -79,15 +79,15 @@ Within software development, there are two points for these analyses where such 
 * The first point that most people will think of is the CI segment. Here the CI server can carry out the analysis during the execution of a build pipeline and all the checks and also take over the reporting. If the violations are too massive, the build is cancelled.
 * The second position, which is ideally suited for such an analysis, is directly in the IDE. Here it can already be determined during definition whether the license used is permitted. The known vulnerabilities can also be extracted and thus provide enough information to decide whether this version of this dependency may be used.
 
-Lesson Learned: What we learned from the SolarWinds Hack. {#h2-5-lesson-learned-what-we-learned-from-the-solarwinds-hack}
--------------------------------------------------------------------------------------------------------------------------
+Lesson Learned: What we learned from the SolarWinds Hack.
+---------------------------------------------------------
 
 We learned the following things from SolarWinds. First, the attacks are no longer aimed at the final targets themselves but against the suppliers. Here one tries to reach multipliers who massively increase the effectiveness of this attack.
 
 Likewise, you no longer only have to protect yourself against your use of compromised binaries. The newly added component means that the self-generated binaries must also be secured. Nobody wants to become a distributor of infected software. It follows that all parts involved must be subjected to permanent checks.
 
-Reactions: The Executive Order from US President Joe Biden {#h2-6-reactions-the-executive-order-from-us-president-joe-biden}
-----------------------------------------------------------------------------------------------------------------------------
+Reactions: The Executive Order from US President Joe Biden
+----------------------------------------------------------
 
 Some have undoubtedly noticed that the US President issued an Executive Order on Cybersecurity. But what exactly does that mean, and who can even do something like that and under what conditions?
 
@@ -101,8 +101,8 @@ Since the US government can define its way of working, it was decided that the S
 
 When the European Union agreed on comprehensive data protection and data security laws with the GDPR, the effect was felt worldwide and quickly. In a globally networked economy, decisions by the world's largest GDP producers can set standards for other areas. With the GDPR, companies in the US and elsewhere had to immediately revise and update software and processes to continue doing business in the EU. It became a worldwide rule so as not to lose EU treaties. Likewise, with US cybersecurity order, as U.S.-based global corporations influence global software security behaviour.
 
-Wow, what now? {#h2-7-wow-what-now}
------------------------------------
+Wow, what now?
+--------------
 
 What does that mean for me as a software developer?
 
@@ -112,8 +112,8 @@ To obtain such a dependency graph, one can, for example, use the tools that alre
 
 This information can thus be generated as build information by the CI route (e.g., [JFrog Pipelines](https://jfrog.com/pipelines/ "JFrog Pipelines")) and stored in a build repository within Artifactory.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 We have seen that the new qualities of attacks on software systems, in general, will lead to advanced countermeasures. What is meant here is a complete analysis of all artefacts involved and produced.
 

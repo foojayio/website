@@ -25,7 +25,7 @@ frozen: false
 
 So how can systems be able to manage and track the flow of data in a coherent fashion and in a stateless world?
 
-### Navigating the maze of cloud related terminologies {#h3-0-navigating-the-maze-of-cloud-related-terminologies}
+### Navigating the maze of cloud related terminologies
 
 We will first iron out a few terminologies that some folks appear to be using almost interchangeably in the current cloud computing era:
 
@@ -59,7 +59,7 @@ Whereas, with stateful computing, everything is heavier, because we will need to
 
 As a result of all of these concerns, stateful systems are less performant, heavier, and can become very complex.
 
-### Stateful Computing in the Client-Server era {#h3-1-stateful-computing-in-the-client-server-era}
+### Stateful Computing in the Client-Server era
 
 #### Two-Phase Commit Protocol (2PC)
 
@@ -90,8 +90,8 @@ HTTP cookies generated from the web server are being cached on the client-side w
 
 JSON Web Token (JWT) offers a compact and self-contained way to securely transmit messages as JSON object between the client and the server.
 
-Cloud Native and the Twelve-Factor App {#h2-2-cloud-native-and-the-twelve-factor-app}
--------------------------------------------------------------------------------------
+Cloud Native and the Twelve-Factor App
+--------------------------------------
 
 The [12-Factor App methodology](https://12factor.net/) from Heroku provides a set of guidelines for designing cloud native systems.
 
@@ -101,12 +101,12 @@ As we can see, #6 and #9 epitomize the need for highly efficient and very lightw
 
 Hence, the question now becomes...
 
-How can stateless microservices handle stateful workload? {#h2-3-how-can-stateless-microservices-handle-stateful-workload}
---------------------------------------------------------------------------------------------------------------------------
+How can stateless microservices handle stateful workload?
+---------------------------------------------------------
 
 While microservices themselves are implemented as stateless containers, they can still utilize the operations and services outside of the containers to perform any stateful tasks.
 
-### Techniques and Mechanisms {#h3-4-techniques-and-mechanisms}
+### Techniques and Mechanisms
 
 The following are the techniques and mechanisms which we have already discussed in the earlier part of this article, namely:
 
@@ -116,7 +116,7 @@ The following are the techniques and mechanisms which we have already discussed 
 * Caches
 * Database Transactions
 
-### Cloud Native Infrastructure {#h3-5-cloud-native-infrastructure}
+### Cloud Native Infrastructure
 
 Kubernetes is the de facto container orchestrator in the current cloud computing era. In a short span of roughly 7 years since its debut, it has taken the world by storm. In its early days, it supported only stateless workloads with containers that had no persistent storage or volume. From an operational point of view, re-starting a pod was simpler then, as there was no need to initialize it to the same state as other pods running within the same node inside the same cluster. However, not all workloads are meant to be stateless.
 
@@ -154,7 +154,7 @@ From [the Kubernetes Conceptual guide on Persistent Volumes](https://kubernetes.
 
 *A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany or ReadWriteMany, see [AccessModes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)).*
 
-### Cloud Native Application Programming Design Pattern(s) {#h3-6-cloud-native-application-programming-design-pattern-s}
+### Cloud Native Application Programming Design Pattern(s)
 
 As developers, we get excited when it comes to programming design patterns. For designing stateful microservices, the [Saga pattern](https://microservices.io/patterns/data/saga.html) is the replacement for the two-phase commit protocol.
 
@@ -198,14 +198,14 @@ Chris Richardson has [a great blog post that explains the choreography vs orches
 
 The Saga pattern does not have the same concept as a traditional database transaction when any failure occurs and a *rollback* needs to happen. If a local transaction fails because it violates a business rule then the saga executes a series of *compensating transactions that undo the changes* that were made by the preceding local transactions.
 
-### MicroProfile LRA and Open Liberty {#h3-7-microprofile-lra-and-open-liberty}
+### MicroProfile LRA and Open Liberty
 
 The [MicroProfile Long Running Action 1.0 (LRA)](https://download.eclipse.org/microprofile/microprofile-lra-1.0/microprofile-lra-spec-1.0.html), an Eclipse Foundation project, was released in April of 2021. The model it uses to support long-running distributed transaction, [the Long Running Action model](https://www.oasis-open.org/committees/document.php?document_id=12794), is based on the Saga Interaction Pattern.
 
 [Open Liberty](https://openliberty.io)implements MicroProfile LRA by way of a transaction manager that acts as a coordinator. This coordinator handles one or more participant services so that the execution of their business logic is organized in a predictable way.
 
-Closing thoughts {#h2-8-closing-thoughts}
------------------------------------------
+Closing thoughts
+----------------
 
 Stateful workload processing is certainly not for the faint of heart, especially in the present cloud computing era. There can be a multitude of *moving parts* within a distributed ecosystem that are constantly updating the state of the data, and our job is to not only keep track of the state changes, but also ensure the integrity of the data as it flows through the ecosystem in the infrastructural and the application systems layers.
 

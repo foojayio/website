@@ -4,8 +4,17 @@
        2. Root-relative internal links get the baseURL subpath (relURL only
           prefixes it when the path doesn't already start with "/").
        3. Links to any other host are external -> open in a new tab.
-       String checks (not urls.Parse, which errors on malformed migrated URLs). */ -}}
-{{- $orig := .Destination -}}
+       String checks (not urls.Parse, which errors on malformed migrated URLs).
+
+       htmlUnescape on .Destination/.Title is what goldmark's own link renderer
+       does before emitting, and taking over rendering here means taking that
+       over too. CommonMark decodes entity references in link destinations, so
+       migrated WordPress hrefs holding `?a=1&amp;b=2` are CORRECT Markdown for
+       `?a=1&b=2`. Without this the raw `&amp;` reaches the href and
+       html/template escapes it a second time to `&amp;amp;`, i.e. the browser
+       requests a query param literally named `amp;b`. ~90 posts carry such
+       links. Same failure mode as the codeblock hook -- see render-codeblock.html. */ -}}
+{{- $orig := .Destination | htmlUnescape -}}
 {{- $dest := $orig -}}
 {{- $isAbs := or (hasPrefix $orig "http://") (hasPrefix $orig "https://") (hasPrefix $orig "//") -}}
 {{- /* Host-anchored so foojay.social and query strings don't false-match. */ -}}
@@ -17,4 +26,4 @@
 {{- if not (or $external (hasPrefix $dest "http") (hasPrefix $dest "//") (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
   {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
 {{- end -}}
-<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ $dest }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>

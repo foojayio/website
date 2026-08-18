@@ -26,13 +26,13 @@ frozen: false
 
 It's been a few years since we last hosted JManc, and a lot has changed in the world, but one thing we've learned in the Manchester Java Community is that in-person events are what we love the most. JManc provides another opportunity for us to get together with like-minded people from the Java community.
 
-### In and Beyond Manchester {#h3-0-in-and-beyond-manchester}
+### In and Beyond Manchester
 
 As in previous years, Java and JVM enthusiasts of all levels and backgrounds will gather at [Auto Trader UK's](https://careers.autotrader.co.uk) offices in Manchester city centre for a day full of engaging conversations. The unconference format means that the schedule is decided on the day by you, the attendees. This results in a diverse range of sessions across topics such as JVM programming languages, modern software delivery practices, devops, cloud native and agile.
 
 We expect attendees to be predominantly local to the Manchester area however, if previous years are anything to go by, we'll have guests from further afield too. In 2018 we had one attendee from Las Vegas! Ok, they were passing through anyway which made JManc convenient, but we can pretend that JManc was the main reason they were this side of the pond.
 
-### Great Speaker and Socials {#h3-1-great-speaker-and-socials}
+### Great Speaker and Socials
 
 We also have the pleasure of welcoming [Helen Scott](https://www.helenjoscott.com) from [JetBrains](https://www.jetbrains.com) who will help us start the day with an inspiring keynote. Helen will be talking about developer experience with a focus on AI, developer tooling and ways of working. While a traditional conference style session like this isn't necessarily typical for an unconference, we believe it's the perfect way for us to kick off the day in advance of getting into the more conversational schedule driven by our attendees.
 

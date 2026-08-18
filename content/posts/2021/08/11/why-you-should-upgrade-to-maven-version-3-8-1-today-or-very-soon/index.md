@@ -26,8 +26,8 @@ Check your Maven version by typing `mvn -version`! If you are still running on a
 
 Luckily we found out in the [JVM Ecosystem report 2021](https://snyk.io/jvm-ecosystem-report-2021/) that not many people work with Java 6 or below. We do see that a lot of people use Maven so not upgrading can end up in serious issues for a large part of the ecosystem.
 
-The problem with HTTP repositories in older Maven versions {#h2-0-the-problem-with-http-repositories-in-older-maven-versions}
------------------------------------------------------------------------------------------------------------------------------
+The problem with HTTP repositories in older Maven versions
+----------------------------------------------------------
 
 Maven versions prior to 3.8.1 allowed users to connect to custom repositories using HTTP. This is reported by Jonathan Leitschuh and documented in [CVE-2021-26291](https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEMAVEN-1255570). From the [release notes of Maven 3.8.1](https://maven.apache.org/docs/3.8.1/release-notes.html), Maven distinguished three separate issues:
 
@@ -48,7 +48,7 @@ The order for downloading repositories is described on the [Repository Order Pag
 
 This means that after looking at the settings files, Maven looks for repositories in the `pom.xml`. This ends in the Super POM where the location to Maven Central is defined.
 
-### Effective POMs from dependency path to the artifact {#h3-1-effective-poms-from-dependency-path-to-the-artifact}
+### Effective POMs from dependency path to the artifact
 
 The third step is somewhat tricky, but let me try to explain this:
 
@@ -67,8 +67,8 @@ This might not be what you expect, and more importantly, Maven allows HTTP repos
 
 There are POM files on Maven Central that contain references to custom repositories over HTTP. POM files on Maven central are immutable, so it can easily be that developers are unaware that they connect to an external repository over HTTP introduced by a transitive dependency, making them a possible target to a MITM attack.
 
-HTTPS by default in Maven version 3.8.1 {#h2-2-https-by-default-in-maven-version-3-8-1}
----------------------------------------------------------------------------------------
+HTTPS by default in Maven version 3.8.1
+---------------------------------------
 
 To mitigate the problems discussed above, Maven decided to block external HTTP repositories by default. This is done by adding a `<blocked>` field in the mirror configuration and providing the following mirror to your global setting located at `${maven.home}/conf/settings.xml`.
 
@@ -89,8 +89,8 @@ Note that HTTP connections to localhost and file repositories are still allowed.
 
 Jonathan Leitschuh wrote a great InfoSec article, "[Want to take over the Java ecosystem? All you need is a MITM!](https://infosecwriteups.com/want-to-take-over-the-java-ecosystem-all-you-need-is-a-mitm-1fc329d898fb)" in 2019 if you want to learn more.
 
-How to upgrade {#h2-3-how-to-upgrade}
--------------------------------------
+How to upgrade
+--------------
 
 First of all, you need to download Maven version 3.8.1 or higher and rebuild your application. Next to that, if you have a repository defined in your `pom.xml` file, please fix it so it is an HTTPS URL. If an HTTP repository is defined in one of your dependencies, you will get an error. First, search for newer versions of that library that replaced the HTTP repository url with an HTTPS version.
 

@@ -23,7 +23,7 @@ frozen: false
 
 Today in this article, we will continue the discussion and share a few more thread-safe classes that we can use in our day-to-day coding.
 
-### **Synchronized Collections** {#h3-0-synchronized-collections}
+### **Synchronized Collections**
 
 One of the most important data structures that Java provides are collections. We depend on them heavily in our day-to-day coding. Not all collection implementations available in java.util package are thread-safe, but a few of them are:
 
@@ -56,7 +56,7 @@ var synchronizedList = Collections.synchronizedList(ints);
 ```
 
 
-### **Client-Side Locking** {#h3-1-client-side-locking}
+### **Client-Side Locking**
 
 The synchronizedList instance is thread-safe. However, there is a caveat. Even though these classes are thread-safe, a compound operation on these thread-safe collections is not thread-safe. This could seem a bit puzzling. Not to worry, bear with me.
 
@@ -177,7 +177,7 @@ for (Integer number : synchronizedNumbers) {
 
 However, this iteration doesn't avert the need for client-side locking if other threads can modify the collection. This is because the iteration returned by synchronized collections are not designed to deal with concurrent modification; rather, a fail-first approach was taken. If they detect that collection was changed after the iteration began, it throws the unchecked ConcurrentModificationException.
 
-### **Concurrent Collections** {#h3-2-concurrent-collections}
+### **Concurrent Collections**
 
 Although client-side locking solves our issue discussed above, it has some downside as well. If a collection is extensive, it may take a while to iterate. While it's being iterated, no other operation can be performed, which would certainly hurt the overall performance of the applications. To deal with this issue, in java 5.0, a few classes are added to the concurrent packages. These are:
 

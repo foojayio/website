@@ -29,8 +29,8 @@ Now we will take the next step and subscribe to these topics to receive the data
 
 {{< youtube D2znouG4Hqw >}}
 
-About JavaFX {#h2-0-about-javafx}
----------------------------------
+About JavaFX
+------------
 
 JavaFX is a set of graphics and media packages that enables developers to design, create, test, debug, and deploy rich client applications that operate consistently across diverse platforms.
 
@@ -39,7 +39,7 @@ JavaFX was created by Sun Microsystems, later became part of Oracle Corporation 
 
 JavaFX allows to quickly build a user interface while using the language and tools you already know as a Java developer. This can be styled with a CSS syntax and is very flexible and extendable and even allows you to draw your own layout elements as you can see in the history graph above, available on [GitHub as part of the sources](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_04_Java/javafx-timeline) of my book ["Getting Started with Java on the Raspberry Pi"](https://webtechie.be/books/).
 
-### JavaFX on the Raspberry Pi {#h3-1-javafx-on-the-raspberry-pi}
+### JavaFX on the Raspberry Pi
 
 JavaFX can be installed in two ways on the Raspberry Pi:
 
@@ -48,19 +48,19 @@ JavaFX can be installed in two ways on the Raspberry Pi:
 
 Personally, I prefer the second approach as you are sure to be using the latest JavaFX runtime, including all improvements for embedded devices. As this is a fast-evolving market, there are a lot of ongoing changes like improved rendering and Direct Rendering Mode (DRM, also known as Kiosk Mode). An article with more information regarding this topic can be found on ["JavaFX Running in Kiosk Mode on the Raspberry Pi"](https://foojay.io/today/javafx-running-in-kiosk-mode-on-the-raspberry-pi/).
 
-### TilesFX library {#h3-2-tilesfx-library}
+### TilesFX library
 
 This great library is developed by [Gerrit Grunwald](https://twitter.com/hansolo_) and provides tiles to build dashboards. Check [his blog](https://harmoniccode.blogspot.com/) for many more JavaFX examples!
 
 You can find [the sources of TilesFX on GitHub](https://github.com/HanSolo/tilesfx) and it is available as a [Maven dependency](https://mvnrepository.com/artifact/eu.hansolo/tilesfx). As part of the sources of TilesFX, a Demo application is provided to show how to use all the available Tiles.
 ![](tilesfx-1024x589.png)
 
-Java Project {#h2-3-java-project}
----------------------------------
+Java Project
+------------
 
 Let's create a JavaFX application to visualize all the sensor values we pushed to HiveMQ Cloud with the application we created in the previous part.
 
-### Dependencies {#h3-4-dependencies}
+### Dependencies
 
 This project requires a few different dependencies compared to the message sender. Of course, we use the HiveMQ MQTT client again. But for the graphical user interface parts, we need some JavaFX libraries (only controls are used in the application, but others are referenced by TilesFX) and the TilesFX library itself.
 
@@ -95,7 +95,7 @@ This project requires a few different dependencies compared to the message sende
 ```
 
 
-### Full code on GitHub {#h3-5-full-code-on-github}
+### Full code on GitHub
 
 The sources of this application are [available on GitHub in the same repository as the previous post](https://github.com/FDelporte/HiveMQ-examples).
 
@@ -325,7 +325,7 @@ public class BaseTile extends Pane {
 
 As you can see, subscribing to a HiveMQ Cloud message only needs a minimal amount of code.
 
-### Building and running the application {#h3-6-building-and-running-the-application}
+### Building and running the application
 
 #### On developer PC
 
@@ -375,8 +375,8 @@ $ bash run.sh
 
 The `run.sh` script combines the compiled application jars, with the platform-specific JavaFX runtime and starts the application.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 TilesFX is only one of the many open-source libraries you can use in your application, or you can create your own components. Gerrit Grunwald and other writers have explained this approach on [foojay.io](https://foojay.io/?s=javafx+controls) in multiple posts.
 

@@ -37,8 +37,8 @@ Erik summed up the problems with my previous JEP proposal, and in a way with Asy
 
 He proposed that walking Java threads only at safepoints while obtaining some information in the signal handler might do the trick. So I got to work, implementing an API that does just this.
 
-Idea {#h2-0-idea}
------------------
+Idea
+----
 
 The current interaction between a sampler of the profiler and the Java Threads looks like the following:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/04/wall-clock-sampling-sequence.drawio.svg)
@@ -58,8 +58,8 @@ The new API exploits a few implementation details of the OpenJDK:
 1. There is a safepoint check at least at the end of every non-inlined method (and sometimes there is not, but this is a bug, see [The Inner Workings of Safepoints](https://mostlynerdless.de/blog/2023/07/31/the-inner-workings-of-safepoints/)). OpenJ9 doesn't have checks at returns, so the whole approach I am proposing doesn't work for them.
 2. When we are at the return of a non-inlined method, we have enough information to obtain all relevant information of the top inlined and the first non-inlined frame using only the program counter, stack pointer, frame pointer, and bytecode pointer obtained in the signal handler. We focus on the first non-inlined method/frame, as inlined methods don't have physical frames, and walking them would result in walking using Java internal information, which we explicitly want to avoid.
 
-Proposed API {#h2-1-proposed-api}
----------------------------------
+Proposed API
+------------
 
 This API builds upon the API defined in [jmethodIDs in Profiling: A Tale of Nightmares](https://mostlynerdless.de/blog/2023/07/17/jmethodids-in-profiling-a-tale-of-nightmares/) and the iterator API defined in [AsyncGetCallTrace Reworked: Frame by Frame with an Iterative Touch!](https://mostlynerdless.de/blog/2023/08/07/asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch/)
 
@@ -229,8 +229,8 @@ This is the whole API that can be found in my [OpenJDK fork](https://github.com/
 
 But how can we use this API? I use the same profiler from the [AsyncGetCallTrace Reworked: Frame by Frame with an Iterative Touch!](https://mostlynerdless.de/blog/2023/08/07/asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch/) blog post to demonstrate using the new API.
 
-Implementing a Small Profiler {#h2-2-implementing-a-small-profiler}
--------------------------------------------------------------------
+Implementing a Small Profiler
+-----------------------------
 
 The best thing: The code gets more straightforward and uses locks to handle concurrency. Writing code that runs at safepoints is far easier than code in signal handlers; the new API moves complexity from the profiler into the JVM.
 
@@ -316,8 +316,8 @@ java -agentpath:libSmallProfiler.so=output=flames.html \
 This assumes that you use the [modified OpenJDK](https://github.com/parttimenerd/jdk/tree/asgst_iterator). [MathParser](https://github.com/parttimenerd/writing-a-profiler/blob/iterative_safepoint_profiler/samples/math/MathParser.java) is a demo program that generates and evaluates simple mathematical expressions. The resulting flame graph should look something like this:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/08/Screenshot-2023-08-10-at-02.54.56-2000x931.png)
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 The new API can be used to write profilers easier and walk stacks in a safe yet flexible manner.
 

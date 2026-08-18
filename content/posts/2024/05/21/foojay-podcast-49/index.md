@@ -31,13 +31,13 @@ We had so many amazing talks that we will combine them into several podcast epis
 
 This is part 1 about JUGs, Communities, Open Source, Generative AI, LangChain4j, Machine Learning!
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube -wVCYj8oQUY >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,8 +45,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:26 Geertjan Wielenga: Founding father of Foojay.io  
 <https://www.linkedin.com/in/geertjanwielenga/>  

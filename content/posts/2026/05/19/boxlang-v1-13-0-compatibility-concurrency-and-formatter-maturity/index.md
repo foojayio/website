@@ -31,12 +31,12 @@ frozen: false
 
 While this release is bug-fix heavy, it still introduces several meaningful features and quality-of-life improvements: character-aware trimming, class metadata lookup by absolute path, process environment control in SystemExecute(), SOAP headers, new query column rename capabilities, and safer miniserver routing/security defaults.
 
-New Features {#h2-0-new-features}
----------------------------------
+New Features
+------------
 
 Three additions that materially expand what the runtime can do.
 
-### Character-Aware Trimming --- `trim()`, `ltrim()`, `rtrim()` {#h3-1-character-aware-trimming-trim-ltrim-rtrim}
+### Character-Aware Trimming --- `trim()`, `ltrim()`, `rtrim()`
 
 The string trimming BIFs now accept an optional chars argument. Strip arbitrary character sets without reaching for `rereplace()`.
 
@@ -50,7 +50,7 @@ The string trimming BIFs now accept an optional chars argument. Strip arbitrary 
 
 Each character in `chars` is treated as an independent trim target --- the same behavior you'd expect from Python or JavaScript. One less regex workaround.
 
-### `getClassMetadata()` by Absolute Path {#h3-2-getclassmetadata-by-absolute-path}
+### `getClassMetadata()` by Absolute Path
 
 Class metadata can now be loaded directly from a filesystem path, bypassing the class loader and import resolution entirely.
 
@@ -64,7 +64,7 @@ writeDump( meta.functions )   // array of function signatures
 
 This is a cornerstone API for tooling. Linters, IDE integrations, documentation generators, and migration scanners can now inspect `.bx` and .`cfc` files without booting them into the runtime, firing `onApplicationStart`, or wrestling with import edge cases. The kind of unglamorous primitive that makes an ecosystem possible.
 
-### `SystemExecute()` Environment Controls {#h3-3-systemexecute-environment-controls}
+### `SystemExecute()` Environment Controls
 
 Two new arguments give you deterministic control over the environment of spawned child processes:
 
@@ -89,8 +89,8 @@ writeOutput( result.output )
 
 Before 1.13.0, every `systemExecute()` call inherited the full parent environment --- including secrets, tokens, and internal config. Security-conscious deployments now have an explicit, auditable way to lock that down.
 
-The [BoxLang Formatter](https://boxlang.ortusbooks.com/getting-started/ide-tooling/boxlang-formatter "BoxLang Formatter") Goes Production-Ready {#h2-4-the-boxlang-formatter-goes-production-ready}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The [BoxLang Formatter](https://boxlang.ortusbooks.com/getting-started/ide-tooling/boxlang-formatter "BoxLang Formatter") Goes Production-Ready
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 This is a flagship moment. The formatter graduates from experimental to production-grade and lands with a complete CI/CD integration surface.
 
@@ -120,8 +120,8 @@ boxlang format --convertConfig --input ./
 ```
 
 
-Async \& Concurrency Hardening {#h2-5-async-concurrency-hardening}
-------------------------------------------------------------------
+Async \& Concurrency Hardening
+------------------------------
 
 Concurrency bugs are the worst kind of bug --- intermittent, non-deterministic, catastrophic when they hit production. 1.13.0 closes several long-standing race conditions and lifecycle issues across the [async subsystem](https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/async/ "async subsystem") and [threading layer](https://boxlang.ortusbooks.com/boxlang-language/syntax/threading "threading layer").
 
@@ -139,8 +139,8 @@ fullName = formatName( ...args )
 
 **Atomic class file writes.** Class generation now uses a temp-file-then-atomic-rename pattern. No more transient zero-byte `.class` artifacts surfacing under parallel compilation --- a race condition that produced some genuinely painful `ClassNotFoundException` reports in production.
 
-[MiniServer](https://boxlang.ortusbooks.com/getting-started/running-boxlang/miniserver "MiniServer"): Security \& Reliability {#h2-6-miniserver-security-reliability}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[MiniServer](https://boxlang.ortusbooks.com/getting-started/running-boxlang/miniserver "MiniServer"): Security \& Reliability
+-----------------------------------------------------------------------------------------------------------------------------
 
 **The headline** : a misconfigured miniserver no longer accidentally serves your source code or configuration over HTTP. The static-serving security filter now blocks hidden files and dotfiles, framework config artifacts (`.boxlang.json`, `boxlang.json`), and source files (`.bx`, `.cfc`) when not routed through the engine.
 
@@ -174,8 +174,8 @@ export BOXLANG_PASS_PREDICATE="/api/*"
 * Empty text-file uploads no longer throw illegal-state errors
 * `content-length` headers correctly computed across all response paths
 
-Compatibility Wins {#h2-7-compatibility-wins}
----------------------------------------------
+Compatibility Wins
+------------------
 
 CFML compatibility is a continuous workstream, not a one-time port. This release closes a handful of high-impact gaps that real applications were tripping over.
 
@@ -228,8 +228,8 @@ The unsexy stuff that matters. A condensed view of the deeper fixes shipped in t
 | Custom tags       | this scope no longer leaks from custom-tag context                   |
 | `numberFormat()`  | Major mask compatibility sweep across multiple tickets               |
 
-Changelog Highlights {#h2-8-changelog-highlights}
--------------------------------------------------
+Changelog Highlights
+--------------------
 
 #### New Features
 

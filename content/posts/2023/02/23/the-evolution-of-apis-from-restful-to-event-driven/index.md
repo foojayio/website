@@ -21,8 +21,8 @@ related_posts:
 frozen: false
 ---
 
-History of Services and APIs {#h2-0-history-of-services-and-apis}
------------------------------------------------------------------
+History of Services and APIs
+----------------------------
 
 Enterprise application landscapes consist of inter-connected and inter-related applications.
 
@@ -34,8 +34,8 @@ Over time, we've observed a trend towards more modular and data model-focused in
 
 Beginning with EJBs in the 90s, progressing to Webservices and Service-Oriented Architecture (SOA) in the early 2000s, and finally evolving to domain-specific microservices, we are seeing a continual progression towards more efficient and effective integration solutions.
 
-Real-Time Updates and Events {#h2-1-real-time-updates-and-events}
------------------------------------------------------------------
+Real-Time Updates and Events
+----------------------------
 
 As businesses integrate into the real world and approach consumers, the connections and interactions between these apps and businesses become increasingly complex, leading to issues such as component unavailability, scaling difficulties, and tight coupling.
 
@@ -61,8 +61,8 @@ A Gartner study demonstrates that the value from data and events increases with 
 
 Businesses and architects need to process data and events efficiently to maximize their value. This has resulted in the widespread adoption of Event-Driven Architecture (EDA) across various industries.
 
-Synchronous Microservices: Strengths and Weaknesses {#h2-2-synchronous-microservices-strengths-and-weaknesses}
---------------------------------------------------------------------------------------------------------------
+Synchronous Microservices: Strengths and Weaknesses
+---------------------------------------------------
 
 Talking about modern application architecture, Microservices stand out.
 
@@ -88,8 +88,8 @@ However, REST-based microservices may not fully meet these expectations and face
 * Obstacles in adding new services, leading to a fragmented monolithic architecture
 * The one-to-many pattern can be difficult and unsustainable.
 
-Event-Driven APIs to the Rescue {#h2-3-event-driven-apis-to-the-rescue}
------------------------------------------------------------------------
+Event-Driven APIs to the Rescue
+-------------------------------
 
 Synchronous microservice limitations can be overcome through asynchronous interaction, event-driven architecture, and event-enabling traditional microservices.
 
@@ -120,8 +120,8 @@ Events driven APIs deliver the following benefits:
 * Decoupled systems: Event-driven APIs promote decoupled systems, as they allow for loose coupling between systems. This means that systems can evolve independently, and changes in one system don't necessarily impact the other.
 * Flexibility: Event-driven APIs allow for more flexible and dynamic data flow between systems, as events can be generated and processed by different systems, at different times, in different ways.
 
-Event-Driven APIs: How to Ideate, Develop, and Operate {#h2-4-event-driven-apis-how-to-ideate-develop-and-operate}
-------------------------------------------------------------------------------------------------------------------
+Event-Driven APIs: How to Ideate, Develop, and Operate
+------------------------------------------------------
 
 Having discussed event-driven APIs and their benefits, the next step is to explore how to design them. As with any complex system, a well-planned process is essential to create a digital value chain.
 
@@ -133,7 +133,7 @@ At [Solace](https://solace.com/products/platform/ "Solace") we have a 5-step pro
 
 **Solace steps to Event API products**
 
-### Discovering events {#h3-5-discovering-events}
+### Discovering events
 
 To improve a system, it is necessary to understand what exists currently.
 
@@ -145,7 +145,7 @@ This includes analyzing IT landscape, applications, and business processes to un
 * Topic addresses for accessing and utilizing events
 * Application interfaces for producing, consuming, and processing events
 
-### Assessing Usability and Value {#h3-6-assessing-usability-and-value}
+### Assessing Usability and Value
 
 After discovering and cataloging all events, they must be evaluated for their potential value and usability.
 
@@ -155,7 +155,7 @@ This classification helps to determine the actionable value and worthiness of ex
 
 Making event streams more accessible and widespread throughout the organization can improve integrated systems and increase synchronization among different parts of the organization.
 
-### Bundling and documenting high value events {#h3-7-bundling-and-documenting-high-value-events}
+### Bundling and documenting high value events
 
 After identifying high-value events, the next step is to bundle them into a cohesive event API product.
 
@@ -168,7 +168,7 @@ As with any API product, it should be easy to:
 * Manage the event API product
 * Have supporting code generation and developer-focused tools for the event API product.
 
-### Release the Event API product to generate value {#h3-8-release-the-event-api-product-to-generate-value}
+### Release the Event API product to generate value
 
 Here are a few steps to release the event API product:
 
@@ -181,14 +181,14 @@ Here are a few steps to release the event API product:
 * Offer training and support to help users get started.
 * Continuously monitor and improve the API based on user feedback.
 
-### Evolve and optimize the event API product {#h3-9-evolve-and-optimize-the-event-api-product}
+### Evolve and optimize the event API product
 
 As with any product, there is always scope to improve, processes that change, new use cases that are identified.
 
 Managing the lifecycle of your event API product to keep up with these changes is crucial to finding and maintaining success.
 
-Summary {#h2-10-summary}
-------------------------
+Summary
+-------
 
 Transitioning from synchronous to event-driven APIs modernizes the enterprise and unlocks real-time events and information for developers, architects, product owners, and business stakeholders.
 

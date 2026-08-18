@@ -37,8 +37,8 @@ So let's do something different:
 
 Let's look at what modern Java actually does --- backed by real improvements in the platform and the JEPs that introduced them.
 
-The reputation didn't come out of nowhere. {#h2-0-the-reputation-didn-t-come-out-of-nowhere}
---------------------------------------------------------------------------------------------
+The reputation didn't come out of nowhere.
+------------------------------------------
 
 Early versions of the JVM had:
 
@@ -56,12 +56,12 @@ But that was then.
 ![](duke_Pinocchio02-1024x640.jpg)  
 *Image 01: Pinocchio Duke on April 1st: "I swear... Java doesn't use that much memory anymore!*
 
-Modern Java: What Actually Changed? {#h2-1-modern-java-what-actually-changed}
------------------------------------------------------------------------------
+Modern Java: What Actually Changed?
+-----------------------------------
 
 These are the JEPs that are finally helping Duke keep his nose under control
 
-### 1. Garbage Collection Is Not What It Used to Be {#h3-2-1-garbage-collection-is-not-what-it-used-to-be}
+### 1. Garbage Collection Is Not What It Used to Be
 
 Modern garbage collectors are designed for low latency and efficient memory usage.
 
@@ -81,7 +81,7 @@ Java doesn't freeze your application anymore --- it cleans memory while your app
 
 Modern Java doesn't "stop the world." It barely pauses.
 
-### 2. Threads Got Lighter (Much Lighter) {#h3-3-2-threads-got-lighter-much-lighter}
+### 2. Threads Got Lighter (Much Lighter)
 
 One of the biggest hidden memory costs in Java used to be threads.
 
@@ -104,7 +104,7 @@ Why this matters for memory:
 
 Thousands of threads no longer mean gigabytes of memory.
 
-### 3. Java Objects Are Literally Getting Smaller {#h3-4-3-java-objects-are-literally-getting-smaller}
+### 3. Java Objects Are Literally Getting Smaller
 
 Yes, this is real.
 
@@ -121,7 +121,7 @@ This directly impacts:
 
 Java objects are not just managed better --- they're physically smaller.
 
-### 4. The JVM Learned to Share (CDS) {#h3-5-4-the-jvm-learned-to-share-cds}
+### 4. The JVM Learned to Share (CDS)
 
 Class Data Sharing:
 
@@ -138,7 +138,7 @@ This is especially useful in:
 * Microservices architectures
 * Containerized environments
 
-### 5. Java Finally Understands Containers {#h3-6-5-java-finally-understands-containers}
+### 5. Java Finally Understands Containers
 
 There was a time when Java inside a container behaved... badly.
 
@@ -161,11 +161,11 @@ Today:
 
 Java used to think it owned the machine. Now it behaves like a good citizen.
 
-### 6. Project Valhalla (Value Classes \& Objects) -- Coming Soon {#h3-7-6-project-valhalla-value-classes-objects-coming-soon}
+### 6. Project Valhalla (Value Classes \& Objects) -- Coming Soon
 
 Still in preview/early access, but progressing steadily. Value objects eliminate identity and can be stored flattened (no pointer overhead). This will be a game-changer for memory density --- especially for collections, records, and data-oriented programming. Expect the first preview features to land in a future JDK (possibly 27 or 28).
 
-### 7. Optional: Going Even Leaner with Native Images {#h3-8-7-optional-going-even-leaner-with-native-images}
+### 7. Optional: Going Even Leaner with Native Images
 
 With GraalVM, you can compile Java into native binaries:
 
@@ -176,13 +176,13 @@ It's not a silver bullet, but it proves an important point:
 
 Java is not tied to one runtime model anymore.
 
-### 7. Others {#h3-9-7-others}
+### 7. Others
 
 Project Panama (Foreign Function \& Memory API) --- Safer, faster off-heap memory access without the old JNI tax. Leyden \& AOT improvements --- Better ahead-of-time caching and warmup reduction.
 
 If you apply these tips, Duke's nose might actually stop growing.
 
-### Real Examples: Where Memory Actually Goes {#h3-10-real-examples-where-memory-actually-goes}
+### Real Examples: Where Memory Actually Goes
 
 Let's move from theory to something concrete.
 
@@ -316,7 +316,7 @@ With Compact Object Headers (JEP 450):
 
 * This can save hundreds of MBs
 
-### Benchmark Snapshot {#h3-11-benchmark-snapshot}
+### Benchmark Snapshot
 
 Here are simplified, realistic comparisons based on common setups:
 
@@ -331,7 +331,7 @@ Here are simplified, realistic comparisons based on common setups:
 
 *Table 01: Benchmark*
 
-### So... Does Java Use Too Much Memory? {#h3-12-so-does-java-use-too-much-memory}
+### So... Does Java Use Too Much Memory?
 
 Sometimes --- but not for the reason people think.
 
@@ -347,7 +347,7 @@ In other words:
 
 * Most memory problems in Java are... Java developers.
 
-### Final Thoughts {#h3-13-final-thoughts}
+### Final Thoughts
 
 Java's reputation for high memory usage is rooted in the past.
 

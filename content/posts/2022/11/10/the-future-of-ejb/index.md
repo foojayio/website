@@ -28,8 +28,8 @@ frozen: false
 
 Once upon a time EJB was almost synonymous with what was called Java EE or J2EE back then (Jakarta EE now). It suffered from many issues though, although it did incrementally got better. We'll explore some of those issues next.
 
-The past {#h2-0-the-past}
--------------------------
+The past
+--------
 
 The very first version of EJB was released before XML even existed and featured a rather awkward "programmatic" configuration, where a java class had to be compiled and its binary and serialised version used as configuration file.
 
@@ -45,15 +45,15 @@ In CDI, things work exactly the other way around; CDI offers a core component mo
 
 Unfortunately, a few mistakes crept into CDI as especially in the beginning people didn't quite agree on CDI becoming this core model, or CDI becoming another attempt at doing EJB, but in broad lines other APIs building on CDI is what CDI is about.
 
-The Present {#h2-1-the-present}
--------------------------------
+The Present
+-----------
 
 In the years after EJB 3.1, various APIs such as Jakarta Faces rebased on CDI, and new APIs such as Jakarta Security and Jakarta MVC were introduced that fully build on CDI from the get-go. Several features of EJB, such as the `@Asynchronous` annotation, were implemented in other APIs as a CDI compatible feature.
 
 EJB Full incrementally inched closer to EJB Lite, by removing Entity Beans (CMP/BMP), CORBA/IIOP Distributed Interoperability, and the embedded EJB container, as well as making the entire Enterprise Beans 2.x API Group optional.
 
-The Future {#h2-2-the-future}
------------------------------
+The Future
+----------
 
 With EJB being greatly de-emphasised in favour of CDI and many APIs in Jakarta EE that build upon CDI, there's almost certainly not going to be any further innovation in EJB itself. That is, no new features are foreseen to be added. On the other hand, due to the large amount of existing code that uses EJB beans, the technology is also not expected to be removed from Jakarta EE anytime soon.
 
@@ -108,8 +108,8 @@ More information:
  <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
 </figure>
 
-OmniFish - Jakarta EE experts {#h2-3-omnifish-jakarta-ee-experts}
------------------------------------------------------------------
+OmniFish - Jakarta EE experts
+-----------------------------
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

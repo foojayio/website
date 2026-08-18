@@ -25,7 +25,7 @@ It is also a place for people who like OpenJDK, as well as a platform for the Ja
 
 Foojay.io brings together Java professionals from all over the world and helps them by giving them a place to talk, share information, and work together.
 
-### The Debate {#h3-0-the-debate}
+### The Debate
 
 * The conversation started with one participant, [Bazlur](https://twitter.com/bazlur_rahman "Bazlur") (me), expressing his intention to write a series comparing Java and Kotlin to share the superiority of Java. However, another participant, [Nicolas](https://twitter.com/nicolas_frankel "Nicolas"), challenged his claims and advised him to learn Kotlin well before making any comparisons. Nicolas's advice is essential because developers need to understand and learn a language before they can make claims or comparisons. Learning a new programming language can take time, effort, and dedication, but it is worth the investment.
 * The conversation then turned into a friendly debate, with some people pointing out the benefits of Java, such as being easy to use, consistent, well-developed ecosystems, and better tools. Java is a language that has been around for over two decades and has a large and mature ecosystem. As a result, developers can find libraries, frameworks, and tools for almost any use case. Java's consistency and simplicity can also be an advantage for some developers, as there is generally only one way to do things.
@@ -42,7 +42,7 @@ The conversation comparing Java and Kotlin shows developers must learn and under
 
 Competition between languages is healthy and can help drive innovation and improvement.
 
-### The Platform {#h3-1-the-platform}
+### The Platform
 
 Finally, developers interested in joining similar discussions can join Foojay's Slack channel. Foojay is a community platform for the Java ecosystem. It brings together Java professionals worldwide and helps them by giving them a place to talk, share information, and work together.
 

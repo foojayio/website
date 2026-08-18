@@ -59,7 +59,7 @@ The only thing which can help here to get a reliable answer is to measure it. No
 
 So the first code part for performance measurement looks like this:
 
-### Solution 1 {#h3-0-solution-1}
+### Solution 1
 
 ```java
 Benchmark
@@ -76,7 +76,7 @@ public List<Element> with_new_arraylist(Container content) {
 
 and the second part:
 
-### Solution 2 {#h3-1-solution-2}
+### Solution 2
 
 ```java
 @Benchmark
@@ -92,7 +92,7 @@ public List<Element> with_stream_concat(Container content) {
 
 while writing the above code, I thought about some parts of it and I came up with two other possible variations.
 
-### Solution 3 {#h3-2-solution-3}
+### Solution 3
 
 The following example where I put elements directly into the constructor of the `ArrayList`. This means it could only happen that in rarer cases the size of the array list must be resized which depends on the number of elements in `item.getElements()`.
 
@@ -108,7 +108,7 @@ public List<Element> with_new_arraylist_constructor(Container content) {
 ```
 
 
-### Solution 4 {#h3-3-solution-4}
+### Solution 4
 
 Finally, this one where I already calculate the size of the final list by giving the number of elements via the constructor. This will prevent the resizing of the array list at all cause the size will fit always.
 
@@ -126,7 +126,7 @@ public List<Element> with_new_arraylist_constructor_size(Container content) {
 ```
 
 
-### Measurement {#h3-4-measurement}
+### Measurement
 
 The measurement was done on an [Intel Xeon Machine with 3.50GHz](https://github.com/khmarbaise/performance-concat/blob/master/docs/tested-on-hardware.text) with [CentOS Linux release 7.6.1810 (Core)](https://github.com/khmarbaise/performance-concat/blob/e5dd257660a93670b203016fddb9a3ac2975f399/docs/tested-on-os.text).
 

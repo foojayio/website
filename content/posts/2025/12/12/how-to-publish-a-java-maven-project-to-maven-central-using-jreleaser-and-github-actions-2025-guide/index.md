@@ -28,12 +28,12 @@ JReleaser is a tool that streamlines the release process for Java projects, allo
 
 This article will use the [SemVer Check project](https://github.com/jagodevreede/semver-check/ "SemVer Check project") as an example project that uses Maven as a build tool.
 
-Preconditions {#h2-0-preconditions}
------------------------------------
+Preconditions
+-------------
 
 In order to publish to Maven central, you will need to have a GPG key and have a group-id (coordinate) registered.
 
-### GPG key {#h3-1-gpg-key}
+### GPG key
 
 You will need a GPG key to sign the artifacts, this will allow users to verify that they have the correct package.
 
@@ -72,7 +72,7 @@ gpg --keyserver keyserver.ubuntu.com --send-keys XXXXXXXXXXXXFC74
 ```
 
 
-### Coordinate (group-id) {#h3-2-coordinate-group-id}
+### Coordinate (group-id)
 
 This process is actually very well documented at [https://central.sonatype.org/publish/requirements/coordinates/.](https://central.sonatype.org/publish/requirements/coordinates/)
 
@@ -80,7 +80,7 @@ Your group id can be your domain name (reverse) if you have that. Also, many Cod
 
 In order to "claim" this group-id you will need to create an account on the Central Portal at <https://central.sonatype.com>. During registration, you'll verify your namespace ownership. For GitHub-based namespaces like io.github.jagodevreede, verification is done by adding the provided verification key to a public repository. The portal will automatically verify ownership once the key is detected.
 
-### Preparing your project {#h3-3-preparing-your-project}
+### Preparing your project
 
 #### Javadoc and sources
 
@@ -188,10 +188,10 @@ We need to have at least version 3.0.0 of the Maven deploy version, so add the f
 ```
 
 
-JReleaser {#h2-4-jreleaser}
----------------------------
+JReleaser
+---------
 
-### Installing locally {#h3-5-installing-locally}
+### Installing locally
 
 Now with the preconditions out of the way, it is time to install JReleaser locally to verify that everything is working before we switch to GitHub Actions. I would recommend that you do the first release locally; that way you can easily fix any errors.
 
@@ -242,7 +242,7 @@ This we put in the config file under `JRELEASER_GPG_PUBLIC_KEY`.
 
 Lastly, we need to put the credentials that we used to upload to the portal. There is an excellent official guide on how to obtain a token here https://central.sonatype.org/publish/generate-portal-token/ put the username and password obtained in the last step of that guide in `JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME` and `JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD`.
 
-### JReleaser configuration {#h3-6-jreleaser-configuration}
+### JReleaser configuration
 
 We need to create a `jreleaser.yml` file for the project. This can be done with the cli we installed before, with the following command:
 
@@ -274,8 +274,8 @@ deploy:
 ```
 
 
-The actual local release {#h2-7-the-actual-local-release}
----------------------------------------------------------
+The actual local release
+------------------------
 
 Now that all the preconditions and plumbing is out of the way it is time for the actual release
 
@@ -288,7 +288,7 @@ mvn versions:set -DnewVersion=0.0.1
 ```
 
 
-### Staging {#h3-8-staging}
+### Staging
 
 The release needs to be uploaded from a staging directory, to create that invoke the following command:
 
@@ -297,7 +297,7 @@ mvn -Ppublication deploy -DaltDeploymentRepository=local::file:./target/staging-
 ```
 
 
-### Release {#h3-9-release}
+### Release
 
 First, set the version that you will be releasing (this must be the same as what you got in your pom.xml)
 
@@ -313,7 +313,7 @@ jreleaser full-release
 ```
 
 
-### Check progress in Maven Central repository {#h3-10-check-progress-in-maven-central-repository}
+### Check progress in Maven Central repository
 
 You can login in to the [Maven Central repository](https://central.sonatype.com/publishing) to see the progress.
 
@@ -321,12 +321,12 @@ You can login in to the [Maven Central repository](https://central.sonatype.com/
 
 <br />
 
-GitHub action {#h2-11-github-action}
-------------------------------------
+GitHub action
+-------------
 
 Now that we can release by hand it is time to automate this entire process!
 
-### Secrets {#h3-12-secrets}
+### Secrets
 
 Before we can run JReleaser on GitHub, we first need to set our secrets in the secrets of the repository.
 
@@ -336,7 +336,7 @@ And you will end up with something like this:
 ![](Screenshot-2025-12-08-at-14.07.59.png) Note that in this example `JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME`  
 has been shortened to `JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME`
 
-### Workflow {#h3-13-workflow}
+### Workflow
 
 First, create a release workflow by creating a `release.yml` file in your repository under `.github/workflows/`.
 
@@ -432,8 +432,8 @@ The full file can be found here: <https://github.com/jagodevreede/semver-check/b
 
 And with that, we are done! Now we can easily release our module to Maven Central with the press of a button in GitHub.
 
-Maven plugin {#h2-14-maven-plugin}
-----------------------------------
+Maven plugin
+------------
 
 There is also a JReleaser [Maven plugin](https://jreleaser.org/guide/latest/quick-start/maven.html) available that offers a Maven DSL to configure JReleaser. With that the `jreleaser.yml` file can be omitted as information can be read from the pom file instead.
 
@@ -445,8 +445,8 @@ The use of the Maven DSL offers these benefits:
 
 So why is the CLI used in this article, you might ask? Well, the CLI can be used for projects other than Maven as well, and it demonstrates the capabilities of JReleaser.
 
-Resources used {#h2-15-resources-used}
---------------------------------------
+Resources used
+--------------
 
 * <https://central.sonatype.org/publish/publish-guide/>
 * <https://jreleaser.org/guide/latest/examples/maven/index.html>

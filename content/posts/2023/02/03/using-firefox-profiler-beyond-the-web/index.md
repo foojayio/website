@@ -27,8 +27,8 @@ I detailed in [my last blog post](https://mostlynerdless.de/?p=628) how the Fire
 
 But I'm of course not the only one who uses Firefox Profiler beyond the web because using it has many advantages: You're essentially getting a prototypical visualization for your data in an afternoon.
 
-Other tools that use Firefox Profiler {#h2-0-other-tools-that-use-firefox-profiler}
------------------------------------------------------------------------------------
+Other tools that use Firefox Profiler
+-------------------------------------
 
 There are other tools that output use Firefox Profiler for their front end. A great example is the Rust profiler [samply](https://github.com/mstange/samply) by Markus Stange, the initial developer of Firefox Profiler:
 > samply is a command line CPU profiler which uses the [Firefox profiler](https://profiler.firefox.com/) as its UI.
@@ -57,8 +57,8 @@ Another example is the python profiler [FunctionTrace](https://functiontrace.com
 There are also non-open source uses of Firefox Profiler, Luís Oliveira, for example, works on integration with Lisp:
 > We're using the Firefox Profiler to debug performance issues at the Dutch Railways dispatching center.
 
-Basic Structure {#h2-1-basic-structure}
----------------------------------------
+Basic Structure
+---------------
 
 I hope I convinced you that the Firefox Profiler is really great for visualizing profiling data, even if this data comes from the world beyond web UIs. If not, please read [my previous article](https://mostlynerdless.de/?p=628). The main part of adapting to Firefox Profiler is to convert your data into the profiler format. The data is stored as JSON in a (optionally zipped) file and can be loaded into Firefox Profiler. See [Loading in profiles from various sources](https://github.com/firefox-devtools/profiler/blob/main/docs-developer/loading-in-profiles.md) for more information.
 
@@ -71,19 +71,19 @@ You can find the type definitions in the [types](https://github.com/firefox-devt
 
 The type definitions are written with flow. It is helpful to read its documentation if you want to understand the intricacies. But for now, it should suffice to know that `x?: type` means that the property `x` is optional and that `|` denotes either types.
 
-### Layout {#h3-2-layout}
+### Layout
 
 A short interlude: The layout of Firefox Profiler consists basically of a timeline view and a methods and timing view:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/layout.png)
 
 The timeline allows you to select specific threads and a time slice to view the details in the detail section below the timeline.
 
-### Overview {#h3-3-overview}
+### Overview
 
 The following shows the main components of the profile format, omitting and summarizing many properties. This diagram should give a rough overview of what comes next:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/file_format.png)
 
-### Profile {#h3-4-profile}
+### Profile
 
 The topmost level of a profile is the [Profile](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L908) type:
 
@@ -102,7 +102,7 @@ type Profile = {|
 
 A profile consists of the metadata, shared libraries, CPU and memory counters, and the rest of the data per thread.
 
-### ProfileMeta {#h3-5-profilemeta}
+### ProfileMeta
 
 A profile can have lots of metadata shown in the UI. The [ProfileMeta](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L750) type specifies this:
 
@@ -163,7 +163,7 @@ type ProfileMeta = {|
 
 And there is more. It might feel overwhelming, but this data structure also allows you to tailor the profiler UI slightly to your needs.
 
-### Category {#h3-6-category}
+### Category
 
 Many parts of the profile are associated with a [Category](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L447) and a subcategory. A category is defined as:
 
@@ -183,7 +183,7 @@ The categories are used to assign a color to the squares in front of the method 
 
 Now to the individual threads:
 
-### Thread {#h3-7-thread}
+### Thread
 
 The [thread](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L610)data structure combines all information related to a single thread. There can be multiple threads per process Id. The thread with the name GeckoMain is handled differently than the others. It is the main thread that is shown in the process timeline.
 
@@ -217,7 +217,7 @@ type Thread = {|
 
 The file format stores all stack traces in a space-efficient format which the front end can handle fast. It uses an array of strings (`stringTable`) to store all strings that appear in the stack traces (like function names), the other data structures only refer to strings by their index in this array.
 
-### SampleS Table {#h3-8-samples-table}
+### SampleS Table
 
 This [data structure](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L153) associates a captured stack with a capture time and an optional weight:
 
@@ -261,7 +261,7 @@ SamplesTable = {
 Filling the `threadCPUDelta` property allows you to specify the CPU time a thread has used since the last sample. The Firefox Profiler uses this property to show the CPU usage curves in the timeline:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/image-4-2000x64.png)
 
-### Stack Table {#h3-9-stack-table}
+### Stack Table
 
 All stacks are stored in the [stack table](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L84) using a prefix array:
 
@@ -290,7 +290,7 @@ StackTable = {
 ```
 
 
-### Frame Table {#h3-10-frame-table}
+### Frame Table
 
 The frames themselves are stored in the [frame table](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L272):
 
@@ -322,7 +322,7 @@ type FrameTable = {|
 
 Each frame is related to a function, which is in turn stored in the `FuncTable`.
 
-### Func Table {#h3-11-func-table}
+### Func Table
 
 The function table stores all functions with some metadata:
 
@@ -358,7 +358,7 @@ type FuncTable = {|
 ```
 
 
-### Resource Table {#h3-12-resource-table}
+### Resource Table
 
 The last table I'll show in this article is the resource table. It depends on you and what you map to it:
 

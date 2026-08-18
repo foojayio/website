@@ -28,8 +28,8 @@ I then improved the [recipe to compute the root automatically](https://blog.fran
 
 However, my testing approach was wrong. In this post, I want to describe my mistakes, and how I fixed them.
 
-The naive approach {#h2-0-the-naive-approach}
----------------------------------------------
+The naive approach
+------------------
 
 I originally approached the testing of the recipe in a very naive way, to say the least. As explained in the [first post](https://blog.frankel.ch/openrewrite-recipes/1/#testing-the-recipe), I used OpenRewrite's low-level APIs. Here's what I wrote:
 
@@ -82,8 +82,8 @@ val result2 = recipe.getVisitor(acc).visit(modifiedCu2, context)                
 
 It worked, but I admit it was a lucky guess. More involved recipes would require a deeper knowledge of how OpenRewrite works, with more potential bugs. Fortunately, OpenRewrite provides the means to keep the testing code at the right level of abstraction.
 
-The nominal approach {#h2-1-the-nominal-approach}
--------------------------------------------------
+The nominal approach
+--------------------
 
 The nominal approach involves a couple of out-of-the-box classes; it requires a new dependency. I didn't do it before, so now is a good time: let's introduce a to align all of OpenRewrite's dependencies:
 
@@ -167,8 +167,8 @@ class FlattenStructureComputeRootPackageTest : RewriteTest {
 ```
 
 
-Don't forget cycles {#h2-2-don-t-forget-cycles}
------------------------------------------------
+Don't forget cycles
+-------------------
 
 If you followed the above instructions, there's a high chance your test fails with this error message:
 
@@ -196,8 +196,8 @@ override fun defaults(spec: RecipeSpec) {
 1. Set how many cycles the recipe should run
 2. Set to 0 if the recipe isn't expected to make changes
 
-Criticisms {#h2-3-criticisms}
------------------------------
+Criticisms
+----------
 
 I like what the OpenRewrite testing classes bring, but I have two criticisms.
 
@@ -234,8 +234,8 @@ My second criticism is about how the provided testing classes make you structure
 
 With OpenRewrite's abstractions, the structure is widely different from the above.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I migrated my *ad hoc* test code to rely on OpenRewrite's provided classes. Even though they are not exempt from criticism, they offer a solid abstraction layer and make tests more maintainable.
 

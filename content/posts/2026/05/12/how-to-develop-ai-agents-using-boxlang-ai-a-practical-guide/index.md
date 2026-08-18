@@ -33,8 +33,8 @@ In this tutorial, I'll show you how to build a real-world AI agent using [BoxLan
 
 By the end you'll understand how AI agents work under the hood, and you'll have a fully working agent you can adapt for your own domain.
 
-What we'll Cover {#h2-0-what-we-ll-cover}
------------------------------------------
+What we'll Cover
+----------------
 
 * Prerequisites
 * What Are AI Agents?
@@ -48,8 +48,8 @@ What we'll Cover {#h2-0-what-we-ll-cover}
 * Going Further
 * Conclusion
 
-Prerequisites {#h2-1-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 Before diving in, you should be comfortable with:
 
@@ -57,7 +57,7 @@ Before diving in, you should be comfortable with:
 
 **Basic LLM familiarity** --- Knowing what a large language model is and having used one (via `aiChat()` or similar) will help you follow along.
 
-### Step 1 --- Install BoxLang {#h3-2-step-1-install-boxlang}
+### Step 1 --- Install BoxLang
 
 Download and install BoxLang from [boxlang.io](https://boxlang.io/ "boxlang.io"), or use BVM (BoxLang Version Manager) to manage multiple versions:
 
@@ -74,7 +74,7 @@ boxlang --version
 ```
 
 
-### Step 2 --- Install the `bx-ai` Module {#h3-3-step-2-install-the-bx-ai-module}
+### Step 2 --- Install the `bx-ai` Module
 
 Install `bx-ai` locally into your project using the built-in module installer:
 
@@ -99,7 +99,7 @@ my-project/
 ```
 
 
-### Step 3 --- Set Up Your `.env` File {#h3-4-step-3-set-up-your-env-file}
+### Step 3 --- Set Up Your `.env` File
 
 Copy `.env.example` to `.env` and fill in at least one provider API key. Never commit `.env` to source control.
 
@@ -144,7 +144,7 @@ boxlang_modules/
 ```
 
 
-### Step 4 --- `Configure config/boxlang.json` {#h3-5-step-4-configure-config-boxlang-json}
+### Step 4 --- `Configure config/boxlang.json`
 
 BoxLang reads its configuration from the file pointed to by `BOXLANG_CONFIG`. The `${Setting: VAR_NAME not found}` syntax reads directly from your `.env` file --- your keys never live in the config file itself.
 
@@ -168,7 +168,7 @@ BoxLang reads its configuration from the file pointed to by `BOXLANG_CONFIG`. Th
 ```
 
 
-### Step 5 --- Run Your First Script {#h3-6-step-5-run-your-first-script}
+### Step 5 --- Run Your First Script
 
 Create `agent.bxs` and run it:
 
@@ -211,8 +211,8 @@ Your `agent.bxs` code doesn't change at all. This is the zero-vendor-lock-in pro
 
 "💡 `bx-ai` ***supports 17 providers --- OpenAI, Claude, Gemini, Ollama, Groq, and more. You can also run fully local AI with Ollama --- no API key required, zero cost, complete privacy. See the [provider docs](https://ai.ortusbooks.com/ "provider docs") for per-provider configuration*** **.**"
 
-What Are AI Agents? {#h2-7-what-are-ai-agents}
-----------------------------------------------
+What Are AI Agents?
+-------------------
 
 Think of an AI agent as a chatbot that can act, not just respond. A traditional chatbot answers questions from what it knows. An agent can reach out and do things --- query databases, call APIs, read files, send emails --- and chain those actions together to solve multi-step problems.
 
@@ -257,8 +257,8 @@ The agent broke the problem down, picked the right tool, and synthesized the ans
 * Answering requires combining data from multiple sources
 * Users need to follow up on previous answers
 
-What Is BoxLang AI? {#h2-8-what-is-boxlang-ai}
-----------------------------------------------
+What Is BoxLang AI?
+-------------------
 
 BoxLang AI (`bx-ai`) is the official AI framework for BoxLang --- a modern, dynamic JVM language. It provides a unified, fluent API for building AI agents, multi-model workflows, RAG pipelines, and AI-powered applications.
 
@@ -289,8 +289,8 @@ Key properties that make it great for building agents:
 **- Multi-tenant memory** --- one agent instance safely handles thousands of concurrent users  
 **- JVM-native** --- runs everywhere Java runs, with full Java interop
 
-Core Concept 1: Tools {#h2-9-core-concept-1-tools}
---------------------------------------------------
+Core Concept 1: Tools
+---------------------
 
 Tools are functions your AI agent can call. The framework passes the tool's name, description, and parameter schema to the LLM, which decides when and how to call them. When the LLM decides to use a tool, BoxLang AI executes it and feeds the result back.
 
@@ -488,8 +488,8 @@ class {
 ```
 
 
-Core Concept 2: Memory {#h2-10-core-concept-2-memory}
------------------------------------------------------
+Core Concept 2: Memory
+----------------------
 
 Memory is what separates a stateful agent from a stateless API call. Without memory, every message is processed in isolation. With memory, the agent carries the full conversation thread.
 
@@ -622,8 +622,8 @@ At message 21:
 ```
 
 
-Core Concept 3: The Agent {#h2-11-core-concept-3-the-agent}
------------------------------------------------------------
+Core Concept 3: The Agent
+-------------------------
 
 With tools and memory defined, the agent is the piece that ties them together. In BoxLang AI, `aiAgent()` is a single BIF call that gives you a fully autonomous agent.
 
@@ -726,8 +726,8 @@ agent = aiAgent(
 
 This loop is what makes the agent autonomous --- it keeps calling tools until it has everything it needs to produce a final answer.
 
-How to Put It All Together {#h2-12-how-to-put-it-all-together}
---------------------------------------------------------------
+How to Put It All Together
+--------------------------
 
 Here's the complete SupportBot:
 
@@ -801,7 +801,7 @@ class {
 ```
 
 
-### What the Middleware Does {#h3-13-what-the-middleware-does}
+### What the Middleware Does
 
 ```html
 ┌────────────────────────────────────────────────────────────────┐
@@ -828,14 +828,14 @@ class {
 
 `MaxToolCallsMiddleware` prevents runaway agents. If the agent gets stuck in a tool-calling loop, it hits the cap and stops with a clear error rather than burning tokens indefinitely.
 
-Streaming Responses {#h2-14-streaming-responses}
-------------------------------------------------
+Streaming Responses
+-------------------
 
 For web UIs and real-time applications, you want the agent's response to appear token-by-token as it's generated --- like typing. This is what makes AI feel alive rather than frozen.
 
 BoxLang AI supports streaming at every level: direct model calls, agent runs, and web responses.
 
-### How Streaming Works {#h3-15-how-streaming-works}
+### How Streaming Works
 
 ```html
 ┌──────────────────────────────────────────────────────────────┐
@@ -856,7 +856,7 @@ BoxLang AI supports streaming at every level: direct model calls, agent runs, an
 ```
 
 
-### Simple Streaming with `aiChatStream()` {#h3-16-simple-streaming-with-aichatstream}
+### Simple Streaming with `aiChatStream()`
 
 For basic streaming without an agent:
 
@@ -877,7 +877,7 @@ aiChatStream(
 ```
 
 
-### Agent Streaming with `agent.stream()` {#h3-17-agent-streaming-with-agent-stream}
+### Agent Streaming with `agent.stream()`
 
 The `stream()` method on `AiAgent` works exactly like `run()` but delivers the response token by token. Tool calls still execute synchronously under the hood --- the streaming applies to the final text response:
 
@@ -901,7 +901,7 @@ void function handleStream(
 ```
 
 
-### Streaming to a Web Browser (BoxLang Web) {#h3-18-streaming-to-a-web-browser-boxlang-web}
+### Streaming to a Web Browser (BoxLang Web)
 
 Here's how to wire streaming to a real HTTP response --- tokens pushed to the browser as they arrive:
 
@@ -944,7 +944,7 @@ class {
 ```
 
 
-### Consuming the Stream on the Frontend {#h3-19-consuming-the-stream-on-the-frontend}
+### Consuming the Stream on the Frontend
 
 On the client side, use the standard EventSource API or fetch with a readable stream:
 
@@ -969,7 +969,7 @@ eventSource.onerror = () => eventSource.close();
 ```
 
 
-### Streaming with Accumulated Memory {#h3-20-streaming-with-accumulated-memory}
+### Streaming with Accumulated Memory
 
 One important detail: even in streaming mode, the full response is stored in memory after the stream completes. The `AiAgent.stream()` method accumulates tokens internally and saves them when done:
 
@@ -989,7 +989,7 @@ storeInMemory( userMessage, { role: "assistant", content: accumulated }, userId,
 
 This means streaming and memory work seamlessly together --- the user sees tokens as they arrive, and the next turn has the full conversation history.
 
-### When to Use Streaming {#h3-21-when-to-use-streaming}
+### When to Use Streaming
 
 ```html
 ┌──────────────────────────────────────────────────────────────┐
@@ -1010,8 +1010,8 @@ This means streaming and memory work seamlessly together --- the user sees token
 ```
 
 
-How the Agent Thinks {#h2-22-how-the-agent-thinks}
---------------------------------------------------
+How the Agent Thinks
+--------------------
 
 Let's trace exactly what happens for a real multi-step request: "*My order #ORD-78291 arrived damaged. I want a refund.*"
 
@@ -1099,12 +1099,12 @@ The agent confirms before acting (because the instructions say to), executes the
 ```
 
 
-Going Further {#h2-23-going-further}
-------------------------------------
+Going Further
+-------------
 
 The SupportBot above covers the essentials. Here's what to add for production.
 
-### Adding a Knowledge Base (RAG) {#h3-24-adding-a-knowledge-base-rag}
+### Adding a Knowledge Base (RAG)
 
 Ingest your documentation into vector memory and the agent retrieves relevant content automatically before answering:
 
@@ -1154,7 +1154,7 @@ println( "Loaded #result.documentsIn# docs → #result.chunksOut# chunks" )
 ```
 
 
-### Human-in-the-Loop Approvals {#h3-25-human-in-the-loop-approvals}
+### Human-in-the-Loop Approvals
 
 For refunds above a threshold, require a supervisor to approve before the refund executes:
 
@@ -1204,7 +1204,7 @@ agent = aiAgent(
 ```
 
 
-### Multi-Agent Escalation {#h3-26-multi-agent-escalation}
+### Multi-Agent Escalation
 
 For complex issues, automatically delegate to a specialist:
 
@@ -1245,8 +1245,8 @@ supportBot = aiAgent(
 ```
 
 
-Conclusion {#h2-27-conclusion}
-------------------------------
+Conclusion
+----------
 
 Building an AI agent with BoxLang AI comes down to three concepts:
 
@@ -1273,8 +1273,8 @@ The framework handles the hard parts: the tool-calling loop, memory isolation, p
 
 The full SupportBot example shows how these pieces combine in a real application. The same patterns apply to any domain: financial assistants, developer tools, data analysis agents, document processors --- whatever problem you're solving, the architecture is the same.
 
-Resources {#h2-28-resources}
-----------------------------
+Resources
+---------
 
 📖 [BoxLang AI Documentation](https://ai.ortusbooks.com/ "BoxLang AI Documentation")  
 

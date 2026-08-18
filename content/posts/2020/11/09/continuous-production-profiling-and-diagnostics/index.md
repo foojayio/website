@@ -21,8 +21,8 @@ I've gotten a lot of questions about continuous production profiling lately. Why
 
 Trigger warning: this blog will not contain code samples.
 
-Profiling? {#h2-0-profiling}
-----------------------------
+Profiling?
+----------
 
 So what is software profiling then? It's the ancient black magic art of trying to figure out how something is performing, for some aspect of performing. In American TV-series, the profiler is usually some federal agent who is adept at understanding the psychology of the criminal mind. The profiler attempts to understand key aspects of the criminal to make it easier for the law enforcement agents to catch him. In software profiling we're kind of doing the same thing, but for software -- your code as well as all the third party code you might be depending on.
 
@@ -32,8 +32,8 @@ In comparison to other observability tools, like metrics and logs, profilers wil
 
 It used to take painting a red pentagram on the floor, and a healthy stock of black wax candles, to do profiling right. Especially in production. Overhead of early profilers weren't really a design criteria; it was assumed you'd run the process locally, and in development. And, since it was assumed you'd be running the profiling frontend on the same machine, profiling remote processes were somewhat tricky and not necessarily secure. Production profilers, like JFR/JMC came along, but they usually focus on a single process, and since security is a bit tricky to set up properly, most people sidestep the problem altogether and run (yep, in production) with authentication and encryption off.
 
-Different Kinds of Profiling {#h2-1-different-kinds-of-profiling}
------------------------------------------------------------------
+Different Kinds of Profiling
+----------------------------
 
 Profiling means different things to different people. There are various types of resources that you may be interested in knowing more about, such as CPU or locks, and there are different ways of profiling them.
 
@@ -53,11 +53,11 @@ Here are a few of my favourite kinds of profiling information:
 
 Let's go through a few of them...
 
-### CPU Profiling {#h3-2-cpu-profiling}
+### CPU Profiling
 
 CPU profiling attempts to answer the question about which methods/functions are eating up all that CPU. If you can properly answer that question, and if you can do something about it (like optimizing the function or calling it less often) you will use less resources. If you want to reduce your cloud provider bill, this is a great place to start. Also, if you can scope the analysis down to a context that you care about, let's say part of a distributed trace, you can target improving the performance of an individual API endpoint.
 
-### Wall-Clock Profiling {#h3-3-wall-clock-profiling}
+### Wall-Clock Profiling
 
 Wall-clock profiling attempts to answer the question about which method/function is taking all that time, no matter if on CPU or not. For runtimes supporting massively multithreaded applications, this information is much less useful without some context.
 
@@ -67,13 +67,13 @@ As a general rule of thumb, wall-clock profiling is useful for finding and optim
 
 If you can tell where the wall-clock time is spent, you can help remove performance obstacles by seeing which method calls take time and optimize them, or reduce the number of calls to them.
 
-### Allocation Profiling {#h3-4-allocation-profiling}
+### Allocation Profiling
 
 Allocation profiling is trying to answer where all that allocation pressure is coming from, and from allocating what. This is important, since all that allocated memory will usually have to be reclaimed at some point in time, and that uses both CPU and possibly causes stop-the-world pauses from GC (though modern GC technologies, for example [ZGC](https://wiki.openjdk.java.net/display/zgc/Main) for the Java platform, is making this less of an issue for some types of services).
 
 If you can properly answer where the allocation pressure comes from, you can bring down GC activity by optimizing the offending methods, or have your application call them less.
 
-### Lock / Thread Halt / Stop-the-World (STW) Profiling {#h3-5-lock-thread-halt-stop-the-world-stw-profiling}
+### Lock / Thread Halt / Stop-the-World (STW) Profiling
 
 This kind of profiling tries to answer the question about why my thread didn't get to run right there and right then. This is typically what you would use the wall-clock-profiler for, but the wall-clock-profiler usually has some serious limitations, making it necessary to collaborate with the runtime to get some additional context. The wall-clock profiler typically only gets sampled stack traces showing you which method you spent time in, but without context it may be hard to know why.
 
@@ -91,12 +91,12 @@ Here are some examples:
 
 There are plenty of more examples, wait, sleep, park etc. To learn more, open [JDK Mission Control](http://github.com/openjdk/jmc) and take a look at individual event types in the event browser.
 
-### Heap Profiling {#h3-6-heap-profiling}
+### Heap Profiling
 
 This kind of profiling attempts to answer questions about what's on your heap and, sometimes, why. This information can be used to reduce the amount of heap required to run your application, or help you solve memory leaks. Information may range from heap histograms showing you the number of instances of each type on the heap, to leak candidates, their allocation times and allocation stack traces, together with the reference chains still holding on to them.
 
-Continuous Production Profiling {#h2-7-continuous-production-profiling}
------------------------------------------------------------------------
+Continuous Production Profiling
+-------------------------------
 
 Assuming that your application always has the same performance profile, which implies always having exactly the same load and never being updated, with no edge cases or failure modes, and assuming perfectly random sampling, your profiler could simply take a few samples (let's say 100 to get a nice distribution) over whichever time period you are interested in (let's say 24 hours), and call it a day. You would have a very cheap breakdown over whatever profiling information you're tracking.
 
@@ -106,11 +106,11 @@ At Datadog, we've used continuous production profiling for our own services for 
 
 Aside from being incredibly convenient, there are many different reasons why you might want to have the profiler running continuously.
 
-### Change Analysis {#h3-8-change-analysis}
+### Change Analysis
 
 These days new versions are deployed several times a day. This is certainly true for my team at Datadog. There is great value in being able to compare the performance profile, down to the line of code. This is true across new releases, specific time intervals, over other attributes like high vs low CPU load, and countless other facets.
 
-### Fine Grained Profiling {#h3-9-fine-grained-profiling}
+### Fine Grained Profiling
 
 Some production profiling environments allow you to add context, for example custom events, providing the means to look at the profiling data in the light of something else happening in a thread at a certain time. This can be used for doing breakdowns of the profiling data for any context you put there, any time, anywhere.
 
@@ -120,7 +120,7 @@ With the advent of distributed tracing, this can be done in a fairly general way
 
 That said, with a general recording framework, there is no limit to the kinds of contexts you can invent and associate your profiling data with.
 
-### Diagnostics {#h3-10-diagnostics}
+### Diagnostics
 
 It's 2:03 a.m., all of a sudden the CPU spikes on one of your services. You're stumped as to what's going on, and prepare to kill the process, since these things are starting to add substantially to your AWS bill. Just kidding. You're not stumped at all. You get the profiling data for the affected host for the time period in question, and you see exactly what is going on. Turns out it's a rare bug which, since you have an enormous deployment, happens every once in a while. It causes an infinite loop in a third-party library you're using. You fix the bug, being more careful with what you provide to the third-party library, and redeploy.
 
@@ -128,18 +128,18 @@ When something happens in production, you will always have data at hand with a c
 
 Of course, the cure must not be worse than the ailment. If the performance overhead you pay for the information costs you too much, it will not be worth it. Therefore this rather detailed information must be collected rather inexpensively for a continuous production profiler.
 
-Low-overhead Production Profiling {#h2-11-low-overhead-production-profiling}
-----------------------------------------------------------------------------
+Low-overhead Production Profiling
+---------------------------------
 
 So, how can one go about producing this information at a reasonable cost? Also, we can't introduce too much observer effect, as this will skew the data, and not truly represent the application behaviour without the instrumentation.
 
 There are plenty of different methods and techniques we can use. Let's dig into a few.
 
-### Using Already Available Information {#h3-12-using-already-available-information}
+### Using Already Available Information
 
 If the runtime is already collecting the data, exporting it can usually be done quite cheaply. For example, if the runtime is already collecting information about the various garbage collection phases, perhaps to drive decisions like when to start initiating the next concurrent GC-cycle, that information is already readily available. There is usually quite a bit of information that an adaptively optimizing runtime keeps track of, and some of that information can be quite useful for application developers.
 
-### Sampling {#h3-13-sampling}
+### Sampling
 
 One technique we can use is to not take every single possible value, but do statistical sampling instead. In many cases this is the only way which makes sense. Let's take CPU profiling for example. In most cases, we will be able to select an upper boundary for how much data we produce by either selecting the CPU quanta between samples, or by selecting a fixed number of threads to look at any given time and the sampling period. There are also more advanced techniques for getting a fixed data rate.
 
@@ -147,13 +147,13 @@ An interesting example from Java is the new upcoming allocation profiling event.
 
 Of course, the less sample points we have, the less we can say about the behaviour over very short periods of time.
 
-### Thresholding {#h3-14-thresholding}
+### Thresholding
 
 One sort of sampling is to simply only collect outliers. For some situations, we really would like to get more information. One example might be thread halts that take longer than, say, 10ms. Setting a threshold allows us to do a little bit of more work, when it's very much warranted. For example, I might only be interested in tracking blocking I/O reads/writes lasting longer than a certain threshold, but for them I'd like to know the amount of bytes read/written, the IP address read from/written to etc.
 
 Of course, the higher the threshold, the more data we will miss (unless we have other means to account for that time). Also, thresholds make it harder to reason about the actual data production rate.
 
-### Protect Against Edge Cases {#h3-15-protect-against-edge-cases}
+### Protect Against Edge Cases
 
 Edge cases which make it hard to reason about their potential overhead should be avoided, or at least handled. For example, when calculating reference chains, you may provide a time budget for which you can scan, and then only do it when absolutely needed. Or, since the cost of walking a stack trace can be proportional to the number of frames on the stack, you can set an upper limit to how many frames to walk, so that recursion gone wild won't kill your performance. Be careful to identify these edge cases, and protect against them.
 
@@ -162,13 +162,13 @@ One recent example is the Exception event available in the Flight Recorder (Java
 
 You would be excused for believing that Errors would happen very rarely, and that recording all of them would not be a problem. Well, a very popular Java framework, which will remain unnamed, subclassed Error in an exception class named LookAheadSuccess. That error was used in a parser and used for control flow, resulting in the error being thrown about a gazillion times per minute. We ended up developing our own solution for exception profiling at DD, which records Datadog specific events into the JDK Flight Recorder.
 
-### Some Assembly Required {#h3-16-some-assembly-required}
+### Some Assembly Required
 
 These techniques, and more, can be used together to provide a best-of-all-worlds profiling environment. Just be careful, as with most things in life a balance must be found. Just like there is (trigger warning) no single energy source that will solve our energy problems in a carbon neutral way (we should use all at our disposal -- including nuclear power -- to have a chance to go carbon neutral in a reasonable time \[2\]\[3\]), a balance must be struck between sampling and execution tracing, and a balance for how much data to capture for the various types of profiling you're doing.
 
 Continuous Profiling in Large Deployments
-Or, Finding What You're Looking For {#h2-17-continuous-profiling-in-large-deploymentsor-finding-what-you-re-looking-for}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Or, Finding What You're Looking For
+-----------------------------------
 
 In a way this part of the blog will be a shameless plug for the work I've been involved with at Datadog, but it may offer insights into what matters for a continuous profiler to be successful. Feel free to skip if you dislike me talking about a specific commercial solution.
 
@@ -182,7 +182,7 @@ That amount of data will be overwhelming to most people, so you'll need to offer
 * Association by Context
 * Analysis
 
-### Monitoring {#h3-18-monitoring}
+### Monitoring
 
 All that detailed data that has been collected can, of course, be used to derive metrics. We differentiate between two kinds in the profiling team at Datadog:
 
@@ -206,7 +206,7 @@ Here are some contended methods. Yep, one is a demo...
 
 Metrics also allow you to monitor for certain conditions, like having alerts / watchdogs when certain conditions or changes in conditions occur. That said, they aren't worth that much unless you can, if you find something funny, go see what was going on -- for example see how that contended method was reached when under contention.
 
-### Aggregation {#h3-19-aggregation}
+### Aggregation
 
 Another use case is when you simply don't care about a specific use case. You just want to look at the big picture in your datacenter. You may perhaps want to see, on average, across all your hosts and for a certain time range, what the CPU profiling information looks like? This would be a great place to start if, for example, looking for ways to lower the CPU usage for Friday nights, 7 to 10 p.m.
 
@@ -216,19 +216,19 @@ Here, for example, is an aggregation flame graph for the profiling data collecte
 A specific method can be selected to show how that specific method ended up being called:
 [![](methodselect.png)](methodselect.png)
 
-### Searching {#h3-20-searching}
+### Searching
 
 What if you just want to get to an example of the worst possible examples of using a butt-load of CPU? Or if you want to find the worst example of a spike in allocation rate? Having indexed key performance metrics for the profiling data makes it possible to quickly search for profiling information matching certain criteria.
 
 Here is an example of using the monitor enter wait time to filter out an atypically high lock contention:
 [![](atypicallock.png)](atypicallock.png)
 
-### Association by Context {#h3-21-association-by-context}
+### Association by Context
 
 Of course, if we can associate the profiling data with individual traces, it would be possible to see what went on for an individual long lasting span. If using information from the runtime, even things that are normally hidden from user applications (including profilers purely written in Java), like stop-the-world pauses, would be visible.
 [![](breakdown.png)](breakdown.png)
 
-### Analysis {#h3-22-analysis}
+### Analysis
 
 When having access to all that yummy, per thread and time, detailed, profiling data, it would be a shame to not go looking for some interesting patterns to highlight. The result of that analysis can provide a means to focus on the most important parts of the profiling data.
 [![](analysis1.png)](analysis1.png)
@@ -238,15 +238,15 @@ So, nothing terribly interesting going on in our services right now. The one bel
 
 That said, if you're interested in the kind of patterns we can detect, check out the JDK Mission Control rules. The ones at Datadog are a superset, and work similarly.
 
-Summary {#h2-23-summary}
-------------------------
+Summary
+-------
 
 Profiling these days is no longer limited to high overhead development profilers. The capabilities of the production time profilers are steadily increasing and their value is becoming less controversial, some preferring them for complex applications even during development.
 
 Today, having a continuous production profiler enabled in production will offer unparalleled performance insights into your production environment, at an impressively low performance overhead. Data will always be at your fingertips when you need it.
 
-Additional Reading {#h2-24-additional-reading}
-----------------------------------------------
+Additional Reading
+------------------
 
 <https://www.datadoghq.com/blog/datadog-continuous-profiler/>
 

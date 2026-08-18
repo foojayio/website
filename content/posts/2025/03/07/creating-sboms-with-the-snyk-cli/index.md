@@ -24,8 +24,8 @@ frozen: false
 
 The software bill of materials (SBOM) is quickly becoming an essential aspect of open source security and compliance. In this post, we'll delve into what SBOMs are, why they're necessary, and their role in open source security.
 
-What are SBOMs? {#h2-0-what-are-sboms}
---------------------------------------
+What are SBOMs?
+---------------
 
 A software Bill of Materials (SBOM) is a comprehensive inventory of all components used in a software product. They include all the necessary details about each component, such as their names, versions, and licensing information. SBOMs can be seen as the ingredients list for software, providing complete transparency into what makes up a software product.
 
@@ -50,8 +50,8 @@ Consider a simple Python project with various dependencies. A simplified example
 ***Disclaimer:**
 The code above is a simplified snippet of a possible SBOM. This example is for illustration purposes only and will not work when scanning since it is incomplete.*
 
-Why do we need SBOMs? {#h2-1-why-do-we-need-sboms}
---------------------------------------------------
+Why do we need SBOMs?
+---------------------
 
 SBOMs serve a crucial role in understanding the composition of our software. But in the field of open source development, SBOMs play an even more vital role. Open source components often have their own dependencies, leading to a complex web of interconnected components. SBOMs help untangle this web, allowing us to understand the full scope of our exposure to potential security risks or compliance issues that come from third-party dependencies in our apps.
 
@@ -59,14 +59,14 @@ Delivering an SBOM alongside the created artifact is crucial because it enables 
 
 SBOMs are a valuable add-on to any piece of software that should be provided with every release. They provide transparency, enhance security and compliance, and contribute to higher-quality software.
 
-Creating SBOMs with the Snyk CLI {#h2-2-creating-sboms-with-the-snyk-cli}
--------------------------------------------------------------------------
+Creating SBOMs with the Snyk CLI
+--------------------------------
 
 Snyk's command line interface (CLI) is an open source security tool that enables developers and DevOps professionals to find, fix, and monitor known vulnerabilities in open source dependencies. The Snyk CLI supports a broad range of programming languages and package managers --- including JavaScript (npm, yarn), Python (pip), Java (Maven), .NET (NuGet), Ruby (RubyGems), PHP (Composer), and more. The Snyk CLI can be used locally or in a pipeline for SAST, SCA, container, and IaC scanning on a software project.
 
 And now, it can also create SBOMs for your projects.
 
-### Installing the Snyk CLI {#h3-3-installing-the-snyk-cli}
+### Installing the Snyk CLI
 
 To get started with the Snyk CLI, you need to install it in your development environment. Below is a simple guide on how to install the Snyk CLI using npm. For more information or alternative ways to install the Snyk CLI, [++check out our user documentation.++](https://docs.snyk.io/snyk-cli/install-or-update-the-snyk-cli)
 
@@ -84,7 +84,7 @@ snyk auth
 
 Alternatively, you can set your Snyk token as an environment variable, which is the recommended way to use the CLI in a CI/CD pipeline. Check our handy [++CLI cheat sheet++](https://snyk.io/blog/snyk-cli-cheat-sheet/) or the [++official documentation++](https://docs.snyk.io/snyk-cli) for more information.
 
-### Generate SBOMs using the Snyk CLI {#h3-4-generate-sboms-using-the-snyk-cli}
+### Generate SBOMs using the Snyk CLI
 
 Once the CLI is operational and connected to an enterprise Snyk account, it can start creating SBOMs for your software projects with the following command:
 
@@ -104,7 +104,7 @@ snyk sbom --format=cyclonedx1.4+json --json-file-output=mysbom.json
 
 Running this from the root directory of your project will give you an SBOM file that you can ship together with your artifact.
 
-### Multiple projects {#h3-5-multiple-projects}
+### Multiple projects
 
 The Snyk CLI uses the package manifest file of your build system to determine the dependency tree and, therefore, the input of the SBOM. By default, the CLI stops after finding one manifest file. However, you may have more than one manifest file and more than one build system in your project. For example, you might have a project with a Java backend using Maven and a Node.js frontend using npm. By adding the `--all-projects` flag to the SBOM command, the Snyk CLI will traverse through your project looking for manifest files and add them to the result or your SBOM output.
 
@@ -122,18 +122,18 @@ snyk sbom --format=cyclonedx1.4+json --all-projects --detection-depth=3 --exclud
 
 Please be aware that there is a large number of command line flags available for specific ecosystems to handle --- such as multi-module Maven files, configuration attributes in Gradle, Yarn workspaces, etc. For a full overview of all possible flags for Snyk SBOM, check our extensive [++documentation page++](https://docs.snyk.io/snyk-cli/commands/sbom).
 
-### Automating SBOM generation with the Snyk CLI {#h3-6-automating-sbom-generation-with-the-snyk-cli}
+### Automating SBOM generation with the Snyk CLI
 
 Automating software bill of materials generation with the Snyk CLI is a vital step for enhancing security and compliance in the CI/CD pipeline. By integrating the Snyk CLI into your build process, you can automatically generate a comprehensive SBOM each time your code is built. This SBOM lists all dependencies, including transitive dependencies.
 
 As code moves through the CI/CD pipeline, Snyk can not only find security vulnerabilities but also ensure that an up-to-date SBOM is generated and delivered with every build release. This automation not only streamlines the process of maintaining a secure and up-to-date SBOM but also embeds security practices of your software development lifecycle, making it easier to comply with regulatory requirements and industry standards while building trust with your customers.
 
-Analyzing SBOMs {#h2-7-analyzing-sboms}
----------------------------------------
+Analyzing SBOMs
+---------------
 
 Creating SBOMs is an effective and straightforward way to use the Snyk CLI. But what if you need to consume an SBOM and check if there are known vulnerabilities used in a software package? There are currently a few options available:
 
-### Snyk CLI SBOM Test {#h3-8-snyk-cli-sbom-test}
+### Snyk CLI SBOM Test
 
 The Snyk Cli is not only capable of creating an SBOM for your project, it can also scan it. If the Snyk CLI is connected to an enterprise account your can use the Snyk CLI to point to an SBOM file like below:
 
@@ -183,8 +183,8 @@ bomber scan --provider snyk --token xxx mysbom.json
 The output will show you all known vulnerabilities on your screen.
 ![Bomber SBOM scanner with the Snyk integration provider for Java Maven dependencies.](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1707410787/blog-creating-sboms-bomber.jpg)
 
-Supplying up-to-date SBOMs with Snyk {#h2-9-supplying-up-to-date-sboms-with-snyk}
----------------------------------------------------------------------------------
+Supplying up-to-date SBOMs with Snyk
+------------------------------------
 
 The Snyk CLI can help you create up-to-date SBOMs for every build of your software. It's good practice (and in some cases even required) to provide an SBOM with a built artifact to be compliant.
 

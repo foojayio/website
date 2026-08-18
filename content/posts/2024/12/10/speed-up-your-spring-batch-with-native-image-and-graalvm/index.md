@@ -36,8 +36,8 @@ In this article, you'll learn how to build a Spring Batch application that reads
 
 🔵⚪⚪⚪⚪⚪⚪⚪
 
-What is a Native Image? {#h2-0-what-is-a-native-image}
-------------------------------------------------------
+What is a Native Image?
+-----------------------
 
 **A Native Image is a standalone executable** that includes everything the application needs to run *(classes, libraries, and the JVM itself)* in one package. Unlike JVM-based JAR files, **native images do not require a JVM at runtime**, which means:
 
@@ -45,8 +45,8 @@ What is a Native Image? {#h2-0-what-is-a-native-image}
 * Lower memory usage (since there's no JVM)
 * There is no need for JVM warm-up (perfect for short-lived apps like batch jobs)
 
-🏆 What is GraalVM? {#h2-1-what-is-graalvm}
--------------------------------------------
+🏆 What is GraalVM?
+-------------------
 
 **GraalVM is a universal virtual machine** that can execute applications written in Java, Kotlin, Scala, and other languages. **One of its** most powerful **features is the Native Image capabilit** y, which converts Java applications into ahead-of-time (AOT) compiled executables. **This means the Java bytecode is turned into platform-specific machine code**.
 
@@ -58,12 +58,12 @@ When you compile a Spring Boot application into a native image, you remove the n
 
 Before starting, ensure you have the following tools installed on your machine:
 
-### GraalVM: {#h3-2-graalvm}
+### GraalVM:
 
 Download and install from GraalVM Downloads.  
 <https://www.graalvm.org/downloads/>
 
-### Visual Studio and Visual Studio Code: {#h3-3-visual-studio-and-visual-studio-code}
+### Visual Studio and Visual Studio Code:
 
 Install Visual Studio (for C++ tools), as GraalVM uses native compilers.  
 <https://www.graalvm.org/latest/getting-started/windows/>  
@@ -72,7 +72,7 @@ Install Visual Studio (for C++ tools), as GraalVM uses native compilers.
 
 Speed up your Spring Batch with Native Image and GraalVM{#caption-attachment-114938}
 
-### PostgreSQL: {#h3-4-postgresql}
+### PostgreSQL:
 
 Run a PostgreSQL container with Docker  
 `docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres`
@@ -81,7 +81,7 @@ Run a PostgreSQL container with Docker
 
 🔵🔵🔵⚪⚪⚪⚪⚪
 
-### Spring Initializr: {#h3-5-spring-initializr}
+### Spring Initializr:
 
 Go to Spring Initializr: <https://start.spring.io>  
 
@@ -96,7 +96,7 @@ Add the following dependencies:
 * Spring Data JPA
 * Spring Cloud Native
 
-### Add the implementation {#h3-6-add-the-implementation}
+### Add the implementation
 
 Here, I defined a batch for a billing service.
 
@@ -213,28 +213,28 @@ Commands to Compile
 
 🔵🔵🔵🔵🔵⚪⚪⚪
 
-### Without Native Image {#h3-7-without-native-image}
+### Without Native Image
 
 Run it using the standard JVM-based JAR:
 
 `java -jar target/nativeBatch-0.0.1-SNAPSHOT.jar`**⏱️ Execution time: \~4 seconds**
 
-### With Native Image {#h3-8-with-native-image}
+### With Native Image
 
 Run it using the compiled native image:
 
 `./target/nativeBatch`**⏱️ Execution time: \~0.2 seconds**
 
-Results Summary {#h2-9-results-summary}
----------------------------------------
+Results Summary
+---------------
 
 | 𝐄𝐗𝐄𝐂𝐔𝐓𝐈𝐎𝐍 | 𝐖𝐈𝐓𝐇𝐎𝐔𝐓 𝐍𝐀𝐓𝐈𝐕𝐄 | 𝐖𝐈𝐓𝐇 𝐍𝐀𝐓𝐈𝐕𝐄 |
 |--------------------|-----------------------------|-----------------------|
 | Startup Time       | 4 seconds                   | 0.2 seconds           |
 | Resource Usage     | Higher (JVM)                | Lower (Native)        |
 
-📊 Why Native Image Wins {#h2-10-why-native-image-wins}
--------------------------------------------------------
+📊 Why Native Image Wins
+------------------------
 
 | 𝐀𝐒𝐏𝐄𝐂𝐓 | 𝐖𝐈𝐓𝐇𝐎𝐔𝐓 𝐍𝐀𝐓𝐈𝐕𝐄 |  𝐖𝐈𝐓𝐇 𝐍𝐀𝐓𝐈𝐕𝐄  |
 |--------------|-----------------------------|-------------------------|

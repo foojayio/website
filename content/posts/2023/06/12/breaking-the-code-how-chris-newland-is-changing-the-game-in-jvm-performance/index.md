@@ -32,7 +32,7 @@ Among his well-known tools is JITWatch, which has gained significant recognition
 
 In this conversation, we delve into Chris's journey, his motivations, and his thoughts on JVM performance, Java ecosystem changes, and the role of AI in software development.
 
-### Profile: {#h3-0-profile}
+### Profile:
 
 * 🌐 Home page:<https://www.chrisnewland.com/>
 * 🐦 Twitter:<https://twitter.com/chriswhocodes>

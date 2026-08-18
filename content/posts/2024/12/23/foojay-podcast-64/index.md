@@ -33,13 +33,13 @@ Let's wrap up this year with more interviews from the JFall conference.
 
 In this episode you'll learn more about Foojay, JVM internals and writing your own programming language, Project Loom and structured concurrency, learning at conferences, code reviews, creating desktop applications with Java, infrastructure as code, JUG Noord, and much more!
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube kx6DfVE-I0o >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -47,8 +47,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * Geertjan Wielenga: <https://www.linkedin.com/in/geertjanwielenga/>
 * Nataliia Dziubenko: <https://www.linkedin.com/in/nataliia-dziubenko-341919b8/>
@@ -60,8 +60,8 @@ Guests {#h2-2-guests}
 * Lutske de Leeuw: <https://www.linkedin.com/in/lutske/>
 * Johan Hutting
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topics and guests
 

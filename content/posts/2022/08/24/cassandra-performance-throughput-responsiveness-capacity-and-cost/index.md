@@ -21,8 +21,8 @@ frozen: false
 
 **For scalable data workloads like Apache Cassandra, performance and capacity are simply a matter of cost. JVM choice and configuration can dramatically impact that cost. The Azul Platform Prime JVM significantly improves Cassandra performance and reduces the cost of Cassandra clusters.**
 
-Background {#h2-0-background}
------------------------------
+Background
+----------
 
 We set off to characterize the impact of JVM choice and configuration on Cassandra load carrying capacity: the capacity of a Cassandra cluster of a certain size to handle traffic while meeting specified service levels.
 
@@ -34,7 +34,7 @@ We just need enough nodes.
 
 Each node we add to a Cassandra cluster adds both storage capacity and throughput carrying capacity to the cluster.
 
-### How Service Level Expectations Affect Cost {#h-how-service-level-expectations-affect-cost}
+### How Service Level Expectations Affect Cost
 
 Nodes are the basic building blocks of Cassandra clusters, and the cost of a node is determined by its type and size. The cost of a cluster, in turn, depends on the number of such nodes that the cluster must use to perform its task to acceptable levels.
 
@@ -44,7 +44,7 @@ The number of nodes one actually needs in a cluster will fundamentally depend on
 
 A cluster's overall throughput or storage capacity is only effective to the extent that this capacity can practically carry load while expected cluster service levels are maintained. The cluster's actual provisioned resources (and resulting cost) will necessarily end up being sized to meet service level requirements.
 
-### How JVM Choice and Configuration Affect Cost {#h3-2-how-jvm-choice-and-configuration-affect-cost}
+### How JVM Choice and Configuration Affect Cost
 
 JVM choice and configuration can dramatically impact both code speed and response time consistency. The combined effects of modern JVM, JIT, and Garbage Collectors technologies can be observed in the throughout and responsiveness experienced by Cassandra clients.
 
@@ -52,16 +52,16 @@ JVMs that can maintain reliably fast and responsive code speed at high throughpu
 
 JVM configurations that are unable to sustain expected responsiveness levels at significant fractions of their full throughput potential will invariably lead to "overprovisioned" clusters with seemingly underutilized nodes, as driving significant utilization levels with such JVMs leads to service level collapse.
 
-### Establishing a Cluster's Load Carrying Capacity {#h3-3-establishing-a-cluster-s-load-carrying-capacity}
+### Establishing a Cluster's Load Carrying Capacity
 
 Establishing the load carrying capacity of a given cluster configuration is quite simple, if somewhat time consuming: drive the cluster at various throughout levels between 0 and some highest achieved throughput level, each for sustained period of time, and determine the highest throughout that the cluster, as configured, can reliably sustain while maintaining stated service level expectations.
 
-Our Example Workload {#h2-4-our-example-workload}
--------------------------------------------------
+Our Example Workload
+--------------------
 
 For our tests, we chose to use the same tlp-cluster setup and the same TLP stress workload examples that [Datastax has previously used in benchmarking Cassandra 4.0](https://www.datastax.com/blog/apache-cassandra-benchmarking-40-brings-heat-new-garbage-collectors-zgc-and-shenandoah).
 
-### Our Example Service Level Expectation Specification {#h3-5-our-example-service-level-expectation-specification}
+### Our Example Service Level Expectation Specification
 
 We imagine a service serving clients that time out queries at 100msec, and would have to resort to alternate actions or to errors if queries took longer than that to complete.
 
@@ -73,7 +73,7 @@ Since measurement and modeling of actually experienced 99.9%'ile in all 10 secon
 
 We established the modeled client-experienced query response times at various percentile levels and under varying loads for all tested JVM configurations.
 
-### Run Length, Warmup Period, and Repeated Run Count {#h3-6-run-length-warmup-period-and-repeated-run-count}
+### Run Length, Warmup Period, and Repeated Run Count
 
 We chose to use a post-warmup sustained load test period of 2 hours under each throughput and JVM configuration because early tests showed that shorter test periods would often miss service level degradations resulting from sustained work.
 
@@ -85,7 +85,7 @@ Finally, because of exhibited run-to-run variance, we chose to perform 5 repeate
 
 This ensures that expected service levels were reliably met across all runs at a given load, and not just in some.
 
-### JVM Configurations {#h3-7-jvm-configurations}
+### JVM Configurations
 
 We compared five Java 11 JVM configurations:
 
@@ -98,7 +98,7 @@ We compared five Java 11 JVM configurations:
 
 We chose to use 40GB heaps for the Cassandra nodes because this heap size exhibited higher achievable throughputs (ignoring service levels) for the various JVM configurations, as well as higher load carrying capacity for the JVM configurations that were able to meet the 100msec service level requirements.
 
-### Load Test Detail {#h3-8-load-test-detail}
+### Load Test Detail
 
 Our tests all used a tlp-stress benchmarking configuration similar to the one described in the aforementioned Datastax blog entry:
 
@@ -127,7 +127,7 @@ tlp-stress run BasicTimeSeries -d 150m -p 100M -c 50 --pg sequence -t 8 -r 0.2 -
 
 All workloads ran for 150 minutes, allowing compaction loads to be exhibited during the runs.
 
-### Throughput Levels Tested {#h3-9-throughput-levels-tested}
+### Throughput Levels Tested
 
 In early testing, we established that the highest throughput (for the combined 80% writes/20% reads workload) that any of our configurations were able to achieve, regardless of service level expectations, was below 120k ops.
 
@@ -135,8 +135,8 @@ Armed with the knowledge of that upper bound, and with access to readily availab
 
 Altogether, these tests represent a total of 275 separate cluster runs (5 JVM configurations, 11 load levels between 20K and 120k ops, 5 runs each) lasting 2.5 hours each.
 
-Results {#h2-10-results}
-------------------------
+Results
+-------
 
 **Raw achieved throughput (ignoring service levels):**
 
@@ -163,8 +163,8 @@ This is best depicted in a chart:
 
 Additional results detailing the client-experienced P50 Max, P90 Max, and P99 Max on queries performed under these same set of load levels, collected during the same set of test runs, [can be found here](https://www.azul.com/wp-content/uploads/CassandraBenchmarkDetails.pdf).
 
-Summary {#h2-11-summary}
-------------------------
+Summary
+-------
 
 As can be seen in these results, Azul's Platform Prime is fast. It is by far the highest throughput JVM for powering Cassandra, based on pure throughput alone. It also exhibits better response times and latencies, at pretty much any percentile, than any other JVM.
 

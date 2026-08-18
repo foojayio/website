@@ -20,8 +20,8 @@ frozen: false
 
 Here are the JavaFX LinksOfTheMonth of March 2026. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * Java and JavaFX 26 got released!
   * JavaFX 26 requires JDK 24 or later.
@@ -37,8 +37,8 @@ Core {#h2-0-core}
 * Related to the announcement of the Oracle Java Verified Portfolio (JVP) and the reintroduction of commercial support for JavaFX, **Frank Delporte** wrote a blog: [The JavaFX Revival: Good News for the Community, Business as Usual for Azul](https://www.azul.com/blog/the-javafx-revival-good-news-for-the-community-business-as-usual-for-azul/).
 * Already want to experiment with JavaFX 27? Check the [early-access builds](https://jdk.java.net/javafx27/).
 
-Applications {#h2-1-applications}
----------------------------------
+Applications
+------------
 
 * LogoRRR announced [release 26.2.0](https://github.com/rladstaetter/LogoRRR/releases/tag/26.2.0). [**Robert Ladstätter** published a video showing the new features](https://www.youtube.com/watch?v=4INweBlGWoQ).
 * [**Mapton** announced](https://bsky.app/profile/mapton.org/post/3mfysk3uxw22d): "_[Here is a new version of Mapton](https://github.com/trixon/mapton/releases)!, 'some kind of map application', built with Jva \& JavaFX on the Netbeans platform. Let's call this one the `MARKDOWN_HASHca329fd857db05db392388a1d1c2b7f9MARKDOWN`*HASH*. Enjoy!"
@@ -48,8 +48,8 @@ Applications {#h2-1-applications}
   * [Release of LumineLog 0.3.0](https://mstdn.gsi.li/@eitch/116285194315067384): "_A modern, cross-platform log viewer application built with JavaFX. It provides a real-time `MARKDOWN_HASHc21d50ccb3e2b0daf559d6015794f6a7MARKDOWN`*HASH* experience with powerful highlighting and multi-file support. As always, feedback is welcome. Feel free to [raise a ticket](https://github.com/eitch/LumineLog)."
 * [Message by **Robert Ladstätter**](https://bsky.app/profile/rladstaetter.bsky.social/post/3mhaoaaiw6s2k): "*Just released CameraApp on Windows and Linux appstores! [Check out this project](https://github.com/rladstaetter/CameraApp) which resurrects my old passion of doing work with JavaCV and JavaFX. This project can be used as a starting point for experiments with OpenCV and Java.*"
 
-Components, Libraries, Tools {#h2-2-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * **Frank Delporte** announced the first release of Lottie4J, a new Java(FX) library: "*With this library, you can load and parse LottieFiles animations as Java objects, and integrate them as a JavaFX animation component in your application. Watch [this video for more info](https://www.youtube.com/watch?v=6t1O7APENIo) or [read this blog](https://webtechie.be/post/2026-03-03-introducing-lottie4j/).* "
   * Followed by release V1.1.0 of [Lottie4J](https://github.com/lottie4j/lottie4j), a JavaFX player for LottieFiles animations. "*This release includes improved rendering and additional debugging tools. And of course, it also uses the new and animated Lottie4J logo for testing 😉* " All info and a video demonstration are available [on the website in the release notes](https://lottie4j.com/releases/).
@@ -60,23 +60,23 @@ Components, Libraries, Tools {#h2-2-components-libraries-tools}
 * **Dirk Lemmermann** announced: "*I created a new [website for GemsFX](https://dlsc-software-consulting-gmbh.github.io/GemsFX/) that will give you an idea which controls are available in this library.*"
 * [**Lee Wyatt** shared the new library CarouselFX](https://bsky.app/profile/leewyatt.bsky.social/post/3mhvd52wuks2u): "*A JavaFX carousel / slideshow component with 70+ built-in transition effects.* " [Demo on YouTube](https://www.youtube.com/watch?v=oFeuHs_HFwU) and [sources on GitHub](https://github.com/dlsc-software-consulting-gmbh/CarouselFX).
 
-Podcasts, Videos, Books {#h2-3-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * [GNUBSD404 Long N162 PacMan XXL (JavaFX Game) (Linux/FreeBSD)](https://www.youtube.com/watch?v=5T5DI23rJxE): "*This is another example of a "Quality" game on Linux made by some developers. THANKS ! to this developers is that Linux/FreeBSD gaming (and off course thanks to Valve and Steam) is alive!. The game is available on Linux andFreeBSD may work with OpenJDK or may require Linuxuator.*"
 * New video by **Helal Anwar** : [Student management app (Part 6)](https://www.youtube.com/watch?v=ZHnSynN5R3Y)
 * **Florian Enner** published a video demonstrating [HebiCharts](https://www.youtube.com/live/B5GT9XAcqB8): "*A 2D and 3D plotting library built in JavaFX with ChartFX, compiled as GraalVM native-image, and accessible from Python / C++ / MATLAB via idiomatic interface over a C ABI.*"
 
-Miscellaneous {#h2-4-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Robert Ladstätter** is experimenting with JavaFX 26 and shared a video](https://bsky.app/profile/rladstaetter.bsky.social/post/3mg3f6kort22e): "*Vibe coding an editable ToolBar for #JavaFX supporting drag'n drop for the editable Search Term Toolbar Feature. It is amazing how easy it is to implement such things with JavaFX. Looking forward to JavaFX26 which will be released soon.*"
 * [Interesting read by **SikorSky**](https://dev.to/sikorsky43/building-a-tcp-group-chat-app-with-javafx-and-maven-1e46): "*Building a Real-Time Group Chat with Java TCP Sockets and JavaFX. We recently implemented a mini project where the objective was to build a real-time group chat application using Java TCP sockets and JavaFX. This article summarizes the architecture, design decisions, and lessons learned during development.*"
 * [**Dirk Lemmermann**](https://bsky.app/profile/dlemmermann.bsky.social/post/3mgflg35sgc2u) "*did some more evaluation of GitHub Copilot CLI today and built a nice launcher app for my GemsFX open source project. The productivity I get out of this surpassed all my expectations.*"
 * [Post by Gluon](https://gluonhq.com/why-spend-a-week-on-a-bug-that-we-can-fix-in-an-hour/): "*We've all been there. You're working on a JavaFX application, and you hit that wall. Maybe it's a strange rendering glitch on a specific OS, a memory leak you can't pin down, or a performance bottleneck that only appears in production. You search the forums. You check Stack Overflow. You spend days tweaking code, hoping for a breakthrough. There is a faster way! To make it easier for teams to experience the value of expert support, we are introducing a one-time JavaFX Quick-Fix Package.*"
 
-JFX Central {#h2-5-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * New content on JFX Central:
   * Library: [Lottie4J](https://www.jfx-central.com/libraries/lottie4j)

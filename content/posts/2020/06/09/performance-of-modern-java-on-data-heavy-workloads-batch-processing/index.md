@@ -23,7 +23,7 @@ This post is a part of a series:
 * [Part 4 (concurrent GC with green threads)](https://foojay.io/today/sub-10-ms-latency-in-java-concurrent-gc-with-green-threads/)
 * [Part 5 (billion events per second)](https://foojay.io/today/billion-events-per-second-with-millisecond-latency/)
 
-### Batch Pipeline Benchmark {#h3-0-batch-pipeline-benchmark}
+### Batch Pipeline Benchmark
 
 A batch pipeline processes a finite amount of stored data. There are no running results, we need the output of the aggregate function applied to the entire dataset. This changes our performance requirements: the key factor in streaming, latency, doesn't exist here since we are not processing data in real time. The only metric that matters is the total run time of the pipeline.
 

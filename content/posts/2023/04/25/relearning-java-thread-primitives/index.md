@@ -44,8 +44,8 @@ There are many great APIs for working with threads which I discuss in the videos
 
 <br />
 
-Synchronized vs. ReentrantLock {#h2-0-synchronized-vs-reentrantlock}
---------------------------------------------------------------------
+Synchronized vs. ReentrantLock
+------------------------------
 
 A reluctance I had with leaving synchronized is that the alternatives aren't much better. The primary motivation to leave it today is that at this time synchronized can trigger thread pinning in Loom which isn't ideal. JDK 21 might fix this (when Loom goes GA), but it still makes some sense to leave it.
 
@@ -116,8 +116,8 @@ try(LOCK.lock()) {
 
 I like the reduced verbosity but this is a problematic concept since try-with-resource is designed for the purpose of cleanup and we reuse locks. It is invoking close but we will invoke that method again on the same object. I think it might be nice to extend the try with resource syntax to support the lock interface. But until that happens, this might not be a worthwhile trick.
 
-Advantages of ReentrantLock {#h2-1-advantages-of-reentrantlock}
----------------------------------------------------------------
+Advantages of ReentrantLock
+---------------------------
 
 The biggest reason for using `ReentrantLock` is Loom support. The other advantages are nice but none of them is a "killer feature".
 
@@ -129,8 +129,8 @@ It has the option of fairness. This means that it will serve the first thread th
 
 There are edge cases where this probably matters but not something most of us will run into, even when doing advanced multi-threaded code.
 
-ReadWriteReentrantLock {#h2-2-readwritereentrantlock}
------------------------------------------------------
+ReadWriteReentrantLock
+----------------------
 
 A much better approach is the `ReadWriteReentrantLock`. Most resources follow the principle of frequent reads and few write operations. Since reading a variable is thread safe there's no need for a lock unless we're in the process of writing to the variable. This means we can optimize reading to an extreme while making the write operations slightly slower.
 
@@ -174,8 +174,8 @@ public boolean isInList(String name) {
 ```
 
 
-StampedLock {#h2-3-stampedlock}
--------------------------------
+StampedLock
+-----------
 
 The first thing we need to understand about `StampedLock` is that it isn't reentrant. Say we have this block:
 
@@ -245,8 +245,8 @@ public void addName(String name) {
 
 It is a powerful optimization for these cases.
 
-Finally {#h2-4-finally}
------------------------
+Finally
+-------
 
 I cover many similar subjects in the video series above, check it out and let me know what you think.
 

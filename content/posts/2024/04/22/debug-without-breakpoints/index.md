@@ -36,8 +36,8 @@ which can be extremely powerful in some scenarios, including the ones described 
 
 We'll discuss its use-cases and limitations as well as discover the *secret stepping trick*.
 
-What Is Pause? {#h2-0-what-is-pause}
-------------------------------------
+What Is Pause?
+--------------
 
 **Pause** is a feature in IntelliJ IDEA's debugger that enables you to arbitrarily suspend your application at any given point of time. To use it, you don't have to be familiar with the application code. In fact, you can completely ignore it!
 
@@ -47,8 +47,8 @@ What Is Pause? {#h2-0-what-is-pause}
 
 To pause a program, click **Pause** on the debugger's toolbar. As a result, the program gets suspended right in the middle of what it is currently doing.
 
-Limitations {#h2-1-limitations}
--------------------------------
+Limitations
+-----------
 
 At first sight, a paused program may look exactly like the one that has been suspended at a breakpoint. However, this is only true to a certain extent.
 
@@ -58,12 +58,12 @@ At first sight, a paused program may look exactly like the one that has been sus
 
 It would be correct to consider **Pause** a sort of *thread dump plus* . You can still inspect variables and threads just as you typically would. However, some of the more advanced features, such as **Evaluate expression**, won't work.
 
-Use-cases {#h2-2-use-cases}
----------------------------
+Use-cases
+---------
 
 There are countless ways you can use **Pause** . Often, it can be used interchangeably with traditional breakpoints. But there are also scenarios where **Pause** fits better. Let's consider a couple of them.
 
-### Unresponsive apps {#h3-3-unresponsive-apps}
+### Unresponsive apps
 
 If you encounter a UI freeze, that's usually because the UI thread is blocked or doing something heavy. **Pause** might be useful in both those cases.
 
@@ -75,7 +75,7 @@ Pause the application while it is being unresponsive and examine the call stack 
 
 For a hands-on example of this scenario, see [Debug Unresponsive Apps](https://flounder.dev/posts/debug-unresponsive-apps/).
 
-### Missing sources {#h3-4-missing-sources}
+### Missing sources
 
 As I mentioned before, **Pause** allows you to ignore the source code. Actually, the source code might as well be completely missing for you! This scenario is not typical, but when you encounter it, breakpoints wouldn't be of any help.
 
@@ -87,7 +87,7 @@ As I mentioned before, **Pause** allows you to ignore the source code. Actually,
 
 For a hands-on example of this scenario, see [Debugger.godMode()](https://flounder.dev/posts/debugger-god-mode/).
 
-### Locks {#h3-5-locks}
+### Locks
 
 If you suspect a synchronization problem, such as a deadlock or a livelock, **Pause** might help you find exact threads and monitors that are causing the issue.
 
@@ -99,8 +99,8 @@ Pause the program and inspect the thread list. It will show which threads are bl
 
 By navigating to the execution point, you will also see the critical sections they are locked in. This information might guide you towards a solution.
 
-Secret Stepping Trick {#h2-6-secret-stepping-trick}
----------------------------------------------------
+Secret Stepping Trick
+---------------------
 
 As I pointed out earlier, **Pause** indeed limits your access to some of the advanced debugger features. Nevertheless, there is a workaround for this restriction.
 
@@ -108,8 +108,8 @@ After you have paused an application, proceed by performing any stepping action.
 
 All advanced features are now unlocked!
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 That's it for today! Hope you find these tips and tricks useful.
 

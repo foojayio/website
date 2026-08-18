@@ -18,13 +18,13 @@ enlighterjs: true
 frozen: false
 ---
 
-### **Introduction**: {#h3-0-introduction}
+### **Introduction**:
 
 Parameterized testing in JUnit 5 is a potent technique for executing the same test logic with various inputs. While you can use a variety of data structures, such as custom classes, arrays, or collections, Java records offer a compelling advantage in readability, type safety, and expressiveness.
 
 Let's examine how to leverage Java records for parameterized tests through a concrete example -- testing an expression evaluator.
 
-### The Expression Evaluator Scenario {#h3-1-the-expression-evaluator-scenario}
+### The Expression Evaluator Scenario
 
 Consider a simple expression evaluator capable of handling the following:
 
@@ -71,7 +71,7 @@ public class ExpressionEvaluator {
 ```
 
 
-### **Traditional Parameterized Test (with ArgumentsSource)** {#h3-2-traditional-parameterized-test-with-argumentssource}
+### **Traditional Parameterized Test (with ArgumentsSource)**
 
 Let's first look at how a parameterized test for this evaluator might be structured using the traditional [**ArgumentsSource**](https://junit.org/junit5/docs/5.10.2/api/org.junit.jupiter.params/org/junit/jupiter/params/provider/ArgumentsSource.html) method. This will give us a baseline to understand how records can streamline our tests.
 
@@ -117,7 +117,7 @@ class ExpressionEvaluatorTest {
 ```
 
 
-### **Refactoring with Records** {#h3-3-refactoring-with-records}
+### **Refactoring with Records**
 
 Now, let's see how we can improve the clarity and maintainability of our tests by introducing records.
 
@@ -179,7 +179,7 @@ void testEvaluateExpression(TestCase testCase) {
 ```
 
 
-### Benefits of the Record-Based Approach {#h3-4-benefits-of-the-record-based-approach}
+### Benefits of the Record-Based Approach
 
 Let's break down the key advantages of using records in this context:
 
@@ -188,7 +188,7 @@ Let's break down the key advantages of using records in this context:
 * **Flexible Outcome Handling:** The **Failure** record allows us to model various error scenarios, including associating a specific exception type with the failure.
 * **Pattern Matching:** Records and sealed interfaces make our test case logic more concise through the use of pattern matching or switch expressions
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 Records offer a compelling solution for structuring test cases in JUnit 5 parameterized tests.
 

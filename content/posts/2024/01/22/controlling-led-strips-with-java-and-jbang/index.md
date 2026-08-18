@@ -32,15 +32,15 @@ So, for instance, pauses in the garbage collection of the Java virtual machine, 
 
 In my search for a good solution to use LED strips with Java, I stumbled on the Pixelblaze Output Expander. This small device is controlled through a serial interface, and handles the control of the LED strip. As it turns out, this is a perfect solution to offload the timing-critical operations from the Raspberry Pi and have reliable output on a LED strip.
 
-Video Explanation {#h2-0-video-explanation}
--------------------------------------------
+Video Explanation
+-----------------
 
 Based on the created example code and documentation on the Pi4J website, Robert von Burg and I did a live stream to explain the approach and walk through the code.
 
 {{< youtube eToIXACqSuY >}}
 
-How LED Strips Work {#h2-1-how-led-strips-work}
------------------------------------------------
+How LED Strips Work
+-------------------
 
 The LED strips used in the examples of this post, contain LEDs of the WS2812B type, which means they have SMD 5050-LEDs with an integrated IC-driver, so they can be addressed separately.
 
@@ -75,14 +75,14 @@ Again, the second LED will take the first 3 values and output the remaining part
 
 For this system to work correctly, a strict timing of the data signal is needed. Otherwise the IC will handle parts of the data as being a new package, and you'll get unexpected results.
 
-About the Pixelblaze {#h2-2-about-the-pixelblaze}
--------------------------------------------------
+About the Pixelblaze
+--------------------
 
 The Pixelblaze is a product created by [ElectroMage](https://electromage.com/), with the aim to bring the creation of art, costumes, celebrations, and maker projects to a whole new level. Their two basic components, the "Pixelblaze V3 Standard - WiFi LED Controller" and "Pixelblaze V3 Pico - Tiny WiFi LED Controller" are Wi-Fi-enabled, live-codable LED controllers with a web-based development environment. Fifty light patterns are included, and over 200 more are shared in a community library.
 
 But a third product by ElectroMage is the one that caught my attention to use with a Java application: the "Pixelblaze Output Expander" (PBOE). It is designed to expand output options for the other two Pixelblaze boards, but it can also be driven by just about any other microcontroller or computer over serial UART. The ideal solution for an experiment with Java, JBang and the Raspberry Pi!
 
-### Wiring {#h3-3-wiring}
+### Wiring
 
 To control the PBOE, we actually only need one wire to be connected to the Raspberry Pi (RPi) for the serial data to be sent from RPi to PBOE. But we must not forget one important fact: a LED strip with a lot of LEDs will require more power than the RPi can supply.
 
@@ -116,20 +116,20 @@ The following pictures show you the connections with one LED strip on channel 0 
  </figure>
 </figure>
 
-Sample Application {#h2-4-sample-application}
----------------------------------------------
+Sample Application
+------------------
 
 Although the [sources used in this post are part of the Pi4J GitHub repository](https://github.com/Pi4J/pi4j-jbang), no Pi4J library is used in this example!
 
 Remember, the [Pi4J project is more than just a library](https://pi4j.com/), it wants to be the starting point for everyone who wants to experiment with Java and electronics on the Raspberry Pi.
 
-### JBang {#h3-5-jbang}
+### JBang
 
 To simplify the use of the examples, [JBang](https://www.jbang.dev/) is used, so no full Maven or Gradle project is needed, and the code can be executed with a single command.
 
 On the [Pi4J website, a full description](https://pi4j.com/examples/jbang/) is provided with more information about JBang and how to install it on a Raspberry Pi.
 
-### PixelBlazeOutputExpanderHelper {#h3-6-pixelblazeoutputexpanderhelper}
+### PixelBlazeOutputExpanderHelper
 
 The various examples share the same helper-class to send commands to the PBOE. This class takes care of the serial communication between the RPi and the PBOE, hiding most of the "complexity" and provides a few public methods to clear a LED strip or send a byte array with colors.
 
@@ -153,7 +153,7 @@ public void closePort() {
 ```
 
 
-### PixelblazeOutputExpander Example Application {#h3-7-pixelblazeoutputexpander-example-application}
+### PixelblazeOutputExpander Example Application
 
 This is the main demo application that is configured to control three different LED strips:
 
@@ -291,8 +291,8 @@ Closing /dev/ttyS0
 ```
 
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 This is only a short introduction, the [Pi4J website offers more detailed information and extra examples](https://pi4j.com/examples/jbang/), including the use of LED matrixes and a JavaFX user interface to define the colors being displayed on a LED strip.
 

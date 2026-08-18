@@ -31,8 +31,8 @@ Hours were spent dialing these numbers, leading us to make numerous calls for fr
 
 <br />
 
-IDOR {#h2-0-idor}
------------------
+IDOR
+----
 
 In the digital world, IDOR is similar to our teen exploits. It means trying various ID numbers in sequence until we find the right one. A few years ago, a social network named Parler, which listed users by a sequential numeric ID, fell victim to this type of attack when a user was able to request and download the full list of users on that network.
 
@@ -44,8 +44,8 @@ To avoid such an attack, it is advised not to expose guessable or sequential num
 
 I won't go into these since they are typically implemented in the API gateway layer during provisioning. You can write this in code but it's a challenging task as you might have many endpoints with a great deal of complexity. The rule of thumb is to write as little code as you possibly can, more code means more bugs and a wider attack surface for a malicious hacker.
 
-Vulnerabilities and Exploits {#h2-1-vulnerabilities-and-exploits}
------------------------------------------------------------------
+Vulnerabilities and Exploits
+----------------------------
 
 A crucial term in application security is **vulnerability** . It's a weakness or bug that can be likened to a hole in the fence surrounding your house. These vulnerabilities can reside in your code, libraries, Java itself, the operating system, or even physical hardware. However, not every vulnerability is **exploitable**. Just like a hole in your fence may not necessarily grant access to your house, vulnerabilities don't always mean your code can be hacked. Our aim is to plug as many holes as possible to make the task of exploiting our system more difficult.
 
@@ -53,8 +53,8 @@ I know the onion metaphor is tired by now but for security it makes a lot of sen
 
 The Log4Shell vulnerability relied on people logging information without validating it first. This was a bad practice before the vulnerability was known. If you used a Log4J version that had that vulnerability, but sanitized your data. You would have been safe despite that vulnerability.
 
-SQL Injection {#h2-2-sql-injection}
------------------------------------
+SQL Injection
+-------------
 
 SQL injection involves building your own queries by concatenating a query string manually. Let's look at vulnerable SQL like this:
 
@@ -82,15 +82,15 @@ sql.setString(1, id);
 
 In this situation when we set the value for the id it will treat it as a string even if there are SQL keywords or special characters. Using APIs like JPA (Spring Data, Hibernate, etc.) will also protect you from SQL injection when using similar APIs.
 
-Serialization {#h2-3-serialization}
------------------------------------
+Serialization
+-------------
 
 Java serialization is another common vulnerability. The lesson here is to avoid using serialization or requiring it, and instead running your app with a filter that blocks certain types of serialization.
 
 This is something I [discussed in a previous post](https://debugagent.com/java-serialization-filtering-prevent-0-day-security-vulnerabilities) so there's no point repeating it.
 
-Cross-site Scripting (XSS) {#h2-4-cross-site-scripting-xss}
------------------------------------------------------------
+Cross-site Scripting (XSS)
+--------------------------
 
 Cross-site scripting, or XSS, is a complex attack. It involves injecting malicious scripts into websites that then run on every person's browser visiting the page. This can lead to theft of user cookies, which in turn allows the attacker to impersonate users on the website. Protecting against XSS involves validating user-supplied data, treating it as display content, not executable code.
 
@@ -112,18 +112,18 @@ personName = Jsoup.clean(personName, Whitelist.basic());
 
 Notice that validating input is a recurring theme when it comes to security vulnerabilities. As developers we often strive to provide the most generic and flexible tooling, this works against us when it comes to security vulnerabilities. It's important to limit input options even when we don't see a problem.
 
-### Content-Security-Policy (CSP) {#h3-5-content-security-policy-csp}
+### Content-Security-Policy (CSP)
 
 One of the ways to carry out an XSS attack is by including foreign code into our own website. One way to block this is using special HTTP headers to define which sites can include our site. This is a rather elaborate process but the nice thing is that Spring Security handles that nicely for us as well.
 
-### HttpOnly Cookies {#h3-6-httponly-cookies}
+### HttpOnly Cookies
 
 Cookies can be created in the browser using JavaScript. This is a bad practice. Ideally, cookies should always come from the server and be marked as HTTP only (and HTTPS only). This blocks JavaScript code from accessing the cookie.
 
 That means that even if a script is added somehow or a bad link is clicked, it won't have access to the cookie value. This mitigates XSS attacks so even if your site vulnerable the attack can't steal the cookie. We can enable HttpOnly cookies when we set the cookie in the server code.
 
-Unvalidated Redirects and Forwards {#h2-7-unvalidated-redirects-and-forwards}
------------------------------------------------------------------------------
+Unvalidated Redirects and Forwards
+----------------------------------
 
 Another security concern is unvalidated redirects and forwards. Here, an attacker creates a URL that looks like it's coming from your domain, but redirects to another malicious site. The solution lies in validating and restricting included or submitted URLs, and never sending users blindly to third-party sites.
 
@@ -133,13 +133,13 @@ The problem is that a person can create a URL that looks like it's coming from o
 
 The solution is to validate and restrict included or submitted URLs and never send a user blindly to a third-party site.
 
-Server Side Request Forgery (SSRF) {#h2-8-server-side-request-forgery-ssrf}
----------------------------------------------------------------------------
+Server Side Request Forgery (SSRF)
+----------------------------------
 
 SSRF attacks are similar conceptually, in these attacks our server performs a request based on the request we received. Our server can be manipulated to request arbitrary URLs for an attacker. This can serve as the basis for information theft, denial of service attacks, etc.
 
-Cross-Site Request Forgery (CSRF) {#h2-9-cross-site-request-forgery-csrf}
--------------------------------------------------------------------------
+Cross-Site Request Forgery (CSRF)
+---------------------------------
 
 CSRF is another challenging issue where an attacker tricks users into hacking their own account. Typically, we're logged into a website. Our credentials and cookies are already set. If a different website knows we're logged in to a website it can trick us and get us to hack ourselves...
 
@@ -153,8 +153,8 @@ The standard solution is to add a server-generated token into the HTML that chan
 
 We can also set our cookies to the SameSite policy which will mean a user won't be logged in if he's on a separate site. Turning this on for your login information is probably a good idea.
 
-Final Word {#h2-10-final-word}
-------------------------------
+Final Word
+----------
 
 In conclusion, while we did not delve into a lot of code writing in this post, the objective was to shed light on common security vulnerabilities and attacks, and how to prevent them. Understanding these concepts is fundamental in building secure applications, and the more we're aware, the better equipped we are to thwart potential threats.
 

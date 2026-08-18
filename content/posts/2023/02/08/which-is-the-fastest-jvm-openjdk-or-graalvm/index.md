@@ -26,7 +26,7 @@ Every nanosecond counts for trading and other applications where messages betwee
 
 Read this article and find out which JDK variant comes out at the top!
 
-### Benchmarks {#h3-0-benchmarks}
+### Benchmarks
 
 This article will use open-source [Chronicle Queue](https://bit.ly/3wWnXy8) to exchange 256-byte messages between two threads whereby all messages are also stored in shared memory (/dev/shm is used to minimise the impact of the disk subsystem).
 
@@ -36,7 +36,7 @@ In the benchmarks, a single producer thread writes messages to a queue with a na
 
 The target machine has an AMD Ryzen 9 5950X 16-Core Processor running at 3.4 GHz under Linux 5.11.0-49-generic #55-Ubuntu SMP. The CPU cores 2-8 are isolated, meaning the operating system will not automatically schedule any user processes and will avoid most interrupts on these cores.
 
-### The Java Code {#h3-1-the-java-code}
+### The Java Code
 
 Below, parts of the inner loop of the producer is shown:
 
@@ -106,7 +106,7 @@ try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
 
 As can be seen, the consumer thread will read each nano timestamp and record the corresponding latency in an array. These timestamps are later put in a histogram which is printed when the benchmark completes. Measurements will start only after the JVM has warmed up properly and the C2 compiler has JIT:ed the hot execution path.
 
-### JVM Variants {#h3-2-jvm-variants}
+### JVM Variants
 
 [Chronicle Queue](https://bit.ly/3wWnXy8) officially supports all the recent LTS versions: Java 8, Java 11, and Java 17, and so these will be used in the benchmarks. We will also use the GraalVM community and enterprise edition. Here is a list of the specific JVM variants used:
 
@@ -114,7 +114,7 @@ As can be seen, the consumer thread will read each nano timestamp and record the
 
 *Table 1. Shows the specific JVM variants used.*
 
-### Measurements {#h3-3-measurements}
+### Measurements
 
 As 100,000 messages per second are produced, and the benchmarks run for 100 seconds, there will be 100,000 \* 100 = 10 million messages sampled during each benchmark. The histogram used places each sample in a certain percentile: 50% (median), 90%, 99%, 99.9% etc. Here is a table showing the total number of messages received for some percentiles:
 
@@ -124,7 +124,7 @@ As 100,000 messages per second are produced, and the benchmarks run for 100 seco
 
 Assuming a relatively small variance of the measurement values, the confidence interval is likely reasonable for percentiles up to 99.99%. The percentile 99.999% probably requires gathering data for at least half an hour or so rather than just 100 seconds to produce any figures with a reasonable confidence interval.
 
-### Benchmarks Results {#h3-4-benchmarks-results}
+### Benchmarks Results
 
 For each Java variant, the benchmarks are run like this:
 
@@ -183,13 +183,13 @@ Here is another graph showing latencies for the 99.99% percentile for the variou
 
 *Graph 2. Shows the 99.99% percentile latency \[ns\] for the various JDK variants.*
 
-### Conclusions {#h3-5-conclusions}
+### Conclusions
 
 In my opinion, the latency figures of Chronicle Queue are excellent. Accessing 64-bit data from main memory takes about 100 cycles (which corresponds to about 30 ns on current hardware). The code above has some logic that has to be executed. Additionally, Chronicle Queue obtains data from the producer, persists data (writes to a memory-mapped file), applies appropriate memory fencing for inter-thread communication and happens-before guarantees, and then makes data available to the consumer. All this typically happens around 600 ns for 256 bytes compared to the single 64-bit memory access at 30 ns. Very impressive indeed.
 
 OpenJDK 17 and GraalVM EE 17 seem to be the best choices for this application, providing the best latency figures. Consider using GraalVM EE 17 over OpenJDK 17 if outliers need to be suppressed or if you really need the lowest possible overall latency.
 
-### Resources {#h3-6-resources}
+### Resources
 
 Open-source [Chronicle Queue](https://bit.ly/3wWnXy8 "Chronicle Queue")
 

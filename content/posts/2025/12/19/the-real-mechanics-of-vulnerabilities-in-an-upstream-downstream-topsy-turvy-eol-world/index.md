@@ -14,7 +14,7 @@ related_posts:
 frozen: false
 ---
 
-### In this article you'll learn {#h3-0-in-this-article-you-ll-learn}
+### In this article you'll learn
 
 * Why CVEs record that a vulnerability exists, not that a usable fix exists
 * How vulnerabilities are often discovered and fixed downstream before upstream ever acknowledges them
@@ -22,13 +22,13 @@ frozen: false
 * How downstream-only patches break the assumptions scanners and SBOMs rely on
 * What disclosure actually enables when "just upgrade" is not a viable option
 
-### Introduction {#h3-1-introduction}
+### Introduction
 
 There is a tidy, almost academic version of how software security is supposed to work. It appears in conference talks, compliance documents and in the cheerful diagrams seen on marketing slides. It usually looks something like this:
 
 A researcher finds a bug, tells upstream, upstream patches it, a CVE appears, downstream maintainers pull the fix, scanners notice, defenders patch, and the world stays mostly ok. A few poor souls miss the memo, and of course, the bad guys get yet another weapon to add to their arsenal.
 
-### What this article is about {#h3-2-what-this-article-is-about}
+### What this article is about
 
 If that were truly how things worked, I wouldn't be here writing about downstream-only fixes, silent patches, or security issues that exist in one place and vanish in another. But the real world has a different rhythm and one that is increasingly being *disturbed* - and everyone needs to know.
 
@@ -44,13 +44,13 @@ You can have a CVE for software that is unmaintained, unpatchable, obsolete, uns
 
 As an important aside, the CVE can be rejected. *Working-as-designed* is an often quoted reason. In that case, the CVE gets formally marked "rejected". It doesn't get fixed, but it sits in the system. A little waving red flag for the bad guys to review and maybe exploit. Working-as-designed doesn't always mean "safe".
 
-### **Back in the real world** {#h3-3-back-in-the-real-world}
+### **Back in the real world**
 
 The process of finding and fixing vulnerabilities is stuttering and developing arrhythmia. The patterns of old are being replaced by ones shaped by exhaustion, understaffing, commercial pressure, legacy systems that never die, and codebases that 'outlive' the people who wrote them.
 
 Once you look honestly at how this system actually behaves, what's happening today. What you might call the *downstream-fix / upstream-blind* problem, stops looking shocking and starts looking inevitable.
 
-### Code Flows {#h3-4-code-flows}
+### Code Flows
 
 To understand anything in this article, you have to start with the software supply chain itself and how *code flows*.
 
@@ -58,13 +58,13 @@ The terms **"Upstream"** and **"Downstream"** are often used to describe the flo
 
 Downstream organisations take code from upstream and may fork, modify, package, or distribute it, placing them further along the supply chain.
 
-### A different type of waterfall {#h3-5-a-different-type-of-waterfall}
+### A different type of waterfall
 
 The terms **"Upstream"** and **"Downstream"** suggest a calm river: water flowing neatly from one point to another. In practice, for popular projects, it's more like a vast delta with rapids and the occasional waterfall. The code spreads, splits, branches, gets repackaged, embedded, wrapped, containerised, and shipped out into the world in directions nobody can fully track.
 
 A component like Apache Tomcat is a perfect example. It exists as the official Apache distribution, yes, but also inside enterprise servers, inside product bundles, inside Spring Boot JARs, inside appliances, inside internal systems last touched in 2017, inside the developer's local install, and in a thousand places between. It becomes part of the ecosystem in a way that is both powerful and almost impossible to map fully.
 
-### Unpredictable as the weather? {#h3-6-unpredictable-as-the-weather}
+### Unpredictable as the weather?
 
 That sprawling micro-ecosystem is precisely where and how vulnerabilities emerge. Not neatly and systematically, but in sideways, unpredictable ways.
 
@@ -74,7 +74,7 @@ More often, a vulnerability first surfaces in a downstream fork, or it's uncover
 
 In other words, the first person to see a vulnerability is very often someone far from the upstream project.
 
-### The idealised workflow {#h3-7-the-idealised-workflow}
+### The idealised workflow
 
 That's where the disclosure process is meant to kick in. In the ideal world, the discoverer quietly contacts upstream (*please don't publish it to the world)*, upstream acknowledges, a patch is worked out, a CVE is assigned, and everything proceeds as it should.
 
@@ -84,7 +84,7 @@ When a vulnerability appears in an End-of-Life upstream, like Tomcat 8.5, nobody
 
 Now imagine you're a downstream vendor. You support customers running Tomcat 8.5 on your fork (remember the delta analogy) because their workloads can't simply jump to Tomcat 9. You discover a vulnerability. You know it exists in code originally taken from upstream Tomcat. You fix it in your fork. You do the right thing for your customers.
 
-### The ethics of vulnerability patching {#h3-8-the-ethics-of-vulnerability-patching}
+### The ethics of vulnerability patching
 
 Now you face the real dilemma: **do you tell upstream?**
 
@@ -98,13 +98,13 @@ Attackers are not relying on CVE databases. Attackers are much, much more sophis
 
 They diff patches. They fuzz older codebases. They target EOL systems precisely because they know nobody is watching.
 
-### Unreported is not safe {#h3-9-unreported-is-not-safe}
+### Unreported is not safe
 
 A silent vulnerability is not safer than a disclosed one: it is just more profitable for attackers. The only people kept in the dark by silence are defenders, auditors, and the teams desperately trying to keep unmaintained systems alive long enough to migrate them.
 
 This is the real ethical bottom line: disclosure does not create risk; it distributes knowledge of the risk to the people who need it. The vulnerability is already present and likely known. The attackers already have the upper hand. The only thing disclosure changes is that defenders can finally see the problem too.
 
-### Downstream's responsibility to the ecosystem {#h3-10-downstream-s-responsibility-to-the-ecosystem}
+### Downstream's responsibility to the ecosystem
 
 And this is why downstream vendors have a deeper responsibility than most realise.
 
@@ -114,7 +114,7 @@ Upstream may not fix it. Nobody is suggesting they must. But the ecosystem needs
 
 This becomes painfully clear when you remember that, in our example, Apache Tomcat ( including forks varients and versions that are End-of-Life ) is everywhere. Not because people love running outdated servers, but because it has been embedded in frameworks, enterprise products, appliances, Spring Boot applications that "just work," and internal systems that never got migrated after the architect left.
 
-### End of Life software is everywhere {#h3-11-end-of-life-software-is-everywhere}
+### End of Life software is everywhere
 
 An EOL project can still be foundational. In fact, EOL projects are often foundational because nobody touches them when they work well.
 
@@ -124,13 +124,13 @@ In an ideal world, the vendor notifies upstream anyway. Upstream acknowledges th
 
 Everyone gets to act. Nobody stays blind.
 
-### The peril of downstream silence {#h3-12-the-peril-of-downstream-silence}
+### The peril of downstream silence
 
 But when downstream maintainers (especially of forked variants ) remain silent; when the vulnerability is fixed in one place and remains unacknowledged or just "noted" everywhere else, then you get the worst possible outcome.
 
 Upstream knows nothing. Defenders see nothing. SBOMs misrepresent reality. Vulnerability scanners report "no known issues." Legacy systems continue running with a false sense of safety. And attackers who grok the downstream patch now hold precious knowledge of a vulnerability that won't be fixed.
 
-### How the world works {#h3-13-how-the-world-works}
+### How the world works
 
 None of this is malice. It's not incompetence. It is simply what happens when the system relies on people voluntarily and consistently doing the right thing across dozens of organisations, time zones, codebases, and priorities.
 
@@ -138,7 +138,7 @@ The truth is that nothing in the ecosystem enforces upstream notification. It ha
 
 The entire system works only if everyone believes disclosure helps defenders more than attackers --- which it does.
 
-### Summary {#h3-14-summary}
+### Summary
 
 If there's one lesson from the downstream-patch / upstream-silence dynamic, it's this: **silence is the real exposure**.
 
@@ -152,6 +152,6 @@ If we want a safer and more predictable world, the answer isn't silence or secre
 
 **CVEs dont work the way you think - but I wish they did**
 
-### Next time {#h3-15-next-time}
+### Next time
 
 In the next article I'll explore an important case study and show just how messy CVE reporting, fixing, and discovery can be.

@@ -27,13 +27,13 @@ What is interesting to note is none of these vulnerabilities is due to the poor 
 
 For the sake of this article, the vulnerabilities that can come out of insecure coding practices are discounted and the focus is on the third-party libraries as highlighted in the Datadog report. This article explores the factors that contribute to Java's vulnerability, delves into how third-party libraries can become hidden security risks and looks at how to mitigate those risks.
 
-### Delving into the complexity {#h3-0-delving-into-the-complexity}
+### Delving into the complexity
 
 One of the reasons why Java applications score so high on the vulnerability index is due to the reliance on a vast network of interconnected open-source components that are a key part of the java eco system. These can be frameworks (Spring, Hibernate, Struts, Log4J), build tools (Ant, Maven and Gradle), application servers (Tomcat, WildFly, Jetty) and even JDK and JVMs. Each of these libraries has further dependencies, which are indirectly added to the java application and and the result is a huge threat surface.
 
 While these libraries offer valuable functionality and save valuable development time, they also introduce potential points of weakness. Each library, with its own codebase and dependencies, expands the attack surface of the application. As the number of libraries increases, so does the complexity of managing and securing them. A single vulnerability in a seemingly minor dependency can cascade through the entire system, compromising the security of the whole application.
 
-### Transitive Dependencies {#h3-1-transitive-dependencies}
+### Transitive Dependencies
 
 The issue of complexity is further exacerbated by the concept of transitive dependencies. When a Java project includes a library, it often automatically pulls in other libraries that the original library depends on. These indirect dependencies, known as transitive dependencies, can be numerous and difficult to track. Most developers might not even be aware of all the libraries hiding beneath the surface of their code. This lack of visibility makes it challenging to assess the security posture of each component and apply timely patches.
 
@@ -43,7 +43,7 @@ A prime example is the 2021 Log4J vulnerability \[10\], which exposed a critical
 
 While upgrading Log4j itself might appear straightforward, the reality for many organisations is far more nuanced. In projects utilising older versions of dependent components, a simple library upgrade could trigger a cascade of compatibility issues, potentially necessitating updates across the entire interconnected ecosystem. This ripple effect can lead to significant disruptions, requiring extensive testing and validation to ensure the application's stability and functionality. In such cases, what seems like a routine patch can quickly escalate into a complex and time-consuming endeavour. These findings highlight the urgent need for more effective dependency management and quicker vulnerability remediation to protect against evolving threats.
 
-### Challenges in Maintenance and Dependency Management {#h3-2-challenges-in-maintenance-and-dependency-management}
+### Challenges in Maintenance and Dependency Management
 
 Recent analyses highlight a concerning trend in the maintenance of open-source projects. Reports indicate that nearly 20% of open-source java projects maintained in 2022 are no longer being updated in 2023. This decline in maintenance significantly increases the vulnerability of these projects to security exploitation.
 
@@ -51,13 +51,13 @@ The 2024 Open-Source Security and Risk Analysis Report by Synopsys \[5\] sheds m
 
 This situation, therefore, impacts security and impedes modernisation efforts.
 
-### Cognitive Overload on Developers {#h3-3-cognitive-overload-on-developers}
+### Cognitive Overload on Developers
 
 But why can't development teams just bump the version to the latest and solve the problem? Often, the reason lies in the complexity of dependencies. In a Java eco system, upgrading a library is not always straightforward due to potential compatibility issues with other dependent components, which can lead to extensive retesting and refactoring of existing code. We have noticed that development teams are already stretched thin juggling multiple responsibilities from new feature development to bug fixing and performance optimisation.
 
 Adding the task of constantly monitoring and updating dependencies can lead to burnout and mistakes, further exacerbating the security risks. Convincing the business to support an extensive library upgrade can be an uphill task, as it requires significant time and investment without immediate visible benefits. This highlights the critical need for proactive dependency management and regular security audits to mitigate these risks and maintain a robust security posture. Regular updates and vigilant oversight are essential to prevent the security vulnerabilities that come with outdated dependencies.
 
-### Recommendations for Mitigation {#h3-4-recommendations-for-mitigation}
+### Recommendations for Mitigation
 
 To mitigate these risks, it's crucial to adopt best practices for dependency management
 
@@ -67,7 +67,7 @@ To mitigate these risks, it's crucial to adopt best practices for dependency man
 * **Minimise Dependencies.** Use only necessary libraries to reduce the attack surface. Consider using lightweight or distroless container images to limit potential vulnerabilities.
 * **Security Training.** Provide regular training for development teams on secure coding practices and the importance of dependency management. Encourage a culture of security awareness and proactive vulnerability management.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 The growing complexity of Java applications, primarily due to the extensive use of third-party libraries and transitive dependencies, poses significant security challenges.
 
@@ -92,7 +92,7 @@ Don't let your Java services be the weak link in your security chain. Partner wi
 
 [Contact us](https://shiftleft.today/contact "Contact us") today to learn how we can help you secure your Java applications and protect your business from potential exploits.
 
-### References {#h3-6-references}
+### References
 
 * <https://www.zdnet.com/article/only-5-5-of-all-vulnerabilities-are-ever-exploited-in-the-wild/>
 * <https://www.datadoghq.com/state-of-devsecops/>

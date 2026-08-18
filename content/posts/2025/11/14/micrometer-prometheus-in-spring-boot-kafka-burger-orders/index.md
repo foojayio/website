@@ -91,8 +91,8 @@ This pattern is common: REST → Kafka → Consumer → Metric. Spring Kafka mak
 
 Spring initializer for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-attachment-121484}
 
-1) Expose a Counter with Tags (Micrometer) {#h2-0-1-expose-a-counter-with-tags-micrometer}
-------------------------------------------------------------------------------------------
+1) Expose a Counter with Tags (Micrometer)
+------------------------------------------
 
 ```java
 package com.vv.burger.config;
@@ -131,8 +131,8 @@ public class MetricsConfig {
 
 🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪
 
-2) REST Controller → Produce to Kafka {#h2-1-2-rest-controller-produce-to-kafka}
---------------------------------------------------------------------------------
+2) REST Controller → Produce to Kafka
+-------------------------------------
 
 ```java
 package com.vv.burger.controller;
@@ -209,8 +209,8 @@ public class OrderController {
 
 🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪
 
-3) Kafka Consumer → Count "DukeBurger" {#h2-2-3-kafka-consumer-count-dukeburger}
---------------------------------------------------------------------------------
+3) Kafka Consumer → Count "DukeBurger"
+--------------------------------------
 
 ```java
 package com.vv.burger.consumer;
@@ -307,8 +307,8 @@ public class ConsumerApp {
 
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪
 
-4) Avro Bytes → Object (utility) {#h2-3-4-avro-bytes-object-utility}
---------------------------------------------------------------------
+4) Avro Bytes → Object (utility)
+--------------------------------
 
 ```java
 package com.vv.burger.consumer;
@@ -417,8 +417,8 @@ You just wired **Micrometer and Prometheus in Spring Boot** around a Kafka flow 
 
 
 
-References {#h2-4-references}
------------------------------
+References
+----------
 
 * Micrometer docs and Prometheus registry overview. [Micrometer Application Observability+1](https://micrometer.io/docs/)
 * Spring Boot Actuator metrics. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)

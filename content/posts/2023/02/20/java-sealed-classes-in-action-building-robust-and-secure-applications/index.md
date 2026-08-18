@@ -39,7 +39,7 @@ There are plenty of other use cases where the sealed class can be used to make o
 
 So let's go for a deep dive!
 
-### Creating a Closed Type Hierarchy {#h3-0-creating-a-closed-type-hierarchy}
+### Creating a Closed Type Hierarchy
 
 Sealed classes can create a closed-type hierarchy, a limited set of classes that cannot be extended or implemented outside a particular package.
 
@@ -66,7 +66,7 @@ In this example, Animal is a sealed class that only permits Cat and Dog to exten
 
 Any other attempt to extend Animal will result in a compilation error.
 
-### Creating a Limited Set of Implementations {#h3-1-creating-a-limited-set-of-implementations}
+### Creating a Limited Set of Implementations
 
 Sealed classes can also create a limited set of implementations for a specific interface or abstract class. This ensures that the interface or abstract class owners can control and change the set of implementations.
 
@@ -89,7 +89,7 @@ In this example, Shape is a sealed interface that only permits Circle and Square
 
 This ensures that any other implementations of Shape cannot be created.
 
-### Enhancing Pattern Matching in switch Statements {#h3-2-enhancing-pattern-matching-in-switch-statements}
+### Enhancing Pattern Matching in switch Statements
 
 Sealed classes can also be used to enhance pattern matching in switch statements.
 
@@ -125,7 +125,7 @@ The processPayment method in the PaymentProcessor class uses a switch statement 
 
 Using a sealed class ensures that all possible subtypes are covered in the switch statement, making it less error-prone.
 
-### Implementing a State Machine {#h3-3-implementing-a-state-machine}
+### Implementing a State Machine
 
 Sealed classes can be used to implement a state machine, a computational model that defines the behaviour of a system in response to a series of inputs. In a state machine, each state is represented by a sealed class, and the transitions between states are modelled by methods that return a new state.
 
@@ -156,7 +156,7 @@ The transition method is responsible for transitioning between states based on t
 
 The use of sealed classes ensures that the state machine is well-defined and can only be extended with a limited set of classes.
 
-### Creating a Limited Set of Exceptions {#h3-4-creating-a-limited-set-of-exceptions}
+### Creating a Limited Set of Exceptions
 
 Sealed classes can also create a limited set of exceptions that can be thrown by a method. This can help enforce a consistent set of error conditions and prevent the creation of arbitrary exception types.
 
@@ -179,7 +179,7 @@ In this example, DatabaseException is a sealed class that permits ConnectionExce
 
 This ensures that any exception thrown by a method related to a database operation is a well-defined type and can be handled consistently.
 
-### Controlling Access to Constructors {#h3-5-controlling-access-to-constructors}
+### Controlling Access to Constructors
 
 Sealed classes can also control access to constructors, which can help enforce a specific set of invariants for the class.
 
@@ -220,7 +220,7 @@ The constructors for Child and Adult are marked as public, but the constructor f
 
 This enables the Person to enforce the invariant that children must be under 18 years old and adults must be 18 years old or older.
 
-### Improving Code Security {#h3-6-improving-code-security}
+### Improving Code Security
 
 Sealed classes can also improve code security by ensuring that only trusted code can extend or implement them. This can help prevent unauthorized access to sensitive parts of the codebase.
 
@@ -245,7 +245,7 @@ In this example, SecureCode is a sealed class that only permits TrustedCode to e
 
 This ensures that only trusted code can access the sensitive parts of the codebase.
 
-### Enabling Polymorphism with Exhaustive Pattern Matching {#h3-7-enabling-polymorphism-with-exhaustive-pattern-matching}
+### Enabling Polymorphism with Exhaustive Pattern Matching
 
 Sealed classes can also be used to enable polymorphism with exhaustive pattern matching.
 
@@ -277,7 +277,7 @@ In this example, Shape is a sealed class that permits Circle and Square to exten
 
 The drawShape method uses pattern matching to draw the shape, ensuring that all possible subtypes of Shape are covered in the switch statement.
 
-### Enhancing Code Readability {#h3-8-enhancing-code-readability}
+### Enhancing Code Readability
 
 Sealed classes can also be used to enhance code readability by clearly defining the set of possible subtypes.
 
@@ -306,7 +306,7 @@ In this example, Fruit is a sealed class that permits Apple, Banana, and Orange 
 
 This clearly defines the set of possible fruits and enhances code readability by making the code easier to understand.
 
-### Enforcing API Contracts {#h3-9-enforcing-api-contracts}
+### Enforcing API Contracts
 
 Sealed classes can also be used to enforce API contracts, which are the set of expectations that consumers of an API have regarding its behavior.
 
@@ -335,7 +335,7 @@ In this example, Vehicle is a sealed class that permits Car, Truck, and Motorcyc
 
 By using a sealed class to define the set of possible vehicle types, API providers can ensure that the API contract is well-defined and enforceable.
 
-### Preventing Unwanted Subtype Extensions {#h3-10-preventing-unwanted-subtype-extensions}
+### Preventing Unwanted Subtype Extensions
 
 Finally, sealed classes can also be used to prevent unwanted subtype extensions.
 
@@ -369,7 +369,7 @@ Two final classes, `CreditCard` and `DebitCard`, are defined as subtypes of `Pay
 
 However, a third class, `StolenCard`, is defined as a subtype `PaymentMethod` outside the file. Since the `PaymentMethod` class is sealed, it cannot be extended by this unauthorized subtype, and a compiler error will be generated.
 
-### Enhancing Type Safety of Collections {#h3-11-enhancing-type-safety-of-collections}
+### Enhancing Type Safety of Collections
 
 Sealed classes can also enhance the type safety of collections, which are a fundamental part of the Java language.
 
@@ -407,7 +407,7 @@ In this example, animal is a List of elements that extend the Animal interface.
 
 Because Animal is a sealed interface, the set of possible elements in the list is well-defined and type-safe.
 
-### Facilitating API Evolution {#h3-12-facilitating-api-evolution}
+### Facilitating API Evolution
 
 Sealed classes can also facilitate API evolution, which is updating an API to add or remove features.
 
@@ -442,7 +442,7 @@ This ensures that API changes are compatible with existing code and can help mai
 
 Here are a few more concrete and real-life examples of how sealed classes can be used in Java development:
 
-### Representing Different Types of Messages {#h3-13-representing-different-types-of-messages}
+### Representing Different Types of Messages
 
 In many distributed systems, messages pass data between different components or services.
 
@@ -467,7 +467,7 @@ In this example, Message is a sealed interface that permits RequestMessage and R
 
 By using sealed classes, developers can ensure that each message type is well-defined and type-safe, which can help prevent bugs and improve the maintainability of the code.
 
-### Defining a Set of Domain Objects {#h3-14-defining-a-set-of-domain-objects}
+### Defining a Set of Domain Objects
 
 In domain-driven design, domain objects represent the concepts and entities in a business domain.
 
@@ -492,7 +492,7 @@ In this example, OrderItem is a sealed interface that permits ProductItem and Se
 
 By using sealed classes, developers can ensure that each domain object is well-defined and has a limited set of possible subtypes, which can help prevent the introduction of bugs and make the code more maintainable.
 
-### Representing Different Types of Users {#h3-15-representing-different-types-of-users}
+### Representing Different Types of Users
 
 In many systems, users represent individuals who interact with the system somehow. Sealed classes can represent different types of users and ensure that each type is well-defined and type-safe.
 
@@ -519,7 +519,7 @@ In this example, User is a sealed class that permits Customer, Employee, and Adm
 
 By using sealed classes, developers can ensure that each user type is well-defined and type-safe, which can help prevent bugs and make the code more maintainable.
 
-### Defining a Limited Set of Error Types {#h3-16-defining-a-limited-set-of-error-types}
+### Defining a Limited Set of Error Types
 
 In many systems, errors signal that something has gone wrong during the execution of a program.
 
@@ -548,7 +548,7 @@ In this example, Error is a sealed class that permits NetworkError, DatabaseErro
 
 By using sealed classes to define a limited set of error types, developers can ensure that each error type is well-defined and has a limited set of possible subtypes, which can help make the code more maintainable and easier to reason about.
 
-### Defining a Limited Set of HTTP Methods {#h3-17-defining-a-limited-set-of-http-methods}
+### Defining a Limited Set of HTTP Methods
 
 In many web applications, HTTP methods interact with web resources such as URLs.
 
@@ -579,7 +579,7 @@ By using sealed classes to define a limited set of HTTP methods, developers can 
 
 This can help make the code more maintainable and easier to reason about.
 
-### Defining a Limited Set of Configuration Parameters {#h3-18-defining-a-limited-set-of-configuration-parameters}
+### Defining a Limited Set of Configuration Parameters
 
 In many systems, configuration parameters are used to control the behaviour of a program.
 
@@ -606,7 +606,7 @@ By using sealed classes to define a limited set of configuration parameters, dev
 
 This can help make the code more maintainable and easier to reason about.
 
-### Defining a Limited Set of Database Access Strategies {#h3-19-defining-a-limited-set-of-database-access-strategies}
+### Defining a Limited Set of Database Access Strategies
 
 In many systems, databases are used to store and retrieve data.
 
@@ -635,7 +635,7 @@ In this example, DatabaseAccessStrategy is a sealed class that permits JdbcStrat
 
 By using sealed classes to define a limited set of database access strategies, developers can ensure that each strategy is well-defined and has a limited set of possible subtypes, which can help make the code more maintainable and easier to reason about.
 
-### Defining a Limited Set of Authentication Methods {#h3-20-defining-a-limited-set-of-authentication-methods}
+### Defining a Limited Set of Authentication Methods
 
 In many systems, authentication is used to verify the identity of users.
 
@@ -666,7 +666,7 @@ By using sealed classes to define a limited set of authentication methods, devel
 
 This can help make the code more maintainable and easier to reason about.
 
-### Conclusion {#h3-21-conclusion}
+### Conclusion
 
 In conclusion, Java sealed classes are a powerful feature that can help you create more robust and maintainable code by restricting the inheritance hierarchy of your classes and interfaces.
 

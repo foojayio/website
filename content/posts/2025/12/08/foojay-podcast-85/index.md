@@ -29,13 +29,13 @@ In this episode, you'll hear four incredible guests who are actively working to 
 
 These conversations share one message: ***Talent is everywhere, but opportunity isn't. And we have the power to change that!***
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube 3VoyvY9XHls >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,8 +43,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 01:19 Daniel De Luca
 

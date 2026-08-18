@@ -26,8 +26,8 @@ Now that we know why it's important to understand Java features well, it's time 
 
 It's time to improve your Java skills with this Stream Set Distinct Challenge...
 
-Stream Set Distinct Challenge {#h2-0-stream-set-distinct-challenge}
--------------------------------------------------------------------
+Stream Set Distinct Challenge
+-----------------------------
 
 Can you guess what will happen when running the following Java code?
 

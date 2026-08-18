@@ -20,8 +20,8 @@ related_posts:
 frozen: false
 ---
 
-Running Gradle builds on GitHub Actions {#h2-0-running-gradle-builds-on-github-actions}
----------------------------------------------------------------------------------------
+Running Gradle builds on GitHub Actions
+---------------------------------------
 
 GitHub Actions provides a convenient and powerful CI platform for projects hosted on GitHub. To enhance the experience of building Gradle projects on GitHub Actions, the Gradle team has developed the `gradle-build-action`.
 
@@ -47,7 +47,7 @@ It's easy to take advantage of the `gradle-build-action` by adding a setup step 
 
 For details on how to use the `gradle-build-action` in your workflow, check out the [Gradle Build Tool documentation](https://docs.gradle.org/current/userguide/github-actions.html#sec:configure_github_actions) or the [README](https://github.com/gradle/gradle-build-action#use-the-action-to-setup-gradle).
 
-### Features of the Gradle Build Action {#h3-1-features-of-the-gradle-build-action}
+### Features of the Gradle Build Action
 
 #### Save and restore the Gradle User Home directory between workflow runs
 
@@ -85,7 +85,7 @@ For this purpose, the `gradle-build-action` is able to download and install any 
 
 Alias values like 'latest', 'release-candidate' and 'nightly' are also supported. This installed version will then be used when you run `gradle` in a subsequent workflow step.
 
-### Why use the gradle-build-action? {#h3-2-why-use-the-gradle-build-action}
+### Why use the gradle-build-action?
 
 If you're familiar with GitHub Actions, you may be wondering why you'd want to use the `gradle-build-action` instead of simply configuring `actions/cache` or `actions/setup-java` to save and restore Gradle dependencies between workflow runs.
 
@@ -93,7 +93,7 @@ We believe the `gradle-build-action` offers substantial benefits: please check o
 
 If you still have questions, feel free to ask at <https://github.com/gradle/gradle-build-action/issues>.
 
-### A better experience with Gradle and GitHub Actions {#h3-3-a-better-experience-with-gradle-and-github-actions}
+### A better experience with Gradle and GitHub Actions
 
 The `gradle-build-action` provides a simple and effective way to run Gradle builds on GitHub Actions, maximizing the use of the GitHub Actions cache and presenting important information about each Gradle execution.
 

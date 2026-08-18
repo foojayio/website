@@ -36,8 +36,8 @@ Don't forget to check out my [book](https://www.amazon.com/dp/1484290410/) and s
 
 <br />
 
-Transcript {#h2-0-transcript}
------------------------------
+Transcript
+----------
 
 Welcome back to the second part of debugging at Scale where you can learn the secret tricks of debugging.
 
@@ -49,7 +49,7 @@ So what's on the agenda for today?
 
 We'll discuss stepping over and into code, I hope most of this list is familiar to you. The last two items where we disrupt the control flow might not be familiar to you. I'm pretty sure most of you aren't familiar with the last item on the agenda. How do I know? Stay tuned and find out!
 
-### Step Over, Into, Out and Force {#h3-1-step-over-into-out-and-force}
+### Step Over, Into, Out and Force
 
 Step over is the most basic form of control flow. We let the code in the line execute and then we can inspect the results in the variable pane. It's simple and easy.
 
@@ -61,13 +61,13 @@ We have two step-into operations. The regular one and the force-step into which 
 
 When we finished looking at a method and don't care about the rest, we can step out. This executes the rest of the method and returns. Notice that if we have a breakpoint before the return it would still stop at the breakpoint as we see in this case. We can press this button here to step out or, we can press shift-F8 to do the same thing.
 
-### Continue and Run to Cursor {#h3-2-continue-and-run-to-cursor}
+### Continue and Run to Cursor
 
 Continue proceeds with the execution of the project until the breakpoint is hit again. This is also called resume. It's a simple feature that we use a lot. You can continue by pressing the special version of the play button here. The shortcut is also helpful since we use it a lot, it's F9.
 
 Run to cursor lets us skip lines that are uninteresting and reach the code that matters. We can set a breakpoint at that line to get the same effect, but this is sometimes more convenient as it removes the need to set and unset a breakpoint. We can press this button to run to the cursor, or we can use ALT-F9 as the shortcut for this feature.
 
-### Force Return and Throw Exception {#h3-3-force-return-and-throw-exception}
+### Force Return and Throw Exception
 
 This feature is known as force return in IntelliJ/IDEA.
 
@@ -81,7 +81,7 @@ Similarly throw exception lets us reproduce edge cases such as throwing an excep
 
 Once we press OK, we return with the different value. In this case I was at the edge of the method but I could have done it in the start of the method and skipped the execution of the method entirely. This lets us simulate cases where a method might fail, but we want to mock its behavior. That can make sense if we can't reproduce behavior seen by the customer. We can simulate by using tools like this.
 
-### Drop Frame {#h3-4-drop-frame}
+### Drop Frame
 
 Drop frame is almost as revolutionary but it's also more of a "neat trick". Here I stepped into a method by mistake. Oops I didn't want to do that. I wanted to change something before stepping in... Luckily there's drop frame. We saw I can reach it in the right-click menu, you can also click here to trigger it.
 
@@ -93,7 +93,7 @@ This is still a very useful feature similar to force return with the exception t
 
 This gets even better than that!
 
-### Jump to Line {#h3-5-jump-to-line}
+### Jump to Line
 
 Jump to line is a secret feature in IntelliJ. It works but developers don't know about it. You need to install the Jump to Line plugin to use it. Since it has a relatively low install count, I assume people just don't know it exists. Because this is a must have plugin. It will change the way you debug!
 
@@ -107,7 +107,7 @@ We can skip over code that's failing, etc. This is spectacular. I don't need to 
 
 We can just drag the execution back and have a do-over. It's absolutely fantastic!
 
-### Finally {#h3-6-finally}
+### Finally
 
 In the next video we will discuss the watch briefly. We will dig much deeper into it in the sixth video in the series. So stay tuned!
 

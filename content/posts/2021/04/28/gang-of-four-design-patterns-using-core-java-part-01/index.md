@@ -33,8 +33,8 @@ To understand the philosophical and historical perspective on the Gang of Four's
 
 I came up with my own examples to understand design patterns further. Try downloading the code and see if it helps you in comprehending the patterns in a better way. Some brief code snippets follow each pattern so you can get quick demonstrations. Feel free to bookmark this article as a quick reference/cheat sheet for when you want to quickly review each of them. Without further ado, let's jump into the Observer Pattern.
 
-Observer Pattern {#_observer_pattern}
--------------------------------------
+Observer Pattern
+----------------
 
 <br />
 
@@ -155,8 +155,8 @@ public class StockData implements Subject {
 
 Use StockBroker.java to run the application. Try adding your own Observer to this application. Also, you can try picking up these values from a live web service and writing a custom observer which depends on this.
 
-Decorator Pattern {#_decorator_pattern}
----------------------------------------
+Decorator Pattern
+-----------------
 
 <br />
 
@@ -290,14 +290,14 @@ public class PizzaWorld {
 
 PizzaWorld is the main class. Try adding more decorators and pizza base classes to see if you can get a real taste of the Decorator.  
 
-Singleton Pattern {#_singleton_pattern}
----------------------------------------
+Singleton Pattern
+-----------------
 
 <br />
 
 The Singleton Pattern defines a way to maintain only a single instance of a class in the entire execution of a program/application and to provide a uniform way to access it. There are numerous methods that exist in which this pattern can be implemented. I have explained the three most common scenarios here.
 
-### Eager Singleton {#_eager_singleton}
+### Eager Singleton
 
 <br />
 
@@ -329,7 +329,7 @@ public class ProductionHouse {
 ```
 
 
-### Thread-Safe Singleton (Most Common) {#_thread_safe_singleton_most_common}
+### Thread-Safe Singleton (Most Common)
 
 <br />
 
@@ -365,7 +365,7 @@ public class ProductionHouse {
 ```
 
 
-### Double-Checked Locking {#_double_checked_locking}
+### Double-Checked Locking
 
 <br />
 
@@ -439,8 +439,8 @@ public class MediaContract extends Thread {
 ```
 
 
-Command Pattern {#_command_pattern}
------------------------------------
+Command Pattern
+---------------
 
 <br />
 
@@ -511,14 +511,14 @@ public class AuctionControl {
 ```
 
 
-Factory Pattern {#_factory_pattern}
------------------------------------
+Factory Pattern
+---------------
 
 <br />
 
 The Factory Pattern, I am made to believe, is the most widely used and implemented pattern in software projects, after the Singleton Pattern. Since Singleton is only a creational pattern at a single class level, the scale for using the Factory Pattern should be much higher. The Factory Pattern deals with the creation of similar types of objects and producing them in a centralized manner, depending on the condition or type of object requested. There are plenty of variations of the Factory Pattern, three of which I have listed below.
 
-### Simple Factory {#_simple_factory}
+### Simple Factory
 
 <br />
 
@@ -602,7 +602,7 @@ public class SystemFactory {
 ```
 
 
-### Factory Method {#_factory_method}
+### Factory Method
 
 <br />
 
@@ -746,8 +746,8 @@ public class MobileStoreCentre {
 ```
 
 
-Abstract Factory {#_abstract_factory}
--------------------------------------
+Abstract Factory
+----------------
 
 <br />
 

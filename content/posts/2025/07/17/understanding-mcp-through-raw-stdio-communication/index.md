@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Deep Dive into the Model Context Protocol {#h2-0-deep-dive-into-the-model-context-protocol}
--------------------------------------------------------------------------------------------
+Deep Dive into the Model Context Protocol
+-----------------------------------------
 
 ***Ever wondered how AI assistants like Claude actually communicate with external tools and services? While most tutorials focus on using pre-built SDKs and frameworks, this article takes a different approach---we'll dissect a production MCP server built from scratch using only Java's standard libraries and raw STDIO communication.***
 
@@ -33,15 +33,15 @@ Deep Dive into the Model Context Protocol {#h2-0-deep-dive-into-the-model-contex
 ***No frameworks, no magic---just the protocol in its purest form.***
 > **Want to build this yourself?** This article is based on code from the [Agent MCP Workshop](https://github.com/David-Parry/agent-mcp-workshop), an instructor-led workshop that guides you through building a complete MCP server from scratch. The workshop includes hands-on exercises, detailed explanations, and practical examples that complement the concepts discussed in this article.
 
-Understanding MCP Through Raw STDIO Communication {#h2-1-understanding-mcp-through-raw-stdio-communication}
------------------------------------------------------------------------------------------------------------
+Understanding MCP Through Raw STDIO Communication
+-------------------------------------------------
 
 The Model Context Protocol (MCP) represents a paradigm shift in how AI systems interact with external tools and data sources. This article dives deep into the protocol's STDIO-based communication layer, examining a real-world Java implementation built without frameworks to better understand how the protocol and communication actually work at the fundamental level.
 
 By implementing MCP from scratch using only standard Java libraries, we gain invaluable insights into the protocol's inner workings---insights often hidden by higher-level abstractions and frameworks. This bare-metal approach reveals the elegant simplicity underlying MCP's powerful capabilities.
 
-Why STDIO? The Power of Universal Communication {#h2-2-why-stdio-the-power-of-universal-communication}
-------------------------------------------------------------------------------------------------------
+Why STDIO? The Power of Universal Communication
+-----------------------------------------------
 
 Before diving into the implementation, it's crucial to understand why MCP chose STDIO (Standard Input/Output) as its primary transport mechanism. STDIO provides:
 
@@ -115,12 +115,12 @@ public void emit(Object message) {
 
 The message goes directly to stdout as a single line of JSON. No framing, no length prefixes, no binary protocols---just newline-delimited JSON that any tool can read and debug.
 
-Understanding the JSON-RPC Message Flow {#h2-3-understanding-the-json-rpc-message-flow}
----------------------------------------------------------------------------------------
+Understanding the JSON-RPC Message Flow
+---------------------------------------
 
 MCP uses JSON-RPC 2.0 over STDIO, which means every message is a self-contained JSON object on a single line. Let's trace through an actual message exchange to see how this works:
 
-### Client → Server: Initialization Request {#h3-4-client-server-initialization-request}
+### Client → Server: Initialization Request
 
 ```
 {"jsonrpc":"2.0","method":"initialize","params":{"protocolVersion":"0.1.0","capabilities":{"roots":{},"sampling":{}},"clientInfo":{"name":"mcp-inspector","version":"0.1.0"}},"id":0}
@@ -136,7 +136,7 @@ publishLine(line);  // Notify the router
 ```
 
 
-### Server → Client: Initialization Response {#h3-5-server-client-initialization-response}
+### Server → Client: Initialization Response
 
 ```
 {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"0.1.0","capabilities":{"tools":{},"prompts":{},"resources":{}},"serverInfo":{"name":"agent-mcp-workshop","version":"0.0.1"}}}
@@ -145,7 +145,7 @@ publishLine(line);  // Notify the router
 
 The server writes this response directly to stdout. No HTTP headers, no WebSocket frames---just a line of JSON followed by a newline character.
 
-### The Message Type Hierarchy {#h3-6-the-message-type-hierarchy}
+### The Message Type Hierarchy
 
 The implementation uses Java records to model the JSON-RPC message types:
 
@@ -220,8 +220,8 @@ public InitializeResultBuilder withDefaultCapabilities() {
 
 This approach allows servers to clearly declare what they support, enabling intelligent capability negotiation between clients and servers.
 
-Bidirectional Communication: Beyond Request-Response {#h2-7-bidirectional-communication-beyond-request-response}
-----------------------------------------------------------------------------------------------------------------
+Bidirectional Communication: Beyond Request-Response
+----------------------------------------------------
 
 One of MCP's powerful features is true bidirectional communication. The server can send requests to the client, not just respond to them. This implementation demonstrates this with the roots feature:
 
@@ -305,12 +305,12 @@ private void process(JsonRpcRequest message) {
 ```
 
 
-The Complete STDIO Loop: Putting It All Together {#h2-8-the-complete-stdio-loop-putting-it-all-together}
---------------------------------------------------------------------------------------------------------
+The Complete STDIO Loop: Putting It All Together
+------------------------------------------------
 
 Let's trace through a complete interaction to see how STDIO communication enables MCP:
 
-### 1. Server Startup {#h3-9-1-server-startup}
+### 1. Server Startup
 
 ```
 public void start() {
@@ -326,7 +326,7 @@ public void start() {
 ```
 
 
-### 2. Client Connects (via process spawn) {#h3-10-2-client-connects-via-process-spawn}
+### 2. Client Connects (via process spawn)
 
 The client spawns the server process and connects to its stdin/stdout:
 
@@ -335,7 +335,7 @@ java -jar agent-mcp-workshop-0.0.1.jar
 ```
 
 
-### 3. Message Exchange Begins {#h3-11-3-message-exchange-begins}
+### 3. Message Exchange Begins
 
 ```
 → [stdin]  {"jsonrpc":"2.0","method":"initialize","params":{...},"id":0}
@@ -348,7 +348,7 @@ java -jar agent-mcp-workshop-0.0.1.jar
 
 Each arrow represents a complete line written to stdin or stdout. The server never writes partial messages or multiple messages on one line---maintaining the protocol's simplicity.
 
-### 4. Error Handling Without Exceptions {#h3-12-4-error-handling-without-exceptions}
+### 4. Error Handling Without Exceptions
 
 Since STDIO doesn't have error channels like HTTP status codes, errors are part of the protocol:
 
@@ -423,8 +423,8 @@ public ToolCallResult call(ToolCallParams toolCallParams) {
 ```
 
 
-Debugging STDIO Communication {#h2-13-debugging-stdio-communication}
---------------------------------------------------------------------
+Debugging STDIO Communication
+-----------------------------
 
 One of the advantages of building MCP without frameworks is the ability to debug at the protocol level. The implementation includes comprehensive logging:
 
@@ -488,8 +488,8 @@ This approach allows servers to bundle and serve documentation, configurations, 
 
 The entire HTML document is embedded in the JSON response, properly escaped and transmitted as a single line. This demonstrates STDIO's flexibility---it can handle everything from simple method calls to large content transfers.
 
-Prompts: Bridging Human Intent and Tool Execution {#h2-14-prompts-bridging-human-intent-and-tool-execution}
------------------------------------------------------------------------------------------------------------
+Prompts: Bridging Human Intent and Tool Execution
+-------------------------------------------------
 
 The prompt system creates user-friendly interfaces for tools:
 
@@ -524,8 +524,8 @@ case PROMPTS_GET -> {
 ```
 
 
-Advanced Features: Notification Handling {#h2-15-advanced-features-notification-handling}
------------------------------------------------------------------------------------------
+Advanced Features: Notification Handling
+----------------------------------------
 
 The implementation includes sophisticated notification handling:
 
@@ -555,8 +555,8 @@ private void process(JsonRpcNotification message) {
 
 This shows how servers can react to client-side events and maintain synchronized state.
 
-Server Lifecycle Management {#h2-16-server-lifecycle-management}
-----------------------------------------------------------------
+Server Lifecycle Management
+---------------------------
 
 The Server class demonstrates robust lifecycle management:
 
@@ -591,10 +591,10 @@ public class Server {
 
 The use of shutdown hooks and countdown latches ensures graceful termination even in complex scenarios.
 
-Key Architectural Patterns {#h2-17-key-architectural-patterns}
---------------------------------------------------------------
+Key Architectural Patterns
+--------------------------
 
-### 1. Record Types for Protocol Messages {#h3-18-1-record-types-for-protocol-messages}
+### 1. Record Types for Protocol Messages
 
 ```
 public record JsonRpcRequest(
@@ -608,7 +608,7 @@ public record JsonRpcRequest(
 
 Java records provide immutable, self-documenting protocol structures.
 
-### 2. Builder Pattern for Complex Responses {#h3-19-2-builder-pattern-for-complex-responses}
+### 2. Builder Pattern for Complex Responses
 
 ```
 InitializeResult result = InitializeResultBuilder.builder()
@@ -621,7 +621,7 @@ InitializeResult result = InitializeResultBuilder.builder()
 
 Builders ensure valid, complete responses while maintaining readability.
 
-### 3. Enum-Based Method Routing {#h3-20-3-enum-based-method-routing}
+### 3. Enum-Based Method Routing
 
 ```
 public enum UniqueKeys {
@@ -644,24 +644,24 @@ public enum UniqueKeys {
 
 This approach provides type-safe method handling with built-in validation.
 
-Why Building Without Frameworks Matters {#h2-21-why-building-without-frameworks-matters}
-----------------------------------------------------------------------------------------
+Why Building Without Frameworks Matters
+---------------------------------------
 
 This implementation deliberately avoids MCP SDKs or frameworks to reveal important insights:
 
-### 1. **The Protocol is Simple** {#h3-22-1-the-protocol-is-simple}
+### 1. **The Protocol is Simple**
 
 At its core, MCP is just JSON-RPC 2.0 over newline-delimited streams. No magic, no hidden complexity---just structured messages over STDIO.
 
-### 2. **Debugging is Straightforward** {#h3-23-2-debugging-is-straightforward}
+### 2. **Debugging is Straightforward**
 
 Without framework abstractions, every message is visible and every routing decision is explicit. Problems can be traced directly to protocol-level issues.
 
-### 3. **Portability is Maximized** {#h3-24-3-portability-is-maximized}
+### 3. **Portability is Maximized**
 
 This implementation could be ported to any language that can read stdin and write stdout---no framework dependencies to worry about.
 
-### 4. **Understanding is Complete** {#h3-25-4-understanding-is-complete}
+### 4. **Understanding is Complete**
 
 By implementing from scratch, developers gain deep understanding of:
 
@@ -670,7 +670,7 @@ By implementing from scratch, developers gain deep understanding of:
 * How bidirectional communication flows
 * What makes MCP transport-agnostic
 
-### 5. **Performance is Transparent** {#h3-26-5-performance-is-transparent}
+### 5. **Performance is Transparent**
 
 Without framework overhead, the performance characteristics are clear:
 
@@ -678,8 +678,8 @@ Without framework overhead, the performance characteristics are clear:
 * Routing overhead = switch statement
 * I/O latency = STDIO buffering
 
-Conclusion: The Elegance of STDIO-Based Protocols {#h2-27-conclusion-the-elegance-of-stdio-based-protocols}
------------------------------------------------------------------------------------------------------------
+Conclusion: The Elegance of STDIO-Based Protocols
+-------------------------------------------------
 
 This deep dive into a framework-free MCP implementation reveals the elegant simplicity at the protocol's heart. By using STDIO as the transport layer, MCP achieves:
 
@@ -705,8 +705,8 @@ Whether you're building the next generation of AI tools or simply understanding 
 
 
 
-Learn By Building: The Agent MCP Workshop {#h2-28-learn-by-building-the-agent-mcp-workshop}
--------------------------------------------------------------------------------------------
+Learn By Building: The Agent MCP Workshop
+-----------------------------------------
 
 If you found this deep dive valuable and want to build your own MCP server from the ground up, check out the [Agent MCP Workshop](https://github.com/David-Parry/agent-mcp-workshop) on GitHub. This instructor-led workshop takes you through five progressive lessons:
 

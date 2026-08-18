@@ -23,13 +23,13 @@ frozen: false
 
 IBM first made FIPS 140-3 cryptography available as a technology preview more than a year ago, and users responded with helpful feedback on usage and configuration so that the IBM development team could improve its usability. With NIST certification, this capability is now generally available for production deployments on most platforms (with more to come).
 
-What is FIPS 140-3? {#h2-0-what-is-fips-140-3}
-----------------------------------------------
+What is FIPS 140-3?
+-------------------
 
 FIPS 140-3 certified cryptography is a security standard for U.S. federal agencies to use when [securing computer and telecommunication systems with cryptography](https://csrc.nist.gov/pubs/fips/140-3/final "computer and telecommunication systems"). Software used by those federal agencies, including Java, must comply with FIPS cryptography standards. On May 12, 2022, U.S. President Executive Order 14028 re-enforced the requirement for FIPS-validated encryption and brought significant attention across agencies to the FIPS 140-3 standard which supersedes FIPS 140-2.
 
-FIPS 140-3 in IBM Semeru Runtimes for Java {#h2-1-fips-140-3-in-ibm-semeru-runtimes-for-java}
----------------------------------------------------------------------------------------------
+FIPS 140-3 in IBM Semeru Runtimes for Java
+------------------------------------------
 
 Users of IBM Semeru Runtimes for Java now have an all-in-one solution for FIPS 140-3 cryptography when running their production Java workloads. FIPS 140-3 is available in both [IBM Semeru Runtime Open Edition and Certified Edition](https://www.ibm.com/support/pages/java-sdk-downloads "IBM Semeru Runtime Open Edition and Certified Edition") and provides a broad set of FIPS 140-3 cryptography algorithms and ciphers.
 
@@ -37,8 +37,8 @@ IBM Semeru Runtimes provides multiple security profiles to choose from. Security
 
 FIPS 140-3 in IBM Semeru Runtimes is built with IBM Crypto for C, a NIST-certified high performance FIPS 140-3 native cryptographic library. IBM Crypto for C is based on OpenSSL and is available as the open source project [OpenCryptographyKitC](https://github.com/IBM/OpenCryptographyKitC "OpenCryptographyKitC").
 
-Configuring FIPS 140-3 in IBM Semeru Runtimes for Java {#h2-2-configuring-fips-140-3-in-ibm-semeru-runtimes-for-java}
----------------------------------------------------------------------------------------------------------------------
+Configuring FIPS 140-3 in IBM Semeru Runtimes for Java
+------------------------------------------------------
 
 To learn more:
 
@@ -48,8 +48,8 @@ For IBM SDK, Java Technology Edition, V8 (starting with 8.0.8.30), [download the
 
 Commercial support for IBM Semeru Runtimes for Java is available (but completely optional) with [IBM Runtimes for Business](https://www.ibm.com/products/runtimes-for-business "IBM Runtimes for Business").
 
-Secure, efficient, stable {#h2-3-secure-efficient-stable}
----------------------------------------------------------
+Secure, efficient, stable
+-------------------------
 
 With bundled NIST-certified FIPS 140-3 cryptography, you can adopt IBM Semeru Runtimes (or update your IBM SDK, Java Technology Edition, V8 installation) to run production Java workloads securely, efficiently, and with stability, whether your workloads run on-premises or in the cloud and whether you're a small, medium, large, or huge business.
 

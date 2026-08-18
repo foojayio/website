@@ -26,7 +26,7 @@ JCStress is a concurrency stress test tool used by JVM developers to test the co
 
 The OpenJDK provides this amazing tool to test the correctness of your concurrent programs.
 
-### A First JCStress Test {#h3-0-a-first-jcstress-test}
+### A First JCStress Test
 
 We configure JCStress tests using annotations provided by the JCStress framework. The following are important annotations help us to understand our first JCStress test:
 
@@ -87,7 +87,7 @@ Following are few important points about the above test:
 4. Depending upon the output of the test we tag it with corresponding @Outcome, e.g., for r1=1 and r2=2, the result is Expect.ACCEPTABLE.  
    for r1=1 and r2=1, result is Expect.ACCEPTABLE_INTERESTING.
 
-### Setting Up a Project with JCStress {#h3-1-setting-up-a-project-with-jcstress}
+### Setting Up a Project with JCStress
 
 To use jcstress in your project, it is recommended to create the submodule with the jcstress tests, which would use jcstress libraries and build steps.
 
@@ -131,7 +131,7 @@ firefox results/index.html
 ```
 
 
-### More JCStress APIs {#h3-2-more-jcstress-apis}
+### More JCStress APIs
 
 JCStress provides useful APIs to develop Java concurrency tests. In this section, we are going to discuss these APIs and how they solve different types of problems.
 
@@ -178,7 +178,7 @@ Following are the annotations to add the descriptions and references:
 ```
 
 
-### JCStress Options {#h3-3-jcstress-options}
+### JCStress Options
 
 #### Vm Options
 
@@ -219,7 +219,7 @@ java -jar target/jcstress.jar -t ConcurrencyTest -m stress
 ```
 
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Knowing features like this helps you get the best Java jobs, that's why to help you I wrote the e-book [5 steps to Best Java Jobs](https://jfeatures.com/). Download this step by step guide for free!
 

@@ -24,7 +24,7 @@ This article elaborates on different ways of serializing Java objects and benchm
 
 In a previous article about [open-source Chronicle Queue](https://chronicle.software/queue/ "open-source Chronicle Queue"), there was some benchmarking and method profiling indicating that the speed of serialization had a significant impact on execution performance. After all, this is only to be expected as Chronicle Queue (and other persisted queue libraries) must convert Java objects located on the heap to binary data, which is subsequently stored in files. Even for the most internally efficient libraries, this inevitable serialization procedure will largely dictate performance.
 
-### Data Transfer Object {#h3-0-data-transfer-object}
+### Data Transfer Object
 
 In this article, we will use a *Data Transfer Object* (hereafter, **DTO** ) named ***MarketData**,* which contains financial information with a relatively large number of fields. The same principles apply to other DTOs in any other business area.
 
@@ -46,7 +46,7 @@ abstract class MarketData extends SelfDescribingMarshallable {
 ```
 
 
-### Default Serialization {#h3-1-default-serialization}
+### Default Serialization
 
 Java's *Serializable* marker interface provides a default way to serialize Java objects to/from the binary format, usually via the *ObjectOutputStream* and *ObjectInputStream* classes. The default way (whereby the magic ***writeObject()*** and ***readObject()*** are not explicitly declared) entails reflecting over an object's non-transient fields and reading/writing them one by one, which can be a relatively costly operation.
 
@@ -66,7 +66,7 @@ Here is an example of a class using default serialization:
 
 As can be seen, the class does not add anything over its base class, and so it will use default serialization as transitively provided by SelfDescribingMarshallable.
 
-### Explicit Serialization {#h3-2-explicit-serialization}
+### Explicit Serialization
 
 Classes implementing *Serializable* can elect to implement two magic private (sic!) methods whereby these methods will be invoked instead of resorting to default serialization.
 
@@ -127,7 +127,7 @@ public final class ExplicitMarketData extends MarketData {
 
 It can be concluded that this scheme relies on reading or writing each field explicitly and directly, eliminating the need to resort to slower reflection. Care must be taken to ensure fields are referenced in a consistent order, and class fields must also be added to the methods above.
 
-### Trivially Copyable Serialization {#h3-3-trivially-copyable-serialization}
+### Trivially Copyable Serialization
 
 The concept of *Trivially Copyable Java Objects* is derived from and inspired by C++.
 
@@ -169,7 +169,7 @@ public final class TriviallyCopyableMarketData extends MarketData {
 
 This pattern lends itself well to scenarios where the DTO is reused. Fundamentally, It relies on invoking *Unsafe* under the covers for improved performance.
 
-### Benchmarks {#h3-4-benchmarks}
+### Benchmarks
 
 Using JMH, serialization performance was assessed for the various serialization alternatives above using this class:
 
@@ -250,11 +250,11 @@ More fields generally favour trivially copyable serialization over explicit seri
 
 Interestingly, the concept of trivially copyable can be extended to hold data normally stored in reference fields such as a *String* or an array field. This will provide an even greater relative performance increase for such classes. [Contact the Chronicle team](https://chronicle.software/contact-us/ "Contact the Chronicle team") if you want to learn more.
 
-### Why Does it Matter? {#h3-5-why-does-it-matter}
+### Why Does it Matter?
 
 Serialization is a fundamental feature of externalizing DTOs to persistent queues, sending them over the wire or putting them in an off-heap **Map** and otherwise handling DTOs outside the Java heap. Such data-intensive applications will almost always gain performance and experience reduced latencies when the underlying serialization performance is improved.
 
-### Resources {#h3-6-resources}
+### Resources
 
 [Chronicle Queue (open-source)](https://chronicle.software/queue/ "Chronicle Queue (open-source)")  
 [GitHub Chronicle Bytes (open-source)](https://github.com/OpenHFT/Chronicle-Bytes "GitHub Chronicle Bytes (open-source)")

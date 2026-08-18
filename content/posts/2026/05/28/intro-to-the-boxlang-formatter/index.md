@@ -104,7 +104,7 @@ boxlang format --check --source ./
 
 Drop that into your CI pipeline and pull requests with messy formatting simply won't merge. One command, no separate linter needed.
 
-### Recommended Team Workflow {#h3-0-recommended-team-workflow}
+### Recommended Team Workflow
 
 * Developers run `boxlang format` before pushing
 * CI runs boxlang `format --check` on every PR

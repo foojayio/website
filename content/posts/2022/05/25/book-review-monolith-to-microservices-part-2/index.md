@@ -26,8 +26,8 @@ In this article, I will summarize chapter two.
 
 ![](monolith-to-microservice.jpeg)
 
-**Chapter #2: Planning to Migration** {#h2-0-chapter-2-planning-to-migration}
------------------------------------------------------------------------------
+**Chapter #2: Planning to Migration**
+-------------------------------------
 
 In this chapter, the book discusses the goal and mindset. When we are looking for a Microservices, what should be our goal.
 
@@ -43,7 +43,7 @@ Before adopting Microservices architecture, we should ask three questions:
 
 Now that the questions are out of the way let's discuss why we consider Microservices, which aligns with our goal.
 
-### **Improve Team autonomy** {#h3-1-improve-team-autonomy}
+### **Improve Team autonomy**
 
 Having Microservices enables us to have to create autonomous teams. Keeping a team small, allowing them to build close bonding and work effectively together without bringing in too much bureaucracy, in turn, help the organization grow and scale more effectively. We can consider amazon's two-pizza team model.
 
@@ -51,19 +51,19 @@ Usually, team autonomy can empower people, help them step up and grow and get th
 
 ***Alternative to Microservices***, giving ownership to parts of the codebase to different teams, we can achieve this sort of autonomy to the groups, e.g. modular monolith can be a perfect answer here.
 
-### **Reduce time to market** {#h3-2-reduce-time-to-market}
+### **Reduce time to market**
 
 Being able to make and deploy changes independently, it requires less coordination between multiple teams; thus, it reduces the time to put things out for actual use.
 
 ***Alternatively***, with proper automation suites, highlighting the pain point can help reduce the time to market.
 
-### **Scale Cost-Effectively for Load** {#h3-3-scale-cost-effectively-for-load}
+### **Scale Cost-Effectively for Load**
 
 Since things are now broken into smaller pieces, it's now easy to scale independently. In a complete system, the idea is that not all parts would require handling huge loads, so we can focus on those parts that need it. That gives us more control over operational costs.
 
 ***Alternatively***, vertical scaling can help to a great extent. Horizontal scaling -basically running multiple copies- could prove to be highly effective,
 
-### **Improve robustness** {#h3-4-improve-robustness}
+### **Improve robustness**
 
 The expectation grows when we move from a single talent software to a multitenant SaaS application. For example, the application must be available all the time. However, since in Microservice, the application is decomposed into multiple smaller pieces, an impact on a particular area doesn't require putting the whole system down.
 
@@ -71,7 +71,7 @@ Thus, it reduces the blast radius; if something goes wrong, the affecting area b
 
 ***Alternately***, we can put multiple copies of the monolith behind the load balancer, or a queue can improve robustness. Distributing instances of the monolith across multiple failure planes can also further help to handle failure gracefully.
 
-### **Scale the number of developers** {#h3-5-scale-the-number-of-developers}
+### **Scale the number of developers**
 
 We all know it doesn't work if we put many developers on a project. The joke "one developer does a job in a month; two developers do it two months" is well known. However, if we can partition things into separate independent work units with less interaction between them, then it works.
 
@@ -79,7 +79,7 @@ With clear boundaries and Microservices architecture, it is easy to scale develo
 
 ***Alternatively***, a modular monolith can also help to achieve the same principle. Each team can have one module and work independently as long as the interface with the module remains stable.
 
-### **Embrace new technology** {#h3-6-embrace-new-technology}
+### **Embrace new technology**
 
 Although mature organizations limit how many technology stacks they support, it opens the door to having more than one stack running for multiple services. It even makes developers happy to some extent.
 
@@ -89,11 +89,11 @@ Although mature organizations limit how many technology stacks they support, it 
 
 Now that we have understood the goal of having Microservices, let's discuss when this isn't really a good fit.
 
-### **Uncertain Domain** {#h3-7-uncertain-domain}
+### **Uncertain Domain**
 
 Getting service boundaries wrong can be extremely expensive. It can lead to an overly coupled component, in general, could be worse than a monolith. So if we don't have a full grasp of the domain, we must first get the domain expertise before coming to microservices.
 
-### **Startups** {#h3-8-startups}
+### **Startups**
 
 Usually, a startup is likely to have limited funding and resources, where things start with experimenting with ideas; it's probably not a good idea, to begin with, microservices.
 
@@ -101,13 +101,13 @@ A company like Netflix and Airbnb didn't start their product with microservice i
 
 When a startup experiments with its idea, if the idea doesn't work, it doesn't really matter if its software architecture is great.
 
-### **Not having really good reasons** {#h3-9-not-having-really-good-reasons}
+### **Not having really good reasons**
 
 Doing microservices just because everyone else is doing it is a terrible idea.
 
 If we don't have a clear idea of what we want to achieve, we shouldn't go for microservices.
 
-### Conclusion {#h3-10-conclusion}
+### Conclusion
 
 Now that we have laid out the whole picture, it's your call to decide whether you want Microservice or not. In many cases, microservices are probably not ideal, but if you're going to do it with all the good reasons we mentioned, take the baby steps.
 

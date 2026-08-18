@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-### **Introduction:** {#h3-0-introduction}
+### **Introduction:**
 
 <figure class="alignleft">
  <img decoding="async" src="https://media.licdn.com/dms/image/v2/C4E03AQHOSJQsBSmS3A/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517742324318?e=1729123200&amp;v=beta&amp;t=jVizFMHohUoyR_Jp1Cgi5UO-0lVIMQO2fRu3ivz1LHk" alt="">
@@ -158,6 +158,6 @@ I'm actively working on it now, and it should be out later in 2024.
 
 
 
-### **Conclusion** {#h3-1-conclusion}
+### **Conclusion**
 
 This interview offers a wealth of insight into the Java ecosystem's evolution, the importance of community, and the intricate process of writing and revising technical books. Whether you're a seasoned developer or a newcomer, there's something here to inspire and guide you on your Java journey.

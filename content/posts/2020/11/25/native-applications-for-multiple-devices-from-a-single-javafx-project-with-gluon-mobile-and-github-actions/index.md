@@ -30,8 +30,8 @@ In this post, we will use such a project and build it with GitHub Actions as a n
 > True "Write Once, Run Everywhere"!!!
 ![](github_actions_gluon_diagram.jpg)
 
-The Application {#h2-0-the-application}
----------------------------------------
+The Application
+---------------
 
 This application is built around a Java library I created last year for my book ["Getting Started with Java on the Raspberry Pi"](https://webtechie.be/books/) which helps you to calculate the value of a resistor from its color rings. This library is further described on ["Resistor color codes and calculations as a Java Maven library"](https://webtechie.be/post/2019-11-25-resistor-color-codes-and-calculations-a-java-maven-library/).
 
@@ -48,7 +48,7 @@ This application is built around a Java library I created last year for my book 
  </ul>
 </figure>
 
-### Based on "Gluon Mobile Multiview" {#h3-1-based-on-gluon-mobile-multiview}
+### Based on "Gluon Mobile Multiview"
 
 Based on a "Gluon Mobile Multiview" project, it was only a matter of hours to create a working application with two calculation views and one "About" view. Many thanks to [José Pereda](https://twitter.com/JPeredaDnr) of Gluon who was so kind to improve my ugly proof-of-concept to a much better-looking layout with some clever tweaks and CSS improvements.
 
@@ -81,7 +81,7 @@ Based on a "Gluon Mobile Multiview" project, it was only a matter of hours to cr
  </ul>
 </figure>
 
-### **It's Not Finished Yet...** {#h3-2-it-s-not-finished-yet}
+### **It's Not Finished Yet...**
 
 As this first version was created to have a proof-of-concept flow from JavaFX application to native applications and app store publications, the code is not fine-tuned yet...
 
@@ -94,8 +94,8 @@ There are still some things to do:
 
 Any help and pull requests are welcome on [the GitHub project](https://github.com/FDelporte/ResistorCalculatorApp) 😉
 
-**GitHub Actions** {#h2-3-github-actions}
------------------------------------------
+**GitHub Actions**
+------------------
 
 [GitHub Actions](https://github.com/features/actions) allow you to automate your software workflows with Continuous Integration and Continuous Deployment right from GitHub.
 
@@ -115,12 +115,12 @@ jobs:
 ```
 
 
-**Gluon** {#h2-4-gluon}
------------------------
+**Gluon**
+---------
 
 Gluon provides an easy and modern approach to develop Java Client applications. These applications can run on the JVM or can be converted to platform-specific native-images, which have a lightning-fast startup and take a fraction of space. Moreover, applications can also be targeted to Android, iOS, and embedded apart from all the desktop environments.
 
-### **Gluon Client Plugin** {#h3-5-gluon-client-plugin}
+### **Gluon Client Plugin**
 
 The Gluon Client plugin leverages GraalVM, OpenJDK, and JavaFX by compiling the Java Client application and all its required dependencies into native code, so that it can be directly executed as a native application on the target platform.
 
@@ -128,7 +128,7 @@ One of the advantages is a much faster startup time, since the JVM no longer nee
 
 More info is available on the [docs pages on the Gluon website](https://docs.gluonhq.com/).
 
-### **Gluon GitHub Build License Action** {#h3-6-gluon-github-build-license-action}
+### **Gluon GitHub Build License Action**
 
 The GitHub Actions system allows to "plugin" build steps provided by third parties. These are GitHub-projects on their own which allow you to simplify your .yml-files.
 
@@ -140,16 +140,16 @@ Gluon created such a build action which you can integrate into the build process
  <img loading="lazy" decoding="async" width="700" height="220" src="github-secret-gluon-license-700x220.png" alt="" class="wp-image-36373">
 </figure>
 
-### **Build as a Native Application with GraalVM** {#h3-7-build-as-a-native-application-with-graalvm}
+### **Build as a Native Application with GraalVM**
 
 Gluon Substrate takes away most of the complexity of using GraalVM Native Image. You can create an app in Java, test it on your desktop, and then compile and link the Java bytecode to a native image for a specific platform by defining a profile in Maven. The resulting binary can be deployed to the AppStore or Google Play.
 
-**The Build Process on GitHub Actions** {#h2-8-the-build-process-on-github-actions}
------------------------------------------------------------------------------------
+**The Build Process on GitHub Actions**
+---------------------------------------
 
 For the sake of this post, all the different build processes are split into separate .yml-files, but GitHub Actions allows you to combine different "jobs" into one such file.
 
-### **General Description** {#h3-9-general-description}
+### **General Description**
 
 The .yml-structure is pretty similar for all build types and has this structure:
 
@@ -167,7 +167,7 @@ Based on the name, you can get a badge which you can add to the README of your p
 
 Depending on the OS some additional steps are settings are required as described further.
 
-### **Desktop Applications** {#h3-10-desktop-applications}
+### **Desktop Applications**
 
 #### **Linux JAR + Native Application**
 
@@ -234,7 +234,7 @@ Xcode is required to build Apple applications. Again we can add this to our step
 
 And the resulting file "target/client/x86_64-darwin/Resistor Calculator" is copied to the package.
 
-### **Smartphone Applications** {#h3-11-smartphone-applications}
+### **Smartphone Applications**
 
 When I started working on this post and project, I just wanted to reach successful native builds for all platforms. But then Gluon stepped in and pushed this a lot further and guess what? This application is now on both "[Google Play](https://play.google.com/store/apps/details?id=be.webtechie.resistorcalculatorapp)" and the "[Apple App Store](https://apps.apple.com/us/app/gluon-resistor-calculator/id1540638756)" thanks to the work of [Erwin Morrhey](https://twitter.com/erwin1).
 
@@ -336,8 +336,8 @@ And finally, the upload is done with:
 ```
 
 
-**Conclusion** {#h2-12-conclusion}
-----------------------------------
+**Conclusion**
+--------------
 
 The power of JavaFX combined with the Gluon tools and GitHub actions is amazing. Building and distributing a truly cross-platform application has never been easier!
 

@@ -74,7 +74,7 @@ void main(){
 
 I have updated the source code for my book "[Practical Design Patterns for Java Developers \[7\]](https://github.com/mirage22/Practical-Design-Patterns-for-Java-Developers/tree/main-update-j25 "Practical Design Patterns for Java Developers [7]")" to JDK 25, maintaining these examples in a separate branch to ensure the code samples referenced in the book remain accessible.
 
-### JEPs LTS journey (focus on coding but not only): {#h3-0-jeps-lts-journey-focus-on-coding-but-not-only}
+### JEPs LTS journey (focus on coding but not only):
 
 **note** : *Stream API, Lambda Expressions, and Java Platform Module System are considered to be previous milestones*
 
@@ -107,7 +107,7 @@ JDK25 LTS:
 [JEP-518: JFR Cooperative Sampling](https://openjdk.org/jeps/518 "JEP-518: JFR Cooperative Sampling")  
 [JEP-520: JFR Method Timing \& Tracing](https://openjdk.org/jeps/520 "JEP-520: JFR Method Timing &amp; Tracing")
 
-### References: {#h3-1-references}
+### References:
 
 1. [Project Babylon](https://openjdk.org/projects/babylon/ "Project Babylon")
 2. [Project Loom](https://wiki.openjdk.org/display/loom/Main "Project Loom")

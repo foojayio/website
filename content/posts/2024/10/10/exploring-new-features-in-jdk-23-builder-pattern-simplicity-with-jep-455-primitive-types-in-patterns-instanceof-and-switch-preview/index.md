@@ -30,8 +30,8 @@ frozen: false
 
 **In this article, we review how to shift an object initiation process across various parties with creational pattern builder and JEP-455.**
 
-Building a vehicle {#h2-0-building-a-vehicle}
----------------------------------------------
+Building a vehicle
+------------------
 
 It may not be obvious from a simple example, but especially when a project moves away from an coding imperative style, it pushes the requirements on the object initiation process.
 
@@ -116,15 +116,15 @@ var producedVehicle = testVehicleBuilder
 
 **Example 3.**: Builder allows you to add required parts downstream
 
-Conclusion {#h2-1-conclusion}
------------------------------
+Conclusion
+----------
 
 While a factory hides the instantiation logic behind a method, a single point of truth, which can turn out to be complex and not entirely maintainable, the Builder pattern serves to make each added component clear and testable.
 
 The factory pattern may be a good fit for the early stages of the development, but with the new enhancements coming with JDK23 \[2\], the builder pattern may be re-evaluated as it may support the functional nature of current business requirements.
 
-References {#h2-2-references}
------------------------------
+References
+----------
 
 [\[1\] JEP 455: Primitive Types in Patterns, instanceof, and switch (Preview)](https://openjdk.org/jeps/455)  
 [\[2\] Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

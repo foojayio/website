@@ -23,8 +23,8 @@ Since this month is [Hacktoberfest](https://hacktoberfest.digitalocean.com/), I 
 
 Some of the content of this article will be applicable to any of the OpenJDK projects, especially the Skara (OpenJDK on Git) bits.
 
-The OpenJDK Mission Control Project {#h2-0-the-openjdk-mission-control-project}
--------------------------------------------------------------------------------
+The OpenJDK Mission Control Project
+-----------------------------------
 
 The OpenJDK Mission Control project is the observability tools suite for OpenJDK. It contains a JMX Console, a JFR visualizer and analyzer, a heap waste analysis tool, and many other little useful tools and utilities. Since it is all open source, pretty much anyone can contribute to the project.
 
@@ -38,8 +38,8 @@ git checkout -b my-jmc-test
 ```
 
 
-Building JMC {#h2-1-building-jmc}
----------------------------------
+Building JMC
+------------
 
 First of all, ensure that you have [jdk11 active](https://sdkman.io/) in your shell, and verify that this is the case using:  
 
@@ -97,8 +97,8 @@ After this, you can use the build script to run the built JMC product:
 
 For alternative ways of launching JMC, see the platform specific documentation in the [README.md](https://github.com/openjdk/jmc/blob/master/README.md#running-the-locally-built-jmc).
 
-Developing JMC {#h2-2-developing-jmc}
--------------------------------------
+Developing JMC
+--------------
 
 Many that I've talked to, especially when JMC was shipped with the Oracle JDK, believed that JMC is a native application. If you've browsed the repo, you've already seen that it is a Java application, more specifically an Eclipse RCP application. Since it is an Eclipse RCP application, it's easiest to develop JMC using Eclipse.
 
@@ -114,7 +114,7 @@ Now, if this is your first OpenJDK PR, the OpenJDK bot will likely complain abou
 
 Let's take a quick look at these three problems.
 
-### The Oracle Contributor Agreement {#h3-3-the-oracle-contributor-agreement}
+### The Oracle Contributor Agreement
 
 Like all open source projects, there needs to be a Contributor Agreement in place. This is to protect everyone backing the project, as well as the customers depending on the project. For example, the contributor agreement ensures that the source code you're contributing isn't violating any patent rights, and that the source code you're contributing is yours to contribute.
 
@@ -125,16 +125,16 @@ You will know that the OCA status is not properly set up for your GitHub account
 
 The OpenJDK bot will write helpful messages in the PR to help guide you through getting your OCA status verified.
 
-### The Java Bug System {#h3-4-the-java-bug-system}
+### The Java Bug System
 
 Once you have a few commits under your belt, and become an OpenJDK author, you have access to the Java Bug System (JBS): <https://bugs.openjdk.java.net/>. So, what do you do before then? If the PR passes a first cursory check by the reviewers, a reviewer will simply create an Issue in JBS for you.
 
-### Fixing Issues {#h3-5-fixing-issues}
+### Fixing Issues
 
 If you end up having an issue, the details of the test run in the PR will hopefully be enough to sort it out. If not, you can run `mvn verify` locally and look at the test logs. If it is formatting, then check if the formatting problem was in core or not, and either run `mvn spotless:apply` in core or in the root of the project.
 
-Skara -- the OpenJDK Git Tooling {#h2-6-skara-the-openjdk-git-tooling}
-----------------------------------------------------------------------
+Skara -- the OpenJDK Git Tooling
+--------------------------------
 
 Skara is the project name for the tooling around developing OpenJDK on Git(Hub). It actually insulates a lot of the GitHub specifics, making it possible, should the need ever arise, to move the development and development process somewhere else. The project also contains the aforementioned bot that helps, for example, to verify that there is a related JBS issue, and that there is a signed OCA. Skara also contains some useful git extensions which make working with OpenJDK on GitHub smoother.
 
@@ -225,8 +225,8 @@ So, the normal workflow when working with OpenJDK JMC using the Skara tooling be
 
 Once the PR is created, the bot will check that everything is okay, and the PR will be reviewed.
 
-Interacting with the Skara Bot {#h2-7-interacting-with-the-skara-bot}
----------------------------------------------------------------------
+Interacting with the Skara Bot
+------------------------------
 
 Getting the PR merged is handled a bit differently in OpenJDK compared to normal GitHub projects.
 
@@ -240,15 +240,15 @@ If the PR author is not a committer on the project, the bot will inform that the
 
 When the PR is merged, the corresponding JBS issue is automatically closed.
 
-Other Related Repos {#h2-8-other-related-repos}
------------------------------------------------
+Other Related Repos
+-------------------
 
 There are a few additional repos that are related to the OpenJDK JMC project, but that aren't currently OpenJDK projects. Two examples are the [jmc-jshell](https://github.com/thegreystone/jmc-jshell) and the [jmc-tutorial](https://github.com/thegreystone/jmc-tutorial) repositories.
 
 The [jmc-tutorial](https://github.com/thegreystone/jmc-tutorial) is a good resource for learning about JDK Mission Control. Even though it is not officially an OpenJDK repository, it can still be a good place to start contributing to the OpenJDK JMC community.
 
-Summary {#h2-9-summary}
------------------------
+Summary
+-------
 
 * Contributing to OpenJDK is easier than ever before now that it's on GitHub.
 * [Skara](https://wiki.openjdk.java.net/display/SKARA) makes it even easier.

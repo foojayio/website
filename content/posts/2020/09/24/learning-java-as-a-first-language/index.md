@@ -33,7 +33,7 @@ The hardest part of using any of these languages and frameworks is getting your 
 
 Most newbies don't know what experienced programmers know: installs fail *all the time*. This brings me to the first resource for those new to programming.
 
-### 0. Google it {#0-google-it}
+### 0. Google it
 
 If you don't know what the error message you're seeing means, Google it. If there is a file name and line number in the error, and it's your code, dig in and see if you can figure it out. But don't spend too much time on it. Google it, ask a friend, or just go for a walk.
 
@@ -45,7 +45,7 @@ Rather than listing off my preferred methods, sites, and techniques for learning
 
 I sent an email to the Java Champions mailing list and asked them for their recommendations. Based on their responses, I created the following list of ways to get started with Java. Below are my favorites (so far).
 
-### 1. Build Java code katas that are easily accessible {#1-build-java-code-katas-that-are-easily-accessible}
+### 1. Build Java code katas that are easily accessible
 
 *Credit: [Donald Raab](https://twitter.com/TheDonRaab)*
 
@@ -59,7 +59,7 @@ I gave a talk at QCon NY along with a developer I work with who hadn't presented
 
 If you don't have time to watch the video and just want to see the code for the katas, they're [available on GitHub](https://github.com/BNYMellon/CodeKatas).
 
-### 2. Read, code, read, code...​ rinse and repeat {#2-read-code-read-code-rinse-and-repeat}
+### 2. Read, code, read, code...​ rinse and repeat
 
 *Credit: [Henri Tremblay](https://twitter.com/henri_tremblay)*
 
@@ -69,7 +69,7 @@ If you don't have time to watch the video and just want to see the code for the 
 4. Buy Core Java volume two
 5. Read it in your free time while continuing to program
 
-### 3. Check out JShell {#3-check-out-jshell}
+### 3. Check out JShell
 
 *Credit: [Martijn Verburg](https://twitter.com/karianna) and [Michael Kölling](https://twitter.com/michaelkolling)*
 
@@ -81,7 +81,7 @@ There is also extensive teaching material for how to use this for teaching and l
 
 Yes, JShell is cool. Java 11 is pretty cool too --- did you know you can run `.java` files [using the `java` command](https://dzone.com/articles/launch-single-file-source-code-programs-in-jdk-11)?
 
-### 4. Use the power of networking {#4-use-the-power-of-networking}
+### 4. Use the power of networking
 
 *Credit: [Nikhil Nanivadekar](https://twitter.com/NikhilNanivade)*
 
@@ -91,13 +91,13 @@ I am a Mechanical Engineer by education and hadn't written even a "Hello World" 
 
 And lastly, here's my suggestion:
 
-### 5. Try the Spring Guides {#5-try-the-spring-guides}
+### 5. Try the Spring Guides
 
 I think the Spring team has done an excellent job of providing use-case based documentation for Spring Boot. The [Spring Guides](https://spring.io/guides) are a bunch of tutorials that show how to build one of the most popular things Java is used for: APIs and web applications.
 
 Not only that, but [start.spring.io](https://start.spring.io/) allows developers to download an all-in-one package that only requires Java to run. You don't need an IDE. Heck, you don't even need a build tool thanks to Maven and Gradle wrappers that are included. Dare I say, it's super simple?
 
-### Learn Java Today! {#learn-java-today}
+### Learn Java Today!
 
 Hopefully, this short and sweet list of learning resources inspires you to try Java. It's a great language, that can do many things. Write once, run anywhere!
 

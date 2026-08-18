@@ -20,20 +20,20 @@ enlighterjs: true
 frozen: false
 ---
 
-**I'm an average Reddit user, scrolling much more than reading or interacting. Sometimes, however, a post rings a giant red bell. When I stumbled upon [If you could add one feature to K8s, what would it be?](https://www.reddit.com/r/kubernetes/comments/1ga0deo/comment/lta8itb/?context=3&amp;share_id=ZS15DmQexSXUjhXuqQ81z), I knew the content would be worth it.**
+**I'm an average Reddit user, scrolling much more than reading or interacting. Sometimes, however, a post rings a giant red bell. When I stumbled upon [If you could add one feature to K8s, what would it be?](https://www.reddit.com/r/kubernetes/comments/1ga0deo/comment/lta8itb/?context=3&share_id=ZS15DmQexSXUjhXuqQ81z), I knew the content would be worth it.**
 
 The most voted answer is:
 > Namespace scoped CRDs
 
-A short intro to CRDs {#h2-0-a-short-intro-to-crds}
----------------------------------------------------
+A short intro to CRDs
+---------------------
 
 Kubernetes comes packed with existing objects, such as `Pod`, `Service`, `DaemonSet`, etc., but you can create your own: the latter are called Custom Resource Definitions. Most of the time, s are paired with a custom controller called an *operator*. An operator subscribes to the lifecycle events of CRD(s). When you act upon a CRD by creating, updating, or deleting it, Kubernetes changes its status, and the operator gets notified. What it does depends on the nature of the CRD.
 
 For example, the [Prometheus operator](https://prometheus-operator.dev/docs/getting-started/introduction/) subscribes to the lifecycles of a couple of different CRDs: `Prometheus`, `Alertmanager`, `ServiceMonitor`, etc., to make operating Prometheus easier. In particular, it will create a Prometheus instance when it detects a new `Prometheus` . It will configure the instance according to the CR's manifest.
 
-The issue with cluster-wide CRDs {#h2-1-the-issue-with-cluster-wide-crds}
--------------------------------------------------------------------------
+The issue with cluster-wide CRDs
+--------------------------------
 
 CRDs have a cluster-wide scope; that is, you install a CRD for an entire cluster. Note that while the definition is cluster-wide, the CR's scope is either `Cluster` or `Namespaced` depending on the CRD.
 
@@ -49,8 +49,8 @@ Don't get me wrong; I'm all for a lean architectural landscape that limits the n
 
 The cluster-wide CRD doesn't allow it, or at least makes it very hard: we should find a Traefik that handles v0.5.0, **if there's one** and it's still maintained, migrate all APISIX CR to Traefik **at once**, and then proceed to upgrade. This approach requires expensive coordination, the cost of which grows exponentially with the number of teams involved.
 
-The separate clusters approach {#h2-2-the-separate-clusters-approach}
----------------------------------------------------------------------
+The separate clusters approach
+------------------------------
 
 The obvious solution is to have one cluster per team. If you have been operating clusters, you know this approach doesn't scale.
 
@@ -60,8 +60,8 @@ On top of that, every cluster needs a complete monitoring solution. It includes 
 
 All in all, lots of clusters mean lots of additional operational costs.
 
-vCluster, a sensible alternative {#h2-3-vcluster-a-sensible-alternative}
-------------------------------------------------------------------------
+vCluster, a sensible alternative
+--------------------------------
 
 The ideal situation, as the initial quote of this post states, would be to have namespace-scoped CRDs. Unfortunately, it's not the path that Kubernetes chose. The next best thing would be to add a virtual cluster on top of the real one to partition it: that's the promise of [vCluster](https://www.vcluster.com/).
 > What are virtual clusters?
@@ -155,8 +155,8 @@ CRDs are cluster-wide resources, but there's no conflict since the virtual clust
 
 ![](deployment-vcluster.png)
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we touched on the problem of some Kubernetes objects: they are cluster-wide and lock all teams working on the same cluster to use the same version. Running a Kubernetes cluster incurs costs; managing lots of them requires mature and organized automation.
 

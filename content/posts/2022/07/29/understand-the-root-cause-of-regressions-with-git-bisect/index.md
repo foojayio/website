@@ -25,8 +25,8 @@ The hardest part in debugging is knowing the general area of the bug... and bise
 
 Before we begin, let's make one thing clear: bisect is a tool for debugging regressions. It does nothing for regular bugs. When we have a regression, we typically know that the issue used to work in a specific release, we would typically have a specific revision where the code worked. We would typically know that it doesn't work in the current version, but which commit along the way causes the failure?
 
-In the Olden Days {#h2-0-in-the-olden-days}
--------------------------------------------
+In the Olden Days
+-----------------
 
 Back in the old days of SVN (or CVS, SourceSafe, etc.) we used to checkout an older version of the repository and test on it. If it failed, we'd go further back and if it succeeded we'd go forward to hone in on the specific commit that failed. Those among us who were lucky enough to work with competent QA departments could often pass this task to them. Ultimately, the work was manual.
 
@@ -38,8 +38,8 @@ We sometimes did but since no versioning system was as dominant as git these aut
 
 ![](FUSGSqAX0A4FnFe.jpg)
 
-Git Bisect: Find the Bug. Automatically! {#h2-1-git-bisect-find-the-bug-automatically}
---------------------------------------------------------------------------------------
+Git Bisect: Find the Bug. Automatically!
+----------------------------------------
 
 That's right. It does exactly that. The simplest use of git bisect starts with the command:
 
@@ -74,8 +74,8 @@ I marked it as bad, could have marked it as "good" and that would have worked fi
 
 ![](Screen-Shot-2022-07-10-at-12.20.22-1-700x101.png)
 
-This Sucks! Or Does It? {#h2-2-this-sucks-or-does-it}
------------------------------------------------------
+This Sucks! Or Does It?
+-----------------------
 
 Going through every revision manually is a major pain!
 
@@ -112,8 +112,8 @@ git bisect reset
 ```
 
 
-TL;DR {#h2-3-tl-dr}
--------------------
+TL;DR
+-----
 
 Git bisect is probably the simplest tool I will cover in this series.
 

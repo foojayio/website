@@ -35,8 +35,8 @@ Jakarta EE 9 moves all relevant specifications `javax` to the Jakarta namespace.
 
 Among the many features making their way to Jakarta EE 10, I will discuss the top 7, in no particular order.
 
-1. **@ManagedExecutorDefinition** {#h2-0-1-managedexecutordefinition}
----------------------------------------------------------------------
+1. **@ManagedExecutorDefinition**
+---------------------------------
 
 One of the most commonly used services in the Jakarta Concurrency API is the [ManagedExecutorService](https://github.com/jakartaee/concurrency/blob/master/api/src/main/java/jakarta/enterprise/concurrent/ManagedExecutorService.java).
 
@@ -92,8 +92,8 @@ public class WorkService {
 
 <br />
 
-2. @Asynchronous {#h2-1-2-asynchronous}
----------------------------------------
+2. @Asynchronous
+----------------
 
 There is a similar annotation available in EJB. A method annotated with this annotation is supposed to run asynchronously. However, the EJB one is a bit out of date.
 
@@ -143,8 +143,8 @@ record Order() {
 
 <br />
 
-3. Bootstrap API {#h2-2-3-bootstrap-api}
-----------------------------------------
+3. Bootstrap API
+----------------
 
 If you are invoking a REST service outside of a Jakarta EE environment, e.g., unit tests, integration tests etc., this is good to have a standalone API to do that.
 
@@ -154,8 +154,8 @@ With this, you don't need to run the entire container. Thus, it becomes very con
 
 ![](image-9-1024x497.png)
 
-4. Multipart/Form-Data {#h2-3-4-multipart-form-data}
-----------------------------------------------------
+4. Multipart/Form-Data
+----------------------
 
 [Jakarta RESTful Web Service](https://jakarta.ee/specifications/restful-ws/) is one of the popular features among developers to expose restful endpoint. However, it didn't quite support multipart form data in a standard way.
 
@@ -196,8 +196,8 @@ public class FileResource {
 ```
 
 
-5. **@OpenIdAuthenticationDefinition** {#h2-4-5-openidauthenticationdefinition}
--------------------------------------------------------------------------------
+5. **@OpenIdAuthenticationDefinition**
+--------------------------------------
 
 Well, for many years, we have been using usernames and passwords for authenticating users in a web application. However, in modern applications, it has become widespread to log in using other services, e.g., Facebook, Google, Twitter, etc.
 
@@ -221,8 +221,8 @@ public class SecurityConfig {
 ```
 
 
-6. **UUID Key** {#h2-5-6-uuid-key}
-----------------------------------
+6. **UUID Key**
+---------------
 
 [Jakarta Persistence 3.1](https://jakarta.ee/specifications/persistence/3.1/) brings `java.util.UUID` is to be used as a basic type of field, which is very convenient for entity IDs for the cloud environment since many databases don't automatically generate UUID.
 
@@ -254,16 +254,16 @@ Besides, it brings several functions to the query language and Criteria API. The
 * Functions that return the current local date and time using **java.time** types (LOCAL DATE, LOCAL DATETIME, LOCAL TIME)
 * The EXTRACT function extracts a numeric part from a given date (YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND)
 
-7. Jakarta Faces Views with Pure Java {#h2-6-7-jakarta-faces-views-with-pure-java}
-----------------------------------------------------------------------------------
+7. Jakarta Faces Views with Pure Java
+-------------------------------------
 
 [Jakarta Faces 4.0](https://jakarta.ee/specifications/faces/4.0/) brings a new API to define the full view (HTML Pages) using only Java Code.
 
 If you are particularly not interested in writing any kind of tagging language whatsoever, you can now write your UI code entirely in Java with the pure Java Faces view. I love it.
 ![](image-8-1024x440.png)
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Now a bit about Jakarta EE ambassadors.
 

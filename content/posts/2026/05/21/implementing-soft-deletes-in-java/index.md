@@ -19,36 +19,36 @@ enlighterjs: true
 frozen: false
 ---
 
-What are soft deletes? {#soft-deletes}
---------------------------------------
+What are soft deletes?
+----------------------
 
 Usually, when deleting documents from a database, the entry is permanently gone and can not be recovered or accessed again.
 
 Sometimes data needs to be made unavailable for regular access without actually being removed from a database. A common example is a user deleting their account on a platform, but retention policies require you to keep all data related to that user for a certain period of time. At the same time, no data regarding that user is accessible on the platform. A soft delete is a treatment for a piece of data that ensures it is ignored by your application while actually still being stored in the database.
 
-How can soft deletes be approached? {#How-can-soft-deletes-be-approached?}
---------------------------------------------------------------------------
+How can soft deletes be approached?
+-----------------------------------
 
-### Field Flagging {#Field-Flagging}
+### Field Flagging
 
 One way to approach the realization of soft deletes would be to add an additional field to your collection that tracks whether a document should be visible to your application or not. The simplest way to do this would be to implement a Boolean field with a name like "isDeleted" that you can query for in order to exclude documents that are soft deleted. While this allows you to identify ***if*** a document has been deleted, it will not help with data retention periods. To cover this, we need to know when a document has been deleted. Thus, a better solution would be to implement a date field instead, calling it "deletedAt". The field would be set to **null**for each active document and hold the timestamp of the deletion otherwise.
 
-### Archive collections {#archive-collections}
+### Archive collections
 
 Another approach is to move the data into an archive collection. For example, if you are using a user collection for which you need to implement soft deletion, add a user_deleted collection and move deleted documents over there. It might still be useful to add a separate date field to your documents to track when a document has been deleted (or moved to the archive collection in this case). A benefit of this approach over flagging deleted documents is that it keeps the primary collection leaner and does not add any overhead to your queries.
 
-Implementation of soft deletes {#Implementation-of-soft-deletes}
-----------------------------------------------------------------
+Implementation of soft deletes
+------------------------------
 
-### Java driver {#Java-driver}
+### Java driver
 
 The code snippets provided in this guide are based on the MongoDB [Java Sync driver](https://www.mongodb.com/docs/drivers/java/sync/current/) version 5.6. This is the latest version of the Java driver provided officially by [MongoDB](https://www.mongodb.com/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=soft-imp-mongodb-foojay&utm_term=hugh.murray), built to develop synchronous applications.
 
-### Code examples {#Code-examples}
+### Code examples
 
 As a basis for our examples in this guide, we are using the sample_mflix database provided as one of the samples within [MongoDB Atlas.](https://www.mongodb.com/products/platform/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=soft-imp-mongodb-foojay&utm_term=hugh.murray)
 
-#### Flagging approach {#Flagging-approach}
+#### Flagging approach
 
 What we want to do is to change the schema of the users collection from its current form:
 
@@ -349,7 +349,7 @@ public static void recoverDocument(String id) {
 
 Now we have implemented a deletion method that keeps deleted documents in the database for later recovery, auditing, or other purposes
 
-#### Archive approach {#Archive-approach}
+#### Archive approach
 
 An alternative to flagging is to use soft deletes by moving documents into an archive collection. This would have the benefit that the main collection can be kept lean and small for faster access and smaller indexes.
 
@@ -416,7 +416,7 @@ public static void softDeleteWithArchive() {
 
 In order to recover a document using this method, it can just be moved back the same way. Additionally, adding a field with a timestamp can be an option. This way, it is documented when a document has been soft-deleted. That information can be relevant, for example, when certain retention periods have to be met before a document can be removed completely. More on that when we come to the topic of cleanups.
 
-### Cascading to related collections {#Cascading-to-related-collections-}
+### Cascading to related collections
 
 When using this method we need to make sure to also cascade deletions into related collections. For our example, let's take a look at the comments collection.
 
@@ -466,7 +466,7 @@ public static void cascadeDeletion (String userName){
 
 This could either be included in the softDelete() function itself or called separately.
 
-### Cleanup with TTL indexing {#Cleanup-with-TTL-indexing}
+### Cleanup with TTL indexing
 
 In many scenarios, a soft delete will only be a temporary solution. Documents are kept in a soft-deleted status for a while before being removed completely from the database. One common use case is to do that once the document has been inactive for a specified period of time. Let's say, for example, user data needs to be retained for twelve months after an account gets deleted. The soft delete allows engineers to realize that without impacting query performance for active users. Now, in order to clean up documents that have passed the retention period, we can make use of [MongoDB's TTL indexes](https://www.mongodb.com/docs/manual/core/index-ttl/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=soft-imp-mongodb-foojay&utm_term=hugh.murray). This is a special type of single-field index that can be utilized to automatically remove documents from the database. To do this, we will create an index on the "deletedAt" field, which we set to a timestamp when performing the soft delete.
 
@@ -502,21 +502,21 @@ public static void createTTLIndex () {
 ```
 
 
-Pros and cons of soft deletes {#Pros-and-cons-of-soft-deletes}
---------------------------------------------------------------
+Pros and cons of soft deletes
+-----------------------------
 
 Now that the basic steps of implementing soft deletes in a MongoDB deployment are covered, let's summarize the pros and cons of this approach.
 
-### Pros {#Pro}
+### Pros
 
 The primary benefit of soft deletes is the simple and fast recovery of single documents without having to rely on backups that will take way more time, and also don't allow for the level of granularity that soft deletes are bringing. Also, it is a great way to ensure retention and compliance policies without a major impact on database performance. Finally, by adding more metadata with additional fields (e.g., who performed the delete), soft deletes can also be used.
 
-### Cons {#Con}
+### Cons
 
 Drawbacks of this approach would be the additional storage requirements for documents that, in the case of a hard delete, would not require any resources whatsoever. Also, the increased complexity of queries since each request needs to make sure it does not fetch deleted results. Another point is that indexes might become bloated by maintaining the additional entries. Lastly, it carries an increased risk of generating inconsistent database states when, for example, cascading of operations is not controlled thoroughly.
 
-Wrap Up {#Wrap-Up}
-------------------
+Wrap Up
+-------
 
 1. Soft deletes are a great feature to support fast data recovery and retention policies  
 2. There are two primary approaches to soft deletes: flagging and archiving  

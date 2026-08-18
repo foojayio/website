@@ -27,8 +27,8 @@ frozen: false
 
 The course required a different set of scenarios than outlined in my [previous SDN update blog post](https://jmhreif.com/blog/2023/sdn-cypher-update-entity/), so I wanted to cover those scenarios, as well.
 
-Spring save() method {#_spring_save_method}
--------------------------------------------
+Spring save() method
+--------------------
 
 First up is the out-of-the-box `save()` method that is provided by Spring as a default. This method takes an input of the entity object you want to save to the database.
 
@@ -139,8 +139,8 @@ This may not be too big of an effort if you have only a few attributes in your d
 
 What if you wanted to preserve what was already there without providing all the properties defined in the domain class to the request? In these scenarios, there are a couple of other options at your disposal, though neither allow dynamic updates to random properties per request.
 
-Patch Year {#_patch_year}
--------------------------
+Patch Year
+----------
 
 The first option is that you don't have to set all properties if you use a PATCH method and only set the values you want to update. Here is an example.
 
@@ -205,8 +205,8 @@ This allows you to set specific values without overwriting other property values
 
 You can avoid setting each property on an object and retain existing values with a couple of options covered next.
 
-Custom Cypher {#_custom_cypher}
--------------------------------
+Custom Cypher
+-------------
 
 One of the more flexible options is to use [custom Cypher](https://docs.spring.io/spring-data/neo4j/reference/appendix/custom-queries.html). For this, you would write a Cypher statement that sets the new values to the properties you want to update. You can even add/set properties that do not exist on the application's domain class. The negative is that you would need to make changes to the application (Cypher statement) if you wanted to update different properties, so it is not fully dynamic.
 
@@ -267,8 +267,8 @@ This ad hoc Cypher approach could work well when values or property updates occu
 
 A custom Cypher approach might work well when you need to update certain properties, but if you have a subset of properties that operate together, another option is to create a projection of the domain class.
 
-Projections {#_projections}
----------------------------
+Projections
+-----------
 
 To provide a consistent set of values for update and leave other properties as-is, [projections](https://docs.spring.io/spring-data/neo4j/reference/projections/sdn-projections.html) are probably the nicest option I've found so far. This approach still requires setting consistent properties (like with custom Cypher), but avoids overwriting consistent values by creating a "view" of the larger entity, only working with those values and leaving other field values alone.
 
@@ -278,7 +278,7 @@ There are two different ways to [save a projection](https://docs.spring.io/sprin
 
 Let's see how this operates.
 
-### Projection as Movie {#_projection_as_movie}
+### Projection as Movie
 
 The first example sends a projection object (subset of the full domain object's properties) and saves the trimmed object as the full movie entity. We have defined a projection that only includes the `movieId` and `plot` properties of a movie.
 
@@ -357,7 +357,7 @@ The request successfully updated the entity with the new plot value ("Here is th
 
 This approach is helpful when you only want to send certain properties over the wire and not the full object. You can set any fields you wish to update in the projection and only send those values in the request.
 
-### Movie entity as projection {#_movie_entity_as_projection}
+### Movie entity as projection
 
 This type of projection only saves a defined subset of properties out of a potentially larger or variable object. The save will only update the fields included in the projection and ignore anything else that might be in the request object.
 
@@ -420,15 +420,15 @@ This also worked! The controller method accepts a `Movie` request object as inpu
 
 This approach would be helpful if you have request objects with varying fields of a `Movie` entity, but only want to update a certain subset each time. In terms of the incoming request object, this option seems to be the most flexible in allowing you to provide all kinds of fields as input, and it will only save the relevant ones defined in the projection.
 
-Wrapping Up! {#_wrapping_up}
-----------------------------
+Wrapping Up!
+------------
 
 In this post, we delved a bit deeper into updating entities using Spring Data and Neo4j. A [previous blog post on the topic](https://jmhreif.com/blog/2023/sdn-cypher-update-entity/) outlined some examples for that use case at the time (microservices), but I learned about a few more options after working on the [GraphAcademy Spring Data Neo4j course](https://graphacademy.neo4j.com/courses/app-spring-data/). These options included custom Cypher statements and projections.
 
 There are still other pieces of the puzzle to explore and integrate, such as optimistic locking (with the `@Version` field) and custom repository implementations for extending repositories (e.g. to combine `Neo4jRepository`, `Neo4jTemplate`, and/or `Neo4jClient` levels of abstraction), but we will save those for a future blog post. Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Code: [sdn-update-entity-round2](https://github.com/JMHReif/sdn-update-entity-round2)
 * Blog post: [previous SDN update article](https://jmhreif.com/blog/2023/sdn-cypher-update-entity/)

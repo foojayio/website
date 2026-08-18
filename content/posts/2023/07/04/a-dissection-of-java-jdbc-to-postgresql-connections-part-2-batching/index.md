@@ -110,8 +110,8 @@ sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql -O pgsql
 ```
 
 
-Standard Statement Batching {#h2-0-standard-statement-batching}
----------------------------------------------------------------
+Standard Statement Batching
+---------------------------
 
 Let's use the following code snippet to create or truncate a table, then execute three insert statements in the batched mode:
 
@@ -163,8 +163,8 @@ Frame 21 is a response from the PostgreSQL backend, which contains a repetition 
 
 The advantage of the batching is that no S/Synchronize command was sent in between the statement executions (indicated by E/Execution). Without batching, each E/Execution would be followed by S/Synchronize. This would require each statement to perform E/Execution and S/Synchronize, each performing a network round trip. With batching, this is combined for the three (batched) executions in a single network round trip. The ability to execute multiple statements with a single network round trip is the clear advantage that the statement batching feature offers.
 
-PreparedStatement Batching {#h2-1-preparedstatement-batching}
--------------------------------------------------------------
+PreparedStatement Batching
+--------------------------
 
 Now, let's run the same test using a PreparedStatement object:
 
@@ -252,8 +252,8 @@ PostgreSQL
 
 Yes, the Statement: property of the Parse message has a name (`S_1`), indicating it's a named statement, and thus a request that generates a database side prepared statement. This means that despite the fact the JDBC drivers sets the `prepareThreshold` to five by default (see the [first article](https://foojay.io/today/a-dissection-of-java-jdbc-to-postgresql-connections/ "first article") for details), once a `PreparedStatement` object is batching with at least two statements, it will create a prepared statement in the database immediately.
 
-The reWriteBatchedInserts Property {#h2-2-the-rewritebatchedinserts-property}
------------------------------------------------------------------------------
+The reWriteBatchedInserts Property
+----------------------------------
 
 Another noteworthy PostgreSQL JDBC driver feature is the `reWriteBatchedInserts` connection property. This is a setting that is specific to batched insert statements, and is false (off) by default.
 
@@ -281,8 +281,8 @@ properties.setProperty("reWriteBatchedInserts", true);
 ```
 
 
-Standard Statement Batching and reWriteBatchedInserts {#h2-3-standard-statement-batching-and-rewritebatchedinserts}
--------------------------------------------------------------------------------------------------------------------
+Standard Statement Batching and reWriteBatchedInserts
+-----------------------------------------------------
 
 The `reWriteBatchedInserts` optimization has a few requirements before it will perform its optimization:
 
@@ -292,8 +292,8 @@ The `reWriteBatchedInserts` optimization has a few requirements before it will p
 
 In other words: standard insert Statements with data added to a batch will not be rewritten.
 
-Implementation Details of reWriteBatchedInserts With PreparedStatements {#h2-4-implementation-details-of-rewritebatchedinserts-with-preparedstatements}
--------------------------------------------------------------------------------------------------------------------------------------------------------
+Implementation Details of reWriteBatchedInserts With PreparedStatements
+-----------------------------------------------------------------------
 
 By analyzing the rewritten batched inserts for `PreparedStatement` objects, my test reproduced the following interesting implementation details for `reWriteBatchedInserts`:
 
@@ -305,8 +305,8 @@ The resulting, rewritten to multi-values, insert statements are not rewritten in
 
 My personal conclusion is that `reWriteBatchedInserts` currently is a workaround for applications that are not able to generate optimal multi-values inserts. To optimally use the PostgreSQL database in a batch inserting situation, use batched prepared statements with multi-values defined with bind placeholders with `reWriteBatchedInserts` set to false.
 
-Prepared statement batching with reWriteBatchedInserts {#h2-5-prepared-statement-batching-with-rewritebatchedinserts}
----------------------------------------------------------------------------------------------------------------------
+Prepared statement batching with reWriteBatchedInserts
+------------------------------------------------------
 
 When using prepared statements for inserts using bind variables without `reWriteBatchedInserts` set to true, such as the code snippet with "PreparedStatement Batching" is showing above, it will show the following JDBC call sequence:
 
@@ -604,8 +604,8 @@ The above snippet uses manually created "multi values" insert statements. It add
 ```
 
 
-Generic plan {#h2-6-generic-plan}
----------------------------------
+Generic plan
+------------
 
 Another reason why a prepared statement for repeatedly used statements is important, is getting a so-called 'generic plan'. Currently insert statements are rewritten by the java property :
 
@@ -628,8 +628,8 @@ A generic plan skips almost all of the work in the plan/optimize phase for execu
 
 The value of five comes from the generic plan threshold: [an arbitrary value chosen by the PostgreSQL development group](https://github.com/postgres/postgres/blob/53ea2b7ad050ce4ad95c89bb55197209b65886a1/src/backend/utils/cache/plancache.c#L1046 "an arbitrary value chosen by the PostgreSQL development group"). This choice being arbitrary is annotated in the source code. With PostgreSQL version 12 and higher you can use the setting plan_cache_mode to force custom or generic plans outside of the automatic way it performs the choice by default.
 
-Rewrite issue and limits {#h2-7-rewrite-issue-and-limits}
----------------------------------------------------------
+Rewrite issue and limits
+------------------------
 
 About the inability to create a database side prepared statement for a rewritten insert statement in JDBC: the good news is that rewritten statements not creating a database side prepared statement was not expected behavior. The maintainers of [PGJDBC project](https://github.com/pgjdbc/pgjdbc "PGJDBC project"), confirmed that this is an issue that should be addressed in future versions of the driver: [Rewritten inserts from reWriteBatchedInserts do never cause server side prepared statement. #2882.](https://github.com/pgjdbc/pgjdbc/issues/2882 "Rewritten inserts from reWriteBatchedInserts do never cause server side prepared statement. #2882.")
 
@@ -637,8 +637,8 @@ Outside of the rewrite issue, there are limits in play here. Such as: `org.postg
 
 There might well be other limits in play too. It is not hard to imagine in a real life situation that memory may be limited (batching a large amount of data requires it to exist in a single place in memory). Therefore the most optimal setting should be tested with the actual size and amounts of data.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 With JDBC, batching means multiple statements are placed in a single network packet, instead of each statement being placed individually in a network packet due to the S/Synchronization that normally follows a statement.
 

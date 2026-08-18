@@ -39,8 +39,8 @@ Let us learn more about the challenges, different profiling approaches, and when
 
 {{< youtube lVmIEhYNAfg >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -48,8 +48,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-**Guests** {#h2-1-guests}
--------------------------
+**Guests**
+----------
 
 * Chris Newland
   * [@chriswhocodes](https://twitter.com/chriswhocodes)
@@ -63,8 +63,8 @@ You can listen and subscribe to the Foojay Podcast on:
   * [linkedin.com/in/heinzkabutz](https://linkedin.com/in/heinzkabutz)
   * The JavaSpecialists' Newsletter: [www.javaspecialists.eu/](https://www.javaspecialists.eu/)
 
-**Podcast** {#h2-2-podcast}
----------------------------
+**Podcast**
+-----------
 
 * Host: Marcus Lagergren
   * [@lagergren](https://twitter.com/lagergren)
@@ -72,8 +72,8 @@ You can listen and subscribe to the Foojay Podcast on:
   * [@FrankDelporte](https://twitter.com/FrankDelporte)
   * [foojay.social/@frankdelporte](https://foojay.social/@frankdelporte)
 
-**Content** {#h2-3-content}
----------------------------
+**Content**
+-----------
 
 * 00'00 Introduction of the host and guests
   * [jitwatch](https://chrisnewland.com/jitwatch)

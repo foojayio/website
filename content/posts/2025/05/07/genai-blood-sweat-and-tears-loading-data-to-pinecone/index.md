@@ -26,8 +26,8 @@ As someone who is pretty familiar with relational and graph databases, I wanted 
 
 I pivoted a few times along the way, but ended up with a Spring AI application that connects to both Pinecone (vector database) and Neo4j (graph database). There were a few surprises throughout, which I'll be sure to mention. Let's get started!
 
-Getting started {#_getting_started}
------------------------------------
+Getting started
+---------------
 
 The first decision I had to tackle was how to get data into Pinecone. My final Pinecone data load solution is available in the [vectordb-data-load code repository in Github](https://github.com/JMHReif/vectordb-data-load).
 
@@ -37,8 +37,8 @@ After spending a bit of time exporting a smaller set of that data from Neo4j to 
 
 Here's where the "fun" began. The first surprising hurdle was simply connecting to Pinecone.
 
-Issue #1: APIs, SDKs, and rapid change {#_issue_1_apis_sdks_and_rapid_change}
------------------------------------------------------------------------------
+Issue #1: APIs, SDKs, and rapid change
+--------------------------------------
 
 Many of the issues and hours spent troubleshooting arose from a recent API change in Pinecone and lack of documentation updates across the board (integrations for Spring AI and Neo4j APOC). The process went something like this:
 
@@ -48,8 +48,8 @@ Many of the issues and hours spent troubleshooting arose from a recent API chang
 
 Since I didn't immediately have time for making library changes, submitting PRs, and waiting for approvals/release, I pivoted back to Spring AI. The next step was to figure out the config pieces and assemble them.
 
-Issue #2: Config {#_issue_2_config}
------------------------------------
+Issue #2: Config
+----------------
 
 I was back to sorting out the connection string components. Pinecone shows a URI in the console, but Spring AI uses an assembly of index name, environment, and region. I had to reference a few pieces of old Pinecone docs, older community forum posts, and old-fashioned trial and error before I finally discovered the correct arrangement of puzzle pieces I needed to connect the app to Pinecone. The format is as follows: [https://\<indexName\>-\<projectId\>.svc.\<environment\>.pinecone.io](https://<indexName>-<projectId>.svc.<environment>.pinecone.io).
 
@@ -67,8 +67,8 @@ spring.ai.vectorstore.pinecone.api-key=<VALUE_HERE>
 
 Now that I was connected, I tackled the next challenge: loading data into Pinecone.
 
-Issue #3: JSON format {#_issue_3_json_format}
----------------------------------------------
+Issue #3: JSON format
+---------------------
 
 Another confusion was understanding how to work with data in a valid, but unusual, format called [JSON lines](https://jsonlines.org/). Instead of placing items of a list in brackets and each separated by a comma, JSON lines uses a newline character to separate each item.
 
@@ -118,14 +118,14 @@ public String load() throws IOException {
 
 With the JSON format understood and readable in the Spring Boot app, I could move on to manipulating the data into the format I needed to upsert to Pinecone!
 
-Issue #4: Loading data to Pinecone {#_issue_4_loading_data_to_pinecone}
------------------------------------------------------------------------
+Issue #4: Loading data to Pinecone
+----------------------------------
 
 There were a couple of puzzles to solve for this part. 1. Determining how the JSON should map to data for Pinecone. 2. Figuring out how to split and batch such a large amount of data. 3. Adjusting configuration for longer timeout.
 
 For this section, the [ETL pipeline page of the Spring AI documentation](https://docs.spring.io/spring-ai/reference/api/etl-pipeline.html) was super helpful in understanding what I needed and what it should look like.
 
-### 1. Metadata keys {#_1_metadata_keys}
+### 1. Metadata keys
 
 Vector databases were new, and I knew that they optimize for the vector embedding plus a bit of metadata (in key/value pairs). I had to decide which keys in the JSON should be metadata and which were irrelevant for my use case.
 
@@ -186,8 +186,8 @@ I fired up the application, and it started processing, but errored out close to 
 
 Running again took a bit of time, but completed successfully, and I was able to check the Pinecone console to see that the data was loaded!
 
-Alternative embeddings - Book descriptions {#_alternative_embeddings_book_descriptions}
----------------------------------------------------------------------------------------
+Alternative embeddings - Book descriptions
+------------------------------------------
 
 I also toyed with loading the book descriptions as a separate index (see [`BookController` class](https://github.com/JMHReif/vectordb-data-load/blob/main/src/main/java/com/jmhreif/vectordb_data_load/BookController.java)). I haven't played with that in an application yet, but I did get the data loaded. I used the same process as above, but had to do a bit fancier mapping strategy because some of the `isbn` and `isbn13` values were null in the JSON file, and a regular map doesn't allow nulls.
 
@@ -209,8 +209,8 @@ if (book.text() != null) {
 
 The [`computeIfAbsent` method](https://www.baeldung.com/java-map-putifabsent-computeifabsent) is a nice way to only add the key when the value is not null (when it exists).
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 The task to load some JSON data to Pinecone was much more arduous than I had anticipated, but I learned a lot along the way. I also realized that, no matter what database you choose, the data import steps can be complicated.
 
@@ -218,8 +218,8 @@ My ultimate solution was a Spring AI application that reads a JSON file, creates
 
 Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github repository: [Accompanying code for this blog post](https://github.com/JMHReif/vectordb-data-load)
 * Documentation: [Pinecone Java SDK](https://docs.pinecone.io/reference/java-sdk)

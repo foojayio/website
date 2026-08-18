@@ -29,8 +29,8 @@ Static Application Security Testing (SAST) is a method to discover security vuln
 
 Neglecting SAST tools like Snyk Code in your development lifecycle can have significant consequences. Waiting until the later stages of the development cycle to address security issues can be costly and time-consuming. More importantly, it can also lead to vulnerabilities being missed and making their way into the final product. By adopting a proactive approach to security and making SAST a part of your regular development process, you can save time and money and potentially avoid a damaging security breach.
 
-Utilizing Snyk Code for Java projects {#h2-0-utilizing-snyk-code-for-java-projects}
------------------------------------------------------------------------------------
+Utilizing Snyk Code for Java projects
+-------------------------------------
 
 Snyk is a variety of security tools focused on developers that help you find and fix vulnerabilities in your source code, open source packages, container images, and misconfigurations in your cloud infrastructure. One of the most powerful features of Snyk is Snyk Code, a feature specifically designed to analyze your code for security vulnerabilities. Snyk Code supports various programming languages, including Java and Kotlin, making it an ideal choice for JVM projects.
 
@@ -38,8 +38,8 @@ Snyk Code is a machine learning-powered SAST tool to detect potential security v
 
 The extra benefit is that you are not bound to one way of working. Snyk provides you with this capability in many different forms, so you can pick the option that best suits your way of working.
 
-Option 1: Source code scanning using the Snyk CLI {#h2-1-option-1-source-code-scanning-using-the-snyk-cli}
-----------------------------------------------------------------------------------------------------------
+Option 1: Source code scanning using the Snyk CLI
+-------------------------------------------------
 
 In this section, we will discuss how to analyze your Java source code for security vulnerabilities using the Snyk Command Line Interface (CLI). With the Snyk CLI, you can easily integrate Snyk's powerful security analysis capabilities into your development workflows, making it easier to identify and address vulnerabilities early in the development process.
 
@@ -76,19 +76,19 @@ Remember, the earlier you find and fix security vulnerabilities, the safer your 
 
 Don't have a Snyk account yet? [++Sign up for Snyk++](https://snyk.io/signup/) today and start securing your code.
 
-Option 2: Using Snyk code via IDE integrations {#h2-2-option-2-using-snyk-code-via-ide-integrations}
-----------------------------------------------------------------------------------------------------
+Option 2: Using Snyk code via IDE integrations
+----------------------------------------------
 
 As a developer, your Integrated Development Environment (IDE) is your primary workspace, and having security seamlessly integrated into your IDE can save you time and protect your code from vulnerabilities. Snyk provides IDE integrations for IntelliJ and Visual Studio Code, enabling you to analyze your Java code for security vulnerabilities directly from your IDE.
 
-### Snyk IntelliJ plugin {#h3-3-snyk-intellij-plugin}
+### Snyk IntelliJ plugin
 
 The Snyk IntelliJ plugin is a powerful tool that provides real-time feedback on your Java code's security. Once you've installed the plugin, you can scan your project by right-clicking on it and selecting **Snyk** , then **Scan Project**. The plugin will then analyze your code and provide a list of potential vulnerabilities, their severity, and even suggestions for how to fix them.
 ![blog-java-kotlin-sql-injection](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1723566843%2Fblog-java-kotlin-sql-injection.jpg&w=2560&q=75)
 
 In the above example, the Snyk IntelliJ plugin would detect that the SQL query is susceptible to SQL Injection attacks.
 
-### Snyk VS Code plugin {#h3-4-snyk-vs-code-plugin}
+### Snyk VS Code plugin
 
 The Snyk VS Code plugin is another excellent tool for analyzing Java code for security vulnerabilities. To use it, you need to install the Snyk extension from the VS Code marketplace. Once installed, you can right-click on your project in the **Explorer** view and select **Scan with Snyk**. The plugin will then perform a detailed analysis of your Java and Kotlin code for any recognized security vulnerabilities, providing you with a list of issues and suggested remediation steps.
 ![blog-java-kotlin-xss](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1723566844%2Fblog-java-kotlin-xss.jpg&w=2560&q=75)
@@ -97,8 +97,8 @@ In the above example, the Snyk VS Code plugin would detect that the HTML output 
 
 By integrating Snyk into your IDE, you can ensure the security of your Java code right from the start. Don't wait until deployment to consider security.
 
-Option 3: Connect your Git repository to Snyk and enable code scanning {#h2-5-option-3-connect-your-git-repository-to-snyk-and-enable-code-scanning}
-----------------------------------------------------------------------------------------------------------------------------------------------------
+Option 3: Connect your Git repository to Snyk and enable code scanning
+----------------------------------------------------------------------
 
 Connecting your Git repository to Snyk is a fundamental step in your journey to enhance Java code and application security. Thankfully, Snyk integrates seamlessly with popular source control repositories, including GitHub, GitLab, Azure Repo, and BitBucket. This integration allows your Java code to be continuously scanned for vulnerabilities, enhancing your application security.
 ![blog-java-kotlin-code-analysis](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1723566843%2Fblog-java-kotlin-code-analysis.jpg&w=2560&q=75)
@@ -107,12 +107,12 @@ With the above Java code snippet as an example, once your Git repository is link
 
 One of the unique selling points of Snyk is that it does not just identify vulnerabilities but also provides remediation advice. Through Snyk's UI, you can view the details of the identified vulnerabilities, understand their possible impact, and get advice on how to fix them. This feature sets Snyk apart from other security tools and makes it a valuable resource for developers who are keen on bolstering their application's security.
 
-### Checking pull requests for code changes that are vulnerable {#h3-6-checking-pull-requests-for-code-changes-that-are-vulnerable}
+### Checking pull requests for code changes that are vulnerable
 
 Another great feature of Snyk is its ability to check pull requests for code changes that might introduce vulnerabilities. By doing this, you can catch potential security issues before they get merged into the main codebase. This preventive approach is crucial in maintaining the integrity and security of your Java application.
 
-Option 4: Integrate with your CI pipeline and leverage Snyk Code {#h2-7-option-4-integrate-with-your-ci-pipeline-and-leverage-snyk-code}
-----------------------------------------------------------------------------------------------------------------------------------------
+Option 4: Integrate with your CI pipeline and leverage Snyk Code
+----------------------------------------------------------------
 
 Integrating Snyk Code into your CI/CD pipeline is an excellent way to automate code security analysis and ensure that your Java code is free from vulnerabilities. By leveraging Snyk Code's capabilities, you can detect and fix security issues in your code before they become threats to your application's security.
 
@@ -120,8 +120,8 @@ In this section, we will discuss how to integrate Snyk Code into your pipeline w
 
 Snyk provides plugins for various CI/CD tools such as Jenkins, CircleCI, Azure Pipelines, and more. By integrating Snyk Code into your pipeline with these plugins, you can automate the process of detecting and fixing security vulnerabilities in your Java code.
 
-Use GitHub actions provided by Snyk to do SAST scanning {#h2-8-use-github-actions-provided-by-snyk-to-do-sast-scanning}
------------------------------------------------------------------------------------------------------------------------
+Use GitHub actions provided by Snyk to do SAST scanning
+-------------------------------------------------------
 
 Snyk also provides GitHub actions for SAST scanning. By using these actions, you can automate the process of scanning your Java code for security vulnerabilities within your GitHub repositories.
 
@@ -149,7 +149,7 @@ jobs:
 
 In this example, the Snyk action for Java is used to scan the Java code whenever a push or pull request is made to the master branch.
 
-### Create a custom integration for Snyk Code using the CLI and the JSON output {#h3-9-create-a-custom-integration-for-snyk-code-using-the-cli-and-the-json-output}
+### Create a custom integration for Snyk Code using the CLI and the JSON output
 
 You can also create a custom integration for Snyk Code using the CLI and the JSON output. This can be useful if you want to customize the process of scanning your Java code for security vulnerabilities.
 
@@ -166,8 +166,8 @@ In this example, the Snyk CLI is used to run Snyk test, and the results are outp
 
 By integrating Snyk Code into your CI/CD pipeline, you can ensure that your Java code is continuously scanned for security vulnerabilities, making your application security more robust.
 
-Scan your code during all phases of development {#h2-10-scan-your-code-during-all-phases-of-development}
---------------------------------------------------------------------------------------------------------
+Scan your code during all phases of development
+-----------------------------------------------
 
 In summary, let's emphasize a crucial takeaway for Java and Kotlin developers: the indispensable role of consistently scanning our application code throughout every phase of development. Catching issues early and frequently isn't just about fixing bugs. It's about creating a culture of quality and security from the get-go. Using a SAST tool like Snyk Code isn't just adding another gadget to our developer toolbelt. It's about establishing a basic habit in how we work, no matter how we've set things up. When we slot it into our process correctly, it feels like it's always been there, helping us catch issues without getting in the way.
 

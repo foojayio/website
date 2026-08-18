@@ -28,15 +28,15 @@ First, let me get the rants out of the way. I'm not a fan of the "for dummies" b
 
 The book is divided into 6 chapters and includes some intriguing appendices.
 
-Chapter 1: Replacing Oracle Java SE in the Enterprise {#h2-0-chapter-1-replacing-oracle-java-se-in-the-enterprise}
-------------------------------------------------------------------------------------------------------------------
+Chapter 1: Replacing Oracle Java SE in the Enterprise
+-----------------------------------------------------
 
 The book opens with an insightful look at the history of OpenJDK, the evolution of Java over the years and its significance and dominance in the enterprise world, the ease of replacing Oracle Java SE in the enterprise with OpenJDK, the importance of Java TCK (Technology Compatibility Kit), Oracle's licensing, and some Oracle bashing (rightly so 😉).
 
 Overall, this chapter provides insights into the challenges and considerations associated with migrating from Oracle Java SE to OpenJDK in the enterprise, including licensing and pricing.
 
-Chapter 2: Preparing for Your Migration {#h2-1-chapter-2-preparing-for-your-migration}
---------------------------------------------------------------------------------------
+Chapter 2: Preparing for Your Migration
+---------------------------------------
 
 This chapter offers helpful advice on preparing your applications for migration to OpenJDK. It covers several key steps and considerations:
 
@@ -52,15 +52,15 @@ This chapter offers helpful advice on preparing your applications for migration 
 
 The book also provides advice on handling third-party applications that might require specific JDKs and addresses edge cases like font rendering, NTLM authentication, and so on.
 
-Chapter 3: Migrating Your Applications {#h2-2-chapter-3-migrating-your-applications}
-------------------------------------------------------------------------------------
+Chapter 3: Migrating Your Applications
+--------------------------------------
 
 This is the most Azul-specific chapter in the book and is essentially a tutorial on how to install the Zulu JDK (Azul Zulu Builds of OpenJDK).
 
 However, it does offer some generic enough advice on installing an OpenJDK distribution and testing your application afterward.
 
-Chapter 4: Evaluating OpenJDK Distribution Providers {#h2-3-chapter-4-evaluating-openjdk-distribution-providers}
-----------------------------------------------------------------------------------------------------------------
+Chapter 4: Evaluating OpenJDK Distribution Providers
+----------------------------------------------------
 
 This chapter discusses various OpenJDK distribution providers and the differences between them. (Not all of them are covered. For example, Liberica is not mentioned.) It also provides valuable advice on how to evaluate OpenJDK distribution providers and choose the right one for your organization.
 
@@ -68,8 +68,8 @@ The chapter includes a FAQ about switching to OpenJDK distributions. The chapter
 
 One criticism I have is that the chapter doesn't compare the commercial offerings of the various OpenJDK distribution providers, which I think would have been helpful, considering the book's target audience is enterprise users who may opt for commercial offerings.
 
-Chapter 5: OpenJDK Support and Maintenance {#h2-4-chapter-5-openjdk-support-and-maintenance}
---------------------------------------------------------------------------------------------
+Chapter 5: OpenJDK Support and Maintenance
+------------------------------------------
 
 This chapter delves into the benefits of commercial support for OpenJDK and highlights various aspects of such support offered by OpenJDK providers.
 
@@ -81,15 +81,15 @@ The chapter touches on different aspects of commercial support, including:
 * Stabilized Security Builds
 * Updating Bundled Technologies
 
-Chapter 6: Choosing the Right Java Partner {#h2-5-chapter-6-choosing-the-right-java-partner}
---------------------------------------------------------------------------------------------
+Chapter 6: Choosing the Right Java Partner
+------------------------------------------
 
 This chapter focuses on how to select the right vendor for Java SE migration to OpenJDK, emphasizing the need for a trustworthy and proficient provider.
 
 I would have expected this chapter to heavily promote Azul, but surprisingly, it only mentions Azul twice. So, kudos to Simon for being objective and not attempting to excessively promote Azul here.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 "OpenJDK Migration For Dummies, Azul Special Edition" offers a comprehensive and informative guide for those looking to navigate the complex world of JDK distributions and licenses (I'm looking angrily at you, Oracle 😠).
 

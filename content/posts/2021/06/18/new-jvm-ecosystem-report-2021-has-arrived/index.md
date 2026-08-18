@@ -23,8 +23,8 @@ Next to the results, there are some great highlight stories in this report like:
 * ***Java, Changing Faster Than Ever After 26 Years*** by [Simon Ritter](https://twitter.com/speakjava)
 * ***The State of Spring*** by [Josh Long](https://twitter.com/starbuxman)
 
-Report Highlights: {#h2-0-report-highlights}
---------------------------------------------
+Report Highlights:
+------------------
 
 [![The highlight of the 2021 JVM Ecosystem report](tldr-jvm-2021-1024x420.png)](https://snyk.io/jvm-ecosystem-report-2021/)
 

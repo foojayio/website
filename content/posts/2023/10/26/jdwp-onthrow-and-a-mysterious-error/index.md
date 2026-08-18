@@ -31,8 +31,8 @@ in the Coretto booth ([Tweet](https://twitter.com/parttimen3rd/status/1709201492
 
 We got a rough idea of what was happening, and now that I'm back from Devoxx, I have the time to investigate it properly. But to recap: How can you use the `onthrow` option and reproduce the bug?
 
-Recap {#h2-0-recap}
--------------------
+Recap
+-----
 
 We use a [simple example program](https://github.com/parttimenerd/java-dbg/blob/64855dde4531dfa5038ffca5aff9320f989df379/src/test/java/OnThrowAndJCmd.java) with throws and catches the exception `Ex` twice:
 
@@ -94,8 +94,8 @@ This might be, and I'm foreshadowing, the reason why IDEs like [IntelliJ IDEA](h
 
 Update: This bug does not appear in JDK 1.4, but in JDK 1.5 and ever since.
 
-Looking for the culprit {#h2-1-looking-for-the-culprit}
--------------------------------------------------------
+Looking for the culprit
+-----------------------
 
 In our preliminary investigation, Aleksey and I realized that JDB was probably not to blame. The problem is that the JDWP-agent sends an exception event after JDB is attached, related to the thrown Ex exception, but this event does not adhere to the specification. The JDWP specification tells us that every exception event contains the following:
 
@@ -136,8 +136,8 @@ Exception event:
 
 This clearly shows that the exception that started the debugging session was not sent correctly.
 
-How does onthrow work? {#h2-2-how-does-onthrow-work}
-----------------------------------------------------
+How does onthrow work?
+----------------------
 
 When the JDWP agent starts, it registers a JVMTI Exception event callback called [cbEarlyException](https://github.com/openjdk/jdk/blob/ad7a8e86e0334390f87ae44cf749d2b47f1409a1/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L430) via [SetEventCallBacks](https://github.com/openjdk/jdk/blob/ad7a8e86e0334390f87ae44cf749d2b47f1409a1/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L326):
 > > 
@@ -164,8 +164,8 @@ On every exception, this handler [checks](https://github.com/openjdk/jdk/blob/ad
 
 The only problem here is that `cbEarlyException` is passed all the exception information but doesn't pass it to the `initialize` method. This causes the JDWP-agent to send out an Exception event with all fields being `null`, as you saw in the previous section.
 
-Fixing the bug {#h2-3-fixing-the-bug}
--------------------------------------
+Fixing the bug
+--------------
 
 Now that we know exactly what went wrong, we can create an issue in the official JDK Bug System (JDK-8317920). Then, we can fix it by creating the event in the `cbEarlyException` handler itself and passing it to the new `opt_info` parameter of the `initialize` method (see [GitHub](https://github.com/openjdk/jdk/blob/3bcb66dc4fb8bbdcf526145acded53f68d1842f8/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L429)):
 
@@ -199,8 +199,8 @@ cbEarlyException(jvmtiEnv *jvmti_env, JNIEnv *env,
 
 The related Pull Request on GitHub is [#16145](https://github.com/openjdk/jdk/pull/16145). It will hopefully be merged soon. The last time someone reported and fixed an issue related to the `onthrow` option [was in early 2002](https://bugs.openjdk.org/browse/JDK-4554734), so it is the first change in more than 20 years. The issue was about `onthrow` requiring the `launch` option to be present.
 
-It works (even with your IDE) {#h2-4-it-works-even-with-your-ide}
------------------------------------------------------------------
+It works (even with your IDE)
+-----------------------------
 
 With this fix in place, it works. JDB even selects the main thread as the current thread:
 
@@ -219,8 +219,8 @@ main[1]
 But does fixing this issue also mean that IDEs like IntelliJ IDEA now support attaching to agents with `onthrow` enabled? Yes, at least if we set a breakpoint somewhere after the first exception has been thrown (like with the `onjcmd` option):
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/Screenshot-2023-10-11-at-13.00.17-2000x1111.png)
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Collaborating with other people from different companies in an Open-Source project is great. Aleksey found the bug interesting enough to spend half an hour looking into it with me, which persuaded me to look into it again after returning from Devoxx. Fixing these bugs allows users to fully use on-demand debugging, speeding up their error-finding sessions.
 

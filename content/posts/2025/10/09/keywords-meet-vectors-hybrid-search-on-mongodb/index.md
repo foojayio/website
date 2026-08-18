@@ -25,8 +25,8 @@ In the previous issues, I explained how to run a local [MongoDB](https://www.lin
 
 Reading time: 4--5 min
 
-What is hybrid search? {#h2-0-what-is-hybrid-search}
-----------------------------------------------------
+What is hybrid search?
+----------------------
 
 Hybrid search in MongoDB brings together **two complementary search techniques**:
 
@@ -38,8 +38,8 @@ Hybrid search in MongoDB brings together **two complementary search techniques**
 
 On their own, each method has advantages and limitations. Text search misses context ("non-linear crime story" won't return Memento). Pure semantic search may return results that are semantically aligned but sometimes not practically useful. Hybrid search combines the strengths of both, ensuring results are contextually relevant and precise.
 
-How does it work in MongoDB? {#h2-1-how-does-it-work-in-mongodb}
-----------------------------------------------------------------
+How does it work in MongoDB?
+----------------------------
 
 MongoDB Atlas (and soon MongoDB Community Edition and Enterprise Advanced) handles both layers natively:
 
@@ -55,11 +55,11 @@ MongoDB Atlas (and soon MongoDB Community Edition and Enterprise Advanced) handl
 
 This means you don't need multiple databases (like MongoDB + Elastic + Pinecone). Both your operational data and embeddings stay in MongoDB.
 
-### Why movies collection are the perfect demo {#h3-2-why-movies-collection-are-the-perfect-demo}
+### Why movies collection are the perfect demo
 
 Movie data (from the MongoDB [sample dataset](https://www.mongodb.com/docs/atlas/sample-data/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant#available-sample-datasets)) contains both **structured fields** (title, year, genres, ratings) and **unstructured text** (plots). That makes the [sample_mflix.embedded_movies](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant#std-label-mflix-embedded_movies) dataset an ideal sandbox: You can run keyword search, vector search, or combine them into hybrid pipelines. You can read more about it in 👉 [this article](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=xNlcCImhQCC0HsnlThlQFg%3D%3D). Let's walk through an example using *Inception* (2010) as the anchor.
 
-### Inspecting the anchor document {#h3-3-inspecting-the-anchor-document}
+### Inspecting the anchor document
 
 You first need to confirm that the Inception document exists in the dataset and that embeddings are present. This provides metadata for context and the vector that drives semantic similarity.
 
@@ -84,7 +84,7 @@ The query should return:
 
 The presence of **plot_embedding** confirms this document can serve as a query vector.
 
-### Sanity checks {#h3-4-sanity-checks}
+### Sanity checks
 
 You need a [vector index](https://www.mongodb.com/docs/manual/reference/command/createsearchindexes/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant) on [plot_embedding](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant#std-label-mflix-embedded_movies), and you need embeddings stored in BSON Binary (Float32). If the index does not exist, create it (check this article 👉 [how](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=xNlcCImhQCC0HsnlThlQFg%3D%3D)). Otherwise, verify it's READY.
 
@@ -117,7 +117,7 @@ Expected output:
 ```
 
 
-### Step 1: Prepare the query vector {#h3-5-step-1-prepare-the-query-vector}
+### Step 1: Prepare the query vector
 
 MongoDB stores embeddings compactly as BSON Binary (Float32) for storage and indexing efficiency, while [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant#mongodb-pipeline-pipe.-vectorSearch) expects the queryVector as a plain [JavaScript array](https://www.w3schools.com/js/js_arrays.asp). You need to extract and convert it at query time.
 
@@ -133,7 +133,7 @@ const qv = Array.from(d.plot_embedding.toFloat32Array())
 
 Here, **qv** becomes a 1,536-element JavaScript array representing the semantic meaning of Inception.
 
-### Step 2: Run semantic search {#h3-6-step-2-run-semantic-search}
+### Step 2: Run semantic search
 
 With the query vector ready (**qv** ), you search for movies whose **plots are conceptually similar** to *Inception---*for example, titles involving dream manipulation, layered realities, high-stakes heists, or unreliable perception. This step ignores exact keywords and measures conceptual closeness.
 
@@ -190,7 +190,7 @@ db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
 
 Semantic search finds thematically close titles, but ranking does not yet reflect quality.
 
-### Step 3: Apply hybrid scoring {#h3-7-step-3-apply-hybrid-scoring}
+### Step 3: Apply hybrid scoring
 
 You need to combine semantic similarity with IMDb ratings to boost well-reviewed titles. This ensures results are not only close in meaning but also valued by audiences.
 
@@ -277,7 +277,7 @@ Example results:
 
 This hybrid scoring surfaces titles that are both semantically similar and widely acclaimed.
 
-### Step 4: Hybrid ranking with Reciprocal Rank Fusion (RRF) {#h3-8-step-4-hybrid-ranking-with-reciprocal-rank-fusion-rrf}
+### Step 4: Hybrid ranking with Reciprocal Rank Fusion (RRF)
 
 In MongoDB, the [$search](https://www.mongodb.com/docs/manual/reference/operator/aggregation/search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant) aggregation pipeline stage is also available. It runs [text search](https://www.mongodb.com/resources/basics/full-text-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant) on a mongot (Lucene/BM25) index, supports **text/phrase/autocomplete** , and returns a per-document **searchScore** with **analyzers** , **stemming** , and **language** options.
 
@@ -463,8 +463,8 @@ Example result:
 
 This yields **one ranked list** that balances **keyword intent** (textRank) and **semantic meaning** (vectorRank). Items that rank well in both legs rise to the top; items strong in only one leg still get credit but are ranked lower.
 
-Wrap-up {#h2-9-wrap-up}
------------------------
+Wrap-up
+-------
 
 * **Hybrid search = BM25 + k-NN** . In MongoDB, you combine **Atlas Search** (Lucene/BM25 in mongot) with **Atlas Vector Search** (k-NN over knnVector fields) to capture both exact intent and semantic similarity.
 
@@ -484,6 +484,6 @@ Wrap-up {#h2-9-wrap-up}
 
 * **Keep it in MongoDB**. Indexing, vectors, filters, and ranking all live in one place---no cross-system syncing.
 
-### More tips like this {#h3-10-more-tips-like-this}
+### More tips like this
 
 Want more hands-on examples, best practices, and deep dives into MongoDB 8.0 and the Atlas platform? Check out 👉 [MongoDB in Action: Building on the Atlas Data Platform](https://www.manning.com/books/mongodb-in-action-third-edition?utm_source=borucki&utm_medium=affiliate&utm_campaign=book_borucki&a_aid=borucki&a_bid=523e1217&chan=mm_flyinghighwithflutter). Published by [Manning Publications Co](https://www.linkedin.com/company/manning-publications-co/?lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3BnV1cKI74RDKmiAI4lr1TaA%3D%3D).

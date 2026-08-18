@@ -19,7 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Project 🧩 sormuras/modules {#h3-0-project-sormuras-modules}
+### Project 🧩 sormuras/modules
 
 Since August 2018, I have been compiling an overview of Java modules uploaded to Maven Central at <https://github.com/sormuras/modules>.
 
@@ -48,7 +48,7 @@ Scanning 72598 files in bucket...
 * Out of the 4,691 Java modules only **3,779** distinct modules could be filtered out. Due to wrong repackaging/shadowing of 3rd-party libraries like ASM or Log4J, there are already many unintended modules, I like to call them impostor modules, published at Maven Central. If [Java modules names were treated as first-class library properties](https://github.com/sonatype-nexus-community/search-maven-org/issues/6) one could search [Maven Central Repository](https://search.maven.org) for `org.objectweb.asm`, `org.apache.logging.log4j`, or other module names of well-known and often shadowed libraries to see many hits for various GroupIDs.
 * Out of the 3,779 distinct modules, I selected **2,900** unique modules by applying a filter comparing module names to the their Maven Group identifiers.
 
-### Unique Java Modules {#h3-1-unique-java-modules}
+### Unique Java Modules
 
 I consider a Java module to be **unique** on Maven Central
 
@@ -117,7 +117,7 @@ Find a daily updated listing of unique modules at: [modules.properties](https://
 Find module `com.github.sormuras.modules` also attached as an executable JAR and [ToolProvider](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/spi/ToolProvider.html) in the assets of [releases/tag/0-ea](https://github.com/sormuras/modules/releases/tag/0-ea). Stable versions of it are published to [releases](https://github.com/sormuras/modules/releases); with [releases/latest](https://github.com/sormuras/modules/releases/latest) pointing to the latest stable release.
 > Bear in mind that the raw and filtered numbers may alter with changes made to the `Scanner` and the `modulescanner` programs. This also goes for changes made to the Maven Group Alias function.
 
-### More Modules {#h3-2-more-modules}
+### More Modules
 
 The [doc](https://github.com/sormuras/modules/tree/main/doc) directory of the `sormuras/modules` project hosts lists of Maven `Group:Artifact` coordinates in 📜 text files. They are taken as an input of the scan process. The `Scanner` generates overview tables showing the state of modularization for each `Group:Artifact` coordinate.
 
@@ -132,7 +132,7 @@ You will find the following summary at the start of each overview.
 * ➖ denotes an unrelated artifact, like BOM, POM, and other non-JAR packaging types.  
   It also denotes old JAR files, as the scan process can only evaluate artifacts that were deployed after mid August 2018.
 
-### WatchList {#h3-3-watchlist}
+### WatchList
 
 📜 [WatchList](https://github.com/sormuras/modules/tree/main/doc/WatchList.txt.md) overview.
 
@@ -150,7 +150,7 @@ Compiled from [WatchList.txt](https://github.com/sormuras/modules/tree/main/doc/
 
 [Top1000-2019.txt](https://github.com/sormuras/modules/tree/main/doc/Top1000-2019.txt) contains 1,000 Maven `Group:Artifact` lines sorted by download popularity as of December 2019. This list also includes non-JAR entries (`pom`, `bom`, ...). It also contains entries that were not updated since August 2018.
 
-### Summary And Outlook {#h3-4-summary-and-outlook}
+### Summary And Outlook
 
 Java modules are here to stay. Their number is increasing steadily.
 

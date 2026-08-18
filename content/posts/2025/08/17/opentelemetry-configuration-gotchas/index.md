@@ -22,8 +22,8 @@ frozen: false
 
 Last week, I described [several approaches to OpenTelemetry on the JVM](https://blog.frankel.ch/opentelemetry-tracing-jvm/), their requirements, and their different results. This week, I want to highlight several gotchas found across stacks in the zero-code instrumentation.
 
-The promise of OpenTelemetry {#h2-0-the-promise-of-opentelemetry}
------------------------------------------------------------------
+The promise of OpenTelemetry
+----------------------------
 
 Since its inception, OpenTelemetry has unified the 3 pillars of observability. In the distributed tracing space, it replaced proprietary protocols Zipkin and Jaeger. IMHO, it achieved such success for several reasons:
 
@@ -51,12 +51,12 @@ On the OpenTelemetry side, different developers contribute to different language
 
 It naturally creates differences in the different implementations.
 
-Gotchas {#h2-1-gotchas}
------------------------
+Gotchas
+-------
 
 Here are a couple of gotchas I found out, but the list is not exhaustive.
 
-### Path or no path? {#h3-2-path-or-no-path}
+### Path or no path?
 
 Let's start easy with a gotcha that exists across stacks.
 
@@ -71,7 +71,7 @@ Alternatively, one can set the **full** path to the endpoint, *e.g* , `http://co
 
 The gotcha will catch you when the OpenTelemetry evolves to v2 if you didn't use paths. Because the library will automatically append `/v1/`, you'll have to make sure the backend offers both `/v1` and `/v2` endpoints.
 
-### Python logging {#h3-3-python-logging}
+### Python logging
 
 To open the list, here's the first gotcha: by default, the Python library doesn't send logging data. It must be enabled explicitly!
 
@@ -90,8 +90,8 @@ Developers also must be involved:
 >
 > -- [Logs Auto-Instrumentation Example](https://opentelemetry.io/docs/zero-code/python/logs-example/)
 
-Micrometer Tracing {#h2-4-micrometer-tracing}
----------------------------------------------
+Micrometer Tracing
+------------------
 
 Before OpenTelemetry, Jaeger and Zipkin reigned supreme in the distributed tracing area. In the great Spring tradition, the project created Spring Cloud Sleuth to offer a facade over Zipkin. Over time, it evolved to be compatible with OpenTracing, one of OpenTelemetry's parents, along with OpenCensus.
 
@@ -110,8 +110,8 @@ environment:
 2. **MUST** set the full path
 3. Conform to the OpenTelemetry spec since [Spring Boot 3.5](https://github.com/spring-projects/spring-boot/pull/44394). Before it, it used [spring.application.name](https://docs.spring.io/spring-boot/appendix/application-properties/index.html#application-properties.core.spring.application.name)
 
-Quarkus {#h2-5-quarkus}
------------------------
+Quarkus
+-------
 
 Compare with [Quarkus](https://quarkus.io/guides/opentelemetry), which prefixes regular OpenTelemetry environment variables with `QUARKUS_`:
 
@@ -136,8 +136,8 @@ environment:
 ```
 
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 OpenTelemetry has become a *de facto* standard in a few years. However, the promise of ubiquitous configuration, if there was ever such a thing, doesn't hold. Operators of OpenTelemetry can't treat services as black boxes. They must consider the underlying stack and framework, and learn how to configure them accordingly.
 

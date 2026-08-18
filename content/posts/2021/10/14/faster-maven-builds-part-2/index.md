@@ -25,8 +25,8 @@ Following on from [different techniques](https://foojay.io/today/faster-maven-bu
 
 Between each run, we change the source code by adding a single blank line; between each section, we remove all built images, including the intermediate ones that are the results of the multi-stage build. The idea is to avoid reusing a previously built image.
 
-Baseline {#h2-0-baseline}
--------------------------
+Baseline
+--------
 
 To compute a helpful baseline, we need a sample project. I created [one](https://github.com/nfrankel/fast-maven-builds) just for this purpose: it's a relatively small Kotlin project.
 
@@ -79,8 +79,8 @@ Here are the results of the five runs:
 ```
 
 
-Buildkit for the win {#h2-1-buildkit-for-the-win}
--------------------------------------------------
+Buildkit for the win
+--------------------
 
 The last command line used the `DOCKER_BUILDKIT` environment variable. It's the way to tell Docker to use the legacy engine. If you didn't update Docker for some time, it's the engine that you're using. Nowadays, [BuildKit](https://github.com/moby/buildkit) has superseded it and is the new default.
 
@@ -141,8 +141,8 @@ Remember that we change the source code between runs. Files that we do not chang
 
 A fast glance at the logs reveals that the biggest bottleneck in the build is the download of all dependencies (including plugins). It occurs every time we change the source code. That's the reason why BuildKit doesn't improve the performance.
 
-Layers, layers, layers {#h2-2-layers-layers-layers}
----------------------------------------------------
+Layers, layers, layers
+----------------------
 
 We should focus our efforts on the dependencies. For that, we can leverage *layers* and split the build into two steps:
 
@@ -206,8 +206,8 @@ However, the subsequent builds are much faster. Changing the source code only af
 ```
 
 
-Volume mount in build {#h2-3-volume-mount-in-build}
----------------------------------------------------
+Volume mount in build
+---------------------
 
 Layering the build improved the build time drastically. We can change the source code and keep it low. There's one remaining issue, though. Changing a single dependency invalidates the layer, so we need to download all of them again.
 
@@ -278,8 +278,8 @@ It's a huge improvement regarding the build time:
 ```
 
 
-Considering the Maven daemon {#h2-4-considering-the-maven-daemon}
------------------------------------------------------------------
+Considering the Maven daemon
+----------------------------
 
 In the previous post regarding [regular Maven builds](https://blog.frankel.ch/faster-maven-builds/1/), I mentioned the Maven daemon. Let's change our build accordingly:
 
@@ -383,8 +383,8 @@ Here's the summary of all execution times:
 |         % gain         |   0.00%    |  -1.98%  |   91.63%   |  **91.35%**  | 5.74%  |
 |------------------------|------------|----------|------------|--------------|--------|
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Speeding up the performance of Maven builds inside of Docker is pretty different from regular builds. In Docker, the limiting factor is the download speed of dependencies If you're stuck on an old version, you need to use layers to cache dependencies.
 

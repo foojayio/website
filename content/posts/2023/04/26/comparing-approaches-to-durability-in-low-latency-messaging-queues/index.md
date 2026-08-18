@@ -19,13 +19,13 @@ related_posts:
 frozen: false
 ---
 
-A significant feature of [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=comparing-approaches "Chronicle Queue Enterprise") is support for TCP replication across multiple servers to ensure high availability of application infrastructure.
+A significant feature of [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/?utm_source=foojay&utm_medium=article&utm_campaign=comparing-approaches "Chronicle Queue Enterprise") is support for TCP replication across multiple servers to ensure high availability of application infrastructure.
 
 I have generally held the view that replicating data to a secondary system is faster than sync-ing to disk, assuming the round trip network delay wasn't high due to quality networks and co-located redundant servers.
 
 This is the first time I have benchmarked it with a realistic example.
 
-### Little's Law and Why Latency Matters {#h3-0-little-s-law-and-why-latency-matters}
+### Little's Law and Why Latency Matters
 
 In many cases, the assumption is that as long as throughput is high enough, the latency won't be a problem. However, latency is often a key factor in why the throughput isn't high enough.
 
@@ -39,7 +39,7 @@ To achieve a given throughput, the level of concurrency increases with the laten
 
 *Table 1. Level of concurrency/parallelism required to achieve a given throughput and latency.*
 
-### Best of Both Worlds {#h3-1-best-of-both-worlds}
+### Best of Both Worlds
 
 While sync-ing to disk is normally seen as a requirement for message durability, it carries a cost in terms of performance, directly increasing latency, but indirectly reducing throughput. Acknowledged replication gives similar guarantees and (spoiler alert) is quicker.
 
@@ -47,7 +47,7 @@ From time to time, however, you might get messages such as orders, trades or pay
 
 A trade-off would be to use acknowledged replication but sync to disk when some business risk threshold is reached, either in an individual message or an aggregation of messages. In this test, I explore the difference that sync-ing only 10 times per second could make.
 
-### Balancing Technical and Commercial Risks {#h3-2-balancing-technical-and-commercial-risks}
+### Balancing Technical and Commercial Risks
 
 Many IT systems tend to treat technical risks separately from commercial ones. For example, Kafka has the option to periodically sync data to disk say every 100 ms. This is regardless of the content or value of those messages. Unfortunately, you have no idea of the value of the messages that could be lost in that time.
 
@@ -55,7 +55,7 @@ However, you can achieve improved outcomes by aligning the technical solution wi
 
 Chronicle Queue has multiple ways of triggering a sync, however the simplest is to call sync() on the ExcerptAppender to sync everything up to the last message written. In Chronicle Services, writing a sync() event triggers a sync on the underlying queue, keeping a record of when it was performed. Downstream services can wait for this event if they need to know a sync was performed.
 
-### Low Latency vs Durability Requirements {#h3-3-low-latency-vs-durability-requirements}
+### Low Latency vs Durability Requirements
 
 Low latency systems 'need for speed' usually trumps the need for reliability, so the fastest option available is usually chosen. Messages are usually kept as small as is reasonably possible. E.g. 40 -- 256 bytes.
 
@@ -63,7 +63,7 @@ However, many financial systems have higher durability but lower latency speed r
 
 ![](Screenshot-2023-04-17-at-9.20.15-AM-1024x590.png)
 
-### Benchmarked Scenario {#h3-4-benchmarked-scenario}
+### Benchmarked Scenario
 
 Many systems support flushing or syncing to disk periodically, however, this is not based on the content of the messages. With Chronicle you can select the critical messages that have to be sync-ed to disk. There are several programmatic calls you can make to trigger or wait for a sync based on message content. Assuming our application has a small portion of messages that must be sync-ed to disk based on business requirements, we can sync only when those messages are written.
 
@@ -71,7 +71,7 @@ In this benchmark, (1) a client publishes a 1 KB message to a server over TCP, (
 
 Each case used fast machines (Ryzen 9 5950X) and a low latency network.. The OS was tuned for[isolating CPUs](https://access.redhat.com/solutions/480473 " isolating CPUs") to reduce latency, however no additional optimisations were added. Slower machines, disk subsystems, and network latencies will add to the timings below. No tuning was made to optimise how sync performed.
 
-### Low Latency Options with Small Messages {#h3-5-low-latency-options-with-small-messages}
+### Low Latency Options with Small Messages
 
 A simple way to reduce latencies is to do less work. Low latency systems tend to use smaller messages around 256 bytes; what latency can we get if we don't need strong resilience guarantees. In each case, the same configuration is used. The difference is which points are timed. This chart illustrates the performance you can get if you consider:
 
@@ -88,11 +88,11 @@ While these tests benefit from smaller messages (compare "M.2 Async\&Ack" in the
 
 You can customise how your system behaves, either at the queue level, by message type or even based on the message's contents, to align the technical risks to the commercial risks.
 
-### Waiting for either Replication Acknowledgement OR a Sync to Disk {#h3-6-waiting-for-either-replication-acknowledgement-or-a-sync-to-disk}
+### Waiting for either Replication Acknowledgement OR a Sync to Disk
 
 For systems where a sync to disk is currently required, there could be a significant latency improvement if the alternative is to wait for acknowledged replication. In this case, the latency is the same as the "Async\&Ack" options (plus network round trip time), falling back to the "Sync\&Ack" latency when the replica isn't available (or after failover to the secondary system)
 
-### SATA Solid State Drives with Medium Sized Messages {#h3-7-sata-solid-state-drives-with-medium-sized-messages}
+### SATA Solid State Drives with Medium Sized Messages
 
 Above we compared the same configuration timed at different stages. In this case, the end-to-end is timed, with different options for sync-ing to disk.
 
@@ -107,7 +107,7 @@ Solid State Drives are not unusual in enterprise-grade data storage systems. The
 
 As you can see from the yellow line, this significantly reduces the typical latency while improving the whole latency distribution for this SSD.
 
-### M.2 Solid State Drives with Medium Sized Messages {#h3-8-m-2-solid-state-drives-with-medium-sized-messages}
+### M.2 Solid State Drives with Medium Sized Messages
 
 M.2 drives perform much better across the board, and for the drive tested, even at 200Kmsg/s outperformed the SSD. Nevertheless, selective sync-ing still significantly improves the typical latency and the high end latencies. This is the same test as above but with a higher throughput of 200K/s vs 50K/s
 
@@ -116,13 +116,13 @@ M.2 drives perform much better across the board, and for the drive tested, even 
 
 Again, you can see that the yellow line has significantly lower latencies with selective sync-ing compared to sync-ing every batch of messages.
 
-### Head Room {#h3-9-head-room}
+### Head Room
 
 To put this in context, VISA has a capacity of [65,000 transaction messages per second](https://www.visa.co.uk/dam/VCOM/download/corporate/media/visanet-technology/aboutvisafactsheet.pdf "65,000 transaction messages per second") (as of Aug 2017). This is a single pair of servers via a single TCP connection. Having greater headroom immediately available can increase reliability, reducing the risk of the system being overloaded in a burst of activity and reducing the time the system takes to return to normal operation.
 
 Increased head room reduces the risk of a [cascading failure](https://en.wikipedia.org/wiki/Cascading_failure "cascading failure") in the event of a burst of activity or an interruption.
 
-### Conclusion {#h3-10-conclusion}
+### Conclusion
 
 Sync-ing to disk with SSDs, was under 25 milliseconds most of the time for even decent throughputs, up to 50K/s.
 

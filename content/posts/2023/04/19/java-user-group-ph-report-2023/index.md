@@ -23,8 +23,8 @@ The [Java User Group Philippines](https://www.meetup.com/java-user-group-ph/ "Ja
 
 A three hour lunch and learn session was done with activities and prizes.
 
-How did the revitalization start? {#h2-0-how-did-the-revitalization-start}
---------------------------------------------------------------------------
+How did the revitalization start?
+---------------------------------
 
 The revitalization started last January 2023 when Geertjan Wielenga connected the Java User Group PH [Facebook page](https://www.facebook.com/groups/jugph "Facebook Page") together with the Philippine JUG Leaders and Java enthusiasts.
 
@@ -32,10 +32,10 @@ The discussion comprises the date, venue, food and beverage and swags.
 
 The budget of the event would not have been possible without the help of Ning Lim of Azul Singapore and JUG leaders and volunteers of Java User Group PH.
 
-The Event {#h2-1-the-event}
----------------------------
+The Event
+---------
 
-### Preparation of the event {#h3-2-preparation-of-the-event}
+### Preparation of the event
 
 The preparation started last March in Makati, Philippines to conduct a mock presentation and check of devices to be used in the event.
 
@@ -47,7 +47,7 @@ We created a meetup group for our joiners to RSVP to this event.
 
 The Foojay.io Twitter community helped us to cascade events.
 
-### Before the talk {#h3-3-before-the-talk}
+### Before the talk
 
 The meetup was a hybrid event where the virtual option was held in Zoom. We had a last run of preparations to make sure that all devices are working and expectations are met.
 
@@ -55,7 +55,7 @@ The event started at 10:45 AM GMT+8 and we already opened the door (for onsite a
 
 Before Simon proceeded with his talk, I first introduced the Java User Group PH and the PinoyJUG by Calen Legaspi.
 
-### What is New in Java by Simon Ritter {#h3-4-what-is-new-in-java-by-simon-ritter}
+### What is New in Java by Simon Ritter
 
 The talk given by Simon Ritter encompasses the new features of Java starting from JDK 12 to JDK 20.
 
@@ -67,7 +67,7 @@ The presentation slide is available in JUG PH GitHub [repository](https://github
 
 ![](photo_3-700x382.jpg)
 
-### After the talk {#h3-5-after-the-talk}
+### After the talk
 
 The last thing that all attendees want before the speaker leaves is to have a picture.
 
@@ -83,7 +83,7 @@ Also, the JUG PH and PinoyJUG leaders who organized the event had a picture too 
 
 ![JUG Leader and Azul Photo](photo_4-700x435.jpg)
 
-### Swags and Lunch {#h3-6-swags-and-lunch}
+### Swags and Lunch
 
 We gave lunch to our attendees which consist of European, Chinese, Filipino and Vegetarian dishes.
 
@@ -91,15 +91,15 @@ The swags given to our attendees are stickers and t-shirts with logos of JUG PH,
 ![JUG PH sticker](sticker-393x510.jpg)  
 ![JUG PH Sticker and Shirt](sticker_shirt-300x260.jpg)
 
-Thanks to.. {#h2-7-thanks-to}
------------------------------
+Thanks to..
+-----------
 
 I would like to thank the O \& B Philippines specifically [Calen Legaspi](https://www.linkedin.com/in/calenlegaspi/ "Calen Legaspi") and [Adam Breen](https://www.linkedin.com/in/therealadambreen/ "Adam Breen") for the venue. [Dane Villaceran](https://www.linkedin.com/in/dcdcvillaceran/ "Dane") and [Janette Barra](https://www.linkedin.com/in/janette-barra-4a8049204/ "Janette") for helping us organize the event.
 
 I would like to thank the JUG PH volunteers including [Kerby Martino](https://www.linkedin.com/in/kerbymartino/ "Kerby Martino") for discussing what will be the plan for the Java Community effort and **Jansen Ang** for helping create the website and stickers.
 
-Till the next meetup {#h2-8-till-the-next-meetup}
--------------------------------------------------
+Till the next meetup
+--------------------
 
 In the above statements we presented what happened in the revitalized Java User Group event, including what we learned and the preparations we did.
 

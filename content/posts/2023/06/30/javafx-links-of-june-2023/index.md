@@ -20,8 +20,8 @@ frozen: false
 
 Again a lot has been shared this month in the [jfx-central.com](https://www.jfx-central.com/home) #LinksOfTheWeek! And that website itself is "under heavy construction" as version 2 is getting a completely new design and several improvements. Your help is wanted! See the last section of this summary...
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * [Rampdown Phase 1 (RDP1) for JavaFX 21 starts on July 13, 2023 at 16:00 UTC (09:00 Pacific time)](https://twitter.com/OpenJDK/status/1669074682505572353), about four weeks from now.
 * JavaFX 21 Early-Access Builds Build 21 is available from [jdk.java.net/javafx21](https://jdk.java.net/javafx21/), addressing [these issues](https://bugs.openjdk.org/browse/JDK-8301312?jql=project%20%3D%20JDK%20AND%20fixversion%20%3D%20jfx21%20and%20component%20%3D%20javafx%20and%20%22resolved%20in%20build%22%20%3D%20b21%20order%20by%20component%2C%20subcomponent). JavaFX 21-ea is designed to work with JDK 21-ea, but it is known to work with JDK 17 and later versions.
@@ -31,8 +31,8 @@ Core {#h2-0-core}
 * [**Dirk Lemmermann** is looking for help with a Webkit issue in JavaFX 18.0.1](https://github.com/dlsc-software-consulting-gmbh/GMapsFX/issues/204).
 * [**Abdelrahman Bayoumi**](https://twitter.com/Abdelrahman_B1) explores a solution to resolve the challenges when it comes to [rendering Arabic, being a right-to-left script](https://dev.to/abdelrahmanbayoumi/arabic-text-rendering-issues-in-javafx-3j9i).
 
-Applications {#h2-1-applications}
----------------------------------
+Applications
+------------
 
 * [**Sean Phillips** is almost ready to make the sources of Trinity available](https://twitter.com/SeanMiPhillips/status/1662197944718876672)...
   * [He is using Trinity to distinguish between human and chatGPT altered text](https://twitter.com/SeanMiPhillips/status/1666617132338102273).
@@ -52,8 +52,8 @@ Applications {#h2-1-applications}
 * [**Maciek Gorywoda** shared v1.0.0 FxCalculator](https://twitter.com/makingthematrix/status/1669374799246774278): "It's, well, a calculator for your Android phone." Read the whole thread to learn more, e.g. that it's written in Scala 3.3, JavaFX, Gluon, and built with GraalVM Native Image.
 * [**Jamie Macaulay** is working on SUDUnpacker](https://twitter.com/jam_machund/status/1671102745309265920) to handle SoundTraps sud files.
 
-Games {#h2-2-games}
--------------------
+Games
+-----
 
 * [**Johan Vos** stumbled into this addictive web game, written in JavaFX by **Gerrit Grunwald** using WebFX: tetris.webfx.dev](https://foojay.social/@johanvos@mastodon.social/110461937691524803): "It's great to see how developers are using JavaFX to make cool stuff."
 * [**OrangoMango** made Snake v1.0 available on itch](https://twitter.com/orango_mango/status/1662758757506469889). Thanks to WebFX, there is now a web version that is playable in the browser (fullscreen is recommended).
@@ -66,22 +66,22 @@ Games {#h2-2-games}
   * [He is trying to hypnotize us](https://twitter.com/AlmasBaim/status/1664730029887037441).
   * [And he is drawing circles with triangles and FXGL](https://twitter.com/AlmasBaim/status/1673700044556386304).
 
-Components, Libraries, Tools {#h2-3-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * Last week we shared the TreeMap chart by **Matt Coley** here. In a new video, you can see a [practical demo of TreeMapFX in Recaf](https://twitter.com/invokecoley/status/1663073175431675904).
 * [**Sven Ruppert** shared that work has started on TestFX 4](https://mastodon.social/@svenruppert/110436643725621744), after longer silence. You can find the project on [testfx.github.io/TestFX](https://testfx.github.io/TestFX/).
 * [**Dirk Lemmermann** sees there truly is a big need for custom window decorations and found an extra one](https://twitter.com/dlemmermann/status/1669473442163294210).
 * [**Jaroslav Tulach** is discussing JavaFX Lite](https://twitter.com/JaroslavTulach/status/1449827890300915718) and is asking for feedback: "Would you find #javafxlight - e.g. coding in #javafx \& rendering via #HTML5 useful?"
 
-Podcast, Videos {#h2-4-podcast-videos}
---------------------------------------
+Podcast, Videos
+---------------
 
 * [**Gerrit Grunwald** and **Ixchel Ruiz** talking at JNation](https://www.linkedin.com/feed/update/urn:li:activity:7071865436115468288/) about Graphical User Interfaces with Java.
 * [Foojay Podcast #25: Game Development with Java, JavaFX, and FXGL](https://foojay.io/today/foojay-podcast-25/). **Gerrit Grunwald** (aka _hansolo), **Almas Baim** (aka the FXGL creator), and **Chengen Zhao** (aka WhiteWoodCity) talk with **Frank Delporte** about why Java should be on your game-development-language-list.
 
-Tutorials {#h2-5-tutorials}
----------------------------
+Tutorials
+---------
 
 * **Coding Examples** uploaded new videos to "JavaFX 3D Tutorials". For example: ["Animation \| Fade Transition", to create a Text and make it blink using the FadeTransition class](https://www.youtube.com/watch?v=9YSor8d3Hzk). using the shape's transparency to achieve the required effect.
 * [**Sten Nordström** got asked if there are any good JavaFX courses available?](https://twitter.com/safetyvalve/status/1664349425228038144): "Asker has experience with other platforms and some Java knowledge. Online, or possibly in person in Scandinavia/Northern Europe." Who has more ideas? What should we add to [jfx-central.com/tutorials](https://www.jfx-central.com/tutorials)?
@@ -90,15 +90,15 @@ Tutorials {#h2-5-tutorials}
 * In French: [**Jason Champagne** has a series of videos, part 2](https://twitter.com/jachampagne8/status/1674085894700113921): "Point essentiel en JavaFX sur l'architecture des différents composants, en particulier le Scene Graph et la gestion des fenêtres (stages)".
 * Not new, but just discovered: [Video series by **Jaret Wright** to create a JavaFX Memory Game](https://www.youtube.com/watch?v=guXTwZpGVRk&list=PLoodc-fmtJNbeL8P1DizFcgjp62UjvJ3t).
 
-Miscellaneous {#h2-6-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Donald Raab** is hoping to get back to experimenting with JavaFX again this summer](https://twitter.com/TheDonRaab/status/1662199629407027203) and to submit conference talks...
 * [**Sten Nordström** is looking for JavaFX tutorials](https://mastodon.online/@sten/110470561467745227): "Asker has experience with other platforms and some Java knowledge. Online, or possibly in person in Scandinavia/Northern Europe." Who can help him? First starting point should of course be: [jfx-central.com/tutorials](https://www.jfx-central.com/tutorials) 😉
 * [A help request on Reddit to build a JavaFX project in VsCode](https://www.reddit.com/r/JavaFX/comments/1483fio/need_help_building_javafx_project_in_vscode/).
 
-JFX-Central {#h2-7-jfx-central}
--------------------------------
+JFX-Central
+-----------
 
 * Service call to all the people who have "something" on JFX-Central (library, book, tutorial,...). We are reviewing all info on the website in preparation of the new JFX-Central version. But we need your help, please contact us or make a pull request in [jfxcentral-data](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data) to make sure all the info is still correct and up-to-date. Thanks!
 * More previews of version 2 of jfx-central.com:

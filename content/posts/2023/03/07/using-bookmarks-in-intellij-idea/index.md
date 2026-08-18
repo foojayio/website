@@ -27,8 +27,8 @@ You could use Recent Files (**⌘E** on macOS, or **Control+E** on Windows/Linux
 
 Let's take a look!
 
-Add anonymous bookmarks {#h2-0-add-anonymous-bookmarks}
--------------------------------------------------------
+Add anonymous bookmarks
+-----------------------
 
 We can bookmark a line by pressing **F3** (on macOS) or **F11** (on Windows/Linux).
 
@@ -46,8 +46,8 @@ We can use the shortcut (**F3** on macOS, or **F11** on Windows/Linux) or we can
 
 ![Bookmark project item](bookmark-project-item.png)
 
-Add mnemonic bookmarks {#h2-1-add-mnemonic-bookmarks}
------------------------------------------------------
+Add mnemonic bookmarks
+----------------------
 
 We can also create bookmarks that are assigned to a digit (0 to 9) or letter (A to Z). To add a mnemonic line bookmark, press **⌥ F3** (on macOS) or **Control+F11** (on Windows/Linux) and press the digit or letter to use as an identifier for this bookmark.
 
@@ -67,12 +67,12 @@ If the selected digit or letter is already in use, IntelliJ IDEA will ask you wh
 
 ![Rewrite Mnemonic Bookmark](rewrite-mnemonic.png)
 
-Navigate to bookmarks {#h2-2-navigate-to-bookmarks}
----------------------------------------------------
+Navigate to bookmarks
+---------------------
 
 There are several options to navigate to the bookmarks we have created.
 
-### Show line bookmarks {#h3-3-show-line-bookmarks}
+### Show line bookmarks
 
 To see all **line** bookmarks that we have in the code, we can open the **Bookmarks** popup by pressing **⌘ F3** (on macOS) or **Shift+F11** (on Windows/Linux) or go to **Edit \| Bookmarks \| Show Line Bookmarks**.
 
@@ -86,7 +86,7 @@ We can select the bookmark we want to navigate to, either with up and down arrow
 
 ![Bookmark popup](bookmark-popup.png)
 
-### Jump to mnemonic bookmark {#h3-4-jump-to-mnemonic-bookmark}
+### Jump to mnemonic bookmark
 
 To jump straight to a mnemonic bookmark, hold **\^** (on macOS) or **Control** (on Windows/Linux) and press the mnemonic digit or letter on the keyboard.
 
@@ -98,7 +98,7 @@ This works in the **Bookmarks** popup too!
 
 ![Assign Mnemonic](assign-mnemonic.png)
 
-### Bookmarks tool window {#h3-5-bookmarks-tool-window}
+### Bookmarks tool window
 
 To see all our bookmarks, we can open the **Bookmarks** tool window by pressing **⌘ 2** (on macOS) or **Alt+2** (on Windows/Linux), or by selecting **View \| Tool Windows \| Bookmarks** from the main menu.
 
@@ -112,7 +112,7 @@ We can also turn that off in the **Options** menu, by deselecting **Group Line B
 
 ![Bookmark Tool Window options](options.png)
 
-### Bookmarks lists {#h3-6-bookmarks-lists}
+### Bookmarks lists
 
 Another option we do want to show you here is that you can create more lists.
 
@@ -136,7 +136,7 @@ And we can sort bookmarks by selecting a bookmark and using Move down (**⌥ ⌘
 
 ![Breakpoints](breakpoints.png)
 
-### Bookmark editor tabs {#h3-7-bookmark-editor-tabs}
+### Bookmark editor tabs
 
 Finally, we can also bookmark editor tabs. Click the **...** to the right of the tabs and select **Bookmark Open Tabs**.
 
@@ -146,14 +146,14 @@ We can enter a name for this list in the **Create Bookmark List** popup.
 
 ![Create Bookmark List popup](create-bookmark-list-popup.png)
 
-Summary and Shortcuts {#h2-8-summary-and-shortcuts}
----------------------------------------------------
+Summary and Shortcuts
+---------------------
 
 As we've seen, bookmarks allow us to "save" certain interesting locations in the code base, so we can easily go back to them later.
 
 Now we know how to create bookmarks and how to navigate to bookmarks we have created.
 
-### IntelliJ IDEA Shortcuts Used {#h3-9-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -170,7 +170,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Move down                                                                                        | **⌥ ⌘ ↓**         | **Ctrl+Alt+↓**           |
 | Move up                                                                                          | **⌥ ⌘ ↑**         | **Ctrl+Alt+↑**           |
 
-### Related Links {#h3-10-related-links}
+### Related Links
 
 * [(video) JetBrains - Using bookmarks in IntelliJ IDEA](https://www.youtube.com/watch?v=2PG03drOEMk)
 * [(documentation) JetBrains IntelliJ IDEA -- Bookmarks](https://www.jetbrains.com/help/idea/bookmarks.html)

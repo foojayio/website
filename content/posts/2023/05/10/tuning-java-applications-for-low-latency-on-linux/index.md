@@ -18,15 +18,15 @@ related_posts:
 frozen: false
 ---
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 I have lost count of the number of times I have been told that Java is not a suitable language in which to develop applications where performance is a major consideration. My first response is usually to ask for clarification on what is actually meant by "performance" as two of the most common measures -- throughput and latency, sometimes conflict with each other, and approaches to optimise for one may have a detrimental effect on the other.
 
-At [Chronicle Software](https://chronicle.software/?utm_source=article&amp;utm_medium=foojay&amp;utm_campaign=tune-low-latency "Chronicle Software"), we are heavily focused on building applications that are optimised for low latency, meaning that the application must consistently respond to events in a very short time. Over several years we have developed considerable expertise in this area, our libraries contain highly efficient Java code that provides an effective platform for an application's business logic to be implemented.
+At [Chronicle Software](https://chronicle.software/?utm_source=article&utm_medium=foojay&utm_campaign=tune-low-latency "Chronicle Software"), we are heavily focused on building applications that are optimised for low latency, meaning that the application must consistently respond to events in a very short time. Over several years we have developed considerable expertise in this area, our libraries contain highly efficient Java code that provides an effective platform for an application's business logic to be implemented.
 
 However, even this may not be enough to get the best performance from a latency perspective. Java applications still have to rely on the Operating System to provide access to the underlying hardware. Typically latency-sensitive (often called "Real Time") applications operate best when there is almost direct access to the underlying hardware, and the same applies to Java. In this article we will introduce some approaches that can be taken when we want to have our applications utilise system resources most effectively.
 
-### The "Problem" with Java {#h3-1-the-problem-with-java}
+### The "Problem" with Java
 
 Java was designed from the outset to be portable at a binary level across a wide range of hardware and system architectures. This was done by designing and implementing a virtual machine -- an abstract model of an execution platform -- and having this execute the output of the Java source compiler. The argument was that moving to a different type of hardware platform would require only the virtual machine to be ported. Applications and libraries would work without modification (the "write once run everywhere" slogan).
 
@@ -36,7 +36,7 @@ Over the years, the Java virtual machine has evolved into an extremely sophistic
 
 But at the end of the day, the Java virtual machine is not hardware -- it still requires to be run on top of an Operating System to manage its access to the hardware platform. Whether that Operating System is Linux (probably the most widely used in server-side environments), Windows, or some other, the issue still remains.
 
-### The "Problem" With Linux {#h3-2-the-problem-with-linux}
+### The "Problem" With Linux
 
 Linux has evolved over the years as a member of the Unix family of operating systems. The first version of Unix was developed in the late 1960s; it grew and achieved great popularity in academic and research circles at first, and then in various guises in the commercial world. Linux has become the dominant variant of Unix -- although it still retains many of the original features. Nowadays with the emergence of container-based execution environments and the Cloud, its dominance has become almost complete.
 
@@ -48,11 +48,11 @@ However as multi-CPU computers evolved some serious re-engineering was required 
 
 Nowadays, almost every computer will have multiple cores, from mobile devices like phones, through workstations, to server-class machines. It seems valid to examine these environments and see if there are different approaches that we can take, to improve the platform to more effectively support real-time, latency-sensitive applications.
 
-### How Can We Tackle These Problems? {#h3-3-how-can-we-tackle-these-problems}
+### How Can We Tackle These Problems?
 
 #### The Java Runtime
 
-The main issues that can affect latency in Java applications are those connected to the management of the garbage collected heap, and synchronisation of access to shared resources using locks. Techniques exist to address both of these, although they do require developers to depart somewhat from idiomatic Java programming style. Ideally we would use libraries that encapsulate the lower level details and specialised techniques, such as those offered by [Chronicle](https://chronicle.software/?utm_source=article&amp;utm_medium=foojay&amp;utm_campaign=tune-low-latency "Chronicle").
+The main issues that can affect latency in Java applications are those connected to the management of the garbage collected heap, and synchronisation of access to shared resources using locks. Techniques exist to address both of these, although they do require developers to depart somewhat from idiomatic Java programming style. Ideally we would use libraries that encapsulate the lower level details and specialised techniques, such as those offered by [Chronicle](https://chronicle.software/?utm_source=article&utm_medium=foojay&utm_campaign=tune-low-latency "Chronicle").
 
 The core offerings of Chronicle are based on extremely low latency message passing between threads/processes. To achieve this, memory that is not part of the normal Java heap is used (referred to as "off heap" memory). The clear advantage of this approach is that this memory is not subject to the non-deterministic interventions of the Garbage Collector. The memory is mapped to persistent storage using normal operating system mechanisms, or alternatively replicated over network connections to other systems.
 
@@ -82,8 +82,8 @@ Alternatively we can partition the CPUs into groups, and associate a group of CP
 
 Just like with the memory capabilities described above we are being selfish, as doing this will clearly have a negative effect on other parts of the system. Great care is needed to configure for the best outcome, as the potential for errors is high and the consequences can be serious. Chronicle has developed significant expertise in these areas and can offer advice based on our experience in deploying our solutions.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Writing and deploying low latency applications is a highly skilled activity, requiring knowledge of not just the language being used, but the environment in which the applications are to run. In this article I've presented an overview of some of the areas that require consideration, and how they can be addressed.
 
-[Chronicle](https://chronicle.software/?utm_source=article&amp;utm_medium=foojay&amp;utm_campaign=tune-low-latency "Chronicle") has significant expertise in this area and can offer advice and recommendations on your requirements through our expert consulting team.
+[Chronicle](https://chronicle.software/?utm_source=article&utm_medium=foojay&utm_campaign=tune-low-latency "Chronicle") has significant expertise in this area and can offer advice and recommendations on your requirements through our expert consulting team.

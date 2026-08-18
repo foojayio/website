@@ -24,7 +24,7 @@ The following article is an excerpt from my book **Effortless Cloud-Native App D
 
 It is available for order from [Amazon.com](https://www.amazon.com/Effortless-Cloud-Native-Development-using-Skaffold/dp/1801077118) and directly from [Packt](https://www.packtpub.com/product/effortless-cloud-native-apps-development-using-skaffold/9781801077118). This excerpt comes from chapter 9: Creating a Production-Ready CI/CD Pipeline with Skaffold:
 
-### What is GitOps {#h3-0-what-is-gitops}
+### What is GitOps
 
 The word GitOps was coined by a company named Weaveworks. The idea behind GitOps is to consider Git as a single source of truth for your application and declarative infrastructure. Using Git to manage your declarative infrastructure makes it easy for developers because they interact with Git daily. Once you add configuration inside Git, you get the benefits of version control, such as reviewing changes using pull requests, audit, and compliance.
 
@@ -32,7 +32,7 @@ With GitOps, we create automated pipelines to roll out changes to your infrastru
 
 You can easily roll back your changes from Kubernetes by doing a simple git revert. In disaster scenarios or if someone accidentally nuked your entire Kubernetes cluster, we could quickly reproduce your whole cluster infrastructure from Git.
 
-### What are the benefits of GitOps {#h3-1-what-are-the-benefits-of-gitops}
+### What are the benefits of GitOps
 
 * Using GitOps, the team is shipping 30-100 changes per day to production. Of course, you need to use deployment strategies such as blue-green and canary to validate your changes before making them available to all the users. The overall benefit is an increase in developer productivity.
 * You get a better developer experience with GitOps as developers are pushing code and not containers. Moreover, they use familiar tools such as Git and don't need to know about the internals of Kubernetes (that is, kubectl commands).
@@ -42,13 +42,13 @@ You can easily roll back your changes from Kubernetes by doing a simple git reve
 
 It's only fair that we also cover some details about Argo CD so that it's easier to understand the later part where we implement a GitOps workflow using Skaffold and Argo CD.
 
-### What is Argo CD? {#h3-2-what-is-argo-cd}
+### What is Argo CD?
 
 As per the official documentation of [Argo CD](https://argo-cd.readthedocs.io/en/stable/), it is a declarative, GitOps continuous delivery tool for Kubernetes. In the previous section, we used the term GitOps tool that can compare and sync the application state if it deviates from what we have defined in the Git repository, so it is safe to say that Argo CD is the tool that handles this automation.
 
 Kubernetes introduced us to the concept of control loops through which Kubernetes checks whether the number of replicas running matches with the desired number of replicas. Argo CD leverages the same Kubernetes (K8s) capabilities, and its core component is argocd-applicationcontroller, which is basically a Kubernetes controller. It monitors the state of your application and adjusts the cluster accordingly.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 I hope you found this excerpt helpful. Chapter 9 covers the practical knowledge of how you can use GitHub Actions to automate your development workflows. We have also explained how you could build, test, and deploy your Java applications from your GitHub repository.
 

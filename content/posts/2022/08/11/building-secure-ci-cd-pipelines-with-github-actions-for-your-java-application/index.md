@@ -32,8 +32,8 @@ You can create workflows that build and test every pull request to your reposito
 
 And by integrating Snyk into your GitHub CI/CD, you can automate security scanning as part of your build cycle prior to production.
 
-Setting up a Github Actions CI Pipeline for Java {#h2-0-setting-up-a-github-actions-ci-pipeline-for-java}
----------------------------------------------------------------------------------------------------------
+Setting up a Github Actions CI Pipeline for Java
+------------------------------------------------
 
 GitHub Actions workflows are YAML files in the `.github/workflows` folder. If you do not have a workflow, or want to add a new one, select **Actions** and **New workflow**.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-workflows-1240x274.jpg)
@@ -70,14 +70,14 @@ This action will run on every push or pull request on the master branch. It is b
 
 If you're familiar with the syntax, this workflow is relatively straightforward, but you can refer to the [GitHub Actions documentation](https://docs.github.com/en/actions) for a complete overview of the possibilities.
 
-Integrating Snyk in your Github CI/CD {#h2-1-integrating-snyk-in-your-github-ci-cd}
------------------------------------------------------------------------------------
+Integrating Snyk in your Github CI/CD
+-------------------------------------
 
 With Snyk, you can integrate security testing for your new Java project. There are two primary methods for doing this. However, let's make sure two things are set up first.
 
 Begin by logging into your Snyk account, [creating one for free](https://app.snyk.io/login) if you haven't already. Then set your API key as a secret `SNYK_TOKEN` for your GitHub repository.
 
-### OPTION 1: INTEGRATE THE SNYK CLI IN A BUILD STEP OF YOUR GITHUB ACTION {#h3-2-option-1-integrate-the-snyk-cli-in-a-build-step-of-your-github-action}
+### OPTION 1: INTEGRATE THE SNYK CLI IN A BUILD STEP OF YOUR GITHUB ACTION
 
 You can use the Snyk CLI to automatically run security scans inside your current build.
 
@@ -109,7 +109,7 @@ env:
 
 The benefit of this approach is that you only have to compile and build your application once, which can save a lot of time when building large applications. The downside is the steps are used in series, and might not be efficient if one of the later steps fails.
 
-### OPTION 2: USE THE PREDEFINED GITHUB ACTIONS FROM SNYK TO CREATE YOUR CI/CD PIPELINE {#h3-3-option-2-use-the-predefined-github-actions-from-snyk-to-create-your-ci-cd-pipeline}
+### OPTION 2: USE THE PREDEFINED GITHUB ACTIONS FROM SNYK TO CREATE YOUR CI/CD PIPELINE
 
 Snyk created a set of GitHub Actions to check for vulnerabilities in your projects. The required action depends on your language or build tool. For example, we'll use the [maven-based GitHub Action](https://github.com/snyk/actions/tree/master/maven) shown below for our Java project.
 
@@ -150,8 +150,8 @@ While Snyk scans our dependencies, let's check the Java code for vulnerabilities
 
 Notice that all three jobs will run in parallel, which is, in many cases, more efficient.
 
-Adding secure continuous delivery to your GitHub CI/CD {#h2-4-adding-secure-continuous-delivery-to-your-github-ci-cd}
----------------------------------------------------------------------------------------------------------------------
+Adding secure continuous delivery to your GitHub CI/CD
+------------------------------------------------------
 
 Now, let's discuss the deployment --- or delivery --- part of your GitHub CI/CD. After building and testing are completed, it's time to publish the package to GitHub. To establish this, we'll use the Maven release plugin in our Java project
 
@@ -217,8 +217,8 @@ In addition to scanning during development, we can use Snyk to monitor dependenc
 This will send the dependency tree, which is static after release, over to Snyk for monitoring. We can now view our project in the Snyk UI, and get automatic notifications if a new vulnerability is found for any of the dependencies we're using --- and ensure that our published Java project remains vulnerability free.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-snyk-ui-1240x149.jpg)
 
-Integrating security in your GitHub Actions {#h2-5-integrating-security-in-your-github-actions}
------------------------------------------------------------------------------------------------
+Integrating security in your GitHub Actions
+-------------------------------------------
 
 With GitHub Actions, creating a CI/CD pipeline for your GitHub project is quite straightforward. And with the Snyk actions, you can easily integrate security scanning on multiple levels for all applications.  
 

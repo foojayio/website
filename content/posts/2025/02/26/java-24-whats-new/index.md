@@ -25,8 +25,8 @@ frozen: false
 
 Java 24 contains not less than 24 JEPs, a record and above all an eponymous figure!
 
-JEP 404: Generational Shenandoah (Experimental) {#h2-0-jep-404-generational-shenandoah-experimental}
-----------------------------------------------------------------------------------------------------
+JEP 404: Generational Shenandoah (Experimental)
+-----------------------------------------------
 
 Shenandoah is a Garbage Collector (GC) originally developed by RedHat and included in OpenJDK. It reduces GC pause times by performing evacuation work concurrently to application threads.
 
@@ -40,8 +40,8 @@ To enable generational mode, use the following JVM options: `-XX:+UnlockExperime
 
 More information in the [JEP 404](https://openjdk.org/jeps/404 "JEP").
 
-JEP 450: Compact Object Headers (Experimental) {#h2-1-jep-450-compact-object-headers-experimental}
---------------------------------------------------------------------------------------------------
+JEP 450: Compact Object Headers (Experimental)
+----------------------------------------------
 
 This JEP comes from the Liliput project, whose aim is to reduce the size of object headers from 128 bits to 64 bits or less. In fact, this is exactly what JEP 450 delivers: an experimental mode for the JVM that reduces object headers to 64 bits.
 
@@ -59,8 +59,8 @@ There are a few limitations to this mode: it cannot support heaps larger than 8T
 
 More information in the [JEP 450](https://openjdk.org/jeps/450 "JEP").
 
-JEP 472: Prepare to Restrict the Use of JNI {#h2-2-jep-472-prepare-to-restrict-the-use-of-jni}
-----------------------------------------------------------------------------------------------
+JEP 472: Prepare to Restrict the Use of JNI
+-------------------------------------------
 
 JEP 472 restricts the use of the Java Native Interface (JNI) and adjusts the Foreign Function and Memory (FFM) API accordingly.
 
@@ -85,8 +85,8 @@ This JEP is part of a set of JVM changes to restrict certain JVM features by def
 
 More information in the [JEP 472](https://openjdk.org/jeps/472 "JEP").
 
-JEP 475: Late Barrier Expansion for G1 {#h2-3-jep-475-late-barrier-expansion-for-g1}
-------------------------------------------------------------------------------------
+JEP 475: Late Barrier Expansion for G1
+--------------------------------------
 
 JEP 475 simplifies the implementation of G1 Garbage Collector (GC) barriers by moving their expansion from the beginning of the JVM\\'s Just In Time (JIT) compiler pipeline (C2) to the end.
 
@@ -96,8 +96,8 @@ Preliminary tests have shown that setting up G1 barriers has an [overhead of 10 
 
 More information in the [JEP 475](https://openjdk.org/jeps/475 "JEP") and in the article [When should a compiler expand garbage collection barriers?](https://robcasloz.github.io/blog/2024/02/14/when-should-a-compiler-expand-garbage-collection-barriers.html) de Roberto Castañeda Lozano.
 
-JEP 478: Key Derivation Function API (Preview) {#h2-4-jep-478-key-derivation-function-api-preview}
---------------------------------------------------------------------------------------------------
+JEP 478: Key Derivation Function API (Preview)
+----------------------------------------------
 
 New API for Key Derivation Functions (KDFs), which are cryptographic algorithms that derive additional keys from a secret key and other data.
 
@@ -107,15 +107,15 @@ KDF is also one of the building blocks required to implement Hybrid Public Key E
 
 More information in the [JEP 478](https://openjdk.org/jeps/478 "JEP").
 
-JEP 479: Remove the Windows 32-bit x86 Port {#h2-5-jep-479-remove-the-windows-32-bit-x86-port}
-----------------------------------------------------------------------------------------------
+JEP 479: Remove the Windows 32-bit x86 Port
+-------------------------------------------
 
 The Windows 32-bit JVM port for x86 architectures has been deprecated in Java 21, and will be removed in Java 24.
 
 More information in the [JEP 479](https://openjdk.org/jeps/479 "JEP").
 
-JEP 483: Ahead-of-Time Class Loading \& Linking {#h2-6-jep-483-ahead-of-time-class-loading-linking}
----------------------------------------------------------------------------------------------------
+JEP 483: Ahead-of-Time Class Loading \& Linking
+-----------------------------------------------
 
 The purpose of this new feature is to improve JVM startup time by making an application\\'s classes instantly available, in a loaded and linked state, when the JVM starts.
 
@@ -145,8 +145,8 @@ An application such as Spring PetClinic loads and links around 21,000 classes at
 
 More information in the [JEP 483](https://openjdk.org/jeps/483 "JEP").
 
-JEP 486: Permanently Disable the Security Manager {#h2-7-jep-486-permanently-disable-the-security-manager}
-----------------------------------------------------------------------------------------------------------
+JEP 486: Permanently Disable the Security Manager
+-------------------------------------------------
 
 The Security Manager was deprecated in Java 17, and is now completely removed from the JDK!
 
@@ -162,8 +162,8 @@ Stuart Marks has written an interesting article about the Security Manager remov
 
 More information in the [JEP 486](https://openjdk.org/jeps/486 "JEP").
 
-JEP 490: ZGC: Remove the Non-Generational Mode {#h2-8-jep-490-zgc-remove-the-non-generational-mode}
----------------------------------------------------------------------------------------------------
+JEP 490: ZGC: Remove the Non-Generational Mode
+----------------------------------------------
 
 ZGC is a Garbage Collector (GC) developed by Oracle and included in OpenJDK. It reduces GC pause times by performing evacuation work concurrently of application threads.
 
@@ -171,8 +171,8 @@ ZGC was non-generational when it was created, but has had a generational mode si
 
 More information in the [JEP 490](https://openjdk.org/jeps/490 "JEP").
 
-JEP 491: Synchronize Virtual Threads without Pinning {#h2-9-jep-491-synchronize-virtual-threads-without-pinning}
-----------------------------------------------------------------------------------------------------------------
+JEP 491: Synchronize Virtual Threads without Pinning
+----------------------------------------------------
 
 Virtual threads are lightweight threads with low creation and scheduling costs, making it easier to write concurrent applications. When a virtual thread executes, it is mounted on a platform thread (thread OS).
 
@@ -182,8 +182,8 @@ With JEP 491, virtual threads will now unmount their platform thread in the even
 
 More information in the [JEP 491](https://openjdk.org/jeps/491 "JEP").
 
-JEP 493: Linking Run-Time Images without JMODs {#h2-10-jep-493-linking-run-time-images-without-jmods}
------------------------------------------------------------------------------------------------------
+JEP 493: Linking Run-Time Images without JMODs
+----------------------------------------------
 
 JEP 493 reduces the size of the JDK by around 25% by enabling the jlink tool to create custom runtime images without using the JDK\\'s JMOD files. This feature must be enabled when the JDK is built; not all JDK vendors might enable it, but it\\'s likely that they will and that JDK 24 will be 25% smaller than previous versions!
 
@@ -191,8 +191,8 @@ JMOD files are the JDK module files used by jlink to create an image of the JDK;
 
 More information in the [JEP 493](https://openjdk.org/jeps/493 "JEP").
 
-JEP 496: Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism {#h2-11-jep-496-quantum-resistant-module-lattice-based-key-encapsulation-mechanism}
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+JEP 496: Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism
+---------------------------------------------------------------------------
 
 JEP 496 provides an implementation of the key encapsulation mechanism based on a quantum-resistant algorithm Module-Lattice (ML-KEM). Key Encapsulation Mechanisms (KEMs) are used to secure symmetric keys over unsecured communication channels using public key cryptography. ML-KEM has been standardized by the U.S. National Institute of Standards and Technology (NIST) as part of the [FIPS 203](https://csrc.nist.gov/pubs/fips/203/final).
 
@@ -208,15 +208,15 @@ More on post-quantum cryptography in this article by Ben Evans : [Post-Quantum C
 
 More information in the [JEP 496](https://openjdk.org/jeps/496 "JEP").
 
-JEP 497: Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm {#h2-12-jep-497-quantum-resistant-module-lattice-based-digital-signature-algorithm}
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+JEP 497: Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm
+---------------------------------------------------------------------------
 
 JEP 497 provides an implementation of a digital signature algorithm based on Module-Lattice, which is resistant to quantum algorithms (ML-DSA). Digital signatures are used to detect unauthorized data modifications and to authenticate the identity of signatories. It has been standardized by the U.S. National Institute of Standards and Technology (NIST) in the FIPS 204 standard.
 
 More information [JEP 497](https://openjdk.org/jeps/497 "JEP").
 
-JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe {#h2-13-jep-498-warn-upon-use-of-memory-access-methods-in-sun-misc-unsafe}
----------------------------------------------------------------------------------------------------------------------------------------------
+JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe
+------------------------------------------------------------------
 
 **Unsafe** is, as its name suggests, an internal and unsupported JDK class that is not safe to use. For historical reasons, many low-level frameworks used Unsafe for faster memory access. Thanks to VarHandle API features ([JEP 193](https://openjdk.org/jeps/193), since Java 9) and Foreign Function \& Memory API ([JEP 454](https://openjdk.org/jeps/454), since Java 22), there are now replacements for Unsafe\\'s memory-access methods that are as powerful, but safer and more supported.
 
@@ -226,8 +226,8 @@ This change was planned and announced when they were deprecated in Java 23, and 
 
 More information in the [JEP 498](https://openjdk.org/jeps/498 "JEP").
 
-JEP 501: Deprecate the 32-bit x86 Port for Removal {#h2-14-jep-501-deprecate-the-32-bit-x86-port-for-removal}
--------------------------------------------------------------------------------------------------------------
+JEP 501: Deprecate the 32-bit x86 Port for Removal
+--------------------------------------------------
 
 The 32-bit port for Windows is removed in this release, but a 32-bit port for other OS (Linux) remains. This JEP will deprecate all remaining 32-bit ports for the x86 architecture, including the one for Linux, which is the only one still supported. It does not affect other 32-bit ports, such as the one for ARM32, which is not deprecated. The industry has abandoned since a long time the 32-bit x86 architecture, and with Debian also planning to stop supporting it, it makes sense to plan to stop supporting it in the JVM also.
 
@@ -235,8 +235,8 @@ For unsupported architectures, there is an architecture-independent JVM port: Ze
 
 More information in the [JEP 501](https://openjdk.org/jeps/501 "JEP").
 
-Features coming out of preview {#h2-15-features-coming-out-of-preview}
-----------------------------------------------------------------------
+Features coming out of preview
+------------------------------
 
 The following features comes out of preview (or incubator module) are now standard features:
 
@@ -245,8 +245,8 @@ The following features comes out of preview (or incubator module) are now standa
 
 For details on these, please refer to my previous articles.
 
-Features that remain in preview {#h2-16-features-that-remain-in-preview}
-------------------------------------------------------------------------
+Features that remain in preview
+-------------------------------
 
 The following features remain in preview (or in the incubator module).
 
@@ -260,8 +260,8 @@ The following features remain in preview (or in the incubator module).
 
 For details on these, please refer to my previous articles.
 
-Miscellaneous {#h2-17-miscellaneous}
-------------------------------------
+Miscellaneous
+-------------
 
 Various additions to the JDK:
 
@@ -274,8 +274,8 @@ Various additions to the JDK:
 
 All the new JDK 24 APIs can be found in [The Java Version Almanac -- New APIs in Java 24](https://javaalmanac.io/jdk/24/apidiff/23/ "The").
 
-Internal changes, performance, and security {#h2-18-internal-changes-performance-and-security}
-----------------------------------------------------------------------------------------------
+Internal changes, performance, and security
+-------------------------------------------
 
 Like all new versions of Java, OpenJDK 24 contains its share of performance optimizations and security enhancements.
 
@@ -284,8 +284,8 @@ Like all new versions of Java, OpenJDK 24 contains its share of performance opti
 * String concatenation has been optimized using hidden classes generated via the Classfile API and using the MethodHandle API ([JDK-8336856](https://bugs.openjdk.org/browse/JDK-8336856)) bringing nearly 40% performance optimization. See this excellent talk by Claes Redestad during Devoxx 2024 on the subject: <https://www.youtube.com/watch?v=tgX38gvMpjs>.
 * **secondary_super_cache** is a cache used for `instanceof`, it caches one supertype of a class. As it contains only a single entry, if several threads do `instanceof` on different supertypes for the same class, the cache will be invalidated non-stop, which can have significant consequences in terms of performance. This cache has been rewritten by Andrew Haley from RedHat, who has replaced it with a hash table cache. (see [#18309](https://github.com/openjdk/jdk/pull/18309). This problem was named *type pollution* ; RedHat had developed a Java agent to detect problem cases (see [type-pollution-agent](https://github.com/RedHatPerf/type-pollution-agent)) and some frameworks had even implemented workarounds to avoid it in critical paths (for example for Quarkus : [#28834](https://github.com/quarkusio/quarkus/pull/28834), [#28985](https://github.com/quarkusio/quarkus/pull/28985) or [#29109](https://github.com/quarkusio/quarkus/pull/29109)).
 
-JFR Events {#h2-19-jfr-events}
-------------------------------
+JFR Events
+----------
 
 Here are the new Java Flight Recorder (JFR) events of the JVM:
 
@@ -296,8 +296,8 @@ Here are the new Java Flight Recorder (JFR) events of the JVM:
 
 You can find all the JFR events supported in this version of Java on the page [JFR Events](https://sap.github.io/SapMachine/jfrevents/24.html "JFR").
 
-Conclusion {#h2-20-conclusion}
-------------------------------
+Conclusion
+----------
 
 Java 24 contains many new features, and we were delighted to see Stream Gatherer come out of preview, but there are still many features that seem to be stuck in preview without any change.
 

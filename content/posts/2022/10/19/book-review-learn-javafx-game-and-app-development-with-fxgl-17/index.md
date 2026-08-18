@@ -38,8 +38,8 @@ Almas also has a YouTube channel focused on Java, Kotlin, JavaFX, Unity, and Unr
 
 But on the other hand, I'm still a novice in game development. I have been looking forward to the release of this book as I wanted to get more insight into how it works and what can be achieved with it.
 
-About FXGL {#h2-0-about-fxgl}
------------------------------
+About FXGL
+----------
 
 No better way to introduce FXGL than by stealing the introduction from the book:
 
@@ -47,8 +47,8 @@ No better way to introduce FXGL than by stealing the introduction from the book:
 
 *To address this need, the FXGL game engine extends JavaFX and brings support for real-world game development techniques. These include the entity-component model, pathfinding, physics, particle systems, sprite sheet animations, and many other features. As a result, JavaFX developers can produce games more quickly and more effectively with FXGL and easily package their games to native platform images, including Android and iOS.*
 
-A walk through the book {#h2-1-a-walk-through-the-book}
--------------------------------------------------------
+A walk through the book
+-----------------------
 
 The book contains 215 pages with eight chapters, most containing a demo application to explain a specific part of the functionality of the FXGL library.
 
@@ -61,8 +61,8 @@ The book contains 215 pages with eight chapters, most containing a demo applicat
 
 How FXML can be combined with standard JavaFX components and FXML-files to generate JavaFX UIs inside a game world is also explained throughout the book, making it clear that any developer with Java and JavaFX experience will be able to generate any User Interface. Also, the relation between the JavaFX Stage, Scene, and how everything is rendered and related is clearly described.
 
-Key Take-Aways {#h2-2-key-take-aways}
--------------------------------------
+Key Take-Aways
+--------------
 
 I don't know if Almas is hoping to sell his FXGL library for a big cheque and [buy a beautiful old cinema as Bruno Lowagie did](https://www.lowagie.com/goed-nieuws), but **providing a clean and well-written tutorial is a goal he reached for sure**. FXGL provides an impressive list of components with methods to override and build the exact functionality your game requires.
 

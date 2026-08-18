@@ -25,13 +25,13 @@ On November 9th, we had several interviews with the speakers and guests at the J
 
 In this part, we will touch on various topics related to the developers' lives.
 
-Video Report {#h2-0-video-report}
----------------------------------
+Video Report
+------------
 
 {{< youtube VjlaAklbZu0 >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,8 +39,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 **00:00 Introduction**
 
@@ -85,8 +85,8 @@ Content {#h2-2-content}
 
 **32:53 Outro**
 
-Host {#h2-3-host}
------------------
+Host
+----
 
 **Frank Delporte: Introduction**
 
@@ -94,8 +94,8 @@ Host {#h2-3-host}
 * <https://www.linkedin.com/in/frankdelporte/>
 * <https://foojay.io/today/author/frankdelporte/>
 
-Music {#h2-4-music}
--------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

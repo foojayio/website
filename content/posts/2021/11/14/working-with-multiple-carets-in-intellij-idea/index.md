@@ -29,7 +29,7 @@ Sometimes you need to modify multiple lines of code on separate lines inside Int
 
 <br />
 
-### Create Multiple Carets in a Vertical Line {#h3-0-create-multiple-carets-in-a-vertical-line}
+### Create Multiple Carets in a Vertical Line
 
 [Creating carets](https://www.jetbrains.com/help/idea/working-with-source-code.html?keymap=primary_windows#multiple_cursor) that are stacked vertically where you have content on different lines, like a list, can save you a lot of time when you're editing your code.
 
@@ -57,7 +57,7 @@ Finally, how about HTML tags? Again, it's the same process:
 
 [![HTML tags and multiple carots](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/multiple-carets-html-tags.png)](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/multiple-carets-html-tags.mp4)
 
-### Create Multiple Carets at the End of Lines {#h3-1-create-multiple-carets-at-the-end-of-lines}
+### Create Multiple Carets at the End of Lines
 
 Content at the start of your line is likely to be left-aligned, but that's not the case at the end of your line. We can deal with that by using the mouse to drag the caret down, instead of the vertical arrow keys.
 
@@ -84,7 +84,7 @@ This time, instead of cloning the caret in a vertical line with the down arrow, 
 
 [![Multiple carets at the end of the line](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/multiple-carets-end-of-line.png)](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/multiple-carets-end-of-line.mp4)
 
-### Create Multiple Carets at Any Point in Your Code {#h3-2-create-multiple-carets-at-any-point-in-your-code}
+### Create Multiple Carets at Any Point in Your Code
 
 And finally, what if you want multiple carets, but not in a stacked vertical line or at the end of each line? Again, the shortcut is similar:
 
@@ -95,7 +95,7 @@ Let's say you want to add "Name" to these variables, but only to some of them:
 
 [![Multiple carets at the end of the line](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/multiple-carets-random.png)](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/multiple-carets-random.mp4)
 
-### Summary {#h3-3-summary}
+### Summary
 
 There's lots of places that [multiple carets](https://www.jetbrains.com/help/idea/working-with-source-code.html?keymap=primary_windows#multiple_cursor) are helpful in [IntelliJ IDEA](https://www.jetbrains.com/idea/), especially when you're working with lists. Just remember that for carets in a vertical line, press **Option** (macOS) and **Ctrl** (Windows/Linux) twice, holding it down the second time.
 

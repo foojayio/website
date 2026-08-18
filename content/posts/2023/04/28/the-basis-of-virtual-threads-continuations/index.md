@@ -28,8 +28,8 @@ Virtual threads were first introduced as a preview API in JDK 19, delivered to t
 
 So, assuming you are familiar with the basic concepts, I would like to give a brief summary, instead of repeating in detail what you already know, in this article and then turn the spotlight on the Continuations that allow the Java platform to achieve a more fine-grained concurrency model.
 
-A brief summary {#h2-0-a-brief-summary}
----------------------------------------
+A brief summary
+---------------
 
 With Loom we now have two types of threads: Platform thread and virtual thread. While a platform thread is an instance of java.lang.Thread that's implemented in the traditional way, as a thin wrapper around an OS thread, a virtual thread is an alternative implementation of java.lang.Thread that's not tied to a particular OS thread.
 
@@ -46,8 +46,8 @@ In addition, platform threads carry megabyte-scale chunks of memory to manage th
 
 All of these are what make virtual threads cheap. Therefore, a concurrent application can use hundreds of thousands or even millions of virtual threads.
 
-Continuations {#h2-1-continuations}
------------------------------------
+Continuations
+-------------
 
 In Project Loom, the word "continuation" will mean a delimited continuation, also sometimes called a "coroutine". It can be thought of as sequential code that may suspend or yield execution at some point by itself and can be resumed by a caller.
 
@@ -234,8 +234,8 @@ Moving the stack frames from the heap to the stack of the carrier thread(*i.e to
 
 Because the Java runtime can explicitly control when a virtual thread is suspended and resumed and can schedule other virtual threads to run in the meantime, this structure built on Continuations allows a more fine-grained concurrency model.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 With virtual threads, Project Loom promises that Java developers can write highly scalable applications that can utilize the hardware optimally, without changing their habits.
 
@@ -243,8 +243,8 @@ This promise is fulfilled by the cheap nature of virtual threads, each associate
 
 Blocking a virtual thread results in yielding its continuation and unparking it results in the continuation being resubmitted to the scheduler. Because the Java runtime can explicitly control when a virtual thread is suspended and resumed, that structure allows a more fine-grained concurrency model for Java.
 
-References {#h2-3-references}
------------------------------
+References
+----------
 
 * [Loom Proposal](https://cr.openjdk.org/~rpressler/loom/Loom-Proposal.html)
 * [JEP 444: Virtual Threads](https://openjdk.org/jeps/444)

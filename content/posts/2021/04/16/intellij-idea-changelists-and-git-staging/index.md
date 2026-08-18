@@ -26,14 +26,14 @@ Both IntelliJ IDEA Changelists and Git staging are accessible from the **Commit*
 
 Finally, before we get started with the comparison, you can't use IntelliJ IDEA Changelists and the Git staging area at the same time. You can switch between them, but not use them simultaneously. Let's start with IntelliJ IDEA Changelists.
 
-What is an 'IntelliJ IDEA Changelist'? {#h2-0-what-is-an-intellij-idea-changelist}
-----------------------------------------------------------------------------------
+What is an 'IntelliJ IDEA Changelist'?
+--------------------------------------
 
 Prior to the release of 2020.3, IntelliJ IDEA Changelists were the only way to commit changes to your Git repository.
 
 IntelliJ IDEA Changelists are not just for Git, they're for any supported VCS system, but in this blog we are going to focus on Git, so we can compare them to the new Git staging functionality.
 
-### Committing a Whole File {#h3-1-committing-a-whole-file}
+### Committing a Whole File
 
 IntelliJ IDEA always gives you a *Default Changelist* and, when you change a file, the file will show in the *Default Changelist* with a checkbox that isn't selected:
 
@@ -45,7 +45,7 @@ From there, if you want to select the whole file to be committed, you can select
 
 This means that when you commit your files to Git, all the changes in the file that you selected will be added and then committed to git. IntelliJ IDEA runs both the `git add` and the `git commit` command for you.
 
-### Committing Part of a File {#h3-2-committing-part-of-a-file}
+### Committing Part of a File
 
 Alternatively, if you want to commit some, but not all, of that file, you can double-click the file from the *Default Changelist* to open the *diff* view. This view shows the last known version that Git has on the left and then your local copy on the right in blue, which you can edit. You can select the checkboxes adjacent to each code change you have made on the right to specifically say that you only want to commit changes in that range, not the whole file.
 
@@ -55,7 +55,7 @@ Note that if you only select part of the file to be committed as in this example
 
 Tip: You can also use **⌘D** or **Ctrl** +**D** to open up the *diff* view from the Commit tool window.
 
-### Reverting Changes {#h3-3-reverting-changes}
+### Reverting Changes
 
 From the *diff* view you can also revert changes individually by using the `>>` arrow on the file on the left-hand side to revert the changes to your local file. In this case, the right-hand side will update to reflect your changes. If you make a mistake, you can undo it or use [Local History](https://www.jetbrains.com/help/idea/local-history.html) to get your changes back.
 
@@ -63,7 +63,7 @@ From the *diff* view you can also revert changes individually by using the `>>` 
 
 You can also rollback the whole file by right-clicking on it and selecting **Rollback**.
 
-### Multiple Changelists {#h3-4-multiple-changelists}
+### Multiple Changelists
 
 The *Default Changelist* in IntelliJ IDEA is only part of the story. IntelliJ IDEA supports [multiple changelists](https://www.jetbrains.com/help/idea/managing-changelists.html#new_changelist). Let's say you have changes that should not be committed, you can move those into a separate changelist. Changelists in IntelliJ IDEA are used to group changes. You can only commit one Changelist at a time. So, to build groups of changes up at the same time, you need to create multiple Changelists. It's helpful to name your Changelists according to the feature or bug that they apply to. This helps you to keep track of how you should split your commits up into your Changelists.
 
@@ -71,7 +71,7 @@ To create multiple Changelists you can right-click on the *Default Changelist* a
 
 ![Image of new Changelist](new-changelist.png)
 
-### Moving Changes Between Changelists {#h3-5-moving-changes-between-changelists}
+### Moving Changes Between Changelists
 
 You can also move files between Changelists. You can move a whole file to a new Changelist and create that new Changelist if it doesn't already exist as part of that action. To do that, you can right-click on the file in the Changelist in the Commit window and select ***Move to Another Changelist***. You will be prompted to select the changelist if it exists, or create the Changelist if it doesn't. When you create a new Changelist, you can optionally set it to 'Active'. This means that all future changes will be assigned to that Changelist.
 
@@ -92,7 +92,7 @@ As well as moving whole files between Changelists, you can also move single chan
 You can also move changes between Changelists using the coloured bars in the gutter:  
 ![Move changes between changelists](move-between-changelists.png)
 
-### Making a Changelist Active {#h3-6-making-a-changelist-active}
+### Making a Changelist Active
 
 Lastly, we've already shown you how to set a new Changelist to be the active one, but it's worth mentioning that IntelliJ IDEA needs to know which Changelist to use for new changes; you always need one Changelist that is the active one. You can choose which Changelist is the active one when you have more than one by right-clicking on the Changelist and selecting **Set Active Changelist**. If you don't see this option, it's because the Changelist you have selected is already the active Changelist.
 
@@ -100,7 +100,7 @@ Lastly, we've already shown you how to set a new Changelist to be the active one
 
 When you commit any new changes, they will be placed in your *Active* IntelliJ IDEA Changelist by default.
 
-### Committing Your Changes to Git {#h3-7-committing-your-changes-to-git}
+### Committing Your Changes to Git
 
 Now that you have your IntelliJ IDEA Changelists created, and your changes split up how you want them, you're ready to commit them to Git. You can see what will be committed to Git from the Commit window.
 
@@ -110,8 +110,8 @@ When you're happy with that you can use **⌘K** on macOS, or **Ctrl** +**K** on
 
 This adds the files and commits them in one step into your local Git history. You can then go ahead and [push the changes](https://www.jetbrains.com/help/idea/push-dialog-mercurial-git.html#Push_Dialog_(Mercurial_Git)-6-chapter) to your remote repository if you want to.
 
-What is 'Git Staging'? {#h2-8-what-is-git-staging}
---------------------------------------------------
+What is 'Git Staging'?
+----------------------
 
 IntelliJ IDEA 2020.3 introduced support for [Git staging](https://git-scm.com/docs/git-add). It is not enabled by default, but the fastest way to enable it is with Find Actions (**⇧⌘A** on macOS, or **Ctrl** +**Shift** +**A** on Windows and Linux) and type in *git staging*. Git staging is the git-native way of committing file diffs to a git repository.
 
@@ -123,11 +123,11 @@ You can also enable Git staging from the Settings/Preferences dialog with **⌘,
 
 With Git staging, this process is managed in two steps. When you *stage* a file, or part of a file, IntelliJ IDEA runs the `git add` command for the changes. When you subsequently commit those files, or some diffs of a file, IntelliJ IDEA runs the `git commit` command. The end result is the same, however with Git staging you can take advantage of adding your changes before you commit them if you're more familiar with that model.
 
-### Staged and Unstaged Folders {#h3-9-staged-and-unstaged-folders}
+### Staged and Unstaged Folders
 
 With Git Staging you'll see two folders as opposed to the one IntelliJ IDEA Changelist in the Commit window. Each change you make to your file is represented by a diff between your local file and HEAD. The *Unstaged* folder is where all your diffs will appear initially. To include a diff in your next commit, you need to move it from the *Unstaged* folder to the *Staged* folder. The action of doing this means IntelliJ IDEA performs a `git add` command for all the diffs in the file.
 
-### Unstaged Folder - Staging files {#h3-10-unstaged-folder-staging-files}
+### Unstaged Folder - Staging files
 
 When you make a change to a file it will appear in your *Unstaged* folder initially as a diff that you can stage. You can stage the whole file by dragging it up to the Staged folder, by using the ***+*** icon in the tree, or right-click and select ***+Stage*** . IntelliJ IDEA will run a `git add` command when you do this:
 
@@ -135,7 +135,7 @@ When you make a change to a file it will appear in your *Unstaged* folder initia
 
 `Git add` modifies the file content in the index (the staged content). If you subsequently modify content inside that same range, it will not be committed until it's staged. You can use the staging area to change what is going to be committed independently of any modifications to the local files. With IntelliJ Changelists, any change inside of that same range will be committed.
 
-### Unstaged Folder - Staging Part of a File {#h3-11-unstaged-folder-staging-part-of-a-file}
+### Unstaged Folder - Staging Part of a File
 
 Alternatively, you can add part of a file by double-clicking on the file from the *Unstaged* folder and using the `<>` arrows on the Staged version on the left-hand side:
 
@@ -145,7 +145,7 @@ You can also rollback a whole file by selecting it from the *Unstaged* area and 
 
 Let's take a look at the functionality in the *Staged* area. Changes in the *Staged* area means that IntelliJ IDEA has performed a `git add` for the change in the file.
 
-### Staged Folder - Unstaging a File {#h3-12-staged-folder-unstaging-a-file}
+### Staged Folder - Unstaging a File
 
 You may change your mind and decide you want to unstage a whole file that you've previously staged. As with staging a file, you can either drag it from the *Staged* folder into the *Unstaged* folder, click the \***-\*\*** icon in the tree, or right-click and select 'Unstage':
 
@@ -153,13 +153,13 @@ You may change your mind and decide you want to unstage a whole file that you've
 
 When you unstage a file, or part of a file, IntelliJ IDEA runs a `git reset` for the change.
 
-### Staged Folder - Unstaging Part of a File {#h3-13-staged-folder-unstaging-part-of-a-file}
+### Staged Folder - Unstaging Part of a File
 
 You can also unstage a change in a file if you need to. To do that, you need to open the file that contains the change that you want to unstage from the *Staged* folder *diff* view. You can then use the `>>` arrows from the staged portion on the left-hand side to *Unstage* the change. This will unstage that specific change and again, IntelliJ IDEA will run a Git command to reflect the change. You can also type into the editor if you prefer.
 
 ![Unstage part of a file](unstage-part-file.png)
 
-### Staging or Unstaging Individual Changes Using the Gutter Icons {#h3-14-staging-or-unstaging-individual-changes-using-the-gutter-icons}
+### Staging or Unstaging Individual Changes Using the Gutter Icons
 
 You can also use the gutter icons in IntelliJ IDEA to stage individual changes.
 
@@ -167,14 +167,14 @@ When you click on the solid coloured bar you can select to *Stage* your changes,
 
 ![Stage from the Gutter](stage-from-gutter.png)
 
-### Committing Changes {#h3-15-committing-changes}
+### Committing Changes
 
 With Git Staging enabled, your commit will be made up of the changes (diffs) you have in your *Staged* folder. When you're happy with that you can use **⌘K** (macOS), or **Ctrl** +**K** (Windows/Linux) to load the Commit window. You can then enter a commit message and press [commit](https://www.jetbrains.com/help/idea/commit-dialog.html) to commit your selected changes to Git. Alternatively, you can use ***⌘⏎*** (macOS), or **Ctrl** +**Enter** (Windows/Linux) to commit the changes. IntelliJ IDEA will then run the required Git commands for the changes that you selected.
 
 You can then go ahead and [push the changes](https://www.jetbrains.com/help/idea/push-dialog-mercurial-git.html#Push_Dialog_(Mercurial_Git)-6-chapter) to your remote repository if you want to.
 
-Summary {#h2-16-summary}
-------------------------
+Summary
+-------
 
 It's completely up to you which approach you prefer. They both achieve the same result in slightly different ways.
 

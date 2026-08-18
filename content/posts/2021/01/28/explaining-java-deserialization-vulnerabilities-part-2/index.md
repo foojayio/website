@@ -22,7 +22,7 @@ Java serialization is a mechanism to transform an object into a byte stream. Jav
 
 Earlier, in part 1, the basics of Java serialization and deserialization were explained and how to tamper with data in serialized objects. In this part, we continue with even more harmful attacks and show you how you can prevent this in your own code.
 
-### Arbitrary Code Execution, Gadgets, and Chains {#h3-0-arbitrary-code-execution-gadgets-and-chains}
+### Arbitrary Code Execution, Gadgets, and Chains
 
 Tampering with the data in an object is harmful already. However, this can also lead to code execution if the correct set of objects is deserialized. To explain this I first have to explain gadgets and chains.
 
@@ -97,7 +97,7 @@ For a more real life example, take a look at the implementation of `java.util.Ha
 
 It is good to know that whatever gadget chains are available in your application, is not related to your code. Because we import lots of code from libraries and frameworks, the number of classes imported by your (transitive) dependencies influences certain gadget chains' possibility. Although creating such a malicious gadget chain is very hard and labor-intensive, Java deserialization vulnerabilities are a genuine and dangerous security risk.
 
-### How to Prevent a Java Deserialize Vulnerability {#h3-1-how-to-prevent-a-java-deserialize-vulnerability}
+### How to Prevent a Java Deserialize Vulnerability
 
 The best way to prevent a Java deserialize vulnerability is to prevent Java serialization overall. If your application does not accept serialized objects at all, it cannot harm you.
 

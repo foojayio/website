@@ -58,7 +58,7 @@ Let's jump in and **happy reading**!
 **desc.** : Web development has always moved in cycles of hype, from frameworks to tooling. With the rise of large language models, we're entering a new era of "vibe coding," where developers shape software through collaboration with Al rather than syntax. This talk explores what that means for the future of coding, especially in frontend development, and how it echoes the past while redefining what comes next.  
 **category**: youtube
 
-**article** : [The AI Bubble Should Have Never Existed In The First Place](https://www.planetearthandbeyond.co/p/the-ai-bubble-should-have-never-existed?r=6hpwx&amp;utm_medium=ios&amp;triedRedirect=true "The AI Bubble Should Have Never Existed In The First Place")  
+**article** : [The AI Bubble Should Have Never Existed In The First Place](https://www.planetearthandbeyond.co/p/the-ai-bubble-should-have-never-existed?r=6hpwx&utm_medium=ios&triedRedirect=true "The AI Bubble Should Have Never Existed In The First Place")  
 **authors** : Will Lockett  
 **date** : 2025-12-07  
 **desc.** : The article elaborates on the existence of an AI bubble, arguing that so much money has been poured into AI that we have effectively bet the entire economy on its success. Regardless of whether an AI bubble exists or in what form, the article formulates valid points that should be taken into account when considering future developments.  

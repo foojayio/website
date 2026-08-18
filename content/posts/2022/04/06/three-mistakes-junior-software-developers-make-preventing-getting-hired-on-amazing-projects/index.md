@@ -28,8 +28,8 @@ From experience and from the messages I get from junior developers, I have seen 
 
 I will also show you what I have learned that works.
 
-Mistake# 1: They think that the best way to get a job is to send a résumé {#h2-0-mistake-1-they-think-that-the-best-way-to-get-a-job-is-to-send-a-r-sum}
---------------------------------------------------------------------------------------------------------------------------------------------------------
+Mistake# 1: They think that the best way to get a job is to send a résumé
+-------------------------------------------------------------------------
 
 There is a common understanding that to be able to get hired, first, we need to work on a résumé (also known as a CV) and then to send it to hiring companies. Well, this works, sometimes, but does not, most of the time. Most of the résumé gets trashed. The reason is that the company doesn't know you.
 
@@ -44,8 +44,8 @@ So, the solution is simple --- networking. You have to be known to the people wh
 
 By doing this, you will be able to get known to the people where you want to work and you will get called instead of sending a resume to them and getting it thrown in the trash by them.
 
-Mistake# 2: They get apprehensive about the interview process {#h2-1-mistake-2-they-get-apprehensive-about-the-interview-process}
----------------------------------------------------------------------------------------------------------------------------------
+Mistake# 2: They get apprehensive about the interview process
+-------------------------------------------------------------
 
 This is quite common: being worried about the interview process. It can be one of the most intimidating things because the interview is somewhat unpredictable. You cannot know in advance what questions you're going to be asked.
 
@@ -64,8 +64,8 @@ Besides, to ease the interview process, a junior developer can do the following 
 * If there are companies that you would like to work for, come up with a plan to meet at least one person working at those companies virtually or in person and build a relationship with them.
 * Find a local user group, attend the meeting, introduce yourself to as many people as possible, create a network, discuss the topics that excite you, and the things you have learned.
 
-Mistake# 3: They do not have the coding and collaboration skills needed {#h2-2-mistake-3-they-do-not-have-the-coding-and-collaboration-skills-needed}
------------------------------------------------------------------------------------------------------------------------------------------------------
+Mistake# 3: They do not have the coding and collaboration skills needed
+-----------------------------------------------------------------------
 
 The crucial mistake that junior developers struggle with is not having the right coding and collaboration skills that are required to do the work they want to do. How would you do the job if you do not know how to write code, in the first place?
 

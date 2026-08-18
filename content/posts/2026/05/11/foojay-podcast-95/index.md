@@ -30,13 +30,13 @@ Together they cover how CVEs in the Java runtime are handled through coordinated
 
 An animated, occasionally alarming, and ultimately optimistic conversation about a problem the Java community is well-positioned to lead on.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube -T5h4HqRpVw >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -44,22 +44,22 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Steve Poole {#h3-3-steve-poole}
+### Steve Poole
 
 * [LinkedIn](https://www.linkedin.com/in/noregressions/)
 * [Foojay Author profile](https://foojay.io/today/author/steve-poole/)
 * [Crossing the River Styx: Spring Boot 3.5 and the Zombie Dependency Problem](https://foojay.io/today/crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem/)
 * [Why Java Developers Over-Trust AI Suggestions](https://foojay.io/today/why-java-developers-over-trust-ai-dependency-suggestions/)
 
-### David Welch {#h3-4-david-welch}
+### David Welch
 
 * [LinkedIn](https://www.linkedin.com/in/dwelch2344/)
 
-Content {#h2-5-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topics and guests  
 

@@ -48,7 +48,7 @@ There can be no doubt about the fact that the Digital Operational Resilience Act
 
 The following are the main chapters of DORA, focusing on the key tasks that need to be done for a financial institution to be in compliance with DORA, each of which has relevance in the context of OpenJDK, illustrated by some key quotations copied directly from DORA, with commentary by me in the "Connection to Unsupported OpenJDK" sections.
 
-### 1. Develop and Implement a Comprehensive ICT Risk Management Framework {#h3-0-1-develop-and-implement-a-comprehensive-ict-risk-management-framework}
+### 1. Develop and Implement a Comprehensive ICT Risk Management Framework
 
 * **Chapter**: DORA, Chapter II: ICT Risk Management
 * **Relevant Articles and Sub-Articles** :
@@ -59,7 +59,7 @@ The following are the main chapters of DORA, focusing on the key tasks that need
   * **Article 8(1):** "As part of the ICT risk management framework referred to in Article 6(1), financial entities **shall identify, classify and adequately document** all ICT supported business functions, roles and responsibilities, **the information assets and ICT assets supporting those functions** , and their roles and dependencies in relation to ICT risk. **Financial entities shall review as needed, and at least yearly, the adequacy of this classification and of any relevant documentation.** "
     * **Connection to Unsupported OpenJDK**: Unsupported OpenJDK distributions may not receive the necessary updates to address vulnerabilities, meaning that they will not be in a state sufficient to satisfy Article 8(1) since outdated OpenJDK distributions will lead to inaccurate or incomplete identification and classification. Thorough and intentional identification, classification, and documentation of ICT assets, in the spirit of DORA, would be undermined if those assets would themselves be at least far more vulnerable than they could have been had they been supported rather than unsupported.
 
-### 2. Establish an Incident Reporting Mechanism {#h3-1-2-establish-an-incident-reporting-mechanism}
+### 2. Establish an Incident Reporting Mechanism
 
 * **Chapter**: DORA, Chapter III: ICT-related Incident Reporting
 * **Relevant Articles and Sub-Articles** :
@@ -68,7 +68,7 @@ The following are the main chapters of DORA, focusing on the key tasks that need
   * **Article 18(1):** "**Financial entities shall classify ICT-related incidents and shall determine their impact based on the following criteria** : (a) the number and/or relevance of clients or financial counterparts affected and, where applicable, the amount or number of transactions affected by the ICT-related incident, and whether the ICT-related incident has caused reputational impact; (b) the duration of the ICT-related incident, including the service downtime; (c) the geographical spread with regard to the areas affected by the ICT-related incident, particularly if it affects more than two Member States;**(d) the data losses that the ICT-related incident entails, in relation to availability, authenticity, integrity or confidentiality of data; (e) the criticality of the services affected, including the financial entity's transactions and operations; (f) the economic impact, in particular direct and indirect costs and losses, of the ICT-related incident in both absolute and relative terms.** "
     * **Connection to Unsupported OpenJDK**: The lack of support in older OpenJDK distributions could hinder the classification, identification, and reporting of incidents, or provide incomplete or incorrect data, reducing the level of DORA compliance, delaying notifications to authorities as required by Article 18(1). This delay increases the risk of penalties and non-compliance and is not in the spirit of DORA, which exists to minimize risk and promote resilience.
 
-### 3. Conduct Regular and Rigorous Testing of ICT Systems {#h3-2-3-conduct-regular-and-rigorous-testing-of-ict-systems}
+### 3. Conduct Regular and Rigorous Testing of ICT Systems
 
 * **Chapter**: DORA, Chapter IV: Digital Operational Resilience Testing
 * **Relevant Articles and Sub-Articles** :
@@ -78,21 +78,21 @@ The following are the main chapters of DORA, focusing on the key tasks that need
   * **Article 25(1):** "The digital operational resilience testing programme referred to in Article 24 shall provide, in accordance with the criteria set out in Article 4(2), for **the execution of appropriate tests, such as vulnerability assessments and scans, open source analyses, network security assessments, gap analyses, physical security reviews, questionnaires and scanning software solutions, source code reviews where feasible, scenario-based tests, compatibility testing, performance testing, end-to-end testing and penetration testing** ."
     * **Connection to Unsupported OpenJDK**: Using unsupported OpenJDK in testing environments can lead to false security assumptions, which would fail the "appropriate tests" criteria, at least, because outdated systems will not accurately simulate real-world conditions. This can result in a failure to meet the standards set by Article 25(1), compromising the effectiveness of resilience testing.
 
-### 4. Enhance Third-Party Risk Management Practices {#h3-3-4-enhance-third-party-risk-management-practices}
+### 4. Enhance Third-Party Risk Management Practices
 
 * **Chapter**: DORA, Chapter V: Management of ICT Third-Party Risk
 * **Relevant Articles and Sub-Articles** :
   * **Article 28(2):** "As part of their ICT risk management framework, financial entities, other than entities referred to in Article 16(1), first subparagraph, and other than microenterprises, shall adopt, and regularly review, a strategy on ICT third-party risk, taking into account the multi-vendor strategy referred to in Article 6(9), where applicable. The strategy on ICT third-party risk shall include **a policy on the use of ICT services supporting critical or important functions provided by ICT third-party service providers** and shall apply on an individual basis and, where relevant, on a sub-consolidated and consolidated basis. The management body shall, **on the basis of an assessment of the overall risk profile of the financial entity and the scale and complexity of the business services, regularly review the risks identified in respect to contractual arrangements on the use of ICT services supporting critical or important functions** ."
     * **Connection to Unsupported OpenJDK**: If third-party providers rely on unsupported OpenJDK distributions, this poses a significant risk to the financial entity's ICT environment. These risks must be identified and mitigated to comply with Article 28(2), ensuring third-party services meet required security and resilience standards.
 
-### 5. Facilitate Information Sharing on Cyber Threats {#h3-4-5-facilitate-information-sharing-on-cyber-threats}
+### 5. Facilitate Information Sharing on Cyber Threats
 
 * **Chapter**: DORA, Chapter VI: Information Sharing Arrangements
 * **Relevant Articles and Sub-Articles** :
   * **Article 45(1):** "Financial entities may **exchange amongst themselves cyber threat information and intelligence, including indicators of compromise, tactics, techniques, and procedures, cyber security alerts and configuration tools** "
     * **Connection to Unsupported OpenJDK**: Though the word "may" indicates the above is optional, if faulty information were to be shared, that would be suboptimal and against the principle ideas behind DORA, which is to reduce risk and promote resilience. Unsupported OpenJDK environments may miss critical updates, leading to a lack of awareness about current threats and vulnerabilities. This can hinder effective information sharing, reducing the collective cybersecurity benefits outlined in Article 45(1).
 
-### Summary {#h3-5-summary}
+### Summary
 
 To briefly summarize some of the key points above, unsupported OpenJDK distributions are at risk of not being compliant with DORA for, at least, the following reasons.
 

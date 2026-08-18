@@ -31,12 +31,12 @@ It depends:
 * The JVM
 * The data in the file
 
-It works on my machine {#h2-0-it-works-on-my-machine}
------------------------------------------------------
+It works on my machine
+----------------------
 
 or to be more precise, it's faster on my machine.
 
-### CPU {#h3-1-cpu}
+### CPU
 
 My first submission was 23 seconds on my 2016 desktop (Intel) so I was quite surprised to hear it was 41 seconds on the "super fast" CPU of the 1BRC server.
 ![](1brc-first-attempt.png) Lesson 1️⃣: Measure performance on production (like) hardware.
@@ -48,7 +48,7 @@ I then decided to use one `HashMap` per thread and combine them instead of one g
 It also happened during the challenge that changes showing performance improvements on Apple ARM CPU were not resulting in better performance on the 1BRC (AMD) CPU.
 > Lesson 2️⃣: Optimizations will produce different results depending on the hardware.
 
-### Hard disk {#h3-2-hard-disk}
+### Hard disk
 
 In the case of the 1BRC server the file was in the disk cache as it's read many times. In a similar production situation, it's quite likely that the big file won't be in the disk cache and that disk I/O will be more time consuming.
 
@@ -59,38 +59,38 @@ This was confirmed with my test of reading and parsing the file -\> 18 seconds, 
 On my laptop, it was even less significant, reading and parsing the file -\> 5.6 seconds, reading the file and do nothing with the data -\> 5.1 seconds.
 > Lesson 3️⃣: The published results are not including file I/O which may be the most time consuming on your machine.
 
-Hack coding {#h2-3-hack-coding}
--------------------------------
+Hack coding
+-----------
 
 The goal of the challenge is to get the result as fast as possible with most of the hacks allowed.
 
-### Unsafe {#h3-4-unsafe}
+### Unsafe
 
 At one point someone decided to use Unsafe to avoid the range checks when reading an array. Unsafe allows also to get more than 1 byte per call. As this is faster, this went quickly viral in the different solutions.
 
-### Long {#h3-5-long}
+### Long
 
 You could work with bytes but you can also work with longs that contains 8 bytes per value.
 
 You can then use bit operations to find a specific byte inside the long. This could be quite efficient on a 64 bits (= 8 bytes) CPU.
 
-### Hash collisions {#h3-6-hash-collisions}
+### Hash collisions
 
 Since the default testing file has less than 500 station names, a few thought it would be better to use the hash code as key to a custom hash map instead of the station name.
 
 Even though Gunnar was generous in term of hacks allowed (like starting a new process), this one was not allowed. But if you have a similar problem with a fixed set of keys, you could find a hash that won't conflict between the keys and use it.
 > Lesson 4️⃣: Accessing the data or copying the data could be quite CPU intensive.
 
-### Preview API's {#h3-7-preview-api-s}
+### Preview API's
 
 Preview API's such as Foreign Function Memory (FFM) and incubator API such as the new Vector API were used quite often.
 
 I joined the challenge to see how fast I could get the job done without any hacks. The answer is 10 seconds.
 
-The JVM {#h2-8-the-jvm}
------------------------
+The JVM
+-------
 
-### The JVM parameters {#h3-9-the-jvm-parameters}
+### The JVM parameters
 
 The challenge allowed you to pass parameters when starting Java to fine tune how the JVM should behave when running your program.
 
@@ -107,7 +107,7 @@ Here is a list of some of the JVM parameters used by the participants.
 
 > Lesson 5️⃣: You have many options to get better performance without the need to change any line of code.
 
-### The JVM Used {#h3-10-the-jvm-used}
+### The JVM Used
 
 The top 3 results are using GraalVM native binary which is known to have a very fast start up time. It also has the advantage to optimize the code at compile time, instead of using a JIT (Just In Time) compiler.
 
@@ -120,8 +120,8 @@ The fastest "no hacks" implementation from Sam Pullara is faster with GraalVM CE
 Specifying the JVM was quite easy as [SDKMAN](https://sdkman.io/) was used.
 > Lesson 6️⃣: You have many JVM distributions at your disposal, maybe one will better suit your needs.
 
-The Data {#h2-11-the-data}
---------------------------
+The Data
+--------
 
 Some of the very fast implementations are a few times slower when using the 10K station names, instead of the default 500. Some of the submissions even failed.
 > Lesson 7️⃣: Different input data will result in different performances.
@@ -129,8 +129,8 @@ Some of the very fast implementations are a few times slower when using the 10K 
 The 1BRC project includes a [weather_stations.csv](https://github.com/gunnarmorling/1brc/blob/main/data/weather_stations.csv) as example, I guess that most of the implementations would fail with this file as it starts with comment lines and has 4 digits after the comma for temperatures.
 > Lesson 8️⃣: Be aware that optimization could come to the prize of flexibility.
 
-My implementation {#h2-12-my-implementation}
---------------------------------------------
+My implementation
+-----------------
 
 My strategy here was to start with the K.I.S.S. (Keep It Simple Stupid) optimization first and profile for bottlenecks. Using JFR to profile gave me some ideas on where to profile but it didn't result in the expected win quite often.  
 ![](1brc-flameview2-1024x421.png) *-XX:StartFlightRecording=duration=15s,settings=profile,name=CalculateAverage_japplis,filename=flight-recorder.jfr,dumponexit=true*   
@@ -145,8 +145,8 @@ So here are the lessons learned on my implementation:
 > * 1️⃣2️⃣ Put a `try {} catch {}` outside a loop is way faster than having it in the loop
 [![](1brc-total-1024x246.png)](1brc-total.png)
 
-Conclusion {#h2-13-conclusion}
-------------------------------
+Conclusion
+----------
 
 * Performance depends on a lot of factors
 * Collaboration of ideas between participants gave the best results

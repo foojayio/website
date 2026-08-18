@@ -44,8 +44,8 @@ How can you tell if a hash function is slow in production?
 
 How do you even find out that it's the fault of the hash function?
 
-Measuring Performance {#h2-0-measuring-performance}
----------------------------------------------------
+Measuring Performance
+---------------------
 
 For most intents and purposes, we wouldn't know the problem is in the equals method or hash code. We would need to narrow the problem down. It's likely that a server process would take longer than we would expect and possibly show up on the APM.
 
@@ -93,8 +93,8 @@ This is very similar to the way in which we would often debug these things local
 
 Furthermore, we can do that on a set of servers using the tag feature. In this way we can scale our measurements as we scale our servers.
 
-Checking Thread Safety {#h2-1-checking-thread-safety}
------------------------------------------------------
+Checking Thread Safety
+----------------------
 
 Mutable objects can be changed from multiple threads while we try to debug them. This might trigger problems that appear to be performance issues. By verifying that we have single thread access, we can also reduce synchronization in critical sections.
 
@@ -113,8 +113,8 @@ The problem is that a condition like this can trigger output that's hard to foll
 
 This will only log access from different threads. This is something I discussed in my previous post [here](https://lightrun.com/tutorials/debug-race-condition-production/).
 
-TL;DR {#h2-2-tl-dr}
--------------------
+TL;DR
+-----
 
 The performance metrics of the equals and hashcode methods in Java SE are crucial. They have a wide reaching impact on the Java collection API, especially in the key values related calls. Objects must implement this efficiently, but it's often hard to determine the Java class that's at fault.
 

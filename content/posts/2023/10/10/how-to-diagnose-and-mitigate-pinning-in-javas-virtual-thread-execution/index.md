@@ -21,21 +21,21 @@ frozen: false
 
 **In [our last article](https://foojay.io/today/web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads/), we highlighted the impressive performance gains achieved through the use of virtual threads. However, upon diving deeper into the code, we discovered an issue caused by the jsoup library: a phenomenon known as pinning. But before we delve into solutions, let's take a moment to understand what pinning actually is.**
 
-What is Pinning? {#h2-0-what-is-pinning}
-----------------------------------------
+What is Pinning?
+----------------
 
 In the context of virtual threads, pinning refers to the condition where a virtual thread is "stuck" to its carrier thread (the platform thread on which it runs).
 
 When a virtual thread is pinned, it cannot be unmounted from its carrier, effectively monopolizing that carrier thread for the duration of the pinning.
 
-### **When Does Pinning Occur?** {#h3-1-when-does-pinning-occur}
+### **When Does Pinning Occur?**
 
 Pinning occurs in two main scenarios:
 
 1. **Synchronized Blocks or Methods**: When a virtual thread enters a synchronized block or method, it becomes pinned to its carrier thread. This means that during the execution of that block or method, the carrier thread cannot be reused for other tasks.
 2. **Native Methods or Foreign Functions**: When a virtual thread executes a native method or a foreign function, it also becomes pinned.
 
-### **Why is Pinning a Limitation?** {#h3-2-why-is-pinning-a-limitation}
+### **Why is Pinning a Limitation?**
 
 The essence of virtual threads is their ability to be unmounted from carrier threads when they perform blocking operations, thereby freeing up the carrier threads for other tasks. Pinning negates this advantage in the following ways:
 
@@ -43,15 +43,15 @@ The essence of virtual threads is their ability to be unmounted from carrier thr
 2. **Resource Inefficiency**: Carrier threads are a finite resource tied to system capabilities. Having them blocked due to pinned virtual threads is an inefficient use of these resources.
 3. **Scalability Concerns**: If a significant portion of your virtual threads becomes pinned due to frequent use of synchronized blocks or native methods, you might run into scalability issues.
 
-### **Mitigating Pinning** {#h3-3-mitigating-pinning}
+### **Mitigating Pinning**
 
 To alleviate the effects of pinning, consider the following strategies:
 
 1. **Use ReentrantLocks** : Instead of synchronized blocks or methods, use ReentrantLock from `java.util.concurrent.locks` as it allows the virtual thread to be unmounted when blocked.
 2. **Code Review** : Regularly review your code to identify and minimize the use of `synchronized` methods or blocks and native methods in the context of virtual threads.
 
-Monitoring Pinning {#h2-4-monitoring-pinning}
----------------------------------------------
+Monitoring Pinning
+------------------
 
 So, you may be wondering, how do you diagnose this pinning issue in your own code? One way to get to the bottom of this problem is by utilizing specific JVM flags.
 

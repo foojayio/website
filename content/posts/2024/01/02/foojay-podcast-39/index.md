@@ -23,13 +23,13 @@ Once a month in this podcast, we talk about the history of a Java User Group and
 
 Today, we are traveling to the Dominican Republic to learn more about the country and its Java community.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube AKNjwn0yPow >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,19 +37,19 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-### Brayan Muñoz Vargas {#h3-2-brayan-mu-oz-vargas}
+### Brayan Muñoz Vargas
 
 * <https://twitter.com/Brayanmnz_>
 * <https://www.linkedin.com/in/brayanmnz/>
 
-### Eudris Cabrera Rodriguez {#h3-3-eudris-cabrera-rodriguez}
+### Eudris Cabrera Rodriguez
 
 * <https://twitter.com/eudriscabrera>
 * <https://www.linkedin.com/in/eudriscabrera/>
 
 <br />
 
-### Host: Frank Delporte {#h3-4-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>

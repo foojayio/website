@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-### Code quality + Code security for Open Source \& AI code {#h3-0-code-quality-code-security-for-open-source-ai-code}
+### Code quality + Code security for Open Source \& AI code
 
 In the age of AI, ensuring code quality and code security is more critical than ever. Are you using the best methodologies to introduce GenAI in your company? do you know the risks? have you heard about AI MCP and the benefits ? what about using AI in the full SDLC? do you know the latest features of SonarQube regarding AI and SCA(dependencies vulnerabilities)?
 

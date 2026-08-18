@@ -17,7 +17,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### **A Practical Introduction to Horizontal Scaling** {#h3-0-a-practical-introduction-to-horizontal-scaling}
+### **A Practical Introduction to Horizontal Scaling**
 
 When building applications, most developers start with a **single database server**.
 
@@ -134,13 +134,13 @@ This allows the database to handle **massive datasets and high traffic efficient
 
 A sharded cluster in [**MongoDB**](https://www.mongodb.com/docs/manual/sharding/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=sharding-mongodb-devto&utm_term=hugh.murray) consists of three main components: shards, config servers, and MongoDB routers
 
-### **1. Shards** {#h3-1-1-shards}
+### **1. Shards**
 
 Shards are where the **actual data is stored**.
 
 Each shard is usually deployed as a **replica set** to ensure high availability and fault tolerance.
 
-### **2. Config Servers** {#h3-2-2-config-servers}
+### **2. Config Servers**
 
 Config servers store metadata about the cluster.
 
@@ -152,7 +152,7 @@ They maintain information such as:
 
 Without config servers, the cluster would not know where data lives.
 
-### **3. Mongos Router** {#h3-3-3-mongos-router}
+### **3. Mongos Router**
 
 Applications do not connect directly to shards.
 
@@ -247,7 +247,7 @@ Sharding is powerful, but it should be introduced only when needed.
 
 Here are common situations where sharding makes sense.
 
-### **Large datasets** {#h3-4-large-datasets}
+### **Large datasets**
 
 If your dataset grows into **hundreds of gigabytes or terabytes**, a single server may not be sufficient.
 
@@ -257,7 +257,7 @@ Examples include:
 * Log storage systems  
 * IoT platforms
 
-### **High write throughput** {#h3-5-high-write-throughput}
+### **High write throughput**
 
 Applications that generate large numbers of writes can benefit from sharding because writes can be distributed across multiple nodes.
 
@@ -267,7 +267,7 @@ Examples include:
 * Gaming platforms  
 * Social media feeds
 
-### **Rapid data growth** {#h3-6-rapid-data-growth}
+### **Rapid data growth**
 
 If you expect your dataset to grow rapidly, designing the system with sharding in mind early can save major architectural changes later.
 

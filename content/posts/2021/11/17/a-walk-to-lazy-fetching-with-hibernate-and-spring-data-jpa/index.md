@@ -22,7 +22,7 @@ frozen: false
  <img fetchpriority="high" decoding="async" src="oie_koKWLHXsUxuL.jpg" alt="" style="width:452px;height:226px" width="452" height="226">
 </figure>
 
-### Background {#h3-0-background}
+### Background
 
 Using `FetchType.EAGER` is a very bad practice, since our services may not require all the data of the mapped entities in all cases. And moreover, it is a bad idea to fetch so much data in a single session and makes the session heavy.
 
@@ -37,7 +37,7 @@ After using FetchType.LAZY our new code will be like below:
 But now when we try to build our project, we get a new problem. We have the LazyInitializationException.
 ![LazyInitializationException](1_Tr3xvq9hSvqoK3LHNaib6g-2-700x177.png)
 
-### Troubleshooting LazyInitializationException {#h3-1-troubleshooting-lazyinitializationexception}
+### Troubleshooting LazyInitializationException
 
 There might be found many suggestions over online. But my preferred one (I found it really effective) is using something called EntityGraph.
 > A point to note, we can do it in 2 ways.
@@ -47,8 +47,8 @@ There might be found many suggestions over online. But my preferred one (I found
 
 We will see both approaches here.
 
-**Using javax.persistence Provided Annotations** {#h2-2-using-javax-persistence-provided-annotations}
------------------------------------------------------------------------------------------------------
+**Using javax.persistence Provided Annotations**
+------------------------------------------------
 
 We will annotate our above mentioned Status entity with the annotations shown below.
 ![Annotating the Entity with @NamedEntityGraph](1_Tr3xvq9hSvqoK3LHNaib6g-3-700x294.png)
@@ -66,8 +66,8 @@ Notice that here we have only used the attributes owner and locations in our @Na
 To call this named entity graph in our query, we have added the following additional lines (line 96, 97 and 101) in our existing code.
 ![Calling the named entity graph](1_Tr3xvq9hSvqoK3LHNaib6g-4-700x433.png)
 
-**Using Spring Data JPA Provided @EntityGraph Annotation** {#h2-3-using-spring-data-jpa-provided-entitygraph-annotation}
-------------------------------------------------------------------------------------------------------------------------
+**Using Spring Data JPA Provided @EntityGraph Annotation**
+----------------------------------------------------------
 
 Let's see the entity first.
 ![](1_Tr3xvq9hSvqoK3LHNaib6g-5-455x510.png)

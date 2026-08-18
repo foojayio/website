@@ -28,8 +28,8 @@ Quite frequently when it comes to contributing to open source I hear questions/d
 
 Which is why I'd love to share a little bit about Hacktoberfest, which is an event organized by DigitalOcean that runs through the whole month of October that is celebrating its tenth anniversary this year. It's an event encourages people from all over the world, from all walks of life and all skill levels to contribute to open source projects.
 
-Participating {#_how_to_contribute_to_hacktoberfest}
-----------------------------------------------------
+Participating
+-------------
 
 Participating in Hacktoberfest is quite straightforward:
 
@@ -53,8 +53,8 @@ Please do keep in mind the core values:
 * **quality over quantity**: both for the projects, as your own development fewer, but more meaningful contributes are better
 * **it all adds up**: it's amazing to see what can be achieved by all these contributions, and the contributions from those that contributed beforehand.
 
-Advantages of contributing to open source {#_advantages_of_hacktoberfest}
--------------------------------------------------------------------------
+Advantages of contributing to open source
+-----------------------------------------
 
 * **meeting likeminded people:**you'll discover some superb people with similar interests \& passions
 * **learning \& personal growth:** it's a great way to discover a new domain/technology, and you will get great support \& feedback from the organisers.
@@ -63,13 +63,13 @@ Advantages of contributing to open source {#_advantages_of_hacktoberfest}
 
 And in case of Hacktoberfest, the first 50 000 participants that complete a pull request/merge request will mean one more purchased tree through Tree Nation (yes, for those familiar with Hacktoberfest, there will be [no more t-shirts](https://hacktoberfest.com/about/#digital-rewards) ) and a digital reward pack (a customizable badge, and some surprises from the sponsors)
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Hacktoberfest is a fantastic opportunity to engage with the open source community, enhance your skills, make a meaningful contribution to a project, and come in contact with some magnificent people
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 [Hacktoberfest website](https://hacktoberfest.com/)
 

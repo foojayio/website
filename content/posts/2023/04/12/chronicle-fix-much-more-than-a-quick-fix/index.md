@@ -22,7 +22,7 @@ frozen: false
 
 Many of our customers have upgraded from QuickFIX/J to [Chronicle FIX](https://chronicle.software/fix-engine/) and this article provides some background as to why.
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 [QuickFIX/J](https://www.quickfixj.org/) is free, accessible, supports the FIX standard and is therefore often chosen by the IT team for a first FIX engine.
 
@@ -37,7 +37,7 @@ Also, some customers engage with us because they already use our open source pro
 
 See below sections for more detail.
 
-### Upgrading {#h3-1-upgrading}
+### Upgrading
 
 Chronicle provides tools to assist in the upgrade from QuickFIX/J e.g. to automatically convert configuration from quickfix.ini to Chronicle's YAML format, and upgrades to Chronicle FIX are typically very smooth -- with one customer we helped them convert one of their applications in an afternoon.
 
@@ -45,11 +45,11 @@ Chronicle FIX's code generator uses standard FIX XML files and generates clean, 
 
 We can also make available the full source code of Chronicle FIX.
 
-### Features {#h3-2-features}
+### Features
 
 Below see more details on Chronicle FIX features and attributes.
 
-### Throughput and latency {#h3-3-throughput-and-latency}
+### Throughput and latency
 
 Chronicle FIX has been built from the ground up by low latency experts to be as fast as possible and leverages many ingenious techniques and patterns, some of which we believe are unique in the industry.
 
@@ -65,7 +65,7 @@ The second engine parses the NOS, generates an ack ExecutionReport, and sends th
 
 Once this has been parsed and delivered to the application, the time taken is sampled.
 
-### HA/DR {#h3-4-ha-dr}
+### HA/DR
 
 Chronicle FIX has support for transparent session failover for initiators and acceptors, with flexible configuration to allow the business to determine the level of risk -- the engine, for example, can be configured to only process messages that have been replicated to another host, another rack, or another data centre, depending on message type.
 
@@ -83,7 +83,7 @@ The below graph shows the send/ack round-trip/latency impact on the sender as th
 
 ![](Screen-Shot-2023-04-03-at-2.05.05-PM-1024x639.png)
 
-### Features {#h3-5-features}
+### Features
 
 Chronicle FIX implements additional features which have been driven by customer requirements e.g.
 
@@ -95,7 +95,7 @@ Chronicle FIX implements additional features which have been driven by customer 
 * Provides a rule-based Drop-Copy service
 * FIX version translator/adaptor
 
-### Manageability \& Monitoring {#h3-6-manageability-monitoring}
+### Manageability \& Monitoring
 
 The engine can be controlled from customers' tooling via API, or with the GUI.
 
@@ -109,11 +109,11 @@ All important metrics, including latency numbers, are exposed via the monitoring
 
 ![](Screen-Shot-2023-04-03-at-2.08.13-PM-1024x678.png)
 
-### Commercial Support {#h3-7-commercial-support}
+### Commercial Support
 
 Chronicle offers commercial support from our team of experts, who are located in all major Time Zones.
 
-### Conclusion {#h3-8-conclusion}
+### Conclusion
 
 When building your production FIX stack you likely want something more than a quick fix.
 

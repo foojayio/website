@@ -30,8 +30,8 @@ The bootcamp was organized by the JUG Leaders and Volunteers and DEVCON Voluntee
 
 ![](java-bootcamp-2024-1-510x510.jpg)
 
-Registration {#h2-0-registration}
----------------------------------
+Registration
+------------
 
 The bootcamp received an overwhelming **110+ registrations** but 50 was only accomodated due to the slots of the venue.
 
@@ -39,8 +39,8 @@ The JUG Leaders evaluated the interested participants that will be joining the e
 
 **See the registration of the bootcamp in LUMA:** <https://lu.ma/ohzqexnb>
 
-Java in Education by Java Community Process (JCP) {#h2-1-java-in-education-by-java-community-process-jcp}
----------------------------------------------------------------------------------------------------------
+Java in Education by Java Community Process (JCP)
+-------------------------------------------------
 
 JUG PH as a Partner Member of JCP, we integrated the Java in Education initiative of JCP to our curriculum.
 
@@ -48,8 +48,8 @@ The contents of the sessions were modified based on the needs of future and earl
 
 For more information about JCP - Java in Education, check out: [JCP - Java in Education GitHub Wiki](https://github.com/jcp-org/Java-in-Education/wiki/Java-in-Education---Wiki-Page "JCP - Java in Education GitHub Wiki")
 
-Sessions {#h2-2-sessions}
--------------------------
+Sessions
+--------
 
 Before the Java sessions start, the community partners introduced themselves and their initiative for the Philippines!
 
@@ -60,11 +60,11 @@ The bootcamp was splitted into 2 sessions, morning and afternoon. It was hosted 
 * **Morning Session** - Eric Martin discussed Java 8 to Java 13 and Java Coding Best Practices with coding exercises
 * **Afternoon Session** - Jansen Ang discussed Java 14 to Java 21 with coding exercises
 
-### Development Setup {#h3-3-development-setup}
+### Development Setup
 
 Before attending the event, the participants were tasked to download and install IntelliJ Community Edition as the IDE and Azul JDK as the OpenJDK build.
 
-### Java Basics and Java 8 to Java 13 {#h3-4-java-basics-and-java-8-to-java-13}
+### Java Basics and Java 8 to Java 13
 
 The morning session will tackle different features of Java starting from Java 8 to Java 13. Including in the discussion are some Java Best Practices needed in the IT industry.
 
@@ -78,7 +78,7 @@ The morning session will tackle different features of Java starting from Java 8 
 * var keyword
 * Old and New Switch Expression in switch
 
-### Java 14 to Java 21 {#h3-5-java-14-to-java-21}
+### Java 14 to Java 21
 
 The afternoon session will tackle different features of Java starting from Java 14 to Java 21.
 
@@ -95,8 +95,8 @@ The afternoon session will tackle different features of Java starting from Java 
 
 **To access the presentation of these sessions, check out:** [JUG PH Bootcamp Slides](https://github.com/JUGPH/java-presentations/tree/main/java-development-bootcamp-1 "JUG PH Bootcamp Slides")
 
-Community Partners {#h2-6-community-partners}
----------------------------------------------
+Community Partners
+------------------
 
 The bootcamp will not be possible without the help of our community partner.
 
@@ -104,16 +104,16 @@ The bootcamp will not be possible without the help of our community partner.
 
 ![](java-bootcamp-2024-5-510x510.jpg)
 
-Sponsors {#h2-7-sponsors}
--------------------------
+Sponsors
+--------
 
 This bootcamp was generously sponsored by Azul and AWS Philippines. This is the 1st time that AWS will sponsor for the JUG Philippines through DEVCON Manila. Thanks for these organizations for their support for the Philippine Java Community!
 
 * **Azul (Food Sponsor)** - Focusing in delivering alternative OpenJDK distribution aside from Oracle JDK. Azul JDK offers tremendous savings for your Java applications. For more information, check out <https://www.azul.com/>
 * **AWS Philippines (Venue Sponsor via DEVCON)** - Extending the services of Amazon Web Services in the Philippines. For more information, check out <https://aws.amazon.com/>
 
-Connect with us! {#h2-8-connect-with-us}
-----------------------------------------
+Connect with us!
+----------------
 
 The bootcamp exercises can be access below:
 

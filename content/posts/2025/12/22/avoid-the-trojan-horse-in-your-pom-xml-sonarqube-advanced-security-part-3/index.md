@@ -37,8 +37,8 @@ This is **Part 3** . Today, we look at [**SonarQube Advanced Security**](https:/
 
 
 
-**Problem #1: "I didn't write this bug, why is it my problem?"** {#h2-0-problem-1-i-didn-t-write-this-bug-why-is-it-my-problem}
--------------------------------------------------------------------------------------------------------------------------------
+**Problem #1: "I didn't write this bug, why is it my problem?"**
+----------------------------------------------------------------
 
 You add spring-boot-starter-web to your pom.xml. It works great. You deploy. Two months before, a hacker found a vulnerability in the underlying Tomcat server. You have no idea because you don't read CVE reports for breakfast.
 
@@ -56,8 +56,8 @@ If you are using version 2.4.0 of a library, and version 2.4.1 fixes a critical 
 
 
 
-**Problem #2: "The Dependency Hell" (Transitive Dependencies) 🔥** {#h2-1-problem-2-the-dependency-hell-transitive-dependencies}
---------------------------------------------------------------------------------------------------------------------------------
+**Problem #2: "The Dependency Hell" (Transitive Dependencies) 🔥**
+------------------------------------------------------------------
 
 You check your pom.xml. "I am clean! I don't use log4j! I only use my-reporting-tool!" But SonarQube says you are vulnerable. Why?
 
@@ -85,8 +85,8 @@ SonarQube Advanced Security visualizes this chain instantly. It shows you exactl
 
 
 
-**Problem #3: "Wait, I can't use this library? It's open source!" ⚖️** {#h2-2-problem-3-wait-i-can-t-use-this-library-it-s-open-source}
----------------------------------------------------------------------------------------------------------------------------------------
+**Problem #3: "Wait, I can't use this library? It's open source!" ⚖️**
+----------------------------------------------------------------------
 
 You found the perfect library to resize images. You import it. It works. Six months later, the Legal Department calls you screaming. *"You used a library with a* ***GPL-3.0*** *license! Now we have to open-source our entire proprietary banking application!"*
 
@@ -104,8 +104,8 @@ It saves you from a massive lawsuit (or a complete rewrite) later.
 
 
 
-**Problem #4: "The Sneaky Attack" (Advanced SAST \& Taint Analysis) 🕵️‍♂️** {#h2-3-problem-4-the-sneaky-attack-advanced-sast-taint-analysis}
----------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #4: "The Sneaky Attack" (Advanced SAST \& Taint Analysis) 🕵️‍♂️**
+----------------------------------------------------------------------------
 
 Standard dependency checkers are dumb. They just say: *"You have Library X version 1.0. It has a CVE."* But what if the vulnerability isn't a known CVE? What if the danger comes from **how you use the library**?
 
@@ -159,8 +159,8 @@ Standard tools ignore this because they don't look *inside* the library's logic.
 
 
 
-**Problem #5: "The Government is knocking at the door (SBOMs \& Regulations)" 📜** {#h2-4-problem-5-the-government-is-knocking-at-the-door-sboms-regulations}
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #5: "The Government is knocking at the door (SBOMs \& Regulations)" 📜**
+----------------------------------------------------------------------------------
 
 It is not just your manager asking for reports anymore. The world has changed. New strict regulations, like the **Executive Order 14028** in the USA and the **Cyber Resilience Act (CRA)** in Europe, are changing the game.
 
@@ -271,8 +271,8 @@ You just click "Download," hand it to the auditor (or the automated compliance s
 
 
 
-**🎯 Summary** {#h2-5-summary}
-------------------------------
+**🎯 Summary**
+--------------
 
 In **Part 3** , we learned that security is not just about *writing* code, it's about *managing* the ecosystem.
 

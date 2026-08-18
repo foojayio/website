@@ -19,14 +19,14 @@ I haven't always been lazy; it's a fairly recent addition to my repertoire of sk
 
 ![Lazy cat](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/lazy-cat.jpg)
 
-It's all IntelliJ IDEA's Fault {#h2-0-it-s-all-intellij-idea-s-fault}
----------------------------------------------------------------------
+It's all IntelliJ IDEA's Fault
+------------------------------
 
 No, really, it is. Back when I was a *cough* younger adult, we had to type out ***all the code***, we also thought it was cool to mix drinks that turned into something akin to gorilla snot. Maybe we weren't that smart, but I am discovering one thing at a rapid rate, IntelliJ IDEA was smarter than me, even 20 years ago (I'd like to say it was a low bar).
 
 I took a long break from coding, about 20 years, in fact. When I left coding, I wrote code in Vi and had memorised that very useful shortcut *:wq*; IDE's were around in fledgeling forms. Recently I came back to coding, and I walked into IntelliJ IDEA's open arms.
 
-### Exhibit 1 - Statement Completion {#h3-1-exhibit-1-statement-completion}
+### Exhibit 1 - Statement Completion
 
 Never one to take responsibility for my own actions, I'd like to offer up exhibit one - [Statement Completion in IntelliJ IDEA](https://www.jetbrains.com/help/idea/auto-completing-code.html). When you use the combination of ***Cmd*** +***Shift*** +***Enter*** , on macOS or ***Ctrl*** +***Shift*** +***Enter*** on Windows/Linux, IntelliJ IDEA completes it for you so that it will compile. I don't even know where the semi-colon button is on my keyboard anymore; I don't need it. Allow me to demonstrate.
 
@@ -42,7 +42,7 @@ IntelliJ IDEA is kind and pops the caret in the right place as part of Statement
 
 ![Statement Complete Shortcuts](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/statement-complete-presentation-mode.png)
 
-### Exhibit 2 - Live Templates {#h3-2-exhibit-2-live-templates}
+### Exhibit 2 - Live Templates
 
 I covered these in detail [in this blog](https://www.helenjoscott.com/posts/live-templates-in-intellij-idea), but here's a quick recap. Remember the days when you had to type the whole `for i` loop out? Well, they're as dead as the shell-suit fashion of the 1990s.
 
@@ -64,7 +64,7 @@ And
 
 There's [35 more for you to check out](https://www.jetbrains.com/help/idea/using-live-templates.html) with your beverage of choice! There's no keyboard shortcut for Live Templates; they'll just appear when you summon them by starting to type what you want.
 
-### Exhibit 3 - Post-Fix Completion {#h3-3-exhibit-3-post-fix-completion}
+### Exhibit 3 - Post-Fix Completion
 
 It seems like the humble dot is extremely powerful in IntelliJ IDEA. It does [Basic Completion](https://www.jetbrains.com/help/idea/auto-completing-code.html#basic_completion) automagically to suggest what might come next, but, it also does something very cool in that it can be used to tell IntelliJ IDEA to wrap whatever you just typed in some more code.
 
@@ -128,7 +128,7 @@ Using `.var` asks IntelliJ IDEA to put the variable type in for us, it's a boole
 
 You will also have the option to use the `var` type for real at this point if you want to. Now, `var` is fabulous, but Java is still a statically typed language. If you, as a human-being (presumably), can't figure out what type it is, please don't use `var` as the variable type. Using `.var` is geat, but declaring something as type `var` is a big no-no *if* the type of the expression is not quickly decipherable. Gift your fellow humans (right now, we all need it) by stating the type that it evaluates to when all is said and done. They'll thank you for it and you'll help *them* sleep better at night.
 
-### Exhibit 4 - Smart Completion {#h3-4-exhibit-4-smart-completion}
+### Exhibit 4 - Smart Completion
 
 With IntelliJ IDEA you get [Basic Completion](https://www.jetbrains.com/help/idea/auto-completing-code.html#basic_completion) out of the box, but [Smart Completion](https://www.jetbrains.com/help/idea/auto-completing-code.html#smart_completion) is just an extra finger tap away by using ***Ctrl*** +***Shift*** +***Space***.
 
@@ -160,8 +160,8 @@ You get the idea, it's very useful, and here is the keyboard shortcut that you n
 
 ![Smart Completion Shortcuts](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/smart-completion-shortcuts.png)
 
-Did IntelliJ IDEA Make You Lazy Too? {#h2-5-did-intellij-idea-make-you-lazy-too}
---------------------------------------------------------------------------------
+Did IntelliJ IDEA Make You Lazy Too?
+------------------------------------
 
 There's a lot of advantages to being lazy. It affords you more time for yourself, and your loved ones for a start. However, it's more than that, being a developer isn't all about writing code; there's also:
 

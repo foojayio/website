@@ -27,12 +27,12 @@ This separation is crucial: Your business logic shouldn't care whether you're us
 
 In this tutorial, we'll implement the DAO pattern with MongoDB as our backend. We'll start with a simple in-memory example to understand the core concepts, then build a production-ready implementation using the MongoDB Java Driver. Along the way, you'll see how MongoDB's document model actually makes the DAO pattern more straightforward than with traditional ORMs---no complex entity mappings required.
 
-A simple implementation {#h2-0-a-simple-implementation}
--------------------------------------------------------
+A simple implementation
+-----------------------
 
 Let's build a basic example to understand how the DAO pattern works. We'll create an inventory management application that tracks products while keeping the domain model completely agnostic about persistence. You can read through, or follow along:
 
-### Prerequisites {#h3-1-prerequisites}
+### Prerequisites
 
 Before starting this tutorial, ensure you have:
 
@@ -45,7 +45,7 @@ Before starting this tutorial, ensure you have:
 
 Now, you can create a simple maven application in the IDE of your choosing and follow along.
 
-### The domain class {#h3-2-the-domain-class}
+### The domain class
 
 First, we need a simple domain class to represent our products:
 
@@ -121,7 +121,7 @@ public class Product {
 
 Notice that this is just a plain old Java object (POJO). No annotations, no framework dependencies---just a container for product data. This is exactly what we want: a clean domain model that knows nothing about how it will be persisted.
 
-### The DAO API {#h3-3-the-dao-api}
+### The DAO API
 
 Now, let's define the DAO interface that will abstract all persistence operations:
 
@@ -140,7 +140,7 @@ public interface Dao<T> {
 
 This interface defines a generic API for CRUD operations on any type T. The beauty of this abstraction is that our application code can work with this interface without knowing anything about the underlying persistence mechanism.
 
-### The ProductDao class {#h3-4-the-productdao-class}
+### The ProductDao class
 
 Let's create an in-memory implementation to see the pattern in action:
 
@@ -211,7 +211,7 @@ public class ProductDao implements Dao<Product> {
 
 This in-memory implementation uses a simple ArrayList as our "database." In the constructor, we populate it with a few sample products. The key thing to notice here is that all the persistence logic---even if it's just managing a list---is encapsulated within the DAO.
 
-### Using the DAO {#h3-5-using-the-dao}
+### Using the DAO
 
 Here's how an application would use our DAO:
 
@@ -299,8 +299,8 @@ Final inventory:
 ```
 
 
-Using MongoDB as the persistence layer {#h2-6-using-mongodb-as-the-persistence-layer}
--------------------------------------------------------------------------------------
+Using MongoDB as the persistence layer
+--------------------------------------
 
 Let's implement a production-ready DAO using MongoDB. You might wonder: Doesn't MongoDB already provide a clean API through its driver? Why add another layer?
 
@@ -311,7 +311,7 @@ Here's why the DAO pattern still makes sense with MongoDB:
 3. **Testability**: It's easy to mock or swap implementations for testing.
 4. **Future flexibility**: Changing databases or adding caching becomes trivial.
 
-### Setting up MongoDB {#h3-7-setting-up-mongodb}
+### Setting up MongoDB
 
 First, add the MongoDB Java Driver to your pom.xml:
 
@@ -324,7 +324,7 @@ First, add the MongoDB Java Driver to your pom.xml:
 ```
 
 
-### The MongoDBProductDao class {#h3-8-the-mongodbproductdao-class}
+### The MongoDBProductDao class
 
 Here's our MongoDB-backed implementation:
 
@@ -419,7 +419,7 @@ Let's break down what's happening here:
 
 **Mapping helpers**: The productToDocument and documentToProduct methods handle the translation between our domain model and MongoDB's document format. This is much simpler than ORM mapping---we're just moving fields around, no complex entity lifecycle to manage.
 
-### Connecting to MongoDB {#h3-9-connecting-to-mongodb}
+### Connecting to MongoDB
 
 Before we can use our DAO, we need to establish a connection to MongoDB. Here's a simple connection manager:
 
@@ -454,7 +454,7 @@ public class MongoDBConnection {
 
 In a production application, you'd typically want to externalize the connection string to configuration files. For our purposes, this simple singleton approach works fine.
 
-### The application class {#h3-10-the-application-class}
+### The application class
 
 Now, let's see everything in action:
 
@@ -563,10 +563,10 @@ Deleted product: Wireless Mouse
 ```
 
 
-Advanced considerations {#h2-11-advanced-considerations}
---------------------------------------------------------
+Advanced considerations
+-----------------------
 
-### Preventing business logic leakage {#h3-12-preventing-business-logic-leakage}
+### Preventing business logic leakage
 
 One of the most important benefits of the DAO pattern is keeping business logic out of your data access code. Here's what you should avoid:
 
@@ -634,7 +634,7 @@ public void save(Product product) {
 
 Your DAO should focus exclusively on translating between your domain model and MongoDB's document model. All business rules, validation, and workflow logic belong in your service layer.
 
-### Adding custom query methods {#h3-13-adding-custom-query-methods}
+### Adding custom query methods
 
 While our basic DAO interface covers CRUD operations, real applications often need custom queries. Here's how to add them without polluting your DAO:
 
@@ -685,7 +685,7 @@ public class MongoProductDao implements ProductDao {
 
 This approach keeps your query logic encapsulated in the DAO while still maintaining clean separation of concerns.
 
-### Error handling {#h3-14-error-handling}
+### Error handling
 
 Production DAOs need robust error handling:
 
@@ -714,8 +714,8 @@ public void save(Product product) {
 
 Notice we're translating MongoDB-specific exceptions into application-specific exceptions. This prevents MongoDB dependencies from leaking into your business layer. We've made use of two custom exceptions, DuplicateProductException and DataAccessException, to help with debugging.
 
-Conclusion {#h2-15-conclusion}
-------------------------------
+Conclusion
+----------
 
 The DAO pattern remains valuable even with modern databases like MongoDB. It creates a clean separation between your business logic and persistence concerns, making your code more maintainable and testable.
 

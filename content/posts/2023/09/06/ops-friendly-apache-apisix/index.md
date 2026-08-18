@@ -25,8 +25,8 @@ Providing a single package that Ops can configure and deploy in different enviro
 
 In this short post, I'd like to describe how you can do the same with Apache APISIX in the context of containers.
 
-File-based configuration {#h2-0-file-based-configuration}
----------------------------------------------------------
+File-based configuration
+------------------------
 
 The foundation of configuring Apache APISIX is file-based. The default values are found in the `/usr/local/apisix/conf/apisix/config-default.yaml` configuration file. For example, by default, Apache APISIX runs on port `9080`, and the admin port is `9180`. That's because of the default configuration:
 
@@ -72,8 +72,8 @@ docker run -it --rm apache/apisix:3.4.1-debian \
 ```
 
 
-Environment-based configuration {#h2-1-environment-based-configuration}
------------------------------------------------------------------------
+Environment-based configuration
+-------------------------------
 
 The downside of a pure file-based configuration is that you must provide a dedicated file for each environment, even if only a single parameter changes. Apache APISIX allows replacement via environment variables in the configuration file to account for that.
 
@@ -136,8 +136,8 @@ routes:
 ```
 
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 When configuring Apache APISIX, we should ensure it's as operable as possible. In this post, I've described several ways to make it so.
 

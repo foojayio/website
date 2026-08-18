@@ -38,14 +38,14 @@ Already published in this series:
 * [I Got Java 25 Running on the RISC-V BeagleBoard BeagleV-Fire](https://webtechie.be/post/2026-02-13-java-25-runs-on-riscv-beagleboard-beaglev-fire/)
 * [Keeping Single-Board Computers Organized with a 3D Printed Stack](https://webtechie.be/post/2026-01-14-3d-print-sbc-stack/)
 
-Benchmark Tool {#h2-0-benchmark-tool}
--------------------------------------
+Benchmark Tool
+--------------
 
 To make the benchmark testing as easy as possible, I created a simple tool (written in Java of course!) that can be executed with [JBang](https://www.jbang.dev/). The complete project is available on GitHub at [github.com/FDelporte/sbc-java-comparison](https://github.com/FDelporte/sbc-java-comparison).
 
 The project consists of two main parts: a runner and a summarizer.
 
-### BenchmarkRunner.java - The User Tool {#h3-1-benchmarkrunner-java-the-user-tool}
+### BenchmarkRunner.java - The User Tool
 
 This is the tool you run on your single-board computer. It's a JBang script that:
 
@@ -111,7 +111,7 @@ The script generates a report that looks like this:
 ```
 
 
-### SummarizeReports.java - The Automation Tool {#h3-2-summarizereports-java-the-automation-tool}
+### SummarizeReports.java - The Automation Tool
 
 This tool runs automatically via a GitHub Action whenever a new benchmark result gets added to the repository. This tool:
 
@@ -121,8 +121,8 @@ This tool runs automatically via a GitHub Action whenever a new benchmark result
 
 This summary file is then used by the web dashboard to visualize all the results.
 
-About The Renaissance Benchmark Suite {#h2-3-about-the-renaissance-benchmark-suite}
------------------------------------------------------------------------------------
+About The Renaissance Benchmark Suite
+-------------------------------------
 
 Rather than creating benchmarks from scratch, I chose to use the [Renaissance Benchmark Suite](https://renaissance.dev/), an open-source project designed specifically for JVM performance evaluation. Renaissance is maintained by researchers and includes a variety of real-world workloads that stress different aspects of the JVM and hardware.
 
@@ -138,14 +138,14 @@ The suite includes benchmarks for parallel computing, functional programming, ma
 
 I specifically avoided the Apache Spark benchmarks from Renaissance, as they're very memory-hungry and designed for multicore server machines. They would either crash with OutOfMemoryErrors or take forever on these constrained boards.
 
-The Results {#h2-4-the-results}
--------------------------------
+The Results
+-----------
 
 Based on the automatically generated `summary.json` and other configuration files in the [repository's data directory](https://github.com/FDelporte/sbc-java-comparison/tree/main/data), I created (with a lot of help of [Claude.ai](https://claude.ai)...) an interactive dashboard to visualize all the results. You can explore it yourself at [webtechie.be/sbc/](https://webtechie.be/sbc/).
 
 Important note: I ran the tests on the default Ubuntu system provided by the manufacturer of the board, after doing an update/upgrade and installation of OpenJDK 25 and JBang. The runner itself also uses some resources of the board, so this influences the numbers, but the same approach has been used on all boards to have a similar comparison.
 
-### The Dashboard {#h3-5-the-dashboard}
+### The Dashboard
 
 The "[Vanilla JavaScript](http://vanilla-js.com/)" (= no libraries, just HTML/CSS/JS) dashboard presents the benchmark results in an easy-to-understand format. For each board, you can see:
 
@@ -169,7 +169,7 @@ The dashboard pulls the latest summary and other data files from the repository,
 
 These are screenshots from a first test round. Check the [actual last status at webtechie.be/sbc/](https://webtechie.be/sbc/).
 
-### Analyzing the Results {#h3-6-analyzing-the-results}
+### Analyzing the Results
 
 Some general remarks about the charts:
 
@@ -198,18 +198,18 @@ Among the boards that fit the traditional SBC form factor (Raspberry Pi-sized, p
 
 The RISC-V boards present an interesting case. The **Orange Pi RV2** , **BeagleV-Fire** , and **StarFive VisionFive 2 Lite** show that RISC-V is absolutely viable for running Java applications, though performance still lags behind ARM equivalents. This is expected given that RISC-V is a newer architecture with less mature tooling and optimization.
 
-### Selecting a Winner {#h3-7-selecting-a-winner}
+### Selecting a Winner
 
 If I had to pick a winner from the "true" single-board computers (excluding my Apple workstation and the LattePanda IOTA), the **OrangePi 5 Ultra** comes out on top, but the **Raspberry Pi 5** is a very close second. These boards offer the best combination of performance and price. Raspberry Pi has the added advantage of a big ecosystem support, and ease of use with the [Imager Tool](https://www.raspberrypi.com/software/). Orange Pi can still learn a lot from the extensive documentation, and huge library of compatible accessories and software that is available for Raspberry Pi.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 I wanted to run benchmarks on multiple boards, but needed a solution to do this as quickly and easily as possible. After all, this is a pet project for me. I got the boards for free, but comparing them is a personal challenge in my "free" time... With the current setup of the two scripts, I found a solution that is fast to execute. I only need access from my work PC, copy the GitHub token and JBang command, and let the test run in the background. The GitHub Action then automatically pushes the results to the repository and updates the dashboard. So, goal achieved! 🙂
 
 The results confirm: **Java runs without problems on all these platforms, from ARM to x86 to RISC-V**! Of course, there are performance differences between architectures and specific boards, but every single one of the tested devices can run real-world Java applications with a good performance.
 
-### Try It Yourself! {#h3-9-try-it-yourself}
+### Try It Yourself!
 
 I encourage you to run the benchmark on your own boards and contribute the results! The process is simple:
 
@@ -221,7 +221,7 @@ jbang https://github.com/FDelporte/sbc-java-comparison/raw/main/BenchmarkRunner.
 
 If you want your results added to the public dashboard, follow the instructions in the [repository README](https://github.com/FDelporte/sbc-java-comparison) to set up GitHub API access and submit your results.
 
-### What's Next? {#h3-10-what-s-next}
+### What's Next?
 
 This is just the beginning! I also received two Banana Pi boards, which I still need to unpack and test. And it would also be great to add a benchmark for JavaFX performance, but that will exclude RISC-V, as there is no JavaFX port for it (yet?). And, of course, I really want to get started exploring Pi4J on all these boards and see how it compares to the Raspberry Pi's GPIO.
 

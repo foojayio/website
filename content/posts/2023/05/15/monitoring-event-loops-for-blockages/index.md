@@ -29,7 +29,7 @@ The problem with profilers however is that they present aggregate information --
 
 Another problem with profilers is that it is very difficult to convince management that it is safe to run a profiler -- even a low overhead profiler -- in production, and some performance outliers only happen in production and can't be reproduced in test systems.
 
-### Event Loop Monitoring {#h3-0-event-loop-monitoring}
+### Event Loop Monitoring
 
 [Chronicle Threads](https://github.com/OpenHFT/Chronicle-Threads "Chronicle Threads") provides high performance event loop implementations and utility functions to help with threading and concurrency. Event loops are a very useful abstraction when building a low latency system, and event handlers are a simple mechanism to write safe code in a concurrent world. If you use Chronicle's [EventGroup](https://github.com/OpenHFT/Chronicle-Threads#event-loops "EventGroup") as your event loop then you get automatically enabled Event Loop Monitoring (this has historically also been known as Loop Block Monitoring).
 
@@ -41,7 +41,7 @@ This can be explained using pseudo code:
 
 ![](Screenshot-2023-05-15-at-5.37.56-PM-1024x214.png)
 
-### Best practice {#h3-1-best-practice}
+### Best practice
 
 The recommended way to use the Event Loop Monitor is to configure it initially with a relatively high threshold (default threshold is 100ms), run, examine stack traces and fix problems, decrease the threshold and repeat.
 
@@ -49,7 +49,7 @@ It is expected that in normal operation it will be configured to fire only 10s o
 
 The only real downside to this approach is that we make use of Thread#getStackTrace to get the stack trace of the blocked thread, and this method is safepoint-biased i.e. the blocked thread has to come to a safepoint before the stack trace can be taken and this can lead to inaccurate stack traces. A mitigation to this is to sprinkle the code that you are focused on with Jvm.safepoint() calls, which are a no-op unless you set the jvm.safepoint.enabled system property.
 
-### Sample code {#h3-2-sample-code}
+### Sample code
 
 If, for example you have some code that looks like this:
 
@@ -84,7 +84,7 @@ Then, once the Event Loop Monitor has started (it delays for a few seconds to al
 ```
 
 
-### Real-world examples {#h3-3-real-world-examples}
+### Real-world examples
 
 The below have all happened in the real world.
 
@@ -133,6 +133,6 @@ In this case, the machine was heavily loaded, logging was very infrequent, and t
 
 The lesson here is not to use logging in your fast path.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 For lightweight, always-on detection of latency outliers, the Event Loop Monitor is hard to beat.

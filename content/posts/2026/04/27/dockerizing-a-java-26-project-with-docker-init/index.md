@@ -35,13 +35,13 @@ What makes it valuable is that it's deterministic---not a probabilistic guess. I
 
 ![Docker Commandos setting up the command center](https://dockersecurity.io/commandos-asgard/asgard-init.png)
 
-Technical Requirements {#_technical_requirements}
--------------------------------------------------
+Technical Requirements
+----------------------
 
 * Docker Desktop 4.27 or later
 
-Create a New Project {#_create_a_new_project}
----------------------------------------------
+Create a New Project
+--------------------
 
 I'm using a Spring Boot project. Because it's early Spring now and I haven't touched one in a while---so let's go.
 
@@ -72,8 +72,8 @@ cd hello-wowlrd
 ```
 
 
-Run Docker Init {#_run_docker_init}
------------------------------------
+Run Docker Init
+---------------
 
 As my British friend say, "It's Docker, innit?"
 
@@ -157,8 +157,8 @@ ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
 
 This is already a proper multi-stage build: separate stages for dependency resolution, compilation, layer extraction, and a minimal runtime image with a non-root user. Gord would approve.
 
-A Note on Java 26 Base Images {#_a_note_on_java_26_base_images}
----------------------------------------------------------------
+A Note on Java 26 Base Images
+-----------------------------
 
 The generated Dockerfile references `eclipse-temurin:26-jdk-jammy` and `eclipse-temurin:26-jre-jammy`. Since Java 26 was just released, these Eclipse Temurin images may not be fully available on Docker Hub yet.
 
@@ -170,8 +170,8 @@ Swap them out for SAP Machine images instead---SAP's free OpenJDK distribution s
 
 Find them on Docker Hub: <https://hub.docker.com/_/sapmachine>. Just replace `eclipse-temurin` with `sapmachine` in both `FROM` lines.
 
-Build and Run {#_build_and_run}
--------------------------------
+Build and Run
+-------------
 
 ```bash
 docker compose up --build
@@ -192,8 +192,8 @@ services:
 
 The application starts, and immediately stops with exit code 0. That's expected: there's no HTTP endpoint to keep it alive.
 
-Add a Controller {#_add_a_controller}
--------------------------------------
+Add a Controller
+----------------
 
 Create `src/main/java/io/dockersecurity/hellowowlrd/HelloController.java`:
 
@@ -239,8 +239,8 @@ curl http://localhost:8080
 ```
 
 
-More Links {#_more_links}
--------------------------
+More Links
+----------
 
 Docker Init supports more than Java. If you want to try it with other languages, Docker's official guides are the place to start: <https://docs.docker.com/guides/>.
 
@@ -248,8 +248,8 @@ I co-authored the C++ guide---Docker thanked me for it at the top of the page, w
 
 * <https://docs.docker.com/guides/cpp/>
 
-Conclusion {#_conclusion}
--------------------------
+Conclusion
+----------
 
 Java 26 just shipped and Docker Init handles it cleanly out of the box---multi-stage build, layer extraction, non-root user, bind mounts for caching. You get a production-ready Dockerfile in under a minute. When Eclipse Temurin catches up, swap the base images back. Until then, SAP Machine has you covered.
 

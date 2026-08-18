@@ -29,37 +29,37 @@ To make it as easy as possible to get started with Java on the Raspberry Pi to i
 
 **In this tutorial, I want to show you how you can read the temperature, humidity, and pressure from a BME280 Sensor.**
 
-What Is Used? {#h2-0-what-is-used}
-----------------------------------
+What Is Used?
+-------------
 
 As explained on the websites of each project:
 
-### Pi4J {#h3-1-pi4j}
+### Pi4J
 
 *A friendly object-oriented I/O API and implementation libraries for Java Programmers to access the full I/O capabilities of the Raspberry Pi platform. This project abstracts the low-level native integration and interrupt monitoring to enable Java programmers to focus on implementing their application business logic.*
 
 All info on: [pi4j.com](https://pi4j.com/)
 
-### JBang {#h3-2-jbang}
+### JBang
 
 *Lets Students, Educators and Professional Developers create, edit and run self-contained source-only Java programs with unprecedented ease.*
 
 All info on: [jbang.dev](https://www.jbang.dev/)
 
-### Raspberry Pi {#h3-3-raspberry-pi}
+### Raspberry Pi
 
 *Computing for everybody. From industries large and small, to the kitchen table tinkerer, to the classroom coder, we make computing accessible and affordable for everybody.*
 
 All info on: [raspberrypi.com](https://www.raspberrypi.com/)
 
-Tutorial {#h2-4-tutorial}
--------------------------
+Tutorial
+--------
 
 This tutorial is also explained in this video, which is based on the [documentation provided by the Pi4J website](https://pi4j.com/examples/jbang/bme280_temperature_humidity_pressure/).
 
 {{< youtube -CgjwthLy5c >}}
 
-### About the BME280 {#h3-5-about-the-bme280}
+### About the BME280
 
 The BME280 is a sensor produced by Bosch. It's very tiny, only 2,5 millimeters. The [datasheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf) lists many different applications and devices for which this sensor can be used. But it's also an excellent component for experiments, as it provides both I2C and SPI interfaces.
 
@@ -71,7 +71,7 @@ Unfortunately, Bosch is only referring to the datasheet as it contains all the i
 
 In my example, the sensor in a version of [Adafruit](https://www.adafruit.com/product/2652) is used. It comes on a small board that can be quickly tested on a breadboard. It also exist in a version by [SparkFun where I2C and SPI connections are separated](https://www.sparkfun.com/products/13676).
 
-### Wiring {#h3-6-wiring}
+### Wiring
 
 You can control the sensor both with I2C and SPI, so there are two wirings provided.
 
@@ -84,7 +84,7 @@ You can control the sensor both with I2C and SPI, so there are two wirings provi
  </figure>
 </figure>
 
-### Java Code {#h3-7-java-code}
+### Java Code
 
 The [full description and tutorial on the Pi4J website](https://pi4j.com/examples/jbang/bme280_temperature_humidity_pressure/) includes the code examples for both I2C and SPI.
 
@@ -186,7 +186,7 @@ console.println("Temperature: " + df.format(temperature* 1.8 + 32) + " °F ");
 ```
 
 
-### Running the Application {#h3-8-running-the-application}
+### Running the Application
 
 Because JBang downloads the dependencies and compiles the code, we can execute all this with just one single Java file. This is the output of the I2C example:
 
@@ -221,8 +221,8 @@ $ jbang Pi4JTempHumPressI2C.java
 ```
 
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 After my earlier [JBang experiment with only a basic LED and button](https://foojay.io/today/controlling-electronics-with-jbang-on-the-raspberry-pi/), this BME280 was more challenging.
 
@@ -236,8 +236,8 @@ I have a bunch of other components in my drawer waiting for more experiments, so
 
 
 
-Read More {#h2-10-read-more}
-----------------------------
+Read More
+---------
 
 * [Pi4J_V2-TemperatureSensor example code by Tom Aarts](https://github.com/Pi4J/pi4j-example-devices/blob/master/src/main/java/com/pi4j/devices/bmp280/README.md)
 * [Bosch BMP280 Data Sheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp280-ds001.pdf)

@@ -38,8 +38,8 @@ It's called **tracing** , and it's one of the pillars of *observability*; the ot
 
 In this post, I'll focus solely on traces and describe how you can start your journey into observability.
 
-The W3C Trace Context specification {#h2-0-the-w3c-trace-context-specification}
--------------------------------------------------------------------------------
+The W3C Trace Context specification
+-----------------------------------
 
 A tracing solution should provide a standard format to work across heterogeneous technology stacks. Such a format needs to adhere to a specification, either a formal one or a *de facto* one.
 
@@ -65,8 +65,8 @@ At the time of this writing, the specification is a W3C recommendation, which is
 
 Trace Context already has [many implementations](https://github.com/w3c/trace-context/blob/main/implementations.md). One of them is OpenTelemetry.
 
-OpenTelemetry as the golden standard {#h2-1-opentelemetry-as-the-golden-standard}
----------------------------------------------------------------------------------
+OpenTelemetry as the golden standard
+------------------------------------
 
 The closer you're to the operational part of IT, the highest the chances that you've heard about OpenTelemetry:
 > OpenTelemetry is a collection of tools, APIs, and SDKs. Use it to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) to help you analyze your software's performance and behavior.
@@ -89,8 +89,8 @@ Both projects merged and added logs on top. OpenTelemetry now offers a set of "l
 
 Note that while OpenTelemetry is a Trace Context implementation, it does more. Trace Context limits itself to HTTP, while OpenTelemetry allows spans to cross non-web components, such as Kafka. It's outside the scope of this blog post.
 
-The use-case {#h2-2-the-use-case}
----------------------------------
+The use-case
+------------
 
 My favorite use case is an e-commerce shop, so let's not change it. In this case, the shop is designed around microservices, each accessible via a REST API and protected behind an API Gateway. To simplify the architecture for the blog post, I'll use only two microservices: `catalog` manages products, and `pricing` handles the price of products.
 
@@ -102,8 +102,8 @@ To make things more interesting, `catalog` is a Spring Boot application coded in
 
 Tracing should allow us to follow the path of a request across the gateway, both microservices and, if possible, the databases.
 
-Traces at the gateway {#h2-3-traces-at-the-gateway}
----------------------------------------------------
+Traces at the gateway
+---------------------
 
 The entry point is the most exciting part of tracing, as it should generate the trace ID: in this case, the entry point is the gateway. I'll use Apache APISIX to implement the demo:
 > Apache APISIX provides rich traffic management features like Load Balancing, Dynamic Upstream, Canary Release, Circuit Breaking, Authentication, Observability, etc.
@@ -153,8 +153,8 @@ global_rules:
 
 1. Tracing has an impact on performance. The more we trace, the more we impact. Hence, we should carefully balance the performance impact vs. the benefits of observability. For the demo, however, we want to trace every request.
 
-Collecting, storing and displaying traces {#h2-4-collecting-storing-and-displaying-traces}
-------------------------------------------------------------------------------------------
+Collecting, storing and displaying traces
+-----------------------------------------
 
 While Trace Context is a W3C specification and OpenTelemetry is a *de facto* standard, many solutions exist to collect, store and display traces on the market. Each solution may provide all three capabilities or only part of them. For example, the Elastic stack handles storage and display, but you must rely on something else for collection. On the other hand, [Jaeger](https://www.jaegertracing.io/docs/1.18/opentelemetry/) and [Zipkin](https://zipkin.io/) do provide a complete suite to fulfill all three capabilities.
 
@@ -189,8 +189,8 @@ services:
 
 Now that we have set up the infrastructure, we can focus on enabling traces in our applications.
 
-Traces in Flask apps {#h2-5-traces-in-flask-apps}
--------------------------------------------------
+Traces in Flask apps
+--------------------
 
 The `pricing` service is a simple [Flask](https://flask.palletsprojects.com/) application. It offers a single endpoint to fetch the price of a single product from the database.
 
@@ -271,8 +271,8 @@ def price(product_str: str) -> Dict[str, object]:
 
 1. Add an additional span with the configured label and attribute
 
-Traces in Spring Boot apps {#h2-6-traces-in-spring-boot-apps}
--------------------------------------------------------------
+Traces in Spring Boot apps
+--------------------------
 
 The `catalog` service is a Reactive [Spring Boot](https://spring.io/projects/spring-boot) application developed in Kotlin. It offers two endpoints:
 
@@ -339,8 +339,8 @@ suspend fun fetch(@SpanAttribute("id") id: Long): Result<Product> {             
 1. Add an additional span with the configured label
 2. Use the parameter as an attribute, with the key set to `id` and the value the parameter's runtime value
 
-The result! {#h2-7-the-result}
-------------------------------
+The result!
+-----------
 
 We can now play with our simple demo to see the result:
 
@@ -364,8 +364,8 @@ Each span contains attributes that the automatic instrumentation added and the o
 
 [![](span-attributes.jpg)](span-attributes.jpg)
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I've showcased tracing by following a request across an API gateway, two apps based on different tech stacks, and their respective databases.
 

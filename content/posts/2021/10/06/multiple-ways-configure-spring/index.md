@@ -28,8 +28,8 @@ Many alternatives are available to configure your Spring app.
 
 I'd like to list them in this post, leaving Spring Boot out of the picture on purpose.
 
-Core concepts {#h2-0-core-concepts}
------------------------------------
+Core concepts
+-------------
 
 A couple of concepts are central in Spring. The related documentation doesn't describe most of them. Here is my understanding of them:
 
@@ -46,8 +46,8 @@ To configure a Spring application, one creates one or more contexts and register
 
 ![](application-model.png)
 
-Property file {#h2-1-property-file}
------------------------------------
+Property file
+-------------
 
 Yes, you read that well: you can actually configure beans via a property file. It was the first way to do it, and though **it's deprecated**, it still works.
 
@@ -87,8 +87,8 @@ context.refresh();                                            // 6
 5. Parse the file to create bean definitions in the context
 6. Instantiate the beans from the beans definitions
 
-XML {#h2-2-xml}
----------------
+XML
+---
 
 XML is the way most developers think about when they configure a Spring application. It has been available for ages and still is today. To use it, we only have to transform the previous property file to XML format:
 
@@ -117,8 +117,8 @@ var context = new ClassPathXmlApplicationContext("beans.xml");   // 1
 
 1. Create the application context, parse the XML file, create the bean definitions, and refresh the context!
 
-Groovy DSL {#h2-3-groovy-dsl}
------------------------------
+Groovy DSL
+----------
 
 One can alternatively also use Groovy. For that, Spring provides a dedicated .
 
@@ -141,8 +141,8 @@ var context = new GenericGroovyApplicationContext("beans.groovy");
 
 Just remember that Groovy is not a first-class citizen in the Spring ecosystem anymore.
 
-Self-annotated classes {#h2-4-self-annotated-classes}
------------------------------------------------------
+Self-annotated classes
+----------------------
 
 When Spring introduced self-annotated classes not long after Java 5, people considered them a significant improvement over XML. With this approach, you add annotations to your code that Spring recognizes at startup time. For me, it's a bit odd to use Spring to make one's code more decoupled and to end up coupling it to a third-party framework.
 
@@ -179,8 +179,8 @@ var context = new AnnotationConfigApplicationContext(John.class, Jane.class);
 
 Note that you need to explicitly list all the necessary classes you want to be part of the context. Spring Boot makes it easier for you by implementing *classpath scanning*, so you don't need explicit listing.
 
-Configuration classes {#h2-5-configuration-classes}
----------------------------------------------------
+Configuration classes
+---------------------
 
 As mentioned above, self-annotated classes have a couple of downsides:
 
@@ -217,8 +217,8 @@ var context = new AnnotationConfigApplicationContext(ClassConfigurator.class);
 ```
 
 
-Kotlin DSL {#h2-6-kotlin-dsl}
------------------------------
+Kotlin DSL
+----------
 
 The Kotlin DSL is the latest newcomer to the available alternatives. It avoids the usage of annotations.
 
@@ -244,8 +244,8 @@ GenericApplicationContext().apply {             // 1
 5. Add the bean definitions to the context
 6. Instantiate the beans from the beans definitions
 
-Bean definitions {#h2-7-bean-definitions}
------------------------------------------
+Bean definitions
+----------------
 
 All the previous configuration alternatives provide an abstraction layer over bean definitions. Then, the container creates beans out of bean definitions. We can bypass these abstraction layers and directly use the bean definition API.
 
@@ -293,8 +293,8 @@ context.refresh();                                                           // 
 2. Register the bean definition
 3. Instantiate the beans from the beans definitions
 
-Beans {#h2-8-beans}
--------------------
+Beans
+-----
 
 Spring provides a simple API for simple bean definitions, so we don't need to create dedicated bean definition classes. This mechanism creates such a definition when necessary.
 
@@ -312,8 +312,8 @@ context.refresh();
 ```
 
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 Spring is based on several core concepts: bean factories, contexts, bean definitions, and beans.
 

@@ -29,8 +29,8 @@ In this blog, we share how the Java developer experience team optimized the Mong
 
 These are the lessons we learned turning micro-optimizations into macro-gains. Our findings might surprise you --- they certainly surprised us --- so we encourage you to read until the end.
 
-Getting the metrics right {#h2-0-getting-the-metrics-right}
------------------------------------------------------------
+Getting the metrics right
+-------------------------
 
 Development teams often assume they know where bottlenecks are, but intuition is rarely dependable. During this exercise, the MongoDB Java team discovered that performance problems were often not where the team expected them to be.
 
@@ -42,8 +42,8 @@ To avoid 'premature optimization'---that is, improving code that appears slow bu
 
 We applied the [Pareto principle](https://en.wikipedia.org/wiki/Pareto_principle) (also known as the 80/20 rule) to target the specific code paths responsible for the majority of execution time. For this analysis, we used [**async-profiler**](https://github.com/async-profiler/async-profiler). Its low-overhead, sampling-based approach allowed us to capture actionable CPU and memory profiles with negligible performance impact.
 
-How we measured performance {#h2-1-how-we-measured-performance}
----------------------------------------------------------------
+How we measured performance
+---------------------------
 
 We standardized performance tests based on throughput (MB/s), simplifying comparisons across all scenarios. Our methodology focused on minimizing the influence of external variables and ensuring practical relevance.
 
@@ -109,8 +109,8 @@ The flat byte\[\] layout remains the preferred choice because it uses fewer heap
 **Figure 1.** The figure below shows the before-and-after results of performance tests on 100x100 and 100x1000 array documents. The larger arrays saw the greatest improvement in performance.  
 ![](Screenshot-2026-02-10-at-11.40.40-AM.png)
 
-2. Java Virtual Machine (JVM) intrinsics {#h2-2-2-java-virtual-machine-jvm-intrinsics}
---------------------------------------------------------------------------------------
+2. Java Virtual Machine (JVM) intrinsics
+----------------------------------------
 
 As Java developers, we write code with many abstractions, which makes the code easier to maintain and understand; however, these abstractions can also cause significant performance issues. What is easy for humans to read isn't always what the machine prefers to execute, which is why having [mechanical sympathy](https://wa.aws.amazon.com/wellarchitected/2020-07-02T19-33-23/wat.concept.mechanical-sympathy.en.html) may be beneficial.
 
@@ -141,8 +141,8 @@ After implementing our changes and testing them, we realized thata simple change
 **Figure 2.**The figure below shows throughput improvements for each insert command. 'Large Doc Bulk Insert' saw the most significant gain because processing larger payloads maximizes the impact of optimizing the hottest execution paths.  
 ![](Screenshot-2026-02-10-at-11.41.20-AM.png)
 
-3. Check and check again {#h2-3-3-check-and-check-again}
---------------------------------------------------------
+3. Check and check again
+------------------------
 
 As mentioned earlier, size checks on **ByteBuffer** in the critical path are expensive. However, we also performed similar checks on invariants in many other places**.**When encoding BSON, we retrieved the current buffer from a list by index on every write:
 
@@ -164,8 +164,8 @@ This minor change led to a **16% increase in throughput** for bulk inserts. This
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **The lesson:** Remove unnecessary checks from the hottest paths. Because these checks run so frequently, they quickly become bottlenecks that drag down performance. |
 
-4. BSON null terminator detection with SWAR {#h2-4-4-bson-null-terminator-detection-with-swar}
-----------------------------------------------------------------------------------------------
+4. BSON null terminator detection with SWAR
+-------------------------------------------
 
 Every BSON document is structured as a list of triplets: *a type byte, a field name, and a value* . Crucially, each field name is a null-terminated string---[CString](https://stackoverflow.com/questions/14473526/what-is-cstring)---not a length-prefixed string. While this design saves four bytes per field, it introduces a performance trade-off: extracting a CString now requires a linear scan rather than a constant-time lookup.
 
@@ -259,8 +259,8 @@ The final result:
 
 Because the loop body now consists of a small, predictable set of arithmetic instructions, it integrates seamlessly with modern CPU pipelines. The efficiency of SWAR stems from its reduced instruction count, the absence of per-byte branches, and one memory load for every eight bytes.
 
-5. Avoiding redundant copies and allocations {#h2-5-5-avoiding-redundant-copies-and-allocations}
-------------------------------------------------------------------------------------------------
+5. Avoiding redundant copies and allocations
+--------------------------------------------
 
 While optimizing CString detection with SWAR, we also identified an opportunity to reduce allocations and copies on the string decoding path.
 
@@ -289,8 +289,8 @@ To achieve this, the decoder maintains a reusable byte\[\] buffer. The first cal
 
 On our "FindMany and empty cursor" workload, eliminating the redundant intermediate copy in readString **improved throughput by approximately 22.5%** **.** Introducing the reusable buffer contributed a **\~5%** improvement in cases where the internal array is not available.
 
-6. String Encoding, removing method indirection and redundant checks {#h2-6-6-string-encoding-removing-method-indirection-and-redundant-checks}
------------------------------------------------------------------------------------------------------------------------------------------------
+6. String Encoding, removing method indirection and redundant checks
+--------------------------------------------------------------------
 
 While benchmarking our code, we observed that encoding Strings to UTF-8, the format used by BSON, consumed a significant amount of time. BSON documents contain many strings, including attribute names as CStrings and various string values of different lengths and Unicode code points. The process of encoding strings to UTF-8 was identified as a hot path, prompting us to investigate it and suggest potential improvements. Our initial implementation used custom UTF-8 encoding to avoid creating additional arrays with the standard JDK libraries.
 
@@ -397,8 +397,8 @@ This optimization improved insert throughput across all related benchmarks. For 
 
 You can see the particular test conditions in the [Performance Benchmarking specification](https://github.com/mongodb/specifications/blob/master/source/benchmarking/benchmarking.md#large-doc-bulk-insert).
 
-Lessons learned {#h2-7-lessons-learned}
----------------------------------------
+Lessons learned
+---------------
 
 * **Cache immutable data on the hot path:** In our case, pre-encoding BSON index CStrings once into a compact flat byte\[\] removed repeated int to byte\[\] conversions and cut heap overhead from thousands of tiny byte\[\] objects.  
 * **The JVM can surprise you:** Use intrinsics and hardware features whenever possible. After implementing our changes and testing, we found that a simple modification affecting less than 0.03% of the codebase increased throughput for large document bulk inserts by nearly 39%.  

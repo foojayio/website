@@ -22,8 +22,8 @@ frozen: false
 
 This article shows how to configure Vaadin and Spring Security to use OAuth2 with Keycloak.
 
-Keycloak {#h2-0-keycloak}
--------------------------
+Keycloak
+--------
 
 First, we must start Keycloak and configure a realm. The easiest way is to start Keycloak with Docker.   
 *Caution: This is just for development purposes. Don't use the setup in production.*
@@ -87,8 +87,8 @@ Now comes a crucial step. We must disable the role mapping to the ID token. When
 The configuration must look like this:
 ![](https://martinelli.ch/wp-content/uploads/2022/11/image-1024x723.png)
 
-Vaadin Application with Security Configuration {#h2-1-vaadin-application-with-security-configuration}
------------------------------------------------------------------------------------------------------
+Vaadin Application with Security Configuration
+----------------------------------------------
 
 First, we need to extend VaadinWebSecurity to set up the Vaadin Spring security integration. There we override the configure method.
 
@@ -160,7 +160,7 @@ Sign in with admin/admin, and you'll be redirected to the app:
 
 Now you have access to all views.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Setting up Vaadin, Spring Security, and Keycloak is straight forwarded. The only tricky part was the role mapping to get the realm roles as GranteAuthority.

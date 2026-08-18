@@ -26,7 +26,7 @@ On Java, thanks to the investments communities and Microsoft have been constantl
 
 In this article, I will walk you through how to get started for Java on VS Code.
 
-### Installation {#h3-0-installation}
+### Installation
 
 On VS Code, although you can read and write your code without installing extension, to take advantage of Java specific features, you need install some extensions. There are three options for installation:
 
@@ -38,7 +38,7 @@ On VS Code, although you can read and write your code without installing extensi
 * If you are an existing VS Code user and want to add support for Java, we recommend installing the **Java Extension Pack** , a collection of suggested extensions by Microsoft. You can get [the pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack "the pack") from VS Code Marketplace, or when you first-time open a .java file on VS Code, you will be promoted to install.
 * Alternatively, you can install extensions with your own choice from [VS Code Marketplace](https://marketplace.visualstudio.com/VSCode "VS Code Marketplace").
 
-### Starting a Project {#h3-1-starting-a-project}
+### Starting a Project
 
 Regardless of a new project or an existing project, it's easy to get started with VS Code.
 
@@ -51,13 +51,13 @@ One thing a new user may find a bit tricky in the beginning is JDK configuration
 
 ![](JDK-configuration.png)
 
-### Run and Debugging {#h3-2-run-and-debugging}
+### Run and Debugging
 
 Once your project is opened and imported, VS Code is smart enough to detect the main() method. What you have to do is only to decide whether clicking **Ctrl+F5** for running without debugging or **F5** for starting debugging.
 
 We would recommend you playing with [PetClinic](https://github.com/spring-projects/spring-petclinic "PetClinic") application, one of our favorite reference applications, built in Spring Boot in a reasonable size. You will feel the power of VS Code, which is beyond a traditional editor.
 
-### Tips {#h3-3-tips}
+### Tips
 
 As an introduction, we won't go too deep on listing what VS Code can do for you. In fact, it is impossible to do so, as communities and Microsoft are building more and more on top of it. However, before closing this writing, I would like to share some tips that are worth to know before dive in.
 

@@ -23,8 +23,8 @@ At some point in your career, probably many points, you'll have to resolve merge
 
 A common cause of merge conflicts is when you're working on a `feature` branch while other changes have been applied to the `main` branch.
 
-Merge feature branch into main {#h2-0-merge-feature-branch-into-main}
----------------------------------------------------------------------
+Merge feature branch into main
+------------------------------
 
 In this tutorial, we are currently on the `main` branch, and we want to merge the `feature` branch into `main`.
 
@@ -62,8 +62,8 @@ Alternatively, if you accidentally click **Close** , a *Merge Conflicts* node wi
 
 Click the arrow to see the *Merge Conflicts* node. You can click **Resolve** to reopen the *Conflicts* dialog.
 
-Resolving Merges {#h2-1-resolving-merges}
------------------------------------------
+Resolving Merges
+----------------
 
 Back on the *Conflicts* dialog, there are changes on both branches that we want to keep so you can click **Merge** to open the *Merge Revision*s dialog.
 

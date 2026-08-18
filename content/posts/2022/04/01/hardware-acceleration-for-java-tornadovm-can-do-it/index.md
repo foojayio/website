@@ -36,13 +36,13 @@ Figure 1 shows the conventional execution of Java applications on CPUs via the J
 
 Figure 1: Execution of Java applications through JVM (top) and TornadoVM (bottom).
 
-### What is TornadoVM? {#h3-0-what-is-tornadovm}
+### What is TornadoVM?
 
 TornadoVM is an open-source software technology originated from the Beehive Lab at the University of Manchester. In a nutshell, TornadoVM can be used as a plug-in software for various JDK distributions (e.g., OpenJDK, Red Hat Mandrel, Amazon Corretto, etc.) to enable hardware acceleration.
 
 Besides acceleration, TornadoVM offers several innovative runtime features, such as the live migration from one device to another and the composition of pipelines in Java.
 
-### The Interaction Points of TornadoVM with the JVM {#h3-1-the-interaction-points-of-tornadovm-with-the-jvm}
+### The Interaction Points of TornadoVM with the JVM
 
 The Java Virtual Machine (JVM) is a system that - among others - performs two prime functionalities: a) the translation of Java bytecodes to assembly code, and b) handles memory operations (e.g., allocation of memory, memory mapping, etc.).
 
@@ -95,7 +95,7 @@ Additionally, it allows fast development of new compiler phases, since Graal is 
 * The **PTX** backend emits parallel implementations in assembly code that can be executed on Nvidia GPUs.
 * The **SPIR-V** backend emits binary SPIR-V code that can be executed currently on Intel Integrated GPUs and any SPIR-V compatible devices.
 
-### Applications of Interest {#h3-2-applications-of-interest}
+### Applications of Interest
 
 Applications that can merit from hardware acceleration must exhibit a high degree of parallelism. The kind of parallelism can indicate which hardware type is more suitable for execution. For example, applications aiming at high-throughput processing can target GPU hardware. On the other hand, applications that focus on low latency calculations can harness FPGAs.
 
@@ -107,7 +107,7 @@ Accelerators can be also integrated on the same silicon and share memory with th
 
 Figure 3: TornadoVM Use Cases.
 
-### Summary {#h3-3-summary}
+### Summary
 
 To summarize, TornadoVM is a software technology that enables hardware acceleration for Java and potentially other JVM programming languages.
 

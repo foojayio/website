@@ -42,8 +42,8 @@ We implement the profiler in a daemon thread started by a Java agent. This allow
 * Profiler: Contains the profiling loop
 * Store: Stores and outputs the collected results
 
-Main Class {#h2-0-main-class}
------------------------------
+Main Class
+----------
 
 We start by implementing the agent entry points:
 
@@ -124,8 +124,8 @@ t.start();
 ```
 
 
-Profiler Class {#h2-1-profiler-class}
--------------------------------------
+Profiler Class
+--------------
 
 The actual sampling takes place in the Profiler class:
 
@@ -227,8 +227,8 @@ The result of `Thread::getAllStackTraces` is filtered so that we don't include d
 
 We pass the appropriate traces to the Store, which deals with the post-processing.
 
-Store Class {#h2-2-store-class}
--------------------------------
+Store Class
+-----------
 
 This is the last class of this profiler and also the by far most significant, post-processing, storing, and outputting of the collected information:
 
@@ -414,8 +414,8 @@ private static class Node {
 ```
 
 
-Tiny-Profiler {#h2-3-tiny-profiler}
------------------------------------
+Tiny-Profiler
+-------------
 
 I named the final profiler tiny-profiler and its sources are on [GitHub](https://github.com/parttimenerd/tiny-profiler) (MIT licensed).
 
@@ -455,8 +455,8 @@ scala.collection.immutable.List.foreach       16271     145.06       3       0.0
 
 The overhead for this example is around 2% on my MacBook Pro 13" for a 10ms interval, which makes the profiler usable when you ignore the safepoint-bias.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Writing a Java profiler in 240 lines of pure Java is possible and the resulting profiler could even be used to analyze performance problems.
 

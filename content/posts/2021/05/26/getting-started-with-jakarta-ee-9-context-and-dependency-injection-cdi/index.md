@@ -28,8 +28,8 @@ The CDI specification is an important backbone of Jakarta EE as it brings severa
 
 We will also tell you a bit about the different scopes, the interceptor mechanism, and the Event system.
 
-Dependency Injection and Bean Scopes {#h2-0-dependency-injection-and-bean-scopes}
----------------------------------------------------------------------------------
+Dependency Injection and Bean Scopes
+------------------------------------
 
 Instead of instantiating Java Objects yourself, it is sometimes easier to ask for an instance from a central location. It can handle the lifecycle for you when the instance needs to be created and can be disposed of. It will also have all its dependencies prepared and ready and can be enhanced with some interceptors related to logging, transaction, and security, for example.
 
@@ -101,8 +101,8 @@ public class HelloResource {
 ```
 
 
-Bean Initialisation {#h2-1-bean-initialisation}
------------------------------------------------
+Bean Initialisation
+-------------------
 
 If we define a CDI bean, the required dependencies are 'injected' were we have used the @Inject annotation. But in some cases, the service needs to perform some initialisation steps before it can be used. We indicate which method needs to be executed after the instance is created, the dependencies are injected but BEFORE the bean itself is injected into another bean.
 
@@ -120,8 +120,8 @@ public class GreetingService {
 ```
 
 
-Interceptors {#h2-2-interceptors}
----------------------------------
+Interceptors
+------------
 
 Another important aspect of CDI is the ability to define interceptors. They define some cross-cutting concerns for your application. These code bits need to be applied to various parts of your code and ideally should be separated from it as they don't belong to the logic of a method. But they are very important as they handle the transactional, security, or logging aspects.
 
@@ -192,8 +192,8 @@ The interceptors are not applied automatically by the CDI implementation, we nee
 
 In the above example, we did not specify the namespace of the beans tag. This has the advantage that it can be used by different versions of Java EE and Jakarta EE (since the namespace changes between Java EE, Jakarta EE 8, and Jakarta EE 9) but we do not specify the bean discovery mode.
 
-CDI Events {#h2-3-cdi-events}
------------------------------
+CDI Events
+----------
 
 Another very powerful feature of the CDI framework is the ability to send Events from producer to consumers in a very efficient and decoupled way. In many applications, you have the requirement that some information or an event needs to be used by other parts of the application. Instead of direct coupling, you can choose a loose coupling so that producers and consumers don't have to know each other.
 
@@ -238,15 +238,15 @@ public void addPerson(@Observes AddPersonEvent addPersonEvent) {
 
 As you can see, there is no coupling between the producer and the consumer of the CDI events. The only link they have is the payload class, AddPersonEvent in our example.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 The Context and Dependency Injection specification provides you with some powerful features for the core of your Jakarta EE application. You can define beans that provide you services or keep data for a user request. You can define the lifecycle of those beans using annotations and define initialisation methods. You can also define an alternative, decorators and producers for CDI beans which I didn't cover in this blog. [Have a look at the documentation what is available and how you can use it.](https://docs.payara.fish/community/docs/documentation/payara-server/development-tools/cdi-dev-mode/README.html)
 
 Besides the basics of Dependency Injection, we saw also some other features that are available with the specification, defining interceptors, and using CDI events.
 
-Watch the Video {#h2-5-watch-the-video}
----------------------------------------
+Watch the Video
+---------------
 
 We've also created an associated video demonstration as part of our video series['Getting Started with Jakarta EE 9'.](https://www.youtube.com/playlist?list=PLFMhxiCgmMR8rWUcvrxiSQnKqyHk2knpi)
 

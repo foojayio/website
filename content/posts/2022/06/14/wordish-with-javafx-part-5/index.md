@@ -46,8 +46,8 @@ Before we start, here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 5: Chart Your Guesses {#h2-0-part-5-chart-your-guesses}
-------------------------------------------------------------
+Part 5: Chart Your Guesses
+--------------------------
 
 The bar chart icon in the main Wordish view takes you to the Statistics view, where a user can see game statistics accumulated during play.
 
@@ -70,7 +70,7 @@ The green bar shows the guess level of the most recent game. However, if the mos
 
 Let's show you how to display both these game statistics as well as the JavaFX BarChart Guess Distribution, as shown in Figure 2.
 
-### Keeping Track of the Game Stats {#h3-1-keeping-track-of-the-game-stats}
+### Keeping Track of the Game Stats
 
 Class WordStats stores our game-playing statistics as the user works through each game. Here's the WordStats class and its class variables (without the getters and setters). Variable `guessDistribution` is a HashMap with Integer keys and values. The key corresponds to the number of tries a successful play took (a number between 1 and 6, inclusive) and the value is the number of games that took that number of tries. Variable `thisGameGuesses` is how many guesses the most recent game took (one through six). A value of zero means the user did not guess the word in the allotted six tries.
 
@@ -98,7 +98,7 @@ public class WordStats {
 
 **Note** : See **[WordStats.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/WordStats.java)** and **[GameStatus.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/GameStatus.java)**.
 
-### The Statistics View {#h3-2-the-statistics-view}
+### The Statistics View
 
 FXML file **stats.fxml** describes the Statistics view, shown in Figure 2. The controller class for this view is **StatsController.java** . The `@FXML` annotation provides access to the appropriate Label controls, which we set in the `initialize()` method, as shown here.
 
@@ -130,7 +130,7 @@ public class StatsController {
 
 **Note** : See **[stats.fxml](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/stats.fxml)** and **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)**.
 
-### Adding Data to the Bar Chart {#h3-3-adding-data-to-the-bar-chart}
+### Adding Data to the Bar Chart
 
 The lower portion of the Statistics view is a Bar Chart. Notably, JavaFX charts are extremely flexible, but have added complexity. The Bar Chart for our use case, however, is fairly straightforward.
 
@@ -153,7 +153,7 @@ Here are the BarChart, NumberAxis, and CategoryAxis UI controls for Wordish. Fir
 ```
 
 
-### Method `getBarChartData()` {#h3-4-method-getbarchartdata}
+### Method `getBarChartData()`
 
 Although a Bar Chart can have multiple series, we have only one series here. We pull our data from the `guessDistribution` hashmap and fill the list as follows.
 
@@ -177,7 +177,7 @@ private ObservableList<XYChart.Series<Number, String>> getBarChartData() {
 
 **Note** : See **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)**.
 
-### Customizing the Bar Chart {#h3-5-customizing-the-bar-chart}
+### Customizing the Bar Chart
 
 A standard JavaFX Bar Chart uses default colors for each of its data series. We can easily change the default color with CSS, as shown below. Here, we set the `.chart-bar` selector attribute `-fx-bar-fill` to our previously defined `-fx-nomatch-color` (a gray color). We similarly set the `.chartlabel` selector (which styles the specialized Label nodes, discussed next) to use the same `-fx-nomatch-color`, with `-fx-text-fill` set to white.
 
@@ -208,7 +208,7 @@ if (data.getYValue().equals(String.valueOf(ws.getThisGameGuesses()))) {
 
 **Note** : See **[styles.css](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/style.css)** and **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)** (method `fixLabels()`).
 
-### Adding Controls to a Chart Node Structure {#h3-6-adding-controls-to-a-chart-node-structure}
+### Adding Controls to a Chart Node Structure
 
 A standard bar chart has a grid with labels that show the value of each bar. In our case, we display the category labels for the Y-axis data (the number of guesses). However, we don't use default labels for the X-axis. Instead, we have separate Label controls that we define in the FXML: one Label for each of the chart's bars.
 
@@ -307,7 +307,7 @@ Note that the critical code that depends on CSS and layout rendering includes th
 
 **Note** : See **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)** (method `fixLabels()`).
 
-### Implementing a PopUp Control {#h3-7-implementing-a-popup-control}
+### Implementing a PopUp Control
 
 Wordish uses a PopUp control to display messages to users who play the game. We use a popup when the user
 

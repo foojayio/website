@@ -25,8 +25,8 @@ frozen: false
 
 One critical aspect of Spring Boot dependency management is security. Software vulnerabilities are discovered frequently, and by keeping your project's dependencies up to date, you're essentially putting on your digital security armor. Outdated dependencies can be like unlocked doors, inviting trouble from potential threats, and that's something we'd like to avoid.
 
-Finding vulnerabilities in Spring Boot {#h2-0-finding-vulnerabilities-in-spring-boot}
--------------------------------------------------------------------------------------
+Finding vulnerabilities in Spring Boot
+--------------------------------------
 
 Software composition analysis (SCA) tools are a very useful tool for developers. They cover an easy solution to managing dependencies, handling security vulnerabilities, navigating licensing issues, and ensuring compliance in your software projects. By using [++Snyk Open Source++](https://snyk.io/product/open-source-security-management/) as your SCA, you can easily find out if your Spring Boot packages contain vulnerabilities.
 
@@ -38,8 +38,8 @@ The second vulnerability I would like to discuss is a medium severity arbitrary 
 
 I won't go into the actual problem of individual vulnerabilities today, but you can check out the dedicated [++blog post++](https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471/) for more information on the \`snakeyaml\` problem. Let's focus on solving the problem and implementing the best solution.
 
-Remediating vulnerable packages in your Spring Boot application {#h2-1-remediating-vulnerable-packages-in-your-spring-boot-application}
----------------------------------------------------------------------------------------------------------------------------------------
+Remediating vulnerable packages in your Spring Boot application
+---------------------------------------------------------------
 
 For the first vulnerability, there is a clear fix described. My application is based on Spring Boot 2.7.16, and therefore, the \`spring-boot-starter-webflux\` is also on version 2.7.16.
 
@@ -90,7 +90,7 @@ dependencies {
 ```
 
 
-### Update Spring Boot starter {#h3-2-update-spring-boot-starter}
+### Update Spring Boot starter
 
 The version number of the individual \`spring-boot-starters\` are derived from the \`spring-boot-starter-parent\` (Maven) or the \`org.springframework.boot\` plugin in Gradle.
 
@@ -145,7 +145,7 @@ plugins {
 I would advise everyone to go the extra mile and update their entire spring boot version to the latest appropriate version. To find out what that is, simply go to https://start.spring.io.
 ![blog-sprint-boot-initializer](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273847%2Fblog-sprint-boot-initializer.jpg&w=2560&q=75)
 
-### Updating transitive dependencies {#h3-3-updating-transitive-dependencies}
+### Updating transitive dependencies
 
 For the second issue, Snyk discovered that there is no clear remediation advice in my appliation. Currently, there is also no available version of a \`spring-boot-starter\` that does not have this insecure transitive dependency. What we do know is that there is an updated version of the transitive dependency available. Updating to \`snakeyaml\` 2.0 will solve the problem.  
 
@@ -221,8 +221,8 @@ dependencies {
 ```
 
 
-Scanning your Spring Boot applications with Snyk {#h2-4-scanning-your-spring-boot-applications-with-snyk}
----------------------------------------------------------------------------------------------------------
+Scanning your Spring Boot applications with Snyk
+------------------------------------------------
 
 Scanning your Spring Boot application with Snyk is essential for ensuring the security and stability of your software. Snyk helps identify in your application's dependencies, which can be exploited by malicious actors if left unaddressed. After reading this article, you also know what the best way is to implement the remediation advice provide by Snyk.  
 

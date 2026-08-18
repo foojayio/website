@@ -31,7 +31,7 @@ In this article, we'll take a close look at the data flow between a public excha
 
 The proposed scheme may serve as a foundation for crypto-trading projects.
 
-### How Crypto Exchanges Provide Market Data {#h3-0-how-crypto-exchanges-provide-market-data}
+### How Crypto Exchanges Provide Market Data
 
 In this article we'll take a look at the techniques that the Binance exchange uses to provide market data to its customers, but the techniques and patterns used by this exchange are similar to many other exchanges as well.
 
@@ -72,7 +72,7 @@ Exchange updates are provided by a [websocket connection](https://binance-docs.g
 The data flow between the Binance endpoint and the trading logic follows below:  
 ![](Screen-Shot-2022-10-10-at-2.21.44-PM-1024x321.png)
 
-### Best Practices: Implementing Efficient Market Data Connector {#h3-1-best-practices-implementing-efficient-market-data-connector}
+### Best Practices: Implementing Efficient Market Data Connector
 
 Let's walk through some implementation details which are important for achieving maximum performance, usability and stability.
 
@@ -172,7 +172,7 @@ How to arrange your services and cores
 * Several microservices can be grouped together to share a single event loop, which gives you full control over CPU consumption. With this approach, you are able to run all exchange adaptors in a single thread.
 * Alternatively, you may elect to run just some of your most critical services on their own core giving your microservices a greater degree of separation.
 
-### Resulting Architecture of Crypto Market Data Connectivity Layer {#h3-2-resulting-architecture-of-crypto-market-data-connectivity-layer}
+### Resulting Architecture of Crypto Market Data Connectivity Layer
 
 The diagram below just highlights the idea of separating the connector service from the trading service.
 
@@ -180,7 +180,7 @@ You can use this approach to start your project and attach more Chronicle micros
 
 ![](Screen-Shot-2022-10-10-at-2.27.27-PM-1024x618.png)
 
-### Demo Project {#h3-3-demo-project}
+### Demo Project
 
 The demo project connects to Binance and performs simple analytics on the market state.
 

@@ -31,13 +31,13 @@ I chose an analogy for the entire thing: **Gossips**;\\
 
 It fits with the nature of the library, and the way it'll be used. A global pub-sub component to enable cross-component communication.
 
-Just, why? {#h2-0-just-why}
----------------------------
+Just, why?
+----------
 
 > The intention of this "experiment" is to explore how expressive programming languages can be. And how close can we model our real world using logical statements and constructs. It really is amusing how software engineers have created such expressive constructs that we use in our code. This experiment is heavily triggered and inspired by [JavaFX's Theater analogy](https://medium.com/@juliemmasam/javafx-and-the-theatre-metaphor-179243704581).
 
-Show me the code {#h2-1-show-me-the-code}
------------------------------------------
+Show me the code
+----------------
 
 The spine of almost every event bus out there is a form of the [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern). And we won't be any different.
 
@@ -129,8 +129,8 @@ internal class GossipsImpl<T> : Gossips<T> {
 
 We store a set of `Neighbor`s, and we keep them up to date whenever a new `gossip` is out. We add new neighbors to this set whenever they are interested in `listen`ing to our gossips. We also remove them whenever they feel they had enough and want to `unsubscribe`.
 
-Tying it all together {#h2-2-tying-it-all-together}
----------------------------------------------------
+Tying it all together
+---------------------
 
 An example of how it looks like in action is quite amusing:
 

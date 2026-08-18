@@ -33,16 +33,16 @@ OpenRewrite allows us to do major refactorings on our source code using (prewrit
 
 
 
-Use cases {#h2-0-use-cases}
----------------------------
+Use cases
+---------
 
 * fixes: autoformatting, unused imports, applying new conventions using a recipe, ...
 * migrations: log4j ⇒ slf4j, java 8 ⇒ 11 ⇒ 17, JUnit 4 ⇒ 5, ...
 * static analysis fixes: resolve common issues reported by SAST tools, code cleanup, ...
 * utility: generate a CycloneDx bill of materials, update GitHub actions, ...
 
-How does OpenRewrite work? {#h2-1-how-does-openrewrite-work}
-------------------------------------------------------------
+How does OpenRewrite work?
+--------------------------
 
 OpenRewrite makes changes to the **L** osless **S** emantic **T** ree representation of your code using *visitors*.
 
@@ -50,14 +50,14 @@ OpenRewrite makes changes to the **L** osless **S** emantic **T** ree representa
 
 These *visitors* can in turn be gathered into *recipes*.
 
-Setup {#h2-2-setup}
--------------------
+Setup
+-----
 
 OpenRewrite can be run using the Maven/Gradle build plugin tools or directly from a java `main` method if a build tool plugin is not possible ([see for reference](https://docs.openrewrite.org/running-recipes/running-rewrite-without-build-tool-plugins))
 
 Both for Maven and Gradle we can run the migrations either by modifying our build files or by running a shell command or init script respectively.
 
-### Maven {#h3-3-maven}
+### Maven
 
 If we add the plugin to our pom.xml file
 
@@ -70,7 +70,7 @@ If we add the plugin to our pom.xml file
 ```
 
 
-### Gradle {#h3-4-gradle}
+### Gradle
 
 For Gradle, we need to be certain that `mavenCentral()` is present in our repositories section, then we need to add the following to our build file:
 
@@ -99,10 +99,10 @@ rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:2.1.0"))
 
 After which we can try `./mvnw rewrite:discover` or `./gradlew rewriteDiscover` to discover which recipes we can run from OpenRewrite using this setup. (we can add other sources/write our own).
 
-Usage {#h2-5-usage}
--------------------
+Usage
+-----
 
-### Adding a recipe without configuration {#h3-6-adding-a-recipe-without-configuration}
+### Adding a recipe without configuration
 
 Some OpenRewrite recipes require some configuration, but we will start easy with a standard OpenRewrite which doesn't need any setup.
 
@@ -136,7 +136,7 @@ index d97b878..8e85aaf 100644
 ```
 
 
-### Adding a recipe with a configuration {#h3-7-adding-a-recipe-with-a-configuration}
+### Adding a recipe with a configuration
 
 Some recipes require configuration. Let us start with an easy one. For example, your organisation changes its name, and suddenly you need to rewrite your package names.
 
@@ -163,16 +163,16 @@ Then we will add `dev.simonverhoeven.sampleRecipe` to our active recipes.
 
 When we then run the rewrite we will see that our `oldorgname` has been renamed to `neworgname` and that the package statement in our `Sample` file has also been adapted.
 
-### Without build tool plugins {#h3-8-without-build-tool-plugins}
+### Without build tool plugins
 
 It is possible to use OpenRewrite without the build tool plugins, the hardest part is determining the applicable classpath for each set of files. A brief overview of the approach is documented at [running rewrite without build tool plugins](https://docs.openrewrite.org/running-recipes/running-rewrite-without-build-tool-plugins) on the OpenRewrite website.
 
-The real power {#h2-9-the-real-power}
--------------------------------------
+The real power
+--------------
 
 For now, we have used 2 quite basic recipes, which had relatively limited impact. Now let us take a leap forward to java 17 \& Spring Boot 3.1.
 
-### Migration {#h3-10-migration}
+### Migration
 
 #### Hamcrest ⇒ AssertJ
 
@@ -191,7 +191,7 @@ mvn -U org.openrewrite.maven:rewrite-maven-plugin:run
 
 After running this command you can see that this recipe has managed to fully replace all usages of Hamcrest. So if desired one can remove the library.
 
-### Modernization {#h3-11-modernization}
+### Modernization
 
 And we would love to finally start using `spring-boot-starter-test`. Now we would like to take the sensible approach and make certain that all our tests run properly using this library. Now here is where we stumble upon a small hiccup. For some reason, our project is using JUnit 4, not 5 and since Spring boot 2.2 the backward compatibility with Spring JUnit 4 has been dropped.
 
@@ -327,7 +327,7 @@ mvn -U org.openrewrite.maven:rewrite-maven-plugin:run
 
 After running this command you can see that this recipe has managed to fully replace all usages of Guava. So if desired one can remove the library.
 
-### Static analysis fixes {#h3-12-static-analysis-fixes}
+### Static analysis fixes
 
 Now that we have done all this, we are finally starting to reach our target.  
 
@@ -389,7 +389,7 @@ In our console we will see:
 
 And looking at [SampleController](https://github.com/SimonVerhoeven/openrewrite-demo/blob/main/src/main/java/dev/simonverhoeven/openrewritedemo/oldorgname/SampleController.java) will reveal a lot of changes
 
-### Utility {#h3-13-utility}
+### Utility
 
 Now OpenRewrite goes beyond just rewriting one's codebase. There are a lot of other convenient features:
 
@@ -503,7 +503,7 @@ class Test {
 ```
 
 
-### Summary {#h3-14-summary}
+### Summary
 
 OpenRewrite has so many more interesting recipes, and I would invite you to take a gander at their recipe list.
 
@@ -511,8 +511,8 @@ But hopefully, this has wet your appetite, and given you a brief insight as to w
 
 If you have any questions feel free to reach out, or join the OpenRewrite [Slack](https://join.slack.com/t/rewriteoss/shared_invite/zt-nj42n3ea-b~62rIHzb3Vo0E1APKCXEA).
 
-References {#h2-15-references}
-------------------------------
+References
+----------
 
 * [OpenRewrite documentation](https://docs.openrewrite.org/)
 * [Creating your own recipe](https://docs.openrewrite.org/authoring-recipes)
@@ -521,7 +521,7 @@ References {#h2-15-references}
 * [Moderne](https://www.moderne.io/) - a platform to automate migrating, securing, and maintaining source code. It uses OpenRewrite recipes and offers certain extra features like data tables to view the changes that were made. It is free for open-source projects.
 * [Spring boot migrator](https://github.com/spring-projects-experimental/spring-boot-migrator) - a CLI tool that offers recipes to migrate/upgrade an application to Spring boot and is compatible with \& uses OpenRewrite
 
-Notes {#h2-16-notes}
---------------------
+Notes
+-----
 
 If you have a multi-module maven project you might run into errors when using the maven plugin, a workaround \& more information is documented at [multi-module maven](https://docs.openrewrite.org/running-recipes/multi-module-maven).

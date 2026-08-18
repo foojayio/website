@@ -25,7 +25,7 @@ I've been playing with GraalVM Ahead-Of-Time compilation capability since I beca
 
 In this post, I want to check how easy it is to produce a (working!) Docker image from an existing Spring Boot application.
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 GraalVM provides many different features. Among them, the component known as Substrate VM allows to AOT-compile regular bytecode to a native executable. The process "walks" the application starting from the `main` method at build time. Substrate VM leaves out the code that it doesn't follow out from the resulting binary.
 
@@ -47,7 +47,7 @@ This option is compelling and allows one to create native images out of nearly e
 
 None of these items are complicated, but the process is time-consuming and error-prone. It can be automated, but there's always a risk that a specific release forgets to test a particular use-case and crashes when deployed.
 
-### Experimenting with Spring Native {#h3-1-experimenting-with-spring-native}
+### Experimenting with Spring Native
 
 In the true Spring spirit, Spring Native aims to ease the configuration. The main idea is to provide "hints" directly in the code. A dedicated plugin will use these hints and generate the required configuration files. The Spring team has already provided those hints for the framework's code. You can also annotate your application's code if necessary.
 
@@ -116,7 +116,7 @@ With this configuration snippet, one can create a native image with the `native`
 mvn spring-boot:build-image -Pnative
 ```
 
-### First Hurdles {#h3-2-first-hurdles}
+### First Hurdles
 
 The AOT compilation process takes a long time. It should succeed (though it displays some stack traces), and in the end, it produces a Docker image. You can run the image with:
 
@@ -193,7 +193,7 @@ Caused by: java.lang.RuntimeException: internal error
 ```
 
 
-### Switching to YAML {#h3-3-switching-to-yaml}
+### Switching to YAML
 
 XML is a huge beast, and I'm not expert enough to understand the exact reason behind the above exception. Engineering is also about finding the right workaround. In this case, I decided to switch from XML configuration to YAML configuration. It's simple anyway:
 
@@ -220,7 +220,7 @@ Because of missing charsets at runtime, we also need to initialize the YAML read
 
 We need to continue adding a couple of reflectively-accesses classes, all related to Hazelcast.
 
-### Missing Proxies {#h3-4-missing-proxies}
+### Missing Proxies
 
 At this point, we hit a brand new exception at runtime!
 
@@ -257,7 +257,7 @@ This one is about proxies and is pretty straightforward. In this context, Spring
 ```
 
 
-### And Now For Serialization {#h3-5-and-now-for-serialization}
+### And Now For Serialization
 
 With the above configuration, the image should start successfully, which makes me feel all warm inside:
 
@@ -303,7 +303,7 @@ AOT left out serialized classes, and we need to manage them. As for proxies, Gra
 ```
 
 
-### Success! {#h3-6-success}
+### Success!
 
 Now, we can (finally!) `curl` the running image:
 
@@ -324,7 +324,7 @@ The output returns the expected result:
 
 We need to configure the `Sort` class to work with the root '/' endpoint, which retrieves all entities at once.
 
-### Conclusion {#h3-7-conclusion}
+### Conclusion
 
 Despite all the "magic" of Spring Boot, Spring Native handles most of GraalVM's required configuration out-of-the-box. The steps described above are mainly specific to the application's code.
 

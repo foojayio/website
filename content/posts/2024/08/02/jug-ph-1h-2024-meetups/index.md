@@ -23,14 +23,14 @@ frozen: false
 
 Summary of the meetups done in the 1st half of 2024. We discussed a variety of topics which was useful to our Java enthusiasts and members.
 
-2024 Meetup Kickoff {#h2-0-2024-meetup-kickoff}
------------------------------------------------
+2024 Meetup Kickoff
+-------------------
 
 We kicked-off the Java meetup in partnership with Angular Philippines. The meetup had 2 sessions which was demonstrated by Mark Montealto and Eric Martin.
 
 ![](jugph-angular-2024-1-700x467.jpeg)
 
-### Progressive Web App using Angular Framework {#h3-1-progressive-web-app-using-angular-framework}
+### Progressive Web App using Angular Framework
 
 A 1 hour session by Mark Montealto talking about how to make a Progressive Web aplication using Angular Framework. He started with the concepts and performed a live-coding.
 
@@ -42,7 +42,7 @@ Topics covered:
 
 ![](jugph-angular-2024-2-700x467.jpeg)
 
-### Clean Code in Java {#h3-2-clean-code-in-java}
+### Clean Code in Java
 
 Eric Martin discussed Clean Coding by Robert Martin using Java. He discussed the following topics:
 
@@ -53,10 +53,10 @@ Eric Martin discussed Clean Coding by Robert Martin using Java. He discussed the
 
 ![](jugph-angular-2024-3-680x510.jpeg)
 
-JCP 25th Anniversary {#h2-3-jcp-25th-anniversary}
--------------------------------------------------
+JCP 25th Anniversary
+--------------------
 
-### JCP Celeberation {#h3-4-jcp-celeberation}
+### JCP Celeberation
 
 We included in this meetup the celebration of Java Community Process 25th Anniversary. The image below is a snapshot of the JCP 25th Anniversary video.
 
@@ -66,7 +66,7 @@ We included in this meetup the celebration of Java Community Process 25th Annive
 The JCP Organization gave us merchandises to be distributed to JUG PH Members  
 ![](jugph-jcp-2024-4-680x510.jpeg)
 
-### Spring Modulith {#h3-5-spring-modulith}
+### Spring Modulith
 
 Lorenzo Dee discussed the use of Spring Modulith and the concepts behind it. He discussed how modularity affects the codebases.
 
@@ -76,12 +76,12 @@ Some keypoints during the talk:
 * Transactions in Spring Modulith
 * Spring Modulith Testing
 
-### Spring Boot Observability {#h3-6-spring-boot-observability}
+### Spring Boot Observability
 
 Raymond Del Rosario discussed Spring Boot Micrometer as a tool for observability. He demonstrated on how to observe Spring Boot applications using Prometheus and Grafana.
 
-GitHub Copilot Day {#h2-7-github-copilot-day}
----------------------------------------------
+GitHub Copilot Day
+------------------
 
 This meetup focuses on the use of GitHub Copilot in creating a Spring Boot API, Dockerfile and Kubernetes Deployment object. Bryan San Juan demonstrated this in front of the Java Members and Partners.
 
@@ -95,18 +95,18 @@ Sequence of the demonstration using GitHub Copilot
 
 ![](jugph-github-2024-2-680x510.jpeg)
 
-Modern API Development {#h2-8-modern-api-development}
------------------------------------------------------
+Modern API Development
+----------------------
 
 This meetup focuses on Modern Java API Development and Testing Frameworks.
 
 ![](jugph-api-development-2024-1-680x510.jpeg)
 
-### OpenAPI using Quarkus and Vert.x {#h3-9-openapi-using-quarkus-and-vert-x}
+### OpenAPI using Quarkus and Vert.x
 
 Stephan Wissel demonstrated the use of OpenAPI using Quarkus and Vert.x. He did a live-coding for our Java Members and Partners.
 
-### API Testing in Spring Boot {#h3-10-api-testing-in-spring-boot}
+### API Testing in Spring Boot
 
 Lino Borsoto discussed Spring Boot API Testing and the different annotations of Spring Boot Starter Test. He individually discussed the following:
 
@@ -116,8 +116,8 @@ Lino Borsoto discussed Spring Boot API Testing and the different annotations of 
 * Mockito
 * and so on..
 
-Sponsors {#h2-11-sponsors}
---------------------------
+Sponsors
+--------
 
 The meetups were sponsored generously by Azul, ING Hubs Philippines, Inventive Media, and Orange and Bronze Software Labs. Thanks for these organizations for their continuous support for the Philippine Java Community!
 
@@ -128,8 +128,8 @@ Check-out the product and career opportunities of our sponsors!
 * **Orange and Bronze Software Labs (Venue Sponsor)** - Focusing in IT consulting and services using Java-based technologies. Their organization consists of experts with extensive experience of Java, Spring and Cloud Technologies. For more information, check out, <https://orangeandbronze.com/>
 * **Inventive Media (Venue Sponsor)** - An IT Learning Hub focusing in delivering high-quality IT trainings in the Philippines. For more information, check out: <https://www.inventivemedia.com.ph/>
 
-Connect with us! {#h2-12-connect-with-us}
------------------------------------------
+Connect with us!
+----------------
 
 The presentations and recording of these meetups can be access below:
 

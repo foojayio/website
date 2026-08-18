@@ -49,8 +49,8 @@ Before we start, here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 4: What's In a Word, Anyway? {#h2-0-part-4-what-s-in-a-word-anyway}
-------------------------------------------------------------------------
+Part 4: What's In a Word, Anyway?
+---------------------------------
 
 Wordish depends on a word list. While the official Wordle game gives every player the same target word once per day, Wordish allows you to play as many times as you want. Wordish generates a word randomly from a list and uses the same list to check the validity of a submitted word. Thus, target words don't come from a carefully curated list. This makes Wordish more difficult, since you can be challenged with obscure words, such as:
 
@@ -59,7 +59,7 @@ Wordish depends on a word list. While the official Wordle game gives every playe
 * sanga (African breed of cattle), or
 * gusle (a musical instrument of the Balkans).
 
-### **The Word List** {#h3-1-the-word-list}
+### **The Word List**
 
 Our word list comes from **/usr/share/dict/words**, a linux text file (also available on MacOS) with one word per line that constitutes a dictionary. We use several shell commands to massage this list. We want to include only five-letter words and convert the words to all uppercase.
 
@@ -72,7 +72,7 @@ $ grep -E '^[a-z]{5}$' /usr/share/dict/words | tr [:lower:] [:upper:] > wordlist
 
 The resulting file contains 8,497 words and we add **wordlist.txt** to our maven project under subdirectory **resource**.
 
-### How We Get the Target Word {#h3-2-how-we-get-the-target-word}
+### How We Get the Target Word
 
 The singleton class WordData generates words and checks word validity. This class has a private constructor and a public static method `getInstance()`.
 
@@ -133,7 +133,7 @@ Once the WordData object is created, we set a new target word (the word to be gu
 
 We call method `setNewWord()` when we start a new game. And we call method `getTheWord()` any time we need to access our current target word.
 
-### Is Your Word Valid? {#h3-3-is-your-word-valid}
+### Is Your Word Valid?
 
 One of the baseline rules of Wordish (and Wordle) is that any submitted word must be a valid word, as defined in our word list. For Wordish, this list is the same source list we use to generate target words. A submitted word that is not in this list is rejected. In order to continue the game, the user must submit a valid word. Notably, a user is not penalized by submitting invalid words. However, there is also no feedback on matching, partial-matching, or non-matching status for letters submitted for an invalid word.
 

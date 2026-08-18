@@ -34,13 +34,13 @@ A small Java project seemed to be the best solution, otherwise, this would have 
 
 Isn't that the goal of most of our developments? **"Automate the boring stuff!"**
 
-### About iText {#h3-0-about-itext}
+### About iText
 
 iText is a library for creating and manipulating PDF files in Java and .NET, originally written by Bruno Lowagie. The history of the project and [the company that grew out of it](https://itextpdf.com/en) is described in the book ["Entreprenerd"](https://entreprenerd.lowagie.com/). This book explains what you can expect when starting a company to generate the resources that are necessary to further develop and maintain your technology.
 
 iText is available under open source (AGPL) as well as a commercial license. As Bruno is Belgian and the company still has a solid base in Belgium, I have to admit there is also some patriotism involved here.
 
-### Goal of the project {#h3-1-goal-of-the-project}
+### Goal of the project
 
 We asked our guests to give us their two favorite songs. We added some extra "party songs" and ended up with a list of over 70 songs in a playlist on Spotify. Each player gets a print-out with 16 songs, of course, this value can be configured in the code.
 
@@ -57,7 +57,7 @@ Each print-out has the name of the player and contains the songs selected by the
 
 First goal of the game was to have a full horizontal line, and after we had three winners of those, we switched to having a full Bingo card. Some of the songs were only played for 10-15 seconds, others needed more time as some dancing and singing got involved. For that last part, I want to apologize to our neighbors...
 
-### Exporting from Spotify {#h3-2-exporting-from-spotify}
+### Exporting from Spotify
 
 A playlist can't be exported from Spotify itself. There is a "Spotify Web API" that can be used for this (see [the Spotify Developer documentation](https://developer.spotify.com/documentation/web-api/libraries/)). I've taken a shortcut here and used [Exportify](https://github.com/watsonbox/exportify) which actually is built on top of that API. It shows you all your playlists and those can be exported with one click of a button to CSV.
 ![Exportify](exportify-1024x312.png)
@@ -79,7 +79,7 @@ Macarena,Los Del Rio,
 
 <br />
 
-### Source code {#h3-3-source-code}
+### Source code
 
 The final project is a very simple Java Maven program and the sources are available on [Github](https://github.com/FDelporte/SpotifyBingoCardGenerator).
 
@@ -231,7 +231,7 @@ private static void addEmptyLine(Paragraph paragraph, int number) {
 ```
 
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Is this production-ready code? No, of course not, there are no unit tests 😉
 

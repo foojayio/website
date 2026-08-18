@@ -26,8 +26,8 @@ I used rate limiting as an example, moving it from a library inside the applicat
 
 Today, I'll use another example: authentication and authorization.
 
-Securing a Spring Boot application {#h2-0-securing-a-spring-boot-application}
------------------------------------------------------------------------------
+Securing a Spring Boot application
+----------------------------------
 
 I'll keep using Spring Boot in the following because I'm familiar with it. The Spring Boot application offers a REST endpoint to check employees' salaries.
 
@@ -186,8 +186,8 @@ curl -H 'Authorization: bob' localhost:9080/finance/salary/alice
 
 The code above works perfectly but has one big issue: there's no way to audit the logic. One must know Kotlin and how Spring Security works to ensure the implementation is sound.
 
-Introducing Open Policy Agent {#h2-1-introducing-open-policy-agent}
--------------------------------------------------------------------
+Introducing Open Policy Agent
+-----------------------------
 
 Open Policy Agent, or OPA for short, describes itself as "Policy-based control for cloud native environments".
 > Stop using a different policy language, policy model, and policy API for every product and service you use. Use OPA for a unified toolset and framework for policy across the cloud native stack.
@@ -239,8 +239,8 @@ I used two variables in the above snippet: `input` and `data`. `input` is the pa
 ```
 
 
-More Open Policy Agent goodness {#h2-2-more-open-policy-agent-goodness}
------------------------------------------------------------------------
+More Open Policy Agent goodness
+-------------------------------
 
 However, OPA can't decide on the input alone, as it doesn't know the employee's hierarchy.
 
@@ -292,8 +292,8 @@ The flow is now the following:
 
 [![](spring-security-opa-flow-1024x939.png)](spring-security-opa-flow.png)At this point, we moved the authorization logic from the code to OPA.
 
-Moving authentication to the API Gateway {#h2-3-moving-authentication-to-the-api-gateway}
------------------------------------------------------------------------------------------
+Moving authentication to the API Gateway
+----------------------------------------
 
 The next and final step is to move the **authentication** logic.
 
@@ -386,8 +386,8 @@ The final flow is the following:
 
 [![](no-spring-security-flow-1024x823.png)](no-spring-security-flow.png)
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Everything looks like a nail when all you've got is a hammer.
 

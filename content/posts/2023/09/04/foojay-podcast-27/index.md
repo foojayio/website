@@ -30,8 +30,8 @@ And this time, we are in Chicago to learn from the Java and Kotlin user groups.
 
 {{< youtube UkCmZ02pJek >}}
 
-Podcast Apps {#h2-0-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,33 +39,33 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
-### Mary Grygleski {#h3-2-mary-grygleski}
+### Mary Grygleski
 
 * <https://foojay.social/@mgrygles>
 * <https://twitter.com/mgrygles>
 
-### John Burns {#h3-3-john-burns}
+### John Burns
 
 * <https://bigshoulders.city/@wakingrufus>
 * <https://twitter.com/wakingrufus>
 
-Podcast {#h2-4-podcast}
------------------------
+Podcast
+-------
 
-### Host: Frank Delporte {#h3-5-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
 ![](foojay-podcast-guests-chicago-1024x576.png)
 
-Links {#h2-6-links}
--------------------
+Links
+-----
 
-### Chicago JUG {#h3-7-chicago-jug}
+### Chicago JUG
 
 * <https://twitter.com/CJUG>
 * <https://foojay.social/@ChicagoJUG>
@@ -73,7 +73,7 @@ Links {#h2-6-links}
 * <https://www.meetup.com/chicagojug>
 * <https://discord.gg/U25g437>
 
-### Chicago Kotlin {#h3-8-chicago-kotlin}
+### Chicago Kotlin
 
 * <https://twitter.com/ChicagoKotlin>
 * <https://foojay.social/@ChicagoKUG>
@@ -81,12 +81,12 @@ Links {#h2-6-links}
 * <https://www.youtube.com/channel/UCWCHNOYemampfWXMUdQ95Sw>
 * <https://www.youtube.com/playlist?list=PLb1tSwQ0ReIFFJbVpbNGIvmELaucyBTaL>
 
-### A gift from DataStax {#h3-9-a-gift-from-datastax}
+### A gift from DataStax
 
 DataStax Vector DB and Search (no credit card and $25 monthly complimentary usage for up to a year): <https://bit.ly/3L1Dkgi>
 
-Content {#h2-10-content}
-------------------------
+Content
+-------
 
 00:00 Intro and introduction of the guests  
 

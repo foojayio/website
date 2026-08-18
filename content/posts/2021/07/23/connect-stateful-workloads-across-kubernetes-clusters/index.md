@@ -29,8 +29,8 @@ One of the biggest challenges in providing a solution that spans multiple region
 
 In this post, we'll go over how we arrived at our solution, its technical overview, and a hands-on example with the Cassandra operator.
 
-Storytime {#h2-0-storytime}
----------------------------
+Storytime
+---------
 
 About a year ago, several blog posts were published that inspired us on this journey. The first was the [Nebula announcement](https://slack.engineering/introducing-nebula-the-open-source-global-overlay-network-from-slack/) from Slack. Reading it and then learning about Nebula's architecture was a good introduction to the capabilities and feasibility of home-built overlay networks. The introduction to [how Tailscale works](https://tailscale.com/blog/how-tailscale-works/) was another good primer on the subject.
 
@@ -38,8 +38,8 @@ Later, Linkerd published a post about [service mirroring](https://linkerd.io/202
 
 So the idea of making our own virtual IPs and exposing them just to the relevant pods via sidecars was born.
 
-Lightweight overlay network to the rescue {#h2-1-lightweight-overlay-network-to-the-rescue}
--------------------------------------------------------------------------------------------
+Lightweight overlay network to the rescue
+-----------------------------------------
 
 Overlay networks differ in their capabilities and implementations, but one thing that unites them is that they run on top of other networks. Each link connecting two nodes of an overlay network corresponds to a path of one or more links on the underlying network. While overlay networks usually serve traffic for multiple different apps, the overlay network described here will be single tenant and dedicated to one app. It will consist of two logical components: routing and transport. For routing, we need a way to route connections to a given stateful pod (virtual IP) that survives pod IP changes during pod restart. For transport, we'll need to communicate the source and destination virtual IP addresses across the connection and to secure the data stream.
 ![](image-2-1024x450.png)
@@ -52,24 +52,24 @@ With routing figured out, we now need to address packet transport. Using a proxy
 
 We'll attach an init container and a sidecar to each pod. The privileged init container will set up the packet routing and forwarding logic, while the sidecar will proxy the traffic to the right endpoint, either local or remote. This is similar to the approach used by popular service mesh implementations like Istio and Linkerd, which usually auto-inject these containers during pod creation via the [Mutating Admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/).
 
-Hands-on example with cass-operator {#h2-2-hands-on-example-with-cass-operator}
--------------------------------------------------------------------------------
+Hands-on example with cass-operator
+-----------------------------------
 
 We can illustrate the above concept by creating a lightweight overlay network for Cassandra's internode traffic. We'll deploy a Cassandra cluster consisting of two datacenters using the open source [cass-operator](https://github.com/k8ssandra/cass-operator). After preparing two Kubernetes clusters of 3 nodes each (2 CPU \& 4 GB RAM), perform the following steps. Steps one through five are performed in both kubes, while steps six and seven are different for each:
 
-### 1) Spin up the Cassandra operator {#h3-3-1-spin-up-the-cassandra-operator}
+### 1) Spin up the Cassandra operator
 
 Run the following command in the cass-operator namespace in both kubes:
 
     kubectl apply -f https://raw.githubusercontent.com/k8ssandra/cass-operator/v1.7.0/docs/user/cass-operator-manifests.yaml
 
-### 2) Create the storage class {#h3-4-2-create-the-storage-class}
+### 2) Create the storage class
 
 The storage class will be used to create persistent volumes that back the Cassandra pods. Run the following command in both kubes, adjusting for the cloud provider. While the below is for GKE, there are similar storage classes available in the parent directory for other clouds.
 
     kubectl apply -f https://raw.githubusercontent.com/k8ssandra/cass-operator/v1.7.0/operator/k8s-flavors/gke/storage.yaml
 
-### 3) Create a seed updater pod {#h3-5-3-create-a-seed-updater-pod}
+### 3) Create a seed updater pod
 
 In Cassandra, seeds are a list of IP addresses provided to new nodes on startup to help them locate an existing node and begin joining the cluster. The job of the seed updater is to populate the headless seed service created by cass-operator with virtual IPs, instead of the pod IPs it usually contains. Apply the following in both kubes:
 
@@ -140,7 +140,7 @@ In Cassandra, seeds are a list of IP addresses provided to new nodes on startup 
     metadata:
       name: seed-updater
 
-### 4) Create a load balancer {#h3-6-4-create-a-load-balancer}
+### 4) Create a load balancer
 
 The load balancer will be used for traffic coming from other Kubernetes clusters. Apply the following in both kubes:
 
@@ -156,7 +156,7 @@ The load balancer will be used for traffic coming from other Kubernetes clusters
       type: LoadBalancer
       publishNotReadyAddresses: true
 
-### 5) Create the nginx configuration {#h3-7-5-create-the-nginx-configuration}
+### 5) Create the nginx configuration
 
 The Nginx sidecar will route traffic between pods and we will configure it by a ConfigMap, both for convenience, and to allow for live configuration reloading. Replace the _EXTERNAL_IP_ placeholders below with the correct values from the two load balancers we created in step four, and apply the result in both kubes:
 
@@ -239,7 +239,7 @@ The Nginx sidecar will route traffic between pods and we will configure it by a 
             }
         }
 
-### 6) Spin up the first datacenter {#h3-8-6-spin-up-the-first-datacenter}
+### 6) Spin up the first datacenter
 
 Now that the stage is set, it's time to spin up the first datacenter and wait for it to come up. Apply the below in the first kube only.
 
@@ -344,7 +344,7 @@ After the datacenter is up, the pods should looks something like this:
     cassandra-dc-1-rack2-sts-0       3/3     Running   0          3m
     seed-updater-65d5bd6ff6-fsxfw    1/1     Running   0          23m
 
-### 7) Finally, create the second datacenter: {#h3-9-7-finally-create-the-second-datacenter}
+### 7) Finally, create the second datacenter:
 
 The only differences here are the change in the name of the datacenter and the presence of the additionalSeeds field. This tells the second datacenter to bootstrap from the first one. Apply the following in the second kube only:
 
@@ -465,8 +465,8 @@ After the pods come up, we can run a command to view the status of the cluster i
 
 And there we have it, a multi datacenter deployment of Cassandra on it's own lightweight overlay network! To set up [CQL connectivity](https://github.com/k8ssandra/cass-operator/tree/master/docs/ingress), regular pod IPs can continue to be used, as the overlay network is only carrying internode traffic. One thing to note is the absence of mTLS, which would need to be added to the nginx configuration to properly secure the installation.
 
-To wrap it up {#h2-10-to-wrap-it-up}
-------------------------------------
+To wrap it up
+-------------
 
 With a bit of creativity, we were able to utilize off-the-shelf functionality and components to set up lightweight cross-cluster communication for apps in a multitenant environment.
 

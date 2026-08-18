@@ -24,7 +24,7 @@ For each Java Challenge you get a full explanation to fully prepare you to beat 
 
 To tease you with the Java Challengers book, try out the following challenges and see if you can solve them. We've given a few clues to think about, should you need them, though not the answers themselves! Try and see if you can figure out the below, before running the code to see the answers. 🙂
 
-### Jedi Covariant Polymorphism Challenge {#h3-0-jedi-covariant-polymorphism-challenge}
+### Jedi Covariant Polymorphism Challenge
 
 In this challenger, we have an abstract class and another class that extends it. The concept of covariant types is being used here. What do you think the output will be after the main method is compiled and run? Will the code compile?
 
@@ -109,7 +109,7 @@ Even though we instantiate the LightForce class three times, note that the light
 
 In conclusion, the correct answer is ...
 
-### Mysterious Door Lambda Challenge {#h3-1-mysterious-door-lambda-challenge}
+### Mysterious Door Lambda Challenge
 
 By running the following code, can you guess what will happen?
 
@@ -162,7 +162,7 @@ Note that the doorNumber variable is being changed when we increment it. Therefo
 
 In conclusion, the correct answer is ...
 
-### KeyMaker Overloading Challenge {#h3-2-keymaker-overloading-challenge}
+### KeyMaker Overloading Challenge
 
 The following challenger explores the concept of how primitive types are interpreted by the JVM when argument values are hardcoded. Can you figure out what will happen when this code is executed?
 

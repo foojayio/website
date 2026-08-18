@@ -39,8 +39,8 @@ The second talk is from [an earlier post](https://blog.frankel.ch/miss-in-java-k
 
 In this post, I'd like to expand on the problem of nullability and how it's solved in Kotlin and Java and add my comments to the Twitter thread.
 
-Nullability {#h2-0-nullability}
--------------------------------
+Nullability
+-----------
 
 I guess that everybody in software development with more than a couple of years of experience has heard the following quote:
 > I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
@@ -59,8 +59,8 @@ Null values are found in many programming languages under different names:
 
 Some languages do *not* allow uninitialized values, such as Rust.
 
-Null-safety in Kotlin {#h2-1-null-safety-in-kotlin}
----------------------------------------------------
+Null-safety in Kotlin
+---------------------
 
 As I mentioned, Kotlin does allow `null` values. However, they are baked into the type system. In Kotlin, every type `X` has two indeed two types:
 
@@ -106,8 +106,8 @@ val int: Int? = str?.toIntOrNull()
 ```
 
 
-Null-safety in Java {#h2-2-null-safety-in-java}
------------------------------------------------
+Null-safety in Java
+-------------------
 
 Now that we have described how Kotlin manages `null` values, it's time to check how Java does it. First, there are neither non-nullable types nor null-safe operators in Java. Thus, every variable can potentially be `null` and should be considered so.
 
@@ -189,8 +189,8 @@ Thanks to [Sébastien Deleuze](https://mastodon.online/@sdeleuze) for mentioning
 
 I still hope it will work out!
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Java was incepted when `null`-safety was not a big concern. Hence, `NullPointerException` occurrences are common. The only safe solution is to wrap every method call in a `null` check. It works, but it's boilerplate-y and makes the code harder to read.
 

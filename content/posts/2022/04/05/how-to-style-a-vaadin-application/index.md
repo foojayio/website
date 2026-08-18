@@ -24,8 +24,8 @@ While it is possible to style some parts of a Vaadin application using the Java 
 
 So, it is recommended to do the styling of a Vaadin application by adding CSS inside standard style sheets. This guide focuses only on the recommended style-sheets approach.
 
-Create a custom theme {#h2-0-create-a-custom-theme}
----------------------------------------------------
+Create a custom theme
+---------------------
 
 To start, we need to inform Vaadin about the location in which we will place our CSS. The easiest way to do this is to add the `@Theme` annotation on a class that implements `AppShellConfigurator`.
 
@@ -46,8 +46,8 @@ public class Application extends SpringBootServletInitializer
 
 By default, projects downloaded from [start.vaadin.com](https://start.vaadin.com/) come with the `@Theme` annotation added to the `Application` class.
 
-Where to place your CSS {#h2-1-where-to-place-your-css}
--------------------------------------------------------
+Where to place your CSS
+-----------------------
 
 Custom CSS should be placed inside a specific folder located under the `frontend/themes` directory in your project. This directory has something like the following minimal structure:
 
@@ -89,8 +89,8 @@ For example, if we create a new CSS file called `main-view.css` at `frontend/the
 
 Further below, we will discuss the scenarios in which we should add our CSS to the `components/` directory.
 
-How to override Lumo values {#h2-2-how-to-override-lumo-values}
----------------------------------------------------------------
+How to override Lumo values
+---------------------------
 
 The default look and feel of a Vaadin application is based on a built-in theme, called Lumo. This theme is essentially a bunch of CSS custom properties (such as colors, typography, and sizes) that each has a CSS variable assigned to it.
 
@@ -130,8 +130,8 @@ This will change the defaults for the TextField and ComboBox only, leaving other
 
 ![A Vaadin TextField, ComboBox with increased corner roundedness. A Vaadin DatePicker, and Button with default look and feel.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lrjca5ijn3rdfa2szh66.png)
 
-How to selectively style views and components {#h2-3-how-to-selectively-style-views-and-components}
----------------------------------------------------------------------------------------------------
+How to selectively style views and components
+---------------------------------------------
 
 So far, we have been discussing ways to style all components belonging to a certain kind in the same way.
 
@@ -217,8 +217,8 @@ Now after the selective styling is applied, `MyView` will look as follows:
 
 ![MyView after selective styling](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ij7493vc0zx9vxhoza3p.png)
 
-When to add CSS under the `/components` directory {#h2-4-when-to-add-css-under-the-components-directory}
---------------------------------------------------------------------------------------------------------
+When to add CSS under the `/components` directory
+-------------------------------------------------
 
 Customizing styling using the two aforementioned options (namely by placing styles inside `styles.css`, or inside a separate file imported from within `styles.css`) should work for views and layouts created within the project. However, these two options are not guaranteed to work if one aims to style the internals of a Vaadin component.
 
@@ -245,8 +245,8 @@ Note that the files placed under the `/components` directory have to exactly mat
 
 Accordingly, the styling file of the ComboBox has to be named exactly `vaadin-combo-box.css`.
 
-How to selectively style the internals of a Vaadin component {#h2-5-how-to-selectively-style-the-internals-of-a-vaadin-component}
----------------------------------------------------------------------------------------------------------------------------------
+How to selectively style the internals of a Vaadin component
+------------------------------------------------------------
 
 We just saw how to style the internals of a Vaadin component by using the `part` property and placing the CSS inside a specific file placed under the `frontend/themes/myapp/components/` directory. Specifically, we saw how to style the ComboBox toggle using the `[part="toggle-button"]` selector and placing the CSS in a file called `vaadin-combo-box.css` that resides under the `frontend/themes/myapp/components/` directory.
 
@@ -288,8 +288,8 @@ Then, in `frontend/themes/myapp/components/vaadin-combo-box.css`, we can selecti
 
 Notice that we have to use here the `:host()` shadow function because the `toggle-button` part is located inside the [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) of the ComboBox.
 
-How to selectively style a sub-component of a Vaadin component {#h2-6-how-to-selectively-style-a-sub-component-of-a-vaadin-component}
--------------------------------------------------------------------------------------------------------------------------------------
+How to selectively style a sub-component of a Vaadin component
+--------------------------------------------------------------
 
 There are cases in which we cannot use CSS classnames to do the selective styling. Specifically, we cannot rely on CSS classnames when we want to style the sub-components of a Vaadin component.
 
@@ -345,8 +345,8 @@ In this file, we can selectively style the overlay part of the `vaadin-combo-box
 
 Here again we are using the `:host()` shadow function because the overlay part is located inside the shadow DOM of the `vaadin-combo-box-overlay` element.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In this guide, we learned the basics of styling a Vaadin application using CSS.
 

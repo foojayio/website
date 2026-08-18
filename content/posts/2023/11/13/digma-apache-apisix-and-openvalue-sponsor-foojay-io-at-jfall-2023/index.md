@@ -28,7 +28,7 @@ Below you see the above described setup, featuring Paco and Johannes in the midd
 Also, it was very cool to join Frank in a short talk about Foojay.io, which was attended by several people involved in Foojay.io, plus many that heard about it for the first time.
 ![](F-gPzDGWUAAm7if-1024x578.jpeg)
 
-Many thanks to [Digma](https://digma.ai/) for sponsoring the t-shirts, [Apache APISIX](https://apisix.apache.org/) for sponsoring the stickers, and [OpenValue](https://www.openvalue.eu/) for sponsoring the rental of the booth equipment! {#h2-0-many-thanks-to-digma-for-sponsoring-the-t-shirts-apache-apisix-for-sponsoring-the-stickers-and-openvalue-for-sponsoring-the-rental-of-the-booth-equipment}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Many thanks to [Digma](https://digma.ai/) for sponsoring the t-shirts, [Apache APISIX](https://apisix.apache.org/) for sponsoring the stickers, and [OpenValue](https://www.openvalue.eu/) for sponsoring the rental of the booth equipment!
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Also, Frank is processing the podcast interviews into multiple podcasts that will be released over the coming months, while [a playlist of them all can be found here](https://www.youtube.com/watch?v=FV1ITrl42mk&list=PL-3Bf_FLNZLCR09uDyIA3CHiOvdw5LU6B)!

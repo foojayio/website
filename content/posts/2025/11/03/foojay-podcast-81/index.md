@@ -25,15 +25,15 @@ frozen: false
 
 In this Foojay Podcast episode, we talk about Apache Maven 4, a significant milestone that has been years in the making. Maven has been the backbone of Java dependency management and build automation since the early 2000s; however, the road to version 4 has been a long and deliberate one. With significant performance improvements, a modernized API for plugin developers, and changes that affect how we think about project structure, Maven 4 represents both an evolution and a revolution. What does this mean for the millions of developers who depend on Maven daily? How should teams prepare for the transition? And what's the story behind the Maven Central Repository changes that have been making headlines? To answer these questions and more, we're joined by a few of the many contributors who are actually building Maven 4 and stewarding its ecosystem.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube 2qiXn9vN5iE >}}
 
 <br />
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +41,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * Hervé Boutemy
   * <https://www.linkedin.com/in/hboutemy/>
@@ -51,8 +51,8 @@ Guests {#h2-2-guests}
 * Maarten Mulders
   * <https://www.linkedin.com/in/mthmulders/>
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests
 

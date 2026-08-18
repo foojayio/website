@@ -30,8 +30,8 @@ JDK Flight Recorder (JFR) does not do this; it instead [walks the stack in the s
 
 *Update after talks on the JEP: The recommended way to use AsyncGetStackTrace will be to call it in a separate thread.*
 
-Advantages {#h2-0-advantages}
------------------------------
+Advantages
+----------
 
 Walking the thread in a sampler thread has multiple advantages: Only a few instructions run in the signal handler: the handler is either just busy waiting for the stack walking to finish, or the thread is stopped entirely. Most of the code runs in the sampler thread, walking one thread after another.
 
@@ -49,8 +49,8 @@ I digress here from the main topic of this article, but I think that the next co
 
 Back to the main topic: It is important to note that even when we walk a thread in a separate thread, we still have to make sure that we only use signal-safe methods while the sampled thread is waiting (thanks to Lukas Werling for pointing this out). The sampled thread might, for example, hold locks for malloc, so our sampled thread cannot use malloc without risking a dead-lock.
 
-Disadvantages {#h2-1-disadvantages}
------------------------------------
+Disadvantages
+-------------
 
 There are, of course, disadvantages: Sampling in a signal handler is more straightforward, as we're running in the context of the sampled thread and get passed the ucontext (with stack pointer, ...) directly. It is more accurate, as we can trigger the sampling of the threads precisely at the time that we want (disregarding thread scheduling), and faster, as we do not busy wait in any thread.
 
@@ -62,15 +62,15 @@ This can be implemented by pushing the current thread id in a queue, and the sam
 
 This problem can be lessened when we choose a different way of accessing the perf data: We can read the perf events in a loop and then just use the technique from wall-clock profiling. This is a significant modification of the inner workings of the profiler, and it is not possible with itimer-based profiling.
 
-What is the real reason? {#h2-2-what-is-the-real-reason}
---------------------------------------------------------
+What is the real reason?
+------------------------
 
 Walking in a separate thread has more advantages than disadvantages, especially when wall-clock profiling or valuing stability over slight performance gains. So why don't tools like async-profiler implement their sampling this way? It's because AsyncGetCallTrace currently doesn't support it.
 
 This is the starting point of my small experiment: Could I modify the OpenJDK with just a few changes to add support for out-of-thread walking with AsyncGetCallTrace (subsequently proposing this for AsyncGetStackTrace too)?
 
-Modifying AsyncGetCallTrace {#h2-3-modifying-asyncgetcalltrace}
----------------------------------------------------------------
+Modifying AsyncGetCallTrace
+---------------------------
 
 Let us first take a look at the API to refresh our knowledge:
 
@@ -143,8 +143,8 @@ We can thereby support the new feature without modifying the API itself, only ch
 
 The implementation can be found in my [OpenJDK fork](https://github.com/parttimenerd/jdk/tree/dont_use_thread_current). This is still a prototype, but it works well enough for testing and benchmarking.
 
-Modifying async-profiler {#h2-4-modifying-async-profiler}
----------------------------------------------------------
+Modifying async-profiler
+------------------------
 
 At the beginning of the article, I already told you how JFR walks the stack in a different thread. We are implementing similar code into async-profiler, restricting us to wall-clock profiling, as its implementation requires fewer modifications.
 
@@ -299,8 +299,8 @@ VMThread* VMThread::current() {
 
 This implementation detail is not an issue for async-profiler as it might make assumptions. Still, it is undoubtedly a problem for the general approach I want to propose for my [new AsyncGetStackTrace API](https://openjdk.org/jeps/435).
 
-Modifying AsyncGetCallTrace (2^nd^ approach) {#h2-5-modifying-asyncgetcalltrace-2nd-approach}
----------------------------------------------------------------------------------------------
+Modifying AsyncGetCallTrace (2^nd^ approach)
+--------------------------------------------
 
 We want to identify the thread using something different from JNIEnv. The OS thread id seems to be a good fit. It has three significant advantages:
 
@@ -327,8 +327,8 @@ void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth,
 
 The implementation can be found in [my OpenJDK fork](https://github.com/parttimenerd/jdk/tree/dont_use_thread_current2), but be aware that it is not yet optimized for performance as it iterates over the whole thread list for every call to find the `Thread` which matches the passed OS thread id.
 
-Modifying async-profiler (2^nd^ approach) {#h2-6-modifying-async-profiler-2nd-approach}
----------------------------------------------------------------------------------------
+Modifying async-profiler (2^nd^ approach)
+-----------------------------------------
 
 The modification to async-profiler is quite similar to the first approach. The only difference is that we're not dealing with JNIEnv anymore. This makes the signal handler implementation slightly simpler ([source](https://github.com/parttimenerd/async-profiler/blob/dont_use_thread_current2/src/wallClock.cpp#102)):
 
@@ -359,8 +359,8 @@ You can find the full implementation in [my async-profiler fork](https://github.
 
 Now to the fun part (the *experiment*): Two drawbacks of the two previously discussed approaches are that one thread waits busily, and the other cannot execute all non-signal-safe code during that period. So the obvious next question is:
 
-Could we walk a thread without stopping it? {#h2-7-could-we-walk-a-thread-without-stopping-it}
-----------------------------------------------------------------------------------------------
+Could we walk a thread without stopping it?
+-------------------------------------------
 
 In other words: Could we omit the busy waiting? An unnamed person suggested this.
 
@@ -439,8 +439,8 @@ Many traces (the left part of the graph) are broken and do not appear in the sec
 
 But this was an interesting experiment, and the implementation seems to be possible, albeit creating a safe and accurate profiler would be hard and probably not worthwhile: Catching the segmentation faults seems to be quite expensive: The runtime for the renaissance finagle-http benchmark is 83 seconds for the version with busy waiting and 84 seconds without, despite producing worse results.
 
-Evaluation {#h2-8-evaluation}
------------------------------
+Evaluation
+----------
 
 We can now compare the performance of the original with the two prototypical implementations and the experimental implementation in a preliminary evaluation. I like using the benchmarks of the [renaissance suite](https://renaissance.dev/) (version 0.14.2). For this example, I used the primarily single core, dotty benchmark with an interval of 1ms and 10ms:
 
@@ -465,8 +465,8 @@ The wall-clock timings might therefore be affected by my CPU having enough cores
 
 I tried to evaluate all approaches with a benchmark that utilizes all CPU (finagle-http), but my two new approaches have apparently severe shortcomings, as they produced only around a quarter of the samples compared to the original async-profiler and OpenJDK combination. This is worth fixing, but out-of-scope for this blog post, which already took more than a week to write.
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 This was the serious part of the experiment: Using AsyncGetCallTrace in a separate thread is possible with minor modifications and offers many advantages (as discussed before).
 
@@ -476,8 +476,8 @@ I think that it should be up to the experienced performance engineer two decide 
 
 The implementations in both the OpenJDK and async-profiler also show how to quickly implement, test and evaluate different approaches with widely used benchmarks.
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 The initial question, "Couldn't we just use AsyncGetCallTrace in a separate thread?" can be answered with a resounding "Yes!".
 

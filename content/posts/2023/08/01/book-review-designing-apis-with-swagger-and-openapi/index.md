@@ -22,20 +22,20 @@ frozen: false
 
 ***Disclaimer*: this post includes affiliate links; I may receive compensation if you purchase the book from the different links provided in this post.**
 
-This review is about [Designing APIs with Swagger and OpenAPI](https://www.manning.com/books/designing-apis-with-swagger-and-openapi?utm_source=frankel&amp;utm_medium=affiliate&amp;utm_campaign=affiliate&amp;a_aid=frankel) by Joshua S. Ponelat and Lukas L. Rosenstock from Manning.
+This review is about [Designing APIs with Swagger and OpenAPI](https://www.manning.com/books/designing-apis-with-swagger-and-openapi?utm_source=frankel&utm_medium=affiliate&utm_campaign=affiliate&a_aid=frankel) by Joshua S. Ponelat and Lukas L. Rosenstock from Manning.
 
 I'm continuing my API journey by reading books, viewing relevant YouTube videos, and reading relevant s.
 
 Today is a book review.
 
-Facts {#h2-0-facts}
--------------------
+Facts
+-----
 
 * 21 chapters
 * $38.39 (eBook)
 
-Chapters {#h2-1-chapters}
--------------------------
+Chapters
+--------
 
 * Part 1: Describing APIs
   1. Introducing APIs and OpenAPI
@@ -64,8 +64,8 @@ Chapters {#h2-1-chapters}
 
 The book goes through designing a complete API via a demo project, the [Farmstall API](https://github.com/designapis/farmstall).
 
-Pros and cons {#h2-2-pros-and-cons}
------------------------------------
+Pros and cons
+-------------
 
 The review is concise, to say the least.
 
@@ -73,8 +73,8 @@ The book's main benefit is also its main issue: it focuses on beginners. Everyth
 
 I'm not an API expert, but I didn't learn anything. Hence, I don't have a lot to say.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 If you're a true newbie, *i.e.*, you know nothing about HTTP, requests and responses, OpenAPI, and Postman, this book is for you. It goes into great detail in explaining everything from scratch.
 

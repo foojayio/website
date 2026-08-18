@@ -22,8 +22,8 @@ I was reading [this article](https://betterprogramming.pub/why-open-source-softw
 
 First, if you don't know me I've written a ton of Open Source code. A whole platform and then some. I think the general view expressed in that article and a lot of the fluff I see online is over simplistic and dangerous.
 
-We Need to get Paid {#h2-0-we-need-to-get-paid}
------------------------------------------------
+We Need to get Paid
+-------------------
 
 Who will pay your salary?
 
@@ -41,8 +41,8 @@ People used to say it ends up with a smaller piece out of a larger pie. This is 
 
 Don't get me wrong, I'm not against people profiting off my work or even large corporations. I do OSS for fun and love the idea of people succeeding based on my work. But I get the frustration many developers feel, and the blanket "open source advocacy" I see from people is problematic.
 
-Bait and Switch {#h2-1-bait-and-switch}
----------------------------------------
+Bait and Switch
+---------------
 
 The bad thing is corporate cynicism. Take Google. They open sourced Android when it had no users. Companies built on top of it and so did developers. Advocacy formed around it because "it's open source". Then they released the closed source Google Play Services which later added the SaaS Firebase requirement for some essential functionality (it's free for that at the moment) and now we have deep vendor closed source dependencies masquerading as open source.
 
@@ -52,8 +52,8 @@ Take Elastic search. They were open source and killing it. But AWS was forking a
 
 The case of Java is slightly different. Java wasn't open-source and was made open source later. It still kept IP over the language. So I get some of Oracle's tight grip on the project and accept that. It's good that there's a steady hand of the ship and it contributed to the success of Java. The problem with the Google lawsuit was that Oracle tried to stretch their IP to include the APIs. That was a mistake.
 
-GPL is the Best License {#h2-2-gpl-is-the-best-license}
--------------------------------------------------------
+GPL is the Best License
+-----------------------
 
 About a decade ago, a startup called RoboVM released an open source compiler that translated Java to native iOS apps. It was pretty cool, and I talked quite a bit with the founder at JavaOne. Back then we were considering building our own VM or picking up a solution such as RoboVM. We ended up with the former and built our own VM which was much simpler and better fit our needs ([it's also open source](https://github.com/codenameone/CodenameOne/tree/master/vm)).
 
@@ -65,8 +65,8 @@ The GPL protected the community by forcing RoboVM to release the code for the fi
 
 In this regard, I'm a big believer in GPL rather than more permissive licenses such as MIT, BSD, Apache, etc. I think that we as a community should prefer a license that preserves community rights as opposed to corporate rights. It also provides a good monetization option to the creator of the project. Just re-license as a proprietary license and charge for that. Unfortunately, the GPL is often a no-starter for many developers because they incorrectly assume it's bad for them. The opposite is true. The GPL is one of the best ways to preserve community rights in the long term.
 
-Have Things Changed? {#h2-3-have-things-changed}
-------------------------------------------------
+Have Things Changed?
+--------------------
 
 I mentioned Zig before. There are many other examples of foundations that were successful such as SQLite, Mozilla, etc. Getting to this point is typically hard and doesn't necessarily work for every open source project.
 
@@ -84,8 +84,8 @@ The competition seems expensive (since they can't sell at a loss). They go out o
 
 Open source is used in a similar, cynical way by big tech. They form "communities" by hiring armies of developer relations professionals to create a masquerade of grassroots enthusiasm. Sometimes they don't need to monetize the market, it's enough to keep the competition out.
 
-TL;DR {#h2-4-tl-dr}
--------------------
+TL;DR
+-----
 
 I love open source and think it's remarkably important. That's why we shouldn't let corporations weaponize it. We need diversity within the ecosystem and we need to support smaller, critical projects. The idea of "handouts" to open source projects or "consulting" isn't sustainable.
 

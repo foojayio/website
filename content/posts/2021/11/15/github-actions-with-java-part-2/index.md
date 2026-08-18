@@ -24,8 +24,8 @@ frozen: false
  <img fetchpriority="high" decoding="async" src="distro-choice.jpg" alt="Distro Choice 337" width="308" height="465">
 </figure>
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Have you ever been given too many choices resulting in the feeling of indifference ("not a big deal, doesn't really matter either way")? However, when given **two** choices, somehow you feel torn or become more critical of one versus the other.
 
@@ -41,12 +41,12 @@ In **Part 1** , we used the GitHub Action `setup-java@v1` that defaults to Azul'
 
 In this article (Part 2) we will be creating a workflow from GitHub's Actions market place (a template Yaml file with defaults).
 
-Getting Started {#_getting_started}
------------------------------------
+Getting Started
+---------------
 
 Assuming you've cloned [HelloWorldGHActions](https://github.com/carldea/HelloWorldGHActions) project or have an existing project we are going to create a GitHub workflow using the generated (suggested) Action `setup-java@v2` from the marketplace.
 
-### Step 1 Create a Workflow {#_step_1_create_a_workflow}
+### Step 1 Create a Workflow
 
 Click on the **Actions tab** , then click on the **New Workflow** button as shown below:
 ![New Workflow](Actions-New-Workflow.png)
@@ -54,14 +54,14 @@ Click on the **Actions tab** , then click on the **New Workflow** button as show
 Next, click on the **Set up this workflow** option from the suggested **Java with Maven**
 ![Setup this Workflow](Setup-this-workflow.png)
 
-### Step 2 Choose an OpenJDK Distribution {#_step_2_choose_an_openjdk_distribution}
+### Step 2 Choose an OpenJDK Distribution
 
 Afterwards you should see something similar to the following:
 ![Setup-java@v2 Yaml](yaml-distro.png)
 
 Enter either, `zulu` or `temurin` as your build distribution. When it come to what are the distribution choices and why will be covered later. For now in the example we'll pick **`zulu`**.
 
-### Step 3 Create a Matrix for `java-version` {#_step_3_create_a_matrix_for_java_version}
+### Step 3 Create a Matrix for `java-version`
 
 Just like in [Part 1](https://foojay.io/today/github-actions-with-java-part-1/) of this series of articles we were able to specify a **matrix** to build the project on different operating systems, Java versions, etc. here we will be creating the same matrix for the `java-version` attribute.   
 
@@ -100,12 +100,12 @@ jobs:
 
 2. Use variable substitution `${{ matrix.java-version }}` for steps in the job.
 
-### Step 4 Commit changes {#_step_3_commit_changes}
+### Step 4 Commit changes
 
 After you've updated the workflow you'll need to comment and commit the changes.
 ![Commit Workflow Changes](commit-workflow.png)
 
-### Step 5 Validate GitHub Actions Workflow Job Run {#_step_4_validate_github_actions_workflow_job_run}
+### Step 5 Validate GitHub Actions Workflow Job Run
 
 After, the changes have been committed let's validate to see the workflow jobs have been run correctly. Click on the **Actions** tab as shown below:  
 ![succesfully job run](Successful-Job-run.png)
@@ -113,22 +113,22 @@ After, the changes have been committed let's validate to see the workflow jobs h
 Next, click on the `Create a workflow using a JDK distribution` workflow to see the JDK versions built on. As shown in the following:  
 ![JDK versions build on](JDKVersions-built.png)
 
-### Step 6 Success! {#_step_5_success}
+### Step 6 Success!
 
 Now that you know how to use GitHub Action `setup-java@v2` to choose a particular OpenJDK build distribution let's talk a little about what's available and the differences between them.
 
-What's the difference? {#_whats_the_difference}
------------------------------------------------
+What's the difference?
+----------------------
 
 Before we discuss the differences between `zulu` and `temurin` I want to mention changes regarding the `adopt` **AdoptOpenJDK** build distribution (specified as the default value for **distribution:** attribute). For many who are new to GitHub actions may not know the announcements made earlier in the year (Sept. 2021).
 
-### AdoptOpenJDK is no more {#_adoptopenjdk_is_no_longer}
+### AdoptOpenJDK is no more
 
 You'll notice the attribute **distribution:** as `'adopt'`. As of this writing the Yaml template still defaults to an OpenJDK distribution with the discontinued **AdoptOpenJDK** build (Announcement: <https://adoptopenjdk.net/>). ![AdoptOpenJDK discontinued](adopt-announcement.png)
 
 The announcement informs developers about a rebranding of the name from **AdoptOpenJDK** to **Adoptium** . Also announced are new LTS builds named `Temurin` under the Eclipse Foundation. According to Adoptium the `Temurin` builds would undergo ([Java TCK](https://openjdk.java.net/groups/conformance/JckAccess/)) testing (Technology Compatibility Kit). Which is great news for the Java community at large.
 
-### Long Live OpenJDK Distros {#_long_live_openjdk_distros}
+### Long Live OpenJDK Distros
 
 A side note: To hear more about the many choices in build distributions in the wild you may be interested in the Foojay podcast [#4: Why So Many JDKs?"](https://foojay.io/today/foojay-podcast-4/).
 
@@ -174,8 +174,8 @@ I'm often of the opinion when it comes to CI/CD is the mindset of **set it and f
 
 Well, there you have it! A way to pick your OpenJDK build distribution for your CI/CD pipeline on GitHub.
 
-Conclusion {#_conclusion}
--------------------------
+Conclusion
+----------
 
 When picking a particular build distribution with the current version of **GitHub Actions** `setup-java@v2` you really only have two build distributions to choose from: `zulu` or `temurin`.
 

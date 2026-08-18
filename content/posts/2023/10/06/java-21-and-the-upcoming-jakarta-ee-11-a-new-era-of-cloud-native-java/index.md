@@ -23,8 +23,8 @@ frozen: false
 
 **With Java 21 released and Jakarta EE 11 slated for release in Q1 of 2024, the landscape for Java development is evolving rapidly, particularly in the cloud-native space. Although these two are not being developed together, they are intrinsically linked: Jakarta EE 11 will have Java 21 as its base Java SE version. This blog post will explore what these two significant releases bring to the table individually and how they can collectively enhance cloud native Java development.**
 
-Java 21: The Game-Changer {#h2-0-java-21-the-game-changer}
-----------------------------------------------------------
+Java 21: The Game-Changer
+-------------------------
 
 Java 21, the latest long-term support (LTS) version of Java, is already out and has been a hot topic in the Java community. It introduces several exciting features, including:
 
@@ -34,13 +34,13 @@ Java 21, the latest long-term support (LTS) version of Java, is already out and 
 
 **Pattern Matching for Switch:** This feature allows for more concise and user-friendly switch statements.
 
-Jakarta EE 11: The Awaited Release {#h2-1-jakarta-ee-11-the-awaited-release}
-----------------------------------------------------------------------------
+Jakarta EE 11: The Awaited Release
+----------------------------------
 
 [Jakarta EE](https://jakarta.ee/) 11, expected in Q1 of 2024, is set to be the next major version of Jakarta EE. One of the most noteworthy aspects is that it is expected to have Java 21 as its base Java SE version. This means it will inherently benefit from the advancements Java 21 brings. The Jakarta EE Steering Committee is seeking to establish a predictable release cadence for the platform, with the current proposal being a new major Jakarta EE release 6 months after a Java SE LTS release.
 
-Jakarta EE 11 On Java 21 {#h2-2-jakarta-ee-11-on-java-21}
----------------------------------------------------------
+Jakarta EE 11 On Java 21
+------------------------
 
 The fact that Jakarta EE 11 will use Java 21 as its base version means some of the notable features of Java 21 will be be leveraged to provide even better performance and code readability. Even though the core theme of Jakarta EE 11 will be better alignment of the entire platform with Jakarta CDI, some notable places Java SE 21 features will come to play are:  
 
@@ -48,13 +48,13 @@ The fact that Jakarta EE 11 will use Java 21 as its base version means some of t
 
 **Simplified Code in Jakarta EE:** The pattern matching and string templates in Java 21 can make Jakarta EE applications more straightforward and easier to maintain.
 
-Why It Matters for Cloud Native Java Development {#h2-3-why-it-matters-for-cloud-native-java-development}
----------------------------------------------------------------------------------------------------------
+Why It Matters for Cloud Native Java Development
+------------------------------------------------
 
 Cloud native applications require scalability, reliability, and efficiency. The features in Java 21, combined with the enterprise capabilities expected in Jakarta EE 11, aim to meet these needs. For example, virtual threads can be a crucial feature for applications that require quick scaling to meet demand spikes.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 While Java 21 is already bringing transformative features to the table, the upcoming release of Jakarta EE 11 is expected to further elevate the state of cloud native Java development. Jakarta EE 11, through Java 21, will make it easier to build more robust, efficient, and scalable cloud native Java applications.  
 

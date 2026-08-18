@@ -24,8 +24,8 @@ I've tried Go in the past, and the least I could say is that I was not enthusias
 
 In this post, I'd like to describe how a couple of popular languages cope with errors.
 
-A time before our time {#h2-0-a-time-before-our-time}
------------------------------------------------------
+A time before our time
+----------------------
 
 I could probably go back a long time, but I needed to choose a baseline at some point. In this post, the baseline is C.
 
@@ -45,8 +45,8 @@ The final solution is to use a global error variable - `errno`.
 
 Every alternative has pros and cons. However, since there's no baked-in way, the biggest issue is the lack of consistency.
 
-Exceptions {#h2-1-exceptions}
------------------------------
+Exceptions
+----------
 
 I don't know which language first implemented exceptions, but I'm pretty sure Java was the one to popularize them. Exceptions solve a common problem: simple error checking code intertwines the nominal path and the error-handling path:
 
@@ -118,8 +118,8 @@ The compiler enforces this requirement. Unchecked exceptions don't need to follo
 
 Some languages designed later did implement exceptions too: Scala and Kotlin, since they share Java's JVM roots, but also Python and Ruby.
 
-The Try container {#h2-2-the-try-container}
--------------------------------------------
+The Try container
+-----------------
 
 While exceptions were an improvement over plain return values, they were not exempt from criticism. The bulk of it was aimed at checked exceptions since the mechanism they're based on clutter the code. Moreover, some view *all* exceptions as a `GOTO` because of its short-circuiting nature.
 
@@ -144,8 +144,8 @@ Try.of(() -> getFoo())                      // 1
 3. Block to execute in all cases, nominal path or exception
 4. Get the result if there's one, or return the result of the supplier's execution
 
-The Either container {#h2-3-the-either-container}
--------------------------------------------------
+The Either container
+--------------------
 
 While the above snippet might appeal to your FP-side, our programming-side is probably not happy. We had to assign unique return values to exceptions. We have to know the meaning of `1`, `2` and `3`.
 
@@ -187,8 +187,8 @@ var result = getFoo()
 
 Note that the previous `andFinally()` block doesn't require special treatment.
 
-Either on steroids {#h2-4-either-on-steroids}
----------------------------------------------
+Either on steroids
+------------------
 
 Java provides `Either` via a library, so do other languages. Yet, a couple of them integrate it in their standard library:
 
@@ -241,8 +241,8 @@ fn read_username_from_file() -> Result<String, io::Error> {
 1. If `Ok`, unwrap the value, else return the `Err`
 2. Return the `Result`
 
-The curious case of Go {#h2-5-the-curious-case-of-go}
------------------------------------------------------
+The curious case of Go
+----------------------
 
 Throughout history, programming languages have provided more and more powerful constructs to handle errors: from simple return values to `Either` via exceptions. It brings us to the Go programming language. Incepted relatively recently, it forces developers to handle errors via... multiple return values:
 
@@ -267,8 +267,8 @@ if err != nil {                           // 2
 
 Developers must check each potential error, cluttering the code with error-handling code in the nominal path. I've no clue why Go designers chose such an approach.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 I'm not an expert on Functional Programming, nor a die-hard fanboy. I merely acknowledge its benefits. For example, you can design your Object-Oriented model around immutability.
 

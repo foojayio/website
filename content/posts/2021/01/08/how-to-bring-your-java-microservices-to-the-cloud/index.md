@@ -30,7 +30,7 @@ Yes, and to demonstrate how [Jakarta EE](https://jakarta.ee/ "Jakarta EE") and [
 
 Software is everywhere. No matter where you look, there is software running. In human history, we've seen the number of machines/software increase with time, from one machine shared by a bunch of people, to a single person using thousands of software programs. Now, we can see software interacting with other software, such as when you buy a flight ticket: a system sends an email, another reads it and fires an event into your calendar. This new approach opens more business perspectives and opportunities for everybody, including machine learning. Make no mistake, Skynet is coming soon.
 
-### Agile Manifesto {#h3-0-agile-manifesto}
+### Agile Manifesto
 
 It's not just the amount of software that has increased, but also the number of interactions in a program itself. More users, more requirements, more feedback. It doesn't make sense to wait years to release a product, the time-to-market and the user feedback are vital to drive the product in the right direction. That's why in 2001, a small group of people, tired of the traditional approach to managing software development projects, designed the agile manifesto, which gave birth to the agile methodology. Agile is a process that helps teams provide quick and unpredictable responses to the feedback they receive on their project. It creates opportunities to assess a project's direction during the development cycle. Organizations evaluate the project in regular meetings called sprints or iterations.
 
@@ -38,13 +38,13 @@ In a more technical aspect aligning with Agile, the Domain-Driven Design (DDD) a
 
 More and more companies understand that all companies are software companies. As a result of relying heavily on software, companies frequently need to hire software developers. The question of how to handle several people working on just one project then arises. To solve this modern question, we can look at an ancient Roman military strategy: divide and conquer. Yes, divide a highly complex issue into small blocks of problems, split the team into small groups and divide the monolithic project into smaller ones. The Microservice architectural style is an approach to developing a single application into a suite of small services so that, for example, instead of an e-commerce company working with just one code-base and one implementation, it can split the teams/code in financial, product stock, marketing and so on. One thing to point out, the DDD context is still there. Indeed, it works alongside the approach for how to create useful services based on some of its bounded concepts; we're not discarding or deprecating that notion, but aggregating it into microservices.
 
-### Microservices {#h3-1-microservices}
+### Microservices
 
 Microservices, beyond making the team more agile, also bring several advantages such as independent scaling-up and releasing discrete services. However, it carries more twists in the operations side. Finalised code is not enough if it does not go to production. Thus the operations must follow the development team to release what the system needs to deploy every day. This is why: DevOps is a set of software development practices that combine software development (Dev) and information-technology operations (Ops) to shorten the systems development life cycle while delivering features, fixes, and updates frequently in close alignment with business objectives.
 
 With both development and operations teams integrated and working together with the DevOps methodology, we're ready to handle software and operations. But how about hardware? Integrating the team means that equipment does not exist. What happens when a team needs more computer power? Does it make sense for somebody to go buy a new server? It isn't fast enough. In the global market and with the milliseconds battle to get less response time, a closer server to the client means less throughput time, but how do we buy/keep servers in several continents?
 
-### Cloud Computing {#h3-2-cloud-computing}
+### Cloud Computing
 
 With cloud computing that is available on-demand for computer system resources, especially data storage and computing power, without direct active management by the user, Cloud computing means: we don't care about the hardware itself. These services are broadly divided into three categories: Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS) and Software-as-a-Service (SaaS).
 
@@ -77,7 +77,7 @@ A software project has fast delivery as the best strategic approach. A quick-rel
 
 That's why several methodologies / technologies such as Agile, microservices, DevOps, or cloud were born. Nowadays, it is hard to think of waiting one year to release a project, running the risk of missing the right timing. The Java Community has decided to push a release every six months, and Jakarta EE seeks the same path.
 
-### Cloud Native {#h3-3-cloud-native}
+### Cloud Native
 
 Cloud computing has brought many methodologies and techniques that have revolutionized both the business and technical worlds. Among the terms that came up was cloud-native. To meet and cover these expectations in the Java universe, Jakarta EE emerged.
 

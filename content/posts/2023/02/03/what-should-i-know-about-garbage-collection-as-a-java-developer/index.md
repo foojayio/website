@@ -25,8 +25,8 @@ But what is it exactly, and why is it important to understand how it works? If y
 
 Since I joined Azul as technical writer, it was a real discovery to talk to the engineers who develop such GCs and help companies get the most out of their Java systems.
 
-What is the Garbage Collector? {#GarbageCollection:WhatshouldIknowasaJavadeveloper-WhatistheGarbageCollector?}
---------------------------------------------------------------------------------------------------------------
+What is the Garbage Collector?
+------------------------------
 
 In many other programming languages, programmers manage the creation and removal of objects to moderate memory usage. In Java, programmers focus on application functionality while the Garbage Collector (GC) controls how memory is used.
 
@@ -44,8 +44,8 @@ So it is clear the GC is at the center of memory management for Java application
   * Reference counting: the number of references for each object defines if an object is still in use
   * A mix of scope and counting and a bit of GC
 
-How Does a Garbage Collector Work? {#GarbageCollection:WhatshouldIknowasaJavadeveloper-HowDoesaGarbageCollectorwork?}
----------------------------------------------------------------------------------------------------------------------
+How Does a Garbage Collector Work?
+----------------------------------
 
 
 
@@ -61,7 +61,7 @@ How Does a Garbage Collector Work? {#GarbageCollection:WhatshouldIknowasaJavadev
 
 
 
-### Different Stages in Garbage Collection {#GarbageCollection:WhatshouldIknowasaJavadeveloper-DifferentStagesinGarbageCollection}
+### Different Stages in Garbage Collection
 
 A GC process can follow different approaches and, in all cases, contains one or more of the following steps.
 
@@ -88,7 +88,7 @@ A few other terms related to how the GC is implemented are essential when you wa
   * **Stop-The-World**: the application is stopped while the GC cycle is running.
   * **Concurrent**: the GC is running "next to" the application and has no impact on the application execution.
 
-### The Importance of Live Set and Allocation Rate {#GarbageCollection:WhatshouldIknowasaJavadeveloper-Theimportanceoflivesetandallocationrate}
+### The Importance of Live Set and Allocation Rate
 
 As described in the different stages, the **live set**, which contains all the objects still in use, is an essential factor in the behavior of the GC. If a Java application has a constant load and behavior, and objects are added and removed from the live set steadily, its size will remain stable. A growing live set can be caused by a memory leak.
 
@@ -102,7 +102,7 @@ A good guideline for the heap size (`-Xmx`) is 2.5 to 5 times the size of the av
 
 Azul Zulu Prime builds of OpenJDK contain a mechanism called **Allocation Pacing** that helps to reduce peak allocation delays by limiting the allocation rate of the application when the heap usage approaches `-Xmx` as [described in this blog post](https://www.azul.com/blog/memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk-explained/).
 
-### Generational Heaps {#GarbageCollection:WhatshouldIknowasaJavadeveloper-GenerationalHeaps}
+### Generational Heaps
 
 Another technique used in GC is "generational heaps," keeping "young" versus "old" objects in different areas of the heap.
 
@@ -123,8 +123,8 @@ The following diagram illustrates how a typical Young generation GC cleans and m
 
 You can take advantage of the young generation system by focusing on local variables within methods that have a short lifetime so the GC can focus on a subset of the heap that can quickly be handled.
 
-Types of Java Garbage Collectors {#GarbageCollection:WhatshouldIknowasaJavadeveloper-TypesofJavaGarbageCollectors}
-------------------------------------------------------------------------------------------------------------------
+Types of Java Garbage Collectors
+--------------------------------
 
 Just like Java-the-language has evolved, the runtime and tools have evolved a lot, and different GCs have been part of the JRE.
 ![](https://www.azul.com/wp-content/uploads/garbage-collectors-table.png) Table overview of the different Garbage Collectors in Java
@@ -145,10 +145,10 @@ Just like Java-the-language has evolved, the runtime and tools have evolved a lo
 
 
 
-Impact of the Garbage Collector on the Application {#GarbageCollection:WhatshouldIknowasaJavadeveloper-ImpactoftheGarbageCollectorontheApplication}
----------------------------------------------------------------------------------------------------------------------------------------------------
+Impact of the Garbage Collector on the Application
+--------------------------------------------------
 
-### Which Garbage Collector to Use? {#GarbageCollection:WhatshouldIknowasaJavadeveloper-WhichGarbageCollectortoUse?}
+### Which Garbage Collector to Use?
 
 As should be clear by now, "The Garbage Collector" doesn't exist; but depending on the version of your Java runtime and/or startup options, multiple ones are available, and you can even choose which one you want to use! But with this flexibility also comes some responsibility.
 
@@ -175,7 +175,7 @@ Do you just go for the default option, or do you want to use another one? The sp
 
 
 
-### Impact on the Runtime Environment {#GarbageCollection:WhatshouldIknowasaJavadeveloper-ImpactontheRuntimeEnvironment}
+### Impact on the Runtime Environment
 
 Azul also has other technologies on top of OpenJDK that improve the performance of Java applications as this is not always only related to the behavior of the application itself but can also be impacted by the environment, cluster, or resources used within the organization.
 
@@ -197,7 +197,7 @@ Azul also has other technologies on top of OpenJDK that improve the performance 
 
 
 
-### Select Two Out of Three {#GarbageCollection:WhatshouldIknowasaJavadeveloper-SelectTwoOutofThree}
+### Select Two Out of Three
 
 In IT project management, there is a famous rule: "You need to choose between speed, quality, and cost. But you can only have 2 out of these 3." There seems to be a consensus that the same applies in regard to running an application. You need to pick two of the following:
 
@@ -213,13 +213,13 @@ On top of that, Prime has a combination of technologies and tuning options that 
 
 [ReadyNow!](https://www.azul.com/products/components/readynow/) and Connected Compilation help provide throughput without sacrificing too much warmup time and CPU. Prime GC continuously improves to find the best balance of the three goals.
 
-### About Concurrent Garbage Collectors {#h3-10-about-concurrent-garbage-collectors}
+### About Concurrent Garbage Collectors
 
 When the GC is concurrent, it shares the resources with application threads running concurrently. Thus the duration of the GC cycle can be impacted by the level of CPU load on the system or inside a container. A Stop-The-World GC does not face this issue since it stops all the Java threads when it runs.
 
 Thus if the system is highly saturated, a concurrent GC can take significant time and introduce allocation pauses. To reap full benefit from concurrent GC, it is advisable to keep the CPU load average below the number of cores available. Of course, the eventual GC behavior will depend on a combination of factors -- live set, allocation rate, and CPU load average.
 
-### Throughput Under Service Level Expectation {#GarbageCollection:WhatshouldIknowasaJavadeveloper-ThroughputUnderServiceLevelExpectation}
+### Throughput Under Service Level Expectation
 
 [Azul Platform Prime](https://www.azul.com/products/prime) helps achieve high "useful capacity" -- the amount of load carried while maintaining reasonable service level expectations. As described before, the choice of garbage collector influences the responsiveness of the application.
 
@@ -227,7 +227,7 @@ Stop-the-world and partially concurrent collectors break response time targets a
 
 More info regarding this topic is available in a blog post, [Cassandra Performance: Throughput, Responsiveness, Capacity, and Cost](https://www.azul.com/blog/cassandra-performance-throughout-responsiveness-capacity-and-cost/).
 
-### Monitor Resource Usage for Optimal Garbage Collector Behaviour {#GarbageCollection:WhatshouldIknowasaJavadeveloper-MonitorResourceUsageforOptimalGarbageCollectorBehaviour}
+### Monitor Resource Usage for Optimal Garbage Collector Behaviour
 
 VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the GC Log Analyzer (provided by Azul) are Java tools that can help you to identify potential memory leaks and keep an eye on the resources being used. On our documentation site, you can find more info on how to use these tools:
 
@@ -246,8 +246,8 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 
 
 
-Learn More... {#GarbageCollection:WhatshouldIknowasaJavadeveloper-LearnMore...}
--------------------------------------------------------------------------------
+Learn More...
+-------------
 
 If you were asking, "What should I know about garbage collection," this post gives an overview of the functionality of the Garbage Collector and the things a developer should know.
 

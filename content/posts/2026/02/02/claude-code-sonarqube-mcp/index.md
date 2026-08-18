@@ -32,8 +32,8 @@ Today, I want to show you a powerful integration: **Claude Code** combined with 
 
 
 
-**First things first: What is Claude Code? 🤖** {#h2-0-first-things-first-what-is-claude-code}
-----------------------------------------------------------------------------------------------
+**First things first: What is Claude Code? 🤖**
+-----------------------------------------------
 
 If you haven't tried it yet, Claude Code, developed by Anthropic, is an agentic, terminal-based AI coding tool that helps with coding and is based on natural language prompts.
 
@@ -43,8 +43,8 @@ It basically turns your terminal into a conversational agentic coding partner. Y
 
 ![](Screenshot-2026-02-02-at-15.07.01-656x510.png)
 
-**The Old Way: The Context-Switching Tax 💸** {#h2-1-the-old-way-the-context-switching-tax}
--------------------------------------------------------------------------------------------
+**The Old Way: The Context-Switching Tax 💸**
+---------------------------------------------
 
 Typically, a developer's workflow looks like this: Code in your IDE, commit the changes, and then break flow to check the full spectrum of issues on the SonarQube Server or Cloud dashboard.
 
@@ -52,8 +52,8 @@ Interacting with those issues---analyzing the details, setting statuses, or just
 
 
 
-**The Missing Piece: SonarQube MCP Server 🧩** {#h2-2-the-missing-piece-sonarqube-mcp-server}
----------------------------------------------------------------------------------------------
+**The Missing Piece: SonarQube MCP Server 🧩**
+----------------------------------------------
 
 Claude Code is smart, but it doesn't know *your* specific project rules or do the deep static analysis that **SonarQube** has been perfecting for years.
 
@@ -71,8 +71,8 @@ Because now, the workflow is seamless. You stay in the CLI. Claude Code generate
 
 
 
-**Close the AI trust gap with a "vibe, then verify" approach 🔄** {#h2-3-close-the-ai-trust-gap-with-a-vibe-then-verify-approach}
----------------------------------------------------------------------------------------------------------------------------------
+**Close the AI trust gap with a "vibe, then verify" approach 🔄**
+-----------------------------------------------------------------
 
 The main use case here is simple but powerful: **Verify before you trust.**
 
@@ -80,7 +80,7 @@ We often ask AI to generate boilerplate code or complex logic. But AI makes mist
 
 With this integration, you can ask Claude Code to verify its *own* work using Sonar's engine.
 
-### **Step 1: The Setup 🛠️** {#h3-4-step-1-the-setup}
+### **Step 1: The Setup 🛠️**
 
 It takes literally one command to connect them.
 
@@ -103,7 +103,7 @@ Once this is running, Claude will have [25 SonarQube tools](https://github.com/S
 
 
 
-### **Step 2: The Action (Java Example) ☕** {#h3-5-step-2-the-action-java-example}
+### **Step 2: The Action (Java Example) ☕**
 
 Let's imagine you ask Claude code to create a simple method to hash a password.
 
@@ -173,8 +173,8 @@ Do you see what happened? You didn't leave the terminal. You didn't have to be a
 
 
 
-**Interacting with your Project 🏗️** {#h2-6-interacting-with-your-project}
----------------------------------------------------------------------------
+**Interacting with your Project 🏗️**
+-------------------------------------
 
 The integration isn't just for new snippets. Since you are already in the command line, you can query your existing project status without opening the dashboard.
 
@@ -190,8 +190,8 @@ Claude Code queries the SonarQube Cloud/Server via MCP and prints the answer rig
 
 
 
-**Why this matters** {#h2-7-why-this-matters}
----------------------------------------------
+**Why this matters**
+--------------------
 
 We developers love tools that make us faster. But speed without control is dangerous.
 

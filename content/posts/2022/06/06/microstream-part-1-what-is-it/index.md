@@ -32,8 +32,8 @@ But what if we would only need to deal with the object graph in memory, and woul
 
 That is the main idea of the [MicroStream framework](https://microstream.one/), the realization of ultra-fast in-memory data processing with pure Java. The Java object graph is stored in a storage location using a fundamentally new serialization concept designed from scratch.
 
-Object-Relational Impedance Mismatch {#h2-0-object-relational-impedance-mismatch}
----------------------------------------------------------------------------------
+Object-Relational Impedance Mismatch
+------------------------------------
 
 In the most simple cases, the structure of the data within memory matches the data structure in the database relatively well. We have Entities that map to tables and properties that match fields in the database. But sometimes the ideal structure in both systems does not match. And in all cases, the data needs to be retrieved from the relational system using a specific protocol.
 
@@ -47,14 +47,14 @@ So that is why at MicroStream we believe the Java memory itself must be the data
 
 A newly designed serialisation framework, build from the ground up, will make sure that those Java instances in the Object Graph that you have indicated as your primary data are stored by the Storage Manager. That component is also responsible for reading all the information back into the memory when you start up your process again.
 
-User Scenarios {#h2-1-user-scenarios}
--------------------------------------
+User Scenarios
+--------------
 
 Since MicroStream is just written in plain Java, it can be used in a variety of scenarios as there are no limitations. The objects that are serialised don't have any restrictions, any plain POJO can be used. There is no requirement related to an interface that must be implemented, annotations that are present, or restrictions on the Java class itself.
 
 Let us describe three user scenarios in a bit more detail where we think that MicroStream can really shine.
 
-### 1. Microservices Local Data Storage {#h3-2-1-microservices-local-data-storage}
+### 1. Microservices Local Data Storage
 
 Microservices are centered around a certain domain of your business. A service can be responsible for all actions related to products, or stock. But these services don't run on their own as they need data from other services to validate or complete the user request.
 
@@ -64,7 +64,7 @@ So many authors describe the need for a cache of the most important data within 
 
 Storing the data in an in-memory cache persisted using the features of the MicroStream library is an ideal solution here. Data is accessible very fast as it resides in memory, is persisted so that it can survive a restart of the process, and can be updated based on the information in the events.
 
-### 2. Serverless Functions {#h3-3-2-serverless-functions}
+### 2. Serverless Functions
 
 Serverless functions are the smaller variant of the microservices as they in general only implement a single functionality and not all the functionality related to a domain.
 
@@ -74,7 +74,7 @@ But instead of residing to solutions to keep the functions warm to avoid the col
 
 MicroStream has the possibility of Lazy loading the data into memory. Instead of retrieving all the Java instances from storage at the startup of the Storage Manager, instances are only restored when accessed. This makes the startup of the process very fast as it doesn't need to initiate the connection to the external system and data can be accessed quickly as it is only read in the portion that is needed to handle the user request.
 
-### 3. Alternative for SqlLite on Android {#h3-4-3-alternative-for-sqllite-on-android}
+### 3. Alternative for SqlLite on Android
 
 The SqlLite database is used in many cases to store data offline within Android applications. No Wifi or 4G connection is needed to reach the server and keep the data entered by users, it can be done on the device storage.
 
@@ -82,8 +82,8 @@ But a lot of work is required to set up this connection, perform the mapping and
 
 From now on, you only have to deal with the Java objects and instances as data is stored in regular POJOs and MicroStream makes sure the objects are persisted in the storage of the device and available the next time the user accessed the application or the device gets online.
 
-MicroStream Highlights {#h2-5-microstream-highlights}
------------------------------------------------------
+MicroStream Highlights
+----------------------
 
 With [MicroStream](https://microstream.one/), data is stored within the Java Heap as plain POJOs. You don't have any annoying restrictions as any class is supported, without the need to have annotations or interface or markers or parent class that needs to be applied.
 
@@ -111,7 +111,7 @@ Although the primary source is the memory, we need to persist the data in a dura
 
 This is the task of the Storage Manager to persist the Java instances in a binary format, in a security vulnerability-free way.
 
-### Resources {#h3-6-resources}
+### Resources
 
 * [MicroStream website](https://microstream.one/ "MicroStream website")
 * [MicroStream reference manual](https://docs.microstream.one/manual/intro/welcome.html "MicroStream reference manual")

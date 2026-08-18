@@ -20,8 +20,8 @@ The Java SE landscape is strewn with acronyms that it has picked up over the las
 * OpenJDK
 * Java Development Kits (JDKs)
 
-What is 'OpenJDK'? {#h2-0-what-is-openjdk}
-------------------------------------------
+What is 'OpenJDK'?
+------------------
 
 The phrase *OpenJDK* is used to describe at least three fundamental things in the Java ecosystem.
 
@@ -36,53 +36,53 @@ Firstly, there is a place called *OpenJDK* which lives at <https://openjdk.java.
 
 Lastly, *OpenJDK* can also refer to just the source code repository on GitHub that we spoke about earlier, available at <https://github.com/openjdk>. This is the reference implementation of the Java specifications that we mentioned above.
 
-### Who Contributes to the OpenJDK Project? {#h3-1-who-contributes-to-the-openjdk-project}
+### Who Contributes to the OpenJDK Project?
 
 There are [various channels to contribute](https://openjdk.java.net/contribute/) to [OpenJDK](https://openjdk.java.net/). [This blog](https://blogs.oracle.com/java-platform-group/the-arrival-of-java-15) from Oracle has a graphic which breaks down committers for Java 15 - those that committed code to OpenJDK. To contribute to OpenJDK, you need to use a [JDK Enhancement Proposal (JEP)](https://openjdk.java.net/jeps/0) to start with.
 
 *Correction with thanks to Marc Maathuis: You don't always need a JEP to contribute to the OracleJDK. Bug fixes, for example may not. Contributors need to have signed the [Oracle Contributor Agreement](https://www.oracle.com/technetwork/oca-405177.pdf).*
 
-### What are JEPs? {#h3-2-what-are-jeps}
+### What are JEPs?
 
 [JDK Enhancement Proposal (JEP)](http://openjdk.java.net/jeps/0) is a proposed change to OpenJDK. You can think of them as the roadmap for Java. Like all good roadmaps, there's no commitment to inclusion or timescales. Some JEPs require changes to the Java specifications. In this instance, a corresponding [Java Specification Request (JSR)](https://jcp.org/en/jsr/all) is required.
 
-### What is a JSR? {#h3-3-what-is-a-jsr}
+### What is a JSR?
 
 A [Java Specification Request (JSR)](https://jcp.org/en/jsr/all) may detail potential specification changes (where present) that arise from one or more [JEPs](http://openjdk.java.net/jeps/0). Not all JEPs will have JSRs; if the JEP doesn't have changes to the specifications, you don't need a JSR. A JSR may also be a suggested new specification for Java SE that does not require a JEP, such as [a new specification for an API for computer vision](https://jcp.org/en/jsr/detail?id=381). JSRs are considered for inclusion in the Java specifications by the [Java Community Process (JCP)](https://www.jcp.org/en/home/index).
 
-### What is the JCP? {#h3-4-what-is-the-jcp}
+### What is the JCP?
 
 The [Java Community Process (JCP)](https://www.jcp.org/en/home/index) is a process to facilitate the review and ultimate inclusion of changes to the [Java specifications](https://docs.oracle.com/javase/specs/).
 
-What are JDKs? {#h2-5-what-are-jdks}
-------------------------------------
+What are JDKs?
+--------------
 
 [Java Development Kits (JDKs)](https://en.wikipedia.org/wiki/Java_Development_Kit) are implementations of the [Java SE platform specification](https://www.oracle.com/java/technologies/java-se-glance.html) by different vendors and groups of people, such as the open source community. Some of them are built from the [OpenJDK code on GitHub](https://github.com/openjdk). JDKs include the Java Runtime Environment (JRE), as well as other tools that help you develop Java.
 
-### What is the Java Runtime Environment (JRE) {#h3-6-what-is-the-java-runtime-environment-jre}
+### What is the Java Runtime Environment (JRE)
 
 The Java Runtime Environment (JRE) is a component of the JDK that is required to run Java. It used to be a separate download from the JDK, but, since Java 11, it's now part of the JDK itself rather than a separate entity meaning you can no longer download it separately.
 
-### Are all JDKs the same? {#h3-7-are-all-jdks-the-same}
+### Are all JDKs the same?
 
 Vendors may introduce little implementation differences such as garbage collection, branding, and utilities, but they are all implementations of the [Java platform specifications](https://docs.oracle.com/javase/specs/). For the purpose of this blog I've assumed the Java SE platform.
 
-### When can you call something a JDK? {#h3-8-when-can-you-call-something-a-jdk}
+### When can you call something a JDK?
 
 To be called a JDK officially, the binaries need to have passed a Java Compatibility Kit (JCK) for that release, which is a collection of tests provided by the [Technology Compatibility Kits (TCK)](https://foojay.io/pedia/tck/), for testing each [JSR](https://jcp.org/en/jsr/all) to ensure that the implementation of the specification behaves as expected. [Oracle's OpenJDK](https://jdk.java.net/15/) we spoke about earlier has passed the TCK, for example.
 
-### What's the Technology Compatibility Kit (TCK)? {#h3-9-what-s-the-technology-compatibility-kit-tck}
+### What's the Technology Compatibility Kit (TCK)?
 
 The [Technology Compatibility Kit (TCK)](https://foojay.io/pedia/tck/) is a set of tests that is applicable for a JSR. There has been controversy on the license for the TCK given it's an open source project. There is now a specific license to allow the TCK to be run against the OpenJDK under the GPL license.
 
-### Who Makes JDKs? {#h3-10-who-makes-jdks}
+### Who Makes JDKs?
 
 There are lots of JDKs out there. They all vary in terms of license, support, branding, and implementation differences. The list includes, but is not limited to [AdoptOpenJDK](https://adoptopenjdk.net/), [OracleJDK](https://www.oracle.com/uk/java/technologies/javase-downloads.html), [Oracle OpenJDK](https://jdk.java.net/), [RedHat](https://developers.redhat.com/products/openjdk/download), [Alibaba](https://github.com/alibaba/dragonwell8/releases), [Azul](https://www.azul.com/downloads/zulu-community/?architecture=x86-64-bit&package=jdk), [Bell Soft](https://bell-sw.com/pages/downloads/), [Amazon](https://docs.aws.amazon.com/corretto/index.html), and [IBM](https://www.ibm.com/support/pages/java-sdk-downloads).
 
 It is also possible to build your own JDK, but that's a whole other blog! Talking of blogs, [this one from the Java Champions](https://medium.com/@javachampions/java-is-still-free-2-0-0-6b9aa8d6d244) is excellent and helps fill in some of the gaps as well.
 
-Summary {#h2-11-summary}
-------------------------
+Summary
+-------
 
 'OpenJDK' is either:
 

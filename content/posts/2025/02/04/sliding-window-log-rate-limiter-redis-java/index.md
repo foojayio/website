@@ -30,29 +30,29 @@ frozen: false
 
 By checking how many requests were made within that time frame, it ensures limits are enforced more smoothly. If the log shows too many requests, new ones are denied.
 
-How It Works {#h2-0-how-it-works}
----------------------------------
+How It Works
+------------
 
 ![](https://cdn-images-1.medium.com/max/2160/1*tmaCfNHgzaAJNop4Aa2afA.gif)
 
-### 1. **Define a Time Window** {#h3-1-1-define-a-time-window}
+### 1. **Define a Time Window**
 
 Choose a rolling time window, such as the last 1 second, 1 minute, or 1 hour.
 
-### 2. **Track Requests** {#h3-2-2-track-requests}
+### 2. **Track Requests**
 
 Log each request with a precise timestamp as it comes in.
 
-### 3. **Remove Expired Entries** {#h3-3-3-remove-expired-entries}
+### 3. **Remove Expired Entries**
 
 Continuously clean up the log by removing entries older than the current time window.
 
-### 4. **Rate Limit Check** {#h3-4-4-rate-limit-check}
+### 4. **Rate Limit Check**
 
 Count the remaining entries in the log. If the count exceeds the allowed limit, reject new requests; otherwise, allow them.
 
-How to Implement It with Redis and Java {#h2-5-how-to-implement-it-with-redis-and-java}
----------------------------------------------------------------------------------------
+How to Implement It with Redis and Java
+---------------------------------------
 
 Implementing the **Sliding Window Log** with **Redis** involves logging each request with a timestamp and checking how many requests fall within the defined time window.
 
@@ -60,7 +60,7 @@ With Redis 8 and the introduction of the command HEXPIRE this process became eas
 
 Here's how to do it:
 
-### 1. **Log Each Request (If Allowed)** {#h3-6-1-log-each-request-if-allowed}
+### 1. **Log Each Request (If Allowed)**
 
 Use a Redis **hash** (HSET) to track each request. The hash key can represent something unique, like an IP address or client ID. Each field in the hash will represent a successful request.
 
@@ -71,7 +71,7 @@ HSET bucket_name  ""
 
 The HSET command creates a hash where the key (bucket_name) identifies the client, and the field () marks the exact time of the request. The value related to this field is left empty since only the timestamp matters.
 
-### 2. **Remove Expired Entries** {#h3-7-2-remove-expired-entries}
+### 2. **Remove Expired Entries**
 
 To make sure only requests within a specific time window are kept, we can set a time-to-live for each field when adding it to the hash.
 
@@ -82,7 +82,7 @@ HEXPIRE bucket_name 3600 FIELDS 1
 
 This example sets the field to expire after 3600 seconds (1 hour). This way, only recent requests stay in the hash, ensuring the bucket reflects activity within the chosen time window.
 
-### 3. **Count Requests in the Time Window** {#h3-8-3-count-requests-in-the-time-window}
+### 3. **Count Requests in the Time Window**
 
 Use HLEN bucket_name to count the existing fields in the hash. This gives you the number of requests within the time window.
 
@@ -95,14 +95,14 @@ Compare this count to the allowed limit. **If it's over the limit, reject the ne
 
 Cool! Now that we understand the steps, let's implement this in Java with Jedis!
 
-Implementing it with Jedis {#h2-9-implementing-it-with-jedis}
--------------------------------------------------------------
+Implementing it with Jedis
+--------------------------
 
 **Jedis** is a popular library that makes it easy to work with **Redis** from **Java** applications.
 
 Its API is simple and intuitive, which is perfect for implementing our rate limiter. We'll use it to interact with Redis and handle all the commands we need for managing requests and enforcing limits.
 
-### Start by adding the Jedis library to your Maven file: {#h3-10-start-by-adding-the-jedis-library-to-your-maven-file}
+### Start by adding the Jedis library to your Maven file:
 
 Check the latest version [here](https://redis.io/docs/latest/develop/clients/jedis/).
 
@@ -113,7 +113,7 @@ jedis
 ```
 
 
-### Create a SlidingWindowLogRateLimiter class: {#h3-11-create-a-slidingwindowlogratelimiter-class}
+### Create a SlidingWindowLogRateLimiter class:
 
 The class will take:
 
@@ -143,7 +143,7 @@ private final int limit;
 ```
 
 
-### Validate the Requests {#h3-12-validate-the-requests}
+### Validate the Requests
 
 The main task of this rate limiter is to determine whether a client's request falls within their allowed limit. If it does, the request is permitted, and the log is updated to include it. If it doesn't, the request is denied without updating the log.
 
@@ -214,7 +214,7 @@ return isAllowed;
 ```
 
 
-### Complete Implementation {#h3-13-complete-implementation}
+### Complete Implementation
 
 Here's the full code for the SlidingWindowLogRateLimiter class:
 
@@ -243,8 +243,8 @@ public boolean isAllowed(String clientId) {
 
 And we're ready to start testing its behavior!
 
-Testing our Rate Limiter {#h2-14-testing-our-rate-limiter}
-----------------------------------------------------------
+Testing our Rate Limiter
+------------------------
 
 To ensure our Sliding Window Log Rate Limiter behaves as expected, we'll write tests for various scenarios. For this, we'll use three tools:
 
@@ -254,7 +254,7 @@ To ensure our Sliding Window Log Rate Limiter behaves as expected, we'll write t
 
 Let's begin by adding the necessary dependencies to our pom.xml.
 
-### Adding Dependencies {#h3-15-adding-dependencies}
+### Adding Dependencies
 
 Here's what you'll need in your Maven pom.xml file:
 
@@ -278,7 +278,7 @@ test
 
 Once you've added these dependencies, you're ready to start writing your test class.
 
-### Setting Up the Test Class {#h3-16-setting-up-the-test-class}
+### Setting Up the Test Class
 
 The first step is to create a test class named SlidingWindowLogRateLimiterTest. Inside, we'll define three main components:
 
@@ -303,7 +303,7 @@ public class SlidingWindowLogRateLimiterTest {
 ```
 
 
-### Preparing the Environment Before Each Test {#h3-17-preparing-the-environment-before-each-test}
+### Preparing the Environment Before Each Test
 
 Before running any test, we need to ensure a clean Redis environment. Here's what we'll do:
 
@@ -323,7 +323,7 @@ public void setup() {
 
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
-### Cleaning Up After Each Test {#h3-18-cleaning-up-after-each-test}
+### Cleaning Up After Each Test
 
 After each test, we need to close the Jedis connection to free up resources. This ensures no lingering connections interfere with subsequent tests.
 
@@ -335,7 +335,7 @@ public void tearDown() {
 ```
 
 
-### Full Setup {#h3-19-full-setup}
+### Full Setup
 
 Here's how the complete test class looks with everything in place:
 
@@ -364,7 +364,7 @@ public class FixedWindowRateLimiterTest {
 ```
 
 
-### Verifying Requests Within the Limit {#h3-20-verifying-requests-within-the-limit}
+### Verifying Requests Within the Limit
 
 This test ensures the rate limiter allows requests within the defined limit.
 
@@ -383,7 +383,7 @@ public void shouldAllowRequestsWithinLimit() {
 ```
 
 
-### Verifying Requests Beyond the Limit {#h3-21-verifying-requests-beyond-the-limit}
+### Verifying Requests Beyond the Limit
 
 This test ensures the rate limiter correctly denies requests once the defined limit is exceeded.
 
@@ -406,7 +406,7 @@ public void shouldDenyRequestsOnceLimitIsExceeded() {
 ```
 
 
-### **Verifying Requests After Sliding Window Resets** {#h3-22-verifying-requests-after-sliding-window-resets}
+### **Verifying Requests After Sliding Window Resets**
 
 This test ensures that the rate limiter correctly resets the sliding window and allows requests after the window duration has passed.
 
@@ -441,7 +441,7 @@ public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws Interrupte
 ```
 
 
-### Verifying Independent Handling of Multiple Clients {#h3-23-verifying-independent-handling-of-multiple-clients}
+### Verifying Independent Handling of Multiple Clients
 
 This test ensures the rate limiter handles multiple clients independently.
 
@@ -477,7 +477,7 @@ public void shouldHandleMultipleClientsIndependently() {
 ```
 
 
-### **Verifying Gradual Request Allowance in Sliding Window** {#h3-24-verifying-gradual-request-allowance-in-sliding-window}
+### **Verifying Gradual Request Allowance in Sliding Window**
 
 This test ensures that the sliding window rate limiter gradually allows requests as old requests expire from the window.
 
@@ -515,7 +515,7 @@ After waiting 2 seconds, enough of the older requests have expired to allow one 
 ```
 
 
-### Verifying Denied Requests Are Not Counted {#h3-25-verifying-denied-requests-are-not-counted}
+### Verifying Denied Requests Are Not Counted
 
 This test ensures that requests denied by the rate limiter are not included in the request count.
 
@@ -560,14 +560,14 @@ We implemented the limiter in Java using Jedis, making it straightforward and ea
 
 This setup is a strong and flexible starting point for managing request limits and can be easily adapted to handle more advanced needs as they come up.
 
-### GitHub Repo {#h3-26-github-repo}
+### GitHub Repo
 
 You can find this implementation in **Java** and **Kotlin**:
 
 * Java ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/main/java/io/redis/SlidingWindowLogRateLimiter.java), [Test](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/test/java/io/redis/SlidingWindowLogHashAlternativeRateLimiterTest.java))
 * Kotlin ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/main/kotlin/org/example/SlidingWindowLogRateLimiter.kt), [Test](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/test/kotlin/io/redis/SlidingWindowLogHashAlternativeRateLimiterTest.kt))
 
-### Stay Curious! {#h3-27-stay-curious}
+### Stay Curious!
 
 **Related Articles:**
 

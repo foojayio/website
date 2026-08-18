@@ -18,13 +18,13 @@ frozen: false
 
 [Jakarta Agentic AI](https://jakarta.ee/specifications/agentic-ai/1.0/)just shipped its first deliverable: [version 1.0.0-M1 is live on Maven Central](https://central.sonatype.com/artifact/jakarta.agentic-ai/jakarta.agentic-ai-api/1.0.0-M1) and [the draft 1.0 specification is out for review](https://github.com/jakartaee/agentic-ai/releases/download/1.0.0-M1/jakarta-agentic-ai-1.0.0-M1.pdf). The project now has a specific API surface that developers can look at, try out and give feedback on.
 
-Quick recap - what is Jakarta Agentic AI? {#h2-0-quick-recap-what-is-jakarta-agentic-ai}
-----------------------------------------------------------------------------------------
+Quick recap - what is Jakarta Agentic AI?
+-----------------------------------------
 
 If you missed [the original announcement,](https://www.azul.com/blog/announcing-the-jakarta-agentic-ai-project/) Jakarta Agentic AI is a new Eclipse Foundation project bringing vendor-neutral, standardized APIs for building AI agents to Jakarta EE runtimes. The goal is to do for agentic AI what Jakarta Servlet, Jakarta RESTful Web Services and Jakarta Batch did for their respective domains: give Java and Jakarta EE developers a consistent, portable programming model instead of forcing them to hand-roll agent orchestration or lock into a single vendor's framework.
 
-What's in our First Milestone {#h2-1-what-s-in-our-first-milestone}
--------------------------------------------------------------------
+What's in our First Milestone
+-----------------------------
 
 The draft specification - [see here -](https://github.com/jakartaee/agentic-ai/releases/download/1.0.0-M1/jakarta-agentic-ai-1.0.0-M1.pdf) lays out the core programming model, and `jakarta.agentic-ai-api:1.0.0-M1` is now available on Maven Central so implementers and early adopters can start working against real interfaces:
 
@@ -46,8 +46,8 @@ A few of the key ideas the spec defines:
 
 The spec's examples chapter walks through realistic patterns: fraud detection, automated documentation generation from pull requests, a customer support agent and error-recovery workflows with parameter validation - all built from the same small set of annotations.
 
-Get involved! {#h2-2-get-involved}
-----------------------------------
+Get involved!
+-------------
 
 As [Reza Rahman](https://www.linkedin.com/in/javareza/), who leads the project, put it: 'The implementation, TCK and v1 release is close.' M1 is the annotations-and-lifecycle milestone; a reference implementation and TCK (Technology Compatibility Kit) are the next pieces needed before a full 1.0 release. A programmatic workflow API - for dynamic, runtime-modifiable agent workflows - is also flagged as a future direction beyond 1.0.
 

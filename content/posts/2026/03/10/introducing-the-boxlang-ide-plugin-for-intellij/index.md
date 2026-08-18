@@ -28,8 +28,8 @@ Whether you're building new BoxLang applications or maintaining existing CFML co
 
 ![](testbox-integration-700x438.png)
 
-Installing the Plugin {#h2-0-installing-the-plugin}
----------------------------------------------------
+Installing the Plugin
+---------------------
 
 Installing the plugin is easy from the JetBrains Marketplace.
 
@@ -44,12 +44,12 @@ Or install directly from the marketplace:
 
 ![](plugin-web-view-695x510.png)
 
-Key Features {#h2-1-key-features}
----------------------------------
+Key Features
+------------
 
 The IntelliJ plugin brings powerful development features for both **BoxLang and CFML developers.**
 
-### 🎨 BoxLang Syntax Highlighting {#h3-2-boxlang-syntax-highlighting}
+### 🎨 BoxLang Syntax Highlighting
 
 Full syntax highlighting for BoxLang source files makes your code easier to read and maintain.
 
@@ -61,7 +61,7 @@ Features include:
 
 ![](hyper-in-intellij-700x439.png)
 
-### 🧰 BoxLang Project Creation {#h3-3-boxlang-project-creation}
+### 🧰 BoxLang Project Creation
 
 Quickly bootstrap a new BoxLang project directly from the IntelliJ project wizard.
 
@@ -73,7 +73,7 @@ This allows you to:
 
 ![](boxlang-new-project-700x438.png)
 
-### 🧠 Language Server (LSP) Support {#h3-4-language-server-lsp-support}
+### 🧠 Language Server (LSP) Support
 
 The plugin integrates with the BoxLang Language Server, enabling advanced development features:
 
@@ -85,7 +85,7 @@ The plugin integrates with the BoxLang Language Server, enabling advanced develo
 
 ![](symbol-search-700x439.png)
 
-### 🐞 Debugging Support {#h3-5-debugging-support}
+### 🐞 Debugging Support
 
 Debug your BoxLang applications directly inside IntelliJ.
 
@@ -98,7 +98,7 @@ The plugin supports:
 
 ![](debugging-700x439.png)
 
-### 🧪 TestBox Integration {#h3-6-testbox-integration}
+### 🧪 TestBox Integration
 
 Run and debug TestBox tests without leaving your IDE.
 
@@ -110,7 +110,7 @@ Benefits include:
 
 ![](testbox-integration-1-700x438.png)
 
-### 🔵 CFML Syntax Highlighting {#h3-7-cfml-syntax-highlighting}
+### 🔵 CFML Syntax Highlighting
 
 The plugin also includes **syntax highlighting for CFML**, making it easier to work in mixed environments.
 
@@ -120,8 +120,8 @@ This is particularly useful for teams that are:
 * Maintaining legacy codebases
 * Working with hybrid projects
 
-Designed for the JVM Ecosystem {#h2-8-designed-for-the-jvm-ecosystem}
----------------------------------------------------------------------
+Designed for the JVM Ecosystem
+------------------------------
 
 BoxLang is built for the JVM and integrates naturally with Java-based tooling and workflows.
 
@@ -132,8 +132,8 @@ That means IntelliJ users get:
 * Rich plugin ecosystem
 * Seamless integration with JVM tooling
 
-Get Started Today {#h2-9-get-started-today}
--------------------------------------------
+Get Started Today
+-----------------
 
 Ready to try BoxLang in IntelliJ?
 
@@ -143,8 +143,8 @@ Ready to try BoxLang in IntelliJ?
 👉 Learn more about BoxLang:  
 <https://boxlang.io>
 
-Feedback Welcome {#h2-10-feedback-welcome}
-------------------------------------------
+Feedback Welcome
+----------------
 
 We're actively improving the plugin and [would love your feedback.](http://https://ortussolutions.atlassian.net/jira/software/c/projects/BLIDE/boards/132?search_id=c5d57cde-72a5-400c-b8ee-32b5fe3c8a6f "would love your feedback.")
 

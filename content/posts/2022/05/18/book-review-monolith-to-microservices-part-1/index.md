@@ -34,12 +34,12 @@ This book contains five chapters, each of which has a great deal of context and 
 
 So I will go through each chapter, one by one.
 
-**Chapter 1:**Just Enough Microservices {#h2-0-chapter-1-just-enough-microservices}
------------------------------------------------------------------------------------
+**Chapter 1:**Just Enough Microservices
+---------------------------------------
 
 This chapter starts with defining the concept, "Microservice" itself, the benefits and the problems it creates.
 
-### Microservices Defined {#h3-1-microservices-defined}
+### Microservices Defined
 
 So from the definition, Microservices have the following key components:
 
@@ -47,7 +47,7 @@ So from the definition, Microservices have the following key components:
 2. **A service has to be modelled around a business domain.** The idea is that if you need to touch two or more services to deliver a feature, then that's not an ideal scenario for Microservices. So we have to find a way so that his cross-service changes are less frequent.
 3. **Each service has to own its data.** Again, we can compare this with the object-oriented design principle; the way a class encapsulates its fields, a service must encapsulate the data.
 
-### Benefits of Microservices {#h3-2-benefits-of-microservices}
+### Benefits of Microservices
 
 Now the question is, what are the benefits it brings to the table? Well many. It puts many options on the table, you can mix and match different technology. It offers us to choose to mix different programming languages, programming styles, deployment platforms or databases to find the right mix.
 
@@ -55,13 +55,13 @@ Multiple services can be developed independently without getting each other ways
 
 Finally, it reduces the blast radius. If a particular service goes out of service, ideally, it shouldn't impact any other services.
 
-### Not a Silver Bullet {#h3-3-not-a-silver-bullet}
+### Not a Silver Bullet
 
 However, the Microservice architecture is not a silver bullet. It also brings a lot of baggage. Communication between services becomes a bottleneck. We now have to worry about latencies, and they vary, and thus the system becomes unpredictable. The transactional behaviour that we cherish so much will go away out the window.
 
 Network calls can become a headache, for example, Service A is talking to Service B, but Service B might go offline. Since data are not in one place, getting a consistent view of data across multiple machines becomes difficult. In fact, microservice can be a terrible idea, except for all the good stuff it provides.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Putting all these pros and cons upfront, the book argues whether we really need to go forward with Microservices or not. Perhaps not, in many cases. There are still many benefits of having a monolith.
 

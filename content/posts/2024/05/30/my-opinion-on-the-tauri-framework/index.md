@@ -26,8 +26,8 @@ I also like the Rust programming language a lot.
 
 Tauri is a Rust-based framework for building desktop applications. Here's my view.
 
-Overview {#h2-0-overview}
--------------------------
+Overview
+--------
 
 > Build an optimized, secure, and frontend-independent application for multi-platform deployment.
 >
@@ -65,8 +65,8 @@ fn greet(name: &str) -> String {                                               /
 
 In the following sections, I'll list Tauri's good, meh, and bad points. Remember that it's my subjective opinion based on my previous experiences.
 
-The good {#h2-1-the-good}
--------------------------
+The good
+--------
 
 * Getting started:Fortunately, it is becoming increasingly rare, but some technologies need to remember that before you're an expert, you're a newbie. The first section of any site should be a quick explanation of the technology, and the second a getting started. Tauri succeeds in this; I got my first Tauri app in a matter of minutes by following the [Quick start](https://tauri.app/v1/guides/getting-started/setup/) guide.
 * Documentation:Tauri's documentation is comprehensive, extensive (as far as my musings browsed them), and well-structured.
@@ -75,15 +75,15 @@ The good {#h2-1-the-good}
   In this regard, Tauri scores points. One can launch the app with a simple `cargo tauri dev` command. If the front end changes, Tauri reloads it. If any metadata changes, *e.g.* , anything stored in `tauri.conf.json`, Tauri restarts the app. The only downside is that both behaviors lose the UI state.
 * Complete lifecycle management:Tauri doesn't only help you develop your app, it also provides the tools to [debug](https://tauri.app/v1/guides/debugging/application/), [test](https://tauri.app/v1/guides/testing/mocking), [build](https://tauri.app/v1/guides/building/windows), and [distribute](https://tauri.app/v1/guides/distribution/publishing) it.
 
-The meh {#h2-2-the-meh}
------------------------
+The meh
+-------
 
 At first, I wanted to create my usual showcase for desktop applications, a [file renamer app](https://github.com/ajavageek/renamer-swing). However, I soon hit an issue when I wanted to select a directory using the file browser button. First, Tauri doesn't allow to use the regular JavaScript file-related API; Instead, it provides a more limited API. Worse, you need to explicitly configure which file system paths are available at build time, and they are part of an enumeration.
 
 I understand that security is a growing concern in modern software. Yet, I fail to understand this limitation on a desktop app, where every other app can access any directory.
 
-The bad {#h2-3-the-bad}
------------------------
+The bad
+-------
 
 However, Tauri's biggest problem is its design, more precisely, its separation between the front and the back end. What I love in Vaadin is its management of all things frontend, leaving you to learn the framework only. It allows your backend developers to build web apps without dealing with HTML, CSS, and JavaScript.
 
@@ -91,8 +91,8 @@ Tauri, though a desktop framework, made precisely the opposite choice. Your deve
 
 Worse, the separation reproduces the request-response model created using browser technologies to create UIs. Reminder: early desktop apps use the [Observer model](https://en.wikipedia.org/wiki/Observer_pattern), which better fits user interactions. We designed apps around the request-response model only after we ported them on the web. Using this model in a desktop app is a regression, in my opinion.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Tauri has many things to like, mainly everything that revolves around the developer experience. If you or your organization uses and likes web technologies, try Tauri.
 

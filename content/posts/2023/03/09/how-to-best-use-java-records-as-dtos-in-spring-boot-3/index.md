@@ -33,8 +33,8 @@ Whether you prefer reading or watching, let's review a few approaches for using 
 
 <br />
 
-Sample Database {#h2-0-sample-database}
----------------------------------------
+Sample Database
+---------------
 
 Follow these intructions if you'd like to install the sample database and experiment yourself. Otherwise, feel free to skip this section:
 
@@ -94,8 +94,8 @@ spring.datasource.password = yugabyte
 
 All set! Now, you're ready to follow the rest of the guide.
 
-Data Model {#h2-1-data-model}
------------------------------
+Data Model
+----------
 
 The Chinook Database comes with many relations, but two tables will be more than enough to show how to use Java records as DTOs.
 
@@ -160,8 +160,8 @@ public record TrackRecord(String name, String album, String composer) {}
 ```
 
 
-Naive Approach {#h2-2-naive-approach}
--------------------------------------
+Naive Approach
+--------------
 
 Imagine you need to implement a REST endpoint that returns a short song description. The API needs to provide song and album names, as well as the author's name.
 
@@ -228,8 +228,8 @@ Hibernate selects 12 columns across two tables, but `TrackRecord` needs only thr
 
 This is a waste of memory, computing, and networking resources, especially if you use distributed databases like YugabyteDB that scatters data across multiple cluster nodes.
 
-TupleTransformer {#h2-3-tupletransformer}
------------------------------------------
+TupleTransformer
+----------------
 
 The naive approach can be easily remediated if you query only the records the API requires then transform a query result set to a respective Java Record.
 
@@ -287,8 +287,8 @@ Hibernate:
 
 However, there is one, very visible downside to this approach ---the implementation of the `public TrackRecord getTrackRecordV2(Integer trackId)` became longer and wordier.
 
-Java Record Within JPA Query {#h2-4-java-record-within-jpa-query}
------------------------------------------------------------------
+Java Record Within JPA Query
+----------------------------
 
 There are several ways to shorten the previous implementation. One is to instantiate a Java Record instance within a JPA query.
 
@@ -332,8 +332,8 @@ SELECT new TrackRecord(t.name, a.title, t.composer)...
 ```
 
 
-Hypersistence Utils {#h2-5-hypersistence-utils}
------------------------------------------------
+Hypersistence Utils
+-------------------
 
 [Hypersistence Utils](https://github.com/vladmihalcea/hypersistence-utils "Hypersistence Utils") library comes with many goodies for Spring and Hibernate. One feature allows you to create a Java Record instance within a JPA query without the package name.
 
@@ -374,8 +374,8 @@ After that you can update the JPA query of the `TrackRepository.findTrackRecord(
 
 It's that simple!
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 The latest versions of Java, Spring, and Hibernate have a number of significant enhancements to simplify and make coding in Java more fun.
 

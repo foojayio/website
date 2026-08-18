@@ -33,8 +33,8 @@ Before we go on to the book review (and note [another Foojay book review on the 
 
 Another important detail: I didn't run the code or go through the samples. I just read the book. I also did that relatively quickly and used the PDF version. As such, I feel I lost some of the core experience in the book.
 
-What's Skaffold {#h2-0-what-s-skaffold}
----------------------------------------
+What's Skaffold
+---------------
 
 [Skaffold](https://github.com/GoogleContainerTools/skaffold) is an open source project started by a Google engineer after suffering the pain of cloud native Kubernetes deployments. It's effectively a command-line tool that automates the build, push, and deploy steps for Kubernetes applications.
 
@@ -42,8 +42,8 @@ That alone warrants an info sheet. The surrounding system integrates with Maven/
 
 There's obviously additional complexity, and configuration, but the core idea is the same. Developers still need to understand basic Kubernetes ideas, there's no way around it. But you can remove some of the hassle involved with it. Kubernetes is aimed at devops and a lot of its features are redundant for developers. This way we can build cloud native microservices without the hassle.
 
-The Book {#h2-1-the-book}
--------------------------
+The Book
+--------
 
 Packt books offer a quick and practical introduction to current technologies. They have the advantage of including a lot of current details that other books might miss. However, these details might become outdated by the time you need the book. It's a tradeoff you need to make based on your experience with the publication.
 
@@ -59,7 +59,7 @@ In the first section, we get a glimpse into the "problem" of building Kubernetes
 
 Choudhary introduces Skaffold in the second section. The third section gets into the finer points of deployment, alternatives, etc.
 
-### Cloud Native {#h3-2-cloud-native}
+### Cloud Native
 
 The book focuses on the separation of the inner/outer loop of the development cycle. The inner loop is the local development environment, where the outer loop is the production/CI/CD environment. What makes this development style "Cloud Native" is the similarity between the inner and outer loops.
 
@@ -67,33 +67,33 @@ There's a similar focus on the value delivered in integration tests during the C
 
 Another aspect that makes Skaffold native to the cloud is the instant deployment via jib. As a result, we can instantly see changes in our local Kubernetes environment as we save changes in the IDE. That's pretty cool, and this alone is worth the price of admission to Skaffold (which admittedly is free).
 
-What I Liked {#h2-3-what-i-liked}
----------------------------------
+What I Liked
+------------
 
-### Writing and Focus {#h3-4-writing-and-focus}
+### Writing and Focus
 
 Choudhary is a talented writer who uses clear language and examples. The examples weren't too verbose, as is sometimes the case with such books. He wrote the book targeting Kotlin/Java developers, which is great.
 
 The core ideas and benefits of Skaffold are covered early on in the book and are pretty obvious. There are a few diagrams that illustrate the big set pieces.
 
-### Objectivity {#h3-5-objectivity}
+### Objectivity
 
 The book covers competitors to Skaffold and seems to be reasonably objective with its treatment. This is at the end of the book, so if you have doubts about Skaffold, I suggest reading the ending first.
 
-### Publishing {#h3-6-publishing}
+### Publishing
 
 While somewhat wasteful (more on that later), the layout of the Packt books is as usual pretty great. Packt books have excellent layout, table of contents and index. This makes the reading/referencing process much smoother.
 
-What I Didn't Like {#h2-7-what-i-didn-t-like}
----------------------------------------------
+What I Didn't Like
+------------------
 
-### Cloud Native {#h3-8-cloud-native}
+### Cloud Native
 
 I feel the phrase cloud native was ‌co-opted by GraalVM and frameworks such as Quarkus. I understand what Choudhary is aiming at and think this makes sense for the book. But it's one of those overused phrases that loses some of its meaning. A cloud native book is a pretty vague statement, Skaffold narrows it down but only after you know what that means.
 
 There's an entire chapter on GKE which I skipped entirely for that reason. It just isn't relevant to me.
 
-### Publishing {#h3-9-publishing}
+### Publishing
 
 While I like Packt books, I have two grievances. I hope they improve on these:
 
@@ -102,8 +102,8 @@ While I like Packt books, I have two grievances. I hope they improve on these:
 
 Notice that both comments aren't unique to Packt and apply to most publishers.
 
-Final Word {#h2-10-final-word}
-------------------------------
+Final Word
+----------
 
 I liked the book. I still haven't made up my mind about Skaffold though. As a latecomer to the cloud native realm, I feel I need to leapfrog some of the hassle. That makes it attractive. But I try to keep away from [Google services due to past trauma](https://talktotheduck.dev/production-horrors-handling-disasters-public-debrief) . Skaffold doesn't require GCP and can still be pretty useful without it, so it's something I intend to try.
 

@@ -21,7 +21,7 @@ As announced [last month](https://foojay.io/today/virtual-foojay-jug-tour/), to 
 
 And here's the schedule, note that it will change as more meetups are confirmed, and if your JUG is missing, i.e., you'd like to still be included in the tour, no worries, let's see what can be done, simply contact JFrog's Ari Waller (ariw at jfrog dot com), Foojay's Event Manager, and specify a date and time ([and preferred topics](https://foojay.io/today/virtual-foojay-jug-tour/)) for March or April.
 
-### March {#h3-0-march}
+### March
 
 * 1 March, Monday: Java User Group Munchen, Simon Maple (Snyk)  
   **"Stranger Danger: Finding Security Vulnerabilities Before They Find You!"** ([Details, click here.](https://www.meetup.com/Java-User-Group-Munchen-JUGM/events/276395074/))  
@@ -42,7 +42,7 @@ And here's the schedule, note that it will change as more meetups are confirmed,
 * 29 March, Monday: Jozi JUG, Brian Vermeer (Snyk)  
   **"Secure Docker Containers for Java Developers"** ([Details, click here.](https://www.meetup.com/Jozi-JUG/events/276396380))
 
-### April {#h3-1-april}
+### April
 
 * 6 April, Tuesday: Coimbra JUG, Steve Chin (JFrog)  
   **"DevOps Tools for Java Developers"** ([Details, click here.](https://www.meetup.com/Coimbra-JUG/events/276440402/))  

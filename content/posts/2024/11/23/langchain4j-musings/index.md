@@ -29,8 +29,8 @@ For example, I never bought into blockchain, the solution still searching for pr
 
 The main focus of this post is to integrate a chatbot into my application and explore its capabilities.
 
-Choosing a LLM {#h2-0-choosing-a-llm}
--------------------------------------
+Choosing a LLM
+--------------
 
 A plethora of LLMs is available at the moment. I mentioned OpenAI, but plenty of others beg for your attention: Google Gemini, Cohere, Amazon Bedrock, ad nauseam. Each has pros and cons, which are irrelevant to this introductory post.
 
@@ -38,8 +38,8 @@ My main requirement in the context of this post is that it needs to run locally.
 
 I chose [LangChain4J](https://docs.langchain4j.dev) and [Ollama](https://ollama.com/) because they are well-known and meet my specific requirements for this project.
 
-Quick introduction to LangChain4J and Ollama {#h2-1-quick-introduction-to-langchain4j-and-ollama}
--------------------------------------------------------------------------------------------------
+Quick introduction to LangChain4J and Ollama
+--------------------------------------------
 
 Here's how LangChain4J introduces itself in its own words:
 > The goal of LangChain4j is to simplify integrating LLMs into Java applications.
@@ -61,12 +61,12 @@ Ollama's introduction is even shorter:
 
 One runtime, multiple models.
 
-Getting our feet wet {#h2-2-getting-our-feet-wet}
--------------------------------------------------
+Getting our feet wet
+--------------------
 
 I'll split this section into the LangChain4j app and the Ollama infrastructure.
 
-### The LangChain4j app {#h3-3-the-langchain4j-app}
+### The LangChain4j app
 
 LangChain4j provides a Spring Boot integration starter. Here's our minimal dependencies:
 
@@ -105,7 +105,7 @@ langchain4j.ollama.chat-model:
 
 When the app starts, LangChain4j creates a bean of type `ChatLanguageModel` and adds it to the context. Note that the concrete type depends on the dependency found on the classpath.
 
-### The Ollama infrastructure {#h3-4-the-ollama-infrastructure}
+### The Ollama infrastructure
 
 For ease of use, I'll use Docker, and more specifically Docker Compose. Here's my Compose file:
 
@@ -149,8 +149,8 @@ curl localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'
 ```
 
 
-Enhancing with streaming {#h2-5-enhancing-with-streaming}
----------------------------------------------------------
+Enhancing with streaming
+------------------------
 
 The above solution works, but the user experience has room for improvement. The command hangs, and the response comes after several seconds, unlike the traditional OpenAI UI, which streams tokens back to the user.
 
@@ -223,8 +223,8 @@ curl -N localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'
 
 The result is already better!
 
-Remembering history {#h2-6-remembering-history}
------------------------------------------------
+Remembering history
+-------------------
 
 Every chatbot request is independent of others at this stage - they don't keep a context. Chat history is an important feature that we miss from off-the-shelf AI assistants. We need to refactor the app in two directions: first, store each message from the user and the model, and second, compartmentalize users' histories from each other.
 
@@ -287,8 +287,8 @@ curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "2
 ```
 
 
-Adding Retrieval-Augmented Generation {#h2-7-adding-retrieval-augmented-generation}
------------------------------------------------------------------------------------
+Adding Retrieval-Augmented Generation
+-------------------------------------
 
 LLMs are only as good as the data they are trained on, and there's a high chance you want your chatbot to be trained on your own custom data. RAG is the answer to this problem. The idea is to index content ahead of time, store it somewhere, and add the indexed data to the search - called retrieval. For more details, LangChain4j does a great job of [explaining RAG](https://docs.langchain4j.dev/tutorials/rag).
 
@@ -354,8 +354,8 @@ The answer is much better:
 
 It's not really correct---I actually mentioned that I wrote the books mentioned, but it's at least not hallucinating.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I showed how to start your Langchain4j journey in several incremental steps.
 

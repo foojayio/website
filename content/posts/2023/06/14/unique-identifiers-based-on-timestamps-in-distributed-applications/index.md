@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-At [Chronicle](https://chronicle.software/?utm_source=website&amp;utm_medium=foojay&amp;utm_campaign=unique-identifiers "Chronicle") we build applications that must process very high numbers of events with minimum latency. Generating unique IDs for these events using the traditional method of UUIDs introduces an unacceptable time overhead into our applications, so an alternative approach is needed.
+At [Chronicle](https://chronicle.software/?utm_source=website&utm_medium=foojay&utm_campaign=unique-identifiers "Chronicle") we build applications that must process very high numbers of events with minimum latency. Generating unique IDs for these events using the traditional method of UUIDs introduces an unacceptable time overhead into our applications, so an alternative approach is needed.
 
 I recently wrote [an article](http://blog.vanillajava.blog/2021/12/system-wide-unique-nanosecond-timestamps.html "an article") on how timestamps can be used as unique identifiers, as they are much cheaper to generate than other methods of generating unique identifiers, taking a fraction of a microsecond.
 
@@ -29,7 +29,7 @@ Guaranteeing uniqueness when using timestamps at nanosecond granularity is strai
 
 This article describes an extension of the previously described algorithm that generates unique identifiers in a distributed environment, and presents them in a format that is easy to read.
 
-### A Nanosecond Timestamp with a Host Identifier {#h3-0-a-nanosecond-timestamp-with-a-host-identifier}
+### A Nanosecond Timestamp with a Host Identifier
 
 Chronicle's `DistributedUniqueTimeProvider` overwrites the lowest two digits of a generated nanosecond timestamp with the hostId. This makes it easy to identify when looking at the generated identifier.
 
@@ -53,7 +53,7 @@ DistributedUniqueTimeProvider.instance().hostId(hostId)
 ```
 
 
-### Generating Unique IDs in a Distributed System {#h3-1-generating-unique-ids-in-a-distributed-system}
+### Generating Unique IDs in a Distributed System
 
 Each host participating in the application has a predefined, unique host identifier, or hostId.
 
@@ -61,13 +61,13 @@ Currently, we assume up to 100 hosts.
 
 Of course, Java application components run in a JVM, and there may be multiple JVMs active on the same physical machine. JVMs sharing the same (memory mapped) `DistributedUniqueTimeProvider` may share a hostId. Alternatively, a JVM may have its own unique hostId assigned to it.
 
-### Speeding Up Generation with a Saved Host Identifier {#h3-2-speeding-up-generation-with-a-saved-host-identifier}
+### Speeding Up Generation with a Saved Host Identifier
 
 Having a preconfigured host identifier and keeping track of the most recent identifier in shared memory allows fast concurrent generation of timestamp based identifiers across machines. As timestamps only have a resolution of 100 ns, the sustained limit for a single host is ten million per second.
 
 For a maximum number of 100 hosts, the theoretical limit is one billion per second. If you need more than 100 servers, the strategy can be altered to reduce resolution, and allow more concurrent hosts. e.g. 1000 hosts could generate one million ids per second with a microsecond resolution.
 
-### Implementation {#h3-3-implementation}
+### Implementation
 
 The happy path is simple. Take the current time, remove the lower two digits and add the hostId. The value of **HOST_IDS** is hardcoded to 100, as we assume 2 digits for the hostId. As long as the generated identifier is higher than the last one generated, it's ok.
 
@@ -83,7 +83,7 @@ If the time hasn't progressed, either due to high contention, or the wall clock 
 
 This loop looks for the next possible timestamp (with the hostId) and attempts to update it.
 
-### Using JMH to Benchmark the Timestamp Provider {#h3-4-using-jmh-to-benchmark-the-timestamp-provider}
+### Using JMH to Benchmark the Timestamp Provider
 
 With JMH, benchmarking this utility in a single-threaded manner is pretty easy.
 
@@ -97,7 +97,7 @@ UUID.randomUUID() is also very fast, only six times longer, however, if you need
 
 ![](Screenshot-2023-06-06-at-1.19.51-PM-1024x268.png)
 
-### Disadvantages of This Approach {#h3-5-disadvantages-of-this-approach}
+### Disadvantages of This Approach
 
 Traditionally, Java applications used UUIDs as unique identifiers. This approach is considerably more efficient than the generation of UUIDs, however there may still be some cases where UUIDs present a more suitable approach:
 
@@ -105,7 +105,7 @@ Traditionally, Java applications used UUIDs as unique identifiers. This approach
 * No configuration is required
 * UUIDs are not predictable, the timestamp-based ones are highly predictable
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 This article has described a highly efficient approach to generating an 8-byte lightweight identifier that is unique across many hosts, based on some predetermined partitioning by host identifier.
 

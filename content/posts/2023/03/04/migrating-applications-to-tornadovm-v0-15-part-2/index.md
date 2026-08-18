@@ -29,8 +29,8 @@ In particular, this blog has the following objectives:
 * Provide guidelines regarding how programmers can trigger TornadoVM-specific configurations that regard the execution on hardware accelerators.
 * Provide examples on how to exploit the new operations that are exposed by the new TornadoVM API.
 
-1. Prerequisites {#h2-0-1-prerequisites}
-----------------------------------------
+1. Prerequisites
+----------------
 
 This blog begins with a prerequisite that a snapshot of a user-defined TaskGraph is captured to an immutable state. This was the final point of the [previous blog](https://foojay.io/today/migrating-applications-to-tornadovm-v0-15-part-1/).
 
@@ -49,8 +49,8 @@ ImmutableTaskGraph itg = taskGraph.snapshot();
 ```
 
 
-2. Build, Optimize and Execute an Execution Plan {#h2-1-2-build-optimize-and-execute-an-execution-plan}
--------------------------------------------------------------------------------------------------------
+2. Build, Optimize and Execute an Execution Plan
+------------------------------------------------
 
 The first step that enables programmers to configure the execution of a TaskGraph is the creation of an execution plan. This is a new feature of TornadoVM v0.15.
 
@@ -67,7 +67,7 @@ TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(itg);
 ```
 
 
-### 2.1. **What can be done with an execution plan?** {#h3-2-2-1-what-can-be-done-with-an-execution-plan}
+### 2.1. **What can be done with an execution plan?**
 
 An execution plan can be executed directly, in which case TornadoVM will apply a list of default optimizations (e.g., it will run on the default device, using the default thread scheduler).
 
@@ -80,7 +80,7 @@ executionPlan.execute();
 
 **Note:** The **default scheduler** is configured by the TornadoVM runtime and refers to the global and local work-group sizes that are launched per generated kernel. The default configuration of a scheduler depends on the device type (e.g., CPU, GPU, FPGA).
 
-### **2.2. How can an application be optimized with an execution plan?** {#h3-3-2-2-how-can-an-application-be-optimized-with-an-execution-plan}
+### **2.2. How can an application be optimized with an execution plan?**
 
 The TornadoExecutionPlan object offers a set of methods that programmers can use to configure the execution plans and apply various optimizations.
 
@@ -111,8 +111,8 @@ executionPlan.execute();
 
 **Note for migration:** The **execute()** method that was exposed in the **TaskSchedule** object of TornadoVM API (prior to v0.15) needs to be replaced with: i) the creation of a **TornadoExecutionPlan** object that accepts the corresponding **ImmutableTaskGraph** object as input; and ii) the invocation of the **execute** method of the generated execution plan.
 
-3. Obtain the result and the profiling information {#h2-4-3-obtain-the-result-and-the-profiling-information}
-------------------------------------------------------------------------------------------------------------
+3. Obtain the result and the profiling information
+--------------------------------------------------
 
 Every time an execution plan is executed, a new object of type **TornadoExecutionResult** is created.
 
@@ -129,8 +129,8 @@ TornadoProfilerResult profilerResult = executionResult.getProfilerResult();
 ```
 
 
-4. Further reading and examples {#h2-5-4-further-reading-and-examples}
-----------------------------------------------------------------------
+4. Further reading and examples
+-------------------------------
 
 The TornadoVM modules for the [tornado-unittests](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-unittests) and the [tornado-examples](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples) contain a list of diverse applications that showcase how to use the new TornadoVM API.
 

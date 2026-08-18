@@ -32,8 +32,8 @@ Then, I'll describe why microservices don't fit most organizations' structures.
 
 Afterward, I'll move to detail the root problem to solve. I'll conclude by proposing an alternative, less-risky approach.
 
-You're not doing microservices {#h2-0-you-re-not-doing-microservices}
----------------------------------------------------------------------
+You're not doing microservices
+------------------------------
 
 Microservices seem ubiquitous. A conference [must have](https://www.scale-up-360.com/en/microservices-software-architectures#/) microservices in its name, or doesn't attract that many attendees. Some conferences are [entirely dedicated](https://devopscon.io/microservices-software-architecture/) to microservices.
 
@@ -86,8 +86,8 @@ What happens in reality, however, is entirely different. A technical lead or arc
 
 Because of Conway's Law, any such microservices effort is doomed to fail. The result will be an information system that doesn't benefit from most benefits of microservices (if any) while having to bear all of their downsides.
 
-Delivery time {#h2-1-delivery-time}
------------------------------------
+Delivery time
+-------------
 
 In one of his other posts, Fowler mentions the pros and cons of microservices:
 
@@ -118,8 +118,8 @@ My experience is that spec time involves a lot of back and forth between the bus
 
 Of course, it depends a lot on the maturity of the organization. Still, delivery time makes more sense in the scope of this post.
 
-Rules engines {#h2-2-rules-engines}
------------------------------------
+Rules engines
+-------------
 
 Before people theorized Agile and Continuous Deployment concepts, organizations did deploy a couple of times a year. We named them release trains. And indeed, they were very akin to trains: if your feature was too late, you had to wait until the next release train. Depending on the frequency, it could mean a couple of months up to six. The business didn't want to miss the train!
 
@@ -138,8 +138,8 @@ The main idea is that the business must be able to configure the rules in produc
 
 Business is independent but bears the consequences of misconfiguration.
 
-Code parts change at different speed {#h2-3-code-parts-change-at-different-speed}
----------------------------------------------------------------------------------
+Code parts change at different speed
+------------------------------------
 
 We moved tax computation logic to the Rules Engine in the tax application above. Application designers inferred beforehand that this logic would be the most subject to change. Indeed, any change in the law could impact tax computation and require changes in the code.
 
@@ -165,8 +165,8 @@ What if, instead of splitting to microservices, one would "chop" the part that c
 * "Regular" microservices
 * Something else?
 
-How to chop? {#h2-4-how-to-chop}
---------------------------------
+How to chop?
+------------
 
 Once you've analyzed the boundaries and isolated the part to "chop", the next problem is how to achieve it. In one of his famous articles, Martin Fowler (him again!) describes the Strangler pattern:
 > An alternative route is to gradually create a new system around the edges of the old, letting it grow slowly over several years until the old system is strangled. Doing this sounds hard, but increasingly I think it's one of those things that isn't tried enough. In particular I've noticed a couple of basic strategies that work well. The fundamental strategy is EventInterception, which can be used to gradually move functionality to the strangler fig and to enable AssetCapture. -- [StranglerFigApplication](https://martinfowler.com/bliki/StranglerFigApplication.html)
@@ -184,8 +184,8 @@ Just route the request to the new endpoint location, and you're done.
 
 <br />
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I've highlighted that microservices, as presented in conferences, are doomed to fail in most organizations.
 

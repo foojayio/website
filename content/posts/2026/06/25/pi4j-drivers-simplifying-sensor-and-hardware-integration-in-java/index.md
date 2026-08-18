@@ -29,7 +29,7 @@ When developing Java applications for Raspberry Pi, [Pi4J](https://www.pi4j.com/
 
 This is where the **Pi4J Drivers library** become extremely valuable.
 
-### What is Pi4J Drivers? {#h3-0-what-is-pi4j-drivers}
+### What is Pi4J Drivers?
 
 Pi4J Drivers is a companion project to Pi4J that provides ready-to-use drivers for a wide range of electronic components, including sensors, displays, I/O expanders, and actuators. Instead of implementing low-level communication from scratch, developers can leverage tested and reusable APIs to interact with hardware devices.
 
@@ -39,13 +39,13 @@ Pi4J Drivers repository: <https://github.com/Pi4J/pi4j-drivers>
 
 Info on the Pi4J website: <https://www.pi4j.com/drivers/>
 
-### Pi4J Drivers Reaches Version 1.0.0 {#h3-1-pi4j-drivers-reaches-version-1-0-0}
+### Pi4J Drivers Reaches Version 1.0.0
 
 A major milestone for the Pi4J community is the release of Pi4J Drivers 1.0.0. This first stable release demonstrates the maturity of the project and provides developers with greater confidence when building real-world applications.
 
 Version 1.0 marks the beginning of a more robust and reliable driver ecosystem for Java developers working with Raspberry Pi. It also reflects the ongoing commitment of the community to expand the available driver catalog and make hardware integration more accessible for IoT, automation, education, and industrial projects.
 
-### Why is Pi4J Drivers Important? {#h3-2-why-is-pi4j-drivers-important}
+### Why is Pi4J Drivers Important?
 
 Imagine you want to work with a temperature sensor, an OLED display, or an MCP23017 I/O expander.
 
@@ -69,7 +69,7 @@ Some of the key benefits include:
 * Easier maintenance
 * Better developer experience for both beginners and experienced engineers
 
-### A Community-Driven Driver Ecosystem {#h3-3-a-community-driven-driver-ecosystem}
+### A Community-Driven Driver Ecosystem
 
 Pi4J Drivers is a community-driven project designed to centralize reusable implementations for electronic components commonly used with Raspberry Pi.
 
@@ -77,7 +77,7 @@ The goal is to continuously grow the ecosystem by adding new drivers and improvi
 
 By building on modern versions of Pi4J, the project benefits from the latest improvements in the platform while providing a consistent and user-friendly development experience.
 
-### Learning Through Pi4J Examples {#h3-4-learning-through-pi4j-examples}
+### Learning Through Pi4J Examples
 
 Having ready-to-use drivers is great, but learning how to use them effectively is equally important.
 
@@ -109,7 +109,7 @@ These examples are extremely valuable because they help developers:
 
 Whether you're just getting started with Raspberry Pi and Java or building advanced IoT applications, the examples repository provides a practical reference for real-world development.
 
-### A Simple Example {#h3-5-a-simple-example}
+### A Simple Example
 
 To understand the value of Pi4J Drivers, let's look at a simple example using a BME280 environmental sensor, which can measure temperature, humidity, and atmospheric pressure.
 
@@ -134,7 +134,7 @@ Instead of dealing with low-level communication details, developers can immediat
 
 Another important aspect of Pi4J Drivers is that the project goes beyond individual sensor drivers. In addition to providing drivers for standalone components such as environmental sensors, displays, and I/O expanders, it also includes a dedicated [HATs](https://dev.to/igoriot/what-is-a-raspberry-pi-hat-1c8d "HATs") section. The goal of this module is to offer higher-level libraries for popular Raspberry Pi HATs, bundling multiple sensors and features into a single, easy-to-use API. Instead of configuring and managing each device separately, developers can work directly with the HAT as a complete platform. This approach further simplifies development and makes it easier to get started with feature-rich expansion boards such as the Sense HAT and other Raspberry Pi add-ons.
 
-### A Hat Example {#h3-6-a-hat-example}
+### A Hat Example
 
 The goal of Pi4J Drivers is to make hardware interaction feel natural for Java developers.
 
@@ -159,7 +159,7 @@ pi4j.shutdown();
 
 Behind the scenes, the driver handles the communication with the hardware, allowing developers to focus on application logic instead of device-specific protocols and register management.
 
-### Conclusion {#h3-7-conclusion}
+### Conclusion
 
 Pi4J Drivers represents an important step forward in making Java development on Raspberry Pi simpler, faster, and more productive.
 

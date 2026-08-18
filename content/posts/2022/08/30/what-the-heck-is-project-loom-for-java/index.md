@@ -37,8 +37,8 @@ One has to resort to synchronizing threads to avoid issues like data races and t
 
 I wrote more about Java concurrency in my [Concurrency in modern programming languages: Java](https://deepu.tech/concurrency-in-modern-languages-java/) post.
 
-What is Project Loom? {#h2-0-what-is-project-loom}
---------------------------------------------------
+What is Project Loom?
+---------------------
 
 > Project Loom aims to drastically reduce the effort of writing, maintaining, and observing high-throughput concurrent applications that make the best use of available hardware.
 >
@@ -54,7 +54,7 @@ Another common use case is parallel processing or multi-threading, where you mig
 
 Project Loom aims to fix these issues in the current concurrency model by introducing two new features: ***virtual threads*** and ***structured concurrency***.
 
-### Virtual threads {#h3-1-virtual-threads}
+### Virtual threads
 
 > Java 19 is scheduled to be released in September 2022, and Virtual threads will be a preview feature. Yayyy!
 
@@ -212,7 +212,7 @@ You can find the benchmark [source code on GitHub](https://github.com/deepu105/j
 * A benchmark using Akka actors [on Medium](https://medium.com/@zakgof/a-simple-benchmark-for-jdk-project-looms-virtual-threads-4f43ef8aeb1) by [Alexander Zakusylo](https://medium.com/@zakgof)
 * JMH benchmarks for I/O and non-I/O tasks [on GitHub](https://github.com/colincachia/loom-benchmark) by [Colin Cachia](https://twitter.com/colincachia)
 
-### Structured concurrency {#h3-2-structured-concurrency}
+### Structured concurrency
 
 > Structured concurrency will be an incubator feature in Java 19.
 
@@ -267,8 +267,8 @@ Unlike the previous sample using `ExecutorService`, we can now use `StructuredTa
 * **Cancellation propagation** --- If the thread running `handleOrder()` is interrupted before or during the call to `join()`, both forks are canceled automatically when the thread exits the scope.
 * **Observability** --- A thread dump would clearly display the task hierarchy, with the threads running `updateInventory()` and `updateOrder()` shown as children of the scope.
 
-State of Project Loom {#h2-3-state-of-project-loom}
----------------------------------------------------
+State of Project Loom
+---------------------
 
 The Loom project started in 2017 and has undergone many changes and proposals. Virtual threads were initially called fibers, but later on they were renamed to avoid confusion.
 
@@ -276,8 +276,8 @@ Today with Java 19 getting closer to release, the project has delivered the two 
 
 One as a preview and another as an incubator. Hence the path to stabilization of the features should be more precise.
 
-What does this mean to regular Java developers? {#h2-4-what-does-this-mean-to-regular-java-developers}
-------------------------------------------------------------------------------------------------------
+What does this mean to regular Java developers?
+-----------------------------------------------
 
 When these features are production ready, it should not affect regular Java developers much, as these developers may be using libraries for concurrency use cases.
 
@@ -289,15 +289,15 @@ This will increase performance and scalability in most cases based on the benchm
 
 Structured concurrency can help simplify the multi-threading or parallel processing use cases and make them less fragile and more maintainable.
 
-What does this mean to Java library developers? {#h2-5-what-does-this-mean-to-java-library-developers}
-------------------------------------------------------------------------------------------------------
+What does this mean to Java library developers?
+-----------------------------------------------
 
 When these features are production ready, it will be a big deal for libraries and frameworks that use threads or parallelism. Library authors will see huge performance and scalability improvements while simplifying the codebase and making it more maintainable. Most Java projects using thread pools and platform threads will benefit from switching to virtual threads.
 
 Candidates include Java server software like Tomcat, Undertow, and Netty; and web frameworks like Spring and Micronaut. I expect most Java web technologies to migrate to virtual threads from thread pools. Java web technologies and trendy reactive programming libraries like RxJava and Akka could also use structured concurrency effectively. This doesn't mean that virtual threads will be the one solution for all; there will still be use cases and benefits for asynchronous and reactive programming.
 
-Learn more about Java, multi-threading, and Project Loom {#h2-6-learn-more-about-java-multi-threading-and-project-loom}
------------------------------------------------------------------------------------------------------------------------
+Learn more about Java, multi-threading, and Project Loom
+--------------------------------------------------------
 
 Check out these additional resources to learn more about Java, multi-threading, and Project Loom.
 

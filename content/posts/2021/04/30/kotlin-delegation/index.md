@@ -23,8 +23,8 @@ frozen: false
 
 Kotlin offers many exciting features. In general, developers tend to cite null safety as their favorite. For me, it's function extensions. But delegation comes a close second.
 
-The delegation pattern {#h2-0-the-delegation-pattern}
------------------------------------------------------
+The delegation pattern
+----------------------
 
 The delegation pattern is described in the book:
 > *Delegation* is a way to make composition as powerful for reuse as inheritance \[Lie86, JZ91\]. In delegation, *two* objects are involved in handling a request: a receiving object delegates operations to its *delegate* . This is analogous to subclasses deferring requests to parent classes. But with inheritance, an inherited operation can always refer to the receiving object through the `this` member variable in C++ and `self` in Smalltalk. To achieve the same effect with delegation, the receiver passes itself to the delegate to let the delegated operation refer to the receiver.
@@ -37,8 +37,8 @@ Delegation is critical when one chooses *composition* over *inheritance*.
 
 ![](composition-inheritance.png)
 
-Manual and native delegation {#h2-1-manual-and-native-delegation}
------------------------------------------------------------------
+Manual and native delegation
+----------------------------
 
 In Java, you need to code delegation manually. The example above translates into the following code:
 
@@ -90,8 +90,8 @@ As explained in the docs:
 >
 > -- [Delegation](https://kotlinlang.org/docs/reference/delegation.html)
 
-Delegated properties {#h2-2-delegated-properties}
--------------------------------------------------
+Delegated properties
+--------------------
 
 Kotlin also offers **delegated properties** , a property that delegates its getter (and its setter if a `var`) to "something else". A delegated property also uses the `by` keyword.
 
@@ -132,8 +132,8 @@ val vetoable: String by Delegates.vetoable(observed) {
 
   Here, the set fails randomly 50% of the time. It's not helpful but fun to debug for your colleagues.
 
-Your own delegated property {#h2-3-your-own-delegated-property}
----------------------------------------------------------------
+Your own delegated property
+---------------------------
 
 If you want to create your own delegated property, it needs to point to a class that has:
 
@@ -186,8 +186,8 @@ fun main() {
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 The delegate pattern is ubiquitous in the Object-Oriented Programming world. Some languages, such as Kotlin, provides a native implementation.
 

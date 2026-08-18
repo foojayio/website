@@ -27,8 +27,8 @@ Java provides a file system abstraction that enables solution-specific implement
 
 In this post, I'll explain the basics of Java's file systems to get you started. I created a [starter project](https://github.com/scsosna99/java-file-system-starter) which is a bare-bones Java file system with two operation implemented ([create directory](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/spi/FileSystemProvider.html#createDirectory(java.nio.file.Path,java.nio.file.attribute.FileAttribute...)) and [exists](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/spi/FileSystemProvider.html#exists(java.nio.file.Path,java.nio.file.LinkOption...))) are used via a [demo class](https://github.com/scsosna99/java-file-system-starter/blob/main/src/main/java/dev/scottsosna/sandbox/javafs/Runner.java). If you're a glutton for punishment, you can also clone/fork my [neo4j-filesystem](https://github.com/scsosna99/neo4j-filesystem) project which is an almost fully-functioning file system minus some edge cases.
 
-History of File Systems Within Java {#h2-0-history-of-file-systems-within-java}
--------------------------------------------------------------------------------
+History of File Systems Within Java
+-----------------------------------
 
 A short, flippant, perhaps not even completely correct history of the Java APIs for [file systems](https://en.wikipedia.org/wiki/File_system). Not required reading, jump ahead if you're getting antsy to start actual work!
 > ![](gosling-507x510.png)
@@ -43,14 +43,14 @@ Prior to a recent project, I had not used (actually avoided) Java NIO and did no
 
 Most important are the Java NIO.2 changes which allow solutions to implement *their* file systems based on *their* requirements that seamlessly integrate with the JVM. Third-party or customized implementations are no longer necessary which should greatly simplifying many aspects of your solution.
 
-Before You Start {#h2-1-before-you-start}
------------------------------------------
+Before You Start
+----------------
 
 Implementing your first custom file system will not be quick, straight-forward nor painless, so I recommend you consider the following to create a high-level, conceptual design before you start coding. The design is not immutable; in fact, I fully expect course corrections and refinements as you get deeper. Even an in-your-head design makes future decisions easier to contextualize and implement. You'll thank me later!
 
 **NOTE** : Java is [POSIX](https://en.wikipedia.org/wiki/POSIX)-biased -- unsurprising considering its [Sun Solaris origins](https://www.oreilly.com/library/view/java-the-legend/9781492048299/ch01.html) -- and therefore so is its file system abstraction: path separator, owner user/groups, [access modes](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/AccessMode.html), [file permissions](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/attribute/PosixFilePermission.html), file types, etc. Moving away from POSIX likely means working around, rather than with, Java's file systems. Possible? Yes. Recommended? No.. *You've been warned*.
 
-### URI Design {#h3-2-uri-design}
+### URI Design
 
 [URI](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/net/URI.html)s have two important purposes within Java file systems:
 
@@ -70,7 +70,7 @@ A URI has four components that are relevant for file systems:
 
 URI query strings may be used for unique requirements but generally are not necessary.
 
-### File Tree Management {#h3-3-file-tree-management}
+### File Tree Management
 
 ![](file-tree.png)
 
@@ -80,7 +80,7 @@ What data or properties are stored with each entry? Definitely directory/file na
 
 Managing a file tree is challenging: operating systems structures -- e.g., \*nix [iNodes](https://en.wikipedia.org/wiki/Inode) or [NTFS](https://learn.microsoft.com/en-us/windows-server/storage/file-server/ntfs-overview)'s master file table in [Windows](https://www.microsoft.com/en-us/windows/?r=1)-- have evolved to be highly optimized and efficient. Your challenge providing efficient access and navigation while maintaining your organization's non-functional requirements. I've experience customized file systems struggle to provide both efficient tree management (write) and navigation (read), leading to on-going hacks to fix the performance problem of the day. File trees are simple graphs, but arbitrary directory depth and number of files/directories within a directory are problematic.
 
-### Binary Storage {#h3-4-binary-storage}
+### Binary Storage
 
 ![](disk-controller-700x237.jpg)
 
@@ -90,8 +90,8 @@ Your solution may require functionality not always available to your file storag
 
 File storage is as simple or as complicated as defined by your requirements.
 
-The Bare Minimum {#h2-5-the-bare-minimum}
------------------------------------------
+The Bare Minimum
+----------------
 
 Four components must be present to bootstrap your Java file system. Clone the [starter file system](https://github.com/scsosna99/java-file-system-starter) repository if you want to follow along in your IDE: after reviewing you'll understanding how little magic is actually involved.
 
@@ -125,8 +125,8 @@ Four components must be present to bootstrap your Java file system. Clone the [s
 
 That's it. Really. Review the starter project. You now have a working Java file system which does absolutely nothing. At this point, you are ready to implement the functionality required by your custom file system. So far, so good!
 
-Next Steps {#h2-6-next-steps}
------------------------------
+Next Steps
+----------
 
 Implement, implement, implement. Now the real \~fun\~ work begins. Some suggestions:
 
@@ -137,19 +137,19 @@ Implement, implement, implement. Now the real \~fun\~ work begins. Some suggesti
 * *Local File System Testing*: My file system is intended to be a fully-functioning POSIX-based file system, so dug deep into code for working with a local file for better understanding: method return values, exceptions thrown, edge cases, enum interpretation, how attributes are implemented, etc. Create demos/tests using Files and see what works, what doesn't, debug, refactor, etc., etc.
 * *Patience* : Frustrating initially, rewarding later. The abstraction makes some things much more difficult than I expected/wanted, but little by little the pieces start fitting together. This is **not** an afternoon's work!
 
-Final Thoughts {#h2-7-final-thoughts}
--------------------------------------
+Final Thoughts
+--------------
 
 Now with a better understanding, I have additional ideas on unique ways to leverage Java file systems. Could I have asked AI to do this for me? Sure, but what fun would that have been! Creating a custom Java file system was both geeky and fun, perhaps more fun than I have had in a while, plus I have a deeper understanding of a core Java concept. Score!
 
-### References Links {#h3-8-references-links}
+### References Links
 
 * <https://github.com/scsosna99/java-file-system-starter>
 * <https://github.com/scsosna99/neo4j-filesystem>
 * <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/package-summary.html>
 * <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/spi/FileSystemProvider.html>
 
-### Image Credits {#h3-9-image-credits}
+### Image Credits
 
 * "James Gosling 2008" by Peter Campbell is licensed under CC BY-SA 4.0.
 * "URI Format" generated by [Claude.AI](https://claude.ai/new) based on my prompts.

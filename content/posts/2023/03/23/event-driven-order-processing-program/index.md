@@ -26,7 +26,7 @@ A [New Order Single](https://www.onixs.biz/fix-dictionary/4.4/msgtype_d_68.html 
 
 The reply is typically one or more [Execution Reports](https://www.onixs.biz/fix-dictionary/4.2/msgtype_8_8.html "Execution Reports") updating the status of that order.
 
-### Some Background on Fintech {#h3-0-some-background-on-fintech}
+### Some Background on Fintech
 
 In fintech, when one organisation wishes to purchase an asset or commodity from another, they send an order.
 
@@ -42,7 +42,7 @@ Again, we model an input event in YAML. To start with, we will reject all new or
 
 ![500,500](Screen-Shot-2023-03-13-at-2.30.26-PM-1024x567.png)
 
-### Testing this Service {#h3-1-testing-this-service}
+### Testing this Service
 
 We can test this service with the captured data earlier with a YAML configuration. We override the system clock to produce the same results every time.
 
@@ -67,7 +67,7 @@ public void newOrderSingle() {
 
 As in previous examples, if the output is incorrect, we can quickly see this in the data.
 
-### What do we see when a test fails? {#h3-2-what-do-we-see-when-a-test-fails}
+### What do we see when a test fails?
 
 Say we don't override the time and use the wall clock instead. We might see something like this.
 
@@ -79,7 +79,7 @@ And if we "Click to see difference", we can see the orderID, which contains a ti
 
 The component doesn't need to log anything as all results, including errors, are written to the output queue.
 
-### Performance Testing {#h3-3-performance-testing}
+### Performance Testing
 
 In this benchmark, 100k orders/s are injected into one queue. These are then processed, and the result is written in a second queue and read to get an end to end latency. Each run is 30 seconds. This times two serializations, two writes, two reads, two deserializations and two hops between threads.
 
@@ -91,13 +91,13 @@ Using the queues in an asynchronous mode achieves similar latencies to in memory
 
 ![](Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651.png)
 
-### Chronicle Enterprise Extensions {#h3-4-chronicle-enterprise-extensions}
+### Chronicle Enterprise Extensions
 
 You can test, develop and run microservices using our open source software.
 
 Our commercial extensions support; state management e.g. idempotency, faster restarts of services, distributions of events and HA/DR, centralised monitoring of distributed systems, and configuration and testing of a services mesh.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 Combining high performance and ease of use can be challenging.
 

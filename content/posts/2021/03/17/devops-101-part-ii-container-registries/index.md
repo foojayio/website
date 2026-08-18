@@ -26,19 +26,19 @@ In this series ([part 1 is here](https://foojay.io/today/devops-101-part-i-ci-cd
 
 Today, I'll break down container registries.
 
-### What's a container registry? {#h3-0-what-s-a-container-registry}
+### What's a container registry?
 
 A **container registry** is a tool for hosting, versioning, and distributing container images within repositories. They can be public (like Docker Hub) or private (like [JFrog Container Registry](https://jfrog.com/container-registry/ "JFrog Container Registry")).
 
 If you've used Docker, you've pulled an image from a container registry before. There are several out there, both public and private, free and paid, but I'll mostly be focusing on JFrog Container Registry since it's free, can run locally or on a cloud provider, and provides a few other nice-to-have features that other services don't, like a Helm repository and advanced metadata.
 
-### What's the difference between public and private container registries? {#h3-1-what-s-the-difference-between-public-and-private-container-registries}
+### What's the difference between public and private container registries?
 
 **Public registries** allow anyone to create a repository and host container images there for other people to use. Getting started with a public registry is fast, since you don't have to deal with any of the infrastructure. However, public registries do sacrifice security in exchange for that ease of use. If using standard images works for your project, and you aren't concerned about security, a public registry might be the right choice for you.
 
 **Private registries** are hosted by the organization that will be using them. JFrog Container Registry can be hosted either locally on your hardware (on-prem) or with a cloud provider like Google, Amazon, or Microsoft. Hosting your own container registry gives you fine-grained access control and the ability to define your own security policies. Since the organization is in complete control of the images, repositories, and access control for those things, they can be certain that container images are what they say they are and that no one has access to things they shouldn't. In the case of JFrog Container Registry, you also have the option to organize your images into various local, remote, generic, and virtual repositories, depending on your needs. For larger organizations, this additional reliability and security is worth the effort involved in setting up the infrastructure itself.
 
-### What are all these different types of repositories? {#h3-2-what-are-all-these-different-types-of-repositories}
+### What are all these different types of repositories?
 
 **Local repositories** are exactly what they sound like -- locally-managed repositories into which you deploy artifacts. Pretty simple.
 
@@ -48,7 +48,7 @@ If you've used Docker, you've pulled an image from a container registry before. 
 
 **Virtual repositories** bundle up a collection of various remote and local repositories with the same package type into a single URL.
 
-### Neat. How do I try one of these things? {#h3-3-neat-how-do-i-try-one-of-these-things}
+### Neat. How do I try one of these things?
 
 The quickest and easiest way is with the [cloud hosted](https://jfrog.com/container-registry/cloud-registration/ "cloud hosted") version of JFrog Container Registry, since it's still free-ish (you pay for usage on the cloud provider over a certain amount), mostly configures itself, and doesn't require you to set up a reverse proxy. Sign up here with your preferred flavor of cloud provider and follow along with the automated setup wizard to configure some initial options and create your default repositories.
 
@@ -67,7 +67,7 @@ Pulling an image is easy, too:
 
 Setup and usage is a bit more complicated with the on-prem version, but fortunately, the [official documentation](http://https://www.jfrog.com/confluence/display/JCR/Getting+Started+with+JFrog+Container+Registry+as+a+Docker+Registry "official documentation") is pretty explicit.
 
-### Summarize this for me. {#h3-4-summarize-this-for-me}
+### Summarize this for me.
 
 If your organization or team is getting serious about cloud native development, a private container registry is probably something you're going to work with at some point. The goal of a private registry is to provide you with a place to organize, version, and deploy your container images with increased security options and better integration into your existing CI/CD workflows when compared to a public registry, whether it's hosted on a local server or out on the cloud.
 

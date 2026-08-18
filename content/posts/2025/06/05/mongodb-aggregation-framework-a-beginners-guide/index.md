@@ -67,8 +67,8 @@ This is the essence of a pipeline: chaining operations that refine data step by 
 
 In MongoDB, we do something very similar.
 
-Aggregation pipeline {#h2-0-aggregation-pipeline}
--------------------------------------------------
+Aggregation pipeline
+--------------------
 
 An [aggregation pipeline](https://www.mongodb.com/resources/products/capabilities/aggregation-pipeline) consists of one or more stages. Each stage represents a step that will be executed.
 
@@ -96,8 +96,8 @@ Here, we apply a `$match` filter to select only the documents with `status` equa
 
 Each stage in the pipeline is executed in order, and each one only processes the results from the previous stage. So in the example above, even if there are 1,000 transactions in total, the `$count` stage only counts the transactions that matched the `"error"` status from the `$match` stage.
 
-Aggregation stages {#h2-1-aggregation-stages}
----------------------------------------------
+Aggregation stages
+------------------
 
 As mentioned earlier, [stages](https://www.mongodb.com/docs/manual/reference/operator/aggregation-pipeline/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) are used to build a pipeline. In this section, let's take a look at some stages that are useful for our day-to-day work.
 
@@ -141,7 +141,7 @@ db.articles.insertMany(
 
 ```
 
-### $Match {#h3-2-match}
+### $Match
 
 This is one of [the most common stages](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) you'll use. It basically serves to filter documents based on a specific query. For example, if you only want to return the document with `_id: 3`, you can use:
 
@@ -157,7 +157,7 @@ db.articles.aggregate([
 
 ```
 
-### $Project {#h3-3-project}
+### $Project
 
 We use this stage to specify which fields we'd like to include in our results.
 
@@ -186,7 +186,7 @@ The result would look like this:
 ```
 
 
-### $Unwind {#h3-4-unwind}
+### $Unwind
 
 The [$unwind stage](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) is used to deconstruct an array into multiple documents. For example:
 
@@ -232,9 +232,9 @@ This way, you can analyze or process each tag individually:
 
 ```
 
-### $Group {#h3-5-group}
+### $Group
 
-As the name suggests, we use this stage to [group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&amp;utm_source=third-party-content&amp;utm_medium=cta&amp;utm_content=aggregation_framework_a_beginner_guide&amp;utm_term=ricardo.mello) our results. This time, we'll use the \`$unwind\` stage we saw earlier to deconstruct the array of tags and find out how many articles exist for each tag:
+As the name suggests, we use this stage to [group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) our results. This time, we'll use the \`$unwind\` stage we saw earlier to deconstruct the array of tags and find out how many articles exist for each tag:
 
 ```
 db.articles.aggregate([  
@@ -271,9 +271,9 @@ The result would look like this:
 
 ```
 
-### $Sort {#h3-6-sort}
+### $Sort
 
-Continuing with our example---what if we want to query all articles and [sort](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/?utm_campaign=devrel&amp;utm_source=third-party-content&amp;utm_medium=cta&amp;utm_content=aggregation_framework_a_beginner_guide&amp;utm_term=ricardo.mello) them by publication date, from newest to oldest?
+Continuing with our example---what if we want to query all articles and [sort](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) them by publication date, from newest to oldest?
 
 ```
 db.articles.aggregate([  
@@ -286,9 +286,9 @@ db.articles.aggregate([
 And if we want to reverse the order—showing the oldest articles first—we just use `1` instead of `-1`.
 ```
 
-### $AddFields {#h3-7-addfields}
+### $AddFields
 
-This stage is useful when we want to [add a new field](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?utm_campaign=devrel&amp;utm_source=third-party-content&amp;utm_medium=cta&amp;utm_content=aggregation_framework_a_beginner_guide&amp;utm_term=ricardo.mello) in our result.
+This stage is useful when we want to [add a new field](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) in our result.
 
 Let's say our client requested that we display a field called \`publishedYear\` containing only the year:
 
@@ -317,8 +317,8 @@ Our result would look something like this:
 
     Here, you can see that we’re using an operator called $year to extract the year from our publishedAt field. To learn about other operators, check out our official documentation page on aggregation operators.
 
-Combining stages {#h2-8-combining-stages}
------------------------------------------
+Combining stages
+----------------
 
 As we explored earlier, a pipeline can combine multiple stages. Let's say we want to know the total number of articles published in 2025 and beyond. We can combine the `$match` and [`$count`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) stages for this:
 
@@ -340,8 +340,8 @@ db.articles.aggregate(
 
     Notice that we’re using the $gt operator to filter for years greater than the specific date.
 
-Wrapping up {#h2-9-wrapping-up}
--------------------------------
+Wrapping up
+-----------
 
 Aggregation Pipeline is a powerful alternative that MongoDB offers for combining stages and extracting data in an accurate and efficient way. There's a whole world of stages and operators for you to explore.
 

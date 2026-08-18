@@ -29,18 +29,18 @@ frozen: false
 
 We're thrilled to announce the release of `bx-rss`, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to [BoxLang](https://www.boxlang.io/# "BoxLang")! Whether you're building a content aggregator, publishing a podcast, or exposing your application's data as feeds, `bx-rss` makes it incredibly simple.
 
-Thanks To Ray Camden {#h2-0-thanks-to-ray-camden}
--------------------------------------------------
+Thanks To Ray Camden
+--------------------
 
 I just want to thank you to [Ray Camden](https://www.raymondcamden.com/ "Ray Camden") for his contributions to this module. Thanks Ray! You rock!
 
-Why bx-rss? {#h2-1-why-bx-rss}
-------------------------------
+Why bx-rss?
+-----------
 
 In today's interconnected web, RSS and Atom feeds remain crucial for content distribution and syndication. From blog posts and news articles to podcasts and video channels, feeds power how content flows across the internet. The bx-rss module brings enterprise-grade feed capabilities to BoxLang with an elegant, easy-to-use API.
 
-✨ Key Features at a Glance {#h2-2-key-features-at-a-glance}
------------------------------------------------------------
+✨ Key Features at a Glance
+--------------------------
 
 📖 **Universal Feed Reading** - Parse RSS 2.0, RSS 1.0 (RDF), and Atom feeds from URLs or files  
 
@@ -60,8 +60,8 @@ In today's interconnected web, RSS and Atom feeds remain crucial for content dis
 
 🏢 **Enterprise Ready** - Built and supported by Ortus Solutions
 
-🚀 Installation {#h2-3-installation}
-------------------------------------
+🚀 Installation
+---------------
 
 Getting started is as simple as running one command:
 
@@ -72,8 +72,8 @@ box install bx-rss
 
 The module automatically registers as `bxrss` in your BoxLang applications. That's it!
 
-💡 Quick Start Examples {#h2-4-quick-start-examples}
-----------------------------------------------------
+💡 Quick Start Examples
+-----------------------
 
 Reading a Feed (The Easy Way)  
 
@@ -110,8 +110,8 @@ println( "Latest 10 items from #feedData.channel.title#" );
 ```
 
 
-🎙️ Podcast Power: iTunes Extension Support {#h2-5-podcast-power-itunes-extension-support}
-------------------------------------------------------------------------------------------
+🎙️ Podcast Power: iTunes Extension Support
+-------------------------------------------
 
 One of the most powerful features of bx-rss is its automatic iTunes podcast extension detection. When you read a podcast feed, the module automatically includes all iTunes-specific fields without any configuration:
 
@@ -155,8 +155,8 @@ podcast.items.each( ( episode ) => {
 * Individual artwork
 * Author and summary
 
-📹 Media RSS: Video \& Image Feeds {#h2-6-media-rss-video-image-feeds}
-----------------------------------------------------------------------
+📹 Media RSS: Video \& Image Feeds
+----------------------------------
 
 Media RSS extensions are also automatically detected, making it perfect for video platforms and image galleries:
 
@@ -178,8 +178,8 @@ videos.items.each( ( video ) => {
 ```
 
 
-🔄 Feed Aggregation: Read Multiple Sources {#h2-7-feed-aggregation-read-multiple-sources}
------------------------------------------------------------------------------------------
+🔄 Feed Aggregation: Read Multiple Sources
+------------------------------------------
 
 Build a feed aggregator by reading multiple sources simultaneously:
 
@@ -205,8 +205,8 @@ aggregated.items.each( ( item ) => {
 ```
 
 
-✍️ Creating Feeds: Share Your Content {#h2-8-creating-feeds-share-your-content}
--------------------------------------------------------------------------------
+✍️ Creating Feeds: Share Your Content
+-------------------------------------
 
 Generate professional RSS feeds from your data with ease:
 
@@ -251,8 +251,8 @@ println( "✅ Feed created with #feedItems.size()# items" );
 ```
 
 
-🎙️ Create Your Own Podcast Feed {#h2-9-create-your-own-podcast-feed}
----------------------------------------------------------------------
+🎙️ Create Your Own Podcast Feed
+--------------------------------
 
 Launch your podcast with full iTunes support:
 
@@ -305,8 +305,8 @@ println( "🎙️ Podcast feed created!" );
 ```
 
 
-📊 Create Feeds from Database Queries {#h2-10-create-feeds-from-database-queries}
----------------------------------------------------------------------------------
+📊 Create Feeds from Database Queries
+-------------------------------------
 
 Generate feeds directly from your database:
 
@@ -347,8 +347,8 @@ bx:feed
 ```
 
 
-🎯 Flexible Output Options {#h2-11-flexible-output-options}
------------------------------------------------------------
+🎯 Flexible Output Options
+--------------------------
 
 The module gives you multiple ways to access feed data:
 
@@ -371,8 +371,8 @@ println( "XML length: #rawXml.len()# chars" );
 ```
 
 
-🔌 MCP Server Integration {#h2-12-mcp-server-integration}
----------------------------------------------------------
+🔌 MCP Server Integration
+-------------------------
 
 Want even more power? Connect to our **Model Context Protocol (MCP) server** for enhanced documentation and AI-assisted development:
 
@@ -385,8 +385,8 @@ This gives you:
 * Real-time assistance
 * Context-aware suggestions
 
-📚 Complete Documentation {#h2-13-complete-documentation}
----------------------------------------------------------
+📚 Complete Documentation
+-------------------------
 
 The bx-rss module is fully documented with extensive examples, best practices, and troubleshooting guides:
 
@@ -402,8 +402,8 @@ Topics covered:
 * Security considerations
 * Troubleshooting common issues
 
-🎯 Use Cases {#h2-14-use-cases}
--------------------------------
+🎯 Use Cases
+------------
 
 The bx-rss module is perfect for:
 
@@ -416,8 +416,8 @@ The bx-rss module is perfect for:
 * 🏢 **Enterprise Content** - Syndicate internal content
 * 🤖 **Automation** - Trigger workflows from feed updates
 
-✨ Why Choose bx-rss? {#h2-15-why-choose-bx-rss}
------------------------------------------------
+✨ Why Choose bx-rss?
+--------------------
 
 #### Enterprise-Grade Quality
 
@@ -439,8 +439,8 @@ Drop-in replacement for `cffeed` - migrate existing applications with minimal ch
 
 Built on BoxLang's modern architecture with continued support and feature updates.
 
-🚀 Get Started Today {#h2-16-get-started-today}
------------------------------------------------
+🚀 Get Started Today
+--------------------
 
 ```java
 # Install the module
@@ -452,8 +452,8 @@ println( feedData.items.size() );
 ```
 
 
-📞 Support \& Community {#h2-17-support-community}
---------------------------------------------------
+📞 Support \& Community
+-----------------------
 
 * **BoxLang+/++** : [https://boxlang.io/plans](https://boxlang.io/plans "https://boxlang.io/plans")
 * **Documentation** : [https://boxlang.ortusbooks.com/boxlang-framework/modularity/rss](https://boxlang.ortusbooks.com/boxlang-framework/modularity/rss "https://boxlang.ortusbooks.com/boxlang-framework/modularity/rss")
@@ -461,8 +461,8 @@ println( feedData.items.size() );
 * **BoxLang Community** : [https://community.ortussolutions.com/](https://community.ortussolutions.com/ "https://community.ortussolutions.com/")
 * **Ortus Solutions** : [ortussolutions.com](https://www.ortussolutions.com/ "ortussolutions.com")
 
-🎉 Final Thoughts {#h2-18-final-thoughts}
------------------------------------------
+🎉 Final Thoughts
+-----------------
 
 The bx-rss module brings professional RSS and Atom feed capabilities to BoxLang, making it easier than ever to integrate syndication into your applications. Whether you're reading feeds, creating podcasts, or building a content aggregator, bx-rss has you covered.
 

@@ -20,8 +20,8 @@ You didn't install a native binary. You didn't configure JNI. You didn't cross-c
 
 This is the same pattern that already powers the web. Every day, millions of people use Google Sheets, Figma, or Photoshop without knowing that WebAssembly is what makes those applications possible. Wasm is already invisible infrastructure in the browser. Now the same thing is happening on the JVM.
 
-The problem every Java developer knows {#h2-0-the-problem-every-java-developer-knows}
--------------------------------------------------------------------------------------
+The problem every Java developer knows
+--------------------------------------
 
 Some of the best libraries in the world are written in C, C++, Rust, or Go. SQLite. QuickJS. Protocol Buffers. OPA. They are battle-tested, widely deployed, and actively maintained. At some point, every Java project wants to use one of them.
 
@@ -29,15 +29,15 @@ The options have never been great. You can rewrite the library in Java, but that
 
 For decades, this trade-off felt permanent. You could have the capability, or you could have the JVM's guarantees. Not both.
 
-What if the library just ran inside the JVM? {#h2-1-what-if-the-library-just-ran-inside-the-jvm}
-------------------------------------------------------------------------------------------------
+What if the library just ran inside the JVM?
+--------------------------------------------
 
 WebAssembly changes this equation. Take a proven C or Rust library, compile it to Wasm, and run it *within* JVM boundaries. You keep everything the JVM gives you: guaranteed memory safety, fault isolation, platform independence, advanced JIT, observability, and the "write once, run anywhere" promise. The Wasm module becomes just another artifact inside your JAR, an implementation detail that your users never need to think about.
 
 This isn't a theoretical possibility. It's happening right now, in production, across a growing ecosystem of Java libraries.
 
-The ecosystem: it's already here {#h2-2-the-ecosystem-it-s-already-here}
-------------------------------------------------------------------------
+The ecosystem: it's already here
+--------------------------------
 
 **SQLite4j** is a pure-Java JDBC driver for SQLite. The real SQLite, compiled to WebAssembly and embedded in a JAR. Before: you shipped platform-specific native binaries for every OS and architecture your users might run on, and hoped your CI matrix covered them all. After: one JAR, everywhere. Same SQLite, zero native dependencies. Add a Maven dependency and you have an embedded relational database.
 
@@ -55,8 +55,8 @@ And the list keeps growing: **Debezium** single message transforms, **OpenFeatur
 
 The pattern is always the same. Take a proven library. Compile it to Wasm. Wrap it in a JAR. Ship it on Maven Central. Your users add a dependency and get the capability. No JNI, no platform matrix, no native binary management. **Wasm becomes the implementation detail.**
 
-Endive: a new chapter for WebAssembly on the JVM {#h2-3-endive-a-new-chapter-for-webassembly-on-the-jvm}
---------------------------------------------------------------------------------------------------------
+Endive: a new chapter for WebAssembly on the JVM
+------------------------------------------------
 
 This entire ecosystem was built on [Chicory](https://github.com/dylibso/chicory), a pure-Java WebAssembly runtime started in September 2023. Within two years it went from experiment to infrastructure, powering production systems across multiple organizations and proving that WebAssembly fits naturally into Java applications.
 
@@ -70,8 +70,8 @@ Further out, the roadmap includes WasmGC, enabling the Java garbage collector to
 
 For the full story on the fork, the governance model, and the migration path for existing Chicory users, see the [Bytecode Alliance announcement](https://bytecodealliance.org/articles/endive-and-the-next-chapter-of-webassembly-on-the-jvm).
 
-Compose, don't rewrite {#h2-4-compose-don-t-rewrite}
-----------------------------------------------------
+Compose, don't rewrite
+----------------------
 
 The future isn't about rewriting native libraries in Java. It isn't about wrestling with JNI or maintaining platform-specific builds. It's about *composing* your application from components written in any language (Rust, C, Go, Python, JavaScript) through WebAssembly.
 
@@ -81,8 +81,8 @@ Java has always been about writing code once and running it anywhere. WebAssembl
 
 Wasm becomes the invisible glue. The implementation detail that makes it all work, without you even noticing.
 
-Get involved {#h2-5-get-involved}
----------------------------------
+Get involved
+------------
 
 The [Endive repository](https://github.com/bytecodealliance/endive) is already available. The first release will prioritize strong continuity with Chicory, preserving compatibility and documenting migration steps clearly.
 

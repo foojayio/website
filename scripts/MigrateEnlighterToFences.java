@@ -71,6 +71,13 @@ public class MigrateEnlighterToFences {
             Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
     /** A fence line, split into indent / backtick run / info string. */
     static final Pattern FENCE_LINE = Pattern.compile("^([ \\t]*)(`{3,})(.*)$");
+    /** An inline code span: a backtick run, its content, the same run again. */
+    static final Pattern CODE_SPAN = Pattern.compile("(`+)([^`]+)\\1");
+    /** A Markdown link/image destination: the text up to whitespace or `)` inside `](...)`. */
+    static final Pattern LINK_DEST = Pattern.compile("(?<=\\]\\()([^()\\s]+)");
+    /** Any HTML tag. Marks a line as belonging to a preserved raw-HTML block,
+     *  where entities are correct as written and backticks are not code spans. */
+    static final Pattern HTML_TAG = Pattern.compile("(?i)<[a-z][a-z0-9]*(\\s[^<>]*)?/?>|</[a-z][a-z0-9]*>");
 
     public static void main(String[] args) throws IOException {
         boolean dryRun = false;
@@ -177,9 +184,22 @@ public class MigrateEnlighterToFences {
      * single definition of which entities are safe to resolve, shared with the
      * conversion scripts so a re-scrape produces the same result.
      *
-     * Scoped to fence BODIES on purpose. In prose an `&amp;` is ordinary
-     * Markdown that the author typed, and preserved raw-HTML blocks (embeds,
-     * galleries, inline SVG) need their entities exactly as they are.
+     * Covers the three places WP damage can land, and only those:
+     *
+     *   fence bodies      -- via resolveDoubleEscaped, as before.
+     *   inline code spans -- same rule, same reason: Markdown does not decode
+     *       entities inside `...` either, so `DESCRIBE KEYSPACE &lt;name>`
+     *       renders as a literal `&lt;`.
+     *   link destinations -- via resolveEscapedUrl. `[x](...?a=1&amp;b=2)` is
+     *       CORRECT Markdown (CommonMark decodes entities in destinations), so
+     *       only the over-escaped `&amp;amp;` is a bug; resolveEscapedUrl
+     *       collapses the surplus levels and leaves a single one alone.
+     *
+     * Everything else is left exactly as it is. Bare prose keeps its entities --
+     * an `&amp;` there is ordinary Markdown the author typed, and one post has a
+     * TABLE of entity names as its subject matter. Lines carrying an HTML tag are
+     * skipped wholesale: they are preserved raw-HTML blocks (embeds, galleries,
+     * inline SVG) where `&amp;` is correct markup, not damage.
      */
     static String fixFenceEntities(String body, int[] fixedLines) {
         String[] lines = body.split("\n", -1);
@@ -190,7 +210,15 @@ public class MigrateEnlighterToFences {
             if (openMarker == null) {
                 // Opening fence. A backtick in the info string means this isn't
                 // one (inline code can start a line), so it's treated as prose.
-                if (isFence && m.group(3).indexOf('`') < 0) openMarker = m.group(2);
+                if (isFence && m.group(3).indexOf('`') < 0) {
+                    openMarker = m.group(2);
+                    continue;
+                }
+                String fixedProse = fixProseLine(lines[i]);
+                if (!fixedProse.equals(lines[i])) {
+                    lines[i] = fixedProse;
+                    fixedLines[0]++;
+                }
                 continue;
             }
             // Closing fence: at least as long as the opener, nothing else on it.
@@ -205,6 +233,20 @@ public class MigrateEnlighterToFences {
             }
         }
         return String.join("\n", lines);
+    }
+
+    /**
+     * Repairs a single line of prose: inline code spans and link destinations.
+     * A line containing an HTML tag is returned untouched -- see fixFenceEntities.
+     */
+    static String fixProseLine(String line) {
+        if (line.indexOf('&') < 0 || HTML_TAG.matcher(line).find()) return line;
+        String out = LINK_DEST.matcher(line).replaceAll(r ->
+                Matcher.quoteReplacement(HtmlToMarkdown.resolveEscapedUrl(r.group(1))));
+        out = CODE_SPAN.matcher(out).replaceAll(r ->
+                Matcher.quoteReplacement(r.group(1)
+                        + HtmlToMarkdown.resolveDoubleEscaped(r.group(2)) + r.group(1)));
+        return out;
     }
 
     /**

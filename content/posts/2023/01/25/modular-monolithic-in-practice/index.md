@@ -28,8 +28,8 @@ But there will be times when creating too many microservices is not the best way
 
 Because of that, one alternative is to leverage the use of modules.
 
-Modules {#h2-0-modules}
------------------------
+Modules
+-------
 
 Modularity is a concept that is used to build applications to separate logical units through modules, giving you *highly cohesive* code.
 
@@ -37,8 +37,8 @@ These modules are analogous to a compartment where you put a specific feature of
 
 Creating modules has different benefits during software development, whether ground-up or maintenance.
 
-Modular Monolithic {#h2-1-modular-monolithic}
----------------------------------------------
+Modular Monolithic
+------------------
 
 Modular Monolithic is an architectural style where your code is structured on the concept of modules.
 
@@ -53,14 +53,14 @@ In practice, this style is used when you don't want to manage different applicat
 * Greenfield Development - when starting out a new application we wouldn't want to build our applications immediately in microservice. This may cause over-engineering and high maintenance cost with no reason.
 * Cost of developers - Too many services is costly to an organization. This can be seen where the organization is in the stage of budgeting and has few developers in place.
 
-Architecture {#h2-2-architecture}
----------------------------------
+Architecture
+------------
 
 The architecture of the Modular Monolithic is quite simple. It's in a single project with different components separated into a well-defined logical directory. The modules or projects (for multi-module) defines their own way to prevent leaking of their implementation. The multi-module can define what to expose via custom configuration of Gradle while Spring Modulith leverages the use of *internal* modules.
 
 This can be deployed to cloud using a single Dockerfile or a Multi-container approach using Docker Compose or Kubernetes-based technology. The application used in this demonstration is Spring and Gradle and a new module under Spring Framework called [Spring Modulith](https://spring.io/projects/spring-modulith)*.*
 
-### Multi-Module {#h3-3-multi-module}
+### Multi-Module
 
 ![Gradle Multi-module](modular-monolithic-gradle-700x455.png)
 
@@ -76,7 +76,7 @@ The *application* project is your main project that will invoke your services an
 
 Sub-modules itself can have their own Gradle lifecycle which is controlled by their own build file. In their, you can define on what to expose or not.
 
-### Spring Modulith {#h3-4-spring-modulith}
+### Spring Modulith
 
 ![Spring Modulith Architecture](modular-monolithic-modulith-700x341.png)
 
@@ -88,7 +88,7 @@ For scenarios where you want to create another service, you can just create anot
 
 Although under the hood, Spring Modulith uses the multi-module approach too in its respective sub-functionalities. This technology can help us improve the way we create modules especially in Spring.
 
-### Cloud Deployment {#h3-5-cloud-deployment}
+### Cloud Deployment
 
 ![Modular Monolithic Cloud Deployment](modular-monolithic-deployment.png)
 
@@ -96,8 +96,8 @@ So far I've discussed the approaches to create a modular monolithic application 
 
 To deploy your application to cloud, you can do the single Dockerfile deployment which contains a single image of your application or deploy it in multi-container style which can be done by a single image (single jar) or multi-image (multiple jars). The multi-module approach can deploy the sub-projects as a multi-container deployment since it can have its own image (jar file). For Spring Modulith, since internally it can be a multi-module, the modulith application can be still be deployed in a single or multiple deployments.
 
-Final Thoughts {#h2-6-final-thoughts}
--------------------------------------
+Final Thoughts
+--------------
 
 It is understandable that developers will opt to microservices since it gives flexibility of technology to be used, style of deployment and decoupling of functionalities.
 
@@ -107,8 +107,8 @@ Problems arise where microservices becomes a Distributed Monolithic, which defea
 
 In this post, I've presented an option called Modular Monolithic which is an alternative for the complexity seen in microservices and how modularity can be integrated to your software requirements.
 
-Further Reading {#h2-7-further-reading}
----------------------------------------
+Further Reading
+---------------
 
 * [Spring Modulith Reference Documentation](https://docs.spring.io/spring-modulith/docs/current/reference/html/)
 * [Modular Monolithic by JRebel](https://www.jrebel.com/blog/what-is-a-modular-monolith#when-to-use-modular-monoliths)

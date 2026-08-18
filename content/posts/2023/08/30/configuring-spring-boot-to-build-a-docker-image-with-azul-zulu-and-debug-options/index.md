@@ -24,10 +24,10 @@ frozen: false
 *The Spring Boot Maven Plugin makes creating a Docker image from your application very easy! In this article, we give you some extra tips and examples for configuring Spring Boot to define the Java runtime used in such a Spring Boot Docker image and explain how to add additional environmental options to ease debugging.*
 ![](azul-zulu-springboot-docker-1024x400.jpg)
 >
-> ### For this post, I got the help of [DaShaun Carter](https://twitter.com/dashaun), Spring Developer Advocate, who immediately jumped in when I raised some questions about these configuration options. Thanks, DaShaun! {#h3-0-for-this-post-i-got-the-help-of-dashaun-carter-spring-developer-advocate-who-immediately-jumped-in-when-i-raised-some-questions-about-these-configuration-options-thanks-dashaun}
+> ### For this post, I got the help of [DaShaun Carter](https://twitter.com/dashaun), Spring Developer Advocate, who immediately jumped in when I raised some questions about these configuration options. Thanks, DaShaun!
 >
-Spring Boot Petclinic Project {#h-spring-boot-petclinic-project}
-----------------------------------------------------------------
+Spring Boot Petclinic Project
+-----------------------------
 
 To illustrate our approach, we'll use the Spring Boot Petclinic project, a Spring Boot application built using Maven or Gradle, to demonstrate how a Spring Boot project is set up fully and how the code is structured and must be packaged.
 
@@ -39,8 +39,8 @@ $ cd spring-petclinic
 ```
 
 
-Modify and extend the default settings {#h2-2-modify-and-extend-the-default-settings}
--------------------------------------------------------------------------------------
+Modify and extend the default settings
+--------------------------------------
 
 We just need a few additional configurations in the `spring-boot-maven-plugin` section in the `pom.xml` file of the project to modify the OpenJDK distribution in the generated Docker image and add additional debug settings. Don't change the executions; just insert the configuration section. The goal of this Docker image is to use the Azulu Zulu Build of OpenJDK as the runtime and to include all possible debug and test tools, so it has all the following options. Of course, which ones you use will depend on your use case.
 
@@ -88,7 +88,7 @@ To better understand this section, we need to look at all the different options 
   * **BPE_**: image embedded environment variables.
   * **BPL_** : runtime features of the app image, which are set as environment variables in the app container. You must append them with `BPE_DEFAULT_` to "bake" them into the container image to automatically use them.
 
-### Building the Docker image {#h3-3-building-the-docker-image}
+### Building the Docker image
 
 At this point, building the Docker image is a single-line command, and the output will show a few references to the Azul JDK and our settings after the various test cycles:
 
@@ -167,8 +167,8 @@ $ ./mvnw spring-boot:build-image
 ```
 
 
-Checking the created Docker images {#h2-4-checking-the-created-docker-images}
------------------------------------------------------------------------------
+Checking the created Docker images
+----------------------------------
 
 During the build process, various images were downloaded and created. As you can see, there are more than we may expect, but a few of these are used during the unit tests.
 
@@ -187,8 +187,8 @@ spring-petclinic             3.1.0-SNAPSHOT   c05d70c78109   43 years ago   496M
 ```
 
 
-Running the Docker image {#h2-5-running-the-docker-image}
----------------------------------------------------------
+Running the Docker image
+------------------------
 
 You can now start the Docker image. Three ports are configured for various use cases:
 
@@ -228,8 +228,8 @@ JMX enabled on port 5000
 ```
 
 
-Validating the Docker image {#h2-6-validating-the-docker-image}
----------------------------------------------------------------
+Validating the Docker image
+---------------------------
 
 At this point, you can perform various steps to validate the Docker image we created with the additional settings:
 
@@ -287,12 +287,12 @@ Launcher Type: SUN_STANDARD
 ```
 
 
-Making use of the logging and debug configurations {#h2-7-making-use-of-the-logging-and-debug-configurations}
--------------------------------------------------------------------------------------------------------------
+Making use of the logging and debug configurations
+--------------------------------------------------
 
 Analyzing and debugging the application inside Docker with the various tools and configurations is beyond the scope of this article. But we can validate all of them quickly to confirm their correct configuration, and how you can use them.
 
-### Getting files out of the Docker {#h3-8-getting-files-out-of-the-docker}
+### Getting files out of the Docker
 
 You can copy both the JFR recording and the Garbage Collector files inside the Docker image to your PC.
 
@@ -302,7 +302,7 @@ $ docker cp petclinic:/tmp/gc.log gc.log
 ```
 
 
-### Connecting to debug {#h3-9-connecting-to-debug}
+### Connecting to debug
 
 From within your IDE, for instance, IntelliJ IDEA, you can start a debug connection to the running application inside the Docker via port 8000 and set breakpoints in your code.
 
@@ -320,7 +320,7 @@ Connected to the target VM, address: 'localhost:8000', transport: 'socket'
  </figure>
 </figure>
 
-### Connecting to JMX {#h3-10-connecting-to-jmx}
+### Connecting to JMX
 
 The JMX connection configured on port 5000 allows you to connect to the running application inside the Docker with VisualVM or [Azul Mission Control](https://docs.azul.com/azul-mission-control/). For instance, you can start a JFR recording for a given duration and get the results immediately visualized.
 
@@ -338,8 +338,8 @@ Click on any of the three images below for a larger image.
  </figure>
 </figure>
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 This post's extended `pom.xml` configuration includes various ways to enable remote debugging and generate log files.
 
@@ -353,8 +353,8 @@ And... mission accomplished!
 
 <br />
 
-Read more {#h2-12-read-more}
-----------------------------
+Read more
+---------
 
 * [Video created by DaShaun Carter](https://www.youtube.com/watch?v=6FfP3v40il8)
 * Paketo docs:

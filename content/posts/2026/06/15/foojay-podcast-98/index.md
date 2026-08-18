@@ -21,13 +21,13 @@ frozen: false
 
 WebAssembly is already running inside Java applications, most developers just don't know it yet. In this episode, Andrea Peruffo walks us through how WebAssembly is becoming the modern, safe alternative to JNI: letting you run Rust, C, and other native libraries directly on the JVM, without the crash risks, the per-platform distribution headaches, or the observability blackhole that JNI creates. From JRuby's Prism parser to SQLite and Postgres running as pure Java bytecode, the use cases are real and the project Endive, under the Bytecode Alliance, is ready to explore.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube BCbJwLphhsU >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -35,8 +35,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guest {#h2-2-guest}
--------------------
+Guest
+-----
 
 **Andrea Peruffo**   
 
@@ -46,8 +46,8 @@ WebAssembly engineer, creator of Chicory, maintainer of Endive under the Bytecod
 * [LinkedIn](https://www.linkedin.com/in/andrea-peruffo-32269178/)
 * [Bluesky](https://bsky.app/profile/andreatp.bsky.social)
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * Foojay post: [A New Generation of Java Libraries: Wasm Becomes the Implementation Detail](https://foojay.io/today/a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail/)
 * [Chicory --- WebAssembly interpreter for the JVM](https://github.com/dylibso/chicory)
@@ -56,8 +56,8 @@ Links {#h2-3-links}
 * [Bytecode Alliance](https://bytecodealliance.org)
 * [OpenJDK Project Detroit](https://openjdk.org/projects/detroit/)
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 * 00:00 Introduction of topic and guests
 * 00:56 What is WebAssembly?

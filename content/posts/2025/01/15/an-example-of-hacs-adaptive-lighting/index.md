@@ -22,8 +22,8 @@ frozen: false
 
 The first step when wanting to add a feature to Home Assistant is to browse through available integrations. While there was no out-of-the-box integration, I discovered an alternative: HACS.
 
-The Home Assistant Community Store {#h2-0-the-home-assistant-community-store}
------------------------------------------------------------------------------
+The Home Assistant Community Store
+----------------------------------
 
 Before implementing your integration, you should know about [Home Assistant Community Store](https://hacs.xyz/) or HACS. HACS is a **third-party integration store**. If Home Assistant doesn't offer the necessary integration, there's a considerable chance somebody published it on HACS.
 
@@ -41,7 +41,7 @@ Once you install it, it appears in the integration list.
 
 On HACS, we can search for a relevant integration. Indeed, there's [Adaptive Lighting](https://github.com/basnijholt/adaptive-lighting):
 
-### Adaptive Lighting {#h3-1-adaptive-lighting}
+### Adaptive Lighting
 
 > Adaptive Lighting is a custom component for Home Assistant that intelligently adjusts the brightness and color of your lights 💡 based on the sun's position, while still allowing for manual control.
 >
@@ -77,8 +77,8 @@ The configuration can be quite intimidating, with its many parameters. You can u
 
 Depending on your setup, you can configure a single light, a couple of them, or all. I added only a single one, the one managed by the sensor.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, we configured the Adaptive Lighting integration to our Home Assistant. We can now benefit from different intensities based on the time of the day.
 

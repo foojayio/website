@@ -42,16 +42,16 @@ Materialized views are useful for speeding up queries that are repeated.
 
 Instead of performing resource-intensive queries against large datasets in different sources, your applications can query a materialized view and retrieve a precomputed result.
 
-Before you Begin {#h2-0-before-you-begin}
------------------------------------------
+Before you Begin
+----------------
 
 You need the following:
 
 * A Hazelcast Viridian cluster. This tutorial assumes that you have a production cluster: <https://docs.hazelcast.com/cloud/create-serverless-cluster>
 * A basic understanding of Kafka: <https://hazelcast.com/glossary/kafka/>
 
-Step 1. Set Up the Hazelcast CLI {#h2-1-step-1-set-up-the-hazelcast-cli}
-------------------------------------------------------------------------
+Step 1. Set Up the Hazelcast CLI
+--------------------------------
 
 You need to use the Hazelcast CLI in later steps to open connections to the SQL shell of your Viridian cluster: <https://docs.hazelcast.com/hazelcast/latest/getting-started/get-started-cli>
 
@@ -69,8 +69,8 @@ bin/hz-cli -f hazelcast-client-with-ssl.yml sql
 ```
 
 
-Step 2. Create a Free Confluent Cloud Kafka Cluster {#h2-2-step-2-create-a-free-confluent-cloud-kafka-cluster}
---------------------------------------------------------------------------------------------------------------
+Step 2. Create a Free Confluent Cloud Kafka Cluster
+---------------------------------------------------
 
 1. Create a Confluent Cloud account: <https://confluent.cloud/signup>
 2. Create a Basic cluster.
@@ -84,8 +84,8 @@ Step 2. Create a Free Confluent Cloud Kafka Cluster {#h2-2-step-2-create-a-free-
 10. Click **Download and continue**. The configuration snippet now includes your API key and secret.
 11. Copy the code in your configuration snippet from the top to session.timeout.ms=45000. You won't use the Schema Registry in this tutorial.
 
-Step 3. Create a Mapping to the Confluent Cloud Cluster {#h2-3-step-3-create-a-mapping-to-the-confluent-cloud-cluster}
-----------------------------------------------------------------------------------------------------------------------
+Step 3. Create a Mapping to the Confluent Cloud Cluster
+-------------------------------------------------------
 
 To allow Hazelcast to access the trades topic that you created in your Confluent Cloud Kafka cluster, you need to create a mapping to it.
 
@@ -196,8 +196,8 @@ SELECT ticker, price_usd, amount
 ```
 
 
-Step 4. Enrich the Data in the Kafka Messages {#h2-4-step-4-enrich-the-data-in-the-kafka-messages}
---------------------------------------------------------------------------------------------------
+Step 4. Enrich the Data in the Kafka Messages
+---------------------------------------------
 
 To reduce network latency, Kafka messages are often small and contain minimal data.
 
@@ -240,8 +240,8 @@ ON companies.ticker = trades.ticker;
 ```
 
 
-Step 5. Create a Materialized View {#h2-5-step-5-create-a-materialized-view}
-----------------------------------------------------------------------------
+Step 5. Create a Materialized View
+----------------------------------
 
 You can set up an automated job to continuously run the streaming query and cache the results in a Hazelcast map.
 
@@ -306,8 +306,8 @@ SELECT * FROM trade_map;
 ```
 
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 You've learned how to connect Hazelcast Viridian to a Confluent Cloud Kafka cluster as well as the following:
 

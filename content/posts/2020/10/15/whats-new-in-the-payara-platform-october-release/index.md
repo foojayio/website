@@ -24,7 +24,7 @@ Meanwhile, the Payara Community Edition introduces support for the Jakarta EE 9 
 
 Read more below to find out the details!
 
-### Payara InSight is Coming to Payara Server Enterprise {#h3-0-payara-insight-is-coming-to-payara-server-enterprise}
+### Payara InSight is Coming to Payara Server Enterprise
 
 Accessible from within the Payara Enterprise Admin Console, the new[Payara InSight](https://docs.payara.fish/enterprise/docs/5.22.0/documentation/user-guides/monitoring/monitoring-console.html)(real-time monitoring console) features a new and improved GUI. Easily add, remove, and refresh metrics to monitor, change your layout, and customize alerts and watches of the health status of your applications.
 
@@ -33,7 +33,7 @@ To maintain the security of your Payara InSight settings, you can set three leve
 Payara InSight Demo is coming very soon, so watch this space! Meanwhile, you can give it a go yourself - [request access to Payara Enterprise Edition here.](https://www.payara.fish/page/payara-enterprise-downloads/)
 ![Screen Shot 2020-10-13 at 10.36.07 AM](https://blog.payara.fish/hs-fs/hubfs/Screen%20Shot%202020-10-13%20at%2010.36.07%20AM.png?width=808&name=Screen%20Shot%202020-10-13%20at%2010.36.07%20AM.png)
 
-### Tooling Enhancements in Payara Platform Enterprise {#h3-1-tooling-enhancements-in-payara-platform-enterprise}
+### Tooling Enhancements in Payara Platform Enterprise
 
 #### **IntelliJ IDEA Support**
 
@@ -53,7 +53,7 @@ In the upcoming release of Apache NetBeans (planned for release at the end of [N
 
 We've also fixed the Payara Micro integration[issue](https://issues.apache.org/jira/browse/NETBEANS-4559) and removed the derby integration from the Payara Server tools.
 
-### Other Minor Enhancements in Payara Platform Enterprise {#h3-2-other-minor-enhancements-in-payara-platform-enterprise}
+### Other Minor Enhancements in Payara Platform Enterprise
 
 #### **Remote EJB Tracing**
 
@@ -65,7 +65,7 @@ With the OpenID Connect session timeout functionality, the expiry time of the Ac
 
 This update also includes the possibility to perform a programmatic logout. The new feature is available within Payara Server and Payara Micro Enterprise.
 
-### Notifier API Update in Payara Platform Community {#h3-3-notifier-api-update-in-payara-platform-community}
+### Notifier API Update in Payara Platform Community
 
 The notification service received a major overhaul in Payara Server Community this month! It makes implementing new notifiers in a modular fashion easier. The overhaul also involved rewriting the existing notifiers as extensions, porting them over to a new community repository, and then implementing new Discord and Microsoft Teams notifiers.
 
@@ -73,17 +73,17 @@ Since this is quite a large change, we're rolling it out in Payara Server Commun
 
 More info on this update is coming soon in a separate article so watch this space!
 
-### Eclipse Transformer Configuration Option with Jakarta EE 9 Milestone Release {#h3-4-eclipse-transformer-configuration-option-with-jakarta-ee-9-milestone-release}
+### Eclipse Transformer Configuration Option with Jakarta EE 9 Milestone Release
 
 Payara Services is one of the leading contributor companies of the Jakarta EE and [Eclipse GlassFish](https://projects.eclipse.org/projects/ee4j.glassfish/who) projects. We now provide the support of the Jakarta EE 9 Platform as a *Tech Preview* feature in Payara Server Community 5.2020.5 to give our users an opportunity to try out the new Jakarta EE 9 namespace and start experimenting and migrating their applications. Do not migrate your production apps at this time - this is basically a proof of concept, and a tool for getting us from Jakarta EE 8 to Jakarta EE 9.
 
-### Ongoing MicroProfile Enhancements in Payara Platform Community {#h3-5-ongoing-microprofile-enhancements-in-payara-platform-community}
+### Ongoing MicroProfile Enhancements in Payara Platform Community
 
 We've added the\`add-to-microprofile-health\` option to the \`set-healthcheck-service-configuration\` command, which will add the configured Payara Health checks such as CPU Usage, Heap Usage etc. to the MicroProfile health endpoint as readiness checks. This is especially useful for cloud environments, as container orchestration tools such as Kubernetes and Docker Swarm can now stop distributing requests to servers which are highly contested.
 
 In future releases, we intend to make further improvements to our [MicroProfile](https://docs.payara.fish/community/docs/5.2020.5/documentation/microprofile/README.html) support to develop the experience of using these features, and more tightly integrate them with other Payara Server features.
 
-### Release Notes {#h3-6-release-notes}
+### Release Notes
 
 The Enterprise Release ([request here](https://www.payara.fish/page/payara-enterprise-downloads/)) includes 3 new features, 13 bug fixes, 8 improvements and 1 component upgrade; while the Community Release ([direct download here](https://www.payara.fish/downloads/payara-platform-community-edition/)) includes 4 new features, 26 bug fixes, 18 improvements, 1 security fix and 1 component upgrade.
 
@@ -92,7 +92,7 @@ See more detailed overview of the fixes and improvements in the Release Notes:
 * [Payara Platform Community Edition 5.2020.5](https://docs.payara.fish/community/docs/5.2020.5/release-notes/release-notes-2020-5.html)
 * [Payara Platform Enterprise Edition 5.22.0](https://docs.payara.fish/enterprise/docs/5.22.0/release-notes/release-notes-22-0.html)
 
-### Download The Latest Payara Platform Release {#h3-7-download-the-latest-payara-platform-release}
+### Download The Latest Payara Platform Release
 
 Don't forget to update your Payara Platform to the new version! You can [Download the Payara Community Edition here](https://www.payara.fish/downloads/payara-platform-community-edition/), or request the Payara Enterprise Edition [via this form.](https://www.payara.fish/page/payara-enterprise-downloads/)
 

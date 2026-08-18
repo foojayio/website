@@ -28,13 +28,13 @@ frozen: false
 
 Just one year ago, in March 2024, we launched BoxLang AI 1.0. Today, we're thrilled to announce **BoxLang AI v2**---a massive leap forward that positions BoxLang as one of the most powerful and versatile AI framework on the JVM. This release is 9-months in the making, with over 100 new features! This would have not been possible without all the new features that the BoxLang JVM language exposes to developers like: Server Side Events, HTTP Streaming, HTTP pooling, Caching, and so much more.
 
-What Makes This Release Groundbreaking? {#h2-0-what-makes-this-release-groundbreaking}
---------------------------------------------------------------------------------------
+What Makes This Release Groundbreaking?
+---------------------------------------
 
 BoxLang AI v2 isn't an incremental update---it's a complete transformation. We've added **over 100 new features** that make building production-grade AI applications faster, simpler, and more powerful than ever.
 
-🎯 Summary {#h2-1-summary}
---------------------------
+🎯 Summary
+----------
 
 BoxLang AI v2 delivers a complete AI platform with unprecedented capabilities:
 
@@ -57,8 +57,8 @@ BoxLang AI v2 delivers a complete AI platform with unprecedented capabilities:
 * ⏰ **Autonomous Scheduling** - Create self-running agents on any OS with BoxLang Scheduler  
   This release transforms BoxLang into the most comprehensive AI development platform available, with zero vendor lock-in and production-grade reliability.
 
-🤖 Autonomous AI Agents {#h2-2-autonomous-ai-agents}
-----------------------------------------------------
+🤖 Autonomous AI Agents
+-----------------------
 
 Build intelligent agents that think, remember, and act independently. Agents are the crown jewel of BoxLang AI v2---capable of multi-step reasoning, tool usage, memory management, and delegation.
 
@@ -99,8 +99,8 @@ response = agent.run( "Find John's order, check inventory, and update shipping" 
 **- Context Awareness** - Maintain conversation history across sessions  
 **- Error Handling** - Automatic retry logic and graceful degradation
 
-⚡ Serverless AI Agents on AWS Lambda {#h2-3-serverless-ai-agents-on-aws-lambda}
--------------------------------------------------------------------------------
+⚡ Serverless AI Agents on AWS Lambda
+------------------------------------
 
 Deploy AI agents as **serverless functions** using the [BoxLang AWS Runtime](https://boxlang.ortusbooks.com/getting-started/running-boxlang/aws-lambda "BoxLang AWS Runtime"):
 
@@ -126,8 +126,8 @@ function handler( event, context ) {
 * Enterprise-grade reliability  
   Get started with our AWS Lambda Starter Template.
 
-🔄 Autonomous Agents with BoxLang Scheduler {#h2-4-autonomous-agents-with-boxlang-scheduler}
---------------------------------------------------------------------------------------------
+🔄 Autonomous Agents with BoxLang Scheduler
+-------------------------------------------
 
 Create truly autonomous agents that run on schedules---no servers required:
 
@@ -154,8 +154,8 @@ class {
 
 Deploy autonomous agents on **any OS** with the [BoxLang Scheduler](https://boxlang.ortusbooks.com/boxlang-framework/asynchronous-programming/scheduled-tasks "BoxLang Scheduler").
 
-🧬 Multi-Tenant Vector Memory \& RAG {#h2-5-multi-tenant-vector-memory-rag}
----------------------------------------------------------------------------
+🧬 Multi-Tenant Vector Memory \& RAG
+------------------------------------
 
 Enterprise-grade isolation with 10+ vector databases:
 
@@ -184,8 +184,8 @@ response = agent.run( "What did we discuss about Q4 projections?" );
 
 **Supported Vector DBs**: ChromaDB, Pinecone, PostgreSQL+pgvector, Weaviate, Qdrant, Milvus, and more.
 
-📚 Document Loaders for 30+ Formats {#h2-6-document-loaders-for-30-formats}
----------------------------------------------------------------------------
+📚 Document Loaders for 30+ Formats
+-----------------------------------
 
 Load and process documents from any source:
 
@@ -210,8 +210,8 @@ result = aiDocuments( "/docs", { type: "markdown" } )
 
 **Supported formats**: PDF, Word, CSV, JSON, XML, Excel, Markdown, HTML, databases, web scraping, and more.
 
-🔌 12+ AI Provider Support {#h2-7-12-ai-provider-support}
----------------------------------------------------------
+🔌 12+ AI Provider Support
+--------------------------
 
 One API for all major providers:
 
@@ -234,8 +234,8 @@ response = aiChat(
 
 **Providers:** OpenAI, Claude, Gemini, Grok, Groq, DeepSeek, Ollama, Mistral, Cohere, Perplexity, OpenRouter, HuggingFace.
 
-📡 Model Context Protocol (MCP) {#h2-8-model-context-protocol-mcp}
-------------------------------------------------------------------
+📡 Model Context Protocol (MCP)
+-------------------------------
 
 Full MCP support for building distributed AI systems. Create your own MCP servers or integrate with ANY external MCP-compatible system using the fluent `MCP()` function.
 
@@ -297,8 +297,8 @@ pipeline = aiModel( "grok" )
 * Mix MCP tools with local function tools
 * Full protocol compliance for interoperability
 
-📦 Native Structured Output {#h2-9-native-structured-output}
-------------------------------------------------------------
+📦 Native Structured Output
+---------------------------
 
 Get type-safe, validated responses directly from AI models. No more parsing JSON strings or handling malformed responses.
 
@@ -334,8 +334,8 @@ println( invoice.getTotal() );
 * Array responses
 * Nested complex objects
 
-🌊 Streaming Support {#h2-10-streaming-support}
------------------------------------------------
+🌊 Streaming Support
+--------------------
 
 Real-time token streaming for responsive applications thanks to BoxLang:
 
@@ -361,8 +361,8 @@ pipeline = aiModel( "openai" )
 ```
 
 
-⚡ Async Operations {#h2-11-async-operations}
---------------------------------------------
+⚡ Async Operations
+------------------
 
 Non-blocking futures for concurrent AI requests:
 
@@ -386,8 +386,8 @@ future1.thenApply( ( result ) => processResult( result ) )
 ```
 
 
-🔗 AI Pipelines {#h2-12-ai-pipelines}
--------------------------------------
+🔗 AI Pipelines
+---------------
 
 Build composable workflows with models, transformers, and custom logic:
 
@@ -417,8 +417,8 @@ result = pipeline.invoke( inputData );
 * Handle errors gracefully
 * Monitor execution time
 
-🎯 Event-Driven Architecture {#h2-13-event-driven-architecture}
----------------------------------------------------------------
+🎯 Event-Driven Architecture
+----------------------------
 
 25+ lifecycle events for observability and control:
 
@@ -458,8 +458,8 @@ interceptorService.listen( "onAIError", ( data ) => {
 * Model invocation
 * Pipeline execution
 
-🏭 Production-Ready Features {#h2-14-production-ready-features}
----------------------------------------------------------------
+🏭 Production-Ready Features
+----------------------------
 
 Built for enterprise deployment:
 
@@ -514,8 +514,8 @@ response = aiChat(
 ```
 
 
-🦙 Local AI with Ollama {#h2-16-local-ai-with-ollama}
------------------------------------------------------
+🦙 Local AI with Ollama
+-----------------------
 
 Zero API costs, complete privacy, offline capability:
 
@@ -542,8 +542,8 @@ response = agent.run( "Analyze this confidential document" );
 * No rate limits
 * Full control
 
-🎯 Real-World Use Cases {#h2-17-real-world-use-cases}
------------------------------------------------------
+🎯 Real-World Use Cases
+-----------------------
 
 **Customer Support Automation:**
 
@@ -586,42 +586,42 @@ scheduler.task( "Weekly Report" )
 ```
 
 
-📖 Comprehensive Learning Resources {#h2-18-comprehensive-learning-resources}
------------------------------------------------------------------------------
+📖 Comprehensive Learning Resources
+-----------------------------------
 
 We've built a complete ecosystem to help you master BoxLang AI:
 
-### 🌐 Official Website {#h3-19-official-website}
+### 🌐 Official Website
 
 [ai.boxlang.io](https://ai.boxlang.io/ "ai.boxlang.io") - Features, examples, and quickstart guides
 
-### 📚 Complete Documentation {#h3-20-complete-documentation}
+### 📚 Complete Documentation
 
 [ai.ortusbooks.com](https://ai.ortusbooks.com/ "ai.ortusbooks.com") - Full API reference and guides
 
-### 🎓 Free AI Bootcamp {#h3-21-free-ai-bootcamp}
+### 🎓 Free AI Bootcamp
 
 [BoxLang AI Bootcamp](https://github.com/ortus-boxlang/bx-ai/tree/development/bootcamp "BoxLang AI Bootcamp") - Hands-on training from basics to advanced
 
-### 💻 60+ Code Examples {#h3-22-60-code-examples}
+### 💻 60+ Code Examples
 
 [Examples Gallery](https://github.com/ortus-boxlang/bx-ai/tree/development/examples "Examples Gallery") - Real-world implementations
 
-### 🏢 Professional Services {#h3-23-professional-services}
+### 🏢 Professional Services
 
 [ai.ortussolutions.com](https://ai.ortussolutions.com/ "ai.ortussolutions.com") - Enterprise consulting and support
 
-🚀 Getting Started {#h2-24-getting-started}
--------------------------------------------
+🚀 Getting Started
+------------------
 
-### **OS Applications** {#h3-25-os-applications}
+### **OS Applications**
 
 ```bash
 install-bx-module bx-ai
 ```
 
 
-### **AWS Lambda** {#h3-26-aws-lambda}
+### **AWS Lambda**
 
 ```bash
 cd src/resources
@@ -629,14 +629,14 @@ install-bx-module bx-ai --local
 ```
 
 
-### Web Applications {#h3-27-web-applications}
+### Web Applications
 
 ```bash
 box install bx-ai
 ```
 
 
-### Your First Agent {#h3-28-your-first-agent}
+### Your First Agent
 
 ```java
 agent = aiAgent(
@@ -650,32 +650,32 @@ println( response );
 ```
 
 
-Why BoxLang AI v2 Matters {#h2-29-why-boxlang-ai-v2-matters}
-------------------------------------------------------------
+Why BoxLang AI v2 Matters
+-------------------------
 
-### For Developers: {#h3-30-for-developers}
+### For Developers:
 
 * One fluent API for all AI providers
 * No vendor lock-in
 * Production-ready with timeouts, retries, and error handling
 * Local AI support with Ollama (zero API costs)  
 
-  ### For Enterprises: {#h3-31-for-enterprises}
+  ### For Enterprises:
 
 * Multi-tenant isolation
 * Enterprise-grade memory systems
 * Serverless deployment options
 * Professional support available  
 
-  ### For the Ecosystem: {#h3-32-for-the-ecosystem}
+  ### For the Ecosystem:
 
 * 100% open source (Apache 2)
 * Active community
 * Extensive documentation
 * Real-world examples
 
-The Year Ahead {#h2-33-the-year-ahead}
---------------------------------------
+The Year Ahead
+--------------
 
 In just 12 months, we've transformed BoxLang AI from a simple chat wrapper into a comprehensive AI platform. But we're not stopping here.
 
@@ -700,8 +700,8 @@ In just 12 months, we've transformed BoxLang AI from a simple chat wrapper into 
 
 **The future of AI development is here. It's written in BoxLang.**
 
-Get Started TodayGet Started Today {#h2-34-get-started-todayget-started-today}
-------------------------------------------------------------------------------
+Get Started TodayGet Started Today
+----------------------------------
 
 * Documentation: [ai.ortusbooks.com](https://ai.ortusbooks.com/ "ai.ortusbooks.com")
 * Website: [ai.boxlang.io](https://ai.boxlang.io/ "ai.boxlang.io")

@@ -28,12 +28,12 @@ It's been a while since I published the [intro to the duplicate finder project](
 
 Before starting to write the program code, it makes sense to lay down the requirements first. A good way to do this is by writing tests. Not only will the tests help us develop faster, but they will also ensure that the code adheres to the specification.
 
-Requirements {#h2-0-requirements}
----------------------------------
+Requirements
+------------
 
 In this section, I've formulated my idea of the duplicate finder's core features. These work well for my applications. However, as each project might have different needs, I would be happy to hear and implement your ideas.
 
-### Detecting both exact and fuzzy matches {#h3-1-detecting-both-exact-and-fuzzy-matches}
+### Detecting both exact and fuzzy matches
 
 The duplicate detection tool should be capable of finding both exact and fuzzy matches with granularity down to individual symbols.
 
@@ -51,11 +51,11 @@ This *is an example text* that the duplicate finder tool should detect *consiste
 
 Additionally, in the case of fuzzy duplicates, the degree of similarity should be measurable. This would allow us to quickly evaluate the duplicate pairs and sort them by how closely the text fragments resemble each other.
 
-### Language-agnostic {#h3-2-language-agnostic}
+### Language-agnostic
 
 Given the multitude of potential target languages, it would be nice to support as many of them as possible. Some approaches might require separate maintenance for every added language, which is not at all scalable and requires lots of resources. Ideally, the tool should use some heuristic or language-agnostic algorithm for compatibility with any common language.
 
-### Configurable {#h3-3-configurable}
+### Configurable
 
 The criteria for identifying duplicates should be adjustable, with the settings along the lines of:
 
@@ -65,8 +65,8 @@ The criteria for identifying duplicates should be adjustable, with the settings 
 
 Generally, the longer and more frequently repeated a section is, the more beneficial it is to deduplicate it. However, it ultimately depends on the particular application, so it would be nice to have control over these thresholds.
 
-Definitions {#h2-4-definitions}
--------------------------------
+Definitions
+-----------
 
 With the basic requirements sorted out, it's time to get code definitions in place. At this stage, we'll need:
 
@@ -75,7 +75,7 @@ With the basic requirements sorted out, it's time to get code definitions in pla
 
 The code in this chapter doesn't need to be exhaustive and provide for every future use-case -- we can always come back for adjustments.
 
-### Chunk {#chunk}
+### Chunk
 
 When it comes to a unit of text, which details are important for us? For our purposes, I'd stick with the text that a fragment contains, the path to its containing file, its line number, and the type of the element -- in case the source is not just plain text:
 
@@ -91,7 +91,7 @@ class Chunk(
 
 This definition doesn't take into account some nuances. For example, we might leave out the `content` field. This would save us some RAM, but the tradeoff will be the speed of accessing the element's content, because then the program will have to read it from disk each time instead of only once. We're not fighting for performance right now, so a potentially suboptimal choice is fine.
 
-### Interface {#interface}
+### Interface
 
 We don't have an implementation yet, so we'll program against an interface. The interface defines what our function should take as input and what it should return as output, abstracting away the function's internals. This effectively creates a *contract*, allowing us to write tests right now, without coding the actual algorithm. In the future, the interface will also make alternative implementations compatible with the existing tests and client code.
 
@@ -128,8 +128,8 @@ val duplicateFinder: (Path, DuplicateFinderOptions) -> Map<Chunk, List<Chunk>> =
 
 This declaration means that the duplicate finder is a function that takes `Path, DuplicateFinderOptions` and outputs `Map<Chunk, List<Chunk>>` , and that the function itself is not yet implemented. This might not be the best style for large projects, but in smaller ones like ours, it works great.
 
-Test data {#h2-7-test-data}
----------------------------
+Test data
+---------
 
 Since the duplicate finder is supposed to work with text data, the tests will also need some texts to analyze. This means we need to prepare some examples containing fuzzy duplicates. Let's start with the duplicates:
 
@@ -192,8 +192,8 @@ fun injectDuplicates(testDataDir: String) = Files.list(Path.of(testDataDir)).toL
 ```
 
 
-Tests {#h2-8-tests}
--------------------
+Tests
+-----
 
 As already mentioned, the primary goal of the tests at this stage is to define the specification, so let's not waste too much time on perfecting the test suite. Instead, we'll write just enough to ensure that the future code adheres to the requirements.
 
@@ -240,7 +240,7 @@ private fun Map<Chunk, List<Chunk>>.texts() = (keys + values.flatten()).map { it
 ```
 
 
-Next steps {#h2-9-next-steps}
------------------------------
+Next steps
+----------
 
 We have established the requirements by defining the interface and writing the tests. In the next post of the series, we'll implement the actual algorithm and see how well it performs. See you soon!

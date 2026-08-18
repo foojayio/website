@@ -26,7 +26,7 @@ While the process introduces many new features, these new features sometimes cau
 
 An example of the second is [Scoped Values](https://openjdk.org/jeps/429 "Scoped Values") which has been included in the JDK since Java 20 as an incubator API.
 
-### Why were Scoped Values proposed? {#h3-0-why-were-scoped-values-proposed}
+### Why were Scoped Values proposed?
 
 [Virtual threads](https://openjdk.org/jeps/425 "Virtual threads") became a part of JDK as a preview feature in Java 19.
 
@@ -40,7 +40,7 @@ On the other hand, [ThreadLocal API](https://docs.oracle.com/en/java/javase/19/d
 
 At this point, given the aforementioned nature of virtual threads, some problems arise.
 
-### What is the problem? {#h3-1-what-is-the-problem}
+### What is the problem?
 
 The ThreadLocal API supports a fully general model of communication that allows any code to mutate the data by calling related methods(*eg set(), remove()*) at any time, so these variables are mutable.
 
@@ -58,7 +58,7 @@ Considering this described design flaws of thread-local variables, the drawbacks
 
 The Scoped Values API proposed to overcome the aforementioned potential problems. They should be preferred to thread-local variables, especially when using large numbers of virtual threads.
 
-### What are Scoped Values and how to use them? {#h3-2-what-are-scoped-values-and-how-to-use-them}
+### What are Scoped Values and how to use them?
 
 The Scoped Values API allows us to store and share immutable data for a bounded lifetime and only the thread that wrote the data can read it.
 
@@ -155,7 +155,7 @@ In short, the Scoped Values API doesn't allow a method body to change the bindin
 
 As soon as the run() call finishes in the getPaidByCreditCard() method, the binding reverts to its previous value.
 
-### How to enable cross-thread sharing? {#h3-3-how-to-enable-cross-thread-sharing}
+### How to enable cross-thread sharing?
 
 Java developers can create their own threads for many reasons. In such a case, if the code running in a child thread needs to access the scoped value how can access it?
 
@@ -203,7 +203,7 @@ Because, unlike thread-local variables, there is no copying of a parent thread's
 
 I created a [repository](https://github.com/hakdogan/scoped-values "repository") for the scenario discussed in this article, which you can examine.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 The Scoped Values API allows storing and sharing immutable data for a bounded lifetime.
 
@@ -215,7 +215,7 @@ Cross-thread sharing occurs with minimal overhead because no copying of a parent
 
 Note that Scoped Values and Structured Concurrency are still incubator APIs, so they may still be subject to fundamental changes.
 
-### References {#h3-5-references}
+### References
 
 * [Scoped Values](https://openjdk.org/jeps/429 "Scoped Values")
 * [Virtual Threads](https://openjdk.org/jeps/425 "Virtual Threads")

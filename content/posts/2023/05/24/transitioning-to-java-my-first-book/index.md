@@ -41,7 +41,7 @@ After about two months, I realized that there was far more to say to an experien
 
 I found myself agonizing over individual sentences. Writing the code samples that accompanied every chapter was also difficult because I needed to ensure that I was using the best practices. An attack of imposters syndrome came up every time a chapter went to my technical reviewers. But in the end the book was completed and is available now.
 
-### What is in this book? {#h3-0-what-is-in-this-book}
+### What is in this book?
 
 * It begins with a look at how Java is distributed and what is included when you download the SDK. Next up was the development environment. Here I made the decision to to keep this as simple as possible. All you needed was Java, a text editor, and Maven. The version of Java is 17 although a later chapter that looked at virtuakl threads needed Java 19. When Jakarta EE came up I used Glassfish. An entire chapter is dedicated to Maven.
 * Next up were language fundamentals. I am quite proud that this section of the book is "Hello World" free. Instead the first program calculates compound interest. There are 9 chapters covering the fundamentals I believe a developer new to Java should know.

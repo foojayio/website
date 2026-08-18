@@ -33,8 +33,8 @@ In this article, we'll look at [solid-state drives (SSDs)](https://en.wikipedia.
 
 What do Java and SSDs have in common? Garbage collection!
 
-How an SSD Writes Data {#h2-0-how-an-ssd-writes-data}
------------------------------------------------------
+How an SSD Writes Data
+----------------------
 
 Imagine you have created an application that actively uses an SSD. The application can use the SSD directly via the Java File API or indirectly through a database.
 
@@ -52,8 +52,8 @@ What about writes? Suppose the app needs to write some user data to disk. The ap
 
 The SSD will receive the write request from the database and will store data to a free page of one of its blocks. The SSD always writes new data to new pages, it never overwrites used ones.
 
-How an SSD Updates Data {#h2-1-how-an-ssd-updates-data}
--------------------------------------------------------
+How an SSD Updates Data
+-----------------------
 
 How does the device handle updates if the SSD never overwrites used pages?
 
@@ -67,8 +67,8 @@ Over time, the number of stale pages in the block keeps growing, leaving less an
 
 The stale pages are effectively garbage that needs to be removed. And the SSD has its own garbage collector.
 
-Garbage Collection in SSDs {#h2-2-garbage-collection-in-ssds}
--------------------------------------------------------------
+Garbage Collection in SSDs
+--------------------------
 
 Before getting into the garbage collection details of SSDs, let's find out why the device's inventors turned to this memory management technique. Why couldn't they just erase or overwrite used pages with stale data whenever new data arrived?
 
@@ -85,8 +85,8 @@ The garbage collection is a two-step process in SSDs:
 
 As Java developers, we know that the garbage collector needs free space in the heap to do its job efficiently. If the heap space becomes a scarce resource, then the collector can impact the performance of the app and even put it on hold with long stop-the-world pauses. Well, SSDs are similar here as well. If the SSD's garbage collector runs out of free blocks, be ready to take a performance hit.
 
-SSD Over-Provisioning {#h2-3-ssd-over-provisioning}
----------------------------------------------------
+SSD Over-Provisioning
+---------------------
 
 SSD manufacturers were aware of the negative impact that garbage collection can have on the performance of our applications. So, they came up with SSD over-provisioning, where each device comes with an extra space that is unavailable to the user.
 
@@ -102,8 +102,8 @@ As soon as the applications need to persist bigger volumes of data, less space w
 
 So, if your application's performance suddenly worsens and your disk I/O chart looks like the one above, tit might be your SSD garbage collector. If the SSD is 50% (or more) full, you may start noticing the impact of garbage collection. In this case, consider using an SSD with larger capacity, and see if you can optimize your write workloads.
 
-Wrapping Up {#h2-4-wrapping-up}
--------------------------------
+Wrapping Up
+-----------
 
 As you see, even SSDs use garbage collection to their advantage. If you'd like to learn more about SSD garbage collection internals, check out the following articles:
 

@@ -39,18 +39,18 @@ Since version 7, Eclipse GlassFish provides a lot of benefits not available with
 
 Here's an in-depth comparison highlighting the significant new features and improvements that address the limitations found in older GlassFish versions.
 
-### **Jakarta EE Standardization and Flexibility** {#jakarta-ee-standardization-and-flexibility}
+### **Jakarta EE Standardization and Flexibility**
 
 In legacy versions, GlassFish supported Java EE, but it was less flexible when implementing new features or APIs. Transitioning to the Eclipse Foundation gave GlassFish a fresh alignment with Jakarta EE, enabling it to incorporate major updates such as **Jakarta EE 10** with a more modular structure and lightweight API usage.
 
 * Jakarta EE 10 showcases flexibility with new features built on the **CDI** dependency injection container. Previously, Java EE relied heavily on EJB components, which combined unrelated features, required boilerplate code, and created heavy components---making it harder to build lightweight applications like microservices. By rebuilding this functionality on CDI, Jakarta EE 10 simplifies things with an annotation-driven model, enabling lightweight components with only the necessary features. This reduces memory usage and speeds up deployments.
 * **Better Java SE Compatibility** : Integrating newer Java SE language features into enterprise apps is now simpler with Jakarta EE 10. While legacy versions required workarounds to use Java's latest enhancements, developers can now use Java records, `var` declarations, virtual threads and other language-level improvements directly, bringing GlassFish in line with modern Java development practices.
 
-### **Compatibility with new Java versions** {#compatibility-with-new-java-versions}
+### **Compatibility with new Java versions**
 
 Legacy GlassFish runs only on Java 8 or older, while Eclipse GlassFish supports newer versions like Java 11, 17, 21, and 23. This enables applications to run on older Java versions for compatibility or upgrade to benefit from new features, JVM improvements, and security updates.
 
-### **Enhanced Security with Modern Protocols** {#enhanced-security-with-modern-protocols}
+### **Enhanced Security with Modern Protocols**
 
 Older GlassFish versions used a more monolithic security model with limited integration options, making it cumbersome to configure advanced authentication schemes without custom code. Security was largely based on GlassFish-specific realms and Java EE's standard security APIs, which didn't support OAuth2.0, OpenID Connect, or other modern protocols directly.
 
@@ -59,7 +59,7 @@ Older GlassFish versions used a more monolithic security model with limited inte
 * **Smoother Multi-Tenant Configurations**: Modern applications often serve multiple clients on the same infrastructure. Eclipse GlassFish supports more seamless multi-tenancy by allowing separate authentication configurations per tenant, a feature that older versions did not support effectively without manual setups.
 * Regular releases with **Security fixes**: Eclipse GlassFish includes critical security fixes that address vulnerabilities found in older versions. This reduces the risk of security breaches, making it safer for production environments. Regular security updates and regular monthly releases help ensure compliance with industry standards and protect sensitive data.
 
-### **Support for HTTP/2, REST and JSON Enhancements** {#support-for-http-2-rest-and-json-enhancements}
+### **Support for HTTP/2, REST and JSON Enhancements**
 
 While legacy GlassFish versions provided REST support with JAX-RS, it was limited in scope, focusing on basic RESTful communication without modern features such as HTTP/2 or server-sent events (SSE). JSON handling, likewise, was somewhat rigid, making complex object serialization a manual task.
 
@@ -68,14 +68,14 @@ While legacy GlassFish versions provided REST support with JAX-RS, it was limite
 * **Developer-friendly REST Client API**: The MicroProfile REST Client API in GlassFish makes it easy for developers to call RESTful services, reducing boilerplate code and simplifying setup with support for external configuration.
 * **Improved JSON Binding**: Jakarta JSON-B and JSON-P updates in Eclipse GlassFish reduce JSON serialization boilerplate. JSON-B now supports features like bidirectional mapping for complex objects, which legacy GlassFish versions handled less gracefully. This improvement is especially useful in microservices that rely heavily on JSON for data exchange, saving development time and improving maintainability.
 
-### **Cloud-Native Readiness and Containerization** {#cloud-native-readiness-and-containerization}
+### **Cloud-Native Readiness and Containerization**
 
 Older GlassFish versions were designed primarily for traditional data center deployments and required extensive configuration to run efficiently in cloud environments. Running GlassFish on containers such as Docker was possible, but it demanded workarounds to optimize memory, CPU usage, and health monitoring.
 
 * **Enhanced Container and Kubernetes Support**: Eclipse GlassFish has moved towards cloud-native application architecture, streamlining containerization and orchestration with Kubernetes. Pre-configured Docker images, optimized for fast startup and low memory usage, simplify GlassFish deployments. This helps with automating tasks such as scaling, load balancing, and health-checking.
 * **Microservices-Friendly Configuration** : GlassFish now supports lightweight deployments with optimized class loaders, reducing startup time and memory usage. The GlassFish Embedded distribution lets you build and run lightweight applications with a single command, without needing to install a server. Additionally, the **MicroProfile Config** API provides a modern, standardized way to manage external configurations, supporting common and custom configuration sources.
 
-### Conclusion {#conclusion}
+### Conclusion
 
 Eclipse GlassFish has clearly transformed from its legacy versions, evolving with features tailored to today's demands for flexibility, security, observability, and cloud-native capabilities.
 

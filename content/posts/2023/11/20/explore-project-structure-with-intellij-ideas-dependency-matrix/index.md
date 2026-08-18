@@ -24,8 +24,8 @@ When you are new to a project, the Dependency Matrix can help you get an overvie
 
 It offers a matrix of the components in our project to help you and highlights the usage flow between them. Let's take a look!
 
-Opening the Dependency Matrix {#h2-0-opening-the-dependency-matrix}
--------------------------------------------------------------------
+Opening the Dependency Matrix
+-----------------------------
 
 You can open the Dependency Matrix from the main menu by going to **Code \| Analyze Code \| Dependency Matrix**.
 
@@ -51,8 +51,8 @@ If the project's class files are out of date, the analysis may result in incompl
 
 The **DSM tool window** will open in a popup, showing a matrix of your project's components.
 
-Interpreting the Dependency Matrix {#h2-1-interpreting-the-dependency-matrix}
------------------------------------------------------------------------------
+Interpreting the Dependency Matrix
+----------------------------------
 
 Let's take a look at how to interpret the Dependency Matrix.
 
@@ -70,7 +70,7 @@ As you can see in the legend at the top right of the **DSM tool window**:
 * mutual or cyclic dependencies, meaning that two components depend on each other, are shown in red
 * dependencies flow from green to yellow.
 
-### Dependencies {#h3-2-dependencies}
+### Dependencies
 
 Dependencies are shown in blue. The numbers in the cells show the number of dependencies of the selected row on the selected column. An ellipsis (the three dots) in a cell means that there are more than 99 dependencies. Hover over the cell to get more information. In the example below, we see the tooltip "cucumber-java -\> cucumber-core (209)". This means that in this project the component cucumber-java (represented in the column) depends on the component cucumber-core 209 times.
 
@@ -98,7 +98,7 @@ You can drill down further into specific cells. When you click a cell, one compo
 
 We can drill down even further.
 
-### Expand components {#h3-3-expand-components}
+### Expand components
 
 Right now everything is collapsed and only the modules are shown. You can click a module to expand its packages. The module name is shown to the left, the packages are shown as rows and the dependencies between the packages are shown in the matrix inside the box marked with a black line.
 
@@ -108,7 +108,7 @@ You can expand the packages further to show the classes in that package, and see
 
 You can also expand the modules and packages by double-clicking a cell. We can collapse everything again by using the **Flatten Packages** button on the top left.
 
-### Limit scope {#h3-4-limit-scope}
+### Limit scope
 
 You can limit the scope of your Dependency Matrix. Right-click the row you want to look at in more detail, and from the context menu, select **Limit Scope To Selection**.
 
@@ -134,7 +134,7 @@ Notice how you can now select the module or directory as scope for the Dependenc
 
 ![Analyze Dependency Matrix scope](analyze-dependency-matrix-scope.png)
 
-### Navigate to relevant code {#h3-5-navigate-to-relevant-code}
+### Navigate to relevant code
 
 We can also navigate to the relevant code from the Dependency Matrix. To select a specific dependency for further source-code analysis, right-click the dependency you are interested in in the **DSM tool window** , and select **Find Usages for Dependencies**.
 
@@ -152,7 +152,7 @@ And remember that all windows can be opened from **Recent Files** (**⌘E** on m
 
 ![Reopen Dependency Matrix](recent-files-dsm.png)
 
-### Cyclic dependencies {#h3-6-cyclic-dependencies}
+### Cyclic dependencies
 
 Remember from the legend that mutual or cyclic dependencies are shown in red. This means that two components depend on each other.
 
@@ -160,14 +160,14 @@ In a large application with multiple cyclic dependencies, you don't need to expa
 
 ![Dependency Matrix - Go to Next Cycle](go-to-next-cycle.png)
 
-Summary {#h2-7-summary}
------------------------
+Summary
+-------
 
 In this tutorial you've seen how the Dependency Matrix can help visualize and explore dependencies between components in  
 
 your project.
 
-### IntelliJ IDEA Shortcuts Used {#h3-8-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -179,7 +179,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Recent Files        | **⌘E**         | **Ctrl+E**               |
 | Go to Next Cycle    | **F2**         | **F2**                   |
 
-### Related Links {#h3-9-related-links}
+### Related Links
 
 * [(video) JetBrains - IntelliJ IDEA: Explore project structure with the Dependency Matrix](https://youtu.be/moi49_V_4g0)
 * [(docs) JetBrains - Dependency Structure Matrix](https://www.jetbrains.com/help/idea/dsm-analysis.html)

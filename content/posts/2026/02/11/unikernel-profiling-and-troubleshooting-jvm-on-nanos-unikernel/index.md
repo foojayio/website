@@ -25,7 +25,7 @@ related_posts:
 frozen: false
 ---
 
-### Profiling a Java Application Running Inside an Unikernel with JProfiler {#h3-0-profiling-a-java-application-running-inside-an-unikernel-with-jprofiler}
+### Profiling a Java Application Running Inside an Unikernel with JProfiler
 
 Unikernels are often associated with minimalism and tight resource control.
 
@@ -82,10 +82,10 @@ Below is the complete `config.json` used for this setup:
 }
 ```
 
-Explanation {#h2-1-explanation}
--------------------------------
+Explanation
+-----------
 
-### Dirs {#h3-2-dirs}
+### Dirs
 
 ```json
 "Dirs":["myQuarkusApp","jprofiler15","tmp"]
@@ -99,7 +99,7 @@ These directories are embedded into the unikernel filesystem:
 
 
 
-### Args {#h3-3-args}
+### Args
 
 ```json
 "-agentpath:/jprofiler15/bin/linux-x64/libjprofilerti.so=port=8849,address=0.0.0.0"
@@ -122,7 +122,7 @@ Then we launch the application:
 
 
 
-### RunConfig {#h3-4-runconfig}
+### RunConfig
 
 ```json
 "Ports": ["8080","8849"]
@@ -135,7 +135,7 @@ We expose:
 
 
 
-### BaseVolumeSz {#h3-5-basevolumesz}
+### BaseVolumeSz
 
 ```json
 "BaseVolumeSz": "300m"
@@ -151,8 +151,8 @@ From the project root directory, run:
 ops pkg load AngeloRubens/SemeruJREx64Linux:25.0.1 --nightly -c config.json
 ```
 
-What this command does {#h2-6-what-this-command-does}
------------------------------------------------------
+What this command does
+----------------------
 
 * Loads IBM Semeru JRE 25 (OpenJ9)
 * Applies our local `config.json`
@@ -192,8 +192,8 @@ This confirms:
 
 
 
-Instrumentation Phase {#h2-7-instrumentation-phase}
----------------------------------------------------
+Instrumentation Phase
+---------------------
 
     JProfiler> Enabling native methods instrumentation.
     JProfiler> Can retransform classes.
@@ -208,8 +208,8 @@ This means:
 
 
 
-Final State {#h2-8-final-state}
--------------------------------
+Final State
+-----------
 
     JProfiler> Retransforming 11 base class files.
     JProfiler> Base classes instrumented.

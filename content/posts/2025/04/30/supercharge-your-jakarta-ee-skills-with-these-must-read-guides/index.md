@@ -27,66 +27,66 @@ Let's dive in.
 
 
 
-![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Getting Started with Jakarta EE {#getting-started-with-jakarta-ee}
---------------------------------------------------------------------------------------------------------------------------------
+![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Getting Started with Jakarta EE
+---------------------------------------------------------------------------------------------
 
 Before building complex enterprise apps, it's important to get the basics right. These starter guides will help you build a solid foundation --- with real code examples and clear explanations.
 
-### 1. [How to Start with Servlets](https://jakarta.ee/learn/starter-guides/how-to-start-with-servlets/) {#1-how-to-start-with-servlets}
+### 1. [How to Start with Servlets](https://jakarta.ee/learn/starter-guides/how-to-start-with-servlets/)
 
 The humble Servlet is at the heart of Jakarta EE. If you're new to the platform or just need a refresher, this guide walks you through creating and deploying a basic servlet, handling requests and responses, and understanding the servlet lifecycle.
 
-### 2. [How to Build a RESTful Web Service](https://jakarta.ee/learn/starter-guides/how-to-build-a-restful-web-service/) {#2-how-to-build-a-restful-web-service}
+### 2. [How to Build a RESTful Web Service](https://jakarta.ee/learn/starter-guides/how-to-build-a-restful-web-service/)
 
 Once you're comfortable with servlets, it's time to move into REST APIs. This hands-on guide shows how to use Jakarta RESTful Web Services (JAX-RS) to create your first API, define endpoints, and return JSON data --- a must for any modern application.
 
-### 3. [How to Store and Retrieve Data Using Jakarta Persistence](https://jakarta.ee/learn/starter-guides/how-to-store-and-retrieve-data-using-jakarta-persistence/) {#3-how-to-store-and-retrieve-data-using-jakarta-persistence}
+### 3. [How to Store and Retrieve Data Using Jakarta Persistence](https://jakarta.ee/learn/starter-guides/how-to-store-and-retrieve-data-using-jakarta-persistence/)
 
 You'll eventually need to persist data --- and this guide has you covered. Learn how to map entities, perform CRUD operations, and interact with relational databases using Jakarta Persistence (JPA).
 
-### 4. [How to Secure a RESTful Web Service](https://jakarta.ee/learn/starter-guides/how-to-secure-a-restful-web-service/) {#4-how-to-secure-a-restful-web-service}
+### 4. [How to Secure a RESTful Web Service](https://jakarta.ee/learn/starter-guides/how-to-secure-a-restful-web-service/)
 
 Security is never an afterthought. This guide walks you through adding authentication and authorization to your REST endpoints using Jakarta Security --- including how to protect resources and validate user credentials.
 
 
 
-![🧠](https://s.w.org/images/core/emoji/15.0.3/svg/1f9e0.svg) Understand the Specs Behind the Scenes {#understand-the-specs-behind-the-scenes}
-----------------------------------------------------------------------------------------------------------------------------------------------
+![🧠](https://s.w.org/images/core/emoji/15.0.3/svg/1f9e0.svg) Understand the Specs Behind the Scenes
+----------------------------------------------------------------------------------------------------
 
 Now that you've built something with Jakarta EE, it's time to go deeper. These **specification guides** break down the key technologies behind the platform --- not just how to use them, but how they work under the hood.
 
-### 5. [Servlet, Faces, and Server Pages Explained](https://jakarta.ee/learn/specification-guides/servlet-faces-and-server-pages-explained/) {#5-servlet-faces-and-server-pages-explained}
+### 5. [Servlet, Faces, and Server Pages Explained](https://jakarta.ee/learn/specification-guides/servlet-faces-and-server-pages-explained/)
 
 This guide connects the dots between Jakarta Servlet, Jakarta Faces (JSF), and JSP. Learn when and why you'd use each, and how they form the foundation of Jakarta EE's web layer.
 
-### 6. [Persistence Explained](https://jakarta.ee/learn/specification-guides/persistence-explained/) {#6-persistence-explained}
+### 6. [Persistence Explained](https://jakarta.ee/learn/specification-guides/persistence-explained/)
 
 If you're curious about how Jakarta Persistence really works --- including the EntityManager lifecycle, transactions, and querying --- this is the deep dive you need.
 
-### 7. [RESTful Web Services Explained](https://jakarta.ee/learn/specification-guides/restful-web-services-explained/) {#7-restful-web-services-explained}
+### 7. [RESTful Web Services Explained](https://jakarta.ee/learn/specification-guides/restful-web-services-explained/)
 
 Want to master JAX-RS? This guide explains how it fits into the Jakarta EE platform, its key annotations and behaviors, and best practices for building scalable APIs.
 
-### 8. [Security, Authorization, and Authentication Explained](https://jakarta.ee/learn/specification-guides/security-authorization-and-authentication-explained/) {#8-security-authorization-and-authentication-explained}
+### 8. [Security, Authorization, and Authentication Explained](https://jakarta.ee/learn/specification-guides/security-authorization-and-authentication-explained/)
 
 Take your security skills to the next level. This resource unpacks how Jakarta Security works, including identity stores, role-based access, and integrating with other specs like CDI.
 
-### 9. [Contexts and Dependency Injection (CDI) Explained](https://jakarta.ee/learn/specification-guides/contexts-dependency-injection-explained/) {#9-contexts-and-dependency-injection-cdi-explained}
+### 9. [Contexts and Dependency Injection (CDI) Explained](https://jakarta.ee/learn/specification-guides/contexts-dependency-injection-explained/)
 
 CDI is the glue that holds Jakarta EE together. This guide shows how to inject beans, manage lifecycles, and write decoupled, testable code that just works.
 
-### 10. [Concurrency Explained](https://jakarta.ee/learn/specification-guides/concurrency-explained/) {#10-concurrency-explained}
+### 10. [Concurrency Explained](https://jakarta.ee/learn/specification-guides/concurrency-explained/)
 
 Want to scale your apps? You need to understand concurrency. This guide covers managed executors, thread safety, and how Jakarta EE handles background tasks the right way.
 
-### 11. [Jakarta EE Platform Explained](https://jakarta.ee/learn/specification-guides/jakarta-ee-platform/) {#11-jakarta-ee-platform-explained}
+### 11. [Jakarta EE Platform Explained](https://jakarta.ee/learn/specification-guides/jakarta-ee-platform/)
 
 Finally, this high-level overview ties everything together --- showing how all the specs in Jakarta EE fit into a cohesive platform for building robust, cloud-ready enterprise applications.
 
 
 
-![📚](https://s.w.org/images/core/emoji/15.0.3/svg/1f4da.svg) Wrap-Up: Learn. Build. Grow. {#wrap-up-learn-build-grow}
-----------------------------------------------------------------------------------------------------------------------
+![📚](https://s.w.org/images/core/emoji/15.0.3/svg/1f4da.svg) Wrap-Up: Learn. Build. Grow.
+------------------------------------------------------------------------------------------
 
 Jakarta EE is a mature, powerful platform --- but it's also approachable, thanks to resources like these. Whether you're just starting out or looking to sharpen your enterprise Java chops, these guides will take you step-by-step from beginner to seasoned developer.
 

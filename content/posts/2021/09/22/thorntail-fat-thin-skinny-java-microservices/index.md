@@ -27,8 +27,8 @@ frozen: false
 
 Below we will describe how to build and deploy Thorntail based applications using Fat, Thin and Skinny approaches. The application will be packaged in the Jar/War format automatically with the help of [Builder add-ons](https://github.com/jelastic-jps/thorntail) prepared by Jelastic. The topology will consist of Maven build node and JVM containers for running microservices.
 
-Thorntail Fat Jar Builder Installation {#h2-0-thorntail-fat-jar-builder-installation}
--------------------------------------------------------------------------------------
+Thorntail Fat Jar Builder Installation
+--------------------------------------
 
 <figure class="aligncenter is-resized">
  <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/09/instal-thorntail-fat-jar-builder-e1536655546281.png" alt="wildfly swarm" class="wp-image-30137" width="524" height="350">
@@ -61,8 +61,8 @@ When the installation and building of the project are completed, a corresponding
 
 Afterward, you can make sure, that application is up and running by pressing **Open in browser** button.
 
-Thorntail Skinny Jar Builder Installation {#h2-1-thorntail-skinny-jar-builder-installation}
--------------------------------------------------------------------------------------------
+Thorntail Skinny Jar Builder Installation
+-----------------------------------------
 
 <figure class="aligncenter is-resized">
  <img loading="lazy" decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/09/instal-thorntail-skinny-jar-builder.png" alt="build jar" class="wp-image-30139" width="599" height="401">
@@ -91,8 +91,8 @@ When the installation and building of the project are completed, a corresponding
 
 Afterward, you can make sure, that application is up and running by pressing **Open in browser** button.
 
-Thorntail Thin War Builder Installation {#h2-2-thorntail-thin-war-builder-installation}
----------------------------------------------------------------------------------------
+Thorntail Thin War Builder Installation
+---------------------------------------
 
 <figure class="aligncenter is-resized">
  <img loading="lazy" decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/09/instal-thorntail-thin-jar-builder.png" alt="thin jar" class="wp-image-30141" width="597" height="397">
@@ -118,8 +118,8 @@ When the installation and building of the project are completed, a corresponding
 
 Afterward, you can make sure, that application is up and running by pressing **Open in browser** button.
 
-Multiple Thorntail Projects with Microservices {#h2-3-multiple-thorntail-projects-with-microservices}
------------------------------------------------------------------------------------------------------
+Multiple Thorntail Projects with Microservices
+----------------------------------------------
 
 <figure class="aligncenter is-resized">
  <img loading="lazy" decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/09/multiple-thorntail-projects-with-microservices.png" alt="thorntail wildfly swarm" class="wp-image-30151" width="683" height="341">

@@ -40,8 +40,8 @@ Here we can see the rationale for adding the new option:
 So the purpose of `PrintMemoryMapAtExit` is to provide information about the memory layout of a JVM process that might exit before you get a chance to use other tools like   
 `jcmd System.map` or OS tools for reading memory layout details.
 
-What's in the JVM's memory map? {#h2-0-what-s-in-the-jvm-s-memory-map}
-----------------------------------------------------------------------
+What's in the JVM's memory map?
+-------------------------------
 
 I'll let the new option explain what information it can display.
 
@@ -91,8 +91,8 @@ As a Java developer these JVM memory regions aren't something you usually need t
 
 Where this new JVM option might be interesting to you as a developer is if you are using memory mapped files in your application code.
 
-Memory mapping in Java {#h2-1-memory-mapping-in-java}
------------------------------------------------------
+Memory mapping in Java
+----------------------
 
 Memory mapping is a technique for treating addressable regions that are outside the bounds of your program as being addressable from within your program.
 

@@ -25,8 +25,8 @@ This Java Challenge is one of the hardest ones, are you ready for this one? Now 
 
 It's time to improve your Java skills with this Hidden Dracula Polymorphism Challenge...
 
-Hidden Dracula Polymorphism Challenge {#h2-0-hidden-dracula-polymorphism-challenge}
------------------------------------------------------------------------------------
+Hidden Dracula Polymorphism Challenge
+-------------------------------------
 
 What will happen after running the following code?
 

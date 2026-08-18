@@ -136,6 +136,7 @@ public final class HtmlToMarkdown {
      * the content tree, so a page and its images are managed together.
      */
     public static Result convert(Element content, Options opts, String itemSubpath) {
+        repairEscapedUrls(content);
         localizeImages(content, opts, itemSubpath);
         boolean jdoodle = !content.select(SELECTOR_JDOODLE).isEmpty();
         boolean enlighterjs = !content.select(SELECTOR_ENLIGHTERJS).isEmpty();
@@ -154,6 +155,14 @@ public final class HtmlToMarkdown {
      */
     static String toMarkdown(Element content) {
         List<String> preserved = new ArrayList<>();
+
+        // WordPress stamps every heading with a positional anchor
+        // (<h2 id="h2-2-where-the-dedup-check-actually-lives">), which Flexmark
+        // faithfully carries over as Markdown attribute syntax -- `## Title
+        // {#h2-2-...}`. Dropped here so Hugo generates its own readable id from
+        // the heading text instead. See StripHeadingAnchors.java for the
+        // reasoning and for the one-off cleanup of already-converted content.
+        content.select("h1, h2, h3, h4, h5, h6").removeAttr("id");
 
         // YouTube embeds -> Hugo shortcode. Done first so the wrapping
         // figure.wp-block-embed isn't grabbed by SELECTOR_PRESERVE below.
@@ -179,6 +188,19 @@ public final class HtmlToMarkdown {
             String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
             preserved.add(codeFence(el.wholeText(), el.attr("data-enlighter-language")));
             el.replaceWith(new Element("p").text(token));
+        }
+
+        // Inline <code> spans left over (the EnlighterJS ones are gone by now).
+        // Flexmark turns these into backtick spans, where -- exactly as in a
+        // fence -- an entity is never what the author typed, it is WordPress's
+        // double-escaping. Without this a span reading `DESCRIBE KEYSPACE
+        // &lt;name>` survives into content/ and renders as literal `&lt;`,
+        // because Markdown does not decode entities inside code spans.
+        for (Element code : content.select("code")) {
+            if (code.parent() != null && "pre".equals(code.parent().tagName())) continue;
+            String text = code.wholeText();
+            String fixed = resolveDoubleEscaped(text);
+            if (!fixed.equals(text)) code.text(fixed);
         }
 
         // Code widgets, embeds and galleries -> raw HTML (done before the image
@@ -278,6 +300,43 @@ public final class HtmlToMarkdown {
         // URL query separator: preceded by the end of a value, followed by `key=`.
         s = s.replaceAll("(?<=[?&\\w])&amp;(?=[A-Za-z_][\\w.-]*=)", "&");
         return s;
+    }
+
+    /**
+     * Strips the surplus escaping WordPress leaves in a URL attribute.
+     *
+     * Companion to resolveDoubleEscaped, for the other place WP damage lands.
+     * Jsoup has already decoded one level by the time an attribute value gets
+     * here, so a correctly-stored `?a=1&amp;b=2` arrives as `?a=1&b=2` and this
+     * finds nothing to do. A LEFTOVER `&amp;` therefore means the source was
+     * over-escaped, and there is no reading of a URL where the query separator
+     * is meant to be the six characters `&amp;` -- so it is resolved, repeatedly,
+     * since WP bodies carry `&amp;amp;` (three levels) as well as two.
+     *
+     * Deliberately unconditional, unlike the `&amp;` handling in
+     * resolveDoubleEscaped: that method inspects arbitrary code, where `&amp;`
+     * can be correct source, whereas this one only ever sees an href/src.
+     * Idempotent: once resolved there is nothing left for a second run.
+     */
+    public static String resolveEscapedUrl(String url) {
+        if (url == null || !url.contains("&amp;")) return url;
+        String prev;
+        do {
+            prev = url;
+            url = url.replace("&amp;", "&");
+        } while (!url.equals(prev));
+        return url;
+    }
+
+    /** Applies resolveEscapedUrl to every href/src in the body. */
+    static void repairEscapedUrls(Element content) {
+        for (Element el : content.select("[href], [src]")) {
+            for (String attr : new String[]{"href", "src"}) {
+                if (!el.hasAttr(attr)) continue;
+                String fixed = resolveEscapedUrl(el.attr(attr));
+                if (!fixed.equals(el.attr(attr))) el.attr(attr, fixed);
+            }
+        }
     }
 
     /**

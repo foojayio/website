@@ -39,8 +39,8 @@ Most developers using AI tools are still guessing. The Eclipse Foundation's firs
  </figure>
 </figure>
 
-From Vibe to Systematic {#h2-0-from-vibe-to-systematic}
--------------------------------------------------------
+From Vibe to Systematic
+-----------------------
 
 The workshop kicked off with an important framing question: where are we in the AI coding journey? Jonas positioned AI assistance on a scale from 1 (basic code suggestions) to 5 (fully autonomous). We are now at level 4 with tools like Claude Code. Level 5 is approaching when fully cloud-based autonomous agents will be available.
 
@@ -48,8 +48,8 @@ Most developers today are still somewhere in the "vibe coding" zone. Vibe coding
 
 The fundamental shift the workshop is about, is moving beyond the experimentation phase toward something repeatable and systematic. That's what Jonas calls *Systematic AI Coding*: understanding how coding agents actually work, and building workflows around them, not just prompting and hoping.
 
-How a Coding Agent Actually Works {#h2-1-how-a-coding-agent-actually-works}
----------------------------------------------------------------------------
+How a Coding Agent Actually Works
+---------------------------------
 
 One of the most useful sessions was the breakdown of what happens inside a coding agent. It's easy to think of it as a magic box, but the mechanics matter a lot for using it well.
 
@@ -59,8 +59,8 @@ From there, the agent uses tools, calls the LLM, and generates a change set: fil
 
 A key insight: **the LLM is stateless and forgets immediately.** Every time it runs, you need to resend the full conversation history for it to understand what happened before. This has a real consequence as the context gets polluted and the cost rises because extra tokens are needed to handle the input. And there's a subtle trap called the "dumb zone": efficiency actually drops before you hit the context window limit. According to some experiments, this can already start at roughly ±40% of the context capacity. So a session that feels like it's still working might already be producing worse results.
 
-The Workflow {#h2-2-the-workflow}
----------------------------------
+The Workflow
+------------
 
 Once you understand how agents work, the practical workflow makes a lot more sense. It looks roughly like this: Your AI Agent generates output, and you need to **Review or Decide**. From there you have several options: escape (abort), refine (adjust the prompt), redo (start a fresh chat), divide the task further, compact the session, adjust the agent configuration, or commit what's working. Then repeat.
 
@@ -71,8 +71,8 @@ Two important take-aways from Jonas here:
 
 One tip I should follow: when your AI tool is working, don't start another session in another project. Look out the window and think about the actual problem you're solving within the project to better handle the result. Context-switching is expensive for humans too.
 
-Time Changes When You Use AI {#h2-3-time-changes-when-you-use-ai}
------------------------------------------------------------------
+Time Changes When You Use AI
+----------------------------
 
 Without AI, a developer typically spends roughly 70% of time on design and coding combined, and 30% on debugging. With AI, the split looks very different:
 
@@ -97,13 +97,13 @@ The work doesn't disappear, but it shifts. You spend more time thinking, reviewi
 2. Decide the follow-up action (refine, redo, split, etc.)
 3. Only if there are no remaining blockers: do a detailed review to finish the task
 
-Done ≠ Ready {#h2-4-done-ready}
--------------------------------
+Done ≠ Ready
+------------
 
 When an agent says it's done, that's not a green light to push. AI-generated code can quietly lower the quality, introduce security risks, and produce "work-slop" that frustrates your coworkers. Before pushing, do a review the way a careful coworker would.
 
-What Companies Need to Enable This {#h2-5-what-companies-need-to-enable-this}
------------------------------------------------------------------------------
+What Companies Need to Enable This
+----------------------------------
 
 Jonas highlighted a few important requirements that a company needs to provide to its developers if it wants to make systematic AI coding actually happen:
 
@@ -113,16 +113,16 @@ Jonas highlighted a few important requirements that a company needs to provide t
 
 That third one is often underrated. Individual experimentation is great, but if there's no mechanism to share what works, the team never levels up together.
 
-On the Eclipse Side {#h2-6-on-the-eclipse-side}
------------------------------------------------
+On the Eclipse Side
+-------------------
 
 There was also a short quiz by Thomas Froment that covered some Eclipse Foundation projects worth knowing about.
 
 * **Open VSX** is an open-source, vendor-neutral alternative to the Visual Studio Marketplace: an [open registry](https://open-vsx.org/), an [open-source project](https://projects.eclipse.org/projects/ecd.openvsx), and a working group.
 * [**Theia IDE**](https://theia-ide.org/) built on the [Theia Platform](https://theia-ide.org/theia-platform/), ## a modern, AI-native IDE for cloud and desktop. It has many handy AI-tools for developers, like showing every step an agent takes, token usage, a `@PR Review` agent that you can give a PR number to checkout, build, run, and create a review plan, etc.
 
-Final Thoughts {#h2-7-final-thoughts}
--------------------------------------
+Final Thoughts
+--------------
 
 Thanks to the Eclipse Foundation for the free tickets, for the perfect organization, and to everyone from BeJUG and Foojay who joined! This was their first workshop in this format, and I hope they bring it to many more cities soon. Thanks also to the sponsor (Open VSX) for a well-equipped venue and good food throughout the day.
 
@@ -130,7 +130,7 @@ It was a dense, practical day. This summary is only a small part of all the tips
 
 **AI coding isn't magic and it isn't a shortcut. It's a different kind of engineering discipline, with its own workflows, its own failure modes, and its own learning curve. The developers who benefit most are the ones who take it seriously and build repeatable processes on top of AI tooling.**
 
-This Post Was Co-Authored With Claude Code {#h2-8-this-post-was-co-authored-with-claude-code}
----------------------------------------------------------------------------------------------
+This Post Was Co-Authored With Claude Code
+------------------------------------------
 
 Jonas also highlighted that you can use AI tools for much more than coding alone. So, again in all honesty, Claude Code wrote the initial version of this blog during my train ride from Brussels back to Kortrijk. The tool read my handwritten reMarkable notes, exported as a PDF. But, of course, with a full review, rewrite, and fine-tuning by yours truly :-).

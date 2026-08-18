@@ -24,8 +24,8 @@ frozen: false
 
 This example shows you how to receive mails in Java either using the IMAP or the POP3 protocol. The SSL encrypted variants IMAPS and POP3S are also supported. Received mails will be set to read, which means that you will only receive the latest ones. I will also give some hints about how to handle incoming mails concerning application security. Remember that you should always sanitize user inputs.
 
-Receiving mails {#h2-0-receiving-mails}
----------------------------------------
+Receiving mails
+---------------
 
 You need to use to the following import statement `import javax.mail.*;` to be able to connect mail servers. The constructor of the client is straightforward. It is simply used to pass and store some values into fields, which are then used later on. We are interested in the protocol, host, port user and password. Valid values for the protocol are `imap`, `imaps`, `pop3` and `pop3s`.
 
@@ -43,7 +43,7 @@ public final class MailReceiveClient {
 ```
 
 
-### Connecting to the Server {#h3-1-connecting-to-the-server}
+### Connecting to the Server
 
 We use the following code sample to connect to the mail server. First we have to create new properties and add values with the defined protocol, host and port. We use these properties to create a Session. With this session we can create a Store and connect to the server using the given username and password.
 
@@ -89,7 +89,7 @@ public List<Mail> receive() {
 ```
 
 
-### Processing Mails {#h3-2-processing-mails}
+### Processing Mails
 
 The `getNewMails` method gets all the messages in the folder. An if condition is used to only process unseen messages. Afterwards the message is set to seen.
 
@@ -137,8 +137,8 @@ public final class Mail {
 
 You can read more about the mapping in the next chapter.
 
-Sanitizing received Mails {#h2-3-sanitizing-received-mails}
------------------------------------------------------------
+Sanitizing received Mails
+-------------------------
 
 When you are dealing with user input (you could also count mails to this) you should always worry about code injections. The best way to prevent these is sanitizing the inputs you receive. You can obviously do this with mails as well.
 
@@ -171,8 +171,8 @@ public final class MailMapper {
 
 The class can also be found on [GitHub](https://github.com/JensKnipper/greenmail-example/blob/main/src/main/java/de/jensknipper/greenmailexample/control/mail/mapper/MailMapper.java).
 
-Usage {#h2-4-usage}
--------------------
+Usage
+-----
 
 To get started simply fill in the constructor's parameters to connect to your mail server.  
 
@@ -194,8 +194,8 @@ You could also use Spring to create a bean using the `@Component` annotation and
 
 If you do not know how to easily start up a local (mock) mail server you can use GreenMail to do that. I have written an article how to [integrate it into you local environment](https://jensknipper.de/blog/greenmail-mock-mail-server-dev-setup/).
 
-Testing {#h2-5-testing}
------------------------
+Testing
+-------
 
 There is quite some logic in this piece of code apart from the connection to the server. Things that you should test! I recently held a [presentation at a meetup about testing mails](https://jensknipper.de/blog/openvalue-meetup-greenmail-talk). You can use this resource to get started. Along to the repo I wrote a test for this class, which you can check out on [GitHub](https://github.com/JensKnipper/greenmail-example/blob/main/src/test/java/de/jensknipper/greenmailexample/control/mail/receive/MailReceiveClientTest.java).
 

@@ -28,14 +28,14 @@ It's hard to grasp that it's been about a year since Chat GPT and other generati
 
 [Olimpiu Pop](https://twitter.com/olimpiupop "Olimpiu Pop") and I have debated the situation multiple times, and we realised that there's lots of rumour around AI and Java but not much in the way of fact.
 
-### We do know that: {#h3-0-we-do-know-that}
+### We do know that:
 
 * There are some cool new tools out there
 * We use some of them ourselves!
 * We hear others asking about which tools to use
 * Businesses are desperate to find ways to adopt AI ahead of the competition
 
-### What we dont know: {#h3-1-what-we-dont-know}
+### What we dont know:
 
 Sonatype ran a[AI survey](https://www.sonatype.com/resources/report-ai-in-software-development " AI survey") recently and the results indicated that almost 100% of businesses have adopted Generative AI in some form.
 
@@ -45,7 +45,7 @@ AI isn't going away thats for sure. This blog entry isn't about answering the in
 
 Whether you're integrating AI into Java, outlining business needs, or just AI-curious, your experiences are invaluable.
 
-### **Here's what to share:** {#h3-2-here-s-what-to-share}
+### **Here's what to share:**
 
 **Experiences:** Triumphs or challenges with Java and AI.  
 **Business Needs:** Desired AI features for your Java projects.  

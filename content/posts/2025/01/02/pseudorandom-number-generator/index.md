@@ -26,19 +26,19 @@ It's one of the busiest nights of the year for Santa, as children eagerly await 
 
 This magical gift bag is like a Random Number Generator. It produces results that seem random (the gifts), but there's an underlying algorithm (Santa's list) controlling everything.
 
-### Random Numbers and Why They Matter {#h3-0-random-numbers-and-why-they-matter}
+### Random Numbers and Why They Matter
 
 Randomness is a key element in cryptography, as cryptosystems rely on unpredictable numbers, known as random numbers. Understanding random number generators is crucial because they ensure the unpredictability and security of cryptographic systems.
 
 This makes them a fundamental component in protecting sensitive information and maintaining data integrity.
 
-### Random Number Generators {#h3-1-random-number-generators}
+### Random Number Generators
 
 Random numbers are generated mainly in two ways: True Random Number Generators (TRNGs) and Pseudorandom Number Generators (PRNGs).
 
 TRNGs are based on physical phenomena that are inherently unpredictable, such as thermal noise or radioactive decay. In contrast, PRNGs use mathematical algorithms to produce sequences of numbers that only appear to be random, but are actually deterministic and reproducible.
 
-### Pseudorandom Number Generators in Java {#h3-2-pseudorandom-number-generators-in-java}
+### Pseudorandom Number Generators in Java
 
 #### 1. java.util.random Class
 
@@ -106,7 +106,7 @@ When choosing a [random number generation algorithm](https://docs.oracle.com/en/
 
 In contrast, non-blocking algorithms like `NativePRNGNonBlocking` are designed to provide random data without delay. They use alternative methods to ensure a continuous flow of randomness, which tends to be faster, but may not be as cryptographically strong as the randomness produced by blocking sources.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 Whether you believe in Santa and his magical gift bag, understanding secure random numbers and their generation is crucial.
 

@@ -21,8 +21,8 @@ frozen: false
 
 Continuing [from part 2](https://foojay.io/today/java-thread-programming-part-2/), let's start this article with a bit of context first (*and if you don't like reading text, you can skip this introduction, and go directly to the section below where I discuss pieces of code*).
 
-Context {#h2-0-context}
------------------------
+Context
+-------
 
 * When we start an application program, the operating system creates a process.
 * Each process has a unique id (we call it PID) and a memory boundary.
@@ -38,8 +38,8 @@ The idea of the thread is that a process can have many tiny processes within its
 
 That seems to be a good idea. However, it comes with many problems alongside its benefits. Let's discuss some of those problems and how we can deal with them. But don't get discouraged, the benefits still outweigh the problems!
 
-Code {#h2-1-code}
------------------
+Code
+----
 
 Let's begin by running a piece of code.
 

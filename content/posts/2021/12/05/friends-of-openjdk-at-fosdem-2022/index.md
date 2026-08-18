@@ -31,7 +31,7 @@ And in 2021, the above was transformed into... the Friends of OpenJDK developer 
 
 <https://archive.fosdem.org/2021/schedule/track/friends_of_openjdk/>
 
-### **Overview of Foojay at FOSDEM 202**2 {#h3-0-overview-of-foojay-at-fosdem-2022}
+### **Overview of Foojay at FOSDEM 202**2
 
 In next year's implementation of the same concept, developers connected to [Foojay](https://foojay.io/) (friends of OpenJDK) are running the program:
 
@@ -41,7 +41,7 @@ Organizations included in setting up this dev room, active in [Foojay](https://f
 
 The content is focused on being similar to previous years, that is, short presentations on a variety of tools and technologies, though narrowly focused on Java and Kotlin, and, of course, the OpenJDK in general.
 
-### Submission Details and Deadlines {#h3-1-submission-details-and-deadlines}
+### Submission Details and Deadlines
 
 The upcoming FOSDEM, 5 and 6 February 2022, will be virtual and everything will be prerecorded. Go here to sign up and submit your abstracts, making sure to use the "Friends of OpenJDK devroom" in the "Track" field:
 
@@ -51,7 +51,7 @@ Here's the announcement details on the FOSDEM mailing list:
 
 <https://lists.fosdem.org/pipermail/fosdem/2021q4/003314.html>
 
-### **Program Committee** {#h3-2-program-committee}
+### **Program Committee**
 
 This year the program committee for the Friends of OpenJDK devroom consists of:
 

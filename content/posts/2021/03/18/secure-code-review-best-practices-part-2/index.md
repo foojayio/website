@@ -21,7 +21,7 @@ In [part 1 of this series](https://foojay.io/today/secure-code-review-best-pract
 
 Let's move on to the second and final part of this topic, tips 5 through 8!
 
-### 5. Enforce the Least Privilege Principle {#h3-0-5-enforce-the-least-privilege-principle}
+### 5. Enforce the Least Privilege Principle
 
 In addition to authentication comes authorization. They sound similar but are quite different. As we saw in point 4, authentication proves a user or service is indeed who they say they are, while authorization goes further to ensure that person or service is allowed to perform whatever task or action they're trying to perform. We know we need to check for this and ensure those users, services, or processes are running or exist in a role that has the authority to undertake such an action. However, from a coding point of view, it's often all too easy to give more access than is actually required.
 
@@ -29,7 +29,7 @@ The principle of least privilege states that every module (such as a process, a 
 
 A great way to test for this is to ensure you write specific automatic unit and integration tests that not only test the happy path but, more importantly, test the unhappy security related cases. These tests should successfully authenticate, but try to perform operations they're not entitled to perform. These tests should always be added when altering the roles your application runs under or introduces new resources that require you to be in a specific role to perform.
 
-### 6. Handle Sensitive Data with Care {#h3-1-6-handle-sensitive-data-with-care}
+### 6. Handle Sensitive Data with Care
 
 Exposing sensitive data --- like personal information or credit card numbers of your client --- can be harmful. But even a more subtle case than this can be equally harmful. For example, the exposure of unique identifiers in your system is harmful, if that identifier can be used in another call to retrieve additional data.
 
@@ -49,7 +49,7 @@ If you need to transfer sensitive data, check if the connection is secure. Sensi
 
 Last but certainly not least, consider session data also as sensitive data. The advice is not to store sensitive data in cookies at all, but rather use a session identifier and store the data in a server-managed session. Also, make sure that cookies are encrypted and have a decent length (eg. 128 bits). Check if attributes like **HttpOnly** , **Secure,** and **SameSite** on the cookie are set correctly and that they expire in a reasonable amount of time. Note that if a user logs out client-side, the session must be invalidated so it cannot be used elsewhere.
 
-### 7. Protect Against Predictable Attacks {#h3-2-7-protect-against-predictable-attacks}
+### 7. Protect Against Predictable Attacks
 
 We can safely assume that attackers will continue to hack our applications using predictable, well-known, and recognized attack vectors. The general lack of knowledge about common vulnerabilities and how they can be exploited, often leads to duplicating the same security mistakes over and over in future code. Take a look at the [OWASP Top 10](https://owasp.org/www-project-top-ten/) vulnerabilities and understand how these common exploits work. Here are some tips to look out for when trying to avoid some of the most common vulnerability types.
 
@@ -77,7 +77,7 @@ Both XSS and SQL injection are very common attacks. You should know how they wor
 
 There are many other vulnerability types that your application might be susceptible to, some more than others. You should take the time to learn about which ones affect your application most, from the code your teams directly produce through, to the types of libraries your application depends upon.
 
-### 8. Statically Test Source Code Automatically {#h3-3-8-statically-test-source-code-automatically}
+### 8. Statically Test Source Code Automatically
 
 A static code analysis tool or linter is a very powerful tool for developers. By statically looking at the code you and your team wrote, you can point out a number of things like programming errors, [bugs](https://en.wikipedia.org/wiki/Software_bug), stylistic errors, and suspicious constructs. With this bug and error detection, a linter can, in many cases, also indicate if a security-related bug slipped into your source code. Depending on the static tool you use and the ecosystem you are operating in, a static code analyzer can point out issues like SQL injections and code vulnerabilities.
 
@@ -85,7 +85,7 @@ Linter can be very useful but will produce a lot of false positives. Since all l
 
 Either way, automation is key. Well-known static code analyzers you can use are [SonarSource](https://www.sonarsource.com/) (with a free and open source tier) and Veracode. You might also want to take a look at [Snyk Code](https://snyk.io/blog/java-code-analysis-solving-java-security-issues-in-spring-mvc-app/) that does specific static analysis on security issues. However, depending on your context, you might need a more specific one. Check this[list of static code analyses tools](https://en.wikipedia.org/wiki/List_of_tools_for_static_code_analysis)for both language-specific and multi-language solutions that may fit your needs. If you don't have automatic static code analyzer in place, you can either use it during your manual code review or, even better, automate it in your process so people can catch obvious problems even sooner.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Reviewing someone's code is hard, specifically when you also have to look at security issues.
 

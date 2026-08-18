@@ -36,7 +36,7 @@ This article focuses on the architectural concepts underlying Reactor, with part
 
 This article is not an introduction to the basics of reactive programming. It assumes that the reader already knows what Flux and Mono are and is more interested in understanding why and when these abstractions make sense at the system level.
 
-### Reactive Streams: The Contract Behind Reactor {#h3-0-reactive-streams-the-contract-behind-reactor}
+### Reactive Streams: The Contract Behind Reactor
 
 Reactive Streams is at the heart of the Reactor Project. Reactor is not just another asynchronous library. It is a concrete implementation of a standardized protocol for asynchronous stream processing with non-blocking backpressure.
 
@@ -60,7 +60,7 @@ This demand-driven model is very different from traditional push systems. In thi
 
 Reactive Streams shifts the complexity of implicit thread management to explicit flow control. This problem is much more manageable at scale.
 
-### Project Reactor Core Concepts {#h3-1-project-reactor-core-concepts}
+### Project Reactor Core Concepts
 
 Project Reactor is based on Reactive Streams, but adds many operators and conventions. To properly understand how it works, it is useful to take another look at some of the fundamental concepts.
 
@@ -97,7 +97,7 @@ The most commonly used schedulers are:
 
 From an architectural point of view, the golden rule is as follows: schedulers are an escape route, not a default setting. Excessive use of publishOn and subscribeOn often indicates that blocking code has become part of a non-blocking reactive pipeline.
 
-### Backpressure: The Hard Part {#h3-2-backpressure-the-hard-part}
+### Backpressure: The Hard Part
 
 Backpressure is normally described as the ability to slow down producers. Although technically correct, this definition does not fully explain its true architectural impact.
 
@@ -119,7 +119,7 @@ Every strategy is an architectural choice. For example, buffering may be fine fo
 
 Backpressure is not something to consider after the design is complete. It must be designed from start to end, otherwise it could turn into hidden queues and unpredictable latency spikes.
 
-### Reactive Does Not Mean Faster {#h3-3-reactive-does-not-mean-faster}
+### Reactive Does Not Mean Faster
 
 Performance is one of the most common misconceptions about reactive systems. Reactive applications are often expected to be faster, when in fact their main advantage is predictable behavior under load.
 
@@ -139,7 +139,7 @@ Some of the most common mistakes are:
 
 These issues not only degrade performance, but also break the reactive contract and often negate the benefits of backpressure.
 
-### MongoDB Reactive Driver: Architecture Overview {#h3-4-mongodb-reactive-driver-architecture-overview}
+### MongoDB Reactive Driver: Architecture Overview
 
 MongoDB offers three main Java drivers:
 
@@ -153,7 +153,7 @@ Internally, the driver relies on non-blocking I/O operations and event loops, wi
 
 For architects, this means that MongoDB can become a non-blocking participant in reactive communication, rather than a bottleneck.
 
-### Integrating MongoDB Reactive Driver with Project Reactor {#h3-5-integrating-mongodb-reactive-driver-with-project-reactor}
+### Integrating MongoDB Reactive Driver with Project Reactor
 
 Project Reactor integrates seamlessly with MongoDB's reactive driver because they both use the same protocol. A MongoDB query returns a Publisher \<Document\> that can be directly adapted to a Flux. From there, the entire pipeline remains non-blocking.
 
@@ -165,7 +165,7 @@ A clear advantage of the architecture is query streaming. Instead of loading all
 
 Cursor behavior is an implementation detail, while backpressure spreads naturally from the consumer to the database.
 
-### Performance Considerations with Reactive MongoDB {#h3-6-performance-considerations-with-reactive-mongodb}
+### Performance Considerations with Reactive MongoDB
 
 Using the reactive driver does not automatically result in better performance. There are a number of factors that need to be taken into account;
 
@@ -191,7 +191,7 @@ Reactive systems require different observability strategies. The number of threa
 
 These metrics thus become critical signals of the health of the system.
 
-### Reactive Architecture Patterns with MongoDB {#h3-7-reactive-architecture-patterns-with-mongodb}
+### Reactive Architecture Patterns with MongoDB
 
 MongoDB Reactive works particularly well with certain architectural models and patterns:
 
@@ -203,7 +203,7 @@ In many real-world systems, reactive and imperative components coexist. For exam
 
 Defining clear boundaries and architectural blueprints is certainly preferable to imposing reactive paradigms everywhere.
 
-### When NOT to Use Reactive MongoDB {#h3-8-when-not-to-use-reactive-mongodb}
+### When NOT to Use Reactive MongoDB
 
 Reactive programming, along with its benefits, comes with real costs:
 
@@ -213,7 +213,7 @@ Reactive programming, along with its benefits, comes with real costs:
 
 For low-concurrency CRUD applications, the synchronous driver may be simpler and just as effective. For applications with high levels of computation, similarly, the synchronous driver allows for better performance and stability. The MongoDB reactive driver makes sense when scalability and resource efficiency are architectural requirements and not just theoretical aspirations.
 
-### Conclusion: Reactive as a System Property {#h3-9-conclusion-reactive-as-a-system-property}
+### Conclusion: Reactive as a System Property
 
 Reactive programming is not about APIs or frameworks; it is not enough to use a reactive driver to gain benefits from this paradigm. Reactive programming requires understanding how the system behaves under stress.
 

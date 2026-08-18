@@ -26,7 +26,7 @@ The question I am asked is almost always: "What are the quick wins or low hangin
 
 Let's start with the definition of a phrase that often used in the business world.
 
-### Make Or Buy {#h3-0-make-or-buy}
+### Make Or Buy
 
 Even as a software developer, you will often hear this phrase during meetings with the company's management and sales part. The phrase is called "**Make or Buy**". Typically, we have to decide if we want to do something ourselves or spend money to buy the requested functionality. It could be less or more functionality or different so that we have to adjust ourself to use it in our context.
 
@@ -43,7 +43,7 @@ We should have the same behaviour regarding compliance and license usage. The ne
 
 The two following layers, Docker and Kubernetes, are leading us to the same result. Until now, we are not looking at the tool-stack for the production line itself. All programs and utilities that are directly or indirectly used under the hood called DevSecOps are some dependencies.All layers' dependencies are the most significant part by far. Checking these binaries against known Vulnerabilities is the first logical step.
 
-### One Time and Recurring Efforts for Compliance/Vulnerabilities {#h3-1-one-time-and-recurring-efforts-for-compliance-vulnerabilities}
+### One Time and Recurring Efforts for Compliance/Vulnerabilities
 
 Comparing the effort of scanning against known Vulnerabilities and for Compliance Issues, we see a few differences.
 
@@ -69,7 +69,7 @@ Next is the timeline from when the vulnerability is found until the fix is in pr
 Nevertheless, at some point, the information is consumable for us. If you are using **JFrog Xray** , from the free tier, for example, you will get the information very fast. **JFrog** is consuming different security information resources and merging all information into a single vulnerability database. After this database is fed with new information, all **JFrog Xray** instances are updated. After this stage is reached, you can act.
 ![](004-262x510.jpg)
 
-### Test Coverage Safety Belt: Mutation Testing {#h3-2-test-coverage-safety-belt-mutation-testing}
+### Test Coverage Safety Belt: Mutation Testing
 
 Until now, the only thing you can do to speed up the information flow is spending money for professional security information aggregator. But as soon as the information is consumable for you, the timer runs. It depends on your environment how fast this security fix will be up and running in production. To minimise the amount of time a full automated CI Pipeline ist one of the critical factors.
 
@@ -85,27 +85,27 @@ To get a picture of the full impact graph based on all known vulnerabilities, it
 JFrog Artifactory provides information, including the vendor-specific metadata that is part of the package managers. JFrog Xray can consume all this knowledge and can scan all binaries that are hosted inside the repositories that are managed by Artifactory.
 ![](005-498x510.jpg)
 
-### Vulnerabilities: IDE Plugin {#h3-3-vulnerabilities-ide-plugin}
+### Vulnerabilities: IDE Plugin
 
 Shift Left means that Vulnerabilities must be eliminated as early as possible inside the production pipeline. One early-stage after the concept phase is the coding itself. At the moment you start adding dependencies to your project you are possibly adding Vulnerabilities as well.
 
 The fastest way to get feedback regarding your dependencies is the **JFrog IDE Plugin**. This plugin will connect your IDE to your JFrog Xray Instance. The free tier will give you access to Vulnerability scanning. The Plugin is OpenSource and available for IntelliJ, VS-Code, Eclipse,... If you need some additional features, make a feature request on GitHub or fork the Repository add your changes and make a merge request.
 > Try it out by yourself: [JFrog Free Tier](https://jfrog.com/artifactory/start-free/)
 
-Using the IDE Plugin {#h2-4-using-the-ide-plugin}
--------------------------------------------------
+Using the IDE Plugin
+--------------------
 
 If you add a dependency to your project, the IDE Plugin can understand this information based on the used package manager. The IDE Plugin is connected to your JFrog Xray instance and will be queried if there is a change inside your project's dependency definition. The information provided by Xray includes the known vulnerabilities of the added dependency. If there is a fixed version of the dependency available, the new version number will be shown.
 > If you want to see the IDE Plugin in Action without registering for a Free Tier, have a look at my youtube video:  
 >
 > [![JFrog IDE Plugin - english](http://img.youtube.com/vi/PsghzAf-ODU/mqdefault.jpg)](https://youtu.be/PsghzAf-ODU "JFrog IDE Plugin - english - 4k")
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 With the JFrog Free Tier, you have the tools in your hands to practice Shift Left and pushing it into your IDE. Create repositories for all included technologies, use Artifactory as a proxy for your binaries and let Xray scan the full stack.
 
 With this, you have a complete impact graph based on your full-stack and the pieces of information about known Vulnerabilities as early as possible inside your production line. You don't have to wait until your CI Pipeline starts complaining. This will save a lot of your time.
 
-### Next Steps {#h3-6-next-steps}
+### Next Steps
 
 If you liked this blog post, I would appreciate to have you as a new subscriber on Youtube. I have two channels, one in [English](https://www.youtube.com/channel/UCNkQKejDX-pQM9-lKZRpEwA) and one in [German](https://www.youtube.com/user/svenruppert). On my channel, you will find videos about the topics Core Java, Kotlin and DevSecOps. Please give me a thumbs up and see you on my channel.

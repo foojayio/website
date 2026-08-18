@@ -47,8 +47,8 @@ Note that by JetBrains IntelliJ IDEA, I mean all JetBrains IDE's based on the sa
 
 ![Choice of shells in Eclipse](shell-eclipse-choice.png) *Choice of shells in Eclipse*
 
-More Shells for Free {#h2-0-more-shells-for-free}
--------------------------------------------------
+More Shells for Free
+--------------------
 
 [Applet Runner](https://www.japplis.com/applet-runner/) is a free IDE plug-in available for JetBrains [IntelliJ IDEA](https://plugins.jetbrains.com/plugin/16682-applet-runner/), [Eclipse](https://marketplace.eclipse.org/content/applet-runner-eclipse) and [Apache NetBeans](https://plugins.netbeans.apache.org/catalogue/?id=57).
 [![Shells menu in Applet Runner plug-in bookmarks](shell-menu-intellij.png)](shell-menu-intellij.png) *New Shells menu in Applet Runner plug-in bookmarks*
@@ -58,7 +58,7 @@ Since I've developed a lot of software, mostly utilities, I thought it would be 
 At the same time, I've added many more applets like the ones mentioned in this article that are basically applets wrapping an open source library.
 > Note that for Command Prompt, Powershell, WSL, Git Bash and Cygwin, they will need to be installed on your computer and the executable should be in your **PATH** environment variable.
 
-### Command Prompt {#h3-1-command-prompt}
+### Command Prompt
 
 Command Prompt aka cmd.exe aka MS-DOS is probably the most used shell on Windows. So it has been the first shell supported in Applet Runner.
 
@@ -67,7 +67,7 @@ I guess this applet greatly contributed to the success of this [plug-in](https:/
 
 For macOS and Linux, it will start `zsh` or `bash` or whatever shell that is defined in your `SHELL` environment variable.
 
-### Powershell {#h3-2-powershell}
+### Powershell
 
 [Powershell](https://learn.microsoft.com/en-us/powershell/) is Microsoft software to provide a more powerful shell to advanced user.
 [![Powershell running in Eclipse IDE](shell-powershell-eclipse-1024x749.png)](shell-powershell-eclipse.png) *Powershell running in Eclipse IDE*
@@ -76,41 +76,41 @@ Note that the background and foreground colors are defined in the applet paramet
 
 Powershell is also available for macOS and Linux, so I have adapted the applet to also make it work for these OSes but I haven't tested it.
 
-### Windows Subsystem for Linux (WSL) {#h3-3-windows-subsystem-for-linux-wsl}
+### Windows Subsystem for Linux (WSL)
 
 [WSL](https://learn.microsoft.com/en-us/windows/wsl/) offers a Linux prompt on Windows. If your application is running on Linux on production, maybe you want to run it also on Linux in your development environment.
 [![Windows Subsystem for Linux running in Apache NetBeans](shell-wsl-netbeans.png)](shell-wsl-netbeans.png) *Windows Subsystem for Linux running in Apache NetBeans*
 
-### Git Bash {#h3-4-git-bash}
+### Git Bash
 
 Git is included in IDE's but sometimes you need to run more exotic Git commands. That's where [Git Bash](https://git-scm.com/downloads/win) becomes handy.  
 
 With this applet you won't need to have a separate terminal window for Git Bash, you can do it now in your IDE.
 [![Git Bash running in JetBrains IntelliJ IDEA](shell-gitbash-intellij.png)](shell-gitbash-intellij.png) *Git Bash running in JetBrains IntelliJ IDEA*
 
-### Cygwin {#h3-5-cygwin}
+### Cygwin
 
 [Cygwin](https://cygwin.com/) is a unix Bash for Windows. If you like Bash but don't want to start a Linux VM, Cygwin could be your shell to go.
 [![Cygwin in Eclipse IDE](shell-cygwin-eclipse-1024x749.png)](shell-cygwin-eclipse.png) *Cygwin in Eclipse IDE*
 
 If `Cygwin.bat` directory is not in your `PATH` environment variable, it will try to find it with `CYGWIN_HOME` or if `cygwin\bin` is in the `PATH`.
 
-### SSH {#h3-6-ssh}
+### SSH
 
 SSH (Secure SHell) is used to connect securely to a remote computer.
 [![SSH (Secure shell) in IntelliJ IDEA](shell-ssh-intellij.png)](shell-ssh-intellij.png) *SSH in IntelliJ IDEA*
 
-### Bean Shell {#h3-7-bean-shell}
+### Bean Shell
 
 [Bean Shell](https://beanshell.github.io/) is a script language similar to Java that can be interpreted in a console. This is very similar to JShell.
 [![Bean Shell running in JetBrains IntelliJ IDEA](shell-beanshell-intellij.png)](shell-beanshell-intellij.png) *Bean Shell running in JetBrains IntelliJ IDEA*
 
-More power {#h2-8-more-power}
------------------------------
+More power
+----------
 
 Let's see two ways to bring more power to your shell.
 
-### Applet Runner Pro {#h3-9-applet-runner-pro}
+### Applet Runner Pro
 
 There is also a [pro version of Applet Runner](https://www.japplis.com/applet-runner/pro/) (€ 2.90 per month) with:
 
@@ -129,7 +129,7 @@ There is also a [pro version of Applet Runner](https://www.japplis.com/applet-ru
 For example: *`https://www.japplis.com/applet-runner/terminal/command-prompt.html?Background=000000&Foreground=00FF00&File=C:\Java`*
 [![Command Prompt with Applet Runner plug-in](shell-prompt-java-1024x623.png)](shell-prompt-java.png) *Command Prompt with specific parameters* [![IntelliJ IDEA running 2 shells next to each other with Applet Runner Pro plug-in](shell-applet-runner-pro-slipt-1024x524.png)](shell-applet-runner-pro-slipt.png) *IntelliJ IDEA running 2 shells next to each other with Applet Runner Pro plug-in*
 
-### Ant Commander Pro {#h3-10-ant-commander-pro}
+### Ant Commander Pro
 
 These shells are also available in [Ant Commander Pro file manager](https://www.antcommander.com/) that can be run as applet in the IDE.
 
@@ -146,8 +146,8 @@ Here is what you get as extra for the terminal shells (Command line, Powershell,
 
 [![Applet Runner running Ant Commander Pro file manager](shell-ant-commander-pro-intellij-1024x576.png)](shell-ant-commander-pro-intellij.png) *Applet Runner running Ant Commander Pro file manager*
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 In this article, we have seen how you could extend your IDE to provide more shells.
 

@@ -32,8 +32,8 @@ Especially if you're new(er) to K8ssandra, this builder will help you save sever
 
 As of this writing you can take your pick between a custom configuration and templates for [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) (GKE), [Azure AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/), [Digital Ocean](https://www.digitalocean.com/), [Amazon EKS](https://aws.amazon.com/eks/) or a local setup of K8ssandra.
 
-Write hundreds of lines of code with a couple of clicks {#h-write-hundreds-of-lines-of-code-with-a-couple-of-clicks}
---------------------------------------------------------------------------------------------------------------------
+Write hundreds of lines of code with a couple of clicks
+-------------------------------------------------------
 
 As you may know [K8ssandra](https://dtsx.io/3ICC6VU) is a platform for production deployments of Cassandra on Kubernetes. This includes everything you want to run alongside them like your monitoring system, repair process ([Reaper](https://dtsx.io/3EJcCDH)) and backups.
 
@@ -55,8 +55,8 @@ Sure, there might still be instances where you want to write the YAML file yours
 
 We'll keep the builder up to date so you can always come back and get exactly what you need.
 
-What's next for the K8ssandra Config Builder {#h2-1-what-s-next-for-the-k8ssandra-config-builder}
--------------------------------------------------------------------------------------------------
+What's next for the K8ssandra Config Builder
+--------------------------------------------
 
 Our goal is to give you a rich experience building anything in K8ssandra. So we're working on new features to be released for the K8ssandra config builder in the near future. Near the top of our to-do list are:
 
@@ -70,7 +70,7 @@ Curious to learn more about (or play with) Cassandra itself? We recommend trying
 
 *So don't hesitate to tell us what you think. You can do so by joining the* [*K8ssandra Discord*](https://dtsx.io/3DGLG6f)*or* [*K8ssandra Forum*](https://dtsx.io/31Rp85v)*today. For exclusive posts on all things data, follow* [*DataStax on Medium*](https://dtsx.io/3IE3mTW)*.*
 
-### Resources {#h-resources}
+### Resources
 
 1. Try out the [K8ssandra Config Builder](https://dtsx.io/3pIiPcR)
 2. Join the [K8ssandra Community](https://dtsx.io/31Rp85v)

@@ -20,8 +20,8 @@ frozen: false
 
 As I keep refactoring, this article will focus on a few more interesting ways to do it. These are pretty much minor yet effective and useful changes.
 
-Stream.noneMatch() and Stream.anyMatch() {#h2-0-stream-nonematch-and-stream-anymatch}
--------------------------------------------------------------------------------------
+Stream.noneMatch() and Stream.anyMatch()
+----------------------------------------
 
 In some situations, we need to find a single case among many. For example, we want to do a certain operation if we have a list of items and a certain item is in that list. Usually, we run a for loop and then use a loop inside the for loop to check the value against our case. Check out the following piece of code:
 

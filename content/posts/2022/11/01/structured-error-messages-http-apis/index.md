@@ -31,8 +31,8 @@ For this, I'm reading and watching the following sources:
 
 Today, I'd like to introduce the "Problem Details for HTTP APIs" RFC, *aka* , [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807).
 
-The problem(s) {#h2-0-the-problem-s}
-------------------------------------
+The problem(s)
+--------------
 
 REST principles mandate to use HTTP status to communicate.
 
@@ -57,8 +57,8 @@ Hence, a standardized error reporting structure:
 * Provides uniformity across providers
 * Increases API stability
 
-RFC 7807 {#h2-1-rfc-7807}
--------------------------
+RFC 7807
+--------
 
 [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) aims to solve the problem by providing a standardized error structure.
 
@@ -79,8 +79,8 @@ The RFC offers the following sample when there needs to be more funds to make a 
 
 ![](problemdetails-json-sample.png)
 
-An example {#h2-2-an-example}
------------------------------
+An example
+----------
 
 I'll use one of my [existing demo](https://github.com/nfrankel/evolve-apis/) as an example.
 
@@ -104,8 +104,8 @@ Let's structure the message as per RFC 7807.
 
 ![](problemdetails-json-register.png)
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 RFC 7807 not only helps client developers.
 

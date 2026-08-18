@@ -23,12 +23,12 @@ frozen: false
 
 This article aims to present various patterns of defining the data transfers based on the diverse requirements of Java applications. For instance, some applications may need to transfer data to the accelerator every time that a computation is performed, while others may need to transfer them on demand. Additionally, some applications may need to process more data than the actual memory capacity of the accelerator.
 
-Pattern 1. Data that fit into the GPU memory {#h2-0-pattern-1-data-that-fit-into-the-gpu-memory}
-------------------------------------------------------------------------------------------------
+Pattern 1. Data that fit into the GPU memory
+--------------------------------------------
 
 The TornadoVM API exposes two methods to configure which data correspond to the input and the output of a TaskGraph. This is happening via the **transferToDevice** for the inputs and **transferToHost** for the outputs. Those methods accept an additional configuration which is the **DataTransferMode**.{#viewer-r55ph1440}
 
-### a) Transferring input data in every execution {#viewer-2r8jb571}
+### a) Transferring input data in every execution
 
 If you configure your TaskGraph to accept inputs in every execution, it will copy the new values of your variables (e.g., matrixA and matrixB) every time the TaskGraph is executed (i.e., executionPlan.execute()).
 
@@ -40,7 +40,7 @@ TaskGraph tg = new TaskGraph("s0")
 ```
 
 
-### b) Transferring input data only in the first execution {#h3-2-b-transferring-input-data-only-in-the-first-execution}
+### b) Transferring input data only in the first execution
 
 If you configure your TaskGraph with the **DataTransferMode.FIRST_EXECUTION**, it will copy the input data only once during the first execution, indicating that they are read-only; so, your program will not modify the values of your variables (e.g., matrixA and matrixB) after the first execution (i.e., executionPlan.execute()).
 
@@ -52,7 +52,7 @@ TaskGraph tg = new TaskGraph("s0")
 ```
 
 
-### c) Transferring output data under demand {#h3-3-c-transferring-output-data-under-demand}
+### c) Transferring output data under demand
 
 Regardless, the configuration of the input data (a, b), you must also define the transferring mode for the outputs of your TaskGraph. Two modes are available: i) the transferring of the outputs after every execution; when the executionPlan.execute() is completed; and ii) the transferring of the outputs under demand.
 
@@ -82,8 +82,8 @@ executionResult.transferToHost(matrixC);
 
 <br />
 
-Pattern 2. Data do not fit into the GPU memory {#h2-4-pattern-2-data-do-not-fit-into-the-gpu-memory}
-----------------------------------------------------------------------------------------------------
+Pattern 2. Data do not fit into the GPU memory
+----------------------------------------------
 
 In this case, TornadoVM supports [++batch processing++](https://tornadovm.readthedocs.io/en/latest/programming.html#batch-computing-processing). This feature enables programmers that handle large data sizes (e.g. 20 GB) to configure the TornadoExecutionPlan in order to operate with the batch size (e.g. 512 MB), based on which all data will be split and streamed in the GPU memory to be processed. Note, the batch size should fit into the GPU memory.
 
@@ -100,8 +100,8 @@ plan.withBatch("512MB") // Run in blocks of 512MB
 
 <br />
 
-Pattern 3. Transfer only a short range of the result from the GPU memory {#h2-5-pattern-3-transfer-only-a-short-range-of-the-result-from-the-gpu-memory}
---------------------------------------------------------------------------------------------------------------------------------------------------------
+Pattern 3. Transfer only a short range of the result from the GPU memory
+------------------------------------------------------------------------
 
 TornadoVM also supports the transferring of a small piece of the output data. This may be useful if your program operates on large arrays, and you are interested only at a partial segment of the output array. In this case, you can access a partial segment (e.g., just the first element of the array), as shown below (assuming that the data are defined to operate under demand, i.e., **DataTransferMode.UNDER_DEMAND**, as shown in Pattern 1-C).
 
@@ -122,8 +122,8 @@ An example of this API call is shown in one of the TornadoVM unit-tests, [here](
 
 <br />
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 This article aims to show how TornadoVM programmers can utilize the API functions for transferring data to the accelerator's (e.g., GPU) memory, and backwards, in the frequency of every execution, first execution or under demand.{#viewer-8gzhf10345}
 
@@ -131,7 +131,7 @@ Note that this blog shows the API functions as exist in the current version Torn
 
 <br />
 
-### Useful links {#h3-7-useful-links}
+### Useful links
 
 * TornadoVM [++documentation++](https://tornadovm.readthedocs.io/en/latest/introduction.html)
 * DataRange [++examples++](https://github.com/beehive-lab/TornadoVM/blob/faffab7ee2fc9c9f06ece7f7e5f075fc056f379a/tornado-unittests/src/main/java/uk/ac/manchester/tornado/unittests/api/TestAPI.java#L283)

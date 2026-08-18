@@ -26,10 +26,10 @@ First and foremost, it's a complete JavaFX project running in the browser. Thank
 
 Both the [site/app source code](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2), and all the [jfxcentral-data](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data) are available on GitHub, so anyone can contribute and see how the project is built. This same GitHub data is also fetched by the website and app, so no databases or complicated hosting services are needed.
 
-JFX Central Content {#h2-0-jfx-central-content}
------------------------------------------------
+JFX Central Content
+-------------------
 
-### Homepage {#h3-1-homepage}
+### Homepage
 
 The homepage provides links to the [GitHub projects of JFX Central](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2) and its [data](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data), but also to the [latest download of the desktop application](https://downloads.hydraulic.dev/jfxcentral2/download.html) version, and a [page providing more information about OpenJFX Project](https://www.jfx-central.com/openjfx), the open source project behind JavaFX. Furthermore, this page links to randomly selected highlights of the website's various sections and the most recent "Links Of The Week."
 
@@ -45,7 +45,7 @@ The homepage provides links to the [GitHub projects of JFX Central](https://gith
  </figure>
 </figure>
 
-### Resources {#h3-2-resources}
+### Resources
 
 The Resources section of the JFX Central website contains an overview of libraries, tools, videos, books, blogs, tips, tutorials, and icons. All related to JavaFX.
 
@@ -75,7 +75,7 @@ The icons are a new part of version 2 of JFX Central, allowing you to search and
  </figure>
 </figure>
 
-### Community {#h3-3-community}
+### Community
 
 The Community section gives you more info about the people and companies in the JavaFX community. This is also the place where you can find all the previous Links Of The Week and the team involved in the JFX Central project.
 
@@ -91,7 +91,7 @@ The Community section gives you more info about the people and companies in the 
  </figure>
 </figure>
 
-### Showcases {#h3-4-showcases}
+### Showcases
 
 Head over to the Showcases section to find real-world applications based on JavaFX. This section doesn't aim to be an overview of all available applications but a summary of uses in different markets, industries, use cases, etc.
 
@@ -107,12 +107,12 @@ Head over to the Showcases section to find real-world applications based on Java
  </figure>
 </figure>
 
-### Documentation {#h3-5-documentation}
+### Documentation
 
 The Documentation section is also a new addition to version 2 of JFX Central. The goal is to provide links to various sources that explain how to start with JavaFX and related topics.
 ![Documentation on JFX Central](documentation-1024x623.png)
 
-### Downloads {#h3-6-downloads}
+### Downloads
 
 The Downloads section contains a mix of libraries and apps with a direct link to the available downloads.
 
@@ -130,13 +130,13 @@ This section shows the power (and a bit of its weakness) of JFX Central, as it i
  </figure>
 </figure>
 
-### Search {#h3-7-search}
+### Search
 
 The search box helps you to jump to the correct section of the website for all the different parts of the content.
 ![Search box with an example search](search.png)
 
-**Conclusion** {#h2-8-conclusion}
----------------------------------
+**Conclusion**
+--------------
 
 JFX Central is a continuously evolving website and application.
 

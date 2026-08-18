@@ -33,8 +33,8 @@ This is a perfect use case for profilers. They offer a bird's eye view of arbitr
 
 Many people believe that they don't need to learn how to profile as long as they don't write high-load applications. In the example, we'll see how we can benefit from profiling even when dealing with very simple apps.
 
-Example application {#h2-0-example-application}
------------------------------------------------
+Example application
+-------------------
 
 Let's say we have the following program:
 
@@ -92,8 +92,8 @@ Spent time: 1462 ms
 
 Let's profile it and see what's wrong.
 
-Get a snapshot {#h2-1-get-a-snapshot}
--------------------------------------
+Get a snapshot
+--------------
 
 I'm using IntelliJ Profiler because it is nicely integrated with the IDE and removes the hassle of setting everything up. If you don't have IntelliJ IDEA Ultimate, you can use another profiler. In this case, the steps might be a little bit different.
 
@@ -109,8 +109,8 @@ When the app has finished running, a popup will appear, prompting us to open the
 
 Let's open the report and see what's in it.
 
-Analyze the snapshot {#h2-2-analyze-the-snapshot}
--------------------------------------------------
+Analyze the snapshot
+--------------------
 
 The first thing we see after opening the report is the flame graph. This is essentially a summary of all sampled stacks. The more samples with the same stack the profiler has collected, the wider this stack grows on the flame graph. So, the width of the frame is roughly equivalent to the share of time spent in this state.
 
@@ -134,8 +134,8 @@ This clearly needs some looking into.
  <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/hints-dark.png" alt="Profiler hints in the editor's gutter" style="width:774px">
 </figure>
 
-Optimize the benchmark {#h2-3-optimize-the-benchmark}
------------------------------------------------------
+Optimize the benchmark
+----------------------
 
 Seems like the code responsible for removing events from the queue is doing extra work.
 
@@ -165,8 +165,8 @@ Spent time: 639 ms
 ```
 
 
-Native profiling {#h2-4-native-profiling}
------------------------------------------
+Native profiling
+----------------
 
 Having solved the problem in the benchmark, we could stop here and pat ourselves on the back. But what's going on with our `createDirectories()` method? Is it too slow?
 
@@ -209,8 +209,8 @@ Spent time: 87 ms
 
 It is now about 16 times faster than it originally was. This exception handling was really expensive! The results may differ depending on the hardware and the environment, but they should be impressive anyway.
 
-Snapshots' diff {#h2-5-snapshots-diff}
---------------------------------------
+Snapshots' diff
+---------------
 
 If you are using IntelliJ Profiler, there is a handy tool that lets you visually compare two snapshots. For a detailed explanation and steps, I recommend referring to the [documentation](https://www.jetbrains.com/help/idea/compare-profiler-snapshots.html).
 
@@ -224,8 +224,8 @@ Frames missing from the newer snapshot are highlighted in green, while the new o
 
 As visible in the screenshot above, the vast majority of operations originally performed by our program were unnecessary, and we were able to eliminate them. `CountEvents.update()` is completely green, which means our first change resulted in near-complete improvement in the method's runtime. Adding `Files.exists()` was not a 100% improvement, but it effectively removed `createDirectories()` from the snapshot, only adding 60 ms to the program runtime.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 In this scenario, we used a profiler to detect and fix a performance problem. We also witnessed how even a well-known API may have implications that seriously affect the execution times of a Java program. This shows us why profiling is a useful skill even if you are not optimizing for millions of transactions per second.
 

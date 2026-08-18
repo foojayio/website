@@ -28,8 +28,8 @@ During Q\&A, somebody asked whether coroutines implemented backpressure. I admit
 
 This post provides information on backpressure in general and how [RxJava](https://github.com/ReactiveX/RxJava) (v3), [Project Reactor](https://projectreactor.io/) and Kotlin's [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) handle it.
 
-What is backpressure? {#h2-0-what-is-backpressure}
---------------------------------------------------
+What is backpressure?
+---------------------
 
 > Back pressure (or backpressure) is a resistance or force opposing the desired flow of fluid through pipes, leading to friction loss and pressure drop. The term back pressure is a misnomer, as pressure is a scalar quantity, so it has a magnitude but no direction. -- [Wikipedia](https://en.wikipedia.org/wiki/Back_pressure)
 
@@ -55,8 +55,8 @@ Reactive Streams' specifications are pretty solid. They also come with a Java-ba
 
 But it falls outside the specifications' scope to define how to manage items emitted by the producer that cannot be handled downstream. While the problem is pretty simple, different solutions are possible. Each Reactive framework provides some options, so let's see them in turn.
 
-Backpressure in RxJava 3 {#h2-1-backpressure-in-rxjava-3}
----------------------------------------------------------
+Backpressure in RxJava 3
+------------------------
 
 RxJava v3 provides several base classes:
 
@@ -88,8 +88,8 @@ Note that I took the above Marble diagrams from RxJava's wiki.
 
 Compared to other frameworks, RxJava offers methods to send an overflow exception signal after sending all items. These allow the consumer to receive items *and* still be notified that the producer has dropped items.
 
-Backpressure in Project Reactor {#h2-2-backpressure-in-project-reactor}
------------------------------------------------------------------------
+Backpressure in Project Reactor
+-------------------------------
 
 Strategies offered by Project Reactor are similar to those of RxJava's.
 
@@ -117,8 +117,8 @@ Here's the `Flux` class diagram that highlights backpressure capabilities:
 
 Compared to other frameworks, Project Reactor offers methods to set a for buffered items to prevent overflowing it.
 
-Backpressure in coroutines {#h2-3-backpressure-in-coroutines}
--------------------------------------------------------------
+Backpressure in coroutines
+--------------------------
 
 Coroutines do offer the same buffering and dropping capabilities. The base class in coroutines is `Flow`.
 
@@ -137,8 +137,8 @@ flow {                              // 1
 2. Define the `Flow` content
 3. Set the buffer's capacity to 10
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 All in all, RxJava, Project Reactor, and Kotlin coroutines all provide backpressure capabilities. All cope with a producer that is faster than its subscriber by offering two strategies: either buffer items or drop them.
 

@@ -78,8 +78,8 @@ Thanks to my colleague [Zeping](https://github.com/bzp2010) for pointing out the
 
 You can expose the `/products/1` REST-friendly URL and let APISIX rewrite it for PostgREST.
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 I've described using the proxy-rewrite plugin with a path variable in this post. You can reuse the same technique with multiple variables. Keep also in mind that the `serverless` plugin is a hidden jewel; it can help you with small Lua snippets before moving to a full-fledged plugin.
 

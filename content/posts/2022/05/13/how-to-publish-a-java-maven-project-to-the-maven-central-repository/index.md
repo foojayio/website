@@ -28,8 +28,8 @@ The project is written in Java using Maven as the build tool. So, the process wi
 
 You can follow this article if you need to publish a Java Maven-based library or artifact to Maven.
 
-Get Ready for Publishing Packages {#h2-0-get-ready-for-publishing-packages}
----------------------------------------------------------------------------
+Get Ready for Publishing Packages
+---------------------------------
 
 Publishing a Java artifact is not as trivial as Python or JavaScript packages can be deployed.
 
@@ -37,7 +37,7 @@ You have to comply with several rules.
 
 I will show the general steps to publish the artifact.
 
-### Basic Requirements {#h3-1-basic-requirements}
+### Basic Requirements
 
 You need to own a domain name where the package is going to live or be hosted. It is not necessary to have a domain name for each package, you can use the GitHub.io page that is generated from your project, but for real packages is required to have a professional domain. In this case, the domain is **jdesk.mathsoftware.engineer**.
 
@@ -45,23 +45,23 @@ This is semantic, therefore you follow the subsets of: **engineers** (all engine
 
 Later, the reverse DNS has to be used for the standard Java packaging convention. That is, **engineer.mathsoftware.jdesk**.
 
-### Safety {#h3-2-safety}
+### Safety
 
 You will also need a private key to sign the artifact. Generate a [GPG key](https://www.gnupg.org/download) to use. Then run `gpg --gen-key` and set it up like when you generate a GitHub GPG key.
 
-### Build Tool {#h3-3-build-tool}
+### Build Tool
 
 You can use Gradle or Maven as the build tool. Because of the nature of this project, I chose to use Maven in the beginning. So this article will use Maven to configure the `pom.xml` file.
 
 You need to have Maven installed into your system. Go to [download Apache Maven](https://maven.apache.org/download.cgi), uncompress the file, then add the entry to the Path environment variable with the value of the bin directory, like "C:\\Users\\user\\apache-maven-3.8.5\\bin" (Windows). Check this installation by running "mvn --version" into a new terminal.
 
-### Create a JIRA Account and Request a Ticket {#h3-4-create-a-jira-account-and-request-a-ticket}
+### Create a JIRA Account and Request a Ticket
 
 First, you will need to have a [Sonatype JIRA account](https://issues.sonatype.org/secure/Signup!default.jspa) to open a new ticket to request your access to publish your artifact.
 
 This sounds really weird, at least for the first time I had to do it. Just keep carrying on.
 
-Then, create a [JIRA ticket](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&amp;pid=10134) to fill your information. I will add screenshots to get you an idea of how to proceed. Then you will be assisted by a bot to complete your request.
+Then, create a [JIRA ticket](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134) to fill your information. I will add screenshots to get you an idea of how to proceed. Then you will be assisted by a bot to complete your request.
 
 [![JIRA Ticket 1](jira-ticket-1-1.png)](jira-ticket-1-1.png)
 
@@ -71,7 +71,7 @@ Then, create a [JIRA ticket](https://issues.sonatype.org/secure/CreateIssue.jspa
 
 As shown above, you have to fill your domain name, and the project's Git repository. Then prove ownership by adding a text record to your domain.
 
-### Next Steps {#h3-5-next-steps}
+### Next Steps
 
 That was the overall process. You can read [Publish Artifacts to Maven Central \| JetBrains Space](https://www.jetbrains.com/help/space/publish-artifacts-to-maven-central.html) and [OSSRH Guide - The Central Repository Documentation](https://central.sonatype.org/publish/publish-guide) for more details.
 
@@ -140,8 +140,8 @@ You will add your credentials. I would like to store encrypted passwords instead
 
 This process can be tricky, so you will likely have to solve some issues in the way.
 
-Set Up Maven in the Project {#h2-6-set-up-maven-in-the-project}
----------------------------------------------------------------
+Set Up Maven in the Project
+---------------------------
 
 This is the configuration that was applied to the project. It has many things, so it is exhausting. Once this is done properly, the release without errors will be trivial.
 
@@ -201,7 +201,7 @@ Then, other information about the project's repository:
 
 ```
 
-### Build Config {#h3-7-build-config}
+### Build Config
 
 This will add the configuration for the build tag.
 
@@ -335,7 +335,7 @@ The final build configuration will look like this:
 ```
 
 
-### Distribution Management Config {#h3-8-distribution-management-config}
+### Distribution Management Config
 
 Add this child to the project's root:
 
@@ -359,7 +359,7 @@ Add this child to the project's root:
 
 That way, you set the repositories for snapshots, and final release. If you go to the snapshot repository link, you will literally find the directory for all the repositories added with their reverse DNS.
 
-### Profiles Config {#h3-9-profiles-config}
+### Profiles Config
 
 We'll want to run a profile called ci-cd with the following configuration:
 
@@ -414,12 +414,12 @@ This means that the program will inline the passphrase when signing the artifact
 
 This is the profile to run when deploying the artifact.
 
-### Maven pom.xml File {#h3-10-maven-pom-xml-file}
+### Maven pom.xml File
 
 The final `pom.xml` file ends up [like this](https://github.com/tobiasbriones/jdesk/blob/v0.2.0/pom.xml).
 
-Deploy the Project {#h2-11-deploy-the-project}
-----------------------------------------------
+Deploy the Project
+------------------
 
 In this last step, if everything is all right, we can now deploy the artifact. Add "-SNAPSHOT" if you will deploy to the snapshot repository. For example:
 
@@ -450,8 +450,8 @@ Recall that the production release takes some 4 waiting hours to complete the
 
 deployment and be available at [Maven Search](https://search.maven.org).
 
-Result {#h2-12-result}
-----------------------
+Result
+------
 
 After deploying to the main repository, which took more than 4 hours to get it  
 
@@ -459,12 +459,12 @@ done, the result is there:
 
 [![JDesk 0.2.0 Deployed](jdesk-0.2.0-deployed.png)](jdesk-0.2.0-deployed.png)
 
-Conclusion {#h2-13-conclusion}
-------------------------------
+Conclusion
+----------
 
 The deployment of a Java Maven-based library to the Maven Central Repository was documented so users can import the library into their Java projects.
 
-### Recommendations {#h3-14-recommendations}
+### Recommendations
 
 * Make sure you include good JavaDocs in your project. That is important for a library that is going to be used by others.
 * The process might throw errors or warnings, always try to fix warnings as much as possible.

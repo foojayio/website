@@ -49,16 +49,16 @@ But what if you want to process or enrich changes in real time? For example, wha
 
 ![](1693934925104-700x394.png)
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 * If you are new to Kafka or you're just getting started, I recommend you start with [Kafka Documentation](https://kafka.apache.org/documentation/).
 * If you are new to Hazelcast or you're just getting started, I recommend you start with [Hazelcast Documentation](https://docs.hazelcast.com/home/).
 * For Kafka, you need to download Kafka, start the environment, create a topic to store events, write some events to your topic, and finally read these events. Here's a [Kafka Quick Start](https://kafka.apache.org/quickstart).
 * For Hazelcast, you can use either the [Platform](https://docs.hazelcast.com/hazelcast/latest/) or the [Cloud](https://docs.hazelcast.com/cloud/overview). I will use a local cluster.
 
-Step #1: Start Kafka {#h2-1-step-1-start-kafka}
------------------------------------------------
+Step #1: Start Kafka
+--------------------
 
 Run the following commands to start all services in the correct order:
 
@@ -80,8 +80,8 @@ $ bin/kafka-server-start.sh config/server.properties
 
 Once all services have successfully launched, you will have a basic Kafka environment running and ready to use.
 
-Step #2: Create a Java application project {#h2-2-step-2-create-a-java-application-project}
--------------------------------------------------------------------------------------------
+Step #2: Create a Java application project
+------------------------------------------
 
 The `pom.xml` should include the following dependencies in order to run Hazelcast and connect to Kafka:
 
@@ -101,8 +101,8 @@ The `pom.xml` should include the following dependencies in order to run Hazelcas
 ```
 
 
-Step #3: Create a Wikimedia Publisher class {#h2-3-step-3-create-a-wikimedia-publisher-class}
----------------------------------------------------------------------------------------------
+Step #3: Create a Wikimedia Publisher class
+-------------------------------------------
 
 Basically, the class reads from a URL connection, creates a Kafka Producer and sends messages to a Kafka topic:
 
@@ -132,8 +132,8 @@ private static Properties kafkaProps() {
 ```
 
 
-Step #4: Create a Main stream processing class {#h2-4-step-4-create-a-main-stream-processing-class}
----------------------------------------------------------------------------------------------------
+Step #4: Create a Main stream processing class
+----------------------------------------------
 
 This class creates a pipeline that reads from a Kafka source using the same Kafka topic, then it filters out messages that were created by bots (bot:true) and keeps only messages created by humans. It sends the output to a logger.
 
@@ -160,16 +160,16 @@ private static Properties kafkaProps() {
 ```
 
 
-Step #5: Enriching a stream {#h2-5-step-5-enriching-a-stream}
--------------------------------------------------------------
+Step #5: Enriching a stream
+---------------------------
 
 If you want to enrich real-time messages with batch or static data such as location details, labels or some features, you can follow the next step:
 
 1. Create a Hazelcast Map and load static data into it.
 2. Use the Map to enrich the Message stream using `mapUsingIMap`
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we explained how to build a real-time application to process Wikimedia streams using Kafka and Hazelcast.
 

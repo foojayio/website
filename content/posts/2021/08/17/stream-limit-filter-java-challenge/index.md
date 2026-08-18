@@ -27,8 +27,8 @@ Without further ado, let's go to the next Java Challenge!
 
 It's time to improve your Java skills with this Limit Stream Challenge.
 
-Limit Stream Java Challenge {#h2-0-limit-stream-java-challenge}
----------------------------------------------------------------
+Limit Stream Java Challenge
+---------------------------
 
 What will happen after the main method below is executed?
 

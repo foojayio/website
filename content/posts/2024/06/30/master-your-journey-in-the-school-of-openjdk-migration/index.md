@@ -24,8 +24,8 @@ Azul has led so many OpenJDK migrations, we could write a book. Like, seriously,
 
 [The School of OpenJDK Migration](https://www.azul.com/school-of-open-jdk-migration/) is your ultimate resource for mastering OpenJDK migration. Dive into our rich collection of webinars, where OpenJDK experts divulge their secrets, from foundational knowledge to advanced tactics, derived from industry knowledge and professional experience. You'll leave the course with a blueprint to navigate the complexities of OpenJDK migration with confidence and ease.
 
-How difficult are most OpenJDK migrations? {#h2-0-how-difficult-are-most-openjdk-migrations}
---------------------------------------------------------------------------------------------
+How difficult are most OpenJDK migrations?
+------------------------------------------
 
 For many smaller organizations with less complex infrastructures, an OpenJDK migration can be very straightforward. **"In fact, migrating to certified builds of OpenJDK can be very straightforward and simple for the vast majority of enterprises,"** I wrote in [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/). **"If you're migrating server applications, you're not likely to encounter any challenges."**
 
@@ -43,8 +43,8 @@ Every migration is unique, so it's critical to understand your goals. After you'
 2. **inventory to create a migration plan.** Execution. For each machine that requires a Java runtime, install the same version (or versions) of the OpenJDK distribution you choose.
 3. **Validation.** Test your applications to verify that everything works as expected.
 
-Join the School of OpenJDK Migration {#h-join-the-school-of-openjdk-migration-nbsp-nbsp}
-----------------------------------------------------------------------------------------
+Join the School of OpenJDK Migration
+------------------------------------
 
  The school provides strategies and tactical tips from Java Champions and migration experts who have real-world experience. Try it now and get:
 

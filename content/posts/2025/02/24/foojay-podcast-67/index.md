@@ -32,13 +32,13 @@ But that's only my story. I invited several guests to share their knowledge abou
 * Len Epp is the co-founder of Leanpub, so he can tell us a lot about ebooks.
 * And we start with Trisha Gee, who wrote a lot of books!
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube xhEiXA8ImJo >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -46,23 +46,23 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Trisha Gee {#h3-3-trisha-gee}
+### Trisha Gee
 
 * <https://www.linkedin.com/in/trishagee/>
 * <https://jvm.social/@trisha_gee>
 * <https://bsky.app/profile/trishagee.bsky.social>
 * <https://x.com/trisha_gee>
 
-### Len Epp {#h3-4-len-epp}
+### Len Epp
 
 * <https://www.linkedin.com/in/lenepp/>
 * <https://bsky.app/profile/lenepp.bsky.social>
 * <https://x.com/lenepp>
 
-### Wim Deblauwe {#h3-5-wim-deblauwe}
+### Wim Deblauwe
 
 * <https://www.linkedin.com/in/wimdeblauwe/>
 * <https://bsky.app/profile/wimdeblauwe.com>
@@ -70,21 +70,21 @@ Guests {#h2-2-guests}
 * <https://www.wimdeblauwe.com/>
 * <https://www.widit.be/>
 
-### Marián Varga {#h3-6-mari-n-varga}
+### Marián Varga
 
 * <https://www.dastalvi.com/book/>
 * <https://www.linkedin.com/in/mari%C3%A1n-varga-4869a042/>
 * <https://mastodon.social/@mrvarga>
 
-Links {#h2-7-links}
--------------------
+Links
+-----
 
-### Book by Frank {#h3-8-book-by-frank}
+### Book by Frank
 
 * <https://webtechie.be/books/>
 * <https://leanpub.com/gettingstartedwithjavaontheraspberrypi/>
 
-### Books and links by Trisha Gee {#h3-9-books-and-links-by-trisha-gee}
+### Books and links by Trisha Gee
 
 * <https://trishagee.com/books/>
 * <https://trishagee.com/2022/12/12/tools-and-processes-for-collaborating-on-a-book-remotely/>
@@ -93,18 +93,18 @@ Links {#h2-7-links}
 * [https://youtu.be/RzaNJzz5jW8](https://youtu.be/RzaNJzz5jW8?feature=shared)
 * [https://learning.oreilly.com/search/?q=trisha%20gee\&rows=100\&language=en\&language=es](https://learning.oreilly.com/search/?q=trisha%20gee&rows=100&language=en&language=es)
 
-### Books by Wim Deblauwe {#h3-10-books-by-wim-deblauwe}
+### Books by Wim Deblauwe
 
 * <https://www.infoq.com/minibooks/spring-boot-api-backend-version2/>
 * <https://www.wimdeblauwe.com/books/modern-frontends-with-htmx/>
 * <https://www.wimdeblauwe.com/books/taming-thymeleaf/>
 
-### Book by Marián Varga {#h3-11-book-by-mari-n-varga}
+### Book by Marián Varga
 
 * <https://www.dastalvi.com/book/>
 * <https://bsky.app/profile/love2integrate.com>
 
-### Leanpub {#h3-12-leanpub}
+### Leanpub
 
 * <https://www.youtube.com/leanpub>
 * <https://twitter.com/leanpub>
@@ -112,12 +112,12 @@ Links {#h2-7-links}
 * [https://www.instagram.com/leanpub](https://www.instagram.com/leanpub%20)
 * [https://bsky.app/profile/leanpub.bsky.social](https://bsky.app/profile/leanpub.bsky.social%20)
 
-### Lulu {#h3-13-lulu}
+### Lulu
 
 * [https://www.lulu.com/](https://www.lulu.com/%20%20)
 
-Content {#h2-14-content}
-------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests
 

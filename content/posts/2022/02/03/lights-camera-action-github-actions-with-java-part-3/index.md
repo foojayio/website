@@ -52,8 +52,8 @@ steps:
 
 Here you'll notice the actions/setup-java@v2 is the same uses value, but will now support 2 additional vendor build distributions microsoft and liberica.
 
-Specify a Supported JDK Distribution {#h2-0-specify-a-supported-jdk-distribution}
----------------------------------------------------------------------------------
+Specify a Supported JDK Distribution
+------------------------------------
 
 To specify the build distribution you simply add it to the `distribution` attribute as shown below:
 
@@ -118,8 +118,8 @@ steps:
 ```
 
 
-Specify any JDK Distribution {#h2-1-specify-any-jdk-distribution}
------------------------------------------------------------------
+Specify any JDK Distribution
+----------------------------
 
 Now that this job uses the new `foojayio/setup-java@disco` you can now specify any JDK distribution as you wish! Let's look at ways we can specify distributions in yml.
 

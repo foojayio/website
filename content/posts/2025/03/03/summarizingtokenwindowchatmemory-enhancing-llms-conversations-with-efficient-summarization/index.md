@@ -37,8 +37,8 @@ These memory policies help optimize resource usage while ensuring conversations 
 
 While both approaches are effective, I wondered why not add a **third approach** ---one that summarizes old messages rather **than removing** them. This idea led me to experiment and eventually implement **SummarizingTokenWindowChatMemory** .
 
-**SummarizingTokenWindowChatMemory** {#h2-0-summarizingtokenwindowchatmemory}
------------------------------------------------------------------------------
+**SummarizingTokenWindowChatMemory**
+------------------------------------
 
 The core idea behind **SummarizingTokenWindowChatMemory** is straightforward:
 
@@ -246,7 +246,7 @@ The class also handles system messages separately, preserving them during summar
 
 Now, let's work on the **Sumerizer**.
 
-### **The Summarizer Interface** {#h3-1-the-summarizer-interface}
+### **The Summarizer Interface**
 
 At its core, **OpenAILLMSummarizer** implements the Summarizer interface:
 
@@ -263,7 +263,7 @@ public interface Summarizer {
 
 This provides a contract for any summarization strategy.
 
-### **Summarization Logic** {#h3-2-summarization-logic}
+### **Summarization Logic**
 
 The main implementation, **OpenAILLMSummarizer** , is responsible for processing chat history and condensing it into a summary:
 
@@ -316,7 +316,7 @@ public class OpenAILLMSummarizer implements Summarizer {
 * Constructs a structured prompt containing key user, AI, and system messages.
 * Invokes the **SummarizerAssistant** , which interacts with OpenAI's language model to generate the summary.
 
-### **LLM Summarization** {#h3-3-llm-summarization}
+### **LLM Summarization**
 
 The **SummarizerAssistant** provides an AI-driven summarization method:
 
@@ -348,8 +348,8 @@ This mechanism:
 * Calls an **LLM model** (e.g., OpenAI's GPT) to generate concise summaries.
 * Ensures that the summarized conversation remains within a predefined token limit.
 
-Why This Matters {#h2-4-why-this-matters}
------------------------------------------
+Why This Matters
+----------------
 
 The **SummarizingTokenWindowChatMemory** approach effectively manages long conversations while staying within the constraints of an LLM's context window. The chatbot can retain essential details by summarizing older exchanges, ensuring coherence without exceeding token limits.
 
@@ -363,8 +363,8 @@ Moreover, the summarization step itself adds computational overhead, and its eff
 
 These trade-offs must be carefully weighed when deciding whether this approach is the right fit for a given application.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 To test its functionality, I created a simple chatbot that suggests recipes.
 

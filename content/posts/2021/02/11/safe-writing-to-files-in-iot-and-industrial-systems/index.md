@@ -19,19 +19,19 @@ frozen: false
 
 Especially on IoT devices, file corruption on shutdown is a common concern. This article discusses how to write to disk safely in Java, combining disk sync, shutdown hooks, and atomic renaming of files.
 
-### Files On Disk Can Still Easily Become Corrupted {#h3-0-files-on-disk-can-still-easily-become-corrupted}
+### Files On Disk Can Still Easily Become Corrupted
 
 For performance optimization, file systems write to disks asynchronously resulting in potential corruption when a hard system shutdowns occurs through power off or crashes.
 
 As this has become a rare experience for desktop and server users, it comes as a surprise to many developers working on IoT devices and industrial computers that hard power cuts are a common operational scenario and storage is far less robust than expected.
 
-### General Problem {#h3-1-general-problem}
+### General Problem
 
 Operating systems cache writes to storage devices in RAM buffers. Additionally, spinning disks and SSDs have their own RAM buffers for write optimization. To clear buffers and guarantee safe physical storage, file systems provide the sync() command, which cascades through the hierarchy of storage devices.
 
 It should be no surprise that the "sync" call is expensive, even more so on embedded systems where I/O is often slower for cost reasons and even writes to SSD are heavily buffered and delayed for the purpose of reducing wear on the SSD. As calling sync() for every write operation is a no go area due to poor performance in most scenarios, the developer needs to make the correct design choices.
 
-### Useful Design Patterns {#h3-2-useful-design-patterns}
+### Useful Design Patterns
 
 1. File flush() and sync()
 2. Shutdown hooks and SIGTERM versus SIGKILL
@@ -89,7 +89,7 @@ You may expect that modern file system have transactions or locking mechanism fo
 
 The above works for local file system as well as network protocos like NFS, SMB FTP, SCP...
 
-### Notes {#h3-3-notes}
+### Notes
 
 * When the reading application does not find a "config.dat", it can recover the previous "config.dat_old".
 * This also works when the reading application is polling for files as it can never open a half written file by accident.

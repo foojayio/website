@@ -36,8 +36,8 @@ However, it means that you download the original image. It entails two problems:
 
 This post will cover two alternatives: traditional and brand-new solutions.
 
-Ahead-of-time resizing {#h2-0-ahead-of-time-resizing}
------------------------------------------------------
+Ahead-of-time resizing
+----------------------
 
 The traditional solution to a single image source has been ahead-of-time resizing. Before releasing, designers would take time to provide multiple image versions in different resolutions. On this blog, I'm using this technique. I provide three resolutions to display the post's main image in different contexts as background images:
 
@@ -72,8 +72,8 @@ This way has worked for ages, but it has two issues. First, providing multiple r
 
 However, the volume of necessary storage could be twice or thrice the size of the original image, depending on the number of extra resolutions created. In an assets-rich environment, *e.g.*, e-commerce would significantly increase costs.
 
-On-the-fly resizing {#h2-1-on-the-fly-resizing}
------------------------------------------------
+On-the-fly resizing
+-------------------
 
 I recently stumbled upon `imgproxy`, a component to resize images on-the-fly:
 > imgproxy makes websites and apps blazing fast while saving storage and SaaS costs
@@ -144,7 +144,7 @@ routes:
 
 With the above, `/resize/200/ai-generated.jpg` to Apache APISIX is rewritten as `/rs:fill/w:200/plain/http://server:3000/ai-generated.jpg@webp` to `imgproxy`.
 
-### Testing {#h3-2-testing}
+### Testing
 
 We can set up a small testing sample with Docker Compose:
 
@@ -172,14 +172,14 @@ We can now test the above setup with the browser's Developer Tools, emulating sm
 * The returned image is in WebP format; its weight is 14.4kb
 * The original JPEG image weighs 154kb, more than ten times as much. It's a lot of network bandwidth saving!
 
-### Discussion {#h3-3-discussion}
+### Discussion
 
 Cutting your storage costs by ten is naturally a great benefit. However, it's not all unicorns and rainbows. Computing the resized image is a compute-intensive operation; it costs CPU time for each request. Moreover, however efficient `imgproxy` is, it takes time to create the image. We traded storage costs for CPU costs and now incur a slight performance hit.
 
 To fix it, we need a caching layer in front, either a custom one or, more likely, a . You may object that we will store assets again; thus, storage costs will rise again. However, a considerable difference is that the cache works only for **used** images, whereas we previously paid for storing all images in the first solution. You can also apply known recipes for caching, such as pre-warming, when you know a group of images will be in high demand, *e.g.*, before an event.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, we described how to use Apache APISIX with `imgproxy` to reduce the storage cost of images in multiple resolutions. With caching on top, it adds more components to the overall architecture but shrinks down storage costs.
 

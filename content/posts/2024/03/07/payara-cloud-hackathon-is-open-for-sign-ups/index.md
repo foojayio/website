@@ -29,31 +29,31 @@ Winners will be spotlighted across our platforms, earn money prizes, and present
 
 <br />
 
-Power up Your Jakarta EE! {#h2-0-power-up-your-jakarta-ee}
-----------------------------------------------------------
+Power up Your Jakarta EE!
+-------------------------
 
-### **Your Mission:** {#h3-1-your-mission}
+### **Your Mission:**
 
 * **Champion Sustainability:** Develop applications that tackle key sustainability issues, from energy conservation and waste reduction to sustainable agriculture and eco-friendly transport.
 * **Maximize Jakarta EE:** Display the strength of Jakarta EE and related technologies in creating scalable and impactful solutions.
 * **Excel with Payara Cloud:** Highlight the simplicity of deploying Jakarta EE applications on Payara Cloud, showcasing its scalability and reliability.
 
-### **Why Participate?** {#h3-2-why-participate}
+### **Why Participate?**
 
 * Work solo or team up for a multidisciplinary approach, welcoming participants globally.
 * A chance to contribute to sustainability, push the limits of Jakarta EE and Payara Cloud, and gain recognition for your innovative solutions.
 * Winners will be spotlighted across our platforms, earn money prizes, and present their solutions to a worldwide audience.
 
-Awards {#h2-3-awards}
----------------------
+Awards
+------
 
 * First Place -- £3,000
 * Second Place -- £2,000
 * Third Place -- £1,000
 * Payara \& Eclipse Foundation Swag Bag for the **Top 10** contestants
 
-How to Enter? {#h2-4-how-to-enter}
-----------------------------------
+How to Enter?
+-------------
 
 1. Fill in[the signup form on this page.](https://www.payara.fish/page/payara-hackathon-2024/) Make sure you enter all the data!
 2. You may want to join our informative webinar on the 8th of March -- [register here](https://us02web.zoom.us/webinar/register/WN_EWfDdM0jQeOIcqYOuXNbRA#/registration).

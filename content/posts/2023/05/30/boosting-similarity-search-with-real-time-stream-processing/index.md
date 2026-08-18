@@ -29,7 +29,7 @@ Here we present a hybrid approach by taking the strengths of vector databases an
 
 ![](Hazelcast_Qdrant-700x394.png)
 
-### Step 1: run Hazelcast and install the client {#h3-0-step-1-run-hazelcast-and-install-the-client}
+### Step 1: run Hazelcast and install the client
 
 ```
 !docker run -p 5701:5701 hazelcast/hazelcast:5.2
@@ -37,7 +37,7 @@ Here we present a hybrid approach by taking the strengths of vector databases an
 ```
 
 
-### Step 2: run Qdrant and install the client {#h3-1-step-2-run-qdrant-and-install-the-client}
+### Step 2: run Qdrant and install the client
 
 ```
 !docker run -p 6333:6333 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
@@ -53,7 +53,7 @@ movies = [{"id":"1","title":"Zack Snyder''s Justice League","description":"Deter
 ```
 
 
-### Step 3: use Qdrant to store movies, vectorize descriptions, and do similarity search {#h3-2-step-3-use-qdrant-to-store-movies-vectorize-descriptions-and-do-similarity-search}
+### Step 3: use Qdrant to store movies, vectorize descriptions, and do similarity search
 
 ```
 qdrant = QdrantClient(":memory:") 
@@ -105,7 +105,7 @@ for hit in hits:
 ```
 
 
-### Step 4: use Hazelcast to store casts and actors, perform SQL on movies, casts and actors {#h3-3-step-4-use-hazelcast-to-store-casts-and-actors-perform-sql-on-movies-casts-and-actors}
+### Step 4: use Hazelcast to store casts and actors, perform SQL on movies, casts and actors
 
 Up to here, we used Qdrant for similarity search and filtered results with predefined attributes defined in the payload. If we want to boost this similarity search with features that do not belong to vectors or payload, we can use Hazelcast features for real-time stream processing and fast data store.
 
@@ -184,8 +184,8 @@ client.shutdown()
 ```
 
 
-Summary {#h2-4-summary}
------------------------
+Summary
+-------
 
 So here you have it, boosting similarity search with Hazelcast and Qdrant.
 

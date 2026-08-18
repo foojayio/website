@@ -25,8 +25,8 @@ With faster Java releases, it's an exciting time to be a Java developer. Every n
 
 To give them a spin, you have the tooling support in Eclipse Java IDE ready at your disposal.
 
-Under the Hood {#h2-0-under-the-hood}
--------------------------------------
+Under the Hood
+--------------
 
 The Java tooling in Eclipse IDE has its own compiler implementation which not only generates class files, but also produces a Java document model which forms the basis for implementing a large number of tooling features.
 
@@ -34,8 +34,8 @@ To support the latest Java versions, the Eclipse Compiler for Java implements al
 
 Here is a sneak peek into the major interesting features of recent Java versions with their support in the Eclipse IDE.
 
-Highlights {#h2-1-highlights}
------------------------------
+Highlights
+----------
 
 To get started, you can add a JRE in Preferences \> Java \> Installed JREs:
 
@@ -53,7 +53,7 @@ When a preview feature is used in the code, a default warning is provided by the
 
 ![](Preview-features-severity.png)
 
-### Sealed Classes {#h3-2-sealed-classes}
+### Sealed Classes
 
 Sealed classes have received a second round of preview in Java 16 and they can be used to restrict the type hierarchy of a class. You can create a permitted class or interface declaring the sealed type as its super type with the provided Quick Fix (Ctrl/Cmd + 1):
 
@@ -63,7 +63,7 @@ The type hierarchy needs to be controlled at the permitted sub type by declaring
 
 ![](Restrict-permitted-class.png)
 
-### Records {#h3-3-records}
+### Records
 
 You can create a record in Eclipse IDE by using the New \> Record wizard which provides more options like selecting the visibility modifier and adding the interfaces to be implemented by the record:
 
@@ -81,7 +81,7 @@ A lot of new settings have been added to the formatter profile to control the fo
 
 ![](Record-formatter.png)
 
-### Pattern Matching for instanceof {#h3-4-pattern-matching-for-instanceof}
+### Pattern Matching for instanceof
 
 Pattern matching for instanceof provides a pattern variable with the `instanceof` operator. Eclipse IDE provides you a new clean up option on the Java Feature tab of your clean up profile to use the pattern matching for instanceof and simplify your code by reducing explicit casts created after an `instanceof` check:
 
@@ -91,7 +91,7 @@ Eclipse IDE understands the pattern variable's type and scope, and allows you to
 
 ![](Instanceof-pattern-variable-actions.png)
 
-### Text Blocks {#h3-5-text-blocks}
+### Text Blocks
 
 You can create a text block by enclosing any text in triple quotes. Eclipse IDE makes it easier for you to add this new delimiter with the new keyboard shortcut Ctrl/Cmd + Shift + ' (apostrophe). You can also select any existing text and use this key binding to quickly enclose it in text block delimiters:
 
@@ -101,7 +101,7 @@ The indentation of a text block can be configured in the formatter profile:
 
 ![](Text-block-formatter.png)
 
-### Switch Expressions {#h3-6-switch-expressions}
+### Switch Expressions
 
 Eclipse IDE provides you a Quick Assist (Ctrl/Cmd + 1) and clean up option to convert eligible switch statements into switch expressions:
 
@@ -125,7 +125,7 @@ The formatter profile has new settings that allow you to control spaces at vario
 
 ![](Switch-formatter.png)
 
-### Local-Variable Type Inference {#h3-7-local-variable-type-inference}
+### Local-Variable Type Inference
 
 While extracting an expression to a local variable, you can choose to declare the type of the local variable as `var`:
 
@@ -137,7 +137,7 @@ Quick Assists are provided to change the type of a variable from `var` to the in
 
 You can view the inferred type for `var` by just hovering over it and you can also use Ctrl/Cmd + click on `var` to navigate to that type.
 
-### Java Platform Module System {#h3-8-java-platform-module-system}
+### Java Platform Module System
 
 To convert an existing Java project to a modular project by creating a module-info.java file in it, you can right-click on the project in the Package or Project Explorer and select Configure \> Create module-info.java:
 
@@ -167,7 +167,7 @@ You can also provide a service implementation from module-info.java with the hel
 
 ![](Create-service-implementation.png)
 
-### Functional Interface Instances {#h3-9-functional-interface-instances}
+### Functional Interface Instances
 
 You can hover over the `->` of a lambda expression or the `::` of a method reference to view the functional interface method being implemented and you can use Ctrl/Cmd + click on these operators to navigate to that method:
 
@@ -177,8 +177,8 @@ Eclipse IDE provides you many quick assist, clean up, formatting, and refactorin
 
 ![](Functional-instances-quick-assists.png)
 
-Summary {#h2-10-summary}
-------------------------
+Summary
+-------
 
 This post provides you a glimpse of the tooling features provided by Eclipse IDE as part of its support for the recent Java versions.
 

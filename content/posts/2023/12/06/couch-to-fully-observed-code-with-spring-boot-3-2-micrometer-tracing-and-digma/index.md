@@ -26,8 +26,8 @@ frozen: false
 
 {#more-103351}
 
-Tracing \> Debugging {#h2-0-tracing-debugging}
-----------------------------------------------
+Tracing \> Debugging
+--------------------
 
 There are many benefits to being able to follow what your Spring Boot code is doing using tracing. When used effectively, traces can reveal a lot about the inner workings of complex systems, or provide early feedback when you make mistakes in introducing new code changes.
 
@@ -35,14 +35,14 @@ Unlike debugging, which basically allows you to pause at a specific moment in ti
 
 The main reason most developers use debugging over tracing is that it is more available, immediate, and does not require any complicated setup. However, technologies such as Micrometer and OpenTelemetry are receiving wider support and deeper integration in existing libraries, changing the parameters of this equation.
 
-How to get to fully observed code with Spring Boot and Micrometer {#h2-1-how-to-get-to-fully-observed-code-with-spring-boot-and-micrometer}
--------------------------------------------------------------------------------------------------------------------------------------------
+How to get to fully observed code with Spring Boot and Micrometer
+-----------------------------------------------------------------
 
 Thankfully, it's extremely easy to get started with Micrometer. These capabilities are even easier with Spring Boot 3.2 but are available in Spring 3.x releases. To make it even easier, we (Digma) invested in a free IDE plugin (IntelliJ only for now, though other IDEs coming soon!) that can reduce the amount of work required to start getting information about your code with tracing ---  to a few clicks. Digma also runs locally! So there is no issue about sending observability data to the cloud.
 
 I (Roni) have previously written on the benefits of using Micrometer Tracing in terms of its low-performance impact (definitely compared to the OTEL agent, which is much more suited for dev and test). But how easy it is to get started? Here is a quick guide to getting from no observability to fully observed in just a few steps.
 
-### Like all else, start with dev {#h3-2-like-all-else-start-with-dev}
+### Like all else, start with dev
 
 There are many benefits to using Tracing, even in dev. For once, you can get a feel for the type of feedback and knowledge you can gain by analyzing the code, with minimal changes.
 
@@ -70,8 +70,8 @@ Behind the scenes, the plugin will add the required dependencies to the build.gr
 
 That's it! All that remains now is to launch your application and run some traffic through it, you should be seeing data appear almost immediately.
 
-What we do with observability matters {#h2-3-what-we-do-with-observability-matters}
------------------------------------------------------------------------------------
+What we do with observability matters
+-------------------------------------
 
 It is tempting to look at the ability to quickly navigate from the code to the relevant trace as the holy grail of leveraging tracing and observability while coding. However, if you try to go down that path you'll soon find that the individual trace is just not that important.
 
@@ -93,8 +93,8 @@ In this sense, the first and most important priority is to actually find these i
 
 ![](digma-insights.png)
 
-Adding more observability {#h2-4-adding-more-observability}
------------------------------------------------------------
+Adding more observability
+-------------------------
 
 Beyond automated instrumentation available for Spring Boot, JDBC, and other libraries, you may want to inspect the behavior of specific functions in your code. Micrometer provides some great ways to do that (with the DSL syntax or annotations). With the plugin implementation, we wanted to make that extra easy from the context of any function.
 
@@ -102,11 +102,11 @@ Beyond automated instrumentation available for Spring Boot, JDBC, and other libr
 
 Clicking the button will take care of adding the `@Observe` annotation to start recording useful information about the function invocations. In this manner, we can gradually evolve the project observability coverage from the extremities of the API and clients to the care of the domain logic.
 
-### Things to consider when running in production {#h3-5-things-to-consider-when-running-in-production}
+### Things to consider when running in production
 
 At some point, it would make sense to start gathering observability data not just from your own machine, or the testing environments, but from the real source of truth --- production. Due to its minimal footprint and the fact that it avoids using reflection, Micrometer Tracing performs great in prod. However, there are still some things to consider when observing real-world, high-load environments.
 
-### Sampling {#h3-6-sampling}
+### Sampling
 
 Your application in production can generate a very large number of spans (depending on traffic and instrumentation). To reduce the network traffic and the volume of stored data, tracing solutions usually support sampling. Those spans that are "sampled" will be sent to your tracing backend and the spans that are not "sampled" won't be.
 
@@ -114,7 +114,7 @@ There are two main types of sampling: client-side/head sampling when spans are s
 
 Spring Boot applications using Micrometer Tracing use client-side sampling with 10% sampling rate by default. You can change this behavior using the `management.tracing.sampling.probability` property, e.g.: set it to `0.01` if you want to keep 1% of your traces or set it to `1.0` if you want to keep all of them in case you have very light traffic or you are doing server-side sampling.
 
-### High Cardinality {#h3-7-high-cardinality}
+### High Cardinality
 
 If you are collecting metrics, you may run into a cardinality problem in production (depending on your traffic patterns). High cardinality means that one of your metrics has a dimension that can have many (possibly infinite) possible values. For example, if you're keeping a metric for variables such as email addresses or user IDs that are different for every user, even a request identifier that is unique for every request your application receives, you can end up with millions (or billions) of time series simply because one of the dimensions of your metric can have millions (or billions) of values.
 
@@ -122,8 +122,8 @@ High cardinality can increase your metrics data to unmanageable proportions. It 
 
 Please be aware of the cardinality of the dimensions you use and always consider user input as high cardinality data (normalize it). You can never know if the user has a random generator handy just to bring your app down. If you need to record high cardinality data, instead of trying to attach this data to your metrics, try to use a different output that was designed to handle high cardinality data, e.g.: logging, distributed tracing, event store, etc. Also, here's an article about high cardinality if you want to learn more: <https://develotters.com/posts/high-cardinality/>
 
-Tell us what observability reveals for you {#h2-8-tell-us-what-observability-reveals-for-you}
----------------------------------------------------------------------------------------------
+Tell us what observability reveals for you
+------------------------------------------
 
 Observability is an important part of the development cycle in dev, test, and production.
 

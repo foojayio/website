@@ -25,8 +25,8 @@ Staying current helps to mitigate security risks, while also benefiting from bug
 
 This is true whether you're deploying to a cloud or locally, and applies regardless of the deployment type, whether container images, VMs, or bare metal.
 
-The challenge of keeping microservices up to date {#h2-0-the-challenge-of-keeping-microservices-up-to-date}
------------------------------------------------------------------------------------------------------------
+The challenge of keeping microservices up to date
+-------------------------------------------------
 
 Updating an application runtime is, however, typically a grueling task to undertake. With each new version, breaking changes can be introduced that directly impact your application, your configuration, or your operations. Breaking changes translate to significant development effort being needed to re-run all the tests and address any regressions. Similarly, the operations team also need to ensure that all their automation still works with the new version, and that it remains compatible with their target deployment environment.
 
@@ -38,19 +38,19 @@ Now multiply these concerns by the hundreds or thousands of deployments of your 
 
 Although container image scanning is improving, containers can further exacerbate the problem by obfuscating old, possibly unsupported, runtimes and dependencies. Teams might not even be aware of an aging runtime and the potential security risks it could pose.
 
-Zero-migration architecture {#h2-1-zero-migration-architecture}
----------------------------------------------------------------
+Zero-migration architecture
+---------------------------
 
 This is where the benefit of a [zero-migration architecture](https://openliberty.io/docs/latest/zero-migration-architecture.html?utm_source=foojay&utm_medium=article&utm_id=zeromigration "zero-migration architecture") comes in. Zero migration is a core design principle of the [Open Liberty](https://openliberty.io/?utm_source=foojay&utm_medium=article&utm_id=zeromigration "Open Liberty") Java application runtime and it seeks to make updating the application runtime quick and easy.
 
 Zero migration ensures that a valid runtime configuration from one Liberty release functions the same for all future releases. This means that you're able to update the Liberty application runtime and gain all the benefits of the newer version: security and bug fixes, performance enhancements, and new functionality and features, but without any disruption to your existing application logic and operations.
 
-How does zero-migration architecture work? {#h2-2-how-does-zero-migration-architecture-work}
---------------------------------------------------------------------------------------------
+How does zero-migration architecture work?
+------------------------------------------
 
 New versions of the application runtime (Liberty, in our case) only add new capabilities; new versions never remove or change existing capabilities. So the configuration that you create for your application today will work and behave in the same way for every future version.
 
-### Modularity {#h3-3-modularity}
+### Modularity
 
 Modularity is essential here. For Liberty, *features* are what provide its modularity. Each Liberty capability is associated with a feature; for example, the Admin Center feature provides an administrative GUI, and the Audit feature provides tracking of auditable events. Features are composed of the feature name and the feature version, which you specify in the [configuration files](https://openliberty.io/docs/latest/reference/config/server-configuration-overview.html?utm_source=foojay&utm_medium=article&utm_id=zeromigration "configuration files") (e.g. `server.xml` file) for the Liberty instance on which the application runs. The versions of the features are not tied to the version of Liberty.
 
@@ -58,8 +58,8 @@ You can upgrade the version of Liberty on which your application runs (e.g. to g
 
 For example, if your application is using MicroProfile Config 2.0 (the `mpConfig-2.0` feature), it's up to you if and when you want to move up to `mpConfig-3.0`, `mpConfig-3.1`, or any other future versions of MicroProfile Config. Your application can continue to use `mpConfig-2.0` while Liberty receives updates, including bug and security fixes, new features and functionality, and performance enhancements.
 
-Easily upgrade to a new version of Liberty {#h2-4-easily-upgrade-to-a-new-version-of-liberty}
----------------------------------------------------------------------------------------------
+Easily upgrade to a new version of Liberty
+------------------------------------------
 
 A new version of Liberty is released every four weeks, though you can skip one or more versions when upgrading. So upgrading to a new Liberty version has to be easy, yet decoupled from the feature versions.
 
@@ -71,8 +71,8 @@ In a development environment, update the `version` attribute in the `runtimeArti
 
 After upgrading, your application configuration remains unchanged so that your app continues to run using the same versions of the features that it uses (zero migration). When you're ready to upgrade the feature version, you can change the feature version number in the app's server configuration file (`server.xml`) and then test that the app still runs as expected and make any modifications needed to the source code.
 
-Caveats {#h2-5-caveats}
------------------------
+Caveats
+-------
 
 It wouldn't be the full story without the caveats. Thankfully, in Liberty, there are only a few and they mainly relate to important security fixes and circumstances outside of the control of the Liberty developers:
 
@@ -88,8 +88,8 @@ Out of scope of Liberty's zero migration policy:
 
 If you're running your applications in a business production environment and you find yourself unable to quickly move to a newer version of Liberty, but need a specific bug or security fix, a [paid subscription with IBM](https://openliberty.io/support/?utm_source=foojay&utm_medium=article&utm_id=zeromigration "paid subscription with IBM") means you can contact IBM Support to receive an iFix that you can apply to your existing supported version. That iFix is then included in future releases of Liberty, meaning you won't need to reapply it when you do move to the latest version.
 
-Summary: Zero migration vs technical debt {#h2-6-summary-zero-migration-vs-technical-debt}
-------------------------------------------------------------------------------------------
+Summary: Zero migration vs technical debt
+-----------------------------------------
 
 Zero migration not only reduces your technical debt, the overhead of keeping a runtime current, but in many cases eliminates it entirely, allowing you to focus on the higher value items of development and operations.
 

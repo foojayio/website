@@ -21,8 +21,8 @@ The following four short videos will take you step-by-step through installing, w
 
 {#more-36262}
 
-Introduction to Payara Server {#h2-0-introduction-to-payara-server}
--------------------------------------------------------------------
+Introduction to Payara Server
+-----------------------------
 
 Learn how to write a simple Hello World application and deploy it to Payara Server.
 

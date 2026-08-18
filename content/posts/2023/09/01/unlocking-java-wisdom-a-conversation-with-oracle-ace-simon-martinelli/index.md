@@ -24,16 +24,16 @@ frozen: false
 
 In a recent insightful interview, Simon Martinelli, an Oracle ACE associate and veteran Java developer, shares his career experiences, software development philosophies, and views on mentoring. With over two decades in the industry, Martinelli offers a perspective that combines the wisdom of experience with a focus on simplicity and constant learning.
 
-Profiles: {#h2-0-profiles}
---------------------------
+Profiles:
+---------
 
 * 🌍 Homepage:[martinelli.ch](https://martinelli.ch/)
 * 👔 LinkedIn:[Simon Martinelli on LinkedIn](https://www.linkedin.com/in/simonmartinelli/?originalSubdomain=ch)
 * 🐦 Twitter:[@simas_ch on Twitter](https://twitter.com/simas_ch)
 * 📦 GitHub:[simasch on GitHub](https://github.com/simasch)
 
-Fun Fact: {#h2-1-fun-fact}
---------------------------
+Fun Fact:
+---------
 
 > Before starting my IT career, I was working as a traffic controller at Swiss Railways.  
 
@@ -143,6 +143,6 @@ And finally - stay curious!
 
 
 
-### Conclusion {#h3-2-conclusion}
+### Conclusion
 
 The wisdom shared by Simon Martinelli is not just a reflection of his own journey but serves as guiding principles for software developers at all stages of their careers. Whether you're a seasoned developer or just starting out, his emphasis on simplicity in solutions, the importance of mentoring, and the value of ongoing education make for invaluable lessons. His pragmatic and down-to-earth insights provide a road map for navigating the complex, ever-evolving landscape of software development.

@@ -26,8 +26,8 @@ This is the next part in the series of "JavaFX in Action" interviews. Are you wo
 4. [March '25: Mike Hearn, Sven Reimers, Chris Newland](https://foojay.io/today/video-series-javafx-in-action-part-4/)
 5. [July '25: Cormac Redmond, Brian Schlining, Gerrit Grunwald, Dirk Lemmermann](https://foojay.io/today/video-series-javafx-in-action-part-5/)
 
-Vlad Protsenko: Combining Clojure with JavaFX for Game Development with Defold {#h2-0-vlad-protsenko-combining-clojure-with-javafx-for-game-development-with-defold}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Vlad Protsenko: Combining Clojure with JavaFX for Game Development with Defold
+------------------------------------------------------------------------------
 
 [Vlad Protsenko](https://www.linkedin.com/in/vlad-protsenko-0999b2163/) is a Senior Developer with proficiency in many JVM-based languages. He worked both in very small and large teams, gaining experience in developing projects of various sizes, from scratch and from legacy codebases. He enjoys full-stack development, writing backend, frontend, and Android applications. He started as a game developer and switched to developing enterprise software, currently mixing both at Defold.
 
@@ -42,8 +42,8 @@ The [Cljfx library](https://www.jfx-central.com/tools/cljfx) is a declarative, f
 
 More info in [this blog post](https://webtechie.be/post/2025-10-16-jfxinaction-vlad-protsenko-closure-cljfx-defold/).
 
-Matt Coley: Diving into byte code and JARs with Recaf and JavaFX libraries {#h2-1-matt-coley-diving-into-byte-code-and-jars-with-recaf-and-javafx-libraries}
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Matt Coley: Diving into byte code and JARs with Recaf and JavaFX libraries
+--------------------------------------------------------------------------
 
 [Matt Coley](https://www.coley.software/) got into Java development when he wanted to find out how Minecraft works. Because of his many experiments, he gained a lot of knowledge about Java byte code, how it can be converted back to Java code, and how JARs can hide the real code from the user or contain malicious code. He combines all his knowledge in the Recaf tool and the JavaFX libraries he created.
 
@@ -55,8 +55,8 @@ As Recaf wants to provide an IDE similar to IntelliJ IDEA, Matt needed a framewo
 
 More info in [this blog post](https://webtechie.be/post/2025-10-30-jfxinaction-matt-coley-recaf-bentofx-treemapfx-glcanvasfx/).
 
-Craig Raw: Sparrow Bitcoin Wallet {#h2-2-craig-raw-sparrow-bitcoin-wallet}
---------------------------------------------------------------------------
+Craig Raw: Sparrow Bitcoin Wallet
+---------------------------------
 
 [Craig Raw](https://github.com/craigraw) is the creator of the Sparrow Bitcoin Wallet. He lives in South Africa. Funny fact: in the video, you can hear that he is surrounded by birds who wanted to join the conversation. Craig loves Java and JavaFX because of how easy it is to create user-friendly interfaces. He also values the security built into Java. Another important aspect for him is the ability to create reproducible builds, a key factor in the security of the Bitcoin ecosystem.
 
@@ -68,8 +68,8 @@ Sparrow supports all the features you would expect from a modern Bitcoin wallet,
 
 More info in [this blog post](https://webtechie.be/post/2025-11-20-jfxinaction-craig-raw-sparrow-bitcoin-wallet/).
 
-Florian Enner: Robot 3D Visualizations and Charts {#h2-3-florian-enner-robot-3d-visualizations-and-charts}
-----------------------------------------------------------------------------------------------------------
+Florian Enner: Robot 3D Visualizations and Charts
+-------------------------------------------------
 
 [Florian Enner](https://www.linkedin.com/in/florian-enner-59b81466/) works on software libraries and applications that are aimed at simplifying development of robotic systems. For example, he has worked on an API for MATLAB that is capable of low-latency real-time control of high degree of freedom systems. It allows engineers without a strong background in computer science to develop sophisticated control algorithms without requiring knowledge of C/C++ or code generation.
 

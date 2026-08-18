@@ -27,7 +27,7 @@ For Java developers and architects who design, build, and run applications, ther
 
 Additional details about the attack and its functionality are available through [FireEye's SUNBURST research](https://www.fireeye.com/blog/threat-research/2020/12/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor.html) and [follow-up](https://www.fireeye.com/blog/threat-research/2020/12/sunburst-additional-technical-details.html), as well as [Krebs on Security](https://krebsonsecurity.com/2021/01/solarwinds-what-hit-us-could-hit-others/).
 
-### Monitoring Software to Catch Anomalous or Unsafe Behavior {#h3-0-monitoring-software-to-catch-anomalous-or-unsafe-behavior}
+### Monitoring Software to Catch Anomalous or Unsafe Behavior
 
 One way that the SolarWinds attack was caught came from [its outreach](https://www.fireeye.com/blog/threat-research/2020/12/sunburst-additional-technical-details.html) to a command and control server in its primary domain (avsvmcloud.com). While Java developers recognize that a URL commonly makes its way to a [URLConnection](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/URLConnection.html), there are some primary JDK capabilities that will monitor this API, as well as many others.
 
@@ -51,7 +51,7 @@ Instrumentation has been part of Java since [JDK 1.5](https://docs.oracle.com/ja
 
 Java developers that monitor their applications with [Contrast Community Edition](https://www.contrastsecurity.com/contrast-community-edition) can detect unique security issues to their own application: when the application reads remote data, the agent marks that data as coming from a user (onMethodExit watching the return value). When the application goes to access another asset, such as a File or Runtime.exec, the agent can compare the incoming argument to see if it came from user input (onMethodEntry watching the argument). This would give the ability to detect and correct injection issues, such as [Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal) and [Command Injection](https://owasp.org/www-community/attacks/Command_Injection). It will similarly give a listing of items like what cryptographic algorithms are in use, where hardcoded passwords are, and a fair amount of other security-oriented information.
 
-### Verify Integrity Through Signed JAR Files {#h3-1-verify-integrity-through-signed-jar-files}
+### Verify Integrity Through Signed JAR Files
 
 Java offers signed JAR files as a way of verifying the integrity of a library. These signatures leverage the public key infrastructure and certificate authorities so that a file can be verified without knowing the original author. Combined with timestamping, developers can know who published a library and when it was signed. In most cases, this integrity verification acts as a safeguard against anyone modifying the library contents either as it goes over the network or by changing a file anywhere in the build pipeline. The SolarWinds case was different, in that attackers targeted the build pipeline before the signature was applied. While this means that the SUNBURST malware would have been signed, signed JAR files represent a net benefit for most developers to validate their software.
 

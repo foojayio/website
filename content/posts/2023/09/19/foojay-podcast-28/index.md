@@ -36,8 +36,8 @@ Let's see what our experts find the most important facts we need to know about J
 
 {{< youtube OY8TYRbcutc >}}
 
-Podcast Apps {#h2-0-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,40 +45,40 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
-### Mohamed Taman {#h3-2-mohamed-taman}
+### Mohamed Taman
 
 * <https://twitter.com/_tamanm>
 * <https://www.linkedin.com/in/mohamedtaman/>
 * <https://foojay.io/today/hidden-and-not-so-hidden-gems-in-java-20/>
 
-### Piotr Przybyl {#h3-3-piotr-przybyl}
+### Piotr Przybyl
 
 * <https://mstdn.social/@piotrprz>
 * <https://twitter.com/piotrprz>
 * <https://www.linkedin.com/in/piotrprzybyl/>
 * <https://softwaregarden.dev/en/about-me/>
 
-### Simon Ritter {#h3-4-simon-ritter}
+### Simon Ritter
 
 * <https://mastodon.social/@speakjava>
 * <https://twitter.com/speakjava>
 * <https://www.linkedin.com/in/siritter/>
 
-Podcast {#h2-5-podcast}
------------------------
+Podcast
+-------
 
-### Host: Frank Delporte {#h3-6-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
 ![](episode-28-guests-1024x578.png)
 
-Content {#h2-7-content}
------------------------
+Content
+-------
 
 00:00 Intro and introduction of the guests  
 

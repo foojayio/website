@@ -31,7 +31,7 @@ OpenJDK 64-Bit Server VM (build 11.0.8+10-post-Ubuntu-0ubuntu120.04, mixed mode)
 ```
 
 
-### Installing Azul Zulu OpenJDK 15 {#installing-azul-zulu-15}
+### Installing Azul Zulu OpenJDK 15
 
 OpenJDK Java 15 was released on 2020-09-15, check out the [Java Version Almanac](https://foojay.io/almanac/jdk-15/) for more details.
 
@@ -75,7 +75,7 @@ OpenJDK 64-Bit Server VM Zulu15.27+17-CA (build 15+36, mixed mode)
 ```
 
 
-### Comparing Startup Speeds {#comparing-startup-speeds}
+### Comparing Startup Speeds
 
 To compare the startup speeds, I reused the Spring and Quarkus applications [of the previous article](https://foojay.io/blog/startup-spring-quarkus-raspberry-pi/).
 
@@ -91,7 +91,7 @@ $ java -jar javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
 ```
 
 
-#### Startup Results {#startup-results}
+#### Startup Results
 
 No important differences here, the newer JDK doesn't seem to have any influence here.
 
@@ -104,7 +104,7 @@ No important differences here, the newer JDK doesn't seem to have any influence 
 |              | 2   | 36s    | 10s     |
 |              | 3   | 37s    | 10s     |
 
-### Thread and Memory Analysis with VisualVM {#thread-and-memory-analysis-with-visualvm}
+### Thread and Memory Analysis with VisualVM
 
 Let's go a step deeper and use [VisualVM](https://visualvm.github.io/) to inspect the application.
 
@@ -143,7 +143,7 @@ I waited two minutes before taking each screenshot below.
  </ul>
 </figure>
 
-#### Profiling Conclusions {#profiling-conclusions}
+#### Profiling Conclusions
 
 | Framework |    JDK     | Running CPU | Heap Size | Loaded classes |
 |-----------|------------|-------------|-----------|----------------|
@@ -154,7 +154,7 @@ I waited two minutes before taking each screenshot below.
 
 Quarkus seems to need less memory on Java 15 and both Spring and Quarkus have a bit less loaded classes.
 
-### Conclusion {#conclusions}
+### Conclusion
 
 Do you need to switch from OpenJDK 11 to 15? No, not really, based on these results.
 

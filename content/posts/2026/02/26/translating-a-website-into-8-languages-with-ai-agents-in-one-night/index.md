@@ -14,8 +14,8 @@ related_posts:
 frozen: false
 ---
 
-How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved --- from spec to deployment {#h2-0-how-i-used-claude-sonnet-4-6-and-fleets-of-github-copilot-coding-agents-to-internationalize-java-evolved-from-spec-to-deployment}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved --- from spec to deployment
+------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -27,8 +27,8 @@ This is the story of that experiment.
 
 
 
-The Architecture Decision: Let the AI Draft the Spec {#h2-1-the-architecture-decision-let-the-ai-draft-the-spec}
-----------------------------------------------------------------------------------------------------------------
+The Architecture Decision: Let the AI Draft the Spec
+----------------------------------------------------
 
 The first step wasn't writing code. It was writing a specification.
 
@@ -48,8 +48,8 @@ After iterating through review comments over 5 days (the original PR had 12 comm
 
 
 
-Phase 1: Building the Infrastructure {#h2-2-phase-1-building-the-infrastructure}
---------------------------------------------------------------------------------
+Phase 1: Building the Infrastructure
+------------------------------------
 
 With the spec in hand, I coordinated an agent locally with Coilot CLI to implement the core i18n infrastructure in [PR #83](https://github.com/javaevolved/javaevolved.github.io/pull/83) --- the generator changes that made everything locale-aware:
 
@@ -62,8 +62,8 @@ This was the only PR that required significant intervention. Everything after it
 
 
 
-Phase 2: The First Translations (Spanish + Portuguese) {#h2-3-phase-2-the-first-translations-spanish-portuguese}
-----------------------------------------------------------------------------------------------------------------
+Phase 2: The First Translations (Spanish + Portuguese)
+------------------------------------------------------
 
 The first real translation --- Spanish --- came in [PR #84](https://github.com/javaevolved/javaevolved.github.io/pull/84). This PR also migrated the English content files from JSON to YAML for improved readability --- a format change that the AI handled naturally since the generator already supported multiple formats.
 
@@ -71,8 +71,8 @@ Brazilian Portuguese followed immediately in [PR #85](https://github.com/javaevo
 
 
 
-Phase 3: The Fleet --- 6 Languages in Parallel {#h2-4-phase-3-the-fleet-6-languages-in-parallel}
-------------------------------------------------------------------------------------------------
+Phase 3: The Fleet --- 6 Languages in Parallel
+----------------------------------------------
 
 This is where things got interesting. With the architecture proven and two complete translations validated, I launched a **fleet of Copilot Coding Agents** --- multiple agents working in parallel, each assigned a single language. I used the Copilot CLI `/delegate` command to dispatch them asynchonously, all with the same prompt:
 
@@ -95,7 +95,7 @@ Each agent independently:
 
 All six PRs were opened within a span of about 12 minutes (2:33 AM to 2:45 AM) and were all merged within the next hour. **No translation conflicts**, no merge issues, no structural errors. The partial-file architecture did exactly what it was designed to do --- each agent's output was isolated to its own locale directory.
 
-### The Numbers {#h3-5-the-numbers}
+### The Numbers
 
 By the time the fleet finished:
 
@@ -107,8 +107,8 @@ By the time the fleet finished:
 
 
 
-The Arabic Surprise: RTL Support {#h2-6-the-arabic-surprise-rtl-support}
-------------------------------------------------------------------------
+The Arabic Surprise: RTL Support
+--------------------------------
 
 The most impressive moment was the Arabic translation ([PR #91](https://github.com/javaevolved/javaevolved.github.io/pull/91)). The agent not only translated, it also noted that Arabic is a right-to-left language and **proactively added RTL infrastructure**:
 
@@ -120,7 +120,7 @@ This was a genuinely thoughtful architectural change that I hadn't explicitly re
 
 ![Arabic localization on the Java Evolved website](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w3itxwxcyyoksvae22m3.png)
 
-### The One Bug {#h3-7-the-one-bug}
+### The One Bug
 
 Of course, it wasn't perfect. When `dir="rtl"` is applied globally, the browser flips *everything* --- including Java source code blocks and the navigation bar, which IMO should always be LTR regardless of locale. I spotted this when reviewing the deployed site and [filed issue #96](https://github.com/javaevolved/javaevolved.github.io/issues/96).
 
@@ -147,12 +147,12 @@ Arabic prose continues to render RTL. Java code stays LTR. One bug, one issue, o
 
 
 
-Why It Worked: Architecture as Force Multiplier {#h2-8-why-it-worked-architecture-as-force-multiplier}
-------------------------------------------------------------------------------------------------------
+Why It Worked: Architecture as Force Multiplier
+-----------------------------------------------
 
 This experiment succeeded because of deliberate architectural decisions, not just because of a magic AI prompt. A few design choices made parallelized AI translation almost trivially easy:
 
-### 1. Source of Truth Separation {#h3-9-1-source-of-truth-separation}
+### 1. Source of Truth Separation
 
 Content files contain both translatable text and structural data (code, navigation, metadata). But translation files contain *only* the translatable fields. The generator overlays translations onto the English base at build time. This means:
 
@@ -160,7 +160,7 @@ Content files contain both translatable text and structural data (code, navigati
 * Translation files are small and self-contained
 * Structural changes to the English source propagate immediately without needing to update translations
 
-### 2. Partial File Fallback {#h3-10-2-partial-file-fallback}
+### 2. Partial File Fallback
 
 If a pattern has no translation file for a locale, the site shows the English content with an "untranslated" banner. This means:
 
@@ -168,7 +168,7 @@ If a pattern has no translation file for a locale, the site shows the English co
 * New patterns added in English are immediately visible in all locales
 * There's no "all or nothing" pressure on translation completeness
 
-### 3. Convention Over Configuration {#h3-11-3-convention-over-configuration}
+### 3. Convention Over Configuration
 
 Each locale follows the same directory structure. Adding a new language is a checklist:
 
@@ -180,17 +180,17 @@ No code changes needed in the generator. No template modifications. The AI spec 
 
 
 
-Lessons Learned {#h2-12-lessons-learned}
-----------------------------------------
+Lessons Learned
+---------------
 
-### What Went Well {#h3-13-what-went-well}
+### What Went Well
 
 * **Spec-first approach:** Having the AI draft the specification before any implementation meant the architecture was explicitly designed for AI-driven translation from day one
 * **Fleet parallelism:** Six language translations running simultaneously with zero conflicts demonstrates that well-isolated task boundaries enable effortless parallelization
 * **Proactive problem-solving:** The Arabic agent identifying and implementing RTL support without being explicitly asked shows that LLMs can reason about the downstream implications of their translations
 * **Technical term preservation:** Across all 9 languages, Java API names, annotations, JDK versions, and code examples were correctly left in English --- the agents understood what should and shouldn't be translated in a technical context
 
-### What Required Human Intervention {#h3-14-what-required-human-intervention}
+### What Required Human Intervention
 
 * **One bug:** The RTL global flip affecting code blocks. This is a classic CSS gotcha that even experienced developers might miss on first pass. Filed as an issue, fixed by an agent in minutes
 * **CI pipeline fixes:** The deploy workflow needed path trigger updates after the JSON→YAML migration. A routine ops fix
@@ -198,8 +198,8 @@ Lessons Learned {#h2-12-lessons-learned}
 
 
 
-The Timeline {#h2-15-the-timeline}
-----------------------------------
+The Timeline
+------------
 
 |      Time (UTC)      |                                          Event                                          |
 |----------------------|-----------------------------------------------------------------------------------------|
@@ -221,8 +221,8 @@ The Timeline {#h2-15-the-timeline}
 
 
 
-Conclusion {#h2-16-conclusion}
-------------------------------
+Conclusion
+----------
 
 The experiment proved a simple thesis: **if you design your architecture for AI-driven workflows, AI agents can do remarkable things.**
 

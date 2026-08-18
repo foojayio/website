@@ -33,8 +33,8 @@ If you are following along, I recommend that you use IntelliJ IDEA Ultimate, how
 
 Now you should be able to navigate to [localhost:8080/MyWebApp](8080/MyWebApp) and see the application. If you enter a name and fruit, they should successfully be persisted in the database. This application is currently running Apache Tomcat 9.0 which uses the `javax` namespace.
 
-Updating your Apache Tomcat version {#h2-0-updating-your-apache-tomcat-version}
--------------------------------------------------------------------------------
+Updating your Apache Tomcat version
+-----------------------------------
 
 This project uses Docker, so you can update the version of Apache Tomcat from 9 to 10 in your Docker file:
 
@@ -70,8 +70,8 @@ You can check the logs for your container to ensure you're running Tomcat 10.0 i
 
 Now we're confident that we're using Apache Tomcat 10.0, let's go to the webserver front end and see what happens. In your browser, go to [localhost:8080/MyWebApp](8080/MyWebApp) and try to enter a name and fruit - you will get a 404 error. We're getting this error because Tomcat 9 used Java Servlet 4.0 which uses `javax.*` and Apache Tomcat 10 uses Jakarta Servlet 5.0 which uses `jakarta.*`. Let's fix the problem now!
 
-Updating your dependencies {#h2-1-updating-your-dependencies}
--------------------------------------------------------------
+Updating your dependencies
+--------------------------
 
 The first thing we need to do is update our dependencies. This project uses Maven so that's the `pom.xml` file. If you're using Gradle in your project, you need to update your `build.gradle` file.
 
@@ -136,8 +136,8 @@ Next, we need to reload our `pom.xml` file with **⇧⌘I** (macOS), or **Ctrl+S
 
 Now open your Project window with **⌘1** (macOS) or **Alt+1** (Windows/Linux) and note that your two Java files are underlined in red because they are now in an error state. Let's fix that next.
 
-Using IntelliJ IDEA's migration tool {#h2-2-using-intellij-idea-s-migration-tool}
----------------------------------------------------------------------------------
+Using IntelliJ IDEA's migration tool
+------------------------------------
 
 One common question you might have at this stage is "why don't I just do a find and replace for `javax` to `jakarta`?" The answer is that not all `javax` packages have been migrated to the `jakarta` namespace. For example, `javax.transaction.xa` package is not using Jakarta.
 
@@ -153,8 +153,8 @@ Press **Do Refactor** . Your Java classes should no longer be in a state of erro
 
 Now you should be able to navigate to [localhost:8080/MyWebApp](8080/MyWebApp) again and see the application. Your error should be gone and your migration is nearly complete.
 
-Updating your persistence file {#h2-3-updating-your-persistence-file}
----------------------------------------------------------------------
+Updating your persistence file
+------------------------------
 
 Now if you do a search across your whole project with **⌘⇧F** or **Crl+Shift+F** for *javax* you will see that it still appears in your `persistence.xml` file.
 
@@ -207,12 +207,12 @@ Your application should still be available at [localhost:8080/MyWebApp](8080/MyW
 
 Your code should now be the same as the `jakarta` branch in the project. You can verify this by navigating to the *src* directory in IntelliJ IDEA then right-click and select Git \> Compare with Branch... and select the `jakarta` branch.
 
-Summary and shortcuts {#h2-4-summary-and-shortcuts}
----------------------------------------------------
+Summary and shortcuts
+---------------------
 
 Congratulations, you've successfully migrated the project from the `javax` namespace to `jakarta` using IntelliJ IDEA's migration tool. You also updated your `persistence.xml` file as part of that migration. Here are some helpful links and a summary of the shortcuts we used.
 
-### Further reading and viewing {#h3-5-further-reading-and-viewing}
+### Further reading and viewing
 
 Here are some helpful links for you to consider when you need to migrate your application from the `javax` namespace to `jakarta`:
 
@@ -220,7 +220,7 @@ Here are some helpful links for you to consider when you need to migrate your ap
 * [JetBrains blog - Creating new jakarta persistence jpa applications](https://blog.jetbrains.com/idea/2021/02/creating-new-jakarta-persistence-jpa-applications/)
 * [JetBrains blog - Creating a simple JPA Application](https://blog.jetbrains.com/idea/2021/02/creating-a-simple-jpa-application/)
 
-### IntelliJ IDEA shortcuts {#h3-6-intellij-idea-shortcuts}
+### IntelliJ IDEA shortcuts
 
 Here are the shortcuts that we used.
 

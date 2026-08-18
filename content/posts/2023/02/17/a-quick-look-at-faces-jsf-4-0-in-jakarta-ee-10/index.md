@@ -53,8 +53,8 @@ As you can see, there was a lot of changes.
 
 In this article, we take a look at the programmatic API, extensionless mapping, @ClientWindowScoped, and multi-file upload.
 
-Programmatic View API In Faces 4 {#h2-0-programmatic-view-api-in-faces-4}
--------------------------------------------------------------------------
+Programmatic View API In Faces 4
+--------------------------------
 
 The only way to create views in previous versions of Faces was through .xhtml files.
 
@@ -151,8 +151,8 @@ However, for developers that prefer to create their application views in Java, t
 
 Whether it will be developed further is going to be a matter of how many people adopt this API and give feedback.
 
-Extensionless Mapping {#h2-1-extensionless-mapping}
----------------------------------------------------
+Extensionless Mapping
+---------------------
 
 Hitherto, accessing a view in the browser meant having to add the .xhtml file extension to the view. So for instance, to access the view index.xhtml, you needed to add the literal .xhtml in the browser.
 
@@ -175,8 +175,8 @@ This extensionless mapping feature can be enabled in the web.xml file via contex
 
 In my test run, I found that extensionless mapping didn't seem to work with programmatic UIs. This is something you should test for yourself and keep in mind.
 
-@ClientWindowScoped {#h2-2-clientwindowscoped}
-----------------------------------------------
+@ClientWindowScoped
+-------------------
 
 Faces 4.0 comes with the @ClientWindowScoped bean scope that is based on the jakarta.faces.lifecycle.ClientWindow.
 
@@ -205,8 +205,8 @@ The number of client window scoped bean instances per HTTP session can be set th
 ```
 
 
-Multiple File Upload {#h2-3-multiple-file-upload}
--------------------------------------------------
+Multiple File Upload
+--------------------
 
 The \<h:inputFile/\> has a new multiple attribute that when set to true, allows the upload of multiple files.
 
@@ -267,8 +267,8 @@ public class FileUploadBean {
 
 The files list will contain the uploaded files for the bean to validate and consequently upload/store in the database or however the business case demands.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 As you can see, Faces 4.0 has a number of major and quality of life features that makes this venerable framework even more productive.
 

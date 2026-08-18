@@ -28,7 +28,7 @@ Learning about memory management will also help us to write more performant code
 
 
 
-### Definitions {#h3-0-definitions}
+### Definitions
 
 Memory management is the process of controlling and coordinating the way a software application access **computer memory**.
 
@@ -42,7 +42,7 @@ When a software runs on a target Operating system on a computer it needs access 
 
 When a software program uses memory there are two regions of memory they use, apart from the space used to load the bytecode, Stack and Heap memory.
 
-### Stack {#h3-1-stack}
+### Stack
 
 The stack is used for **static memory allocation** and as the name suggests it is a last in first out (**LIFO**) stack (Think of it as a stack of boxes).
 
@@ -59,7 +59,7 @@ The stack is used for **static memory allocation** and as the name suggests it i
 
 Stack used in JavaScript, objects are stored in Heap and referenced when needed. [Here](https://youtu.be/95_CAUC9nvE) is a video of the same.
 
-### Heap {#h3-2-heap}
+### Heap
 
 Heap is used for **dynamic memory allocation** and unlike stack, the program needs to look up the data in heap using **pointers** (Think of it as a big multi-level library).
 
@@ -71,21 +71,21 @@ Heap is used for **dynamic memory allocation** and unlike stack, the program nee
 * This is where you would encounter **out of memory errors** if your application tries to use more memory than the allocated heap (though there are many other factors at play here like GC, compacting).
 * Generally, there is **no limit** on the size of the value that can be stored on the heap. Of course, there is the upper limit of how much memory is allocated to the application.
 
-Why is it important? {#h2-3-why-is-it-important}
-------------------------------------------------
+Why is it important?
+--------------------
 
 Unlike Hard disk drives, RAM is not infinite. If a program keeps on consuming memory without freeing it, ultimately it will run out of memory and crash itself or even worse crash the operating system. Hence software programs can't just keep using RAM as they like as it will cause other programs and processes to run out of memory.
 
 So instead of letting the software developer figure this out, most programming languages provide ways to do automatic memory management. And when we talk about memory management we are mostly talking about managing the Heap memory.
 
-Different approaches? {#h2-4-different-approaches}
---------------------------------------------------
+Different approaches?
+---------------------
 
 Since modern programming languages don't want to burden (more like trust 👅) the end developer to manage the memory of his/her application most of them have devised a way to do automatic memory management.
 
 Some older languages still require manual memory handling but many do provide neat ways to do that. Some languages use multiple approaches to memory management and some even let the developer choose what is best for him/her(C++ is a good example). The approaches can be categorized as below
 
-### Manual memory management {#h3-5-manual-memory-management}
+### Manual memory management
 
 The language doesn't manage memory for you by default, it's up to you to allocate and free memory for the objects you create. For example, **C** and **C++**.
 
@@ -93,7 +93,7 @@ They provide the `malloc`, `realloc`, `calloc`, and `free` methods to manage mem
 
 Let's just say that it's not for everyone 😉.
 
-### Garbage collection (GC) {#h3-6-garbage-collection-gc}
+### Garbage collection (GC)
 
 Automatic management of heap memory by freeing unused memory allocations. GC is one of the most common memory management in modern languages and the process often runs at certain intervals and thus might cause a minor overhead called pause times.
 
@@ -104,17 +104,17 @@ Automatic management of heap memory by freeing unused memory allocations. GC is 
 * **Mark \& Sweep GC** : Also known as Tracing GC. Its generally a two-phase algorithm that first marks objects that are still being referenced as "alive" and in the next phase frees the memory of objects that are not alive. **JVM** , **C#** , **Ruby** , **JavaScript** , and **Golang** employ this approach for example. In JVM there are different GC algorithms to choose from while JavaScript engines like V8 use a Mark \& Sweep GC along with Reference counting GC to complement it. This kind of GC is also available for C \& C++ as an [external library](https://en.wikipedia.org/wiki/Boehm_garbage_collector).
 * **Reference counting GC** : In this approach, every object gets a reference count which is incremented or decremented as references to it change and garbage collection is done when the count becomes zero. It's not very preferred as it cannot handle cyclic references. **PHP** , **Perl** , and **Python**, for example, uses this type of GC with workarounds to overcome cyclic references. This type of GC can be enabled for C++ as well.
 
-### Resource Acquisition is Initialization (RAII) {#h3-7-resource-acquisition-is-initialization-raii}
+### Resource Acquisition is Initialization (RAII)
 
 In this type of memory management, an object's memory allocation is tied to its lifetime, which is from construction until destruction. It was introduced in **C++** and is also used by **Ada** and **Rust**.
 
-### Automatic Reference Counting (ARC) {#h3-8-automatic-reference-counting-arc}
+### Automatic Reference Counting (ARC)
 
 It's similar to Reference counting GC but instead of running a runtime process at a specific interval the `retain` and `release` instructions are inserted to the compiled code at compile-time and when an object reference becomes zero its cleared automatically as part of execution without any program pause.
 
 It also cannot handle cyclic references and relies on the developer to handle that by using certain keywords. It's a feature of the Clang compiler and provides ARC for **Objective C** \& **Swift**.
 
-### Ownership {#h3-9-ownership}
+### Ownership
 
 It combines RAII with an ownership model, any value must have a variable as its owner (and only one owner at a time) when the owner goes out of scope the value will be dropped freeing the memory regardless of it being in stack or heap memory. It is kind of like Compile-time reference counting.
 

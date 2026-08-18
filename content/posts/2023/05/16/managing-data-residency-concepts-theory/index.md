@@ -40,12 +40,12 @@ I want to offer a couple of options to handle this requirement in this post.
 
 ![](initial-system-1024x309.png)
 
-Where to compute the location? {#h2-0-where-to-compute-the-location}
---------------------------------------------------------------------
+Where to compute the location?
+------------------------------
 
 In this section, I'll list a couple of approaches to compute the location.
 
-### In the code {#h3-1-in-the-code}
+### In the code
 
 We can manage Data Residency at the code level. It's the most flexible option, but it also requires writing code and thus is the most error-prone.
 
@@ -62,7 +62,7 @@ Here's what it looks like:
 
 X and Y correspond to different countries.
 
-### In a library/framework {#h3-2-in-a-library-framework}
+### In a library/framework
 
 From an architectural point-of-view, the driver approach is similar to the one above. However, the code doesn't compute the final location. The library/framework offers *sharding*:
 > A database shard, or simply a shard, is a horizontal partition of data in a database or search engine. Each shard is held on a separate database server instance, to spread load.
@@ -80,7 +80,7 @@ For example, the Apache ShardingSphere project provides a JVM database driver wi
 >
 > -- [Apache ShardingSphere](https://shardingsphere.apache.org/document/current/en/overview/)
 
-### In a proxy {#h3-3-in-a-proxy}
+### In a proxy
 
 The proxy approach is similar to the library/framework approach above; the difference comes from the former running inside the application, while the latter is a dedicated component.
 
@@ -90,7 +90,7 @@ The responsibility of keeping track of the databases falls now on the proxy's sh
 
 Apache ShardingSphere provides both alternatives, a JDBC driver and a proxy.
 
-### In the API Gateway {#h3-4-in-the-api-gateway}
+### In the API Gateway
 
 Another approach is to compute the location in the API Gateway.
 
@@ -98,8 +98,8 @@ Another approach is to compute the location in the API Gateway.
 
 Interestingly enough, part of a Gateway's regular responsibilities is to keep part of the upstreams.
 
-How to compute the location? {#h2-5-how-to-compute-the-location}
-----------------------------------------------------------------
+How to compute the location?
+----------------------------
 
 This section will consider what we need to compute the location. Let's examine the case of an HTTP request from a client to a system. The system as a whole, regardless of the specific component, needs to compute the location to know where to save the data.
 
@@ -111,8 +111,8 @@ Imagine a situation where data location is based on a user's living place. We co
 
 To improve security, we could keep everything server-side. The system would need to request additional data to compute the location on every request.
 
-A tentative proposal {#h2-6-a-tentative-proposal}
--------------------------------------------------
+A tentative proposal
+--------------------
 
 We can reconcile the best of both worlds at the cost of additional complexity. Remember that everything is a trade-off; your mileage may vary depending on your context. The following is a good first draft that you can refine later.
 
@@ -128,8 +128,8 @@ Here's the sequence diagram of the second call, with location metadata already a
 
 ![](flow-across-location.png)
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we looked at data residency and designed a draft architecture to implement it. In the next post, we will delve into the technical details.
 

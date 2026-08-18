@@ -23,7 +23,7 @@ frozen: false
 
 *Disclaimer: This article is on the things I learned/observed spending the day in AI and Machine Learning Developer Room at FOSDEM 24. Opinions and statements are mine and have nothing to do with my employer. This article might raise more questions than answers, but in my opinion, we all need more awareness on this topic and get familiar with the (right) questions that are to be answered.*
 
-### FOSDEM {#h3-0-fosdem}
+### FOSDEM
 
 [FOSDEM](https://fosdem.org/2024/ "FOSDEM") (Free Open-Source Developers'European Meeting) is a community-organised event that is free and non-commercial. The aim is to provide a venue for free and open-source software developers and communities to:
 
@@ -36,7 +36,7 @@ frozen: false
 There were 35 devrooms, ranging from Java, Containers, Go, Rust, Network, Community, and other various topics. Although I am a huge fan of Java and OSS eco-system around it, but I went to FOSDEM this year specifically to understand and discuss about the state and direction of AI in Free and/or Open-Source world. And this article is about that.
 > "An AI system is a machine-based system that can, for a given set of human-defined objectives, make predictions, recommendations, or decisions influencing real or virtual environments. AI systems are designed to operate with varying levels of autonomy." -- [Open-Source Initiative, AI definition](https://opensource.org/deepdive/drafts/the-open-source-ai-definition-draft-v-0-0-3/ "Open-Source Initiative, AI definition")
 
-### What is Open (Source) AI? {#h3-1-what-is-open-source-ai}
+### What is Open (Source) AI?
 
 To be Open Source, an AI system needs to make its components available under licenses that individually grant the freedoms to:
 
@@ -47,7 +47,7 @@ To be Open Source, an AI system needs to make its components available under lic
 
 The Golden Rule applies "also" to AI \> *If I like an AI system, I must be free to share it with other people.* (Reference #4)
 
-### Why Free and Open? {#h3-2-why-free-and-open}
+### Why Free and Open?
 
 The term 'open source' means software that is available on an open-source licence that lets anyone see the source code or the code that humans can read and allows anyone using the code on that licence to keep and change the code. They can do this by themselves, or with a skilled third party they choose. The Open-Source Initiative must approve open-source licenses.(Reference #1, #2)
 
@@ -57,7 +57,7 @@ There is a general emphasis on ethics and morals in the open-source community wi
 
 The supply-side value of widely used Open-Source Software (OSS) is $4.15 billion, but that the demand-side value is much larger at $8.8 trillion.(Reference #5) To put some perspective, this amount is 30% more than the total federal budget of USA in 2023.(Reference #6)
 
-### What are the components of an AI system? {#h3-3-what-are-the-components-of-an-ai-system}
+### What are the components of an AI system?
 
 It was easy to categorize a software or the code behind and although it had its complications but the definition of components in a traditional software is straightforward. But it becomes very complicated when we try to define the same for an AI system.
 
@@ -88,7 +88,7 @@ A (current possible) identified components of an AI system:(Reference #7)
 
 This also implies, that the definition of FREE and OPEN might be different for each component or a sub-set of a component. For example, a model which identifies early-stage cancer based on X-Ray or MRI images might want to shield the data it is trained on due to privacy regulations, but at the same time can have the rest of the components FREE and/or OPEN. Modification to this model by the community would be defined differently.
 
-### State of "Open"-ness in AI systems {#h3-4-state-of-open-ness-in-ai-systems}
+### State of "Open"-ness in AI systems
 
 Currently there is no proper definition of open-ness for AI systems, and they fall under a big spectrum.(Reference #8)  
 
@@ -109,7 +109,7 @@ What we need is:
 3. Accessibility, Reusability and Sustainability of AI systems.
 4. Ethical compliance to fall under purview of regulations and not software licenses.
 
-### What is AI system Specification? {#h3-5-what-is-ai-system-specification}
+### What is AI system Specification?
 
 Open-Source shows that when you eliminate the obstacles to learning, using, sharing and enhancing software systems, everyone benefits. These benefits come from using licenses that follow the Open-Source Definition. The benefits can be expressed as autonomy, transparency, and cooperative improvement. They are necessary for everyone in AI. We need basic freedoms to help users create and use AI systems that are trustworthy and clear.(Reference #4)
 
@@ -145,7 +145,7 @@ Ongoing and following tasks of this spec for Open-Source Initiative are:
 
 The drafts can be found at \> [Drafts of the Open Source AI Definition -- Open Source Initiative](https://opensource.org/deepdive/drafts/ "Drafts of the Open Source AI Definition – Open Source Initiative")
 
-### TLDR; {#h3-6-tldr}
+### TLDR;
 
 **What is Open-Source AI and why it matters**: Open-Source AI is an AI system that allows anyone to study, use, modify, and share its components under licenses that follow the Open-Source Definition. Open-Source AI matters because it offers benefits such as autonomy, transparency, and cooperative improvement, and it helps to create and use AI systems that are trustworthy and clear.
 
@@ -157,7 +157,7 @@ The drafts can be found at \> [Drafts of the Open Source AI Definition -- Open S
 
 **What is the Open-Source AI Specification and how to use it**: The Open-Source AI Specification is a set of questions that help to evaluate the openness of an AI system and its components, based on the freedoms to study, use, modify, and share them. The specification can be used by system and license creators, regulators, end users, and subjects to understand and engage with different aspects of an AI system.
 
-### References {#h3-8-references}
+### References
 
 1. [About -- Open Source Initiative](https://opensource.org/about/ "About – Open Source Initiative")
 2. [Why Should You Use Open-Source Software?](https://www.howtogeek.com/94114/why-should-you-use-open-source-software/ "Why Should You Use Open-Source Software?")

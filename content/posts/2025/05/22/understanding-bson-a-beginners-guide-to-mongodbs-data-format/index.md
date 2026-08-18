@@ -29,14 +29,14 @@ In this guide, we'll take a look at some of BSON's key concepts, how it maps to 
 
 By the end, you'll have a clear understanding of how MongoDB leverages BSON under the hood and how you can work with it effectively in Java. Let's get started. If you just want to check out the code, pop over to the [GitHub repository](https://github.com/mongodb-developer/mongodbbsonexample).
 
-What is BSON? {#h2-0-what-is-bson}
-----------------------------------
+What is BSON?
+-------------
 
 [BSON](https://www.mongodb.com/resources/languages/bson#:~:text=What%20Does%20BSON%20Stand%20For,like%20dates%20and%20binary%20data.?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) stands for Binary JSON. It's a binary-encoded serialization of JSON-like documents. It's everything we like about JSON, just more efficient and type-rich---optimized for speed and storage in MongoDB.
 
 While we interact with MongoDB using JSON-like queries, the documents themselves are stored and transmitted as BSON behind the scenes.
 
-### Why not just JSON? {#h3-1-why-not-just-json}
+### Why not just JSON?
 
 JSON is pretty great. It's human-readable, flexible, and widely adopted. But it's not ideal for databases. Here's why MongoDB uses BSON instead:
 
@@ -58,8 +58,8 @@ hello\x00                  // field name
 
 **Note:** A BSON document has a [size limit of 16MB](https://www.mongodb.com/docs/manual/reference/limits/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) on MongoDB.
 
-BSON vs. JSON {#h2-2-bson-vs-json}
-----------------------------------
+BSON vs. JSON
+-------------
 
 | **Feature** |             **JSON**             |                 **BSON**                 |
 |-------------|----------------------------------|------------------------------------------|
@@ -69,8 +69,8 @@ BSON vs. JSON {#h2-2-bson-vs-json}
 | Speed       | Slower to parse                  | Faster to parse                          |
 | Size        | Often smaller                    | Slightly larger due to type metadata     |
 
-Common BSON data types (and their Java equivalents) {#h2-3-common-bson-data-types-and-their-java-equivalents}
--------------------------------------------------------------------------------------------------------------
+Common BSON data types (and their Java equivalents)
+---------------------------------------------------
 
 | **BSON type** |      **Description**      |   **Java equivalent**   |
 |---------------|---------------------------|-------------------------|
@@ -84,8 +84,8 @@ Common BSON data types (and their Java equivalents) {#h2-3-common-bson-data-type
 | Document      | Embedded object           | org.bson.Document       |
 | Array         | List of values            | List\<?\>               |
 
-BSON and MongoDB internals {#h2-4-bson-and-mongodb-internals}
--------------------------------------------------------------
+BSON and MongoDB internals
+--------------------------
 
 * BSON is how MongoDB **stores** documents on disk.
 * BSON is how MongoDB **communicates** between client and server.
@@ -93,8 +93,8 @@ BSON and MongoDB internals {#h2-4-bson-and-mongodb-internals}
 
 Our Java driver handles the BSON encoding and decoding transparently. But if we're building performance-sensitive applications or exploring custom serialization, or we're even just curious, it's worth understanding.
 
-Setup and project structure {#h2-5-setup-and-project-structure}
----------------------------------------------------------------
+Setup and project structure
+---------------------------
 
 In order to follow along with the code, make sure you have Java 24 and Maven installed. You will also need a MongoDB cluster set up. A [MongoDB M0](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) free-forever tier is perfect for this.
 
@@ -128,8 +128,8 @@ pom.xml
 ```
 
 
-BSON data types and document creation {#h2-6-bson-data-types-and-document-creation}
------------------------------------------------------------------------------------
+BSON data types and document creation
+-------------------------------------
 
 In MongoDB's Java driver, we can interact directly with BSON types using classes like BsonString, BsonInt32, and BsonObjectId. However, we rarely do this. Instead, we work with standard Java types, and MongoDB automatically handles the conversion to BSON.
 
@@ -200,7 +200,7 @@ Inserted Document: {
 
 The ObjectId is generated automatically, if not provided. The Date is converted to a BSON Date type, stored as milliseconds since the epoch.
 
-### Nested fields and arrays {#h3-7-nested-fields-and-arrays}
+### Nested fields and arrays
 
 MongoDB allows for nested structures and arrays, making it easy to represent complex data within a single document. This structure gives us more flexibility in how we want to model our data than traditional relational databases, where data would typically be spread across multiple tables. In MongoDB, we can embed related data directly within the document, creating hierarchical structures that are easy to query and manipulate.
 
@@ -254,12 +254,12 @@ Inserted Nested Document: {
 
 The nested structure is straightforward to read and query. Each level of nesting is a separate Document object, and arrays are automatically converted to BSON arrays.
 
-### Why use nested structures? {#h3-8-why-use-nested-structures}
+### Why use nested structures?
 
 Nested documents provide a way to keep related data together, minimizing the number of queries needed to access complete data sets. Instead of joining tables, we can query a single document to retrieve user details, address information, and recent activity. This approach is particularly useful when dealing with hierarchical data, embedded lists, or object relationships that are tightly coupled.
 
-Raw BSON manipulation {#h2-9-raw-bson-manipulation}
----------------------------------------------------
+Raw BSON manipulation
+---------------------
 
 So far, we've relied on the Document class to handle BSON conversion. But what if we need direct control over BSON structure? That's where raw BSON manipulation comes in. MongoDB's Java driver provides a higher-level Document class that abstracts away BSON specifics, allowing us to work with Java types like String, int, and Date. However, sometimes, we may need to interact directly with BSON data. This can be useful when dealing with binary data, timestamps, or performing low-level optimizations.
 
@@ -323,8 +323,8 @@ The binaryData field is represented as a base64-encoded string with a type ident
 
 Direct BSON manipulation is not typically necessary for most MongoDB operations. For most use cases, the Document class is sufficient, and a lot more intuitive. The BsonDocument class is there when we need more precise control over BSON data or when working with advanced MongoDB features like oplog processing or custom serialization.
 
-Querying with BSON {#h2-10-querying-with-bson}
-----------------------------------------------
+Querying with BSON
+------------------
 
 When querying MongoDB, we typically use the [Filters class](https://www.mongodb.com/docs/drivers/java/sync/current/builders/filters/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly).The Filters class provides static factory methods for all the MongoDB query operators. Each method returns an instance of the BSON type, which we can pass to any method that expects a query filter. These filters work with BSON data but allow us to write queries using Java types and let the MongoDB driver handle the conversion to BSON.
 
@@ -390,8 +390,8 @@ The Filters class provides a range of query operators, allowing us to construct 
 
 This approach keeps the syntax concise and consistent, making the most of the Java types while MongoDB handles the BSON conversion automatically.
 
-Aggregation with BSON {#h2-11-aggregation-with-bson}
-----------------------------------------------------
+Aggregation with BSON
+---------------------
 
 [MongoDB's aggregation](https://www.mongodb.com/docs/manual/aggregation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) framework allows for complex data processing, transforming documents in a collection through a series of stages like filtering, grouping, and projecting. While we usually interact with MongoDB through Java types like String or int, the aggregation framework operates directly on BSON data, making it important for us to understand how BSON types are handled in aggregation operations.
 
@@ -511,8 +511,8 @@ Aggregation Results:
 
 Each document in the output is a BSON object resulting from the aggregation pipeline. The user field is derived from the grouping key, and totalBalance is the calculated sum of all balance values per user.
 
-POJO mapping: Bridging Java and BSON {#h2-12-pojo-mapping-bridging-java-and-bson}
----------------------------------------------------------------------------------
+POJO mapping: Bridging Java and BSON
+------------------------------------
 
 As we've seen, BSON is the native data format for storing documents in MongoDB. While BSON extends JSON with additional data types, Java developers typically don't need to work directly with raw BSON. Instead, we can work with familiar Java objects and let the MongoDB driver handle the BSON conversion behind the scenes. This is where POJO (Plain Old Java Object) mapping comes into play.
 
@@ -520,13 +520,13 @@ POJOs are often used for data encapsulation, which is the practice of separating
 
 The PojoCodecProvider allows MongoDB to automatically map Java objects to BSON documents and back. This not only simplifies data handling but also keeps our data model consistent with our Java classes.
 
-### Why POJO mapping? {#h3-13-why-pojo-mapping}
+### Why POJO mapping?
 
 Without POJO mapping, we would need to manually convert Java objects into Document objects and vice versa. This is error-prone and can quickly become cumbersome as our data model grows more complex.
 
 POJO mapping abstracts away the BSON conversion process. We define our Java classes, and the MongoDB driver handles the rest.
 
-### Setting up POJO mapping in Java {#h3-14-setting-up-pojo-mapping-in-java}
+### Setting up POJO mapping in Java
 
 Before we define our Java classes, we need to configure the PojoCodecProvider. This codec provider registers our Java classes for automatic BSON mapping.
 
@@ -554,7 +554,7 @@ public class CodecSetup {
 
 The codec registry combines the default [BSON codecs](https://www.mongodb.com/docs/drivers/java/sync/current/data-formats/codecs/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) with our custom POJO codecs.
 
-### Defining a POJO class: User {#h3-15-defining-a-pojo-class-user}
+### Defining a POJO class: User
 
 Now, let's define a simple User class that MongoDB will automatically map to BSON.
 
@@ -633,7 +633,7 @@ public class User {
 * **@BsonId**: Marks the id field as the BSON _id field
 * **@BsonProperty**: Maps the name field to the BSON key username, and isMember to member
 
-### Inserting and querying POJOs {#h3-16-inserting-and-querying-pojos}
+### Inserting and querying POJOs
 
 Now that we have our codec set up and our POJO classes defined, let's see how we can insert and query these objects.
 
@@ -675,7 +675,7 @@ private static void demonstratePojoMapping() {
 * When the User object is inserted, MongoDB will automatically convert it to a BSON document.
 * When querying, MongoDB will deserialize the BSON back into a User object, maintaining type integrity.
 
-### BSON representation of the user document {#h3-17-bson-representation-of-the-user-document}
+### BSON representation of the user document
 
 When the User object is inserted, MongoDB stores it as a BSON document. The BSON representation will look like this:
 
@@ -698,7 +698,7 @@ Notice that:
 
 Even though we're working with plain Java objects, MongoDB is still converting these to BSON. This automatic conversion ensures that data types are preserved when stored in MongoDB.
 
-### Why use POJO mapping? {#h3-18-why-use-pojo-mapping}
+### Why use POJO mapping?
 
 1. **Cleaner code:**   
    POJO mapping eliminates the need to manually convert Java objects to BSON Document objects, reducing boilerplate code.
@@ -707,12 +707,12 @@ Even though we're working with plain Java objects, MongoDB is still converting t
 3. **Nested structures:**   
    Complex nested objects are easily represented using embedded BSON documents, maintaining data structure and hierarchy.
 
-### What about custom conversions? {#h3-19-what-about-custom-conversions}
+### What about custom conversions?
 
 The default POJO mapping behavior is plenty sufficient for most use cases, but MongoDB also provides options for advanced customization. We can define custom codecs, register additional conventions, or handle abstract types and enums using advanced configuration. For more advanced scenarios, check out our [PojoCodecProvider documentation](https://mongodb.github.io/mongo-java-driver/4.11/driver/getting-started/pojos/).
 
-Conclusion {#h2-20-conclusion}
-------------------------------
+Conclusion
+----------
 
 BSON is at the core of how MongoDB stores and transmits data. It extends JSON with additional data types like ObjectId, Decimal128, and Timestamp, allowing MongoDB to handle richer and more complex data structures. While BSON is a binary format optimized for storage and traversal, the Java driver abstracts most of its complexity, allowing developers to work with familiar Java types.
 

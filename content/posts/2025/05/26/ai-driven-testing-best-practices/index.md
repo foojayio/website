@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-**So, AI Can Write Tests Now? Cool, But...** {#h2-0-so-ai-can-write-tests-now-cool-but}
----------------------------------------------------------------------------------------
+**So, AI Can Write Tests Now? Cool, But...**
+--------------------------------------------
 
 AI assisted coding tools are everywhere now, helping with autocomplete, suggesting fixes, and sometimes writing surprisingly large blocks of code. A hot topic is using generative AI to generate tests automatically -- unit, integration, e2e, etc.
 
@@ -35,8 +35,8 @@ This article is for devs figuring out how to actually *use* these AI tools witho
 
 We'll also bring in static analysis with SonarQube, using its big list of Java test rules \[<https://rules.sonarsource.com/java/tag/tests/>\] to show concrete examples of what can go wrong and what to watch for. The point isn't to ditch AI, but to use it intelligently, so you don't trade real quality for fake coverage.
 
-**How AI Learns to Code (And Why That's a Problem for Tests)** {#h2-1-how-ai-learns-to-code-and-why-that-s-a-problem-for-tests}
--------------------------------------------------------------------------------------------------------------------------------
+**How AI Learns to Code (And Why That's a Problem for Tests)**
+--------------------------------------------------------------
 
 To understand why AI tests can be uncertain, it helps to know how these code-generating AIs learn. Most are Large Language Models (LLMs) trained on absolutely massive datasets. These datasets contain billions of lines of code from GitHub, Stack Overflow, open-source projects, maybe your own company's code.
 
@@ -62,8 +62,8 @@ Think of learning English only by reading internet comments. You'd get good at s
 
 AI powered tests can be inaccurate and may only validate existing code, not the intended behavior. Let's see some of the main problems you can encounter by generating the tests with AI.
 
-**Problem #1: AI Tests Might Just Be Wrong** {#h2-2-problem-1-ai-tests-might-just-be-wrong}
--------------------------------------------------------------------------------------------
+**Problem #1: AI Tests Might Just Be Wrong**
+--------------------------------------------
 
 Yeah, AI can generate code that uses @Test and compiles. It will save a lot of manual effort on time consuming test case generation. But is it *correct*? Often, it might not be. When you're reviewing AI-generated tests, watch out for:
 
@@ -103,8 +103,8 @@ void testProcessItem() {
 
 Looks like a test, runs, but proves nothing. And it will be GREEN !! . *You gotta check.*
 
-**Problem #2: Testing the Code You Have, Not the Code You Need (Verification vs. Validation Trap)** {#h2-3-problem-2-testing-the-code-you-have-not-the-code-you-need-verification-vs-validation-trap}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #2: Testing the Code You Have, Not the Code You Need (Verification vs. Validation Trap)**
+---------------------------------------------------------------------------------------------------
 
 This is the deeper problem. Even if an AI test is technically correct *for the current code* , it might be testing the wrong thing if the code itself is buggy. It's about **Verification vs. Validation**:
 
@@ -180,8 +180,8 @@ void whenNameHasSpace_shouldReturnLowerCase() { // Validates bug!
 
 This test passes but locks in the bad behavior of allowing spaces. You, the dev, need to check if the test matches the *requirement*, not just the buggy code.
 
-**So? What to Do? Don't Use AI for Generating Tests? Nah, Rely on Your AI Test Quality Guardian** {#h2-4-so-what-to-do-don-t-use-ai-for-generating-tests-nah-rely-on-your-ai-test-quality-guardian}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**So? What to Do? Don't Use AI for Generating Tests? Nah, Rely on Your AI Test Quality Guardian**
+-------------------------------------------------------------------------------------------------
 
 Given that AI tests can be wonky, using static analysis tools is pretty much essential. These tools automatically scan your code (including tests) against a huge rulebook, finding potential bugs, security issues, and just plain confusing code. When AI is potentially adding lots of code fast, you need this automated check.
 
@@ -379,8 +379,8 @@ void testInvalidInput() {
 
 Seeing these examples shows how easy it is for generated code (and human code!) to violate basic testing hygiene. SonarQube acts as your automated checklist for this stuff.
 
-**How to Use AI Test Tools Without Getting Burned** {#h2-5-how-to-use-ai-test-tools-without-getting-burned}
------------------------------------------------------------------------------------------------------------
+**How to Use AI Test Tools Without Getting Burned**
+---------------------------------------------------
 
 So, how do you actually use these tools without causing chaos?
 
@@ -397,8 +397,8 @@ So, how do you actually use these tools without causing chaos?
 6. **Learn the Tools:** Figure out how *your* specific AI tool works best. Practice prompting. Learn to spot its common mistakes quickly.
 7. **Start Small:** Try it on a safe project first. See if it *really* saves time after you account for fixing its output.
 
-**Wrapping Up** {#h2-6-wrapping-up}
------------------------------------
+**Wrapping Up**
+---------------
 
 AI test generation? It's here and it can write test code fast, which is cool. But don't just trust it blindly. AI often gets things wrong, misses assertions, or writes tests that just confirm your bugs are still there.
 

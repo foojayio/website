@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Java Virtual Threads, also known as lightweight threads, is an exciting new feature introduced in Project Loom.
 
@@ -29,8 +29,8 @@ Virtual threads aim to simplify concurrent programming in Java by providing an e
 
 In this article, we'll cover the basics of Java Virtual Threads, how they work, why they are beneficial for developers, and how they overcome the limitations of traditional Java threads.
 
-What are Virtual Threads? {#h2-1-what-are-virtual-threads}
-----------------------------------------------------------
+What are Virtual Threads?
+-------------------------
 
 Java is made of threads. When we run a Java program, its main method is invoked as the first call frame of the main thread created by the Java launcher. It gives us many things: sequential control flow, local variables, exception handling, single-step debugging, and profiling.
 
@@ -67,8 +67,8 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor())
 
 The JDK can now run up to 10,000 concurrent virtual threads on a small number of operating system (OS) threads, as little as one, to execute the simple code above that involves sleeping for one second.
 
-Why Use Virtual Threads? {#h2-2-why-use-virtual-threads}
---------------------------------------------------------
+Why Use Virtual Threads?
+------------------------
 
 1. **Scalability:** Since a large number of virtual threads are easy to create, the thread-per-request programming style alleviates this scalability bottleneck. In other words, high throughput is very simple to achieve.
 2. **Simplified Concurrency**: Virtual threads make concurrent programming in Java easier by allowing developers to write code using familiar synchronous APIs. This eliminates the need for complex asynchronous programming patterns, such as callbacks, promises, or reactive programming, which can be difficult to understand and maintain.
@@ -76,8 +76,8 @@ Why Use Virtual Threads? {#h2-2-why-use-virtual-threads}
 
 <br />
 
-Getting Started with Virtual Threads {#h2-3-getting-started-with-virtual-threads}
----------------------------------------------------------------------------------
+Getting Started with Virtual Threads
+------------------------------------
 
 Project Loom is still an experimental feature and is not available in stable Java releases. JDK 21, which is still not released, is expected to include virtual threads.
 
@@ -95,7 +95,7 @@ Replace \<version\> with the specific version you'd like to install, such as the
 
 Once you have downloaded JDK 21, you can create virtual threads in three ways:
 
-### Using the Thread Factory method {#h3-4-using-the-thread-factory-method}
+### Using the Thread Factory method
 
 <br />
 
@@ -121,7 +121,7 @@ thread.join();
 
 ```
 
-### Using the builder method {#h3-5-using-the-builder-method}
+### Using the builder method
 
 Like the factory method, you can use the builder method, which is much more convenient as you can create **started** or **unstarted** threads.
 
@@ -145,7 +145,7 @@ var unstarted = Thread.ofVirtual().unstarted(() ->
 
 ```
 
-### Using the Executors {#h3-6-using-the-executors}
+### Using the Executors
 
 If we want to move away from our existing code, which is heavily dependent on executors, one new method that is just one line long and uses virtual threads has been added.
 
@@ -161,8 +161,8 @@ executorService.submit(() -> {
 
 ```
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Java Virtual Threads provide a powerful and efficient concurrency model for modern applications. By simplifying concurrent programming and allowing for better resource utilization, virtual threads have the potential to revolutionize the way developers write concurrent code in Java.
 

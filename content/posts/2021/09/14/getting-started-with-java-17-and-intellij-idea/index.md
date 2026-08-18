@@ -64,8 +64,8 @@ To understand pattern matching for switch, it will be beneficial to have an unde
 
 If you are already familiar with all of the preceding topics, feel free to skip to the section 'Welcome to pattern matching for switch'.
 
-**What is pattern matching?** {#h2-0-what-is-pattern-matching}
---------------------------------------------------------------
+**What is pattern matching?**
+-----------------------------
 
 [Wikipedia](https://en.wikipedia.org/wiki/Pattern_matching) states pattern matching is "the act of checking a given sequence of tokens for the presence of the constituents of some pattern".
 
@@ -78,8 +78,8 @@ There are different types of patterns. In this blog post, I'll cover type patter
 
 Pattern matching for instanceof uses type pattern. Let's look at how it works.
 
-**Pattern matching for instanceof** {#h2-1-pattern-matching-for-instanceof}
----------------------------------------------------------------------------
+**Pattern matching for instanceof**
+-----------------------------------
 
 This feature extends the `instanceof` operator with the possibility to use a type pattern. It checks whether an instance is of a certain type. If the test passes, it casts and assigns the value to a pattern variable. This removes the need to define an additional variable, or for explicit casting, to use members of the instance being compared.
 
@@ -105,7 +105,7 @@ The simplicity of pattern matching of instanceof might be deceptive. If you are 
 
 Now, let me brief you on the enhancements to the switch statement with the switch expressions (covered in detail [here](https://blog.jetbrains.com/idea/2019/02/java-12-and-intellij-idea), with Java 12, and [here](https://blog.jetbrains.com/idea/2019/11/java-13-and-intellij-idea/) with changes in Java 13). As I mentioned before, if you are already familiar with switch expressions, please feel free to jump to the section 'Welcome to pattern matching for switch'.
 
-### **Switch expressions -- what benefits do they bring to the table?** {#h3-2-switch-expressions-what-benefits-do-they-bring-to-the-table}
+### **Switch expressions -- what benefits do they bring to the table?**
 
 Switch expressions enhance the switch statement and improve the coding experience for developers. As compared to the switch statements, switch expressions can *return a value* . The ability to define *multiple constants with a switch branch* , and the improved code semantics, makes it *concise* . By removing default fall-through the switch branches, you are less likely to introduce a *logical error* in a switch expression.
 
@@ -144,8 +144,8 @@ Let's see how switch expressions can help. The following gif demonstrates some o
 
 With a basic understanding of pattern matching, pattern matching for instanceof, and switch expressions, let's look at what pattern matching is and why you need it?
 
-**Welcome to Pattern matching for switch** {#h2-3-welcome-to-pattern-matching-for-switch}
------------------------------------------------------------------------------------------
+**Welcome to Pattern matching for switch**
+------------------------------------------
 
 Imagine being able to replace long if-else statement chains with concise switch statements *or* expressions. Yes, you read that correctly. Pattern matching for switch applies to both switch statements and switch expressions.
 
@@ -155,7 +155,7 @@ Also, the case labels are no longer restricted to constants. They can define pat
 
 Let's start with an example.
 
-### **Replace if-else statement chains with concise switch constructs -- that test types beyond int integrals, String, or enums.** {#h3-4-replace-if-else-statement-chains-with-concise-switch-constructs-that-test-types-beyond-int-integrals-string-or-enums}
+### **Replace if-else statement chains with concise switch constructs -- that test types beyond int integrals, String, or enums.**
 
 You can work with switch constructs that can be passed a wide range of selector expressions, and can test values not just against constants but also types. That's not all, case labels can also include complex conditions.
 
@@ -227,7 +227,7 @@ public class MyEarth {
 
 The power of this construct lies in how often it helps to reduce the cognitive complexity in the code, as I discuss in the following section.
 
-### **Reducing cognitive complexity with pattern matching for switch** {#h3-5-reducing-cognitive-complexity-with-pattern-matching-for-switch}
+### **Reducing cognitive complexity with pattern matching for switch**
 
 An if-else statement chain *seems* complex to read and understand -- each condition should be *carefully* read together with its then-and-else code blocks. If we consider the if statement chain from the preceding section, it can be represented roughly as follows:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img4.png)
@@ -239,7 +239,7 @@ Even by looking at both these images, the switch logic (though similar) looks si
 
 Let's look at other reasons for working with pattern matching for switch.
 
-### **Yay! You can now handle nulls within a switch construct** {#h3-6-yay-you-can-now-handle-nulls-within-a-switch-construct}
+### **Yay! You can now handle nulls within a switch construct**
 
 Previously, switch constructs never allowed using null as a case label, even though it accepted instances of class `String` and enumerations. Then how was it possible to test whether the reference variable you are switching over is not null?
 
@@ -250,7 +250,7 @@ Of course, if you do not explicitly check for null values and the selector expre
 Now, you can define null as one of the valid case labels -- so that you can define what to do if the selector expression is null.
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-5.gif)
 
-### **Does IntelliJ IDEA convert your if-statement to a switch expression or a switch statement?** {#h3-7-does-intellij-idea-convert-your-if-statement-to-a-switch-expression-or-a-switch-statement}
+### **Does IntelliJ IDEA convert your if-statement to a switch expression or a switch statement?**
 
 In the preceding example, the if-else construct was converted to a switch expression. However, if you'd have selected this conversion, *before* using pattern matching for instanceof, you would have got a switch statement, as shown in the following gif:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-6.gif)
@@ -259,7 +259,7 @@ Since the code block for if-else in the original code snippet defined multiple l
 
 This brings us to another interesting question -- what is the relation between switch statement, switch expression, colon syntax, and arrow syntax? Let's have a look.
 
-### **Switch statements vs. Switch expressions and Colon Syntax vs. Arrow Syntax** {#h3-8-switch-statements-vs-switch-expressions-and-colon-syntax-vs-arrow-syntax}
+### **Switch statements vs. Switch expressions and Colon Syntax vs. Arrow Syntax**
 
 A switch is classified as a statement or an expression depending on whether it returns a value or not. If it returns a value, it is a switch expression, otherwise a statement. Switch can also use either a colon or an arrow syntax.
 
@@ -270,7 +270,7 @@ The preceding matrix is not just limited or specific to switch statements or exp
 
 As shown in the previous examples, the case labels are no longer limited to constants. Let's see what they have to offer.
 
-### **Type pattern -- case labels with a data type** {#h3-9-type-pattern-case-labels-with-a-data-type}
+### **Type pattern -- case labels with a data type**
 
 In the previous examples, case labels included a data type. This is a type pattern. A type compares the selector expression with a type. If the test passes, the value is cast and assigned to the pattern variable that is defined right after the type name. Let's pull the exact lines of code from these previous examples:
 
@@ -284,16 +284,16 @@ case Discrimination d -> {
 ```
 
 
-### **Scope of pattern variables** {#h3-10-scope-of-pattern-variables}
+### **Scope of pattern variables**
 
 Pattern variables are local variables, which are casted and initialized when a type pattern tests true. Their scope is limited to the case labels in which they are declared -- it doesn't make sense for a pattern variable to be available in a switch branch in which its argument doesn't match.
 
-### **When do missing break statements in a switch statement become a compilation error?** {#h3-11-when-do-missing-break-statements-in-a-switch-statement-become-a-compilation-error}
+### **When do missing break statements in a switch statement become a compilation error?**
 
 In the following example, the pattern variable `d` is limited to the case label `Discrimination`. When patterns, instead of constants, are used in case labels for switch statements or expressions, missing `break` statements is a compilation error because it can result in a default fall-through to a case label that did not pass the test:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-7-1.gif)
 
-### **Guarded patterns -- conditions that follow test patterns** {#h3-12-guarded-patterns-conditions-that-follow-test-patterns}
+### **Guarded patterns -- conditions that follow test patterns**
 
 Guarded patterns can help you to add conditions to your case labels, beyond test patterns, so that you don't have to define another if construct within a switch branch.
 
@@ -370,11 +370,11 @@ public class MyEarth {
 ```
 
 
-### **Parenthesized patterns** {#h3-13-parenthesized-patterns}
+### **Parenthesized patterns**
 
 So far, the necessity of parenthesized patterns is very low. It's only to distinguish guard and expression in instanceof syntax: `if(o instanceof (String s && !s.isEmpty())` -- here we use a parenthesized pattern (with guarded pattern inside). It will be more useful in the future with deconstruction patterns.
 
-### **Pattern dominance -- handling general types before specific types in case labels** {#h3-14-pattern-dominance-handling-general-types-before-specific-types-in-case-labels}
+### **Pattern dominance -- handling general types before specific types in case labels**
 
 What happens if the types being checked in switch case labels have an inheritance relationship? You should check for the most specific case, prior to checking for the general type.
 
@@ -386,7 +386,7 @@ An interesting observation is that with a similar logic it isn't a compilation e
 However, in such cases, IntelliJ IDEA would not offer you the option to convert it to a switch. You get the option, when you remove checking a superclass before its subclass, or, perhaps checking for unrelated types:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-8.gif)
 
-### **Should you care about handling all possible values for the selector expression in switch?** {#h3-15-should-you-care-about-handling-all-possible-values-for-the-selector-expression-in-switch}
+### **Should you care about handling all possible values for the selector expression in switch?**
 
 Yes, you must have a branch to execute, regardless of the value that is passed to it, if you are using any kind of patterns in case labels with switch expressions or switch statements.
 
@@ -452,7 +452,7 @@ class MyEarth {
 
 Adding a null case to switch is not mandatory to ensure that it handles all the possible values.
 
-### **Using sealed classes as type patterns -- are they treated differently to non-sealed classes?** {#h3-16-using-sealed-classes-as-type-patterns-are-they-treated-differently-to-non-sealed-classes}
+### **Using sealed classes as type patterns -- are they treated differently to non-sealed classes?**
 
 The short answer is yes they are. Please refer to the section 'Sealed classes' in this blog post for their detailed coverage.
 
@@ -482,7 +482,7 @@ class MyEarth {
 
 This rule applies to the hierarchy of an interface too.
 
-### **Freedom from defining code that might never execute** {#h3-17-freedom-from-defining-code-that-might-never-execute}
+### **Freedom from defining code that might never execute**
 
 I know the title is confusing. To understand what it means, let's look at an example of a sealed interface and the classes that implement it:
 
@@ -526,7 +526,7 @@ public class Geometry {
 ```
 
 
-### **Running inspection** **'if' can be replaced with 'switch' on your code base** {#h3-18-running-inspection-if-can-be-replaced-with-switch-on-your-code-base}
+### **Running inspection** **'if' can be replaced with 'switch' on your code base**
 
 It can be time-consuming to look for if-else constructs in your code and check if they can be replaced with switch. You can run the inspection 'if can be replaced with switch' on all the classes in your codebase or its subset.
 
@@ -539,8 +539,8 @@ We have talked a lot about the pattern matching for switch. Now let's cover seal
 
 The language syntax of Sealed types enables you to restrict the classes or interfaces that can extend or implement them. The goal of this language feature is to let you define the possible hierarchies in your business domain in a declarative manner. But why would you ever need to create restricted hierarchies?
 
-**Need for creating restricted hierarchies** {#h2-19-need-for-creating-restricted-hierarchies}
-----------------------------------------------------------------------------------------------
+**Need for creating restricted hierarchies**
+--------------------------------------------
 
 Imagine you are creating an application that helps its users with gardening activities. Depending on the type of plant, a gardener might need to do different activities. Let's model the plant hierarchy as follows (I'm not detailing the classes on purpose):
 
@@ -584,8 +584,8 @@ public class Gardner {
 
 The problem code is the assumption that a developer has to deal with in the last else construct - defining actions even though the developer knows that all possible types of the method parameters plant have been addressed. Though it might look unreachable now, what happens if another developer adds a class to this hierarchy? Sealed classes can impose this restriction on the hierarchies at the language level.
 
-**Define secure hierarchies with sealed classes** {#h2-20-define-secure-hierarchies-with-sealed-classes}
---------------------------------------------------------------------------------------------------------
+**Define secure hierarchies with sealed classes**
+-------------------------------------------------
 
 With the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) sealed, you can **declare** a class as a sealed class. A sealed class uses the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) permits to list the classes that can extend it directly. Its subclasses can either be final, non-sealed*,* or sealed.
 
@@ -617,8 +617,8 @@ You can't create another class, say, `AquaticPlant`, that tries to extend the se
 
 Let's quickly check the configuration of IntelliJ IDEA on your system to ensure you can get the code to run it.
 
-**Revisiting processing of Plant types in class Gardner** {#h2-21-revisiting-processing-of-plant-types-in-class-gardner}
-------------------------------------------------------------------------------------------------------------------------
+**Revisiting processing of Plant types in class Gardner**
+---------------------------------------------------------
 
 After creating a sealed hierarchy, you will be able to process an instance from the hierarchy in a precise way, and won't need to deal with any unknown implementations. The `process` method in class `Gardner` will work with no chance of running the `else` clause. However, the syntax of the if-else construct will still need you to define the else part (this may change in a future Java version).
 
@@ -636,8 +636,8 @@ int process(Plant plant) {
 ```
 
 
-**Package and module restrictions** {#h2-22-package-and-module-restrictions}
-----------------------------------------------------------------------------
+**Package and module restrictions**
+-----------------------------------
 
 Sealed classes and their implementations can't span across multiple Java modules.
 
@@ -645,13 +645,13 @@ If a sealed base class is declared in a named Java module, all its implementatio
 
 For a sealed class declared in an unnamed Java module, all its implementations must be defined in the same package.
 
-**Rules for base and extended classes** {#h2-23-rules-for-base-and-extended-classes}
-------------------------------------------------------------------------------------
+**Rules for base and extended classes**
+---------------------------------------
 
 The classes that extend a sealed class must either be final, non-sealed, or sealed. A final class prohibits further extension. A non-sealed class allows other classes to extend it. And a sealedsubclass must follow the same set of rules as the parent base class -- it could be extended by an explicit list of other classes.
 
-**Abstract sealed base class** {#h2-24-abstract-sealed-base-class}
-------------------------------------------------------------------
+**Abstract sealed base class**
+------------------------------
 
 A sealed class can be abstract too. The extended classes could be defined as abstract or concrete classes. Here's the modified code which adds an abstract method `grow()` to the class `Plant`:
 
@@ -678,14 +678,14 @@ final class Cucumber extends Climber {}
 ```
 
 
-**Implicit subclasses** {#h2-25-implicit-subclasses}
-----------------------------------------------------
+**Implicit subclasses**
+-----------------------
 
 If you define a sealed class and its derived classes in the same source file, you can omit the contextual keyword permits and the name of the derived classes that are included in the declaration of a sealed class. In this case, the compiler can infer the hierarchy.
 ![](https://lh4.googleusercontent.com/xzlgIYLYBNICSpdXjJgWCCb5C4slW5LLoRF9Dq9NB-Q7WuwUdqR7bdToJkbs-pyVH_nQbbOQy-DChZRHSxnuz6_pRZJbug8dPzyiKen4uyILnQg4eSN4Ml_JocWKKQ-9WczN8yy9=s0)
 
-**Sealed interfaces** {#h2-26-sealed-interfaces}
-------------------------------------------------
+**Sealed interfaces**
+---------------------
 
 Unlike classes, interfaces can not define constructors. Before the introduction of *sealed classes*, a public class could define a private or package-private constructor to limit its extensibility, but interfaces couldn't do that.
 
@@ -708,8 +708,8 @@ final class Karate implements Kick {}
 ```
 
 
-**Stronger code analysis with closed list of subclasses** {#h2-27-stronger-code-analysis-with-closed-list-of-subclasses}
-------------------------------------------------------------------------------------------------------------------------
+**Stronger code analysis with closed list of subclasses**
+---------------------------------------------------------
 
 With sealed classes and interfaces, you can have an explicit list of inheritors that is known to the compiler, IDE and the runtime (via reflection). This closed list of subclasses makes the code analysis more powerful.
 

@@ -31,7 +31,7 @@ Here's the (growing) roster of topics!
 
 **Note:** **Abstracts that have already been booked are marked as such below and, in some cases, an abstract may be available for more than one JUG, though ideally all abstracts would be assigned before assigning sessions more than once.**
 
-### Java Core {#h3-0-java-core}
+### Java Core
 
 
 
@@ -117,7 +117,7 @@ This talk will explore what virtual threads are, how they are implemented, how t
 
 **Status: Booked July 19, 2022, PhillyJUG (USA)**
 
-### Java Cloud {#h3-1-java-cloud}
+### Java Cloud
 
 
 
@@ -187,7 +187,7 @@ JDK 17, the next LTS version of Java, is around the corner and in this session, 
 
 Learn about these features and improvements including Records, Text blocks, Garbage collection improvements, and monitoring through Flight Recorder in several live demos.
 
-### JavaFX {#h3-2-javafx}
+### JavaFX
 
 
 
@@ -207,7 +207,7 @@ FXGL 11 has been a success among JavaFX developers, leveraging high-performance 
 
 In this session, we will cover the latest features the current version offers and outline key milestones for FXGL 17.
 
-### Raspberry Pi {#h3-3-raspberry-pi}
+### Raspberry Pi
 
 
 
@@ -233,7 +233,7 @@ And you just need the OpenJDK and four libraries: JavaFX, FXGL, Pi4J, and JavaCV
 
 In this talk, you will see all the things that are needed besides the available libraries---ready made Linux images, Maven based, well documented template projects that enable development on laptops, and remote starting and debugging of apps on the Raspberry Pi, while you will also be shown the best practices of how to combine, for example, a GUI with a PUI (Physical User Interface). The fun is back. And the fun is 100% pure Java.
 
-### Miscellaneous {#h3-4-miscellaneous}
+### Miscellaneous
 
 
 

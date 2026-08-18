@@ -54,8 +54,8 @@ The UpgradeSpringBoot_3_2 recipe combines multiple recipes that fulfill our requ
 6. Enabling [Virtual Threads](https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html#GUID-DC4306FC-D6C1-4BCC-AECE-48C32C1A8DAA "Virtual") on Java21
 7. Switching to a more up-to-date qualifiedTypeName, replacing the older version
 
-Usage of Recipes {#h2-0-usage-of-recipes}
------------------------------------------
+Usage of Recipes
+----------------
 
 I have used it for Maven projects, and I have employed this approach to accomplish it.
 
@@ -63,7 +63,7 @@ I have used it for Maven projects, and I have employed this approach to accompli
 
 ```
 
-### **1. First add the following plugin to the pom.xml** {#h3-1-1-first-add-the-following-plugin-to-the-pom-xml}
+### **1. First add the following plugin to the pom.xml**
 
 ```
 <plugin>
@@ -77,7 +77,7 @@ I have used it for Maven projects, and I have employed this approach to accompli
 ```
 
 
-### **2. Under the activeRecipes tag, please add the following UpgradeSpringBoot_3_2 recipe** {#h3-2-2-under-the-activerecipes-tag-please-add-the-following-upgradespringboot-3-2-recipe}
+### **2. Under the activeRecipes tag, please add the following UpgradeSpringBoot_3_2 recipe**
 
 ```
 <recipe>org.openrewrite.java.migrate.UpgradeToJava21</recipe>
@@ -85,7 +85,7 @@ I have used it for Maven projects, and I have employed this approach to accompli
 ```
 
 
-### 3. And the above recipes can be activated by adding the following dependency {#h3-3-3-and-the-above-recipes-can-be-activated-by-adding-the-following-dependency}
+### 3. And the above recipes can be activated by adding the following dependency
 
 ```
 <dependencies>
@@ -103,7 +103,7 @@ I have used it for Maven projects, and I have employed this approach to accompli
 ```
 
 
-### **4. Finally configuration would be** {#h3-4-4-finally-configuration-would-be}
+### **4. Finally configuration would be**
 
 ```
 <project>
@@ -138,7 +138,7 @@ I have used it for Maven projects, and I have employed this approach to accompli
 ```
 
 
-### **5. Perform the dryRun** {#h3-5-5-perform-the-dryrun}
+### **5. Perform the dryRun**
 
 Performing a `rewrite:dryRun` and verifying the generated file rewrite.patch under the target/rewrite folder is considered the recommended approach.
 
@@ -157,7 +157,7 @@ If you observe `rewrite.patch` file you can observe the difference in the each o
 * RequestMapping annotation has been simplified
 * Changed `javax` namespace to `jakarta`
 
-### 6. Run the recipe using the below command {#h3-6-6-run-the-recipe-using-the-below-command}
+### 6. Run the recipe using the below command
 
 After gaining confidence in using the dryRun feature, you should proceed to execute the `rewrite:run` command
 
@@ -166,14 +166,14 @@ mvn rewrite:run
 ```
 
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In summary, OpenRewrite recipes will reduce the time required for framework migration. Ultimately, numerous enterprise organizations need to consider cost optimization as a crucial factor.
 
 As usual, the complete code available [over on Github](https://github.com/bsmahi/migratespring/tree/master)
 
-### Reference {#h3-8-reference}
+### Reference
 
 <https://docs.openrewrite.org/>
 

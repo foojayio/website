@@ -29,7 +29,7 @@ Here on foojay.io you can already find two posts by Carl Dea to get you started 
 
 In this post, I want to show you yet another approach that uses the tools provided by [Gluon](https://gluonhq.com/), who are the maintainers, and the driving force behind [OpenJFX](https://openjfx.io/).
 
-### Before We Start... {#h3-0-before-we-start}
+### Before We Start...
 
 We will be using IntelliJ IDEA in this post, and to develop JavaFX applications, we need to have the proper JDK and JavaFX installed.
 
@@ -98,7 +98,7 @@ In that case you'll need to follow these steps:
 
 ![](Screenshot-from-2020-11-16-08-33-50-1024x434.png) Adding openjfx as a dependency ![](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
 
-### Create a New Project with start.gluon.io {#h3-1-create-a-new-project-with-start-gluon-io}
+### Create a New Project with start.gluon.io
 
 <br />
 
@@ -133,7 +133,7 @@ By clicking the "Generate Project" button, you will get a ZIP with the full proj
  </figcaption>
 </figure>
 
-### Create a New Mobile Project with the Gluon Plugin in IntelliJ IDEA {#h3-2-create-a-new-mobile-project-with-the-gluon-plugin-in-intellij-idea}
+### Create a New Mobile Project with the Gluon Plugin in IntelliJ IDEA
 
 Gluon also created a [plugin for IntelliJ IDEA](https://plugins.jetbrains.com/plugin/7864-gluon) which makes it very easy to start a JavaFX mobile project.
 
@@ -182,7 +182,7 @@ As you can see in this video, within 30 seconds you have a new JavaFX project op
  </div>
 </figure>
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 The Gluon start website and the plugin allow you to get started with a new JavaFX project in a few clicks.
 

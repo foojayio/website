@@ -26,13 +26,13 @@ I had read about `git bisect` a few times and figured that this time, I would us
 
 So what does `git bisect` do? It helps you find the exact commit that introduced a bug, using binary search.
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this, you must know a point in history (a commit hash, a tag) that did *not* have the bug. You also need to know a point in history that *does* have the bug. And finally, you need to have a reliable way to determine if the bug is there.
 
-The Process {#h2-1-the-process}
--------------------------------
+The Process
+-----------
 
 From here on, using `git bisect` looks a bit like a game:
 > Git: does this version of your project contain the bug?  
@@ -78,8 +78,8 @@ As you can see in the picture above, every time you answer that question, you ge
 
 If you want, you can watch a replay by looking at the output of `git bisect log`. Now is also a good time to clean up the mess we made with all those checkouts by issuing `git bisect reset`.
 
-Automate Everything! {#h2-2-automate-everything}
-------------------------------------------------
+Automate Everything!
+--------------------
 
 But wait a minute... having this tedious manual check is both boring and error prone. There must be a way to automate this!
 
@@ -93,8 +93,8 @@ Rather than going through the manual process, we can have a script perform the c
 
 Typically, something like `mvn test` would be a good test.
 
-When Things Get Complicated {#h2-3-when-things-get-complicated}
----------------------------------------------------------------
+When Things Get Complicated
+---------------------------
 
 But what if your setup is a bit more complex? The situation I faced today was a problem where Maven couldn't build Maven. How would you use `git bisect` for that?
 
@@ -159,8 +159,8 @@ After a couple of minutes and a lot of noise from my computer, I get the same ou
 
 Again, make sure to reset the project clone to a pristine state with `git bisect reset`.
 
-Wrapping Up {#h2-4-wrapping-up}
--------------------------------
+Wrapping Up
+-----------
 
 So, did I find the bug? Well, yes and no. I did find out which commit introduced the bug. But given that the message was so unclear, I gave up there.
 

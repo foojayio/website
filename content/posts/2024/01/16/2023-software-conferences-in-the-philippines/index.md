@@ -27,10 +27,10 @@ The Philippine Java Community were involved in two big conferences namely, Softw
 
 Members of the Foojay community were included as the speakers of the conferences, including me (Tristan Mahinay). This is the first time that the Friends of OpenJDK is involved in these big conferences. Thanks to [Azul](https://www.azul.com/ "Azul") for being a sponsor of both events.
 
-Software Conference Philippines {#h2-0-software-conference-philippines}
------------------------------------------------------------------------
+Software Conference Philippines
+-------------------------------
 
-### What is SOFTCON PH? {#h3-1-what-is-softcon-ph}
+### What is SOFTCON PH?
 
 SOFTCON PH is the biggest software conference in the Philippines. This conference started on 2011 and still continuing to attract speakers locally and internationally. The conference theme is Artificial Intelligence and a variety of other topics:
 
@@ -43,7 +43,7 @@ SOFTCON PH is the biggest software conference in the Philippines. This conferenc
 * Java
 * Mobile
 
-### Venue {#h3-2-venue}
+### Venue
 
 The conference was held on Oct 25-27, 2023 in hybrid format. [Airmeet](https://www.airmeet.com "Airmeet") was used for the online conference and the onsite venue was in SMX Aura, Taguig, Philippines. Below is the virtual lobby of SOFTCON PH in Airmeet and the onsite conference at SMX Aura.
 
@@ -59,7 +59,7 @@ The conference was held on Oct 25-27, 2023 in hybrid format. [Airmeet](https://w
 
 ![](softcon-smx-aura-2023-680x510.jpg)
 
-### Foojay Speakers {#h3-3-foojay-speakers}
+### Foojay Speakers
 
 Most of the speakers were part of Friends of OpenJDK community and Java Champions. Check the link below for the full list of speakers.
 
@@ -87,14 +87,14 @@ The speakers in the event were given a hoodie merchandise from the organizers as
 
 ![](softcon-2023-hoodie-383x510.jpg)
 
-Samsung Open Source Conference {#h2-4-samsung-open-source-conference}
----------------------------------------------------------------------
+Samsung Open Source Conference
+------------------------------
 
-### What is SOSCON PH? {#h3-5-what-is-soscon-ph}
+### What is SOSCON PH?
 
 SOSCON PH is a conference focusing on open source technologies backed by Samsung R\&D Philippines which was started last 2022. The conference this year will focus on the use of open-source tehnologies for Data Intelligence. In this event, the [Java User Group Philipines (JUG PH)](https://www.meetup.com/java-user-group-ph "Java User Group Philipines") were invited as an event partner.
 
-### Venue {#h3-6-venue}
+### Venue
 
 The conference is a one day event held in the University of the Philippines. Below are some images that was taken during the conference.
 
@@ -112,7 +112,7 @@ The conference at the end will give their attendees a merchandise. The merchandi
 
 ![](soscon-2023-merchandise-680x510.jpg)
 
-### Speakers {#h3-7-speakers}
+### Speakers
 
 Below is the full list of speakers:
 

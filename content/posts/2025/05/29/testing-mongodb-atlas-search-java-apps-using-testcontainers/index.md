@@ -32,8 +32,8 @@ mvn test
 ```
 
 
-What is MongoDB Atlas Search, anyway? {#h2-0-what-is-mongodb-atlas-search-anyway}
----------------------------------------------------------------------------------
+What is MongoDB Atlas Search, anyway?
+-------------------------------------
 
 MongoDB Atlas Search is an extension to the built-in indexing capabilities that are part of MongoDB itself, using the awesome open source indexing and query library [Lucene](https://lucene.apache.org/). MongoDB has built a wrapper around Lucene called [mongot](https://www.mongodb.com/docs/atlas/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant#fts-architecture/).
 
@@ -78,8 +78,8 @@ MongoDB Atlas Search surfaces these Lucene capabilities in a familiar MongoDB ag
 
 MongoDB Atlas Search is an Atlas-cloud hosted service which MongoDB automatically maintains for you and runs alongside your database or on dedicated search nodes in your cluster.
 
-Local development and testing with MongoDB Atlas Search {#h2-1-local-development-and-testing-with-mongodb-atlas-search}
------------------------------------------------------------------------------------------------------------------------
+Local development and testing with MongoDB Atlas Search
+-------------------------------------------------------
 
 If you are building an application or service based on MongoDB Atlas Search, a crucial part of the developer experience is how to debug and test locally.
 
@@ -89,7 +89,7 @@ You can run this container on your machine, and then build and experiment with a
 
 In addition, if you are using Java, you can write unit tests using the awesome unit test support provided for [MongoDB and MongoDB Atlas Local containers](https://java.testcontainers.org/modules/databases/mongodb/#mongodbatlaslocalcontainer) in the TestContainers project.
 
-### What's TestContainers? {#h3-2-what-s-testcontainers}
+### What's TestContainers?
 
 TestContainers is a handy unit testing library that helps you write integration tests by managing containerised versions of services you might use in your code. A few things it does for you are it:
 
@@ -100,12 +100,12 @@ TestContainers is a handy unit testing library that helps you write integration 
 
 Even though we're going to be using the Java TestContainers project here, TestContainers is available for lots of languages and platforms. You can check it out on [their website](https://testcontainers.com/).
 
-Let's write some code! {#h2-3-let-s-write-some-code}
-----------------------------------------------------
+Let's write some code!
+----------------------
 
 We'll build a simple Java data access layer with unit tests, then gradually add features and more comprehensive tests as we go.
 
-### Simple CRUD data access and unit tests {#h3-4-simple-crud-data-access-and-unit-tests}
+### Simple CRUD data access and unit tests
 
 Here's a simple DataAccess class in Java, using the awesome Java record immutable data type Person. It has simple CRUD methods:
 
@@ -284,7 +284,7 @@ Because our PersonDataAccess class implements AutoCloseable, adding this annotat
 
 After that, the tests are standard JUnit tests, which set up preconditions, perform an operation, and assert postconditions in the Given/When/Then style.
 
-### MongoDB Atlas Search with seed data and index wait {#h3-5-mongodb-atlas-search-with-seed-data-and-index-wait}
+### MongoDB Atlas Search with seed data and index wait
 
 Alright, let's get into MongoDB Atlas Search!
 
@@ -507,7 +507,7 @@ Hopefully, you (like me!) now have green ticks and passing tests. Very satisfyin
 
 I renamed my original test class PersonDataAccessCRUDTest and can run them both together. You can see they each get their own independent container and set of test data, giving good isolation of test cases and seed data.
 
-### Advanced seed data loading: MongoDB Database Tools {#h3-6-advanced-seed-data-loading-mongodb-database-tools}
+### Advanced seed data loading: MongoDB Database Tools
 
 Finally, we'll use a couple of more advanced TestContainers methods to load a more significant amount of seed data and run commands on the database.
 
@@ -598,7 +598,7 @@ mongoDBContainer.execInContainer(ExecConfig.builder()
 ```
 
 
-### Loading a *mongodump* BSON database and index {#h3-7-loading-a-mongodump-bson-database-and-index}
+### Loading a *mongodump* BSON database and index
 
 Let's create some seed data and MongoDB Atlas Search indexes, which we'll store in a resource directory /seed-data.
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdlQGT-Gx9KjXh62fBIazUC4WwMXa3Ti--NVjGkt3YqlpAsQoIpGl_rQiqtz7Db-xAgDfYx71au5tzv3yIO35ipy04k7I_f4wkepw2RoSM-qdeBF59W_0A1YbeOce3zcvzqzEiH_g?key=xtuklWIXthgOT-_RVHPDsg)
@@ -772,14 +772,14 @@ Having the mappings JSON external is also useful, for instance:
 * Local index creation: In new environments (e.g., starting a new local container to test with), you can use this index mapping to initialise the MongoDB Atlas Search indexes.
 * Production index rollout: Using a source controlled index mapping and performing a (controlled) rollout ahead of changes to software which will rely on it makes sense.
 
-Wrapping up {#h2-8-wrapping-up}
--------------------------------
+Wrapping up
+-----------
 
 So we've been through a few examples of how you can use the awesome TestContainers projects to enhance testing of your MongoDB Atlas Search Java apps.
 
 I hope you find it useful. Feel free to reach out if you have questions through the comments. Happy coding!
 
-### Further reading {#h3-9-further-reading}
+### Further reading
 
 Here are a few links for further reading:
 

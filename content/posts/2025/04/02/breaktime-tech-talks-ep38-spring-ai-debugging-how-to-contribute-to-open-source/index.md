@@ -25,8 +25,8 @@ Next, I share insights from [an article on contributing to open-source source pr
 
 {{< youtube W36VlhRHo_g >}}
 
-Vector database architecture {#h2-0-vector-database-architecture}
------------------------------------------------------------------
+Vector database architecture
+----------------------------
 
 Vector store architecture, I found out is a little bit different from what I'm used to with relational or graph databases. As an example, graph databases start with data and then the index will sit on top of that data. Indexes are used as the starting point of the query or for relational databases, to do a lookup for the tables and such, the rows that you're looking for. So you can load data and or create the indexes first in a graph database. It doesn't really matter as long as you don't have conflicts between the index and the data that you're trying to add that index to.
 
@@ -40,8 +40,8 @@ First off is that Pinecone has changed some of their API stuff, and their docume
 
 That was the thing that I noticed. I was having trouble with one vector store, so I just dropped that dependency and pulled in another vector store and similar issues there. Even though the API For Spring AI VectorStore, it looks the same. Underlying, if the database has changed, they don't quite sync up with the latest version of the database always. Hopefully there will be some changes there and they'll update some of the libraries and such that are working with the backend databases to reflect the latest API changes from those vector stores, but not everything is in sync just yet. And again, lots of changes going on lots of times, so things changing, at variable times and that's hard to keep up with.
 
-JSON formatting {#h2-1-json-formatting}
----------------------------------------
+JSON formatting
+---------------
 
 But I went back to Spring AI to read and parse the JSON that I was talking about last week, and it was a little bit tricky because I realized and it fully sunk in that I'm dealing with JSON lines format, which is different than a lot of, I guess, standard or typical JSON formatting.
 
@@ -49,8 +49,8 @@ It's just wired a little bit differently. Instead of throwing multiple objects i
 
 But once I figured it out, I think now I have a decent starting place where maybe, hopefully, I won't have those same problems going forward. I do plan to put together a project and probably some content, blog posts and so on, detailing the differences and the things that I worked with and things I ran up against, but that's not out yet and, hopefully I'll get to it sometime soon.
 
-Pinecone configuration {#h2-2-pinecone-configuration}
------------------------------------------------------
+Pinecone configuration
+----------------------
 
 The next thing was that the required Pinecone configuration has changed in Spring AI and the UI has changed in Pinecone itself. So I spun up a free tier instance on Pinecone on their cloud. First of all, their free tier doesn't use the namespace qualifier, which is fine, it's not required, but it is a little bit confusing sometimes looking at their documentation, it throws that namespace thing in there all the time, and sometimes it's hard to know, do I need to have that, do I need to not,
 
@@ -60,8 +60,8 @@ So when you look at your free tier instance of Pinecone, it shows the full host 
 
 So in case you're wondering, it's `<index>-<projectID>.svc.<environment>.pinecone.io`. Super confusing to find out, but once I know the format that they're looking for, it's actually much, much easier, and I was able to get Spring AI to connect with no problem once I figured out all the pieces and assembled them correctly. That was really tricky, took me way longer than what I wanted it to, but again, some things that were out of sync between Pinecone and Spring AI.
 
-Configuring multiple vector stores {#h2-3-configuring-multiple-vector-stores}
------------------------------------------------------------------------------
+Configuring multiple vector stores
+----------------------------------
 
 The next thing is I spun up a Spring AI application using Pinecone and Neo4j. The tricky part I found here is that I needed to have multiple vector databases configured in the same application. Which meant that if I tried to just let Spring do its auto configuration, the vector store beans would conflict because a generic vector store bean would try to pick up Pinecone, and it would try to pick up Neo4j, and it'd be like, which one do you want me to pick up? I don't know.
 
@@ -69,8 +69,8 @@ I actually needed to create two separate beans and and set those values separate
 
 I'll probably try to rework this and clean this up a little bit, but it is working for now. I do have the beans working and I'm able to connect to either database as I so choose.
 
-Why and how to participate in open source {#h2-4-why-and-how-to-participate-in-open-source}
--------------------------------------------------------------------------------------------
+Why and how to participate in open source
+-----------------------------------------
 
 The last piece I want to talk about is a piece of content that I came across and actually I came across this a few weeks ago and just haven't had a chance to cover it yet. So I'm excited to do that today. And the article is called Why and How to Participate in Open Source Projects in 2025.
 
@@ -100,8 +100,8 @@ Then, as you build your credibility, then you can start adding to enhancements a
 
 Lastly, the article closes with some example open source project ideas...but whatever stack you might be working on probably has some libraries or some things that are missing and out of sync that could help you some contributions too. So I would encourage you to look within whatever stack you might be dealing with at the time.
 
-Wrapping up! {#h2-5-wrapping-up}
---------------------------------
+Wrapping up!
+------------
 
 This episode, I talked through my latest progress in playing with vector databases, getting data loaded, and then exploring it with Spring AI. Then I discussed an article on the why and how of contributing to open source projects.
 

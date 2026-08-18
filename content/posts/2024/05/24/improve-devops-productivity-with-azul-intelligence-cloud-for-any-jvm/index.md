@@ -35,7 +35,7 @@ Two primary challenges to DevOps productivity are alert fatigue due to out-of-co
 
 [Azul Intelligence Cloud](https://www.azul.com/products/intelligence-cloud/) helps bring efficiency to these DevOps operations, making these DevOps initiatives achievable and even commonplace for Java applications.
 
-### Benefits of Azul Intelligence Cloud {#h-benefits-of-azul-intelligence-cloud}
+### Benefits of Azul Intelligence Cloud
 
 ![](image-2-1024x578.png)
 
@@ -43,8 +43,8 @@ Intelligence Cloud is designed to help engineering managers effectively deal wit
 
 And now, in an exciting new development, Intelligence Cloud works for any JVM from any Java vendor. Whether you're using a JDK distribution from Azul, Microsoft, Red Hat, IBM, Oracle, Eclipse Temurin, or any other Java provider, Intelligence Cloud works for you.
 
-Eliminate CVE false positives with Vulnerability Detection {#h-eliminate-cve-false-positives-with-vulnerability-detection-nbsp}
--------------------------------------------------------------------------------------------------------------------------------
+Eliminate CVE false positives with Vulnerability Detection
+----------------------------------------------------------
 
 [Azul Vulnerability Detection](https://www.azul.com/products/vulnerability-detection/) is a cloud service that eliminates false positives by accurately identifying and prioritizing known vulnerabilities in Java applications in production. Unlike other tools, it has no performance penalty.
 
@@ -54,8 +54,8 @@ And unlike security scanners that report vulnerabilities on all code, including 
 
 Vulnerability Detection helps teams prioritize and de-prioritize CVEs based on whether the component loaded in production. Intelligence Cloud now goes beyond this to address the question of unused code -- do I need this code at all?
 
-Find unused code with Code Inventory {#h-find-unused-code-with-code-inventory-nbsp}
------------------------------------------------------------------------------------
+Find unused code with Code Inventory
+------------------------------------
 
 [Code Inventory](https://www.azul.com/products/components/code-inventory/) identifies code that exists in a company's servers but doesn't run. It's a clutter finder. It's the only solution that accurately identifies unused and dead code for removal by precisely detailing what custom and third-party code is running.
 
@@ -87,8 +87,8 @@ The longest amount of code may deal with annual reporting modules, where teams s
 
 In general, though, the benefit is from teams passively building up the list of "what's still used" to identify "what's not used anymore" without impacting standard feature work and schedules.
 
-Try a pilot of Azul Intelligence Cloud Today {#h-try-a-pilot-of-azul-intelligence-cloud-today-nbsp}
----------------------------------------------------------------------------------------------------
+Try a pilot of Azul Intelligence Cloud Today
+--------------------------------------------
 
 Intelligence Cloud works with any JVM from any vendor or distribution including Azul, Oracle, Amazon, Microsoft, RedHat, and Temurin to dramatically slash time from unimportant tasks across an enterprise's entire Java estate.
 

@@ -23,10 +23,10 @@ In [Part 1](https://foojay.io/today/junit-5-introduction/) of this series of art
 
 This article will share examples of a JUnit test which makes use of a few of these annotations.
 
-Testing {#h2-0-testing}
------------------------
+Testing
+-------
 
-### Marking a method as a Test {#h3-1-marking-a-method-as-a-test}
+### Marking a method as a Test
 
 Tests in JUnit5 are annotated with the **@Test** annotation. *Unlike prior versions of JUnit, the JUnit5 `@Test` annotation does not have any attributes. Prior versions supported extensions via attributes, while JUnit5 fosters a custom annotation based extension* (more on this in a future article).
 
@@ -53,7 +53,7 @@ Tests in JUnit5 are annotated with the **@Test** annotation. *Unlike prior versi
 ```
 
 
-### Assertions {#h3-2-assertions}
+### Assertions
 
 Assertions are how testing is conducted. Several types of assertions exist for testing. Some examples include:
 
@@ -124,10 +124,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 > ***NOTE**: Assertion parameter ordering in JUnit 5 is different from the order in prior versions. In my opinion, the current parameter arrangement makes a lot more sense.*
 
-Filtering and Categorizing Tests {#h2-3-filtering-and-categorizing-tests}
--------------------------------------------------------------------------
+Filtering and Categorizing Tests
+--------------------------------
 
-### Tags {#h3-4-tags}
+### Tags
 
 Tags are a means to categorize test methods and classes. Tagging also leads to discovery and filtering of tests. Tagging is done by annotating the class or method with an [**@Tag**](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/Tag.html) annotation. More on filtering in another blog of this series.
 
@@ -154,7 +154,7 @@ Tags are a means to categorize test methods and classes. Tagging also leads to d
 ```
 
 
-### Assumptions {#h3-5-assumptions}
+### Assumptions
 
 Assumptions are conditions that determine if the rest of the test code block should be **either evaluated or aborted**. Not meeting an assumption will not cause the code block conditioned by it, to fail. It would rather simply abort execution of such a code block. Some assumption methods:
 
@@ -187,10 +187,10 @@ Typically, unit tests statically import the assumptions required for the given t
 
 ***There is no current example of an assumption in the code kata.***
 
-Ordering Tests {#h2-6-ordering-tests}
--------------------------------------
+Ordering Tests
+--------------
 
-### Test execution order {#h3-7-test-execution-order}
+### Test execution order
 
 As stated in the previous part of the blog series, I reserve my opinions of ordering the sequence of test executions. It is useful in certain cases, such as code katas. Test ordering requires either one or two steps depending on the type of ordering.
 

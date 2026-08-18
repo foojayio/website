@@ -31,13 +31,13 @@ Frank meets Otavio Santana, who recently wrote the book "Mastering the Java Virt
 
 You'll also learn more about Jakarta EE, GlassFish, and a PET project with messaging via Telegram.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube 7-lhQld4KVc >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,8 +45,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:42 Otavio Santana: Book Author, Talks about the persistence layer and evolving your career thanks to open-source.  
 <https://www.linkedin.com/in/otaviojava>  

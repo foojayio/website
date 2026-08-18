@@ -20,8 +20,8 @@ frozen: false
 
 It's been another half year of content and activities in and around the place for friends of OpenJDK... let's look at some statistics, trends, comparisons, highlights, and plans for the future!
 
-Trends and Comparisons {#h2-0-trends-and-comparisons}
------------------------------------------------------
+Trends and Comparisons
+----------------------
 
 Let's start by looking at Google Analytics, what's the curve look like for the past half year? Here it is:
 
@@ -37,8 +37,8 @@ Over the past 6 months, from the first day of January to the last day of June, t
 
 What you see above is that **we have had as much traffic on Foojay.io in the first half of this year as we had for the whole of last year**. That's a good trend!
 
-Big Spikes and Popular Articles {#h2-1-big-spikes-and-popular-articles}
------------------------------------------------------------------------
+Big Spikes and Popular Articles
+-------------------------------
 
 What do the big spikes mean? For the spikes of the previous half years, and related analysis, see [Foojay Status Report: July -- December 2021](https://foojay.io/today/foojay-status-report-july-december-2021/) and [Foojay Status Report: January -- June 2021](https://foojay.io/today/foojay-status-report-january-june-2021/).
 
@@ -46,8 +46,8 @@ Over the past half year, the very biggest spikes were in April for [Bazlur Rahma
 
 Of course, what makes Bazlur's articles extremely popular is that they are high level overviews and assessments, rather than specific niche topics, of which there are very many on Foojay.io too, which are very much appreciated. In that context, a special shout out to [Nicolas Frankel](https://foojay.io/today/author/nicolas-frankel/) and [Shai Almog](https://foojay.io/today/author/shai-almog/) who, week after week keep bringing out great and inspiring content around their areas of interest.
 
-Upcoming Activities {#h2-2-upcoming-activities}
------------------------------------------------
+Upcoming Activities
+-------------------
 
 Foojay.io has always been more than a website. It is a vehicle for the users of the OpenJDK to get together and unite around their common platform.
 
@@ -55,8 +55,8 @@ For example, this year [the second Friends of OpenJDK devroom was held at FOSDEM
 
 Just over the past week, in the Foojay.io Slack channel, the ideas were raised to continue with the Foojay Podcast and also to set up a developer certification program.
 
-Join In {#h2-3-join-in}
------------------------
+Join In
+-------
 
 There's clearly a lot going on and if you too want to get your tutorials, tips and tricks, release notes, event announcements, and opinions out to the broader OpenJDK user community, there's nothing easier to do than follow these two articles:
 

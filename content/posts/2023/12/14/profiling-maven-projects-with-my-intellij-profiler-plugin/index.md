@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Or: I just released version 0.0.11 with a cool new feature that I can't wait to tell you about... {#h3-0-or-i-just-released-version-0-0-11-with-a-cool-new-feature-that-i-can-t-wait-to-tell-you-about}
+### Or: I just released version 0.0.11 with a cool new feature that I can't wait to tell you about...
 
 According to the recent [JetBrains survey](https://www.jetbrains.com/lp/devecosystem-2023/java/), most people use Maven as their build system and build Spring Boot applications with Java. Yet my profiling plugin for IntelliJ only supports profiling pure Java run configurations. Configurations where the JVM gets passed the main class to run. This is great for tiny examples where you directly right-click on the `main` method and profile the whole application using the context menu:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-2.png)

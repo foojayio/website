@@ -27,7 +27,7 @@ Sometimes that was easy... sometimes it was hard... but it never was fun. And if
 
 After creating the Disco API ("Universal OpenJDK Discovery API", in full) which serves up JDK distributions as a service, I had the idea to create plugins for IDEs to enable people to download the JDK of their choice more easily.
 
-### **IDE Plugins** {#h3-0-ide-plugins}
+### **IDE Plugins**
 
 Long story short, we created plugins for Intellij Idea, Eclipse, and Visual Studio Code. NetBeans even comes with bundled support for the Disco API.
 
@@ -54,7 +54,7 @@ Once you have found the JDK of your choice, it will show you the selected file n
 
 The plugin will only let you download the JDK, the installation is still your job to do.
 
-### **IDE Plugins with Links** {#h3-1-ide-plugins-with-links}
+### **IDE Plugins with Links**
 
 * Intellij Idea: [DiscoIdea](https://plugins.jetbrains.com/plugin/16787-discoidea)
 * Eclipse: [DiscoEclipse](https://marketplace.eclipse.org/content/discoeclipse)
@@ -65,7 +65,7 @@ After I had finished those plugins, I thought again about the procedure of downl
 
 So why not create plugins for the browsers to make it even easier to get a JDK?
 
-### **Browser Plugins** {#h3-2-browser-plugins}
+### **Browser Plugins**
 
 And so I did, there are now plugins for Chrome, Edge, Firefox, and Safari. And because I don't want to reinvent the wheel, I simply made them look exactly the same as the IDE plugins. Here is a screenshot that shows all four plugins in their browser:
 ![](BrowserPlugins-700x295.jpg)
@@ -74,7 +74,7 @@ As you can see, they look more or less all the same and the functionality is the
 
 So for me this is now the easiest way to search for a JDK and download it via the browser.
 
-### **Browser Plugins with Links** {#h3-3-browser-plugins-with-links}
+### **Browser Plugins with Links**
 
 * Chrome: [DiscoChrome](https://chrome.google.com/webstore/detail/discochrome/cikmnphhlggceijbbdeohhlkbdagjjce)
 * Firefox: [DiscoFox](https://addons.mozilla.org/addon/discofox/)

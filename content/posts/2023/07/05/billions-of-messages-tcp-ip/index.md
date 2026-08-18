@@ -22,7 +22,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Key Takeaways {#h3-0-key-takeaways}
+### Key Takeaways
 
 * Data consistency is critical when communicating between software components on different machines to ensure information remains in tact.
 * Low-latency data exchange requires a different approach than common formats.
@@ -30,7 +30,7 @@ frozen: false
 * Recent additions to the library extend its use with TCP/IP communications channels, offering extremely high throughput.
 * Using Wire across TCP/IP opens up the possibility of Cloud Native deployment of Chronicle-based applications.
 
-### Introduction {#h3-1-introduction}
+### Introduction
 
 One of the most important issues when building distributed applications is that of data representation. We must ensure that data sent by a component to a "remote" component (i.e. one that is part of a different process) is received correctly, with the same values. This may seem straightforward but remember that the communicating components may have been written in completely different languages.
 
@@ -38,21 +38,21 @@ Things are complicated further when we consider that different hardware/system a
 
 The most common solution to this problem is to define a "canonical" representation of data that is understood between processes -- even between programming languages -- and have data translated into this format before sending and then back into the receiver's own format once received. Several such "wire formats" exist, ranging from text-based standards such as YAML, JSON or XML, to binary options such as [Protobuf](https://www.infoq.com/protocolbuffers/ "Protobuf") that incorporate metadata or are completely raw.
 
-At [Chronicle Software](https://chronicle.software/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=george-tcp "Chronicle Software") we have developed a number of libraries to support the building of applications that are optimised for low latency messaging, primarily in the financial services industry. We provide bespoke solution development and consultancy to clients, the majority of whom are in the financial area, from all over the world.
+At [Chronicle Software](https://chronicle.software/?utm_source=foojay&utm_medium=article&utm_campaign=george-tcp "Chronicle Software") we have developed a number of libraries to support the building of applications that are optimised for low latency messaging, primarily in the financial services industry. We provide bespoke solution development and consultancy to clients, the majority of whom are in the financial area, from all over the world.
 
-One of these libraries, [Chronicle Wire](https://chronicle.software/wire/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=george-tcp "Chronicle Wire"), provides high-performance transformations of state in Java objects between their internal JVM representation and a format that allows that state to be persisted or communicated to another Java process.
+One of these libraries, [Chronicle Wire](https://chronicle.software/wire/?utm_source=foojay&utm_medium=article&utm_campaign=george-tcp "Chronicle Wire"), provides high-performance transformations of state in Java objects between their internal JVM representation and a format that allows that state to be persisted or communicated to another Java process.
 
-Chronicle Wire grew from the [Chronicle Queue](https://chronicle.software/queue/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=george-tcp "Chronicle Queue") project, which offers single digit microsecond latencies for messaging between JVMs on the same machine, or stable latencies of tens of microseconds between machines, as throughput scales to millions of messages per second. Wire now forms a key part of most of the software components developed by Chronicle, with uses from serialisation and deserialisation of object state for communication between components to an efficient model for managing the configuration of these components.
+Chronicle Wire grew from the [Chronicle Queue](https://chronicle.software/queue/?utm_source=foojay&utm_medium=article&utm_campaign=george-tcp "Chronicle Queue") project, which offers single digit microsecond latencies for messaging between JVMs on the same machine, or stable latencies of tens of microseconds between machines, as throughput scales to millions of messages per second. Wire now forms a key part of most of the software components developed by Chronicle, with uses from serialisation and deserialisation of object state for communication between components to an efficient model for managing the configuration of these components.
 
 As software architectures increasingly follow a distributed, event-based approach, we are looking to expand the space in which Chronicle Wire can be used, to support TCP/IP interconnections between components. This article provides a basic overview of the features that will be available and some simple examples of how they can be used.
 
-We are already seeing some startling performance figures for this basic approach -- in a benchmark described in Peter Lawrey's article[Java is Very Fast, If You Don't Create Many Objects](https://chronicle.software/java-is-very-fast/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=george-tcp " Java is Very Fast, If You Don’t Create Many Objects"), for example, which is built upon loopback TCP/IP networking on a single machine, we were able to pass over 4 billion events per minute.
+We are already seeing some startling performance figures for this basic approach -- in a benchmark described in Peter Lawrey's article[Java is Very Fast, If You Don't Create Many Objects](https://chronicle.software/java-is-very-fast/?utm_source=foojay&utm_medium=article&utm_campaign=george-tcp " Java is Very Fast, If You Don’t Create Many Objects"), for example, which is built upon loopback TCP/IP networking on a single machine, we were able to pass over 4 billion events per minute.
 
 We benchmarked this against similar technologies used for data exchanges, specifically Jackson and BSON. In a test processing 100 byte messages, the 99.99 percentile processing per-message processing time was about 10.5 microseconds with Chronicle Wire compares to 1400 microseconds with Jaskcon/BSON. This is a significant difference.
 
 Here we present an introduction to the key concepts used to realise this. We are, however, designing these features to be flexible as well as performant, and future articles will show some more advanced use cases.
 
-### About Chronicle Wire {#h3-2-about-chronicle-wire}
+### About Chronicle Wire
 
 Chronicle Wire exists as a layer between an application and a byte stream, acting as a source or sink of data. Wire will serialise (marshal) the state of a Java object and store the resulting format to the byte stream, or it will read a sequence of bytes from the byte stream and deserialise (unmarshal) these into a Java object based only on information carried in the message.
 
@@ -141,7 +141,7 @@ p2: !Person {
 
 The code that demonstrates this can be found in the [Chronicle Wire Github repo](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/Person.java "Chronicle Wire Github repo").
 
-### Method Writers and Readers {#h3-3-method-writers-and-readers}
+### Method Writers and Readers
 
 Normally we would imagine objects that are serialised and deserialised using Wire to hold data of some kind, relevant to our application. When using Chronicle Queue as a message transport, these objects would form the payload of messages, and we call them Data Transfer Objects (DTOs).
 
@@ -273,7 +273,7 @@ This is potentially very powerful, as it gives us a highly flexible and efficien
 
 We'll now look at how the addition of support for TCP/IP based networking communication as a Wire transport can extend the possibilities even further.
 
-### Concepts {#h3-4-concepts}
+### Concepts
 
 The new capabilities are based on three abstractions:
 
@@ -293,7 +293,7 @@ A handler is a component that is bound to a Channel and defines how incoming eve
 
 A handler is associated with a channel during the establishment of a connection, normally by the "initiator" of the connection (ie. the client).
 
-### Working with Channels {#h3-5-working-with-channels}
+### Working with Channels
 
 Let's look at some examples of these features in action.
 
@@ -584,7 +584,7 @@ public class PersonClient {
 2. The channel is created and an instance of our custom handler injected.
 3. Once created, we can use the channel's MethodWriter method to generate the stub methods that will send the appropriately serialised events to the service.
 
-### Summary {#h3-6-summary}
+### Summary
 
 Chronicle Wire has had new features added to permit communication with other components across a TCP/IP network. This document has described the basic ideas of how this will work within Wire and described some simple examples.
 

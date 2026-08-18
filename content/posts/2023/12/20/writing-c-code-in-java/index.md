@@ -30,8 +30,8 @@ This is pretty helpful when trying to build wrappers around existing native libr
 
 Be aware that the API is still in flux. Much of the existing non-OpenJDK documentation is not in sync.
 
-Example {#h2-0-example}
------------------------
+Example
+-------
 
 Now to my main example: Assume you're tired of all the abstraction of the Java I/O API and just want to read a file using the traditional I/O functions of the C standard lib (like [read_line.c](https://github.com/parttimenerd/panama-examples/blob/main/misc/read_line.c)): we're trying to read the first line of the passed file, opening the file via [`fopen`](https://www.man7.org/linux/man-pages/man3/fopen.3.html), reading the first line via [`gets`](https://www.man7.org/linux/man-pages/man3/fgets.3.html), and closing the file via [`fclose`](https://www.man7.org/linux/man-pages/man3/fclose.3.html).
 
@@ -166,8 +166,8 @@ You can find the source code in my [panama-examples](https://github.com/parttime
 
 which prints the first line of the license file.
 
-Errno {#h2-1-errno}
--------------------
+Errno
+-----
 
 We didn't care much about error handling here, but sometimes, we want to know precisely why a C function failed. Luckily, the C standard library on Linux and other Unixes has `errno`:
 > Several standard library functions indicate errors by writing positive integers to `errno`.
@@ -245,8 +245,8 @@ No such file or directory
 
 This is as expected, as we hard-coded a non-existent file in the `fopen` call.
 
-JExtract {#h2-2-jextract}
--------------------------
+JExtract
+--------
 
 Creating all the MethodHandles manually can be pretty tedious and error-prone. JExtract can parse header files, generating MethodHandles and more automatically. You can download [jextract](https://jdk.java.net/jextract/) on the project page.
 
@@ -299,8 +299,8 @@ public static MemorySegment fopen(String filename, String mode) {
 
 You can find the example code in the GitHub repository in the file [HelloWorldJExtract.java](https://github.com/parttimenerd/panama-examples/blob/main/src/main/java/me/bechberger/panama/HelloWorldJExtract.java). I integrated jextract via a wrapper directly into the Maven build process, so just `mvn package` to run the tool.
 
-More Information {#h2-3-more-information}
------------------------------------------
+More Information
+----------------
 
 There are many other resources on Project Panama, but be aware that they might be dated. Therefore, I recommend reading JEP 454, which describes the newly introduced API in great detail. Additionally, the talk ["The Panama Dojo: Black Belt Programming with Java 21 and the FFM API" by Per Minborg](https://www.youtube.com/watch?v=t8c1Q2wJOoM) at this year's Devoxx Belgium is a great introduction:
 
@@ -310,8 +310,8 @@ As well as the talk by Maurizio Cimadamore at this year's JVMLS:
 
 {{< youtube kUFysMkMS00 >}}
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Project Panama greatly simplifies interfacing with existing native libraries. I hope it will gain traction after leaving the preview state with the upcoming JDK 22, but it should already be stable enough for small experiments and side projects.
 

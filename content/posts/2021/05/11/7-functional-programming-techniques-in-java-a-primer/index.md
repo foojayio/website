@@ -28,8 +28,8 @@ I'm not going to dive into all functional programming concepts in detail, instea
 
 
 
-What is functional programming? {#h2-0-what-is-functional-programming}
-----------------------------------------------------------------------
+What is functional programming?
+-------------------------------
 
 As per Wikipedia,
 > Functional programming is a programming paradigm---a style of building the structure and elements of computer programs---that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.
@@ -57,12 +57,12 @@ Using functional programming doesn't mean its all or nothing, you can always use
 
 
 
-Functional programming in Java {#h2-1-functional-programming-in-java}
----------------------------------------------------------------------
+Functional programming in Java
+------------------------------
 
 So let us see how we can apply some of the functional programming concepts above in Java. We will be using Java 11 as it is the LTS version currently.
 
-### First-class and higher-order functions {#h3-2-first-class-and-higher-order-functions}
+### First-class and higher-order functions
 
 First-class functions (function as a first-class citizen) means you can assign functions to variables, pass a function as an argument to another function or return a function from another. Unfortunately, Java doesn't support this and hence makes concepts like closures, currying and higher-order-functions less convenient to write.
 
@@ -205,7 +205,7 @@ System.out.println(list); // [Apple, Banana, Grape, Orange]
 
 The Java stream API also provides many interesting higher-order-functions like forEach, map and so on.
 
-### Pure functions {#h3-3-pure-functions}
+### Pure functions
 
 As we saw already a pure function should return values only based on the arguments passed and should not affect or depend on global state. It is possible to do this in Java except for some cases when there are checked exceptions involved.
 
@@ -233,7 +233,7 @@ public static int sum(int a, int b) {
 
 So try to keep your functions pure and simple.
 
-### Recursion {#h3-4-recursion}
+### Recursion
 
 Functional programming favors recursion over looping. In Java, this can be achieved either by using the stream API or by writing recursive functions. Let us see an example for calculating the factorial of a number.
 
@@ -316,7 +316,7 @@ public class FactorialSample {
 
 Consider using stream API or recursion when writing Java code for readability and immutability, but if performance is critical or if the number of iterations will be huge use standard loops.
 
-### Lazy evaluation {#h3-5-lazy-evaluation}
+### Lazy evaluation
 
 Lazy evaluation or non-strict evaluation is the process of delaying evaluation of an expression until it is needed. In general, Java does strict evaluation but for operands like `&&`, `||` and `?:` it does a lazy evaluation. We can utilize this to do lazy evaluations when writing java code.
 
@@ -400,11 +400,11 @@ executing multiply
 ```
 
 
-### Type system {#h3-6-type-system}
+### Type system
 
 Java has a strong type system and with the introduction of the `var` keyword it now also has pretty decent type inference. The only thing missing compared to other functional programming languages are case classes. There are proposals for [value classes](http://cr.openjdk.java.net/~jrose/values/values-0.html) and case classes for future Java versions. Let's hope they make it.
 
-### Referential transparency {#h3-7-referential-transparency}
+### Referential transparency
 
 From Wikipedia:
 > Functional programs do not have assignment statements, that is, the value of a variable in a functional program never changes once defined. This eliminates any chances of side effects because any variable can be replaced with its actual value at any point of execution. So, functional programs are referentially transparent.
@@ -432,7 +432,7 @@ list.add("Test 2");
 
 `final` keyword allows the internal state of referenced variables to be mutated and hence from a functional programming perspective `final` keyword is useful only for constants and to catch reassignments.
 
-### [Data structures](https://en.wikipedia.org/wiki/Purely_functional_data_structure) {#h3-8-data-structures}
+### [Data structures](https://en.wikipedia.org/wiki/Purely_functional_data_structure)
 
 When using functional programming techniques it is encouraged to use functional data types such as Stacks, Maps and Queues.  
 
@@ -440,8 +440,8 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 This is just an introduction for those who are trying to apply some functional programming techniques in Java. There are lot more that can be done in Java and Java 8 added a lot of API to make it easy to do functional programming in Java, like the stream API, Optional interface, functional interfaces and so on.
 

@@ -26,16 +26,16 @@ As Java evolves, simplifying code and improving developer productivity remain pr
 
 This feature aims to streamline the process of importing multiple packages from a module, enhancing code readability and reducing boilerplate.
 
-### **What is JEP 476?** {#h3-0-what-is-jep-476}
+### **What is JEP 476?**
 
 JEP 476 proposes the ability to import all packages exported by a module with a single declaration. This is particularly useful for developers who frequently use multiple packages from the same module, as it eliminates the need for numerous individual import statements.
 
-### **Key Features** {#h3-1-key-features}
+### **Key Features**
 
 * **Simplified Imports**: Instead of multiple import statements, a single import module statement can be used. For example, import module java.base; will import all public top-level classes and interfaces from the java.base module, which includes packages like java.util and java.nio.file.
 * **Beginner-Friendly**: This feature makes it easier for beginners to use third-party libraries and fundamental Java classes without having to learn the package hierarchy by reducing the complexity of import statements.
 
-### **Usage Example** {#h3-2-usage-example}
+### **Usage Example**
 
 Consider a scenario where you need to use multiple classes from the java.util package. Traditionally, you would write:
 
@@ -101,12 +101,12 @@ NOTE: This is a [preview language feature](https://openjdk.org/jeps/12), availab
 * When using the [source code launcher](https://openjdk.org/jeps/330), run the program with java --enable-preview Main.java; or,
 * When using [jshell](https://openjdk.java.net/jeps/222), start it with jshell --enable-preview.
 
-### **Addressing Ambiguities** {#h3-3-addressing-ambiguities}
+### **Addressing Ambiguities**
 
 One potential issue with module imports is name ambiguity. For example, importing both java.base and java.sql modules might lead to conflicts with classes like Date present in both packages.
 
 In such cases, specific import statements can be used to resolve ambiguities.
 
-### **Conclusion** {#h3-4-conclusion}
+### **Conclusion**
 
 JEP 476 represents a significant step towards simplifying Java programming by reducing boilerplate code and improving readability. More about this JEP can be found in this [infoQ news](https://www.infoq.com/news/2024/05/simplifying-java-module-import/).

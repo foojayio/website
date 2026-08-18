@@ -26,13 +26,13 @@ In this episode, I'm leaving the European Union and stepping over the border of 
 
 Let's find out if there is also a big Java community...
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube onYRMp1sFhk >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -40,26 +40,26 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Speakers {#h2-2-speakers}
--------------------------
+Speakers
+--------
 
-### Patrick Baumgartner {#h3-3-patrick-baumgartner}
+### Patrick Baumgartner
 
 * <https://www.linkedin.com/in/patbaumgartner/>
 * <https://twitter.com/patbaumgartner>
 
-### Simon Martinelli {#h3-4-simon-martinelli}
+### Simon Martinelli
 
 * <https://www.linkedin.com/in/simonmartinelli/>
 * <https://twitter.com/simas_ch>
 
-### Podcast Host: Frank Delporte {#h3-5-podcast-host-frank-delporte}
+### Podcast Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Links {#h2-6-links}
--------------------
+Links
+-----
 
 * <https://ijug.social/@jugch>
 * <https://www.jug.ch/>
@@ -69,8 +69,8 @@ Links {#h2-6-links}
 * <https://twitter.com/VoxxedZurich>
 * <https://voxxeddays.com/zurich/>
 
-Content {#h2-7-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the guests and topic   
 
@@ -112,8 +112,8 @@ Content {#h2-7-content}
 
 <br />
 
-Music {#h2-8-music}
--------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

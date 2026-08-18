@@ -35,8 +35,8 @@ Every time the answer to "can we switch providers?" is "it would take months," s
 
 BoxLang AI was designed from the start to eliminate this problem. One API, one set of BIFs, 17 providers --- and 3.0 makes the architecture underneath significantly more robust with a proper capability system, a cleaner provider hierarchy, and type-safe capability checking that prevents cryptic runtime crashes.
 
-🗺️ The Full Provider Matrix {#h2-0-the-full-provider-matrix}
--------------------------------------------------------------
+🗺️ The Full Provider Matrix
+----------------------------
 
 BoxLang AI 3.0 supports 17 providers out of the box:
 
@@ -62,8 +62,8 @@ BoxLang AI 3.0 supports 17 providers out of the box:
 
 Your BoxLang code doesn't change between any of these. Switch providers with a single config change.
 
-🏗️ The Provider Hierarchy {#h2-1-the-provider-hierarchy}
----------------------------------------------------------
+🏗️ The Provider Hierarchy
+--------------------------
 
 The architecture is built around three layers:
 
@@ -93,8 +93,8 @@ IAiService (interface — identity + capabilities)
 
 The split between `BaseService` and `OpenAIService` is one of the most important refactors in 3.0. Before, the "base" class was OpenAI-specific code that every other provider either inherited awkwardly or had to override entirely. Now `BaseService` is a true provider-agnostic foundation, and `OpenAIService` is where the OpenAI-format-specific logic lives.
 
-🎯 `IAiService` --- The Trimmed Interface {#h2-2-iaiservice-the-trimmed-interface}
-----------------------------------------------------------------------------------
+🎯 `IAiService` --- The Trimmed Interface
+-----------------------------------------
 
 The base interface now declares only what's universal across *all* providers:
 
@@ -118,8 +118,8 @@ interface {
 
 That's it. No `chat()`. No `embeddings()`. No operation methods at all. Those live in capability interfaces --- because not every provider supports every operation.
 
-🛡️ The Capability System {#h2-3-the-capability-system}
--------------------------------------------------------
+🛡️ The Capability System
+-------------------------
 
 The capability system is the architectural anchor of 3.0's multi-provider story. It answers the question "what can this provider actually do?" at the type level, not at runtime.
 
@@ -157,7 +157,7 @@ class extends="BaseService" implements="IAiEmbeddingsService" {
 ```
 
 
-### Runtime Capability Detection {#h3-4-runtime-capability-detection}
+### Runtime Capability Detection
 
 `BaseService` uses `isInstanceOf()` to detect implemented interfaces --- which means capability detection is always in sync with the `implements` declarations with nothing to maintain manually:
 
@@ -181,7 +181,7 @@ public array function getCapabilities() {
 ```
 
 
-### Querying Capabilities {#h3-5-querying-capabilities}
+### Querying Capabilities
 
 ```java
 // Runtime introspection
@@ -196,7 +196,7 @@ println( service.hasCapability( "chat" ) )    // true
 ```
 
 
-### Enforced at the BIF Level {#h3-6-enforced-at-the-bif-level}
+### Enforced at the BIF Level
 
 `aiChat()`, `aiChatStream()`, and `aiEmbed()` all check provider capabilities before calling and throw a clear `UnsupportedCapability` exception if the requirement isn't met:
 
@@ -213,8 +213,8 @@ aiEmbed( "some text", provider: "claude" )
 
 No more cryptic 404s or malformed response errors when you call the wrong operation on the wrong provider.
 
-🔧 `BaseService` --- The Transport Layer {#h2-7-baseservice-the-transport-layer}
---------------------------------------------------------------------------------
+🔧 `BaseService` --- The Transport Layer
+----------------------------------------
 
 `BaseService` owns everything that's truly provider-agnostic:
 
@@ -238,8 +238,8 @@ aiEmbed( "some text", provider: "claude" )
 
 This keeps the HTTP transport code in `BaseService` and isolates provider-specific behavior in tiny, focused overrides.
 
-⚙️ Provider Configuration {#h2-8-provider-configuration}
---------------------------------------------------------
+⚙️ Provider Configuration
+-------------------------
 
 Every provider auto-detects its API key from environment variables using a convention: `_API_KEY`. So `OPENAI_API_KEY`, `CLAUDE_API_KEY`, `GEMINI_API_KEY`, `GROQ_API_KEY`, etc. --- you never commit keys to source control.
 
@@ -278,8 +278,8 @@ Full provider configuration in `boxlang.json`:
 
 Provider-specific params override the global `defaultParams`. Per-request params override provider params. The merge order is predictable and deterministic.
 
-🔀 Custom Base URLs {#h2-9-custom-base-urls}
---------------------------------------------
+🔀 Custom Base URLs
+-------------------
 
 All senders in `BaseService` now accept a `baseUrl` override --- making it trivial to use proxies, self-hosted endpoints, and OpenAI-compatible APIs:
 
@@ -301,8 +301,8 @@ model = aiModel( provider: "ollama", options: { baseUrl: "http://my-ollama-serve
 
 This is how you use any OpenAI-compatible API --- LM Studio, vLLM, LocalAI, Amazon Bedrock with proxy, etc. --- without writing a custom provider class.
 
-🏠 Ollama --- Local AI, Zero API Cost {#h2-10-ollama-local-ai-zero-api-cost}
-----------------------------------------------------------------------------
+🏠 Ollama --- Local AI, Zero API Cost
+-------------------------------------
 
 Ollama deserves a special mention. With BoxLang AI, running fully local AI is as simple as:
 
@@ -339,8 +339,8 @@ The same code that runs against OpenAI runs against your local Ollama instance. 
 
 Docker Compose setup for development teams that want a shared Ollama instance is included in the repo --- `docker-compose-ollama.yml` sets up both the Ollama service and auto-pulls models on first run.
 
-🤗 New in 3.0: HuggingFace Embeddings {#h2-11-new-in-3-0-huggingface-embeddings}
---------------------------------------------------------------------------------
+🤗 New in 3.0: HuggingFace Embeddings
+-------------------------------------
 
 `HuggingFaceService` now supports embeddings via the HuggingFace Inference API --- useful for semantic search, RAG pipelines, and clustering workflows where you want to use community-hosted models:
 
@@ -355,8 +355,8 @@ embeddings = aiEmbed(
 
 The service uses the OpenAI-compatible router endpoint at `router.huggingface.co/v1`, so any HuggingFace model exposed through their inference API works out of the box.
 
-🏗️ Building a Custom Provider {#h2-12-building-a-custom-provider}
-------------------------------------------------------------------
+🏗️ Building a Custom Provider
+------------------------------
 
 If you need a provider that BoxLang AI doesn't support yet, extending the framework is straightforward. For any provider that uses the OpenAI API format (most do), extend `OpenAIService` and override just what's different:
 
@@ -402,8 +402,8 @@ bxEvents.listen( "onMissingAiProvider", ( data ) => {
 ```
 
 
-📢 The Event System {#h2-13-the-event-system}
----------------------------------------------
+📢 The Event System
+-------------------
 
 Every operation through `BaseService` fires BoxLang global events you can intercept for monitoring, logging, billing, and custom behavior:
 
@@ -435,8 +435,8 @@ bxEvents.listen( "onAITokenCount", ( data ) => {
 ```
 
 
-🔄 Switching Providers in Practice {#h2-14-switching-providers-in-practice}
----------------------------------------------------------------------------
+🔄 Switching Providers in Practice
+----------------------------------
 
 To drive the point home --- here's what switching from OpenAI to Claude looks like in your code:
 
@@ -460,8 +460,8 @@ To drive the point home --- here's what switching from OpenAI to Claude looks li
 
 Your `aiChat()`, `aiEmbed()`, `aiAgent()`, and `aiModel()` calls are all identical. The provider-specific formatting, authentication, and response normalization live entirely inside the provider classes --- your application code never sees it.
 
-🎯 Wrapping Up the Series {#h2-15-wrapping-up-the-series}
----------------------------------------------------------
+🎯 Wrapping Up the Series
+-------------------------
 
 Over these five posts, we've covered the full depth of BoxLang AI 3.0:
 
@@ -472,8 +472,8 @@ Over these five posts, we've covered the full depth of BoxLang AI 3.0:
 * **Part 5** --- Provider Architecture: 17 providers, the capability system, and zero-vendor-lock-in design  
   The common thread across all five: BoxLang AI is designed so that the hard parts --- lifecycle management, observability, multi-tenancy, provider compatibility --- are handled by the framework. Your code stays focused on what you're building.
 
-Get Started {#h2-16-get-started}
---------------------------------
+Get Started
+-----------
 
 ```
 # Install via CommandBox

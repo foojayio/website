@@ -26,8 +26,8 @@ It was not a walk in the park.
 
 To help others who may be interested in doing the same (and my future self), here's my journey!
 
-Context {#h2-0-context}
------------------------
+Context
+-------
 
 I've written multiple posts about my [conference submission workflow](https://blog.frankel.ch/automating-conference-submission-workflow/).
 
@@ -37,7 +37,7 @@ To sum up:
 * I created an app that registered a webhook on the board
 * When I move a conference from one lane to another, it starts or continues a workflow on the app side
 
-I source the board by looking at websites, mainly [Papercall](https://www.papercall.io/events?cfps-scope=open&amp;keywords=) and [Sessionize](https://sessionize.com/), and manually copying conference data on cards. Two automation options are available:
+I source the board by looking at websites, mainly [Papercall](https://www.papercall.io/events?cfps-scope=open&keywords=) and [Sessionize](https://sessionize.com/), and manually copying conference data on cards. Two automation options are available:
 
 1. Automating conference sourcing
 2. Automating a card creation
@@ -46,8 +46,8 @@ I thought long and hard about the first part. If I automate it, it will create a
 
 However, I created the card manually by copy-pasting relevant data: name, dates, due date, CFP link, and website. It's precisely what a Firefox extension can help one with.
 
-Requirements and design {#h2-1-requirements-and-design}
--------------------------------------------------------
+Requirements and design
+-----------------------
 
 The user story is pretty straightforward:
 > AS A: Lazy developer  
@@ -66,8 +66,8 @@ I chose the second option because I needed to figure out how to achieve the firs
 
 I also wanted first to create my extension in Rust with WebAssembly. Spoiler: I didn't.
 
-A simple Firefox extension {#h2-2-a-simple-firefox-extension}
--------------------------------------------------------------
+A simple Firefox extension
+--------------------------
 
 I had no clue about writing a Firefox extension, as this was the first time I did write one. My first step was to follow the [tutorial](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension). It explains the basics of an extension structure. Then, I followed the [second tutorial](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_second_WebExtension). It explains how to create a pop-up menu for the extension but not how to interact with the web page. At this point, I decided to learn by doing, a technique that works well for me.
 
@@ -106,8 +106,8 @@ Then, point to your manifest file. Firefox loads the extension: it's now active.
 
 In the above example, the JavaScript from the tutorial adds a red border around every web page. It's useless, we can do better, but it shows how it works. We can change the script to change the color, *e.g.* , from `red` to `green`. To make Firefox reload **any change**, including changes to the manifest, click on the "Reload" button on the temporary extension panel.
 
-Interacting with the extension {#h2-3-interacting-with-the-extension}
----------------------------------------------------------------------
+Interacting with the extension
+------------------------------
 
 As I mentioned above, I want a button to trigger the creation of the Trello Card. Firefox allows multiple interaction options: direct trigger or opening of a pop-up window. I don't need to enter any parameter, so the former is enough in my case.
 
@@ -128,8 +128,8 @@ Adding the button takes place in the manifest:
 
 At this point, everything was fine and dandy. Afterward, I lost many hours trying to understand the different kinds of scripts and how they interact. I'll make it a dedicated section.
 
-Scripts, scripts everywhere {#h2-4-scripts-scripts-everywhere}
---------------------------------------------------------------
+Scripts, scripts everywhere
+---------------------------
 
 The default language for scripts in extensions is JavaScript. However, depending on their location, they play different roles. Worse, they need to "talk" with one another.
 
@@ -164,8 +164,8 @@ browser.browserAction.onClicked.addListener(foo)    //1
 
 1. Register the `foo` function as an event listener to the button. When one clicks the extension button, it calls the `foo` function
 
-Debugging the extension {#h2-5-debugging-the-extension}
--------------------------------------------------------
+Debugging the extension
+-----------------------
 
 Let's stop for a moment to talk about debugging. I lost several hours because I didn't know what had happened. When I started to develop JavaScript 20 years ago, we "debugged" with `alert()`. It was not the best developer experience you could hope for. More modern practices include *logging* and *debugging*. Spoiler: I didn't manage to get debugging working, so I'll focus on logging.
 
@@ -175,8 +175,8 @@ First things first, content scripts work in the context of the page. Hence, logg
 
 <br />
 
-Communication across scripts {#h2-6-communication-across-scripts}
------------------------------------------------------------------
+Communication across scripts
+----------------------------
 
 Now that we know how to log, it's possible to go further and describe communication across scripts. Here's an overview of the overall flow:
 
@@ -209,8 +209,8 @@ browser.runtime.onMessage.addListener((message, sender) => {
 ```
 
 
-Getting the content {#h2-7-getting-the-content}
------------------------------------------------
+Getting the content
+-------------------
 
 So far, we have implemented a back-and-forth flow between the `background` and the `content` scripts. The meat is to get content from the page in the `content` script and pass it back to the `background` via a message. Remember that only the `content` script can access the page! The code itself uses the Document API, *e.g.* , `document.querySelector()`, `document.getElementsByClassName()`, etc. Specifics are unimportant.
 
@@ -241,8 +241,8 @@ The next issue is that the structure of Sessionize and Papercall are different. 
 
 At this point, we managed to get the necessary data and send it back to the `background` script. The last step is to call Trello with the data.
 
-Handling authentication credentials {#h2-8-handling-authentication-credentials}
--------------------------------------------------------------------------------
+Handling authentication credentials
+-----------------------------------
 
 Using Trello's REST requires authentication credentials. I want to share the code on GitHub, so I cannot hard-code credentials: I need configuration.
 
@@ -312,8 +312,8 @@ At this point, I was happy with my setup. I just added another round-trip from t
 
 ![](final-result-1024x434.jpg)
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 It was the first extension I wrote, and though the beginning was challenging, I achieved what I wanted. Now, I can navigate to a Papercall and a Sessionize page, click the extension button, and get the conference on my Trello board. It took me a couple of days and was fun; it was well worth it. I continue working on it to improve it bit by bit.
 

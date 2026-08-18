@@ -29,8 +29,8 @@ I got involved in the [Firefox Profiler](https://profiler.firefox.com/) developm
 
 But you may well ask the most important of all questions: Why? Why did I spend so much time on a profiler for JavaScript and the Firefox browser? It all started in August 2022...
 
-How did I end up there? {#h2-0-how-did-i-end-up-there}
-------------------------------------------------------
+How did I end up there?
+-----------------------
 
 I developed code related to the Java debugging protocol in the second quarter of 2022. I had grand plans, but it eventually did turn out to be far more complicated than expected, but that is a story for another blog post.
 
@@ -66,8 +66,8 @@ I thought I was probably not the only one with this use case who stumbled upon t
 
 Building a basic version of an IDE plugin that solves the second of my two problems is relatively easy. There is already the open-source profiling plugin [Panda](https://plugins.jetbrains.com/plugin/7772-panda-profiler/) by Rastislav Papp, on which I based mine. Panda has only a simple tree view visualization, so it does not cover my first problem with visualizations. So I still had to figure out how I could implement the UI. Implementing it directly in the IDE in Java is cumbersome, so I decided early on to use an embedded browser. I considered implementing it myself, with the help of libraries like d3-flamegraph or extending speedscope, but this proved too much work. And I had no experience in building production-ready web applications, or for that matter,*React.*
 
-Advantages of Firefox Profiler {#h2-1-advantages-of-firefox-profiler}
----------------------------------------------------------------------
+Advantages of Firefox Profiler
+------------------------------
 
 Here comes the Firefox Profiler: It might seem illogical to use it in a use case that its developers never thought about, but it has a lot going for it:
 
@@ -82,8 +82,8 @@ It has still been a lot of work to add the necessary features for my use case, a
 
 Just keep in mind that you'll have to map your data onto the profile data structure of Firefox Profiler.
 
-My Java Profiler IntelliJ Plugin {#h2-2-my-java-profiler-intellij-plugin}
--------------------------------------------------------------------------
+My Java Profiler IntelliJ Plugin
+--------------------------------
 
 My [Java JFR profiler](https://github.com/parttimenerd/intellij-profiler-plugin) plugin is the result of all my efforts:
 [![](https://mostlynerdless.de/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-12.32.55-2000x1201.png)](https://plugins.jetbrains.com/plugin/20937-java-jfr-profiler)

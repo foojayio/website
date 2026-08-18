@@ -30,8 +30,8 @@ frozen: false
 
 <br />
 
-From Project Amber {#h2-0-from-project-amber}
----------------------------------------------
+From Project Amber
+------------------
 
 Java 21 contains five features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -43,7 +43,7 @@ Java 21 contains five features that originated from [Project Amber](https://open
 
 > The goal of Project Amber is to explore and incubate smaller, productivity-oriented Java language features.
 
-### JEP 441: Pattern Matching for switch {#h3-1-jep-441-pattern-matching-for-switch}
+### JEP 441: Pattern Matching for switch
 
 The feature 'Pattern Matching for switch' (first introduced in Java 17) has reached completion status, now that Java 21 has been released.
 
@@ -119,7 +119,7 @@ There have been two major changes from [the previous JEP](https://openjdk.org/je
 
 For more information on this feature, see [JEP 441](https://openjdk.org/jeps/441). Or if you want to try out pattern matching for switch with the provided code examples, then here's a [GitHub repository](https://github.com/hannotify/pattern-matching-music-store) to get you started.
 
-### JEP 440: Record Patterns {#h3-2-jep-440-record-patterns}
+### JEP 440: Record Patterns
 
 With the introduction of *record patterns*, deconstructing records is now possible, along with nesting record and type patterns to enable a powerful, declarative, and composable form of data navigation and processing.
 
@@ -180,7 +180,7 @@ Apart from some minor editorial changes and the fact that the feature is now in 
 
 For more information on this feature, see [JEP 440](https://openjdk.org/jeps/440). Or if you want to try out record patterns with the provided code examples,, then here's a [GitHub repository](https://github.com/hannotify/pattern-matching-music-store) to get you started.
 
-### JEP 443: Unnamed Patterns and Variables (Preview) {#h3-3-jep-443-unnamed-patterns-and-variables-preview}
+### JEP 443: Unnamed Patterns and Variables (Preview)
 
 Data processing in Java has become increasingly streamlined since the introduction of [records](https://openjdk.org/jeps/395) and [record patterns](#jep-440-record-patterns). But in some cases writing out an entire record pattern when some record components aren't even used in the logic that follows can be both cumbersome and confusing. Let's consider the following code example:
 
@@ -277,7 +277,7 @@ Java 20 didn't contain anything related to unnamed patterns and variables yet, s
 
 For more information on this feature, see [JEP 443](https://openjdk.org/jeps/443).
 
-### JEP 445: Unnamed Classes and Instance Main Methods (Preview) {#h3-4-jep-445-unnamed-classes-and-instance-main-methods-preview}
+### JEP 445: Unnamed Classes and Instance Main Methods (Preview)
 
 Java's take on the classic [Hello, World!](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program) program is notoriously verbose:
 
@@ -345,7 +345,7 @@ Java 20 didn't contain anything related to unnamed classes and instance main met
 
 For more information on this feature, see [JEP 445](https://openjdk.org/jeps/445).
 
-### JEP 430: String Templates (Preview) {#h3-5-jep-430-string-templates-preview}
+### JEP 430: String Templates (Preview)
 
 There are currently multiple ways in Java to compose a string from literal text and expressions:
 
@@ -520,8 +520,8 @@ Java 20 didn't contain anything related to string templates yet, so Java 21 is t
 
 For more information on this feature, see [JEP 430](https://openjdk.org/jeps/430).
 
-From Project Loom {#h2-6-from-project-loom}
--------------------------------------------
+From Project Loom
+-----------------
 
 Java 21 contains three features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -531,7 +531,7 @@ Java 21 contains three features that originated from [Project Loom](http://openj
 
 > Project Loom strives to simplify maintaining concurrent applications in Java by introducing *virtual threads* and an API for *structured concurrency*, among other things.
 
-### JEP 444: Virtual Threads {#h3-7-jep-444-virtual-threads}
+### JEP 444: Virtual Threads
 
 Threads have been a part of Java since the very beginning, and since the start of Project Loom we gradually started calling them 'platform threads' instead. A platform thread runs Java code on an underlying OS thread and captures the OS thread for the code's entire lifetime. The number of platform threads is therefore limited to the number of available OS threads.
 
@@ -596,7 +596,7 @@ Based on developer feedback the following changes were made to virtual threads c
 
 For more information on this feature, see [JEP 444](https://openjdk.org/jeps/444).
 
-### JEP 453: Structured Concurrency (Preview) {#h3-8-jep-453-structured-concurrency-preview}
+### JEP 453: Structured Concurrency (Preview)
 
 Java's current implementation of concurrency is *unstructured* , meaning that tasks run independently of each other. They don't come with any hierarchy, scope, or other structure, which means they cannot easily pass errors or cancellation intent to each other.  
 
@@ -767,7 +767,7 @@ Note that the JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you
 
 For more information on this feature, see [JEP 453](https://openjdk.org/jeps/453). Or if you want to try out structured concurrency and you liked the code examples, then here's a [GitHub repository](https://github.com/hannotify/structured-concurrency-bar) to get you started.
 
-### JEP 446: Scoped Values (Preview) {#h3-9-jep-446-scoped-values-preview}
+### JEP 446: Scoped Values (Preview)
 
 *Scoped values* enable the sharing of immutable data within and across threads.  
 
@@ -813,8 +813,8 @@ The only difference from Java 20 is that Scoped Values has become a Preview API 
 
 For more information on this feature, see [JEP 446](https://openjdk.org/jeps/446).
 
-From Project Panama {#h2-10-from-project-panama}
-------------------------------------------------
+From Project Panama
+-------------------
 
 Java 21 contains two features that originated from [Project Panama](http://openjdk.java.net/projects/panama/):
 
@@ -823,7 +823,7 @@ Java 21 contains two features that originated from [Project Panama](http://openj
 
 > Project Panama aims to improve the connection between the JVM and foreign (non-Java) libraries.
 
-### JEP 442: Foreign Function \& Memory API (Third Preview) {#h3-11-jep-442-foreign-function-memory-api-third-preview}
+### JEP 442: Foreign Function \& Memory API (Third Preview)
 
 Java programs have always had the option of interacting with code and data outside of the Java runtime, through the [Java Native Interface](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/) (JNI).  
 
@@ -900,7 +900,7 @@ In Java 20, this feature was in second preview (in the form of [JEP 434](https:/
 
 For more information on this feature, see [JEP 442](https://openjdk.org/jeps/442).
 
-### JEP 448: Vector API (Sixth Incubator) {#h3-12-jep-448-vector-api-sixth-incubator}
+### JEP 448: Vector API (Sixth Incubator)
 
 The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
 
@@ -961,8 +961,8 @@ Aside from a minor set of enhancements in the API, the biggest differences with 
 
 For more information on this feature, see [JEP 448](https://openjdk.org/jeps/448).
 
-HotSpot {#h2-13-hotspot}
-------------------------
+HotSpot
+-------
 
 Java 21 introduces three changes to [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -972,7 +972,7 @@ Java 21 introduces three changes to [HotSpot](https://openjdk.org/groups/hotspot
 
 > The HotSpot JVM is the runtime engine that is developed by Oracle. It translates Java bytecode into machine code for the host operating system's processor architecture.
 
-### JEP 439: Generational ZGC {#h3-14-jep-439-generational-zgc}
+### JEP 439: Generational ZGC
 
 The Z Garbage Collector (ZGC) is a scalable, low-latency garbage collector. It has been [available for production use since Java 15](https://openjdk.org/jeps/377) and has been designed to keep pause times consistent and short, even for very large heaps. It uses techniques like region-based memory management and compaction to achieve this.
 
@@ -1000,7 +1000,7 @@ As you can see, Generational ZGC has been introduced *alongside* non-generationa
 
 For more information on this feature, see [JEP 439](https://openjdk.org/jeps/439).
 
-### JEP 449: Deprecate the Windows 32-bit x86 Port for Removal {#h3-15-jep-449-deprecate-the-windows-32-bit-x86-port-for-removal}
+### JEP 449: Deprecate the Windows 32-bit x86 Port for Removal
 
 Supporting multiple platforms has been the focus of the Java ecosystem since the beginning.  
 
@@ -1024,7 +1024,7 @@ This means Windows x86-32 users can still use JDK 21; however a future release w
 
 For more information about this deprecation, see [JEP 449](https://openjdk.org/jeps/449).
 
-### JEP 451: Prepare to Disallow the Dynamic Loading of Agents {#h3-16-jep-451-prepare-to-disallow-the-dynamic-loading-of-agents}
+### JEP 451: Prepare to Disallow the Dynamic Loading of Agents
 
 An *agent* is a component that can alter the code of a Java application while it is running. Introduced in JDK 5, agents provide a way for tools (such as profilers) to instrument classes, with the aim of altering the code in a class so that it emits events to be consumed by a tool outside the application. *Dynamically loaded agents* grant serviceability tools the capability to modify a *running* application. However, this capability is available to both tools and libraries, and it can just as easily be used for modifications with bad intentions. To assure integrity, stronger measures are needed to prevent the misuse by libraries of dynamically loaded agents. JEP 451 therefore proposes to require the dynamic loading of agents to be approved by the application owner. This means that in Java 21, the application owner will have to explicitly allow the dynamic loading of agents via a command-line option.
 
@@ -1036,15 +1036,15 @@ Java 21 is the first version of Java that issues warnings when agents are loaded
 
 For more information on this feature, see [JEP 451](https://openjdk.org/jeps/451).
 
-Core \& Security Libs {#h2-17-core-security-libs}
--------------------------------------------------
+Core \& Security Libs
+---------------------
 
 Java 21 also brings you two additions that are part of the Core Libs and Security Libs, respectively:
 
 * Sequenced Collections
 * Key Encapsulation Mechanism API
 
-### JEP 431: Sequenced Collections {#h3-18-jep-431-sequenced-collections}
+### JEP 431: Sequenced Collections
 
 One of the most well-known APIs in Java is the [collections framework](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/doc-files/coll-index.html), but did you know it doesn't even contain a collection type that represents an ordered sequence of elements? Sure, there are some subtypes that support encounter order (such as `List`, `SortedSet` and `Deque`), but their common supertype is `Collection`, which does not support it. So support for encounter order is dispersed across the type hierarchy, and that leads to more challenges. Consider obtaining the first or last element of a collection, for instance. While numerous implementations accommodate this functionality, each adopts a distinct approach, and a few are not as obvious (or don't support it at all). The process of sequentially traversing collection elements from the beginning to the end might appear simple and systematic, but iterating in reverse order is notably less straightforward.
 
@@ -1115,7 +1115,7 @@ Java 20 didn't contain anything related to sequenced collections yet, so everyth
 
 For more information on this feature, see [JEP 431](https://openjdk.org/jeps/431).
 
-### JEP 452: Key Encapsulation Mechanism API {#h3-19-jep-452-key-encapsulation-mechanism-api}
+### JEP 452: Key Encapsulation Mechanism API
 
 A protocol like Transport Layer Security (TLS) relies heavily on public key encryption schemes in order to provide a secure way for a sender and recipient to share information.  
 
@@ -1237,7 +1237,7 @@ The Key Encapsulation Mechanism API didn't exist yet in Java 20; it was newly ad
 
 There is a bit more to this API than we were able to cover here (like different *KEM configurations* , for example), so to get the full picture you could have a look at [JEP 452](https://openjdk.org/jeps/452).
 
-Final thoughts {#h2-20-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 Phew! I guess it's safe to say that JDK 21 turned out to be quite the update, with no less than 15 JEPs delivered! And that's not even all that's new: thousands of other updates were included in this new release, including various performance and stability updates. Our favourite language is clearly more alive than ever, and I think it's due to Java's continuing focus on its best traits: performance, stability, security, compatibility and maintainability. Wishing you many happy hours of developing with Java 21!

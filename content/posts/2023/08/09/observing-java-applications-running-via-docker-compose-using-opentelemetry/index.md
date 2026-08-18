@@ -19,8 +19,8 @@ enlighterjs: true
 frozen: false
 ---
 
-An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files! {#h2-0-an-easy-non-obtrusive-way-to-collect-data-about-your-dockerized-app-without-changing-your-existing-docker-compose-yml-or-docker-files}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files!
+--------------------------------------------------------------------------------------------------------------------------------------
 
 This is just a neat trick that I discovered when I was trying to collect [OTEL](https://opentelemetry.io/docs/instrumentation/java/automatic/) data about my application which was running via Docker Compose. I was trying to understand more about the code using tracing. However, I definitely didn't want to modify any of the code or deployment-related artifacts, or risk checking in any changes by mistake.
 
@@ -64,7 +64,7 @@ docker compose -f docker-compose.yml -f docker-compose.override.otel.yml up -d
 ```
 
 
-### WHAT CAN YOU DO WITH THE DATA? {#h3-1-what-can-you-do-with-the-data}
+### WHAT CAN YOU DO WITH THE DATA?
 
 #### Starting a development stack for observability
 
@@ -92,7 +92,7 @@ Traces provide a good means to see into the working of your app and services and
 
 Getting more interesting metrics might require you to enable some more settings in your Java application (depending on what framework you're running). But if you do [enable](https://mehmetozkaya.medium.com/monitor-spring-boot-custom-metrics-with-micrometer-and-prometheus-using-docker-62798123c714) them, you can browse the Grafana OSS deployment and load or create dashboards for your app.
 
-### Using Digma for end-to-end analysis {#h3-2-using-digma-for-end-to-end-analysis}
+### Using Digma for end-to-end analysis
 
 We are writing [Digma](https://digma.ai/blog/introducing-the-digma-jetbrains-plugin/) to be an easy way to analyze dev and test observability data quickly in the IDE, without getting into more YAML configurations.
 
@@ -143,7 +143,7 @@ The idea of Digma is to get [Continuous Feedback](https://digma.ai/blog/ci-cd-cf
 
 ![](0_2fYOaC2TR6hdT6cd.png)
 
-### Now what? {#h3-3-now-what}
+### Now what?
 
 That's a great question. Getting data about your code is just the prerequisite, the important part is what to do with it --- how to transform it into something more meaningful than a science project. In a [previous](https://digma.ai/blog/coding-with-java-observability/) blog post, I wrote about this very question --- how to actually use observability data effectively to write better code. I also looked at a few code examples.
 

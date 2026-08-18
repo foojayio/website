@@ -21,7 +21,7 @@ Until recently, I last wrote Java in anger in 2002. IntelliJ IDEA had just been 
 
 Here's my experience of using IntelliJ IDEA for the first time!
 
-### 1. Downloading IntelliJ IDEA {#h3-0-1-downloading-intellij-idea}
+### 1. Downloading IntelliJ IDEA
 
 There's a lot going on when you first load IntelliJ IDEA, but I learned pretty quickly that there are also some good first steps you can take to make your experience a little more comfortable.
 
@@ -50,7 +50,7 @@ You've got a shiny version of IntelliJ IDEA downloaded.
 
 Let's get started!
 
-### 2. Running IntelliJ IDEA for the First Time {#h3-1-2-running-intellij-idea-for-the-first-time}
+### 2. Running IntelliJ IDEA for the First Time
 
 You'll be asked to choose between Darcula and Light for your UI theme. I am not getting into this argument. I like light, deal with it. **Click Next: Default Plugins** to move on (unless you're in a rush in which case click **Skip Remaining and Set Defaults**).
 
@@ -62,7 +62,7 @@ I recommend you build the plugins up so you get used to IntelliJ IDEA out-of-the
 
 Little note here, if you screw up your settings and want to unwrap IntelliJ IDEA all over again, go to **File** \> **Manage IDE Settings** \> **Restore Default Settings**. This is relatively new and can be a very useful learning experience.
 
-### 3. Starting a New Project in IntelliJ IDEA {#h3-2-3-starting-a-new-project-in-intellij-idea}
+### 3. Starting a New Project in IntelliJ IDEA
 
 I'm going to go ahead and start a new project. Here's where we need to sort our Java version out. IntelliJ IDEA is pretty smart about this. It will go and look for the Java versions you've already got installed, if there are any. If it finds them, it will populate the Project SDK with them. If it doesn't find any it gives you an option to download them. You can select your Vendor and your Version and click **Download** . I recommend you leave the default **Location** because again, IntelliJ IDEA is smart and knows exactly where to look to find what it needs.
 
@@ -91,7 +91,7 @@ The two settings can be different as well. Your Project language level will rest
 
 You can override the compiler settings as I showed above if you don't want to compile your code with the Project Language Level.
 
-### Summary {#h3-3-summary}
+### Summary
 
 I can remember hating getting my environment set up at university - and I screwed it up regularly too. There is absolutely no doubt that IntelliJ IDEA makes the whole process of running 'HelloWorld.java' a whole lot easier. It does a great job of obfuscating the settings until you need them and will hold your hand throughout the process of setting up your environment without you breaking into a sweat about your path settings. Yes, you can break it, but you can also fix it very easily.
 

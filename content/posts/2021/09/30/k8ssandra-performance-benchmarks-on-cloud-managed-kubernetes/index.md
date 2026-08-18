@@ -24,10 +24,10 @@ Is there a cost to running Apache Cassandra in containers? How about on Kubernet
 
 While there were many challenges in designing a fair benchmark in a world (the cloud) where apples could very well be oranges, we managed to come up with a solid comparison and results that matched our expectations: running Cassandra in Kubernetes brings flexibility and ease of use without performance penalty.
 
-Benchmarking methodology {#h2-0-benchmarking-methodology}
----------------------------------------------------------
+Benchmarking methodology
+------------------------
 
-### Infrastructure {#h3-1-infrastructure}
+### Infrastructure
 
 Our recommendation for running Cassandra in production is to use instances that have the following specifications:
 
@@ -94,7 +94,7 @@ All three cloud vendors have indexed the number of IOPS and/or disk throughput f
 
 Azure Ultra Disks are special in that aspect, as the number of IOPS and the desired throughput are set while defining the custom Storage Class in Kubernetes (pricing changes accordingly).
 
-### Cassandra Version and Settings {#h3-2-cassandra-version-and-settings}
+### Cassandra Version and Settings
 
 At the time of conducting the benchmarks, the latest stable version of K8ssandra was 1.1.0 which supported Cassandra 3.11.10 and 4.0\~beta4. We chose the latter for this experiment.
 
@@ -108,7 +108,7 @@ Cassandra's default settings were applied with the exception of garbage collecti
 ```
 
 
-### Baseline infrastructure setup {#h3-3-baseline-infrastructure-setup}
+### Baseline infrastructure setup
 
 [tlp-cluster](https://github.com/thelastpickle/tlp-cluster/tree/alex/stargate-updates) was used to provision our baseline VM infrastructure in AWS. The following command was used to spin up the instances and the Cassandra cluster:
 
@@ -119,7 +119,7 @@ build_cluster.sh -n K8SSANDRA_BENCH_BASELINE_r5 -g 0 -s 1 -v 4.0~beta4 -c 3 -i r
 
 The stress instance deployed by [this branch](https://github.com/thelastpickle/tlp-cluster/tree/alex/stargate-updates) of tlp-cluster contains both [tlp-stress](https://github.com/thelastpickle/tlp-stress) and [nosqlbench](https://github.com/nosqlbench/nosqlbench).
 
-### K8ssandra Helm Charts {#h3-4-k8ssandra-helm-charts}
+### K8ssandra Helm Charts
 
 The values for our K8ssandra Helm charts varied slightly from one provider to another, especially around affinities since zones are named differently, and storage classes which differ as they are cloud vendor specific. We relied on dynamic provisioning for persistent volumes and used standard storage classes for each vendor, with the exception of Azure, which required us to enable Ultra Disks:
 
@@ -183,7 +183,7 @@ kube-prometheus-stack:
 ```
 
 
-### Stress Workloads {#h3-5-stress-workloads}
+### Stress Workloads
 
 We ran two types of tests using [nosqlbench](https://github.com/nosqlbench/nosqlbench), DataStax's sponsored open source benchmarking suite. The first one was an unthrottled throughput test, which evaluated the maximum ops rate the infrastructure could handle. We then ran a rate limited test at 35% of the maximum throughput of our baseline infrastructure to evaluate the latency of Cassandra under low/moderate pressure.
 
@@ -297,10 +297,10 @@ spec:
 
 Note that the latency test uses a **striderate** instead of a **cyclerate** . A **striderate** of 10 with a **stride** value of 800 would generate 8000 cycles (operations) per second. Initially we used a **cyclerate** of 8000 but the rate limiter was failing to reach the desired throughput, while strides (an over ensemble of cycles in nosqlbench) succeeded.
 
-Benchmark results {#h2-6-benchmark-results}
--------------------------------------------
+Benchmark results
+-----------------
 
-### Throughput test {#h3-7-throughput-test}
+### Throughput test
 
 |--------------------------------|----------------|----------------|----------------|----------------------------|---------------------------|
 |                                | **AWS EC2 r5** | **AWS EKS r5** | **GCP GKE n2** | **Azure AKS** **UltraSSD** | **Azure AKS** **premium** |
@@ -315,7 +315,7 @@ Such results are expected given the r5 instances have slower CPU cores as establ
 
 ***Note:*** *We performed several runs for each cloud vendor and retained the best results. AWS showed the highest variance for the same instance type and stress test, with results that could drop down to 19k ops/s.*
 
-### Latency test {#h3-8-latency-test}
+### Latency test
 
 |----------|----------------|----------------|----------------|------------------------|-----------------------|
 |          | **AWS EC2 r5** | **AWS EKS r5** | **GCP GKE n2** | **Azure AKS UltraSSD** | **Azure AKS premium** |
@@ -333,8 +333,8 @@ While AWS keeps latencies at a very solid level, GCP and Azure managed to cut th
 
 Thanks to the numerous improvements Cassandra 4.0 brings, p99 and p999 latencies reached very low values overall, which weren't notably affected by running in Kubernetes compared to VM results.
 
-Wrapping up {#h2-9-wrapping-up}
--------------------------------
+Wrapping up
+-----------
 
 Running Cassandra in Kubernetes using K8ssandra does not introduce any notable performance impacts in throughput nor in latency. We were thrilled to see that K8ssandra dramatically simplified the deployment of Cassandra clusters, making it mostly transparent to run on premises or on cloud managed Kubernetes services, while offering the same level of performance.
 

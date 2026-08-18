@@ -26,8 +26,8 @@ I explained the concepts and theory behind Data Residency in a [previous post](h
 
 It's time to get our hands dirty and implement it in a simple demo.
 
-The sample architecture {#h2-0-the-sample-architecture}
--------------------------------------------------------
+The sample architecture
+-----------------------
 
 In the last section of the previous post, I proposed a sample architecture where location-based routing happened at two different stages:
 
@@ -66,8 +66,8 @@ Finally, we develop a straightforward RESTful API to fetch thingies:
 
 Now that we have set the stage, let's check how to implement routing at the two levels.
 
-Routing on Apache ShardingSphere {#h2-1-routing-on-apache-shardingsphere}
--------------------------------------------------------------------------
+Routing on Apache ShardingSphere
+--------------------------------
 
 Apache ShardingSphere offers two approaches: as a library inside the application, ShardingSphere-JDBC, or as a full-fledged deployable component, ShardingSphere-Proxy. You can also combine both. I chose the former because it's the easiest to set up. For a comparison between them, please check [this table](https://shardingsphere.apache.org/document/5.0.0-alpha/en/user-manual/shardingsphere-proxy/#comparison).
 
@@ -159,8 +159,8 @@ class LocationBasedSharding : StandardShardingAlgorithm<String> {    //1
 
 With all of the above, the application will fetch thingies in the relevant data source based on the owner's country.
 
-Routing on Apache APISIX {#h2-2-routing-on-apache-apisix}
----------------------------------------------------------
+Routing on Apache APISIX
+------------------------
 
 We should route as early as possible to avoid an application instance in Europe fetching US data. In our case, it translates to routing at the API Gateway stage.
 
@@ -208,8 +208,8 @@ The first request carries no header; APISIX forwards it to the default route, wh
 
 Subsequent requests set the `X-Country` header because the response to the first request carries the information, and the client has stored it. Remember that it's outside the scope of the demo. In most cases, it's set to the correct location; hence, the request will stay "in its lane". If not, the configured routing will still find the data in the appropriate location at the cost of increased latency to fetch data in the other lane.
 
-Observing the flow in practice {#h2-3-observing-the-flow-in-practice}
----------------------------------------------------------------------
+Observing the flow in practice
+------------------------------
 
 It's always a good idea to check that the design behaves as expected. We can use OpenTelemetry for this. For more information on how to set up OpenTelemetry in such an architecture, please refer to [End-to-end tracing with OpenTelemetry](https://blog.frankel.ch/end-to-end-tracing-opentelemetry/).
 
@@ -244,8 +244,8 @@ APISIX forwards it to the USA-located app according to the header. However, Shar
 
 ![](request-with-incorrect-header.jpg)
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In the previous article, I explained the concepts behind Data Residency.
 

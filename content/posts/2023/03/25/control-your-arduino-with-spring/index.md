@@ -26,7 +26,7 @@ In this article, I show how I created a web app to control my Arduino with a Ras
 
 ![](Arduino_spring01.jpg)  
 
-### Idea {#h3-0-idea}
+### Idea
 
 A simple Spring app where I can create a REST interface to control one of the Arduino GPIOs. I can plug a LED and build a simple blink LED example.
 
@@ -57,7 +57,7 @@ You can simply upload the Firmata to your Arduino and just use your time to writ
 
 Fun fact, Firmata is an Italian word and means something like: "Signed"
 
-### Firmata4j {#h3-1-firmata4j}
+### Firmata4j
 
 firmata4j is a client library of Firmata written in Java. The library allows controlling Arduino and other Arduino compatible boards which run Firmata protocol from your java program.
 
@@ -70,7 +70,7 @@ Picture 2: full idea Architecture
 
 A Spring app that is running on the Raspberry Pi, it uses the Firmata4j to send commands to the Arduino. The Arduino itself is just running the Firmata code that receives the command and executes that action. In this example, it just blinks the LED.
 
-### Setup Arduino {#h3-2-setup-arduino}
+### Setup Arduino
 
 You just need to upload the Firmata code to your Arduino and that is it.
 
@@ -87,7 +87,7 @@ You can check the Firmata code or just ignore and upload it to your Arduino boar
 
 That's all you need to do on the Arduino side.
 
-### Code example {#h3-3-code-example}
+### Code example
 
 Let's create a simple code that reminds us of an Arduino code.
 
@@ -124,7 +124,7 @@ private static final void loop() throws IOException, InterruptedException {
 
 Here is a simple code that just blinks the Arduino LED.
 
-### Spring App {#h3-4-spring-app}
+### Spring App
 
 Now let's create a simple Spring application where it can make available a REST interface to control one of the Arduino GPIO. Therefore we can turn on and turn off the LED just by calling the REST interface.
 
@@ -155,7 +155,7 @@ You can check all the code on [GitHub](http://github.com/igfasouza/Spring_Arduin
 <https://youtu.be/4B4WHhOf5I4>   
 Video 1: Arduino led blink
 
-### Next Steps {#h3-5-next-steps}
+### Next Steps
 
 I'm using my Arduino Mega, but this code can be used in other Arduino compatible boards as well, including the ESP family and others. Check out the supported board list [here](http://github.com/firmata/arduino/blob/main/Boards.h "here").
 
@@ -165,7 +165,7 @@ Another idea here could be to implement some kind of interface to use to interac
 
 It would be nice to try out this with Kotlin and/or Scala.
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 In this tutorial, you have seen how to use Firmata4j to control an Arduino board from a Raspberry Pi board or directly from your computer.
 
@@ -187,7 +187,7 @@ In this case, why not **#ArduinoWithJava**, and of course don't forget to celebr
 
 Check out **#ArduinoDay2023**
 
-### Links {#h3-7-links}
+### Links
 
 [](https://day.arduino.cc/about "link")<https://day.arduino.cc/about>
 

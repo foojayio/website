@@ -34,8 +34,8 @@ This is like the profiler of my [Writing a Profiler in 240 Lines of Pure Java](h
 
 As always, you can find the final MIT-licensed code on GitHub in my [dead-code-agent](https://github.com/parttimenerd/dead-code-agent) repository.
 
-Main Idea {#h2-0-main-idea}
----------------------------
+Main Idea
+---------
 
 I make one simplification compared to many of the more academic tools: I only deal with code with class-level granularity.
 
@@ -93,8 +93,8 @@ class UnusedClass {
 
 This has the advantage that we still log when our assumption on class usage is broken, but the program doesn't crash, making it more suitable in production settings.
 
-Structure {#h2-1-structure}
----------------------------
+Structure
+---------
 
 The tool consists of two main parts:
 
@@ -104,8 +104,8 @@ The tool consists of two main parts:
 This leads us to the following workflow:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/04/dead-code-workflow.png) Workflow of the dead-code analyzer
 
-Usage {#h2-2-usage}
--------------------
+Usage
+-----
 
 Before I dive into the actual code, I'll present you with how to use the tool. *Skip this section if you're only here to see how to implement an instrumenting agent 🙂*
 
@@ -128,8 +128,8 @@ cp spring-petclinic/target/spring-petclinic-3.0.0-SNAPSHOT.jar \
 
 The tool is written in Java 17 (you should be using this version anyways), which is the only system requirement.
 
-Using the Instrumenting Agent to Obtain the Used Classes {#h2-3-using-the-instrumenting-agent-to-obtain-the-used-classes}
--------------------------------------------------------------------------------------------------------------------------
+Using the Instrumenting Agent to Obtain the Used Classes
+--------------------------------------------------------
 
 The instrumenting agent can be started at JVM startup:
 
@@ -157,8 +157,8 @@ Removing JDK classes is possible with jlink, but instrumenting these classes is 
 
 The instrumentation agent is not called for some Spring Boot classes for reasons unknown to me. This makes the agent approach unsuitable for Spring Boot applications and led me to the development of the main instrumenter:
 
-Using the Instrumenter to Obtain the Used Classes {#h2-4-using-the-instrumenter-to-obtain-the-used-classes}
------------------------------------------------------------------------------------------------------------
+Using the Instrumenter to Obtain the Used Classes
+-------------------------------------------------
 
 The instrumenter lets you create an instrumented JAR that records all used classes:
 
@@ -183,8 +183,8 @@ The two differences are that we cannot observe only loaded but not used classes 
 
 *Hopefully, I will find time to investigate the issue related to Spring's classloaders.*
 
-Using the Instrumenter to Log Usages of Unused Classes {#h2-5-using-the-instrumenter-to-log-usages-of-unused-classes}
----------------------------------------------------------------------------------------------------------------------
+Using the Instrumenter to Log Usages of Unused Classes
+------------------------------------------------------
 
 The list of used classes can be used to log the usage of classes not used in the recording runs:
 
@@ -225,8 +225,8 @@ This tells the instrumenter to instrument the JAR to report all usages of Apache
 
 These two additions make the tool quite versatile.
 
-Writing the Instrumentation Agent {#h2-6-writing-the-instrumentation-agent}
----------------------------------------------------------------------------
+Writing the Instrumentation Agent
+---------------------------------
 
 We start with the instrumentation agent and later go into the details of the Instrumenter.
 
@@ -256,8 +256,8 @@ We build the runtime JAR by creating a new maven configuration that only include
 ```
 
 
-Main Class {#h2-7-main-class}
------------------------------
+Main Class
+----------
 
 The main class consists mainly of the `premain` method which deletes the used classes file, loads the runtime JAR, and registers the ClassTransformer:
 
@@ -311,8 +311,8 @@ The `premain` method uses the `getExtractedJARPath` method to extract the runtim
 ```
 
 
-ClassTransformer Class {#h2-8-classtransformer-class}
------------------------------------------------------
+ClassTransformer Class
+----------------------
 
 This transformer implements the [ClassFileTransformer](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/ClassFileTransformer.html) to transform all loaded classes.
 > A transformer of class files. An agent registers an implementation of this interface using the [`addTransformer`](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/Instrumentation.html#addTransformer(java.lang.instrument.ClassFileTransformer,boolean)) method so that the transformer's [`transform`](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/ClassFileTransformer.html#transform(java.lang.Module,java.lang.ClassLoader,java.lang.String,java.lang.Class,java.security.ProtectionDomain,byte%5B%5D)) method is invoked when classes are loaded, [`redefined`](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/Instrumentation.html#redefineClasses(java.lang.instrument.ClassDefinition...)), or [`retransformed`](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/Instrumentation.html#retransformClasses(java.lang.Class...)). The implementation should override one of the `transform` methods defined here. Transformers are invoked before the class is defined by the Java virtual machine.
@@ -413,8 +413,8 @@ We, therefore, have to walk the interface tree ourselves.
 
 Static initializers of parent classes are called; therefore, we don't have to handle parent classes ourselves.
 
-Instrumenter {#h2-9-instrumenter}
----------------------------------
+Instrumenter
+------------
 
 The main difference is that the instrumenter also transforms the bytecode, transforming all files in the JAR and writing a new JAR back. This new JAR is then executed, which has the advantage that we can instrument all classes in the JAR (even with Spring's classloader magic).
 
@@ -629,8 +629,8 @@ Therefore, the code creates a JarEntry that is just stored and not compressed. B
 
 All other code can be found in the [GitHub repository](https://github.com/parttimenerd/dead-code-agent) of the project. Feel free to adapt the code and use it in your own projects.
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 Dynamic dead-code analyses are great for finding unused code and classes, helping to reduce the attack surface.
 

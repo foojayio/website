@@ -34,7 +34,7 @@ Following a failover to the secondary, an initiator continues exchanging message
 
 This article reviews the high availability and failover solution in Chronicle FIX.
 
-### Overview of the Solution {#h3-0-overview-of-the-solution}
+### Overview of the Solution
 
 Figure 1. shows a high-level view of the Chronicle FIX failover mechanism and its components.
 
@@ -77,7 +77,7 @@ Then ConnectionStrategy defines in what order the initiator tries to connect to 
 
 In addition, if a different connection behaviour is required, it is possible to implement the required behaviour and plug it into the engine.
 
-### Conclusion {#h3-1-conclusion}
+### Conclusion
 
 Chronicle FIX offers a failover solution that is built based on native products, so the implementation is straightforward and just a matter of configuring a focused set of parameters such as IP address, cluster definitions, acknowledgement strategies.
 
@@ -87,7 +87,7 @@ A by-product of the native solution is benefiting from support on all components
 
 Additionally, the modular design of the components allows for customising the components to meet a broad range of requirements.
 
-### References {#h3-2-references}
+### References
 
 [Chronicle FIX](https://chronicle.software/fix-engine/)  
 [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/ "Chronicle Queue Enterprise")  

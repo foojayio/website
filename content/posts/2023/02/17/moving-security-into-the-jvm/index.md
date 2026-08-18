@@ -48,7 +48,7 @@ Most organizations that run tools like Kafka, Cassandra, or Spark just download 
 
 
 
-### There are so many active Java applications that organizations have difficulty tracking them. {#h-there-are-so-many-active-java-applications-that-organizations-have-difficulty-tracking-them}
+### There are so many active Java applications that organizations have difficulty tracking them.
 
 
 
@@ -64,8 +64,8 @@ Read the blog post by Azul CEO and Co-Founder Scott Sellers.
 
 [Read the Blog](https://www.azul.com/blog/revolutionary-approach-to-java-application-security)
 
-Evolution of Java Security {#h-evolution-of-java-security}
-----------------------------------------------------------
+Evolution of Java Security
+--------------------------
 
 The security landscape has changed around Java's main designs. The original [outdated Java threat model](https://www.infoq.com/news/2021/04/java-security-vote/) dealt with portable code, using the SecurityManager to defend a host computer and sandbox code from an untrusted party.
 
@@ -73,7 +73,7 @@ With usage on backend systems and cloud-native development, the model has change
 
 
 
-### With Azul Vulnerability Detection, running the software and getting security insight become the same action. {#h-with-azul-vulnerability-detection-running-the-software-and-getting-security-insight-become-the-same-action}
+### With Azul Vulnerability Detection, running the software and getting security insight become the same action.
 
 
 
@@ -87,8 +87,8 @@ The ultimate goal is to answer three questions:
 2. **Is it vulnerable?** Based on the knowledge of today (not the time of a scan), does this application contain known vulnerabilities in either the JVM or the application's libraries.
 3. **Do I actually use the vulnerable code?** Many Java applications contain unused libraries yet security scans report them at the same severity as code that loads -- they're important but focus on code that loads.
 
-Enabling Azul Vulnerability Detection for security in the JVM {#h2-3-enabling-azul-vulnerability-detection-for-security-in-the-jvm}
------------------------------------------------------------------------------------------------------------------------------------
+Enabling Azul Vulnerability Detection for security in the JVM
+-------------------------------------------------------------
 
 Using Azul Vulnerability Detection is simple -- it's part of the JDK so there's nothing additional to install. You can turn it on locally via command flags or environment variables, or at scale through DNS.
 

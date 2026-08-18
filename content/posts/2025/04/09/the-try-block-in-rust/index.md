@@ -22,8 +22,8 @@ frozen: false
 
 I wrote previously about [libs for error management in Rust](https://blog.frankel.ch/error-management-rust-libs/). This week, I want to write about the `try` block, an experimental feature.
 
-The limit of the `?` operator {#h2-0-the-limit-of-the-operator}
----------------------------------------------------------------
+The limit of the `?` operator
+-----------------------------
 
 Please check the above article for a complete refresher on error management in general and the `?` operator in particular. In short, `?` allows to hook into a function call that returns a `Result`:
 
@@ -64,8 +64,8 @@ the `?` operator can only be used in a function that returns `Result` or `Option
 ```
 
 
-The verbose alternative {#h2-1-the-verbose-alternative}
--------------------------------------------------------
+The verbose alternative
+-----------------------
 
 We must manually unwrap to return a non-wrapper type, *e.g.* , `i8` instead of `Option`.
 
@@ -84,8 +84,8 @@ fn add(str1: &str, str2: &str) -> i8 {
 3. Return a default value since we cannot get a `Result`. In this case, it's not a great idea, but it's for explanation's sake
 4. Unwrap with confidence
 
-The `try` block to the rescue {#h2-2-the-try-block-to-the-rescue}
------------------------------------------------------------------
+The `try` block to the rescue
+-----------------------------
 
 The sample above works but is quite lengthy. The `try` block is an *experimental* approach to make it more elegant. It allows "compacting" all the checks for errors in a single block:
 
@@ -134,8 +134,8 @@ fn add(str1: &str, str2: &str) -> i8 {
 
 ![](try-api.png)
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 I learned about the `try` block in Java over twenty years ago. Java needs it because exceptions are at the root of its error-handling system; Rust doesn't because it uses Functional Programming for its error handling - mainly `Result`.
 

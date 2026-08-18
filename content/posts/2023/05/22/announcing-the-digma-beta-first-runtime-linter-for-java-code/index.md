@@ -23,8 +23,8 @@ frozen: false
 
 ![](doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1-1024x512.png)
 
-Call for Developers {#h2-0-call-for-developers}
------------------------------------------------
+Call for Developers
+-------------------
 
 We are looking for senior Java developers who are interested in exploring how to use observability to improve their code to join the beta program for Digma: a free runtime linter plugin for Jetbrains/Java.  
 [Digma](https://digma.ai) analyzes your code in runtime, improving coding practices and confidence when working on complex Java code.
@@ -35,8 +35,8 @@ The plugin runs locally and doesn't require sharing data.
 
 We have 20 slots currently open for the beta.
 
-What you'll gain 💪 {#h2-1-what-you-ll-gain}
---------------------------------------------
+What you'll gain 💪
+-------------------
 
 1. Experience in applying [OTEL](https://digma.ai/blog/improving-code-design-with-opentelemetry-a-practical-guide/) (OpenTelemetry) and [Jaeger](https://digma.ai/blog/jaeger-distributed-tracing-with-java-an-introduction/) tracing to improve Java code
 2. Recognized contribution to a Java project
@@ -48,15 +48,15 @@ What you'll gain 💪 {#h2-1-what-you-ll-gain}
  <img decoding="async" src="4D2F9C818E2F9075155FC2B1FB4DDA4C-768x1024.jpg" alt="" class="wp-image-98441" width="155" height="206">
 </figure>
 
-Requirements to apply ✅ {#h2-2-requirements-to-apply}
------------------------------------------------------
+Requirements to apply ✅
+-----------------------
 
 1. Using [Jebtrains](https://www.jetbrains.com/)IDEA (any edition)
 2. Developing in Java, on most platforms except for Quarkus (currently not supported)
 3. Passion for innovation and new coding tools and practices
 
-What will be required from you? {#h2-3-what-will-be-required-from-you}
-----------------------------------------------------------------------
+What will be required from you?
+-------------------------------
 
 1. Installing the plugin and developing alongside it
 2. Participating in a quick 30-minute weekly Zoom meeting for about three weeks, at a time that works for you, to provide your ideas thoughts, and feedback

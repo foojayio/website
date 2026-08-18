@@ -40,8 +40,8 @@ Our hope is that this change will keep the OpenJDK community engaged and informe
 
 
 
-How to add your events {#h2-0-how-to-add-your-events}
------------------------------------------------------
+How to add your events
+----------------------
 
 We welcome inquiries from organizations interested in connecting with us.
 
@@ -49,7 +49,7 @@ You can reach us at [\[email protected\]](/cdn-cgi/l/email-protection#b7dfd2dbdb
 
 If you have events to share but lack development capabilities, our team is happy to assist with integration setup.  
 
-### 1. Registering as an External Source and Getting an API Key {#h3-1-1-registering-as-an-external-source-and-getting-an-api-key}
+### 1. Registering as an External Source and Getting an API Key
 
 Other organizations that want to use our API directly and send events via an endpoint can follow the instructions below.
 
@@ -64,7 +64,7 @@ Other organizations that want to use our API directly and send events via an end
 
 
 
-### 2. Working with an API endpoint {#h3-2-2-working-with-an-api-endpoint}
+### 2. Working with an API endpoint
 
 Now you can work with our endpoint.
 
@@ -87,7 +87,7 @@ Below is an example of adding a new event in Postman:
 To add your API key, use the "calendar-key" HTTP header. Make sure you have already generated an API key and source name, which should have been provided by the Foojay admin.
 ![](image4-1024x289.png)  
 
-### 3. Responses {#h3-3-3-responses}
+### 3. Responses
 
 Once the event has been successfully added, you'll receive a **201 code and event ID**:
 ![](image3-1024x479.png)
@@ -97,16 +97,16 @@ If there is an issue, you will receive a response with a **4xx code**:
 
 
 
-Example on the Frontend {#h2-4-example-on-the-frontend}
--------------------------------------------------------
+Example on the Frontend
+-----------------------
 
 Below is a description of the API fields and their corresponding elements on the front-end.
 ![](image7-1024x353.png)
 
 
 
-Example Based on an Existing Event {#h2-5-example-based-on-an-existing-event}
------------------------------------------------------------------------------
+Example Based on an Existing Event
+----------------------------------
 
 The following is a real imported event provided by <https://adoptium.net/:>  
 

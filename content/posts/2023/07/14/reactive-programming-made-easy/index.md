@@ -33,8 +33,8 @@ In reactive programming, Mono and Flux are two fundamental types of the Publishe
 
 Let's see what features and tools IntelliJ IDEA provides to conveniently work with these crucial types.
 
-Reactor live templates {#h2-0-reactor-live-templates}
------------------------------------------------------
+Reactor live templates
+----------------------
 
 Who doesn't love typing less and coding faster? Reactive live templates will help you do exactly that!
 
@@ -45,8 +45,8 @@ When working on projects that have Reactor support, IntelliJ IDEA can automatica
 Here's how you can effortlessly return Mono from the string with the help of the toMono live template:  
 ![Reactive_live_templates](image5.gif)
 
-Debugging Reactor Streams {#h2-1-debugging-reactor-streams}
------------------------------------------------------------
+Debugging Reactor Streams
+-------------------------
 
 IntelliJ IDEA allows you to debug your reactive projects. Prior to starting the process, you'll need to adjust your configurations. Go to Preferences/Settings \| Languages \& Frameworks \| Reactive Streams. Tick the Enable Reactor Debug mode option and select Hooks.onOperatorDebug().
 
@@ -64,18 +64,18 @@ You can also perform more complex evaluations.
 
 By default, the debugger fetches the first 100 items of Flux. You can configure this number in *File \| Settings \| Languages \& Frameworks \| Reactive Streams*. Each time you trigger a computation, the IDE subscribes to a Publisher value and assumes the operation is safe to retry.
 
-Noteworthy inspections for daily needs {#h2-2-noteworthy-inspections-for-daily-needs}
--------------------------------------------------------------------------------------
+Noteworthy inspections for daily needs
+--------------------------------------
 
 Our helpful inspections are always ready to highlight inconsistencies in your code -- everybody can use an extra set of eyes! We'll demonstrate two of the most helpful inspections that you can benefit from when using Reactive Streams.
 
-### Unused Publisher value {#h3-3-unused-publisher-value}
+### Unused Publisher value
 
 To use an operator that produces a new Publisher instance, you must subscribe to the created Publisher via *subscribe()* or return a value from a method. If you don't do this, the created reactive stream is never used -- in reactive programming terminology, "The value is never used as the Publisher type". Here is where our first inspection comes in handy by reporting unused Publisher instances.
 
 ![](image4.png)
 
-### Blocking call in non-blocking context {#h3-4-blocking-call-in-non-blocking-context}
+### Blocking call in non-blocking context
 
 You can use code that might cause a delay or pause in a program where it's not supposed to. IntelliJ IDEA provides the *Possibly blocking call in non-blocking context* inspection that looks for situations like this.
 

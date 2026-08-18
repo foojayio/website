@@ -25,7 +25,7 @@ In this articlem we are going to share an exciting new AI related feature for Ja
 
 In addition, there will be several important Spring updates, so let's get started.
 
-### Rewriting your Java code with Copilot-based suggestions {#h3-0-rewriting-your-java-code-with-copilot-based-suggestions}
+### Rewriting your Java code with Copilot-based suggestions
 
 As our code undergoes updates and iterations, our business logic continues to grow in complexity. Meanwhile, Java versions are constantly evolving. Often, our older code can be replaced with newer, more efficient alternatives, not only improving their performance but also making the code more elegant, concise and secure. Previously, these tasks may have been done manually, but with the power of AI, many tasks can now be handled automatically.
 
@@ -67,7 +67,7 @@ This feature aims to leverage AI to offer helpful suggestions and seamless refac
 
 To use this feature, developer needs to install both Insider (Pre-release) version [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) and [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) extensions. (with a GitHub Copilot license).
 
-### Spring updates {#h3-1-spring-updates}
+### Spring updates
 
 #### JPQL syntax highlighting
 
@@ -91,13 +91,13 @@ The Spring Boot Dashboard now shows the active profiles of a running Spring Boot
 
 The Spring Boot tools now offer actions to automatically convert `application.properties` files to YAML format and the other way around. This makes the switch to your (newly) preferred format super easy. (screenshot property conversion
 
-### [![Convert properties](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/convert-properties.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/convert-properties.gif) {#h3-2-}
+### [![Convert properties](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/convert-properties.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/convert-properties.gif)
 
 #### Performance and footprint improvements
 
 The indexing infrastructure for Spring projects got improved. Previously, the mechanism was able to index about 6.5k Java source files inside of a single project before running out of memory. The latest versions can now index up to 60k Java source files instead within the same memory constraints. In addition to that the initial as well as ongoing performance of reconciling Java source files for Spring specific validations is now twice as fast as before.
 
-### Testing Coverage {#h3-3-testing-coverage}
+### Testing Coverage
 
 In April, we released the Testing Coverage feature for our Test Runner extension in Stable version on Visual Studio Code. After release, we have received lots of positive feedback. However, we also received questions on how to use the feature. One popular question was around how coverage data can be reset for every execution.
 
@@ -111,7 +111,7 @@ If you want to reset the coverage data before every coverage execution, you can 
          }
     }
 
-### Install Extension Pack for Java {#h3-4-install-extension-pack-for-java}
+### Install Extension Pack for Java
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
@@ -121,7 +121,7 @@ If you are a Spring developer working on a Spring Boot application, you can also
 
 [![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
 
-### Feedback and suggestions {#h3-5-feedback-and-suggestions}
+### Feedback and suggestions
 
 As always, your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to give us feedback
 
@@ -129,7 +129,7 @@ As always, your feedback and suggestions are very important to us and will help 
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-### Resources {#h3-6-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

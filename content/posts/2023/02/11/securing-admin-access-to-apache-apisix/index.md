@@ -33,8 +33,8 @@ Hence, protecting your API Gateway is of utmost importance.
 
 In this short article, I'll list a couple of ways to secure your Apache APISIX admin access.
 
-Change admin tokens {#h2-0-change-admin-tokens}
------------------------------------------------
+Change admin tokens
+-------------------
 
 You can manage Apache APISIX configuration via its HTTP APIs. A token protects every API call. Operations require an `X-API-KEY` HTTP Header:
 
@@ -77,8 +77,8 @@ deployment:
 
 You may want to secure tokens even further; it depends on your platform. For example, you may want to store tokens as `Secret` and inject them at container startup.
 
-Restrict binding IP(s) {#h2-1-restrict-binding-ip-s}
-----------------------------------------------------
+Restrict binding IP(s)
+----------------------
 
 A server can have multiple IPs from different network adapters. For example, an API Gateway would have at least two network adapters:
 
@@ -99,8 +99,8 @@ deployment:
 
 1. Change it!
 
-Restrict allowed IPs {#h2-2-restrict-allowed-ips}
--------------------------------------------------
+Restrict allowed IPs
+--------------------
 
 Even if you restrict access to only IPs from inside your enterprise network, you want only some machines to access the API Gateway configuration. If it was the case, an attacker gaining access to the machine of an accountant could use it to try to attack the API Gateway.
 
@@ -119,8 +119,8 @@ deployment:
 
 1. Change it according to your network topology
 
-Mutual TLS {#h2-3-mutual-tls}
------------------------------
+Mutual TLS
+----------
 
 If to talk about authentication, one way is via a digital certificate. The most widespread low-level authentication mechanism today is . TLS allows servers to prove their identity. Additionally, it keeps data exchanged private and prevents them from being tampered with.
 
@@ -140,8 +140,8 @@ deployment:
 ```
 
 
-Standalone mode {#h2-4-standalone-mode}
----------------------------------------
+Standalone mode
+---------------
 
 Last but not least, one can completely move the configuration from `etcd` to a static (YAML) file. In this case, no Admin API is available to update the configuration. This deployment model is known as **standalone mode**.
 
@@ -159,8 +159,8 @@ deployment:
 
 Note that standalone mode makes all other securing options moot, as there's no Admin API to secure anymore.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 You need to secure API Gateways from unwanted access as they are valuable targets for bad actors. In this post, I've shown several non-exclusive options you should consider to secure Apache APISIX.
 

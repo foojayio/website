@@ -116,8 +116,8 @@ There are several ways to give us feedback:
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-**Resources** {#h2-0-resources}
--------------------------------
+**Resources**
+-------------
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

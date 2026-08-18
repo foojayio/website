@@ -25,8 +25,8 @@ The Apache Web Server is built around a modular architecture. Developers created
 
 Then, people began to think that a web server's core responsibility was not to generate content but to serve it. This separation of concern split the monolithic web server into two parts: the web server on the front serves static content, and the application server generates dynamic content, generally from data stored in a database.
 
-Reverse proxies {#h2-0-reverse-proxies}
----------------------------------------
+Reverse proxies
+---------------
 
 Organizations kept this architecture, even though application servers could serve static content. I remember that around 2007, I read an article that benchmarked the performance of the Apache Web Server and Apache Tomcat (a Java-based application server): to serve purely static content, the latter was on par with the former, if not a bit faster.
 
@@ -38,8 +38,8 @@ Meanwhile, websites that were focused on communication evolved to full-fledged w
 
 After introducing load balancing, adding more and more features was easy. The entry point started to handle cross-cutting responsibilities: authentication (but not always authorization), caching, IP blocking, etc. The webserver became a [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy).
 
-The rise of APIs {#h2-1-the-rise-of-apis}
------------------------------------------
+The rise of APIs
+----------------
 
 Over time, the number of services grew exponentially along with their need to communicate with one another. Inside the same organization, the long-standing tradition was to keep as few technology stacks as possible, the exact number depending on the organization's size.
 
@@ -51,16 +51,16 @@ While SOAP's popularity waned, HTTP's popularity (I dare not write REST) waxed. 
 
 With that in mind, our faithful web server evolved into its current form, the API gateway. It makes a lot of sense: the web server already serves as a central entry point as a Reverse Proxy. Now, we only need to add capabilities that are specific to APIs. Which ones are they?
 
-The need for API gateways {#h2-2-the-need-for-api-gateways}
------------------------------------------------------------
+The need for API gateways
+-------------------------
 
 Here are two essential capabilities that highlight the need for APIs for something that regular web servers cannot provide.
 
 * Complex rate-limiting: Rate limiting is a general-purpose capability to protect one's information system from DDoS attacks. However, when you differentiate between consumers, e.g., free vs. paying, you need to move from a simple rate to a more complex business logic rule.
 * Billing: You might access a resource with regular content if you paid a subscription fee. However, when your business is to sell data, you probably sell them based on volume consumption. While it's possible for the service itself to embed the billing capability, it prevents more distributed architectures that rely on several services to serve the required data. At this point, only a central access point can reliably measure and charge usage.
 
-Apache APISIX {#h2-3-apache-apisix}
------------------------------------
+Apache APISIX
+-------------
 
 A non-exhaustive list of the most widespread API gateways includes:
 
@@ -137,8 +137,8 @@ curl http://apisix:9080/apisix/admin/routes/2 -H 'X-API-KEY: xyz' -X PUT -d '
 ```
 
 
-Getting your feet wet {#h2-4-getting-your-feet-wet}
----------------------------------------------------
+Getting your feet wet
+---------------------
 
 The quickest way to try Apache APISIX is via Docker. Apache APISIX relies on etcd for its configuration, so let's use Docker Compose:
 
@@ -250,8 +250,8 @@ The output should closely resemble the following:
 ```
 
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I've explained the evolution of web servers. In the beginning, their sole responsibility was to serve static content. Then, they added routing and load balancing capabilities and became reverse proxies. At this point, it was an easy step to add additional cross-cutting features.
 

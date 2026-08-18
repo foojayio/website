@@ -39,19 +39,19 @@ For more info see <https://metatransapps.com/chess-board-scanner-and-analyzer/>
 
 If you are a Java developer and would like to have a look at the underlying source code, you could check out our open source project, which shows how it works (Windows version) look at <https://github.com/bagaturchess/ChessBoardScanner/tree/main/BoardScanner>
 
-### Technologies {#h3-0-technologies}
+### Technologies
 
 This project uses technologies from two subdomains of the Artificial Intelligence field, Computer Vision and Machine Learning. The actual Java frameworks used by this application are OpenCV and Deep Netts Professional Edition version 1.3. OpenCV is a computer vision library, which helps in extracting the chessboard from the picture and prepares the image for visual recognition.
 
 The [Deep Netts Java-based ML software](https://www.deepnetts.com/) capabilities recognize the various chess pieces from the image which are placed on some of the board squares. Behind these frameworks, there is a lot of mathematics and algorithms, which the Java application developer can use to solve the given problem.
 
-### Comparison with Alternatives {#h3-1-comparison-with-alternatives}
+### Comparison with Alternatives
 
 I had investigated other alternative ML libraries, such as DeepLearning4J. However such libraries have a significant number of native components and are quite big in file size. For example, if you incorporate DeepLearning4J in your Android app, the actual downloaded size for the production version that a user downloads will be \~300 MB for all chip-set architectures (arm, arm64, x86, x86_64).
 
 In contrast, Deep Netts is pure Java without any native parts. Its file size is extremely small, under 1 MB. Another concern of any ML software is its performance running in an Android runtime environment. The Deep Netts framework is a bit slower than DeepLearning4J, but this is a worthwhile tradeoff with a **file size decrease of 60 times!**
 
-### Summary {#h3-2-summary}
+### Summary
 
 Overall, the performance of Deep Netts is acceptable running on an Android device and this is achieved **without any native code or hardware assistance** . This strongly suggests there is **very well-optimized Java code inside the framework** . Running on Windows, where the training of the convolutional neural networks (CNNs) happens, the **speed of learning/training is also very acceptable.**
 

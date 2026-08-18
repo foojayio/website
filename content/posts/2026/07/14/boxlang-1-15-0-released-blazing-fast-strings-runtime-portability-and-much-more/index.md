@@ -37,14 +37,14 @@ On top of that, 1.15.0 ships two new type-check BIFs (`isBoxSet()` and `isRange(
 
 **35 issues closed. 9 new features. 13 improvements. 13 bug fixes.** Let's dig in.
 
-🔤 Headline: BoxStringBuilder and Dramatically Faster String Concatenation {#h2-0-headline-boxstringbuilder-and-dramatically-faster-string-concatenation}
----------------------------------------------------------------------------------------------------------------------------------------------------------
+🔤 Headline: BoxStringBuilder and Dramatically Faster String Concatenation
+--------------------------------------------------------------------------
 
 String concatenation looks simple until it lands on a hot path. Java strings are immutable, which means every `a & b` allocates a new object and copies both buffers. In a tight loop or a large accumulator, that dominates runtime.
 
 BoxLang 1.15.0 fixes this at four layers simultaneously: a new type, a new operator semantic, a compiler pass, and an auto-switching runtime strategy. Together they mean **your existing string code is faster without a single change**, and when you want maximum control you now have a proper mutable builder to reach for.
 
-### The Performance Story {#h3-1-the-performance-story}
+### The Performance Story
 
 We benchmarked plain string concatenation against` StringBuilder.append()` across 100,000 iterations, with segment counts from 2 to 8 strings. The result:
 
@@ -59,7 +59,7 @@ Key takeaways:
 
 You get the fast path automatically. No opt-in. No new syntax.
 
-### A First-Class BoxStringBuilder Type {#h3-2-a-first-class-boxstringbuilder-type}
+### A First-Class BoxStringBuilder Type
 
 `BoxStringBuilder` wraps `java.lang.StringBuilder` with full BoxLang integration: member-function dispatch, 1-based positional semantics, and silent coercion to `String` wherever a string value is required.
 
@@ -133,7 +133,7 @@ len( sb )                     // works, sb is coerced
 ```
 
 
-### Optimization 1: `&=` Does In-Place Append {#h3-3-optimization-1-does-in-place-append}
+### Optimization 1: `&=` Does In-Place Append
 
 Compound concat now uses in-place append semantics for `BoxStringBuilder` values. No new allocation. Reference stays stable.
 
@@ -149,7 +149,7 @@ writeOutput( sb )  // "Hello World"
 
 The same in-place append also applies to raw `java.lang.StringBuilder` instances, not just `BoxStringBuilder`.
 
-### Optimization 2: Compiler Self-Assignment Rewrite {#h3-4-optimization-2-compiler-self-assignment-rewrite}
+### Optimization 2: Compiler Self-Assignment Rewrite
 
 The compiler recognizes explicit self-concat patterns and rewrites them to the compound form automatically:
 
@@ -164,7 +164,7 @@ data &= chunk
 
 Applies to identifier, dot-access, and array-access targets: `variables.data, arr[ 1 ]`, and friends. Legacy code that never learned the `&=` habit still gets the fast path.
 
-### Optimization 3: Compile-Time Literal Folding {#h3-5-optimization-3-compile-time-literal-folding}
+### Optimization 3: Compile-Time Literal Folding
 
 Contiguous string literals are combined **at compile time**, before your code ever runs:
 
@@ -188,7 +188,7 @@ result = "foobar" & name & "bazqux"
 ```
 
 
-### Optimization 4: Auto-Switching Runtime Concat Strategy {#h3-6-optimization-4-auto-switching-runtime-concat-strategy}
+### Optimization 4: Auto-Switching Runtime Concat Strategy
 
 At runtime, concat behavior is tiered by segment count:
 
@@ -209,7 +209,7 @@ result = sb.toString()
 
 You write idiomatic BoxLang. The compiler and runtime cooperate to make it fast.
 
-### Java Interop Nuance {#h3-7-java-interop-nuance}
+### Java Interop Nuance
 
 `BoxStringBuilder` member methods are **not** injected onto a raw `java.lang.StringBuilder`. Mixing 1-based (BoxLang) and 0-based (Java) positional semantics on the same instance would be a source of quiet bugs. Wrap the Java instance first if you want BoxLang semantics:
 
@@ -227,8 +227,8 @@ javaSB.delete( 2, 2 )  // Java semantics (0-based, no-op for equal start/end)
 * Syntax \& Semantics guide: [StringBuilder](https://boxlang.ortusbooks.com/boxlang-language/syntax/string-builder "StringBuilder")
 * Community deep dive: [StringBuilder in BoxLang: Fast Concatenation, Better \&=, and Compile-Time Folding](https://community.ortussolutions.com/t/stringbuilder-in-boxlang-fast-concatenation-better-and-compile-time-folding/11123 "StringBuilder in BoxLang: Fast Concatenation, Better &amp;=, and Compile-Time Folding")
 
-🚀 Headline: Pluggable ClassLoader Factory (BL-2526) {#h2-8-headline-pluggable-classloader-factory-bl-2526}
------------------------------------------------------------------------------------------------------------
+🚀 Headline: Pluggable ClassLoader Factory (BL-2526)
+----------------------------------------------------
 
 BoxLang has always had ambitions beyond the JVM. We want BoxLang to run on **Android** . We want it to compile **ahead-of-time** via GraalVM Native Image. We want to support constrained and specialized execution targets that differ fundamentally from a standard JVM process.
 
@@ -271,10 +271,10 @@ The default `DynamicClassLoaderFactory` is installed automatically and reproduce
 This investment does not add a single new BIF or language construct. What it does is make BoxLang **portable at the architecture level**. The BoxLang code you write today will run, unchanged, on whatever runtime target we ship tomorrow.
 > **For module authors:** if your module currently constructs class loaders directly instead of going through the module service lifecycle, now is the time to align with the factory pattern. Reach out to the Ortus team for migration guidance.
 
-✨ New Features {#h2-9-new-features}
------------------------------------
+✨ New Features
+--------------
 
-### `isBoxSet()` BIF (BL-2506) {#h3-10-isboxset-bif-bl-2506}
+### `isBoxSet()` BIF (BL-2506)
 
 A dedicated type check to identify BoxLang `BoxSet` instances, rounding out the `isArray()` / `isStruct()` / `isQuery()` family.
 
@@ -297,7 +297,7 @@ function processCollection( data ) {
 ```
 
 
-### `isRange() `BIF (BL-2507) {#h3-11-isrange-bif-bl-2507}
+### `isRange() `BIF (BL-2507)
 
 Test whether a value is a BoxLang `Range` instance.
 
@@ -317,7 +317,7 @@ function sumRange( val ) {
 ```
 
 
-### `threadCurrent()` BIF (BL-2513) {#h3-12-threadcurrent-bif-bl-2513}
+### `threadCurrent()` BIF (BL-2513)
 
 Direct access to the current native Java thread from BoxLang.
 
@@ -332,7 +332,7 @@ writeOutput( javaThread.threadId() )   // JVM thread identifier
 
 Useful for telemetry, profiling integrations, and anywhere direct Thread API access is required.
 
-### Improved `asString()` on Class Instances (BL-2487) {#h3-13-improved-asstring-on-class-instances-bl-2487}
+### Improved `asString()` on Class Instances (BL-2487)
 
 Class instances now produce a more useful string representation. If the class defines a `toString()` method or property, that value is used. Otherwise the representation now includes the class name and a summary of public properties.
 
@@ -352,7 +352,7 @@ writeOutput( "#p#" )   // Product(Widget, $9.99)
 ```
 
 
-### Compile Validation for Inner Classes Inside Functions (BL-2490) {#h3-14-compile-validation-for-inner-classes-inside-functions-bl-2490}
+### Compile Validation for Inner Classes Inside Functions (BL-2490)
 
 The compiler now emits a clear validation error when an inner class is declared inside a function body, instead of failing confusingly at runtime.
 
@@ -365,7 +365,7 @@ function doSomething() {
 ```
 
 
-### Auto-Deserialize JSON Args in Remote Methods (BL-2505) {#h3-15-auto-deserialize-json-args-in-remote-methods-bl-2505}
+### Auto-Deserialize JSON Args in Remote Methods (BL-2505)
 
 Remote methods (marked` access="remote"`) now automatically deserialize JSON string arguments into `Struct` or `Array` values when the argument type is declared as such.
 
@@ -379,11 +379,11 @@ remote function saveUser( required struct userData ) {
 ```
 
 
-### `application/json` Whitespace Compression (BL-2547) {#h3-16-application-json-whitespace-compression-bl-2547}
+### `application/json` Whitespace Compression (BL-2547)
 
 The web runtime's whitespace compression, previously only active for HTML responses, now also applies to `application/json` responses. Smaller payloads, no application changes.
 
-### Error Basics in HTML Error Page Comment (BL-2204) {#h3-17-error-basics-in-html-error-page-comment-bl-2204}
+### Error Basics in HTML Error Page Comment (BL-2204)
 
 The default HTML error page now includes an HTML comment at the very top of the response with essential error information. Makes it possible to programmatically extract error details during testing and debugging even when full error display is suppressed.
 
@@ -397,7 +397,7 @@ The default HTML error page now includes an HTML comment at the very top of the 
 ```
 
 
-### Synchronized Set Support (BL-2494) {#h3-18-synchronized-set-support-bl-2494}
+### Synchronized Set Support (BL-2494)
 
 `setNew()` gains an `isSynchronized` boolean argument. When `true`, the set is wrapped in a thread-safe synchronized wrapper for safe concurrent access.
 
@@ -412,10 +412,10 @@ writeOutput( sharedSet.size() )  // 2
 ```
 
 
-🔧 Improvements {#h2-19-improvements}
--------------------------------------
+🔧 Improvements
+---------------
 
-### Language \& Runtime {#h3-20-language-runtime}
+### Language \& Runtime
 
 * [BL-2538](https://ortussolutions.atlassian.net/browse/BL-2538 "BL-2538") **QoQ Performance** Query of Queries executes significantly faster on large datasets, thanks to internal optimizations across the filter, sort, and aggregation pipeline.
 * [BL-2539](https://ortussolutions.atlassian.net/browse/BL-2539 " BL-2539") **Safe navigation in the expression interpreter** The expression interpreter no longer throws when a safe navigation expression fails to resolve a key. It returns null instead.
@@ -452,12 +452,12 @@ r.toArray()   // []
 * [BL-2548](https://ortussolutions.atlassian.net/browse/BL-2548 "BL-2548") **Adobe CF** `returnFormat` **drives** `Content-Type` Remote methods with `returnFormat="json"` now correctly set `Content-Type: application/json.`
 * [BL-2493](https://ortussolutions.atlassian.net/browse/BL-2493 "BL-2493") **Set dump template handles Java sets** The HTML dump template for `BoxSet` now also renders native `java.util.Set` instances.
 
-### Security {#h3-21-security}
+### Security
 
 * [BL-2515](https://ortussolutions.atlassian.net/browse/BL-2515 "BL-2515") **Web runtime blocks null-byte requests** Any HTTP request with a null byte (`%00`) in the URL is rejected with `400 Bad Request` before processing, preventing null-byte injection attacks.
 
-Upgrade Today {#h2-22-upgrade-today}
-------------------------------------
+Upgrade Today
+-------------
 
 BoxLang 1.15.0 is available now.
 

@@ -38,8 +38,8 @@ I would also like to refer to the book "[Productive Programmer](https://www.orei
 
 Most of the tools come with a built-in help with the `-h` parameter, or provide help pages using \`man \`. These [manpages can also be found on the Oracle website](https://docs.oracle.com/en/java/javase/14/docs/specs/man/).
 
-Managing Installations with SDKman {#_managing_installations_with_sdkman}
--------------------------------------------------------------------------
+Managing Installations with SDKman
+----------------------------------
 
 As mentioned in previous articles, for me sdkman is the management genius par excellence to install Java, Groovy, Maven, Gradle, Micronaut and many other tools and to activate different versions.
 
@@ -51,8 +51,8 @@ You have a wide choice from OpenJDK over Azul Zuulu, GraalVM to Amazon and SAP J
 
 With e.g. `sdk install java 17-open` you can install new versions (up to the last EAP) and with `sdk use java 17-open` you can switch for the current shell or globally.
 
-Simple Helpers {#_simple_helpers}
----------------------------------
+Simple Helpers
+--------------
 
 In every JRE and JDK there are a lot of useful helpers in the `bin` directory of the distribution besides the `javac` compiler and the `java` runtime environment.  
 
@@ -60,7 +60,7 @@ Some of them, like `jarsigner` or `keytool` are very special and I will not dive
 
 We will start with some useful tools and then give the more complex ones a separate section each.
 
-### jps {#_jps}
+### jps
 
 If you want to get rid of a hanging Java process you can either search for it in the TaskManager and close it there, or find the PID (Process ID) with `ps auxww | grep java` and then terminate it with \`kill \`.
 
@@ -68,7 +68,7 @@ Instead, the built-in `jps` can provide the same service.
 
 Additional options are `-l` for FQN of main class or path to startup JAR, `-v` for JVM arguments, and `-m` for command line arguments for `main` method.
 
-### jstack {#_jstack}
+### jstack
 
 To get a thread dump of a JVM, especially if it is stuck at a point you want to examine more closely, there are 2 ways.  
 
@@ -86,7 +86,7 @@ The status of the threads differs between `kill -3` and `jstack`.
 | `TIMED_WAITING` | `BLOCKED`        |
 | `WAITING`       | `BLOCKED (PARK)` |
 
-### jinfo {#_jinfo}
+### jinfo
 
 Using `jinfo` you can quickly access system properties, JVM flags, and JVM arguments of a Java process.
 
@@ -94,7 +94,7 @@ A ``jinfo ` gives a complete overview, which can help in detecting strange effec
 ``
 Using `jinfo -flag name=value`` or `-flag [+|-]name` you can change dynamic JVM flags.
 
-### jshell {#_jshell}
+### jshell
 
 Introduced in Java 9, `jshell` was the first official REPL (read eval print loop) console for interactive execution of Java code.  
 
@@ -176,8 +176,8 @@ Set parse(String s) {
 ```
 
 
-jar {#_jar}
------------
+jar
+---
 
 To deal with jar files (Java ARchive) there is a command of the same name.  
 
@@ -193,8 +193,8 @@ Here are some useful applications:
 
 Since Java 9 `jar` can also create multi-release archives, these are then compatible with multiple JDKs and can contain optimized class files for the respective Java version.
 
-java {#_java}
--------------
+java
+----
 
 The Java command starts the Java Virtual Machine, with the given classpath (directories, files and URLs of jar and classes) and a main class whose main method is executed.
 
@@ -228,8 +228,8 @@ A few useful flags follow, the list represents only a fraction of the JVM option
 * `+TraceClassLoading`
 * `+UseCompressedStrings`
 
-Javac {#_javac}
----------------
+Javac
+-----
 
 The `javac` compiler translates Java source code into one or more class files, containing the bytecode of the classes, performing initial optimizations and triggering the processing of annotations by "annotation processors".  
 
@@ -237,8 +237,8 @@ To specify all classes on which the current code depends, they or their archives
 
 Going deeper into `javac` would require its own article so we leave it at the honorable mention.
 
-JavaP {#_javap}
----------------
+JavaP
+-----
 
 Whenever you want to examine the result of `javac`, `javap` comes into play.  
 
@@ -277,7 +277,7 @@ public class Hello {
 ```
 
 
-### JMAP {#_jmap}
+### JMAP
 
 To create heapdumps or histograms of (referenced) objects `jmap` was helpful.  
 
@@ -287,7 +287,7 @@ Currently it is recommended to use `jcmd`.
 * ``jmap --histo ` or `-histo:live`` histogram of the
 * \`jmap -dump:live,format=b,file=heap.hprof \` Generate heap dump.
 
-### JCMD {#_jcmd}
+### JCMD
 
 Using `jcmd` Java processes can be controlled remotely, there are quite a few actions that can be triggered in the JVM.  
 `jcmd` can be used interactively or by command line parameters.
@@ -346,8 +346,8 @@ jcmd GradleDaemon GC.class_histogram | head
 ```
 
 
-JDK Flight Recorder (jfr) {#_jdk_flight_recorder_jfr}
------------------------------------------------------
+JDK Flight Recorder (jfr)
+-------------------------
 
 JDK Flight Recorder is a runtime tracing mechanism that allows to record various events of activities that take place in the JVM and correlate them with the activity of the application.  
 
@@ -395,8 +395,8 @@ The better tool to evaluate JFR records is of course [JDK Mission Control (JMC)]
 
 ![VE3MaNh](https://i.imgur.com/VE3MaNh.png)
 
-jdeprscan {#_jdeprscan}
------------------------
+jdeprscan
+---------
 
 Since some components of the JDK have been discontinued in recent years, `jdeprscan` allows to scan classes, directories or jar files for the usage of these APIs.
 
@@ -431,15 +431,15 @@ jdeprscan --release 11 --list | cut -d' ' -f 3- | cut -d. -f1-3 | sort | uniq -c
 ```
 
 
-Other tools {#_other_tools}
----------------------------
+Other tools
+-----------
 
 There are of course many more important tools for working with the JVM, from `async-profiler` and `jol` (Java Object Layout) to graphical programs for parsing and displaying GC logs (<https://gceasy.io>), JFR recordings (jmc) or heap dumps (jvisualvm, Eclipse-MAT).
 
 Other tools like the Java debugger `jdb` are not as comfortable as the capabilities of the IDEs for convenient debugging, whether on the local or remote machines.
 
-Conclusion {#_conclusion}
--------------------------
+Conclusion
+----------
 
 The helpers that come with the JDK can make your life easier if you know about their capabilities and how to combine them with each other and other shell tools.
 

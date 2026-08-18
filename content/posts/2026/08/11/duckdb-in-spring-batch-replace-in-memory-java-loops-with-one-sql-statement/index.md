@@ -36,8 +36,8 @@ But much batch work is not about moving data, it is about transforming it: group
 
 [DuckDB](https://duckdb.org/) is an embedded, in-process analytical database, similar in spirit to SQLite but built for analytics. It is a single JDBC dependency, needs no server, and runs a vectorized, multi-core query engine inside the JVM. That makes it a good fit for the transformation step of a batch job. To measure the difference, I built two Spring Boot and Spring Batch applications that run the same job over the same data and differ only in the engine that does the transform.
 
-The setup {#h2-0-the-setup}
----------------------------
+The setup
+---------
 
 Both apps generate a deterministic `orders.csv` (`id, customer_id, category, quantity, amount``) and compute, per ``(customer_id, category)` group: the order count, `sum(amount * quantity)`, `sum(quantity)`, `avg(amount)`, and `max(amount * quantity)`. The [generator](https://github.com/geertjanw/duckdb-samples/blob/02dcc32275ee1602d9592ed0384b63a11936c8f4/batch-scenarios/spring-batch-java-demo/src/main/java/com/example/batchjava/OrdersCsvGenerator.java#L23-L48) has no randomness, so the inputs are byte-identical and the outputs can be compared directly.
 
@@ -86,8 +86,8 @@ That is the entire transform. There is no reader, processor, writer, or chunk si
 
 Both are still real Spring Batch jobs: a `Job` with a generate step and a transform step ([`BatchConfig.java`](https://github.com/geertjanw/duckdb-samples/blob/02dcc32275ee1602d9592ed0384b63a11936c8f4/batch-scenarios/spring-batch-java-demo/src/main/java/com/example/batchjava/BatchConfig.java#L44-L67)), using H2 for the `JobRepository`. Only the transform step changes.
 
-The results {#h2-1-the-results}
--------------------------------
+The results
+-----------
 
 Timing only the transform step, on an Apple Silicon machine (12 threads, Java 21, DuckDB 1.5.5), with a fresh JVM each run so the Java figure includes the JIT warm-up that a one-shot batch job actually incurs:
 
@@ -98,8 +98,8 @@ Timing only the transform step, on an Apple Silicon machine (12 threads, Java 21
 
 The two summary files are byte-identical, verified with `cmp`, so this is the same 8,000-group result computed two ways. The gap grows with scale, and would grow further with a heavier per-row transform.
 
-Why the difference {#h2-2-why-the-difference}
----------------------------------------------
+Why the difference
+------------------
 
 Three things explain the difference:
 
@@ -109,8 +109,8 @@ Three things explain the difference:
 
 This is not a criticism of Spring Batch. Its chunk model is well suited to orchestration, restartability, and I/O. The point is more specifically that the arithmetic inside a transform step does not have to run in your own loop.
 
-When to use it {#h2-3-when-to-use-it}
--------------------------------------
+When to use it
+--------------
 
 Consider DuckDB for the transform step when you are aggregating, joining, or deriving over large volumes, and your source is a file (CSV, Parquet, JSON) or a database DuckDB can read. Keep the classic reader, processor, and writer for row-level enrichment, external calls, or writing to a strict downstream system.
 

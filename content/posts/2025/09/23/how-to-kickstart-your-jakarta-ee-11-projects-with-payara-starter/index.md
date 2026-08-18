@@ -34,13 +34,13 @@ The latest updates to Payara Starter [entity relationship diagram (ERD)](https:/
 
 Let's break down what this means for your next enterprise application.
 
-### Why Payara Starter Exists {#h3-0-why-payara-starter-exists}
+### Why Payara Starter Exists
 
 When starting a new Jakarta EE project, the initial setup to scaffold your application is often the least enjoyable part. The free, online developer tool Payara Starter removes that friction, offering an AI-powered custom project generator for modern Jakarta EE applications that helps you set up a new project in minutes.
 
 It leverages natural language processing (NLP) to automatically create, adjust, scale up or down entity relationship diagrams (ERDs) as well as code. Once you are happy with the result, you can download the project, refine it if needed, and run the resulting Jakarta EE application on Payara Server, Payara Micro and Payara Cloud.
 
-### What's New in Payara Starter {#h3-1-what-s-new-in-payara-starter}
+### What's New in Payara Starter
 
 #### Jakarta EE 11 Support
 
@@ -67,7 +67,7 @@ Building a server-side rendered user interfaces (UIs) ? Payara Starter now has a
 
 Instead of wiring everything up manually, you get an immediately runnable UI that is perfect for demos, proof of concepts (PoC), minimum viable products (MVPs) or internal tools.
 
-### How to Create Jakarta EE 11 Apps with Payara Starter {#h3-2-how-to-create-jakarta-ee-11-apps-with-payara-starter}
+### How to Create Jakarta EE 11 Apps with Payara Starter
 
 1. Visit [the Payara Starter website](https://start.payara.fish/ "the Payara Starter website")
 2. Pick your build tool (Maven or Gradle)
@@ -80,7 +80,7 @@ Instead of wiring everything up manually, you get an immediately runnable UI tha
 9. Add any necessary security configuration you may want for your application
 10. Download your project and refine the code - you'll have a running Jakarta EE 11 app in minutes.
 
-### Why This Matters for Java Developers {#h3-3-why-this-matters-for-java-developers}
+### Why This Matters for Java Developers
 
 In short: The recent updates to Payara Starter make the developer tool even more powerful, helping you to get started learning about the latest Jakarta EE version while fast tracking Jakarta EE 11 application development, without manual boilerplate setup.
 

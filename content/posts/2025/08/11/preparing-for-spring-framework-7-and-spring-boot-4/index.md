@@ -32,7 +32,7 @@ In this blog post, we will discuss some key features enhanced as part of Spring 
 
 To start with,
 
-### 1. Built-in Resilience Feature {#h3-0-1-built-in-resilience-feature}
+### 1. Built-in Resilience Feature
 
 Spring Framework 7 introduces powerful resilience tools directly into its core:
 
@@ -75,11 +75,11 @@ public class PaymentService {
 ```
 
 
-### 2. Fluent JMS Client API {#h3-1-2-fluent-jms-client-api}
+### 2. Fluent JMS Client API
 
 Spring now includes **JmsClient** , modeled after **JdbcClient** and RestClient. Developers can now send/receive messages using a fluent, builder-style API. This new approach is a more elegant and readable alternative to traditional JMS templates---just like how **JdbcClient** replaces **JdbcTemplate** , and **RestClient** replaces **RestTemplate**.
 
-### 3. Robust Api Versioning {#h3-2-3-robust-api-versioning}
+### 3. Robust Api Versioning
 
 Spring Framework enhances API versioning with powerful new features:
 
@@ -89,15 +89,15 @@ Spring Framework enhances API versioning with powerful new features:
 
 These enhancements work across both Spring MVC and Spring WebFlux.
 
-### 4. Unified Message Conversion {#h3-3-4-unified-message-conversion}
+### 4. Unified Message Conversion
 
 Spring simplifies message conversion with a new ***HttpMessageConverters*** configuration class. This unified approach draws inspiration from reactive codecs, streamlining how HTTP messages are serialized and deserialized.
 
-### 5. Faster and Smarter Testing {#h3-4-5-faster-and-smarter-testing}
+### 5. Faster and Smarter Testing
 
 Spring now optimizes test performance by**pausing unused application contexts.** When paused, the framework stops the context and automatically restarts it when needed. This reduces resource usage and speeds up test execution significantly.
 
-### 6. Modern Ecosystem Integration {#h3-5-6-modern-ecosystem-integration}
+### 6. Modern Ecosystem Integration
 
 Spring Framework 7 aligns with the latest platforms and standards:
 
@@ -105,19 +105,19 @@ Spring Framework 7 aligns with the latest platforms and standards:
 * Jakarta EE 11 baseline
 * GraalVM 24 support
 
-### 7. Hibernate ORM and JPA Upgrades {#h3-6-7-hibernate-orm-and-jpa-upgrades}
+### 7. Hibernate ORM and JPA Upgrades
 
 Spring integrates with **Hibernate ORM 7.0** and **JPA 3.2** , offering compatibility with the latest persistence standards. Prior to these, EntityManager could be injected only by defining the @PersistenceContext annotation; however, now both **EntityManagerFactory** and its associated shared **EntityManager** can now be injected using **@Inject or @Autowired**, with support for qualifiers to select a specific persistence unit when multiple are configured.
 
-### 8. Overhauled HttpHeaders API {#h3-7-8-overhauled-httpheaders-api}
+### 8. Overhauled HttpHeaders API
 
 The new HttpHeaders API delivers a cleaner, more consistent developer experience when handling HTTP headers.
 
-### 9. Support for Jackson 3.x {#h3-8-9-support-for-jackson-3-x}
+### 9. Support for Jackson 3.x
 
 Spring Framework now supports **Jackson 3.x** and provides migration guidance for deprecated Jackson features, helping developers upgrade smoothly.
 
-### 10. Null Safety using JSpecify {#h3-9-10-null-safety-using-jspecify}
+### 10. Null Safety using JSpecify
 
 Introduces **JSpecify** for null safety that certainly replaces the former `org.springframework.lang.*` annotation. This is going to be the standard annotation approach for ***nullness*** . For more details, see <https://spring.io/blog/2025/03/10/null-safety-in-spring-apps-with-jspecify-and-null-away>
 
@@ -125,7 +125,7 @@ Introduces **JSpecify** for null safety that certainly replaces the former `org.
 
 Spring Boot 4 is a significant leap forward in modernizing how Spring applications are developed, configured, and deployed. This milestone marks the beginning of a more modular, extensible, and developer-friendly version of the framework. Let's understand some of the significant enhancements in Spring Boot 4 and how they impact developers.
 
-### 1. Modular Codebase---A Refactored Architecture {#h3-10-1-modular-codebase-a-refactored-architecture}
+### 1. Modular Codebase---A Refactored Architecture
 
 It introduces a major architectural shift by **breaking up the internal codebase into smaller, focused modules.** Previously, Spring Boot relied on large, monolithic auto-configuration JARs. With version 4, the auto-configurations have been **refactored into modular packages**, making the framework more maintainable and composable.
 
@@ -142,7 +142,7 @@ Depending on the module's purpose, it can include:
 * Auto-configuration logic
 * Actuator-related support
 
-### 2. Now Available in Maven Central {#h3-11-2-now-available-in-maven-central}
+### 2. Now Available in Maven Central
 
 For the first time, milestone artifacts like 4.0.0-M1 are **published to Maven Central** in addition to Spring's repository. This helps in a greater way:
 
@@ -154,11 +154,11 @@ For the first time, milestone artifacts like 4.0.0-M1 are **published to Maven C
 
 This change enhances developer productivity by reducing the friction in bootstrapping and upgrading projects.
 
-### 3. Enhanced Configuration Properties Metadata {#h3-12-3-enhanced-configuration-properties-metadata}
+### 3. Enhanced Configuration Properties Metadata
 
 Introduces a new annotation: **@ConfigurationPropertiesSource** . This allows Spring Boot to read **@ConfigurationProperties** types defined in external modules, something that wasn't possible before. The benefits would be 1. a cleaner modular design 2. Improves tooling support (IDE autocompletion, validation, etc.) 3. makes shared configuration libraries easier to manage.
 
-### 4. Improvements in SSL Health Reporting {#h3-13-4-improvements-in-ssl-health-reporting}
+### 4. Improvements in SSL Health Reporting
 
 The SSL health endpoint in Spring Boot has been improved to provide more accurate and streamlined reporting.
 
@@ -170,7 +170,7 @@ The SSL health endpoint in Spring Boot has been improved to provide more accurat
 
 These changes make it easier for teams to monitor SSL certificate validity in production environments without false alarms.
 
-### 5. Task Scheduling with Multiple TaskDecorator Beans {#h3-14-5-task-scheduling-with-multiple-taskdecorator-beans}
+### 5. Task Scheduling with Multiple TaskDecorator Beans
 
 One of the most developer-friendly updates in Spring Boot 4.0 is support for ***multiple*** **TaskDecorator** beans. Prior to 4.0, Spring Boot allowed only one decorator, requiring manual chaining when multiple beans (like tracing and logging) needed to be applied.
 
@@ -246,17 +246,17 @@ When the task runs, Spring applies decorators in order:
 
 We no longer need to manually compose decorators---Spring Boot handles it for us.
 
-### 6. JMS Support via JdbcClient {#h3-15-6-jms-support-via-jdbcclient}
+### 6. JMS Support via JdbcClient
 
 Spring Boot 4.0 now auto-configures JmsClient, introduced in Spring Framework 7. This aligns with the familiar patterns of JdbcClient and RestClient, offering a fluent, builder-pattern style, modern API for working with JMS messaging. It still coexists with **JmsTemplate** and **JmsMessagingTemplate**.
 
 This makes JMS more accessible and cleaner to use, especially for microservices that rely on messaging systems.
 
-### Conclusion {#h3-16-conclusion}
+### Conclusion
 
 As a spring fan, I am super excited. Spring Boot 4.0 is shaping up to be one of the most significant releases in recent years. With **a refactored modular architecture** , **improved observability** , **native resilience patterns** , and **developer-friendly defaults**, it's ready to power the next generation of Spring applications.
 
-### References {#h3-17-references}
+### References
 
 <https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now>
 

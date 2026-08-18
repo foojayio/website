@@ -16,7 +16,7 @@ frozen: false
 
 VS Code is getting better and better for Java. In the last two months, we have made progresses in all key areas including core language support, testing, debugging, refactoring and project management. Let's uncover the new hidden and less hidden gems!
 
-### Type hierarchy {#h3-0-type-hierarchy}
+### Type hierarchy
 
 VS Code has already supported call hierarchy for Java, so what about type hierarchy?
 
@@ -26,7 +26,7 @@ The feature allows you to view type hierarchy in class, supertype, or subtype vi
 
 ![](type-hierarchy.gif)
 
-### Generating tests {#h3-1-generating-tests}
+### Generating tests
 
 Automatically generating testing method templates and importing testing packages is a handy feature to improve coding efficiency.
 
@@ -35,7 +35,7 @@ Starting from April, you can generate the method templates directly from a test 
 ![](generate-test.gif)  
 **Note:** for generating from a test file, testing dependency need be added into your project.
 
-### Package refactoring when moving file {#h3-2-package-refactoring-when-moving-file}
+### Package refactoring when moving file
 
 When a .java file is moved from one folder to another, VS Code can automatically update package declaration and importing statements.
 
@@ -43,7 +43,7 @@ The latest release of [Language Support for Java published by Red Hat](https://m
 
 ![](moveRefactoring.gif)
 
-### Classpath configuration {#h3-3-classpath-configuration}
+### Classpath configuration
 
 Managing path for source code, output, runtime, and libraries is an important project management task, almost every Java developer will perform. For those using build tool like Maven or Gradle, the tool allows managing these paths through its configuration file.
 
@@ -53,7 +53,7 @@ However, for those not using the build tool, especially like students, they need
 
 This feature is released as part of [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack "Java Extension Pack"). Please, make sure you have installed the latest version of the pack.
 
-### Debugging enhancements {#h3-4-debugging-enhancements}
+### Debugging enhancements
 
 #### Inline values
 
@@ -73,7 +73,7 @@ You can right-clicking the view to bring up customization menu.
 
 Debugging enhancements were demonstrated at [VS Code 1.56 Release Party](https://channel9.msdn.com/Shows/VS-Code-Livestreams/1-56-Release-Party#time=20m55s "VS Code 1.56 Release Party").
 
-### Maven enhancements {#h3-5-maven-enhancements}
+### Maven enhancements
 
 #### Lifecycle support
 

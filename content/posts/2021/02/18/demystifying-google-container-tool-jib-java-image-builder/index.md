@@ -24,7 +24,7 @@ In short, Jib is an excellent tool for Java developers who are interested in con
 
 Now, let's talk about some internals.
 
-### Jib Image Layering {#h3-0-jib-image-layering}
+### Jib Image Layering
 
 Jib intelligently divides your images into the following layers for more granular incremental builds.
 
@@ -36,7 +36,7 @@ Jib intelligently divides your images into the following layers for more granula
 
 When you do any code changes, only your changes are rebuilt, not your entire application. This means Jib only pushes the layer, which is changed, and the rest of the layers remain the same. For example, in the following demo, only a class file was changed and Jib pushed only the compiled class layer. Later on, we could see that during the docker pull, only the changed layer was extracted.
 
-### Demo Video {#h3-1-demo-video}
+### Demo Video
 
 [](https://www.youtube.com/watch?v=vizfV2opkfU)
 
@@ -104,7 +104,7 @@ DEBUG] Containerizing application with the following files:
 ```
 
 
-### Deep-Dive Image Layer {#h3-2-deep-dive-image-layer}
+### Deep-Dive Image Layer
 
 You can inspect images created by Jib using the [Dive](https://github.com/wagoodman/dive "Dive") tool. As you can see, on RHS, we have exploded directory structure for classes, resources, and dependencies in the following path and their size are very minimal. The rest of the contents are of your base image.
 
@@ -120,33 +120,33 @@ Dive also tells you if you are wasting any space and, if you are, then you can d
 
 Docker History Command screenshot.
 
-### What Are Distroless Images? {#h3-3-what-are-distroless-images}
+### What Are Distroless Images?
 
 Google defines distroless images as the following:
 > Distroless images are lightweight base images, as they contain only dependencies required to run your application. They do not contain package managers, shells, or any other programs you would expect to find in a standard Linux distribution.
 
 Furthermore, the layers created by Jib are created on top of a distroless base image. Jib by default uses distroless Java 8 image, but you have the option to choose an image of your choice.
 
-### Why Distroless? {#h3-4-why-distroless}
+### Why Distroless?
 
 1. Fewer vulnerabilities to patch.
 2. Better security.
 3. Built with minimum dependencies.
 
-### Debugging Distroless Images {#h3-5-debugging-distroless-images}
+### Debugging Distroless Images
 
 Since there are no package managers installed, and you cannot do ssh to your container running with distroless base image, it makes them hard for debugging. In an ideal world, you would add better logging, instead of allowing shell access for your containers. But, there are ways with which you can add shell support and [debug](https://github.com/GoogleContainerTools/distroless#debug-images "debug") your application.
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 In this article, we have covered some internals about Jib .i.e. image layering, which makes it fast. We have also covered distroless images with their benefits and pitfalls, such as debugging.
 
-### Support Me {#h3-7-support-me}
+### Support Me
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:
 
 [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
 
-### Further Reading {#h3-8-further-reading}
+### Further Reading
 
 You can also read some of my previous articles [here](https://ashishtechmill.com)

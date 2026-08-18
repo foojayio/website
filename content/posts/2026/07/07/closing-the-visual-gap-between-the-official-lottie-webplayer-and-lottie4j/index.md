@@ -26,7 +26,7 @@ Within the `fxfileviewer`, there is an app to visually compare the result of the
 Over the last weeks the focus has been exactly there: **making the JavaFX output match the reference renderer, pixel for pixel** (if possible).
 ![](20260702-lottie4j-after.png)
 
-### Improved Comparison Workflow {#h3-0-improved-comparison-workflow}
+### Improved Comparison Workflow
 
 The biggest change is not a rendering fix but the way rendering is now verified. The test suite renders the same animation two ways and compares them frame by frame:
 
@@ -52,7 +52,7 @@ Now each frame is diffed, instead of every 5 frames before, and measured against
 
 New real-world test animations, like `pi4j.json`, `foojay-reporter.json` and `foojay-duke.json`, got added so the harness measures against the files I'm actually using.
 
-### Rendering Fixes {#h3-1-rendering-fixes}
+### Rendering Fixes
 
 With the harness in place, the diffs made it obvious where JavaFX and the web player disagreed. The fixes can be grouped into a few areas:
 
@@ -64,7 +64,7 @@ With the harness in place, the diffs made it obvious where JavaFX and the web pl
 
 Individually these are small, but together they close a lot of the visible distance between Lottie4J and the official player.
 
-### Built with Systematic AI Coding {#h3-2-built-with-systematic-ai-coding}
+### Built with Systematic AI Coding
 
 All of this was implemented with **[Theia IDE](https://theia-ide.org/)** using the **Claude API** . I learned about Theia IDE during an Eclipse Foundation workshop in Brussels. I wrote about it on Foojay.io: [Systematic AI coding, my takeaways](https://foojay.io/today/systematic-ai-coding-my-takeaways-from-the-eclipse-foundation-workshop-in-brussels/).
 
@@ -77,7 +77,7 @@ The takeaways from that article map almost one-to-one onto this batch of work:
 
 I committed all the tasks written by the `@Architect` [into the repository](https://github.com/lottie4j/lottie4j/tree/main/.prompts/done) so they are available as "history of the project". The most important take-away here isn't that AI wrote the code, but the disciplined process with clear tasks and small iterations, each in a new session.
 
-### The Result {#h3-3-the-result}
+### The Result
 
 Where are we now? Check the images below.
 
@@ -106,13 +106,13 @@ Where are we now? Check the images below.
  </figure>
 </figure>
 
-### The Cost {#h3-4-the-cost}
+### The Cost
 
 Of course, the AI coding process is not free. Theia IDE luckily is free, but it needs one or more API keys to call AI services. As you can see, I burned a lot of tokens, and budget. But to be honest, I would not have achieved these improvements by myself in such a short time. Actually, I could do my "real work", and have the tools work in the background!
 ![](20260702-lottie4j-cost-ai-assisted-coding-1024x403.png)
 
-What's Next {#h2-5-what-s-next}
--------------------------------
+What's Next
+-----------
 
 I'm happy with the results so will release a new version soon. The same approach with `@Architect`/`@Coder` will help me to further improve or fix the library when needed. But first I want to know which visual differences remain based on feedback from the users of the Lottie4J library!
 

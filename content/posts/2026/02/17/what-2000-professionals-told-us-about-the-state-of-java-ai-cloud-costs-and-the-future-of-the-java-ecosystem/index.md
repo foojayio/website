@@ -28,8 +28,8 @@ As the only company 100% focused on Java, we get to see these changes up close.
 
 Here are the key takeaways and what they mean for your business.
 
-Java powers AI in production {#h2-0-java-powers-ai-in-production}
------------------------------------------------------------------
+Java powers AI in production
+----------------------------
 
 One of the most significant trends we've watched over the past few years is AI's shift from an area of research to a core part of enterprise systems. And for the first time, the majority of organizations that participated in this survey are now using Java to build or run AI functionality.
 
@@ -51,8 +51,8 @@ The Java ecosystem is keeping pace. Libraries like JavaML and Deep Java Library 
 
 If your teams are running AI at scale --- or plan to --- you're going to want your Java expertise in the room.
 
-Enterprises are rapidly moving away from Oracle Java {#h-enterprises-nbsp-are-nbsp-rapidly-nbsp-moving-nbsp-away-from-oracle-java-nbsp}
----------------------------------------------------------------------------------------------------------------------------------------
+Enterprises are rapidly moving away from Oracle Java
+----------------------------------------------------
 
 This year's survey confirms what many of you have been telling us is happening in boardrooms and budget meetings: the era of predictable, reasonable Oracle Java pricing is over.
 
@@ -71,8 +71,8 @@ The primary driver? **Cost.** But that's not the whole story:
 
 This isn't a small shift. It's a structural change in the Java market. Vendors who offer true open-source alternatives, predictable pricing, and long‑term stability are core to enterprise Java strategies. And that's exactly why so many organizations choose Azul's OpenJDK‑based platforms.
 
-Cloud costs are still too high, and Java efficiency is a powerful lever {#h-cloud-nbsp-costs-nbsp-are-nbsp-still-nbsp-too-nbsp-high-nbsp-and-java-nbsp-efficiency-nbsp-is-a-nbsp-powerful-nbsp-lever-nbsp}
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cloud costs are still too high, and Java efficiency is a powerful lever
+-----------------------------------------------------------------------
 
 Cost optimization in the cloud is no longer a "nice to have." It's a strategic imperative. And the data shows that Java is one of the most effective---and overlooked---ways to reduce those costs.
 
@@ -90,8 +90,8 @@ Often this "waste" is simply overprovisioning to compensate for slow start-up ti
 
 If your cloud bills keep you up at night, Java efficiency may be one of the simplest, highest‑ROI levers you have available.
 
-Unused and Dead code and CVE noise are quietly killing DevOps productivity {#h-unused-nbsp-and-nbsp-dead-nbsp-code-and-cve-nbsp-noise-nbsp-are-nbsp-quietly-nbsp-killing-devops-nbsp-productivity-nbsp}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Unused and Dead code and CVE noise are quietly killing DevOps productivity
+--------------------------------------------------------------------------
 
 When we talk to engineering leaders, one complaint comes up consistently: the hidden tax of legacy code and inaccurate application security tooling.
 
@@ -111,8 +111,8 @@ These issues are solvable. But they require better visibility into what code act
 
 This is one of the reasons we've invested so heavily in intelligence‑driven Java solutions: developers deserve tools that give them clarity and the ability to act, not more noise.
 
-Why this all matters right now {#h-why-nbsp-this-nbsp-all-nbsp-matters-nbsp-right-nbsp-now-nbsp}
-------------------------------------------------------------------------------------------------
+Why this all matters right now
+------------------------------
 
 Across every conversation I have with CIOs, engineering leaders, and architects, the themes are consistent:
 
@@ -124,8 +124,8 @@ Across every conversation I have with CIOs, engineering leaders, and architects,
 
 Java sits at the intersection of all of these trends. It's beyond "still relevant." As enterprises scale intelligent systems, tighten fiscal discipline, and modernize their applications, Java remains increasingly important.
 
-Where Azul fits into this future {#h-where-azul-nbsp-fits-nbsp-into-nbsp-this-nbsp-future-nbsp}
------------------------------------------------------------------------------------------------
+Where Azul fits into this future
+--------------------------------
 
 Our mission at Azul has always been simple:
 > ***Help enterprises realize value and success through Java.***

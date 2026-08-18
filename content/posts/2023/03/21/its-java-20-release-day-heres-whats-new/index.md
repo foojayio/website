@@ -33,8 +33,8 @@ Where applicable the differences with Java 19 are highlighted and a few typical 
 
 **Note:** See [the whole list of everything included in Java 20 here on Foojay.io](https://foojay.io/java-20/?quarter=032023&version=20&tab=component) and you can vote on those that you find most useful or interesting and also check out the [Java 20 Foojay Podcast](https://foojay.io/today/foojay-podcast-16/)!
 
-From Project Amber {#h2-0-from-project-amber}
----------------------------------------------
+From Project Amber
+------------------
 
 Java 20 contains two features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -43,7 +43,7 @@ Java 20 contains two features that originated from [Project Amber](https://openj
 
 > The goal of Project Amber is to explore and incubate smaller, productivity-oriented Java language features.
 
-### JEP 433: Pattern Matching for switch (Fourth Preview) {#h3-1-jep-433-pattern-matching-for-switch-fourth-preview}
+### JEP 433: Pattern Matching for switch (Fourth Preview)
 
 The feature 'Pattern Matching for switch' that was first introduced in Java 17 has reached its fourth preview stage, now that Java 20 has been released. The feature has always gathered a lot of feedback in the past, and on top of that it needs alignment with the related Record Patterns preview feature. In the end there are plenty of reasons to keep it in preview just a little longer.
 
@@ -119,7 +119,7 @@ A few changes were made to this feature compared to Java 19:
 
 For more information on this feature, see [JEP 433](https://openjdk.org/jeps/433).
 
-### JEP 432: Record Patterns (Second Preview) {#h3-2-jep-432-record-patterns-second-preview}
+### JEP 432: Record Patterns (Second Preview)
 
 Pattern matching is a feature in Java that is being rolled out gradually over multiple Java versions. Being able to deconstruct an object using patterns was always one of the ultimate goals of the feature arc. With the introduction of *record patterns*, deconstructing records is now possible, along with nesting record and type patterns to enable a powerful, declarative, and composable form of data navigation and processing.
 
@@ -200,8 +200,8 @@ The following changes were made to this feature compared to Java 19:
 
 For more information on this feature, see [JEP 432](https://openjdk.org/jeps/432).
 
-From Project Loom {#h2-3-from-project-loom}
--------------------------------------------
+From Project Loom
+-----------------
 
 Java 20 contains three features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -211,7 +211,7 @@ Java 20 contains three features that originated from [Project Loom](http://openj
 
 > Project Loom strives to simplify maintaining concurrent applications in Java by introducing *virtual threads* and an API for *structured concurrency*, among other things.
 
-### JEP 436: Virtual Threads (Second Preview) {#h3-4-jep-436-virtual-threads-second-preview}
+### JEP 436: Virtual Threads (Second Preview)
 
 Threads have been a part of Java since the very beginning, and since the start of Project Loom we've gradually started calling them 'platform threads' instead. A platform thread runs Java code on an underlying OS thread and captures the OS thread for the code's entire lifetime. The number of platform threads is therefore limited to the number of available OS threads.
 
@@ -278,7 +278,7 @@ On top of that, [the degradations to `ThreadGroup`](https://openjdk.org/jeps/425
 
 For more information on this feature, see [JEP 436](https://openjdk.org/jeps/436).
 
-### JEP 429: Scoped Values (Incubator) {#h3-5-jep-429-scoped-values-incubator}
+### JEP 429: Scoped Values (Incubator)
 
 *Scoped values* enable the sharing of immutable data within and across threads.  
 
@@ -324,7 +324,7 @@ Java 19 didn't contain anything related to scoped values yet, so Java 20 is the 
 
 For more information on this feature, see [JEP 429](https://openjdk.org/jeps/429).
 
-### JEP 437: Structured Concurrency (Second Incubator) {#h3-6-jep-437-structured-concurrency-second-incubator}
+### JEP 437: Structured Concurrency (Second Incubator)
 
 Java's current implementation of concurrency is *unstructured*, which can make error handling and cancellation with multiple tasks a challenge. When multiple tasks are started up asynchronously, we currently aren't able to cancel the remaining tasks once the first task returns an error.
 
@@ -396,8 +396,8 @@ The only change is an update to `StructuredTaskScope` to make it support the inh
 
 For more information on this feature, see [JEP 437](https://openjdk.org/jeps/437).
 
-From Project Panama {#h2-7-from-project-panama}
------------------------------------------------
+From Project Panama
+-------------------
 
 Java 20 contains two features that originated from [Project Panama](http://openjdk.java.net/projects/panama/):
 
@@ -406,7 +406,7 @@ Java 20 contains two features that originated from [Project Panama](http://openj
 
 > Project Panama aims to improve the connection between the JVM and foreign (non-Java) libraries.
 
-### JEP 434: Foreign Function \& Memory API (Second Preview) {#h3-8-jep-434-foreign-function-memory-api-second-preview}
+### JEP 434: Foreign Function \& Memory API (Second Preview)
 
 Java programs have always had the option of interacting with code and data outside of the Java runtime.  
 
@@ -473,7 +473,7 @@ In Java 19, this feature was in its first preview status (in the form of [JEP 42
 
 For more information on this feature, see [JEP 434](https://openjdk.org/jeps/434).
 
-### JEP 438: Vector API (Fifth Incubator) {#h3-9-jep-438-vector-api-fifth-incubator}
+### JEP 438: Vector API (Fifth Incubator)
 
 The Vector API will make it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
 
@@ -534,8 +534,8 @@ Once the features of Project Valhalla are available, the Vector API will be adap
 
 For more information on this feature, see [JEP 438](https://openjdk.org/jeps/438).
 
-Final thoughts {#h2-10-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 So, these are exciting times for Java programmers!
 

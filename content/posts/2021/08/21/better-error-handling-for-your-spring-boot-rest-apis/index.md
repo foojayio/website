@@ -68,8 +68,8 @@ Another example is when an `ObjectOptimisticLockingFailureException` happens:
 ```
 
 
-Custom Application Exceptions {#_custom_application_exceptions}
----------------------------------------------------------------
+Custom Application Exceptions
+-----------------------------
 
 For the Exception classes that you create in your own application, the library will generate an error `code` using the name of the Exception class. For instance, if you have `UserNotFoundException`, then a `USER_NOT_FOUND` error code will be generated.
 
@@ -103,7 +103,7 @@ This basic behaviour can be customized in a few ways:
 2. Override the error code via `@ResponseErrorCode`
 3. Add extra fields in the error response
 
-### Override the error code via properties {#_override_the_error_code_via_properties}
+### Override the error code via properties
 
 Using the `error.handling.codes` key and the full qualified name of the exception class, the error code can be changed. For example:
 
@@ -124,7 +124,7 @@ Applying this will change the response body to something like this:
 
 If you don't own the Exception type, this might be the only way to influence the error code. If you *do* own the Exception type, then using the `@ResponseErrorCode` annotation is probably easier.
 
-### Override the error code via annotation {#_override_the_error_code_via_annotation}
+### Override the error code via annotation
 
 By adding the `@ResponseErrorCode` annotation on the class level, we can override the used error code.
 
@@ -151,7 +151,7 @@ Will generate the following response:
 ```
 
 
-### Additional fields in response {#_additional_fields_in_response}
+### Additional fields in response
 
 If you want to add additional fields in the error response, then this can be done by annotating fields or methods on the Exception class with `@ErrorResponseProperty`.
 
@@ -189,14 +189,14 @@ Will generate the following response:
 
 Note the extra `userId` field in the response.
 
-Testing {#_testing}
--------------------
+Testing
+-------
 
 One of the advantages of using the library is also the testing support. The exact same error responses are returned when using the actual application, or when using a full integration test with `@SpringBootTest`, or using a [web test slice](https://rieckpil.de/spring-boot-test-slices-overview-and-usage/) with `@WebMvcTest`.
 
 This is [not the case in Spring Boot by default](https://github.com/spring-projects/spring-boot/issues/7321). When using MockMvc, you don't get the error handling. Using Error Handling Spring Boot Starter, you can test the error handling with MockMvc, no need to start a complete `@SpringBootTest`.
 
-Conclusion {#_conclusion}
--------------------------
+Conclusion
+----------
 
 The [Error Handling Spring Boot Starter](https://github.com/wimdeblauwe/error-handling-spring-boot-starter) can really simplify correct and consistent implementation of errors in your REST API. Check out [the documentation](https://wimdeblauwe.github.io/error-handling-spring-boot-starter) for more detailed information on all the things that are possible.

@@ -26,8 +26,8 @@ The correct way to fix this would be to create a Pull Request. But your deadline
 
 In this article, we are going through some alternatives that allow you to make third-party APIs behave in a way that their designers didn't intend to.
 
-Reflection {#h2-0-reflection}
------------------------------
+Reflection
+----------
 
 Imagine that the API has been designed to follow the open-closed principle:
 > In object-oriented programming, the open--closed principle states "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification"; that is, such an entity can allow its behaviour to be extended without modifying its source code.
@@ -88,8 +88,8 @@ Yet, reflection has some limitations:
 * The module system restricts the usage of the Reflection API. For example, both the caller and the target classes must be in the same module, the target member must be `public`, etc. Note that many libraries do not use the module system.
 * Reflection is good if you directly use the class that has private members. But it's no use if you need to change the behavior of a dependent class: if your class uses a third-party class `A` that itself requires a class `B` and you need to change `B`.
 
-Classpath shadowing {#h2-1-classpath-shadowing}
------------------------------------------------
+Classpath shadowing
+-------------------
 
 A long post could be dedicated solely to Java's class loading mechanism. For this post, we will narrow it down to the *classpath* . The classpath is an **ordered** list of folders and JARs that the JVM will look into to load previously unloaded classes.
 
@@ -121,8 +121,8 @@ This approach also has some limitations:
 
 Those are technical requirements. Whether it's legally possible is an entirely different concern and outside of the scope of this post.
 
-Aspect-Oriented Programming {#h2-2-aspect-oriented-programming}
----------------------------------------------------------------
+Aspect-Oriented Programming
+---------------------------
 
 Contrary to C++, the Java language offers single inheritance: a class can inherit from a single superclass.
 
@@ -230,8 +230,8 @@ AOP in general and AspectJ, in particular, represent the nuclear option. They pr
 
 However, the official AspectJ Maven plugin from Codehaus handles the JDK only up to version 8 (included) as nobody has updated since 2018. Somebody has forked the code on [GitHub](https://github.com/nickwongdev/aspectj-maven-plugin) that handles later versions. The fork can handle the JDK up to version 13 and the AspectJ library up to 1.9.5.
 
-Java agent {#h2-3-java-agent}
------------------------------
+Java agent
+----------
 
 AOP offers a high-level abstraction when you want to hack. But if you want to change the code in a fine-grained way, there's no other way than to change the *bytecode* itself. Interestingly enough, the JVM provides us with a standard mechanism to change bytecode when a class is loaded.
 
@@ -295,8 +295,8 @@ public class HackTransformer implements ClassFileTransformer {
 6. Replace the original byte array with the updated one
 7. Return the updated byte array for the JVM to load
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we have listed four different methods to hack the behavior of third-party libraries: reflection, classpath shadowing, Aspect-Oriented Programming, and Java agents.
 

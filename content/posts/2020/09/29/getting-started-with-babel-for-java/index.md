@@ -22,14 +22,14 @@ In the Java world, the situation is much better because Java desktop application
 
 frgaal ([https://frgaal.org](https://frgaal.org/)) is a retrofitting compiler for Java that helps you with these situations. It allows you to use modern and even experimental features while still keeping compatibility with your target runtime.
 
-frgaal: Frugal Czech Cake {#a849}
----------------------------------
+frgaal: Frugal Czech Cake
+-------------------------
 
 frgaal, based [on the name of a Czech cake](http://czechgastronomy.com/frgaly/), and pronounced a bit like "frugal", targets all those developers who are stuck with a runtime that doesn't support modern language features.
 
 Some examples where this might be useful are serverless functions, legacy applications, or simply the wish to try out new and experimental features without installing the latest Java daily builds.
 
-### Serverless Java {#219f}
+### Serverless Java
 
 AWS Lambda is the most popular environment for serverless functions. Currently it only provides runtimes for Java 8 and 11 (<https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html>).
 
@@ -37,7 +37,7 @@ In order to use newer features, you can add frgaal to your build and happily cod
 
 Once your target runtime is available, you can simply remove frgaal again, or continue updating your code with even newer features.
 
-### Legacy applications {#67c9}
+### Legacy applications
 
 A very common warmup question at Java conferences is „What version of Java are you using?". The audience is supposed to raise their hand when the speaker calls out their version.
 
@@ -45,14 +45,14 @@ And almost everytime the poor people who still run their code on very old JREs a
 
 With frgaal, these developers can brush up their Java and use all these shiny new features without compromising compatibility.
 
-### Trying out new features {#565d}
+### Trying out new features
 
 It's cool to read about new language features in upcoming versions of Java, but it would be nice to have an easy way to try them out.
 
 Usually you'll need to download a JDK daily build or even build it from source. With frgaal it becomes much less painful.
 
-How to use frgaal {#f48b}
--------------------------
+How to use frgaal
+-----------------
 
 The only thing you need to use it in a Maven build is to configure the maven-compiler-plugin.
 
@@ -142,7 +142,7 @@ ok
 
 That's it, three lines of code to try out new and experimental Java features without installing a preview JDK.
 
-### I can't believe it's not Java! {#4946}
+### I can't believe it's not Java!
 
 [frgaal](http://frgaal.org/) is built using the javac compiler from OpenJDK and you can compile valid Java code with it. Nevertheless, technically, it is not Java. This explains some of the odd wording on the project's website speaking of "a Java-like language", even though it only supports valid Java plus the experimental features.
 
@@ -150,8 +150,8 @@ The project patches javac 14 to allow it to generate bytecode for JDK8 and compi
 
 It seems really surprising that frgaal can produce bytecode from Java 14 syntax that is compatible with JDK 8, but it actually isn't, as JDK 9--14 contains no features that would require bytecode changes except modules and records. The `var` keyword is purely syntactic, so the compiled code remains the same. The same applies to """textblocks"""" as well. Switch expressions and "instanceof" do not require any special bytecode either. Most of these features just alter the AST of Java, so it's easy to emit JDK 8 compatible bytecode for the generator.
 
-Summary {#0ada}
----------------
+Summary
+-------
 
 The [frgaal project](http://frgaal.org/) allows you to try or use new Java language features in a very simple and convenient way. It's the quickest way to try out new Java syntax and language features. More important, it's a way to use these features in your real projects and brush up your Java, even if you're limited to an older runtime like in a serverless environment.
 

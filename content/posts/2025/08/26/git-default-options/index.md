@@ -22,8 +22,8 @@ frozen: false
 
 Git has become a fundamental part of our developers' daily routine that it's hard to remember our lives without it. And yet, most of us use a limited set of commands **and** options. Today, I want to focus on two commands most developers probably use **every** day and look at the defaults behind them.
 
-git push {#h2-0-git-push}
--------------------------
+git push
+--------
 
 After `git commit`, `git push` is probably the second most used command. I don't think I'll teach you anything with this excerpt from the documentation:
 > git-push - Update remote refs along with associated objects
@@ -47,8 +47,8 @@ git push other_upstream master
 ```
 
 
-git rebase {#h2-1-git-rebase}
------------------------------
+git rebase
+----------
 
 The default `git push` options are straightforward. The default ones for `git rebase` aren't the reason why we probably use one of them all the time.
 > git-rebase - Reapply commits on top of another base tip

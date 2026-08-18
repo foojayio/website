@@ -24,8 +24,8 @@ frozen: false
 
 In this article, I'd like to detail this introduction briefly, explain different ways to define the fraction, and show how to execute it with Apache APISIX.
 
-Introduction to canary releases {#h2-0-introduction-to-canary-releases}
------------------------------------------------------------------------
+Introduction to canary releases
+-------------------------------
 
 The term "canary" originates from the coal mining industry. When mining, it's not uncommon to release toxic gases: In a small enclosed space, it can mean quick death. Worse, the gas may be odorless, so miners would breathe it until it was too late to leave. Carbon monoxide is quite common in coal mines and is not detectable by human senses.
 
@@ -35,8 +35,8 @@ Years ago, we brought this approach to releasing a new software version. The ana
 
 The most crucial part is that **you need to measure the impact** of the release, including failure rates, HTTP status codes, etc., and compare them with those of the previous version. It's outside the scope of this post, but again, it's critical if you want to benefit from canary releases. The second most important part is the ability to roll back fast if the new version is buggy.
 
-Canary releases vs. feature flags {#h2-1-canary-releases-vs-feature-flags}
---------------------------------------------------------------------------
+Canary releases vs. feature flags
+---------------------------------
 
 Note that canary releases are not the only way to manage the risk of releasing new code. For example, feature flags are another popular way:
 
@@ -47,8 +47,8 @@ Feature flags represent a more agile approach (in the true sense of the word) to
 
 On the other hand, canary requires a mature deployment pipeline to be able to deploy and undeploy at will.
 
-Approaches to canary releases {#h2-2-approaches-to-canary-releases}
--------------------------------------------------------------------
+Approaches to canary releases
+-----------------------------
 
 The idea behind canary releases is to allow only a fraction of users to access the new version. Most canary definitions only define "fraction" as a percentage of users. However, there's more to it.
 
@@ -60,8 +60,8 @@ To enlarge the fraction of users while limiting the risks, we can now indiscrimi
 
 Again, monitor and compare at this point.
 
-The whole nine yards {#h2-3-the-whole-nine-yards}
--------------------------------------------------
+The whole nine yards
+--------------------
 
 At this point, everything should work as expected for internal users, either a few or all. But just as no plan survives contact with the enemy, no usage can mimic the whole diversity of a production workload. In short, we need to let regular users access the new version, but in a controlled way, just as we gradually increased the number of users so far: start with a small fraction, monitor it, and if everything is fine, increase the fraction.
 
@@ -127,8 +127,8 @@ routes:
 
 Note that Apache APISIX reloads changes to the file above every second. Hence, you split traffic in near-real time. Alternatively, you can use the Admin API to achieve the same.
 
-More controlled releases {#h2-4-more-controlled-releases}
----------------------------------------------------------
+More controlled releases
+------------------------
 
 In the above, I moved from internal users to a fraction of external users. Perhaps releasing to every internal user is too big a risk in your organization, and you need even more control. Note that you can further configure the `traffic-split` plugin in this case.
 
@@ -172,8 +172,8 @@ curl -H 'X-Canary: Let-Me-Go-To-v2' http://localhost:9080
 ```
 
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 This article explained canary releases and how you can configure one via Apache APISIX.
 

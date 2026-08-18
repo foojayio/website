@@ -30,7 +30,7 @@ Lately, I've been building a side-project which consists of a [Ktor](https://kto
 
 In this article, I'll dive into several methods I've been looking into and why I finally decided to go for a [Docker Compose](https://docs.docker.com/compose/?ref=lengrand.fr) / [Test Containers](https://testcontainers.com/?ref=lengrand.fr) solution. You can check the example repository [here](https://github.com/jlengrand/supabase-mock-demo-kotlin?ref=lengrand.fr) AND THE FINAL CODE [HERE](https://lengrand.fr/p/f6b63121-9525-4f77-a31f-f11b22f50809/#final-solution-docker-compose-and-test-containers).
 
-### What I want to achieve {#h3-0-what-i-want-to-achieve}
+### What I want to achieve
 
 Let's imagine a minimal code example that contains a `Person` data class, and wants to save/fetch persons via a `SupabaseClient`. It can look like this:
 
@@ -90,7 +90,7 @@ create table
 
 We want to be able to test that our functions behave properly. For the sake of this minimal example, I've decided to filter all non adults, but you can imagine any other use case where the functions contain some business logic.
 
-### First attempt: Mock Supabase {#h3-1-first-attempt-mock-supabase}
+### First attempt: Mock Supabase
 
 When unit testing code using third parties that I don't have control over, my first reflex is to try and mock it.
 
@@ -142,7 +142,7 @@ java.lang.IllegalStateException: Plugin rest not installed or not of type Postgr
 ```
 
 
-### Second attempt: Encapsulate the Supabase Client {#h3-2-second-attempt-encapsulate-the-supabase-client}
+### Second attempt: Encapsulate the Supabase Client
 
 My second attempt was to get around the problem by encapsulating the problematic client inside a class of mine that I can then control.
 
@@ -190,7 +190,7 @@ class MainKtTestSubclass {
 
 My main issue now is that because I have to indicate every single time what my output should be. It also just displaces the problem, because I don't really have any nice and clean way to check that my business logic works as intended, since I'm mocking it.
 
-### Third attempt: Ktor mock {#h3-3-third-attempt-ktor-mock}
+### Third attempt: Ktor mock
 
 The main contributor of the project gave another possible workaround [in the GitHub issue I created](https://github.com/supabase-community/supabase-kt/issues/298?ref=lengrand.fr) : mock the internal Ktor engine of the Supabase client.
 
@@ -227,7 +227,7 @@ My main issue with this method would be that to test my business logic I'd have 
 
 I do want to investigate it further though.
 
-### Proposed solution: Test Supabase db {#h3-4-proposed-solution-test-supabase-db}
+### Proposed solution: Test Supabase db
 
 Now, one semi obvious solution would be to fire up a test database in supabase itself, and test there!
 
@@ -240,7 +240,7 @@ It has some obvious downsides though:
 * I'd be terrified to run that against the wrong database
 * It uses my bandwidth and projects, that either are limited, or I have to pay for!
 
-### Final solution: Docker Compose and Test Containers {#h3-5-final-solution-docker-compose-and-test-containers}
+### Final solution: Docker Compose and Test Containers
 
 I had one last idea, and that's the one I've decided to stick with for now. It leverages the fact that at its core, Supabase is built on a lot of Open-Source. And when we're using the Supabase client, we're essentially interacting with a glorified PostgreSQL / [postgrest](https://postgrest.org/?ref=lengrand.fr) combo!
 
@@ -395,7 +395,7 @@ class MainKtTestTestContainers {
 
 All of the magic happens at the beginning, to setup a fake Supabase URL and connect to it. Once that is done, we can write our tests as easily as ever, since we're actually interacting with an actual light Supabase clone! (For reference, the tests take about 2 seconds to run on my machine)
 
-### A word of conclusion {#h3-6-a-word-of-conclusion}
+### A word of conclusion
 
 It took me a little while to get all these tests running, but I'm very happy about the final result. It might not be the best solution for production grade apps, but the trade off of running test containers for my side project definitely makes up for the fact that I literally have no boilerplate to run and can avoid using mocks.
 

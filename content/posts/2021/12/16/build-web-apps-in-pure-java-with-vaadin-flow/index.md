@@ -23,16 +23,16 @@ Vaadin Flow enables you to quickly build web apps in *pure Java*, without writin
 
 In this guide, you learn how to build a small but fully functional ToDo application using Vaadin Flow.
 
-### What You Need {#h3-0-what-you-need}
+### What You Need
 
 * About 5 minutes
 * JDK 11 or higher (For example, [Eclipse Temurin JDK](https://adoptium.net/ "Eclipse Temurin JDK")).
 
-### Step 1: Download a Vaadin Project {#h3-1-step-1-download-a-vaadin-project}
+### Step 1: Download a Vaadin Project
 
 [Click here to download an empty project starter](https://start.vaadin.com/dl?preset=flow-quickstart-tutorial "here"). Unpack the downloaded zip into a folder on your computer, and import the project in the IDE of your choice.
 
-### Step 2: Add Your Code {#h3-2-step-2-add-your-code}
+### Step 2: Add Your Code
 
 Open `src/main/java/com/example/application/views/main/MainView.java`. Replace the code in `MainView.java` with the code below:
 
@@ -92,7 +92,7 @@ public class MainView extends VerticalLayout { // (2)
 
 Notice that `taskField` and `addButton` are in a `HorizontalLayout`, which puts them next to each other.
 
-### Step 3: Run the Application {#h3-3-step-3-run-the-application}
+### Step 3: Run the Application
 
 To run the project in your IDE, launch `Application.java`, which is located under `src/main/java/org/vaadin/example`.
 
@@ -102,8 +102,8 @@ Then, in your browser, open [http://localhost:8080](http://localhost:8080 "http:
 
 ![Animation of Vaadin Todo app](https://vaadin.com/docs/latest/static/54a9ced3610b3825d3c8b32e3c7e95dd/completed-app.gif "Animation of Vaadin Todo app")
 
-Go further {#h2-4-go-further}
------------------------------
+Go further
+----------
 
 Now that you have a taste of how Vaadin Flow empowers you to quickly build web apps in pure Java, without writing any HTML or JavaScript.
 

@@ -40,8 +40,8 @@ image: registry.gitlab.com/nfrankel/nfrankel.gitlab.io:latest
 ```
 
 
-Updating, the hard way {#h2-0-updating-the-hard-way}
-----------------------------------------------------
+Updating, the hard way
+----------------------
 
 Jekyll is built on top of Ruby. Shared libraries in Ruby are known as *gems* . I'm using a few of them, along with the Jekyll gem itself. As a long-time Maven user, I searched for the equivalent dependency management utility in the Ruby world and stumbled upon [https://bundler.io/\[Bundler\]:](https://bundler.io/%5BBundler%5D:)
 > Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions needed.
@@ -64,8 +64,8 @@ It has several drawbacks:
 * The image takes up storage. I can clean it up, but it's an additional waste of my time.
 * It clogs my network. As my upload speed is very limited, I cannot do anything that involves the Internet when I'm uploading.
 
-Updating, the smart way {#h2-1-updating-the-smart-way}
-------------------------------------------------------
+Updating, the smart way
+-----------------------
 
 I recently stumbled upon the excellent [series of GitLab cheatsheets](https://dev.to/jphi_baconnais/series/12928). In the [6^th^ part](https://dev.to/zenika/gitlabcheatsheet-6-registry-2bjo), the author mentions [Kaniko](https://github.com/GoogleContainerTools/kaniko):
 > kaniko is a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster.
@@ -123,8 +123,8 @@ pages:                                                                          
 8. Run this job only if the `Gemfile.lock` file has been changed
 9. Generate the static site using the previously generated image
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 This article shows how one could offload the Docker part of your build pipeline from your local machine to GitLab using the Kaniko image. It saves on time and resources. The only regret I have is that I should have done it much earlier as I'm a huge proponent of automation.
 

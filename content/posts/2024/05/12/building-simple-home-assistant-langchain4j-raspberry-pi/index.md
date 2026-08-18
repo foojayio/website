@@ -37,8 +37,8 @@ Our simple smart home assistant features the ability to:
 
 The complete code is accessible at this GitHub [link](https://github.com/jmgang/SmartHomeAssistant), which also includes speech-to-text and text-to-speech capabilities using Amazon Polly and Transcribe.
 
-Creating a simple conversational chatbot {#_creating_a_simple_conversational_chatbot}
--------------------------------------------------------------------------------------
+Creating a simple conversational chatbot
+----------------------------------------
 
 To start, we use the `AiServices` class from Langchain4j, a declarative approach to creating customizable AI interactions through an interface. This integration allows for interaction with prompts, models, memory, and tools, as we'll explore further.
 
@@ -66,8 +66,8 @@ System.out.println(assistant.chat("Hello"));
 
 With these few lines of code, we're able to implement the user conversation feature.
 
-Utilizing Function Calling for External Actions {#_utilizing_function_calling_for_external_actions}
----------------------------------------------------------------------------------------------------
+Utilizing Function Calling for External Actions
+-----------------------------------------------
 
 A remarkable aspect of Langchain4j and LLMs is their ability to create agent-like workflows that orchestrate complex tasks through planning, memory, and the use of external tools. This is achieved through function calling, which enables the LLM to automatically invoke your methods as needed.
 
@@ -111,8 +111,8 @@ var assistant = AiServices.builder(ActionAIAssistant.class)
 ```
 
 
-Capturing and Analyzing an image {#_capturing_and_analyzing_an_image}
----------------------------------------------------------------------
+Capturing and Analyzing an image
+--------------------------------
 
 To recognize and analyze an image, we first capture an image, in which the image will be saved to a predetermined file location. It then will retrieve this image and pass it to a multimodal LLM capable of image recognition.
 
@@ -173,8 +173,8 @@ var assistant = AiServices.builder(ActionAIAssistant.class)
 ```
 
 
-Controlling an External Smart Device {#_controlling_an_external_smart_device}
------------------------------------------------------------------------------
+Controlling an External Smart Device
+------------------------------------
 
 For external smart device integration, I used [Home Assistant](https://www.home-assistant.io/), an open-source home automation platform that centralizes control of various smart devices within a single user interface.
 
@@ -247,8 +247,8 @@ var assistant = AiServices.builder(ActionAIAssistant.class)
 ```
 
 
-Using our own data for Question-Answering {#_using_our_own_data_for_question_answering}
----------------------------------------------------------------------------------------
+Using our own data for Question-Answering
+-----------------------------------------
 
 Currently, we can either engage in conversation with the LLM or direct it to perform external actions, but it remains unable to answer questions about new information or topics not previously known to it. To empower the LLM to respond to queries based on our data, we utilize [Retrieval Augmented Generation](https://docs.langchain4j.dev/tutorials/rag/).
 
@@ -303,8 +303,8 @@ public class DocumentRetriever {
 ```
 
 
-Revisiting the Current Architecture {#_revisiting_the_current_architecture}
----------------------------------------------------------------------------
+Revisiting the Current Architecture
+-----------------------------------
 
 ![Model Bottleneck](https://smart-assistant-langchain4j-blog.s3.amazonaws.com/smart+assistant+archi+bottleneck.PNG)
 
@@ -365,8 +365,8 @@ public String query(String query) {
 ```
 
 
-Adding Moderation Models {#_adding_moderation_models}
------------------------------------------------------
+Adding Moderation Models
+------------------------
 
 We include moderation models to monitor both user queries and LLM responses, ensuring content remains appropriate and free from harmful material. This is true for both the user query and the LLM responses. The `Moderator` interface defines a single method moderate, marked with the `@Moderate` annotation, which suggests it applies specific content moderation rules to the input string.
 
@@ -419,8 +419,8 @@ public String query(String query) {
 ```
 
 
-Final Thoughts {#_final_thoughts}
----------------------------------
+Final Thoughts
+--------------
 
 The journey to creating a smart home assistant showcases the power of modern AI tools like Langchain4j and accessible hardware such as the Raspberry Pi.
 

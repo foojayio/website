@@ -30,8 +30,8 @@ You can find all the [code of this post on GitHub](https://gist.github.com/FDelp
 
 {{< youtube PcKRJqo-c9Q >}}
 
-The Basics: Bits {#h2-0-the-basics-bits}
-----------------------------------------
+The Basics: Bits
+----------------
 
 Let's start with the basics: bits, 0 or 1.
 
@@ -96,8 +96,8 @@ Value   Bits    Hex
 ```
 
 
-Bits to Byte {#h2-1-bits-to-byte}
----------------------------------
+Bits to Byte
+------------
 
 A byte consists of 8 bits and has the range of 0x00 (= 0) to 0xFF (= 255).
 
@@ -142,12 +142,12 @@ Value   Bits    Hex
 ```
 
 
-Value Ranges in Java {#h2-2-value-ranges-in-java}
--------------------------------------------------
+Value Ranges in Java
+--------------------
 
 A bit doesn't really exist as a data type in Java. However, the closest match is a `boolean` type, which can represent two states: `true` (equivalent to `1`) and `false` (equivalent to `0`). To store numeric whole values (without decimals), Java provides different primitive types, each with its own range and characteristics.
 
-### Difference between Byte, Short, Integer and Long {#h3-3-difference-between-byte-short-integer-and-long}
+### Difference between Byte, Short, Integer and Long
 
 All these are numeric objects and each uses a fixed number of bytes in memory:
 
@@ -158,7 +158,7 @@ All these are numeric objects and each uses a fixed number of bytes in memory:
 | int   | 32         | 4           | 0x00000000         | 0xFFFFFFFF         |
 | long  | 64         | 8           | 0x0000000000000000 | 0xFFFFFFFFFFFFFFFF |
 
-### Minimum and maximum values in Java {#h3-4-minimum-and-maximum-values-in-java}
+### Minimum and maximum values in Java
 
 Let's go back to Java and check how values are represented with the following code:
 
@@ -201,8 +201,8 @@ Long
 
 Hmm, this is unexpected! Does a byte have the range of -128 to 127, instead of 0 to 255?! That's why we need to understand the difference between signed and unsigned values.
 
-Signed versus Unsigned {#h2-5-signed-versus-unsigned}
------------------------------------------------------
+Signed versus Unsigned
+----------------------
 
 * **Signed Byte**: The most significant bit (MSB = the most left one) is used as the sign bit, indicating whether the value is positive or negative. This results in a range for a byte of -128 to 127.
 * **Unsigned Byte**: All bits are used for the value, without a sign bit. This results in a range for a byte of 0 to 255.
@@ -231,7 +231,7 @@ Byte value 10001111: -113
 ```
 
 
-### Using Masks {#h3-6-using-masks}
+### Using Masks
 
 A mask is a value used in bitwise operations to extract or manipulate specific bits of another value. By applying a mask in the format `byte & 0xFF`, we can convert a byte value to it's unsigned integer value. By applying the mask `0xFF`, which has only 8 bits, you effectively keep only the lower 8 bits of the byte value when it's converted to an integer.
 
@@ -261,7 +261,7 @@ Object Type: java.lang.Integer
 ```
 
 
-### Using Helper Methods {#h3-7-using-helper-methods}
+### Using Helper Methods
 
 Applying a mask is a short piece of code and you can easily add it to your code to convert a signed byte to its unsigned integer equivalent. However, there are also built-in helper methods available in Java that return the same result but are more readable. This is important for code reviews or when you or someone else need to mainten or extend the code: `Byte.toUnsignedInt(b)` and `Byte.toUnsignedLong(b)`.
 
@@ -288,7 +288,7 @@ Object Type: java.lang.Long
 ```
 
 
-### Same Approach for Short {#h3-8-same-approach-for-short}
+### Same Approach for Short
 
 A `short` in Java uses 16 bits (or 2 bytes) and can be handled similarly when converting from its binary representation. A short is also a signed data type, with a range of -32,768 to 32,767.
 
@@ -312,8 +312,8 @@ Short value 1111111111111111 to unsigned: 65535
 ```
 
 
-Example use of Bits {#h2-9-example-use-of-bits}
------------------------------------------------
+Example use of Bits
+-------------------
 
 A nice example of the use of bits and bytes, is included in my book. A LED number display is a typical component used in a lot of experiments with electronics and is also used in e.g. alarm clocks. Such a display has 7 segments to for the number, and one for the dot. So a total of 8 true/false values to define what must be displayed. This makes it the perfect example of how 8 booleans can be combined into one byte.
 
@@ -331,12 +331,12 @@ A nice example of the use of bits and bytes, is included in my book. A LED numbe
 
 In 2019, I even published a JavaFX library with a component to visualize such a display, as you can [read here: "LED number display JavaFX library published on Maven"](https://webtechie.be/post/2019-10-02-led-number-display-javafx-library-published-to-maven/).
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 Understanding how to work with bits, bytes and shorts in Java is essential for effective programming, especially when dealing with low-level data manipulation for electronic components, such as with Raspberry Pi and [Pi4J](https://www.pi4j.com/) projects. The way Java handles signed data types can sometimes be confusing, but by using masks and/or the helper methods like `Byte.toUnsignedInt()` and `Short.toUnsignedInt()`, you can efficiently convert these values.
 
-Remark {#h2-11-remark}
-----------------------
+Remark
+------
 
 This is a returning question, so this blog post is not completely new. 😉 A [shorter version was published on October 25, 2019](https://webtechie.be/post/2019-10-25-the-mystery-of-the-negative-byte-value-in-java-a-story-of-bits-bytes-signed-and-unsigned/). I created this new post to provide a deeper explanation, a video, and more Java code examples.

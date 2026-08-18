@@ -29,8 +29,8 @@ Let's take an introductory run-through of setting up your database on OpenShift,
 
 CodeReady Containers is a great way to run OpenShift K8s locally, ideal for development and testing. The steps in this blog post will require a machine, laptop or desktop, of decent capability; preferably quad CPUs and 16GB+ RAM.
 
-Download and Install RedHat's CodeReady Containers {#h2-0-download-and-install-redhat-s-codeready-containers}
--------------------------------------------------------------------------------------------------------------
+Download and Install RedHat's CodeReady Containers
+--------------------------------------------------
 
 Download and install RedHat's CodeReady Containers as described in [Red Hat OpenShift 4 on your laptop: Introducing Red Hat CodeReady Containers](https://developers.redhat.com/blog/2019/09/05/red-hat-openshift-4-on-your-laptop-introducing-red-hat-codeready-containers)
 
@@ -96,8 +96,8 @@ View details with 'oc describe <resource>/<name>' or list resources with 'oc get
 Before continuing, go to the CodeReady Containers Preferences dialog. Increase CPUs and Memory to \>12 and \>14GB correspondingly.
 ![](https://dzone.com/storage/temp/14977914-xfya19mfue6tcsuyuvl4.png)
 
-Create the OpenShift Local Volumes {#h2-1-create-the-openshift-local-volumes}
------------------------------------------------------------------------------
+Create the OpenShift Local Volumes
+----------------------------------
 
 Cassandra needs persistent volumes for its data directories. There are different ways to do this in OpenShift, from enabling local host paths in Rancher persistent volumes, to installing and using the OpenShift Local Storage Operator, and of course persistent volumes on the different cloud provider backends.
 
@@ -168,8 +168,8 @@ server-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstCons
 
 More information on using the can be found in the RedHat documentation for [OpenShift volumes](https://docs.openshift.com/container-platform/4.7/nodes/containers/nodes-containers-volumes.html).
 
-Deploy the Cass-Operator {#h2-2-deploy-the-cass-operator}
----------------------------------------------------------
+Deploy the Cass-Operator
+------------------------
 
 Now create the cass-operator. Here we can use the upstream 1.7.0 version of the cass-operator. After creating (applying) the cass-operator, it is important to quickly execute the `oc adm policy ...` commands in the following step so the pods have the privileges required and are successfully created.
 
@@ -226,8 +226,8 @@ cass-operator-7675b65744-hxc8z   1/1     Running   0          15m
 
 Troubleshooting: If the cass-operator does not end up in `Running` status, or if any pods in later sections fail to start, it is recommended to use the [OpenShift UI Events webpage](https://console-openshift-console.apps-crc.testing/k8s/all-namespaces/events) for easy diagnostics.
 
-Setup the Cassandra Cluster {#h2-3-setup-the-cassandra-cluster}
----------------------------------------------------------------
+Setup the Cassandra Cluster
+---------------------------
 
 The next step is to create the cluster. The following deployment file creates a 3 node cluster. It is largely a copy from the upstream cass-operator version 1.7.0 file [example-cassdc-minimal.yaml](https://github.com/k8ssandra/cass-operator/tree/v1.7.0/operator/example-cassdc-yaml/cassandra-3.11.x) but with a small modification made to allow all the pods to be deployed to the same worker node (as CodeReady Containers only uses one k8s node by default).
 
@@ -254,8 +254,8 @@ cluster1-dc1-default-sts-2       2/2     Running   0          3m
 ```
 
 
-Use the Cassandra Cluster {#h2-4-use-the-cassandra-cluster}
------------------------------------------------------------
+Use the Cassandra Cluster
+-------------------------
 
 With the Cassandra pods each up and running, the cluster is ready to be used. Test it out using the `nodetool status` command.
 
@@ -295,8 +295,8 @@ cluster1-superuser@cqlsh>
 ```
 
 
-Keep It Clean {#h2-5-keep-it-clean}
------------------------------------
+Keep It Clean
+-------------
 
 CodeReady Containers are very simple to clean up, especially because it is a packaging of OpenShift intended only for development purposes. To wipe everything, just "delete"
 

@@ -28,7 +28,7 @@ In The Legend of Zelda, the Triforce is a sacred golden triangle made of three s
 
 Java 25 turns the tide and proves Java is fast, efficient, and ready for modern demands with the triforce of performance improvements.
 
-### The Triforce of Performance Improvements in Java 25 {#h3-0-the-triforce-of-performance-improvements-in-java-25}
+### The Triforce of Performance Improvements in Java 25
 
 #### Power (Ahead-Of-Time Cache) - JEPs 483, 514, and 515
 
@@ -56,7 +56,7 @@ The payoff is especially clear in object-heavy workloads and memory-constrained 
 
 ![](zelda02.jpg)
 
-### From 8-Bit to Open World -- A Parallel Journey Java Has Leveled Up (Evolved) {#h3-1-from-8-bit-to-open-world-a-parallel-journey-java-has-leveled-up-evolved}
+### From 8-Bit to Open World -- A Parallel Journey Java Has Leveled Up (Evolved)
 
 Just as Zelda has evolved from 2D pixel hero to open-world legend over 40 years, Java has evolved from "enterprise slowpoke" to a lean, high-performance champion.
 

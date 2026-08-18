@@ -33,13 +33,13 @@ Then Ronald Dehuysser, founder of JobRunr, reveals how his open-source job-sched
 
 And finally, Jan Ouwens joins us to discuss practical strategies for reducing both costs and CO2 emissions in your applications. He explains why cloud spending is actually a good proxy for your carbon footprint.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube wZvUYt7IOXs >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -47,8 +47,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topic and guests
 

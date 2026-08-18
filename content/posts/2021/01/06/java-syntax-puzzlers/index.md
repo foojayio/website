@@ -25,7 +25,7 @@ While working on Eclipse, I fondly remember working on various parts of the Java
 
 Working on language-specific tooling exposes you to all kinds of edge cases and delicate details and language has to offer. Some of them are well known and generally seen as "unprofessional" (hello `goto`). Others are actually not known at all. And with all due respect, I quite enjoy discovering the edge cases of the language syntax - a lot of times to confuse my co-workers who think they know the Java Language Syntax 😉 And given I love a good puzzle (especially the Java Puzzles), let's try a puzzle but using the Java syntax only, without any runtime behavior.
 
-### Using Java for Phishing {#h3-0-using-java-for-phishing}
+### Using Java for Phishing
 
 Let us start off with a widely known fact about Java source files. You're allowed to use Unicode in most places of your code. While we can't use the full range of [Unicode in your class names](https://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.8) (I still want to write `throw 🎂()`), you can add enough Unicode to play some pranks on your co-workers.
 
@@ -67,7 +67,7 @@ public static void main(String[] args) {
 
 Funny enough, most programmers would suspect something fishy with this comment when they see it. But what about indenting it so it's not shown in your editor anymore? 😉
 
-### Blocks of Blocks {#h3-1-blocks-of-blocks}
+### Blocks of Blocks
 
 Let's move on to the [Java Language Specification](https://docs.oracle.com/javase/specs/) and see what interesting bits of syntax we can find in there.
 
@@ -109,7 +109,7 @@ public void howDeepCanWeGo() {
 
 Funnily enough, while this feature seems quite useless at first sight, it's the only one I've been using in actual test code in the past. While working on a framework that heavily relied on reflection, the inline class definitions came in quite handy to define classes under test and keeping them with the test. The alternative of having a bunch of nested classes scattered alongside tests was a good reason to move them closer to the test. You can read more about the quirks of local classes in [JLS 14.3](https://docs.oracle.com/javase/specs/jls/se15/html/jls-14.html#jls-14.3).
 
-### This and That {#h3-2-this-and-that}
+### This and That
 
 Moving away from classes and closer to the action. Let's have a look at method parameters. As you may encounter several times yourself, you can't name things the same as keywords. Well, let's have a look at the following snippet.
 
@@ -151,7 +151,7 @@ public void callMe(@Immutable KeywordParameter this, int foo) { ... }
 ```
 
 
-### @Everywhere {#h3-3-everywhere}
+### @Everywhere
 
 Talking about annotating things to analyze code. For the above snippets to work, the annotation needs to be targetable for `PARAMETER`. Did you ever look up what other targets an annotation can have? Going through the most common ones, there are no surprises: `TYPE`, `FIELD`, `METHOD`, `PARAMETER`, `CONSTRUCTOR`, `LOCAL_VARIABLE`, `ANNOTATION_TYPE`, `PACKAGE`, `TYPE_PARAMETER`, `MODULE` (since Java 9) and `RECORD_COMPONENT` (since Java 14).
 

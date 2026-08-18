@@ -25,8 +25,8 @@ If you still think of GlassFish as a slow, unsupported, and purely for-developme
 This article explores the key differences between the modern Eclipse GlassFish and its predecessor, Oracle GlassFish and older Eclipse GlassFish versions. We'll show you how GlassFish has evolved into a robust, enterprise-grade platform with commercial support from our team at OmniFish, with frequent updates, and a strong commitment to modern Java standards and modern lightweight deployments. In short, this is no longer your father's GlassFish.
 ![](oracle_glassfish_comparison_infographic-1024x682.png)
 
-The Myth of the Unsupported, Non-Production Server {#the-myth-of-the-unsupported-non-production-server}
--------------------------------------------------------------------------------------------------------
+The Myth of the Unsupported, Non-Production Server
+--------------------------------------------------
 
 One of the most persistent myths about GlassFish is that it's not suitable for production environments and lacks commercial support. This might have been a valid concern in the past, but it is no longer true. Since 2022 and GlassFish 7.0, the landscape has changed dramatically. **Eclipse GlassFish is now a production-ready, enterprise-grade platform** with active community, frequent releases, and**[commercial support with enterprise guarantees](https://omnifish.ee/glassfish-support/)** **from OmniFish**, a company which is actively involved in the project and leads most of the development.
 
@@ -34,8 +34,8 @@ We founded OmniFish because we believe in GlassFish's potential as a modern, ent
 
 This level of support and active development means that the claim that GlassFish is not production-ready is **outdated** . Organizations can now **confidently deploy GlassFish in production**, knowing that they have a team of experts backing them up and continuously improving the platform.
 
-Key Differences: Eclipse GlassFish vs. Oracle GlassFish {#key-differences-eclipse-glassfish-vs-oracle-glassfish}
-----------------------------------------------------------------------------------------------------------------
+Key Differences: Eclipse GlassFish vs. Oracle GlassFish
+-------------------------------------------------------
 
 To help you understand the evolution of GlassFish, let's briefly summarize the history of GlassFish and then compare the modern Eclipse GlassFish with the older Oracle GlassFish across several key areas.
 
@@ -67,16 +67,16 @@ And here's how the Eclipse GlassFish since 2022 (starting with GlassFish 7.0) co
 
 As you can see, Eclipse GlassFish has made significant strides in every important aspect of a modern application server. It is no longer the abandoned GlassFish of the past but a forward-looking platform designed for today's enterprise needs.
 
-What's New in Eclipse GlassFish 7.0 and Beyond {#whats-new-in-eclipse-glassfish-70-and-beyond}
-----------------------------------------------------------------------------------------------
+What's New in Eclipse GlassFish 7.0 and Beyond
+----------------------------------------------
 
 Let's look at some of the highlights that make Eclipse GlassFish a top choice for enterprise Java development.
 
-### Jakarta EE 11 and MicroProfile Support {#jakarta-ee-11-and-microprofile-support}
+### Jakarta EE 11 and MicroProfile Support
 
 Eclipse GlassFish was the **first to pass the Jakarta EE 11 Web Profile and Jakarta EE 11 Platform TCKs**. This means you can use the newest features of Jakarta EE with confidence. In addition, GlassFish now supports several popular MicroProfile APIs such as Health, Config, REST Client, and JWT. This makes it an excellent choice for building resilient and configurable microservices.
 
-### A New Era for Embedded GlassFish {#a-new-era-for-embedded-glassfish}
+### A New Era for Embedded GlassFish
 
 Embedded GlassFish has grown from a developer-focused tool into a **production-ready, lightweight runtime** . It's now a viable option for running microservices from the [command line](https://omnifish.ee/run-your-apps-with-glassfish-from-the-command-line/) or in [cloud containers](https://github.com/eclipse-ee4j/glassfish.docker/wiki/Example:-Using-Embedded-GlassFish-with-the-docker-Command). With the inclusion of MicroProfile APIs and JMX monitoring, Embedded GlassFish offers the same power and observability as the full server in a smaller footprint.  
 
@@ -84,13 +84,13 @@ Embedded GlassFish has grown from a developer-focused tool into a **production-r
  <a target="_blank" href="https://omnifish.ee/run-your-apps-with-glassfish-from-the-command-line/"><img decoding="async" width="300" height="260" src="Embedded-GlassFish-featured-300x260.png" alt="" class="wp-image-123141"></a>
 </figure>
 
-### Performance and Security at the Core {#performance-and-security-at-the-core}
+### Performance and Security at the Core
 
 The recent Eclipse GlassFish releases have focused heavily on performance and security. You can expect **faster startup times, improved JDBC pool throughput, and better resource management**. GlassFish also supports the latest Java versions, up to Java 25, allowing you to take advantage of the newest language features and JVM optimizations.
 
 On the security front, GlassFish now supports the **PKCS12 keystore format**and uses it by default, and it addresses critical vulnerabilities, ensuring that applications are secure and compliant with industry standards.
 
-### Learn More About Modern GlassFish {#h3-6-learn-more-about-modern-glassfish}
+### Learn More About Modern GlassFish
 
 * [Eclipse GlassFish: Official website](https://glassfish.org)
 * [Eclipse GlassFish: OmniFish website](https://omnifish.ee/glassfish/){#https://omnifish.ee/glassfish/}
@@ -103,8 +103,8 @@ On the security front, GlassFish now supports the **PKCS12 keystore format**and 
  <img decoding="async" width="400" height="400" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px">
 </figure>
 
-[OmniFish - Jakarta EE experts](https://omnifish.ee) {#h2-7-omnifish-jakarta-ee-experts}
-----------------------------------------------------------------------------------------
+[OmniFish - Jakarta EE experts](https://omnifish.ee)
+----------------------------------------------------
 
 * Enterprise Support For Eclipse GlassFish
 * Jakarta EE Support: Payara Community, Piranha, Quarkus

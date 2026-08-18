@@ -25,16 +25,16 @@ In this article, you will build a product catalog with orders. Products have nam
 
 The complete source code is available in the [companion repository on GitHub](https://github.com/fhsinchy/clean-architecture-spring-boot-mongodb).
 
-Prerequisites {#prerequisites}
-------------------------------
+Prerequisites
+-------------
 
 * Java 17 or later
 * Spring Boot 3.x (use [Spring Initializr](https://start.spring.io/) with the `Spring Data MongoDB` and `Spring Web` dependencies)
 * A MongoDB Atlas cluster (the free tier is sufficient). You can set up one by following the [MongoDB Atlas getting started guide](https://www.mongodb.com/docs/atlas/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=djanog-mongodb-queryable&utm_term=hugh.murray). Alternatively, a local MongoDB instance or Docker container works too.
 * Basic familiarity with Spring Boot (controllers, services, dependency injection)
 
-1. What is Clean Architecture? {#1-what-is-clean-architecture}
---------------------------------------------------------------
+1. What is Clean Architecture?
+------------------------------
 
 Robert C. Martin introduced Clean Architecture to keep business rules independent of frameworks, databases, and UI. The central idea is the dependency rule: source code dependencies must point inward. Inner layers define interfaces, outer layers implement them. Never the reverse.
 
@@ -58,8 +58,8 @@ MongoDB sits in the outermost ring alongside Spring Boot. The domain layer defin
 
 In a typical Spring Boot application, the entity class carries `@Document`, `@Id`, and `@Field` annotations. The service imports it directly. The controller imports the service. Every layer knows about MongoDB. In Clean Architecture, the entity is a plain Java class. The `@Document` class is a separate object in the adapter layer, with mapper functions to convert between the two. This separation means your domain logic never depends on how your data is stored.
 
-2. Project structure {#2-project-structure}
--------------------------------------------
+2. Project structure
+--------------------
 
 The package layout for the project looks like this:
 
@@ -89,8 +89,8 @@ Since we already covered what a port is, the directory names should make sense. 
 
 You can clone the [companion repository](https://github.com/fhsinchy/clean-architecture-spring-boot-mongodb) to get this structure pre-built and follow along.
 
-3. Building the domain layer {#3-building-the-domain-layer}
------------------------------------------------------------
+3. Building the domain layer
+----------------------------
 
 Domain models are plain Java classes with no framework dependencies. Start with `Product`:
 
@@ -219,8 +219,8 @@ These are plain Java interfaces in the `domain.port.out` package. No Spring anno
 
 This matters for testing. You can write unit tests for `Product.decreaseStock()` or `Order.create()` without starting a Spring context or connecting to a database. You can also create a simple in-memory implementation of `ProductRepository` that stores products in a `HashMap`, and use it to test your services without touching MongoDB at all. Your business rules do not depend on any framework, so they are portable across different infrastructures.
 
-4. Building the application layer {#4-building-the-application-layer}
----------------------------------------------------------------------
+4. Building the application layer
+---------------------------------
 
 Use case interfaces define what the outside world can ask the application to do. These are the inbound ports:
 
@@ -317,8 +317,8 @@ public class GetProductCatalogService implements GetProductCatalogUseCase {
 ```
 
 
-5. Building the MongoDB adapter {#5-building-the-mongodb-adapter}
------------------------------------------------------------------
+5. Building the MongoDB adapter
+-------------------------------
 
 So far, nothing in the project references MongoDB or Spring. The adapter layer is where that changes. Document classes are separate from domain models. `ProductDocument` looks like this:
 
@@ -429,8 +429,8 @@ This interface extends `MongoRepository<ProductDocument, String>`. The two type 
 
 If you decided to switch from MongoDB to PostgreSQL, you would create a new `adapter.out.persistence` package with JPA entities, JPA repository implementations, and new mappers. The `domain` and `application` packages would not change at all. The business rules and use case logic stay exactly as they are.
 
-6. Wiring everything with Spring Boot {#6-wiring-everything-with-spring-boot}
------------------------------------------------------------------------------
+6. Wiring everything with Spring Boot
+-------------------------------------
 
 REST controllers are the inbound adapters. `ProductController` exposes `GET /products`:
 
@@ -575,8 +575,8 @@ Each layer depends only on the layer inside it. The controller knows about use c
 
 At the bottom of that flow, Spring has injected `MongoProductRepository` and `MongoOrderRepository` behind the `ProductRepository` and `OrderRepository` interfaces. The service never sees these concrete classes. If you swapped in a different adapter, the request would flow through the same path but hit a different database at the bottom.
 
-Conclusion {#conclusion}
-------------------------
+Conclusion
+----------
 
 Clean Architecture keeps your domain and business logic independent of MongoDB and Spring Boot. The dependency rule is enforced through package structure and interfaces. MongoDB is a pluggable adapter at the outermost ring, not a concern that leaks into your business logic.
 

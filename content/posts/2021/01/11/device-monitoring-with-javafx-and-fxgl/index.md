@@ -26,8 +26,8 @@ In a previous post ["Getting Started with FXGL Game Development"](https://foojay
 
 But, this game engine can also be used for other use cases. In this post, we will be building a system monitoring dashboard, which can run on a Raspberry Pi. The dashboard can be used to keep an eye on any device that can report its state to a queue. And, for me personally, it finally solves the problem of finding the IP addresses of all my Raspberry Pi's when my router decided to shuffle them... 😉
 
-Application Description {#h2-0-application-description}
--------------------------------------------------------
+Application Description
+-----------------------
 
 A proof-of-concept has been set up using one Raspberry Pi as the "central system" to host the queue (Mosquitto). On this Raspberry Pi and others, a Python script runs to send the device state every second to the queue.  
 
@@ -47,12 +47,12 @@ When the application starts, you can choose between "Mock Data", or an IP addres
 
 The sources of this project are available on [GitHub in the FXGLSystemMonitoring repository](https://github.com/FDelporte/FXGLSystemMonitoring).
 
-Mosquitto {#h2-1-mosquitto}
----------------------------
+Mosquitto
+---------
 
 [Eclipse Mosquitto](https://mosquitto.org/) is an open-source message broker that implements the MQTT protocol which is lightweight and is suitable for use on all devices from low power single board computers to full servers. As such, it's a perfect match to use on the Raspberry Pi.
 
-### Installing Mosquitto on the Raspberry Pi {#h3-2-installing-mosquitto-on-the-raspberry-pi}
+### Installing Mosquitto on the Raspberry Pi
 
 Installing Mosquitto can be done with the following commands, which will also configure it as a service to start whenever your Raspberry Pi is (re)powered.
 
@@ -76,7 +76,7 @@ $ mosquitto -v
 
 The last line with the error message can be ignored.
 
-### Testing Mosquitto on the Pi {#h3-3-testing-mosquitto-on-the-pi}
+### Testing Mosquitto on the Pi
 
 The installed mosquitto-clients can be used to easily test if Mosquitto is running OK on the Pi, by opening two terminal windows. In the first one we start a listener on topic "testing/TestTopic":
 
@@ -97,12 +97,12 @@ $ mosquitto_pub -t 'testing/TestTopic' -m 'jieha it works'
 Every "publish" from the second terminal window will appear in the first one as you can see in these screenshots:
 ![](mosquitto_testing.png)
 
-Send State from Raspberry Pi {#h2-4-send-state-from-raspberry-pi}
------------------------------------------------------------------
+Send State from Raspberry Pi
+----------------------------
 
 To send the state from all our Raspberry Pi-boards to Mosquitto, a [script is available in the GitHub project](https://github.com/FDelporte/FXGLSystemMonitoring/blob/main/python/statsSender.py). For this script, we are using Python as we only need some minimal example data which is easily available with the "psutil" library. Of course the same could be done with Java, but let's embrace Python for once 😉
 
-### Extra Dependencies {#h3-5-extra-dependencies}
+### Extra Dependencies
 
 If you started from the default Raspberry Pi OS, Python is already installed. So we only need to add two extra libraries with the pip-command to send data to the queue (with paho) and get device status info (with psutil).
 
@@ -142,8 +142,8 @@ client.publish(topicName, jsonString)
 ```
 
 
-Inside the Monitoring Application {#h2-6-inside-the-monitoring-application}
----------------------------------------------------------------------------
+Inside the Monitoring Application
+---------------------------------
 
 The application starts in MonitorApp which extends an FXGL GameApplication.
 
@@ -190,7 +190,7 @@ run(() -> monitors.forEach(m -> {
 ```
 
 
-### Incoming Data {#h3-7-incoming-data}
+### Incoming Data
 
 By using JSONB the incoming data is converted to Java objects. For example, let's look at the `VirtualMemory` class which maps the Python data to a Java object. Each JsonbProperty has a name-value which is not required if the variable has the same name, but for clarity, I prefer to still define it to avoid errors later when the Java variable is renamed.
 
@@ -220,7 +220,7 @@ public class VirtualMemory {
 ```
 
 
-### Queue {#h3-8-queue}
+### Queue
 
 By using the ["org.eclipse.paho.client.mqttv3" dependency](https://www.eclipse.org/paho/), we can easily connect to the queue:
 
@@ -242,7 +242,7 @@ public void messageArrived(String s, MqttMessage mqttMessage) {
 ```
 
 
-### The View Components {#h3-9-the-view-components}
+### The View Components
 
 All the views are split into separate JavaFX Nodes. The overall `MonitorView` is responsible for handling both the `CollapsedView` and the `ExpandedView`, which in turn delegate their responsibility to `LoadView`  
 
@@ -261,7 +261,7 @@ ExpandedView uses CanvasLineChart
 
 All these views implement the `ReadingHandler` callback, which notifies each view when a new reading from the queue is available. Therefore, all views can easily be updated following this notification.
 
-### Animations {#h3-10-animations}
+### Animations
 
 Each dashboard tile expands on click to fill the entire window. This expansion happens as an animation, which seamlessly transforms the `CollapsedView` into the `ExpandedView`. The animation itself makes use of the FXGL animation system using "fluent" API, where we can configure various properties, such as duration and interpolation. We also provide the JavaFX observable property that we are animating (`bg.widthProperty()`) and the values at the start and end of the animation:
 
@@ -276,7 +276,7 @@ animationBuilder()
 ```
 
 
-### Running the Application with Mock Data {#h3-11-running-the-application-with-mock-data}
+### Running the Application with Mock Data
 
 When the application starts, you have the choice to select between an IP address of the Raspberry Pi with the Mosquitto queue and "Mock Data". After selecting this second option, 16 devices will be created inside the application, where each device is driven by the randomly generated data. This is ideal for testing all of the application functions.
 
@@ -300,7 +300,7 @@ When the application starts, you have the choice to select between an IP address
  </figcaption>
 </figure>
 
-### Running the Application with Real Data {#h3-12-running-the-application-with-real-data}
+### Running the Application with Real Data
 
 Restart the application and select the IP address. As soon as data is received from a device with a new IP address, a new tile is created to visualize the data. Start the Python script on a few devices to see the result as shown in the video below.
 
@@ -324,8 +324,8 @@ $ stress --vm 4 --vm-bytes 1024M
 ```
 
 
-Conclusion {#h2-13-conclusion}
-------------------------------
+Conclusion
+----------
 
 It should be noted that something similar could be done with the magnificent [TilesFX library by Gerrit Grunwald](https://github.com/HanSolo/tilesfx) but we deliberately took another approach to show you how you can create visualization components with JavaFX and FXGL yourself.
 

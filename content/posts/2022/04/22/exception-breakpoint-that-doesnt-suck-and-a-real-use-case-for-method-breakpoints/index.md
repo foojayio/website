@@ -36,12 +36,12 @@ There's a solution, and it's discussed in duckling 6 number 7 also covers a lot 
 
 <br />
 
-Filters {#h2-0-filters}
------------------------
+Filters
+-------
 
 Filters solve the problem of "noisy" breakpoints. They let us limit a breakpoint to a very specific narrow area, which we can then inspect more casually. When debugging a major project, this is an invaluable tool at our disposal.
 
-### Catch Class {#h3-1-catch-class}
+### Catch Class
 
 This one feature makes exception breakpoints worth having. But let's back up a bit and discuss the problem... At least for JVM languages.
 
@@ -57,7 +57,7 @@ You can add additional filters to cover other libraries and your own classes as 
 
 Of all the breakpoint types, I feel these have the most untamed potential. I hope more people turn this on by default with this filter (which should itself be the default).
 
-### Instance {#h3-2-instance}
+### Instance
 
 This limits the breakpoint to the current object. This is something I would normally use a conditional breakpoint for. The problem is that conditions might cause a mistake, e.g. in a case where instances are harder to differentiate. Conditions also require more work.
 
@@ -67,7 +67,7 @@ When applying an instance filter, you need to get the object ID from the watch a
 
 ![Instance Id](https://cdn.hashnode.com/res/hashnode/image/upload/v1647961990933/Hj4VQTvII.png)
 
-### Class {#h3-3-class}
+### Class
 
 Class filter seems redundant at first until we look at the more elaborate breakpoints we have in place. A good example is field watchpoint, which can be triggered by access from a different class, assuming the field isn't private.
 
@@ -75,12 +75,12 @@ Let's say you have a public field and you're concerned someone is reading or wri
 
 In that case, you can add a class filter to only break in the field watch point for access that isn't from the set of classes.
 
-### Caller {#h3-4-caller}
+### Caller
 
 Have you ever reached a breakpoint and looked at the stack... Then kept pressing continue until that stack changed to include the method you wanted in the stack. The one that invoked your call. This is where the caller filter comes in. You can exclude a specific stack element from consideration or require a specific method.
 
-Method Breakpoint {#h2-5-method-breakpoint}
--------------------------------------------
+Method Breakpoint
+-----------------
 
 You may recall I mentioned you shouldn't use method breakpoints... They're usually just emulated by line breakpoints to avoid their typical overhead. So there's no actual need for them when placing one on a method.
 
@@ -96,8 +96,8 @@ So how do you deal with the excessive noise?
 
 We can use a conditional breakpoint just like we can in any other area of the program. We can use tracepoints and pretty much any other option in the list above.
 
-Show Objects {#h2-6-show-objects}
----------------------------------
+Show Objects
+------------
 
 For the last section, I'm going to go to the watch instead of the current breakpoint discussion. This is a feature that's so cool and so simple... Yet unfamiliar to many developers.  
 
@@ -109,8 +109,8 @@ When you do that on a `Thread` object, you see the JIT compiler thread. You can 
 
 You can even narrow down that list with an expression statement to make it even more useful for a larger list of objects.
 
-TL;DR {#h2-7-tl-dr}
--------------------
+TL;DR
+-----
 
 I hope this blew your mind. There are so many debugger capabilities that we sometimes gloss over when trying to build an application. The tools we discussed today are all designed for debugging large code bases. Where the capabilities of these tools really shine.
 

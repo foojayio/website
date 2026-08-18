@@ -22,12 +22,12 @@ Since this is the source release, it may still take a bit of time until the down
 
 I will try to remember to [tweet](https://twitter.com/hirt) or say something on the [JMC Facebook page](https://www.facebook.com/javamissionctrl) once the binaries start showing up.
 
-Mission Control 8.1 -- New and Noteworthy {#h2-0-mission-control-8-1-new-and-noteworthy}
-----------------------------------------------------------------------------------------
+Mission Control 8.1 -- New and Noteworthy
+-----------------------------------------
 
 
 
-### General {#h3-1-general}
+### General
 
 
 
@@ -52,7 +52,7 @@ There are more than 80 fixes and improvements in this release. Check out the JMC
 
 
 
-### Core {#h3-2-core}
+### Core
 
 
 
@@ -95,7 +95,7 @@ For convenience, files with the .lz4 extension will now be attempted to be opene
 
 
 
-### JMC Agent Plug-in {#h3-3-jmc-agent-plug-in}
+### JMC Agent Plug-in
 
 
 
@@ -106,8 +106,8 @@ There is now a new agent plug-in available for JMC, which allows configuring whe
 
 
 
-Bug Fixes {#h2-4-bug-fixes}
----------------------------
+Bug Fixes
+---------
 
 
 
@@ -125,8 +125,8 @@ Previously it would not be possible to edit run configuration after installing t
 
 
 
-Known Issues {#h2-5-known-issues}
----------------------------------
+Known Issues
+------------
 
 
 

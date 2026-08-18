@@ -26,7 +26,7 @@ At each stop of the tour, there'll be a brief introduction to Foojay.io followed
 
 Here's the (growing) roster of topics!
 
-### Java Core {#h3-0-java-core}
+### Java Core
 
 * **Getting the Most from Modern Java** , *Simon Ritter (Azul)* : "Java is changing faster than ever with new features being added every six months. Despite being over 25 years old, Java is still adapting to ensure it remains one of the most popular platforms on the planet. With the release of JDK 16, we will have had eight (yes eight!) versions of Java in less than four years. Many of these new features provide exciting new language level changes, as well as useful new APIs. In this session, we'll explore in detail what these changes are and how best to use them (as well as advice on when not to use them). We'll also explain the significance of preview features and incubator modules."  
   **Status:** **Booked April 8, Manchester Java Community**
@@ -39,7 +39,7 @@ Here's the (growing) roster of topics!
 * **Know Thy Neighbours: Dependency Management Done Right,** *Brian Vermeer (Snyk)* : "Modern Java development is heavily dependent on third-party libraries. When looking at an average project, the amount of your code can be as little as 1%. As we do care a lot about the code we write, how do we augment this on the packages we depend on? Let's look at best practices on how to build a proper dependency management strategy. How to pick dependencies, update them, and clean out manifest files with tons of dependencies. And maybe even more important, what happens if we are not on top of this?"  
   **Status:** **Available**
 
-### Java Web {#h3-1-java-web}
+### Java Web
 
 * **Migrating from Imperative to Reactive in the Cloud,** *Nicolas Frankel (Hazelcast)* : "While Reactive Programming is very different from the usual Imperative way, there's no denying it fits "the Cloud", as every bit of resource is used to its fullest. Let's see how to migrate from the latter to the former using a Spring Boot web app as an example. In this demo-based talk, I'll show how to migrate a traditional Spring Boot application that uses WebMVC, Spring Data JPA, and Spring Cache to its Reactive equivalent in a step-by-step process."  
   **Status:** **Booked March 13, Hyderabad JUG**
@@ -66,7 +66,7 @@ Here's the (growing) roster of topics!
 * **How Class Data Sharing Can Speed up Your Application Startup,** *Rudy De Busscher (Payara)* : "Java Byte code is OS independent, which means that your application's startup takes more time than a native image. Using the Class Data Sharing functionality introduced in more recent versions of the JVM, you can prepare your application so that it will load very fast. In this presentation, I'll go into more detail what Class Data Sharing is and how you can use it with OpenJDK versions. With some Jakarta EE demo applications, you will see gains that you can achieve and reduce memory footprint a lot in Docker containers by sharing memory."  
   **Status:** **Available**
 
-### Java Desktop {#h3-2-java-desktop}
+### Java Desktop
 
 * **Cross-Platform User Interface Development in Java with OpenJFX** ,*Johan Vos (Gluon)* : "The JavaFX API's allow Java developers to create Java applications with a user interface. The JavaFX code (API's and implementations) is developed in the OpenJFX project, under the OpenJDK umbrella. JavaFX brings the cross-platform paradigm of Java to user interfaces (UI). A UI created with JavaFX can be rendered on different desktop or laptop systems, but also on mobile devices (iOS/Android) and embedded devices. In this session, we will give an overview of the structure and the capabilities of JavaFX. We will also explain how the development process is organised. We will show demos explaining how the code is integrated with IDE's, and we will discuss features that are currently on the roadmap."  
   **Status:** **Booked April 22, JUG Hamburg**
@@ -75,12 +75,12 @@ Here's the (growing) roster of topics!
 * **Practical Introduction to FXGL Game Engine,** *Almas Baimagambetov (University of Brighton)* : "Modern JavaFX provides hardware acceleration support on a range of platforms, including desktop, mobile and embedded, allowing the development of high-performance cross-platform applications. However, to develop games with JavaFX effectively, numerous domain-specific concepts are needed. To address this need, the FXGL game engine extends JavaFX and brings support for real-world game development techniques. These include the entity-component model, A\* pathfinding, particle systems, sprite sheet animations, and many other features. As a result, JavaFX (including Java and Kotlin) developers can produce games more quickly and more effectively with FXGL."  
   **Status:** **Available**
 
-### Java Embedded {#h3-3-java-embedded}
+### Java Embedded
 
 * **The Future of Java on Raspberry Pi: Java, JavaFX, Raspberry Pi and Electronics:** *Frank Delporte (Toadi)* : "Java on the Raspberry Pi is still a controversial topic, but recent evolutions of both the JDK and OpenJFX have proven they are a perfect match! In this talk, we will look into some examples and discuss what could be the next steps. We will take a look at the current state of Java, JavaFX, and Pi4J on the Raspberry Pi. Still, most Java developers didn't consider the Raspberry Pi yet to be the perfect board to run their applications, but with its low price but high specifications, the Raspberry Pi is opening whole new worlds."  
   **Status:** **Booked March 17, Virtual JUG**
 
-### Java Tools {#h3-4-java-tools}
+### Java Tools
 
 * **DevOps Tools for Java Developers,** *Steve Chin (JFrog)* **:** "With the rise of DevOps, low cost Cloud Computing, and emerging Container technologies, the landscape for how you approach development has dramatically changed. This talk is focused on helping Java developers to adapt to this new landscape and take advantage of microservices, serverless, and cloud-native technologies with the latest DevOps techniques to simplify their build and create hyperproductive teams. Some of the technologies you will learn about in this talk include source control, build declaration, CI/CD, package management, containerization, and security. Learn from the combined experience of the presenters who are experts in the Java and DevOps domains on the best tools, technologies, and methodologies to build your next cloud-native application or refactor your monolith. We cover the entire DevOps toolchain from source control through CI/CD through containerized deployments with an emphasis on maintaining efficiency and control from the source code and dependencies."  
   **Status:** **Booked April 6, Coimbra JUG**

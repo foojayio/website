@@ -29,8 +29,8 @@ Luckily all these topics, and so many more are covered in the magnificent new bo
  <img fetchpriority="high" decoding="async" src="image-830x1024.png" alt="" class="wp-image-102342" style="width:456px;height:563px" width="456" height="563">
 </figure>
 
-About the book {#h2-0-about-the-book}
--------------------------------------
+About the book
+--------------
 
 price: €27.99 for the eBook  
 
@@ -42,34 +42,34 @@ pages: 202
 
 ISBN: 9781837631278
 
-Content {#h2-1-content}
------------------------
+Content
+-------
 
 The book itself consist of 3 overarching sections:
 
-### Persistence in cloud computing {#h3-2-persistence-in-cloud-computing}
+### Persistence in cloud computing
 
 * a brief history of persistence, and involved trade-offs with distributed/cloud systems
 * the different flavours of databases: relational, NoSQL (and it's subvariants) \& NewSQL
 * possible architectures and strategies, including implications \& pitfalls
 * persistence layer design patterns \& mapping strategies (or lack thereof)
 
-### Jakarta EE, MicroProfile, modern persistence technologies \& their trade-offs {#h3-3-jakarta-ee-microprofile-modern-persistence-technologies-their-trade-offs}
+### Jakarta EE, MicroProfile, modern persistence technologies \& their trade-offs
 
 * Jakarta EE and JPA: what's the state, what can be achieve with Quarkus \& Panache, and performance considerations
 * NoSQL: what do we need to keep in mind, what can we achieve with JNoSQL, and what are the pros/cons of the different variants
 * JOOQ: what is it, and why should I consider using it?
 * in-memory persistence: use cases, and what is the object-relational impedance mismatch
 
-### Architectural considerations {#h3-4-architectural-considerations}
+### Architectural considerations
 
 * Polyglot setups: what are the (dis)advantages?
 * architecting distributed systems: what are some anti-patterns and fallacies, and how to resolve them
 * modernization strategies \& data integration: anti-patterns \& bad practices to avoid, change data capture, cloud technologies \& offerings
 * the power of documentation, data-domain testing and the importance of proper architecture
 
-My thoughts {#h2-5-my-thoughts}
--------------------------------
+My thoughts
+-----------
 
 I can heartily recommend this book, it offers a lot of valuable insights into persistence in Cloud computing, the involved technologies, and technical and architectural considerations by two developers with years of experience.
 

@@ -21,15 +21,15 @@ enlighterjs: true
 frozen: false
 ---
 
-Takeaways {#h2-0-takeaways}
----------------------------
+Takeaways
+---------
 
 * RISC-V is an open standard instruction set architecture that anyone can use to build new processors and accelerators, for example, for AI.
 * oneAPI Construction Kit (OCK) is a new framework that allows software developers and system designers to bridge the gap between hardware accelerators and open standards, by enabling a programming system to implement domain specific instructions for modern hardware such as RISC-V accelerators and custom processors.
 * TornadoVM, a parallel programming framework for Java, can take advantage of OCK to offload and accelerate Java workloads on RISC-V chips. This post shows how to run on RISC-V CPUs with vector extensions.
 
-Introduction {#h2-1-introduction}
----------------------------------
+Introduction
+------------
 
 [RISC-V](https://riscv.org/ "RISC-V") is an open standard instruction set architecture (ISA) based on the principles of reduced instruction sets (RISC). RISC-V is freely available under open licences, allowing anyone to design, modify and implement RISC-V processors.
 
@@ -43,12 +43,12 @@ Furthermore, OCK could also be used as a runtime dispatcher of OpenCL and SPIR-V
 
 But, can we run Java workloads on these accelerators? Well, with the help of TornadoVM, a parallel programming framework for acceleration of Java workloads, it is possible. This post explains how to configure and install OCK to work as a backend for TornadoVM, allowing Java developers to access CPUs from different vendors, including RISC-V accelerators. Are you curious? Let's find out how this is possible.
 
-OCK for TornadoVM {#h2-2-ock-for-tornadovm}
--------------------------------------------
+OCK for TornadoVM
+-----------------
 
 OCK is in active development, and it is built based on the LLVM compiler. This post explains how to obtain the main dependencies from source files and Linux systems. All components explained in this post are fully open source.
 
-### Installing prerequisites: {#h3-3-installing-prerequisites}
+### Installing prerequisites:
 
 If you use Fedora or Red Hat-based distributions, you will need to install the following dependencies.
 
@@ -58,7 +58,7 @@ sudo pip3 install lit cmakelint
 ```
 
 
-### Installation of OCK for TornadoVM {#h3-4-installation-of-ock-for-tornadovm}
+### Installation of OCK for TornadoVM
 
 Let's configure OCK to run on RISC-V accelerators and use them as devices for TornadoVM. In the case of RISC-V, since I do not have any hardware available, TornadoVM can run on a RISC-V simulator from an X86/64 machine.
 
@@ -489,7 +489,7 @@ export SPIKE_SIM_DEBUG=1
 
 We can even run step by step with a debugger that is included within the RefSi Simulator. How cool is this?
 
-### Running with the SPIR-V Backend on RISC-V Devices {#h3-5-running-with-the-spir-v-backend-on-risc-v-devices}
+### Running with the SPIR-V Backend on RISC-V Devices
 
 TornadoVM, as in version 1.0.7, supports three different backends: OpenCL, NVIDIA PTX and SPIR-V. When using OCK, we can program devices in OpenCL C, and SPIR-V. So far, we have only used the SPIR-V backend, so how do we also enable the SPIR-V backend? What we need to do is to reconfigure TornadoVM to also use SPIR-V devices.
 
@@ -682,8 +682,8 @@ Task info: s0.t0
 ```
 
 
-Conclusions {#h2-6-conclusions}
--------------------------------
+Conclusions
+-----------
 
 Hardware specialisation is now everywhere and modern computing systems contain a wide range of processors for computing specialised tasks more efficiently, such as processors for AI and deep learning.
 
@@ -691,7 +691,7 @@ However, we also need to program and access new hardware accelerators and exploi
 
 This post just scratches the surface of the possibilities of execution and optimization of Java programs on modern hardware. I have written [a more detailed blogpost](https://jjfumero.github.io/posts/2024/09/10/tornadovm-ock "a more detailed blogpost") in which I also compared OCK on Intel and ARM CPUs with Java threads, and shows the potential for these types of solutions to run on modern and parallel CPUs.
 
-Acknowledgments {#h2-7-acknowledgments}
----------------------------------------
+Acknowledgments
+---------------
 
 I would like to thank [Colin Davidson](https://www.linkedin.com/in/colin-davidson-6a4b042/ "Colin Davidson") from [Codeplay](https://codeplay.com/ "Codeplay") for the support regarding the oneAPI Construction Kit for TornadoVM.

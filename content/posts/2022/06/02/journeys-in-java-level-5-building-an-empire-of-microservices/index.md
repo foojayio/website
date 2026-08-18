@@ -38,8 +38,8 @@ Neither of these may seem daunting, but I ran into a few unexpected gotchas, whi
 
 Let's get started!
 
-Architecture {#_architecture}
------------------------------
+Architecture
+------------
 
 We began this project with minimum functionality explained in the [level 1 blog post](https://jmhreif.com/blog/microservices-level1/). Currently, our microservices system consists of three services and a database container. While still pretty small in the microservices world, issues like coordination are already surfacing, so this is a good time to introduce orchestration tools like Docker Compose that attempt to reduce that pain.
 
@@ -51,8 +51,8 @@ Here is the updated architecture:
 
 The border around each service represents the container housing each application. All of the services are encompassed in a larger grey area that shows how Docker Compose groups these services together. Containerizing our applications means a couple of code changes to minimize environment or configuration changes later. The first of these is to create additional methods in each service for testing.
 
-Added test methods {#_added_test_methods}
------------------------------------------
+Added test methods
+------------------
 
 I ran into some errors when testing endpoints, but it was hard to tell the root cause (database, authentication, Docker compose, or something else entirely). To help debugging, I added a method to each service called `liveCheck()` that elimiates a database call, returning a string to confirm our service is up.
 
@@ -64,8 +64,8 @@ All code for these methods is on Github, linked for each service below.
 * Service2: [liveCheck() method](https://github.com/JMHReif/microservices-level5/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L37)
 * Service3: [liveCheck() and getAuthor() methods](https://github.com/JMHReif/microservices-level5/blob/main/service3/src/main/java/com/jmhreif/service3/Service3Application.java#L33)
 
-Containerizing - Service 1 {#_containerizing_service_1}
--------------------------------------------------------
+Containerizing - Service 1
+--------------------------
 
 To create a container for service1, we need a Dockerfile in the application folder (`/service1`).
 
@@ -89,7 +89,7 @@ First, I want a Java environment in the container, so Docker will pull openjdk's
 
 In the next section, we will see how to prepare for a containerized application.
 
-### Service 1 - packaging the application {#_service_1_packaging_the_application}
+### Service 1 - packaging the application
 
 The first step is to package the app into a .jar file by running `mvn clean package` from the service1 folder.
 
@@ -101,32 +101,32 @@ Once you package the application, you can verify by navigating to the service1 `
 
 Next, we could go ahead and build this individual container, but we want to manage all of the containers together. Instead, we will use wait and use Docker compose, so let's do the same steps for service2.
 
-Containerizing - Service 2 {#_containerizing_service_2}
--------------------------------------------------------
+Containerizing - Service 2
+--------------------------
 
 Creating a container for service2 looks nearly identical to what we did above, with only differing names for the application's filename.
 
 For brevity, [Service2's Dockerfile](https://github.com/JMHReif/microservices-level5/blob/main/service2/Dockerfile) is on Github.
 
-### Service 2 - packaging the application {#_service_2_packaging_the_application}
+### Service 2 - packaging the application
 
 We also need to package the service2 application. From the service2 folder, we run the `mvn clean package` command to bundle up the application. We can verify it worked by checking the `target` folder to find a `service2-0.0.1-SNAPSHOT.jar` file.
 
 Let's do the same for service3, for the third and final time!
 
-Containerizing - Service 3 {#_containerizing_service_3}
--------------------------------------------------------
+Containerizing - Service 3
+--------------------------
 
 Steps for service3 mirror what we have done for the previous two services, so we will condense with a link to [service3's Dockerfile](https://github.com/JMHReif/microservices-level5/blob/main/service3/Dockerfile) on Github.
 
-### Service 3 - packaging the application {#_service_3_packaging_the_application}
+### Service 3 - packaging the application
 
 We will run `mvn clean package` in the service3 folder, which we can verify in the `target` folder with a file named `service3-0.0.1-SNAPSHOT.jar`.
 
 Now we are ready to set up Docker Compose to manage all of our prepped services.
 
-Docker compose for everything {#_docker_compose_for_everything}
----------------------------------------------------------------
+Docker compose for everything
+-----------------------------
 
 We need to create a [YAML](https://en.wikipedia.org/wiki/YAML) file with container details, configuration, and commands we want Compose to execute.
 
@@ -154,7 +154,7 @@ services:
 
 The first field displays the Docker compose version, though it is not required. Next, we will list our services. Instead of running our database container separately as we have been, we include it here so that Docker Compose handles everything. The child fields for each service contain a few details and configurations. We will go through those in the next subsections.
 
-### Goodreads-db {#_goodreads_db}
+### Goodreads-db
 
 Under `goodreads-db`, we have the container name, so we can reference and identify the container by name. The image field specifies whether we want to use an existing image (as we have done here) or create a new image.
 
@@ -172,7 +172,7 @@ The final subfield in the `goodreads-db` service is to mount volumes from the lo
 
 Now that we got through our first service definition, the following ones should be faster. Let's look at the `goodreads-svc1` next.
 
-### Goodreads-svc1 {#_goodreads_svc1}
+### Goodreads-svc1
 
 ```
 ......
@@ -199,7 +199,7 @@ If you look at service1's `application.properties` file, you will see that the f
 
 Next is service2.
 
-### Goodreads-svc2 {#_goodreads_svc2}
+### Goodreads-svc2
 
 ```
 ......
@@ -247,7 +247,7 @@ Changes to the application need to be repackaged, so we can go back to the servi
 
 Let's move on to service3.
 
-### Goodreads-svc3 {#_goodreads_svc3}
+### Goodreads-svc3
 
 ```
 ......
@@ -270,7 +270,7 @@ We have all of the same fields (and some of the same values) for `service3` as w
 
 The last piece is to define our custom network.
 
-### docker-compose.yml network {#_docker_compose_yml_network}
+### docker-compose.yml network
 
 ```
 networks:
@@ -282,8 +282,8 @@ We need to define a high-level field that defines our custom Docker network that
 
 You can view the [full `docker-compose.yml` file](https://github.com/JMHReif/microservices-level5/blob/main/docker-compose.yml) on Github.
 
-Put it to the test {#_put_it_to_the_test}
------------------------------------------
+Put it to the test
+------------------
 
 Docker compose will handle starting all of the containers in the proper order, so all we need to do is assemble the command.
 
@@ -308,8 +308,8 @@ Next, we can test our endpoints.
 
 When everything looks good, we can run `docker-compose down`, which will stop each of the services in necessary order and remove those along with the custom network. Clearing everything out will help give us a clean run each time we start the services.
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 This post covered quite a bit of material, although we did not alter or add any more services. We added a couple extra methods to each service to help us test/debug issues with the applications, then we packaged the applications into JAR files. Next, we created Dockerfiles for each service that would allow Docker to create a container that copies and executes the service JAR.
 
@@ -319,8 +319,8 @@ Finally, we saw how to run everything with a single `docker-compose` command and
 
 There is so much more we can explore with microservices, such as adding more data sources, additional services, asynchronous communication through messaging platforms, cloud deployments, and much more. I hope to catch you in future improvements on this project. Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github: [microservices-level5](https://github.com/JMHReif/microservices-level5) repository
 * Github: [Meta repository for all related content](https://github.com/JMHReif/microservices-java)

@@ -82,8 +82,8 @@ def createVehicle(vehicleType: String): SVehicle = vehicleType match {
 
 Example 3. VehicleFactory, method "createVehicle" in Scala - match mechanism
 
-Conclusions {#h2-0-conclusions}
--------------------------------
+Conclusions
+-----------
 
 The "*VehicleFactory*" has been implemented in three different JVM languages: Java, Kotlin and Scala. It seems that commonly used critique about the verbosity in Java is not really valid in this example. Actually, each of three different implementations look very similar.
 
@@ -141,8 +141,8 @@ java.lang.IllegalArgumentException: illegal type: BLA
 
 Example 4. Vehicle factory causes exceptions with StackTraces
 
-References: {#h2-1-references}
-------------------------------
+References:
+-----------
 
 1. GitHub jvm-language-examples : https://github.com/mirage22/jvm-language-examples
 2. JEP-420, Pattern Matching for switch (Second Preview): https://openjdk.java.net/jeps/420

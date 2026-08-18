@@ -32,7 +32,7 @@ In this post, we will guide you through setting up and integrating these two tec
 
 So, let's dive in and get started!
 
-### Pizza in motion: the solution architecture for a pizza delivery service {#h3-0-pizza-in-motion-the-solution-architecture-for-a-pizza-delivery-service}
+### Pizza in motion: the solution architecture for a pizza delivery service
 
 First, let's understand what we are going to build. Most of us love pizza, so let's use a pizza delivery service as an example. Our pizza delivery service receives orders from multiple users in real time; these orders contain a timestamp, user_id, pizza_type and quantity. We'll generate orders using Python, ingest them into Redpanda, then use Hazelcast to process them.
 
@@ -44,11 +44,11 @@ Here's a quick diagram of what this solution looks like.
 
 ![](https://dz2cdn1.dzone.com/storage/temp/17079264-hazelcast-redpanda.png)
 
-### Tutorial: real-time stream processing with Redpanda and Hazelcast {#h3-1-tutorial-real-time-stream-processing-with-redpanda-and-hazelcast}
+### Tutorial: real-time stream processing with Redpanda and Hazelcast
 
 Before diving in, let's make sure we have all the necessary prerequisites in place. You can download the demo from [this GitHub repository](https://github.com/fawazghali/redpanda-hazelcast).
 
-### Setting up Redpanda {#h3-2-setting-up-redpanda}
+### Setting up Redpanda
 
 For the scope of this tutorial, we will [set up a Redpanda cluster with Docker Compose](https://docs.redpanda.com/docs/get-started/quick-start/?num-brokers=three). So, make sure you have [Docker Compose installed](https://docs.docker.com/compose/install/) locally.
 
@@ -204,7 +204,7 @@ if __name__ == "__main__":
 ```
 
 
-### Setting up Hazelcast {#h3-3-setting-up-hazelcast}
+### Setting up Hazelcast
 
 Start a Hazelcast local cluster. This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
 
@@ -217,7 +217,7 @@ hz -V
 
 Now that we understand what we are going to build, and have prerequisites set up, let's jump right into the solution.
 
-### Step 1: Start the Redpanda cluster {#h3-4-step-1-start-the-redpanda-cluster}
+### Step 1: Start the Redpanda cluster
 
 Let's start the [Redpanda cluster](https://docs.redpanda.com/docs/21.11/deployment/guide-rpk-container/) by running the following command in a terminal. Make sure you are in the same location where you saved the `docker-compose.yml` file.
 
@@ -237,7 +237,7 @@ An output similar to the following confirms that the Redpanda cluster is up and 
 ```
 
 
-### Step 2: Run Hazelcast {#h3-5-step-2-run-hazelcast}
+### Step 2: Run Hazelcast
 
 You can run the following command to start a Hazelcast cluster with one node.
 
@@ -248,7 +248,7 @@ hz start
 
 To add more members to your cluster, open another terminal window and rerun the start command.
 
-### Step 3: Run SQL on Hazelcast {#h3-6-step-3-run-sql-on-hazelcast}
+### Step 3: Run SQL on Hazelcast
 
 We will use the SQL shell---the easiest way to run SQL queries on a cluster. You can use SQL to query data in maps and Kafka topics. The results can be sent directly to the client or inserted into maps or Kafka topics. You can also use Kafka [Connector](https://docs.hazelcast.com/hazelcast/latest/integrate/kafka-connector) which allows you to stream, filter, and transform events between Hazelcast clusters and Kafka. You can do so by running the following command:
 
@@ -257,7 +257,7 @@ bin/hz-cli sql
 ```
 
 
-### Step 4: Ingest into Hazelcast iMap (pizzastream) {#h3-7-step-4-ingest-into-hazelcast-imap-pizzastream}
+### Step 4: Ingest into Hazelcast iMap (pizzastream)
 
 Using the SQL command, we create pizzastream Map:
 
@@ -277,7 +277,7 @@ OPTIONS (
 ```
 
 
-### Step 5: Enrich the stream with recommendations data (recommender) {#h3-8-step-5-enrich-the-stream-with-recommendations-data-recommender}
+### Step 5: Enrich the stream with recommendations data (recommender)
 
 For this step, we create another Map:
 
@@ -311,7 +311,7 @@ INSERT INTO recommender VALUES
 ```
 
 
-### Step 6: Combine both Maps using SQL {#h3-9-step-6-combine-both-maps-using-sql}
+### Step 6: Combine both Maps using SQL
 
 Based on the above two Maps, we send the following SQL query:
 
@@ -329,7 +329,7 @@ AND recommender.extra2 = 'Soup';
 ```
 
 
-### Step 7: Send the combined data stream to Redpanda {#h3-10-step-7-send-the-combined-data-stream-to-redpanda}
+### Step 7: Send the combined data stream to Redpanda
 
 To send the results back to Redpanda, we create a Jet job in Hazelcast that stores the SQL query results into a new Map, then into Redpanda:
 
@@ -364,8 +364,8 @@ AND recommender.extra2 = 'Soup';
 ```
 
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 In this post, we explained how to build a pizza delivery service with Redpanda and Hazelcast.
 

@@ -25,8 +25,8 @@ frozen: false
 
 This is the first article in a three-part series. Part 2 covers short-term and long-term memory; Part 3 introduces stateful workflow checkpointing with pause/resume.
 
-The problem {#h2-0-the-problem}
--------------------------------
+The problem
+-----------
 
 It's 2 a.m. Suddenly, an alert pops up indicating abnormal CPU usage on the payment services. The on-call engineer opens their laptop, logs into the monitoring dashboards, and begins the hunt. One by one, he searches the runbooks on Confluence, checks the Slack chats, and opens the GitHub wikis and documents shared during the design phase. By the time he finds any useful information, ten minutes have already passed.
 
@@ -36,8 +36,8 @@ We're talking about a problem that, in theory, has already been solved. The team
 
 So, this is one of the many problems we can solve with Retrieval-Augmented Generation (RAG).
 
-What we are building {#h2-1-what-we-are-building}
--------------------------------------------------
+What we are building
+--------------------
 
 In this series of articles, we will build an Operations Assistant: a Spring AI-based Java application that allows engineers to ask questions in plain English and receive answers that help them perform operations and solve problems, based on their operational knowledge base.
 
@@ -45,8 +45,8 @@ In this first article, we'll focus on the foundation: loading documentation into
 
 In parts 2 and 3, we will add conversational memory and persistence, leveraging MongoDB as a unified database.
 
-Why RAG and why MongoDB Atlas {#h2-2-why-rag-and-why-mongodb-atlas}
--------------------------------------------------------------------
+Why RAG and why MongoDB Atlas
+-----------------------------
 
 An LLM is a perfect tool for generating generic responses, but it stops being effective the moment I ask it for specific information about your systems. And the problem is clear: it has never seen your runbooks, read your documentation, reviewed your postmortems, or understood the naming convention your team decided on over a post-work beer three years ago.
 
@@ -62,8 +62,8 @@ Documents and their embeddings coexist within the same collection and can be ret
 
 Another truly interesting and useful feature is metadata filtering. Every piece of documentation we save in our database includes metadata, such as the system it refers to, the environment, the associated severity, and which team is responsible. When a request is made, the retrieval advisor can pre-filter the vector search based on this metadata. In the example scenario, a request regarding the payments service in the production environment will bring to the model's attention only the runbooks associated with this service and this environment. This is particularly efficient and accurate when the database grows.
 
-How the Pieces Fit Together {#h2-3-how-the-pieces-fit-together}
----------------------------------------------------------------
+How the Pieces Fit Together
+---------------------------
 
 Before diving into the code, it's helpful to have a clear picture of what we're about to build.
 
@@ -80,8 +80,8 @@ The pipeline is shown below:
 
 The true strength of Spring AI lies in its abstraction, which allows the controller and service to remain unaware of which model is being used---whether it's GPT-5.4 or Sonnet 4.6---or whether the database is MongoDB Atlas or PostgreSQL. Changing the model or database is a matter of configuration, not a new development task. A game changer.
 
-Getting the Project Running {#h2-4-getting-the-project-running}
----------------------------------------------------------------
+Getting the Project Running
+---------------------------
 
 Now that we've laid the groundwork for understanding what we're building, let's get started with the implementation. The project requires Java 21, Maven 3.9+, an OpenAI API key, and a MongoDB Atlas cluster.
 
@@ -123,8 +123,8 @@ All of this works thanks to Spring AI, which is integrated into the application 
 
 Everything else consists of standard Spring Boot dependencies.
 
-The Ingestion Pipeline {#h2-5-the-ingestion-pipeline}
------------------------------------------------------
+The Ingestion Pipeline
+----------------------
 
 The ingestion pipeline has a single task: taking a document, dividing it into chunks of the right size, and saving each chunk along with its embedding and corresponding metadata in the Atlas database. That's it.
 
@@ -136,8 +136,8 @@ As mentioned earlier, metadata is attached to each chunk. For example, within th
 
 The application exposes an API for manually ingesting a text document and its associated metadata as a JSON body. The application also provides sample runbooks in Markdown, covering scenarios such as detecting abnormal CPU usage, service rollbacks, disk space alerts, and network latency. A POST request to the API at /api/ops/knowledge/ingest/sample automatically loads all of them, allowing you to have a working system right away.
 
-The Retrieval Pipeline {#h2-6-the-retrieval-pipeline}
------------------------------------------------------
+The Retrieval Pipeline
+----------------------
 
 Spring AI truly stands out in the retrieval phase, making many of the operations performed transparent. The ChatClient is configured with the QuestionAnswerAdvisor, which allows every request coming from the chat to be wrapped in a retrieval operation. From the controller's perspective, an incoming request translates into a series of sequential steps that produce an outgoing response, all linked together within a single method chain.
 
@@ -155,8 +155,8 @@ Throughout this process, the controller remains extremely lightweight, simply va
 
 This separation of responsibilities will become clearer and more useful as we continue through the tutorial. In Parts 2 and 3, we will add new advisors to the chain---for conversational memory and long-term memory---all without touching the controller or the exposed interfaces.
 
-The Atlas Vector Search Index {#h2-7-the-atlas-vector-search-index}
--------------------------------------------------------------------
+The Atlas Vector Search Index
+-----------------------------
 
 Before you can run any similarity search, you must have a Vector Search index on the *knowledge_chunks* collection. The Atlas cluster tier affects how the index is created.
 
@@ -187,8 +187,8 @@ If you want to create the index manually, you need to access the Atlas UI, navig
 ```
 
 
-Trying It Out {#h2-8-trying-it-out}
------------------------------------
+Trying It Out
+-------------
 
 We're finally ready to test. Open your browser to[http://localhost:8080](http://localhost:8080/) while the application is running, click "Load Sample Runbooks," and wait a few seconds for the sample runbooks to finish loading. Now, try typing the following in the chat panel:
 
@@ -203,8 +203,8 @@ Finally, review all recent deployments within the cluster. All these operations 
 
 Let's now try asking another question using the optional filters for *system* and *environment*, and see how the retrieved context changes. If we ask a question with the payment-service and prod filters, the retrieval mechanism retrieves a different subset of chunks compared to the unfiltered version, since these filters narrow the set of candidates before the similarity search.
 
-Conclusion and What's Next {#h2-9-conclusion-and-what-s-next}
--------------------------------------------------------------
+Conclusion and What's Next
+--------------------------
 
 In this tutorial, we built a RAG system that answers questions by providing responses based on the content of your documentation. To do this, we first gathered a collection of runbooks written in Markdown and divided them into appropriately sized chunks. All of these chunks were embedded within the MongoDB Vector Store, along with associated metadata. Everything was connected to an LLM using a Spring Boot advisor.
 

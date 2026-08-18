@@ -23,7 +23,7 @@ Since this is our first blog post of the new year, we are going to look back on 
 
 We also have some exciting feature updates so let us get started.
 
-### Highlights of 2021 {#h3-0-highlights-of-2021}
+### Highlights of 2021
 
 2021 was a productive year for Java on Visual Studio Code. We have made substantial improvements on all extensions in the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack). Among those achievements, we'd like to highlight a few important ones:
 
@@ -47,7 +47,7 @@ Better getting started experience is always one of the top priorities. In 2021, 
 
 We also re-designed our welcome view and help center page so that newcomers can find the guidance they needed.
 
-### Various user experience improvements {#h3-1-various-user-experience-improvements}
+### Various user experience improvements
 
 Throughout 2021, numerous user experience improvements were also made to optimize the developer productivity overall. To name a few remarkable ones:
 
@@ -55,7 +55,7 @@ Throughout 2021, numerous user experience improvements were also made to optimiz
 * Project Management -- We no longer generate .project metadata files in project root folder! This was one of the top community voted issues and we finally delivered a long awaited solution. Click [here](https://devblogs.microsoft.com/java/say-goodbye-to-project-files-in-1-1-0/) to see how we addressed the problem.
 * Code actions -- We [added several features](https://devblogs.microsoft.com/java/java-on-visual-studio-code-update-september-2021/) so that operations like getter/setter and construction generation were more easily accessed, and we will continue to make code actions more accessible.
 
-### Spring support in GitHub Codespaces {#h3-2-spring-support-in-github-codespaces}
+### Spring support in GitHub Codespaces
 
 Besides the core Java extension releases, there were also exciting updates in remote development area.
 
@@ -63,13 +63,13 @@ In September 2021, it was announced that Spring framework was fully enabled on [
 
 Please visit [our past blogs](https://devblogs.microsoft.com/java/category/vscode/) to learn about all the improvements that we made through 2021.
 
-### User growth {#h3-3-user-growth}
+### User growth
 
 In addition to product updates, we also witnessed the growth of our users during 2021. We now have more than 1.5 million users developing Java in VS Code.
 
 This is the result of continuous feedback from our users and it wouldn't have been possible without the support from the community.
 
-### 2022 Roadmap {#h3-4-2022-roadmap}
+### 2022 Roadmap
 
 Now onto the exciting part, let us talk about our roadmap for year 2022. Here is a picture that summarizes our investment areas.
 
@@ -127,7 +127,7 @@ With cloud-native development approach, developers need to deal with microservic
 
 With Visual Studio Code's[remote development extensions](https://code.visualstudio.com/docs/remote/remote-overview) and [GitHub Codespaces](https://code.visualstudio.com/docs/remote/codespaces), we will aim to make cloud-native development an awesome experience for Java developers.
 
-### Feature Updates {#h3-5-feature-updates}
+### Feature Updates
 
 Besides the roadmap, we also have some exciting new product features to share --
 
@@ -155,7 +155,7 @@ Doing either one of the options above will lead you to the formatter settings vi
 
 [![Formatter](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/formatter.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/formatter.png)
 
-### Feedback and suggestions {#h3-6-feedback-and-suggestions}
+### Feedback and suggestions
 
 There will be lots of exciting updates for Java on Visual Studio Code in 2022, and as always, your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to give us feedback
 
@@ -163,7 +163,7 @@ There will be lots of exciting updates for Java on Visual Studio Code in 2022, a
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-### Resources {#h3-7-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

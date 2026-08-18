@@ -35,8 +35,8 @@ You could write your own application, or use the generic JDBC Kafka connector to
 
 Let's see how the integration works.
 
-Requirements {#h2-0-requirements}
----------------------------------
+Requirements
+------------
 
 Make sure you already have:
 
@@ -44,8 +44,8 @@ Make sure you already have:
 * A running QuestDB (for example, `docker run --add-host=host.docker.internal:host-gateway -p 9000:9000 -p 9009:9009 -p 8812:8812 -p 9003:9003 questdb/questdb:latest`)
 * A local [JDK installation](https://foojay.io/java-quick-start/install-java/)
 
-Adding the QuestDB Sink Connector to Kafka {#h2-1-adding-the-questdb-sink-connector-to-kafka}
----------------------------------------------------------------------------------------------
+Adding the QuestDB Sink Connector to Kafka
+------------------------------------------
 
 The Apache Kafka distribution includes the Kafka Connect framework, but the QuestDB-specific zip file must be downloaded from the [QuestDB Kafka connector GH page](https://github.com/questdb/kafka-questdb-connector/releases/tag/v0.6).
 
@@ -65,8 +65,8 @@ cp ./*.jar /path/to/kafka_2.13-2.6.0/libs
 ```
 
 
-Configuration {#h2-2-configuration}
------------------------------------
+Configuration
+-------------
 
 The connector reads messages from a topic in Kafka, and writes them to a table in QuestDB using the ILP protocol, so the minimum configuration you need is the topic name, QuestDB host and port, and the table name.
 
@@ -87,8 +87,8 @@ key.converter=org.apache.kafka.connect.storage.StringConverter
 ```
 
 
-Start Kafka {#h2-3-start-kafka}
--------------------------------
+Start Kafka
+-----------
 
 Go to the Kafka home directory and start Zookeeper
 
@@ -111,8 +111,8 @@ bin/connect-standalone.sh config/connect-standalone.properties config/questdb-co
 ```
 
 
-Publish some events {#h2-4-publish-some-events}
------------------------------------------------
+Publish some events
+-------------------
 
 We are going to start and interactive Kafka console producer, so you can post some messages into a topic. Just make sure the topic name is the one we have in the configuration file.
 
@@ -142,8 +142,8 @@ You can send one or two more messages, maybe add an extra field to one of them j
 
 Note: If you preferred, you could have created your table beforehand in QuestDB issuing a [CREATE TABLE](https://questdb.io/docs/reference/sql/create-table/) statement
 
-Querying your time-series data {#h2-5-querying-your-time-series-data}
----------------------------------------------------------------------
+Querying your time-series data
+------------------------------
 
 If all went well, your data has already been stored in QuestDB and can be queried using SQL either via a [Postgresql-compatible library](https://questdb.io/docs/develop/query-data/#postgresql-wire-protocol), or the handy [REST API](https://questdb.io/docs/develop/query-data/#http-rest-api).
 
@@ -158,8 +158,8 @@ SELECT * FROM example_table
 ```
 
 
-That's a wrap {#h2-6-that-s-a-wrap}
------------------------------------
+That's a wrap
+-------------
 
 As you can see, consuming messages from Kafka and into QuestDB is quite painless using the built-in connector.
 

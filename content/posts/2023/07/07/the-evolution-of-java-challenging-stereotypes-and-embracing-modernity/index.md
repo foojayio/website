@@ -24,8 +24,8 @@ This gentleman, having worked with Java some 15-20 years ago, was surprised to l
 
 However, this stereotype is not only outdated but also inaccurate. Java is no longer a slow language; in fact, it's considered one of the most performant languages, and in some scenarios, it even outperforms C++. In this article, we will tackle and dismantle such stereotypes as we explore the exciting evolution of Java.
 
-Java: From Its Inception to Now {#h2-0-java-from-its-inception-to-now}
-----------------------------------------------------------------------
+Java: From Its Inception to Now
+-------------------------------
 
 When James Gosling and his team at Sun Microsystems released Java in 1995, it was touted as a revolutionary step in the world of programming languages. Java's "write once, run anywhere" promise and its strong emphasis on security made it an immediate hit.
 
@@ -33,12 +33,12 @@ However, as the software landscape began to shift towards more dynamic and flexi
 
 Today, thanks to ongoing and substantial upgrades to the language, Java is shedding these stereotypes. A slew of new features, alongside important improvements in existing ones, have kept Java not only relevant but also increasingly attractive for the modern developer.
 
-Embracing Modernity: The New Features of Java {#h2-1-embracing-modernity-the-new-features-of-java}
---------------------------------------------------------------------------------------------------
+Embracing Modernity: The New Features of Java
+---------------------------------------------
 
 The modern versions of Java have brought in several compelling features that challenge the idea of Java as an old and rigid language.
 
-### **Flexible Main Methods** {#h3-2-flexible-main-methods}
+### **Flexible Main Methods**
 
 In a departure from the traditional '***public static void main(String\[\] args)***', Java now allows additional entry points to an application, providing more flexibility and expressiveness in how programs are written and executed.
 
@@ -64,7 +64,7 @@ void main() {
 
 If you are interested in reading more, read my news item published on infoQ: [Breaking down Barriers: Introducing JDK 21's Approach to Beginner-Friendly Java Programming](https://www.infoq.com/news/2023/05/beginner-friendly-java/)
 
-### **Records** {#h3-3-records}
+### **Records**
 
 With Records, Java provides a compact syntax for declaring classes which are supposed to be dumb data holders. This reduces the boilerplate code developers have to write, making the language learner more efficient. Consider the following class:  
 
@@ -132,13 +132,13 @@ public record User(Long id, String firstName, String lastName) {}
 
 And that's it.
 
-### **Sealed Classes** {#h3-4-sealed-classes}
+### **Sealed Classes**
 
 Sealed classes (and interfaces) give developers more control over inheritance, providing a level of flexibility hitherto unseen in the Java world.
 
 If you're interested in knowing more about the case of sealed classes, read this article: [Java Sealed Classes: Building Robust and Secure Applications](https://foojay.io/today/java-sealed-classes-in-action-building-robust-and-secure-applications/)
 
-### **Pattern Matching, Unnamed Patterns and Variables** {#h3-5-pattern-matching-unnamed-patterns-and-variables}
+### **Pattern Matching, Unnamed Patterns and Variables**
 
 The inclusion of these features ushers in a new level of expressiveness in the language, reducing the verbosity and making code easier to read and write.
 
@@ -155,7 +155,7 @@ switch (b) {
 
 If you're interested in knowing more about it, read this article: [JEP 443: Unnamed Patterns and Variables Aims to Improve Java Code Readability](https://www.infoq.com/news/2023/06/streamlining-java-with-jep-443/)
 
-### **String Templates** {#h3-6-string-templates}
+### **String Templates**
 
 Java developers can now enhance the language's string literals and text blocks with string templates that can produce specialized results by coupling literal text with embedded expressions and processors.
 
@@ -191,7 +191,7 @@ This produces the following output.
 
 Read the following infoQ item to know more about it: [Java Gets a Boost with String Templates: Simplifying Code and Improving Security](https://www.infoq.com/news/2023/04/java-gets-a-boost-with-string/)
 
-### **Java's Handling of Concurrency** {#h3-7-java-s-handling-of-concurrency}
+### **Java's Handling of Concurrency**
 
 Java's improved handling of concurrency is another example of its modernization. The introduction of Virtual Threads (previously known as Project Loom) simplifies concurrent programming by making it easier to write, debug, profile, and maintain concurrent applications.
 
@@ -203,7 +203,7 @@ To know more about read the following article I have written:
 * [JEP 444: Virtual Threads Arrive in JDK 21, Ushering a New Era of Concurrency](https://www.infoq.com/news/2023/04/virtual-threads-arrives-jdk21/)
 * [Structured Concurrency in JDK 21: A Leap Forward in Concurrent Programming](https://www.infoq.com/news/2023/06/structured-concurrency-jdk-21/)
 
-### Unlocking High Performance with Modern Java Technologies {#h3-8-unlocking-high-performance-with-modern-java-technologies}
+### Unlocking High Performance with Modern Java Technologies
 
 It's important to note that modern Java Virtual Machines (JVMs) have incorporated more efficient garbage collection algorithms, like the Garbage-First (G1) collector and the Z Garbage Collector (ZGC), designed to significantly reduce pause times and scale effectively. Furthermore, today's Just-In-Time (JIT) compilers have been greatly enhanced and are capable of generating highly efficient machine code. In certain instances, JIT-compiled code can surpass the performance of statically compiled code due to its ability to make optimizations based on real-time data.   
 
@@ -211,8 +211,8 @@ JVMs have seen substantial advancements in efficiency through the application of
 
 Java has been the foundation of countless high-performance applications and systems. This includes high-frequency trading systems, big data processing frameworks like Apache Hadoop and Apache Spark, as well as large-scale websites such as LinkedIn and eBay. This stands as a testament to its capabilities and versatility.
 
-The Journey Ahead {#h2-9-the-journey-ahead}
--------------------------------------------
+The Journey Ahead
+-----------------
 
 While Java's transformation has been significant, it is far from over. With its robust ecosystem and the Java Community Process continually pushing for enhancements, the future is bright.
 

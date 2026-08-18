@@ -39,31 +39,31 @@ As a sidenote, if you like the content of this and the other posts in this serie
 
 {#understanding-the-process-of-elimination-in-debugging}
 
-Understanding the Process of Elimination in Debugging {#h2-0-understanding-the-process-of-elimination-in-debugging}
--------------------------------------------------------------------------------------------------------------------
+Understanding the Process of Elimination in Debugging
+-----------------------------------------------------
 
 {#the-basics}
 
-### The Basics {#h3-1-the-basics}
+### The Basics
 
 The process of elimination in debugging is straightforward in principle: continuously rule out non-problematic components until the root cause reveals itself. This can be achieved either by commenting out lines of code or using debugging techniques, such as the 'force return', which bypasses specific code paths.
 
 {#using-external-tools}
 
-### Using External Tools {#h3-2-using-external-tools}
+### Using External Tools
 
 For front-end issues, replicating the problem using tools like curl or postman is valuable. It helps us determine if the bug is within the front-end code or elsewhere. This way, we can quickly narrow our focus, not merely addressing the symptoms but locating the actual bug.
 
 {#the-power-of-unit-tests-in-debugging}
 
-The Power of Unit Tests in Debugging {#h2-3-the-power-of-unit-tests-in-debugging}
----------------------------------------------------------------------------------
+The Power of Unit Tests in Debugging
+------------------------------------
 
 Unit tests are our best allies when it comes to debugging. By focusing on isolated units, they hone in on potential problem areas.
 
 {#benefits-of-mocking-frameworks}
 
-### Benefits of Mocking Frameworks {#h3-4-benefits-of-mocking-frameworks}
+### Benefits of Mocking Frameworks
 
 Mocking frameworks like Mockito come in handy as they can simulate large parts of the application. This way, we can drill down on the exact problem, circumventing potential disturbances. Moreover, using mocks can prevent regression and make our test cases cleaner.
 
@@ -71,15 +71,15 @@ However, while there are best practices regarding the extent of mocking, when de
 
 {#the-challenges-with-flaky-issues}
 
-The Challenges with Flaky Issues {#h2-5-the-challenges-with-flaky-issues}
--------------------------------------------------------------------------
+The Challenges with Flaky Issues
+--------------------------------
 
 The elimination technique is less straightforward with flaky issues - those bugs that appear irregularly or whose behavior changes as code is eliminated. The key strategy here is to **focus on negatives**. In simpler terms, if removing a certain block doesn't cause the problem to appear, it doesn't automatically indict that block. The absence could be due to the bug's unpredictable nature. Hence, it's crucial only to trust instances where the problem consistently reproduces.
 
 {#the-concept-of-the-tong-motion}
 
-The Concept of the 'Tong Motion' {#h2-6-the-concept-of-the-tong-motion}
------------------------------------------------------------------------
+The Concept of the 'Tong Motion'
+--------------------------------
 
 Think of tongs. They grasp from both sides. Similarly, almost all software has at least two primary interfaces or points of input/output. For instance:
 
@@ -89,7 +89,7 @@ Think of tongs. They grasp from both sides. Similarly, almost all software has a
 
 {#applying-the-tong-motion-to-debugging}
 
-### Applying the Tong Motion to Debugging {#h3-7-applying-the-tong-motion-to-debugging}
+### Applying the Tong Motion to Debugging
 
 Using the example of an enterprise web app:
 
@@ -102,8 +102,8 @@ One common pitfall is neglecting one prong of the tongs or misplacing the other.
 
 {#an-illustrative-case-debugging-a-server-performance-issue}
 
-An Illustrative Case: Debugging a Server Performance Issue {#h2-8-an-illustrative-case-debugging-a-server-performance-issue}
-----------------------------------------------------------------------------------------------------------------------------
+An Illustrative Case: Debugging a Server Performance Issue
+----------------------------------------------------------
 
 In a real-world scenario, while tackling a server performance issue, I employed the 'Tong Motion' technique. By replacing web calls with curl requests, I shifted focus to the problematic area. At the same time, I enhanced database logging to monitor its output as problematic SQL was replicated through curl. This dual-sided approach helped unearth a bug in the Object Relational Mapping layer.
 
@@ -119,8 +119,8 @@ This concrete example comprises of the following stages:
 
 {#wrapping-up}
 
-Wrapping Up {#h2-9-wrapping-up}
--------------------------------
+Wrapping Up
+-----------
 
 Debugging can be a daunting process. However, with the right techniques, like the process of elimination and the 'Tong Motion' approach, it becomes a more manageable task. Always remember to tackle issues methodically and from all angles to find and fix the root cause effectively.
 

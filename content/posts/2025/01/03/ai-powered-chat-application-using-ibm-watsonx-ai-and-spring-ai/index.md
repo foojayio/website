@@ -54,8 +54,8 @@ The flagship AI and machine learning platform by IBM. It is designed to empower 
 
 To see the table of all supported foundation models, you can check it out [here](https://www.ibm.com/products/watsonx-ai/foundation-modelshttp:// "here").
 
-Pricing {#h2-0-pricing}
------------------------
+Pricing
+-------
 
 If you're an organization interested in trying IBM watsonx.ai, you can check-out its [pricing table](https://www.ibm.com/products/watsonx-ai/pricing "pricing table")
 
@@ -90,8 +90,8 @@ Additional functionalities that Spring AI supports which is significant for AI c
 
 In this demonstration, we will not deal in-depth of these concepts. We will show only the features that IBM watsonx.ai API supports on how quickly we can create a simple chat application.
 
-IBM watsonx.ai {#h2-1-ibm-watsonx-ai}
--------------------------------------
+IBM watsonx.ai
+--------------
 
 The IBM watsonx.ai API supports chat and embedding models in Spring AI context. For chat it supports *WatsonxAiChatModel* which is both a text generation and text stream generation.
 
@@ -101,10 +101,10 @@ To generate embeddings, the platform supports *WatsonxAiEmbeddingModel*.
 
 The image above is the UML Diagram of WatsonxAi API. The chat model implements the provided abstraction of Spring AI for basic chat and streaming chat. To provide implementations of these methods, the WatsonxAiChatModel needs to call the corresponding watsonx.ai platform API via REST and HTTP protocol.
 
-Creating IBM watsonx.ai Chat-based Application {#h2-2-creating-ibm-watsonx-ai-chat-based-application}
------------------------------------------------------------------------------------------------------
+Creating IBM watsonx.ai Chat-based Application
+----------------------------------------------
 
-### Prerequisites {#h3-3-prerequisites}
+### Prerequisites
 
 The code that will be demonstrated is already available in [watsonx-spring-ai-hilla](https://github.com/rjtmahinay/watsonx-spring-ai-hilla "watsonx-spring-ai-hilla") project. If you're interested to run the demo project, you may fork and run it locally.
 
@@ -116,7 +116,7 @@ implementation 'org.springframework.ai:spring-ai-watsonx-ai-spring-boot-starter'
 
 See the <https://github.com/rjtmahinay/watsonx-spring-ai-hilla/blob/main/build.gradle> file of the project.
 
-### Configurations {#h3-4-configurations}
+### Configurations
 
 The watsonx platform needs the following properties to start the Spring AI application.
 
@@ -175,9 +175,9 @@ spring:
 ```
 
 
-To see the token limits of all available foundation models in watsonx.ai platform, please check the [documentation](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-details.html?context=wx&amp;locale=en&amp;audience=wdp "documentation").
+To see the token limits of all available foundation models in watsonx.ai platform, please check the [documentation](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-details.html?context=wx&locale=en&audience=wdp "documentation").
 
-### Chatbot {#h3-5-chatbot}
+### Chatbot
 
 The user-interface of the application is created via Hilla Framework. Hilla is part of Spring Initialzr dependencies. To learn more about Hilla, check out this [documentation](https://vaadin.com/docs/latest/hilla/guides "documentation").
 
@@ -315,18 +315,18 @@ const StreamingChatView = () => {
 ```
 
 
-Chat Application {#h2-6-chat-application}
------------------------------------------
+Chat Application
+----------------
 
 I've showed how quickly it is to create a custom chat application and integrate it to watsonx.ai using Spring AI and Hilla.
 
-### Basic Chat {#h3-7-basic-chat}
+### Basic Chat
 
 The basic chat waits for the AI platform to fully return the response. Thus, waiting time may be longer.
 
 ![](watsonx-chat.gif)
 
-### Streaming Chat {#h3-8-streaming-chat}
+### Streaming Chat
 
 The streaming chat responds by chunks and prevents frustration to the end user.
 
@@ -339,5 +339,5 @@ For future demonstrations, watsonx.ai can be used for RAG, Function Calling (via
 You can access my watsonx.ai Chat application [here](https://github.com/rjtmahinay/watsonx-spring-ai-hilla "here")
 
 1. **Spring AI Documentation** - <https://docs.spring.io/spring-ai/reference/index.html>
-2. **watsonx.ai Documentation** - [https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/welcome-main.html?context=wx\&locale=en\&audience=wdp](https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/welcome-main.html?context=wx&amp;locale=en&amp;audience=wdp)
+2. **watsonx.ai Documentation** - [https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/welcome-main.html?context=wx\&locale=en\&audience=wdp](https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/welcome-main.html?context=wx&locale=en&audience=wdp)
 3. **watsonx Developer Hub** - <https://www.ibm.com/watsonx/developer>

@@ -25,8 +25,8 @@ Yes, Java 18 is here and in this article we explore the most important changes a
 
 **Note:** For a full listing of the 2,045 fixes in Java 18, [go here on Foojay.io](https://foojay.io/java-18/?tab=highlights&quarter=032022&version=18.0.0). And vote on your favorites to show the Java community's favorite fixes in Java 18.
 
-Exploring Changes {#h2-0-exploring-changes}
--------------------------------------------
+Exploring Changes
+-----------------
 
 Before we start introducing particular features, lets spend some thinking on the type and the focus of those changes.
 
@@ -45,8 +45,8 @@ java.io.FileReader(“hello.txt”) -> “縺ォ縺。縺ッ” (Windows (ja-JP)
 ```
 
 
-Feature Highlights {#h2-1-feature-highlights}
----------------------------------------------
+Feature Highlights
+------------------
 
 **1. JEP-400: UTF-8 by Default**
 
@@ -107,8 +107,8 @@ Each new Java release does not always come with bunches of large new features. I
 
 With having finalization deprecated, Java 18 also comes with the removal of the empty finalize methods, see **removal of empty finalize() methods** in java.desktop Module ([JDK-8273102](https://bugs.openjdk.java.net/browse/JDK-8273102)).
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Java 18 is another of the six month iterations, bringing with it the stability that would have been nice to have in the Java 17 LTS, namely default string encoding, though is great to have too, ready for the next LTS release.
 

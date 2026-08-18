@@ -26,8 +26,8 @@ I assume readers know the reasons behind versioning, semantic versioning, and pr
 
 I'll summarize the subject in a few words in any case.
 
-Generalities {#h2-0-generalities}
----------------------------------
+Generalities
+------------
 
 Software naturally evolves, because of business need or changing regulations. In some cases, the said software has no clients but humans, *e.g.*, a monolith with Server-Side Rendering. In all other cases, at least another software component interacts with your software:
 
@@ -47,8 +47,8 @@ The crux of the problem is now how to use a specific version of the endpoint. Th
 
 Let's detail them in turn. It all boils down to routing; I'll demo the configuration with [Apache APISIX](https://apisix.apache.org/) to implement each versioning approach.
 
-Path-based versioning {#h2-1-path-based-versioning}
----------------------------------------------------
+Path-based versioning
+---------------------
 
 Path-based versioning is so ubiquitous that it's the approach most people think about when they think about API versioning. The idea is to set the version in the path:
 
@@ -113,8 +113,8 @@ routes:
 2. `proxy-mirror` default priority is `1010`
 3. Set it to `1000` so that it now applies *after* the rewrite takes place
 
-Query-based versioning {#h2-2-query-based-versioning}
------------------------------------------------------
+Query-based versioning
+----------------------
 
 Another way to version is to use query parameters, *e.g.* , `?version=v1`. While I've never seen it in the wild, it deserves a mention nonetheless. We can leverage the following Apache APISIX configuration:
 
@@ -138,8 +138,8 @@ routes:
 2. Evaluate the query parameter named `version`
 3. Default route when no `version` is provided. Here, I route to version 1, but you can also return an HTTP status `4xx` to require a version.
 
-Header-based versioning {#h2-3-header-based-versioning}
--------------------------------------------------------
+Header-based versioning
+-----------------------
 
 The last alternative for versioning is to use HTTP headers. Here's a custom header:
 
@@ -199,8 +199,8 @@ routes:
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this short article, we detailed the three options for versioning HTTP APIs: path-based, query-based, and header-based.
 

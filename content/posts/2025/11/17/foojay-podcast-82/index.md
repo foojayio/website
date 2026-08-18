@@ -34,8 +34,8 @@ And finally, we'll meet some of the team members behind TornadoVM - Christos Kot
 
 {{< youtube Srxy_ukw3-k >}}
 
-Podcast Apps {#h2-0-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,8 +43,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-1-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topics and guests
 

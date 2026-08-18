@@ -21,8 +21,8 @@ frozen: false
 
 I**n modern web development, testing is essential for ensuring the reliability and performance of applications. For developers working with Vaadin, one of the best testing tools is Karibu Testing. This testing framework stands out for its ability to run browserless testing, offering several advantages over traditional end-to-end testing approaches, such as Selenium, Playwright, or Cypress.**
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 This article will highlight the benefits of browserless testing with Karibu Testing and how it compares to the end-to-end testing approach (E2E).   
 
@@ -52,14 +52,14 @@ Karibu Testing allows developers to focus on testing their applications' busines
 
 It's comparable to testing with MockMVC in Spring Boot. While MockMVC is excellent for testing RESTful APIs and Spring MVC controllers, Vaadin Karibu is better suited for testing the full stack of a Vaadin application, including its rich user interface components.
 
-Getting Started {#h2-1-getting-started}
----------------------------------------
+Getting Started
+---------------
 
 The documentation of Karibu Testing can be found on GitHub: <https://github.com/mvysny/karibu-testing>  
 
 All code examples are from my [Java Track and Field](https://jtaf.ch/) project and the code is hosted on GitHub as well: <https://github.com/72services/jtaf4>
 
-### Dependency {#h3-2-dependency}
+### Dependency
 
 First, you'll need to add the Karibu Testing dependency. In my project I use Maven but you can also use Gradle if you prefer this build tool.
 
@@ -73,7 +73,7 @@ First, you'll need to add the Karibu Testing dependency. In my project I use Mav
 ```
 
 
-### Base Test Class {#h3-3-base-test-class}
+### Base Test Class
 
 Second, we want to create a base test class with the Karibu Testing configuration for convenience. The convenience class contains the setup and tear down of the Mock servlet and Vaadin stack. Plus a login method that lets you fake the user and roles and also a logout method.
 
@@ -138,7 +138,7 @@ public abstract class KaribuTest {
 ```
 
 
-### Writing a Test {#h3-4-writing-a-test}
+### Writing a Test
 
 As we want to test a protected view we first login and then navigate to the view we want to test. As mentioned above the login method fakes the login. But be aware that the application may access the user in the database so you should use a username that also exists in your database. Alternatively, you could use the UserDetailsService to load the user and roles from the database instead of faking it entirely.
 
@@ -200,8 +200,8 @@ void add_club() {
 
 There are two classes of Karibu Testing involved: LocatorJ and GridKt. Karibu Testing is written in Kotlin and for Java there is a special LocatorJ class written in Java to access the components. Additionally, it provides helper classes for certain components like the Grid to access properties or execute methods like in the case above the size of the grid.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Vaadin Karibu Testing offers a robust and efficient approach to testing Vaadin applications. Eliminating the need for a browser speeds up the testing process reduces complexity, and provides a more consistent testing environment.
 

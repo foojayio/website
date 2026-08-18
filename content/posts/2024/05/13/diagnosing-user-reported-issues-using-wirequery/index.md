@@ -119,8 +119,8 @@ In many cases, these screens should provide you with all the information you nee
 
 Now that we've seen how to set up a demo environment, let's take a closer look into how the demo applications were set up to communicate with WireQuery.
 
-Backend {#h2-0-backend}
------------------------
+Backend
+-------
 
 In the `application.yml`, a few properties were added, such as the Api Key, the name of the application and the location of the WireQuery server. Similarly, the following dependencies were added to the `build.gradle.kts` file that are relevant for using WireQuery:
 
@@ -153,8 +153,8 @@ class WireQueryConfig {
 ```
 
 
-Frontend {#h2-1-frontend}
--------------------------
+Frontend
+--------
 
 On the frontend, the following dependencies were added:
 

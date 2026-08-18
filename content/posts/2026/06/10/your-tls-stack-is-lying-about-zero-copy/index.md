@@ -25,8 +25,8 @@ enlighterjs: true
 frozen: false
 ---
 
-The "No Waste Compute" Constraint {#h2-0-the-no-waste-compute-constraint}
--------------------------------------------------------------------------
+The "No Waste Compute" Constraint
+---------------------------------
 
 When I started designing the Exeris Kernel, I set one non-negotiable rule very early: no waste compute. That rule sounds like a performance slogan until it starts killing otherwise normal design decisions.
 
@@ -42,8 +42,8 @@ The root issue I found with `SSLEngine` was not that it is slow in the abstract,
 
 
 
-The Impedance Mismatch in Memory Ownership {#h2-1-the-impedance-mismatch-in-memory-ownership}
----------------------------------------------------------------------------------------------
+The Impedance Mismatch in Memory Ownership
+------------------------------------------
 
 The failure showed up at the contract level long before any benchmark.
 
@@ -58,8 +58,8 @@ In a conventional stack, delayed cleanup is usually acceptable because the whole
 
 
 
-The Netty Question {#h2-2-the-netty-question}
----------------------------------------------
+The Netty Question
+------------------
 
 I looked at Netty's `OpenSslEngine` directly before committing to the FFM path. It is genuinely fast and battle-tested --- and for many systems it is the right answer. But it operates under a different architectural paradigm.
 
@@ -69,8 +69,8 @@ With Panama FFM in Exeris, I don't need reference counting. I get deterministic,
 
 
 
-Explicit State and FFM {#h2-3-explicit-state-and-ffm}
------------------------------------------------------
+Explicit State and FFM
+----------------------
 
 To see why this changes the architecture, look at the actual implementation in the Exeris Kernel.
 
@@ -115,8 +115,8 @@ The trade-off here is explicit: I lose the safety net of `ByteBuffer` bounds che
 
 
 
-What the Exploratory Benchmarks Prove {#h2-4-what-the-exploratory-benchmarks-prove}
------------------------------------------------------------------------------------
+What the Exploratory Benchmarks Prove
+-------------------------------------
 
 I prefer brutal transparency over carefully curated optimization claims. The native FFM TLS path in Exeris is still taking shape, but the early exploratory JMH results confirm exactly what I expected structurally.
 
@@ -147,8 +147,8 @@ A naive reading would ask why the throughput dropped to \~367,000 ops/s. The ans
 
 
 
-The GC Layer and the True Cost of Abstractions {#h2-5-the-gc-layer-and-the-true-cost-of-abstractions}
------------------------------------------------------------------------------------------------------
+The GC Layer and the True Cost of Abstractions
+----------------------------------------------
 
 What changed my mind was not the ops/s number. It was what `-prof gc` showed underneath it.
 
@@ -161,8 +161,8 @@ This is the core definition of "No Waste Compute." By eliminating the intermedia
 
 
 
-Where SSLEngine Still Wins {#h2-6-where-sslengine-still-wins}
--------------------------------------------------------------
+Where SSLEngine Still Wins
+--------------------------
 
 A few things remain true even after this architectural shift.
 
@@ -174,8 +174,8 @@ Finally, Panama FFM and native TLS do not remove complexity---they relocate it. 
 
 
 
-What I Changed, and What I Gave Up {#h2-7-what-i-changed-and-what-i-gave-up}
-----------------------------------------------------------------------------
+What I Changed, and What I Gave Up
+----------------------------------
 
 A lot of JVM performance work still assumes the heap is the center of the system and the goal is simply to make it hurt less. That is a valid way to design software, but it is not the design I wanted for Exeris.
 

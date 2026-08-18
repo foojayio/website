@@ -25,8 +25,8 @@ Did we miss anything? Is there anything you want to have included in one of the 
 
 Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * A lot of updates by **Johan Vos**
   * [Weekend update](https://mastodon.social/@johanvos/113415033521942389): "*Getting ready to create a developer preview for the headless platform.*"
@@ -37,13 +37,13 @@ Core {#h2-0-core}
     I often see Platform.runLater() is used "just to make sure..." but that can slow down performance.*"
 * [**Carl Dea** shared](https://x.com/carldea/status/1856703165535584640): "*JavaFX will have custom image loaders! See [JDK-8343315](https://bugs.openjdk.org/browse/JDK-8343315). Man I love JavaFX! Thank you, [@jddarcy](https://x.com/jddarcy)!*"
 
-SceneBuilder {#h2-1-scenebuilder}
----------------------------------
+SceneBuilder
+------------
 
 * [Again **Johan Vos** 😉](https://mastodon.social/@johanvos/113468864869281531): "*Scene Builder is getting much better. [Major changes in 24 are coming](https://gluonhq.com/scene-builder-24-0-0-rc1-whats-coming-for-javafx-ui-developers/): A major technical debt has been addressed: the whole structure, including Scene Builder Kit, is now modular. I highly recommend creating your JavaFX interfaces with this RC release!*"
 
-Applications {#h2-2-applications}
----------------------------------
+Applications
+------------
 
 * [**Robert Ladstätter** announced LogoRRR 24.5.1](https://graz.social/@rladstaetter/113380976846373387) for Windows, Mac, and Linux: "*More information about the included features and bugfixes is [available here](https://github.com/rladstaetter/LogoRRR/releases/tag/24.5.1)*."
 * [**Bluerain** announced Mago](https://x.com/bluerai1n/status/1855383577199775882): "*A JavaFX-based shell generator tool that creates payloads for Linux, Windows, and web systems. Generate payloads for various operating systems, Supports Base64 and URL encoding for generated commands, 110+ Payload.* " You can [find it on GitHub](https://github.com/blue0x1/Mago).
@@ -54,14 +54,14 @@ Applications {#h2-2-applications}
 * [**Jago de Vreede** is looking for help](https://x.com/JagoVreede/status/1857082809355002346): "*I've created an early-access build for aarch64 binary for Mac of SKDman-UI. Unfortunately, I can't test that one because I don't have an M-MacBook. Does anyone with an M MacBook want to see if it works?* "
   * The [(early-access) releases are on GitHub](https://github.com/jagodevreede/sdkman-ui/releases), including a version for x86 macOS.
 
-Games {#h2-3-games}
--------------------
+Games
+-----
 
 * [**BJ Dela Cruz** shared a screenshot of his "Wordle" application](https://www.linkedin.com/posts/bj-delacruz_javafx-java-javaprogramming-activity-7262307662577520640-8mcI/): "*Finally, it will be able to generate an image that the player can keep to remember what moves he or she performed to win the game.*"
 * [**Mark J. Koch**](https://bsky.app/profile/markjkoch.bsky.social/post/3lbutov6xp22o): "*One of my bucket list game projects has reached Alpha. I'm looking for enthusiasts to try it. I ported/re-engineered Neuromancer PC to JavaFX. Original content, all new engine. For now requires NetBeans IDE to run.* " You can [find it on GitHub](https://github.com/maehem/javamancer).
 
-Components, Libraries, Tools {#h2-4-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [**Carl Dea** published Cognitive 1.5.0](https://x.com/carldea/status/1851983577321255003), a JavaFX MVVM forms library.  
   Check the [wiki for new features](https://github.com/carldea/cognitive/wiki#new-features).
@@ -71,8 +71,8 @@ Components, Libraries, Tools {#h2-4-components-libraries-tools}
   * [Part 11](https://x.com/P_Duke/status/1855617371186020476): "*New LIGHT and DARK styles for Editable ComboBox, Pill Buttons and Pill Toggle Buttons.*"
   * [Part 12](https://x.com/P_Duke/status/1855617371186020476): "*New LIGHT and DARK styles for Editable ComboBox, Pill Buttons and Pill Toggle Buttons.*"
 
-Podcasts, Videos, Books {#h2-5-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * Not new, but just discovered: [**Chad Preisler** uses a JavaFX UI to demo Kafka Outer Joins](https://bsky.app/profile/chadpreisler.bsky.social/post/3l3vjfi4z742r): "*Make sure to stick around for the [demo right around four and half minutes into the video](https://www.youtube.com/watch?v=bGffINGD9KQ). Happy coding!*"
 * New "JFX In Action" interviews by **Frank Delporte** :
@@ -81,8 +81,8 @@ Podcasts, Videos, Books {#h2-5-podcasts-videos-books}
   * Video #5 till #8 of these interviews got published in a summary on Foojay: [Video series "JavaFX In Action", Part 2](https://foojay.io/today/video-series-javafx-in-action-part-2/) with **Maciej Gorywoda** about FxCalculator, **Ramiro Domínguez Ayub** about the Televic Generic Update Tool, **Christoph Schwentker** about JabRef, and **Ulas Ergin** about migrating from Swing to React UIs, all combined in one Java(FX) app.
 * [**Anton Arhipov** has a box with books to review](https://bsky.app/profile/antonarhipov.bsky.social/post/3lbjqjdtf2s2c): "*I was helping with technical reviews of this edition. The author **Faisal Islam** teaches Kotlin by explaining and visualizing various algorithms. They used JavaFX for visualization though and I'd love to see another edition of this book using Compose instead.*" Let's conclude the Faisal made the right choice and Anton is wrong 😉
 
-Tutorials {#h2-6-tutorials}
----------------------------
+Tutorials
+---------
 
 * [**Alexander S. Ricciardi** shared a tutorial about JavaFX Layout Managers](https://x.com/AlexOmegapy/status/1855082449589748028): "*This article explores how Layout Managers provide an abstraction that streamlines the development of Graphical User Interfaces (GUIs) in JavaFX by automating component sizing and positioning. Using predefined layouts like HBox, VBox, and GridPane, developers can create organized and responsive interfaces.*"
 * [**polypragmatist** shared on Bluesky](https://bsky.app/profile/polypragmatist.bsky.social/post/3lbabzug2bk2j): "*Looking to learn JavaFX? Take a look at my [Beginners' Guide to JavaFX](https://www.pragmaticcoding.ca/beginners/intro). It's a 13-part tutorial that takes you from 'Hello World' to building an Reactive GUI with a framework. No FXML, all the layouts are done in code.*"
@@ -90,8 +90,8 @@ Tutorials {#h2-6-tutorials}
   * "*[Building a Social Media Dashboard with JavaFX](https://codezup.com/building-a-social-media-dashboard-with-java-fx/).*"
   * "*[Unlock Efficient Cloud and Edge Computing with JavaFX Websocket Services](https://codezup.com/cloud-edge-computing-javafx-websocket-services/)*", to create a JavaFX application that uses Websocket Services to communicate with a server.
 
-Miscellaneous {#h2-7-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [On Bluesky, **Gerrit Gruwald** explains](https://bsky.app/profile/hansolo.bsky.social/post/3l6c24vt4222g) that the [visuals of his Devoxx presentation](https://www.youtube.com/watch?v=Jh79ojcror0) are created with JavaFX.
 * You can read more about JavaFX Nodes versus Canvas experiments by **Frank Delporte** in the [German JavaMagazin edition 12.2024](https://entwickler.de/java/javafx-nodes-versus-canvas).
@@ -109,8 +109,8 @@ Miscellaneous {#h2-7-miscellaneous}
 * [**polypragmatist** is very active promoting JavaFX on Bluesky](https://bsky.app/profile/polypragmatist.bsky.social/post/3lbte3cvxvs2p), for instance: "*JavaFX is 100% a reactive declarative UI development library. No FXML required. The Observables facility is tightly integrated into the UI components and makes React look clunky in comparison. Last I looked, Java supported loops and conditionals. JavaFX works great with Kotlin too.*"
 * [**Johan Vos** is testing bld to replace Maven](https://bsky.app/profile/johanvos.bsky.social/post/3lbr6rz6qoc2v): "*Did a first project using bld. Works great, and I love the 'no auto-magical behavior'. I need a deeper look to see how to deal with platform-specific jars at runtime, e.g. JavaFX, where we currently use a maven plugin to deal with this.*"
 
-JFX Central {#h2-8-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * JFX Central is now also on Bluesky: [@jfxcentral.com](https://bsky.app/profile/jfxcentral.com)
 * [Message from **Dirk Lemmermann**](https://x.com/dlemmermann/status/1853719535901122837): "*JFX Central is now available as a web app, a desktop app, and an iOS application (via Gluon). We still need to get it into the Google Play Store. Anyone up for the job? If any code changes are required I could work on that. I just need somebody to take over the deployment part to the Play Store. I do not feel at home at all in the Android space 🙂*"

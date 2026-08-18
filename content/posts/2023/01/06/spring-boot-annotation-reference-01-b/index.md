@@ -27,7 +27,7 @@ In continuation of [part 01/a of this article](https://foojay.io/today/spring-bo
 
 What percentage (depth and extent) of Spring Boot Annotations do you think you really know? This includes annotations in all their glory and the power that they bring via all of their options. I am sure whatever your answer may be, you will appreciate this quote from Albert Einstein: "The more I learn, the more I realize how much I don't know."
 
-### **Spring-Stereotype** {#h3-0-spring-stereotype}
+### **Spring-Stereotype**
 
 **@Service**
 
@@ -153,7 +153,7 @@ package xyz.sumithpuri.spring.boot.annotation.component;
 
 @Repository is a specialized @Component that is used to mark a class that provides persistence or storage operations. It will provide operations like create, update, retrieve, delete and search type of operations. It is mostly used in conjunction with RDBMS or any other Database.
 
-### **Spring - REST/Web/MVC** {#h3-1-spring-rest-web-mvc}
+### **Spring - REST/Web/MVC**
 
 **@RequestMapping**
 

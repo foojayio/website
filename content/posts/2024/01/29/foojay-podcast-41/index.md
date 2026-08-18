@@ -24,13 +24,13 @@ When starting to build a new website, you are facing a major challenge. Which fr
 
 But... do you really need one of these frameworks? Why would you not just stick to Java and use one of the many great libraries that are available for it?
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube aaYs7zqaBO8 >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,25 +38,25 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Martijn Dashorst {#h3-3-martijn-dashorst}
+### Martijn Dashorst
 
 * <https://www.linkedin.com/in/dashorst/>
 * <https://mastodon.social/@dashorst>
 * <https://twitter.com/dashorst>
 * <https://martijndashorst.com>
 
-### Marcus Hellberg {#h3-4-marcus-hellberg}
+### Marcus Hellberg
 
 * <https://www.linkedin.com/in/marcushellberg/>
 * <https://mstdn.social/@marcushellberg>
 * <https://twitter.com/marcushellberg>
 * <https://marcushellberg.dev/>
 
-Podcast {#h2-5-podcast}
------------------------
+Podcast
+-------
 
 Host: Frank Delporte
 
@@ -65,10 +65,10 @@ Host: Frank Delporte
 
 ![](podcast-guests-web-development-1024x576.png)
 
-Links {#h2-6-links}
--------------------
+Links
+-----
 
-### Wicket {#h3-7-wicket}
+### Wicket
 
 * <https://wicket.apache.org/>
 * <https://builtwithwicket.tumblr.com>
@@ -78,7 +78,7 @@ Links {#h2-6-links}
 * <https://github.com/apache/wicket>
 * <https://twitter.com/apache_wicket>
 
-### Vaadin {#h3-8-vaadin}
+### Vaadin
 
 * <https://vaadin.com/>
 * <https://start.vaadin.com>
@@ -91,7 +91,7 @@ Links {#h2-6-links}
 * <https://foojay.io/today/how-to-style-a-vaadin-application/>
 * <https://foojay.io/today/blink-a-led-on-raspberry-pi-with-vaadin/>
 
-### Thymeleaf / htmx {#h3-9-thymeleaf-htmx}
+### Thymeleaf / htmx
 
 * <https://www.thymeleaf.org/>
 * <https://htmx.org/>
@@ -99,8 +99,8 @@ Links {#h2-6-links}
 * <https://foojay.io/today/new-book-taming-thymeleaf/>
 * <https://foojay.io/today/controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi/>
 
-Content {#h2-10-content}
-------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests  
 
@@ -147,8 +147,8 @@ Content {#h2-10-content}
 
 <br />
 
-Music {#h2-11-music}
---------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

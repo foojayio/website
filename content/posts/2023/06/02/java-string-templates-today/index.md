@@ -47,8 +47,8 @@ Manifold also has some drawbacks:
 
 These partially relate to the age of Manifold which is a new project by comparison. But it also relates to the different focus. Manifold focuses on language functionality and a single working fluid result.
 
-JEP 430 String Interpolation {#h2-0-jep-430-string-interpolation}
------------------------------------------------------------------
+JEP 430 String Interpolation
+----------------------------
 
 One of the big features coming to JDK 21 is [JEP 430](https://openjdk.org/jeps/430), which is a string interpolation language change. It will allow writing code like this:
 
@@ -62,8 +62,8 @@ In this case, `info` will have the value `"My name is Joan"`. This is just the t
 
 Unfortunately, it will take years to use this in production. It will be in preview in JDK 21, then it will be approved. We will wait for an LTS, and then wait for the LTS to reach critical mass. In the meantime, can we use something as nice as this today?
 
-Maven Dependencies {#h2-1-maven-dependencies}
----------------------------------------------
+Maven Dependencies
+------------------
 
 Before we dive into the code, I want to remind you that all the code for this and other videos in this series is available on [GitHub](https://github.com/shai-almog/java-book/) (feel free to star it and follow).
 
@@ -113,8 +113,8 @@ String templating has no dependencies. We still need to make changes to the pom 
 ```
 
 
-Manifold String Interpolation {#h2-2-manifold-string-interpolation}
--------------------------------------------------------------------
+Manifold String Interpolation
+-----------------------------
 
 To begin, we can create a new variable that we can use to get external input. In the second line, we integrate that variable into the printout:
 
@@ -146,8 +146,8 @@ private static void noTemplate(String word) {
 ```
 
 
-Templates {#h2-3-templates}
----------------------------
+Templates
+---------
 
 The Manifold project allows us to create JSP-like templates without all of the baggage. We can define a base class to a template to create generic code for the templates and place common functionality in a single location. We can create a file called HelloTemplate.html.mtl in the resources/templates directory with the following content. Notice the params we define in the template file can be anything:
 
@@ -186,7 +186,7 @@ The templating capabilities are powerful yet simple. Just like we could in JSP, 
 ```
 
 
-### Why Not: JSP, Velocity, Thymeleaf or Freemarker? {#h3-4-why-not-jsp-velocity-thymeleaf-or-freemarker}
+### Why Not: JSP, Velocity, Thymeleaf or Freemarker?
 
 There are so many templating languages in Java already... Adding yet another one seems like a heavy burden of replication. I think all of those are great and this isn't meant to replace them, at least not yet.
 
@@ -194,7 +194,7 @@ Their focus is very much on web generation, they might not be ideal for more flu
 
 Another big advantage is size and performance. All of these frameworks have many dependencies and a lot of runtime overhead. Even JSP performs the initial compilation in runtime by default. This templating support is compiled and Spartan, in a good way. It's fast, simple and deeply integrated into the application flow.
 
-### Import {#h3-5-import}
+### Import
 
 We can import Java packages just like we can in every Java class using code like this:
 
@@ -205,7 +205,7 @@ We can import Java packages just like we can in every Java class using code like
 
 Once imported we can use any class within the code. Notice that this import statement must come above other lines in the code, just like a regular import statement.
 
-### Include {#h3-6-include}
+### Include
 
 We can use include to simply include another template into the current template, allowing us to assemble sophisticated templates like headers and footers. If we want to generate a complex Java class, we can wrap the boilerplate in a generic template and include that in. We can conditionally include a template using an if statement and use a for loop to include multiple entries:
 
@@ -216,14 +216,14 @@ We can use include to simply include another template into the current template,
 
 Notice that we can include an entry with parameters and pass them along to the underlying template. We can pass hardcoded strings or variables along the include chain.
 
-### A Lot More {#h3-7-a-lot-more}
+### A Lot More
 
 I skipped extends because of a documentation issue, which has since been fixed. it has a lot of potential. There's layout functionality that has a lot of potential but is missing parameter passing at the moment. But the main value is in the simplicity and total integration.
 
 When I define a dependency on a class and remove it from the code the error appears even in the template file. This doesn't happen in Thymeleaf.
 
-Final Word {#h2-8-final-word}
------------------------------
+Final Word
+----------
 
 In conclusion, with the Manifold project, we can write fluent text processing code today without waiting for a future JVM enhancement. The introduction of String templates can help Java developers generate files that aren't a web application, which is useful in several cases e.g. where code generation is needed.
 

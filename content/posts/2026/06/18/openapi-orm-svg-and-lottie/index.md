@@ -29,8 +29,8 @@ This is the third follow-up to [Friday's release post](https://www.codenameone.c
 
 The pieces are an OpenAPI client generator, a SQLite ORM, JSON and XML mappers, a component binder with validation, build-time SVG and Lottie transcoders, and a declarative router with deep links. All ride on a single **build-time codegen pipeline** : a Maven-plugin pass that reads annotations or declarative source files at build time and emits typed Java that compiles into your binary. No reflection, no service loader, no `Class.forName`. The "How it works" section at the end of this post covers the codegen plumbing once you have seen what it powers.
 
-OpenAPI client generation {#h2-0-openapi-client-generation}
------------------------------------------------------------
+OpenAPI client generation
+-------------------------
 
 The headline of this release for any team that talks to a backend.
 
@@ -87,8 +87,8 @@ For teams who already publish an OpenAPI spec as part of their backend (most mod
 
 It is the kind of change that is most useful when you do not know you have it: pull a fresh spec, rebuild, and your IDE highlights every place in the codebase that called a renamed endpoint or passed the wrong type to a parameter.
 
-SQLite ORM {#h2-1-sqlite-orm}
------------------------------
+SQLite ORM
+----------
 
 `@Entity` marks the class; `@Id` and `@Column` shape the schema; `@DbTransient` opts a field out:
 
@@ -116,8 +116,8 @@ The generated DAO does the typed work underneath. No reflection in `insert`; the
 
 **For JPA / Hibernate developers,** the API is intentionally familiar. `@Entity`, `@Id`, `@Column`, and `@Transient` (here renamed `@DbTransient` to avoid colliding with `java.beans.Transient`) carry the same meaning they do under `javax.persistence` / `jakarta.persistence`. The `EntityManager` name is the same. `Dao#findById`, `Dao#findAll`, `Dao#find(where, params)`, `Dao#insert`, `Dao#update`, `Dao#delete` line up with the basic JPA repository contract. The query language is plain SQL (there is no JPQL or Criteria DSL) but the annotation surface, the lifecycle, and the runtime methods will feel like a long-lost friend to anyone with server-side Java persistence experience.
 
-JSON / XML mapping {#h2-2-json-xml-mapping}
--------------------------------------------
+JSON / XML mapping
+------------------
 
 `@Mapped` marks a class as a transferable POJO. `@JsonProperty` and `@XmlElement` (plus `@XmlRoot`, `@XmlAttribute`, `@JsonIgnore`, `@XmlTransient`) shape the wire format. The runtime entry points are `Mappers.toJson(...)`, `Mappers.fromJson(...)`, `Mappers.toXml(...)`, `Mappers.fromXml(...)`:
 
@@ -153,8 +153,8 @@ Rest.get("https://api.example.com/users")
 
 **For JAXB developers,** the XML surface (`@XmlRoot`, `@XmlElement`, `@XmlAttribute`, `@XmlTransient`) is a direct port of the long-established `javax.xml.bind.annotation` surface. The same model class can be both `@XmlRoot`-decorated and `@JsonProperty`-decorated, which gives you a single source of truth for both wire formats. The JSON surface adopts the Jackson convention (`@JsonProperty`, `@JsonIgnore`) that nearly every modern JVM JSON binding (Jackson, Moshi, kotlinx-serialization) inherited.
 
-Component binding with validation {#h2-3-component-binding-with-validation}
----------------------------------------------------------------------------
+Component binding with validation
+---------------------------------
 
 The fourth annotation processor on the same pipeline is the component binder. `@Bindable` marks a model class; `@Bind(name = "userField")` ties a field to a component on a form by the component's `name`. Field-level validation annotations compose with `@Bind` on the same field:
 
@@ -201,8 +201,8 @@ binding.getValidator().addSubmitButtons(submit);
 
 The new `BindAttr` enum lets `@Bind` target a specific attribute of the component (`TEXT`, `UIID`, `SELECTED`, ...) when the default ("write a `String` field into the component's text") is not what you want.
 
-SVG at build time {#h2-4-svg-at-build-time}
--------------------------------------------
+SVG at build time
+-----------------
 
 Drop an SVG into `src/main/css/`, alongside `theme.css`:
 
@@ -226,7 +226,7 @@ A grid of the static SVGs from the hellocodenameone fixture, rendered through th
 
 <br />
 
-### Sizing in millimeters {#h3-5-sizing-in-millimeters}
+### Sizing in millimeters
 
 The SVG transcoder's most useful feature is also the one most easily missed: **size every SVG in millimeters from CSS** . SVGs in the wild routinely declare odd `width` / `height` attributes (a 1024×1024 export of a 24×24 icon, no dimensions at all, design-pixel values from one specific framework). Pinning the rendered size in millimeters sidesteps all of that.
 
@@ -250,7 +250,7 @@ A 6 mm icon is 6 mm tall on a 1× desktop, 6 mm on a high-DPI handset, and 6 mm 
 
 If a project does not use CSS for theming, the two-`float` constructor on the generated class takes millimeters directly: `new com.codename1.generated.svg.Home(6f, 6f)`.
 
-### Coverage and what we still want feedback on {#h3-6-coverage-and-what-we-still-want-feedback-on}
+### Coverage and what we still want feedback on
 
 The transcoder is a `maven/svg-transcoder/` module that parses SVG with `javax.xml` StAX. No Batik, no Flamingo, no external dependencies. Coverage targets what real-world icon SVGs use: `rect` (rounded corners included), `circle`, `ellipse`, `line`, `polyline`, `polygon`, the full `path` grammar (`M` / `L` / `H` / `V` / `C` / `S` / `Q` / `T` / `A` / `Z` plus relative-coordinate and smooth-curve reflection), groups with affine transforms (`translate`, `scale`, `rotate`, `skew`, `matrix`), linear gradients via `LinearGradientPaint`, fill, stroke, stroke-width, linecap, linejoin, opacity.
 
@@ -266,8 +266,8 @@ What is still not supported: SVG `filter` primitives, ` (treated as a clip, so a
 
 The coverage matrix and troubleshooting are at [SVG Transcoder](https://www.codenameone.com/developer-guide/#_svg_transcoder) in the developer guide.
 
-Lottie at build time {#h2-7-lottie-at-build-time}
--------------------------------------------------
+Lottie at build time
+--------------------
 
 The same pipeline carries Lottie. Drop a Bodymovin export into the same `src/main/css/`:
 
@@ -301,12 +301,12 @@ Coverage in v1: shape layers (`rc` / `el` / `sh`) with solid fills and strokes; 
 
 The same iOS caveat applies: the renderer leans on the shape API, so the deprecated GL ES 2 pipeline shows artifacts on the more elaborate Lottie animations. Use the Metal default (now on by default for new iOS builds).
 
-Deep links and routing {#h2-8-deep-links-and-routing}
------------------------------------------------------
+Deep links and routing
+----------------------
 
 Two pieces of plumbing for apps that handle URLs from outside themselves (notification taps, marketing links, share targets, Universal Links from Safari and the equivalent App Links from Chrome on Android).
 
-### Deep links {#h3-9-deep-links}
+### Deep links
 
 Codename One has had deep-link support for a long time through `Display.setProperty("AppArg", url)`. The platform plumbing already writes the incoming URL into that property on cold launch, and an app-resume sets it again on warm launch; reading it back from `start()` works fine for a small number of patterns. Where the `AppArg`-only approach gets fragile is consistency. The cold and warm paths execute different lifecycle code, the value is a flat string with no parsing, and the trickiest case is the one where a user lands in the middle of the app via a link and then continues to interact: their next navigation needs to compose with the entry point, the back-stack needs to make sense as if they had arrived through the usual flow, and "fall off the edge of the app" on back is a common bug. With a hand-rolled `AppArg` reader it is easy to miss one of these and ship a half-working flow.
 
@@ -327,7 +327,7 @@ Display.getInstance().setDeepLinkHandler(link -> {
 
 `AppArg` still works for projects that depend on it, but the new handler is what we recommend going forward. The handler runs on a consistent lifecycle path on both cold and warm starts, and the parsed `DeepLink` value carries the scheme, host, path segments, query map, and fragment so app code does not need to roll its own URL parser.
 
-### Routing {#h3-10-routing}
+### Routing
 
 For projects that handle more than a handful of URL patterns, the second piece is the declarative router in `com.codename1.router`. We built it on the same build-time codegen pipeline as the ORM and the mappers (the router was actually the first concrete consumer of the new preprocessor) so the two surfaces compose: a deep-link handler that delegates to the router becomes a one-liner.
 
@@ -377,8 +377,8 @@ For the link-publishing side, an `AasaBuilder` emits the iOS `apple-app-site-ass
 
 The JavaScript port bridges the router into `window.history` so navigating the in-app router pushes a real entry into the browser's session history. Back and forward in the browser drive the router; reloading the page lands at the deep-link URL; sharing the URL out of the address bar takes a colleague to the same in-app location.
 
-How it works: the build-time codegen pipeline {#h2-11-how-it-works-the-build-time-codegen-pipeline}
----------------------------------------------------------------------------------------------------
+How it works: the build-time codegen pipeline
+---------------------------------------------
 
 Everything above sits on a single Maven-plugin pass.
 
@@ -392,8 +392,8 @@ cn1-core ships a no-op stub of each generated index (`RoutesIndex`, `MappersInde
 
 The SVG and Lottie transcoders sit on a parallel pipeline (declarative graphics files in place of annotations), but they emit the same shape of code and obey the same constraints. The practical effect is that the kind of code that historically required reflection at runtime (with all the obfuscation hazards and surprise allocations that come with that) now happens once at build time and produces direct, dead-code-eliminable, rename-safe symbol references.
 
-Wrapping up {#h2-12-wrapping-up}
---------------------------------
+Wrapping up
+-----------
 
 That closes this release's post series. We already have some pretty big features lined up for **this Friday's** release post; the headline pieces are the most substantial things to land in months and worth checking back for.
 

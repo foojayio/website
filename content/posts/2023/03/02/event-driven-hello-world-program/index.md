@@ -55,7 +55,7 @@ The requirements for each internal microservices can be described in YAML, for B
 
 All examples are in the [Chronicle-Queue-Demo/hello-world module](https://github.com/OpenHFT/Chronicle-Queue-Demo/tree/main/hello-world).
 
-### A Simple Event-Driven Contract {#h3-0-a-simple-event-driven-contract}
+### A Simple Event-Driven Contract
 
 We model events as asynchronous method calls without arguments, or one-to-many arguments e.g.
 
@@ -74,7 +74,7 @@ There is no assumption about how the events produced by the microservice will be
 
 Thus, it doesn't return a value. Any results will be emitted as events from the respective event handlers. In programming, an event handler is a callback routine that can operate asynchronously.
 
-### External Event Producers and Consumers {#h3-1-external-event-producers-and-consumers}
+### External Event Producers and Consumers
 
 Often we need to integrate with the client's external systems.
 
@@ -137,7 +137,7 @@ public class ReplayOutputMain {
 ```
 
 
-### Unit Tests for the RecordAsYaml and Replay Methods {#h3-2-unit-tests-for-the-recordasyaml-and-replay-methods}
+### Unit Tests for the RecordAsYaml and Replay Methods
 
 To test the functionality of recordAsYaml and replay methods in isolation and verify if they work as suggested above, the following unit tests were developed.
 
@@ -230,7 +230,7 @@ public class AddsExclamation implements Says {
 ![](Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241.png)  
 *Figure 2- A microservice that adds exclamation marks to input messages.*
 
-### A Single-Threaded Event-Driven Process {#h3-3-a-single-threaded-event-driven-process}
+### A Single-Threaded Event-Driven Process
 
 We can combine these all stages in one process, one thread.
 
@@ -245,7 +245,7 @@ public class DirectWithExclamationMain {
 ```
 
 
-### Testing a Single Event-Driven Service {#h3-4-testing-a-single-event-driven-service}
+### Testing a Single Event-Driven Service
 
 Instead of embedding large amounts of text in a test, we can read resource files.
 
@@ -292,6 +292,6 @@ In the next post, we will see how to implement more realistic example processing
 
 This provides a basis for creating highly performant, deterministic, redundant microservices
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 This article shows the outline of creating and testing a simple microservice, which provides the basis for microservices which are easy to deploy and maintain.

@@ -29,8 +29,8 @@ The tools in each KoolKit were carefully selected, and you can read more about t
 
 If you just want to take a look at the good stuff, feel free to check out the full project [on GitHub](https://github.com/lightrun-platform/koolkits).
 
-Debugging Kubernetes is Hard {#h2-0-debugging-kubernetes-is-hard}
------------------------------------------------------------------
+Debugging Kubernetes is Hard
+----------------------------
 
 It's not trivial to understand what's going on inside a Kubernetes pod.
 
@@ -40,8 +40,8 @@ Furthermore, to access your application with local tools (like debuggers) you ne
 
 And, the crown jewel of the distributed systems world-altering the state of or completely halting the running pod (e.g. when placing a breakpoint) might cause cascading failures in other parts of your system, which will exacerbate the existing problem.
 
-The Motivation Behind KoolKits {#h2-1-the-motivation-behind-koolkits}
----------------------------------------------------------------------
+The Motivation Behind KoolKits
+------------------------------
 
 Lightrun was built with Kubernetes in mind -- we work across multiple pods, multiple clusters, and even multiple clouds. We understood early on that packing a punch by using the right tools is a great source of power for the troubleshooting developer -- and we figured we'd find a way to give back to the community somehow -- and that's how we came up with the idea for KoolKits.
 
@@ -65,29 +65,29 @@ By using a KoolKit, you're allowing yourself the benefits of a small production 
 
 P.S. KoolKits was inspired by [kubespy](https://github.com/huazhihao/kubespy) and [netshoot](https://github.com/nicolaka/netshoot).
 
-Considerations {#h2-2-considerations}
--------------------------------------
+Considerations
+--------------
 
 There's quite a few decisions we made during the construction of these images -- some things we took into consideration are listed below.
 
-### Size of Images {#h3-3-size-of-images}
+### Size of Images
 
 KoolKits Docker images tend to run, uhm, rather **large**.
 
 KoolKits are intended to be downloaded once, kept in the cluster's Docker registry, and then spun up immediately on demand as containers. Since they're not intended for constant pulling, and since they're intended to be packed with goodies, this is a side effect we're willing to endure.
 
-### Using Ubuntu base images {#h3-4-using-ubuntu-base-images}
+### Using Ubuntu base images
 
 Part of the reason it's hard to create a really slim image is due to our decision to go with a full Ubuntu 20.04 system as the basis for each KoolKit. This mainly came from our desire to replicate the same environment you would debug with locally inside your clusters.
 
 For example, this means no messing around with Alpine alternatives to normal Ubuntu packages you're used to working with. Actually, this means we have a way of including tools that have no Alpine versions in each KoolKit.
 
-### Using language version managers {#h3-5-using-language-version-managers}
+### Using language version managers
 
 Each KoolKit uses (wherever possible) a language version manager instead of relying on language-specific distros. This is done to allow you to install older runtime versions easily, and in order to allow you to swap between runtime versions at will (for example, to get specific versions of tooling that only exist for specific runtime versions), as need be.
 
-Available KoolKits {#h2-6-available-koolkits}
----------------------------------------------
+Available KoolKits
+------------------
 
 Each of the folders in the repo contains the Dockerfile behind the KoolKit and a short explanation of the debug image. All KoolKits are based on the [ubuntu:20.04](https://hub.docker.com/layers/ubuntu/library/ubuntu/20.04/images/sha256-57df66b9fc9ce2947e434b4aa02dbe16f6685e20db0c170917d4a1962a5fe6a9?context=explore) base image, since real people need real shells.
 
@@ -99,15 +99,15 @@ The list of available KoolKits:
 
 Note that you don't actually have to build them yourselves -- all KoolKits are hosted publicly on Docker Hub and available free of charge.
 
-KoolKits Coming up {#h2-7-koolkits-coming-up}
----------------------------------------------
+KoolKits Coming up
+------------------
 
 * A whole new, Go 1.17.7 KoolKit
 * JVM KoolKit -- [jvm-profiler](https://github.com/uber-common/jvm-profiler), [jHiccup](https://github.com/giltene/jHiccup) support
 * Node.js KoolKit -- [llnode](https://github.com/nodejs/llnode), [thetool](https://github.com/sfninja/thetool) support
 * Python KoolKit -- [vardbg](https://github.com/CCExtractor/vardbg), [memprof](https://github.com/jmdana/memprof) support
 
-Contribution {#h2-8-contribution}
----------------------------------
+Contribution
+------------
 
 We'd be more than happy to add tools we missed to any image -- just [open a pull request](https://github.com/lightrun-platform/koolkits/pulls) or [an issue](https://github.com/lightrun-platform/koolkits/issues) to suggest one.

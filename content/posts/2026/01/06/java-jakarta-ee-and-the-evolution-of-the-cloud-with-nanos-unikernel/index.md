@@ -29,7 +29,7 @@ For years, Kubernetes has been considered the de‑facto standard for modernizin
 
 Nanos images are not just an alternative to containers: they are **lighter, faster, more secure, more performant, and more efficient** . Unlike containers, which coexist with a general‑purpose Linux kernel, a Nanos image contains **only what the Java application needs** , allowing the JVM to use **100% of the CPU and RAM** of the VM. The result is a more efficient environment with **higher density** , **less waste** , and **lower operational costs**.
 
-### Why Nanos Unikernel {#h3-0-why-nanos-unikernel}
+### Why Nanos Unikernel
 
 VMs vs. Containers vs. Unikernels
 
@@ -59,7 +59,7 @@ This results in:
 * better hardware utilization
 * **more workloads per physical node compared to containers**
 
-### What Changes Compared to Kubernetes {#h3-1-what-changes-compared-to-kubernetes}
+### What Changes Compared to Kubernetes
 
 |-------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | ##### Kubernetes Model ![](k8s.png) | ##### Nanos Unikernel Model ![](nanos.png) |
@@ -89,7 +89,7 @@ The result:
 * higher throughput
 * **better performance on the same hardware**
 
-### Nanos Images = Cloud-Native Immutable Images {#h3-2-nanos-images-cloud-native-immutable-images}
+### Nanos Images = Cloud-Native Immutable Images
 
 Each Nanos build produces a **single immutable VM image** , versioned and ready to be replaced.  
 
@@ -106,7 +106,7 @@ Unlike container images, Unikernel images:
 
 This not only increases security but also enables **higher application density** : on the same physical node you can run **more Nanos VMs than containers**, thanks to the drastically smaller footprint.
 
-### CI/CD: GitHub Actions for Building Azul 25 + Payara 7 on Nanos Images {#h3-3-ci-cd-github-actions-for-building-azul-25-payara-7-on-nanos-images}
+### CI/CD: GitHub Actions for Building Azul 25 + Payara 7 on Nanos Images
 
 |---------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
 | ![](logo.png) | ![](logo.svg) | ![](Payara_Logo-700x365.jpg) |
@@ -129,7 +129,7 @@ Because Nanos images are lighter than containers, the pipeline becomes:
 * more predictable
 * more cost-efficient
 
-### Scaling: The Hypervisor Does Kubernetes' Job {#h3-4-scaling-the-hypervisor-does-kubernetes-job}
+### Scaling: The Hypervisor Does Kubernetes' Job
 
 With Kubernetes:
 
@@ -153,7 +153,7 @@ This means:
 * fewer instances to maintain
 * **lower cost per unit of load**
 
-### Application Upgrades: Rolling Just Like Kubernetes {#h3-5-application-upgrades-rolling-just-like-kubernetes}
+### Application Upgrades: Rolling Just Like Kubernetes
 
 The upgrade pattern is surprisingly similar.
 
@@ -177,7 +177,7 @@ Since Nanos images are smaller and faster, rollouts are:
 * more predictable
 * less expensive
 
-### Security: Stronger Isolation than Containers {#h3-6-security-stronger-isolation-than-containers}
+### Security: Stronger Isolation than Containers
 
 Container security is configuration-based (seccomp, AppArmor, SELinux, Kubernetes policies).  
 
@@ -188,14 +188,14 @@ Nanos security is **architectural**.
 
 And because there are no system processes, **all resources are dedicated to the JVM**, increasing performance and reducing costs.
 
-### Nanos Is a Better Choice {#h3-7-nanos-is-a-better-choice}
+### Nanos Is a Better Choice
 
 * you want scaling and rolling upgrades
 * you want to reduce operational costs
 * you want to maximize the cloud hypervisor
 * you want **better security, higher density, better performance, and lower costs**
 
-### Conclusion {#h3-8-conclusion}
+### Conclusion
 
 With Nanos Unikernel on the cloud you can:
 
@@ -210,7 +210,7 @@ With Nanos Unikernel on the cloud you can:
 
 Nanos shows that cloud-native can exist **without adding complexity** , and can be **secure** , **faster, lighter, safer, more efficient, and more cost-effective**.
 
-### Further Reading and Resources {#h3-9-further-reading-and-resources}
+### Further Reading and Resources
 
 *
 

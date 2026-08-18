@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 If we want to evolve our Java system over time, architecture is more important than the choice of framework. Very often, teams realize too late that what was supposed to be a simple persistence layer at the beginning ended up influencing and overwhelming the entire application design. MongoDB annotations end up in domain models, repository abstractions mirror collections, and business logic becomes an integral part of the infrastructure.
 
@@ -30,8 +30,8 @@ Hexagonal architecture, also known as Ports and Adapters, offers an architectura
 
 In this article, we focus on a concrete, real-world scenario: using a database, specifically MongoDB, without contaminating the main domain. The goal is not theoretical elegance, but long-term maintainability and testability of the solution.
 
-Why "Clean Core" Still Matters in 2026 {#h2-1-why-clean-core-still-matters-in-2026}
------------------------------------------------------------------------------------
+Why "Clean Core" Still Matters in 2026
+--------------------------------------
 
 It would be great if modern frameworks solved all architectural problems for us. Spring Boot, Quarkus, and Micronaut offer conventions, annotations, and automatic configuration. All things that promise productivity and organization from day one. And, to be honest, they do exactly what they promise.
 
@@ -39,8 +39,8 @@ The real problem is that frameworks are optimized to get started and provide str
 
 The clean core principle respects and recognizes this asymmetry. It isolates business rules from infrastructure. This allows persistence strategies, testing approaches, and frameworks to evolve without making invasive changes within the domain. Ports and Adapters explicitly apply this separation, imposing it as a structural guarantee.
 
-Hexagonal Architecture Recap {#h2-2-hexagonal-architecture-recap}
------------------------------------------------------------------
+Hexagonal Architecture Recap
+----------------------------
 
 At its core, hexagonal architecture is very simple:
 
@@ -52,8 +52,8 @@ At its core, hexagonal architecture is very simple:
 
 What makes this architecture powerful is the directional dependency: the core depends on the abstractions, while the infrastructure depends on the core. Not the other way around.
 
-Ports: Defining What the Core Needs {#h2-3-ports-defining-what-the-core-needs}
-------------------------------------------------------------------------------
+Ports: Defining What the Core Needs
+-----------------------------------
 
 A port tells the application what to do, not how to do it. It represents a domain functionality, not an abstraction of the persistence layer.
 
@@ -77,8 +77,8 @@ These interfaces are in the core module. They do not connect to MongoDB, Spring 
 
 The domain says what is needed, the adapters decide how to do it.
 
-The Domain Model Must Stay Ignorant {#h2-4-the-domain-model-must-stay-ignorant}
--------------------------------------------------------------------------------
+The Domain Model Must Stay Ignorant
+-----------------------------------
 
 Check your domain model carefully. If it uses persistence annotations or Spring data types, using MongoDB or any other database is no longer just a technical detail. The boundaries have already been crossed, and technology has begun to shape the inner core.
 
@@ -86,8 +86,8 @@ In a hexagonal architecture, domain objects are simple Java objects whose only t
 
 This is not purity for its own purpose: keeping the domain in the dark is what allows for true isolation. Business logic can be tested without a database, evaluated without any knowledge of specific frameworks, and evolved without coordinating changes between technical layers.
 
-MongoDB as an Adapter --- Not a Repository {#h2-5-mongodb-as-an-adapter-not-a-repository}
------------------------------------------------------------------------------------------
+MongoDB as an Adapter --- Not a Repository
+------------------------------------------
 
 MongoDB fits perfectly into a hexagonal architecture, but only when we consider it an adapter and not a conceptual reference point. This way of looking at things requires us to go against the recommended approach of frameworks, which is centered on the concept of a repository.
 
@@ -95,8 +95,8 @@ By reversing this approach, instead of asking how an aggregate should be maintai
 
 Starting from this assumption, the MongoDB adapter translates domain objects into specific representations for persistence, executes queries optimized for document storage, and manages indexes, projections, and schema evolution. The core remains completely unaware of what BSON is, what a collection is, or the language used for queries. This separation preserves flexibility and extensibility.
 
-Mapping Between Domain and Persistence Models {#h2-6-mapping-between-domain-and-persistence-models}
----------------------------------------------------------------------------------------------------
+Mapping Between Domain and Persistence Models
+---------------------------------------------
 
 Hexagonal architecture is often criticized for its duplication of patterns. In practice, this duplication is both intentional and beneficial.
 
@@ -156,8 +156,8 @@ public class OrderMapper {
 
 This type of mapping is an ad hoc demarcation line, as it allows changes to be localized and prevents the core from getting involved in the details of persistence.
 
-Testing: Where the Architecture Pays Off {#h2-7-testing-where-the-architecture-pays-off}
-----------------------------------------------------------------------------------------
+Testing: Where the Architecture Pays Off
+----------------------------------------
 
 The real advantage of this architecture is the testing approach. With a clean core:
 
@@ -169,8 +169,8 @@ MongoDB adapters can be tested separately, using TestContainer, with embedded Mo
 
 The key point is that the testing strategy follows the architectural design.
 
-Spring Boot Without Letting It Take Over {#h2-8-spring-boot-without-letting-it-take-over}
------------------------------------------------------------------------------------------
+Spring Boot Without Letting It Take Over
+----------------------------------------
 
 Following on from what has just been said, Spring only becomes a problem when it is allowed to define the architecture instead of giving us the tools to support it.
 
@@ -196,8 +196,8 @@ The core module has no Spring dependencies. Component scanning stops at the boun
 
 Spring remains on the edge, exactly where the infrastructure supporting the core module should be located.
 
-When MongoDB Does Influence Design {#h2-9-when-mongodb-does-influence-design}
------------------------------------------------------------------------------
+When MongoDB Does Influence Design
+----------------------------------
 
 MongoDB has distinctive features that naturally influence the design of adapters. MongoDB offers functionality with:
 
@@ -215,8 +215,8 @@ These decisions shift to:
 
 And never in domain entities or interfaces with business logic.
 
-Trade-offs and Real-World Constraints {#h2-10-trade-offs-and-real-world-constraints}
-------------------------------------------------------------------------------------
+Trade-offs and Real-World Constraints
+-------------------------------------
 
 Designing systems using hexagonal architecture is not easy. Adding ports, adapters, and imposing explicit, well-defined boundaries means adding code, levels of indirection, and above all, a higher cognitive load, especially for those applying this style for the first time.
 
@@ -224,8 +224,8 @@ The real advantage is not immediate, but emerges over time. Systems built around
 
 If we need to design a system to last over time, the overhead introduced is a highly rewarding price to pay.
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 Applying the Ports and Adapters architecture is not the same as drawing hexagons, but rather making responsibilities and dependencies explicit and clear.
 

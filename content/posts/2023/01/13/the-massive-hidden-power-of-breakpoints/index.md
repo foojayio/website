@@ -29,8 +29,8 @@ In this weeks post we'll talk about breakpoints. It's a long one since what we m
 
 <br />
 
-Transcript {#h2-0-transcript}
------------------------------
+Transcript
+----------
 
 Welcome back to the forth part of debugging at Scale where we kick ass and take names. Variable names!
 
@@ -38,11 +38,11 @@ In this section we discuss breakpoints which are the most basic units of work wh
 
 We talked about the most basic breakpoint in our first installment. This time we'll dig a bit deeper and into some of the lesser known nuances.
 
-### Conditional Breakpoints {#h3-1-conditional-breakpoints}
+### Conditional Breakpoints
 
 We start with conditional breakpoints. Conditional breakpoints lets us define a condition for a breakpoint hit. This prevents the thread from stopping constantly on a breakpoint. I discussed this before with the myThread marker object we created in the previous video. In this case we only stop if it's different from current thread. That means this breakpoint will only hit if a different thread invokes it. It's a great way to detect thread related problems like deadlocks or races. This feature is worth repeating since it's such an important feature.
 
-### Method Breakpoints {#h3-2-method-breakpoints}
+### Method Breakpoints
 
 Method breakpoints are pretty problematic.
 
@@ -60,7 +60,7 @@ To see the use case for method breakpoints lets go into the manage breakpoints w
 
 If you have an abstract base class whose subclasses follow a naming convention and they have many related methods. You want to track everything and you can do that using this approach. Notice you can also use tracepoints here and get very deep logging. We'll discuss tracepoints in a few minutes.
 
-### Field Watchpoints {#h3-3-field-watchpoints}
+### Field Watchpoints
 
 Field watchpoints aren't your typical breakpoint. A watchpoint will stop every time the value of the field changes or every time it's read. This is a remarkably cool way to catch a case where some code mutates a variable or find out how a field value propagates into the code.
 
@@ -68,13 +68,13 @@ Notice we can tune whether it stops at read operations, write operations or both
 
 It's called a watchpoint and not a breakpoint because it isn't the point where the code stops. It stops at the point of access not on the field itself.
 
-### Breakpoint Management {#h3-4-breakpoint-management}
+### Breakpoint Management
 
 IDEs provide a management UI for all the breakpoints. We can manage the breakpoints we already have and create new breakpoints in the view breakpoints menu. I can open it via the view breakpoints menu option or I can use `Shift-Control-F8` key combination. Notice that on a mac we need to use command instead of the control key.
 
 In this dialog we can disable, delete and edit breakpoints. You'll notice we have a lot of options here that we'll discuss soon. We can add breakpoints from here. There are several interesting options but now I'll just add a simple field breakpoint.
 
-### Exception Breakpoints Suck (Or do they?) {#h3-5-exception-breakpoints-suck-or-do-they}
+### Exception Breakpoints Suck (Or do they?)
 
 We can set a breakpoint to stop when an exception is thrown. But it's a bit of a problem. I have two options. First I can catch a specific exception by name. This is useful if you know in advance the exception that will be thrown. But I can't think of many cases where this happened and I didn't already know the line where the exception is thrown.
 
@@ -94,7 +94,7 @@ Once I press OK I can press continue and the application runs without breaking o
 
 It's amazing that this isn't the IDE default. Without it the feature is practically useless.
 
-### Tracepoints (AKA Logpoints) {#h3-6-tracepoints-aka-logpoints}
+### Tracepoints (AKA Logpoints)
 
 Tracepoints or LogPoints are some of the most important types of breakpoints we have. We can add a tracepoint by shift clicking on the gutter. This opens up a familiar breakpoint dialog but it looks a bit different. First off notice this
 
@@ -112,7 +112,7 @@ Let's press OK
 
 And then run this program, we can see the log we added in the tracepoint printed to the console as if we wrote it in the code!
 
-### Grouping and Naming {#h3-7-grouping-and-naming}
+### Grouping and Naming
 
 Grouping and naming are crucial once we scale up our debugging.
 
@@ -124,7 +124,7 @@ It saves us from tediously pressing continue when trying to reach a state and le
 
 But the true value here is at scale. Say you have a complex debugging session with multiple tracepoints running concurrently. You can group the session and disable the breakpoints while switching to a different branch to debug something else. Then go back to where you were when you're done.
 
-### Disable Breakpoint {#h3-8-disable-breakpoint}
+### Disable Breakpoint
 
 Sometimes a breakpoint is constantly hit and we only need a specific stack
 
@@ -132,7 +132,7 @@ We can disable a breakpoint until a different breakpoint or an exception is hit 
 
 This is very useful for the case of a failure that only goes through a specific pathway. I can add a tracepoint to the first method. Then disable the actual breakpoint I want in that tracepoint.
 
-### Instance Filters {#h3-9-instance-filters}
+### Instance Filters
 
 Instance filters let us only accept a breakpoint from a specific object instance
 
@@ -148,19 +148,19 @@ So the next step is to change the instance filter to a different object instance
 
 Now that we've made that change the breakpoint no longer breaks.
 
-### Class Filters {#h3-10-class-filters}
+### Class Filters
 
 Class filters don't make sense for a typical line breakpoint. Class filters make sense when using a field watchpoint or an exception breakpoint.  
 
 In this case I have a public field. I filter the access to the field to ignore all access from the prime main class. If a different class accesses the field the breakpoint will hit. This is very useful otherwise I might get a lot of hits on the watchpoint from the current class. But I want to see other cases.
 
-### Caller Filters {#h3-11-caller-filters}
+### Caller Filters
 
 Caller filter implements a filter based on the signature of the invoking method. To use it we again need to go to the advanced menu. It supports wildcards so I can limit the caller to only allow the run method. Notice that it uses JVM notation for method signature which is a pretty complex subject I'll discuss later. I have a section covering that in my debugging book. The method keeps stopping at the breakpoint as expected because as we can see here, the run method is indeed in the stack trace. So the filter applies properly and hits the breakpoint.
 
 We can again customize the breakpoint in the quick edit UI for the filter. In this case I change the filter to look for a method called stop which doesn't exist and indeed the breakpoint no longer breaks.
 
-### Final Word {#h3-12-final-word}
+### Final Word
 
 This has been a long video, I hope you found it educational and comprehensive. In the next video we'll talk about debugging streams and collections.  
 

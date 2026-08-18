@@ -33,8 +33,8 @@ We will try to keep the details short on data loading, so that we can focus on t
 
 Without further ado, let's get started!
 
-Architecture {#_architecture}
------------------------------
+Architecture
+------------
 
 The first microservices architecture we started with in the [level 1 version](https://jmhreif.com/blog/microservices-level1/) of this project comprised of two Spring Boot applications trading a single message string between them. In the next two levels, we added an embedded and then a separate MongoDB database with imported book data set for the applications to host and call.
 
@@ -46,8 +46,8 @@ Here is the updated architecture:
 
 We also have a few changes in services 1 and 2 due to switching data sets in the database. A couple of field names are different, and the data has more information. While we won't spend a lot of time on that, the new data set is a trimmed-down subset of the [UCSD Book Graph](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home?authuser=0).
 
-New data load {#_new_data_load}
--------------------------------
+New data load
+-------------
 
 The above-mentioned UCSD Book Graph data set we are using is very thorough and diverse, which makes it great for larger projects.
 
@@ -59,8 +59,8 @@ Once the data was in, I ran a couple queries to verify the format looked as I ex
 
 *\*Note:\* For more info about trimming the data set for this project, check out my [blog post on picking data cleaning tools](https://jmhreif.com/blog/data-cleaning-goodreads/). Detailed steps on importing the data to the database are provided in the [Github project's docker folder](https://github.com/JMHReif/microservices-level4/tree/main/docker-mongodb).*
 
-Applications - Service 1 {#_applications_service_1}
----------------------------------------------------
+Applications - Service 1
+------------------------
 
 Since we are adding a separate service to interact with a different entity (author vs. book), the only changes needed for `service1` are to align properties with the new data set.
 
@@ -73,7 +73,7 @@ spring.data.mongodb.database=goodreads
 
 Changes in the application class code will also be very few. Let's take a look at that next.
 
-### Service 1 - project code {#_service_1_project_code}
+### Service 1 - project code
 
 The data domain class (`Book`) is the only section that needs to change here. This is due to the fields on the book object have changed with the new data set. The updated class code is below.
 
@@ -95,12 +95,12 @@ If you are looking at the [previous version of the code](https://github.com/JMHR
 
 With those changes to the data domain, let's see what changes to `service2` entail.
 
-Applications - Service 2 {#_applications_service_2}
----------------------------------------------------
+Applications - Service 2
+------------------------
 
 There are no changes to the dependencies, properties, or other configuration pieces of the application, so we can skip straight to the application class.
 
-### Service 2 - project code {#_service_2_project_code}
+### Service 2 - project code
 
 The same changes we made to the data domain in service1 also need to be made in service2 for field name changes and additions.
 
@@ -116,8 +116,8 @@ class Book {
 
 On to the new service for the book authors!
 
-Applications - Service 3 {#_applications_service_3}
----------------------------------------------------
+Applications - Service 3
+------------------------
 
 This will be the real core of this step in the microservices project. We are adding a separate service to manage and interact with author data. The code will look very similar to service1 for books because we are essentially creating the same functionality, except for author objects.
 
@@ -148,7 +148,7 @@ spring.data.mongodb.database=goodreads
 
 On to the code!
 
-### Service 3 - project code {#_service_3_project_code}
+### Service 3 - project code
 
 The data domain class, repository interface, and controller class in service3 follow the same patterns as what we did in service1, but for authors. That means really only fields, names, and endpoints need changed, so let's take a look!
 
@@ -193,8 +193,8 @@ Moving to the `Service3Application` class, no changes are needed. It already inc
 
 Let's test all the services together!
 
-Put it to the test {#_put_it_to_the_test}
------------------------------------------
+Put it to the test
+------------------
 
 As usual, we will spin up our project from top to bottom, starting with the database in the Docker container. Running `docker ps` will show us whether the container is running. If not started, use `docker start mongoBooks` to kick it off.
 
@@ -210,8 +210,8 @@ And here is the resulting output from authors api results from service3!
 
 ![microservices lvl4 results](microservices-lvl4-results.png)
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 In this post, we took another big leap by adding a separate, new service that hosts a REST API for authors in the database.
 
@@ -227,8 +227,8 @@ We ran and tested all of these changes together by starting all three of our app
 
 Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github: [microservices-level4](https://github.com/JMHReif/microservices-level4) repository
 * Previous blog posts: [Microservices Level 1](https://jmhreif.com/blog/microservices-level1/), [Microservices Level 2](https://jmhreif.com/blog/microservices-level2/), [Microservices Level 3](https://jmhreif.com/blog/microservices-level3/)

@@ -29,8 +29,8 @@ I got curious. I have decided to compare four major Java frameworks: Spring, Qua
 
 Here's what I found.
 
-Choosing your character class {#h2-0-choosing-your-character-class}
--------------------------------------------------------------------
+Choosing your character class
+-----------------------------
 
 I've named my demo app a quest for a reason. I think that selecting a framework is like picking an RPG character at the start of a long campaign. Each comes with a personality, strengths, constraints, and a preferred playstyle that shapes every decision down the road. So, before committing to one, ask yourself these eight questions:
 
@@ -47,8 +47,8 @@ I've named my demo app a quest for a reason. I think that selecting a framework 
 
 Let's see if the reflex holds up.
 
-Spring {#h2-1-spring}
----------------------
+Spring
+------
 
 Spring Boot is the paladin. It is familiar to almost every Java developer, built for sustained enterprise work, and designed to absorb complexity. Its pitch is straightforward: stand-alone, production-grade applications that you can just run, with opinionated starters, auto-configuration, and production features included.
 
@@ -113,8 +113,8 @@ The tradeoff is startup time and memory. Spring pays for its convenience with ab
 
 For hiring, Spring Boot is the default keyword in Java backend job descriptions. You can staff it at every level.
 
-Quarkus {#h2-2-quarkus}
------------------------
+Quarkus
+-------
 
 If Spring is a heavily-armed warrior, Quarkus is a ranger: fast and very knowledgeable of the terrain it operates on. Quarkus was designed for containers from the start. Red Hat built it around build-time augmentation: instead of resolving dependencies and wiring beans at runtime, Quarkus does most of that work during the build, which is why the quest app starts in 2.1 seconds in a container.
 
@@ -184,8 +184,8 @@ For Kubernetes deployments, Quarkus provides dedicated extensions, health checks
 
 The talent pool is thinner than Spring's. You can hire Java developers and train them up, but engineers with senior Quarkus production experience are still rare.
 
-Jooby {#h2-3-jooby}
--------------------
+Jooby
+-----
 
 Jooby is the monk. It travels light and advocates for minimalism: You pick every piece yourself. No annotation-driven magic to reverse-engineer. Routes are functions:
 
@@ -228,8 +228,8 @@ The container image is 149MB and startup is 0.79 seconds. For a focused API serv
 
 The cost shows up when requirements grow. As soon as you need OAuth/OIDC, audit logging, distributed tracing, retry patterns, and platform conventions, you assemble them yourself --- and those decisions become yours to maintain. Jooby is actively maintained with a clear security policy, but the available modules are fewer than what Spring and Quarkus provide out of the box. A confident senior team that values simplicity will thrive with it. If the company expects easy staffing or rotation, Jooby gets harder to justify.
 
-Vert.x {#h2-4-vert-x}
----------------------
+Vert.x
+------
 
 Vert.x is often called a framework, but technically, it is a toolkit for building reactive applications on JVM. It was specifically designed for high-volume messages, large event processing, HTTP interactions, and cloud-native apps. It is a reactive sorcerer who can punish hard. The official docs put it plainly: do not block the event loop, or the application can grind to a halt.
 
@@ -271,8 +271,8 @@ That chain of `.compose()` calls bootstraps the entire application. Each step is
 
 For APIs that genuinely need high concurrency, event-bus patterns, reactive database access, or custom protocol handling, Vert.x can be excellent. For standard CRUD, you're paying a complexity tax the system doesn't need.
 
-The numbers {#h2-5-the-numbers}
--------------------------------
+The numbers
+-----------
 
 All four apps were containerized with multi-stage Docker builds using [BellSoft Hardened Images](https://bell-sw.com/bellsoft-hardened-images/), which keep CVE counts low and image sizes lean by default. No AOT processing, no native images. Just the frameworks running as-is, so the comparison stays honest. The Dockerfiles are included into each framework's module.  
 
@@ -285,8 +285,8 @@ These are baseline numbers without tuning. Spring's startup improves substantial
 | **Jooby**   |      367      |        149 MB        |   3.2 s    |    0.79 s    |
 | **Vert.x**  |      530      |        147 MB        |   2.3 s    |    0.73 s    |
 
-Who plays which character {#h2-6-who-plays-which-character}
------------------------------------------------------------
+Who plays which character
+-------------------------
 
 For most teams making this decision without strong constraints in either direction, Spring is still the right call. It carries the lowest organizational risk: documentation, support lifecycle, mature third-party tooling, straightforward replacement hiring. The LOC count is the lowest of the four, and most Java developers already know the rules.
 

@@ -23,13 +23,13 @@ In the previous [blog post](https://foojay.io/today/introduction-to-jvm-unified-
 
 I wasn't satisfied with the official documentation and other blog posts as they usually present only a fragmented picture of the previous options. This led me to dig in.
 
-Migrating the GC logging (continued) {#_migrating_the_gc_logging_continued}
----------------------------------------------------------------------------
+Migrating the GC logging (continued)
+------------------------------------
 
 |------|--------------------------------|
 | Note | These log are based on JDK11u. |
 
-### Exhaustive translation table {#_exhaustive_translation_table}
+### Exhaustive translation table
 
 I extracted the following table from the actual patches that implemented JEP-271, see [JDK-8059805](https://bugs.openjdk.java.net/browse/JDK-8059805), [JDK-8145092](https://bugs.openjdk.java.net/browse/JDK-8145092), and in particular the [related diff](https://hg.openjdk.java.net/jdk9/jdk9/hotspot/rev/f944761a3ce3) [(on github)](https://github.com/AdoptOpenJDK/openjdk-jdk11u/commit/d724e8a3489f8ebb57c7bbf82784a2b2d537fdc8).
 
@@ -88,7 +88,7 @@ In a lesser way I used the official [`java` documentation](https://docs.oracle.c
 | `PrintGCTimeStamps` | `uptime` |
 [Table 2. old options are now decorators]
 
-### Caveat when using this translation table {#_caveat_when_using_this_translation_table}
+### Caveat when using this translation table
 
 I noticed while analyzing GC logs with the above unified logging configuration that some logs I expected were missing, and while doing this translation table I identified the log statements I expected. They had a different *tag set*.
 
@@ -103,7 +103,7 @@ Moreover, JDK maintainers are improving the JVM sub-systems logging over time, p
 
 The bottom line is that I believe that the configured/selected tags are too restrictive it might be counter-productive to get valuable information, and may even prevent to get log message from loggers that may be added in the future.
 
-### Embracing unified logging for GC logs {#_embracing_unified_logging_for_gc_logs}
+### Embracing unified logging for GC logs
 
 These caveats led me to think that instead of trying to *mimic* old logging options, I should instead prefer to log more tags and simplify the overall logging configuration.
 
@@ -166,7 +166,7 @@ GC tagsets with `gc*=debug` configuration
 
 Of course if one want to focus on a certain part, it is alwasy possible to specify explicitly the tags with a higher logging level.
 
-#### Try GC logging configurations {#_try_gc_logging_configurations}
+#### Try GC logging configurations
 
 Unlike `os` and `container` logs, GC happens almost continuously. This opens the opportunity to try log configurations at runtime using `jcmd`. In the example below I wanted to monitor more thoroughly G1GC regions:
 
@@ -180,7 +180,7 @@ jcmd $(pidof java) \
 ```
 
 
-### Migrating the Trace\* flags {#_migrating_the_trace_flags}
+### Migrating the Trace\* flags
 
 One thing I used to log is about classes, particularly during development. Especially loading and unloading. I used this a lot while debugging some aspects of Mockito and some application servers back in the days.
 
@@ -245,7 +245,7 @@ static AliasedFlag const removed_develop_logging_flags[] = {
 ```
 
 
-End words {#_end_words}
------------------------
+End words
+---------
 
 In this article I provided an exhaustive translation table for GC logging flags and Trace\* logging flags. However after using these log configuration the surfacing idea to bring home is there is a better approach than using a one-to-one mapping from flags to tags, instead favoring tag with wildcard resulting in simpler and future-proof log configuration.

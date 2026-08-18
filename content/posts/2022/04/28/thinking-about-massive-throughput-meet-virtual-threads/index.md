@@ -27,8 +27,8 @@ No, no-worries, the current Java threading model remains but behind the curtains
 
 Yes, we are talking about JEP-425: Virtual Threads.
 
-Knocking on current concurrency limits {#h2-0-knocking-on-current-concurrency-limits}
--------------------------------------------------------------------------------------
+Knocking on current concurrency limits
+--------------------------------------
 
 Let's first look at the current Java threading model. It provides an implementation of the Thread class. A Thread can be considered a Java concurrency unit which can execute so-called *Runnable* tasks. The instance of a Thread class is also an object but there is a bit more happening behind the scenes.
 
@@ -89,8 +89,8 @@ Example 3. Using *ComputableFuture* may come with drawbacks such as not terminab
 
 To be fair as Java platform is highly multi-threaded therefore we talk about the concurrency we must consider also garbage collectors, debuggers, profilers or other technologies are influenced by the "threading game".
 
-Meeting Virtual Threads {#h2-1-meeting-virtual-threads}
--------------------------------------------------------
+Meeting Virtual Threads
+-----------------------
 
 Okay, that's what we currently have. Something exciting is going to happen. The next upcoming big concurrency model extension. These are the Virtual Threads. I'll explain what they are, where they are coming from and why we should want them! The motivation may be obvious. Let's refresh the background.
 
@@ -148,7 +148,7 @@ Example 5. The Java SE 19 proposed "newThreadPerTaskExecutor" method that runs a
 
 Virtual threads allow the execution of hundreds of tasks concurrently (!) which may have otherwise resulted in JVM crashes or out-of-memory exceptions by utilizing a common thread model (Example 4. With for example THREAD_NUMBER = 10_000).
 
-### A few things to remember {#h3-2-a-few-things-to-remember}
+### A few things to remember
 
 A virtual thread **always** runs **as** a **Daemon** thread with **NORM_PRIORITY** , which means that usage of the setter has no effect. As the Virtual threads are carried by the active threads, it can not be a part of any **ThreadGroup** . Usage of Thread.getThreadGroup returns "*VirtualThreads*".
 
@@ -156,21 +156,21 @@ A virtual Thread has **no permission** while running with Security Manager, whic
 
 As has been already mentioned the Virtual Thread behaves pretty much like normal threads which implies that they can use a thread local and thread local inheritable variables (carefully as virtual thread should never be pooled)
 
-### Remember one more thing {#h3-3-remember-one-more-thing}
+### Remember one more thing
 
 Java SE 19 is also coming with another quite important improvement. The *ExecutorService* now extends *AutoCloseable* interface and is recommended to use the "*try-with-resource*" construct. This goes nicely in hand with the intent of the finalization removal (JEP-421, Reference 3.)
 
 An additional extension that is related to the upcoming Virtual Thread are Java Flight Recorder Events
 ![Image 2.: Upcoming Java Flight Recorder Events for Virtual Threads](image_2-614x510.png) Image 2.: Upcoming Java Flight Recorder Events for Virtual Threads
 
-### Almost no darksiders {#h3-4-almost-no-darksiders}
+### Almost no darksiders
 
 There may be some potential drawbacks. One is related to the fact that VirtualThread is planned to use a common thread pool, the thread pool also used by other processes running in the JVM, such as the ForkJoin framework (Image 1.). This may hypothetically cause an out of memory exception in an attempt to allocate a thread stack or turn the application into thread starving.
 
 Another challenge is a potential incompatibility with existing concurrency code as for example the ThreadGroup always returns the value "*VirtualThreads*" but the fact is that it can not be destroyed, resumed or stopped. Those methods aways cause an exception. ThreadMXBean is intended to be used only for platform threads and some other...
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 ![Image 3.: ComputableTaskEvent emitted by the task. It shows the Virtual Threads usage. Virtual Threads are served by the factory (Example 5.)](image_3-700x229.png) Image 3.: ComputableTaskEvent emitted by the task. It shows the Virtual Threads usage. Virtual Threads are served by the factory (Example 5.)
 
@@ -181,8 +181,8 @@ After all, JEP-425 is still under heavy development and we should be looking for
 To test the current state you can check the GitHub Project (Reference 5.)
 ![Image 4.: Traditional “request-per-thread” approach showing its limitations compared to Image 3.](image_4-700x93.png) Image 4.: Traditional "request-per-thread" approach showing its limitations compared to Image 3.
 
-References {#h2-6-references}
------------------------------
+References
+----------
 
 1. Project Loom Early-Access Build 19-loom+5-429 (2022/4/4), https://jdk.java.net/loom/
 2. JEP-425: Virtual Threads (Preview), <https://openjdk.java.net/jeps/425#observability>

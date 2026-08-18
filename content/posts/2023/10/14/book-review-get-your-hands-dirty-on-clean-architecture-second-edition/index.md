@@ -27,8 +27,8 @@ frozen: false
  <img fetchpriority="high" decoding="async" src="image-830x1024.png" alt="" class="wp-image-102635" style="width:301px;height:371px" width="301" height="371">
 </figure>
 
-About the book {#h2-0-about-the-book}
--------------------------------------
+About the book
+--------------
 
 **price** : €26.99 for the eBook  
 **publication date** : July 2023  
@@ -36,8 +36,8 @@ About the book {#h2-0-about-the-book}
 **pages** : 168  
 **ISBN**: 9781805128373
 
-Content {#h2-1-content}
------------------------
+Content
+-------
 
 1. Maintainability =\> what does it mean, and how do we ensure it
 2. What's wrong with layers? =\> What are the implications \& consequences
@@ -57,8 +57,8 @@ Content {#h2-1-content}
 
 <br />
 
-My thoughts {#h2-2-my-thoughts}
--------------------------------
+My thoughts
+-----------
 
 Tom Hombergs does a magnificent job of walking through a lot the different architectural considerations one has to make to develop maintainable code (including pros/cons), using practical examples and demonstrations (which are also available in a GitHub repository).
 

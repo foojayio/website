@@ -21,8 +21,8 @@ frozen: false
 
 Here are the JavaFX LinksOfTheMonth of May 2026. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Applications {#h2-0-applications}
----------------------------------
+Applications
+------------
 
 * [**Gerrit Grunwald**](https://bsky.app/profile/hansolo.eu/post/3mkeusogqbs2h): "*After a nice 14km morning walk, I've modified the prediction mode in my little [JavaFX diabetes app and created a new release](https://github.com/hansolo/glucostatusfx/releases)... and all of that before 8am... great start into the Sunday.* 😁"
 * [Message from JabRef](https://foojay.social/@jabref/116501474018435951): "*We are excited that we are participating in GSOC2026 with 3 projects:* "
@@ -37,8 +37,8 @@ Applications {#h2-0-applications}
 * [**Robert Ladstätter** shared a behind the scenes](https://bsky.app/profile/rladstaetter.bsky.social/post/3mlmbc73w3c25): "*LogoRRR's latest tutorial video was made with JavaFX too. The app, overlays, effects, voice, and recording pipeline all come together in one generated video.*"
 * **Marcus Hirt** is looking for people wanting to try out, and maybe even participate in, a little hobby project: [DiskSpace](https://github.com/thegreystone/diskspace): "*A cross-platform disk space visualizer that shows where your space went, with two complementary views: a sunburst (hierarchical radial layout, good for spotting depth-imbalanced subtrees and proportional weight at a glance) and a squarified-treemap heatmap (good for finding the largest individual cells across the whole tree). Press V to toggle.*"
 
-Components, Libraries, Tools {#h2-1-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [A (removed) message by **Street_Humor_7861** on Reddit](https://www.reddit.com/r/JavaFX/comments/1suhrov/early_contributors_wanted_tailwindfx_utilityfirst/): "*Early contributors wanted for TailwindFX. An utility-first UI framework for JavaFX (MIT, 1.0-SNAPSHOT, actively developed). I'm building TailwindFX, an open-source framework that brings Tailwind CSS's utility-first paradigm to JavaFX. Instead of writing verbose CSS/FXML or inline -fx-\* styles, you compose UIs with familiar utility classes and type-safe Java APIs.* " Check [the repository here](https://github.com/yasmramos/tailwindfx).
 * [**Striking_Creme864** on Reddit](https://www.reddit.com/r/JavaFX/comments/1sz7od8/ceffx_prebuilt_natives_added_no_need_to_compile/): "*We recently introduced our [CEFFX project](https://github.com/techsenger/ceffx) (a library for integrating the Chromium Embedded Framework into JavaFX) and it was well received. Based on that feedback, we decided to simplify its usage by providing prebuilt native libraries. This allows you to use the library without having to compile anything yourself. All native binaries are packaged into the ceffx-natives module using classifier names similar to those in OpenJFX.*"
@@ -58,8 +58,8 @@ Components, Libraries, Tools {#h2-1-components-libraries-tools}
 * Last week, we included a link to the message by **Dirk Lemmermann** about AtlantaFX Themes. Now, there is also a [website at](https://dlsc-software-consulting-gmbh.github.io/atlantafx-themes/) with screenshots of all themes. "*Each theme overrides the color scale, semantic tokens, and dark / light mode flag without touching the upstream stylesheet.*"
 * [**Dirk Lemmermann** announced version 4.1.0 of GemsFX](https://www.reddit.com/r/JavaFX/comments/1tp4jjv/gemsfx_new_controlsfx_atlantafx_companion/): "*now includes an AtlantaFX companion stylesheet for ControlsFX. You can use the method ControlsFXAtlantaFX.apply() to add this new stylesheet to your scene or any parent node. By doing so you will be able to get rid of all those pesky warning / error messages regarding CSS rules using unknown colors. For more on GemsFX see [gemsfx.dlsc.com](https://gemsfx.dlsc.com).*"
 
-Podcasts, Videos, Books {#h2-2-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * [Video by **BabyDevCode**](https://www.youtube.com/watch?v=Q8YPQzyeh58): "How to Run JavaFX Projects in Visual Studio Code." The original is in Spanish, but also available in auto-dubbed English.
 * Recording of the JavaOne '26 talk by **Phil Race** : [The JDK Client Desktop : 2026 and Still Swinging](https://inside.java/2026/05/03/jdk-client-desktop/): "*In this session, we explore how Swing fits into today's Java ecosystem, how it works seamlessly alongside JavaFX, and why it can still outperform web-based approaches for certain desktop applications.*"
@@ -67,23 +67,23 @@ Podcasts, Videos, Books {#h2-2-podcasts-videos-books}
 * [Video by **Florian Enner**](https://www.youtube.com/watch?v=N0KiHP6UPKY) showing his JavaFX charts and 3D visualizations in JavaFX from within MATLAB.
 * New impressive [video by **Florian Enner** of the JavaFX HEBI Charts](https://www.youtube.com/watch?v=TlaJmlVQf98) showing 50 KHz update, 100 subplots, chart with 1000 lines, and more. You can find the [example repo on GitHub](https://github.com/HebiRobotics/hebi-charts-examples).
 
-Tutorials {#h2-3-tutorials}
----------------------------
+Tutorials
+---------
 
 * [New tutorial by **Ana-Maria Mihalceanu**: "Accessibility in JavaFX"](https://dev.java/learn/javafx/a11y/). "*JavaFX provides accessibility APIs and properties that help you build inclusive user interfaces. A good starting point is to rely on standard controls and ensure that your user interface employs proper semantics. From there, you can customize accessible metadata and fine-tune how components behave for assistive technologies.*"
 
-Conferences, Presentations {#h2-4-conferences-presentations}
-------------------------------------------------------------
+Conferences, Presentations
+--------------------------
 
 * On June 16th, the [JFX Adopters Meeting](https://www.zeiss.com/meditec/en/news-events/events/jfx-adopters-meeting-2026.html) will take place in Munich, Germany. "*We will be hosting a JFX Adopters Meeting to exchange information on current projects and future plans. Representatives of the JavaFX 'ecosystem' will also be there to help develop a viable picture of JavaFX. The success of future developments depends on the contribution of adopter companies making our community stronger.*"
 
-Miscellaneous {#h2-5-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [In the JVM Weekly vol. 173, by **Artur Skowroński**](https://www.linkedin.com/pulse/rest-story-april-edition-jvm-weekly-vol-173-artur-skowro%C5%84ski-ibyyf/): "*[MelodyMatrix](https://melodymatrix.rocks/) by **Frank Delporte** isn't important for what it does (it's a music-related tool) - it's important as a case study for how to ship a JavaFX desktop app in 2026. The [release walkthrough on Foojay covers the full pipeline](https://foojay.io/today/melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update/): jdeploy for cross-platform native installers, GitHub Actions for the build, auto-update integration, the works.*"
 * [**Dirk Lemmermann** is asking](https://bsky.app/profile/dlemmermann.bsky.social/post/3ml6mkelzhk2g) to get JetBrains to [fix a JavaFX-related issue](https://youtrack.jetbrains.com/issue/IDEA-353241/Allow-final-JavaFX-properties-to-generate-the-setter-method.) in IntelliJ IDEA."*It is so disruptive to my 'flow'.*"
 
-JFX Central {#h2-6-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * The JavaFX Links Of The Week of April got [bundled and published on Foojay.io](https://foojay.io/today/javafx-links-of-april-2026/).

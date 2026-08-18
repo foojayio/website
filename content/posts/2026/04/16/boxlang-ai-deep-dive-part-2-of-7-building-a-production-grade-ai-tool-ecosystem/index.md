@@ -32,8 +32,8 @@ Function calling is where most AI frameworks look deceptively simple on the surf
 
 In most frameworks: you do. In BoxLang AI 3.0: the framework does, and the architecture is worth understanding.
 
-🏗️ The Tool Hierarchy {#h2-0-the-tool-hierarchy}
--------------------------------------------------
+🏗️ The Tool Hierarchy
+----------------------
 
 The 3.0 tool system is built around three layers:
 
@@ -47,8 +47,8 @@ ITool (interface)
 
 Every tool in the system extends `BaseTool`. That means every tool gets the same lifecycle, the same event firing, and the same result serialization --- for free, without touching provider code.
 
-🧱 `BaseTool` --- The Abstract Foundation {#h2-1-basetool-the-abstract-foundation}
-----------------------------------------------------------------------------------
+🧱 `BaseTool` --- The Abstract Foundation
+-----------------------------------------
 
 `BaseTool` is an abstract class that owns the shared infrastructure all tools need. The key design decision is that `invoke()` is declared `final`:
 
@@ -102,7 +102,7 @@ abstract public struct function generateSchema();
 
 The separation is clean: `BaseTool` handles infrastructure, subclasses handle logic.
 
-### Fluent Schema Description {#h3-2-fluent-schema-description}
+### Fluent Schema Description
 
 `BaseTool` also ships a fluent `onMissingMethod` that gives you a readable way to describe your tool's arguments without building schema structs by hand:
 
@@ -116,8 +116,8 @@ tool = new MySearchTool( client )
 
 Any call to `describe[ArgName]( "..." )` routes through `onMissingMethod` and sets the argument description used during schema generation.
 
-⚡ `ClosureTool` --- Zero-Boilerplate Tool Creation {#h2-3-closuretool-zero-boilerplate-tool-creation}
------------------------------------------------------------------------------------------------------
+⚡ `ClosureTool` --- Zero-Boilerplate Tool Creation
+--------------------------------------------------
 
 `ClosureTool` is the tool you'll use most of the time. It wraps any closure or lambda and auto-introspects the callable's parameter metadata using BoxLang's `.$bx.meta.parameters` to generate a full OpenAI-compatible function schema.
 
@@ -189,7 +189,7 @@ searchTool = aiTool(
 ```
 
 
-### Tools Get the Full Chat Request {#h3-4-tools-get-the-full-chat-request}
+### Tools Get the Full Chat Request
 
 One powerful feature: `ClosureTool` injects `_chatRequest` into the args struct before invocation. This gives your closure access to the full originating `AiChatRequest` --- the entire conversation context, parameters, options, and more:
 
@@ -206,8 +206,8 @@ contextAwareTool = aiTool(
 ```
 
 
-🗄️ The Global AI Tool Registry {#h2-5-the-global-ai-tool-registry}
--------------------------------------------------------------------
+🗄️ The Global AI Tool Registry
+-------------------------------
 
 The `AIToolRegistry` is a module-scoped singleton accessible via `aiToolRegistry()`. Its core job: let you register tools by name once and reference them as plain strings anywhere tools are accepted.
 
@@ -226,7 +226,7 @@ result = aiChat(
 
 String keys are resolved lazily via `resolveTools()` right before each LLM request --- so you can register at startup and reference anywhere.
 
-### Module Namespacing {#h3-6-module-namespacing}
+### Module Namespacing
 
 Use `toolName@moduleName` convention to keep registrations collision-free across modules:
 
@@ -246,7 +246,7 @@ tool = aiToolRegistry().get( "lookup" )
 ```
 
 
-### `@AITool` Annotation Scanning {#h3-7-aitool-annotation-scanning}
+### `@AITool` Annotation Scanning
 
 The cleanest registration path for class-based tools: annotate your methods and let the registry scan the class:
 
@@ -277,7 +277,7 @@ aiToolRegistry().scan( new WeatherTools(), "weather-module" )
 
 The `scan()` method uses `getMetaData()` to find all @`AITool`-annotated functions, extracts the annotation value as the description, and wraps each method as a `ClosureTool` automatically. Per-parameter `@hint` annotations become argument descriptions.
 
-### Two-Step Resolution {#h3-8-two-step-resolution}
+### Two-Step Resolution
 
 The registry uses a smart two-step lookup for bare names (without `@module`):
 
@@ -287,8 +287,8 @@ Scan all keys for any that match the name portion before `@`: `"lookup"` → fin
 
 This means you can use bare names in development and fully-qualified keys in production without changing your call sites.
 
-🔧 Built-In Core Tools --- `now@bxai` {#h2-9-built-in-core-tools-now-bxai}
---------------------------------------------------------------------------
+🔧 Built-In Core Tools --- `now@bxai`
+-------------------------------------
 
 Two tools ship built-in, defined in `CoreTools.bx` using the same `@AITool` annotation pattern:
 
@@ -321,8 +321,8 @@ aiToolRegistry().scan( new CoreTools(), "bxai" )
 ```
 
 
-🔌 `MCPTool` --- MCP Server Proxy {#h2-10-mcptool-mcp-server-proxy}
--------------------------------------------------------------------
+🔌 `MCPTool` --- MCP Server Proxy
+---------------------------------
 
 `MCPTool` is the third `BaseTool` subclass. When you call `withMCPServer()` on an agent or model, each tool returned by `MCPClient.listTools()` becomes an `MCPTool` instance automatically:
 
@@ -351,8 +351,8 @@ public any function doInvoke( required struct args, AiChatRequest chatRequest ) 
 
 The `generateSchema()` method converts the MCP `inputSchema` to OpenAI function-calling format automatically --- so the LLM can call MCP tools exactly the same way it calls any other `ITool`.
 
-🏗️ Building a Custom Class-Based Tool {#h2-11-building-a-custom-class-based-tool}
-----------------------------------------------------------------------------------
+🏗️ Building a Custom Class-Based Tool
+--------------------------------------
 
 For tools that need their own state, configuration, or unit tests, extend `BaseTool` directly:
 
@@ -408,8 +408,8 @@ result = aiChat( "Find wireless headphones", { tools: [ "searchProducts@my-app" 
 ```
 
 
-🗺️ MCP Server Seeding {#h2-12-mcp-server-seeding}
---------------------------------------------------
+🗺️ MCP Server Seeding
+----------------------
 
 Beyond the `MCPTool` class itself, the agent and model `withMCPServer()` / `withMCPServers()` APIs make it trivial to connect to entire MCP ecosystems:
 
@@ -436,8 +436,8 @@ servers = agent.listMCPServers() // [{ url, toolNames }]
 
 Under the hood, `withMCPServer()` calls `listTools()`, wraps each result as an `MCPTool`, and appends them to the agent's tool list. The MCP server metadata is also injected into the system message so the LLM knows which tools came from which server --- useful for complex multi-server setups.
 
-🎯 Putting It All Together {#h2-13-putting-it-all-together}
------------------------------------------------------------
+🎯 Putting It All Together
+--------------------------
 
 A realistic example: a customer support agent with a mix of registry tools, class-based tools, and MCP server tools.
 
@@ -458,8 +458,8 @@ response = agent.run( "Customer #12345 says their order #98765 never arrived. He
 ```
 
 
-What's Next {#h2-14-what-s-next}
---------------------------------
+What's Next
+-----------
 
 In Part 3, we go deep on multi-agent orchestration --- how parent-child hierarchies work in code, how sub-agents become tools automatically, how stateless agents handle multi-tenant memory, and how to build real AI teams in BoxLang.
 

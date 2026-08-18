@@ -212,7 +212,7 @@ As we've seen, we can work with GitLab Merge Requests right inside IntelliJ IDEA
 
 We can see all Merge Requests on a project, filter them or search for a specific Merge Request, perform a code review and add comments, see whether checks have passed and there are no merge conflicts, checkout the branch to run it locally, submit our review and approve the Merge Request, and merge (or close) the Merge Request all from inside our IDE.
 
-### IntelliJ IDEA Shortcuts Used {#h3-0-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -227,7 +227,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Recent files                       | **⌘E**         | **Ctrl+E**               |
 | Refresh reviews                    | **⌘R**         | **Ctrl+F5**              |
 
-### Related Links {#h3-1-related-links}
+### Related Links
 
 * [(video) JetBrains - IntelliJ IDEA: GitLab Merge Request](https://youtu.be/I_k9v9bBaCA)
 * [(documentation) JetBrains IntelliJ IDEA -- GitLab](https://www.jetbrains.com/help/idea/gitlab.html)

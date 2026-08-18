@@ -35,8 +35,8 @@ What used to take days or weeks of frustration getting the infrastructure set up
 
 With Jakarta EE and Payara Cloud, developers can finally focus on what they do best: write applications that solve business challenges.
 
-Application-Focused Jakarta EE Model {#h2-0-application-focused-jakarta-ee-model}
----------------------------------------------------------------------------------
+Application-Focused Jakarta EE Model
+------------------------------------
 
 Jakarta EE is a [set of specifications](https://blog.payara.fish/jakarta-ee-java-ee-guide) that allow Java developers to work on Java enterprise applications.
 
@@ -55,8 +55,8 @@ With the Web Profile, providing Web-based clients like REST endpoints and UI-bas
 Developers don't need to add more libraries to provide some functionality and then deal with the difficulties of integrating them since everything is already in place - so the developer can simply focus on solving the business challenges.
 ![](https://blog.payara.fish/hubfs/Benefits%20of%20jakarta%20EE%20model%20(2)-png.png)
 
-Easing the Pressure on the "Plate-Spinning" DevOps Engineer {#h2-1-easing-the-pressure-on-the-plate-spinning-devops-engineer}
------------------------------------------------------------------------------------------------------------------------------
+Easing the Pressure on the "Plate-Spinning" DevOps Engineer
+-----------------------------------------------------------
 
 The popularity of a DevOps method makes it even more useful if infrastructure elements can be dealt with separately to application development.
 
@@ -64,8 +64,8 @@ This is because with [DevOps,](https://www.payara.fish/solutions/devops-and-the-
 
 As a result of the DevOps method, developers are confronted more often with infrastructure-related tasks. They need to learn more about the frameworks and infrastructure concepts. They are spinning so many plates and juggling different priorities. Using specifications that reduce the stress of setting up an application's infrastructure is a welcome invitation to spend more time writing the core code.
 
-Avoid Infrastructure Infiltration {#h2-2-avoid-infrastructure-infiltration}
----------------------------------------------------------------------------
+Avoid Infrastructure Infiltration
+---------------------------------
 
 Separating the infrastructure from the code using a Jakarta EE application server also avoids the situation where the infrastructure finds its way into the the application itself, making it difficult to change later on.
 
@@ -79,8 +79,8 @@ The Jakarta EE model avoids: infrastructure swallowing up developers' time, requ
 
 And what Jakarta EE does for application set up, Payara Cloud does for getting your web applications to run in the cloud.
 
-Taking the Jakarta EE Deployment Model into the Cloud Era with Payara Cloud {#h2-3-taking-the-jakarta-ee-deployment-model-into-the-cloud-era-with-payara-cloud}
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Taking the Jakarta EE Deployment Model into the Cloud Era with Payara Cloud
+---------------------------------------------------------------------------
 
 Using a cloud environment brings a whole new set of things to learn, like [Kubernetes](https://kubernetes.io/), routing, and setting up secure communication - to name just a few.
 
@@ -92,8 +92,8 @@ The provisioning of the Kubernetes resources, setting up the routing, networking
 
 Some other Platform As a Service solutions come close to this concept, but with Payara Cloud, the entire infrastructure is shielded away from the user:
 
-![](https://blog.payara.fish/hubfs/Benefits%20of%20Payara%20Cloud-png.png)Jakarta EE + Payara Cloud Lets You Focus on Functionality {#h2-4-jakarta-ee-payara-cloud-lets-you-focus-on-functionality}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+![](https://blog.payara.fish/hubfs/Benefits%20of%20Payara%20Cloud-png.png)Jakarta EE + Payara Cloud Lets You Focus on Functionality
+-----------------------------------------------------------------------------------------------------------------------------------
 
 For an end-user, the provided functionality of an application is the most important aspect. Traditionally, Jakarta EE developers could focus on the most important aspect of development, which is the business logic that supplies the functionality of the finished application, while keeping the operations and deployments separated from the development task.
 

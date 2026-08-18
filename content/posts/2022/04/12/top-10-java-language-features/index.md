@@ -25,8 +25,8 @@ Some are unique to that particular language and some are common to many other pr
 
 In this article, I will explore ten Java programming features used frequently by developers in their day-to-day programming jobs.
 
-Collection's factory method {#h2-0-collection-s-factory-method}
----------------------------------------------------------------
+Collection's factory method
+---------------------------
 
 Collections are the most frequently used feature in our daily coding. They are used as a container where we store objects and pass them along.
 
@@ -64,8 +64,8 @@ These are very convenient when we want to create immutable containers. However, 
 
 If you want to learn more about the collection framework, please visit here: <https://dev.java/learn/the-collections-framework/>.
 
-Local Type Inference {#h2-1-local-type-inference}
--------------------------------------------------
+Local Type Inference
+--------------------
 
 Java 10 introduced type inference for local variables, which is super convenient for developers.
 
@@ -106,8 +106,8 @@ To know more about it, visit:
 <https://openjdk.java.net/projects/amber/guides/lvti-faq>  
 <https://openjdk.java.net/projects/amber/guides/lvti-style-guide>
 
-Enhanced Switch Expression {#h2-2-enhanced-switch-expression}
--------------------------------------------------------------
+Enhanced Switch Expression
+--------------------------
 
 The traditional switch statement has been in Java from the beginning, which resembled C and C++. It was ok, but as the language evolved, it hasn't offered us any improvement until Java 14. It certainly has some limitations as well. The most infamous was the [fall-through](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html.):
 
@@ -127,8 +127,8 @@ String result = switch (day) {
 
 Read more about it: <https://dev.java/learn/branching-with-switch-expressions/>
 
-Records {#h2-3-records}
------------------------
+Records
+-------
 
 Although records are relatively new features in Java, released in Java 16, many developers find it super helpful to create immutable objects.
 
@@ -201,8 +201,8 @@ public record Point(int x, int y, int z) {
 
 Read more about records here: <https://nipafx.dev/java-record-semantics/>.
 
-Optional {#h2-4-optional}
--------------------------
+Optional
+--------
 
 A method is a contract: we put thought into it when defining one. We specify parameters with their type and also a return type. We expect it to behave according to the contract when we invoke a method. If it doesn't, it's a violation of the contract.
 
@@ -256,8 +256,8 @@ Read more about Optional:
 <https://dzone.com/articles/optional-in-java>  
 <https://www.baeldung.com/java-optional>
 
-Java Date Time API {#h2-5-java-date-time-api}
----------------------------------------------
+Java Date Time API
+------------------
 
 Every developer is confused with date-time calculation to some degree. This isn't an overstatement. This was mainly due to not having a good Java API for dealing with Dates and times in Java for a long time.
 
@@ -324,8 +324,8 @@ Read more about Java Date Time:
 <https://www.infoq.com/articles/java.time>  
 <https://docs.oracle.com/javase/tutorial/datetime/TOC.html>
 
-Helpful NullPointerException {#h2-6-helpful-nullpointerexception}
------------------------------------------------------------------
+Helpful NullPointerException
+----------------------------
 
 Every developer hates the Null Pointer Exception. It becomes challenging when StackTrace doesn't provide helpful information it. To demonstrate the problem, let's see an example:
 
@@ -394,8 +394,8 @@ at ca.bazlur.playground.Main.main(Main.java:8)
 
 Read more about it: <https://openjdk.java.net/jeps/358>
 
-CompletableFuture {#h2-7-completablefuture}
--------------------------------------------
+CompletableFuture
+-----------------
 
 We write program line and line, and typically it gets executed line by line. However, there are times when we want relatively parallel execution to make the program faster. To accomplish that, we usually consult Java Thread.
 
@@ -470,8 +470,8 @@ Read more about it:
 
 <https://www.linkedin.com/pulse/asynchronous-programming-java-completablefuture-aliaksandr-liakh/>
 
-Lambda Expression {#h2-8-lambda-expression}
--------------------------------------------
+Lambda Expression
+-----------------
 
 Lambda Expression is probably the most powerful feature in the Java language. It reshaped the way we write code. A Lambda expression is like an anonymous function that can take arguments and return a value.
 
@@ -508,8 +508,8 @@ Well, I have just shown you one example here, but there are plenty of other bene
 
 Read more about it: <https://dev.java/learn/lambda-expressions/>
 
-Stream API {#h2-9-stream-api}
------------------------------
+Stream API
+----------
 
 > "Lambda Expressions are the gateway drug to Java 8, but Streams are the real addiction."  
 >

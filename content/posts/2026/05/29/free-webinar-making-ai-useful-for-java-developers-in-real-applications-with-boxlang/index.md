@@ -26,8 +26,8 @@ AI is everywhere right now, but for many development teams, the biggest question
 
 That's exactly what we'll explore in our upcoming free June webinar:
 
-Making AI Useful in Real Applications {#h2-0-making-ai-useful-in-real-applications}
------------------------------------------------------------------------------------
+Making AI Useful in Real Applications
+-------------------------------------
 
 #### A Practical Guide to Secure and Effective AI Development
 
@@ -40,8 +40,8 @@ Join **Bill Reese, Senior Developer** **at Ortus Solutions** , for a practical s
 * **Location**: Online Event
 * **Speaker**: Bill Reese, Senior Developer at Ortus Solutions
 
-What This Webinar Is About {#h2-1-what-this-webinar-is-about}
--------------------------------------------------------------
+What This Webinar Is About
+--------------------------
 
 AI can unlock powerful new capabilities for applications, but only when it is implemented with the right patterns, architecture, and security mindset.
 
@@ -49,8 +49,8 @@ In this session, Bill will break down the practical side of AI integration, incl
 
 You'll also get a demo of the **AI+ module**, giving you a practical look at how BoxLang can help simplify AI integration in real-world applications. This session will also include a sneak peek at some of the tools and approaches Ortus Solutions is building to help developers create secure, flexible, and maintainable AI-powered features.
 
-What You'll Learn {#h2-2-what-you-ll-learn}
--------------------------------------------
+What You'll Learn
+-----------------
 
 #### During this webinar, we'll cover:
 
@@ -72,14 +72,14 @@ Whether you are modernizing existing applications or building something new, you
 
 #### [REGISTER FOR FREE](https://webinar-ai-real-life-apps.eventbrite.com/ "REGISTER FOR FREE")
 
-Join the Ortus Community {#h2-3-join-the-ortus-community}
----------------------------------------------------------
+Join the Ortus Community
+------------------------
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on, **product launches, tool updates, promo services and much more.**
 
 **Subscribe to our newsletter** for exclusive content.
 
-#### [SUBSCRIBE](https://us1.list-manage.com/contact-form?u=09b13d89e6ce4c287f4c1f1b0&amp;form_id=64e38b27deddd9c95c4ea6ee5b6c61e2 "SUBSCRIBE")
+#### [SUBSCRIBE](https://us1.list-manage.com/contact-form?u=09b13d89e6ce4c287f4c1f1b0&form_id=64e38b27deddd9c95c4ea6ee5b6c61e2 "SUBSCRIBE")
 
 **Follow Us on Social media and don't miss any news and updates:**
 

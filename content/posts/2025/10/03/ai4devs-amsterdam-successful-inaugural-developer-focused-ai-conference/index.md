@@ -29,8 +29,8 @@ Co-sponsored and co-organized with ING and Azul, together with Qodo and ContentS
 
 However, AiDevs had as much love for frontend as for backend developers, with multiple parallel tracks, dedicated in particular to Java, JavaScript, and Python, together with a dedicated workshop track that ran throughout the day.
 
-50% Live Coding {#h2-0-50-live-coding}
---------------------------------------
+50% Live Coding
+---------------
 
 The conference fulfilled its mission to "share practical, usable knowledge with real use cases and code," targeting developers working with AI technologies at every level. True to its promise of being code-first, the event delivered talks with 50% live coding demonstrations across the full range of technologies.
 

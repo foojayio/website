@@ -23,7 +23,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Quartz is often considered the standard job scheduling library in Java, which can lead developers to overlook more modern alternatives. {#h3-0-quartz-is-often-considered-the-standard-job-scheduling-library-in-java-which-can-lead-developers-to-overlook-more-modern-alternatives}
+### Quartz is often considered the standard job scheduling library in Java, which can lead developers to overlook more modern alternatives.
 
 For a long time, Quartz, also known as Quartz Scheduler, was the only viable open-source task scheduler in Java. In fact, the official Quartz documentation still suggests that there is [no real alternative](https://www.quartz-scheduler.org/documentation/2.3.1-SNAPSHOT/faq.html "no real alternative"). In this article, we will list a few different **Quartz alternatives that offer a similar set of features while being easier and more enjoyable to use.**
 
@@ -31,10 +31,10 @@ Similar to its alternatives, **Quartz Scheduler can be integrated into almost an
 
 The fact that Quartz has been around for so long has two major advantages: **the library is battle-tested and has a large community** , which makes it easier to find help. All these elements together make it the most popular job scheduling library in Java. Despite all these strengths, **choosing Quartz is no longer so obvious due to some glaring issues**.
 
-Limitations of Quartz {#h2-1-limitations-of-quartz}
----------------------------------------------------
+Limitations of Quartz
+---------------------
 
-### Quartz is showing its age {#h3-2-quartz-is-showing-its-age}
+### Quartz is showing its age
 
 Quartz Scheduler has several issues that make it less of an obvious choice, especially when **there are several really good alternatives.**
 
@@ -44,19 +44,19 @@ Another place where Quartz shows its age is in its architecture. When using an R
 
 We have written an article that [compares Quartz to a more modern solution, namely JobRunr](https://www.jobrunr.io/en/blog/2023-02-20-moving-from-quartz-scheduler-to-jobrunr/). This article **gives a feel for how complex and verbose Quartz is to use**.
 
-### Performs worse than modern alternatives {#h3-3-performs-worse-than-modern-alternatives}
+### Performs worse than modern alternatives
 
 When compared to more modern alternatives, **Quartz is reported as having significantly lower performance**. This performance issue may be caused by the use of row level locking and the complexity of the configuration making Quartz Scheduler harder to fine-tune.
 
-### Lack of built-in monitoring {#h3-4-lack-of-built-in-monitoring}
+### Lack of built-in monitoring
 
 Quartz Scheduler **lacks an intuitive dashboard or UI for tracking and monitoring jobs** . It also doesn't provide an out-of-the-box interface with external monitoring tools like [Grafana](https://grafana.com/) or [Jaeger](https://www.jaegertracing.io/). Quartz users cannot actively monitor the system to proactively address issues such as job failures.
 
-### Distributed scheduling is opt-in {#h3-5-distributed-scheduling-is-opt-in}
+### Distributed scheduling is opt-in
 
 Quartz has the ability to handle the tasks in a distributed fashion, but this feature is opt-in. With tools like [Kubernetes](https://kubernetes.io/) now allowing a pod to spin up on demand, such a feature should not be an afterthought, but rather the default.
 
-### Sporadic maintenance {#h3-6-sporadic-maintenance}
+### Sporadic maintenance
 
 The last non-beta release of Quartz dates back to October 23, 2019. While development was on hold, **the ecosystem around it didn't stop evolving** . This hiatus led to a pile of unresolved issues. The users of the library are still suffering from the `javax` to `jakarta` namespace change, along with many bugs and security issues. They also **cannot use newer Java features such as virtual threads**, that may benefit background job processing, for instance to increase throughput...
 > **Update:** there is good news for Quartz users! The recent acquisition by IBM led to a spark in activity, with the community helping to fix some of the major issues. It is still unclear what this acquisition means for the future of Quartz but a new version of Quartz Scheduler - version 2.5 - was released on November 13, 2024.
@@ -68,14 +68,14 @@ We distinguish between two types of schedulers:
 * The first class consists of Java job scheduling libraries. Similar to Quartz, t**hey can be included in any Java application as a dependency**. They live inside your application.
 * The second class are workflow engines, which target a broader audience. These are **standalone services that your application will need to communicate with.**
 
-Alternatives to Quartz in Java {#h2-7-alternatives-to-quartz-in-java}
----------------------------------------------------------------------
+Alternatives to Quartz in Java
+------------------------------
 
 There are two great alternatives to Quartz for scheduling jobs in Java, namely JobRunr and db-scheduler. They can be added as a dependency to any Java application to **provide features like distributed background task processing and persisted task scheduling**.
 
 These libraries keep the number of third-party dependencies to a minimum, providing better security insurance. They are available as standard Java jars on Maven Central.
 
-### JobRunr {#h3-8-jobrunr}
+### JobRunr
 
 [JobRunr](https://github.com/jobrunr/jobrunr) is a modern, actively maintained, open-source Java library designed for background job processing. JobRunr offers an **easy-to-use API that simplifies job scheduling**. Unlike Quartz, JobRunr was designed with cloud-native applications in mind and provides support for distributed job scheduling.
 
@@ -99,7 +99,7 @@ A feature of JobRunr that neither Quartz nor db-scheduler provide out of the box
 
 Used, loved and trusted by developers, the open-source version of **JobRunr provides essential features you need for distributing and scheduling tasks in Java**. You can expect features similar to those in Quartz Scheduler, but much easier to use. The team behind JobRunr also develops and maintains JobRunr Pro which offers Enterprise grade features, making JobRunr Pro the best job scheduling library in Java!
 
-### DB Scheduler {#h3-9-db-scheduler}
+### DB Scheduler
 
 Another good alternative to Quartz is [db-scheduler](https://github.com/kagkarlsson/db-scheduler). The library was originally designed to be **a simpler alternative to Quartz**. This design reduces the number of required tables to one (compared to Quartz's 11 tables!) and provides a much simpler API.
 
@@ -109,7 +109,7 @@ db-scheduler **provides all the essential features for background job scheduling
 
 The library is well maintained and growing in features to match the capabilities of Quartz Scheduler, without the extra complexity.
 
-### Spring Boot @Scheduled annotation {#h3-10-spring-boot-scheduled-annotation}
+### Spring Boot @Scheduled annotation
 
 Spring Boot applications often utilize the `@Scheduled` annotation for basic scheduling needs. While convenient for simple tasks, this built-in solution has limitations in distributed environments.
 
@@ -132,8 +132,8 @@ While `@Scheduled` with ShedLock provides a straightforward solution for distrib
 
 For applications requiring these advanced features, consider using a dedicated job scheduling solution like those discussed above.
 
-Other job scheduling tools {#h2-11-other-job-scheduling-tools}
---------------------------------------------------------------
+Other job scheduling tools
+--------------------------
 
 There are several job scheduling alternatives to Quartz that are aimed at a broader audience; we could probably not list them all, even if we wanted to. These alternatives come as standalone services, often referred to as **workflow engines**, that communicates with your application.
 
@@ -141,7 +141,7 @@ Using these tools means you'll **have to get used to the terminology they use**.
 
 Here we'll briefly introduce two such workflow engines that work well with Java applications: Temporal and Kestra.
 
-### Temporal {#h3-12-temporal}
+### Temporal
 
 [Temporal](https://temporal.io/) is an open-source **workflow engine designed to make applications more resilient**. The engine is written in Go and can be interfaced with your Java application using the provided Java SDK.
 
@@ -149,7 +149,7 @@ Very similar to pure Java-based solutions like JobRunr or Quartz, Temporal provi
 
 In addition to providing features such as retries, scalability, delayed and recurring executions, Temporal also provides a user interface that **allows you to monitor workflow execution** to detect failed tasks.
 
-### Kestra {#h3-13-kestra}
+### Kestra
 
 [Kestra](https://kestra.io/) is an open-source **workflow automation platform that makes job scheduling easy**. The engine is written in Java but aims at running any task in any programming language. Kestra is a great low-code alternative to Quartz. It provides several hundreds of plugin allowing to extract data from any database, cloud storage, or API, and run scripts in any language.
 
@@ -172,7 +172,7 @@ With these diverse tools at their disposal, Java developers can now select the o
   * [JobRunr website](https://www.jobrunr.io/en/)
   * [JobRunr Github Repository](https://github.com/jobrunr/jobrunr)
   * [Get started with JobRunr](http://www.jobrunr.io/en/documentation/5-minute-intro/)
-  * [watch Ronald, the creator of JobRunr, present the motivation, design and code of JobRunr at Spring I/O 2022!](http://www.youtube.com/watch?v=2KFeeFuM9og&amp;ab_channel=SpringI%2FO)
+  * [watch Ronald, the creator of JobRunr, present the motivation, design and code of JobRunr at Spring I/O 2022!](http://www.youtube.com/watch?v=2KFeeFuM9og&ab_channel=SpringI%2FO)
 * Spring Boot
   * [Spring Boot website](https://spring.io/guides/gs/scheduling-tasks "Spring Boot website")  
     [Spring Boot Repository](https://github.com/spring-guides/gs-scheduling-tasks "Spring Boot Repository")

@@ -32,8 +32,8 @@ Prior to the change, Tomcat used a single `ciphers` attribute on the SSL connect
 
 The Tomcat team made this change to align with the distinct nature of TLSv1.3 cipher suites, which differ structurally from their TLSv1.2 counterparts. However, the migration path is problematic: TLSv1.3 ciphers placed in the `ciphers` attribute are removed from the configuration, logging only a warning.
 
-What's the risk? {#h2-0-what-s-the-risk}
-----------------------------------------
+What's the risk?
+----------------
 
 For example, consider an organization with a security policy requiring 256-bit encryption only. Let's say they configure a Spring Boot application as follows:
 
@@ -92,8 +92,8 @@ Despite the explicit exclusion of the `TLS_AES_128_GCM_SHA256` (128-bit) cipher 
 
 While all standard TLSv1.3 ciphers are cryptographically strong and the default ciphers are not inherently weak, the central issue is the server's silent deviation from the administrator's security policy. Because of this, the mismatch between the intended configuration and the server's actual behavior is a significant concern. In regulated environments (FIPS 140-2, PCI-DSS, internal compliance mandates), this gap between intended and actual configuration is exactly what auditors and penetration testers look for.
 
-Who is Affected {#h2-1-who-is-affected}
----------------------------------------
+Who is Affected
+---------------
 
 Any Spring Boot application that:
 
@@ -101,12 +101,12 @@ Any Spring Boot application that:
 * Explicitly configures TLSv1.3 cipher suites, either via `server.ssl.ciphers` or via `options.ciphers` in an [SSL Bundle](https://docs.spring.io/spring-boot/reference/features/ssl.html#features.ssl.applying) [applied](https://docs.spring.io/spring-boot/how-to/webserver.html#howto.webserver.configure-ssl.bundles) to the connection with `server.ssl.bundle`
 * Runs on Tomcat 9.0.115+, 10.1.52+, or 11.0.18+
 
-The Fix {#h2-2-the-fix}
------------------------
+The Fix
+-------
 
 Spring Boot's OSS releases `v3.5.11` and `v4.0.3` introduced a patch that correctly configures ciphers. This configuration allows for separate cipher settings for TLSv1.2 and older versions, distinct from those used for TLSv1.3.
 
-### How to Verify {#h3-3-how-to-verify}
+### How to Verify
 
 After upgrading, you can verify the fix is working by checking which ciphers your server offers.
 
@@ -121,7 +121,7 @@ nmap --script ssl-enum-ciphers -p 8443 localhost
 
 Once the fix is applied, only the explicitly configured ciphers should be offered by the server.
 
-### Recommendation {#h3-4-recommendation}
+### Recommendation
 
 If your application configures TLSv1.3 cipher suites whether via `server.ssl.ciphers` or via `options.ciphers` in an SSL Bundle, upgrade to a Spring Boot version that includes the fix.
 

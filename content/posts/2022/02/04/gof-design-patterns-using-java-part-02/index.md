@@ -24,8 +24,8 @@ frozen: false
 
 
 
-**Adapter Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/adapter "Sample Code")\]** {#h2-0-adapter-pattern-sample-code}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Adapter Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/adapter "Sample Code")\]**
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 What can one do if he needs to use an Asian Hairdryer in a European Country, each with different socket types? I would seek an Adapter! As in real life, when we want to plug and play with similar but incompatible interfaces we use the Adapter. The Adapter adapts the Adaptee to the desired interface, by composing the Adaptee object and inheriting the desired interface or by multiple inheritance.
 
@@ -39,8 +39,8 @@ The ideal way to handle this scenario is to throw an exception, whenever this me
 
 PCAssembler is the main class here. Try adding your own device and its adapter to the computer.
 
-**Facade Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/facade "Sample Code")\]** {#h2-1-facade-pattern-sample-code}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Facade Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/facade "Sample Code")\]**
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Consider a scenario where we require multiple method invocations on various classes, to achieve the desired functionality. Also, consider that this set of functionality is repeatedly being used in your code. If you are thinking of an option where you will perform direct invocations, you are bound to end up with code maintenance issues and tightly coupled code. If these invocations are remote, it is going to be worse with respect to the performance.
 
@@ -58,8 +58,8 @@ The example attached is a very simple scenario of a InvoiceManagerFacade which h
 
 AccountsCentral is the main class. Try adding your own method to the facade class, or try plugging in a new type of facade.  
 
-**Template Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/template "Sample Code")\]** {#h2-2-template-pattern-sample-code}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Template Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/template "Sample Code")\]**
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Imagine a real-world scenario where a factory is creating both aluminium nails and screws. Though the machine has to create both of them through similar processes, the way some steps are implemented may vary in each of these. When we think of such scenarios in software, we utilize the template pattern. Template pattern defines a way to re-use algorithms for various implementations with different or slightly different outcomes.
 
@@ -70,8 +70,8 @@ Fig. 4 : Template (Structural) Design Pattern - Sequence Diagram
 In the attached example, the abstract class SoftwareProcessor defines a general set of algorithmic steps (functions) to deliverSoftware(). This class is my template class. Since the implementation and testing phases differ in projects based on the technology stack being used, CProcessor and JavaProcessor classes adapt this algorithm for these phases. The common methods are all implemented in SoftwareProcessor and the specific ones are left as abstract.  
 SoftwareConsultants can be used to run this example. Try adding your own processor.
 
-**Iterator Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/iterator "Sample Code")\]** {#h2-3-iterator-pattern-sample-code}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Iterator Pattern \[[Sample Code](https://github.com/sumithpuri/skp-code-marathon-pattaya/tree/master/src/main/java/me/sumithpuri/github/pattaya/iterator "Sample Code")\]**
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The need to have a handle to a collection of elements, without exposing its internal implementation is met by the Iterator Pattern. I would term this as a pure programming pattern, in its own right. By utilising this handle (Iterator), the client using the collection can easily process the same without any dependency on the internal logic.
 

@@ -28,7 +28,7 @@ In this second part, we're gonna push the madness further and actually run a FUL
 
 Right after I finished pushing my repository last week, I realised that Supabase actually offered [a Docker Compose file to self-host their platform](https://supabase.com/docs/guides/self-hosting/docker?ref=lengrand.fr). So I decided to push the madness further and see how easy it was to use that file inside TestContainers. In short : Relatively easy.
 
-### The setup {#h3-0-the-setup}
+### The setup
 
 The setup isn't actually much different from my homecrafted Docker Compose. version. Here it is in its entirety.
 
@@ -171,7 +171,7 @@ I needed to :
 * Run some magic to remove `container_name`
 * Once in a while, the Supabase repository will have to be pulled
 
-### The results {#h3-1-the-results}
+### The results
 
 The results are as outrageous as I expected them to be, if not more : **All tests are running fine, though it takes almost 1 minute to run them** . The `ComposeContainer` is starting no less than 12 containers (!!!) so it is to be expected.
 
@@ -180,7 +180,7 @@ Obviously, that setup is not to be used for unit testing. That being said, I fin
 ![\[Unit\] Testing Supabase in Kotlin using Test Containers - PART 2](https://lengrand.fr/content/images/2023/10/image.png)  
 *Gradle running those massive tests just fine*
 
-### What more {#h3-2-what-more}
+### What more
 
 My original complete intent was to build a small layer on top of the Docker Compose file, kinda like AtomoicJar does it with its [modules](https://github.com/testcontainers/testcontainers-java/blob/57ca6ad4f0a6ee8bb5feaf428b5c66c7d25259c4/modules/kafka/src/main/java/org/testcontainers/containers/KafkaContainer.java?ref=lengrand.fr#L28). It would have been cool to have a simple interface for a Supabase instance to start, while providing a locally for starting scripts, user roles, maybe a new set of credentials, ...
 
@@ -198,7 +198,7 @@ All of the implementation I've seen extend from `GenericContainer` though, not `
 
 Could maybe be something for the future, who knows.
 
-### In conclusion {#h3-3-in-conclusion}
+### In conclusion
 
 That was a fun experiment, in which I've learnt more about TestContainers 😊. I'm as happy as usual with the way Supabase shows love for their users. Providing a seemless Docker Compose like this allows for a great experience. And I'm also impressed with TestContainers and how they can run such complex flaws without breaking a sweat!
 

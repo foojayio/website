@@ -30,8 +30,8 @@ Also while we're on the subject of books, my new book "[Java 8 to 21: Explore an
 
 <br />
 
-The Simplicity and Complexity of Bugs {#h2-0-the-simplicity-and-complexity-of-bugs}
------------------------------------------------------------------------------------
+The Simplicity and Complexity of Bugs
+-------------------------------------
 
 Debugging is a labyrinthine journey, often reminiscent of Alice in Wonderland. It calls for acute observation, insatiable curiosity, calculated experimentation, and a sense of adventure. However, the general sentiment towards debugging is one of antagonism, largely because of the frustration it entails and the uncomfortable truths it uncovers.
 
@@ -41,15 +41,15 @@ The emotions experienced during debugging -- surprise, frustration, and humility
 
 An important principle I have when debugging is to "start with stupid". I look for the dumbest mistake I can think of and in a surprising number of cases, it's indeed the bug. This isn't a part of the theory
 
-Embracing the Debugging Methodology {#h2-1-embracing-the-debugging-methodology}
--------------------------------------------------------------------------------
+Embracing the Debugging Methodology
+-----------------------------------
 
 The first step in tracking a bug is identifying the likely area in the code. This involves searching through documentation and conducting basic research. From there, we need to devise a strategy to tackle the bug. This step is often overlooked in our haste to find a solution, leading to unstructured and disorganized approaches. We need to formulate a plan, make assumptions, and then test these assumptions.
 
 Next, we should isolate the behavior causing the issue and aim to reproduce it consistently for testing. This could ideally be done in a local environment within the debugger. If we can't consistently reproduce a bug, we won't be able to truly verify our fix, adding uncertainty to the process.
 
-Validation and Elimination {#h2-2-validation-and-elimination}
--------------------------------------------------------------
+Validation and Elimination
+--------------------------
 
 Following this, we must validate that the results of our tests and environment align with our initial assumptions. In the spirit of robustness, it's advisable to have two forms of verification as one could potentially be flawed. I wrote about the importance of double verification in [this post](https://debugagent.com/building-for-failure-best-practices-for-easy-production-debugging).
 
@@ -60,15 +60,15 @@ In other words, we need to "Sherlock Holmes" our problem and rule out possibilit
 
 With a deeper understanding of the bug, we can move on to resolving the issue. The resolution process should include filing the issue, creating a failing test case, verifying the proposed fix resolves the test case, and committing both the bug and fix.
 
-Reading the Docs: A Misconception {#h2-3-reading-the-docs-a-misconception}
---------------------------------------------------------------------------
+Reading the Docs: A Misconception
+---------------------------------
 
 It's often said, "5 hours of debugging can save you 5 minutes of reading the docs." However, this saying is misleading. Reading the documentation is not the answer, especially considering the sheer volume of documents associated with APIs, platforms, systems, and more. Documentation is never read in five minutes and rarely memorized to a level that will solve a bug. In all the decades I've been a developer I solved bugs by searching through the docs, but never by reading the docs in advance.
 
 The key here is to know what, where, and when to search for the problem. Search engines and platforms like Stack Overflow have revolutionized debugging, enabling us to input error messages directly and find potential solutions. This method is not foolproof, but it's a good starting point.
 
-The Importance of a Game Plan {#h2-4-the-importance-of-a-game-plan}
--------------------------------------------------------------------
+The Importance of a Game Plan
+-----------------------------
 
 Having a game plan saves us from being swallowed by the abyss of trial-and-error debugging. Many years ago, I lost two workdays due to a misplaced 'greater-than' character because I didn't use a methodical approach.
 
@@ -83,8 +83,8 @@ The answers to these questions will shape your game plan and the course of your 
 
 In our next installment, we'll explore gameplans for debugging issues that can't be reproduced. Stay tuned and embrace the debugging adventure!
 
-Final Word {#h2-5-final-word}
------------------------------
+Final Word
+----------
 
 Debugging, despite being seen as frustrating, is an essential part of software development, offering moments of learning and personal growth. A methodical approach to debugging involves identifying the area of code responsible for the bug, formulating a strategic game plan, isolating and reproducing the bug for testing, and finally resolving the issue.
 

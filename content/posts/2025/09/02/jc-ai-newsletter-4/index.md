@@ -108,7 +108,7 @@ The world influenced by LLM is changing very quickly, let's start...
 **desc.** : The paper presents a case study of using the Vibe Coding approach using large language models (LLMs) to generate code using natural language instructions, to support rapid prototyping in user-centered design. The paper discusses errors occurrences which require extensive debugging conversation as such prompting deviates from design ideas. The paper touches on the security risks of generated code.  
 **category**: research
 
-**article** : [Tales from the jar side: GPT-5 from Java, gpt-oss, More theme song experiments, and the usual social media gags](https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-5-from?r=2dwq5&amp;utm_campaign=post&amp;utm_medium=web&amp;triedRedirect=true)  
+**article** : [Tales from the jar side: GPT-5 from Java, gpt-oss, More theme song experiments, and the usual social media gags](https://kenkousen.substack.com/p/tales-from-the-jar-side-gpt-5-from?r=2dwq5&utm_campaign=post&utm_medium=web&triedRedirect=true)  
 **authors** : Ken Kousen  
 **date** : 2025-08-10  
 **desc.** : The release of ChatGPT-5 can be considered big news in the world of artificial intelligence. This article provides first-hand experience with the new model through examples and required changes in Java frameworks (Spring AI, LangChain4j).  
@@ -122,7 +122,7 @@ The world influenced by LLM is changing very quickly, let's start...
 
 Enjoy reading and look forward to the next one!
 
-### Previous: {#h3-0-previous}
+### Previous:
 
 [Newsletter vol. 1](https://foojay.io/today/ai-newsletter-1)  
 [Newsletter vol. 2](https://foojay.io/today/jc-ai-newsletter-2)  

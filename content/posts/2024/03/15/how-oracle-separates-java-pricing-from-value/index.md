@@ -29,8 +29,8 @@ To be fair, employee-count metrics are not uncommon in the technology world. Man
 
 The new pricing for Oracle Java SE is disconnected from actual Java usage and could result in a massive price increase.
 
-Do the math {#h-do-the-math-nbsp}
----------------------------------
+Do the math
+-----------
 
 Say a company has two vCores and 25,000 desktops for 10,000 employees. Azul will save that company approximately $635,000 per year in licensing.
 
@@ -47,16 +47,16 @@ Imagine that this savvy company acquires another corporation and grows to 50,000
 
 Do the math yourself on our [Java price comparison calculator](https://www.azul.com/products/core-savings-calculator/).
 
-How did Oracle Java pricing get here? {#h-how-did-oracle-java-pricing-get-here-nbsp}
-------------------------------------------------------------------------------------
+How did Oracle Java pricing get here?
+-------------------------------------
 
-### September 2017 {#h-september-2017-nbsp}
+### September 2017
 
 Oracle announced significant changes to the Java release process. The new model provided a new release every six months (in March and in September). Developers had been requesting a more agile approach to developing the core Java platform, and this change led to more features being added to Java --- and more rapidly --- than ever before.
 
 Oracle also changed how it delivers updates and support. Instead of providing extended maintenance and support for all Java versions, only Long-Term Support (LTS) releases would qualify for that.
 
-### June 2018 {#h-june-2018-nbsp}
+### June 2018
 
 Oracle announced its new licensing and pricing for JDK, which it bundled with the Java SE subscription.
 
@@ -68,17 +68,17 @@ A Java SE subscription included:
 
 Paid support is a familiar component of open-source communities, and the change was accepted --- but a move Oracle made three months later wasn't.
 
-### September 2018 {#h-september-2018-nbsp}
+### September 2018
 
 Oracle announced that in January 2019, it would end free public updates for commercial use for Java 8, which was then the most popular version of Java. Updates would still be available with a subscription to Java SE; but if you installed the updates without a subscription, you'd be liable to Oracle for the cost of the subscription.
 
-### April 2019 {#h-april-2019-nbsp}
+### April 2019
 
 Oracle unveiled a new Java license: the Oracle Technology License Agreement for Oracle Java SE.
 
 The cost for using Oracle Java under these new terms increased. Organizations like Cornell University began to take steps to minimize or eliminate their dependency on Oracle Java. Cornell published a blog post asking users of its network to uninstall Oracle Java from their computers and to install OpenJDK if they needed Java.
 
-### September 14, 2021 {#h-september-14-2021-nbsp}
+### September 14, 2021
 
 Oracle announced a new No-Fee Terms and Conditions (NFTC) license that partially rolled back the changes announced in 2019. A new LTS release could now be free under NFTC until one year after the next LTS release, although Oracle's language is unclear.
 
@@ -88,8 +88,8 @@ This gave users a chance to transition their applications to the next release. T
 
 Oracle also shortened the time between LTS releases from three years to two years. The move was generally well received, but it had little effect on OpenJDK's growing momentum.
 
-Conclusion {#h-conclusion-nbsp}
--------------------------------
+Conclusion
+----------
 
 Oracle's changes to its licensing terms and Java pricing models for Java have been a mixed bag. Oracle deserves props for continuing to develop Java as an open-source platform, but its pricing model and licensing continues to drive users away.
 

@@ -31,7 +31,7 @@ However, I don't attend that many talks now, and I don't take notes when I do.
 
 Probably, for this reason, the atmosphere is quite emulating: I attended a couple of talks and here are my notes.
 
-### Replicating production on your laptop using the magic of containers by Jamie Lee Coleman {#h3-0-replicating-production-on-your-laptop-using-the-magic-of-containers-by-jamie-lee-coleman}
+### Replicating production on your laptop using the magic of containers by Jamie Lee Coleman
 
 The container technology has old roots indeed.
 
@@ -104,7 +104,7 @@ It offers several implementations:
 
 *The rest of the presentation was code and live demo*
 
-### Docker Who: small containers through time and space by Dmitry Chuyko {#h3-1-docker-who-small-containers-through-time-and-space-by-dmitry-chuyko}
+### Docker Who: small containers through time and space by Dmitry Chuyko
 
 *The speaker introduces the concepts of Docker and Docker images, highlighting the sizing part.*
 
@@ -146,7 +146,7 @@ Other characteristics of Alpine Linux is that it comes with its dedicated packag
 
 Although the differences between musl and glibc are small, they exist. JDK providers wanted to close this gap. Project Portalla, *aka* JEP 386, aims to port Alpine Linux to x64 and AArch64 architectures. Portalla is facing a couple of issues, but developers are working on them.
 
-### Integration Testing with Spring Boot by Catalin Tudose {#h3-2-integration-testing-with-spring-boot-by-catalin-tudose}
+### Integration Testing with Spring Boot by Catalin Tudose
 
 The testing pyramid strategy consists of several layers.
 
@@ -169,7 +169,7 @@ Applications generally need to run in different contexts. For example, a develop
 
 To test the HTTP layer, one can inject a `MockMvc` instance in a test via the `@AutoConfigureMockMvc` annotation.
 
-### Demystifying "Event" related software concepts and methodologies by Milen Dyankov {#h3-3-demystifying-event-related-software-concepts-and-methodologies-by-milen-dyankov}
+### Demystifying "Event" related software concepts and methodologies by Milen Dyankov
 
 In software, we use the word "event," but different people may have a different meanings for this word. Let's dive deeper.
 
@@ -224,7 +224,7 @@ Milen finishes the talk by talking about his company's products:
 1. Axon Server is a message router and event server.
 2. Axon Framework is an Open Source framework for building and CQRS systems
 
-### DiscoAPI - OpenJDK distributions as a service by Gerrit Grunwald {#h3-4-discoapi-openjdk-distributions-as-a-service-by-gerrit-grunwald}
+### DiscoAPI - OpenJDK distributions as a service by Gerrit Grunwald
 
 The main question is how to get the JDK: on a vendor website or via a proprietary vendor API?
 
@@ -265,12 +265,12 @@ Another tool is [JDKMon](https://github.com/HanSolo/JDKMon) to detect JDKs insta
 
 Finally, note that the v2 of [setup-java GitHub Action](https://github.com/actions/setup-java) limits the possible JDK distributions to four options. If you need to use one that is not listed, use [foojayio/setup-java](https://github.com/foojayio/setup-java) instead to configure **any** distribution.
 
-### Evolving your APIs by your humble servitor {#h3-5-evolving-your-apis-by-your-humble-servitor}
+### Evolving your APIs by your humble servitor
 
 I've already written a full-fledged blog post about [Evolving your APIs](https://blog.frankel.ch/evolve-apis/). Soon, the recording of the talk will be available.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 jPrime is a great community-led conference. After two years of Covid, they were able to attract around 1k attendees and local and international speakers. Icing on the cake, all talks are in English!
 

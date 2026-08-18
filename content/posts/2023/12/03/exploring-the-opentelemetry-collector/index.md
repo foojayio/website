@@ -32,8 +32,8 @@ In this post, I explore the different aspects of the Collector:
 * Push and pull models
 * Operations: reads, transformations, and writes
 
-First steps {#h2-0-first-steps}
--------------------------------
+First steps
+-----------
 
 A long time ago, *observability* as we know it didn't exist; what we had instead was *monitoring*. Back then, monitoring was a bunch of people looking at screens displaying dashboards. Dashboards themselves consisted of metrics and only system metrics: mainly CPU, memory, and disk usage. For this reason, we will start with metrics.
 
@@ -134,8 +134,8 @@ Here's a sample of the result:
 ```
 
 
-Beyond printing {#h2-1-beyond-printing}
----------------------------------------
+Beyond printing
+---------------
 
 The above is an excellent first step, but there's more than printing to the console. We will expose the metrics to be scraped by a regular Prometheus instance; we can add a [Grafana dashboard](https://grafana.com/) to visualize them. While it may seem pointless, bear with it, as it's only a stepstone.
 
@@ -185,8 +185,8 @@ With the Prometheus exporter configured, we can visualize metrics in Grafana.
 
 [![](raw-metrics-1024x437.jpg)](raw-metrics.jpg)Note that receivers and exporters specify their type **and** every one of them must be unique. To comply with the last requirement, we can append a qualifier to distinguish between them, *i.e.* , `prometheus/foo` and `prometheus/bar.`
 
-Intermediary data processing {#h2-2-intermediary-data-processing}
------------------------------------------------------------------
+Intermediary data processing
+----------------------------
 
 A valid question would be why the OTEL Collector is set between the source and Prometheus, as it makes the overall design more fragile. At this stage, we can leverage the true power of the OTEL Collector: data processing. So far, we have ingested raw metrics, but the source format may not be adapted to how we want to visualize data. For example, in our setup, metrics come from our fake generator, "business", and the underlying NodeJS platform, "technical." It is reflected in the metrics' name. We could add a dedicated source label and remove the unnecessary prefix to filter more efficiently.
 
@@ -252,11 +252,11 @@ service:
 
 Here are the results:
 
-[![](labeled-metrics-1024x385.jpg)](labeled-metrics.jpg) {#h2-3-}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[![](labeled-metrics-1024x385.jpg)](labeled-metrics.jpg)
+--------------------------------------------------------
 
-Connecting receivers and exporters {#h2-4-connecting-receivers-and-exporters}
------------------------------------------------------------------------------
+Connecting receivers and exporters
+----------------------------------
 
 A connector is both a receiver **and** an exporter and connects two pipelines. The example from the documentation receives the number of spans (tracing) and exports the count, which has a metric. I tried to achieve the same with 500 errors - spoiler: it doesn't work as intended.
 
@@ -295,8 +295,8 @@ service:
 
 The metric is named `log_record_count_total`, but its value stays at 1.
 
-Logs manipulation {#h2-5-logs-manipulation}
--------------------------------------------
+Logs manipulation
+-----------------
 
 Processors allow data manipulation; operators are specialized processors that work on logs. If you're familiar with the stack, they are the equivalent of Logstash.
 
@@ -338,8 +338,8 @@ receivers:
 6. Accept a range, *e.g.* , `501-599`. The operator has a special interpreted value `5xx` (and similar) for HTTP statuses.
 7. Remove duplicated data
 
-Logs {#h2-6-logs}
------------------
+Logs
+----
 
 At this point, we can send the logs to any log aggregation component. We shall stay in the Grafana Labs sphere and use Loki.
 
@@ -372,8 +372,8 @@ service:
 
 Grafana can also visualize the logs. Choose Loki as a datasource.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we delved into the OpenTelemetry collector.
 

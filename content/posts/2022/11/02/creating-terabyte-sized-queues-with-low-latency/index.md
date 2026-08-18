@@ -28,7 +28,7 @@ Java can only hold so much information before the heap becomes a limiting factor
 
 This article covers how to create huge persisted queues while retaining predictable and consistent low latency using [open-source Chronicle Queue.](https://chronicle.software/queue/ "open-source Chronicle Queue.")
 
-### The Application {#h3-0-the-application}
+### The Application
 
 In this article, the objective is to maintain a queue of objects from market data feeds (e.g. the latest price for securities traded on an exchange). Other business areas such as sensory input from IOT devices or reading crash-recording information within the automotive industry could have been chosen as well. The principle is the same.
 
@@ -71,7 +71,7 @@ static MarketData create() {
 
 Now, the objective is to create a queue that is durable, concurrent, low-latency, accessible from several processes and that can hold billions of objects.
 
-### The Naïve Approach {#h3-1-the-na-ve-approach}
+### The Naïve Approach
 
 Armed with these classes, the naïve approach of using a ConcurrentLinkedQueue can be explored:
 
@@ -94,7 +94,7 @@ This will fail for several reasons:
 
 Looking at various other standard Java classes, it can be concluded that there is no support for large persisted queues.
 
-### Using Chronicle Queue {#h3-2-using-chronicle-queue}
+### Using Chronicle Queue
 
 Chronicle Queue is an open-source library and is designed to meet the requirements set forth above. Here is one way to set it up and use it:
 
@@ -144,7 +144,7 @@ static MarketData recycle(MarketData marketData) {
 ```
 
 
-### Reading from a Chronicle Queue {#h3-3-reading-from-a-chronicle-queue}
+### Reading from a Chronicle Queue
 
 Reading from a Chronicle Queue is straightforward. Continuing the example from above, the following shows how the first two MarketData objects can be read from the queue:
 
@@ -191,7 +191,7 @@ This might produce the following output:
 
 There are provisions to efficiently seek the tailer's position, for example, to the end of the queue or to a certain index.
 
-### What's Next? {#h3-4-what-s-next}
+### What's Next?
 
 There are many other features that are out of scope for this article.
 
@@ -203,7 +203,7 @@ Finally, there is an enterprise version with replication of queues across server
 
 The enterprise version also includes a variety of other features such as encryption, time zone rolling and asynchronous appenders.
 
-### Resources {#h3-5-resources}
+### Resources
 
 [Open-source Chronicle Queue](https://chronicle.software/queue/ "Open-source Chronicle Queue")
 

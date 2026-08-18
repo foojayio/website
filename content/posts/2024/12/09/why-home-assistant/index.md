@@ -30,8 +30,8 @@ I have many different "smart" devices at home and no centralized system to manag
 
 In the first article of this series, I describe my current context and goals. The context includes a collection of 'smart' devices at home, each managed separately without a centralized system. My goals are to enhance privacy and control by adopting an open-source, local-first approach to home automation.
 
-My existing infrastructure {#h2-0-my-existing-infrastructure}
--------------------------------------------------------------
+My existing infrastructure
+--------------------------
 
 My smart home didn't start as a conscious thought but as a speaker's gift of [DevFest Vienna](https://www.youtube.com/watch?v=SXNz6jX7w0U). In 2018, Google wanted to promote Google Home Mini, which was part of the package. I put it in my living room, but it delivered little value besides answering a few questions. Soon afterwards, a then-colleague gave me a regular Google Home. I moved the Mini to my office and put the regular one in its place. At this point, I had a Deezer account (think Spotify, but French), so I could listen to music by asking Google.
 
@@ -43,8 +43,8 @@ I was happy with the setup, with one exception: if anybody pressed the button to
 
 The next logical step was to acquire smart switches to fix this issue, which I installed in the relevant rooms.
 
-My goals {#h2-1-my-goals}
--------------------------
+My goals
+--------
 
 Everything works as expected. Still, some improvements are in order.
 

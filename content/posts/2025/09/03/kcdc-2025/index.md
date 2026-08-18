@@ -18,8 +18,8 @@ When I first started attending conferences, I diligently tried to write down not
 
 This week, I was privileged to speak at [DevOps Days Kansas City](https://devopsdays.org/events/2025-kansas-city/program/nicolas-fr%c3%a4nkel). The event was co-located with and part of [KCDC](https://www.kcdc.info/). It was my first edition for both. As I'm returning to engineering, the number of conferences I'll attend in the near future will probably be very low, if not zero. Hence, I wanted to revive the tradition of note-taking, as well as give my opinion on the conference.
 
-The talks {#h2-0-the-talks}
----------------------------
+The talks
+---------
 
 At conferences, I attended talks depending on several goals:
 
@@ -29,19 +29,19 @@ At conferences, I attended talks depending on several goals:
 
 Here are the talks I attended. When possible, I link to a recorded edition of the talk or the slides.
 
-### Home Lab - Private Cloud on a budget {#h3-1-home-lab-private-cloud-on-a-budget}
+### Home Lab - Private Cloud on a budget
 
 I stopped at the part before the dash, and expected a talk on Home Automation. The talk was instead about creating your own "cloud" at home, as the name states. I guess jet lag hit me more than I expected. Despite my mistake, the talk felt engaging, touching on some parts of what I'm doing at home, albeit in a much more "build" fashion (as opposed to "buy").
 
-### Loom is more than virtual threads: Structured Concurrency and Scoped Values {#h3-2-loom-is-more-than-virtual-threads-structured-concurrency-and-scoped-values}
+### Loom is more than virtual threads: Structured Concurrency and Scoped Values
 
 I haven't coded with Java virtual threads yet, and the last talk I attended on the subject was probably more than one year ago. The speaker delivered and refreshed my memory. TIL: Structured Concurrency won't be released as part of Java 25, but will still be in preview state.
 
-### 15 Productivity tips to accelerate your Apache Maven builds {#h3-3-15-productivity-tips-to-accelerate-your-apache-maven-builds}
+### 15 Productivity tips to accelerate your Apache Maven builds
 
 I've been using Maven for a long time, and I wanted a deep dive. Case in point, TIL: [forkCount](https://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html#Forked_Test_Execution).
 
-### Take the Polar Plunge: A Fearless Introduction to Apache Iceberg® {#h3-4-take-the-polar-plunge-a-fearless-introduction-to-apache-iceberg}
+### Take the Polar Plunge: A Fearless Introduction to Apache Iceberg®
 
 I heard about Apache Iceberg before; I think I even read a post about it. Yet, I'm unable to tell what it is for, what role it plays, and in which context. I decided to go to this talk to get an introduction.
 
@@ -54,7 +54,7 @@ If there's one thing to remember, it's that Iceberg is a data format for Data La
 
 [Recording](//mirrors.dotsrc.org/fosdem/2025/ub5132/fosdem-2025-4701--replacement-take-the-polar-plunge-a-fearless-introduction-to-apache-iceberg-.av1.webm)
 
-### Epic App Performance Starts with the Database {#h3-5-epic-app-performance-starts-with-the-database}
+### Epic App Performance Starts with the Database
 
 This talk is targeted at developers. I believe the concepts explained in the talk are fundamental for any programmer worth their salt.
 
@@ -73,7 +73,7 @@ Follows a demo, which uses OpenTelemetry to measure performance! The demo goes t
 
 Here's the [recording](https://www.epicweb.dev/talks/epic-app-performance-starts-with-the-database) and here are the [slides](https://github.com/rtbenfield/talks-kcdc-2025-epic-app-performance).
 
-### The Amazing Features of Modern Java {#h3-6-the-amazing-features-of-modern-java}
+### The Amazing Features of Modern Java
 
 The talk is from Venkat Subramaniam. Venkat's talks are based on code, not slides. This presentation compares "Java of the past" to the more modern ways Java takes on specific features. Here's the list of features he went through in this talk.
 
@@ -82,18 +82,18 @@ The talk is from Venkat Subramaniam. Venkat's talks are based on code, not slide
 * Records. TIL: [compact constructors](https://docs.oracle.com/en/java/javase/19/language/records.html#GUID-6699E26F-4A9B-4393-A08B-1E47D4B2D263__GUID-0630D05B-DCF5-484D-8D46-A78DB6C8B2F0)
 * Sealed classes
 
-### Typescript can do that? {#h3-7-typescript-can-do-that}
+### Typescript can do that?
 
 Even though I love the idea of typed JavaScript, the only time I wrote Typescript was for my [OpenTelemetry demo](https://github.com/nfrankel/opentelemetry-tracing/blob/master/analytics/src/index.ts). I read a post about TypeScript not so long ago, and it blew my mind. I wanted to know more about the language allowed, beyond the regular tutorials.
 
 *Jet lag hit me hard during the talk, and I can't remember what was said. Check the [slides](https://docs.google.com/presentation/d/1th388DlssDcdEipTftgBBNJRKsMVCxZjis7w2TobnNQ/mobilepresent#slide=id.p1) if you're interested.*
 
-### 82 Bugs I Collected in a Year You Won't Believe Made It to Production {#h3-8-82-bugs-i-collected-in-a-year-you-won-t-believe-made-it-to-production}
+### 82 Bugs I Collected in a Year You Won't Believe Made It to Production
 
 The talk doesn't lend itself very well to note-taking, as it is very visual.
 
-The side activities {#h2-9-the-side-activities}
------------------------------------------------
+The side activities
+-------------------
 
 No conference would be considered as such if it didn't offer side activities. At KCDC, we were literally showered with activities. We started on Wednesday with a speakers' dinner, make-your-own-burger, and ice creams included. On Tuesday, we started with (light) board games, then we went to the attendee party.
 
@@ -109,8 +109,8 @@ After dinner, we went to the Crown Jewels, a master task copycat. Some participa
 
 ![Night view of a Kansas City casino](kccasino.jpg)
 
-Summary {#h2-10-summary}
-------------------------
+Summary
+-------
 
 It was my first edition of KCDC, and I loved it. KCDC is a community-organized event, and it shows: you feel that volunteers care for you and are always happy to help.
 

@@ -24,12 +24,12 @@ My recent article ["Why Java 8 is a Ticking Time Bomb Hiding Within Your Organiz
 
 Here is a summary of what I learned from the reactions!
 
-Reasons to Stick to 8 {#h2-0-reasons-to-stick-to-8}
----------------------------------------------------
+Reasons to Stick to 8
+---------------------
 
 Of course, there are many reasons why some projects deliberately are kept on Java 8 or don't succeed on moving to a newer version.
 
-### Managers Blocking Upgrades {#h3-1-managers-blocking-upgrades}
+### Managers Blocking Upgrades
 
 In many cases, the development team wants to move on, but gets a no-go by management for various reasons....
 
@@ -51,7 +51,7 @@ In many cases, the development team wants to move on, but gets a no-go by manage
 **[Özkan Pakdil](https://app.daily.dev/ozkanpakdil)** on daily.dev:
 > *Banks are full of those Java 5, 6, 8 apps. I was still writing Java 8, 3 years ago, thats why I do side/open source projects 🤓 using latest tech is not easy for every engineer, I wish them good managers and nice upgrades to the latest🤞.*
 
-### Cost of Upgrading {#h3-2-cost-of-upgrading}
+### Cost of Upgrading
 
 Upgrading a big project can require some development time which is a direct cost. As such, it's used as a clear argument why an upgrade "doesn't fit in the budget". But this hides the fact that the cost only keeps increasing, as a security issue or even bigger refactoring is waiting to become an urgent problem. We can only hope that this will not lead to a series of news reports that put your company in a bad light...
 
@@ -64,7 +64,7 @@ Upgrading a big project can require some development time which is a direct cost
 **[Johannes Bechberger](https://www.linkedin.com/in/johannes-bechberger/)** on Foojay Slack:
 > *Switching costs are quite high to refactor the code, update libraries, etc. We'll probably be supporting Java for a long time for all those legacy systems out there.*
 
-### Production Environment {#h3-3-production-environment}
+### Production Environment
 
 Running on outdated Java runtimes is not only a problem caused by your code. Many of these applications run on server systems that were once state-of-the-art but no longer exist or have since evolved significantly.
 
@@ -74,14 +74,14 @@ Running on outdated Java runtimes is not only a problem caused by your code. Man
 **Anonymous**:
 > *Stuck on Java 8 thanks to IBM Websphere that does not run on Java 9+.*
 
-### Compatibility {#h3-4-compatibility}
+### Compatibility
 
 When you are the creator of a Java library or tool, you're facing another problem: you want to move on to newer Java versions, but your users are still on the older ones.
 
 **[Tim te Beek](https://www.linkedin.com/in/timtebeek/)** on Foojay Slack:
 > *As a maintainer of OpenRewrite we want to support our users that are still on Java 8. For that reason, we are also stuck on Java 8... We'd be the very last ones to move away from Java 8, although thankfully our tests and services are already on 17, but the target Java version for recipes remains 8.*
 
-### Breaking Changes in OpenJDK {#h3-5-breaking-changes-in-openjdk}
+### Breaking Changes in OpenJDK
 
 OpenJDK always aimed at stability. Most old Java applications can still run on newer runtimes. But still, some changes in OpenJDK itself have blocked projects to move on.
 
@@ -93,7 +93,7 @@ OpenJDK always aimed at stability. Most old Java applications can still run on n
 >
 > *Jokes aside, Java 9 breaks many old applications that rely on "hacky" ways of doing things. One example for us was Webswing, we had to drop it. Now we use Java 23. Oracle took a page from Microsoft there.*
 
-### Education {#h3-6-education}
+### Education
 
 One reason I didn't consider myself is education. It turns out that many schools are still using Java 8 or older!
 
@@ -104,7 +104,7 @@ One reason I didn't consider myself is education. It turns out that many schools
 >
 > *The college board moves slowly. They have a history of adopting a new language once it's use starts to decline. However, at the community college level at least, a lot of people are looking at curriculum alignment. An understanding of academic versus CTE paths is important, but there are [some models that help industry impact teaching](https://www.skilledtradesplaybook.org/partnering-community-colleges/).*
 
-### Various Other Reasons... {#h3-7-various-other-reasons}
+### Various Other Reasons...
 
 **[Max](https://app.daily.dev/wpfprogrammer)** on daily.dev:
 > *From what I see some companies get a software and when it's enough mature they let it go with time. When the final moment is coming, they have to migrate, not just update. This is a major problem.*
@@ -119,8 +119,8 @@ One reason I didn't consider myself is education. It turns out that many schools
 >
 > *Until the disasters become visible, many people don't want to invest and prepare. Sounds a bit like climate change. Apart from that disasters are already happening and people still don't want to change things.*
 
-More Reasons to Upgrade {#h2-8-more-reasons-to-upgrade}
--------------------------------------------------------
+More Reasons to Upgrade
+-----------------------
 
 As much as people agree and shared some of their experiences how they got stuck, there were also more arguments to make the switch to an up-to-date Java version.
 
@@ -132,8 +132,8 @@ You don't want to be the company where applicants don't want to work because the
 **[Jiří Hermann](https://www.linkedin.com/in/ji%C5%99%C3%AD-hermann-8926a173/)** on LinkedIn:
 > *Nearly three years ago, I had an interview where someone mentioned they were still using Java 7 and were planning to upgrade to Java 8. 😄*
 
-Success Story {#h2-9-success-story}
------------------------------------
+Success Story
+-------------
 
 Between all the complaints about old versions being in use, I was happy to learn from Ulas that a big bank successfully did the move!
 
@@ -146,8 +146,8 @@ Between all the complaints about old versions being in use, I was happy to learn
 >
 > *Here's to more technological milestones and continued excellence in serving our customers! 🎉*
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 All developers want to use the latest features and improvements but there are many reasons why it doesn't happen...
 

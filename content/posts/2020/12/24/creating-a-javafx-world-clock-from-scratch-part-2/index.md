@@ -22,8 +22,8 @@ frozen: false
 
 > *"The only way to learn mathematics is to do mathematics."* -- Paul Halmos[\[1\]](https://en.wikipedia.org/wiki/Paul_Halmos "Mathematician Paul Halmos")
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Welcome to *Creating a JavaFX World Clock from Scratch Part 2!*
 
@@ -37,8 +37,8 @@ In Part 2, I will show you how I animate the clock face's hands using basic trig
 
 *Creating a JavaFX World Clock from Scratch (Part 2)*{#caption-attachment-36624}
 
-Scene Builder {#h2-1-scene-builder}
------------------------------------
+Scene Builder
+-------------
 
 First lets give a quick recap of Part 1. In the first part I discussed my design workflow, then later I mention tools such as a WYSIWYG graphical editor called Scene Builder[\[5\]](https://gluonhq.com/products/scene-builder/ "Gluon Scene Builder"). Scene Builder is a tool to allows you to style shapes and to layout nodes onto the JavaFX scene graph.
 
@@ -55,8 +55,8 @@ Before I show you the code, I want to show you the world clock face and its hour
 
 *Parts of the hour hand of the world clock*{#caption-attachment-36529}
 
-Hour Hand Arc {#h2-2-hour-hand-arc}
------------------------------------
+Hour Hand Arc
+-------------
 
 An Arc shape is really a wedge (pizza slice). As we previously described the fill color is set to be transparent and the stroke width set to 4 pixels with a stroke color of orange. This gives it the appearence of a curved piece cut from a circle. Next, we will look at the Arc's attributes that will determine how long the arc will be and how to move it around the clock circle.
 
@@ -180,7 +180,7 @@ Similar to a time lapse an animation of the hour hand is shown below. It doesn't
 
 Now that you know how to position and draw arcs to appear to move, let's look at basic trigonometry to move the hour hand tip around the clock face.
 
-### Hour Hand Tip {#h3-3-hour-hand-tip}
+### Hour Hand Tip
 
 To change the (X, Y) position of the Circle shape around the clock face you will need to modify the following attributes of the JavaFX **Circle** shape:
 
@@ -232,8 +232,8 @@ To see the full listing of the code to move the clock arms see WorldClockControl
 
 There you have it! A way to animate the clock face. In [Part 3](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-3/) of this blog series I will be creating a UI form to configure the world clock such as changing timezones and locations (I will finally remove my pesky hardcoded cities).
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In Part 2, you got a chance to use some math and trig skills to determine how to position parts of the hour hand.
 

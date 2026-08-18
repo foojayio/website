@@ -101,8 +101,8 @@ You can find all defined events [here](https://gist.github.com/parttimenerd/a3b0
 I'm, of course, not the first OpenJDK developer who stumbled upon these custom events. Erik Gahlin even found them shortly after their addition in 2021 and promptly created an issue to recommend improvements (see [MC-236873](https://bugs.mojang.com/browse/MC-236873)):
 [![](https://mostlynerdless.de/wp-content/uploads/2023/11/image-5.png)](https://bugs.mojang.com/browse/MC-236873)
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 In [my previous blog post](https://mostlynerdless.de/blog/2023/11/20/custom-jfr-events-a-short-introduction/), I showed you how to create custom JFR events for a small sample application.
 

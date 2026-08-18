@@ -111,8 +111,8 @@ The resulting XML for the History class would look something like this (formatte
 
 **TIP:** Java SE bundled JAXB 2.0 as part of the Java 8 release (AKA JDK/Java 1.8). Unfortunately, Java 9 removed it. It's important that you explicitly include it in your Maven/Gradle dependencies for compatibility between the various versions of Java SE.
 
-The XML Database Demo {#h2-0-the-xml-database-demo}
----------------------------------------------------
+The XML Database Demo
+---------------------
 
 To show the power and ease of JAXB, I created a simple demo that uses JAXB to store/read the objects stored within it. You can find the source code [here](https://github.com/lightrun-platform/lightrun/tree/main/examples).
 
@@ -120,8 +120,8 @@ The demo includes a simple web service that accepts typical restful requests and
 
 We can debug this project, but this is a non-transferable skill. Your project will look different. Instead, we will debug the JAXB implementation. This will work even for your custom projects using roughly the same process.
 
-Debugging JAXB In Production {#h2-1-debugging-jaxb-in-production}
------------------------------------------------------------------
+Debugging JAXB In Production
+----------------------------
 
 We need to start by setting up Lightrun and running your project with the Lightrun agent. I'll skip the details as the getting started process covers them well.
 
@@ -168,8 +168,8 @@ In the variables view, you can deeply inspect every property, including the stat
 
 ![Screen Shot 2022-01-27 at 15.28.29.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537232346/iNvT4AX2X.png)
 
-JAXB Unmarshaller {#h2-2-jaxb-unmarshaller}
--------------------------------------------
+JAXB Unmarshaller
+-----------------
 
 The reading process is practically identical to the writing process. We open a class file and type Unmarshall into it (I didn't even need to finish typing):
 
@@ -194,8 +194,8 @@ Once we have that in place, we can add a snapshot and see the resulting stack:
 
 We can dig deeper similarly into the sax parser content tree and inspect an individual XML element. This approach makes it much easier to debug applications with XML.
 
-TL;DR {#h2-3-tl-dr}
--------------------
+TL;DR
+-----
 
 The JAXB runtime API is a powerful tool for converting generic types to XML and vice versa. It's popular in Java EE (Jakarta EE), Spring and pretty much all application server platforms. JAXB 2.0 was bundled in Java 8 but removed in Java 9, which means the runtime API must be included as a dependency.
 

@@ -25,8 +25,8 @@ frozen: false
 So far, we have looked at how well [Spring Boot](https://foojay.io/today/native-spring-boot/) and [Micronaut](https://foojay.io/today/native-image-micronaut/) integrate GraalVM native image extension. In this post, I'll focus on [Quarkus](https://quarkus.io/):
 > A Kubernetes Native Java stack tailored for OpenJDK HotSpot and GraalVM, crafted from the best of breed Java libraries and standards.
 
-Creating a new project {#h2-0-creating-a-new-project}
------------------------------------------------------
+Creating a new project
+----------------------
 
 Just as Spring Boot and Micronaut, Quarkus provides options to create new projects:
 
@@ -46,8 +46,8 @@ Just as Spring Boot and Micronaut, Quarkus provides options to create new projec
    Note that the menu displays Gradle-related commands instead if you choose Gradle as the build tool.
 3. A Maven plugin: I like that no external dependencies are necessary beyond one's build tool of choice.
 
-Bean configuration {#h2-1-bean-configuration}
----------------------------------------------
+Bean configuration
+------------------
 
 Quarkus relies on [JSR 330](http://javax-inject.github.io/javax-inject/). However, it deviates from the specification: it lists both [limitations](https://quarkus.io/guides/cdi-reference#limitations) and [non-standard features](https://quarkus.io/guides/cdi-reference#nonstandard_features).
 
@@ -62,8 +62,8 @@ class MarvelFactory {
 ```
 
 
-Controller configuration {#h2-2-controller-configuration}
----------------------------------------------------------
+Controller configuration
+------------------------
 
 A lot of Quarkus relies on Jakarta EE specifications. As such, the most straightforward path to creating controllers is JAX-RS. We can create a "controller" with the following code:
 
@@ -111,8 +111,8 @@ class MarvelRoutes {
 
 Note that the programmatic way requires as many annotations as the annotation way in this particular case. However, the former requires two annotations, while the latter requires one per route plus one.
 
-Non-blocking HTTP client {#h2-3-non-blocking-http-client}
----------------------------------------------------------
+Non-blocking HTTP client
+------------------------
 
 Micronaut integrates with many HTTP client flavors via plugins. In this project, I chose to use [Mutiny](https://smallrye.io/smallrye-mutiny/).
 > There are other reactive programming libraries out there. In the Java world, we can mention Project Reactor and Rx Java.
@@ -177,8 +177,8 @@ fun HttpRequest<Buffer>.queryParamsWith(request: HttpServerRequest) =
 ```
 
 
-Parameterization {#h2-4-parameterization}
------------------------------------------
+Parameterization
+----------------
 
 Like Spring Boot and Micronaut, Quarkus allows parameterizing one's application in multiple ways:
 
@@ -223,8 +223,8 @@ data class MarvelProperties(
 2. Quarkus uses the Microprofile Configuration specification. `@ConfigProperty` sets the property key to read from. It's unwieldy to repeat the same prefix on all keys. Thus, Microprofile offers the `@ConfigProperties` to set the prefix on the class. However, such a class needs a zero-arg constructor, which doesn't work with Kotlin's data classes.
 3. Inject the other config class and benefit from a nested structure
 
-Testing {#h2-5-testing}
------------------------
+Testing
+-------
 
 Like its siblings, Quarkus offers its dedicated annotation for tests, `@QuarkusTest`. It also provides `@NativeImageTest`, which allows running the test in a native-image context. The idea is to define your JVM test in a class annotated with the former and create a subclass annotated with the latter. This way, the test will run both in a JVM context and a native one. Note that I'm not sure it worked in my setup.
 
@@ -304,8 +304,8 @@ class QuarkusApplicationTest {
 
 I like how it decouples the test from its dependencies.
 
-Docker and GraalVM integration {#h2-6-docker-and-graalvm-integration}
----------------------------------------------------------------------
+Docker and GraalVM integration
+------------------------------
 
 When one scaffolds a new project, Quarkus creates different ready-to-use `Dockerfile`:
 
@@ -391,8 +391,8 @@ curl 'localhost:8080?limit=1&offset=50'
 ```
 
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Quarkus brings an exciting take to the table. Unlike Micronaut, it doesn't generate additional *bytecode* during each compilation. The extra code is only generated when one generates the native image via the Maven command. Moreover, relying on Dockerfiles allows you to configure them to your heart's content if you happen to have a Docker daemon available.
 

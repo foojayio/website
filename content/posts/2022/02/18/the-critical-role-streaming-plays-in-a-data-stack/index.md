@@ -32,7 +32,7 @@ For developers, building these data applications involves putting together the r
 
 There is, therefore, a significant gap between how companies say they want to use data and their ability to turn that high-level goal into an ongoing process that can scale up and provide sustainable revenues and advantages. This involves more than implementing successful individual projects; it requires thinking about a holistic stack approach across all the elements around data and across all an organization's lines of business.
 
-### **Application streaming and hybrid approaches** {#h3-0-application-streaming-and-hybrid-approaches}
+### **Application streaming and hybrid approaches**
 
 Application event streaming is a key component to standardizing best practices across teams and organizations and unlocking the value of the data they create and process. Application event streaming uses a message bus that takes events -- a customer action, a sensor alert, a transaction taking place -- enriches it, and combines it with other data sources (to check for fraudulent transactions or abnormal sensor readings), and then sends that data to other services. This includes triggering a real-time response to that customer, paging an administrator to look at the sensor readings or a more in-depth workflow for data. The message bus sits at the heart of any such data stack.
 
@@ -46,7 +46,7 @@ First, Pulsar was developed to support multi-datacenter and geo-distributed depl
 
 To understand the second way in which Pulsar has advanced the state of the art, we need to briefly discuss the relevance of Kubernetes.
 
-### **How do you want to build today?** {#h3-1-how-do-you-want-to-build-today}
+### **How do you want to build today?**
 
 A major element in decisions around software architecture is how developers build their applications in the first place. Microservices-based designs are more popular with developers today as they remove some of the problems around running monolithic applications. IDC [predicted](https://www.idc.com/research/viewtoc.jsp?containerId=US44403818) in 2019 that 90% of applications would be built using microservices designs within three years.
 
@@ -60,7 +60,7 @@ The architecture design for Pulsar also splits the compute and storage sides of 
 
 Pulsar's approach to abstracting the storage layer enables *tiered storage*, where data is stored on the storage service that is most cost-effective for its purpose. New events can be stored on Apache BookKeeper nodes for high-performance retrieval, while older data is offloaded to S3. This allows a very cost-effective approach of running the production message bus on a small number of nodes, while the much larger volume of historical data can be kept separately --- while still being available, via the same API, to services that need to process that data.
 
-### **The need to be open** {#h3-2-the-need-to-be-open}
+### **The need to be open**
 
 IT teams don't want to be locked into a specific provider. [Bain and Company found](https://www.bain.com/insights/cios-say-they-want-to-avoid-vendor-lock-in-snap-chart/)that around two-thirds of CIOs say they would like to use public cloud services from several different vendors to prevent lock-in. This goes alongside a general preference for open-source software -- a survey by IBM and O'Reilly Media [found](https://developer.ibm.com/blogs/oreilly-open-source-skill-survey-blog/) that 94% of developers rated open-source software as equal to or better than proprietary software, while 70% would use cloud services based on open source.
 

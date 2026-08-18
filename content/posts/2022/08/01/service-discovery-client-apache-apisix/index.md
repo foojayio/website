@@ -48,8 +48,8 @@ It worked for a long time, but in this day and age, nodes are probably not pets 
 
 In this article, I'd like to explain how to do it.
 
-Existing service discovery registries {#h2-0-existing-service-discovery-registries}
------------------------------------------------------------------------------------
+Existing service discovery registries
+-------------------------------------
 
 Please don't reinvent the wheel! Apache APISIX comes with a bunch of existing service discovery registries out-of-the-box.
 
@@ -64,8 +64,8 @@ Please don't reinvent the wheel! Apache APISIX comes with a bunch of existing se
 
 Before you write your own, make sure your platform is not listed above.
 
-Setting up the environment {#h2-1-setting-up-the-environment}
--------------------------------------------------------------
+Setting up the environment
+--------------------------
 
 To ease my life and make it easier to reproduce the steps, I chose to use Docker and Docker Compose. Here's the sample that you're welcome to reuse **for development purposes**:
 
@@ -109,8 +109,8 @@ services:
 
 6. If running on Docker Desktop with Kubernetes enabled, a port conflict occurs with the default port. We need to change it.
 
-The use-case {#h2-2-the-use-case}
----------------------------------
+The use-case
+------------
 
 Let's imagine a YAML file that references the available nodes. An *ad hoc* process listens to changes to the topology: it re-generates the file with the new nodes. Our client reads the file regularly and updates its internal nodes list.
 
@@ -123,8 +123,8 @@ nodes:
 ```
 
 
-Developing the discovery service client {#h2-3-developing-the-discovery-service-client}
----------------------------------------------------------------------------------------
+Developing the discovery service client
+---------------------------------------
 
 To create a discovery client, the following structure is required:
 
@@ -251,8 +251,8 @@ end
 
 8. Insert it into the `nodes` file local variable
 
-Putting the code to the test {#h2-4-putting-the-code-to-the-test}
------------------------------------------------------------------
+Putting the code to the test
+----------------------------
 
 I used the default Apache web server available on my Mac to test the code.
 
@@ -304,12 +304,12 @@ It returns the root page served by the Apache Server as expected:
 ```
 
 
-Nitpicking {#h2-5-nitpicking}
------------------------------
+Nitpicking
+----------
 
 While the above code works as expected, we can improve it.
 
-### Logging {#h3-6-logging}
+### Logging
 
 Relevant logging can help your future self solve nasty bugs in production.
 
@@ -327,7 +327,7 @@ local function read_file(premature)
 
 1. Trace the error
 
-### Parameterization {#h3-7-parameterization}
+### Parameterization
 
 So far, we didn't use any parameters. The configuration file path and the fetch interval are hard-coded. We can do better by making them configurable.
 
@@ -358,7 +358,7 @@ function _M.init_worker()
 ```
 
 
-### Premature {#h3-8-premature}
+### Premature
 
 Finally, the `ngx.timer.every` API calls our function with a dedicated `premature` parameter:
 > Premature timer expiration happens when the Nginx worker process is trying to shut down, as in an Nginx configuration reload triggered by the `HUP` signal or in an Nginx server shutdown. When the Nginx worker is trying to shut down, one can no longer call `ngx.timer.at` to create new timers with nonzero delays and in that case `ngx.timer.at` will return a "conditional false" value and a string describing the error, that is, "process exiting". -- [ngx.timer.at](https://github.com/openresty/lua-nginx-module#ngxtimerevery)
@@ -374,8 +374,8 @@ end
 ```
 
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 Most modern infrastructures are dynamic - servers are cattle, not pets. In this case, it doesn't make much sense to configure the nodes of an upstream statically.
 

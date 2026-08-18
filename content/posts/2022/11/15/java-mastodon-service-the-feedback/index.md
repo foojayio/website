@@ -25,15 +25,15 @@ At the same time, we shared this post on [Twitter](https://twitter.com/foojayio/
 
 Let's see what the community thinks...
 
-TL;DR; {#h2-0-tl-dr}
---------------------
+TL;DR;
+------
 
 * Yes, a lot of likes and +1, most of the reactions think this would be a good idea.
 * No, not everyone is convinced Twitter will disappear and an alternative is needed.
 * Nobody volunteered (yet) to assist (pay?) for the server and moderate 😉
 
-Feedback {#h2-1-feedback}
--------------------------
+Feedback
+--------
 
 Some of the confirmations
 
@@ -67,8 +67,8 @@ Ofcourse there are also other ideas and opinions:
 * [**Stelian Iancu**](https://fosstodon.org/@panzerboy/109342802167139394): *I don't think I would join a special Java instance, but I would be interested in following "Java people" no matter what instance they're on. One other interesting thing would be if OpenJDK would have an official instance for the project, with the members having accounts there (like the Internet Archive did).*
 * [**Guillaume Laforge**](https://uwyn.net/@glaforge/109342770766904555): *I'm happy with the instance that my friend @gbevin is taking care of, but if a #java instance had existed, I would definitely have joined it back then!*
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 To Mastodon or Not To Mastodon?
 

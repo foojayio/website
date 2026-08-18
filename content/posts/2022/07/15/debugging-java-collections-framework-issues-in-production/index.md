@@ -30,8 +30,8 @@ One of the core principles underlying the framework is coding to the interface. 
 
 When we debug a typical class we can inspect the variables or the implementation. In this case, the collection of objects is often hidden behind an abstraction which masks a complex internal structure e.g. red black tree etc.
 
-Local Debugging is Easy {#h2-0-local-debugging-is-easy}
--------------------------------------------------------
+Local Debugging is Easy
+-----------------------
 
 With local debugging we can just add an inspection such `aslist.toArray()`. This will perform poorly but will still work. However, in a production environment when using [Lightrun](https://lightrun.com/) this will fail.
 
@@ -39,8 +39,8 @@ When trying to print out a complex list we can fail on the method invocation its
 
 Printing the content of a collection of elements is problematic. Even if you have code that uses the `Iterable` interface to loop over the entire list the likelihood of avoiding quota restrictions is low. Printing a primitive type array is easy but printing objects requires more.
 
-Erasure of Collection Elements {#h2-1-erasure-of-collection-elements}
----------------------------------------------------------------------
+Erasure of Collection Elements
+------------------------------
 
 The collection framework includes another challenge when debugging: erasures. In Java one would expect code like this to work:
 
@@ -69,10 +69,10 @@ The property value of the first element is {((MyObject)myList.get(0)).getPropert
 ```
 
 
-Getting Around Quota Limits {#h2-2-getting-around-quota-limits}
----------------------------------------------------------------
+Getting Around Quota Limits
+---------------------------
 
-### What's Quota? {#h3-3-what-s-quota}
+### What's Quota?
 
 Lightun executes user code in a sandbox. Use code would qualify as any condition, expression log etc. The sandbox lets us guarantee that:
 
@@ -84,7 +84,7 @@ This sandboxing has its own overhead. This is the "quota limit" the amount of CP
 
 Quota may be impacted if the object dependency graph is deep and requires access to many class objects. ֿThere are however two things we can do to extract some debuggable value from a collection interface.
 
-### Use Snapshots {#h3-4-use-snapshots}
+### Use Snapshots
 
 Snapshots provide far more detail about all types of collections. Since they access object internal state with a single shot, they tend to grab a lot of applicable data in the class.
 
@@ -92,7 +92,7 @@ E.g., take for instance this snapshot from the pet clinic Spring Boot demo. It l
 
 ![](Screen-Shot-2022-03-28-at-14.51.52-2048x1267-1-700x433.jpg)
 
-### Use Size and Related Methods {#h3-5-use-size-and-related-methods}
+### Use Size and Related Methods
 
 Debugging is the process of making assumptions and validating them. The `size()` method from java collections is very efficient and can be used almost freely.
 
@@ -102,7 +102,7 @@ You can use it as a condition or within the log format itself:
 
 ![](Screen-Shot-2022-03-28-at-14.55.09-700x500.png)
 
-### Logging an Individual Entry {#h3-6-logging-an-individual-entry}
+### Logging an Individual Entry
 
 As we mentioned before, if we're in a loop and try to log all the elements we'll hit quota pretty fast.
 
@@ -119,8 +119,8 @@ If it's met I can print out the full details for the entry: `Current vet is {new
 
 ![](Screen-Shot-2022-03-28-at-14.59.23-700x414.png)
 
-Preparation {#h2-7-preparation}
--------------------------------
+Preparation
+-----------
 
 Debugging Java Collections is harder when we aren't prepared. The nice thing is that preparation is also the first step in writing better code for long term maintenance.
 
@@ -161,14 +161,14 @@ But the second one lets us debug the collection locally as well as remotely. It 
 
 This is especially true when dealing with Java streams which emphasize such terse syntax.
 
-### Include a Proper toString Methods {#h3-8-include-a-proper-tostring-methods}
+### Include a Proper toString Methods
 
 I cannot stress this enough: if it goes into the collection framework it should have a `toString()` method in the class. This makes debugging the elements so much easier!
 
 When we include the class in a snapshot or a log the` toString()` method is invoked. If there's no implementation in the class we will see the object ID which isn't as useful.
 
-Summary {#h2-9-summary}
------------------------
+Summary
+-------
 
 Snapshots are superior for debugging collection framework objects as they display more of the hierarchy.
 

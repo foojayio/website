@@ -23,8 +23,8 @@ As last year, before diving in into the report proper, I'd like to remind you th
 
 Please help Ukraine and help the civilized world by doing so. Here are two organizations I trust: [Come Back Alive](https://savelife.in.ua/en/) and [Dzyga's Paw](https://dzygaspaw.com/).
 
-I lost my job (and found a new one) {#h2-0-i-lost-my-job-and-found-a-new-one}
------------------------------------------------------------------------------
+I lost my job (and found a new one)
+-----------------------------------
 
 First and foremost, I suffered quite a blow this year. It was a complete surprise when my company unexpectedly let me go due to budget reasons. To tell you I was unhappy is quite an understatement. It was also a complete surprise, as my CEO had assured me everything was okay a few months before he notified me.
 
@@ -43,8 +43,8 @@ All in all, it's safe that the current economic situation is bleak. Unfortunatel
 
 We must bite the bullet and hope for better times.
 
-I'm using more and more AI {#h2-1-i-m-using-more-and-more-ai}
--------------------------------------------------------------
+I'm using more and more AI
+--------------------------
 
 I used AI more than a couple of times this year.
 
@@ -56,8 +56,8 @@ I'm an avid learner of many different subjects. So far, my go-to sites were Wiki
 
 Finally, I'm not a graphic designer, and I spend a lot of time searching for free illustrations for my blog posts on image banks. I prefer to spend less time on OpenAI to describe what I want. I don't have strong opinions, so it gives me good enough results.
 
-Technical content {#h2-2-technical-content}
--------------------------------------------
+Technical content
+-----------------
 
 I published fifty-one blog posts this year on [this blog](https://blog.frankel.ch/): one weekly on Sunday, but one between Christmas and the New Year for obvious reasons. Here are the top most viewed pages in 2024:
 
@@ -79,8 +79,8 @@ I continue to cross-post on different sites. Here is my followers' count on the 
 
 The trend I noticed last year is confirmed: wild growth on dev.to and close to plateau on Hashnode.
 
-Comparing social media {#h2-3-comparing-social-media}
------------------------------------------------------
+Comparing social media
+----------------------
 
 My metrics tracking script is still working nicely.
 
@@ -108,8 +108,8 @@ We can't compare LinkedIn since it's mostly about people you know personally; th
 
 I recommend keeping your account if you already have one there, but new investments are a total loss of both time and money.
 
-Summary {#h2-4-summary}
------------------------
+Summary
+-------
 
 My goals are evident this year. I've joined a new company, so I need to learn more about the product, create new related content, design new talks, submit them, and be selected. In the meantime, feel free to invite me to your meetup and user group.
 

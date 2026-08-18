@@ -39,8 +39,8 @@ In this first post I'd like to discuss two heavyweight champions: dtrace and str
 
 Both tools will let you debug anything without the source code. You could detect problems and gain a level of understanding you never imagined.
 
-Dtrace {#h2-0-dtrace}
----------------------
+Dtrace
+------
 
 Back in 2004, I first heard about DTrace while working at Sun Microsystems. It became all the rage in the hallways as it was an innovation that Sun Microsystems was promoting. Dtrace was ported later into MacOS X (it originated on Solaris). Today there are ports on Windows and Linux as well.
 
@@ -66,7 +66,7 @@ You might think that dtrace is one of those tools that will destroy your CPU com
 
 It was revolutionary when it was launched almost two decades ago and it's still the case to this day!
 
-### Running Dtrace {#h3-1-running-dtrace}
+### Running Dtrace
 
 Before we begin, a word of warning. Save your data!
 
@@ -80,7 +80,7 @@ Then, in a recovery mode terminal, issue the command: `csrutil disable`.
 
 Then upon reboot, dtrace should work as expected.
 
-### Basic Usage {#h3-2-basic-usage}
+### Basic Usage
 
 As mentioned before, dtrace is a very powerful tool. There are whole books written about it. It has its own programming language based on C syntax that you can use to build elaborate logic. E.g. the following command will log some information from the given callbacks:
 
@@ -93,7 +93,7 @@ The code snippet passed to the dtrace command listens to the sendto callback on 
 
 If this seems like a bit too much and too hard to get started with... You're 100% right. It's a powerful tool when you need it. But for most of our day-to-day usage, it's just too powerful. What we want is to know a bit of basic stuff and this is just too much!
 
-### Simple Usage {#h3-3-simple-usage}
+### Simple Usage
 
 As luck would have it, we have a simple solution:
 
@@ -117,7 +117,7 @@ It's worth your time going over this list to realize what you can truly do here.
 
 ![](Screen-Shot-2022-07-04-at-7.24.48-700x302.png)
 
-### Examples {#h3-4-examples}
+### Examples
 
 You're facing elevated disk write issues that are causing the performance of your application to degrade... But is it your app at fault or some other app?
 
@@ -189,10 +189,10 @@ SentinelAgent workq_kernreturn   -2
 ```
 
 
-These are just the tip of the iceberg. I suggest checking out this old [dtrace tutorial](https://www.oracle.com/solaris/technologies/dtrace-tutorial.html) from Oracle or [the book](https://www.bookdepository.com/DTrace-Brendan-Gregg/9780132091510?ref=grid-view&amp;qid=1656581174175&amp;sr=1-1). Disclaimer: I didn't read the book...
+These are just the tip of the iceberg. I suggest checking out this old [dtrace tutorial](https://www.oracle.com/solaris/technologies/dtrace-tutorial.html) from Oracle or [the book](https://www.bookdepository.com/DTrace-Brendan-Gregg/9780132091510?ref=grid-view&qid=1656581174175&sr=1-1). Disclaimer: I didn't read the book...
 
-strace {#h2-5-strace}
----------------------
+strace
+------
 
 Amusingly enough, the strace tool also originated at Sun Microsystems in this case in the 90s. This isn't surprising though as the list of technologies originating from Sun Microsystems is absolutely mind numbing.
 
@@ -202,7 +202,7 @@ Strace is enabled thanks to the kernel feature known as ptrace. Since ptrace is 
 
 Working with strace is akin to printing a log entry every time we make a kernel call. This creates very verbose logging for every command you execute. As a result, you can follow what's **really** going on under the hood of a running process.
 
-### Running Strace {#h3-6-running-strace}
+### Running Strace
 
 Nowadays, strace is commonly used in Linux, it's my favorite system diagnostic tool on that platform. It's remarkably convenient to work with since we can run it with no special privileges. Notice that unlike dtrace, you should keep strace away from production environments (unless the code is segregated). It carries a significant performance overhead and would bring a production system down.
 
@@ -266,7 +266,7 @@ There are many system calls you can learn and use to track many behaviors such a
 
 ![](Screen-Shot-2022-07-04-at-7.26.35-700x278.png)
 
-### Strace and Java {#h3-7-strace-and-java}
+### Strace and Java
 
 As you saw before, strace works great with the JVM. Since strace predates Java and is a very low level tool, it has no awareness of the JVM. The JVM works like most other platforms and invokes system calls which you can use to debug its behavior. However, because of its unique approach to some problems, some aspects might not be as visible with strace.
 
@@ -274,8 +274,8 @@ A good example is allocations. System tools use malloc, which maps to kernel all
 
 At the time of this writing, threading works well with strace. But this might not be the case moving forward as [project Loom](https://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html) might change the one-to-one mapping between Java threads and system threads. This might make strace output harder to pinpoint in heavily threaded applications.
 
-Finally {#h2-8-finally}
------------------------
+Finally
+-------
 
 There's an alphabet soup of "\*trace" utilities in various forms that keep borrowing ideas from one another. It's a significant challenge to keep up with all of that noise. There are just too many great tools to cover, I would like to discuss btrace in a future installment though. It's very similar to dtrace but also very JVM specific so probably worth a different post.
 

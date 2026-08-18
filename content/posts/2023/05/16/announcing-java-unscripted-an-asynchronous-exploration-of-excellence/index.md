@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-### **ITL;DR** {#h3-0-itl-dr}
+### **ITL;DR**
 
 **Introducing "Java Unscripted," a series featuring interviews with Java industry experts. We aim to inspire and guide new developers with these insights. Interested in participating? Fill out our [Interview Participation Form](https://docs.google.com/forms/d/e/1FAIpQLSfyZEjdUaL_NTRKO-Gfk_Y9jIhuUszka3p1Kw6cWVdRBkOESQ/viewform). Let's share your story with our community!**
 
@@ -49,7 +49,7 @@ The interviews will be conducted asynchronously via **email** or **Slack** , wit
 
 <br />
 
-### **We'd be thrilled to have you if you're interested in contributing to this series. Please fill out this Google Form to provide some basic information and preferences for the interview process:[Interview Participation Form](https://forms.gle/DsC9hN424sCPicgM8)** {#h3-1-we-d-be-thrilled-to-have-you-if-you-re-interested-in-contributing-to-this-series-please-fill-out-this-google-form-to-provide-some-basic-information-and-preferences-for-the-interview-process-interview-participation-form}
+### **We'd be thrilled to have you if you're interested in contributing to this series. Please fill out this Google Form to provide some basic information and preferences for the interview process:[Interview Participation Form](https://forms.gle/DsC9hN424sCPicgM8)**
 
 <figure class="wp-block-image size-large is-resized">
  <img fetchpriority="high" decoding="async" src="image-847x1024.png" alt="" class="wp-image-98319" width="629" height="760">

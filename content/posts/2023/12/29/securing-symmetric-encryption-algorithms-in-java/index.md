@@ -26,14 +26,14 @@ The first choice you must make as a developer is whether you need encryption. Al
 
 When looking at passwords, for instance, we do not want encryption as we do not want to be able to "decrypt" the original text. Therefore, we rely on [++hashing for passwords++](https://snyk.io/blog/password-hashing-java-applications/) and not encryption.
 
-Encryption in Java {#h2-0-encryption-in-java}
----------------------------------------------
+Encryption in Java
+------------------
 
 Java applications often handle sensitive data, including customer information, financial details, and transaction records.
 
 As a Java developer, employing robust encryption algorithms is vital to maintaining the integrity and confidentiality of sensitive data. This protects your users and any essential data you have inside your system.
 
-### Symmetric vs asymmetric encryption {#h3-1-symmetric-vs-asymmetric-encryption}
+### Symmetric vs asymmetric encryption
 
 Generally speaking, we can distinguish two types of encryption: symmetric and asymmetric. Either type works fundamentally differently, and either type has different use cases.
 
@@ -45,20 +45,20 @@ When using symmetric encryption, it's best to rely on services that leverage har
 
 However, if you're unable to use a service like Amazon Key Management Service (KMS) and still want to do this, the information below will show you how to do so securely. In the remainder of this article, we focus on implementing symmetric encryption in your Java application using the `javax.crypto` packages.
 
-### Understanding outdated encryption algorithms and their risks {#h3-2-understanding-outdated-encryption-algorithms-and-their-risks}
+### Understanding outdated encryption algorithms and their risks
 
 Despite the importance of encryption, not all encryption algorithms are created equal. Some older or "outdated" encryption algorithms, such as DES (Data Encryption Standard) or 3DES, [++have been found to have vulnerabilities that attackers can exploit++](https://security.snyk.io/vuln/SNYK-AMZN201803-JAVA180OPENJDK-1704650). These algorithms were once considered secure, but advances in computing power and cryptanalysis techniques have rendered them unsafe.
 
 Using insecure encryption algorithms in your Java applications can lead to potential risks. An attacker who gains access to your encrypted data may be able to decrypt it if the encryption algorithm is outdated and has known vulnerabilities. This could result in a data breach, with potentially devastating consequences for your users and your organization.
 
-### Recommendations for algorithms and cipher modes {#h3-3-recommendations-for-algorithms-and-cipher-modes}
+### Recommendations for algorithms and cipher modes
 
 If we look at symmetric encryption algorithms, the [++OWASP foundation++](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html) currently advises AES (Advanced Encryption Standard) with a key that is at least 128 bits but preferably 256 bits. In addition, you should use the algorithm with a secure mode. Also, the [++NIST cryptographic standards and guidelines++](https://csrc.nist.gov/projects/block-cipher-techniques) approve AES encryption as a block cipher technique.
 
 Multiple modes are available with a cipher like AES. These modes have different security and performance characteristics. When it comes to modes, avoid ECB (Electronic Codebook) mode, which [++does not provide serious message confidentiality++](https://cybergibbons.com/reverse-engineering-2/why-is-unauthenticated-encryption-insecure/). Instead, use modes like CCM (Counter with CBC-MAC) or GCM (Galois/Counter Mode). Both of these modes are [++authenticated++](https://www.ubiqsecurity.com/understanding-authenticated-encryption-an-explainer/) modes and guarantee the data's integrity, confidentiality, and authenticity.
 
-Identifying weak encryption algorithms in Java {#h2-4-identifying-weak-encryption-algorithms-in-java}
------------------------------------------------------------------------------------------------------
+Identifying weak encryption algorithms in Java
+----------------------------------------------
 
 It is relatively easy to use the `javax.crypto` APIs for implementing a small encryption service in Java. Below is an example of `EncryptionService` in Java based on the outdated DES algorithm using the ECB mode.
 
@@ -165,15 +165,15 @@ public class EncryptionServiceAESGCM {
 
 <br />
 
-Continuously reviewing encryption algorithms in your Java applications {#h2-5-continuously-reviewing-encryption-algorithms-in-your-java-applications}
------------------------------------------------------------------------------------------------------------------------------------------------------
+Continuously reviewing encryption algorithms in your Java applications
+----------------------------------------------------------------------
 
 While updating outdated encryption algorithms is crucial, it's equally important to monitor your codebase for new security issues continuously. The encryption algorithms considered safe and secure at the moment of writing will most definitely be out of date in a matter of years.
 
 Proactively scanning and identifying this should, therefore, be a continuous exercise. This does not only count for encryption algorithms but obviously also for other issues in the code you maintain. Adopting and using a static analysis security testing (SAST) tool like Snyk code will help you easily recognize, identify, and mitigate these issues before actual harm is done.
 
-Snyk Code for Java can help you for free {#h2-6-snyk-code-for-java-can-help-you-for-free}
------------------------------------------------------------------------------------------
+Snyk Code for Java can help you for free
+----------------------------------------
 
 Snyk Code is a state-of-the-art static application security testing (SAST) tool that can identify security vulnerabilities within your codebase. It supports several programming languages, including Java, by analyzing code and providing real-time feedback to developers. Snyk Code can be integrated into your CI/CD pipeline to automatically scan your code with each commit, helping you catch and fix security issues early in the development cycle. Additionally, you can connect it to your git repository, use it on the command line using our CLI, and integrate it with all the popular IDEs for Java.
 

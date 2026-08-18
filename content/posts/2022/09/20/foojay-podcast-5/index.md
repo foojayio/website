@@ -29,8 +29,8 @@ It's September 20th, OpenJDK 19 has been released. In this podcast, we discuss t
 
 {{< youtube 71ZAYZWwpuI >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,20 +38,20 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
 * **[Miroslav Wengner](https://twitter.com/miragemiko)** (OpenValue)
 * **[Mary Grygleski](https://twitter.com/mgrygles)** (CJUG, DataStax)
 * **[Deepu K Sasidharan](https://twitter.com/deepu105)** (Okta, JHipster)
 
-Podcast host {#h2-2-podcast-host}
----------------------------------
+Podcast host
+------------
 
 **[Erik Costlow](https://twitter.com/costlow)** (Azul)
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 0'00 Short intro and music  
 

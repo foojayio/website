@@ -37,8 +37,8 @@ This is the native memory allocated by the OS and the amount depends on OS, proc
 
 Let us see what the different areas are for:
 
-Heap Memory {#h2-0-heap-memory}
--------------------------------
+Heap Memory
+-----------
 
 This is where JVM stores object or dynamic data. This is the biggest block of memory area and this is where **Garbage Collection(GC)** takes place.
 
@@ -49,23 +49,23 @@ The size of heap memory can be controlled using the `Xms`(Initial) and `Xmx`(Max
   * **Survivor Space** : This is where objects that survived the minor GC are stored. This is divided into two halves, **S0** and **S1**.
 * **Old generation** : Old generation or **"Tenured Space"** is where objects that reached the maximum tenure threshold during minor GC live. This space is managed up by **"Major GC"**.
 
-Thread Stacks {#h2-1-thread-stacks}
------------------------------------
+Thread Stacks
+-------------
 
 This is the stack memory area and there is one stack memory per thread in the process. This is where thread-specific static data including method/function frames and pointers to objects are stored. The stack memory limit can be set using the `Xss` flag.
 
-Meta Space {#h2-2-meta-space}
------------------------------
+Meta Space
+----------
 
 This is part of the native memory and doesn't have an upper limit by default. This is what used to be **Permanent Generation(PermGen) Space** in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that it's possible to set a limit on meta-space used with the `XX:MetaspaceSize` and `-XX:MaxMetaspaceSize` flag in which case the application might just throw out of memory errors.
 
-Code Cache {#h2-3-code-cache}
------------------------------
+Code Cache
+----------
 
 This is where the **Just In Time(JIT)** compiler stores compiled code blocks that are often accessed. Generally, JVM has to interpret byte code to native machine code whereas JIT-compiled code need not be interpreted as it is already in native format and is cached here.
 
-Shared Libraries {#h2-4-shared-libraries}
------------------------------------------
+Shared Libraries
+----------------
 
 This is where native code for any shared libraries used is stored. This is loaded only once per process by the OS.
 
@@ -150,8 +150,8 @@ The garbage collector in JVM is responsible for:
 
 JVM garbage collectors are generational(Objects in Heap are grouped by their age and cleared at different stages). There are many different algorithms available for garbage collection but **Mark \& Sweep** is the most commonly used one.
 
-Mark \& Sweep Garbage Collection {#h2-5-mark-sweep-garbage-collection}
-----------------------------------------------------------------------
+Mark \& Sweep Garbage Collection
+--------------------------------
 
 JVM uses a separate daemon thread that runs in the background for garbage collection and the process runs when certain conditions are met. Mark \& Sweep GC generally involves two phases and sometimes there is an optional third phase depending on the algorithm used.
 
@@ -169,7 +169,7 @@ JVM offers few different algorithms to choose from when it comes to GC and there
 * **Pause-time**: The duration for which GC stops the application from executing. The pause-time ideally should be very low.
 * **Footprint**: Size of the heap used. This ideally should be kept low.
 
-### Collectors available as of JDK 11 {#h3-6-collectors-available-as-of-jdk-11}
+### Collectors available as of JDK 11
 
 As of JDK 11, which is the current LTE version, the below garbage collectors are available and the default used is chosen by JVM based on hardware and OS used. We can always specify the GC to be used with the `-XX` switch as well.
 
@@ -178,12 +178,12 @@ As of JDK 11, which is the current LTE version, the below garbage collectors are
 * **Garbage-First(G1) Collector** : The G1 collector is mostly concurrent (Means only expensive work is done concurrently). This is for multi-processor machines with a large amount of memory and is enabled as default on most modern machines and OS. It has a focus on low pause times and high throughput. This can be enabled using the `-XX:+UseG1GC` switch.
 * **Z Garbage Collector** : This is a new experimental GC introduced in JDK11. It is a scalable low-latency collector. It's concurrent and does not stop the execution of application threads, hence no stop-the-world. It is intended for applications that require low latency and/or use a very large heap(multi-terabytes). This can be enabled using the `-XX:+UseZGC` switch.
 
-GC Process {#h2-7-gc-process}
------------------------------
+GC Process
+----------
 
 Regardless of the collector used, JVM has two types of GC process depending on when and where its performed, the minor GC and major GC.
 
-### Minor GC {#h3-8-minor-gc}
+### Minor GC
 
 This type of GC keeps the young generation space compact and clean. This is triggered when the below conditions are met:
 
@@ -217,7 +217,7 @@ Click on the slides and move forward/backward using arrow keys to see the proces
 
 So we saw how minor GC reclaims space from the young generation. It is a stop-the-world process but it's so fast that it is negligible most of the time.
 
-### Major GC {#h3-9-major-gc}
+### Major GC
 
 This type of GC keeps the old generation(Tenured) space compact and clean. This is triggered when the below conditions are met:
 

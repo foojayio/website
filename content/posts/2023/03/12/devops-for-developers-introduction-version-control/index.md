@@ -34,8 +34,8 @@ This is an important skill that we need to master in a startup where we might no
 
 <br />
 
-What's DevOps? {#h2-0-what-s-devops}
-------------------------------------
+What's DevOps?
+--------------
 
 DevOps is a software development methodology that aims to bridge the gap between development and operations teams. It emphasizes collaboration and communication between these two teams to ensure the seamless delivery of high-quality software products.
 
@@ -45,8 +45,8 @@ The core principles behind it are:
 2. **Automation** - Automation involves automating repetitive tasks such as building, testing, and deploying software. This helps to reduce the time and effort required to perform these tasks, freeing up developers to focus on more important tasks.As a developer, automation can help you by freeing up your time and allowing you to focus on writing code, rather than spending time on manual tasks. Additionally, automation helps reduce the risk of human error, ensuring that your code is always deployed correctly.
 3. **Collaboration and Communication** - DevOps emphasizes collaboration and communication between development and operations teams. This helps ensure that everyone is on the same page and working towards a common goal. It also helps reduce the time and effort required to resolve any issues that may arise.
 
-Platform Engineering {#h2-1-platform-engineering}
--------------------------------------------------
+Platform Engineering
+--------------------
 
 Recently there's been a rise in the field of platform engineering. This is somewhat confusing as the overlap between the role of DevOps and a Platform Engineer isn't necessarily clear.
 
@@ -58,8 +58,8 @@ In other words, DevOps is concerned with improving the way software is developed
 
 While both DevOps and Platform Engineering complement each other, they serve different purposes. DevOps helps teams to work together more effectively and deliver software faster, while Platform Engineering provides the infrastructure and tools needed to support that process.
 
-Where do we Start? {#h2-2-where-do-we-start}
---------------------------------------------
+Where do we Start?
+------------------
 
 When learning DevOps, it is important to have a solid understanding of the tools and techniques commonly used in the field. Here are some of the most important tools and techniques to learn:
 
@@ -81,8 +81,8 @@ However, by having a solid understanding of the most commonly used tools and tec
 
 Most features and capabilities are transferable. If you learn CI principles in one tool, moving to another won't be seamless. But it will be relatively easy.
 
-Version Control {#h2-3-version-control}
----------------------------------------
+Version Control
+---------------
 
 We all use git, or at least I hope so. Git's dominance in version control has made it much easier to build solutions that integrate deeply. As developers, Git is primarily viewed as a version control system that helps us manage and track changes to our codebase.
 
@@ -92,7 +92,7 @@ DevOps have a different vantage point. Git is viewed as a critical component of 
 
 DevOps professionals use Git to manage the release pipeline, automate builds, and manage deployment configurations. Git is an important part of the DevOps toolchain as it allows for the seamless integration of code changes into the CI/CD pipeline, ensuring the timely delivery of software to production.
 
-### Branch Protection {#h3-4-branch-protection}
+### Branch Protection
 
 By default, GitHub projects allow anyone to commit changes to the main (master) branch. This is problematic in most projects.
 
@@ -111,7 +111,7 @@ Enabling branch protection on the master branch in GitHub provides several benef
 
 Overall, enabling branch protection on the master branch in GitHub can help to ensure that changes to your codebase are carefully reviewed, tested, and of high quality. This can help to improve the stability and reliability of your software.
 
-### Working with Pull Requests {#h3-5-working-with-pull-requests}
+### Working with Pull Requests
 
 As developers, we find that working with branches and pull requests allow us to collect multiple separate commits and changes to a single feature. This is one of the first areas of overlap between our role as developers and the role of DevOps. Pull requests let us collaborate and review each other's code before merging it into the main branch.
 
@@ -125,8 +125,8 @@ We decide on these metrics based on rules of thumb and best practices. But a goo
 
 The second benefit of pull requests is their crucial role in the CI/CD process. When a developer creates a pull request, it triggers an automated build and testing process, which verifies that the code changes are compatible with the rest of the codebase and that all tests pass. This helps identify any issues early in the development process and prevents bugs from reaching production. Once the build and test processes are successful, the pull request can be merged into the main branch, triggering the release pipeline to deploy the changes to production. I will cover CI more in-depth in the next installment of this series.
 
-Finally {#h2-6-finally}
------------------------
+Finally
+-------
 
 I feel that the discussion of DevOps is often very vague.
 

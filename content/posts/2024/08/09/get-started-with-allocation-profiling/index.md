@@ -33,8 +33,8 @@ Can't we just stare at the code until the solution eventually comes to us? Sure,
 
 In this post, we'll look at how we can profile memory allocations to solve a runtime problem.
 
-The problem {#h2-0-the-problem}
--------------------------------
+The problem
+-----------
 
 Let's start with cloning the following repository: <https://github.com/flounder4130/party-parrot>.
 
@@ -47,8 +47,8 @@ There is no reliable way of telling how exactly the problem will manifest itself
 
 **Note**: I used Amazon Corretto 11 for running this app. The result may differ on other JVMs or even on the same JVM if it uses a different configuration.
 
-The debugger {#h2-1-the-debugger}
----------------------------------
+The debugger
+------------
 
 It seems we have a bug. Let's try using the debugger! Launch the application in debug mode, wait until the animation freezes, then hit [Pause Program](https://flounder.dev/posts/debug-without-breakpoints/).
 
@@ -58,8 +58,8 @@ It seems we have a bug. Let's try using the debugger! Launch the application in 
 
 Unfortunately, this did not tell us much because all the threads involved in the parrot party are in the waiting state. Inspecting their stacks gives no indication why the freeze happened. Clearly, the we need another approach rather than [treating this error as a regular exception](https://flounder.dev/posts/efficient-debugging-exceptions/).
 
-Monitor resources' usage {#monitor-resources-usage}
----------------------------------------------------
+Monitor resources' usage
+------------------------
 
 Since we are getting an `OutOfMemoryError`, a good starting point for analysis is **CPU and Memory Live Charts** . They allow us to visualize real-time resources usage for the processes that are running. Let's [open the charts](https://www.jetbrains.com/help/idea/cpu-and-memory-live-charts.html) for our parrot app and see if we can spot anything when the animation freezes.
 
@@ -99,8 +99,8 @@ Regardless of the available memory, the parrot runs out of it anyway. Again, we 
  <img decoding="async" src="https://flounder.dev/img/profile-memory-allocations/cpu-memory-charts-2-dark.png" alt="Memory usage chart shows that now there is 500M available memory, but the app uses it all anyway" style="width:642px">
 </figure>
 
-Allocation profiling {#h2-3-allocation-profiling}
--------------------------------------------------
+Allocation profiling
+--------------------
 
 Since we know our application never gets enough memory, it is reasonable to suspect a memory leak and analyze its memory usage. For this, we can collect a memory dump using the `-XX:+HeapDumpOnOutOfMemoryError` VM option. This is a perfectly acceptable approach for inspecting the heap; however, it will not point at the code responsible for creating these objects.
 
@@ -153,8 +153,8 @@ public State(BufferedImage baseImage, int hue) {
 ```
 
 
-Analyze data flow {#h2-4-analyze-data-flow}
--------------------------------------------
+Analyze data flow
+-----------------
 
 Using the built-in static analyzer, we can trace the range of input values for the `State` constructor call. Right-click the `baseImage` constructor argument, then from the menu, select **Analyze** \| **Data Flow to Here**.
 
@@ -185,8 +185,8 @@ If we inspect the code that modifies the `hue` variable, we see that it has a st
 
 So, we have 100 variants of hue and 10 base images, which should guarantee that the cache never grows bigger than 1000 elements. Let's check if that holds true.
 
-Conditional breakpoints {#h2-5-conditional-breakpoints}
--------------------------------------------------------
+Conditional breakpoints
+-----------------------
 
 Now, this is where the debugger can be useful. We can check the size of the cache with a conditional breakpoint.
 
@@ -206,8 +206,8 @@ Now run the app in debug mode.
 
 Indeed, we stop at this breakpoint after running the program for some time, which means the problem is indeed in the cache.
 
-Inspect the code {#h2-6-inspect-the-code}
------------------------------------------
+Inspect the code
+----------------
 
 [Cmd + B](https://www.jetbrains.com/help/idea/navigating-through-the-source-code.html#go_to_declaration) on `cache` takes us to its declaration site:
 
@@ -237,8 +237,8 @@ class State {
 
 Seems like we have found the culprit: the implementation of `equals()` and `hashcode()` isn't just incorrect. It's completely missing!
 
-Override methods {#h2-7-override-methods}
------------------------------------------
+Override methods
+----------------
 
 Writing implementations for `equals()` and `hashcode()` is a mundane task. Luckily, modern tools can generate them for us.
 
@@ -260,8 +260,8 @@ public int hashCode() {
 ```
 
 
-Check the fix {#h2-8-check-the-fix}
------------------------------------
+Check the fix
+-------------
 
 Let's restart the application and see if things have improved. Again, we can use [CPU and Memory Live Charts](#monitor-resources-usage) for that:
 
@@ -271,8 +271,8 @@ Let's restart the application and see if things have improved. Again, we can use
 
 That is much better!
 
-Summary {#h2-9-summary}
------------------------
+Summary
+-------
 
 In this article, we looked at how we can start with the general symptoms of a problem and then, using our reasoning and the variety of tools available to us, narrow the scope of the search step-by-step until we find the exact line of code that's causing the problem.
 

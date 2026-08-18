@@ -28,12 +28,12 @@ And here's the schedule, note that it will change as more meetups are confirmed,
 
 <br />
 
-### August {#h3-0-august}
+### August
 
 * 26 August, Thursday: Manchester JUG, Frank Delporte (Toadi)  
   **"[Current state of Java, JavaFX, and Pi4J on the Raspberry Pi](https://www.meetup.com/ManchesterUK-Java-Community/events/279781260/)"**
 
-### September {#h3-1-september}
+### September
 
 * 9 September, Thursday: St. Louis JUG, Simon Ritter (Azul)  
   **"[OpenJDK 17: Get Ready for the Next LTS Java](https://www.meetup.com/GatewayJUG/events/278342779/)"**   
@@ -62,7 +62,7 @@ And here's the schedule, note that it will change as more meetups are confirmed,
 * 29 September, Wednesday: Istanbul JUG, Sven Ruppert (JFrog)  
   "[**DevSecOps from Scratch for Java and Kotlin Developers**](https://www.meetup.com/Istanbul-Java-User-Group/events/279924692/)"
 
-### October {#h3-2-october}
+### October
 
 * 5 October, Wednesday: Silicon Valley JUG, Pratik Patel (Azul)  
   "[**OpenJDK 17: Get Ready for the Next LTS Java**](https://www.meetup.com/singajug/events/281112394)"  

@@ -24,7 +24,7 @@ With over two decades of deep JVM experience, Mark has shaped the runtime used b
 
 Struggling with slow Java startup times? Tired of burning CPU and memory just to get past warm-up? Mark will guide you through cutting-edge JVM performance optimizations.
 
-### What You'll Learn (and Take Back to your projects): {#h3-0-what-you-ll-learn-and-take-back-to-your-projects}
+### What You'll Learn (and Take Back to your projects):
 
 * Real-world strategies to cut your Java startup and warm-up time
 
@@ -34,7 +34,7 @@ Struggling with slow Java startup times? Tired of burning CPU and memory just to
 
 * Tools to tune JVMs like a pro (because you're learning from the pro)
 
-### Reserve Your Seat for This Exclusive Workshop {#h3-1-reserve-your-seat-for-this-exclusive-workshop}
+### Reserve Your Seat for This Exclusive Workshop
 
 🔗 [Grab your workshop ticket now](https://pretix.eu/impuls/europe2025/ "Grab your workshop ticket now")  
 

@@ -28,8 +28,8 @@ In this article, you will build an indie game discovery platform with two comple
 
 By the end, you will have a working recommendation API built with Java 21+, Spring Boot 3.x, Spring Data MongoDB, and Spring AI, combining both approaches into a single ranked result. The embedding layer uses OpenAI's `text-embedding-3-small` model, but any embedding provider that Spring AI supports will work. The complete source code is available in the [companion repository on GitHub](https://github.com/fhsinchy/indie-game-discovery).
 
-Prerequisites {#prerequisites}
-------------------------------
+Prerequisites
+-------------
 
 * Java 21 or later
 * Spring Boot 3.x (use [Spring Initializr](https://start.spring.io/) with the `Spring Data MongoDB` and `Spring Web` dependencies; Spring AI is added manually later in the article)
@@ -37,8 +37,8 @@ Prerequisites {#prerequisites}
 * An OpenAI API key (used for generating embeddings in the second half of the article)
 * Basic familiarity with Spring Boot (controllers, services, dependency injection)
 
-1. Data model {#1-data-model}
------------------------------
+1. Data model
+-------------
 
 The system needs two collections: one for games and one for user profiles. Start with the `Game` document:
 
@@ -177,8 +177,8 @@ Notice how each game has multiple genres, tags, and mechanics. When a user's pre
 
 The companion repository includes a `DataSeeder` component implemented as a `CommandLineRunner` that loads approximately 25 indie games into the `games` collection on startup. This gives you a meaningful dataset to test recommendations against without manual data entry.
 
-2. Project setup {#2-project-setup}
------------------------------------
+2. Project setup
+----------------
 
 Head over to [Spring Initializr](https://start.spring.io/) and configure a new project. Select **Maven** as the build tool, **Java 21** as the language version, and the latest **Spring Boot 3.x** release. For dependencies, add **Spring Web** and **Spring Data MongoDB**. These two are all you need for now. Spring AI gets added later in section 5 when you build the embedding-based recommendation layer. Generate the project, unzip it, and open it in your IDE.
 
@@ -202,12 +202,12 @@ Replace the placeholders with your Atlas credentials and cluster URL. If you fol
 
 If you want to skip the incremental setup and jump straight into a working project, clone the [companion repository](https://github.com/fhsinchy/indie-game-discovery). It contains the complete source code for every section, so you can follow along with the article or run the finished application directly.
 
-3. Building the content-based recommendation engine {#3-building-the-content-based-recommendation-engine}
----------------------------------------------------------------------------------------------------------
+3. Building the content-based recommendation engine
+---------------------------------------------------
 
 Before you can generate recommendations, you need endpoints for managing user profiles and a repository for querying games. Start with a simple request DTO and controller for user profiles.
 
-### UserProfileController {#userprofilecontroller}
+### UserProfileController
 
 Create a `CreateUserRequest` record that captures the data needed to build a new profile:
 
@@ -257,7 +257,7 @@ public interface UserProfileRepository extends MongoRepository<UserProfile, Stri
 
 Constructor injection is used throughout the codebase. Spring resolves the single constructor automatically without needing an `@Autowired` annotation.
 
-### GameRepository {#gamerepository}
+### GameRepository
 
 The game repository needs two queries: one to fetch all games and one to find games that match any of a given set of genres. Spring Data MongoDB derives both from method names:
 
@@ -271,7 +271,7 @@ public interface GameRepository extends MongoRepository<Game, String> {
 
 The `findByGenresIn` method queries the `genres` array field and returns any game where at least one genre appears in the provided list. You will not use this method for the main recommendation pipeline, but it is useful for quick filtering when you want to narrow results to a specific genre subset.
 
-### RecommendationService core logic {#recommendationservice-core-logic}
+### RecommendationService core logic
 
 The recommendation engine needs to solve a specific problem: the user's preferences are stored as `Map<String, Double>` (weighted maps where keys are attributes and values are affinity scores), while each game stores its genres, tags, and mechanics as plain `List<String>` arrays. To score a game, you need to find which keys in the user's preference maps appear in the game's arrays, then sum the corresponding weights.
 
@@ -377,7 +377,7 @@ The `buildScoreExpression` method constructs the aggregation expression for a si
 
 The `getRecommendations` method calls `buildScoreExpression` three times (once each for genres, tags, and mechanics), adds the three results together into a total score, and runs the pipeline against the `games` collection.
 
-### RecommendationController {#recommendationcontroller}
+### RecommendationController
 
 The controller takes a user ID, calls the service, and returns the ranked list:
 
@@ -427,7 +427,7 @@ public class GameRecommendation {
 
 MongoDB's aggregation result maps directly into this class because `$addFields` attaches the `score` field alongside the existing game fields. Spring Data MongoDB deserializes the output documents into `GameRecommendation` objects automatically.
 
-### Manual test {#manual-test}
+### Manual test
 
 Start the application and create a user profile with weighted preferences:
 
@@ -460,13 +460,13 @@ The response is a list of games sorted by score. Take *Slay the Spire* as an exa
 
 That gives it a total score of 3.1. Compare that to *Hollow Knight*, which scores well on "metroidvania" (0.7) and tags like "difficult" (0.8) and "atmospheric" (0.6), but lacks roguelike traits, so it ends up lower in the ranking. The scores map directly to the user's preference weights, which makes the results easy to explain and debug.
 
-4. User ratings and affinity adjustment {#4-user-ratings-and-affinity-adjustment}
----------------------------------------------------------------------------------
+4. User ratings and affinity adjustment
+---------------------------------------
 
 The recommendation engine works, but the preference weights are static. A user sets their initial preferences once, and the system never learns from their behavior. You need a ratings endpoint that lets users score games they have played, and adjustment logic that updates preference weights based on those ratings.  
 ![](Screenshot-2026-04-17-at-1.26.02-PM.png)
 
-### Ratings endpoint {#ratings-endpoint}
+### Ratings endpoint
 
 Create a `RatingRequest` record to capture the incoming data:
 
@@ -502,7 +502,7 @@ public UserProfileController(UserProfileRepository userProfileRepository,
 ```
 
 
-### Affinity adjustment logic {#affinity-adjustment-logic}
+### Affinity adjustment logic
 
 The `RatingService` handles the core adjustment logic. When a user rates a game, the service looks up the game's genres, tags, and mechanics, then adjusts the corresponding weights in the user's preference maps according to these rules:
 
@@ -614,11 +614,11 @@ public class RatingService {
 
 The `adjustWeights` method iterates over the game's attributes and applies the formula to each matching weight. If the user does not already have a weight for a particular attribute (for example, a genre they have never encountered before), it defaults to 0.5 as a neutral starting point and adjusts from there.
 
-### MongoDB update {#mongodb-update}
+### MongoDB update
 
 The `updateProfileInMongo` method performs the preference update and rating storage in a single MongoDB operation. The `$set` operator replaces the `preferences.genres`, `preferences.tags`, and `preferences.mechanics` maps with the recalculated versions, while `$push` appends the new `GameRating` entry to the `ratings` array. Because both modifications happen in one `updateFirst` call, there is no window during which the document is partially updated.
 
-### Before and after demo {#before-and-after-demo}
+### Before and after demo
 
 To see the feedback loop in action, hit the recommendations endpoint before and after submitting a rating. Using the same user from section 3:
 
@@ -638,14 +638,14 @@ curl http://localhost:8080/api/recommendations/<user-id>
 
 Compare the two responses. Games that share genres, tags, or mechanics with the highly rated game will have moved up in the rankings because their matching weights increased. Games that do not share those attributes remain at their previous scores. Each rating nudges the profile slightly, and over several ratings, the preference weights settle into a profile that matches what the user actually enjoys.
 
-5. Adding Spring AI embeddings and MongoDB Atlas Vector Search {#5-adding-spring-ai-embeddings-and-mongodb-atlas-vector-search}
--------------------------------------------------------------------------------------------------------------------------------
+5. Adding Spring AI embeddings and MongoDB Atlas Vector Search
+--------------------------------------------------------------
 
 The preference engine works well when a user's tags literally match a game's tags. But it misses semantic connections. A game tagged "exploration" and "mystery" should appeal to a user who likes "adventure" and "narrative," because those concepts are closely related. The preference engine scores that match at zero since none of the strings overlap.
 
 Embeddings solve this problem. They represent text as high-dimensional vectors, with semantically similar concepts close together. Instead of checking whether two strings are identical, you measure the distance between their vector representations.
 
-### Spring AI setup {#spring-ai-setup}
+### Spring AI setup
 
 Add the Spring AI OpenAI starter to your `pom.xml`. You also need the Spring AI BOM to manage dependency versions:
 
@@ -681,7 +681,7 @@ spring.ai.openai.embedding.options.model=text-embedding-3-small
 
 The `text-embedding-3-small` model produces 1536-dimensional vectors. Store your API key in an environment variable rather than hardcoding it.
 
-### Generating embeddings {#generating-embeddings}
+### Generating embeddings
 
 To generate an embedding, concatenate a game's description, genres, tags, and mechanics into a single text block, then pass the resulting text to the `EmbeddingModel`. First, add an `embedding` field to the `Game` class:
 
@@ -725,7 +725,7 @@ public class EmbeddingService {
 
 The `embed()` method sends the text to OpenAI's embedding API and returns a `float[]` with 1536 values. Concatenating all of a game's metadata into one string gives the model enough context to produce a meaningful vector.
 
-### DataSeeder update {#dataseeder-update}
+### DataSeeder update
 
 Update the `DataSeeder` to generate embeddings for each game on startup. After inserting the game documents, iterate over them and call the `EmbeddingService`:
 
@@ -759,7 +759,7 @@ public class DataSeeder implements CommandLineRunner {
 
 The `null` check prevents re-generating embeddings on every restart. Each API call costs money, so you only want to embed games that do not already have a vector stored.
 
-### Atlas Vector Search index {#atlas-vector-search-index}
+### Atlas Vector Search index
 
 Before you can query the embeddings, you need to create a Vector Search index in Atlas. Go to your cluster in the Atlas UI, select the **Atlas Search** tab, and click **Create Search Index** . Choose **Atlas Vector Search** as the index type, select the `games` collection, and use the following index definition:
 
@@ -779,7 +779,7 @@ Before you can query the embeddings, you need to create a Vector Search index in
 
 Name the index `vector_index`. The `numDimensions` value must match the output of your embedding model, which is 1536 for `text-embedding-3-small`. Cosine similarity is the standard choice for text embeddings because it measures the angle between vectors regardless of their magnitude.
 
-### Vector search query {#vector-search-query}
+### Vector search query
 
 With the index in place, you can build a method to find games that are semantically similar to a user's preferences. The approach is: construct a text summary of the user's top preferences, embed it, then run a `$vectorSearch` aggregation against the games collection.
 
@@ -860,16 +860,16 @@ public RecommendationService(MongoTemplate mongoTemplate,
 ```
 
 
-### Results {#results}
+### Results
 
 Using the same user profile from section 3, vector search surfaces games like *Outer Wilds* (tagged "exploration" and "mystery") even though the user's preferences contain "adventure" and "narrative" rather than those exact terms. The preference engine gives *Outer Wilds* a low score because there is no literal tag overlap, but the embedding vectors for "exploration" and "adventure" are close in vector space, so `$vectorSearch` ranks it highly. This is the gap that embeddings fill.
 
-6. Combining both signals {#6-combining-both-signals}
------------------------------------------------------
+6. Combining both signals
+-------------------------
 
 You now have two recommendation approaches that each capture something the other misses. Content-based scoring reflects what the user explicitly told you they want. Vector similarity catches semantic relationships that literal tag matching overlooks. The next step is to merge both into a single ranked result.
 
-### Merging approach {#merging-approach}
+### Merging approach
 
 Add three new fields to the `GameRecommendation` class you created in section 3:
 
@@ -938,7 +938,7 @@ public List<GameRecommendation> getCombinedRecommendations(String userId) {
 
 Both scoring methods operate on different scales. Content-based scores are unbounded sums of matched weights, while similarity scores are cosine distances between 0 and 1. The method normalizes each set of scores by dividing each score by the maximum value in that set, bringing both into the 0 to 1 range before combining them. Games that appear in both result sets get both scores populated. Games that only appear in one set receive a zero for the missing score.
 
-### Unified response {#unified-response}
+### Unified response
 
 Update the `GET /api/recommendations/{userId}` endpoint in `RecommendationController` to call `getCombinedRecommendations` instead of `getRecommendations`:
 
@@ -986,20 +986,20 @@ The response now includes all three scores for each game:
 
 *Slay the Spire* leads because it scores well on both signals. *Hollow Knight* has a strong similarity score but a weaker content match. *Outer Wilds* has a low content score, but still appears because its high similarity score pulls it up.
 
-### Recommendation flow {#recommendation-flow}
+### Recommendation flow
 
 ![](Screenshot-2026-04-17-at-1.26.35-PM.png)
 
 The combined system follows this flow: user preferences and ratings feed into the content-based scoring pipeline, which computes a score for each game using MongoDB aggregation. In parallel, the user's top preferences are converted to a text summary and passed through the embedding model to produce a query vector. MongoDB Atlas Vector Search uses that vector to find semantically similar games. Both sets of scores are normalized and merged using the weighted formula, and the final output is a single ranked list of recommendations sorted by combined score.
 
-### Tuning weights {#tuning-weights}
+### Tuning weights
 
 The 0.6/0.4 split is a reasonable starting point, not a universal answer. The right balance depends on how much preference data you have. When a user has submitted many ratings and their preference weights are well-calibrated, the content-based signal is reliable and deserves more weight. For new users who have set only a few initial preferences, the content-based scores may be sparse, and increasing the similarity weight (e.g to 0.5/0.5 or even 0.4/0.6) can yield better early recommendations by leaning on semantic connections.
 
 Treat these weights as a tunable parameter, not a fixed constant. You could also make them dynamic per user, shifting toward content-based as the system accumulates more ratings.
 
-7. Testing the full workflow {#7-testing-the-full-workflow}
------------------------------------------------------------
+7. Testing the full workflow
+----------------------------
 
 With all the pieces in place, walk through the full cycle: create a user, get initial recommendations, submit ratings, and observe how the results change.
 
@@ -1076,8 +1076,8 @@ curl http://localhost:8080/api/recommendations/682f1a3b5e4d
 
 *Hollow Knight* jumped from fourth to first. Its content score increased from 0.68 to 0.91 because the 5-star rating boosted the weights for metroidvania, platformer, and atmospheric. *Slay the Spire* dropped because the 2-star rating pulled down roguelike and card-game weights. *Outer Wilds* moved up thanks to the 4-star rating increasing adventure and exploration weights, which also shifted the embedding query to favor similar games. Each rating adjusts the preference profile incrementally, and the combined scoring reflects those changes immediately.
 
-Conclusion {#conclusion}
-------------------------
+Conclusion
+----------
 
 You built a recommendation engine with two layers. Content-based preference scoring uses MongoDB aggregation pipelines to match games against weighted user preferences. Embedding-based similarity uses Spring AI and MongoDB Atlas Vector Search to surface games that are semantically related to a user's tastes, even when tags do not literally overlap. User ratings close the feedback loop by adjusting preference weights over time.
 

@@ -41,8 +41,8 @@ Why do we need a new version of the time zone and currency database every few mo
 Let's find out...
 ![](timezone-currency-1024x400.jpg)
 
-Time Zone Database {#h2-0-time-zone-database}
----------------------------------------------
+Time Zone Database
+------------------
 
 Within the Java code, a whole list of time zones is defined. We can get this list quickly in jshell. The result below is truncated because it has 602 entries!
 
@@ -57,7 +57,7 @@ $3 ==> 602
 ```
 
 
-### Where are the Time Zones Managed? {#h3-1-where-are-the-time-zones-managed}
+### Where are the Time Zones Managed?
 
 The Java time zone information is based on the Time Zone Database of the [Internet Assigned Numbers Authority](https://www.iana.org/time-zones) (IANA).
 
@@ -132,7 +132,7 @@ BE  +5050+00420 Europe/Brussels
 
 
 
-### What Methods are Available? {#h3-2-what-methods-are-available}
+### What Methods are Available?
 
 Let's go back to `jshell` to find out what we can do with this time zone data.
 
@@ -204,7 +204,7 @@ $14 ==> Transition[Overlap at 2023-10-29T03:00+02:00 to +01:00]
 
 
 
-### Update the Timezone Database Separately {#h3-3-update-the-timezone-database-separately}
+### Update the Timezone Database Separately
 
 The ZIUpdater tool provided by Azul is a solution if you can't update the Java runtime to keep track of changes in the timezone database.
 
@@ -215,8 +215,8 @@ More information is available on:
 * Azul website: [ZIUpdater Time Zone Tool](https://www.azul.com/products/components/ziupdater-time-zone-tool/)
 * Azul docs: [Timezone Updater](https://docs.azul.com/core/timezone-updater)
 
-Also Changing Between Releases: Currency Data {#h2-4-also-changing-between-releases-currency-data}
---------------------------------------------------------------------------------------------------
+Also Changing Between Releases: Currency Data
+---------------------------------------------
 
 The data directory in the OpenJDK sources contains another file that can change between versions: `CurrencyData.properties`[. The January 2023 release notes of Azul Zulu Builds of OpenJDK](https://docs.azul.com/core/zulu-openjdk/release-notes/january-2023#whats-new) lists the following changes, which align this properties file with ISO-related changes regarding the codes for historic denominations of currencies and funds.
 
@@ -227,7 +227,7 @@ The data directory in the OpenJDK sources contains another file that can change 
 The third one is caused by Croatia joining the group of countries where the EURO is used as the currency. We can see this is reflected in the changes in [this pull request](https://github.com/openjdk/jdk/pull/10994/files):
 ![](croatia-euro-1024x355.png)
 
-### Code Examples of Currency Usage {#h3-5-code-examples-of-currency-usage}
+### Code Examples of Currency Usage
 
 With `jshell` we can again do some experiments to check these changes for Croatia, with country code `HR`.
 
@@ -290,8 +290,8 @@ $4 ==> "€"
 
 Isn't that impressive? The same code now gives the correct output by just switching to the most up-to-date version of Java!
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Time zone, daylight savings, and currencies are not only a problem for programmers.
 

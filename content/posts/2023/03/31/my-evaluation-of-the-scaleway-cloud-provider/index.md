@@ -30,8 +30,8 @@ I searched for a new hosting provider and found [Scaleway](https://www.scaleway.
 
 In this article, I'd like to explain my requirement, why I chose them, and my experience using them.
 
-The context {#h2-0-the-context}
--------------------------------
+The context
+-----------
 
 I've already described the app in [previous blog posts](https://blog.frankel.ch/automating-conference-submission-workflow/), especially the [deployment part](https://blog.frankel.ch/automating-conference-submission-workflow-deploying/). Yet, here's a summary in case you want to avoid rereading it.
 
@@ -43,8 +43,8 @@ For example, when I move a card from Backlog to Submitted, it adds the conferenc
 
 When I move the card from Submitted to Accepted, it changes the Google Calendar event color to default and marks it as Busy. It also changes the Google Sheet status to Accepted.
 
-Why Scaleway? {#h2-1-why-scaleway}
-----------------------------------
+Why Scaleway?
+-------------
 
 As I mentioned in the introduction, I was a happy Heroku user. One of the great things about Heroku, apart from the free plan, was the "hibernating" feature: when the app was not in use, it switched it off. In essence, it was scale-to-zero for web apps.
 
@@ -54,8 +54,8 @@ I'm a big fan of [Viktor Farcic](https://twitter.com/vfarcic)'s YouTube channel,
 
 By chance, Scaleway offers free credits to startups, including the company I'm currently working for. It didn't take long for me to move the application to Scaleway.
 
-Deploying on Scaleway {#h2-2-deploying-on-scaleway}
----------------------------------------------------
+Deploying on Scaleway
+---------------------
 
 Before describing how to deploy on Scaleway, let's explain how I deployed on Heroku. The latter provides a Git repo. Every push to `master` triggers a build based on what Heroku can recognize. For example, if it sees a `pom.xml`, it knows it's a Maven project and calls the Maven command accordingly.
 
@@ -65,16 +65,16 @@ Scaleway offers a dedicated scale-to-zero feature for its Serverless Containers 
 
 On the UI, one chooses the container to deploy, fills in environment variables and secrets, and Heroku deploys it.
 
-Main issues {#h2-3-main-issues}
--------------------------------
+Main issues
+-----------
 
 I stumbled upon two main issues using Scaleway so far.
 
 * **The is the only way to deploy a container.** It's a good thing to start with, but it doesn't fit regular usage. The industry standard is based on build pipelines, which compile, test, create container images, store them in a registry, and deploy them on remote infrastructure.
 * **You need to fill in secrets on every deployment.** GitHub and GitLab both allow configuring deployed containers with environment variables. This way, one can create a single container but deploy it in different environments. You can configure some environment variables as secrets. Nobody can read them afterward, and they don't appear in logs. Scaleway also offers secrets. However, you must fill them out at every deployment. Beyond a couple of them, it's unmanageable.
 
-Bugs and Scaleway's Support {#h2-4-bugs-and-scaleway-s-support}
----------------------------------------------------------------
+Bugs and Scaleway's Support
+---------------------------
 
 In my short time using Scaleway, I encountered two bugs.
 
@@ -85,8 +85,8 @@ Finally, I opened a ticket to ask whether an automated deployment option was pos
 
 Regardless of the issues, the support's relevance ranges from average to entirely useless.
 
-Logging {#h2-5-logging}
------------------------
+Logging
+-------
 
 All Cloud providers I've tried so far offer a logging console. My experience is that the console looks and behaves like a regular terminal console: the oldest log line is on top and the newest at the bottom, and one can scroll through the history, limited by a buffer.
 
@@ -101,8 +101,8 @@ I tried to fathom why Scaleway implemented the logging console this way and came
 
 In any case, it reflects poorly on the product.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Even though my usage of Scaleway is 100% free, I'm pretty unhappy about the deployment part.
 

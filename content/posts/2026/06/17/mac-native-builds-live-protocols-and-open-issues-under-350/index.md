@@ -29,19 +29,19 @@ Our focus was all over the place this week with work that targeted many differen
 
 But before we dig into the new features, there's one number I'm particularly proud of...
 
-Open issues are under 350 {#h2-0-open-issues-are-under-350}
------------------------------------------------------------
+Open issues are under 350
+-------------------------
 
 The open issue count is now below 350 (332 at the moment of this writing). That is the result of a deliberate pass through the tracker, closing things that were already fixed, reproducing the ones that were not, and fixing a batch of them outright. Some of the reports we closed this week had been open since 2015. We got a little side-tracked in the process (it is hard to read an old report without wanting to fix it on the spot), but the direction is set: we want this number to keep dropping, and by a lot.
 
 We went over the issue tracker starting with the oldest issues and working our way back. You may recall that when we started tracking this, going under the 500-issue mark was a major milestone and that was just a few weeks back!
 
-What shipped this week {#h2-1-what-shipped-this-week}
------------------------------------------------------
+What shipped this week
+----------------------
 
 Every one of the bigger items has its own deep-dive tutorial. Here is the tour, with the links to the full posts.
 
-### Your app is now a native Mac app {#h3-2-your-app-is-now-a-native-mac-app}
+### Your app is now a native Mac app
 
 Your existing Codename One app can ship as a **100% native Mac app today, with zero porting effort**. No rewrite, no bundled JVM, no Electron shell: the project you already have produces a lean native Mac binary the same way it produces your iPhone app, on the same Metal renderer and battle-tested native pipeline. And it arrives feeling like a real Mac app, not a phone in a window: native title bar, native menu bar, interactive scrollbars, and desktop notifications come with it. Two of this week's features in one shot: the sample below uses the new advertising API covered later in this post, running as a native Mac app from the same Java code that produces the iOS and Android builds:
 ![The advertising API sample running as a native Mac app](https://www.codenameone.com/blog/mac-native-builds-and-desktop-integration/mac-app.png)
@@ -50,7 +50,7 @@ Your existing Codename One app can ship as a **100% native Mac app today, with z
 
 The full tutorial, including the new desktop menu and shortcut APIs and the Mac signing hints, is in [Your Codename One App, Now A Native Mac App](https://www.codenameone.com/blog/mac-native-builds-and-desktop-integration/).
 
-### WebSockets in the core {#h3-3-websockets-in-the-core}
+### WebSockets in the core
 
 `com.codename1.io.WebSocket` is now part of the framework with no `cn1lib` required, implemented natively on every port. A live connection is a fluent one-liner:
 
@@ -65,7 +65,7 @@ WebSocket ws = WebSocket.build("wss://chat.example.com/room/general")
 
 This is the foundation the GraphQL subscriptions below ride on, and it is trusted enough that our own screenshot CI uses it as the transport for device renders. The hands-on tutorial that builds a live chat with it is [WebSockets, gRPC, And GraphQL In The Core](https://www.codenameone.com/blog/websockets-grpc-and-graphql/).
 
-### A typed GraphQL client from your schema {#h3-4-a-typed-graphql-client-from-your-schema}
+### A typed GraphQL client from your schema
 
 `cn1:generate-graphql` turns a GraphQL schema into a typed client: you declare an interface against your operations and the build emits the implementation, with zero HTTP plumbing on your side. A `@Subscription` gets you live server-pushed updates over the new core WebSocket:
 
@@ -85,7 +85,7 @@ public interface StarWarsApi {
 
 Note that `Episode` is a real enum: enum binding landed in the JSON/XML mapper alongside this work, fixing a long-standing gap for `@Mapped` users too. The full tutorial is in [WebSockets, gRPC, And GraphQL In The Core](https://www.codenameone.com/blog/websockets-grpc-and-graphql/).
 
-### gRPC clients with no protoc {#h3-5-grpc-clients-with-no-protoc}
+### gRPC clients with no protoc
 
 `cn1:generate-grpc` does the same for proto3. Point it at your `.proto` files and it generates the messages, the binary protobuf codecs, and the client, speaking the standard gRPC-Web wire protocol that works with Envoy and modern gRPC servers. There is no `protoc` to install and no native dependency; calling a service looks like this:
 
@@ -103,7 +103,7 @@ g.sayHello(req, "Bearer " + token, response -> {
 
 Together with `cn1:generate-openapi` and `cn1:generate-graphql`, this means a typed client for practically any backend is one Maven goal away. The walkthrough from proto file to running call is in [WebSockets, gRPC, And GraphQL In The Core](https://www.codenameone.com/blog/websockets-grpc-and-graphql/).
 
-### A new advertising API {#h3-6-a-new-advertising-api}
+### A new advertising API
 
 Advertising support had quietly rotted across three dead-end legacy mechanisms. A pluggable, format-complete `com.codename1.ads` subsystem replaces all of them, with a modern AdMob reference provider, GDPR consent and iOS App Tracking Transparency built in, and a simulator placeholder provider so you can exercise every format without a device. A rewarded ad, the format people most often ask about, is now this short:
 
@@ -121,7 +121,7 @@ ad.load();
 
 The full story, including banners, native ads, app-open ads, and the provider SPI, is in [A New Advertising API, Built From The Ground Up](https://www.codenameone.com/blog/modern-advertising-api/).
 
-### Background execution and push {#h3-7-background-execution-and-push}
+### Background execution and push
 
 Constraint-based background work, foreground services, push topics, shared-content handling, and a much richer local notification API, all of it usable in the simulator so you can debug these flows on your desktop. You describe what the work needs, not when to poll:
 
@@ -137,8 +137,8 @@ BackgroundWork.schedule(req);
 
 The walkthrough, from progress notifications and inline replies to push topics and shared content, is [Background Work, Push Topics, And Richer Notifications](https://www.codenameone.com/blog/background-execution-and-push/).
 
-Building screens from screenshots, and a simpler Initializr {#h2-8-building-screens-from-screenshots-and-a-simpler-initializr}
-------------------------------------------------------------------------------------------------------------------------------
+Building screens from screenshots, and a simpler Initializr
+-----------------------------------------------------------
 
 Generated apps ship with a `codename-one` agent skill under `.claude/skills/`, so an AI agent working in your project already knows how to build, test, and screenshot a Codename One UI. [PR #5161](https://github.com/codenameone/CodenameOne/pull/5161) teaches it the single most common design task: "make this screen look like this mockup."
 
@@ -151,8 +151,8 @@ Agents can now automatically update the skills to the latest versions and also d
 
 <br />
 
-Smaller fixes worth knowing about {#h2-9-smaller-fixes-worth-knowing-about}
----------------------------------------------------------------------------
+Smaller fixes worth knowing about
+---------------------------------
 
 Several of these came straight out of the issue-tracker pass:
 
@@ -166,8 +166,8 @@ Several of these came straight out of the issue-tracker pass:
 * **Screenshot block now covers peers.** [PR #5107](https://github.com/codenameone/CodenameOne/pull/5107): `ios.blockScreenshotsOnEnterBackground=true` was hiding the render surface but leaving peer components (such as a `BrowserComponent`'s `WKWebView`) visible in the app-switcher snapshot. Fixed.
 * **Better site search.** [PR #5090](https://github.com/codenameone/CodenameOne/pull/5090) sorts the on-site search index newest-first and stops the giant developer-guide page from crowding out every result. We also have dates visible next to blog post results in the search and a new highlight explaining we don't search the developer guide/Javadoc.
 
-A note on contributions {#h2-10-a-note-on-contributions}
---------------------------------------------------------
+A note on contributions
+-----------------------
 
 We stopped accepting community pull requests. We want to be precise about why, because it would be easy to read more into this than is there.
 
@@ -179,8 +179,8 @@ So the door is open the other way. **Please keep filing issues.** A clear issue 
 
 To everyone who has sent us patches over the years, and especially the people who contributed recently: thank you. The effort was real and appreciated, and this decision is about our pipeline, not your work.
 
-Upcoming attractions {#h2-11-upcoming-attractions}
---------------------------------------------------
+Upcoming attractions
+--------------------
 
 Four deep-dive tutorials follow this one, one per day:
 
@@ -189,7 +189,7 @@ Four deep-dive tutorials follow this one, one per day:
 * **Monday.** The new advertising API. PR [#5169](https://github.com/codenameone/CodenameOne/pull/5169).
 * **Tuesday.** Background work, push topics, and richer notifications. PR [#5142](https://github.com/codenameone/CodenameOne/pull/5142).
 
-Wrapping up {#h2-12-wrapping-up}
---------------------------------
+Wrapping up
+-----------
 
 The issue tracker is [here](https://github.com/codenameone/CodenameOne/issues) and it is the best place to reach us right now. The discussion forum is [here](https://www.codenameone.com/discussion-forum.html), and the Build Cloud console is at [`/console/`](https://cloud.codenameone.com/console/index.html). The [Playground](https://www.codenameone.com/playground/), [Initializr](https://www.codenameone.com/initializr/), and [Skin Designer](https://www.codenameone.com/skindesigner/) are where they have always been.

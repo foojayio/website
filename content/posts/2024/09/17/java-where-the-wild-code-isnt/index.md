@@ -24,20 +24,20 @@ There are two core aspects that have led to this:
 1. A secure JDK, where vulnerabilities are dealt with and patched.
 2. A modular JDK, where different types or risk can be clearly delineated.
 
-1. A Secure JDK {#h2-0-1-a-secure-jdk}
---------------------------------------
+1. A Secure JDK
+---------------
 
 The core Java platform underlies all Java applications and is kept secure by a special OpenJDK Vulnerability Group. This group helps to perform different actions and security regression tests like fuzzing and ensuring old vulnerabilities do not recur.
 
 Another charge for this group is receiving researcher reports of vulnerabilities and helping to ensure timely attention and patching. A "secure JDK" does not mean one where there are no vulnerabilities, rather it means a community in which security is taken seriously in both word and action.
 
-### 1.1 Quarterly Patches {#h3-1-1-1-quarterly-patches}
+### 1.1 Quarterly Patches
 
 Most OpenJDK vendors patch around the same timeframe, using version numbers that reflect the security posture of the release. The benefit that this has for typical Java users is that they can quickly determine if their runtime meets the security baseline or requires a patch.
 
 This patch cadence generally follows the older [Oracle Critical Patch Update timeline](https://www.oracle.com/security-alerts/) of the third Tuesday of each third month. The timeframe is short enough to minimize the window of exposure and long enough to avoid some level of "patch fatigue," while being consistent for teams to plan and schedule work.
 
-### 1.2 CVE Advisories {#h3-2-1-2-cve-advisories}
+### 1.2 CVE Advisories
 
 A crucial part to addressing and patching vulnerabilities is keeping track of what they are and telling people. A key part to community work is attributing credit to the researchers who find security issues and properly disclose them to help open source projects.
 
@@ -47,7 +47,7 @@ Another excellent aspect that the OpenJDK Vulnerability Group does in these advi
 
 In short, simply saying that an older Java installation contains a CVE is not sufficient to indicate that the vulnerability exists on that system.
 
-### 1.3 Consistent Naming {#h3-3-1-3-consistent-naming}
+### 1.3 Consistent Naming
 
 In early 2019, the primary OpenJDK distribution on Docker was serving "[mystery meat Java](https://www.infoq.com/news/2019/06/docker-vulnerable-java/)." A build of the source code taken out of sync with the patch schedule that missed various security patches but still used the version number as the JDK that contained the security flaws. As a result, users of the Docker image were left insecure while users of known downstream Java distributions were secured.
 
@@ -55,8 +55,8 @@ By recognizing the need for vulnerability disclosure and leveraging the knowns o
 
 The alterative to this coordination would be a situation of semi-predictable yet meaningless numbers that would require special lookup tables to know which security patches were present where.
 
-2. Security of a Modular JDK {#h2-4-2-security-of-a-modular-jdk}
-----------------------------------------------------------------
+2. Security of a Modular JDK
+----------------------------
 
 A security posture often moves in waves. Something is considered secure until it fails, then attackers learn to emulate and build on new ways that caused the fail. By isolating the areas in which security has been a major issue, the Java platform has provided and continues to provide a secure development platform for running applications and workloads.
 
@@ -64,7 +64,7 @@ In spite of various vulnerabilities against the platform over the years, threats
 
 For example, in 2013, when Java was on the receiving end of different vulnerabilities and 0-day exploits, almost all of these exploits landed in one single area that was rarely used and is no longer present: the deployment plugin for applets and web-start applications.
 
-### 2.1 Pinpointing Risk Through Modularity {#h3-5-2-1-pinpointing-risk-through-modularity}
+### 2.1 Pinpointing Risk Through Modularity
 
 The original documentation for Java 8 and below provides a [conceptual diagram](https://docs.oracle.com/javase/8/docs/) of where certain features are. From a threat-modeling perspective, this is the same location where vulnerabilities live.
 
@@ -81,7 +81,7 @@ Developers can look at these modules and examine the risk present in each as it 
 
 Another point to note is to recognize what does not appear in the conceptual diagram and focus on the area where it does appear. For example, in the core Java diagram and modules, there is no concept of "web" or HTML. This means that work against web threats, such as XSS, belongs in the frameworks or tools which provide that functionality.
 
-### 2.2 Reducing Risk By Removing Modules {#h3-6-2-2-reducing-risk-by-removing-modules}
+### 2.2 Reducing Risk By Removing Modules
 
 While operations teams can still use a central system-wide JRE, many developers customize a single JRE to run a single application. Tools such as jlink enable developers to [create custom JREs](https://www.baeldung.com/jlink) that slim down modules. These expand modern JREs (JDK 11+) from the previous incarnations of [compact profiles](https://foojay.io/pedia/compactprofiles/) and javapackager.
 
@@ -91,8 +91,8 @@ The July 2020 advisory by the OpenJDK Vulnerability Group cites [CVE-2020-14562]
 
 This distinction is crucial as many software teams are expected to do vulnerability scanning in the form of open-source dependencies. Scanners often look only at the library names and then assume that all usage of those libraries contain all CVEs. In the case of a custom jlink-ed JRE, any scanner that reported the JRE as vulnerable to this flaw would be incorrect. Removing the component removes the vulnerabilities and risk in that component. Hackers cannot attack what isn't there.
 
-Tactical Take-Aways {#h2-7-tactical-take-aways}
------------------------------------------------
+Tactical Take-Aways
+-------------------
 
 Java users should incorporate several practices to take full benefit from the defenses of the modern JRE:
 

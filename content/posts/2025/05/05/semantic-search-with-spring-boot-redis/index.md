@@ -43,8 +43,8 @@ Today, **we're gonna build a vector similarity search app that lets users find m
 
 To do that, we'll build a Spring Boot app from scratch and plug in **Redis OM Spring**. It'll handle turning our data into vectors, storing them in Redis, and running fast vector searches when users send a query.
 
-Redis as a Vector Database {#h2-0-redis-as-a-vector-database}
--------------------------------------------------------------
+Redis as a Vector Database
+--------------------------
 
 {{< youtube Yhv19le0sBw >}}
 
@@ -56,8 +56,8 @@ Redis 8 not only turns the community version of Redis into a Vector Database, bu
 
 Learn more: <https://redis.io/blog/searching-1-billion-vectors-with-redis-8/>
 
-**Redis OM Spring** {#h2-1-redis-om-spring}
--------------------------------------------
+**Redis OM Spring**
+-------------------
 
 To allow our users and customers to take full advantage of everything Redis can do --- with the speed Redis is known for --- we decided to implement **Redis OM Spring**, a library built on top of Spring Data Redis.
 
@@ -65,8 +65,8 @@ Redis OM Spring allows our users to easily communicate with Redis, model their e
 
 Redis OM Spring on GitHub: <https://github.com/redis/redis-om-spring>
 
-Dataset {#h2-2-dataset}
------------------------
+Dataset
+-------
 
 The dataset we'll be looking is a catalog of thousands of movies. Each of these movies has metadata such as its title, cast, genre, year, and synopsis. The JSON file representing this dataset can be found in the repository that accompanies this article.
 
@@ -94,16 +94,16 @@ Sample:
 ```
 
 
-Building the Application {#h2-3-building-the-application}
----------------------------------------------------------
+Building the Application
+------------------------
 
 Our application will be built using Spring Boot with Redis OM Spring. **It will allow movies to be searched by their synopsis based on semantic search rather than keyword matching.** Besides that, our application will also allow its users to perform **hybrid search** , **a technique that combines vector similarity with traditional filtering and sorting.**
 
-### 0. GitHub Repository {#h3-4-0-github-repository}
+### 0. GitHub Repository
 
 **The full application can be found on GitHub: \[** [https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/\](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/src](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/%5D(https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/src))
 
-### 1. Add the required dependencies {#h3-5-1-add-the-required-dependencies}
+### 1. Add the required dependencies
 
 From a Spring Boot application, add the following dependencies to your Maven or Gradle file:
 
@@ -122,7 +122,7 @@ spring-ai-transformers
 ```
 
 
-### 2. Define the Movie entity {#h3-6-2-define-the-movie-entity}
+### 2. Define the Movie entity
 
 Redis OM Spring provides two annotations that makes it easy to vectorize data and perform vector similarity search from within Spring Boot.
 
@@ -188,7 +188,7 @@ redis.om.spring.ai.open-ai.api-key=${OPEN_AI_KEY}
 
 If an embedding model is not specified, Redis OM Spring will use a Hugging Face's Transformers model (all-MiniLM-L6-v2) by default. In this case, make sure you match the number of dimensions in the indexed annotation to 384 which is the number of dimensions created by the default embedding model.
 
-### 3. Repository Interface {#h3-7-3-repository-interface}
+### 3. Repository Interface
 
 A simple repository interface that extends RedisEnhancedRepository. This will be used to load the data into Redis using the saveAll() method:
 
@@ -199,7 +199,7 @@ public interface MovieRepository extends RedisEnhancedRepository {}
 
 This provides basic CRUD operations for Movie entities, with the first generic parameter being the entity type and the second being the ID type.
 
-### **4. Search Service** {#h3-8-4-search-service}
+### **4. Search Service**
 
 The search service uses two beans provided by Redis OM Spring:
 
@@ -267,7 +267,7 @@ Key features of the search service:
 * Applies additional filters for hybrid search (combining vector and traditional search)
 * Returns pairs of movies and their similarity scores
 
-### 5. Movie Service for Data Loading {#h3-9-5-movie-service-for-data-loading}
+### 5. Movie Service for Data Loading
 
 The MovieService handles loading movie data into Redis. It reads a JSON file containing movie date and save the movies into Redis.
 > It may take one or two minutes to load the data for the thousands of movies in the file because the embedding generation is done in the background. The @Vectorize annotation will generate the embeddings for the extract field before the movie is saved into Redis.
@@ -313,7 +313,7 @@ public class MovieService {
 ```
 
 
-### 5. Search Controller {#h3-10-5-search-controller}
+### 5. Search Controller
 
 The REST controller exposes the search endpoint:
 
@@ -353,7 +353,7 @@ public class SearchController {
 ```
 
 
-### 6. Application Bootstrap {#h3-11-6-application-bootstrap}
+### 6. Application Bootstrap
 
 The main application class initializes Redis OM Spring and loads data. The @EnableRedisEnhancedRepositories annotation activates Redis OM Spring's repository support:
 
@@ -380,7 +380,7 @@ public class Redis8DemoVectorSimilaritySearchApplication {
 ```
 
 
-### 7. Sample Requests {#h3-12-7-sample-requests}
+### 7. Sample Requests
 
 You can make requests to the search endpoint:
 
@@ -437,8 +437,8 @@ GET http://localhost:8082/search?numberOfNearestNeighbors=1&yearMin=1970&yearMax
 
 ```
 
-Wrapping up {#h2-13-wrapping-up}
---------------------------------
+Wrapping up
+-----------
 
 And that's it --- you now have a working semantic search app using Spring Boot and Redis.
 
@@ -450,10 +450,10 @@ Whether you're building search, recommendations, or AI-powered assistants, this 
 
 Try it out, tweak the filters, explore other models, and see how far you can go!
 
-### More AI Resources {#h3-14-more-ai-resources}
+### More AI Resources
 
 The best way to stay on the path of learning AI is by following the recipes available on the Redis AI Resources GitHub repository. There you can find dozens of recipes that will get you to start building AI apps, fast!
 
 [**GitHub - redis-developer/redis-ai-resources: ✨ A curated list of awesome community resources, integrations, and examples of Redis in the AI ecosystem.**](https://github.com/redis-developer/redis-ai-resources/tree/main)
 
-### Stay Curious! {#h3-15-stay-curious}
+### Stay Curious!

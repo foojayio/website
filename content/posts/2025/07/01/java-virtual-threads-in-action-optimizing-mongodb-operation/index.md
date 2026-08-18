@@ -31,8 +31,8 @@ git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemai
 ```
 
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this tutorial, you'll need:
 
@@ -79,8 +79,8 @@ jnosql.document.database=cameras
 
 With this foundation, we'll move on to implementing the product entity and explore how MongoDB's embedded types can simplify data modeling for your application.
 
-Step 1: Create the Product entity {#h2-1-step-1-create-the-product-entity}
---------------------------------------------------------------------------
+Step 1: Create the Product entity
+---------------------------------
 
 To start, we'll define the core of our application: the Camera entity. This class represents the camera data structure and contains fields such as id, brand, model, and brandWithModel. We will have a static factory method where, based on the Faker instance, it will generate a Camera instance.
 
@@ -124,8 +124,8 @@ Explanation of annotations:
 * `@Entity`: Marks the Product class as a database entity for management by Jakarta NoSQL.
 * `@Column`: Maps fields (name, manufacturer, tags, categories) for reading from or writing to MongoDB.
 
-Step 2: Create the Service {#h2-2-step-2-create-the-service}
-------------------------------------------------------------
+Step 2: Create the Service
+--------------------------
 
 In our application, the CameraService class serves as a bridge between our business logic and MongoDB. We utilize Eclipse JNoSQL, which supports Jakarta NoSQL and Jakarta Data. In this tutorial, we work with the DocumentTemplate interface from Jakarta NoSQL---a specialized version of the generic Template interface tailored for NoSQL document capabilities. The Quarkus integration makes it easier once you, as a Java developer, need to use an injection annotation.
 
@@ -216,8 +216,8 @@ This setup shows how Quarkus and Eclipse JNoSQL simplify the development process
 
 For more details on using virtual threads in Quarkus, check out the [Quarkus Virtual Threads Guide](https://quarkus.io/guides/virtual-threads).
 
-Step 3: Expose the Camera API {#h2-3-step-3-expose-the-camera-api}
-------------------------------------------------------------------
+Step 3: Expose the Camera API
+-----------------------------
 
 We'll create the CameraResource class to expose our data through a RESTful API. This resource handles HTTP requests. We will generate a camera either manually or using the asynchronous resource. You can define the size of the cameras generated, with the default being 100.
 
@@ -303,8 +303,8 @@ public class CameraResource {
 ```
 
 
-Step 4: Build and run the application {#h2-4-step-4-build-and-run-the-application}
-----------------------------------------------------------------------------------
+Step 4: Build and run the application
+-------------------------------------
 
 It's finally time to integrate everything and run the application. After packaging the project with Maven, start the application and ensure that MongoDB runs locally or through MongoDB Atlas. Once the application runs, you can test the API endpoints to interact with the camera data.
 
@@ -316,8 +316,8 @@ java -jar target/mongodb-virtual-thread-1.0.1-runner.jar
 ```
 
 
-Step 5: Test the API {#h2-5-step-5-test-the-api}
-------------------------------------------------
+Step 5: Test the API
+--------------------
 
 Create a Camera
 
@@ -378,8 +378,8 @@ curl -X POST http://localhost:8080/cameras/async?size=100
 ```
 
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Java 21's virtual threads simplify handling I/O-bound operations, allowing for massive concurrency with minimal overhead. By integrating virtual threads with MongoDB and Quarkus while maintaining a clean, synchronous programming model, we built a scalable and responsive application.
 

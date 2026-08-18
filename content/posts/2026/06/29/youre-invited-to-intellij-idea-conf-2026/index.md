@@ -29,8 +29,8 @@ IntelliJ IDEA Conf 2026 will be held on two days, September 8-9. The conference 
 
 Find the detailed conference schedule, session descriptions, and speaker bios on the [conference website](https://jb.gg/7nfl5a).
 
-Day 1: September 8 {#h2-0-day-1-september-8}
---------------------------------------------
+Day 1: September 8
+------------------
 
 09:00 am -- 10:00 am UTC -- Now and Next Java for AI by Ana-Maria Mihalceanu  
 
@@ -44,8 +44,8 @@ Day 1: September 8 {#h2-0-day-1-september-8}
 
 02:00 pm -- 03:00 pm UTC -- Codepocalypse Now: LangChain4j vs JetBrains Koog by Baruch Sadogursky, Viktor Gamov
 
-Day 2: September 9 {#h2-1-day-2-september-9}
---------------------------------------------
+Day 2: September 9
+------------------
 
 09:00 am -- 10:00 am UTC -- The Past, Present, and Future of Enterprise Java by Ivar Grimstad  
 
@@ -61,25 +61,25 @@ Day 2: September 9 {#h2-1-day-2-september-9}
 
 Find the details on how to join sessions below.
 
-Register {#h2-2-register}
--------------------------
+Register
+--------
 
 The first step is to [register for the event](https://jb.gg/7nfl5a)!
 
 When you register to participate in this event, you can choose to attend all sessions or only specific ones. Once your registration is complete, JetBrains will email you all of the details you'll need to view the sessions. All of the sessions are scheduled to last for one hour.
 
-Join live sessions and ask questions {#h2-3-join-live-sessions-and-ask-questions}
----------------------------------------------------------------------------------
+Join live sessions and ask questions
+------------------------------------
 
 None of the sessions at this conference are prerecorded. Sessions will be presented in real time, and speakers will answer questions either by taking quick breaks or at the end of their sessions. We encourage you to ask any questions you might have via the chat option while watching the sessions. Engaging with the speaker or your fellow participants is one of the best ways to learn.
 
-Recordings {#h2-4-recordings}
------------------------------
+Recordings
+----------
 
 All of the sessions will be recorded and made available for you to watch again or catch up on after the event. Don't forget to subscribe to [IntelliJ IDEA's YouTube channel](https://www.youtube.com/intellijidea) to view them.
 
-Hashtags {#h2-5-hashtags}
--------------------------
+Hashtags
+--------
 
 Don't miss the chance to connect with us on social media! Use the hashtag #IntelliJIDEAConf on X (formerly Twitter), Bluesky, LinkedIn, and Facebook throughout the event.
 

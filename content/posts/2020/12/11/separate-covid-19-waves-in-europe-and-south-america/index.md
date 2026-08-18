@@ -20,13 +20,13 @@ Software-ECG is a free time series analysis tool originally developed for time s
 
 Software-ECG is build on OpenJDK and JavaFX. It leverages the power of a compiled language with a native rich client framework.
 
-### Overview {#h3-0-overview}
+### Overview
 
 [Last week, we compared the situation in Europe and in China,](https://foojay.io/today/where-is-the-2nd-wave-in-russia-and-china/) and discovered interesting anomalies in the data on Russia, Ukraine, Serbia, and China.
 
 This week, we are going to compare Europe with South America.
 
-### Europe {#h3-1-europe}
+### Europe
 
 During the summer months of 2020, the pandemic paused throughout Europe. This applies to all countries, except for Russia. Russia had 100+ Covid-19 related deaths/day during the summer months July and August.  
 [![Daily deaths in Europe (excluding Russia) related to Covid-19](https://foojay.io/?attachment_id=36582)](https://foojay.io/?attachment_id=36582)
@@ -48,7 +48,7 @@ In Software-ECG COVID-19 Edition, you can create an aggregated view of all these
 
 The seasonal component cannot be ignored as it is not surprising for a disease that has the same transmission as the seasonal flu.
 
-### South America {#h3-2-south-america}
+### South America
 
 Now, we would like to ask the following question---can the same behavior also be seen in South America?
 
@@ -70,7 +70,7 @@ It would certainly be nice if the summer pause of the northern and southern hemi
 
 However, the data does not support this. In Brazil, it is summer right now and, of course, it is more pleasant there than in Europe at the moment, though nonetheless you will still be confronted with COVID-19 there.
 
-### Working with Software-ECG {#h3-3-working-with-software-ecg}
+### Working with Software-ECG
 
 By means of this series of articles, we're aiming to demonstrate that it is easy and interesting to analyze the current COVID-19 situation with the latest available data in Software-ECG COVID-19 Edition.
 

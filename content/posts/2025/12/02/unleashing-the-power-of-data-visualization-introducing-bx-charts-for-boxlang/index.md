@@ -22,8 +22,8 @@ frozen: false
 
 In the world of modern web applications, data is king---but raw numbers rarely tell the full story. 📈 That's where visualization becomes crucial, transforming complex datasets into intuitive, compelling narratives. Today, we're thrilled to introduce BX-Charts, a game-changing charting module that brings professional-grade data visualization directly into the BoxLang ecosystem. 🌟
 
-The Visualization Challenge 🧩 {#h2-0-the-visualization-challenge}
-------------------------------------------------------------------
+The Visualization Challenge 🧩
+------------------------------
 
 Developers have long struggled with creating meaningful charts:
 
@@ -34,18 +34,18 @@ Developers have long struggled with creating meaningful charts:
 
 **BX-Charts** demolishes these barriers, offering a seamless, powerful charting solution that's both developer-friendly and enterprise-ready. 💪
 
-Fully Documented {#h2-1-fully-documented}
------------------------------------------
+Fully Documented
+----------------
 
 We love ❤️ docs! We have fully documented our module: [https://boxlang.ortusbooks.com/boxlang-framework/modularity/charts](https://boxlang.ortusbooks.com/boxlang-framework/modularity/charts "https://boxlang.ortusbooks.com/boxlang-framework/modularity/charts")
 
-Fully Supported {#h2-2-fully-supported}
----------------------------------------
+Fully Supported
+---------------
 
 If you have one of our +/++ licenses, you will get personalized support and implementation advice: [https://www.boxlang.io/plans](https://www.boxlang.io/plans "https://www.boxlang.io/plans")
 
-Code Samples: Bringing Data to Life {#h2-3-code-samples-bringing-data-to-life}
-------------------------------------------------------------------------------
+Code Samples: Bringing Data to Life
+-----------------------------------
 
 1. Multi-Series Performance Analysis with Per-Series Border Styling  
    ![](bx-charts-1-700x324.png)
@@ -198,8 +198,8 @@ Code Samples: Bringing Data to Life {#h2-3-code-samples-bringing-data-to-life}
 ```
 
 
-Exploring the Possibilities 🔍 {#h2-4-exploring-the-possibilities}
-------------------------------------------------------------------
+Exploring the Possibilities 🔍
+------------------------------
 
 ![](boxlang-charts-explorer-700x372.png)  
 
@@ -210,7 +210,7 @@ We've built an interactive Chart Explorer at **[charts.boxlang.io](https://chart
 * Experiment with different chart configurations
 * Learn best practices for data visualization
 
-### Installation 🔧 {#h3-5-installation}
+### Installation 🔧
 
 Get started with BX-Charts
 
@@ -223,7 +223,7 @@ install-bx-module bx-charts
 ```
 
 
-### Key Features {#h3-6-key-features}
+### Key Features
 
 * 📊 10 Chart Types
 * 📱 Fully Responsive
@@ -231,7 +231,7 @@ install-bx-module bx-charts
 * 🔗 Easy Data Integration
 * 🚀 Performance Optimized
 
-### Developers, Unleash Your Data! 🌍 {#h3-7-developers-unleash-your-data}
+### Developers, Unleash Your Data! 🌍
 
 Whether you're building business intelligence dashboards, scientific visualizations, or performance reports, BX-Charts provides the flexibility and power you need. 🔍
 

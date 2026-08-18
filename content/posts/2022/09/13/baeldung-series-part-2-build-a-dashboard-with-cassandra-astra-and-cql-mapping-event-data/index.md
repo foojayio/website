@@ -19,8 +19,8 @@ enlighterjs: true
 frozen: false
 ---
 
-**1. Introduction** {#h2-0-1-introduction}
-------------------------------------------
+**1. Introduction**
+-------------------
 
 In our [previous article](https://www.baeldung.com/cassandra-astra-rest-dashboard-updates), we looked at augmenting our dashboard to store and display individual events from the Avengers using [DataStax Astra](https://astra.dev/3DnYCl8), a serverless DBaaS powered by [Apache Cassandra](https://cassandra.apache.org/) using [Stargate](https://stargate.io/?utm_medium=referral&utm_source=baeldung&utm_campaign=series-1-of-3&utm_content=avengers-dash-series-1) to offer additional APIs for working with it.
 
@@ -28,12 +28,12 @@ In this article, we will be making use of the exact same data in a different way
 
 In order to follow along with this article, it is assumed that you have already read the [first](https://www.baeldung.com/cassandra-astra-stargate-dashboard) and [second](https://www.baeldung.com/cassandra-astra-rest-dashboard-updates) articles in this series and that you have a working knowledge of Java 16, Spring, and at least an understanding of what Cassandra can offer for data storage and access. It may also be easier to have the code from [GitHub](https://github.com/Baeldung/datastax-cassandra/) open alongside the article to follow along.
 
-**2. Service Setup** {#h2-1-2-service-setup}
---------------------------------------------
+**2. Service Setup**
+--------------------
 
 **We will be retrieving the data using the CQL API, using queries in the [Cassandra Query Language](https://docs.datastax.com/en/cql-oss/3.3/index.html).** This requires some additional setup for us to be able to talk to the server.
 
-### **2.1. Download Secure Connect Bundle.** {#h3-2-2-1-download-secure-connect-bundle}
+### **2.1. Download Secure Connect Bundle.**
 
 **In order to connect to the Cassandra database hosted by DataStax Astra via CQL, we need to download the "Secure Connect Bundle".** This is a zip file containing SSL certificates and connection details for this exact database, allowing the connection to be made securely.
 
@@ -42,7 +42,7 @@ This is available from the Astra dashboard, found under the "Connect" tab for ou
 
 For pragmatic reasons, we're going to put this file into *src/main/resources* so that we can access it from the classpath. In a normal deployment situation, you would need to be able to provide different files to connect to different databases -- for example, to have different databases for development and production environments.
 
-### **2.2. Creating Client Credentials** {#h3-3-2-2-creating-client-credentials}
+### **2.2. Creating Client Credentials**
 
 **We also need to have some client credentials in order to connect to our database.** Unlike the APIs that we've used in previous articles, which use an access token, the CQL API requires a "username" and "password". These are actually a Client ID and Client Secret that we generate from the "Manage Tokens" section under "Organizations":
 ![](astra-client-credentials-1024x610.png)
@@ -55,7 +55,7 @@ ASTRA_DB_CLIENT_SECRET=clientSecretHere
 ```
 
 
-### **2.3. Google Maps API Key** {#h3-4-2-3-google-maps-api-key}
+### **2.3. Google Maps API Key**
 
 **In order to render our map, we are going to use Google Maps. This will then need a Google API key to be able to use this API.**
 
@@ -75,8 +75,8 @@ GOOGLE_CLIENT_ID=someRandomClientId
 ```
 
 
-3. Building the Client Layer Using Astra and CQL {#h2-5-3-building-the-client-layer-using-astra-and-cql}
---------------------------------------------------------------------------------------------------------
+3. Building the Client Layer Using Astra and CQL
+------------------------------------------------
 
 **In order to communicate with the database via CQL, we need to write our client layer.** This will be a class called CqlClient that wraps the DataStax CQL APIs, abstracting away the connection details:
 
@@ -115,8 +115,8 @@ This gives us a single public method that will connect to the database and execu
 
 Note that this implementation loads every row from the query into memory and returns them as a single list before finishing. This is only for the purposes of this article but is not as efficient as it otherwise could be. We could, for example, fetch and process each row individually as they are returned or even go as far as to wrap the entire query in a *java.util.streams.Stream* to be processed.
 
-**4. Fetching the Required Data** {#h2-6-4-fetching-the-required-data}
-----------------------------------------------------------------------
+**4. Fetching the Required Data**
+---------------------------------
 
 **Once we have our client to be able to interact with the CQL API, we need our service layer to actually fetch the data we are going to display.**
 
@@ -146,7 +146,7 @@ public class MapService {
 
 Into this, we're going to write our functions to actually query the database -- using the *CqlClient* that we've just written -- and return the appropriate details.
 
-### **4.1. Generate a List of Avengers** {#h3-7-4-1-generate-a-list-of-avengers}
+### **4.1. Generate a List of Avengers**
 
 Our first function is to get a list of all the Avengers that we are able to display the details of:
 
@@ -164,7 +164,7 @@ public List<String> listAvengers() {
 
 **This just gets the list of distinct values in the *avenger* column from our *events* table.** Because this is our partition key, it is incredibly efficient. CQL will only allow us to order the results when we have a filter on the partition key so we are instead doing the sorting in Java code. This is fine though because we know that we have a small number of rows being returned so the sorting will not be expensive.
 
-### **4.2. Generate Location Details** {#h3-8-4-2-generate-location-details}
+### **4.2. Generate Location Details**
 
 Our other function is to get a list of all the location details that we wish to display on the map. **This takes a list of avengers, and a start and end time and returns all of the events for them grouped as appropriate:**
 
@@ -193,12 +193,12 @@ public Map<String, List<Location>> getPaths(List<String> avengers, Instant start
 
 The CQL binds automatically expand out the IN clause to handle multiple avengers correctly, and the fact that we are filtering by the partition and clustering key again makes this efficient to execute. We then parse these into our *Location* object, group them together by the *avenger* field and ensure that each grouping is sorted by the timestamp.
 
-**5. Displaying the Map** {#h2-9-5-displaying-the-map}
-------------------------------------------------------
+**5. Displaying the Map**
+-------------------------
 
 **Now that we have the ability to fetch our data, we need to actually let the user see it.** This will first involve writing our controller for getting the data:
 
-### **5.1. Map Controller** {#h3-10-5-1-map-controller}
+### **5.1. Map Controller**
 
 ```
 @Controller
@@ -240,7 +240,7 @@ public class MapController {
 
 **This uses our service layer to get the list of avengers, and if we have inputs provided then it also gets the list of locations for those inputs.** We also have a *ModelAttribute* that will provide the Google Client ID to the view for it to use.
 
-### **5.1. Map Template** {#h3-11-5-1-map-template}
+### **5.1. Map Template**
 
 Once we've written our controller, we need a template to actually render the HTML. This will be written using Thymeleaf as in the previous articles:
 
@@ -404,8 +404,8 @@ We are injecting the data retrieved from Cassandra, as well as some other detail
 **At this point, we have a fully working application. Into this we can select some avengers to display, date and time ranges of interest, and see what was happening with our data:**
 ![](avengers-map-1024x519-1.png)
 
-**6. Conclusion** {#h2-12-6-conclusion}
----------------------------------------
+**6. Conclusion**
+-----------------
 
 Here we have seen an alternative way to visualize data retrieved from our Cassandra database, and have shown the Astra CQL API in use to obtain this data.
 

@@ -25,8 +25,8 @@ Series of Articles on Microservices Architecture. They Revolve Around Microservi
 
 
 
-Intro to Microservices Adoption in Real World {#h2-0-intro-to-microservices-adoption-in-real-world}
----------------------------------------------------------------------------------------------------
+Intro to Microservices Adoption in Real World
+---------------------------------------------
 
 Microservices Adoption is almost becoming the normal in almost all software product and it services organizations. Hereby, i am taking this opportunity to make you aware of the Real-World Issues (Case Studies) that are faced by organizations (small, mid, large) of all sizes in migrating or adopting microservices. Since learning from other's mistakes and knowing the pitfalls upfront help us prepare and plan better - this article will be helpful for those planning a shift to the Microservices Strategy organization-wide or simply making a move from Monolithic to Microservices Architecture.
 
@@ -36,8 +36,8 @@ Adopting Microservices has Been a Great Challenge for All -- Netflix, Amazon, Ub
 
 \[So, The Idea is that You Do Not Make the Same Mistakes, Learn from the Below and Try to Get it Right the First Time -- Hence, We Need to Invest Time in Quality Research and Development to build the Initial and Robust Architectural Pieces. Also, To Create a Meaningful and a More Realistic Plan for Organization-Wide Microservices Adoption in a Software Product Company. These are also valid for Adoption / Evangelizing to your Customers in an IT Services Organization.\]
 
-Practical Challenges in Adoption of Microservices {#h2-1-practical-challenges-in-adoption-of-microservices}
------------------------------------------------------------------------------------------------------------
+Practical Challenges in Adoption of Microservices
+-------------------------------------------------
 
 #### **Overhead**
 
@@ -73,10 +73,10 @@ So, Once the Initial Part is Over - Even If the Microservices Strategy and Imple
 
 **FIG. 1** : INDICATIVE COMPLEXITY OF MICROSERVICES ARCHITECTURE IN THE ENTERPRISE
 
-Articles from Online Developer Magazines (By Topic) {#h2-2-articles-from-online-developer-magazines-by-topic}
--------------------------------------------------------------------------------------------------------------
+Articles from Online Developer Magazines (By Topic)
+---------------------------------------------------
 
-### Challenges of Moving from Monolithic to Microservices {#h3-3-challenges-of-moving-from-monolithic-to-microservices}
+### Challenges of Moving from Monolithic to Microservices
 
 [Top 3 Challenges of Adopting Microservices as Part of Your Cloud Migration](https://devops.com/top-3-challenges-of-adopting-microservices-as-part-of-your-cloud-migration/ "Top 3 Challenges of Adopting Microservices as Part of Your Cloud Migration")
 
@@ -86,7 +86,7 @@ Articles from Online Developer Magazines (By Topic) {#h2-2-articles-from-online-
 
 [Fearless Monolith to Microservices Migration -- A Guided Journey](https://www.dynatrace.com/news/blog/fearless-monolith-to-microservices-migration-a-guided-journey/ "Fearless Monolith to Microservices Migration – A Guided Journey")
 
-### Failure and Pitfalls of the Microservices Strategy {#h3-4-failure-and-pitfalls-of-the-microservices-strategy}
+### Failure and Pitfalls of the Microservices Strategy
 
 [Experiences from Failing with Microservices](https://www.infoq.com/news/2014/08/failing-microservices/ "Experiences from Failing with Microservices")
 
@@ -96,7 +96,7 @@ Articles from Online Developer Magazines (By Topic) {#h2-2-articles-from-online-
 
 [Your Microservice Architecture Will Collapse](https://dzone.com/articles/your-microservice-architecture-will-collapse "Your Microservice Architecture Will Collapse")
 
-### Learn from Others Mistakes in Microservices {#h3-5-learn-from-others-mistakes-in-microservices}
+### Learn from Others Mistakes in Microservices
 
 [5 Big Microservices Pitfalls to Avoid During Migration](https://searchapparchitecture.techtarget.com/tip/5-big-microservices-pitfalls-to-avoid-during-migration "5 Big Microservices Pitfalls to Avoid During Migration")
 
@@ -106,7 +106,7 @@ Articles from Online Developer Magazines (By Topic) {#h2-2-articles-from-online-
 
 [Failing at Microservices - Please Avoid Our Mistakes!](https://rclayton.silvrback.com/failing-at-microservices "Failing at Microservices - Please Avoid Our Mistakes!")
 
-### Planning a Microservices Adoption in the Enterprise {#h3-6-planning-a-microservices-adoption-in-the-enterprise}
+### Planning a Microservices Adoption in the Enterprise
 
 [Pitfalls \& Challenges Faced During a Microservices Architecture Implementation](https://www.cognizant.com/whitepapers/pitfalls-and-challenges-faced-during-a-microservices-architecture-implementation-codex5066.pdf "Pitfalls &amp; Challenges Faced During a Microservices Architecture Implementation")
 
@@ -118,7 +118,7 @@ Articles from Online Developer Magazines (By Topic) {#h2-2-articles-from-online-
 
 [Fearless Monolith to Microservices Migration -- A Guided Journey](https://www.dynatrace.com/news/blog/fearless-monolith-to-microservices-migration-a-guided-journey/ "Fearless Monolith to Microservices Migration – A Guided Journey")
 
-### Real-World Case Studies of Microservices Adoption {#h3-7-real-world-case-studies-of-microservices-adoption}
+### Real-World Case Studies of Microservices Adoption
 
 [Why and How Netflix, Amazon, and Uber Migrated to Microservices: Learn from Their Experience](https://www.hys-enterprise.com/blog/why-and-how-netflix-amazon-and-uber-migrated-to-microservices-learn-from-their-experience/ "Why and How Netflix, Amazon, and Uber Migrated to Microservices: Learn from Their Experience")
 
@@ -126,7 +126,7 @@ Articles from Online Developer Magazines (By Topic) {#h2-2-articles-from-online-
 
 [Why Microservices Fail? --- Xebia Blog](https://xebia.com/blog/why-microservices-fail/ "Why Microservices Fail? — Xebia Blog")
 
-### Is it the Death of Microservices - Already, In 2021 ? {#h3-8-is-it-the-death-of-microservices-already-in-2021}
+### Is it the Death of Microservices - Already, In 2021 ?
 
 [Microservices to Not Reach Adopt Ring in ThoughtWorks Technology Radar](https://www.infoq.com/news/2018/06/microservices-adopt-radar/ "Microservices to Not Reach Adopt Ring in ThoughtWorks Technology Radar")
 
@@ -136,8 +136,8 @@ Articles from Online Developer Magazines (By Topic) {#h2-2-articles-from-online-
 
 [Unraveling Microservices: Higher Agility or Hype?](https://www.infosys.com/digital/insights/documents/higher-agility-hype.pdf "Unraveling Microservices: Higher Agility or Hype?")
 
-Conclusion and 'Gyan' for Real-World Adoption {#h2-9-conclusion-and-gyan-for-real-world-adoption}
--------------------------------------------------------------------------------------------------
+Conclusion and 'Gyan' for Real-World Adoption
+---------------------------------------------
 
 Let us take a look a Uber's Microservices Dependency Graph (Source : Online Presentation by an Uber Engineer - All Rights Reserved by Uber - Solely Used to Demostrate Complexity). It seems like an Outer Space Image from a Hubble Telescope! 🙂
 

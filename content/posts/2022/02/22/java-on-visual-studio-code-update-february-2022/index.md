@@ -45,7 +45,7 @@ Here is a demo of the feature:
 
 After this step is done, simply create a Java file and start writing unit tests! You can get this feature in the latest update of [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
 
-### Better support for GUI application development (JavaFX, Swing and AWT) {#h3-0-better-support-for-gui-application-development-javafx-swing-and-awt}
+### Better support for GUI application development (JavaFX, Swing and AWT)
 
 GUI-based Java applications are quite common in school projects. The most commonly used GUI frameworks are JavaFX, Swing and AWT. In this section, we are going to highlight some optimizations we have made to support these frameworks better.
 
@@ -95,7 +95,7 @@ You can also click the "Create Java Project" button to use this feature.
 
 Note that you will need to install the [Gradle for Java extension](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle) to use this feature. To use all the new features mentioned above, please download the latest version of [Extension Pack for Java.](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 
-### Feedback and suggestions {#h3-1-feedback-and-suggestions}
+### Feedback and suggestions
 
 There will be lots of exciting updates for Java on Visual Studio Code in 2022, and as always, your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to give us feedback
 
@@ -103,7 +103,7 @@ There will be lots of exciting updates for Java on Visual Studio Code in 2022, a
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-### Resources {#h3-2-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

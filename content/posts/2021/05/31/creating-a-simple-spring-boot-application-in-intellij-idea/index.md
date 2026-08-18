@@ -23,8 +23,8 @@ frozen: false
 
 This tutorial uses IntelliJ IDEA Ultimate because we want to create a new project using Spring Initializr. This functionality is only available with IntelliJ IDEA Ultimate. It is based off [Building an Application with Spring Boot](https://spring.io/guides/gs/spring-boot/).
 
-Creating your Spring Boot Project {#h2-0-creating-your-spring-boot-project}
----------------------------------------------------------------------------
+Creating your Spring Boot Project
+---------------------------------
 
 1) If you're in an IntelliJ IDEA project already, select **File** \> **Project** . Alternatively click the **New Project** button on the Welcome screen.
 
@@ -61,8 +61,8 @@ Click **Finish**.
 
 That's all we have to do to get our basic Spring project set up in IntelliJ IDEA. In the next step we'll take a look at what has been automatically created for you, and most importantly, why.
 
-Project Walk-through {#h2-1-project-walk-through}
--------------------------------------------------
+Project Walk-through
+--------------------
 
 In the previous step we asked IntelliJ IDEA to create us a Spring Boot project with **Spring Web** as a dependency. Let's now take a look at what has been automatically created, so that we can build on that understanding in the next step.
 
@@ -73,11 +73,11 @@ Let's take a look around some aspects of the project. The easiest way to do this
 * HelloWorldApplication.java
 * HelloWorldApplicationTests.java
 
-### The .mvn Folder {#h3-2-the-mvn-folder}
+### The .mvn Folder
 
 This folder has been created because Spring Boot uses the Maven wrapper when you create a Spring Boot project with the Maven build system. This means you don't have to install Maven locally to run your Spring Boot project. You should commit this project to version control, but you can ignore it from now on.
 
-### The Maven pom.xml File {#h3-3-the-maven-pom-xml-file}
+### The Maven pom.xml File
 
 This file is generated with the dependencies that you selected when we created this project.
 
@@ -101,7 +101,7 @@ The first dependency on `spring-boot-starter-web````````` is there because we se
 
 It's very easy to add dependencies to your `pom.xml` file once you have created your Project. Use **⌘N** (macOS), or **Alt+Ins** (Windows/Linux) and then browse for your dependency. However, for our demo, these are the only dependencies that we need.
 
-### The SpringHelloWorldDemoApplication.java File {#h3-4-the-springhelloworlddemoapplication-java-file}
+### The SpringHelloWorldDemoApplication.java File
 
 Inside your **main** \> **java** \> **com.example.helloworld** file structure you'll see your `HelloWorldApplication.java` file. Let's take a look in more detail.
 
@@ -140,11 +140,11 @@ When you run this method, Spring looks at what Maven has pulled in to the class 
 
 For example, we have a dependency in our Maven pom.xml called `spring_boot_starter_web`. That in turn, has a transitive dependency on `spring-boot-starter-tomcat`. In this instance, when the Spring `run` method is called, it checks the class path and your `application.properties` (which is empty) among other things, and sees that you want a Tomcat webserver, so it creates one for you.
 
-### The SpringHelloWorldDemoApplicationTests.java File {#h3-5-the-springhelloworlddemoapplicationtests-java-file}
+### The SpringHelloWorldDemoApplicationTests.java File
 
 If you head down to the **test** \> **java** \> **com.example.springhelloworlddemo** folder you'll see you have another class called `HelloWorldApplicationTests.java`\`\`. This is a test you get for free with Spring Boot. It checks if the Application Context can start, it will fail if not. The test can be a useful starting point for creating your own integration tests.
 
-### Running our Spring Boot Application {#h3-6-running-our-spring-boot-application}
+### Running our Spring Boot Application
 
 We have the basics of our Spring Boot Application at this point. You can run it with **Ctrl** +**R** (macOS), or **Shift** +**F10** (Windows/Linux). Alternatively you can use the gutter icons:
 
@@ -160,12 +160,12 @@ We're getting this page because we have support for REST Controllers with the `s
 
 Lastly, before we do any more development it's a good idea to stop your server from running. You can do this with **⌘F2** (macOS), or **Ctrl** +**F2** on Windows and Linux.
 
-Create your Spring Controller {#h2-7-create-your-spring-controller}
--------------------------------------------------------------------
+Create your Spring Controller
+-----------------------------
 
 Now we have our functioning Spring project we need to [create a Spring Controller](https://spring.io/guides/gs/serving-web-content/#initial) to handle the web requests.
 
-### Create our Controller {#h3-8-create-our-controller}
+### Create our Controller
 
 One important thing to note here is that you don't need to tell your Spring Application class about your (new) Spring Controller class. That is handled by the `@SpringBootApplication` annotation in the Application class which also consists of other annotations, including `@ComponentScan`. This means that the current package, and sub packages will be scanned for Spring components. It's a little unnerving when you first start using Spring but in time you'll get used to it once you have an appreciation of what Spring is doing behind the scenes for you.
 
@@ -212,8 +212,8 @@ public String helloWorld(){
 
 That's it! You're done, congratulations on creating your first Spring Application and serving some text in the browser! In the next section we'll create a test for our application.
 
-Creating a Test for your Spring Boot Application {#h2-9-creating-a-test-for-your-spring-boot-application}
----------------------------------------------------------------------------------------------------------
+Creating a Test for your Spring Boot Application
+------------------------------------------------
 
 Let's write a test to check that in the event of an HTTP request, we get the response that we are expecting, in this case the string *Greetings from Spring Boot*.
 
@@ -255,14 +255,14 @@ It's always worth checking our assumptions, so try changing the text to somethin
 
 In the next step we will summarise what we've done up to this point and list the resources we've used.
 
-Summary and Resources {#h2-10-summary-and-resources}
-----------------------------------------------------
+Summary and Resources
+---------------------
 
 In this tutorial we used the [New Project Wizard](https://www.jetbrains.com/help/idea/new-project-wizard.html) in IntelliJ IDEA to create a Spring Boot project with the **Spring Web** dependency.
 
 We created a Spring Controller and served some text to the local Tomcat webserver. Finally, we added a test for our HTTP call.
 
-### Resources {#h3-11-resources}
+### Resources
 
 * I referenced [this guide](https://spring.io/guides/gs/spring-boot/) to create this tutorial.
 * The [New Project Wizard](https://www.jetbrains.com/help/idea/new-project-wizard.html) in IntelliJ IDEA Ultimate uses [Spring Initializr](https://start.spring.io/) to create the project behind the scenes.

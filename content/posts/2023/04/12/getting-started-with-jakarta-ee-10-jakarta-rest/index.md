@@ -26,8 +26,8 @@ As a major release, it did come with a slew of updates to almost all the major s
 
 In this article, we take a look at how to get started developing RESTful web services on the Jakarta EE Platform using the Jakarta REST API.
 
-Setup {#h2-0-setup}
--------------------
+Setup
+-----
 
 As a core [Jakarta EE](https://blog.payara.fish/jakarta-ee-java-ee-guide) specification, there's not much setup to be done in getting Jakarta REST up and running.
 
@@ -35,8 +35,8 @@ Your typical Jakarta EE application will already contain a dependency on the pla
 
 If you are not sure where or how to get started, check out my very [opinionated guide](https://blog.payara.fish/getting-started-with-jakarta-ee-development-in-2023) to getting started with Jakarta EE 10.
 
-Configuration {#h2-1-configuration}
------------------------------------
+Configuration
+-------------
 
 With the dependency in place, we need to configure the root resource path for your REST resources.
 
@@ -62,8 +62,8 @@ The Application superclass extended above has three methods, getClasses, getSing
 
 The above configuration, however, will suffice for a large number of applications.
 
-Resource {#h2-2-resource}
--------------------------
+Resource
+--------
 
 With our Jakarta REST configuration in place, we are ready to create our obligatory, traditional "hello, world!" resource.   
 
@@ -100,8 +100,8 @@ The fully qualified URL to this class and method will be *https://my-very-shiny-
 
 A HTTP GET request to this path should return the string "Hello, World!" to the caller.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 As a matured specification, you can develop all kinds of sophisticated REST applications using the Jakarta REST API.
 

@@ -24,8 +24,8 @@ Again, some exciting developments seem to be happening in the Java world! There'
 
 Let me explain what's happening and why this could be a game-changer for the Java ecosystem.
 
-History: Why JavaFX Got Separated From The JDK {#h2-0-history-why-javafx-got-separated-from-the-jdk}
-----------------------------------------------------------------------------------------------------
+History: Why JavaFX Got Separated From The JDK
+----------------------------------------------
 
 JavaFX was part of the JDK till Java 10. But with Java 11, more than seven years ago, it became a separate library. You can find its [sources on GitHub within the OpenJDK project](https://github.com/openjdk/jfx). At the time, there were three main reasons for this separation:
 
@@ -35,8 +35,8 @@ JavaFX was part of the JDK till Java 10. But with Java 11, more than seven years
 
 For many developers, this separation meant having to make two separate installations and then wrestling with IDE configurations to get everything working together, or install a build which combines them (e.g. from Azul or BellSoft). Not exactly the smooth developer experience we all hope for...
 
-Time to Reunite {#h2-1-time-to-reunite}
----------------------------------------
+Time to Reunite
+---------------
 
 Bruce Haddon posted a compelling argument on the OpenJDK discussion list about why it's time to bring JavaFX back into the fold. His reasoning makes a lot of sense as the original concerns were largely solved.
 
@@ -46,28 +46,28 @@ Bruce Haddon posted a compelling argument on the OpenJDK discussion list about w
 
 Next to this, [Johan Vos also shared a message on the mailing list](https://mail.openjdk.org/pipermail/openjfx-dev/2025-September/056477.html), "Building OpenJFX using the OpenJDK build system", in which he explained that the OpenJDK build system can now be used to build OpenJFX, bringing both projects even closer together. You can also find this project [on GitHub \> openjdk-mobile \> openjfx-build](https://github.com/openjdk-mobile/openjfx-build).
 
-### The Developer Experience Matters {#h3-2-the-developer-experience-matters}
+### The Developer Experience Matters
 
 For students and beginners especially, having JavaFX integrated with the JDK would make a huge difference. It would send a clear message that JavaFX is on equal footing with other JDK features, not some optional add-on that requires extra effort to learn and configure.
 
 In the [article on InfoWorld](https://www.infoworld.com/article/4082709/will-javafx-return-to-java.html), Donald Smith, Oracle's vice president of Java product management, states: "*Oracle continues to lead and be active in the OpenJFX Project. While we don't have specific announcements or plans currently, we are investigating options for improving the approachability of JavaFX with the JDK.*"
 
-Enter Java on Mobile: The Perfect Timing {#h2-3-enter-java-on-mobile-the-perfect-timing}
-----------------------------------------------------------------------------------------
+Enter Java on Mobile: The Perfect Timing
+----------------------------------------
 
 Here's what I find fascinating: while the JavaFX integration discussion is happening, Johan Vos and the team at Gluon are pushing forward another fantastic initiative: bringing full OpenJDK to mobile platforms!
 
-### The Challenge They're Solving {#h3-4-the-challenge-they-re-solving}
+### The Challenge They're Solving
 
 For nearly a decade, Gluon has been working to make Java a first-class citizen on mobile. They built a toolchain that allowed developers to run Java and JavaFX applications on iOS and Android. It worked, but maintaining it became increasingly difficult. Every new iOS or Android release, every JDK update, every change to the AOT compiler required patches and adjustments. It simply didn't scale.
 
-### A New Approach: Java on Mobile {#h3-5-a-new-approach-java-on-mobile}
+### A New Approach: Java on Mobile
 
 Instead of maintaining complex patches and workarounds, Johan Vos proposes to focus on building OpenJDK directly for mobile targets. Gluon created a GitHub-based community site at [openjdk-mobile.github.io](https://openjdk-mobile.github.io) that documents all the missing pieces, provides scripts and GitHub Actions to automate the work, and publishes nightly builds to catch regressions early.
 
 The goal is to make OpenJDK work on mobile continuously, not just patch one JDK version for one iOS/Arduino release.
 
-### Current Progress and Roadmap {#h3-6-current-progress-and-roadmap}
+### Current Progress and Roadmap
 
 They already have a [working pipeline that runs a HelloWorld application on iOS](https://openjdk-mobile.github.io/ios/helloworld/)! From here, the roadmap includes:
 
@@ -76,8 +76,8 @@ They already have a [working pipeline that runs a HelloWorld application on iOS]
 * Full JavaFX applications to run as native iOS/Android apps.
 * Exposing Java libraries as native mobile libraries.
 
-Why These Two Initiatives Complement Each Other Perfectly {#h2-7-why-these-two-initiatives-complement-each-other-perfectly}
----------------------------------------------------------------------------------------------------------------------------
+Why These Two Initiatives Complement Each Other Perfectly
+---------------------------------------------------------
 
 In my opinion, "Java on Mobile" and "OpenJFX in OpenJDK" are a perfect match. If OpenJFX gets integrated again in OpenJDK, and OpenJDK becomes a first-class citizen on mobile, then JavaFX automatically becomes mobile-ready as part of the standard Java distribution.
 
@@ -88,8 +88,8 @@ This would mean:
 * **For the Ecosystem**: A unified, consistent experience across all platforms. The Java ecosystem would finally have a modern, complete, and integrated GUI solution that works everywhere Java runs.
 * **For Maintainability**: With JavaFX in the JDK and mobile support directly in OpenJDK, there would be less fragmentation, fewer separate patches to maintain, and a clearer path forward for updates and improvements.
 
-A Community Effort {#h2-8-a-community-effort}
----------------------------------------------
+A Community Effort
+------------------
 
 There is one crucial point: this is a community effort. Gluon can't do the mobile work alone, and the JavaFX integration won't happen without community support and involvement.
 
@@ -97,8 +97,8 @@ The [openjdk-mobile project on GitHub](https://github.com/openjdk-mobile/) is op
 
 As [Johan Vos wrote](https://gluonhq.com/bringing-openjdk-to-mobile-a-community-effort/): "We believe that no miracle is needed -- Java was designed to be portable, and it should run on mobile as a first-class citizen. It's just a matter of making it happen, together."
 
-What's Next? {#h2-9-what-s-next}
---------------------------------
+What's Next?
+------------
 
 These are still early days. The JavaFX integration discussion is just beginning, and while there's positive sentiment, there are no official announcements yet. The Java on Mobile project is making progress but still has significant work ahead.
 

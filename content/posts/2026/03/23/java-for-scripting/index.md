@@ -26,8 +26,8 @@ frozen: false
 
 ![](java-script-cover-700x467.png)
 
-The Scripting Dilemma {#h2-0-the-scripting-dilemma}
----------------------------------------------------
+The Scripting Dilemma
+---------------------
 
 If you're like me, as a Java developer, you struggle to remember bash or python syntax for quick scripts.  
 
@@ -37,12 +37,12 @@ You might say "Java is not for scripting" and "I don't want maven or Gradle".Mod
 
 In this article, I'll show you how Java became a first-class scripting language. It might just become your new favorite automation tool.
 
-The Death of Manual Compilation {#h2-1-the-death-of-manual-compilation}
------------------------------------------------------------------------
+The Death of Manual Compilation
+-------------------------------
 
 The first problem if you want to write a Java script is compilation. You probably don't want to run `javac` and manage `.class` files for a simple script. But since Java 11 (via [JEP 330](https://openjdk.org/jeps/330)), you can run source-code programs directly with the `java` launcher.
 
-### Single-File Execution {#h3-2-single-file-execution}
+### Single-File Execution
 
 Let's say you want to rewrite `ls` in Java. You might do something like this:
 
@@ -113,7 +113,7 @@ java ListFiles.java
 
 No `javac` needed. No `.class` files cluttering your directory. Just instant execution.
 
-### Multi-File Support {#h3-3-multi-file-support}
+### Multi-File Support
 
 But since **Java 22** (via [JEP 458](https://openjdk.org/jeps/458), you're not limited to single-file programs. You can now write multi-file programs and run them directly. The Java launcher locates and compiles related source files in subdirectories. For instance if you have something like this:
 
@@ -157,8 +157,8 @@ This feature is especially useful for complex scripts that require multiple clas
 
 Behind the scenes, the launcher invokes the compiler automatically and stores the compiled result in memory. There's no build cruft, no intermediate files, just pure execution. For scripting purposes, Java now feels as immediate as Python or Ruby.
 
-Why so much ceremony? {#h2-4-why-so-much-ceremony}
---------------------------------------------------
+Why so much ceremony?
+---------------------
 
 One key thing for a good scripting language is to eliminate boilerplate. Let's be honest, Java can be a bit verbose. The most infamous example is the `public static void main(String[] args)` signature. If you just want a simple script, that's a lot of text that doesn't serve much purpose. Printing "Hello World!" requires at least 5 lines, mostly boilerplate.
 
@@ -171,7 +171,7 @@ public class HelloWorld {
 ```
 
 
-### The Java Evolution {#h3-5-the-java-evolution}
+### The Java Evolution
 
 Java 25 builds upon previews from Java 21 and 22. It introduces several features that directly tackle verbosity.  
 **Compact Source Files** and **Instance Main Methods** eliminate the need for boilerplate signatures.
@@ -190,7 +190,7 @@ void main() {
 
 The JVM automatically chooses the starting point, prioritizing instance `main()` methods when available. This makes your scripts feel more natural and less like traditional enterprise Java.
 
-### Easier console interaction {#h3-6-easier-console-interaction}
+### Easier console interaction
 
 In the past interacting with the console was a bit cumbersome. First everytime you want to print something to the console, you end up typing `System.out.println("...")`. But it gets worse when you want to read input. You need to go through the gymnastics of using `BufferedReader` or `Scanner`. So you quickly end up with code like this:
 
@@ -228,8 +228,8 @@ The IO class lives in `java.lang`, so it's implicitly imported by every source f
 
 If you want to learn about all this, I recommend reading the [JEP 512](https://openjdk.org/jeps/512).
 
-Java as a Native Script: Shebang Support {#h2-7-java-as-a-native-script-shebang-support}
-----------------------------------------------------------------------------------------
+Java as a Native Script: Shebang Support
+----------------------------------------
 
 A defining feature of any script is running it directly, like `./myscript`, without calling an interpreter. Many scripting languages achieve this with a "shebang" line (`#!`). This line at the start of a file tells the OS which program to use.
 
@@ -324,12 +324,12 @@ ls  # Run from any directory
 
 Suddenly, Java feels like a native scripting language.
 
-Advanced Automation with JBang {#h2-8-advanced-automation-with-jbang}
----------------------------------------------------------------------
+Advanced Automation with JBang
+------------------------------
 
 These built-in features have made Java a capable scripting language. But [JBang](https://www.jbang.dev/) takes it to the next level by handling setup overhead and enabling advanced features.
 
-### What is JBang? {#h3-9-what-is-jbang}
+### What is JBang?
 
 JBang lets you create, edit, and run self-contained Java programs with unprecedented ease.With JBang, your script can fetch dependencies without you having to dive into Maven or Gradle. It runs on any platform, including Docker and Github Actions. Best of all, JBang automatically downloads required Java versions if they're missing.
 
@@ -342,7 +342,7 @@ jbang MyScript.java
 ```
 
 
-### Dependency Management {#h3-10-dependency-management}
+### Dependency Management
 
 This is where JBang truly shines. Declare dependencies directly in your file using special comments. No Maven or Gradle needed.
 
@@ -369,7 +369,7 @@ record Person(String name, int age) {}
 
 JBang automatically downloads and manages these dependencies. No Maven. No Gradle. Just declare and use.
 
-### Awesome Features {#h3-11-awesome-features}
+### Awesome Features
 
 JBang offers a lot of advanced features:
 
@@ -404,12 +404,12 @@ jbang init --template=javafx gui.java
 ```
 
 
-Elevating Your Scripts: CLI Richness with Picocli {#h2-12-elevating-your-scripts-cli-richness-with-picocli}
------------------------------------------------------------------------------------------------------------
+Elevating Your Scripts: CLI Richness with Picocli
+-------------------------------------------------
 
 Simple scripts are great place to start. However, you'll often want options, positional parameters, and help menus for a robust CLI experience. That's where [Picocli](https://picocli.info/) comes in.
 
-### Pro-Grade Tools {#h3-13-pro-grade-tools}
+### Pro-Grade Tools
 
 Picocli integrates perfectly with JBang for ANSI-colored help messages and strongly-typed argument parsing. Build professional CLIs with auto-generated help, version info, type checking, and beautiful error messages.
 
@@ -457,7 +457,7 @@ jbang greet.java -c 3 Alice Bob
 ```
 
 
-### Zero-Code CLI Experience {#h3-14-zero-code-cli-experience}
+### Zero-Code CLI Experience
 
 Picocli handles the complexity:
 
@@ -469,12 +469,12 @@ Picocli handles the complexity:
 
 Your scripts can rival professionally built CLI tools.
 
-Java's New Era {#h2-15-java-s-new-era}
---------------------------------------
+Java's New Era
+--------------
 
 I hope you now see that Java is not just about enterprise complexity and verbose boilerplate. You can use it to build powerful automation scripts with ease.
 
-### Why This Matters {#h3-16-why-this-matters}
+### Why This Matters
 
 **Maintainability**: Java scripts offer types and structure that Bash often lacks. Six months later, strong typing and IDE support make understanding and modifying code much easier.
 
@@ -484,7 +484,7 @@ I hope you now see that Java is not just about enterprise complexity and verbose
 
 **Performance**: GraalVM native images let your scripts compile to native binaries with instant startup, rivaling Go or Rust.
 
-### The Bottom Line {#h3-17-the-bottom-line}
+### The Bottom Line
 
 With shebang support, JBang, and instance main methods, Java is now a lean automation machine. The ceremony is gone. The friction is eliminated. What remains is a powerful, typed, maintainable scripting language that happens to be Java.
 

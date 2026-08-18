@@ -23,8 +23,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Design patterns are great, they standardize solutions for common programming problems so you don't shoot yourself in the foot or reinvent the wheel.
 
@@ -183,8 +183,8 @@ First we'll start with an implementation using **vanilla OOP concepts**.
 
 Then, we'll reimplement this example using Data Oriented Programming techniques and showcase all the new relevant language features java 21 has to offer.
 
-What is the visitor pattern? {#h2-1-what-is-the-visitor-pattern}
-----------------------------------------------------------------
+What is the visitor pattern?
+----------------------------
 
 The [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) is a design pattern that at its base allows an algorithm to be implemented *without* changing the classes upon which it acts.
 
@@ -192,8 +192,8 @@ Implementing this in java used to be **rather verbose** , however. This was most
 
 This got improved upon with the introduction of [records](https://openjdk.org/jeps/395), and [sealed classes](https://openjdk.org/jeps/409) allowing to concisely present product types \& sum types, and lastly [enhanced pattern matching for the switch statement](https://openjdk.org/jeps/441#:~:text=Enhance%20the%20Java%20programming%20language,be%20expressed%20concisely%20and%20safely).
 
-Example: A book curation system {#h2-2-example-a-book-curation-system}
-----------------------------------------------------------------------
+Example: A book curation system
+-------------------------------
 
 *Note: If you prefer just taking a look at the code, the repository can be found [here](https://github.com/wimdetroyer/visitor-pattern-with-dop).*
 
@@ -203,7 +203,7 @@ The java class hierarchy for these books is already in place, and you're not sup
 
 This makes it an ideal candidate for the visitor pattern!
 
-### The Book Domain {#h3-3-the-book-domain}
+### The Book Domain
 
 Books always have the following properties:
 
@@ -231,7 +231,7 @@ Non-fiction books are rated:
 * They can optionally have 0, 1 or 2 ratings.
 * A rating can be anonymous or be by a named reviewer.
 
-### The task: Collect interesting information about a book {#h3-4-the-task-collect-interesting-information-about-a-book}
+### The task: Collect interesting information about a book
 
 Following rules determine when which type of book is interesting:
 
@@ -277,7 +277,7 @@ Children's tale books can be interesting under specific conditions:
 
 The curator asks you to notify the user of the application that the book wasn't interesting.
 
-### An implementation using OOP concepts {#h3-5-an-implementation-using-oop-concepts}
+### An implementation using OOP concepts
 
 #### The java representation of the domain
 
@@ -505,7 +505,7 @@ If you're like me, two things stuck out:
 
 Now let me try to sell you on a data-oriented programming implementation!
 
-### Re-implementation using Data Oriented Programming (DOP) techniques {#h3-6-re-implementation-using-data-oriented-programming-dop-techniques}
+### Re-implementation using Data Oriented Programming (DOP) techniques
 
 #### Remodelling the class domain: Use sealed interfaces and records!
 
@@ -770,8 +770,8 @@ While technically still a preview feature in java 24, we can use the support for
 
 {#more-116139}
 
-Recommended further reading and watching {#h2-7-recommended-further-reading-and-watching}
------------------------------------------------------------------------------------------
+Recommended further reading and watching
+----------------------------------------
 
 * [An excellent Devoxx talk by Nicolai Parlog which inspired me to learn more about this subject](https://www.youtube.com/watch?v=8FRU_aGY4mY)
 * [Brian Goetz' seminal article on InfoQ about Data Oriented Programming in java](https://www.infoq.com/articles/data-oriented-programming-java/)

@@ -41,8 +41,8 @@ However, there were several obstacles I encountered that took much longer to sol
 
 I'll do my best to cover those thoroughly here and avoid future problems for both myself and others!
 
-Architecture {#_architecture}
------------------------------
+Architecture
+------------
 
 We built this project from scratch with a [rudimentary scope and functionality](https://foojay.io/today/journeys-in-java-level-1-building-an-empire-of-microservices/) and have slowly expanded the complexity.
 
@@ -60,8 +60,8 @@ There is a small grey border around each service indicating a containerized appl
 
 The larger grey box encompassing everything represents how Docker Compose is orchestrating all of services as a single unit.
 
-Prepping applications {#_prepping_applications}
------------------------------------------------
+Prepping applications
+---------------------
 
 The first step was to integrate the config-service to Docker Compose. This service handles database credentials to both MongoDB and Neo4j.
 
@@ -71,8 +71,8 @@ Once that was operating smoothly, adding the rest of the services took very litt
 
 Let's walk through the steps!
 
-Goodreads-config {#_goodreads_config}
--------------------------------------
+Goodreads-config
+----------------
 
 First, we need to containerize the application using a Dockerfile. After copying/pasting from another service, I found out that my base [`openjdk` image](https://hub.docker.com/_/openjdk) was deprecated. There were a few suggestions for alternatives, but went with [Azul's image](https://hub.docker.com/u/azul) as the [new base image](https://github.com/JMHReif/microservices-level9/blob/main/config-server/Dockerfile#L3).
 
@@ -118,7 +118,7 @@ The main difference is the use of `localhost` to connect to other services in a 
 
 Let's test what we changed so far!
 
-### Round 1: Put it to the test! {#_round_1_put_it_to_the_test}
+### Round 1: Put it to the test!
 
 We can run this much of the system with a single command.
 
@@ -142,8 +142,8 @@ docker-compose down
 ```
 
 
-Goodreads-svc1: Interact with goodreads-config {#_goodreads_svc1_interact_with_goodreads_config}
-------------------------------------------------------------------------------------------------
+Goodreads-svc1: Interact with goodreads-config
+----------------------------------------------
 
 As mentioned above, this was the toughest part to get working, but I learned a few things along the way.
 
@@ -184,7 +184,7 @@ Lastly, the environment variables specify the application name, location of the 
 
 The `SPRING_CONFIG_IMPORT` variable tells the container where to look for the config server. I also noticed that these properties did not work correctly if I put them in the config file itself. The values must be accessible within the container, or it would not know where to look.
 
-### Service1: Application Changes {#_service1_application_changes}
+### Service1: Application Changes
 
 As I was debugging the restart issues mentioned above, one suggestion to add resiliency to the application and assist with determining errors was to add [Spring Retry](https://docs.spring.io/spring-batch/docs/current/reference/html/retry.html) capabilities.
 
@@ -250,7 +250,7 @@ With those changes in place, we will need to re-package the application with `mv
 
 *\*Note:\* the `-DskipTests=true` is necessary because it will look for a config server and fail when/if it doesn't find it.*
 
-### Config file: mongo-client {#_config_file_mongo_client}
+### Config file: mongo-client
 
 In the [mongo-client configuration file](https://github.com/JMHReif/microservices-level9/blob/main/microservices-java-config/mongo-client.yaml) hosted by the config server, I added a couple more properties for opening up Actuator endpoints (for application debugging) and the application name
 
@@ -269,7 +269,7 @@ spring:
 ```
 
 
-### Round 2: Put it to the test! {#_round_2_put_it_to_the_test}
+### Round 2: Put it to the test!
 
 Let's run all of the pieces so far - goodreads-db, goodreads-config, goodreads-svc1.
 
@@ -291,8 +291,8 @@ Figure 2. Test service1 for a book
 
 When we are done testing this, we can bring down the system with `docker-compose down`.
 
-Goodreads-svc2: Interact with service1 {#_goodreads_svc2_interact_with_service1}
---------------------------------------------------------------------------------
+Goodreads-svc2: Interact with service1
+--------------------------------------
 
 This service is our user-facing service for interacting with book data. All of the changes made to this service will look familiar because we made the same changes in `service1`!
 
@@ -322,7 +322,7 @@ networks:
 
 We only add the `restart: on-failure` option here. Because we could have network interruptions that cause services to miss requests or other flaky behavior, I wanted to build the same resiliency into my other applications and containers that I did with `service1`. For a refresher on the `BACKEND_HOSTNAME` environment variable, check out the [Level 5 blog post](https://jmhreif.com/blog/microservices-level5/).
 
-### Service1: Application Changes {#_service1_application_changes_2}
+### Service1: Application Changes
 
 First, we want to add the Spring Retry logic to `service2` by adding the three dependencies in the `pom.xml` ([lines 29-40](https://github.com/JMHReif/microservices-level9/blob/main/service2/pom.xml#L29)). Next, we can add the property to the `application.properties` to [open all Actuator endpoints](https://github.com/JMHReif/microservices-level9/blob/main/service2/src/main/resources/application.properties#L3). **Note:** We only do this in development or local testing - not production! We can comment out that property here for now. Finally, we can add `@EnableRetry` to the [main application class](https://github.com/JMHReif/microservices-level9/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L18) and `@Retryable` to each method we want to use retry logic. In our case, only the [`getBooks()` method](https://github.com/JMHReif/microservices-level9/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L43).
 
@@ -332,7 +332,7 @@ While we are here, we can update the Spring Boot project to use the latest versi
 
 We need to re-package the application and build the local container, just as we did in `service1`. Because this service interacts only with `service1`, it doesn't need any ties to the config service or database. Let's test it!
 
-### Round 3: Put it to the test! {#_round_3_put_it_to_the_test}
+### Round 3: Put it to the test!
 
 We'll use the `docker-compose up -d` command, as we did before, to spin up Docker Compose.
 
@@ -348,8 +348,8 @@ Figure 3. Test service2 for books
 
 And `docker-compose down` will shut down everything gracefully.
 
-Goodreads-svc3: Backend service for Authors {#_goodreads_svc3_backend_service_for_authors}
-------------------------------------------------------------------------------------------
+Goodreads-svc3: Backend service for Authors
+-------------------------------------------
 
 Our third service is a near copy of `service1`, but it hosts author data (rather than books). Pretty much everything we learned before is also applied to this `service3`. We will list the changes for review.
 
@@ -363,7 +363,7 @@ Our third service is a near copy of `service1`, but it hosts author data (rather
 
 Let's test!
 
-### Round 4: Put it to the test! {#_round_4_put_it_to_the_test}
+### Round 4: Put it to the test!
 
 As usual, use `docker-compose up -d` at the command line to spin up our microservices system and test the endpoints with the commands listed below.
 
@@ -378,8 +378,8 @@ Figure 4. Test service3 for an author
 
 Close the system with `docker-compose down`.
 
-Goodreads-svc4: Backend service for Reviews {#_goodreads_svc4_backend_service_for_reviews}
-------------------------------------------------------------------------------------------
+Goodreads-svc4: Backend service for Reviews
+-------------------------------------------
 
 Similar to services one and three, `service4` is a backing service for book review data. However, this service interacts with a graph database in the cloud ([Neo4j](https://dev.neo4j.com/aura-java)). More background on this service is in the [Level 6 blog post](https://jmhreif.com/blog/microservices-level6/). Let's list out our changes to bring `service4` into Docker Compose.
 
@@ -393,7 +393,7 @@ Similar to services one and three, `service4` is a backing service for book revi
 
 We now have all of our services migrated to Docker Compose. Time to test the entire system!
 
-### Round 5 (final!): Put it to the test! {#_round_5_final_put_it_to_the_test}
+### Round 5 (final!): Put it to the test!
 
 We can run our system with the same command we have been using.
 
@@ -423,8 +423,8 @@ docker-compose down
 ```
 
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 We have successfully created an orchestrated microservices system with Docker Compose!
 
@@ -434,8 +434,8 @@ The microservices system now includes a database container (MongoDB), configurat
 
 We have grown this system, and we hope to continue adding functionality and learning along the way. Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github: [microservices-level9](https://github.com/JMHReif/microservices-level9) repository
 * Blog post: [Simple Fix If Your Dockerized App Crashes...​](https://vsupalov.com/simple-fix-db-not-ready/)

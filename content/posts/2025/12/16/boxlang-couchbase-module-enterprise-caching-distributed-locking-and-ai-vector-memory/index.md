@@ -26,8 +26,8 @@ frozen: false
 
 
 
-**Couchbase + BoxLang: A High-Performance Combination** {#h2-0-couchbase-boxlang-a-high-performance-combination}
-----------------------------------------------------------------------------------------------------------------
+**Couchbase + BoxLang: A High-Performance Combination**
+-------------------------------------------------------
 
 Couchbase is more than a database---it's a distributed NoSQL platform engineered for speed, flexibility, and global scale. With sub-millisecond key-value operations, built-in vector search, and multi-data-center support, it is the ideal foundation for next-generation AI-powered applications.
 
@@ -36,8 +36,8 @@ The new **bx-couchbase v1.0** module exposes all this power through an elegant, 
 📘 **Documentation:**   
 <https://boxlang.ortusbooks.com/boxlang-framework/boxlang-plus/modules/bx-couchbase>
 
-🚀 **Enterprise-Grade Distributed Caching** {#h2-1-enterprise-grade-distributed-caching}
-----------------------------------------------------------------------------------------
+🚀 **Enterprise-Grade Distributed Caching**
+-------------------------------------------
 
 bx-couchbase introduces a complete cache provider with replication, fault tolerance, TTL support, scopes, and collections---all optimized for BoxLang. You can easily leverage any bucket, scope or collection as a BoxLang native Cache, even store all your session scope and distribute it.
 
@@ -61,12 +61,12 @@ user = cache("default").get("user:123")
 * Logical grouping via scopes \& collections
 * First-class integration with BoxLang caching APIs
 
-🔐 **True Distributed Locking for Mission-Critical Workloads** {#h2-2-true-distributed-locking-for-mission-critical-workloads}
-------------------------------------------------------------------------------------------------------------------------------
+🔐 **True Distributed Locking for Mission-Critical Workloads**
+--------------------------------------------------------------
 
 bx-couchbase v1.0 delivers robust distributed locking---ideal for financial transactions, inventory control, batch operations, and high-traffic systems. It has introduced a semantic component to give you locking capabilities into Couchbase. You can also use the functional approach as well.
 
-### **Component-Based Locking (Recommended)** {#h3-3-component-based-locking-recommended}
+### **Component-Based Locking (Recommended)**
 
 ```
 bx:couchbaseLock
@@ -83,7 +83,7 @@ bx:couchbaseLock
 ```
 
 
-### **Callback-Based Locking** {#h3-4-callback-based-locking}
+### **Callback-Based Locking**
 
 ```
 result = couchbaseLock(
@@ -112,12 +112,12 @@ result = couchbaseLock(
 * 👤 Serialized user updates
 * 🎫 Ticketing \& reservation systems
 
-🤖 **AI Vector Memory for BoxLang Agents** {#h2-5-ai-vector-memory-for-boxlang-agents}
---------------------------------------------------------------------------------------
+🤖 **AI Vector Memory for BoxLang Agents**
+------------------------------------------
 
 A major highlight of v1.0 is deep integration with the **bx-ai** v2 module, enabling Couchbase-backed vector memory for AI agents, chatbots, and RAG pipelines.
 
-### **Example: Persistent Vector-Powered Memory** {#h3-6-example-persistent-vector-powered-memory}
+### **Example: Persistent Vector-Powered Memory**
 
 ```
 memory = aiMemory( "cache", {
@@ -139,7 +139,7 @@ response = agent.run( "What did we discuss about billing?" )
 ```
 
 
-### **Multi-Tenant Isolation** {#h3-7-multi-tenant-isolation}
+### **Multi-Tenant Isolation**
 
 Each user and conversation remains fully isolated:
 
@@ -152,7 +152,7 @@ aliceMemory = aiMemory( "cache",
 ```
 
 
-### **Hybrid Memory Model** {#h3-8-hybrid-memory-model}
+### **Hybrid Memory Model**
 
 Combine short-term recency + long-term semantic search:
 
@@ -176,8 +176,8 @@ memory = aiMemory( "hybrid", {
 * Hybrid search models
 * Support for OpenAI, Cohere, Voyage \& more
 
-🛠️ **Direct Couchbase SDK Access** {#h2-9-direct-couchbase-sdk-access}
------------------------------------------------------------------------
+🛠️ **Direct Couchbase SDK Access**
+-----------------------------------
 
 For advanced use cases, developers can directly access Couchbase Java SDK primitives but with many dynamic features and automatic serialization/deserialization, and casting.
 
@@ -193,8 +193,8 @@ result = collection.query("
 ```
 
 
-📦 **Session Storage Backed by Couchbase** {#h2-10-session-storage-backed-by-couchbase}
----------------------------------------------------------------------------------------
+📦 **Session Storage Backed by Couchbase**
+------------------------------------------
 
 ```
 // Application.bx
@@ -212,7 +212,7 @@ session.user = userObject;
 
 Install BoxLang OS, or chose a web runtime, then install the couchbase module. (www.boxlang.io)
 
-### **Installation** {#h3-11-installation}
+### **Installation**
 
 ```
 install-bx-module bx-couchbase
@@ -221,7 +221,7 @@ box install bx-couchbase
 ```
 
 
-### **Quick App Configuration** {#h3-12-quick-app-configuration}
+### **Quick App Configuration**
 
 ```
 this.caches[ "default" ] = {
@@ -238,7 +238,7 @@ this.caches[ "default" ] = {
 ```
 
 
-### **E-Commerce Inventory Protection** {#h3-13-e-commerce-inventory-protection}
+### **E-Commerce Inventory Protection**
 
 ```
 function reserveProduct( productId, quantity ) {
@@ -253,7 +253,7 @@ function reserveProduct( productId, quantity ) {
 ```
 
 
-### **AI-Powered Customer Support** {#h3-14-ai-powered-customer-support}
+### **AI-Powered Customer Support**
 
 ```
 agent = aiAgent(...)
@@ -261,7 +261,7 @@ return agent.run(message)
 ```
 
 
-### **Financial Transaction Processing** {#h3-15-financial-transaction-processing}
+### **Financial Transaction Processing**
 
 ```
 couchbaseLock("default", "payment-#orderId#", 5, 30, () => { ... })

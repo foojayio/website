@@ -27,7 +27,7 @@ And now it's time for you now to test your abilities with lambdas and functional
 
 It's time to improve your Java skills with this Function Calculation Challenge...
 
-### Function Calculation Java Challenge {#h3-0-function-calculation-java-challenge}
+### Function Calculation Java Challenge
 
 What will be the output when the main method is executed as follows?
 

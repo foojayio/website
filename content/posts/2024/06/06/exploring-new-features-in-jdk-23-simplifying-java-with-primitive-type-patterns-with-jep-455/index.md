@@ -22,14 +22,14 @@ frozen: false
 
 This article delves into how JEP 455 can be utilized to handle complex decision-making scenarios more efficiently. We'll examine a practical example to illustrate the benefits of this feature.
 
-### **What's New in JEP 455?** {#h3-0-what-s-new-in-jep-455}
+### **What's New in JEP 455?**
 
 This JEP introduces the following key features:
 
 * **Primitive Type Patterns:** You can use primitive types (like `int, long, boolean`, etc.) directly within pattern-matching constructs. This eliminates the need for unnecessary boxing and unboxing of values.
 * **Expanded** **instanceof** **and** **switch** **:** The `instanceof` operator and `switch` expressions have been extended to work seamlessly with primitive types.
 
-### **Practical Example: User Order Processing** {#h3-1-practical-example-user-order-processing}
+### **Practical Example: User Order Processing**
 
 Let's explore a practical example demonstrating how JEP 455 can be applied. We'll create a simple order processing system that distinguishes between logged-in and unrecognized users and processes their orders accordingly.
 
@@ -104,7 +104,7 @@ Since JDK 23 isn't officially available yet, the Early-Access Builds version is 
 
 If you don't have SDKMAN, use this [resource](https://sdkman.io/install#:~:text=It%20effortlessly%20sets%20up%20on,both%20Bash%20and%20ZSH%20shells.) to download and install it. In addition to SDKMAN, the OpenJDK JDK 23 Early-Access Builds are available [here](https://jdk.java.net/23/).
 
-### **Conclusion** {#h3-2-conclusion}
+### **Conclusion**
 
 As Java continues to evolve, features like JEP 455 demonstrate the language's commitment to modernizing and improving developer productivity. Embrace these changes to write more efficient and readable code and stay ahead in the ever-evolving landscape of Java development.
 

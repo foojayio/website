@@ -24,8 +24,8 @@ But as time moved on, I see it in a different light. I see it as a very limited 
 
 TDD is more than that. In it we need to define the constraints and then solve the problem. Is that approach superior to solving the problem and then verifying the constraints are correct? That's the core premise of TDD vs. just writing good test coverage.
 
-The Good {#h2-0-the-good}
--------------------------
+The Good
+--------
 
 TDD is an interesting approach. It's especially useful when working with loosely typed languages. In those situations TDD is wonderful as it fills the role of a strict compiler and linter.
 
@@ -33,8 +33,8 @@ There are other cases where it makes sense. When we're building a system that ha
 
 The idea is to construct the equation with the hidden variables in the middle. Then the coding becomes filling in the equation. It's very convenient in cases like that. Coding becomes filling in the blanks.
 
-The Bad {#h2-1-the-bad}
------------------------
+The Bad
+-------
 
 > "Test Driven Development *IS* Double Entry Bookkeeping. Same discipline. Same reasoning. Same result." -- Uncle Bob Martin
 
@@ -48,8 +48,8 @@ The tests had bugs. There were many competing implementations but none of them f
 
 But the real problem was the slow progress. The company could not move forward quickly. TDD proponents will be quick to comment that a TDD project is easier to refactor since the tests give us a guarantee that we won't have regressions. But this applies to projects with testing performed after the fact.
 
-The Worse {#h2-2-the-worse}
----------------------------
+The Worse
+---------
 
 TDD focuses heavily on fast unit testing. It's impractical to run slow integration tests or longrun tests that can run overnight on a TDD system. How do you verify scale and integration into a major system?
 
@@ -57,15 +57,15 @@ In an ideal world everything will just click into place like legos. I don't live
 
 As a result, TDD over-emphasizes the "nice to have" unit tests, over the essential integration tests. Yes, you should have both. But I must have the integration tests. Those don't fit as cleanly into the TDD process.
 
-Right Driven Testing {#h2-3-right-driven-testing}
--------------------------------------------------
+Right Driven Testing
+--------------------
 
 I write testing the way I choose on a case-by-case basis. If I have a case where testing in advance is natural, I'll use that. But for most cases, writing the code first seems more natural to me. Reviewing the coverage numbers is very helpful when writing tests and this is something I do after the fact.
 
 As I mentioned before, I only check coverage for integration tests. I like unit tests and monitor the coverage there since I want good coverage there too. But for quality, only integration tests matter. A PR needs unit tests, I don't care if we wrote them before the implementation. We should judge the results.
 
-Bad Automation {#h2-4-bad-automation}
--------------------------------------
+Bad Automation
+--------------
 
 When Tesla was building up their Model 3 factories they went into production hell. The source of the problems was their attempt to automate everything. The [Pareto Principle](https://en.wikipedia.org/wiki/Pareto_principle) applies perfectly to automation. Some things are just very resistant to automation and make the entire process so much worse.
 
@@ -73,8 +73,8 @@ One point where this really fails is in UI testing. Solutions like Selenium, etc
 
 We can probably cross 80% of tested functionality, but there's a point of diminishing return for automation. In those environments TDD is problematic. The functionality is easy but building the tests becomes untenable.
 
-Finally {#h2-5-finally}
------------------------
+Finally
+-------
 
 I'm not against TDD but I don't recommend it and effectively I don't use it. When it makes sense to start with a test I might do that, but that's not really TDD. I judge code based on the results. TDD can provide great results but often it over-emphasizes unit tests. Integration tests are more important for quality in the long run.
 

@@ -30,8 +30,8 @@ We all know what the author means. We all Google coding stuff all the time. Obvi
 
 After reading [these](https://yieldcode.blog/how-to-be-a-great-technical-interviewer/) [articles](https://levelup.gitconnected.com/software-interviews-suck-here-is-how-to-fix-them-ea587f89db89) on the subject, I felt I needed to write something of my own that reflects my perspective on a good technical interview.
 
-What's the Goal in a Technical Interview {#h2-0-what-s-the-goal-in-a-technical-interview}
------------------------------------------------------------------------------------------
+What's the Goal in a Technical Interview
+----------------------------------------
 
 When I conduct a technical interview, I'm hiring a teammate. This teammate should be a person I want to work with. As a result, I focus on:
 
@@ -45,14 +45,14 @@ When I conduct a technical interview, I'm hiring a teammate. This teammate shoul
 
 When I tell this to people I get the knee jerk reaction of "so what the hell do you ask" or "why not X?". I'll start with the positive first, the things I ask...
 
-Debugging as a Technical Interview Technique {#h2-1-debugging-as-a-technical-interview-technique}
--------------------------------------------------------------------------------------------------
+Debugging as a Technical Interview Technique
+--------------------------------------------
 
 I don't care about programming experience in a specific company. I care about programming experience, it can be in open source, university or elsewhere. If you did any real world programming, then you had bugs and you dealt with them.
 
 That's programming. If you don't know a programming language, you can pick it up. If you don't know a library or API, you can learn it. But debugging and dealing with issues is a skill you develop by doing.
 
-### The Hardest Technical Interview Question I Ever Got {#h3-2-the-hardest-technical-interview-question-i-ever-got}
+### The Hardest Technical Interview Question I Ever Got
 
 Sun Microsystems conducted interviews by using three separate engineers. The 3rd one, [Eran Davidov](https://medium.com/@erand) asked me a question that was one of the hardest questions I ever got in a technical interview. Years later, I asked him about it and he totally forgot that...
 
@@ -66,7 +66,7 @@ I don't get stage fright. I'm never speechless. But I was drawing blanks. I was 
 
 Eventually I had to confess that I know I'm responsible for bugs... But my brain completely erased them from my mind. He still must have recommended me for the job despite my clear, over inflated ego. At least he knew about that in advance.
 
-### Great Technical Job Interviews Questions {#h3-3-great-technical-job-interviews-questions}
+### Great Technical Job Interviews Questions
 
 Based on that, here are some of the best technical interview questions to ask in no particular order:
 
@@ -88,7 +88,7 @@ When I was interviewing at Lightrun, they asked me how I would scale a specific 
 
 You can ask dozens of questions like this... The nice thing about this is that you can even give them to candidates in advance and they can come prepared. You still wouldn't lose much of the value.
 
-### What about Code? {#h3-4-what-about-code}
+### What about Code?
 
 Reading code is much harder than writing it. That's why I consider coding questions completely redundant. Here, open source can come to the rescue.
 
@@ -100,20 +100,20 @@ Then I would guide them through the process verbally to see if they pick up my i
 
 Obviously, people had to locate the part that handles event dispatching to place a breakpoint there. Following that thought process was very illuminating. Far more valuable than a bubble sort.
 
-Why Common Technical Interview Questions are Problematic {#h2-5-why-common-technical-interview-questions-are-problematic}
--------------------------------------------------------------------------------------------------------------------------
+Why Common Technical Interview Questions are Problematic
+--------------------------------------------------------
 
 So it's time to get negative. Previously, I instantly discarded many technical interview techniques as being flawed. Your favorite might have been there, so it's time to explain why I don't like them.
 
 I'll skip the "no liars" rule. I think that's pretty obvious. But here are the others.
 
-### No live coding tests {#h3-6-no-live-coding-tests}
+### No live coding tests
 
 We spend more time debugging and reading code than coding in a normal day to day. So writing code in an interview is redundant. It's stressful and doesn't show much.
 
 Doing it on a whiteboard or a foreign computer is the worst.
 
-### No take home exercises {#h3-7-no-take-home-exercises}
+### No take home exercises
 
 This is humiliating. Getting homework from an employer shows a future employee complete disregard for their time. The people who will go through with this are:
 
@@ -122,7 +122,7 @@ This is humiliating. Getting homework from an employer shows a future employee c
 
 So you get absolutely no valuable information from this and lose potentially outstanding candidates who take a job with an employer that values their time.
 
-### No ranking websites or hacker challenges {#h3-8-no-ranking-websites-or-hacker-challenges}
+### No ranking websites or hacker challenges
 
 These websites over value people like myself who have a larger social footprint. When hiring you want to "moneyball" the candidates. You want someone who doesn't look good for a casual interview but is an amazing candidate. I've run into some coders who are timid people with a small social footprint. But they are amazing coders.
 
@@ -132,7 +132,7 @@ I think it speaks to my work ethic and patience. Those make me a great developer
 
 Ultimately, I think those websites are a small data point you can consider. But for coding or team leading, they shouldn't be a major factor.
 
-### All interviews are one on one {#h3-9-all-interviews-are-one-on-one}
+### All interviews are one on one
 
 This isn't something I experienced. But I heard people (especially women) complain that they felt "ganged up on" when several interviewers "bombed them" with questions. This is difficult. We want the interviewee to feel at ease. After all, if we like them, we need them to like us back. The interview experience is the first step in hiring.
 
@@ -140,7 +140,7 @@ As such, we want a one-on-one process to help form a relationship. This will be 
 
 Ideally, you want diverse interviewers to prevent bias from creeping into the process. This is tough in smaller startups before they have representation in wider demographics. Once you have that, you need to integrate it into the process.
 
-### Have Three people conduct one-on-one interviews (separately). Reach consensus {#h3-10-have-three-people-conduct-one-on-one-interviews-separately-reach-consensus}
+### Have Three people conduct one-on-one interviews (separately). Reach consensus
 
 This sort of interview breeds mistakes. I can form a positive opinion of a person because of charm, projection, etc. When using this method with a single interviewer, you will get problematic results.
 
@@ -168,8 +168,8 @@ So why don't I recommend this?
 
 Because we're not Google. Without the branding surrounding a hiring process like that, you just have another filter that will block excellent candidates. All of that for a redundant question that makes no sense. A major faceless organization can play to its made up "exclusive club" as a strength. Smaller companies need to have a more personal touch when hiring (hence one on ones).
 
-TL;DR {#h2-11-tl-dr}
---------------------
+TL;DR
+-----
 
 In technical interviews don't:
 

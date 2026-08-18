@@ -22,7 +22,7 @@ Since you're reading this blog, chances are that you're writing software which w
 
 After trying to figure out what's what, I thought I'd simply write a blog post on the various JDKs available out there. This is especially important, since you might be consuming your JDK from a container provided by a third party, e.g. Docker Hub, and you may not know exactly what you're getting\[1\].
 
-### Release Version Chicken Race {#h3-0-release-version-chicken-race}
+### Release Version Chicken Race
 
 Typically most companies will require that you keep your dependencies up-to-date. For example, if you've written something with a dependency on Tomcat, you are pretty likely to keep your dependencies up-to-date. GitHub may even warn you if you're running with a version that has known security implications. However, not everyone is keeping their JDKs/JVMs up-to-date. Which is funny, in a way, since everything you'll be running could be affected.
 
@@ -45,8 +45,8 @@ At the time of writing this blog, the new CPU (Critical Patch Update) releases h
 
 If you're running anything else in production, without a support contract, it could be argued you're not doing things quite right.
 
-What's what? {#h2-1-what-s-what}
---------------------------------
+What's what?
+------------
 
 OpenJDK, being open sourced, has builds provided by plenty of vendors. Here is a**non-exhaustive** list of some vendors shipping supported versions of OpenJDK (in alphabetical order, distribution(s) in parenthesis):
 
@@ -63,8 +63,8 @@ These providers usually ship distributions with pretty much the same bits from t
 
 There are also upstream builds, not supported by anyone, built on Red Hat infrastructure and hosted by AdoptOpenJDK. For example, if you get a JDK 8 from Docker Hub (openjdk/jdk8u252, openjdk/jdk8), that is what you would [get](https://github.com/docker-library/openjdk/blob/master/8/jdk/Dockerfile).
 
-Where to get JFR -- Public Service Announcement {#h2-2-where-to-get-jfr-public-service-announcement}
-----------------------------------------------------------------------------------------------------
+Where to get JFR -- Public Service Announcement
+-----------------------------------------------
 
 As you probably know, JDK Flight Recorder, a technology close to my heart, has been backported to JDK 8. Since we're talking about where to get your JVMs and versions, I thought I'd include a small table for which provider will be including JFR in what version of their JDK 8 builds.
 
@@ -79,8 +79,8 @@ As you probably know, JDK Flight Recorder, a technology close to my heart, has b
 
 Where to get JDK Flight Recorder
 
-Summary {#h2-3-summary}
------------------------
+Summary
+-------
 
 * Use the latest version of an LTS which is still supported, or the latest version
 * Use a supported build in production (even if you haven't bought support)

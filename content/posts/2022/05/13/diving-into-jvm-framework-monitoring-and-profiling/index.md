@@ -33,8 +33,8 @@ In this article we will take a closer look at how popular frameworks work under 
 
 Let us now together take a journey through examples and start off with examining the differences between monitoring and profiling.
 
-Building and Cloud Applications {#h2-0-building-and-cloud-applications}
------------------------------------------------------------------------
+Building and Cloud Applications
+-------------------------------
 
 For the purposes of this article a couple of JVM applications have been created. Let's first introduce all players name by name and the reason for their presence. The used technology stack and their interaction is very simple and transparent (Figure 1.)
 ![Image 1.: Considered scenario deployed into the Kubernetes cluster. Gatling node resides outside the cluster.](Image_1-700x355.png) **Figure 1.** : Simplified pods interactions during each of our tests
@@ -63,8 +63,8 @@ spring-boot-kotlin-cc8688d9d-rlt4d   1/1     Running   0          23s
 
 **Listing 1**.: deploy script for deploying infrastructure and monitoring pods
 
-Get Some Load {#h2-1-get-some-load}
------------------------------------
+Get Some Load
+-------------
 
 ![Image 3.: generated report by Gatling](Image_3-552x510.png) **Figure 3.**: generated report by Gatling
 
@@ -115,8 +115,8 @@ Http status code 200 in case the element was successfully stored and found insid
 
 Everything is going according to the plan so far. But is that really enough to state the application has a good throughput and all is good? Of course not, even when tests have passed and the application is able to take some load, we still do not know enough.What about ....(explain what else)
 
-Dive into Monitoring and Profiling {#h2-2-dive-into-monitoring-and-profiling}
------------------------------------------------------------------------------
+Dive into Monitoring and Profiling
+----------------------------------
 
 As we intend to provision example applications to the cluster it would be nice that endpoints remain running and are not continually restarted. An important aspect of become highly available.
 
@@ -179,8 +179,8 @@ In general it could prove to be very challenging with significant difficulties t
  </figcaption>
 </figure>
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 The article has explained and demonstrates the key difference between monitoring and profiling on real examples. Each of the methods has its place in the application life cycle and are important.
 
@@ -196,16 +196,16 @@ Such issues can be easily caused by external library usage in practice. I've dem
 
 <br />
 
-Used technologies {#h2-4-used-technologies}
--------------------------------------------
+Used technologies
+-----------------
 
 1. Quarkus, version: 2.8.2.Final, for Java and Kotlin
 2. Spring Boot, version: 2.6.4 for Java, 2.6.7 Kotlin
 3. Gatling, version: 3.7.6
 4. Docker application base image: eclipse-temurin:17-centos7
 
-References {#h2-5-references}
------------------------------
+References
+----------
 
 1. Gatling, <https://gatling.io/>
 2. Quarkus, <https://quarkus.io/>

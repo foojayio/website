@@ -26,8 +26,8 @@ When everything is set up, you'll probably want to expose some pods to the outsi
 
 Kubernetes provides different ways to do it: I'll describe them in this post.
 
-Setup {#h2-0-setup}
--------------------
+Setup
+-----
 
 For the sake of the demo, I'll be using [Kind](https://kind.sigs.k8s.io/):
 > kind is a tool for running local Kubernetes clusters using Docker container "nodes". kind was primarily designed for testing Kubernetes itself, but may be used for local development or CI.
@@ -74,8 +74,8 @@ alias k=kubectl
 ```
 
 
-No outside access by default {#h2-1-no-outside-access-by-default}
------------------------------------------------------------------
+No outside access by default
+----------------------------
 
 The default situation is to provide no access to the outside of the cluster.
 
@@ -121,8 +121,8 @@ hostname -I
 
 We cannot successfully ping this IP outside the cluster; it's an internal IP.
 
-Internal IPs are not stable {#h2-2-internal-ips-are-not-stable}
----------------------------------------------------------------
+Internal IPs are not stable
+---------------------------
 
 We created a deployment. Hence, if we delete the single pod, Kubernetes will detect it and create a new one, thanks to its self-healing capabilities.
 
@@ -174,8 +174,8 @@ From this point on, it's possible to access the pod *via* the service's `Cluster
 
 All is set for access inside the cluster. From the outside, it's not possible yet. So why shall we use `ClusteIP`? It's pretty darn useful for services that you don't want to expose to the outside world: databases, ElasticSearch nodes, Redis nodes, etc.
 
-Accessing a pod {#h2-3-accessing-a-pod}
----------------------------------------
+Accessing a pod
+---------------
 
 Accessing a pod from outside the cluster is when things become interesting.
 
@@ -328,8 +328,8 @@ while true; do curl localhost:30800; done
 
 The service balances the requests between all available pods.
 
-The load balancing abstraction {#h2-4-the-load-balancing-abstraction}
----------------------------------------------------------------------
+The load balancing abstraction
+------------------------------
 
 `NodePort` allows querying *any* cluster node. `LoadBalancer` is a facade over the cluster that does... load balancing. It's an abstract object provided by Kubernetes; each cloud provider implements it differently depending on its peculiarities though the behavior is the same.
 > LoadBalancer: Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
@@ -375,8 +375,8 @@ Unfortunately, as I mentioned above, on Mac (and Windows), Docker runs in a VM. 
 
 Depending on the cloud provider, `LoadBalancer` may provide additional proprietary capabilities.
 
-Ingress, when you need routing {#h2-5-ingress-when-you-need-routing}
---------------------------------------------------------------------
+Ingress, when you need routing
+------------------------------
 
 `Ingress` focuses on *routing* requests to services in the cluster.  
 
@@ -540,8 +540,8 @@ curl localhost:30800/right
 
 `/left`, it works as well.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I've described several ways to access pods outside the cluster: `NodePort` and `LoadBalancer` services and `Ingress`. For `Ingress`, you may have noticed that the `ApisixRoute` object is a proprietary CRD. To avoid it, Kubernetes aims to provide an abstraction; the CNCF is working on a [Gateway API](https://gateway-api.sigs.k8s.io/) project.
 

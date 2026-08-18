@@ -24,7 +24,7 @@ I wrote an article on [low latency microservices](https://vanilla-java.github.io
 
 Read this article and learn what we learned after five years of developing and supporting low latency microservices.
 
-### Separation of Concerns Gives Better Testability {#h3-0-separation-of-concerns-gives-better-testability}
+### Separation of Concerns Gives Better Testability
 
 Microservices repeatedly demonstrated that testing and debugging business components were much easier with simple, stand-alone components with clear contracts between microservices.
 
@@ -87,7 +87,7 @@ newOrder: {
 
 Building variations on tests to explore all the things which could go wrong and check how they are handled is easy.
 
-### What we Needed to Add {#h3-1-what-we-needed-to-add}
+### What we Needed to Add
 
 Beyond implementing what we envisioned five years ago, there were some features we discovered we needed to add.
 
@@ -137,7 +137,7 @@ Having a complete deterministic persisted record of every message made restarts 
 
 One key feature is ensuring upstream messages are replicated before downstream messages to simplify rebuilding the current state.
 
-### What became less important {#h3-2-what-became-less-important}
+### What became less important
 
 Some of the features we though would be vital five years ago, turned out to be not always required as clients used our technology in broader contexts.
 
@@ -163,7 +163,7 @@ It also wasn't possible to get high performance, high volume drives which could 
 
 If you are looking for such a drive you can test in a desktop, I suggest looking at the [Corsair MP600 Pro series](https://www.corsair.com/uk/en/Categories/Products/Storage/M-2-SSDs/MP600-PRO-XT/p/CSSD-F4000GBMP600PXT "Corsair MP600 Pro series")
 
-### Tip: Make your infrastructure as fast as your application needs {#h3-3-tip-make-your-infrastructure-as-fast-as-your-application-needs}
+### Tip: Make your infrastructure as fast as your application needs
 
 Over the last five years, the requirements for core systems have been more stringent, however as we need to integrate with existing system we have see the need to easily support systems which don't have the same requirements (and would rather it be easy and natural to work with)
 
@@ -175,7 +175,7 @@ For the more stringent systems, the latencies clients care about
 
 At the same time, our client need to integrate with existing systems, were all they need is for that to be as easy as possible.
 
-### Tip: Make the message format a configuration consideration {#h3-4-tip-make-the-message-format-a-configuration-consideration}
+### Tip: Make the message format a configuration consideration
 
 Five years ago I imagined we would need to support all sorts of formats however a relatively small number turned out to be really useful.
 
@@ -189,7 +189,7 @@ Five years ago I imagined we would need to support all sorts of formats however 
 
 We regularly use a single DTO in multiple formats depending on what is most appropriate without the need to copy data between DTO specialised for a given format.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 For the use case of our clients, I believe most of the concerns around replacing microservices with a monolith have been solved.
 

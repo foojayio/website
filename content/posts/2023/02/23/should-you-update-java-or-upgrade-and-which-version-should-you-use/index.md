@@ -21,8 +21,8 @@ related_posts:
 frozen: false
 ---
 
-*Update versus Upgrade: what's the difference and what are the consequences of your decision?* {#h2-0-update-versus-upgrade-what-s-the-difference-and-what-are-the-consequences-of-your-decision}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*Update versus Upgrade: what's the difference and what are the consequences of your decision?*
+----------------------------------------------------------------------------------------------
 
 Since 2018, every six months we get an upgrade to a new OpenJDK version, and this year versions 20 and 21 will be released.
 
@@ -40,8 +40,8 @@ So what's the difference between a Java upgrade and an update?
 
 ![](LTS-versus-STS-1024x410.jpg)
 
-Upgrades are New Versions of OpenJDK {#h2-1-upgrades-are-new-versions-of-openjdk}
----------------------------------------------------------------------------------
+Upgrades are New Versions of OpenJDK
+------------------------------------
 
 Until OpenJDK 9 in 2017, Oracle didn't have a fixed schedule of new releases.
 
@@ -65,8 +65,8 @@ In 2018 Oracle introduced a new strategy with a fixed six-months release cycle:
 
 
 
-Java Updates are Fixes and Improvements in Existing Versions {#h2-2-java-updates-are-fixes-and-improvements-in-existing-versions}
----------------------------------------------------------------------------------------------------------------------------------
+Java Updates are Fixes and Improvements in Existing Versions
+------------------------------------------------------------
 
 The release of a new version of OpenJDK is not an endpoint.
 
@@ -76,7 +76,7 @@ In some cases, there are even backports of new features introduced in higher ver
 
 For instance, TLS 1.3, which was released in 2020, was backported for Java 8, which was released in 2014.
 
-### **Common Vulnerabilities and Exposures (CVEs)** {#JavaMaintenance:Updatevs.Upgrade-Updates:SecurityandOtherFixesandImprovementsinExistingVersions}
+### **Common Vulnerabilities and Exposures (CVEs)**
 
 One of the most critical goals of these updates is to keep the Java environment safe.
 
@@ -103,8 +103,8 @@ The entire timeline of an OpenJDK version is available on [wiki.openjdk.org](htt
 * The timeline for OpenJDK 15: <https://wiki.openjdk.org/display/JDKUpdates/JDK+15u>
 * Message about "OpenJDK 15.0.8 released": <https://mail.openjdk.org/pipermail/jdk-updates-dev/2022-July/016055.html>
 
-CPU and PSU Releases {#JavaMaintenance:Updatevs.Upgrade-CommonVulnerabilitiesandExposures(CVEs)}
-------------------------------------------------------------------------------------------------
+CPU and PSU Releases
+--------------------
 
 Azul uses an approach with **Critical Patch Updates (CPU)** and **Patch Set Updates (PSU)** to organize the release of new versions.
 
@@ -128,14 +128,14 @@ These updates don't introduce significant new features; they keep the OpenJDK sa
 * PSUs should be used in your production system before the next CPU/PSU release, as fixes in a PSU will be present in the next CPU release.
 * Azul Zulu PSU Builds of OpenJDK get an even-numbered version (second digit), e.g., 17.**38**.
 
-Support Durations of OpenJDK {#h2-5-support-durations-of-openjdk}
------------------------------------------------------------------
+Support Durations of OpenJDK
+----------------------------
 
 OpenJDK versions are usually called LTS (Long-Term Supported) or non-LTS.
 
 However, non-LTS versions can be separated into MTS (Mid-Term Supported) and STS (Short-Term Supported).
 
-### LTS Versus MTS Versus STS {#h3-6-lts-versus-mts-versus-sts}
+### LTS Versus MTS Versus STS
 
 OpenJDK versions only get updates for a predefined time:
 
@@ -159,8 +159,8 @@ OpenJDK versions only get updates for a predefined time:
 
 For instance, Oracle dropped support for Java 7 after more than 11 years, but you can still get commercial support from Azul for five more years till 2027.
 
-Which Java Version Should You Use? {#h2-7-which-java-version-should-you-use}
-----------------------------------------------------------------------------
+Which Java Version Should You Use?
+----------------------------------
 
 Each new version of the OpenJDK brings new and experimental features, including speed and memory improvements.
 
@@ -182,8 +182,8 @@ There are several criteria for choosing which version:
 
 ![](option-a-b-c-1024x410.png)
 
-A Real-life Example of the Impact of Upgrading or Updating {#h-a-real-life-example-of-the-impact-of-upgrading-or-updating}
---------------------------------------------------------------------------------------------------------------------------
+A Real-life Example of the Impact of Upgrading or Updating
+----------------------------------------------------------
 
 Upgrading to a newer release (for instance, from one LTS version to another, like 11 to 17) requires a lot of testing to ensure your production environment keeps running as intended.
 
@@ -210,8 +210,8 @@ Andrew Brygin, Staff Software Engineer, Azul
 Let's take a look at an example based on the [October 2022 Release Notes of Azul Zulu Builds of OpenJDK](https://docs.azul.com/core/zulu-openjdk/release-notes/october-2022).
 ![CHART: Quarterly release update for Azul Zulu Builds of OpenJDK version 19, 17, 15 13, 11, 8, 7, and 6.](https://www.azul.com/wp-content/uploads/FY23-Q4-Oracle-Compete-Educate-Java-Maintenance-pt2-table.png) *Versions info for Java 11 till 19 in the Azul Zulu Builds of OpenJDK Release Notes of October 2022*
 
-The Shortest Path to Deploying CVE Fixes in Your Environment {#h2-9-the-shortest-path-to-deploying-cve-fixes-in-your-environment}
----------------------------------------------------------------------------------------------------------------------------------
+The Shortest Path to Deploying CVE Fixes in Your Environment
+------------------------------------------------------------
 
 * Your production system should already be running on the Zulu PSU release of July 2022, Zulu PSU 17.36, to include all preceding fixes and updates.
 * The release of October contains both a CPU and PSU package:
@@ -245,8 +245,8 @@ Sergey Grinev, QA Manager, Azul
 
 A complete overview of the support duration of the different versions, also comparing the commercial support offered by Oracle, Eclipse Temurin, and Azul is available in [the support roadmap of Azul](https://www.azul.com/products/azul-support-roadmap/).
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 Keeping your Java environment stable requires discerning which updates to install and then installing them appropriately.
 

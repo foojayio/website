@@ -41,8 +41,8 @@ In fact, over the past three years, there has been a [742% average](https://www.
 
 The opportunity is so great that attackers are even creating new ways to attack software pipelines through strategies like typosquatting and dependency confusion.
 
-Besides listening to soothing waterfall sounds... What can be done? {#h2-0-besides-listening-to-soothing-waterfall-sounds-what-can-be-done}
--------------------------------------------------------------------------------------------------------------------------------------------
+Besides listening to soothing waterfall sounds... What can be done?
+-------------------------------------------------------------------
 
 As it turns out, nearly all downloads of known vulnerable components hosted on Maven Central already have available fixes in newer versions ([95.5% to be exact](https://www.sonatype.com/state-of-the-software-supply-chain/open-source-dependency-management-trends-and-recommendations "95.5% to be exact")). That leaves much of the remaining responsibility on consuming projects to manage their own risk when using software libraries.
 
@@ -54,8 +54,8 @@ Another area that should also be considered is, if you have the luxury of choosi
 
 What does high quality mean, you ask? No two teams may have exactly the same criteria due to their specific use cases. Regarding security considerations, some crucial areas to consider include the presence of known vulnerabilities and the likelihood of the project having a vulnerability in the future.
 
-How likely is it for a project to contain a vulnerability? {#h2-1-how-likely-is-it-for-a-project-to-contain-a-vulnerability}
-----------------------------------------------------------------------------------------------------------------------------
+How likely is it for a project to contain a vulnerability?
+----------------------------------------------------------
 
 This is a question Maven Central attempts to provide insight into through the Sonatype Safety Rating. Currently, this experimental rating shows up on only about twenty-five thousand projects. It is 92% accurate in predicting past vulnerabilities on a project.
 
@@ -65,8 +65,8 @@ The rating ranges from 1 to 10, where 1 means a project is very likely to have f
 
 ***Screenshot from central.sonatype.com***{#caption-attachment-62930}
 
-What goes into this rating? {#h2-2-what-goes-into-this-rating}
---------------------------------------------------------------
+What goes into this rating?
+---------------------------
 
 The two most important inputs to the Sonatype Safety Rating are [OpenSSF Scorecard](https://securityscorecards.dev/ "OpenSSF Scorecard") and Mean Time To Update (MTTU).
 
@@ -78,8 +78,8 @@ When MTTU was introduced to the model, it increased to 92% accuracy. MTTU measur
 
 Machine learning nerds can read more details about the rating in the [State of the Software Supply Chain Report](https://www.sonatype.com/state-of-the-software-supply-chain/project-quality-metrics "State of the Software Supply Chain Report").
 
-In case you didn't know, code review is really important {#h2-3-in-case-you-didn-t-know-code-review-is-really-important}
-------------------------------------------------------------------------------------------------------------------------
+In case you didn't know, code review is really important
+--------------------------------------------------------
 
 A key conclusion that came out of analyzing the OpenSSF Scorecard data is that code review is the single most important thing projects can do to reduce the chance of future vulnerabilities.
 
@@ -89,8 +89,8 @@ A key conclusion that came out of analyzing the OpenSSF Scorecard data is that c
 
 While this is pretty standard practice in most open source projects I've participated in, it's still reassuring to the analytical mind that there is concrete evidence to know that the benefits of code review go even as far as to say that they can help prevent security vulnerabilities.
 
-Just the beginning {#h2-4-just-the-beginning}
----------------------------------------------
+Just the beginning
+------------------
 
 The Safety Rating is a good start. Ultimately it measures the *least* behaviour a project should exhibit to keep vulnerabilities at bay. It's certainly not a predictor of future trends.
 

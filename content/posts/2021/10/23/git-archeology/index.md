@@ -35,8 +35,8 @@ Most people will start with using "git blame" (or the respective functionality w
 
 We need to carefully remove layer by layer of sand and dirt that has been swept over the real changes to unearth them.
 
-Moving Backwards In Time {#h2-0-moving-backwards-in-time}
----------------------------------------------------------
+Moving Backwards In Time
+------------------------
 
 A simple `git blame` shows us only the most recent changes. Assuming it's a simple move within the file or a whitespace fix, we can ignore those using the flags that `git blame` offer us:
 
@@ -65,8 +65,8 @@ In case you're using Visual Studio Code, the excellent "GitLense" extension offe
 
 ![Visual Studio Code Show Previous Commit](gitlense_previous.png)
 
-Moving Forward {#h2-1-moving-forward}
--------------------------------------
+Moving Forward
+--------------
 
 Depending on what we're looking for, we may not want to uncover commit by commit until we find the initial commit that introduced something. Let's say that we're working with a customer who sees a specific error message on an older version of our product.
 
@@ -86,8 +86,8 @@ git log -G"error.*"
 ```
 
 
-Skipping History {#h2-2-skipping-history}
------------------------------------------
+Skipping History
+----------------
 
 Whether you move forward or backward through history, there will always be the "big bang" refactorings that get in your way. Be it that your team decided to agree on certain line endings, a large split of the codebase or a rename to align the codebase with the [ubiquitous language](https://www.jamesshore.com/v2/books/aoad1/ubiquitous_language).
 
@@ -167,8 +167,8 @@ For example, IntelliJ IDEA shows the "Important Change" when enabling annotation
 
 ![IntelliJ Ignoring Changes](blame_ignore_intellij.png)
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Different problems require different approaches. Whether you're looking for an error message that is long gone from the `main` branch or try to peel back the layers for some new code, git offers a tremendous amount of tools for your needs.
 

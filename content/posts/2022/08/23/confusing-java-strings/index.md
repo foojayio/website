@@ -25,8 +25,8 @@ I would also like to give you a few suggestions to avoid issues with them.
 
 I also prepared a GitHub repo for you where you can find some code that you can use to try the examples out on your own: [github.com/jonatan-ivanov/java-strings-demo](https://github.com/jonatan-ivanov/java-strings-demo).
 
-Quiz {#h2-0-quiz}
------------------
+Quiz
+----
 
 In order to demonstrate this, let me invite you for a little quiz:  
 
@@ -41,35 +41,35 @@ What do you think, what is the `length` of the following Java Strings?
 
 By now, you might get why "Confusing Java Strings" is the title of this article. In the rest of the article, I'm going to explain why you might got unexpected results in the quiz and give you a few suggestions to avoid issues.
 
-Facts {#h2-1-facts}
--------------------
+Facts
+-----
 
 As you might know, Java uses UTF-16 to encode Unicode text. Unicode is a standard to represent text while UTF-16 is a way to encode Unicode characters. That's why the size of the Java `char` type is 2 bytes (2x8 = 16 bits).
 
-Terminology {#h2-2-terminology}
--------------------------------
+Terminology
+-----------
 
 There are two important Unicode terms here that you need to know about: ***Code Point*** and ***Code Unit***.
 
 * *Code Point* is a unique integer value that identifies a character
 * *Code Unit* is a bit sequence used to encode a character (*Code Point*)
 
-UTF-16 {#h2-3-utf-16}
----------------------
+UTF-16
+------
 
 As I mentioned above, UTF-16 is a way to encode Unicode characters. Not the only way but that is what Java uses.
 
-### Code Points {#h3-4-code-points}
+### Code Points
 
 Unicode *Code Points* are logically divided into 17 planes (groups). The first plane, the Basic Multilingual Plane (BMP) contains the "classic" characters (from U+0000 to U+FFFF). The other planes contain the "supplementary" characters (from U+10000 to U+10FFFF).
 
-### Code Units {#h3-5-code-units}
+### Code Units
 
 Characters (*Code Points* ) from the first plane are encoded in one 16-bit *Code Unit* with the same value. Supplementary characters (*Code Points* ) are encoded in two Code Units (see [Wikipedia - UTF-16](http://en.wikipedia.org/wiki/UTF-16) for more information).
 
 The key thing here is that **one or more *Code Units* may be required to encode a *Code Point* (character).**
 
-### Example {#h3-6-example}
+### Example
 
 Character: A  
 
@@ -85,8 +85,8 @@ UTF-16 Code Unit(s): `\uD835\uDD38`
 
 As you can see here **A is encoded by one *Code Unit* while 𝔸 is encoded by two.**
 
-Java String::length {#h2-7-java-string-length}
-----------------------------------------------
+Java String::length
+-------------------
 
 Let's take a look at the Javadoc of the [length()](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html#length()) method of the `String` class; it says the followings:
 > `public int length()`  
@@ -95,7 +95,7 @@ Let's take a look at the Javadoc of the [length()](https://docs.oracle.com/en/ja
 
 So if you have **one** supplementary character that consists of **two** *Code Units* , the `length` of that single character is **two** . Let that sink in: this means that **the `char` type (as well as the `Character` class) in Java is not what we usually mean by a *character***.
 
-### Code Points vs. Code Units Example {#h3-8-code-points-vs-code-units-example}
+### Code Points vs. Code Units Example
 
 If we go back to our quiz, we can explain some of the anomalies:
 
@@ -121,7 +121,7 @@ But 𝕒, 𝕓, and 𝕔 are supplementary characters:
 ```
 
 
-### \~Solution {#h3-9-solution}
+### \~Solution
 
 If you really need to, you can count the *Code Points* to get the number of characters, not the number of *Code Units*:
 
@@ -131,8 +131,8 @@ str.codePointCount(0, str.length()) // evaluates to 3
 ```
 
 
-Consequences {#h2-10-consequences}
-----------------------------------
+Consequences
+------------
 
 The rest of the quiz is a bit more tricky but before I go there, let me mention a couple of things that are implied from the fact that Java is using UTF-16 under the hood; let me use the `"𝔸"` String as an example:
 
@@ -143,8 +143,8 @@ The rest of the quiz is a bit more tricky but before I go there, let me mention 
 * Therefore, most of the character manipulation code we ever wrote is probably broken 🙂
 * And you probably do not want to do any character manipulation
 
-Java String::reverse {#h2-11-java-string-reverse}
--------------------------------------------------
+Java String::reverse
+--------------------
 
 In Java, the `String` class does not have a `reverse` method so sometimes you can bump into methods like this:
 
@@ -184,13 +184,13 @@ Can you tell why we got this result?
 
 (Hint: look into the Code Units of `𝕒𝕓𝕔` above and check what you get if you read them backwards.)
 
-### Solution {#h3-12-solution}
+### Solution
 
 Usually, not writing code to solve problems is a good idea:  
 `new StringBuilder(original).reverse().toString()`.
 
-Emojis {#emojis}
-----------------
+Emojis
+------
 
 The first emoji sequence (👩❤☕) in the quiz does not have anything tricky that you haven't known by now: the first emoji in it consists of two *Code Units* the other two consist of 1-1:
 
@@ -231,8 +231,8 @@ U+1F375       // 1 Code Point
 
 So the `length` of 👩‍💻❤️🍵 is 👩‍💻(5) + ❤️(2) + 🍵(2) = 9.
 
-Java String::substring {#h2-14-java-string-substring}
------------------------------------------------------
+Java String::substring
+----------------------
 
 If `substring` cuts into the "wrong" place, we might get an invalid character or a new (different) character or both:
 
@@ -247,7 +247,7 @@ Can you tell why this happened?
 
 (Hint: look into the Code Units [above](https://foojay.io/today/confusing-java-strings#emojis).)
 
-Takeaway {#h2-15-takeaway}
---------------------------
+Takeaway
+--------
 
 As you have seen above, Strings are trickier than they seem first so try to avoid String manipulation as much as you can. 🙂

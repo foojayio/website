@@ -26,8 +26,8 @@ Writing scalable network code is always difficult. Synchronous APIs can't be sca
 
 Java introduced Project Loom, creating a new type of thread called virtual threads. This API became generally available in Java 21. [JEP 353](https://openjdk.org/jeps/353) and [JEP 373](https://openjdk.org/jeps/373) reimplemented the synchronous Java networking APIs in preparation for Loom. When executed in a virtual thread, I/O operations that don't complete immediately cause the virtual thread to "park". The virtual thread is reactivated when the I/O operation is ready. This allows us to write synchronous code and avoid I/O limitations.
 
-What is synchronous coding vs asynchronous coding? {#h2-0-what-is-synchronous-coding-vs-asynchronous-coding}
-------------------------------------------------------------------------------------------------------------
+What is synchronous coding vs asynchronous coding?
+--------------------------------------------------
 
 To more deeply understand what this means for developers, let's back up a little and recap. Synchronous coding is a style where the developer writes code that defines a sequence of commands for the computer to perform, which is much easier to reason about and debug. It's about describing how things should be done. The control flow is explicit and step-by-step, often using loops, conditionals, and other control structures. State is manually managed and updated by the developer. The state is usually local and changes are made imperatively.
 
@@ -48,8 +48,8 @@ Of course, the choice between imperative and reactive programming depends on the
 
 Virtual threads still have some limitations that may result in "pinning" virtual threads (i.e. making virtual threads wait as platform threads would). A JVM virtual thread gets pinned when it encounters a method that does not support the unmounting and mounting process, for instance: file IO operation or JNI (Java Native Interface) calls to the underlying operating system. The [MariaDB Java connector 3.3.0](https://mariadb.com/kb/en/mariadb-connector-j-3-3-0-release-notes/) has been improved in order to avoid those I/O cases, and therefore, virtual thread compatibility.
 
-Benchmark {#h2-1-benchmark}
----------------------------
+Benchmark
+---------
 
 The concept is nice, but what is the impact in reality? Let's do a benchmark test to find out.
 
@@ -120,8 +120,8 @@ I've run the benchmark using 16 connections with the MySQL connector too, for th
 
 Virtual threads are incredible but still have some limitations. For example there's a limitation named 'pinning'---making a virtual thread blocking like a platform thread (tip: pinning can be logged using the Java option -Djdk.tracePinnedThreads=full). At the time of writing, the MySQL connector still makes intensive use of synchronized methods, making it susceptible to issues related to pinning. This explains the difference between the performance of the MariaDB connector and MySQL's connector.
 
-R2DBC comparison {#h2-2-r2dbc-comparison}
------------------------------------------
+R2DBC comparison
+----------------
 
 While at it, here is the benchmark achieved comparing a platform/virtual threads with JDBC connector and [MariaDB R2DBC connector](https://mariadb.com/downloads/connectors/connectors-data-access/r2dbc-connector). (Results differ to the previous one, because this was run on 2 others machines with different ping)
 
@@ -129,8 +129,8 @@ While at it, here is the benchmark achieved comparing a platform/virtual threads
 
 R2DBC is a non-blocking connector based on specifications that differ from JDBC. This benchmark confirms that R2DBC presents a huge improvement compared to traditional threads. The main advantage of R2DBC is that it can already be used with frameworks like Spring Data R2DBC, but in terms of performance, virtual threads dethrone R2DBC.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Virtual threads promise better performance, specifically around I/O limitations. Goal achieved.
 
@@ -138,8 +138,8 @@ R2DBC is still in competition for now, because lots of frameworks still use sync
 
 Another point is correct pool sizing. This has always been a pain to configure. At some point, using more connections only results in less operations per second due to context switching. Using virtual threads changes this for the better.
 
-Next Steps {#h2-4-next-steps}
------------------------------
+Next Steps
+----------
 
 * Download the latest Java connector, plus MariaDB Community Server software, Docker images, and more from [mariadb.com/downloads](https://mariadb.com/downloads/)
 * Need help or want to connect? MariaDB is here to help with [Remote DBA](https://mariadb.com/services/remote-dba/), [Expert Technical Support](https://mariadb.com/services/technical-support-services/), [Migration](https://mariadb.com/services/migration-practice/), [Training](https://mariadb.com/services/training/), [Consulting](https://mariadb.com/services/consulting/) and [more](https://mariadb.com/services/).

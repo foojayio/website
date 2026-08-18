@@ -30,8 +30,8 @@ Vertical scaling is not a replacement for horizontal scaling. It is a complement
 In this post, we focus on a common vertical scaling challenge: **Java warm-up**.
 ![](prime-kedify-jvm-warm-up.avif)
 
-Why JVM Warmup and Steady State Should Not Share the Same Resource Profile {#h2-0-why-jvm-warmup-and-steady-state-should-not-share-the-same-resource-profile}
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Why JVM Warmup and Steady State Should Not Share the Same Resource Profile
+--------------------------------------------------------------------------
 
 One of the key concepts of a JVM, so called Just-In-Time (JIT) compilation, is the ability to continuously optimize the source code based on the actual data being processed and code paths being executed. The benefit of this approach, compared to static code compilation in programming languages like C/C++, is that it ultimately yields higher peak performance, or from the opposite angle, needs less resources to handle the same load.
 
@@ -64,8 +64,8 @@ Azul Zing, the JVM at the heart of Azul Prime, is the first JVM on the market to
 >
 > Combined with the optional Optimizer Hub service (Cloud Native Compiler offloads JIT compilation to a dedicated service; ReadyNow Orchestrator manages profiles across an entire JVM fleet), Azul Prime targets two complementary goals: better, more predictable performance for latency-sensitive Java workloads (financial trading, e-commerce, real-time analytics, Kafka pipelines) and meaningful infrastructure savings on Java workloads more generally, since the same load runs on materially fewer cores.
 
-PodResourceProfiles: Vertical Scaling Without Restarts {#h2-1-podresourceprofiles-vertical-scaling-without-restarts}
---------------------------------------------------------------------------------------------------------------------
+PodResourceProfiles: Vertical Scaling Without Restarts
+------------------------------------------------------
 
 Kubernetes introduced [In Place Pod Resource Resize](https://kubernetes.io/blog/2023/05/12/in-place-pod-resize-alpha/) in v1.27, enabled by default since v1.33. This allows CPU and memory requests and limits to be updated for a running container without restarting the pod.
 
@@ -90,8 +90,8 @@ This unlocks a lifecycle-aware vertical scaling pattern: allocate extra CPU only
 
 Note: While warm-up resizing is a common use case, PRPs can also be triggered by other lifecycle or [demand signals](https://kedify.io/resources/blog/shrink-pods-when-traffic-sleeps), enabling vertical scale-up even when horizontal scaling is con=strained or replica count cannot increase. If we want to achieve fast vertical scaling based on the actual usage and not predefined triggers, we can leverage [PodResourceAutoscalers](https://kedify.io/resources/blog/pod-resource-autoscaler-fast-vertical-scaling) and even combine them with PRPs.
 
-Measuring JVM Warm-up Using Azul Prime JMX Metrics {#h2-2-measuring-jvm-warm-up-using-azul-prime-jmx-metrics}
--------------------------------------------------------------------------------------------------------------
+Measuring JVM Warm-up Using Azul Prime JMX Metrics
+--------------------------------------------------
 
 To resize resources correctly, we need a real signal that warm-up is complete.
 
@@ -213,8 +213,8 @@ kubectl get po -lapp=heavy-workload \
 
 ![](https://azul.imgix.net/wp-content/uploads/Image-4-2-scaled.png?auto=format&crop=faces,entropy&fit=max&q=80&w=739&s=07e91025e7e8553103fdb5a66db5fd4e)
 
-Metrics: What This Achieves {#h2-3-metrics-what-this-achieves}
---------------------------------------------------------------
+Metrics: What This Achieves
+---------------------------
 
 PodResourceProfiles let you treat JVM warm-up as a short lifecycle phase that deserves temporary compute, and then automatically return to a lean steady state footprint.
 
@@ -240,8 +240,8 @@ A typical transition looks like:
 
 The exact numbers depend on workload behavior, but the operational pattern is consistent: fast warm-up, readiness-gated traffic, and lean steady state sizing.
 
-How Vertical and Horizontal Scaling Work Together {#h2-4-how-vertical-and-horizontal-scaling-work-together}
------------------------------------------------------------------------------------------------------------
+How Vertical and Horizontal Scaling Work Together
+-------------------------------------------------
 
 PodResourceProfiles solve the per container sizing problem, while horizontal autoscaling solves the replica count problem. They work best together.
 
@@ -258,8 +258,8 @@ In practice, the flow looks like this:
 
 ![](https://azul.imgix.net/wp-content/uploads/Image-5-1-scaled.png?auto=format&crop=faces,entropy&fit=max&q=80&w=739&s=5202a8c01a0ddbd87a0da47a64ef6a14)
 
-Try It Yourself {#h2-5-try-it-yourself}
----------------------------------------
+Try It Yourself
+---------------
 
 To experiment with this approach:
 
@@ -271,8 +271,8 @@ To experiment with this approach:
 
 This gives you a declarative way to treat warm-up as a first class lifecycle phase rather than a permanent sizing decision.
 
-Closing Thoughts {#h2-6-closing-thoughts}
------------------------------------------
+Closing Thoughts
+----------------
 
 Java warm-up is a distinct phase with distinct CPU requirements. Treating pod resources as static forces teams into a tradeoff between overprovisioning and degraded early performance.
 

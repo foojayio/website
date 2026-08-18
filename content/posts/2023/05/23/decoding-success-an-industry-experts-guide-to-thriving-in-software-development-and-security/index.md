@@ -27,8 +27,8 @@ In this enlightening discussion, we speak with Erik Costlow, a Senior Director o
 
 With a unique perspective and wealth of experience, Erik's insights are sure to be invaluable for anyone seeking to navigate the complex landscape of the software industry.
 
-Profile: {#h2-0-profile}
-------------------------
+Profile:
+--------
 
 LinkedIn: 📇 <https://www.linkedin.com/in/costlow/>   
 
@@ -38,8 +38,8 @@ GitHub: 🐙 <https://github.com/erikcostlow>
 
 Mastodon: 🐘 <https://mastodon.social/@costlow>
 
-Key takeaways: {#h2-1-key-takeaways}
-------------------------------------
+Key takeaways:
+--------------
 
 1. **The transition from Engineering to Product Management**: Erik highlighted the importance of communication skills and understanding of business needs for making this shift. Practicing presentations, teaching material alone, and focusing on understanding why and what about the product can help in this transition.
 2. **Challenges in Software Development:** Erik pointed out two key challenges - prioritization and managing expectations. Both are key for an engineer to transition into a more senior role or into product management.
@@ -50,7 +50,7 @@ Key takeaways: {#h2-1-key-takeaways}
 
 
 
-> ### Fun fact: Erik used to perform in a circus, riding a three-wheeled unicycle while juggling fire. The wheels were vertical. {#h3-2-fun-fact-erik-used-to-perform-in-a-circus-riding-a-three-wheeled-unicycle-while-juggling-fire-the-wheels-were-vertical}
+> ### Fun fact: Erik used to perform in a circus, riding a three-wheeled unicycle while juggling fire. The wheels were vertical.
 >
 
 
@@ -146,8 +146,8 @@ One story where I can be a little vague is that a while ago, I had a service whe
 
 
 
-Conclusion: {#h2-3-conclusion}
-------------------------------
+Conclusion:
+-----------
 
 From our enriching conversation with Erik, we glean that the software industry is as exciting as it is complex. Whether it's mastering the transition from engineering to product management, understanding the challenges and trends in software development, or getting to grips with the nuances of software security, the right approach and mindset can make all the difference. As technology continues to evolve and shape our world, it's essential to keep learning, remain adaptable, and always remember to view our work from the perspective of 'why', 'what', and 'who'. With these insights in hand, we can all navigate the software industry with a little more confidence and clarity.
 

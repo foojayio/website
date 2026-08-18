@@ -27,12 +27,12 @@ The problem is that this conversation is often driven by dogma rather than engin
 
 We start from what IEEE 754 actually does under the hood, move through `BigDecimal` pitfalls and fixed-point arithmetic, tour the libraries that solve these problems for you, and end with the production traps (serialization, testing, concurrency) that can quietly undo a good numeric choice. Sections include working code.
 
-The floating-point problem {#h2-0-the-floating-point-problem}
--------------------------------------------------------------
+The floating-point problem
+--------------------------
 
 Most floating-point surprises trace back to a single fact: Java's `float` and `double` use binary arithmetic, not decimal. Understanding why that matters, and when it doesn't, is the foundation for every choice in this post.
 
-### IEEE 754 {#h3-1-ieee-754}
+### IEEE 754
 
 `float` and `double` in Java follow the IEEE 754 standard: `float` uses binary32, `double` uses binary64. The keyword here is *binary*. Values are stored as a signed bit, an exponent, and a mantissa, all in base 2. This means that many numbers that look trivially simple in base 10 have no exact representation in base 2.
 
@@ -56,7 +56,7 @@ This does **not** mean that `double` is broken. It means that the decimal litera
 
 `double` is fast, compact, and purpose-built for numerical computation, but it is inherently approximate in the decimal sense. That is not a defect; it is a design trade-off, and in many domains it is exactly the right one.
 
-### Naive equality checks {#h3-2-naive-equality-checks}
+### Naive equality checks
 
 The most common floating-point bug is not imprecision itself but testing equality with `==`.
 
@@ -89,7 +89,7 @@ boolean nearlyEqualRelative(double a, double b, double relTol) {
 
 The choice between absolute and relative tolerance depends on your data. Scientific applications often use relative tolerance; financial rounding at display boundaries often uses a fixed number of decimal places. The point is: **understand your comparison strategy before you write a single `if`.**
 
-### `strictfp`, the x87 FPU, and Java 17's silent fix {#h3-3-strictfp-the-x87-fpu-and-java-17-s-silent-fix}
+### `strictfp`, the x87 FPU, and Java 17's silent fix
 
 Java 1.0 enforced strict IEEE 754 semantics, but Intel's x87 FPU computed intermediates in 80-bit extended precision, making strict mode slow. Java 1.2 introduced a compromise:
 
@@ -102,7 +102,7 @@ Almost nobody used `strictfp`, so floating-point results could differ across pla
 
 The practical implication: **on Java 17+, floating-point arithmetic is fully reproducible across platforms.** If you still see `strictfp` in legacy code, it can safely be removed.
 
-### The `NaN` and `-0.0` landmines {#h3-4-the-nan-and-0-0-landmines}
+### The `NaN` and `-0.0` landmines
 
 IEEE 754 defines two special values that break common assumptions about how numbers behave.
 
@@ -137,8 +137,8 @@ System.out.println(1.0 / -0.0);               // -Infinity       // 3
 
 The practical rule: **if your `double` values can be `NaN` or `-0.0`, test for them explicitly before using the values in collections, comparisons, or as divisors.**
 
-When `double` is the right choice {#h2-5-when-double-is-the-right-choice}
--------------------------------------------------------------------------
+When `double` is the right choice
+---------------------------------
 
 Many developers reach for `BigDecimal` "just to be safe," even when approximation is perfectly acceptable. `double` is an excellent choice when:
 
@@ -170,12 +170,12 @@ double average(double[] values) {
 
 For a dozen values, this works perfectly. But what happens when you sum ten thousand, or ten million? Each addition introduces a rounding error of a few ULPs, and those errors accumulate. Over long sequences, the final result can drift significantly from the mathematically exact answer, not because `double` is wrong, but because naive summation is *numerically unstable* . The good news: you do not need to abandon `double` to fix this. The next section presents a toolkit of well-known algorithms that keep your computation in `double` while dramatically reducing accumulated error.
 
-Reducing floating-point errors {#h2-6-reducing-floating-point-errors}
----------------------------------------------------------------------
+Reducing floating-point errors
+------------------------------
 
 The algorithms below all work on plain `double`, with no `BigDecimal` needed. The choice between them depends on your trade-off between accuracy, performance, and implementation complexity.
 
-### Kahan Compensated Summation {#h3-7-kahan-compensated-summation}
+### Kahan Compensated Summation
 
 The most famous technique. When you add a small number to a large running sum, the low-order bits of the small number get lost. Kahan summation keeps a separate *compensation* variable that tracks the accumulated rounding error and feeds it back into the next addition.
 
@@ -199,7 +199,7 @@ double kahanSum(double[] values) {
 
 The error bound is essentially independent of *n* , versus O(*n*) for naive summation. However, Kahan has a weakness: if the next term exceeds the running sum, the compensation logic fails. Neumaier's variant fixes this.
 
-### Neumaier's improved Kahan-Babuška algorithm {#h3-8-neumaier-s-improved-kahan-babu-ka-algorithm}
+### Neumaier's improved Kahan-Babuška algorithm
 
 Neumaier (1974) introduced a variant that handles the case where the new term is larger than the running sum, by checking the relative magnitudes and adjusting the compensation accordingly:
 
@@ -227,11 +227,11 @@ double neumaierSum(double[] values) {
 
 The practical difference: for the sequence `[1.0, 1e100, 1.0, -1e100]`, Kahan summation yields `0.0`, while Neumaier correctly returns `2.0`. This matters in real workloads where your data has values at very different scales: financial portfolios mixing micro-cent adjustments with large transfers, or scientific datasets spanning orders of magnitude.
 
-### Pairwise summation {#h3-9-pairwise-summation}
+### Pairwise summation
 
 Pairwise, or cascade, summation takes a completely different approach: recursively split the array in half, sum each half, then add the two results. The error grows as O(log *n* ), not as good as Kahan's O(1), but very close in practice, and with a crucial advantage: it requires the same number of arithmetic operations as naive summation and is naturally parallelizable. The implementation is a simple divide-and-conquer recursion with a small base case (typically 16-32 elements summed naively) to amortize recursion overhead. Pairwise summation is the default algorithm in NumPy and Julia for their `sum` functions, and is used internally in many FFT implementations.
 
-### Fused multiply-add {#h3-10-fused-multiply-add}
+### Fused multiply-add
 
 Since Java 9, `Math.fma(a, b, c)` computes `a * b + c` with a single rounding step instead of two. This corresponds to the IEEE 754-2008 `fusedMultiplyAdd` operation. In a normal `a * b + c`, the multiplication rounds once and the addition rounds again, losing precision at each step. FMA computes the exact product internally and only rounds once when adding `c`.
 
@@ -256,8 +256,8 @@ FMA is particularly valuable for dot products, polynomial evaluation (Horner's m
 | [Klein second-order](https://en.wikipedia.org/wiki/Kahan_summation_algorithm#Precision) | O(1), even tighter | \~6x          | No                           | Maximum accuracy               |
 | Apache Commons `Sum` (Sum2S)                                                            | O(1)               | \~4x          | No                           | Production Java code           |
 
-What `BigDecimal` actually solves {#h2-11-what-bigdecimal-actually-solves}
---------------------------------------------------------------------------
+What `BigDecimal` actually solves
+---------------------------------
 
 `BigDecimal` is not "more precise" in some absolute sense. It is **decimal** , **arbitrary-precision** , **controllable** , and **auditable**. Those four properties are what matter.
 
@@ -270,7 +270,7 @@ unscaled value = 1999, scale = 2  →  19.99
 
 This means that `19.99` is stored as exactly `19.99`, not as the nearest binary approximation. Every arithmetic operation preserves decimal semantics, and you control the rounding mode explicitly at every step.
 
-### Constructing `BigDecimal` from `double` {#h3-12-constructing-bigdecimal-from-double}
+### Constructing `BigDecimal` from `double`
 
 This is one of the most frequently encountered `BigDecimal` bugs:
 
@@ -289,7 +289,7 @@ BigDecimal.valueOf(0.1);   // also correct: uses Double.toString internally
 ```
 
 
-### Controlled Rounding {#h3-13-controlled-rounding}
+### Controlled Rounding
 
 Where `BigDecimal` truly shines is in explicit rounding control. In tax, invoicing, and accounting, the rounding rule is not a suggestion; it is a legal requirement.
 
@@ -312,7 +312,7 @@ BigDecimal result = a.divide(b, 2, RoundingMode.HALF_UP);       // 1
 
 Without specifying scale and rounding mode, `divide` will throw `ArithmeticException` if the result is non-terminating. This is by design: `BigDecimal` refuses to silently lose precision. You must be explicit about how many decimal places you want and how to round.
 
-### The immutability trap {#h3-14-the-immutability-trap}
+### The immutability trap
 
 This may be the single most common `BigDecimal` bug in production code:
 
@@ -327,7 +327,7 @@ System.out.println(amount);                 // still 19.995
 
 `BigDecimal` is immutable. Every method (`setScale`, `add`, `multiply`, `divide`) returns a **new** instance. The original is never modified. Static analysis tools like SonarQube flag this (rule `S2201`), but it still slips through code reviews with surprising frequency. The fix is trivial: `amount = amount.setScale(2, RoundingMode.HALF_UP);`.
 
-### The `equals()` vs `compareTo()` Trap {#h3-15-the-equals-vs-compareto-trap}
+### The `equals()` vs `compareTo()` Trap
 
 This bug appears constantly in enterprise code:
 
@@ -345,7 +345,7 @@ System.out.println(a.compareTo(b));   // 0                       // 2
 
 `equals()` compares both value **and** scale. Since `2.0` has scale 1 and `2.00` has scale 2, they are not equal according to `equals()`. This has consequences everywhere: `HashMap` keys, `Set` membership, assertions in tests. The rule is simple: **use `compareTo() == 0` for numerical equality of `BigDecimal` values.** If you must use `BigDecimal` as a `Map` key, normalize with `stripTrailingZeros()` first, but be aware that in older Java versions (prior to JDK 8u), `stripTrailingZeros()` on zero values had inconsistent behavior.
 
-### Performance Ccost {#h3-16-performance-ccost}
+### Performance Ccost
 
 `BigDecimal` operations allocate objects on the heap, perform arbitrary-precision integer arithmetic internally, and manage scale and precision metadata at every step. Compared to `double`, which compiles down to a single FPU instruction, the overhead is enormous. Benchmarks published by Peter Lawrey (Vanilla Java / Chronicle Software) have shown throughput differences of 100x or more for tight arithmetic loops.
 > **Note:** Though the work is regularly cited on the Web, I couldn't find the original research.
@@ -373,7 +373,7 @@ public void bigDecimalCalc(Blackhole bh) {
 
 1. `Blackhole.consume()` prevents the JIT from eliminating dead code; without it, you benchmark nothing
 
-### Fast `double` rounding {#h3-17-fast-double-rounding}
+### Fast `double` rounding
 
 Peter Lawrey's blog (Vanilla Java / Chronicle Software) demonstrated that rounding a `double` to a fixed number of decimal places can be done at very different speeds depending on the technique. His original benchmark measured three approaches for rounding to two decimal places: cast-based rounding (\~6 ns), `Math.round()`-based (\~17 ns), and `BigDecimal.setScale()` (\~932 ns).
 
@@ -411,8 +411,8 @@ This works correctly for both positive and negative values, within the safe inte
 
 Use `BigDecimal.valueOf(value)` and not `new BigDecimal(value)` in the BigDecimal approach to avoid capturing the inexact binary representation.
 
-Fixed-point arithmetic {#h2-18-fixed-point-arithmetic}
-------------------------------------------------------
+Fixed-point arithmetic
+----------------------
 
 If even the fast rounding tricks above feel like too much overhead, there is a more radical alternative. Many high-performance financial systems do not use `BigDecimal` at all. They use **fixed-point arithmetic on `long`**.
 
@@ -454,12 +454,12 @@ static long applyVat(long netCents, long vatBasisPoints) {
 
 Everything stays in integer arithmetic. This is the pattern used by many low-latency trading systems and payment processors.
 
-Real-world libraries and frameworks {#h2-19-real-world-libraries-and-frameworks}
---------------------------------------------------------------------------------
+Real-world libraries and frameworks
+-----------------------------------
 
 The Java ecosystem offers several mature libraries for numeric precision. Each occupies a different niche. Here is a practical guide.
 
-### JavaMoney and Moneta {#h3-20-javamoney-and-moneta}
+### JavaMoney and Moneta
 
 [JSR 354](https://javamoney.github.io/) defines a standard API for monetary amounts and currencies in Java, aka JavaMoney. The reference implementation, **Moneta**, provides two concrete types:
 
@@ -470,7 +470,7 @@ This mirrors exactly the trade-off we have been discussing. The JSR 354 API (`Mo
 
 **Use case:** Enterprise applications that need a standardized money type with currency awareness, formatting, and conversion. Ideal when you want a well-defined abstraction layer and do not need to squeeze out the last nanosecond.
 
-### Joda-Money {#h3-21-joda-money}
+### Joda-Money
 
 Created by Stephen Colebourne, author of Joda-Time and `java.time`, [Joda-Money](https://www.joda.org/joda-money/) is a deliberately simpler alternative to JSR 354. It provides `Money`, a fixed-scale class, backed by `BigDecimal`, and `BigMoney`, of arbitrary scale. There's no `FastMoney` equivalent; the focus is a clean, minimal API for applications where money is a secondary concern (e-commerce, SaaS billing, reporting).
 
@@ -486,7 +486,7 @@ Money vat   = total.multipliedBy(0.22, RoundingMode.HALF_UP);
 
 **Use case:** Simpler alternative to JSR 354 when you need a robust money type but do not require the full JSR API surface (conversion providers, custom currencies, monetary queries). The 2.x branch requires Java 21+; the 1.x branch works with Java 8+.
 
-### decimal4j {#h3-22-decimal4j}
+### decimal4j
 
 [decimal4j](https://github.com/tools4j/decimal4j) implements fixed-point decimal arithmetic on `long`, with a configurable scale of up to 18 decimal places, pluggable rounding modes, and a zero-garbage API designed for low-latency systems. It offers both immutable and mutable decimal types, and the scale is encoded in the type itself (*e.g.* , `Decimal2f` for 2 decimal places).
 
@@ -504,7 +504,7 @@ The library also provides `DoubleRounder`, a utility for fast rounding of `doubl
 
 **Use case:** Low-latency systems where you need fixed-point arithmetic with a clean API and do not want to manage raw `long` arithmetic yourself. Trading systems, pricing engines, financial microservices.
 
-### Apache Commons Numbers {#h3-23-apache-commons-numbers}
+### Apache Commons Numbers
 
 [commons-numbers-core](https://commons.apache.org/proper/commons-numbers/) is not a money library; it is a numerical precision toolkit. Its key components for our purposes are:
 
@@ -529,7 +529,7 @@ boolean eq2 = Precision.equals(a, b, 1e-10);                    // 2
 
 **Use case:** Any application that does floating-point computation and needs reliable comparison, compensated summation, or compensated dot products. Scientific computing, analytics, ML pipelines, numerical simulations.
 
-### Library Comparison {#h3-24-library-comparison}
+### Library Comparison
 
 The table also includes [ta4j](https://github.com/ta4j/ta4j), Technical Analysis for Java, whose `Num` interface abstracts over `DecimalNum` (`BigDecimal`) and `DoubleNum` (`double`), letting you swap precision for performance without changing business logic, the same pattern Moneta uses with `Money` vs `FastMoney`.
 
@@ -543,8 +543,8 @@ The table also includes [ta4j](https://github.com/ta4j/ta4j), Technical Analysis
 | Commons Numbers `Precision`   | `double`                | Yes                   | No               | Comparison, rounding            |
 | ta4j `DecimalNum`/`DoubleNum` | `BigDecimal` / `double` | No / Yes              | No               | Technical analysis, backtesting |
 
-Decision Guide {#h2-25-decision-guide}
---------------------------------------
+Decision Guide
+--------------
 
 Choosing the right numeric type is an engineering decision, not a religious one.
 
@@ -556,12 +556,12 @@ Choosing the right numeric type is an engineering decision, not a religious one.
 | `long` fixed-point | Exact within fixed scale         | Very fast, no allocation   | Trading, payment processors, low-latency pricing                           |
 | `decimal4j`        | Exact, 0-18 decimal places       | Fast, zero-garbage         | Structured fixed-point with rounding API, less boilerplate than raw `long` |
 
-Production pitfalls {#h2-26-production-pitfalls}
-------------------------------------------------
+Production pitfalls
+-------------------
 
 Choosing the right numeric type is only half the battle. The other half is making sure your choice survives contact with JSON serializers, test frameworks, and multi-threaded runtimes.
 
-### JSON Serialization {#h3-27-json-serialization}
+### JSON Serialization
 
 Serializing numeric values to JSON is one of the most common sources of silent precision loss, because the JSON specification defines only one number type and has no concept of scale or precision.
 
@@ -594,7 +594,7 @@ mapper.configure(SerializationFeature.WRITE_BIGDECIMAL_AS_PLAIN, true);
 
 **`long` fixed-point.** If your internal representation is `long` cents, you need a custom serializer/deserializer that converts between `1999` (internal) and `19.99` (JSON). This is extra code, but it gives you full control and eliminates any ambiguity.
 
-### Testing floating-point code {#h3-28-testing-floating-point-code}
+### Testing floating-point code
 
 Testing numeric code has its own set of traps. The core issue: you cannot use exact equality for `double` results, but choosing the right tolerance is a skill that is rarely taught.
 
@@ -643,7 +643,7 @@ void testVatCalculation() {
 ```
 
 
-### `double` is not atomic {#h3-29-double-is-not-atomic}
+### `double` is not atomic
 
 JLS §17.7 states that a write to a non-volatile `double` or `long` is treated as **two separate 32-bit writes** . A reading thread can observe a *torn value* (high bits from one write, low bits from another), producing a meaningless bit pattern.
 
@@ -655,7 +655,7 @@ private volatile double sharedPrice;   // SAFE: volatile guarantees atomic read/
 
 On 64-bit JVMs, `double` writes happen to be atomic at the hardware level, but the JLS does not guarantee this. If you share a `double` across threads without `volatile`, your code is incorrect per the spec.
 
-### Parallel streams {#h3-30-parallel-streams}
+### Parallel streams
 
 The Javadoc for `DoubleStream.sum()` explicitly warns that the order of addition is *intentionally not defined* . This has a direct consequence: `DoubleStream.parallel().sum()` can return different results on different invocations with the same input data.
 
@@ -670,7 +670,7 @@ The difference is usually tiny, within a few ULPs for well-conditioned data. But
 
 This connects directly to the earlier section on summation algorithms: floating-point addition is not associative, so different partition orders yield different results.
 
-### Concurrent accumulation with `DoubleAdder` {#h3-31-concurrent-accumulation-with-doubleadder}
+### Concurrent accumulation with `DoubleAdder`
 
 When multiple threads need to update a shared sum (metrics counters, running totals, real-time aggregates), the naive approaches all have problems. A `synchronized` block serializes all threads. An `AtomicReference` with a CAS loop allocates a new `BigDecimal` on every retry. Both create severe contention under load.
 
@@ -689,8 +689,8 @@ The trade-off: `DoubleAdder.sum()` is not atomic: it reads the stripes sequentia
 
 For `BigDecimal` accumulation, there is no built-in equivalent. The common pattern is a `LongAdder` on fixed-point cents, converted to `BigDecimal` only when reading.
 
-Project Valhalla and Value Types {#h2-32-project-valhalla-and-value-types}
---------------------------------------------------------------------------
+Project Valhalla and Value Types
+--------------------------------
 
 One of the strongest arguments for `double` or `long` over `BigDecimal` has always been performance, specifically the cost of heap allocation and garbage collection pressure for every arithmetic operation. Project Valhalla may fundamentally change this equation.
 
@@ -712,8 +712,8 @@ The implications extend beyond custom types. `BigDecimal` itself is unlikely to 
 
 Value classes are currently in preview, *aka* [JEP 401](https://openjdk.org/jeps/401), with early-access builds available since JDK 23. This is the next major architectural shift in the JVM, and it will reshape the performance trade-offs we have discussed throughout this article.
 
-Conclusion {#h2-33-conclusion}
-------------------------------
+Conclusion
+----------
 
 The statement "never use `double` for money" is too simplistic. A more honest version would be: **never use any numeric type without understanding its precision model, rounding behavior, overflow characteristics, performance profile, and how those properties interact with the requirements of your domain.**
 

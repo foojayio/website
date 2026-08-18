@@ -22,8 +22,8 @@ frozen: false
 
 As a result, in this article, I'd like to introduce some Apache projects that are less well-known than HTTPD or Kafka.
 
-Apache APISIX {#h2-0-apache-apisix}
------------------------------------
+Apache APISIX
+-------------
 
 <img fetchpriority="high" decoding="async" class="alignright wp-image-103491 size-full" src="apisix.png" alt="" width="256" height="256">
 
@@ -45,11 +45,11 @@ If no plugin fits your requirements, writing your own is possible.
 
 You can leverage APISIX on Kubernetes as an Ingress Controller. APISIX provides a Helm Chart for this.
 
-[![](flow-software-architecture-1024x438.png)](flow-software-architecture.png) {#h2-1-}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[![](flow-software-architecture-1024x438.png)](flow-software-architecture.png)
+------------------------------------------------------------------------------
 
-Apache ShardingSphere {#h2-2-apache-shardingsphere}
----------------------------------------------------
+Apache ShardingSphere
+---------------------
 
 <img decoding="async" class="alignright wp-image-103494 size-full" src="shardingSphere.png" alt="" width="256" height="170">
 
@@ -68,8 +68,8 @@ ShardingSphere offers several core features:
 * Data encryption
 * etc.
 
-Apache SeaTunnel {#h2-3-apache-seatunnel}
------------------------------------------
+Apache SeaTunnel
+----------------
 
 <img loading="lazy" decoding="async" class="alignright wp-image-103495 size-full" src="seatunnel.png" alt="" width="256" height="275">
 
@@ -91,8 +91,8 @@ The power of SeaTunnel comes from its rich connector ecosystem. It does provide 
 
 SeaTunnel comes with a web UI, which provides visual management of jobs, scheduling, running, and monitoring capabilities.
 
-Apache SkyWalking {#h2-4-apache-skywalking}
--------------------------------------------
+Apache SkyWalking
+-----------------
 
 <img loading="lazy" decoding="async" class="alignright wp-image-103497 size-full" src="skywalking-logo.png" alt="" width="256" height="61">
 
@@ -109,8 +109,8 @@ Apache SkyWalking {#h2-4-apache-skywalking}
 
 Skywalking supports a couple of formats, including OpenTelemetry. Given the industry's current focus on OpenTelemetry, I recommend seriously considering this option.
 
-Apache Doris {#h2-5-apache-doris}
----------------------------------
+Apache Doris
+------------
 
 <img loading="lazy" decoding="async" class="alignright size-full wp-image-103499" src="Doris_Logo.png" alt="" width="256" height="90">
 
@@ -129,8 +129,8 @@ Doris promotes four primary scenarios:
 
 Doris is mostly MySQL compliant so that you can use a regular MySQL client.
 
-Discussion {#h2-6-discussion}
------------------------------
+Discussion
+----------
 
 The Apache Foundation hosts the projects above, but they have another thing in common: they were all incepted in China. Have a look at the [Apache project list](https://projects.apache.org/projects.html). You'll probably be amazed at the sheer number; it's close to 300!
 

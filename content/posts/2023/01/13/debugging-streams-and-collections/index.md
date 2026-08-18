@@ -32,8 +32,8 @@ Finally, I finished scripting all the videos for the full debugging course. It c
 
 <br />
 
-Transcript {#h2-0-transcript}
------------------------------
+Transcript
+----------
 
 Welcome back to the fifth part of debugging at Scale where we no longer stare blankly at the screen. We know where to look for that bug!
 
@@ -41,7 +41,7 @@ In this section we discuss streams and collections. These constructs are much ha
 
 Notice that here I'm talking about Java 8 and higher streams. These streams come from the realm of functional programming. We'll dig deeper into them. But first I want to start by talking about filtering. Filtering is such a basic feature, that I'm amazed it took me so long to notice that it's there.
 
-### Filtering {#h3-1-filtering}
+### Filtering
 
 When we have code that views an array or collection content, we can filter the content using an expression and reduce the noise significantly. I can right-click any such collection and select the filter operation.
 
@@ -53,7 +53,7 @@ Once I apply this you will notice the numbers "skip" everything that doesn't mat
 
 This is very versatile if we have a list of names we can filter it so we can only see applicable names etc. It works with arbitrary objects, arrays and all collection types.
 
-### Java 8 Streams {#h3-2-java-8-streams}
+### Java 8 Streams
 
 For the next two features we need to discuss streams. Here we have a simple Java stream expression. These are functional expressions we can use to process multiple elements, let's review the various pieces of this expression. visits is a standard Java collection on which we invoke the stream method to get a functional interface we can work with.
 
@@ -63,7 +63,7 @@ Finally, we collect all the elements in the stream into a set. We could collect 
 
 The stream is self-contained. If we run it again, and again it will be idempotent that means the result doesn't change. That's good. In the map code I could just change a global variable or add an element to a list. This would be called a side effect, and it's a very bad thing to do in a stream. It will make it less debuggable and can cause problems with parallel streams, etc. I strongly suggest avoiding this and some things just won't work if you do it.
 
-### Debugging Streams With Breakpoints {#h3-3-debugging-streams-with-breakpoints}
+### Debugging Streams With Breakpoints
 
 Let's review the process of debugging the stream. We can debug it like we would debug a loop. Add a breakpoint and place a condition on it, so it will only stop for the pet we care about which is pet ID number 7.  
 
@@ -73,7 +73,7 @@ As I press continue the loop keeps going and stops when the applicable entry is 
 
 This would work exactly the same as a loop and would let us see everything. But is there a better way?
 
-### The Stream Debugger {#h3-4-the-stream-debugger}
+### The Stream Debugger
 
 IntelliJ ships with a stream debugger which is a fantastic dedicated tool.  
 
@@ -85,7 +85,7 @@ The advantage here is that you can see the entire process in a single view that 
 
 This is inspired by time travel debuggers which is a unique branch of debugging I talk about in the book.
 
-### Final Word {#h3-5-final-word}
+### Final Word
 
 In the next video we'll discuss watch expressions which are far more elaborate than what you might expect...
 

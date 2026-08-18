@@ -29,8 +29,8 @@ Let's dig in.
 
 
 
-Verify the signature of the JDK you download {#h2-0-verify-the-signature-of-the-jdk-you-download}
--------------------------------------------------------------------------------------------------
+Verify the signature of the JDK you download
+--------------------------------------------
 
 Here's an uncomfortable truth about most CI pipelines: the JDK that compiles and runs your code is downloaded over the network, and for a long time the only integrity guarantee was TLS. That's fine --- until it isn't. The JDK becomes the `java` binary that the rest of your pipeline trusts, with access to your secrets, your signing keys, and your deploy credentials. Supply-chain integrity of the toolchain itself matters.
 
@@ -69,8 +69,8 @@ If you care about reproducible, supply-chain-safe builds, this is the flag to re
 
 
 
-Tencent Kona JDK {#h2-1-tencent-kona-jdk}
------------------------------------------
+Tencent Kona JDK
+----------------
 
 `actions/setup-java` now speaks **Tencent Kona JDK** natively:
 
@@ -88,8 +88,8 @@ This brings the roster of supported distributions to a healthy list: Temurin, Zu
 
 
 
-Install a JDK *without* making it the default {#h2-2-install-a-jdk-without-making-it-the-default}
--------------------------------------------------------------------------------------------------
+Install a JDK *without* making it the default
+---------------------------------------------
 
 By default, every call to `setup-java` sets `JAVA_HOME` and updates `PATH`, so the last JDK you install "wins" and becomes *the* `java` for the rest of the job. That's usually what you want --- but not always.
 
@@ -122,12 +122,12 @@ This makes it possible for a single job to juggle multiple JDKs cleanly, without
 
 
 
-Smarter version files: auto-detect the distribution {#h2-3-smarter-version-files-auto-detect-the-distribution}
---------------------------------------------------------------------------------------------------------------
+Smarter version files: auto-detect the distribution
+---------------------------------------------------
 
 `setup-java` can read your Java version from a file instead of hard-coding it in the workflow. It supports `.java-version`, `.tool-versions` (asdf), and `.sdkmanrc` (SDKMAN). The recent releases taught it to **infer the distribution** from those files, so you can stop repeating yourself.
 
-### From `.sdkmanrc` {#h3-4-from-sdkmanrc}
+### From `.sdkmanrc`
 
 SDKMAN identifiers carry a vendor suffix --- `-tem` for Temurin, `-zulu` for Zulu, and so on. The action now maps that suffix to a distribution automatically:
 
@@ -148,12 +148,12 @@ That `-tem` is enough --- no `distribution` input needed. In fact, `distribution
 
 
 
-A much nicer Maven experience {#h2-5-a-much-nicer-maven-experience}
--------------------------------------------------------------------
+A much nicer Maven experience
+-----------------------------
 
 Several changes in these releases target one of the most common Java build tools directly.
 
-### Quieter logs by default {#h3-6-quieter-logs-by-default}
+### Quieter logs by default
 
 Maven loves to print a line for *every* artifact it downloads. On a cold cache that's hundreds of noisy lines burying the output you actually care about. `setup-java` now sets `--no-transfer-progress` (`-ntp`) in the `MAVEN_ARGS` environment variable by default:
 
@@ -181,11 +181,11 @@ Details worth knowing:
 ```
 
 
-### Non-interactive `settings.xml` {#h3-7-non-interactive-settings-xml}
+### Non-interactive `settings.xml`
 
 The generated `settings.xml` now disables Maven's interactive mode. Translation: Maven will never sit there blocking a CI run waiting on a prompt that no human is going to answer.
 
-### Toolchains that stop growing out of control {#h3-8-toolchains-that-stop-growing-out-of-control}
+### Toolchains that stop growing out of control
 
 This one is a genuine bug fix that'll make some people very happy. If you called `setup-java` multiple times in a job, each call *appended* to `toolchains.xml` --- including duplicate entries. Over a few installs you'd end up with a toolchains file full of repeats.
 
@@ -193,8 +193,8 @@ The generated `toolchains.xml` is now **deduplicated by toolchain type and id** 
 
 
 
-Don't forget these v5.4.0 additions {#h2-9-don-t-forget-these-v5-4-0-additions}
--------------------------------------------------------------------------------
+Don't forget these v5.4.0 additions
+-----------------------------------
 
 Three more things from that release deserve a callout:
 
@@ -214,8 +214,8 @@ Three more things from that release deserve a callout:
 
 
 
-Putting it all together {#h2-10-putting-it-all-together}
---------------------------------------------------------
+Putting it all together
+-----------------------
 
 Here's a workflow that uses several of these features at once --- signature-verified Temurin as the default, a secondary JDK for a tool, version driven from `.sdkmanrc`, Maven caching, and clean logs out of the box:
 
@@ -250,8 +250,8 @@ jobs:
 
 
 
-A note on pinning {#h2-11-a-note-on-pinning}
---------------------------------------------
+A note on pinning
+-----------------
 
 One recurring recommendation from the maintainers, and good advice for any third-party action: **pin it** . For reproducible, supply-chain-safe builds, reference the exact release tag `v5.5.0` which are now immutable, or for the strongest guarantee, the full commit SHA:
 

@@ -24,8 +24,8 @@ I got to sit down with [Naail Abdul Rahman](https://www.linkedin.com/in/kudanai/
 
 {{< youtube R6k4NZ_SQqU >}}
 
-What we talked about {#h2-0-what-we-talked-about}
--------------------------------------------------
+What we talked about
+--------------------
 
 The conversation covers a lot, so here is a quick overview of the topics if you want to jump to a specific part:
 
@@ -54,22 +54,22 @@ The conversation covers a lot, so here is a quick overview of the topics if you 
 * 49:04 JavaFX gains more popularity as desktop applications become more important in AI use
 * 50:05 Conclusion
 
-Lottie: from Bodymovin to everywhere {#h2-1-lottie-from-bodymovin-to-everywhere}
---------------------------------------------------------------------------------
+Lottie: from Bodymovin to everywhere
+------------------------------------
 
 One thing I always find interesting about the Lottie format is that it did not start at LottieFiles. It started as [Bodymovin](https://aescripts.com/bodymovin/), an After Effects plugin for exporting animations to the web. Airbnb picked it up, built their Android player around it, and the name Lottie stuck. From there the format spread across platforms, communities, and now also into Java.
 
 The open-source specification lives at [lottie.github.io](https://lottie.github.io), driven by the Lottie Animation Community (LAC). That is the reference Lottie4J works against.
 
-dotLottie: the format worth paying attention to {#h2-2-dotlottie-the-format-worth-paying-attention-to}
-------------------------------------------------------------------------------------------------------
+dotLottie: the format worth paying attention to
+-----------------------------------------------
 
 Most Lottie work today happens with `.json` files. The dotLottie format (`.lottie`) is a ZIP container that can hold multiple animations, theming through slots, and interactive state machines, all in one file. It is where things are heading, and it is definitely what I need to add proper support for in Lottie4J.
 
 The difference matters practically. A `.lottie` file compresses much better than the equivalent JSON, it can bundle assets cleanly, and the slots and states features open up real interactivity that a static JSON animation just cannot do.
 
-What this means for Lottie4J {#h2-3-what-this-means-for-lottie4j}
------------------------------------------------------------------
+What this means for Lottie4J
+----------------------------
 
 The conversation pushed me to think concretely about where to take the project next. Three areas stood out as important steps:
 
@@ -79,8 +79,8 @@ The conversation pushed me to think concretely about where to take the project n
 
 Another important moment in the conversation: Naail noted that interest in Lottie for desktop applications is growing, including from projects like KDE. JavaFX is in good company there! Even more right now, considering the recent announcement by Oracle that are now offering extended JavaFX support. This is something [Azul has done for years](https://www.azul.com/blog/the-javafx-revival-good-news-for-the-community-business-as-usual-for-azul/).
 
-Links from the video {#h2-4-links-from-the-video}
--------------------------------------------------
+Links from the video
+--------------------
 
 * [Lottie format Wikipedia article](https://en.wikipedia.org/wiki/Lottie_(file_format))
 * Lottie4J
@@ -104,7 +104,7 @@ Links from the video {#h2-4-links-from-the-video}
 * [Compottie (Kotlin Multiplatform player)](https://github.com/alexzhirkevich/compottie)
 * [ThorVG (C++ rendering library)](https://www.thorvg.org/)
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 The conversation confirmed something I suspected: Lottie4J is not a niche experiment. Desktop animation is getting serious attention across the Java and Linux ecosystems. If you want to help shape where Lottie4J goes next, head over to [lottie4j.com](https://lottie4j.com). Pull requests, bug reports, and questions are all welcome in the comments of the video or in the [Lottie4J GitHub project](https://github.com/lottie4j/).

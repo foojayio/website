@@ -26,7 +26,7 @@ frozen: false
 
 Five years ago, [Hielke](https://medium.com/@Frevib) and I wrote one of the first blogs of this account about being [the first team to put Kotlin on production at ING](https://medium.com/ing-blog/introducing-kotlin-at-ing-a-long-but-rewarding-story-1bfcd3dc8da0). The article generated some interest and to this day it is still present as one of the [Kotlin website case studies](https://kotlinlang.org/lp/server-side/case-studies/).
 
-After a few years outside of the company, I joined back a few months ago to lead the Developer Relations program. Being just as big of a fan of Kotlin as I was five years ago, one of the first thing I did was help build the storyline when JetBrains contacted us to be one of the main case studies of [their KotlinConf 2025 Keynote](https://youtu.be/F5NaqGF9oT4?si=pn1e9dC0Vhb31W1-&amp;t=3397) 🎉. Now, this seems like the perfect time to investigate what the internal picture looks like now! Let's dive into it together 😊.
+After a few years outside of the company, I joined back a few months ago to lead the Developer Relations program. Being just as big of a fan of Kotlin as I was five years ago, one of the first thing I did was help build the storyline when JetBrains contacted us to be one of the main case studies of [their KotlinConf 2025 Keynote](https://youtu.be/F5NaqGF9oT4?si=pn1e9dC0Vhb31W1-&t=3397) 🎉. Now, this seems like the perfect time to investigate what the internal picture looks like now! Let's dive into it together 😊.
 
 Before looking into the code, let's look at the Kotlin ecosystem of ING! There is quite a lot to say, which is why I start by this. For reference, there are about 20000 people working in the Tech structure of ING. This includes developers, but also many other technical roles (e.g DevOps, product, machine learning, ....).
 
@@ -72,8 +72,8 @@ By the way, in case you are interested: this is the code used to create this gra
 
 ![Kandy and Kotlin Notebooks, for fun and learning](6-700x450.webp)
 
-The share of Kotlin code at ING {#h2-0-the-share-of-kotlin-code-at-ing}
------------------------------------------------------------------------
+The share of Kotlin code at ING
+-------------------------------
 
 Now, the next step is obvious right? We have segregated all of the repositories containing JVM code. Let's look into the proportion between flavors!
 
@@ -99,8 +99,8 @@ We can make a few observations here:
 
 This is not very surprising, to be fair. ING is a Java powerhouse and most of the production code has been running for many years! Looking at all the history, we see that **the Kotlin penetration is at just about 8% of the active repositories in our codebase**. This is not a massive groundbreaking shift, but it definitely cannot be ignored when given the fact that all of the work happens on a voluntary basis. Our internal language of choice is still Java by default today and that's where all of our internal documentation and technical standards are pointing towards.
 
-Looking at trends over time {#h2-1-looking-at-trends-over-time}
----------------------------------------------------------------
+Looking at trends over time
+---------------------------
 
 Let's dive slightly deeper into trends, using the data we have at our disposal: Let's look at the date of last update for each repository per flavor of JVM. This will give us an idea of the language usage over time and will help us see what general trends are in the more recent years.
 
@@ -108,8 +108,8 @@ Let's dive slightly deeper into trends, using the data we have at our disposal: 
 
 In this graph, we can clearly see an upward trend for Kotlin year after year from a negligible amount to the around 10% that it has become today. We can also see that since 2024, **Kotlin has surpassed both Groovy and Scala in terms of activity becoming the second most used JVM language inside the company.**
 
-How many flavors does a repository contain? {#h2-2-how-many-flavors-does-a-repository-contain}
-----------------------------------------------------------------------------------------------
+How many flavors does a repository contain?
+-------------------------------------------
 
 Let's dive just a bit deeper yet! One of the additional data we have and we haven't used yet is the **share of a specific language inside a repository** (either in terms of percentage of files, or bytes).
 
@@ -121,8 +121,8 @@ This is an interesting graph! Repositories containing Kotlin contain over 70% Ko
 
 Scala and Groovy repositories, however, seem to be used in hybrid repositories.
 
-And what about newer projects? {#h2-3-and-what-about-newer-projects}
---------------------------------------------------------------------
+And what about newer projects?
+------------------------------
 
 Now, there is one thing in the current data that I am dearly missing: we have information about the last update of a given repository, but not its creation date. My main question when I started this analysis was: **given a new project starting, how large is the share of repositories for which teams decide to use Kotlin.**
 
@@ -134,8 +134,8 @@ One major difference with the data before though, is that using this method I ca
 
 Using this dataset, I find that **just over 11% of inner-source repositories that are created internally are pure Kotlin repositories as of February 2025**. The very nice thing though, is that we clearly see the organic growth of the language year after year.
 
-A message from the community {#h2-4-a-message-from-the-community}
------------------------------------------------------------------
+A message from the community
+----------------------------
 
 Before closing this blog, I want to finish with a few testimonials from our internal engineers. While preparing for the Keynote video and this blog, I've been asking around _why_ people were choosing for Kotlin over another JVM language. What made the language so compelling. Here are a few of their answers (please get ready for dry and nerdy developer humor!).
 
@@ -144,8 +144,8 @@ Before closing this blog, I want to finish with a few testimonials from our inte
 ![](13-700x70.webp)  
 ![](14-700x136.webp)
 
-A word of conclusion {#h2-5-a-word-of-conclusion}
--------------------------------------------------
+A word of conclusion
+--------------------
 
 ![Julien after spending much time staring at his screen making graphs](15-700x467.webp)
 

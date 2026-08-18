@@ -32,18 +32,18 @@ Today, I will show you how to write Java code that can talk to a **locally insta
 
 For the impatient the example code is at [Github.com](https://github.com/carldea/panama-polyglot/tree/main/python).
 
-Problem {#h2-0-problem}
------------------------
+Problem
+-------
 
 As a Java developer, you want to execute Python script code. Also, you want to be able to access 3rd party Python libraries, such as Tensorflow.
 
-Solution {#h2-1-solution}
--------------------------
+Solution
+--------
 
 Use the `jextract` tool against the include file `Python.h` on the local system.
 
-Why ask Why? {#h2-2-why-ask-why}
---------------------------------
+Why ask Why?
+------------
 
 The above **problem** and **solution** is rather short, that probably begs the question **why**? Or you might ask "Can you give me a high-level use-case that will help me understand the problem you want to solve?".
 
@@ -74,8 +74,8 @@ import tensorflow as tf
 ```
 
 
-Brief History {#h2-3-brief-history}
------------------------------------
+Brief History
+-------------
 
 In the past, Java developers would use [Jython](https://www.jython.org) ([JSR 223](https://www.jcp.org/en/jsr/detail?id=223)) to execute Python code on the JVM using Jython's implementation of the Python interpreter as a JVM language.
 
@@ -87,13 +87,13 @@ Besides, most of the official tutorials and documentation relating to Tensorflow
 
 Let's get back to the article on how to execute native Python script code.
 
-Assumptions {#h2-4-assumptions}
--------------------------------
+Assumptions
+-----------
 
 To complete this tutorial I assume you have installed the EA release of OpenJDK with Project Panama and its [environment variables](https://foojay.io/today/project-panama-for-newbies-part-1/) set. Also, you should be familiar with common shell commands.
 
-Requirements {#h2-5-requirements}
----------------------------------
+Requirements
+------------
 
 To get started download and install the required software as follows.
 
@@ -113,8 +113,8 @@ Python 3.10.2
 ```
 
 
-Installing 3rd party packages {#h2-6-installing-3rd-party-packages}
--------------------------------------------------------------------
+Installing 3rd party packages
+-----------------------------
 
 Later in the tutorial you will need to install the following libraries (packages) for Python 3:
 
@@ -151,8 +151,8 @@ Before creating and executing our **Hello World**example lets look at the follow
 3. Create a Java program to execute Python script code
 4. Run Java program
 
-Generating Panama binding (Java) classes {#h2-7-generating-panama-binding-java-classes}
----------------------------------------------------------------------------------------
+Generating Panama binding (Java) classes
+----------------------------------------
 
 Prior to calling the Python code inside Java you will need to generate Java Panama binding classes using `jextract`. These generated class files will be used on the `classpath` e.g. `-cp classes` when running the java application. Do the following to generate Java classes.
 
@@ -170,8 +170,8 @@ The above use of `jextract` I've used (`-I`) include directory paths that are lo
 
 Next, you'll can (optionally) create Java source code for your IDE. This allows you to preview the generated methods and functions capable of calling into the Python interpreter.
 
-Generating Panama binding (Java) source code {#h2-8-generating-panama-binding-java-source-code}
------------------------------------------------------------------------------------------------
+Generating Panama binding (Java) source code
+--------------------------------------------
 
 Enter the following to generate source code against the header file `Python.h`:
 
@@ -186,8 +186,8 @@ jextract  -l python3.10  \
 ```
 
 
-Create a Java Application (Python Script Runner) {#h2-9-create-a-java-application-python-script-runner}
--------------------------------------------------------------------------------------------------------
+Create a Java Application (Python Script Runner)
+------------------------------------------------
 
 After generating classes and sources you will create a single Java application file `PythonMain.java` to be executed. Please cut and past the following into a file `PythonMain.java`. The file should reside in the `panama-polyglot/python/src` directory.
 
@@ -218,8 +218,8 @@ public class PythonMain {
 
 Above you'll notice the `var script` is assigned a Python script code of type Java string. This will be fed into the `PyRun_SimpleStringFlags(str, NULL)` function to be executed.
 
-Execute Java Python Script Runner App {#h2-10-execute-java-python-script-runner-app}
-------------------------------------------------------------------------------------
+Execute Java Python Script Runner App
+-------------------------------------
 
 Assuming you are in the `panama-polyglot/python` directory let's run the `PythonMain.java` application. To run the above code enter the following:
 
@@ -239,8 +239,8 @@ Hello World!!!
 ```
 
 
-How does it work? {#h2-11-how-does-it-work}
--------------------------------------------
+How does it work?
+-----------------
 
 When generating the binding code by using `jextract` the following shows the switches and their descriptions:
 
@@ -263,8 +263,8 @@ When interacting with the function `PyRun_SimpleStringFlags()` it is similar to 
 
 Now, that you know how to run Python script code lets do something more useful. In the next example we'll be executing Python script code to build and train a neural network (graph model) using the popular Tensorflow framework.
 
-Bonus Example - Tensorflow {#h2-12-bonus-example-tensorflow}
-------------------------------------------------------------
+Bonus Example - Tensorflow
+--------------------------
 
 In a more advanced example let's replace the `var script` value above with the official basic tutorial (script code) from Tensorflow.org [here](https://www.tensorflow.org/tutorials/keras/classification). Instead of the simple Python script code above (Hello World) lets create a **Java method** (`mnistClothes()`) that returns the Python script code as a `String`.
 
@@ -654,8 +654,8 @@ Output of a single image prediction:
 
 So, there you have it -- Java's Panama talking to Python's interpreter. Of course we've only scratched the surface in terms of interacting with the Python interpreter. This article's objective was to just get your feet wet.
 
-Conclusion {#h2-13-conclusion}
-------------------------------
+Conclusion
+----------
 
 We began this article by posing the problem as a question to help understand the use case of Java's ability to interoperate with a locally installed Python interpreter.
 

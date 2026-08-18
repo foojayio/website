@@ -38,8 +38,8 @@ Our search service provides the three-tier benefits outlined above in these ways
 
 In this article, we are going to detail an HTTP Java search service designed to be called from a presentation tier, and in turn, it translates the request into an aggregation pipeline that queries our Atlas data tier. This is purely a service implementation, with no end-user UI; the user interface is left as an exercise for the reader. In other words, the author has deep experience providing search services to user interfaces but is not a UI developer himself. 🙂
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 The code for this article lives in the [GitHub repository](https://github.com/mongodb-developer/atlas-search-java-server).
 
@@ -52,8 +52,8 @@ Standard Java and servlet APIs are used and should work as-is or port easily to 
 
 In order to run the examples provided here, the Atlas sample data needs to be loaded and a movies_index, as described below, created on the sample_mflix.movies collection. If you're new to Atlas Search, a good starting point is [Using Atlas Search from Java](https://foojay.io/today/atlas-searching-with-the-java-driver/).
 
-Search service design {#h2-1-search-service-design}
----------------------------------------------------
+Search service design
+---------------------
 
 The front-end presentation layer provides a search box, renders search results, and supplies sorting, pagination, and filtering controls. A middle tier, via an HTTP request, validates and translates the search request parameters into an aggregation pipeline specification that is then sent to the data tier.
 
@@ -67,8 +67,8 @@ Also, a performant query should only search and return a small number of fields,
 
 Additionally, a search service must provide a way to constrain search results to, say, a specific category, genre, or cast member, without affecting the relevancy ordering of results. This filtering capability could also be used to enforce access control, and a service layer is an ideal place to add such constraints that the presentation tier can rely on rather than manage.
 
-Search service interface {#h2-2-search-service-interface}
----------------------------------------------------------
+Search service interface
+------------------------
 
 Let's now concretely define the service interface based on the design. Our goal is to support a request, such as *find "Music" genre movies for the query "purple rain" against the \`title\` and \`plot\` fields*, returning only five results at a time that only include the field's title, genres, plot, and year. That request from our presentation layer's perspective is this HTTP GET request:
 
@@ -89,15 +89,15 @@ These parameters, along with a \`debug\` parameter, are detailed in the followin
 | **filter**    | \<field name\>:\<exact value\> syntax; supports zero or more \`filter\` parameters.                                                                                               |
 | **debug**     | If \`true\`, include the full aggregation pipeline .explain() output in the response, as well.                                                                                    |
 
-### Returned results {#h3-3-returned-results}
+### Returned results
 
 Given the specified request, let's define the response JSON structure to return the requested (\`project\`) fields of the matching documents in a \`docs\` array. In addition, the search service returns a \`request\` section showing both the explicit and implicit parameters used to build the Atlas $search pipeline and a \`meta\` section that will return the total count of matching documents. This structure is entirely our design, not meant to be a direct pass-through of the aggregation pipeline response, allowing us to isolate, manipulate, and map the response as it best fits our presentation tier's needs.
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | { "request": { "q": "purple rain", "skip": 0, "limit": 5, "search": "title,plot", "project": "title,genres,plot,year", "filter": \[ "genres:Music" \] }, "docs": \[ { "plot": "A young musician, tormented by an abusive situation at home, must contend with a rival singer, a burgeoning romance and his own dissatisfied band as his star begins to rise.", "genres": \[ "Drama", "Music", "Musical" \], "title": "Purple Rain", "year": 1984 }, { "plot": "Graffiti Bridge is the unofficial sequel to Purple Rain. In this movie, The Kid and Morris Day are still competitors and each runs a club of his own. They make a bet about who writes the ...", "genres": \[ "Drama", "Music", "Musical" \], "title": "Graffiti Bridge", "year": 1990 } \], "meta": \[ { "count": { "total": 2 } } \] } |
 
-Search service implementation {#h2-4-search-service-implementation}
--------------------------------------------------------------------
+Search service implementation
+-----------------------------
 
 Code! That's where it's at. Keeping things as straightforward as possible so that our implementation is useful for every front-end technology, we're implementing an HTTP service that works with standard GET request parameters and returns easily digestible JSON. And Java is our language of choice here, so let's get to it. Coding is an opinionated endeavor, so we acknowledge that there are various ways to do this in Java and other languages --- here's one opinionated (and experienced) way to go about it.
 
@@ -121,11 +121,11 @@ For the best protection of our \`ATLAS_URI\` connection string, we define it in 
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | \<**web-app** \> \<**servlet** \> \<**servlet-name** \>SearchServlet\</**servlet-name** \> \<**servlet-class** \>com.mongodb.atlas.SearchServlet\</**servlet-class** \> \<**load-on-startup** \>1\</**load-on-startup** \> \<!-- The connection string must be defined in the \`ATLAS_URI\` environment variable --\> \<**init-param** \> \<**param-name** \>database\</**param-name** \> \<**param-value** \>sample_mflix\</**param-value** \> \</**init-param** \> \<**init-param** \> \<**param-name** \>collection\</**param-name** \> \<**param-value** \>movies\</**param-value** \> \</**init-param** \> \<**init-param** \> \<**param-name** \>index\</**param-name** \> \<**param-value** \>movies_index\</**param-value** \> \</**init-param** \> \</**servlet** \> \<**servlet-mapping** \> \<**servlet-name** \>SearchServlet\</**servlet-name** \> \<**url-pattern** \>/search\</**url-pattern** \> \</**servlet-mapping** \> \</**web-app**\> |
 
-### GETting the search results {#h3-5-getting-the-search-results}
+### GETting the search results
 
 Requesting search results is a stateless operation with no side effects to the database and works nicely as a straightforward HTTP GET request, as the query itself should not be a very long string. Our front-end tier can constrain the length appropriately. Larger requests could be supported by adjusting to POST/getPost, if needed.
 
-### Aggregation pipeline behind the scenes {#h3-6-aggregation-pipeline-behind-the-scenes}
+### Aggregation pipeline behind the scenes
 
 Ultimately, to support the information we want returned (as shown above in the example response), the request example shown above gets transformed into this aggregation pipeline request:
 
@@ -142,7 +142,7 @@ The use of \`$facet\` is a bit of a tricky trick, which gives our aggregation pi
 
 Callout (\> markdown) section: \`$facet\` aggregation stage is confusingly named the same as the Atlas Search \`facet\` collector. Search result facets give a group label and count of that group within the matching search results. For example, faceting on \`genres\` (which requires an index configuration adjustment from the example here) would provide, in addition to the documents matching the search criteria, a list of all \`genres\` within those search results and the count of how many of each. Adding the \`facet\` operator to this search service is on the roadmap mentioned below.
 
-### $search in code {#h3-7-search-in-code}
+### $search in code
 
 Given a query (\`q\`), a list of search fields (\`search\`), and filters (zero or more \`filter\` parameters), building the \`$search\` stage programmatically is straightforward using the Java driver's convenience methods:
 
@@ -151,22 +151,22 @@ Given a query (\`q\`), a list of search fields (\`search\`), and filters (zero o
 
 We've added the \`scoreDetails\` feature of Atlas Search when \`debug=true\`, allowing us to introspect the gory Lucene scoring details only when desired; requesting score details is a slight performance hit and is generally way too low-level for most of us.
 
-### Field projection {#h3-8-field-projection}
+### Field projection
 
 The last interesting bit of our service implementation entails field projection. Returning the \`_id\` field, or not, requires special handling. Our service code looks for the presence of \`_id\` in the \`project\` parameter and explicitly turns it off if not specified. We have also added a facility to include the document's computed relevancy score, if desired, by looking for a special \`_score\` pseudo-field specified in the \`project\` parameter. Programmatically building the projection stage looks like this:
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | List\<String\> project_fields = new ArrayList\<\>(); if (project_fields_value != null) { project_fields.addAll(List.of(project_fields_value.split(","))); } boolean include_id = false; if (project_fields.contains("_id")) { include_id = true; project_fields.remove("_id"); } boolean include_score = false; if (project_fields.contains("_score")) { include_score = true; project_fields.remove("_score"); } // $project List\<Bson\> projections = new ArrayList\<\>(); projections.add(include(project_fields)); if (include_id) { projections.add(include("_id")); } else { projections.add(excludeId()); } if (debug) { projections.add(meta("_scoreDetails", "searchScoreDetails")); } if (include_score) { projections.add(metaSearchScore("_score")); } Bson projection = fields(projections); |
 
-### Aggregating and responding {#h3-9-aggregating-and-responding}
+### Aggregating and responding
 
 Pretty straightforward at the end of the parameter wrangling and stage building, we build the full pipeline, make our call to Atlas, build a JSON response, and return it to the calling client. The only unique thing here is adding the \`.explain()\` call when \`debug=true\` so that our client can see the full picture of what happened from the Atlas perspective:
 
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | AggregateIterable\<Document\> aggregation_results = collection.aggregate(List.of( searchStage, facet_stage )); Document response_doc = new Document(); response_doc.put("request", new Document() .append("q", q) .append("skip", skip) .append("limit", limit) .append("search", search_fields_value) .append("project", project_fields_value) .append("filter", filters==null ? Collections.EMPTY_LIST : List.of(filters))); if (debug) { response_doc.put("debug", aggregation_results.explain().toBsonDocument()); } // When using $facet stage, only one "document" is returned, // containing the keys specified above: "docs" and "meta" Document results = aggregation_results.first(); for (String s : results.keySet()) { response_doc.put(s,results.get(s)); } response.setContentType("text/json"); PrintWriter writer = response.getWriter(); writer.println(response_doc.toJson()); writer.close(); |
 
-Taking it to production {#h2-10-taking-it-to-production}
---------------------------------------------------------
+Taking it to production
+-----------------------
 
 This is a standard Java servlet extension that is designed to run in Tomcat, Jetty, or other servlet API-compliant containers. The build runs [Gretty](https://gretty-gradle-plugin.github.io/gretty-doc/index.html), which smoothly allows a developer to either \`jettyRun\` or \`tomcatRun\` to start this example Java search service.
 
@@ -174,8 +174,8 @@ In order to build a distribution that can be deployed to a production environmen
 
 ./gradlew buildProduct
 
-Future roadmap {#h2-11-future-roadmap}
---------------------------------------
+Future roadmap
+--------------
 
 Our search service, as is, is robust enough for basic search use cases, but there is room for improvement. Here are some ideas for the future evolution of the service:
 
@@ -186,8 +186,8 @@ Our search service, as is, is robust enough for basic search use cases, but ther
 
 And with the service layer being a middle tier that can be independently deployed without necessarily having to make front-end or data-tier changes, some of these can be added without requiring changes in those layers.
 
-Conclusion {#h2-12-conclusion}
-------------------------------
+Conclusion
+----------
 
 Implementing a middle-tier search service provides numerous benefits from security, to scalability, to being able to isolate changes and deployments independent of the presentation tier and other search clients. Additionally, a search service allows clients to easily leverage sophisticated search capabilities using standard HTTP and JSON techniques.  
 

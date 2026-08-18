@@ -22,7 +22,7 @@ In [part 1 of this series](https://foojay.io/today/new-user-interface-for-jfx-ce
 
 **JFX Central is a not-for-profit team effort. Many people are involved, and any issue or pull request provided by anyone from the JavaFX community helps to improve and extend the website, application, and data. I reached out to some people involved to learn about their history in Java and JavaFX development and how they are engaged in JFX Central.**
 
-### Dirk Lemmermann {#h3-0-dirk-lemmermann}
+### Dirk Lemmermann
 
 *CEO of Senapt GmbH \& DLSC Software \& Consulting GmbH, [@dlemmermann](https://twitter.com/dlemmermann)*
 
@@ -66,7 +66,7 @@ It is the same code base except for a few if-statements where we check the runti
 
 Up until the final release of JavaFX 8, we could frequently see new features being added. This was not the case for a long time. The primary focus was on stability (bug fixes) and performance improvements. Only now do we hear about new features being added (e.g., [rich text control](https://gluonhq.com/presenting-a-new-richtextarea-control/)), which makes me hopeful that this will become a new trend. According to the rumor mill, Oracle has also increased the number of people working on JavaFX again.
 
-### Li Wang Yang {#h3-1-li-wang-yang}
+### Li Wang Yang
 
 *JavaFX developer and freelancer, [@LeeWyatt_7788](https://twitter.com/LeeWyatt_7788)*
 
@@ -106,7 +106,7 @@ My primary aspiration for JFX Central is to introduce a suite of visual developm
 
 I owe profound gratitude to Mr. Dirk Lemmermann for the invaluable opportunities and guidance, and to you, Frank, for your constructive feedback on refining my Java code and for your unwavering commitment as the editor of JFX Central's "Links of the week" section. I also thank Florian for his expertise in JPro, which was instrumental in guiding me through its intricacies. Interacting with and learning from all of you has been a cherished experience in my journey.
 
-### Florian Kirmaier {#h3-2-florian-kirmaier}
+### Florian Kirmaier
 
 *CO-Founder and CTO at Sandec GmbH, [@FlorianKirmaier](https://twitter.com/FlorianKirmaier)*
 
@@ -162,7 +162,7 @@ Our most significant weakness today is the lack of good documentation, tutorials
 
 Additionally, we'll make public various libraries we've created and employed in several of our custom, cross-platform projects. These libraries will address functionalities like media handling, file management, and OAUTH.
 
-### Mike Hearn {#h3-3-mike-hearn}
+### Mike Hearn
 
 *Founder Hydraulic Software*
 
@@ -192,8 +192,8 @@ The big difference is it makes self-updating packages, which is essential. There
 
 With distribution now mostly solved, JavaFX apps can become more competitive against Electron, especially with the multi-language support of Truffle and GraalVM. Interestingly, in the web framework space, we're starting to see people come back around and almost rediscover some of the ideas in JavaFX since the start, like per-property binding, constraint-based layout models, and so on.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Of course, more people are involved and contributed to the [development](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2) and [data project](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data)! If you find a bug, or have extra content to be added, create a ticket or pull request.
 

@@ -25,8 +25,8 @@ Are you ready for this Java Challenge? Less introduction, more action, try out t
 
 It's time to improve your Java skills with this Join Jedi Lambda
 
-Join Jedi Lambda Java Challenge {#_join_jedi_lambda_java_challenge}
--------------------------------------------------------------------
+Join Jedi Lambda Java Challenge
+-------------------------------
 
 By analyzing the following code, what do you think will happen when running it?
 

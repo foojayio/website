@@ -25,8 +25,8 @@ The approach targets a practical problem. Most developers work in mixed-era code
 
 <br />
 
-Less Boilerplate, More Intent {#h2-0-less-boilerplate-more-intent}
-------------------------------------------------------------------
+Less Boilerplate, More Intent
+-----------------------------
 
 One example contrasts a classic data class with a record.
 
@@ -59,8 +59,8 @@ The goal is not a new capability but a clearer expression. Modern Java often rem
 
 
 
-Safer Type Handling and Control Flow {#h2-1-safer-type-handling-and-control-flow}
----------------------------------------------------------------------------------
+Safer Type Handling and Control Flow
+------------------------------------
 
 The site also shows improvements in type checks and switch logic.
 
@@ -88,8 +88,8 @@ These changes shift common runtime mistakes into compile-time guarantees.
 
 
 
-Why It Matters {#h2-2-why-it-matters}
--------------------------------------
+Why It Matters
+--------------
 
 Java's evolution has been gradual, making improvements easy to miss. Seen individually, features look incremental. Seen side by side, they show a significant shift toward readability and correctness.
 
@@ -97,16 +97,16 @@ Community reactions suggest a clear use case: onboarding developers and guiding 
 
 
 
-Community Perspective {#h2-3-community-perspective}
----------------------------------------------------
+Community Perspective
+---------------------
 
 In a short exchange about the motivation behind the project, [Bruno Borges](https://www.linkedin.com/in/brunocborges/){#https://www.linkedin.com/in/brunocborges/} explained that the gap is largely about awareness rather than resistance to change:
 > > *"As Java developers find themselves being able to use newer versions of the JDK, I believe they do start adopting new language idioms, but new API usage requires deeper thinking and learning. Then, there is also the element of non-Java developers having the misconception that Java today is still the same as Java from more than a decade ago. The website helps bring awareness to both cases!"*
 
 This perspective aligns with the project's goal: not convincing developers to abandon existing code, but giving them a concrete reference point for how the language has evolved.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 *java.evolved* acts as a translation layer between past and present Java. By framing language features as recognizable rewrites instead of abstract concepts, it helps developers answer a simple daily question:
 

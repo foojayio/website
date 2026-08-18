@@ -28,8 +28,8 @@ We will package the API up as a Docker image which we can run a container from u
 
 The code for this project is on a GitHub repo: <https://github.com/zikani03/spam-detection-with-onnx>
 
-Which model to use? {#h2-0-which-model-to-use}
-----------------------------------------------
+Which model to use?
+-------------------
 
 SPAM detection is a very important part of modern digital communications especially if your running platforms that accept User Generated Content (UGC). Implementing SPAM detection is one of the classic machine learning problems, and there are many approaches to doing so.
 
@@ -40,8 +40,8 @@ Sounds interesting enough, so I looked to see if there was an ONNX version of th
 
 So the next step was to download the `model.onnx` and `tokenizer.json` files and include them in the project. Otis is licensed under BSD 3-Clause license for the curious.
 
-The Controller {#h2-1-the-controller}
--------------------------------------
+The Controller
+--------------
 
 The controller isn't much but here it is for reference, as you can see we have defined our API endpoint at the path: `/api/spam/check` which is intended to be called via a POST request. We rely on Spring's internal content negotiation for the request and responses meaning we can expect to be able to send and receive JSON.
 
@@ -63,8 +63,8 @@ public class SpamCheckerController {
 ```
 
 
-The Spam Detection Service {#h2-2-the-spam-detection-service}
--------------------------------------------------------------
+The Spam Detection Service
+--------------------------
 
 The end goal is to have an API that can be called from HTTP client. But In order to separate concerns, we place the inference code for the Spam detection in a class named `SpamDetectionService` with an appropriate `@Service` annotation.
 
@@ -196,8 +196,8 @@ tokenizer:
 ```
 
 
-Running the service via Docker {#h2-3-running-the-service-via-docker}
----------------------------------------------------------------------
+Running the service via Docker
+------------------------------
 
 The project in the repository uses Jib to build docker image from the Java source code. Run the following command to build the container, by default the created image will be named **zikani03/spam-detection-with-onnx**
 
@@ -232,8 +232,8 @@ I like to load test things with [hey](https://github.com/rakyll/hey), not bad.
 
 The performance is okay, considering this is all running on CPU and not GPU (which I'm sure you can use with the onnxruntime libraries).
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 I have been curious about performing Machine Learning with Java for a while and ran into ONNX as I was trying out some Python stuff and got curious if I could leverage ONNX models in Java, and ofcourse you can! Microsoft's onnxruntime for Java is a great place to start.
 

@@ -30,12 +30,12 @@ An experiment that brought me great pleasure. I hope you like it too!
 
 So... let's time travel and get back to Utrecht when I got the organizers before the camera just minutes before the first guests arrived!
 
-### Video {#h3-0-video}
+### Video
 
 {{< youtube VzhDmWZilI4 >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,54 +43,54 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Michel van Dongen {#h3-3-michel-van-dongen}
+### Michel van Dongen
 
 * [https://www.linkedin.com/in/michelvandongen/](https://www.linkedin.com/in/michelvandongen/%0A)
 * <https://twitter.com/VanDongenM>
 
-### Willem van de Griendt {#h3-4-willem-van-de-griendt}
+### Willem van de Griendt
 
 * <https://www.linkedin.com/in/willemvandegriendt/>
 * <https://twitter.com/Willemvdg>
 
-### Elias Nogueira {#h3-5-elias-nogueira}
+### Elias Nogueira
 
 * <https://www.linkedin.com/in/eliasnogueira/>
 * <https://twitter.com/eliasnogueira>
 
-### Gerard Meijwaard {#h3-6-gerard-meijwaard}
+### Gerard Meijwaard
 
 * [https://www.linkedin.com/in/gerard-meijwaard-83a5827/](https://www.linkedin.com/in/gerard-meijwaard-83a5827/%0A)
 * <https://twitter.com/GerardMei>
 
-### Hanno Embregts {#h3-7-hanno-embregts}
+### Hanno Embregts
 
 * <https://www.linkedin.com/in/hannoembregts/>
 * [https://twitter.com/hannotify](https://twitter.com/hannotify%0Ahttps://foojay.social/@hannotify)
 * [https://foojay.social/@hannotify](https://twitter.com/hannotify%0Ahttps://foojay.social/@hannotify)
 
-Podcast {#h2-8-podcast}
------------------------
+Podcast
+-------
 
-### Host: Frank Delporte {#h3-9-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
 ![](utrechtjug-819x1024.jpg)
 
-Links {#h2-10-links}
---------------------
+Links
+-----
 
 * <https://www.meetup.com/Utrecht-Java-User-Group/>
 * <https://www.linkedin.com/company/javautrecht/>
 * <https://twitter.com/utrechtjug>
 
-Content {#h2-11-content}
-------------------------
+Content
+-------
 
 00:00 Intro  
 

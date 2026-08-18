@@ -36,8 +36,8 @@ We plan to do a second part of this talk because there were so many things we ne
 
 <br />
 
-The Problem with show-sql {#h2-0-the-problem-with-show-sql}
------------------------------------------------------------
+The Problem with show-sql
+-------------------------
 
 After the brief introduction, we dove right into the problem with `show-sql`. It's pretty common for developers to enable the `spring.jpa.show-sql` setting in the configuration file.
 
@@ -47,7 +47,7 @@ This is very helpful for debugging performance issues, as we can see exactly wha
 
 But it doesn't log the SQL query. It prints it on the console!
 
-### Why do we Use Loggers? {#h3-1-why-do-we-use-loggers}
+### Why do we Use Loggers?
 
 This triggered the question to the audience: why does it matter if we use a logger and not `System.out`?
 
@@ -61,13 +61,13 @@ The reason is the fine grained control and metadata that loggers provide. Logger
 
 They let us attach metadata to a request using tools like MDC, which are absolutely amazing. You can also pipe logs to multiple destinations, output them in ingestible formats such as JSON so they can include proper meta-data when you view all the logs from all the servers (e.g. on Elastic).
 
-### Show-sql is Just System Output {#h3-2-show-sql-is-just-system-output}
+### Show-sql is Just System Output
 
 It includes no context. It's possible it won't get into your Elastic output and even if it does. You will have no context. It will be impossible to tell if a query was triggered because of request X or Y.
 
 Another problem here is the question marks in the SQL. There's a very limited context to work with. We want to see the variable values, not questions.
 
-### Adding a Log with Lightrun {#h3-3-adding-a-log-with-lightrun}
+### Adding a Log with Lightrun
 
 Lightrun lets you add a new log to a production application without changing the source code. We can just open the Hibernate file "Loader.java" and add a new log to `executeQueryStatement`.
 
@@ -89,7 +89,7 @@ You can see the log was printed with the full content on top but then suspended 
 
 You still get to see the query, and values sent to the database server.
 
-### Log Piping {#h3-4-log-piping}
+### Log Piping
 
 One of the biggest benefits of [Lightrun's](https://lightrun.com/) logging capability is its ability to integrate with other log statements written in the code. When you look at the log file, the Lightrun added statements will appear "in-order" with the log statements written in code.
 
@@ -99,8 +99,8 @@ If there are many people working on the source code and you want to investigate 
 
 Log piping lets us determine where we want the log to go. We can choose to pipe logs to the plugin and in such a case, the log won't appear with the other application logs. This way, a developer can track an issue without polluting the sanctity of the log.
 
-Spring Boot Connection Acquisition {#h2-5-spring-boot-connection-acquisition}
------------------------------------------------------------------------------
+Spring Boot Connection Acquisition
+----------------------------------
 
 ![](vlad5-spring-boot-connection-acquisition-700x322.png)
 
@@ -116,8 +116,8 @@ If this log is printed, we have a problem in our auto-commit configuration. Once
 
 ![](vlad7-disable-auto-commit-700x116.png)
 
-Query Plan Cache {#h2-6-query-plan-cache}
------------------------------------------
+Query Plan Cache
+----------------
 
 ![](vlad8-query-plan-cache-700x311.png)
 
@@ -133,7 +133,7 @@ Hibernate has a statistics class which collects all of this information. We can 
 
 ![](vlad10-snapshot-700x125.png)
 
-### Snapshots {#h3-7-snapshots}
+### Snapshots
 
 A Snapshot (AKA Non-breaking breakpoint or Capture) is a breakpoint that doesn't stop the program execution. It includes the stack trace, variable values in every stack frame, etc. It then presents these details to us in a UI very similar to the IDE breakpoint UI.
 
@@ -143,8 +143,8 @@ Conditional snapshots let us trigger the snapshot only if a particular condition
 
 ![](vlad11-snapshot-view-700x192.png)
 
-Eager Fetch {#h2-8-eager-fetch}
--------------------------------
+Eager Fetch
+-----------
 
 When we look at logs for SQL queries, we can often see that the database fetches a lot more than what we initially asked for. That's because of the default setting of JPA relations which is EAGER. This is a problem in the specification itself. We can achieve significant performance improvement by explicitly defining the fetch type to LAZY.
 
@@ -164,8 +164,8 @@ As you can see, this got triggered with a full stack trace and the information a
 
 You can use this approach to detect incorrect lazy fetches as well. Multiple lazy fetches can be worse than a single eager fetch, so we need to be vigilant.
 
-Open Session in View Anti-Pattern {#h2-9-open-session-in-view-anti-pattern}
----------------------------------------------------------------------------
+Open Session in View Anti-Pattern
+---------------------------------
 
 ![](vlad15-session-in-view-700x324.png)
 
@@ -181,12 +181,12 @@ Now that we see the problem is happening we can solve the problem by defining `s
 
 It will block you from using this approach.
 
-Q\&A {#h2-10-q-a}
------------------
+Q\&A
+----
 
 There were many brilliant questions as part of the session. Here are the answers.
 
-### **Could you please describe a little bit about Lightrun?** {#h3-11-could-you-please-describe-a-little-bit-about-lightrun}
+### **Could you please describe a little bit about Lightrun?**
 
 Lightrun is a developer observability platform. As such, it lets you debug production safely and securely while keeping a tight lid on CPU usage. It includes the following pieces:
 
@@ -196,17 +196,17 @@ Lightrun is a developer observability platform. As such, it lets you debug produ
 
 I wrote about it in depth [here](https://talktotheduck.dev/remote-debugging-and-developer-observability).
 
-### **Could Lightrun Work Offline?** {#h3-12-could-lightrun-work-offline}
+### **Could Lightrun Work Offline?**
 
 Since you're debugging production, we assume your server isn't offline.
 
 However, Lightrun can be deployed on-premise, which removes the need for an open to the Internet environment.
 
-### **Wondering about this sample, will this be available for our reference?** {#h3-13-wondering-about-this-sample-will-this-be-available-for-our-reference}
+### **Wondering about this sample, will this be available for our reference?**
 
 The code is all [here](https://github.com/vladmihalcea/spring-petclinic).
 
-### **As the Instrumentation/manipulation happens via a Server, given that I do not host the instrumentation server myself, what kind and what amount of data is being transmitted? Is the data secured or encrypted in any way?** {#h3-14-as-the-instrumentation-manipulation-happens-via-a-server-given-that-i-do-not-host-the-instrumentation-server-myself-what-kind-and-what-amount-of-data-is-being-transmitted-is-the-data-secured-or-encrypted-in-any-way}
+### **As the Instrumentation/manipulation happens via a Server, given that I do not host the instrumentation server myself, what kind and what amount of data is being transmitted? Is the data secured or encrypted in any way?**
 
 The instrumentation happens on your server using the agent.
 
@@ -220,55 +220,55 @@ Finally, all operations in Lightrun are logged in an administrator log, which me
 
 You can read more about Lightrun security [here](https://talktotheduck.dev/detect-track-verify-security-issues-zero-days).
 
-### **As mentioned, these logs are aged out in 1 hr. Is it possible to save those and re-use them for later use rather than creating log entries manually every time?** {#h3-15-as-mentioned-these-logs-are-aged-out-in-1-hr-is-it-possible-to-save-those-and-re-use-them-for-later-use-rather-than-creating-log-entries-manually-every-time}
+### **As mentioned, these logs are aged out in 1 hr. Is it possible to save those and re-use them for later use rather than creating log entries manually every time?**
 
 Lightrun actions default to expire after 1 hour to remove any potential unintentional overhead. You can set this number much higher, which is useful for hard to reproduce bugs.
 
 Notice that when an action is expired, you can just click it and re-create it. It will appear in red within the IDE and can still be used for reference.
 
-### **Is IntelliJ IDEA the only way to add breakpoints/logging? Or how is debugging with Lightrun done in production?** {#h3-16-is-intellij-idea-the-only-way-to-add-breakpoints-logging-or-how-is-debugging-with-lightrun-done-in-production}
+### **Is IntelliJ IDEA the only way to add breakpoints/logging? Or how is debugging with Lightrun done in production?**
 
 You can use IntelliJ (also PyCharm and WebStorm) as well as VSCode, VSCode.dev and the command line.
 
 These connect to production through the Lightrun server. The goal is to make you feel as if you're debugging a local app while extracting production data. Without the implied risks.
 
-### **Is there any case where eager loading should be configured always for One-to-Many or Many-to-Many or Many-to-One relations? I always configure lazy loading for the above relations. Is it okay?** {#h3-17-is-there-any-case-where-eager-loading-should-be-configured-always-for-one-to-many-or-many-to-many-or-many-to-one-relations-i-always-configure-lazy-loading-for-the-above-relations-is-it-okay}
+### **Is there any case where eager loading should be configured always for One-to-Many or Many-to-Many or Many-to-One relations? I always configure lazy loading for the above relations. Is it okay?**
 
 Yes. If you see that you keep fetching the other entity, then eager loading for this case makes sense. Having eagerness as the default makes little sense for most cases.
 
-### **Do we need to restart an application with the javaagent?** {#h3-18-do-we-need-to-restart-an-application-with-the-javaagent}
+### **Do we need to restart an application with the javaagent?**
 
 The agent would run in the background constantly. It's secure and doesn't have overhead when it isn't used.
 
-### **If we are using other instrumentation tools like say AppDynamics or dynatrace... does this work alongside?** {#h3-19-if-we-are-using-other-instrumentation-tools-like-say-appdynamics-or-dynatrace-does-this-work-alongside}
+### **If we are using other instrumentation tools like say AppDynamics or dynatrace... does this work alongside?**
 
 This varies based on the tool. Most APMs work fine besides Lightrun because they hook up to different capabilities of the JVM.
 
-### **Does this work with GraalVM?** {#h3-20-does-this-work-with-graalvm}
+### **Does this work with GraalVM?**
 
 Not at this time since GraalVM doesn't support the javaagent argument. We're looking for alternative approaches, but hopefully the GraalVM team will have some solutions.
 
-### **Is it free to use?** {#h3-21-is-it-free-to-use}
+### **Is it free to use?**
 
 Yes!
 
 Check out [lightrun.com/free](https://lightrun.com/free)
 
-### **Does it impact app performance?** {#h3-22-does-it-impact-app-performance}
+### **Does it impact app performance?**
 
 Yes, but it's minimal. Under 0.5% when no actions are used, and under 8% with multiple actions. Notice you can tune the amount of overhead in the agent configuration.
 
-### **Does it work for Scala and Kotlin?** {#h3-23-does-it-work-for-scala-and-kotlin}
+### **Does it work for Scala and Kotlin?**
 
 Yes.
 
-### **How to use it in production without an IDE?** {#h3-24-how-to-use-it-in-production-without-an-ide}
+### **How to use it in production without an IDE?**
 
 The IDE will work even for production, since you don't connect directly to the production servers and don't have access to them. The IDE connects to the Lightrun management server only. This lets your production servers remain segregated.
 
 Having said that, you can still use the command-line interface to get all the features discussed here and much more.
 
-### **Apart from injecting loggers, what other stuff can we do?** {#h3-25-apart-from-injecting-loggers-what-other-stuff-can-we-do}
+### **Apart from injecting loggers, what other stuff can we do?**
 
 The snapshot lets you get full stack traces with the values of all the variables in the stack and object instance state. You can also include custom watch expressions as part of the snapshot.
 
@@ -276,21 +276,21 @@ Metrics let you add counters (how many times did we reach this line), tictocs (h
 
 You can also add conditions to each one of those to narrowly segment the data.
 
-### **How do we hide sensitive properties from beans? Say Credit card number of user?** {#h3-26-how-do-we-hide-sensitive-properties-from-beans-say-credit-card-number-of-user}
+### **How do we hide sensitive properties from beans? Say Credit card number of user?**
 
 Lightrun supports PII Reduction, which lets you define a mask (e.g. credit card) that would be removed before going into the logs. This lets you block an inadvertent injection into the logs.
 
 It also supports blocklists, which let you block a file/class/group from actions. This means a developer won't be able to place a log or snapshot there.
 
-### **How can we use it for performance testing?** {#h3-27-how-can-we-use-it-for-performance-testing}
+### **How can we use it for performance testing?**
 
-I made a tutorial on this [here](https://twitter.com/debugagent/status/1531653268639825923?s=20&amp;t=_2mpt-LGGCr5WYvDc7POUw).
+I made a tutorial on this [here](https://twitter.com/debugagent/status/1531653268639825923?s=20&t=_2mpt-LGGCr5WYvDc7POUw).
 
-### **When working air gapped on prem is required, how do you provide the Server, as a jar or docker...?** {#h3-28-when-working-air-gapped-on-prem-is-required-how-do-you-provide-the-server-as-a-jar-or-docker}
+### **When working air gapped on prem is required, how do you provide the Server, as a jar or docker...?**
 
 This is something our team helps you set up.
 
-### **Will it consume much more memory if we run with the Lightrun agent?** {#h3-29-will-it-consume-much-more-memory-if-we-run-with-the-lightrun-agent}
+### **Will it consume much more memory if we run with the Lightrun agent?**
 
 This is minimal. Running the petclinic demo on my Mac with no agent produces this in the system monitor:
 
@@ -302,8 +302,8 @@ With the agent, we have this:
 
 At these scales, a difference of 17mb is practically within the margin of error. It's unclear what overhead the agent has, if at all.
 
-Finally {#h2-30-finally}
-------------------------
+Finally
+-------
 
 This has been so much fun and we can't wait to do it again. Please follow [Vlad](https://twitter.com/vlad_mihalcea), [Tom](https://twitter.com/tomGranot/), and [myself](https://twitter.com/debugagent) for updates on all of this.
 

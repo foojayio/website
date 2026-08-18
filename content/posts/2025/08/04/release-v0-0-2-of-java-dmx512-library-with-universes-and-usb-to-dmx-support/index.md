@@ -37,8 +37,8 @@ Earlier this month, I [released V0.0.1 of my new Java library to interact with D
  </figure>
 </figure>
 
-Introduction of DMX Universes {#h2-0-introduction-of-dmx-universes}
--------------------------------------------------------------------
+Introduction of DMX Universes
+-----------------------------
 
 {{< youtube slC4niKWUq0 >}}
 
@@ -78,8 +78,8 @@ controller.render(universe2);
 ```
 
 
-USB-to-DMX Support {#h2-1-usb-to-dmx-support}
----------------------------------------------
+USB-to-DMX Support
+------------------
 
 {{< youtube q7T66fzsym0 >}}
 
@@ -113,8 +113,8 @@ controller.render(universe);
 ```
 
 
-DMX512 Java Library {#h2-2-dmx512-java-library}
------------------------------------------------
+DMX512 Java Library
+-------------------
 
 The library I created is open-source with its [sources on GitHub](https://github.com/codewriterbv/DMX512/) and [releases on Maven Central](https://central.sonatype.com/artifact/be.codewriter/dmx512).
 
@@ -127,14 +127,14 @@ The library I created is open-source with its [sources on GitHub](https://github
 ```
 
 
-DMX512 JavaFX Demo Project {#h2-3-dmx512-javafx-demo-project}
--------------------------------------------------------------
+DMX512 JavaFX Demo Project
+--------------------------
 
 The JavaFX user interface demo application has been updated to use V0.0.2 of the library and has proven to work identically with IP-to-DMX and USB-to-DMX. Check the [sources on GitHub](https://github.com/codewriterbv/DMX512-Demo).
 ![](https://webtechie.be/images/2025/dmx/demo-app-picospot-channels.png)
 
-Next Steps {#h2-4-next-steps}
------------------------------
+Next Steps
+----------
 
 I also have an Enttec Open DMX USB interface, but I didn't get it working yet... With a chat-based coding approach, I have implemented several serial DMX512 protocols that you can test, but none have resulted in a working solution. I reached out to Enttec for more information about the protocol, but I haven't received a reply yet.
 

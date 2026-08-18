@@ -29,13 +29,13 @@ frozen: false
 
 We're proud to announce **BoxLang 1.11.0**, a highly focused performance and stability release that delivers measurable speed improvements across every BoxLang application, with zero code changes required. The team invested deeply in bytecode generation, class loading, lock management, and type casting to produce one of the most impactful runtime optimization releases to date. Alongside the performance wave, this release resolves critical concurrency bugs, hardens DateTime handling, and ships powerful new developer tooling.
 
-🚀 What's New in 1.11.0 {#h2-0-what-s-new-in-1-11-0}
-----------------------------------------------------
+🚀 What's New in 1.11.0
+-----------------------
 
 You can find the full release notes here:  
 <https://boxlang.ortusbooks.com/readme/release-history/1.11.0>
 
-### ⚡ Performance Wave --- 15+ Targeted Runtime Speedups {#h3-1-performance-wave-15-targeted-runtime-speedups}
+### ⚡ Performance Wave --- 15+ Targeted Runtime Speedups
 
 BoxLang 1.11.0 includes over **15 targeted performance improvements** spanning bytecode compilation, runtime execution, memory management, and concurrency. Every BoxLang application benefits immediately.
 
@@ -71,7 +71,7 @@ Memory \& Concurrency
 * **Avoided** `Map.containsValue()` in UDF invocation (linear scan → constant time)  
   The cumulative effect is meaningful: applications under load will see reduced latency, lower GC pressure, and better throughput --- all with zero migration effort.
 
-### 🔒 Concurrency \& Lock Safety --- Critical Fix {#h3-2-concurrency-lock-safety-critical-fix}
+### 🔒 Concurrency \& Lock Safety --- Critical Fix
 
 Two critical bugs in the exclusive lock system have been resolved. Before 1.11.0, exclusive locks could occasionally allow more than one thread into a supposedly exclusive section under high load ([BL-2203](http://https://ortussolutions.atlassian.net/browse/BL-2203 "BL-2203"), [BL-2205](http://https://ortussolutions.atlassian.net/browse/BL-2205 "BL-2205")).
 
@@ -88,7 +88,7 @@ lock name="processPayment_#orderId#" type="exclusive" timeout="30" {
 
 Lock storage has also been improved ([BL-2201](http://https://ortussolutions.atlassian.net/browse/BL-2201 "BL-2201")) for better performance and memory efficiency. If you rely on exclusive locks for payment processing, inventory management, or any critical section --- this is an important upgrade.
 
-### 🗓️ DateTime Casting Reliability {#h3-3-datetime-casting-reliability}
+### 🗓️ DateTime Casting Reliability
 
 A comprehensive sweep of DateTime casting fixes ensures robust date handling across all common formats and edge cases:
 
@@ -110,7 +110,7 @@ cast1 = dateTimeFormat( odbcDate, "yyyy-mm-dd" )          // BL-2188
 ```
 
 
-### 🆕 **`enforceUDFTypeChecks`** Configuration Setting {#h3-4-enforceudftypechecks-configuration-setting}
+### 🆕 **`enforceUDFTypeChecks`** Configuration Setting
 
 A new runtime setting allows you to skip UDF argument and return type validation --- useful for trusted high-performance codebases:
 
@@ -124,7 +124,7 @@ A new runtime setting allows you to skip UDF argument and return type validation
 
 When false, BoxLang skips argument type validation and return type casting on function calls --- similar to how the Java compiler performs generic type erasure. This can improve performance but removes the safety net of runtime type checks.
 
-### ⏱️ **`getTickCount()`** --- Nanosecond \& Second Precision {#h3-5-gettickcount-nanosecond-second-precision}
+### ⏱️ **`getTickCount()`** --- Nanosecond \& Second Precision
 
 `getTickCount()` now supports `nano` and `second` units alongside the existing `millisecond` support:
 
@@ -143,7 +143,7 @@ println( "Elapsed: #elapsed# seconds" )  // 2
 ```
 
 
-### 🗑️ New BIF: `ExecutorDelete()` {#h3-6-new-bif-executordelete}
+### 🗑️ New BIF: `ExecutorDelete()`
 
 The missing `ExecutorDelete()` BIF has been added, completing the executor lifecycle management API. Previously, shutting down an executor did not remove it from the executor registry (BL-2168), causing issues when recreating executors with the same name.
 
@@ -160,51 +160,51 @@ executorDelete( "myPool" )
 ```
 
 
-🤖 Core Runtime Updates {#h2-7-core-runtime-updates}
-----------------------------------------------------
+🤖 Core Runtime Updates
+-----------------------
 
-### 🏗️ Class System Improvements {#h3-8-class-system-improvements}
+### 🏗️ Class System Improvements
 
 * **Super class loading** improved to handle complex inheritance hierarchies reliably ([BL-2211](http://https://ortussolutions.atlassian.net/browse/BL-2211 "BL-2211"))
 * **Abstract class enforcement** relaxed --- abstract classes are no longer required to implement all interface methods ([BL-2251](http://https://ortussolutions.atlassian.net/browse/BL-2251 "BL-2251")), matching Java and CFML semantics
 * **Typed array returns** no longer throw NPE when a class is instantiated via a different invocation path ([BL-2237](http://https://ortussolutions.atlassian.net/browse/BL-2237 "BL-2237"))
 * **Implicit accessors** now generate the correct return type in method signatures instead of always using `any` ([BL-2195](http://https://ortussolutions.atlassian.net/browse/BL-2195 "BL-2195"))  
 
-  ### 🧵 Thread \& Execution Fixes {#h3-9-thread-execution-fixes}
+  ### 🧵 Thread \& Execution Fixes
 
 * **Duplicate bytecode methods** no longer generated in edge cases ([BL-2207](http://https://ortussolutions.atlassian.net/browse/BL-2207 "BL-2207"))
 * **Incompatible stack heights** when not assigning new `Foo()` resolved ([BL-2213](http://https://ortussolutions.atlassian.net/browse/BL-2213 "BL-2213"))
 * **Illegal exception table range** in class files fixed ([BL-1916](http://https://ortussolutions.atlassian.net/browse/BL-1916 "BL-1916"))
 * **Parser concurrency** issue in LSP fixed when getting cache size ([BL-2253](http://https://ortussolutions.atlassian.net/browse/BL-2253 "BL-2253"))  
 
-  ### 📊 Query System {#h3-10-query-system}
+  ### 📊 Query System
 
 * **`QueryNew()`** **and** **`queryAddRow()`** now properly validate column types ([BL-2247](http://https://ortussolutions.atlassian.net/browse/BL-2247 "BL-2247"))
 * **`distinct(col)`** no longer confused with a function name in QoQ ([BL-2221](http://https://ortussolutions.atlassian.net/browse/BL-2221 "BL-2221"))
 * **QoQ with ODBC Timestamp** format columns now compiles correctly ([BL-2144](http://https://ortussolutions.atlassian.net/browse/BL-2144 "BL-2144"))
 * **Query column scope** no longer found in loops for assignment ([BL-2208](http://https://ortussolutions.atlassian.net/browse/BL-2208 "BL-2208")), fixing variable scoping edge cases  
 
-  ### 🔤 String \& Type Improvements {#h3-11-string-type-improvements}
+  ### 🔤 String \& Type Improvements
 
 * **`quotedValueList()`** now correctly wraps values in single quotes per CFML spec ([BL-2185](http://https://ortussolutions.atlassian.net/browse/BL-2185 "BL-2185"))
 * **`println()`** can now be called with no arguments to output an empty line --- no more `println( "" )` workaround ([BL-2200](http://https://ortussolutions.atlassian.net/browse/BL-2200 "BL-2200"))
 * **`compareTo()`** **date member method** no longer incorrectly attaches to zero-valued BigDecimal ([BL-2166](http://https://ortussolutions.atlassian.net/browse/BL-2166 "BL-2166"))  
 
-  ### 🌐 XML Handling {#h3-12-xml-handling}
+  ### 🌐 XML Handling
 
 * **Deleting a non-existent key** from `XMLAttribute` no longer throws an error ([BL-2231](http://https://ortussolutions.atlassian.net/browse/BL-2231 "BL-2231"))
 * **`XMLChildren`** now updates correctly in all mutation cases ([BL-2240](http://https://ortussolutions.atlassian.net/browse/BL-2240 "BL-2240"))
 * **WDDX** now properly escapes special characters in attribute values ([BL-2216](http://https://ortussolutions.atlassian.net/browse/BL-2216 "BL-2216"))  
 
-  ### 🔐 Transaction \& Stored Procedures {#h3-13-transaction-stored-procedures}
+  ### 🔐 Transaction \& Stored Procedures
 
 * **Transaction** **`end`** **action** no longer throws an error when a stored procedure was executed within the transaction ([BL-2157](http://https://ortussolutions.atlassian.net/browse/BL-2157 "BL-2157"))
 * **Transaction** **`action`** **attribute** is now case-insensitive ([BL-2238](http://https://ortussolutions.atlassian.net/browse/BL-2238 "BL-2238"))
 
-📡 MiniServer Runtime Updates {#h2-14-miniserver-runtime-updates}
------------------------------------------------------------------
+📡 MiniServer Runtime Updates
+-----------------------------
 
-### 📁 **`.boxlang.json`** Convention {#h3-15-boxlang-json-convention}
+### 📁 **`.boxlang.json`** Convention
 
 The MiniServer now automatically detects and loads a .boxlang.json file from the current working directory, merging it with the base BoxLang configuration (BL-2218):
 
@@ -225,7 +225,7 @@ $ boxlang server start
 
 This makes project-level BoxLang configuration portable and self-contained --- ideal for containerized deployments and team environments.
 
-### ⚙️ Undertow / Socket / WebSocket Options {#h3-16-undertow-socket-websocket-options}
+### ⚙️ Undertow / Socket / WebSocket Options
 
 You can now tune Undertow, socket, and WebSocket low-level options directly from `miniserver.json`:
 
@@ -248,7 +248,7 @@ You can now tune Undertow, socket, and WebSocket low-level options directly from
 ```
 
 
-### 📂 Logging Directory Output {#h3-17-logging-directory-output}
+### 📂 Logging Directory Output
 
 The MiniServer now logs the logging directory path during startup ([BL-1342](http://https://ortussolutions.atlassian.net/browse/BL-1342 "BL-1342")) --- a small but welcome quality-of-life improvement:
 
@@ -257,14 +257,14 @@ The MiniServer now logs the logging directory path during startup ([BL-1342](htt
 | \[BoxLang\] Logging directory: /home/app/.boxlang/logs |
 | \[BoxLang\] Server started on <http://localhost:8080>  |
 
-### 🔄 Undertow Upgraded to 2.3.23.Final {#h3-18-undertow-upgraded-to-2-3-23-final}
+### 🔄 Undertow Upgraded to 2.3.23.Final
 
 The MiniServer now runs on **Undertow 2.3.23.Final**, bringing the latest HTTP server fixes and security patches.
 
-🌐 Web Support Updates {#h2-19-web-support-updates}
----------------------------------------------------
+🌐 Web Support Updates
+----------------------
 
-### 🔀 Pre-Request Interception for Request Rerouting {#h3-20-pre-request-interception-for-request-rerouting}
+### 🔀 Pre-Request Interception for Request Rerouting
 
 A new interception point fires **before** `onRequestStart`, enabling interceptors to reroute requests before the application lifecycle begins ([BL-2164](http://https://ortussolutions.atlassian.net/browse/BL-2164 "BL-2164")). This unlocks powerful request gateway patterns:
 
@@ -275,10 +275,10 @@ A new interception point fires **before** `onRequestStart`, enabling interceptor
 
 All handled before any application overhead kicks in.
 
-🛠️ Developer Experience {#h2-21-developer-experience}
-------------------------------------------------------
+🛠️ Developer Experience
+------------------------
 
-### 🌳 Enhanced **`--bx-printast`** Tooling {#h3-22-enhanced-bx-printast-tooling}
+### 🌳 Enhanced **`--bx-printast`** Tooling
 
 The `--bx-printast` CLI flag now supports **file paths and standard input piping** ([BL-2187](http://https://ortussolutions.atlassian.net/browse/BL-2187 "BL-2187")), making it far more useful for debugging parser output and build tooling integration:
 
@@ -294,7 +294,7 @@ cat MyComponent.bx | boxlang --bx-printast | jq '.body[0]'
 ```
 
 
-### 🧩 SOAP Client --- Binary and Map Type Support {#h3-23-soap-client-binary-and-map-type-support}
+### 🧩 SOAP Client --- Binary and Map Type Support
 
 The SOAP client now supports binary data and map/struct types for both requests and responses. It also allows you to call service methods directly without going through `invoke()`:
 
@@ -315,7 +315,7 @@ result = ws.updateRecord( {
 ```
 
 
-### 🔧 Session Configuration in `boxlang.json` {#h3-24-session-configuration-in-boxlang-json}
+### 🔧 Session Configuration in `boxlang.json`
 
 Two previously missing session configuration settings are now supported ([BL-1859](http://https://ortussolutions.atlassian.net/browse/BL-1859 "BL-1859")):
 
@@ -327,12 +327,12 @@ Two previously missing session configuration settings are now supported ([BL-185
 ```
 
 
-### 📋 Improved CLI Error Messages {#h3-25-improved-cli-error-messages}
+### 📋 Improved CLI Error Messages
 
 CLI error messages now provide clearer context and actionable information when BoxLang scripts fail ([BL-2212](http://https://ortussolutions.atlassian.net/browse/BL-2212 "BL-2212")).
 
-🐛 Notable Bug Fixes🐛 Notable Bug Fixes {#h2-26-notable-bug-fixes-notable-bug-fixes}
--------------------------------------------------------------------------------------
+🐛 Notable Bug Fixes🐛 Notable Bug Fixes
+----------------------------------------
 
 |                                      Ticket                                      |                                    Summary                                    |
 |----------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
@@ -349,8 +349,8 @@ CLI error messages now provide clearer context and actionable information when B
 | [BL-2242](http://https://ortussolutions.atlassian.net/browse/BL-2242 "BL-2242")  | Null in switch statement threw error                                          |
 | [BL-2251](http://https://ortussolutions.atlassian.net/browse/BL-2251 "BL-2251")  | Abstract class incorrectly required to implement all interface methods        |
 
-🔧 Configuration Updates Summary {#h2-27-configuration-updates-summary}
------------------------------------------------------------------------
+🔧 Configuration Updates Summary
+--------------------------------
 
 |         Setting         |                               Description                               |
 |-------------------------|-------------------------------------------------------------------------|
@@ -359,16 +359,16 @@ CLI error messages now provide clearer context and actionable information when B
 | `sessionCluster`        | Enable distributed session clustering in `boxlang.json`                 |
 | `.boxlang.json `        | MiniServer now auto-loads this file from the working directory          |
 
-📦 Dependency Updates {#h2-28-dependency-updates}
--------------------------------------------------
+📦 Dependency Updates
+---------------------
 
 * **Undertow** upgraded to `2.3.23.Final`
 * **Gradle wrapper** updated to `9.3.1`
 * **Jackson Jr** bumped to `2.21.1`
 * **Logback Classic** bumped to `1.5.32`
 
-🎯 Upgrading {#h2-29-upgrading}
--------------------------------
+🎯 Upgrading
+------------
 
 BoxLang 1.11.0 is a drop-in upgrade. No code changes are required to benefit from the performance improvements.
 
@@ -386,8 +386,8 @@ FROM ortussolutions/boxlang:1.11.0
 
 Full release notes, documentation, and downloads are available at [boxlang.io](http://https://boxlang.io/?_gl=1*1i9icmx*_gcl_au*NDk3OTAwOTEuMTc2ODUxNjQ4Nw..*_ga*MTg5MDU4NDYzMS4xNzMyMDQwMzg2*_ga_663JFQ7YGX*czE3NzM0MTYwNzYkbzkyJGcxJHQxNzczNDE2MTAyJGozNCRsMCRoMA.. "boxlang.io") and [boxlang.ortusbooks.com](http://https://boxlang.ortusbooks.com/ "boxlang.ortusbooks.com").
 
-Join the BoxLang Community ⚡️ {#h2-30-join-the-boxlang-community}
------------------------------------------------------------------
+Join the BoxLang Community ⚡️
+-----------------------------
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on **Into the Box 2025, product launches, tool updates, and more.**
 

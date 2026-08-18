@@ -43,8 +43,8 @@ One consistent API. Three major cloud providers. Zero custom plumbing in your ap
 * <https://boxlang.ortusbooks.com/boxlang-+-++/modules/bx-azure-secrets>
 * <https://boxlang.ortusbooks.com/boxlang-+-++/modules/bx-google-secrets>
 
-One Pattern to Rule Them All {#h2-0-one-pattern-to-rule-them-all}
------------------------------------------------------------------
+One Pattern to Rule Them All
+----------------------------
 
 No matter which cloud provider you use, the interface is the same:
 
@@ -71,10 +71,10 @@ apiKey = getSystemSetting( "aws.API_KEY", "local-dev-key" )
 
 If the secret can't be resolved (no credentials, wrong environment, network issue), BoxLang falls back gracefully to your default. No exceptions to swallow, no conditional logic to write.
 
-InstallationInstallation {#h2-1-installationinstallation}
----------------------------------------------------------
+InstallationInstallation
+------------------------
 
-### CommandBoxVia CommandBox {#h3-2-commandboxvia-commandbox}
+### CommandBoxVia CommandBox
 
 ```java
 # AWS
@@ -88,7 +88,7 @@ box install bx-plus,bx-google-secrets
 ```
 
 
-### Via BoxLang OS Binary {#h3-3-via-boxlang-os-binary}
+### Via BoxLang OS Binary
 
 ```java
 install-bx-module bx-plus bx-aws-secrets
@@ -99,8 +99,8 @@ install-bx-module bx-plus bx-google-secrets
 
 All three modules require an active BoxLang+ license. See plans at boxlang.io/plans.
 
-How Configuration Resolution Works {#h2-4-how-configuration-resolution-works}
------------------------------------------------------------------------------
+How Configuration Resolution Works
+----------------------------------
 
 Each module resolves its settings using a clean 3-tier hierarchy -- independently per setting, so you can mix sources freely:
 
@@ -112,7 +112,7 @@ Each module resolves its settings using a clean 3-tier hierarchy -- independentl
 
 This means a multi-tenant server can run multiple applications, each with their own credentials and region, with no cross-contamination. Each application gets its own dedicated client instance, created on first use and cleaned up on application shutdown.
 
-### Per-Application Configuration (Application.bx) {#h3-5-per-application-configuration-application-bx}
+### Per-Application Configuration (Application.bx)
 
 ```java
 class {
@@ -145,7 +145,7 @@ class {
 ```
 
 
-### Global Server Configuration (boxlang.json) {#h3-6-global-server-configuration-boxlang-json}
+### Global Server Configuration (boxlang.json)
 
 ```java
 {
@@ -175,8 +175,8 @@ class {
 ```
 
 
-Real-World Usage: Datasource Configuration {#h2-7-real-world-usage-datasource-configuration}
---------------------------------------------------------------------------------------------
+Real-World Usage: Datasource Configuration
+------------------------------------------
 
 This is where it gets satisfying. No more credentials in your datasource config, no more environment variable juggling:
 
@@ -198,8 +198,8 @@ class {
 
 Rotate the secret in AWS Secrets Manager, and the next cache expiry cycle picks it up automatically. No redeployment, no config change, no 2am wake-up call.
 
-Built-In Caching: Performance Without Compromise {#h2-8-built-in-caching-performance-without-compromise}
---------------------------------------------------------------------------------------------------------
+Built-In Caching: Performance Without Compromise
+------------------------------------------------
 
 Every secrets call is cached in-memory with a configurable TTL (default: 300 seconds). Cache keys are scoped to the provider identity (`region:secretName` for AWS, `vaultUrl:secretName` for Azure, `projectId:secretName` for Google) so there is no leakage between applications or providers.
 
@@ -207,8 +207,8 @@ The math is straightforward: a BoxLang application handling thousands of request
 
 Set `cacheTTL` to `0` if you need fresh values on every resolution -- useful in certain compliance scenarios.
 
-Local Development Support {#h2-9-local-development-support}
------------------------------------------------------------
+Local Development Support
+-------------------------
 
 All three modules have first-class local development stories.
 
@@ -256,8 +256,8 @@ gcloud secrets versions add DB_PASSWORD --data-file=- <<< "local-password"
 
 In each case, the same application code that runs in production works locally with no changes. That's the contract.
 
-Environment Variable Support {#h2-10-environment-variable-support}
-------------------------------------------------------------------
+Environment Variable Support
+----------------------------
 
 All three modules fall back to standard provider environment variables when no explicit configuration is set. This makes them drop-in compatible with existing container and CI/CD setups:
 
@@ -269,15 +269,15 @@ All three modules fall back to standard provider environment variables when no e
 
 Azure and Google also support their respective managed identity and default credential chains (`DefaultAzureCredential`, Application Default Credentials), so workloads running inside Azure or GCP need no explicit credentials at all.
 
-This Is a BoxLang+ Feature {#h2-11-this-is-a-boxlang-feature}
--------------------------------------------------------------
+This Is a BoxLang+ Feature
+--------------------------
 
 These modules are available exclusively to **BoxLang+** and **BoxLang++** subscribers. If you're already a subscriber, install away. If you're not, this is a good moment to look at what's in the tier.
 
 [Explore BoxLang plans](https://boxlang.io/plans?_gl=1*mwcok8*_gcl_au*MTY2NTY3NzQ5Ni4xNzgzMzU1ODU3Li0uLS4xNzg0NTY3MTg5Ljc0ODkxOTMwMy4xNzg0NTY3MTg5LjE3ODQ1NjcxODk.*_ga*MTQ4MjQzODA2Ny4xNzc1NTA1MDAw*_ga_D1P6P1YYT0*czE3ODQ2MzIxNjEkbzY5JGcwJHQxNzg0NjMyMTYxJGo2MCRsMCRoMA..*_ga_663JFQ7YGX*czE3ODQ2MzIxNjEkbzY1JGcwJHQxNzg0NjMyMTYxJGo2MCRsMCRoMA.. "Explore BoxLang plans")
 
-Get Started {#h2-12-get-started}
---------------------------------
+Get Started
+-----------
 
 ```java
 # Pick your provider and install

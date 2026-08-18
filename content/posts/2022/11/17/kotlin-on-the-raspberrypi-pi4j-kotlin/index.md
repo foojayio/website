@@ -35,13 +35,13 @@ Many factors led to this great reality, most notable to me is Kotlin's non-disru
 
 Enough reasons for us to bring it over to the RaspberryPi Community!
 
-Pi4J-Kotlin {#h2-0-pi4j-kotlin}
--------------------------------
+Pi4J-Kotlin
+-----------
 
 Our latest project, [Pi4J-Kotlin](https://github.com/Pi4J/pi4j-kotlin), provides a Kotlin DSL for the already-mature \& capable Pi4J V2 API. You can take full advantage of Kotlin on the RaspberryPi and write even more capable and concise code for your projects.
 
-Blink if you can hear me {#h2-1-blink-if-you-can-hear-me}
----------------------------------------------------------
+Blink if you can hear me
+------------------------
 
 A blinking LED example is a benchmark for code simplicity (*at least for me, just pretend* ). Here's how to blink with `Pi4J-Kotlin`:
 
@@ -57,8 +57,8 @@ fun blink() = digitalOutput(22).run {
 
 We also have a [minimal example](https://pi4j.com/kotlin/minimal-kotlin-example/) to get you started with more components.
 
-Declarative API {#h2-2-declarative-api}
----------------------------------------
+Declarative API
+---------------
 
 All you have to do to access everything-RaspberryPi is to use the `pi4j` block:
 
@@ -114,12 +114,12 @@ Be it Digital or Analog IO you'll find a little API that makes life even more co
 
 Confused as you are, you might want to check the [full documentation](https://pi4j.com/kotlin/kotlin-api-docs/) on these new APIs and lots more.
 
-The story doesn't end {#h2-3-the-story-doesn-t-end}
----------------------------------------------------
+The story doesn't end
+---------------------
 
 There are still more DSLs on their way for communication protocols and standards like **SPI** , **I²C** and more!
 
-Tell us what you think {#h2-4-tell-us-what-you-think}
------------------------------------------------------
+Tell us what you think
+----------------------
 
 Try it out! Tell us what you think and give us some ideas! Here is the [GitHub Repository](https://github.com/Pi4J/pi4j-kotlin).

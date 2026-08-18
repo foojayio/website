@@ -31,8 +31,8 @@ RBAC is certainly not new; it has been around for decades. However, the way we a
 
 In this article, we will explore how to implement RBAC at the application level, using MongoDB to store user metadata and keeping the authorization logic close to the core of the system. The goal is not only to make things secure, but also to make them architecturally consistent. All the code used in this article is inside this [repository](https://github.com/matteoroxis/mongo-rbac-engine).
 
-Authorization Is a Business Concern {#h2-0-authorization-is-a-business-concern}
--------------------------------------------------------------------------------
+Authorization Is a Business Concern
+-----------------------------------
 
 In Spring applications, it is very easy to find authorization hidden within annotations:
 
@@ -56,8 +56,8 @@ However, this does not mean that annotations should be eliminated. On the contra
 
 Making business rules explicit and technical rules declarative allows us to achieve both clarity and security.
 
-Modeling Permissions First {#h2-1-modeling-permissions-first}
--------------------------------------------------------------
+Modeling Permissions First
+--------------------------
 
 A common mistake is to think about roles before permissions. Permissions represent actions. They are verbs, concrete operations that the system makes available.
 
@@ -105,8 +105,8 @@ A design like this has two important consequences. First, permissions are clear 
 
 Second, this entire logic does not depend in any way on technological implementations or any security framework. This independence is intentional, as authorization rules should not be linked in any way to infrastructure or external dependencies.
 
-Using MongoDB for User Metadata {#h2-2-using-mongodb-for-user-metadata}
------------------------------------------------------------------------
+Using MongoDB for User Metadata
+-------------------------------
 
 MongoDB can be an excellent choice for storing user metadata. User profiles change over time: new attributes appear, others disappear. Roles change.
 
@@ -143,8 +143,8 @@ MongoDB does one thing and one thing only: it persists metadata. It does not dec
 
 This type of separation keeps the core application code clean.
 
-From Infrastructure Model to Application Principal {#h2-3-from-infrastructure-model-to-application-principal}
--------------------------------------------------------------------------------------------------------------
+From Infrastructure Model to Application Principal
+--------------------------------------------------
 
 Instead of using a representation of the User as UserDocument, contaminating its representation with persistence logic, we use a representation closer to the domain, such as the following
 
@@ -186,8 +186,8 @@ public class UserMapper {
 
 By doing this, authorization works on the application domain and not on a MongoDB entity or a specific framework principle.
 
-Centralizing Authorization Logic {#h2-4-centralizing-authorization-logic}
--------------------------------------------------------------------------
+Centralizing Authorization Logic
+--------------------------------
 
 We explicitly introduce an AuthorizationService, which allows us to centralize authorization control in a single place, rather than spreading it throughout the codebase.
 
@@ -223,8 +223,8 @@ public class OrderService {
 
 When reading this method, the authorization requirement is clear: there are no hidden or nested annotations, no proxy magic. The rule is located where it matters, namely protecting the boundary between application behavior and the domain.
 
-Contextual Rules: Where RBAC Stops {#h2-5-contextual-rules-where-rbac-stops}
-----------------------------------------------------------------------------
+Contextual Rules: Where RBAC Stops
+----------------------------------
 
 RBAC policies handle static permissions well, but real-world systems rarely stop at this level. For example, a user may have permission to cancel orders, but that does not automatically mean they can cancel any order.
 
@@ -267,8 +267,8 @@ public boolean canCancel(Order order, Authentication authentication) {
 
 In practice, RBAC tells you whether the action is allowed "in general," while context constraints---whether you choose to implement them in domain logic or as context-aware RBAC in the policy engine---tell you whether the action is allowed here and now. Keeping these layers separate helps avoid confusing identity-based access with business constraints related to the specific case.
 
-RBAC vs ABAC: When Roles Are Not Enough {#h2-6-rbac-vs-abac-when-roles-are-not-enough}
---------------------------------------------------------------------------------------
+RBAC vs ABAC: When Roles Are Not Enough
+---------------------------------------
 
 As mentioned, as the system grows in both functionality and complexity, RBAC policies show their limitations. Let's take another example:
 
@@ -292,8 +292,8 @@ For the vast majority of enterprise applications, especially those with well-def
 
 If permissions are explicit and authorization is centralized, we can start with this approach and then extend the AuthorizationService by applying richer policies, and why not, attribute-based ones. In this case, the architecture offers options.
 
-The Architectural Payoff {#h2-7-the-architectural-payoff}
----------------------------------------------------------
+The Architectural Payoff
+------------------------
 
 Implementing RBAC policies as configurations gives us the idea that we have added functionality to our system. Modeling RBAC policies in the core of our application allows us to make these rules part of the business logic. Permissions describe capabilities, roles describe responsibilities, and authorization controls describe intent.
 
@@ -308,8 +308,8 @@ Applying this attribution of responsibilities allows us to gain a lot of long-te
 
 The real strength lies in the fact that by reading the service layer of an application, you not only know what that application does, but also who is authorized to do what.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 We often see role-based access control functionality as something that can be activated, a box to tick in the security settings. In many cases, an annotation above a method.
 

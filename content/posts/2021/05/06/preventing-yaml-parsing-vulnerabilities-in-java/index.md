@@ -25,8 +25,8 @@ Although YAML looks like an excellent alternative for XML and JSON, many people 
 
 Most importantly to note, manually importing YAML in your Java application with an outdated version of **[snakeyaml](https://snyk.io/vuln/SNYK-JAVA-ORGYAML-537645)**might get you into trouble.
 
-Billion laughs attack {#h2-0-billion-laughs-attack}
----------------------------------------------------
+Billion laughs attack
+---------------------
 
 One feature of YAML is that you can create anchors. You can reuse these anchors in different places so you do not have to repeat yourself. In the simplified example below, I create two variables: `var1` and `var2`. By using anchors, `var2` has the same value as `var1`.
 

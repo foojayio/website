@@ -33,7 +33,7 @@ We will do this by taking a closer look at one of the projects in the list "[Spe
 
 [Igor De Souza](https://twitter.com/Igfasouza), Dublin based Principal Big Data Consultant at Oracle, set up an interesting experiment in which he combines a LED number display with the Raspberry Pi and Quarkus.
 
-### Building blocks {#h3-0-building-blocks}
+### Building blocks
 
 #### Quarkus
 
@@ -51,7 +51,7 @@ Note: **Note**: Qute is still an experimental feature.
 
 [Pi4J provides a friendly object-oriented I/O API and implementation libraries for Java](https://www.pi4j.com) to access the full I/O capabilities of the Raspberry Pi platform. This project abstracts the low-level native integration and interrupt-monitoring to enable Java programmers to focus on implementing their application business logic.
 
-### The application {#h3-1-the-application}
+### The application
 
 Using Quarkus, Qute and Pi4J an example application is built to show a 7-segments diplay on the PC which controls such an electronic component connected to a Raspberry Pi.
 
@@ -158,8 +158,8 @@ public class HelloResource {
 
 {{< youtube i576hpXrglQ >}}
 
-Alternative approach with a Shift Register {#h2-2-alternative-approach-with-a-shift-register}
----------------------------------------------------------------------------------------------
+Alternative approach with a Shift Register
+------------------------------------------
 
 The setup used in the example of Igor has the main advantage that you only need a Raspberry Pi and a LED number display. But it uses a lot of the GPIO pins of the Raspberry Pi which could be a problem in a project where you need other input and output components.
 
@@ -178,8 +178,8 @@ To solve this problem, a [shift register SN74HC595 IC](https://www.ti.com/lit/ds
  </ul>
 </figure>
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Once again, the Raspberry Pi proves to be a real workhorse which can run Java and Quarkus to bring business-power applications to inexpensive but powerfull hardware.
 

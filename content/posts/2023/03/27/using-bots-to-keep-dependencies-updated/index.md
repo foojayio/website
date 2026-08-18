@@ -38,8 +38,8 @@ The first bot we will look at is Dependabot. Since Dependabot is [GitHub](https:
 
 ![Dependabot settings on GitHub](Dependabot-settings.png)
 
-Features {#h2-0-features}
--------------------------
+Features
+--------
 
 Dependabot offers the following features: Alerts, security updates and vulnerability updates.
 
@@ -53,8 +53,8 @@ We can click the button to **View Dependabot alerts** to see more information ab
 
 ![Dependabot alerts](Dependabot-alerts.png)
 
-Pull requests {#h2-1-pull-requests}
------------------------------------
+Pull requests
+-------------
 
 When we enable Dependabot security updates, Dependabot will open pull requests (PRs) automatically to resolve vulnerabilities.
 
@@ -66,8 +66,8 @@ We can review the changes, or dismiss the alert.
 
 To enable version updates, you need to add a `dependabot.yml` file to your repository.
 
-Configuration {#h2-2-configuration}
------------------------------------
+Configuration
+-------------
 
 In this configuration file, you need to provide the package manager, the directory that contains your manifest file and a scheduling interval (daily, weekly, or monthly).
 
@@ -75,8 +75,8 @@ You can configure more options, like when it should be scheduled (date, time, ti
 
 For more information on configuration options, see the [Dependabot documentation on configuration](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file).
 
-Integration {#h2-3-integration}
--------------------------------
+Integration
+-----------
 
 While Dependabot is [GitHub](https://github.com/) native, it is possible to run it [locally](https://mikebifulco.com/posts/run-dependabot-locally) or [on GitLab](https://blog.jdriven.com/2021/03/running-dependabot-on-gitlab/) too.
 
@@ -100,8 +100,8 @@ It describes the configuration in a **Configuration Summary** , and provides som
 
 *Note: These screenshots were taken from the PR created in September 2022. It may have changed since then.*
 
-Configuration {#h2-4-configuration}
------------------------------------
+Configuration
+-------------
 
 Renovate offers additional configuration options. In addition to setting a maximum number of PRs, Renovate allows you to to set a maximum number of concurrent branches or even an hourly limit, which can help to keep the number of open PRs and branches manageable.
 
@@ -113,8 +113,8 @@ Once the onboarding PR is merged and the configuration file is added to your rep
 
 ![Renovate pull request](Renovate-PR.png)
 
-Pull requests {#h2-5-pull-requests}
------------------------------------
+Pull requests
+-------------
 
 These PRs contain information about the reason a PR was created including which package was updated, the current and new version, as well as the following information to help you decide whether or not to merge the PR and apply the update (apart from your build being green).
 
@@ -124,8 +124,8 @@ These PRs contain information about the reason a PR was created including which 
 * **Confidence** : The confidence level for this update  
   For more information, see the [Renovate documentation on merge confidence](https://docs.renovatebot.com/merge-confidence/).
 
-Auto merging PRs {#h2-6-auto-merging-prs}
------------------------------------------
+Auto merging PRs
+----------------
 
 In addition, Renovate offers the option for rule based auto merging of PRs; a feature that lets you automate upgrading dependencies. When auto merging is enabled, Renovate tries to merge the proposed update once the tests pass.
 
@@ -133,8 +133,8 @@ Renovate recommends that you enable auto merge only for any type of dependency u
 
 Of course, great test coverage is also very helpful here! Renovate is currently the only of these three options that offers this feature.
 
-Dashboards {#h2-7-dashboards}
------------------------------
+Dashboards
+----------
 
 Finally, Renovate will add a Dependency Dashboard to your project, listing all Renovate updates and detected dependencies. This dashboard can be enabled or disabled as desired.
 
@@ -143,8 +143,8 @@ Finally, Renovate will add a Dependency Dashboard to your project, listing all R
 
 In addition, Renovate provides a general dashboard with all projects \& jobs run, which you can find under <https://app.renovatebot.com/dashboard> if you have Renovate enabled.
 
-Integration {#h2-8-integration}
--------------------------------
+Integration
+-----------
 
 Note: If you are not using GitHub, Renovate currently also supports other platforms. For more information, see the [Renovate documentation on supported platforms](https://docs.renovatebot.com/#supported-platforms).
 
@@ -154,8 +154,8 @@ You will need to **Authorize snyk** on your GitHub profile, select repository ac
 
 ![Snyk Open Source Start free](Snyk-Open-Source-Start-free.png)
 
-Features {#h2-9-features}
--------------------------
+Features
+--------
 
 In addition to security updates, version updates, and dashboards, Snyk Open Source offers to test for new vulnerabilities and/or test for vulnerabilities in source code.
 
@@ -165,8 +165,8 @@ As this article is focused on tools to help you detect possible vulnerabilities 
 
 ![Snyk Open Source GitHub repository access and additional features](Snyk-Open-Source-GitHub-repository-access.png)
 
-Pull requests {#h2-10-pull-requests}
-------------------------------------
+Pull requests
+-------------
 
 When enabled, Snyk Open Source will open PRs on the selected repositories.
 
@@ -186,8 +186,8 @@ When enabled, incoming PRs will be checked for known vulnerabilities to make sur
 
 ![Snyk Open Source security test on PRs](Snyk-Open-Source-PR-check.png)
 
-Configuration {#h2-11-configuration}
-------------------------------------
+Configuration
+-------------
 
 We can configure the frequency with which Snyk Open Source should run (daily, weekly, never).
 
@@ -197,8 +197,8 @@ This might help getting started with updating outdated dependencies without gett
 
 Finally, we can also enable or disable PRs for a single project, so we can start using Snyk Open Source on a single project like we can with Renovate, but this is not a default option.
 
-Dashboards {#h2-12-dashboards}
-------------------------------
+Dashboards
+----------
 
 The dashboards offered by Snyk Open Source are the most extensive of these three options.
 
@@ -206,8 +206,8 @@ The dashboards provide an overview of known vulnerabilities found in your reposi
 
 ![Snyk Open Source Dashboard](Snyk-Dashboard.png)
 
-Integration {#h2-13-integration}
---------------------------------
+Integration
+-----------
 
 You can use Snyk Open Source in the Snyk Web UI, with the Snyk CLI, in your IDE, or with an API. For more information, see the [Snyk Open Source documentation](https://docs.snyk.io/scan-application-code/snyk-open-source).
 

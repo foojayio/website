@@ -28,8 +28,8 @@ Note that if you want to play along, you'll need to compile with the `-Xcontext-
 
 The main idea behind context receivers is to pass additional parameters to a function without having to do it explicitly.
 
-A simplified model sample {#h2-0-a-simplified-model-sample}
------------------------------------------------------------
+A simplified model sample
+-------------------------
 
 Let's start with a simple example to show how it works. We want to model a simple transfer operation between two bank accounts.
 
@@ -68,8 +68,8 @@ service.transfer(
 ```
 
 
-Improving the code with extension functions {#h2-1-improving-the-code-with-extension-functions}
------------------------------------------------------------------------------------------------
+Improving the code with extension functions
+-------------------------------------------
 
 We can slightly improve the above code by making use of [extension functions](https://kotlinlang.org/docs/extensions.html#extension-functions). Instead of defining the `Transaction` as a parameter to the `transfer()` function, we can migrate the latter to an extension function.
 
@@ -128,8 +128,8 @@ Unfortunately, with the current language constructs, fixing semantics means we w
 
 It would be lousy modeling as the transfer is the responsibility of the service.
 
-Context receivers to the rescue {#h2-2-context-receivers-to-the-rescue}
------------------------------------------------------------------------
+Context receivers to the rescue
+-------------------------------
 
 As I mentioned in the introduction, the idea behind context receivers is to somehow "pass" function parameters without being explicit about them.
 
@@ -207,8 +207,8 @@ with(transaction) {                               // 1
 1. Bring `transaction` in scope
 2. Use the `transaction` object in scope
 
-Discussion {#h2-3-discussion}
------------------------------
+Discussion
+----------
 
 Context receivers allow us to implement the API with the correct calling code semantics.
 

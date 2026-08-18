@@ -24,8 +24,8 @@ frozen: false
 
 Optimizer Hub provides the services Cloud Native Compiler and ReadyNow Orchestrator, which can be combined with ReadyNow, included in Azul Zing Builds of OpenJDK (Zing), to further improve your applications' startup and compilation speed.
 
-What is Optimizer Hub? {#What-is-Optimizer-Hub?}
-------------------------------------------------
+What is Optimizer Hub?
+----------------------
 
 [Optimizer Hub](https://www.azul.com/products/components/azul-optimizer-hub/) is a component of Azul Platform Prime that makes your Java programs start and stay fast. It consists of two services:
 
@@ -34,15 +34,15 @@ What is Optimizer Hub? {#What-is-Optimizer-Hub?}
 
 Optimizer Hub is shipped as a Kubernetes cluster, which you provision and run on your cloud or on-premises servers. It runs alongside your other clusters with the Java applications in your environment.
 
-Is Optimizer Hub required to use ReadyNow? {#Is-Optimizer-Hub-Required-to-Use-ReadyNow?}
-----------------------------------------------------------------------------------------
+Is Optimizer Hub required to use ReadyNow?
+------------------------------------------
 
 Absolutely not! As we explained in the previous posts in this series, ReadyNow is fully integrated into Zing. With the `-XX:ProfileLogOut=<file>` and `-XX:ProfileLogIn=<file>` command line options, you can generate profile logs locally on your machine or a production server and reuse them on the same and other machines.
 
 You can add Optimizer Hub to your production environment to reduce the operational complexity of using ReadyNow within a more extensive system. The ReadyNow Orchestrator service helps you to automatically handle training runs, simplify the management of profile log files by offloading the storage from the JVM instances, and more.
 
-Advantages of using ReadyNow Orchestrator {#Advantages-of-Using-ReadyNow-Orchestrator}
---------------------------------------------------------------------------------------
+Advantages of using ReadyNow Orchestrator
+-----------------------------------------
 
 Some of the advantages of using the ReadyNow Orchestrator service of Optimizer Hub:
 
@@ -53,8 +53,8 @@ Some of the advantages of using the ReadyNow Orchestrator service of Optimizer H
 
 {{< youtube Wk60VKXCZyA >}}
 
-More advantages of Optimizer Hub {#More-Advantages-of-Optimizer-Hub}
---------------------------------------------------------------------
+More advantages of Optimizer Hub
+--------------------------------
 
 The ReadyNow Orchestrator service is part of Optimizer Hub, which provides more advantages:
 
@@ -64,8 +64,8 @@ The ReadyNow Orchestrator service is part of Optimizer Hub, which provides more 
 4. **Regular Updates**: Optimizer Hub includes regular updates and bug fixes in sync with Prime releases to ensure optimal performance and compatibility.
 5. **Monitoring**: Optimizer Hub provides detailed metrics about compilations, which you can use in your monitoring tools or with the provided Grafana dashboard.
 
-Conclusion {#Conclusion}
-------------------------
+Conclusion
+----------
 
 Although Optimizer Hub, with its ReadyNow Orchestrator, is not required to use ReadyNow in your Zing runtime environment, it can significantly help reduce the operational complexity of an extensive production system.
 

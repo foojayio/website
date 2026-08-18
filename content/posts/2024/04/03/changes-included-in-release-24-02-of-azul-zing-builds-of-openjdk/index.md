@@ -34,8 +34,8 @@ As stream builds happen in a fixed schedule, all changes are included in the [re
 
 Twice a year (in February and August), a Stream build becomes the new Stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the release 24.02.0.0.
 
-Changes Included in 24.02 {#h-changes-included-in-24-02}
---------------------------------------------------------
+Changes Included in 24.02
+-------------------------
 
 As Stable builds overlap, your system should be on the 23.08 Stable line, and you have a window of four months to test and migrate to the 24.02 Stable line.
 
@@ -43,21 +43,21 @@ Let's look at some of the most significant changes between the Stream Build rele
 
 Version 24.02.0.0 is the branching point for the new Stable Build line, and includes all the following changes compared to the previous Stable Builds based on 23.08.
 
-### Rebranding {#h-rebranding}
+### Rebranding
 
 From now on, the JVM provided by Azul Platform Prime will be referenced as Azul Zing Builds of OpenJDK (Zing).
 
 This name was used before and was recently reintroduced to clarify the distinction between Platform Prime, a set of tools and services, and the Zing JDK.
 
-### Security fixes {#h-security-fixes}
+### Security fixes
 
 This version includes the October 2023 and January 2024 CPU and PSU release security fixes, including CPU and PSU fixes for Azul Zing Builds of OpenJDK 21.
 
-### Changes in supported versions {#h-changes-in-supported-versions}
+### Changes in supported versions
 
 Since 23.10, Azul Zing contains the General Availability (GA) release of OpenJDK 21.
 
-### Java Runtime Environment (JRE) {#h-java-runtime-environment-jre}
+### Java Runtime Environment (JRE)
 
 A new lightweight, fully functional distribution of the Java Runtime Environment (JRE) is now included for Java 8, 11, 17, and 21. The new Java JREs save a significant amount of space by removing various debugging options, developer options, and by eliminating various tools such as GC Log Analyzer.
 
@@ -75,7 +75,7 @@ The Zing JRE distributions still fully support [Azul Optimizer Hub](https://docs
 
 (\*) TYPE = `jdk` or `jre`
 
-### Garbage Collector Log Analyzer (GCLA) Improvements {#h-garbage-collector-log-analyzer-gcla-nbsp-improvements}
+### Garbage Collector Log Analyzer (GCLA) Improvements
 
 More concise logging of the Compilation Ranking feature has been implemented in 23.12 to better asses the behavior and impact of this feature.
 
@@ -87,11 +87,11 @@ Newly collected data has been added to the pre-existing charts in GC Log Analyze
 
 Since 24.01, the garbage collector's (GC) CPU usage is logged by default. Previously, you had to use the option `-XX+:PrintGCDetails`. By default, you can view these metrics in GC Log Analyzer in the *GC CPU Usage* graph.
 
-### ARM Support for Optimizer Hub {#h-arm-support-for-optimizer-hub}
+### ARM Support for Optimizer Hub
 
 Zing 24.02.0.0 includes support for Optimizer Hub (formerly Cloud Native Compiler) on Arm64 system architecture.
 
-### ReadyNow Support {#h-readynow-support}
+### ReadyNow Support
 
 This new Zing version improves integration with [ReadyNow Orchestrator](https://docs.azul.com/optimizer-hub/about/readynow-orchestrator).
 
@@ -105,13 +105,13 @@ New configuration settings are available to achieve this: `minProfileSize`, `min
 
 A new experimental feature is available on client side with the command line option "-XX:RNOProfileFallbackInput". With this option, you can configure a local filesystem path, which gets used in case no profile data is available from ReadyNow Orchestrator, e.g., in case of a missing connection or the requested profile name doesn't exist on the server.
 
-### Changes in Command Line Options {#h-changes-in-command-line-options}
+### Changes in Command Line Options
 
 * A new option in 23.09, `GPGCSafepointWaitForMutatorResume`, has been introduced and is set to `true` by default. This flag tells the Garbage Collector to pause and wait for mutator threads to be woken up before resuming, after every GC safepoint. If `-XX:-GPGCSafepointWaitForMutatorResume` is set, the Garbage Collector resumes its work in parallel with mutator threads waking up.
 * A small but significant change is introduced in 24.01 to the behavior of `-XX:ProfileStartupLimitInSeconds`. Now, when you set this option to `0`, it means 0 seconds. Previously, if you set this flag to `0`, it would be interpreted as "infinite". You can still specify "infinite" by using any negative number, for example `-1`. The default behavior without setting this option remains the same, i.e. the default value has changed from `0` to `-1`.
 
-Conclusion {#h-conclusion}
---------------------------
+Conclusion
+----------
 
 In addition to many improvements and fixes, the new Stable Azul Zing Build of OpenJDK includes the new Long Term Support (LTS) version, OpenJDK 21.
 

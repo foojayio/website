@@ -27,8 +27,8 @@ frozen: false
 
 The [RIFE2 v1.3.0 release](https://github.com/gbevin/rife2/releases/tag/1.3.0) introduced experimental support for GraalVM Ahead-Of-Time compilation with native-image, reducing the startup time of the bootstrap project from 177ms to an incredible 3ms.
 
-Try it out yourself {#h2-0-try-it-out-yourself}
------------------------------------------------
+Try it out yourself
+-------------------
 
 In order to try this out, you can download the latest [GraalVM](https://www.graalvm.org/downloads/) JDK 19 distribution, and follow the steps to install [native-image](https://www.graalvm.org/dev/reference-manual/native-image/) on your machine.
 
@@ -62,8 +62,8 @@ Starting that one up is even easier with the single executable that now contains
 ```
 
 
-Microbenchmark numbers {#h2-1-microbenchmark-numbers}
------------------------------------------------------
+Microbenchmark numbers
+----------------------
 
 I ran the previous instructions on my AMD Ryzen 9 5950X 16 Core 128GB dedicated Ubuntu Linux server and then called `siege -c 10 -r 2000 -b http://localhost:8080/hello` to measure the performance:
 
@@ -85,8 +85,8 @@ In comparison, launching the Uber jar with the JVM on the same machine:
 
 > **NOTE:** RIFE2 support for GraalVM native-image is still in experimental. There's no solution yet to replace the features of the RIFE2 Java agent, and it's only been tested in a limited context.
 
-Share your thoughts {#h2-2-share-your-thoughts}
------------------------------------------------
+Share your thoughts
+-------------------
 
 I'm curious to hear how GraalVM native-image is faring for you.
 

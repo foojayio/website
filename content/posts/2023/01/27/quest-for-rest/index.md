@@ -28,8 +28,8 @@ In the current literature, REST is generally promoted as the best thing since sl
 
 In each of these steps, issues lurk. This blog post focuses on listing some of them and providing hints at ways to solve them.
 
-Resources {#h2-0-resources}
----------------------------
+Resources
+---------
 
 REST emerged from the cons of SOAP. SOAP provides a single endpoint and executes code depending on the payload. The idea of REST is to provide multiple endpoints, which each executes different code.
 
@@ -37,8 +37,8 @@ I'll be honest; there are few issues at this stage. The biggest one relates to g
 
 Let's walk up the REST maturity model.
 
-HTTP verbs {#h2-1-http-verbs}
------------------------------
+HTTP verbs
+----------
 
 HTTP verbs are the next step toward the glory of REST. They come from interactions with HTML "back in the days". Interactions came from operations.
 
@@ -69,8 +69,8 @@ It changes the identified resource indeed, but it has "side-effects": it also ch
 
   What's the best alternative? "It depends".
 
-Hypermedia {#h2-2-hypermedia}
------------------------------
+Hypermedia
+----------
 
 Fowler describes Hypermedia Controls as the ultimate step to reaching the glory of REST. It's nowadays known as :
 > With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia.
@@ -199,8 +199,8 @@ Other alternative media types specifications are available.
 | [Siren](https://github.com/kevinswiber/siren)                                                                                | > Siren is a hypermedia specification for representing entities. > As HTML is used for visually representing documents on a Web site, Siren is a specification for presenting entities via a Web API. > Siren offers structures to communicate information about entities, actions for executing state transitions, and links for client navigation. | Individual  |
 | [Application-Level Profile Semantics](https://datatracker.ietf.org/doc/html/draft-amundsen-richardson-foster-alps-07)        | > An ALPS document can be used as a profile to explain the application semantics of a document with an application-agnostic media type (such as HTML, HAL, Collection+JSON, Siren, etc.). > This increases the reusability of profile documents across media types.                                                                                  | IETF        |
 
-Bonus: HTTP response status {#h2-3-bonus-http-response-status}
---------------------------------------------------------------
+Bonus: HTTP response status
+---------------------------
 
 What Fowler's post doesn't mention is the HTTP response status. Most readers are familiar with the status ranges:
 
@@ -234,8 +234,8 @@ It's not a straightforward answer; there was a lot of debate around the alternat
 
 That's already a lot on the designer side, but the client side contains a lot of uncertainty, too, as some big APIs providers use their [own HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes).
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 The "glory of REST" doesn't mean much.
 

@@ -30,8 +30,8 @@ Last week the [news broke](https://arstechnica.com/security/2026/05/fed-up-with-
 
 So let me say it plainly, on behalf of Codename One: **we will not sabotage your code.** Not now, not as a protest, not ever. We won't do it for free users, we won't do it for paid users, and we won't do it if we disagree with you politically.
 
-Why this matters {#h2-0-why-this-matters}
------------------------------------------
+Why this matters
+----------------
 
 From what I have read of the relevant laws, this is likely a crime in some jurisdictions. But beyond that, as an open source maintainer, I find it deeply offensive: it is a violation of trust which I find morally reprehensible.
 
@@ -39,8 +39,8 @@ Trust is the greatest currency open source actually has. We spend years earning 
 
 To be clear about the principle: a maintainer can do whatever the license allows. If you do not want AI agents touching your work, that is a legitimate position. Write a license that says so it probably can't be defined as "open source" though. That's an honest choice, and it's yours to make. What this developer chose instead was sabotage dressed up as a stand, and the fact that some people find that normal, or even justified, is the part that disheartens me most.
 
-I understand the fear {#h2-1-i-understand-the-fear}
----------------------------------------------------
+I understand the fear
+---------------------
 
 I do understand where the anger comes from.
 
@@ -48,8 +48,8 @@ Calling AI agents a "disruptor" is a massive understatement. Many of us will los
 
 But we are engineers. Our entire profession is solving problems and building on top of whatever the new layer turns out to be. Lashing out at the people downstream of us is not engineering. It is the opposite of it.
 
-Why I am optimistic anyway {#h2-2-why-i-am-optimistic-anyway}
--------------------------------------------------------------
+Why I am optimistic anyway
+--------------------------
 
 The potential of AI for open source is groundbreaking, and I do not use that word lightly. Before this current generation of agents, competing with a company like Google was a fantasy. They can put 100+ developers, designers, and technical writers on the exact field we are fighting in. We could only dream of keeping pace.
 
@@ -57,8 +57,8 @@ I now genuinely believe we can surpass them by the end of the year.
 
 Large organizations are going to struggle to adopt AI properly. Process, politics, risk committees, and sheer inertia will slow them down. That difficulty is precisely the opening for the small, agile player working out of the proverbial garage. For the first time, leverage is on our side.
 
-This means reinventing yourself, again {#h2-3-this-means-reinventing-yourself-again}
-------------------------------------------------------------------------------------
+This means reinventing yourself, again
+--------------------------------------
 
 None of this is free. The skills you need to work well with LLMs are radically different from the skills most of us built our careers on, and that adjustment is hard.
 

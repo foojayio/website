@@ -44,10 +44,10 @@ The book directly speaks to my core expertise in Java, providing clarity and gui
 
 This review below dissects the content, calls out key insights, and highlights reflections connecting with my Java-focused software engineer experiences.
 
-**Content Overview** {#h2-0-content-overview}
----------------------------------------------
+**Content Overview**
+--------------------
 
-### 1. Oracle's Licensing Transition {#h3-1-1-oracle-s-licensing-transition}
+### 1. Oracle's Licensing Transition
 
 Like many in the industry, I've found myself puzzled by the nuances of Oracle's Java licensing.
 
@@ -56,14 +56,14 @@ The transition from Oracle JDK to alternative distributions has sent ripples acr
 The details surrounding the legal framework, agreements, and alternative options are presented with utmost clarity.
 > As someone who has navigated these waters, I feel seen and understood by the words in this chapter. It is not just an academic analysis: it is a reflection of real-world experiences and challenges faced by many Java professionals.
 
-### 2. Technology Compatibility Kit (TCK) {#h3-2-2-technology-compatibility-kit-tck}
+### 2. Technology Compatibility Kit (TCK)
 
 The Technology Compatibility Kit (TCK) ensures that all implementations of a specification are compatible. The TCK has long been crucial in fulfilling Java's "write once, run anywhere" promise. This part of the book delves into the importance of TCK, its functioning, and how it serves as a validation tool for Java developers.
 > It is enlightening to read an explanation that connects with my understanding of Java's legalities and compatibility concerns. The author's ability to simplify complex concepts while maintaining accuracy is commendable.
 
 This chapter serves as a valuable resource for any professional working with Java.
 
-### 3. Preparing for OpenJDK Migration {#h3-3-3-preparing-for-openjdk-migration}
+### 3. Preparing for OpenJDK Migration
 
 Migration is rarely simple, and OpenJDK is no exception. It's a process that requires a careful and structured approach.
 
@@ -76,7 +76,7 @@ A significant portion of the chapter is dedicated to understanding the risks ass
 Furthermore, the book provides valuable information on the available installation formats for different operating systems, including Windows, Linux, macOS, and Docker. This caters to different organizational preferences and technical requirements.
 > The holistic approach presented about OpenJDK migration makes it an essential read for organizations, offering insights and guidance that are both practical and adaptable to various migration scenarios and goals.
 
-### 4. Choosing the Right OpenJDK Distribution {#h3-4-4-choosing-the-right-openjdk-distribution}
+### 4. Choosing the Right OpenJDK Distribution
 
 Selecting the right OpenJDK distribution is an intricate process that requires careful consideration of several key factors, as detailed in Chapter 4.
 
@@ -85,7 +85,7 @@ Supported versions, platforms, and organizational needs are foundational to the 
 
 In short, Chapter 4 offers a comprehensive, structured approach to evaluating and choosing an OpenJDK distribution, making it valuable for decision-makers and technical experts.
 
-### 5. Addressing Concerns in OpenJDK Migration {#h3-5-5-addressing-concerns-in-openjdk-migration}
+### 5. Addressing Concerns in OpenJDK Migration
 
 Migration to an alternative OpenJDK distribution is often accompanied by uncertainties and questions.
 
@@ -96,43 +96,43 @@ The chapter also provides practical advice for migrating Oracle-specific applica
 It also includes a brief comparison of popular OpenJDK distributions to assist organizations in decision-making.
 > You're provided with a helpful guide that addresses concerns, provides practical insights, and assists in selecting the right options for a seamless migration experience.
 
-### 6. Exploring Vulnerabilities and Security {#h3-6-6-exploring-vulnerabilities-and-security}
+### 6. Exploring Vulnerabilities and Security
 
 The book notably focuses on common vulnerabilities and exposures (CVEs) in various JDK versions from 2019 to 2023. It emphasizes the importance of backported security fixes and illustrates the frequency and severity of new CVEs.
 > Commercial support, especially from providers like Oracle and Azul, is highlighted for offering two types of updates: Critical Patch Update (CPU) for security patches, and Patch Set Update (PSU) for all changes. This distinction aids in risk management and emphasizes the role of regular updates and commercial backing in maintaining a secure Java environment.
 
 This chapter serves as a valuable resource for understanding the complex landscape of Java security.
 
-### 7. Commercial Support for OpenJDK {#h3-7-7-commercial-support-for-openjdk}
+### 7. Commercial Support for OpenJDK
 
 This chapter discusses the importance and benefits of commercial support for OpenJDK. Without formal support, OpenJDK users can face challenges such as slow bug fixing, waiting for scheduled updates, and limited guarantees. Commercial support provides timely bug fixing, stability and security assurance, help with migration, and delivery of innovation.
 > Commercial support allows organizations to scale Java teams, protect intellectual property, and maintain bundled technologies. It assists in applying quarterly updates, ensuring regular access to security patches, bug fixes, and enhancements. For organizations that cannot build their own JDK, providers like Azul offer the necessary support.
 
 Moreover, commercial support offers extensive services beyond standard help-desk support, providing essential stability, security, and flexibility to Java users and enterprises. This chapter overall describes the benefits of having commercial support.
 
-### 8. Questions for Requesting Information {#h3-8-8-questions-for-requesting-information}
+### 8. Questions for Requesting Information
 
 This concise yet impactful chapter presents essential questions for evaluating potential Java partners.
 > Questions focus on compatibility, support, legal protection, and other crucial factors that influence decision-making.
 
 These questions form a critical checklist that I personally find incredibly useful.
 
-Writing Style {#h2-9-writing-style}
------------------------------------
+Writing Style
+-------------
 
 The book's articulate and insightful writing style appeals to the analytical and logical aspects of the professional software engineer.
 
 While exploring complex subjects, the author maintains simplicity and structure, connecting with readers on both an intellectual and emotional level.
 
-Potential Audience {#h2-10-potential-audience}
-----------------------------------------------
+Potential Audience
+------------------
 
 Professionals, students, educators, and anyone interested in the intricacies of Java will find this book engaging and informative.
 
 It's not just a technical manual: it's a companion on a journey through the complexities of OpenJDK migration.
 
-Critique and Considerations {#h2-11-critique-and-considerations}
-----------------------------------------------------------------
+Critique and Considerations
+---------------------------
 
 The book appears to be an informative resource for those looking to understand and undertake the migration process to OpenJDK.
 
@@ -144,8 +144,8 @@ It provides an overview of key considerations, stages of migration, and answers 
 
 Nonetheless, these potential areas for improvement should be viewed in the context of the book's overall goals and the needs of its intended readership, as it evidently provides a foundational understanding of the subject matter.
 
-Conclusion {#h2-12-conclusion}
-------------------------------
+Conclusion
+----------
 
 **"[OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/)"** offers a guide to OpenJDK migration.
 

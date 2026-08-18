@@ -21,8 +21,8 @@ frozen: false
 
 In this, [part 5 of the series](https://foojay.io/today/author/c-guntur/), a walkthrough of the topic of Maven dependencies is covered!
 
-What are dependencies {#h2-0-what-are-dependencies}
----------------------------------------------------
+What are dependencies
+---------------------
 
 Dependencies are the basic building blocks of a Maven project.
 
@@ -32,7 +32,7 @@ Imagine writing code that requires logging output or using String utilities or p
 
 The project in question could potentially be a library used as a dependency in some other consumer POM.
 
-### How are dependencies located? {#h3-1-how-are-dependencies-located}
+### How are dependencies located?
 
 In [Part 3](https://foojay.io/today/understanding-apache-maven-part-3-maven-coordinates-pom-inheritance/) of the series, dependency coordinates and distinguishers were covered. As a recap: a dependency location can be reached via its **groupId** , **artifactId** and **version** (G-A-V or GAV) coordinates and furthermore the **type** and **classifier** can be specified to pinpoint the exact dependency needed in the project. Together these can be referred to as ***location coordinates***.
 
@@ -70,26 +70,26 @@ An sample of a dependency block in an XML format POM file is listed below:
 
 This excerpt is **not exhaustive** in how a dependency excerpt can look. Time to dig in!
 
-A dependency in a POM {#h2-2-a-dependency-in-a-pom}
----------------------------------------------------
+A dependency in a POM
+---------------------
 
 Dependencies for a project are declared in a **dependencies** element. This element represents a set of unique **dependency** elements. As exemplified above and described in earlier blogs, a **dependency** can contain the G-A-V coordinates and additional optional distinguishers as needed. In addition to the location coordinates, a dependency can contain **exclusions** , a **scope** and an **optional** tag.
 
-### Transitive dependencies {#h3-3-transitive-dependencies}
+### Transitive dependencies
 
 As mentioned earlier, a POM has **dependencies** . The project itself can be a dependency for some other consumer project. The current project's dependencies are then considered ***transitive dependencies*** for the other project. When Maven pulls in a dependency from the location coordinates, it also attempts to pull in the transitive dependencies for it. Put in different words, if project A depends on dependency (another project) B and this B depends on dependencies C and D, then
 Maven attempts to resolve and pull in B, C and D when creating an ***effective POM*** for project A. More on this in a bit.
 
 The depth of transitive dependencies is not limited. Traversal continues until the level where there are no further transitives for each dependency listed. This entire structure of a dependency and its complete transitive graph is known as its ***dependency tree***.
 
-### Exclusions {#h3-4-exclusions}
+### Exclusions
 
 In some cases, it may not be necessary to pull one or more transitive dependencies (and their entire further depth). A means to instruct
 Maven to ignore certain "branches" of the tree is via an ***exclusion*** . As the excerpt suggests, **exclusions** are a set of rejection criteria. An exclusion requires a **groupId** and **artifactId** (more on this in a bit). It is possible to use a *wildcard* (\*) in the exclusion elements (functional since Apache Maven 3.2.1).
 
 A dependency element can have one or more **exclusion** elements nested within an **exclusions** element.
 
-### Scope {#h3-5-scope}
+### Scope
 
 A dependency may be required to compile a project or to run a project or to only run the project's tests. A **scope** instructs
 Maven on how the said dependency is used in the project lifecycle. There are a few scopes enumerated for usage in dependencies. A tabulated summary:
@@ -105,19 +105,19 @@ Maven on how the said dependency is used in the project lifecycle. There are a f
 
 Tabulated scope values with notes on each
 
-### Optional {#h3-6-optional}
+### Optional
 
 The project may need some dependencies that need not be passed on to any other projects that use the current project as a dependency. Such dependencies can be of any scope. An element in the dependency structure is **optional** that marks the said dependency as only needed for the current project's
 Maven executions.
 
 An anecdotal example of depending on a ***metrics*** library: The current project may need a metrics library for execution and testing, however when the project is used as a dependency, there may be no need for the consumer project to rely on this metrics library. Such a dependency can be tagged as **optional**.
 
-### A graphical representation {#h3-7-a-graphical-representation}
+### A graphical representation
 
 ![A graphical representation of a dependency tree showing different depths of transitive dependencies as well as possible exclusions and non-inclusion via an optional attribute on a sample transitive.](https://cgunturme.files.wordpress.com/2020/06/mavendependencygraph.png?w=1024) Basic dependency graph example
 
-How to view the dependency tree {#h2-8-how-to-view-the-dependency-tree}
------------------------------------------------------------------------
+How to view the dependency tree
+-------------------------------
 
 It is possible to view the dependency tree of the project POM via a command line as well as via most modern IDEs. Command line options for viewing the dependency tree:
 
@@ -143,8 +143,8 @@ OR
 OR  
 `mvn dependency:tree -Dverbose=true -Dincludes=<groupId>:<artifactId>`
 
-How Maven resolves transitive dependency versions {#h2-9-how-maven-resolves-transitive-dependency-versions}
------------------------------------------------------------------------------------------------------------
+How Maven resolves transitive dependency versions
+-------------------------------------------------
 
 A project POM can include several dependencies, which may further have varying depths of transitive dependencies. It is very possible that a few dependencies share transitive dependencies but depend on different versions. Maven is thus tasked with electing the right transitive dependency to use for its effective POM, to avoid duplication. Since ***Maven cannot sort version strings*** (*versions are arbitrary strings and may not follow a strict semantic sequence* ), Maven takes the approach of ***nearest transitive dependency in the tree depth***. This is very similar to how Java picks up the first jar in the class path when looking for a fully qualified class name.
 
@@ -162,14 +162,14 @@ Maven creates a dependency tree during its ***effective POM*** generation that i
 
 the above example shows V1.2.0 of Dx as the transitive dependency of choice since it is ***nearest in depth and first in resolution in this dependency tree***.
 
-Helping Maven pick a different version {#h2-10-helping-maven-pick-a-different-version}
---------------------------------------------------------------------------------------
+Helping Maven pick a different version
+--------------------------------------
 
-### Add a direct dependency {#h3-11-add-a-direct-dependency}
+### Add a direct dependency
 
 Adding the desired transitive dependency version as a direct dependency in the project POM will result in such a dependency being the nearest in depth, and thus the dependency version to be selected. In the above example, if the desired version to be used was v1.3.0, then adding a dependency **D5 (Gx:Vx:V1.3.0)** would ensure its selection.
 
-### Use `dependencyManagement` {#h3-12-use-dependencymanagement}
+### Use `dependencyManagement`
 
 A project may contain several modules as was highlighted in [Part 3](https://cguntur.me/2020/05/26/understanding-apache-maven-part-3/) of this series. Often times, both for compatibility enforcement and POM hygiene, it is necessary to ensure the same version of the dependency be used across all child modules. In addition, the ability to override the nearest depth selection by selecting a specific version requires a ***lookup section*** in the POM. A **dependencyManagement** section in a POM is such a lookup.
 

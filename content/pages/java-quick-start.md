@@ -12,8 +12,8 @@ frozen: false
 
 **Let friends of OpenJDK, i.e., the open source Java development kit that includes the Java programming language, help you get started!**  
 
-1. Install Java {#1-install-java}
----------------------------------
+1. Install Java
+---------------
 
 Let's first check if you already have Java installed. If not, we provide step-by-step instructions for each operating system below.
 
@@ -29,8 +29,8 @@ e. [Find Another Java Version](https://foojay.io/java-quick-start/install-java/f
 
 
 
-2. Get Started {#2-get-started}
--------------------------------
+2. Get Started
+--------------
 
 In ***less than 30 minutes***, let's go from choosing an editor to using the latest Java language features.
 
@@ -58,8 +58,8 @@ k. [What's Next?](https://foojay.io/java-quick-start/quick-start-tutorial/whats-
 
 
 
-3. Next Steps {#3-next-steps}
------------------------------
+3. Next Steps
+-------------
 
 You've now absorbed the basics of the Java programming language!
 

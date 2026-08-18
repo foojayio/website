@@ -24,13 +24,13 @@ We're excited to present the first episode of the Foojay Podcast's fifth season,
 
 For the first time, an OpenJDK release is aligned with the year, and we can welcome release 25 in 2025. As usual in the release podcast, I have my regular guest, Simon Ritter. And in this episode, we are joined by Balkrishna Rawool to talk about all the new features in this new OpenJDK version.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube FftYJqEGKME >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,16 +38,16 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * Simon Ritter
   * <https://www.linkedin.com/in/siritter/>
 * Balkrishna Rawool
   * <https://www.linkedin.com/in/balkrishnarawool/>
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topic and guests
 

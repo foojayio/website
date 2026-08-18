@@ -32,8 +32,8 @@ I'll share my expedition into solving this challenge by combining project Panama
 
 If you're building high-throughput web servers, data processing pipelines, or any application with intensive I/O requirements, this approach might be the missing piece in fully realizing the potential of Virtual Threads.
 
-What is Panama {#h2-0-what-is-panama}
--------------------------------------
+What is Panama
+--------------
 
 Project Panama is Java's modern approach to native interoperability, released as a standard feature in Java 22. It offers an alternative to JNI with a more elegant and safe API for interacting with native code and memory. Panama's API provides us developers with the performance benefits of native code while maintaining Java's safety and usability characteristics.
 
@@ -41,8 +41,8 @@ At its core, Panama solves a fundamental problem that Java developers have faced
 
 For applications that need to leverage native libraries or system capabilities, Panama transforms what was a dreaded necessity into a natural extension of Java development. This transformation is especially relevant for domains like high-performance computing, machine learning, and the focus of this exploration of high-performance I/O operations. Let's break down Panama's capabilities into its core components: memory management and function calling, to understand how they enable our io_uring integration.
 
-Managing memory {#h2-1-managing-memory}
----------------------------------------
+Managing memory
+---------------
 
 Memory management represents one of the most significant challenges when interacting with native code. Panama addresses this through an approach centered around the use of Arenas.
 
@@ -80,8 +80,8 @@ VarHandle idHandle = requestLayout.varHandle(MemoryLayout.PathElement.groupEleme
 
 The integration of these concepts creates an approach to memory management that maintains Java's safety guarantees while providing the flexibility needed for native interoperability.
 
-Making calls up and down {#h2-2-making-calls-up-and-down}
----------------------------------------------------------
+Making calls up and down
+------------------------
 
 Panama's approach to function calls builds upon Java's existing metaprogramming features like Method handles to create a bridge between Java methods and native functions. The API distinguishes between downcalls (Java calling native functions) and upcalls (native code calling back into Java methods).
 
@@ -137,8 +137,8 @@ static void handleSignal(int signal) {
 
 Both upcalls and downcalls benefit from Panama's unified type mapping system, which automatically handles conversion between Java and native types. When passing complex data structures to native functions, developers can use MemoryLayout to describe the structure and MemorySegment to allocate memory. What is great about this approach is that it is a complete shift from JNI. Rather than treating native code as a separate environment with its own rules, Panama extends Java's programming model to more natural interaction with native code. Now that we understand how Panama enables safe and efficient native interoperability, let's examine how it can be used with io_uring.
 
-What is io_uring {#h2-3-what-is-io-uring}
------------------------------------------
+What is io_uring
+----------------
 
 IO_uring is a Linux kernel interface that improves how applications perform input/output operations. At its core, it establishes a shared memory communication channel between applications and the kernel using two ring buffers: one for requests and another for completions.
 
@@ -148,8 +148,8 @@ It addresses the performance limitations of traditional I/O methods by eliminati
 
 The relationship between io_uring and Virtual Threads is particularly interesting. Virtual Threads excel at managing concurrent tasks but can become pinned during blocking I/O operations. IO_uring's asynchronous nature addresses this limitation, allowing Virtual Threads to yield during I/O operations rather than remaining pinned to carrier threads. To make these concepts concrete, let's implement a basic file read operation using io_uring through Panama. This example will demonstrate the essential pattern that supports more complex I/O operations.
 
-Single read with Java and Uring {#h2-4-single-read-with-java-and-uring}
------------------------------------------------------------------------
+Single read with Java and Uring
+-------------------------------
 
 Implementing a basic file read operation with io_uring through Panama illustrates how these technologies work together to create an alternative for Java's file I/O. The following application creates a bridge between Java and io_uring native library.
 
@@ -189,8 +189,8 @@ try (Arena arena = Arena.ofConfined()) {
 
 For applications that perform numerous read operations, such as web servers, and databases this integration delivers potential performance improvements by reducing system call overhead and enabling asynchronous I/O. Another benefit is that io_uring supports sockets, streamlining the process of reading data and sending it to clients without copying data unnecessarily. While this basic implementation works, we can further optimize it by examining some of the performance characteristics and challenges when bridging Java and native code.
 
-Performance improvements {#h2-5-performance-improvements}
----------------------------------------------------------
+Performance improvements
+------------------------
 
 Using a native library on its own can be beneficial and provide performance improvements. To get more speed out of the bindings we need to take a closer look at three patterns for memory allocation. The first speed-up is for applications doing lots of allocations.
 
@@ -287,8 +287,8 @@ Using `Linker.Option.critical(true)` enables the application to use heap memory.
 
 There are several ways to speed up memory segment allocation but the best way is to reuse memory that you have already allocated. The risk is accessing previous values, if you are not careful. The benefit is the almost free performance gains. Allocating memory will always have a cost and so will be turning that memory into a memorySegment. This can all be prevented by reusing segments. The easiest/safest way is to reuse memory that holds pointers, this is an easy way to start and learn how to do it safely. In the end, it looks almost the same as Java. Beyond memory optimization, our primary goal was addressing the Virtual Thread pinning issue. Let's explore how we can transform blocking operations into yielding operations to preserve how Virtual Thread work.
 
-Turning pinning into yielding {#h2-6-turning-pinning-into-yielding}
--------------------------------------------------------------------
+Turning pinning into yielding
+-----------------------------
 
 Virtual Threads face a significant limitation with file I/O operations: pinning. When a Virtual Thread performs blocking operations, including file I/O, it becomes "pinned" to its carrier thread, preventing that carrier thread from executing other Virtual Threads. This pinning effectively negates one of the primary benefits of the Virtual Thread model. More carrier threads get created if this happens, to prevent a degradation in performance. Making native calls is not great either as those will pin the virtual thread as well. So let's see how we can prevent pinning in the first place.
 
@@ -333,8 +333,8 @@ while (running) {
 
 The approach is pretty straightforward and allows you to yield virtual threads for operations that do not support virtual threads. The upside is that virtual threads will yield, the downside is that you will need an event loop to wake up the threads. If this is beneficial to you application depends on the workload.
 
-Bringing It All Together {#h2-7-bringing-it-all-together}
----------------------------------------------------------
+Bringing It All Together
+------------------------
 
 We explored how Panama, io_uring, and Virtual Threads can fundamentally improve Java's approach to I/O operations. By integrating io_uring using Panama, Java applications can leverage Linux's I/O capabilities while maintaining Java's safety and productivity benefits.
 

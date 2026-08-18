@@ -36,8 +36,8 @@ The full source code is available at the end of this page. The game will look li
 
 Whilst this tutorial is meant to teach basic concepts, building on them will allow us to produce much more [complex examples](https://youtu.be/yhr1b4061os?t=496).
 
-Imports {#h2-0-imports}
------------------------
+Imports
+-------
 
 Create a file `PongApp.java` and let us import all of these and forget about them for the rest of the tutorial.
 
@@ -59,8 +59,8 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 ```
 
 
-Code {#h2-1-code}
------------------
+Code
+----
 
 This section will go through each method and explain the major parts of the code. By default FXGL sets the game size to 800x600, which works for our game. You can change these and various other settings via `settings.setXXX()`. For now, we will just set the title and add the entry point - `main()`.
 
@@ -241,8 +241,8 @@ private void resetBall() {
 
 That is all! You've now got a simple clone of Pong. You can get the full source code below. Stay tuned for a more complex Pong tutorial involving physics and particle effects!
 
-Full source code {#h2-2-full-source-code}
------------------------------------------
+Full source code
+----------------
 
 ```java
 import com.almasb.fxgl.app.GameApplication;

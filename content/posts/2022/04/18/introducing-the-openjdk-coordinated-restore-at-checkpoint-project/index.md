@@ -19,7 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 One of the great things about the Java Virtual Machine (JVM) is the fact that it is able to adapt the performance of a Java application to the way it is used.
 
@@ -35,7 +35,7 @@ That is because it simply takes time to warm up the JVM before your application 
 
 <br />
 
-### Modern Applications {#h3-1-modern-applications}
+### Modern Applications
 
 If you have a long-running application, the warm up time, which may be within the range of seconds to minutes, is usually no problem.
 
@@ -47,7 +47,7 @@ One way to work around that warm up problem could be to compile your application
 
 But the drawback with native images is the fact that, as soon as your code is statically compiled to native code, you will lose the power of runtime optimizations that can be done by the JVM.
 
-### Coordinated Restore at Checkpoint {#h3-2-coordinated-restore-at-checkpoint}
+### Coordinated Restore at Checkpoint
 
 So the question is whether there is a way to keep the JVM but reduce its startup time.
 
@@ -63,7 +63,7 @@ Using this approach can lead to dramatically decreased startup time from hundred
 
 The proposal relies on the Linux CRIU (Checkpoint/Restore In Userspace) project, plus other additional methods.
 
-### Checkpoint Creation {#h3-3-checkpoint-creation}
+### Checkpoint Creation
 
 The idea is to start a JVM with your application and warm it up until it reaches its optimum performance.
 
@@ -77,7 +77,7 @@ If you think about microservices that are deployed in a containerized environmen
 
 The next time you spin up this container, it could then restore the JVM from the stored checkpoint.
 
-### Promising Test Results {#h3-4-promising-test-results}
+### Promising Test Results
 
 The team around Anton Kozlov has tested this approach using different well known frameworks, such as Spring Boot, Quarkus, Micronaut, and Tomcat.
 
@@ -93,7 +93,7 @@ In addition, you also keep all the debugging features for continuous optimizatio
 
 In principle, startup time can be reduced to the time needed to load the checkpoint files back into memory plus the reinitialization of resources.
 
-### CRaC API {#h3-5-crac-api}
+### CRaC API
 
 Creating a checkpoint requires your application to free its resources, such as database connections, HTTP connections, and open files, otherwise the checkpoint image could be outdated by relying on resources that may disappear.
 
@@ -140,7 +140,7 @@ This will create the checkpoint and exit the application.
 
 Registering resources is done by notifying a global context before the checkpoint is created and after the checkpoint was restored.
 
-### Getting Started {#h3-6-getting-started}
+### Getting Started
 
 1. Get hold of the [OpenJDK builds](https://github.com/CRaC/openjdk-builds/releases/) that already include the CRaC functionality.
 2. Get [the basic example available on GitHub](https://github.com/HanSolo/crac4) that I have created to give you an idea of how CRaC works.

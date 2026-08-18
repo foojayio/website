@@ -30,8 +30,8 @@ How could a bank misplace 70M USD? Don't they have checks and balances? Sure the
 
 This story is important because that woman wasn't a bad person. We shouldn't look at our colleagues with suspicion. She was being blackmailed by local organized crime which instigated the whole thing. Because of that, we need to limit our exposure as much as possible and avoid reliance on a single point of failure.
 
-Work/Security Balance {#h2-0-work-security-balance}
----------------------------------------------------
+Work/Security Balance
+---------------------
 
 Internal security has many benefits:
 
@@ -47,8 +47,8 @@ We need to increase security while having minimal impact on day-to-day work. The
 
 I'm a developer, not a DevOps. I'm not a security expert either. As such, the duty of deploying a security policy and safeguarding it doesn't fall on me. Nor should it. But security is a team effort. The weakest link is where we all fail. One person clicking a bad email link can foil the best security policy. As developers there's a lot we can do, both for our colleagues and for the customers using our products. This is what I want to discuss.
 
-Don't Open the Door {#h2-1-don-t-open-the-door}
------------------------------------------------
+Don't Open the Door
+-------------------
 
 It might seem insane. Why would we open the door? We're security conscious people. But we often open the figurative door without even thinking about it. Do you leave remote debugging open into a production server just to check stuff out?
 
@@ -63,8 +63,8 @@ Both are problematic notions. Now you might say: that's zero trust. You would be
 
 If you're a developer in a team, pay attention to that. Communicate it onwards and try to improve the situation. People are often used to the way things are and don't even notice when a glaring hole is right in-front of them.
 
-Use Audit Logs {#h2-2-use-audit-logs}
--------------------------------------
+Use Audit Logs
+--------------
 
 The most important assumption you should make as a security conscious developer is this: you can get hacked. Then what. DevOps are the first line of defense. We developers rarely do much in that regard. If a hacker does indeed get in there are two things that fall to us. The first is making it harder for them to do damage (see the next section). The second is later.
 
@@ -72,15 +72,15 @@ What did the hacker do? Where did they go? What did they get? These are all ques
 
 Speaking about logs, don't be overzealous with application logging and make sure to secure the log. I've dealt with quite a few organizations where they properly encrypted their database and secured it. Yet log access was free for all. By reading the log we can often find everything we need. User tokens are sometimes written directly to the log and let us impersonate a user. Imagine an admin logging in, not only can a malicious person with access to the log assume the identity. It's the perfect crime since it will seem like someone else committed it. While we should review the logs and make sure we don't log anything that is risky. We should also keep the log small so we can notice problematic aspects. Furthermore, we need to restrict access to the production logs to a restricted group of people who need to know.
 
-Access Restrictions {#h2-3-access-restrictions}
------------------------------------------------
+Access Restrictions
+-------------------
 
 We should encrypt everything that's important. Secrets must be stored securely and externally to avoid hopping between services for complete control. Source shouldn't be stored using the same credentials or on the servers. Everything should be read-only and barebones with no SSH access.
 
 If it's possible to access production, a hacker could find a way in. By removing normal access to production we remove that possibility and force a malicious hacker to find a non-standard way in.
 
-Support Good Passwords {#h2-4-support-good-passwords}
------------------------------------------------------
+Support Good Passwords
+----------------------
 
 I failed on this in at least one project and didn't appreciate the value of this enough. Lots of security experts swear by password managers. That's fine. But as a developer we need to support two things when it comes to passwords:
 
@@ -89,8 +89,8 @@ I failed on this in at least one project and didn't appreciate the value of this
 
 Some password validation doesn't allow some special characters which is just bad albeit more rare in recent years. But the real problem is password length. I love using passphrases. These are sentences of 5+ words that have meaning to me thus easy to remember. But impossible to guess randomly and impossible to brute force. E.g. "The kindergarten is packed at 8AM" would be impossible to guess. Even if a person is standing over my shoulder looking at me, typing they wouldn't piece that together (no that's not my password). Yet some systems limit the password length to 12.
 
-Finally {#h2-5-finally}
------------------------
+Finally
+-------
 
 This is a team effort. Yes, most of the work is on the security team (if you have them) followed by DevOps. Then there are the tools that do a great deal of work e.g. keeping our dependencies clean from known vulnerabilities, etc.
 

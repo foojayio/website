@@ -31,8 +31,8 @@ This guide walks you through:{#viewer-aq221189}
 
 
 
-Prerequisites {#viewer-f868f305-69f0-46b4-bbc6-baaa3d02051b}
-------------------------------------------------------------
+Prerequisites
+-------------
 
 Before installing TornadoVM, ensure that your system has the following:{#viewer-k00hu10420}
 
@@ -49,8 +49,8 @@ SDKMAN! will automatically set **JAVA_HOME** and make the JDK available to Torna
 
 
 
-Downloading and Installing the TornadoVM SDK {#viewer-71800d5d-9ec2-4119-b8cc-36e88d6c117f}
--------------------------------------------------------------------------------------------
+Downloading and Installing the TornadoVM SDK
+--------------------------------------------
 
 TornadoVM SDKs come as ZIP archives tailored for different operating systems, CPU architectures, and accelerator backends. Choose the SDK that matches your setup from the official [++TornadoVM webpage++](https://www.tornadovm.org/downloads) or the [SDKMAN! TornadoVM page](https://sdkman.io/sdks/tornadovm/).{#viewer-dae9277e-ba59-42c1-b958-a40a2e031a81}  
 
@@ -67,9 +67,9 @@ You can choose a backend-specific build:{#ib4ew13010}
 | SPIR-V       | 2.2.0-spirv            |
 | All Backends | 2.2.0-full             |
 
-### Installation Steps by Operating System {#m9n2a452}
+### Installation Steps by Operating System
 
-#### Linux / macOS {#viewer-a24da4d5-8325-4e5e-81f0-e6289232fe0c}
+#### Linux / macOS
 
 Open a terminal and run:{#viewer-942675ef-8b3d-44f9-ba30-0b5847ce2896}
 
@@ -102,8 +102,8 @@ set PATH=%TORNADO_SDK%\bin;%PATH%
 
 
 
-Verify Available Devices {#h2-3-verify-available-devices}
----------------------------------------------------------
+Verify Available Devices
+------------------------
 
 Once TornadoVM is installed, verify that your system detects the available hardware accelerators.
 
@@ -120,14 +120,14 @@ This command lists all devices recognized by TornadoVM, including CPUs and GPUs.
 
 
 
-Run Your First TornadoVM Program {#h2-4-run-your-first-tornadovm-program}
--------------------------------------------------------------------------
+Run Your First TornadoVM Program
+--------------------------------
 
 TornadoVM includes example applications that demonstrate how Java programs can be accelerated transparently.{#ibr6b482}
 
 A simple starting point is a **Matrix-Vector multiplication** example.{#ta49l9349}
 
-#### Linux / macOS {#w6a3l486}
+#### Linux / macOS
 
 ```bash
 java @$TORNADOVM_HOME/tornado-argfile -cp $TORNADOVM_HOME/share/java/tornado/tornado-examples-2.2.0.jar uk.ac.manchester.tornado.examples.compute.MatrixVectorRowMajor
@@ -145,8 +145,8 @@ This program runs a Java application that TornadoVM automatically offloads to av
 
 
 
-Integrating TornadoVM into Java Projects Using Maven {#3ca69bda-e774-4774-9cb1-9c7004841816}
---------------------------------------------------------------------------------------------
+Integrating TornadoVM into Java Projects Using Maven
+----------------------------------------------------
 
 Since **TornadoVM v2.0.0** , TornadoVM has been available via [Maven Central](https://central.sonatype.com/namespace/io.github.beehive-lab), which simplifies adding it to your Java projects. To integrate TornadoVM, add the following dependency to your ***pom.xml***:{#fa986f36-2454-46d2-bd91-c14f8b4dbb96}
 
@@ -168,7 +168,7 @@ Since **TornadoVM v2.0.0** , TornadoVM has been available via [Maven Central](ht
 
 This setup allows your project to compile and run with TornadoVM support without manual SDK management.{#e7129922-9c05-4948-959a-58ed0571ed45}
 
-### Example: Accelerating a Simple Java Kernel {#54dd0a45-2253-4cbe-84c1-a4aca4409490}
+### Example: Accelerating a Simple Java Kernel
 
 Here is a basic example class of how to use TornadoVM to accelerate a Java method (vectorAdd):{#0491a289-1514-4666-b9fd-9da119c8abce}
 
@@ -262,8 +262,8 @@ Expected each element = 30
 
 
 
-What's Next? {#d8l4z496}
-------------------------
+What's Next?
+------------
 
 After running your first program, you can:{#oicl4498}
 
@@ -277,8 +277,8 @@ Full documentation is available here:[++https://tornadovm.readthedocs.io/en/late
 
 
 
-Final Thoughts {#wuvt7505}
---------------------------
+Final Thoughts
+--------------
 
 Using SDKMAN!, getting started with TornadoVM takes only a few commands. Once installed, TornadoVM allows Java developers to take advantage of heterogeneous hardware without rewriting applications in specialized languages.{#7i174507}
 

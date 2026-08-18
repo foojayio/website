@@ -25,8 +25,8 @@ Halloween is probably the most appropriate time to start this new series of arti
 
 Today's horror story is about a young startup that nearly went bankrupt because of caching. I was the founder of this company and I [wrote quite a bit about this in the past](https://hackernoon.com/why-and-how-we-left-app-engine-after-it-almost-destroyed-us-40ac2fc0b1a8?1). It's been a few years since and while it still hurts, I hope I can write in a more detached voice this time around.
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 I co-founded [Codename One](https://github.com/codenameone/CodenameOne) in early 2012. The SaaS portion of the company was a complex backend that orchestrated build servers. This was 2012, no Containers/Docker or anything like that was available for production. PaaS was pretty big back then and App Engine was gaining some traction.
 
@@ -38,8 +38,8 @@ One important thing we should clarify. App Engine had a local debugging environm
 
 One final important thing to know is that Codename One is a bootstrapped company. It's an open source framework with limited funds.
 
-Disaster Strikes {#h2-1-disaster-strikes}
------------------------------------------
+Disaster Strikes
+----------------
 
 One fine day we got an email that billing is high. That seemed weird but we logged in to check it out. Our typical monthly bill was around 70$ + 400$ paid for gold support. The billing at this point was already in the 4 digits.
 
@@ -53,8 +53,8 @@ To make matters worse our only tool for debugging was logs, which cost money. So
 
 App engine data store reads are known to be slow. So we assumed this was a problem there. Google provides an instance of memcached which you should use when accessing the data store. As far as I knew, we used it everywhere that was frequently used to cache everything important. But it seems we missed some point and the new App Engine update triggered that.
 
-Resolution {#h2-2-resolution}
------------------------------
+Resolution
+----------
 
 Unfortunately, deploying a new update to production was the only way to debug or fix it. But it gets worse.
 
@@ -62,10 +62,10 @@ Billing didn't list "live" numbers at the time (I'm unsure if it does so now). S
 
 Because of that each attempt at a fix, included many different improvements to the code. To this day we have no idea what the bug was and what fixed it eventually. It's entirely possible that this was a bug in App Engine that was resolved by Google. We have no way of knowing.
 
-Debrief -- Lessons Learned {#h2-3-debrief-lessons-learned}
-----------------------------------------------------------
+Debrief -- Lessons Learned
+--------------------------
 
-### What we Should Have Done {#h3-4-what-we-should-have-done}
+### What we Should Have Done
 
 I've given this a lot of thought over the years, what could we have done differently to avoid this in the first place?
 
@@ -105,7 +105,7 @@ To this day I don't know if I made the right decision of skipping the spending l
 
 I honestly don't know.
 
-### Are you at Risk? {#h3-5-are-you-at-risk}
+### Are you at Risk?
 
 You might be tempted to think that you aren't at risk. You don't use App Engine, probably don't use PaaS.
 
@@ -115,8 +115,8 @@ These stories are all over the place.
 
 If you choose to use such services you MUST define a spending limit. You should also use observability tools and set up triggers to warn you if anything changes.
 
-Epilogue {#h2-6-epilogue}
--------------------------
+Epilogue
+--------
 
 A couple of years ago I met the founders of Lightrun. They outlined their vision for the company which is effectively a production debugger that gives us instant feedback securely. I instantly thought about this story.
 
@@ -124,15 +124,15 @@ What could I have done with this tool back then?
 
 Ideas gain meaning when we feel the pain and I felt the pain deeply. This made the decision to join Lightrun a no-brainer. So I guess this horror story has a happy ending.
 
-TL;DR {#h2-7-tl-dr}
--------------------
+TL;DR
+-----
 
 Today's scary story is about a promising young bootstrapped company who ventured into an environment that seemed welcoming and wholesome... Only to discover that billing suddenly flipped overnight and it was running up huge charges.
 
 You might be next, as many young companies have run into this nightmare.
 
-Tell Your Story {#h2-8-tell-your-story}
----------------------------------------
+Tell Your Story
+---------------
 
 Do you have an interesting production disaster story to share?
 

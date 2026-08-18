@@ -32,8 +32,8 @@ At the [University of Applied Sciences and Arts Northwestern Switzerland (FHNW)]
 
 This year two projects focused on the integration of Pi4J V2:
 
-CrowPi Goes Java {#h2-0-crowpi-goes-java}
------------------------------------------
+CrowPi Goes Java
+----------------
 
 The CrowPi is a platform that allows taking first steps in programming combined with hardware. The main goal of this project was to implement a library with examples and documentation which allows beginners to take their first steps in Java in a fun new way.
 
@@ -56,8 +56,8 @@ The CrowPi is a platform that allows taking first steps in programming combined 
 
 The full documentation and example code is provided [on the Pi4J website](https://pi4j.com/getting-started/crowpi/).
 
-JavaFX Game on the Raspberry Pi with a Joystick Controller {#h2-1-javafx-game-on-the-raspberry-pi-with-a-joystick-controller}
------------------------------------------------------------------------------------------------------------------------------
+JavaFX Game on the Raspberry Pi with a Joystick Controller
+----------------------------------------------------------
 
 The second project started from [the Snake FXLG game which was already handled here on Foojay](https://foojay.io/today/creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions/) and got further extended and was used to compare the rendering speed with different JavaFX versions and startup arguments.
 
@@ -78,8 +78,8 @@ The second project started from [the Snake FXLG game which was already handled h
  </ul>
 </figure>
 
-Interviews with Barbara Scheuner and Dieter Holz {#h2-2-interviews-with-barbara-scheuner-and-dieter-holz}
----------------------------------------------------------------------------------------------------------
+Interviews with Barbara Scheuner and Dieter Holz
+------------------------------------------------
 
 To me, it seems obvious that Java is also a perfect language when you start learning to program. But let's find out why the FHNW university has chosen this path... And why they use it on the Raspberry Pi.
 

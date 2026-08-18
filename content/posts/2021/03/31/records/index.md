@@ -20,13 +20,13 @@ Professional Java developers need immutable data carrier-classes for communicati
 
 Record classes provide a way to model data in Java. An example of data is a row in a database table. This feature simplifies coding, makes Java code more concise and readable, increasing productivity for professional Java developers. Java14 introduced Records as a preview feature, Java15 brings in some updates as a second preview, and Java16 makes it a final feature, no changes will be needed for Records after this.
 
-### Common Implementation Use Cases {#h3-0-common-implementation-use-cases}
+### Common Implementation Use Cases
 
 **1. Multiple Return Values:** Often we encounter cases when we want to return multiple values from a method, for this we will have to create a class having values that we need to return. The record provides an easy way rather than writing boilerplate code.
 
 **2. Data Transfer Objects (DTO):** Developers working with databases often write DTO which is typically used for storage only, we can again reduce boilerplate code using java Record classes.
 
-### Java Code Before and After Records {#h3-1-java-code-before-and-after-records}
+### Java Code Before and After Records
 
 Following is one example showing Point class without using record:
 
@@ -86,7 +86,7 @@ In the above output of the javap command we can see the record classes have:
 * Implementations of equals and hashCode that say two record classes are equal if they are of the same type and contain the same state.
 * An implementation of toString that includes the string representation of all the record components, with their names.
 
-### Record Classes in Detail {#h3-2-record-classes-in-detail}
+### Record Classes in Detail
 
 Record classes behave like normal classes except restrictions, following are few properties of the Record classes:
 
@@ -263,19 +263,19 @@ Note: Recompile with -Xlint:preview for details.
 ```
 
 
-### Why Records, Why Not Just Tuples? {#h3-3-why-records-why-not-just-tuples}
+### Why Records, Why Not Just Tuples?
 
 A central aspect of Java's philosophy is that "names" matter.
 
 A `Person` with properties `firstName` and `lastName` is clearer and safer than a tuple of `String` and `String`.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Records help you remove repetitive and error prone code, reduce bugs in your code, reduces verbosity in code, and increases developer productivity. Using language features like this is going to make you a great developer everyone wants to hire.
 
 If you want to get amazing Java jobs, I wrote an ebook [5 steps to Best Java Jobs](https://jfeatures.com/). You can download this step-by-step guide for free!
 
-### Resources {#h3-5-resources}
+### Resources
 
 * <https://openjdk.java.net/jeps/395>
 * [https://cr.openjdk.java.net/\~briangoetz/amber/datum.html](https://cr.openjdk.java.net/~briangoetz/amber/datum.html)

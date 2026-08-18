@@ -32,7 +32,7 @@ Let's look at the five big risks and how to *analyze* and mitigate them.
 
 
 
-### **1. The "My Prompt is Leaking Secrets" Problem 🔑** {#h3-0-1-the-my-prompt-is-leaking-secrets-problem}
+### **1. The "My Prompt is Leaking Secrets" Problem 🔑**
 
 **The Threat:** A developer on your team is debugging. They paste this into their Agent-powered chat:
 
@@ -50,7 +50,7 @@ This prompt goes *straight* to the Agent, and it could be associated with an MCP
 
 
 
-### **2. The "Is My Server a Double Agent?" Problem 🕵️** {#h3-1-2-the-is-my-server-a-double-agent-problem}
+### **2. The "Is My Server a Double Agent?" Problem 🕵️**
 
 **The Threat:** The MCP server's job is to use your keys (e.g., a Jira API token, a database password) to access tools. But what if the server's *own code* is malicious or buggy? What if it's siphoning your data or keys to an unknown server?
 
@@ -114,7 +114,7 @@ spec:
 
 
 
-### **3. The "Black Box of Vulnerabilities" Problem 🐛** {#h3-2-3-the-black-box-of-vulnerabilities-problem}
+### **3. The "Black Box of Vulnerabilities" Problem 🐛**
 
 **The Threat:** The MCP server is just software. What if it's built using a vulnerable version of Log4j, Spring, or jackson-databind? An attacker won't attack your AI; they'll attack your *server* with a simple, malicious API call.
 
@@ -127,7 +127,7 @@ spec:
 * **DAST Analysis (Dynamic Analysis):** Run automated security scanners against the server's live API endpoints. This will find "outside-in" vulnerabilities like improper auth, open-management endpoints, etc.
 * **Isolation.** Assume the server *is* vulnerable. Run it in a minimal, locked-down container, on a separate network segment (VLAN), with a strict firewall policy that only allows it to talk to *exactly* what it needs. *See details in previous point.*   
 
-### 4. The "Context Pollution and Poisoning" Problem 🧪 {#h3-3-4-the-context-pollution-and-poisoning-problem}
+### 4. The "Context Pollution and Poisoning" Problem 🧪
 
 **The Threat:** The AI Agent relies on a context window (the recent history of the conversation and data) to provide accurate, relevant answers. An MCP server's function is to connect the Agent to real live data (e.g. database , documentation API, a Kubernetes cluster) and when it is reading it will inject the info into this context.
 
@@ -188,7 +188,7 @@ with the sonarqube mcp server using analyze_code_snippet tool
 * **Implement the Code Execution in MCP concept** : [Code execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp) lets an AI write and run code inside a secure sandbox, using that code to call MCP servers through a normal programming API rather than many direct tool calls. This keeps large data and complex operations outside the model, reducing tokens and improving accuracy and scalability. Instead of a dynamic loading of the MCP tools schemas into the context, the execution environment filters/aggregates results from static code calling those MCPs and returns only what the model needs, while enforcing strong isolation and safety. This will mitigate the context pollution and reduce the number of tokens used.
 * **Use only 'certified' or official MCP servers :** Trust is crucial, and it should not be given easily. When using MCP servers it's important to trust only those that are official, with a real company with big credibility behind. This will reduce the chances of context poisoning. *See the previous point about ownership*.
 
-### 5. The "Too Many Cooks" Problem (MCP Sprawl) 🌐 {#h3-4-5-the-too-many-cooks-problem-mcp-sprawl}
+### 5. The "Too Many Cooks" Problem (MCP Sprawl) 🌐
 
 **The Threat:** As AI adoption grows, individual teams often deploy their own dedicated MCP servers, leading to **MCP Sprawl**. You end up with ten different servers, each with redundant tool configurations (e.g., three different Jira MCPs, two database-connecting MCPs). This sprawl creates a massive attack surface: more servers to patch, more secrets to manage (often poorly), and inconsistent security policies across the board. The presence of multiple servers with similar configurations also increases the risk that an AI Assistant will call the wrong MCP server, leading to incorrect or failed operations.
 
@@ -199,7 +199,7 @@ with the sonarqube mcp server using analyze_code_snippet tool
 
 
 
-### **Final Check: You're an Auditor** {#h3-5-final-check-you-re-an-auditor}
+### **Final Check: You're an Auditor**
 
 When you can't *fix* the code, your job is to *analyze* the risk. By scanning, monitoring, and correctly configuring this "black box," you can (hopefully) prevent it from becoming your company's biggest data leak. 🛡️
 

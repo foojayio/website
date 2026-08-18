@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-### **Production disasters are sometimes those pileups we can see coming from miles away. But the train is moving so fast we can't possibly stop it. This is one of those stories. In it a combination of bad communication, missing skills, immature technological choices created a pile up.** {#h3-0-production-disasters-are-sometimes-those-pileups-we-can-see-coming-from-miles-away-but-the-train-is-moving-so-fast-we-can-t-possibly-stop-it-this-is-one-of-those-stories-in-it-a-combination-of-bad-communication-missing-skills-immature-technological-choices-created-a-pile-up}
+### **Production disasters are sometimes those pileups we can see coming from miles away. But the train is moving so fast we can't possibly stop it. This is one of those stories. In it a combination of bad communication, missing skills, immature technological choices created a pile up.**
 
 **You can't debug a specification. You must stay vigilant during the development cycle to find conceptual mistakes and reorient the Titanic.**
 
@@ -29,15 +29,15 @@ This time the production horror is of a different kind. It started well before t
 
 I was too busy and expensive for the project so they decided to do without me. But I did get a chance to review the specification for the system.
 
-Still Relevant Today? {#h2-1-still-relevant-today}
---------------------------------------------------
+Still Relevant Today?
+---------------------
 
 This was an in-house project with technologies that seem comically old by now. But I think all the big piece decision making/mistakes are timeless. I still see managers and developers making a lot of the same mistakes today.
 
 I don't think anyone working on this was incomptent or stupid. I think mistakes were made because of scope/scale and the fact you can't debug architecture. Some of you might jump to "lean startup" and modern methodologies as a solution. Those weren't common back then but even with those processes, the problems only became visible when the full system was in place and it was too late to turn around.
 
-Real Time Trading, Over the Web? {#h2-2-real-time-trading-over-the-web}
------------------------------------------------------------------------
+Real Time Trading, Over the Web?
+--------------------------------
 
 This was a system for internal use. The bank had used a mainframe terminal system that worked OK but was clunky. They wanted to modernize it to "internet technologies".
 
@@ -51,8 +51,8 @@ It was later discovered that the customer just wanted modern technologies. A Swi
 
 If that one mistake in architecture wasn't made, this sad monstrosity could have been avoided...
 
-Servlets... It's Full of Servlets... {#h2-3-servlets-it-s-full-of-servlets}
----------------------------------------------------------------------------
+Servlets... It's Full of Servlets...
+------------------------------------
 
 The next failure was one of hiring, I was expensive and busy. So they hired a lot of people. Filled a big office with \~30 developers of varying skill levels. They spent months drawing up an EJB 1.1 architecture with servlet/JSP front end.
 
@@ -68,8 +68,8 @@ If you don't come from the financial industry you might think this isn't a "big 
 
 This was before we had any front end APIs even on the server. Struts was relatively new and the developers in the project weren't aware of its existence. So they started pumping out a lot of disconnected servlets/JSPs with unclear navigation and no central control. The system became an unmanageable mess before it went to production.
 
-It Gets Worse {#h2-4-it-gets-worse}
------------------------------------
+It Gets Worse
+-------------
 
 Keep in mind, we didn't get to the point of the story which is the production.
 
@@ -94,8 +94,8 @@ There was even a discussion about using remote terminals (VNC style) to show a c
 
 Surprisingly, this wasn't considered a failure by the bank who still hired the contractor to a much larger project.
 
-Lessons Learned {#h2-5-lessons-learned}
----------------------------------------
+Lessons Learned
+---------------
 
 There are a lot of lessons that are applicable to modern projects:
 
@@ -118,8 +118,8 @@ What do you do when you're going to production with a badly built project?
 * Re-evaluate directions during development -- you can't debug a system design decision. As you're implementing it you might find problems. It's important to raise them high enough and loudly enough.
 * Talk to the customers continuously -- There was a point in time in the middle of the project where the company could have changed course and gone back to building a regular Swing UI instead of a web UI. They probably would have finished the project sooner and with better quality.
 
-TL;DR {#h2-6-tl-dr}
--------------------
+TL;DR
+-----
 
 Production disasters are sometimes those pileups we can see coming from miles away. But the train is moving so fast we can't possibly stop it. This is one of those stories. In it a combination of bad communication, missing skills, immature technological choices created a pile up.
 

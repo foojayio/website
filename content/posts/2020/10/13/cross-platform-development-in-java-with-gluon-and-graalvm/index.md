@@ -18,8 +18,8 @@ frozen: false
 
 That's a common question when making conversation, but how many times have you felt that you were giving an accurate answer? My personal answer largely depends on who's asking. When asked by another professional in my business, I can speak freely without much risk of being misunderstood. When asked by someone who isn't tech-savvy, my answer can be as simple as *"I work in IT"* , hoping that I won't get the dreaded response: *"Oh, you're doing something with computers! Maybe you can solve my printer problem."*
 
-The job of a CTO / Software architect {#h2-0-the-job-of-a-cto-software-architect}
----------------------------------------------------------------------------------
+The job of a CTO / Software architect
+-------------------------------------
 
 In a reply to such a question, you can try to be a tad more accurate by saying: *"No, I don't fix computers. In my job, I help my management decide how we can digitally exchange data with our customers and how we can provide digital services for internal and external use."* That's a mouthful, but if you have pen and paper, you can make the following drawing:
 ![](gluon-bruno-figure01.png)
@@ -35,8 +35,8 @@ You could add more detail to your drawing to reflect this.
 
 Apart from providing a responsive web site that can be used in a browser on the desktop or on your phone, you may also want to offer applications that run on mobile devices such as iPhones, iPads, Android phones, Android tables. For complex functionality, you may also require applications that run on the desktop. In some cases, you're also responsible for embedded software or software that runs on IoT devices.
 
-The Java Platform {#h2-1-the-java-platform}
--------------------------------------------
+The Java Platform
+-----------------
 
 It is your task to lead the development team that makes all of this happen.
 ![](gluon-bruno-figure03.png)
@@ -45,8 +45,8 @@ If you're like me, you've once had the job of the people you are now leading. I 
 
 I'm not going to preach to the choir, explaining why I think Java is the better choice for mission-critical applications in a back end that must meet high security requirements. The audience I want to address with this article already knows this to be true. My goal is to explain that Java can also be an option if you want to create mobile applications. That's a lesser known fact among Java professionals.
 
-Cross-platform development {#h2-2-cross-platform-development}
--------------------------------------------------------------
+Cross-platform development
+--------------------------
 
 If you've been using Java for your company's back-end infrastructure, you probably also want to use Java as a technology for the front-end development too. Searching the technological landscape, you might assume that your options are limited to:
 
@@ -57,7 +57,7 @@ If you've been using Java for your company's back-end infrastructure, you probab
 
 All of these options have pros and cons.
 
-### Native development for every platform {#h3-3-native-development-for-every-platform}
+### Native development for every platform
 
 Creating native apps for iOS and Android will give you great performance on the platforms the apps were created for, but the main disadvantage is that you must create and maintain different code bases.
 
@@ -65,17 +65,17 @@ At first sight, Android may look like Java, but as soon as you start working wit
 
 You'll also need code that is written for the iPhone and iPad, which means you'll need Swift or Objective-C developers. You'll enter a complex ecosystem, with frequent new SDKs, rapid deprecation, and a strong vendor lock-in for many iOS libraries.
 
-### Using HTML, CSS and JS {#h3-4-using-html-css-and-js}
+### Using HTML, CSS and JS
 
 Many small-town developers will argue: *"Why would you need to create native apps? Why don't you simply use HTML, CSS, and JS? You'll have your app in no time, and it will run on every device that has a browser!"*
 
 While that's certainly true for simple applications, the quality and performance of cross-platform in-browser apps are usually sub-optimal when a certain complexity is needed. Maintaining a project that depends on a plethora of ECMAScript libraries can be hell, and security issues are easily introduced even if everyone in your team pays attention---which isn't something you should assume to be true by default.
 
-### ReactNative and Flutter {#h3-5-reactnative-and-flutter}
+### ReactNative and Flutter
 
 ReactNative or Flutter are popular with startups that are "born mobile" and who have skipped the step of making desktop applications. Apps can be created relatively fast, but whether they are future-proof remains to be seen. The maintenance cost is usually high because of frequent breaking changes in these technologies.
 
-### Xamarin {#h3-6-xamarin}
+### Xamarin
 
 If you are working in a Microsoft environment and your team is well-versed in C#, then Xamarin may be a valid option for you.
 ![](gluon-bruno-figure04.png)

@@ -36,8 +36,8 @@ It was an exciting trip, and I had the pleasure of visiting friends in Zurich an
 
 Sadly there are only recordings of two of my seven talks, but all talks were excellent:
 
-[JUG Milano: Your Java Application Is Slow? Check Out These Open-Source Profilers](http://www.jugmilano.it/meeting-145.html) {#h2-0-jug-milano-your-java-application-is-slow-check-out-these-open-source-profilers}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[JUG Milano: Your Java Application Is Slow? Check Out These Open-Source Profilers](http://www.jugmilano.it/meeting-145.html)
+----------------------------------------------------------------------------------------------------------------------------
 
 I gave my updated QCon talk in Milan on 31st May:
 
@@ -51,8 +51,8 @@ This is related to my InfoQ article [Unleash the Power of Open Source Java Profi
 
 Being in Milan for the first time was fantastic. I was able to stay with Mario Fusco for a few days to enjoy the beauty of Gorgonzola, the suburb of Milan where he lives, and also visit the famous [Museo Nazionale della Scienza e della Tecnologia Leonardo da Vinci](https://www.museoscienza.org/).
 
-[OpenValue Munich Meetup: Writing a Profiler in 240 Lines of Pure Java](https://www.meetup.com/openvaluemuenchen/events/293736106/) {#h2-1-openvalue-munich-meetup-writing-a-profiler-in-240-lines-of-pure-java}
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[OpenValue Munich Meetup: Writing a Profiler in 240 Lines of Pure Java](https://www.meetup.com/openvaluemuenchen/events/293736106/)
+-----------------------------------------------------------------------------------------------------------------------------------
 
 I then went on to give a talk at the OpenValue Munich Meetup, based on the previous talk and my [Writing a Profiler in 240 Lines of Pure Java](https://mostlynerdless.de/blog/2023/03/27/writing-a-profiler-in-240-lines-of-pure-java/) article:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/06/image-4.png)
@@ -60,43 +60,43 @@ I then went on to give a talk at the OpenValue Munich Meetup, based on the previ
 But before this, I stayed with friends in Augsburg and Zurich:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/06/IMG_1398-2-1500x2000.jpeg) Wooden tower near Oerlikon, nearby Zurich
 
-[JDriven Full Stack Conference](https://jdriven.com/full-stack-conference-2023) {#h2-2-jdriven-full-stack-conference}
----------------------------------------------------------------------------------------------------------------------
+[JDriven Full Stack Conference](https://jdriven.com/full-stack-conference-2023)
+-------------------------------------------------------------------------------
 
 I gave a similar talk, only with a little more information on why you shouldn't trust profilers ([see](https://mostlynerdless.de/blog/2023/02/20/do-you-trust-profilers-i-once-did-too/)), in [Nieuwegein](https://jdriven.com/full-stack-conference-2023):
 ![](https://mostlynerdless.de/wp-content/uploads/2023/06/image-5.png)
 
 This concluded my three talks outside of Karlsruhe.
 
-[Gulasch Programmier Nacht Karlsruhe](https://cfp.gulas.ch/gpn21/speaker/9ZMNT9/) {#h2-3-gulasch-programmier-nacht-karlsruhe}
------------------------------------------------------------------------------------------------------------------------------
+[Gulasch Programmier Nacht Karlsruhe](https://cfp.gulas.ch/gpn21/speaker/9ZMNT9/)
+---------------------------------------------------------------------------------
 
 After coming home, I gave two talks at the GPN, one based on the article [Do you trust profilers? I once did,](https://mostlynerdless.de/blog/2023/02/20/do-you-trust-profilers-i-once-did-too/) too, and one based on the two articles [Instrumenting Java Code to Find and Handle Unused Classes](https://mostlynerdless.de/blog/2023/04/06/instrumenting-java-code-to-find-and-handle-unused-classes/) and [Class Loader Hierarchies](https://mostlynerdless.de/blog/2023/06/02/class-loader-hierarchies/). The former talk is recorded:
 
 {{< youtube 6DbjSN-nCcY >}}
 
-[Karlsruher Entwicklertag](https://www.entwicklertag.de/2023/conference_day.html) {#h2-4-karlsruher-entwicklertag}
-------------------------------------------------------------------------------------------------------------------
+[Karlsruher Entwicklertag](https://www.entwicklertag.de/2023/conference_day.html)
+---------------------------------------------------------------------------------
 
 My last two talks in Karlsruhe were my profiling talk from before and a talk with live coding based on my [writing a profiler from scratch](https://mostlynerdless.de/blog/tag/writing-a-profiler-from-scratch/) series.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Giving so many talks during two weeks was interesting, although it proved more taxing than I had hoped. I'm happy to start working on my JEP and fixing bugs; a significant rewrite of the JEP might be on the horizon. The following blog post will probably be related.
 
 If you want to see me giving a talk, either invite me or come to the following few planned talks:
 
-### July {#h3-6-july}
+### July
 
 * [Java User Group Mannheim](http://www.majug.de/), 13th July: Writing a Profiler in 240 Lines of Pure Java ([blog post](https://mostlynerdless.de/blog/2023/03/27/writing-a-profiler-in-240-lines-of-pure-java/))
 
-### September {#h3-7-september}
+### September
 
 * [JavaZone Oslo](https://2023.javazone.no/), 6th and 7th September: Unleash the Power Of Open-Source Profilers ([InfoQ article](https://www.infoq.com/articles/open-source-java-profilers/))
 * [Java Forum Nord](https://javaforumnord.de/2023/programm/) Hannover, 12th September: Unleash the power of Open-Source Java Profilers
 
-### Oktober {#h3-8-oktober}
+### Oktober
 
 * [Basel One](https://baselone.ch/one), 18th and 19th October: Unleash the Power Of Open-Source Profilers
 

@@ -27,8 +27,8 @@ We'll look at different ways to add dependencies to your project, and how to add
 
 There are several ways to add new dependencies to your project.
 
-From the build file using copy-paste {#h2-0-from-the-build-file-using-copy-paste}
----------------------------------------------------------------------------------
+From the build file using copy-paste
+------------------------------------
 
 You have probably copied a dependency from [Maven Repository](https://mvnrepository.com/) (or another website) and pasted into your build file.
 
@@ -46,8 +46,8 @@ Or, if we are using Maven, we can copy the Maven xml format into our pom.xml.
 
 Did you know that if you copy-paste a Maven XML dependency into your build.gradle file, IntelliJ IDEA automatically turns it into the correct format for Gradle?
 
-From the build file using code completion {#h2-1-from-the-build-file-using-code-completion}
--------------------------------------------------------------------------------------------
+From the build file using code completion
+-----------------------------------------
 
 We can also add dependencies to our build file using code completion. For example, let's add a new dependency to our pom.xml.
 
@@ -73,8 +73,8 @@ Code completion works in Gradle too, as you can see below.
 
 [![Code completion in build.gradle](build-gradle-code-completion-2.png "Code completion in build.gradle")](build-gradle-code-completion-2.png "Code completion in build.gradle")
 
-From the build file using code generation {#h2-2-from-the-build-file-using-code-generation}
--------------------------------------------------------------------------------------------
+From the build file using code generation
+-----------------------------------------
 
 We can also use code generation from the build file to add dependencies.
 
@@ -88,8 +88,8 @@ Note that if we are using Gradle, we can do the same in our build.gradle file.
 
 [![Invoke Package Search in build.gradle](add-dependency-build-gradle.png "Invoke Package Search in build.gradle")](add-dependency-build-gradle.png "Invoke Package Search in build.gradle")
 
-From the Dependencies tool window {#h2-3-from-the-dependencies-tool-window}
----------------------------------------------------------------------------
+From the Dependencies tool window
+---------------------------------
 
 Alternatively, we can open the Dependencies tool window directly.
 
@@ -219,7 +219,7 @@ We will see that the dependency is removed from the pom.xml and the dependency l
 
 Now we know the different ways in which we can view our project's dependencies in IntelliJ IDEA, and the different focus for each view.
 
-### IntelliJ IDEA Shortcuts Used {#h3-4-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -230,7 +230,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Invoke Package Search                                                                            | **⌘N**         | **Alt+Insert**           |
 | Context Actions                                                                                  | **⌥⏎**         | **Alt+Enter**            |
 
-### Related Links {#h3-5-related-links}
+### Related Links
 
 * [(video) JetBrains - IntelliJ IDEA: Managing Dependencies](https://www.youtube.com/watch?v=nqb9yAecM9Y)
 * [(video) JetBrains - IntelliJ IDEA: Viewing Dependencies](https://www.youtube.com/watch?v=nqb9yAecM9Y)

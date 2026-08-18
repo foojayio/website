@@ -35,8 +35,8 @@ The new API should be more flexible, safer, and future-proof than the current ve
 
 This article is the first of two articles covering the draft of a new iterator-based stack walking API, which builds the base for the follow-up article on safepoint-based profiling.
 
-Iterators {#h2-0-iterators}
----------------------------
+Iterators
+---------
 
 AsyncGetCallTrace fills a preallocated list of frames, which has the most profound expected stack trace length, and many profilers just store away this list.
 
@@ -56,8 +56,8 @@ This API can be used to develop your version of AsyncGetCallTrace, allowing seam
 
 Using the API in a signal handler and writing it using C declarations imposes some constraints, which result in a slightly more complex API which I cover in the following section.
 
-Proposed API {#h2-1-proposed-api}
----------------------------------
+Proposed API
+------------
 
 When running in a signal handler, a significant constraint is that we have to allocate everything on the stack. This includes the iterator. The problem is that we don't want to specify the size of the iterator in the API because this iterator is based on an internal stack walker and is subject to change.
 
@@ -183,8 +183,8 @@ int ASGST_ThreadState();
 
 But how can we use this API? I developed a small profiler in my writing, a profiler from scratch series, which we can now use to demonstrate using the methods defined before. Based on my Writing a Profiler in 240 Lines of Pure Java blog post, I added a flame graph implementation. In the meantime, you can also find the base implementation on [GitHub](https://github.com/parttimenerd/writing-a-profiler/tree/live_coding).
 
-Implementing a Small Profiler {#h2-2-implementing-a-small-profiler}
--------------------------------------------------------------------
+Implementing a Small Profiler
+-----------------------------
 
 First of all, you have to build and use [my modified OpenJDK](https://github.com/parttimenerd/jdk/tree/asgst_iterator). This JDK has been tested on x86 and aarch64. The profiler API implementation is still a prototype and contains known errors, but it works well enough to build a small profiler. Feel free to review the code; I'm open to help, suggestions, or sample programs and tests.
 
@@ -353,8 +353,8 @@ This assumes that you use the modified OpenJDK. MathParser is a demo program tha
 
 <br />
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Using an iterator-based profiling API in combination with better method ids offers flexibility, performance, and safety for profiler writers.
 

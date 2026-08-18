@@ -226,7 +226,7 @@ If I need to port a new JavaFX project to iOS, I usually copy this folder the ne
 
 For JArkanoid, I copied the ios folder from my [SpaceFX](https://github.com/HanSolo/SpaceFX/tree/mobile) game that I wrote some time ago.
 
-### Prerequisites {#h3-0-prerequisites}
+### Prerequisites
 
 There are a couple of things you have to do before you can compile and run your JavaFX application on your iOS device which are:
 
@@ -236,7 +236,7 @@ There are a couple of things you have to do before you can compile and run your 
 * Download the latest [Gluon GraalVM](https://github.com/gluonhq/graal/releases) version
 * Set the GRAALVM_HOME environment variable (e.g. `export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/gluon-graalvm/Contents/Home`)
 
-### Modifications {#h3-1-modifications}
+### Modifications
 
 Usually you have to make some modifications to your application related to the size, layout and things like control. Just keep in mind that on your mobile device you normally don't use a keyboard to interact with the application where on a desktop machine using the keyboard is more or less natural.
 
@@ -301,7 +301,7 @@ I know that this does not look really nice...but it works and does the job 🙂
 
 Once you've done all the modifications it's time to build and install the app on your iOS device.
 
-### Build and install {#h3-2-build-and-install}
+### Build and install
 
 Once you have all things setup, you can hook up your iOS device to your computer and go to your project folder.
 
@@ -319,7 +319,7 @@ If everything worked as it should, you should see something like the following o
 
 When you fulfil all the requirements, you should be able to build and install the code from the JArkanoid Gluon branch directly onto you iOS device.
 
-### TIP {#h3-3-tip}
+### TIP
 
 If you need to switch between the Gradle based main branch and the Maven based Gluon branch of JArkanoid, you should always make sure to close the project in your IDE (e.g., IntelliJ IDEA).
 

@@ -53,8 +53,8 @@ Here is a small program I use for this. The program works with Java 11 and above
 
 *Note that the following classes can be copied into a single file **MainMethodFinder.java** for ease of use.*
 
-MainMethodFinder {#h2-0-mainmethodfinder}
------------------------------------------
+MainMethodFinder
+----------------
 
 The class **MainMethodFinder** is the main driver of our scanning tool. It detects the current execution environment and checks if the current JDK or a different JDK should be analyzed. The `Path` of the current JDK is derived via `ProcessHandle.current().info().command()`.
 
@@ -153,8 +153,8 @@ public class MainMethodFinder {
 ```
 
 
-MainMethod {#h2-1-mainmethod}
------------------------------
+MainMethod
+----------
 
 The class **MainMethod** is a data-holder class that captures the name of a found Class with a main-method and the library containing it.
 
@@ -175,8 +175,8 @@ class MainMethod {
 ```
 
 
-MainMethodVisitor {#h2-2-mainmethodvisitor}
--------------------------------------------
+MainMethodVisitor
+-----------------
 
 The class **MainMethodVisitor** is an ASM `ClassVisitor` which analyzes the class byte code to detect executable main methods. An executable main-Method obviously has the name `"main"` and is `public static` and has a `String[]` as single parameter.
 
@@ -272,8 +272,8 @@ class MainMethodVisitor extends ClassVisitor {
 ```
 
 
-MainMethodReportingVisitor {#h2-3-mainmethodreportingvisitor}
--------------------------------------------------------------
+MainMethodReportingVisitor
+--------------------------
 
 The actual scanning of JDK `.jar`-Files and `.jmods` is performed by the **MainMethodReportingVisitor** class, which is a `SimpleFileVisitor` used in combination with `Files.walkFileTree(jdkHomePath, visitor)` in the `MainMethodFinder` main-method.
 

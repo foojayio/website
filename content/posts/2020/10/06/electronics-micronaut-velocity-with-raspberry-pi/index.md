@@ -28,8 +28,8 @@ In a previous post, we looked at the project "[Electronics \& Quarkus Qute on Ra
 In this article, we present you another great example of Java on Raspberry Pi created by Igor. It shows how to create a Micronaut Velocity demo using an 8x8 LED matrix display.
 ![](raspberry_micronaut.jpg)
 
-Micronaut {#h2-0-micronaut}
----------------------------
+Micronaut
+---------
 
 [Micronaut](https://micronaut.io/) is a JVM-based framework for building lightweight, modular applications. Developed by [OCI](https://objectcomputing.com/), the same company that created [Grails](https://objectcomputing.com/products/grails), Micronaut is the latest framework designed to make creating microservices quick and easy.
 
@@ -39,15 +39,15 @@ Although Micronaut is primarily designed around message encoding/decoding there 
 
 More info on: <https://micronaut-projects.github.io/micronaut-views/latest/guide/>
 
-Velocity {#h2-1-velocity}
--------------------------
+Velocity
+--------
 
 Velocity is a Java-based template engine. It permits anyone to use a simple yet powerful template language to reference objects defined in Java code.
 
 More info on: <http://velocity.apache.org/>
 
-Sense HAT {#h2-2-sense-hat}
----------------------------
+Sense HAT
+---------
 
 <figure class="alignleft size-large">
  <img decoding="async" width="300" height="218" src="sensehat-300x218-1.jpg" alt="" class="wp-image-35452">
@@ -63,8 +63,8 @@ You can check Igor's blog post with additional info on the Sense HAT [here](http
  <img decoding="async" src="http://www.igfasouza.com/blog/wp-content/uploads/2020/09/IMG-20200928-WA0001.jpg" alt="" class="wp-image-823" width="150" height="200">
 </figure>
 
-Idea {#h2-3-idea}
------------------
+Idea
+----
 
 Igor started with the idea to do something similar to the [Quarkus Qute 7 segment display demo](https://foojay.io/blog/electronics-quarkus-qute-on-raspberry-pi/), using Micronaut, but pivoted a little bit and ended up with a Micronaut Vecolcity interface that provides a way to control the 8×8 Led Matrix on the Sense HAT.
 
@@ -72,8 +72,8 @@ This project uses the [Java wrapper for Sense Hat](https://github.com/cinci/rpi-
 
 {{< youtube xv6irduSG3Q >}}
 
-Code {#h2-4-code}
------------------
+Code
+----
 
 The full code of this project is available on [GitHub](https://github.com/igfasouza/micronaut-velocity-8x8-led-matrix-sense-hat), below some highlights.
 
@@ -221,8 +221,8 @@ window.onload = function() {
 
 
 
-Alternative approach with a cheaper 8x8 LED matrix {#h2-5-alternative-approach-with-a-cheaper-8x8-led-matrix}
--------------------------------------------------------------------------------------------------------------
+Alternative approach with a cheaper 8x8 LED matrix
+--------------------------------------------------
 
 In most getting started kits for Arduino and Raspberry Pi, you will find a stand-alone 8x8 matrix which can be controlled with SPI (Serial Peripheral Interface) via a MAX7219 chip. Or you can buy these for around 3$ (search on ebay for "max7219 dot matrix module").
 
@@ -241,8 +241,8 @@ By using the "Find" function in the IDE for value "1" it becomes pretty clear ho
 
 
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Both on hardware as software level, you have different possible approaches, but the result is the same... a fun project to learn new software technologies and getting introduced into electronics.
 

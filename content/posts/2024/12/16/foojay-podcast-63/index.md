@@ -27,18 +27,18 @@ related_posts:
 frozen: false
 ---
 
-Last month, I published a Foojay article about [the risks in systems that are stuck on old or outdated Java versions](https://foojay.io/today/why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization/) and got [a lot of feedback from developers](https://foojay.io/today/how-organizations-became-stuck-on-outdated-java-versions/). Most of them want to move on but get stuck on management decisions, outdated production environments, or one of the many other reasons that keep systems stuck on old Java versions and dependencies. {#h2-0-last-month-i-published-a-foojay-article-about-the-risks-in-systems-that-are-stuck-on-old-or-outdated-java-versions-and-got-a-lot-of-feedback-from-developers-most-of-them-want-to-move-on-but-get-stuck-on-management-decisions-outdated-production-environments-or-one-of-the-many-other-reasons-that-keep-systems-stuck-on-old-java-versions-and-dependencies}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Last month, I published a Foojay article about [the risks in systems that are stuck on old or outdated Java versions](https://foojay.io/today/why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization/) and got [a lot of feedback from developers](https://foojay.io/today/how-organizations-became-stuck-on-outdated-java-versions/). Most of them want to move on but get stuck on management decisions, outdated production environments, or one of the many other reasons that keep systems stuck on old Java versions and dependencies.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Do you want to bring your system from Java 8 to 23? Did you know that Java 17 already has 13 security releases? And that you can use tools like OpenRewrite to help you update your code?
 
-Video {#h2-1-video}
--------------------
+Video
+-----
 
 {{< youtube EjDIBGHd33o >}}
 
-Podcast Apps {#h2-2-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -46,8 +46,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-3-guests}
----------------------
+Guests
+------
 
 * Gerrit Grunwald: <https://www.linkedin.com/in/gerritgrunwald/>
 * Jonathan Schneider: <https://www.linkedin.com/in/jonkschneider/>
@@ -56,8 +56,8 @@ Guests {#h2-3-guests}
 * Charl Fasching: <https://www.linkedin.com/in/charl-fasching-77843288/>
 * Johan Janssen: <https://www.linkedin.com/in/johanjanssen2001/>
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests
 

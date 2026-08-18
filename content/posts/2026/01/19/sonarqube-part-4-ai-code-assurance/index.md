@@ -36,8 +36,8 @@ This is **Part 4** . Today, we stop "finding" and start **"auto-remediating"** u
 
 
 
-**Problem #1: "I see the bug, but I'm too lazy (or busy) to fix it"** {#h2-0-problem-1-i-see-the-bug-but-i-m-too-lazy-or-busy-to-fix-it}
-----------------------------------------------------------------------------------------------------------------------------------------
+**Problem #1: "I see the bug, but I'm too lazy (or busy) to fix it"**
+---------------------------------------------------------------------
 
 You are in IntelliJ. SonarQube highlights a block of code with high Cognitive Complexity.
 
@@ -66,8 +66,8 @@ And finally this is the way we see the change coming from SonarQube AI CodeFix i
 
 
 
-**Problem #2: "My AI Assistant writes buggy code because it doesn't know our rules"** {#h2-1-problem-2-my-ai-assistant-writes-buggy-code-because-it-doesn-t-know-our-rules}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #2: "My AI Assistant writes buggy code because it doesn't know our rules"**
+-------------------------------------------------------------------------------------
 
 You are using Cursor, Windsurf, or Claude Desktop to generate a new Spring Boot Service.
 
@@ -98,8 +98,8 @@ Asking the agent to produce code but connecting it to SonarQube MCP Server in or
 
 
 
-**Problem #3: "How do I know if this Project with AI-generated code is actually good?"** {#h2-2-problem-3-how-do-i-know-if-this-project-with-ai-generated-code-is-actually-good}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #3: "How do I know if this Project with AI-generated code is actually good?"**
+----------------------------------------------------------------------------------------
 
 Your team is using GitHub Copilot heavily. Productivity is up 30%. But... are they generating high-quality code, or just generating more bugs faster?
 
@@ -121,8 +121,8 @@ When a project passes this strict gate, it earns the **"AI Code Assurance"** bad
 
 
 
-**🎯 Series Summary: The Complete Cycle** {#h2-3-series-summary-the-complete-cycle}
------------------------------------------------------------------------------------
+**🎯 Series Summary: The Complete Cycle**
+-----------------------------------------
 
 We have come a long way.
 

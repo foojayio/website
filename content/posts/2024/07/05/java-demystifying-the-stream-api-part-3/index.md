@@ -42,8 +42,8 @@ So what are these three operations for sequences,
 
 * The **Reduce** operation collates a sequence of elements using a binary function. It requires an initial value to initialize the reduction, and if the input data is empty, the return value becomes this initial value.
 
-Streams or For Loops? {#_streams_or_for_loops}
-----------------------------------------------
+Streams or For Loops?
+---------------------
 
 As a developer and architect, I aim to enhance the readability, functionality, and efficiency of my code. We can achieve these objectives in a more elegant manner using StreamAPI.
 
@@ -76,8 +76,8 @@ DoubleStream specialized in handling elements of double-valued elements.
 
 The streams mentioned above are suitable for both sequential and parallel aggregate operations.
 
-***Intermediate Operations*** in the Stream API interface {#h2-1-intermediate-operations-in-the-stream-api-interface}
----------------------------------------------------------------------------------------------------------------------
+***Intermediate Operations*** in the Stream API interface
+---------------------------------------------------------
 
 **map:** Produces a stream containing the outcomes of implementing the specified function to the elements within the stream.
 
@@ -167,8 +167,8 @@ Additionally, **flatMapToDouble, mapMulti, mapMultiToInt, mapMultiToLong, mapMul
 
 Some of these methods are *stateful and involve short-circuiting intermediate operations* , such as **sorted, skip, limit, dropWhile, and takeWhile**, which businesses can utilize according to specific needs.
 
-*T**erminal Operations***in the Stream API interface {#h2-2-terminal-operations-in-the-stream-api-interface}
-------------------------------------------------------------------------------------------------------------
+*T**erminal Operations***in the Stream API interface
+----------------------------------------------------
 
 **forEach \& forEachOrdered:** This stream performs an action for each element and display it in Order
 
@@ -247,7 +247,7 @@ Happy Learning 🙂
 
 The complete code is available over on [Github](https://github.com/bsmahi/Java8Features/blob/master/StreamAPI.java)
 
-References {#h2-3-references}
------------------------------
+References
+----------
 
 <https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html>

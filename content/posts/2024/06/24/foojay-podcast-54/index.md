@@ -27,13 +27,13 @@ Within OpenJDK, there is a whole Java package dedicated to MIDI communication an
 
 Let's find out...
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube tHKZA9yqIVM >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,24 +41,24 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Atsushi Eno {#h3-3-atsushi-eno}
+### Atsushi Eno
 
 * <https://atsushieno.github.io/>
 * [@\[email protected\]](https://g0v.social/@atsushieno)
 * [@\[email protected\]](https://fedibird.com/@atsushieno)
 
-### Geert Bevin {#h3-4-geert-bevin}
+### Geert Bevin
 
 * <https://www.linkedin.com/in/gbevin/>
 * <https://gbevin.com/cv/>
 * <https://www.uwyn.com/>
 * <https://www.gbevin.com/>
 
-Content {#h2-5-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests  
 

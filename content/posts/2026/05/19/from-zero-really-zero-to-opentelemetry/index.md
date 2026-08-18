@@ -22,8 +22,8 @@ Here's a super awesome prompt (e.g., for Claude Code) that you can use with <htt
 And the end result is this, a view into the traces of your application (without anything at all at the start of the process).
 ![](dash0-foojay-2-1024x545.png)
 
-**The Super Awesome Prompt** {#h2-0-the-super-awesome-prompt}
--------------------------------------------------------------
+**The Super Awesome Prompt**
+----------------------------
 
 Take a careful look below: before doing this prompt, not only do we not have an application that is instrumented with OpenTelemetry yet. Not only do we not have the agent we need to do the instrumentation yet.
 
@@ -52,8 +52,8 @@ Service version and namespace as appropriate resource attributes**
 
 (All you need to run this prompt is to get your endpoint and token from your Dash0 Settings dialog, and put them in the placeholders above.)
 
-Why This Prompt Works {#h2-1-why-this-prompt-works}
----------------------------------------------------
+Why This Prompt Works
+---------------------
 
 A few things in there are deliberate:
 
@@ -63,7 +63,7 @@ A few things in there are deliberate:
 * **run.sh + gitignore** --- keeps your token out of source control. The agent will do this if asked; less reliably if not.
 * **"show me the commands to run"** --- forces it to surface the verification path, not just dump files.
 
-### After The Agent Finishes {#h3-2-after-the-agent-finishes}
+### After The Agent Finishes
 
 You should end up with, roughly `pom.xml`, `src/main/java/.../Application.java` plus a controller, `opentelemetry-javaagent.jar`, `run.sh`, `.gitignore`, `README.md`.
 
@@ -81,7 +81,7 @@ Then in Dash0 go to the **Trace Explorer** --- filter by `service.name = dash0-j
 
 Next, go to **Integrations → Java → Install all dashboards** if you haven't yet, then open **JVM Metrics** for the heap/GC/thread charts.
 
-### Follow Up Prompts You'll Likely Want {#h3-3-follow-up-prompts-you-ll-likely-want}
+### Follow Up Prompts You'll Likely Want
 
 Once data is flowing, these are the natural next asks (each triggers a different skill):
 

@@ -28,8 +28,8 @@ frozen: false
 
 Hilla is designed to be simple enough for small utilities, but robust enough to build complex, enterprise-grade apps.
 
-Automatic Java to TypeScript Code Generation {#h2-0-automatic-java-to-typescript-code-generation}
--------------------------------------------------------------------------------------------------
+Automatic Java to TypeScript Code Generation
+--------------------------------------------
 
 Automatic TypeScript code generation helps ensure that the frontend always stays in sync with the backend, so you can build apps faster and with greater confidence, even when your team grows bigger. The strong type-safety also means you can explore server endpoint methods and their input and return types right from your IDE as you type.
 
@@ -76,22 +76,22 @@ export class PersonView extends View {
 ```
 
 
-Getting started {#h2-1-getting-started}
----------------------------------------
+Getting started
+---------------
 
 You can learn more about Hilla and get started on <https://hilla.dev/>.
 
-Full Release Notes {#h2-2-full-release-notes}
----------------------------------------------
+Full Release Notes
+------------------
 
-### Features {#h3-3-features}
+### Features
 
 * Zero-configuration toolchain for building web applications with Lit TypeScript UI and Java Spring Boot server side
 * Easy and type-safe back end access using TypeScript endpoints and data definitions generated from Java code
 * Form binding with shared data validation on server and client
 * Includes Vaadin web components for building the UI
 
-### Versions {#h3-4-versions}
+### Versions
 
 **Included dependencies:**
 
@@ -104,7 +104,7 @@ Full Release Notes {#h2-2-full-release-notes}
 * Hilla Spring Boot Starter (1.0.0)
 * Vaadin Design System / Web Components (23.0.0)
 
-### Supported languages and tools {#h3-5-supported-languages-and-tools}
+### Supported languages and tools
 
 * Java 11
 * TypeScript 4.5

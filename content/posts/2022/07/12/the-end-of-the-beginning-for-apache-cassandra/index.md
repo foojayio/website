@@ -30,8 +30,8 @@ So I feel this day marks an important milestone that isn't just a version number
 
 Now it's ready to launch into the next 10 years of cloud native data; it has the computer science and hard-won history to make a huge impact. Today's milestone is the end of the beginning.{#d6a4}
 
-Not the hero you wanted, but the hero you need {#7121}
-------------------------------------------------------
+Not the hero you wanted, but the hero you need
+----------------------------------------------
 
 In early 2011, I was having lunch with the person whom I would call the first evangelist for Cassandra: [Adrian Cockcroft](https://twitter.com/adrianco). At the time, he was helping transform Netflix from a mail-based DVD company to a streaming company that required a lot of cutting-edge technology, some of which hadn't even been invented yet.{#d99a}
 
@@ -41,8 +41,8 @@ These were the early years of Cassandra, and as is typical in the 30- to 40-year
 
 The computer science was really clear: To meet the type of scale requirements modern applications need, you have to use a coordination-free database that is built for availability and partition tolerance. There were teams using other technologies, but not always successfully. Because of this, Cassandra earned the reputation as the database that wouldn't let you down, though it was really hard to learn. If all other databases failed to deliver the needed uptime or scale, Cassandra could do the job.{#2ec4}
 
-Coming of age isn't easy {#278c}
---------------------------------
+Coming of age isn't easy
+------------------------
 
 In 2016, Cassandra 3.0 was released and one of the big changes was a completely new storage engine. Anyone who has worked in operations knows that major alterations to core components need their time in service before reaching a stability point that's generally trusted. Cassandra wasn't immune to this. With a lot of initial issues in the 3.0 storage engine, most users opted to stay with 2.1 and wait to upgrade. At about that time, DataStax was pulling away from the project, which led to a lot of internal project conflict. Apache Cassandra had arrived at the awkward adolescent years.{#462c}
 
@@ -54,8 +54,8 @@ DataStax is the open, multicloud stack for modern data apps. DataStax gives ente
 
 The idea that a dot-zero release could be considered production stable doesn't fit in many operators' world views. Of course, you have to wait at least a few bug releases before trying your hand at an upgrade, right? The members of the Apache Cassandra community decided to challenge that idea. What is the point of a beta release or a release candidate? Since this is not being built in a cathedral and instead in the open bazaar, a real contribution to the project will be running a beta with production workloads. And before getting to the beta, we need to be able to test correctness in a variety of ways that failure can happen consistently and continuously. Incredible tools have been built in the project in the past few years that are unmerciful in the failure modes they present. The payoff has been real. Apache Cassandra 4.0 is green on all tests and, as promised, being run in production by the organizations sponsoring engineering time. It's being released because the members of the project believe in the promise that this will be the most stable database you can use.{#0bea}
 
-On the shoulders of giants {#d9ce}
-----------------------------------
+On the shoulders of giants
+--------------------------
 
 This is how we got to today. A solid pedigree from the beginning, years of innovation and a commitment to quality. The database is trusted by companies like Netflix, Uber, Flipkart, ING Bank and hundreds of others. And now we are on the cusp of a new era of Cassandra. Truly the end of the beginning. So what is next for Cassandra?{#6eec}
 

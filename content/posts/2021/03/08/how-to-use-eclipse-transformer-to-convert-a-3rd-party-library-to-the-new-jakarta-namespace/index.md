@@ -21,13 +21,13 @@ The release of Jakarta EE 9 breaks a tradition of Java Enterprise. A legal requi
 
 But the change of the package and XML namespace in Jakarta EE 9 is only the beginning. The change of the namespace allows for new development and functionality, but all frameworks and libraries using one of the Java Enterprise specifications also need to be adjusted to the new version.
 
-### Updates {#h3-0-updates}
+### Updates
 
 Since your application is using additional libraries on top of Jakarta EE, those also need to be updated to the new namespace. Libraries like Apache Deltaspike, PrimeFaces, Jackson, MicroProfile, Arquillian, and so on, all depend on some of the Jakarta Specifications. And all of them will release a version based on the Jakarta EE 9 code and thus use the new package names.
 
 When you wait a couple of months, things will be become easier to convert your application to the Jakarta EE 9 namespace, and prepare it for the new functionalities planned in Jakarta EE 10. On the other hand, the package name change is the only change in Jakarta EE 9, so testing out the conversion of your application today, especially when it is a larger one, makes sense. This is possible with the help of the Eclipse Transformer and some custom POM files.
 
-### Eclipse Transformer {#h3-1-eclipse-transformer}
+### Eclipse Transformer
 
 The [Eclipse Transformer project](https://github.com/eclipse/transformer) converts the namespace of the compiled Java resources. Also, JAR artifacts as WAR and EAR files containing entire applications are supported. The project is generic in the sense that it can handle all kinds of conversions and not only the one related to the changes for Jakarta EE 9.
 
@@ -55,7 +55,7 @@ Using the above command, you create a converted JAR file that can be picked up b
 
 But in most cases, a bit of extra work is required. So in the next paragraph we explain in more detail what is needed for a few frameworks and libraries.
 
-### MicroProfile {#h3-2-microprofile}
+### MicroProfile
 
 When you need some MicroProfile functionality in your application, you typically add the following dependency to your project and run it on a compatible runtime like [Payara Server](https://www.payara.fish/products/payara-server/)or [Payara Micro](https://www.payara.fish/products/payara-micro/):
 
@@ -78,7 +78,7 @@ The resulting file can be seen [here](https://github.com/rdebusscher/ee9-lib-tra
 
 Converting all the different MicroProfile specifications can also be automated. [This project](https://github.com/rdebusscher/ee9-lib-transform/tree/main/microprofile-transformer) on GitHub can do this for you in a single run.
 
-### DeltaSpike {#h3-3-deltaspike}
+### DeltaSpike
 
 Apache DeltaSpike consists of several modules that can help you in various aspects with JPA, JSF, security, etc ... Some of these modules are very simple and easy to convert. Others have a lot of dependencies and require a bit more work.
 
@@ -90,7 +90,7 @@ But the process is the same as the one for the MicroProfile case. Make a referen
 
 The results for the JSF implementation module of DeltaSpike can be found [here](https://github.com/rdebusscher/ee9-lib-transform/blob/main/deltaspike-pom/1.8.1/jsf-impl/pom.xml).
 
-### PrimeFaces {#h3-4-primefaces}
+### PrimeFaces
 
 As already mentioned, in the end, the library maintainers will create a version that uses the correct Jakarta EE 9 dependencies. PrimeFaces is one of those libraries that are always quick to update to the latest changes. There already exists a *test* version of PrimeFaces 9 using the *jakarta* namespace.
 
@@ -115,7 +115,7 @@ When you want to try it out, use the following dependency block in Maven and ref
 ```
 
 
-### Start Experimenting with the Eclipse Transformer Project on the Payara Platform {#h3-5-start-experimenting-with-the-eclipse-transformer-project-on-the-payara-platform}
+### Start Experimenting with the Eclipse Transformer Project on the Payara Platform
 
 Jakarta EE 9 is released and it contains the change from the *javax* namespace to the *jakarta* namespace as was required as part of the code donation to the Eclipse Foundation. This change also means many frameworks and libraries need to be updated to make use of the new package names.
 

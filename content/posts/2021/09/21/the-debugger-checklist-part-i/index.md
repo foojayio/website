@@ -32,8 +32,8 @@ We're going to skip ahead to a point where you have a bug you can reproduce (con
 
 This isn't a tutorial for beginners, that's a different article in which I will cover a lot of additional things and go into more details.
 
-1. Works on My Machine {#h2-0-1-works-on-my-machine}
-----------------------------------------------------
+1. Works on My Machine
+----------------------
 
 If this doesn't reproduce locally you might want to leverage remote debugging. This is pretty easy for most modern development tools, e.g. [this article](https://lightrun.com/debugging/how-to-debug-remotely-in-intellij/) covers the process of debugging a Java process remotely in IntelliJ/IDEA. You can apply the same technique to most IDEs and languages/platforms.
 
@@ -46,8 +46,8 @@ Without that you can try the following tricks:
 
 In my experience this is one of the hardest things to do when debugging a remote issue. Especially in a clustered/polyglot environment.
 
-2. If The Bug is Inconsistent {#h2-1-2-if-the-bug-is-inconsistent}
-------------------------------------------------------------------
+2. If The Bug is Inconsistent
+-----------------------------
 
 These are the hard to track bugs for which we need the most help. These are also the bugs in which people lose faith in debugging. I'll classify this problem into two distinct cases:
 
@@ -87,8 +87,8 @@ public class DebugUtil {
 
 We can use this code in our logs which we can then instantly scan through to find whether a bug correlates to invocation through a specific stack.
 
-3. Conditional Breakpoints {#h2-2-3-conditional-breakpoints}
-------------------------------------------------------------
+3. Conditional Breakpoints
+--------------------------
 
 You probably know about conditional breakpoints, but when was the last time you used them?
 
@@ -100,8 +100,8 @@ Say the bug we're tracking happens only when the data for a specific user is bei
 
 There are some problems with conditional breakpoints. E.g. They can impact performance in such a way that the execution slows down to such a degree that we can't reproduce problems properly.
 
-4. Rinse Repeat {#h2-3-4-rinse-repeat}
---------------------------------------
+4. Rinse Repeat
+---------------
 
 You know that feeling when you step over the code after spending ages getting everything right... Then you step too far and you "missed it"!
 
@@ -117,8 +117,8 @@ Couple that with the ability to edit variable values in the watch window and you
 
 ![Jump to the line plugin](screenshot_22984-700x280.gif)
 
-To be Continued... {#h2-4-to-be-continued}
-------------------------------------------
+To be Continued...
+------------------
 
 Next time I'll go over the process of debugging an application. It's a very simple process but as usual "the devil is in the details".
 

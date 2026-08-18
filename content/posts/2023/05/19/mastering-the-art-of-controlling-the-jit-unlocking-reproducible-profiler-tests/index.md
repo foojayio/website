@@ -44,8 +44,8 @@ Writing small test cases this way is great, but it would be even better if we co
 
 *Consider reading my* [*Validating Java Profiling API*s](https://foojay.io/today/validating-java-profiling-apis/) article to*get a different angle on profiling API testing.*
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Before I start with discussing the ways you can force methods to be compiled, interpreted, or inlined, I'll have to clarify that:
 
@@ -65,8 +65,8 @@ The JVM might decide at any point to use the interpreted version of a method by 
 
 Every compiler can decide to inline called methods of a currently compiled method. A compiler uses the initial byte code for this purpose.
 
-What we want and what we get {#h2-1-what-we-want-and-what-we-get}
------------------------------------------------------------------
+What we want and what we get
+----------------------------
 
 The ideal would be to tell the JVM to just use a method in its compiled version, e.g.:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/05/tiered_states3-2000x474.png)
@@ -74,8 +74,8 @@ The ideal would be to tell the JVM to just use a method in its compiled version,
 But this is not possible, as the JVM does not have any information it needs for compilation before the first execution of a method. We, therefore, have first to execute the method (or the benchmark) and then set the compilation level:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/05/tiered_states2-2000x470.png)
 
-How do we get it? {#h2-2-how-do-we-get-it}
-------------------------------------------
+How do we get it?
+-----------------
 
 We can split the task of forcing a method to be compiled (or inlined, for that matter) into two parts:
 
@@ -87,8 +87,8 @@ The following is the modified state diagram when forcing a method to be C1 compi
 
 In the following, I'll discuss how to use both the WhiteBox API and Compiler Control to facilitate the wanted behavior.
 
-WhiteBox API {#h2-3-whitebox-api}
----------------------------------
+WhiteBox API
+------------
 
 Many JVM tests are written in the JTreg framework, allowing developers to write these tests in Java. But these tests often require specific functionality not regularly available to Java developers. This functionality is exported in the WhiteBox API:
 > One of the not so well-known tools of the HotSpot VM is its WhiteBox testing API. Introduced in Java 7 it has been significantly improved and extended in Java 8 and 9. It can be used to query or change HotSpot internals which are not otherwise exposed to Java-land. While its features make it an indispensable tool for writing good HotSpot regression tests, it can also be used for experiments or for the mere fun of peeking into the VM. This entry will focus on the usage of the WhiteBox API in Java 8 and 9.
@@ -183,25 +183,25 @@ wb.testSetForceInlineMethod(m, true);
 
 I implemented this in the [WhiteBoxUtil](https://github.com/parttimenerd/trace_tester/blob/4b02b80a1935822f18c356f0b340f70ca7ec06b2/src/main/java/tester/util/WhiteBoxUtil.java) class in my trace-tester library. This allows us to force all methods in their respective states. But the JVM can still decide to optimize further or inline a method, even when specifying the contrary. So we have to force the JVM using the second the Compiler Control specifications.
 
-Compiler Control {#h2-4-compiler-control}
------------------------------------------
+Compiler Control
+----------------
 
 This control mechanism has been introduced in Java 9 with [JEP 165](https://openjdk.org/jeps/165) by Nils Eliasson:
 >
-> Summary {#Summary}
-> ------------------
+> Summary
+> -------
 >
 > This JEP proposes an improved way to control the JVM compilers. It enables runtime manageable, method dependent compiler flags. (Immutable for the duration of a compilation.)
 >
-> Goals {#Goals}
-> --------------
+> Goals
+> -----
 >
 > * Fine-grained and method-context dependent control of the JVM compilers (C1 and C2)
 > * The ability to change the JVM compiler control options in run time
 > * No performance degradation
 >
-> Motivation {#Motivation}
-> ------------------------
+> Motivation
+> ----------
 >
 > Method-context dependent control of the compilation process is a powerful tool for writing small contained JVM compiler tests that can be run without restarting the entire JVM. It is also very useful for creating workarounds for bugs in the JVM compilers. A good encapsulation of the compiler options is also good hygiene.
 > [JEP 165](https://openjdk.org/jeps/165)
@@ -236,8 +236,8 @@ This, in theory, allows the method to be deoptimized, but this did not happen du
 
 I recommend this Compiler Control guide for a more in-depth guide with all options. An implementation of the control file generation with a fluent API can be found in the trace-tester project in the [CompilerDirectives](https://github.com/parttimenerd/trace_tester/blob/4b02b80a1935822f18c356f0b340f70ca7ec06b2/src/main/java/tester/util/CompilerDirectives.java) class. Feel free to adapt this for your own projects.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 I've shown you in this article how to control the JIT to specify the inlining and compilation of methods using two lesser-known JVM APIs.
 

@@ -29,8 +29,8 @@ Part 2 describes how to use the new capabilities offered by Leyden and presents 
 
 Part 3 provides a more detailed account of how Leyden's proposed solution operates and presents a first look at tooling that allows you to assess the benefits that result and tune your application to make the most of what Leyden offers.
 
-A Brief History of Java Performance {#h2-0-a-brief-history-of-java-performance}
--------------------------------------------------------------------------------
+A Brief History of Java Performance
+-----------------------------------
 
 Java has been one of the most popular programming object-oriented languages for decades. Its success relies heavily on the fact that it offers a *portable, managed runtime* that makes it easy and safe to resolve many common programming challenges. In particular, Java was the first portable language to make it straightforward for programmers to deliver multi-threaded applications which allocate and manage storage at runtime without risk of invalid memory accesses.
 
@@ -38,7 +38,7 @@ The fact that Java remains popular still surprises some programmers, given that 
 
 However, modern Java runtimes rely on powerful 'just-in-time' (JIT) compilers to translate bytecode to native machine code at runtime. JIT compilation, a technique originally tried in Smalltalk nearly 40 years ago, has improved Java performance by orders of magnitude from the early days of an interpreter-only runtime. The use of runtime execution profiling supports *feedback directed optimization* and *speculative optimization*. This has allowed Java JIT compilers to achieve peak performance that far exceeds what can be achieved with programs that are compiled ahead-of-time (AOT).
 
-### Why Java takes time to reach peak performance {#h3-1-why-java-takes-time-to-reach-peak-performance}
+### Why Java takes time to reach peak performance
 
 The downside of dynamic class loading and JIT compilation is that a Java runtime takes some time to achieve this impressive peak performance.
 
@@ -52,8 +52,8 @@ The JVM normally starts off executing Java methods in the interpreter. Of course
 
 Furthermore, without runtime execution profile data as input, the compiler is unable to make informed, *feedback-directed* optimizations that significantly improve performance of the compiled code. Most importantly, it cannot simplify the compiled code by *speculating* that previous execution patterns will continue, replacing code that lies on untaken 'cold' branches with traps. Speculative compilation, an optimization first used in the Self compiler over 30 years ago, reduces both the size and the complexity of bytecode that feeds into a specific compilation. That, in turn, enables deep inlining of method calls and offers the possibility to identify many more derived optimizations. The rare case where a trap on a cold branch gets executed is handled by *deoptimizing* i.e. jumping back into the interpreter and recompiling the method with an updated branch profile.
 
-Housekeeping considered harmful {#h2-2-housekeeping-considered-harmful}
------------------------------------------------------------------------
+Housekeeping considered harmful
+-------------------------------
 
 During early stages of application execution, the JVM housekeeping overheads listed above are at their highest. Class loading and initialization, class linking, and recording of method execution profile data occur frequently as side effects of execution, for both application and JDK runtime methods, impeding direct forward progress of the application. Method compilation proceeds in dedicated, background compiler threads, but this still steals CPU cycles, once again, impeding application progress.
 
@@ -61,8 +61,8 @@ The impedance of JVM housekeeping work gradually decreases, as more and more of 
 
 After some time, a steady state is reached where most or all classes are loaded and linked, most or all methods have been profiled, and all 'hot' methods have been compiled with highly efficient code. Very occasionally variation in input data or a phase change in program behaviour drives the application down a cold path, triggering deoptimization and incurring extra JVM overheads. However, by and large, applications mostly warm up and continue to run with steady peak performance.
 
-Leyden Project 'premain' Experiment {#h2-3-leyden-project-premain-experiment}
------------------------------------------------------------------------------
+Leyden Project 'premain' Experiment
+-----------------------------------
 
 Project Leyden has been experimenting with reducing the impedance of JVM house keeping tasks in [the 'premain' branch of the project repository](https://github.com/openjdk/leyden/tree/premain). The observation that drives the Leyden premain experiment is that, most of the time, the housekeeping operations that occur during an application run involve doing exactly or almost exactly the same work with the same result, certainly in the early stages where the impedance is high. On every run a lot of the same byecode gets loaded and linked, the same classes get initialized, the same methods turn out to be hot, and end up getting compiled with the same or very similar profile information.
 
@@ -82,7 +82,7 @@ Leyden's premain branch builds on this success but it is addressing a bigger pri
 
 Even if some saved state might turn out not to be useful, because, say, a class was not referenced or a method not called in the subsequent run, the ability to reuse some of the state should still pay off. The cost of reloading the required state can be made much lower than the cost of recreating, meaning the application can reach peak performance earlier, with less impedance from the JVM. The more reusable state that can be saved the greater the reduction in impedance.
 
-### Training and Production Runs {#h3-4-training-and-production-runs}
+### Training and Production Runs
 
 So, the basic idea behind is to run your application twice:
 

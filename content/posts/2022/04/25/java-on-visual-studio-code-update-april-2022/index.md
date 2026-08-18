@@ -24,7 +24,7 @@ This time we are bringing you many exciting updates regarding our fundamental ex
 
 Let's get into it.
 
-### Microsoft JDConf {#h3-0-microsoft-jdconf}
+### Microsoft JDConf
 
 Before we start our update, we want to share an exciting news: Microsoft JDConf is coming up! Join us for the second JDConf event on May 4 -- 5, 2022.
 
@@ -32,7 +32,7 @@ It is a virtual, Java focused conference where developers can come together to s
 
 Our goal with this event is to highlight external speakers and showcase the great work that's going on across the Java community. You can get more information and register via this link:
 
-### Java 18 Support {#h3-1-java-18-support}
+### Java 18 Support
 
 We have always been targeting to support the latest Java technology.
 
@@ -40,7 +40,7 @@ With Java 18 reaching General Availability in March this year, we have enabled t
 
 This means you can now use Java 18 in your projects!
 
-### Support Inlay Hints for Parameter Names {#h3-2-support-inlay-hints-for-parameter-names}
+### Support Inlay Hints for Parameter Names
 
 Have you ever wondered about which parameter you are filling for in some unfamiliar methods? Don't worry, Inlay Hints is here to help you.
 
@@ -60,7 +60,7 @@ Here is a demo of the feature in action:
 
 ![Inlay demo](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/inlay.gif)
 
-### New Java Language Server Status UX {#h3-3-new-java-language-server-status-ux}
+### New Java Language Server Status UX
 
 Previously, there are multiple items on the status bar to show the current state of the Java language server, this can make the UX crowded and confusing sometimes.
 
@@ -90,13 +90,13 @@ If there is an issue or error, you will see an indicator on the status icon and 
 
 We hope this improvement will provide better user experience about the state of the Java language server and please share your feedback with us so we can continue to improve this area.
 
-### Code action to extract lambda body to method {#h3-4-code-action-to-extract-lambda-body-to-method}
+### Code action to extract lambda body to method
 
 As a minor feature update, we have also added a code action (from Quick Fix) to allow developers to easily extract lambda body to a method. Here is a quick demo:
 
 ![Lambda demo](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/lambda.gif)
 
-### Lambda expression evaluation support in debugging {#h3-5-lambda-expression-evaluation-support-in-debugging}
+### Lambda expression evaluation support in debugging
 
 Lastly, we wanted to provide an update on lambda expression support in debugging. Previously, there was [an issue](https://github.com/microsoft/vscode-java-debug/issues/754) that prevents developer from properly evaluating variables inside lambda expressions when debugging. In our latest release, we have fixed this issue.
 
@@ -106,7 +106,7 @@ Here is a quick demo of evaluating a variable from enclosing methods when using 
 
 For complete list of supported case, please visit the [original issue](https://github.com/microsoft/vscode-java-debug/issues/754).
 
-### Feedback and suggestions {#h3-6-feedback-and-suggestions}
+### Feedback and suggestions
 
 As always, your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to give us feedback
 
@@ -114,7 +114,7 @@ As always, your feedback and suggestions are very important to us and will help 
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-### Resources {#h3-7-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

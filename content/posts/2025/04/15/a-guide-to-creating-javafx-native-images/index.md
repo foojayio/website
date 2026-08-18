@@ -27,8 +27,8 @@ This article was originally published [here](https://bell-sw.com/blog/how-to-cre
 
 The code for the project I use in this article is available [on GitHub](https://github.com/des-felins/raffle). It was built using [Liberica JDK Full](https://bell-sw.com/pages/downloads/#jdk-21-lts) that includes an OpenJFX bundle. It facilitates developing and building JavaFX applications as there's no need to add separate dependencies for JavaFX.
 
-Table of Contents {#h2-0-table-of-contents}
--------------------------------------------
+Table of Contents
+-----------------
 
 1. [Set Up GraalVM for JavaFX Native Compilation](#mcetoc_1inc190pt1d)
 2. [Collect Metadata Using GraalVM Tracing Agent](#mcetoc_1inc190pt1e)
@@ -36,8 +36,8 @@ Table of Contents {#h2-0-table-of-contents}
 4. [Use GitHub Actions to Automate JavaFX Releases](#mcetoc_1inc190pt1g)
 5. [Conclusion](#mcetoc_1inc190pt1h)
 
-Set Up GraalVM for JavaFX Native Compilation {#h2-1-set-up-graalvm-for-javafx-native-compilation}
--------------------------------------------------------------------------------------------------
+Set Up GraalVM for JavaFX Native Compilation
+--------------------------------------------
 
 IMPORTANT NOTE: you will need to provide the executable JAR of your application to the Native Image, so make sure that you create one before proceeding.
 
@@ -82,8 +82,8 @@ If you want to build native images using Maven, you need to add the plugin to yo
 
 We're all set up, let's move on!
 
-Collect Metadata Using GraalVM Tracing Agent {#h2-2-collect-metadata-using-graalvm-tracing-agent}
--------------------------------------------------------------------------------------------------
+Collect Metadata Using GraalVM Tracing Agent
+--------------------------------------------
 
 Java dynamic features and resources such as images or icons require special treatment when working with GraalVM Native Image. This is because the native-image compiler includes only those elements into the executable that are reachable at build time.
 
@@ -115,8 +115,8 @@ $NIK_HOME/bin/java -agentlib:native-image-agent=config-merge-dir=./agent-data -j
 
 It is possible to enable the agent in the pom.xml. Follow the instructions described [here](https://graalvm.github.io/native-build-tools/latest/maven-plugin.html#agent-support-running-application).
 
-Build a JavaFX Native Image with GraalVM {#h2-3-build-a-javafx-native-image-with-graalvm}
------------------------------------------------------------------------------------------
+Build a JavaFX Native Image with GraalVM
+----------------------------------------
 
 Now that we have all necessary metadata on our hands, it's time to generate a native image.
 
@@ -168,8 +168,8 @@ You can now run your executable with:
 
 Note that the native executable doesn't need JVM to run because it already contains all necessary Java classes.
 
-Use GitHub Actions to Automate JavaFX Releases {#h2-4-use-github-actions-to-automate-javafx-releases}
------------------------------------------------------------------------------------------------------
+Use GitHub Actions to Automate JavaFX Releases
+----------------------------------------------
 
 In contrast to the JAR files that can be run on any platform where Java is installed, native images are built for a specific architecture. So, if you have built a native image on Linux x66, it will run on Linux x64 only.
 
@@ -268,8 +268,8 @@ That's it! Make sure that you [created a release on GitHub](https://docs.github.
 
 After the workflow completes successfully, you will find the binaries for all platforms under [Releases.](https://github.com/des-felins/raffle/releases)
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Creating JavaFX Native Images using GraalVM helps to improve the performance and portability of Java desktop applications by eliminating the need for a JVM at runtime.
 

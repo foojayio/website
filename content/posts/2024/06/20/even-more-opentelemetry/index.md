@@ -32,15 +32,15 @@ Here's an updated diagram. New components appear in violet, and updated componen
 
 I've written about the changes in the inventory to account for the new configuration. Let's talk about the warehouse components.
 
-The Go warehouse {#h2-0-the-go-warehouse}
------------------------------------------
+The Go warehouse
+----------------
 
 Let me be blunt: I dislike (hate?) Go for its error handling approach. However, with close to zero knowledge of the language, I was able to build a basic HTTP API that reads from the database in a couple of hours. I chose [Gin Gonic](https://gin-gonic.com/) for the web library and [Gorm](https://gorm.io/index.html) for the . OpenTelemetry provides an integration with a [couple of libraries](https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation#instrumentation-packages), including Gin and Gorm. On the Dockerfile side, it's also pretty straightforward. I skipped optimizing the mount cache and the final base image, though I might return to it later.
 
 All in all, that's the component I developed the fastest. I still dislike the Go language, but I begrudgingly understand that developers who want to get things done use it.
 
-The Ruby warehouse {#h2-1-the-ruby-warehouse}
----------------------------------------------
+The Ruby warehouse
+------------------
 
 While Ruby is not this famous anymore, I still wanted the stack in my architecture. I eschewed Ruby on Rails in favor of the leaner [Sinatra](https://sinatrarb.com/) framework. I use [sequel](https://sequel.jeremyevans.net/) for database access. The dynamic nature of the language was a bit of a hurdle, which is why it took me more time to develop my service than with Go.
 
@@ -48,8 +48,8 @@ I also spent a non-trivial amount of time on auto-instrumentation. For stacks wi
 
 I expected the same "carefree" approach with Ruby, but I couldn't find anything related to the stack. Ruby on Rails has a built-in plugin system, but not Sinatra. I tried to use `bash` to glue files together, but to no avail. If you're a Ruby expert or have any experience doing this, please let me know how.
 
-The GraalVM native warehouse {#h2-2-the-graalvm-native-warehouse}
------------------------------------------------------------------
+The GraalVM native warehouse
+----------------------------
 
 This one is a regular Kotlin application on Spring Boot with a twist: I'm using [GraalVM native image](https://www.graalvm.org/latest/reference-manual/native-image/) to compile ahead-of-time to *native code* . This way, I can use a tiny Docker image as my base, *e.g* , `busybox`. It's not as efficient as Go or Rust, but it's a good bet if tied to the JVM.
 
@@ -77,8 +77,8 @@ If the property is not present **at compile-time** , the Spring Framework doesn'
 
 While auto-configuration is a compelling feature, you must understand how it works. That's the easy part. However, it's much more work to understand the whole chain of auto-configuration activation regarding a feature. Having distanced myself from the JVM, I'm no longer an expert in these chains, much less the OpenTelemetry one. I finally understand why some developers avoid Spring Boot and name it magic.
 
-Migrating from JavaScript to TypeScript {#h2-3-migrating-from-javascript-to-typescript}
----------------------------------------------------------------------------------------
+Migrating from JavaScript to TypeScript
+---------------------------------------
 
 I used JavaScript in my first draft of a subscriber to the MQTT queue. Soon afterward, I decided to migrate to TypeScript. JavaScript code is valid TypeScript, so a simple copy-paste worked, with the addition of `@ts-ignore`.
 
@@ -113,8 +113,8 @@ const userProperties: Record<string, any> = {}
 ```
 
 
-Adding a Redis cache {#h2-4-adding-a-redis-cache}
--------------------------------------------------
+Adding a Redis cache
+--------------------
 
 So far, my services have used only PostgreSQL as a data store. Datastores don't implement OpenTelemetry by themselves, but the correct instrumentation of an app can show the trace going to the datastore. Here, you can see the trace created by the OpenTelemetry agent on a Kotlin/Spring Boot app that uses the PostgreSQL driver.
 
@@ -130,8 +130,8 @@ Both traces display the system, the statement, and a couple of other data. The R
 
 Icing on the cake, if you use the Lettuce client, which is the default for Spring, you don't need additional changes. The OpenTelemetry agent already takes care of everything.
 
-Another Apache APISIX instance {#h2-5-another-apache-apisix-instance}
----------------------------------------------------------------------
+Another Apache APISIX instance
+------------------------------
 
 Last but not least, I've added another APISIX instance. Most organizations manage their APIs from behind a single multi-node API Gateway. However, it can be a significant burden depending on how the organization structures the teams. When a team needs to deploy a new or change the routing of an existing non-front-facing API, they want the change ASAP. If the team in charge of the centralized API Gateway doesn't respond to tickets, it slows down the API team and the business value they want to deploy.
 
@@ -139,8 +139,8 @@ For this reason, it's a perfectly valid pattern to set up API Gateways that are 
 
 In my demo, I assume the team responsible for the `inventory` component has set up such an instance. It handles all routing to the warehouses. All other components still rely on the primary APISIX instance.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I've described several changes I made in my OpenTelemetry tracing demo and the lessons I learned. I want to add additional warehouse components in other stacks. What stack would you be interested in? Would you like to contribute to such a component?
 

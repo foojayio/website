@@ -19,8 +19,8 @@ related_posts:
 frozen: false
 ---
 
-tl;dr {#tldr}
--------------
+tl;dr
+-----
 
 Great day, great people, great discussions and great team of *dis-organisers*!
 > Whoever comes are the right people!
@@ -29,14 +29,14 @@ Thanks to all who attended, it's down to each and every one of you that JManc Un
 
 See you next year! 😀
 
-intro {#intro}
---------------
+intro
+-----
 
 In January this year we decided to test the interest of the Manchester Java Community on whether they were up for another edition of the [JManc Unconference](https://jmanc.org/). We sent out a survey to our members and from the responses received there was unanimous support for to us to run it again. This gave [Jon Bullock](https://www.linkedin.com/in/jsbullock/), [Dave Underwood](https://www.linkedin.com/in/david-underwood-6b929858/) and I the motivation we needed to put plans into motion for the 3rd edition of JManc Unconference!
 ![JManc 2024](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/jmanc-2024.png)
 
-planning {#planning}
---------------------
+planning
+--------
 
 We had a few key decisions to make to get things started including where and when we would hold the unconference.
 
@@ -58,8 +58,8 @@ After all the planning it then boils down to promotion! With the help of our par
 
 Something that's really important for us as organisers is to keep things simple but there's an essential level of complexity that comes with running an event like this. Huge thanks to [Claire Isherwood](https://www.linkedin.com/in/claireisherwood/) (and team at Auto Trader), [Gareth Pike](https://www.linkedin.com/in/garethpike/) and [Rob Sugden](https://www.linkedin.com/in/robertsugden/) for helping manage this complexity and reducing the stress during the run up to the day.
 
-the day {#the-day}
-------------------
+the day
+-------
 
 ![Welcome](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/welcome.jpg)
 
@@ -67,7 +67,7 @@ Our predictions on the number of attendees were pretty much spot on with just un
 
 We only really had full access to the event space on the morning of the conference however we visited a few weeks earlier to make a rough plan for how we'd make best use of it. This meant the organising team arriving early to put the plan into action.
 
-### the marketplace \& discussion spaces {#the-marketplace--discussion-spaces}
+### the marketplace \& discussion spaces
 
 We created a main space where attendees would congregate on arrival for coffee and pastries. This space was also where we created "The Marketplace", a key area for the unconference where attendees could propose their topic ideas, vote on their favourites and we could create the schedule. Throughout the day attendees revisited The Marketplace to connect with others, propose new topics and choose their next sessions.
 ![The Marketplace](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/marketplace-0.jpeg)
@@ -81,7 +81,7 @@ We also created 4 spaces where the actual unconference sessions would happen. On
 Immediately before the keynote we did our first round of dot voting on the topics proposed so far. This approach ensures that it's the attendees who democratically decide the schedule for the day.
 ![dot voting](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/JMac_2023-018.jpg)
 
-### keynote {#keynote}
+### keynote
 
 The Auditorium also provided the perfect setting for our keynote session.
 ![auditorium](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/auditorium.jpg)
@@ -94,7 +94,7 @@ Helen then took attendees on a tour of AI, tooling and ways of working covering 
 
 Unfortunately for myself, Jon and Dave we had to the leave the keynote half way through to go and create the morning schedule out the sessions that had been voted on. This part is easier said than done with there often being various competing topics that are highly voted.
 
-### the schedule {#the-schedule}
+### the schedule
 
 As an attendee, the nature of any conference is that, unless it's single track, you are more than likely going to have a clash between multiple sessions with topics you are interested in happening at the same time. We tried our best to avoid clashes between the most popular topics and I hope we managed to make most people happy.
 ![schedule](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/schedule.jpeg)
@@ -121,12 +121,12 @@ The sessions on the day covered a wide variety of topics such as:
 As you can see this is a diverse range of content, and not all Java/JVM specific.
 ![session-01](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/session-01.jpeg) ![session-02](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/session-02.jpeg) ![session-03](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/session-03.jpeg)
 
-### evening social {#evening-social}
+### evening social
 
 The day was super busy and was over before we knew it and the evening social provides the ideal way to relax and reflect. ECOM provided the food and drinks and around half the attendees hung around to continue the conversations and begin new ones.
 
-retro {#retro}
---------------
+retro
+-----
 
 In previous years we've ran a more structured retro session which has been a really nice touch however this year we kept it simple and just asked for feedback on post-its as people left at the end. I think this worked well, and thankfully almost 100% of feedback was positive.
 ![feedback](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/feedback.jpeg)
@@ -138,8 +138,8 @@ The organising group of JManc plan to run a retro in the coming weeks to review 
 * how can we attract more Java experts to JManc? We have many connections with people from communities like Foojay and Java User Groups (JUGs) across the world and it would be awesome to tap into those and see some Java SMEs in attendance next year.
 * is a single day unconference enough?
 
-future {#future}
-----------------
+future
+------
 
 Apologies for such a long post but this is has been a great way for me to reflect on this year's JManc and really think about the whole process from idea to execution. I'm delighted that it went well and it's really been a pleasure collaborating with the MJC leadership and our sponsors to make it a success.
 

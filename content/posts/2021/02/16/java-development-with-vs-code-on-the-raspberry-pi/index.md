@@ -30,7 +30,7 @@ Let's install and test them!
 On your Raspberry Pi open a browser and go to the [Visual Studio Code download page](https://code.visualstudio.com/Download). We will be using the Linux .deb-files.
 ![](visualstudiocode-download.png) Visual Studio Code dowload page with ARM 32bit and 64bit version
 
-### Raspberry Pi OS 32-bit {#h3-0-raspberry-pi-os-32-bit}
+### Raspberry Pi OS 32-bit
 
 If you are using a "default" Raspberry Pi OS - which is an 32-bit version - you need to download the "ARM" file. Once downloaded, start a terminal and run the installation with:
 
@@ -65,7 +65,7 @@ You can now start VSC from the start button and you will find it in the "Program
 
 There it is, version 1.53.2 on a Linux ARM processor, in the screenshot with Maven and the Java Extension Pack installed!
 
-### Raspberry Pi OS 64-bit {#h3-1-raspberry-pi-os-64-bit}
+### Raspberry Pi OS 64-bit
 
 If you are already using the newer work-in-progress 64-bit Raspberry Pi OS (see more info in my post ["64-bit Raspbian OS on Raspberry Pi 4 with USB BOOT"](https://foojay.io/today/64-bit-raspbian-os-on-raspberry-pi-4-with-usb-boot/), you will need another version.
 
@@ -100,7 +100,7 @@ OpenJDK 64-Bit Server VM (build 11.0.8+10-LTS, mixed mode)
 Without any further installation, we can now try out [this demo application which you can get from GitHub](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_07_JavaFX/javafx-dashboard).
 ![](visualstudiocode-64bit-java-testing.png) JavaFX demo application started by Visual Studio Code on the Raspberry Pi
 
-### Is Microsoft Spying On You? {#h3-2-is-microsoft-spying-on-you}
+### Is Microsoft Spying On You?
 
 To allow the installation of Visual Studio Code with `apt install`, the Microsoft repository is included in the Linux Raspberry Pi OS distribution.
 
@@ -110,7 +110,7 @@ A very clear overview is given in this video by [Jeff Geerling](https://twitter.
 
 {{< youtube OnA_s9IBSmA >}}
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 The Raspberry Pi was already a powerful PC at a low price. Now with Visual Studio Code being released with versions for our beloved board, and all the extensions which are available for this IDE, **we can use the Raspberry Pi as a real developer PC for Java and many other programming languages**!
 

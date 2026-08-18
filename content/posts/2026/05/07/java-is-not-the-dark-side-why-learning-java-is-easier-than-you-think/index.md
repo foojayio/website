@@ -27,7 +27,7 @@ So, this week is ideal for talking about one of the most misunderstood technolog
 
 While many developers view Java as the "Dark Side" of coding, complex, outdated, and intimidating, the reality is very different. Learning Java can be much easier, more logical, and far more rewarding than most people think. In this post, we'll show you why Java might actually be one of the best and most accessible languages to learn.
 
-### ("In a galaxy far, far away...") {#h3-0-in-a-galaxy-far-far-away}
+### ("In a galaxy far, far away...")
 
 A long time ago in a galaxy not so different from ours, aspiring developers looked at Java and felt a disturbance in the Force.
 
@@ -49,8 +49,8 @@ Java is not the Dark Side.
 
 It is the Jedi Order in code form.
 
-The Myth: "Java is Too Hard for Beginners" {#h2-1-the-myth-java-is-too-hard-for-beginners}
-------------------------------------------------------------------------------------------
+The Myth: "Java is Too Hard for Beginners"
+------------------------------------------
 
 Many new developers imagine Java like a Sith holocron, ancient, complex, and impossible to decode.
 
@@ -81,8 +81,8 @@ No Jedi Council approval needed.
 
 Just structure.
 
-Java: The Jedi Order of Programming {#h2-2-java-the-jedi-order-of-programming}
-------------------------------------------------------------------------------
+Java: The Jedi Order of Programming
+-----------------------------------
 
 In the Star Wars galaxy, Jedi training is not random.
 
@@ -172,8 +172,8 @@ Obi-Wan Kenobi uses the Force like Master Yoda taught.
 
 ![](duke_st_03-1024x687.jpg)
 
-The Real Dark Side: The Empire of Bad Learning {#h2-3-the-real-dark-side-the-empire-of-bad-learning}
-----------------------------------------------------------------------------------------------------
+The Real Dark Side: The Empire of Bad Learning
+----------------------------------------------
 
 Most Padawans fail not because Java is powerful...
 
@@ -187,8 +187,8 @@ Even Darth Vader didn't start by building an Empire.
 
 He started as Anakin... a learner.
 
-Why Java Feels Like the Jedi Code (But Isn't Hard) {#h2-4-why-java-feels-like-the-jedi-code-but-isn-t-hard}
------------------------------------------------------------------------------------------------------------
+Why Java Feels Like the Jedi Code (But Isn't Hard)
+--------------------------------------------------
 
 #### The Jedi Code of Java Logic
 
@@ -215,8 +215,8 @@ Only discipline.
 
 ![](duke_st_04-1024x687.jpg)
 
-Training Like a Jedi: Loops in the Temple {#h2-5-training-like-a-jedi-loops-in-the-temple}
-------------------------------------------------------------------------------------------
+Training Like a Jedi: Loops in the Temple
+-----------------------------------------
 
 Jedi training is repetition.
 
@@ -233,8 +233,8 @@ for (int i = 1; i <= 3; i++) {
 
 Even Luke Skywalker didn't master the Force in one training montage.
 
-Your Journey from Youngling to Jedi Developer {#h2-6-your-journey-from-youngling-to-jedi-developer}
----------------------------------------------------------------------------------------------------
+Your Journey from Youngling to Jedi Developer
+---------------------------------------------
 
 Let's map your path through the galaxy:
 
@@ -311,8 +311,8 @@ You are building systems like the Jedi rebuilt themselves after Order 66.
 
 ![](java_start_wars_end-1024x683.png)
 
-Final Wisdom from the Jedi Archives {#h2-7-final-wisdom-from-the-jedi-archives}
--------------------------------------------------------------------------------
+Final Wisdom from the Jedi Archives
+-----------------------------------
 
 Java is not the Dark Side.
 

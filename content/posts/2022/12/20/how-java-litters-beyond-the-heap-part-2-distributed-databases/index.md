@@ -33,8 +33,8 @@ It's a common behavior among all databases implementing [MVCC](https://en.wikipe
 
 But, suppose our Java app uses a distributed database for the user data. Will that database also generate litter in response to application requests? Let's find out....
 
-LSM Tree-Based Databases {#h2-0-lsm-tree-based-databases}
----------------------------------------------------------
+LSM Tree-Based Databases
+------------------------
 
 There is a class of distributed databases that stores and arranges application data in a[log-structured merge (LSM) tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree " log-structured merge (LSM) tree") for its performance and scalability characteristics. Apache Cassandra, Apache HBase, ScyllaDB, and YugabyteDB all belong to this class.
 
@@ -56,8 +56,8 @@ Another database can have just Level 0 and merge multiple SSTable into a new fil
 
 Alright, enough of the theory. Let's see how things work in practice.
 
-Starting YugabyteDB and the App {#h2-1-starting-yugabytedb-and-the-app}
------------------------------------------------------------------------
+Starting YugabyteDB and the App
+-------------------------------
 
 Our [sample app](https://github.com/dmagda/java-litters-everywhere "sample app") is a Spring Boot RESTful service for a pizzeria. The app tracks pizza orders.
 
@@ -162,8 +162,8 @@ yugabyte=# select * from pizza_order;
 ```
 
 
-Generating Garbage in the Database {#h2-2-generating-garbage-in-the-database}
------------------------------------------------------------------------------
+Generating Garbage in the Database
+----------------------------------
 
 Now, go ahead and put the first pizza order in the queue.
 
@@ -288,8 +288,8 @@ There are three versions of `ColumnId(1)`, which is the `status` column.
 
 For curious minds, `ColumnId(2)` on line #9 is the `order_time` column. As long as it has not been updated after the order was placed in the database, there is only one version of the column.
 
-Garbage Collection in the Database {#h2-3-garbage-collection-in-the-database}
------------------------------------------------------------------------------
+Garbage Collection in the Database
+----------------------------------
 
 It's clear that YugabyteDB can't and doesn't want to keep stale and deleted data forever. This is why the database has its own garbage collection process called compaction.
 
@@ -308,8 +308,8 @@ Let's use the picture below to break things down:
 * The SSTable1 through SSTable4 files get deleted.
 * The SSTable5 is left untouched. It was not included in the compaction cycle.
 
-Wrapping Up {#h2-4-wrapping-up}
--------------------------------
+Wrapping Up
+-----------
 
 As you can see, garbage collection is a widespread technique used far beyond the Java ecosystem.
 

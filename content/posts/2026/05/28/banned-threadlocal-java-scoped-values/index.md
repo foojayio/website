@@ -38,21 +38,21 @@ Here is why I enforced a strict, kernel-wide ban on `ThreadLocal` in Exeris, and
 
 
 
-The Forensic Analysis: The 3 Sins of ThreadLocal {#h2-0-the-forensic-analysis-the-3-sins-of-threadlocal}
---------------------------------------------------------------------------------------------------------
+The Forensic Analysis: The 3 Sins of ThreadLocal
+------------------------------------------------
 
 Treating Virtual Threads like OS threads discards most of their scalability advantages --- especially around context propagation and allocation behavior. When you combine `ThreadLocal` with a highly concurrent, thread-per-request architecture, you introduce three critical flaws:
 
-### 1. The Spaghetti State (Unconstrained Mutability) {#h3-1-1-the-spaghetti-state-unconstrained-mutability}
+### 1. The Spaghetti State (Unconstrained Mutability)
 
 Any code deep in the call stack that can read a `ThreadLocal` can also call `.set()` on it. If a nested library mutates the `SecurityContext` mid-flight, tracking down who changed it and when is a debugging nightmare. Data flow becomes completely unpredictable.
 ![Figure 1: The uncontrolled mutability of ThreadLocal versus the strict, read-only data flow guarantees of a lexically bounded Scoped Value.](https://blog.arkstack.dev/blog/scopedvalue/fig1_spaghetti_state.png)  
 
-### 2. The Memory Leak Trap (Unbounded Lifetime) {#h3-2-2-the-memory-leak-trap-unbounded-lifetime}
+### 2. The Memory Leak Trap (Unbounded Lifetime)
 
 A `ThreadLocal` survives until the thread dies or someone explicitly calls `.remove()`. In legacy thread pools, forgetting to clean up means a security context bleeds into the next user's request.
 
-### 3. The Inheritance Tax (The RAM Killer) {#h3-3-3-the-inheritance-tax-the-ram-killer}
+### 3. The Inheritance Tax (The RAM Killer)
 
 This is the fatal blow. To share context with child threads, frameworks use `InheritableThreadLocal`. When a parent thread creates a child, the JVM must **eagerly clone** the parent's `ThreadLocalMap`. This typically allocates between **32 and 128 bytes** per entry on the heap, depending on the load factor and key distribution.
 
@@ -61,22 +61,22 @@ Now, imagine a single HTTP request where your logic forks **50 concurrent sub-ta
 
 
 
-The Missing Link: Structured Concurrency Incompatibility {#h2-4-the-missing-link-structured-concurrency-incompatibility}
-------------------------------------------------------------------------------------------------------------------------
+The Missing Link: Structured Concurrency Incompatibility
+--------------------------------------------------------
 
 Beyond performance, `ThreadLocal` is fundamentally incompatible with Structured Concurrency. `StructuredTaskScope` relies on deterministic, tree-like execution where child tasks are strictly bound to the lifetime of their parent. `ThreadLocal`, being non-deterministic and fully mutable at any level of the tree, completely breaks this model.
 > You cannot build a reliable, fail-fast concurrent tree if any leaf node can secretly mutate the global state of the branch.
 
 
 
-Exhibit A: The Zero-Waste Solution (JEP 506) {#h2-5-exhibit-a-the-zero-waste-solution-jep-506}
-----------------------------------------------------------------------------------------------
+Exhibit A: The Zero-Waste Solution (JEP 506)
+--------------------------------------------
 
 To survive millions of Virtual Threads, we need a mechanism that is **immutable** , **temporally bounded** , and **virtually free to inherit** . Enter **Scoped Values**.
 
 Instead of a globally mutable variable, a `ScopedValue` defines a **Dynamic Scope**. It binds a value to a specific block of code (and all methods called within it). Once the block finishes, the binding vanishes.
 
-### The Scoreboard {#h3-6-the-scoreboard}
+### The Scoreboard
 
 |                      |             ThreadLocal             |                          ScopedValue                           |
 |----------------------|-------------------------------------|----------------------------------------------------------------|
@@ -86,8 +86,8 @@ Instead of a globally mutable variable, a `ScopedValue` defines a **Dynamic Scop
 
 
 
-Exhibit B: "Show, Don't Tell" --- The Exeris Implementation {#h2-7-exhibit-b-show-don-t-tell-the-exeris-implementation}
------------------------------------------------------------------------------------------------------------------------
+Exhibit B: "Show, Don't Tell" --- The Exeris Implementation
+-----------------------------------------------------------
 
 In the Exeris Kernel, context propagation is strictly separated. The Security module authenticates, and the Persistence module applies Row-Level Security. They never talk directly. They communicate purely through an **"Invisible Wall"** using `ScopedValue`.
 ![Figure 3: Context propagation in the Exeris Kernel. Security and Persistence modules remain completely decoupled, sharing identity strictly through an immutable dynamic scope.](https://blog.arkstack.dev/blog/scopedvalue/fig3_context_scope.png)
@@ -137,8 +137,8 @@ Because `ScopedValue` is immutable, the `TransactionOrchestrator` is **guarantee
 
 
 
-The Paradigm Shift {#h2-8-the-paradigm-shift}
----------------------------------------------
+The Paradigm Shift
+------------------
 
 By ripping `ThreadLocal` out of the kernel, we eliminated an entire category of memory leaks and GC pressure. When a system spawns 1,000,000 Virtual Threads, the difference between *"copying a map 1 million times"* and *"sharing a pointer in constant time"* is the difference between a crashed server and a stable infrastructure.
 
@@ -148,8 +148,8 @@ Java 26 is not just *"Java 8 with `var`"* . Features like Project Loom, Panama (
 
 
 
-Explore the Exeris Kernel {#h2-9-explore-the-exeris-kernel}
------------------------------------------------------------
+Explore the Exeris Kernel
+-------------------------
 
 The zero-allocation architecture described in this article isn't just theory --- it's running code. Exeris is an open-core, post-container cloud kernel built for extreme density. If you're tired of GC pauses and want to see how native I/O, Panama FFM, and Virtual Thread orchestration look in practice, explore the Exeris Kernel:
 

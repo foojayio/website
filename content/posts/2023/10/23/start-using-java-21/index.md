@@ -39,13 +39,13 @@ View the list of fixed bugs in [23.0.0.10](https://github.com/OpenLiberty/open-l
 
 Check out [previous Open Liberty GA release blog posts](https://openliberty.io/blog/?search=release&search!=beta&utm_source=foojay&utm_medium=news&utm_content=java21).
 
-Try Java 21 on Open Liberty 23.0.0.10 now {#_get_open_liberty_23_0_0_10_now}
-----------------------------------------------------------------------------
+Try Java 21 on Open Liberty 23.0.0.10 now
+-----------------------------------------
 
 Available through [Maven, Gradle, Docker, and as a downloadable archive](#run).
 
-Support for Java 21 {#java21}
------------------------------
+Support for Java 21
+-------------------
 
 Try out the new changes in Java 21 now and test your applications, microservices, and runtime environments.
 
@@ -85,8 +85,8 @@ For more information on Java 21, see:
 * [API Javadoc page](https://docs.oracle.com/en/java/javase/21/docs/api/index.html)
 * [migration guide](https://docs.oracle.com/en/java/javase/21/migrate/getting-started.html)
 
-featureUtility now verifies feature signatures by default {#feature}
---------------------------------------------------------------------
+featureUtility now verifies feature signatures by default
+---------------------------------------------------------
 
 The `featureUtility` command now verifies feature signatures before installing the feature into the Liberty runtime. It identifies whether the feature originated from the Liberty development team or is a third-party user feature.
 
@@ -106,8 +106,8 @@ For more information, see:
 * [featureUtility installServerFeature command docs](https://openliberty.io/docs/latest/reference/command/featureUtility-installServerFeatures.html?utm_source=foojay&utm_medium=news&utm_content=java21)
 * [featureUtility commands](https://openliberty.io/docs/latest/reference/command/featureUtility-commands.html?utm_source=foojay&utm_medium=news&utm_content=java21)
 
-Develop and run your apps using Open Liberty 23.0.0.10 {#run}
--------------------------------------------------------------
+Develop and run your apps using Open Liberty 23.0.0.10
+------------------------------------------------------
 
 If you're using [Maven](https://openliberty.io/guides/maven-intro.html?utm_source=foojay&utm_medium=news&utm_content=java21), include the following in your `pom.xml` file:
 

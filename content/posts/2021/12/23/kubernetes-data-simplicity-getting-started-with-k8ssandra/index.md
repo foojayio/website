@@ -30,8 +30,8 @@ This post walks the K8ssandra developer through various activities for getting s
 
 The sections include: editor and tooling installation, installation and setup of K8ssandra, hands-on exercises, and information shared from K8ssandra maintainers.
 
-Configuring the development environment {#h2-0-configuring-the-development-environment}
----------------------------------------------------------------------------------------
+Configuring the development environment
+---------------------------------------
 
 Let's set the foundation for a K8ssandra development environment. Where possible, this guide attempts to maintain an operating system agnostic approach. K8ssandra supports the following operating systems for development:
 
@@ -45,7 +45,7 @@ Although K8ssandra is created primarily to run in Kubernetes cloud environments,
 
 Reference "[Requirements for running K8ssandra for development](https://k8ssandra.io/blog/2021/03/10/requirements-for-running-k8ssandra-for-development/)" for details on managing expectations if you are running on a resource-constrained machine.
 
-### Development editor {#h3-1-development-editor}
+### Development editor
 
 If you already have a code editor setup supporting Kubernetes development AND have Go installed, feel free to skip this section.
 
@@ -72,7 +72,7 @@ Here is a list of useful VS Code extensions for K8ssandra development. Search fo
 
 Once the VS Code editor and Go binaries are installed, let's make sure you're ready to pull in the K8ssandra source.
 
-### Git and GitHub {#h3-2-git-and-github}
+### Git and GitHub
 
 If you already have Git setup and you've got a GitHub account, feel free to skip this section.
 
@@ -83,8 +83,8 @@ If you already have Git setup and you've got a GitHub account, feel free to skip
 2. Reference information for setting up a GitHub account.  
    [Getting started](https://github.com/join) with GitHub
 
-Checkpoint {#h2-3-checkpoint}
------------------------------
+Checkpoint
+----------
 
 At this point, you should have the following setup \& installed:
 
@@ -102,8 +102,8 @@ See the references listed below of useful information developers use when starti
 * A Git [cheat sheet](https://training.github.com/downloads/github-git-cheat-sheet/)
 * Go [tutorial](https://golang.org/doc/tutorial/getting-started)
 
-Installing and configuring a Kubernetes and K8ssandra environment {#h2-4-installing-and-configuring-a-kubernetes-and-k8ssandra-environment}
--------------------------------------------------------------------------------------------------------------------------------------------
+Installing and configuring a Kubernetes and K8ssandra environment
+-----------------------------------------------------------------
 
 If you already have a Kubernetes environment setup with K8ssandra, feel free to skip this section.
 
@@ -115,10 +115,10 @@ For a more visual and interactive demonstration of setting up K8ssandra, check o
 
 Now it's time to learn about the file types contained in the K8ssandra codebase.
 
-Getting hands-on {#h2-5-getting-hands-on}
------------------------------------------
+Getting hands-on
+----------------
 
-### Repository {#h3-6-repository}
+### Repository
 
 The K8ssandra GitHub repository resides [here](https://github.com/k8ssandra/k8ssandra). Follow these steps to download the current K8ssandra source code:
 
@@ -137,7 +137,7 @@ git clone https://github.com/your-github-repo-name/k8ssandra.git
 
 If you want to take GitHub to the command line, checkout [GitHub CLI](https://cli.github.com/). It is GitHub's official command line tool.
 
-### Project composition {#h3-7-project-composition}
+### Project composition
 
 K8ssandra is primarily composed of [YAML](https://en.wikipedia.org/wiki/YAML) files used for declarative configurations. In fact, many of the YAML files are a collection of [Helm charts](https://helm.sh/). Helm is an open source package management solution for Kubernetes, and its charts are the packaging format used.
 ![](pasted-image-0.png)
@@ -167,7 +167,7 @@ Check out the [docs readme](https://github.com/k8ssandra/k8ssandra/tree/main/doc
 * **Scripts** - a collection of useful scripts for working with K8ssandra that you can use or extend. Also included are documentation scripts for K8ssandra docs management.
 * **Tests - unit, integration, and end-to-end testing for K8ssandra.**
 
-### Running tests {#h3-8-running-tests}
+### Running tests
 
 The K8ssandra test directory contains subdirectories for managing and executing tests at the unit and integration levels. Let's run the unit tests as an example. Using the command line, navigate to the K8ssandra project root directory where the Makefile resides.
 
@@ -187,12 +187,12 @@ ok github.com/k8ssandra/k8ssandra/tests/unit 47.156s
 
 Feel free to explore the K8ssandra [Makefile](https://github.com/k8ssandra/k8ssandra/blob/main/Makefile) for other recipes that can be targeted.
 
-Maintainer tips and tricks {#h2-9-maintainer-tips-and-tricks}
--------------------------------------------------------------
+Maintainer tips and tricks
+--------------------------
 
 The K8ssandra maintainer team has developed a set of common knowledge and best practices that we wanted to share with you. Think of it as a starting point for learning and growing with K8ssandra. This will enable you to become more comfortable with contributing to the project and/or utilizing K8sssandra to deploy your own applications.
 
-### Make testing a priority {#h3-10-make-testing-a-priority}
+### Make testing a priority
 
 The K8ssandra maintainers have created test foundations for unit and integration tests with the goal of aligning with Kubernetes developer practices. As you continue to customize and/or expand the K8ssandra ecosystem, it's recommended to include verifications at all levels.
 
@@ -208,7 +208,7 @@ The K8ssandra project creates separation between the tests themselves and the su
 
 Watch for the expansion of testing practices as K8ssandra continues to grow!
 
-### Visually inspect your Kubernetes environment {#h3-11-visually-inspect-your-kubernetes-environment}
+### Visually inspect your Kubernetes environment
 
 For a more visual way to obtain an overview of the resources and components in a Kubernetes cluster, consider using a free Kubernetes IDE like [Lens](https://k8slens.dev/).
 
@@ -217,7 +217,7 @@ Here's an example of what it looks like to view your K8ssandra pods, deployments
 
 A UI can be great for some users, but there will be times when only a command line will be required or needed. That's why tips related to Kubernetes command-line usage specific to K8ssandra are included below.
 
-### Commands to collect useful information {#h3-12-commands-to-collect-useful-information}
+### Commands to collect useful information
 
 If you have an error after editing a K8ssandra configuration, or you just want to inspect resources as you learn, there are many useful commands that can save you lots of time.
 
@@ -452,8 +452,8 @@ helm get all k8ssandra -n k8ssandra | grep stargate -C 2
 ```
 
 
-Summing up {#h2-13-summing-up}
-------------------------------
+Summing up
+----------
 
 We've covered a lot in this post, including:
 
@@ -473,8 +473,8 @@ There are additional open source repositories that makeup the overall K8ssandra 
 * [medusa-operator](https://github.com/k8ssandra/medusa-operator)
 * [cass-operator](https://github.com/k8ssandra/cass-operator)
 
-Next steps {#h2-14-next-steps}
-------------------------------
+Next steps
+----------
 
 Here are some recommended next steps for learning more about K8ssandra:
 

@@ -44,8 +44,8 @@ Understanding these tools is crucial for developers, as it bridges the gap betwe
 
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-The Need for Advanced Management Tools in Development {#h2-0-the-need-for-advanced-management-tools-in-development}
--------------------------------------------------------------------------------------------------------------------
+The Need for Advanced Management Tools in Development
+-----------------------------------------------------
 
 Development and DevOps teams utilize an array of tools, often perceived as complex or alien by developers. These tools, designed for scalability, enable the management of thousands of servers simultaneously.
 
@@ -53,7 +53,7 @@ Such capabilities, although not always necessary for smaller scales, offer signi
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5ca4duiw3l3hqipsolap.png)
 
-### Introduction to JMX (Java Management Extensions) {#h3-1-introduction-to-jmx-java-management-extensions}
+### Introduction to JMX (Java Management Extensions)
 
 One of the pivotal standards in application management is Java Management Extensions (JMX), which Java introduced to simplify the interaction with and management of applications.
 
@@ -85,20 +85,20 @@ Central to JMX are Management Beans (MBeans), which serve as the control points 
 
 The ability to export application metrics to dashboards through MBeans is particularly valuable, facilitating real-time decision-making based on accurate, up-to-date information. Furthermore, operations such as user management can be exposed through MBeans, enhancing administrative capabilities.
 
-### Spring and Management Beans {#h3-2-spring-and-management-beans}
+### Spring and Management Beans
 
 Spring Framework's Actuator module exemplifies the integration of management capabilities within development, offering extensive metrics and operational details.
 
 This integration propels applications to "production-ready" status, allowing developers to monitor and manage applications with unprecedented depth and efficiency.
 
-Tooling for JMX Management {#h2-3-tooling-for-jmx-management}
--------------------------------------------------------------
+Tooling for JMX Management
+--------------------------
 
 While JMX can be accessed through various web interfaces and administrative tools, command-line tooling offers a direct, efficient method for interacting with JMX-enabled applications on production servers.
 
 Tools like JMXTerm complement visual tools by providing a streamlined interface for rapid insights, especially in environments unfamiliar to the developer.
 
-### Getting Started with JMXTerm {#h3-4-getting-started-with-jmxterm}
+### Getting Started with JMXTerm
 
 JMXTerm is a powerful utility for managing JMX without the need for graphical visualization, ideal for quick diagnostics or high-level server insights. After enabling JMX on the JVM and setting up the necessary configurations, developers can connect to servers, explore different JMX domains, and manipulate MBeans directly from the command line.
 
@@ -184,8 +184,8 @@ This is just the tip of the iceberg. We can get many things such as spring setti
 ```
 
 
-Leveraging JMX in Debugging and Management {#h2-5-leveraging-jmx-in-debugging-and-management}
----------------------------------------------------------------------------------------------
+Leveraging JMX in Debugging and Management
+------------------------------------------
 
 JMX stands out as a robust tool for wiring management consoles, allowing developers to expose critical settings and metrics for their projects.
 
@@ -193,8 +193,8 @@ Beyond its conventional use, JMX can be leveraged as part of the debugging proce
 
 This approach not only simplifies the management of server applications but also enhances the developer's ability to diagnose and resolve issues efficiently.
 
-Exposing MBeans in Spring Boot {#h2-6-exposing-mbeans-in-spring-boot}
----------------------------------------------------------------------
+Exposing MBeans in Spring Boot
+------------------------------
 
 Up until now we discussed the process of working with beans that are a part of the JVM or Spring. But what about our own application logic?
 
@@ -202,11 +202,11 @@ We can expose our own applications internal state so we (and our SREs) can revie
 
 Spring Boot simplifies the management and monitoring of applications through its comprehensive support for JMX. By leveraging Spring's infrastructure, we can easily expose their application's beans as JMX Managed Beans (MBeans), making them accessible for monitoring and management via JMX clients.
 
-### Understanding Spring Boot JMX Support {#h3-7-understanding-spring-boot-jmx-support}
+### Understanding Spring Boot JMX Support
 
 Spring Boot automatically configures JMX for you and exposes any beans annotated with `@ManagedResource` as JMX MBeans. This feature, combined with Spring Boot's Actuator, provides a rich set of management endpoints, covering various aspects of the application, from metrics to thread dumps.
 
-### Expose an MBean in Spring Boot {#h3-8-expose-an-mbean-in-spring-boot}
+### Expose an MBean in Spring Boot
 
 To expose a bean we need to take the following steps:
 
@@ -216,7 +216,7 @@ To expose a bean we need to take the following steps:
 4. **Enable JMX in Spring Boot** : Ensure that JMX is enabled in your Spring Boot application. This is usually the default behavior, but you can explicitly enable it by setting `spring.jmx.enabled=true` in your `application.properties` or `application.yml` file.
 5. **Access the MBean via a JMX Client**: Once your application is running, you can access the exposed MBean through any standard JMX client, such as JConsole, VisualVM, or a custom client. Connect to the Spring Boot application's JMX domain, and you'll find the MBean you exposed, ready for interaction.
 
-### Example: Exposing a Simple Configuration MBean {#h3-9-example-exposing-a-simple-configuration-mbean}
+### Example: Exposing a Simple Configuration MBean
 
 ```
 // Define a management interface
@@ -255,8 +255,8 @@ By following the steps outlined above, developers can provide external tools wit
 
 This not only aids in debugging and performance tuning but also aligns with best practices for building manageable, robust applications.
 
-Final Word {#h2-10-final-word}
-------------------------------
+Final Word
+----------
 
 Advanced management tools, particularly JMX and its integration with frameworks like Spring, offer developers powerful capabilities for application monitoring, configuration, and debugging.
 

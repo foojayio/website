@@ -24,13 +24,13 @@ frozen: false
 
 **bld is an up-and-coming build tool for the Java ecosystem. This article guides you through getting set up to use it in your own projects.**
 
-What is `bld`? {#h2-0-what-is-bld}
-----------------------------------
+What is `bld`?
+--------------
 
 `bld` is a build tool for the Java ecosystem.
 
-Why use `bld`? {#h2-1-why-use-bld}
-----------------------------------
+Why use `bld`?
+--------------
 
 `bld` is a very simple build tool.
 
@@ -42,8 +42,8 @@ If you know Java, you already have the needed skill-set.
 
 Once you try it, you'll get it.
 
-Installation {#h2-2-installation}
----------------------------------
+Installation
+------------
 
 The easiest way to install `bld` is to use [`SDKMAN!`](https://sdkman.io/).
 
@@ -56,8 +56,8 @@ Other installation methods including `brew`, `jbang` are [documented in the bld 
 
 If you have an aversion to package management tools, you can also download the JAR [directly from the releases page](https://github.com/rife2/bld/releases/latest).
 
-Make a Project {#h2-3-make-a-project}
--------------------------------------
+Make a Project
+--------------
 
 If you installed `bld` with your package manager, then you should run:
 
@@ -125,8 +125,8 @@ Please enter a project name (for instance: myapp):
 
 Choose whatever you want for this. If you are just following along, use `myapp`.
 
-Working with a `bld` Project {#h2-4-working-with-a-bld-project}
----------------------------------------------------------------
+Working with a `bld` Project
+----------------------------
 
 Once you've run the commands above, a folder should be generated which is structured like the following.
 
@@ -299,8 +299,8 @@ Of course, commands can also be combined.
 ```
 
 
-Adding a Dependency {#h2-5-adding-a-dependency}
------------------------------------------------
+Adding a Dependency
+-------------------
 
 To add a dependency to your project, you need to edit your build file. If you have been following along, that will be  
 `src/bld/java/com/example/MyappBuild.java`.
@@ -354,8 +354,8 @@ world where you need to run `npm install`.
 
 After this, you can start to use any classes brought in by those dependencies in your project.
 
-Writing a Test {#h2-6-writing-a-test}
--------------------------------------
+Writing a Test
+--------------
 
 An example test should have been generated under `src/test/`:
 
@@ -410,8 +410,8 @@ Test run finished after 124 ms
 ```
 
 
-Writing Custom Commands {#h2-7-writing-custom-commands}
--------------------------------------------------------
+Writing Custom Commands
+-----------------------
 
 If you have any custom logic you want to run, you need to add a method to the build class and annotate it with `@BuildCommand`.
 
@@ -482,8 +482,8 @@ Hello
 ```
 
 
-Spring Boot Integration {#h2-8-spring-boot-integration}
--------------------------------------------------------
+Spring Boot Integration
+-----------------------
 
 Chances are you are a [Spring](https://spring.io) developer.
 
@@ -517,8 +517,8 @@ And you can use it like so.
 
 The [repository for the extension](https://github.com/rife2/bld-spring-boot) has further code samples as well as links to example projects.
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 Maven has been around since 2004, Gradle since 2008.
 

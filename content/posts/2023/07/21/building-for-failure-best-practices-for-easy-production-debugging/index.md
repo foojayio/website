@@ -45,8 +45,8 @@ A common military axiom goes "Difficult training makes combat easy". Assuming th
 
 This preparation goes beyond testing and QA. It means preparing our code and our infrastructure for that point where a problem occurs. That point is where both testing and QA fail us. By definition, this is preparation for the unexpected.
 
-Defining a Failure {#h2-0-defining-a-failure}
----------------------------------------------
+Defining a Failure
+------------------
 
 We first need to define the scope of a failure. When I talk about production failures people automatically assume crashes, websites going down and disaster-level events. In practice those are rare. The vast majority of these cases are handled by OPS and system engineers.
 
@@ -54,8 +54,8 @@ When I ask developers to describe the last production problem they ran into they
 
 What if we could understand the problem just by looking at the way it failed, right in production?
 
-Simplicity {#h2-1-simplicity}
------------------------------
+Simplicity
+----------
 
 The rule of simplicity is common and obvious but people use it to argue both sides. Simple is subjective. Is this block of code simple?
 
@@ -110,8 +110,8 @@ The read-only list is a major advantage. It promotes the fail-fast principle whi
 
 When building big applications the word "robust" gets thrown around frequently. Systems should be robust, but they should offer that outside of your code which should fail fast.
 
-Consistency {#h2-2-consistency}
--------------------------------
+Consistency
+-----------
 
 In my talk about logging best practices, I mention the fact that every company I ever worked for had a style guide for code, or at least aligned with a well-known style. Very few had a [guide for logging](https://www.youtube.com/watch?v=CFL--dAX3FQ), where should we log, what should we log etc. This is a sad state of affairs.
 
@@ -121,8 +121,8 @@ Thankfully, with CI these consistency rules are easy to enforce without burdenin
 
 Every rule has an exception, we shouldn't be bound to overly strict rules. That's why the ability to override such tools and merge a change with a developer review is important.
 
-Double Verification {#h2-3-double-verification}
------------------------------------------------
+Double Verification
+-------------------
 
 Debugging is the process of verifying assumptions as we circle the area of the bug. Typically this happens very quickly. We see what's broken, verify and fix it. But sometimes we spend an inordinate amount of time tracking a bug. Especially a hard-to-reproduce bug or a bug that only manifests in production.
 
@@ -141,7 +141,7 @@ The second way should ideally be different enough so it wouldn't simply repeat t
 
 Similarly, for the backend, we would want to see the data returned from within the application. This is a core concept in observability. An observable system is a system for which we can express questions and get answers. During development, we should aim our observability level at two different ways to answer a question.
 
-### Why not Three Ways to Verify? {#h3-4-why-not-three-ways-to-verify}
+### Why not Three Ways to Verify?
 
 We don't want more than two ways because that would mean we're observing too much, and as a result, our costs can go up while performance goes down. We need to limit the information we collect to a reasonable amount. Especially given the risks of personal information retention which is an important aspect to keep in mind!
 
@@ -151,14 +151,14 @@ We need to make sure that our production system will be properly observed. To do
 
 E.g. When a particular problem occurs we would often want to know how many users were actively modifying data in the system. As a result, we can add a metric for that information.
 
-### Verifying with Feature Flags {#h3-5-verifying-with-feature-flags}
+### Verifying with Feature Flags
 
 We can verify an assumption using observability tools but we can also use more creative verification tools. One unexpected tool is the feature flag system. A feature flag solution can often be manipulated with very fine granularity, we can disable or modify a feature only for a specific user, etc.
 
 This is very powerful, we can toggle a feature that could provide us with verification of a specific behavior if that specific code is wrapped in a flag. I don't suggest spreading feature flags all over the code, but the ability to pull levers and change the system in production is a powerful debugging tool that is often underutilized as such.
 
-Bug Debriefs {#h2-6-bug-debriefs}
----------------------------------
+Bug Debriefs
+------------
 
 Back in the 90s I developed flight simulators and worked with many fighter pilots. They instilled in me a culture of debriefing. Up until that point, I thought of these things only for discussing failures but fighter pilots go to debrief immediately after the flight, whether it is successful or a failed mission.
 
@@ -180,8 +180,8 @@ If you're in R\&D you're four steps away from the customer and receive an issue 
 
 When a customer reports an issue there's a good possibility they will include the error key which R\&D can find within the logs. These are the types of process refinements that often rise through such debriefs.
 
-Review Successful Logs and Dashboards {#h2-7-review-successful-logs-and-dashboards}
------------------------------------------------------------------------------------
+Review Successful Logs and Dashboards
+-------------------------------------
 
 Waiting for failure is a problematic concept. We need to review logs, dashboards, etc. regularly both to track potential bugs that aren't manifesting, but also to get a sense of a "baseline". What does a healthy dashboard or log look like...
 
@@ -189,8 +189,8 @@ We have errors in a normal log, if during a bug hunt we spend time looking at a 
 
 I went into more detail in the logging best practices post and [talk](https://www.youtube.com/watch?v=CFL--dAX3FQ).
 
-Final Word {#h2-8-final-word}
------------------------------
+Final Word
+----------
 
 A couple of years after founding Codename One our Google App Engine bill suddenly jumped to a level that would trigger bankruptcy within days. This was a sudden regression due to a change on their backend.
 

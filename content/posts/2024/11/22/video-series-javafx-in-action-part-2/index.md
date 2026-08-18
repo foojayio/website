@@ -23,8 +23,8 @@ In [July, we published the first part, which included four interviews](https://f
 
 In this part, we have four new interviews for you! Learn more about JavaFX combined with Scala, Swing, React, trains, scientific research, banking, and more...
 
-Maciej Gorywoda about FxCalculator {#h2-0-maciej-gorywoda-about-fxcalculator}
------------------------------------------------------------------------------
+Maciej Gorywoda about FxCalculator
+----------------------------------
 
 [Maciej Gorywoda](https://www.linkedin.com/in/mgorywoda/) is the product marketing manager for the IntelliJ Scala team at JetBrains. As a Scala Ambassador, he teaches Scala and makes its community more beginner-friendly. He is also self-publishing a fantasy novel.
 
@@ -38,8 +38,8 @@ More info in [this blog post](https://webtechie.be/post/2024-09-17-jfxinaction-m
 
 
 
-Ramiro Domínguez Ayub about the Televic Generic Update Tool {#h2-1-ramiro-dom-nguez-ayub-about-the-televic-generic-update-tool}
--------------------------------------------------------------------------------------------------------------------------------
+Ramiro Domínguez Ayub about the Televic Generic Update Tool
+-----------------------------------------------------------
 
 [Ramiro Domínguez Ayub](https://www.linkedin.com/in/rayub143/) is a Java developer with a lot of experience in Java backend development. His roots are in Cuba, but after living in Spain and visiting Bruges a few times, he permanently moved to Belgium. Since then, he has joined Televic Rail, working on passenger information systems for trains. When he joined Televic, he started using JavaFX to develop the Televic Generic Update Tool (TGUT).
 
@@ -55,8 +55,8 @@ More info in [this blog post](https://webtechie.be/post/2024-09-24-jfxinaction-r
 
 
 
-Christoph Schwentker about JabRef {#h2-2-christoph-schwentker-about-jabref}
----------------------------------------------------------------------------
+Christoph Schwentker about JabRef
+---------------------------------
 
 [Christoph Schwentker](https://www.linkedin.com/in/christoph-schwentker-723656247/) is a (Kotlin) software developer at [System Integration Laboratory GmbH (SIL) in Germany](https://www.silab.de/). He is one of the main maintainers of the JabRef project.
 
@@ -70,8 +70,8 @@ More info in [this blog post](https://webtechie.be/post/2024-10-01-jfxinaction-c
 
 
 
-Ulas Ergin: How JavaFX helps to migrate from Swing to React UIs, all combined in one Java app {#h2-3-ulas-ergin-how-javafx-helps-to-migrate-from-swing-to-react-uis-all-combined-in-one-java-app}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ulas Ergin: How JavaFX helps to migrate from Swing to React UIs, all combined in one Java app
+---------------------------------------------------------------------------------------------
 
 Ulas Ergin has over 25 years of experience on large-scale enterprise systems in the banking sector, including core-banking migration, cloud transformation, and digitalization projects. He has led several teams within different domains. Currently, he manages a multicultural department in the Netherlands, Ukraine, and Turkey.
 

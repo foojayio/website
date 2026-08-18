@@ -24,14 +24,14 @@ We've been talking about migrating workloads to the cloud for a long time, but a
 
 For this reason, there has been a surge of recent interest in data infrastructure that is designed to take maximum advantage of the benefits that cloud computing provides. A [cloud-native database](https://k8ssandra.io/blog/2021/03/23/the-search-for-a-cloud-native-database/) is one that achieves the goals of scalability, elasticity, resiliency, observability and automation; the [K8ssandra](https://k8ssandra.io/) project is a great example. It packages Apache [Cassandra](https://containerjournal.com/?s=Cassandra) and supporting tools into a production-ready Kubernetes deployment.
 
-Databases on Kubernetes {#h2-0-databases-on-kubernetes}
--------------------------------------------------------
+Databases on Kubernetes
+-----------------------
 
 This raises an interesting question: must a database run on Kubernetes to be considered cloud-native? While Kubernetes was originally designed for stateless workloads, recent improvements in Kubernetes -- such as StatefulSets and persistent volumes -- have made it possible to run stateful workloads, as well. Even long-time DevOps practitioners [skeptical of running databases](https://thenewstack.io/a-case-for-databases-on-kubernetes-from-a-former-skeptic/) on Kubernetes are beginning to come around, and [best practices](https://cloud.google.com/blog/products/databases/to-run-or-not-to-run-a-database-on-kubernetes-what-to-consider) are starting to emerge.
 
 But, of course, grudging acceptance of running databases on Kubernetes is not our goal. If we're not pushing for greater [maturity in cloud-native databases](https://containerjournal.com/topics/a-maturity-model-for-cloud-native-databases/), we're missing a big opportunity. To make databases the most "cloud-native" they can be, we need to embrace everything that Kubernetes has to offer. A truly cloud-native approach means adopting key elements of the Kubernetes design paradigm. A cloud-native database must be one that can run effectively on Kubernetes. Let's explore a few Kubernetes design principles that point the way.
 
-### Principle One: Leverage Compute, Network and Storage as Commodity APIs {#h3-1-principle-one-leverage-compute-network-and-storage-as-commodity-apis}
+### Principle One: Leverage Compute, Network and Storage as Commodity APIs
 
 One of keys to the success of cloud computing is the commoditization of compute, networking and storage as resources we can provision via simple APIs. Consider this sampling of AWS services:
 
@@ -53,7 +53,7 @@ Kubernetes resources promote portability of applications across Kubernetes distr
 
 Thinking of databases in terms of their compute, network and storage needs removes much of the complexity involved in deployment on Kubernetes.
 
-### Principle Two: Separate the Control and Data Planes {#h3-2-principle-two-separate-the-control-and-data-planes}
+### Principle Two: Separate the Control and Data Planes
 
 Kubernetes promotes the separation of control and data planes. The Kubernetes API server is the key data plane interface used to request computing resources, while the control plane manages the details of mapping those requests onto an underlying IaaS platform.
 
@@ -64,13 +64,13 @@ The remainder of the control plane consists of logic that leverages the manageme
 The K8ssandra project uses [cass-operator](https://github.com/datastax/cass-operator) to automate Cassandra operations. Cass-operator defines a "CassandraDatatcenter" custom resource (CRD) to represent each top-level failure domain of a Cassandra cluster. This builds a higher-level abstraction based on Stateful Sets and Persistent Volumes.
 ![](Screen-Shot-2021-05-12-at-7.png)
 
-### Principle Three: Make Observability Easy {#h3-3-principle-three-make-observability-easy}
+### Principle Three: Make Observability Easy
 
 The three pillars of observable systems are logging, metrics and tracing. Kubernetes provides a great starting point by exposing the logs of each container to third-party log aggregation solutions. Metrics and tracing require a bit more effort to implement, but there are multiple solutions available.
 
 The K8ssandra project supports metrics collection using the kube-prometheus-stack. The Metrics Collector for Apache Cassandra (MCAC) is deployed as an agent on each Cassandra node, providing a dedicated metrics endpoint. A ServiceMonitor from the kube-prometheus-stack pulls metrics from each agent and stores them in Prometheus for use by Grafana or other visualization and analysis tools.
 
-### Principle Four: Make the Default Configuration Secure {#h3-4-principle-four-make-the-default-configuration-secure}
+### Principle Four: Make the Default Configuration Secure
 
 Kubernetes networking is secure by default: ports must be explicitly exposed in order to be accessed externally to a pod. This sets a useful precedent for database deployment, forcing us to think carefully about how each control plane and data plane interface will be exposed, and which interfaces should be exposed via a Kubernetes Service.
 
@@ -78,14 +78,14 @@ In Kassandra, CQL access is exposed as a service for each CassandraDatacenter re
 
 Kubernetes also provides facilities for secrets management, including sharing encryption keys and configuring administrative accounts. K8ssandra deployments replace Cassandra's default administrator account with a new administrator username and password.
 
-### Principle Five: Prefer Declarative Configuration {#h3-5-principle-five-prefer-declarative-configuration}
+### Principle Five: Prefer Declarative Configuration
 
 In the Kubernetes declarative approach, you specify the desired state of resources and controllers manipulate the underlying infrastructure in order to achieve that state. Cass-operator allows you to specify the desired number of nodes in a cluster, and manages the details of placing new nodes to scale up, and selecting which nodes to remove to scale down.
 
 The next generation of operators should enable us to specify rules for stored data size, number of transactions per second or both. Perhaps we'll be able to specify maximum and minimum cluster sizes, and when to move less frequently used data to object storage.
 
-Draw on the Wisdom of the Community {#h2-6-draw-on-the-wisdom-of-the-community}
--------------------------------------------------------------------------------
+Draw on the Wisdom of the Community
+-----------------------------------
 
 I hope I've convinced you that Kubernetes is a great source of best practices for cloud-native database implementations, and the innovation continues. Solutions for federating Kubernetes clusters are still maturing, but will soon make it much simpler to manage multi-data center Cassandra clusters in Kubernetes. In the Cassandra community, we can work to make extensions for management and metrics a part of the core Apache project so that Cassandra is more naturally cloud-native for everyone, right out of the box.
 

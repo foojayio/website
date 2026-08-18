@@ -28,8 +28,8 @@ The main idea is that the JDWP agent
 
 The first point is debatable; one can find arguments for and against it. But for the second point, we can run some benchmarks. After renewed discussions, I started benchmarking to conclude whether the onjcmd feature improves on-demand debugging performance. *Spoiler alert: It doesn't.*
 
-Benchmarks {#h2-0-benchmarks}
------------------------------
+Benchmarks
+----------
 
 As for the benchmarks, I chose to run the [Renaissance benchmark suite](https://renaissance.dev/) (version 0.15.0):
 > Renaissance is a modern, open, and diversified benchmark suite for the JVM, aimed at testing JIT compilers, garbage collectors, profilers, analyzers and other tools.
@@ -49,8 +49,8 @@ Remember that we never start a debugging session or use `jcmd`, as we're only in
 
 *Yes, I know that Renaissance uses different iteration numbers for the sub-benchmarks, but this should not affect the overall conclusions from the benchmark.*
 
-Results {#h2-1-results}
------------------------
+Results
+-------
 
 Now to the results. For a current JDK 21 on my Ubuntu 23.10 machine with a ThreadRipper 3995WX CPU, hyperfine obtains the following benchmarks:
 
@@ -81,8 +81,8 @@ Or, more analytically, [Welch's t-test](https://en.wikipedia.org/wiki/Welch's_t-
 
 The question is then: Why has it been [implemented](https://bugs.openjdk.org/browse/JDK-8214892?jql=text%20~%20%22onjcmd%22) in the JDK at all? Let's run Renaissance on JDK 11.0.3, the first release supporting onjcmd.
 
-Results on JDK 11.0.3 {#h2-2-results-on-jdk-11-0-3}
----------------------------------------------------
+Results on JDK 11.0.3
+---------------------
 
 Here, using onjcmd results in a significant performance improvement of a factor of 1.5 (from 354 to 248 seconds) compared to running the JDWP agent without it:
 
@@ -113,8 +113,8 @@ We excluded the finagle-chirper sub-benchmark here, as it causes the run-time to
 
 But what explains this difference?
 
-Fixes since JDK 11.0.3 {#h2-3-fixes-since-jdk-11-0-3}
------------------------------------------------------
+Fixes since JDK 11.0.3
+----------------------
 
 Between JDK 11.0.3 and JDK 21, there have been improvements to the OpenJDK, some of which drastically improved the performance of the JVM in debugging mode. Most notable is the fix for [JDK-8227269](https://bugs.openjdk.org/browse/JDK-8227269) by Roman Kennke. The issue, reported by Egor Ushakov, reads as follows:
 > Slow class loading when running with JDWP
@@ -152,8 +152,8 @@ This clearly shows the significant impact of the change. 11.0.3 came out on Apr 
 
 Want to try this out yourself? Get the binaries from [AdoptOpenJDK](https://github.com/AdoptOpenJDK/openjdk11-binaries/) and run the benchmarks yourself. This kind of performance archaeology is quite rewarding, giving you insights into critical performance issues.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 A few years ago, it was definitely a good idea to add the onjcmd feature to have usable on-demand debugging performance-wise. But nowadays, we can just start the JDWP agent to wait for a connection and connect to it whenever we want to, without any measurable performance penalty (in the Renaissance benchmark).
 

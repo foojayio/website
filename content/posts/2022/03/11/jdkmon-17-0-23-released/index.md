@@ -61,7 +61,7 @@ At the moment the following distributions are supported:
 * Zulu
 * Zulu Prime
 
-### New Release {#h3-0-new-release}
+### New Release
 
 JDKMon 17.0.23 has just been released and brings a new feature consisting of CVE's that are found will be coloured according to their score, e.g., low is green and high is red.
 
@@ -75,10 +75,10 @@ JDKMon is available for the following platforms:
 * Linux x64/arm64
 * MacOS x64/aarch64
 
-### Download {#h3-1-download}
+### Download
 
 You can download the latest version from [github relases](https://github.com/HanSolo/JDKMon/releases "github relases") or from[JFX Central](https://www.jfx-central.com/downloads " JFX Central").
 
-### More Info {#h3-2-more-info}
+### More Info
 
 [JDKMon Home](https://harmoniccode.blogspot.com/p/jdkmon.html "JDKMon Home")

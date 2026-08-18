@@ -35,8 +35,8 @@ Experienced developers plan for this and design beyond just the happy path. In g
 
 A couple of libraries implement these features on the JVM. In this post, we will look at Microprofile Fault Tolerance, [Failsafe](https://failsafe.dev/) and Resilience4J.
 
-Microprofile Fault Tolerance {#h2-0-microprofile-fault-tolerance}
------------------------------------------------------------------
+Microprofile Fault Tolerance
+----------------------------
 
 [Microprofile Fault Tolerance](https://download.eclipse.org/microprofile/microprofile-fault-tolerance-1.1.2/microprofile-fault-tolerance-spec.html) comes from the Microprofile umbrella project. It differs from the two others because it's a *specification* , which relies on a runtime to provide its capabilities. For example, Open Liberty is one such runtime. [SmallRye Fault Tolerance](https://smallrye.io/docs/smallrye-fault-tolerance/5.2.1/index.html) is another one. In turn, other components such as Quarkus and WildFly embed SmallRye.
 
@@ -47,8 +47,8 @@ Because the runtime reads annotations, one should carefully read the documentati
 >
 > -- [Timeout Usage](https://download.eclipse.org/microprofile/microprofile-fault-tolerance-1.1.2/microprofile-fault-tolerance-spec.html#_timeout_usage)
 
-Resilience4J {#h2-1-resilience4j}
----------------------------------
+Resilience4J
+------------
 
 I came upon [Resilience4J](https://resilience4j.readme.io/docs) when I was running my talk on the Circuit Breaker pattern. The talk included a demo, and it relied on [Hystrix](https://github.com/Netflix/Hystrix). One day, I wanted to update the demo to the latest Hystrix version and noticed that maintainers had deprecated it in favor of Resilience4J.
 
@@ -114,8 +114,8 @@ var pipeline = Decorators.ofSupplier(() -> server.call())
 
 It makes the intent much clearer.
 
-Failsafe {#h2-2-failsafe}
--------------------------
+Failsafe
+--------
 
 I stumbled upon Failsafe not long ago. Its tenets are similar to Resilience4J: static factories, function composition, and exception propagation.
 
@@ -161,8 +161,8 @@ var pipeline = Failsafe.with(Fallback.of("fallback"))
 ```
 
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 All three libraries provide more or less the same features. If you don't use a CDI-compliant runtime such like regular application server or Quarkus, forget about Microprofile Fault Tolerance.
 

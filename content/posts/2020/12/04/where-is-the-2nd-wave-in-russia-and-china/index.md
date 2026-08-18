@@ -20,7 +20,7 @@ With the Covid-19 edition, QAware has adapted the tool so that the current data 
 
 Software-ECG is built on OpenJDK and JavaFX, leveraging the power of a compiled language with a native rich client framework.
 
-### The 2nd Wave in Russia, Ukraine, Serbia, and China {#h3-0-the-2nd-wave-in-russia-ukraine-serbia-and-china}
+### The 2nd Wave in Russia, Ukraine, Serbia, and China
 
 In [last week's blog post](https://foojay.io/today/the-second-wave-breaks-in-europe/), we took a look at the current situation in Europe and we saw that the second wave was already breaking. Over the past week, this trend has continued.
 
@@ -29,7 +29,7 @@ The number of people testing positive is decreasing significantly in France (bla
 
 *The 2nd Wave in Europe*{#caption-attachment-36491}
 
-### Some Graphs Behave Differently {#h3-1-some-graphs-behave-differently}
+### Some Graphs Behave Differently
 
 But there are some countries where the graphs are different. These are Russia, Serbia and Ukraine.
 
@@ -44,7 +44,7 @@ A possible explanation for this could be that these countries are currently ramp
 
 If we had the same metrics as in the EU, we could easily demonstrate this by analyzing the number of tests and the infection rate. But these metrics are not published. The relevant fields in the CSV file from Our World in Data are empty for Russia, Serbia, and Ukraine.
 
-### Where is the 2nd Wave in China? {#h3-2-where-is-the-2nd-wave-in-china}
+### Where is the 2nd Wave in China?
 
 Now, let's take a look at countries outside of Europe and analyze China. This country also has a very interesting chart because the second wave in China looks like this:  
 [![2nd Wave in China](3-china-2nd-wave-2)](https://foojay.io/3-china-2nd-wave-2)
@@ -62,7 +62,7 @@ China does not report any test numbers. So, just looking at the isolated numbers
 
 It might seem that in China the pandemic is over. People go to parties, concerts and do normal activities again. It would be very interesting, however, if we were able to take a look at the same test metrics (number of tests, positive rate) which are available for Europe.
 
-### Working with Software-ECG {#h3-3-working-with-software-ecg}
+### Working with Software-ECG
 
 We wanted to demonstrate that it is easy and fun to analyze the current COVID-19 situation with the latest available data in Software-ECG COVID-19 Edition.
 

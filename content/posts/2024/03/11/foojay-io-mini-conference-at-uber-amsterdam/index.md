@@ -44,15 +44,15 @@ This meetup will be hosted by Uber Tech, in their office at Uber, Burgerweeshuis
 
 **Information about the talks:**
 
-**Talk 1: Asynchronous Programming in Java: The Era of Virtual Threads (by [Horia Burca](https://www.linkedin.com/in/hcburca/)and [Grigory Panov](https://www.linkedin.com/in/gri/))** {#h2-0-talk-1-asynchronous-programming-in-java-the-era-of-virtual-threads-by-horia-burcaand-grigory-panov}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Talk 1: Asynchronous Programming in Java: The Era of Virtual Threads (by [Horia Burca](https://www.linkedin.com/in/hcburca/)and [Grigory Panov](https://www.linkedin.com/in/gri/))**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 As Java continues to evolve, the release of Java 21 has ushered in a new era for asynchronous programming with the introduction of virtual threads.
 
 We will dive deep into the essence and advantages of virtual threads, and how they are different from other async programming paradigms in Java.
 
-**Talk 2: A Journey of Energy Efficient Design Principles in Software Engineering ([by Ko Turk](https://www.linkedin.com/in/ko-turk-b271b929/))** {#h2-1-talk-2-a-journey-of-energy-efficient-design-principles-in-software-engineering-by-ko-turk}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Talk 2: A Journey of Energy Efficient Design Principles in Software Engineering ([by Ko Turk](https://www.linkedin.com/in/ko-turk-b271b929/))**
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 Are you a software developer who wants to make a positive impact on the environment?
 
@@ -62,8 +62,8 @@ Using a practical hands-on approach, we'll dive into different layers of the app
 
 Let's work together to code a greener future!
 
-**Talk 3: Cloud Cost Optimization for Java Developers ([by Pratik Patel](https://www.linkedin.com/in/prpatel/))** {#h2-2-talk-3-cloud-cost-optimization-for-java-developers-by-pratik-patel}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Talk 3: Cloud Cost Optimization for Java Developers ([by Pratik Patel](https://www.linkedin.com/in/prpatel/))**
+-----------------------------------------------------------------------------------------------------------------
 
 Cloud usage has been soaring over the last few years, and now developers are starting to get pressure to reduce cloud spend.
 
@@ -76,8 +76,8 @@ In this session, we'll discuss how to optimize your cloud utilization, and hence
 * Over provision or elastic compute?
 * Database and caching techniques
 
-**Talk 4: Open Telemetry and Continuous Feedback ([by Roni Dover](https://www.linkedin.com/in/ronidover/))** {#h2-3-talk-4-open-telemetry-and-continuous-feedback-by-roni-dover}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Talk 4: Open Telemetry and Continuous Feedback ([by Roni Dover](https://www.linkedin.com/in/ronidover/))**
+------------------------------------------------------------------------------------------------------------
 
 Continuous Feedback is a new dev practice that aims to make practical usage of code runtime data to shorten the feedback loop during development. It enables developers to get early data about their code changes and detect issues and regressions as-they-code. At the same time, collecting data from multiple environments, allows developers to instantly understand how their code is performing in the real world.
 

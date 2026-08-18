@@ -24,7 +24,7 @@ In a multi-threaded Java application, any thread can change the state of an obje
 
 ++**[Previous article](https://foojay.io/today/records/)**++ on records explains how records provide a way to create data carrier-classes without writing a lot of boilerplate code. As part of this article, we will focus on the immutable feature of records. Immutability is one of the best features provided by records, we can use a record object without worrying about other threads changing its state.
 
-### Java language features making record immutable {#h3-0-java-language-features-making-record-immutable}
+### Java language features making record immutable
 
 In this section, we will go through a table explaining how records are made immutable in the Java language. In the below table the 2nd column explains different ways to update the state of a record object, the 3rd column explains Java language features that prevent updating the state of the Record object.
 
@@ -37,7 +37,7 @@ In this section, we will go through a table explaining how records are made immu
 | 5     | Update record components in the constructor.                                | Only canonical constructor can update record components, which is called while initializing record. For other types of constructors, assigning any of the record components in the constructor body results in a compile-time error.                                                                                                                 |
 | 6     | Update record components using reflection.                                  | Record components have specific handling in Reflection ++**[Field API](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/reflect/Field.html#set(java.lang.Object,java.lang.Object))**++ . This treatment is like hidden classes. You can read more about Hidden classes ++**[here](https://jfeatures.com/blog/HiddenClass)**++. |
 
-### Shallowly immutable {#h3-1-shallowly-immutable}
+### Shallowly immutable
 
 Record components are final, which means we can not change the record components once assigned. Although we can change fields of the record component, there is no restriction on that, it makes the record shallowly immutable. Let's see this with an example.
 
@@ -68,7 +68,7 @@ record IntegerListRecord(List<Integer> integerList) {
 
 In this example, we created a list of integers(integerList), added one element into it, and initialized the record class with this. Calling method getListSize of record class results into 1. Now we add one more element in integerList and calling getListSize results into 2. Here we did not change the record component (integerList) but updated the fields of the record component, which does not have any restriction. This is the reason we call the record shallowly immutable.
 
-### Conclusion {#h3-2-conclusion}
+### Conclusion
 
 Records help you remove repetitive and error-prone code, and increases developer productivity. The immutability feature keeps it away from concurrency bugs. Using language features like this is going to make you a great developer everyone will want to hire.
 
@@ -76,7 +76,7 @@ If you want to get amazing Java jobs, I wrote an ebook [5 steps to Best Java Job
 
 [![](https://jfeatures.com/img/ebook_upd.png)](https://jfeatures.com/)
 
-### Resources {#h3-3-resources}
+### Resources
 
 1. [JEP 395](https://openjdk.java.net/jeps/395)
 2. [https://cr.openjdk.java.net/\~briangoetz/amber/datum.html](https://cr.openjdk.java.net/~briangoetz/amber/datum.html)

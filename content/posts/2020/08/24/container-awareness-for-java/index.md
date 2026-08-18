@@ -26,7 +26,7 @@ Older versions of JDK (prior to 8u192) may not have container awareness (or may 
 
 Newer versions of JDK (8u192 and above) will automatically discover the CGroup resource allocations located in `/sys/fs/cgroup/cpu` and `/sys/fs/cgroup/memory`.
 
-#### Heap {#heap}
+#### Heap
 
 Run a Docker container and give it only 256MB of memory, and see what an older version of JDK will assign for the default Max Heap.
 
@@ -52,13 +52,13 @@ The JVM heap size should never be equal memory resource you assigned. In this ca
 
 JVM native memory usages contains thread stack, code cache, metaspace, and potentially direct memory buffer allocations.
 
-#### Estimate Memory Needs {#estimate-memory-needs}
+#### Estimate Memory Needs
 
 According to the [Cloud Foundry Java Buildpack Memory calculator documentation](https://docs.google.com/document/d/1vlXBiwRIjwiVcbvUGYMrxx2Aw1RVAtxq3iuZ3UK2vXA/edit), the total native memory needed for a JVM instance is approximately linear to the number of loaded classes.
 
 You can use [Cloud Foundry Java Buildpack Memory calculator](https://github.com/cloudfoundry/java-buildpack-memory-calculator) to the memory needs and configurations.
 
-#### Understand Memory Used {#understand-memory-used}
+#### Understand Memory Used
 
 In cases where you are getting `OOMKilled` for your container instance, and have already made sure that you are using a container-aware version of JDK, then you may want to turn on [Native Memory Tracking](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr007.html).
 
@@ -87,7 +87,7 @@ java -XX:+UnlockDiagnosticVMOptions \
 
 f your application was `OOMKilled`, then it's an unsuccessful exit, so the memory details may not be printed. In this case, consider first increase the amount of memory allocation, and then trigger a successful exit, to get the native memory usage details.
 
-#### CPU {#cpu}
+#### CPU
 
 Run a Docker container and giving it only 2 CPUs, and see what an older version of JDK will assign for the default Parallel GC threads.
 
@@ -109,7 +109,7 @@ docker run -ti --rm --cpus=2 --memory=256M openjdk:8u252-jre java \
 
 The output of `ParallelGCThreads` is `2`.
 
-#### Runtime API {#runtime-api}
+#### Runtime API
 
 When using non-container-aware JDK versions, both Memory and CPU can be inaccurately reflected in the [`Runtime`](https://docs.oracle.com/javase/8/docs/api/java/lang/Runtime.html) API as well.
 

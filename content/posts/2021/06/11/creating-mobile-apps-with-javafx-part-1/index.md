@@ -36,7 +36,7 @@ In [Part 2](https://foojay.io/today/creating-mobile-apps-with-javafx---part-2/),
 
 Lastly in [Part 3](https://foojay.io/today/creating-mobile-apps-with-javafx---part-3/), we'll discuss how to upload this application to the respective mobile app stores.
 
-### TiltMaze Labyrinth {#h3-0-tiltmaze-labyrinth}
+### TiltMaze Labyrinth
 
 Let's start with the end result first. TiltMaze Labyrinth is a mobile game you can install from both the Apple App Store and Google Play. Download TiltMaze here on your mobile device or tablet to play.  
 [![Apple Store download TiltMaze](app-store-logo-sm.png)](https://apps.apple.com/app/id1566464439)  
@@ -46,7 +46,7 @@ The game is simple enough: you navigate a rolling ball through a maze within the
 
 The Novice-Expert slider controls how fast the ball rolls and the time allotment for completing the maze. As your skill improves, you can challenge your dexterity by making the ball movements more sensitive while simultaneously decreasing the time allotment.
 
-### JavaFX {#h3-1-javafx}
+### JavaFX
 
 I am a big proponent of using FXML (FX markup language) to describe your JavaFX views. To those not familiar with JavaFX, FXML is an XML-based markup language that lets you describe a UI scene.
 
@@ -58,7 +58,7 @@ Part of the appeal of this mobile application is its simplicity. TiltMaze is a s
 
 Note that we removed sensitive licensing and credential information from the project!
 
-### The Accelerometer {#h3-2-the-accelerometer}
+### The Accelerometer
 
 The accelerometer is a sensor that measures velocity changes in three dimensions: horizontally, vertically, and up-down movements (that include the effects of gravity).
 
@@ -124,7 +124,7 @@ Figure 3 shows a game in progress. The ball's path is marked in blue and the cou
 
 The Novice/Expert slider is disabled during play, but can be adjusted between games. The Novice setting has the longest game time and the slowest ball roll. The Expert setting corresponds to the shortest game time and the fastest ball roll. And you can experiment with values in between that fit your level.
 
-### **Scaling to Device Size** {#h3-3-scaling-to-device-size}
+### **Scaling to Device Size**
 
 Although mobile devices are generally similar in that they're portrait-mode rectangles, their sizes can vary quite a bit. We scale the maze so that the aspect ratio is constant and fits within the device's form factor.
 
@@ -132,13 +132,13 @@ We compute a scale factor, using the resulting scale factor to build the maze's 
 
 We limit orientation for the game for portrait mode only. If you reorient your device, the application stays in portrait mode.
 
-### **Mouse Events** {#h3-4-mouse-events}
+### **Mouse Events**
 
 The edit-compile-install-run cycle is relatively long for native targets. Therefore, we simulate the maze program on a desktop to test the JavaFX UI as much as possible before installing it on a mobile device. We use mouse events instead of the accelerometer to guide the ball through the maze.
 
 Although this is really a poor imitation of an accelerometer, it provides a convenient environment for testing the UI: the progress indicator, the Novice/Expert slider, and the Start/Stop game button.
 
-### **Performance** {#h3-5-performance}
+### **Performance**
 
 We installed the TiltMaze application on an iPhone 8 Plus and an Android Nexus 5X.
 
@@ -146,6 +146,6 @@ The iPhone model is a newer and faster device, but both targets perform the ball
 
 The GraalVM-Gluon build creates images that run natively on the target devices.
 
-### Next {#h3-6-next}
+### Next
 
 In [Part 2](https://foojay.io/today/creating-mobile-apps-with-javafx-part-2/), we show you how to build and install TiltMaze on a locally connected iPhone and Android device.

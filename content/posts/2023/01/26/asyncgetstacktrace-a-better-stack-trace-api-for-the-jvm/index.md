@@ -33,8 +33,8 @@ Probing is hard without a proper way to obtain traces.
 
 The JVM offers us two different mechanisms:
 
-GetStackTrace {#h2-0-getstacktrace}
------------------------------------
+GetStackTrace
+-------------
 
 You could use the official and well defined `GetStackTrace` JVMTI API, which OpenJ9 and every other JVM out there also Implement:
 > 
@@ -74,8 +74,8 @@ So what are our other options? Writing a custom perf agent, we could obtain the 
 
 He never implemented anything into his async-profiler.
 
-AsyncGetCallTrace {#h2-1-asyncgetcalltrace}
--------------------------------------------
+AsyncGetCallTrace
+-----------------
 
 The only other option left is to use `AsyncGetCallTrace`, an API added on the 19th of November 2002 in the JVMTI draft and removed two months later. This API is the asynchronous, non-safepoint-biased ([kind-of](https://jpbempel.github.io/2022/06/22/debug-non-safepoints.html)) version of `GetStackTrace`, called from signal handlers at any point of time:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgct_2-2000x1125.png)
@@ -119,8 +119,8 @@ The [honest-profiler](https://github.com/jvm-profiling-tools/honest-profiler/) w
 
 Albeit *available* is a strong word, as Sun removed the API from JVMTI, it now lives in a C++ source file without any exported header. The JVM exports the symbol `AsyncGetCallTrace`, because Sun probably used the API in their Sun Studio, which contained a profiler. To use it, one must use dlsym and hope that it is still there: It's an internal API that might disappear in the blink of an eye, although being rather unlikely. Other JVMs are not required to have this API, e.g., OpenJ9 only got this API in [2021](https://github.com/eclipse-openj9/openj9/issues/5654).
 
-History of AsyncGetStackTrace {#h2-2-history-of-asyncgetstacktrace}
--------------------------------------------------------------------
+History of AsyncGetStackTrace
+-----------------------------
 
 So where do I come into this story? I started in the [SapMachine](https://sapmachine.io) team at [SAP](https://sap.com) at the beginning of last year after only [minor academic](https://pp.info.uni-karlsruhe.de/person.php?id=159) success. One of my first tasks was to help my colleague Gunter Haug fix a bug in the PPC64le support of async-profiler, resulting in my first contribution to this project.
 
@@ -130,8 +130,8 @@ I started working on a new API with the working title `AsyncGetCallTrace2`, late
 
 These discussions eventually led to the proposal of `AsyncGetStackTrace` that is currently out in the open as [JEP Candidate 435](https://openjdk.org/jeps/435). waiting for feedback from the JFR and supportability community (and the related teams at Oracle).
 
-AsyncGetStackTrace {#h2-3-asyncgetstacktrace}
----------------------------------------------
+AsyncGetStackTrace
+------------------
 
 The proposed API is essentially an extended, official, and well-tested version of `AsyncGetCallTrace`:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgst-2000x1125.png)
@@ -147,7 +147,7 @@ The proposed API is essentially an extended, official, and well-tested version o
 
 Now to the API: I will inadvertently use parts of the text of my JEP in the following, but I will not update this blog post in the future every time my JEP changes. I would really encourage you to read the [JEP Candidate 435](https://openjdk.org/jeps/435) yourself, after you read this one, it has a different angle than this blog post.
 
-### Function Declaration {#h3-4-function-declaration}
+### Function Declaration
 
 The primary function definition is similar to AsyncGetCallTrace:
 
@@ -187,7 +187,7 @@ This is quite useful when you work with JNI code which in turn calls Java code. 
 
 With the old API you would never observe the `checkCMethod` in a stack trace, even if it would take lots of time to execute. But we disabled the options to mimic the behavior (and number of obtained frames), of `AsyncGetCallTrace`.
 
-### CallTrace {#h3-5-calltrace}
+### CallTrace
 
 We defined the main trace data structure in the new API as follows:
 
@@ -229,7 +229,7 @@ enum ASGST_TRACE_KIND {
 
 We encode the error code as negative numbers in the num_frames field because it keeps the data structures simple and `AsyncGetCallTrace` does it too. Every trace with `num_frames > 0` is valid.
 
-### Frames {#h3-6-frames}
+### Frames
 
 The most significant difference between the two APIs is in the representation of frames: Where `AsyncGetCallTrace` just stored the bytecode index and the method id, we capture much more.
 
@@ -290,14 +290,14 @@ typedef struct {
 
 Although the API provides more information, the amount of space required per frame (e.g., 16 bytes on x86) is the same as for the existing `AsyncGetCallTrace` API.
 
-### Testing {#h3-7-testing}
+### Testing
 
 `AsyncGetCallTrace` has just *one* [test case](https://github.com/openjdk/jdk/blob/c8319ed0cc5d5663c9dc8d28563bb60efff08c1e/test/hotspot/jtreg/serviceability/AsyncGetCallTrace/libAsyncGetCallTraceTest.cpp) at the time of writing, which merely checks one single frame. This is a pity for such a widely used API. The JEP candidate suggests that the implementation should have many more than that. Walking a stack asynchronously might trigger segmentation faults in the profiled JVM. The possibility of such can be reduced by extensive testing, calling `AsyncGetStackTrace` millions of times per second on benchmarks for hours and calling it with randomly modified `ucontext`s.
 
 The code of the draft implementation contains several of these to ensure that calling the API is safe enough. It will never be entirely safe, as asynchronously walking stacks in a signal handler of a thread while all the other threads are still running is inherently risky. The aim is to reduce the risk to a level where the possibility of anything happening in real-world settings is minuscule.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Working on this JEP, with the help of my team and Jaroslav Bachorik, almost exactly a year now, gave me a glimpse into the inner workings of the OpenJDK.
 

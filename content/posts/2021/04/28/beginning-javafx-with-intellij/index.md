@@ -40,8 +40,8 @@ New comers to the JavaFX platform that want things even more basic (fundamental)
 
 Next, you'll need to download and install the required software.
 
-Requirements {#h2-0-requirements}
----------------------------------
+Requirements
+------------
 
 The following are requirements for this tutorial.
 
@@ -52,8 +52,8 @@ When downloading IntelliJ the free version is called the community edition.
 
 To see how to install ZuluFX please refer to the section '**Installing ZuluFX** ' at "[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/blog/a-javafx-app-on-zulufx-in-60-seconds/)".
 
-Plain JavaFX Project {#h2-1-plain-javafx-project}
--------------------------------------------------
+Plain JavaFX Project
+--------------------
 
 The following steps will show you how to create a new JavaFX project from scratch (aka Plain old JavaFX Project). Usually this type of project is good for quick prototypes.
 
@@ -166,8 +166,8 @@ Figure 19. Run the HelloWorld application.
 The following is the output of running the HelloWorld application.
 ![](Final-output-App.png) Figure 20. The output of the execution of HelloWorld JavaFX application.
 
-Maven JavaFX Project {#h2-2-maven-javafx-project}
--------------------------------------------------
+Maven JavaFX Project
+--------------------
 
 The following are steps to create a modular JavaFX application through IntelliJ as a Maven project.
 
@@ -354,8 +354,8 @@ When using JavaFX as separate libraries such as from GluonHQ (`$PATH_TO_FX`) and
 ```
 
 
-Gradle JavaFX Project {#h2-3-gradle-javafx-project}
----------------------------------------------------
+Gradle JavaFX Project
+---------------------
 
 Because this article is getting way too long, I am only going to post the **build.gradle** file below. Because the file and directory structure of a gradle project is the same as a Maven project I trust you can simply go through creating the project in a similar manner and near the end click on the **Gradle** tab and the **reload** button to see the **run** task.
 
@@ -378,8 +378,8 @@ mainClassName = "com.mycompany.helloworldfx/com.mycompany.helloworldfx.HelloWorl
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Well there you have it, a Hello World JavaFX Application that was **JPMS** based and created using the popular IntelliJ IDE in three project types **Plain** , **Maven** and **Gradle**.
 
@@ -387,8 +387,8 @@ As you get familiar with how to code and execute your application your next step
 
 As always feel free to comment if you have questions or need any help. Happy coding!
 
-References: {#h2-5-references}
-------------------------------
+References:
+-----------
 
 Understanding Java 9 Modules by Paul Deitel - <https://www.oracle.com/corporate/features/understanding-java-9-modules.html>
 

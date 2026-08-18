@@ -25,28 +25,28 @@ frozen: false
 
 Despite the high-profile exposure of Log4Shell and Spring4Shell vulnerabilities, a shocking number of applications are still running on these ticking time bombs. This isn't just a minor oversight --- it's a major risk. We're builders at heart, but part of building is ensuring our structures are safe.
 
-The developer's dilemma {#h2-0-the-developer-s-dilemma}
--------------------------------------------------------
+The developer's dilemma
+-----------------------
 
 As developers, we constantly balance pushing out new features and maintaining the existing projects and features. It's a balancing act that demands our time and full cognitive bandwidth. Keeping track of every project's dependencies while ensuring they're up to date can feel like an uphill battle, especially when the pressure is on to deliver new functionalities.
 
 Amid this juggling act, critical vulnerabilities like Log4Shell and Spring4Shell can sometimes fall through the cracks, not out of negligence but due to the sheer volume of tasks we manage daily. However, it is essential to recognize that the safety and security of exciting applications are crucial aspects of software development nowadays.
 
-The current state of Log4shell {#h2-1-the-current-state-of-log4shell}
----------------------------------------------------------------------
+The current state of Log4shell
+------------------------------
 
 Remember Log4Shell? That nasty vulnerability in Apache Log4j found in 2021 that could let attackers run code on your server by logging a special string? An attacker could use a JNDI lookup with the LDAP protocol to inject a pre-compiled class file and execute malicious code.
 
 Even in newer versions of Java, this vulnerability could lead to damage due to deserialization attacks. The attack complexity of this critical [++vulnerability++](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2314720) is considered very low, which makes the threat even higher than usual. Check our [++blog post++](https://snyk.io/blog/log4j-rce-log4shell-vulnerability-cve-2021-44228/) for a full breakdown of the issue.
 
-### More than 20% of companies are still vulnerable to Log4shell. {#h3-2-more-than-20-of-companies-are-still-vulnerable-to-log4shell}
+### More than 20% of companies are still vulnerable to Log4shell.
 
 Today, many companies still have an outdated, vulnerable version of the Log4j library in one of their projects. Of all the companies that scan their production code for vulnerabilities, **21%** still have projects vulnerable to Log4Shell. That means over **60k** projects are still at risk of getting breached by a vulnerability disclosed and fixed over 2 years ago.
 
 That's huge! Knowing that these companies already use security tooling and are actively mitigating the security issues they encounter, the actual number of vulnerable log4j versions in the wild will be much higher than that. That thought alone is not only scary but also very disturbing.
 
-Spring4Shell in the wild {#h2-3-spring4shell-in-the-wild}
----------------------------------------------------------
+Spring4Shell in the wild
+------------------------
 
 Another infamous example was Spring4Shell, which was disclosed in March 2022. The vulnerability in spring-beans could also lead to malicious remote code execution. Although the attack complexity was low, and there were exploits for specific cases, the impact was less significant than that of Log4Shell. Check out the dedicated [++blog post++](https://snyk.io/blog/spring4shell-zero-day-rce-spring-framework-explained/) for more details.
 
@@ -58,8 +58,8 @@ This proves that seemingly lesser dangers could still lead to significant securi
 
 Moreover, it shows that many Spring applications depend on older, outdated framework versions, and updating and servicing existing applications is considered unimportant. However, deep down, we know this is a ticking time bomb that can explode any minute.
 
-Wakeup call to all who maintain applications {#h2-4-wakeup-call-to-all-who-maintain-applications}
--------------------------------------------------------------------------------------------------
+Wakeup call to all who maintain applications
+--------------------------------------------
 
 Let's keep this straightforward and to the point. We all know that feeling of pride when our code finally runs without a hitch, and the last thing we want to do is go back and mess with it, especially for something as silly as updating libraries.
 

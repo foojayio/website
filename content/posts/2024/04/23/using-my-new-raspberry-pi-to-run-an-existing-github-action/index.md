@@ -35,8 +35,8 @@ Recently, I mentioned [how I refactored](https://blog.frankel.ch/kotlin-scriptin
 
 Though the current setup works flawlessly - and is free, I wanted to experiment with self-hosted runners. Here are my findings.
 
-Context {#h2-0-context}
------------------------
+Context
+-------
 
 GitHub offers a large free usage of GitHub Actions:
 > GitHub Actions usage is free for standard GitHub-hosted runners in public repositories, and for self-hosted runners. For private repositories, each GitHub account receives a certain amount of free minutes and storage for use with GitHub-hosted runners, depending on the account's plan. Any usage beyond the included amounts is controlled by spending limits.
@@ -53,8 +53,8 @@ Yet, the policy can easily change tomorrow. Free tier policies show a regular tr
 
 Forewarned is forearmed. I like to try options before I need to choose one. Case in point: what if I need to migrate?
 
-The theory {#h2-1-the-theory}
------------------------------
+The theory
+----------
 
 GitHub Actions comprise two components:
 
@@ -82,8 +82,8 @@ jobs:
 
 It's a bit more involved, though. Let's detail what steps I had to undertake in my repo to make the job work.
 
-The practice {#h2-2-the-practice}
----------------------------------
+The practice
+------------
 
 GitHub Actions depend on Docker being installed on the runner. Because of this, I thought jobs ran in a dedicated image: it's plain wrong. Whatever you script in your job happens on the running system. Case in point, the initial script installed Python and Poetry.
 
@@ -158,8 +158,8 @@ sudo ./svc.sh start
 
 The script uses `systemd` underneath.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Migrating from a GitHub runner to a self-hosted runner is not a big deal but requires changing some bits and pieces.
 

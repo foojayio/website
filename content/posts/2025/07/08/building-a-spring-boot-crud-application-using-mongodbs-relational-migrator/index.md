@@ -34,8 +34,8 @@ This guide will help modernize a legacy application built with relational databa
 
 Let's get started!
 
-Pre-requisites {#h2-0-pre-requisites}
--------------------------------------
+Pre-requisites
+--------------
 
 Before we get into the actual implementation to build the application, below are the pre-requisites that you need to have:
 
@@ -45,8 +45,8 @@ Before we get into the actual implementation to build the application, below are
 4. The IDE of your choice
 5. A free Atlas cluster---create your first[Atlas cluster for free](https://account.mongodb.com/account/register?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe)
 
-Relational Migrator {#h2-1-relational-migrator}
------------------------------------------------
+Relational Migrator
+-------------------
 
 The [Relational Migrator](https://www.mongodb.com/docs/relational-migrator/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe) is a tool developed by MongoDB that helps you migrate data from a relational database into MongoDB. It is an application with a UI that helps you map the data from the relational schema to the MongoDB schema.
 
@@ -55,12 +55,12 @@ Along with providing migration capability, the tool offers more than the name su
 1. **Generate the application code**: After the data has been migrated into the Atlas cluster, the developer asks how we begin the text. Well! The code generation feature of the RM tool is the answer to the questions. This allows you to get the boilerplate code for performing the basic CRUD operations and also expand the project to perform other complex functionality based on the project requirements.
 2. **Query converter**: The tool's query converter feature helps you convert your SQL queries, views, and stored procedures into equivalent MongoDB queries and validate them. The query converter uses the relational schema, the MongoDB schema, and the mapping rules in your current project to determine how the queries should be converted. Conversions may fail or be incorrect if the queries reference tables that are not in your relational schema or if they are not mapped to MongoDB collections. This query converter also works for views and stored procedures.
 
-Migrating the data from the PostgreSQL schema to MongoDB {#h2-2-migrating-the-data-from-the-postgresql-schema-to-mongodb}
--------------------------------------------------------------------------------------------------------------------------
+Migrating the data from the PostgreSQL schema to MongoDB
+--------------------------------------------------------
 
 Once your free Atlas cluster is ready, download the [SQL schema script](https://github.com/mongodb-developer/relational-migrator-lab/blob/main/docker/sample-postgres-library/init/1-library-schema-and-data.sql), which has a sample Postgres schema with data inserted into the tables. Use the [PgAdmin](https://www.pgadmin.org/download/) application to upload the schema and explore the created schema. The sample schema created nine different tables and their relationships for this tutorial. We will use the same schema to generate the equivalent and simpler MongoDB schema, following the different design patterns. First, let's examine both schemas in detail and then understand how to convert them to the equivalent MongoDB schema for further application development.
 
-### Analysing the Postgres schema {#h3-3-analysing-the-postgres-schema}
+### Analysing the Postgres schema
 
 In this section, we will understand an example of a library management system where we have nine different tables, and the relationship between them is shown in the diagram below:
 [![Image representing the relational schema diagram for the database](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ftjz0onokqk2qp839418n.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ftjz0onokqk2qp839418n.png)
@@ -80,7 +80,7 @@ LEFT JOIN library.author_alias aa ON a.id = aa.author_id;
 
 This leads to the joining of two different tables using the foreign key constraint. In the next section, we will understand how this query would look in MongoDB.
 
-### Creating mappings to generate the equivalent MongoDB schema {#h3-4-creating-mappings-to-generate-the-equivalent-mongodb-schema}
+### Creating mappings to generate the equivalent MongoDB schema
 
 The nine different tables in the relational schema need to be converted into five different collections using the [mapping technique](https://www.mongodb.com/docs/relational-migrator/mapping-rules/mapping-rules/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe) given by MongoDB. These techniques follow the [design patterns](https://www.mongodb.com/docs/manual/data-modeling/design-patterns/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe) followed by MongoDB in data modelling concepts.
 
@@ -107,7 +107,7 @@ This is one such example where a huge ER diagram with nine different tables can 
 
 After applying the mapping techniques, once the desired MongoDB schema is achieved, the next step is to migrate the data into the MongoDB Atlas cluster.
 
-### Migrating the data into MongoDB {#h3-5-migrating-the-data-into-mongodb}
+### Migrating the data into MongoDB
 
 To migrate the data into the cluster, click on "Data Migration" and select "Create Job Migration."
 
@@ -126,16 +126,16 @@ But don't worry---MongoDB Relational Migrator eliminates that confusion.
 
 The tool's Code Converter feature is designed to simplify your journey further by providing boilerplate code in the programming language of your choice. This makes it easy to jumpstart your application development, so you can focus on building great features without worrying about the groundwork.
 
-Code generation with Relational Migrator {#h2-6-code-generation-with-relational-migrator}
------------------------------------------------------------------------------------------
+Code generation with Relational Migrator
+----------------------------------------
 
 To create an application with migrated data using Relational Migrator, you should click on the "Code Generation" tab and select the language and template as Java and Spring Data, respectively. The below screenshot from the Relational Migrator tools explains the steps for the code generation.
 [![Screenshot from Relational Migrator tool performing the code generation](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgftcazognj7pfmnk7clw.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgftcazognj7pfmnk7clw.png)
 
 Once you select the framework, you are all set to download/copy the code in the editor of your choice for further processing.
 
-Building Spring Boot application {#h2-7-building-spring-boot-application}
--------------------------------------------------------------------------
+Building Spring Boot application
+--------------------------------
 
 At this point, building the application becomes very easy, as all the essential code is provided. You just need to perform the business logic, and the application is all set to fulfil the requirements.
 
@@ -150,7 +150,7 @@ The controller has all the REST API calls, and the service files are where we ne
 
 Let us understand a few examples in the next section.
 
-### Examples of aggregation pipelines {#h3-8-examples-of-aggregation-pipelines}
+### Examples of aggregation pipelines
 
 At this point in the application development, we have all the entity and repository files required for building the complete application.
 
@@ -236,8 +236,8 @@ More such examples are provided in the [GitHub repository](https://github.com/mo
 
 This tutorial therefore explains how to leverage the Relational Migrator and its functionality to create applications with no complexity and where the focus is more on the business logic and less on the boilerplate repetitive code.
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 This article shows how transitioning from traditional relational databases to MongoDB's dynamic and schema-less architecture can be overwhelming, but MongoDB's Relational Migrator simplifies the process. This tool facilitates seamless data migration and offers advanced features like SQL-to-MongoDB query conversion and automatic boilerplate code generation. In a practical tutorial, the article demonstrates how to modernize a legacy relational database-driven application into a Spring Boot-based CRUD application using MongoDB and Relational Migrator. By converting a sample relational schema into an optimized MongoDB schema, the tool reduces the complexity of joins and nested queries, paving the way for faster and more intuitive development cycles.
 

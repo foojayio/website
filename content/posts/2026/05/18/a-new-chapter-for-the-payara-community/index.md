@@ -29,15 +29,15 @@ The iconic Payara fish has also had a bit of a refresh. The Azul Payara commerci
 
 ![](Untitled-400-x-100-px.png)
 
-What the acquisition means for the Community {#h2-0-what-the-acquisition-means-for-the-community}
--------------------------------------------------------------------------------------------------
+What the acquisition means for the Community
+--------------------------------------------
 
 We believe the open-source community is the heart of the Payara ecosystem. The contributors, committers and developers using Azul Payara Community for testing, education, side projects or apps that haven't gone commercial yet all matter to us. Growing that community, listening to it and investing in it is central to how we think about Azul Payara's future.
 
 The rebrand is part of bringing Azul Payara Community properly into the Azul portfolio alongside Azul Zulu (OpenJDK), Azul Prime, Intelligence Cloud and Azul Payara's commercial offering. It's the same open-source project with a new home in the broader Azul ecosystem.
 
-What's changing (and when) {#h2-1-what-s-changing-and-when}
------------------------------------------------------------
+What's changing (and when)
+--------------------------
 
 Over the coming weeks and months, you can expect to see updates to Payara documentation, resource names, technical content and the blog. Downloads are still available at [payara.fish](https://payara.fish/downloads/payara-platform-community-edition/ "payara.fish") for now, but will be moving to Azul website before long - we'll announce that when the time comes.
 
@@ -45,21 +45,21 @@ One thing we're particularly excited about: we'll be increasing our presence her
 
 For social media, we're consolidating onto Foojay and Azul's official channels. Make sure you're following us there, so you don't miss a thing.
 
-Getting out and meeting you {#h2-2-getting-out-and-meeting-you}
----------------------------------------------------------------
+Getting out and meeting you
+---------------------------
 
 Together with the Azul DevRel, Product and Engineering Teams, we're planning to visit a lot of Java User Groups over the coming months, and we're really looking forward to meeting community members face to face. If your JUG would like a visit or a talk on Azul Payara Community, OpenJDK or Jakarta EE - let us know.
 
 We'll also be at a number of Java conferences this year. More details to come, but if you spot us - come and say hello.
 
-What's been shipping: April and May 2026 Azul Payara Community Releases {#h2-3-what-s-been-shipping-april-and-may-2026-azul-payara-community-releases}
-------------------------------------------------------------------------------------------------------------------------------------------------------
+What's been shipping: April and May 2026 Azul Payara Community Releases
+-----------------------------------------------------------------------
 
 We didn't want to announce the rebrand without also catching you up on recent releases ([download here!](https://payara.fish/downloads/payara-platform-community-edition/ "download here!")), so here's a combined look at what landed for Azul Payara Community in April and May.
 
 ![](Azul-Payara-Community-New-Release-1.png)
 
-### May: Azul Payara Community 7.2026.5 {#h3-4-may-azul-payara-community-7-2026-5}
+### May: Azul Payara Community 7.2026.5
 
 **Security fixes (critical - please upgrade)**:
 
@@ -88,7 +88,7 @@ We didn't want to announce the rebrand without also catching you up on recent re
 
 The critical security fix is also backported across Azul Payara 6.38.0, 5.87.0, and 4.1.2.191.55 --- we recommend all users upgrade regardless of which branch they're on.
 
-### April: Azul Payara Community 7.2026.4 {#h3-5-april-azul-payara-community-7-2026-4}
+### April: Azul Payara Community 7.2026.4
 
 April's community release was a significant cleanup milestone, removing three long-standing deprecated items: the start-domain --upgrade service (replaced by the Payara Upgrade Tool), all methods previously annotated @Deprecated, and all deprecated configuration properties.
 
@@ -111,8 +111,8 @@ April's community release was a significant cleanup milestone, removing three lo
 
 **Component upgrades:** EclipseLink 5.0.0-B08 → 5.0.0-B13, OpenMQ updated to 6.8.0, plus bumps to Jackson BOM, Reactor Core, Kotlin Stdlib, and several others.
 
-A lot more to come {#h2-6-a-lot-more-to-come}
----------------------------------------------
+A lot more to come
+------------------
 
 The rebrand is just the start. As part of Azul, Payara Community gains access to more resources, more engineering investment and a broader platform to grow.
 

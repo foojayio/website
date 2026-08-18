@@ -51,12 +51,12 @@ Cassandra can run with fairly limited resources as long as you don't put too muc
 
 If we want to run K8ssandra with limited resources, we'll need to set these appropriately in our Helm values files.
 
-Setting heap sizes in K8ssandra {#setting-heap-sizes-in-k8ssandra}
-------------------------------------------------------------------
+Setting heap sizes in K8ssandra
+-------------------------------
 
 The K8ssandra Helm charts allow us to set heap sizes for both the Cassandra and Stargate pods separately.
 
-### Cassandra {#cassandra}
+### Cassandra
 
 For Cassandra, the heap and new gen sizes can be set at the cluster level, or at the datacenter level (K8ssandra will support multi DC deployments in a future release):
 
@@ -113,7 +113,7 @@ cassandra:
 ```
 
 
-### Stargate {#stargate}
+### Stargate
 
 Because Stargate nodes are special coordinator-only Cassandra nodes and run in the JVM, it is also necessary to set their max heap size:
 

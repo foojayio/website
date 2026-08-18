@@ -20,7 +20,7 @@ With the Covid-19 edition, QAware has adapted the tool so that the current data 
 
 Software-ECG is build on Open-JDK and JavaFX. It leverages the power of a compiled language with a native Rich Client Framework.
 
-### Overview {#h3-0-overview}
+### Overview
 
 Over the last weeks, we looked at the current development in [Europe](https://foojay.io/today/the-second-wave-breaks-in-europe/), [China](https://foojay.io/today/where-is-the-2nd-wave-in-russia-and-china/) and [South America](https://foojay.io/today/separate-covid-19-waves-in-europe-and-south-america/). In Europe, we saw that the second wave is breaking and has already peaked in most countries.
 
@@ -35,7 +35,7 @@ Don't get too depressed by looking at Europe. Let's take a look at the summer in
 
 In our last blog, we took a look at South America and, unfortunately, the recovery phase in Brazil during summer was not as significant as the one we observed in Europe in the summer of 2020.
 
-### Oceania {#h3-1-oceania}
+### Oceania
 
 The data from the Our World In Data (OWID) COVID-19 data set includes the pseudo-continent of "Oceania" as a collective term for all countries in Australia, New Zealand and Polynesia.
 
@@ -79,7 +79,7 @@ However, those having relatives in Oceania should really consider moving their h
 
 *Interleaving waves in Europe and Oceania*{#caption-attachment-36616}
 
-### Working with the Software-ECG {#h3-2-working-with-the-software-ecg}
+### Working with the Software-ECG
 
 We wanted to demonstrate that it is easy and fun to analyze the current COVID-19 situation with the latest available data in Software-ECG COVID-19 Edition.
 

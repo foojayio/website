@@ -16,8 +16,8 @@ related_posts:
 frozen: false
 ---
 
-FinOps and Cloud Cost Management, what's it all about and how does it impact us as developers and others who are close to the code? In this series on Foojay.io, you're introduced to FinOps practitioners around the world, focused on how they have gradually found themselves, their technology, and their organization in the FinOps space. {#h2-0-finops-and-cloud-cost-management-what-s-it-all-about-and-how-does-it-impact-us-as-developers-and-others-who-are-close-to-the-code-in-this-series-on-foojay-io-you-re-introduced-to-finops-practitioners-around-the-world-focused-on-how-they-have-gradually-found-themselves-their-technology-and-their-organization-in-the-finops-space}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FinOps and Cloud Cost Management, what's it all about and how does it impact us as developers and others who are close to the code? In this series on Foojay.io, you're introduced to FinOps practitioners around the world, focused on how they have gradually found themselves, their technology, and their organization in the FinOps space.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -31,8 +31,8 @@ FinOps and Cloud Cost Management, what's it all about and how does it impact us 
 
 
 
-**Hi Tim! At Walmart, your focus is Cloud Cost Management. How did you end up in that role, what was your journey?** {#h2-1-hi-tim-at-walmart-your-focus-is-cloud-cost-management-how-did-you-end-up-in-that-role-what-was-your-journey}
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Hi Tim! At Walmart, your focus is Cloud Cost Management. How did you end up in that role, what was your journey?**
+--------------------------------------------------------------------------------------------------------------------
 
 *Over a decade ago, I began my journey with Walmart alongside David Blevins at Tomitribe. At that time, Ben Galbraith and Dion Almaer were spearheading the mobile and eCommerce efforts, and we were brought on board to tackle various build-related challenges. Given my prior experience, I was specifically tasked with assisting with Maven and Tomcat configuration.*
 
@@ -40,8 +40,8 @@ FinOps and Cloud Cost Management, what's it all about and how does it impact us 
 
 *Java and my experience with the Java community and open source are what brought me to this role, but these days my focus is entirely on Cloud cost, budget, and ideas for efficiency.*
 
-**What is Cloud Cost Management primarily focused on and why does it interest you?** {#h2-2-what-is-cloud-cost-management-primarily-focused-on-and-why-does-it-interest-you}
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**What is Cloud Cost Management primarily focused on and why does it interest you?**
+------------------------------------------------------------------------------------
 
 *If you are not familiar with the practice you might just think I'm running CPU utilization reports and telling people to scale down. There are teams that do this, but Cloud Cost Management (or FinOps) is really a combination of architecture strategy and encouraging teams to optimize cost.*
 > *"Cloud Cost Management (or FinOps) is really a combination of architecture strategy and encouraging teams to optimize cost."*
@@ -58,8 +58,8 @@ FinOps and Cloud Cost Management, what's it all about and how does it impact us 
 
 *There's some overlap with SRE and DevOps, but the biggest Cloud cost wins are often gained by collaborating with architects and helping them discover changes that would reduce cost by an order of magnitude. It's more about architecture and technology selection than it is about dialing systems up and down based on CPU.*
 
-What are some aspects of the role that have surprised you or areas you hadn't expected to encounter? {#h2-3-what-are-some-aspects-of-the-role-that-have-surprised-you-or-areas-you-hadn-t-expected-to-encounter}
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What are some aspects of the role that have surprised you or areas you hadn't expected to encounter?
+----------------------------------------------------------------------------------------------------
 
 *It isn't about Cloud cost reports as much as it is about relationships. When you need to sit down with teams and suggest improvements to an architecture or changes that might not be in their roadmap. You are going to get a lot of pushback. The most valuable tool in controlling Cloud cost is building the right relationships with the teams and departments you support.*
 > *"It isn't about Cloud cost reports as much as it is about relationships."*
@@ -69,15 +69,15 @@ What are some aspects of the role that have surprised you or areas you hadn't ex
 
 *So, everything in this area is relationships, and this is something I feel like my participation in the Java community and open source for the last few decades really gave me an advantage because of the time I spent watching really capable community leaders like Matt Raible, David Blevins, Tim Berglund, Matthew McCullough, Raju Gandhi, and yourself, Geertjan. I haven't been active in developer relations or open source lately, but when I look over at the Java community it's clear that the energy is still there. When I have to stand up in front of 10,000 of my colleagues to get them excited about cloud efficiency I'm trying to channel that same energy.*
 
-Is there overlap/synergy between what you do and the new FinOps movement? How do you see FinOps playing itself out? {#h2-4-is-there-overlap-synergy-between-what-you-do-and-the-new-finops-movement-how-do-you-see-finops-playing-itself-out}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Is there overlap/synergy between what you do and the new FinOps movement? How do you see FinOps playing itself out?
+-------------------------------------------------------------------------------------------------------------------
 
 *I'm active with the FinOps Foundation, and I see it as a chance for everyone to come together and define standards across different cloud providers for reporting on both cost and utilization. The energy of the organization reminds me of the energy in Apache back in 2001.*
 
 *One project I'm starting to participate in is the FOCUS project which is the FinOps Open Cost \& Utilization Standard. We're in the specification drafting phase. What we're doing right now is getting together multiple times a week to discuss a standard field set for cloud costs. Once this is formalized I see some potential for the community to start establishing open specifications for measuring utilization and cost.*
 
-Does Java have a role to play in FinOps and Cloud Cost Management? {#h2-5-does-java-have-a-role-to-play-in-finops-and-cloud-cost-management}
---------------------------------------------------------------------------------------------------------------------------------------------
+Does Java have a role to play in FinOps and Cloud Cost Management?
+------------------------------------------------------------------
 
 *Yes it does. I'm not giving away any secrets here, but I will say that Java is very much a part of some of the largest systems in the enterprise. When you are running something with 10,000 or 20,000 VMs during a high peak event it's so critical both from a resilience and a cost perspective that you have people that understand JVM internals.*
 
@@ -87,8 +87,8 @@ Does Java have a role to play in FinOps and Cloud Cost Management? {#h2-5-does-j
 
 *Back to my previous answer where I mentioned that the FinOps foundation is starting a common standard for cost and utilization data. As that starts to mature, what I'd also like to propose is that we develop more standards for how we assess workload utilization. When we're running workloads in the JVM there's a constant question of whether a workload is CPU-bound or Memory-bound? If it's a search index or a data-bound system like Cassandra, CPU isn't as important as IO or Memory. If it's a stateless application server running Tomcat, that's when CPU matters.*
 
-What trends do you see in this domain and hopes you have for the coming years? {#h2-6-what-trends-do-you-see-in-this-domain-and-hopes-you-have-for-the-coming-years}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What trends do you see in this domain and hopes you have for the coming years?
+------------------------------------------------------------------------------
 
 *As a community, it would be helpful if different organizations could come together to exchange ideas about how utilization is measured for different applications. Right now I think a lot of organizations are creating their own standards to measure utilization, and I'd like to see more collaboration in this space.*
 > *As a community, it would be helpful if different organizations could come together to exchange ideas about how utilization is measured for different applications.*

@@ -28,8 +28,8 @@ In this article, we'll explore why your development environment should closely r
 
 To demonstrate this, we've built a small Java application that simulates a real-world scenario where the application needs to retrieve movie details, including the title, full plot, and their semantic vector representation, by combining data across collections using a multi-stage aggregation pipeline. We'll use it to show how MongoDB Atlas tools can uncover problems that might go unnoticed, until they impact production.
 
-The setup: A realistic aggregation scenario {#h2-0-the-setup-a-realistic-aggregation-scenario}
-----------------------------------------------------------------------------------------------
+The setup: A realistic aggregation scenario
+-------------------------------------------
 
 Let's imagine your team is working on a new feature that queries movie data with some filtering and enrichment logic. The goal is to retrieve movie details, such as the title and full plot, and enrich them with vector embeddings stored in a related collection.
 
@@ -74,8 +74,8 @@ While this query works correctly, it's intentionally inefficient, designed to si
 
 One key detail is the use of a $regex filter on the fullplot field, a choice that can lead to slower performance in larger datasets. Although a more efficient solution would be to use [MongoDB Atlas Search](https://www.mongodb.com/products/platform/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=why_your_dev_environment_should_mirror_production&utm_term=ricardo.mello), we intentionally avoided it here. The goal is to highlight performance pitfalls that developers might face when relying on basic queries without deeper optimization.
 
-The application behind the test {#h2-1-the-application-behind-the-test}
------------------------------------------------------------------------
+The application behind the test
+-------------------------------
 
 To turn this into a more practical scenario, we created a small Java application with an HTTP endpoint /enriched-details that triggers a method called getMovies. This endpoint executes the same aggregation we discussed earlier, allowing us to simulate how a real application would interact with the database and measure how long the query takes to run.
 
@@ -144,8 +144,8 @@ This simple setup makes it easy to test different queries in a controlled way, i
 
 The full source code is available on [GitHub](https://github.com/mongodb-developer/mongodb-java-showcase).
 
-Testing on M0: The hidden risk {#h2-2-testing-on-m0-the-hidden-risk}
---------------------------------------------------------------------
+Testing on M0: The hidden risk
+------------------------------
 
 When tested against an M0 cluster, the application behaves normally. The response returns without errors, latency is acceptable, and from the app's perspective, everything looks fine.
 
@@ -172,8 +172,8 @@ While there's no magic number, testing on a nearly empty database won't reveal m
 
 M0 clusters, with their 512MB cap, are perfect to get started. But, once your app is doing real work, you'll need more space and more visibility to catch what actually matters.
 
-Taking it to production: Same query, different outcome {#h2-3-taking-it-to-production-same-query-different-outcome}
--------------------------------------------------------------------------------------------------------------------
+Taking it to production: Same query, different outcome
+------------------------------------------------------
 
 Let's continue our scenario by imagining that the application has now been deployed to production. To simulate this environment more accurately, where the dataset is significantly larger and where most applications typically run on more powerful clusters, the application was moved to an M10 cluster.
 
@@ -183,8 +183,8 @@ The exact same endpoints were executed, but this time, performance issues quickl
 
 What could be causing this? One of the first clues is the significant difference in data volume. With over 520,000 documents, the M10 cluster is processing far more data than the M0 environment, which naturally increases the query's cost.
 
-Real-time metrics: Detecting the bottleneck {#h2-4-real-time-metrics-detecting-the-bottleneck}
-----------------------------------------------------------------------------------------------
+Real-time metrics: Detecting the bottleneck
+-------------------------------------------
 
 To better understand the system's behavior, the /movies/enriched-details endpoint was executed again, but this time, with MongoDB Atlas's[Real-Time Performance](https://www.mongodb.com/docs/atlas/real-time-performance-panel/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=why_your_dev_environment_should_mirror_production&utm_term=ricardo.mello) panel open. That's when a red flag appeared: CPU usage spiked to 100% during the request.
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdw4TLmNXlUjXjCmX7Fi6n0Qt3PZVZkVMzma2TrIKnfuYpM1XCtTtLJl0AdwQ82Z6tVBlcZv_fEhVn6aVblC_dgnkbGNvHlKCip1w1VOCxeKdzGWMEKmF2dzFJ_2DOSdSMQzaH3?key=PBvB2TCVxbZqZz48uwpcQg)
@@ -193,8 +193,8 @@ To better understand the system's behavior, the /movies/enriched-details endpoin
 
 On the bottom-right, we also see the slowest operations pointing to the movies collection, a strong indication that something in our aggregation was overloading the system. However, this alone doesn't explain exactly what caused the spike.
 
-Query insights: The detective tool {#h2-5-query-insights-the-detective-tool}
-----------------------------------------------------------------------------
+Query insights: The detective tool
+----------------------------------
 
 Following the clues, the next logical step is to open [Query Insights](https://www.mongodb.com/blog/post/elevating-database-performance-introducing-query-insights-mongodb-atlas%20/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=why_your_dev_environment_should_mirror_production&utm_term=ricardo.mello), a tool that helps investigate performance issues in more detail. During the same time window, we can access the **Query Profiler** tab to view which operations took the longest to execute. There, we can often identify the query responsible for the high resource usage.
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdmFSw89x4qIEwTxmdBEdpj8T8YZz1DHHAZQ-kSbQhz96bcn90gi0OXb_19hViPCz08bZuU_rO8SUyzGfCvq4986M5w9mDyhKISC__x-Fdpgcu7Fa9m5_Ve6GQpir7G6Fcf52R7gg?key=PBvB2TCVxbZqZz48uwpcQg)
@@ -213,8 +213,8 @@ This sudden escalation confirms that the query began consuming significantly mor
 
 With this information in hand, we can move toward a proper optimization solution or even make code adjustments to prevent the issue.
 
-Don't guess, let Performance Advisor show the way {#h2-6-don-t-guess-let-performance-advisor-show-the-way}
-----------------------------------------------------------------------------------------------------------
+Don't guess, let Performance Advisor show the way
+-------------------------------------------------
 
 Continuing our analysis, we have the /by-title-year endpoint, which returns movies filtered by title and year. Once the application is live in production, this endpoint starts receiving several requests to look up specific movies. That's when we notice the query isn't optimized, and we might not even know exactly how to improve it.
 
@@ -231,21 +231,21 @@ Atlas is suggesting the creation of the { title: 1, year: 1 } index on the movie
 
 The query is quite simple, and the need for an index might be easy to spot manually. But in more complex scenarios, the Performance Advisor becomes a powerful ally during development.
 
-Resilience under pressure: Testing primary failover {#h2-7-resilience-under-pressure-testing-primary-failover}
---------------------------------------------------------------------------------------------------------------
+Resilience under pressure: Testing primary failover
+---------------------------------------------------
 
 A cluster configured in MongoDB Atlas operates as a replica set with three nodes. By default, there are two secondary nodes and one primary node, as shown in the image below:
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd3vk7tQ-oCw-eD57JSOJc_DY65JoyxYFQEO5jZd5Y6MsXFnSiURlBc833kgZSesoXpjsXQVo5DWpEmEZtLBdtNbkeTU-3kykL4pSC3OIWGNUKy_RbsI1BApcNZyxdy99JrNNCV?key=PBvB2TCVxbZqZz48uwpcQg)
 
 *MongoDB replica set*
 
-### Replication {#h3-8-replication}
+### Replication
 
 The primary node is responsible for handling all write operations. After each write, the data is automatically replicated to the secondaries, which may be deployed across different geographic regions.  
 
 This setup is especially valuable in scenarios involving backup and regional failures. Imagine, for instance, that the primary node is hosted in the São Paulo region, and that region becomes unavailable. In that case, the two secondary nodes in other regions still maintain up-to-date copies of the data.
 
-### Failover scenario {#h3-9-failover-scenario}
+### Failover scenario
 
 But what happens if the primary node fails? MongoDB will automatically initiate an election process among the secondaries to choose a new primary. Once elected, that node takes over all write operations. And the old primary? Once it recovers, it re-joins the replica set as a secondary node.
 
@@ -253,7 +253,7 @@ Although MongoDB handles this entire process automatically, it's equally importa
 
 The idea behind this feature is to force the current primary node to step down, triggering an election where a new primary is chosen. This simulates the failure of a node, helping you validate how well your application handles such an event.
 
-### Simulating application load {#h3-10-simulating-application-load}
+### Simulating application load
 
 To ensure the application can handle a primary switch without interruptions, all we need is a simple method that performs both write and read operations to the database. These operations should continue running seamlessly, even during a primary failover. Here is the code:
 
@@ -284,7 +284,7 @@ while (true) {
 
 This loop runs continuously, inserting and reading documents until the application is manually stopped. It's just a temporary setup designed for experimentation, to confirm that the application continues writing and reading data during the failover process, not production-ready, but enough to validate behavior during failover.
 
-### Triggering the test in Atlas {#h3-11-triggering-the-test-in-atlas}
+### Triggering the test in Atlas
 
 While the loop is running, open your MongoDB Atlas dashboard. Find the cluster you want to test, click the ⋮ (three dots) menu, and select **Test Resilience**. This will initiate the failover process and let you observe how your application behaves in real time.
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdP0ScEHyncW7h8ep-P8ZCQOXNbEV3X09F5-lmce3wHPGwpGTJMW7yPDl5bA-hRkcuYusLFQfYwsDVxoJ6Ano81ebrapVQe2mVbcIkxzFLN7qLHt4KFPUkvMN3kGkRfRNUxD0V32Q?key=PBvB2TCVxbZqZz48uwpcQg)
@@ -308,8 +308,8 @@ If you want to go one step further, implement basic error handling around your M
 
 These kinds of tests are essential to ensure that the application continues to operate as expected.
 
-Ready for production? {#h2-12-ready-for-production}
----------------------------------------------------
+Ready for production?
+---------------------
 
 This experiment highlights the importance of simulating real-world conditions during development. Tools like Real-Time Performance Panel, Query Profiler, and Performance Advisor aren't just nice to have. They're essential for building with confidence.
 

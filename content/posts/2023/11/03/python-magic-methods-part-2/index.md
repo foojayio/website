@@ -22,16 +22,16 @@ frozen: false
 
 Let's continue our exploration of Python's magic methods in this second part of the series. This part will focus on numbers and containers, *i.e.* , collections. You can read the first part [here](https://foojay.io/today/python-magic-methods-part-1/).
 
-Container-related methods {#h2-0-container-related-methods}
------------------------------------------------------------
+Container-related methods
+-------------------------
 
 Python provides the usual containers, *e.g.*, lists, sets, and dictionaries. You can use the following methods when you want to implement your own.
 
-### Common methods {#h3-1-common-methods}
+### Common methods
 
 Containers have a size. Python defines two methods to implement to return the number of items in a container: `object.__len__(self)` for the exact size and `object.__length_hint__(self)` for an approximation. You should use the latter when getting the exact size is computationally expensive.
 
-### Item-related methods {#h3-2-item-related-methods}
+### Item-related methods
 
 Containers contain objects. Some containers offer index-based access, *e.g.* , `list(1)`, while others offer key-based access, *e.g.* , `dict('mykey')`. In both cases, here are the methods to implement:
 
@@ -105,12 +105,12 @@ print('foo' in container)                              #9
 8. Print `bar: bar` since the `foo` key has been deleted
 9. Implicitly calls the `__contains__()` method
 
-Number-related methods {#h2-3-number-related-methods}
------------------------------------------------------
+Number-related methods
+----------------------
 
 Just as we can emulate containers, we can emulate numbers as well.
 
-### Arithmetic methods {#h3-4-arithmetic-methods}
+### Arithmetic methods
 
 Arithmetic methods abound; it's easier to summarize them in a table:
 
@@ -240,7 +240,7 @@ stocklevel111 + stocklevel121                          #9
 8. Print `StockLevel(warehouse=Warehouse(id=1),product=Product(id=1),quantity=3)`
 9. Raise an exception as warehouses are different, though products are the same
 
-### Conversion methods {#h3-5-conversion-methods}
+### Conversion methods
 
 Conversion methods allow changing an instance to a numeric type, *i.e.* , `int`, `float`, or `complex`.
 
@@ -274,7 +274,7 @@ print(what)                                            #3
 2. Coerce `foo` into an `int`. We didn't implement any conversion method; Python falls back to `index()`
 3. Print `b`
 
-### Other methods {#h3-6-other-methods}
+### Other methods
 
 Finally, Python delegates to a magic method when your code calls a specific number-related function.
 
@@ -285,8 +285,8 @@ Finally, Python delegates to a magic method when your code calls a specific numb
 | `object.__floor__(self)`            | `floor()`         |
 | `object.__ceil__(self)`             | `ceil()`          |
 
-Context managers' methods {#h2-7-context-managers-methods}
-----------------------------------------------------------
+Context managers' methods
+-------------------------
 
 Python's context managers allow fine-grained control over resources that must be acquired and released. It works with the `with` keyword. For example, here's how you open a file to write to:
 
@@ -339,8 +339,8 @@ with Connection() as connection:
 ```
 
 
-Callable objects {#h2-8-callable-objects}
------------------------------------------
+Callable objects
+----------------
 
 I was first exposed to callable objects in Kotlin. A callable object looks like a function but is an object:
 
@@ -360,8 +360,8 @@ class Hello:
 ```
 
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 The post concludes our 2-part series on Python "magic" methods. I didn't mention some of them, though, as they are so many. However, they cover the majority of them.
 

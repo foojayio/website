@@ -23,8 +23,8 @@ frozen: false
 
 ![We Need Your Help image](Screenshot-2024-08-29-at-13.07.44-700x441.png)
 
-What is the 12 factor app methdology? {#h2-0-what-is-the-12-factor-app-methdology}
-----------------------------------------------------------------------------------
+What is the 12 factor app methdology?
+-------------------------------------
 
 Originally created back in 2012, the [12-factor app methodology](https://12factor.net/ "12-factor app methodology") was designed to provide a set of guidelines for helping developers and organizations to design and build cloud-native applications. This methodology was defined by the developers at Heroku, but has been adopted and even in some cases extended by the community since then.
 
@@ -33,8 +33,8 @@ If you'd like to learn more about the 12 factors and how to achieve them using O
 
 ![Screenshot of 12 Factor website.](Screenshot-2024-08-29-at-13.13.20-611x510.png)
 
-Why update them? {#h2-1-why-update-them}
-----------------------------------------
+Why update them?
+----------------
 
 Although these factors have been a fantastic resource and guide for developers looking to create effective cloud-native applications (in many diferent langauges and platforms), the cloud-native landscape and our application requirements have changed significantly over the last decade. So, to ensure this methodology remains a useful, effective tool/guide to use, we need to ensure it is best suited to the needs, requirements and expectations of modern cloud-native development.
 
@@ -44,8 +44,8 @@ While the folks at Heroku originally wrote Twelve-Factor on their own, it's now 
 
 **So, let's do this together, if you're interested in getting involved, you can either email to join our Google group ([\[email protected\]](/cdn-cgi/l/email-protection)) or tell us about your ideas and perspectives through a blog and tag #12factor (X / LinkedIn) or @heroku when you publish it. We'd love to hear your ideas!**
 
-Find out more: {#h2-2-find-out-more}
-------------------------------------
+Find out more:
+--------------
 
 If you'd like to find out more about this, check out the announcement blog posted by Heroku here:  
 <https://blog.heroku.com/updating-twelve-factor-call-for-participation>

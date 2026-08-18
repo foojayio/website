@@ -21,7 +21,7 @@ frozen: false
 
 A couple of weeks ago, JavaFX version 15 was released.
 
-### Highlights {#h3-0-highlights}
+### Highlights
 
 These are some of the highlights we've selected for you:
 
@@ -29,7 +29,7 @@ These are some of the highlights we've selected for you:
 * Support for e-paper displays on i.MX6 devices was added,
 * FX scripting support was enhanced.
 
-### Enhancements {#h3-1-enhancements}
+### Enhancements
 
 These are some of the improvements that were implemented in JavaFX 15:
 
@@ -37,7 +37,7 @@ These are some of the improvements that were implemented in JavaFX 15:
 * Adjusted font size in JavaFX apps with enabled Monocle on Raspberry Pi,
 * Capped the refresh rate on iOS (to a maximum of 30 Hz).
 
-### Code Cleanup {#h3-2-code-cleanup}
+### Code Cleanup
 
 With every new release, a code cleanup is done, for instance:
 
@@ -45,7 +45,7 @@ With every new release, a code cleanup is done, for instance:
 * The deprecated finalize() methods from JavaFX property objects were removed,
 * Some unnecessary logging, e.g. for pinch gestures on iOS, is now skipped.
 
-### Bug Fix {#h3-3-bug-fix}
+### Bug Fix
 
 In the bug fix department, you'll find, among others:
 
@@ -54,7 +54,7 @@ In the bug fix department, you'll find, among others:
 * A fix for memory leaks, e.g. in the ProgressIndicator class, in the ToggleButton.setToggleGroup() method, and in some other places.
 * Better code hygiene to avoid exceptions such as an IndexOutOfBoundsException when requesting focus on an empty bar, a StringOutOfBoundsException when adding a ChangeListener to TextField.selectedTextProperty(), possible NullPointerExceptions in TabPaneSkin.perfromDrag(), in the MenuButtonSkinBase change listener, and while entering empty submenu with "arrow right".
 
-### Dependency Upgrades {#h3-4-dependency-upgrades}
+### Dependency Upgrades
 
 Finally, these are some of the dependency upgrades in JavaFX 15:
 
@@ -63,7 +63,7 @@ Finally, these are some of the dependency upgrades in JavaFX 15:
 * Upgraded WebKit to version 609.1,
 * Upgraded libxml2 to version 2.9.10
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 A more comprehensive list of all the changes in JavaFX 15 can be found on Github:
 

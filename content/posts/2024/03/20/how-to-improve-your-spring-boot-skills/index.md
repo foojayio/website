@@ -28,11 +28,11 @@ I want to make sure I'm unlocking the full potential of Spring. The other day, w
 
 So I started thinking to myself, how would Spring Pros approach this? How much time do they invest in exploring the framework's features, and where do they seek this information? After researching Reddit and other platforms, talking to peers, and relying on intuition, I think I've figured out a few things that would be cool to share with fellow Java devs. And I decided to write up this blog and share my experience.
 
-Here are 9 ways to improve your Spring Boot skills: {#h2-0-here-are-9-ways-to-improve-your-spring-boot-skills}
---------------------------------------------------------------------------------------------------------------
+Here are 9 ways to improve your Spring Boot skills:
+---------------------------------------------------
 
-1. Externalize your configuration: {#h2-1-1-externalize-your-configuration}
----------------------------------------------------------------------------
+1. Externalize your configuration:
+----------------------------------
 
 Another way to utilize Spring Boot to its full potential is to try as much as possible to externalize your configuration instead of hard coding them. Externalizing your configuration will make your application more flexible and easier to manage.
 
@@ -109,8 +109,8 @@ public class DemoService {
 ```
 
 
-2. You need to keep your controllers lean {#h2-2-2-you-need-to-keep-your-controllers-lean}
-------------------------------------------------------------------------------------------
+2. You need to keep your controllers lean
+-----------------------------------------
 
 Another way to utilize Spring Boot to its full potential is to ensure that you keep your controllers lean. Keeping your controllers lean will help you avoid practices that will lead to the 'Fat Controller' anti-pattern.
 
@@ -130,8 +130,8 @@ To avoid the 'Fat Controller' anti-pattern, adhere to the following principles:
 * Encapsulated: The HTTP layer of your application should be handled by controllers, this should not be handled by the service layer.  
   Use-case-centric: make sure your controllers are built around use cases or the business domain.
 
-3. Handle exception globally {#h2-3-3-handle-exception-globally}
-----------------------------------------------------------------
+3. Handle exception globally
+----------------------------
 
 To use Spring Boot to the fullest, you'll need to learn how to handle exceptions globally and this is important because:
 
@@ -187,8 +187,8 @@ public class UserService {
 
 Using @ControllerAdvice or @RestControllerAdvice in your Spring Boot application allows you to centralize exception handling and other configurations across multiple controllers in a Spring Boot application.
 
-4. Make use of Lazy Initialization {#h2-4-4-make-use-of-lazy-initialization}
-----------------------------------------------------------------------------
+4. Make use of Lazy Initialization
+----------------------------------
 
 The SpringApplication allows you as a developer to initialize your spring boot application lazily. When lazy initialization is enabled, beans get created as they are needed rather than during application startup. Enabling lazy initialization reduces the time that it takes your application to start.
 
@@ -204,8 +204,8 @@ Lazy initialization can be enabled programmatically using:
 * the setLazyInitialization method on SpringApplication.
 * the spring.main.lazy-initialization property
 
-5. Make good use of Starter POMs {#h2-5-5-make-good-use-of-starter-poms}
-------------------------------------------------------------------------
+5. Make good use of Starter POMs
+--------------------------------
 
 Just as AutoConfiguration takes away the pain of having to configure common functionalities, Starter POMs removes the pain of looking for and configuring common dependencies in your project.
 
@@ -219,8 +219,8 @@ The spring-boot-starter-data-jpa is a starter for using Spring Data JPA. It incl
 
 So instead of searching for and adding all these dependencies and worrying about their compatible version, you just need to add one Starter POM --- spring-boot-starter-data-jpa
 
-6. Make use of Spring Boot CLI {#h2-6-6-make-use-of-spring-boot-cli}
---------------------------------------------------------------------
+6. Make use of Spring Boot CLI
+------------------------------
 
 The Spring Boot CLI is a command line tool provided by the Spring Boot team. This tool allows you to create Spring Boot web applications. Obviously, you'll need to install it in order to use it, here is how you install it.
 
@@ -231,8 +231,8 @@ The Spring Boot CLI is a command line tool provided by the Spring Boot team. Thi
 \`\> scoop bucket add extras
 > scoop install spring boot
 
-7. Master your build tool of preference {#h2-7-7-master-your-build-tool-of-preference}
---------------------------------------------------------------------------------------
+7. Master your build tool of preference
+---------------------------------------
 
 One way to use Spring Boot to its fullest is to master the build tool of your preference. If you prefer the Maven or Gradle build tool, you have to master it, know its downsides and equally know how to mitigate the downside of your build tool of preference.
 
@@ -240,8 +240,8 @@ One common complaint of the Maven build tool is that is slow and the best way to
 
 One common downside of the Gradle build tool is that the methods names are getting changed all the time, so the only way to mitigate this is to keep yourself abreast of the new features and deprecated features that comes with every new release of Gradle.
 
-8. Take Observability Seriously {#h2-8-8-take-observability-seriously}
-----------------------------------------------------------------------
+8. Take Observability Seriously
+-------------------------------
 
 [Observability](https://foojay.io/today/effective-coding-with-java-observability/ "Observability") is basically the process of measuring the internal state of your application using its external outputs such as logs, metrics and traces.
 
@@ -296,7 +296,7 @@ management:
 ```
 
 
-### Some interesting Actuator Endpoints {#h3-9-some-interesting-actuator-endpoints}
+### Some interesting Actuator Endpoints
 
 * /health: This endpoint shows you the basic health information of your application. It is one of the most commonly used endpoints and is exposed by default.  
   You can integrate this endpoint with external monitoring tools (e.g., Grafana, Prometheus) to get alerts when the health status of your application changes.
@@ -321,7 +321,7 @@ management:
 
 Spring Boot Actuator provides key insights into application internals via endpoints like /actuator/health, /actuator/metrics, and /actuator/env. These endpoints offer health status, detailed metrics, and environmental properties.
 
-### Metrics Collection with Micrometer {#h3-10-metrics-collection-with-micrometer}
+### Metrics Collection with Micrometer
 
 [Micrometer,](https://digma.ai/couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma/) a versatile metrics utility, supports various monitoring systems like Prometheus, Datadog, and more. It offers a range of instrument types and is a go-to solution for application metrics, providing flexibility in choosing monitoring tools.
 
@@ -337,8 +337,8 @@ OpenTelemetry provides end-to-end tracing and observability in microservice-base
 
 Continuous Feedback tools such as digma.ai can make the journey from no observability to full observability much easier, but more importantly, make sure that observability data becomes impactful -- instead of just pretty dashboards. Digma and similar tools can analyze what the observability data means about your code to detect common anti-patterns and issues and provide you with feedback as-you-code.
 
-9. Test, Test, Test {#h2-11-9-test-test-test}
----------------------------------------------
+9. Test, Test, Test
+-------------------
 
 With Spring Boot, writing unit tests and integration tests became less of a headache and more of a satisfying routine.
 
@@ -352,11 +352,11 @@ Spring Boot is an excellent choice for developing applications with robust [test
 * If you're building a distributed application, testing is non-negotiable.
 * One great thing that happened to Test-Driven Development was the use of Testcontainers. The development is fairly new and thankfully Spring Boot has an integration for Testcontainers.
 
-### What are TestContainers? {#h3-12-what-are-testcontainers}
+### What are TestContainers?
 
 Testcontainers is a powerful testing library that provides easy and lightweight throwaway instances of common databases for bootstrapping integration tests with real services wrapped in Docker containers. With Testcontainers, you can write and run tests talking to the same type of services or databases you use in production without mocks or in-memory services.
 
-### Benefits of TestContainers {#h3-13-benefits-of-testcontainers}
+### Benefits of TestContainers
 
 Reproducibility: Each test runs in a clean environment as this eliminates any issues that can be caused by stale or conflicting state.
 
@@ -364,8 +364,8 @@ Isolation: Testcontainers automatically create isolated environments for testing
 
 Ease of Use: There is a seamlessly integration between TestContainers with popular testing frameworks such as JUnit, Mockito, TestNG etc, hence, reducing the complexity of setting up separate test environmentsPredictability: What this means is that you can use the same environment (a container) to host your software regardless of if you are building, testing, or deploying your application in production.
 
-Conclusion: Lookahead Spring Boot 3.2 {#h2-14-conclusion-lookahead-spring-boot-3-2}
------------------------------------------------------------------------------------
+Conclusion: Lookahead Spring Boot 3.2
+-------------------------------------
 
 We're looking forward to:
 

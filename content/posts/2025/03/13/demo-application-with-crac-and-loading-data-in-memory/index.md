@@ -29,12 +29,12 @@ Improving the startup time of Java applications is only one use case for CRaC. B
 
 {{< youtube RW2K5qC9_v0 >}}
 
-Demo Application {#h2-0-demo-application}
------------------------------------------
+Demo Application
+----------------
 
 The [sources of the demo application can be found on GitHub](https://github.com/FDelporte/crac-example). They are based on another example from the CRaC repository at [github.com/CRaC/example-jetty](https://github.com/CRaC/example-jetty), and the PostgreSQL integration is based on [stackabuse.com/working-with-postgresql-in-java](https://stackabuse.com/working-with-postgresql-in-java/). The CSV files located in `src/main/resources/data` were downloaded from [datablist.com](https://www.datablist.com/learn/csv/download-sample-csv-files).
 
-### Goal of the Application {#h3-1-goal-of-the-application}
+### Goal of the Application
 
 This demo application shows a few use cases:
 
@@ -50,7 +50,7 @@ In the code, a few CRaC-specific implementations can be found:
 
 After starting the application, you can find all available endpoints on <http://localhost:8080>.
 
-### Running the Application {#h3-2-running-the-application}
+### Running the Application
 
 As I like to experiment with Java on the Raspberry Pi, and the full CRaC-functionality is only available on a Linux machine, I ran this application on a Raspberry Pi 4 with:
 
@@ -167,8 +167,8 @@ duration=0, description====================================================
 ```
 
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Of course, this time-consuming CSV-reading process is not a typical use case, but it's a nice illustration of how time-consuming processes can be stored in a checkpoint.
 

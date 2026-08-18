@@ -31,8 +31,8 @@ Pattern matching can be classified into two types.
 
 ![regex meme](https://i.imgur.com/M6xKDas.jpeg)
 
-Why Pattern Matching? {#h2-0-why-pattern-matching}
---------------------------------------------------
+Why Pattern Matching?
+---------------------
 
 Why do we need pattern matching? We don't, to be honest!
 
@@ -49,8 +49,8 @@ Pattern matching is not a requirement for a good programming language. Many of t
 
 Of course, these advantages depend on how a language implements pattern matching. So later, we will look at these from the perspective of Java.
 
-Pattern Matching Features {#h2-1-pattern-matching-features}
------------------------------------------------------------
+Pattern Matching Features
+-------------------------
 
 These are many languages that have great support for pattern matching. Rust and OCaml lead the pack here. On the JVM world, Scala also offers many of these pattern matching features. So when a language claims to have support for pattern matching, these are the features we expect:
 
@@ -67,8 +67,8 @@ These are many languages that have great support for pattern matching. Rust and 
 
 It's not an exhaustive list but more of a general expectation to fulfill the previous advantages we saw.
 
-Pattern Matching in Java {#h2-2-pattern-matching-in-java}
----------------------------------------------------------
+Pattern Matching in Java
+------------------------
 
 Unfortunately, Java is still a bit behind the curve when it comes to pattern matching.
 
@@ -82,7 +82,7 @@ But fortunately, we already have most of the building blocks required to achieve
 
 Now let us look at some examples of what is already possible to do as of Java 17
 
-### Pattern Matching for `instanceof` {#h3-3-pattern-matching-for-instanceof}
+### Pattern Matching for `instanceof`
 
 From Java 16 onwards, we can do pattern matching using the `instanceof` operator. It can be used on `if` statements, and we can use it as type guards on variable assignments and returns. This lets us use a variable without further casting after a type check. This is a new syntax added to the language.
 
@@ -160,7 +160,7 @@ static String formatter(Object o) {
 ```
 
 
-### Pattern Matching for switch {#h3-4-pattern-matching-for-switch}
+### Pattern Matching for switch
 
 But with the new preview feature in Java 17, we can do pattern matching for data types in switch cases as well. For Both, switch statements and switch expressions.
 
@@ -207,7 +207,7 @@ static String formatter(Object o) {
 ```
 
 
-### Type Guards \& pattern refinement {#h3-5-type-guards-pattern-refinement}
+### Type Guards \& pattern refinement
 
 As we saw earlier, Type guards are already supported for `instanceof` operator from Java 16 onwards, and Java 17 preview adds that for switch cases as well. This means we can rely on the type guards to refine the patterns further to have conditions, relations, and value checks.
 
@@ -234,7 +234,7 @@ static void test(Object o) {
 
 While it's not as flexible as in Rust or OCaml, it's a good start, in my opinion.
 
-### Pattern exhaustion with Sealed classes {#h3-6-pattern-exhaustion-with-sealed-classes}
+### Pattern exhaustion with Sealed classes
 
 We need to understand another new feature in Java 17, Sealed classes, to understand pattern exhaustion.
 
@@ -324,7 +324,7 @@ Shape rotate(Shape shape, double angle) {
 ```
 
 
-### Partial patterns and destructing {#h3-7-partial-patterns-and-destructing}
+### Partial patterns and destructing
 
 There is a candidate feature to add preview for destructing/deconstruction syntax for the `instanceof` operator, so logically at some point, that should extend to the switch syntax as well. There are also talks about improving the feature further to add support for primitives in switch case patterns and to declare how it should be deconstructed at the class level so that normal classes can also be deconstructed.
 

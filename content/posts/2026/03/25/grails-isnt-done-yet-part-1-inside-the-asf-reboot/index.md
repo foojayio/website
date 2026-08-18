@@ -29,7 +29,7 @@ Grails has been moving into the Apache Software Foundation (ASF), modernising an
 
 If you have not looked at Grails recently, your mental model is likely several years out of date. And that, in many ways, is exactly the problem.
 
-### The technology we stop seeing {#h3-0-the-technology-we-stop-seeing}
+### The technology we stop seeing
 
 Software ecosystems rarely end with a bang; most of the time, they simply slip out of focus. Conference agendas move on, blog coverage thins out, and new frameworks capture the narrative. Eventually, we collectively "agree" that a technology is "basically done".
 
@@ -41,7 +41,7 @@ According to W3Techs, PHP powers roughly 71.8% of all websites whose server-side
 
 JavaScript, for all its conference-circuit dominance, accounts for under 6% on the server side. The technologies that quietly keep the internet running and the ones that dominate the narrative are often not the same technologies at all.
 
-### Why the Apache move matters {#h3-1-why-the-apache-move-matters}
+### Why the Apache move matters
 
 The transition of Grails into the ASF is not merely administrative tidying. Moving under the ASF umbrella is one of the clearest signals an open-source project can send about its long-term intent.
 
@@ -49,7 +49,7 @@ ASF provides a neutral home, predictable release discipline, and a contributor m
 
 For Grails, this matters because mature platforms live or die on trust signals. The ASF move changes the risk conversation for organisations evaluating whether Grails still has a place on their servers.
 
-### Twenty years of changing hands {#h3-2-twenty-years-of-changing-hands}
+### Twenty years of changing hands
 
 The context makes the move even more significant. Grails was primarily led by single organisations for most of its 20-year history: G2One from 2005 to 2008, then SpringSource through 2015, Object Computing through 2021, and the Grails Foundation/Unity Foundation through 2025.
 
@@ -57,7 +57,7 @@ Each transition introduced uncertainty about the project's direction and sustain
 
 The ASF model is designed to break that pattern, replacing single-organisation dependency with volunteer-driven governance, vendor neutrality, and the structured transparency of the Apache Way.
 
-### Eighteen months of migration {#h3-3-eighteen-months-of-migration}
+### Eighteen months of migration
 
 In October 2025, Grails officially graduated from incubation to become a Top-Level Project at the ASF, following a board vote in September.
 
@@ -65,7 +65,7 @@ That sounds like a single event. It wasn't. The migration was an 18-month proces
 
 What followed was a substantial modernisation effort: merging repositories into a mono-repo, overhauling the build system and dependency management, upgrading Maven coordinates, and issuing releases under ASF governance. The first ASF release (Milestone 4) shipped in June 2025, with the 7.0.0 General Availability release arriving in October.
 
-### One hundred repositories become nine {#h3-4-one-hundred-repositories-become-nine}
+### One hundred repositories become nine
 
 The scale of the repository consolidation tells its own story. Grails originally had around 100 Git repositories, of which 43 were slated for ASF migration. By the time the move was complete, those had been consolidated to 18, with only 9 still in active use.
 
@@ -77,7 +77,7 @@ Over 2,000 commits went into the grails-core mono-repo alone, and build times fo
 
 Read that again. Three weeks to thirty minutes.
 
-### Beyond the code: licensing and compliance {#h3-5-beyond-the-code-licensing-and-compliance}
+### Beyond the code: licensing and compliance
 
 The code was only part of it. The team also had to meet ASF security and licensing requirements. Reproducible, verifiable builds were implemented (requiring upstream contributions to dependencies including Apache Groovy).
 
@@ -85,13 +85,13 @@ Every source file was reviewed for licence headers, and 327 separate artefacts w
 
 Migrating the fully automated Gradle and GitHub Actions workflows proved to be a novel challenge in its own right; other Gradle-based projects at the ASF are now looking at the result as a reference implementation.
 
-### The modernisation you might have missed {#h3-6-the-modernisation-you-might-have-missed}
+### The modernisation you might have missed
 
 A significant amount of careful modernisation has been focused on keeping Grails aligned with the moving baseline of the JVM and the Spring ecosystem.
 
 This is not cosmetic: dependencies have been pulled forward, and compatibility with newer Java runtimes has been tightened.
 
-### What Grails 7 actually ships {#h3-7-what-grails-7-actually-ships}
+### What Grails 7 actually ships
 
 Grails 7.0.0 shipped in October 2025 as the first stable release under ASF stewardship. It brings major dependency upgrades including Java 17+ support (through to Java 25), Groovy 4, Spring Boot 3.5, Spring Framework 6.2, and Jakarta EE 10.
 
@@ -99,13 +99,13 @@ Alongside the platform alignment, the release introduced containerised browser t
 
 The grails-core mono-repo now produces over 325 published jar files across 109 Gradle projects, with local build times between two and ten minutes depending on caching and hardware.
 
-### Grails 8 and the release cadence {#h3-8-grails-8-and-the-release-cadence}
+### Grails 8 and the release cadence
 
 Grails 8 development started in late November 2025, tracking Spring Boot 4.0 which reached general availability at the end of that month.
 
 The project now follows Spring Boot's six-month release cadence, with 13 months of support per release. Giving teams predictable timelines to plan around.
 
-### The humans behind the reboot {#h3-9-the-humans-behind-the-reboot}
+### The humans behind the reboot
 
 Open-source projects do not evolve by inertia. They move forward because a relatively small number of people decide the work is worth doing.
 
@@ -161,7 +161,7 @@ To make that work more visible, I spoke with **James Fredley, the Apache Grails 
 
 
 
-### Where Grails realistically sits in 2026 {#h3-10-where-grails-realistically-sits-in-2026}
+### Where Grails realistically sits in 2026
 
 Grails is not trying to out-Spring Boot Spring Boot. Where it continues to make sense is in environments that value convention-heavy productivity and rapid delivery, particularly where there is already meaningful investment in the Groovy ecosystem.
 
@@ -171,7 +171,7 @@ The ASF graduation, the release of Grails 7 (supporting Java 17 through 25), and
 
 For teams evaluating new projects, the productivity argument deserves a fresh hearing. As Fredley puts it, Grails is extra developer-productivity layers on top of what 85--90% of the Java ecosystem already uses. That framing: not "legacy framework" but "productivity accelerator built on Spring Boot", is a different proposition than the one most people have filed away in their mental models.
 
-### The hard work that keeps software alive {#h3-11-the-hard-work-that-keeps-software-alive}
+### The hard work that keeps software alive
 
 Software rarely dies because of a single technical flaw; it fades because attention moves somewhere else.  
 

@@ -29,8 +29,8 @@ Command completion (..) is a new feature in IntelliJ IDEA that lets you discover
 
 {{< youtube waY6HAmyHOw >}}
 
-**Command completion extends regular completion** {#h2-0-command-completion-extends-regular-completion}
--------------------------------------------------------------------------------------------------------
+**Command completion extends regular completion**
+-------------------------------------------------
 
 Command completion is an extension of regular code completion - something every developer already uses. For example, when you have a variable, you can type a dot to show you completion options. It will show you API completion (all of the methods you can call on this variable), and postfix completion (templates you can apply to this variable). The list now also includes commands; all relevant commands for your current context. Code completion (a single dot) is now a universal entry point for all relevant actions.
 
@@ -40,20 +40,20 @@ To filter the list to show commands only, type two dots `..`. As the list can be
 By default, the commands are shown in a separate section of the list. If you prefer *Commands* to be part of the regular completion list, you can adjust this in the *Settings* . Use *Search Everywhere* (Shift Shift) and look for "command completion" to go straight to the relevant settings and uncheck the option *Show command completion as a separate group*.
 ![](https://maritvandijk.com/wp-content/uploads/2026/01/CommandCompletion_Settings_Group-1024x743.png) *Command Completion Settings: Show command completion as a separate group*
 
-**Fix errors and warnings** with command completion {#h2-1-fix-errors-and-warnings-with-command-completion}
------------------------------------------------------------------------------------------------------------
+**Fix errors and warnings** with command completion
+---------------------------------------------------
 
 You can use this new feature to fix errors and warnings in your code. If you write code that doesn't compile, IntelliJ IDEA will tell you. You can navigate to the error using *F2* and press *Alt+Enter* to show context actions. However, *Alt+Enter* gives you only a few options; it is designed to give you the most relevant fixes to your problem. That means it might not always include the action you want to perform. On the other hand, command completion (..) offers you all actions that are relevant in your current context. IntelliJ IDEA will give you a preview of what each command will do.
 *Fix errors and warnings*
 
-**Perform file- or class-level actions** {#h2-2-perform-file-or-class-level-actions}
-------------------------------------------------------------------------------------
+**Perform file- or class-level actions**
+----------------------------------------
 
 It is now possible to unlock this type of completion in places where it wasn't available before, like on a blank line. Typing a dot on a blank line now shows you file-level actions, like *Reformat Code* or *Optimize Imports* . For example, use *Optimize Imports* to remove an import statement that is no longer needed.
 *Perform file or class level actions*
 
-**Refactoring and code transformation** {#h2-3-refactoring-and-code-transformation}
------------------------------------------------------------------------------------
+**Refactoring and code transformation**
+---------------------------------------
 
 Command completion can also help you when refactoring or transforming your code. When writing code, you can use it to keep moving forward. For example, to create classes, methods and fields.
 *Keep moving forward and create classes, methods and fields*
@@ -63,8 +63,8 @@ You can use it to generate code for you, such as a `toString()` method.
 You can transform your code as you go, for example to make use of modern Java language features. For example, you can refactor a class into a record, using only command completion.
 *Transform code*
 
-Use command completion for n**avigation** {#h2-4-use-command-completion-for-navigation}
----------------------------------------------------------------------------------------
+Use command completion for n**avigation**
+-----------------------------------------
 
 You can use it for navigation. For example, we can navigate to the `String` class declaration. You'll notice that this file is read only! How will we use completion here? Don't worry, you can change your settings to be able to use command completion in read-only files!
 
@@ -73,16 +73,16 @@ Open the *Settings* for *Command Completion* , by using *Search Everywhere* (Shi
 
 If you want to rename your class, you can use a shortcut to do so, but you need to know this shortcut (*⇧F6* on macOS / *Shift+F6* on Windows/Linux). Now, you can use command completion instead. Go to the end of the class or method name you want to rename and type `..rename`.
 
-**Aliases** for several commands {#h2-5-aliases-for-several-commands}
----------------------------------------------------------------------
+**Aliases** for several commands
+--------------------------------
 
 In some cases, you don't even need to know the exact name of the command you're looking for, as some commands have aliases. For example, you can also use `..change name` instead of `..rename`.
 *Aliases*
 
 This makes features even more discoverable; you don't need to remember the exact name of the feature.
 
-**Complements existing features** {#h2-6-complements-existing-features}
------------------------------------------------------------------------
+**Complements existing features**
+---------------------------------
 
 You can still use existing [shortcuts](https://www.jetbrains.com/help/idea/mastering-keyboard-shortcuts.html), [postfix completion](https://www.jetbrains.com/help/idea/postfix-code-completion.html) and [live templates](https://www.jetbrains.com/help/idea/using-live-templates.html). Command completion is intended to complement existing features.
 
@@ -105,8 +105,8 @@ What if you want to add JavaDoc to your code? You could use *Alt+Enter* to Add J
 
 As you can see, using command completion is as easy as adding a dot, or two..
 
-**Conclusion** {#h2-7-conclusion}
----------------------------------
+**Conclusion**
+--------------
 
 Command completion extends regular completion - which you already use. It lets you discover and use IntelliJ IDEA features without having to remember shortcuts. This keeps you in the flow of coding; you can think about ***what*** you want to do, instead of ***how*** to do it.
 

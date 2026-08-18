@@ -35,8 +35,8 @@ Recently, my good friend Richard Fichtner advised using the `mvn dependency:anal
 
 While it was a great idea years ago, it's dangerous advice today. In this post, I'd like to explain what the plugin does and why you shouldn't use it but in the most straightforward projects.
 
-The `mvn dependency:analyze` command {#h2-0-the-mvn-dependency-analyze-command}
--------------------------------------------------------------------------------
+The `mvn dependency:analyze` command
+------------------------------------
 
 Maven uses a plugin architecture; in the above command, the plugin is [maven-dependency-plugin](https://github.com/apache/maven-dependency-plugin). A plugin hosts several related *goals* . Here, it's `analyze`.
 > Analyzes the dependencies of this project and determines which are: used and declared; used and undeclared; unused and declared. This goal is intended to be used standalone, thus it always executes the `test-compile` phase - use the` dependency:analyze-only` goal instead when participating in the build lifecycle.
@@ -56,8 +56,8 @@ Maven uses a plugin architecture; in the above command, the plugin is [maven-dep
 
 The warning clearly shows that it works at the *bytecode* level. In particular, it explicitly mentions that it doesn't consider source-level annotations.
 
-Spring Boot starters {#h2-1-spring-boot-starters}
--------------------------------------------------
+Spring Boot starters
+--------------------
 
 I described how to [design your own](https://blog.frankel.ch/designing-your-own-spring-boot-starter/1/) [Spring Boot starter](https://blog.frankel.ch/designing-your-own-spring-boot-starter/2/) a long time ago, and it didn't change a lot since then. If you're new to Spring Boot starters, here's a summary.
 
@@ -115,8 +115,8 @@ public class RestTemplateAutoConfiguration {
 
 Note that the class loader loads the `RestTemplateAutoConfiguration` class just fine, *regardless of whether the `RestTemplate` class is on the classpath or not* ! Spring leverages this mechanism to its fullest, as seen above. In effect, the resolution of classes configured in annotations is deferred until they are *explicitly* accessed.
 
-Bringing the `maven-dependency-analyzer` into the modern age {#h2-2-bringing-the-maven-dependency-analyzer-into-the-modern-age}
--------------------------------------------------------------------------------------------------------------------------------
+Bringing the `maven-dependency-analyzer` into the modern age
+------------------------------------------------------------
 
 Committers designed the analyzer in 2007: [here's](https://github.com/apache/maven-dependency-analyzer/tree/b448d95daba17db67bc071eab9a1dd2457b77cab) how it looked like then. Spring Boot started later, in 2010. For this reason, the analyzer didn't take deferred class loading in annotations. Note that this is still not the case; the project doesn't get a lot of love.
 
@@ -158,8 +158,8 @@ The plugin allows configuring another analyzer:
 
 We can create an overall analyzer that reuses the above but adds one specific to Spring Boot.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 The current state of the Maven analyzer doesn't offer any benefit to modern Spring Boot projects. The existing code is open to configuration and even extension. However, we would need to embed a lot of Spring Boot logic. For Quarkus and Micronaut projects, we would require dedicated code as well.
 

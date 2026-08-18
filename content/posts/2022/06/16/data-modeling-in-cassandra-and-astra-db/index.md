@@ -43,8 +43,8 @@ Data modeling can have a profound effect on data quality and data access. For da
 Our *methodology* defines how the data modeling process can be carried out in a well-organized and repeatable fashion. In particular, the Cassandra data modeling methodology is based on four objectives, four models, and two transitions; along with specific modeling, visualization, mapping, and optimization techniques and methods.{#48ff}
 ![](0_7aGP73Y0HgnSV_76.png) Figure 1: Cassandra data modeling methodology.
 
-**Four objectives** {#f110}
----------------------------
+**Four objectives**
+-------------------
 
 The Cassandra data modeling process, when discussed at a high level, can be distilled into these four key objectives:{#d3c1}
 
@@ -53,8 +53,8 @@ The Cassandra data modeling process, when discussed at a high level, can be dist
 3. **Apply the query-first approach:** Do you know how to design Cassandra tables to support specific queries? It is called a query-first or query-driven approach because designing table schemas depends on both data and queries.
 4. **Optimize and implement:** How do you verify that both database tables and application queries are efficient and scalable? For example, large partitions and queries that access many partitions may require additional optimizations.
 
-**Four models** {#b610}
------------------------
+**Four models**
+---------------
 
 The four models directly correspond to the four objectives and are meant to make the process more concrete, manageable, repeatable, documentable, collaborative, and shareable. They are:{#2291}
 
@@ -63,8 +63,8 @@ The four models directly correspond to the four objectives and are meant to make
 3. **Logical data model:** A Cassandra-specific data model featuring tables, materialized views, secondary indexes, user-defined types, and other database schema constructs. It is derived from a conceptual data model by organizing data into Cassandra-specific data structures based on data access patterns identified by an application workflow. This is where the query-first approach is applied. Logical data models can be conveniently captured and visualized using *Chebotko Diagrams* that can feature tables, materialized views, indexes, and so forth.
 4. **Physical data model** : A Cassandra-specific data model that is directly derived from a logical data model by analyzing and optimizing for performance. Physical data models can be conveniently captured and visualized using *Chebotko Diagrams* and implemented in Cassandra using CQL.
 
-**Two transitions** {#e14e}
----------------------------
+**Two transitions**
+-------------------
 
 To complete the picture, the methodology must define the transitions between the models:{#b756}
 

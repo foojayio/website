@@ -29,8 +29,8 @@ Yet there are three hidden gems of the Java Debugging (JDWP) agent that allow yo
 
 Before I tell you more about the specific options, I want to start with the basics of how to apply them.
 
-Option Application {#h2-0-option-application}
----------------------------------------------
+Option Application
+------------------
 
 When you debug remotely in your IDE (IntelliJ IDEA in my case), the "Debug Configurations" dialog tells you which options you should pass to your remote JVM:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/image.png)
@@ -41,8 +41,8 @@ All options only work correctly in the server mode (server=y) of the JDWP agent 
 
 I'm now showing you how the three hidden gems work:
 
-JCmd triggered debugging {#h2-1-jcmd-triggered-debugging}
----------------------------------------------------------
+JCmd triggered debugging
+------------------------
 
 There are often cases where the code that you want to debug is executed later in your program's run or after a specific issue appears. So don't waste time running the debugging session from the start of your program, but use the `onjcmd=y` option to tell the JDWP agent to wait with the debugging session till it is triggered via `jcmd`:
 
@@ -68,8 +68,8 @@ A similar feature [long existed](https://mail.openjdk.org/pipermail/serviceabili
 
 *Disclaimer: I'm part of this magnificent team, albeit not in 2019.*
 
-Exception triggered debugging {#h2-2-exception-triggered-debugging}
--------------------------------------------------------------------
+Exception triggered debugging
+-----------------------------
 
 Far older than `jcmd` triggered are exception-triggered debugging sessions. There are two types:
 
@@ -113,8 +113,8 @@ Debugging a specific exception has never been easier.
 
 *jdb and the JDWP on\* options aren't as widely used as graphical debuggers, so you might still find some bugs. I don't know whether the stack trace in the second-to-last screenshot is a bug. Feel free to comment if you know the answer.*
 
-How to discover these features {#h2-3-how-to-discover-these-features}
----------------------------------------------------------------------
+How to discover these features
+------------------------------
 
 You can either be like me and just drop into the JDK source and look into the [debugInit.c file](https://github.com/openjdk/jdk/blob/287b24322135b54641f013970c4545ce069c4350/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L1249), the [official documentation](https://docs.oracle.com/en/java/javase/21/docs/specs/jpda/conninv.html), or you use `help` option, which prints the following with JDK 21:
 
@@ -170,8 +170,8 @@ Warnings
 
 Of course, this only gives you a glance at the options, so reading the source code still revealed much of what I had before.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Hidden gems are everywhere in the Java ecosystem, even in widely used tools like debugging agents.
 

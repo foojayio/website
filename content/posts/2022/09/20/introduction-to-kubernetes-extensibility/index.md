@@ -24,8 +24,8 @@ Kubernetes offers a lot of benefits: an enormous ecosystem with plenty of actors
 
 However, the more I work with Kubernetes, the more I think its most significant asset is **extensibility**. If you need something that the platform doesn't provide by default, there's an option to develop it yourself and integrate it. In this post, I'd like to list such extension points.
 
-Kubernetes 101 {#h2-0-kubernetes-101}
--------------------------------------
+Kubernetes 101
+--------------
 
 A lot of explanations on Kubernetes focus on the architecture. I believe they go into too many details and miss the big picture. Here, I only want to highlight the basic concepts.
 
@@ -37,8 +37,8 @@ The idea behind making a generic tool is to follow Pareto's Law: solve 80% of th
 
 Kubernetes designers saw this issue as the most critical obstacle to widespread adoption. Hence, Kubernetes offers many extension points.
 
-Extensible model {#h2-1-extensible-model}
------------------------------------------
+Extensible model
+----------------
 
 In the section above, I mentioned scheduling a pod. A pod is one of the many objects available in Kubernetes out-of-the-box. Other objects include: deployments, jobs, services, etc.
 
@@ -110,8 +110,8 @@ kubectl get foo
 
 The above commands have updated the data model with a new `Foo` type and created a `Foo` object. But under the cover, we've only stored data in `etcd` via the Kubernetes API. Nothing will happen until we start a controller that watches for new objects and acts upon them. Note that the name for a controller that manages CRDs is *operator*.
 
-Extensible validation {#h2-2-extensible-validation}
----------------------------------------------------
+Extensible validation
+---------------------
 
 A common concern with a platform that can run third-party workloads is allowing only vetted ones. Some workloads may consume too many resources; others may be malicious.
 
@@ -140,8 +140,8 @@ They run in turn as per the following diagram:
 
 Each can solve the scenarios highlighted above.
 
-Extensible client capabilities {#h2-3-extensible-client-capabilities}
----------------------------------------------------------------------
+Extensible client capabilities
+------------------------------
 
 At its most basic level, the `kubectl` command line is a high-level abstraction over a REST client. You can verify it by setting the verbose option:
 
@@ -234,8 +234,8 @@ system:kube-scheduler                          system:kube-scheduler            
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we browsed through several extension points in Kubernetes: the data model, admission controllers, and client-side. It was a very brief introduction, both in width and depth. Yet, I hope that it gives a good entry point into further research.
 

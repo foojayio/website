@@ -42,8 +42,8 @@ git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemai
 ```
 
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this tutorial, you'll need:
 
@@ -62,8 +62,8 @@ docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 
 In this tutorial, we'll use aJava SE project---without any heavyweight frameworks---to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
 
-Step 1: Create the project structure {#h2-1-step-1-create-the-project-structure}
---------------------------------------------------------------------------------
+Step 1: Create the project structure
+------------------------------------
 
 The first step is generating the project using Maven. To make it easier, we have the Maven Archetype. Thus, generate the following command:
 
@@ -508,8 +508,8 @@ Feature: Manage hotel rooms
 ```
 
 
-Step 2: Create the test infrastructure {#h2-2-step-2-create-the-test-infrastructure}
-------------------------------------------------------------------------------------
+Step 2: Create the test infrastructure
+--------------------------------------
 
 As we will need to generate a MongoDB instance for the test, we will use a container and run the test on it. We will create a DatabaseContainer as a singlethon instance. At the src/test/java/org/soujava/demos/mongodb/config, make the class DatabaseContainer.
 
@@ -674,8 +674,8 @@ public class RoomDataTableMapper {
 ```
 
 
-Step 3: Generate our first scenario test {#h2-3-step-3-generate-our-first-scenario-test}
-----------------------------------------------------------------------------------------
+Step 3: Generate our first scenario test
+----------------------------------------
 
 The code infrastructure is ready, where we set the ObjectFactory using Weld, and the table mapper to convert the table into our entities. The next step is the test generation itself. As it's necessary to highlight in the BDD methodology, we start with the test. Then we start the implementation, but once the focus is more on showing the tool with MongoDB than the methodology itself, we finalize this tutorial with what should be the first step. We will create our last class in this tutorial: the HotelRoomSteps.
 
@@ -776,8 +776,8 @@ public class HotelRoomSteps {
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Behavior-driven development (BDD) encourages us to look beyond code and concentrate on a shared understanding among stakeholders. By integrating Jakarta Data, Eclipse JNoSQL, and Cucumber, we have learned how to articulate business expectations through executable scenarios. These scenarios are written in plain language and linked to actual database operations. This approach not only guarantees technical accuracy but also fosters alignment among developers, testers, and domain experts. Furthermore, it links more with another methodology that I enjoyed that is about[domain driven design](https://bpbonline.com/products/domain-driven-design-with-java), which I've written a new book about.
 

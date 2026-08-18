@@ -26,21 +26,21 @@ Dear fellow developer, welcome!
 
 The [$search](https://www.mongodb.com/docs/atlas/atlas-search/query-syntax/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim#std-label-search-agg-pipeline) stage, as one of the newest members of the [MongoDB aggregation pipeline](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim) family, has gotten native, convenient support added to various language drivers. Driver support helps developers build concise and readable code. This article delves into using the Atlas Search support built into the MongoDB Java driver, where we'll see how to use the driver, how to handle \`$search\` features that don't yet have native driver convenience methods or have been released after the driver was released, and a glimpse into Atlas Search relevancy scoring. Let's get started!
 
-New to search? {#h2-0-new-to-search}
-------------------------------------
+New to search?
+--------------
 
 Full-text search is a deceptively sophisticated set of concepts and technologies. From the user perspective, it's simple: good ol' \`?q=query\` on your web applications URL and relevant documents are returned, magically. There's a lot behind the classic magnifying glass search box, from analyzers, synonyms, fuzzy operators, and facets to autocomplete, relevancy tuning, and beyond. We know it's a lot to digest. Atlas Search works hard to make things easier and easier for developers, so rest assured you're in the most comfortable place to begin your journey into the joys and power of full-text search. We admittedly gloss over details here in this article, so that you get up and running with something immediately graspable and useful to you, fellow Java developers. By following along with the basic example provided here, you'll have the framework to experiment and learn more about details elided.
 
-Setting up our Atlas environment {#h2-1-setting-up-our-atlas-environment}
--------------------------------------------------------------------------
+Setting up our Atlas environment
+--------------------------------
 
 We need two things to get started, a database and data. We've got you covered with both. First, we'll start with logging into your Atlas account. If you don't already have an Atlas account, follow the steps for the Atlas UI in the ["Get Started with Atlas"](https://www.mongodb.com/docs/atlas/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim) tutorial.
 
-### Opening network access {#h3-2-opening-network-access}
+### Opening network access
 
 If you already had an Atlas account or perhaps like me, you skimmed the tutorial too quickly and skipped the step to [add your IP address to the list of trusted IP addresses](https://www.mongodb.com/docs/atlas/security/add-ip-address-to-list/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim), take care of that now. Atlas only allows access to the IP addresses and users that you have configured but is otherwise restricted.
 
-### Indexing sample data {#h3-3-indexing-sample-data}
+### Indexing sample data
 
 Now that you're logged into your Atlas account, add [the sample datasets to your environment](https://www.mongodb.com/docs/atlas/sample-data/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim). Specifically, we are using the [sample_mflix collection](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim#std-label-mflix-movies) here. Once you've added the sample data, turn Atlas Search on for that collection by navigating to the Search section in the Databases view, and clicking "Create Search Index."  
 ![Atlas Search index creation](Screenshot-2025-11-18-at-9.09.16-AM.png)
@@ -63,8 +63,8 @@ This is our first glimpse into the $search syntax. The handy "copy" (the top rig
 
 At this point, your environment is set up and your collection is Atlas search-able. Now it's time to do some coding!
 
-Click, click, click, ... code! {#h2-4-click-click-click-code}
--------------------------------------------------------------
+Click, click, click, ... code!
+------------------------------
 
 Let's first take a moment to reflect on and appreciate what's happened behind the scenes of our wizard clicks up to this point:
 
@@ -74,8 +74,8 @@ Let's first take a moment to reflect on and appreciate what's happened behind th
 
 Through the Atlas UI and other tools like [MongoDB Compass](https://www.mongodb.com/products/compass/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim), we are now able to query our movies collection in, of course, all the usual MongoDB ways, and also through a proven and performant full-text index with relevancy-ranked results. It's now up to us, fellow developers, to take it across the finish line and build the applications that allow and facilitate the most useful or interesting documents to percolate to the top. And in this case, we're on a mission to build Java code to search our Atlas Search index.
 
-Our coding project challenge {#h2-5-our-coding-project-challenge}
------------------------------------------------------------------
+Our coding project challenge
+----------------------------
 
 Let's answer this question from our movies data:
 
@@ -91,8 +91,8 @@ Let's suppose we have a UI that allows the user to select one or more genres to 
 
 Using the Atlas Search index we've already set up, we can now easily handle a variety of full text queries. We'll stick with this example throughout so you can compare and contrast doing standard [$match](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim) queries to doing sophisticated [$search](https://www.mongodb.com/docs/atlas/atlas-search/query-syntax/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim#mongodb-pipeline-pipe.-search) queries.
 
-Know the $search structure {#h2-6-know-the-search-structure}
-------------------------------------------------------------
+Know the $search structure
+--------------------------
 
 Ultimately, regardless of the coding language, environment, or driver that we use, a [BSON](https://www.mongodb.com/json-and-bson/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim) representation of our aggregation pipeline request is handled by the server. The Aggregation view in Atlas UI and very similarly in Compass, our useful MongoDB client-side UI for querying and analyzing MongoDB data, can help guide you through the syntax, with links directly to the pertinent [Atlas Search aggregation pipeline](https://www.mongodb.com/docs/atlas/atlas-search/query-syntax/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim) documentation.
 
@@ -114,8 +114,8 @@ As we adapt the three-stage aggregation pipeline to Java, we'll explain things i
 
 We spend the time here emphasizing this JSON-like structure because it will help us in our Java coding. It'll serve us well to also be able to work with this syntax in ad hoc tools like Compass in order to experiment with various combinations of options and stages to arrive at what serves our applications best, and be able to translate that aggregation pipeline to Java code. It's also the most commonly documented query language/syntax for MongoDB and Atlas Search; it's valuable to be savvy with it.
 
-Now back to your regularly scheduled Java {#h2-7-now-back-to-your-regularly-scheduled-java}
--------------------------------------------------------------------------------------------
+Now back to your regularly scheduled Java
+-----------------------------------------
 
 [Version 4.7 of the MongoDB Java driver](https://www.mongodb.com/community/forums/t/mongodb-java-driver-4-7-0-released/175796/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim) was released in July of 2022, adding convenience methods for the Atlas $search stage, while Atlas Search was made generally available [two years prior](https://www.mongodb.com/community/forums/t/atlas-search-is-now-ga/5161/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim). In that time, Java developers weren't out of luck, as direct BSON Document API calls to construct a $search stage work fine. Code examples in that time frame used \`new Document("$search",...)\`. This article showcases a more comfortable way for us Java developers to use the $search stage, allowing clearly named and strongly typed parameters to guide you. Your IDE's method and parameter autocompletion will be a time-saver to more readable and reliable code.
 
@@ -151,8 +151,8 @@ Ideally, at this point, the code ran successfully, performing the search query t
 
 So there are four movies that match our criteria --- our initial mission has been accomplished.
 
-Java $search building {#h2-8-java-search-building}
---------------------------------------------------
+Java $search building
+---------------------
 
 Let's now go through our project and code, pointing out the important pieces you will be using in your own project. First, our build.gradle file specifies that our project depends on the MongoDB Java driver, down to the specific version of the driver. There's also a convenient \`application\` plugin so that we can use the \`run\` target as we just did.
 
@@ -210,8 +210,8 @@ Last but not least is the primary (scoring!) \`phrase\` search operator clause t
 |---------------------------------------------------------------------------------------------------------------|
 | Document searchQuery = new Document("phrase", new Document("query", "keanu reeves") .append("path", "cast")); |
 
-And the results are... {#h2-9-and-the-results-are}
---------------------------------------------------
+And the results are...
+----------------------
 
 So now we've built the aggregation pipeline. To show the results, we simply iterate through \`aggregationResults\`:
 
@@ -224,8 +224,8 @@ You're now an Atlas Search-savvy Java developer --- well done! You're well on yo
 
 This is only the beginning. And it is important, as we refine our application to meet our users' demanding relevancy needs, to continue the Atlas Search learning journey.
 
-For further information {#h2-10-for-further-information}
---------------------------------------------------------
+For further information
+-----------------------
 
 We finish our code with some insightful diagnostic output. An aggregation pipeline execution can be [\*explain\*ed](https://www.mongodb.com/docs/atlas/atlas-search/explain/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim), dumping details of execution plans and performance timings. In addition, the Atlas Search process, \`mongot\`, provides details of \`$search\` stage interpretation and statistics.
 
@@ -234,8 +234,8 @@ We finish our code with some insightful diagnostic output. An aggregation pipeli
 
 We'll leave delving into those details as an exercise to the reader, noting that you can learn a lot about how queries are interpreted/analyzed by studying the explain() output.
 
-Bonus section: relevancy scoring {#h2-11-bonus-section-relevancy-scoring}
--------------------------------------------------------------------------
+Bonus section: relevancy scoring
+--------------------------------
 
 Search relevancy is a scientific art. Without getting into mathematical equations and detailed descriptions of information retrieval research, let's focus on the concrete scoring situation presented in our application here. The scoring component of our query is a phrase query of "keanu reeves" on the cast field. We do a \`phrase\` query rather than a \`text\` query so that we search for those two words contiguously, rather than "keanu OR reeves" ("keanu" is a rare term, of course, but there are many "reeves").
 
@@ -247,8 +247,8 @@ Don't worry if this section is a bit too much to take in right now. Stay tuned -
 
 We could quick fix the ordering to at least not bias based on the absence of hyphenated actor names. Moving the queryClause into the \`filters\` section, rather than the \`must\` section, such that there would be no scoring clauses, only filtering ones, will leave all documents of equal ranking.
 
-Searching for more? {#h2-12-searching-for-more}
------------------------------------------------
+Searching for more?
+-------------------
 
 There are many useful Atlas Search resources available, several linked inline above; we encourage you to click through those to delve deeper. These quick three steps will have you up and searching quickly:
 

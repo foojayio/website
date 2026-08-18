@@ -37,8 +37,8 @@ We created `bld` because we're not really interested in build tools. We use them
 * standard collection of Java-centric tasks for common operations
 * `bld` is part of RIFE2, if you have the RIFE2 jar, you have the build system
 
-Where does bld fit? {#h2-0-where-does-bld-fit}
-----------------------------------------------
+Where does bld fit?
+-------------------
 
 From a very high level, build tools can be organized in a matrix:
 
@@ -55,8 +55,8 @@ Writing your build logic in the same language as your application (Java), signif
 
 `bld` lets your build logic get out of the way so that you can focus on writing applications.
 
-Designed for modern Java {#h2-1-designed-for-modern-java}
----------------------------------------------------------
+Designed for modern Java
+------------------------
 
 `bld` relies on Java 17 and leverages many of the features that this version of Java provides.
 
@@ -97,8 +97,8 @@ public class MyappBuild extends Project {
 ```
 
 
-Creating a new project {#h2-2-creating-a-new-project}
------------------------------------------------------
+Creating a new project
+----------------------
 
 After [installing `bld`](https://github.com/rife2/bld/wiki/Installation), you can create a new Java application with the package `com.example` and the name `myapp`, by typing the following:
 
@@ -133,14 +133,14 @@ These also work:
 ```
 
 
-Java and RIFE2 powered {#h2-3-java-and-rife2-powered}
------------------------------------------------------
+Java and RIFE2 powered
+----------------------
 
 `bld` project files benefit from all the power of Java and RIFE2.
 
 You can for instance extract logic out into classes with custom `bld` operations, or you can create specialized project classes that make it easy to apply common traits, or you can use the RIFE2 template engine to generate files during your build cycle, ... the possibilities are endless.
 
-Learn more {#h2-4-learn-more}
------------------------------
+Learn more
+----------
 
 You can learn more on the [RIFE2 `bld` wiki](https://github.com/rife2/bld/wiki), or by reaching out to us on [Discord](https://discord.gg/DZRYPtkb6J) or [Mastodon](https://uwyn.net/@gbevin).

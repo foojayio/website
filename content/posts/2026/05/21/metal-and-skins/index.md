@@ -26,8 +26,8 @@ frozen: false
 This post has a lot to cover. Before we get to any of it I want to take on the uncomfortable subject first: quality. Two incidents from the past two weeks deserve a public explanation, one was a bug that fits into our normal iteration loop and one was a serious mistake on my part. Both deserve the kind of explanation I would want if I were on the other side of the import.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
-How we think about quality {#h2-0-how-we-think-about-quality}
--------------------------------------------------------------
+How we think about quality
+--------------------------
 
 Codename One is a small open source company. We are not a 200-engineer platform team with a dedicated SRE rotation and a separate QA org. We move fast, fast enough that we ship meaningful new code every week, and we put a lot of effort into making sure that speed does not come at the cost of breaking your apps.
 
@@ -45,13 +45,13 @@ That is a meaningful amount of automated coverage and it catches a lot before co
 
 With that in mind, let's talk about the two specific incidents from the past two weeks.
 
-### Sticky headers were half baked, and that was by design {#h3-1-sticky-headers-were-half-baked-and-that-was-by-design}
+### Sticky headers were half baked, and that was by design
 
 Last week's post [introduced `StickyHeaderContainer`](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/#sticky-headers) with an animated transition between section headers. Within a couple of days the issue tracker had [#4849](https://github.com/codenameone/CodenameOne/issues/4849), the `NONE` and `FADE` transitions were not behaving correctly and the swap had visible jitter. We turned the fix around within hours of the report.
 
 That round trip, ship, hear from a real user, fix, is the deal we make with the community. Our pixel-diff harness is excellent at catching regressions in code that already exists. It is structurally bad at catching the first version of a brand new component because there is nothing yet to compare against. We could have sat on `StickyHeaderContainer` for another two weeks polishing it in private and we would have shipped a worse component, because we would not have had Thomas's eyes on it. Iterating in public, with a tight feedback loop, is how a team our size keeps moving.
 
-### The SIMD bug, which was my mistake {#h3-2-the-simd-bug-which-was-my-mistake}
+### The SIMD bug, which was my mistake
 
 [PR #4842](https://github.com/codenameone/CodenameOne/pull/4842) is a different story. The SIMD code on iOS uses `alloca` to put working buffers on the stack for speed. That is the right call for small buffers and the wrong call for large ones, past a certain size the stack request fails outright and the process crashes. The image API uses these buffers, and on large images the buffer crossed the threshold. Result: image API crash in production.
 
@@ -67,8 +67,8 @@ We are also actively brainstorming the next generation of crash protection insid
 
 With the quality conversation out of the way, the rest of this post is about the things that actually shipped.
 
-Metal is here {#h2-3-metal-is-here}
------------------------------------
+Metal is here
+-------------
 
 [PR #4799](https://github.com/codenameone/CodenameOne/pull/4799) is the largest single change we have landed in months: a complete Metal rendering backend for iOS. It sits next to the existing OpenGL ES 2 path, behind a single build hint, with its own CI job and its own pixel-diff goldens.
 
@@ -121,8 +121,8 @@ The Metal `Dialog` capture is also worth showing because the translucent surface
 
 <br />
 
-The end of the skin downloader {#h2-4-the-end-of-the-skin-downloader}
----------------------------------------------------------------------
+The end of the skin downloader
+------------------------------
 
 [PR #4758](https://github.com/codenameone/CodenameOne/pull/4758) ships the Skin Designer as a JavaScript bundle, embedded into the website at [/skindesigner/](https://www.codenameone.com/skindesigner/) the same way the Playground and Initializr are embedded. You can build a skin in the browser, save it, and use it in your simulator without installing anything.
 
@@ -137,7 +137,7 @@ To be clear about what is changing:
 
 The "no skin for X" problem is solved generically. If you are running a niche enterprise app on a less-common Android device, you no longer have to wait on us to produce a skin for it. Build it once, drop it into your team's shared assets, done.
 
-### How the wizard works {#h3-5-how-the-wizard-works}
+### How the wizard works
 
 The Skin Designer turns a device specification (resolution, PPI, fonts, safe-area insets, cutouts) into a `.skin` file that the JavaSE simulator can load. It runs in your browser. There is nothing to install. The wizard is intentionally opinionated. It ships with a curated device catalog, generates the device frame procedurally, and writes a skin layout that matches the `iPhoneTheme.res`, `iOS7Theme.res`, and `android_holo_light.res` themes shipped with Codename One.
 
@@ -195,7 +195,7 @@ Apple-iPhone-16-Pro.skin/
 
 The full developer-guide chapter at [Skin-Designer.asciidoc](https://github.com/codenameone/CodenameOne/blob/master/docs/developer-guide/Skin-Designer.asciidoc) walks through every stage with annotated screenshots and documents the `skin.properties` keys the wizard writes (`roundScreen`, `displayX/Y/Width/Height`, `safePortrait*`, `safeLandscape*`, `overrideNames`, system font families, PPI, and pixel ratio).
 
-### Eating our own dog food {#h3-6-eating-our-own-dog-food}
+### Eating our own dog food
 
 While we're talking about the Skin Designer, this is the right moment to point out something I think is genuinely worth highlighting. The [Initializr](https://www.codenameone.com/initializr/), the [Playground](https://www.codenameone.com/playground/), and the [Skin Designer](https://www.codenameone.com/skindesigner/) are all open source Codename One apps. They are written in Java using the same Codename One UI framework you use to build your iOS and Android apps, and they are deployed to the browser through our JavaScript port.
 
@@ -205,8 +205,8 @@ These three tools are the most direct demonstration we can give of what Codename
 
 The source for all three lives in the same [CodenameOne](https://github.com/codenameone/CodenameOne) repository the framework itself does. If you want to see how a non-trivial Codename One app is structured, those are three good places to start reading.
 
-iOS multi-line TextArea: Return as Done {#h2-7-ios-multi-line-textarea-return-as-done}
---------------------------------------------------------------------------------------
+iOS multi-line TextArea: Return as Done
+---------------------------------------
 
 [PR #4859](https://github.com/codenameone/CodenameOne/pull/4859), driven by issue [#4854](https://github.com/codenameone/CodenameOne/issues/4854), gives multi-line `TextArea` an opt-in flag that makes the iOS keyboard's Return key act as Done. It closes the editor and fires the Done listener instead of inserting a newline. This is the iOS Reminders-app behaviour: a growing, multi-line task-title field where Return finishes the entry.
 
@@ -221,8 +221,8 @@ ta.setDoneListener(e -> { /* Return / Done was tapped */ });
 
 While the flag is set, the keyboard's Return key is relabelled to **Done** (`UIReturnKeyDone`). Default behaviour is unchanged: the flag defaults to off, only takes effect on multi-line `TextArea`s, and only intercepts an exact `"\n"` replacement so pasted multi-line text is unaffected.
 
-Diagnostics for status-bar tap scroll-to-top {#h2-8-diagnostics-for-status-bar-tap-scroll-to-top}
--------------------------------------------------------------------------------------------------
+Diagnostics for status-bar tap scroll-to-top
+--------------------------------------------
 
 [PR #4868](https://github.com/codenameone/CodenameOne/pull/4868), driven by issue [#3589](https://github.com/codenameone/CodenameOne/issues/3589), adds three complementary diagnostics for the iOS status-bar tap path. We shipped a fix earlier ([#4857](https://github.com/codenameone/CodenameOne/pull/4857)) and the reporter still saw no scroll on device. Rather than another sweep in the dark, we built tools to make the path observable.
 
@@ -230,8 +230,8 @@ Diagnostics for status-bar tap scroll-to-top {#h2-8-diagnostics-for-status-bar-t
 * **Device-side properties.** `Display.getProperty("cn1.iosStatusBarTap.count")`, `cn1.iosStatusBarTap.lastEpochMillis`, `cn1.iosStatusBarTap.lastX/Y`, and `cn1.iosStatusBarTap.proxyInstalled` let you inspect the path on a real iPhone. Run your app on the device, tap the status bar, and read the property. That distinguishes "iOS never delivered the message" from "iOS delivered it but a CodenameOne component intercepted the tap".
 * **Regression coverage.** `StatusBarTapDiagnosticScreenshotTest` exercises the exact same code path through a 2x3 frame grid, with the visible counter rising and the scroll position alternating, so future regressions surface in CI.
 
-Simulator: Dark / Light mode toggle {#h2-9-simulator-dark-light-mode-toggle}
-----------------------------------------------------------------------------
+Simulator: Dark / Light mode toggle
+-----------------------------------
 
 [PR #4871](https://github.com/codenameone/CodenameOne/pull/4871) adds a **Dark / Light Mode** submenu under the simulator's **Simulate** menu with three options: Dark Mode, Light Mode, and Unsupported (the default).
 
@@ -239,27 +239,27 @@ Selecting an option flips `Display.isDarkMode()` (`Boolean.TRUE` / `Boolean.FALS
 
 Combined with the **Native Theme** menu we shipped two weeks ago, you can now sit on a single skin and flip between iOS Modern, Material 3, iOS 7, and Holo Light, in light, dark, and unsupported, in seconds. The everyday win is being able to verify your own theme looks right in dark mode without restarting the simulator.
 
-Heads-up: weekend backend maintenance {#h2-10-heads-up-weekend-backend-maintenance}
------------------------------------------------------------------------------------
+Heads-up: weekend backend maintenance
+-------------------------------------
 
 This weekend we will be doing some maintenance on our build backend servers. The work is mostly invisible from the outside but it touches enough of the infrastructure that you might see intermittent build issues during the window: slower-than-usual builds, the occasional retry, possibly a short period where new builds are queued.
 
 We are doing it because the underlying backend needs to move forward, and the cost of putting that work off keeps compounding. We will keep the disruption as short as we can. If you have a hard release deadline that lands this weekend, please plan around it. Otherwise the impact should be small and you can build through it normally.
 
-Warning: Android 16 will effectively disallow locking orientation {#h2-11-warning-android-16-will-effectively-disallow-locking-orientation}
--------------------------------------------------------------------------------------------------------------------------------------------
+Warning: Android 16 will effectively disallow locking orientation
+-----------------------------------------------------------------
 
 Thanks to **Durank** for flagging [#4879](https://github.com/codenameone/CodenameOne/issues/4879). The [Android 16 behavior changes](https://developer.android.com/about/versions/16/behavior-changes-16) include a meaningful change to how Android handles orientation, in short, on large-screen devices the platform will ignore an app's request to lock orientation. If your app calls `Display.lockOrientation(...)` or sets a fixed orientation in the Android manifest, that lock will be honoured on phones but effectively ignored on tablets and foldables once the device targets Android 16.
 
 There is not much we can do about this on the framework side. It is a platform-level decision and there is no public opt-out for general apps. The realistic path forward is to design layouts that work in both orientations, and to test your app against both portrait and landscape on a tablet before Android 16 reaches your users. We will keep watching for any opt-in path Google publishes, but for the moment please plan accordingly.
 
-Why the version jumped to 7.0.242 {#h2-12-why-the-version-jumped-to-7-0-242}
-----------------------------------------------------------------------------
+Why the version jumped to 7.0.242
+---------------------------------
 
 A small note on versioning: the current release is **7.0.242** , not 7.0.238 as you might expect from the cadence. The gap is real and worth explaining. We made a fix to the Maven archetype that brings over the features we added in the Codename One Initializr to projects created from the command line. The change itself is straightforward, but it interacted badly with our release build automation and we had to delete several releases along the way to get the pipeline back on its feet. The version numbers we burned in the process are the visible scar. The bright side is that command-line `mvn archetype:generate` now produces projects that line up with what the Initializr generates, which is what we wanted all along.
 
-Wrapping up {#h2-13-wrapping-up}
---------------------------------
+Wrapping up
+-----------
 
 We closed **24 issues** in the past week, a meaningful share of them direct beneficiaries of the Metal port. Old GL-only rasterisation diffs, font sizing on retina, polygon drawing artefacts, perspective transform issues, things that the Metal pipeline simply renders correctly out of the box. Migrating the rendering layer turned out to be the cleanest way to retire a long tail of small bugs at once. With the new Skin Designer landing in the same week, two long-running structural problems went from "we should fix this someday" to "this is fixed and shipping".
 

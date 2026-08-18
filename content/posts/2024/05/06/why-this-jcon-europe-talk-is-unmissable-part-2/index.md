@@ -24,7 +24,7 @@ frozen: false
  <img fetchpriority="high" decoding="async" width="1024" height="682" src="image.png" alt="" class="wp-image-110878" style="width:582px;height:auto">
 </figure>
 
-### Jakarta EE 11 - Performance and Developer Productivity - Ivar Grimstad {#h3-0-jakarta-ee-11-performance-and-developer-productivity-ivar-grimstad}
+### Jakarta EE 11 - Performance and Developer Productivity - Ivar Grimstad
 
 Thursday, 16 May 2024 9:00 am - 9:45 am - Cinema 7
 
@@ -34,15 +34,15 @@ What are the updates? Are there any new specifications introduced? What about re
 
 Come to this session to get all these questions and more answered to be prepared for Jakarta EE 11.
 
-Why your talk is unmissable? {#h2-1-why-your-talk-is-unmissable}
-----------------------------------------------------------------
+Why your talk is unmissable?
+----------------------------
 
 My talk titled "Jakarta EE 11 - Performance and Developer Productivity" will give you a full overview of what to expect from the upcoming Jakarta EE 11 release. By attending the talk, you will have the advantage of getting this knowledge first-hand before it reaches your code.
 
 This even applies to Spring developers. If you haven't noticed yet, a lot of the Jakarta EE technologies are exposed to Spring developers through the dependence Spring has on Jakarta EE. It will be there before you know it!
 
-[Get your free Foojay JCON tickets by clicking here!](https://bit.ly/3xv9yfT) {#h2-2-get-your-free-foojay-jcon-tickets-by-clicking-here}
-----------------------------------------------------------------------------------------------------------------------------------------
+[Get your free Foojay JCON tickets by clicking here!](https://bit.ly/3xv9yfT)
+-----------------------------------------------------------------------------
 
 <br />
 

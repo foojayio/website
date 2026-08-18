@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works! {#h2-0-tests-can-run-limited-sets-of-assertions-on-your-code-or-reveal-important-insights-about-how-your-application-really-works}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!
+----------------------------------------------------------------------------------------------------------------------------
 
 ![](1_JAiQsj-ez608WsovCheXVQ-1024x512.png)
 

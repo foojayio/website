@@ -35,8 +35,8 @@ This is the main reason why cache invalidation is often considered one of the mo
 
 In this article, we will explore several practical models for managing cache invalidation. We will focus on the different strategies developers can apply in real-world systems using tools such as Spring Boot, Redis, and Apache Kafka.
 
-Why Cache Invalidation Becomes Hard in Distributed Systems {#h2-0-why-cache-invalidation-becomes-hard-in-distributed-systems}
------------------------------------------------------------------------------------------------------------------------------
+Why Cache Invalidation Becomes Hard in Distributed Systems
+----------------------------------------------------------
 
 To better understand why cache invalidation in a distributed system is so complex, let's consider how modern systems are typically implemented.
 
@@ -66,8 +66,8 @@ Ensuring that all these levels remain consistent is no trivial matter. As system
 
 The solution? A good cache invalidation strategy should minimize stale data while keeping the system scalable and resilient. Let's see how to do that.
 
-Time-Based Expiration (TTL) {#h2-1-time-based-expiration-ttl}
--------------------------------------------------------------
+Time-Based Expiration (TTL)
+---------------------------
 
 One of the simplest strategies for cache invalidation is to apply a time-based expiration, often implemented using a TTL (time-to-live).
 
@@ -114,8 +114,8 @@ However, TTL alone rarely solves the entire problem: if a record changes immedia
 
 More proactive and effective invalidation strategies are necessary when dealing with highly dynamic data.
 
-The Cache-Aside Pattern {#h2-2-the-cache-aside-pattern}
--------------------------------------------------------
+The Cache-Aside Pattern
+-----------------------
 
 A widely used approach to application-level caching is the "cache-aside" model, also known as the "lazy loading" mechanism. In this model, the application itself handles interactions with both the cache and the database (or any other system to be cached).
 
@@ -147,8 +147,8 @@ The next request will trigger the process again: reading from the database and r
 
 Cache-aside works very well in single-instance applications. In distributed systems, however, it invalidates the cache only on the node that performs the update. The other nodes may continue to serve outdated values unless additional coordination mechanisms are implemented.
 
-Event-Based Cache Invalidation {#h2-3-event-based-cache-invalidation}
----------------------------------------------------------------------
+Event-Based Cache Invalidation
+------------------------------
 
 A common approach to invalidating a distributed cache is to use event-driven communication.
 
@@ -202,8 +202,8 @@ This approach ensures that all nodes have the opportunity to respond to the same
 
 The main challenge lies in managing reliability issues, such as message delivery guarantees and duplicate events. For this reason, enterprise systems with strict requirements often rely on durable messaging platforms rather than the simple Pub/Sub model.
 
-Versioned Cache Keys {#h2-4-versioned-cache-keys}
--------------------------------------------------
+Versioned Cache Keys
+--------------------
 
 Another effective strategy is using versioned cache keys. Instead of deleting cache entries when data changes, the system creates a new cache key with an incremented version.
 
@@ -231,8 +231,8 @@ This technique eliminates race conditions in which one node invalidates a cache 
 
 Versioned keys are particularly useful in high-throughput systems, where invalidation events may arrive in random order. What is the drawback? Keys can accumulate over time, leading to cache overload. It is therefore necessary to implement a periodic cleanup process to remove obsolete and no-longer-useful versions.
 
-Multi-Layer Caching {#h2-5-multi-layer-caching}
------------------------------------------------
+Multi-Layer Caching
+-------------------
 
 Many modern systems combine local in-memory caches with distributed caches. This multi-tiered approach reduces latency while maintaining the necessary scalability.
 
@@ -262,8 +262,8 @@ public CacheManager cacheManager() {
 
 In a setup like this, invalidation events must clear both cache levels. While this adds complexity, it allows us to significantly reduce the number of remote cache calls and improve response times under heavy load. It's important to note that local cache size should be tuned relative to the number of instances. With 10 instances each caching 10,000 entries, total memory consumption across the fleet is 100,000 entries. Size it carefully!
 
-Event-Driven Cache Rebuilds {#h2-6-event-driven-cache-rebuilds}
----------------------------------------------------------------
+Event-Driven Cache Rebuilds
+---------------------------
 
 There are some architectural strategies, particularly those inspired by CQRS, where caches are not simply invalidated but are rebuilt from domain events.
 
@@ -293,8 +293,8 @@ Applying this pattern transforms the cache into a projection of the event stream
 
 It is a powerful pattern, but it requires a mature event infrastructure and careful design focused on ensuring the consistency of the final result.
 
-Choosing the Right Strategy {#h2-7-choosing-the-right-strategy}
----------------------------------------------------------------
+Choosing the Right Strategy
+---------------------------
 
 So what is the best approach? None. There is no single optimal approach to cache invalidation in distributed systems.
 
@@ -310,8 +310,8 @@ A starting combination could be:
 
 Systems with high-throughput requirements can adopt versioned keys or event-driven read patterns to ensure the overall effectiveness of the invalidation model.
 
-Final Thoughts {#h2-8-final-thoughts}
--------------------------------------
+Final Thoughts
+--------------
 
 Caching remains one of the most effective ways to improve the performance of distributed systems. When implemented effectively and in line with business requirements, it can drastically reduce the load on the database or external services and greatly improve response times and overall system latency.
 

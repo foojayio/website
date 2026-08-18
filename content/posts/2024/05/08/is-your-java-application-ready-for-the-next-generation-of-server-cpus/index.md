@@ -27,7 +27,7 @@ Amazon introduced their own Aarch64 chips ([Graviton](https://newsroom.arm.com/b
 
 With every major cloud provider now offering Arm-based instances, often at a better price to users, it's time to start looking at what you need to do to migrate your Java applications to Aarch64.
 
-### It all "just works" on Java {#h3-0-it-all-just-works-on-java}
+### It all "just works" on Java
 
 The good news is that your app is written in Java, so there's nothing you need to change in your code to make this migration. OpenJDK gained [support for Aarch64](https://openjdk.org/jeps/237) architecture on Linux in 2014, and [Windows](https://openjdk.org/jeps/388) and [Mac](https://openjdk.org/jeps/391) in 2020. But simply running isn't enough, you also want your application to run fast. Over the years, significant work has gone into optimizing the Java Virtual Machine (JVM) and Hotspot to use advanced instructions on Intel and AMD chips.
 
@@ -37,7 +37,7 @@ You have your choice of Java distributions too, it's not just OpenJDK that has A
 
 Amazon has released Coretto JVM with optimizations specific to their Graviton processors, and support for OpenJDK's LTS releases. The Liberica JDK from Bellsoft (who contributed much of the Hotspot optimizations for Neon and SVE) also supports Aarch64 for those LTS releases, and is the default for Paketo's Java Buildpacks on Arm. And both Azul and IBM have Aarch64 support in their Java Development Kits (JDKs) and out-of-process JIT servers (Falcon and JITServer).
 
-### The software and tools you need to consider {#h3-1-the-software-and-tools-you-need-to-consider}
+### The software and tools you need to consider
 
 Of course, there's more to deploying a modern Java application than just the hardware and JDK, as there are a whole host of software and tools to consider. Fortunately, the work of migrating those have largely already been done for you. Debian and Ubuntu Linux both gained full Aarch64 support all the way back in 2013 on desktops and servers.
 
@@ -53,7 +53,7 @@ Once you have an Aarch64 container image for your app, you'll be ready to deploy
 
 And if you're hosting your own deployment environment, you can use Red Hat's Openshift or SUSE's Rancher on Aarch64 now too.
 
-### Get started now {#h3-2-get-started-now}
+### Get started now
 
 Ready to get started? Arm has gathered up all the best options for you under our [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) page, including links to the free tiers and offerings supporting Arm64 from some of the major cloud provides.
 

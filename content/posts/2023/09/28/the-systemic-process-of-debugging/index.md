@@ -40,8 +40,8 @@ It's also a core part of the academic theory behind debugging. Its purpose is to
 
 {#the-importance-of-issue-tracking}
 
-The Importance of Issue Tracking {#h2-0-the-importance-of-issue-tracking}
--------------------------------------------------------------------------
+The Importance of Issue Tracking
+--------------------------------
 
 I'm sure we all use an issue tracker. In that sense, we should all be aligned. But do you sometimes "just fix a bug"?
 
@@ -51,7 +51,7 @@ Honestly, I do that a lot. Mostly in hobby projects but occasionally even in pro
 
 {#avoiding-parallel-work-on-the-same-bug}
 
-### Avoiding Parallel Work on the Same Bug {#h3-1-avoiding-parallel-work-on-the-same-bug}
+### Avoiding Parallel Work on the Same Bug
 
 When working on larger projects, it's crucial to avoid situations where multiple developers are unknowingly addressing the same issue. This can lead to wasted effort and potential conflicts in the codebase. To prevent this:
 
@@ -64,7 +64,7 @@ As the project grows you will find that bugs keep coming back despite everything
 
 {#the-value-of-issue-over-pull-requests}
 
-### The Value of Issue Over Pull Requests {#h3-2-the-value-of-issue-over-pull-requests}
+### The Value of Issue Over Pull Requests
 
 We sometimes write the comments and information directly into the pull request instead of the issue tracker. This can work for some situations but isn't as ideal for the general case.
 
@@ -72,8 +72,8 @@ Issues in a tracking system are often more accessible than pull requests or spec
 
 {#communication-issue-tracker-vs-ephemeral-channels}
 
-Communication: Issue Tracker vs. Ephemeral Channels {#h2-3-communication-issue-tracker-vs-ephemeral-channels}
--------------------------------------------------------------------------------------------------------------
+Communication: Issue Tracker vs. Ephemeral Channels
+---------------------------------------------------
 
 I use Slack a lot. This is a problem, it's convenient but it's ephemeral and in more than one case important information written in a Slack chat was gone. Emails aren't much of an improvement, especially in the long term. An email thread I had with a former colleague was cut short and I had no context as to where it ended.
 
@@ -81,7 +81,7 @@ Yes, having a conversation in the issue tracker is cumbersome and awkward but we
 
 {#why-we-sometimes-avoid-the-issue-tracker}
 
-### Why We Sometimes Avoid the Issue Tracker {#h3-4-why-we-sometimes-avoid-the-issue-tracker}
+### Why We Sometimes Avoid the Issue Tracker
 
 Developers might sometimes avoid discussing issues in the tracker because:
 
@@ -92,7 +92,7 @@ However, while team cohesion and empathy are crucial, it's essential to log all 
 
 {#the-role-of-daily-meetings}
 
-### The Role of Daily Meetings {#h3-5-the-role-of-daily-meetings}
+### The Role of Daily Meetings
 
 Daily meetings are invaluable for teams with multiple developers working on related tasks. These meetings provide a platform for:
 
@@ -103,14 +103,14 @@ However, it's essential to keep these meetings concise. Detailed discussions sho
 
 {#the-role-of-testing-in-debugging}
 
-The Role of Testing in Debugging {#h2-6-the-role-of-testing-in-debugging}
--------------------------------------------------------------------------
+The Role of Testing in Debugging
+--------------------------------
 
 We all use tests when developing (hopefully) but debugging theory has a special place for tests.
 
 {#starting-with-unit-tests}
 
-### Starting with Unit Tests {#h3-7-starting-with-unit-tests}
+### Starting with Unit Tests
 
 A common approach to debugging is to begin by creating a unit test that reproduces the issue. However, this might not always be feasible before understanding the problem. Nevertheless, once the problem is understood we should:
 
@@ -121,7 +121,7 @@ A test acts as a safeguard against a regression. If the bug resurfaces it will b
 
 {#unit-tests-vs-integration-tests}
 
-### Unit Tests vs. Integration Tests {#h3-8-unit-tests-vs-integration-tests}
+### Unit Tests vs. Integration Tests
 
 While unit tests are fast and provide immediate feedback, they primarily prevent regressions. They might not be as effective in verifying overall quality. On the other hand, integration tests, though potentially slower, offer a comprehensive quality check. They can sometimes be the only way to reproduce certain issues. Most of the difficult bugs I ran into in my career were in the interconnect area between modules. This is an area that unit tests don't cover very well. That is why integration tests are far more important than unit tests for overall application quality.
 
@@ -129,8 +129,8 @@ To ensure quality **focus on integration tests for coverage.** Relying solely on
 
 {#final-word}
 
-Final Word {#h2-9-final-word}
------------------------------
+Final Word
+----------
 
 A structured approach to debugging, combined with effective communication and a robust testing strategy, can significantly enhance the efficiency and quality of software development. This isn't about convenience, the process underlying debugging is like a paper trail for the debugging process.
 

@@ -21,8 +21,8 @@ frozen: false
 
 **When using the publish-subscribe domain with JMS, we often want to use durable subscriptions. But how can this be done with Spring Boot?**
 
-What is JMS? {#h2-0-what-is-jms}
---------------------------------
+What is JMS?
+------------
 
 The Java Message Service (JMS) API is a standard for creating, sending, receiving, and reading messages. It enables distributed communication that is loosely coupled, reliable, and asynchronous.
 
@@ -34,16 +34,16 @@ In the point-to-point domain, a producer can send a message to one consumer thro
 In the publish-subscribe domain, a producer can send a message to many consumers through a destination called "topic". Consumers can subscribe to a topic and receive a copy of each message.
 ![](image-1.png)
 
-Durable Subscription {#h2-1-durable-subscription}
--------------------------------------------------
+Durable Subscription
+--------------------
 
 Durable subscriptions allow messages to remain on a topic while the message consumer is not active. A durable subscriber registers a durable subscription by specifying a unique identity that is retained by the JMS provider. You establish the unique identity of a durable subscriber by setting the following:
 
 * A client ID for the connection
 * A topic and a subscription name for the subscriber
 
-Configuration with Spring Boot and JMS {#h2-2-configuration-with-spring-boot-and-jms}
--------------------------------------------------------------------------------------
+Configuration with Spring Boot and JMS
+--------------------------------------
 
 The first thing to configure is that we want to use the publish-subscribe domain in the application.properties:
 
@@ -88,8 +88,8 @@ public void onMessage(Message message) {
 ```
 
 
-Example Code and References {#h2-3-example-code-and-references}
----------------------------------------------------------------
+Example Code and References
+---------------------------
 
 You can find the source code on GitHub: <https://github.com/simasch/spring-boot-jms-pubsub-durable>
 

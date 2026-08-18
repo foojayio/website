@@ -28,8 +28,8 @@ I**n today's fast-paced digital world, web crawling is a cornerstone technology 
 
 **This article unfolds a compelling narrative around web crawling in Java, contrasting classical threads with their newer counterpart: virtual threads.**
 
-**Environment Setup** {#h2-0-environment-setup}
------------------------------------------------
+**Environment Setup**
+---------------------
 
 Before diving into the code and its intricate comparisons, ensure you have JDK 21 installed on your system. If you're using a Unix-based system, SDKMAN! It makes this simple. Just open your terminal and run `curl -s "https://get.sdkman.io" | bash` to install SDKMAN!, followed by `source "$HOME/.sdkman/bin/sdkman-init.sh"` to initialize it. Finally, install JDK 21 with `sdk install java 21.0.0-<vendor>`, replacing \<vendor\> with your preferred vendor (e.g., zulu, adopt).
 
@@ -37,8 +37,8 @@ Now that your environment is ready let's move forward with our captivating tale 
 
 By having JDK 21 at your disposal, you are now well-equipped to delve into the fascinating juxtaposition of classical and virtual threads in Java's web-crawling landscape.  
 
-**The Code Overview** {#h2-1-the-code-overview}
------------------------------------------------
+**The Code Overview**
+---------------------
 
 The Java code in focus here serves as a skeletal web crawler, a program that starts at an initial URL and recursively follows links to gather data from various web pages.
 
@@ -170,7 +170,7 @@ public class Crawler implements Runnable {
 ```
 
 
-### Key Components {#h3-2-key-components}
+### Key Components
 
 * **ConcurrentMap** **visited** : Our trusty guide, marking the URLs we've visited.
 * **Queue** **pageQueue** : The frontier, storing URLs awaiting exploration.
@@ -178,7 +178,7 @@ public class Crawler implements Runnable {
 * **Crawler Class** : The main protagonist embodies crawling logic.
 * **run()** **Method** : The heart of the operation, orchestrating the fetching and parsing of web pages.
 
-### **The Core Logic** {#h3-3-the-core-logic}
+### **The Core Logic**
 
 When the program starts, it initializes a shared visited map, a pageQueue, and an AtomicInteger count.
 
@@ -188,12 +188,12 @@ Inside this loop, it picks URLs from the pageQueue and submits new Crawler tasks
 
 Each Crawler task fetches the web page, parses the HTML to find links, and adds those new URLs to the pageQueue.  
 
-Running the Code: Execution Command with Dependencies {#running-the-code-execution-command-with-dependencies}
--------------------------------------------------------------------------------------------------------------
+Running the Code: Execution Command with Dependencies
+-----------------------------------------------------
 
 Before running your web crawler, it's important to include its dependency: the jsoup library, specifically version 1.16.1, which is used for HTML parsing.
 
-### Command-Line Execution {#command-line-execution}
+### Command-Line Execution
 
 1. **Compile the Java File** : Navigate to the directory containing your `Crawler.java` file. To compile the code, include the [jsoup library](https://jsoup.org/) in the classpath. If the jsoup JAR file is in the same directory, you can run:` javac -cp '.:jsoup-1.16.1.jar' Crawler.java`
 2. **Run the Compiled Class** : When running the Java program, don't forget to include the JSoup library in the classpath again:` java -cp '.:jsoup-1.16.1.jar' Crawler `Make sure you've replaced `jsoup-1.16.1.jar` with the correct version if you downloaded a different one.
@@ -202,7 +202,7 @@ By following these steps, your Java web crawler will be up and running, fully eq
 
 If you prefer to manage dependencies using a build tool, both Maven and Gradle offer straightforward ways to include the JSoup library. Below are the steps for each:
 
-### Using Maven {#using-maven}
+### Using Maven
 
 * **Add Dependency** : In your `pom.xml`, include the following dependency for JSoup version 1.16.1:` `
 
@@ -219,7 +219,7 @@ If you prefer to manage dependencies using a build tool, both Maven and Gradle o
 
 * **Compile and Run** : Navigate to your project directory and execute:` mvn compile exec:java -Dexec.mainClass="``Crawler``"` .
 
-### Using Gradle {#using-gradle}
+### Using Gradle
 
 * **Add Dependency** : In your file`build.gradle`, add the following dependency:` dependencies { implementation 'org.jsoup:jsoup:1.16.1' }`
 
@@ -229,10 +229,10 @@ If you prefer to manage dependencies using a build tool, both Maven and Gradle o
 
 Either of these build tools will automatically download the JSoup library and include it in your project's classpath, making the compilation and execution process much smoother.
 
-**A Comparative Analysis** {#h2-8-a-comparative-analysis}
----------------------------------------------------------
+**A Comparative Analysis**
+--------------------------
 
-### **Metrics Observed** {#h3-9-metrics-observed}
+### **Metrics Observed**
 
 With **Virtual Threads** :
 
@@ -246,14 +246,14 @@ With **Classical Threads** :
 * Execution time: 20,910 ms
 * Throughput: 4.83 pages/sec
 
-### **The Revelation: Virtual Threads Shine** {#h3-10-the-revelation-virtual-threads-shine}
+### **The Revelation: Virtual Threads Shine**
 
 1. **Throughput** : Virtual threads deliver a throughput of 26.77 pages/sec, significantly higher than the 4.83 pages/sec achieved by classical threads. It's akin to a sports car leaving a bicycle in the dust.
 2. **Pages Crawled** : Virtual threads manage to crawl a whopping 785 pages, compared to the modest 101 by classical threads. The difference is too vast to ignore.
 3. **Resource Efficiency** : Both virtual and classical threads in this example are backed by the same number of underlying physical threads, thanks to Java's ForkJoinPool. This makes the comparison even more compelling, showing how much more you can achieve with the same resources when using virtual threads.
 
-**Drawing Conclusions** {#h2-11-drawing-conclusions}
-----------------------------------------------------
+**Drawing Conclusions**
+-----------------------
 
 The story told by this code and its performance metrics is one of stark contrast between classical and virtual threads. Virtual threads not only outperform classical threads in terms of throughput but also do so without requiring more underlying resources. It's as if they're performing a high-wire act while juggling, making the most of what they have.
 

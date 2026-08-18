@@ -40,24 +40,24 @@ The best choice? Well, it depends on a whole slew of factors, including your que
 
 Let's take a close look at the pros and cons of SQL vs. NoSQL to help you make the right choice.
 
-SQL pros {#h2-0-sql-pros}
--------------------------
+SQL pros
+--------
 
-### Standardized schema {#h3-1-standardized-schema}
+### Standardized schema
 
 While the standardized schema of SQL databases makes them rigid and difficult to modify, it does come with some advantages. All data added to the database must comply with the well-known schema of linked tables made up of rows and columns. Some may find this limiting or confining, but it is helpful when data consistency, integrity, security, and compliance are at a premium.
 
-### Large user community {#h3-2-large-user-community}
+### Large user community
 
 At almost 50-years-old, the SQL programming language is extremely mature and still widely used. It has a strong community, with countless experts willing to share tips and well-established best practices. There are many opportunities to sharpen skills and collaborate.
 
 If necessary, consultants and SQL vendors can provide additional support. With SQL, your developers will be able to find the answers they need.
 
-### No code required {#h3-3-no-code-required}
+### No code required
 
 SQL is a user-friendly language. Managing and querying the database can be accomplished using simple keywords with little to no coding required. Most developers are taught SQL in college.
 
-### ACID compliance {#h3-4-acid-compliance}
+### ACID compliance
 
 The extremely structured nature of relational database tables enables SQL databases to be ACID compliant. This level of compliance keeps tables in-sync and guarantees the validity of transactions. It is likely the right choice when you run applications that have no room for error and need the highest level of data integrity.
 
@@ -68,41 +68,41 @@ Here are the ACID properties:
 * Isolation: Transactions run concurrently, without competing with each other. Instead, they behave as though they are occurring successively.
 * Durability: When a transaction is completed, its associated data is permanent and cannot be changed.
 
-SQL cons {#h2-5-sql-cons}
--------------------------
+SQL cons
+--------
 
-### Hardware {#h3-6-hardware}
+### Hardware
 
 The norm for SQL databases is to scale-up vertically, where capacity can only be expanded by increasing capabilities, such as RAM, CPU, and SSD, on the existing server or by migrating to a larger, more expensive one. You'll need to continually increase hard drive space as your data grows and you'll need faster machines to run evolving and more sophisticated technologies.
 
 The database vendor you use will likely require you to periodically level up your hardware just to run their latest releases. In this environment, hardware can quickly become outdated. Each upgrade is sure to be expensive and resource intensive. SQL's hardware needs also include ongoing, everyday maintenance and operating costs. It's a never-ending hamster wheel.
 
-### Data Normalization {#h3-7-data-normalization}
+### Data Normalization
 
 Developed at a time when the cost of data storage was high, relational databases attempt to negate data duplication. Each table has different information and they can be connected and queried using common values. However, as SQL databases get large, the lookups and joins required between numerous tables can slow things down.
 
-### Rigidity {#h3-8-rigidity}
+### Rigidity
 
 A SQL database's schema must be defined before use. Once in place, they are inflexible, and modifications are typically difficult and resource-intensive. For that reason, substantial time needs to be invested in upfront planning, before the database is ever put into production. So it follows that they're only appropriate when all of your data is also structured and you don't expect much change, either in volume or data types.
 
-### Resource-intensive scaling {#h3-9-resource-intensive-scaling}
+### Resource-intensive scaling
 
 As mentioned earlier, SQL databases normally scale vertically by expanding hardware investment. This is expensive and time-consuming. In some cases, an organization may attempt to horizontally scale a SQL database through partitioning. This added complexity magnifies the time and resources expended. The effort will likely include coding, requiring highly skilled, highly paid developers.
 
 As data volume grows, scaling your SQL database is like playing a never-ending game of tag, where the perfect setup is always just out of reach. On the other hand, NoSQL databases scale-out horizontally, making it easier and more cost-effective to expand capacity. They're a good fit for cloud computing and handling extremely large and quickly growing datasets.
 
-NoSQL pros {#h2-10-nosql-pros}
-------------------------------
+NoSQL pros
+----------
 
-### Continuous availability: {#h3-11-continuous-availability}
+### Continuous availability:
 
 With NoSQL, data is distributed across multiple servers and regions, so there is no single point of failure. As a result, NoSQL databases are more stable and resilient, with continuous availability and zero downtime.
 
-### Query speed {#h3-12-query-speed}
+### Query speed
 
 Since NoSQL databases are denormalized, with no worry of data duplication, all the information needed for a particular query will often already be stored together---no joins required. This can make lookups easier, especially when working with large data volumes. It also means NoSQL can be very fast for simple queries. Make no mistake, SQL databases can also return very speedy queries. They also support highly complex queries for structured data. However, query speed can quickly taper off as SQL databases grow and complex join requirements increase.
 
-### Agility {#h3-13-agility}
+### Agility
 
 NoSQL databases were developed as data storage costs were beginning to drastically drop and developer costs were rising. Data duplication was no longer a concern. Instead, they were designed to give developers as much flexibility as possible to boost creativity and productivity. Not constrained by rows and columns, NoSQL database schemas don't have to be predefined. Instead, they are dynamic with the ability to handle all types of data, including structured, semi-structured, unstructured, and polymorphic. You can launch NoSQL databases without spending time defining their structure and easily add data types and fields, without downtime, on the fly.
 
@@ -110,33 +110,33 @@ All of this makes NoSQL a great fit for modern, Agile development teams. Develop
 
 NoSQL databases are not one-size-fits-all. Unlike the SQL databases, they aren't constrained to a rigid, centralized data model, likely housed on a single server. Instead, NoSQL has the flexibility to connect disparate database model types that can be distributed across many servers. NoSQL includes several database types, allowing developers to find the mix that is the best fit for their data and use cases. The main types of NoSQL databases are[key/value, document, tabular (or wide column), graph or multi-model](https://www.datastax.com/nosql).
 
-### Low cost {#h3-14-low-cost}
+### Low cost
 
 NoSQL databases scale-out horizontally, making it cost-effective to expand capacity. Rather than upgrading expensive hardware, they can cheaply expand by simply adding commodity servers or cloud instances. And open-source NoSQL databases provide affordable options for many organizations. They're a good fit for cloud computing and handling extremely large and quickly growing datasets.
 
-NoSQL cons {#h2-15-nosql-cons}
-------------------------------
+NoSQL cons
+----------
 
-### No standardized language: {#h3-16-no-standardized-language}
+### No standardized language:
 
 There isn't a standard language to conduct NoSQL queries. The syntax used to query data varies for the different types of NoSQL databases. Unlike SQL, where there is just one, easy-to-learn language to master, NoSQL has a steeper learning curve. For example, it might be difficult for a developer to quickly get up-to-speed working on a wide-column database if all their prior experience consists of building and managing graph databases.
 
-### Smaller user community {#h3-17-smaller-user-community}
+### Smaller user community
 
 Developers have been using NoSQL databases for more than a decade and the community is growing quickly. However, it is less mature than the SQL community. So, it could be harder to solve undocumented issues. There are also fewer consultants and experts on the NoSQL side.
 
-### Inefficiency with complex queries {#h3-18-inefficiency-with-complex-queries}
+### Inefficiency with complex queries
 
 Flexibility comes with a price. With the variety of data structures found in NoSQL databases, querying isn't as efficient. Unlike SQL databases, there isn't a standard interface to conduct complex queries. Even simple NoSQL queries will likely require programming experience. This means more technical and costly staff, like developers or data scientists, will need to perform the queries.
 
-### Data retrieval inconsistency {#h3-19-data-retrieval-inconsistency}
+### Data retrieval inconsistency
 
 The distributed nature of NoSQL databases enables data to be available faster. However, it can also make it more difficult to ensure the data is always consistent. Queries might not always return updated data and it's possible to receive inaccurate information. With its distributed approach, the database could return different values, at the same time, depending on which server happens to be queried. This is one of the reasons NoSQL doesn't achieve ACID-level compliance. Consistency is the "C" in ACID which states that data must be valid and consistent at the start and end of a transaction. Instead, most NoSQL databases adhere to the BASE consistency model, where the "E" stands for eventual consistency.
 
 In other words, the data will be consistent at some later point. In the real world, this is often a small delay of only a few milliseconds. For many applications, that likely won't matter, such as social media posts going live, or an online shopping cart being updated. In those situations, faster availability for most of the network outweighs the value of providing the exact same data at the same time to all users. However, it certainly could matter in some cases, such as when you make an online stock purchase. NoSQL values speed and availability over consistency. Each organization must decide if that aligns with their goals.
 
-Weighing your options {#h2-20-weighing-your-options}
-----------------------------------------------------
+Weighing your options
+---------------------
 
 Both SQL and NoSQL databases serve specific needs and use cases extremely well. Depending on your organization's data environment and goals, specific pros and cons of each could be amplified. You may find the best solution is to use both, letting each type of database play to its strengths. Many organizations use both SQL and NoSQL databases in their cloud architecture, sometimes even within the same application. Then again, the best option could be finding a solution, like DataStax Astra DB, that takes advantage of NoSQL's inherent benefits, such as flexibility, continuous availability, and scalability, while minimizing its drawbacks.
 

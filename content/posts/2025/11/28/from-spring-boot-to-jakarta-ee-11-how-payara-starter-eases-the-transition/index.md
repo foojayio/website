@@ -45,8 +45,8 @@ If you've spent most of your career building microservices and APIs with **Sprin
 
 6. Download the resulting ZIP file, which is an archive of a web application (as .war/.jar file) that is configured with your choices.
 
-Starting with Jakarta EE Doesn't Have to be Slow {#h2-0-starting-with-jakarta-ee-doesn-t-have-to-be-slow}
----------------------------------------------------------------------------------------------------------
+Starting with Jakarta EE Doesn't Have to be Slow
+------------------------------------------------
 
 Now, even though you are a Spring aficionado, for a number of reasons you may be tasked with developing a Jakarta EE application. Maybe it's because the company landed a project where the framework was specified. Maybe it's time to modernize any existing Java EE workloads, and the transition to the Jakarta EE namespace was identified as the most suitable option. Maybe you just want to see what's out there beside Spring and expand your skillset, especially with the [release of Jakarta EE 11.](https://payara.fish/blog/jakarta-ee-11-is-here-and-its-ready-for-the-cloud/ "release of Jakarta EE 11.")
 
@@ -54,8 +54,8 @@ In any case, while Spring and Jakarta EE share some commonalities as[enterprise 
 
 And the even better news? The latest**Payara Starter** , a free online developer tool to generate entity relationship diagrams and code, makes scafollding a Jakarta EE project as easy --- dare I say, easier than creating a Spring Boot project with [Spring Initializr](https://start.spring.io/ "Spring Initializr").
 
-Meet Payara Starter: The Equivalent to Spring Initializr for Jakarta EE {#h2-1-meet-payara-starter-the-equivalent-to-spring-initializr-for-jakarta-ee}
-------------------------------------------------------------------------------------------------------------------------------------------------------
+Meet Payara Starter: The Equivalent to Spring Initializr for Jakarta EE
+-----------------------------------------------------------------------
 
 Payara Starter is a free, web-based project generator that offers a web-based UI that walks developers through scafollding a Jakarta EE application step by step. Think of it as Jakarta EE's version of Spring Initializr. In effect, it is a tool that gives you **a ready-to-run project** with all the right dependencies, packaging and configuration for Payara Platform.
 
@@ -65,8 +65,8 @@ The latest version of Payara Starter has three major features that make it a gam
 2. **A Jakarta Faces generator**so you can scaffold JSF projects without touching obscure XML configs
 3. **An AI-powered ER diagram generator** and ready-made code templates to shave hours from initial scaffolding, so the app is up and running almost instantly, even with complex data relationships. Note: *expert oversight is essential when handling Gen AI tools. For these reasons, the AI functionalities within Payara Starter are best suited for testing and development environments, where they can help accelerate initial setup and design without the risks associated with production use. In any case, the generated ER Diagram and source code should be reviewed carefully, as they may contain errors.*
 
-Payara Starter vs. Spring Initializr: Same Comfort, Different Stack {#h2-2-payara-starter-vs-spring-initializr-same-comfort-different-stack}
---------------------------------------------------------------------------------------------------------------------------------------------
+Payara Starter vs. Spring Initializr: Same Comfort, Different Stack
+-------------------------------------------------------------------
 
 Think of Payara Starter as a mirror image of the experience you've enjoyed in Spring Initializr. Both tools:
 
@@ -74,8 +74,8 @@ Think of Payara Starter as a mirror image of the experience you've enjoyed in Sp
 2. Allow you to pick dependencies and packaging types
 3. Provide a build-ready ZIP you can import into your IDE
 
-Payara Starter and Spring Initializr Side by Side {#h2-3-payara-starter-and-spring-initializr-side-by-side}
------------------------------------------------------------------------------------------------------------
+Payara Starter and Spring Initializr Side by Side
+-------------------------------------------------
 
 |       Feature       |                         Payara Starter                         |              Spring Initializr               |
 |---------------------|----------------------------------------------------------------|----------------------------------------------|
@@ -85,8 +85,8 @@ Payara Starter and Spring Initializr Side by Side {#h2-3-payara-starter-and-spri
 | UI/UX               | AI powered entity relationship diagram generator and previewer | Intuitive forms, real-time dependency search |
 | Code Download       | Full, directly runnable project                                | Full, directly runnable project              |
 
-Step-by-Step: Starting a Jakarta EE 11 App with Payara Starter {#h2-4-step-by-step-starting-a-jakarta-ee-11-app-with-payara-starter}
-------------------------------------------------------------------------------------------------------------------------------------
+Step-by-Step: Starting a Jakarta EE 11 App with Payara Starter
+--------------------------------------------------------------
 
 1. Go to the **Payara Starter** webpage at <https://start.payara.fish/>
 2. Select Maven or Gradle
@@ -101,8 +101,8 @@ Step-by-Step: Starting a Jakarta EE 11 App with Payara Starter {#h2-4-step-by-st
    (Optional) Open the AI-enriched Diagram Builder \& Live Preview to adjust the structure based on your needs
 9. Download your generated project as .war file
 
-Wrapping Up: Familiar Simplicity, Different Framework {#h2-5-wrapping-up-familiar-simplicity-different-framework}
------------------------------------------------------------------------------------------------------------------
+Wrapping Up: Familiar Simplicity, Different Framework
+-----------------------------------------------------
 
 Switching frameworks can feel like switching languages. Payara Starter gives you something steady to hold while you explore Jakarta EE. If you've built dozens of Spring Boot apps with Spring Initializr, you'll feel right at home, only now you're targeting a modern Jakarta EE runtime.
 

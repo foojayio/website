@@ -35,10 +35,10 @@ For Gradle plugins, we have some new features for Azure Web Apps and Azure Funct
 
 We hope you like these new features and share your feedback with us. So let us get right into it...
 
-Azure Toolkit for IntelliJ Improvements {#h2-0-azure-toolkit-for-intellij-improvements}
----------------------------------------------------------------------------------------
+Azure Toolkit for IntelliJ Improvements
+---------------------------------------
 
-### New Application-centric View in Azure Explorer {#h3-1-new-application-centric-view-in-azure-explorer}
+### New Application-centric View in Azure Explorer
 
 In [April's update](https://foojay.io/today/azure-toolkit-for-intellij-april-2022-update/ "April’s blog"), we introduced our application-centric view in the roadmap. The current Azure Explorer has been built over time and expanded to support multiple separate cloud services. The Azure Explorer is the logic collections of Web Apps, Function Apps, Spring Apps, Virtual Machines, Storage Accounts, Databases, and other services. And it is grouped by resource types rather than applications (resource groups).
 
@@ -54,7 +54,7 @@ And then you can create or delete a resource to a resource group if needed for e
 
 ![App-view-new-Toolkit](App-view-new.gif)
 
-### Application Insights Support {#h3-2-application-insights-support}
+### Application Insights Support
 
 In our latest release, Application Insights is available on Azure Toolkit for IntelliJ, so that developers can manage Application Insights directly in Azure Explorer.
 
@@ -70,7 +70,7 @@ When you right click the node in with option "Open Live Metrics", it will take y
 
 ![AI3-Toolkit](AI3.gif)
 
-### Spring Apps Improvement {#h3-3-spring-apps-improvement}
+### Spring Apps Improvement
 
 As Azure Spring Apps Enterprise is made generally available with [the announcement](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/azure-spring-apps-enterprise-tier-is-now-generally-available/ba-p/3418245 "the announcement") recently, we have made investments to support for Azure Spring Cloud Enterprise tier with our toolkit.
 
@@ -84,10 +84,10 @@ Besides, you do not need to specify Runtime for Enterprise Tier app since it wil
 
 ![Spring-apps2-Toolkit](Spring-apps2.gif)
 
-Gradle Plugin Improvements {#h2-4-gradle-plugin-improvements}
--------------------------------------------------------------
+Gradle Plugin Improvements
+--------------------------
 
-### Deployment Slots Support {#h3-5-deployment-slots-support}
+### Deployment Slots Support
 
 When you deploy your Web Apps or Function Apps to Azure App Service, you can use a separate deployment slot instead of the default production slot.
 
@@ -110,8 +110,8 @@ Starting from June, you can try our Gradle plugin for deployment slots support f
 
 To learn more about Gradle plugin, you can find more details with [how to deploy Java web apps to Azure with Gradle in one step](https://devblogs.microsoft.com/java/gradle-deploy-java-web-apps-to-azure-in-one-step/ "how to deploy Java web apps to Azure with Gradle in one step").
 
-Feedback and Suggestions {#h2-6-feedback-and-suggestions}
----------------------------------------------------------
+Feedback and Suggestions
+------------------------
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 
@@ -121,8 +121,8 @@ Please don't hesitate to try our product! Your feedback and suggestions are very
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new "Create a feature request or submit a bug") on our official GitHub Issues page
 * [Fill in our survey](https://microsoft.qualtrics.com/jfe/form/SV_b17fG5QQlMhs2up "Fill in our survey")
 
-Resources {#h2-7-resources}
----------------------------
+Resources
+---------
 
 Here is a list of links that are helpful to learn Java on Azure Tooling,
 

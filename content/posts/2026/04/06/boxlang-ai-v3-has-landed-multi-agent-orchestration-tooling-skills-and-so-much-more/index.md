@@ -40,8 +40,8 @@ Let's dig in. 🎉
 
 
 
-🎯 The Headline: AI Skills System {#h2-0-the-headline-ai-skills-system}
------------------------------------------------------------------------
+🎯 The Headline: AI Skills System
+---------------------------------
 
 The single biggest addition in 3.0 is the **AI Skills system** --- a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills).
 
@@ -86,13 +86,13 @@ Skills live in plain Markdown files --- which means your team can review them in
 
 
 
-📚 Brand New Docs {#h2-1-brand-new-docs}
-----------------------------------------
+📚 Brand New Docs
+-----------------
 
 The entire documentation has been re-organized so you can go from zero to hero. Tons of new sections and more direct docs for your reading pleasure: <https://ai.ortusbooks.com/>
 
-🔌 MCP Server Seeding {#h2-2-mcp-server-seeding}
-------------------------------------------------
+🔌 MCP Server Seeding
+---------------------
 
 Agents can now be pointed directly at one or more **MCP servers** . All tools exposed by those servers are discovered automatically via `listTools()` and registered as `MCPTool` instances --- no manual tool construction required.
 
@@ -118,8 +118,8 @@ The agent's system prompt is automatically updated so the LLM knows which tools 
 
 
 
-🗄️ Global AI Tool Registry {#h2-3-global-ai-tool-registry}
------------------------------------------------------------
+🗄️ Global AI Tool Registry
+---------------------------
 
 New in 3.0: a module-scoped **Global Tool Registry** accessible via the `aiToolRegistry()` BIF. Register tools by name once --- in `Application.bx` or `ModuleConfig.bx` --- and reference them as plain strings anywhere in your codebase.
 
@@ -139,8 +139,8 @@ Module namespacing (e.g. `now@bxai`) keeps registrations collision-free across m
 
 
 
-🔧 Tool System Overhaul {#h2-4-tool-system-overhaul}
-----------------------------------------------------
+🔧 Tool System Overhaul
+-----------------------
 
 The tool system has been significantly redesigned around a new `BaseTool` abstract base class. All tool implementations extend it, getting the shared invocation lifecycle, result serialization, and fluent `describeArg()` annotation syntax for free.
 
@@ -165,8 +165,8 @@ Two **built-in core tools** ship with the module:
 
 
 
-🛡️ Provider Capability System {#h2-5-provider-capability-system}
------------------------------------------------------------------
+🛡️ Provider Capability System
+------------------------------
 
 A new type-safe capability system prevents calling unsupported operations on providers and gives you clear, actionable errors instead of cryptic runtime crashes.
 
@@ -180,8 +180,8 @@ println( service.hasCapability( "chat" ) )    // false
 
 
 
-🌲 Parent-Child Agent Hierarchy {#h2-6-parent-child-agent-hierarchy}
---------------------------------------------------------------------
+🌲 Parent-Child Agent Hierarchy
+-------------------------------
 
 Multi-agent orchestration is now a first-class concept. `AiAgent` tracks its position in an agent tree with full introspection, cycle detection, and depth tracking.
 
@@ -200,8 +200,8 @@ println( researcherAgent.getAncestors() )    // [ coordinator ]
 
 
 
-🧵 Middleware Support {#h2-7-middleware-support}
-------------------------------------------------
+🧵 Middleware Support
+---------------------
 
 Both `AiModel` and `AiAgent` now support composable **middleware** for cross-cutting concerns --- logging, retries, guardrails, human-in-the-loop approvals, and more. Agent middleware is prepended ahead of model middleware in the execution chain.
 
@@ -236,8 +236,8 @@ agent = aiAgent(
 
 
 
-🏢 Stateless Agents + Per-Call Identity Routing {#h2-8-stateless-agents-per-call-identity-routing}
---------------------------------------------------------------------------------------------------
+🏢 Stateless Agents + Per-Call Identity Routing
+-----------------------------------------------
 
 `AiAgent` is now **fully stateless** . `userId` and `conversationId` are resolved per-call from the `options` argument, eliminating shared-state concurrency bugs in multi-user deployments.
 
@@ -253,8 +253,8 @@ sharedMemory.getAll( userId: "alice", conversationId: "conv-1" )
 
 
 
-What Else Is New {#h2-9-what-else-is-new}
------------------------------------------
+What Else Is New
+----------------
 
 * 🤗 **HuggingFace Embeddings** --- new `huggingface` provider for the HuggingFace Inference API
 * 🔀 **Custom Service URLs** --- all senders now accept a `baseUrl` override for proxies, self-hosted endpoints, and OpenAI-compatible APIs
@@ -264,15 +264,15 @@ What Else Is New {#h2-9-what-else-is-new}
 
 
 
-No Breaking Changes {#h2-10-no-breaking-changes}
-------------------------------------------------
+No Breaking Changes
+-------------------
 
 3.0 is a major release but your existing code keeps working. `aiChat()`, `aiEmbed()`, and `aiAgent()` BIF signatures are unchanged. Upgrade, run your tests, and start exploring the new APIs.
 
 
 
-Get Started {#h2-11-get-started}
---------------------------------
+Get Started
+-----------
 
 ```bash
 # Install or upgrade your OS installation via BoxLang

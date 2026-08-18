@@ -21,8 +21,8 @@ frozen: false
 
 Confused about the release cycles of OpenJDK and OpenJFX and the relationship between them? Read on!
 
-OpenJDK {#h2-0-openjdk}
------------------------
+OpenJDK
+-------
 
 Since 2018, Java switched to a 6-months release cycle. Every new release brings new finished features, but also "preview" ones which are not finished yet. These can be enabled [with a flag](https://mkyong.com/java/java-how-to-enable-the-preview-language-features/) (\``java --enable-preview`\`) to allow developers to start experimenting with them and provide feedback to the developers to further improve these so they can become available in one of the next releases.
 ![](history_java_releases.png) Java release history
@@ -31,8 +31,8 @@ Thanks to this fixed schedule, new versions are no longer causing major changes,
 
 If you're in doubt if you should move to a newer JDK version, make sure to read "[Modern Java toys that boost productivity, from type inference to text blocks. Developers using older versions of the Java platform are missing out.](https://blogs.oracle.com/javamagazine/modern-java-toys-that-boost-productivity-from-type-inference-to-text-blocks)" by Angie Jones on the [Oracle Java Magazine](https://blogs.oracle.com/javamagazine).
 
-OpenJFX {#h2-1-openjfx}
------------------------
+OpenJFX
+-------
 
 In the past, JavaFX has been bundled with the Oracle JDK (until JDK 11), but it was always a project on its own as [openjfx.io](https://openjfx.io/), with its [sources on GitHub](https://github.com/openjdk/jfx). [Gluon](https://gluonhq.com/)builds and distributes the OpenJFX releases, following the same 6-month release cycle.
 ![](history_javafx-1.png) JavaFX history
@@ -42,15 +42,15 @@ You can find them in the [Maven Central Repository](https://search.maven.org/sea
 
 An overview of all the changes in OpenJFX since version 11 are [available here.](https://github.com/openjdk/jfx/tree/jfx15/doc-files)
 
-Relationship Between OpenJDK and OpenJFX Releases {#h2-2-relationship-between-openjdk-and-openjfx-releases}
------------------------------------------------------------------------------------------------------------
+Relationship Between OpenJDK and OpenJFX Releases
+-------------------------------------------------
 
 Until now, the OpenJFX releases did not require a specific OpenJDK version. This means you can use OpenJDK 11 combined with OpenJFX 15.
 
 At this moment, there are no planned features or changes in OpenJFX which require new JDK features (text blocks, records, etc), so the next releases of OpenJFX will most probably still be compatible with JDK 11.
 
-Conclusions {#h2-3-conclusions}
--------------------------------
+Conclusions
+-----------
 
 Yes, OpenJDK and OpenJFX are aligned in the number of releases per year (2x) and follow the same major version numbering (15, next one will be 16).
 

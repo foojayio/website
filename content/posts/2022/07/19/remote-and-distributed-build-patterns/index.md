@@ -29,20 +29,20 @@ This article will explore the difference between remote vs. distributed builds a
 
 Except for two JVM-specific references, these observations are generally applicable to software projects using any language or ecosystem.
 
-But Why? {#h2-0-but-why}
-------------------------
+But Why?
+--------
 
 These features are typically discussed in the context of shortening build times on local developer machines.
 
 Extended build turnaround times hinder productivity in both local and CI environments, but the local build experience has a disproportionate effect on developer sentiment.
 
-### Terminology {#h3-1-terminology}
+### Terminology
 
 The terms "remote" and "distributed" builds are not always used consistently in the industry and are often used interchangeably.
 
 Below, we'll give each a distinct definition. Firstly, we'll also define the more fundamental "build cache" optimization.
 
-### What is a Remote Build Cache? {#h3-2-what-is-a-remote-build-cache}
+### What is a Remote Build Cache?
 
 The first pattern that includes a remote component that we'll discuss is the build cache. Similar to [incremental builds](https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks), the build cache avoids execution of CPU-intensive operations like compiling source files or executing tests. While an incremental build leaves the outputs of the most recent local operation in-place on disk, a build cache does this by storing and reusing the results of any previous execution of the operation - much like restoring files from a backup.
 
@@ -52,7 +52,7 @@ In short, the build cache stores the intermediate build artifacts on remote serv
 
 The Gradle Build Tool [Build Cache](https://blog.gradle.org/introducing-gradle-build-cache) feature has been very successful at reducing both local and CI build times since its introduction in 2017.
 
-### Variations of Remote Build {#h3-3-variations-of-remote-build}
+### Variations of Remote Build
 
 In general, "building remotely" refers to the method of reducing build times by delegating the entire process to another computer. Typically the remote computer is more powerful than a local computer in terms of compute resources and memory. It may host builds in a uniform, curated environment and/or in isolation, free from resource contention with other local processes.
 
@@ -113,7 +113,7 @@ Centrally-managed remote build environments can provide several benefits:
 
 Looking at the available solutions above, we see the most exciting innovation taking place in the remote IDE and remote build environment spaces. Remote build has some interesting aspects as well, but the marginal benefits to the local developer experience may be outweighed by the increased complexity. As such, we encourage bypassing remote build in favor of remote IDEs while keeping an eye on the emerging capabilities of remote build environments.
 
-### Variations of Distributed Builds {#h3-4-variations-of-distributed-builds}
+### Variations of Distributed Builds
 
 Unlike remote builds which execute all work on a single remote machine, distributed builds focus on dividing work into small pieces, and distributing them among multiple machines. The remote executors are typically allocated from a pool, similar to how CI allocation works, though each distributed work item takes relatively little time to execute.
 
@@ -150,19 +150,19 @@ The benefit of distributing non-test work such as compilation depends on the com
 
 See the [General Build Distribution: A Game-Changer or a Gimmick?](https://medium.com/@GradleBuildTool/general-build-distribution-a-game-changer-or-a-gimmick-28b50bd6ff78) article for more details about the tradeoffs with general build distribution.
 
-### Common Factors of Remote and Distributed Builds {#h3-5-common-factors-of-remote-and-distributed-builds}
+### Common Factors of Remote and Distributed Builds
 
 In both the remote and distributed paradigms, non-trivial amounts of network traffic can result. Serializing source code to a remote host or synchronizing build artifacts between agents can incur a significant overhead. Network proximity between the local client and remote host, or between distribution agents and artifact storage, can be a major factor. Network connections should be both high-bandwidth and low-latency to prevent eroding the theoretical gains achieved through remote and/or distributed work.
 
 Further, managing the pool of remote hosts or distributed agents incurs more cost and overhead. Additional engineering investment will be required to provide the standardized environments. Care should be exercised to avoid resource starvation or over-allocation by responding to peak usage cycles and downtime.
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 In this post, we've reviewed the build patterns in which remote machines are leveraged, clarified the definition of remote and distributed builds, and discussed their variations.
 
 We started by explaining the remote build cache as the most fundamental build optimization leveraging remote machines. Then, we elaborated on remote build patterns and pointed out exciting innovation taking place in the remote IDE and remote build environment spaces. Finally, we explained the CI fanout technique and different patterns in distributed builds including test distribution and general distribution.
 
-### Feedback {#h3-7-feedback}
+### Feedback
 
 Let us know if you have any questions on our [forums](https://discuss.gradle.org/) or [Gradle Community Slack](https://gradle.com/slack-invite).

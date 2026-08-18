@@ -37,8 +37,8 @@ So where am I going with this and what does it have to do with GitHub? Well, [Gi
 
 In this short article, I will show you how to create a GitHub Action job that will build and test a Java-based project using Maven or Gradle.
 
-Getting Started {#h2-0-getting-started}
----------------------------------------
+Getting Started
+---------------
 
 This article assumes you already have an account over at [GitHub.com](https://github.com) and familiar with Git commands. Also, assumes you have an existing Java project using Ant, Maven or Gradle.
 
@@ -46,8 +46,8 @@ To begin choose an existing repository you own or fork an open source Java proje
 
 If you want to just follow along the code and setup for the example is on GitHub here: <https://github.com/carldea/HelloWorldGHActions>
 
-Activate GitHub Actions {#h2-1-activate-github-actions}
--------------------------------------------------------
+Activate GitHub Actions
+-----------------------
 
 Once you've chosen your repository click on the Action tab (**Step 1** ) then click on the link  
 `set up a workflow yourself ->` (**Step 2**) as shown below:
@@ -69,8 +69,8 @@ If you have forked ![Fork Button](Screen-Shot-2021-10-21-at-9.40.06-AM.png) an e
  </figcaption>
 </figure>
 
-Yaml Loves You {#h2-2-yaml-loves-you}
--------------------------------------
+Yaml Loves You
+--------------
 
 > Love Yaml and Yaml will love you back
 > Unknown Yaml zealot
@@ -82,8 +82,8 @@ Before we discuss GitHub Action **jobs** (the meat and potatoes of the article),
 
 In short, the name attribute will be the name of the workflow (in this case CI). Next, you'll notice in lines 6 the `on` attribute as it relates to **Workflow Events** . This is responsible for running job(s) whenever a Git/GitHub event occurs on a particular branch such as `push` or `pull_request`. To see more events go to [**Events that trigger workflows**](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows).
 
-Jobs {#h2-3-jobs}
------------------
+Jobs
+----
 
 Let's talk about Jobs! To create a comprehensive coverage scenario let's describe the the use-case in pseudocode.
 
@@ -124,8 +124,8 @@ jobs:
 
 The Jobs attribute contains children entries. Each child job entry can be named whatever you like (in the scenario below it's called `test:`). As you can see above the `test` job will have keyword attributes such as: `runs-on`, `strategy`, `name`, and `steps` (Lines 3, 4, 10 and 11 above).
 
-Matrix {#h2-4-matrix}
----------------------
+Matrix
+------
 
 A matrix is a way to create a lookup or dictionary of variables and values. Often values can be arrays such as the JDK versions and operating systems.
 
@@ -147,8 +147,8 @@ And, on the following operating systems (`runs-on` attribute):
 
 This is often good practice when you test both a fixed (major) release and the latest version of the JDK. For example, if the fixed version **passes** (Green) and the latest **fails** (Red) you can immediately know it isn't something you did (introduced) in your code, but something changed in the latest release build.
 
-Job definition {#h2-5-job-definition}
--------------------------------------
+Job definition
+--------------
 
 The following describes each entry when defining a job:
 
@@ -161,13 +161,13 @@ The following describes each entry when defining a job:
 | steps        | has child elements such as `uses`, `name`, `env` and `run`. Steps as the name suggests are steps to build and test your app.                                                                                                                                                                   |
 |              | **uses** - ready made GitHub actions **with** - are config options for the uses GitHub action **name** - A step to be display when viewing the job's run progress **env** - A way to set environment variable if your app needs them. **run** - A way to run bash commands or execute programs |
 
-Uses: actions/setup-java@v1 {#h2-6-uses-actions-setup-java-v1}
---------------------------------------------------------------
+Uses: actions/setup-java@v1
+---------------------------
 
 To setup Java or JDK 17 we'll be using the GitHub Action Marketplace's action called `setup-java` that is responsible for downloading a JDK, JRE, or JDK with JavaFX to run maven and/or gradle.
 
-Build and Test {#h2-7-build-and-test}
--------------------------------------
+Build and Test
+--------------
 
 The steps after setup-java are preparing environment variables before `mvn verify`.
 
@@ -230,8 +230,8 @@ After, committed the workflow will be triggered to run. You'll want to click on 
 
 Well, there you have it! Your first GitHub action to build and test a Java application. **One thing you might not have noticed thus far is what is the OpenJDK distribution (GitHub action `setup-java@v2`). We'll go into that in Part 2 of this blog series.**
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, you've had a chance to create a workflow containing one job that uses the `setup-java` GitHub action that performs a setup of the OpenJDK build versions on 3 major operating systems. Next, the environment variables where set before building and testing the Java app.
 
@@ -243,7 +243,7 @@ Happy continuous integration!
 
 <br />
 
-### References {#h3-9-references}
+### References
 
 * GitHub Actions - <https://github.com/features/actions>
 * Yaml discussions - ([@brunoborges](https://twitter.com/brunoborges)) <https://twitter.com/brunoborges/status/1098472238469111808?lang=en>

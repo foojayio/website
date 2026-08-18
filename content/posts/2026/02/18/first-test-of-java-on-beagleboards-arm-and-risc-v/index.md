@@ -30,13 +30,13 @@ I got all these boards for free, but what I write here and show in the video is 
 
 {{< youtube pZ8hMuQbk8Y >}}
 
-ARM versus RISC-V? {#h2-0-arm-versus-risc-v}
---------------------------------------------
+ARM versus RISC-V?
+------------------
 
 ARM and RISC-V represent two different approaches to processor design. ARM is the established player we know from, e.g., the Raspberry Pi's. It's mature, and has a huge ecosystem of tools and support built over decades. RISC-V is the open-source alternative, free from licensing restrictions and fully transparent. While ARM still leads in performance and tooling today, RISC-V is catching up fast. The real difference isn't just about speed. It's about openness and flexibility. With RISC-V, you're not locked into a vendor's ecosystem, and you have complete visibility into how your hardware works.
 
-BeagleBoards {#h2-1-beagleboards}
----------------------------------
+BeagleBoards
+------------
 
 BeagleBoard has a wide range of single-board-computers in Raspberry Pi-like and Arduino-like formats. Here's how the BeagleBoards I received, compare to the latest Raspberry Pi's:
 
@@ -49,7 +49,7 @@ BeagleBoard has a wide range of single-board-computers in Raspberry Pi-like and 
 | [BeagleV-Ahead](https://www.beagleboard.org/boards/beaglev-ahead)   | Alibaba TH1520 | RISC-V        |            |   4   |   2GHz |                [149$](https://www.digikey.com/en/products/detail/beagleboard/102991698/20380528) |
 | [PocketBeagle 2](https://www.beagleboard.org/boards/pocketbeagle-2) |                | ARM           | Cortex-A53 |   4   | 1.4Ghz |                 [29$](https://www.digikey.com/en/products/detail/beagleboard/102110780/25927193) |
 
-### Test Boards {#h3-2-test-boards}
+### Test Boards
 
 I received the following boards.
 
@@ -95,12 +95,12 @@ I received the following boards.
  </figure>
 </figure>
 
-First Tests {#h2-3-first-tests}
--------------------------------
+First Tests
+-----------
 
 The easiest way to get started with a BeagleBoard and burn the latest OS on an SD card, is the [BeagleBoard Imaging Utility](https://www.beagleboard.org/bb-imager), available for Windows, macOS and Linux. This is the first supplier of SBC's that provides such a tool that is comparable to the Raspberry Pi Imager Tool. It's a crucial factor to get started with a new type of SBC, and BeagleBoard has done a great job in making this tool available.
 
-### BeagleY-AI (ARM Processor) {#h3-4-beagley-ai-arm-processor}
+### BeagleY-AI (ARM Processor)
 
 This board delivered the smoothest experience of all four BeagleBoards. Using BeagleBoard's excellent Imaging Utility, I created an SD card with the latest OS, providing the username and password I want to use via the settings. With the SD card installed, I connected it via micro HDMI and USB, and booted into a desktop environment within minutes. After the standard `update` and \`upgrade, I installed [SDKMAN](https://sdkman.io/), Java (Azul Zulu 25.0.2 with JavaFX support), and [JBang](https://www.jbang.dev/). The JavaFX test application from the [Pi4J JBang repository](https://github.com/Pi4J/pi4j-jbang) ran flawlessly, confirming that both Java and JavaFX work perfectly on this ARM-based board. It's very comparable to the Raspberry Pi 5, even sharing similar connector placement, making it an excellent choice for Java development.
 
@@ -122,7 +122,7 @@ jbang HelloJavaFXWorld.java
 ```
 
 
-### BeagleV-Fire (RISC-V Processor) {#h3-5-beaglev-fire-risc-v-processor}
+### BeagleV-Fire (RISC-V Processor)
 
 This board proved challenging due to my Raspberry Pi habits. I initially created an SD card using the Imaging Utility, not realizing the board already has Ubuntu pre-installed in its eMMC storage. Unfortunately, it's running Ubuntu 23.04, which is no longer maintained, preventing me from updating or installing Java through the package manager. The correct approach requires connecting the board via USB to my computer and flashing the eMMC directly using the Imaging Utility's device mode, but I haven't successfully completed this process yet. While Java RISC-V builds exist and should theoretically work, I need to resolve the OS update issue first before confirming Java compatibility.
 
@@ -138,7 +138,7 @@ default username:password is [beagle:temppwd]
 ```
 
 
-### BeagleV-Ahead (RISC-V Processor) {#h3-6-beaglev-ahead-risc-v-processor}
+### BeagleV-Ahead (RISC-V Processor)
 
 This larger RISC-V board presents its own unique challenges. Unlike modern boards, it requires a traditional 5-volt barrel connector instead of USB-C for power. I successfully connected to it via SSH over my network, but discovered it runs a custom Linux distribution specifically built for its processor, one I didn't recognize and couldn't identify as Debian or Ubuntu-based. The apt package manager doesn't function on this distribution, leaving me unable to install Java through standard methods. While Java RISC-V builds should theoretically be compatible, I need to dive deeper into the documentation to understand this custom distribution and determine the proper installation approach.
 
@@ -166,12 +166,12 @@ E: Unable to locate package java
 ```
 
 
-### PocketBeagle 2 2 (ARM Processor) {#h3-7-pocketbeagle-2-2-arm-processor}
+### PocketBeagle 2 2 (ARM Processor)
 
 This tiny ARM-based board uses the Cortex A53 processor (the same as the BeagleY-AI), which means Java should run without issues since ARM Java distributions are readily available. I haven't tested it yet, but I'm confident it will work. The exciting part is the included Tech Lab kit with buttons and RGB LEDs that mount directly on top of the board, making it an ideal platform for coding clubs and educational settings where you want to combine programming with physical computing experiments. This compact form factor paired with interactive hardware makes it a promising board for hands-on Java experimentation.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 My congratulations to BeagleBoard for their documentation website and Imaging Utility! That really sets them apart from other single-board computer suppliers I tested before. Java on BeagleY-AI runs within minutes of starting my tests, and I'm confident I'll be able to use it for further experiments.
 

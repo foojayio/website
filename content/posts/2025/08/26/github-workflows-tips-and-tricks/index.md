@@ -22,8 +22,8 @@ frozen: false
 
 I've quite a lengthy experience with GitHub workflows, but not up to the point where I can claim I'm an expert. However, I recently developed a new workflow, and it prompted me to write this post. Feel free to add your own.
 
-What are GitHub workflows? {#h2-0-what-are-github-workflows}
-------------------------------------------------------------
+What are GitHub workflows?
+--------------------------
 
 > A **workflow** is a configurable automated process that will run one or more jobs. Workflows are defined by a YAML file checked in to your repository and will run when triggered by an event in your repository, or they can be triggered manually or at a defined schedule.
 >
@@ -41,8 +41,8 @@ Note that GitHub was quite late to the party. Before it implemented workflows, I
 
 💡 Tip: **Use the correct semantics** : they are called *GitHub workflows*. GitHub Actions are entirely different.
 
-GitHub Actions {#h2-1-github-actions}
--------------------------------------
+GitHub Actions
+--------------
 
 GitHub workflows are composed of *jobs* , which themselves are composed of *steps* . Steps reference *run* commands, and a couple of optional parameters, including a name.
 
@@ -92,8 +92,8 @@ I'm a big fan of not reinventing the wheel. GitHub Actions play a big role in th
 
 💡 Tip: **Prefer GitHub Actions over ad-hoc commands** when possible.
 
-Choosing the right Action {#h2-2-choosing-the-right-action}
------------------------------------------------------------
+Choosing the right Action
+-------------------------
 
 The GitHub Marketplace hosts [plenty of actions](https://github.com/marketplace?type=actions). Actions are listed by categories. You can filter by creator type and sort by popularity.
 
@@ -110,8 +110,8 @@ When choosing an action, you should exert the same care as when bringing in any 
 
 💡 Tip: **Be as careful in choosing a GitHub Action as in choosing any other dependency.**
 
-Know your Actions {#h2-3-know-your-actions}
--------------------------------------------
+Know your Actions
+-----------------
 
 As the previous tip, this one stems from a more generic one---I speak from experience. I was developing a workflow to package a Java application. I was heavily using the workflow, and the job had to download the dependencies at every run.
 
@@ -166,8 +166,8 @@ jobs:
 
 💡 Tip: **Thoroughly read the documentation of actions.** Spending one hour on the documentation can help you save man-days of effort.
 
-Pin your dependency version {#h2-4-pin-your-dependency-version}
----------------------------------------------------------------
+Pin your dependency version
+---------------------------
 
 This section also takes generic advice and applies it to GitHub workflows' version. You find versions in at least two places: the OCI image and GitHub Actions' version.
 
@@ -188,8 +188,8 @@ jobs:
 
 💡 Tip: Take security seriously and **pin actions to a specific commit.**
 
-Use the job summary {#h2-5-use-the-job-summary}
------------------------------------------------
+Use the job summary
+-------------------
 
 Each of your workflow steps probably outputs lots of logs. In a regular workflow, the overall amount of log lines can be quite huge. Some of them might be useful, some of them might not be, but because there's only a standard output and standard error, everything ends up in the same place. Yet, you may want to focus on specific information, *e.g.*, the number of tests run or the percentage of code coverage, in case you don't send these data somewhere else. GitHub makes it straightforward to add the data you want in the job summary.
 > You can set some custom Markdown for each job so that it will be displayed on the summary page of a workflow run. You can use job summaries to display and group unique content, such as test result summaries, so that someone viewing the result of a workflow run doesn't need to go into the logs to see important information related to the run, such as failures.
@@ -215,8 +215,8 @@ The [result](https://github.com/apache/arrow-adbc/actions/runs/17181739408#summa
 
 💡 Tip: **Use GitHub job summary** to enhance developer experience.
 
-Understand workflows' lifecycle {#h2-6-understand-workflows-lifecycle}
-----------------------------------------------------------------------
+Understand workflows' lifecycle
+-------------------------------
 
 Workflows run steps sequentially. A failing step cancels all remaining steps, and the workflow ends up in a `Failure` state. In the example above, it means we won't get any testing summary at all if any of the subsequent step fails. It's possible to bypass this default behavior by using the counterintuitive `if` condition.
 > You can use the following status check functions as expressions in `if` conditionals. A default status check of `success()` is applied unless you include one of these functions.
@@ -273,8 +273,8 @@ It's only a simple example, but it offers interesting options.
 
 💡 Tip: **Know workflows' lifecycle** and use it to your advantage.
 
-Test locally {#h2-7-test-locally}
----------------------------------
+Test locally
+------------
 
 Lots of organizations enforce strict GitHub rules. The most widespread one is that you can't push to `master`: every commit must go through a pull request. While it makes sense for established projects, it prevents starting projects from iterating fast while retaining the commit history. In the context of developing GitHub workflows, it's definitely crippling.
 
@@ -402,8 +402,8 @@ I could write a couple of posts on `act`; I'll leave you to read the documentati
 
 💡 Tip: **Test your workflows locally** to reduce your feedback cycle time.
 
-Summary {#h2-8-summary}
------------------------
+Summary
+-------
 
 1. Use the correct semantics, differentiate between workflows and actions.
 2. Prefer GitHub Actions over ad-hoc commands.

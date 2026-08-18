@@ -24,10 +24,10 @@ In [Part 3](https://foojay.io/today/understanding-apache-maven-part-3-maven-coor
 
 Maven uses the **version as a coordinate** in identifying an artifact.
 
-Common Version naming conventions {#h2-0-common-version-naming-conventions}
----------------------------------------------------------------------------
+Common Version naming conventions
+---------------------------------
 
-### Development cycle {#h3-1-development-cycle}
+### Development cycle
 
 During a development cycle, code is often altered. Changing version numbers for each change in code will produce too many throw-away versions. Each deployment where this artifact gets tested will need to update a version number. In addition, if other projects depend on such an artifact, it can cause ripple effects while updating the version number from each build. As a solution maven provides what is known as a **SNAPSHOT** version. **A SNAPSHOT version is usually the same as the targeted final version with a suffix of `-SNAPSHOT`**.
 
@@ -35,11 +35,11 @@ The project POM declares its coordinates with the SNAPSHOT suffix and iterativel
 
 **A version with a SNAPSHOT suffix is a *mutable* artifact that eases the development cycle.** Mutability is both a benefit and a liability. More on this later.
 
-### Release cycle {#h3-2-release-cycle}
+### Release cycle
 
 Once all desired group of changes are verified/tested, a project reaches a release cycle. The artifact produced from building the project can be marked *immutable* . Any further change would have to be scoped into another future build, with a different version. Such builds are commonly called release builds. The artifacts produced from this build are immutable. Version schemes for such artifacts ***may have no suffix*** or ***may have an alternate suffix*** such as `-FINAL` or `-RELEASE` or `-GA` etc.
 
-### Transitioning from SNAPSHOT to a release {#h3-3-transitioning-from-snapshot-to-a-release}
+### Transitioning from SNAPSHOT to a release
 
 There are several ways to convert a SNAPSHOT version to a release when the time comes. Versions can be manually altered prior to a build. The build sanctity is potentially violated with any change made in code, hence using an automated process to update the version are preferred. Two sample mechanisms commonly used are detailed below.
 
@@ -62,10 +62,10 @@ Ideally, since a POM is modified during development, it is best to use the -SNAP
 Typically projects start with a `0.0.1-SNAPSHOT` or a `1.0.0-SNAPSHOT`. Following **Semver 2.0** rules is heavily recommended for the numeric portion of the POM, since it provides visual cues for a developer's understanding.
 ![Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.](https://cgunturme.files.wordpress.com/2020/07/mavenversionstrategy.png?w=1024) Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.
 
-Controlling Versions in Maven {#h2-4-controlling-versions-in-maven}
--------------------------------------------------------------------
+Controlling Versions in Maven
+-----------------------------
 
-### Version Ranges in Maven {#h3-5-version-ranges-in-maven}
+### Version Ranges in Maven
 
 Maven supports version ranges. At times it is possible for a POM to be a bit flexible in accepting a range of versions of a dependency. This flexibility can stem from some underlying assumptions such as backward compatibility or a minimal dependence on the said dependency. It is also a means of restricting an allowed version to be within a specified set of versions.
 
@@ -91,7 +91,7 @@ Version Range patterns
 
 Version ranges are a powerful option. One of the **major drawback of using ranges** , in general, is a **lack of build reproducibility** . There is no guarantee of the version that will be chosen if a range is provided. There are better options using `dependencyManagement` to control versions. This blog will also cover the **`maven-enforcer-plugin`**, which can do more with version ranges.
 
-### Using `dependencyManagement` and `pluginManagement` {#h3-6-using-dependencymanagement-and-pluginmanagement}
+### Using `dependencyManagement` and `pluginManagement`
 
 As was covered in [Part 5](https://cguntur.me/2020/06/03/understanding-apache-maven-part-5/), versions for a dependency can be controlled using a `dependencyManagement` section.
 
@@ -107,7 +107,7 @@ A similar recap for `pluginManagement` applies, where a **plugins** can be liste
 
 Similar to the pattern followed by `dependencyManagement`, plugins configured in `pluginManagement` are not directly used in the build, but are looked up, when encountered in the POM's build section with a **groupId** and **artifactId**.
 
-### Using a `maven-enforcer-plugin` {#h3-7-using-a-maven-enforcer-plugin}
+### Using a `maven-enforcer-plugin`
 
 Maven provides a very versatile tooling plugin to allow centralized control over the build environment from a single POM (inherited to child POMs) and allows for greater flexibility in version specifications by supporting version ranges.
 
@@ -121,8 +121,8 @@ Enforcer provides built-in rules for `bannedDependencies`, `dependencyConvergenc
 
 Link to built-in rules: <http://maven.apache.org/enforcer/enforcer-rules/index.html>
 
-Handling Backward Compatibility {#h2-8-handling-backward-compatibility}
------------------------------------------------------------------------
+Handling Backward Compatibility
+-------------------------------
 
 Projects, especially libraries, strive not to break **backward compatibility** . Backward compatibility is a guarantee that upgrading to the newer version of the library **WILL NOT** break existing usage. While this goal is utopian, there is a necessity to, at times, break backward compatibility, due to either security constraints or to allow enhancements that are not possible without such a breaking change.
 

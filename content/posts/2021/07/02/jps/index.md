@@ -26,7 +26,7 @@ For Linux OS we generally use `ps -ef`. ***ps*** is one of the most used Linux t
 
 The `jps` utility can also provide information on arguments passed to the main method, arguments passed to JVM, etc. In this post, we will see the functionalities provided by `jps`.
 
-### Troubleshooting a Java Application with jps {#h3-0-troubleshooting-a-java-application-with-jps}
+### Troubleshooting a Java Application with jps
 
 In this section, we will see how to use `jps` with a running Java process.
 

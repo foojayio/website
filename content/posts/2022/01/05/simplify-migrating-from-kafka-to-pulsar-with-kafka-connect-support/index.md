@@ -32,10 +32,10 @@ Let's take a quick look at the existing ecosystem that helps navigate the transi
 
 Throughout this article, we will follow the convention of discussing streaming *sources* , that push data into Pulsar from another system, and *sinks*, that send data from Pulsar to another destination.
 
-Current state of the Pulsar-Kafka ecosystem {#h2-0-current-state-of-the-pulsar-kafka-ecosystem}
------------------------------------------------------------------------------------------------
+Current state of the Pulsar-Kafka ecosystem
+-------------------------------------------
 
-### Built-in connectors to Kafka {#h3-1-built-in-connectors-to-kafka}
+### Built-in connectors to Kafka
 
 Built-in connectors simplify pulling/pushing data between Pulsar and Kafka topics.
 
@@ -46,7 +46,7 @@ More details are available in the Pulsar documentation:
 * Source (ingest data to Pulsar from Kafka): <https://pulsar.apache.org/docs/en/io-kafka-source/>
 * Sink (send data from Pulsar to Kafka): <https://pulsar.apache.org/docs/en/io-kafka-sink/>
 
-### Kafka on Pulsar {#h3-2-kafka-on-pulsar}
+### Kafka on Pulsar
 
 Kafka on Pulsar (KoP) is the recommended way to use the native Kafka client with Pulsar.
 
@@ -56,7 +56,7 @@ KoP is a *protocol handler*. This means that it interprets the Kafka protocol at
 2. KoP uses the well-defined interface between Kafka client and server
 3. Client code does not need to change at all
 
-### Kafka Connect Adaptor {#h3-3-kafka-connect-adaptor}
+### Kafka Connect Adaptor
 
 Most people use Kafka (and Pulsar) via connectors to other systems, rather than writing low-level client code by hand. Pulsar has [native connectors](https://pulsar.apache.org/docs/en/io-overview/) available for the most popular systems, but as of this writing, there are many more connectors for Kafka that do not yet exist for Pulsar, including private connectors created in-house for use at a single company.
 
@@ -64,12 +64,12 @@ The Kafka Connect Adaptor (KCA) bridges this gap. KCA is a Pulsar Source and Sin
 
 Currently, the documentation is scarce, but using KCA is simple. We will look at examples of using both the KCA Sink and Source below.
 
-Using the Kafka Connect Adaptor Sink {#h2-4-using-the-kafka-connect-adaptor-sink}
----------------------------------------------------------------------------------
+Using the Kafka Connect Adaptor Sink
+------------------------------------
 
 Using Kafka Connect Adaptor Sink is fairly straightforward. All you need to do is package the Kafka Connect connector, create the configuration, and use it as a regular Pulsar Sink.
 
-### Step 1: Package {#h3-5-step-1-package}
+### Step 1: Package
 
 Use Kafka Connect Adaptor NAR <https://github.com/apache/pulsar/tree/master/pulsar-io/kafka-connect-adaptor-nar> as a starting point (for simplicity, I'll edit it directly) and add your Kafka Connector Sink to the list of the dependencies in pom.xml. Here's what this would look like with the Kinesis Kafka connector sink:
 
@@ -99,7 +99,7 @@ $ mvn -f pulsar-io/kafka-connect-adaptor-nar/pom.xml clean package -DskipTests
 ```
 
 
-### Step 2: Configuration {#h3-6-step-2-configuration}
+### Step 2: Configuration
 
 The Sink expects "processingGuarantees" to be "EFFECTIVELY_ONCE"\`, configs pointing to the Pulsar instance \& topic to store processed offsets at, topic to read the data from, and configuration to pass to the Kafka Connect Sink.
 
@@ -127,12 +127,12 @@ configs:
 ```
 
 
-### Step 3: Profit! {#h3-7-step-3-profit}
+### Step 3: Profit!
 
 Follow regular Pulsar's steps to use the packaged connector: <https://pulsar.apache.org/docs/en/io-use/>
 
-Using the Kafka Connect Adaptor Source {#h2-8-using-the-kafka-connect-adaptor-source}
--------------------------------------------------------------------------------------
+Using the Kafka Connect Adaptor Source
+--------------------------------------
 
 KCA Source has been available since Pulsar version 2.3.0. In the simplest case, its usage is similar to the KCA Sink's: add the dependency and build, provide configuration and run.
 
@@ -140,8 +140,8 @@ Currently, KCA Source only supports Sources that return data in Apache Avro or J
 
 For detailed examples of the use of the Source Adaptor please look at [Pulsar's Debezium Connector](https://github.com/apache/pulsar/blob/master/pulsar-io/debezium/core/src/main/java/org/apache/pulsar/io/debezium/DebeziumSource.java).
 
-Under the hood: Building a better developer experience for Pulsar IO {#h2-9-under-the-hood-building-a-better-developer-experience-for-pulsar-io}
-------------------------------------------------------------------------------------------------------------------------------------------------
+Under the hood: Building a better developer experience for Pulsar IO
+--------------------------------------------------------------------
 
 Apache Pulsar 2.8 offers many improvements to the Java Pulsar Schema API and to the Pulsar IO API that helped to fill in the gaps between Kafka Connect and Pulsar IO. These improvements were foundational for Kafka Connect Adaptor Sink and result in easier development of Pulsar IO Sinks in general.
 
@@ -149,7 +149,7 @@ The Kafka Connect user must explicitly configure the Sink (or the Kafka Consumer
 
 Let's take a deeper look at the Pulsar IO API improvements below; for more technical details, please refer to the [PIP-85](https://docs.google.com/document/d/1VWi5LHP44V31nP4bCui9d5RXwH6xc_phrUes6tvNguk/edit?usp=sharing).
 
-### Runtime handling of the schema {#h3-10-runtime-handling-of-the-schema}
+### Runtime handling of the schema
 
 We have contributed the support for coding schema-aware Pulsar IO Sinks that do not depend on a particular schema at build time. In other words, in Pulsar 2.7 you had to declare the schema type in your sink:
 
@@ -174,13 +174,13 @@ class MySink implements Sink {
 
 This sink will work with every schema type and with topics without a schema. It also supports schema evolution and KeyValue schema type.
 
-### Seamless support of KeyValue messages {#h3-11-seamless-support-of-keyvalue-messages}
+### Seamless support of KeyValue messages
 
 The second gap between Kafka Connect and Pulsar IO was the lack of seamless support for KeyValue messages.
 
 For many versions, Pulsar offered the powerful KeyValue schema type that supported setting a schema for the Key and the Value. With a Sink\<GenericObject\> you can handle the KeyValue schema as well, writing your code only once and keeping it simpler.
 
-### Access message and schema details for messages consumed with Schema.AUTO_CONSUME {#h3-12-access-message-and-schema-details-for-messages-consumed-with-schema-auto-consume}
+### Access message and schema details for messages consumed with Schema.AUTO_CONSUME
 
 Pulsar uses a special AUTO_CONSUME schema to validate and deserialize messages using schemas received from the broker. Currently, it supports Avro, JSON, and ProtobufNativeSchema schemas. You can find more details in the documentation <https://pulsar.apache.org/docs/en/schema-understand/#auto_consume>
 
@@ -198,8 +198,8 @@ Message.getReaderSchema() method returns the actual schema used for decoding the
 
 Schema.getNativeSchema() and GenericRecord.getNativeObject() methods provide access to the underlying implementation of the schema and the Java model of the message. In particular, you can access the Avro schema and the Avro GenericObject instance under the covers.  
 
-Summing up {#h2-13-summing-up}
-------------------------------
+Summing up
+----------
 
 The new Kafka Connect Adaptor completes the Pulsar-Kafka compatibility ecosystem. This ecosystem currently allows an iterative transition from Kafka to Pulsar, supports the use of native Kafka clients with Pulsar, the use of Kafka Connect connectors on Pulsar, and data transfer between two systems.
 

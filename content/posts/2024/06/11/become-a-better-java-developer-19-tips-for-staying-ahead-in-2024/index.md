@@ -35,8 +35,8 @@ After posting my question and receiving so much solidarity, I shared it with my 
 
 Sorce; Reddit
 
-Here are the tips I got on becoming a better Java developer {#h2-0-here-are-the-tips-i-got-on-becoming-a-better-java-developer}
--------------------------------------------------------------------------------------------------------------------------------
+Here are the tips I got on becoming a better Java developer
+-----------------------------------------------------------
 
 1. Bump up the version number, and JetBrains IDEs auto-suggest most of the new changes. IntelliJ itself does a great job of telling you if you aren't taking advantage of new language features.
 2. Learn Kotlin: it might give you some interesting perspective (and the ability to shift jobs if the need arises, etc.). My understanding is that Java 17 and 21 are actually significantly better than 9 \& 11, and adopt a lot of similar changes to what Kotlin introduced (other than null safety, because of backward compatibility)
@@ -67,8 +67,8 @@ Here are the tips I got on becoming a better Java developer {#h2-0-here-are-the-
 18. Sign up for Rodrigo Graciano's weekend reading list, where he shares the best Java articles of the week. Here is the website: <https://graciano.dev/>.
 19. I saved the best for last, as I knew people would associate "feeling rusty" with Rust: 'If you are feeling quite Rusty, might I recommend you take up my Lord and Savior- Rust"
 
-Final Words:) {#h2-1-final-words}
----------------------------------
+Final Words:)
+-------------
 
 I'm sure that some of you can relate to the situation and find these tips valuable.
 

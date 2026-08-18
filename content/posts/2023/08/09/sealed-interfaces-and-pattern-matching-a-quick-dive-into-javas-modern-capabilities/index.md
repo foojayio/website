@@ -35,8 +35,8 @@ public interface Shape {
 
 In a conventional scenario, any class can implement `Shape`, and finding all classes that do this is not straightforward. However, with the introduction of sealed classes, we can specify precisely which classes are allowed to implement an interface.
 
-Defining a Sealed Interface {#h2-0-defining-a-sealed-interface}
----------------------------------------------------------------
+Defining a Sealed Interface
+---------------------------
 
 Here is how you can declare a sealed interface with permitted subclasses:
 
@@ -49,8 +49,8 @@ public sealed interface Shape permits Circle, Rectangle, Square {
 
 In the example above, we declared `Shape` as a sealed interface and explicitly specified that only `Circle`, `Rectangle`, and `Square` classes can implement `Shape`. This is a powerful feature, as it gives us more control over our class hierarchy and prevents unwanted class implementations.
 
-Finding All Permitted Subclasses {#h2-1-finding-all-permitted-subclasses}
--------------------------------------------------------------------------
+Finding All Permitted Subclasses
+--------------------------------
 
 With a sealed interface, finding all subclasses or implementors becomes straightforward:
 
@@ -64,8 +64,8 @@ for (Class<?> subclass : permittedSubclasses) {
 
 The method `getPermittedSubclasses()` returns an array of `Class` objects representing the permitted subclasses of `Shape`. We can then loop through the array and print out all the subclasses.
 
-Pattern Matching with Sealed Classes {#h2-2-pattern-matching-with-sealed-classes}
----------------------------------------------------------------------------------
+Pattern Matching with Sealed Classes
+------------------------------------
 
 Pattern matching is another powerful feature in Java that goes hand-in-hand with sealed classes. With pattern matching, we can perform operations based on the type of the object:  
 

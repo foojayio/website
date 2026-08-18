@@ -37,10 +37,10 @@ Let's explore how Kafka Streams powers a real-time city tour experience! 🧭
 
 🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
-1️⃣ The Use Case: Lille City Tour {#h2-0-1-the-use-case-lille-city-tour}
-------------------------------------------------------------------------
+1️⃣ The Use Case: Lille City Tour
+---------------------------------
 
-### Imagine you're planning a visit through Lille, France. {#h3-1-imagine-you-re-planning-a-visit-through-lille-france}
+### Imagine you're planning a visit through Lille, France.
 
 You want to see:
 
@@ -58,10 +58,10 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 
 🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪
 
-2️⃣ The Goal {#h2-2-2-the-goal}
--------------------------------
+2️⃣ The Goal
+------------
 
-### What I want to do! {#h3-3-what-i-want-to-do}
+### What I want to do!
 
 1. Receive event submissions (location + visit time).
 2. Check whether the visit is valid.
@@ -74,10 +74,10 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 
 🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪
 
-3️⃣ Tech Stack {#h2-4-3-tech-stack}
------------------------------------
+3️⃣ Tech Stack
+--------------
 
-### What I used for this demo {#h3-5-what-i-used-for-this-demo}
+### What I used for this demo
 
 * Apache Kafka
 * Kafka Streams
@@ -90,10 +90,10 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 
 🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪
 
-4️⃣ Data Modeling {#h2-6-4-data-modeling}
------------------------------------------
+4️⃣ Data Modeling
+-----------------
 
-### What is the model of the visit data {#h3-7-what-is-the-model-of-the-visit-data}
+### What is the model of the visit data
 
 Each location has its own timetable:
 
@@ -152,10 +152,10 @@ Or, if the visit falls outside the available range:
 
 🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪
 
-5️⃣ Kafka Streams Topology {#h2-8-5-kafka-streams-topology}
------------------------------------------------------------
+5️⃣ Kafka Streams Topology
+--------------------------
 
-### 🧠 Concept {#h3-9-concept}
+### 🧠 Concept
 
 #### Kafka Streams builds real-time processing flows using topologies.
 
@@ -175,7 +175,7 @@ In our case:
 * trip-steps for valid events
 * DLQ for invalid ones
 
-### 🧾 Key Logic {#h3-10-key-logic}
+### 🧾 Key Logic
 
 #### The processors involved:
 
@@ -194,7 +194,7 @@ validatedVisits.split()
 ```
 
 
-### 🖥️ Visualization {#h3-11-visualization}
+### 🖥️ Visualization
 
 #### Using Kafka Streams Viz:[Kafka Streams Topology Visualizer](http://https://zz85.github.io/kafka-streams-viz/ "Kafka Streams Topology Visualizer"))
 
@@ -210,8 +210,8 @@ Each branch of the stream is defined clearly, allowing easy debugging and mainta
 
 🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪
 
-6️⃣ Tools in Action {#h2-12-6-tools-in-action}
-----------------------------------------------
+6️⃣ Tools in Action
+-------------------
 
 #### 🔄 Kafka Topics: All messages are pushed and consumed in real time.
 
@@ -334,8 +334,8 @@ class VisitStatusTopologyTest {
 
 🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪
 
-7️⃣ What I Learned {#h2-13-7-what-i-learned}
---------------------------------------------
+7️⃣ What I Learned
+------------------
 
 This project helped solidify my understanding of:
 
@@ -350,10 +350,10 @@ And most importantly, building a real-life use case that's both educational and 
 
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪
 
-8️⃣ Next Steps {#h2-14-8-next-steps}
-------------------------------------
+8️⃣ Next Steps
+--------------
 
-### Going further with SpringBoot and Kafka Streams {#h3-15-going-further-with-springboot-and-kafka-streams}
+### Going further with SpringBoot and Kafka Streams
 
 Here's what could be added next:
 
@@ -366,10 +366,10 @@ Here's what could be added next:
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪
 
-9️⃣ Try It Yourself {#h2-16-9-try-it-yourself}
-----------------------------------------------
+9️⃣ Try It Yourself
+-------------------
 
-### Want to explore this yourself? {#h3-17-want-to-explore-this-yourself}
+### Want to explore this yourself?
 
 Clone the project ([vinny59200 / kstream-lille-city-tour](https://github.com/vinny59200/kstream-lille-city-tour "vinny59200 / kstream-lille-city-tour")), run the containers, and start submitting events to see the validation in action.
 
@@ -379,10 +379,10 @@ Clone the project ([vinny59200 / kstream-lille-city-tour](https://github.com/vin
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵
 
-🔟 Conclusion {#h2-18-conclusion}
----------------------------------
+🔟 Conclusion
+-------------
 
-### SpringBoot and Kafka Streams -- Event Routing \& Testing {#h3-19-springboot-and-kafka-streams-event-routing-testing}
+### SpringBoot and Kafka Streams -- Event Routing \& Testing
 
 Kafka Streams is an incredibly powerful tool for building real-time event processing pipelines.  
 
@@ -392,7 +392,7 @@ Want the code? [vinny59200 / kstream-lille-city-tour](https://github.com/vinny59
 
 Thanks for joining the tour! 🇫🇷✨
 
-### See also {#h3-20-see-also}
+### See also
 
 #### Related to SpringBoot and Kafka Streams
 

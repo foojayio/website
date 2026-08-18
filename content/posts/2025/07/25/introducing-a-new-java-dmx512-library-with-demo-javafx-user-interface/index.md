@@ -29,8 +29,8 @@ In this post, I would like to inform you about a new Java library that is now av
 
 But first...
 
-A Personal Story {#h2-0-a-personal-story}
------------------------------------------
+A Personal Story
+----------------
 
 I've always been fascinated by sound and light equipment. As a teenager (over 30 years ago...), I built two disco bars and used them as "DJ Franky" to bring ambiance to many weddings and other parties. I loved the DJ-ing, but I loved even more the technique of getting all the devices together and finding the best way to connect them, building custom housing, and creating the best possible connections. But there was one problem with this hobby, it all cost a lot of money...
 ![](https://webtechie.be/images/2025/dmx/djfranky-1.jpg)
@@ -39,12 +39,12 @@ Fast forward to now. Thanks to modern technology and improved production process
 
 As I wanted to control a few of these from a JavaFX user interface, but couldn't find a suitable Java library to do so, I created one myself.
 
-About DMX512 and OFL {#h2-1-about-dmx512-and-ofl}
--------------------------------------------------
+About DMX512 and OFL
+--------------------
 
 Let's start by explaining the standards used in this project.
 
-### What is DMX512 {#h3-2-what-is-dmx512}
+### What is DMX512
 
 [DMX512](https://en.wikipedia.org/wiki/DMX512) is a digital communication protocol, based on [RS-485](https://en.wikipedia.org/wiki/RS-485), widely used in professional lighting and stage equipment to control dimmers, moving lights, fog machines, and other effects. The protocol transmits data in a serial format over standard XLR cables, with each "universe" capable of controlling up to 512 channels of information. Each channel can carry values from 0 to 255, allowing for precise control of parameters such as brightness, color, position, and speed across multiple fixtures simultaneously. DMX512 has become the industry standard because it's reliable, relatively simple to implement, and allows complex lighting shows to be programmed and synchronized from a central console.
 ![](https://webtechie.be/images/2025/dmx/dmx-fixtures.png)
@@ -78,7 +78,7 @@ Software applications like [QLC+](https://www.qlcplus.org/), [ONYX](https://www.
 
 But none of these are based on Java...
 
-### What is Open Fixture Library {#h3-3-what-is-open-fixture-library}
+### What is Open Fixture Library
 
 The [Open Fixture Library (OFL)](https://open-fixture-library.org/) is a collaborative, open-source platform that addresses a persistent issue in lighting control: fixture definitions that are tied to specific software platforms.
 ![](https://webtechie.be/images/2025/dmx/ofl-picospot.png)
@@ -101,8 +101,8 @@ In my library, you can use OFL exports in the "Open Fixture Library JSON" format
 
 The OFL project is [well documented on GitHub](https://github.com/OpenLightingProject/open-fixture-library/tree/master/docs) with more [details about the data model of the JSON files here](https://github.com/OpenLightingProject/open-fixture-library/blob/master/docs/model-api.md).
 
-DMX512 Java Library {#h2-4-dmx512-java-library}
------------------------------------------------
+DMX512 Java Library
+-------------------
 
 The library I created is open-source with its [sources on GitHub](https://github.com/codewriterbv/DMX512/) and [releases on Maven Central](https://central.sonatype.com/artifact/be.codewriter/dmx512).
 
@@ -115,7 +115,7 @@ The library I created is open-source with its [sources on GitHub](https://github
 ```
 
 
-### My Test Setup {#h3-5-my-test-setup}
+### My Test Setup
 
 At this moment, the library is only tested with this IP-to-DMX controller: [JUNELIONY ArtNet 1024 2-Port Sulite DMX LAN512 2-Port ArtNet Converter](https://www.amazon.com.be/dp/B0CYPQ2Z4V). It comes configured with a fixed IP, but I changed it to use DHCP.
 
@@ -126,7 +126,7 @@ I have the following fixtures connected to it:
 
 ![](https://webtechie.be/images/2025/dmx/test-setup-2.jpg)
 
-### Minimal Code Example {#h3-6-minimal-code-example}
+### Minimal Code Example
 
 You can send a byte array directly via the controller. Create an array with the expected length by your device and fill in the values.
 
@@ -160,7 +160,7 @@ controller.render(new byte[]{0, 0, 0, 0, 0, (byte) 44, 0, (byte) 255, 0, 0, 0});
 ```
 
 
-### Using Fixtures and Modes {#h3-7-using-fixtures-and-modes}
+### Using Fixtures and Modes
 
 By using a fixture loaded from an OFL JSON file, it becomes significantly easier to modify the data. You can use the name of the channel (e.g., "red", "dimmer", ...) and don't need to know the index of the data in the byte array.
 
@@ -208,7 +208,7 @@ controller.close();
 ```
 
 
-### Detecting USB-to-DMX and IP-to-DMX interfaces {#h3-8-detecting-usb-to-dmx-and-ip-to-dmx-interfaces}
+### Detecting USB-to-DMX and IP-to-DMX interfaces
 
 Two tools in the library can be used to detect these interfaces:
 
@@ -221,14 +221,14 @@ List<DMXIPDevice> ipDevices = DMXIPDiscoverTool.discoverDevices();
 ```
 
 
-DMX512 JavaFX Demo Project {#h2-9-dmx512-javafx-demo-project}
--------------------------------------------------------------
+DMX512 JavaFX Demo Project
+--------------------------
 
 To demonstrate how the DMX data can be controlled from a user interface and what gets loaded from the OFL JSON files, a separate project has been created. It's also [available as open-source on GitHub](https://github.com/codewriterbv/DMX512-Demo).
 ![](https://webtechie.be/images/2025/dmx/demo-app-picospot-channels.png)
 
-Next Steps {#h2-10-next-steps}
-------------------------------
+Next Steps
+----------
 
 At this moment, with V0.0.1 of the library, devices can be successfully controlled with IP-to-DMX with the ArtNet protocol. My first USB experiments didn't succeed. That's why I focused on the DMX data handling, IP-to-DMX, and OFL integration to reach a first milestone.
 

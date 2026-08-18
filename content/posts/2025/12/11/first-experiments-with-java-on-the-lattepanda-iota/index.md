@@ -31,8 +31,8 @@ I reached out to several suppliers to see if I could get evaluation copies, and 
 
 {{< youtube jCOv1gXSzCA >}}
 
-Unboxing the LattePanda IOTA {#h2-0-unboxing-the-lattepanda-iota}
------------------------------------------------------------------
+Unboxing the LattePanda IOTA
+----------------------------
 
 The box contained multiple smaller boxes, but the most important one was the LattePanda IOTA board itself, based on an Intel Twin Lake N150 quad-core processor (up to 3.6GHz). It has a clear warning on the packaging: **"Do not operate without a heatsink"**. This thing will definitely get hot if you ignore that warning I guess 😉
 
@@ -56,26 +56,26 @@ In the same box, I also received:
 
 The cooling fan has a nice logo and excellent build quality. The PoE shield connects directly to a new network connector on the board, unlike Raspberry Pi expansion boards that use the Pi's existing network connection.
 
-Assembly {#h2-1-assembly}
--------------------------
+Assembly
+--------
 
 Following the documentation, I applied thermal paste to the processor, attached the cooling fan, and connected the M2 expansion board.
 
-Setting Up The Board {#h2-2-setting-up-the-board}
--------------------------------------------------
+Setting Up The Board
+--------------------
 
-### First Boot: Windows Pre-installed {#h3-3-first-boot-windows-pre-installed}
+### First Boot: Windows Pre-installed
 
 After finding the power button, the LattePanda logo appeared on screen, and... Windows started booting. Windows was pre-installed, though I'm not sure if this is default or just for evaluation units. Either way, I immediately noticed 100% CPU usage, the exact reason I left Windows long ago, as I never understood that it's an ongoing problem with Windows... Memory usage was also pretty high.
 ![](windows-cpu.png)
 
 This thing definitely works with Windows, but I don't use Windows myself. Time to turn this into a Linux device.
 
-### Installing Ubuntu {#h3-4-installing-ubuntu}
+### Installing Ubuntu
 
 I put the latest Ubuntu system on a USB stick to boot from it, restarted the device, and kept pressing the delete button to enter the BIOS. The system recognized the USB drive immediately. After selecting it and choosing "Save and exit", it booted into Ubuntu installation mode. A few configuration steps later, I had a nice combination: LattePanda running Ubuntu.
 
-### Setting Up Java Development {#h3-5-setting-up-java-development}
+### Setting Up Java Development
 
 As expected, Java isn't pre-installed in Ubuntu, but several installation options were suggested. However, there's an easier way to prepare a Linux embedded board like this or a Raspberry Pi for Java development: the **[Pi4J OS repository](https://github.com/pi4J/pi4j-os)**.
 
@@ -105,16 +105,16 @@ I also installed **Visual Studio Code**, the preferred Java editor for this kind
 * Extension Pack for Java: Installs many tools for Java development
 * JBang: To execute JBang code directly from VS Code
 
-Testing Java, JavaFX, and Pi4J {#h2-6-testing-java-javafx-and-pi4j}
--------------------------------------------------------------------
+Testing Java, JavaFX, and Pi4J
+------------------------------
 
 I cloned the [Pi4J JBang examples project](https://github.com/Pi4J/pi4j-jbang) and opened it in Visual Studio Code, to execute code in an easy way.
 
-### HelloWorld with JBang {#h3-7-helloworld-with-jbang}
+### HelloWorld with JBang
 
 The simple "Hello World" example ran perfectly. There's also an extended example using the Jackson library for JSON parsing, demonstrating how JBang can create single-file applications with dependencies, without needing a full Maven or Gradle project.
 
-### JavaFX Test {#h3-8-javafx-test}
+### JavaFX Test
 
 Since I installed the Java version from Azul with JavaFX included, I could also run a JavaFX demo application. It uses Pi4J to detect the board type, though this only contains methods to detect Raspberry Pi board versions at this moment, so it didn't recognize the LattePanda.
 
@@ -123,18 +123,18 @@ But the application **ran smoothly**! It showed we're running on a Linux 64-bit 
 
 Without any extra work, we have a JavaFX application running very smoothly on this board!
 
-### Pi4J Test {#h3-9-pi4j-test}
+### Pi4J Test
 
 Now for the fun part: let's see what happens when we run something Pi4J-specific. I tried a project that uses an RGB-LED and changes colors. It compiled, but gave errors about user groups not being configured correctly. This was expected, I've never tried Pi4J on a non-Raspberry Pi single-board-computer before, so I wasn't expecting it to work on the first attempt.
 
 This is something I'll dive into further and post follow-up videos about what can be achieved with the Pi4J library on boards like this.
 
-### Performance Check {#h3-10-performance-check}
+### Performance Check
 
 With `htop`, I checked the CPU usage. Compared to Windows using 100% CPU, we have here in an idle state almost nothing. There's a lot of room for applications we can run on this board. Great!!!
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 This was the first quick test, and it only took me about an hour to unbox everything, assemble it, and record this. Very promising results:
 

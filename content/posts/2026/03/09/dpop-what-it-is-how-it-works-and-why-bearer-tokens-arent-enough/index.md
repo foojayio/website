@@ -21,15 +21,15 @@ frozen: false
 
 DPoP is one of the most exciting developments in the IAM (Identity and Access Management) space in recent years. Yet many backend developers either have not heard of it or are unsure what it actually changes. In this article, I will break down what DPoP is, what problem it solves, and walk through a working implementation with Keycloak and Quarkus.
 
-What is DPoP? {#h2-0-what-is-dpop}
-----------------------------------
+What is DPoP?
+-------------
 
 DPoP (Demonstration of Proof-of-Possession) is an OAuth 2.0 security mechanism defined in [RFC 9449](https://datatracker.ietf.org/doc/html/rfc9449). Its core purpose is simple: cryptographically bind an access token to the client that requested it. This way, even if a token is intercepted, it cannot be used by another client.
 
 In the traditional Bearer token model, anyone who possesses the token is considered authorized. DPoP changes this model; to use a token, the client must also prove possession of the corresponding private key.
 
-The Problem: Bearer Tokens and the "Finders Keepers" Risk {#h2-1-the-problem-bearer-tokens-and-the-finders-keepers-risk}
-------------------------------------------------------------------------------------------------------------------------
+The Problem: Bearer Tokens and the "Finders Keepers" Risk
+---------------------------------------------------------
 
 Bearer tokens are tokens carried in the HTTP Authorization header and accepted by the server without any additional verification of the presenter. [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750) explicitly states that possession of the token is the sole authorization criterion. This means any party that obtains the token can act as if it were the legitimate client.
 
@@ -41,8 +41,8 @@ This is not a theoretical risk. Real-world breaches have shown, time and again, 
 
 The common thread across these incidents is that a token was obtained and seamlessly used in a different context by a different actor. What makes this possible is the Bearer token model's core assumption: **whoever presents the token = the authorized actor.** The model checks who holds the token, not who the token belongs to.
 
-How Does DPoP Work? {#h2-2-how-does-dpop-work}
-----------------------------------------------
+How Does DPoP Work?
+-------------------
 
 DPoP requires the client to send a **DPoP Proof** JWT with every request. This proof is signed with the client's private key and contains the following claims:
 
@@ -70,8 +70,8 @@ The flow works as follows:
 
 With this model, stealing the token alone is not enough. The attacker cannot generate valid proofs without the private key, limiting any potential misuse to an already captured, unused proof within its narrow validity window. Compare this to the Bearer model, where a stolen token grants unrestricted access until it expires. DPoP does not eliminate token theft, but it makes stolen tokens fundamentally harder to exploit.
 
-Configuring DPoP in Keycloak {#h2-3-configuring-dpop-in-keycloak}
------------------------------------------------------------------
+Configuring DPoP in Keycloak
+----------------------------
 
 For this article, I use Keycloak (v26.5.5) as the identity provider. It is open-source, widely adopted, and provides built-in DPoP support with a straightforward configuration.
 
@@ -91,12 +91,12 @@ However, if you want to **enforce** DPoP for a specific client, meaning Bearer t
 
 With this option enabled, the client must include a DPoP proof with every token request. Requests without valid proof will be rejected, and Bearer tokens will not be accepted to access this client's resources.
 
-DPoP in Action with Quarkus {#h2-4-dpop-in-action-with-quarkus}
----------------------------------------------------------------
+DPoP in Action with Quarkus
+---------------------------
 
 To see DPoP in practice, I built a Quarkus application with protected REST endpoints and tested them using a [k6](https://k6.io) script. The full source code is available on [GitHub](https://github.com/hakdogan/quarkus-dpop-example).
 
-### Project Setup {#h3-5-project-setup}
+### Project Setup
 
 The application uses Quarkus 3.32.2 with the following key extension: **OpenId Connect**. Quarkus provides extensions for OpenID Connect and OAuth 2.0 access token management, focusing on acquiring, refreshing, and propagating tokens.
 
@@ -120,7 +120,7 @@ quarkus.oidc.token.authorization-scheme=dpop
 
 The key line here is `quarkus.oidc.token.authorization-scheme=dpop`. This property tells Quarkus OIDC extension to expect the `Authorization: DPoP ` scheme and to perform the full DPoP proof verification process as defined by [RFC 9449](https://datatracker.ietf.org/doc/html/rfc9449). This includes validating the proof's signature, `htm`, `htu`, `ath`, and the `cnf` thumbprint binding between the token and the proof's public key.
 
-### Protected Endpoints {#h3-6-protected-endpoints}
+### Protected Endpoints
 
 The application exposes three endpoints under the `/api` path, all requiring authentication. Each endpoint returns the caller's name and the token type (Bearer or DPoP) by checking the presence of the `cnf` claim in the JWT:
 
@@ -168,7 +168,7 @@ public class ProtectedResource {
 
 Having both GET and POST on `/user-info` plus a separate `/list-users` endpoint is intentional. These allow us to demonstrate how DPoP proof claims (`htm` and `htu`) restrict token usage to a specific HTTP method and URL.
 
-### Replay Protection with a jti Filter {#h3-7-replay-protection-with-a-jti-filter}
+### Replay Protection with a jti Filter
 
 As mentioned above, Quarkus OIDC extension handles the core DPoP verification. However, `jti` replay protection is not part of that process, since tracking used values requires server-side state, which falls outside the scope of a stateless token validation layer.
 
@@ -221,7 +221,7 @@ It is worth noting that Keycloak already performs jti replay protection at the *
 
 However, this protection only covers requests made to Keycloak itself. Once a DPoP-bound token is issued, the **resource server** is responsible for its own jti tracking. A stolen proof could be replayed against the Quarkus application, and Keycloak would have no visibility into that. This is why I added the jti filter at the resource server level, creating a two-layer defense: **Keycloak guards the token endpoint, and the filter guards the application endpoints.**
 
-### Testing with k6 {#h3-8-testing-with-k6}
+### Testing with k6
 
 The repository includes a k6 test script (`k6/dpop-test.js`) that exercises the full DPoP flow. Run it with:
 
@@ -334,8 +334,8 @@ All seven checks pass:
 
 In contrast, if the same requests were sent as plain Bearer tokens without DPoP proofs, all of them would succeed with `200`. The replay, method mismatch, and URL mismatch scenarios would go undetected because there is no proof to validate. **This is exactly the gap that DPoP closes.**
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 Bearer tokens follow a simple rule: whoever holds the token is authorized. DPoP changes this by binding each token to a cryptographic key pair and requiring a fresh, signed proof on every request. A stolen token alone is no longer sufficient.
 

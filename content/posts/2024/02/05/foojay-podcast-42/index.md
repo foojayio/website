@@ -23,13 +23,13 @@ Once a month in this podcast, we talk about the history of a Java User Group and
 
 Today, we are traveling to Cape Town and Johannesburg to learn more about its Java communities.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube fdJIDSy9_MA >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,23 +37,23 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Java User Groups {#h2-2-java-user-groups}
------------------------------------------
+Java User Groups
+----------------
 
-### Jozi-JUG {#h3-3-jozi-jug}
+### Jozi-JUG
 
 * <https://www.meetup.com/Jozi-JUG/>
 * <https://www.youtube.com/@JoziJUG>
 * <https://twitter.com/jozijug>
 
-### Cape Town Java Community {#h3-4-cape-town-java-community}
+### Cape Town Java Community
 
 * <https://www.meetup.com/Cape-Town-Java-Meetup/>
 * <https://www.youtube.com/@capetownjug>
 * <https://twitter.com/capetownjug>
 
-Guests {#h2-5-guests}
----------------------
+Guests
+------
 
 * Corneil du Plessis
   * <https://www.linkedin.com/in/corneil/>
@@ -62,16 +62,16 @@ Guests {#h2-5-guests}
 * Steven Makunzva
   * <https://www.linkedin.com/in/stevenmakunzva/>
 
-Podcast {#h2-6-podcast}
------------------------
+Podcast
+-------
 
 Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Content {#h2-7-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the guests  
 
@@ -109,8 +109,8 @@ Content {#h2-7-content}
  </div>
 </figure>
 
-Music {#h2-8-music}
--------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

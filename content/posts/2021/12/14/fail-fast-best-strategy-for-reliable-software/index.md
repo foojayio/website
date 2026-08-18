@@ -25,14 +25,14 @@ E.g., my machine tried to recover from a failure which sent it into an infinite 
 
 Which approach should we take and how does that impact our long-term reliability?
 
-Fail-Fast vs. Fail-Safe Approach {#h2-0-fail-fast-vs-fail-safe-approach}
-------------------------------------------------------------------------
+Fail-Fast vs. Fail-Safe Approach
+--------------------------------
 
 In case you aren't familiar with the terms, **fail-fast means a system that would quickly fail** in an unexpected condition. A **fail-safe system will try to recover and proceed even with bad input**.
 
 Java tries to take the fail-fast approach, whereas JavaScript leans a bit more towards the fail-safe approach. A good example of fail-fast behavior would be their respective approaches to null. In Java, a null produces a NullPointerException, which fails the code instantly and clearly. JavaScript uses "undefined", which can propagate through the system.
 
-### Which One Should We Pick? {#h3-1-which-one-should-we-pick}
+### Which One Should We Pick?
 
 This is hard to tell. There's very little research and I can't think of a way to apply the scientific method objectively to measure this sort of methodology. It has both technical aspects and core business aspects. It's pretty hard to determine something conclusively. What I can say for sure is that this shouldn't be a senior executive decision alone. This is a sort of policy that management should integrate with engineering to mitigate the downside risk. This applies to you, whether you're an engineer or a business leader. Whether you're a Silicon Valley startup, Amazon or a bank. These principles are universal.
 
@@ -53,7 +53,7 @@ Notice that despite that opinion I said that the Thermomix was smart to pick fai
 
 We need to learn from previous failure. Successful companies use both approaches, so it's very hard to pick the best approach.
 
-### Hybrid Environment in the Cloud {#h3-2-hybrid-environment-in-the-cloud}
+### Hybrid Environment in the Cloud
 
 A more common "strategy" for handling failure is to combine the best aspects of both worlds:
 
@@ -62,8 +62,8 @@ A more common "strategy" for handling failure is to combine the best aspects of 
 
 The core assumptions behind this direction is that we can control our local environment and test it well. Businesses can't rely on a random service in the cloud. They can build fault-tolerant systems by avoiding external risks but taking the calculated risks of a fail-fast system.
 
-Defining Failure {#h2-3-defining-failure}
------------------------------------------
+Defining Failure
+----------------
 
 When discussing failure the assumptions we make focus around a 500 error page, crash, etc. Those are serious P1 failures. But by no means are they the only type of failures or even the worst types of failure... A crash usually marks a problem we can fix and even workaround by spinning up a new server instance automatically. This is actually a failure we can handle relatively elegantly.
 
@@ -73,8 +73,8 @@ With cloud computing, we're seeing a rise in defensive programming such as circu
 
 An important part of a good QA process is long running tests that take hours to run and stress the system. When reviewing the logs of these tests, we can sometimes notice issues that didn't fail but conflict with our assumptions about the system. This can help find the insidious bugs that went through.
 
-Don't Fix the Bug {#h2-4-don-t-fix-the-bug}
--------------------------------------------
+Don't Fix the Bug
+-----------------
 
 Not right away. Well, unless it's in production, obviously...
 
@@ -82,14 +82,14 @@ We should understand bugs before we fix them. Why didn't the testing process fin
 
 When developers resolve a bug, they should be able to answer that question on the issue tracker. Then comes the hard problem, find the root cause of the failure and fix the process so such issues won't happen again. This is obviously an extreme approach to take on every bug, so we need to apply some discretion when we pick the bugs to focus on. But this must always apply to a bug in production. We must investigate bugs in production thoroughly since failure in the cloud can be very problematic to the business, especially when experiencing exponential growth.
 
-Debugging Failure {#h2-5-debugging-failure}
--------------------------------------------
+Debugging Failure
+-----------------
 
 Now that we have a general sense of the subject, let's get into the more practical aspects of a blog focused on debugging. There's no special innovation here. Debugging a fail-fast system is pretty darn easy.
 
 But there are some gotchas, tips and tricks we can use to promote fail-fast. There are other strategies we can use to debug a fail-safe system.
 
-### Ensuring We Fail-Fast {#h3-6-ensuring-we-fail-fast}
+### Ensuring We Fail-Fast
 
 Use the following strategies:
 
@@ -100,7 +100,7 @@ Use the following strategies:
 
 The core idea is to fail quickly. Say we need to invoke an Amazon web service. A networking issue can trigger a failure. A fail-fast system will expect a failure and present an error to the user.
 
-### Intelligent Failure for Fail-Safe {#h3-7-intelligent-failure-for-fail-safe}
+### Intelligent Failure for Fail-Safe
 
 The core idea isn't so much to avoid failure, it's unavoidable. The core idea is to soften the blow of a failure. E.g. if we take the Amazon web service example from above... A fail-safe environment could cache responses from Amazon and would try to show an older response.
 
@@ -108,8 +108,8 @@ The problem here is that users might get out-of-date information and this might 
 
 The obvious tip here is to log and alert on every failure and mitigation so we can address them. But there's another hybrid approach that isn't as common but might be interesting to some.
 
-Hybrid Fail-Safe {#h2-8-hybrid-fail-safe}
------------------------------------------
+Hybrid Fail-Safe
+----------------
 
 A hybrid fail-safe environment starts as a fail-fast environment. This is also true for the testing environment and staging. The core innovation is wrappers that enclose individual components and provide a failsafe layer. This can be very similar to CloudFlare or Amazon cloud front providing a cached version of the website.
 
@@ -121,8 +121,8 @@ A simplistic example like the Amazon example from above will include a quick fai
 
 This has the downside of adding a production component that's mostly missing in development and QA. But it includes many of the advantages of fail-fast and keeps the code relatively clean.
 
-Additional Best Practices for all {#h2-9-additional-best-practices-for-all}
----------------------------------------------------------------------------
+Additional Best Practices for all
+---------------------------------
 
 Here are some best practices you should keep in mind, regardless of the strategy you pick:
 
@@ -131,8 +131,8 @@ Here are some best practices you should keep in mind, regardless of the strategy
 * **Proper code review - I can't stress this enough.** I love code reviews. I despise nitpicking!  
   When I get a response on variable naming, code styling etc. it pushes my buttons... Sometimes comments like that ignore an actual bug. People hate code review because of that type of nitpicking. Companies should train developers in substantive processes and evaluation.
 
-TL;DR {#h2-10-tl-dr}
---------------------
+TL;DR
+-----
 
 Failure can come in many shapes and forms. We should accept that failure happens. It happens to Amazon, Facebook and Google despite all their efforts to avoid it. We need to decide on a strategy. Make assumptions and get support from senior management all the way through engineering.
 

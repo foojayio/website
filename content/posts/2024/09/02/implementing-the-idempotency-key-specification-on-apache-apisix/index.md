@@ -30,8 +30,8 @@ In short, the idea is for the client to send a unique key along with the request
 
 This post shows how to implement it with [Apache APISIX](https://apisix.apache.org/).
 
-Overview {#h2-0-overview}
--------------------------
+Overview
+--------
 
 Before starting coding, we need to define a couple of things. Apache APISIX offers a plugin-based architecture. Hence, we will code the above logic in a plugin.
 
@@ -112,8 +112,8 @@ routes:
 
 With this infrastructure in place, we can start the implementation.
 
-Laying out the plugin {#h2-1-laying-out-the-plugin}
----------------------------------------------------
+Laying out the plugin
+---------------------
 
 The foundations of an Apache APISIX plugin are pretty basic:
 
@@ -194,8 +194,8 @@ end
 
 The Redis client is now available in the `redis` variable throughout the rest of the plugin execution cycle.
 
-Implementing the nominal path {#h2-2-implementing-the-nominal-path}
--------------------------------------------------------------------
+Implementing the nominal path
+-----------------------------
 
 In my previous software engineer life, I usually implemented the nominal path first. Afterward, I made the code more robust by managing error cases individually. This way, if I had to release at any point, I would still deliver business values - with warnings. I shall approach this mini-project the same way.
 
@@ -292,8 +292,8 @@ curl -i -H 'Idempotency-Key: C' -H 'foo: bar'  localhost:9080/status/250
 
 Also, try to reuse a mismatched idempotency key, *e.g.* , `A`, for the third request. As we haven't implemented any error management yet, you'll get the cached response for another request. It's time to up our game.
 
-Implementing error paths {#h2-3-implementing-error-paths}
----------------------------------------------------------
+Implementing error paths
+------------------------
 
 The specification defines several error paths:
 
@@ -384,8 +384,8 @@ end
 
 That's it.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I showed a simple implementation of the `Idempotency-Key` header specification on Apache APISIX via a plugin.
 

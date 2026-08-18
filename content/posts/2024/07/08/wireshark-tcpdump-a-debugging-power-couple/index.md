@@ -49,8 +49,8 @@ Whether you're a developer, security expert, or just curious about network opera
 
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-Introduction to Wireshark {#h2-0-introduction-to-wireshark}
------------------------------------------------------------
+Introduction to Wireshark
+-------------------------
 
 Wireshark was initially developed by Eric Rescorla and Gerald Combs, designed to capture and analyze network packets in real-time. Its capabilities extend across various network interfaces and protocols, making it a versatile tool for anyone involved in networking. Unlike its command-line counterpart, tcpdump, Wireshark's graphical interface simplifies the analysis process, presenting data in a user-friendly "proto view" that organizes packets in a hierarchical structure. This facilitates quick identification of protocols, ports, and data flows.
 
@@ -60,14 +60,14 @@ The key features of Wireshark are:
 * **Proto View:** Displays packet data in a tree structure, simplifying protocol and port identification.
 * **Compatibility:** Supports a wide range of network interfaces and protocols.
 
-### Browser Network Monitors {#h3-1-browser-network-monitors}
+### Browser Network Monitors
 
 FireFox and Chrome contain a far superior network monitor tool built into them. It is superior because it is simpler to use and works with secure websites out of the box. If you can use the browser to debug the network traffic you should do that.
 
 In the cases where your traffic requires low level protocol information or is outside of the browser, Wireshark is the next best thing.
 
-Installation and Getting Started {#h2-2-installation-and-getting-started}
--------------------------------------------------------------------------
+Installation and Getting Started
+--------------------------------
 
 To begin with Wireshark, visit their [official website](https://www.wireshark.org/) for the download. The installation process is straightforward, but attention should be paid to the installation of command-line tools, which may require separate steps. Upon launching Wireshark, users are greeted with a selection of network interfaces as seen below. Choosing the correct interface, such as the loopback for local server debugging, is crucial for capturing relevant data.
 
@@ -75,8 +75,8 @@ To begin with Wireshark, visit their [official website](https://www.wireshark.or
 
 When debugging a Local Server (localhost) use the loopback interface. Remote servers will probably fit with the en0 network adapter. You can use the activity graph next to the network adapter to identify active interfaces for capture.
 
-Navigating Through Noise with Filters {#h2-3-navigating-through-noise-with-filters}
------------------------------------------------------------------------------------
+Navigating Through Noise with Filters
+-------------------------------------
 
 One of the challenges of using Wireshark is the overwhelming amount of data captured, including irrelevant "background noise" as seen in the following image.
 
@@ -94,8 +94,8 @@ But this isn't enough as HTTP is more concise. We can filter by protocol by addi
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ia7jokyzd3q7jgf3sdj9.png)
 
-Deep Dive into Data Analysis {#h2-4-deep-dive-into-data-analysis}
------------------------------------------------------------------
+Deep Dive into Data Analysis
+----------------------------
 
 Wireshark excels in its ability to dissect and present network data in an accessible manner. For example, HTTP responses carrying JSON data are automatically parsed and displayed in a readable tree structure as seen below. This feature is invaluable for developers and analysts, providing insights into the data exchanged between clients and servers without manual decoding.
 
@@ -103,8 +103,8 @@ Wireshark excels in its ability to dissect and present network data in an access
 
 Wireshark parses and displays JSON data within the packet analysis pane. It offers both hexadecimal and ASCII views for raw packet data.
 
-Beyond Basic Usage {#h2-5-beyond-basic-usage}
----------------------------------------------
+Beyond Basic Usage
+------------------
 
 While Wireshark's basic functionalities cater to a wide range of networking tasks, its true strength lies in advanced features such as ethernet network analysis, HTTPS decryption, and debugging across devices. These tasks, however, may involve complex configuration steps and a deeper understanding of network protocols and security measures.
 
@@ -113,13 +113,13 @@ There are two big challenges when working with Wireshark:
 * **HTTPS Decryption:** Decrypting HTTPS traffic requires additional configuration but offers visibility into secure communications.
 * **Device Debugging:** Wireshark can be used to troubleshoot network issues on various devices, requiring specific knowledge of network configurations.
 
-### The Basics of HTTPS Encryption {#h3-6-the-basics-of-https-encryption}
+### The Basics of HTTPS Encryption
 
 HTTPS uses the Transport Layer Security (TLS) or its predecessor, Secure Sockets Layer (SSL), to encrypt data. This encryption mechanism ensures that any data transferred between the web server and the browser remains confidential and untouched. The process involves a series of steps including handshake, data encryption, and data integrity checks.
 
 Decrypting HTTPS traffic is often necessary for developers and network administrators to troubleshoot communication errors, analyze application performance, or ensure that sensitive data is correctly encrypted before transmission. It's a powerful capability in diagnosing complex issues that cannot be resolved by simply inspecting unencrypted traffic or server logs.
 
-### Methods for Decrypting HTTPS in Wireshark {#h3-7-methods-for-decrypting-https-in-wireshark}
+### Methods for Decrypting HTTPS in Wireshark
 
 **Important:** Decrypting HTTPS traffic should only be done on networks and systems you own or have explicit permission to analyze. Unauthorized decryption of network traffic can violate privacy laws and ethical standards.
 
@@ -139,13 +139,13 @@ Another approach involves routing traffic through a proxy server that decrypts H
 2. **Configure Network to Route Through Proxy:** Ensure the client's network settings route traffic through the proxy.
 3. **Inspect Traffic:** Use the proxy's tools to inspect the decrypted traffic directly.
 
-Integrating tcpdump with Wireshark for Enhanced Network Analysis {#h2-8-integrating-tcpdump-with-wireshark-for-enhanced-network-analysis}
------------------------------------------------------------------------------------------------------------------------------------------
+Integrating tcpdump with Wireshark for Enhanced Network Analysis
+----------------------------------------------------------------
 
 While Wireshark offers a graphical interface for analyzing network packets, there are scenarios where using it directly may not be feasible due to security policies or operational constraints. tcpdump, a powerful command-line packet analyzer, becomes invaluable in these situations, providing a flexible and less intrusive means of capturing network traffic.
 
-The Role of tcpdump in Network Troubleshooting {#h2-9-the-role-of-tcpdump-in-network-troubleshooting}
------------------------------------------------------------------------------------------------------
+The Role of tcpdump in Network Troubleshooting
+----------------------------------------------
 
 tcpdump allows for the capture of network packets without a graphical user interface, making it ideal for use in environments with strict security requirements or limited resources. It operates under the principle of capturing network traffic to a file, which can then be analyzed at a later time or on a different machine using Wireshark.
 
@@ -159,7 +159,7 @@ tcpdump allows for the capture of network packets without a graphical user inter
 * **Remote Servers:** Debugging issues on a cloud server can be challenging with Wireshark due to the graphical interface; tcpdump captures can be transferred and analyzed locally.
 * **Security-conscious Customers:** Customers may be hesitant to allow third-party tools to run on their systems; tcpdump's command-line operation is often more palatable.
 
-### Using tcpdump Effectively {#h3-10-using-tcpdump-effectively}
+### Using tcpdump Effectively
 
 Capturing traffic with tcpdump involves specifying the network interface and an output file for the capture. This process is straightforward but powerful, allowing for detailed analysis of network interactions:
 
@@ -179,12 +179,12 @@ tcpdump: listening on en, link-type EN10MB (Ethernet), capture size 262144 bytes
 ```
 
 
-### Challenges and Considerations {#h3-11-challenges-and-considerations}
+### Challenges and Considerations
 
 Identifying the correct network interface for capture on remote systems might require additional steps, such as using the `ifconfig` command to list available interfaces. This step is crucial for ensuring that relevant traffic is captured for analysis.
 
-Final Word {#h2-12-final-word}
-------------------------------
+Final Word
+----------
 
 Wireshark stands out as a powerful tool for network analysis, offering deep insights into network traffic and protocols. Whether it's for low-level networking work, security analysis, or application development, Wireshark's features and capabilities make it an essential tool in the tech arsenal. With practice and exploration, users can leverage Wireshark to uncover detailed information about their networks, troubleshoot complex issues, and secure their environments more effectively.
 

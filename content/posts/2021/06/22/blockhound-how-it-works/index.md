@@ -23,8 +23,8 @@ I've presented this talk several times in the previous week, both in its Java ve
 
 This post tries to explain what I discovered.
 
-Why BlockHound? {#h2-0-why-blockhound}
---------------------------------------
+Why BlockHound?
+---------------
 
 Reactive Programming is based on asynchronous message passing. Different frameworks/libraries will differ in their approach: for example, in Project Reactor, an API call is not a blocking request-response call but a subscription to a message(s) that the publisher will deliver in the future.
 
@@ -35,8 +35,8 @@ If one call in the chain is blocking, it "freezes" the whole chain until the wor
 
 In few words, BlockHound checks for blocking calls in places where there shouldn't be.
 
-Using BlockHound {#h2-1-using-blockhound}
------------------------------------------
+Using BlockHound
+----------------
 
 Using BlockHound is straightforward:
 
@@ -72,8 +72,8 @@ public static class Builder {
 
 So, what's the problem?
 
-Blocking calls on the "main" thread {#h2-2-blocking-calls-on-the-main-thread}
------------------------------------------------------------------------------
+Blocking calls on the "main" thread
+-----------------------------------
 
 Blocking calls are not a problem *per se*. A lot of calls are blocking but required anyway. It wouldn't be possible to throw on every blocking call.
 
@@ -153,8 +153,8 @@ Main thread finished<code></code>
 ```
 
 
-BlockHound is only as good as its configuration {#h2-3-blockhound-is-only-as-good-as-its-configuration}
--------------------------------------------------------------------------------------------------------
+BlockHound is only as good as its configuration
+-----------------------------------------------
 
 Though its artifact's `groupId` is `io.projectreactor`, BlockHound is generic:
 
@@ -173,8 +173,8 @@ builder.nonBlockingThreadPredicate(current -> current.or(NonBlockingThread.class
 ```
 
 
-But how does it work? {#h2-4-but-how-does-it-work}
---------------------------------------------------
+But how does it work?
+---------------------
 
 It's time to get back to our original question, how does BlockHound work?
 
@@ -195,8 +195,8 @@ The snippet's code flow looks like this:
 2. If the call is dynamic, it also continues normally.
 3. Otherwise, *i.e.* , the call is blocking *and* not dynamic, BlockHound throws.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Using BlockHound *is* straightforward, *i.e.* , `BlockHound.install()`. A short explanation is that BlockHound is a Java agent.
 

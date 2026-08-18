@@ -27,7 +27,7 @@ The problem is that high sustained message rates, or bursty workloads, can lead 
 
 In this article, we will describe how [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/ "Chronicle Queue Enterprise") solves this.
 
-### Background {#h3-0-background}
+### Background
 
 When benchmarking Java low-latency persistent queue solutions, latencies tend to be excellent up to high percentiles until sustained throughput limits are reached; these sustained throughput limits are determined by disk performance, OS version, and configuration.
 
@@ -37,7 +37,7 @@ Unfortunately, despite OS virtual memory pages (and the disk) being used in a pr
 
 The OS keeps these pages in the page cache in case they will need to be accessed frequently. As system memory is used, it is necessary for the OS to free up space in the page cache, by copying the contents of memory to disk.
 
-### Benchmark Using Open Source Chronicle Queue {#h3-1-benchmark-using-open-source-chronicle-queue}
+### Benchmark Using Open Source Chronicle Queue
 
 Here we are running a benchmark with 4 runs, each of 3M messages of size 140 bytes at a rate of 100K/sec.
 
@@ -49,7 +49,7 @@ The below graph shows latencies at various percentiles in microseconds and we ca
 
 *Another thread waits for these messages to arrive and reads them, recording the difference between the time after reading vs the writing timestamp and records these in a histogram. All experiments were run on Centos 7 Xeon E5-2650 v4 @ 2.20GHz.*
 
-### Why Do We See These Delays and How to Fix {#h3-2-why-do-we-see-these-delays-and-how-to-fix}
+### Why Do We See These Delays and How to Fix
 
 The short answer is that the OS and hardware are introducing the delays because they are stalling the process while waiting for a page to be read from or written to disk. You can reduce these delays by:
 
@@ -71,10 +71,10 @@ Below we see results with the same workload and asynchronous mode configured (qe
 
 ![](Screen-Shot-2022-10-31-at-11.20.54-AM-1024x478.png)
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 Fed up with pauses at the high percentiles in your application? You may want to consider Chronicle Queue Enterprise.
 
-### Resources {#h3-4-resources}
+### Resources
 
 [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/ "Chronicle Queue Enterprise")

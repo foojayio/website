@@ -23,19 +23,19 @@ After my initial struggles with the BeagleV-Fire in a [previous video](https://w
 
 {{< youtube p08u_g7hFwE >}}
 
-The Challenge {#h2-0-the-challenge}
------------------------------------
+The Challenge
+-------------
 
 In my earlier [blog post and video about several BeagleBoards](https://webtechie.be/post/2026-02-10-first-test-beagleboard-java/), I demonstrated that Java, JavaFX, and even Pi4J worked perfectly. That's expected, since ARM processors, like those in Raspberry Pi boards, have run Java reliably for years.
 
 However, the BeagleV-Fire with its RISC-V processor presented a different story. The board came pre-installed with Ubuntu 23, and I hit a wall immediately. The apt repositories were outdated and no longer available, making it impossible to install Java or update the system to a newer Ubuntu version.
 
-The Solution: BeagleBoard Imaging Utility {#h2-1-the-solution-beagleboard-imaging-utility}
-------------------------------------------------------------------------------------------
+The Solution: BeagleBoard Imaging Utility
+-----------------------------------------
 
 The key to solving this problem was updating the operating system using the [BeagleBoard Imaging Utility](https://www.beagleboard.org/bb-imager). Unlike Raspberry Pi boards that use SD cards, the BeagleV-Fire has eMMC storage with the operating system pre-installed. This means you need to replace the board's existing OS with a newer version. The process took about half an hour in real time (though I've edited the video down significantly), including updating the system and installing all the latest dependencies.
 
-### Serial Connection Setup {#h3-2-serial-connection-setup}
+### Serial Connection Setup
 
 As described on the [BeagleBoard Documentation \> Boards \> BeagleV-Fire \> Quick Start](https://docs.beagle.cc/boards/beaglev/fire/02-quick-start.html), you need a serial connection to see what the board is doing and interrupt it at the right moment to make it accessible from the Imaging Utility. I used a [DSD TECH USB to TTL Serial Cable](https://www.amazon.com.be/dp/B083HVM7VZ?ref=ppx_yo2ov_dt_b_fed_asin_title).
 
@@ -53,7 +53,7 @@ As described on the [BeagleBoard Documentation \> Boards \> BeagleV-Fire \> Quic
 
 You also need a USB-to-USB cable to connect the board to your computer.
 
-### Failed With macOS {#h3-3-failed-with-macos}
+### Failed With macOS
 
 I initially tried connecting the board to my Apple workstation via USB. Despite the USB-to-serial cable being detected, I ran into issues:
 
@@ -69,7 +69,7 @@ crw-rw-rw-  1 root  wheel  0x9000004 Feb 10 16:19 /dev/tty.usbserial-BG02SIJE
 
 The board itself never appeared as a USB drive, so the BeagleBoard Imaging Utility didn't detect it, and while I could start a screen session, no output from the BeagleBoard appeared. This could be a macOS-specific issue, related to security not allowing such USB devices, so I switched strategies.
 
-### Succeeded With Linux {#h3-4-succeeded-with-linux}
+### Succeeded With Linux
 
 On a Linux machine, everything worked as expected! The USB-to-serial cable was properly detected, something you can easily verify with the `dmesg` command:
 
@@ -107,8 +107,8 @@ Then type in the following two commands:
 
 Now the board should appear as a USB drive on your computer and as a device in the Imaging Utility for an OS update. I had to do this twice because Wi-Fi was enabled, which caused an error at the end of the first attempt. After disabling the Wi-Fi settings, the update succeeded, and the board rebooted to Ubuntu 24!
 
-Installing Java 25 {#h2-5-installing-java-25}
----------------------------------------------
+Installing Java 25
+------------------
 
 Once Ubuntu 24 was up and running on the BeagleV-Fire, installing Java 25 was straightforward using the standard apt install command. Java 25 is the latest Long-Term Support (LTS) version, meaning it will be maintained for a long time. While Java 26 will be released in March, that's a short-term version with only six months of support. I'm happy to start with Java 25 on this board, though Java 26 should work just as well once it becomes available through apt.
 
@@ -135,8 +135,8 @@ jbang HelloJavaFXWorld.java
 ```
 
 
-What's Next: Performance Testing {#h2-6-what-s-next-performance-testing}
-------------------------------------------------------------------------
+What's Next: Performance Testing
+--------------------------------
 
 Now that I have Java 25 running on both ARM and RISC-V boards, the big question remains: how do they compare in terms of performance? That's exactly what I plan to explore throughout 2026. My goal is to create a reusable Java performance test that I can run across all these single-board computers to compare:
 
@@ -146,7 +146,7 @@ Now that I have Java 25 running on both ARM and RISC-V boards, the big question 
 
 This will help us understand what's achievable with these affordable single-board computers and which architecture performs best for Java development, and which board is the best choice for a specific use case.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Getting Java running on RISC-V is a reality! While the process required a few extra steps compared to ARM boards, the BeagleV-Fire is now running Ubuntu 24 with Java 25 and is ready for experimentation.

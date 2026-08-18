@@ -28,8 +28,8 @@ And the feature that immediately grabs the attention this time is *stable values
 This post takes you on a tour of everything that is part of this release, giving you a brief introduction to each of them. Where applicable the differences with Java 24 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
 > Short descriptions of the repreviewed and finalized features are provided to prevent this article from becoming too lengthy. Each of these features comes with a link to a longer description should you wish to learn more.
 
-JEP Overview {#h2-0-jep-overview}
----------------------------------
+JEP Overview
+------------
 
 To start off, let's look at an overview of the JEPs that ship with Java 25. This table contains the preview status for all JEP's, to which project they belong, what kind of features they add and the things that have changed since Java 24.
 
@@ -54,12 +54,12 @@ To start off, let's look at an overview of the JEPs that ship with Java 25. This
 | **520** | JFR Method Timing \& Tracing                        |                 | HotSpot / JFR | Profiling        | New feature                            |
 | **521** | Generational Shenandoah                             |                 | HotSpot / GC  | Performance      | Stability and performance improvements |
 
-New features {#h2-1-new-features}
----------------------------------
+New features
+------------
 
 Let's start with the JEP's that add brand-new features to Java 25.
 
-### Core Libs {#h3-2-core-libs}
+### Core Libs
 
 Java 25 contains a single new feature that is part of the Core Libs:
 
@@ -274,7 +274,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, read [JEP 502](https://openjdk.org/jeps/502).
 
-### HotSpot {#h3-3-hotspot}
+### HotSpot
 
 Java 25 introduces two new features in [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -377,7 +377,7 @@ A short program such as this has only a short warmup period, but with cached pro
 
 For more information on this feature, read [JEP 515](https://openjdk.org/jeps/515).
 
-### Security Libs {#h3-4-security-libs}
+### Security Libs
 
 Java 25 introduces a single new feature that is part of the Security Libs:
 
@@ -462,7 +462,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, read [JEP 470](https://openjdk.org/jeps/470).
 
-### Java Flight Recorder {#h3-5-java-flight-recorder}
+### Java Flight Recorder
 
 Java 25 introduces three new features that are part of the Java Flight Recorder:
 
@@ -614,12 +614,12 @@ This new approach comes with both performance and usability benefits. As we have
 
 For more information on this feature, read [JEP 520](https://openjdk.org/jeps/520).
 
-Repreviews and Finalizations {#h2-6-repreviews-and-finalizations}
------------------------------------------------------------------
+Repreviews and Finalizations
+----------------------------
 
 Now it's time to take a look at a few features that may already be familiar to you, because they were introduced in a previous version of Java. They have been repreviewed (or finalized) in Java 25, with only minor changes compared to Java 24 in most cases. Therefore, to avoid a very lengthy article, we'll outline these changes and link to a previous article for a full feature description, should you wish to refresh your memory.
 
-### JEP 505: Structured Concurrency (Fifth Preview) {#h3-7-jep-505-structured-concurrency-fifth-preview}
+### JEP 505: Structured Concurrency (Fifth Preview)
 
 *Structured concurrency* treats groups of related tasks running in different threads as a single unit of work, thereby streamlining error handling and cancellation, improving reliability, and enhancing observability.
 
@@ -635,7 +635,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 If you prefer to get more information on the current state of this feature, then read [JEP 505](https://openjdk.org/jeps/505) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-480-structured-concurrency-third-preview) from a previous article.
 
-### JEP 506: Scoped Values {#h3-8-jep-506-scoped-values}
+### JEP 506: Scoped Values
 
 *Scoped values* enable the sharing of immutable data within and across threads.  
 
@@ -653,7 +653,7 @@ On top of that, the preview status has been dropped, which means the scoped valu
 
 For more information on this feature, read [JEP 506](https://openjdk.org/jeps/506) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-481-scoped-values-third-preview) from a previous article.
 
-### JEP 507: Primitive Types in Patterns, instanceof, and switch (Third Preview) {#h3-9-jep-507-primitive-types-in-patterns-instanceof-and-switch-third-preview}
+### JEP 507: Primitive Types in Patterns, instanceof, and switch (Third Preview)
 
 Pattern matching now supports primitive types in all pattern contexts. On top of that, the `instanceof` and `switch` constructs have been extended to also work with all primitive types.
 
@@ -669,7 +669,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, read [JEP 507](https://openjdk.org/jeps/507) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-455-primitive-types-in-patterns-instanceof-and-switch-preview) from a previous article.
 
-### JEP 508: Vector API (Tenth Incubator) {#h3-10-jep-508-vector-api-tenth-incubator}
+### JEP 508: Vector API (Tenth Incubator)
 
 The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
 
@@ -689,7 +689,7 @@ The Vector API will keep incubating until necessary features of Project Valhalla
 
 For more information on this feature, read [JEP 508](https://openjdk.org/jeps/508) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-469-vector-api-eighth-incubator) from a previous article.
 
-### JEP 510: Key Derivation Function API {#h3-11-jep-510-key-derivation-function-api}
+### JEP 510: Key Derivation Function API
 
 To be able to withstand practical quantum computing attacks, it is Java's long-term goal is to eventually implement Hybrid Public Key Encryption (HPKE), which facilitates a seamless transition to quantum-resistant encryption methods. To that end, Java 24 introduced a new Key Derivation Function API, which is now finalized in Java 25.
 
@@ -703,7 +703,7 @@ Compared to the preview version of this feature in Java 24, the preview status h
 
 For more information on this feature, read [JEP 510](https://openjdk.org/jeps/510) or the [full feature description](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-478-key-derivation-function-api-preview) from a previous article.
 
-### JEP 511: Module Import Declarations {#h3-12-jep-511-module-import-declarations}
+### JEP 511: Module Import Declarations
 
 Module import declarations import all of the public top-level classes and interfaces in the packages exported by that module. They are a shorter alternative for listing many imports that originate from the same root package.
 
@@ -715,7 +715,7 @@ This feature was in second preview in Java 24, and in Java 25 the preview status
 
 For more information on this feature, read [JEP 511](https://openjdk.org/jeps/511) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-476-module-import-declarations-preview) from a previous article.
 
-### JEP 512: Compact Source Files and Instance Main Methods {#h3-13-jep-512-compact-source-files-and-instance-main-methods}
+### JEP 512: Compact Source Files and Instance Main Methods
 
 Comapct source files allow developers to write Java programs without the need to explicitly declare a class. They can contain 'instance main methods': a shorter form of the classic `main()` method without requiring program arguments or imports. These two features simplify the process of writing small programs and scripts by reducing boilerplate code.
 
@@ -735,7 +735,7 @@ This last change has been made to make a beginner's first experience with Java a
 
 For more information on this feature, read [JEP 512](https://openjdk.org/jeps/512) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-477-implicitly-declared-classes-and-instance-main-methods-third-preview) from a previous article.
 
-### JEP 513: Flexible Constructor Bodies {#h3-14-jep-513-flexible-constructor-bodies}
+### JEP 513: Flexible Constructor Bodies
 
 Flexible constructor bodies allow statements to appear before an explicit constructor invocation, like `super(..)` or `this(..)`. The statements cannot reference the instance under construction, but they can initialize its fields. Initializing fields before invoking another constructor makes a class more reliable when methods are overridden.
 
@@ -747,7 +747,7 @@ Compared to the preview version of this feature in Java 24, the preview status h
 
 For more information on this feature, read [JEP 513](https://openjdk.org/jeps/513) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-482-flexible-constructor-bodies-second-preview)) from a previous article.
 
-### JEP 519: Compact Object Headers {#h3-15-jep-519-compact-object-headers}
+### JEP 519: Compact Object Headers
 
 JDK 24 introduced compact object headers as an experimental feature, which enabled a reduction of the object header size to 64 bits. Since then, compact object headers have proven their stability and performance. They have been tested at Oracle by running the full JDK test suite. They have also been tested at Amazon by hundreds of services in production, most of them using backports of the feature to JDK 21 and JDK 17. On top of that, various other experiments have demonstrated that enabling compact object headers improves performance.
 
@@ -765,7 +765,7 @@ This means the `-XX:+UnlockExperimentalVMOptions` option that was required in Ja
 
 For more information on this feature, including references to the conducted experiments that proved the better performance, read [JEP 519](https://openjdk.org/jeps/519) or the [full feature description](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-450-compact-object-headers-experimental) from a previous article.
 
-### JEP 521: Generational Shenandoah {#h3-16-jep-521-generational-shenandoah}
+### JEP 521: Generational Shenandoah
 
 The Shenandoah garbage collector is an ultra-low pause time garbage collector. It has been [available for production use since Java 15](https://openjdk.org/jeps/379) and has been designed to dramatically reduce garbage collection pause times, regardless of the heap size that is used. It can achieve these low pause times because most of the work is done before the GC pause, in a series of preparation steps. Shenandoah marks and compacts any heap objects eligible for garbage collection, while regular Java user threads are still running.
 
@@ -789,12 +789,12 @@ This means the `-XX:+UnlockExperimentalVMOptions` option that was required in Ja
 
 For more information on this feature, read [JEP 521](https://openjdk.org/jeps/521) or the [full feature description](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-404-generational-shenandoah-experimental) from a previous article.
 
-Deprecations, Removals \& Restrictions {#h2-17-deprecations-removals-restrictions}
-----------------------------------------------------------------------------------
+Deprecations, Removals \& Restrictions
+--------------------------------------
 
 Java 25 comes with a single removal.
 
-### JEP 503: Remove the 32-bit x86 Port {#h3-18-jep-503-remove-the-32-bit-x86-port}
+### JEP 503: Remove the 32-bit x86 Port
 
 This JEP removes the 32-bit x86 (Linux) port, which was to be expected after [its deprecation in Java 24](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-501-deprecate-the-32-bit-x86-port-for-removal). The affected users are expected to already have migrated to 64-bit JVMs.
 
@@ -804,7 +804,7 @@ Supporting multiple platforms has been the focus of the Java ecosystem since the
 
 For more information on this removal, read [JEP 503](https://openjdk.org/jeps/503).
 
-Final thoughts {#h2-19-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 And that concludes our discussion of the 18 JEP's that come with Java 25. But that's not even all that's new: [many other updates](https://jdk.java.net/25/release-notes) were included in this release, including various performance, stability and security updates. One thing is for sure: this version of Java is ready to perform to the limit. So what are you waiting for? It's time to take this brand-new Java release for a high-performance spin!

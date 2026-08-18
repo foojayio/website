@@ -36,10 +36,10 @@ We heard how much you valued practical tips, deep dives, and the chance to bring
 
 Now we're taking everything we learned and actively shaping the JCON EUROPE 2026 experience --- refining the program, deepening the technical content, and creating even more space for meaningful exchange. If you care about Java, build with it every day, and want to learn from---and contribute to---the people shaping its future, we want you to be part of it. Join us at JCON EUROPE 2026, bring your ideas, your questions, and your experience --- and help us continue to prove, together, that Java is alive through its community.
 
-### Foojay.io friends, you're invited---for free! {#h3-0-foojay-io-friends-you-re-invited-for-free}
+### Foojay.io friends, you're invited---for free!
 
 As proud members of the Java ecosystem, Foojay collaborators of all shapes and sizes can join JCON EUROPE 2026 at no cost via this link: <https://pretix.eu/impuls/europe2026/redeem?voucher=FOOJAY-COMMUNITY>
 
-### Relive JCON EUROPE 2025 {#h3-1-relive-jcon-europe-2025}
+### Relive JCON EUROPE 2025
 
 [![Relive JCON EUROPE 2025](Screenshot-2026-01-30-154045-700x468.jpg)](https://www.youtube.com/watch?v=5CwMLcp70wg)

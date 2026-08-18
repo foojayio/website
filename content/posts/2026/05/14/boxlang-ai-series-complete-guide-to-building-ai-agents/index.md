@@ -28,8 +28,8 @@ The world of AI development is moving fast, but building real, production-ready 
 
 This series walks you step by step through how to design, build, and deploy AI agents using BoxLang AI. Whether you're exploring AI for the first time or looking to modernize your current applications, these guides will help you move from concept to implementation with clarity.
 
-Start Here: A Practical Overview {#h2-0-start-here-a-practical-overview}
-------------------------------------------------------------------------
+Start Here: A Practical Overview
+--------------------------------
 
 If you're new to BoxLang AI or want to understand what's possible before diving into the technical details, start here:
 
@@ -37,8 +37,8 @@ If you're new to BoxLang AI or want to understand what's possible before diving 
 
 This guide provides a high-level view of how to build AI agents, integrate multiple models, and design real-world workflows using BoxLang.
 
-The Full Series {#h2-1-the-full-series}
----------------------------------------
+The Full Series
+---------------
 
 Follow the series in order to go from fundamentals to advanced implementations:
 
@@ -50,8 +50,8 @@ Follow the series in order to go from fundamentals to advanced implementations:
 * [Part 6: Memory Systems \& RAG --- Building AI That Remembers](https://foojay.io/today/boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers/ "Part 6")
 * [Part 7: MCP --- The Protocol That Connects Everything](https://foojay.io/today/boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything/ "Part 7")
 
-What You'll Learn {#h2-2-what-you-ll-learn}
--------------------------------------------
+What You'll Learn
+-----------------
 
 Across this series, you'll learn how to:
 
@@ -62,8 +62,8 @@ Across this series, you'll learn how to:
 * Design scalable, production-ready AI workflows
 * Deploy AI agents in modern cloud environments
 
-Key Resources {#h2-3-key-resources}
------------------------------------
+Key Resources
+-------------
 
 To help you go deeper and start building right away:
 
@@ -72,15 +72,15 @@ To help you go deeper and start building right away:
 * BoxLang Website - <https://boxlang.io/>
 * GitHub Examples and Integrations - <https://github.com/ortus-boxlang>
 
-Why BoxLang AI {#h2-4-why-boxlang-ai}
--------------------------------------
+Why BoxLang AI
+--------------
 
 **BoxLang AI** is designed to remove the complexity of working with multiple AI providers and tools. With a single API, you can build powerful AI-driven applications without vendor lock-in, while maintaining full control over your architecture.
 
 If you're working with legacy systems, BoxLang also allows you to introduce AI capabilities incrementally without needing a full rewrite.
 
-Ready to Start Building? {#h2-5-ready-to-start-building}
---------------------------------------------------------
+Ready to Start Building?
+------------------------
 
 Explore the series, try the examples, and start building your own AI agents today.
 

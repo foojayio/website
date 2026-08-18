@@ -30,8 +30,8 @@ The main purpose is to reduce the number of system calls needed between the subs
 
 In this article, I will explain how DTOs are used in modern Java applications, ways your application can benefit, and how Java DTOs can help you be more secure by preventing accidental data leaks.
 
-What is a POJO, Java Bean, and Value Object {#h2-0-what-is-a-pojo-java-bean-and-value-object}
----------------------------------------------------------------------------------------------
+What is a POJO, Java Bean, and Value Object
+-------------------------------------------
 
 As the name already suggested, a Plain Old Java Object (POJO) is an ordinary Java Object. It can be any class and isn't bound to any specific restrictions other than the ones prescribed by the Java language. They are created for re-usability and increased readability.
 
@@ -93,8 +93,8 @@ Value objects are not currently available in Java, but JDK maintainers are worki
 
 For now, we have to create a POJO to do the work for us.
 
-Implementing a Data Transfer Object {#h2-1-implementing-a-data-transfer-object}
--------------------------------------------------------------------------------
+Implementing a Data Transfer Object
+-----------------------------------
 
 A DTO can be implemented as a POJO --- or a Java Bean for that matter. The most important thing is that a DTO separates concerns between entities like the presentation layer and the domain model, for example.
 
@@ -161,8 +161,8 @@ String name = favoriteCoffeeDTO.name();
 ```
 
 
-What makes a good DTO? {#h2-2-what-makes-a-good-dto}
-----------------------------------------------------
+What makes a good DTO?
+----------------------
 
 The purpose of a DTO is to carry data between processes. Therefore, a good DTO only contains the information needed for that specific part of the system.
 
@@ -170,8 +170,8 @@ In our API example, we only need to return the name of the customer and their fa
 
 Also after a DTO is initialized, its state shouldn't change or evolve. This means that an immutable data structure would be a great fit for a DTO. As a DTO only carries data that should be unaltered, a Java Record would be a great fit --- especially because JSON serialization libraries like Jackson support Java Records.
 
-DTO security considerations {#h2-3-dto-security-considerations}
----------------------------------------------------------------
+DTO security considerations
+---------------------------
 
 We already noticed that we decouple the Domain model from the presentation layer with this DTO pattern. Simple DTOs that only contain the data needed for this subsystem or API, without any business logic, can also improve your security.
 
@@ -217,8 +217,8 @@ public class CustomerDTO {
 ```
 
 
-Recommendations {#h2-4-recommendations}
----------------------------------------
+Recommendations
+---------------
 
 Using DTOs in Java to decouple subsystems is generally a good idea.
 
@@ -240,9 +240,9 @@ Check out the following resources to learn more about Java security:
 * [10 Java security best practices](https://snyk.io/blog/10-java-security-best-practices/)
 * [Java logging: what should you log and what not?](https://snyk.io/blog/java-logging-what-should-you-log-and-what-not/)
 
-Secure your Java code with Snyk {#h2-5-secure-your-java-code-with-snyk}
------------------------------------------------------------------------
+Secure your Java code with Snyk
+-------------------------------
 
 Create a free Snyk account to find and fix vulnerabilities in your Java applications.
 
-[Sign up for free](https://app.snyk.io/login?cta=sign-up&amp;loc=body&amp;page=how-to-use-java-dtos-to-stay-secure)
+[Sign up for free](https://app.snyk.io/login?cta=sign-up&loc=body&page=how-to-use-java-dtos-to-stay-secure)

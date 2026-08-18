@@ -27,8 +27,8 @@ This post will advance once again by upgrading our embedded MongoDB instance to 
 
 I like to think of it like a restaurant kitchen. It is usually walled off separately and hidden (though still part of the same building), but the kitchen is the heart and a critical component of the restaurant. However you want to think of it, let's get started building it!
 
-Architecture {#_architecture}
------------------------------
+Architecture
+------------
 
 Our architecture from the previous couple of blog posts started with two Spring Boot applications communicating to one another via HTTP. The project goal is to slowly assemble microservices in manageable pieces to improve understanding (yours and mine). 🙂
 
@@ -42,8 +42,8 @@ We decided on a data domain of books in the previous blog post, so we can load K
 
 That means we need to spin up a Docker container with MongoDB first, then load the data into it second before we can move to our interacting applications.
 
-Docker container {#_docker_container}
--------------------------------------
+Docker container
+----------------
 
 Many of you are probably familiar with what [Docker](https://www.docker.com/resources/what-container) is and how to use containers, but let me spend a couple of sentences on background anyway. The term containers actually matches the design of the technology itself. It's like taking all the required components for running an application (a mini virtual machine, the application, and any other necessary tools) and putting them inside a neatly packaged box (i.e. container). Yes, I like metaphors. 🙂
 
@@ -75,8 +75,8 @@ If you clone the full [microservices-level3 repository](https://github.com/JMHRe
 
 Next, we will get the data loaded to our MongoDB instance running in the container.
 
-Book data import {#_book_data_import}
--------------------------------------
+Book data import
+----------------
 
 As mentioned earlier in the architecture section, we are going to load data about books using the [Goodreads](https://www.kaggle.com/jealousleopard/goodreadsbooks) data set on Kaggle. The spreadsheet-formatted data is free to use, and it includes data such as title, author, reviews, and ratings about each book. There are several fields, but not so many to be unmanageable.
 
@@ -88,8 +88,8 @@ Then, we need to get into our container to load the data in there. All of the st
 
 Back to our microservices applications!
 
-Applications - Service 1 {#_applications_service_1}
----------------------------------------------------
+Applications - Service 1
+------------------------
 
 Our application code doesn't change much to go from an embedded to a separate instance of MongoDB. Though our database instance is becoming separate from the application, we aren't classifying it as a different service because it is the backing/support for `service1`.
 
@@ -120,7 +120,7 @@ We removed the MongoDB port and embedded versioning in favor of a full URI prope
 
 On to the Java code!
 
-### Service 1 - project code {#_service_1_project_code}
+### Service 1 - project code
 
 Since we are not really changing much in our project code itself, I left our classes in the main `Service1Application` Java file. As always, we will start at the bottom of the file and work our way up.
 
@@ -159,14 +159,14 @@ public class Service1Application {
 
 The CommandLineRunner bean is no longer needed because we are not populating an embedded database with dummy data, but rather using a separate database with a real data set loaded. Once we remove the bean, that is all for `service1`! Time to move over to `service2`.
 
-Applications - Service 2 {#_applications_service_2}
----------------------------------------------------
+Applications - Service 2
+------------------------
 
 This service is our client-side service that calls `service1` and displays the response. Because we are not changing functionality on the frontend side of the application, we do not need to update the `pom.xml` or the `application.properties` file.
 
 Let's see about the class code.
 
-### Service 2 - project code {#_service_2_project_code}
+### Service 2 - project code
 
 Since we changed the domain class in service1, that means we need to align the domain class in service2, as well.
 
@@ -205,8 +205,8 @@ The `@RequestMapping` annotation is the only line that has changed, so we will n
 
 Let's test our changes!
 
-Put it to the test {#_put_it_to_the_test}
------------------------------------------
+Put it to the test
+------------------
 
 Just like in updating the code, I like to spin up functionality from the bottom and move up. So, we need to make sure the database is running in our Docker container. You can check whether the container is running with `docker ps`. If you don't see anything, you can start the container with `docker start mongoBooks`. Then we can use `docker ps` to check it again.
 
@@ -222,8 +222,8 @@ And here is the resulting output!
 
 <br />
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 This step in our microservices project took us from an embedded instance of MongoDB to a standalone database running in a Docker container. The `service1` and `service2` application code may not have changed much, but it puts us in a production-ready layout.
 
@@ -233,8 +233,8 @@ As always, there is much more to learn and many more steps to a large system of 
 
 Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github: [microservices-level3](https://github.com/JMHReif/microservices-level3) repository
 * Documentation: [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb)

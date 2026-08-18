@@ -24,8 +24,8 @@ In this article, you will learn how to set up IntelliJ IDEA Ultimate to work wit
 
 We will create a new project that uses Tomcat and then talk about using Tomcat in IntelliJ IDEA so you can benefit from the rich integration capabilities.
 
-Downloading Apache Tomcat {#h2-0-downloading-apache-tomcat}
------------------------------------------------------------
+Downloading Apache Tomcat
+-------------------------
 
 To use Tomcat with IntelliJ IDEA, it needs to be installed on your machine. If you don't already have Tomcat installed, you can download the latest version, which at the time of writing, is [Tomcat 10](https://tomcat.apache.org/download-10.cgi).
 
@@ -33,8 +33,8 @@ Once you have downloaded the appropriate file for your operating system, unzip i
 
 You will need to point to the folder from IntelliJ IDEA when the time comes.
 
-Creating a New Application Based on Tomcat {#h2-1-creating-a-new-application-based-on-tomcat}
----------------------------------------------------------------------------------------------
+Creating a New Application Based on Tomcat
+------------------------------------------
 
 We're going to create a small web application that runs on Tomcat to demonstrate the integration in IntelliJ IDEA Ultimate:
 
@@ -91,8 +91,8 @@ If you're not creating a new project from scratch and instead have an existing p
 
 You can run the application with **\^R** (macOS), or **Shift+F10** (Windows/Linux) and IntelliJ IDEA will open our browser at the application's root context which in this case displays an actual page because this app has an `index.jsp` file.
 
-Working with Tomcat in IntelliJ IDEA {#h2-2-working-with-tomcat-in-intellij-idea}
----------------------------------------------------------------------------------
+Working with Tomcat in IntelliJ IDEA
+------------------------------------
 
 Now that you know how to set up your IDE to work with Tomcat for both new and existing applications, let's look at how to work with Tomcat during application development. We'll refer to the first application we created called `HelloWebApp` for this section.
 
@@ -137,8 +137,8 @@ Response code: 200; Time: 139ms; Content length: 14 bytes
 ```
 
 
-Summary {#h2-3-summary}
------------------------
+Summary
+-------
 
 We've talked about how to set up a new project with IntelliJ IDEA Ultimate and Tomcat and use Tomcat with an existing application.
 

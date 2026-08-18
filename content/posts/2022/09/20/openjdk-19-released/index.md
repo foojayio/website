@@ -22,26 +22,26 @@ OpenJDK 19 has been released today! Get it from your favorite vendor... whether 
 
 The friends of OpenJDK community has put together a number of resources, and more coming in the coming weeks, about the new features and all the enhancements and fixes that have gone into the release, accompanied by a brand new podcast released today, featuring key Java community leaders from around the world.
 
-### Release Highlights {#h3-0-release-highlights}
+### Release Highlights
 
 * [The 5 Most Pivotal and Innovative Additions to OpenJDK 19](https://foojay.io/today/the-5-most-pivotal-and-innovative-additions-to-openjdk-19/)
 * [What Can We Expect In OpenJDK 19?](https://foojay.io/today/what-can-we-expect-in-openjdk-19/)
 * [What the Heck Is Project Loom for Java?](https://foojay.io/today/what-the-heck-is-project-loom-for-java/)
 * [Thinking About Massive Throughput? Meet Virtual Threads!](https://foojay.io/today/thinking-about-massive-throughput-meet-virtual-threads/)
 
-### OpenJDK 19 Fixes {#h3-1-openjdk-19-fixes}
+### OpenJDK 19 Fixes
 
 As always Foojay.io provides you with [a complete list of fixes, here](https://foojay.io/java-19/?version=19&quarter=092022&tab=component):
 [![](image-1024x631.png)](https://foojay.io/java-19/?version=19&quarter=092022&tab=component)
 
-### New Foojay.io Podcast {#h3-2-new-foojay-io-podcast}
+### New Foojay.io Podcast
 
 Also, [check out the brand new Foojay podcast, all the details here](https://foojay.io/today/foojay-podcast-5-openjdk-discussion-panel/):
 
 <iframe src="https://app.springcast.fm/player/episode/67136?theme=springcast" width="100%" height="241" frameborder="0" scrolling="no" seamless="true" style="width:100%; height:241px;"></iframe>
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 0'00 Short intro and music  
 

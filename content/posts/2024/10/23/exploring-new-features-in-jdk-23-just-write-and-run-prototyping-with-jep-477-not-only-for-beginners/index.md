@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### It seems like it's never been easier to start writing a simple program that can be turned into a more advanced one as development progresses. Let's explore possibilities delivered by JDK 23 release. {#h3-0-it-seems-like-it-s-never-been-easier-to-start-writing-a-simple-program-that-can-be-turned-into-a-more-advanced-one-as-development-progresses-let-s-explore-possibilities-delivered-by-jdk-23-release}
+### It seems like it's never been easier to start writing a simple program that can be turned into a more advanced one as development progresses. Let's explore possibilities delivered by JDK 23 release.
 
 **From the early days, Java may have struggled with a relatively verbose and sometimes strikingly complicated process of creating a small program. A small program just to validate an idea or assumption. Let's call that Just-Write-And-Run feature. For example, it's required to create a trivial solution for reading and parsing data, Oh now what...**
 
@@ -33,8 +33,8 @@ JEP-477: Implicitly declared classes and main instance methods (Third Preview) b
 
 The Java Platform has already introduced several important JEPs, such as type inference of local variables (JEP-286\[4\]), the ability to run multi-file source programs with the need to define a package structure (JEP-458\[5\]), etc.
 
-Analyzing, Parsing and understanding data {#h2-1-analyzing-parsing-and-understanding-data}
-------------------------------------------------------------------------------------------
+Analyzing, Parsing and understanding data
+-----------------------------------------
 
 In an age where machine learning techniques are required on a daily basis, it is essential to understand, analyze data quickly and parse them correctly. A data analysis scenario can take many forms.
 
@@ -194,8 +194,8 @@ fileContentAsSet:[1, 2, 3]
 
 The example shows that despite the automatic imports, a correct checked exception definition is still required.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 **In** fact, JEP-477 can be considered an example of the symbiotic development of multiple JEPs together, similar to the result of the development of the Java platform.
 
@@ -205,8 +205,8 @@ Although an already existing jShell might be a good alternative, the ability to 
 
 JEP-477 can meet current business requirements driven by the use of various artificial intelligence techniques and its another great example of big step forward.
 
-References {#h2-3-references}
------------------------------
+References
+----------
 
 [\[1\] JEP 477: Implicitly Declared Classes and Instance Main Methods (Third Preview)](https://openjdk.org/jeps/477)  
 [\[2\] Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

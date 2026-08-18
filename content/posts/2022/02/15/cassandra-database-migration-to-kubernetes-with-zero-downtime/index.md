@@ -28,8 +28,8 @@ K8ssandra is a cloud-native distribution of the Apache Cassandra® database that
 
 As an Apache Cassandra user, your expectation should be that migrating to K8ssandra would happen without downtime. To make that happen with "classic" clusters running on virtual machines or bare metal instances, you will use the datacenter (DC) switch technique which is commonly used in the Cassandra community to transfer clusters to different hardware or environments. The good news is that it's not very different for clusters running in Kubernetes as most Container Network Interfaces (CNI) will provide routable pod IPs.
 
-Routable pod IPs in Kubernetes {#h-routable-pod-ips-in-kubernetes}
-------------------------------------------------------------------
+Routable pod IPs in Kubernetes
+------------------------------
 
 A common misconception about Kubernetes networking is that services are the only way to expose pods outside the cluster and that pods themselves are only reachable directly from within the cluster.
 
@@ -40,8 +40,8 @@ The same documentation tells us that the default CNI used in AWS EKS, Azure AKS 
 
 This is necessary because Cassandra nodes in both datacenters will need to be able to communicate with each other without having to go through services. Each Cassandra node stores the list of all the other nodes in the cluster in the `system.peers(_v2)` table and communicates with them using the IP addresses that are stored there. If pod IPs aren't routable, there's no (easy) way to create a hybrid Cassandra cluster that would span outside of the boundaries of a Kubernetes cluster.
 
-Database Migration using Cassandra Datacenter Switch {#h-database-migration-using-cassandra-datacenter-switch}
---------------------------------------------------------------------------------------------------------------
+Database Migration using Cassandra Datacenter Switch
+----------------------------------------------------
 
 The traditional technique to migrate a cluster to a different set of hardware or environment is to add up a new datacenter to the cluster whose nodes will be located in the target infrastructure, configure keyspaces so that Cassandra replicates data to the new DC, switch traffic to the new DC once it's up to date, and then decommission the old infrastructure.
 
@@ -55,10 +55,10 @@ Here are the steps we'll go through to perform the migration:
 * Switch traffic over to the K8ssandra datacenter.
 * Decommission the original Cassandra datacenter.
 
-Performing the migration {#h-performing-the-migration}
-------------------------------------------------------
+Performing the migration
+------------------------
 
-### Initial State {#h-initial-state}
+### Initial State
 
 Our starting point is a Cassandra 4.0-rc1 cluster running in AWS on EC2 instances:
 
@@ -80,7 +80,7 @@ In the AWS console, we can access the details of a node in the EC2 service and l
 
 The next step is to create an EKS cluster with the right settings so that pod IPs will be reachable from the existing EC2 instances.
 
-### Creating the EKS cluster {#h-creating-the-eks-cluster}
+### Creating the EKS cluster
 
 We'll use the [k8ssandra-terraform](https://github.com/k8ssandra/k8ssandra-terraform) project to spin up an EKS cluster with 3 nodes (see <https://docs.k8ssandra.io/install/eks/> for more information).
 
@@ -194,13 +194,13 @@ ip-10-0-3-239.us-west-2.compute.internal   Ready    <none>   5m   v1.20.4-eks-6b
 ```
 
 
-### VPC Peering and Security Groups {#h-vpc-peering-and-security-groups}
+### VPC Peering and Security Groups
 
 Our Terraform scripts will create a specific VPC for the EKS cluster. In order for our Cassandra nodes to communicate with the K8ssandra nodes, we will need to create a peering connection between both VPCs. Follow the documentation provided by AWS on this topic to create the peering connection: [VPC Peering Connection](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html).
 
 Once the VPC peering connection is created and the route tables are updated in both VPCs, update the inbound rules of the security groups for both the EC2 Cassandra nodes and the EKS worker nodes to accept all TCP traffic on ports 7000 and 7001, which are used by Cassandra nodes to communicate with each other (unless configured otherwise).
 
-### Preparing the Cassandra cluster for the expansion {#h-preparing-the-cassandra-cluster-for-the-expansion}
+### Preparing the Cassandra cluster for the expansion
 
 ![](image-1.png) Original Cassandra cluster
 
@@ -249,7 +249,7 @@ CqlSession session = CqlSession.builder()
 
 More information can be found in the drivers documentation.
 
-### Deploying K8ssandra as a new datacenter {#h-deploying-k8ssandra-as-a-new-datacenter}
+### Deploying K8ssandra as a new datacenter
 
 ![](image-2.png) Creating a K8ssandra deployment for the new datacenter
 
@@ -369,7 +369,7 @@ UN  172.31.22.153  10.2 GiB   16      100.0%            d6488a81-be1c-4b07-9145-
 ```
 
 
-### Rebuilding the new datacenter {#h-rebuilding-the-new-datacenter}
+### Rebuilding the new datacenter
 
 ![](image-3.png) Replicating data to the new datacenter by rebuilding
 
@@ -421,13 +421,13 @@ UN  172.31.22.153  10.32 GiB  16      100.0%            d6488a81-be1c-4b07-9145-
 ```
 
 
-### Switching traffic to the new datacenter {#h-switching-traffic-to-the-new-datacenter}
+### Switching traffic to the new datacenter
 
 ![](image-4.png) Redirecting client traffic to the new datacenter
 
 Client traffic can now be directed at the `k8s-1` datacenter, the same way we previously restricted it to `us-west-2`. If your clients are running from within the Kubernetes cluster, use the cassandra service exposed by K8ssandra as a contact point for the driver. If the clients are running outside of the Kubernetes cluster, you'll need to enable Ingress and configure it appropriately, which is outside the scope of this blog post and will be covered in a future one.
 
-### Decommissioning the old datacenter and finishing the migration {#h-decommissioning-the-old-datacenter-and-finishing-the-migration}
+### Decommissioning the old datacenter and finishing the migration
 
 ![](image-5.png) Decommission the original datacenter
 
@@ -488,8 +488,8 @@ As a final step, we can now delete the VPC peering connection which is no longer
 
 Note that the cluster can run in hybrid mode for as long as necessary. There's no requirement to delete the `us-west-2` datacenter if it makes sense to keep it alive.
 
-Conclusion {#h-conclusion}
---------------------------
+Conclusion
+----------
 
 We have seen today that it was possible to migrate existing Cassandra clusters to K8ssandra without downtime, leveraging flat networking to allow Cassandra nodes running in VMs to connect to Cassandra pods running in Kubernetes directly.
 

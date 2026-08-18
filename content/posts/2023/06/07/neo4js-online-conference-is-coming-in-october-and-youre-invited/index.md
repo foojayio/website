@@ -34,14 +34,14 @@ Join thousands of fellow developers, data scientists, and data engineers to get 
 
 Last year, NODES featured an impressive lineup of 110+ sessions from more than 100 speakers from over 30 countries. This year, we expect it to be even better.
 
-### What to Expect at NODES 2023 {#h3-0-what-to-expect-at-nodes-2023}
+### What to Expect at NODES 2023
 
 * **24-hour, multi-time zone coverage:** There will be live sessions no matter whether you're attending virtually from the Americas, Europe, the Middle East, Africa, or the Asia Pacific.
 * **Knowledge and skill development:** Highly technical, interactive content will be delivered by your fellow developers and data scientists, offering value to beginners and experts alike. The three session tracks for 2023 are building intelligent applications, graph-powered machine learning and AI, and visualization.
 * **Coverage of the latest topics:** We are expanding conference content to include trending topics like LLMs, graph neural networks, and more.
 * **An energetic, collaborative community:** At NODES, speakers present live talks and engage in thoughtful Q\&As, showcasing the latest implementations and prototypes using graphs. It's a fantastic opportunity to build your skills while you connect and exchange ideas.
 
-### Submit a Talk {#h3-1-submit-a-talk}
+### Submit a Talk
 
 The [Call for Papers](https://dev.neo4j.com/417Qa1D "Call for Papers") (CFP) is open now through June 30, 2023.
 
@@ -62,7 +62,7 @@ This year's three conference tracks are:
 * **Visualization: Tools, Techniques, and Best Practices**   
   Techniques and tools for exploring hidden and unexpected patterns in your data and presenting complex relationships. Topics may include knowledge graphs, ethical data practices, data representation, and much more.
 
-### Discover Talks From Previous NODES {#h3-2-discover-talks-from-previous-nodes}
+### Discover Talks From Previous NODES
 
 Get an idea of what to expect at the conference from our collection of talks from previous years:
 
@@ -76,7 +76,7 @@ NODES 2021 [Schedule](https://neo4j.brand.live/c/2021nodes-homepage "Schedule") 
 
 NODES 2022 [Schedule](https://hopin.com/events/nodes-2022/registration "Schedule") and [Playlist](https://neo4j.com/video/nodes-2022/ "Playlist")
 
-### Brainstorm Your Presentation Idea {#h3-3-brainstorm-your-presentation-idea}
+### Brainstorm Your Presentation Idea
 
 Want help deciding what to talk about at NODES 2023? Explore postings on the [community forums](http://community.neo4j.com/ "community forums") and see if your presentation can answer a question, contribute to a discussion, or share relevant best practices.
 

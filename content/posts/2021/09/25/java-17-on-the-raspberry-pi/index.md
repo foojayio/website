@@ -38,7 +38,7 @@ In the past, I have been experimenting with Java 16 on the Raspberry Pi (see "[B
 
 To be able to easily test and install different Java versions, I love using [SDKMAN](https://sdkman.io/install) but unfortunately this isn't available for 32bit systems. So, no problem, we start with a fresh Raspberry Pi and the 64bit OS version!
 
-### Setup a New Raspberry Pi with 64bit OS {#h3-0-setup-a-new-raspberry-pi-with-64bit-os}
+### Setup a New Raspberry Pi with 64bit OS
 
 Although the 64bit version is still not officially released at the time of writing (as described earlier in "[Faster \& More Reliable 64-bit OS on Raspberry Pi 4 with USB Boot](https://foojay.io/today/64-bit-raspbian-os-on-raspberry-pi-4-with-usb-boot/)"), there is a more regular updated version available on the [download server of the Raspberry Pi Foundation](http://downloads.raspberrypi.org).
 
@@ -54,7 +54,7 @@ Linux raspberrypi 5.10.17-v8+ #1414 SMP PREEMPT Fri Apr 30 13:23:25 BST 2021 aar
 ```
 
 
-### SDKMAN {#h3-1-sdkman}
+### SDKMAN
 
 [SDKMAN](https://sdkman.io/) is very useful tool to quickly install a new Java version, or switch between already installed versions. With a few terminal commands, we can install it on our Raspberry Pi.
 
@@ -165,7 +165,7 @@ OpenJDK 64-Bit Server VM Temurin-17+35 (build 17+35, mixed mode, sharing)
 
 Indeed `sdk install java 17.0.0-tem` is all that's needed to switch to Java 17!
 
-### Early Access Java 17 {#h3-2-early-access-java-17}
+### Early Access Java 17
 
 As no official Java 17 is available at the time this article was written, an other approach is to install an early access version provided by jdk.java.net. At 23th of August an EA-version was available and could be installed based on [this step-by-step description on opensource.com](https://opensource.com/article/19/11/install-java-linux):
 
@@ -195,7 +195,7 @@ OpenJDK 64-Bit Server VM (build 17+35-2724, mixed mode, sharing)
 
 Look at that, Java 17 on the Raspberry Pi! 😉
 
-### Visual Studio Code {#h3-3-visual-studio-code}
+### Visual Studio Code
 
 Check "[Java Development with VS Code on the Raspberry Pi](https://foojay.io/today/java-development-with-vs-code-on-the-raspberry-pi/)" for more info about using VSC on the Raspberry Pi, but in short install like this:
 
@@ -227,8 +227,8 @@ Hello World, greeting you with Java version: 17
 
 ![](Screenshot-2021-08-21-at-15.40.18.png) Hello World Java code running on Raspberry Pi with JDK 17
 
-Run a Pi4J project {#h2-4-run-a-pi4j-project}
----------------------------------------------
+Run a Pi4J project
+------------------
 
 Now let's see if we can run the minimal example project of the Pi4J project to control a LED and read a button state with some basic electronic components.
 ![](led-button_bb-1024x378.png) Minimal electronic setup for a Pi4J demo project
@@ -258,7 +258,7 @@ Button was pressed for the 5th time
 ```
 
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 As always, Java runs everywhere so no surprises here with version 17 on the Raspberry Pi! The Pi4J example application also runs without problems!

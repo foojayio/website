@@ -45,8 +45,8 @@ I would highly recommend you to read my [Writing a profiler from scratch series]
 
 If you want to know more about how the foundational AsyncGetCallTrace is used in profilers. Just to list a few.
 
-A sample AsyncGetCallTraceTrace bug {#h2-0-a-sample-asyncgetcalltracetrace-bug}
--------------------------------------------------------------------------------
+A sample AsyncGetCallTraceTrace bug
+-----------------------------------
 
 A problem that has been less discussed is the lacking test coverage of the underlying APIs.
 
@@ -141,8 +141,8 @@ My PR improves the test by checking the result of AsyncGetCallTrace against GetS
 
 My main problem with finding this bug is that it shows how the lack of test coverage for the underlying profiling APIs might cause problems even for profiling simple Java code. I only found the bug because I'm [writing many tests](https://github.com/openjdk/jdk/pull/11767) for my new AsyncGetStackTrace API. It's hard work, but I'm convinced this is the only way to create a reliable foundation for profilers.
 
-Profilers in a loop {#h2-1-profilers-in-a-loop}
------------------------------------------------
+Profilers in a loop
+-------------------
 
 Profilers have many problems but are still helpful if you know what they can and cannot do. They should be used with care, without trusting everything they tell you. Profilers are only as good as the person interpreting the profiler results and the person's technique.
 
@@ -159,8 +159,8 @@ Then you formulate a hypothesis based on the problem you're investigating embedd
 
 This technique lets you use profilers without fearing that spurious errors will lead you to wrong conclusions.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 I hope you found this article helpful and educational.
 

@@ -25,7 +25,7 @@ frozen: false
 
 Let me quickly show you!
 
-### Example {#h3-0-example}
+### Example
 
 Here's a simple bit of Java code that includes all the important actors in the exception-throwing game (try-catch-finally):
 
@@ -43,7 +43,7 @@ try {
 ```
 
 
-### Exception table {#h3-1-exception-table}
+### Exception table
 
 The resulting bytecode includes an interesting section in the Code attribute called the Exception table. Each method can have its own exception table, and it's only present when relevant. If there is no exception-handling logic in the method, it won't have an exception table.
 
@@ -60,7 +60,7 @@ Exception table:
 
 The numbers point to the addresses of the bytecode instructions. Each line in this table shows a range of bytecode instructions (`from` and `to`) that is guarded by an exception handler. The handler itself is also just a set of bytecode instructions, and the `target` column points to the address where the handling code starts. `type` simply means the type of exception that can be handled by the specified handler.
 
-### Bytecode instructions {#h3-2-bytecode-instructions}
+### Bytecode instructions
 
 To see what exactly these addresses are pointing to, let's take a look also at the set of method's bytecode instructions (explanation below):
 
@@ -100,7 +100,7 @@ The instruction at the address `15`, `athrow`, is responsible for actually throw
 
 When the JVM encounters `athrow` instruction, it checks the method's exception table in order to find the appropriate location to continue execution.
 
-### Try-catch-finally flow {#h3-3-try-catch-finally-flow}
+### Try-catch-finally flow
 
 Let's take another look at the exception table now that we have more context.
 
@@ -119,7 +119,7 @@ Why two handlers? One is a `catch` block (target points to `22`, where the `catc
 
 When we are in a `catch` block (address `22`), something from the operand stack is stored into a variable. We had an extra reference to the `Exception` instance on our stack, remember? Here, the `astore` instruction saves it as a variable. Internally, a variable doesn't have a name, but logically, this is our variable `e`, which we can use in the `catch` block to log it or do anything else with it.
 
-### Less nice flow {#h3-4-less-nice-flow}
+### Less nice flow
 
 This was a "nice" flow. The JVM looked into the exception table and found a handler that knew what to do with the `Exception`. If there was only a `finally` handler, that wouldn't have been enough.
 
@@ -127,7 +127,7 @@ How does the JVM know if it's a `catch` or a `finally` handler? We can see that 
 
 What if there is no appropriate handler? In that case, the JVM stops execution of the current frame and returns to the previous frame (to the method that called the current method). It continues going to the previous frames until it finds an appropriate `catch` handler for the given exception. Note that if it finds a `finally` handler which is applicable by address range, it will execute it on the way too. If there is no `catch` handler all the way through the stack, the JVM terminates the thread and prints out the stacktrace.
 
-### Summarized flow {#h3-5-summarized-flow}
+### Summarized flow
 
 The try-catch-finally mechanism can be summarized as follows:
 

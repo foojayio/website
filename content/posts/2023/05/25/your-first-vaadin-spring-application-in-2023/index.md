@@ -29,8 +29,8 @@ Recently I noticed that it is 8 years since Vaadin was first released in [start.
 Recent upgrade to[Java 17 and Jakarta EE 9](https://spring.io/blog/2021/09/02/a-java-17-and-jakarta-ee-9-baseline-for-spring-framework-6 " Java 17 and Jakarta EE 9") baseline. Vaadin 24 added a new [pre-compiled frontend mod](https://vaadin.com/docs/latest/configuration/development-mode#pre-compiled-front-end-bundle-for-faster-start-up "pre-compiled frontend mod")e making the initial startup matter of seconds (native compilation using GraalVM would make that even faster). And many many more. Time to grow a new project.  
 ![](plant-lines2-691x510.png)
 
-Step 1: Set Up Project {#h2-0-step-1-set-up-project}
-----------------------------------------------------
+Step 1: Set Up Project
+----------------------
 
 The Spring Initializr will help us create a new Spring Boot application with the desired dependencies. Think of it as a `pom.xml` configurator.
 
@@ -46,8 +46,8 @@ The Spring Initializr will help us create a new Spring Boot application with the
 
 Now you have now created an empty project and are ready to start developing the User Interface (UI) and functionality.
 
-Step 2: Create a Simple HelloWorld Application {#h2-1-step-2-create-a-simple-helloworld-application}
-----------------------------------------------------------------------------------------------------
+Step 2: Create a Simple HelloWorld Application
+----------------------------------------------
 
 Let's start with a simple HelloWorld application to make sure everything is working fine.
 
@@ -80,14 +80,14 @@ To start the server, just open the context menu on the SpringAppApplication.java
 
 Now that your server is running, head to <http://localhost:8080/> to access your newly created Vaadin application.
 
-Bonus: quick links to typical configurations {#h2-2-bonus-quick-links-to-typical-configurations}
-------------------------------------------------------------------------------------------------
+Bonus: quick links to typical configurations
+--------------------------------------------
 
 The sample application above didn't do too much, and you are likely to want to add something more. You can do this incrementally, but here are some typical setups:
 
-* [Vaadin with JPA and HSQLDB](https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=3.0.6&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=org.vaadin.example&amp;artifactId=springapp&amp;name=springapp&amp;description=Demo%20project%20for%20Vaadin%20on%20Spring%20Boot&amp;packageName=org.vaadin.example.springapp&amp;dependencies=vaadin,data-jpa,hsql). This is an perfect setup for simple DB applications.
-* [Vaadin with JPA and MySQL](https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=3.0.6&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=org.vaadin.example&amp;artifactId=springapp&amp;name=springapp&amp;description=Demo%20project%20for%20Vaadin%20on%20Spring%20Boot&amp;packageName=org.vaadin.example.spring-app&amp;dependencies=vaadin,data-jpa,mysql). Perfect setup for more serious DB apps and [really easy CRUD UI](https://vaadin.com/directory/component/crud-ui-add-on "really easy CRUD UI").
-* [Vaadin with JOOQ](https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=3.0.6&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=org.vaadin.example&amp;artifactId=springapp&amp;name=springapp&amp;description=Demo%20project%20for%20Vaadin%20on%20Spring%20Boot&amp;packageName=org.vaadin.example.spring-app&amp;dependencies=vaadin,jooq). Make sure to add also the[jOOQ for Vaadin add-on](https://vaadin.com/directory/component/jooq-for-vaadin " jOOQ for Vaadin add-on") to get most out of it.
+* [Vaadin with JPA and HSQLDB](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.6&packaging=jar&jvmVersion=17&groupId=org.vaadin.example&artifactId=springapp&name=springapp&description=Demo%20project%20for%20Vaadin%20on%20Spring%20Boot&packageName=org.vaadin.example.springapp&dependencies=vaadin,data-jpa,hsql). This is an perfect setup for simple DB applications.
+* [Vaadin with JPA and MySQL](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.6&packaging=jar&jvmVersion=17&groupId=org.vaadin.example&artifactId=springapp&name=springapp&description=Demo%20project%20for%20Vaadin%20on%20Spring%20Boot&packageName=org.vaadin.example.spring-app&dependencies=vaadin,data-jpa,mysql). Perfect setup for more serious DB apps and [really easy CRUD UI](https://vaadin.com/directory/component/crud-ui-add-on "really easy CRUD UI").
+* [Vaadin with JOOQ](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.6&packaging=jar&jvmVersion=17&groupId=org.vaadin.example&artifactId=springapp&name=springapp&description=Demo%20project%20for%20Vaadin%20on%20Spring%20Boot&packageName=org.vaadin.example.spring-app&dependencies=vaadin,jooq). Make sure to add also the[jOOQ for Vaadin add-on](https://vaadin.com/directory/component/jooq-for-vaadin " jOOQ for Vaadin add-on") to get most out of it.
 
 That's a-may-zing! You have just set up and run your first Vaadin application with Spring Boot. Enjoy exploring more features and functionalities of Vaadin and Spring Boot.  
 ![](reindeer-lines-474x510.png)

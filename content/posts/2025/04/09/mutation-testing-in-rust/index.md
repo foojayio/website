@@ -22,8 +22,8 @@ frozen: false
 
 I've been a big fan of [Mutation Testing](https://en.wikipedia.org/wiki/Mutation_testing) since I discovered [PIT](https://pitest.org/). As I dive deeper into Rust, I wanted to check the state of mutation testing in Rust.
 
-Starting with `cargo-mutants` {#h2-0-starting-with-cargo-mutants}
------------------------------------------------------------------
+Starting with `cargo-mutants`
+-----------------------------
 
 I found two crates for mutation testing in Rust:
 
@@ -82,8 +82,8 @@ ok       Unmutated baseline in 0.1s build + 0.3s test
 
 I expected a mutant to survive, as I didn't test the boundary when the test value equals the limit. Strangely enough, `cargo-mutants` didn't detect it.
 
-Finding and fixing the issue {#h2-1-finding-and-fixing-the-issue}
------------------------------------------------------------------
+Finding and fixing the issue
+----------------------------
 
 I investigated the source code and found the place where it mutates operators:
 
@@ -177,8 +177,8 @@ ok       Unmutated baseline in 0.1s build + 0.2s test
 ```
 
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Not many blog posts end with a Pull Request, but this one [does](https://github.com/sourcefrog/cargo-mutants/pull/501). Unfortunately, I couldn't manage to make the tests pass; fortunately, the repository maintainer helped me--a lot. The Pull Request is merged: enjoy this slight improvement.
 

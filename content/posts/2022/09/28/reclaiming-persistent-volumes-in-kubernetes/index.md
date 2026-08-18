@@ -39,8 +39,8 @@ This mechanism, however, relies on certain naming conventions involving the STS 
 
 In this article, we'll show you how to manually reassign a PV from one STS to another. We'll also explain the STS, PV, and PVC API resources in greater detail, and present step-by-step instructions for the reassignment of PVs, including the `kubectl` commands for each step. We'll use [Azure Kubernetes Service](https://azure.microsoft.com/en-gb/services/kubernetes-service/) (AKS) for the given examples, but they're easily transferable to other cloud providers.{#8d2f}
 
-Persistent Volumes {#3fb4}
---------------------------
+Persistent Volumes
+------------------
 
 In Kubernetes, pods can request resources such as CPU, memory, and (persistent) storage. While CPU and memory are provided by nodes, storage can be provided by PVs. Just like nodes, PVs have a life cycle that's independent of the pods that use them. The PV resource captures all the details of the storage implementation. Examples are NFS, Azure File, AWS, and EBS.{#b356}
 
@@ -53,8 +53,8 @@ AKS initially creates [four storage classes](https://docs.microsoft.com/en-us/az
 * Standard Azure File Share (azurefile)
 * Premium Azure File Share (azurefile-premium)
 
-Persistent Volume Claims {#3df0}
---------------------------------
+Persistent Volume Claims
+------------------------
 
 PVCs consume storage resources, just like pods consume CPU and memory resources. A PVC resource specification has different fields, such as access modes, volume size, and storage classes.{#bdbc}
 
@@ -64,8 +64,8 @@ A PVC can only be bound to a single PV, and a PV can only be bound to a single P
 
 Pods can use PVCs as volumes, effectively making the PV storage available to the containers inside the pod. In stateful applications, it's important that a given replica keeps the initially assigned PV even if pods get rescheduled. To ensure that, pods must be managed as stateful sets.{#955d}
 
-Stateful Sets {#01ff}
----------------------
+Stateful Sets
+-------------
 
 STSs are similar to `Deployments`, as they manage the deployment and scaling of pods. Although they provide additional guarantees about the ordering and uniqueness of these pods. Pods are created based on an identical specification, but the STS maintains a sticky identity for each of the replicas. The identity stays with the replica even if the pod gets scheduled on a different node.{#f27b}
 
@@ -126,16 +126,16 @@ Alternatively to specifying the resource names directly, you can also use label 
 
 To avoid code duplication, we will use a short-hand pseudocode notation to indicate that commands should be repeated for each replica. E.g. `kubectl get pvc $OLD_PVC_NAME_i` needs to be expanded to `kubectl get pvc $OLD_PVC_NAME_0` and `kubectl get pvc $OLD_PVC_NAME_1`.{#cd09}
 
-Retain PVs {#f402}
-------------------
+Retain PVs
+----------
 
 When a PVC bound to a PV gets deleted, the PV reclaim policy dictates what will happen to the PV. The default behavior is that PVs are deleted once their claim is released. We can prevent that by setting the reclaim policy to Retain. Here is the code to retain PVs:{#aaa2}
 
     kubectl patch pv $PV_NAME_i -p \
       '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 
-Create new PVC manifests {#3acd}
---------------------------------
+Create new PVC manifests
+------------------------
 
 Before we can delete the old PVCs, we will export their manifests and modify them to match the naming scheme of the new STS. We are going to use [jq](https://stedolan.github.io/jq/) in combination with `-o json` in this example, but you might also use [yq](https://github.com/mikefarah/yq) and `-o yaml`. Here is the code snippet to create a new PVC manifest.{#3076}
 
@@ -184,36 +184,36 @@ We also remove some additional metadata that was created by Kubernetes automatic
 ```
 
 
-Delete old STS {#51dc}
-----------------------
+Delete old STS
+--------------
 
 Next, we delete the old STS. Note that this will terminate the pods in no guaranteed order. If you need graceful termination, please scale the STS to 0 before deleting it.{#fac9}
 
     kubectl delete sts $OLD_STS_NAME
 
-Delete old PVCs {#7484}
------------------------
+Delete old PVCs
+---------------
 
 Since the PVCs do not get deleted automatically, we delete them manually.{#8cb5}
 
     kubectl delete pvc $OLD_PVC_NAME_i
 
-Make PVs available again {#0e3b}
---------------------------------
+Make PVs available again
+------------------------
 
 When a PVC is deleted and the PV is supposed to be reclaimed, it needs to be made available first. This is accomplished by nulling the PV `claimRef` to make PVs available.{#b660}
 
     kubectl patch pv $PV_NAME_i -p '{"spec":{"claimRef": null}}'
 
-Create new PVCs {#bbf1}
------------------------
+Create new PVCs
+---------------
 
 After making the PVs available again, we create the PVCs from the derived JSON manifests to create the PVC.{#8afb}
 
     kubectl apply -f $NEW_PVC_MANIFEST_FILE_i
 
-Create new STS {#04a6}
-----------------------
+Create new STS
+--------------
 
 Finally, we can create the new STS.{#21f1}
 

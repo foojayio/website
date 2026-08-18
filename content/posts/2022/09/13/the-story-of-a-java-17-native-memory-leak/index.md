@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Context {#context}
-------------------
+Context
+-------
 
 When Java 17 was released, we (the platform team at [Auto Trader](https://careers.autotrader.co.uk/) where I was working at the time) were fairly quick to provide a new Docker base image to allow our developers to gain the benefits of the new goodness in the JDK available since Java 11, the previous LTS version.
 
@@ -33,8 +33,8 @@ One decision we made therefore was to enable [String Deduplication](https://open
 
 The goal of this flag is to reduce the live heap size by automatically deduplicating the use of duplicate strings. This achieved the desired result, reducing the overall memory footprint across our platform.
 
-Discovery {#discovery}
-----------------------
+Discovery
+---------
 
 The new Java 17 base image was adopted and deployed through to production for a number of services pretty much straight away.
 
@@ -66,8 +66,8 @@ Unsure where to look next I decided to see if anyone in the community was seeing
 
 Unfortunately this didn't get much traction.
 
-Trial \& Error {#trial--error}
-------------------------------
+Trial \& Error
+--------------
 
 Java 17 brings many benefits (e.g. improved GC) from both a platform and language perspective so it felt right to invest more time trying to understand what was actually happening.
 
@@ -79,8 +79,8 @@ Something that helped with the experimentation is that Auto Trader has invested 
 
 However, the fact that the visibility of the leak was slow to manifest meant that overall this was still a pretty painful feedback loop!
 
-Progress {#progress}
---------------------
+Progress
+--------
 
 Having originally made little progress using Native Memory Tracking, one of our engineers decided to take another look.
 
@@ -219,8 +219,8 @@ This gave us some additional information so I jumped back on Twitter to call for
 > So something changed between Java 11 -\> 17 that means with -XX:+UseStringDeduplication we see a slow off-heap memory leak <https://t.co/QWwNRy2rZr>
 > --- Nick Ebbitt (@nickebbitt) [November 30, 2021](https://twitter.com/nickebbitt/status/1465617649547849733?ref_src=twsrc%5Etfw)
 
-The bug \& the fix {#the-bug--the-fix}
---------------------------------------
+The bug \& the fix
+------------------
 
 Within 15 minutes of posting the tweet a member of the Java community spotted it and tagged [Aleksey Shipilëv](https://twitter.com/shipilev) who works for Red Hat and is a subject matter expert when it comes to GC on the JVM.
 
@@ -233,8 +233,8 @@ Within a few hours they had [reproduced it and filed a bug report](https://bugs.
 
 This was awesome!
 
-Verification {#verification}
-----------------------------
+Verification
+------------
 
 We were eager to get our hands on the fix however it wouldn't be available in an official release of the JDK until the next patch version, `17.0.2`, which wasn't due until the middle of January.
 
@@ -256,8 +256,8 @@ This indeed did verify that we were no longer seeing the memory leak.
 > Thanks [@shipilev](https://twitter.com/shipilev?ref_src=twsrc%5Etfw) 👏 [pic.twitter.com/GdrhCSv5GM](https://t.co/GdrhCSv5GM)
 > --- Nick Ebbitt (@nickebbitt) [December 7, 2021](https://twitter.com/nickebbitt/status/1468157655365607425?ref_src=twsrc%5Etfw)
 
-The future {#the-future}
-------------------------
+The future
+----------
 
 At the time of writing this, Java 17.0.2 is due to be released as part of the scheduled quarterly updates.
 
@@ -265,8 +265,8 @@ Once available our process for producing the Java 17 base Docker image will pick
 
 We'll also then consider re-enabling `String Deduplication` with renewed confidence in Java 17.
 
-Final thoughts... {#final-thoughts}
------------------------------------
+Final thoughts...
+-----------------
 
 I hope you enjoyed this little story.
 

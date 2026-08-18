@@ -28,8 +28,8 @@ In this article, you will build a code review assistant API. Developers submit c
 
 The tech stack is Java 21+, Spring Boot 3.x, Spring AI, Spring Data MongoDB, and MongoDB Atlas. By the end, you will have a working review API that accepts code, finds relevant anti-patterns using Atlas Vector Search, gets structured feedback from an LLM, and tracks findings across submissions. The complete source code is available in the [companion repository on GitHub](https://github.com/fhsinchy/code-review-assistant).
 
-Prerequisites {#prerequisites}
-------------------------------
+Prerequisites
+-------------
 
 * Java 21 or later
 * Spring Boot 3.x (use [Spring Initializr](https://start.spring.io/) with the `Spring Data MongoDB` and `Spring Web` dependencies; you will add Spring AI manually later in the article)
@@ -37,8 +37,8 @@ Prerequisites {#prerequisites}
 * An OpenAI API key (used for both the embedding model and the chat model)
 * Basic familiarity with Spring Boot (controllers, services, dependency injection)
 
-1. Project setup {#1-project-setup}
------------------------------------
+1. Project setup
+----------------
 
 Go to [Spring Initializr](https://start.spring.io/) and generate a new project. I am using the following settings, feel free to use your own group name:
 
@@ -60,12 +60,12 @@ Replace the placeholders with your Atlas cluster credentials. The `appName` quer
 
 The companion repository has the complete project structure. You can clone it and follow along, or build each piece from scratch as you read.
 
-2. Storing and managing review patterns {#2-storing-and-managing-review-patterns}
----------------------------------------------------------------------------------
+2. Storing and managing review patterns
+---------------------------------------
 
 The review assistant works by comparing submitted code against a library of known anti-patterns. Before you can do any comparison, you need a way to define what an anti-pattern looks like, store it in MongoDB, and expose endpoints for adding and listing patterns.
 
-### Defining the pattern model {#defining-the-pattern-model}
+### Defining the pattern model
 
 Review findings will have severity levels, so start by defining those as a Java enum. An enum is a type that restricts a value to a fixed set of options, which prevents invalid severity strings from entering the system:
 
@@ -142,7 +142,7 @@ The second describes hardcoded credentials, a security anti-pattern:
 
 Each JSON document maps directly to the fields in the `ReviewPattern` class. When you save one of these through the API, Spring Data MongoDB converts the Java object into a document with this same structure and stores it in the `review_patterns` collection.
 
-### Creating the repository {#creating-the-repository}
+### Creating the repository
 
 To read and write patterns from MongoDB, you need a repository interface. In Spring Data, a repository is an interface that provides database operations without requiring you to write implementation code. You declare methods with names that follow a specific naming convention, and Spring generates the query logic at runtime:
 
@@ -164,7 +164,7 @@ By extending `MongoRepository<ReviewPattern, String>`, this interface inherits s
 
 The custom methods use Spring Data's derived query feature. `findByLanguage("java")` translates to a MongoDB query that filters documents where the `language` field equals `"java"`. `findByLanguageAndCategory` combines two filters with an AND condition. You do not need to write any MongoDB query syntax here. Spring parses the method name, identifies the field names and the operator (`And`), and builds the query for you.
 
-### Building the service layer {#building-the-service-layer}
+### Building the service layer
 
 The service class contains the business logic for creating and retrieving patterns. The `@Service` annotation marks it as a Spring-managed component, which means Spring will create a single instance of this class and make it available for injection into other components:
 
@@ -229,7 +229,7 @@ public record CreatePatternRequest(
 
 When a JSON body arrives at the endpoint, Spring deserializes it into this record by matching JSON field names to the record's component names.
 
-### Exposing the REST endpoints {#exposing-the-rest-endpoints}
+### Exposing the REST endpoints
 
 The controller class maps HTTP requests to service methods. The `@RestController` annotation tells Spring that this class handles web requests and that every method's return value should be serialized directly as the response body (as JSON, by default). `@RequestMapping("/api/patterns")` sets the base URL path for all endpoints in this controller:
 
@@ -293,12 +293,12 @@ curl -X POST http://localhost:8080/api/patterns \
 
 This works for adding patterns one at a time, but the system is more useful with a full library loaded. The next section adds the data seeder along with the embedding and vector search capabilities that make pattern matching work.
 
-3. Embedding patterns with Spring AI and MongoDB Atlas Vector Search {#3-embedding-patterns-with-spring-ai-and-mongodb-atlas-vector-search}
--------------------------------------------------------------------------------------------------------------------------------------------
+3. Embedding patterns with Spring AI and MongoDB Atlas Vector Search
+--------------------------------------------------------------------
 
 Suppose a developer writes `InputStream is = new FileInputStream(path);` without a try-with-resources block. Your pattern library describes "unclosed resources in try blocks" with a different code example that uses `FileReader`. The underlying problem is identical, but the code looks different. Exact string matching will not connect the two. This is where embeddings help. By converting both the stored pattern and the submitted code into vectors, you can measure their semantic similarity regardless of superficial differences in syntax.
 
-### Adding Spring AI dependencies {#adding-spring-ai-dependencies}
+### Adding Spring AI dependencies
 
 Spring AI is managed through a Bill of Materials (BOM), which is a special dependency declaration that locks the versions of all Spring AI modules so they stay compatible with each other. Add the BOM and the OpenAI starter to your `pom.xml`:
 
@@ -339,7 +339,7 @@ spring.ai.openai.chat.options.temperature=0.2
 
 The `${OPENAI_API_KEY}` syntax reads the value from an environment variable, so you do not hardcode your key in the configuration file. The `text-embedding-3-small` model produces 1536-dimensional vectors, meaning each piece of text gets converted into an array of 1536 numbers that capture its semantic meaning. The low temperature setting (0.2) keeps code review output deterministic and consistent, which is what you want for a review tool that should give similar feedback for similar code. You can swap `gpt-4o-mini` for a different model if you want stronger results and do not mind higher API costs.
 
-### Generating embeddings {#generating-embeddings}
+### Generating embeddings
 
 To generate an embedding for a pattern, you need to combine its most descriptive fields into a single text block and pass that to the embedding model. Add an `embedding` field and a helper method to the `ReviewPattern` class:
 
@@ -400,7 +400,7 @@ public class ReviewPatternService {
 
 The `EmbeddingModel` is a Spring AI interface that the OpenAI starter auto-configures. Its `embed()` method sends the text to OpenAI's embedding API and returns a `float[]` with 1536 values. Each value represents one dimension of the text's meaning in the model's vector space. Two pieces of text about similar topics will produce vectors that point in similar directions, which is what makes semantic search possible.
 
-### Seeding the pattern library {#seeding-the-pattern-library}
+### Seeding the pattern library
 
 The companion repository includes a `DataSeeder` component that loads about 20 patterns on startup. It implements `CommandLineRunner`, which is a Spring Boot interface with a single `run` method. Spring Boot automatically calls `run` after the application context is fully initialized, making it a convenient place for one-time setup tasks like loading seed data:
 
@@ -465,7 +465,7 @@ When the collection is empty, the method builds all 20 patterns, then loops thro
 
 The full list of 20 patterns covers error handling (catching generic exceptions, empty catch blocks, swallowing `InterruptedException`), security (hardcoded credentials, SQL injection, logging sensitive data), performance (string concatenation in loops, N+1 queries, unnecessary autoboxing), and maintainability (unclosed resources, missing null checks, raw generics). The complete list is available in the companion repository.
 
-### Creating the Atlas Vector Search index {#creating-the-atlas-vector-search-index}
+### Creating the Atlas Vector Search index
 
 Before you can query the embeddings, you need to create a vector search index in Atlas. This index tells MongoDB how to organize and search the embedding vectors efficiently.
 
@@ -489,7 +489,7 @@ The `path` field points to `embedding`, which is where you stored the vector in 
 
 The `similarity` field specifies how MongoDB measures the distance between vectors. Cosine similarity measures the angle between two vectors regardless of their magnitude, which makes it a good fit for text embeddings where the direction of the vector matters more than its length.
 
-### Searching for similar patterns {#searching-for-similar-patterns}
+### Searching for similar patterns
 
 With the index in place, you can build a method that finds patterns semantically similar to a given code snippet. This method takes a query vector (the embedding of the submitted code) and runs a `$vectorSearch` aggregation against the patterns collection.
 
@@ -550,8 +550,8 @@ private double searchScore;
 
 The `@Transient` annotation tells Spring Data MongoDB not to persist this field to the database. The `searchScore` only gets populated during vector search results and has no meaning outside that context. Without `@Transient`, saving a pattern returned by vector search would write a stale score to the database.
 
-4. Building the code review engine {#4-building-the-code-review-engine}
------------------------------------------------------------------------
+4. Building the code review engine
+----------------------------------
 
 The `ReviewService` is where the pieces connect. It accepts a code submission, finds matching patterns via vector search, sends both to an LLM, and parses the structured response into findings. The following diagram shows the complete flow from submission to response:  
 ![](Screenshot-2026-05-08-at-3.08.56-PM-313x1024.png)
@@ -560,7 +560,7 @@ Figure 1: Review flow diagram showing the steps from code submission through emb
 
 Before building the service, you need two more document classes: one for storing the code that developers submit, and one for storing the issues that the review engine identifies.
 
-### Defining the submission and finding models {#defining-the-submission-and-finding-models}
+### Defining the submission and finding models
 
 The `CodeSubmission` document stores each code snippet that a developer sends for review:
 
@@ -612,7 +612,7 @@ The `@Indexed` annotation on `submissionId` tells Spring Data MongoDB to create 
 
 The `startLine` and `endLine` fields mark where in the submitted code the issue appears. The `matchedPatternId` field is nullable because the LLM may flag issues that do not map to any stored pattern. For example, the LLM might notice a logic error that is too specific to be a general anti-pattern. The `confidence` field is a score from 0.0 to 1.0 that the LLM assigns to indicate how certain it is about the finding.
 
-### The review service {#the-review-service}
+### The review service
 
 Here is the flow that the review service follows for each submission:
 
@@ -702,7 +702,7 @@ The method returns `savedFindings` (the list from `saveAll`) rather than the ori
 
 One catch with the two saves is that if the application crashes between them, the findings will be in the database with a valid `submissionId`, but the submission document will have an empty `findingIds`. The data is not lost, though. Each finding still references its parent, so `findingRepository.findBySubmissionId(submission.getId())` returns them and you can rebuild the submission's `findingIds` afterward. If you want stricter atomicity, wrap both writes in a MongoDB multi-document transaction with Spring's `@Transactional`. Otherwise, treat `findingIds` as a lookup optimization and query by `submissionId` as a fallback.
 
-### Prompt design {#prompt-design}
+### Prompt design
 
 The system prompt sets the reviewer persona and defines the exact output format. Being specific about the JSON structure is important because the `entity()` call on the chat client needs the response to match the `ReviewFinding` class:
 
@@ -759,7 +759,7 @@ The prompt includes each pattern's ID so the LLM can populate the `matchedPatter
 
 The `chatClient.prompt()` call can fail if the OpenAI service is unavailable or if the response does not parse into the expected structure. In this tutorial, the exception propagates as a 500 error. In production, you would want to catch the failure and return a meaningful error response to the caller rather than an unhandled stack trace.
 
-### The review controller {#the-review-controller}
+### The review controller
 
 The controller exposes three endpoints: one for submitting code for review, one for retrieving a past review by submission ID, and one for listing just the findings:
 
@@ -795,7 +795,7 @@ public class ReviewController {
 
 The POST endpoint at `/api/reviews` accepts a JSON body with the code to review and returns the full review response including the submission and all findings. The GET endpoint at `/api/reviews/{submissionId}` retrieves a previous review, and `/api/reviews/{submissionId}/findings` returns just the findings for a given submission, which is useful when you only need the issues without the submission metadata.
 
-### Testing the review engine {#testing-the-review-engine}
+### Testing the review engine
 
 Submit a Java method with a few intentional issues:
 
@@ -811,8 +811,8 @@ curl -X POST http://localhost:8080/api/reviews \
 
 This code has three issues: an unclosed `FileInputStream` (no try-with-resources), a generic `catch (Exception e)` with an empty body, and string concatenation with `+=` inside a loop. The response includes a finding for each issue, with the matched pattern ID, severity, line range, and a suggestion for how to fix it. The confidence scores typically range from 0.7 to 0.95 depending on how closely the code matches the stored patterns.
 
-5. Tracking review trends with aggregation pipelines {#5-tracking-review-trends-with-aggregation-pipelines}
------------------------------------------------------------------------------------------------------------
+5. Tracking review trends with aggregation pipelines
+----------------------------------------------------
 
 After enough reviews accumulate, you can use MongoDB aggregation pipelines to answer questions like "what issues keep showing up?" across all submissions. Aggregation pipelines work by passing documents through a series of stages, where each stage performs an operation like filtering, grouping, or sorting. The output of one stage becomes the input for the next.
 
@@ -929,8 +929,8 @@ After running several reviews through the system, the category endpoint might re
 
 This tells you that error handling is the most frequent issue category across all reviewed code. These pipelines scan the entire `review_findings` collection each time they run. For a tutorial with a few dozen reviews, that is fine. In production with thousands of findings, you would want indexes on `category`, `severity`, and `matchedPatternId` to speed up the `$group` stages.
 
-6. Testing the full workflow {#6-testing-the-full-workflow}
------------------------------------------------------------
+6. Testing the full workflow
+----------------------------
 
 Here is the complete flow from start to finish:
 
@@ -994,8 +994,8 @@ curl http://localhost:8080/api/analytics/top-patterns
 
 These show the accumulated data across all your reviews.
 
-Conclusion {#conclusion}
-------------------------
+Conclusion
+----------
 
 You built a code review assistant with three layers. Atlas Vector Search matches submitted code against the pattern library by semantic similarity, so it finds issues even when the code looks different from the stored examples. Spring AI sends the matched patterns and the code to an LLM, which returns structured findings with severity, line ranges, and fix suggestions. MongoDB aggregation pipelines turn the accumulated findings into trends across submissions.
 

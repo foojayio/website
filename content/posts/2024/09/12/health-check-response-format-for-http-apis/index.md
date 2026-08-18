@@ -24,8 +24,8 @@ I'm continuing my journey on getting more familiar with HTTP APIs by reading rel
 
 Note that it's a draft. Moreover, it has been dormant for nearly two years and, thus, has been automatically expired. However, it's the closest to a specification on health checks and thus deserves some love.
 
-Sample data visualization {#h2-0-sample-data-visualization}
------------------------------------------------------------
+Sample data visualization
+-------------------------
 
 Even though it's not a long read, it's a bit "dry". Fortunately, the specification offers a JSON sample. I copy-pasted it in PlantUML, and presto, it shows a visual representation of it:
 
@@ -33,8 +33,8 @@ Even though it's not a long read, it's a bit "dry". Fortunately, the specificati
 
 Let's have a look at the proposed structure element by element.
 
-The root object {#h2-1-the-root-object}
----------------------------------------
+The root object
+---------------
 
 At its simplest, the response is a JSON object with a mandatory `status` property:
 
@@ -57,15 +57,15 @@ One can add additional *optional* values:
 * `notes`: array of non-structured notes
 * `output`: plain error message in case of `pass` or `warn`. The field should be left blank for `pass`.
 
-The `links` objects {#h2-2-the-links-objects}
----------------------------------------------
+The `links` objects
+-------------------
 
 The `links` object consists of object pairs. Values are URIs, while keys can be URIs or common/registered ones: see [RFC5988](https://www.rfc-editor.org/rfc/rfc5988#section-6.2.2) for common values, *e.g.* , `self`.
 
 ![](links-object-healthcheck.png)
 
-The `checks` objects {#h2-3-the-checks-objects}
------------------------------------------------
+The `checks` objects
+--------------------
 
 Keys of `checks` objects consist of two terms separated by a colon, component name, and measurement name. The latter can be either:
 
@@ -97,8 +97,8 @@ I tried implementing the above with Spring Boot using a custom `HealthIndicator`
 
 The current structure of the JSON response needs to be (easily?) customizable. You'd need to create your endpoint. I hope the Spring Boot team provides the option to generate a compatible structure.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 The Healthcheck IETF draft is a great initiative to standardize health checks across the industry. It would allow monitoring tools to rely on HTTP status and response body without ad-hoc configuration on each service.
 

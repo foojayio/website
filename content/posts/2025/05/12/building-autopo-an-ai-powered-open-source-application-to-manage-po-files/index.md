@@ -27,8 +27,8 @@ Fortunately, machine translation have come a long way. It's not perfect, but wit
 
 In this article , I'll walk you through the journey that led me to create [Autopo](https://autopo.ooo "Autopo"), a free and [open source](https://github.com/soberlemur/autopo/) JavaFX desktop tool for managing `.po` files and with AI-powered features to translate and validate `.po` entries.
 
-Discovering localization {#h2-0-discovering-localization}
----------------------------------------------------------
+Discovering localization
+------------------------
 
 I started [PDFsam](https://pdfsam.org "PDFsam") back in 2006, when SourceForge was still cool and my company was just moving from CVS to SVN. I was a junior developer, fresh out of university, eager to build something of my own. PDFsam seemed like the perfect project to experiment with technologies I couldn't use at work.
 
@@ -36,7 +36,7 @@ At the time, terms like i18n (internationalization) and l10n (localization) were
 
 At some point PDFsam gained a bit of traction abroad and it became clear that it needed to be translated into other languages.
 
-### Gettext {#h3-1-gettext}
+### Gettext
 
 > *a set of tools that provides a framework to help other GNU packages produce multi-lingual messages*.
 
@@ -44,8 +44,8 @@ At some point PDFsam gained a bit of traction abroad and it became clear that it
 
 For the actual translation work there's, among the others, a convenient desktop application called [POEdit](https://poedit.net/ "POEdit"), which allows users to open `.po` files and translate entries easily.
 
-Building a localization workflow {#h2-2-building-a-localization-workflow}
--------------------------------------------------------------------------
+Building a localization workflow
+--------------------------------
 
 Over time, I standardized my approach to applications localization. In my projects I always create a dedicated module, usually named `project-i18n`, where I store all `.po` files. Maven is configured to automatically generate `.properties` files from these `.po` files during the build process.
 
@@ -85,8 +85,8 @@ xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' 
 ```
 
 
-Introducing Zanata {#h2-3-introducing-zanata}
----------------------------------------------
+Introducing Zanata
+------------------
 
 With this setup in place, I needed an interface to simplify the translation process:
 
@@ -96,8 +96,8 @@ With this setup in place, I needed an interface to simplify the translation proc
 
 At that time, I discovered [Zanata](https://zanata.org/), an open source translation server developed by Red Hat. It fit my needs perfectly: I could hire translators and point them to Zanata's web interface, while keeping track of progress in real time. For a while, the setup worked well, but there were challenges that became more and more problematic over time.
 
-Pain points with Zanata {#h2-4-pain-points-with-zanata}
--------------------------------------------------------
+Pain points with Zanata
+-----------------------
 
 Several issues emerged during my experience with Zanata:
 
@@ -107,7 +107,7 @@ Several issues emerged during my experience with Zanata:
 4. **Small Updates:** While adding a new language justified hiring a translator, making minor changes, like adding two or three new sentences, was cumbersome and inefficient.
 5. **Abandonment:** Most critically, Zanata itself was no longer actively maintained. I recall reading about the events that lead to Zanata become abandonware, and although the server still functioned, it was clear that the clock was ticking.
 
-### Pain points gradually became real blockers {#h3-5-pain-points-gradually-became-real-blockers}
+### Pain points gradually became real blockers
 
 Point 4 led me to rely on Google Translate almost every time a few strings were added. This was a repetitive and time consuming task, especially when maintaining translations across five, ten or even twenty languages.
 
@@ -115,8 +115,8 @@ Point 5 eventually escalated: Zanata's server became unavailable for several mon
 
 In the end it was clear that I needed a new workflow.
 
-The Side Project {#h2-6-the-side-project}
------------------------------------------
+The Side Project
+----------------
 
 At first, I looked for a replacement for Zanata, a web based service offering similar functionality, ideally simple and not too expensive. I found a few options: some were free for opensource projects, others free if self hosted, most were available through paid subscription plans.
 
@@ -130,8 +130,8 @@ How long could it take? Two weeks, three tops.
 
 **Spoiler alert: it didn't.**
 
-From side project to pet project {#h2-7-from-side-project-to-pet-project}
--------------------------------------------------------------------------
+From side project to pet project
+--------------------------------
 
 Once the side project seed started to take root and sprout, a few other factors pushed me further down this path. The first was [a post on BluSky](https://bsky.app/profile/dlemmermann.bsky.social/post/3lijlscz42c2t) by Dirk Lemmermann, where he praised **AtlantaFX** for styling JavaFX applications. I thought, "Nice, I want to try that," and what better opportunity than a side project to experiment with it?
 
@@ -141,7 +141,7 @@ The third was a discovery on GitHub: [jgettext](https://github.com/zanata/jgette
 
 Finally, during a conversation with my wife, we came up with the name **Autopo** .... and you know how it goes, once you name it, it's yours. The side project had become a pet project, and I was already getting attached to it.
 
-### Requirements {#h3-8-requirements}
+### Requirements
 
 Since I was building **Autopo** from scratch, I wanted to tailor it to fit my needs. Here are the key features I absolutely wanted to include:
 
@@ -155,24 +155,24 @@ Since I was building **Autopo** from scratch, I wanted to tailor it to fit my ne
 8. **Multiple AI Providers**: The ability to configure and use multiple AI translation providers.
 9. **Batch Translation \& Evaluation**: I wanted to be able to translate and assess translations for multiple entries, or even the entire file, with just few clicks.
 
-Building the Pet {#h2-9-building-the-pet}
------------------------------------------
+Building the Pet
+----------------
 
 **Autopo** is a JavaFX application that took around ten weeks to finalize. It was fun to build it, I learned a few new things and it turned out to be more useful than I initially expected.
 
-### From jgettext to Potentilla {#h3-10-from-jgettext-to-potentilla}
+### From jgettext to Potentilla
 
 The first step was to ensure that **jgettext** could handle everything I needed for working with `.po` and `.pot` files. Like Zanata itself, jgettext had also been abandoned, so I decided to fork it.  
 
 I cleaned up the code, updated dependencies and test libraries, added a few unit tests and utility methods I needed and made it modular adding a `module-info.java`. The result is [**Potentilla**](https://github.com/soberlemur/potentilla), a library I published to Maven Central.
 
-### AtlantaFX {#h3-11-atlantafx}
+### AtlantaFX
 
 [**AtlantaFX**](https://github.com/mkpaz/atlantafx) turned out to be a very pleasant discovery. It offers a collection of modern themes that can be applied as *user agent stylesheets* (a sheet providing default styling for all UI elements of the application).  
 
 AtlantaFX also includes a set of custom controls and a nice showcase application where you can preview the available themes and components in action.
 
-### The AI Role {#h3-12-the-ai-role}
+### The AI Role
 
 AI integration was a key requirement from the start, and the idea of validating translations using a different AI provider or model felt like a smart way to assess quality.  
 [Langchain4j](https://github.com/langchain4j/langchain4j) turned out to be both comprehensive and easy to work with. My use case is probably among the simplest, no chat streaming, no RAG, no tool chaining, but the documentation was concise and clear, and integrating it into Autopo was straightforward.
@@ -230,8 +230,8 @@ public Result<TranslationAssessment> assess(PoFile poFile, PoEntry entry, AIMode
 ```
 
 
-Autopo in Action {#h2-13-autopo-in-action}
-------------------------------------------
+Autopo in Action
+----------------
 
 After all the talk, it's finally time to show Autopo at work. The interface displays the list of `.po` files in the opened project along with their translation progress. While it looks simple, it covers all the requirements I initially set and even adds a few extras.
 ![Autopo screenshot](autopo-screen-1024x581.png)
@@ -248,8 +248,8 @@ Over the past few weeks, I've used Autopo to:
 
 That last step was a bit of a surprise. The validation process caught several issues and inaccuracies in human made translations.
 
-**Takeaways** {#h2-14-takeaways}
---------------------------------
+**Takeaways**
+-------------
 
 * **JavaFX is** ****alive and kicking**** **:** things move so make sure to follow the mailing list for updates, bug fixes and new features.
 * **AtlantaFX is** **great**: with just a few lines of code, your app can have a professional look, and you won't have to worry about CSS headaches. Kudos to the maintainers!

@@ -34,8 +34,8 @@ You'll also run a simple test to make sure that your configuration is correct an
 
 You'll learn how to collect all the resources that you need to create a failover client for a primary and secondary cluster, create a failover client based on the sample Java client, test failover and add exception handling for operations.
 
-Step 1. Set Up Clusters and Clients {#h2-0-step-1-set-up-clusters-and-clients}
-------------------------------------------------------------------------------
+Step 1. Set Up Clusters and Clients
+-----------------------------------
 
 Create two Viridian Serverless clusters that you'll use as your primary and secondary clusters and then download and connect sample Java clients to them.
 
@@ -46,8 +46,8 @@ Create two Viridian Serverless clusters that you'll use as your primary and seco
 
 You now have two running clusters, and you've checked that both Java clients can connect.
 
-Step 2. Configure a Failover Client {#h2-1-step-2-configure-a-failover-client}
-------------------------------------------------------------------------------
+Step 2. Configure a Failover Client
+-----------------------------------
 
 To create a failover client, update the configuration and code of the Java client for your primary cluster.
 
@@ -64,8 +64,8 @@ You can find these connection details in the Java client of your secondary clust
 1. Go to the directory where you extracted the Java client for your primary cluster and then navigate to `src/main/java/com/hazelcast/cloud/`.
 2. Open the Java client (`ClientwithSsl.java`) and make the following updates. An example failover client is also available for [download](https://github.com/hazelcast-guides/client-failover/blob/master/docs/modules/client-failover/examples/ClientWithSsl.java).
 
-Step 3. Verify Failover {#h2-2-step-3-verify-failover}
-------------------------------------------------------
+Step 3. Verify Failover
+-----------------------
 
 Check that your failover client automatically connects to the secondary cluster when your primary cluster is stopped.
 
@@ -84,8 +84,8 @@ The client has sent a put request to the cluster but has not received a response
 
 To prevent the client from overwriting more recent write operations, this write operation is stopped and an exception is thrown.
 
-Step 4. Exception Handling {#h2-3-step-4-exception-handling}
-------------------------------------------------------------
+Step 4. Exception Handling
+--------------------------
 
 Update the `nonStopMapExample()` function in your failover client to trap the exception that is thrown when the primary cluster disconnects.
 

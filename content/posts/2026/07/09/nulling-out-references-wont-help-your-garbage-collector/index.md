@@ -23,8 +23,8 @@ It's also wrong, and the way it's wrong tells you most of what's worth knowing a
 
 That is, the vast majority of data allocated in a tracing garbage collected runtime becomes collectable as soon as a variable falls out of scope.
 
-The collector doesn't delete anything {#h2-0-the-collector-doesn-t-delete-anything}
------------------------------------------------------------------------------------
+The collector doesn't delete anything
+-------------------------------------
 
 Let's look at the name, garbage collection, because that's where the trouble starts. The term "Garbage Collector" leaves one with the mental model that once an object is no longer in use, garbage collection works to free the memory used by that object making it available for reuse.
 
@@ -34,8 +34,8 @@ After all of the live data is copied from the "from" memory pool to the "to" mem
 
 Once one starts to think about garbage collection as live object harvesting, you quickly realize that the collector doesn't delete anything. Instead it preserves all the data that it can reach by tracing live references. The impact of how data is scoped on garbage collection is key to understanding why `ref = null` isn't helpful
 
-Most objects die young {#h2-1-most-objects-die-young}
------------------------------------------------------
+Most objects die young
+----------------------
 
 Garbage collection is triggered when the accumulation of memory consumed by an application hits a threshold. Once triggered, the garbage collector starts the process of cleaning memory by first finding all of the garbage collection roots (GC roots).
 
@@ -158,13 +158,13 @@ You may be wondering, if the stack frames are changing millions of times per sec
 
 The important thing to know is, references that have dropped out of scope can't magically come back into scope and we can allow concurrent collectors to treat some objects as live for an individual GC cycle knowing that the memory will be recovered in a future cycle. Since this data typically represents a small portion of overall heap, the "waste" is acceptable given the benefits.
 
-### `ref = null` is dead code {#h3-2-ref-null-is-dead-code}
+### `ref = null` is dead code
 
 Now that we've briefly explored how the garbage collector interacts with thread stacks and local variables it seems obvious that setting ref to null when it will soon fall out of scope, is unnecessary. It does nothing to help the garbage collector. A leak isn't a forgotten free, it's an object that the collector can still reach, a static collection that keeps growing, a listener you registered and never unregistered, a cache entry that is never evicted. The object is live because, by the rules of reachability, it genuinely still is. Finding the reference chain and the logic that causes data to be retained for longer than it is semantically useful is the first step towards a fix.
 
 In short, `ref = null` is a bandaid fix for a deeper problem that should never appear in an application's code base. You may ask, is that true? Because never is a very long time and in that long time you're likely to run into some exceptions. Remember the brief mention of the Weak Generational Hypothesis? It turns out that using this hypothesis for the basis for optimizing garbage collection is so powerful that it cannot be ignored.
 
-### When `ref = null` can help {#h3-3-when-ref-null-can-help}
+### When `ref = null` can help
 
 The Weak Generational Hypothesis tells us that most objects are live for a very short period of time. It is the basis for why modern Java heaps are organized into generational spaces. That is, these spaces are designed to organize the data by age.
 
@@ -196,7 +196,7 @@ One last point, the nodes are all pointing to another object and it is generally
 ```
 
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 The takeaway is a short one. As part of the method return, the top of stack is adjusted so that the current stack frame is no longer in scope. With this adjustment, all of the local references to data stored in that stack frame will be lost. Ironically, this loss of references, something you'd fight to avoid in C/C++, is exactly what needs to happen in the Java runtime. It is this loss of references that allows the collector to reclaim memory without the aid of a `ref = null` from you.
 

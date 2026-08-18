@@ -26,8 +26,8 @@ Reactive Java is well suited to modern streaming, event driven applications. In 
 * Details of some of the key elements of Reactive Java - **Mono** , **Flux** and **flatMap**.
 * A walk through of a sample application, comparing a Reactive version of the code using the Reactive Streams MongoDB driver, with a more traditional version of the code using the synchronous MongoDB driver.
 
-Streaming Data - The Air Traffic Control Example. {#h2-0-streaming-data-the-air-traffic-control-example}
---------------------------------------------------------------------------------------------------------
+Streaming Data - The Air Traffic Control Example.
+-------------------------------------------------
 
 As a key part of global initiatives to modernize national airspace systems, many national aviation authorities have introduced mandates requiring most non-military aircraft transmit GPS based location data using a system known as Automatic Dependent Surveillance Broadcast, or "ADS-B".
 
@@ -45,8 +45,8 @@ While the structure of the ADS-B messages are unremarkable, the velocity with wh
 
 During that discussion, it occurred to me that MongoDB's Reactive Streams driver for Java might be ideally suited for handling streaming data of this nature. I decided to investigate just how much of a difference using it might make over using the standard synchronous driver.
 
-Reactive Java - a brief history {#h2-1-reactive-java-a-brief-history}
----------------------------------------------------------------------
+Reactive Java - a brief history
+-------------------------------
 
 Reactive Java emerged as a solution to the limitations of traditional, synchronous, and blocking I/O models in Java, particularly in highly concurrent, event-driven, and streaming applications. The conventional thread-per-request model often leads to excessive resource consumption due to threads being blocked while waiting for I/O operations (such as database queries or API calls) to complete.
 
@@ -126,8 +126,8 @@ The difference in execution time, being almost exactly 5 seconds, is what we wou
 
 By not waiting for the web service call to complete before starting the non-dependent pi calculation, we reduced overall completion time and avoided a possibly idle CPU core and definitely an idle thread.
 
-Reactive Java with MongoDB and Kafka {#h2-2-reactive-java-with-mongodb-and-kafka}
----------------------------------------------------------------------------------
+Reactive Java with MongoDB and Kafka
+------------------------------------
 
 To test the impact of using Reactive Java when working with streams of ADS-B data, I created an application to:
 
@@ -154,7 +154,7 @@ With the Java applications added, the overall application flow is:
 
 ![](Screenshot-2026-03-06-at-12.25.26-PM.png)
 
-### Blocking Code Version {#h3-3-blocking-code-version}
+### Blocking Code Version
 
 In the blocking application, a simple polling mechanism is used to retrieve ADS-B messages from Kafka. The main section of this code looks like this:
 
@@ -175,7 +175,7 @@ The MongoMessageWriter class' write method does a simple MongoDB 'insertOne' ope
 |----------------------------------------------------------------------------------------|
 | public void write(AdsbMessage message) { collection.insertOne(message.toDocument()); } |
 
-### Reactive Code Version {#h3-4-reactive-code-version}
+### Reactive Code Version
 
 The Reactive code version uses Project Reactor, including its reactive KafkaReceiver class, along with [MongoDB's Reactive Streams](https://www.mongodb.com/docs/languages/java/reactive-streams-driver/current/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=reactive-foojay&utm_term=hugh.murray) Java driver. The main function of this version looks like this:
 
@@ -225,7 +225,7 @@ In contrast to .**map()** , **.flatMap()** does the following:
 
 As you would no doubt now expect, all of these operations are handled asynchronously, allowing the stream of messages arriving from Kafka to be processed without any blocking operations.
 
-### Blocking Versus Reactive Application Performance. {#h3-5-blocking-versus-reactive-application-performance}
+### Blocking Versus Reactive Application Performance.
 
 With both versions of the application completed, test runs of each were carried out with the following parameters:
 
@@ -245,8 +245,8 @@ After each version of the application had run for two minutes, we observed:
 
 This indicated the Reactive application was able to process messages essentially as fast as they were being pushed into Kafka, while the blocking version was unable to keep up with the stream of messages.
 
-Final Thoughts {#h2-6-final-thoughts}
--------------------------------------
+Final Thoughts
+--------------
 
 Although the metrics from testing both versions of the application would suggest Reactive Java has a significant performance advantage over traditional Java techniques when working with streaming data, no doubt many of you will have observed that the blocking version of the code was single-threaded and thus at a disadvantage. Indeed, when I tested a version of the blocking code that explicitly used multiple threads, the performance difference between the two versions of the code was negligible due to the inherently sequential nature of the two databases operations - the ADS-B message could not be written to MongoDB before the enrich operation had completed. This highlights a key consideration when considering a Reactive approach:
 

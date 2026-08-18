@@ -41,8 +41,8 @@ public sealed interface Counter{
 ```
 
 
-**The Basic Counter and Its Thread-Safety Issue** {#h2-0-the-basic-counter-and-its-thread-safety-issue}
--------------------------------------------------------------------------------------------------------
+**The Basic Counter and Its Thread-Safety Issue**
+-------------------------------------------------
 
 Consider a simple counter implemented in Java:
 
@@ -73,8 +73,8 @@ It involves three separate operations: reading the current value of count, incre
 
 This is a classic example of a race condition.
 
-**Making the Counter Thread-Safe with Synchronization** {#h2-1-making-the-counter-thread-safe-with-synchronization}
--------------------------------------------------------------------------------------------------------------------
+**Making the Counter Thread-Safe with Synchronization**
+-------------------------------------------------------
 
 Java provides a built-in mechanism for thread-safety: synchronization.
 
@@ -105,8 +105,8 @@ public class SynchronizedCounter implements Counter{
 
 Now, even if multiple threads call increment() simultaneously, each call will be executed one after the other, ensuring the correct count.
 
-**Enhancing Thread-Safety with ReentrantLock** {#h2-2-enhancing-thread-safety-with-reentrantlock}
--------------------------------------------------------------------------------------------------
+**Enhancing Thread-Safety with ReentrantLock**
+----------------------------------------------
 
 While synchronization is simple and effective, it doesn't provide flexibility in handling lock acquisition and release. Java's ReentrantLock gives us more control and can lead to more efficient concurrent code. Here's our counter using a [ReentrantLock](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html):
 
@@ -230,8 +230,8 @@ public final class ThreadSafeCounterUsingVarHandle implements Counter {
 ```
 
 
-**Simplifying with AtomicInteger** {#h2-3-simplifying-with-atomicinteger}
--------------------------------------------------------------------------
+**Simplifying with AtomicInteger**
+----------------------------------
 
 While the above methods are effective, they can be complex and hard to manage. Java provides a simpler way to handle thread-safe counters: AtomicInteger.
 

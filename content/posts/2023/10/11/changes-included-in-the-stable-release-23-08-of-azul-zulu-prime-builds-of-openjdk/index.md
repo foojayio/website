@@ -32,24 +32,24 @@ frozen: false
 As stream builds happen in a fixed schedule, all changes are included in the [release notes](https://docs.azul.com/prime/release-notes). Twice a year (in February and August), a stream build becomes the new stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the latest stable release, 23.08.01.0.
 ![](Azul-Prime-Stable-2308-1024x400.jpg)
 
-Changes Included in 23.08.1.0 {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-ChangesIncludedin23.08.1.0}
---------------------------------------------------------------------------------------------------------------------------------
+Changes Included in 23.08.1.0
+-----------------------------
 
 As stable builds overlap, your system should be on the 23.02-stable line, and there are now four months of overlap with the 23.08-stable builds. Let's look at some of the most significant changes between 23.02 and 23.08 and the changes included in the new Stable Build 23.08.01.00 released on September 26, 2023.
 
-### Security fixes {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-Securityfixes}
+### Security fixes
 
 April and July 2023 CPU and PSU release security fixes.
 
-### Changes in supported versions {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-Changesinsupportedversions}
+### Changes in supported versions
 
 JDK versions 13, 15, and 19 are no longer included in Prime stable releases. Only the JDK Long Term Support (LTS) versions 8, 11, and 17 continue to be included.
 
-### New Supported Platforms {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-NewSupportedPlatforms}
+### New Supported Platforms
 
 Oracle Linux (Centos 7.9) ARM is now supported since Azul Platform Prime 23.03.0.0.
 
-### Optimizer Hub {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-OptimizerHub}
+### Optimizer Hub
 
 The client for [Optimizer Hub](https://docs.azul.com/optimizer-hub/) has been upgraded to support the latest features of Optimizer Hub version 1.8. This upgrade aligns the client in Prime to support the components provided in Optimizer Hub (formerly Cloud Native Compiler). As [Cloud Native Compiler](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/) expands its scope to offer more functionality than just offloading compilations, it is time to rebrand the offering to reflect better what it does. Starting with release 1.8, we are using the following names:
 
@@ -65,27 +65,27 @@ In Optimizer Hub 1.8, all major artifacts and command line switches use the upda
 
 All documentation of Optimizer Hub can be found on [docs.azul.com/optimizer-hub](https://docs.azul.com/optimizer-hub).
 
-### Native Memory Tracking (NMT) {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-NativeMemoryTracking(NMT)}
+### Native Memory Tracking (NMT)
 
 It is no longer necessary to LD_PRELOAD the [libnmt_hooks.so](http://libnmt_hooks.so) library to use extended Native Memory Tracking (NMT). The [libnmt_hooks.so](http://libnmt_hooks.so) library is now linked by default.
 
-### Falcon Compiler {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-FalconCompiler}
+### Falcon Compiler
 
 Azul Platform Prime 23.05.0.0 brought several performance optimizations, including many intrinsic functions implemented in the Falcon compiler.
 
 Compilation ranks by priority, which allows the JVM to assign compilation ranks to methods, has been introduced to Azul Platform Prime 23.08.0.0. This allows the Falcon compiler to assign ranks (**hot** , **warm** , or **cold** ) to methods to prioritize system resources to methods depending on their hotness. For more information on compilation ranks, see [Analyzing and Tuning Warmup](http://doc-builder.azulsystems.com:8081/prime/release/23.08/analyzing-tuning-warmup.html#_setting_falcon_priorities). For newly added options, see [Command Line Options](http://doc-builder.azulsystems.com:8081/prime/release/23.08/Command-Line-Options.html#_compilation_ranks).
 
-### Java Flight Recorder {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-JavaFlightRecorder}
+### Java Flight Recorder
 
 Using Java Flight Recorder, you can now see exact JIT names for each stacktrace frame in [Azul Mission Control](https://www.azul.com/products/components/azul-mission-control/) in the Method Profiling tab. This uses the option `JFRDistinguishJITTypes`, which is set to `true` by default, and shows either C1, C2, or Falcon for each stacktrace frame. With `JFRDistinguishJITTypes` set to `false`, it shows *JIT compiled*.
 
-### Per Thread CPU Utilization in GC Log {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-PerThreadCPUUtilizationinGCLog}
+### Per Thread CPU Utilization in GC Log
 
 The per-thread CPU (Central Processing Unit) utilization tracking feature, available from Azul Platform Prime 23.06, allows the collection and charting of per-thread CPU core usage statistics. This lets you view the CPU usage of an application and the JVM internal threads of the process over time. JVM internal threads are grouped into known categories (for example, compiler or GC group) to make analysis of threads simpler. There is also an option to include CPU usage from other processes on the system.
 
 Per-thread CPU utilization is turned on using the option \`-XX:+PrintCPUUtilization\`, which is disabled by default due to the potential overhead from data collection.
 
-### Changes in Command Line Options {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-ChangesinCommandLineOptions}
+### Changes in Command Line Options
 
 * The Command Line Option `GPGCUseAllocationPacing` has been disabled by default.
 * The Command Line Option `CNCForceLocalCompiler` has been deprecated and replaced with the new option `CNCEnableRemoteCompiler`.
@@ -126,12 +126,12 @@ Due to rebranding of Cloud Native Compiler to Optimizer Hub, some options have b
 | CNCSSLRootsPath | OptHubSSLRootsPath |                                                                                                                                  |
 | CNCInsecure     | OptHubUseSSL       | OptHubUseSSL is the inverse on CNCInsecure, so the default value has changed from `false` to `true` i.e. SSL is used by default. |
 
-### Deprecation of ZVTools {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-DeprecationofZVTools}
+### Deprecation of ZVTools
 
 ZVision and ZVRobot components have been deprecated and are no longer actively developed. While we still support these components, we encourage users to switch to [Java Flight Recorder](http://doc-builder.azulsystems.com:8081/prime/release/23.08/release-notes#https://docs.azul.com/prime/Java-Flight-Recorder), as ZVision and ZVRobot are planned for End-of-life with Azul Platform Prime 24.02.0.0.
 
-Resolved Issues {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-ResolvedIssues}
-------------------------------------------------------------------------------------------------------
+Resolved Issues
+---------------
 
 | Issue ID  |                                                        Description                                                        |
 |-----------|---------------------------------------------------------------------------------------------------------------------------|
@@ -152,7 +152,7 @@ Resolved Issues {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofO
 | ZVM-27897 | Hadoop fails with Prime when -XX:+UseAES is used                                                                          |
 | ZVM-27098 | Incompatibility with Apache Flink with RocksDB                                                                            |
 
-Conclusion {#ChangesIncludedintheStablerelease23.08ofAzulZuluPrimeBuildsofOpenJDK-Conclusion}
----------------------------------------------------------------------------------------------
+Conclusion
+----------
 
 The new Stable Azul Zulu Prime Build of OpenJDK brings many improvements and fixes to bring a more performant and secure runtime to your environment.

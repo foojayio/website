@@ -35,8 +35,8 @@ However, PDFs have issues on their own: a web "page" is potentially endless, whi
 
 In this post, I'll describe how I configured GitLab Pages to get the preview I want.
 
-Summary of GitLab Pages {#h2-0-summary-of-gitlab-pages}
--------------------------------------------------------
+Summary of GitLab Pages
+-----------------------
 
 GitLab Pages are akin to [GitHub Pages](https://pages.github.com/):
 > With GitLab Pages, you can publish static websites directly from a repository in GitLab. To publish a website with Pages, you can use any static site generator, like Gatsby, Jekyll, Hugo, Middleman, Harp, Hexo, or Brunch. You can also publish any website written directly in plain HTML, CSS, and JavaScript.
@@ -45,8 +45,8 @@ GitLab Pages are akin to [GitHub Pages](https://pages.github.com/):
 
 That's how you see this blog post. I found no preview feature for GitLab Pages. I asked experts to no avail; GitLab doesn't offer previews.
 
-Laying out the work {#h2-1-laying-out-the-work}
------------------------------------------------
+Laying out the work
+-------------------
 
 I didn't believe it initially, but you only need to create a dedicated artifact. Since the artifact consists of web files, the browser will render them.
 
@@ -75,12 +75,12 @@ preview:
 
 At this point, the site is available at `https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/public/index.html`. Many issues need fixing, though.
 
-Making it work {#h2-2-making-it-work}
--------------------------------------
+Making it work
+--------------
 
 Let's fix the issues by order of importance.
 
-### Fixing access permissions {#h3-3-fixing-access-permissions}
+### Fixing access permissions
 
 The project is *private*; hence, only I can access the artifact: it defeats the initial purpose of offering the preview to others.
 
@@ -88,7 +88,7 @@ I want to give my teammates only limited access to my GitLab repository. I gave 
 
 As per the documentation, you must also make your pipeline *public*. Go to Settings \> CI/CD \> General pipelines and check the Public pipelines checkbox.
 
-### Fixing relative links {#h3-4-fixing-relative-links}
+### Fixing relative links
 
 I use [Jekyll](https://jekyllrb.com/) to build HTML from Asciidoc. To generate links, Jekyll uses two configuration parameters:
 
@@ -118,7 +118,7 @@ preview:
 3. Display the configuration's content for debugging purposes
 4. Use it!
 
-### Improving usability {#h3-5-improving-usability}
+### Improving usability
 
 It's a bore trying to distribute the correct URL each time. Better to write it down in the console after building:
 
@@ -129,7 +129,7 @@ after_script: echo https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/
 
 There's still one missing bit. GitLab Pages offer an index page. For example, if you request <https://blog.frankel.ch>, they will serve the root `index.html`. With plain artifacts, it's not the case. Given that I only want to offer a single post for preview, it's not an issue, so I didn't research the configuration further.
 
-### Usage {#h3-6-usage}
+### Usage
 
 At this point, I only need to push to my `preview` branch:
 
@@ -140,8 +140,8 @@ git push --force origin HEAD:preview
 
 Icing on the cake, we don't need to have the branch locally; just push to the remote one.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I showed how to preview GitLab Pages and share the preview's URL with teammates in a couple of steps. The hardest part was to realize that web artifacts are rendered regularly with the browser.
 

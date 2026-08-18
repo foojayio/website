@@ -54,8 +54,8 @@ As JavaFX is no longer part of the Java JDK, since version 11, running a JavaFX 
 
 Luckily, we can use the Liberica JDK, which is provided by BellSoft. They have a version dedicated for the Raspberry Pi, which includes JavaFX, so you will be able to run a JavaFX application with a simple "java -jar yourapp.jar" start command.
 
-Installing Liberica JDK {#installing-libericajdk}
--------------------------------------------------
+Installing Liberica JDK
+-----------------------
 
 We only need the download link from their site to install an alternative Java JDK like this:
 
@@ -81,8 +81,8 @@ OpenJDK Server VM (build 13-BellSoft+33, mixed mode)
 On my test-Pi I even keeping different versions of LibericaJDK and switching is very easy with "update-alternatives".
 ![](https://webtechie.be/images/2020-04-08/java-versions-on-pi.png)
 
-Install Scripts on GitHub {#install-scripts-on-github}
-------------------------------------------------------
+Install Scripts on GitHub
+-------------------------
 
 On [Github, in the sources](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_04_Java/scripts) of my book ["Getting started with Java on Raspberry Pi"](https://webtechie.be/books/), you can find install scripts for multiple versions of Liberica JDK, which already contain the correct download link for each one:
 ![](https://webtechie.be/images/2020-04-08/github-scripts.png)

@@ -19,8 +19,8 @@ enlighterjs: true
 frozen: false
 ---
 
-And why MongoDB might be a better relational database than you ever realized. {#h2-0-and-why-mongodb-might-be-a-better-relational-database-than-you-ever-realized}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+And why MongoDB might be a better relational database than you ever realized.
+-----------------------------------------------------------------------------
 
 <figure class="wp-block-image size-full is-resized">
  <img fetchpriority="high" decoding="async" width="700" height="307" src="tue11.png" alt="" class="wp-image-124328" style="width:840px;height:auto">
@@ -44,8 +44,8 @@ In this series of articles, we'll present a fictional scenario using a data mode
 
 If you wish to repeat the testing described in this series, the source code used to build the test data set and then measure the performance of each modification is available on [GitHub](https://github.com/mongodb-developer/pipeline-optimization-blog).
 
-The video streaming service use case: profiles, devices, and device types {#h2-1-the-video-streaming-service-use-case-profiles-devices-and-device-types}
---------------------------------------------------------------------------------------------------------------------------------------------------------
+The video streaming service use case: profiles, devices, and device types
+-------------------------------------------------------------------------
 
 For our example scenario, we created a database for a fictional video streaming service. The part of the system we were focused on dealt with user profiles and devices and contained three collections:
 
@@ -92,8 +92,8 @@ Using this data model, the query that we were trying to perform was designed to 
 ```
 
 
-Understanding the query aggregation pipeline {#h2-2-understanding-the-query-aggregation-pipeline}
--------------------------------------------------------------------------------------------------
+Understanding the query aggregation pipeline
+--------------------------------------------
 
 To carry out the query, a MongoDB aggregation pipeline was used. Aggregation pipelines are used in MongoDB to perform a sequence of query, manipulation, and transformation steps on documents and are defined as an array of "stages." Each stage receives an input set of documents, performs an operation on those documents, then passes its output to the next stage in the "pipeline."
 
@@ -450,8 +450,8 @@ A $set stage was now added to rename the _id field created by the prior $group s
 
 The final stages in the pipeline sorted the documents by profileID and then used $skip and $limit stages to return the required page of ten results.
 
-The pipeline performance problem {#h2-3-the-pipeline-performance-problem}
--------------------------------------------------------------------------
+The pipeline performance problem
+--------------------------------
 
 While the initial pipeline design was returning correct results, and its design could even be considered perfectly reasonable when thought of in terms of how an equivalent SQL query might have been structured, its performance was problematic.
 

@@ -36,34 +36,34 @@ In the past, I had the privilege to work on a project that was initially created
 
 This month, he's published a new book, "[Modern frontends with htmx](https://www.wimdeblauwe.com/books/modern-frontends-with-htmx/)" where he takes a new approach by adding htmx into the "mix" to create dynamic and interactive web applications with Spring Boot and Thymeleaf.
 
-Technologies {#h2-0-technologies}
----------------------------------
+Technologies
+------------
 
 The book is filled with example applications using several technologies.
 
-### htmx {#h3-1-htmx}
+### htmx
 
 [htmx](https://htmx.org/), created by Carson Gross, is a little JavaScript library that allows you to write rich interactive web applications, in a simple way. A minimal learning curve is needed, and it works equally well with Python, PHP, .NET,...
 
 Using the attributes of HTML elements, htmx can modify elements of a web page without the need to fully reload and redraw the page. HTML snippets on the page are swapped on the fly with new snippets provided by the backend.
 
-### Spring Boot {#h3-2-spring-boot}
+### Spring Boot
 
 [Spring Boot](https://spring.io/projects/spring-boot) is based on the [Spring Framework](https://spring.io/projects/spring-framework) (a dependency-injection system), and provides pre-configured components (= beans = singletons) that are tied together at runtime. Within the Spring system, a long list of subprojects is available for all kinds of use cases.
 
 Spring Boot ensures that you get a list of versions of the included libraries that are guaranteed to work together.
 
-### Thymeleaf {#h3-3-thymeleaf}
+### Thymeleaf
 
 [Thymeleaf](https://www.thymeleaf.org/) is a server-side template engine to generate web pages filled with data from a backend. Making such a user interface interactive, is not easy and involves a lot of JavaScript. That's exactly where htmx fits in as it can solve these limitations in Thymeleaf.
 
 htmx is not tied to Thymeleaf and can also be used with other templating engines.
 
-### IntelliJ IDEA {#h3-4-intellij-idea}
+### IntelliJ IDEA
 
 Wim advises using the IntelliJ IDEA Ultimate edition as it fully supports Thymeleaf and JavaScript. But with some additional settings described in the book, you will also be able to use the free Community edition.
 
-### Other {#h3-5-other}
+### Other
 
 For the different examples in the book, various other tools are also used and described:
 
@@ -73,20 +73,20 @@ For the different examples in the book, various other tools are also used and de
 * [SortableJS](https://sortablejs.github.io/Sortable/): JavaScript library for reorderable drag-and-drop lists.
 * [Shoelace](https://shoelace.style/): A forward-thinking library of web components.
 
-Content of the book {#h2-6-content-of-the-book}
------------------------------------------------
+Content of the book
+-------------------
 
 All the sources used in the book are [available on GitHub](https://github.com/wimdeblauwe/modern-frontends-with-htmx-sources) with a directory per chapter. The samples use Java 17 (but also work with Java 21) and Spring Boot 3.1, but Wim plans to update the book and samples to use the recently released version 3.2 of Spring Boot.
 
-### Chapter 1: Technologies used in the book {#h3-7-chapter-1-technologies-used-in-the-book}
+### Chapter 1: Technologies used in the book
 
 See the info above.
 
-### Chapter 2: Getting Started {#h3-8-chapter-2-getting-started}
+### Chapter 2: Getting Started
 
 How to create a first example as a Maven project with the `ttcli` tool.
 
-### Chapter 3. Starting with htmx {#h3-9-chapter-3-starting-with-htmx}
+### Chapter 3. Starting with htmx
 
 With a simple "Hello World" example, you get to understand how HTML fragments are used by htmx, instead of the "traditional" JSON we are used to by almost all JavaScript frameworks.
 
@@ -96,53 +96,53 @@ Ajax events are used to interact with the backend to receive new HTML fragments,
 
 Targets and Swapping complete this chapter.
 
-### Chapter 4: Request and response headers {#h3-10-chapter-4-request-and-response-headers}
+### Chapter 4: Request and response headers
 
 In this chapter, Wim explains the extra arguments that can be used in the request and response headers to add more advanced functionality. And he made this even simpler by creating a Maven library ([io.github.wimdeblauwe:htmx-spring-boot-thymeleaf](https://mvnrepository.com/artifact/io.github.wimdeblauwe/htmx-spring-boot-thymeleaf)) which provides constants and other features for a smoother integration of htmx into a Spring Boot / Thymeleaf system.
 
-### Chapter 5: Project 1: TodoMVC {#h3-11-chapter-5-project-1-todomvc}
+### Chapter 5: Project 1: TodoMVC
 
 When you already used Spring Boot before, this example will help you to understand the use of htmx very easily. Wim starts with a "traditional" Thymeleaf user interface which gets improved step-by-step with htmx. First, a complete HTML page gets replaced with the result from a Controller and then gradually element by element, using the full advantages of htmx to replace parts of the page based on specific triggers and events.
 
 He uses the features of Thymeleaf in this process, to simplify the generation of repeated content like table rows and list items. In some cases, he even provides alternative implementations to illustrate that same functionality can be achieved differently, according to your preferred choice.
 
-### Chapter 6: Out of Band Swaps {#h3-12-chapter-6-out-of-band-swaps}
+### Chapter 6: Out of Band Swaps
 
 Basically, htmx is used to swap a specific HTML-element on a page. But you can also have the server respond with multiple top-level pieces of HTML. These pieces can be used in the client to replace multiple HTML parts on several places of the page, independent of the element where the event happened. This is called Out of Band Swaps and is illustrated with an example where results get updated on multiple places, by filling in numbers in a spreadsheet-like table.
 
-### Chapter 7: Client-side scripting {#h3-13-chapter-7-client-side-scripting}
+### Chapter 7: Client-side scripting
 
 Although htmx wants to reduce the need for client-side JavaScript, it doesn't mean it can't be used... The examples in this chapter enhance the user experience beyond what can be achieved with "pure htmx". Wim provides examples with Vanilla JavaScript (no extra framework), Alpine.js ("jQuery for the modern web"), and SortableJS (drag-and-drop).
 
 This way, a few problems can be handled when no response is received from the server, an error is returned, or it was not possible to send a request.
 
-### Chapter 8: Security {#h3-14-chapter-8-security}
+### Chapter 8: Security
 
 Luckily, to keep a htmx application safe, you don't have to do anything when using Spring, as the session related to the autorization will be used by htmx. Only `POST`, `PUT`, and `DELETE` requests require some extra effort if CSRF-protection is enabled. But all this gets explained in this chapter with the use of Spring Security with a bookmark demo application.
 
-### Chapter 9: Project 2: Contact application {#h3-15-chapter-9-project-2-contact-application}
+### Chapter 9: Project 2: Contact application
 
 In this chapter, Wim makes a Java adaption of the one presented in the book [Hypermedia Systems](https://hypermedia.systems/) by Carson Gross (the founder of htmx), Adam Stepinski, and Deniz Akşimşek. It's a contacts list, with active (= while typing) search functionality, inline validation of duplicate email addresses, trigger validation while typing, pagination, etc.
 
-### Chapter 10: Web Components {#h3-16-chapter-10-web-components}
+### Chapter 10: Web Components
 
 Web components are reusable custom components, with their functionality and styling encapsulated away from the rest of your code. There are a lot of free of such component libraries like [Google Material Web](https://m3.material.io/develop/web), [Vaadin Web Components](https://github.com/vaadin/web-components), [SAP Web Components](https://sap.github.io/ui5-webcomponents/), [Shoelace](https://shoelace.style/),...
 
 In this chapter, a user interface is created with Shoelace to show an expandable tree with the names of GitHub projects for a certain user, using the GitHub API.
 
-### Chapter 11: Server-Sent Events \& Websockets {#h3-17-chapter-11-server-sent-events-websockets}
+### Chapter 11: Server-Sent Events \& Websockets
 
 This chapter provides examples to push data from the server to the client with two different approaches:
 
 * Server-Sent Events (SSE): Allows the server to push data to the client (one way only).
 * Websockets: Two-way communication channel between client (browser) and server, but slightly more complicated.
 
-### Chapter 12: Closing {#h3-18-chapter-12-closing}
+### Chapter 12: Closing
 
 Some extra links to further explore htmx.
 
-Review {#h2-19-review}
-----------------------
+Review
+------
 
 Wim's book gives a lot of examples. They not only fully explain the use of htmx, but can also be used to improve your knowledge about Spring Boot and Thymeleaf. But I would advise you to read Wim's Thymeleaf book first if you have never used it before.
 

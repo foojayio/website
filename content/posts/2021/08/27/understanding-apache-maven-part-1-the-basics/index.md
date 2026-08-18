@@ -22,7 +22,7 @@ Apache Maven (commonly referred to as "Maven") is a **Build Management** tool. M
 
 Maven follows a **convention-over-configuration** philosophy. More on this follows.
 
-### Why is Maven a Build Management tool? {#block-26a619e1-4ead-4d98-9783-d0af7673e045}
+### Why is Maven a Build Management tool?
 
 Maven aims at achieving the following for a project:
 
@@ -41,11 +41,11 @@ In addition, maven provides capabilities for a project to :
 * furnish metrics and reports
 * deploy built artifacts
 
-### What is Convention-Over-Configuration? {#block-5a40e91f-1702-4a3a-a4ff-6f16a9a1df07}
+### What is Convention-Over-Configuration?
 
 [Convention-over-configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) is a software paradigm. The main intent of such a paradigm is to reduce the number of superfluous decisions required by a developer to build her/his project. The paradigm aims to meet and satisfy the "*[principle of least astonishment](https://en.wikipedia.org/wiki/Principle_of_least_astonishment)*".
 
-#### Apache Maven -- convention over configuration {#block-1037484d-d1d5-4626-9189-ed2548ab694b}
+#### Apache Maven -- convention over configuration
 
 Apache Maven provides sensible defaults for a project's build management. A developer can then choose to override any preset defaults.
 
@@ -62,7 +62,7 @@ Similarly *resources* needed for *production* or *test* outputs, reside respecti
 
 This is just one example. Maven uses the convention-over-configuration philosophy in many other areas.
 
-### What are some Maven capabilities? {#block-441f4cb2-4fc0-4876-808e-20217229bb69}
+### What are some Maven capabilities?
 
 A few features that maven offers (this is not a comprehensive list):
 
@@ -78,7 +78,7 @@ A few features that maven offers (this is not a comprehensive list):
 * Report a build as success or failure
 * . . .
 
-### How does Maven work? {#block-544bc655-5abe-45ac-82e7-8d3f96e8858d}
+### How does Maven work?
 
 Maven uses a **Project Object Model (POM)** to manage a project.
 

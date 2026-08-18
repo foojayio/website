@@ -35,8 +35,8 @@ However, often teams struggle with it, due to a lack of standardized testing sol
 
 Here, I present an effective method for Jakarta EE integration testing, using [Payara Platform](https://www.payara.fish/) and [Testcontainers](https://www.testcontainers.org/) in my example.
 
-What Are Integration Tests and What Are Their Common Problems? {#h2-0-what-are-integration-tests-and-what-are-their-common-problems}
-------------------------------------------------------------------------------------------------------------------------------------
+What Are Integration Tests and What Are Their Common Problems?
+--------------------------------------------------------------
 
 Integration tests are designed to make sure that an application and its dependencies, for example database engines, third-party services, data processors, work correctly together. They are intended to discover flaws in how interfaces are designed and how the multiple components communicate with each other.
 
@@ -48,8 +48,8 @@ In some cases, sloppy tests may even complicate the "works on my machine" scenar
 
 What to do then? In recent years, new technology has come out to leverage the amazing power of containers: [Testcontainers.](https://www.testcontainers.org/)
 
-What are Testcontainers? {#h2-1-what-are-testcontainers}
---------------------------------------------------------
+What are Testcontainers?
+------------------------
 
 Testcontainers is, simply put, a library that provides object-oriented abstractions of a software component running in a [Docker](https://www.docker.com/) container that is quickly provisioned and discarded, often within the boundaries of a test. Any kind of software that has a Docker image available can be quickly plugged into Testcontainers. And if this isn't the case, these components can be easily wrapped in a custom image and be plugged in any way!
 
@@ -64,8 +64,8 @@ The goals of Testcontainers can be summarized in the following:
 
 The focus of this article will be to illustrate how quickly and easy it is to set up a Testcontainers test suite for a small Jakarta EE application using [JUnit 5](https://junit.org/junit5/) and run it with the help of the Payara Platform. After following the instructions outlined in the next sections you should be able to give it a try!
 
-Getting Started {#h2-2-getting-started}
----------------------------------------
+Getting Started
+---------------
 
 The only requirement needed to run Testcontainers is for your environment to have a valid Docker installation, whether on Windows, Linux, or Mac systems. We'll assume that you are familiar with how JUnit 5 Maven projects are structured in the following sections.
 
@@ -169,8 +169,8 @@ The Testcontainers engine will inform of the following details and/or events:
 
 All of this is done with a couple of lines of code!
 
-Payara Platform and Testcontainers {#h2-3-payara-platform-and-testcontainers}
------------------------------------------------------------------------------
+Payara Platform and Testcontainers
+----------------------------------
 
 As mentioned before, any software component can be quickly plugged into Testcontainers, and the Payara Platform is no exception to this rule as its main distributions have up-to-date official Docker images:
 
@@ -446,8 +446,8 @@ You will notice that the test is marked as ***ordered*** and will execute first.
 
 There's a big question mark with our test and it is simple: *How do we reach the server instance running in the container?*
 
-Reaching the Container {#h2-4-reaching-the-container}
------------------------------------------------------
+Reaching the Container
+----------------------
 
 Remember that the Payara Micro instance is running inside a container, so it cannot be directly contacted using port **8080**, as this port will get mapped automatically to an available port in the host system by Testcontainers. To retrieve this port, we'll use the getMappedPort method:
 
@@ -530,8 +530,8 @@ Running the tests again will generate a successful result, since the first test 
 
 In most scenarios, re-using the same container will be the best solution, as it will speed up the overall time needed to complete the test suite. Although Payara Micro's official container is fast to start, running sequential tests on one container will be enough to test most Jakarta EE features. There are also different patterns that allow to reuse the same container across different test classes, such as the [Singleton Container Pattern](https://www.testcontainers.org/test_framework_integration/manual_lifecycle_control/#singleton-containers).
 
-A Real-World Test Scenario {#h2-5-a-real-world-test-scenario}
--------------------------------------------------------------
+A Real-World Test Scenario
+--------------------------
 
 Now that we understand the extent of what we can do with testcontainers, how about we do a real-world integration test? You may recall that our application's persistence unit uses the default data source provided by the Payara Platform, which relies on an embedded H2 database. This setting is certainly useful for a quick test and validation of the persistence layer, but in no way reflects good practices, as H2 is not recommended for production use.
 
@@ -647,8 +647,8 @@ Let's re-run our tests and observe that the Testcontainers engine will also repo
 
 And both tests should be executed without issues. With this, we have demonstrated that our integration tests are closely mirroring what a potential production environment would look like!
 
-Testcontainers Cloud {#h2-6-testcontainers-cloud}
--------------------------------------------------
+Testcontainers Cloud
+--------------------
 
 Testing with Testcontainers will make you extremely productive, but there's an interesting challenge to consider: as your applications grow, so will the overall size and number of integration tests needed to establish a good quality threshold.
 
@@ -683,8 +683,8 @@ Total Memory: 11.145 MB
 
 You might be surprised by the benefits of using this solution. It allows for truly portable tests that can run anywhere with zero impact on the development environment and the ability to test the full extent of any Jakarta EE application and ecosystem in detail!
 
-In Conclusion {#h2-7-in-conclusion}
------------------------------------
+In Conclusion
+-------------
 
 Testcontainers is a powerful testing framework that simplifies the provisioning of test environments, so you can effectively and quickly run real-world integration tests.
 

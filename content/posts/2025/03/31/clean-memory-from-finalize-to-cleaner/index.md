@@ -29,8 +29,8 @@ Java's [Cleaner API](https://docs.oracle.com/en/java/javase/17/docs/api/java.bas
 
 It addresses the shortcomings of the deprecated finalize() method, offering a predictable and efficient way to manage non-memory resources: so let's take a short trip on clean memory from finalize to Cleaner API.
 
-Why is the finalize() method deprecated/removed? {#_why_is_the_finalize_method_deprecatedremoved}
--------------------------------------------------------------------------------------------------
+Why is the finalize() method deprecated/removed?
+------------------------------------------------
 
 The [finalize()](https://openjdk.org/jeps/421) method was initially introduced in Java to provide a way for objects to perform cleanup actions before they are garbage collected. It belongs to `java.lang.Object` and can be overridden by subclasses to release resources like file handles or network sockets. Why was this approach problematic?
 
@@ -39,8 +39,8 @@ The [finalize()](https://openjdk.org/jeps/421) method was initially introduced i
 * **Memory Leaks** : If an object is unintentionally retained (e.g., due to an exception in `finalize()`), it may never be garbage collected.
 * **Finalization Queue Mechanism** : `finalize()` execution happens in a separate thread(the Finalizer Thread), which can lead to thread contention and delays.
 
-How does Cleaner relate to Java Reference classes? {#_how_does_cleaner_relate_to_java_reference_classes}
---------------------------------------------------------------------------------------------------------
+How does Cleaner relate to Java Reference classes?
+--------------------------------------------------
 
 In Java, there are four types of references differentiated by the way by which they are garbage collected:
 
@@ -134,8 +134,8 @@ public class BasicCleanerExample {
 ```
 
 
-Behind the scenes of Cleaner {#_behind_the_scenes_of_cleaner}
--------------------------------------------------------------
+Behind the scenes of Cleaner
+----------------------------
 
 The implementation behind Cleaner is not trivial. It leverages a combination of the Java `PhantomReference` and a background daemon thread. Let's explore the inner workings:
 
@@ -197,8 +197,8 @@ public class FileCleanerExample {
 ```
 
 
-Cleaner vs. try-with-resources {#_cleaner_vs_try_with_resources}
-----------------------------------------------------------------
+Cleaner vs. try-with-resources
+------------------------------
 
 The example with a file might suggest a more idiomatic solution using the `try-with-resources` construct. It may be a real solution but is less so if we consider particular resources such as images or memory buffers directly mapped to memory. As a last note, we also need to consider that `Autocloseable` can be used with `Cleanable`, invoking the `clean()` method from the `close()` one, having the same effect as a GC operation.  
 
@@ -251,8 +251,8 @@ The following table allows us to summarize the tools presented and choose the on
 | Use Case       | When precise cleanup timing is required | When working with external resources or objects without explicit close methods |
 | Overhead       | Minimal                                 | Higher due to the background thread                                            |
 
-Avoid overusing Cleaner {#_avoid_overusing_cleaner}
----------------------------------------------------
+Avoid overusing Cleaner
+-----------------------
 
 Using `Cleaner` is more straightforward than using references. Still, we must exercise caution when using this kind of resource: only use `Cleaner` when the runtime can't release resources via `try-with-resources` or explicit `close()` calls.  
 
@@ -264,15 +264,15 @@ More aspects need our attention, as for cleaning action, following some rules:
 * Cleaning actions can be invoked concurrently with other cleaning actions. They should be swift to execute and not block: it may delay processing other cleaning actions registered to the same cleaner.
 * We can also consider executing a cleaning action and delegating it to another thread pool, but this idea can involve more complexity and not solve concurrency issues.
 
-Conclusion {#_conclusion}
--------------------------
+Conclusion
+----------
 
 Java's Cleaner API provides a modern, efficient approach to resource management, addressing the limitations of `finalize()`. By leveraging `Cleaner`, developers can ensure that non-`AutoCloseable` resources, such as native memory and caches, are properly cleaned up when no longer needed. However, you should always prefer try-with-resources when possible for deterministic resource management.
 
 By understanding when and how to use `Cleaner`, developers can write more reliable, high-performance, and memory-efficient Java applications. Mastering these best practices will be essential for building robust, scalable software as Java evolves.
 
-Further Resources {#_further_resources}
----------------------------------------
+Further Resources
+-----------------
 
 * [How to handle Java errors and cleanup without finalize](https://www.infoworld.com/article/2334445/how-to-handle-java-errors-and-cleanup-without-finalize.html)
 * [Replacing Finalizers with Cleaners](https://inside.java/2022/05/25/clean-cleaner/)

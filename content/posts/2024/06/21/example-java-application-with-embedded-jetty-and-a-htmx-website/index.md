@@ -28,15 +28,15 @@ For this experiment, I was inspired by the book **"Modern frontends with htmx" w
 
 {{< youtube ko-tIacI-u8 >}}
 
-What is (Eclipse) Jetty? {#h2-0-what-is-eclipse-jetty}
-------------------------------------------------------
+What is (Eclipse) Jetty?
+------------------------
 
 As described on [eclipse.dev/jetty](https://eclipse.dev/jetty/): *"Jetty provides a web server and servlet container, additionally providing support for HTTP/2, WebSocket, OSGi, JMX, JNDI, JAAS and many other integrations. These components are open source and are freely available for commercial use and distribution."*
 
 Jetty can be run as a stand-alone webserver, or integrated in a Java application. The integrated approach is what I wanted to use and is described here.
 
-What is htmx? {#h2-1-what-is-htmx}
-----------------------------------
+What is htmx?
+-------------
 
 As described on [htmx.org](https://htmx.org/): *"htmx gives you access to AJAX, CSS Transitions, WebSockets and Server Sent Events directly in HTML, using attributes, so you can build modern user interfaces with the simplicity and power of hypertext"*
 
@@ -53,12 +53,12 @@ The htmx website gives this minimal example for a webpage with the action: _"Whe
 ```
 
 
-Example Application {#h2-2-example-application}
------------------------------------------------
+Example Application
+-------------------
 
 The [sources of this example application are available on GitHub](https://github.com/FDelporte/java-jetty-htmx). It's a Maven project that will provide two HTML pages, one with "simple" htmx, and one using a websocket.
 
-### Dependencies {#h3-3-dependencies}
+### Dependencies
 
 Many of the Jetty+WebSocket examples that you can find online, refer to the `javax`-libraries for WebSocket integration. But after some searching, I found the correct configuration using the newer `jakarta` replacement library to achieve this. Although my example project uses Maven, I list the dependencies here in Gradle format, as that's a shorter way to list them in a blog post 🙂
 
@@ -73,7 +73,7 @@ net.datafaker:datafaker:2.1.0
 ```
 
 
-### Jetty Configuration {#h3-4-jetty-configuration}
+### Jetty Configuration
 
 As I wanted to expose three different things on the same port, I needed some researching to combine them all into one Jetty Server instance:
 
@@ -213,7 +213,7 @@ I use the Firefox plugin ["Simple WebSocket Client"](https://addons.mozilla.org/
   </svg></button>
 </figure>
 
-### htmx web requests {#h3-5-htmx-web-requests}
+### htmx web requests
 
 The example application contains two test pages. The first one, available on `http://localhost:9999/index.html` contains a few small examples of how you can use htmx to request data from the server and handle it on the client side. These example shows a button that calls the API on `/rest/text` to get a random paragraph (`<p>`) which replace the button because of the `hx-swap="outerHTML"`:
 
@@ -245,7 +245,7 @@ Another demo requests a list item (`<li>`) with a timestamp from the API on `/re
  </figure>
 </figure>
 
-### htmx with websocket {#h3-6-htmx-with-websocket}
+### htmx with websocket
 
 htmx makes it also very easy to communicate between client and server with WebSockets. You need an additional JavaScript include and some small configuration in the `body` as you can see in the sources of the page that is available on `http://localhost:9999/websocket.html`:
 
@@ -276,12 +276,12 @@ In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp fr
  </figure>
 </figure>
 
-Running the Application {#h2-7-running-the-application}
--------------------------------------------------------
+Running the Application
+-----------------------
 
 You can start the application from your IDE, or build it first as a JAR.
 
-### In IntelliJIDEA {#h3-8-in-intellijidea}
+### In IntelliJIDEA
 
 * Open the project in your IDE as Maven project.
 * Open `be.webtechie.javajettyhtmx.Application`.
@@ -294,13 +294,13 @@ You can start the application from your IDE, or build it first as a JAR.
   * <http://localhost:9999/rest/list>
 * You can test the WebSocket on this endpoint: `ws://localhost:9999/websocket/ws`
 
-### From JAR {#h3-9-from-jar}
+### From JAR
 
 * Build the application with `mvn package`.
 * Start it with `java -jar jetty-htmx-demo.jar`
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 Any technology, library, or framework should be evaluated to be sure it's the right solution for the problem you need to solve.
 

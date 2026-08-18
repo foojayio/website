@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Building local AI agents with Spring AI and Ollama has emerged as a game-changer for developers seeking to maintain complete control over their AI implementations and have access always at their fingertips, even offline.
 
@@ -33,8 +33,8 @@ By the end of this tutorial, you'll have a working local AI agent that can handl
 
 Let's dive in and explore what makes the Spring AI + Ollama combination such a powerful approach for privacy-first, cost-efficient AI development.
 
-Configuring Ollama {#h2-1-configuring-ollama}
----------------------------------------------
+Configuring Ollama
+------------------
 
 [Ollama](https://ollama.com/) has emerged as one of the best pieces of software for the modern AI-assisted era, giving developers access to a vast collection of open-source foundation models, that enable you running your own LLMs fully locally, in the comfort of your laptop!
 
@@ -57,8 +57,8 @@ On their website you can find several models and commands on how to run them.
 
 Essentially, doing a simple `ollama run ` will pull and start a given LLM, using your machine to perform inference, so, it can and will be very resource intensive, but, the main advantage is that it will all be within your machine, running 100% under your control, and, if you pull the models you want beforehand, you can then run them fully offline, which is pretty neat!
 
-Spring AI + Ollama: a perfect match! {#h2-2-spring-ai-ollama-a-perfect-match}
------------------------------------------------------------------------------
+Spring AI + Ollama: a perfect match!
+------------------------------------
 
 We can have the best of both worlds: the ingenuity of Ollama and power of Springboot at our fingertips, to create a powerful AI agent that runs fully locally and can serve you in your own tasks, much better than proprietary AI ever would.
 
@@ -68,7 +68,7 @@ We will also go the extra mile and showcase how to create a local MCP server tha
 
 We'll see just how easy all of this is with Spring AI.
 
-### Setting up the project {#h3-3-setting-up-the-project}
+### Setting up the project
 
 First, we'll use Maven and set up a simple POM.xml that sets the stage and leverages most of the starter dependencies we need for all the magic to happen:
 
@@ -156,7 +156,7 @@ What about this absolute beauty? In 25 lines, we configured an Ollama chat model
 
 This is also why we call these *agents* , in the sense that we provide an LLM with *tools* so they can have *agency* by acting on a users' behalf. In our case, these are a tool for doing web searches (Give me a carbonara recipe) and also to send emails (Send me the recipe above to my email \`\`).
 
-### Enough talk, show me the code {#h3-4-enough-talk-show-me-the-code}
+### Enough talk, show me the code
 
 Here it is, in all its glory. We start with a simple configuration class that showcases how a `ChatClient` is instantiated with tool capabilities. It wraps the lower-level `ChatModel` to enhance it with tool calling capabilities.
 
@@ -203,8 +203,8 @@ public Flux<ChatResponse> processPromptStreaming(@RequestBody String promptText)
 
 Now, we have a local running LLM, configured with Ollama that we can then use as our own private assistant that can send emails and conduct web searches on our behalf!
 
-A quick detour on FastMCP {#h2-5-a-quick-detour-on-fastmcp}
------------------------------------------------------------
+A quick detour on FastMCP
+-------------------------
 
 With FastMCP, you can build your own agents as shown above in the application.yml file.
 
@@ -278,8 +278,8 @@ The most important piece here is to add a nice function description and use name
 
 This is why it's required to use an LLM that has been fine-tuned for using tools, as they will know which tools to call in which contexts.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 The combination of Spring AI and Ollama represents a significant advancement in local AI development, offering developers a powerful yet accessible pathway to creating sophisticated AI agents. This synergy allows you to maintain complete control over your AI implementations while eliminating the need to share sensitive data with third-party services.
 

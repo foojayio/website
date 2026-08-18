@@ -37,11 +37,11 @@ Here are our main conclusions:
 2. Shenandoah's pacer improvement showed a very strong effect, reducing the latency by a factor of three, but still staying well above 10 ms except in the very lowest part of our tested range
 3. G1 kept its 99.99th percentile latency below 13 ms across a wide range of throughputs
 
-### The JDK We Tested {#h3-0-the-jdk-we-tested}
+### The JDK We Tested
 
 Since this is all so fresh, we couldn't use an existing JDK release, not even EA, to see the effects of the fix. JDK version 14.0.2 is slated to be released on July 14. To nevertheless make progress, we took the source code from the jdk14u tree, at the changeset number [57869:e9d41bbaea38](http://hg.openjdk.java.net/jdk-updates/jdk14u/rev/e9d41bbaea38), and applied the changeset number [59746:29b4bb22b5e2](https://hg.openjdk.java.net/jdk/jdk/rev/29b4bb22b5e2)from the main jdk tree on top of it. The jdk14u tree is where JDK 14.0.2 will be released from and the changeset 59746:29b4bb22b5e2 applies the patch resolving the mentioned Shenandoah issue.
 
-### The JVM Options {#h3-1-the-jvm-options}
+### The JVM Options
 
 There are two HotSpot JVM options whose default values change automatically when you use the ZGC so we had to decide which choice to make when testing the other garbage collectors.
 
@@ -54,7 +54,7 @@ For the G1 collector, we also set `-XX:MaxGCPauseMillis=5`, same as in the previ
 
 We performed all our tests on an EC2 c5.4xlarge instance. It has 16 vCPUs and 32 GB of RAM.
 
-### The Data Pipeline {#h3-2-the-data-pipeline}
+### The Data Pipeline
 
 To get a more nuanced insight into the performance, we made some improvements to the testing code. Whereas in the first iteration we just reported the maximum latency, this time around we wanted to capture the entire latency profile. To this end we had to increase the number of reports per second the pipeline outputs. Initially we set it to 10 times per second, a number which results in too few data points for the latency chart. The pipeline in this round emits 100 reports per second. The event rate and the length of the time window are the same: 1 million events per second and 10 seconds, respectively. This results in 1,000 hashtables each holding 10,000 keys as the aggregation state. We tested across a wide range of keyset sizes, starting from 5,000 up to 105,000.
 
@@ -90,13 +90,13 @@ Another key difference is that, in the original post, we measured the latency of
 
 There's another, relatively minor technical point worth mentioning: since we tested on a cloud server instance, we used Jet's client-server mode, which means we separately start a Jet node and then deploy the pipeline to it using Jet's command `jet submit`. The code available on GitHub is the client code and the Jet server code was a build from the Jet master branch before Jet 4.2 was released. We expect all the results to be reproducible with the [Jet 4.2 release](https://github.com/hazelcast/hazelcast-jet/releases/download/v4.2/hazelcast-jet-4.2.tar.gz).
 
-### What Exactly We Measured {#h3-3-what-exactly-we-measured}
+### What Exactly We Measured
 
 We measured the latency as the timestamp at which the pipeline emits a given result minus the timestamp to which the result pertains, giving us end-to-end latency (the only kind the user actually cares about).
 
 Keep especially in mind that latency does not equal a GC pause. Normally, neither Shenandoah nor ZGC enter anything more than a millisecond of GC pause, but their background work shares the limited system capacity with the application. With G1 the equivalence is much stronger and its 10-20 millisecond latencies are primarily the result of GC pauses that long.
 
-### The Measurements {#h3-4-the-measurements}
+### The Measurements
 
 To come up with the charts below, for each data point we let the pipeline warm up for 20 seconds and then gathered the latencies for 4 minutes, collecting 24,000 samples.
 
@@ -124,7 +124,7 @@ Here are some things to note:
 2. The G1 collector is unphased by the differences in throughput. While its latency is never under 10 milliseconds, it keeps its level over the entire tested range and more. Its latency even improves a bit with higher loads.
 3. At 9.5 M items per second, ZGC shows a remarkable recovery. Sandwiched between the latencies of 92 and 209 milliseconds, at this exact throughput it achieves 10 ms latency! We of course thought it was a measurement error and repeated it for three times, but the result was consistent. Maybe there's a lesson in there for the ZGC engineers.
 
-### A Sneak Peek into Upcoming Versions {#h3-5-a-sneak-peek-into-upcoming-versions}
+### A Sneak Peek into Upcoming Versions
 
 As a preview into what's coming up in OpenJDK, we also took a look at the [Early Access release 27 of JDK 15](https://download.java.net/java/early_access/jdk15/28/GPL/openjdk-15-ea+28_linux-x64_bin.tar.gz). Shenandoah's pacer improvement is not applied in it, so to properly test Shenandoah's prospects we used a build available at [builds.shipilev.net/openjdk-jdk](https://builds.shipilev.net/openjdk-jdk/), specifically one that reports its version as `build 16-testing+0-builds.shipilev.net-openjdk-jdk-b1282-20200611`. Out of interest, we also doubled our throughput range to capture more of the behavior after the latency exceeds 10 milliseconds. Here's what we got:
 

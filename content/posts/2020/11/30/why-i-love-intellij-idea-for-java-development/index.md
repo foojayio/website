@@ -30,7 +30,7 @@ NOTE: I used IDEA 2020.2.3 (Ultimate Edition) for this blog post.
 
 ![](idea-2020.2.3-700x455.png "IntelliJ IDEA 2020.2.3")
 
-### Run Your Java Apps from IntelliJ IDEA {#h3-0-run-your-java-apps-from-intellij-idea}
+### Run Your Java Apps from IntelliJ IDEA
 
 I used to prefer running my apps from the command line with Ant or Maven. Then, along came Spring Boot. Spring Boot is a plain ol' Java application with a `public static void main()`. This makes it a lot easier for Java IDEs to run apps since this is a standard part of *any* Java app.
 
@@ -91,7 +91,7 @@ You might be wondering, "why do I need a run configuration?" First of all, it's 
 
 For example, if you're using Spring Boot with Okta's Spring Boot starter, you'll want to use environment variables rather than putting a client secret in your source code.![](10-env-variables.png "Set environment variables")
 
-### Debug Your Java Apps {#h3-1-debug-your-java-apps}
+### Debug Your Java Apps
 
 Setting breakpoints in apps and debugging them is a valuable skill for software engineers, regardless of language.
 
@@ -115,7 +115,7 @@ Confession: I was a Java developer for over five years before I learned [you can
 
     `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar path/to/jar.jar`
 
-### Run Your Java Tests from IntelliJ IDEA {#h3-2-run-your-java-tests-from-intellij-idea}
+### Run Your Java Tests from IntelliJ IDEA
 
 When I run tests from the command line with a Java build tool, I often run all the tests.
 
@@ -138,7 +138,7 @@ You can also run them at a package level by right-clicking on the page and selec
 
 TIP: You might notice I'm using [SDKMAN](https://sdkman.io/) for my JDK installation. IDEA pairs well with SDKMAN (which is very useful when testing with different vendors/versions).
 
-### My Favorite Keyboard Shortcuts in IntelliJ IDEA {#h3-3-my-favorite-keyboard-shortcuts-in-intellij-idea}
+### My Favorite Keyboard Shortcuts in IntelliJ IDEA
 
 I'm a big fan of keyboard shortcuts because leaving my hands on the keyboard makes me more efficient. Since I do a lot of presentations and use keyboard shortcuts, I use [Presentation Assistant](https://plugins.jetbrains.com/plugin/7345-presentation-assistant) for showing commands during presentations (and learning Windows/Linux commands).
 
@@ -160,7 +160,7 @@ You can also use ⌘ + Shift + A to pop an actions dialog and search for command
 >
 > --- JetBrains IntelliJ IDEA (@intellijidea) [October 20, 2020](https://twitter.com/intellijidea/status/1318461975844724736?ref_src=twsrc%5Etfw)
 
-### IDEA's Command-Line Launcher {#h3-4-idea-s-command-line-launcher}
+### IDEA's Command-Line Launcher
 
 Did you know you can install a command-line launcher (**Tools** \> **Create Command-line launcher**) and open projects from your terminal? For example:
 
@@ -173,7 +173,7 @@ Did you know you can install a command-line launcher (**Tools** \> **Create Comm
 
 The [IDEA CLI has other commands](https://www.jetbrains.com/help/idea/working-with-the-ide-features-from-command-line.html#arguments) like `diff` and `format` too, but I've never used them.
 
-### Markdown and AsciiDoc Support {#h3-5-markdown-and-asciidoc-support}
+### Markdown and AsciiDoc Support
 
 I write blog posts like this one as much as I write Java code. I was a big fan of writing HTML until I spent a year writing mostly Markdown. Now, I prefer Markdown over HTML, and AsciiDoc is even better!
 
@@ -183,13 +183,13 @@ IntelliJ IDEA bundles Markdown support, and it works "good enough" when I have t
 
 I use the [IntelliJ AsciiDoc Plugin](https://intellij-asciidoc-plugin.ahus1.de/) for AsciiDoc authoring. This plugin has gotten so good over the past few years, I do almost all my authoring in IDEA and only render it via build tools as a QA process.
 
-### Local History is Fantastic! {#h3-6-local-history-is-fantastic}
+### Local History is Fantastic!
 
 IntelliJ's Local History support can be a lifesaver. I try to edit all text-based files in IDEA because of this feature. If things crash or I want to go back to what I'd written before, local history works excellent for that.
 
 Simply right-click on a file or directory and go to **Local History** \> **Show History**.
 
-### IntelliJ Live Templates {#h3-7-intellij-live-templates}
+### IntelliJ Live Templates
 
 An awesome way to pre-record code snippets for demos and increase your productivity is to use [Live Templates](https://www.jetbrains.com/help/idea/using-live-templates.html).
 
@@ -224,7 +224,7 @@ To add new live templates, select the code you want to save, then go to **Tools*
 
 TIP: Make sure you test your templates before doing a demo because sometimes they get saved for the wrong context!
 
-### Web Framework Support {#h3-8-web-framework-support}
+### Web Framework Support
 
 If you're a hard-core Java developer, you might not care about web framework support. That is, unless your web framework requires Java code, like Wicket or GWT. Personally, I'm a fan of JavaScript and don't trust Java developers to write my JavaScript for me. I'm a full-stack developer, and I ❤️ [JHipster](https://www.jhipster.tech)! 🤓
 
@@ -232,7 +232,7 @@ I first switched to IntelliJ IDEA in 2006 because of its Maven multi-module supp
 
 Support for Angular is bundled, and there are lots of React plugins. I've never installed any because I haven't had a need. As far as Vue is concerned, there's a [Vue.js plugin](https://plugins.jetbrains.com/plugin/9442-vue-js) from JetBrains.
 
-### Learn More About Java and IntelliJ {#h3-9-learn-more-about-java-and-intellij}
+### Learn More About Java and IntelliJ
 
 I've heard from many developers that they prefer to use Eclipse or NetBeans because they're free. If you were a carpenter, would you look around for free tools, or would you buy new fancy tools that make you a better carpenter? 😏
 

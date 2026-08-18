@@ -37,7 +37,7 @@ Let's get in and build a Quarkus REST API that classifies text sentiment using a
 
 If you want to start with the fully working example, get it from [my Github repository](https://github.com/myfear/ejq_substack_articles/tree/main/sentiment-analysis).
 
-### What You'll Build {#h3-0-what-you-ll-build}
+### What You'll Build
 
 A simple `/sentiment` REST endpoint that takes a text string and returns a sentiment classification: **POSITIVE** , **NEGATIVE** , or **NEUTRAL**. The model runs locally in a container, orchestrated automatically by Quarkus Dev Services.
 
@@ -47,7 +47,7 @@ This is great for:
 * Offline development.
 * Avoiding external API rate limits and costs.
 
-### Prerequisites {#h3-1-prerequisites}
+### Prerequisites
 
 To follow along, make sure you have the following installed:
 
@@ -58,7 +58,7 @@ To follow along, make sure you have the following installed:
 
 No need to manually install Ollama. Quarkus will take care of that for you during development.
 
-### Bootstrap Your Quarkus Project {#h3-2-bootstrap-your-quarkus-project}
+### Bootstrap Your Quarkus Project
 
 Open a terminal and scaffold a new project with the necessary extensions:
 
@@ -76,7 +76,7 @@ You now have a Quarkus project with:
 * `rest-jackson` for creating JSON-based REST endpoints.
 * `langchain4j-ollama` for interacting with local LLMs.
 
-### Configure Ollama and Dev Services {#h3-3-configure-ollama-and-dev-services}
+### Configure Ollama and Dev Services
 
 Open `src/main/resources/application.properties` and configure the local model:
 
@@ -91,7 +91,7 @@ quarkus.langchain4j.ollama.timeout=120s
 
 That's all. Quarkus Dev Services will handle pulling the Docker image, downloading the model, and wiring up the service when you run in dev mode.
 
-### Define the Sentiment Enum {#h3-4-define-the-sentiment-enum}
+### Define the Sentiment Enum
 
 Create `src/main/java/org/acme/Sentiment.java`:
 
@@ -103,7 +103,7 @@ public enum Sentiment { POSITIVE, NEGATIVE, NEUTRAL }
 
 Just a simple enum class with the sentiments.
 
-### Create the AI Classification Service {#h3-5-create-the-ai-classification-service}
+### Create the AI Classification Service
 
 Quarkus Langchain4j allows you to define an interface and annotate it with `@AiService`. Quarkus and Langchain4j will auto-generate the implementation at runtime.
 
@@ -139,7 +139,7 @@ public interface SentimentAnalyzer {
 
 This is where the magic happens. With a few lines, you've created an AI-powered sentiment classifier.
 
-### Expose the Sentiment API {#h3-6-expose-the-sentiment-api}
+### Expose the Sentiment API
 
 Create `src/main/java/org/acme/SentimentResource.java`:
 
@@ -189,7 +189,7 @@ public class SentimentResource {
 
 This class provides a simple GET endpoint for testing in the browser or via `curl`.
 
-### Run It! {#h3-7-run-it}
+### Run It!
 
 Ensure Podman is running, then launch the app in dev mode:
 
@@ -206,7 +206,7 @@ On first startup, Quarkus will:
 
 Be patient, it might take a few minutes.
 
-### Test It! {#h3-8-test-it}
+### Test It!
 
 Try some sample requests:
 
@@ -234,7 +234,7 @@ curl "http://localhost:8080/sentiment?text=The+Ollama+container+started+successf
 
 > **Note:** While local models like Phi-3 Mini are fast and private, they're also smaller and less instruction-tuned than cloud-hosted LLMs, so sentiment predictions might occasionally be off, especially for nuanced or ambiguous text. Fine-tuning examples and careful prompting help, but results may vary.
 
-### Final Thoughts {#h3-9-final-thoughts}
+### Final Thoughts
 
 You've just built a locally-running AI-powered sentiment analysis API in Java using modern open source tools. No cloud credits or platform lock-in required.
 
@@ -244,7 +244,7 @@ You've just built a locally-running AI-powered sentiment analysis API in Java us
 * **Quarkus** simplifies integration and optimizes for fast feedback during dev.
 * **Dev Services** automate local infrastructure like Ollama so you can focus on code.
 
-### What's Next? {#h3-10-what-s-next}
+### What's Next?
 
 * Swap out `phi3:mini` for more powerful models like `llama3:8b`.
 * Add more few-shot examples to improve accuracy.

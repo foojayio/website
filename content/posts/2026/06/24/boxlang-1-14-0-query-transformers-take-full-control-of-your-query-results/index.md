@@ -29,8 +29,8 @@ BoxLang 1.14.0 ships a lot of exciting features -- Dynamic Sets, Ranges, Inner C
 
 If you have ever executed a query and then immediately written a loop to reshape the result into what you actually needed, this feature is for you.
 
-The Problem with Three Return Types {#h2-0-the-problem-with-three-return-types}
--------------------------------------------------------------------------------
+The Problem with Three Return Types
+-----------------------------------
 
 For years, `queryExecute()` and `bx:query` have offered three hardcoded return formats:
 
@@ -44,8 +44,8 @@ The old answer was post-processing: execute, then immediately loop, map, or tran
 
 **Query Transformers eliminate that step entirely.**
 
-What Is a Query Transformer? {#h2-1-what-is-a-query-transformer}
-----------------------------------------------------------------
+What Is a Query Transformer?
+----------------------------
 
 A transformer is a callable you attach to any `queryExecute()` call via the `transformer` option. BoxLang executes your SQL, materializes the result set, then passes the raw Query object and execution metadata directly to your transformer. Whatever your transformer returns becomes the result of the `queryExecute()` call -- no second pass required.
 
@@ -59,8 +59,8 @@ Three forms are accepted:
 
 One rule to remember: **when** `transformer` **is present** , `returnType` **is ignored**. The transformer always wins.
 
-The Transformer Contract {#h2-2-the-transformer-contract}
----------------------------------------------------------
+The Transformer Contract
+------------------------
 
 Every transformer receives exactly two arguments:
 
@@ -87,10 +87,10 @@ metadata.columnMetadata    // JDBC column descriptors
 
 Both arguments arrive after the result set has been closed, so you have access to every property without worrying about cursor state.
 
-Live Examples: Inline Closures {#h2-3-live-examples-inline-closures}
---------------------------------------------------------------------
+Live Examples: Inline Closures
+------------------------------
 
-### 1. Envelope with Metadata {#h3-4-1-envelope-with-metadata}
+### 1. Envelope with Metadata
 
 The most common pattern in REST APIs -- wrap the rows in a response envelope that includes pagination info and the originating SQL for debugging.
 
@@ -115,7 +115,7 @@ var result = queryExecute( "SELECT * FROM users WHERE active = 1", [], {
 
 No second pass. No separate wrapper function. The envelope is the result.
 
-### 2. Domain Object Hydration {#h3-5-2-domain-object-hydration}
+### 2. Domain Object Hydration
 
 Map each row directly into a domain object in a single expression. This pairs cleanly with the new class-reference-as-constructor feature also introduced in 1.14.0.
 
@@ -136,7 +136,7 @@ transformer: ( query, meta ) => query.toArrayOfStructs().map( User )
 ```
 
 
-### 3. Tabular Format (Near Zero-Copy) {#h3-6-3-tabular-format-near-zero-copy}
+### 3. Tabular Format (Near Zero-Copy)
 
 Some consumers -- charting libraries, data grids, analytics pipelines -- prefer a columnar representation: a list of column names and a 2D array of row values. This avoids allocating a struct per row.
 
@@ -163,7 +163,7 @@ data    : query.getData().map( ::arrayNew )
 ```
 
 
-### 4. Rich Column Descriptors {#h3-7-4-rich-column-descriptors}
+### 4. Rich Column Descriptors
 
 The new `getColumnMeta()` method (a prerequisite enhancement shipped alongside transformers) captures JDBC `ResultSetMetaData` that was previously discarded after the cursor closed. Use it to produce schema-aware result sets.
 
@@ -202,8 +202,8 @@ var rich = queryExecute( "SELECT id, name, price, status FROM products", [], {
 
 This format is ideal for dynamic data grids, code generators, and API documentation tools that need to understand the shape of data, not just its values.
 
-Reusable Class Transformers {#h2-8-reusable-class-transformers}
----------------------------------------------------------------
+Reusable Class Transformers
+---------------------------
 
 When the same transformation logic needs to be shared across multiple queries -- or when you want to unit test the transformation independently -- reach for a class transformer.
 
@@ -248,8 +248,8 @@ var orders   = queryExecute( orderSql, orderParams, { transformer: transformer }
 
 The same transformer instance can be reused across any number of queries with no side effects -- the `query` and `metadata` arguments are always fresh per execution.
 
-Registered App-Level Transformers {#h2-9-registered-app-level-transformers}
----------------------------------------------------------------------------
+Registered App-Level Transformers
+---------------------------------
 
 For application-wide reuse, register your transformers once in `Application.bx` and reference them anywhere by name.
 
@@ -295,7 +295,7 @@ var users   = queryExecute( sql, params, { transformer: "domainUsers" } )
 
 The `"domainUsers"` entry is a dotted class path string -- BoxLang resolves it lazily on first use, so you can register class paths for transformers that may not always be loaded.
 
-### Transformer Resolution Order {#h3-10-transformer-resolution-order}
+### Transformer Resolution Order
 
 ```html
 transformer option:
@@ -310,8 +310,8 @@ transformer option:
               └── Class path str  => instantiate, then transform( query, metadata )
 ```
 
-bx:query Component Support {#h2-11-bx-query-component-support}
---------------------------------------------------------------
+bx:query Component Support
+--------------------------
 
 Transformers are not limited to `queryExecute()`. The `bx:query` component accepts a `transformer` attribute as well.
 
@@ -336,8 +336,8 @@ Or using a registered name:
 
 The `result` variable will contain whatever your transformer returned -- in the JSON example above, a serialized JSON string.
 
-JDBC Metadata: What `getColumnMeta()` Now Captures {#h2-12-jdbc-metadata-what-getcolumnmeta-now-captures}
----------------------------------------------------------------------------------------------------------
+JDBC Metadata: What `getColumnMeta()` Now Captures
+--------------------------------------------------
 
 As part of the transformer work, BoxLang now preserves JDBC `ResultSetMetaData` that was previously discarded as soon as the cursor closed. It is available on any query via `getColumnMeta()` -- no transformer required.
 
@@ -363,12 +363,12 @@ for ( var name in q.getColumnNames() ) {
 ```
 
 
-Global Query Options {#h2-13-global-query-options}
---------------------------------------------------
+Global Query Options
+--------------------
 
 Along with transformers, 1.14.0 also ships application-level and runtime-level query defaults -- no more repeating the same options on every `queryExecute()` call.
 
-### Application.bx {#h3-14-application-bx}
+### Application.bx
 
 ```java
 this.queryOptions = {
@@ -381,7 +381,7 @@ this.queryOptions = {
 ```
 
 
-### boxlang.json {#h3-15-boxlang-json}
+### boxlang.json
 
 ```java
 "queries": {
@@ -396,8 +396,8 @@ this.queryOptions = {
 
 Priority order is: **per-query option \>** `this.queryOptions` \> `boxlang.json`. Set your application-wide defaults once and override only where needed.
 
-Upgrade Notes {#h2-16-upgrade-notes}
-------------------------------------
+Upgrade Notes
+-------------
 
 Query Transformers require no migration. Existing queries are unaffected -- the `transformer` option is purely additive. If you are on 1.13.x, update to 1.14.0 via CommandBox:
 
@@ -419,8 +419,8 @@ docker pull ortussolutions/boxlang:1.14.0
 ```
 
 
-Resources {#h2-17-resources}
-----------------------------
+Resources
+---------
 
 * [BoxLang 1.14.0 Release Notes](https://boxlang.ortusbooks.com/readme/release-history/1.14.0 "BoxLang 1.14.0 Release Notes")
 * [Queries Documentation](https://boxlang.ortusbooks.com/boxlang-language/syntax/queries "Queries Documentation")

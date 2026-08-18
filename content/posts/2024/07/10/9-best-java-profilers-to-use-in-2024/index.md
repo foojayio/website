@@ -34,8 +34,8 @@ YourKit Profiler
 
 We thought to use our [Continuous Feedback](https://digma.ai/how-it-works/ "Continuous Feedback") tool which is not a profiler in the classical sense but can assist in profiling efforts since it can analyze observability data. We thought that our Continuous Feedback tool could help us analyze the profiler results reach my conclusions faster and help me with what to look for in the profiler. So, I opened Digma along with the YourKit profiler to analyze the data of the profiler and come to conclusions.
 
-What is a Java profiler? {#h2-0-what-is-a-java-profiler}
---------------------------------------------------------
+What is a Java profiler?
+------------------------
 
 A Java profiler is a tool for gauging and examining the performance of Java applications. It collects data on program execution, including the time taken by each function, memory usage, and frequency of function calls.
 
@@ -43,14 +43,14 @@ Java Profiling is beneficial for pinpointing performance bottlenecks in software
 
 Hence, a Java profiler is a tool that checks the Java bytecode constructs and operations at the JVM level. These programming structures and actions consist of creating objects, repeating processes (including calling functions recursively), executing methods, running threads, and performing garbage collections.
 
-Types of Java Profilers {#h2-1-types-of-java-profilers}
--------------------------------------------------------
+Types of Java Profilers
+-----------------------
 
 * Sampling profilers: These profilers periodically take snapshots of the running program and analyze the call stack to identify hotspots.
 * Instrumentation profilers: These profilers modify the program's code to gather more detailed performance data.
 
-Usecase for Java Profilers {#h2-2-usecase-for-java-profilers}
--------------------------------------------------------------
+Usecase for Java Profilers
+--------------------------
 
 Java Profiling tools can be used in three ways basically:
 
@@ -60,8 +60,8 @@ Memory management: Java profilers can assist in detecting memory leaks, where a 
 
 Testing: Java profilers can evaluate program performance across various scenarios, like varying input sizes or user counts. This can help recognize possible performance problems before the program is launched.
 
-How Do Java Profilers Work? {#h2-3-how-do-java-profilers-work}
---------------------------------------------------------------
+How Do Java Profilers Work?
+---------------------------
 
 The JVM allows Java developers to attach an agent to a running JVM (Java Virtual Machine). When a developer attaches an agent to a JVM, the JVM will provide a class to the agent before loading it. The agent then transforms the class. The agent can make changes to the code of any class.
 
@@ -83,12 +83,12 @@ Some tools that are well-liked include:
 
 OpenTelemetry and Java Flight Recorder (JFR) cover most bases. Use the OpenTelemetry Java agent if you want auto-instrumentation or just the APIs if you want to do your instrumentation.
 
-1. JVM Tools {#h2-4-1-jvm-tools}
---------------------------------
+1. JVM Tools
+------------
 
 These Java profiling tools come bundled with the standard JDK and do not need separate installation or setup. There are about five: jstat, jmap, jcmp, jhat, and hprof.
 
-### a. jstat {#h3-5-a-jstat}
+### a. jstat
 
 This built-in command line tool comes with the standard JDK and does not need installation or setup. Monitoring JVM memory, heap sizing, and garbage collection activity through the command line is highly beneficial.
 
@@ -119,7 +119,7 @@ jstat -gc 98132 17527
 
 ![](https://digma.ai/wp-content/uploads/2024/03/image-11-768x121.png)
 
-### b. jmap {#h3-6-b-jmap}
+### b. jmap
 
 This command-line tool is also included in the standard JDK. It displays memory-related data (heap summary, java object heap histogram, class loader stats, finalization queue info, dump of Java heap in hprof binary format) for a live VM or core file.
 
@@ -139,7 +139,7 @@ You can also create a heap dump using this command
 jcmd <JAVA_PID> GC.heap_dump filename=<FILE>
 ```
 
-### c. jhat {#h3-7-c-jhat}
+### c. jhat
 
 This Command line tool comes pre-installed with the standard JDK (no need for installation/setup). It is employed to explore the structure of objects in a heap snapshot (also known as heap dump).
 
@@ -147,7 +147,7 @@ This tool is a substitute for the Heap Analysis Tool (HAT). It processes a binar
 
 This tool can also assist in identifying unintended object connections (similar to a memory leak in Java -- an object that is still in use because it is referenced from the rootset)
 
-### d. hprof {#h3-8-d-hprof}
+### d. hprof
 
 This built-in command-line tool comes with the standard JDK. It examines performance by analyzing heap and CPU profiling, lock contention, memory leaks, and other problems. It is a dynamic-link library (DLL) communicating with the JVM through the Java Virtual Machine Tool Interface (JVMTI).It records profiling data in ASCII or binary form for a file or socket. It can provide information on heap allocation statistics, heap dumps, CPU usage, the states of all monitors and threads in the JVM, and contention profiles.
 
@@ -164,8 +164,8 @@ javac --J-agentlib:hprof=heap=dump HelloWorld.java
 
 ```
 
-2. Digma Continuous Feedback {#h2-9-2-digma-continuous-feedback}
-----------------------------------------------------------------
+2. Digma Continuous Feedback
+----------------------------
 
 Digma relies on observability data that it collects automatically using OTEL. Like other profiling tools, the purpose is to analyze how the code works in runtime and find issues; the only difference is that Digma finds them on its own, continuously.
 
@@ -217,8 +217,8 @@ For example, with Scaling issue insight, developers can quickly spot performance
 
 By synthesizing this information, the developer is guided toward the aspects of the application that need attention and can start forming hypotheses about what could be causing the issue, such as inefficient code, database bottlenecks, inadequate hardware resources, or suboptimal architecture decisions. The goal is to investigate and address these areas to improve the application's scalability.
 
-3. VisualVM {#h2-10-3-visualvm}
--------------------------------
+3. VisualVM
+-----------
 
 This tool was part of the Java Development Kit (JDK) until JDK 8, but it was removed in JDK 9 and is currently available as a separate tool.
 
@@ -248,8 +248,8 @@ jvisualvm
 
 Next, the Java VisualVM program will launch. Navigate to Tools \> Plugins and download Visual GC plugin (A selection of other plugins will also be displayed. You can use them as needed.
 
-4. YourKit {#h2-11-4-yourkit}
------------------------------
+4. YourKit
+----------
 
 YourKit Java Profiler is compatible with various platforms and offers distinct installations for each supported operating system, such as Windows, MacOS, Linux, Solaris, and FreeBSD.
 
@@ -265,8 +265,8 @@ YourKit provides a distinctive CPU profiling feature that focuses on particular 
 
 YourKit allows for the profiling of SQL and NoSQL database calls as well.
 
-5. JProfiler {#h2-12-5-jprofiler}
----------------------------------
+5. JProfiler
+------------
 
 JProfiler is a profiling tool for Java applications created by ej-technologies. JProfiler provides interfaces for monitoring memory usage, system performance, potential memory leaks, and thread profiling with a friendly user interface.
 
@@ -289,8 +289,8 @@ Advanced subsystems: Numerous performance issues arise at an elevated semantic l
 
 JProfiler can be integrated with well-known IDEs like IntelliJ IDEA, Eclipse, and NetBeans. One can even go from a snapshot to the actual source code.
 
-6. NetBeans Profiler {#h2-13-6-netbeans-profiler}
--------------------------------------------------
+6. NetBeans Profiler
+--------------------
 
 Although NetBeans is primarily recognized for its exceptional debugging capabilities, it also surprisingly stands out as one of the top Java profilers. Apache NetBeans IDE includes the NetBeans Profiler as part of its bundle. It is also an excellent option for easy development and profiling.  
 ![](https://digma.ai/wp-content/uploads/2024/03/image-20.png)
@@ -299,8 +299,8 @@ Combining the features of a profiler and a debugger allows for monitoring code e
 
 Although Java VisualVM and Netbeans Profiler are similar in features and both are free, Netbeans stands out by offering all features in one bundled program with an IDE.
 
-7. IntelliJ Profiler {#h2-14-7-intellij-profiler}
--------------------------------------------------
+7. IntelliJ Profiler
+--------------------
 
 The IntelliJ Profiler is an uncomplicated yet robust tool for profiling CPU and memory allocations. It merges the capabilities of two well-known Java profilers: JFR and Async profiler.
 
@@ -310,8 +310,8 @@ Although a few advanced functions are available, the primary emphasis is on simp
 
 Within IntelliJ IDEA Ultimate, IntelliJ Profiler can be easily connected to a Java process, allowing seamless navigation between a snapshot and the source code. Other aspects, such as distinct flame graphs, enable us to evaluate the effectiveness of various methods visually and understand the runtime processes promptly and effectively.
 
-8. Async Profiler {#h2-15-8-async-profiler}
--------------------------------------------
+8. Async Profiler
+-----------------
 
 This Java profiling tool has minimal overhead and avoids the Safepoint bias issue. It includes APIs specific to HotSpot for gathering stack traces and monitoring memory allocations. The profiler is compatible with OpenJDK and other Java runtimes that utilize the HotSpot JVM.
 
@@ -332,8 +332,8 @@ At the time of writing, Async Profiler only supports Linux and Mac operating sys
 * Connecting to a process that is already in progress
 * Examining the profile assessment.![](https://digma.ai/wp-content/uploads/2024/03/image-23.png)
 
-9. Arthas {#h2-16-9-arthas}
----------------------------
+9. Arthas
+---------
 
 Alibaba Arthas is a tool for diagnosing Java applications, providing the ability to track, analyze, and resolve issues. A major advantage of utilizing Arthas is that there is no need to modify your code or reboot the Java services being monitored.
 
@@ -353,8 +353,8 @@ Other Solid Java Profilers
 
 Some notable mentions are Java Mission Control, New Relic, Glowroot, JMH, Arthas, XRebel/JRebel, JProbe, Pinpoint, and Stackify Prefix. While they hold a smaller portion of the market, they certainly merit recognition.
 
-Conclusion - 9 Best Java Profilers to Use in 2024 {#h2-17-conclusion-9-best-java-profilers-to-use-in-2024}
-----------------------------------------------------------------------------------------------------------
+Conclusion - 9 Best Java Profilers to Use in 2024
+-------------------------------------------------
 
 So, we found that combining YourKit, and Digma is best for the best optimization outcome: Grafana for visualizations of application logs, YourKit to profile applications for potential bottlenecks, and Digma to give seamless insights into potential problematic pieces of code.
 

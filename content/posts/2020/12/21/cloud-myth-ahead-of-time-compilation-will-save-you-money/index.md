@@ -25,7 +25,7 @@ While these frameworks are technically interesting, the claim is if you spend ti
 
 First, by enabling the adoption of a serverless deployment model and second by reducing your containers' memory usage.
 
-### Cold Starts Mean You Need AOT to do Serverless {#h3-0-cold-starts-mean-you-need-aot-to-do-serverless}
+### Cold Starts Mean You Need AOT to do Serverless
 
 **Some History**   
 
@@ -60,7 +60,7 @@ Now that we have established that cold starts are bad and to be avoided in serve
 
 Then, there is a negative consequence of using AOT native compilation and that is the loss of the JIT compiler optimisations provided by the JVM. When your application instance is reused for subsequent requests then the JVM JIT will optimise your code making it run faster in subsequent requests. With AOT Native instances then this optimisation [does not occur](https://medium.com/graalvm/improving-performance-of-graalvm-native-images-with-profile-guided-optimizations-9c431a834edb "does not occur"). So ultimately a long running service on the JVM using the JIT compiler will execute faster. Now in reality if your services make network calls to other services, then this performance decrease will likely be negligible compared with the network call overheads.
 
-### AOT Frameworks Use Less Memory And Cost Less {#h3-1-aot-frameworks-use-less-memory-and-cost-less}
+### AOT Frameworks Use Less Memory And Cost Less
 
 For AOT native images the memory usage of the JVM is reduced down to 10s of MB in size compared to base JVM memory sizes which are typically in the [200 -300 MB range](https://billykorando.com/category/openj9/ "200 -300 MB range"). Given that memory is a billing scale factor in cloud then AOT native images logically have a clear cost advantage? In practice the memory usage of a real world microservice is often more dependent on the live data set of the application which can often dwarf the Java runtime memory requirement. AOT native does not make your live object set smaller it only reduces the memory usage of the underlying Java runtime.
 
@@ -96,13 +96,13 @@ The table below shows the typical annual cost (£) of running a container instan
 
 From this, you can see that the cost is more sensitive to the number of CPUs allocated than the memory allocated to the container. For example the difference between an instance with 2 CPU and 1GB of memory and an instance with 2 CPU and 4 GB of memory is only £116 over the year.
 
-### Cloud Resource Savings Dwarfed by Engineering Costs {#h3-2-cloud-resource-savings-dwarfed-by-engineering-costs}
+### Cloud Resource Savings Dwarfed by Engineering Costs
 
 As advocated by Java microservice frameworks that support AOT compilation, it may seem obvious that if you reduce the Java runtime memory footprint and reduce cold start times then there are significant cost savings and advantages for running on public cloud. Many cost savings are marginal and in practice absolute savings are trivial for lightly used serverless functions and not significant for container instances unless you are at hyper scale with 1000s of containers running 24/7.
 
 Rewriting applications to use a non-Jakarta EE framework, supporting AOT native image creation, to achieve cloud cost reductions is a myth. In practice the cost of Java Developer [salaries](https://www.payscale.com/research/US/Job=Java_Developer/Salary "salaries") to rewrite applications from widely known standards like Jakarta EE to new frameworks focussed on AOT will significantly outweigh cloud infrastructure costs by a long way. Developer time cost and vendor lock-in outweighs any potential cloud infrastructure savings.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 The two main advantages of Java AOT natively compiled microservice frameworks are rapid boot times and reduced JVM memory usage. While technically impressive, the reality is that neither of these advantages delivers a significant economic or technical advantage when deploying to public clouds.
 

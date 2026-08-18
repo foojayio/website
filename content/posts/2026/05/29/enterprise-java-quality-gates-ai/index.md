@@ -30,8 +30,8 @@ People and AI can write code together, but enterprise repositories still need de
 
 <br />
 
-Enterprise quality is a scaling problem {#h2-0-enterprise-quality-is-a-scaling-problem}
----------------------------------------------------------------------------------------
+Enterprise quality is a scaling problem
+---------------------------------------
 
 Enterprise Java development is not only about writing correct code. It is about keeping a large, long-lived codebase understandable, reviewable and safe to change while many people and many tools touch it over time.
 
@@ -41,8 +41,8 @@ That model breaks down in larger organizations. Teams change, ownership moves, m
 
 This is where quality gates become important. They are not bureaucracy around the build. They are executable engineering agreements. If a rule matters for long-term maintainability, it should be runnable, repeatable and enforceable from the build pipeline.
 
-Local differences become delivery problems {#h2-1-local-differences-become-delivery-problems}
----------------------------------------------------------------------------------------------
+Local differences become delivery problems
+------------------------------------------
 
 Most quality problems look small in isolation. One developer uses a different IDE profile. Another ignores a local inspection warning. Someone forgets to run tests. A dependency is updated without checking the broader impact. A generated change touches many files in a slightly different style.
 
@@ -52,8 +52,8 @@ A large team therefore needs common rules that run the same way for everyone. Fo
 
 Readable and maintainable code is a delivery concern, not an aesthetic preference. The main consumer of source code is another developer: the person reviewing it today, debugging it in six months or extending it next year.
 
-Noisy diffs hurt review quality {#h2-2-noisy-diffs-hurt-review-quality}
------------------------------------------------------------------------
+Noisy diffs hurt review quality
+-------------------------------
 
 Weak automation often shows up as noisy pull requests. A developer changes a few lines of behavior, but the diff also contains reordered methods, import cleanup, blank-line changes and unrelated formatting noise.
 
@@ -61,8 +61,8 @@ The reviewer has to dig for the real change inside layout churn. That is tiring,
 
 Good tooling separates these concerns. If a project has a canonical representation of source code, developers can bring files back to that representation before review. The diff becomes smaller, and the reviewer focuses on behavior instead of formatting archaeology.
 
-IDE-based quality control is not enough {#h2-3-ide-based-quality-control-is-not-enough}
----------------------------------------------------------------------------------------
+IDE-based quality control is not enough
+---------------------------------------
 
 The natural answer is: let the IDE handle it. Modern IDEs are powerful productivity tools. IntelliJ IDEA, Eclipse and other environments can format Java code, optimize imports, rearrange class members, run inspections, show test coverage and integrate static-analysis plugins. For local work, that feedback is valuable. It helps developers produce cleaner code before they even run the build.
 
@@ -74,8 +74,8 @@ IDE support remains useful, but repository protection must live somewhere indepe
 
 AI agents make this even more obvious. They do not reliably use your IDE, inspection profile, formatter settings, rearrangement rules or local quality plugins. Depending on IDE-based quality control becomes even weaker when not all code is produced through an IDE.
 
-AI needs deterministic boundaries {#h2-4-ai-needs-deterministic-boundaries}
----------------------------------------------------------------------------
+AI needs deterministic boundaries
+---------------------------------
 
 AI does not remove the need for quality gates. It increases it.
 
@@ -89,8 +89,8 @@ If a quality rule can be expressed as a deterministic algorithm, it should be en
 
 AI can still be useful around this process. It can suggest fixes, explain a failed check, generate tests, or help a developer understand a static-analysis warning. But the final repository boundary should not depend on a model interpreting a prompt. It should depend on executable rules.
 
-What enterprise quality gates should check {#h2-5-what-enterprise-quality-gates-should-check}
----------------------------------------------------------------------------------------------
+What enterprise quality gates should check
+------------------------------------------
 
 A quality gate is not one vague checkbox called "quality". In a serious Java project, it is a set of concrete checks that protect different parts of the delivery process.
 
@@ -114,8 +114,8 @@ In CI, the same project should have check-only execution. The pipeline should no
 
 This is how a written convention becomes an executable rule. Instead of repeating the same review comments again and again, such as "run the formatter", "fix imports", "update tests", "do not use this dependency", or "this class structure is inconsistent", the team moves these checks into the build pipeline. Reviewers can then focus on design, behavior, risk and business logic instead of acting as manual linters.
 
-Formatting is only one source-code gate {#h2-6-formatting-is-only-one-source-code-gate}
----------------------------------------------------------------------------------------
+Formatting is only one source-code gate
+---------------------------------------
 
 Many quality gates are already common in mature Java projects. Build checks, tests, coverage thresholds, static analysis and dependency rules are familiar parts of CI pipelines.
 
@@ -127,8 +127,8 @@ But source-code policy does not end at formatting. It does not decide where cons
 
 A file can be perfectly formatted and still be hard to scan because every class follows a different internal order. This is the gap between formatting and source restructuring.
 
-Java member ordering is harder than it looks {#h2-7-java-member-ordering-is-harder-than-it-looks}
--------------------------------------------------------------------------------------------------
+Java member ordering is harder than it looks
+--------------------------------------------
 
 Java declarations are not always independent. One constant may depend on another constant. A field initializer may depend on a field declared above it. Static or instance initialization blocks may rely on members that already exist earlier in the class.
 
@@ -152,8 +152,8 @@ Now the change is not only cosmetic. `API_REQUEST_TIMEOUT_SECONDS` depends on `D
 
 A source restructuring tool therefore has to respect declaration-order dependencies. Similar issues can appear around field initializers, static initializers, instance initializers, enum constants, annotation values and other class-level declarations where order may matter.
 
-The missing layer: JHarmonizer {#h2-8-the-missing-layer-jharmonizer}
---------------------------------------------------------------------
+The missing layer: JHarmonizer
+------------------------------
 
 This was the missing layer I could not find in the Java tooling ecosystem: a way to make Java class structure reproducible outside the IDE, enforceable from the build, and safe enough to respect declaration-order dependencies.
 
@@ -181,8 +181,8 @@ It can:
 * run from Maven or the command line in auto-fix mode;
 * run in check mode as a CI quality gate.
 
-Where it fits in the Java quality stack {#h2-9-where-it-fits-in-the-java-quality-stack}
----------------------------------------------------------------------------------------
+Where it fits in the Java quality stack
+---------------------------------------
 
 JHarmonizer is not meant to replace the Java quality ecosystem. Static analyzers, bug detectors, coverage tools, architectural tests and code review all solve different problems.
 
@@ -190,8 +190,8 @@ A typical Java quality setup may include Maven Enforcer, PMD, CPD, SpotBugs, JaC
 
 There is no single magic tool. Enterprise quality comes from boring, deterministic checks that protect different parts of the codebase.
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 AI will continue to change how code is produced. That is not a reason to weaken engineering discipline. It is a reason to automate more of it.
 

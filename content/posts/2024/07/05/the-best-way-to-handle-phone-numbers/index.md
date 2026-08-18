@@ -21,8 +21,8 @@ frozen: false
 
 Processing phone numbers seems complicated at first glance because of the many different formats. In this post, I'll show you that with libphonenumber, it becomes child's play. I'll also recommend how to store the phone number in the database.
 
-Introduction Google's libphonenumber {#h2-0-introduction-google-s-libphonenumber}
----------------------------------------------------------------------------------
+Introduction Google's libphonenumber
+------------------------------------
 
 According to the GitHub repository <https://github.com/google/libphonenumber/> libphone number is:
 > <br />
@@ -31,8 +31,8 @@ According to the GitHub repository <https://github.com/google/libphonenumber/> l
 
 Let's see the library in action. The source code is available here: <https://github.com/simasch/libphonenumber-demo>
 
-Creating and Formatting Phone Numbers {#h2-1-creating-and-formatting-phone-numbers}
------------------------------------------------------------------------------------
+Creating and Formatting Phone Numbers
+-------------------------------------
 
 The main class of libphonenumber is, no surprise, the class `Phonenumber`. You'll want to use a phone number in two ways to create a phone number.
 
@@ -53,8 +53,8 @@ This will print:
 ```
 
 
-Parsing Phone Numbers {#h2-2-parsing-phone-numbers}
----------------------------------------------------
+Parsing Phone Numbers
+---------------------
 
 But what if we get the phone number as a string? No worries, the `PhoneNumberUtil` cannot only format but also parse phone numbers:
 
@@ -66,8 +66,8 @@ Phonenumber.PhoneNumber parsedSwissPhoneNumber =
 
 The first argument is the phone number as a string, and the second parameter is the region we expect the number to be from; this is only used if the number string is not an international number.
 
-Validating Phone Numbers {#h2-3-validating-phone-numbers}
----------------------------------------------------------
+Validating Phone Numbers
+------------------------
 
 Now that we can parse strings to phone numbers, how can we check if the phone number is valid?  
 
@@ -83,8 +83,8 @@ System.out.println(phoneNumberUtil.isValidNumber(invalidSwissPhoneNumber));
 
 The code above will print false as the phone number is too short.
 
-Conclusion and Recommendation {#h2-4-conclusion-and-recommendation}
--------------------------------------------------------------------
+Conclusion and Recommendation
+-----------------------------
 
 Google's libphonnumber is very powerful and has even more features, like finding phone numbers in text, getting the number's type, and so on. In my opinion, it's the go-to library for processing phone numbers.
 

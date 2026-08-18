@@ -25,8 +25,8 @@ frozen: false
 
 **Please help me to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS).**
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 FEPCOS-J [\[1\]](#references) is a Java development tool that prototypes a Java language extension for declarative programming of networked systems. See my previous posts for details [\[2, 3, 4\]](#references).
 
@@ -34,8 +34,8 @@ Firstly, this post briefly defines [the term "multithreaded TCP/IP server"](#wha
 
 I would also like to ask you to [help me make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS)](#help).
 
-What is a multithreaded TCP/IP server? {#what}
-----------------------------------------------
+What is a multithreaded TCP/IP server?
+--------------------------------------
 
 The following section defines the term "**multithreaded TCP/IP server**" bottom up:
 
@@ -63,8 +63,8 @@ Using application-specific requests and responses, multithreaded TCP/IP servers 
  </figcaption>
 </figure>
 
-How does FEPCOS-J support developers programming a multithreaded TCP/IP server in Java? {#how}
-----------------------------------------------------------------------------------------------
+How does FEPCOS-J support developers programming a multithreaded TCP/IP server in Java?
+---------------------------------------------------------------------------------------
 
 If you enter "*multi-threaded TCP/IP server in Java*" into a search engine, you will get several results. Many of them explain manual Java programming and provide a lot of source code.
 
@@ -90,8 +90,8 @@ For that reason, FEPCOS-J provides the generic part with a modular Jar file and 
 
 So, a developer who uses FEPCOS-J to implement a multithreaded TCP/IP server in Java only has to program the server's application logic. FEPCOS-J handles the rest.
 
-What is the implementation of a multithreaded server in Java using FEPCOS-J? {#look}
-------------------------------------------------------------------------------------
+What is the implementation of a multithreaded server in Java using FEPCOS-J?
+----------------------------------------------------------------------------
 
 To implement multithreaded servers in Java, FEPCOS-J provides the ***fepcos.j.annotation*** module, the FEPCOS-J Processor ***fjp*** , and the FEPCOS-J Exporter ***fjx***.
 
@@ -112,7 +112,7 @@ In its current state, FEPCOS-J uses Virtual Threads [\[12, 13\]](#references) an
  </figcaption>
 </figure>
 
-### Programming the system declaration of a multithreaded server {#h3-4-programming-the-system-declaration-of-a-multithreaded-server}
+### Programming the system declaration of a multithreaded server
 
 | Annotation |                                                                                                                                                      Description                                                                                                                                                       |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -124,7 +124,7 @@ In its current state, FEPCOS-J uses Virtual Threads [\[12, 13\]](#references) an
 
 **Tab. 1) **The *fepcos.j.annotation* module contains these Java annotations**. Developers can use them to implement the system declaration of a multithreaded server.** Using *@SYDec* and *@Cap* is required. In contrast, the use of *@Part,* *@Start* , and *@Stop* is optional.
 
-### Programming activity specifications of services that a multithreaded server provides {#h3-5-programming-activity-specifications-of-services-that-a-multithreaded-server-provides}
+### Programming activity specifications of services that a multithreaded server provides
 
 | Annotation |                                                                                                                                                                              Description                                                                                                                                                                               |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -135,8 +135,8 @@ In its current state, FEPCOS-J uses Virtual Threads [\[12, 13\]](#references) an
 
 **Tab. 2) The *fepcos.j.annotation* module contains these Java annotations. Developers can use them to implement an activity specification for a service that the multithreaded server provides.** Using *@AYSpec* and *@Behavior* is required. In contrast, the use of *@In* and *@Out* is optional.
 
-Exemplary implementation of a multithreaded server in Java using FEPCOS-J {#example}
-------------------------------------------------------------------------------------
+Exemplary implementation of a multithreaded server in Java using FEPCOS-J
+-------------------------------------------------------------------------
 
 This section describes how to use FEPCOS-J to implement the following simple example: A server called `idServer`
 
@@ -145,7 +145,7 @@ This section describes how to use FEPCOS-J to implement the following simple exa
 * accepts an initial ID as a command-line parameter.
 * returns the next ID when shut down.
 
-### Programming {#h3-7-programming}
+### Programming
 
 The developer programs *idServer's* system specification within the *idServer* directory.
 
@@ -250,7 +250,7 @@ The class imports ***fepcos.j.annotation.\**** . In particular, this package con
 
 sets the `id` output parameter and increments `srv.counter`.
 
-### Processing, and executing {#h3-8-processing-and-executing}
+### Processing, and executing
 
 In order to process the source code, the developer runs ***fjp*** in the project directory (**Fig. 3**).
 
@@ -274,7 +274,7 @@ To explain:
  </figcaption>
 </figure>
 
-### Requesting the service by a Client {#h3-9-requesting-the-service-by-a-client}
+### Requesting the service by a Client
 
 The ***fjp*** -generated system import module *idServer.imp.jar* enables a client to request the service from the server.
 
@@ -323,8 +323,8 @@ public class App {
 ```
 
 
-Conclusion {#conclusion}
-------------------------
+Conclusion
+----------
 
 Firstly, this post introduced the term "multithreaded TCP/IP server". It then described how FEPCOS-J supports programming a multithreaded TCP/IP server in Java. Further, the post explained what implementing the server with FEPCOS-J looks like.
 
@@ -336,8 +336,8 @@ In other words, the prototype Java development tool FEPCOS-J allows the realizat
 
 To sum up, programming a multithreaded TCP/IP server in Java is easy with FEPCOS-J.
 
-I need your help to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS) {#help}
----------------------------------------------------------------------------------------
+I need your help to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS)
+-------------------------------------------------------------------------------
 
 Have you thought about how FEPCOS-J can support your work?
 
@@ -349,8 +349,8 @@ Please let me know what you think about it and provide me with any feedback. Det
 
 Thanks for reading!
 
-References {#references}
-------------------------
+References
+----------
 
 1. FEPCOS-Project: "*FEPCOS-J -- FEPCOS-J implements a Java language extension that enables developers to declaratively compose networked systems like building blocks* "; <http://fepcos.info/en/fepcos-j.html>.
 2. Fuchs, G.: "*FEPCOS-J (1) -- Description, Impressions of Usage, Current State* "; <https://foojay.io/today/fuchs-2023-fepcos-j-01/>.

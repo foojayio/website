@@ -22,8 +22,8 @@ related_posts:
 frozen: false
 ---
 
-Hone your software design skills by implementing popular design patterns in Java {#h2-0-hone-your-software-design-skills-by-implementing-popular-design-patterns-in-java}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Hone your software design skills by implementing popular design patterns in Java
+--------------------------------------------------------------------------------
 
 This book is for sale on [Amazon in Kindle and Paperback editions](https://www.amazon.de/dp/180461467X).
 
@@ -41,8 +41,8 @@ This book is for sale on [Amazon in Kindle and Paperback editions](https://www.a
 
 We'll start this post with the personal verdict of two avid readers of this book:
 
-Frank Delporte's Verdict {#h2-1-frank-delporte-s-verdict}
----------------------------------------------------------
+Frank Delporte's Verdict
+------------------------
 
 I've been programming since I was 10y old, but I graduated from film school as a video editor, so I never learned the "official" way to be a programmer. It was only by following courses and, most importantly, learning from colleagues that I started making "readable and maintainable" code, which is precisely the topic of this book.
 
@@ -52,8 +52,8 @@ On top of that, this book also provides a lot of extra information related to th
 
 The book's goal is to break a returning pattern many programmers go through during their careers. When you start using a programming language like Python, JavaScript, or even Java, the platform allows you to create messy code. Only when you learn and understand patterns and debugging and use a strongly typed language like Java do you start writing "real" code. When someone starts a programming career with Java and has a solid understanding of design patterns, many bad practices can be avoided.
 
-Johannes Bechberger's Verdict {#h2-2-johannes-bechberger-s-verdict}
--------------------------------------------------------------------
+Johannes Bechberger's Verdict
+-----------------------------
 
 When I first read the book's title, I thought, "another book on the good old design patterns," and wondered why I should bother reading it. But I was wrong; this book gives you far more than a short descriptive compilation of design patterns.
 
@@ -61,13 +61,13 @@ It gives you a great introduction to modern Java features and common pitfalls; t
 
 The chapters on design patterns are also significant. They give a (slightly opinionated) view of all the major design patterns, complete with small examples and examples from the JDK. These chapters feel like an encyclopedia, which I'll probably revisit occasionally whenever I need to do a more complex architecture. I had courses on design patterns in university, but I wished I had this book then to guide me through these topics.
 
-About the Author {#h2-3-about-the-author}
------------------------------------------
+About the Author
+----------------
 
 Miroslav Wengner is a Java Champion and JavaOne Rockstar with an impressive career. He contributes to OpenJDK and various open-source projects (e.g., [Robo4J](http://www.robo4j.io/)) and is an executive committee member of the [Java Community Process (JCP)](https://jcp.org/). He is a principal engineer at OpenValue and a regular conference speaker and blogger.
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 The book is divided into three parts:
 
@@ -79,7 +79,7 @@ The table of contents immediately shows how the description of each design patte
 
 There are a lot of references to the ["Gang of Four (GoF)" book](https://en.wikipedia.org/wiki/Design_Patterns). This book from 1994, with code examples in C++ and Smalltalk, describes 23 software design patterns. In his book, Miroslav extends the list to 42 practical design patterns, focusing on implementing and using them with Java code.
 
-### Part 1: Design Patterns and Java Platform Functionalities {#h3-5-part-1-design-patterns-and-java-platform-functionalities}
+### Part 1: Design Patterns and Java Platform Functionalities
 
 This part covers the purpose of software design patterns and outlines the fundamental ideas of the APIE and SOLID design principles, with a thorough introduction to the Java platform.
 
@@ -95,7 +95,7 @@ As a Java developer, getting re-introduced to the platform may be strange. Still
 
 Furthermore, this chapter briefly reviews the new Java features introduced from Java 11 up to Java 17, which you might have missed: Sealed classes, Pattern Matching, and more.
 
-### Part 2: Implementing Standard Design Patterns Using Java Programming {#h3-6-part-2-implementing-standard-design-patterns-using-java-programming}
+### Part 2: Implementing Standard Design Patterns Using Java Programming
 
 This central part of the book groups the design patterns into three categories: creational, behavioral, and structural.
 
@@ -113,7 +113,7 @@ Twelve structural design patterns focus on maintainable and flexible source code
 
 Fourteen patterns are described in this chapter! They provide transparent communication between objects, resulting in efficient memory allocations. These include the caching, command, iterator, observer, and template patterns.
 
-### Part 3: Other Essential Patterns and Anti-Patterns {#h3-7-part-3-other-essential-patterns-and-anti-patterns}
+### Part 3: Other Essential Patterns and Anti-Patterns
 
 #### Chapter 6: Concurrency Design Patterns
 
@@ -127,8 +127,8 @@ The previous chapters described the "green paths" and how to improve your code. 
 
 The unwanted autoboxing anti-pattern is one I need to remember when reviewing some of my old but still-used code...
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 We're impressed with the knowledge Miroslav exposes in his book.
 
@@ -140,7 +140,7 @@ But personally, it was also a confirmation. You grow as a developer in your care
 
 Some of these principles became a daily habit as we wanted to become better coders, and we started implementing them without even knowing of their existence, as they made my code better to maintain.
 
-### The Bad {#h3-9-the-bad}
+### The Bad
 
 Only a few minor notes here...
 
@@ -148,7 +148,7 @@ Only a few minor notes here...
 * Screenshots of the JDK Mission Control (JMC) profiler are used in the book to visualize the effect of, for instance, multiple threads or the autoboxing anti-pattern. But there is no explanation of the tool given.
 * The principles and code examples are not intended for beginner developers. The whole book requires substantial knowledge of Java upfront.
 
-### The Good {#h3-10-the-good}
+### The Good
 
 * The last "bad" point also makes the first "good" point. The principles and patterns explained in the book will uplift your knowledge and bring your code quality to the next level, without explaining too much you already know.
 * When you buy the paper version of the book, you can get a DRM-free PDF via an easy web form with a fast response.

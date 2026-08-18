@@ -33,7 +33,7 @@ At steady state, the cache holds both **clean pages** (byte-for-byte identical t
 
 The core loop looks deceptively simple:{#533a}
 
-### **Scan → Score → Hazard Check → Write (if dirty) → Evict → Adjust Metrics** {#6f38}
+### **Scan → Score → Hazard Check → Write (if dirty) → Evict → Adjust Metrics**
 
 But each stage involves subtle synchronization:{#2494}
 

@@ -26,8 +26,8 @@ What if we took a different approach? What if we made **requirements** the sourc
 
 After years of building business applications, I began developing a methodology that combines ideas from the [Rational Unified Process](https://en.wikipedia.org/wiki/Rational_unified_process) (RUP) with modern AI tooling: The [AI Unified Process](https://aiup.dev). The results are remarkable: better business alignment, maintainable code, and complete traceability from business needs to implementation.
 
-The Problem with Code-Centric Development {#h2-0-the-problem-with-code-centric-development}
--------------------------------------------------------------------------------------------
+The Problem with Code-Centric Development
+-----------------------------------------
 
 Traditional development follows this pattern:
 
@@ -40,12 +40,12 @@ The problem? Code becomes the source of truth. Requirements documents get outdat
 
 AI coding tools make this worse by generating code faster. We're accelerating toward the same maintenance problems we've always had.
 
-Requirements as the Single Source of Truth {#h2-1-requirements-as-the-single-source-of-truth}
----------------------------------------------------------------------------------------------
+Requirements as the Single Source of Truth
+------------------------------------------
 
 My approach flips this around. Requirements stay at the center, and everything else gets generated from them:
 
-### The Complete Workflow {#h3-2-the-complete-workflow}
+### The Complete Workflow
 
 1. **Business Requirements Catalog** (manual, with business stakeholders)
 2. **Business Use Case Diagrams** (AI-generated, then reviewed with business stakeholders)
@@ -56,7 +56,7 @@ My approach flips this around. Requirements stay at the center, and everything e
 
 The key: **Every step gets reviewed and revised by the business team.** They validate not just the business artifacts, but also the entity models and system use cases. This catches domain modeling errors before they become expensive code problems.
 
-### Everything is Code, Everything is Versioned {#h3-3-everything-is-code-everything-is-versioned}
+### Everything is Code, Everything is Versioned
 
 All specifications are written in Markdown and stored in Git alongside the application code. Use case diagrams are generated as PlantUML source code. This gives us:
 
@@ -65,7 +65,7 @@ All specifications are written in Markdown and stored in Git alongside the appli
 * **Version control**: Branch specifications alongside code
 * **Collaborative editing**: Business stakeholders can request specific changes
 
-### AI as the Consistency Engine {#h3-4-ai-as-the-consistency-engine}
+### AI as the Consistency Engine
 
 When requirements change, AI tools like Claude Code update all downstream artifacts automatically:
 
@@ -77,8 +77,8 @@ When requirements change, AI tools like Claude Code update all downstream artifa
 
 No manual synchronization. No outdated documentation. No guessing what the system should do.
 
-The Structure: Independent Epics {#h2-5-the-structure-independent-epics}
-------------------------------------------------------------------------
+The Structure: Independent Epics
+--------------------------------
 
 Business applications are complex, but that doesn't mean they have to be complicated. I organize everything into independent epics:
 
@@ -88,8 +88,8 @@ Business applications are complex, but that doesn't mean they have to be complic
 
 No cross-epic dependencies. Each epic is a bounded context that can be developed, tested, and deployed independently. This simplifies both the AI generation process and the overall system architecture.
 
-A Real Example: System Use Case Specification {#h2-6-a-real-example-system-use-case-specification}
---------------------------------------------------------------------------------------------------
+A Real Example: System Use Case Specification
+---------------------------------------------
 
 Here's how a system use case looks in practice:
 
@@ -120,8 +120,8 @@ Here's how a system use case looks in practice:
 
 This level of detail gives AI tools everything they need to generate correct, complete implementations. Business stakeholders can understand the main flow, while developers get precise technical requirements.
 
-The Results {#h2-7-the-results}
--------------------------------
+The Results
+-----------
 
 This approach has transformed how I build business applications:
 
@@ -135,8 +135,8 @@ This approach has transformed how I build business applications:
 
 **Quality Assurance**: Generated code includes comprehensive tests based on the use case specifications.
 
-Why This Works for Business Applications {#h2-8-why-this-works-for-business-applications}
------------------------------------------------------------------------------------------
+Why This Works for Business Applications
+----------------------------------------
 
 Business applications have predictable technical patterns but more or less complex domain logic. Frameworks like Vaadin, Spring Boot, and jOOQ provide stable foundations (see [the Simon Martinelli Stack](https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-stack-java-development/)). The real complexity lies in understanding and modeling the business domain correctly.
 
@@ -145,8 +145,8 @@ This methodology plays to both strengths:
 * Human expertise handles business domain complexity
 * AI handles consistent technical implementation
 
-Getting Started {#h2-9-getting-started}
----------------------------------------
+Getting Started
+---------------
 
 If you want to try this approach:
 
@@ -156,8 +156,8 @@ If you want to try this approach:
 4. **Use AI as your consistency engine**: Let tools like Claude Code handle generation and updates.
 5. **Keep epics independent**: Avoid cross-dependencies to simplify both development and AI generation.
 
-The Future of Business Application Development {#h2-10-the-future-of-business-application-development}
-------------------------------------------------------------------------------------------------------
+The Future of Business Application Development
+----------------------------------------------
 
 We're at an inflection point. AI can generate high-quality code, but only if we give it high-quality specifications. The organizations that invest in better requirements processes will build better software faster.
 

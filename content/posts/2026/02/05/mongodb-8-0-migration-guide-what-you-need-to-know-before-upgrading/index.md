@@ -22,8 +22,8 @@ frozen: false
 
 Have you ever wondered why updates and upgrades are so essential for any system? Well, it's no secret: They ensure that systems remain relevant and efficient. With MongoDB, it's no different. Whenever we think about updating, we seek efficiency, security, performance, and other benefits that come with updated systems. However, every update introduces changes that need to be carefully managed. In this article, we will cover some of the new features of MongoDB version 8.0 and highlight the key considerations you should take into account before migrating to this new version.
 
-What's new in version 8.0? {#h2-0-what-s-new-in-version-8-0}
-------------------------------------------------------------
+What's new in version 8.0?
+--------------------------
 
 The most popular document database is [now faster than ever](https://www.mongodb.com/products/updates/version-release/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim). MongoDB 8.0 is an excellent choice for those looking for performance, cutting-edge technology, and an intuitive experience. It offers a notable improvement in throughput and latency, compared to earlier versions. Internal testing against 7.0 demonstrates 32% faster reads, 59% faster updates, and 200%+ faster time-series queries. The release of this latest version focuses on several key pillars:
 
@@ -33,10 +33,10 @@ The most popular document database is [now faster than ever](https://www.mongodb
 
 **Resilience, scalability, and high availability**: With MongoDB 8.0, horizontal scaling is now faster and more affordable. This method allows applications to go beyond the limits of traditional databases by spreading data across multiple servers, known as shards, without needing to prepare large amounts of resources in advance. The new sharding features in MongoDB 8.0 make data distribution up to 50 times faster while cutting costs by up to 50%.
 
-General changes {#h2-1-general-changes}
----------------------------------------
+General changes
+---------------
 
-### Queryable Encryption {#h3-2-queryable-encryption}
+### Queryable Encryption
 
 With the new version, Queryable Encryption enables you to search within a range, using operators like $lt, $lte,$gt, and $gte, for example, to filter data by specific intervals, such as dates or numerical values, while keeping the data encrypted.  
 ![](Screenshot-2025-12-30-at-10.14.49-PM.png)
@@ -45,7 +45,7 @@ With the new version, Queryable Encryption enables you to search within a range,
 
 If you want to learn more, the article [Java Meets Queryable Encryption: Developing a Secure Bank Account Application](https://www.mongodb.com/developer/products/atlas/java-queryable-encryption/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim) provides detailed instructions on how to implement a Java application to explore this new feature in the version.
 
-### Express query stages {#h3-3-express-query-stages}
+### Express query stages
 
 Express was introduced as a new execution stage that optimizes the query path for simple use cases. If you are running a simple query that uses a single _id index, for example...
 
@@ -68,7 +68,7 @@ EXPRESS stages can be one of the following:
 
 Instead of executing the classic plan stage, your query will now utilize this new stage. This skips regular query planning and execution, delivering up to a 17% improvement in performance.
 
-### Query shape and query settings {#h3-4-query-shape-and-query-settings}
+### Query shape and query settings
 
 The query shape in MongoDB represents a set of attributes that group similar queries together, including filters, sorting, projections, aggregation stages, and the namespace. This enables MongoDB to improve performance by reusing query plans for structurally similar queries, leading to more efficient execution. Starting in MongoDB 8.0, the query shape supports query settings, allowing you to define specific behaviors for matching queries.
 
@@ -189,10 +189,10 @@ db.adminCommand(
 
 This approach is valuable as it ensures the database won't be affected by third-party queries that could cause high resource consumption, all without the need to make changes to the application.
 
-Compatibility and deprecations {#h2-5-compatibility-and-deprecations}
----------------------------------------------------------------------
+Compatibility and deprecations
+------------------------------
 
-### Query behavior {#h3-6-query-behavior}
+### Query behavior
 
 Before version 8.0, if you searched for values equal to null, fields with the value undefined would also be returned. However, in this new version, data stored as undefined will no longer be returned in queries with null equality---for example:
 
@@ -220,12 +220,12 @@ Data with undefined will no longer be returned. If your application contains dat
 
 **Note**: The undefined type has been deprecated, and in some cases, if you attempt to insert undefined, it will be converted to null.
 
-### Index filters {#h3-7-index-filters}
+### Index filters
 
 Consider using setQuerySettings, as discussed in the query shape section of this article, since index filters are deprecated in this version. SetQuerySettings offers significantly more functionality, making it the preferred choice. With index filters now deprecated, it's advisable to switch to setQuerySettings to take advantage of its advanced features.
 
-Migration planning and strategy {#h2-8-migration-planning-and-strategy}
------------------------------------------------------------------------
+Migration planning and strategy
+-------------------------------
 
 Now that you've seen the new features in the latest version and decided to upgrade to the newest MongoDB release, there are a few things you need to be aware of. This topic will describe some strategies and steps that are ideal to ensure a smooth and successful migration of a replica set in MongoDB Atlas.
 
@@ -233,7 +233,7 @@ Keep in mind that each scenario has its own particularities, and understanding h
 
 Additionally, remember that you can [consult specialists to support](https://www.mongodb.com/services/consulting/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim) you in achieving a successful migration. While this tutorial focuses on Atlas, there are also resources available for self-managed upgrades.
 
-### Pre-migration assessment {#h3-9-pre-migration-assessment}
+### Pre-migration assessment
 
 #### Upgrade version path
 
@@ -263,7 +263,7 @@ Another crucial point before starting the migration is to check the health of al
 
 On this screen, you will notice that each node has a green dot next to its name, indicating that the health is fine.
 
-### Staging cluster: your testing hub {#h3-10-staging-cluster-your-testing-hub}
+### Staging cluster: your testing hub
 
 To ensure a safe update and mitigate risks, it is essential to work with a testing environment. The [staging environment](https://www.mongodb.com/docs/atlas/tutorial/major-version-change/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim) acts as a safe zone to test new versions, features, and changes without impacting end users. With the production cluster in a healthy state, it's time to follow these steps:
 
@@ -295,7 +295,7 @@ To ensure a safe update and mitigate risks, it is essential to work with a testi
 
 #### Run tests to make sure everything works as expected, including both database and application tests.
 
-### Upgrade production cluster {#h3-11-upgrade-production-cluster}
+### Upgrade production cluster
 
 After testing in a staging environment, ensure that the **Feature Compatibility Version (FCV)** is set appropriately, before upgrading the production cluster.
 
@@ -310,7 +310,7 @@ Although it's not mandatory, configuring the FCV gives you flexibility. If neces
 
 Once you've configured the FCV (if desired), you can proceed with upgrading the production cluster. To do so, simply follow the same steps outlined in the previous section, but this time, apply them to the production cluster.
 
-### Monitoring {#h3-12-monitoring}
+### Monitoring
 
 Post-migration is just as important as all the previous steps. Monitoring the operation is crucial to ensure the success of the process.
 ![](Screenshot-2025-12-30-at-10.28.06-PM.png)
@@ -330,9 +330,9 @@ Some important points to check are:
 Last but not least, check the metrics for each node in your cluster. They will provide valuable insight into the overall health of your system. You can find them in the "Metrics" tab of your cluster:  
 ![](Screenshot-2025-12-30-at-10.28.29-PM.png)
 
-### *Cluster node metrics* {#h3-13-cluster-node-metrics}
+### *Cluster node metrics*
 
-### Recap {#h3-14-recap}
+### Recap
 
 Your upgrade plan should be customized to align with your organization's specific needs and goals. Make sure to monitor your MongoDB cluster's support lifecycle and stay updated on version releases, so you can prepare for a seamless and efficient upgrade.
 
@@ -342,16 +342,16 @@ Your upgrade plan should be customized to align with your organization's specifi
 4. Don't overlook driver updates.
 5. Conduct thorough testing before proceeding with the upgrade.
 
-How complex is your upgrade? {#h2-15-how-complex-is-your-upgrade}
------------------------------------------------------------------
+How complex is your upgrade?
+----------------------------
 
 Now that we've outlined the key steps for a successful upgrade---including pre-migration assessment, staging cluster testing, and checking driver compatibility---let's evaluate how complex your upgrade might be. The effort required to upgrade to MongoDB 8.0 depends on multiple factors, including your current version, driver compatibility, data size, and experience level.
 
-### Straightforward upgrades {#h3-16-straightforward-upgrades}
+### Straightforward upgrades
 
 If you are already on MongoDB 7.0, have updated drivers, and are running on a fully supported Atlas tier, then the migration is generally quicker and more straightforward. In these cases, setting up a staging cluster, validating health, and performing the upgrade can be completed efficiently, often with minimal or no downtime.
 
-### More complex upgrades {#h3-17-more-complex-upgrades}
+### More complex upgrades
 
 If you're on an older version (e.g., 5.0 or 6.0), you'll need to upgrade incrementally (e.g., 5.0 → 6.0 → 7.0 → 8.0), as mentioned before. Additionally, if your drivers are outdated or you have custom configurations, the process may take several hours and require more thorough testing to prevent compatibility issues.
 
@@ -359,8 +359,8 @@ Since upgrade time varies significantly based on these factors, using a staging 
 
 Regardless of complexity, following best practices---such as testing a staging environment and monitoring cluster health---ensures a smooth and reliable transition. The effort is well worth it, as upgrading unlocks better performance, security improvements, and new features.
 
-Conclusion {#h2-18-conclusion}
-------------------------------
+Conclusion
+----------
 
 This article highlighted key changes in the latest version, including compatibility considerations, deprecated features, and best practices for a smooth migration. By understanding these aspects, you can ensure a seamless transition to MongoDB 8.0 and continue benefiting from its enhanced capabilities.
 

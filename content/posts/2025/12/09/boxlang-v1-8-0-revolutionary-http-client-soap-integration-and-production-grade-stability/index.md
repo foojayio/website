@@ -19,10 +19,10 @@ frozen: false
 
 The BoxLang team is excited to announce BoxLang 1.8.0, a massive release that revolutionizes HTTP capabilities, introduces comprehensive SOAP/WSDL integration, and delivers over 100 critical bug fixes for production-grade stability. This release focuses on modern web application development with fluent APIs, streaming support, persistent connection management, and extensive CFML compatibility improvements.
 
-🚀 What's New in 1.8.0 {#h2-0-what-s-new-in-1-8-0}
---------------------------------------------------
+🚀 What's New in 1.8.0
+----------------------
 
-### 🎯 Modular Compiler Architecture \& Ultra-Slim Runtime {#h3-1-modular-compiler-architecture-ultra-slim-runtime}
+### 🎯 Modular Compiler Architecture \& Ultra-Slim Runtime
 
 **BoxLang 1.8.0 introduces a revolutionary modular compiler architecture that delivers unprecedented flexibility, security, and deployment efficiency for enterprise applications.**
 
@@ -39,7 +39,7 @@ The BoxLang runtime has been dramatically optimized, dropping from over 9MB to j
 
 BoxLang now ships in two distinct flavors to meet different security and deployment requirements:
 
-### 1. `boxlang` - Full Development Runtime {#h3-2-1-boxlang-full-development-runtime}
+### 1. `boxlang` - Full Development Runtime
 
 * Includes **NoOp** (No Operation) compiler for pre-compiled class execution
 * Includes **ASM** compiler for runtime compilation and hot-reloading
@@ -47,7 +47,7 @@ BoxLang now ships in two distinct flavors to meet different security and deploym
 * Enables live code changes and interactive development
 * Default choice for most applications
 
-### 2. `boxlang-noop` - Secure Production Runtime {#h3-3-2-boxlang-noop-secure-production-runtime}
+### 2. `boxlang-noop` - Secure Production Runtime
 
 * **NoOp compiler only** - no runtime compilation capabilities
 * **100% pre-compiled code execution** - zero dynamic compilation
@@ -72,7 +72,7 @@ java -jar boxlang-noop-1.8.0.jar myapp.bx
 
 Compilers are now **modular add-ons** that can be loaded dynamically via classpath. BoxLang includes two compiler modules:
 
-### 1. `bx-compiler-asm` - ASM Bytecode Compiler (Recommended) {#h3-4-1-bx-compiler-asm-asm-bytecode-compiler-recommended}
+### 1. `bx-compiler-asm` - ASM Bytecode Compiler (Recommended)
 
 * Direct bytecode generation using ASM library
 * **Superior performance** - skips Java source generation step
@@ -80,7 +80,7 @@ Compilers are now **modular add-ons** that can be loaded dynamically via classpa
 * Optimized bytecode output
 * Default compiler for production applications
 
-### 2. bx-compiler-java - Java Source Compiler {#h3-5-2-bx-compiler-java-java-source-compiler}
+### 2. bx-compiler-java - Java Source Compiler
 
 * Generates Java source code, then compiles to bytecode
 * Legacy compatibility for debugging and inspection
@@ -179,8 +179,8 @@ compiler = new VerifiableCompiler()
 
 **Migration Path:** Existing applications continue to work seamlessly. Simply choose boxlang for standard deployments or upgrade to boxlang-noop when security requirements demand pre-compiled-only execution.
 
-🌐 Revolutionary HTTP Client - Modern, Fluent, and Powerful {#h2-6-revolutionary-http-client-modern-fluent-and-powerful}
-------------------------------------------------------------------------------------------------------------------------
+🌐 Revolutionary HTTP Client - Modern, Fluent, and Powerful
+-----------------------------------------------------------
 
 BoxLang 1.8.0 completely rewrites the HTTP subsystem from the ground up, delivering a modern, fluent HTTP client with streaming support, connection pooling, and advanced features for building robust web applications.
 
@@ -284,8 +284,8 @@ println( "Active connections: #stats.activeConnections#" );
 ```
 
 
-🧼 SOAP/WSDL Client Integration - Web Services Made Simple {#h2-7-soap-wsdl-client-integration-web-services-made-simple}
-------------------------------------------------------------------------------------------------------------------------
+🧼 SOAP/WSDL Client Integration - Web Services Made Simple
+----------------------------------------------------------
 
 BoxLang now includes comprehensive SOAP web service support with automatic WSDL parsing and fluent method invocation:
 
@@ -324,8 +324,8 @@ opInfo = ws.getOperationInfo( "getUserInfo" );
 
 Perfect for integrating with legacy SOAP services, enterprise APIs, and third-party web services!
 
-🎯 Context Shutdown Listeners - Graceful Application Cleanup {#h2-8-context-shutdown-listeners-graceful-application-cleanup}
-----------------------------------------------------------------------------------------------------------------------------
+🎯 Context Shutdown Listeners - Graceful Application Cleanup
+------------------------------------------------------------
 
 New lifecycle hooks enable graceful application shutdown with resource cleanup:
 
@@ -355,7 +355,7 @@ component {
 * External service disconnection
 * Logging final state
 
-### 📚 Enhanced Metadata \& Reflection {#h3-9-enhanced-metadata-reflection}
+### 📚 Enhanced Metadata \& Reflection
 
 Class metadata now includes `simpleName` for easier reflection:
 
@@ -366,8 +366,8 @@ println( "Simple name: #meta.simpleName#" ); // New in 1.8.0
 ```
 
 
-🤖 Core Runtime Enhancements {#h2-10-core-runtime-enhancements}
----------------------------------------------------------------
+🤖 Core Runtime Enhancements
+----------------------------
 
 #### MiniServer JSON Configuration
 
@@ -408,7 +408,7 @@ boxlang-miniserver miniserver.json --port 9090 --debug
 * JSON configuration
 * Command-line arguments (highest priority)
 
-### Compiler Configuration Refactored {#h3-11-compiler-configuration-refactored}
+### Compiler Configuration Refactored
 
 The experimental compiler setting is now a top-level directive in `boxlang.json:`
 
@@ -424,7 +424,7 @@ The experimental compiler setting is now a top-level directive in `boxlang.json:
 
 Valid values: `"asm"` (default), `"java"`, `"noop"`
 
-### Dynamic Class Loading {#h3-12-dynamic-class-loading}
+### Dynamic Class Loading
 
 The `DynamicClassLoader` now supports `addPaths()` for loading external JARs at runtime:
 
@@ -440,14 +440,14 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 ```
 
 
-### Performance Optimizations {#h3-13-performance-optimizations}
+### Performance Optimizations
 
 * **Metadata Creation** - Micro-optimizations for faster class metadata generation
 * **Application Timeout Checks** - Background thread reduces main thread overhead
 * **Thread Joining** - Faster `bx:thread` join operations
 * **DateTimeFormatter Usage** - Optimized for better performance
 
-### Query Improvements {#h3-14-query-improvements}
+### Query Improvements
 
 * **Text Type Support** - Query columns support text type (maps to VARCHAR)
 * **BLOB/CLOB Handling** - Proper support for binary large objects
@@ -457,10 +457,10 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
   * Generated keys support (ROWID)
   * Stored procedure ref cursor support
 
-🐛 100+ Critical Bug Fixes {#h2-15-100-critical-bug-fixes}
-----------------------------------------------------------
+🐛 100+ Critical Bug Fixes
+--------------------------
 
-### Date \& Time (30+ fixes) {#h3-16-date-time-30-fixes}
+### Date \& Time (30+ fixes)
 
 * **Timezone Handling** - this.timezone now properly respected
 * **Date Parsing** - Fixed parsing with various masks:
@@ -474,7 +474,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * **Null Date Handling** - Added handling in formatting methods
 * `.format()` Member - Undocumented but now properly supported
 
-### Query Operations (15+ fixes) {#h3-17-query-operations-15-fixes}
+### Query Operations (15+ fixes)
 
 * `queryFilter()` - Fixed returning unexpected rows
 * `querySlice()` - Fixed offset handling
@@ -484,20 +484,20 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * **Connection Pooling** - Fixed credentials override, proper pooling
 * **SQLite** - Database errors properly handled
 
-### List Operations (5+ fixes) {#h3-18-list-operations-5-fixes}
+### List Operations (5+ fixes)
 
 * `listDeleteAt()` - Fixed incorrect behavior
 * **List Find BIFs** - Fixed unexpected matches
 * **Null Appending** - Fixed failures appending null to list
 
-### Number Formatting (5+ fixes) {#h3-19-number-formatting-5-fixes}
+### Number Formatting (5+ fixes)
 
 * `numberFormat()` - Fixed `"_.00"` mask compatibility
 * `isNumeric()` - `isNumeric("true")` returns false (matches ACF/Lucee)
 * `val()` - Fixed occasional scientific notation
 * `lsIsCurrency()` - Fixed type casting issues
 
-### HTTP \& Network (10+ fixes) {#h3-20-http-network-10-fixes}
+### HTTP \& Network (10+ fixes)
 
 * **HTTP Component** - Fixed basic auth regression
 * **Duplicate Headers** - Properly handles duplicate response headers
@@ -505,7 +505,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * **Header Component** - Adds headers instead of replacing (correct CFML behavior)
 * **Compression** - Fixed gzip decompression issues
 
-### File Operations (5+ fixes) {#h3-21-file-operations-5-fixes}
+### File Operations (5+ fixes)
 
 * `fileCopy()` - Respects overwrite parameter
 * **File Upload** - Files smaller than 10KB stored properly on disk
@@ -513,7 +513,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * `expandPath()` - Fixed wrong base path with Application.bx in different directory
 * `getTempDirectory()` - Contains trailing slash (CFML compat)
 
-### Parser Improvements (10+ fixes) {#h3-22-parser-improvements-10-fixes}
+### Parser Improvements (10+ fixes)
 
 * **Semicolons** - After empty blocks properly end statements
 * **Whitespace** - Allowed in tag closing (`/ >`)
@@ -522,7 +522,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * `continue` in `switch` - Can use inside `for` loop
 * **Static Invocation** - Fixed parse error on static method calls
 
-### CFML Compatibility (15+ fixes) {#h3-23-cfml-compatibility-15-fixes}
+### CFML Compatibility (15+ fixes)
 
 * **CGI Values** - Now java.lang.String for compatibility
 * **Boolean Comparison** - Don't compare numbers to booleans
@@ -534,7 +534,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * **Custom Tags** - `thisTag` scope behaves like ACF/Lucee
 * **Line Numbers** - Correct line numbers in tag context
 
-### Java Interop (5+ fixes) {#h3-24-java-interop-5-fixes}
+### Java Interop (5+ fixes)
 
 * **Field Access** - Fixed accessing public parent package/private fields
 * **Field Setting** - Values properly coerced when setting
@@ -542,7 +542,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * **Unmodifiable Arrays** - Can now map/filter unmodifiable arrays
 * **Native Array Printing** - `println()` handles Java arrays better
 
-### Additional Fixes {#h3-25-additional-fixes}
+### Additional Fixes
 
 * **XML Operations** - `xmlSearch()` returns correct xpath values
 * **Async Operations** - `asyncRun()` properly detects BoxExecutors
@@ -551,8 +551,8 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * **Stored Procedures** - Null attribute respected, multiple result sets
 * **Exception Handling** - Custom tags in catch blocks work correctly
 
-🎉 New BoxLang+ Modules for Subscribers {#h2-26-new-boxlang-modules-for-subscribers}
-------------------------------------------------------------------------------------
+🎉 New BoxLang+ Modules for Subscribers
+---------------------------------------
 
 Exciting news for **BoxLang+ subscribers**! Several powerful premium modules have been released:
 
@@ -573,31 +573,31 @@ Each module follows BoxLang's fluent API patterns and integrates seamlessly with
 
 [View BoxLang+ Plans](https://boxlang.io/plans#open-source "View BoxLang+ Plans")
 
-🛠️ Developer Experience {#h2-27-developer-experience}
-------------------------------------------------------
+🛠️ Developer Experience
+------------------------
 
-### Feature Audit Tool {#h3-28-feature-audit-tool}
+### Feature Audit Tool
 
 * Enhanced to find REST classes and REST API usage
 * Better reporting of missing modules for migrations
 * Improved analysis of BoxLang feature usage
 
-### Web Support Documentation {#h3-29-web-support-documentation}
+### Web Support Documentation
 
 All web-related BIFs and components include proper descriptions via @BoxBIF and @BoxComponent annotations for better IDE integration.
 
-### JavaParser Dependencies {#h3-30-javaparser-dependencies}
+### JavaParser Dependencies
 
 Removed all JavaParser dependencies externally unless explicitly checked - reduces runtime footprint and startup time.
 
-⚡ Migration Guide {#h2-31-migration-guide}
-------------------------------------------
+⚡ Migration Guide
+-----------------
 
-### Breaking Changes {#h3-32-breaking-changes}
+### Breaking Changes
 
 **None** - This release maintains full backward compatibility with 1.7.x
 
-### Recommended Actions {#h3-33-recommended-actions}
+### Recommended Actions
 
 **HTTP Migration**: Consider migrating to the new fluent HTTP APIs:
 
@@ -644,13 +644,13 @@ result = ws.methodName( arg1, arg2 );
 ```
 
 
-### 🙏 Thank You {#h3-34-thank-you}
+### 🙏 Thank You
 
 A huge thank you to our community for your continued feedback, bug reports, and contributions. This release includes fixes from real-world production usage, and your input directly drives BoxLang forward!
 
 Special thanks to all contributors who reported issues, tested pre-releases, and provided valuable feedback throughout the development cycle.
 
-### 📚 Resources {#h3-35-resources}
+### 📚 Resources
 
 * [Complete Release Notes](https://boxlang.ortusbooks.com/changelog/v1.8.0 "Complete Release Notes")
 * [BoxLang Documentation](https://boxlang.ortusbooks.com "BoxLang Documentation")
@@ -671,11 +671,11 @@ https://boxlang.io/download
 ```
 
 
-### 🙏 Thank You {#h3-36-thank-you}
+### 🙏 Thank You
 
 A huge thank you to our community for your continued feedback, bug reports, and contributions. Your input drives BoxLang forward!
 
-### 📚 Resources {#h3-37-resources}
+### 📚 Resources
 
 * [Complete Release Notes](https://boxlang.ortusbooks.com/changelog/v1.7.0 "Complete Release Notes")
 * [BoxLang Documentation](https://boxlang.ortusbooks.com "BoxLang Documentation")
@@ -685,8 +685,8 @@ A huge thank you to our community for your continued feedback, bug reports, and 
 Ready to experience real-time streaming, distributed caching, and blazing performance?  
 **Upgrade to BoxLang 1.7.0 today!**
 
-Download {#h2-38-download}
---------------------------
+Download
+--------
 
 Please visit our [download](https://www.boxlang.io/download "download") page or our quick [installation guides](https://boxlang.ortusbooks.com/getting-started/installation "installation guides") to upgrade your installation.
 
@@ -709,8 +709,8 @@ Join us and redefine development on the JVM **Ready to learn more**? Explore Box
 
 [Try BoxLang](https://try.boxlang.io)
 
-Join the BoxLang Community ⚡️ {#h2-39-join-the-boxlang-community}
------------------------------------------------------------------
+Join the BoxLang Community ⚡️
+-----------------------------
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on **Into the Box 2025, product launches, tool updates, and more.**
 

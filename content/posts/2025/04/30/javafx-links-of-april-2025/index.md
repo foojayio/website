@@ -20,8 +20,8 @@ frozen: false
 
 Here is the overview of the JavaFX LinksOfTheMonth of April 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * [Slides from the presentation "JavaFX 24 and Beyond"](https://cr.openjdk.org/~kcr/presentations/javaone-2025/JavaFX-24-Final.pdf) by **Kevin Rushforth** at JavaOne, March 18th, 2025.
 * [ApiDoc of JavaFX 24](https://apidia.net/mvn/org.openjfx/javafx/24/) is available on [APIdia](https://bsky.app/profile/apidia.net), a growing collection of high-quality APIdocs, interlinked, without tracking.
@@ -35,8 +35,8 @@ Core {#h2-0-core}
 * A tip by **Wolfgang Weigend** related to [JEP 493](https://openjdk.org/jeps/493): "_Add JavaFX 24 to your jdk-24.jdk image with cmd `jlink --add-modules javafx.base,javafx.controls,... --output image` and verify file release and the directory `MARKDOWN_HASH456c8dcb2e4cb13faea8318519ab5263MARKDOWN`*HASH*." (See [the original message for the full command](https://bsky.app/profile/wolfgangweigend.bsky.social/post/3llya7y6bfs23)).
 * Message from **Gluon** : "*Another CPU release for JavaFX! Today, we released JavaFX 24.0.1, JavaFX 17.0.15 and JavaFX 21.0.7. [Get it from gluonhq.com](https://gluonhq.com/products/javafx/). Thanks to the fantastic JavaFX community for the combined work.*"
 
-SceneBuilder {#h2-1-scenebuilder}
----------------------------------
+SceneBuilder
+------------
 
 * [SceneBuilder 24.0.0](https://gluonhq.com/scene-builder-24-0-0-ga-is-here/) is available. Highlights:
   * Scene Builder Kit is now published to Maven Central, making it easier for developers to integrate it into their software.
@@ -45,8 +45,8 @@ SceneBuilder {#h2-1-scenebuilder}
   * Logging to console is now enabled by default to make it easier to debug issues in Scene Builder.
   * Multiple fixes went into Accordion, DialogPane, TextField etc. to make Scene Builder more robust.
 
-Applications {#h2-2-applications}
----------------------------------
+Applications
+------------
 
 * [**Patrik Karlström** released a new version of nbRsync](https://bsky.app/profile/trixon.se/post/3lmcattkucc2w): "*A GUI for rsync, written in Java and JavaFX atop the netbeans platform. Available as [appimage, snap, platform zips with and without a bundled JDK 24](https://github.com/trixon/nbRsync/releases/tag/v25.04).*"
 * [**Serendipity** released version 2 of SmartFinder](https://bsky.app/profile/serendigityinfo.bsky.social/post/3lma43kntls27): "*Now with advanced filter building to create powerful, custom queries on file attributes and metadata. Stay tuned \& level up your file search!* " A [video demo is available on YouTube](https://www.youtube.com/watch?v=Vsm3W5zeP2A).
@@ -61,8 +61,8 @@ Applications {#h2-2-applications}
   * [JPro](https://bsky.app/profile/jpro.one/post/3lmzd4c6hmc2q): "*With JPro release 2025.2.0, we've added support for JavaFX 24 as well as improvements to Canvas shape clipping, instance startup timeout logging, and more.*"
   * [SmartFinder](https://bsky.app/profile/serendigityinfo.bsky.social/post/3ln6fezarnc2w): "*SmartFinder runs on Java 24! Better performance and improved stability. Always one step ahead! SmartFiner is an alternative to MacOS Finder and Windows Search.*"
 
-Components, Libraries, Tools {#h2-3-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [Here you can find a list of all the Visual Studio Code extensions](https://open-vsx.org/?search=sosuisha&sortBy=relevance&sortOrder=desc) created by [**Hidekazu Kubota**](https://github.com/sosuisen/): "*I have registered all the VSCode extensions I created for JavaFX in the Open VSX repository. Now, it's possible to develop with JavaFX in VSCode-compatible editors like TheiaIDE.*"
 * JDeploy, a tool that helps you to create installers/updaters, announced: "[A New Chapter for jDeploy: The Desktop App is Here](https://jdeploy.substack.com/p/a-new-chapter-for-jdeploy-the-desktop)" with:
@@ -80,8 +80,8 @@ Components, Libraries, Tools {#h2-3-components-libraries-tools}
 * [TabShell is a lightweight platform for building tab-based applications](https://github.com/techsenger/tabshell) in JavaFX using the MVVM pattern.
   * [**Striking_Creme864** shared a video on Reddit](https://www.reddit.com/r/JavaFX/comments/1k2rzze/custom_file_chooser/): "*For our project we needed users to be able to use a file chooser for file storages that may exist in the application, but not in the OS, such as Google Drive, FTP, etc. As a solution, such a custom file chooser was created, which recognizes 4 types of storage (floppy, CD, network and base). The file path is represented as a URI. Both modes (list/details) use VirtualFlow. File sorting is done by the table from details, even for the list mode (the table is not on the Scene). Storage implementations will be wrappers for OpenDAL, Commons FVS, etc.*"
 
-Podcasts, Videos, Books {#h2-4-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * Live stream step-by-step in Korean - with CC 😉 - by **알클 ALOHA CLASS** in which he creates an application with SceneBuilder and FXML: [JavaFX - Controller](https://www.youtube.com/watch?v=S01AemsDXew).
 * **Frank Delporte** [interviewed **Gerrit Grunwald (aka hansolo)** for the JavaFX In Action series](https://webtechie.be/post/2025-04-10-jfxinaction-gerrit-grunwald-amazing-javafx-libraries/): "*Gerrit created many JavaFX libraries and blog posts. I wanted to talk with him about his work with JavaFX, but I also learned more about SVGs and how the garbage collectors in the JVM are working, thanks to the amazing visualizations he creates with ... JavaFX of course.*"
@@ -91,22 +91,22 @@ Podcasts, Videos, Books {#h2-4-podcasts-videos-books}
   * YouTube comment by **Michel Antony Barros Barrios** : "*Amazing, I remember have used several components of Gerrit's libraries to show data analytics about billing behavior in a project I work some years ago. His libraries are wonderful.*"
 * [Live stream with **Dashaun Carter** and **Catherine Edelveis**](https://www.youtube.com/watch?v=IxCfpxxS88w): "*Who said that desktop apps are dead? We prove them wrong! 🥊 We explore the world of rich and smart GUI apps that combine the powers of JavaFX and SpringBoot.*"
 
-Tutorials {#h2-5-tutorials}
----------------------------
+Tutorials
+---------
 
 * By **Codez Up** : [JavaFX: Build Modern Desktop Applications Easily](https://codezup.com/javafx-creating-modern-desktop-applications/).
 * By **Sounetra Ghosal** : [How To Use JavaFX For GUI Development?](https://codingzap.com/javafx-for-gui-development/)
 * **Frank Delporte** always forgets "*how to create a JavaFX ComboBox and configure it to show a specific field of an object in the opened and closed state of the ComboBox* " and [wrote a tutorial](https://webtechie.be/post/2025-04-09-javafx-combobox-with-objects/) "*hoping I remember that I blogged about it, the next time I need this functionality*".
 * [Blog by **Catherine Edelveis** on Foojay](https://foojay.io/today/a-guide-to-creating-javafx-native-images/): "*A Guide to Creating JavaFX Native Images*"
 
-Miscellaneous {#h2-6-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * Very short but [impressive video by **PIE SPACE**](https://x.com/PIE_SPACE_12/status/1907782342326079866): "*Check out my custom GUI made using Processing and JavaFX---specially designed to visualize real-time data from the Agni Flight Computer V2. You can find the full flight computer design along with the source code [on my GitHub page](https://github.com/PIEspace).*"
 * [**Catherine Edelveis** asks your advise](https://bsky.app/profile/cat-edelveis.bsky.social/post/3lmc6dschus2f): "*Friends, does anyone know what is the best way of adding image urls to JavaFX CSS file?*"
 
-JFX Central {#h2-7-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * New content:
   * Video: [JavaFX In Action with Gerrit Grunwald: Creator of Many Amazing JavaFX Libraries](https://www.jfx-central.com/videos/6pgHlHLrX8c)

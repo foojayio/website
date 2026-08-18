@@ -43,8 +43,8 @@ Another thing I'd like to point out is that I'm not a security expert. I did rea
 
 Notice you don't need to be a security expert to understand these concepts and inherent flaws. In that sense this post is much simpler than the one from Assaf. This post is also heavily biased towards Java since that's my main field of expertise, but the situation isn't much better in other languages/platforms.
 
-Insecure By Design {#h2-0-insecure-by-design}
----------------------------------------------
+Insecure By Design
+------------------
 
 Most remote debugging protocols such as JDWP are a product of a different era. An era that gave us telnet and HTTP. Most aren't even encrypted by default. Just leaving JDWP enabled [warrants a CVE](https://nvd.nist.gov/vuln/detail/CVE-2018-5486) .
 
@@ -68,8 +68,8 @@ ssh remoteUser@remoteHost -L 9000:127.0.0.1:9000 -N
 
 If you need credentials for the command also add them there. This will open a tunnel between your local machine's port 9000 and the remote one. You will be able to debug on localhost but it would work as a standard remote debugger. The only difference is that it wouldn't be as bad in terms of security.
 
-Crash and Burn {#h2-1-crash-and-burn}
--------------------------------------
+Crash and Burn
+--------------
 
 Unfortunately such workarounds don't impact everything else that is broken in the debug protocols. Some operations in the debugger require more than one step in terms of the protocol. As a result you could send a request to the debuggee, lose your connection and the debuggee could be stuck in a problematic state.
 
@@ -77,8 +77,8 @@ This is an inherent limitation of the JDWP protocol and can't be worked around i
 
 The problem is that even unintentional actions can demolish a server. A simple conditional breakpoint that invokes a method as part of the condition can demolish server performance and crash it.
 
-Information Sifting {#h2-2-information-sifting}
------------------------------------------------
+Information Sifting
+-------------------
 
 ![office-space.jpg](https://cdn.hashnode.com/res/hashnode/image/upload/v1634113633044/LJZGiwg5X.jpeg)
 
@@ -90,18 +90,18 @@ Seriously don't do that!
 
 This is a very real risk of placing JDWP on servers and something you need to keep in mind.
 
-How we Solved these Issues at Lightrun {#h2-3-how-we-solved-these-issues-at-lightrun}
--------------------------------------------------------------------------------------
+How we Solved these Issues at Lightrun
+--------------------------------------
 
 Pretty much all of those problems don't exist in Lightrun. Before I go into that, Lightrun doesn't just let you start debugging... You need to authenticate. There's an access system with corporate compliance, user roles that provide specific permissions etc.
 
-### Insecure By Design {#h3-4-insecure-by-design}
+### Insecure By Design
 
 Lightrun doesn't use JDWP and instead uses a custom agent. This means that there is no need to open an additional port to your service.
 
 The agent connects to a management server so information is always pulled, never pushed. Furthermore, connections use certificate pinning to block man in the middle attacks.
 
-### Crash and Burn {#h3-5-crash-and-burn}
+### Crash and Burn
 
 Operations on Lightrun are executed using a fail-safe mechanism and a Sandbox.
 
@@ -109,7 +109,7 @@ Operations sent to the agent are atomic so a connection failure won't impact the
 
 Furthermore, conditions and expressions are sandboxed and checked. If too much CPU is used or a write operation is detected the operation is discarded or rate limited. You will get a printout that rate limiting occurred and your server will remain stable and performant.
 
-### Information Sifting {#h3-6-information-sifting}
+### Information Sifting
 
 Lightrun has PII reduction and blocklists. This means that Lightrun can detect problematic patterns in logs such as credit card numbers. It can then block those numbers from entering the logs.
 
@@ -119,8 +119,8 @@ Blocklists let you define classes, files etc. that are blocked to debugging. Jus
 
 Finally everything in Lightrun is audited. That means that even if you forgot to limit access this would all be logged. Any snapshot (breakpoint) or log added by the user is added to the audit log. So a malicious developer would leave a digital trail we can follow.
 
-TL;DR {#h2-7-tl-dr}
--------------------
+TL;DR
+-----
 
 Don't use remote debugging unless you REALLY have to and then make sure no one can access your system... Even under those circumstances be vigilant and tunnel your connections via SSH.
 

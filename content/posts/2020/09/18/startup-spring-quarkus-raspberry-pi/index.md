@@ -25,8 +25,8 @@ For my book "[Getting Started with Java on Raspberry Pi](https://webtechie.be/bo
 
 The application takes some time to start on a Raspberry Pi, and [Adam Bien](https://twitter.com/AdamBien) who does the [airhacks.fm podcast](https://airhacks.fm/#episode_104) asked me if I could compare this to a similar Quarkus application, which resulted in some nice results.
 
-Application {#h2-0-application}
--------------------------------
+Application
+-----------
 
 The same application was developed in both Spring and Quarkus:
 
@@ -41,7 +41,7 @@ The same application was developed in both Spring and Quarkus:
 
 * Spring is using JPA, while Quarkus uses Panache
 
-### Sources {#h3-1-sources}
+### Sources
 
 Both projects are available on GitHub in "[JavaOnRaspberryPi \> Chapter_10_Spring \> java-spring-rest-db](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_10_Spring/java-spring-rest-db)" and "[JavaQuarkusRestDb](https://github.com/FDelporte/JavaQuarkusRestDb)". If you like to get more information of the code itself, you can check the blog post links at the bottom of this page.
 
@@ -111,8 +111,8 @@ Some of the keynotes while developing:
 * Live coding and testing is amazing! Start your application with `mvn quarkus:dev` and have any change available for testing immediately
 * Out-of-the-box native support with GraalVM (on PC, not (yet) on ARM)
 
-Running the Application {#h2-2-running-the-application}
--------------------------------------------------------
+Running the Application
+-----------------------
 
 To run the application, two new fresh SD cards where prepared with the [Imager tool provided by Raspberry Pi](https://www.raspberrypi.org/downloads/), both having OpenJDK 11 pre-installed:
 
@@ -129,8 +129,8 @@ $ java -jar target/javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
 ```
 
 
-Results {#h2-3-results}
------------------------
+Results
+-------
 
 Each JAR was started a few times to get an average value from the startup time reported in their logging.
 

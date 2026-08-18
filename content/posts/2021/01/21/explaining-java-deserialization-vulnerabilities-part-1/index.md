@@ -20,7 +20,7 @@ Java serialization is a mechanism to transform an object into a byte stream. Jav
 
 Java serialization---and more specifically deserialization in Java---is also known as "the gift that keeps on giving". This relates to the many security issues and other problems it has produced over the years.
 
-### Serialization and Deserialization in Java? {#h3-0-serialization-and-deserialization-in-java}
+### Serialization and Deserialization in Java?
 
 In Java, we create objects. These objects live in memory and are removed by the garbage collector once they are not used anymore. If we want to transfer an object, for instance, store it on a disk or send it over a network, we need to transform it into a byte stream. To do this, the class of that object needs to implement the interface `Serializable`. Serialization is converting the state of an object into a byte stream. This byte stream does not contain the actual code.
 
@@ -32,7 +32,7 @@ When deserializing a byte stream back to an object it does not use the construct
 
 A Java deserialize vulnerability is a security vulnerability that occurs when a malicious user tries to insert a modified serialized object into the system that eventually compromises the system or its data. Think of arbitrary code execution that can be triggered when deserializing a serialized object. To better explain Java deserialize vulnerabilities, we first need to explore how deserialization works in Java.
 
-### Tampering with Data in Serialized Objects {#h3-1-tampering-with-data-in-serialized-objects}
+### Tampering with Data in Serialized Objects
 
 A serialized object in Java is a byte array with information of the state. It contains the name of the object it refers to and the data of the field. If you look at a stored serialized object with a hex-editor, you can enclose and manipulate the information quickly.
 
@@ -84,7 +84,7 @@ So, if an application accepts serialized objects, it is relatively easy to tampe
 
 By altering the serialized objects, we can create invalid objects, mess with the data's integrity, or even worse.
 
-### Up Next {#h3-2-up-next}
+### Up Next
 
 In [part 2](https://foojay.io/today/explaining-java-deserialization-vulnerabilities-part-2/) of this multi-part article, we will dive a bit deeper into arbitrary code execution problems that are possible because of Java deserialization.
 

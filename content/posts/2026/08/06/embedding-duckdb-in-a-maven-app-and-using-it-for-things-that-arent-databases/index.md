@@ -20,7 +20,7 @@ frozen: false
 
 This article covers getting it into a Maven project and using it that way.
 
-### Setup {#h3-0-setup}
+### Setup
 
 One dependency. The native engine is bundled inside the JAR, so there's nothing else to install:
 
@@ -35,7 +35,7 @@ One dependency. The native engine is bundled inside the JAR, so there's nothing 
 
 It exposes a standard JDBC interface, so from the point of view of anyone who's ever written Java database code before, there's no new API to learn. The connection string `jdbc:duckdb:` (with nothing after the colon) gives you a purely in-memory instance --- nothing is written to disk, and everything disappears when the connection closes.
 
-### Querying a file on the internet with SQL {#h3-1-querying-a-file-on-the-internet-with-sql}
+### Querying a file on the internet with SQL
 
 Here's a complete Java application. It runs an aggregation [over a CSV file hosted on GitHub](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins_raw.csv) --- no download step, no schema definition, no table creation:
 
@@ -143,7 +143,7 @@ public class DuckDB {
 ```
 
 
-### Querying a file on the internet with SQL {#h3-2-querying-a-file-on-the-internet-with-sql}
+### Querying a file on the internet with SQL
 
 The interesting part is the `FROM` clause. DuckDB treats the URL as a table: it fetches the file, sniffs the delimiter and column types, and runs the query against it. Swap in a local path and it works the same way. Globs work too --- `FROM 'logs/*.parquet'` queries a whole directory of Parquet files as one dataset.
 
@@ -163,7 +163,7 @@ Chinstrap penguin (Pygoscelis antarctica)       68   3733.1
 ```
 
 
-### Where this is actually useful {#h3-3-where-this-is-actually-useful}
+### Where this is actually useful
 
 None of this replaces your application database, and it isn't meant to.
 
@@ -183,7 +183,7 @@ Where it makes sense:
 
 * **Reading Parquet from plain Java.** The usual route to Parquet in Java involves a slice of the Hadoop ecosystem. This is one dependency.
 
-### Summing up {#h3-4-summing-up}
+### Summing up
 
 The story isn't that DuckDB is magic --- it's that **a columnar engine is now a Maven dependency away** , and it's willing to **treat any file (or URL) as a table**.
 

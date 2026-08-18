@@ -24,8 +24,8 @@ frozen: false
 The [2025 Stack Overflow survey](https://survey.stackoverflow.co/2025/) reveals a paradox: while 84% of developers express confidence in adopting AI tools, nearly half (48%) still distrust the accuracy of their outputs. This tension between optimism and skepticism has reshaped how teams think about quality assurance.
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764049813672/6ad5aea0-625a-4f7f-bf4c-a0b3c8a4903f.png?auto=compress,format&format=webp)
 
-**From PRD to PR in days (not weeks)** {#heading-from-prd-to-pr-in-days-not-weeks}
-----------------------------------------------------------------------------------
+**From PRD to PR in days (not weeks)**
+--------------------------------------
 
 The bottleneck in software development has fundamentally shifted from writing code to validating it.
 
@@ -35,8 +35,8 @@ Today's reality is different. Advanced reasoning models like OpenAI's o1 can dec
 
 Reviewing AI-generated code also takes much more time. The bottleneck isn't writing code anymore - it's trusting it.
 
-**The AI-generated code crisis nobody's talking about** {#heading-the-ai-generated-code-crisis-nobodys-talking-about}
----------------------------------------------------------------------------------------------------------------------
+**The AI-generated code crisis nobody's talking about**
+-------------------------------------------------------
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764050727379/470609c8-ac04-40f4-8406-efdd62c734f2.png?auto=compress,format&format=webp)
 
@@ -46,8 +46,8 @@ Engineers are right to be skeptical, since [**over 40% of AI-generated code stil
 * **Hallucinated dependencies**: AI invents package names that don't exist. Attackers register those names in public repositories with malicious code. Developers install them blindly. This attack vector, called "slopsquatting," is uniquely enabled by AI code generation.
 * **Architectural drift**: The AI swaps out your cryptography library, removes access control checks, or changes security assumptions in ways that look correct but behave insecurely. These are the bugs that static analysis misses and humans don't catch until production.
 
-**Why did reasoning models change everything?** {#heading-why-did-reasoning-models-change-everything}
------------------------------------------------------------------------------------------------------
+**Why did reasoning models change everything?**
+-----------------------------------------------
 
 A few years back, applying AI to a collaborative workflow like Code Review met with a degree of amused skepticism. The bots would catch your missing semicolons, flag unused variables, and maybe (if you were lucky) warn you about a potential null pointer. They were fast, cheap, and fundamentally shallow.
 
@@ -55,8 +55,8 @@ At CodeRabbit, when we started to apply Generative AI, we realized this problem 
 
 With the launch of reasoning models like OpenAI's o1 and o3 the models actually think through the problem thanks to the **monologue feature** on CodeRabbit. When you ask GPT-4o to review code, it pattern-matches against things it's seen before and code review feedback is mostly superfluous. When you ask GPT-5 or Claude Sonnet 4.5, it spends time reasoning through your code's logic, tracing execution paths, considering edge cases, and understanding intent. This was important for successful code review. But there is a catch!
 
-**What makes review more "agentic"?** {#heading-what-makes-review-more-agentic}
--------------------------------------------------------------------------------
+**What makes review more "agentic"?**
+-------------------------------------
 
 Many thought that applying the same reasoning models to review the code they generated would cut slop or find bugs, but this wasn't entirely true. The two major missing pieces were effective context assembly (context engineering) and verifying the veracity of the results.
 
@@ -82,8 +82,8 @@ Here are some examples from the open-source PRs.
 
 The "agentic" part means the AI decides which tools to run, interprets the results, and takes action. Think of it like having a senior engineer who knows when to dig deeper and when something is *not* fine.
 
-**How CodeRabbit closes the AI code trust gap** {#heading-how-coderabbit-closes-the-ai-code-trust-gap}
-------------------------------------------------------------------------------------------------------
+**How CodeRabbit closes the AI code trust gap**
+-----------------------------------------------
 
 Instead of chasing higher benchmark scores or relying on traditional metrics, CodeRabbit focuses on how AI systems actually perform in live engineering environments through custom evaluation methods, some visible directly on the PRs we review.
 

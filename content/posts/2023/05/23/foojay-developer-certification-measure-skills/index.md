@@ -26,7 +26,7 @@ All very important without a doubt, but you can still produce code without them.
 
 Surely, there is already Java certification out [there](https://education.oracle.com/oracle-certification-path/pfamily_48#path-p-prod-product_267 "there"). Oracle is offering Oracle Certified Associate and Professional certification for Java 8, 11 and 17. The LTS versions. Notably, associate seems to be discontinued, since it's only available for Java 8, but there's no good information about that available.
 
-### Determine the seniority of a developer {#h3-0-determine-the-seniority-of-a-developer}
+### Determine the seniority of a developer
 
 While these certification programs are definitely set up well, with excellent books and exams, you can argue they do not measure actual coding skills. If you have finished one of the certification programs you can testify that you will learn to think like a compiler and that you need to internalize important parts of the Java API.
 
@@ -44,9 +44,9 @@ Whiteboard coding and coding assignments are a way to assess skills. But how obj
 
 Sometimes an assignment takes days to complete, and if you're unlucky and - for instance as a consultant - looking for a new assignment you might need to make a number of coding assignments in parallel. Even though you've been coding for many years.
 
-### How to measure coding skills {#h3-1-how-to-measure-coding-skills}
+### How to measure coding skills
 
-We can do better as an industry, we think at Foojay. We came across a platform called GrepS that uses a model that is based on [scientific research](https://scholar.google.com/citations?user=p_E5TZcAAAAJ&amp;hl=no&amp;oi=ao "scientific research") (mostly by Assistant Professor Gunnar Bergerson from the Oslo University) about what skills predict the productivity of developers. This model has been tested on a large group of developers and now has sufficient data points to come to an 'objective' score for these skills.
+We can do better as an industry, we think at Foojay. We came across a platform called GrepS that uses a model that is based on [scientific research](https://scholar.google.com/citations?user=p_E5TZcAAAAJ&hl=no&oi=ao "scientific research") (mostly by Assistant Professor Gunnar Bergerson from the Oslo University) about what skills predict the productivity of developers. This model has been tested on a large group of developers and now has sufficient data points to come to an 'objective' score for these skills.
 
 What's extra interesting is that this platform has the ability to rotate tasks for each test taker and that, because of the model the scores of the tasks can be objectively compared and the final test score of tests with different tasks can be compared one on one.
 
@@ -54,7 +54,7 @@ The idea would be that a certification method based on this platform offers a ti
 
 Just do a certification test once and different people can use your score and wouldn't require you to do all these coding assignments. And you can retake the test anytime if you think you have improved. Moreover: you can find out how to improve based on the test result! Also would it allow organizations to track progress.
 
-### Foojay certification committee {#h3-2-foojay-certification-committee}
+### Foojay certification committee
 
 With this idea in mind, we had several brainstorms with many members of Foojay and next a Foojay certification committee was formed. about 10 months ago that had several meetings (thanks Rodolfo Felipe, Maarten Mulders, Geertjan Wielenga, Jago de Vreede and others).
 
@@ -70,7 +70,7 @@ These have been demoed recently by a spin-off workgroup to the certification com
 
 Ps. good to know: anyone is welcome to the committee, just join #certification on the [Foojay slack](https://join.slack.com/t/foojay/shared_invite/zt-1vbgap6ad-~jEIrCj1_v6_AyRe9imXJw "Foojay slack") and reach out to us.
 
-### Next steps: create tasks and test drive! {#h3-3-next-steps-create-tasks-and-test-drive}
+### Next steps: create tasks and test drive!
 
 The next goal is to create more tasks and this is something we would like to do with the community, meaning you.
 

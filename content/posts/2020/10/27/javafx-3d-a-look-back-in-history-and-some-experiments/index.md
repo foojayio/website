@@ -25,8 +25,8 @@ After my virtual conference talk ["Java and JavaFX on the Raspberry Pi" at the "
 
 Only one way to find out! Let's experiment!
 
-History of JavaFX 3D {#h2-0-history-of-javafx-3d}
--------------------------------------------------
+History of JavaFX 3D
+--------------------
 
 JavaFX is an open-source, next-generation Java library for rich client applications. JavaFX started with a focus on 2D UI elements.
 
@@ -70,10 +70,10 @@ Chess seems to be a popular topic for 3D-experiments as this final impressive ex
 
 {{< youtube 6uEbfeW-9Gg >}}
 
-**Let's experiment!** {#h2-1-let-s-experiment}
-----------------------------------------------
+**Let's experiment!**
+---------------------
 
-### **The code** {#h3-2-the-code}
+### **The code**
 
 For this post, I collected some existing stuff in this [GitHub JavaFX3D project](https://github.com/FDelporte/JavaFX3D/). I didn't use the original repositories but reworked them a bit to use Maven, so you can get started easily.
 
@@ -108,7 +108,7 @@ This application can load different 3D image file formats and visualize them.
  </ul>
 </figure>
 
-### **Build and run on PC** {#h3-3-build-and-run-on-pc}
+### **Build and run on PC**
 
 Let's try out if all this works on a Linux PC with OpenJDK 11. We will use this in combination with the current latest JavaFX provided by Gluon.
 
@@ -157,7 +157,7 @@ When the application has started, I opened the Duke image "allStacked_solidColor
  </div>
 </figure>
 
-### **JavaFX 3D on the Raspberry Pi** {#h3-4-javafx-3d-on-the-raspberry-pi}
+### **JavaFX 3D on the Raspberry Pi**
 
 #### Some examples
 
@@ -194,8 +194,8 @@ As this tweet of [José Pereda](https://twitter.com/JPeredaDnr) illustrates, smo
  </div>
 </figure>
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 **JavaFX 3D really is a hidden gem**! I've been using JavaFX already for a long time now but wasn't aware of these 3D features... And the demos presented here really impressed me.
 

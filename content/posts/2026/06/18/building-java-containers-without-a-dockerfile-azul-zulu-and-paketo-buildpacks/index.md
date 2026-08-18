@@ -28,20 +28,20 @@ frozen: false
 
 Every post in this series so far has shown you a Dockerfile. You pick a base image, copy a JAR, set an entrypoint, and ship. That works well. But Spring Boot developers often skip the Dockerfile entirely and still get a production-ready container with Azul Zulu as the JVM thanks to Paketo Buildpacks. Here is how that works, and how to configure it.
 
-What Are Paketo Build Packs? {#h-what-are-paketo-build-packs}
--------------------------------------------------------------
+What Are Paketo Build Packs?
+----------------------------
 
 [Paketo Buildpacks](https://paketo.io/) implement the [Cloud Native Buildpacks (CNB) specification](https://buildpacks.io/). A buildpack doesn't require a Dockerfile but instead inspects your application source. It decides what it needs to run and assembles a layered [Open Container Initiative (OCI)](https://opencontainers.org/) image. One layer provides the JVM (Azul Zulu), another compiles and packages the Java application, and others add launch helpers. Each concern stays separate and independently updatable.
 
 The [Paketo Java buildpack](https://github.com/paketo-buildpacks/java) handles everything a Java app needs: dependency download, compilation, layering, JVM injection, and launch configuration. The JVM itself comes from a separate, swappable buildpack. The [Paketo Buildpack for Azul Zulu](https://github.com/paketo-buildpacks/azul-zulu) (buildpack ID: `paketo-buildpacks/azul-zulu`) supplies that JVM layer using Azul Zulu Builds of OpenJDK. This Buildpack is maintained by Paketo, with [significant contributions](https://github.com/paketo-buildpacks/azul-zulu/commits/main/) by [Daniel Mikusa](https://github.com/dmikusa). The new Zulu versions from the most recent security update in April '26 were integrated into Paketo within 3 days of their release.
 
-Spring Boot Already Uses Paketo {#h-sprint-boot-already-uses-paketo}
---------------------------------------------------------------------
+Spring Boot Already Uses Paketo
+-------------------------------
 
 If you use the Spring Boot Maven Plugin and run `spring-boot:build-image`, Paketo does the work. The plugin calls the `paketobuildpacks/builder:base` builder by default. To use Azul Zulu, you add `paketobuildpacks/azul-zulu` in front of `paketobuildpacks/java` in the buildpacks list. This order matters because Paketo uses the first matching JVM buildpack.
 
-Setting Up the Demo Project {#h-setting-up-the-demo-project}
-------------------------------------------------------------
+Setting Up the Demo Project
+---------------------------
 
 The code examples in this post are available in [FDelporte/azul-paketo-demo](https://github.com/FDelporte/azul-paketo-demo). That directory contains a minimal Spring Boot application you can run yourself.
 
@@ -161,12 +161,12 @@ Starting PaketoApplication v1.0-SNAPSHOT using Java 25.0.3 with PID 1
 ```
 
 
-Configuring the Azul Zulu Buildpack {#h-configuring-the-azul-zulu-buildpack}
-----------------------------------------------------------------------------
+Configuring the Azul Zulu Buildpack
+-----------------------------------
 
 The Paketo buildpack accepts environment variables in two categories: build-time configuration (prefixed `BP_`) and launch-time configuration (prefixed `BPL_`). You set these inside the `<env>` block of the `spring-boot-maven-plugin` configuration.
 
-### Choosing the Java Version and Type {#h-choosing-the-java-version-and-type}
+### Choosing the Java Version and Type
 
 You can specifiy the Java version and type of runtime. Setting `BP_JVM_TYPE` to `JDK` keeps the full JDK in the runtime image. That is useful when your application needs JDK-only tools like `jmap` or `jstack`, but it increases image size and adds unnecessary tooling to a production container. Use `JRE` unless you have a specific reason not to.
 
@@ -193,7 +193,7 @@ You can specifiy the Java version and type of runtime. Setting `BP_JVM_TYPE` to 
 ```
 
 
-### Using jlink to Generate a Custom JRE {#h-using-jlink-to-generate-a-custom-jre}
+### Using jlink to Generate a Custom JRE
 
 The Azul Zulu buildpack supports `jlink` at build time via the `BP_JVM_JLINK_ENABLED` variable. When enabled, the buildpack runs `jlink` to produce a minimal JRE containing only the Java modules your application uses:
 
@@ -228,7 +228,7 @@ Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)
 ```
 
 
-### Enabling Observability and Debugging Features {#h-enabling-observability-and-debugging-features}
+### Enabling Observability and Debugging Features
 
 The buildpack can bake observability configuration into the image using `BPE_DEFAULT_` prefixed variables. These set default values for `BPL_` runtime flags without requiring the container runner to pass them explicitly.
 
@@ -278,13 +278,13 @@ Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)
 ```
 
 
-Complete Configuration Reference {#h-complete-configuration-reference}
-----------------------------------------------------------------------
+Complete Configuration Reference
+--------------------------------
 
 For the full and up-to-date list of `BP_` and `BPL_` variables, see the ["Configuration" section in the GitHub README of paketo-buildpacks/azul-zulu](https://github.com/paketo-buildpacks/azul-zulu#configuration%5BConfiguration).
 
-Using Paketo Without Spring Boot {#h-using-paketo-without-spring-boot}
-----------------------------------------------------------------------
+Using Paketo Without Spring Boot
+--------------------------------
 
 Paketo is not Spring Boot-specific. You can build any JVM application with the `pack` CLI directly.
 
@@ -332,8 +332,8 @@ Java 25.0.3 (Vendor: Azul Systems, Inc., version: Zulu25.34+17-CA)
 ```
 
 
-Container Size {#h-container-size}
-----------------------------------
+Container Size
+--------------
 
 Based on the examples in the repository, the following container sizes were created:
 
@@ -347,13 +347,13 @@ Based on the examples in the repository, the following container sizes were crea
 
 Apparently Spring Boot and `pack` deliver comparable container sizes.
 
-Which Zulu Image Does Paketo Use? {#h-which-zulu-image-does-paketo-use}
------------------------------------------------------------------------
+Which Zulu Image Does Paketo Use?
+---------------------------------
 
 As you can see in the [buildpack.toml file on GitHub](https://github.com/paketo-buildpacks/azul-zulu/blob/main/buildpack.toml) in `paketo-buildpacks/azul-zulu`, `.tar.gz` Community Availability (CA) versions of the Azul Zulu Builds of OpenJDK are used. They are directly pulled from Azul's CDN. Azul Zulu CA is free to download and use. As explained in [All Azul Zulu Container Images Explained](https://www.azul.com/blog/all-azul-zulu-container-images-explained-ca-sa-and-chainguard/), CA is the right choice for development, open-source projects, and deployments that do not require a commercial support contract.
 
-What This Means for Your Build Pipeline {#h-what-this-means-for-your-build-pipeline}
-------------------------------------------------------------------------------------
+What This Means for Your Build Pipeline
+---------------------------------------
 
 Paketo and Dockerfile-based builds solve different problems. Dockerfile builds give you full control over every layer. Paketo builds give you automatic memory tuning, NMT, JFR hooks, and a correctly layered image with no Dockerfile to maintain.
 

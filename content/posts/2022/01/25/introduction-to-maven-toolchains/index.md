@@ -27,8 +27,8 @@ I have projects on Java 8, 11, and 17 and sometimes I want to play with early ac
 
 How to make sure I can build them without having to constantly switch Java runtimes?
 
-Switching Java versions the whole day long {#h2-0-switching-java-versions-the-whole-day-long}
----------------------------------------------------------------------------------------------
+Switching Java versions the whole day long
+------------------------------------------
 
 Switching Java versions on the command line [doesn't have to be hard](https://maarten.mulders.it/2017/02/quickly-switch-java-versions-on-macos/). In my case, it's as easy as typing `j8`, `j11`, `j17`. But doing that every time you're seeing that "release version 17 not supported" is a bit tedious. More importantly, it doesn't solve the root cause of the issue.
 
@@ -54,8 +54,8 @@ But in my project, I've configured the Maven Compiler Plugin to set the `-releas
 
 The compiler from the Java 11 Development Kit obviously doesn't know how to target Java 17, hence we see "release version 17 not supported".
 
-Toolchains to the rescue! {#h2-1-toolchains-to-the-rescue}
-----------------------------------------------------------
+Toolchains to the rescue!
+-------------------------
 
 Luckily, the solution is right at our disposal. In fact, the ["Compiling Sources Using A Different JDK" guide](https://maven.apache.org/plugins/maven-compiler-plugin/examples/compile-using-different-jdk.html) of the Maven Compiler Plugin starts with it:
 > The preferable way to use a different JDK is to use the toolchains mechanism.
@@ -114,8 +114,8 @@ jdk [ version='17' ]
 
 That's a clear message: Maven cannot build this project as there is no JDK toolchain with version 17 installed. Well - there is, but we didn't tell Maven where to find it.
 
-Defining Toolchains {#h2-2-defining-toolchains}
------------------------------------------------
+Defining Toolchains
+-------------------
 
 We can do that using the [Toolchain Configuration](https://maven.apache.org/ref/3.6.3/maven-core/toolchains.html), which lives in **\~/.m2/toolchains.xml**.
 
@@ -141,8 +141,8 @@ As you can see, this file contains the full path to a Java installation.
 
 This makes the file specific to the machine where it is stored. That's why its location is in the **.m2** directory for the local user, and why the file cannot be part of the project's source code version control. Everyone who works on the team will need their own copy of the file, adapting it as needed for the correct paths. That also includes the build servers where the project will be built!
 
-Popularity of Toolchains {#h2-3-popularity-of-toolchains}
----------------------------------------------------------
+Popularity of Toolchains
+------------------------
 
 Some ten months ago, I [asked around on Twitter](https://twitter.com/mthmulders/status/1367754038826201089) to see if people know this feature, and whether they use it.
 
@@ -161,8 +161,8 @@ I think part of the explanation is that Maven itself is written in Java.
 
 Imagine if Maven was written in another language. In that case, you would always have to specify where to find a Java Development Kit, as Maven wouldn't know it automatically. But now that Maven runs on the JVM, it already knows one JVM it could use. It may not be the best one for the current project, but at least it is one, and it will attempt to use it.
 
-What's Next? {#h2-4-what-s-next}
---------------------------------
+What's Next?
+------------
 
 We already saw that the Maven Compiler Plugin understands the concept of Toolchains and knows how to use it.
 

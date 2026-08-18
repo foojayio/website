@@ -34,8 +34,8 @@ When we have a flexible team with a relatively small and familiar code base, tou
 
 [![](Trapped-657x510.png)](https://www.goodtechthings.com/locked-in/)
 
-The Legacy Project {#h2-0-the-legacy-project}
----------------------------------------------
+The Legacy Project
+------------------
 
 The hard part is touching code in legacy projects. As a consultant, I had to do that often. How do you enter a project with a million lines of code and start refactoring?
 
@@ -47,8 +47,8 @@ Old tools keep the stale bit rot. This is an opportunity. Revisit the project an
 
 Getting it to work on my Mac with LLVM and VS Code helped me visualize the moving pieces more clearly. Once I had a debugger up and running, fixing the bugs and weird issues became trivial. I can't say I fully understood that codebase. But the process of porting and updating the tools exposed me to many nuances and issues.
 
-When You Can't {#h2-1-when-you-can-t}
--------------------------------------
+When You Can't
+--------------
 
 The flip side of that were cases where an existing legacy system is a customer requirement. I had to implement integrations with legacy systems that were external black boxes. We didn't need to touch their code, but we needed to interface with these systems and rely on their behaviors. This is a very challenging situation.
 
@@ -68,8 +68,8 @@ E.g., in a case of a stock market purchase command that fails a trader might pre
 
 Such mistakes can be very costly and originate from that black box. Without reviewing the legacy code fully and understanding it, we can make no guarantee. What we can do is respond promptly and accurately to failures of this type. Debuggability is important in these situations hence the importance of observability and isolation in such a black box.
 
-Confidence Through Observability {#h2-2-confidence-through-observability}
--------------------------------------------------------------------------
+Confidence Through Observability
+--------------------------------
 
 In the past, we used to watch the server logs whenever we pushed a new release. Waiting for user complaints to pour in. Thanks to observability we're the first to know about a problem in our production. Observability flipped the script.
 
@@ -83,8 +83,8 @@ A lot of focus has been given in languages to the non-null capabilities of langu
 
 Not to mention dependencies on the environmental state. This isn't tenable and enforcing this check-in runtime would be even more expensive. However, this is something we can consciously do in entry points to our module or microservice. The fail-fast principle is essential when integrating with legacy systems because of the unpredictable nature of the result.
 
-Summary {#h2-3-summary}
------------------------
+Summary
+-------
 
 In the '90's I used to take a bus to my job.
 

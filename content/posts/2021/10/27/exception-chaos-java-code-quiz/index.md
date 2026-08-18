@@ -67,7 +67,7 @@ D) -excfinoferrorJVMError
 
 E) -runoferrorJVMError
 
-### Warning: Try to answer the correct alternative BEFORE seeing the answer! Only then will you refine your Java skills! {#h3-0-warning-try-to-answer-the-correct-alternative-before-seeing-the-answer-only-then-will-you-refine-your-java-skills}
+### Warning: Try to answer the correct alternative BEFORE seeing the answer! Only then will you refine your Java skills!
 
 Working correctly with exceptions is crucial to a high-quality application that users enjoy using.
 

@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### What you'll learn {#h3-0-what-you-ll-learn}
+### What you'll learn
 
 * How the MongoDB Spring repository can be used to abstract MongoDB operations
 * Separating Reads and Writes in your application
@@ -34,13 +34,13 @@ Spring Boot applications generally have two main components to a repository patt
 
 The code in this article is based on the [grocery item sample app](https://github.com/mongodb-developer/mongodb-springboot). View the [updated version of this code](https://github.com/mongodb-developer/CQRSModelSpring) used in this article. Note the connection string in the application.properties file passes the app name of 'devrel-blog-java-cqrs' to the DB.
 
-The Spring standard repository {#h2-1-the-spring-standard-repository}
----------------------------------------------------------------------
+The Spring standard repository
+------------------------------
 
 The standard repo items can extend the base MongoRepository class. This greatly reduces the amount of code needed for standard CRUD operations. However, if we're using the CQRS pattern, we'll want to use custom repositories for both the read and write functions to the DB. We can still use standard Spring functions for some of our read functionality.
 
-Creating separate repositories for the read and write {#h2-2-creating-separate-repositories-for-the-read-and-write}
--------------------------------------------------------------------------------------------------------------------
+Creating separate repositories for the read and write
+-----------------------------------------------------
 
 To implement CQRS, we'll need two custom repos in Spring. One for the reads and one for the writes. Although this may add a little bit of complexity up front, this will make it easier to modify going forward. Consider the following changes that may need to be made in the future:
 
@@ -49,7 +49,7 @@ To implement CQRS, we'll need two custom repos in Spring. One for the reads and 
 * New security requirements, such as permissioning and encryption.
 * Reading and writing to different data sources.
 
-### The read Repository {#h3-3-the-read-repository}
+### The read Repository
 
 Our first repository will be for data reading. Note that this repo only queries the DB. In our case, we'll call it ItemReadRepository:
 
@@ -83,7 +83,7 @@ project({"name" : 1, "quantity" : 1})
 
 * **count**: This simply counts the items in the collection.
 
-### The write repository {#h3-4-the-write-repository}
+### The write repository
 
 The next repository will be for writing data (C, U, and D of CRUD). This repo only writes to the DB. In our case, we'll call it ItemWriteRepository:
 
@@ -157,8 +157,8 @@ public class ItemWriteRepositoryImpl implements ItemWriteRepository {
 ```
 
 
-When requirements change {#h2-5-when-requirements-change}
----------------------------------------------------------
+When requirements change
+------------------------
 
 At some point in the future, we decide to add validation to the groceryItem so that the quantity must be greater than zero. Since we don't need to worry about this when reading data, we only need to modify the ItemWriteRepository in order to implement this check:
 
@@ -195,8 +195,8 @@ public void insert(GroceryItem itm){
 
 In our code example, we also have an "updateItemQuantity" function. Since this only takes a name and a new quantity, the rule regarding quantity \> 0 can be applied in this function by checking the 'newQuantity' parameter before doing the update. When using the CQRS pattern with Spring, we can be certain that we only need to update a single repository ItemWriteRepository, to ensure that ALL sources of application writes will apply the rules consistently.
 
-The double-edged sword of Spring updates in MongoDB {#h2-6-the-double-edged-sword-of-spring-updates-in-mongodb}
----------------------------------------------------------------------------------------------------------------
+The double-edged sword of Spring updates in MongoDB
+---------------------------------------------------
 
 I've discussed this previously in my article [Building Java Microservices with the Repository Pattern](https://foojay.io/today/building-java-microservices-with-the-repository-pattern/), but it bears repeating here. In the code examples above, we wrote our own update statement to change a category. This is preferred to calling the saveAll repository function for several reasons:
 
@@ -206,13 +206,13 @@ I've discussed this previously in my article [Building Java Microservices with t
 
 Why should we avoid save() and saveAll() when updating documents? The main reasons to avoid these are for network traffic and oplog bloat. Let's discuss these individually.
 
-### Increased network traffic {#h3-7-increased-network-traffic}
+### Increased network traffic
 
 In the original example, changing the category of a set of items required each document to be retrieved from the DB to the client. When there are only a couple of documents, this amount of overhead won't make much of a difference. However, imagine the traffic we would incur if there were thousands of items that had to have their categories changed. This could also consume a significant amount of memory on the client fetching this list.
 
 When the saveAll() method is called, Spring will iterate through each document in the list to determine if it's a new document needing to be inserted or an existing one needing to be replaced. This is also a drag on performance as it must iterate through the list, check for the existence of the document by _id, and then decide what to do. Each document in this list will be sent to the DB individually. This is also a non-atomic operation, which could result in a partial update should there be some sort of error or outage.
 
-### Oplog bloat and replacing documents {#h3-8-oplog-bloat-and-replacing-documents}
+### Oplog bloat and replacing documents
 
 The MongoDB operation log (or oplog) is how MongoDB replicates writes from the primary to secondaries. The oplog is a capped collection in MongoDB, meaning it is typically a fixed size. Although this collection can grow beyond its configured size, it's best to minimize data from each operation in order to reduce storage requirements and data going across the network. As the size of each operation grows in the oplog, fewer can fit before the oldest ones are overwritten in the collection. This translates into a smaller oplog window, which is the time a secondary can be offline and able to catch up when coming back online.
 
@@ -248,8 +248,8 @@ Using the 'updateMulti' function in our bulkUpdateItemCategories function, this 
 
 In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 The Command Query Responsibility Segregation (CQRS) model can (and should) be used to separate read and write logic. This has several benefits:
 
@@ -266,7 +266,7 @@ There are a few downsides to CQRS:
 
 Avoid using the standard Spring save() and saveAll() methods to update documents. They take a brute force approach by replacing the entire document, which can lead to significantly more network traffic, poor performance, and negative impacts on cluster availability due to oplog bloat.
 
-### Further reading {#h3-10-further-reading}
+### Further reading
 
 * [Building Java Microservices with the Repository Pattern](https://foojay.io/today/building-java-microservices-with-the-repository-pattern/)
 

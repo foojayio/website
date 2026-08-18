@@ -28,16 +28,16 @@ A quick recap:
 * Execution of maven is done via **plugins** which define **goals**.
 * **Goals** can be associated with **phases** (or may simply be run independent of phases).
 
-What are plugins? {#h2-0-what-are-plugins}
-------------------------------------------
+What are plugins?
+-----------------
 
 Maven is a plugin-execution framework. Plugins are an assembly of goals, code written as MOJOs (*Maven's plain Old Java Objects, Modern MOJOs are not restricted to being written in Java*). Goals have names and can be bound to phases. A MOJO declares its goal name and optionally, a phase association, which binds the class to a part of a lifecycle.
 ![Image displays a plugin-lifecycle relationship. Plugins define goals. Goals can be bound to phases. Goals from multiple plugins can be bound to a single phase.](https://cgunturme.files.wordpress.com/2020/07/mavenplugins.png?w=1024) Plugins define goals. Goals can be bound to phases. Goals from multiple plugins can be bound to a single phase.
 
 A plugin is typically a `.jar` file which contains the MOJO classes and a `META-INF/maven/plugins.xml`. This `plugins.xml` is generated as a part of the maven execution of the plugin code.
 
-Types of plugins {#h2-1-types-of-plugins}
------------------------------------------
+Types of plugins
+----------------
 
 Broadly, plugins are of two types:
 > <br />
@@ -57,14 +57,14 @@ Furthermore, plugins can be classified as:
 >
 > **tooling plugins** -- Plugins related to general tooling during the maven execution. Examples include `assembly`, `help`, `enforcer` `toolchains` etc.
 
-### Plugins from Maven -- versus -- custom plugins {#h3-2-plugins-from-maven-versus-custom-plugins}
+### Plugins from Maven -- versus -- custom plugins
 
 Official Maven plugins developed as a part of Apache Maven have a standard naming convention: `maven-`**<plugin shortName>**`-plugin`. This naming convention is reserved and **SHOULD NOT** be used by plugins which do not have a **groupId** of `org.apache.maven.plugins` and are not found on a maven repository under `ord/apache/maven/plugins` directory.
 
 Plugins developed with other **groupId** s typically have a name of **<plugin shortName>**`-maven-plugin`.
 
-How to learn about a plugin {#h2-3-how-to-learn-about-a-plugin}
----------------------------------------------------------------
+How to learn about a plugin
+---------------------------
 
 Standard plugins from Apache Maven have a consistent site structure under a common site: <https://maven.apache.org/plugins/index.html>.
 
@@ -74,34 +74,34 @@ In addition to the standard menu items, a plugin landing page can provide links 
 
 The plugin site is the best way to start understanding a plugin provided by Apache Maven. Plugins developed external to Apache Maven should attempt to follow similar conventions to ensure easier comprehension by the users.
 
-How to use plugins in a project POM {#h2-4-how-to-use-plugins-in-a-project-pom}
--------------------------------------------------------------------------------
+How to use plugins in a project POM
+-----------------------------------
 
 Plugins are configured in a POM under ***either*** the `<build>` ***or*** the `<reporting>` ***or*** the `<profiles> -> <profile>` element. A plugin can be *located* using the standard maven G-A-V (GroupId-ArtifactId-Version) coordinates. In addition to the location coordinates, a plugin has a few other elements that are optional.
 
-### Extensions {#h3-5-extensions}
+### Extensions
 
 The **extensions** is a flag to determine if Maven extensions from the plugin should be loaded. The value is a `true` or `false`, however, the current datatype in the schema is a `String` (for some technical reasons). The default value is `false` and it is rarely enabled. Typical use cases for enabling this is when defining a ***custom lifecycle*** or ***packaging types***.
 
-### Inherited {#h3-6-inherited}
+### Inherited
 
 Will be covered in a section below, but **inherited** is a boolean flag that is `true` by default. As with **extensions** the datatype in the schema is a `String`. Setting **inherited** to `false` prevents propagation of the configuration to any child POM of the current one.
 
-### Executions {#h3-7-executions}
+### Executions
 
 The **executions** is a complex element and contains a set of **execution** elements. At its core, maven executes such definitions. An **execution** specified the set of goals to execute during the lifecycle. An **execution** is a complex element that has a unique **id** , a **phase** to bind one or more **goal** s to, an **inherited** flag (*similar to the one defined for a plugin, also set as a `String` datatype* ), a **goals** element which is a set of `String` **goal** elements that are bound to the phase, and a generic **configuration** element.
 
-### Dependencies {#h3-8-dependencies}
+### Dependencies
 
 The **dependencies** is a complex element and contains a set of **dependency** elements. The **dependency** definitions listed here are used by the plugin and loaded by the plugin classloader.
 
-### Configuration {#h3-9-configuration}
+### Configuration
 
 The **configuration** is a complex element which allows for a free-form DOM configuration used by the plugin. The configuration specifics are typically listed (*and recommended, in case of custom plugins*) in the Usage page for a given plugin.
 ![](https://cgunturme.files.wordpress.com/2020/07/mavenpomplugins-1.png?w=1024) A visual of the plugin element
 
-Plugin Inheritance {#h2-10-plugin-inheritance}
-----------------------------------------------
+Plugin Inheritance
+------------------
 
 Plugins have a inheritance logic similar to dependencies. A **plugin** declared in a parent POM is inherited into the child POM unless the parent declares the **inherited** flag to `false`. Setting the **inherited** flag to `false` breaks the inheritance.
 
@@ -109,14 +109,14 @@ In addition, a **pluginManagement** section in a POM functions the same way a **
 
 There is currently no equivalent in a **bill-of-materials** for a plugin, although, there is an open issue for introducing such a facility. Link: <https://issues.apache.org/jira/browse/MNG-5588>
 
-### Mixin Maven Plugin {#h3-11-mixin-maven-plugin}
+### Mixin Maven Plugin
 
 Not officially an Apache Maven plugin, but the `mixin-maven-plugin` deserves a special mention. The plugin allows for including multiple pluginManagement sections without needing to inherit the plugins from a single parent. Using this plugin allows for a build behavior to be made more modular.
 
 More about the mixin-maven-plugin: <https://github.com/odavid/maven-plugins/tree/master/mixin-maven-plugin>
 
-Links to learn more {#h2-12-links-to-learn-more}
-------------------------------------------------
+Links to learn more
+-------------------
 
 Introduction to Plugins: <https://maven.apache.org/guides/introduction/introduction-to-plugins.html>
 

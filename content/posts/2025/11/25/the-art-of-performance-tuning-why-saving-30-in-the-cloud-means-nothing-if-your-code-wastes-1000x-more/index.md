@@ -23,8 +23,8 @@ enlighterjs: true
 frozen: false
 ---
 
-The Hidden Cost of "Good Enough" Code {#h2-0-the-hidden-cost-of-good-enough-code}
----------------------------------------------------------------------------------
+The Hidden Cost of "Good Enough" Code
+-------------------------------------
 
 A few weeks ago, Kirk Pepperdine published a fascinating performance challenge --- a small Java code snippet that appeared trivial but produced puzzling runtime behavior.
 
@@ -40,8 +40,8 @@ We all love to talk about cloud cost optimization --- how to save 30%, 40%, mayb
 
 That's the real art of performance tuning --- not chasing milliseconds, but seeing where we're blind to inefficiency.
 
-A Quick Reality Check -- Programming Languages and Energy {#h2-1-a-quick-reality-check-programming-languages-and-energy}
-------------------------------------------------------------------------------------------------------------------------
+A Quick Reality Check -- Programming Languages and Energy
+---------------------------------------------------------
 
 A remarkable study comparing the [energy efficiency of 27 programming languages](https://appdevelopermagazine.com/how-27-programming-languages-differ-in-energy-consumption/ "energy efficiency of 27 programming languages") quantified what many of us intuitively know: language choice matters --- not just for speed, but for environmental impact.
 
@@ -57,10 +57,10 @@ Not by buying more servers, but by thinking smarter about how existing systems u
 
 That's what this article is about --- how thinking differently about code can do more for performance (and cost) than all the hardware tuning in the world.
 
-Let's see how good am I with performance analysis {#h2-2-let-s-see-how-good-am-i-with-performance-analysis}
------------------------------------------------------------------------------------------------------------
+Let's see how good am I with performance analysis
+-------------------------------------------------
 
-### Step One -- Exceptions as Logic {#h3-3-step-one-exceptions-as-logic}
+### Step One -- Exceptions as Logic
 
 The naive baseline looked like this:
 
@@ -94,7 +94,7 @@ This is where the journey begins --- three datasets, each one messier than the l
 
 <br />
 
-### Step Two -- The RegExp Trap {#h3-4-step-two-the-regexp-trap}
+### Step Two -- The RegExp Trap
 
 Determined to fix this, I thought: Let's just validate inputs before parsing them. Naturally, I reached for regular expressions:
 
@@ -128,7 +128,7 @@ In one of my own projects, a regex intended to filter invalid IDs became a CPU f
 
 *Regexes are like wildcards in SQL --- fine for a few records, dangerous at scale. --- showing orders-of-magnitude slowdowns in real production code.*
 
-### Step Three -- Let the CPU Breathe {#h3-5-step-three-let-the-cpu-breathe}
+### Step Three -- Let the CPU Breathe
 
 Next, I tried something simpler. What if we just used what Java already offers --- without regex magic or exception traps?
 
@@ -166,7 +166,7 @@ While not perfect, they're good enough for most cases and let you create perform
 As a senior engineer once told me:
 > *"Good code isn't the shortest path to an answer --- it's the path with the fewest surprises for the CPU, and for a developer."*
 
-### Step Four -- Handcrafted Precision {#h3-6-step-four-handcrafted-precision}
+### Step Four -- Handcrafted Precision
 
 But I wanted to know how far I could go. So I stripped away even the built-ins and wrote my own version:
 
@@ -211,7 +211,7 @@ When Does This Level of Optimization Make Sense?
 
 *Still, such optimizations come with cost: more complexity, less universality. Use them deliberately, not habitually.*
 
-### Step Five -- Fail Faster, Think Smarter {#h3-7-step-five-fail-faster-think-smarter}
+### Step Five -- Fail Faster, Think Smarter
 
 Finally, I built a version that failed fast, checked the simplest conditions first, and skipped unnecessary work.
 
@@ -238,8 +238,8 @@ This version delivered 10× to 50× better performance than the original --- nea
 
 At that point, I realized something: The process of optimization itself teaches more than the final result. Each step --- exception removal, regex replacement, loop simplification --- peeled away layers of waste. The outcome wasn't just faster code. It was clearer thinking.
 
-The Economics of Efficiency {#h2-8-the-economics-of-efficiency}
----------------------------------------------------------------
+The Economics of Efficiency
+---------------------------
 
 Cloud computing gives us infinite scalability --- and infinite temptation to ignore waste.
 
@@ -263,8 +263,8 @@ Efficiency scales people, not just servers.
 
 Compute equals energy. Wasteful software silently increases carbon footprint. Optimized code isn't just cheaper --- it's greener. Cloud efficiency and sustainability start at the keyboard, not in the billing dashboard.
 
-The Art, Not the Algorithm {#h2-9-the-art-not-the-algorithm}
-------------------------------------------------------------
+The Art, Not the Algorithm
+--------------------------
 
 Performance tuning is less about syntax and more about craftsmanship. It's about curiosity, attention to detail, and respect for the machine. It's about seeing beauty in precision and economy of motion.
 
@@ -276,8 +276,8 @@ Knuth wrote The Art of Computer Programming, not The Science, for a reason: scie
 
 Every optimization has a cost. The trick is knowing which costs are worth paying.
 
-Closing Thoughts -- Code as Craft {#h2-10-closing-thoughts-code-as-craft}
--------------------------------------------------------------------------
+Closing Thoughts -- Code as Craft
+---------------------------------
 
 My final implementation wasn't perfect. Kirk's was still a little faster. But that's not the point. The point is that software waste is invisible until you measure it. We've normalized inefficiency because the cloud hides it behind elasticity. We call it resilience, but it's often just overprovisioning.
 

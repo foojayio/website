@@ -93,7 +93,7 @@ d) 0
 
 e) ArrayOutOfBoundsException will be thrown
 
-### Warning: Try to answer the correct alternative BEFORE seeing the answer! Only then you will refine your Java skills! {#h3-0-warning-try-to-answer-the-correct-alternative-before-seeing-the-answer-only-then-you-will-refine-your-java-skills}
+### Warning: Try to answer the correct alternative BEFORE seeing the answer! Only then you will refine your Java skills!
 
 The correct answer is... what do you think?
 

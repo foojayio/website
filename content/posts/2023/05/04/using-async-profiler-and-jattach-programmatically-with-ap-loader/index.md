@@ -54,12 +54,12 @@ The ap-loader library consists of multiple parts:
 
 All but the `AsyncProfilerLoader` class is just copied from the underlying async-profiler release. ap-loader contains all Java classes from async-profiler, but I omit the helper classes here for brevity.
 
-AsyncProfilerLoader {#h2-0-asyncprofilerloader}
------------------------------------------------
+AsyncProfilerLoader
+-------------------
 
 This is the main entry point to ap-loader; it lives in the `one.profiler` package like the AsyncProfiler class. Probably the most essential method is `load`:
 
-### Load {#h3-1-load}
+### Load
 
 The `load` method loads the included async-profiler library for the current platform:
 
@@ -87,8 +87,8 @@ This might still throw `IOException`s, but they should never happen in normal ci
 
 If you want to merely get the path to the extracted libAsyncProfiler, then use the `getAsyncProfilerPath method` which throws the same exceptions as the `load` method. A similar method exists for jattach (`getJattachPath`).
 
-Execute Profiler {#h2-2-execute-profiler}
------------------------------------------
+Execute Profiler
+----------------
 
 The async-profiler project contains the [profiler.s](https://github.com/jvm-profiling-tools/async-profiler#profiler-options)`h` script (will be replaced by `asprof` starting with async-profiler 2.10):
 > To run the agent and pass commands to it, the helper script `profiler.sh` is provided. A typical workflow would be to launch your Java application, attach the agent and start profiling, exercise your performance scenario, and then stop profiling. The agent's output, including the profiling results, will be displayed in the Java application's standard output.
@@ -117,8 +117,8 @@ public static class ExecutionResult {
 
 `executeProfiler` throws an `IOException` if the profiler execution failed.
 
-Execute Converter {#h2-3-execute-converter}
--------------------------------------------
+Execute Converter
+-----------------
 
 You cannot only use the converter by using the classes from the `one.profiler.converter`, but you can also execute the converter by calling `ExecutionResult executeProfiler(String... args)`, e.g., the following:
 
@@ -133,8 +133,8 @@ java -cp converter.jar \
 
 The `executeConverter` returns the output of the conversion tool on success and throws an `IOException` on error, as before.
 
-JAttach {#h2-4-jattach}
------------------------
+JAttach
+-------
 
 There are multiple ways to use the embedded [jattach](https://github.com/jattach/jattach) besides using the binary returned by `getJattachPath`: `ExecutionResult executeJattach(String... args)` and `boolean jattach(Path agentPath[, String arguments])`.
 
@@ -170,8 +170,8 @@ AsyncProfilerLoader.jattach("libjni.so")
 
 This attaches the `libjni.so` agent to the current JVM. The process id of this JVM can be obtained by using the `getProcessId` method.
 
-Extracting a Native Library {#h2-5-extracting-a-native-library}
----------------------------------------------------------------
+Extracting a Native Library
+---------------------------
 
 I happen to write many small projects for testing profilers that often require loading a native library from the resources folder; an[example](https://github.com/parttimenerd/trace_validation/blob/78ad8dd70233b33c266bcec834b3c808568425e1/src/runtime/me/bechberger/trace/NativeChecker.java#LL11C1-L44C6) can be found in the [trace_validation](https://github.com/parttimenerd/trace_validation) ([blog post](https://mostlynerdless.de/blog/2023/03/14/validating-java-profiling-apis/)) project:
 
@@ -253,8 +253,8 @@ one.profiler.AsyncProfilerLoader.jattach(p, "optional arguments")
 
 *This use-case comes from a profiler test helper library on which I hope to write an article in the near future.*
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 ap-loader makes it easy to use async-profiler and its included tools programmatically without creating complex build systems. The project is regularly updated to keep pace with the newest stable async-profiler version; updating a version just requires changing a single dependency in your dependencies list.
 

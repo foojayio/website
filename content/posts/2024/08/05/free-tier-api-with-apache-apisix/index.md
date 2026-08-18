@@ -24,8 +24,8 @@ frozen: false
 
 In this day and age, most services are online and accessible via an API. Today, we will implement a free tier with [Apache APISIX](https://apisix.apache.org/).
 
-A naive approach {#h2-0-a-naive-approach}
------------------------------------------
+A naive approach
+----------------
 
 I implemented a free tier in my post [Evolving your RESTful APIs, a step-by-step approach](https://blog.frankel.ch/evolve-apis/#know-your-users), albeit in a very naive way. I copy-pasted the [limit-count](https://apisix.apache.org/docs/apisix/plugins/limit-count/) plugin and added my required logic.
 
@@ -58,8 +58,8 @@ function _M.access(conf, ctx)
 
 The downside of this approach is that the code is now my own. It has evolved since I copied it, and I'm stuck with the version I copied. We can do better, with the help of the `vars` parameter on routes.
 
-APISIX route matching {#h2-1-apisix-route-matching}
----------------------------------------------------
+APISIX route matching
+---------------------
 
 APISIX delegates its matching rule to a [router](https://apisix.apache.org/docs/apisix/terminology/router/).  
 
@@ -131,8 +131,8 @@ routes:
 
 1. Evaluated first. The order is not relevant since the URIs are disjointed.
 
-Implementing free tier with matching rules {#h2-2-implementing-free-tier-with-matching-rules}
----------------------------------------------------------------------------------------------
+Implementing free tier with matching rules
+------------------------------------------
 
 We are now ready to implement our free tier with matching rules.
 
@@ -175,8 +175,8 @@ When you configure APISIX with the above snippets, and it receives a request to 
    * If it fails, APISIX returns a 403 HTTP status code
 2. If it has no such request header, it matches the second route with a rate limit.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 A free tier is a must for any API service provider worth its salt. In this post, I've explained how to configure such free tier with Apache APISIX.
 

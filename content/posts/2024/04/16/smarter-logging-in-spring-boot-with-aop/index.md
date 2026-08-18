@@ -23,8 +23,8 @@ Hey **AOP** fan, after explaining the basics of AOP in ***[Part 1](https://fooja
 
 The complete example can be found on ***[GitHub](https://github.com/mezocode/healthcare-management-system/blob/main/src/main/java/com/mezocode/healthcare/shared/aop/LoggingAspect.java).***
 
-**The Problem with Logging Everywhere** {#h2-0-the-problem-with-logging-everywhere}
------------------------------------------------------------------------------------
+**The Problem with Logging Everywhere**
+---------------------------------------
 
 As software developers, we know the importance of logging 📝. But scattering log statements everywhere comes with drawbacks:
 
@@ -68,8 +68,8 @@ This leads to a dilemma - log everything and suffer messy code, or omit logging 
 
 There must be a better way! 🤔
 
-**Introducing Aspect-Oriented Logging** {#h2-1-introducing-aspect-oriented-logging}
------------------------------------------------------------------------------------
+**Introducing Aspect-Oriented Logging**
+---------------------------------------
 
 With AOP, we can modularize cross-cutting concerns like logging away from core functionality. Let's see it in action!
 
@@ -130,8 +130,8 @@ DoctorController -> getDoctor(id = 1, date = mydate)
 
 This output shows method names and parameters being logged systematically, and the name parameter is hidden, thanks to AOP.
 
-**Smart Logging Techniques 🧠** {#h2-2-smart-logging-techniques}
-----------------------------------------------------------------
+**Smart Logging Techniques 🧠**
+-------------------------------
 
 We can take it further by controlling what gets logged based on metadata.
 
@@ -145,8 +145,8 @@ public void updateUser(Long id, String password) {
 ```
 
 
-**Smart Logging Technique Output** {#h2-3-smart-logging-technique-output}
--------------------------------------------------------------------------
+**Smart Logging Technique Output**
+----------------------------------
 
 With smart logging annotations, you get precise control over logged information:
 
@@ -159,8 +159,8 @@ INFO: Exiting UserService.updateUser
 
 Passwords are masked, while IDs are shown, enhancing both security and clarity.
 
-**Where to Go from Here** {#h2-4-where-to-go-from-here}
--------------------------------------------------------
+**Where to Go from Here**
+-------------------------
 
 With AOP, we can log smarter, not harder! Some ideas:
 

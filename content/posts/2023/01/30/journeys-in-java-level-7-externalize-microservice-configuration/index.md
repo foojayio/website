@@ -38,8 +38,8 @@ In this article, we will walk through how to set up a service that hosts the Spr
 
 Let's dive in!
 
-Architecture {#_architecture}
------------------------------
+Architecture
+------------
 
 We began this microservices project with minimum functionality explained in the [level 1 blog post](https://jmhreif.com/blog/microservices-level1/). In our last post ([level6](https://jmhreif.com/blog/microservices-level6/)), we added a graph database to our microservices system to take advantage of data relationships between books, authors, and reviews.
 
@@ -53,8 +53,8 @@ We haven't incorporated our Neo4j service to the rest of our Docker Compose syst
 
 Until then, our intermediary step is to add the `config-server` service and plug that into our existing `service4` that connects to Neo4j.
 
-Spring Cloud Config {#_spring_cloud_config}
--------------------------------------------
+Spring Cloud Config
+-------------------
 
 The [project overview for Spring Cloud Config](https://spring.io/projects/spring-cloud-config) has a good explanation of design and usage, but I'll briefly put it into my own words here.
 
@@ -62,8 +62,8 @@ Spring Cloud Config gives us a way to externalize configuration, so that individ
 
 Without further ado, let's start coding!
 
-Applications - Spring Cloud Config Server {#_applications_spring_cloud_config_server}
--------------------------------------------------------------------------------------
+Applications - Spring Cloud Config Server
+-----------------------------------------
 
 As we have done with our previous services, we will use the Spring Initializr at [start.spring.io](https://start.spring.io/) to set up the outline for our config server application.
 
@@ -87,7 +87,7 @@ Just like with our other services, we need to specify a port number for this app
 
 On to the project code!
 
-### Config Server - project code {#_config_server_project_code}
+### Config Server - project code
 
 There is very little we need to add, since we are using the default setup. We don't have any big customizations or features required for now. So, there is only one small annotation we need to add to the `ConfigServerApplication.java` class.
 
@@ -106,8 +106,8 @@ The `@EnableConfigServer` annotation notifies Spring that this application needs
 
 Now we need to add our configuration file that will contain the database credentials!
 
-Storing config values {#_storing_config_values}
------------------------------------------------
+Storing config values
+---------------------
 
 We need an externalized place for our configuration values to reside, i.e. a file with our database credentials for config server to retrieve. Most of the tutorials you find on Spring Cloud Config recommend starting with a local config folder containing either a `.properties` or `.yaml` file. I went with the YAML file for this project.
 
@@ -135,8 +135,8 @@ microservices-java-config % git commit -am "Initial commit"
 
 Let's test our config server application!
 
-Test Config Server {#_test_config_server}
------------------------------------------
+Test Config Server
+------------------
 
 Start the application from your IDE or command line. To test, we need to figure out the correct URL to ping. First, we are running the application locally and set the port to `8888`, so the first part of the URL is `localhost:8888`. The rest of the URL is what confused me in most of the tutorials, but once you know what the application is looking for, it isn't as intimidating.
 
@@ -152,8 +152,8 @@ Figure 2. Neo4j config results
 
 Next, we need to plug our client service (`service4`) in to use the config server we just set up.
 
-Service4 - modifications {#_service4_modifications}
----------------------------------------------------
+Service4 - modifications
+------------------------
 
 To start, we need to add a dependency to `service4` for the Spring Cloud Config client. Open the `pom.xml` and add the following items:
 
@@ -201,8 +201,8 @@ This actually wraps up all of our changes to the Neo4j service! We don't need to
 
 Let's test it!
 
-Put it to the test {#_put_it_to_the_test}
------------------------------------------
+Put it to the test
+------------------
 
 As always, we will kick things off from the bottom to the top. First, ensure the Neo4j AuraDB instance is still running. *\*Note:\* AuraDB free tier pauses automatically after 3 days. You can resume with the `play` icon on the instance.*
 
@@ -223,8 +223,8 @@ Figure 3. Find 1000 reviews
 
 Figure 4. Find reviews by book
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 Today, we incorporated the Spring Cloud Config project to manage and provide database credentials to our Neo4j microservice.
 
@@ -241,8 +241,8 @@ There are still a few things that we can do on this topic.
 
 Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github: [microservices-level7](https://github.com/JMHReif/microservices-level7) repository
 * Github: [Meta repository for all related content](https://github.com/JMHReif/microservices-java)

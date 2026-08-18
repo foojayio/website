@@ -24,8 +24,8 @@ Code challenges are a nice way to challenge yourself with programming, resulting
 
 While these challenges often include a competitive element, the Application Observability Code Challenges are focussed on the learning about observability practices.
 
-What are the Application Observability Code Challenges? {#h2-0-what-are-the-application-observability-code-challenges}
-----------------------------------------------------------------------------------------------------------------------
+What are the Application Observability Code Challenges?
+-------------------------------------------------------
 
 The idea of these challenges came to me based on the challenges above and the fact that I see in practice that quite a few developers are struggling to get up to speed with applying observability practices.
 
@@ -46,8 +46,8 @@ Observability data can help you make that decision.
 
 The goal of these code challenges is to practice and gain more experience in both making your application observable and using the observability tools.
 
-Goals {#h2-1-goals}
--------------------
+Goals
+-----
 
 The goals of the challenges:
 
@@ -60,8 +60,8 @@ The goals of the challenges:
 
 The goal is not to discuss the libraries, frameworks or specific code implementation used, but to practice and learn!
 
-What do the code challenges look like? {#h2-2-what-do-the-code-challenges-look-like}
-------------------------------------------------------------------------------------
+What do the code challenges look like?
+--------------------------------------
 
 My background is in Java development, so most of the challenges I will provide will be Java challenges. I have a number of them in mind.
 
@@ -80,8 +80,8 @@ In Grafana you can see the first results, then it is up to you to continue. Some
 The whole setup will look like this:  
 ![Application Observability flow](flow.png)
 
-Your own stack {#h2-3-your-own-stack}
--------------------------------------
+Your own stack
+--------------
 
 If you usually use other observability tools, I encourage you to use them!
 
@@ -89,8 +89,8 @@ The sample application is prepared to send data using OpenTelemetry, so any setu
 
 ![Application Observability flow with own stack](flow_with_own_stack.png)
 
-Online environment(s) {#h2-4-online-environment-s}
---------------------------------------------------
+Online environment(s)
+---------------------
 
 Besides running it locally, I am also preparing a guided online environment with Killercoda, [https://killercoda.com/observability-code-challenges](https://goto.ceesbos.nl/aocckk).  
 
@@ -98,8 +98,8 @@ That way you don't have to mess with your local machine and it will give you som
 
 I may also add a setup with devcontainers so you can easily run it in other ways. Please let me know if you are interested.
 
-The first challenge {#h2-5-the-first-challenge}
------------------------------------------------
+The first challenge
+-------------------
 
 The steps to follow for the first challenge:
 
@@ -110,8 +110,8 @@ The steps to follow for the first challenge:
 * Optional: fix the problem and **prove it with observability data that it is really fixed**
 * Optional, but highly appreciated 🙏: Share your findings, insights you learned and potential solution, either as a ['discussion'](https://github.com/cbos/application-observability-code-challenges/discussions) or as a pull request
 
-🛠️ How to Get Started {#h2-6-how-to-get-started}
--------------------------------------------------
+🛠️ How to Get Started
+----------------------
 
 All the details you need to jump in can be found here:  
 
@@ -121,8 +121,8 @@ Prefer an online environment? No problem! Use KillerCode to get started with jus
 
 👉 [https://killercoda.com/observability-code-challenges](https://goto.ceesbos.nl/aocckk)
 
-Challenge details {#h2-7-challenge-details}
--------------------------------------------
+Challenge details
+-----------------
 
 * The sample application is a simple **Spring Boot** application with a REST endpoint implemented in Jersey/JAX-RS.
 * The application is instrumented using **OpenTelemetry** auto instrumentation.

@@ -29,8 +29,8 @@ This blog updates the previously published **TornadoInsight** configuration [**+
 
 
 
-**Overview** {#6bbq84970}
--------------------------
+**Overview**
+------------
 
 TornadoInsight requires access to a compatible Java Development Kit (JDK) and the TornadoVM SDK.{#o7o5c20810}
 
@@ -40,12 +40,12 @@ Since version [++v1.4.0++](https://github.com/beehive-lab/tornado-insight/releas
 
 
 
-JDK Configuration (Recommended) {#kj3lj29712}
----------------------------------------------
+JDK Configuration (Recommended)
+-------------------------------
 
 TornadoInsight supports using the JDK defined in the IntelliJ project settings.{#w8y9b29714}
 
-### Configure the JDK in IntelliJ IDEA {#ev5aq29716}
+### Configure the JDK in IntelliJ IDEA
 
 1. Open **IntelliJ IDEA**
 2. Go to **File → Project Structure**
@@ -63,8 +63,8 @@ When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will aut
 
 
 
-TornadoVM SDK Configuration (Recommended) {#keesm31250}
--------------------------------------------------------
+TornadoVM SDK Configuration (Recommended)
+-----------------------------------------
 
 Since version [++v1.4.2++](https://github.com/beehive-lab/tornado-insight/releases/tag/v1.4.2), TornadoInsight requires the environment variable **TORNADOVM_HOME** to be defined and visible to the IntelliJ IDEA process.{#b74ch20726}
 
@@ -86,11 +86,11 @@ TORNADOVM_HOME=/absolute/path/to/tornado-sdk
 
 
 
-### **macOS** {#i80s15288}
+### **macOS**
 
 On macOS, GUI applications do **not** read \~/.zshrc or \~/.zprofile.{#g8z335290}
 
-#### **Recommended:** {#kghgn5648}
+#### **Recommended:**
 
 Run the following command in a terminal:{#ip1ei5300}
 
@@ -103,11 +103,11 @@ Then **quit IntelliJ IDEA** (Cmd + Q) and relaunch it.
 
 
 
-### Linux {#xbi0p5638}
+### Linux
 
 If IntelliJ IDEA is launched from **JetBrains Toolbox** or a desktop launcher, variables set in \~/.bashrc will **not** be visible.{#xmt6z5640}
 
-#### **Recommended: systemd** **environment.d** {#ted4t6250}
+#### **Recommended: systemd** **environment.d**
 
 This method works reliably on modern Linux distributions using systemd.{#b9wg15651}
 
@@ -127,7 +127,7 @@ TORNADOVM_HOME=/absolute/path/to/tornado-sdk
 
 
 
-### **Windows** {#x9em06931}
+### **Windows**
 
 1. Open **System Properties**
 2. Navigate to **Environment Variables**
@@ -140,12 +140,12 @@ TORNADOVM_HOME=/absolute/path/to/tornado-sdk
 
 
 
-**Verification** {#ja8uq7253}
------------------------------
+**Verification**
+----------------
 
 Before starting IntelliJ IDEA, verify that the variable is set:{#hgeqi7255}
 
-### **macOS / Linux** {#k9yq97257}
+### **macOS / Linux**
 
 ```bash
 launchctl getenv TORNADOVM_HOME
@@ -163,8 +163,8 @@ If the variable is present, TornadoInsight will automatically detect the Tornado
 
 
 
-**Summary** {#dschd9476}
-------------------------
+**Summary**
+-----------
 
 If **TORNADOVM_HOME** is not recognized by the IntelliJ process, a warning is shown in the settings of the plugin, as shown in the picture below.{#wo6nn88008}  
 ![](https://plugins.jetbrains.com/files/23309/screenshot_aa1940fc-c2d6-4120-95fc-2df46fc3d67f)

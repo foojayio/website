@@ -24,7 +24,7 @@ frozen: false
 
 This article guides you through different ways of calling Microservices in Java, from basic methods to more advanced ones, and will share tips on best practices and common mistakes.
 
-### 1. Basic HTTP Requests with HttpURLConnection {#h3-0-1-basic-http-requests-with-httpurlconnection}
+### 1. Basic HTTP Requests with HttpURLConnection
 
 The simplest way to calling a microservice in Java is using the `HttpURLConnection` class. This lets your application send HTTP requests and receive responses directly.
 
@@ -67,7 +67,7 @@ public class SimpleServiceCaller {
 * It lacks features like connection reuse, automatic retries, and error handling.
 * Managing HTTP connections manually can lead to mistakes and messy code.
 
-### 2. Using Apache HttpClient {#h3-1-2-using-apache-httpclient}
+### 2. Using Apache HttpClient
 
 Apache HttpClient is a more robust tool for making HTTP calls.
 
@@ -104,7 +104,7 @@ public class ApacheHttpClientExample {
 * Adds complexity and requires additional library dependencies.
 * Still needs manual setup for error handling and resilience.
 
-### 3. Using Spring's RestTemplate and WebClient {#h3-2-3-using-spring-s-resttemplate-and-webclient}
+### 3. Using Spring's RestTemplate and WebClient
 
 For applications built with Spring, `RestTemplate` and `WebClient` are convenient options.
 
@@ -152,7 +152,7 @@ public class WebClientExample {
 * Tied to Spring, so not suitable if you're not using this framework.
 * Spring is moving away from `RestTemplate` to favor `WebClient`.
 
-### 4. Using Feign for Declarative REST Clients {#h3-3-4-using-feign-for-declarative-rest-clients}
+### 4. Using Feign for Declarative REST Clients
 
 Feign is a tool that lets you write very simple code to make HTTP calls by defining interfaces.
 
@@ -178,7 +178,7 @@ public interface ServiceClient {
 * Less control over the details of HTTP requests.
 * Requires adding Feign libraries to your project.
 
-### Best Practices and Common Mistakes {#h3-4-best-practices-and-common-mistakes}
+### Best Practices and Common Mistakes
 
 * **Use connection pooling**: It's better for performance.
 * **Implement error handling**: Use retries, timeouts, and circuit breakers to make your application more reliable.
@@ -186,7 +186,7 @@ public interface ServiceClient {
 * **Keep an eye on your HTTP traffic**: Logging requests and responses help in debugging issues.
 * **Secure your HTTP requests**: Use HTTPS and proper authentication methods.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 Choosing the right method to connect to microservices in Java depends on your specific needs, such as how big your application is and whether you are using Spring Framework.
 

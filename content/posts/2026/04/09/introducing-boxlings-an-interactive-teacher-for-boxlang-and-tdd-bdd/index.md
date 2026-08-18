@@ -20,8 +20,8 @@ Inspired by the beloved [rustlings](https://github.com/rust-lang/rustlings) proj
 
 Oh, and the whole thing is written in BoxLang itself. 🥊 Dogfooding at its finest.
 
-What Is BoxLings? {#h2-0-what-is-boxlings}
-------------------------------------------
+What Is BoxLings?
+-----------------
 
 ![](https://www.ortussolutions.com/__media/contentbox:2026/boxlang/boxlings-intro.png)
 
@@ -33,12 +33,12 @@ From day one, you'll read **TestBox** specs before touching any implementation c
 
 
 
-The Full Learning Path {#h2-1-the-full-learning-path}
------------------------------------------------------
+The Full Learning Path
+----------------------
 
 BoxLings is organized into three progressive phases, with 28 topics and 129 exercises total.
 
-### 🟢 Phase 1 --- Core Fundamentals (50 Exercises) {#h3-2-phase-1-core-fundamentals-50-exercises}
+### 🟢 Phase 1 --- Core Fundamentals (50 Exercises)
 
 Perfect for beginners and developers new to BoxLang:
 
@@ -55,7 +55,7 @@ Perfect for beginners and developers new to BoxLang:
 | 9  | **Strings**      | 6         | Interpolation, multi-line strings, string operations |
 | 10 | **Imports**      | 4         | Importing classes and the `java:` prefix             |
 
-### 🟡 Phase 2 --- Intermediate (40 Exercises) {#h3-3-phase-2-intermediate-40-exercises}
+### 🟡 Phase 2 --- Intermediate (40 Exercises)
 
 Dive deeper into BoxLang's power features:
 
@@ -70,7 +70,7 @@ Dive deeper into BoxLang's power features:
 | 17 | **Async**            | 6         | Threads, futures, async programming            |
 | 18 | **Components**       | 3         | `bx:http`, `bx:query`, and more                |
 
-### 🔴 Phase 3 --- Advanced (48 Exercises) {#h3-4-phase-3-advanced-48-exercises}
+### 🔴 Phase 3 --- Advanced (48 Exercises)
 
 Master BoxLang-specific and power-user features:
 
@@ -90,8 +90,8 @@ Master BoxLang-specific and power-user features:
 
 
 
-The TDD/BDD Learning Journey {#h2-5-the-tdd-bdd-learning-journey}
------------------------------------------------------------------
+The TDD/BDD Learning Journey
+----------------------------
 
 BoxLings teaches test-driven development alongside BoxLang in four progressive stages:
 
@@ -113,8 +113,8 @@ Red → Green → Refactor. The real deal.
 
 
 
-How It Works {#h2-6-how-it-works}
----------------------------------
+How It Works
+------------
 
 ```bash
 git clone https://github.com/ortus-boxlang/boxlings.git
@@ -139,8 +139,8 @@ Three exercise types are supported: scripts (`.bxs`), classes (`.bx`), and templ
 
 
 
-Built for Learners, Classrooms \& Workshops {#h2-7-built-for-learners-classrooms-workshops}
--------------------------------------------------------------------------------------------
+Built for Learners, Classrooms \& Workshops
+-------------------------------------------
 
 BoxLings is self-contained and runs completely offline after the initial clone. Whether you're learning solo, teaching a workshop, or onboarding a new team member, BoxLings provides a structured, guided path with immediate feedback.
 
@@ -152,8 +152,8 @@ BoxLings is self-contained and runs completely offline after the initial clone. 
 
 
 
-Get Started {#h2-8-get-started}
--------------------------------
+Get Started
+-----------
 
 You'll need **BoxLang 1.12+** . We recommend [BVM](https://boxlang.ortusbooks.com/getting-started/installation/boxlang-version-manager-bvm) to manage your BoxLang versions:
 
@@ -173,8 +173,8 @@ boxlang BoxLings.bx
 
 
 
-Join the Community {#h2-9-join-the-community}
----------------------------------------------
+Join the Community
+------------------
 
 We'd love to hear what you think --- and contributions are very welcome. New exercises, bug fixes, documentation --- all of it.
 

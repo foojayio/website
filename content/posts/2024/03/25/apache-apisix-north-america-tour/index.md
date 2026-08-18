@@ -124,7 +124,7 @@ It was time to get home after this last pause on American soil. Many hours later
 
 See you soon [somewhere](https://blog.frankel.ch/speaking/)!
 
-PS: I tried to document my journey via #APISIXNorthAmericaTour. Find more pictures on [Twitter](https://twitter.com/search?q=%23APISIXNorthAmericaTour&amp;src=typed_query&amp;f=live), [LinkedIn](https://www.linkedin.com/search/results/all/?keywords=%23APISIXNorthAmericaTour&amp;origin=GLOBAL_SEARCH_HEADER), [Mastodon](https://mastodon.top/tags/APISIXNorthAmericaTour) and [BlueSky](https://bsky.app/search?q=%23APISIXNorthAmericaTour).
+PS: I tried to document my journey via #APISIXNorthAmericaTour. Find more pictures on [Twitter](https://twitter.com/search?q=%23APISIXNorthAmericaTour&src=typed_query&f=live), [LinkedIn](https://www.linkedin.com/search/results/all/?keywords=%23APISIXNorthAmericaTour&origin=GLOBAL_SEARCH_HEADER), [Mastodon](https://mastodon.top/tags/APISIXNorthAmericaTour) and [BlueSky](https://bsky.app/search?q=%23APISIXNorthAmericaTour).
 
 
 

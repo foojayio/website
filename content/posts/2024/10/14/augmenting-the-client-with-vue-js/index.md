@@ -26,12 +26,12 @@ In my [previous article](https://foojay.io/today/a-short-history-of-ajax-and-ssr
 
 I heard a lot of [Vue.js](https://vuejs.org/). Additionally, a friend who transitioned from developer to manager told me good things about Vue, which further piqued my interest. I decided to have a look at it: it will be the first "lightweight" JavaScript framework I'll study - from the point of view of a newbie, which I am.
 
-Laying out the work {#h2-0-laying-out-the-work}
------------------------------------------------
+Laying out the work
+-------------------
 
 I explained WebJars and Thymeleaf in the last article. Here's the setup, server- and client-side.
 
-### Server-side {#h3-1-server-side}
+### Server-side
 
 Here is how I integrate both in the POM:
 
@@ -84,7 +84,7 @@ If you're used to developing APIs, you're familiar with the `body()` function; i
 1. The view's name. By default, the path is `/templates` and the prefix is `.html`; in this case, Thymeleaf expects a view at `/templates/vue.html`
 2. A model map of key-value pairs
 
-### Client-side {#h3-2-client-side}
+### Client-side
 
 Here's the code on the HTML side:
 
@@ -112,8 +112,8 @@ As explained in last week's article, one of Thymeleaf's benefits is that it allo
 
 ![](vue-static-display.webp)
 
-The Vue code {#h2-3-the-vue-code}
----------------------------------
+The Vue code
+------------
 
 Now, let's dive into the Vue code.  
 
@@ -127,7 +127,7 @@ We want to implement several features:
    * `label`: value of the *Label* field for `label`
    * `completed`: set to `false`
 
-### Our first steps into Vue {#h3-4-our-first-steps-into-vue}
+### Our first steps into Vue
 
 The first step is to bootstrap the framework. We have already set up the reference for our custom `vue.js` file above.
 
@@ -204,7 +204,7 @@ Vue.createApp({
 
 At this point, Vue displays the title.
 
-### Basic interactions {#h3-5-basic-interactions}
+### Basic interactions
 
 At this point, we can implement the action when the user clicks on a checkbox: it needs to be updated in the server-side state.
 
@@ -273,7 +273,7 @@ const TodoLine = {
 5. JSON payload
 6. We return all defined functions to make them accessible from HTML
 
-### Client-side model {#h3-6-client-side-model}
+### Client-side model
 
 In the previous section, I made two mistakes:
 
@@ -366,7 +366,7 @@ On the HTML side, we use the relevant Vue attributes:
 
 I've described the corresponding template above.
 
-### Updating the model {#h3-7-updating-the-model}
+### Updating the model
 
 We can now implement a new feature: add a new `Todo` from the client. When clicking on the *Add* button, we read the *Label* field value, send the data to the API, and refresh the model with the response.
 
@@ -424,8 +424,8 @@ Vue binds the `create()` function to the HTML button. It does call it asynchrono
 
 Note that I didn't intentionally implement any error-handling code to avoid making the code more complex than necessary. I'll stop here as we gained enough insights for a first experience.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 In this artic;e, I took my first steps in augmenting an SSR app with Vue. It was pretty straightforward. The biggest issue I encountered was for Vue to replace the line template: I didn't read the documentation extensively and missed the `is` attribute.
 

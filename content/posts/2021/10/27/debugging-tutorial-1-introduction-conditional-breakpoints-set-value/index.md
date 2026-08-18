@@ -39,8 +39,8 @@ In a future post I'd also like to also talk about browser debugging with Chrome 
 
 I also included a video tutorial highlighting the steps visually. This might help if my instructions are unclear:
 
-Motivation {#h2-0-motivation}
------------------------------
+Motivation
+----------
 
 The main goal in this series is to bring you up to speed so we can dig into the real interesting tutorials near the end. The first part might seem a bit trivial since I'm assuming zero knowledge of debugging techniques but I plan to get in-depth with these posts as we move forward.
 
@@ -48,12 +48,12 @@ But you might be asking yourself, why even go through this?
 
 Why do we need to go through a debugging tutorial? I already know programming and using a debugger isn't exactly rocket science...
 
-Well... we spend 50% of our time chasing bugs according to this [study](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.370.9611&amp;rep=rep1&amp;type=pdf), although I saw numbers ranging from 25% to 75%. Unfortunately, this is a skill that universities don't really teach. Even at our jobs, people gloss over this essential skill. There are books that cover this subject but a lot are out of date and aim at more complex scenarios.
+Well... we spend 50% of our time chasing bugs according to this [study](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.370.9611&rep=rep1&type=pdf), although I saw numbers ranging from 25% to 75%. Unfortunately, this is a skill that universities don't really teach. Even at our jobs, people gloss over this essential skill. There are books that cover this subject but a lot are out of date and aim at more complex scenarios.
 
 Debugging isn't just about finding bugs. When I need to implement a new feature in an area of the code I'm unfamiliar with, I often pull up the debugger and start debugging those areas. Trying to look at the flow as if I'm debugging an issue, inspecting the stack, members etc., to gain a better understanding of the way the system works and validate my assumptions.
 
-Getting Started {#h2-1-getting-started}
----------------------------------------
+Getting Started
+---------------
 
 To get started, we need a simple app we can debug in the initial parts of this tutorial. For this, we'll use Prime Main which calculates prime numbers. It's a trivial app which you can just fetch and open in your IDE.
 
@@ -68,8 +68,8 @@ Here are versions of it for the various languages:
 
 Download the appropriate source file and add it as the main source file in a new project in your IDE. You can run the application but take in mind that it will run for a VERY long time searching for prime numbers.
 
-Simple Conditional Breakpoint {#h2-2-simple-conditional-breakpoint}
--------------------------------------------------------------------
+Simple Conditional Breakpoint
+-----------------------------
 
 First we need to debug the app. In IDEs from JetBrains, we just right click the executable file and select debug as such:
 
@@ -85,8 +85,8 @@ You will be prompted with an environment to use, pick Node.js to continue.
 
 Once you start debugging you can set a breakpoint by clicking once on the "gutter" area to the left of the file. Let's do a quick experiment for every file type/IDE.
 
-Running {#h2-3-running}
------------------------
+Running
+-------
 
 ![Running on JetBrains IntelliJ/IDEA](https://cdn.hashnode.com/res/hashnode/image/upload/v1634756909711/3Ynut12B6.png)  
 **Running on JetBrains IntelliJ/IDEA**
@@ -134,15 +134,15 @@ Since the Java code is a bit different I used `primesToTest[0] == 2` which will 
 
 In the other cases I used `num % 2 == 0` as a condition that will always be false. Since the line above that line checks if a number is even which it never will be. Flipping this condition to `num % 2 == 1` will always be true and the breakpoint will be hit.
 
-Taking this Further {#h2-4-taking-this-further}
------------------------------------------------
+Taking this Further
+-------------------
 
 Conditional breakpoints are one of the most powerful yet sadly under utilized tools in the arsenal of a debugger. When you experience a failure in a loop we often walk over the loop again and again and again... Waiting for the right conditions to materialize.
 
 By using set value or a condition we can move much faster in our debugging process and possibly reproduce issues more accurately without the delays you'd normally see for stepping over.
 
-TL;DR {#h2-5-tl-dr}
--------------------
+TL;DR
+-----
 
 In this first installment of this series, I have tried to stress the importance of debugging skills for our daily work. Great developers use their tools effectively and efficiently to increase productivity and the debugger is a complex machine that we need to wield effectively. According to some statistics, debugging might be as important as our coding skills.
 

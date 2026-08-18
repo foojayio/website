@@ -94,7 +94,7 @@ Function-based or expression indexes are handy when:
 
 Remember that function-based indexes can significantly improve query performance but also increase storage requirements and slow down data modification operations. Use them judiciously based on your specific query patterns and performance needs.
 
-### 2. Avoid Using SELECT \* {#h3-0-2-avoid-using-select}
+### 2. Avoid Using SELECT \*
 
 Using `SELECT *` retrieves all columns from the table, which can be inefficient and lead to unnecessary data transfer.
 
@@ -118,7 +118,7 @@ SELECT name, email FROM users;
 
 This query retrieves only the `name` and `email` columns, reducing the amount of data transferred.
 
-### 3. Use Proper Joins {#h3-1-3-use-proper-joins}
+### 3. Use Proper Joins
 
 Improper joins can lead to performance issues. Use the correct type of join for your query.
 
@@ -147,7 +147,7 @@ JOIN orders o ON u.id = o.user_id;
 
 This query uses an `INNER JOIN` to combine data from the `users` and `orders` tables.
 
-### 4. Use WHERE Clauses to Filter Data {#h3-2-4-use-where-clauses-to-filter-data}
+### 4. Use WHERE Clauses to Filter Data
 
 Filtering data as early as possible in your query can help reduce the amount of data processed.
 
@@ -171,7 +171,7 @@ SELECT name, email FROM users WHERE active = true;
 
 This query retrieves only active users, reducing the amount of data processed.
 
-### 5. Limit the Number of Rows Returned {#h3-3-5-limit-the-number-of-rows-returned}
+### 5. Limit the Number of Rows Returned
 
 When you don't need all rows, use the `LIMIT` clause to restrict the number of rows returned.
 
@@ -195,7 +195,7 @@ SELECT name, email FROM users WHERE active = true LIMIT 10;
 
 This query retrieves the first 10 active users, reducing the amount of data processed and transferred.
 
-### 6. Use EXISTS Instead of IN {#h3-4-6-use-exists-instead-of-in}
+### 6. Use EXISTS Instead of IN
 
 Using `EXISTS` can be more efficient than using `IN`, especially for large datasets.
 
@@ -203,7 +203,7 @@ Using `EXISTS` can be more efficient than using `IN`, especially for large datas
 
 * Use `EXISTS` for subqueries to check for the existence of rows.
 
-### 7. Avoid Functions in WHERE Clauses {#h3-5-7-avoid-functions-in-where-clauses}
+### 7. Avoid Functions in WHERE Clauses
 
 Using functions in \`WHERE\` clauses can prevent the use of indexes, leading to slower queries.
 
@@ -227,7 +227,7 @@ SELECT name, email FROM users WHERE created_at >= '2023-01-01' AND created_at < 
 
 This query filters on the \`created_at\` column without using a function, allowing the use of an index.
 
-### 8. Use JOINs Instead of Subqueries {#h3-6-8-use-joins-instead-of-subqueries}
+### 8. Use JOINs Instead of Subqueries
 
 JOINs are often more efficient than subqueries, especially for large datasets.
 
@@ -257,7 +257,7 @@ SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id;
 
 This query uses a \`JOIN\` instead of a subquery, improving performance.
 
-### 9. Optimize Group By and Order By Clauses {#h3-7-9-optimize-group-by-and-order-by-clauses}
+### 9. Optimize Group By and Order By Clauses
 
 Using \`GROUP BY\` and \`ORDER BY\` clauses can be resource-intensive. Optimize them to improve performance.
 
@@ -282,7 +282,7 @@ SELECT user_id, COUNT(*) FROM orders GROUP BY user_id ORDER BY user_id;
 
 This query groups and orders by indexed columns, improving performance.
 
-### 10. Use Appropriate Data Types {#h3-8-10-use-appropriate-data-types}
+### 10. Use Appropriate Data Types
 
 Choosing the correct data types for your columns can significantly impact performance and storage efficiency.
 
@@ -320,7 +320,7 @@ Tips:
 
 This schema uses appropriate data types, improving performance and storage efficiency.
 
-### 11. Analyze Query Execution Plans {#h3-9-11-analyze-query-execution-plans}
+### 11. Analyze Query Execution Plans
 
 Use tools like \`EXPLAIN\` to analyze your query execution plans and identify performance issues.
 
@@ -345,7 +345,7 @@ EXPLAIN SELECT name, email FROM users WHERE active = true;
 
 This command provides an execution plan for the query, helping identify potential performance issues.
 
-### 12. Use Connection Pooling {#h3-10-12-use-connection-pooling}
+### 12. Use Connection Pooling
 
 For Java applications, using connection pooling can reduce the overhead of establishing database connections and improve performance.
 
@@ -377,7 +377,7 @@ HikariDataSource dataSource = new HikariDataSource(config);
 
 This sets up a connection pool with a maximum of 10 connections, reducing connection overhead.
 
-### 13. Use Batch Processing {#h3-11-13-use-batch-processing}
+### 13. Use Batch Processing
 
 Using batch processing can significantly improve performance when performing multiple insert, update, or delete operations.
 
@@ -419,7 +419,7 @@ conn.close();
 
 This Java code uses batch processing to insert multiple users efficiently.
 
-### 14. Optimize Joins {#h3-12-14-optimize-joins}
+### 14. Optimize Joins
 
 Properly optimizing joins can significantly impact query performance, especially for large datasets.
 
@@ -444,7 +444,7 @@ SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id WHERE
 
 This query joins the \`users\` table with the \`orders\` table on an indexed column, improving performance.
 
-### 15. Optimize Subqueries {#h3-13-15-optimize-subqueries}
+### 15. Optimize Subqueries
 
 Subqueries can often be replaced with joins or other more efficient query constructs.
 
@@ -473,7 +473,7 @@ SELECT u.name, u.email FROM users u JOIN RecentOrders ro ON u.id = ro.user_id;
 
 This query uses a CTE to improve readability and performance.
 
-### 16. Optimize Aggregations {#h3-14-16-optimize-aggregations}
+### 16. Optimize Aggregations
 
 When performing aggregation queries, use efficient techniques to minimize the computational load. **Tips:**
 
@@ -496,7 +496,7 @@ SELECT user_id, COUNT(*) AS order_count FROM orders GROUP BY user_id;
 
 This query is grouped by the \`user_id\` column, which should be indexed for optimal performance.
 
-### 17. Use Summary Columns {#h3-15-17-use-summary-columns}
+### 17. Use Summary Columns
 
 Summary columns store pre-computed aggregate values, reducing the need for expensive computations during query execution. **Tips:**
 
@@ -521,7 +521,7 @@ UPDATE users u SET total_order_amount = (SELECT SUM(amount) FROM orders o WHERE 
 
 This approach adds a summary column to store the total order amount for each user.
 
-### 18. Use Materialized Views {#h3-16-18-use-materialized-views}
+### 18. Use Materialized Views
 
 Materialized views cache the results of complex queries, improving performance for read-heavy operations. **Tips:**
 
@@ -548,7 +548,7 @@ GROUP BY user_id;
 
 This creates a materialized view that stores the pre-computed summary of user orders.
 
-### 19. Monitor and Tune Database Settings {#h3-17-19-monitor-and-tune-database-settings}
+### 19. Monitor and Tune Database Settings
 
 Regularly monitor and tune your database settings to ensure optimal performance. **Tips:**
 
@@ -576,7 +576,7 @@ This command adjusts the buffer pool size in PostgreSQL, which can improve perfo
 
 Refer to the docs: <https://www.postgresql.org/docs/9.1/runtime-config-resource.html>
 
-### 20. Regularly Review and Refactor SQL Code {#h3-18-20-regularly-review-and-refactor-sql-code}
+### 20. Regularly Review and Refactor SQL Code
 
 Regularly reviewing and refactoring your SQL code can help identify and address performance issues. **Tips:**
 
@@ -608,6 +608,6 @@ The refactored query joins \`users\` and \`orders\` and uses a \`GROUP BY\` clau
 
 **For more best practices guide download my free book here** : <https://abosaadmuaath.activehosted.com/f/1>
 
-### Summary {#h3-19-summary}
+### Summary
 
 Optimizing SQL queries is essential for modern software development, particularly for Java engineers who work with relational databases. By adhering to best practices such as utilizing indexes, avoiding SELECT \*, mastering joins, and optimizing WHERE clauses, you can guarantee efficient queries, shorten load times, and enhance overall application performance. In addition, incorporating connection pooling and selecting the appropriate data types can significantly improve database interactions. Consistently reviewing and refining SQL code, as well as analyzing execution plans is key to maintaining optimal queries and upholding high-performance standards.

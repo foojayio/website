@@ -28,8 +28,8 @@ Before we get into these problems, we need to understand what it means to have a
 
 <br />
 
-Small Monoliths {#h2-0-small-monoliths}
----------------------------------------
+Small Monoliths
+---------------
 
 A common misconception is that microservices are simply broken down monoliths. This isn't the case. I've talked to quite a few people who still hold that notion, to be fair they might have a point. This is how AWS defines Microservices:
 > Microservices are an architectural and organizational approach to software development where software is composed of small independent services that communicate over well-defined APIs. These services are owned by small, self-contained teams.
@@ -40,7 +40,7 @@ Smaller monoliths might fit the definition, but they don't if you read between t
 
 If we break this service down into smaller pieces, we essentially create distributed points of failure. If one piece along the chain fails, the entire architecture breaks down. That isn't independent, and it isn't easier to scale. Microservices are NOT small monoliths and breaking down the Monolith isn't only about working with smaller projects. It's about shifting the way we work.
 
-### What Makes a Microservice? {#h3-1-what-makes-a-microservice}
+### What Makes a Microservice?
 
 A good Microservice needs to follow these principles for robustness and scale:
 
@@ -61,7 +61,7 @@ In an ideal world, all our operations will be simple and contained in a small mi
 
 [![Copyright @forrestbrazeal licensed as Creative Commons BY-NC-ND](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aj4tjmm940wtoyc7acqc.png)](https://www.goodtechthings.com/marco-polo/)
 
-### Reliance on the DevOps Team {#h3-2-reliance-on-the-devops-team}
+### Reliance on the DevOps Team
 
 If your company doesn't have good DevOps and Platform Engineering teams, Microservices aren't an option. Instead of deploying one application, we might deploy hundreds because of migration. While the individual deployments are simple and automated, you will still throw a lot of work at operations.
 
@@ -77,7 +77,7 @@ As developers we need to know many of the tools used to tie our separate service
 
 I'll skip orchestration, CI/CD, etc. but they too need to be adapted for every service that comes out. Some of those tools are opaque to developers but we need the help of DevOps in all the phases.
 
-### Saga Pattern {#h3-3-saga-pattern}
+### Saga Pattern
 
 Stateless services would be ideal, carrying a state makes everything far more complex. If we stored the state in the client, we need to send it back and forth all the time. If it is on the server, we would need to either fetch it constantly, cache it or save it locally and then all interaction would be performed against the current system. That eliminates the scalability of the system.
 
@@ -120,8 +120,8 @@ Tolerance means that everything will keep working even if many messages get drop
 
 This differs greatly from our historic approach to failure with transactions.
 
-Should We Pick Microservices? {#h2-4-should-we-pick-microservices}
-------------------------------------------------------------------
+Should We Pick Microservices?
+-----------------------------
 
 Hopefully, you now understand how hard it is to deploy Microservices properly. We need to make some big compromises. This new way isn't necessarily better, in some regards, it is worse. But the proponents of Microservices still have a point, we can gain a lot through Microservices and should focus on those benefits too.
 
@@ -131,7 +131,7 @@ The biggest benefit of Microservice is to the team. That is why having a stable 
 
 Splitting a Monolith is hard but doable. Unifying Microservices to a Monolith is probably harder, I'm unaware of anyone who seriously tried to do that but would be curious to hear stories.
 
-### Not One Size {#h3-5-not-one-size}
+### Not One Size
 
 In order to move to a Microservice architecture we need a bit of a mind shift. A good example is in the databases. A good example would be a user tracking Microservice. In a Monolith, we would write the data to a table and move on with our work. But this is problematic...
 
@@ -143,7 +143,7 @@ As data scales, this user tracking table can end up containing a great deal of d
 
 There are complexities, data will no longer be localized. So if we send tracking data asynchronously we need to send everything necessary as the tracking service won't be able to go back to the original service to get additional meta-data. But it has a locality advantage, if regulation changes about tracking storage there's a single place where this is stored.
 
-### Dynamic Control and Rollout {#h3-6-dynamic-control-and-rollout}
+### Dynamic Control and Rollout
 
 Did you ever push a button to a release that broke production?
 
@@ -153,13 +153,13 @@ Observability for Microservices is essential, expensive, but also more powerful.
 
 Applications can become too big to fail. Even with modularity, some of the largest monoliths around have so much code it takes hours to run through a full CI/CD cycle. Then if the deployment fails reverting to the last good version might also take a while.
 
-### Segmentation {#h3-7-segmentation}
+### Segmentation
 
 Back in the day, we used to divide teams based on layers. Client, Server, DB, etc. This made sense since each of those required a unique set of skills. Today, vertical teams make more sense, but we still have specialties.
 
 Typically, a mobile developer wouldn't work on the backend. But let's say we have a mobile team that wants to work with GraphQL instead of REST. With a Monolith we would either tell them to "live with it" or we would have to do the work. With Microservices we can create a simple service for them with very little code. A simple facade to the core services. We won't need to worry about a mobile team writing server code since this would be relatively isolated. We can do the same for every client layer, this makes it easier to integrate a team vertically.
 
-### Too Big {#h3-8-too-big}
+### Too Big
 
 It is hard to put the finger on a size that makes a monolith impractical but here's what you should ask yourself:
 
@@ -181,7 +181,7 @@ At some point, a huge project becomes so big that the experts start losing track
 
 Microservices will cost more. There's no way around that. There are special cases where we can tune scale, but ultimately observability and management costs would remove any potential cost savings. Since personnel costs usually exceed the costs of cloud hosting the total might still play in your favor as those costs might decrease if the scale is big enough.
 
-### Trade-Offs {#h3-9-trade-offs}
+### Trade-Offs
 
 The trade-offs of monolith vs. microservice are illustrated nicely in the following radar chart. Notice that this chart was designed with a large project in mind. The smaller the project, the better the picture is for the Monolith.
 
@@ -189,8 +189,8 @@ The trade-offs of monolith vs. microservice are illustrated nicely in the follow
 
 Notice that Microservices deliver a benefit in larger projects in fault tolerance and team independence. But they pay a price in cost. They can reduce R\&D spend but they mostly shift it to DevOps so that isn't a major benefit.
 
-Final Word {#h2-10-final-word}
-------------------------------
+Final Word
+----------
 
 The complexity of Microservices is immense and sometimes ignored by the implementing teams. Developers use Microservices as a cudgel to throw away parts of the system they don't want to maintain, instead of building a sustainable, scalable architecture worthy of replacing a monolith.
 

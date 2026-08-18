@@ -33,8 +33,8 @@ In this episode of the Foojay Podcast, we talk to volunteers from different orga
 
 {{< youtube GMyDhQzQCcE >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,8 +42,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-**Guests** {#h2-1-guests}
--------------------------
+**Guests**
+----------
 
 * Jeanne Boyarsky
   * [Twitter @jeanneboyarsky](https://twitter.com/jeanneboyarsky)
@@ -54,8 +54,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * Igor De Souza
   * [Twitter @Igfasouza](https://twitter.com/Igfasouza)
 
-**Content** {#h2-2-content}
----------------------------
+**Content**
+-----------
 
 * 00'00 Intro
 * 00'43 Introduction of the guests

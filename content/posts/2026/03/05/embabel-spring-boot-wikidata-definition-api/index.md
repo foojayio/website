@@ -18,8 +18,8 @@ enlighterjs: true
 frozen: false
 ---
 
-TL;DR {#h2-0-tl-dr}
--------------------
+TL;DR
+-----
 
 * I built a **Spring Boot 4** API that defines terms via **Wikidata**.
 * The app is fully reproducible: **no API keys** and **no model installation** needed.
@@ -42,10 +42,10 @@ The important part: I used **Embabel** to orchestrate the workflow, even though 
 
 
 
-Part I --- Concepts {#h2-1-part-i-concepts}
--------------------------------------------
+Part I --- Concepts
+-------------------
 
-### I.1 Embabel {#h3-2-i-1-embabel}
+### I.1 Embabel
 
 Embabel is an agent framework for the JVM. I like to think of it as a way to model a workflow as:
 
@@ -58,7 +58,7 @@ In practice, that means I don't call methods in a fixed chain. I provide an init
 
 
 
-### I.2 Spring AI (even in a "no LLM" demo) {#h3-3-i-2-spring-ai-even-in-a-no-llm-demo}
+### I.2 Spring AI (even in a "no LLM" demo)
 
 Spring AI provides an abstraction layer for interacting with chat models (and other AI components) using Spring-friendly APIs.
 
@@ -72,7 +72,7 @@ This kept the demo:
 
 
 
-### I.3 Role of Embabel in this application {#h3-4-i-3-role-of-embabel-in-this-application}
+### I.3 Role of Embabel in this application
 
 A reasonable question is: *"What's the point of using Embabel just to query a REST API?"*
 
@@ -87,7 +87,7 @@ Embabel makes these steps explicit, typed, and observable, and it can re-plan as
 
 
 
-### I.4 Wikidata: definition and why it's ideal for demos {#h3-5-i-4-wikidata-definition-and-why-it-s-ideal-for-demos}
+### I.4 Wikidata: definition and why it's ideal for demos
 
 Wikidata is a public, open knowledge base. It's perfect for demos because:
 
@@ -104,10 +104,10 @@ This gives a nice "definition API" in a few lines of code, with zero setup for v
 
 
 
-Part II --- App building (code + explanations) {#h2-6-part-ii-app-building-code-explanations}
----------------------------------------------------------------------------------------------
+Part II --- App building (code + explanations)
+----------------------------------------------
 
-### II.1 Maven setup (`pom.xml`) {#h3-7-ii-1-maven-setup-pom-xml}
+### II.1 Maven setup (`pom.xml`)
 
 I used Spring Boot **4.0.3** with Java **25** , and Embabel **0.3.4**.
 
@@ -184,7 +184,7 @@ I also forced **Jackson 2** compatibility (`spring-boot-jackson2`) and excluded 
 
 
 
-### II.2 Configuration (`application.yml`) {#h3-8-ii-2-configuration-application-yml}
+### II.2 Configuration (`application.yml`)
 
 I set the server port and configured the default Embabel model name to `noop`.
 
@@ -204,7 +204,7 @@ embabel:
 
 
 
-### II.3 App launcher + Embabel enablement + NOOP LLM registration {#h3-9-ii-3-app-launcher-embabel-enablement-noop-llm-registration}
+### II.3 App launcher + Embabel enablement + NOOP LLM registration
 
 The application entrypoint enables agent scanning using `@EnableAgents`, then registers a "noop" model so the platform boots without external dependencies.
 
@@ -240,7 +240,7 @@ public class WikiDemoApplication {
 
 
 
-### II.4 The NOOP ChatModel (Spring AI) {#h3-10-ii-4-the-noop-chatmodel-spring-ai}
+### II.4 The NOOP ChatModel (Spring AI)
 
 This is intentionally minimal. If Embabel ever calls it, it returns a predictable message.
 
@@ -270,7 +270,7 @@ public class NoopChatModel implements ChatModel {
 
 
 
-### II.5 Domain model (Java records) {#h3-11-ii-5-domain-model-java-records}
+### II.5 Domain model (Java records)
 
 I used records for the request, intermediate agent objects, and final result.
 
@@ -316,7 +316,7 @@ The key idea is that Embabel "stores" and "reuses" these typed objects during ex
 
 
 
-### II.6 Repository: Wikidata calls with RestClient {#h3-12-ii-6-repository-wikidata-calls-with-restclient}
+### II.6 Repository: Wikidata calls with RestClient
 
 The repository is responsible for the data access logic only:
 
@@ -474,7 +474,7 @@ public class WikidataRepository {
 
 
 
-### II.7 The Embabel agent (actions + goal) {#h3-13-ii-7-the-embabel-agent-actions-goal}
+### II.7 The Embabel agent (actions + goal)
 
 The agent defines the workflow. Each method is a step (`@Action`). The final step is tagged as a goal (`@AchievesGoal`) because it produces the desired output type `DefinitionResult`.
 
@@ -560,7 +560,7 @@ I like this structure because it stays small and readable. More importantly, it 
 
 
 
-### II.8 Service: running the agent via `AgentInvocation` {#h3-14-ii-8-service-running-the-agent-via-agentinvocation}
+### II.8 Service: running the agent via `AgentInvocation`
 
 The service is the bridge between the web layer and Embabel. It creates an `AgentInvocation` and calls it with a `DefinitionRequest`.
 
@@ -595,7 +595,7 @@ public class WikiService {
 
 
 
-### II.9 Controller: a single endpoint {#h3-15-ii-9-controller-a-single-endpoint}
+### II.9 Controller: a single endpoint
 
 The controller stays boring on purpose. All the interesting logic is in the agent and repository.
 
@@ -641,17 +641,17 @@ public class WikiController {
 
 
 
-Part III --- Demo {#h2-16-part-iii-demo}
-----------------------------------------
+Part III --- Demo
+-----------------
 
-### III.1 Curl request {#h3-17-iii-1-curl-request}
+### III.1 Curl request
 
 ```bash
 curl --request get --url 'http://localhost:8080/api/wiki/define?term=kafka'
 ```
 
 
-### III.2 Response {#h3-18-iii-2-response}
+### III.2 Response
 
 ```json
 {
@@ -667,7 +667,7 @@ curl --request get --url 'http://localhost:8080/api/wiki/define?term=kafka'
 
 This is intentionally "small JSON": label + description + canonical links.
 
-### III.3 Logs: the agentic part {#h3-19-iii-3-logs-the-agentic-part}
+### III.3 Logs: the agentic part
 
 These logs are the best part to show on screen, because they reveal Embabel's planning and execution.
 
@@ -713,8 +713,8 @@ This is the "agentic" angle: Embabel is not just calling methods---it's planning
 
 
 
-Part IV --- Conclusion and extensions {#h2-20-part-iv-conclusion-and-extensions}
---------------------------------------------------------------------------------
+Part IV --- Conclusion and extensions
+-------------------------------------
 
 This application intentionally starts simple. It's a demo designed to be reproduced in minutes.
 
@@ -722,7 +722,7 @@ However, the Embabel structure is already useful because it's an orchestrator. E
 
 Here are extensions that make the demo evolve naturally:
 
-### 1) Disambiguation {#h3-21-1-disambiguation}
+### 1) Disambiguation
 
 Instead of `limit=1`, fetch the top N hits and add an action to pick the best match. For example:
 
@@ -730,14 +730,14 @@ Instead of `limit=1`, fetch the top N hits and add an action to pick the best ma
 * description keyword match
 * "instance of" filtering (person vs concept vs product)
 
-### 2) Multi-language {#h3-22-2-multi-language}
+### 2) Multi-language
 
 Add `lang` to `DefinitionRequest` and propagate it into:
 
 * `wbsearchentities&language=...`
 * selecting labels/descriptions by language
 
-### 3) Confidence score {#h3-23-3-confidence-score}
+### 3) Confidence score
 
 Add a `ConfidenceScore` record and an action that computes a score based on:
 
@@ -748,11 +748,11 @@ Add a `ConfidenceScore` record and an action that computes a score based on:
 
 Return it to consumers to make the API safer to use.
 
-### 4) Caching and rate limiting {#h3-24-4-caching-and-rate-limiting}
+### 4) Caching and rate limiting
 
 Add an action that checks a cache before querying Wikidata. This is a classic production step and it fits nicely as an independent action.
 
-### 5) Multi-source enrichment {#h3-25-5-multi-source-enrichment}
+### 5) Multi-source enrichment
 
 Add an alternative source for definitions:
 
@@ -762,7 +762,7 @@ Add an alternative source for definitions:
 
 Embabel becomes more valuable as the number of sources increases, because orchestration becomes a first-class concept.
 
-### 6) Optional LLM post-processing (when needed) {#h3-26-6-optional-llm-post-processing-when-needed}
+### 6) Optional LLM post-processing (when needed)
 
 A good, minimal LLM use case is last-mile text rewriting:
 

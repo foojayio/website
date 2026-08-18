@@ -27,13 +27,13 @@ These tools are reshaping how we work, but they come with a catch: while they he
 
 I've spoken with several guests at the JFall conference in the Netherlands actively working with these tools to learn more about them. And I had a chat with Grace Jansen about a recent Foojay blog post.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube FRQqqv9Oi2Y >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +41,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * Grace Jansen: <https://www.linkedin.com/in/grace-jansen/>
 * Sean Li: <https://www.linkedin.com/in/sean-li-568a8414/>
@@ -51,8 +51,8 @@ Guests {#h2-2-guests}
 * Urs Peter: <https://www.linkedin.com/in/urs-peter-70a2882/>
 * Joost Kaan: <https://www.linkedin.com/in/joost-kaan/>
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * <https://foojay.io/today/run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty/>
 * <https://marketplace.visualstudio.com/items?itemName=IBM.wca-eja>
@@ -61,8 +61,8 @@ Links {#h2-3-links}
 * <https://foojay.io/today/project-panama-for-newbies-part-1/>
 * <https://foojay.io/today/writing-c-code-in-java/>
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topics and guests
 

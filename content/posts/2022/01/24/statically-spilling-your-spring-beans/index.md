@@ -27,8 +27,8 @@ UPDATE - To make it abundantly clear:
 
 Continue reading at **your own risk**! You have been warned!  
 
-Autowiring Beans {#h2-0-autowiring-beans}
------------------------------------------
+Autowiring Beans
+----------------
 
 Getting instances of beans in Spring is pretty simple.  
 
@@ -63,8 +63,8 @@ Some notes about the above code example before we continue:
 
 
 
-The problem {#h2-1-the-problem}
--------------------------------
+The problem
+-----------
 
 In our use-case, we don't want to create a class. We want to be able to have static access to the beans! This means the standard @Autowire is not an option. There is however another way to get beans, namely directly from the Application Context.
 
@@ -120,16 +120,16 @@ UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
 
 ![Diagram: Initialization Order](https://www.tomcools.be/post/apr-2020-static-spring-bean/visual-wait.png) Invoking method on a bean from a static method.
 
-Timing and the looming NullPointerException {#h2-2-timing-and-the-looming-nullpointerexception}
------------------------------------------------------------------------------------------------
+Timing and the looming NullPointerException
+-------------------------------------------
 
 While the solution above works, there is a major problem with it. It is possible to use the StaticContextAccessor.getBean(class) method **before** the ApplicationContext is autowired. This would crash the system because you can't invoke a method on a reference pointing to null.  
 ![Diagram: Looming NullPointerException](https://www.tomcools.be/post/apr-2020-static-spring-bean/visual-nullpointer.png) The solution doesn't work if the context is not yet initialized.
 
 **We have a timing issue here.** We know the ApplicationContext will be autowired eventually, usually within seconds if not milliseconds after the application is started. But we also can't really stop anyone from invoking the static method to get the bean before that happens.
 
-Returning a Proxy {#h2-3-returning-a-proxy}
--------------------------------------------
+Returning a Proxy
+-----------------
 
 **To avoid the timing issue, we need to bridge the time between those two events.** What we could do is provide a temporary object, so our static getBean() returns at least something. **This can be achieved by using a Proxy object**, which is a part of the Java specification.  
 
@@ -193,8 +193,8 @@ Now all that is left is to set the actual bean on the handler as soon as it beco
 
 
 
-Full Code Solution {#h2-4-full-code-solution}
----------------------------------------------
+Full Code Solution
+------------------
 
 ```
 @Component
@@ -265,8 +265,8 @@ UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
 
 
 
-About that RuntimeException {#h2-5-about-that-runtimeexception}
----------------------------------------------------------------
+About that RuntimeException
+---------------------------
 
 Even with this proxying setup, there is still a case which will not work.  
 

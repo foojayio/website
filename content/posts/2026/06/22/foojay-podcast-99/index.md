@@ -25,13 +25,13 @@ frozen: false
 
 Your AI-powered Java application is live in production. But have you actually tested whether it can be jailbroken or manipulated into leaking data it should never reveal? In this episode, Iryna Dohndorf walks us through Tiberius, an open-source security testing library for LLM applications in Java, and explains why everything you know about unit testing needs a rethink when non-determinism is part of the design.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube 7bBcTzeevEo >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,22 +39,22 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * Iryna Dohndorf - Software Engineer at Karakun Group, active member of the Basel One and Devoxx UK program committees, and creator of Tiberius
   * [LinkedIn](https://www.linkedin.com/in/iryna-dohndorf)
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * [Tiberius article on Foojay](https://foojay.io/today/tiberius-a-security-testing-framework-for-llm-applications-in-java/)
 * [Tiberius on GitHub](https://github.com/tiberius-security/tiberius)
 * [Maven Central: io.github.tiberius-security:tiberius:1.0.0](https://central.sonatype.com/artifact/io.github.tiberius-security/tiberius)
 * [Security Testing Guide](https://github.com/tiberius-security/tiberius/blob/main/docs/SECURITY_TESTING_GUIDE.md)
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 * 00:00 Introduction of topic and guest
 * 01:05 The problem Tiberius wants to solve

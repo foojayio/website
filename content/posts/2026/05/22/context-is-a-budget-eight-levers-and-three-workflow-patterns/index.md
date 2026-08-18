@@ -35,8 +35,8 @@ This post is a practical guide to spending it well: where the tokens actually go
 
 ![Token distribution by bucket — most teams are surprised which one dominates](01-token-distribution-700x364.png)
 
-Where the tokens actually go {#h2-0-where-the-tokens-actually-go}
------------------------------------------------------------------
+Where the tokens actually go
+----------------------------
 
 Every request to a coding assistant is a stack of buckets. The shape varies by tool and session, but it tends to look like this:
 
@@ -60,8 +60,8 @@ In a Copilot context, you can't see token counts directly --- but you can see th
 
 ![VS Code Output panel showing Copilot Chat ccreq lines — your free token meter](ccreq-log-650x510.png)
 
-The Eight Levers {#h2-1-the-eight-levers}
------------------------------------------
+The Eight Levers
+----------------
 
 These aren't in priority order --- they're in the order you'd naturally encounter them in a session. The first three (context, caching, tools) are about the request *shape* . The next three (instructions, model, output) are about how you *talk* to the assistant. The last two (repo, observability) are the foundations that make all of the others stick.
 
@@ -69,7 +69,7 @@ These aren't in priority order --- they're in the order you'd naturally encounte
 
 
 
-### A. Context engineering --- scope your asks {#h3-2-a-context-engineering-scope-your-asks}
+### A. Context engineering --- scope your asks
 
 The single biggest waste in most AI workflows is asking vague questions of agent-mode chat with full codebase access. The agent dutifully explores, reads ten files to find the two it needed, summarizes them all, and then answers. You pay for every step.
 
@@ -88,7 +88,7 @@ Specificity is free. Every `#file:` (Copilot) or explicit path (Claude Code) you
 
 
 
-### B. Prompt caching --- order matters {#h3-3-b-prompt-caching-order-matters}
+### B. Prompt caching --- order matters
 
 Every major provider supports prompt caching now. Anthropic and OpenAI both charge roughly **10% of base input cost for cache hits**. Google's Gemini does it explicitly. The mechanism is the same: a stable prefix at the front of your prompt is cached after the first request and read back cheaply on subsequent ones.
 
@@ -108,7 +108,7 @@ The classic anti-pattern is innocent-looking and brutal is to have dynamic value
 
 
 
-### C. Tool \& MCP hygiene --- every schema is a tax {#h3-4-c-tool-mcp-hygiene-every-schema-is-a-tax}
+### C. Tool \& MCP hygiene --- every schema is a tax
 
 Each connected tool ships its full JSON schema with every request. A typical MCP server with 8--15 tools costs **400--2,500 tokens per turn**. Five servers connected? You may be paying 5,000--10,000 tokens per turn for tool definitions the model never invokes.
 
@@ -130,7 +130,7 @@ The same discipline applies to **the tools you build yourself** . A tool that re
 
 
 
-### D. Custom instructions \& skills --- codify it once {#h3-5-d-custom-instructions-skills-codify-it-once}
+### D. Custom instructions \& skills --- codify it once
 
 Anything you find yourself re-typing in chats belongs in an instructions file. The exact filename varies --- `.github/copilot-instructions.md`, `CLAUDE.md`, `AGENTS.md`, Cursor Rules --- but the principle is identical: write your team conventions once, commit them, and let every chat in the repo inherit them.
 
@@ -157,7 +157,7 @@ This file is loaded *only* when a matching file is in scope. Repo-wide rules go 
 
 
 
-### E. Model routing --- start cheap, escalate when stuck {#h3-6-e-model-routing-start-cheap-escalate-when-stuck}
+### E. Model routing --- start cheap, escalate when stuck
 
 Routine tasks pick the most expensive model by default if you let them. You probably just paid 10× for the same answer.
 
@@ -178,7 +178,7 @@ The math compounds. A team of fifty doing twenty agent runs each per day at 10×
 
 
 
-### F. Output discipline --- diffs, not novels {#h3-7-f-output-discipline-diffs-not-novels}
+### F. Output discipline --- diffs, not novels
 
 Every model has a "let me explain what I'm about to do" reflex. It's polite. It's also pure cost.
 
@@ -202,7 +202,7 @@ The leverage is in the system prompt. Two lines in `copilot-instructions.md` mak
 
 
 
-### G. Repo hygiene --- what the indexer sees {#h3-8-g-repo-hygiene-what-the-indexer-sees}
+### G. Repo hygiene --- what the indexer sees
 
 The indexer that powers retrieval respects `.gitignore`. Tighten it.
 
@@ -237,7 +237,7 @@ Three lines, \~50 tokens. Now "what does the template engine do?" can be answere
 
 
 
-### H. Observability --- latency is your token meter {#h3-9-h-observability-latency-is-your-token-meter}
+### H. Observability --- latency is your token meter
 
 You can't see Copilot's token counts. You don't need to. Use the proxy you already have:
 
@@ -268,8 +268,8 @@ Wire it into CI and context bloat stops accumulating silently across PRs.
 
 **Do this Monday:** put a stopwatch next to your editor for one day. Count "Amsterdam" (not Mississippi's) . You'll know which chats to rotate.
 
-Three workflow patterns that compound {#h2-10-three-workflow-patterns-that-compound}
-------------------------------------------------------------------------------------
+Three workflow patterns that compound
+-------------------------------------
 
 The eight levers above shrink the cost of an individual turn. These three patterns shrink the *number* of expensive turns. Apply them on top.
 
@@ -277,7 +277,7 @@ The eight levers above shrink the cost of an individual turn. These three patter
 
 
 
-### 1. The Ralph Wiggum loop {#h3-11-1-the-ralph-wiggum-loop}
+### 1. The Ralph Wiggum loop
 
 Named after the *Simpsons* character whose superpower is relentless dumbness. The recipe is unglamorous on purpose:
 
@@ -300,7 +300,7 @@ After it runs, `git log --oneline` reads like a changelog: one commit per task, 
 
 
 
-### 2. Auto-compact {#h3-12-2-auto-compact}
+### 2. Auto-compact
 
 Most assistants don't compact aggressively on their own. **You** have to drive it.
 
@@ -320,7 +320,7 @@ If you are interested in a sofisticated implementation of compaction, check this
 
 
 
-### 3. Planner → Implementer → Reviewer (agent handover) {#h3-13-3-planner-implementer-reviewer-agent-handover}
+### 3. Planner → Implementer → Reviewer (agent handover)
 
 This is the one that changes how features get built. Three short, focused chats with three different model choices and one shared artifact:
 
@@ -334,8 +334,8 @@ Three chats, \~5--8 premium requests total for an end-to-end feature. Compare wi
 
 The crucial discipline: the **handover artifact** (`plan.md`, the diff, the review notes) is the *only* thing that crosses the boundary. Never chat history. That's how you keep each agent's context small, focused, and cheap.
 
-The Monday checklist {#h2-14-the-monday-checklist}
---------------------------------------------------
+The Monday checklist
+--------------------
 
 Pin this to your team's wiki. Take what's useful, ignore the rest.
 
@@ -362,8 +362,8 @@ Pin this to your team's wiki. Take what's useful, ignore the rest.
 * \[ \] Use the planner / implementer / reviewer split for one real feature. Notice the request count.
 * \[ \] Treat latency as your token meter. Count Amsterdam for one day.
 
-Closing {#h2-15-closing}
-------------------------
+Closing
+-------
 
 The mindset shift is small and the wins are not.
 

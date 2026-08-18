@@ -22,15 +22,15 @@ frozen: false
 
 In this article, I'll explain how to use the web application framework [Hilla](https://hilla.dev) to create a master-detail view with a Grid to display the data and a Form to edit the data.
 
-What is Hilla? {#h2-0-what-is-hilla}
-------------------------------------
+What is Hilla?
+--------------
 
 > Hilla integrates a Spring Boot Java back end with a reactive TypeScript front end. It helps you build apps faster with type-safe server communication, including UI components, and integrated tooling. -- From [hilla.dev](https://hilla.dev/)
 
 Hilla uses TypeScript with [Lit](https://lit.dev/)and [Webcomponents](https://developer.mozilla.org/de/docs/Web/Web_Components) in the frontend and Spring Boot in the backend. In the backend you'll create endpoints from which the API and the TypeScript will be generated. This makes the access to the backend much easier and it's also typesafe and compile-time-checked.
 
-How to Start? {#h2-1-how-to-start}
-----------------------------------
+How to Start?
+-------------
 
 The source code is available on GitHub: <https://github.com/simasch/hilla-master-detail-with-filter>
 
@@ -46,8 +46,8 @@ npx @vaadin/cli init --hilla my-hilla-app
 Or use [start.vaadin.com](https://start.vaadin.com). Make sure that you delete all views and add one of those
 ![](https://martinelli.ch/wp-content/uploads/2022/06/image.png)
 
-The Endpoint {#h2-2-the-endpoint}
----------------------------------
+The Endpoint
+------------
 
 The demo project uses a `SamplePerson` entity. This is stored in an H2 database using Spring Data JPA.
 
@@ -171,8 +171,8 @@ const data = await SamplePersonEndpoint.list(
 
 As you can imagine changing the Endpoint on the Java side will result in changing the generated TypeScript code and you'll get compiler errors if there are breaking changes.
 
-The Entity {#h2-3-the-entity}
------------------------------
+The Entity
+----------
 
 For simplicity, we directly use the JPA Entity in the Endpoint. We also use annotations to define nullability and looking at the email property also some validation.
 
@@ -252,8 +252,8 @@ export default class SamplePersonModel<T extends SamplePerson = SamplePerson> ex
 
 The `SamplePerson` interface is used by our code and `SamplePersonModel `will be used for form binding.
 
-The View with the Grid {#h2-4-the-view-with-the-grid}
------------------------------------------------------
+The View with the Grid
+----------------------
 
 To create the view we use Lit. Also the View will be a Webcomponent. You'll find the full source code [here](https://github.com/simasch/hilla-master-detail-with-filter/blob/main/frontend/views/masterdetail/master-detail-view.ts).
 
@@ -351,8 +351,8 @@ private async getGridData(
 ```
 
 
-The Form {#h2-5-the-form}
--------------------------
+The Form
+--------
 
 To bind the `SamplePerson `object to the form we use a binder. A binder controls all aspects of a single form. It is typically used to get and set the form value, access the form model, validate, reset, and submit the form.  
 
@@ -400,8 +400,8 @@ render() {
 ```
 
 
-Submitting the Form {#h2-6-submitting-the-form}
------------------------------------------------
+Submitting the Form
+-------------------
 
 The last thing we want to have a look at is how to save the person in the form.
 
@@ -436,8 +436,8 @@ After saving we clear the store and dispatch an event `contact-form-saved`. This
 ```
 
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Of course, this was only a superficial introduction to Hilla.
 

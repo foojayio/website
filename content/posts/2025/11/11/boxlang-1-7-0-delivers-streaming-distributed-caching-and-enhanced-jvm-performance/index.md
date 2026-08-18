@@ -24,8 +24,8 @@ frozen: false
 
 This release introduces **native Server-Sent Events (SSE)** for real-time streaming, **JDBC-powered distributed caching** , **Abstract Syntax Tree (AST)** programmatic access, and **bytecode compatibility versioning**---alongside extensive performance optimizations across the runtime.
 
-Real-Time Streaming with Server-Sent Events {#h2-0-real-time-streaming-with-server-sent-events}
------------------------------------------------------------------------------------------------
+Real-Time Streaming with Server-Sent Events
+-------------------------------------------
 
 The centerpiece of this release is full **Server-Sent Events (SSE)** integration via a new `SSE()` built-in function and an enhanced **Emitter system**. These additions empower developers to build real-time, event-driven applications such as AI chatbots, live analytics dashboards, progress streams, and notification services.
 
@@ -72,8 +72,8 @@ SSE(
 ```
 
 
-Enterprise-Ready Distributed Caching {#h2-1-enterprise-ready-distributed-caching}
----------------------------------------------------------------------------------
+Enterprise-Ready Distributed Caching
+------------------------------------
 
 BoxLang 1.7.0 debuts the **JDBC Cache Store** , a robust distributed caching solution that enables shared caches across multiple BoxLang instances using enterprise databases such as **Oracle, MySQL, PostgreSQL, Microsoft SQL Server, Apache Derby, HSQLDB,** and **SQLite**.
 
@@ -99,8 +99,8 @@ BoxLang 1.7.0 debuts the **JDBC Cache Store** , a robust distributed caching sol
 
 The JDBC store includes **automatic schema creation** , **database-specific SQL optimization** , **eviction policy support (LRU, LFU)** , and **Base64 object serialization** for complex types. All cache stores now implement `isDistributed()` for ecosystem introspection.
 
-Advanced Code Analysis with BoxAST() {#h2-2-advanced-code-analysis-with-boxast}
--------------------------------------------------------------------------------
+Advanced Code Analysis with BoxAST()
+------------------------------------
 
 Developers can now access BoxLang's internal **Abstract Syntax Tree** through the new `BoxAST()` built-in function. This feature supports the creation of **linters** , **formatters** , **migration tools** , and **refactoring utilities**---making it invaluable for static analysis and CFML-to-BoxLang transitions.
 
@@ -130,13 +130,13 @@ cfAst = BoxAST(
 
 `BoxAST()` supports **BoxLang script and template syntax** , as well as **CFML/ColdFusion** code parsing for migration purposes, returning structured, JSON, or text output.
 
-Bytecode Compatibility Versioning {#h2-3-bytecode-compatibility-versioning}
----------------------------------------------------------------------------
+Bytecode Compatibility Versioning
+---------------------------------
 
 To enhance module stability and cross-version reliability, BoxLang now implements **bytecode compatibility versioning**, ensuring that compiled artifacts remain consistent and reusable across multiple runtime releases---a major improvement for module authors and enterprise teams maintaining large applications.
 
-Performance \& Stability Enhancements {#h2-4-performance-stability-enhancements}
---------------------------------------------------------------------------------
+Performance \& Stability Enhancements
+-------------------------------------
 
 Version 1.7.0 delivers substantial runtime performance boosts, including:
 
@@ -147,8 +147,8 @@ Version 1.7.0 delivers substantial runtime performance boosts, including:
 
 Additionally, over **40 bug fixes** improve database interaction, file handling, HTTP services, CFML compatibility, and Windows platform support.
 
-Open and Professional Ecosystem {#h2-5-open-and-professional-ecosystem}
------------------------------------------------------------------------
+Open and Professional Ecosystem
+-------------------------------
 
 BoxLang follows a **professional open-source model** with three editions: **Open Source (Apache 2.0)** , **BoxLang+** , and **BoxLang++** .  
 
@@ -164,8 +164,8 @@ New **BoxLang+ exclusive modules** include:
 
 Future roadmap modules include **bx-couchbase** , **bx-mongodb** , and **bx-elasticsearch**.
 
-Availability \& Resources {#h2-6-availability-resources}
---------------------------------------------------------
+Availability \& Resources
+-------------------------
 
 BoxLang 1.7.0 is available now via:
 
@@ -182,15 +182,15 @@ BoxLang 1.7.0 is available now via:
 
 📚 **Documentation:** [boxlang.ortusbooks.com](https://boxlang.ortusbooks.com)
 
-About BoxLang {#h2-7-about-boxlang}
------------------------------------
+About BoxLang
+-------------
 
 **BoxLang** is a next-generation, dynamic JVM language that runs seamlessly across multiple environments---**desktop, web, cloud, serverless, and embedded systems** . It combines the best features of Java, CFML, Python, Ruby, Go, and PHP to deliver a **modern, expressive, and functional syntax** with full Java interoperability.
 
 With native capabilities for **scheduling** , **asynchronous execution** , **event-driven programming** , **task management** , and **modular architecture** , BoxLang functions as both a **language** and a **framework** , serving as a replacement for legacy CFML engines like **Adobe ColdFusion** and **Lucee**.
 
-About Ortus Solutions {#h2-8-about-ortus-solutions}
----------------------------------------------------
+About Ortus Solutions
+---------------------
 
 **Ortus Solutions** is a leader in modern software development for the JVM ecosystem. The company builds innovative frameworks, tools, and languages, including **BoxLang** , **ColdBox MVC** , and **CommandBox CLI**, which power thousands of applications globally.
 

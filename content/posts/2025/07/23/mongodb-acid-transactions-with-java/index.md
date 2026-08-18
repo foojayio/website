@@ -27,8 +27,8 @@ Transactions let us group multiple operations together so they either all succee
 
 In this tutorial, you'll learn how MongoDB supports ACID transactions, when to use them, and how to implement them in Java using the [Java sync driver](https://www.mongodb.com/docs/drivers/java/sync/current/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+acid&utm_term=tim.kelly).
 
-What are MongoDB ACID transactions and when should you use them? {#h2-0-what-are-mongodb-acid-transactions-and-when-should-you-use-them}
-----------------------------------------------------------------------------------------------------------------------------------------
+What are MongoDB ACID transactions and when should you use them?
+----------------------------------------------------------------
 
 A MongoDB transaction is a way to execute a sequence of operations as a single atomic unit. This means if any part fails, the entire set of operations is rolled back. This is what ACID guarantees:
 
@@ -39,7 +39,7 @@ A MongoDB transaction is a way to execute a sequence of operations as a single a
 
 MongoDB gives us these guarantees for multi-document transactions starting in version 4.0 on replica sets and 4.2 on sharded clusters, going as far back as 2018.
 
-### But do you really need a transaction? {#h3-1-but-do-you-really-need-a-transaction}
+### But do you really need a transaction?
 
 [Data modelling best practices](https://www.mongodb.com/resources/basics/databases/data-modeling?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+acid&utm_term=tim.kelly) in MongoDB recommend embedding related data in a single document. For example, rather than storing a user and their addresses in separate collections, you'd typically embed the addresses inside the user document. One of the many benefits of this approach is it makes most operations atomic without needing transactions.
 
@@ -51,8 +51,8 @@ However, there are valid reasons to go beyond single-document operations:
 
 In those situations, transactions are the right tool.
 
-Transaction APIs: Callback vs core {#h2-2-transaction-apis-callback-vs-core}
-----------------------------------------------------------------------------
+Transaction APIs: Callback vs core
+----------------------------------
 
 Before we dive into the fund transfer example, it's important to understand how MongoDB exposes transactions in the Java driver. There are two main ways to run transactions:
 
@@ -61,7 +61,7 @@ Before we dive into the fund transfer example, it's important to understand how 
 
 Both APIs use sessions under the hood and offer full ACID semantics. The difference lies in how much responsibility we, the developer, take on.
 
-### When to use the callback API {#h3-3-when-to-use-the-callback-api}
+### When to use the callback API
 
 The callback API is ideal when our transaction logic is simple and self-contained. We write our operations in a lambda, and the driver handles the rest---from including starting the transaction to committing it, and even retrying if needed. Below is a little code snippet to show what this might look like:
 
@@ -83,7 +83,7 @@ It's recommended when:
 * You're working with predictable transaction boundaries.
 * You want built-in retry handling without a lot of boilerplate (it's Java, we have enough boilerplate as it is).
 
-### When to use the core API {#h3-4-when-to-use-the-core-api}
+### When to use the core API
 
 The core API gives us more control over how a transaction starts, commits, and aborts. We'll manage everything manually, which means more flexibility. But as always, with great power comes great responsibility.
 
@@ -110,14 +110,14 @@ Not a lot more complicated than the callback API, just a more hands-on approach.
 * You're building custom retry/backoff logic.
 * You want to log or handle partial failures explicitly.
 
-Setting up: A simple banking example {#h2-5-setting-up-a-simple-banking-example}
---------------------------------------------------------------------------------
+Setting up: A simple banking example
+------------------------------------
 
 Let's build a simple banking demo. We'll set up two accounts: Alice and Bob. Then, we'll transfer money from one to the other, and ensure both the debit and credit happen atomically.
 
 Our Java program connects to a MongoDB database, sets up the data, and invokes a `transferFunds` function that wraps everything in a transaction.
 
-### Prerequisites {#h3-6-prerequisites}
+### Prerequisites
 
 We need a few things in order to get started:
 
@@ -140,8 +140,8 @@ In our Maven project, we need to add our MongoDB driver dependency. Open the `po
 ```
 
 
-Connecting and seeding data {#h2-7-connecting-and-seeding-data}
----------------------------------------------------------------
+Connecting and seeding data
+---------------------------
 
 Before we can demonstrate transactions, we need some data to work with. In this section, we connect to MongoDB, set up a `bank` database, and create a simple `accounts` collection with two users: Alice and Bob.
 
@@ -177,8 +177,8 @@ We create a `bank` database and get the `accounts` collection. We call `drop()` 
 
 Now, let's look at how we implement that transaction, using the callback API.
 
-Writing a transaction (with the callback API) {#h2-8-writing-a-transaction-with-the-callback-api}
--------------------------------------------------------------------------------------------------
+Writing a transaction (with the callback API)
+---------------------------------------------
 
 MongoDB requires that all transactions happen inside a session. When using the callback API, we pass a lambda (or Java function) to the driver's `withTransaction()` method, and the driver takes care of the rest, including starting, committing, and retrying the transaction if needed.
 
@@ -230,8 +230,8 @@ Now, for our simple business use case example, inside the lambda, we:
 
 If the sender has insufficient funds, we throw an exception. This causes the transaction to be aborted. Finally, we print a success message or handle errors if the transaction fails entirely. Super simple and straightforward thanks to our trusty callback API.
 
-Supported operations {#h2-9-supported-operations}
--------------------------------------------------
+Supported operations
+--------------------
 
 Most of the common MongoDB operations can be included in a transaction:
 
@@ -249,8 +249,8 @@ That being said, we can't do everything. There are some limitations to operation
 
 We have a comprehensive list of supported operations in [our docs](https://www.mongodb.com/docs/manual/core/transactions/#transactions-and-operations?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+acid&utm_term=tim.kelly), so make sure to check out what transactions can do before implementing them in your application.
 
-Transactions in sharded clusters {#h2-10-transactions-in-sharded-clusters}
---------------------------------------------------------------------------
+Transactions in sharded clusters
+--------------------------------
 
 Transactions are also [supported across shards](https://www.mongodb.com/docs/manual/core/transactions-sharded-clusters/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+acid&utm_term=tim.kelly). This means we can span documents across multiple shards and still keep full ACID guarantees.
 
@@ -261,8 +261,8 @@ Behind the scenes, the driver and [`mongos`](https://www.mongodb.com/docs/manual
 
 This comes at a performance cost, so avoid sharded transactions unless you truly need them. Good schema design often eliminates the need.
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 MongoDB's support for multi-document ACID transactions gives you flexibility when single-document atomicity isn't enough. In most applications, considerate document design will reduce the need for them. But when you do need that extra level of consistency, MongoDB transactions are there and ready.
 

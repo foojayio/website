@@ -23,7 +23,7 @@ First, some data! Here's the Google Analytics graph showing total unique visitor
  <img fetchpriority="high" decoding="async" src="first-6-months-2021-1024x844.png" alt="" class="wp-image-51304" width="522" height="430">
 </figure>
 
-### Understanding the Data {#h3-0-understanding-the-data}
+### Understanding the Data
 
 It should be noted that Foojay.io was launched in April 2020, gradually building out from initially only providing [OpenJDK release notes in the form of the OpenJDK update and release details](https://foojay.io/java-8/?quarter=042020&tab=highlights&version=openjdk8u252), then to [incorporating Marc Hoffmann's Java Almanac](https://foojay.io/almanac/jdk-11/) and the [integration of Chris Newland's JVM Options Explorer](https://foojay.io/command-line-arguments/openjdk-11/?tab=alloptions), after which [Foojay.io Today](https://foojay.io/today/) was added, as well as the several other features, such as the [Java Events Calendar](https://foojay.io/calendar/) and the [Foojay Pedia of frequently used/confused OpenJDK terminology](https://foojay.io/pedia/).
 
@@ -41,7 +41,7 @@ After that there were a number of significant spikes, in the graph above, which 
 
 It is also noticeable that [a lot of JavaFX-related content is finding its way onto Foojay.io](https://foojay.io/today/category/java/javafx/), indicating that there really is a lot of innovation going on in that part of the Java ecosystem, a combination of the possibilities provided by game development via FXGL by the amazing [Almas Baimagambetov](https://foojay.io/today/author/almasbaimagambetov/) to [the multiplatform JavaFX support provided by Gluon](https://foojay.io/today/creating-mobile-apps-with-javafx-part-1/), to the enthusiasm around that combination together with Raspberry Pi by the inspiring [Frank Delporte](https://foojay.io/today/author/frankdelporte/), while beyond the areas of JavaFX, the Java security domain has been excellently and thoroughly covered by [Brian Vermeer](https://foojay.io/today/author/bmvermeer/) from Snyk, microservices and beyond by [Jadon Ortlepp](https://foojay.io/today/author/jadon-ortlepp/) from Payara, IntelliJ IDEA by [Helen Scott](https://foojay.io/today/author/helenjoscott/) from JetBrains, VS Code by [Yaojin Yang](https://foojay.io/today/author/yaojin-yang/) from Microsoft, and simply cool and cutting edge performance-related content by [Nicolas Frankel](https://foojay.io/today/author/nicolas-frankel/) from Hazelcast. Well done to one and all. Thank you, Wim! Thank you, Deepu! Thank you, Peter! Thank you, Brian! Thank you, Frank! Thank you, Almas! Thank you, Nicolas! Thank you, Helen! Thank you, Yaojin! Thank you, Jadon! And well done, every single other individual contributor ([just too many to name individually](https://foojay.io/today/author/)) for providing such strong content, day after day, week after week, month after month!
 
-### Month-By-Month Growth {#h3-1-month-by-month-growth}
+### Month-By-Month Growth
 
 Let's also look at the month-by-month growth of Foojay.io. The first graph shows that between January and March this year, i.e., over the space of two months, total unique visitors doubled:
 
@@ -55,7 +55,7 @@ That doubling effect, which took two months, i.e., from January to March, took h
  <img loading="lazy" decoding="async" src="image-14-1024x865.png" alt="" class="wp-image-45154" width="355" height="300">
 </figure>
 
-### Thank You, Everyone! {#h3-2-thank-you-everyone}
+### Thank You, Everyone!
 
 In short, the trends are what one would hope... and they indicate that we're doing well as a community, that there is significant momentum, and that there's a lot to be gained in collaborating with Foojay.io, by publishing or republishing content here. **Foojay.io is living up to its ambition to be a central resource for the Java community's daily ​information needs, a place for friends of OpenJDK, ​and a community platform for the Java ecosystem​ --- bringing together and helping Java professionals everywhere.​**
 
@@ -63,7 +63,7 @@ Thank you to everyone involved, [the dozens of contributors from across the Java
 
 Many thanks also to specific people at Azul, you know who you are, including, among many others, Pavel Petroshenko, Betsy Rhodes, Gerrit Grunwald, and Carl Dea, as well as (maybe more than anyone for being so flexible and adaptable and open to all our smallest whims) the development team of [Slava, Vigen, and everyone at Yelk](https://www.linkedin.com/company/yelk/about/).
 
-### Quotes {#h3-3-quotes}
+### Quotes
 
 **"Foojay is an example of the strength of the Java community that is greater than any single company and is composed of active, passionate, and caring individuals who want to share their expertise and help mentor the next generation of developers."** --- Stephen Chin, Head of Developer Relations at JFrog (on [Foojay Board page](https://foojay.io/board/))
 
@@ -71,7 +71,7 @@ Many thanks also to specific people at Azul, you know who you are, including, am
 
 **"I like the way Foojay highlights what the Java community is doing. We have missed that."** --- Johan Vos, Co Founder at Gluon (on [Twitter](https://twitter.com/johanvos/status/1403261868031057928))
 
-### Next Steps {#h3-4-next-steps}
+### Next Steps
 
 The Foojay.io site is under heavy development right now, a new homepage will be released over the next weeks. After that, there are several directions we can go in together---how about a forum, a job board, a newsletter, a real calendar, a code exchange, and Foojay Awards?
 

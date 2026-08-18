@@ -24,8 +24,8 @@ I recall the C course I took during my first semester at university. I wanted to
 
 Since then, I've been curious about the internals of technologies. That way, I'll be able to appreciate it more. On that note, I'd like to talk about how the JVM works internally today.
 
-How the JVM Works {#h2-0-how-the-jvm-works}
--------------------------------------------
+How the JVM Works
+-----------------
 
 Java code is compiled into bytecode, which is then executed by Java's virtual machine. This produces an intermediate language (IL), which is neither human-readable nor machine-executable. As a result, only the virtual machine comprehends it.
 
@@ -45,8 +45,8 @@ This conclusion, while intuitive, is incorrect, but that is where the JIT compil
 
 Now the question gets to be, what does the JIT compiler do?
 
-What Does the JIT Compiler Do? {#h2-1-what-does-the-jit-compiler-do}
---------------------------------------------------------------------
+What Does the JIT Compiler Do?
+------------------------------
 
 Its first job is to sit around and just watch the code. It profiles code. It watches how the code is being executed. If a particular method always returns the same value, does it require calling the method at all?
 

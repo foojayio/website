@@ -33,8 +33,8 @@ The rest of the release pushes the open source core outward: car projection, mot
 
 Here is what shipped.
 
-CarPlay and Android Auto {#h2-0-carplay-and-android-auto}
----------------------------------------------------------
+CarPlay and Android Auto
+------------------------
 
 [PR #5281](https://github.com/codenameone/CodenameOne/pull/5281) adds a portable `com.codename1.car` API for Apple CarPlay and Google Android Auto. The important caveat is that car platforms are template-based. They do not allow an app to draw an arbitrary Codename One `Form` on the dashboard. You describe a driver-safe list, grid, message, pane, navigation, or now-playing template, and Codename One maps that to `CPTemplate` on CarPlay and `androidx.car.app` templates on Android Auto.
 
@@ -44,8 +44,8 @@ CarPlay and Android Auto {#h2-0-carplay-and-android-auto}
 
 The API is zero cost when unused. Referencing `com.codename1.car` is what tells the build to inject CarPlay scenes, entitlements, Android Auto services, and the AndroidX dependency. Apps that never touch the package do not carry that code. Tomorrow's post walks through the template model, the simulator head unit, and the approvals you still need from Apple and Google.
 
-Motion, Input, And Real Hardware {#h2-1-motion-input-and-real-hardware}
------------------------------------------------------------------------
+Motion, Input, And Real Hardware
+--------------------------------
 
 [PR #5310](https://github.com/codenameone/CodenameOne/pull/5310) adds `com.codename1.sensors`, a cross-platform motion API with accelerometer, gyroscope, magnetometer, derived gravity, linear acceleration, orientation, and common gestures such as shake, flip, tilt, pick up, and free fall. This replaces the old external `sensors-codenameone` cn1lib with a core API and a core gesture engine.
 
@@ -53,8 +53,8 @@ Motion, Input, And Real Hardware {#h2-1-motion-input-and-real-hardware}
 
 Together they make Codename One less phone-only. A canvas can tell the difference between a finger, a mouse, and a stylus. A foldable can split layout around a hinge. A trackpad pinch can zoom the same component as a mobile pinch. Sunday's post covers the full hardware story.
 
-Commerce And Secrets {#h2-2-commerce-and-secrets}
--------------------------------------------------
+Commerce And Secrets
+--------------------
 
 [PR #5300](https://github.com/codenameone/CodenameOne/pull/5300) adds the Commerce SDK and the Secrets API.
 
@@ -81,8 +81,8 @@ Monday's post is mostly a failure-mode pass over Commerce: what it does, what it
 
 ![Secrets dashboard for cloud-managed app secrets](https://www.codenameone.com/blog/commerce-secrets-without-iap-tax/secrets.png)
 
-Versioned Builds Are Back {#h2-3-versioned-builds-are-back}
------------------------------------------------------------
+Versioned Builds Are Back
+-------------------------
 
 Versioned builds are back, and the model is better suited to Maven than the old Ant-era point release scheme. You can pin a cloud build to a released Codename One version, or build against `master` when you need to verify an unreleased fix.
 
@@ -94,8 +94,8 @@ Community developers recently asked for nightly or daily builds. Building agains
 
 Subscription tiers limit versioned build access because old versions create support churn, not because fetching a few artifacts drives the business model. The further back a build goes, the harder it is to diagnose a regression against the current code. The new model still opens versioned builds much further down the account ladder than before, including limited access for basic/free usage, while giving paying teams the longer support windows they actually need. Tuesday's post covers the tradeoff.
 
-Video, Audio, And Subtitles {#h2-4-video-audio-and-subtitles}
--------------------------------------------------------------
+Video, Audio, And Subtitles
+---------------------------
 
 [PR #5315](https://github.com/codenameone/CodenameOne/pull/5315) adds `VideoIO`: cross-platform video encode and frame-accurate decode using native codecs. It can encode app-rendered frames plus audio into MP4/WebM/MOV/MKV style containers, enumerate codecs, decode exact frames, resample variable-frame-rate clips, and expose the audio track as PCM.
 
@@ -105,8 +105,8 @@ Video, Audio, And Subtitles {#h2-4-video-audio-and-subtitles}
 
 Wednesday's post shows how these pieces fit: render frames, mix audio, encode a video, decode frames back out, and attach timed captions.
 
-Smaller But Important {#h2-5-smaller-but-important}
----------------------------------------------------
+Smaller But Important
+---------------------
 
 There are four smaller changes worth calling out:
 
@@ -115,8 +115,8 @@ There are four smaller changes worth calling out:
 * **MorphTransition grew up.** [PR #5314](https://github.com/codenameone/CodenameOne/pull/5314) adds opacity, rotation, scale, deterministic scrubbing, and arbitrary rendered elements. This matters for UI polish and also for frame export, because scrubbing lets the same transition be rendered into generated video.
 * **Timed Whisper transcription.** [PR #5319](https://github.com/codenameone/CodenameOne/pull/5319) also deserves a second mention because timed segments turn transcription into subtitles. The cn1lib can render SRT and VTT payloads from segment timestamps.
 
-Upcoming Posts {#h2-6-upcoming-posts}
--------------------------------------
+Upcoming Posts
+--------------
 
 * **Saturday.** . PR [#5281](https://github.com/codenameone/CodenameOne/pull/5281).
 * **Sunday.** . PRs [#5310](https://github.com/codenameone/CodenameOne/pull/5310) and [#5309](https://github.com/codenameone/CodenameOne/pull/5309).
@@ -125,8 +125,8 @@ Upcoming Posts {#h2-6-upcoming-posts}
 * **Wednesday.** . PRs [#5315](https://github.com/codenameone/CodenameOne/pull/5315), [#5317](https://github.com/codenameone/CodenameOne/pull/5317), and [#5319](https://github.com/codenameone/CodenameOne/pull/5319).
 * **Thursday.** . The final part of the Game Builder tutorial series.
 
-Wrapping Up {#h2-7-wrapping-up}
--------------------------------
+Wrapping Up
+-----------
 
 The release is large because the app surface is larger now. It reaches cars, foldables, desktops, sensors, stylus devices, media pipelines, cloud validation, and older build timelines.
 

@@ -33,14 +33,14 @@ We are excited to announce the general availability of a gRPC API for Apache Cas
 
 Native database drivers offer high performance but not all programming languages have commercially supported drivers. Writing and maintaining a native driver is complex and time-consuming because it involves significant configuration management (retries, load balancing, and pooling, for example). Community drivers alleviate development work but often lack enterprise functionality because active development is intermittent.
 
-### **Introducing the gRPC API** {#h3-0-introducing-the-grpc-api}
+### **Introducing the gRPC API**
 
 One way to address these challenges is with gRPC, an open-source, high-performance, remote procedure call (RPC) framework developed by Google. DataStax has leveraged this technology to create a gRPC API to query Cassandra that's 100% open source and already includes client libraries for Go, Rust, Node.js, and Java.
 
 Client libraries send CQL queries from the application to the gRPC API which in turn passes those queries to Cassandra. The gRPC API is part of Stargate, an open-source project that serves as a data API gateway to make it easier to work with data in Cassandra. Stargate sits between your applications and Cassandra and includes schemaless JSON, REST, and GraphQL APIs, providing alternatives to traditional database drivers.  
 ![gRPC for Apache Cassandra\[8X faster\](https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/grpc "8X faster")](gRPC-blog-image.png)
 
-### **How a gRPC API can solve your challenges** {#h3-1-how-a-grpc-api-can-solve-your-challenges}
+### **How a gRPC API can solve your challenges**
 
 gRPC is unanimously accepted as the best option for communicating between microservices for two reasons: unmatched performance and multilingual support. Its high-performance results from using a binary data format rather than text-based JSON, resulting in a smaller payload. In some studies this data serialization has made gRPC [8X faster](https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/grpc "8X faster"). Since gRPC allows for describing a service contract in a binary format, there's a standard way to specify those contracts, regardless of the programming language used, thus ensuring interoperability. If you're creating applications using polyglot microservices, gRPC is the best choice for exchanging data between these services and Cassandra.
 
@@ -59,7 +59,7 @@ In summary, gRPC introduces a potent alternative to native Cassandra drivers---o
 
 DataStax will continue to introduce more native drivers and innovate with gRPC to create additional ways to interact with Cassandra.
 
-### **How to get started** {#h3-2-how-to-get-started}
+### **How to get started**
 
 Ready to find out if gRPC is a fit for you? If you are using Apache Cassandra (3.x and higher) or DataStax Enterprise 6.8, download and install [Stargate](https://downloads.datastax.com/#stargate "Stargate") to access the gRPC API.
 

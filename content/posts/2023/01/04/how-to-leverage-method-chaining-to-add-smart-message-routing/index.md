@@ -231,7 +231,7 @@ Sends the product to America, product=!Product {
 ```
 
 
-### Summary {#h3-0-summary}
+### Summary
 
 All of the above has been built using the open-source product Chronicle-Wire.
 
@@ -243,7 +243,7 @@ Other uses for method chaining and associating meta-information include setting 
 
 Then, Dispatching events with associated metadata over an event-driven architecture (EDA) framework allows custom lightweight microservices to read and act upon that metadata.
 
-### What else {#h3-1-what-else}
+### What else
 
 [Chronicle-Services](https://chronicle.software/products/services/ "Chronicle-Services") takes this concept to the next stage, offering an EDA framework; it also comes with a web gateway that uses a similar principle to provide routing of JSON messages (below) to web-based clients using REST and WebSockets:
 

@@ -20,8 +20,8 @@ Summer conference season goes quiet. Most major Java events wrap by June, CFPs g
 
 If you're in the northeastern US or eastern Canada and are around next month with some extra time to spare, this may be a good excuse to join your local community to watch and learn from a technical session on a problem most of us have hit in production, delivered by [Simon Ritter,](https://gsjug.org/profiles/simon-ritter.html) a Java Champion who's spent years in the JVM internals.
 
-The talk: Keeping Your Java Hot - Solving the JVM Startup and Warmup Problem {#h2-0-the-talk-keeping-your-java-hot-solving-the-jvm-startup-and-warmup-problem}
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+The talk: Keeping Your Java Hot - Solving the JVM Startup and Warmup Problem
+----------------------------------------------------------------------------
 
 Get ready to tackle JVM startup woes and keep your Java apps running smooth and speedy from the get-go.
 
@@ -38,13 +38,13 @@ In this session, we'll look at several approaches to alleviating or even elimina
 
 At the end of the session, you'll be all set to keep your Java hot!
 
-Why join your local JUG this August? {#h2-1-why-join-your-local-jug-this-august}
---------------------------------------------------------------------------------
+Why join your local JUG this August?
+------------------------------------
 
 August tends to be a quieter month so it may be a perfect time to spend an evening on learning about a topic that matters the next time you're debugging cold starts, rather than skimming it between meetings. It's also a good excuse to come back to your local JUG if it's been a while, or to join one for the first time if you never have - these communities are so worth being part of and a specialist talk from a well known speaker is not something that is usually available for free elsewhere. You get to see and talk to Simon face to face, which means you can actually ask the questions you'd normally have to google the answer to, and you get a room full of people wrestling with the same problems, which is its own kind of learning. Turn up, listen, ask something, talk to whoever's next to you afterward.
 
-The full tour details {#h2-2-the-full-tour-details}
----------------------------------------------------
+The full tour details
+---------------------
 
 |   Date    |        JUG        |                                                                            Registration                                                                             |
 |:---------:|:-----------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|

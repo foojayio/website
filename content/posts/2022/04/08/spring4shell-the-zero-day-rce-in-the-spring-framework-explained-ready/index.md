@@ -25,8 +25,8 @@ On March 30, 2022, a critical [remote code execution (RCE) vulnerability](https:
 
 Security resources like [Lunasec](https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities/), [Rapid7](https://www.rapid7.com/blog/post/2022/03/30/spring4shell-zero-day-vulnerability-in-spring-framework/) and [Praetorian](https://www.praetorian.com/blog/spring-core-jdk9-rce/) confirmed that the vulnerability is real, and in the meantime, Spring has already released a new version that mitigates this problem, so [we recommend updating](https://snyk.io/blog/is-there-such-a-thing-as-spring4shell/). While **Spring4Shell** does not appear to have the same impact as the recent Log4Shell vulnerability, it should still be evaluated and prioritized by every organization using the Spring Framework. In this post, we'll explore how the RCE works.
 
-Explaining Spring4Shell {#h2-0-explaining-spring4shell}
--------------------------------------------------------
+Explaining Spring4Shell
+-----------------------
 
 If we have a controller with a request mapping loaded into memory, we are already vulnerable to this issue. Below, you see our `GreetingController` with a `PostMapping` to `/greeting`. When we call our application in, for instance, Tomcat at `https://mydomain/myapp/greeting` it tries to transform the input to a POJO (Plain Old Java Object) which, in our case, is the `Greeting` object.
 

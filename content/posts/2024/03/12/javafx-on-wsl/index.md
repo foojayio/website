@@ -31,8 +31,8 @@ Note that this article does not refer to other embedded systems without a window
 
 If you have never used WSL or the graphics support of WSL before, you might be surprised how seamless everything works nowadays. The X11 configuration is done automatically and should work out of the box once all necessary packages are installed. Performance is decent and comparably much better than running a Linux VM on your Windows system.
 
-JavaFX dependencies on Linux {#h2-0-javafx-dependencies-on-linux}
------------------------------------------------------------------
+JavaFX dependencies on Linux
+----------------------------
 
 The main thing that can catch you out on these systems is a missing dependency. This will cause the JavaFX platform initialization to fail with library loading errors most of the time.
 
@@ -100,8 +100,8 @@ Note that this list is only compiled for basic purposes. If you are looking into
 
 When generating a .deb or .rpm installer, you just have to list these packages to depend on, and they should be automatically installed by the package manager. The generation of .deb and .rpm installers is not covered in this article. We use the [gradle-ospackage-plugin](https://github.com/nebula-plugins/gradle-ospackage-plugin) for that, which is an easy-to-use gradle plugin. However, any other solution should also work.
 
-JavaFX font loading on Linux {#h2-1-javafx-font-loading-on-linux}
------------------------------------------------------------------
+JavaFX font loading on Linux
+----------------------------
 
 In contrast to Windows and macOS, font loading on Linux is a lot more dynamic. Especially on non-graphical systems or embedded systems, there might be no fonts at all installed by default. Things are made more complicated by the fact that font package names can vary across distributions and package managers. There's no sure way to install some font package on every system as that package might not exist in some distro package manager repositories or has a different name.
 

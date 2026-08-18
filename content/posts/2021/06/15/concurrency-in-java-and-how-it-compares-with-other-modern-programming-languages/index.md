@@ -37,8 +37,8 @@ The chapters of this series are as below, with part 6 here on Foojay.io, the pla
 
 
 
-Concurrency in Java {#h2-0-concurrency-in-java}
------------------------------------------------
+Concurrency in Java
+-------------------
 
 > "The Java programming language and the Java virtual machine (JVM) have been designed to support concurrent programming, and all execution takes place in the context of threads. " -- Wikipedia
 
@@ -52,13 +52,13 @@ Java 8 bought a lot of improvements and simplifications to make it easier to do 
 
 With Java, it's possible to do multi-threaded concurrency or parallel programming as well as asynchronous programming. This means as we saw in the [first chapter](https://deepu.tech/concurrency-in-modern-languages/), we can mix and match these models to get the best possible performance for any use case.
 
-### Multi-threading {#h3-1-multi-threading}
+### Multi-threading
 
 Java provides building blocks to create and manage OS threads as part of the standard library and it also provides implementations required for [shared-state concurrency](https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html) using locks and synchronization. Message-passing concurrency is not provided by default but can be done using external libraries like [Akka](https://akka.io/) or using an [Actor model](https://en.wikipedia.org/wiki/Actor_model) implementation. However, due to the memory model, it's up to the developer to ensure there are no data races or memory leaks in the concurrent program.
 
 In order to make multi-threading even more efficient, Java provides ways to create thread pools and reuse those threads to increase throughput. This will become even better once Project loom is released, hopefully with Java 17 or 18. Technically Java has one of the most mature ecosystems when it comes to multi-threading and most Java frameworks that you would end up using will be making use of it internally for performance improvements.
 
-### Asynchronous processing {#h3-2-asynchronous-processing}
+### Asynchronous processing
 
 Technically asynchronous programming is not part of concurrency but in practice, it goes hand in hand for many use cases and improves performance, and makes resource usage more efficient. In Java asynchronous programming is achieved using the same building blocks as concurrent/parallel programming. a.k.a, Threads. This wasn't very popular in Java before Java 8 due to complexity and, let's be honest, the lack of things like lambdas, functional programming support, CompletableFuture, and so on.
 
@@ -66,12 +66,12 @@ The latest versions of Java provide the building blocks required for asynchronou
 
 Java still doesn't have any syntax sugar for async/await though but there are alternatives like the [EA Async](https://github.com/electronicarts/ea-async) library that's close enough.
 
-Benchmarking {#h2-3-benchmarking}
----------------------------------
+Benchmarking
+------------
 
 Now that we have some basic understanding of concurrency features in Java, let us build a simple concurrent web server in Java. Since Java offers multiple ways to achieve this we'll be building two sample applications and comparing them. The Java version used is the latest (16.0.1) at the time of writing.
 
-### Multi-threaded concurrent webserver {#h3-4-multi-threaded-concurrent-webserver}
+### Multi-threaded concurrent webserver
 
 This example is closer to the Rust multi-threaded example we built in the [rust chapter](https://deepu.tech/concurrency-in-modern-languages-rust/), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). We use `java.net.ServerSocket` for this. We are not using any external dependency in this case.
 
@@ -200,7 +200,7 @@ As you can see, the request handler thread sleeps for 2 seconds for every 10th r
 
 So let's see if we can have another solution without such a bottleneck.
 
-### Asynchronous concurrent webserver {#h3-5-asynchronous-concurrent-webserver}
+### Asynchronous concurrent webserver
 
 This example is closer to the asynchronous example from the [rust chapter](https://deepu.tech/concurrency-in-modern-languages-rust/), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). Notice that we are using `java.nio.channels.AsynchronousServerSocketChannel`here and no external dependencies.
 
@@ -328,8 +328,8 @@ Percentage of the requests served within a certain time (ms)
 
 We have almost identical results here, this one is even faster by 100ms. Hence this version seems much more efficient than the multi-threaded version for this particular use case, however, at the cost of added complexity.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 As I explained in the [first part](https://deepu.tech/concurrency-in-modern-languages/) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases.
 
@@ -339,8 +339,8 @@ The idea is to see the differences in solutions and to understand how concurrenc
 
 
 
-References {#h2-7-references}
------------------------------
+References
+----------
 
 * [blogs.oracle.com](https://blogs.oracle.com/javamagazine/going-inside-javas-project-loom-and-virtual-threads)
 * [dzone.com](https://dzone.com/articles/java-concurrency-evolution)

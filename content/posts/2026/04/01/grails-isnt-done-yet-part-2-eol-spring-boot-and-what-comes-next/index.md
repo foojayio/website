@@ -19,11 +19,11 @@ This article is about the other side of the same coin.
 
 While Grails moves forward, many of the applications built on it cannot move at the same pace. The result is a growing gap between where the framework is heading and where a significant number of production systems actually sit. Understanding that gap, and what options exist for managing it, is what this piece is about.
 
-### The inflexion point {#h3-0-the-inflexion-point}
+### The inflexion point
 
 The alignment of Grails with modern Spring Boot and Java baselines brings us to a critical inflexion point in 2026. While the framework is being revitalised, the "gravity" of the underlying ecosystem is shifting. Many legacy Grails applications remain tied to versions of Spring Boot and Java that are rapidly approaching or have already reached End of Life.
 
-### Where Grails versions stand today {#h3-1-where-grails-versions-stand-today}
+### Where Grails versions stand today
 
 The Apache Grails support schedule tells the story clearly:
 
@@ -35,7 +35,7 @@ The Apache Grails support schedule tells the story clearly:
 
 That is the Grails layer. Beneath it, the picture gets more complicated.
 
-### The Spring Boot gravitational pull {#h3-2-the-spring-boot-gravitational-pull}
+### The Spring Boot gravitational pull
 
 Beneath all of this, the Spring Boot timelines create their own gravitational pull.
 
@@ -45,7 +45,7 @@ For teams still running applications on Spring Boot 2.x, open-source support end
 
 Taken together, this is less a single deadline and more a slow-moving *dependency cliff*.
 
-### What the risk actually looks like {#h3-3-what-the-risk-actually-looks-like}
+### What the risk actually looks like
 
 The primary corporate risk is rarely that these systems suddenly stop working. Mature Grails applications are typically very stable. The real exposure appears more slowly and more quietly, when organisations lose visibility of their dependency health and drift out of a supported posture without fully realising it.
 
@@ -55,7 +55,7 @@ A team running Grails 4 on Spring Boot 2.x and Java 11 does not wake up one morn
 
 The danger is not sudden failure. It is the slow accumulation of exposure that nobody is tracking.
 
-### The practical middle ground {#h3-4-the-practical-middle-ground}
+### The practical middle ground
 
 In practice, most organisations are not choosing between "upgrade tomorrow" and "do nothing." Reality is rarely that clean. Portfolio constraints, regulatory timelines, and simple engineering capacity mean many teams need a supported holding pattern while they plan their next move.
 
@@ -63,7 +63,7 @@ Increasingly, this is where commercial continuity support for end-of-life open s
 
 Even the ASF itself acknowledges this reality: the Foundation does not offer commercial support, but it recognises that not everyone can keep pace with upstream release cadences.
 
-### Upgrade is an action, not a strategy {#h3-5-upgrade-is-an-action-not-a-strategy}
+### Upgrade is an action, not a strategy
 
 The reflex response to EOL exposure is "just upgrade." And upgrading is, eventually, the right thing to do. But treating it as a strategy rather than an action ignores the complexity of real-world systems.
 
@@ -101,13 +101,13 @@ Providing EOL support is not a simple undertaking and requires particular skills
 
 If you have multiple Grails applications at different versions, sequence the work. Prioritise by exposure, not by convenience. Treat the dependency cliff as the engineering constraint it is, and fund it accordingly.
 
-### Summary {#h3-6-summary}
+### Summary
 
 The Grails revitalisation under the ASF is real, and it matters. But it does not retroactively protect the applications that were built on earlier versions of the framework. Those systems need their own plan.
 
 In an industry that celebrates only the new, the work of keeping older systems safe and supported is easy to overlook. It probably should not be.
 
-### Resources {#h3-7-resources}
+### Resources
 
 [Apache Grails Support Schedule](https://grails.apache.org/support-schedule.html)  
 [Spring Boot End of Life Dates](https://endoflife.date/spring-boot)  

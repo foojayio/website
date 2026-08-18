@@ -23,24 +23,24 @@ frozen: false
 
 This article explores how Liquibase and MongoDB can be integrated with Git actions to implement source control for database changes.
 
-What is Liquibase? {#h2-0-what-is-liquibase}
---------------------------------------------
+What is Liquibase?
+------------------
 
 Liquibase is an open-source tool designed to manage version control for database schema changes. It allows developers to simplify and automate the process of applying database updates across various database platforms.
 
 By using database-independent formats like XML, YAML, or JSON, Liquibase enables teams to define changes in a consistent and structured way. In a Java project, these updates are organized into files containing *changesets*, which outline the specific instructions needed to modify or refactor the database schema.
 
-What is MongoDB? {#h2-1-what-is-mongodb}
-----------------------------------------
+What is MongoDB?
+----------------
 
 MongoDB is an open-source NoSQL database management system that provides an alternative to traditional relational databases. It is designed to store and manage document-oriented data, making it ideal for scenarios that require flexible, scalable, and high-performance data storage and retrieval.
 
-Setting up a local MongoDB instance on Windows {#h2-2-setting-up-a-local-mongodb-instance-on-windows}
------------------------------------------------------------------------------------------------------
+Setting up a local MongoDB instance on Windows
+----------------------------------------------
 
 To test the integration of tools like Liquibase with MongoDB, we need a MongoDB server running locally. Install MongoDB directly on a Windows machine.
 
-### Use Liquibase with MongoDB {#h3-3-use-liquibase-with-mongodb}
+### Use Liquibase with MongoDB
 
 [MongoDB](https://www.mongodb.com/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=rav-foojay&utm_term=tony.kim) is a document-oriented NoSQL database. For more information, see the[MongoDB Documentation](https://www.mongodb.com/docs/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=rav-foojay&utm_term=tony.kim).
 
@@ -48,14 +48,14 @@ To test the integration of tools like Liquibase with MongoDB, we need a MongoDB 
 
 Liquibase supports MongoDB versions starting from 5.0 onwards: 5.x, 6.x, 7.x, 8.x.
 
-Prerequisites {#h2-4-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 1. Download the latest version of the [Liquibase MongoDB Pro Extension](https://mvnrepository.com/artifact/org.liquibase.ext/liquibase-commercial-mongodb).
 2. [Ensure Java is installed](https://docs.liquibase.com/start/install/liquibase-requirements.html): Liquibase requires Java to run. If you used the Liquibase Installer, Java is included automatically. Otherwise, you must[install Java](https://www.java.com/en/download/) manually.
 3. If you use Liquibase Pro, or a Liquibase Pro extension, confirm that you have a valid license key. For more information, see[How to Apply Your Liquibase Pro License Key](https://docs.liquibase.com/liquibase-pro/license-key.html).
 
-### Install supporting drivers {#h3-5-install-supporting-drivers}
+### Install supporting drivers
 
 1. Download the following four [JAR files](https://mvnrepository.com/artifact/org.liquibase.ext):
 
@@ -68,7 +68,7 @@ Prerequisites {#h2-4-prerequisites}
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdHZO7Y0SQdS3eA5oISfMG9kpkWJbaziO9O4s6cB34yOit-MbJY5i5sYcwkyz4GYUAqZ-U_sYTLvqDShXiVwx4xQHGpazKkYG1CZHwe8X-QKVpiwjjvz7sp-3yv0l_FY2wfViPA?key=kYj68YH2LkWKvX_ueHC8rQ)list of jarfiles required for this project
 
-### Connection configuration {#h3-6-connection-configuration}
+### Connection configuration
 
 1. Ensure MongoDB is installed and configured as expected on your machine.
 
@@ -78,7 +78,7 @@ Prerequisites {#h2-4-prerequisites}
 
 4. Install Mongosh to run mongoshell commands though Liquibase.
 
-### Connection test {#h3-7-connection-test}
+### Connection test
 
 1. Create a text file called[changelog](https://docs.liquibase.com/concepts/changelogs/home.html) (.js, .yaml, .json, or .xml) in your project directory and add a[changeset](https://docs.liquibase.com/concepts/changelogs/changeset.html).
 2. Create files as per requirement.
@@ -86,10 +86,10 @@ Prerequisites {#h2-4-prerequisites}
 
 
 
-Hands-on execution steps detailed {#h2-8-hands-on-execution-steps-detailed}
----------------------------------------------------------------------------
+Hands-on execution steps detailed
+---------------------------------
 
-### **1. Create project and add files** {#h3-9-1-create-project-and-add-files}
+### **1. Create project and add files**
 
 The liquibase-mdb-demo project demonstrates how to automate MongoDB database changes using Liquibase, a popular database change management tool. Here's a detailed explanation of the project structure, the purpose of each folder and file, and how they are utilized:
 
@@ -115,7 +115,7 @@ PS E:\temp\liquibase-mdb-demo>
 
 Figure: Git project structure and its files
 
-### **2. Project structure in VS Code** {#h3-10-2-project-structure-in-vs-code}
+### **2. Project structure in VS Code**
 
 ```
 liquibase.properties
@@ -134,7 +134,7 @@ mongoscripts/
 
 <br />
 
-### **3. Lifecycle of Liquibase** {#h3-11-3-lifecycle-of-liquibase}
+### **3. Lifecycle of Liquibase**
 
 **3.1 Configuration:**liquibase.properties tells Liquibase where to find the changelog and how to connect to MongoDB.
 
@@ -146,7 +146,7 @@ mongoscripts/
 
 **3.5 Reporting:**Update reports are generated for auditing.
 
-### **4. Verify the Liquibase version by using the inbuilt command** {#h3-12-4-verify-the-liquibase-version-by-using-the-inbuilt-command}
+### **4. Verify the Liquibase version by using the inbuilt command**
 
 ```
 PS E:\temp\liquibase-mdb-demo> liquibase --version
@@ -304,7 +304,7 @@ Figure: Liquibase generated collections inside the MongoDB database.
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfg_G5VO7eKsxhOgrBV1hY6PsfJCvs8wptKh3qnWsoFTpgdl1OuTubRQrE0GXKJP138ldkVylVp5jJkPPIbEjtlqgY44gSzTPLuhC9Vw5kgQgVww9hiFDNfBXhVV0S7hTewwgokgw?key=kYj68YH2LkWKvX_ueHC8rQ)Figure: Databasechangelog collection documents![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcXSEPB_M1PoAwHIF8KAds4wjFry4fnyhG89JF_pNQcDwFAE-lG1NWAVu6Ix6Mp5Eu9uSv6YAWoAV-uxQQE17lL6B2KOUETl8-HXjFdMVAB0_SFFKOXvrBONuuJ3WVfF-SCmffryA?key=kYj68YH2LkWKvX_ueHC8rQ)Figure: Databasechangeloglock collection document
 
-### **5. Scripts used for this project** {#h3-13-5-scripts-used-for-this-project}
+### **5. Scripts used for this project**
 
 ```
 mongoscripts\create_person_collection.js
@@ -395,7 +395,7 @@ changelog.json
 
 <br />
 
-### **6. Liquibase commands** {#h3-14-6-liquibase-commands}
+### **6. Liquibase commands**
 
 ```
 liquibase status -verbose
@@ -416,7 +416,7 @@ liquibase --help // To explore more on Liquibase commands
 
 <br />
 
-### **7. Create a git project info** {#h3-15-7-create-a-git-project-info}
+### **7. Create a git project info**
 
 1. git add .
 2. git commit -m "Initial MongoDB automation setup with Liquibase Pro"

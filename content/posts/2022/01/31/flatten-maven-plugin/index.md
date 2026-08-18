@@ -87,8 +87,8 @@ The above method gives you the most flexibility. However, developers of the plug
 | `fatjar`                  | Removes all `FlattenDescriptor` optional POM elements and all `dependencies`.                                                                                                                                                                                                                                                                  |
 | `resolveCiFriendliesOnly` | Only resolves variables revision, sha1 and changelist. Keeps everything else. See Maven CI Friendly for further details.                                                                                                                                                                                                                       |
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 The Maven Flatten plugin separates between build and consumer POMs. You don't need to wait until the release of Maven 5. It's a freebie, so if you're a library provider, you should probably consider using it.
 

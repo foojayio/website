@@ -25,7 +25,7 @@ A lot of game and 3D development, releases, interesting ongoing development, and
 
 This is a summary of the Links Of The Week as published on [jfx-central.com](https://www.jfx-central.com) during February.
 
-### JavaFX/OpenJFX Core {#h3-0-javafx-openjfx-core}
+### JavaFX/OpenJFX Core
 
 * **Kevin Rushforth** of Oracle announced on the mailinglist "As a reminder, JavaFX 20 is now in Rampdown Phase Two (RDP2). Now that we are in RDP2, the goal is to stabilize what is there". So we will soon get a new version of JavaFX being released!
 * [**Chad Preisler** wants to thank all JavaFX maintainers](https://twitter.com/cpreisler/status/1620893592435978240): "The people that maintain and enhance #JavaFX are great. They fixed an issue with Mac back in December, and today when a dev got a M1 all we needed to do was update the JavaFX dependencies. Everything runs great now."
@@ -39,11 +39,11 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
 * [**Chad Preisler** shared a 5 minute about property binding](https://twitter.com/cpreisler/status/1623174913891659777): "JavaFX makes getting data from your form controls into your model very easy.".
 * [**Gerrit Grunwald** warns about the JavaFX Canvas being really nice and fast, but](https://twitter.com/hansolo_/status/1621651332011642881) "be beware of effects... Using one simple dropshadow in a GraphicsContext can really bring down performance... Just as a reminder."
 
-### Scene Builder {#h3-1-scene-builder}
+### Scene Builder
 
 * [**Raumzeitfalle** shared an update for Scene Builder Leading Edge](https://twitter.com/Raumzeitfalle/status/1627038605225955329): preview of unofficial and features-in-progress. February 2023 brings us support to create controllers in Scala and JRuby and a Chinese translation.
 
-### UI Development {#h3-2-ui-development}
+### UI Development
 
 * [**WhiteWoodCity**](https://twitter.com/WhiteWoodCity/) shared a lot of JavaFX news:
   * [He found this impressive video of VFX](https://twitter.com/WhiteWoodCity/status/1621461727681589248), a JavaFX UI [framework](https://www.bilibili.com/video/BV1c24y1B7jg/).
@@ -54,7 +54,7 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
 * In the previous edition of this list, a link was included to Matt Coley sharing his wish-list to extend RichText. There is a [GitHub issue by **Andy Goryachev** of Oracle asking for "Any missing APIs in JavaFX which are needed for RichTextFX"](https://github.com/FXMisc/RichTextFX/issues/1167) to gather feedback.
 * [**Sean Phillips** spotted a JavaFX user interface](https://twitter.com/SeanMiPhillips/status/1628819152122019841) on a transparent Science- Fiction-like screen.
 
-### JavaFX Libraries {#h3-3-javafx-libraries}
+### JavaFX Libraries
 
 * [**Frank Delporte** shared it is still a long way to go, but Lottie4J can now read both fixed and animated beziers](https://twitter.com/FrankDelporte/status/1622870327301746688). It includes a screenshot of the very first result of a loaded animation with colors, strokes, fills... being the next step.
   * And shared a [link to an article](https://foojay.social/@lottie4j/109839719108396708) why it could become important to have a JavaFX implementation of LottieFiles: "4.7 Million Motion Graphics Designers and Developers Turn to Lottie for Efficient Animation Workflow."
@@ -62,7 +62,7 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
 * [**Dirk Lemmermann** created a new project on GitHub called LayoutFX](https://twitter.com/dlemmermann/status/1628069536074280964) and would like to use it to collect interesting layout solutions for JavaFX. If you have any custom panes with fancy approaches to laying out scene graph nodes and would like to contribute, then please feel free to add it.
   * And he's [adding a custom control to GemsFX that allows to horizontally position and scroll multiple cells based on an items list](https://twitter.com/dlemmermann/status/1628745308296425473). The control fades out to the left and right.
 
-### JavaFX Applications {#h3-4-javafx-applications}
+### JavaFX Applications
 
 * [JDKMon by **Gerrit Grunwald** got downloaded 10k times](https://twitter.com/hansolo_/status/1623028117219450881)!
 * [**Dirk Lemmermann** is facing another nice design challenge for his CRM for the energy market](https://twitter.com/dlemmermann/status/1621512306311200769).
@@ -74,7 +74,7 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
 * [**trinaryoperator** created a JavaFX version of WinDirStat to do a cleanup of some directories](https://www.reddit.com/r/JavaFX/comments/11a36yv/windirstat_in_javafx/). In the future it will have actual tools to help hard drive clean-up.
 * [**Chad Preisler** built a very basic Kafka topic viewer](https://twitter.com/cpreisler/status/1628752475434909702) and shared a 7-minute video with a link to the source code in the video description.
 
-### Game Development {#h3-5-game-development}
+### Game Development
 
 * [**Almas Baim** shared a fancy particle effect demo](https://twitter.com/AlmasBaim/status/1620569177928142848).
   * [And he is practising his "summing skills"](https://twitter.com/AlmasBaim/status/1621649400052211715).
@@ -97,7 +97,7 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
 * [**WhiteWoodCity** is using FXGL to simplify the code of UI applications](https://twitter.com/WhiteWoodCity/status/1627302125960302594).
   * And [migrated his game fully to FXGL](https://twitter.com/WhiteWoodCity/status/1628316669268606976).
 
-### 3D {#h3-6-3d}
+### 3D
 
 * [**OrangoMango** keeps experimenting with 3D](https://twitter.com/orango_mango/status/1620493609287172096).
   * And what is really impressive... [it is running on a Raspberry Pi with 2GB of memory](https://twitter.com/orango_mango/status/1620827009646759937)!
@@ -105,22 +105,22 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
   * [Improved shadows and performance by adding cache (video)](https://twitter.com/orango_mango/status/1625759767464484864), in a self-made 3D engine from scratch.
   * [Experimenting with chess pieces](https://twitter.com/orango_mango/status/1627331295536680960) with his 3D engine.
 
-### Podcast {#h3-7-podcast}
+### Podcast
 
 * [**Adam Bien** talked in his podcast with **Karol Harezlak**](https://twitter.com/AdamBien/status/1619811640802955265) briefly about JavaFX.
 
-### Miscellaneous {#h3-8-miscellaneous}
+### Miscellaneous
 
 * Not directly JavaFX related, but nice to know... [**Heinz Kabutz** shared graphs](https://mastodon.social/@HeinzKabutz/109799634014176668) showing that a lot of the work in recent Java versions was to stabilize and improve the platform, rather than just adding hundreds of new classes. The number of lines of code might even decrease in the future.
 * The research team of [**Almas Baim** completed basic initialization and setup steps](https://twitter.com/AlmasBaim/status/1627783341805117447) for UI and robot interaction. The hype is real at the Robotics AI Lab.
 
-### Jobs {#h3-9-jobs}
+### Jobs
 
 * [JavaFX Developer (Remote)](https://remotewant.com/job/javafx-developer-2/)
 * [Java Entwickler (Berlin), including JavaFX](https://germantechjobs.de/jobs/Honeypot-GmbH-Java-Entwickler)
 * [Lead JavaFX Application Developer (Remote)](https://remotewant.com/job/lead-javafx-application-developer/)
 
-### New Releases {#h3-10-new-releases}
+### New Releases
 
 * [3.2.0 of KeenWrite by **Dave Jarvis**](https://github.com/DaveJarvis/keenwrite), a free, open-source, cross-platform desktop Markdown editor that can produce beautifully typeset PDFs.
 * [2.2.1 of KeenType used in KeenWrite](https://github.com/DaveJarvis/KeenType) with modernized DANTE e.V.'s Java-based NTS system for rendering TeX.
@@ -128,6 +128,6 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
 * [5, 5.0.1 and 5.0.2 of PDFsam](https://twitter.com/PDFsamOSS/status/1620779451146719232) a powerful and professional PDF editor.
 * [v2.1.4 of FXGraphics2D by **David Gilbert**](https://twitter.com/david_m_gilbert/status/1625034499355561984). This enables drawing on the JavaFX Canvas using the Java2D APIs. The update includes great contributions from [**Laurent Bourges**](https://twitter.com/laurent_bourges) to fix clipping issues and boost performance!
 
-### New content on jfx-central.com: {#h3-11-new-content-on-jfx-central-com}
+### New content on jfx-central.com:
 
 * Company added: [Intechcore](https://www.jfx-central.com/companies)

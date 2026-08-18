@@ -20,19 +20,19 @@ related_posts:
 frozen: false
 ---
 
-We are excited to invite you to IntelliJ IDEA Conf 2025, a free virtual event. {#h2-0-we-are-excited-to-invite-you-to-intellij-idea-conf-2025-a-free-virtual-event}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+We are excited to invite you to IntelliJ IDEA Conf 2025, a free virtual event.
+------------------------------------------------------------------------------
 
 IntelliJ IDEA Conf is a celebration of the developer community, bringing together professionals who strive for excellence in software development. Join us for this free, live online conference and learn from industry leaders and experts on June 3--4, 2025.
 
 You'll be able to learn about a variety of topics, including Core Java, Kotlin, Java and AI, Spring Boot, GraalVM, Gradle, Junit and Kafka. For more details, see the agenda below.
 ![](IntelliJ-IDEA-Conf-2025.png)
 
-[Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&amp;utm_medium=foojay&amp;utm_campaign=intellijideaconf)
+[Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf)
 
 IntelliJ IDEA Conf 2025 will be held on two days, June 3--4, with 15 sessions in total. The conference has a single track on both days.
 
-Find the detailed conference schedule, session descriptions, and speaker bios on the [conference website](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&amp;utm_medium=foojay&amp;utm_campaign=intellijideaconf#agenda "conference website").  
+Find the detailed conference schedule, session descriptions, and speaker bios on the [conference website](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#agenda "conference website").  
 
 Here's a brief overview of the sessions which will be live streamed on the first day of IntelliJ IDEA Conf 2025, June 3:
 
@@ -63,7 +63,7 @@ Click [here](https://lp.jetbrains.com/intellij-idea-conf-2025-partners "here") t
 
 Once your registration form is processed, you will be listed as one of our community partners and your logo will be displayed on our event page. Community partners will also receive free JetBrains IDE licenses.
 
-The first step is to [register for the event](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&amp;utm_medium=foojay&amp;utm_campaign=intellijideaconf#register "register")!
+The first step is to [register for the event](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#register "register")!
 
 When you register to participate in this event, you can choose to attend all sessions or only specific ones. Once your registration is complete, JetBrains will email you all of the details you'll need to view the sessions. All of the sessions are scheduled to last for one hour.
 
@@ -79,4 +79,4 @@ We reserve special thanks for industry experts and leaders like [Sharat Chander]
 
 We truly appreciate their support! See you at the conference!
 
-[Register now!](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&amp;utm_medium=foojay&amp;utm_campaign=intellijideaconf#register "Register now")
+[Register now!](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#register "Register now")

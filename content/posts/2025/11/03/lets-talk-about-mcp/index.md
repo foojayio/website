@@ -19,12 +19,12 @@ related_posts:
 frozen: false
 ---
 
-**Hey Java Devs, Let's Talk About AI MCP! 🤖** {#h2-0-hey-java-devs-let-s-talk-about-ai-mcp}
---------------------------------------------------------------------------------------------
+**Hey Java Devs, Let's Talk About AI MCP! 🤖**
+----------------------------------------------
 
 Ever feel like your AI models are stuck in a bubble, cut off from the real-time data and tools they need to be truly useful? Well, you're not alone! This has been a major headache for developers. But what if I told you there's a new sheriff in town that's changing the game? Enter the **Model Context Protocol (MCP)**.
 
-### **So, What's the Big Deal with MCP?** {#h3-1-so-what-s-the-big-deal-with-mcp}
+### **So, What's the Big Deal with MCP?**
 
 Think of MCP as a universal translator for your AI. It's an open standard that lets AI assistants, like large language models (LLMs), seamlessly connect with external data sources, tools, and just about any environment you can think of. No more building custom, one-off integrations for every single tool and data source. With MCP, you create a standardized way for your AI to talk to the outside world. Pretty neat, huh? 😉
 
@@ -32,7 +32,7 @@ This open source protocol was cooked up by [Anthropic](https://www.anthropic.com
 
 
 
-### **The Problem MCP Is Solving** {#h3-2-the-problem-mcp-is-solving}
+### **The Problem MCP Is Solving**
 
 Before MCP, integrating an AI model with various tools and databases was a chaotic mess. For every new tool or data source you wanted your AI to use, you had to write custom code. This is what's known as the "M×N integration problem" -- connecting *M* AI models to *N* tools resulted in a tangled web of integrations that was a nightmare to maintain.
 
@@ -40,7 +40,7 @@ MCP swoops in to solve this by providing a standardized communication layer. Ins
 
 
 
-### **The Evolution of AI Integration** {#h3-3-the-evolution-of-ai-integration}
+### **The Evolution of AI Integration**
 
 The journey to MCP has been a series of stepping stones:
 
@@ -52,7 +52,7 @@ Then came **MCP**, which brought a universal standard to the table. It's like th
 
 
 
-### **The Good, the Bad, and the How-To** {#h3-4-the-good-the-bad-and-the-how-to}
+### **The Good, the Bad, and the How-To**
 
 #### **The Benefits 🥳**
 
@@ -71,7 +71,7 @@ Then came **MCP**, which brought a universal standard to the table. It's like th
 
 
 
-### **Let's Get Our Hands Dirty: Creating an MCP with Java and Quarkus 🚀** {#h3-5-let-s-get-our-hands-dirty-creating-an-mcp-with-java-and-quarkus}
+### **Let's Get Our Hands Dirty: Creating an MCP with Java and Quarkus 🚀**
 
 Ready to build your own MCP server? [Quarkus](https://quarkus.io/), the supersonic, subatomic Java framework, makes it surprisingly easy! The folks at Quarkus have created a project to get you started.
 
@@ -100,7 +100,7 @@ For a more in-depth guide and to explore more advanced features, check out the [
 
 
 
-### **Using Your MCP from IDEs 👨‍💻** {#h3-6-using-your-mcp-from-ides}
+### **Using Your MCP from IDEs 👨‍💻**
 
 Visual Studio Code, through the GitHub Copilot plugin, has embraced MCP, [making it incredibly easy for developers](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) to interact with these powerful new tools right from their editor.
 
@@ -135,7 +135,7 @@ And the way to use it couldn't be easier, just ask your question in natural lang
 
 
 
-### **A Cool MCP on the Block: The SonarQube MCP Server** {#h3-7-a-cool-mcp-on-the-block-the-sonarqube-mcp-server}
+### **A Cool MCP on the Block: The SonarQube MCP Server**
 
 Speaking of awesome MCPs, the team at Sonar has [released](https://www.sonarsource.com/blog/announcing-sonarqube-mcp-server/) their own **SonarQube MCP Server**. If you're a fan of keeping your code reliable, maintainable, and secure with SonarQube Server or SonarQube Cloud, you're going to love this.
 

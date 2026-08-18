@@ -26,8 +26,8 @@ Let's learn about the challenges of organizing both a Java User Group and an ent
 
 {{< youtube fVq5YHjzmVk >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -35,8 +35,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
 * Pratik Patel
   * <https://twitter.com/prpatel>
@@ -47,8 +47,8 @@ Guests {#h2-1-guests}
   * [https://www.linkedin.com/in/vincentmayers/](https://www.linkedin.com/in/vincentmayers/%20)
   * Dev Community at Gradle
 
-Podcast host {#h2-2-podcast-host}
----------------------------------
+Podcast host
+------------
 
 * Frank Delporte
   * <https://twitter.com/FrankDelporte>
@@ -56,8 +56,8 @@ Podcast host {#h2-2-podcast-host}
 
 ![](atlantajug-screenshot-zoom-1024x577.png)
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * Atlanta JUG
   * <https://ajug.org/>
@@ -66,8 +66,8 @@ Links {#h2-3-links}
   * 4-6th of April 2023, Atlanta US
   * [https://devnexus.org/](https://devnexus.org/%20)
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 * 00'00 Intro
 * 00'36 Introduction of the guests

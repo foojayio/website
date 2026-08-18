@@ -29,8 +29,8 @@ One of [my first posts](https://blog.frankel.ch/the-unit-test-war-junit-vs-testn
 
 Since JUnit 5 has been out for some time already, let's check if it fixed those issues.
 
-Parameterization {#h2-0-parameterization}
------------------------------------------
+Parameterization
+----------------
 
 I wrote the initial post in 2008, and I think JUnit was available in version 3 at the time. Let's skip directly to version 4: JUnit did indeed offer parameterization. Here's a snippet from their wiki:
 
@@ -104,8 +104,8 @@ With version 5, JUnit offers the `@ParamerizedTest` annotation. Parameterized te
 
 While TestNG's approach can address all use cases, JUnit 5 multiple configuration capabilities are more custom-tailored.
 
-Grouping {#h2-1-grouping}
--------------------------
+Grouping
+--------
 
 Again, the initial post mentions that with JUnit 3, one cannot run only a subset of them. JUnit 4 provides two orthogonal ways to group tests. The first one is test suites:
 
@@ -211,8 +211,8 @@ public class B {
 
 Both frameworks implement similarly running a subset of tests.
 
-Test method ordering {#h2-2-test-method-ordering}
--------------------------------------------------
+Test method ordering
+--------------------
 
 This point is the most debatable of all because JUnit stems from *unit testing*. In unit testing, tests need to be independent of one another. For this reason, you can run them in parallel.
 
@@ -288,8 +288,8 @@ public class CheckoutIT {
 
 TestNG implements ordering via a , JUnit directly. TestNG's approach is more flexible as it allows the runtime to run some methods in parallel, but JUnit gets the job done.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Up until now, I've favoured TestNG because of the poor parameterization design and, more importantly, the complete lack of ordering in JUnit. Version 5 of JUnit fixes both issues. Even more so, its implementation offers multiple configuration capabilities.
 

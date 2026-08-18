@@ -26,9 +26,9 @@ frozen: false
 At the heart of JGraphlet is simplicity, backed by a Graph. Add Tasks to a pipeline and connect them to create your graph. Each `Task` has an input and output. A `TaskPipeline` builds and executes a pipeline while managing the I/O for each Task.
 For example, a `Map` for Fan-in, a `Record` for your own data model, etc. A Task pipeline also has a way `PipelineContext` to share data between Tasks, and Tasks can also be cached, so the computation doesn't need to take place again and again.
 You can choose how your Task pipeline flow should be, and you can decide whether it should be synchronous `SyncTask` or asynchronous. By default, all Tasks are asynchronous.
-Let's dive into the eight core principles that define JGraphlet. {#h2-0-let-s-dive-into-the-eight-core-principles-that-define-jgraphlet}
-----------------------------------------------------------------------------------------------------------------------------------------
-### 1. A Graph-First Execution Model {#h3-1-1-a-graph-first-execution-model}
+Let's dive into the eight core principles that define JGraphlet.
+----------------------------------------------------------------
+### 1. A Graph-First Execution Model
 JGraphlet treats your workflow as a Directed Acyclic Graph (DAG). You define tasks as nodes and explicitly draw the connections (edges) between them. This makes complex patterns like fan-out (one task feeding many) and fan-in (many tasks feeding one) natural.
 **Example:**
 
@@ -59,7 +59,7 @@ try (TaskPipeline pipeline = new TaskPipeline()) {
 
 ```
 ```
-### 2. Two Task Styles: Task\<I\> and SyncTask\<I\> {#h3-2-2-two-task-styles-task-i-and-synctask-i}
+### 2. Two Task Styles: Task\<I\> and SyncTask\<I\>
 JGraphlet provides two distinct task types you can mix and match:
 * **Task*(Async):*** Returns a `CompletableFuture`. Perfect for I/O operations or heavy computations.
 * **SyncTask*(Sync):*** Returns a direct *O* - output. Ideal for fast, CPU-bound operations.
@@ -82,7 +82,7 @@ try (TaskPipeline pipeline = new TaskPipeline()) {
 
 
 
-### 3. A Simple, Explicit API {#h3-3-3-a-simple-explicit-api}
+### 3. A Simple, Explicit API
 JGraphlet avoids complex builders or magic configurations. The API is lean and explicit:
 1. Create a pipeline: `new TaskPipeline()`
 2. Register nodes: `addTask("uniqueId", task)`
@@ -106,7 +106,7 @@ try (TaskPipeline pipeline = new TaskPipeline()) {
 
 
 
-### 4. A Clear Fan-In Input Shape {#h3-4-4-a-clear-fan-in-input-shape}
+### 4. A Clear Fan-In Input Shape
 A fan-in task receives a `Map`, where keys are parent task IDs and values are their results.
 **Example:**
 
@@ -134,7 +134,7 @@ try (TaskPipeline pipeline = new TaskPipeline()) {
 
 
 
-### 5. A Clear Run Contract {#h3-5-5-a-clear-run-contract}
+### 5. A Clear Run Contract
 Executing a pipeline is straightforward: `pipeline.run(input)` returns a `CompletableFuture` for the final result. You can block with `.join()` or use async chaining.
 **Example:**
 
@@ -160,7 +160,7 @@ pipeline.run(input)
 
 
 
-### 6. A Built-in Resource Lifecycle {#h3-6-6-a-built-in-resource-lifecycle}
+### 6. A Built-in Resource Lifecycle
 JGraphlet implements `AutoCloseable`. Use try-with-resources to guarantee safe shutdown of internal resources.
 **Example:**
 
@@ -184,7 +184,7 @@ System.out.println("Pipeline resources have been released.");
 
 
 
-### 7. Context {#h3-7-7-context}
+### 7. Context
 `PipelineContext` is a thread-safe, per-run workspace for metadata.
 **Example:**
 
@@ -201,7 +201,7 @@ SyncTask<String, String> taskB = (input, ctx) -> {
 
 
 
-### 8. Optional Caching {#h3-8-8-optional-caching}
+### 8. Optional Caching
 Tasks can opt into caching to prevent re-computation.
 **Example:**
 

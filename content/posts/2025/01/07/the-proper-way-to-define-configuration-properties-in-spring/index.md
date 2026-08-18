@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 I recently did a (long overdue) **migration from Spring Boot 2 to 3** on one of our larger applications.
 
@@ -52,8 +52,8 @@ app:
 
 And you can run the `DemoApp` to see what the `ApplicationProperties` contain at run time.
 
-The initial set-up in Spring Boot 2. {#h2-1-the-initial-set-up-in-spring-boot-2}
---------------------------------------------------------------------------------
+The initial set-up in Spring Boot 2.
+------------------------------------
 
 Let's take a look at the configuration properties in the initial setup of module-spring2:
 
@@ -87,8 +87,8 @@ Running the `DemoApp` gives us what we expect, though:
 > )
 > ```
 
-Spring boot 3: Some of my properties are suddenly empty! {#h2-2-spring-boot-3-some-of-my-properties-are-suddenly-empty}
------------------------------------------------------------------------------------------------------------------------
+Spring boot 3: Some of my properties are suddenly empty!
+--------------------------------------------------------
 
 **Module-spring3-wrong** contains the **exact same setup** we've just seen in **module-spring2** but running the `DemoApp` gives us:
 > ApplicationProperties(  
@@ -137,8 +137,8 @@ The **easy** solution I first saw was to just replace the `@RequiredArgsConstruc
 
 But while we're busy upgrading, you might as well do some [code gardening](https://blog.codinghorror.com/tending-your-software-garden/) and look for the more **proper and maintainable** solution instead of the easy one.
 
-The proper way to define your configuration properties {#h2-3-the-proper-way-to-define-your-configuration-properties}
----------------------------------------------------------------------------------------------------------------------
+The proper way to define your configuration properties
+------------------------------------------------------
 
 Let's take a look at the refined ApplicationProperties in **module-spring3**:
 
@@ -166,7 +166,7 @@ public record ApplicationProperties(
 ```
 
 
-### 1. Simplify your code \& get rid of lombok: use records instead of classes {#h3-4-1-simplify-your-code-get-rid-of-lombok-use-records-instead-of-classes}
+### 1. Simplify your code \& get rid of lombok: use records instead of classes
 
 Since configuration is bound at start-up time and should be **immutable** , it makes sense to refactor the class to a **record**.
 
@@ -175,7 +175,7 @@ By doing this, we can get rid of all the Lombok annotations we had before.
 * Getters, setters, and a toString() method are all provided by the record.
 * A record and all its components are also *final* , and an implicit *canonical* constructor will be created by the compiler. So no need for the `@RequiredArgsConstructor` and you won't need to remember to add the final keyword to the field.
 
-### 2. Acquire 'start-up' time security: validate your configuration {#h3-5-2-acquire-start-up-time-security-validate-your-configuration}
+### 2. Acquire 'start-up' time security: validate your configuration
 
 We've added some [bean validation](https://beanvalidation.org/) to the configuration, too:
 
@@ -220,7 +220,7 @@ To start using bean validation, just add the following dependency:
 ```
 
 
-### 3. Bonus: Document your configuration and let your IDE help you. {#h3-6-3-bonus-document-your-configuration-and-let-your-ide-help-you}
+### 3. Bonus: Document your configuration and let your IDE help you.
 
 Spring boot has an *annotation processor* that can read your configuration at compile-time and generate a JSON file with meta-data describing your configuration.  
 
@@ -298,8 +298,8 @@ To start using configuration processing, it's as simple as adding:
 
 and enabling annotation processing in your favorite IDE.
 
-Read more {#h2-7-read-more}
----------------------------
+Read more
+---------
 
 * <https://docs.spring.io/spring-boot/specification/configuration-metadata/index.html>
 

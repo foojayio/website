@@ -23,8 +23,8 @@ frozen: false
 
 In this article, I'd like to introduce Vaadin in the context of AJAX and SSR.
 
-Short introduction to Vaadin {#h2-0-short-introduction-to-vaadin}
------------------------------------------------------------------
+Short introduction to Vaadin
+----------------------------
 
 The beauty of Vaadin lies in its simplicity - **you only write backend code** . You read that well. A Vaadin developer only needs to know Java, or any JVM language, and the Vaadin API. At runtime, Vaadin will create the client-side code, *i.e.*, HTML, JavaScript and CSS. This approach empowers developers to focus on the application's core functionality, making the development process more productive.
 
@@ -32,8 +32,8 @@ Vaadin builds upon components and layouts, just like regular desktop-based frame
 
 I mentioned CSS above: Vaadin allows you to develop your CSS in a dedicated reusable package called a *theme*. The icing on the cake: developing a theme can be done in parallel to backend development and has no adherence to the latter; the code doesn't need to use a specific template or to add specific classes to the HTML.
 
-Vaadin setup {#h2-1-vaadin-setup}
----------------------------------
+Vaadin setup
+------------
 
 Setting up Vaadin in the context of Spring Boot is a breeze:
 
@@ -77,8 +77,8 @@ vaadin.url-mapping=/vaadin/*
 
 At the first request from a client, Vaadin will return the JavaScript engine's code. The engine will make subsequent requests to retrieve the configured UI and scaffold the latter client side. From then on, the engine handles all user interactions and updates the UI if necessary.
 
-First steps with Vaadin {#h2-2-first-steps-with-vaadin}
--------------------------------------------------------
+First steps with Vaadin
+-----------------------
 
 Once we set up the project, we must configure which component Vaadin displays when it receives a request.
 
@@ -102,8 +102,8 @@ class TodoView(todos: ArrayList<Todo>) : VerticalLayout() {       //3-4-5
 6. Vaadin executes the `init()` function at the first browser request
 7. The next code snippets will go there
 
-Adding components {#h2-3-adding-components}
--------------------------------------------
+Adding components
+-----------------
 
 In the above snippet, we inherited from `VerticalLayout`, a Vaadin-provided *component*.
 > The Vaadin Design System includes a set of components that you can use to build your UI. The components have a server-side Java API in addition to the TypeScript API for client-side development.
@@ -150,8 +150,8 @@ On the plus side, Karibu is Open Source, and you can always contribute if you ha
 
 Specific components related to the UI are not important for the general understanding. If you're interested, you can always check the [source code](https://github.com/ajavageek/compare-frontends).
 
-User interactions {#h2-4-user-interactions}
--------------------------------------------
+User interactions
+-----------------
 
 When mainframes were the kings of computing, you accessed them via terminals. The UI was pretty limited, and rendering occurred on the "dumb" terminal. Personal computers moved the rendering functionality from the server to the client. At this time, developers attached behaviour to a component via a trigger. For example, you could bind printing `Hello world!` when the user clicks a button.
 
@@ -169,8 +169,8 @@ Checkbox(todo.completed).apply {                                  //1
 
 There's no need for JavaScript code; Vaadin manages the interaction independently.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 The post was but a short introduction to Vaadin in the context of AJAX and SSR.
 

@@ -33,8 +33,8 @@ That's the problem [**APM**](https://github.com/microsoft/apm), the Agent Packag
 
 
 
-1. The problem: agent context drifts {#h2-0-1-the-problem-agent-context-drifts}
--------------------------------------------------------------------------------
+1. The problem: agent context drifts
+------------------------------------
 
 Most teams' agent setup today is a tangle of hand-rolled files:
 
@@ -55,8 +55,8 @@ If we treat prompts as text, we'll keep ignoring them in supply-chain reviews. I
 
 
 
-2. The idea: what if agent context had a `package.json`? {#h2-1-2-the-idea-what-if-agent-context-had-a-package-json}
---------------------------------------------------------------------------------------------------------------------
+2. The idea: what if agent context had a `package.json`?
+--------------------------------------------------------
 
 One manifest. One install. Every agent, configured. That's it.
 
@@ -100,12 +100,12 @@ Three details worth highlighting:
 
 
 
-3. The 3 strong guarantees {#h2-2-3-the-3-strong-guarantees}
-------------------------------------------------------------
+3. The 3 strong guarantees
+--------------------------
 
 APM makes three headline guarantees, everything else flows from these.
 
-### Portable by manifest {#h3-3-portable-by-manifest}
+### Portable by manifest
 
 One `apm.yml` describes every primitive --- instructions, skills, prompts, agents,  
 
@@ -114,7 +114,7 @@ hooks, plugins, MCP servers and `apm install` reproduces the same setup across
 every harness on every machine. `apm.lock.yaml` pins the resolved tree the way  
 `package-lock.json` does for npm.
 
-### Secure by default {#h3-4-secure-by-default}
+### Secure by default
 
 Agent context is executable in effect. Every install scans for hidden Unicode  
 
@@ -122,7 +122,7 @@ Agent context is executable in effect. Every install scans for hidden Unicode
 
 and gates transitive MCP servers behind trust prompts.
 
-### Governed by policy {#h3-5-governed-by-policy}
+### Governed by policy
 
 `apm-policy.yml` is enforced at install time, including on transitive dependencies  
 
@@ -130,8 +130,8 @@ and transitive MCP servers. Tighten-only inheritance flows enterprise → org �
 
 
 
-4. What an APM package can contain {#h2-6-4-what-an-apm-package-can-contain}
-----------------------------------------------------------------------------
+4. What an APM package can contain
+----------------------------------
 
 Six primitive types. You can mix and match.
 
@@ -150,8 +150,8 @@ single manifest for *all* the moving parts an agent needs.
 
 
 
-5. The five commands you'll actually use {#h2-7-5-the-five-commands-you-ll-actually-use}
-----------------------------------------------------------------------------------------
+5. The five commands you'll actually use
+----------------------------------------
 
 ```
 apm install                  # resolve manifest, scan, deploy primitives, write lockfile
@@ -164,8 +164,8 @@ apm pack                     # bundle your package for distribution
 
 
 
-6. One manifest, every harness {#h2-8-6-one-manifest-every-harness}
--------------------------------------------------------------------
+6. One manifest, every harness
+------------------------------
 
 The same packages render to whatever your team uses:
 
@@ -181,8 +181,8 @@ For other harnesses, `apm compile` emits `AGENTS.md` in the repo root (the open 
 
 
 
-7. Plugins and marketplaces: bundle a workflow, not a file {#h2-9-7-plugins-and-marketplaces-bundle-a-workflow-not-a-file}
---------------------------------------------------------------------------------------------------------------------------
+7. Plugins and marketplaces: bundle a workflow, not a file
+----------------------------------------------------------
 
 A single skill or instruction file isn't a workflow. Real capabilities, code review, release notes, incident triage, need *several primitives bundled together*.
 
@@ -206,8 +206,8 @@ Marketplaces are the curated layer on top: install from a registry in one comman
 
 
 
-8. Security: treat prompts like the programs they are {#h2-10-8-security-treat-prompts-like-the-programs-they-are}
-------------------------------------------------------------------------------------------------------------------
+8. Security: treat prompts like the programs they are
+-----------------------------------------------------
 
 The honest pitch on security is this: agent context *is* executable in effect, and the integrity story has to match.
 
@@ -222,8 +222,8 @@ One caveat until today(5 June 2026): **package signing is not yet implemented**.
 
 
 
-9. Governance: one policy file, tighten-only inheritance {#h2-11-9-governance-one-policy-file-tighten-only-inheritance}
------------------------------------------------------------------------------------------------------------------------
+9. Governance: one policy file, tighten-only inheritance
+--------------------------------------------------------
 
 `apm-policy.yml` lets enterprises set the ceiling, orgs tighten further, and repos tighten further still. Each layer can only *tighten* , never *loosen* . The math: allow lists intersect, deny lists union, `max_depth` takes the minimum, and enforcement escalates `off < warn < block`.
 
@@ -256,8 +256,8 @@ The architects' takeaway: **you can roll APM out org-wide without losing control
 
 
 
-10. AgentRC: context engineering, automated {#h2-12-10-agentrc-context-engineering-automated}
----------------------------------------------------------------------------------------------
+10. AgentRC: context engineering, automated
+-------------------------------------------
 
 So APM *distributes* agent context. But where does the content come from in the first place? That's where [AgentRC](https://github.com/microsoft/agentrc) comes in.
 > **Note:** AgentRC is currently marked **experimental** in its README. Pilot it on a non-critical repo and pin a commit if you adopt it today.
@@ -291,8 +291,8 @@ The eval angle is the one most people miss. Instructions only matter if they act
 
 
 
-11. How AgentRC + APM compose {#h2-13-11-how-agentrc-apm-compose}
------------------------------------------------------------------
+11. How AgentRC + APM compose
+-----------------------------
 
 ```
 Your repo → agentrc (measure · generate · eval)
@@ -312,8 +312,8 @@ Three personas, three flows:
 
 
 
-12. How to start on Monday {#h2-14-12-how-to-start-on-monday}
--------------------------------------------------------------
+12. How to start on Monday
+--------------------------
 
 Six steps. Most teams should do steps 1--3 this week, 4--6 over the next quarter.
 
@@ -326,8 +326,8 @@ Six steps. Most teams should do steps 1--3 this week, 4--6 over the next quarter
 
 
 
-13. Three things to take away {#h2-15-13-three-things-to-take-away}
--------------------------------------------------------------------
+13. Three things to take away
+-----------------------------
 
 1. **Agent context is code.** Version it, pin it, ship it like dependencies.
 2. **APM gives you the manifest. AgentRC gives you the content.** Together they close the loop.
@@ -338,8 +338,8 @@ If you remember one line, make it this one:
 
 
 
-Links {#h2-16-links}
---------------------
+Links
+-----
 
 * [github.com/microsoft/apm](https://github.com/microsoft/apm)
 * [microsoft.github.io/apm](https://microsoft.github.io/apm/)

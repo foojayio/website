@@ -20,8 +20,8 @@ frozen: false
 
 In this, [part 7 of the series](https://foojay.io/today/author/c-guntur/), various means of configuring Apache Maven are covered!
 
-Why Configure Apache Maven? {#h2-0-why-configure-apache-maven}
---------------------------------------------------------------
+Why Configure Apache Maven?
+---------------------------
 
 Over several parts in this series, Maven was touted to be ***convention-over-configuration***. Maven assumes defaults and allows for overrides where possible.
 
@@ -29,14 +29,14 @@ However, Maven can depend on constraints external to what is packaged. Examples 
 
 The examples mentioned above are external to both the maven executable/distribution as well as to the POM that is authored. Hence a need to provide a means of configuration.
 
-Options to configure Maven {#h2-1-options-to-configure-maven}
--------------------------------------------------------------
+Options to configure Maven
+--------------------------
 
 * Using environment variables
 * Using config files under a .mvn directory in the project
 * Using XML configurations
 
-### Configuring Maven -- Environment Variables {#h3-2-configuring-maven-environment-variables}
+### Configuring Maven -- Environment Variables
 
 There are a few environment variables (**abbreviated as env. var.** in the blog) useful for maven execution of a POM. Listing a few common ones here:
 
@@ -56,7 +56,7 @@ The **PATH** env. var. includes locations where the operating system looks for e
 
 The **MAVEN_OPTS** env. var. is useful for setting JVM options to be used during the maven execution of the POM. Common use cases include setting of memory and garbage collection options.
 
-### Configuring Maven -- Config files {#h3-3-configuring-maven-config-files}
+### Configuring Maven -- Config files
 
 Maven allows for customization on a per-project basis via config files. These files are located in a `.mvn` directory under the project root directory. The directory can contain a few config files.
 
@@ -83,7 +83,7 @@ An example could be that the project POM relies on SNAPSHOT versions, but requir
 
 The `mvn.config` file allows for setting and checking into version control, such options that can be used by other developers on the project.
 
-### Configuring Maven -- XML files {#h3-4-configuring-maven-xml-files}
+### Configuring Maven -- XML files
 
 In [Part 2](https://cguntur.me/2020/05/24/understanding-apache-maven-part-2/) of the series, the global settings XML file and a user-home settings.xml were covered. There are additional configuration files that maven provides.
 

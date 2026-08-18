@@ -18,7 +18,7 @@ frozen: false
 
 In this article, we will discuss Records, which is an official feature in Java 16, and we will apply this knowledge while using it in conjunction with a Spring Boot application.
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 On March 16th, 2021, Java 16 was GA. With this new release, tons of new exciting features are added. Check out [the highlights here on Foojay](https://foojay.io/today/highlights-of-new-jeps-in-java-16/) to know more about these changes.
 
@@ -44,7 +44,7 @@ For some more Java and tech-related stuff, follow me on [Twitter](https://twitte
 
 So let's discuss what's the fuss is about Java Records.
 
-### What are Records? {#h3-1-what-are-records}
+### What are Records?
 
 As per JEP 395:
 > Records are a new kind of class in the Java language. They act as transparent carriers for immutable data with less ceremony than normal classes. Records can be thought of as nominal tuples.
@@ -95,7 +95,7 @@ record Point(int x, int y) { }
 
 Here a record class declaration consists of a name, optional type parameters, a header, and a body.
 
-### Demystifying Records {#h3-2-demystifying-records}
+### Demystifying Records
 
 The internals of the Java Record class can be checked using a decompiler that comes with IntelliJ IDE, for example, or you can use the `javap` command-line utility. To understand the internals, I've created the following Record class:
 
@@ -175,13 +175,13 @@ You can further validate these points by writing tests as well:
 
 There are some restrictions in the declaration of record classes as compared to normal classes. Checkout [JEP 395](https://openjdk.java.net/jeps/395) for such restrictions.
 
-### Lombok and Records, Friends or Foe?. {#h3-3-lombok-and-records-friends-or-foe}
+### Lombok and Records, Friends or Foe?.
 
 You are probably already using [Lombok](https://projectlombok.org/) annotations such as @[Value](https://projectlombok.org/features/Value), which is closest if not the same to the Java records. Then you can get rid of one dependency and those Christmas trees of annotations. I might have oversimplified things, and it may make sense to replace Lombok for some cases. But you might be using Lombok for other features and not just one annotation that it provides. And believe me, while Java Records are a welcome feature for Java lovers, but it's not going to replace Lombok, at least for now. You do not believe me? Check out this [answer](https://stackoverflow.com/a/61325018/1472027) from Brain Goetz on StackOverflow.
 
 And be careful with what dependencies you add to your project as the problem that is part of that dependency becomes your problem too.
 
-### Spring Boot and Java Records {#h3-4-spring-boot-and-java-records}
+### Spring Boot and Java Records
 
 From version 2.5.0-M1 onwards, Spring Boot provides preliminary [support](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5.0-M1-Release-Notes#java-16-support) for Java 16. I have a working Spring Boot application that I will use to demo Java records with it. The source code is available [here](https://github.com/yrashish/indian-states/tree/develop).
 
@@ -316,13 +316,13 @@ Update:- I posted these exceptions to Spring Boot Gitter chat and got this answe
 
 Fair enough. So clearly `BeanPropertyRowMapper` cannot be used with records. It's a wrap for now. Happy coding.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 In this article, you have learned that Records are immutable data carrier classes that reduce lots of boilerplate code that we are used to writing. Then we looked at the internals of a Record class and discovered that hashCode(), equals(), toString(), and constructors are implicitly generated for us by the compiler. Then we learned that you should not really compare or replace Records with external libraries like Lombok because both are different tools for different things.
 
 In the last section, we discovered that Records are good for use in cases such as getting data from a database (or some external service) with an example of the Spring Boot application. We also discovered some issues while using `BeanPropertyRowMapper,` and concluded that we could not use it with records.
 
-### Support me {#h3-6-support-me}
+### Support me
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:
 

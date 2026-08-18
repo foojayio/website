@@ -27,7 +27,7 @@ The book ["Java by Comparison" by Simon Harrer, Jörg Lenhard, and Linus Dietz](
 
 Each "example" is structured as a before-and-after comparison. It's best to illustrate that with, well, an example:
 
-### **Return Boolean Expressions Directly** {#h3-0-return-boolean-expressions-directly}
+### **Return Boolean Expressions Directly**
 
 **Before:**
 

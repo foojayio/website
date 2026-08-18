@@ -30,7 +30,7 @@ We found that [GraphViz](https://graphviz.org/) helped us to solve part of this 
 
 However, we wanted this process to be even more user friendly and more automatic, so that the user would not have to manually generate a DOT file of their microservices architecture.
 
-### In-Browser Tool {#h3-0-in-browser-tool}
+### In-Browser Tool
 
 As we could not find such a tool, we decided to create one ourselves.
 
@@ -42,13 +42,13 @@ For our event streaming microservices framework, we used [Chronicle Services](ht
 
 For the scope of this article, I will not focus on the details into Chronicle's microservices framework; the techniques mentioned in this article could also be applied to many other similar frameworks.
 
-### Converting Microservices Architecture to DOT Format {#h3-1-converting-microservices-architecture-to-dot-format}
+### Converting Microservices Architecture to DOT Format
 
 As discussed, with this tool, we are taking a description of the architecture of a microservice-based application and producing a graphical representation of the connections between services. In our case, this 'description' is contained in a YAML file called services.yaml.
 
 YAML is a human-friendly data serialisation language. Hence, the first step for our tool is to read the contents from the microservice configuration file (services.yaml) and produce a corresponding DOT file. This link provides some more details on the structure and syntax of DOT language.
 
-### GraphViz: DOT to PNG Converter {#h3-2-graphviz-dot-to-png-converter}
+### GraphViz: DOT to PNG Converter
 
 Once we have this temporary DOT file, we then need to be able to convert it to a PNG image. We chose to use GraphViz (an open-source graph visualisation software) for this process.
 
@@ -62,7 +62,7 @@ There are several options for how to output the PNG (or other file types). In th
 
 *Figure 1. Rendered services.yaml file*
 
-### Example {#h3-3-example}
+### Example
 
 Let's look at an example to illustrate how we can produce an image illustrating a simple service.
 
@@ -123,7 +123,7 @@ Now that we have the DOT file that describes how our graph should look, we use G
 
 Figure 1 (seen above) is the image generated as a result of the previous two steps.
 
-### Complex Services {#h3-4-complex-services}
+### Complex Services
 
 The example above was simple but real-world examples of applications can contain dozens of microservices and queues.
 
@@ -158,7 +158,7 @@ If you are using a different microservice framework you could replace the Chroni
 
 If these two aspects are successful, the tool generates a formatted image (PNG) that displays how the project's different Services relate to each other.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 Having architecture diagrams adds to our documentation, but also provides us with a simple and fast tool to view the structure of our projects.
 

@@ -29,7 +29,7 @@ In this case, it might sometimes be easier to just create a completely new contr
 
 For this blog series, I will make use of JDK15 + OpenJFX15 but all of the code should also run fine on JDK11 and above. The code will be made available on [github](https://github.com/HanSolo/JavaFXCustomControls "github") so that you can fork it there and play around with it.
 
-### Different Ways of Creating Custom Controls {#h3-0-different-ways-of-creating-custom-controls}
+### Different Ways of Creating Custom Controls
 
 So in JavaFX there are different ways to create a custom control. You could create a custom control by:
 
@@ -44,7 +44,7 @@ As you can see, there are a lot of ways on how to create a custom control in Jav
 
 We will go through all of these approaches in this series of blog posts.
 
-### Part I - Restyle Existing Controls by Using CSS {#h3-1-part-i-restyle-existing-controls-by-using-css}
+### Part I - Restyle Existing Controls by Using CSS
 
 In this part, we will create a custom JavaFX control by changing the style of an existing control. For the example, I will use a JavaFX CheckBox control.
 

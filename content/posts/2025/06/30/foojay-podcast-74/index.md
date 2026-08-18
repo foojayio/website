@@ -26,13 +26,13 @@ This is part 3 of the interviews recorded at the JCON conference in May. In the 
 
 This episode collects all the interviews on the AI topic. You will learn more about the different technologies we can use in our Java projects. We also checked with our guests to see how they compare Java to Python for AI-related development.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube mYpS62EyusQ >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -40,8 +40,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:00 Introduction  
 

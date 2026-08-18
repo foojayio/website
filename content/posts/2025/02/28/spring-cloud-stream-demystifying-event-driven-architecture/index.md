@@ -41,8 +41,8 @@ Considering this restaurant and banking example, contemporary applications manag
 
 This article aims to explore and elucidate the significance of **Event-Driven Architecture**.
 
-Why Event-Driven Systems? {#h2-0-why-event-driven-systems}
-----------------------------------------------------------
+Why Event-Driven Systems?
+-------------------------
 
 Modern applications actively process extensive volumes of real-time data. Conventional request-response models often face challenges related to architectural capabilities like latency, scalability, and inefficiency. **Event-driven architecture (EDA)** helps systems respond immediately to changes. Since enterprises manage huge data streams every second, including:
 
@@ -61,8 +61,8 @@ Data events are critical across industries:
 
 * Banking, healthcare, e-commerce, media, communication, education, etc.
 
-What Are Event-Driven Systems? {#h2-1-what-are-event-driven-systems}
---------------------------------------------------------------------
+What Are Event-Driven Systems?
+------------------------------
 
 Enterprises created event-driven systems to manage massive, unpredictable data streams efficiently. These systems fulfill three core activities:
 
@@ -70,45 +70,45 @@ Enterprises created event-driven systems to manage massive, unpredictable data s
 * **Consumer (Receiver):** Processes events (e.g., fraud detection, real-time alerts).
 * **Processor:** Acts as both producer and consumer (e.g., event transformation, analytics processing).
 
-### Key drivers: {#h3-2-key-drivers}
+### Key drivers:
 
 * Growing data volumes and complexity.
 * Artificial Intelligence (AI) revolution increasing data needs.
 
-Why Now? {#h2-3-why-now}
-------------------------
+Why Now?
+--------
 
 Data volumes are growing exponentially, requiring systems that:
 
 * Handle high throughput (terabytes of data every minute).
 * Offer low-latency responses (e.g., instant credit card approvals, seamless video streaming).
 
-The Architecture of Event-Driven Systems {#h2-4-the-architecture-of-event-driven-systems}
------------------------------------------------------------------------------------------
+The Architecture of Event-Driven Systems
+----------------------------------------
 
-### Key Benefits {#h3-5-key-benefits}
+### Key Benefits
 
 * Loose Coupling: Components work independently and communicate via events.
 * Scalability: Easily scale producers and consumers without modifying application code.
 * Resilience: Message brokers ensure reliable data delivery even in failures.
 
-### Communication in Microservices {#h3-6-communication-in-microservices}
+### Communication in Microservices
 
 Traditional microservices rely on HTTP-based synchronous communication, leading to delays and failure points. Event-driven microservices, however, use message brokers for seamless asynchronous communication.
 
-### Popular Message Brokers {#h3-7-popular-message-brokers}
+### Popular Message Brokers
 
 * **RabbitMQ:** A widely used open-source message broker. For more details [RabbitMQ](https://www.rabbitmq.com/ "RabbitMQ")
 * **Apache Kafka:** A distributed streaming platform designed for high throughput. For more details [Apache Kafka](https://kafka.apache.org/ "Apache Kafka")
 * **Apache Pulsar:** A scalable, low-latency messaging system. For more details [Apache Pulsar](https://pulsar.apache.org/ "Apache Pulsar")
 
-### Cloud-Based Messaging Systems {#h3-8-cloud-based-messaging-systems}
+### Cloud-Based Messaging Systems
 
 * **AWS Kinesis:** Real-time data streaming. For more details, click [here](https://aws.amazon.com/pm/kinesis/ "here")
 * **Google Pub/Sub:** Scalable event-driven messaging.
 * **Azure Event Hubs:** High-throughput event ingestion.
 
-### Scaling and Fault Tolerance in Event-Driven Systems {#h3-9-scaling-and-fault-tolerance-in-event-driven-systems}
+### Scaling and Fault Tolerance in Event-Driven Systems
 
 How Loose Coupling Enables Scaling
 
@@ -116,27 +116,27 @@ How Loose Coupling Enables Scaling
 * **Consumers** process events independently, enabling parallelism.
 * **Scaling** is done via configuration changes (e.g., increasing consumer instances).
 
-### Fault Tolerance Mechanisms {#h3-10-fault-tolerance-mechanisms}
+### Fault Tolerance Mechanisms
 
 * **Producer Acknowledgments:** Ensures messages are successfully published.
 * **Consumer Acknowledgments:** Confirms event processing to prevent data loss.
 * **Retries and Dead Letter Queues (DLQ):** Handle failed messages efficiently.
 
-### Real-Time and Streaming Data {#h3-11-real-time-and-streaming-data}
+### Real-Time and Streaming Data
 
 **Streaming vs. Batch Processing**
 
 * **Batch Processing:** Works with historical data or data in rest (e.g., payroll processing).
 * **Stream Processing:** Works with data in motion (e.g., live traffic alerts, fraud detection).
 
-### Stream Processing Libraries {#h3-12-stream-processing-libraries}
+### Stream Processing Libraries
 
 * **Kafka Streams:** Used exclusively with Apache Kafka.
 * **Apache Flink:** Distributed stream processing.
 * **Spark Streaming:** Scalable real-time processing.
 
-Challenges of Event-Driven Architecture {#h2-13-challenges-of-event-driven-architecture}
-----------------------------------------------------------------------------------------
+Challenges of Event-Driven Architecture
+---------------------------------------
 
 **Peter Deutch's** "Fallacies of Distributed Computing" identifies eight common misconceptions that are highly relevant to event-driven systems:
 
@@ -151,7 +151,7 @@ Challenges of Event-Driven Architecture {#h2-13-challenges-of-event-driven-archi
 
 These fallacies highlight issues related to networking in distributed applications, which are critical when developers build event-driven systems. Since event-driven microservices communicate over a network, it's important for designers and developers to be aware of these misconceptions while creating the system.
 
-### CAP Theorem and Trade-Offs {#h3-14-cap-theorem-and-trade-offs}
+### CAP Theorem and Trade-Offs
 
 According to Eric Brewer's **CAP theorem,** distributed systems can only provide two of the three guarantees:
 
@@ -160,7 +160,7 @@ According to Eric Brewer's **CAP theorem,** distributed systems can only provide
 * **Partition Tolerance (P):** The system continues working despite network failures.  
   Thus, event-driven systems typically favor Availability and Partition Tolerance (AP), accepting eventual consistency.
 
-### The Challenge: Pick Two of Three {#h3-15-the-challenge-pick-two-of-three}
+### The Challenge: Pick Two of Three
 
 **Eric Brewer's CAP theorem (1998)** states that no distributed system can guarantee all three properties simultaneously. A system can only offer two out of the three:
 
@@ -168,8 +168,8 @@ According to Eric Brewer's **CAP theorem,** distributed systems can only provide
 * **AP (Availability + Partitioning):** Guarantees high availability and partition tolerance, even during network failures.  
   Understanding which guarantees a messaging broker provides can help design efficient event-driven systems.
 
-Conclusion {#h2-16-conclusion}
-------------------------------
+Conclusion
+----------
 
 Modern software development has transformed through event-driven systems, which enable scalability, fault tolerance, and real-time responsiveness. By leveraging **Spring Cloud Stream** , *developers seamlessly build event-driven microservices and integrate them with robust messaging systems like Kafka, RabbitMQ, and cloud-based event hubs*. As data continues to grow, organizations must adopt event-driven architecture; it's no longer a luxury---it's a necessity.
 
@@ -177,7 +177,7 @@ Whether developers are streaming financial transactions, processing IoT sensor d
 
 In the forthcoming article, we will explore how we can implement event-driven architecture utilizing **Spring Cloud Stream**.
 
-### References {#h3-17-references}
+### References
 
 * <https://spring.io/event-driven>
 * <https://en.wikipedia.org/wiki/CAP_theorem>

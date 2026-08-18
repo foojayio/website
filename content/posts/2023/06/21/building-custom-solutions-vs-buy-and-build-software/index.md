@@ -23,7 +23,7 @@ related_posts:
 frozen: false
 ---
 
-### The Challenges of Building a FIX Engine {#h3-0-the-challenges-of-building-a-fix-engine}
+### The Challenges of Building a FIX Engine
 
 The first day I was introduced to [Financial Information eXchange (FIX)](https://en.wikipedia.org/wiki/Financial_Information_eXchange) was when I worked at an investment bank in London as a developer.
 
@@ -33,7 +33,7 @@ Bear in mind that at this time, I knew nothing about FIX, apart from Googling it
 
 With a touch of overconfidence and slight arrogance, I set to work coding a direct socket connection to the remote FIX endpoint, "how hard could it be?"
 
-### So, What Is FIX ? {#h3-1-so-what-is-fix}
+### So, What Is FIX ?
 
 FIX is both a market data format and a protocol. It is used by investment banks to place orders and receive market data and has become a global language in financial trading.
 
@@ -50,7 +50,7 @@ For example, 'D' denotes a New Order Single message, which is a message that is 
 
 When it comes to the FIX protocol, you have to be careful, as it turns out to be much more involved than just having the correct FIX message format and being able to decode the key=value pairs. The protocol also includes ensuring the counterparty has successfully logged in and that any missed messages are retransmitted; it also requires support for gap fills and sequence resets.
 
-### And, What Is QuickFIX? {#h3-2-and-what-is-quickfix}
+### And, What Is QuickFIX?
 
 Back again to the coding. The first challenge was to get past the login phase; it looked like this login message was mandatory! Over time, I managed to put together enough of a login message that the other end came back with a login reply, but it was not long before my colleagues started taunting me, "Why don't you just use [Quick/FIX4J?](https://www.quickfixj.org/ "Quick/FIX4J?")"
 
@@ -62,7 +62,7 @@ At the time, I was working alongside a team of developers that I looked up to; t
 
 So, I got back to my PC and proceeded to implement the lightweight raw byte buffer parser route; over the next few weeks, I was starting to get end-to-end data going through the FIX adapter, and when I was finished, it screened.
 
-### Should I Have Implemented It Myself? {#h3-3-should-i-have-implemented-it-myself}
+### Should I Have Implemented It Myself?
 
 Now looking back on those early days, I ponder, 'did I make the right decision? 'and 'should I have implemented it myself?'. The answer is I think yes, it was best to implement the custom simple, lightweight solution that I ended up with, but I only got away with it because I had an extremely simple FIX use case. I was only connecting a single session to a single counterparty with a single version of FIX and, apart from the login and heartbeat messages, just a single message.
 
@@ -81,7 +81,7 @@ At this point, it becomes a serious undertaking; and it starts to make more sens
 ![](Screenshot-2023-06-12-at-5.05.51-PM-1024x430.png)  
 *Image 4. Alerts being raised in FIX UI*
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Not long after, I joined a company founded by Peter Lawrey called [Chronicle Software](https://chronicle.software/ "Chronicle Software"); Peter is one of those super-optimal developers I mentioned earlier. He developed the widely used open-source software [Chronicle Queue](https://chronicle.software/quick-start/?product=queue "Chronicle Queue") and [Chronicle Map](https://chronicle.software/map/ "Chronicle Map").
 

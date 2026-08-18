@@ -24,8 +24,8 @@ Now that Java 26 is features complete (Rampdown Phase Two at the day of writing)
 
 After Java 25 and its 18 JEPs, Java 26 arrives with a small number of JEPs, 10, with very few new features.
 
-JEP 500: Prepare to Make Final Mean Final {#h2-0-jep-500-prepare-to-make-final-mean-final}
-------------------------------------------------------------------------------------------
+JEP 500: Prepare to Make Final Mean Final
+-----------------------------------------
 
 A final field is supposed to never be modified after its initialization.  
 
@@ -59,8 +59,8 @@ It is possible to selectively allow modification of final fields via the JVM opt
 
 More information in [JEP 500](https://openjdk.org/jeps/500).
 
-JEP 504: Remove the Applet API {#h2-1-jep-504-remove-the-applet-api}
---------------------------------------------------------------------
+JEP 504: Remove the Applet API
+------------------------------
 
 Removes the applet API, which had been deprecated for removal in Java 17.
 
@@ -68,8 +68,8 @@ Current browsers have not supported applets for a long time anyway.
 
 More information in [JEP 504](https://openjdk.org/jeps/504).
 
-JEP 516: Ahead-of-Time Object Caching with Any GC {#h2-2-jep-516-ahead-of-time-object-caching-with-any-gc}
-----------------------------------------------------------------------------------------------------------
+JEP 516: Ahead-of-Time Object Caching with Any GC
+-------------------------------------------------
 
 JEP 483: \[Ahead-of-Time Class Loading \& Linking\] (<https://openjdk.org/jeps/483>) introduced in Java 24 the ability to create an AOT (Ahead of Time) cache containing the classes already loaded and linked by an application to improve its startup time.
 
@@ -79,8 +79,8 @@ In Java 26, this cache has been improved to store objects in a GC-agnostic manne
 
 More information in [JEP 516](https://openjdk.org/jeps/516).
 
-JEP 517: HTTP/3 for the HTTP Client API {#h2-3-jep-517-http-3-for-the-http-client-api}
---------------------------------------------------------------------------------------
+JEP 517: HTTP/3 for the HTTP Client API
+---------------------------------------
 
 JEP 517 adds support for **HTTP/3** in the JDK HTTP client.
 
@@ -97,8 +97,8 @@ var client = HttpClient.newBuilder()
 
 More information in [JEP 517](https://openjdk.org/jeps/517).
 
-JEP 522: G1 GC: Improve Throughput by Reducing Synchronization {#h2-4-jep-522-g1-gc-improve-throughput-by-reducing-synchronization}
------------------------------------------------------------------------------------------------------------------------------------
+JEP 522: G1 GC: Improve Throughput by Reducing Synchronization
+--------------------------------------------------------------
 
 **G1** is the default garbage collector (GC), but it sometimes performs less well than **ParallelGC** because, in order to perform part of its work concurrently with the application, it needs to share CPU resources with application threads and coordinate with them.
 
@@ -106,8 +106,8 @@ JEP 522 increases both application throughput and latency by reducing the amount
 
 More information can be found in [JEP 522](https://openjdk.org/jeps/522).
 
-UUIDv7 support {#h2-5-uuidv7-support}
--------------------------------------
+UUIDv7 support
+--------------
 
 The new `UUID.ofEpochMillis(long)` method allows you to create a **type 7 UUID** (UUIDv7) from a Unix Epoch timestamp.
 ![](uuidv7-700x404.webp)
@@ -120,8 +120,8 @@ The main feature of UUIDv7 is that they are monotonic (each subsequent value is 
 
 The big advantage of UUIDv7 is that they are naturally sortable, making them a good choice for database identifiers and filling one of the gaps in previous versions of UUID. They remain 128 bits long, so they are compatible with previous UUID type fields.
 
-Features coming out of preview {#h2-6-features-coming-out-of-preview}
----------------------------------------------------------------------
+Features coming out of preview
+------------------------------
 
 The following features comes out of preview (or incubator module) are now standard features:
 
@@ -129,8 +129,8 @@ The following features comes out of preview (or incubator module) are now standa
 
 This is rare enough to warrant highlighting. Some of the features that have been in preview for a long time are on hold pending the Valhalla project.
 
-Features that remain in preview {#h2-7-features-that-remain-in-preview}
------------------------------------------------------------------------
+Features that remain in preview
+-------------------------------
 
 The following features remain in preview (or in the incubator module).
 
@@ -142,8 +142,8 @@ The following features remain in preview (or in the incubator module).
 
 For details on these, please refer to my previous articles.
 
-Miscellaneous {#h2-8-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 Various additions to the JDK:
 
@@ -158,8 +158,8 @@ Various additions to the JDK:
 
 All of the new APIs in JDK 26 can be found in [The Java Version Almanac -- New APIs in Java 26](https://javaalmanac.io/jdk/26/apidiff/25/).
 
-Internal changes, performance, and security {#h2-9-internal-changes-performance-and-security}
----------------------------------------------------------------------------------------------
+Internal changes, performance, and security
+-------------------------------------------
 
 Like all new versions of Java, OpenJDK 25 contains a number of performance optimizations and security enhancements.
 
@@ -167,8 +167,8 @@ In terms of performance, there are no major changes, but quite a few minor ones.
 
 On the security side, I haven't noticed anything yet, but I will update the article if necessary.
 
-JFR Events {#h2-10-jfr-events}
-------------------------------
+JFR Events
+----------
 
 Here are the new Java Flight Recorder (JFR) events for the JVM:
 
@@ -177,8 +177,8 @@ Here are the new Java Flight Recorder (JFR) events for the JVM:
 
 You can find all JFR events supported in this version of Java on the [JFR Events](https://sap.github.io/jfrevents/26.html) page.
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 We are clearly left wanting more, as this release brings very few new features and most of the features already in preview or incubator module remain so.  
 

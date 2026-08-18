@@ -32,7 +32,7 @@ In Part 4 I will be fast forwarding my progress of the JFX World Clock and jump 
 
 For the impatient go to check out the Readme.md on the simple steps to build the app at <https://github.com/carldea/worldclock>
 
-### Requirements {#h3-0-requirements}
+### Requirements
 
 Install your favorite OpenJDK distribution.
 
@@ -40,7 +40,7 @@ Install your favorite OpenJDK distribution.
 * Maven 3.6.3+ (optional)
 * SDKMan (optional)
 
-### Installing Java 16+ (with JavaFX) {#h3-1-installing-java-16-with-javafx}
+### Installing Java 16+ (with JavaFX)
 
 Out of convenience I have been using the [SDKMAN](https://sdkman.io) for easy installs and being able to switch between versions of the JDK on the command prompt (terminal).
 
@@ -54,7 +54,7 @@ $ sdk use java 16.0.0.fx-zulu
 
 For see more information on newer Java distros go to: <https://www.azul.com/downloads/zulu-community/?package=jdk-fx>
 
-### Clone JFX World Clock repo {#h3-2-clone-jfx-world-clock-repo}
+### Clone JFX World Clock repo
 
 Assuming you have Java 16 or greater installed do the following:
 
@@ -94,7 +94,7 @@ If you ever want to suggest a fix or change code locally (assuming you've forked
 
 So, let's build the JFX World Clock to be run.
 
-### Bach Build {#h3-3-bach-build}
+### Bach Build
 
 Bach is a build tool that uses executable tools that comes with your installed Java 16+ JDK such as `javac`, `jar`, `jlink`, etc. Bach is a lightweight build tool but does the heavy lifting for you when building a Java based modular application.
 
@@ -126,7 +126,7 @@ $ bach build
 ```
 
 
-### Setup Environment Variables {#h3-4-setup-environment-variables}
+### Setup Environment Variables
 
 After building the world clock with the above command you will inevitably perform builds often, so let's make it more convenient by setting your PATH environment.
 
@@ -146,7 +146,7 @@ set PATH=%PATH%;.bach\bin
 ```
 
 
-### Learning from Bach {#h3-5-learning-from-bach}
+### Learning from Bach
 
 After calling the `bach build` command you should see the following:
 
@@ -199,7 +199,7 @@ Logbook written to file:///Users/cdea/projects/worldclock/.bach/workspace/logboo
 ```
 
 
-### Running JFX World Clock as a Module {#h3-6-running-jfx-world-clock-as-a-module}
+### Running JFX World Clock as a Module
 
 After the application is built let's run it as a Java module as shown below:
 
@@ -251,7 +251,7 @@ Bach's API is in the form of Java annotations. A Bach annotation called `@Projec
 
 Now that you know how to build a modular app using Bach let's create an installer to distribute to others.
 
-### Creating an Installer {#h3-7-creating-an-installer}
+### Creating an Installer
 
 Wouldn't it be nice to distribute your application that is packaged into an installer program such as dmg, msi, or rpm?
 
@@ -296,7 +296,7 @@ Topics not discussed regarding jpackage following:
 * License File
 * Overriding resources
 
-### Maven Build and Run {#h3-8-maven-build-and-run}
+### Maven Build and Run
 
 This project originally used Maven to build the project. While Maven and Gradle are often the de-facto standard when it comes to building apps, I only went as far as building it and running it as a modular app in development. I did not use Maven to build a custom image and installer.
 
@@ -308,7 +308,7 @@ $ mvn javafx:run
 ```
 
 
-### Conclusion {#h3-9-conclusion}
+### Conclusion
 
 In Part 4, instead of working on the other features of the JFX World Clock I wanted to show you how to build the app using the Bach build tool and also how to use the jpackage tool from JDK 16 to create a native installer to be distributed. Lastly, I showed you how to build and run the app using Maven.
 

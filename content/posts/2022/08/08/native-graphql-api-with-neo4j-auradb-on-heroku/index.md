@@ -32,15 +32,15 @@ What I don't want to cover is a discussion about REST or GraphQL, exposing a dat
 
 In general, my litmus test usually goes into the direction of whether I can follow along with a framework or architecture to achieve my purpose or do I need to work against it. In the latter case, it's often better to pick something that works better, even if it is only in a personal perception of things.
 
-The use case {#_the_use_case}
------------------------------
+The use case
+------------
 
 A while back I started a README in this [repository](https://github.com/michael-simons/goodreads) containing a bunch of CS/IT books I liked. It grew to kinda append only database (`all.csv`) in which I kep track of books I buy and read so that I don't end up with duplicates. A book has a title, one or more authors, a state and a type.
 
 I wanted to have a simple, searchable API and the result is online [here](https://neo4j-aura-quarkus-graphql.herokuapp.com/).
 
-"Schema-First" vs "Object-First" {#_schema_first_vs_object_first}
------------------------------------------------------------------
+"Schema-First" vs "Object-First"
+--------------------------------
 
 Any [GraphQL](https://graphql.org) API requires a schema. If you look at the official web page you'll see three steps:
 
@@ -87,8 +87,8 @@ This has not per-se a direction pendant in the model world.
 
 In GraphQL, the same types are used for querying as for the model. Hence, I think GraphQL is more a modelling language than a query language.
 
-A graph-database and it's issues with GraphQL {#_a_graph_database_and_its_issues_with_graphql}
-----------------------------------------------------------------------------------------------
+A graph-database and it's issues with GraphQL
+---------------------------------------------
 
 Neo4j is a graph database. It stores related objects as an actual graph, in which relationships between objects are first-class entities. They can have properties the same way as other entities but especially, they can be traversed very efficiently. "Graph database" and "GraphQL" have both a whole word in common, so why does a Graph database not come with GraphQL built in?
 
@@ -116,8 +116,8 @@ RETURN *
 
 In case you are interested, Neo4j offers an official solution rooted in the JavaScript ecosystem, called \` @neo4j/graphql\` and documented [here](https://neo4j.com/docs/graphql-manual/current/), OGM included. There's also [neo4j-graphql-java](https://github.com/neo4j-graphql/neo4j-graphql-java), which does the translation from GraphQL models to Cypher on the JVM. Both these tools are "schema first" approaches, hence, I don't want to use either. Those are great tools, but they wouldn't fit my personal interest, so - as said in the beginning - I would rather use something else than working against a solution.
 
-Quarkus {#_quarkus}
--------------------
+Quarkus
+-------
 
 I chose Quarkus for a couple of reasons for this project:
 
@@ -225,8 +225,8 @@ or call the GraphQL UI:
 
 Which is exactly what we want. For the rest of this post I'm gonna walk through the most important pieces of implementation. I am not going touch the actual frontend, I leave that task up to someone with more Vue knowledge than I have. Regarding `frontend-maven-plugin`: Many things that [Jonas Hecht](https://twitter.com/jonashackt) describes in his post at [Codecentric](https://blog.codecentric.de/en/2018/04/spring-boot-vuejs/) applies to a Quarkus backend too.
 
-Implementation {#_implementation}
----------------------------------
+Implementation
+--------------
 
 The whole API my application offers is in a class called `BooksAndMovies`. From a domain perspective, I always wanted to add more content of Neo4j's movie graph but haven't done yet. That class is declared as application scoped `GraphQLApi`:
 
@@ -379,8 +379,8 @@ public CompletionStage<String> shortBio(@Source Person person) {
 
 It takes in a source argument - the person - and asynchronously gets their biography and adds it to the result. It won't work with the example data yet, since I don't have a Wikipedia entry and that's where the `PeopleService` is looking at right now. I am not recommending doing such things without proper circuit breaker in production, but it is rather simple to build a federated GraphQL API based on the given stack.
 
-Deployment {#_deployment}
--------------------------
+Deployment
+----------
 
 We have seen how to run the project in developer mode in which the [dev services](https://quarkus.io/guides/dev-services) will use the amazing [Testcontainers](https://www.testcontainers.org) to spin up a database for you. In production however, I want to have something different and opted for [Neo4j AuraDB](https://neo4j.com/cloud/platform/aura-graph-database/). You can sign up there for an always free account.
 

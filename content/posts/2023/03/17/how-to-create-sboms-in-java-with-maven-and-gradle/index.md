@@ -35,8 +35,8 @@ More importantly, how can they check if the dependencies are not vulnerable to s
 
 The answer is a **software bill of materials**.
 
-What is an SBOM? {#h2-0-what-is-an-sbom}
-----------------------------------------
+What is an SBOM?
+----------------
 
 A [software bill of materials](https://snyk.io/learn/software-bill-of-materials/), often abbreviated as SBOM, is a list of all software components used in an application. The SBOM is made up of third-party open-source libraries, vendor-provided packages, and first-party artifacts built by the organization. You can basically see it as the full list of ingredients for your applications.
 
@@ -44,8 +44,8 @@ But be careful to not confuse an SBOM with Maven's Bill Of Materials (BOM). In M
 
 An SBOM is something you create next to your application, so any user or client has a uniform way to find out what your application is using under the hood.
 
-Why should I create an SBOM? {#h2-1-why-should-i-create-an-sbom}
-----------------------------------------------------------------
+Why should I create an SBOM?
+----------------------------
 
 There are multiple reasons for creating an SBOM. First of all, you create transparency about what how your application is containing. In most Java applications, 80% to 90% of the produced binary consists of other Java packages like libraries and frameworks.
 
@@ -55,8 +55,8 @@ Take the recent [Log4Shell](https://snyk.io/log4j-vulnerability-resources/) and 
 
 The creation of SBOMs is expected to be something that will be common practice, or sometimes even mandatory, when you deliver software. Therefore we feel it is important to cover how to create these SBOMs for your Java project, which we cover in the remainder of this article.
 
-SBOM standards: SPDX and CycloneDX {#h2-2-sbom-standards-spdx-and-cyclonedx}
-----------------------------------------------------------------------------
+SBOM standards: SPDX and CycloneDX
+----------------------------------
 
 Currently, there are multiple standards for SBOMs. The two most commonly used are SPDX and CycloneDX. Both of these standards provide a way to show the components your application contains.
 
@@ -68,8 +68,8 @@ CycloneDX is a SBOM standard from the OWASP foundation designed for application 
 
 The specification is rich and extends beyond software libraries to standards such as software as a service bill of materials (SaaSBOM), Vulnerability Exploitability Exchange (VEX), and more. The CycloneDX project provides standards in XML, JSON, and Protocol Buffers, as well as a large [collection of official and community-supported tools](https://cyclonedx.org/tool-center/) that create or interoperate with the standard.
 
-When to create an SBOM in Java {#h2-3-when-to-create-an-sbom-in-java}
----------------------------------------------------------------------
+When to create an SBOM in Java
+------------------------------
 
 Java is a compiled language, so you should create an SBOM whenever you build a release version of your application.
 
@@ -77,10 +77,10 @@ Therefore, creating an SBOM when using one of the Java build systems makes a lot
 
 By using a plugin for Maven or Gradle, you can easily create SBOMs with every release of your binary either on a single machine or as part of your CI pipeline
 
-Creating a Java SBOM with Maven {#h2-4-creating-a-java-sbom-with-maven}
------------------------------------------------------------------------
+Creating a Java SBOM with Maven
+-------------------------------
 
-### CycloneDX plugin for Maven {#h3-5-cyclonedx-plugin-for-maven}
+### CycloneDX plugin for Maven
 
 There is a CylconeDX plugin available on Maven central and [Github](https://github.com/CycloneDX/cyclonedx-maven-plugin) that appears to be well-maintained and commonly used.
 
@@ -149,7 +149,7 @@ All dependencies, both direct and transitive, are mentioned in the SBOM individu
 ```
 
 
-### SPDX plugin for Maven (prototype) {#h3-6-spdx-plugin-for-maven-prototype}
+### SPDX plugin for Maven (prototype)
 
 For SPDX, there is a [Maven plugin](https://github.com/spdx/spdx-maven-plugin) as well. However, this is still marked as a prototype. In the example below, I used the latest version (at the time of writing) with a similar configuration as mentioned in the GitHub README.
 
@@ -177,7 +177,7 @@ The output by default for this version of the plugin is located in `/target/site
 
 Browsing through the output, it surprised me that it only contained the top-level dependencies and not the transitive. Now, this plugin is marked as a prototype, so that could be why. Additionally, I might be doing something wrong. However, reading the docs did not give me a clear hint.
 
-### SPDX CLI tool for Maven {#h3-7-spdx-cli-tool-for-maven}
+### SPDX CLI tool for Maven
 
 Alternatively, there is command line tool available called [spdx-sbom-generator](https://github.com/opensbom-generator/spdx-sbom-generator). This CLI tool can generate SPDX SBOMs for many package managers, including Maven for Java applications. Gradle is currently not supported.
 
@@ -214,12 +214,12 @@ Relationship: SPDXRef-Package-jackson-databind-2.13.4 DEPENDS_ON SPDXRef-Package
 
 If you want to create SBOMs in the SPDX format I would suggest this tool over the prototype plugin.
 
-Creating a Java SBOM with Gradle {#h2-8-creating-a-java-sbom-with-gradle}
--------------------------------------------------------------------------
+Creating a Java SBOM with Gradle
+--------------------------------
 
 Now let's take a look at Gradle. While Gradle is less used than Maven, it is still used a substantial amount, and we can definitely say it is a well-adopted build tool in the ecosystem.
 
-### CycloneDX for Gradle {#h3-9-cyclonedx-for-gradle}
+### CycloneDX for Gradle
 
 There is a CyconeDX plugin available for Gradle. Just like the Maven plugin we discussed earlier, the Gradle plugin is released by the [CycloneDX organization on Github](https://github.com/CycloneDX/cyclonedx-gradle-plugin) with some of the same maintainers as the Maven plugin.
 
@@ -253,14 +253,14 @@ In this example, I also added the line `build.finalizedBy('cyclonedxBom')` at th
 
 The output is as expected and similar to what we have seen with the Maven plugin. With the configuration shown above, you will find both a JSON and an XML output of the SBOM in your project's `build` folder. So, this plugin is an excellent option for Gradle users to create SBOMs
 
-### SPDX for Gradle {#h3-10-spdx-for-gradle}
+### SPDX for Gradle
 
 Unfortunately, we could not find a real plugin to create SPDX-type SBOMs for Gradle projects. Also, third-party CLI tools are either not available or are not correctly working for Gradle-based Java projects.
 
 So, for now, there is no easy way to generate SPDX SBOMs for Gradle.
 
-Creating SBOMs for your Java projects {#h2-11-creating-sboms-for-your-java-projects}
-------------------------------------------------------------------------------------
+Creating SBOMs for your Java projects
+-------------------------------------
 
 Building an SBOM when you are building your Java project seems like a practice that will get more popular soon.
 

@@ -21,7 +21,7 @@ frozen: false
 
 Hi everyone, we are near the end of year. Looking back on 2022, there are a few highlights that we wanted to share with you all!
 
-### Highlights from 2022 {#h3-0-highlights-from-2022}
+### Highlights from 2022
 
 #### Major Visualization Experience Upgrade for Spring Boot Extensions
 
@@ -57,7 +57,7 @@ In November, we shared the news that [there were two million Java developers](ht
 
 In addition to the highlights from the 2022, let's look at the new features from the latest release!
 
-### December 2022 Update {#h3-1-december-2022-update}
+### December 2022 Update
 
 #### Spring Boot -- Live Memory View
 
@@ -132,8 +132,8 @@ As always, your feedback and suggestions are very important to us and will help 
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-Resources {#h2-2-resources}
----------------------------
+Resources
+---------
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

@@ -27,8 +27,8 @@ Many of us have been long used to JUnit 4 as a formidable unit testing framework
 Let us explore JUnit 5 as it was used for a recent code kata, that is, this is how I learnt using JUnit 5 !  
 ![JUnit5 Logo](https://cgunturme.files.wordpress.com/2019/07/dukejunit5.png "JUnit5")
 
-JUnit 5 dependencies {#h2-0-junit-5-dependencies}
--------------------------------------------------
+JUnit 5 dependencies
+--------------------
 
 JUnit 5 can be added as a single maven dependency:
 
@@ -42,8 +42,8 @@ JUnit 5 can be added as a single maven dependency:
 
 The equivalent gradle dependency can be inferred.
 
-What is JUnit 5 and What is Jupiter? {#h2-1-what-is-junit-5-and-what-is-jupiter}
---------------------------------------------------------------------------------
+What is JUnit 5 and What is Jupiter?
+------------------------------------
 
 JUnit5 is made of three separate parts:
 
@@ -53,15 +53,15 @@ JUnit5 is made of three separate parts:
 
 Read more about this at the JUnit5 User Guide (<https://junit.org/junit5/docs/current/user-guide/>).
 
-JUnit5 Basics {#h2-2-junit5-basics}
------------------------------------
+JUnit5 Basics
+-------------
 
 Base package for JUnit 5 is: `org.junit.jupiter`. Most unit test annotations are located at: `org.junit.jupiter.api`package (in the **junit-jupiter-api** module). Methods in JUnit5 Test can be typically grouped into :
 
 1. **Test methods**: Methods that are run as unit tests.
 2. **Lifecycle methods**: Methods that are executed as before or after one or more (or all) test methods.
 
-### Basic Annotations {#h3-3-basic-annotations}
+### Basic Annotations
 
 `@Test`: Identifies a method as a test method. Unlike prior versions, this annotation does not have attributes. #TestMethod
 
@@ -75,7 +75,7 @@ Base package for JUnit 5 is: `org.junit.jupiter`. Most unit test annotations are
 
 `@AfterAll`: A **static** teardown method run once after execution of all tests. #LifecycleMethod
 
-### Other Annotations {#h3-4-other-annotations}
+### Other Annotations
 
 `@Tag`: A category or grouping annotation. This is very useful specially when filtering which tests should be run via build tools such as maven. Example in another article in this series.
 
@@ -85,29 +85,29 @@ Base package for JUnit 5 is: `org.junit.jupiter`. Most unit test annotations are
 
 **Custom annotations**: It is quite simple to create custom annotations and inherit the behavior.
 
-JUnit5 Conditional Control of Test Methods {#h2-5-junit5-conditional-control-of-test-methods}
----------------------------------------------------------------------------------------------
+JUnit5 Conditional Control of Test Methods
+------------------------------------------
 
-### Operating System Conditions {#h3-6-operating-system-conditions}
+### Operating System Conditions
 
 `@EnabledOnOs`: Enable a test to run on a specific array of one or more operating systems.
 
 `@DisabledOnOs`: Disable a test to run on a specific array of one or more operating systems.
 
-### Java Runtime Environment Conditions {#h3-7-java-runtime-environment-conditions}
+### Java Runtime Environment Conditions
 
 `@EnabledOnJre`: Enable a test to run on a specific array of one or more Java Runtime Environments.
 
 `@DisabledOnJre`: Disable a test to run on a specific array of one or more Java Runtime Environments.
 
-### System Property Conditions {#h3-8-system-property-conditions}
+### System Property Conditions
 
 `@EnabledIfSystemProperty`: Enable a test to run if a System Property matches the condition attributes.
 
 `@DisabledIfSystemProperty`: Disable a test to run if a System Property matches the condition attributes.
 
-Ordering Test method execution {#h2-9-ordering-test-method-execution}
----------------------------------------------------------------------
+Ordering Test method execution
+------------------------------
 
 JUnit 5 allows for ordering test method execution. **This causes mixed feelings for me**.
 > ***My feelings** : Ordering methods may lead to some developers building out dependent tests where the result of one test is needed for the next to run or pass. Tests should be independent. That said, it is an incredibly useful a feature when used in code katas where the run of tests may have to follow a certain sequence. In the past, I used to solve this by naming my test methods with some numeral-inclusive prefix and sort the results alphabetically. **With great power, comes great responsibility.***

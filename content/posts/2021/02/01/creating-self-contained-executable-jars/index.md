@@ -20,7 +20,7 @@ When your application goes beyond a dozen of lines of code, you should probably 
 
 This article aims to describe ways to create self-contained executable JARs, also known as uber-JARs or fat JARs.
 
-### What is an Executable JAR? {#what-is-an-executable-jar}
+### What is an Executable JAR?
 
 A JAR is just a collection of class files. To be executable, its `META-INF/MANIFEST.MF` file should point to the class that implements the `main()` method. You do this with the `Main-Class` attribute. Here's an example:
 
@@ -31,7 +31,7 @@ Main-Class: path.to.MainClass
 
 In the above, `MainClass` has a `static main(String...​ args)` method.
 
-### Handling the Classpath {#handling-the-classpath}
+### Handling the Classpath
 
 Most applications depend on existing code. Java provides the concept of the **classpath** . The classpath is a list of path elements that the runtime will look into to find dependent code. When **running Java classes** , you define the classpath via the `-cp` command-line option:
 
@@ -54,7 +54,7 @@ One way to solve those issues is to create a unique deployment unit that contain
 * The Shade plugin
 * The Spring Boot plugin (for Spring Boot projects)
 
-#### The Apache Assembly Plugin {#the-apache-assembly-plugin}
+#### The Apache Assembly Plugin
 
 The Assembly Plugin for Maven enables developers to combine project output into a single distributable archive that also contains dependencies, modules, site documentation, and other files.--- [Apache Maven Assembly Plugin](https://maven.apache.org/plugins/maven-assembly-plugin/index.html)
 
@@ -119,7 +119,7 @@ The reason is that different JARs provide **different resources under the same p
 
 With Assembly, you can **exclude resources but not merge them**. When you need to merge resources, you'll probably want to use the Apache Shade plugin instead.
 
-#### The Apache Shade Plugin {#the-apache-shade-plugin}
+#### The Apache Shade Plugin
 
 The Assembly plugin is generic; the Shade plugin solely focuses on the task of creating self-contained JARs.
 
@@ -247,7 +247,7 @@ This configuration works! Still, there are remaining warnings:
 
 You can add and configure additional transformers to fix the remaining warnings. All in all, the whole process requires a deep understanding of each kind of resource and how to handle them.
 
-#### The Spring Boot plugin {#the-spring-boot-plugin}
+#### The Spring Boot plugin
 
 The Spring Boot plugin adopts an entirely different approach. It doesn't merge resources from JARs individually; it adds dependent JARs **as they are** inside the uber JAR. To load classes and resources, it provides a specific class-loading mechanism. Obviously, it's dedicated to Spring Boot projects.
 
@@ -289,7 +289,7 @@ As you can see, the main class is a Spring Boot specific class while the "real" 
 
 For more information on the structure of the JAR, please check the [reference documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-executable-jar-format.html).
 
-### Conclusion {#conclusion}
+### Conclusion
 
 In this post, we've described 3 different ways to create self-contained executable JARs:
 
@@ -299,8 +299,8 @@ In this post, we've described 3 different ways to create self-contained executab
 
 The complete source code for this post can be found on [Github](https://github.com/ajavageek/executable-jar) in Maven format.
 
-To go further: {#gofurther}
----------------------------
+To go further:
+--------------
 
 * [Maven Assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/)
 * [Maven Shade plugin](https://maven.apache.org/plugins/maven-shade-plugin/)

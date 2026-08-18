@@ -25,17 +25,17 @@ If you had asked me this question five years ago, the answer would have been a r
 
 But how about today? Should you run a database on Kubernetes? With complex operations and the requirements of persistent, consistent data, lets retrace the stages in the journey to my current answer: "In a cloud native environment? **Yes!**"
 
-### Stage 1: Running Stateless Workloads on Kubernetes, But Not Databases! {#h3-0-stage-1-running-stateless-workloads-on-kubernetes-but-not-databases}
+### Stage 1: Running Stateless Workloads on Kubernetes, But Not Databases!
 
 When Kubernetes landed on the DevOps scene, I was keen to explore this new platform. My automation was already dialed in with Puppet configuring hosts and Capistrano shuffling my application bits to virtual servers. I had started exploring Docker containers and loved how I no longer had to install and manage services on my developer workstation. I could just fire up a few containers and continue changing the world with *my* code.
 
 Kubernetes made it trivial to deploy these containers to a fleet of servers. It also handled replacing instances as they went down, and keeping a number of replicas online. No more getting paged at all hours! This was *great* for stateless services, but what about databases? Kubernetes promised agility, but my databases were tied to a giant boat anchor of data. If I ran a database in a container, would my data be there when the container came back? I didn't have time to solve this problem, so I fired up a managed RDBMS and moved on to the next feature ticket. Job done.
 
-### Stage 2: Running Ephemeral Databases on Kubernetes for Testing {#h3-1-stage-2-running-ephemeral-databases-on-kubernetes-for-testing}
+### Stage 2: Running Ephemeral Databases on Kubernetes for Testing
 
 This question came up again when I needed to run separate instances of an application for QA testing per GitHub pull request (PR). Each PR needed a running app instance *and a database* . We couldn't just run against a shared database, since some of the PRs contained schema changes. I didn't need a pretty solution, so we ran an instance of the RDBMS in the same *pod* as the app; and pre-loaded the schema and some data. We tossed a reverse proxy in front of it and spun up the instances on-demand as needed. QA was happy as there was no more scheduling of PRs in the test environment, the product team enjoyed feature environments to test drive new functionality, and ops didn't have to write a bunch of automation. This felt like a completely different situation to me, because I never expected these environments to be anything but ephemeral. It certainly wasn't cloud native, so I still wasn't ready to replace my managed database with a Kubernetes-deployed database in production.
 
-### Stage 3: Running Cassandra on Kubernetes StatefulSets {#h3-2-stage-3-running-cassandra-on-kubernetes-statefulsets}
+### Stage 3: Running Cassandra on Kubernetes StatefulSets
 
 Around this time, I was introduced to Apache Cassandra®. I was amazed by this high-performance database with a phenomenal operations story. A database that could support losing instances? Sign me up! My hopes of running a database on Kubernetes came roaring back. Could Cassandra deal with the ephemeral nature of containers? At the time, it felt like a begrudging "*I guess?* ". It seemed possible, but there were significant gaps in the tooling. To take this to production, I'd need a team of Kubernetes *and* Cassandra veterans, plus a suite of tooling and runbooks to fill in the operational gaps. It certainly seemed like a number of teams were successfully running Cassandra in containers. I fondly recall a webinar by Instaclustr talking about running [Cassandra on CoreOS](https://www.youtube.com/watch?v=rhqSmc9meMw).
 
@@ -43,7 +43,7 @@ In parallel, a number of Kubernetes ecosystem changes started to solidify. State
 
 Storage is the core of every database. In a containerized database, data may be stored within the container itself or mounted externally. Using external storage makes it possible to switch the container out to change configuration or upgrade software, while keeping the data intact. Cassandra is already capable of leveraging high performance local storage, but the flexibility of modern CSI implementations means data volumes are moved to new workers as pods are rescheduled. This reduces the time to recovery, as data no longer has to be synced between hosts in the case of a worker failure.
 
-### Stage 4: A Kubernetes Operator for Cassandra {#h3-3-stage-4-a-kubernetes-operator-for-cassandra}
+### Stage 4: A Kubernetes Operator for Cassandra
 
 With straightforward deployment of Cassandra nodes to pods, resilient handling of data volumes and a Kubernetes control plane that works to keep everything running, what more could we ask for? At this point I encountered the collision of two separate distributed systems that have been developed independently from each other. The way Kubernetes provisions pods and starts services does **not** align with the operational steps needed to care and feed for a Cassandra cluster --- there's a gap that must be bridged between Kubernetes workflows and Cassandra runbooks.
 
@@ -55,7 +55,7 @@ As these powerful new tools became available, I joined the effort to codify the 
 
 With cass-operator, we spend less time thinking about pods, stateful sets, persistent volumes, or even the tedious tasks of bootstrapping and scaling clusters, and more time thinking about our applications.
 
-### Stage Now: Running a Full Data Platform with K8ssandra {#h3-4-stage-now-running-a-full-data-platform-with-k8ssandra}
+### Stage Now: Running a Full Data Platform with K8ssandra
 
 The next iteration in this cycle, [K8ssandra](https://k8ssandra.io/), elevates us further away from the individual components. Instead of looking at the Cassandra Datacenters, we can consider our data platform holistically: not just the database, but also supporting services including monitoring, backups and APIs. We can ask Kubernetes for a data platform by executing a simple Helm install command; and a suite of operators kick in to provision and manage all of the pieces.
 

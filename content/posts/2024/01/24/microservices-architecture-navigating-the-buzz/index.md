@@ -23,7 +23,7 @@ Lately I've been exploring what all the talk around '[microservices architecture
 
 In this article I'm here to break it down for you as I outline the benefits, some common challenges, and offer some insights from microservices experts for those considering this approach.
 
-### Monolith vs Microservices in a Nutshell {#h3-0-monolith-vs-microservices-in-a-nutshell}
+### Monolith vs Microservices in a Nutshell
 
 If you are not already familiar with monolithic vs microservices architecture, you could imagine your software application as a structure made of lego bricks. With monolithic architecture you have one large lego brick encompassing your entire application and all of its functionality.
 
@@ -53,7 +53,7 @@ In a nutshell, [microservices architecture](https://en.wikipedia.org/wiki/Micros
 
 *Image 2. Visual representation of microservices*
 
-### Benefits of Microservices Architecture {#h3-1-benefits-of-microservices-architecture}
+### Benefits of Microservices Architecture
 
 1. Scalability
 
@@ -77,7 +77,7 @@ With larger development teams, there is often a lack of awareness between differ
 
 Again, by having a microservices architecture that is segmented based on functionality, and which provides clearer boundaries, this allows the structure of your microservices to largely reflect your organisational chart. Teams can work on their tasks largely independently and at their own pace, and by reducing the need for extensive coordination, this translates to increased productivity and improved output quality.
 
-### Challenges of Microservices Architecture {#h3-2-challenges-of-microservices-architecture}
+### Challenges of Microservices Architecture
 
 Despite the apparent advantages, there are various challenges that I think are important to highlight. Worth noting is that they are all avoidable when considered and planned around upfront.
 
@@ -89,7 +89,7 @@ Aside from these difficulties, another major concern when considering microservi
 
 As much as these are valid concerns and are very real everyday challenges, working with microservices does not have to be so confusing, and these are all avoidable when considered upfront.
 
-### Microservices Tips and Tricks {#h3-3-microservices-tips-and-tricks}
+### Microservices Tips and Tricks
 
 If you are considering making the monolithic to microservices switch, one top recommendation from microservices experts is to make sure that your microservices are independently deployable.
 
@@ -108,7 +108,7 @@ Moreover, if your application has stringent latency requirements and you have pe
 
 For a microservices framework that specialises in low-latency software, Chronicle Services is one that is worth exploring.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 While microservices may be trendy, the benefits of scalability, resilience, and productiveness are anything but temporary.
 

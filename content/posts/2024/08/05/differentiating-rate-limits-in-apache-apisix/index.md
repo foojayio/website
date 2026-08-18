@@ -26,8 +26,8 @@ Rate-limiting is an age-old Reverse Proxy feature focused on protecting against 
 
 In this post, I want to detail how to do it with Apache APISIX. Note I take most of the material from the [workshop](https://nfrankel.github.io/apisix-workshop/).
 
-Rate-limiting for the masses {#h2-0-rate-limiting-for-the-masses}
------------------------------------------------------------------
+Rate-limiting for the masses
+----------------------------
 
 Apache APISIX offers no less than three plugins to rate limit requests:
 
@@ -93,8 +93,8 @@ Server: APISIX/3.9.1
 2. Remaining quota
 3. Waiting time in seconds before quota replenishment
 
-Per-consumer rate limiting {#h2-1-per-consumer-rate-limiting}
--------------------------------------------------------------
+Per-consumer rate limiting
+--------------------------
 
 To configure per-consumer rate limiting, we first need to implement request authentication. APISIX offers many authentication plugins; we shall use the simplest one, [key-auth](https://apisix.apache.org/docs/apisix/plugins/key-auth/). `key-auth` checks a specific HTTP request header - `apikey` by default.
 
@@ -170,8 +170,8 @@ curl -H 'apikey: jane' localhost:9080/get
 
 The second request gets rate-limited.
 
-Per-group rate limiting {#h2-2-per-group-rate-limiting}
--------------------------------------------------------
+Per-group rate limiting
+-----------------------
 
 We never attach permissions directly to identities in Identity Management systems. It's considered bad practice because when a person moves around the organization, we need to add and remove permissions one by one. The good practice is to attach permissions to groups and set the person in that group. When the person moves, we change their group; the person loses permissions from the old group and gets permissions from the new group. People get their permissions *transitively* via their groups.
 
@@ -259,8 +259,8 @@ curl -H 'apikey: john' localhost:9080/get #1
 
 1. `johndoe` hits the limit here, but `janedoe` now only has four requests left from this minute, as the former used one request
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we implement rate limiting with Apache APISIX. We set the rate limit on a route and moved it to individual consumers. Then we moved it to consumer groups, so all consumers in a group share the same "pool".
 

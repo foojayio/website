@@ -33,8 +33,8 @@ In this second part, we'll **extend our application** to model relationships bet
 
 By the end of this tutorial, you'll see how [Hibernate and MongoDB](https://www.mongodb.com/company/blog/product-release-announcements/introducing-mongodb-extension-for-hibernate-orm-public-preview/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-hibernate-data-modeling&utm_term=ricardo.mello) can work together to model richer, interconnected data, all while using the same familiar annotations and APIs from the ORM world.
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 Before continuing, make sure you have the project from the first article up and running.  
 
@@ -53,8 +53,8 @@ git checkout v1.0
 
 Make sure your environment still meets the same requirements: Java 17+, Maven, and MongoDB 6.0+ (replica set enabled).
 
-One-to-many relationship {#h2-1-one-to-many-relationship}
----------------------------------------------------------
+One-to-many relationship
+------------------------
 
 In the current version of our project, we have a single entity---**Book**---that represents the documents stored in the MongoDB books collection. Each book contains basic information like title and number of pages:
 
@@ -69,7 +69,7 @@ In the current version of our project, we have a single entity---**Book**---that
 
 Now, we'll extend this model to make it more realistic. A book can have multiple reviews, and each review belongs to a specific book, forming a classic one-to-many relationship.
 
-### Approach 1: Embedding reviews inside books {#h3-2-approach-1-embedding-reviews-inside-books}
+### Approach 1: Embedding reviews inside books
 
 *This section corresponds to Git* [*tag* *v2.0*](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v2.0).
 
@@ -226,7 +226,7 @@ However, this strategy has an important limitation: If a book becomes extremely 
 
 To address that, the next step is to **move the reviews to their own collection**, allowing them to scale independently while still keeping a logical relationship to their book.
 
-### Approach 2: Moving reviews to a separate collection {#h3-3-approach-2-moving-reviews-to-a-separate-collection}
+### Approach 2: Moving reviews to a separate collection
 
 *This section corresponds to Git* [*tag* *v3.0*](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v3.0).
 
@@ -483,7 +483,7 @@ In relational databases, this would be handled automatically with a join, but in
 
 To address this, we can apply a common modeling technique known as the **Subset Pattern**---which we'll explore in the next section.
 
-### Approach 3: Bringing back recent reviews (Subset Pattern) {#h3-4-approach-3-bringing-back-recent-reviews-subset-pattern}
+### Approach 3: Bringing back recent reviews (Subset Pattern)
 
 *This section corresponds to Git* [*tag v4.0*](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v4.0).
 
@@ -530,7 +530,7 @@ This approach offers a great balance:
 
 In this simplified example, we're embedding only the author and comment fields inside the book. But in a real-world scenario, we could include additional fields such as rating, date, or short summaries, depending on what's most useful for quick access.
 
-### Implementing the Subset Pattern {#h3-5-implementing-the-subset-pattern}
+### Implementing the Subset Pattern
 
 To keep our documents lightweight and still show the latest feedback, we'll embed only the **three most recent reviews** inside each Book, while continuing to store all reviews in the separate reviews collection. Here's the step-by-step implementation:
 
@@ -647,7 +647,7 @@ How it works:
 * **$push** appends a new element to the array.  
 * **$slice: -3** trims the array to keep only the last three elements.  
 
-### Testing the feature {#h3-6-testing-the-feature}
+### Testing the feature
 
 To test this feature, simply run the application and choose option 6, Add Review from the console menu.  
 
@@ -658,8 +658,8 @@ Each time you add a new review:
 
 After inserting a few reviews for the same book, you should see that only the three most recent entries remain in the recentReview array, confirming that the $slice: -3 operator is working as expected.
 
-Wrapping up {#h2-7-wrapping-up}
--------------------------------
+Wrapping up
+-----------
 
 Throughout this series, we explored three different strategies for modeling one-to-many relationships with Hibernate ORM and MongoDB. From embedding data directly inside documents to referencing separate collections and finally applying the Subset Pattern, we saw how flexible MongoDB can be when paired with a familiar ORM framework like Hibernate.
 

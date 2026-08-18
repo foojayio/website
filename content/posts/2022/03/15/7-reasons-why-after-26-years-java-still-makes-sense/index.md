@@ -42,8 +42,8 @@ While many others mentioned similar ideas, Java Champion [Geertjan Wielenga](htt
 
 **After many discussions with Java developers, combined with my personal experiences with the Java community and platform, I have come up with the following seven key reasons why Java developers still love Java after all these years and want to stick with it in the years to come.**
 
-1. Community {#h2-0-1-community}
---------------------------------
+1. Community
+------------
 
 Software development is a unique and recent phenomenon in the history of humanity. Unlike others, the full body of knowledge is yet to be established. That's why learning and acquiring skills in this field is more-or-less mentorship-driven. We can read books, but we learn more from our peers, from our fellow developers, and by doing things in a team.
 
@@ -57,8 +57,8 @@ You will find a list of Java groups at the following link: <https://dev.java/com
 
 To get involved with the community, reach out to your local JUG and everyone will welcome you with a warm heart.
 
-2. Language and Platform {#h2-1-2-language-and-platform}
---------------------------------------------------------
+2. Language and Platform
+------------------------
 
 Java is a type-safe and object-oriented programming language with a high emphasis on readability. We, its developers and its users, spend a significant amount of time in our work reading code. Java being extremely readable allows developers tremendous benefits, e.g., in scaling the team. Often even non-programmers can read Java source code and understand the intention behind a particular portion of the code.
 
@@ -70,8 +70,8 @@ Furthermore, while Java is an excellent programming language, it isn't limited o
 
 This combination and amalgamation of language and platform features gives the Java platform a unique and robust strength, like none other.
 
-3. More Solved Problems Than Any Other Ecosystem {#h2-2-3-more-solved-problems-than-any-other-ecosystem}
---------------------------------------------------------------------------------------------------------
+3. More Solved Problems Than Any Other Ecosystem
+------------------------------------------------
 
 It's been 26 years since Java was released. Being the dominant programming language and platform, it has solved more problems than any other ecosystem. And that's not an exaggeration: if you search around a problem, more likely someone has already solved it. Stackoverflow alone has more than a million answered questions: <https://stackoverflow.com/questions/tagged/java>.
 
@@ -91,8 +91,8 @@ Performance may differ from OpenJDK vendor to OpenJDK vendor, but the output rem
 
 Here's a list of OpenJDK vendors: <https://foojay.io/almanac/java-17/>
 
-4. Stability {#h2-3-4-stability}
---------------------------------
+4. Stability
+------------
 
 Stability is one of the critical aspects of which the Java community is very proud. Whenever a new feature is released, backward compatibility gets the utmost priority. So, even a dusty JAR from the very past, can still be run on the latest OpenJDK distribution.
 
@@ -100,8 +100,8 @@ That unmatched stability is unparalleled in other platforms available out there.
 
 With that stability in mind, many organizations have confidently made Java their primary language, since they have in the back of their minds the fact that their code will run on OpenJDK distributions for many years to come.
 
-5. Innovation {#h2-4-5-innovation}
-----------------------------------
+5. Innovation
+-------------
 
 In contrast to the stability, there is plenty of innovation going on in the Java ecosystem. From Java 9 onwards, there is a new major release every six months, which makes it super easy to add new features to the OpenJDK. Each release comes with a rich set of new features, along with improving the performance of the existing codebase and fixing security issues.
 
@@ -109,8 +109,8 @@ For example, Java 8 reimagines our ways of writing Java code with a functional p
 
 Further into the future, we are going to see Project Loom: the lightweight concurrency model that we hope will change the future Java concurrency. Besides [Project Loom](https://wiki.openjdk.java.net/display/loom/Main), other projects, such as [Valhalla](https://wiki.openjdk.java.net/display/valhalla), [Amber](https://wiki.openjdk.java.net/display/amber), [Panama](https://openjdk.java.net/projects/panama/), and [Leydon](https://mail.openjdk.java.net/pipermail/discuss/2020-April/005429.html) will make our programming life even more efficient than before.
 
-6. Tooling {#h2-5-6-tooling}
-----------------------------
+6. Tooling
+----------
 
 How wealthy a language and a platform are depends highly on its tooling support.
 
@@ -120,8 +120,8 @@ Besides the IDEs and editors, there is a need for build tools and dependency man
 
 Furthermore, when software goes into production, we need to monitor the system's behaviour constantly, for which we have a well-established toolset, such as [JMC](https://jdk.java.net/jmc/8/), [JFR](https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH173), [jstack](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr016.html). [Mbeans](https://docs.oracle.com/javase/tutorial/jmx/mbeans/index.html), and[Java Agents](https://youtu.be/nY6g23PLe28).
 
-7. Employment Opportunities {#h2-6-7-employment-opportunities}
---------------------------------------------------------------
+7. Employment Opportunities
+---------------------------
 
 Now that we covered the technical aspect of the Java ecosystem, the most important reason for sticking to this ecosystem is the simple fact of how widespread Java is.
 
@@ -129,7 +129,7 @@ It is said that there are 12 million Java developers out there in the world. Tha
 
 Since the language is widespread and can be considered a general purpose approach to programming usable for developing pretty much anything from smart cards to large enterprise data applications, from smartphone applications to probes on Mars, you will always find something interesting to do with Java. Moreover, besides simply getting a job, being a Java developer turns out to be one of the [top-paying jobs](https://www.payscale.com/research/US/Job=Java_Developer/Salary) in the USA.
 
-### Conclusion {#h3-7-conclusion}
+### Conclusion
 
 Knowing all the major points above, the argument around the ongoing success of Java becomes pretty apparent.
 

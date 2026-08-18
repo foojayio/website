@@ -25,8 +25,8 @@ frozen: false
 
 In this article, we will learn about cache miss and, in general, about the caching concept and how to implement it in Spring Boot. Eventually, we will see how Digma can help us detect cache misses locally during development.
 
-The history of caching {#h2-0-the-history-of-caching}
------------------------------------------------------
+The history of caching
+----------------------
 
 The concept of caching can be traced back to the early days of computing when computer systems relied on hierarchical memory architectures. Early computers used different types of memory with varying access speeds, such as registers, caches, and main memory (RAM). Programmers often employ manual caching techniques to optimize performance by storing frequently accessed data in faster memory locations.
 
@@ -34,12 +34,12 @@ In the 1960s and 1970s, with the emergence of database management systems (DBMS)
 
 The history of caching in software development reflects a continuous evolution driven by the need for efficient resource utilization, improved performance, and enhanced user experiences.
 
-Benefits of caching {#h2-1-benefits-of-caching}
------------------------------------------------
+Benefits of caching
+-------------------
 
 When discussing caching, we usually think of situations where we have frequently accessed data that is expensive to compute. Caching mainly boosts availability and reliability, which are its key advantages.
 
-### Key benefits of caching: {#h3-2-key-benefits-of-caching}
+### Key benefits of caching:
 
 * Improved Performance
 * Reliability and Availability
@@ -49,12 +49,12 @@ When discussing caching, we usually think of situations where we have frequently
 * Reduced Server Load
 * Cost Saving
 
-What are caching, cache hits, cache evictions, and cache misses? {#h2-3-what-are-caching-cache-hits-cache-evictions-and-cache-misses}
--------------------------------------------------------------------------------------------------------------------------------------
+What are caching, cache hits, cache evictions, and cache misses?
+----------------------------------------------------------------
 
 These are key concepts in caching, Before getting deep into the code, it's a good idea to get familiar with these concepts with a practical example.
 
-### Let's examine cache concepts through a relatable scenario: {#h3-4-let-s-examine-cache-concepts-through-a-relatable-scenario}
+### Let's examine cache concepts through a relatable scenario:
 
 Imagine a time when there were no mobile phones and only home landlines were the only way to make phone calls. There was a phone book in every house, and we used to write down the important and frequently used phone numbers in it. Instead of asking others or searching in Yellow Pages, magazines, etc., we used those phone books to call.
 
@@ -64,7 +64,7 @@ In the screenshot below, caching, cache hits, cache evictions, and cache misses 
 
 Every time we had a new phone number that we used a lot, we added it to the phone book. We had different ways to keep this phonebook updated, for example, if we called a number and realized that it had changed, we would delete that number, find a new number, and replace it. Let's explore cache-related concepts, including caching cache hits, evictions, and misses, through this imaginary example:
 
-### Scenarios: {#h3-5-scenarios}
+### Scenarios:
 
 1. Cache Hit: If we search for a phone number in our phonebook and find it there (Cached), We call this a Cache Hit.
 2. Cache Eviction: If, for any reason, we decide to delete a phone number from our phonebook, We call this Cache Eviction. Cache eviction can be due to many reasons, and it helps us to keep our phonebook updated and ensure we have the latest information.
@@ -73,8 +73,8 @@ Every time we had a new phone number that we used a lot, we added it to the phon
 
 By exploring cache concepts through navigating a phonebook, including caching, cache hit, cache misses, and cache eviction, we can better understand how caching works in computer systems and the strategies used to optimize performance.
 
-Caching in Spring Boot {#h2-6-caching-in-spring-boot}
------------------------------------------------------
+Caching in Spring Boot
+----------------------
 
 Spring Boot supplies caching support to make your application fast. Spring Boot caching is based on an Abstraction that can easily be enabled in a Spring Boot application. There is a starter package that can easily add to your project dependency to add caching support to your project.
 
@@ -91,7 +91,7 @@ The first two things we need to do after adding the library dependency are:
 1. Enable caching by adding the @EnableCaching annotation to a configuration class.
 2. Add your preferred caching library (e.g., Caffeine, Redis, Hazelcast, or ...). If you don't provide any cache library, Spring Boot will automatically autoconfigure the default in-memory cache based on the ConcurrentHashMap.  
 
-   ### Implementing the Phonebook example using Spring Boot {#h3-7-implementing-the-phonebook-example-using-spring-boot}
+   ### Implementing the Phonebook example using Spring Boot
 
    Let's continue by implementing the Phonebook example that we discuss in the previous section as a simple Spring Web MVC project with four REST APIs:
 3. Get a phone number with a name.
@@ -168,7 +168,7 @@ class PhonebookRepository {
 ```
 
 
-### Spring Boot annotations for Caching {#h3-8-spring-boot-annotations-for-caching}
+### Spring Boot annotations for Caching
 
 Spring Boot supports caching concepts by introducing several annotations that can be used at the method level in a declarative way:
 
@@ -178,8 +178,8 @@ Spring Boot supports caching concepts by introducing several annotations that ca
 
 **Cache Eviction**: Spring Boot supports cashing an item using @CachePut and @CacheEvict annotations.
 
-Adding the cache capability to the Phonebook example {#h2-9-adding-the-cache-capability-to-the-phonebook-example}
------------------------------------------------------------------------------------------------------------------
+Adding the cache capability to the Phonebook example
+----------------------------------------------------
 
 Now we know how to use the cache concept in a Spring Boot. Let us add a cache capability to the Phonebook's service layer.
 
@@ -213,12 +213,12 @@ class PhonebookService {
 
 By adding these annotations to the service layer, the Phonebook application performance now is improved.
 
-### More advanced features {#h3-10-more-advanced-features}
+### More advanced features
 
 There are some advanced features in Spring Boot caching support, like custom Key generation strategies or cashing manually (non-declarative or programmatically) using the CacheManager bean.
 
-What are the signs of detecting cache misses in observability? {#h2-11-what-are-the-signs-of-detecting-cache-misses-in-observability}
--------------------------------------------------------------------------------------------------------------------------------------
+What are the signs of detecting cache misses in observability?
+--------------------------------------------------------------
 
 Traditionally, to detect when and where we need to cache data to improve performance, we have to deploy our application and use monitoring tools to see the patterns in the diagrams and charts.
 
@@ -226,7 +226,7 @@ We might even need to load test our applications to understand better how our ap
 
 The [Digma IDE plugin](https://digma.ai/ "Digma IDE plugin") finds bottlenecks, scaling challenges, and query problems lurking in your codebase during development without the need to deploy our project. It brings us a short and Continuous Feedback loop.
 
-### Adding a slow endpoint to the Phonebook project {#h3-12-adding-a-slow-endpoint-to-the-phonebook-project}
+### Adding a slow endpoint to the Phonebook project
 
 Let's continue by adding this [endpoint](https://digma.ai/whats-new-feb-2024/ "endpoint") to the Phonebook project:
 
@@ -299,8 +299,8 @@ And also, we should consider these two:
 
 The final code for the Phonebook project is accessed at this [GitHub repository](https://github.com/zarinfam/phonebook "GitHub repository").
 
-Final thoughts {#h2-13-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 Caching is a powerful technique that can greatly improve the performance, scalability, and efficiency of any system.
 

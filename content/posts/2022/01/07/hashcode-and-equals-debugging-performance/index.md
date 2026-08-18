@@ -26,8 +26,8 @@ Unfortunately, this is a part of the Java API specification and is no longer fix
 
 What we can do is understand the problem with equals and hashcode. How can we avoid such problems in the future?
 
-What's the problem with URLs Hashcode and Equals? {#h2-0-what-s-the-problem-with-urls-hashcode-and-equals}
-----------------------------------------------------------------------------------------------------------
+What's the problem with URLs Hashcode and Equals?
+-------------------------------------------------
 
 To understand this, let's ‌look at the JavaDoc of hashcode and equals:
 > Compares this URL for equality with another object. If the given object is not a URL then this method immediately returns false. Two URL objects are equal if they have the same protocol, **reference equivalent hosts**, have the same port number on the host, and the same file and fragment of the file. **Two hosts are considered equivalent if both host names can be resolved into the same IP addresses;** else if either host name can't be resolved, the host names must be equal without regard to case; or both host names equal to null. Since hosts comparison requires name resolution, this operation is a blocking operation.
@@ -52,8 +52,8 @@ true
 
 This might be pretty simple with localhost, but if we compare domains and the Strings aren't identical (which they often aren't) we need to do a DNS lookup. We need to do that just for a hashcode() call!
 
-A Quick Workaround {#h2-1-a-quick-workaround}
----------------------------------------------
+A Quick Workaround
+------------------
 
 A quick workaround for this case is to avoid URL. Sun deeply embedded the class in the original JVM code, but we can use URI for most purposes.
 
@@ -67,8 +67,8 @@ System.out.println(new URI("http://localhost/").hashCode() == new URI("http://12
 
 We will get false for both statements. While this might be problematic for some use cases, it's a vast difference in performance.
 
-A Bigger Pitfall {#h2-2-a-bigger-pitfall}
------------------------------------------
+A Bigger Pitfall
+----------------
 
 If all we ever used as a map key were Strings we'd be fine. This sort of bug can hit us in every place where we use these methods:
 
@@ -81,7 +81,7 @@ But it gets deeper. When writing our own classes with our own hashcode and equal
 
 E.g. A stream operation that takes longer because the hashcode method is slow or incorrect can represent a long-term problem.
 
-### The Best Hashcode Implementation {#h3-3-the-best-hashcode-implementation}
+### The Best Hashcode Implementation
 
 To understand the best hashcode and equals method, we first need to understand some mediocre code. Now I won't show horrible or old code. This is good code, but it isn't the best:
 
@@ -103,7 +103,7 @@ public int hashCode() {
 
 This is fast, 100% unique and correct. There's literally no reason to do anything beyond that. There's one exception of an id which is an object. In that case we might want to do Objects.hashCode(id) instead which will also work for null, etc.
 
-### Hashcode isn't Equals {#h3-4-hashcode-isn-t-equals}
+### Hashcode isn't Equals
 
 Well, obviously... This is one of the most important things you need to keep in mind when writing a hashcode implementation. This method must perform fast and must be consistent with equals for the false case. It will not be correct for the case of true.
 
@@ -127,7 +127,7 @@ if(obj1.hashCode() == obj2.hashCode()) {
 
 The value here is in performance. A hashcode method should perform much faster than equals. It should let us skip the potentially expensive equals calculation and index elements quickly.
 
-### Special Case with JPA {#h3-5-special-case-with-jpa}
+### Special Case with JPA
 
 JPA developers often just use a hardcoded value for hashcode or use the Class object to generate the hashCode(). This seems weird until you think about this.
 
@@ -135,8 +135,8 @@ If you let the database generate the ID for you, you would save an object and it
 
 In fact, I would theorize that a lot of the problems JPA developers experienced with Lombok are because it generates hashcode and equals methods for you. Those could be problematic.
 
-Is this a Blog about Debugging? {#h2-6-is-this-a-blog-about-debugging}
-----------------------------------------------------------------------
+Is this a Blog about Debugging?
+-------------------------------
 
 Sorry about that long setup, but yes it damn well is. So I needed all of that preface to talk about this in a more generic sense of debugging. Notice that this is true for other languages that use similar paradigms for common interfaces.
 
@@ -163,8 +163,8 @@ public int hashCode() {
 
 It's short and simple. Yet, performance of this code can be all over the place. The method would invoke the hashcode method of all internal objects. These methods can be far worse in terms of performance. We need to be vigilant about this. Even for JDK classes such as URL which, as we discussed earlier, is problematic.
 
-TL;DR {#h2-7-tl-dr}
--------------------
+TL;DR
+-----
 
 We often auto-generate hashcode and equals methods. The IDEs are normally pretty good at that; they offer us an option to pick the fields we wish to compare. Unfortunately, they then apply both sets of fields to hashcode and equals.
 

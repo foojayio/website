@@ -25,15 +25,15 @@ The growing adoption of [MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/t
 
 This article presents the concept and capabilities of Resource Policies, highlights their importance in enterprise environments, and demonstrates how to use them effectively via Terraform --- ensuring that essential configurations rely not only on best practices but also on enforceable and auditable constraints.
 
-**What Are Resource Policies?** {#h2-0-what-are-resource-policies}
-------------------------------------------------------------------
+**What Are Resource Policies?**
+-------------------------------
 
 **Resource Policies** are organization-level rules in Atlas that are automatically enforced across all projects and clusters under that organization. Their goal is straightforward yet powerful: to restrict specific actions or configurations that could compromise security, increase costs, or violate compliance standards.
 
 These policies are defined using the AWS open-source [Cedar](https://docs.cedarpolicy.com/) policy language, adopted by MongoDB for its concise and expressive syntax. Its declarative structure allows for clear and precise specification of forbidden actions based on the resource context --- including cluster configuration, networking parameters, associated projects, and security requirements such as minimum TLS versions.
 
-**Why Use Them?** {#h2-1-why-use-them}
---------------------------------------
+**Why Use Them?**
+-----------------
 
 Throughout the lifecycle of a MongoDB Atlas environment, it's common for different teams (developers, SREs, architects) to interact with the infrastructure. While this flexibility is desirable, it can introduce risk if well-defined *guardrails* are not in place.
 
@@ -46,8 +46,8 @@ Throughout the lifecycle of a MongoDB Atlas environment, it's common for differe
 
 In short, these policies elevate governance and operational control across any organization running MongoDB Atlas at scale.
 
-**Available Capabilities** {#h2-2-available-capabilities}
----------------------------------------------------------
+**Available Capabilities**
+--------------------------
 
 Among the constraints currently supported by **Resource Policies**, the following stand out:
 
@@ -61,14 +61,14 @@ Among the constraints currently supported by **Resource Policies**, the followin
 
 These rules can be combined and fine-tuned, enabling targeted policies for critical clusters, production environments, or specific business units.
 
-**Applying Resource Policies with Terraform** {#h2-3-applying-resource-policies-with-terraform}
------------------------------------------------------------------------------------------------
+**Applying Resource Policies with Terraform**
+---------------------------------------------
 
 Support for **Resource Policies** is available in the [MongoDB Atlas Terraform Provider](https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs/resources/resource_policy). This allows teams to declare policies as code, apply them through CI/CD pipelines, and enforce configuration compliance continuously and audibly.
 
 Here are three practical examples of commonly used policies:
 
-### **🔐 Example 1: Allow clusters only on AWS** {#h3-4-example-1-allow-clusters-only-on-aws}
+### **🔐 Example 1: Allow clusters only on AWS**
 
 This policy blocks any cluster modifications outside AWS by using the unless clause. It's useful for organizations standardizing on a single cloud provider.
 
@@ -92,7 +92,7 @@ EOT
 
 <br />
 
-### **🌐 Example 2: Block public IPs (0.0.0.0/0)** {#h3-5-example-2-block-public-ips-0-0-0-0-0}
+### **🌐 Example 2: Block public IPs (0.0.0.0/0)**
 
 This policy denies any modification to the access list that includes a wildcard public IP. It's critical to improve access control and avoid accidental exposure.
 
@@ -116,7 +116,7 @@ EOT
 
 <br />
 
-### **🔒 Example 3: Enforce TLS 1.2 or higher** {#h3-6-example-3-enforce-tls-1-2-or-higher}
+### **🔒 Example 3: Enforce TLS 1.2 or higher**
 
 This policy ensures that new or modified clusters support at least TLS 1.2, aligning with modern security standards.
 
@@ -142,8 +142,8 @@ EOT
 
 These policies can be organized in multiple .tf files and integrated into CI pipelines. By versioning and enforcing them through automation, teams can guarantee that all cluster configurations follow approved security and architecture standards.
 
-**Validation and Testing** {#h2-7-validation-and-testing}
----------------------------------------------------------
+**Validation and Testing**
+--------------------------
 
 Once Resource Policies are applied via Terraform, it's possible to validate their enforcement using the Atlas UI or the administration API.
 
@@ -184,21 +184,21 @@ Non-compliant resources in Atlas
 
 Below are some visual examples of tests performed:
 
-### **🚫 Attempt to create a cluster on Google Cloud Platform (GCP)** {#h3-8-attempt-to-create-a-cluster-on-google-cloud-platform-gcp}
+### **🚫 Attempt to create a cluster on Google Cloud Platform (GCP)**
 
 The policy allowed only AWS clusters. The operation was blocked as expected:
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcq2s-go-k5tgvDUQ6HPSTLjtUNUEzQhYS0CGN_5fVErasvVtVEoFxyyBNZRJbKbYOo8_dHuux8qAifvsQtfqd-S03PVXPPqC0L95O3IkZBiyz9lSYVhiZUXV8V4r0fhjJQoxPbqA?key=FOpKAlLwLhYVlHz_DCq4KA)
 
 Cluster creation blocked by policy
 
-### **🔒 Attempt to add a public IP (0.0.0.0/0)** {#h3-9-attempt-to-add-a-public-ip-0-0-0-0-0}
+### **🔒 Attempt to add a public IP (0.0.0.0/0)**
 
 The policy prevented the addition of a wildcard IP to the access list:
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcPPLQVyrfCrA2YBUDLgj_MDv7hQa1gpTpEvub9UTJf6-eBptrjoZaFKu4GHo2oUuwi1gnyXBzH516lr17-4HyqqUmlsOdL5Nu_AJ1yqlp4TRl2mb0AqLYoA88Q1clCfJ91fZSr?key=FOpKAlLwLhYVlHz_DCq4KA)
 
 Blocked: 0.0.0.0/0 not allowed
 
-### **Final Thoughts** {#h3-10-final-thoughts}
+### **Final Thoughts**
 
 MongoDB Atlas Resource Policies represent a significant advancement for organizations looking to strengthen their security and governance posture. By combining declarative control, policy-as-code, and Terraform integration, these policies become a foundational component of any cloud data strategy.
 

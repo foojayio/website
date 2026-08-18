@@ -29,24 +29,24 @@ frozen: false
 * DialogueContext object for storing data that is local to the context in which the dialogue is being run.
 * Improvements to avoid various crashes on the Raspberry Pi.
 
-Auto-generated Changelog {#h2-0-auto-generated-changelog}
----------------------------------------------------------
+Auto-generated Changelog
+------------------------
 
 The full changelog is given below.
 
-### build {#h3-1-build}
+### build
 
 * kotlin 1.5.10 -\> 1.5.32 [commit](https://github.com/AlmasB/FXGL/commit/a2b5daf2d)
 * maven pmd plugin 3.13.0 -\> 3.15.0 [commit](https://github.com/AlmasB/FXGL/commit/db737a7ed)
 * base Java 17, switch to 17+dev-SNAPSHOT [commit](https://github.com/AlmasB/FXGL/commit/e1acdecbb)
 * javafx 16 -\> 17.0.0.1, closes #1107 [commit](https://github.com/AlmasB/FXGL/commit/87b3f0ade)
 
-### docs {#h3-2-docs}
+### docs
 
 * added commit message guidelines for changelog generation [commit](https://github.com/AlmasB/FXGL/commit/0f7dee3b7)
 * clarified release process [commit](https://github.com/AlmasB/FXGL/commit/e2b212a26)
 
-### feat {#h3-3-feat}
+### feat
 
 * FXGL 17 intro [commit](https://github.com/AlmasB/FXGL/commit/1077d768b)
 * added transferFrom() to Inventory [commit](https://github.com/AlmasB/FXGL/commit/17bc460e6)
@@ -65,23 +65,23 @@ The full changelog is given below.
 * added randomColorHSB() [commit](https://github.com/AlmasB/FXGL/commit/ddc489daf)
 * added embeddedShutdown() that allows restarting an FXGL instance without the need to exit JavaFX, added sample, #1075 [commit](https://github.com/AlmasB/FXGL/commit/904def3f2)
 
-### fix {#h3-4-fix}
+### fix
 
 * fixed non-uniform frame distribution for AnimationTexture, closes #1067 [commit](https://github.com/AlmasB/FXGL/commit/211e867de)
 * fixed a bug that causes audio service to not load properly on embedded devices [commit](https://github.com/AlmasB/FXGL/commit/842b079b2)
 * fixed a bug that would cause FS access via gluon attach on embedded devices [commit](https://github.com/AlmasB/FXGL/commit/2cb4736da)
 
-### refactor {#h3-5-refactor}
+### refactor
 
 * internal refactor Inventory [commit](https://github.com/AlmasB/FXGL/commit/2ea725dd0)
 * clean up MDIWindow, closes #815 [commit](https://github.com/AlmasB/FXGL/commit/e46b34af3)
 * remove redundant code, active is always false at that point, closes #1024 [commit](https://github.com/AlmasB/FXGL/commit/8ea6b755e)
 
-### repo {#h3-6-repo}
+### repo
 
 * ignore auto-generated changelog files [commit](https://github.com/AlmasB/FXGL/commit/6316a0c9a)
 
-Contribute {#h2-7-contribute}
------------------------------
+Contribute
+----------
 
 You can contribute to the development on [GitHub](https://github.com/AlmasB/FXGL/blob/dev/CONTRIBUTING.md).

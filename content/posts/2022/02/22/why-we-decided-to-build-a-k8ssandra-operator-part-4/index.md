@@ -24,8 +24,8 @@ In the [first](https://k8ssandra.io/blog/other/why_k8ssandra_operator_part_1/), 
 
 In this final post of the series, we pick up from the previous post with a discussion of how we decided to structure our projects in GitHub, how we test the K8ssandra operator, and our hopes for how the operator will expand the K8ssandra developer community.
 
-Implications of operators for project structure {#h-implications-of-operators-for-project-structure}
-----------------------------------------------------------------------------------------------------
+Implications of operators for project structure
+-----------------------------------------------
 
 *Jeff Carpenter:* There are external projects that K8ssandra is managing, but don't have operators. If I look in GitHub, I see Reaper under The Last Pickle organization, but Reaper Operator under K8ssandra. Is this another case where Stargate isn't building an operator under its org, but we're building a Stargate operator under K8ssandra?
 
@@ -35,8 +35,8 @@ Implications of operators for project structure {#h-implications-of-operators-fo
 
 *John Sanda:* Absolutely. It's not a microservice architecture per se, but it is highly decoupled and highly modular. Let's say we wanted to take the Stargate controller and run that in its own separate pod. We could do that without impacting the code of the Reaper or K8ssandra operator, or the cass-operator controllers, it would just be a matter of repackaging it. They are decoupled and modular in that regard. That's also driven by having distinct CRDs, because you'll typically have a separate controller per CRD, and those controllers, for the most part, act in isolation from one another.
 
-How to test a Kubernetes operator {#h-how-to-test-a-kubernetes-operator}
-------------------------------------------------------------------------
+How to test a Kubernetes operator
+---------------------------------
 
 *Jeff Carpenter:* Are there any interesting considerations for testing an operator?
 
@@ -58,8 +58,8 @@ How to test a Kubernetes operator {#h-how-to-test-a-kubernetes-operator}
 
 *John Sanda:* I think that would be a good example. Perhaps it would be a good candidate for user acceptance testing.
 
-Automating operator testing {#h-automating-operator-testing}
-------------------------------------------------------------
+Automating operator testing
+---------------------------
 
 *Jeff Carpenter:* What amount of testing do you expect to automate? What will the K8ssandra CI/CD pipeline look like with the expected combination of Helm and the K8ssandra operator?
 
@@ -67,8 +67,8 @@ Automating operator testing {#h-automating-operator-testing}
 
 *Jeff Carpenter:* Sure, that's a key difference between any case where you have a compiled language versus a scripted language.
 
-Expanding the K8ssandra community {#h-expanding-the-k8ssandra-community}
-------------------------------------------------------------------------
+Expanding the K8ssandra community
+---------------------------------
 
 *Jeff Carpenter:* What does this push to build a K8ssandra operator mean for contributors outside of the core team?
 
@@ -86,8 +86,8 @@ Expanding the K8ssandra community {#h-expanding-the-k8ssandra-community}
 
 *John Sanda:* I agree, and I think this is something that Jeff DiNoto brought up when we were trying to decide at what point we should commit to building an operator. For engineers and developers, this is going to resonate more. In terms of development and testing, the libraries and the frameworks you'll use for writing unit tests in Go code are the same ones that you can use in Kubernetes. Overall, this will make it easier for folks to get involved, and hopefully, submit PRs.
 
-Summary {#h-summary}
---------------------
+Summary
+-------
 
 That's where our conversation ended, and it's a perfect place to wrap up this series. The K8ssandra team is working hard on implementing the K8ssandra operator for a 2.0 release, but the amount of Go code is still quite manageable to read and learn. This is a great time to get involved in the project, and we'd love to give you a hand with setting up and testing out the in your own environment. Please reach out in the #k8ssandra-dev channel in our [Discord](https://discord.gg/qP5tAt6Uwt) server and we'll help you get started!
 Curious to learn more about (or play with) Cassandra itself? We recommend trying it on the [Astra DB](https://astra.dev/3BEiQ7m) for the fastest setup.

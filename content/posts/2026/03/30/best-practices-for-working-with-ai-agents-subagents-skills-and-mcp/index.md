@@ -22,8 +22,8 @@ A practical guide to the five best practices every developer should apply when w
 
 
 
-§0 📖 Where This Fits in the Series {#h2-0-0-where-this-fits-in-the-series}
----------------------------------------------------------------------------
+§0 📖 Where This Fits in the Series
+-----------------------------------
 
 > This article assumes you already know what MCP is and have used or built at least one Agent.  
 >
@@ -33,8 +33,8 @@ A practical guide to the five best practices every developer should apply when w
 >
 > This article picks up where those leave off: architecture, production patterns, and the problems that only appear at scale.
 
-§1 🏗️ The Naive Architecture --- and Why It Breaks {#h2-1-1-the-naive-architecture-and-why-it-breaks}
-------------------------------------------------------------------------------------------------------
+§1 🏗️ The Naive Architecture --- and Why It Breaks
+---------------------------------------------------
 
 Most agent implementations start the same way. You have a model, you have a few tools or API calls hardcoded into the agent, and you have one big system prompt that tries to make the whole thing work. It looks like this:
 
@@ -53,8 +53,8 @@ This works in the demo. Here's why it fails in production:
 | **No specialization**    | The same model and prompt handles order lookups, refund approvals, supplier payments, and compliance checks. Each task degrades the others.                                  |
 | **Impossible to test**   | One monolithic agent with a 4000-token system prompt has no meaningful unit surface. You can only test the whole thing, end to end, every time.                              |
 
-§2 ✅ The Better Architecture --- Multi-Agent with MCP {#h2-2-2-the-better-architecture-multi-agent-with-mcp}
-------------------------------------------------------------------------------------------------------------
+§2 ✅ The Better Architecture --- Multi-Agent with MCP
+-----------------------------------------------------
 
 The solution is decomposition --- the same principle that moved us from monolithic services to microservices, applied to agent systems. A supervisor agent handles intent routing. specialised subagents handle specific domains. MCP servers provide standardised, scoped access to external systems. Each component has one job and a clearly bounded blast radius.
 
@@ -75,8 +75,8 @@ But this architecture introduces three categories of problems that the naive one
 
 Each section below is labeled by the problem category it addresses, and by whether the pattern applies to you as a **user** of these systems (working with agents and MCP servers you didn't build) or as a **creator** (building the tools and architecture others depend on). Most of us are both --- read straight through or jump to your current problem.
 
-§3 📉 Before You Build: The Productivity Reality Check {#h2-3-3-before-you-build-the-productivity-reality-check}
-----------------------------------------------------------------------------------------------------------------
+§3 📉 Before You Build: The Productivity Reality Check
+------------------------------------------------------
 
 Before committing to multi-agent architecture, it's worth grounding expectations in data. A 2025 METR RCT --- 16 experienced developers, 246 real tasks --- found AI tools made developers **19% slower** , while those same developers believed they'd been 20% faster \[1\]. Faros AI found **zero measurable DORA improvement** across 10,000+ developers despite 75% AI adoption \[2\] --- individual gains absorbed by bottlenecks that hadn't changed.
 
@@ -101,26 +101,26 @@ The point isn't that agents don't work. It's that the same failure modes that sl
 
 \[2\] Faros AI --- *The AI Productivity Paradox* (10,000+ developers across 1,255 teams, June 2025) · [faros.ai/blog/ai-software-engineering](https://www.faros.ai/blog/ai-software-engineering)
 
-§3b 📐 Requirements First --- The Bottleneck AI Doesn't Remove {#h2-4-3b-requirements-first-the-bottleneck-ai-doesn-t-remove}
------------------------------------------------------------------------------------------------------------------------------
+§3b 📐 Requirements First --- The Bottleneck AI Doesn't Remove
+--------------------------------------------------------------
 
 AI has made coding cheap. Thinking is still expensive. Before any agent is built, someone needs to work out what the system should do --- and that is still a human job. As Simon Martinelli put it: *"AI did not remove complexity. It relocated it. The effort is no longer in writing code. It is in understanding what should be built."*
 
 Feed an agent a vague requirement and you get working code that does the wrong thing --- fast. Clarity upstream is what makes prompts, specs, and guardrails effective downstream.
 
-### The AI Unified Process {#h3-5-the-ai-unified-process}
+### The AI Unified Process
 
 [The AI Unified Process (AIUP)](https://aiup.dev), by Java Champion [Simon Martinelli](https://martinelli.ch), puts specifications --- not code --- at the centre. Its core artefact is the **System Use Case**: a precise, testable description of what the system does from the outside. Code, tests, and docs are all generated from the same spec. Requirement changes? Update the spec first. Code follows.
 > [AI Makes Coding Cheap. Requirements Are Now the Bottleneck](https://martinelli.ch/ai-makes-coding-cheap-requirements-are-now-the-bottleneck/) --- the core argument. [Stop Starting with Code](https://martinelli.ch/stop-starting-with-code-start-with-system-use-cases/) --- the methodology. Full process at [aiup.dev](https://aiup.dev).
 
-### IREB AI4RE --- Requirements Engineering in the Age of AI {#h3-6-ireb-ai4re-requirements-engineering-in-the-age-of-ai}
+### IREB AI4RE --- Requirements Engineering in the Age of AI
 
 The [International Requirements Engineering Board (IREB)](https://ireb.org/en) --- 73,000+ certified professionals worldwide --- offers **AI4RE**: a micro-credential on using AI responsibly in Requirements Engineering. It covers elicitation, documentation, validation, LLMs, prompt engineering, and where AI falls short. No prerequisites; self-study available.
 
 The two complement each other: AI4RE helps you write better specs; AIUP ensures those specs drive the system rather than getting forgotten once coding starts.
 > [IREB AI4RE micro-credential](https://cpre.ireb.org/en/concept/ai4re-micro-credential) --- LLMs, prompt engineering, RAG, and the risks of AI-generated requirements. No prerequisites. Self-study or via recognised training providers.
 
-### Agents that understand code: LSP in OpenCode {#h3-7-agents-that-understand-code-lsp-in-opencode}
+### Agents that understand code: LSP in OpenCode
 
 [OpenCode](https://opencode.ai) --- an open-source AI coding agent --- connects its subagents to **Language Server Protocol (LSP)** servers. When a subagent edits a file, OpenCode queries the LSP server and feeds the diagnostics straight back into the agent's context: type errors, undefined variables, missing methods --- the same feedback your IDE gives you. It can also query symbols, navigate to definitions, and inspect call hierarchies and AST structure.
 
@@ -131,12 +131,12 @@ It ships with over 30 LSP servers --- Java, TypeScript, Go, Rust, Python, and mo
 
 The four best practices that follow cover what you can control as a user: model choice, agent specification, context isolation, MCP security, and output quality. All of them work better when the requirements behind the agent are clear from the start.
 
-🏆 Best Practices {#h2-8-best-practices}
-----------------------------------------
+🏆 Best Practices
+-----------------
 
 Five practices covering the most common failure modes. Apply them in order --- each one makes the next more effective, and all work better when the requirements behind the agent are clear from the start.
 
-### §4 📊 Best Practice 0 --- Choose the Right Model and Be Precise {#h3-9-4-best-practice-0-choose-the-right-model-and-be-precise}
+### §4 📊 Best Practice 0 --- Choose the Right Model and Be Precise
 
 Model choice affects consistency, instruction-following, and how gracefully ambiguity is handled. But the table below will show you something more important: **the prompt does most of the work**. A weaker model with a well-constrained prompt will consistently outperform a stronger model given vague instructions.
 
@@ -199,7 +199,7 @@ Model size raises the ceiling. Prompt precision raises the floor. Pick the right
 | Smaller OSS model --- detailed prompt        | Medium             | Partial                      | Guesses, often wrong   |
 | Smaller OSS model --- vague prompt           | Low                | Ignores them                 | Invents behaviour      |
 
-### §7 📋 Best Practice 1 --- Be Specific: Define Agent Behaviour Before You Build It {#h3-10-7-best-practice-1-be-specific-define-agent-behaviour-before-you-build-it}
+### §7 📋 Best Practice 1 --- Be Specific: Define Agent Behaviour Before You Build It
 
 **SDD --- Specification-Driven Development** is the practice of writing a short, structured spec before writing any code or prompt. Think of it as TDD for agents. The spec defines scope, forbidden actions, tools, output format, escalation conditions, and test cases. It drives the system prompt, the implementation, and the test suite. Same spec, same behaviour, every time.
 
@@ -355,7 +355,7 @@ Notice what Claude Code does: it derives the system prompt word-for-word from th
 >
 > The most common failure mode with Claude Code and agents is asking for an implementation before the scope is defined. You get working code that does the wrong thing reliably. Write the spec, review it with your team, then generate.
 
-### §8 🤖 Best Practice 2 --- Consider Context Isolation and Reusability {#h3-11-8-best-practice-2-consider-context-isolation-and-reusability}
+### §8 🤖 Best Practice 2 --- Consider Context Isolation and Reusability
 
 One agent doing everything accumulates context noise, produces cascading errors, and cannot be tested in isolation. Claude Code has two mechanisms for this: **subagents** for context isolation and parallel execution, and **Skills** for reusable, versioned capabilities.
 
@@ -377,7 +377,7 @@ QuestDB's open-source repo ships a `review-pr` skill that shows what a productio
 >
 > Parallel subagents don't share state or context with each other. A misbehaving subagent can't affect its siblings. But it also means: if task B needs task A's output, they must run sequentially, not in parallel. Design your decomposition accordingly.
 
-### §9 🔒 Best Practice 3 --- Secure Your MCP Calls {#h3-12-9-best-practice-3-secure-your-mcp-calls}
+### §9 🔒 Best Practice 3 --- Secure Your MCP Calls
 
 > [The 5 Knights of the MCP Apocalypse](https://foojay.io/today/the-5-knights-of-the-mcp-apocalypse/) covers *what to audit* when you can't modify a third-party MCP server --- PII leakage, malicious servers, SCA/DAST scanning, context poisoning, and sprawl management. This section focuses on *why those threats are real* --- documented incidents from MCP's first year with CVSS scores --- and what every user should do before connecting a third-party server.
 
@@ -441,7 +441,7 @@ Mitigations that actually work --- and don't require writing any code:
 >
 > You wouldn't pull a random npm package into a production service without reviewing it. An MCP server runs with the same trust level as your application code, with access to your credentials, file system, and external APIs. The review bar should be at least as high. For servers you don't control, the [5 Knights of the MCP Apocalypse](https://foojay.io/today/the-5-knights-of-the-mcp-apocalypse/) covers the full vetting checklist.
 
-### §10 🛡️ Best Practice 4 --- Guide the Security and Quality of Your Agent's Response {#h3-13-10-best-practice-4-guide-the-security-and-quality-of-your-agent-s-response}
+### §10 🛡️ Best Practice 4 --- Guide the Security and Quality of Your Agent's Response
 
 Guardrails in an agent context are not content filters --- they are load-bearing architecture. A missing check does not produce bad text; it produces a deleted record, a leaked credential, or a wrong answer that nobody notices. They need to sit at multiple points: before input reaches the model, before tool execution, and after output is generated.
 
@@ -560,7 +560,7 @@ The `hookify` plugin removes the JSON editing. You describe the rule and it gene
 >
 > PII that enters the model may end up in logs, embeddings, fine-tuning pipelines, or cached completions. Research by Carlini et al. and confirmed in a Stanford SAIL analysis found that modern LLMs can reliably memorise and regurgitate training data under certain prompts --- meaning once data enters the model, it may never be fully removable. [\[Stanford SAIL, 2025\]](https://ai.stanford.edu/blog/verbatim-memorization/) Block it at the input layer. Post-incident cleanup is not a recovery strategy.
 
-### §11 ✅ Quality and Security Best Practices Summary {#h3-14-11-quality-and-security-best-practices-summary}
+### §11 ✅ Quality and Security Best Practices Summary
 
 Each best practice above addresses a specific failure mode. This is the consolidated reference --- one checklist per concern --- for a quick audit of any agent system.
 

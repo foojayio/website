@@ -32,7 +32,7 @@ Today, we have the unique opportunity to gain insights from Steve on his journey
 
 So, let's dive into our conversation with the remarkable Steve Poole without further ado.
 
-### Key Takeaways: {#h3-0-key-takeaways}
+### Key Takeaways:
 
 1. Computers are there to change lives for the better. Developers get the most fun and satisfaction when they do something that helps someone else be successful.
 2. The software development industry has evolved significantly over the years, with changes in technology, processes, and productivity. Some of the most significant changes have been the adoption of agile, the rise of open source, the democratization of programming, and the emergence of SaaS-based tools.
@@ -46,7 +46,7 @@ So, let's dive into our conversation with the remarkable Steve Poole without fur
 > *Fun fact:*   
 > *Steve Poole plays board games on Monday evenings with a friend. They have been doing it for years and years. During the lockdown, they played remotely over Zoom! Steve enjoys cooperative games, short war games with figures or blocks (his favorite being Memoir 44), and the occasional complicated and very long-running games. He owns more computing kits than he cares to mention - from ESP32s upwards. Steve loves tinkering with robots and creating Heath Robinson-style contraptions. His favorite creation was a Harry Potter-style hairy "Monster Book of Monsters" that growled and shook if you got too close.*
 
-### Bazlur: Can you tell us about your background and how you got started in the software industry? {#h3-1-bazlur-can-you-tell-us-about-your-background-and-how-you-got-started-in-the-software-industry}
+### Bazlur: Can you tell us about your background and how you got started in the software industry?
 
 **Steve Poole**: I live in the UK. I have a wife, three grown-up daughters, and more gadgets than I can count. I did computing at school---basic, of course---but it didn't excite me. As a kid, I wanted to be a fighter pilot, but that wasn't an option since I'm shortsighted. Next, I wanted to be an architect, so I went to university.
 
@@ -60,7 +60,7 @@ I built one of these<https://en.wikipedia.org/wiki/ZX80>, etc. So, I left colleg
 
 
 
-### Bazlur: What was your first experience like working as an operator on a mini-computer for a local company, and how did it shape your career path moving forward? {#h3-2-bazlur-what-was-your-first-experience-like-working-as-an-operator-on-a-mini-computer-for-a-local-company-and-how-did-it-shape-your-career-path-moving-forward}
+### Bazlur: What was your first experience like working as an operator on a mini-computer for a local company, and how did it shape your career path moving forward?
 
 **Steve Poole**: It was dirty, smelly, and hard physical work. Computers were big, printers, tape drives, etc., were big too. We went through hundreds of boxes of paper (about A3 size page equivalent) per month, and my colleagues and I had to carry them all up three flights of stairs. But I loved it. I left home early and stayed late.
 
@@ -74,7 +74,7 @@ That's what gets me up at night, and it still does. So my career has been this m
 
 
 
-### Bazlur: You mentioned that you've worked in hardware, software, business development, developer relations, and education throughout your career. How has software development specifically changed since you first started working in the industry, and how have you adapted to these changes? As someone who has seen the evolution of software development firsthand, what do you think are some of the most significant changes or advancements in software development that you've seen over the course of your career that has impacted you personally and the community as a whole? {#h3-3-bazlur-you-mentioned-that-you-ve-worked-in-hardware-software-business-development-developer-relations-and-education-throughout-your-career-how-has-software-development-specifically-changed-since-you-first-started-working-in-the-industry-and-how-have-you-adapted-to-these-changes-as-someone-who-has-seen-the-evolution-of-software-development-firsthand-what-do-you-think-are-some-of-the-most-significant-changes-or-advancements-in-software-development-that-you-ve-seen-over-the-course-of-your-career-that-has-impacted-you-personally-and-the-community-as-a-whole}
+### Bazlur: You mentioned that you've worked in hardware, software, business development, developer relations, and education throughout your career. How has software development specifically changed since you first started working in the industry, and how have you adapted to these changes? As someone who has seen the evolution of software development firsthand, what do you think are some of the most significant changes or advancements in software development that you've seen over the course of your career that has impacted you personally and the community as a whole?
 
 **Steve Poole**: Good questions. Number one is that we all take source control management systems (SCMs) for granted. When I started, they hardly existed. Getting access to a previous version of the source required using the tape drive!
 
@@ -99,7 +99,7 @@ And smaller in scope, machines were much less powerful (and pre-Java), so creati
 
 
 
-### Bazlur: Wow, how much the industry has changed over the years is incredible. With all these changes happening rapidly, what skills do you think are essential for developers to stay relevant in the industry, especially with emerging technologies like AI and machine learning? And how do you suggest developers keep up with the constant changes and advancements? Additionally, In your opinion, what are some of the biggest challenges that developers face today? {#h3-4-bazlur-wow-how-much-the-industry-has-changed-over-the-years-is-incredible-with-all-these-changes-happening-rapidly-what-skills-do-you-think-are-essential-for-developers-to-stay-relevant-in-the-industry-especially-with-emerging-technologies-like-ai-and-machine-learning-and-how-do-you-suggest-developers-keep-up-with-the-constant-changes-and-advancements-additionally-in-your-opinion-what-are-some-of-the-biggest-challenges-that-developers-face-today}
+### Bazlur: Wow, how much the industry has changed over the years is incredible. With all these changes happening rapidly, what skills do you think are essential for developers to stay relevant in the industry, especially with emerging technologies like AI and machine learning? And how do you suggest developers keep up with the constant changes and advancements? Additionally, In your opinion, what are some of the biggest challenges that developers face today?
 
 <br />
 
@@ -115,7 +115,7 @@ On a non-technical note, the rising challenge of cybercrime is also going to hav
 
 
 
-### Bazlur: As AI continues to advance, many new developers are worried that their job prospects may be limited, and they may even lose their jobs. What advice would you give these developers, and do you share their concerns, given your experience with many technological shifts? {#h3-5-bazlur-as-ai-continues-to-advance-many-new-developers-are-worried-that-their-job-prospects-may-be-limited-and-they-may-even-lose-their-jobs-what-advice-would-you-give-these-developers-and-do-you-share-their-concerns-given-your-experience-with-many-technological-shifts}
+### Bazlur: As AI continues to advance, many new developers are worried that their job prospects may be limited, and they may even lose their jobs. What advice would you give these developers, and do you share their concerns, given your experience with many technological shifts?
 
 <br />
 
@@ -136,7 +136,7 @@ I've seen some great examples where tools like Chat-GPT help developers debug or
 
 
 
-### Bazlur: Your insights on AI-generated code were fascinating! While it can be helpful for programmers, in the end, programming is ultimately a creative process that requires human expertise. Based on your experience, what advice would you give to new programmers who are uncertain about the prospects of their careers and are unsure of the steps they should take to ensure their careers are on the right track? With so much noise on the internet, it can be difficult for newcomers to navigate the field and determine which technologies to focus on. {#h3-6-bazlur-your-insights-on-ai-generated-code-were-fascinating-while-it-can-be-helpful-for-programmers-in-the-end-programming-is-ultimately-a-creative-process-that-requires-human-expertise-based-on-your-experience-what-advice-would-you-give-to-new-programmers-who-are-uncertain-about-the-prospects-of-their-careers-and-are-unsure-of-the-steps-they-should-take-to-ensure-their-careers-are-on-the-right-track-with-so-much-noise-on-the-internet-it-can-be-difficult-for-newcomers-to-navigate-the-field-and-determine-which-technologies-to-focus-on}
+### Bazlur: Your insights on AI-generated code were fascinating! While it can be helpful for programmers, in the end, programming is ultimately a creative process that requires human expertise. Based on your experience, what advice would you give to new programmers who are uncertain about the prospects of their careers and are unsure of the steps they should take to ensure their careers are on the right track? With so much noise on the internet, it can be difficult for newcomers to navigate the field and determine which technologies to focus on.
 
 **Steve Poole**: I didn't plan to be a developer, so my initial motivations differed. However, I have been fortunate to learn that I love being one and couldn't imagine doing anything else now. Having said that, keeping your career moving, whether for love or money, is similar. There are particular patterns of career you can take; mostly, it's about balancing moving on with putting down roots.
 
@@ -154,7 +154,7 @@ But you can often pick up better pay because of the experience and related busin
 
 
 
-### Bazlur: That's great advice! It seems like you have found a career that you truly love. I'm curious, have you ever faced a crossroads in your career where you had to choose between taking on new challenges and sticking with what you know? If so, how did you approach that decision-making process? {#h3-7-bazlur-that-s-great-advice-it-seems-like-you-have-found-a-career-that-you-truly-love-i-m-curious-have-you-ever-faced-a-crossroads-in-your-career-where-you-had-to-choose-between-taking-on-new-challenges-and-sticking-with-what-you-know-if-so-how-did-you-approach-that-decision-making-process}
+### Bazlur: That's great advice! It seems like you have found a career that you truly love. I'm curious, have you ever faced a crossroads in your career where you had to choose between taking on new challenges and sticking with what you know? If so, how did you approach that decision-making process?
 
 <br />
 
@@ -172,7 +172,7 @@ If you don't take chances and don't try different things, you're actively opting
 
 
 
-### Bazlur: Thank you for sharing your valuable insight with us; I am sure our readers will benefit immensely. On a different note, could you tell us some funny or interesting stories from your time in the software industry? {#h3-8-bazlur-thank-you-for-sharing-your-valuable-insight-with-us-i-am-sure-our-readers-will-benefit-immensely-on-a-different-note-could-you-tell-us-some-funny-or-interesting-stories-from-your-time-in-the-software-industry}
+### Bazlur: Thank you for sharing your valuable insight with us; I am sure our readers will benefit immensely. On a different note, could you tell us some funny or interesting stories from your time in the software industry?
 
 **Steve Poole**: How much time do you have?
 
@@ -194,7 +194,7 @@ Unfortunately, we just made assumptions before we'd even started about the probl
 
 
 
-### Conclusion: {#h3-9-conclusion}
+### Conclusion:
 
 In conclusion, our insightful conversation with Steve Poole has provided a wealth of knowledge and invaluable lessons for developers and tech enthusiasts alike.
 

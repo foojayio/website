@@ -29,8 +29,8 @@ It is namely also the idea to use this config specification for the configuratio
 
 We look a bit more in detail in this article about this plain Java SE aspect of MicroProfile config and 2 libraries that implement recent versions of the specification.
 
-Programmatic access {#h2-0-programmatic-access}
------------------------------------------------
+Programmatic access
+-------------------
 
 The programmatic access of the `Config` object allows you to get the configuration values from the sources that are available for your application.
 
@@ -62,8 +62,8 @@ public class MyConverter implements Converter {
 ```
 
 
-Supported features {#h2-1-supported-features}
----------------------------------------------
+Supported features
+------------------
 
 Some MicroProfile Config implementations have split up their project into 2 parts. A part that only contains those features that can be used in Java SE, and another artifact that adds the CDI integration on top of the first part.
 
@@ -79,8 +79,8 @@ What features are supported when using the pure Java SE version?
 
 Other like the `@ConfigProperty` and `@ConfigProperties` which clearly required the CDI engine to function, are not included in those artifacts.
 
-Testing {#h2-2-testing}
------------------------
+Testing
+-------
 
 How can you test code that makes use of the *ConfigProvider*? Since the Config is created once, for each Classloader, you might think it is difficult to have several tests where various values or the absence of a value for a key can be tested.
 
@@ -88,8 +88,8 @@ But you can actually work around this relatively easily. You can create a custom
 
 The gist of that solution can be found in this [Github gist](https://gist.github.com/rdebusscher/f344ec2c6eb777f799ee775425745627).
 
-Use Case {#h2-3-use-case}
--------------------------
+Use Case
+--------
 
 What are typical use cases for MicroProfile Config on Java SE? Defining configuration values can be important for any kind of application, not only web applications. So all applications that you have, might benefit from a proven reusable framework to define the configuration, not only when running web applications on a runtime.
 
@@ -98,12 +98,12 @@ What are typical use cases for MicroProfile Config on Java SE? Defining configur
 
 The implementations that I will discuss next, also support native compilation with GraalVM, so also your native compiled programs can make use of it.
 
-Implementations {#h2-4-implementations}
----------------------------------------
+Implementations
+---------------
 
 I cover two implementations that have an artifact available that cover the MicroProfile Config functionality that can run on pure Java SE.
 
-### SmallRye Config {#h3-5-smallrye-config}
+### SmallRye Config
 
 The Configuration framework that is used within Quarkus and OpenLiberty can use on Java SE only. It is based on version 2.0 of the specification which is still using the javax namespace. You can make use of it in your application by adding the following dependencies to your project.
 
@@ -124,7 +124,7 @@ The Configuration framework that is used within Quarkus and OpenLiberty can use 
 
 The jakarta annotation api one is needed since the order of the converters is defined through the `@Priority` annotation as mentioned above and is not included within the core SmallRye config dependency.
 
-### Atbash MP Config {#h3-6-atbash-mp-config}
+### Atbash MP Config
 
 The [Atbash Runtime](https://www.atbash.be/2022/04/03/testing-the-jakarta-ee-core-profile-with-atbash-runtime/) product, a playground for the new Jakarta core profile, also has [configuration support](https://www.atbash.be/2022/10/03/a-microprofile-config-implementation-for-plain-java-se/) and can also be used in pure Java SE. This library is already based on the Jakarta namespace as it is intended to be used with Jakarta EE 9.1 and Jakarta EE 10. It is based on the Microprofile Config 3.0 specification.
 
@@ -139,8 +139,8 @@ You only need to add the following dependency to your Java SE project to have it
 ```
 
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Configuration is a very important aspect of any application, not only your web application.
 

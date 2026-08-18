@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-### **History of Microservices** {#h3-0-history-of-microservices}
+### **History of Microservices**
 
 The concept of microservices has its roots in Service Oriented Architecture (SOA), which was prominent in the early 2000s. However, the term "microservices" itself didn't appear until around 2012, when it started being discussed at software architecture events and on software architecture blogs.
 
@@ -25,7 +25,7 @@ Early pioneers of microservices include companies like Netflix, Amazon, and eBay
 
 Microservices have since grown increasingly popular, with many organizations adopting them as part of their software development and deployment practices. The adoption of cloud computing has also been a driving force for microservices, as it provides the infrastructure necessary to build and deploy individual services independently.
 
-### **Reasons to Use Microservices** {#h3-1-reasons-to-use-microservices}
+### **Reasons to Use Microservices**
 
 * **Scalability:** One of the most significant benefits of microservices is their ability to scale independently. In a monolithic system, if one function requires more resources, the whole system must be scaled. However, in a microservices architecture, only the necessary services need to be scaled.
 * **Resilience:** If a component in a monolithic architecture fails, it can cause the entire system to crash. With microservices, however, if one service fails, it doesn't necessarily bring down the whole system, making them a more resilient choice.
@@ -38,7 +38,7 @@ However, it's important to note that microservices are not a silver bullet. They
 
 Java is one of the most popular languages used for building microservices due to its robust ecosystem, strong developer community, and compatibility with containerization and orchestration tools. Here are seven of the most popular frameworks in Java for building microservices:
 
-### 1. **Quarkus** {#h3-2-1-quarkus}
+### 1. **Quarkus**
 
 ![](Screenshot-2024-05-24-at-11.34.34.png)
 
@@ -60,7 +60,7 @@ Quarkus is a full-stack, Kubernetes-native Java framework tailored for GraalVM a
 * **Limited Extensions:** While Quarkus does have an extension model, it may not support all libraries and frameworks, especially some niche or less commonly used ones.
 * **Learning Curve:** If developers are not already familiar with the libraries and standards used by Quarkus, there could be a learning curve.
 
-### 2. **Spring Boot** {#h3-3-2-spring-boot}
+### 2. **Spring Boot**
 
 ![](Screenshot-2024-05-24-at-11.34.52.png)
 
@@ -89,7 +89,7 @@ In conclusion, Spring Boot is a great choice for building standalone, production
 
 However, like any technology choice, its suitability will depend on your specific use cases and requirements.
 
-### 3.**Micronaut** {#h3-4-3-micronaut}
+### 3.**Micronaut**
 
 ![](Screenshot-2024-05-24-at-11.34.59.png)
 
@@ -103,7 +103,7 @@ Micronaut is a modern framework that advertises itself as an alternative to Spri
 * Supports multiple languages including Java, Groovy, Kotlin
 * Integrates with GraalVM for ahead-of-time compilation
 
-### 4. **Helidon** {#h3-5-4-helidon}
+### 4. **Helidon**
 
 ![](Screenshot-2024-05-24-at-11.35.08.png)
 
@@ -129,7 +129,7 @@ Its tight integration with Oracle Cloud Infrastructure could make it an excellen
 
 As with any technology choice, its suitability will depend on your specific use cases and requirements.
 
-### 5. **Chronicle Services** {#h3-6-5-chronicle-services}
+### 5. **Chronicle Services**
 
 ![](Screenshot-2024-05-24-at-11.35.14.png)
 
@@ -159,7 +159,7 @@ Despite some challenges, such as a smaller community and a learning curve, the b
 
 For organizations requiring high performance and the capability to manage the complexities of migrating to microservices and the cloud, Chronicle Services is a good choice. While traditionally focused on trading systems, Chronicle Services is branching out to other markets. It is a fantastic technology choice.
 
-### 6. **Vert.x** {#h3-7-6-vert-x}
+### 6. **Vert.x**
 
 ![](Screenshot-2024-05-24-at-11.35.21.png)
 
@@ -176,7 +176,7 @@ Vert.x is an event-driven, non-blocking, reactive toolkit for developing applica
 
 There are numerous choices available for creating microservices in Java. It's important to evaluate key priorities such as performance, developer productivity, operational management, and ecosystem compatibility to find the best fit.
 
-### 7. **Kalix.io** {#h3-8-7-kalix-io}
+### 7. **Kalix.io**
 
 ![](Screenshot-2024-05-24-at-11.35.28.png)
 

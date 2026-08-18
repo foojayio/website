@@ -29,8 +29,8 @@ I got plenty of feedback on my post about [Calling Rust from Python](https://blo
 
 Many comments mentioned `pyo3`, and I should use it instead of cooking my own. Thanks to the authors, I checked: in this post, I explain what it is and how I migrated my code.
 
-What is pyo3? {#h2-0-what-is-pyo3}
-----------------------------------
+What is pyo3?
+-------------
 
 > Rust bindings for Python, including tools for creating native Python extension modules. Running and interacting with Python code from a Rust binary is also supported.
 >
@@ -38,8 +38,8 @@ What is pyo3? {#h2-0-what-is-pyo3}
 
 Indeed, `pyo3` fits my use case, calling Rust from Python. Even better, it handles converting Python types to Rust types and back again. Finally, it offers the `maturin` utility to make the interaction between the Python project and the Rust project seamless.
 
-Maturin {#h2-1-maturin}
------------------------
+Maturin
+-------
 
 > Build and publish crates with pyo3, rust-cpython, cffi and uniffi bindings as well as rust binaries as python packages.
 >
@@ -54,8 +54,8 @@ Maturin {#h2-1-maturin}
 
 Note that Maturin started as a companion project to `pyo3` but now offers rust-cpython, cffi and uniffi bindings.
 
-Migrating the project {#h2-2-migrating-the-project}
----------------------------------------------------
+Migrating the project
+---------------------
 
 The term migrating is a bit misleading here since we will start from scratch to fit Maturin's usage. However, we will achieve the same end state. I won't paraphrase [the tutorial](https://pyo3.rs/v0.20.0/#using-rust-from-python) since it works seamlessly. Ultimately, we have a fully functional Rust project with a single `sum_as_string()` function, which we can call in a Python shell. Note the dependency to `pyo3`:
 
@@ -128,8 +128,8 @@ python
 ```
 
 
-Finishing touch {#h2-3-finishing-touch}
----------------------------------------
+Finishing touch
+---------------
 
 The above setup allows us to use Rust from a Python shell but not in a Python file. To leverage the default, we must create a Python project inside the Rust project, whose name matches the Rust module name. Since I named my lib `rust_over_pyo3`, here's the overall structure:
 
@@ -181,8 +181,8 @@ if __name__ == '__main__':
 1. Regular Python import
 2. Look, ma, it works!
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I improved the low-level integration with `ctypes` to the generic ready-to-use `pyo3` library. I barely scratched the surface, though; `pyo3` is a powerful, well-maintained library with plenty of features.
 

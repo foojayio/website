@@ -28,18 +28,18 @@ Since I have been doing this for many years now, I hope that I can share some of
 
 You can be assured that everything you read here is tried and tested with many different end users, over a longer period of time, and across all platforms. The general idea is that you can quickly integrate these tips into your own desktop application projects with minimal effort.
 
-1. Verify directory permissions {#h2-0-1-verify-directory-permissions}
-----------------------------------------------------------------------
+1. Verify directory permissions
+-------------------------------
 
 Most applications store some kind of configuration data, usually in a subdirectory located somewhere in the user home directory. While this is a straightforward process, a lot of unexpected things can go wrong here.
 
-### What can go wrong {#h3-1-what-can-go-wrong}
+### What can go wrong
 
 Apart from the conventional issues such as a faulty or full hard drive, one common issue is an overzealous AV (AntiVirus) program blocking your application from accessing the file system on Windows. While this problem is already bad enough, it usually gets amplified by these AVs not telling the user or application when the block occurs. Instead, users will just end up with generic access denied exceptions in your Java program. On macOS, all applications are blocked by default when accessing common directories like the documents directory, but at least on there users will get a notification for that.
 
 Another common problem is dealing with cloud-synced directories which are getting more and more prevalent these days. For example, it can happen that a user will get logged out from their account after some time. If that occurs, all file system operations will fail for synced directories. OneDrive behaves pretty badly here as the user is not notified that their cloud storage is currently not working. Other cloud file providers can also run into a myriad of issues, but they usually handle it better than OneDrive.
 
-### Implementing a check {#h3-2-implementing-a-check}
+### Implementing a check
 
 From experience, these issues are pretty common and affect around 1 out of 10 users at some point. To remedy them, you can call a method like this on application startup:
 
@@ -65,14 +65,14 @@ public static void checkDirectoryPermissions() {
 
 This check has drastically reduced reported issues of this kind for us as users now understand why the access is failing. Of course, you can also adapt it to fit your needs and targeted directories. You can make use of this approach in basically all desktop applications, it is not specific to Java. It is very simple but very effective.
 
-2. Adapt tray icons to the OS {#h2-3-2-adapt-tray-icons-to-the-os}
-------------------------------------------------------------------
+2. Adapt tray icons to the OS
+-----------------------------
 
 While you want your application to stand out, you don't want it to stand out in a bad way. Sadly, Java applications usually do stand out in a bad way in some desktop environments. Many parts of the Linux desktop implementation for AWT feel like they were made to satisfy the minimum requirements in order to be called cross-platform rather than well-thought-out implementations.
 
 It doesn't help the case that these longstanding issues have never been properly addressed. If your application utilizes the system tray, which is only supported with AWT, you have to perform some manual work to achieve a satisfying result across all platforms.
 
-### Fixing a bad Linux implementation {#h3-4-fixing-a-bad-linux-implementation}
+### Fixing a bad Linux implementation
 
 On Linux, any Java tray icon will have a completely white background and no title. Why? Because there is no proper implementation to determine the appropriate background color, and it is therefore not set. The same goes for the tray icon title, which is also not set properly. However, you can use reflection to manually set the background color to be at least transparent and fix the title. This is not publicly exposed because it is considered an implementation detail. The following code will make your tray icon look much better on all Linux systems:
 
@@ -121,7 +121,7 @@ To make this work, you also have to add this to your JVM args for Linux builds:
 ```
 
 
-### Choosing the right resolution {#h3-5-choosing-the-right-resolution}
+### Choosing the right resolution
 
 Furthermore, to improve the image look, it can be pretty useful to use the proper image sizes for the tray icon to avoid any image scaling taking place. Of course, it doesn't tell you what sizes the implementation uses, so you would have to figure them out yourself. These are the used sizes:
 
@@ -141,20 +141,20 @@ The images should also be adapted in terms of their padding. On Windows, the inp
 
 At the end of the day, we have now moved into somewhat acceptable territory with the tray icon. This is the best that we can do with the current tools, assuming that you don't want to dip into custom native code.
 
-3. Utilize the advantages of the module system {#h2-6-3-utilize-the-advantages-of-the-module-system}
-----------------------------------------------------------------------------------------------------
+3. Utilize the advantages of the module system
+----------------------------------------------
 
 The Java Platform Module System (JPMS) is still a controversial topic amongst many Java developers, mostly because it breaks their existing classpath-based projects that were working fine before. One major selling point, however, is that with modules, you get access to [jlink](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jlink.html) and [jpackage](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jpackage.html), which are essential tools to build proper self-contained desktop applications.
 
 Nowadays, you don't want to distribute software that requires end users to have the correct JDK installed or depend on third-party tools; this should be a thing of the past. Of course, there are also a few more module features that can make your life easier but are not used this frequently.
 
-### Automatic modularization {#h3-7-automatic-modularization}
+### Automatic modularization
 
 Even though Java runtime images are a first-party feature as the tools are included in all JDKs, build tools such as Maven and Gradle are still not shipping proper support for it. As a result, you have to resort to third-party solutions through plugins. To use jlink and jpackage, in case you are not dealing with modules at all, there exists the [badass-runtime plugin](https://badass-runtime-plugin.beryx.org/releases/latest/) for Gradle which utilizes bytecode manipulation to create a merged module of all your dependencies. If you intend to make use of proper modules but still have some non-modular dependencies, the [badass-jlink plugin](https://badass-jlink-plugin.beryx.org/releases/latest/) can be used.
 
 Both plugins make use of [ASM](https://asm.ow2.io/) manipulation to feed the proper modules into jlink. ASM is not perfect however and also requires frequent updates for every new Java version. You also don't get any module advantages with merged modules and might run into issues sometimes. You are able to avoid the ASM usage with these plugins if all dependencies are properly modularized, but that is often not the case. You will also find somewhat equivalent plugins for Maven, e.g. the [JPackage Maven Plugin](https://akman.github.io/jpackage-maven-plugin/).
 
-### Taking things into your own hand {#h3-8-taking-things-into-your-own-hand}
+### Taking things into your own hand
 
 The major roadblock for many people has always been the usage of non-modular dependencies, mostly unmaintained legacy libraries and other libraries where the maintainers just don't care about anything after Java 8. The solution here is to modularize your dependencies by yourself if needed. Manually modularizing dependencies has been possible for quite some time with [moditect](https://github.com/moditect/moditect) in Maven and Gradle. This process is quite tedious and complicated, plus the project and its plugins are currently not maintained.
 
@@ -214,7 +214,7 @@ Now you just have to create the tasks to build your application images with jlin
 
 Using this approach, the benefits of the module system easily outweigh the effort it takes to adapt to it. Of course, you need to spend a few minutes setting up the plugin and providing module information, but you get a standalone application right out of the box in return.
 
-Outlook {#h2-9-outlook}
------------------------
+Outlook
+-------
 
 I hope you liked the tips and can maybe implement some of them in your own projects. This may become a somewhat regular series as I have a lot of items in the backlog. So stay tuned for that!

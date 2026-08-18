@@ -26,13 +26,13 @@ frozen: false
 
 ![custom railway display showing the train timings](NS_display_2-scaled.jpg)
 
-### **Background** {#h3-0-background}
+### **Background**
 
 Without live data, this project could not work. Luckily, all the data we needed was publicly and freely available with Nederlandse Spoorwegen (NS) APIs. To access them, you only need to create an account in the [NS API Portal and subscribe to the APIs](https://apiportal.ns.nl/) you want to use.
 
 For the application's backend, we decided to use Java, Jakarta EE, and SpringBoot. For the front end, we chose Vaadin because it is closely related to Java and is perfect for our simple screen. We used Raspberry Pi 4 and our existing monitor as the hardware for our project.
 
-### **Implementation** {#h3-1-implementation}
+### **Implementation**
 
 #### 1. Setting up the backend
 
@@ -155,7 +155,7 @@ public class Application implements AppShellConfigurator {
 
 We used Raspberry Pi Imager to install the Raspberry Pi OS and SDKMAN to install Java 17. To run the NS application on the Raspberry Pi, we created a fat jar file and started the application by executing the JAR file. For additional debugging within the Raspberry Pi, we used the already shipped VSCode.
 
-### **Conclusion** {#h3-2-conclusion}
+### **Conclusion**
 
 In this project, we explored Java, SpringBoot and Vaadin to create a UI application seamlessly.
 
@@ -167,7 +167,7 @@ Finally, it's not so much about technology as about the basic human need to solv
 
 If you would like to know more about our project, please check out <https://github.com/Rijosam/NS-home-display>
 
-### **References** {#h3-3-references}
+### **References**
 
 1. NS API Portal: <https://apiportal.ns.nl/>
 2. SDKMAN: <https://foojay.io/today/installing-java-with-sdkman-on-raspberry-pi/>

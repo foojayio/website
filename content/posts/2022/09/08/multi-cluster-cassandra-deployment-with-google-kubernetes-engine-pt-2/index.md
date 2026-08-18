@@ -32,8 +32,8 @@ In the rest of this series, we'll explore additional configurations that promote
 
 Note: for the purpose of this exercise, you'll create GKE clusters in two separate regions, under the same Google Cloud project. This will make it possible to use the same network.
 
-Preparing the first GKE Cluster {#h-preparing-the-first-gke-cluster}
---------------------------------------------------------------------
+Preparing the first GKE Cluster
+-------------------------------
 
 First, you're going to need a Kubernetes cluster in which you can create the first Cassandra datacenter. To create this first cluster, follow the instructions for [K8ssandra on Google Kubernetes Engine (GKE)](https://docs.k8ssandra.io/install/gke/), which reference scripts provided as part of the [K8ssandra GCP Terraform Example](https://github.com/k8ssandra/k8ssandra-terraform/tree/main/gcp).
 
@@ -49,8 +49,8 @@ export TF_VAR_region=us-west4
 
 After creating the GKE cluster, you can ignore further instructions on the [K8ssandra GKE docs page](https://docs.k8ssandra.io/install/gke/) (the "Install K8ssandra" section and beyond), since you'll be doing a custom K8ssandra installation. The Terraform script should automatically change your `kubectl` context to the new cluster, but you can make sure by checking the output of `kubectl config current-context`.
 
-Creating the first Cassandra datacenter {#h-creating-the-first-cassandra-datacenter}
-------------------------------------------------------------------------------------
+Creating the first Cassandra datacenter
+---------------------------------------
 
 First, a bit of upfront planning. It will be easier to manage our K8ssandra installs in different clusters if we use the same administrator credentials in each datacenter. Let's create a namespace for the first datacenter and add a secret within the namespace:
 
@@ -125,8 +125,8 @@ Which produces output that looks like this:
 
 Record a couple of these IP addresses to use as seeds further down.
 
-Preparing the second GKE cluster {#h-preparing-the-second-gke-cluster}
-----------------------------------------------------------------------
+Preparing the second GKE cluster
+--------------------------------
 
 Now you'll need a second Kubernetes cluster that will be used to host the second Cassandra datacenter. The terraform scripts used above to create the first GKE cluster also create a network and service account that should be reused for the second cluster. Instead of modifying the Terraform scripts to take existing resources into account, you can create the new GKE cluster using the console or the `gcloud` command line.
 
@@ -155,8 +155,8 @@ gcloud compute firewall-rules create k8ssandra-multi-region-rule --direction=ING
 
 If desired, you could create a more targeted rule to only allow TCP traffic between ports used by Cassandra.
 
-Adding a second Cassandra datacenter {#h-adding-a-second-cassandra-datacenter}
-------------------------------------------------------------------------------
+Adding a second Cassandra datacenter
+------------------------------------
 
 Let's start by creating a namespace for the new datacenter matching the GCP region name. We also need to create administrator credentials to match those created for the first datacenter, since the secrets are not automatically replicated between clusters.
 
@@ -208,8 +208,8 @@ helm install k8ssandra2 k8ssandra/k8ssandra -f dc2.yaml -n us-central1
 
 If you look at the resources in this namespace using a command such as `kubectl get services,pods` you'll note that there are a similar set of pods and services as for `dc1`, including Stargate, Prometheus, Grafana, and Reaper. Depending on how you wish to manage your application, this may or may not be to your liking, but you are free to tailor the configuration to disable any components you don't need.
 
-Configuring Cassandra Keyspaces {#h-configuring-cassandra-keyspaces}
---------------------------------------------------------------------
+Configuring Cassandra Keyspaces
+-------------------------------
 
 Once the second datacenter comes online, you'll want to configure Cassandra keyspaces to replicate across both clusters
 
@@ -222,7 +222,7 @@ kubectl exec multi-region-dc1-rack1-sts-0 cassandra -it -- cqlsh -u cassandra-ad
 ```
 
 
-Use the `DESCRIBE KEYSPACES` to list the keyspaces and `DESCRIBE KEYSPACE &lt;name>` command to identify those using the `NetworkTopologyStrategy`. For example:
+Use the `DESCRIBE KEYSPACES` to list the keyspaces and `DESCRIBE KEYSPACE <name>` command to identify those using the `NetworkTopologyStrategy`. For example:
 
 ```
 cassandra-admin@cqlsh> DESCRIBE KEYSPACES
@@ -259,8 +259,8 @@ kubectl exec multi-region-dc2-rack1-sts-0 -n us-central1 -- nodetool --username 
 
 Repeat for the other nodes `multi-region-dc2-rack2-sts-0` and `multi-region-dc2-rack3-sts-0`.
 
-Testing the configuration {#h-testing-the-configuration}
---------------------------------------------------------
+Testing the configuration
+-------------------------
 
 Let's verify the second datacenter has joined the cluster. To do this you'll pick a Cassandra node to execute the `nodetool status` command against. Execute the `nodetool` command against the node:
 
@@ -294,8 +294,8 @@ UN  10.24.1.214  398.22 KiB  256          ?       76c0d2ba-a9a8-46c0-87e5-311f7e
 If everything has been configured correctly, you'll be able to see both datacenters in the cluster output. Here's a picture that depicts what you've just deployed, focusing on the Cassandra nodes and networking:
 ![](k8ssandra-multi-cluster-Multiple-GKE-Clusters-no-DNS.png)
 
-What's next {#h-what-s-next}
-----------------------------
+What's next
+-----------
 
 In the following posts in this series, we'll explore additional multi-datacenter topologies across multiple Kubernetes clusters, including Cassandra clusters in hybrid cloud and multi-cloud deployments. We'll also dive into more details on networking and DNS configuration.
 

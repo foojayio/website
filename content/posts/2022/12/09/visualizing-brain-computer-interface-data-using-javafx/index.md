@@ -52,8 +52,8 @@ Trinity allows users to navigate and explore hundreds of layers in AI models and
  </figure>
 </figure>
 
-Project History {#h2-0-project-history}
----------------------------------------
+Project History
+---------------
 
 Trinity is a spinoff of an earlier project, Neurally Enhanced Operator (NEO), so its name was found in the Matrix universe.
 
@@ -61,8 +61,8 @@ Once the tool was created, it became clear it was easily extendable to be used i
 
 Sean deliberately chose Java to handle big data sets at high speed in a multithreaded environment, while JavaFX provides the 2D and 3D tools to visualize all this.
 
-What Data is Used {#h2-1-what-data-is-used}
--------------------------------------------
+What Data is Used
+-----------------
 
 As the tool is used in various projects, we look at one use case: **Brain-Computer Interfaces (BCI)**. For these projects, data is collected with non-invasive (head wraps with many cables) and invasive (brain implants) sensors.
 
@@ -74,14 +74,14 @@ For example, how strongly does the viewer feel the image represents a building, 
 
 This data can be processed by Trinity as JSON files or via ZeroMQ for live data up to 20.000 messages/second. By analyzing the hyper-dimensional neural data in Trinity and the semantic meaning output produced by the model, the scientists working on the project can evaluate the effectiveness of their models.
 
-Visualization Tools {#h2-2-visualization-tools}
------------------------------------------------
+Visualization Tools
+-------------------
 
 The videos below are based on one experiment of 14 minutes that produces a 100MB JSON file with data.
 
 This data set is very dense both vertically and horizontally, with many vectors of data containing a total of more than one million data points.
 
-### Hypersurface Tool {#h3-3-hypersurface-tool}
+### Hypersurface Tool
 
 The first video shows the tool used to visualize the **hyper-dimensional input data**. These are the raw signals from the BCI collected over a certain amount of time. There are 418 neural signals horizontally arranged from left to right. The Z-axis going "into the screen" is the time. The data close to you is on timestamp 0, and the end of the recording is furthest away "in" the screen.
 
@@ -91,7 +91,7 @@ The colored spikes show when an image was presented on the screen, and the parti
 
 {{< youtube XryMlcJx5mc >}}
 
-### Hyperspace Tool {#h3-4-hyperspace-tool}
+### Hyperspace Tool
 
 This tool provides a **scatterplot** system for visualizing the **transformed model outputs**, in this case semantic meaning. This is an essential tool for the researchers, as it shows the data after it has been processed by the model to make a data reduction.
 
@@ -101,8 +101,8 @@ It helps them to determine if the model is correctly decoding and handling the d
 
 {{< youtube zEBGiEfjTls >}}
 
-Why Java and JavaFX are the Perfect Tools {#h2-5-why-java-and-javafx-are-the-perfect-tools}
--------------------------------------------------------------------------------------------
+Why Java and JavaFX are the Perfect Tools
+-----------------------------------------
 
 Many programming languages can handle millions of data points, Java allows doing so at speed while also providing easy to implement visualizations.
 
@@ -112,8 +112,8 @@ Generating 3D renders can be harder than traditional 2D user interfaces, it is t
 
 Sean believes that with some extra "love and care," the 3D implementation of JavaFX could become the industry standard for many more applications once some missing features, like custom shaders, would be added.
 
-What is used for Trinity? {#h2-6-what-is-used-for-trinity}
-----------------------------------------------------------
+What is used for Trinity?
+-------------------------
 
 Trinity is built thanks to many tools the Java community provides:
 
@@ -127,8 +127,8 @@ Trinity is built thanks to many tools the Java community provides:
 * [LitFX](https://github.com/Birdasaur/LitFX): 3D special FX
 * [JeroMQ](https://github.com/zeromq/jeromq): pure Java implementation of ZeroMQ
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Sean admits he is opinionated about Java, after all, he is a Java Champion!
 

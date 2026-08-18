@@ -26,8 +26,8 @@ In this article, Almas and I will show you how to start with an idea for a game 
 
 To give some background, some time ago my 10y old son challenged me to create a Snake-like game with emojis. He selected the emoji images and I "only" needed to do the programming bit, the easy part... Luckily Almas asked me if I had a topic for some pair-programming for his [YouTube channel](https://www.youtube.com/channel/UCmjXvUa36DjqCJ1zktXVbUA/videos), and his question turned into a three-part series. My son is delighted because his idea is now a real game!
 
-Creating the Basics of a Snake Game {#h2-0-creating-the-basics-of-a-snake-game}
--------------------------------------------------------------------------------
+Creating the Basics of a Snake Game
+-----------------------------------
 
 For the first video, we started from a minimal project I prepared, containing the images selected by my son and some basic code. The first challenge to be tackled was making a snake out of multiple elements. By using a fixed grid for the locations of the snake head and body elements, making a growing snake turned out to be pretty straightforward and easy to manipulate.
 
@@ -38,8 +38,8 @@ For the first video, we started from a minimal project I prepared, containing th
 * FXGL:
   * [https://github.com/AlmasB/FXGL](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa2JJRk5OWmZfY3N0WDFZcEl0ekRvNk41NUdKZ3xBQ3Jtc0ttVGJCSFlMN3BvZjByNHlTbTJvXzY0Y01lYUFRNWRvTmsyTDF0OFJRaElLd3prWEp1NU5Hc0VpR1dkMF94YjlLOXA5NUxtZ002UDJ4MWM5NUt0cVpuVEIwWHc4a01JZnBYbG5uYXdGUXdwSXgzVUszYw&q=https%3A%2F%2Fgithub.com%2FAlmasB%2FFXGL)
 
-Controlling the Game with a Joystick on Raspberry Pi {#h2-1-controlling-the-game-with-a-joystick-on-raspberry-pi}
------------------------------------------------------------------------------------------------------------------
+Controlling the Game with a Joystick on Raspberry Pi
+----------------------------------------------------
 
 Wouldn't it be fun to control the game with a real joystick? That was the challenge in our second video where we used the sources of the first one to extend them and make them run them on a Raspberry Pi with a physical controller.
 
@@ -100,8 +100,8 @@ input.addListener(e -> {
 * Raspberry Pi OS + Imager tool
   * <https://www.raspberrypi.org/software/>
 
-Turning the Game into a Mobile App {#h2-2-turning-the-game-into-a-mobile-app}
------------------------------------------------------------------------------
+Turning the Game into a Mobile App
+----------------------------------
 
 In the third video, we extended the game with food and made it playable on smartphones by integrating the Gluon tools and an on-screen joystick. The GitHub project contains workflows to build native applications for Mac OS, Windows, Linux, and Android. That last one also publishes new versions to Google Play. This was inspired by the Foojay article ["Native Applications for Multiple Devices from a Single JavaFX Project with Gluon Mobile and GitHub Actions"](https://foojay.io/today/native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions/).
 
@@ -112,8 +112,8 @@ In the third video, we extended the game with food and made it playable on smart
 * Google Play Store link:
   * <https://play.google.com/store/apps/details?id=be.webtechie.emojisnakegameapp>
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 **Java for game development? Of course!** These videos only show you some getting started techniques, but the possibilities are endless.
 

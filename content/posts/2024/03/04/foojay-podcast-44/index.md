@@ -26,42 +26,42 @@ In this episode, we have a special group as we visit the virtual Quarkus Club.
 
 Did you know? The Quarkus Club initiative started less than a year ago and is already one of the biggest groups in the world dedicated to Quarkus!
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube qWUJTfk-ABY >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
-Links {#h2-2-links}
--------------------
+Links
+-----
 
 * <https://discord.com/invite/NUsVvZp7hs>
 * <https://www.youtube.com/@QuarkusClub>
 * <https://github.com/igfasouza/Choose-the-right-JDK-to-your-Quarkus-application>
 
-Speakers {#h2-3-speakers}
--------------------------
+Speakers
+--------
 
-### Igor De Souza {#h3-4-igor-de-souza}
+### Igor De Souza
 
 * <https://twitter.com/Igfasouza>
 * <https://www.linkedin.com/in/igfasouza/>
 
-### Luis Fabrício De Llamas {#h3-5-luis-fabr-cio-de-llamas}
+### Luis Fabrício De Llamas
 
 * <https://www.linkedin.com/in/luisfabriciodellamas/>
 
-### Podcast Host: Frank Delporte {#h3-6-podcast-host-frank-delporte}
+### Podcast Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Content {#h2-7-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the guests   
 
@@ -95,8 +95,8 @@ Content {#h2-7-content}
 
 <br />
 
-Music {#h2-8-music}
--------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

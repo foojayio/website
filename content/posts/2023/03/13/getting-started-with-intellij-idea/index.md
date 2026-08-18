@@ -35,8 +35,8 @@ You don't need to know *everything* in the IDE to be a badass developer, but lea
 
 I've ordered these tips in the order you're most likely to want to get to grips with them, but feel free to choose your own adventure!
 
-Working together {#h2-0-working-together}
------------------------------------------
+Working together
+----------------
 
 There really is no substitute for sitting next to someone and pairing on something in the IDE; it's a great way to learn a bunch of new keyboard shortcuts and see how your peers use the tool. However, the world was reshaped a few years ago, and now remote working is commonplace, which means you may not be co-located with your peers to benefit from this way of learning.
 
@@ -54,8 +54,8 @@ And read about it on the JetBrains blog:
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/working-together/).
 
-Learning the IDE {#h2-1-learning-the-ide}
------------------------------------------
+Learning the IDE
+----------------
 
 This one seems kinda obvious... of course, you want to Learn the IDE; that's why you're here! That said, you may not know about the Feature Trainer because it's a relatively recent addition to the product.
 
@@ -79,8 +79,8 @@ Even not-so-new-starters can learn something from the Feature Trainer, so go ahe
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/learning-the-ide/).
 
-Customising your IntelliJ IDEA Environment {#h2-2-customising-your-intellij-idea-environment}
----------------------------------------------------------------------------------------------
+Customising your IntelliJ IDEA Environment
+------------------------------------------
 
 Since we spend a large portion of our day working inside the IDE, it's reasonable to assume that we will want to customise it for our eyes.
 
@@ -90,8 +90,8 @@ When you're new to IntelliJ IDEA, the Preferences/Settings dialog (**⌘, \| Ctr
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/setting-up-the-env/).
 
-Navigating Code {#h2-3-navigating-code}
----------------------------------------
+Navigating Code
+---------------
 
 One of the first tasks you have when you are getting to know a new codebase is how to move around it. Again there are lots of ways to do that in IntelliJ IDEA, but I've focused on the ones that I think are most helpful for new users.
 
@@ -103,8 +103,8 @@ Finally, as you start to figure out your workflow you may need to move between f
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/navigating-code/).
 
-Finding Code {#h2-4-finding-code}
----------------------------------
+Finding Code
+------------
 
 As you move from looking around the code to looking for specific code that performs a task, you can get a lot of support from your IDE. Search Everywhere (**⇧⇧** \| **Shift+Shift** ) and Find Action (**⌘⇧A** \| **Ctrl+Shift+A**) are great ways to narrow down your search in the first instance.
 
@@ -114,8 +114,8 @@ You can then build your own queries as required. There's an example in the link 
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/finding-code).
 
-Reading Code {#h2-5-reading-code}
----------------------------------
+Reading Code
+------------
 
 As we all realise as we progress through our careers, we spend more time reading code then writing it. Maybe we wrote that code, or someone else wrote that code; either way you often need to understand what some code does.
 
@@ -131,8 +131,8 @@ This tells you the _state _of the file and if there are any errors. You can eith
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/reading-code/).
 
-Understanding Code {#h2-6-understanding-code}
----------------------------------------------
+Understanding Code
+------------------
 
 When you come across a block of code that you don't fully understand, you can use Context Actions (**⌥⏎ \| Alt+Enter**) to see if IntelliJ IDEA has any suggestions for reshaping the code without changing what it does.
 
@@ -146,8 +146,8 @@ Using data flow analysis allows you to track both the data input (producer) and 
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/understanding-code/).
 
-Writing Code {#h2-7-writing-code}
----------------------------------
+Writing Code
+------------
 
 Writing code is of course part of our day job and, again an area that IntelliJ IDEA can support you. As you'd expect from your IDE, IntelliJ IDEA gives you extensive code completion including Type-Based completion (**⌃␣** \| **Ctrl+Space**), which filters the list to only types that apply to that specific context.
 
@@ -159,8 +159,8 @@ Lastly, IntelliJ IDEA has recently made a number of changes to support you in ma
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/writing-code/).
 
-Changing Code {#h2-8-changing-code}
------------------------------------
+Changing Code
+-------------
 
 Changing code is one of those inevitabilities in our jobs. Perhaps we're refactoring it, adding functionality or deleting it; either way, you will be changing some code you or someone else wrote at some point. Use (**⌃T** \| **Ctrl+Alt+Shift+T**) to pop up the refactoring menu.
 
@@ -180,8 +180,8 @@ You can access Local History from the right-click context menu both at the direc
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/changing-code/).
 
-Testing Code {#h2-9-testing-code}
----------------------------------
+Testing Code
+------------
 
 Of course, you want to test your code! Perhaps you're even doing TDD, but how can IntelliJ IDEA help you here? First up, you can split windows in the editor, allowing you to have your code on one side and your test on the other so you don't have to flick between them.
 
@@ -195,8 +195,8 @@ If you use Navigate to Test and IntelliJ IDEA can't find a test class it will su
 
 .... and finally,[the step in the IntelliJ IDEA Guide](https://www.jetbrains.com/idea/guide/tutorials/getting-started-intellij-idea/testing-code/).
 
-Seeing How Far You've Come {#h2-10-seeing-how-far-you-ve-come}
---------------------------------------------------------------
+Seeing How Far You've Come
+--------------------------
 
 The Productivity Guide in IntelliJ IDEA is a fun way to see which shortcuts you have used and which you have yet to try. You can access it from **Help** \> **My** **Productivity**.
 

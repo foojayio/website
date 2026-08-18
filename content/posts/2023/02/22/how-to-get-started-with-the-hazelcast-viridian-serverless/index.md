@@ -32,14 +32,14 @@ You can store at most 1 GiB of data; and 2) Production: Uncapped storage.
 
 The cluster scales as you add or remove data. In this tutorial, you'll learn how to connect a client to a cluster and use SQL to query data in the cluster.
 
-### **Before you Begin** {#h3-0-before-you-begin}
+### **Before you Begin**
 
 You need the following:
 
 * A Hazelcast Viridian account: <https://docs.hazelcast.com/cloud/create-account>
 * Access to a command prompt such as Terminal for Mac or Powershell for Windows.
 
-### **Step 1. Start a Viridian Serverless Development Cluster** {#h3-1-step-1-start-a-viridian-serverless-development-cluster}
+### **Step 1. Start a Viridian Serverless Development Cluster**
 
 Development clusters are for fast, iterative development while you prototype your application. To create a development cluster, do the following:
 
@@ -50,7 +50,7 @@ Development clusters are for fast, iterative development while you prototype you
 5. Click Create Cluster.
 6. Wait while your cluster is created. When the cluster is up and running, a Quick Connection Guide is displayed with instructions for connecting a sample client to it.
 
-### **Step 2. Connect a Sample Client** {#h3-2-step-2-connect-a-sample-client}
+### **Step 2. Connect a Sample Client**
 
 To connect to your Viridian Serverless cluster, you need a Hazelcast client. The cluster comes with sample clients that are preconfigured to connect to your cluster and add some sample data to a map. A map is an in-memory, key/value data structure that is often used as a cache.
 
@@ -81,7 +81,7 @@ type IMap OPTIONS('keyFormat'='varchar', 'valueFormat'='json-flat');
 ```
 
 
-### **Step 3. Query the Cache with SQL** {#h3-3-step-3-query-the-cache-with-sql}
+### **Step 3. Query the Cache with SQL**
 
 Now that you have some data in your cluster, you can query it, using SQL. If you're using the CLI, enter the following queries in the SQL prompt. If you're using a client library, enter the following queries in the SQL browser.
 
@@ -138,7 +138,7 @@ SELECT city FROM cities WHERE city LIKE 'L%' AND LENGTH(city) > 6;
 ```
 
 
-### **Summary** {#h3-4-summary}
+### **Summary**
 
 In this tutorial, we learnt how to connect to the Hazelcast Viridian Serverless and use SQL to query data. It is possible to connect to the Viridian using Java, Node.js, Python, .NET, C++ and Go.
 

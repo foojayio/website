@@ -35,8 +35,8 @@ Jamie Coleman then made sure there were no soggy bottoms (one for the Mary Berry
 
 So I guess now it's time for me to add the covering to the layers, some glacé cherries, and maybe some of those ornate flowers made of icing, who knows!
 
-Tier 1.... The large base layer. Funfetti. {#h2-0-tier-1-the-large-base-layer-funfetti}
----------------------------------------------------------------------------------------
+Tier 1.... The large base layer. Funfetti.
+------------------------------------------
 
 Vulnerabilities! Nasty things aren't they?! As nasty as funfetti cake, [ranked one of the world's worst cake flavours](https://www.tastingtable.com/1155106/ranking-popular-cake-flavors-from-worst-to-best/), controversial, I know! They've been around for a long time, almost as long as computers. Steve also mentioned earlier that they are ever increasing and getting difficult to manage.  
 
@@ -52,8 +52,8 @@ That's a statistic that I read as saying, assuming you do everything right, it i
 
 OK, let's go to the next layer. As for this cake, it's OK, you can spit it out and put it in the bin.
 
-Tier 2.... The middle layer.. Chocolate. {#h2-1-tier-2-the-middle-layer-chocolate}
-----------------------------------------------------------------------------------
+Tier 2.... The middle layer.. Chocolate.
+----------------------------------------
 
 Now we get to a good one! Chocolate cake tastes great and is simple to make! Much like good security tools!   
 
@@ -69,8 +69,8 @@ While tools that stop vulnerabilities getting into your local development reposi
 
 Goodies make our lives easier and hopefully catch a lot of the bad things before we hit our staging servers, let alone production deployment! If only they actually tasted like chocolate cake...
 
-Tier 3.... The top layer.. Genoise Sponge. {#h2-2-tier-3-the-top-layer-genoise-sponge}
---------------------------------------------------------------------------------------
+Tier 3.... The top layer.. Genoise Sponge.
+------------------------------------------
 
 Now we go for a showstopper! Sophisticated, rich and tasty! Mmmmmmm!
 

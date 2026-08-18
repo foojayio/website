@@ -35,10 +35,10 @@ In the chat, after each session, a quiz question was asked by the speaker. The q
 
 And the winners are...
 
-Hadrien Guyette (Belgium) is the first prize winner, soon to receive an oculus, as well as the one year license to Deep Netts. {#h2-0-hadrien-guyette-belgium-is-the-first-prize-winner-soon-to-receive-an-oculus-as-well-as-the-one-year-license-to-deep-netts}
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Hadrien Guyette (Belgium) is the first prize winner, soon to receive an oculus, as well as the one year license to Deep Netts.
+------------------------------------------------------------------------------------------------------------------------------
 
-Andreas Lämmlein (Germany) and Mark Striekwold (Netherlands) are the runners up, soon to be receiving cool techy toys, as well as the one year license to Deep Netts. {#h2-1-andreas-l-mmlein-germany-and-mark-striekwold-netherlands-are-the-runners-up-soon-to-be-receiving-cool-techy-toys-as-well-as-the-one-year-license-to-deep-netts}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Andreas Lämmlein (Germany) and Mark Striekwold (Netherlands) are the runners up, soon to be receiving cool techy toys, as well as the one year license to Deep Netts.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Congrats to everyone who participated and, if you missed it, check out the videos above, soon the questions will be made available and there'll be new prizes to be awarded. And, of course, lets have the friends of OpenJDK program again next year at the live FOSDEM in Brussels, Belgium!

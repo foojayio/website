@@ -27,8 +27,8 @@ However, once you've set up such a gateway, you can use it for different purpose
 
 Today, I want to show you how to improve the security of web apps.
 
-Prevent sniffing {#h2-0-prevent-sniffing}
------------------------------------------
+Prevent sniffing
+----------------
 
 Browsers are fantastic pieces of technology that try to make the life of users as comfortable as possible.
 
@@ -69,8 +69,8 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 
 Apache APISIX will set the header on request matching the route. Since the route is a catchall, the browser will sniff response from no response.
 
-Prevent framing {#h2-1-prevent-framing}
----------------------------------------
+Prevent framing
+---------------
 
 Some malicious sites may embed your site in an HTML `iframe` to carry on attacks. For example, a malicious actor could devise the website `myshop.trustmebro.com` that embeds your legit webshop `myshop.legit.com`. Users browsing the former would believe they are browsing the latter.
 
@@ -100,8 +100,8 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 
 At this point, compliant browsers will prevent bad actors from framing your website.
 
-HTTPS pinning {#h2-2-https-pinning}
------------------------------------
+HTTPS pinning
+-------------
 
 HTTPS allows security guarantees compared to plain HTTP:
 > Hypertext Transfer Protocol Secure (HTTPS) is an extension of the Hypertext Transfer Protocol (HTTP). It is used for secure communication over a computer network, and is widely used on the Internet. In HTTPS, the communication protocol is encrypted using Transport Layer Security (TLS) or, formerly, Secure Sockets Layer (SSL). The protocol is therefore also referred to as HTTP over TLS, or HTTP over SSL.
@@ -143,8 +143,8 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 ```
 
 
-Fine-grained content control {#h2-3-fine-grained-content-control}
------------------------------------------------------------------
+Fine-grained content control
+----------------------------
 
 Many ways are available for an attacker to load malicious resources from your domain. If they can access the underlying website, they can add a \`\` tag and reference anything they'd want. that render content dynamically, *e.g.*, WordPress, are a favorite target among bad actors.
 
@@ -188,8 +188,8 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 The correct HTTP response headers can go a long way toward making your webapp more secure.
 

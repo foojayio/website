@@ -21,8 +21,8 @@ frozen: false
 
 **Among Java developers, a prevailing assumption is that the number of native threads that can be created within the Java Virtual Machine (JVM) is linked to the stack size. To scrutinize this widespread notion, an experiment was conducted. The results revealed that stack size plays a less significant role in native thread creation than previously thought.**
 
-**The Experiment** {#h2-0-the-experiment}
------------------------------------------
+**The Experiment**
+------------------
 
 The experiment utilized the following Java program, which continuously creates threads and counts them using an [AtomicInteger](https://download.java.net/java/early_access/jdk21/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html).  
 
@@ -51,8 +51,8 @@ public class ThreadCounter {
 
 <br />
 
-**Test Environment** {#h2-1-test-environment}
----------------------------------------------
+**Test Environment**
+--------------------
 
 The test ran on a machine with the following configuration:
 
@@ -61,10 +61,10 @@ The test ran on a machine with the following configuration:
 * Operating System: macOS Vancura
 * Java Version: openjdk 21
 
-**Experimental Results** {#h2-2-experimental-results}
------------------------------------------------------
+**Experimental Results**
+------------------------
 
-### **Default Stack Size** {#h3-3-default-stack-size}
+### **Default Stack Size**
 
 The initial test was conducted using the default stack size of 2048 KB. Approximately 16,300 threads were created before an [OutOfMemoryError](https://download.java.net/java/early_access/jdk21/docs/api/java.base/java/lang/OutOfMemoryError.html) was triggered.
 
@@ -80,7 +80,7 @@ Exception in thread "main" java.lang.OutOfMemoryError: unable to create native t
 
 Calculations indicate that the memory required for these 16,300 threads was around 31.875 GB, well below the total memory of 64 GB.
 
-### **10 MB Stack Size** {#h3-4-10-mb-stack-size}
+### **10 MB Stack Size**
 
 To change the stack size to 10 MB, the following JVM option was used:
 
@@ -102,7 +102,7 @@ Exception in thread "main" java.lang.OutOfMemoryError: unable to create native t
 In case you want to use IntelliJ IDEA, you can configure the stack size, check the following image:   
 ![](Screenshot-2023-09-10-at-10.48.08-PM-1-1024x700.png)
 
-### **1 GB Stack Size** {#h3-5-1-gb-stack-size}
+### **1 GB Stack Size**
 
 Finally, for the most extreme case, the stack size was set to 1 GB using:
 
@@ -121,15 +121,15 @@ Exception in thread "main" java.lang.OutOfMemoryError: unable to create native t
 ```
 
 
-**Insights from the Data** {#h2-6-insights-from-the-data}
----------------------------------------------------------
+**Insights from the Data**
+--------------------------
 
 The consistency across all three tests underscores that stack size does not affect the number of native threads that can be created. Rather, the limitation appears to be imposed by the operating system.
 
 It's worth noting that the OS was capable of creating more threads than the available physical memory, thanks to the concept of virtual memory. Virtual memory leverages disk space to extend RAM, allowing applications to allocate more memory than is physically present, albeit at a lower access speed.
 
-**Conclusion** {#h2-7-conclusion}
----------------------------------
+**Conclusion**
+--------------
 
 Contrary to the commonly held belief, this experiment proves that stack size does not have a impact on the number of native threads that can be created in a JVM environment.
 

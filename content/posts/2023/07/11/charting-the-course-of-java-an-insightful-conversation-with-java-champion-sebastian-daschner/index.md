@@ -32,8 +32,8 @@ Whether you're a veteran developer or a novice just stepping into the field, the
 
 <br />
 
-Profiles: {#h2-0-profiles}
---------------------------
+Profiles:
+---------
 
 <br />
 
@@ -138,8 +138,8 @@ This is something that seems to get harder and harder. So put your phone on flig
 
 
 
-Conclusion {#h2-1-conclusion}
------------------------------
+Conclusion
+----------
 
 In conclusion, Sebastian Daschner's passion for continuous improvement, programming, and sharing knowledge shines through in this interview.
 

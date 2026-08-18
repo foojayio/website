@@ -28,7 +28,7 @@ Bert Jan is a Java Champion, JavaOne Rock Star speaker, Duke's Choice Award winn
 
 He loves to share his experience by speaking at conferences, writing for the Dutch Java magazine and helping out Devoxx4Kids by teaching kids how to code. Bert Jan is easily reachable on Twitter at [@bjschrijver](https://twitter.com/bjschrijver).  
 
-### Online Profile: {#h3-0-online-profile}
+### Online Profile:
 
 * Home page 🏠: [https://openvalue.eu](https://openvalue.eu/)
 * LinkedIn 💼: <https://www.linkedin.com/in/bjschrijver/>

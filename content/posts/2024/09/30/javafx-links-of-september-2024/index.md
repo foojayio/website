@@ -31,8 +31,8 @@ A lot of milestones this month...
 
 More info and links below in this overview...
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * [**Pedro Duke** shared the following](https://x.com/P_Duke/status/1830644652287926277): "Noteworthy features coming in the next release of JavaFX (23) coming this month (September 17):"
   * CSS transitions: This introduces basic animation support in CSS. Won't be able to do it on Background and Borders for now. Work is already underway to also support that in a next release.
@@ -49,8 +49,8 @@ Core {#h2-0-core}
 * A list with all the changes in this release [is available on GitHub](https://github.com/openjdk/jfx/blob/jfx23/doc-files/release-notes-23.md).
 * Important note: "JavaFX 23 Requires JDK 21 or later."
 
-Applications {#h2-1-applications}
----------------------------------
+Applications
+------------
 
 * [PDFsam announced version 5.2.5 of PDFsam Basic](https://x.com/PDFsamOSS/status/1826188220570226707): "Most notably, you can use the keyword 'last' in the page selection of the extract pages tool, allowing you to extract the last page from multiple PDF documents." You can find the [Release Notes here](https://t.co/R3sf3sVdRh).
 * [Deep Netts (Build and deploy ML models in Java) has enhanced debugging with JavaFX visualization tools](https://x.com/DeepNetts/status/1835292030315995390) that let you analyze weight statistics and explore network architectures in 3D, providing better insights for diagnosing issues and optimizing performance.
@@ -59,15 +59,15 @@ Applications {#h2-1-applications}
 * [**Ulas Ergin**](https://x.com/ulasergin/status/1838293466658296179) shared a [major milestone](https://www.linkedin.com/posts/ulasergin_modernizing-primereact-javafx-activity-7243973455702822913-cNrX/): "We've rolled out a new, cutting-edge client powered by PrimeReact and JavaFX, replacing the legacy Java Swing client. A better, faster, smarter core banking application, we call it core+. This transformation will empower our colleagues across the bank to serve our customers even better, offering enhanced performance and a more seamless, intuitive user experience."
 * [**Patrik Karlström** announced version 24.09.0 of nbRsync](https://x.com/PatrikKarlstrom/status/1837847203844415847), the rsync GUI written in Java with JavaFX on the NetBeans Platform. [Release notes and downloads on GitHub](https://github.com/trixon/nbRsync/releases/tag/v24.09.0).
 
-Games {#h2-2-games}
--------------------
+Games
+-----
 
 * [**Mark J Koch** shared](https://mastodon.social/@maehem/113165558900968220): "A good moment for a dev update on the Neuromancer PC game I've been unofficially porting to JavaFX. The player can now connect to one of the banks and crack the password using appropriate software. Hope to have something 'Alpha' quality that folks can try out in the coming weeks."
 * [**ayuusse** is "going to make Chess](https://x.com/ayuusse136620/status/1836963064408854681) in JavaFX in my spare time. Good Start I guess 🙃."
 * [**Catalin Rontu** coded a 2048 game using JavaFX](https://www.linkedin.com/posts/catalin-rontu_github-rontzew2048demo-javafx-2048-game-activity-7241840037804273665-REXR/): "It's small and fun and it helped me learn something new while also enjoying myself. I plan on making many updates (check the readme file) to it so stay tuned for future versions!"
 
-Components, Libraries, Tools {#h2-3-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [**Johan Vos** shared on Mastodon](https://mastodon.social/@johanvos/113085258956232434): "We're getting closer to a new version of Gluon Substrate, enabling Java 23 and JavaFX 23 on mobile (ios/android). Also, more focus on creating static libs (containing compiled versions of your Java code) that can be plugged in new/existing ios/android projects. Since we don't have devrel/marketing, the website updates are way behind what we do. But we'll update it this time. Keep an eye on [gluonhq.com](https://gluonhq.com)."
 * Library updates by [**Pedro Duque Vieira**](https://x.com/P_Duke):
@@ -77,23 +77,23 @@ Components, Libraries, Tools {#h2-3-components-libraries-tools}
   * [Transit Theme WIP Part 5: New LIGHT and DARK styles for ProgressBar and Slider added](https://x.com/P_Duke/status/1834223862424211912).
   * [FXSkins version 1.1.0 released](https://x.com/P_Duke/status/1834280387901596054): "Update to Java and JavaFX version used for compilation. And fixed an issue with ProgressBar skin getting stuck (stopped). As usual you can get it through Maven Central."
 
-Podcasts, Videos, Books {#h2-4-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * [Video by **Sean Phillips**](https://www.youtube.com/watch?v=ccvhOEXtqJ4): "JSON RPC control of JavaFX visualization from Python/Jupyter. In this example a simple Python script, runnable from either CLI or Jupyter notebook uses httpx to post JSON formatted data (225 mbs of AI feature vectors) and commands to a receiving JavaFX application called Trinity."
 * **Frank Delporte** published new interviews in his "JavaFX In Action series":
   * [FxCalculator, an Android app built with Scala and JavaFX](https://webtechie.be/post/2024-09-17-jfxinaction-maciej-gorywoda/) with [**Maciej Gorywoda**](https://x.com/makingthematrix).
   * [**Ramiro Domínguez Ayub** about the Televic Generic Update Tool (TGUT)](https://webtechie.be/post/2024-09-24-jfxinaction-ramiro-dominguez-ayubat/).
 
-Tutorials {#h2-5-tutorials}
----------------------------
+Tutorials
+---------
 
 * New [tutorial videos on JFX Central](https://www.jfx-central.com/learn-javafx), see below.
 * School of Computing, National University of Singapore, is working on a free JavaFX tutorial the [first sections are available here](https://se-education.org/guides/tutorials/javaFx.html).
 * Tutorial by On Exception: [Creating a Simple Weather App with JavaFX and Jackson Libraries using Maven](https://onexception.dev/news/1393916/javafx-weather-app-with-maven).
 
-Miscellaneous {#h2-6-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Rumble Tumble Kid** shared a GitHub project](https://x.com/rumbletumblekid/status/1829538211846357065): "Here's a small template I created a while ago that shows you how to either package your Scala GUI application using jlink and jpackage or compile it ahead-of-time via Graal Native": [package-scalafx](https://github.com/RumbleTumbleKid/package-scalafx).
 * Check [this thread by **Sankalp**](https://twitter.com/Sankalp0704/status/1831374170195947685). He found an old book and is comparing old Java that didn't have resource files or design-time layout tools, versus current FXML and SceneBuilder.
@@ -102,8 +102,8 @@ Miscellaneous {#h2-6-miscellaneous}
 * [JabRef is asking the community for help](https://foojay.social/@jabref/113126358640056652): "Anyone encountered this strange UI font rendering before? Popped up in JabRef, but apparently other applications are affected as well. Anyone a clue or maybe someone else can reproduce this?"
 * [**Aadil Raja** is learning Java and created a media player](https://twitter.com/Akill03712420/status/1833591578574942649) using Java and JavaFX. You can find the sources on [GitHub](https://github.com/aadilraja/MediaPlayer).
 
-JFX Central {#h2-7-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * The Links of August got also [published on Foojay.io](https://foojay.io/today/javafx-links-of-august-2024/).
 * [**Dirk Lemmermann** "is having way too much fun styling the intro page for a freshly installed JFX Central

@@ -20,8 +20,8 @@ Game Development is a large field of Computer Science with a lot of underpinning
 
 However, the concepts themselves are language-agnostic and engine-agnostic. Please note that the material presented here is deliberately simplified to provide a gentle introduction. Those seeking in-depth coverage are encouraged to pursue further research.
 
-Main (Game) Loop {#h2-0-main-game-loop}
----------------------------------------
+Main (Game) Loop
+----------------
 
 The main loop in games is similar to that of any other front-end application. It is an infinite loop, set to terminate when the user exits the application. The game loop, at a high-level, consists of 3 phases:
 
@@ -31,7 +31,7 @@ The main loop in games is similar to that of any other front-end application. It
 
 This is the typical order of these phases: first we take user input, then we update the game (taking into account the new input) and finally we draw the game to the screen.
 
-### Input {#h3-1-input}
+### Input
 
 In this phase the game (or engine) will capture all types of input from the user. This includes keyboard presses, mouse events, touch screen gestures, controller and joystick inputs. In the same phase, the game (or engine) may wish to process the captured input. Typically this means: when `F` key is pressed, do whatever `F` is supposed to do in the game. For example, in a first-person shooter game, `F` may be used to perform a melee attack.
 
@@ -75,7 +75,7 @@ protected void initInput() {
 ```
 
 
-### Update {#h3-2-update}
+### Update
 
 Most of the game logic happens in this phase. A non-exhaustive list of things to be called inside the update method includes:
 
@@ -95,7 +95,7 @@ The game world is responsible for adding, updating and removing entities. It als
 
 During the AI tick, each relevant entity's behaviour will be computed. This determines what the entity will do next. If the behaviour is related to movement, then the pathfinding algorithm kicks in to return a valid path from where the entity is to where the entity needs to go. Finally, the physics tick will ensure that all entity positions are valid, i.e. entities with rigid bodies do not overlap and that entities do not leave their respective boundaries. Collision detection will also be performed inside the physics tick. The detected collisions are then reported back to the game, so the user can handle them appropriately.
 
-### Render {#h3-3-render}
+### Render
 
 In essence, the render phase is about turning the game world into a visual product. Modern games utilise several sophisticated techniques in order to achieve a high-quality image of the game state. Once the game state is drawn, a myriad of post-processing effects can be applied to generate a unique or even cinematic feel for the game. By repeating this process every frame, we are able to obtain the right level of smoothness and fluidity to match the screen refresh rate.
 
@@ -128,8 +128,8 @@ var entity = FXGL.entityBuilder()
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, we have covered the basics of game development using FXGL as a case study.
 

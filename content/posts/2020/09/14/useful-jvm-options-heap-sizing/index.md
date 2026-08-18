@@ -22,7 +22,7 @@ To find the complete list of options you will find in the [globals.hpp](https://
 
 I have summed up here, in my humble opinion, some of the most useful JVM options in the context of heap sizing.
 
-### Young Generation {#h3-0-young-generation}
+### Young Generation
 
 Of course, you know the `-Xms` \& `-Xms` options, which can also be abbreviated to `-ms` `-mx`, though did you know that parts of the Java heap and non-heap can also be sized:
 
@@ -34,7 +34,7 @@ Of course, you know the `-Xms` \& `-Xms` options, which can also be abbreviated 
 
 If `NewSize` \< `MaxNewSize`, young generation size can be adjusted during application life. However, resizing does require a FullGC. To avoid this, set the same value for both options.
 
-### **Metaspace** {#h3-1-metaspace}
+### **Metaspace**
 
 * `-XX:MetaspaceSize=n` Defines the initial size of the Metaspace
 * `-XX:MaxMetaspaceSize=n` Defines the maximum size of the Metaspace generation
@@ -43,7 +43,7 @@ If `NewSize` \< `MaxNewSize`, young generation size can be adjusted during appli
 
 If `MetaspaceSize` \< `MaxMetaspaceSize`, Metaspace generation size can be adjusted during application life. However, resizing does require a FullGC. To avoid this, set the same value for both options.
 
-### Code Cache {#h3-2-code-cache}
+### Code Cache
 
 * `-XX:InitialCodeCacheSize=n` Defines the initial size of the Code Cache.
 * `-XX:ReservedCodeCacheSize=n` Defines the maximum size of the Code Cache.

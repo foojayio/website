@@ -22,8 +22,8 @@ frozen: false
 
 **FEPCOS-J allows declaratively implementing a Java server and generating its profile, which, for example, can be used to generate the networking code of a Rust client.**
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 As I have shown in a [previous post](https://foojay.io/today/fuchs-2024-fepcos-j-multithreaded-server/) \[1\] and a [video](https://youtu.be/qtPP7kZbriQ) \[2\], the [FEPCOS-J development tool](http://fepcos.info/en/fepcos-j.html) \[3\] prototypically implements a Java language extension that allows implementing a client-server application in Java without the need for manual network programming.
 
@@ -41,8 +41,8 @@ Other tools can then use this profile as input to realize the client-network com
 
 This post illustrates this concept using the example of a Java server accessed by a Rust client. Firstly, the post [describes the principle](#principle). Then, it [provides an example](#example). Finally, it [draws a conclusion](#conclusion).
 
-Java server and Rust client implemented using tools from the FEPCOS-Project {#principle}
-----------------------------------------------------------------------------------------
+Java server and Rust client implemented using tools from the FEPCOS-Project
+---------------------------------------------------------------------------
 
 This section describes how to implement a Java server and a Rust client without manually network programming (Fig. 1).
 
@@ -61,8 +61,8 @@ To start the Java server, the developer runs `fjx` utilizing *server.exp*. After
 
 As a result, the Rust client accesses the Java server via the ***frg*** -generated *server_imp* Rust library, the Rust library provided by FEPOCS-R, the network, the Java modules provided by FEPCOS-J, and the ***fjp*** -generated *server.exp* Java module.
 
-Java server and Rust client implemented as examples {#example}
---------------------------------------------------------------
+Java server and Rust client implemented as examples
+---------------------------------------------------
 
 The following describes the implementation of the example scenario shown in Fig. 2: In brief, a Java server called *test.server* provides two services called *add()* and *greet()* via the internet socket *10.0.0.6:8888* , and a Rust client called *test_client* accesses these services via the network.
 
@@ -71,7 +71,7 @@ In other words, I explain the server's programming using the Java programming la
 With this in mind, the interaction of the tools from the FEPCOS-Project becomes obvious.  
 ![A Java server called test.server provides two services add(…) and greet(…) via the internet socket 10.0.0.6:8888. A Rust client called test_client accesses these services via the network.](fuchs2024-java-server-and-rust-client-example.png) **Fig. 2) Example scenario:** A Java server provides two services to a Rust client via the network.
 
-### Implementing the Java server {#h3-3-implementing-the-java-server}
+### Implementing the Java server
 
 #### Workflow
 
@@ -192,7 +192,7 @@ It specifies the input parameter, *String user*.
 
 Further, it specifies the output parameters, *String greet_en* , and *String greet_de* . The first becomes the English greet: `greet_en = "Hello, " + user + "!"`. The second becomes the German greet: `greet_de = "Hallo " + user + "!"`.
 
-### Implementing the Rust client {#h3-4-implementing-the-rust-client}
+### Implementing the Rust client
 
 #### Workflow
 
@@ -251,7 +251,7 @@ requests the server's `add()` service, specifying the input parameters `x=14` an
 
 requests the server's `greet()` service, specifying the input parameter `user="Bob"`. The result is stored in the variable `r2`, a struct with the `r2.greet_en` and `r2.greet_de` fields. These fields represent the corresponding output parameters of the service and are then printed.
 
-### Executing the client-server application {#h3-5-executing-the-client-server-application}
+### Executing the client-server application
 
 First, the developer starts the Java server on a computer named *lumo* by executing
 
@@ -267,8 +267,8 @@ After that, the developer runs the Rust client on a computer named *box* by exec
 The ***test_client*** binary prints *37* (=14 + 23), *"Hello, Bob!"* and *"Hallo Bob!"* as expected.  
 ![A screenshot of a Linux shell shows the execution of an example Rust client that accesses a Java server implemented with FEPCOS-J.](fuchs2024-rust-client-execution-example.png) **Fig. 6) Executing the Rust client that accesses a Java server implemented with FEPCOS-J.**
 
-Java server and Rust client can be implemented without manually network programming {#conclusion}
--------------------------------------------------------------------------------------------------
+Java server and Rust client can be implemented without manually network programming
+-----------------------------------------------------------------------------------
 
 To sum up, this post introduced FEPCOS-J's feature to generate a system profile out of a Java server's system specification. In addition, the post introduced the working draft of FEPCOS-R, which can process the system profile and generate the system import module for a Rust client.
 
@@ -282,8 +282,8 @@ This post contains the complete source code of the implemented example. When you
 
 The FEPCOS-J and FEPCOS-R development tools automated the network programming required to implement a Java server that is accessed by a Rust client.
 
-References {#references}
-------------------------
+References
+----------
 
 1. G. Fuchs: *FEPCOS-J (4) Easy programming of a multithreaded TCP/IP server in Java* ; At: Foojay Today; 2024-03-21; <https://foojay.io/today/fuchs-2024-fepcos-j-multithreaded-server/>.
 2. G. Fuchs: Video: *Easy Implementation of a Client-Server Application in Java with FEPCOS-J* ; On: YouTube, FEPCOS-Project (@FepcosInfo); 2024-07-29; <https://youtu.be/qtPP7kZbriQ>.

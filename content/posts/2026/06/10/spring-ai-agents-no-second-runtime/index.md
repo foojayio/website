@@ -43,8 +43,8 @@ What is missing is not a new platform. It is a runtime that connects agent execu
 
 
 
-What agents actually need in production {#h2-0-what-agents-actually-need-in-production}
----------------------------------------------------------------------------------------
+What agents actually need in production
+---------------------------------------
 
 Forget the demos. In production, an agent system needs to answer six questions:
 
@@ -61,8 +61,8 @@ What is missing is a runtime that connects those existing capabilities directly 
 
 
 
-What Spring already gives you {#h2-1-what-spring-already-gives-you}
--------------------------------------------------------------------
+What Spring already gives you
+-----------------------------
 
 |  Production concern   | Existing Spring capability |
 |-----------------------|----------------------------|
@@ -84,8 +84,8 @@ None of this requires a second operational stack. What it requires is a runtime 
 
 
 
-BUILD: Create agent teams {#h2-2-build-create-agent-teams}
-----------------------------------------------------------
+BUILD: Create agent teams
+-------------------------
 
 [AgentFlow4J](https://github.com/datallmhub/agentflow4j) is that runtime. It gives you the building blocks to create agents and compose them into multi-agent systems.
 
@@ -127,8 +127,8 @@ Three agents, dynamic routing, typed state shared across nodes. Each agent is a 
 
 
 
-GOVERN: Budget, approvals, permissions, checkpoints {#h2-3-govern-budget-approvals-permissions-checkpoints}
------------------------------------------------------------------------------------------------------------
+GOVERN: Budget, approvals, permissions, checkpoints
+---------------------------------------------------
 
 Agents are not implicitly trusted. AgentFlow4J lets you define exactly what each agent can call, what it can spend, when a human must approve, and how execution state is preserved across restarts.
 
@@ -153,10 +153,10 @@ The `processor` agent cannot run until a human approves. The graph cannot spend 
 
 
 
-OPERATE: Observe, recover and run safely {#h2-4-operate-observe-recover-and-run-safely}
----------------------------------------------------------------------------------------
+OPERATE: Observe, recover and run safely
+----------------------------------------
 
-### Retry that understands cost {#h3-5-retry-that-understands-cost}
+### Retry that understands cost
 
 One common failure mode: a retry policy that cannot tell the difference between a transient network error and an over-budget condition will keep retrying an expensive call until the budget runs out.
 
@@ -173,7 +173,7 @@ RetryPolicy policy = RetryPolicy.exponential(3, Duration.ofSeconds(2))
 
 `TRANSIENT` means retry. `PERMANENT` means fail fast. `OVER_BUDGET` means route to a cheaper fallback agent instead of retrying. The retry policy is no longer blind to cost.
 
-### Operational sovereignty {#h3-6-operational-sovereignty}
+### Operational sovereignty
 
 There is another dimension becoming increasingly relevant, particularly in Europe: operational sovereignty.
 
@@ -183,8 +183,8 @@ A JVM-native agent runtime lets organizations build governed agent systems witho
 
 
 
-One stack, one runtime {#h2-7-one-stack-one-runtime}
-----------------------------------------------------
+One stack, one runtime
+----------------------
 
 There is no second runtime to deploy, no second security model to audit, no second monitoring stack to maintain. AgentFlow4J integrates natively into an ecosystem millions of developers already operate, not as a Spring abstraction layer, but as a dedicated JVM-native runtime for governed agent execution.
 
@@ -202,8 +202,8 @@ If you are an architect or open-source contributor interested in what a producti
 
 
 
-Getting started {#h2-8-getting-started}
----------------------------------------
+Getting started
+---------------
 
 AgentFlow4J is available on JitPack, built on Java 17+ and Spring AI 1.0:
 

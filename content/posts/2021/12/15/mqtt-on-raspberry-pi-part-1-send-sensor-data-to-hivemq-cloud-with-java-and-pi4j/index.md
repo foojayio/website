@@ -33,8 +33,8 @@ Example code for many programming languages is available on [the HiveMQ website]
 
 {{< youtube U28uSrY63XY >}}
 
-Setting up a HiveMQ Cloud account {#h2-0-setting-up-a-hivemq-cloud-account}
----------------------------------------------------------------------------
+Setting up a HiveMQ Cloud account
+---------------------------------
 
 Let's start with our free HiveMQ Cloud account. Go to [auth.hivemq.cloud](https://auth.hivemq.cloud) \> "Sign Up Now" and create a login. Once logged in, you will be presented with your clusters. By pressing the "Manage Cluster" button, you will be directed to a view containing the details of your HiveMQ Cloud instance.
 ![](hivemq-your-clusters.png) Your clusters
@@ -42,8 +42,8 @@ Let's start with our free HiveMQ Cloud account. Go to [auth.hivemq.cloud](https:
 Go to the "Access Management" section and create a user name and password for the credentials we will use in our applications.
 ![](hivemq-access-management-1024x582.png) Access Management
 
-About Raspberry Pi {#h2-1-about-raspberry-pi}
----------------------------------------------
+About Raspberry Pi
+------------------
 
 The Raspberry Pi isn't just a small, inexpensive computer-for-everyone. No, the latest version 4 has evolved to a powerful machine that can replace a full-size desktop or notebook for many use-cases.
 
@@ -57,7 +57,7 @@ The "magic part" of the Raspberry Pi is the 40-pins header which allows you to c
 
 post to send sensor data to HiveMQ Cloud.
 
-### Java on Raspberry Pi {#h3-2-java-on-raspberry-pi}
+### Java on Raspberry Pi
 
 When you start with a new Raspberry Pi, you will need to "burn" an Operating System to an SD card. On the [software page of the Raspberry Pi website](https://www.raspberrypi.com/software/), you can find the "Imager" tool. With this tool you can burn one of the pre-defined OS-versions, or select an image you downloaded from another site. If you select "Raspberry Pi OS (other)" \> "Raspberry Pi OS Full (32-bit)", you will have a full Linux desktop environment with extra programming tools.
 ![](imager-full-1024x677.png) Raspberry Pi Imager tool
@@ -74,7 +74,7 @@ OpenJDK Server VM (build 11.0.12+7-post-Raspbian-2deb10u1, mixed mode)
 
 This means we are fully prepared to develop and run Java applications on our Raspberry Pi!
 
-### Pi4J {#h3-3-pi4j}
+### Pi4J
 
 The Pi4J project (started in 2012) aims to unite Java programming with electronics. By using the Pi4J-dependency in a project, electronic components connected to the GPIO-pins (General Purpose Input/Output) of the Raspberry Pi can be controlled as objects in the Java-code. Pi4J uses native libraries to control the GPIOs so you - as a programmer - don't need to be fully aware of all the "magic" which relates to hardware communication.
 ![](pi4j-overview-1024x427.jpg) Pi4J overview
@@ -94,21 +94,21 @@ Since 2019 work was ongoing for a completely new version 2 of Pi4J to bring modu
 
 Together with this V2, a new [documentation website was published](https://pi4j.com) where you can find a lot of information about electronics and how to use Java and JavaFX on the Raspberry Pi.
 
-Java project {#h2-4-java-project}
----------------------------------
+Java project
+------------
 
 The first application we will create is a data-publisher and the full sources are available on [GitHub](https://github.com/FDelporte/HiveMQ-examples). We will read from different sensors and send their values to HiveMQ Cloud. Because every "maker" will have his/her own ideas and wishes for a project, we will not focus on components and wiring, but use an easy starter kit that is perfect for this demo project: the [CrowPi](https://www.elecrow.com/crowpi.html). This pre-wired kit makes it very easy to get started with electronics programming as all the components are pre-assembled and  
 
 wired. So at least that's one thing you don't need to worry about or can mess up ;-).
 ![](crowpi1-1024x1024.jpg) CrowPi version 1
 
-### Based on the CrowPi project by FHNW {#h3-5-based-on-the-crowpi-project-by-fhnw}
+### Based on the CrowPi project by FHNW
 
 Students from the [Swiss FHNW University](https://www.fhnw.ch/en/) created a full Java-project for the CrowPi to demonstrate how all the components in this kit can be controlled with Java. Part of their documentation has been translated and is available on the [Pi4J website](https://pi4j.com/getting-started/crowpi/), the original German documentation can be found on ["CrowPi Goes Java"](https://fhnw-ip5-ip6.github.io/CrowPiGoesJavaTutorial/de/). For each component they created a separate application so it becomes very clear how you can use their code as the foundation for your own project.
 
 The proof-of-concept-application in this article, uses some parts of the "CrowPi Goes Java"-project which are refactored to fit into a stand-alone application to read from different sensors at the same time, or listen to their change events and publish data to HiveMQ.
 
-### Maven pom.xml {#h3-6-maven-pom-xml}
+### Maven pom.xml
 
 The Pi4J library uses the modular approach and building a project for the Raspberry Pi generates a directory with all the required files. Because of this the pom-file can look a bit overwhelming.
 
@@ -127,7 +127,7 @@ By using multiple plugins the following steps are taken:
 * Copy a `run.sh` script in the distribution directory
 * Add the runtime dependencies in that same directory
 
-### Code {#h3-7-code}
+### Code
 
 To make the code easy to understand, each functionality has been separated into its own class. `HiveMqSender.java` is the main class where everything is initialized and the application started.
 
@@ -361,7 +361,7 @@ Pi4J also provides a builder-pattern to configure the GPIOs. For this sensor whi
 * pull up or down: how state changes need to be handled
 * debounce: interval between state changes to avoid a too fast "ping-pong" between state changes
 
-### CrowPi OS {#h3-8-crowpi-os}
+### CrowPi OS
 
 You can run this project on any Raspberry Pi OS which has Java, but when you run it on a CrowPi, you can get a kickstart by using the [CrowPi OS](https://pi4j.com/getting-started/crowpi/crowpi-os/) which is part of the Pi4J project (again, thanks to the FHNW University).
 
@@ -373,7 +373,7 @@ But even with these tweaks, the results are not 100% reliable. This kind of sens
 One last remark: this project uses the tilt sensor, which needs to be enabled with a dip switch on the CrowPi board:
 ![](switch-tilt-sensor.png) DIP switch for the tilt sensor on the CrowPi
 
-### Building and running on Raspberry Pi {#h3-9-building-and-running-on-raspberry-pi}
+### Building and running on Raspberry Pi
 
 You can develop a Java project on your PC and copy the jar-files to the Raspberry Pi. Or copy the sources and compile on the board. Or of course develop on the Raspberry Pi itself (for example with Visual Studio Code). Each has its own pro and contra. On the [Pi4J-website in the "Getting Started" section](https://pi4j.com/getting-started/), more info is provided for each approach.
 
@@ -403,7 +403,7 @@ After some startup logging, you will see the scheduled messages and events of di
 ```
 
 
-### WebSocket test page {#h3-10-websocket-test-page}
+### WebSocket test page
 
 The logging of our application shows data is published to HiveMQ Cloud, but we want to be sure before we continue to create a client... Luckily there is a websocket client we can use to do this test very easily! Head over to [hivemq.com/demos/websocket-client/](http://www.hivemq.com/demos/websocket-client/) and fill in all the fields with your credentials. Make sure to select the `SSL` check box! When all is filled in correctly, and you hit the `Connect` button, you will get a green `connected` indication on top.
 ![](hivemq-websockets-1024x493.png) HiveMQ WebSocket tester
@@ -413,8 +413,8 @@ Now we can define the topics we want to subscribe to, e.g. "crowpi/motion", "cro
 
 Great! We have data flowing from our Raspberry Pi to HiveMQ Cloud!!!
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 As always, when you combine Java with Maven, a project like this can be achieved with minimal code and still be easy to understand and manage. Pi4J adds the required tools to hide the complexity of dealing with GPIOs and 'converts' the electronic components to Java objects.
 

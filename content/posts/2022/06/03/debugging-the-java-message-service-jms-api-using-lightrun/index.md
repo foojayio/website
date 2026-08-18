@@ -36,8 +36,8 @@ It's important to note that there are two messaging models in JMS: the publish-a
 
 Let's go over a quick demo.
 
-A Simple Demo {#h2-0-a-simple-demo}
------------------------------------
+A Simple Demo
+-------------
 
 In order to debug the Java Message Service calls, I've created a simple demo application, whose source code can be [found here](https://github.com/lightrun-platform/lightrun/tree/main/examples).
 
@@ -90,8 +90,8 @@ public class EventListener {
 
 The listener is invoked with the JSON string that is sent to the listener, which we parse and send on to the service.
 
-Debugging the Hidden Code {#h2-1-debugging-the-hidden-code}
------------------------------------------------------------
+Debugging the Hidden Code
+-------------------------
 
 The great thing about abstractions like Spring and JMS is that you don't need to write a lot of boilerplate code. Unfortunately, message-oriented middleware of this type hides a lot of fragile implementation details that can fail along the way.
 
@@ -113,8 +113,8 @@ In the stack above, you can see that the execute method is invoked by the method
 
 Notice that here we can place a condition on the specific topic and narrow things down.
 
-TL;DR {#h2-2-tl-dr}
--------------------
+TL;DR
+-----
 
 We pick messaging systems to make our application reliable.
 

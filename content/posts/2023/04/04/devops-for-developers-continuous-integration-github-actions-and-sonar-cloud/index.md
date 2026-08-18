@@ -47,8 +47,8 @@ CI often goes hand in hand with Continuous Delivery (CD) which aims to automate 
 
 With CD, every code change that passes the CI tests is considered ready for deployment, allowing teams to deploy new releases at any time with confidence. I won't discuss continuous delivery in this post but I will go back to it as there's a lot to discuss. I'm a big fan of the concept but there are some things we need to monitor.
 
-Continuous Integration Tools {#h2-0-continuous-integration-tools}
------------------------------------------------------------------
+Continuous Integration Tools
+----------------------------
 
 There are many powerful continuous integration tools. Here are some commonly used tools:
 
@@ -71,7 +71,7 @@ In general, Jenkins is known for its versatility and extensive plugin library, m
 
 GitLab CI/CD is a popular choice for teams using GitLab for their source code management, as it offers integrated CI/CD capabilities. Bitbucket Pipelines is a good choice for teams using Bitbucket for their source code management, as it integrates seamlessly with the platform.
 
-### Cloud vs. On Premise {#h3-1-cloud-vs-on-premise}
+### Cloud vs. On Premise
 
 The hosting of agents is an important factor to consider when choosing a CI solution. There are two main options for agent hosting: cloud-based and on-premise.
 
@@ -80,7 +80,7 @@ The hosting of agents is an important factor to consider when choosing a CI solu
 
 When choosing a CI solution, it's important to consider your team's specific needs and requirements. For example, if you have a large and complex build pipeline, an on-premise solution such as Jenkins may be a better choice, as it gives you more control over the underlying infrastructure. On the other hand, if you have a small team with simple needs, a cloud-based solution such as Travis CI may be a better choice, as it is easy to set up and manage.
 
-### Agent Statefulness {#h3-2-agent-statefulness}
+### Agent Statefulness
 
 Statefulness determines whether the agents retain their data and configurations between builds.
 
@@ -95,7 +95,7 @@ With a stateful agent, we can log into the machine and try to run the process ma
 
 I disagree with that but that's a personal opinion. I feel I spent more time troubleshooting bad agent cleanup than I benefited from investigating a bug. But that's a personal experience and some smart friends of mine disagree.
 
-### Repeatable Builds {#h3-3-repeatable-builds}
+### Repeatable Builds
 
 Repeatable builds refer to the ability to produce the same exact software artifacts every time a build is performed, regardless of the environment or the time the build is performed. From a DevOps perspective, having repeatable builds is essential to ensuring that software deployments are consistent and reliable.
 
@@ -131,7 +131,7 @@ This is a hotly debated topic. Some engineers believe that this encourages buggy
 
 It is important to keep statistics of test failures and never simply press retry. By tracking the problematic tests and the order of execution for a failure, we can often find the source of the problem. Most times the root cause of the failure happens because of faulty cleanup in a prior test, which is why the order matters and its consistency is also important.
 
-### Developer Experience and CI Performance {#h3-4-developer-experience-and-ci-performance}
+### Developer Experience and CI Performance
 
 We're here to develop a software product, not a CI tool. The CI tool is here to make the process better. Unfortunately, many times the experience with the CI tool is so frustrating that we end up spending more time on logistics than actually writing code.
 
@@ -147,8 +147,8 @@ This contributes to a less than stellar developer experience, especially as a te
 
 Ultimately, this connects directly to the productivity of the developers. But we don't have profilers for these sorts of optimizations. We have to measure each time, this can be painstaking.
 
-GitHub Actions {#h2-5-github-actions}
--------------------------------------
+GitHub Actions
+--------------
 
 GitHub Actions is a continuous integration/continuous delivery (CI/CD) platform built into GitHub. It is stateless although it allows the self-hosting of agents to some degree. I'm focusing on it since it's free for open-source projects and has a decent free quota for closed-source projects.
 
@@ -249,8 +249,8 @@ void testActivateAccount() throws Exception {
 
 This means the assert call failed. `isActivated()` returned `false` and failed the test. This should help a developer narrow down the issue and understand the root cause.
 
-Going Beyond {#h2-6-going-beyond}
----------------------------------
+Going Beyond
+------------
 
 As we mentioned before CI is about developer productivity. We can go much further than merely compiling and testing. We can enforce coding standards, lint the code, detect security vulnerabilities and much more. In this example let's integrate Sonar Cloud which is a powerful code analysis tool (linter). It finds potential bugs in your project and helps you improve code quality.
 
@@ -323,8 +323,8 @@ Notice that we have tabs that explain exactly why the issue is a problem, how to
 
 Two additional interesting elements we saw before are the coverage and duplication reports. SonarCloud expects that tests will have 80% code coverage (trigger 80% of the code in a pull request), this is high and can be configured in the settings. It also points out duplicate code which might indicate a violation of the Don't Repeat Yourself (DRY) principle.
 
-Finally {#h2-7-finally}
------------------------
+Finally
+-------
 
 CI is a huge subject with many opportunities to improve the flow of your project.
 

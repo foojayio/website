@@ -23,8 +23,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 One of the most useful features of real-time stream processing is to combine the strengths and advantages of various technologies to provide a unique developer experience and an efficient way of processing data in real time at scale.
 
@@ -39,8 +39,8 @@ Meanwhile, Apache Pulsar **can be used for** both messaging and streaming use ca
 
 ![](https://hazelcast.com/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-14.00.51.png)
 
-Prerequisites {#h2-1-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 We're building an application where we ingest data from Apache Pulsar into Hazelcast and then process it in real-time. To run this application, make sure your system has the following components:
 
@@ -106,8 +106,8 @@ hz-mc -V
 ```
 
 
-Data collection {#h2-2-data-collection}
----------------------------------------
+Data collection
+---------------
 
 For our application, we wish to ingest air quality readings from around the United States via the AirNow data provider.
 
@@ -155,8 +155,8 @@ Example PM2.5 Data
 
 ![](https://hazelcast.com/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-14.01.42.png)
 
-Data processing {#h2-3-data-processing}
----------------------------------------
+Data processing
+---------------
 
 In order to process the data collected, we used the[Hazelcast Pulsar connector](https://docs.hazelcast.com/hazelcast/latest/pipelines/pulsar) module to ingest data from Pulsar topics (note: you can use the same connector to write to Pulsar topics).
 
@@ -241,8 +241,8 @@ hz-stop
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, we have demonstrated how you can combine the strengths and advantages of various technologies to provide a unique developer experience and an efficient way of processing data in real time at scale.
 
@@ -256,16 +256,16 @@ Pulsar allows you to use your choice of messaging protocols to quickly distribut
 
 StreamNative is the company made up of the original creators of Apache Pulsar and Apache BookKeeper. StreamNative provides a full enterprise experience for Apache Pulsar in the cloud and on premise.
 
-More on Hazelcast {#h2-5-more-on-hazelcast}
--------------------------------------------
+More on Hazelcast
+-----------------
 
 * **Join us on our Real-Time Stream Processing Unconference (#RTSPUnconf): <https://hazelcast.com/lp/unconference/>**
 * Learn the Hazelcast Fundamentals: Start a Local Cluster with the [CLI](https://docs.hazelcast.com/hazelcast/latest/getting-started/get-started-cli) or [Docker](https://docs.hazelcast.com/hazelcast/latest/getting-started/get-started-docker).
 * Start a [Viridian Serverless Cluster](https://viridian.hazelcast.com/): Serverless is a managed cloud service that offers a pay-as-you-go pricing model. Serverless clusters auto-scale to provide the resources that your application needs. You pay only for the resources that your application consumes.
 * Join the Hazelcast [Slack](https://slack.hazelcast.com/) and Hazelcast [Github](https://github.com/hazelcast/hazelcast) repository.
 
-More on Apache Pulsar {#h2-6-more-on-apache-pulsar}
----------------------------------------------------
+More on Apache Pulsar
+---------------------
 
 * Learn the Pulsar Fundamentals: While this blog did not cover the Pulsar fundamentals, there are great resources available to help you learn more. If you are new to Pulsar, we recommend you to take the [self-paced Pulsar courses](https://www.academy.streamnative.io/tracks) or [instructor-led Pulsar training](https://streamnative.io/training/) developed by some of the original creators of Pulsar. This will get you started with Pulsar and accelerate your streaming immediately.
 * Spin up a Pulsar Cluster in Minutes: If you want to try building microservices without having to set up a Pulsar cluster yourself, sign up for [StreamNative Cloud](https://streamnative.io/streamnativecloud/) today. StreamNative Cloud is a simple, fast, and cost-effective way to run Pulsar in the public cloud.

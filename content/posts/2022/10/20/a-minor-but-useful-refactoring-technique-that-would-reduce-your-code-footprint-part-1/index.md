@@ -34,8 +34,8 @@ Anyway, since we have already moved to 11, I was wondering what smaller changes 
 
 I was looking for smaller changes, not major ones. So this article is about the first step of some smaller changes that I made.
 
-Immutable collections {#h2-0-immutable-collections}
----------------------------------------------------
+Immutable collections
+---------------------
 
 For many reasons, we often need immutable collections.
 
@@ -74,8 +74,8 @@ Map.of("bazlur", "Bangladesh",
 ```
 
 
-Null checking if blocks {#h2-1-null-checking-if-blocks}
--------------------------------------------------------
+Null checking if blocks
+-----------------------
 
 In the huge projects that have accumulated code over many years, you will find many if blocks that only check whether the object is null or not. Based on that, it takes specific actions.
 
@@ -110,8 +110,8 @@ Or, optionally, we can use an `Optional` idiom as well.
 
 All of them are just fine, but however, I like the new method, Objects.requireNonNullElse(), which makes it more descriptive, and thus the code becomes more readable as well as shorter.
 
-Repeating strings {#h2-2-repeating-strings}
--------------------------------------------
+Repeating strings
+-----------------
 
 In many cases, you want to repeat the same string multiple times.
 

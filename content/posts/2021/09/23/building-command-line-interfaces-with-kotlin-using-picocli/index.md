@@ -18,12 +18,12 @@ related_posts:
 frozen: false
 ---
 
-*TL;DR : We'll dive into a few interesting bits about CLI applications and picoCLI. But you can directly [see the code here](https://github.com/jlengrand/swacli), or view my related conference talk [here](https://www.youtube.com/watch?v=Rc_D4OTKidU&amp;t=460s).*
+*TL;DR : We'll dive into a few interesting bits about CLI applications and picoCLI. But you can directly [see the code here](https://github.com/jlengrand/swacli), or view my related conference talk [here](https://www.youtube.com/watch?v=Rc_D4OTKidU&t=460s).*
 
 As a developer, there is a large chance that you use Command Line Interfaces (CLIs) every day. From Git, to kubectl or Maven, they are everywhere. In this article, we'll look into use cases where CLIs are a great idea. We'll also dive into best practises, and discover one of the most used library for CLIs in the JVM world: **[picoCLI](https://picocli.info/)**.
 
-Why using Command Line interfaces {#h2-0-why-using-command-line-interfaces}
----------------------------------------------------------------------------
+Why using Command Line interfaces
+---------------------------------
 
 There are a couple reasons why a CLI can be a good use case for you and your users.
 
@@ -57,14 +57,14 @@ There are a couple reasons why a CLI can be a good use case for you and your use
 
 By now, you should be convinced that a CLI can be a nice addition to your developer's toolbelt. So let's have a deeper look into how to create one using Kotlin, and picoCLI.
 
-About picoCLI {#h2-1-about-picocli}
------------------------------------
+About picoCLI
+-------------
 
 [picoCLI](https://picocli.info/) is one of the many options available to you to create CLIs on the JVM. Other possibilities include [Jakarta Commons CLI](https://commons.apache.org/proper/commons-cli/) or [Clikt](https://ajalt.github.io/clikt/) if you're using Kotlin.  
 
 I personally am a big fan of picoCLI because of its amazingly extensive documentation and [how helpful the main author is online](https://twitter.com/jlengrand/status/1318314418825035782). The library has been downloaded over 2.5 million times the past year, and is used in very large projects such as Junit, Spring, or Apache hadoop. The complete list of available features is way too long to be listed here, but today we'll look into **help generation, color support, annotations and compilation to native images**. To do this, we will be creating a simple CLI to return information about Star Wars characters or planets.
 
-### A sample project {#h3-2-a-sample-project}
+### A sample project
 
 The snippet and code used in this article are all directly taken from my swacli demo application. [You can find the code on GitHub](https://github.com/jlengrand/swacli).  
 
@@ -76,8 +76,8 @@ how the gradle configuration looks like in Gradle for a Kotlin project.{#caption
 
 *Note: Even though I love the annotation processor, I tend to disable it because it has a tendency to slow down my IDE a lot.*
 
-Running Hello World {#h2-3-running-hello-world}
------------------------------------------------
+Running Hello World
+-------------------
 
 As usual, the first thing we want to do with a new tool is to run Hello World.  
 
@@ -98,8 +98,8 @@ Result of the help command of sw{#caption-attachment-46683}
 
 *Tip :Make sure to describe all you can when defining your CLI, picoCLI will make sure to generate great help for you and make sure your users are not confused.*
 
-Diving into Options and Arguments {#h2-4-diving-into-options-and-arguments}
----------------------------------------------------------------------------
+Diving into Options and Arguments
+---------------------------------
 
 Without being able to provide any inputs to it, a CLI usage would be very limited. Inputs are usually divided into two main types :
 
@@ -128,8 +128,8 @@ Here is what happens when trying to run the code without specifying one option :
 Missing required argument when running the example. Good!{#caption-attachment-46685}
 > Tip : Don't break conventions that have been there for decades. -i (input) , -o (output), -r (recursive) have typical meanings when using command lines. Make sure to apply those unwritten conventions
 
-SubCommands for a better user experience {#h2-5-subcommands-for-a-better-user-experience}
------------------------------------------------------------------------------------------
+SubCommands for a better user experience
+----------------------------------------
 
 You may already have heard or seen subcommands in CLIs. Subcommands are basically using semantic words to achieve your actions. Typical examples are `kubectl get services`, or `gh repo clone jlengrand/swacli`. SubCommands are perfect in our case because they allow us to get rid of our clunky exclusive options. Let's see how to implement them :  
 
@@ -141,8 +141,8 @@ I omitted all the non-crucial information here. What is important to note is tha
 
 Using this method, users can now search for `sw planets tatooine` or `sw people Luke`.
 
-Colors and Emojis support for clear information display {#h2-6-colors-and-emojis-support-for-clear-information-display}
------------------------------------------------------------------------------------------------------------------------
+Colors and Emojis support for clear information display
+-------------------------------------------------------
 
 Nowadays, all terminals support color schemes as well as emojis (!!). We can leverage those to present information to our users in the clearest possible way and reduce cognitive load. picoCLI supports a custom markup notation that helps with color usage.  
 
@@ -152,8 +152,8 @@ Picturing a *Response* object that contains a number of results, together with d
 
 An example of formatted text using the picoCLI format{#caption-attachment-46687}
 
-Native compilation for a blazing fast experience {#h2-7-native-compilation-for-a-blazing-fast-experience}
----------------------------------------------------------------------------------------------------------
+Native compilation for a blazing fast experience
+------------------------------------------------
 
 The last thing we can do to help our users enjoy our CLI is to make sure it's blazing fast. This is where native compilation and [GraalVM](https://www.graalvm.org/) come into play.
 

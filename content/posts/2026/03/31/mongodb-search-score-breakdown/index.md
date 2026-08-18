@@ -29,16 +29,16 @@ If you've not yet created an MongoDB Search index, it would be helpful to do so 
 
 Welcome back! We see that you've got data, and it lives in MongoDB Atlas. You've turned on MongoDB Search and run some queries, and now you want to understand why the results are in the order they appear and get some tips on tuning the relevancy ranking order.
 
-Relevancy riddle {#h2-0-relevancy-riddle}
------------------------------------------
+Relevancy riddle
+----------------
 
 In the article [Using MongoDB Search from Java,](https://www.mongodb.com/developer/products/atlas/atlas-search-java/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim) we left the reader with a bit of a search relevancy mystery, using a query of the cast field for the phrase "keanu reeves" (lowercase; a \`$match\` fails at even this inexact of a query) narrowing the results to movies that are both dramatic (\`genres:Drama\`) *AND* romantic (\`genres:Romance\`). We'll use that same query here. The results of this query match several documents, but with differing scores. The only scoring factor is a \`must\` clause of the \`phrase\` "keanu reeves"\`. Why don't "Sweet November" and "A Walk in the Clouds" score identically?  
 ![Relevancy Riddle](Screenshot-2026-02-27-at-12.53.48-PM.png)
 
 Can you spot the difference? Read on as we provide you the tools and tips to suss out and solve these kinds of challenges presented by full-text, inexact/fuzzy/close-but-not-exact search results.
 
-Score details {#h2-1-score-details}
------------------------------------
+Score details
+-------------
 
 MongoDB Search makes building full-text search applications possible, and with a few clicks, accepting default settings, you've got incredibly powerful capabilities within reach. You've got a pretty good auto-pilot system, but you're in the cockpit of a 747 with knobs and dials all around. The plane will take off and land safely by itself --- most of the time. Depending on conditions and goals, manually going up to 11.0 on the volume knob, and perhaps a bit more on the thrust lever, is needed to fly there in style. Relevancy tuning can be described like this as well, and before you take control of the parameters, you need to understand what the settings do and what's possible with adjustments.
 
@@ -61,15 +61,15 @@ Content warning! The following output is not for the faint of heart. It's the da
 
 We'll write a little code, below, that presents this nested structure in a more concise, readable format, and delve into the details there. Before we get to breaking down the score, we need to understand where these various factors come from. They come from Lucene.
 
-Lucene inside {#h2-2-lucene-inside}
------------------------------------
+Lucene inside
+-------------
 
 [Apache Lucene](https://lucene.apache.org) powers a large percentage of the world's search experiences, from the majority of e-commerce sites to healthcare and insurance systems, to intranets, to top secret intelligence, and so much more. And it's no secret that Apache Lucene powers MongoDB Search. Lucene has proven itself to be robust and scalable, and it's pervasively deployed. Many of us would consider Lucene to be the most important open source project ever, where a diverse community of search experts from around the world and across multiple industries collaborate constructively to continually improve and innovate this potent project.
 
 So, what is this amazing thing called Lucene? Lucene is an open source search engine library written in Java that indexes content and handles sophisticated queries, rapidly returning relevant results. In addition, Lucene provides faceting, highlighting, vector search, and more.
 
-Lucene indexing {#h2-3-lucene-indexing}
----------------------------------------
+Lucene indexing
+---------------
 
 We cannot discuss search relevancy without addressing the [indexing side](https://www.mongodb.com/developer/products/atlas/introduction-indexes-mongodb-atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim) of the equation as they are interrelated. When documents are added to an Atlas collection with an MongoDB Search index enabled, the fields of the documents are indexed into Lucene according to the configured index mappings.
 
@@ -121,8 +121,8 @@ There are a number of statistics about a document collection that emerge through
 
 These stats lurk in the depths of the Lucene index structure and surface visibly in the score detail output that we've seen above and will delve into below.
 
-Lucene scoring {#h2-4-lucene-scoring}
--------------------------------------
+Lucene scoring
+--------------
 
 The statistics captured during indexing factor into how documents are scored at query time. [Lucene scoring](https://lucene.apache.org/core/9_5_0/core/org/apache/lucene/search/package-summary.html#scoring), at its core, is built upon [TF/IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) --- term frequency/inverse document frequency. Generally speaking, TF/IDF scores documents with higher term frequencies greater than ones with lower term frequencies, and scores documents with more common terms lower than ones with rarer terms --- the idea being that a rare term in the collection conveys more information than a frequently occurring one and that a term's weight is proportional to its frequency.
 
@@ -130,15 +130,15 @@ There's a bit more math behind the scenes of Lucene's implementation of TF/IDF, 
 
 The classic TF/IDF formula has worked well in general, when document fields are of generally the same length, and there aren't nefarious or odd things going on with the data where the same word is repeated many times --- which happens in product descriptions, blog post comments, restaurant reviews, and where boosting a document to the top of the results has some incentive. Given that not all documents are created equal --- some titles are long, some are short, and some have descriptions that repeat words a lot or are very succinct --- some fine-tuning is warranted to account for these situations.
 
-Best matches {#h2-5-best-matches}
----------------------------------
+Best matches
+------------
 
 As search engines have evolved, refinements have been made to the classic TF/IDF relevancy computation to account for term saturation (an excessively large number of the same term within a field) and reduce the contribution of long field values which contain many more terms than shorter fields, by factoring in the ratio of the field length of the document to the average field length of the collection. The now popular [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) method has become the [default scoring formula in Lucene](https://github.com/apache/lucene/blob/releases/lucene/9.7.0/lucene/core/src/java/org/apache/lucene/search/similarities/BM25Similarity.java) and is [the scoring formula used by MongoDB Search](https://www.mongodb.com/docs/atlas/atlas-search/score/get-details/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim#factors-that-contribute-to-the-score). BM25 stands for "Best Match 25" (the 25th iteration of this scoring algorithm). A really great writeup comparing classic TF/IDF to BM25, including illustrative graphs, can be found on [OpenSource Connections](https://opensourceconnections.com/blog/2015/10/16/bm25-the-next-generation-of-lucene-relevation/).
 
 There are built-in values for the additional BM25 factors, \`k1\` and \`b\`. The \`k1\` factor affects how much the score increases with each reoccurrence of the term, and \`b\` controls the effect of field length. Both of these factors are currently internally set to the Lucene defaults and are not settings a developer can adjust at this point, but that's okay as the built-in values have been tuned to provide great relevancy as is.
 
-Breaking down the score details {#h2-6-breaking-down-the-score-details}
------------------------------------------------------------------------
+Breaking down the score details
+-------------------------------
 
 Let's look at those same score details in a slimmer, easier-to-read fashion:  
 ![score details, pretty printed](Screenshot-2026-02-27-at-12.54.56-PM.png)
@@ -161,8 +161,8 @@ This uses the factors indented below it, such as the average length (in number o
 
 In front of each field name in this output ("genres" and "cast") there is a prefix used internally to note the field type (the "$type:string/" prefix).
 
-Pretty printing the score details {#h2-7-pretty-printing-the-score-details}
----------------------------------------------------------------------------
+Pretty printing the score details
+---------------------------------
 
 The more human-friendly output of the score details above was generated using [MongoDB VS Code Playgrounds](https://www.mongodb.com/docs/mongodb-vscode/playgrounds/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim). This JavaScript code will print a more concise, indented version of the scoreDetails, by calling: \`print_score_details(doc.scoreDetails);\`:
 
@@ -180,23 +180,23 @@ function print_score_details(details, indent_level) {
 
 Similarly, pretty printing in Java can be done like the code developed in the article [Using MongoDB Search from Java](https://www.mongodb.com/developer/products/atlas/atlas-search-java/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim), which is [available on GitHub](https://github.com/mongodb-developer/getting-started-search-java/blob/main/src/main/java/com/mongodb/atlas/FirstSearchExample.java#L89-L97).
 
-Mystery solved! {#h2-8-mystery-solved}
---------------------------------------
+Mystery solved!
+---------------
 
 Going back to our Relevancy Riddle, let's see the score details:  
 ![score details showing](Screenshot-2026-02-27-at-12.56.01-PM.png)
 
 Using the detailed information provided about the statistics captured in the Lucene inverted index, it turns out that the \`cast\` fields of these two documents have an interesting difference. They both have four cast members, but remember the analysis process that extracts searchable terms from text. In the lower scoring of the two documents, one of the cast members has a hyphenated last name: Aitana Sènchez-Gijèn. The dash/hyphen character is a term separator character for the \`lucene.standard\` analyzer, making one additional term for that document which in turn increases the length (in number of terms) of the \`cast\` field. A greater field length causes term matches to weigh less than if they were in a shorter length field.
 
-Compound is king {#h2-9-compound-is-king}
------------------------------------------
+Compound is king
+----------------
 
 Even in this simple phrase query example, the scoring is made up of many factors that are the "sum of", "product of", "result of", or "from" other factors and formulas. Relevancy tuning involves crafting clauses nested within a \`compound\` operator using \`should\` and \`must\`. Note again that \`filter\` clauses do not contribute to the score but are valuable to narrow the documents considered for scoring by the \`should\` and \`must\` clauses. And of course, \`mustNot\` clauses don't contribute to the score, as documents matching those clauses are omitted from the results altogether.
 
 Use multiple \`compound.should\` and \`compound.must\` to weight matches in different fields in different ways. It's a common practice, for example, to weight matches in a \`title\` field higher than matches in a \`description\` field (or \`plot\` field in the movies collection), using boosts on different query operator clauses.
 
-Boosting clauses {#h2-10-boosting-clauses}
-------------------------------------------
+Boosting clauses
+----------------
 
 With a query composed of multiple clauses, you have control over [modifying the score](https://www.mongodb.com/docs/atlas/atlas-search/score/modify-score/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-rel-foojay&utm_term=tony.kim) in various ways using the optional \`score\` setting available on all search operators. Scoring factors for a clause can be controlled in these four ways:
 
@@ -207,8 +207,8 @@ With a query composed of multiple clauses, you have control over [modifying the 
 
 That's a lot of nuanced control! These are important controls to have when you're deep into tuning search results rankings.
 
-Relevancy tuning: a delicate balance {#h2-11-relevancy-tuning-a-delicate-balance}
----------------------------------------------------------------------------------
+Relevancy tuning: a delicate balance
+------------------------------------
 
 With the tools and mechanisms illustrated here, you've got the basics of MongoDB Search scoring insight. When presented with the inevitable results ranking challenges, you'll be able to assess the situation and understand why and how the scores are computed as they are. Tuning those results is tricky. Nudging one query's results to the desired order is fairly straightforward, but that's just one query.
 

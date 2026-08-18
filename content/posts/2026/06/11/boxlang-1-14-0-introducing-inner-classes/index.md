@@ -34,8 +34,8 @@ This post covers both flavors of locally defined classes shipped in 1.14.0: **Te
 * <https://boxlang.ortusbooks.com/boxlang-language/classes/inner-classes>
 * <https://boxlang.ortusbooks.com/boxlang-language/classes/template-classes>
 
-The Two Flavors {#h2-0-the-two-flavors}
----------------------------------------
+The Two Flavors
+---------------
 
 Before diving in, a quick orientation:
 
@@ -50,8 +50,8 @@ Before diving in, a quick orientation:
 
 Both share the same fundamental capability: define a class right where you need it, with zero boilerplate. The difference is where you need it. Please also note that in BoxLang you cannot define classes using template markup and this feature applies ONLY to BoxLang templates: `bx, bxs, bxm`
 
-Template Classes {#h2-1-template-classes}
------------------------------------------
+Template Classes
+----------------
 
 A template class is a named class declared inline inside a `.bxs` script or a `.bxm` template's \<bx:script\> block.
 
@@ -71,7 +71,7 @@ result = new Greeter().greet( "World" )
 
 That is a complete, fully functional BoxLang script. No imports, no file path, no module resolution. The class is defined and used in the same compilation unit.
 
-### Hoisting {#h3-2-hoisting}
+### Hoisting
 
 Template classes are **hoisted** to the top of their compilation unit. You can instantiate a class before its textual definition appears - which keeps the "main logic first" narrative flow that makes scripts readable:
 
@@ -87,7 +87,7 @@ class Greeter {
 ```
 
 
-### Multiple Classes in One Script {#h3-3-multiple-classes-in-one-script}
+### Multiple Classes in One Script
 
 Multiple template classes coexist naturally. They can even reference each other:
 
@@ -111,7 +111,7 @@ result     = multiplier.multiply( adder.add( 2, 3 ), 4 )
 ```
 
 
-### Properties, Constructors, and Static Members {#h3-4-properties-constructors-and-static-members}
+### Properties, Constructors, and Static Members
 
 Template classes are full-featured BoxLang classes. Properties, `init()` constructors, and static blocks all work exactly as they do in file-based classes:
 
@@ -153,7 +153,7 @@ MathUtil::circleArea( 5 )    // → ~78.54
 ```
 
 
-### Inheritance {#h3-5-inheritance}
+### Inheritance
 
 Template classes can extend other template classes defined in the same script, including multi-level chains and `super` delegation:
 
@@ -181,7 +181,7 @@ new Circle( 5 ).describe()    // → "Area: 78.53975"
 ```
 
 
-### Java Interoperability {#h3-6-java-interoperability}
+### Java Interoperability
 
 Template classes can implement Java interfaces and extend Java classes, making them a clean fit for interop patterns:
 
@@ -202,7 +202,7 @@ r.getDidRun()    // → true
 ```
 
 
-### Imports Are Shared {#h3-7-imports-are-shared}
+### Imports Are Shared
 
 Template classes inherit the enclosing script's imports. Java types are available directly without any extra ceremony:
 
@@ -225,7 +225,7 @@ new Event( "Launch" ).getInfo()    // → "Launch at Wed Jun 03 ..."
 ```
 
 
-### Template Classes in `.bxm` Files {#h3-8-template-classes-in-bxm-files}
+### Template Classes in `.bxm` Files
 
 Template classes work inside \<bx:script\> islands in markup templates, bringing the same capability to your view layer:
 
@@ -250,8 +250,8 @@ Template classes work inside \<bx:script\> islands in markup templates, bringing
 ```
 
 
-Inner Classes {#h2-9-inner-classes}
------------------------------------
+Inner Classes
+-------------
 
 An inner class is a named class declared **inside the body of another class** in a `.bx` file. Where template classes are scoped to a single compilation unit, inner classes are part of their enclosing class's compiled output and are accessible from outside via the `$` separator syntax.
 
@@ -282,7 +282,7 @@ w.getLabel()    // → "header-nav"
 ```
 
 
-### Hoisting in Inner Classes {#h3-10-hoisting-in-inner-classes}
+### Hoisting in Inner Classes
 
 Like template classes, inner classes are hoisted within the class body. You can instantiate an inner class in a function that appears before the inner class definition:
 
@@ -305,7 +305,7 @@ new Outer().getWidget().getName()    // → "widget"
 ```
 
 
-### Multiple and Nested Inner Classes {#h3-11-multiple-and-nested-inner-classes}
+### Multiple and Nested Inner Classes
 
 A class can contain as many inner classes as it needs. Inner classes can themselves contain inner classes:
 
@@ -341,7 +341,7 @@ first.getSecond().getDepth()  // → "second"
 ```
 
 
-### Inheritance Between Inner Classes {#h3-12-inheritance-between-inner-classes}
+### Inheritance Between Inner Classes
 
 Inner classes can extend other inner classes in the same outer class, enabling polymorphic patterns without the overhead of separate files:
 
@@ -376,7 +376,7 @@ zoo.getCat().speak()    // → "Meow!"
 ```
 
 
-### Accessing Outer Class Statics {#h3-13-accessing-outer-class-statics}
+### Accessing Outer Class Statics
 
 Inner classes can reach back into their enclosing class's static members via dot or double-colon notation:
 
@@ -406,7 +406,7 @@ v.getAppName()         // → "MyApp"
 ```
 
 
-### External Access via `$` Syntax {#h3-14-external-access-via-syntax}
+### External Access via `$` Syntax
 
 Inner classes are compiled as sibling JVM classes with `$`-delimited names. This means they are accessible from anywhere - not just from within the outer class:
 
@@ -421,7 +421,7 @@ second.getDepth()    // → "second"
 ```
 
 
-### Importing Inner Classes {#h3-15-importing-inner-classes}
+### Importing Inner Classes
 
 You can import inner classes directly, with or without an alias:
 
@@ -453,7 +453,7 @@ w = new widgetClass( "via-reference" )
 ```
 
 
-### Java Interoperability {#h3-16-java-interoperability}
+### Java Interoperability
 
 Inner classes are especially powerful for Java interop patterns like `Iterator` implementations, where the inner class is tightly coupled to its parent but needs to satisfy a Java interface contract:
 
@@ -510,8 +510,8 @@ while ( iter.hasNext() ) {
 ```
 
 
-Introspection and Metadata {#h2-17-introspection-and-metadata}
---------------------------------------------------------------
+Introspection and Metadata
+--------------------------
 
 Both template classes and inner classes expose full metadata through BoxLang's standard reflection API.
 
@@ -541,8 +541,8 @@ isInstanceOf( widget, "models.Container$Widget" )   // → true
 ```
 
 
-When to Use Which {#h2-18-when-to-use-which}
---------------------------------------------
+When to Use Which
+-----------------
 
 **Use template classes** when:
 
@@ -564,8 +564,8 @@ When to Use Which {#h2-18-when-to-use-which}
 * The class is a primary domain model, service, or handler
 * Reusability and discoverability matter more than co-location
 
-Getting Started {#h2-19-getting-started}
-----------------------------------------
+Getting Started
+---------------
 
 Both features are available in **BoxLang 1.14.0** with no configuration required.
 

@@ -41,8 +41,8 @@ Though they never said so, there's an implicit consequence of this statement: be
 
 The premise that the code that runs inside your infrastructure can be trusted is dangerous - on-premise or in the Cloud. Let me enumerate some arguments that support this claim.
 
-Libraries can't be trusted {#h2-0-libraries-can-t-be-trusted}
--------------------------------------------------------------
+Libraries can't be trusted
+--------------------------
 
 Wise developers don't reinvent the wheel: they use existing libraries and/or frameworks.
 
@@ -52,15 +52,15 @@ In two decades in the industry, I've never seen such an audit happen.
 
 One could argue in favor of custom code. Unfortunately, it doesn't solve anything. Custom code suffers from the same issues, bugs, and vulnerabilities. Worse, it doesn't get the same attention as standard libraries, so researchers cannot spend their time to find these issues, which costs nothing.
 
-Builds can't be trusted {#h2-1-builds-can-t-be-trusted}
--------------------------------------------------------
+Builds can't be trusted
+-----------------------
 
 Imagine that you have all resources necessary to audit the code - time, money, and skills. Imagine further that the audit reveals nothing fishy. Finally, imagine that the audit's conclusion is 100% reliable.
 
 The issue is that nothing guarantees that the JAR is the result of the build from the source code, even if the build is public. A malicious provider could replace the genuine JAR with another one.
 
-Identities can't be trusted {#h2-2-identities-can-t-be-trusted}
----------------------------------------------------------------
+Identities can't be trusted
+---------------------------
 
 A provider can sign a JAR to guarantee it's genuine. The signature is based on asymmetric cryptography:
 
@@ -124,8 +124,8 @@ PGP key:
 
 However, none of this amounts to much. Signing doesn't assert the identity of the provider. It tells that a private key with the referenced email signed it with a private key with the referenced email. Nothing prevents a malicious actor from creating another private key with the same email or a similar one.
 
-Features can't be trusted {#h2-3-features-can-t-be-trusted}
------------------------------------------------------------
+Features can't be trusted
+-------------------------
 
 At this point, I think the picture looks pretty gloomy. But it's even worse than that. None of the above explains the Log4J vulnerability. The core reason is that it provides features that most developers neither need nor use.
 
@@ -137,8 +137,8 @@ This kind of hidden features is not specific to Log4J. I happen to know there's 
 
 The problem is that developers use a library for their core capability, *e.g.* , logging. If one stops at that, one will never know all the library's capabilities. Hence, one will be surprised when the library does something it was not assumed to do, *e.g.*, read from a remote JNDI resource tree.
 
-The JVM can't be trusted {#h2-4-the-jvm-can-t-be-trusted}
----------------------------------------------------------
+The JVM can't be trusted
+------------------------
 
 I admit the section's title is misleading, but I couldn't find a good one following the series. It's a follow-up to the previous section, this time applied to the JVM.
 
@@ -154,8 +154,8 @@ However:
 
 May I suggest that the first thing you do tomorrow is to check your infrastructure and disable it?
 
-The Security Manager could be trusted {#h2-5-the-security-manager-could-be-trusted}
------------------------------------------------------------------------------------
+The Security Manager could be trusted
+-------------------------------------
 
 I hope that at this point, you understand the problem. A lot of code that you're running can't be trusted. Worse, I'm only considering regular applications: software built on a plugin architecture run untrusted code by definition.
 
@@ -165,8 +165,8 @@ The Security Manager came with several drawbacks, chief amongst them is that it 
 
 Since many didn't know about tools, few did use the Security Manager. But when it was, it was very beneficial. To prove my claim, you can read [this post](https://xeraa.net/blog/2021_mitigate-log4j2-log4shell-elasticsearch/) or jump to the conclusion: *though Elasticsearch embeds a vulnerable Log4J version, it's not susceptible to Log4Shell!*
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Security is a Non-Functional Requirement. s don't bring any competitive advantage and cost money. In short, they divert the budget from business requirements to `/dev/null`. That's at least how most business departments see it.
 

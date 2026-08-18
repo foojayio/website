@@ -55,7 +55,7 @@ And here are our overall conclusions:
 
 This post is Part 1 of a two-part series and presents our findings for the two streaming scenarios. In Part 2, we'll present the results for batch processing.
 
-### Streaming Pipeline Benchmark {#h3-0-streaming-pipeline-benchmark}
+### Streaming Pipeline Benchmark
 
 For the streaming benchmarks, we used the code available [here](https://github.com/mtopolnik/jet-gc-benchmark/blob/master/src/main/java/org/example/StreamingBenchmark.java), with some minor variations between the tests. Here is the main part, the Jet pipeline:
 

@@ -29,15 +29,15 @@ A single security fix, backported from Payara 7 down to Payara 4, runs through e
 
 [Download Payara Here](https://payara.fish/downloads/)
 
-A Critical Security Fix, Patched Across Every Branch {#h2-0-a-critical-security-fix-patched-across-every-branch}
-----------------------------------------------------------------------------------------------------------------
+A Critical Security Fix, Patched Across Every Branch
+----------------------------------------------------
 
 A CSRF and SSRF issue in the Admin Console and REST management interface has been addressed in all five releases: Azul Payara Community 7.2026.6, and Azul Payara 7.1.0, 6.39.0, 5.88.0, and 4.1.2.191.55-era branches.
 
 Shipping the patch across the full supported lifecycle, not only the latest major release, is the practice long-running Azul customers rely on. Azul is a registered CVE Numbering Authority (CNA) under CISA and DHS oversight, with patches backported to every supported version on a published monthly schedule. There is no reason to delay upgrading based on the major-version line you run.
 
-Azul Payara 7.1.0: Supported Payara 7, Post-GA {#h2-1-azul-payara-7-1-0-supported-payara-7-post-ga}
----------------------------------------------------------------------------------------------------
+Azul Payara 7.1.0: Supported Payara 7, Post-GA
+----------------------------------------------
 
 Azul Payara 7.1.0 is the first monthly supported release on the Payara 7 line since Server 7 and Micro 7 reached general availability. It holds Final Jakarta EE 11 certification and ships MicroProfile 6.1: Config, Metrics, Health, Fault Tolerance, JWT, OpenAPI, REST Client, and Telemetry Tracing.
 
@@ -53,7 +53,7 @@ Several Jakarta EE 11 components reached their GA milestones in this cycle, movi
 
 Jakarta Data, the headline API addition of Jakarta EE 11, received two improvements worth noting for teams building repository-based data access. Method-level @Transactional overrides are now supported on repository interfaces, giving fine-grained control over transaction boundaries per method. A performance fix also stops the runtime parsing method names on every Jakarta Data HTTP request.
 
-### Bug Fixes {#h3-2-bug-fixes}
+### Bug Fixes
 
 • Fixed the MicroProfile /metrics endpoint returning duplicate metrics.  
 
@@ -65,7 +65,7 @@ Jakarta Data, the headline API addition of Jakarta EE 11, received two improveme
 
 • Fixed a Payara Micro NullPointerException triggered by the log-to-console access log option.
 
-### ImprovementsImprovements {#h3-3-improvementsimprovements}
+### ImprovementsImprovements
 
 • Reintroduced standalone OpenMQ support for Windows.  
 
@@ -77,19 +77,19 @@ Jakarta Data, the headline API addition of Jakarta EE 11, received two improveme
 
 • Added a warning when OpenMQ runs with default credentials.
 
-### Component Upgrades {#h3-4-component-upgrades}
+### Component Upgrades
 
 Beyond the GA milestones above, the 7 line moves Jackson BOM to 2.22.0, Kotlin stdlib to 2.4.0, Nimbus JOSE JWT to 10.9.1, ASM to 9.10.1, Woodstox to 7.2.0, and JAXB-Impl to 4.0.9, among others. The full list is in the release notes.
 
-Azul Payara Community 7.2026.6 {#h2-5-azul-payara-community-7-2026-6}
----------------------------------------------------------------------
+Azul Payara Community 7.2026.6
+------------------------------
 
 Community 7.2026.6 tracks the Payara 7 development line and carries the same security fix, bug fixes, and component upgrades as Azul Payara 7.1.0. It adds one community-driven item of its own: updated SSH provider support, including SSH on Windows.
 
 ***Thanks to community contributor lprimak for the session retrieval fix (JSESSIONIDVERSION in relaxed mode) included in this release.***
 
-Behaviour Change to Note: Server "Ready" Signal Timing {#h2-6-behaviour-change-to-note-server-ready-signal-timing}
-------------------------------------------------------------------------------------------------------------------
+Behaviour Change to Note: Server "Ready" Signal Timing
+------------------------------------------------------
 
 Azul Payara 5.88.0 and 6.39.0 change the default value of the fish.payara.ready-after-applications system property. The undefined default moves from false to true, aligning Payara 5 and 6 with the behaviour already shipping in Payara 7. Users need do nothing; this is already their default -- both for Azul Payara and Azul Payara Community.
 
@@ -103,38 +103,38 @@ To keep the earlier behaviour, set the property explicitly:
 
 The property is documented in the system property inventory under General Runtime Administration in the Payara Server documentation.
 
-Azul Payara 6.39.0: Jakarta EE 10, Continued {#h2-7-azul-payara-6-39-0-jakarta-ee-10-continued}
------------------------------------------------------------------------------------------------
+Azul Payara 6.39.0: Jakarta EE 10, Continued
+--------------------------------------------
 
 Azul Payara 6.39.0 continues the Jakarta EE 10 and MicroProfile 6.1 line for customers not yet on Payara 7. Alongside the cross-cycle security fix and the ready-signal change above, it carries the shared bug fixes for MicroProfile metrics, session retrieval, and the log-to-console NullPointerException.
 
-### Component Upgrades {#h3-8-component-upgrades}
+### Component Upgrades
 
 Kotlin stdlib moves to 2.3.21, Jackson BOM to 2.21.3, ASM to 9.10.1, JLine to 3.30.13, the StAX2 API to 4.3.0, and Grizzly NPN OSGi to 2.0.1.
 
-Azul Payara 5.88.0: Jakarta EE 8, Continued {#h2-9-azul-payara-5-88-0-jakarta-ee-8-continued}
----------------------------------------------------------------------------------------------
+Azul Payara 5.88.0: Jakarta EE 8, Continued
+-------------------------------------------
 
 Azul Payara 5.88.0 retains the javax.*namespace, Jakarta EE 8, and MicroProfile 4.1 for long-lived applications that have not migrated to the jakarta.* namespace. It picks up the security fix, the ready-signal behaviour change, and the OpenMQ default-credentials warning.
 
-### Component Upgrades {#h3-10-component-upgrades}
+### Component Upgrades
 
 Jackson BOM moves to 2.21.3, ASM to 9.10.1, JLine to 3.30.13, and SnakeYAML to 2.6.
 
-Azul Payara 4.1.2.191.56: Legacy Branch, Still Maintained {#h2-11-azul-payara-4-1-2-191-56-legacy-branch-still-maintained}
---------------------------------------------------------------------------------------------------------------------------
+Azul Payara 4.1.2.191.56: Legacy Branch, Still Maintained
+---------------------------------------------------------
 
 Azul Payara 4.1.2.191.56 receives the cross-cycle CSRF and SSRF security fix and upgrades a vulnerable Hazelcast version, alongside the OpenMQ default-credentials warning. Customers on the 4 branch without contracted Lifetime Support can still access existing binaries but receive no new releases.
 
-Looking Ahead {#h2-12-looking-ahead}
-------------------------------------
+Looking Ahead
+-------------
 
 The Azul Payara product line now spans the JDK ([Azul Zulu and Azul Platform Prime](https://www.azul.com/products/core/)), the full application server ([Azul Payara Server](https://www.azul.com/products/payara-server/)), and the cloud-native runtime ([Azul Payara Micro](https://www.azul.com/products/payara-micro/)), all from one vendor. Payara 7, 6, 5, and 4 continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version.
 
 For teams on Payara 5 or 6, the ready-after-applications default change is the one item in this cycle worth a quick check against any post-boot scripts or transaction recovery configuration before upgrading.
 
-Upgrading and Feedback {#h2-13-upgrading-and-feedback}
-------------------------------------------------------
+Upgrading and Feedback
+----------------------
 
 We recommend upgrading to your version's latest release in this cycle. A critical security patch is available across every supported branch. For detailed upgrade instructions, s[ee the Payara documentation.](https://docs.payara.fish/ "ee the Payara documentation.")
 

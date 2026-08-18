@@ -24,8 +24,8 @@ The Java community thrives on sharing knowledge and experiences. Most content is
 
 That's why we created JCast, a podcast for the Dutch-speaking developer community. Moreover, today we're excited to launch Season 2!
 
-Season 2 Starts with Frank Delporte {#h2-0-season-2-starts-with-frank-delporte}
--------------------------------------------------------------------------------
+Season 2 Starts with Frank Delporte
+-----------------------------------
 
 For our second season opener, we sat down with Frank Delporte. He's well-known in the Java community as a Java Champion. Additionally, he's a Java Developer, Technical Writer at Azul, Blogger, and Author of "Getting started with Java on Raspberry Pi". Furthermore, he's a Pi4J Contributor.
 
@@ -35,8 +35,8 @@ Ultimately, it's a conversation about code as communication. About bridging hard
 
 *Listen now at [jcast.dev](https://jcast.dev)*
 
-What is JCast? {#h2-1-what-is-jcast}
-------------------------------------
+What is JCast?
+--------------
 
 JCast is a podcast about IT, dev life, and soft skills. As we like to say: "gezonde meningsverschillen" (healthy disagreements).
 
@@ -44,7 +44,7 @@ Hosted by three developers from Belgium: Oumaima, Viktor, and Maarten. Together,
 
 We describe ourselves as "drie developers met een liefde voor code en een gezonde dosis chaos" (three developers with a love for code and a healthy dose of chaos). That energy defines our conversations.
 
-### Meet the Hosts {#h3-2-meet-the-hosts}
+### Meet the Hosts
 
 **Oumaima Zerouali** is a developer who loves clarity and challenges. She's passionate about the 'why' behind systems and people. Backend, frontend, or cloud. She wants to understand it, master it, and make it better.
 
@@ -52,7 +52,7 @@ We describe ourselves as "drie developers met een liefde voor code en een gezond
 
 **Maarten Casteels** is a pragmatic tech lead with a sharp eye for detail. He has a soft spot for good teamwork. He loves clean code, clear communication, and a bit of chaos from time to time.
 
-### What We Talk About {#h3-3-what-we-talk-about}
+### What We Talk About
 
 Our episodes explore various topics:
 
@@ -62,13 +62,13 @@ Our episodes explore various topics:
 * **AI \& Innovation**: Practical applications. Tools that actually work.
 * **Community \& Open Source**: Learning from contributors and champions in the Java ecosystem.
 
-### Why We Started JCast {#h3-4-why-we-started-jcast}
+### Why We Started JCast
 
 A year ago, we had an idea. What if Dutch-speaking developers had a podcast in their own language? Not because English is hard. But because sometimes you just want to listen without translating in your head.
 
 After 12 episodes in Season 1, the response has been great. People listen during their commute. While coding. Or during lunch.
 
-### More Than Just Code {#h3-5-more-than-just-code}
+### More Than Just Code
 
 What sets JCast apart is our holistic approach. We don't just focus on frameworks and algorithms. Instead, we explore the human side of development.
 
@@ -76,8 +76,8 @@ Communication. Understanding people. Navigating team dynamics. And yes, those "g
 
 Being a good developer isn't just about writing perfect code. It's about the whole picture.
 
-From Season 1 to Season 2 {#h2-6-from-season-1-to-season-2}
------------------------------------------------------------
+From Season 1 to Season 2
+-------------------------
 
 Season 1 brought us 12 episodes of honest conversations. Capacity planning. Developer hobbies. New Year's resolutions. The real challenges of modern development.
 
@@ -85,8 +85,8 @@ Season 2 continues that journey with even more inspiring guests. We're kicking o
 
 More exciting conversations are coming. We can't wait to share them with you.
 
-Where to Listen {#h2-7-where-to-listen}
----------------------------------------
+Where to Listen
+---------------
 
 JCast is available on all major podcast platforms:
 
@@ -96,8 +96,8 @@ JCast is available on all major podcast platforms:
 
 Start with Season 2, Episode 1 featuring Frank Delporte. Available now!
 
-Final Thoughts {#h2-8-final-thoughts}
--------------------------------------
+Final Thoughts
+--------------
 
 JCast is our contribution to the Dutch-speaking developer community. A place where technical excellence meets honest conversation. Where we can discuss both the 'how' and the 'why' of what we do.
 

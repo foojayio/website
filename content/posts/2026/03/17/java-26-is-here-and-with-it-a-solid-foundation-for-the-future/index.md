@@ -23,8 +23,8 @@ Java 26 is here! Six months ago, we welcomed Java 25 into our hearts, which mean
 
 Regardless of any future plans, this post focuses on everything that has been added in this release, giving you a brief introduction to each of the features. Where applicable the differences with Java 25 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
 
-JEP Overview {#h2-0-jep-overview}
----------------------------------
+JEP Overview
+------------
 
 To start off, let's see an overview of the JEPs that ship with Java 26. This table contains their preview status, to which project they belong, what kind of features they add and the things that have changed since Java 25.
 
@@ -41,12 +41,12 @@ To start off, let's see an overview of the JEPs that ship with Java 26. This tab
 | **[529](#jep-529-vector-api-eleventh-incubator)**                                    | Vector API                                            | Eleventh Incubator | Panama        | New API      | None                                |
 | **[530](#jep-530-primitive-types-in-patterns-instanceof-and-switch-fourth-preview)** | Primitive Types in Patterns, instanceof, and switch   | Fourth Preview     | Amber         | Language     | Minor                               |
 
-New features {#h2-1-new-features}
----------------------------------
+New features
+------------
 
 Let's start with the JEPs that add brand-new features to Java 26.
 
-### HotSpot {#h3-2-hotspot}
+### HotSpot
 
 Java 26 introduces two new features in [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -117,7 +117,7 @@ The two card tables are identical in size, each consuming the same extra native 
 
 For more information on this feature, read [JEP 522](https://openjdk.org/jeps/522).
 
-### Core Libs {#h3-3-core-libs}
+### Core Libs
 
 Java 26 introduces a single new feature that is part of the Core Libs:
 
@@ -187,12 +187,12 @@ HTTP/3 is not as widely deployed as its older counterparts, which is why no sing
 
 For more information on this feature, read [JEP 517](https://openjdk.org/jeps/517).
 
-Repreviews {#h2-4-repreviews}
------------------------------
+Repreviews
+----------
 
 Now it's time to take a look at a few features that might already be familiar to you, because they were introduced in a previous version of Java. They have been repreviewed in Java 26, with only minor changes compared to Java 25 in most cases.
 
-### JEP 524: PEM Encodings of Cryptographic Objects (Second Preview) {#h3-5-jep-524-pem-encodings-of-cryptographic-objects-second-preview}
+### JEP 524: PEM Encodings of Cryptographic Objects (Second Preview)
 
 Within a Java context, cryptographic objects such as public keys, private keys and certificates can be easily created and distributed. But outside of the Java world, the de facto standard is the [Privacy-Enhanced Mail](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) (PEM) format. Let's see an example of a PEM-encoded cryptographic object:
 
@@ -282,7 +282,7 @@ A few minor changes were made to the API compared to Java 25:
 
 For more information on this feature, see [JEP 524](https://openjdk.org/jeps/524).
 
-### JEP 525: Structured Concurrency (Sixth Preview) {#h3-6-jep-525-structured-concurrency-sixth-preview}
+### JEP 525: Structured Concurrency (Sixth Preview)
 
 Java's take on concurrency has always been *unstructured*, meaning that tasks run independently of each other. There's no hierarchy, scope, or other structure involved, which means errors or cancellation intent is hard to communicate. To illustrate this, let's look at a code example that takes place in a restaurant:
 > These code examples were taken from my conference talk ["Java's Concurrency Journey Continues! Exploring Structured Concurrency and Scoped Values"](https://hanno.codes/talks/#javas-concurrency-journey-continues).
@@ -434,7 +434,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 [JEP 525](https://openjdk.org/jeps/525) has more details on the current state of this feature, should you wish to learn more.
 
-### JEP 526: Lazy Constants (Second Preview) {#h3-7-jep-526-lazy-constants-second-preview}
+### JEP 526: Lazy Constants (Second Preview)
 
 Immutable objects are a far less complicated concept than mutable objects, because they can only be in a single state and can be shared freely across multiple threads.  
 
@@ -647,7 +647,7 @@ Other changes have a similar purpose--they include:
 
 [JEP 526](https://openjdk.org/jeps/526) has more details on the current state of this feature, should you wish to learn more.
 
-### JEP 529: Vector API (Eleventh Incubator) {#h3-8-jep-529-vector-api-eleventh-incubator}
+### JEP 529: Vector API (Eleventh Incubator)
 
 The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
 
@@ -707,7 +707,7 @@ The Vector API will keep incubating until necessary features of Project Valhalla
 
 For more information on this feature, read [JEP 529](https://openjdk.org/jeps/529).
 
-### JEP 530: Primitive Types in Patterns, instanceof, and switch (Fourth Preview) {#h3-9-jep-530-primitive-types-in-patterns-instanceof-and-switch-fourth-preview}
+### JEP 530: Primitive Types in Patterns, instanceof, and switch (Fourth Preview)
 
 Since Java 23, pattern matching supports primitive types in all pattern contexts, and in the `instanceof` and `switch` constructs. The feature has been in three consecutive preview statuses, and will be previewed for a fourth time in Java 26. Let's first go through the differences with Java 22 before we highlight the changes in the fourth preview.
 
@@ -880,12 +880,12 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, read [JEP 530](https://openjdk.org/jeps/530).
 
-Deprecations {#h2-10-deprecations}
-----------------------------------
+Deprecations
+------------
 
 Java 26 also deprecates a few older features. Let's see which ones were involved in this effort to improve stability and clarity.
 
-### JEP 500: Prepare to Make Final Mean Final {#h3-11-jep-500-prepare-to-make-final-mean-final}
+### JEP 500: Prepare to Make Final Mean Final
 
 Final fields in Java represent immutable state. Once assigned in a constructor or in a class initializer, a final field cannot be reassigned. This behaviour is important when reasoning about correctness, and for performance reasons. The more constraints there are on the behaviour of a class, the more optimizations the JVM can apply (like [constant folding](https://en.wikipedia.org/wiki/Constant_folding)). Moreover, the immutability we can expect from final fields plays an important role in the [safe initialization of objects](https://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html#finalWrong) in multi-threaded code.
 
@@ -970,7 +970,7 @@ Some dependency‑injection, testing, and mocking libraries rely on deep reflect
 
 For more information on this feature, read [JEP 500](https://openjdk.org/jeps/500).
 
-### JEP 504: Remove the Applet API {#h3-12-jep-504-remove-the-applet-api}
+### JEP 504: Remove the Applet API
 
 When the Java Platform rose to fame in the late 1990s and early 2000s, one of its main catalysts were Java applets and the Applet API. Java applets were small Java programs that could be embedded in web pages and run in a web browser, allowing developers to create interactive web applications. They were widely used for things like games, animations, and other interactive content on the web. People who weren't Java programmers at all at least knew the name 'Java' from their browser because of applets! (in roughly the same way as kids these days know about Java's existence because of a game called Minecraft.)
 ![Hello! I am an applet!](/assets/images/blog/java-applet.png)
@@ -1003,8 +1003,8 @@ Given that the Applet API in its current form is largely unusable, there is no s
 
 For more information on this removal, read [JEP 504](https://openjdk.org/jeps/504).
 
-Final thoughts {#h2-13-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 And that concludes our discussion of the 10 JEPs that come with Java 26. But that's not even all that's new: [many other updates](https://jdk.java.net/26/release-notes) were included in this release, including various performance, stability and security updates. One thing is for sure: this version of Java is primed and ready for more additions later this year. So what are you waiting for? It's time to take this brand-new Java release for a spin!
 

@@ -30,8 +30,8 @@ In later articles, this will allow you to compare runtime performance benchmarks
 
 Before we begin, let's supply some context on Azul's Platform offerings and Apache Kafka.
 
-What is Azul Platform Prime and Platform Core? {#h-what-is-azul-platform-prime-and-platform-core}
--------------------------------------------------------------------------------------------------
+What is Azul Platform Prime and Platform Core?
+----------------------------------------------
 
 Azul offers two Java runtime environments [Platform Prime](https://www.azul.com/products/prime/) and [Platform Core](https://www.azul.com/products/core/). Platform Prime (formerly known as Zing) is a high-performance implementation of the JVM (Java Virtual Machine) while Platform Core refers to Azul's solution that includes the Zulu build of OpenJDK with dedicated support.
 
@@ -46,16 +46,16 @@ To clarify naming conventions the current names of the Azul build distributions 
 
 Overall, Platform Prime ultimately will reduce your infrastructure costs by increasing performance across JVMs with less resources.
 
-What is Kafka? {#h2-1-what-is-kafka}
-------------------------------------
+What is Kafka?
+--------------
 
 In short, Kafka is a highly scalable distributed event streaming framework originally created by LinkedIn.com and later donated to community and open-sourced at the Apache Software Foundation.
 
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. According to the [Kafka website](https://kafka.apache.org/):
 > More than 80% of all Fortune 100 companies trust and use Kafka.
 
-What is Event Streaming? {#h2-2-what-is-event-streaming}
---------------------------------------------------------
+What is Event Streaming?
+------------------------
 
 Event streaming is the practice of capturing data (events) that is then stored, processed, or routed to different technologies as needed and is a common way to develop message-oriented applications.
 
@@ -63,8 +63,8 @@ At a high-level architectural view, it is like the traditional messaging-oriente
 
 Where events (messages) are published topics from producers and consumers will receive the events to be processed.
 
-Kafka Architecture Overview {#h2-3-kafka-architecture-overview}
----------------------------------------------------------------
+Kafka Architecture Overview
+---------------------------
 
 Instead of the traditionally centralized event streaming architectures, Kafka takes a distributed approach to event streaming. Kafka uses Apache [ZooKeeper](https://www.azul.com/technologies/zookeeper/) as a load balancer to manage brokers within a cluster.
 
@@ -77,16 +77,16 @@ Microservice applications (producers) can push messages (events) to topics and o
 
 An exciting thing about Kafka is it's not only a reliable fault tolerant messaging framework, but also supplies flexible Java APIs that enable developers to talk to different data sources ([Connect API](https://kafka.apache.org/documentation.html#connect)) To transform data streams ([Stream API](https://kafka.apache.org/31/documentation/streams/)). These APIs are just to name a few.
 
-Getting Started with Launching Kafka on Azul {#h2-4-getting-started-with-launching-kafka-on-azul}
--------------------------------------------------------------------------------------------------
+Getting Started with Launching Kafka on Azul
+--------------------------------------------
 
 Before getting started the following are assumptions or skills that you should be familiar with. Also, in this section is how to get the software needed to download before we begin.
 
-### Assumptions {#h3-5-assumptions}
+### Assumptions
 
 This article assumes the reader is familiar with common Linux/Unix commands. In this tutorial we will be using a Linux based OS.
 
-### Requirements {#h3-6-requirements}
+### Requirements
 
 The following are downloads needed to get started:
 
@@ -94,7 +94,7 @@ The following are downloads needed to get started:
 * [Azul Zulu build of the OpenJDK](https://www.azul.com/downloads/) (referred to as Platform Core below)
 * [Apache Kafka](https://kafka.apache.org/downloads)
 
-### Install Azul Platform Prime and Core (OpenJDK 17) {#h3-7-install-azul-platform-prime-and-core-openjdk-17}
+### Install Azul Platform Prime and Core (OpenJDK 17)
 
 In this example let's go to Azul.com to download JDK 17 for the Linux OS preferably a **tar.gz** version of both Azul Platform Prime and Platform Core.
 
@@ -152,7 +152,7 @@ $ ln -sfn ~/sdks/zulu<core_version>-<jdk_version> ~/sdks/current_jdk
 ```
 
 
-### Setting Environment Variables {#h3-8-setting-environment-variables}
+### Setting Environment Variables
 
 Now that Azul Prime and Core are installed, we want to switch between the two by setting our *JAVA_HOME* and *PATH* environment variables. Open a terminal window and enter the following commands:
 
@@ -242,8 +242,8 @@ $ sudo apt-get install vim
 
 Not sure if you noticed earlier when setting the *JAVA_HOME* environment to a symbolic link named *current_jdk* inside the *sdks* directory. Because we already created environment variables *AZUL_CORE* and *AZUL_PRIME* it's super easy to switch the symbolic link to point to those paths.
 
-Switching between Azul Platform Prime and Core Java Runtimes {#h2-9-switching-between-azul-platform-prime-and-core-java-runtimes}
----------------------------------------------------------------------------------------------------------------------------------
+Switching between Azul Platform Prime and Core Java Runtimes
+------------------------------------------------------------
 
 Now that your environment variables are setup you will need to create a Linux/Unix symbolic links to switch between Java environments.
 
@@ -284,12 +284,12 @@ product-linux-X86_64, mixed mode)
 ```
 
 
-Installing and running Kafka {#h-installing-and-running-kafka}
---------------------------------------------------------------
+Installing and running Kafka
+----------------------------
 
 The next set of instructions is a simplified version of the Getting started from Apache Kafka's site at <https://kafka.apache.org/quickstart>
 
-### Step 1: Switch to Azul Platform Core (Open a terminal window) {#h-step-1-switch-to-azul-platform-core-open-a-terminal-window}
+### Step 1: Switch to Azul Platform Core (Open a terminal window)
 
 ```
 # (Optional) If this session has not set environment variables yet.
@@ -306,7 +306,7 @@ $ ln -sfn $AZUL_CORE ~/sdks/current_jdk
 
 You only need to source *setup.sh* once per new terminal session. For convenience you can add them and source your *.bashrc* file for later terminal sessions.
 
-### Step 2: Install Kafka {#h-step-2-install-kafka}
+### Step 2: Install Kafka
 
 [Download the latest Kafka release](https://kafka.apache.org/downloads) and extract it under *\<HOME\>/sdks* directory.
 
@@ -322,7 +322,7 @@ $ cd kafka_2.13-3.0.0
 
 After the file is decompressed you may remove the tar file to save space.
 
-### Step 3: Start ZooKeeper and Broker Service {#h-step-3-start-zookeeper-and-broker-service}
+### Step 3: Start ZooKeeper and Broker Service
 
 Run the following commands to start all services in the correct order:
 
@@ -343,7 +343,7 @@ $ bin/kafka-server-start.sh config/server.properties
 
 Once all services have successfully launched, you will have a basic Kafka environment running and ready to use.
 
-### Step 4: Create a Topic to Publish Events {#h-step-4-create-a-topic-to-publish-events}
+### Step 4: Create a Topic to Publish Events
 
 Kafka is a distributed event streaming platform that lets you read, write, store, and process events (Also called records or messages in the documentation) across many machines.
 
@@ -385,7 +385,7 @@ Topic: quickstart-events Partition: 0 Leader: 0 Replicas: 0 Isr:
 
 You can stop the producer's client with Ctrl-C at any time.
 
-### Step 5: Write some events into the Topic (Producer of events) {#h-step-5-write-some-events-into-the-topic-producer-of-events}
+### Step 5: Write some events into the Topic (Producer of events)
 
 Open another terminal session and run the console consumer client to read the events you just created:
 
@@ -401,7 +401,7 @@ This is my second event
 
 Here you enter text and hit the enter key to publish the message onto the topic. You can stop the consumer client with Ctrl-C at any time.
 
-### Step 6: Terminate the Kafka Environment {#h-step-6-terminate-the-kafka-environment}
+### Step 6: Terminate the Kafka Environment
 
 Now that you reached the end of the quickstart, feel free to tear down the Kafka environment---or continue playing around.
 
@@ -416,8 +416,8 @@ $ rm -rf /tmp/kafka-logs /tmp/zookeeper
 ```
 
 
-Running Kafka on Azul Platform Prime {#h-running-kafka-on-azul-platform-prime}
-------------------------------------------------------------------------------
+Running Kafka on Azul Platform Prime
+------------------------------------
 
 Now, that you've run the examples using Platform Core (Standard builds of the OpenJDK) let's switch Java runtime environments to run Kafka on Azul's Platform Prime!
 
@@ -432,8 +432,8 @@ Repeat steps 2-6 to confirm that Kafka runs on Azul Platform Prime.
 
 Success!
 
-Conclusion {#h-conclusion}
---------------------------
+Conclusion
+----------
 
 You got a chance to learn about Azul's two Java runtime environments Platform Prime (Zulu Prime build of the OpenJDK) and Platform Core (Zulu build of the OpenJDK). Platform Prime being the advanced JVM, and Platform Core's runtime is from a standard build of the OpenJDK.
 

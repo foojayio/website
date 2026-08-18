@@ -23,12 +23,12 @@ This article is part of a series comparing different ways to implement asynchron
 
 In this post, I'll focus on [HTMX](https://htmx.org/), whose approach is quite different.
 
-Laying out the work {#h2-0-laying-out-the-work}
------------------------------------------------
+Laying out the work
+-------------------
 
 I'll follow the same structure as in the previous posts of the series. Here's the setup, server- and client-side.
 
-### Server-side {#h3-1-server-side}
+### Server-side
 
 Here is how I integrate Thymeleaf and HTMX in the POM:
 
@@ -59,7 +59,7 @@ Here is how I integrate Thymeleaf and HTMX in the POM:
 1. Same as with previous frameworks
 2. The HTMX dependency
 
-### Client-side {#h3-2-client-side}
+### Client-side
 
 The code on the HTML side is straightforward :
 
@@ -70,8 +70,8 @@ The code on the HTML side is straightforward :
 
 1. Add the HTMX dependency
 
-Working with HTMX {#h2-3-working-with-htmx}
--------------------------------------------
+Working with HTMX
+-----------------
 
 We want to implement the same features as previously.
 
@@ -79,7 +79,7 @@ HTMX implements a radical approach that is different from traditional AJAX frame
 
 Hence, you need to write neither JavaScript nor deal with JSON and serialization of entities.
 
-### Designing the fragments {#h3-4-designing-the-fragments}
+### Designing the fragments
 
 HTMX nicely complements Thymeleaf because both work with page fragments. We can align Thymeleaf's fragments to HTMX's responses. It requires thinking ahead, which differs from the previous AJAX/API/JSON standard, but it's worth it.
 
@@ -110,7 +110,7 @@ Here's the conceptual fragments design for our app:
 
 I'll split the HTML page into these fragments. Because we render them via Thymeleaf, we can split each into their dedicated file for a cleaner separation. At initial load time, we use Thymeleaf's `replace` directive; we use HTMX for asynchronous client-side interactions.
 
-### Our first interaction {#h3-5-our-first-interaction}
+### Our first interaction
 
 We will start with the cleanup feature, as it's the easiest one with HTMX.
 
@@ -154,7 +154,7 @@ That's the heart of HTMX: bind an HTTP call to a client-side event, and replace 
 
 Adding a new todo follows the same principle, but the DOM element is the whole table to reset the `label` value. If interested in the complete, look at [the code](https://github.com/ajavageek/compare-frontends).
 
-### Marking a todo complete {#h3-6-marking-a-todo-complete}
+### Marking a todo complete
 
 While I mentioned that we will not return anything from the check request, it presents an exciting challenge. That's the reason why I am only addressing it now.
 
@@ -181,8 +181,8 @@ HTMX offers the `hx-vals` for the JSON payload. However, the URL is different fo
 
 Note that, as explained above, I ignored the response. In a real-world scenario, you should check/uncheck the checkbox depending on the value returned to avoid keeping the server state and the UI in synch.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In the two previous articles, I described Vue and Alpine. We configured Spring Boot to return JSON. With HTMX, we configured it to return HTML. Additionally, we didn't need any JavaScript code to send the requests from the client.
 

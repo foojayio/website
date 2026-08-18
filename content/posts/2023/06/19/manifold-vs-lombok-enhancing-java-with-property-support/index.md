@@ -34,8 +34,8 @@ Let's dive in and discover how Manifold's property support stands out.
 
 As always, you can find the code examples and additional resources for this post on my [GitHub page](https://github.com/shai-almog/java-book/).
 
-Comparing Manifold and Lombok {#h2-0-comparing-manifold-and-lombok}
--------------------------------------------------------------------
+Comparing Manifold and Lombok
+-----------------------------
 
 Manifold and Lombok are very different projects but they do overlap in a few areas. Properties are where the overlap is greatest and the philosophical differences between the two shine out the most.
 
@@ -49,7 +49,7 @@ Let's explore these differences in detail, highlighting the strengths and limita
 | **Extensibility** | Challenging              | Modular       |
 | **Scope**         | Limited                  | Extensive     |
 
-### Maturity, IDE Support and Exit Strategy {#h3-1-maturity-ide-support-and-exit-strategy}
+### Maturity, IDE Support and Exit Strategy
 
 Lombok has been around for quite some time, and many of its features were designed for older versions of Java. Consequently, some of its functionalities may no longer be relevant or applicable.
 
@@ -57,7 +57,7 @@ Furthermore, Lombok's integration with modern IDEs can be limited, and convertin
 
 While Lombok provides essential boilerplate removal, it is often perceived as a temporary solution or "band-aid" due to its underlying approach.
 
-### Manifold's Extensibility and Scope {#h3-2-manifold-s-extensibility-and-scope}
+### Manifold's Extensibility and Scope
 
 Manifold offers a more extensible and pluggable framework with a well-designed architecture.
 
@@ -65,8 +65,8 @@ While it may still face growing pains and limited IDE support, Manifold's flexib
 
 It leverages the strengths of Java's type system while providing unique features.
 
-Property Support {#h2-3-property-support}
------------------------------------------
+Property Support
+----------------
 
 Manifold's property support is based on a concept that has been discussed for decades in the Java community. However, reaching a consensus on the direction proved challenging so a JEP never took hold.
 
@@ -74,7 +74,7 @@ On a personal note, I was deeply involved with this discussion and strongly advo
 
 Manifold takes a more standard approach that aligns with other languages such as C# and Kotlin, providing familiar and powerful property notation. This is good, it can provide short-term relief to the verbosity of getters and setters.
 
-### Differentiating Manifold's Property Support {#h3-4-differentiating-manifold-s-property-support}
+### Differentiating Manifold's Property Support
 
 To understand Manifold's property support, let's examine its equivalent code to the Lombok example. This is a standard Plain Old Java Object (POJO). Notice the get and set methods?
 
@@ -159,8 +159,8 @@ var time = Calendar.instance.timeInMillis;
 ```
 
 
-Customizing Manifold Properties {#h2-5-customizing-manifold-properties}
------------------------------------------------------------------------
+Customizing Manifold Properties
+-------------------------------
 
 Similar to Lombok, Manifold offers customization options for individual properties. By using `val`, a read-only property with only a getter can be defined, behaving similarly to a final field. Conversely, `set` defines a write-only property. Additionally, scoping preferences can be passed as arguments, influencing the generated methods' visibility.
 
@@ -189,8 +189,8 @@ System.out.println(scoping.str);
 ```
 
 
-Encapsulation and Method Implementation {#h2-6-encapsulation-and-method-implementation}
----------------------------------------------------------------------------------------
+Encapsulation and Method Implementation
+---------------------------------------
 
 Despite the accessibility of properties in Manifold, encapsulation is not compromised. If a setter or getter method is explicitly implemented, Manifold recognizes the custom implementation and seamlessly interacts with the property.
 
@@ -216,8 +216,8 @@ System.out.println(computed.number);
 ```
 
 
-Other Considerations {#h2-7-other-considerations}
--------------------------------------------------
+Other Considerations
+--------------------
 
 While both Lombok and Manifold offer useful features, it's important to consider some aspects that may influence your decision. Lombok provides annotations for generating equals, hashCode, and toString methods. It offers annotations that generate constructors, builder patterns, and loggers, all of which are currently missing from Manifold.
 
@@ -236,8 +236,8 @@ We can sum this up in the following table:
 | Fluid Dot Syntax         | ❌      | ✅        |
 | Smart Scoping            | ❌      | ✅        |
 
-Final Word {#h2-8-final-word}
------------------------------
+Final Word
+----------
 
 As we wrap up our exploration of property support in Manifold and Lombok, it's evident that both projects bring unique approaches to enhance Java development. While Lombok has been a popular choice, its limitations and legacy features may prompt developers to seek alternative solutions.
 

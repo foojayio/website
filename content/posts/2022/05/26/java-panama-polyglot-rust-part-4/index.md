@@ -43,13 +43,13 @@ Today, let's look at how to access a native library built using the Rust languag
 
 For the impatient the example code is at [github.com/carldea/panama-polyglot/rust](https://github.com/carldea/panama-polyglot/tree/main/rust).
 
-Problem {#h2-0-problem}
------------------------
+Problem
+-------
 
 As a Java developer, you want to invoke my Rust based library function `rust_get_pid()` that will return an **integer** value representing an application's process id.
 
-Solution {#h2-1-solution}
--------------------------
+Solution
+--------
 
 Below are the high-level steps to access a native **Rust** library and function.
 
@@ -61,8 +61,8 @@ Below are the high-level steps to access a native **Rust** library and function.
 
 **Step 4:** Create a `Main.java` to call the `rust_get_pid()` generated function
 
-Requirements {#h2-2-requirements}
----------------------------------
+Requirements
+------------
 
 Before we can take the steps above let's make sure we install the JDK 19 EA release of OpenJDK containing Panama and Rust correctly.
 
@@ -83,8 +83,8 @@ source $HOME/.cargo/env
 ```
 
 
-Step 1: Creating a Native Rust Library {#h2-3-step-1-creating-a-native-rust-library}
-------------------------------------------------------------------------------------
+Step 1: Creating a Native Rust Library
+--------------------------------------
 
 Let's initialize the Rust project with the following commands:
 
@@ -120,8 +120,8 @@ A Rust library exported adheres to the C ABI
 
 After you've edited and saved the `lib.rs` file let's edit the `Cargo.toml` file by replacing it with the following contents:
 
-Updating build project file `Cargo.toml` {#h2-4-updating-build-project-file-cargo-toml}
----------------------------------------------------------------------------------------
+Updating build project file `Cargo.toml`
+----------------------------------------
 
 The following contents of the `Cargo.toml` file will **compile** and **build** a native Rust library created in the `target/debug` directory.
 
@@ -149,8 +149,8 @@ On a MacOS system the library created will reside in the following directory: `t
 
 On a Linux system the library will be named `libmyrustlibrary.so`
 
-Step 2: Create a Rust C header generator (generates a lib.h file) {#h2-5-step-2-create-a-rust-c-header-generator-generates-a-lib-h-file}
-----------------------------------------------------------------------------------------------------------------------------------------
+Step 2: Create a Rust C header generator (generates a lib.h file)
+-----------------------------------------------------------------
 
 Create a file called `build.rs` with the following contents:
 
@@ -200,8 +200,8 @@ uint32_t rust_get_pid(void);
 ```
 
 
-Step 3: Use `jextract` against C header file (`lib.h`) {#h2-6-step-3-use-jextract-against-c-header-file-lib-h}
---------------------------------------------------------------------------------------------------------------
+Step 3: Use `jextract` against C header file (`lib.h`)
+------------------------------------------------------
 
 Run the following using `jextract` to generate binding code that will be used in the `Main.java` program created later.
 
@@ -213,8 +213,8 @@ jextract -d classes \
 ```
 
 
-Step 4: Creating a Main.java to call the native function {#h2-7-step-4-creating-a-main-java-to-call-the-native-function}
-------------------------------------------------------------------------------------------------------------------------
+Step 4: Creating a Main.java to call the native function
+--------------------------------------------------------
 
 Edit or create a `Main.java` file with the following contents:
 
@@ -231,8 +231,8 @@ public class Main {
 
 Above you'll notice the static import will reference generated Panama binding code. The bindings will do a library lookup and a native symbol lookup of the function `rust_get_pid()` function based on the **C ABI**.
 
-Running Main.java {#h2-8-running-main-java}
--------------------------------------------
+Running Main.java
+-----------------
 
 To run the Java program you'll simply do the following:
 

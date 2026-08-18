@@ -26,7 +26,7 @@ I started to become interested in the Ops side of software when I was still a co
 
 Since then, other frameworks have popped up. They also provide monitoring capabilities. In this article, I'd like to compare those frameworks concerning those capabilities.
 
-### Spring Boot {#h3-0-spring-boot}
+### Spring Boot
 
 [Spring Boot](https://spring.io/projects/spring-boot) is the framework that started the trend regarding providing monitoring capabilities. To enable them is only a matter of adding a single dependency known as the **Actuator**:
 
@@ -49,7 +49,7 @@ With Spring Boot, one can expose endpoints over JMX and HTTP. For security reaso
 
 You can secure HTTP endpoints via Spring Security. This allows widespread use-cases. For example, you can enable a specific endpoint but only allow authenticated clients to access it.
 
-### Micronaut {#h3-1-micronaut}
+### Micronaut
 
 [Micronaut](https://micronaut.io/) also offers monitoring endpoints. Those endpoints mostly map to those provided by Spring Boot with a few [exceptions](#sum-up).
 
@@ -79,7 +79,7 @@ By default, all endpoints are enabled, but `/cache` and `/stop`.
 
 Note that the `/metrics` endpoint requires a dependency to Micrometer Core.
 
-### Quarkus {#h3-2-quarkus}
+### Quarkus
 
 Last but not least comes [Quarkus](https://quarkus.io/). Quarkus' approach differs from Spring Boot's and Micronaut's: it's doesn't implement endpoints itself but relies on a third-party dependency. Before getting to the core, let me digress a bit.
 
@@ -122,7 +122,7 @@ Also, Quarkus provides multiple endpoints specific to its CDI implementation (Ar
 
 When a SmallRye dependency is on the classpath at compile-time, it's enabled by default. A dedicated flag allows to disable them individually. This is true for other configuration properties, *e.g.*, the path to the endpoint.
 
-### Helidon {#h3-3-helidon}
+### Helidon
 
 [Helidon](https://helidon.io/) is a framework provided by Oracle based on a sub-set of Jakarta EE APIs and MicroProfile.
 
@@ -130,7 +130,7 @@ I know that it supports `/health` and `/metrics` out-of-the-box. For each of the
 
 I must admit I didn't spend enough time to tell more. If you're interested, please check it by yourself.
 
-### Sum Up {#sum-up}
+### Sum Up
 
 Here's a summary of endpoints for all frameworks.
 

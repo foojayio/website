@@ -24,8 +24,8 @@ frozen: false
 
 This article explores how [Chronicle Services](https://chronicle.software/services/ "Chronicle Services"), a Java-based framework optimised for low-latency microservices, meets these critical requirements by integrating HA, performance, and data persistence.
 
-Stateful and Stateless Services {#h2-0-stateful-and-stateless-services}
------------------------------------------------------------------------
+Stateful and Stateless Services
+-------------------------------
 
 A [Chronicle Service](https://chronicle.software/services/ "Chronicle Service") application consists of a number of processing units known as Services, which interact with each other using events posted on [Chronicle Queues](https://chronicle.software/queue-enterprise/ "Chronicle Queues"). The Chronicle Queue is an extremely fast shared memory inter-process communication; it also has an enterprise version that facilitates replication of queues over the network.
 
@@ -41,8 +41,8 @@ In the case of a 'stateless' service, state is not required for the service to h
 ![](Screenshot-2024-04-16-at-17.50.57.png)  
 *Diagram 2: Example of a stateless service*
 
-Persistence in Chronicle Services Applications {#h2-1-persistence-in-chronicle-services-applications}
------------------------------------------------------------------------------------------------------
+Persistence in Chronicle Services Applications
+----------------------------------------------
 
 Service-to-service interactions in[Chronicle Services](https://chronicle.software/services/ " Chronicle Services") applications is facilitated by [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue"), a persistent shared memory-based model for inter-process communication. [Chronicle Services](https://chronicle.software/services/ "Chronicle Services ")utilises [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") to provide a "store everything" model, optionally interleaved with periodic checkpointing, ensuring comprehensive logging of all system activities and state modifications.
 
@@ -50,8 +50,8 @@ Service-to-service interactions in[Chronicle Services](https://chronicle.softwar
 
 In the event of an outage, services are able to precisely reconstruct their state by replaying operations from either the input or output persistent queues. Services are thus able to resume precisely from the point of disruption. Data loss is mitigated by adding minimal latency---a few microseconds per message to the queue.
 
-Queue Replication for High Availability {#h2-2-queue-replication-for-high-availability}
----------------------------------------------------------------------------------------
+Queue Replication for High Availability
+---------------------------------------
 
 Chronicle's High Availability solution is based on replicating the [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") instances used to transport messages between services. Suppose a queue instance has been configured to be replicated. In that case, [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") Replication copies messages as they are added to a queue to one or more replica queue instances, which may be on different hosts, using Chronicle's high speed TCP/IP library.
 
@@ -64,15 +64,15 @@ If there is an issue either with the service or a queue, then it can be restarte
 
 An optional acknowledgement mechanism ensures events are received and stored by at least one secondary host before the replication is deemed successful, thus preventing data loss in the event of a host failure.
 
-Optimising Latency and Reliability {#h2-3-optimising-latency-and-reliability}
------------------------------------------------------------------------------
+Optimising Latency and Reliability
+----------------------------------
 
 While acknowledgement mechanisms over the network are essential for maintaining data integrity, they naturally incur latency.[Chronicle Services](https://chronicle.software/services/ " Chronicle Services") mitigates this effect by supporting "in-flight" messages---those that have been dispatched but not yet acknowledged.
 
 If enabled, this improves overall latency, balancing performance with looser high availability constraints.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") focuses on resilient, low-latency microservices, efficiently managing stateful and stateless models. It eliminates dependencies on databases for managing service state, using [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") for fast data replication and recovery.
 

@@ -27,8 +27,8 @@ frozen: false
 
 Following **OWASP Recommendations** , such as validating user inputs and using parameterized queries, is vital for securing your applications. In this article, we'll dive into LDAP, explore LDAP Injection, share OWASP's best practices, and demonstrate secure coding in **Spring Boot**.
 
-Summary {#h2-0-summary}
------------------------
+Summary
+-------
 
 1. Introduction to LDAP
 2. Understanding LDAP Injection
@@ -37,14 +37,14 @@ Summary {#h2-0-summary}
 
 
 
-1️⃣ Introduction to LDAP (Lightweight Directory Access Protocol) {#h2-1-1-introduction-to-ldap-lightweight-directory-access-protocol}
--------------------------------------------------------------------------------------------------------------------------------------
+1️⃣ Introduction to LDAP (Lightweight Directory Access Protocol)
+----------------------------------------------------------------
 
-### ☝️ What is LDAP? {#h3-2-what-is-ldap}
+### ☝️ What is LDAP?
 
 **LDAP stands for Lightweight Directory Access Protocol.** It is used to access and manage directory information over a network. **Think of it like a digital phone book** ☎📙---but much more versatile and scalable.
 
-### 🔐 What is LDAP Used For? {#h3-3-what-is-ldap-used-for}
+### 🔐 What is LDAP Used For?
 
 **LDAP is commonly used** in IT environments **for**:
 
@@ -54,7 +54,7 @@ Summary {#h2-0-summary}
 
 For example, when you log into a corporate network, LDAP plays a crucial role in verifying your credentials and granting access.
 
-### ⚙️ How Does LDAP Work? {#h3-4-how-does-ldap-work}
+### ⚙️ How Does LDAP Work?
 
 **Imagine LDAP as a tree**:
 
@@ -64,37 +64,37 @@ For example, when you log into a corporate network, LDAP plays a crucial role in
 
 LDAP organizes data hierarchically, making it easy to query and retrieve specific information efficiently.
 
-### Why is LDAP Important? {#h3-5-why-is-ldap-important}
+### Why is LDAP Important?
 
 * LDAP simplifies user management.
 * LDAP provides a single source of truth for user data.
 
 
 
-2️⃣ What is LDAP Injection? {#h2-6-2-what-is-ldap-injection}
-------------------------------------------------------------
+2️⃣ What is LDAP Injection?
+---------------------------
 
-### LDAP Injection {#h3-7-ldap-injection}
+### LDAP Injection
 
 LDAP Injection is a**type of injection attack that exploits user input**. If the input is not properly validated, attackers can access unauthorized data.
 
-### How Does LDAP Injection Work? {#h3-8-how-does-ldap-injection-work}
+### How Does LDAP Injection Work?
 
 You typically input a filter like this: `cn=readers`. If the input is `cn=*` , you get access to all the data, potentially **exposing sensitive information**.
 
-### How to Prevent LDAP Injection? {#h3-9-how-to-prevent-ldap-injection}
+### How to Prevent LDAP Injection?
 
 * **Sanitize User Input**
 * **Escape special** LDAP **characters** like `*, (, ), and .`
 
 
 
-3️⃣ OWASP Recommendations {#h2-10-3-owasp-recommendations}
-----------------------------------------------------------
+3️⃣ OWASP Recommendations
+-------------------------
 
 According to OWASP, the distinguished name (DN) and the search filter have their own sets of meta-characters, which should be escaped to prevent injection attacks.
 
-### Escaping Distinguished Name: {#h3-11-escaping-distinguished-name}
+### Escaping Distinguished Name:
 
 ```java
 public static String escapeDN(String name) {
@@ -138,7 +138,7 @@ public static String escapeDN(String name) {
 ```
 
 
-### Escaping Filter: {#h3-12-escaping-filter}
+### Escaping Filter:
 
 ```java
 public static final String escapeLDAPSearchFilter(String filter) {
@@ -174,12 +174,12 @@ For more detailed guidelines, visit: <https://wiki.owasp.org/index.php/Preventin
 
 
 
-4️⃣ Coding Demonstration {#h2-13-4-coding-demonstration}
---------------------------------------------------------
+4️⃣ Coding Demonstration
+------------------------
 
 **Here's a quick demo** of those escaping methods and how they function:
 
-### 🚀 Starting the LDAP Server {#h3-14-starting-the-ldap-server}
+### 🚀 Starting the LDAP Server
 
 ```bash
 docker run --detach --rm --name openldap5 -p 1389:1389 
@@ -194,7 +194,7 @@ docker run --detach --rm --name openldap5 -p 1389:1389
 
 OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>  
 
-### 🧪 Testing the LDAP Server {#h3-15-testing-the-ldap-server}
+### 🧪 Testing the LDAP Server
 
 #### Open a terminal session to the OpenLDAP container
 
@@ -214,10 +214,10 @@ OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>
 
 Entries in LDAP{#caption-attachment-114911}
 
-### 🍃 Spring Boot part {#h3-16-spring-boot-part}
+### 🍃 Spring Boot part
 
 * **I created a Spring Boot** application using Spring Initializer, **including** dependencies for**Web, LDAP, and Thymeleaf** .  
-  [![Spring Boot dependencies](https://uploads.strikinglycdn.com/files/6d011c45-5775-4276-9d55-af400cd5a7ef/ladp-3.png?t=1733143487&amp;id=4207982 "Spring Boot dependencies")](https://uploads.strikinglycdn.com/files/6d011c45-5775-4276-9d55-af400cd5a7ef/ladp-3.png?t=1733143487&amp;id=4207982 "Spring Boot dependencies")  
+  [![Spring Boot dependencies](https://uploads.strikinglycdn.com/files/6d011c45-5775-4276-9d55-af400cd5a7ef/ladp-3.png?t=1733143487&id=4207982 "Spring Boot dependencies")](https://uploads.strikinglycdn.com/files/6d011c45-5775-4276-9d55-af400cd5a7ef/ladp-3.png?t=1733143487&id=4207982 "Spring Boot dependencies")  
   This **lets me input the filter** and distinguished names (DN)**in the** Thymeleaf **form** . The form **then directs to a Spring Boot endpoint** , **which initiates the search** **in the** Open **LDAP** server.
 
 <!-- -->
@@ -238,8 +238,8 @@ Prevent LDAP injection in #java 💥💉with #springboot](2injection-done-700x24
 
 
 
-**👨‍💻 The related code:** {#h2-17-the-related-code}
------------------------------------------------------
+**👨‍💻 The related code:**
+---------------------------
 
 ```java
 @PostMapping("/submit")
@@ -277,8 +277,8 @@ from <https://github.com/vinny59200/java-ldap-prevention>
 
 
 
-**📺 Demo Video on YouTube:** {#h2-18-demo-video-on-youtube}
-------------------------------------------------------------
+**📺 Demo Video on YouTube:**
+-----------------------------
 
 {{< youtube lRjzxRKfq9M >}}
 
@@ -286,14 +286,14 @@ from <https://github.com/vinny59200/java-ldap-prevention>
 
 
 
-**🙏 Thanks for Reading!** {#h2-19-thanks-for-reading}
-------------------------------------------------------
+**🙏 Thanks for Reading!**
+--------------------------
 
 This article provided a comprehensive overview of LDAP, its importance, the risks associated with LDAP Injection, and how to prevent it. By following these guidelines, you can ensure that your LDAP implementations are secure and robust.
 
 
 
-🌐 Related {#h2-20-related}
----------------------------
+🌐 Related
+----------
 
 <https://foojay.io/today/top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them/>

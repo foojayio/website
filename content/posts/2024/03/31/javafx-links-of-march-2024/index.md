@@ -21,8 +21,8 @@ frozen: false
 
 Here is the overview of the JavaFX LinksOfTheMonth of March 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month.
 
-Components, Libraries, Tools {#h2-0-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * **Pedro Duque Vieira** integrated this [pull request in FXThemes](https://github.com/dukke/FXThemes/pull/2): "[True Dark Mode is now also available on Mac](https://twitter.com/P_Duke/status/1762488686313120185). All thanks to [**Carl Dea**](https://twitter.com/carldea).
 * Not new, but [**siedlerchr** pointed](https://twitter.com/siedlerchr/status/1762439783236636842) us on [EasyBind](https://github.com/tobiasdiez/EasyBind): "Leverages lambdas to reduce boilerplate when creating custom bindings, providing a type-safe alternative to Bindings.select\* methods and provides enhanced bindings support for Optional." It's a fork by [**Tobias Diez**](https://twitter.com/tobias_diez) of an older project by [**Tomas Mikula**](https://twitter.com/tomas_mikula).
@@ -41,8 +41,8 @@ Components, Libraries, Tools {#h2-0-components-libraries-tools}
 * In the Oracle Java 22 Launch Stream, [Kevin Rushforth talked about "JavaFX 22 and Beyond"](https://www.youtube.com/watch?v=AjjAZsnRXtE&t=4685s).
 * [JavaFX 23 Early-Access Builds](https://jdk.java.net/javafx23/) are available.
 
-Applications {#h2-1-applications}
----------------------------------
+Applications
+------------
 
 * [**Patrik Karlström** announced the release of Mapollage 3.0.0](https://twitter.com/PatrikKarlstrom/status/1762215364845244834): "3 yrs later, on the very day! The KML generator of geotagged images for GoogleEarth. This is a major rewrite of the UI, combining NetBeans Platform and JavaFX." [Sources and downloads are available on GitHub](https://github.com/trixon/mapollage/releases/tag/v3.0.0).
 * [**Matt Coley** shared a video](https://twitter.com/invokecoley/status/1764991484808380927): "Re-creating Intellij's "Search Everywhere" panel in Recaf 4X".
@@ -51,8 +51,8 @@ Applications {#h2-1-applications}
 * JabRef immediately [bumped to version 22](https://foojay.social/@jabref/112124226121637837): "We just updated to the newest version of JavaFX 22, and it works fine so far! Great to see so many bugs fixed!"
 * **Carl Dea** shared "a [glimpse of a responsive layout for a landing page](https://twitter.com/carldea/status/1768673053213347911). Clinical interface terminology system (knowledge base)."
 
-Games {#h2-2-games}
--------------------
+Games
+-----
 
 * One of the students of **Almas Baim** built a [dungeon layout generator for FXGL](https://twitter.com/AlmasBaim/status/1770767408896110958): "Once the API is finalised, it will be available from the next release."
   * He also shared a [video of a rotating cube with rotating cubes with rotating cubes with...](https://twitter.com/AlmasBaim/status/1768709121136599320)
@@ -65,8 +65,8 @@ Games {#h2-2-games}
   * And he published a [video on YouTube: "FXGL 21.1 Tutorial: Speech Recognition in Java"](https://www.youtube.com/watch?v=hdPspgAetQk)
 * [**OrangoMango** announced version 2.0 of Reflection](https://twitter.com/orango_mango/status/1771786912363131183): "Can you beat all the current 30 levels? New levels, new mechanic, bugfix, new textures, android version and much more. [Play it in the browser or download it](https://orangomango.itch.io/reflection) for Windows, Linux, Mac or Android."
 
-Components, Libraries, Tools {#h2-3-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * **Dirk Lemmermann** has been very productive this week...
   * Added a [few more features to the DrawerStackPane in GemsFX](https://twitter.com/dlemmermann/status/1770757809698697560): "You can now configure the animation duration and the top and side paddings."
@@ -75,19 +75,19 @@ Components, Libraries, Tools {#h2-3-components-libraries-tools}
   * "Implemented my own ['Friday Fun Component'](https://twitter.com/dlemmermann/status/1768640804820488349) now that [**Gerrit Grunwald**](https://twitter.com/hansolo_) is mostly on [CRaC](https://docs.azul.com/core/crac/crac-introduction) 🙂 We needed an 'energy efficiency' display for our energy software at [Senapt](https://twitter.com/SenaptEaaS)."
 * And and update by **Pedro Duque Vieira** : "Work in progress (continued - very close to finished): [Navigation Control](https://twitter.com/P_Duke/status/1770112311300083931). When shrunk, show popup menus when clicking items - scroll bar shows when items exceed space. And animations when shrinking and expanding."
 
-Podcast, Video, Books {#h2-4-podcast-video-books}
--------------------------------------------------
+Podcast, Video, Books
+---------------------
 
 * A [new version of the ebook by **Frank Delporte**](https://foojay.social/deck/@frankdelporte/112007776688012320), "Getting Started with Java on the Raspberry Pi", is [now available here](https://webtechie.be/books/). It contains 20 extra pages describing a joystick-controlled game with [Pi4J](https://pi4j.com/) and the JavaFX [FXGL game-library](https://www.jfx-central.com/libraries/fxgl) of [**Almas Baim**](https://twitter.com/AlmasBaim).
 
-Conferences {#h2-5-conferences}
--------------------------------
+Conferences
+-----------
 
 * [**Wolfgang Weigend** shared some pictures of the JFX Adopters Meeting](https://twitter.com/wolflook/status/1765356417760760283): "Thanks a lot for attending my session about JavaFX technology at Zeiss Meditec in Munich."
 * If you attend [DEVNEXUS (Apr 9-11, 2024, Atlanta, GA)](https://twitter.com/devnexus), make sure to attend this talk: [Java, JavaFX, and Life on Jupiter's Europa](https://devnexus.com/presentations/java-javafx-and-life-on-jupiter-s-europa/) by **Jordi Turner** and **Scott Turner**: "To achieve this, we created an infrastructure in Java that allows us to responsively render and interact with maps and space views by combining JavaFX and AWT in a multi-threaded approach. This approach has been extremely successful, and now supports missions outside of Europa Clipper, analyzing spacecraft and data around Saturn, Venus, the Moon, and all the way back to Earth."
 
-Tutorials {#h2-6-tutorials}
----------------------------
+Tutorials
+---------
 
 * [**Dave Barrett**](https://twitter.com/Polypragmatist) published a long article with a lot of example code [about new Binding and Listener features added to JavaFX in versions 19 and 21](https://www.pragmaticcoding.ca/javafx/subscribe_and_map): "I looked at the JavaDocs page for ObservableValue in both JFX 16 and 21. There are just 3 methods in JFX 16: addListener(), getValue(), and removeListener(). There are 9 methods in the JFX 21 version. Those 6 new methods (plus one in Observable) are what we are going to look at in this article. And yes, these are game changers!"
 * [**Carl Walker**](https://twitter.com/CarlWalkerDrums) published an [article on using custom JavaFX Dialog subclasses](https://www.bekwam.net/javafx/custom-dialog.html).
@@ -96,8 +96,8 @@ Tutorials {#h2-6-tutorials}
 * **Frank Delporte** wrote a blog post, including two "Code Walk-Trough" videos: "[Search in Documentation with a JavaFX ChatGPT-like LangChain4j Application](https://webtechie.be/post/2024-03-18-search-documentation-javafx-chat-langchain4j/)".
 * JetBrains published an update of their IntelliJIDEA tutorial: [Create a new JavaFX project](https://www.jetbrains.com/help/idea/javafx.html).
 
-Miscellaneous {#h2-7-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Steve Hannah**](https://twitter.com/shannah78/status/1764028712943751539) published a post: ["jDeploy vs jpackage - When does it make sense to distribute your Java desktop app with jDeploy vs jpackage"](https://jdeploy.substack.com/p/jdeploy-vs-jpackage)
 * [**Bazlur Rahman**](https://twitter.com/bazlur_rahman) created a [Mandelbrot fractal using JavaFX](https://www.linkedin.com/pulse/fractal-journeys-javafx-exploration-a-n-m-bazlur-rahman-rfkjc/) with the help of Gemini LLM. The [code is available here](https://github.com/rokon12/Mandelbrot).
@@ -113,8 +113,8 @@ Miscellaneous {#h2-7-miscellaneous}
 * [**Sean Phillips** on Twitter](https://twitter.com/SeanMiPhillips/status/1772343662447317204): "JavaFX is fun what can I say. It's great at combining 2D controls and overlays with 3D scenes. This allows me to interactively measure samples from the Biden Deep Fake robocall against known fake volumes to show which were faked and which were real. Super easy, takes 3 minutes."
   * He will be [presenting a new method for detecting Deep Fake Audio called Projected Volumetric Detection at DevNexus 2024](https://twitter.com/SeanMiPhillips/status/1771606914821931474): "Join me in Atlanta April 9-11 if you would like to know more about how to detect AI generated Deep Fakes using Java and JavaFX."
 
-JFX Central {#h2-8-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * A new showcase application has been added: ["bk.text"](https://jfx-central.com/showcases/bktext): "An ergonomic and accessible text system for the German justice system, which supports the digital processing of court proceedings."
 * The overview of all the LinksOfTheWeek of February got [published on Foojay.io](https://foojay.io/today/javafx-links-of-february-2024/).

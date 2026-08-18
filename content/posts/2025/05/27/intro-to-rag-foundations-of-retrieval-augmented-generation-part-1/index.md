@@ -32,8 +32,8 @@ Instead of relying solely on the model's internal training data, RAG retrieves r
 
 In this post, we will define each component and how it works together in a RAG system.
 
-Why RAG? {#_why_rag}
---------------------
+Why RAG?
+--------
 
 Retrieval augmented generation (RAG) solves a few different problems in the technical space.
 
@@ -41,8 +41,8 @@ Retrieval augmented generation (RAG) solves a few different problems in the tech
 2. It provides searchable access for all types of data storage - database types, text, images, audio, video, webpages, etc.
 3. It allows technical experts to guide or limit the AI with defined tools, high-quality data, rules, business logic, and more. This increases accuracy and reduces risk of the system.
 
-Large Language Models (LLMs) {#_large_language_models_llms}
------------------------------------------------------------
+Large Language Models (LLMs)
+----------------------------
 
 ![Fields within Artificial Intelligence](areas-of-ai.jpg)
 
@@ -66,8 +66,8 @@ There are a variety of reasons that Large Language Models tend to hallucinate (o
 
 How do we improve these weaknesses by providing context to the LLM?
 
-Vector embeddings {#_vector_embeddings}
----------------------------------------
+Vector embeddings
+-----------------
 
 A [vector is a mathematical concept](https://www.mathsisfun.com/algebra/vectors.html) representing a line that has a size (magnitude) and direction. This numeric representation allows us to make calculations and comparisons to explain forces in physics. In the real world, we use vectors for a couple of relatable use cases.
 
@@ -79,7 +79,7 @@ A [vector is a mathematical concept](https://www.mathsisfun.com/algebra/vectors.
 
 We represent the paths by creating numeric representations based upon key, defined features that characterize the path (vector). Then, we can use those paths to make calculations and precise adjustments based on external factors.
 
-### Vectors applied to words {#_vectors_applied_to_words}
+### Vectors applied to words
 
 In 2013, [Google applied this mathmatical concept to words](https://code.google.com/archive/p/word2vec/) (word2vec), creating numeric representations of words based on how they functioned within the language and defining characteristics. Word embeddings map words into a continuous vector space where semantically similar words are closer together. For instance, the words "king" and "queen" might have embeddings that are close in this space, reflecting their related meanings around power, leadership, luxurious living, and wealth.
 
@@ -87,7 +87,7 @@ In 2013, [Google applied this mathmatical concept to words](https://code.google.
 
 This ability allowed humans to represent words for comparing similarity of words or understanding new words from proximity to known words. Broader searches and synonym lists based on "semantic" meaning could be factored into the calculations, which are foundational for many natural language processing tasks.
 
-### Vectors applied to data {#_vectors_applied_to_data}
+### Vectors applied to data
 
 We took this one step further in the last few years to apply this to any type of data (text, image, video, audio, etc). Vector embeddings are numerical representations of data that capture semantic meaning in a way that makes it easier to compare and analyze.
 
@@ -107,7 +107,7 @@ Also, a recent article I read compared vectors to a "fingerprint" of the data. J
 
 Here enter the need and purpose of [vector databases](https://frankzliu.com/blog/a-gentle-introduction-to-vector-databases), which are optimized to store and search these vector representations. But how do vector databases efficiently search vast amounts of these numbers (think every word in every language or millions of text documents)?
 
-### Similarity search {#_similarity_search}
+### Similarity search
 
 Similarity search involves finding data records that are most similar to a given query. This is often achieved using techniques like k-Nearest Neighbors (k-NN) or approximate methods like k-ANN for efficiency, where `k` represents the number of most similar results you want returned (i.e. 7, 42, 100).
 
@@ -133,8 +133,8 @@ In our library example, we could search for specific features like "dragons and 
 
 
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 In this blog post, we explored a few introductory concepts around Retrieval Augmented Generation (RAG), why it exists and the problems it solves. We also covered some starting GenAI concepts on Large Language Models (LLMs), vectors and embeddings, and vector similarity search. These pieces build the foundations of more complex AI systems and how RAG enhances the capabilities of LLMs by integrating them with external knowledge sources.
 
@@ -144,8 +144,8 @@ Whether you're a developer, data scientist, or simply someone interested in the 
 
 Happy coding... [and continue to part 2](https://foojay.io/today/intro-to-rag-foundations-of-retrieval-augmented-generation-part-2/)!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Tutorial: [Vectors - Math is Fun](https://www.mathsisfun.com/algebra/vectors.html)
 * Project: [word2vec - Google](https://code.google.com/archive/p/word2vec/)

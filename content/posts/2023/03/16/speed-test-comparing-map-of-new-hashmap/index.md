@@ -27,29 +27,29 @@ The Map interface is used to store data in key-value pairs, making it an essenti
 
 In this article, we will discuss the use of `Map.of()` and new `HashMap<>()` in Java, the difference between them, and the benefits of using Map.of().
 
-What is Map.of()? {#h2-0-what-is-map-of}
-----------------------------------------
+What is Map.of()?
+-----------------
 
 [`Map.of()`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html#of()) is a method introduced in Java 9, which allows developers to create an immutable map with up to 10 key-value pairs.
 
 It provides a convenient and concise way of creating maps, making it easier to create small maps without having to write a lot of code. `Map.of()` is an improvement over the previous way of creating small maps using the constructor of the HashMap class, which can be cumbersome and verbose.
 
-What is new HashMap\<\>()? {#h2-1-what-is-new-hashmap}
-------------------------------------------------------
+What is new HashMap\<\>()?
+--------------------------
 
 `new `[HashMap](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/HashMap.html)`<>() `is a constructor provided by the HashMap class in Java, which allows developers to create a new instance of a `HashMap`. It is used to create a mutable map, which means that the map can be modified by adding, removing, or updating key-value pairs.
 
 It is a commonly used method for creating maps in Java, especially when dealing with larger sets of data.
 
-Benchmarking Map.of() and new HashMap\<\>() {#h2-2-benchmarking-map-of-and-new-hashmap}
----------------------------------------------------------------------------------------
+Benchmarking Map.of() and new HashMap\<\>()
+-------------------------------------------
 
 To compare the performance of `Map.of()` and `new HashMap<>()` in Java, we can use benchmarking tools to measure the time taken to perform various operations on maps created using these methods. In our benchmark, we will measure the time taken to get a value from a map and the time taken to insert values into a map.
 
 It's worth noting that our benchmarks are limited to a small set of data, such as ten items. It's possible that the results could differ for larger data sets or more complex use cases.
 
-The benchmarking code {#h2-3-the-benchmarking-code}
----------------------------------------------------
+The benchmarking code
+---------------------
 
 ```java
 package ca.bazlur;
@@ -155,8 +155,8 @@ public class MapBenchmark {
 ```
 
 
-The results {#h2-4-the-results}
--------------------------------
+The results
+-----------
 
 ```
 Benchmark                    Mode  Cnt   Score   Error  Units
@@ -181,8 +181,8 @@ In my opinion, the slight variations in performance may not hold much importance
 
 So let's see the benefit of using Map.of() --  
 
-Benefits of using Map.of() {#h2-5-benefits-of-using-map-of}
------------------------------------------------------------
+Benefits of using Map.of()
+--------------------------
 
 There are several benefits to using Map.of() over the new HashMap\<\>() in Java:
 
@@ -194,8 +194,8 @@ There are several benefits to using Map.of() over the new HashMap\<\>() in Java:
 
 **Type Safety**: Map.of() provides type safety for the keys and values of the map, which helps prevent type-related errors that can occur when using new HashMap\<\>().
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 <br />
 

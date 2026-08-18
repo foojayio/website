@@ -42,8 +42,8 @@ This is actually material from four separate videos because I wanted to pool som
 
 <br />
 
-Remote Debugging Session {#h2-0-remote-debugging-session}
----------------------------------------------------------
+Remote Debugging Session
+------------------------
 
 A remote debugger is a feature of pretty much any programming language or platform, but it's pretty common in Java using the [JDWP protocol which we discussed in the past](https://talktotheduck.dev/psa-the-risks-of-remote-jdwp-debugging). As a refresher, JDWP standard for Java Remote Debugging Protocol. It's a wire agnostic protocol that defines the connection between the IDE and the JVM when debugging.
 
@@ -75,8 +75,8 @@ Once we do that, we can use the usual debugging features by connecting directly 
 
 We now have a debug session of the application as if we launched it directly from the IDE!
 
-Production Debugging {#h2-1-production-debugging}
--------------------------------------------------
+Production Debugging
+--------------------
 
 Now we might be tempted to just open a JDWP port, but this approach has many problems:
 
@@ -89,7 +89,7 @@ Now we might be tempted to just open a JDWP port, but this approach has many pro
 
 This is obviously not good. But we need a solution that will address all these issues. After all, the value of tracking a bug on a truly remote machine is tremendous!
 
-### Developer Observability {#h3-2-developer-observability}
+### Developer Observability
 
 Observability lets us monitor the production environment without shipping new code. It has been a part of the DevOps toolchain for a while now. At today's scale, managing a cluster without observability is simply impossible.
 
@@ -99,7 +99,7 @@ Unlike DevOps oriented observability, these tools integrate into the standard de
 
 We can use the [free version of Lightrun](https://lightrun.com/free) to get started and learn how these tools work. You need to install the Lightrun plugin in the IDE and then set up the agent into production servers. Unlike JDWP, the agent is secure and segregated. We'll discuss this further... But first let's discuss the capabilities.
 
-### Logs {#h3-3-logs}
+### Logs
 
 The most simple thing you can do with most developer observability tools is log injection. This lets you add a new log to a running process through an IDE context menu.
 
@@ -126,7 +126,7 @@ This sandbox also verifies performance. If a specific quota of CPU usage is exce
 
 The integrity of the remote process server code is kept!
 
-### Snapshots {#h3-4-snapshots}
+### Snapshots
 
 As I mentioned before, regular breakpoints are an immense problem when debugging production. The core problem is that they "break". Snapshots (AKA Captures or Non-Breaking Breakpoints), solve this problem by not breaking.
 
@@ -136,13 +136,13 @@ They provide us with information similar to the typical breakpoints in source co
 
 The snapshot is the workhorse of such remote debugging tools. With it, we can get an insight into the production that's normally reserved only for local development tools. Amazingly, we can get this insight without compromising the integrity of the remote machine.
 
-### Tags {#h3-5-tags}
+### Tags
 
 Scale is probably one of the biggest challenges with remote debugging. Developer observability tools let us bind any action (log, snapshot or metric) to a tag. This is tantamount to adding the action to all the agents (servers) in the tag.
 
 E.g. you can have a tag based on the platform, e.g. Ubuntu 20. Or based on the type of deployment "Green" etc. This lets you debug at a huge scale, removing the need to guess the remote device that will experience the bug next.
 
-### Counter {#h3-6-counter}
+### Counter
 
 Have you ever asked yourself:
 
@@ -162,7 +162,7 @@ Counter works just like that, without the hassle and without deploying. You can 
 
 ![](counter.png)
 
-### TicToc \& Method Duration {#h3-7-tictoc-method-duration}
+### TicToc \& Method Duration
 
 Similarly, we might be curious about the overhead of a specific method or a block of code. The latter is exactly what tictoc enables. It's the equivalent of storing the current time before the code starts. Then logging "current time - start time" when reaching the block end.
 
@@ -170,7 +170,7 @@ The only difference is that this requires no code changes, doesn't affect produc
 
 The output from all the metrics can be piped to statsd/Grafana and plotted to help in the decision-making process.
 
-### PII Reduction and Blocklists {#h3-8-pii-reduction-and-blocklists}
+### PII Reduction and Blocklists
 
 The sandbox is only one part of the security. As we discussed earlier, one of the biggest risks for such a deployment is from internal developers siphoning off data intentionally or not. Furthermore, there are regulatory and legal requirements we need to abide by.
 
@@ -182,8 +182,8 @@ This might violate regulations and laws. It's also disallowed by credit card pro
 
 Blocklists let us block specific files/classes from action insertion. That means we can prohibit a developer from adding a snapshot/log etc. to a file that might be risky. E.g. a file that handles the login process should be blocked by default. With these two features, we can harden the deployment further.
 
-Summary {#h2-9-summary}
------------------------
+Summary
+-------
 
 In the section titled "Production Debugging" above, I listed a few problems in remote debugging. This is how developer observability solves these problems:
 

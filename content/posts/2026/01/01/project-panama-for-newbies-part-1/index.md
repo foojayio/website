@@ -38,8 +38,8 @@ For the impatient go to [Panama4Newbies](https://github.com/carldea/panama4newbi
 
 In Part 1 of this series, I will give you an overview of the requirements and later go through some exercises as a primer to create memory outside of Java's heap and call into native C functions.
 
-What is Project Panama? {#h2-0-what-is-project-panama}
-------------------------------------------------------
+What is Project Panama?
+-----------------------
 
 Project Panama is a new way for the Java programming language to access native libraries that are written in native languages like C, C++, Objective-C/C++, Swift, Rust and Python (currently supports the C [ABI](https://en.wikipedia.org/wiki/Application_binary_interface)). While my description might be an oversimplification, Project Panama has been in the making for quite some time (11+ years) and continues to have great success! Kudos and a huge shout out to the OpenJDK community at large!
 
@@ -83,8 +83,8 @@ Shown below is the timeline of the roadmap:
 
 The tutorial series is based on **JEP 454** (final was released in JDK 22).
 
-Why Use Project Panama? {#h2-1-why-use-project-panama}
-------------------------------------------------------
+Why Use Project Panama?
+-----------------------
 
 Before answering why, let me ask another question, Have you heard of Minecraft? If you answered "Yes, of course", then, great! If you answered "No", then please go and visit [](https://www.minecraft.net/en-us)<https://www.minecraft.net/en-us>. Did you also know that Minecraft is written in Java using the popular open source gaming library called [LWJGL](https://www.lwjgl.org/ "LWJGL") (LightWeight Java Game Library)?
 
@@ -106,8 +106,8 @@ Okay, so now that you are convinced, how to get started?
 
 Before we begin, it is important to understand **jextract**, a command-line tool that automates the generation of the low-level Project Panama Java code. By binding native libraries to Java, jextract eliminates the tedious manual work required to invoke native functions and interact with native symbols.
 
-Where do I get the jextract tool? {#h2-2-where-do-i-get-the-jextract-tool}
---------------------------------------------------------------------------
+Where do I get the jextract tool?
+---------------------------------
 
 To acquire **jextract**, you can either build it from source or download a pre-compiled version:
 
@@ -222,20 +222,20 @@ macOS platform options for running jextract (available only when running on macO
 
 If you are seeing the `jextract` options then you are ready to go to the next section.
 
-Do I need a C compiler? {#h2-3-do-i-need-a-c-compiler}
-------------------------------------------------------
+Do I need a C compiler?
+-----------------------
 
 In short, **No**. For demonstration purposes I will be using a standard C compiler on my MacOS environment. This is purely optional and I will use it to show concepts inside a C program.
 
 If you are on a Windows OS you can check out Microsoft's Visual C++ that includes a C compiler ([](https://docs.microsoft.com/en-us/cpp/build/walkthrough-compile-a-c-program-on-the-command-line?view=msvc-160)<https://docs.microsoft.com/en-us/cpp/build/walkthrough-compile-a-c-program-on-the-command-line?view=msvc-160>). Also, you can download MingW at [](https://www.mingw-w64.org)<https://www.mingw-w64.org>
 
-Let's Do It! {#h2-4-let-s-do-it}
---------------------------------
+Let's Do It!
+------------
 
 Before we get into using Panama's APIs let's begin by looking at a **Hello World** example in the C programming language. By understanding what a C program consists of will help us know how to invoke **native** code. Later on we will write a pure Hello World Java program that will call into standard C (native) functions.
 
-Anatomy of a Hello World in C {#h2-5-anatomy-of-a-hello-world-in-c}
--------------------------------------------------------------------
+Anatomy of a Hello World in C
+-----------------------------
 
 **Note:** Remember, this part of the tutorial is purely *optional* if you don't have a C compiler handy for your OS just skip the compilation step.
 
@@ -305,8 +305,8 @@ There are two things to keep in mind when talking to C.
 
 Now that we have a good understanding of a Hello World C program let's create an equivalent Panama Java Hello World example. In other words the Java program will natively call the `printf()` function.
 
-Panama Hello World Example {#h2-6-panama-hello-world-example}
--------------------------------------------------------------
+Panama Hello World Example
+--------------------------
 
 As mentioned before, the C code of our Hello World program was using the `stdio.h` library. At this point, we will generate Java code to talk to the `stdio.h` library. Instead of hand coding this (which is out of the scope of this tutorial) we will be using the `jextract` tool. This magical tool will generate pure Java code that will bind to native libraries. These class files will contain meta data and much of the lower level Panama code that will make things convenient for the user of the API (you and me).
 
@@ -314,8 +314,8 @@ As mentioned before, the C code of our Hello World program was using the `stdio.
 
 Because the C language specification is well defined `jextract` can generate Java code pretty easily. C++ on the other hand will be another effort and is not currently supported. If you have a native library written in C++ you'd have to take some additional steps which I won't cover (See [Java Panama Polyglot (C++) Part 1](https://foojay.io/today/java-panama-polyglot-part1/)).
 
-Let's jextract STDIO please! {#h2-7-let-s-jextract-stdio-please}
-----------------------------------------------------------------
+Let's jextract STDIO please!
+----------------------------
 
 The `jextract` tool has been updated to make it easier for standard C libraries by specifying header files in double quotes as follows:
 
@@ -438,8 +438,8 @@ Hello World! Panama style
 ```
 
 
-How does it work? {#h2-8-how-does-it-work}
-------------------------------------------
+How does it work?
+-----------------
 
 **Step 1**, the C compiler on MacOS/Linux platforms allows you to find where headers are located on a system. Often MacOS developers will use Brew (package manager) to install 3rd party libraries such as OpenCL, Tensorflow, etc.
 
@@ -469,7 +469,7 @@ Upon successful execution, `printf()` returns the total character count of the o
 
 HelloWorld
 
-### What about 3rd party C libraries? {#h3-9-what-about-3rd-party-c-libraries}
+### What about 3rd party C libraries?
 
 When 3rd party libraries are installed they typically are in your library path such as `/usr/lib` or `/usr/local/lib`. To specify a library the `-l` (lowercase 'L') option is used. The value will be the name of the library or the absolute path to the library. For example, say you want to use Tensorflow (Google's Machine Learning library).
 
@@ -634,7 +634,7 @@ Congratulations for getting this far! While it's nice to create and output C str
 
 Let's look at how to create C primitive data types and later how to create arrays of primitives.
 
-### Creating/Getting/Setting C primitive data types from Java {#h3-10-creating-getting-setting-c-primitive-data-types-from-java}
+### Creating/Getting/Setting C primitive data types from Java
 
 To make this easy to remember think of `AllocatorFrom -> MemorySegment -> get/set` (`aka MemSeg` pattern). When creating C primitive data (variables) remember that they are like objects where space is allocated and has a memory addresses to change or access the value (dereferenced).
 
@@ -706,7 +706,7 @@ public static final ValueLayout.OfDouble C_DOUBLE = (ValueLayout.OfDouble) Linke
 ```
 
 
-### Creating C primitive arrays {#h3-11-creating-c-primitive-arrays}
+### Creating C primitive arrays
 
 Now that you know how to create primitive data types let's create C primitive arrays. Shown below is allocating space to hold a single dimensional array off of the Java heap. Then we just re-access the C array using `getAtIndex(ValueLayout, index)` and then displaying the contents.
 

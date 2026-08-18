@@ -26,15 +26,15 @@ frozen: false
 
 In this article, we'll be diving into one of the other news of the [Kotlin 1.6 release](https://blog.jetbrains.com/kotlin/2021/11/kotlin-1-6-0-is-released/) : The `Duration`API coming out of Experimental and is available for all flavours of Kotlin (so JS as well 😊)! Let's look quickly together what it has to offer!
 
-Why a Duration API? {#h2-0-why-a-duration-api}
-----------------------------------------------
+Why a Duration API?
+-------------------
 
 There are already multiple ways to calculate time in Java, so why the need for a Kotlin variant?
 
 [From the proposal itself](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/durations-and-time-measurement.md), The Duration API aims at helping to solve the representation of the interval between two moments in time. It aims to be able to represent very precise values (up to the Nanosecond), and is **especially suited to calculated the execution time of a code block**, for example.
 
-Duration API: A Convenient DSL {#h2-1-duration-api-a-convenient-dsl}
---------------------------------------------------------------------
+Duration API: A Convenient DSL
+------------------------------
 
 The first, and nice thing of the duration API is that it provides a nice DSL to manipulate time durations, from `nanoseconds` up to `days`. No need to search for weeks, months or years.
 
@@ -55,8 +55,8 @@ Printing Durations also returns very human readable results (which is the point,
  
 ```
 
-Negative Durations \& Infinite Durations: Completely OK! {#h2-2-negative-durations-infinite-durations-completely-ok}
---------------------------------------------------------------------------------------------------------------------
+Negative Durations \& Infinite Durations: Completely OK!
+--------------------------------------------------------
 
 The API handles negative values nicely, as well as (positive and negative) infinite values. `ZERO` is also a thing, and it comes with no rounding errors
 
@@ -71,8 +71,8 @@ println(ZERO) // 0s
 ```
 
 
-Duration API: Many Conversion Functions {#h2-3-duration-api-many-conversion-functions}
---------------------------------------------------------------------------------------
+Duration API: Many Conversion Functions
+---------------------------------------
 
 The API offers many conversion methods, from one `Duration` unit to another, but also into more common units like `Long`, or `Double`. The `inWhole` methods also allow for simple rounding of units for a better reader experience
 
@@ -99,8 +99,8 @@ fun experimentalConversion(){
 
 *Once thing I am confused about with this function though is the fact that is returns a `Double`, rather that the desired `Duration` output unit. To get `DurationUnit.MINUTES` back out my example you'd need to do it yourself : `convert(12.32, DurationUnit.DAYS, DurationUnit.MINUTES).minutes`*
 
-Easy Parsing In \& Out of the String Realm {#h2-4-easy-parsing-in-out-of-the-string-realm}
-------------------------------------------------------------------------------------------
+Easy Parsing In \& Out of the String Realm
+------------------------------------------
 
 One of the things I didn't expect to find was a simple way to actually parse the String representation of Durations back into actual `Duration` values.
 
@@ -129,8 +129,8 @@ println(parseIsoStringOrNull("PT283H18M")) // 11d 19h 18m
  
 ```
 
-Comparing Durations and Enforcing Duration Intervals \& Bounds {#h2-5-comparing-durations-and-enforcing-duration-intervals-bounds}
-----------------------------------------------------------------------------------------------------------------------------------
+Comparing Durations and Enforcing Duration Intervals \& Bounds
+--------------------------------------------------------------
 
 As expected, `Durations` can be compared which each other. But **the library also offers several methods to enforce that values are within a certain range** . In the case they are not, the default coercion value is returned. Have a look at [coerceIn](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/coerce-in.html) for example.
 
@@ -156,8 +156,8 @@ println(12.milliseconds.coerceIn(bounds))
 ```
 
 
-Duration API: In the Wild {#h2-6-duration-api-in-the-wild}
-----------------------------------------------------------
+Duration API: In the Wild
+-------------------------
 
 I've had a quick look at the current Kotlin stdlib, and haven't found many usages of the Duration API just yet. It does make sense, given that the use case is arguably specific.
 
@@ -176,8 +176,8 @@ fun experimentalPrintDuration(){
 ```
 
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 I really like that the Duration API focuses on a human readability as well as easy conversion and usage. It's also a very nice entry point into the `stdlib` if you're searching for simple contained to start with. I rarely dive into the standard library and the implementation is concise and easy to read. I'll surely be trying to find some uses for it in the short future :).
 

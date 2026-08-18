@@ -24,8 +24,8 @@ frozen: false
 
 **In this article, we'll implement a declarative API to perform tasks belonging to cross-cutting concerns, using auditing as an example. We'll see how SpEL and Spring AOP allow us to easily intercept invocations throughout a code base and perform arbitrary logic in an expressive and non-invasive manner.**
 
-A story about legacy {#h2-0-a-story-about-legacy}
--------------------------------------------------
+A story about legacy
+--------------------
 
 Let's pretend that we inherited a legacy system. The system is in a dismal state, with every change always at risk of bringing the whole thing down. One day, there is a business requirement to audit a few dozen methods scattered throughout the code base. After every invocation of these methods, we should notify an external system by sending a client id and an operation (`1234`, `"CREATE_USER"`).
 
@@ -66,8 +66,8 @@ public void disableUsers(List<DisableRequest> requests) {
 
 This annotation declares that the `DISABLE_USER` action will be audited with the client ids that are in the `clientId` property of every `UserDisableRequest` in the argument list. All in a single line that's expressive, concise, and non-invasive. In the rest of this article, we'll see how to implement this (spoiler: it's fairly straightforward)...
 
-Evaluating SpEL expressions {#h2-1-evaluating-spel-expressions}
----------------------------------------------------------------
+Evaluating SpEL expressions
+---------------------------
 
 First, a quick primer on SpEL. The expression in the annotation above (`#requests.![clientId]`) can be a bit mysterious. SpEL (Spring Expression Language) is a DSL that's built into the Spring Framework. Its main use in modern Spring applications is in one-liners that either drill down in a value (like what we did), or that compute a result from variables. And although SpEL is [well documented](https://docs.spring.io/spring-framework/reference/core/expressions/language-ref.html), it's not as well known as some other components of the Spring Framework.
 
@@ -125,8 +125,8 @@ void methodParamBinding() throws NoSuchMethodException {
 
 This is all we need to bind the arguments of a method invocation to a SpEL evaluation context, parse the expression, and evaluate it. You might wonder what the `new Object()` is. It's the context's root object, but we don't need it for this, so we just pass in a dummy value. One small note, the classes have to be compiled with the [`-parameters` javac argument](https://docs.oracle.com/en/java/javase/23/docs/specs/man/javac.html), so that the parameter names aren't stripped away by the compiler. If you are using Spring Boot and the [Maven plugin](https://docs.spring.io/spring-boot/docs/3.1.3/maven-plugin/reference/htmlsingle/#using) or the [Gradle plugin](https://docs.spring.io/spring-boot/docs/3.2.5/gradle-plugin/reference/htmlsingle/#reacting-to-other-plugins.java), `-parameters` is on by default. Now let's put this into practice by wiring it into an aspect, so that our auditing logic runs after each annotated method.
 
-Implementing the audit advice {#h2-2-implementing-the-audit-advice}
--------------------------------------------------------------------
+Implementing the audit advice
+-----------------------------
 
 If you've never worked with Spring AOP (Aspect-Oriented Programming), let me catch you up very quickly. AOP is often used to implement cross-cutting functionality, such as metrics, tracing, security, or in our case, auditing. It has a special vocabulary: "aspects" are collections of behaviours called "advices" that you can have Spring run before, after, or around invocation of a bean's methods. The invocations you decide to instrument, or "advise", are called "joinpoints", and you select them with a special expression. This expression, called a "pointcut", is written in a [subset of the AspectJ language](https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/pointcuts.html). This brief overview is sufficient for our needs.
 
@@ -214,8 +214,8 @@ private Collection<String> asStringCollection(Object result) {
 
 And voilà! We now have a working declarative auditing API that can handle multiple audit events, as well as one or many client ids coming from arbitrary properties of the audited methods' arguments. This code works, but you shouldn't take my word for it. Instead, I want to show how we can test this with a lightweight test that will run almost as fast as a unit test.
 
-Testing the audit aspect {#h2-3-testing-the-audit-aspect}
----------------------------------------------------------
+Testing the audit aspect
+------------------------
 
 Testing aspects involves starting up a Spring context, as well as the aspect-related machinery that we enabled in the application using `@EnableAspectJAutoProxy`. We can do this easily with `@ExtendWith(SpringExtension.class)`, or `@SpringBootTest(classes = AuditAspect.class)`. If you use `@SpringBootTest`, don't forget to specify at least one class in the `classes` element, so that the test doesn't load the whole application.
 
@@ -266,8 +266,8 @@ I'm not showing the full thing here, but such a test should verify that:
 
 You can view the full test suite, including these test cases, along with the rest of the code for this article [here](https://github.com/LeMikaelF/spel-auditing-blog).
 
-Improvements {#h2-4-improvements}
----------------------------------
+Improvements
+------------
 
 I've tried to keep this article simple, so I've left out some improvements. First, ideally the aspect would parse the expression strings only once per expression, and cache the result, since parsing can be a costly operation. This can easily be achieved with a `ConcurrentHashMap<String, Expression>`. Second, in the odd case where the expression would be malformed, or wouldn't evaluate to an acceptable type, depending on your requirements, you may want to prevent the execution of the method. In that case, the advice should be an `@Around` method and first evaluate the expression, before invoking the join point. `@Around` advices are a little different, but they're [well documented](https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/advice.html#aop-ataspectj-around-advice).
 
@@ -285,8 +285,8 @@ I have a few other SpEL-related ideas, so if you enjoyed this article and would 
 
 *Thank you to my colleagues at Ticketmaster for reviewing an early draft of this article.*
 
-Footnotes {#h2-5-footnotes}
----------------------------
+Footnotes
+---------
 
 (1) Michael Feathers, *Working Effectively With Legacy Code* (Prentice Hall Professional, 2004), 36.  
 (2) The `EvaluationContext` also allows for more advanced configuration than just variables. For more details, see the [documentation](https://docs.spring.io/spring-framework/reference/core/expressions/evaluation.html#expressions-evaluation-context).  

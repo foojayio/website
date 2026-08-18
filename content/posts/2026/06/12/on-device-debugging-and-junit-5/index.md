@@ -26,8 +26,8 @@ frozen: false
 This is the first follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/) and it covers the two changes from this release that affect how you iterate on a Codename One app rather than what the app itself does. On-device debugging that treats Java as Java on a real iPhone or a real Android device, and standard JUnit 5 against the JavaSE simulator. The first is the one we have been wanting for a long time, and is the one that takes the most explaining, so most of the post is about it.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
-On-device debugging that treats Java as Java {#h2-0-on-device-debugging-that-treats-java-as-java}
--------------------------------------------------------------------------------------------------
+On-device debugging that treats Java as Java
+--------------------------------------------
 
 Codename One has always supported on-device debugging in the strict technical sense. You could attach Xcode to a `.ipa`, you could attach Android Studio to a running APK, you could read the native call stack, you could step through Objective-C or the C that ParparVM emits. What you could not do was set a breakpoint in `MyForm.java`, hit it on a real iPhone, and inspect a Java field on a Java object as a Java object. You also could not debug an iOS app without a Mac in the loop somewhere, because the only debugger that understood the binary was Xcode. The translation step between the Java you wrote and the C that ParparVM produces left no way back across the gap on the device.
 
@@ -50,7 +50,7 @@ Supported targets:
 
 The Android attach uses standard `adb`, so you need the Android SDK platform tools installed on the developer machine. Those are available on macOS, Linux, and Windows, so any of the three is fine for Android debugging.
 
-### What it looks like {#h3-1-what-it-looks-like}
+### What it looks like
 
 A breakpoint inside an iOS app, hit on the iOS Simulator next to IntelliJ IDEA:
 ![IntelliJ stopped at a breakpoint inside a Codename One iOS app, with locals and the running simulator visible](https://www.codenameone.com/blog/developer-workflow-debug-and-junit/intellij-debugger-on-device.png)
@@ -59,7 +59,7 @@ A breakpoint inside an iOS app, hit on the iOS Simulator next to IntelliJ IDEA:
 
 The same Debug tool window you use for any other Java project. Frames panel on the left has the full Java call stack. The Variables panel shows `this` and the locals as Java values, with the same drill-down you would get on a regular JVM. The simulator on the right is the real iOS app, paused at the breakpoint, waiting for the next step.
 
-### How the pieces fit together {#h3-2-how-the-pieces-fit-together}
+### How the pieces fit together
 
 On iOS the IDE never talks to the device directly. The CN1 Debug Proxy is a small Java process you run on your developer machine. It binds two TCP ports: one for the iOS app to dial into using the CN1 wire protocol, and one that speaks standard JDWP for the IDE. The IDE sees a normal remote JVM. The iOS app sees a debug proxy. The proxy translates between the two and walks the ParparVM struct layout so Java fields, method calls, and values round-trip cleanly in both directions.
 ![](codenameone-ondevice-debugging-chart1.png)
@@ -69,7 +69,7 @@ On Android the proxy is unnecessary. Dalvik / ART implement JDWP themselves, so 
 
 A capability difference between the two platforms worth knowing up front: on Android, a native interface's `Impl` class is regular Java, so the JDWP attach steps through it the same way it steps through any other class in your project. On iOS the `Impl` is Objective-C, which JDWP does not speak, so you cannot step through it from the IDE. You can still step through the Codename One framework code and your own Java up to and through the native-interface call, and you can inspect the value the call returns; the body of the Objective-C method is the only thing that is opaque from the JDWP side. Attach Xcode in parallel if you need to step through the Objective-C as well.
 
-### Tutorial: IntelliJ + iOS {#h3-3-tutorial-intellij-ios}
+### Tutorial: IntelliJ + iOS
 
 The Codename One archetype now generates two run configurations under an *On-Device Debug* folder in the IntelliJ run-config dropdown: **CN1 Debug Proxy** and **CN1 Attach iOS** . The tutorial below assumes a project generated from the [Initializr](https://www.codenameone.com/initializr/) recently enough to have those. If you have an older project, generate a new project with initializr and copy over the `.idea` directory and maven `pom.xml` files.
 
@@ -126,7 +126,7 @@ Launch the iOS app under the iOS Simulator (from Xcode) or on the tethered devic
 
 **The proxy's Run window is also your device console.** Anything the app writes to `System.out`, `Log.p`, `printf`, or `NSLog` from native code is forwarded to the proxy and printed in the **CN1 Debug Proxy** Run window with a `[device]` prefix. This is genuinely useful and is one fewer thing you need Xcode for. The caveat is that the forwarding starts when the proxy connection is established, so output written during the very first millisecond of process launch (before `Display.init`) is not always captured. If you need every byte from `t=0`, attach Xcode's console for that specific run.
 
-### Tutorial: IntelliJ + Android {#h3-4-tutorial-intellij-android}
+### Tutorial: IntelliJ + Android
 
 Android is simpler because the proxy is not needed. The archetype generates two run configurations under the same *On-Device Debug* folder: **CN1 Android On-Device Debug** (Maven, builds and installs the APK and forwards JDWP) and **CN1 Attach Android** (Remote JVM Debug at `localhost:5005`).
 
@@ -155,12 +155,12 @@ Source resolution covers both the `codenameone-core` and `codenameone-android` s
 
 The dev guide has the full reference, including the wireless-pairing flows, the VS Code and Eclipse equivalents, and a troubleshooting section: [iOS on-device debugging](https://www.codenameone.com/developer-guide/#_on_device_debugging_ios) and [Android on-device debugging](https://www.codenameone.com/developer-guide/#_on_device_debugging_android).
 
-### When to use it (and when not to) {#h3-5-when-to-use-it-and-when-not-to}
+### When to use it (and when not to)
 
 For most bugs the JavaSE simulator is still by a large margin the fastest loop. Reach for on-device debugging when the bug is platform-specific: ParparVM-specific threading, an iOS-only layout glitch under the modern native theme, a real-radio Bluetooth interaction, a Touch ID gate, an Android-only manifest interaction, anything that only reproduces under iOS background memory pressure. The kind of bug that previously sent you reaching for `Log.p` and a rebuild loop. That bug now has a debugger pointed at it.
 
-JUnit 5 against the simulator {#h2-6-junit-5-against-the-simulator}
--------------------------------------------------------------------
+JUnit 5 against the simulator
+-----------------------------
 
 The other change in this release is the new JUnit 5 integration in the JavaSE port ([PR #5032](https://github.com/codenameone/CodenameOne/pull/5032)).
 
@@ -170,7 +170,7 @@ Why a separate integration at all? The legacy `com.codename1.testing.AbstractTes
 
 Both styles coexist in the same project under `common/src/test/java`. You pick per test class. The runners discover disjoint sets (`cn1:test` looks for `UnitTest` implementers; Surefire looks for `@Test` methods), so a `mvn install` runs both passes in the same phase without overlap.
 
-### A minimal test {#h3-7-a-minimal-test}
+### A minimal test
 
 Tests live in `common/src/test/java`. The shape most apps want is one that boots the project's app class through the same `init` / `start` sequence the simulator uses, then asserts against the form the app actually opens:
 
@@ -230,7 +230,7 @@ mvn -Ptest test -Dtest=GreetingFormTest#formShowsExpectedTitle
 
 `@RunOnEdt` dispatches the test body through `CN.callSerially`, which is what you want any time the body touches UI state. It rethrows the body's exceptions on the JUnit thread so the stack trace stays clickable in the IDE. Place it on the method for one test, on the class to apply to every test.
 
-### A couple more common cases {#h3-8-a-couple-more-common-cases}
+### A couple more common cases
 
 A test that exercises a plain validator, with no UI involved at all:
 
@@ -294,8 +294,8 @@ Class-level `@SimulatorProperty` applies to every method in the class. Method-le
 
 The full reference, including the dependency-block YAML for `common/pom.xml` and `javase/pom.xml` and the `@Theme` / `@Orientation` / `@RTL` details, is at [Testing with JUnit 5](https://www.codenameone.com/developer-guide/#_testing_with_junit_5) in the developer guide.
 
-Wrapping up {#h2-9-wrapping-up}
--------------------------------
+Wrapping up
+-----------
 
 That is the workflow half of this release. [Tomorrow's post](https://www.codenameone.com/blog/platform-apis-in-the-core/) covers the new platform APIs that moved into the core this week: AI and OAuth / OIDC are the headline pieces, with WiFi / connectivity and a few smaller items alongside them.
 

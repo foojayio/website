@@ -30,7 +30,7 @@ But Java 25 (released September 2025) is like a Pokémon finally hitting level 1
 
 Here's how Java 25 turns the "verbose" criticism into a thing of the past, just like how Pokémon keeps reinventing itself every generation.
 
-### Java 25 -- Compact Source Files and Instance Main Methods (JEP 512) {#h3-0-java-25-compact-source-files-and-instance-main-methods-jep-512}
+### Java 25 -- Compact Source Files and Instance Main Methods (JEP 512)
 
 <https://openjdk.org/jeps/512>
 
@@ -40,7 +40,7 @@ These functions now rely on System.out and System.in instead of the Console API.
 
 Compact source files gain automatic entry to every public class and interface in the java.base module (essentially performing an import module java.base;).
 
-### Java 25 -- Flexible Constructor Bodies (JEP 513) {#h3-1-java-25-flexible-constructor-bodies-jep-513}
+### Java 25 -- Flexible Constructor Bodies (JEP 513)
 
 <https://openjdk.org/jeps/513>
 
@@ -52,7 +52,7 @@ The enhancement addresses limitations by permitting specific statements to come 
 
 Keep in mind this isn't a complete rundown, I highly recommend checking out the links and experimenting with some samples yourself to fully appreciate the advantages.
 
-### 30 Years of Pokémon. Decades of Java Evolution. {#h3-2-30-years-of-pok-mon-decades-of-java-evolution}
+### 30 Years of Pokémon. Decades of Java Evolution.
 
 Just like how Pokémon keeps evolving its games to stay fresh and fun for 30 years, Java keeps evolving so that you can have fun coding right away, whether you're building a Pokédex app, a tiny game, or controlling LEDs on a Raspberry Pi.
 
@@ -68,6 +68,6 @@ Drop it in the comments --- let's evolve our code together!
 
 Gotta code 'em all!
 
-### LinksLinks {#h3-3-linkslinks}
+### LinksLinks
 
 <https://dev.to/igoriot/stop-saying-java-is-verbose-127i>

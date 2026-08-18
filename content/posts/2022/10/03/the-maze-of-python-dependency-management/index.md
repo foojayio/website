@@ -32,8 +32,8 @@ I'm not a Python developer, but I'm learning - the hard way.
 
 In this article, I'd like to shed some light on dependency management in Python.
 
-Just enough dependency management in Python {#h2-0-just-enough-dependency-management-in-python}
------------------------------------------------------------------------------------------------
+Just enough dependency management in Python
+-------------------------------------------
 
 On the JVM, dependency management seems like a solved problem. First, you choose your build tool, preferably Maven or the alternative-that-I-shall-not-name. Then, you declare your *direct* dependencies, and the tool manages the indirect ones. It doesn't mean there aren't gotchas, but you can solve them more or less quickly.
 
@@ -82,8 +82,8 @@ Werkzeug==2.2.2
 ```
 
 
-Dependencies and transitive dependencies {#h2-1-dependencies-and-transitive-dependencies}
------------------------------------------------------------------------------------------
+Dependencies and transitive dependencies
+----------------------------------------
 
 Before describing the issue, we need to explain what are *transitive* dependencies. A transitive dependency is a dependency that's not required by the project directly but by one of the project's dependencies, or a dependency's dependency, all the way down. In the example above, I added the `flask` dependency, but `pip` installed 6 dependencies in total.
 
@@ -140,8 +140,8 @@ setup(
 ```
 
 
-Pip and transitive dependencies {#h2-2-pip-and-transitive-dependencies}
------------------------------------------------------------------------
+Pip and transitive dependencies
+-------------------------------
 
 The problem appears because I want my dependencies to be up-to-date. For this, I've configured Dependabot to watch for new versions of dependencies listed in `requirements.txt`. When such an event occurs, it open a in my repo. Most of the time, the PR works like a charm, but in a few cases, an error occurs when I run the script after I merge. It looks like the following:
 
@@ -167,8 +167,8 @@ libbar==2.5
 
 Whether the above issue appears depends solely on how `libfoo 1.0.0` specified its dependency in `setup.py`. If `2.5` falls within the compatible range, it works; if not, it won't.
 
-`pip-compile` to the rescue {#h2-3-pip-compile-to-the-rescue}
--------------------------------------------------------------
+`pip-compile` to the rescue
+---------------------------
 
 The problem with `pip` is that it lists transitive dependencies and direct ones. Dependabot then fetches the latest versions of all dependencies but doesn't verify if transitive dependencies version updates fall within the range. It could potentially check, but the `requirements.txt` file format is not structured: it doesn't differentiate between direct and transitive dependencies. The obvious solution is to list only direct dependencies.
 
@@ -218,8 +218,8 @@ It has the following benefits and consequences:
 
 Moreover, Dependabot can manage dependencies version upgrades of `pip-compile`.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 This post described the default Python's dependency management system and how it breaks automated version upgrades.
 

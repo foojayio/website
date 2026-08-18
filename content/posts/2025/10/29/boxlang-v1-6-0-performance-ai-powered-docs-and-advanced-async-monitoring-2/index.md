@@ -25,16 +25,16 @@ frozen: false
 
 We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities. This release focuses on making BoxLang faster, smarter, and more observable than ever before.
 
-🚀 What's New in 1.6.0? {#h2-0-what-s-new-in-1-6-0}
----------------------------------------------------
+🚀 What's New in 1.6.0?
+-----------------------
 
-### 🤖 BoxLang Documentation Meets AI: MCP Server Integration {#h3-1-boxlang-documentation-meets-ai-mcp-server-integration}
+### 🤖 BoxLang Documentation Meets AI: MCP Server Integration
 
 ![](BoxLang_docs-531x510.png)  
 
 BoxLang documentation is now accessible via the Model Context Protocol (MCP)! Connect AI assistants like Claude, GitHub Copilot, and other MCP-compatible tools directly to comprehensive BoxLang documentation for instant access to language references, framework features, and best practices.
 
-### Connect to the MCP Server: {#h3-2-connect-to-the-mcp-server}
+### Connect to the MCP Server:
 
 * **Direct MCP URL:** [https://boxlang.ortusbooks.com/\~gitbook/mcp](https://boxlang.ortusbooks.com/~gitbook/mcp "https://boxlang.ortusbooks.com/~gitbook/mcp")
 * **One-Click VSCode Installation:** [Install BoxLang MCP Server](mcp/install?%7B%22name%22%3A%22BoxLang%20%3A%20A%20Modern%20Dynamic%20JVM%20Language%22%2C%22url%22%3A%22https%3A%2F%2Fboxlang.ortusbooks.com%2F~gitbook%2Fmcp%22%7D "Install BoxLang MCP Server")
@@ -48,12 +48,12 @@ This integration enables developers to:
 
 Imagine asking Claude "How do I create a custom async executor in BoxLang?" and getting instant, accurate answers pulled directly from the official documentation. This is the future of developer assistance, and BoxLang is leading the way!
 
-⚡ Extreme Performance Optimizations: Up to 65% Faster {#h2-3-extreme-performance-optimizations-up-to-65-faster}
----------------------------------------------------------------------------------------------------------------
+⚡ Extreme Performance Optimizations: Up to 65% Faster
+-----------------------------------------------------
 
 BoxLang 1.6.0 delivers **game-changing performance improvements** across the board in comparison to our previous releases. Our second major optimization pass focuses on reducing thread contention, memory usage, and dramatically improving throughput.
 
-### Key Performance Enhancements: {#h3-4-key-performance-enhancements}
+### Key Performance Enhancements:
 
 * **50x throughput increase** via deferred interception data creation based on hasState() checks
 * **Eliminated synchronized bottlenecks** on singleton getInstance() methods for better concurrency
@@ -63,7 +63,7 @@ BoxLang 1.6.0 delivers **game-changing performance improvements** across the boa
 * **Optimized internal** `expandPath()` **method** to avoid unnecessary `context.getConfig()` calls
 * **ASM compiler improvements** to avoid method-level synchronization in `getInstance()` patterns
 
-### Real-World Performance Stats: {#h3-5-real-world-performance-stats}
+### Real-World Performance Stats:
 
 * **Plain text requests:** Jumped from 23,000 to **53,000+ req/s** (130% increase!)
 * **SQL query tests:** Increased from 15,000 to **18,000+ req/s** (20% improvement)
@@ -74,12 +74,12 @@ BoxLang 1.6.0 delivers **game-changing performance improvements** across the boa
 
 We've seen performance and throughput improvements ranging from 45-65% in various benchmarks and vanilla ColdBox applications when comparing 1.6.0 to previous 1.5.x releases. Using BoxLang with our SocketBox WebSocket library and server, we've achieved capabilities of over 5,000 concurrent WebSocket connections running smoothly on modest development hardware.
 
-📊 Advanced Async Monitoring with BoxExecutor Health Checks {#h2-6-advanced-async-monitoring-with-boxexecutor-health-checks}
-----------------------------------------------------------------------------------------------------------------------------
+📊 Advanced Async Monitoring with BoxExecutor Health Checks
+-----------------------------------------------------------
 
 The `ExecutorRecord` has evolved into a full-fledged `BoxExecutor` **class** with comprehensive health monitoring, activity tracking, and advanced statistics. This provides deep insights into your async operations like never before.
 
-### New Health Status Indicators: {#h3-7-new-health-status-indicators}
+### New Health Status Indicators:
 
 * `healthy` - Executor is operating normally within defined thresholds
 * `degraded` - Experiencing some issues but still functional
@@ -89,7 +89,7 @@ The `ExecutorRecord` has evolved into a full-fledged `BoxExecutor` **class** wit
 * `terminated` - No longer operational
 * `draining` - Finishing existing tasks, not accepting new ones
 
-### Comprehensive Health Reporting: {#h3-8-comprehensive-health-reporting}
+### Comprehensive Health Reporting:
 
 ```java
 // Get executor and check its comprehensive stats including health
@@ -123,12 +123,12 @@ The new Executor Health Report provides:
 
 This opens the door for future tooling around executor management and monitoring, giving you unprecedented visibility into your async operations. Especially on our new super secret coming module `bx-orion`
 
-🖥️ MiniConsole Framework \& Enhanced REPL Experience {#h2-9-miniconsole-framework-enhanced-repl-experience}
-------------------------------------------------------------------------------------------------------------
+🖥️ MiniConsole Framework \& Enhanced REPL Experience
+-----------------------------------------------------
 
 A new `MiniConsole` **framework** brings sophisticated terminal interaction capabilities and a dramatically improved REPL experience:
 
-### New REPL Features: {#h3-10-new-repl-features}
+### New REPL Features:
 
 * **Syntax highlighting** for BoxLang code with customizable color themes (dark/light palettes)
 * **Tab completion** for BIFs and components with intelligent providers
@@ -150,8 +150,8 @@ A new `MiniConsole` **framework** brings sophisticated terminal interaction capa
 
 The REPL is now a joy to use, making interactive BoxLang development feel modern and productive.
 
-📦 Module Public Mapping Support {#h2-11-module-public-mapping-support}
------------------------------------------------------------------------
+📦 Module Public Mapping Support
+--------------------------------
 
 Modules now support a `publicMapping` convention for exposing module assets publicly, in addition to the existing internal `mapping` property.
 
@@ -181,10 +181,10 @@ component {
 
 This makes it easier to organize and serve module assets like CSS, JavaScript, and images while keeping internal paths separate.
 
-🔧 Core Runtime Improvements {#h2-12-core-runtime-improvements}
----------------------------------------------------------------
+🔧 Core Runtime Improvements
+----------------------------
 
-### DateTime Enhancements {#h3-13-datetime-enhancements}
+### DateTime Enhancements
 
 * **Immutability flag** to prevent timezone mutation during formatting
 * **Performance optimizations** for DateTime operations
@@ -193,13 +193,13 @@ This makes it easier to organize and serve module assets like CSS, JavaScript, a
 * **Consistent default formats** between parsed date results
 * **DateFormat BIF compatibility** - all `m` letters treated as `M`
 
-### JDBC \& Database {#h3-14-jdbc-database}
+### JDBC \& Database
 
 * **Disabled connection leak detection by default** for better performance (enable via config if needed)
 * **Fixed NPE in bx-mariadb** when checking DDL statement results
 * **Improved query param encoding** in HTTP requests
 
-### BIF \& Component Documentation {#h3-15-bif-component-documentation}
+### BIF \& Component Documentation
 
 Built-in functions and components now include **runtime descriptions** via the `description` attribute in `@BoxBIF` and `@BoxComponent` annotations:
 
@@ -223,42 +223,42 @@ public class Http extends Component {
 
 This improves introspection and makes auto-generated documentation more informative.
 
-🌐 Runtime Updates {#h2-16-runtime-updates}
--------------------------------------------
+🌐 Runtime Updates
+------------------
 
-### MiniServer Runtime {#h3-17-miniserver-runtime}
+### MiniServer Runtime
 
 * **Enhanced error handling** when invalid arguments are provided
 * **STOMP heartbeat responses** now properly returned from miniserver
 * **Version flag support** - `boxlang-miniserver --version` displays version information
 
-### Servlet Runtime (Jakarta EE) {#h3-18-servlet-runtime-jakarta-ee}
+### Servlet Runtime (Jakarta EE)
 
 * **Updated web.xml to Jakarta specs** with proper namespace declarations
 * **Integration tests added** to verify WAR deployment can expand, deploy, and run BoxLang code
 * **Fixed file upload handling** for small files in servlet environment
 
-### AWS Lambda Runtime {#h3-19-aws-lambda-runtime}
+### AWS Lambda Runtime
 
 * **Upgraded AWS Lambda Java Core** from 1.3.0 to 1.4.0
 
-🛠️ Developer Tools {#h2-20-developer-tools}
---------------------------------------------
+🛠️ Developer Tools
+-------------------
 
-### CFTranspile Improvements {#h3-21-cftranspile-improvements}
+### CFTranspile Improvements
 
 * **Verbose mode added** to `cftranspile` command for detailed conversion insights
 * Better visibility into transpilation issues and potential data concerns
 
-### Feature Audit Tool {#h3-22-feature-audit-tool}
+### Feature Audit Tool
 
 * **Updated feature audit** with improved output
 * **Lists missing modules** to help identify required BoxLang modules for migrations
 
-🐛 Notable Bug Fixes {#h2-23-notable-bug-fixes}
------------------------------------------------
+🐛 Notable Bug Fixes
+--------------------
 
-### Component \& Function Fixes {#h3-24-component-function-fixes}
+### Component \& Function Fixes
 
 * `structKeyExists()` now works on closures
 * `imageRead()` properly expands paths and handles URIs
@@ -266,13 +266,13 @@ This improves introspection and makes auto-generated documentation more informat
 * HTTP component now returns results when both `file` and `path` are specified
 * File/Path compatibility improved between BoxLang, Lucee, and Adobe CF
 
-### XML Handling {#h3-25-xml-handling}
+### XML Handling
 
 * `XMLElemNew()` usage - XMLAttribute on produced nodes no longer throws errors
 * Empty `xmlNew()` results now produce valid XML objects with nodes
 * Multiple BOMs - parsing no longer fails on files with multiple byte order marks
 
-### Parsing Improvements {#h3-26-parsing-improvements}
+### Parsing Improvements
 
 * Extra spaces in tag close now parse correctly
 * `return` keyword can now be used as a variable name
@@ -280,7 +280,7 @@ This improves introspection and makes auto-generated documentation more informat
 * FQN starting with underscore now supported
 * Property shortcuts with FQN types now work properly
 
-### Compatibility Fixes {#h3-27-compatibility-fixes}
+### Compatibility Fixes
 
 * `ListDeleteAt()` retains leading delimiters in compatibility mode
 * CF compat nulls now equal empty strings
@@ -288,26 +288,26 @@ This improves introspection and makes auto-generated documentation more informat
 * Lucee JSON compatibility - unquoted keys handled consistently with Lucee
 * Duplication util now uses correct class loader when serializing classes
 
-🔧 Configuration Updates {#h2-28-configuration-updates}
--------------------------------------------------------
+🔧 Configuration Updates
+------------------------
 
-### Datasource Environment Variables {#h3-29-datasource-environment-variables}
+### Datasource Environment Variables
 
 Datasource keys are now searched for environment variable replacements in configuration.
 
-### Mapping Configuration {#h3-30-mapping-configuration}
+### Mapping Configuration
 
 * Enhanced mapping registration detects between simple and complex mappings
 * Better handling of module mappings with `usePrefix` and external flags
 
-🚀 Migration \& Compatibility {#h2-31-migration-compatibility}
---------------------------------------------------------------
+🚀 Migration \& Compatibility
+-----------------------------
 
-### Breaking Changes {#h3-32-breaking-changes}
+### Breaking Changes
 
 **None!** This release maintains full backward compatibility.
 
-### Compatibility Improvements {#h3-33-compatibility-improvements}
+### Compatibility Improvements
 
 Numerous compatibility fixes for Adobe ColdFusion and Lucee migrations:
 
@@ -317,14 +317,14 @@ Numerous compatibility fixes for Adobe ColdFusion and Lucee migrations:
 * IsValid type validation
 * JSON unquoted key handling
 
-### Performance Considerations {#h3-34-performance-considerations}
+### Performance Considerations
 
 * **JDBC connection leak detection** is now disabled by default. Enable via configuration if needed for debugging.
 * **Trusted cache behavior** - Application descriptor lookups are now cached when trusted cache is enabled.
 * Consider using the new **BoxExecutor health monitoring** to track async operation performance.
 
-🎯 What's Next? {#h2-35-what-s-next}
-------------------------------------
+🎯 What's Next?
+---------------
 
 BoxLang 1.6.0 sets a new performance baseline and enhances developer experience significantly. With AI-powered documentation access, comprehensive async monitoring, and massive performance gains, BoxLang continues to evolve as the most modern and powerful JVM language for dynamic application development.
 
@@ -335,21 +335,21 @@ This release also sets the groundwork for two new runtimes coming in fall:
 * BoxLang Desktop Applications
 * BoxLang Azure Functions
 
-📚 Resources {#h2-36-resources}
--------------------------------
+📚 Resources
+------------
 
 * Documentation: [https://boxlang.ortusbooks.com/](https://boxlang.ortusbooks.com/ "https://boxlang.ortusbooks.com/")
 * MCP Server: [https://boxlang.ortusbooks.com/\~gitbook/mcp](https://boxlang.ortusbooks.com/~gitbook/mcp "https://boxlang.ortusbooks.com/~gitbook/mcp")
 * Source Code: [https://github.com/ortus-boxlang/boxlang](https://github.com/ortus-boxlang/boxlang "https://github.com/ortus-boxlang/boxlang")
 * Community: [https://community.ortussolutions.com/](https://community.ortussolutions.com/ "https://community.ortussolutions.com/")
 
-Download {#h2-37-download}
---------------------------
+Download
+--------
 
 Please visit our [download](https://www.boxlang.io/download "download") page or our quick [installation guides](https://boxlang.ortusbooks.com/getting-started/installation "installation guides") to upgrade your installation.
 
-Professional Open Source {#h2-38-professional-open-source}
-----------------------------------------------------------
+Professional Open Source
+------------------------
 
 BoxLang is a professional open-source product, with three different licences:
 
@@ -367,8 +367,8 @@ Join us and redefine development on the JVM **Ready to learn more?** Explore Box
 
 [Try BoxLang](https://boxlang.io/plans)
 
-Join the BoxLang Community ⚡️ {#h2-39-join-the-boxlang-community}
------------------------------------------------------------------
+Join the BoxLang Community ⚡️
+-----------------------------
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on **Into the Box 2025, product launches, tool updates, and more.**
 

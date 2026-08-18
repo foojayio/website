@@ -25,8 +25,8 @@ RIFE2 is a very recently released and completely re-imagined version of my RIFE 
 
 You can find all the details on the [project website](https://rife2.com "project website") and on [GitHub](https://github.com/gbevin/rife2 "GitHub").
 
-What is RIFE2? {#h2-0-what-is-rife2}
-------------------------------------
+What is RIFE2?
+--------------
 
 RIFE2 provides an opinionated full stack web framework, without external dependencies, in a 2MB jar. It is designed as a whole to make the creation of dynamic web applications and REST web services very fast while preserving maintainability and leveraging the strengths of the Java platform. You can still pull in other Java libraries and frameworks, of course, however, the layers of RIFE2's full stack have knowledge about each-other, which provides many convenient features and shortcuts.
 
@@ -64,8 +64,8 @@ Here are some of the features:
 
 • and much more ...
 
-Quickstart {#h2-1-quickstart}
------------------------------
+Quickstart
+----------
 
 I'm very passionate about staying in the flow, to quickly start with a project and frictionlessly iterate, to have your development version up and running immediately with a smooth path towards deployment.
 
@@ -88,8 +88,8 @@ public class HelloWorld extends Site {
 
 This is a fully functional application that you can launch from your build tool, [step by step instructions](https://github.com/gbevin/rife2/wiki/Getting-Started) are available in the RIFE2 manual. Deployment is trivial also, since this class name simply needs to be set as an attribute in your [web.xml file](https://github.com/gbevin/rife2/wiki/Deployment).
 
-Out-of-container testing {#h2-2-out-of-container-testing}
----------------------------------------------------------
+Out-of-container testing
+------------------------
 
 RIFE2 comes with an API to perform out-of-container tests, directly interacting with your site to simulate full request-response interactions, without having to spin up a servlet container.
 
@@ -111,8 +111,8 @@ The key part that I want to bring across here is that it really just takes a cou
 
 As mentioned in the introduction, RIFE2 has many features, far too many to detail in this article. On the surface the route definition above looks similar to some other frameworks, but I already want to highlight one unique feature: type-safe links.
 
-Type-safe links {#h2-3-type-safe-links}
----------------------------------------
+Type-safe links
+---------------
 
 One of the most brittle aspects of web application development is typing links and URLs as text literals, without anything guaranteeing they remain correct when changes occur. RIFE2's routing API allows all your application links to be generated correctly without any effort on your behalf.
 
@@ -146,8 +146,8 @@ class HelloTest {
 ```
 
 
-Wrapping up {#h2-4-wrapping-up}
--------------------------------
+Wrapping up
+-----------
 
 This was a tiny sneak peak into RIFE2's capabilities.
 

@@ -32,15 +32,15 @@ Even though I'm not providing consulting services regularly, I wanted to keep up
 
 The base application uses Project Reactor and its types - `Flux` and `Mono`. For an added twist, I use Kotlin (without coroutines). Most code snippets have unnecessary type hints for better understanding.
 
-The demo model {#h2-0-the-demo-model}
--------------------------------------
+The demo model
+--------------
 
 I don't want a complicated demo model, but I don't want it to be too simple. I'll use a single many-to-many relationship and a field with `LocalDate`:
 
 ![](demo-model-1024x204.png)
 
-Spring Data R2DBC {#h2-1-spring-data-r2dbc}
--------------------------------------------
+Spring Data R2DBC
+-----------------
 
 As far as I remember, the Spring ecosystem was the first to offer a reactive database access API. At first, it was limited to H2 - not very useful in production. However, new reactive drivers were easy to integrate.
 
@@ -136,8 +136,8 @@ spring.r2dbc:
 ```
 
 
-Hibernate Reactive {#h2-2-hibernate-reactive}
----------------------------------------------
+Hibernate Reactive
+------------------
 
 If you're familiar with regular Hibernate, you'll feel right at home with Hibernate Reactive. The mapping is the same in both cases:
 
@@ -210,8 +210,8 @@ val people: Mono<MutableList<Person>> = sessionFactory
 
 Note that Hibernate Reactive is the only library among the three to return a `Mono<List>` instead of a `Flux`. In layman's terms, it means you get the whole list at once instead of getting the elements one by one and being able to do something on each one individually.
 
-jOOQ Reactive {#h2-3-jooq-reactive}
------------------------------------
+jOOQ Reactive
+-------------
 
 As for the two above frameworks, jOOQ Reactive is similar to its non-reactive version. You first generate the code from the database schema, then use it.
 
@@ -314,8 +314,8 @@ I'm not a SQL master, so `multiset` is hard at first glance. However, I confirm 
 
 Note that **nested collections are fetched eagerly on a per-record basis, whereas top-level records are streamed reactively**.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 We have browsed the surface of the main three reactive database access: Spring Data R2DBC, Hibernate, and jOOQ. So, which one should one choose?
 

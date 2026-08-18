@@ -31,7 +31,7 @@ In this article, we explore one of the AgentCore capabilities i.e., ***memory***
 To begin, enable **AgentCore memory** for the agent you built earlier.  
 ![SpringAI SDK](SpringAISDK.png)
 
-### Step 1: Add the Ai model and AgentCore memory dependencies {#h3-0-step-1-add-the-ai-model-and-agentcore-memory-dependencies}
+### Step 1: Add the Ai model and AgentCore memory dependencies
 
 <br />
 
@@ -47,12 +47,12 @@ To begin, enable **AgentCore memory** for the agent you built earlier.
 ```
 
 
-### Step 2: Create Short/Long Term in AWS Management Console {#h3-1-step-2-create-short-long-term-in-aws-management-console}
+### Step 2: Create Short/Long Term in AWS Management Console
 
 *Navigate to **Amazon Bedrock AgentCore \> Memory** to create short/long-term memories.*
 ![AgentCore Memory](AgentCoreMemory-1024x441.png) AgentCore Memory
 
-### Step 3: Add the following memory-related properties. {#h3-2-step-3-add-the-following-memory-related-properties}
+### Step 3: Add the following memory-related properties.
 
 `application.yml`
 
@@ -78,7 +78,7 @@ agentcore.memory.ignore-unknown-roles=false
 ```
 
 
-### Step 4: Add the below `MemoryConfig` class. {#h3-3-step-4-add-the-below-memoryconfig-class}
+### Step 4: Add the below `MemoryConfig` class.
 
 ```java
 package com.bsmlabs.springai.config;
@@ -169,7 +169,7 @@ This combines the ***advisor*** with an empty list of additional strategies. It:
 * Provides a unified interface for long-term memory management
 * Allows for extensibility (the ***List.of()*** can include custom memory strategies)
 
-### Step 5: Create the ***ChatRequest*** and ***ChatResponse*** classes as shown below. {#h3-4-step-5-create-the-chatrequest-and-chatresponse-classes-as-shown-below}
+### Step 5: Create the ***ChatRequest*** and ***ChatResponse*** classes as shown below.
 
 Add the following classes to the models folder. We will use them in the next REST controller.
 
@@ -189,7 +189,7 @@ public record ChatResponse(String response) {
 ```
 
 
-### Step 6: Add the below `ShortTermController` class. {#h3-5-step-6-add-the-below-shorttermcontroller-class}
+### Step 6: Add the below `ShortTermController` class.
 
 Adding memory to an existing agent helps improve response latency and relevance. The agent can store previous conversations in short-term memory (STM). It can also retain learned information over time using long-term memory (LTM).
 
@@ -318,7 +318,7 @@ public void clearHistory() {
 ```
 
 
-### Step 7: verify {#h3-6-step-7-verify}
+### Step 7: verify
 
 ```powershell
 ### Tell name - STM
@@ -367,7 +367,7 @@ curl -X DELETE http://localhost:8080/api/history
 ```
 
 
-### End-to-End Flow {#h3-7-end-to-end-flow}
+### End-to-End Flow
 
 ```
 User Request
@@ -392,7 +392,7 @@ Everything comes from the companion [repo](https://github.com/bsmahi/simple-spri
 
 ***Happy Learning Spring AI***
 
-### References {#h3-8-references}
+### References
 
 * <https://spring.io/ai>
 * **Amazon Bedrock AgentCore:** <https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html>

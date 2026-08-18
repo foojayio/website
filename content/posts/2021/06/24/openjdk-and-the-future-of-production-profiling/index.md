@@ -53,7 +53,7 @@ There are however a few ways in which JFR can, and probably has to, improve, to 
 
 Let's take these in reverse order.
 
-### Recording Context {#h3-0-recording-context}
+### Recording Context
 
 A very common problem is to try to associate some contextual information with the data produced by JFR. For example, in the good old Oracle days, there were events produced by WebLogic Server (WLS) containing what was called the Execution Context IDs (ECIDs). Since JFR events are thread local, it was possible to use them to find out what other, lower level, information was captured during that time, for example where the allocation pressure was, or why a call to a logger leading to a blocking call trying to enter a contended monitor happened. The instrumented code, and thereby the events, were usually emitted where something took a bit of time, such as database IO and similar, so the overhead was not bad.
 
@@ -69,7 +69,7 @@ Having such a capability would not only make it possible to associate events wit
 
 See <https://bugs.openjdk.java.net/browse/JDK-8264516>.
 
-### Wall-Clock Profiling Must Be Possible {#h3-1-wall-clock-profiling-must-be-possible}
+### Wall-Clock Profiling Must Be Possible
 
 JFR has an interesting mix of sampling profiling, thresholded execution tracing and metrics. For example, it has a sampling execution profiler, a rate-limited sampling allocation profiler etc. It also has events to locate thread latency outliers. These events are not sampled, but give you exact information about a thread halt lasting longer than a configurable threshold.
 
@@ -107,7 +107,7 @@ Yet another variant may be to add a native function (`extern "C"`) to emit an ev
 
 There is [JDK-8237206](http://https://bugs.openjdk.java.net/browse/JDK-8237206) for this, but there isn't much information recorded in the issue.
 
-### CPU Profiling Improved {#h3-2-cpu-profiling-improved}
+### CPU Profiling Improved
 
 The current way of doing CPU profiling with JFR is to use the Execution Sample Event in JFR. It gives you a good idea of where the JVM is spending the most CPU time executing Java code. It is cheap, has low overhead, and satisfies the needs of many users.
 
@@ -119,7 +119,7 @@ At Datadog we've built a pretty awesome CPU profiler for Linux, based around `pe
 
 There is [JDK-8234854](http://https://bugs.openjdk.java.net/browse/JDK-8234854), but I haven't added much context yet.
 
-### Deterministic Overhead and Memory Use {#h3-3-deterministic-overhead-and-memory-use}
+### Deterministic Overhead and Memory Use
 
 One problem that JFR used to have, before JDK 16, was that allocation profiling could get very expensive. Especially for allocation heavy applications, running on plenty of CPUs. It could get very expensive both in terms of overhead but also in terms of size. For example, running a well parallelized, allocation heavy, application on a 96 core machine could produce millions of events per minute, resulting in recording sizes of hundreds of megabytes per minute.
 
@@ -131,7 +131,7 @@ Now, it may be useful to use the same kind, or some similar kind, of safety valv
 
 Instead you might want to subsample them, at a max rate that you can set yourself, per event type. You could even allow for thresholding and rate limited sampling at the same time, accepting a certain bias, e.g. if you want to focus on longer lasting thread halts.
 
-### Summary {#h3-4-summary}
+### Summary
 
 TL;DR, JFR has some interesting challenges ahead. Some of them will be compounded by the introduction of Virtual Threads. For JFR to remain the premium, best in class, production profiling platform, some investment will be needed. Datadog will try to help, but some of these problems will require updates to the JFR file format and updating the API. The OpenJDK community will need to be involved.
 

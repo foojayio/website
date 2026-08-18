@@ -22,33 +22,33 @@ frozen: false
 
 This article will demonstrate how to deploy a Spring Boot application on OpenShift (Minishift).
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 Cloud platforms have dramatically changed the way we develop and deploy modern applications. Not so long ago, everything was on-premise infra. However, things have changed dramatically over the years. Now, there are a number of vendors offering solutions for different cloud computing models, i.e., Saas, Paas, and Iaas.
 
 This article will cover Openshift developed by Redhat, which comes under the Paas cloud computing model.
 
-### What is OpenShift? {#h3-1-what-is-openshift}
+### What is OpenShift?
 
 > OpenShift is RedHat's cloud development Platform as a Service (PaaS). It is built on top of Docker containers and the Kubernetes container cluster orchestrator. But, What is Paas?.
 
 Paas is one of the cloud computing model and as per Wikipedia
 > \*Platform as a service**(** PaaS**) or** application platform as a service**(** aPaaS\*\*) or platform-based service is a category of [cloud computing services](https://en.wikipedia.org/wiki/Cloud_computing#Service_models) that provides a [platform](https://en.wikipedia.org/wiki/Computing_platform) allowing customers to develop, run, and manage applications without the complexity of building and maintaining the infrastructure typically associated with developing and launching an app.
 
-### What is Minishift then? {#h3-2-what-is-minishift-then}
+### What is Minishift then?
 
 > Minishift is a tool that helps you run OpenShift locally by running a single-node OpenShift cluster inside a VM. You can try out OpenShift or develop with it, day-to-day, on your localhost.
 
 Let's get started then. The article will focus on installing it on macOS, but there are plenty of blogs/resources available explaining how to install it on other popular OS like Windows, Linux.
 
-### Prerequisites {#h3-3-prerequisites}
+### Prerequisites
 
 1. Spring Boot [project](https://start.spring.io/)
 2. IDE or editor
 3. Hypervisor (VirtualBox or hyperkit for macOS)
 4. OpenJDK 8 or higher
 
-### Installation {#h3-4-installation}
+### Installation
 
 Please follow the mentioned steps for setting up Minishift locally on macOS.
 
@@ -87,20 +87,20 @@ https://192.168.64.3:8443/console
 ```
 
 
-### Accessing Web Console {#h3-5-accessing-web-console}
+### Accessing Web Console
 
 Now you are good to go and browse the Minishift web console, which is accessible by default using this URL <https://192.168.64.3:8443/console>. Since there is no authentication/authorization enabled by default, you can create your own username and password when logging in for the first time.
 
 ![Minishift Login page](https://cdn-images-1.medium.com/max/2000/1*wKabH8L0A5lmkN5N-r45NA.png)*Minishift Login page*
 
-### Creating Project {#h3-6-creating-project}
+### Creating Project
 
 You have the option to create projects etc., via the command line and via the web console. We will be using the command line option. First login using the following command as an admin user.  
 `oc login -u system:admin`
 
 Then by default, we can use the default project, which is myproject, for this demo. Alternatively, you can create a new project also.
 
-### Creating Application {#h3-7-creating-application}
+### Creating Application
 
 Now you need to select a base image(also called the builder image) for the application that you are going to create. The source code of the simple Spring Boot project is available [here](https://github.com/yrashish/springboot-openshift) and we will be using an open jdk8 base image for our application. Use the following command-line command to create an application with an openjdk8 base image.
 
@@ -133,7 +133,7 @@ Following is the output.
 ```
 
 
-### Checking Build Status {#h3-8-checking-build-status}
+### Checking Build Status
 
 Once the application is created, the build will be automatically scheduled using S2I. You can view the logs using the below command to check the status of the build.
 
@@ -182,13 +182,13 @@ Following is the output.
 
 Once the build is triggered, you can see that S2I is doing its work as expected by cloning the repository first and then building it. Later on, after the build is a success, as seen above, the image will push for further execution. You've just built and run a new runnable container image from source code in a git repository. You might be wondering what is S2I?. Allow me to explain it.
 
-### What is S2I? {#h3-9-what-is-s2i}
+### What is S2I?
 
 > S2I stands for source to image. With S2I input is your source code and output is the ready-to-run container image of your application.
 
 As per the Openshift documentation, Source-to-Image (S2I) is a toolkit and workflow for building reproducible container images from source code. S2I produces ready-to-run images by injecting source code into a container image and letting the container prepare it for execution. By creating self-assembling builder images, you can version and control your build environments exactly like using container images to version your runtime environments.
 
-### Checking Status {#h3-10-checking-status}
+### Checking Status
 
 Run the `oc status` command to view the status of your app.
 
@@ -209,7 +209,7 @@ As you can see that there is one pod running. You can view the same status on th
 
 If you carefully observe, we have not exposed the application to the outside world yet because we have not created a route. Let's do that now and see if we can access the application.
 
-### Creating Route {#h3-11-creating-route}
+### Creating Route
 
 As explained above, our application is not exposed to the outside world. We can expose our services by executing the following command:
 
@@ -235,7 +235,7 @@ Let's hit the URL and access our spring boot demo application.
 
 We have successfully deployed our first Spring boot demo application to Openshift locally.
 
-### Conclusion {#h3-12-conclusion}
+### Conclusion
 
 In this article, we have learned how we can deploy a Spring Boot application to a single node minishift cluster.
 
@@ -245,14 +245,14 @@ However, if you are on the OpenShift 4.x version, a better option would be to us
 
 It's a wrap for now. Happy coding!
 
-Support me {#h2-13-support-me}
-------------------------------
+Support me
+----------
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:
 
 [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
 
-Further reading {#h2-14-further-reading}
-----------------------------------------
+Further reading
+---------------
 
 You can also read one of my previous [articles](https://ashishtechmill.com/)

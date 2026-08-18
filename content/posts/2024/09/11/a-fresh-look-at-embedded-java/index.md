@@ -31,8 +31,8 @@ Because those use cases are very visible and there are a lot of job opportunitie
 
 Java is used on embedded platforms for in-car infotainment and information displays, home automation and production environment edge gateways, medical devices, appliances, and the list goes on.
 
-Java on embedded {#JavaintheEmbeddedWorld-JavaonEmbedded}
----------------------------------------------------------
+Java on embedded
+----------------
 
 "Embedded" has a very broad spectrum. It spans a range from very small microcontrollers (ESP32, Arduino, etc.) to powerful, mostly ARM-powered System-On-Chips (SOC) used in mobile phones, edge devices, Raspberry Pi boards, etc. Java is not intended for the smallest end of this spectrum, but it can provide many benefits on the other platforms! It's the ideal solution for delivering high productivity to developers and a stable runtime environment to guarantee reliable use in the field.
 
@@ -41,8 +41,8 @@ An essential but not well-known fact is the energy efficiency Java delivers comp
 With modern, powerful systems based on ARMv7 or newer, the exact same Java runtime used in big cloud environments or on powerful machines runs just as smoothly on the smallest Linux systems. Azul provides builds of OpenJDK for various platforms, as you can see on the [download page](https://www.azul.com/downloads/?package=jdk#zulu). If your system is not on the list of downloads, you can contact Azul as they have other builds available for customers who are not listed on the free download page.
 ![](azul-downloads-embedded-screenshot.png)
 
-Use cases for Java on Embedded {#JavaintheEmbeddedWorld-UsecasesforJavaonEmbedded}
-----------------------------------------------------------------------------------
+Use cases for Java on Embedded
+------------------------------
 
 The many evolutions in the Java language and runtimes from the last years, thanks to the 6-month release cycle, have lifted Java development to a higher level. It provides a smooth development experience and allows developers to build complex and powerful methods with minimal code, thanks to its rich ecosystem of libraries.
 
@@ -53,8 +53,8 @@ But thanks to JavaFX -- to build appealing user interfaces -- there is also a bi
 *"The biggest car brands rely on Java to handle screens and sensor data in their cars," says Azul Consultant Marc Maathuis. "But Azul runtimes are also used in medical devices, Point-of-Sale (POS) systems, ticket vending machines, home-automation edge devices, and many more. For example, you can remotely check the temperature in your house or open the door, thanks to Java!"*
 ![](embedded-Maathuis-quote.jpg)
 
-What Azul Offers for Embedded Java {#JavaintheEmbeddedWorld-WhatAzulOffersforEmbeddedJava}
-------------------------------------------------------------------------------------------
+What Azul Offers for Embedded Java
+----------------------------------
 
 Both the Java language and runtime live and evolve within the open-source OpenJDK project. Multiple distributions are available for embedded platforms, or you can create your own build, starting from the OpenJDK sources.
 
@@ -70,8 +70,8 @@ But the Azul OpenJDK Builds offers much-added value to assist you with Java on e
 "*Many companies build prototypes of new products based on off-the-shelf devices like the Raspberry Pi and later move the software to their own custom hardware," Maathuis says. "Azul can help by building a Java runtime that perfectly fits your product and provides the libraries needed for your application.*"
 ![](embedded-Maathuis-quote2.jpg)
 
-Protect your code from license contamination {#JavaintheEmbeddedWorld-ProtectYourCodeFromLicenseContamination}
---------------------------------------------------------------------------------------------------------------
+Protect your code from license contamination
+--------------------------------------------
 
 The OpenJDK project aims to protect users of the Java ecosystem from "contamination." Because of the GPL + ClassPathException license model, you are protected from infringements when using one of the many included libraries or pieces of code that are contributed by many thousands of developers.
 
@@ -82,8 +82,8 @@ This way, you won't need to publish the sources of your application after distri
 *"Software licensing has become a big challenge in all languages," notes Pavel Petroshenko, Azul's vice president of Product Management. "The open-source community has brought big evolutions in the software industry, but it comes with some "strings attached." We at Azul are entirely focused on Java and know and understand every piece of it. We can help any company that has questions or challenges, either with the development, runtime environment, or the legal part."*
 ![](embedded-Petroshenko-quote.jpg)
 
-Faster startup with Azul runtimes {#JavaintheEmbeddedWorld-FasterStartupWithAzulRuntimes}
------------------------------------------------------------------------------------------
+Faster startup with Azul runtimes
+---------------------------------
 
 Azul has multiple solutions to minimize the startup time of applications. CRaM (Checkpoint Restore at Main) and CRaC (Coordinated Restore at Checkpoint) are available in the Zulu Builds of OpenJDK.
 
@@ -110,8 +110,8 @@ That's precisely what is possible with CRaM and CRaC. Both solutions can speed u
 * It is being developed within the OpenJDK project: <https://openjdk.org/projects/crac/>
 * Read more: <https://docs.azul.com/core/crac/crac-introduction>
 
-Conclusion {#JavaintheEmbeddedWorld-Conclusion}
------------------------------------------------
+Conclusion
+----------
 
 Azul is here to help you get the most out of every Java platform with our Zulu and Zing Builds of OpenJDK. Java is the environment that offers the highest developer productivity thanks to its many amazing tools, evolutions, and community. [Contact Azul for any questions](https://www.azul.com/contact/) regarding Java on any platform, as Azul offers you the best Java runtime environment for each type of use.
 

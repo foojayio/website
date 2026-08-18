@@ -26,8 +26,8 @@ We've described the concept behind [sticky sessions](https://foojay.io/today/sti
 
 However, if necessary, you should replicate the data to other upstreams because this one might go down. In this post, we are going to illustrate it with a demo.
 
-The overall design {#h2-0-the-overall-design}
----------------------------------------------
+The overall design
+------------------
 
 Design options are limitless. I'll keep myself to a familiar stack, the JVM. Also, as mentioned in the previous post, one should only implement sticky sessions with session replication.
 
@@ -50,8 +50,8 @@ The design looks like the following:
 
 `app1` and `app2` are two instances of the same app; I didn't want to overcrowd the diagram with redundant data.
 
-The heart of the application {#h2-1-the-heart-of-the-application}
------------------------------------------------------------------
+The heart of the application
+----------------------------
 
 The heart of the application is a session-scoped bean that wraps a counter, which can only be incremented:
 
@@ -110,8 +110,8 @@ Finally, we display the bean's value on the Thymeleaf page:
 ```
 
 
-Configuring Spring Session with Hazelcast {#h2-2-configuring-spring-session-with-hazelcast}
--------------------------------------------------------------------------------------------
+Configuring Spring Session with Hazelcast
+-----------------------------------------
 
 Spring Session offers a filter that wraps the original `HttpServletRequest` to override the `getSession()` method. This method returns a specific `Session` implementation backed by the implementation configured with Spring Session, in our case, Hazelcast.
 
@@ -161,8 +161,8 @@ public Config hazelcastConfig() {
 2. Allow Hazelcast to search for other instances and automagically form a cluster. It's going to be necessary when deployed as per our design
 3. Copy-pasted from the Spring Session documentation
 
-Configuring Spring Security {#h2-3-configuring-spring-security}
----------------------------------------------------------------
+Configuring Spring Security
+---------------------------
 
 Most Spring Session examples somehow use Spring Security, and though it's not strictly necessary, it makes the design easier. I want to explain why first.
 
@@ -191,8 +191,8 @@ public SecurityFilterChain securityFilterChain(UserDetailsService service, HttpS
 4. Allow everybody to access the authentication form
 5. Redirect to the root if successful, which maps the above controller
 
-Putting our design to the test {#h2-4-putting-our-design-to-the-test}
----------------------------------------------------------------------
+Putting our design to the test
+------------------------------
 
 Beside the counter, I want to display two additional pieces of data: the hostname and the logged-in user.
 
@@ -296,8 +296,8 @@ The only side-effect is an increased latency because of Apache APISIX timeout. I
 
 When we start `webapp2` again, everything works as expected again.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, I've described a possible setup for sticky sessions with Apache APISIX and replication involving the Spring ecosystem and Hazelcast.
 

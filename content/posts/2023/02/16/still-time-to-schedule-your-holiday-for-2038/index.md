@@ -32,8 +32,8 @@ Let's investigate what could happen in that year with `jshell`...
 
 {{< youtube -CPrq3NxPOE >}}
 
-What was the Y2K problem? {#h2-0-what-was-the-y2k-problem}
-----------------------------------------------------------
+What was the Y2K problem?
+-------------------------
 
 In the last years before 2000, there was a growing concern for computer systems using dates and how they would handle the transition from 1999 to 2000.
 
@@ -57,8 +57,8 @@ January 1st of 2000     -->     000101
 
 Luckily, most systems were patched before the world was able to collapse and the Y2K-bug disappeared very quickly.
 
-What is jshell? {#h2-1-what-is-jshell}
---------------------------------------
+What is jshell?
+---------------
 
 The `jshell` tool was added to the Java Development Kit (JDK) with version 9.
 
@@ -126,8 +126,8 @@ jshell> /exit
 ```
 
 
-What will happen in 2038? {#h2-2-what-will-happen-in-2038}
-----------------------------------------------------------
+What will happen in 2038?
+-------------------------
 
 A new Y2K-bug seems to be approaching, but luckily we still have time to prevent it!
 
@@ -201,8 +201,8 @@ testDate ==> 1901-12-13T20:45:52Z[UTC]
 ```
 
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 In the past, when storage space was limited and expensive, it made sense to select the smallest variable type to store data.
 

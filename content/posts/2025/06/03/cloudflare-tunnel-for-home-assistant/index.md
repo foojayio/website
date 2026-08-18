@@ -30,8 +30,8 @@ This is the 6^th^ post in the My journey with Home Assistant focus series. Other
 4. [An example of HACS: Adaptive Lighting](https://blog.frankel.ch/home-assistant/4/)
 5. [The Home Assistant companion app](https://blog.frankel.ch/home-assistant/5/)
 
-The initial setup {#h2-0-the-initial-setup}
--------------------------------------------
+The initial setup
+-----------------
 
 My usage of Home Assistant required external access from the beginning.
 
@@ -60,8 +60,8 @@ While this setup works in general, two things were nagging at me:
 * I already use the HTTPS port of my router for another domain. My router is unable to manage two subdomains on the same port. Hence, I had to open another port. It's harder to remember a port than a domain.
 * The automation is an additional moving piece, that can fail, as mentioned above. I'd rather keep automation focused on the Home part instead of the underlying infrastructure.
 
-Cloudflare Tunnel for Home Assistant {#h2-1-cloudflare-tunnel-for-home-assistant}
----------------------------------------------------------------------------------
+Cloudflare Tunnel for Home Assistant
+------------------------------------
 
 I stumbled upon the [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) integration while browsing [/r/homeassistant](https://www.reddit.com/r/homeassistant/) one morning and realized it would solve my problems. A couple of compelling reasons came to my mind:
 
@@ -105,8 +105,8 @@ http:
 
 At this point, the setup works. Sending requests to the new domain will reach HA via Cloudflare Tunnel. I could have stopped there, but astute readers will have noticed that I only finished half the job: the Let's Encrypt add-on is still there. It doesn't make any sense to use SSL inside the tunnel.
 
-Removing Let's Encrypt add-on {#h2-2-removing-let-s-encrypt-add-on}
--------------------------------------------------------------------
+Removing Let's Encrypt add-on
+-----------------------------
 
 The idea is to remove the Let's Encrypt add-on as well as to clean up the SSL configuration. To put it simply, it's not possible to remove the latter as it is.
 
@@ -130,8 +130,8 @@ You can now remove the server_port and SSL-related parameters from the configura
 
 At this point, you should be able to access HA via the subdomain through the tunnel. It is time to remove the Let's Encrypt add-on, the legacy SSH configuration, and the renewal script.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we installed Cloudflare Tunnel to allow secure access to your HA UI.  
 

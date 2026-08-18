@@ -30,8 +30,8 @@ In this article, I want to focus on the declarative transaction management angle
 
 But I'm getting ahead of myself!
 
-What is Spring's Method Declarative Transaction Management? {#h2-0-what-is-spring-s-method-declarative-transaction-management}
-------------------------------------------------------------------------------------------------------------------------------
+What is Spring's Method Declarative Transaction Management?
+-----------------------------------------------------------
 
 When writing a spring method or class, we can use annotations to declare that a method or a bean (class) is transactional. This annotation lets us tune transactional semantics using attributes. This lets us define behavior such as:
 
@@ -42,13 +42,13 @@ When writing a spring method or class, we can use annotations to declare that a 
 
 And much more.
 
-### Isn't the Transaction Related to the Database Driver? {#h3-1-isn-t-the-transaction-related-to-the-database-driver}
+### Isn't the Transaction Related to the Database Driver?
 
 The concept of transactional methods is very confusing to new spring developers. Transactions are a feature of the database driver/JDBC Connection, not of a method. Why declare it in the method?
 
 There's more to it. Other features, such as message queues, are also transactional. We might work with multiple databases. In those cases, if one transaction is rolled back, we need to rollback all the underlying transactions. As a result, we do the transaction management in user code and spring seamlessly propagates it into the various underlying transactional resource.
 
-### How can we Write Programmatic Transaction Management if we don't use the Database API? {#h3-2-how-can-we-write-programmatic-transaction-management-if-we-don-t-use-the-database-api}
+### How can we Write Programmatic Transaction Management if we don't use the Database API?
 
 Spring includes a transaction manager that exposes the API's we typically expect to see: begin, commit and rollback. This manager includes all the logic to orchestrate the various resources.
 
@@ -66,14 +66,14 @@ I used the annotation on the method level, but I could have placed it on the cla
 
 This allows for extreme flexibility and is great for separating business code from low level JDBC transaction details.
 
-### Dynamic Proxy, Aspect Oriented Programming and Annotations {#h3-3-dynamic-proxy-aspect-oriented-programming-and-annotations}
+### Dynamic Proxy, Aspect Oriented Programming and Annotations
 
 The key to debugging transactions is the way spring implements this logic. Spring uses a proxy mechanism to implement the aspect oriented programming declarative capabilities. Effectively, this means that when you invoke `myMethod` on `MyObject` or `MyClass` spring creates a proxy class and a proxy object instance between them.
 
 Spring routes your invocation through the proxy types which implement all the declarative annotations. As such, a transactional proxy takes care of validating the transaction status and enforcing it.
 
-Debugging a Spring Transaction Management using Lightrun {#h2-4-debugging-a-spring-transaction-management-using-lightrun}
--------------------------------------------------------------------------------------------------------------------------
+Debugging a Spring Transaction Management using Lightrun
+--------------------------------------------------------
 
 **IMPORTANT: I assume you're familiar with Lightrun basics. If not, please read [this](https://docs.lightrun.com/).**
 
@@ -83,7 +83,7 @@ But if an annotation fails, the method won't be invoked and we won't get a callb
 
 Annotations aren't magic, though. Spring uses a proxy object, as we discussed above. That proxy mechanism invokes generic code, which we can use to bind a snapshot. Once we bind a snapshot there, we can detect the proxy types in the stack. Unfortunately, debugging proxying mechanisms is problematic since there's no physical code to debug. Everything in proxying mechanisms is generated dynamically at runtime. Fortunately, this isn't a big deal. We have enough hooks for debugging without this.
 
-### Finding the Actual Transaction Class {#h3-5-finding-the-actual-transaction-class}
+### Finding the Actual Transaction Class
 
 The first thing we need to do is look for the class that implements transaction functionality. Opening the IntelliJ/IDEA class view (Command-O or CTRL-O) lets us locate a class by name. Typing in "Transaction" resulted in the following view:
 ![image1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650896120559/eRLIMjgCA.png)
@@ -113,8 +113,8 @@ If you scroll further in the method, you can see ideal locations to set snapshot
 
 One of the nice things with snapshots is that they can easily debug concurrent transactions. Their non-blocking nature makes them the ideal tool for that.
 
-TL;DR {#h2-6-tl-dr}
--------------------
+TL;DR
+-----
 
 Declarative configuration in Spring makes transactional operations much easier. This significantly simplifies the development of applications and separates the object logic from low level transactional behavior details.
 

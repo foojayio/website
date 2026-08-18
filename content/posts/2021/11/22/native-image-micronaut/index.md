@@ -23,8 +23,8 @@ frozen: false
 
 Last week, I wrote a native web app that queried the Marvel API [using Spring Boot](https://foojay.io/today/native-spring-boot/). This week, I want to do the same with the Micronaut framework.
 
-Creating a new project {#h2-0-creating-a-new-project}
------------------------------------------------------
+Creating a new project
+----------------------
 
 Micronaut offers two options to create a new project:
 
@@ -50,8 +50,8 @@ In both options, you can configure the following parameters:
 
 The application's code is on [GitHub](https://github.com/micronaut-projects/micronaut-starter). You can clone and adapt it, but as far as I know, it's not designed with extension in mind (yet?).
 
-Bean configuration {#h2-1-bean-configuration}
----------------------------------------------
+Bean configuration
+------------------
 
 Micronaut's bean configuration relies on [JSR 330](http://javax-inject.github.io/javax-inject/). The JSR defines a couple of annotations, *e.g.* , `@Singleton` and `@Inject`, in the `jakarta.inject` package. Developers use them, and the service provider implements the specification.
 
@@ -82,8 +82,8 @@ fun main(args: Array<String>) {
 ```
 
 
-Controller configuration {#h2-2-controller-configuration}
----------------------------------------------------------
+Controller configuration
+------------------------
 
 Micronaut copied the `@Controller` annotation from Spring. You can use it in the same way. Likewise, annotate functions with the relevant HTTP method annotation.
 
@@ -97,8 +97,8 @@ class MarvelController() {
 ```
 
 
-Non-blocking HTTP client {#h2-3-non-blocking-http-client}
----------------------------------------------------------
+Non-blocking HTTP client
+------------------------
 
 Micronaut provides two HTTP clients: a declarative one and a low-level one. Both of them are non-blocking.
 
@@ -152,8 +152,8 @@ fun UriBuilder.queryParamsWith(params: Map<String, String?>) = apply {
 ```
 
 
-Parameterization {#h2-4-parameterization}
------------------------------------------
+Parameterization
+----------------
 
 Like Spring, Micronaut can bind application properties to Kotlin data classes. In Micronaut, the file is named `application.yml`. The file already exists and contains the `micronaut.application.name` key. We only need to add the additional data. I chose to put it under the same parent key, but there's no such constraint.
 
@@ -181,8 +181,8 @@ data class MarvelProperties @ConfigurationInject constructor(  // 2
 1. Bind the property class to the property file prefix
 2. Allow using a data class. The `@ConfigurationInject` needs to be set on the constructor: it's a sign that the team could improve Kotlin integration in Micronaut.
 
-Testing {#h2-5-testing}
------------------------
+Testing
+-------
 
 Micronaut tests are based on the `@MicronautTest` annotation.
 
@@ -301,8 +301,8 @@ class MicronautNativeApplicationTest : TestPropertyProvider {
 5. We need to block as the client is reactive
 6. There's no JSON assertion API. The easiest path is to deserialize in a `Model` class, and then assert the object's state.
 
-Docker and GraalVM integration {#h2-6-docker-and-graalvm-integration}
----------------------------------------------------------------------
+Docker and GraalVM integration
+------------------------------
 
 As with Spring, Micronaut provides two ways to create native images:
 
@@ -352,8 +352,8 @@ Cmp   Size  Command
 3. Additional packages
 4. Our native binary
 
-Miscellaneous comments {#h2-7-miscellaneous-comments}
------------------------------------------------------
+Miscellaneous comments
+----------------------
 
 I'm pretty familiar with Spring Boot, much less with Micronaut.  
 
@@ -376,8 +376,8 @@ Here are several miscellaneous comments.
 
   The team is working toward KSP support, but it's an undergoing effort.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Micronaut achieves the same result as Spring Boot. The Docker image's size is about 20% smaller. It's also more straightforward, with fewer layers, and based on Linux Alpine.
 

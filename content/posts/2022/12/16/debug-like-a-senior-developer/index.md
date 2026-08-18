@@ -37,8 +37,8 @@ I don't intend to publish the course on any other channel other than here. So if
 
 <br />
 
-Transcript {#h2-0-transcript}
------------------------------
+Transcript
+----------
 
 Hello everyone and welcome to practical debugging at scale. In this course I will teach you how to debug, but more importantly. I hope to change the way you look at debugging and at programming in general.
 

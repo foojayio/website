@@ -26,8 +26,8 @@ In this article, I'd like to first explain why the JVM platform is a bad idea fo
 
 (I deliberately chose not to link to the original post to avoid lending it any credibility. If you want to read it anyway, Google is your friend.)
 
-Semantics {#h2-0-semantics}
----------------------------
+Semantics
+---------
 
 Before anything, we should first settle the semantics of FaaS and serverless. While the terms are sometimes used interchangeably, I will use the following definitions in the scope of this post. In all cases, it always pays to have a look at what people on Wikipedia agreed on:
 > Serverless computing is a cloud-computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Pricing is based on the actual amount of resources consumed by an application, rather than on pre-purchased units of capacity.
@@ -44,8 +44,8 @@ From the definitions above:
 
 *Ergo*, FaaS implies serverless.
 
-The JVM and FaaS {#h2-1-the-jvm-and-faas}
------------------------------------------
+The JVM and FaaS
+----------------
 
 The platform is a fine piece of technology. In particular, the abstraction layer allows the JVM to compile the *bytecode* to native code adapted to the workload. That's the reason why even though C/C++ compiled apps are closer to the bare metal, the JVM was able to compete with them performance-wise - and even win.
 
@@ -57,8 +57,8 @@ Some recommend keeping the JVM up to reuse it afterward and thus avoid paying th
 
 It applies to Kotlin, Java, Scala, Groovy, Clojure, and every other language that runs on top of the JVM. Even though I love Kotlin, this is a no-go: anybody telling otherwise doesn't need the elasticity that the FaaS approach provides - or worse, has no clue. It would be akin to build a microservices architecture in most contexts: .
 
-The Best of Both Worlds {#h2-2-the-best-of-both-worlds}
--------------------------------------------------------
+The Best of Both Worlds
+-----------------------
 
 And yet, all hope is not lost.
 
@@ -69,8 +69,8 @@ There are ways to use Kotlin and still be able to benefit from FaaS. Since the p
 
 Both approaches need a solid build pipeline to start from Kotlin and end up with a Docker container (or a ZIP). As with the original design, they need both unit testing to test the code is correct and integration testing to test the final artifact works as expected.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 One needs to be aware of the context of most technologies. You (probably) don't need microservices, FaaS, or whatever the hype curve is trending right now. However, by understanding the pros and cons of those, you'll be able to leverage them when the time is right.
 

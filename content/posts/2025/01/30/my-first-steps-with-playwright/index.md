@@ -28,8 +28,8 @@ Here are [the metrics](https://www.linkedin.com/dashboard/) I want on LinkedIn:
 
 I searched for a long time but found no API access for the metrics above. I scraped the metrics manually every morning for a long time and finally decided to automate this tedious task. Here's what I learned.
 
-The context {#h2-0-the-context}
--------------------------------
+The context
+-----------
 
 The job is in Python, so I want to stay in the same tech stack. After a quick research, I found [Playwright](https://playwright.dev/), a browser automation tool with a couple of language APIs, including Python. Playwright's primary use case is end-to-end testing, but it can also manage the browser outside a testing context.
 
@@ -42,8 +42,8 @@ poetry add playwright
 
 At this point, Playwright is ready to use. It offers two distinct APIs, one *synchronous* and one *asynchronous*. Because of my use-case, the first flavour is more than enough.
 
-Getting my feet wet {#h2-1-getting-my-feet-wet}
------------------------------------------------
+Getting my feet wet
+-------------------
 
 I like to approach development incrementally.
 
@@ -82,8 +82,8 @@ with (sync_playwright() as pw):                                                 
 8. Get the inner text of the first element
 9. Close the browser to clean up
 
-Storing cookies {#h2-2-storing-cookies}
----------------------------------------
+Storing cookies
+---------------
 
 The above worked as expected. The only downside is that I received an email from LinkedIn every time I ran the script:
 > Hi Nicolas,
@@ -123,8 +123,8 @@ with sync_playwright() as pw:
 
 At this point, we need only to authenticate with both credentials the first time. On subsequent runs, it depends.
 
-Adapting to reality {#h2-3-adapting-to-reality}
------------------------------------------------
+Adapting to reality
+-------------------
 
 I was surprised to see that the code above didn't work reliably. It worked on the first run and sometimes on subsequent ones. Because I'm storing the browser profile across runs, when I need to authenticate, LinkedIn only asks for the password, not the login! Because the code tries to enter the login, it fails in this case. The fix is pretty straightforward:
 
@@ -136,8 +136,8 @@ page.locator('#password').press_sequentially(getenv('LINKEDIN_PASSWORD'))
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Though I'm no expert in Python, I managed to achieve what I wanted with Playwright.
 

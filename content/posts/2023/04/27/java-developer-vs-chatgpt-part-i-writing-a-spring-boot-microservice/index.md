@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### We pit a seasoned Java developer against the all-knowing generative AI to find out once and for all: Can an AI generate a Java microservice end-to-end? {#h3-0-we-pit-a-seasoned-java-developer-against-the-all-knowing-generative-ai-to-find-out-once-and-for-all-can-an-ai-generate-a-java-microservice-end-to-end}
+### We pit a seasoned Java developer against the all-knowing generative AI to find out once and for all: Can an AI generate a Java microservice end-to-end?
 
 There's a lot of buzz around Generative AI tools for code generation. It's no secret that the future of developer productivity goes alongside tools such as [GitHub Copilot](https://github.com/features/copilot) and [OpenAI's ChatGPT](https://openai.com/blog/chatgpt) to enable us, developers, to produce code better and faster. These tools can learn from our existing code and suggest new code based on the desired functionality, most importantly, they can even write documentation and tests!
 
@@ -50,8 +50,8 @@ Sounds reasonable right? Let's get to it!
 
 *Disclaimer: I am using ChatGPT Plus with the latest GPT4 model to generate the code snippets. Some of the code generation prompt examples here might not work with the current free-to-use GPT3.5 model.*
 
-Step 1: Bootstrapping the initial Spring Boot skeleton {#heading-step-1-bootstrapping-the-initial-spring-boot-skeleton}
------------------------------------------------------------------------------------------------------------------------
+Step 1: Bootstrapping the initial Spring Boot skeleton
+------------------------------------------------------
 
 (The prompts and responses are copied as is - for the reader's benefit, the dialog is shared as text instead of screenshots. Prompts are shared as is without any modification)
 
@@ -192,8 +192,8 @@ $ mvn spring-boot:run
 
 Great success! Or at least a great start.
 
-Step 2: Create OpenAI API client {#heading-step-2-create-openai-api-client}
----------------------------------------------------------------------------
+Step 2: Create OpenAI API client
+--------------------------------
 
 **\[me\] \>** *In this project we're going to use the OpenAI API. Write a Java client that contains a method named* `generateCode` *that accepts a String input and returns the generated code by the API.*
 
@@ -414,8 +414,8 @@ We can see that ChatGPT made the change correctly using Spring's proper annotati
 
 Implicitly, I hoped for it to take one step further and create a relevant interface, a separate [Service class](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Service.html), and take any [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) aspects in concern. We'll get back to it later!
 
-Step 3: POJOs to the rescue {#heading-step-3-pojos-to-the-rescue}
------------------------------------------------------------------
+Step 3: POJOs to the rescue
+---------------------------
 
 **\[me\] \>** *Write a record class named* `PromptRequest` *that contains one String argument named* `input` *and place it under a new relative package called* `pojos`
 
@@ -445,8 +445,8 @@ public record GeneratedCodeResult(String result) {
 
 Nothing complicated here. We created the request \& response POJOs that will be used later for serving the API calls. ChatGPT delivered as desired.
 
-Step 4: Write our first REST service endpoint (controller) {#heading-step-4-write-our-first-rest-service-endpoint-controller}
------------------------------------------------------------------------------------------------------------------------------
+Step 4: Write our first REST service endpoint (controller)
+----------------------------------------------------------
 
 **\[me\] \>** *Write a REST controller named* `CodeGeneration`*. Use Spring conventions.*
 
@@ -503,8 +503,8 @@ public class CodeGenerationController {
 
 I wanted to take ChatGPT step by step in the Controller code generation, instead, it already included the implementation using the client and the POJOs we previously generated! ***I am shocked.*** This was a very unexpected outcome from my prompt and made me stare at the screen for a minute realizing how it inferred the scope immediately. I salute you, my AI friend.
 
-Summary {#heading-summary}
---------------------------
+Summary
+-------
 
 We saw how using ChatGPT we managed to create a new Spring Boot microservice, implemented relevant classes (OpenAI API client and the request/response POJOs), and more importantly: generated our first Controller code that combines all the various components created by that point.
 

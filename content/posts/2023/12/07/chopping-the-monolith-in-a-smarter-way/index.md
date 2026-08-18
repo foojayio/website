@@ -60,8 +60,8 @@ The final sequence is the following:
 
 Note that the `apisix-pipeline-request-plugin` consumes the input. As we want to return all the necessary data, we must return both the cart lines and the price in the payload. The pricing should return the cart lines, which is not an issue since it receives it as an input.
 
-Apache APISIX configuration {#h2-0-apache-apisix-configuration}
----------------------------------------------------------------
+Apache APISIX configuration
+---------------------------
 
 The Apache APISIX configuration is the following:
 
@@ -72,8 +72,8 @@ The Apache APISIX configuration is the following:
 | #3    | `/api/checkout` | `pipeline-request` | The magic happens here: * The first pipeline node calls the monolith to return the cart lines * The second calls the pricing component with the cart lines to return the cart lines and the pricing computed in the component * |
 | #4    | `/api/price`    | `azure-functions`  | I implement the pricing in an Azure FaaS, but it's an implementation detail                                                                                                                                                     |
 
-Conclusion {#h2-1-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I offer another alternative to chop the monolith.
 

@@ -36,8 +36,8 @@ Stages 1, 2, and 3 are upstream, while the workflow executes the latter steps fo
 
 As I had to choose a tech stack for the app, I had to select a Cloud provider for my infrastructure. I choose because I'm more familiar with Google Cloud, but you can apply the same approach to any other provider. The concept will be the same, only the implementation will differ slightly.
 
-Building and storing the image {#h2-0-building-and-storing-the-image}
----------------------------------------------------------------------
+Building and storing the image
+------------------------------
 
 Regardless of your target infrastructure, you must build the app's image. I won't use anything fancy. For this reason, I'll only comment on the workflow steps:
 
@@ -93,8 +93,8 @@ jobs:
 9. Build and push
 10. Use the tags and labels we generated in the previous step. The `tags` part is necessary for later stages; the `labels` part is a nice plus. Notice that we use the `meta` id of the previous stage
 
-Sizing the cluster {#h2-1-sizing-the-cluster}
----------------------------------------------
+Sizing the cluster
+------------------
 
 Sizing the cluster can be a real challenge or a no-brainer.
 
@@ -144,8 +144,8 @@ Astute readers may have noticed that I used the Linux `time` command to wrap the
 
 We could create the cluster from within the GitHub workflow, but please bear with me and keep this duration in mind. Now that we created the cluster, we need to use it from within the GitHub workflow: it requires setting up authentication.
 
-Authenticate on Google Cloud from a GitHub workflow {#h2-2-authenticate-on-google-cloud-from-a-github-workflow}
----------------------------------------------------------------------------------------------------------------
+Authenticate on Google Cloud from a GitHub workflow
+---------------------------------------------------
 
 We must interact with the GKE instance to at least install our app. Since we are inside a GitHub workflow, we will need to authenticate. Fortunately, the `google-github-actions/auth` GitHub Action can help us:
 > This GitHub Action authenticates to Google Cloud. It supports authentication via a Google Cloud Service Account Key JSON and authentication via Workload Identity Federation.
@@ -245,8 +245,8 @@ Here are the steps:
 
 We can now manage the `vcluster-pipeline` Cloud project from a GitHub workflow hosted on any repository that belongs to `ajavageek` by impersonating the `github-actions` SA. Let's configure the GitHub workflow to make use of it.
 
-Working within the GitHub workflow {#h2-3-working-within-the-github-workflow}
------------------------------------------------------------------------------
+Working within the GitHub workflow
+----------------------------------
 
 Using the authentication setup above within the GitHub workflow requires the following small step:
 
@@ -289,8 +289,8 @@ We still need to:
 4. Apply our app manifest
 5. Finally, run the end-to-end test
 
-Create a Kubernetes manifest {#h2-4-create-a-kubernetes-manifest}
------------------------------------------------------------------
+Create a Kubernetes manifest
+----------------------------
 
 I'll keep the manifest pretty simple in the context of this blog post and limit myself to a single pod `Deployment` and a load-balancer `Service`.
 
@@ -345,8 +345,8 @@ spec:
 
 Let's address each of these challenges.
 
-Setting the correct GitHub image tag {#h2-5-setting-the-correct-github-image-tag}
----------------------------------------------------------------------------------
+Setting the correct GitHub image tag
+------------------------------------
 
 When building the image, we set the image name to a constant, `vcluster-pipeline`, but we used the GitHub run ID as the version tag. This way, we considerably limit the probability of one image PR overriding another. This approach creates an issue down the pipeline: how do we reference this runtime-assigned variable in the manifest created during development? The answer is Kustomize.
 > Kustomize introduces a template-free way to customize application configuration that simplifies the use of off-the-shelf applications.
@@ -385,8 +385,8 @@ In the workflow, we apply the manifest like this:
 
 One could easily replace Kustomize with a utility such as `sed` for minor changes on the manifest. However, for bigger ones, I'd advise using Kustomize or a similar Cloud Native tool.
 
-Accessing the private GitHub registry from GKE {#h2-6-accessing-the-private-github-registry-from-gke}
------------------------------------------------------------------------------------------------------
+Accessing the private GitHub registry from GKE
+----------------------------------------------
 
 Our next challenge is to access the private GitHub registry from the GKE instance. We can work around this challenge by making the registry public, but I recommend not doing so. By default, your images should be private to prevent hackers from looking at your image internals and listing all the CVEs it contains.
 
@@ -411,8 +411,8 @@ That being settled, we should follow the nominal path: create a Kubernetes secre
 5. Set the password to the GitHub token. Reminder: `secrets.GITHUB_TOKEN` is a built-in secret that you don't need to declare explicitly
 6. Print the secret to the standard out, but then pipe it to the `kubectl` command, *i.e.* , apply the `Secret`
 
-Get the PostgreSQL connection parameters {#h2-7-get-the-postgresql-connection-parameters}
------------------------------------------------------------------------------------------
+Get the PostgreSQL connection parameters
+----------------------------------------
 
 We should first install PostgreSQL. To ease our lives, we can rely on a Helm Chart.
 
@@ -451,8 +451,8 @@ At this point, we add a step to create the necessary `ConfigMap` from the data i
 ```
 
 
-Getting the external deployed app IP {#h2-8-getting-the-external-deployed-app-ip}
----------------------------------------------------------------------------------
+Getting the external deployed app IP
+------------------------------------
 
 We have installed the PostgreSQL Helm Chart at this stage and applied our app's manifest. The latter connects to the former. The last remaining bit is to run the end-to-end test that uses the endpoint. While we know the path, we need the base URL. Because we configured the `Service` to be of type `LoadBalancer`, GKE is responsible for setting it.
 
@@ -496,8 +496,8 @@ Unfortunately, there's a high chance that it doesn't work: when the step runs, G
 4. If we didn't get the IP after the number of loops times sleep time, exit the step with a non-success exit code
 5. Store the IP in the GitHub workflow environment
 
-Running the end-to-end test {#h2-9-running-the-end-to-end-test}
----------------------------------------------------------------
+Running the end-to-end test
+---------------------------
 
 Finally, we can run the end-to-end test. Because we ran the unit test in a previous step, it's unnecessary and a waste of time and resources. We could configure it to run a second time on Kubernetes, but it doesn't bring any value. We should run integration tests without running unit tests. Because it's not how Maven works, we must be creative:
 
@@ -532,8 +532,8 @@ The output should look like the following:
 ```
 
 
-Discussion {#h2-10-discussion}
-------------------------------
+Discussion
+----------
 
 In this post, we achieved several milestones toward the end-to-end testing goal. We built the app Docker image, stored it on the GitHub registry, installed the PostgreSQL Helm Chart and the app on GKE, and successfully ran the test. Yet, if you implement this already-quite-long-process in your organization, you may experience some shortcomings:
 

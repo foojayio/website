@@ -23,8 +23,8 @@ frozen: false
 
 In a previous post, we [explained how you can add executable Java code to your posts here on Foojay](https://foojay.io/today/integrate-executable-java-code-in-your-blog-posts/), by using JDoodle. In this post, you will learn how you can extend this with one or more libraries.
 
-Define Dependencies {#h2-0-define-dependencies}
------------------------------------------------
+Define Dependencies
+-------------------
 
 To integrate Java code in your post or page that needs dependencies, you need to specify them in the initial `div` with `data-libs`.
 
@@ -46,8 +46,8 @@ To integrate Java code in your post or page that needs dependencies, you need to
 
 The `data-client-id` can only be used for the Foojay website! Create your own [account on the JDoodle site](https://www.jdoodle.com) if you want to use this functionality on another website.
 
-Example Application {#h2-1-example-application}
------------------------------------------------
+Example Application
+-------------------
 
 For example, let's use the Jackson library to parse JSON.
 
@@ -127,8 +127,8 @@ Will produce the following output. Hit the "Execute" button to run the code.
 
 **Notice you can also select Java 21 now to execute this code!**
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Not only "simple" Java code can be added to blog posts. As we illustrated here, a more complex class with a record and Maven dependencies can be created and executed within a webpage.
 

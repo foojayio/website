@@ -23,21 +23,21 @@ Generics are used to parameterize types. A piece of code can be written generica
 
 However, generics is one of the tricky ways to make it possible to use type parameterization so that one particular portion or entirely of a class or their subclass can support a variety of types if an entity such as class, interface, or method that operates on a parameterized type is said to be a generic entity.
 
-Benefits of Generics {#h2-0-benefits-of-generics}
--------------------------------------------------
+Benefits of Generics
+--------------------
 
-### Type safety {#h3-1-type-safety}
+### Type safety
 
 Using generics helps us define a type to consume in and produce from, where it is used. This means we can be sure of adding a specific type of data in a Collection type for example (***List\<Integer\>*** ) and get the exact same type. This saves us from getting ***ClassCastException*** and from lots of development pain.
 
-### Type erasure {#h3-2-type-erasure}
+### Type erasure
 
 Type erasure means, all the additional information included while using Java Generics, is removed from bytecode while generated. In bytecode, it will be old java syntax prior to Java 5.
 
 Alternatively, we can say, we will be enforced to use a type in compile-time, but the types are discarded at runtime.
 
-Where we can use Generics {#h2-3-where-we-can-use-generics}
------------------------------------------------------------
+Where we can use Generics
+-------------------------
 
 * Using Generics with wildcards
   * Unbounded wildcards
@@ -48,8 +48,8 @@ Where we can use Generics {#h2-3-where-we-can-use-generics}
 * Using Generic types as parameters of a class or an interface.
 * Using Generic types with method or constructor definition.
 
-Components of Generics {#h2-4-components-of-generics}
------------------------------------------------------
+Components of Generics
+----------------------
 
 1. ***\<\>*** - Diamond operator - we put a generic type inside it.
 2. ***T*** - known as a Generic type. We can actually use any character or word instead of T here. usually used as ***\<T\>***
@@ -59,7 +59,7 @@ Components of Generics {#h2-4-components-of-generics}
 
 Let's start our today's discussion to explain using Generics with wildcards.
 
-### Using Generics with wildcards {#using-generics-with-wildcards}
+### Using Generics with wildcards
 
 We have talked about the wildcard above. Wildcard represents an unknown type. The followings are examples of wildcard parameterized generics.  
 
@@ -97,7 +97,7 @@ ResponseEntity<?> getAll() {
 ```
 
 
-#### Unbounded wildcard parameterized type {#unbounded-wildcard-parameterized-type}
+#### Unbounded wildcard parameterized type
 
 A generic type that does not contain any boundary of the upper or lower limit only contains wildcard as type.
 
@@ -110,11 +110,11 @@ ArrayList<?>  list = new ArrayList<Employee>();
 ```
 
 
-#### Bounded wildcard parameterized type {#bounded-wildcard-parameterized-type}
+#### Bounded wildcard parameterized type
 
 Bounded wildcards have 2 types - upper-bounded and lower bounded. These bounds put some restrictions on the range of classes that can be used as generic types. We usually achieve the upper bound limit by ***extends*** and the lower bound limit by ***super*** keyword.
 
-##### Upper bounded wildcard {#upper-bounded-wildcard}
+##### Upper bounded wildcard
 
 Let's assume, we have a method, that takes a parameter of ***List***. The list items can have different instances of a class, that has multiple child classes. Now, we don't know, at which point of time which child class instance list will be passed through the method parameter. In such a case, we can simply set the upper-bounded wildcard.  
 
@@ -133,7 +133,7 @@ private static Number sum (List<? extends Number> numbers){
 ```
 
 
-##### Lower bounded wildcard {#lower-bounded-wildcard}
+##### Lower bounded wildcard
 
 When we want to set a lower limit of a class hierarchy, and we don't want to add any instance of any class below to that hierarchy, we use ***super*** keyword to make this lower bounded wildcard. This applies for a method parameter.
 
@@ -192,7 +192,7 @@ printApples(basket2);
 
 Now, let's see some limitations and exceptional cases of ***extends*** and ***super***.
 
-##### Limitations and exceptional cases {#limitations-and-exceptional-cases}
+##### Limitations and exceptional cases
 
 * We can create a list like ***List\<? extends Apple\>*** and instantiate the list. But when we try to add elements in it, it will give us compilation error.
 
@@ -235,7 +235,7 @@ basket.add(new AsianApple()); //Successful
 
 The interesting fact here is, we were supposed to be able to add any supertype of ***Apple*** to the list, but it seems to happen the opposite. When we try to add items in a list demonstrated above, it only accepts the children of the ***supertype***.
 
-#### PECS \[Producer extends, Consumer super\] {#pecs-producer-extends-consumer-super}
+#### PECS \[Producer extends, Consumer super\]
 
 * If we want to produce items, e.g.: iterate over a list or get items from a list, we use extends.
 
@@ -245,7 +245,7 @@ The reason is that we cannot know which subtype or ***Fruit*** our collection wi
 
 The reason is that we don't care what is already stored in the collection. As long as we are adding a ***Fruit*** and its subtype in the collection, the compiler doesn't complain.
 
-#### Where we cannot use Generic types {#where-we-cannot-use-generic-types}
+#### Where we cannot use Generic types
 
 * With static fields
 

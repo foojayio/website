@@ -26,14 +26,14 @@ Java developers, in particular, have long dealt with this issue. But what if you
 
 In this guide, we'll walk through how to implement HCR and integrate it into your Java development workflow. By the end, you'll have a powerful new tool to cut down on those long, unproductive restart times.
 
-Understanding Hot Class Reload {#h2-0-understanding-hot-class-reload}
----------------------------------------------------------------------
+Understanding Hot Class Reload
+------------------------------
 
 Simply put, Hot Class Reload (HCR) allows Java applications to reload classes at runtime. This is incredibly useful in development environments where you're constantly iterating and tweaking code. Think of it as real-time editing: you change some code, the application picks it up right away---no restart required.
 
 Hot Class Reload (HCR) is a technique that enables Java applications to reload classes at runtime. This approach is particularly useful in development environments where frequent code changes occur. By leveraging Java's `WatchService`, custom class loaders using the `javax.tools` api and `JavaCompiler` class we can monitor source files for changes, compile them on-the-fly, and reload the updated classes into the running application.
 
-### How It Works {#h3-1-how-it-works}
+### How It Works
 
 The core components of our HCR implementation include:
 
@@ -41,7 +41,7 @@ The core components of our HCR implementation include:
 2. **Dynamic Compilation** : Uses `javax.tools.JavaCompiler` to compile modified Java source files.
 3. **Custom Class Loader**: Loads the newly compiled classes into the JVM, replacing the old versions.
 
-### System Flow Diagram {#h3-2-system-flow-diagram}
+### System Flow Diagram
 
 Below is a simplified flow diagram illustrating the HCR process:
 
@@ -53,8 +53,8 @@ Below is a simplified flow diagram illustrating the HCR process:
 4. **Custom Class Loader**: Loads the newly compiled class into the jvm.
 5. **Invoke Main Method**: Exectues the main method by executing the bytecode of the reloaded class.
 
-Implementing Hot Class Reload {#h2-3-implementing-hot-class-reload}
--------------------------------------------------------------------
+Implementing Hot Class Reload
+-----------------------------
 
 Here's a breakdown of the Java program implementing HCR:
 
@@ -217,7 +217,7 @@ private boolean compile(Path sourceFile) {
 ```
 
 
-### Custom Class Loader {#h3-4-custom-class-loader}
+### Custom Class Loader
 
 The program uses a custom class loader to load the compiled class files into the JVM. Reloading happens after the compilation succeeds, and it reloads the class. Implement a custom class loader to load the modified class and execute it.  
 
@@ -596,8 +596,8 @@ public class Day84 {
 ```
 
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Hot Class Reload in Java offers a powerful way to enhance development productivity by reducing the need for full application restarts.
 

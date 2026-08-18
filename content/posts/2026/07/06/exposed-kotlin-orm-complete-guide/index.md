@@ -27,8 +27,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 For quite some time, I have been a huge fan of and fascinated by JetBrains products, tools, and libraries because of their masterful craftsmanship in product creation and their pristine focus on building high-quality developer tools.
 
@@ -39,7 +39,7 @@ Recently, one Kotlin Domain-Specific Language (DSL) library caught my attention.
 
 Before diving into the Exposed library, let's first understand some fundamentals and prerequisites.
 
-### What is a Domain-Specific Language (DSL)? {#h3-1-what-is-a-domain-specific-language-dsl}
+### What is a Domain-Specific Language (DSL)?
 
 According to Wikipedia, a domain-specific language (DSL) is a computer language specialized for a particular problem or application domain. Unlike general-purpose languages (GPLs), which apply broadly across domains, DSLs trade broad applicability for greater efficiency, readability, and ease of use in specific tasks. A DSL uses concepts and rules derived from a particular field or domain.
 
@@ -50,14 +50,14 @@ According to Wikipedia, a domain-specific language (DSL) is a computer language 
 * **Regular Expressions (Regex):** Optimized for pattern matching and text searching.
 * **Maven/Gradle:** Used specifically for build automation and software compilation.
 
-### **Key Types of DSLs** {#h3-2-key-types-of-dsls}
+### **Key Types of DSLs**
 
 DSLs generally fall into two categories:
 
 * **Internal DSLs:** Embedded within a general-purpose host language (for example, using Ruby or Kotlin syntax to define specific rules or configurations).
 * **External DSLs:** Independent languages with their own custom syntax that require a dedicated parser (for example, SQL).
 
-### What is Exposed? {#h3-3-what-is-exposed}
+### What is Exposed?
 
 **Exposed** is Jetbrains's official, lightweight SQL library and object-relational mapping (ORM) framework designed specifically for Kotlin. It provides:
 
@@ -65,7 +65,7 @@ DSLs generally fall into two categories:
 2. Native support for both traditional blocking database drivers through JDBC and modern,  
    non-blocking asynchronous database drivers through R2DBC.
 
-### Why Exposed? {#h3-4-why-exposed}
+### Why Exposed?
 
 1. **Lightweight ORM:**Maps our database schema to Kotlin objects in an intuitive and lightweight way
 2. **Type-safe Queries:** Let's you write type-safe SQL queries that survive refactoring and help prevent errors
@@ -75,14 +75,14 @@ DSLs generally fall into two categories:
 6. **Broad Database Support:**Works with popular databases such as PostgreSQL, MySQL, MariaDB, Microsoft SQL Server, SQLite, Oracle, H2, and others.
 7. **Production-proven:** Jetbrains develops and maintains Exposed and uses it extensively in its own products, making it a mature and battle-tested framework.
 
-### Database Access APIs in Exposed {#h3-5-database-access-apis-in-exposed}
+### Database Access APIs in Exposed
 
 Exposed provides two primary APIs for interacting with a database: **the Domain-Specific Language (DSL) API and the Data Access Object (DAO) API**.
 
 1. **Domain-Specific Language (DSL) API:** The DSL API provides kotlin-based abstractions for interacting with relational databases. It closely resembles writing SQL queries while leveraging Kotlin's type safety. Although it is more verbose than the DAO API, it gives you greater control over your queries and makes complex SQL easier to express.
 2. **Data Access Object (DAO) API:** The DAO API provides an object-orientated approach to database access, similar to ORM frameworks such as Hibernate and MyBatis. It requires less boilerplate code and offers a more intuitive, Kotlin-centric way to work with database entities.
 
-### Which API Should You Choose? {#h3-6-which-api-should-you-choose}
+### Which API Should You Choose?
 
 Choose the API based on your project's requirements:
 
@@ -94,17 +94,17 @@ Exposed can be integrated into your application in multiple ways. You can either
 In this article, we will explore Exposed's capabilities by implementing simple CRUD operations with **Spring Boot 4**.
 > **Note: *Support for [Spring Boot 3](https://www.jetbrains.com/help/exposed/spring-boot-integration.html#spring-boot-3) will be sunsetting in the next major release of Exposed. New projects should use Spring Boot 4 whenever possible.***
 >
-> Step-by-Step Guide {#h2-7-step-by-step-guide}
-> ---------------------------------------------
+> Step-by-Step Guide
+> ------------------
 >
-> ### Pre-requisities {#h3-8-pre-requisities}
+> ### Pre-requisities
 >
 > * Java 17 or later
 > * Kotlin 2.1.x or later
 > * IntelliJ IDEA
 > * Gradle (Optional)
 >
-> ### Step 1: Scaffolding a project {#h3-9-step-1-scaffolding-a-project}
+> ### Step 1: Scaffolding a project
 >
 > Let's begin by scaffolding a new Spring Boot 4 application. We'll use **Spring Initializr**, which generates a production-ready project with the required build configuration and dependencies.
 >
@@ -136,7 +136,7 @@ Select the following dependencies:
 
 **Note:** At the time of writing, **Exposed** *is not available as a selectable dependency in Spring Initializr.* We'll add the required Exposed dependencies manually in the next section.
 
-### **Step 3: Generate and Open the Project** {#h3-10-step-3-generate-and-open-the-project}
+### **Step 3: Generate and Open the Project**
 
 Click **Generate** to download the project, then extract the archive and open it in your preferred IDE, such as **IntelliJ IDEA**.
 
@@ -155,7 +155,7 @@ explore-exposed
 ```
 
 
-### **Step 4: Verify the Application** {#h3-11-step-4-verify-the-application}
+### **Step 4: Verify the Application**
 
 Run the application using Gradle:
 
@@ -168,7 +168,7 @@ Or simply run the `ExploreExposedApplication.kt` class directly from your IDE.
 
 If everything is configured correctly, Spring Boot will start successfully, confirming that the project scaffold is ready. In the next section, we'll integrate the **Exposed** **Spring Boot 4 Starter** for working with Exposed features and configure it to work with **H2**.
 
-### Step 5: Add Exposed Spring Boot 4 Starter {#h3-12-step-5-add-exposed-spring-boot-4-starter}
+### Step 5: Add Exposed Spring Boot 4 Starter
 
 Add the below exposed Spring Boot starter artifact to `build.gradle.kts` the script.
 
@@ -301,7 +301,7 @@ class ExposedConfig {
 ```
 
 
-### Step 6: Create Course Table Entity {#h3-13-step-6-create-course-table-entity}
+### Step 6: Create Course Table Entity
 
 We can create different datatypes with primary keys; we will use [LongIdTable](https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html){#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html}. For more details, <https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html>{#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html}
 
@@ -321,7 +321,7 @@ object CourseEntity : LongIdTable("courses") {
 ```
 
 
-### Step 7: Understanding the Service Layer {#h3-14-step-7-understanding-the-service-layer}
+### Step 7: Understanding the Service Layer
 
 The *CourseService* class holds all the business logic for CRUD operations on courses. It uses **Exposed's DSL** to access the database, while Spring handles transactions behind the scenes.
 
@@ -370,7 +370,7 @@ Each of these reads almost like plain SQL but with full Kotlin type-checking---s
 * **Plays well with Spring** --- transactions are handled declaratively, no manual wiring.
 * **Easy to read** --- the DSL mirrors SQL closely enough that anyone familiar with SQL can follow along.
 
-### Step 8: Understanding the Controller Layer {#h3-15-step-8-understanding-the-controller-layer}
+### Step 8: Understanding the Controller Layer
 
 The *CourseController* is where HTTP requests meet business logic. It's a bit unusual in that it does double duty---serving server-rendered HTML views (**Thymeleaf** ) *and* exposing JSON REST endpoints, all from the same class.
 
@@ -396,7 +396,7 @@ Serving Pages (View-Based Endpoints)
 
 These all follow the classic **Post/Redirect/Get** pattern: after a form submission or delete action, the browser is redirected to /courses instead of re-rendering the same page. This avoids duplicate submissions if the user refreshes.
 
-### Step 9: Thymeleaf under the hood {#h3-16-step-9-thymeleaf-under-the-hood}
+### Step 9: Thymeleaf under the hood
 
 Since this project uses **Thymeleaf** as the templating engine, every string returned from a view-based method (like **"index", "add-course", "edit-course"**) maps directly to an HTML template---typically found at:
 
@@ -409,7 +409,7 @@ src/main/resources/templates/edit-course.html
 
 Spring Boot's Thymeleaf auto-configuration takes care of resolving these automatically---no extra ViewResolver setup needed, as long as spring-boot-starter-thymeleaf is on the classpath.
 
-### **Step 10: Verify the Application** {#h3-17-step-10-verify-the-application}
+### **Step 10: Verify the Application**
 
 Run the application using Gradle:
 
@@ -461,8 +461,8 @@ SQL: SELECT COURSES.ID, COURSES.TITLE, COURSES.DESCRIPTION, COURSES.PUBLISHED FR
 
 ![Course management](Screenshot-2026-07-05-at-2.14.45-PM-1024x510.png) Course management
 
-Conclusion {#h2-18-conclusion}
-------------------------------
+Conclusion
+----------
 
 Working with databases in Kotlin usually means picking a side: raw SQL, which is fast but easy to get wrong, or a heavy ORM, which is safe but full of boilerplate. Exposed sits nicely in between.
 
@@ -478,8 +478,8 @@ If you're a Kotlin developer tired of choosing between "too much magic" and "too
 
 Everything comes from the companion [GithubRepo](https://github.com/bsmahi/explore-exposed), which contains fully working implementations of each example.
 
-References: {#h2-19-references}
--------------------------------
+References:
+-----------
 
 1. <https://martinfowler.com/bliki/DomainSpecificLanguage.html>
 2. <https://www.jetbrains.com/mps/concepts/domain-specific-languages>

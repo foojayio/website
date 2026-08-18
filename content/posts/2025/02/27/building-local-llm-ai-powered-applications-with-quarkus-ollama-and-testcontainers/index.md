@@ -31,8 +31,8 @@ The PingPong-AI project demonstrates a simple implementation of AI-powered funct
 
 
 
-Project Overview {#h2-0-project-overview}
------------------------------------------
+Project Overview
+----------------
 
 In PingPong-AI, Ollama is used to simulate a simple conversation model where a curious service generates questions around a topic and a wise service responds with informated answers, that will generate more questions on the curious service.
 
@@ -44,14 +44,14 @@ The project integrates Quarkus with Ollama to create an AI model-driven applicat
 
 
 
-1. Integrating Quarkus with Ollama {#h2-1-1-integrating-quarkus-with-ollama}
-----------------------------------------------------------------------------
+1. Integrating Quarkus with Ollama
+----------------------------------
 
-### Why Ollama? {#h3-2-why-ollama}
+### Why Ollama?
 
 Ollama simplifies the deployment and use of AI models in applications. It provides a runtime for AI model execution and can be easily integrated into existing applications.
 
-### Quarkus and Ollama Integration {#h3-3-quarkus-and-ollama-integration}
+### Quarkus and Ollama Integration
 
 The integration with Quarkus is handled using REST endpoints to interact with Ollama. The Quarkus application serves as the middleware to process client requests and communicate with the Ollama runtime.
 
@@ -119,14 +119,14 @@ quarkus.langchain4j.ollama.curiousModel.chat-model.model-id=tinyllama
 
 
 
-2. Using Testcontainers for Integration Testing {#h2-4-2-using-testcontainers-for-integration-testing}
-------------------------------------------------------------------------------------------------------
+2. Using Testcontainers for Integration Testing
+-----------------------------------------------
 
-### Why Testcontainers? {#h3-5-why-testcontainers}
+### Why Testcontainers?
 
 **Testcontainers** is a Java library for running lightweight, disposable containers during tests. In PingPong-AI, Testcontainers are used to set up an environment with an Ollama runtime for integration testing.
 
-### Example: Setting up a Testcontainer for Ollama {#h3-6-example-setting-up-a-testcontainer-for-ollama}
+### Example: Setting up a Testcontainer for Ollama
 
 The test class demonstrates how to configure and use Testcontainers:
 
@@ -171,21 +171,21 @@ class CuriousChatResourceTest {
 ```
 
 
-### Key Points: {#h3-7-key-points}
+### Key Points:
 
 * The `@QuarkusTest` annotation allows Quarkus to run the application in a test-friendly mode.
 * Quarkus finds a service (Ollama) for which it needs an instance and it will spin up a container for that.
 
 
 
-3. Leveraging Quarkus Dev Services for Ollama {#h2-8-3-leveraging-quarkus-dev-services-for-ollama}
---------------------------------------------------------------------------------------------------
+3. Leveraging Quarkus Dev Services for Ollama
+---------------------------------------------
 
-### What Are Quarkus Dev Services? {#h3-9-what-are-quarkus-dev-services}
+### What Are Quarkus Dev Services?
 
 Quarkus Dev Services simplifies the setup of required services during development. For this project, Quarkus Dev Services can spin up an Ollama runtime container automatically.
 
-### Configuring Dev Services {#h3-10-configuring-dev-services}
+### Configuring Dev Services
 
 The `application.properties` file includes configurations for enabling Dev Services:
 
@@ -198,7 +198,7 @@ quarkus.langchain4j.log-requests=true
 
 With these configurations, Quarkus Dev Services automatically starts an Ollama container when the application is run in development mode or in test, removing the need for manual setup.
 
-### Development Workflow {#h3-11-development-workflow}
+### Development Workflow
 
 You can launch the application in development mode using the following command:
 
@@ -215,12 +215,12 @@ This command:
 
 
 
-Conclusion {#h2-12-conclusion}
-------------------------------
+Conclusion
+----------
 
 The PingPong-AI project demonstrates a seamless integration of Quarkus with Ollama, making it easy to build AI-powered applications. By leveraging Testcontainers and Quarkus Dev Services, developers can efficiently test and develop their applications in a containerized and automated environment.
 
-### Key Takeaways: {#h3-13-key-takeaways}
+### Key Takeaways:
 
 * Quarkus provides a lightweight framework for building and deploying Java applications.
 * Ollama simplifies AI model integration with backend systems.

@@ -30,8 +30,8 @@ Before we proceed I want to say a couple of things about Twitter. Over the past 
 
 I see no reason to stay on Twitter. It's toxic and getting more-so by the second. I still have my account and I have [a bridge that tweets my Mastodon posts](https://moa.party/). So if you follow me there you won't miss anything. But I won't go there as often and will try not to post there. All the links in this post and future posts will refer to other networks whether LinkedIn or Mastodon.
 
-Juergen Hoeller -- Introducing Spring Framework 6 {#h2-0-juergen-hoeller-introducing-spring-framework-6}
---------------------------------------------------------------------------------------------------------
+Juergen Hoeller -- Introducing Spring Framework 6
+-------------------------------------------------
 
 ![Juergen Hoeller](1-jurgen-700x320.jpg)
 
@@ -62,8 +62,8 @@ Other features include fast bean property determination. Complete CGLIB fork wit
 
 During the break I had time to talk to Oleg Šelajev and Juergen. The talk initially covered the future of CRaC. Jurgen was very optimistic about its chances as a future capability in the JVM and the chance of integrating it into a reasonable workflow. I asked him about the uptake of GraalVM and as of now the interest around the new versions focuses on other features. There's excitement for GraalVM but it isn't a killer feature. Yet. I have some thoughts on it which I will share at the end of the post.
 
-DaShaun Carter -- Introducing Spring Boot 3.0 {#h2-1-dashaun-carter-introducing-spring-boot-3-0}
-------------------------------------------------------------------------------------------------
+DaShaun Carter -- Introducing Spring Boot 3.0
+---------------------------------------------
 
 ![DaShaun Carter](3-DaShaun-700x343.jpg)
 
@@ -73,8 +73,8 @@ The audience asked to see the size of the image which was half the size of the o
 
 After that he pointed at <https://calendar.spring.io/> which I wasn't aware of (or forgot). The scale of releases for November is amazing.
 
-Cora Iberkleid -- Protect Your Microservices with Spring Cloud Gateway {#h2-2-cora-iberkleid-protect-your-microservices-with-spring-cloud-gateway}
---------------------------------------------------------------------------------------------------------------------------------------------------
+Cora Iberkleid -- Protect Your Microservices with Spring Cloud Gateway
+----------------------------------------------------------------------
 
 ![Cora Iberkleid](4-Cora-700x271.jpg)
 
@@ -90,8 +90,8 @@ Until now everything was done with pure YAML configurations. The demo concluded 
 
 ![Gateway Flow](6-Api-Gateway-700x329.jpg)
 
-Dr. David Syer -- Running Untrusted Code in Spring Using WebAssembly {#h2-3-dr-david-syer-running-untrusted-code-in-spring-using-webassembly}
----------------------------------------------------------------------------------------------------------------------------------------------
+Dr. David Syer -- Running Untrusted Code in Spring Using WebAssembly
+--------------------------------------------------------------------
 
 ![Dr. David Syer](7-Dr-Syer-700x331.jpg)
 
@@ -109,30 +109,30 @@ Another aspect is the Polyglot support. Being able to do that for C or Rust code
 
 I've had this discussion with many smart people who see a lot of potential in WASM on the server. Notice that this isn't about the browser where WASM has a valid use case. It might succeed simply because of mindshare, but as it stands right now, it seems that WASM is a couple of decades behind what we have in the JVM world.
 
-Finally {#h2-4-finally}
------------------------
+Finally
+-------
 
 Unfortunately, I had to pick up my kids from school and had to leave early so I didn't have time to see the talk by [Oleg Šelajev](https://www.linkedin.com/in/shelajev/) about Test Containers or the many other [interesting talks](https://tanzu.vmware.com/developer/springone-tour/2022/tel-aviv/). I did read the post on [Test Containers](https://www.atomicjar.com/2022/11/testcontainers-testing-with-real-dependencies/) but I guess the talk would have been more interesting.
 
 I need to go to more of these things. It seems I know more people when flying abroad to a conference than when visiting a conference in my country. As I mentioned before. I have some thoughts on why GraalVM isn't taking over everything overnight. There are a few big reasons.
 
-### It's Work {#h3-5-it-s-work}
+### It's Work
 
 Moving to GraalVM requires a lot of work from the developers. Less so as time moves on. But still a lot of things need to change. Debugging is harder. We need to generate builds in CI and we can't run them locally on some machines. It's a pain.
 
 Adding the slow build process to the mix makes this even more painful.
 
-### Dubious Benefit {#h3-6-dubious-benefit}
+### Dubious Benefit
 
 As developers, the memory and storage requirements we give are a given. DevOps have cost reduction incentives that can benefit from GraalVM but they can't just integrate it. They need developers to do the work. In a corporate environment, the cloud waste is already astronomical. Sending a developer to migrate to a new VM so the DevOps team can get "cost saving credit". That's not something that the R\&D management can get behind.
 
 The incentives in a corporate setting are problematic. Maybe the Spring team can arrange some viral marketing by helping twitter cut its cloud bill. I'm sure some of their microservices are Spring based.
 
-### Observability {#h3-7-observability}
+### Observability
 
 While Spring Boot includes some monitoring tooling even with GraalVM. The level of observability on GraalVM is lower at the moment (no agent features). That alone might have been OK but coupled with everything else it could be a problem.
 
-### We Don't Use Serverless {#h3-8-we-don-t-use-serverless}
+### We Don't Use Serverless
 
 Java developers aren't big on serverless. Over there GraalVM makes perfect sense and is already making great strides. But serverless isn't as common in our community (rightly so IMHO) so the value for GraalVM isn't as clear.
 

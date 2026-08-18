@@ -29,8 +29,8 @@ There is also one thing every existing push developer should do now:
 
 Next week we plan to bring down the old push service and direct `push.codenameone.com` traffic to the new implementation. The compatibility endpoint accepts the existing request format, so existing code should keep working. It is still a completely new server, and "should" is not a test result. Please test before the cutover while both routes are easy to compare.
 
-TL;DR {#h2-0-tl-dr}
--------------------
+TL;DR
+-----
 
 Push is the lead story today. Over the next four posts, I will unpack the other changes in this release:
 
@@ -39,8 +39,8 @@ Push is the lead story today. Over the next four posts, I will unpack the other 
 * [Health data](#health-data-without-fake-certainty): A new API covers HealthKit, Health Connect, workouts, nutrition, eight Bluetooth health sensor profiles, and a deterministic simulator. The design preserves denied reads, missing values, source overlap, and compliance boundaries instead of flattening them into convenient answers.
 * [Road-following map routes](#a-polyline-is-not-a-route): `Routing.showRoute(...)` can now turn two coordinates into road geometry, distance, duration, legs, and steps. OSRM provides the default test path, while `RouteService` keeps production provider choice in application code.
 
-Test the new push server now {#h2-1-test-the-new-push-server-now}
------------------------------------------------------------------
+Test the new push server now
+----------------------------
 
 If your server currently sends through the classic endpoint, keep the request exactly as it is and change only the host:
 
@@ -55,8 +55,8 @@ The new server contains a classic compatibility layer. Existing applications do 
 
 The queue records a provider response for each target. "Accepted" means APNs, FCM, or another provider accepted the request. It does not prove that the operating system displayed the notification, that the user saw it, or that the application opened. The console keeps those states separate because a comforting number with the wrong definition is worse than no number.
 
-V3 makes the message a real type {#h2-2-v3-makes-the-message-a-real-type}
--------------------------------------------------------------------------
+V3 makes the message a real type
+--------------------------------
 
 The classic API encoded behavior into numeric push types and positional strings. It worked, but it made provider differences and new destinations increasingly hard to express.
 
@@ -114,21 +114,21 @@ Create one client in `init()`, retain it, and call `register()` from `start()`. 
 
 Applications that run their own push infrastructure are not trapped behind the managed service. `PushTransport` is a public seam for custom registration and delivery, while `PushRegistrationSink` lets an application mirror registration changes to its own backend.
 
-One push can update a notification or a Surface {#h2-3-one-push-can-update-a-notification-or-a-surface}
--------------------------------------------------------------------------------------------------------
+One push can update a notification or a Surface
+-----------------------------------------------
 
 A lock-screen notification is only one destination. Widgets, Live Activities, the Dynamic Island, watch complications, and other [Surfaces](https://www.codenameone.com/blog/widgets-live-activities-dynamic-island/) also need fresh state.
 
 V3 reserves a typed `surface` object in the same envelope. Native bootstrap code can route a Surface command before the main application UI is running.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRCCiAgICBBWyJQdXNoIFYzIGVudmVsb3BlIl0gLS0-IEJ7IlBheWxvYWQga2luZCJ9CiAgICBCIC0tPiBDWyJWaXNpYmxlIG5vdGlmaWNhdGlvbiJdCiAgICBCIC0tPiBEWyJBcHBsaWNhdGlvbiBkYXRhIl0KICAgIEIgLS0-IEVbIlN1cmZhY2UgY29tbWFuZCJdCiAgICBFIC0tPiBGWyJXaWRnZXQgdGltZWxpbmUiXQogICAgRSAtLT4gR1siTGl2ZSBBY3Rpdml0eSJdCiAgICBFIC0tPiBIWyJEeW5hbWljIElzbGFuZCBvciBjb21wbGljYXRpb24iXQogICAgQyAtLT4gSVsiUHVzaExpc3RlbmVyIG9uIHRoZSBDb2RlbmFtZSBPbmUgRURUIl0KICAgIEQgLS0-IEk=?type=png&amp;bgColor=ffffff)
+![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRCCiAgICBBWyJQdXNoIFYzIGVudmVsb3BlIl0gLS0-IEJ7IlBheWxvYWQga2luZCJ9CiAgICBCIC0tPiBDWyJWaXNpYmxlIG5vdGlmaWNhdGlvbiJdCiAgICBCIC0tPiBEWyJBcHBsaWNhdGlvbiBkYXRhIl0KICAgIEIgLS0-IEVbIlN1cmZhY2UgY29tbWFuZCJdCiAgICBFIC0tPiBGWyJXaWRnZXQgdGltZWxpbmUiXQogICAgRSAtLT4gR1siTGl2ZSBBY3Rpdml0eSJdCiAgICBFIC0tPiBIWyJEeW5hbWljIElzbGFuZCBvciBjb21wbGljYXRpb24iXQogICAgQyAtLT4gSVsiUHVzaExpc3RlbmVyIG9uIHRoZSBDb2RlbmFtZSBPbmUgRURUIl0KICAgIEQgLS0-IEk=?type=png&bgColor=ffffff)
 
 Consider a delivery application that is not running while the customer waits for a courier. A server push can update its Live Activity and Dynamic Island to say "Driver is 2 minutes away" without launching the main Codename One UI. On a platform without that Surface, the same campaign can deliver a normal notification instead.
 
 The message view still shows whether APNs or another provider accepted each update. That is useful when the Surface changes while no `PushListener` is running inside the application.
 
-The certificate stops being your server's problem {#h2-4-the-certificate-stops-being-your-server-s-problem}
------------------------------------------------------------------------------------------------------------
+The certificate stops being your server's problem
+-------------------------------------------------
 
 The old arrangement often made an application team generate a push certificate, place it on its own server, watch its expiry date, and repeat the process. That is fragile infrastructure disguised as setup.
 
@@ -138,8 +138,8 @@ The new console stores provider credentials for each application and environment
 
 Credentials are encrypted at rest and treated as write-only secrets in the console. Reading application settings does not return the secret value. This removes certificate hosting from your application server, but it does not remove normal secret hygiene: use a narrowly scoped provider key, rotate it when a team member or system boundary changes, and separate production from development.
 
-Segmentation without handing identity to a device {#h2-5-segmentation-without-handing-identity-to-a-device}
------------------------------------------------------------------------------------------------------------
+Segmentation without handing identity to a device
+-------------------------------------------------
 
 The console separates applications, environments, subscriptions, audiences, messages, campaigns, and analytics.
 
@@ -155,8 +155,8 @@ This is segmentation for application behavior, not an advertising profile. Coden
 
 Never place a password, access token, medical result, or other secret in a notification payload. Providers and operating systems participate in delivery, lock screens can expose visible text, and notification data may outlive the screen where you intended to show it.
 
-Monitoring that answers operational questions {#h2-6-monitoring-that-answers-operational-questions}
----------------------------------------------------------------------------------------------------
+Monitoring that answers operational questions
+---------------------------------------------
 
 The new message view exposes queued, accepted, failed, and dead targets, including provider error information.
 
@@ -172,8 +172,8 @@ This makes several operational checks possible:
 
 Analytics are retained for 30 days. They are operational delivery analytics, not proof of attention. Application opens or business outcomes still belong in consent-aware product analytics under your control.
 
-What each plan includes {#h2-7-what-each-plan-includes}
--------------------------------------------------------
+What each plan includes
+-----------------------
 
 Push sending and managed provider credentials are available on every subscription level, including Free. The plans differ in monthly volume, rate limits, and persistent campaign tooling:
 
@@ -188,8 +188,8 @@ Free and Basic applications can send through the same durable provider pipeline.
 
 These numbers are the initial policy, not a claim that every application needs a million notifications. Start with a small, explicit audience. A precise notification that helps 200 people is better than a vague blast that trains 200,000 people to turn notifications off.
 
-Phase one of our Maven repository move {#h2-8-phase-one-of-our-maven-repository-move}
--------------------------------------------------------------------------------------
+Phase one of our Maven repository move
+--------------------------------------
 
 We have also merged [phase one of a move from Maven Central to a Codename One repository on Cloudflare R2](https://github.com/codenameone/CodenameOne/pull/5497).
 
@@ -201,7 +201,7 @@ Those limits are soft guidelines, and the dashboard offers both open-source adju
 
 Phase one reduced a measured release payload from 229.5 MB to 76.9 MB. The release pipeline now copies the signed Central staging tree to R2, so it does not perform a second build with potentially different bytes.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBWyJKdWx5IDMxPGJyLz5TaHJpbmsgYW5kIGR1YWwgcHVibGlzaCJdIC0tPiBCWyJBdWd1c3QgNzxici8-R2VuZXJhdGVkIFBPTXMgdXNlIFIyIl0KICAgIEIgLS0-IENbIlRocmVlLXdlZWsgb2JzZXJ2YXRpb24gd2luZG93Il0KICAgIEMgLS0-IERbIkF1Z3VzdCAyODxici8-TmV3IHJlbGVhc2VzIG9uIFIyIG9ubHkiXQogICAgQSAtLT4gRVsiTWF2ZW4gQ2VudHJhbCByZW1haW5zIGF1dGhvcml0YXRpdmUiXQogICAgQiAtLT4gRQogICAgRSAtLT4gRlsiRXhpc3RpbmcgQ2VudHJhbCB2ZXJzaW9ucyByZW1haW4gYXZhaWxhYmxlIl0=?type=png&amp;bgColor=ffffff)
+![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBWyJKdWx5IDMxPGJyLz5TaHJpbmsgYW5kIGR1YWwgcHVibGlzaCJdIC0tPiBCWyJBdWd1c3QgNzxici8-R2VuZXJhdGVkIFBPTXMgdXNlIFIyIl0KICAgIEIgLS0-IENbIlRocmVlLXdlZWsgb2JzZXJ2YXRpb24gd2luZG93Il0KICAgIEMgLS0-IERbIkF1Z3VzdCAyODxici8-TmV3IHJlbGVhc2VzIG9uIFIyIG9ubHkiXQogICAgQSAtLT4gRVsiTWF2ZW4gQ2VudHJhbCByZW1haW5zIGF1dGhvcml0YXRpdmUiXQogICAgQiAtLT4gRQogICAgRSAtLT4gRlsiRXhpc3RpbmcgQ2VudHJhbCB2ZXJzaW9ucyByZW1haW4gYXZhaWxhYmxlIl0=?type=png&bgColor=ffffff)
 
 Existing projects can prepare for post-cutover versions by adding the repository to both Maven resolution paths:
 
@@ -222,8 +222,8 @@ R2 object storage and Cloudflare's edge should improve dependency resolution and
 
 [The Maven article publishes on August 4 with the full payload audit, cutover plan, R2 release safeguards, retention policy, and failure modes we are testing during dual publication.](https://www.codenameone.com/blog/maven-central-cloudflare-r2/)
 
-On-device AI and MCP on every port {#h2-9-on-device-ai-and-mcp-on-every-port}
------------------------------------------------------------------------------
+On-device AI and MCP on every port
+----------------------------------
 
 [PR #5467](https://github.com/codenameone/CodenameOne/pull/5467) brings vision, language, and LiteRT inference into the core. The API covers OCR, barcode recognition, face detection, image labels, pose detection, selfie segmentation, document correction, language identification, translation, smart reply, and application-owned `.tflite` models.
 
@@ -242,7 +242,7 @@ Inference sessions keep an application-owned model loaded across multiple runs. 
 
 [PR #5472](https://github.com/codenameone/CodenameOne/pull/5472) takes the existing semantic MCP server beyond JavaSE. On loopback-capable ports, an LLM can read the component tree, find a button by semantic identity, set text, activate an action, and inspect the resulting state in the actual application.
 
-![Diagram](https://mermaid.ink/img/c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFudCBEZXYgYXMgRGV2ZWxvcGVyIGFuZCBMTE0gY2xpZW50CiAgICBwYXJ0aWNpcGFudCBQb3J0IGFzIERldmljZSBwb3J0IGZvcndhcmQKICAgIHBhcnRpY2lwYW50IE1DUCBhcyAxMjcuMC4wLjEgTUNQIHNlcnZlcgogICAgcGFydGljaXBhbnQgVUkgYXMgQ29kZW5hbWUgT25lIEVEVAogICAgRGV2LT4-UG9ydDogQ29ubmVjdCB0byBkZWJ1ZyBkZXZpY2UKICAgIFBvcnQtPj5NQ1A6IEZvcndhcmQgcG9ydCA4NjQyCiAgICBEZXYtPj5NQ1A6IHVpX3NuYXBzaG90CiAgICBNQ1AtPj5VSTogUmVhZCBzZW1hbnRpYyBjb21wb25lbnQgdHJlZQogICAgVUktLT4-RGV2OiBSb2xlcywgdGV4dCwgc3RhdGUsIGFuZCBhY3Rpb25zCiAgICBEZXYtPj5NQ1A6IEFjdGl2YXRlIHNlbWFudGljIHRhcmdldAogICAgTUNQLT4-VUk6IFBlcmZvcm0gY29tcG9uZW50IGFjdGlvbgogICAgVUktLT4-RGV2OiBVcGRhdGVkIHN0YXRl?type=png&amp;bgColor=ffffff)
+![Diagram](https://mermaid.ink/img/c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFudCBEZXYgYXMgRGV2ZWxvcGVyIGFuZCBMTE0gY2xpZW50CiAgICBwYXJ0aWNpcGFudCBQb3J0IGFzIERldmljZSBwb3J0IGZvcndhcmQKICAgIHBhcnRpY2lwYW50IE1DUCBhcyAxMjcuMC4wLjEgTUNQIHNlcnZlcgogICAgcGFydGljaXBhbnQgVUkgYXMgQ29kZW5hbWUgT25lIEVEVAogICAgRGV2LT4-UG9ydDogQ29ubmVjdCB0byBkZWJ1ZyBkZXZpY2UKICAgIFBvcnQtPj5NQ1A6IEZvcndhcmQgcG9ydCA4NjQyCiAgICBEZXYtPj5NQ1A6IHVpX3NuYXBzaG90CiAgICBNQ1AtPj5VSTogUmVhZCBzZW1hbnRpYyBjb21wb25lbnQgdHJlZQogICAgVUktLT4-RGV2OiBSb2xlcywgdGV4dCwgc3RhdGUsIGFuZCBhY3Rpb25zCiAgICBEZXYtPj5NQ1A6IEFjdGl2YXRlIHNlbWFudGljIHRhcmdldAogICAgTUNQLT4-VUk6IFBlcmZvcm0gY29tcG9uZW50IGFjdGlvbgogICAgVUktLT4-RGV2OiBVcGRhdGVkIHN0YXRl?type=png&bgColor=ffffff)
 
 This replaces coordinate guessing with application semantics. It also creates a control channel. Binding to `127.0.0.1` prevents accidental exposure to the local network, but it does not authenticate other processes on the device or workstation.
 
@@ -256,8 +256,8 @@ MCP refuses to start in a release build by default. An explicit override exists 
 
 [The AI and MCP article publishes on August 2 with the capability matrix, portable inference model, semantic debugging loop, and the reasons loopback still needs a release-build gate.](https://www.codenameone.com/blog/on-device-ai-mcp-loopback/)
 
-Health data without fake certainty {#h2-10-health-data-without-fake-certainty}
-------------------------------------------------------------------------------
+Health data without fake certainty
+----------------------------------
 
 [PR #5475](https://github.com/codenameone/CodenameOne/pull/5475) adds a first-class API for HealthKit, Health Connect, recorded workouts, sparse nutrition data, deterministic simulation, and eight adopted Bluetooth health sensor profiles.
 
@@ -287,7 +287,7 @@ if (availability == HealthAvailability.NOT_SUPPORTED) {
 HealthStore store = health.getStore();
 ```
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRCCiAgICBBWyJBcHBsaWNhdGlvbiJdIC0tPiBCWyJIZWFsdGgiXQogICAgQiAtLT4gQ1siSGVhbHRoU3RvcmUiXQogICAgQiAtLT4gRFsiV29ya291dE1hbmFnZXIiXQogICAgQiAtLT4gRVsiSGVhbHRoU2Vuc29ycyJdCiAgICBDIC0tPiBGWyJIZWFsdGhLaXQiXQogICAgQyAtLT4gR1siSGVhbHRoIENvbm5lY3QiXQogICAgQyAtLT4gSFsiTG9jYWwgYW5kIHNpbXVsYXRlZCBzdG9yZSJdCiAgICBFIC0tPiBJWyJFaWdodCBCbHVldG9vdGggTEUgcHJvZmlsZXMiXQogICAgSSAtLT4gRAogICAgSSAtLT4gQw==?type=png&amp;bgColor=ffffff)
+![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRCCiAgICBBWyJBcHBsaWNhdGlvbiJdIC0tPiBCWyJIZWFsdGgiXQogICAgQiAtLT4gQ1siSGVhbHRoU3RvcmUiXQogICAgQiAtLT4gRFsiV29ya291dE1hbmFnZXIiXQogICAgQiAtLT4gRVsiSGVhbHRoU2Vuc29ycyJdCiAgICBDIC0tPiBGWyJIZWFsdGhLaXQiXQogICAgQyAtLT4gR1siSGVhbHRoIENvbm5lY3QiXQogICAgQyAtLT4gSFsiTG9jYWwgYW5kIHNpbXVsYXRlZCBzdG9yZSJdCiAgICBFIC0tPiBJWyJFaWdodCBCbHVldG9vdGggTEUgcHJvZmlsZXMiXQogICAgSSAtLT4gRAogICAgSSAtLT4gQw==?type=png&bgColor=ffffff)
 
 Some of the API looks cautious because the platform contracts are cautious. HealthKit does not reveal whether a user denied read access. A completed authorization sheet means the user was asked, not that the application can read the category. The shared API therefore has no `hasReadPermission()` method that would lie on iOS.
 
@@ -299,8 +299,8 @@ This API does not make an application HIPAA compliant. It never uploads health d
 
 [The Health article publishes on August 1 with the platform matrix, authorization trap, sample model, change cursors, workouts, Bluetooth sensors, simulator failure modes, build configuration, and HIPAA boundary.](https://www.codenameone.com/blog/health-api-false-certainty/)
 
-A polyline is not a route {#h2-11-a-polyline-is-not-a-route}
-------------------------------------------------------------
+A polyline is not a route
+-------------------------
 
 A map polyline joins coordinates that already exist. It cannot discover the roads, travel time, maneuvers, or alternate paths between them.
 
@@ -317,7 +317,7 @@ Routing.showRoute(
 
 The call returns immediately. The active `RouteService` finds a route, then the API draws its geometry and frames the map on the Codename One EDT.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBWyJPcmlnaW4sIGRlc3RpbmF0aW9uLCBhbmQgd2F5cG9pbnRzIl0gLS0-IEJbIlJvdXRlUmVxdWVzdCJdCiAgICBCIC0tPiBDWyJSb3V0ZVNlcnZpY2UiXQogICAgQyAtLT4gRFsiUm9hZCBuZXR3b3JrIGNhbGN1bGF0aW9uIl0KICAgIEQgLS0-IEVbIlJvdXRlIGFsdGVybmF0aXZlcyJdCiAgICBFIC0tPiBGWyJHZW9tZXRyeSBhbmQgYm91bmRzIl0KICAgIEUgLS0-IEdbIkRpc3RhbmNlLCBkdXJhdGlvbiwgbGVncywgYW5kIHN0ZXBzIl0KICAgIEYgLS0-IEhbIk1hcFN1cmZhY2UiXQogICAgRyAtLT4gSVsiQXBwbGljYXRpb24gVUkiXQ==?type=png&amp;bgColor=ffffff)
+![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBWyJPcmlnaW4sIGRlc3RpbmF0aW9uLCBhbmQgd2F5cG9pbnRzIl0gLS0-IEJbIlJvdXRlUmVxdWVzdCJdCiAgICBCIC0tPiBDWyJSb3V0ZVNlcnZpY2UiXQogICAgQyAtLT4gRFsiUm9hZCBuZXR3b3JrIGNhbGN1bGF0aW9uIl0KICAgIEQgLS0-IEVbIlJvdXRlIGFsdGVybmF0aXZlcyJdCiAgICBFIC0tPiBGWyJHZW9tZXRyeSBhbmQgYm91bmRzIl0KICAgIEUgLS0-IEdbIkRpc3RhbmNlLCBkdXJhdGlvbiwgbGVncywgYW5kIHN0ZXBzIl0KICAgIEYgLS0-IEhbIk1hcFN1cmZhY2UiXQogICAgRyAtLT4gSVsiQXBwbGljYXRpb24gVUkiXQ==?type=png&bgColor=ffffff)
 
 The default service is OSRM, so the first driving route needs no provider signup. It points to the public OSRM demonstration server, which has no production SLA and uses a car profile. A `WALKING` request does not turn that graph into a pedestrian route.
 

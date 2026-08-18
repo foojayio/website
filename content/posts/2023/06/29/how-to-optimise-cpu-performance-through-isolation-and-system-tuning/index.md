@@ -29,9 +29,9 @@ In modern production environments, there are numerous hardware and software hook
 
 To accomplish this efficiently, it is necessary to understand the tuning landscape and to use tools and strategies that facilitate effective changes. Moreover, managing Java processes can be more difficult due to the number of auxiliary threads which are spawned by the JVM, even for logically single-threaded applications. The scheduling of these threads is critical to minimising jitter and achieving optimal performance.
 
-In this article, we will explore the strengths and weaknesses of the standard solutions for controlling CPU isolation for low-latency applications under Linux and how we developed [Chronicle Tune](https://chronicle.software/tune/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=chronicle-tune "Chronicle Tune") to address the inherent trade-offs of these solutions.
+In this article, we will explore the strengths and weaknesses of the standard solutions for controlling CPU isolation for low-latency applications under Linux and how we developed [Chronicle Tune](https://chronicle.software/tune/?utm_source=foojay&utm_medium=article&utm_campaign=chronicle-tune "Chronicle Tune") to address the inherent trade-offs of these solutions.
 
-### Using the isolcpus Linux Configuration {#h3-0-using-the-isolcpus-linux-configuration}
+### Using the isolcpus Linux Configuration
 
 isolcpus is a Linux boot command-line option that allows an explicit list of CPUs to be excluded from consideration by the Linux scheduler. This option provides very effective isolation; however, the problem is that it does not respect CPU ranges.
 
@@ -63,14 +63,14 @@ Since there are drawbacks with both isolcpus and cgroups/csets, plus they can be
 
 Chronicle Tune blends features from isolcpus and cgroups/csets together with bespoke functionality to simplify CPU and system tuning, allowing changes to be applied dynamically without the need for reboots.
 
-[Chronicle Tune](https://chronicle.software/tune/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=chronicle-tune "Chronicle Tune") can be especially useful for Java applications where careful separation and control of application and background threads is essential for achieving best performance. Chronicle Tune facilitates optimal process placement and control, helping to ensure fewer and shorter interrupts and allowing threads to be dynamically migrated.
+[Chronicle Tune](https://chronicle.software/tune/?utm_source=foojay&utm_medium=article&utm_campaign=chronicle-tune "Chronicle Tune") can be especially useful for Java applications where careful separation and control of application and background threads is essential for achieving best performance. Chronicle Tune facilitates optimal process placement and control, helping to ensure fewer and shorter interrupts and allowing threads to be dynamically migrated.
 
 ![](Screenshot-2023-06-20-at-2.22.25-PM-1024x532.png)  
 *Figure 2. Comparison of Chronicle Tune, isolcpus and cgroups*
 
 #### How Much Could Tuning Improve Performance?
 
-For businesses seeking to improve their performance down to the nanosecond, it's crucial to understand how much of a difference tuning can make. To this end, we conducted a practical test to evaluate the impact of Chronicle Tune on the performance of [Chronicle Queue](https://chronicle.software/queue/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=chronicle-tune "Chronicle Queue"). Specifically, we measured the write-to-read latency for 256 byte messages at a rate of 100,000 messages per second.
+For businesses seeking to improve their performance down to the nanosecond, it's crucial to understand how much of a difference tuning can make. To this end, we conducted a practical test to evaluate the impact of Chronicle Tune on the performance of [Chronicle Queue](https://chronicle.software/queue/?utm_source=foojay&utm_medium=article&utm_campaign=chronicle-tune "Chronicle Queue"). Specifically, we measured the write-to-read latency for 256 byte messages at a rate of 100,000 messages per second.
 
 Our testing shows that while Chronicle Tune had an effect even at lower percentiles, from around the 99.9th percentile onwards the benefits of significantly reduced jitter became increasingly apparent, showing the machine running in a much cleaner, more optimal configuration.
 
@@ -86,7 +86,7 @@ This plot shows that while the total number of jitter events is slightly lower f
 ![](Screenshot-2023-06-20-at-2.25.00-PM-1024x550.png)  
 *Figure 4. Average number of delays per hour, grouped by length of the delay. The statistics were gathered during a 91 second jitter test run.*
 
-### Conclusion {#h3-1-conclusion}
+### Conclusion
 
 The standard solutions for controlling CPU isolation for low-latency applications under Linux are isolcpus and cgroups/csets. However, they each have their downsides and can be awkward to use.
 

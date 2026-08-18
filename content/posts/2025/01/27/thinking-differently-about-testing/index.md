@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-### 10x Insights on a different view of quality assurance {#h3-0-10x-insights-on-a-different-view-of-quality-assurance}
+### 10x Insights on a different view of quality assurance
 
 I've given a few talks about 10x developers, or rather 10x professionals and been involved in process (re)engineering for many teams and projects.
 
@@ -32,7 +32,7 @@ I thought I'd share a personal example...
 
 ![](Picture-1-700x422.png)
 
-### Bugs cost {#h3-1-bugs-cost}
+### Bugs cost
 
 I expect most of you have seen charts like this one.
 
@@ -50,13 +50,13 @@ Then, I met Simon.
 
 Simon taught me more about testing in one day than I'd ever learned before. He made me think about the principles and objectives of testing. He gave me the 10x insights that I've kept with me for many years since. Here's one piece of that advice.
 
-### When's the best time to find bugs? {#h3-2-when-s-the-best-time-to-find-bugs}
+### When's the best time to find bugs?
 
 Obviously, as soon as possible. Taken to the extreme, that would be when we ctrl-s and press save on a design doc or source file. It would be great(!) if all possible tests could be exercised instantly and results fed back immediately.
 
 Assuming you agree with that, we can agree that since that isn't currently practical, our efforts in testing are, in effect, a pragmatic exercise of risk vs reward. It becomes a discussion about what not to test yet. What can we delay? That's the theory, anyhow.
 
-### How should we really test? {#h3-3-how-should-we-really-test}
+### How should we really test?
 
 Any software production process has testing as one or more steps. From unit tests that developers run to full-grown integration testing carried out at the end of a release. There are probably other stages of testing; each step in the process, from conception to packaging to deployment, probably has some quality assurance effort.
 
@@ -68,23 +68,23 @@ We're saying that developer time is expensive, and we're willing to risk bugs be
 
 We've implicitly labelled tests by who runs them, not by any material aspect of the test. If it's called a unit-test it's created/run by developers. If it's called an integration test, it's created/run by QA teams. Even if the unit test is complex or the integration test is simple.
 
-### Changing the status quo {#h3-4-changing-the-status-quo}
+### Changing the status quo
 
 Simon taught me that this approach, compartmentalizing teams and test units, is always sub-optimal. The project we were working on at the time was significant, with hundreds of developers and millions of lines of code, so even slight improvements in testing and bug fixing were worth considering. Simon showed, though, how a new approach would work at any scale - whether a one-person project or beyond.
 
 Getting started requires some prep work and thinking through the objections you might encounter.
 
-### Three challenges to overcome {#h3-5-three-challenges-to-overcome}
+### Three challenges to overcome
 
 1. **As discussed earlier, giving the developer extra work is considered non-optimal.** Any plan to do this has to be well-considered and thoughtful. As we'll see, it's entirely possible, but we'll need a few things to succeed.
 2. **There's the question of testing 'too' much.** A position many will take when this sort of discussion is aired: For example, whether a tree makes a sound in the forest when it falls or finding bugs that end-users are unlikely to discover is a worthwhile investment. Is all technical debt terrible? Running an extra 1000 hours of tests every build doesn't sound like a good investment if it only produces one bug report.
 3. **The cost of shift left.** It's easy to say run the test earlier, but the tests that run later are usually part of some complex integration test harness or such like. The cost of developer time to learn even how to run these tests is often excessive. Hence, you frequently see conversations around producing a simplified example test case for developers. A test that quite usually sits in a special test bucket of developers' favourite 'known to find bugs' test suite. As an aside - this is often a bad idea in the long run because this 'special' test bucket becomes sacrosanct. A must-run-regardless test suite even though, over time, the value of the individual test lessens.
 
-### We have almost all the pieces {#h3-6-we-have-almost-all-the-pieces}
+### We have almost all the pieces
 
 For this cultural transformation to work, because the most significant challenge will be changing mindsets, we need data. Some you may already have, others you'll need to start collecting. None of this is rocket science.
 
-### Testing is multiI-dimensional {#h3-7-testing-is-multii-dimensional}
+### Testing is multiI-dimensional
 
 Our one-dimensional approach to organising tests and testing gets in the way. Thinking about when to run tests in simple chronological order: unit-test time, integration time, deployment time, etc, is inflexible, and overtime leads to a loss of quality and increased costs.
 
@@ -98,7 +98,7 @@ With those dimensions, we can organise our tests into a few groups.
 
 ![](Picture-2-700x268.png)
 
-### Tortoise and the Hare vs the Feather and the Boulder {#h3-8-tortoise-and-the-hare-vs-the-feather-and-the-boulder}
+### Tortoise and the Hare vs the Feather and the Boulder
 
 Axis One, is about how fast a test takes to complete. It's that simple. From pressing the button to getting a programmatic answer (ideally excluding any framework tax)
 
@@ -108,7 +108,7 @@ Axis Three, how good the test case is at finding bugs is essential. If you're no
 
 Axis Four, is about noise. How often do you get false positives or false negatives from a test? Any test that isn't rock solid in execution needs scrutiny because otherwise, it's costing you time and effort that you don't need to spend.
 
-### Bringing it together {#h3-9-bringing-it-together}
+### Bringing it together
 
 Axis Three and Four: Usefulness and Accuracy can be considered filters over test execution. If a test has never found a bug but is quick to run, you might keep it, while one that takes an hour to run on AWS could easily be a candidate to remove - or at the very least rewrite. You can apply this filtering to your existing test organisations, and it will undoubtedly help. For many, this is already an everyday activity.
 
@@ -118,7 +118,7 @@ What moves us into more 10x territory is to consider the other axes.
 
 These two dimensions allow us to think about how we organise testing differently. Forget the typical linear process and organisation groupings and look at tests through this lens.
 
-### Risk / Reward rebalanced {#h3-10-risk-reward-rebalanced}
+### Risk / Reward rebalanced
 
 Tests that are fast and easy to run are perfect candidates to give to developers. With no or low domain knowledge required to execute, they should be easily incorporated into unit tests for running in the IDE or on the build server.
 
@@ -128,7 +128,7 @@ Tests that have other combinations can be part of other organisations or may sug
 
 ![](Picture-4-700x397.png)
 
-### Changing Behavior {#h3-11-changing-behavior}
+### Changing Behavior
 
 Once you have this thought process about measuring and organising tests, it becomes easier to encourage more flexible behaviour.
 
@@ -136,7 +136,7 @@ It helps to focus on consistently creating test cases that are as simple, fast, 
 
 Developers will undoubtedly support having broader unit tests happening during the build process if they are easy to run when things go wrong and don't take excessive elapsed time. Likewise, having a cross-organisational focus on quality that uses these axes as guides will grease the wheels of the whole process.
 
-### More thoughts {#h3-12-more-thoughts}
+### More thoughts
 
 Once you've started down this road, you'll find that a broader understanding of the objectives and value of testing will naturally occur.
 
@@ -146,7 +146,7 @@ I mentioned other things to measure. Soon, you'll want to connect test results w
 
 Eventually, you'll realise that this data lets you build specific test execution plans. Is a significant new feature in the plan? Then use this data to select the appropriate test cases for a focused unit-test effort for the dev team. Have some new developers onboard? - Build a list of 10 developer tests associated with 'first timer' open issues and get them fixed.
 
-### Summary {#h3-13-summary}
+### Summary
 
 The takeaways of moving to a data-driven and test portability approach are more than a quality improvement. This change brings teams together and makes the whole team more productive. Instead of adding a burden to the developer, it reduces the workload because of the focus on running the appropriate tests at the appropriate time. It also makes everyone understand the actual relationship between the test suite and the product.
 

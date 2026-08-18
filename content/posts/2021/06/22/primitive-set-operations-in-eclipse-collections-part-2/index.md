@@ -34,7 +34,7 @@ These APIs are already available on Sets on the object side, but my goal was to 
 
 I covered the first three operations (`union`, `intersect` and `difference`) in this [blog](https://pratha-sirisha.medium.com/primitive-set-operations-in-eclipse-collections-b126c9121d15?source=friends_link&sk=8c6645ba69f66b01c18796fa21b0163f). I will talk about the remaining operations here.
 
-### Symmetric Difference --- What does this operation do? {#h3-0-symmetric-difference-what-does-this-operation-do}
+### Symmetric Difference --- What does this operation do?
 
 Method signature: `setA.symmetricDifference(setB)`
 
@@ -52,7 +52,7 @@ B --- A= 4.
 
 Symmetric Difference --- 1, 4.
 
-### Symmetric Difference --- Code Implementation {#h3-2-symmetric-difference-code-implementation}
+### Symmetric Difference --- Code Implementation
 
 🛈 Eclipse Collections has an existing API that allows us to `reject` that returns all the elements that evaluate false for the given`Predicate` and results are added to a target collection. Predicate here is `this::contains` and target collection is the set returned from `this.difference(set)`.
 
@@ -66,7 +66,7 @@ default MutableIntSet symmetricDifference(IntSet set)
 ```
 
 
-### Symmetric Difference --- Usage {#h3-3-symmetric-difference-usage}
+### Symmetric Difference --- Usage
 
 ```java
 @Test
@@ -85,7 +85,7 @@ Test cases covering various scenarios can be found [here](https://github.com/ecl
 
 
 
-### Is Subset of --- What does this operation do? {#h3-4-is-subset-of-what-does-this-operation-do}
+### Is Subset of --- What does this operation do?
 
 Method signature: `setA.isSubsetOf(setB)`
 
@@ -99,7 +99,7 @@ Set B --- 1, 2, 3.
 
 Is Set A a subset of Set B --- true.
 
-### Is Subset Of --- Code Implementation {#h3-7-is-subset-of-code-implementation}
+### Is Subset Of --- Code Implementation
 
 🛈 Eclipse Collections has an existing API called `containsAll` that evaluates to true if all the values in `this` are present in `set`.
 
@@ -111,7 +111,7 @@ default boolean isSubsetOf(IntSet set)
 ```
 
 
-### Is Subset of --- Usage {#h3-8-is-subset-of-usage}
+### Is Subset of --- Usage
 
 ```java
 @Test
@@ -132,13 +132,13 @@ Test cases covering various scenarios can be found [here](https://github.com/ecl
 
 
 
-### Is Proper Subset of --- What does this operation do? {#h3-9-is-proper-subset-of-what-does-this-operation-do}
+### Is Proper Subset of --- What does this operation do?
 
 Method signature: `setA.isProperSubsetOf(setB)`
 
 This operation returns true if all elements of Set A are present in Set B but the two sets are not equal i.e. there is at least one element in Set B that is not present in Set A.
 
-### Is Proper Subset of ---Code Implementation {#h3-10-is-proper-subset-of-code-implementation}
+### Is Proper Subset of ---Code Implementation
 
 ```java
 default boolean isProperSubsetOf(IntSet set)
@@ -148,7 +148,7 @@ default boolean isProperSubsetOf(IntSet set)
 ```
 
 
-### Is Proper Subset of --- Usage {#h3-11-is-proper-subset-of-usage}
+### Is Proper Subset of --- Usage
 
 ```java
 @Test
@@ -169,7 +169,7 @@ Test cases covering various scenarios can be found [here](https://github.com/ecl
 
 
 
-### Cartesian Product --- What does this operation do? {#h3-12-cartesian-product-what-does-this-operation-do}
+### Cartesian Product --- What does this operation do?
 
 Method Signature: `setA.cartesianProduct(setB)`
 
@@ -185,7 +185,7 @@ Cartesian Product ---
 
 {(1, 2), (1, 4), (3, 2). (3, 4)}.
 
-### Cartesian Product --- Code Implementation {#h3-14-cartesian-product-code-implementation}
+### Cartesian Product --- Code Implementation
 
 🛈 Eclipse Collections has a static utility class called `IntSets` and equivalent classes for other primitive set collections.
 
@@ -211,7 +211,7 @@ public static <A, B, C> LazyIterable<C> cartesianProduct(IntSet set1, IntSet set
 ```
 
 
-### Cartesian Product --- Usage {#h3-15-cartesian-product-usage}
+### Cartesian Product --- Usage
 
 ```java
 @Test

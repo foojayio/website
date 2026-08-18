@@ -26,8 +26,8 @@ In total, there are a very impressive 16 JDK Enhancement Proposals (JEPs) and 69
 
 Let's start with the more significant items that introduce changes to the Java language syntax.
 
-Records {#h2-0-records}
------------------------
+Records
+-------
 
 Java is an object-oriented language; you create classes to hold data and use encapsulation to control how that data is accessed and modified. The use of objects makes manipulating complex data types simple and straightforward. It's one of the reasons Java is so popular as a platform.
 
@@ -87,8 +87,8 @@ record Range(int min, int max) {
 
 Note that the constructor definition is still abbreviated, as specifying the parameters is redundant. Any of the members that are automatically derived from the state description can also be declared so, for example, you can provide an alternative `toString()`or `hashCode()`implementation.
 
-Pattern Matching instanceof {#h2-1-pattern-matching-instanceof}
----------------------------------------------------------------
+Pattern Matching instanceof
+---------------------------
 
 In some situations, you do not know the exact type of an object. To handle this, Java has the instanceof operator that can be used to test against different types. The drawback to this is that, having determined the type of an object; you must use an explicit cast if you want to use it as that type:
 
@@ -148,8 +148,8 @@ I have seen some negative feedback on the way variables are scoped but, given th
 
 There are already plans for a second preview version of this feature that will extend pattern matching to work with records and provide a simple way of implementing the deconstruction pattern. More details of this can be found in the [JEP 375](https://openjdk.java.net/jeps/375).
 
-Helpful NullPointerException {#h2-2-helpful-nullpointerexception}
------------------------------------------------------------------
+Helpful NullPointerException
+----------------------------
 
 Anyone who's written more than a few lines of Java code will have experienced a NullPointerException at some point. Failing to initialise an object reference (or mistakenly explicitly setting it to null) and then trying to use the reference will cause this exception to be thrown.
 
@@ -205,18 +205,18 @@ Exception in thread "main" java.lang.NullPointerException:
 
 Immediately, we can see that a.b is the problem and set about correcting it. I'm sure that this will make many Java developers lives easier.
 
-New APIs {#h2-3-new-apis}
--------------------------
+New APIs
+--------
 
 Now let's turn our attention to the changes in the class libraries.
 
-### java.io {#h3-4-java-io}
+### java.io
 
 PrintStream has two new methods, write(byte\[\] buf) and writeBytes(byte\[\] buf). These effectively do the same thing, which is equivalent to write(buf, 0, buf.length). The reason for having two different methods is that write is defined to throw an IOException (but, bizarrely, never does), whereas writeBytes does not. The choice of which to use therefore depends on whether you want to surround the call with a try-catch block.
 
 There is a new annotation type, Serial. This is intended to be used for compiler checks on Serialization. Specifically, annotations of this type should be applied to serialisation-related methods and fields in classes declared to be Serializable. (It is similar in some ways to the Override annotation).
 
-### java.lang {#h3-5-java-lang}
+### java.lang
 
 The Class class has two methods for the new Record feature, isRecord() and getRecordComponents(). The getRecordComponents() method returns an array of RecordComponent objects. RecordComponent is a new class in the java.lang.reflect package with eleven methods for retrieving things such as the details of annotations and the generic type.
 
@@ -226,46 +226,46 @@ NullPointerException now overrides the getMessage method from Throwable as part 
 
 The StrictMath class has six new methods that supplement the existing exact methods used when overflow errors need to be detected. The new methods are decrementExact, incrementExact and negateExact (all with two overloaded versions for int and long parameters).
 
-### java.lang.annotation {#h3-6-java-lang-annotation}
+### java.lang.annotation
 
 The ElementType enumeration has a new constant for Records, RECORD_TYPE.
 
-### java.lang.invoke {#h3-7-java-lang-invoke}
+### java.lang.invoke
 
 The MethodHandles.Lookup class has two new methods:
 
 * hasFullPrivilegeAccess, which returns true is the method being looked up has both PRIVATE and MODULE access.
 * previousLookupClass, which reports a lookup class in another module that this lookup object was previously teleported from, or null. I had not heard of teleporting in the context of Java before (only in Doctor Who and Minecraft). Lookups can result in *teleporting* across modules.
 
-### java.lang.runtime {#h3-8-java-lang-runtime}
+### java.lang.runtime
 
 This is a new package in JDK 14 that has a single class, ObjectMethods. This is a low-level part of the records feature having a single method, bootstrap, which generates the Object equals, hashCode and toString methods.
 
-### java.util.text {#h3-9-java-util-text}
+### java.util.text
 
 The CompactNumberFormat class has a new constructor that adds an argument for pluralRules. This a String designating plural rules which associate the Count keyword, such as "one", and the actual integer number. Its syntax is defined in Unicode Consortium's Plural rules syntax.
 
-### java.util {#h3-10-java-util}
+### java.util
 
 The HashSet class has one new method, toArray, which returns an array, whose runtime component type is Object, containing all of the elements in this collection.
 
-### java.util.concurrent.locks {#h3-11-java-util-concurrent-locks}
+### java.util.concurrent.locks
 
 The LockSupport class has one new method, setCurrentBlocker. LockSupport provides the ability to park and unpark a thread (which does not suffer from the same problems as the deprecated Thread.suspend and Thread.resume methods). It is now possible to set the Object that will be returned by getBlocker. This can be useful when calling the no-argument park method from a non-public object.
 
-### javax.lang.model.element {#h3-12-javax-lang-model-element}
+### javax.lang.model.element
 
 The ElementKind enumeration has three new constants for the records and pattern matching for instanceof features, namely BINDING_VARIABLE, RECORD and RECORD_COMPONENT.
 
-### javax.lang.model.util {#h3-13-javax-lang-model-util}
+### javax.lang.model.util
 
 This package provides utilities to assist in the processing of program elements and types. With the addition of records, a new set of abstract and concrete classes have been added to support this feature. (Examples are AbstractTypeVisitor14, ElementScanner14 and TypeKindVisitor14).
 
-### org.xml.sax {#h3-14-org-xml-sax}
+### org.xml.sax
 
 One new method has been added to the ContentHandler interface of the SAX XML parser. The declaration method receives a notification of the XML declaration. In the case of the default implementation, this does nothing.
 
-### JEP 370: Foreign Memory Access API {#h3-15-jep-370-foreign-memory-access-api}
+### JEP 370: Foreign Memory Access API
 
 This is being introduced as an incubator module to allow testing by the broader Java community and feedback to be integrated before it becomes part of the Java SE standard. It is intended as a valid alternative to both sun.misc.Unsafe and java.io.MappedByteBuffer.
 
@@ -275,8 +275,8 @@ The foreign-memory access API introduces three main abstractions:
 * MemoryAddress: providing an offset into a MemorySegment (basically, a pointer).
 * MemoryLayout: providing a way to describe the layout of a memory segment that greatly simplifies accessing a MemorySegment with a var handle. Using this, it is not necessary to calculate the offset based on the way the memory is being used. For example, an array of ints or longs will offset differently but will be handled transparently using a MemoryLayout.
 
-JVM Changes {#h2-16-jvm-changes}
---------------------------------
+JVM Changes
+-----------
 
 I scanned all 609 pages of the JVM specification but couldn't find any highlighted differences. It will be interesting to look at the bytecodes generated for records since this doesn't require any special support at the JVM level. The same applies to the helpful NullPointerException feature.
 
@@ -288,8 +288,8 @@ JDK 14 does include some JEPs that change non-functional parts of the JVM
 * [**JEP 364**](https://openjdk.java.net/jeps/364): ZGC on macOS and [JEP 365](https://openjdk.java.net/jeps/365): ZGC on Windows. ZGC is an experimental low-latency collector that was initially only supported on Linux. This has now been extended to the macOS and Windows operating systems.
 * [**JEP 366**](https://openjdk.java.net/jeps/366): Deprecate the ParallelScavenge and SerialOld GC combination. Oracle states that very few people use this combination and the maintenance overhead is considerable. Expect this combination to be removed at some point in the not-too-distant future.
 
-Other Features {#h2-17-other-features}
---------------------------------------
+Other Features
+--------------
 
 There are a number of JEPs that relate to different parts of the OpenJDK:
 

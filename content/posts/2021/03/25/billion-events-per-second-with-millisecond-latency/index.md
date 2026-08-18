@@ -34,7 +34,7 @@ In contrast to our previous benchmarks, which focused on single-node performance
 
 In a cluster of 45 nodes and 720 vCPUs, Jet reached **1 billion events per second** at a 99% latency of **26 milliseconds**.
 
-### Our Setup {#h3-0-our-setup}
+### Our Setup
 
 We used the same configuration as in our earlier benchmarks:
 
@@ -51,7 +51,7 @@ On the output side, we stop the latency clock as soon we observe some data item 
 
 We don't require Jet to send the results to any outside system, because we want our results to focus on Jet's performance alone. The code we used in the benchmark is available on [GitHub](https://github.com/hazelcast/big-data-benchmark/tree/master/nexmark-jet/src/main/java/com/hazelcast/jet/benchmark/nexmark).
 
-### Benchmark 1: 99.99th Percentile Latency with 20 ms Time Resolution {#h3-1-benchmark-1-99-99th-percentile-latency-with-20-ms-time-resolution}
+### Benchmark 1: 99.99th Percentile Latency with 20 ms Time Resolution
 
 For the first benchmark we asked this question: using a time resolution of 50 result updates per second and an input rate of 1 million events per second, what is the 99.99% latency at different cluster sizes?
 
@@ -70,7 +70,7 @@ The overall worst case was Query 5 in the largest cluster (20 nodes),
 
 and it came out as 16 milliseconds.
 
-### Benchmark 2: 99th Percentile Latency at a Billion Events per Second {#h3-2-benchmark-2-99th-percentile-latency-at-a-billion-events-per-second}
+### Benchmark 2: 99th Percentile Latency at a Billion Events per Second
 
 Our second question was this: How much hardware would Jet need to reach a throughput of a billion events per second, while maintaining its millisecond-level latency?
 

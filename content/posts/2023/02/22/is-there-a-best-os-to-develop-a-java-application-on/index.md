@@ -45,7 +45,7 @@ The Mac is not always perfect; a colleague of mine has a 2019 Intel 16″ mac bo
 
 Regardless of development environment, at the end of the day the software needs to run on a given target OS. Libraries such as Chronicle help abstract the platform differences to enable a largely seamless development experience between different development and target operating systems for low-level features. (Some examples where macOS and Linux differ include file locking and thread affinity, and Chronicle helps normalise these features between the two platforms.) Ultimately, in order to extract the best performance the nuances of each target platform need to be carefully understood when deploying, configuring, and tuning a low-latency software stack, and some exposure and familiarity to the target OS during the development phase can be beneficial.
 
-### Conclusion {#h3-0-conclusion}
+### Conclusion
 
 First and foremost, for development I suggest using the OS you are most comfortable with. If you don't have much experience with any operating system, I recommend Windows or macOS.
 

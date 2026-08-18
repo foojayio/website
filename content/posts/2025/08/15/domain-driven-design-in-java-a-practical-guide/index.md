@@ -35,23 +35,23 @@ By relating each of these building blocks back to airport operations, DDD transf
 
 In this article, we'll take a hands-on approach to learning domain-driven design by actually building an airport operations system together---step by step, using Java and Spring Boot. You'll see how DDD concepts come to life as we model real-world airport activities, create domain classes, organize bounded contexts, and wire everything up with practical code.
 
-Understanding the "Airport" domain {#h2-0-understanding-the-airport-domain}
----------------------------------------------------------------------------
+Understanding the "Airport" domain
+----------------------------------
 
 As a first step, we brainstorm to understand the "Airport" domain: What's unique about airport operations? List out core business activities: scheduling flights, assigning gates, boarding passengers, tracking baggage, enforcing safety.
 
 Result: We would create a glossary for your domain (ubiquitous language) with terms like \`Flight\`, \`Gate\`, \`Runway\`, and \`BoardingPass\`. We would then document this shared vocabulary in Markdown or a Google Doc. We will refer to these in our code comments and as class names for the objects we create in our project.  
 
-Modeling the core Airport domain in Java {#h2-1-modeling-the-core-airport-domain-in-java}
------------------------------------------------------------------------------------------
+Modeling the core Airport domain in Java
+----------------------------------------
 
 Open a new Spring Boot project (use Spring Initializr) in your IDE (like IntelliJ IDEA) and name it \`airport-domain-demo\` as a Maven project.  
 ![Creating new Java Project using Spring Initializr](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdV6QfcM9LjeZjnl09UlO_xaD_oP1Mmei_aR_qUGhqGN1IAk0_vEAEDC_cOyh9LzE_In8_s4zZMBhTVt5m3-waXWiiOHwCWivEuFBYnmmqVW6RzqqXtLlcfsx3g96NJlno1hwLsXA?key=EKoTlsiGwMVY6pWycWj_Pg)  
 
 For the purpose of this demo, we will curtail our domain objects to a minimum, but in a real-world scenario, you would have a broader glossary of domain objects, their fields, and implementation than what's showcased in the demo.
 
-Identifying aggregates and entities {#h2-2-identifying-aggregates-and-entities}
--------------------------------------------------------------------------------
+Identifying aggregates and entities
+-----------------------------------
 
 In DDD, the aggregate is the consistency boundary that defines which entities and value objects belong together when performing business operations. For our simplified airport domain:
 
@@ -60,8 +60,8 @@ In DDD, the aggregate is the consistency boundary that defines which entities an
 * Value object: \`SeatAssignment\` is a value object that represents descriptive attributes without identity. \`SeatAssignment\` describes a passenger's seat via seatNumber and class (e.g., economy, business) and doesn't exist standalone without a passenger.
 * Aggregate root: \`Flight\`,  in this simplified model, acts as the aggregate root. It manages its passengers and their seat assignments, ensuring all operations on passengers occur via the flight to maintain consistency.
 
-Implementing entities and value objects {#h2-3-implementing-entities-and-value-objects}
----------------------------------------------------------------------------------------
+Implementing entities and value objects
+---------------------------------------
 
 In the Spring Boot project, navigate to \`src/main/java/com/example/airport/domain\`. Here, we will define key classes that reflect important concepts from the airport domain. These classes become the building blocks of our application's business logic. Another core DDD practice is to allow entities to publish domain events as part of their business logic. In the airport context, when a passenger is added to a flight, you may want to raise an event (like PassengerAddedEvent) so the rest of the system can respond (updating manifests, sending notifications, etc.). A typical approach is using Spring's domain events support.
 
@@ -150,8 +150,8 @@ public class SeatAssignment {
 
 The separation of entities and value objects helps maintain clarity. Entities have identity (Flight, Passenger), while value objects describe or detail entities without unique identities (SeatAssignment).
 
-Bounded contexts and modularization {#h2-4-bounded-contexts-and-modularization}
--------------------------------------------------------------------------------
+Bounded contexts and modularization
+-----------------------------------
 
 Next, we divide our application into bounded contexts reflecting airport departments, which helps manage complexity by isolating parts of the domain.
 
@@ -170,10 +170,10 @@ com.example.airport.passengerservices
 
 Each context will own its models and business logic to avoid overlap and conflicts.
 
-Repositories, domain services, and factories {#h2-5-repositories-domain-services-and-factories}
------------------------------------------------------------------------------------------------
+Repositories, domain services, and factories
+--------------------------------------------
 
-### Repositories {#h3-6-repositories}
+### Repositories
 
 Repositories abstract data persistence and retrieval, bridging your domain model with databases or external systems.
 
@@ -200,7 +200,7 @@ public interface PassengerRepository {
 
 Repositories expose aggregate roots and entities for retrieval and persistence, without exposing database details to domain logic.
 
-### Domain services {#h3-7-domain-services}
+### Domain services
 
 Domain services encapsulate business logic that involves multiple domain objects or doesn't naturally fit in an entity or value object.
 
@@ -245,7 +245,7 @@ public class FlightService {
 ```
 
 
-### Factories {#h3-8-factories}
+### Factories
 
 Factories create complex aggregate instances while encapsulating creation logic. Example:
 
@@ -278,8 +278,8 @@ public class FlightFactory {
 
 <br />
 
-Application layer and integration {#h2-9-application-layer-and-integration}
----------------------------------------------------------------------------
+Application layer and integration
+---------------------------------
 
 Set up a simple REST controller integrated with your services, exposing the core functionality to clients.
 
@@ -377,8 +377,8 @@ public class FlightRequest {
 
 The API exposes aggregate-root operations and domain behavior aligned with business processes.
 
-Testing and evolving the model {#h2-10-testing-and-evolving-the-model}
-----------------------------------------------------------------------
+Testing and evolving the model
+------------------------------
 
 The next step is to write Junit tests for core scenarios, like flight creation, adding passengers, etc.
 
@@ -419,8 +419,8 @@ public class AirportApplicationTests {
 
 <br />
 
-**Complete DDD implementation source code** {#h2-11-complete-ddd-implementation-source-code}
---------------------------------------------------------------------------------------------
+**Complete DDD implementation source code**
+-------------------------------------------
 
 You can find an elaborated codebase for the airport-domain-demo on my [GitHub repo](https://github.com/vemarahub/airport-domain-demo).
 
@@ -590,8 +590,8 @@ http://localhost:8080/api/flights
 
 • DDD concept: Aggregate manages its entities, ensuring encapsulated and consistent deletion
 
-Testing scenarios for Postman {#h2-12-testing-scenarios-for-postman}
---------------------------------------------------------------------
+Testing scenarios for Postman
+-----------------------------
 
 Scenario 1: Complete flight booking flow
 
@@ -635,15 +635,15 @@ The application initializes with three flights:
 
 • AA203: ORD → MIA (with three passengers)
 
-Real-world tips and common pitfalls {#h2-13-real-world-tips-and-common-pitfalls}
---------------------------------------------------------------------------------
+Real-world tips and common pitfalls
+-----------------------------------
 
 It's important to pause after each section and encourage reflection of what we have achieved in each step of the domain-driven approach. For example, after modeling these aggregates, did we discover new business terms or rules we missed earlier? We would then update our ubiquitous language document in relation to the new discoveries.  
 
 Also, it is significant in DDD to have pitfall identification and have preventive measures like mixing business logic with controllers, kind of like having a spaghetti runway. We would often have the requirement to refactor a confusing service or repository to inline with DDD approach.
 
-Conclusion {#h2-14-conclusion}
-------------------------------
+Conclusion
+----------
 
 By following these demo-driven steps, you'll experience DDD as a practical "control tower" for your Spring Boot project: organizing code, clarifying responsibilities, and enabling your team to grow and adapt the system---just as in a real-world airport operation.
 

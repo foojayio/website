@@ -26,10 +26,10 @@ As developers, we write testcases all the time to help us in our development pro
 
 Now ideally we want our testcases to be as efficient as possible, and ideally to require as few reruns as possible. And this is where Soft Assertions come into play.
 
-Hard Assertions vs Soft Assertions {#_hard_assertions_vs_soft_assertions}
--------------------------------------------------------------------------
+Hard Assertions vs Soft Assertions
+----------------------------------
 
-### "Hard" assertion {#_hard_assertion}
+### "Hard" assertion
 
 These are the traditional assertions that everyone's used to seeing, we assert field by field, and halt as soon as one assertion fails. Hence, "hard" assertions.
 
@@ -56,7 +56,7 @@ Actual   :English
 ```
 
 
-### "Soft" assertion {#_soft_assertion}
+### "Soft" assertion
 
 With soft assertions we bundle our assertions, run them internally and then output all possible failures.  
 
@@ -64,14 +64,14 @@ All our assertions will be executed.
 
 You can set up something for this yourself, or certain libraries also handle this for you as we'll cover later.
 
-### So when should we use them? {#_so_when_should_we_use_them}
+### So when should we use them?
 
 Ideally when you're performing more than one assertion on the same object.  
 
 I dislike flaky tests, and having to run the same test multiple times just to figure out what's wrong with for example the mapping of a single object.
 
-Library support {#_library_support}
------------------------------------
+Library support
+---------------
 
 Some of the most commonly used Assertion libraries have out of the box support for soft assertions, sadly, not all of them do.
 
@@ -91,7 +91,7 @@ As of the moment of writing Truth does have an open pull request for this, but i
 |-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Tip | To focus more on the functionality itself the testcase is very basic. We're testing the mapper, and mapping 2 objects. Let's say we're a smidge sleep-deprived, and just copied the first assertions rather than extracting them to a method, and forgot to replace some references. With hard assertions we would get a failure on each individual error. |
 
-### Junit 5 {#_junit_5}
+### Junit 5
 
 JUnit makes it easy for us, we merely need to statically import `assertAll`
 
@@ -131,7 +131,7 @@ org.opentest4j.MultipleFailuresError: Person 2 (3 failures)
 ```
 
 
-### AssertJ {#_assertj}
+### AssertJ
 
 AssertJ has a couple different soft assertion methods as can be seen in [their documentation](https://assertj.github.io/doc/#assertj-core-soft-assertions).  
 
@@ -171,7 +171,7 @@ at AssertJSoftTest.lambda$softAssert$1(AssertJSoftTest.java:54)
 ```
 
 
-### TestNG {#_testng}
+### TestNG
 
 We can make use of the `SoftAssert` class to group our assertions, and then verify them as a group by invoking `assertAll`.
 
@@ -204,8 +204,8 @@ java.lang.AssertionError: The following asserts failed:
 ```
 
 
-Takeaway {#_takeaway}
----------------------
+Takeaway
+--------
 
 Using the concept of soft-assertions makes testing the impact of our changes on a single object a lot more convenient, and reduces the potential need for reruns.
 
@@ -242,8 +242,8 @@ public class CustomAssertJSoftAssertions extends SoftAssertions {
 ```
 
 
-References {#_references}
--------------------------
+References
+----------
 
 * [The article repository](https://github.com/SimonVerhoeven/soft-assertions) containing the code snippets
 * [JUnit](https://junit.org/junit5/)

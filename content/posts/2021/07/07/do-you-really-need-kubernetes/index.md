@@ -27,8 +27,8 @@ Whether or not you need Kubernetes depends on many different factors. But statis
 
 Let us review what problem Kubernetes solves and determine when you would benefit from learning and using Kubernetes in your environment.
 
-What is Kubernetes? {#h2-0-what-is-kubernetes}
-----------------------------------------------
+What is Kubernetes?
+-------------------
 
 Let's start by looking at a standard description of Kubernetes. This is what you find on[Wikipedia](https://en.wikipedia.org/wiki/Kubernetes):
 
@@ -42,8 +42,8 @@ This description may sound familiar; you probably recognize a few of the propert
 
 Kubernetes is also about automating workflows. When you need to execute some scripts between the deployment of the first and the second service in Kubernetes, you can write a Kubernetes operator to automate this process, even implementing some complex logic into how the Kubernetes resources are called and how they interact with each other.
 
-Why Kubernetes Might Not Work for You {#h2-1-why-kubernetes-might-not-work-for-you}
------------------------------------------------------------------------------------
+Why Kubernetes Might Not Work for You
+-------------------------------------
 
 Now that we have explored what Kubernetes is, we can come to the question of why you would use it or even if you really need to use Kubernetes at all.
 
@@ -59,8 +59,8 @@ For smaller businesses, therefore, the likelihood the the benefits outweigh the 
 
 Therefore, before diving into Kubernetes or a container orchestration tool, you should ensure it actually does solve one of the problems you encounter in your environment.
 
-Use Kubernetes-Based Tools {#h2-2-use-kubernetes-based-tools}
--------------------------------------------------------------
+Use Kubernetes-Based Tools
+--------------------------
 
 As mentioned already, Kubernetes can be helpful when you are dealing with a large environment, and cloud providers have caught on, offering support for Kubernetes with their service.
 
@@ -72,8 +72,8 @@ This is also the philosophy behind our new product, [Payara Cloud,](https://www.
 
 Perhaps you are interested in just configuring and running your application without wanting to learn the concepts of Kubernetes deployments, services, and other tasks like SSL certificate management, routing, and setting up the monitoring. Tools such as Payara Cloud use Kubernetes to bring your application to the cloud in a way that you are familiar with, without you having to retrain developers and make it all work yourself - it's handled for you. Deploying an application to Payara Cloud is very similar to deploying an application on a runtime that you have running locally.
 
-You Probably Don't Need Kubernetes {#h2-3-you-probably-don-t-need-kubernetes}
------------------------------------------------------------------------------
+You Probably Don't Need Kubernetes
+----------------------------------
 
 Kubernetes is useful if you are dealing with many containers and require some automation of the steps when starting them. So, unless you have a large microservice environment, Kubernetes is unlikely to bring much added value. Probably, it is not needed or suited for your case and you should not invest in it.
 

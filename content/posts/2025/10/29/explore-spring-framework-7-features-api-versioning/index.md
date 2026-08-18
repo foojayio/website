@@ -35,8 +35,8 @@ For example, prior to COVID-19, most financial transactions were processed using
 
 When introducing such new capabilities, maintaining **backward compatibility** is imperative so legacy clients continue functioning without disruption. ***API versioning***provides a structured way to evolve APIs while preserving existing functionality, allowing developers to deliver new features without breaking old integrations.
 
-What is API versioning? {#h2-0-what-is-api-versioning}
-------------------------------------------------------
+What is API versioning?
+-----------------------
 
 **API versioning** is a feature that helps clients and customers access new functionalities introduced through new API endpoints in an existing application. It ensures **backward compatibility**, allowing both old and new clients to use the service without disruption.
 
@@ -51,8 +51,8 @@ The **core strategies of API versioning** in Spring are as follows:
 5. **ApiVersionDeprecationHandler**---This component manages deprecation notifications using the standard ApiVersionDeprecationHandler, informing clients when they are using deprecated API versions.
 6. **Request Mapping**---The ApiVersionStrategy integrates with Spring's request mapping mechanism to correctly map incoming requests to the corresponding versioned controller methods.
 
-API Versioning In Action {#h2-1-api-versioning-in-action}
----------------------------------------------------------
+API Versioning In Action
+------------------------
 
 This guide explains how to set up, build, and run the API versioning and project generated using [Spring Initializr](https://start.spring.io/)
 
@@ -65,7 +65,7 @@ In this guide, we will explore how to implement *API versioning using headers*
 
 You can use the following direct [link](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.0-M3&packaging=jar&jvmVersion=25&groupId=com.bsmlabs&artifactId=spring-boot-4-features&name=application&description=Explore%20Spring%20Boot%204%20Features%20&packageName=com.bsmlabs.features&dependencies=web,actuator,lombok,data-jpa,h2) to generate the project, and download the project
 
-### Import the Project into your IntelliJ IDEA {#h3-2-import-the-project-into-your-intellij-idea}
+### Import the Project into your IntelliJ IDEA
 
 1. In the main menu, go to ***File \| New \| Project From Existing Sources***
 2. Navigate to pom.xml and then import the project
@@ -91,7 +91,7 @@ You can enable API versioning using one of the following strategies
 * Query Parameter Versioning
 * Media Type Parameter Versioning
 
-### Annotation-Based Approach {#h3-3-annotation-based-approach}
+### Annotation-Based Approach
 
 * **Request Header Versioning Strategy**
 

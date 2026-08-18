@@ -20,14 +20,14 @@ frozen: false
 
 In Part 3 of the series, an explanation of dependency coordinates and "distinguishers" as well as a more detailed look at POM hierarchies are covered.
 
-What are dependency coordinates? {#h2-0-what-are-dependency-coordinates}
-------------------------------------------------------------------------
+What are dependency coordinates?
+--------------------------------
 
 There are hundreds or thousands of projects that produce artifacts. Some such artifacts can potentially be used in a current project as libraries. For instance, a project may depend on a logging framework or a JSON library. It is possible to host many such dependency artifacts on a central repository. Maven's primary such repository is called **Maven Central**. Many other such repositories also exist. More on this later!
 
 With the availability of such repositories, the next question is, how are exact artifacts needed for a project identified and downloaded? A proper way to identify the artifact is via its **Maven coordinates**.
 
-### What are Maven coordinates? {#h3-1-what-are-maven-coordinates}
+### What are Maven coordinates?
 
 A way to uniquely identify an artifact. There are three primary coordinates that are used to identify an artifact.
 
@@ -70,8 +70,8 @@ Once all testing is complete, the POM no longer needs the `-SNAPSHOT` suffix and
 
 A common way of communicating an artifacts coordinates is with a colon separation. Together the coordinates are referred to as **Group-Artifact-Version** or **GAV** coordinates. The GAV coordinates for commons-lang3 version 3.1.0 will be: **org.apache.commons:commons-lang3:3.1.0**.
 
-Additional distinguishers {#h2-2-additional-distinguishers}
------------------------------------------------------------
+Additional distinguishers
+-------------------------
 
 Often times, a project's build may include more than one format of artifacts. A Maven execution on a project could emit a jar file, a zip file a tarball and many other artifacts. An execution could also emit different outputs such as a binary, a zip file of sources, a zip file of javadoc files etc.
 
@@ -89,27 +89,27 @@ A **type** is used to distinguish the artifact format. Artifacts emitted from a 
 
 A combination of GAV coordinates and distinguishers can be used to locate the exact artifact needed for the project.
 
-POM Hierarchies {#h2-3-pom-hierarchies}
----------------------------------------
+POM Hierarchies
+---------------
 
 This section describes the hierarchy in Maven POMs.
 ![](https://cgunturme.files.wordpress.com/2020/05/mavenhierarchies.png?w=1024)
 
-### Parent POM {#h3-4-parent-pom}
+### Parent POM
 
 A **parent** POM is a POM from which the current project POM can inherit content. The project POM can depend on exactly one parent POM. This single-parent inheritance is one-way. The *parent POM is unaware of the POM that inherits from it* . The child POM declares the parentage in its own `pom.xml` (standard file to hold the POM, can be customized to a different name).
 
 Any number of POMs can declare another POM as their parent.   
 **USAGE**: While we will delve into the contents in a future blog, the parent POM can be used to declare re-usable portions of the POM that individual child POMs can then inherit. This helps in both maintenance and to reduce clutter.
 
-### Aggregator POM {#h3-5-aggregator-pom}
+### Aggregator POM
 
 An **aggregator** POM (also known as a **reactor** POM) is a POM that can sequence the builds of many projects. An aggregate POM specifies all the projects that can be build-managed together. The *child POM(s) remain unaware of the aggregator POM that invokes it* . A child POM can be a listed in more than one aggregator POM. The aggregator POM lists the child POM by `name` in it's own `pom.xml` as a `module`.
 
 As the declared `module` suggests, this pattern is for modular builds of projects. There is *no inheritance of any content* from the aggregator POM.  
 **USAGE:** While we will dig deeper in a future blog, the aggregator POM can be used to ensure the sequence of builds and maintain a list of projects that should be build-managed together.
 
-### Bill-Of-Materials POM {#h3-6-bill-of-materials-pom}
+### Bill-Of-Materials POM
 
 A **bill-of-materials** POM is a POM that can declare bundles of dependencies that have been tested to work well together. The abundance of artifacts and versions of each can, at times, lead to confusion and needs for trial-and-error mechanisms to determine compatibility and/or right functionality.
 

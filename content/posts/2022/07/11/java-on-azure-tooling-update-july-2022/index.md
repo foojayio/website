@@ -31,10 +31,10 @@ In addition, we have added support for Managed Identity Authentication.
 
 Let's see what these new features are.
 
-Azure Toolkit for IntelliJ Improvements {#h2-0-azure-toolkit-for-intellij-improvements}
----------------------------------------------------------------------------------------
+Azure Toolkit for IntelliJ Improvements
+---------------------------------------
 
-### New Guided Getting Started Experience {#h3-1-new-guided-getting-started-experience}
+### New Guided Getting Started Experience
 
 In [April's blog](https://devblogs.microsoft.com/java/azure-toolkit-for-intellij-update-april-2022/ "April’s blog"), we first talked about why we needed better getting started experience. Currently, there are several challenges for a developer who is new to Azure:
 
@@ -66,14 +66,14 @@ When you're done, you will have your first application successfully running on A
 
 ![](Overview-end5.gif)
 
-### EAP and Snapshot Version Support {#h3-2-eap-and-snapshot-version-support}
+### EAP and Snapshot Version Support
 
 Azure Toolkit for IntelliJ has supported the IntelliJ 2022.2 EAP version. Besides, the latest release of the Azure Toolkit for IntelliJ also brings support for snapshot and beta versions. Now, if you want to try some new features that haven't been released, you can download and install the newest version from [the marketplace page](https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij/versions/dev "the marketplace page").
 
-Maven Plugin/Gradle Plugin Improvements {#h2-3-maven-plugin-gradle-plugin-improvements}
----------------------------------------------------------------------------------------
+Maven Plugin/Gradle Plugin Improvements
+---------------------------------------
 
-### Support for Managed Identity Authentication {#h3-4-support-for-managed-identity-authentication}
+### Support for Managed Identity Authentication
 
 The managed identities for Azure resources help you safely access Azure resources. You can find more details [about managed identities for Azure Resources](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview "about managed identities for Azure Resources"). In our latest release, Managed Identity Authentication is available on Maven Plugin and Gradle Plugin.
 
@@ -81,8 +81,8 @@ To use it, you can simply configure your system-assigned or user-assigned manage
 
 ![](managed-identity-full.gif)
 
-Feedback and Suggestions {#h2-5-feedback-and-suggestions}
----------------------------------------------------------
+Feedback and Suggestions
+------------------------
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 
@@ -92,8 +92,8 @@ Please don't hesitate to try our product! Your feedback and suggestions are very
 
 ![](feedback-new.png)
 
-Resources {#h2-6-resources}
----------------------------
+Resources
+---------
 
 Here is a list of links that are helpful to learn Java on Azure Tooling.
 

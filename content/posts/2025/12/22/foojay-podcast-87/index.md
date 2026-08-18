@@ -24,13 +24,13 @@ In this Foojay Podcast we're stepping away from pure code and diving into someth
 
 Four incredible guests are all tackling different pieces of this puzzle. First up, Bruno Souza, the Brazilian Java Man, He is back to challenge our thinking about work-life balance and share his philosophy on taking control of your career. Then Patricia Lenten talks about the real challenges of hacking parenting while being an engineer, and how we can inspire the next generation of developers. Georgios Diamantopoulos brings the hard data on why sitting is literally killing us and what we can actually do about it. And finally, April Schuppel shares lessons from Apryse's journey through 15 acquisitions in five years---and why people, not AI, are still the most important part of building great products.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube 2VRn6wVUyBU >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,8 +38,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topic and guests
 

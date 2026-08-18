@@ -21,12 +21,12 @@ frozen: false
 
 There's no support for the pipe operator `|>` in Kotlin, so we have to come up with a custom and clean implementation for this function.
 
-Defining a Pipe Operator {#h2-0-defining-a-pipe-operator}
----------------------------------------------------------
+Defining a Pipe Operator
+------------------------
 
 Next, one consistent and clean implementation is given for a pipe operator in Kotlin.
 
-#### Finding a Suitable Symbol {#finding-a-suitable-symbol}
+#### Finding a Suitable Symbol
 
 First, I wanted to use the `|>` pipe symbol commonly used in functional languages, but `>` is not a supported character: `Name contains illegal characters: >`.
 
@@ -39,7 +39,7 @@ So, I took my design from [How I Standardized Hyphen and Pipe Symbols on File Na
 
 Now that **the pipe operator symbol is established to `---`**, the implementation is next.
 
-#### Language Features {#language-features}
+#### Language Features
 
 It's required to employ:
 
@@ -54,7 +54,7 @@ It's useful for the given example that shows the operator usage:
 * [String Interpolation](https://kotlinlang.org/docs/idioms.html#string-interpolation).
 * [Basic Regex](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-regex.html).
 
-#### Operator Definition {#operator-definition}
+#### Operator Definition
 
 First, the `---` operator is defined:
 
@@ -86,7 +86,7 @@ Where:
 
 That was the definition of the pipe operator.
 
-#### Usage Example {#usage-example}
+#### Usage Example
 
 Now, to address a concrete example to use this new feature, I implemented a  
 
@@ -177,18 +177,18 @@ Article(
 
 The example code is [here](https://blog.mathsoftware.engineer/fp-in-kotlin/kotlin/Pipe.kt/).
 
-#### Functional Language Design {#functional-language-design}
+#### Functional Language Design
 
 Notice that we're using backticks to define the infix operator like functional languages like Purescript do and [employ this feature](https://leanpub.com/purescript/read#leanpub-auto-infix-operators). It's also preferred to use normal identifier names (i.e., alphabetic) instead of predefined symbols (e.g., `+`) to avoid *abusing the syntax*.
 
 As said above, the pipe can be commonly denoted by `|` or `|>`. Since `pipe` is a universally abstract concept, it must be **terse** , so defining a **symbol** for it is a good design. For user-specific languages, alphabetic identifiers should be used, as said above.
 
-#### Custom Pipe in Kotlin {#custom-pipe-in-kotlin}
+#### Custom Pipe in Kotlin
 
 This was the design of a custom pipe operator that can be used in Kotlin, and some insights about functional languages as well.
 
-Options for a Pipe Operator in Kotlin {#h2-1-options-for-a-pipe-operator-in-kotlin}
------------------------------------------------------------------------------------
+Options for a Pipe Operator in Kotlin
+-------------------------------------
 
 As developed before, we faced many constraints in Kotlin for getting a language design that enables us to use the pipe operator.
 

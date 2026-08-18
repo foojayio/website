@@ -32,7 +32,7 @@ Figure 1. JVM Stack and Heap Memory Areas
 
 \*Where method parameters and local variables live
 
-### Where objects live {#h3-0-where-objects-live}
+### Where objects live
 
 NOTE: All threads in a program will have their own stack, but share a single heap. Threads also can have their own small heap buffer called a Thread Local Allocation Buffer (TLAB).
 
@@ -46,7 +46,7 @@ While this process is automatic in Java, this does not guarantee optimal system 
 
 Aside from garbage collection, part of understanding Java memory management is grasping the process of 'object allocation'. As such, this article aims to explore what this is, and provides an analogy for object allocation. By understanding what it is and its role in memory management, you can better analyse how your system's performance might be affected by object allocation.
 
-### Object Allocation and Garbage Collection {#h3-1-object-allocation-and-garbage-collection}
+### Object Allocation and Garbage Collection
 
 In Java, references are used to access objects, which are variables that hold the "address" of an area of memory in which the attributes of an object will be stored. This memory is allocated on the heap area.
 
@@ -74,7 +74,7 @@ In short, when field and local variables are declared, in your class only enough
 
 Still unclear? Let's take a look at an analogy.
 
-### Analogy {#h3-2-analogy}
+### Analogy
 
 To illustrate object allocation, let's imagine a set of shelves, which you want to add your coffee mugs to:
 
@@ -95,7 +95,7 @@ The reason for doing this in memory management is so that enough memory can be m
 
 If you kept buying mugs that needed storing, you would quickly run into the issue of not having enough shelf space. Comparably, if a program uses up all available memory without careful object lifecycle management, performance issues arise. What we want to avoid is a scenario where we need memory from the Nursery for an object (or space on the bottom shelf for a new mug) but this is not available. If this happens, the program has to stop everything so that objects that need retaining can be copied and all the memory in the Nursery can be released. At [Chronicle](https://chronicle.software/ "Chronicle"), to make this copying process cheaper, we aim to create less objects in the first place, or have almost all objects die in the first region so that they do not need copying.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 This article offered an introduction to memory management in Java, as well as a simple analogy of object allocation, and why it is important to consider.
 

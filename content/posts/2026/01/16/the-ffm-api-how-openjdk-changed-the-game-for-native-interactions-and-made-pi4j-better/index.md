@@ -51,15 +51,15 @@ It's one of the "connection points" between Java and the native libraries to com
 
 In this post, I'll explain how the Foreign Function \& Memory API (FFM API) has revolutionized the way Java developers interact with native libraries and memory, and how this has significantly simplified the Pi4J project. This article is based on a talk I gave at the [Devoxx](https://www.youtube.com/watch?v=2BcWWWkb8ac) and JFall conferences about the history and evolution of this addition to OpenJDK.
 
-A Quick History Lesson {#h2-0-a-quick-history-lesson}
------------------------------------------------------
+A Quick History Lesson
+----------------------
 
 My Java journey started 15 years ago when I switched from C# to Java and never looked back. That was right in the middle of Java's 30-year history, and I've been following its evolution closely ever since. I even had the chance this year, to [talk to James Gosling, the "Father of Java", for the Foojay Podcast](https://foojay.io/today/foojay-podcast-71/).
 
 In recent years, we have seen many evolutions in the Java language and virtual machine, such as improved switch-case, virtual threads, performance improvements, and more. One of the most significant recent developments has been [**Project Panama**](https://openjdk.org/projects/panama/) and the Foreign Function \& Memory (FFM) API that emerged from it.
 
-Foreign Function \& Memory (FFM) API {#h2-1-foreign-function-memory-ffm-api}
-----------------------------------------------------------------------------
+Foreign Function \& Memory (FFM) API
+------------------------------------
 
 The FFM API was officially released in Java 22 as a finalized feature. It represents years of work within Project Panama and has three main goals:
 
@@ -67,7 +67,7 @@ The FFM API was officially released in Java 22 as a finalized feature. It repres
 2. **Easy interaction**: Simple ways to call native libraries.
 3. **High performance**: Matching or exceeding JNI's performance.
 
-### The Problem With JNI {#h3-2-the-problem-with-jni}
+### The Problem With JNI
 
 JNI has been around since Java 1.1, and while it works, it has a few critical drawbacks:
 
@@ -79,7 +79,7 @@ JNI has been around since Java 1.1, and while it works, it has a few critical dr
 
 There were attempts to improve this situation with libraries such as JNA and [Java Native Runtime (JNR)](https://github.com/jnr), but they came with their own overhead and limitations.
 
-### How The FFM API Evolved {#h3-3-how-the-ffm-api-evolved}
+### How The FFM API Evolved
 
 The development of the FFM API is a fascinating story that shows how OpenJDK evolves through careful iteration. The project was broken down into separate JEPs (JDK Enhancement Proposals), which started being delivered in Java 14. As you will see, most of the JEPs were incubator or preview features, which can only be used with the `--enable-preview` flag, as you can [learn in this detailed explanation](https://docs.azul.com/core/incubator-preview-features).
 
@@ -110,7 +110,7 @@ Finally, the FFM API was finalized in Java 22. It's a combination of the two pre
 
 This iterative approach allowed the OpenJDK team to gather community feedback and ensure the API was stable, performant, and truly useful.
 
-### Simple Code Examples {#h3-4-simple-code-examples}
+### Simple Code Examples
 
 Let me show you how much simpler things have become with a few examples.
 
@@ -247,14 +247,14 @@ Interval: 5 - Generated 250000 pixels
 
 That's up to **11x performance improvement** just by avoiding the overhead of Java object management!
 
-Why the FFM API Matters for Raspberry Pi Projects {#h2-5-why-the-ffm-api-matters-for-raspberry-pi-projects}
------------------------------------------------------------------------------------------------------------
+Why the FFM API Matters for Raspberry Pi Projects
+-------------------------------------------------
 
 Let me first answer a more general question I get asked a lot: "**Why Java on a Raspberry Pi?**" The answer is simple: Java is the language that allows me to do everything. I can build user interfaces with JavaFX, make API calls to services, and leverage the extensive library ecosystem. When I started experimenting with Java on Raspberry Pi over five years ago, I didn't want to learn a new language. I wanted to learn how to use and interact with electronic components, using the tools I already knew and loved.
 
 This is where the Pi4J project comes in: it's a Java library that lets you control the GPIO pins and electronic components connected to a Raspberry Pi. But here's the catch: this library has always relied on native C/C++ code to communicate with the hardware. Until now, that meant dealing with the complexity of JNI and JNA.
 
-### Pi4J Architecture {#h3-6-pi4j-architecture}
+### Pi4J Architecture
 
 [Pi4J uses a plugin architecture](https://www.pi4j.com/architecture/) in which different "providers" handle communication with GPIO pins. Previously, these providers relied on native libraries and JNI/JNA, which meant:
 
@@ -265,7 +265,7 @@ This is where the Pi4J project comes in: it's a Java library that lets you contr
 These plugins get loaded dynamically at runtime, in the "black bar" in this architecture diagram:
 ![](pi4j-architecture-1024x668.jpg)
 
-### The FFM Transformation {#h3-7-the-ffm-transformation}
+### The FFM Transformation
 
 Pi4J now has an almost-ready FFM-based provider, which will be available in V4. The improvements are dramatic:
 
@@ -278,13 +278,13 @@ Pi4J now has an almost-ready FFM-based provider, which will be available in V4. 
   * Readable, maintainable Java code.
   * No need for native library compilation with a complex Docker build process.
 
-### A Community Success Story {#h3-8-a-community-success-story}
+### A Community Success Story
 
 What makes this even better is that the FFM implementation came from the community. [Nick Gritsenko (aka @DigitalSmile)](https://github.com/DigitalSmile) had already created a Java 22 library for GPIO interaction using FFM. When I discovered his work, I asked if we could use it. But even better, he contributed it directly to Pi4J himself and made it fit perfectly into the plugin architecture! This resulted in a [major pull request](https://github.com/Pi4J/pi4j/pull/458) that's now merged into the Pi4J V4 snapshot.
 
 I'm very proud that this happens again and again. In the past, [Alexander Liggesmeyer added support for the Raspberry Pi 5](https://www.pi4j.com/blog/2024/20240318_interview_alexander_liggesmeyer/) with a new plugin. And at this moment, [Stefan Haustein](https://github.com/stefanhaustein), [Stephen More](https://github.com/mores), [Tom Aarts](https://github.com/taartspi), and others are actively working on a new [Pi4J drivers library](https://github.com/pi4j/pi4j-drivers/) and example implementations to make it much easier for everyone to create applications that interact with more complex electronic components, such as joysticks, LCD screens, LED strips, and more...
 
-### Beyond Raspberry Pi {#h3-9-beyond-raspberry-pi}
+### Beyond Raspberry Pi
 
 The FFM-based implementation opens up exciting possibilities. Since it's based on standard Linux kernel methods available in Debian, we believe Pi4J could potentially work on:
 
@@ -293,7 +293,7 @@ The FFM-based implementation opens up exciting possibilities. Since it's based o
 
 I'm looking forward to experimenting with these different hardware platforms! Maybe you'll read more about that in next year's JVM Advent...
 
-### Pi4J Examples Using the FFM API {#h3-10-pi4j-examples-using-the-ffm-api}
+### Pi4J Examples Using the FFM API
 
 I often demo with a CrowPi -- a neat kit with a Raspberry Pi and pre-wired components in a single box. It's great for learning because you can't wire things incorrectly!
 
@@ -337,8 +337,8 @@ void main() throws InterruptedException {
 
 More examples like this, which can be executed with JBang, are available in the [Pi4J JBang repository](https://github.com/Pi4J/pi4j-jbang).
 
-Important Notes {#h2-11-important-notes}
-----------------------------------------
+Important Notes
+---------------
 
 While working on the presentation about the FFM API and this article, I noticed a few points worth mentioning.
 
@@ -346,8 +346,8 @@ While working on the presentation about the FFM API and this article, I noticed 
 * **JEPs Are Worth Reading** : If you're curious about how Java evolves, I highly recommend [reading the JDK Enhancement Proposals](https://openjdk.org/jeps/0). They're not just technical specifications! They're well-written documents that explain the thinking behind design decisions, include examples, and provide deep insights from the architects of Java. Similarly, [read more about the OpenJDK projects](https://openjdk.org/projects/), for instance, by subscribing to their mailing list to follow what is happening within such a project.
 * **Keep Up With Java Releases**: Java has a six-month release cycle, and every release is a good one! Each brings many bug fixes, improvements, and evolutions (from projects and JEPs). If you can update your systems, especially your development systems, you should! The FFM API was introduced in Java 22, but I learned at Devoxx that Java 24 brought significant performance improvements to the FFM implementation, without any API changes! This shows that the OpenJDK team continues to optimize and improve existing features.
 
-Conclusion {#h2-12-conclusion}
-------------------------------
+Conclusion
+----------
 
 The FFM API has been a significant improvement for developers working with native code in recent years. It removes the complexity of JNI while maintaining, and even improving, performance. It opens new possibilities for Java in embedded systems and hardware interfacing. It will also drive closer integration of Artificial Intelligence (AI), Machine Learning (ML), and Large-Language Model (LLM) development with Java.
 

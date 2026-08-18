@@ -35,12 +35,12 @@ This is very important for collections and arrays. We can have thousands or mill
 
 <br />
 
-Collections, Arrays and Streams {#h2-0-collections-arrays-and-streams}
-----------------------------------------------------------------------
+Collections, Arrays and Streams
+-------------------------------
 
 Debugging collections (lists, maps etc.) and arrays is painful. You need to dig through results or place conditional breakpoints in for loops. That's all painful. There are better solutions...
 
-### Filtering Collections {#h3-1-filtering-collections}
+### Filtering Collections
 
 I talked about a [different type of filters](https://talktotheduck.dev/exception-breakpoint-that-doesnt-suck#heading-filters) a couple of weeks ago, so please don't confuse the two. There are many filter types. Here, they apply to the collections and arrays.
 
@@ -58,7 +58,7 @@ We can then input any condition we want where "this" stands for the current elem
 
 Here we see the filter in action. We can clear it by pressing the "clear" button next to it. We can edit it by clicking on it too.
 
-### Stream Debugger {#h3-2-stream-debugger}
+### Stream Debugger
 
 While I use the Java 8 stream API frequently, I still prefer the old for loops for most cases. The reason for this is debugging. Loops are just inherently easier to debug. It doesn't mean we can't debug streams, but it's often more challenging and requires more wiggling.
 
@@ -74,8 +74,8 @@ This tool represents every stream function as a stage. You can go back and forth
 
 Notice that all the elements are "live" and you can inspect everything as you can with normal inspection in the watch.
 
-Renderers {#h2-3-renderers}
----------------------------
+Renderers
+---------
 
 We normally look at elements in the watch area without giving it too much thought. That's the "object" or the data...
 
@@ -83,7 +83,7 @@ But what we see is the way a renderer interprets the data. The default behavior 
 
 In fact, next week's duckling will dig even deeper into this subject.
 
-### Mute Renderers to Speed Up Debugging {#h3-4-mute-renderers-to-speed-up-debugging}
+### Mute Renderers to Speed Up Debugging
 
 Don't you just hate unresponsive debugging?
 
@@ -103,7 +103,7 @@ Once we mute the renderers, they appear as a short form rendering. Just the obje
 
 Once clicked, we can see the correct value in the renderer and we can inspect the result only for this value. Other values might still be "unrendered".
 
-### Renderer Customization {#h3-5-renderer-customization}
+### Renderer Customization
 
 `toString()` is great for many things, but it might not represent what we want to know about an object. Especially 3rd party objects where we can't control the `toString()` implementation for cases where performance is an issue. `toString()` must be efficient since we might use it when logging an object in production. We can't overburden it with data.
 
@@ -117,7 +117,7 @@ There are many options in this dialog that let you customize the way elements ar
 
 Here you can uncheck the hide null elements in arrays and collections option we discussed in the filter section above. You can also limit the `toString()` behavior to specific objects.
 
-### Type Renderer {#h3-6-type-renderer}
+### Type Renderer
 
 For simple cases, `toString()` works really well. But there are complex cases where our ability to affect the rendering logic can make a vast difference. Case in point, Spring Boots JPA Repositories. These are interfaces that abstract the underlying database as a set of CRUD operations. A detailed toString() method will be expensive. It can trigger SQL queries, which isn't something we'd want to do normally.
 
@@ -139,8 +139,8 @@ As you can see, the top repository is a JPA repository. The one below isn't. The
 
 Notice that the video above doesn't yet cover the last portion here. I ran out of time there. Next week's video will cover that and an additional interesting renderer feature.
 
-Summary {#h2-7-summary}
------------------------
+Summary
+-------
 
 Showing the right information in the watch is crucial. We can get a sense of what's going on in an instant!
 

@@ -13,7 +13,7 @@ The vendor or creator of a Java application may choose to bundle the application
 
 As Java is fully standardized, the JVM (within a major version) is interchangeable and the Java application OS and CPU independent for a correctly designed and standard compliant Java application. No recompilation is required in any case.
 
-### **Key concepts of Java** {#JavaApplicationsandJavaRuntimeEnvironments-KeyconceptsoftheJVM:}
+### **Key concepts of Java**
 
 * **Java.** The programming language as standardized in the Java SE standard.
 * **Java source code.** A collection of files with the .java extension. Java source code is compiled into Byte Code.

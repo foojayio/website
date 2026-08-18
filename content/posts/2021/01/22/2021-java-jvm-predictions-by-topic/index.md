@@ -22,7 +22,7 @@ In December, here on Foojay.io, several articles were published on this theme, s
 
 In this post, I arrange these predictions and observations by topic, in essence creating a series of brief panel discussions about each topic area: a sort of mini-Java conference in the form of an article!
 
-### Java Version Migration {#h3-0-java-version-migration}
+### Java Version Migration
 
 Java 8 was a major discussion point for many. Everyone predicts it will lose usership in 2021.
 
@@ -43,7 +43,7 @@ The consensus, though, is that Java 17 will ultimately become the predominate mo
 
 Another topic of conversation was the proliferation of OpenJDK vendors. **Carl Dea** considers this good, because "The public sector will have more choices of OpenJDK distros." However, **Bruce Dutheil** said "I am worried about so many OpenJDK vendors, this fragmentation is great for innovation but will provoke confusion."
 
-### Important New Java Features {#h3-1-important-new-java-features}
+### Important New Java Features
 
 For some of the details of what JDK 16 will include, see Simon Ritter's article [Staring Into My Java Snow Globe 2021](https://www.azul.com/staring-into-my-java-snow-globe-2021/ "Staring Into My Java Snow Globe 2021").
 
@@ -66,7 +66,7 @@ Additional observations and forecasts:
 
 Looking into the longer term, **Peter Lawrey** predicted: "Java will continue to slowly adopt features from the other top languages such as C++ and C#, less so C, Python, and Javascript, possibly some features from cooler, though less widely used languages."
 
-### Growth in Application Areas {#h3-2-growth-in-application-areas}
+### Growth in Application Areas
 
 Several developers cited application areas where they expect to see growth in 2021:
 
@@ -74,14 +74,14 @@ Several developers cited application areas where they expect to see growth in 20
 * **Carl Dea:** "More Java apps will appear on Android and iOS devices, due to technologies like [Gluon Mobile](https://gluonhq.com/products/mobile/ "Gluon Mobile")."
 * **Jad Sarno:** "Python and R are dominant in Machine Learning, especially for Data Scientists. Data Engineers, however, can now also use Java with new commercial-ready frameworks such as [DeepLearning4j](https://deeplearning4j.org/ "DeepLearning4j") and Amazon [Deep Java Library](https://djl.ai/ "Deep Java Library"), to train and deploy neural networks. Most AI frameworks use the same mathematical foundations, and language is a personal preference."
 
-### Security {#h3-3-security}
+### Security
 
 I don't think that there will ever be a new year where security isn't an ongoing critical issue in technology:
 
 * **Ryan Cuprak:** "I think that the Java and open source ecosystem may feel the impacts of geopolitics and decoupling. The Solarwinds hack is going to force a reckoning and re-evaluation of the risk around tools and libraries. I think the impact of this hack is currently under-appreciated and there will be some serious fallout. I think that COVID19 will scrabble trends: what happens if you start seeing disruptions at cloud vendors due to COVID19?"
 * **Travis Spencer:** "2021 will see continued adoption of RSA-PSS throughout the Java ecosystem, and much broader use of Edwards-curve Digital Signature Algorithm (EdDSA) that arrived this fall. A JEP for Encrypted Client Hello (ECH) may come late in the year (or early in 2022); this is much needed as Java is used to build a huge swath of the Web applications and services people are consuming, and without ECH all web site destinations can be tracked by intermediaries (e.g., governments, ISPs). As the OpenSSL relicensing under Apache 2 hits the street early in 2021, we will likely see more Java interop with v 3 of that library for speeding up TLS."
 
-### Jakarta EE, MicroProfile, GraalVM {#h3-4-jakarta-ee-microprofile-graalvm}
+### Jakarta EE, MicroProfile, GraalVM
 
 Much new development is expected in Jakarta EE, MicroProfile, and GraalVM technologies:
 
@@ -89,7 +89,7 @@ Much new development is expected in Jakarta EE, MicroProfile, and GraalVM techno
 * **Carl Dea:** "Newer projects will move towards Quarkus.io, Micronaut, and Helidon at a rapid rate."
 * **Ryan Cuprak:** "Jakarta EE and MicroProfile appear to be on pretty firm footing and will continue moving forward."
 
-### Beyond Java on the JVM {#h3-5-beyond-java-on-the-jvm}
+### Beyond Java on the JVM
 
 Simon Ritter recently noted in his article [Java First, Second, and Now Third](https://www.azul.com/java-first-second-and-now-third/ "Java First, Second, and Now Third") that in the November 2020 TIOBE programming index Java had fallen into third place.
 
@@ -99,14 +99,14 @@ As a quick experiment, I looked at the TIOBE January 2021 numbers for Java, Groo
 
 **Peter Lawrey** has a prediction related to non-Java JVM languages: "Kotlin will continue to rise in popularity, getting into the top 30 popular languages, possibly challenging Groovy."
 
-### Java Community Process (JCP) {#h3-6-java-community-process-jcp}
+### Java Community Process (JCP)
 
 Simon Ritter [observed](https://www.azul.com/staring-into-my-java-snow-globe-2021/ "notes"): "Another area that may change this year is the Java Community Process (JCP). There are now only seven active JSRs outside of those for Java SE, and [only one of those seems to have any real activity](https://jcp.org/en/jsr/detail?id=381 "only one of those seems to have any real activity"). It may be time to find a different way to handle the Java SE standards work and intellectual property management."
 
-### Java Community and Conferences {#h3-7-java-community-and-conferences}
+### Java Community and Conferences
 
 **Stephen Chin** noted: "The Java community has the best global conference ecosystem and quickly adapted to virtual events in 2020. I predict that we will see the Java community lead the charge with innovative solutions to solving the hybrid conference model in 2021, getting us all back together in person and connected globally."
 
-### Conclusion {#h3-8-conclusion}
+### Conclusion
 
 There's a lot of activity, a lot of possibilities for 2021. Probably everyone will agree with Java Champion **Fabiane Bizinella Nardon**'s statement: "I think the Java community will continue to be vibrant!"

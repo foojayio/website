@@ -26,14 +26,14 @@ Season 2 of the [Foojay Podcast](https://foojay.io/today/category/podcast/) has 
 
 In this article, we want to share some of the experiences of creating such podcasts, but also more generally, how you can share your work in a video with a small (or bigger) budget...
 
-Audio {#h2-0-audio}
--------------------
+Audio
+-----
 
 There is one fundamental rule for the audio: "Garbage in = Garbage out."
 
 Yes, you can apply many filters and effects in a later phase, but you can't make a bad recording sound good. **You need a clear and good recording as a starting point**!
 
-### Microphone {#h3-1-microphone}
+### Microphone
 
 A good microphone is a minimal requirement! Your computer microphone is not good enough. Ideally, you should use a microphone to place about +- 10cm from your mouth, a bit out of center.
 
@@ -53,12 +53,12 @@ Some examples:
 
 If you use audio recording software, like Audacity, adjust the level to record at -10db.
 
-### Sound Reflection Damping {#h3-2-sound-reflection-damping}
+### Sound Reflection Damping
 
 Having some curtains or foam in front of you and at least on one side to prevent most of the echo.
 
-Recording Your Screen and Yourself {#h2-3-recording-your-screen-and-yourself}
------------------------------------------------------------------------------
+Recording Your Screen and Yourself
+----------------------------------
 
 If you use **macOS**, you don't need to install additional tools!
 
@@ -81,8 +81,8 @@ Record yourself for the explanation:
 * Hit record in the QuickTime window.
 * When done, hit stop, and save the file.
 
-Recording a podcast {#h2-4-recording-a-podcast}
------------------------------------------------
+Recording a podcast
+-------------------
 
 I found out **Zoom** is an excellent tool for recording podcasts with several remote guests. If you go into the recording preferences of the program, you can select "Record a separate file of each participant."
 
@@ -91,8 +91,8 @@ When you finish the recording, you'll find a file per meeting guest, which makes
 
 Another important tip: make sure multiple people make a recording simultaneously. In case the connection of one of you drops, the file is corrupted,... Better to be safe than sorry!
 
-Additional video options {#h2-5-additional-video-options}
----------------------------------------------------------
+Additional video options
+------------------------
 
 The [**ATEM Mini**](https://www.blackmagicdesign.com/products/atemmini) is a very popular device amongst content creators. It allows connecting 4 (or 8 with the Extreme version) HDMI sources. So you can connect one or more computers and cameras with HDMI output.
 
@@ -112,8 +112,8 @@ The ATEM is recognized as a webcam when connected via USB to your computer. You 
 
 Be careful, webcams only have a USB output, so they can not be used with the ATEM. If you can find a Raspberry Pi (chip and stock problems...), you can use those as a cheap camera as [described here](https://webtechie.be/post/2021-12-20-raspberry-pi-as-hdmi-camera-for-atem-mini/).
 
-Editing {#h2-6-editing}
------------------------
+Editing
+-------
 
 Once you have all your raw recordings, it's time to start editing... There are many options here! Let's look at a few of the most popular.
 
@@ -135,10 +135,10 @@ I also use DaVinci Resolve for podcast editing, as I bought the additional **[Sp
  </figure>
 </figure>
 
-Example Setups {#h2-7-example-setups}
--------------------------------------
+Example Setups
+--------------
 
-### Shai Almog {#h3-8-shai-almog}
+### Shai Almog
 
 I record videos with the built-in Mic on my laptop. It grabs background noise, but Final Cut Pro lets me clean it up and get a crisp sound. It isn't perfect, but it's pretty good since I'm not too far. Mics are great, but they are distracting and get in the way. They limit me from reading the script and working.
 
@@ -148,7 +148,7 @@ In terms of microphones, I think a good USB dynamic microphone is probably best 
 
 **You can find video content created by Shai at [youtube.com/@debugagent](http://youtube.com/@debugagent).**
 
-### Frank Delporte {#h3-9-frank-delporte}
+### Frank Delporte
 
 I graduated from a film school and started my professional career as a video editor in 1994. It's amazing to see how this technology has evolved and at which low price you can buy professional equipment like the ATEM Mini or build a camera with a Raspberry Pi. On my blog, I [shared a movie recorded with this setup](https://webtechie.be/post/2022-01-04-first-multicam-recordings-with-raspberry-pi-hdmi-cameras/).
 
@@ -170,8 +170,8 @@ To further improve my setup, I need to move a 19"-rack to a different room, as m
 
 **Frank used this setup for the [Foojay podcast](https://foojay.io/today/category/podcast/) and created the "[Java Quick Start](https://foojay.io/java-quick-start/)" tutorial.**
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 Being "nerds and tech freaks," investing in audio and video equipment could quickly get out of control.
 

@@ -24,10 +24,10 @@ frozen: false
 
 While developing the [Foojay Quickstart Java Tutorial](https://foojay.io/java-quick-start/), I was looking for an easy way to integrate runnable Java code examples into the Foojay pages and blogs. That's when I discovered [jdoodle.com](https://www.jdoodle.com/). I started by using their online editor, but with this blog I want to show you an even easier method to integrate runnable code here on Foojay.
 
-Integration examples {#h2-0-integration-examples}
--------------------------------------------------
+Integration examples
+--------------------
 
-### Single file code {#h3-1-single-file-code}
+### Single file code
 
 To integrate "plain" Java code in your post or page, use the following syntax and add it as "Custom HTML" widget:
 

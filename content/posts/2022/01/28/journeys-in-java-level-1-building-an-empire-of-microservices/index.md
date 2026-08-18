@@ -32,8 +32,8 @@ I came up with some code, but wasn't able to get it returning anything. After a 
 
 <br />
 
-Why Microservices? {#h2-0-why-microservices}
---------------------------------------------
+Why Microservices?
+------------------
 
 There are tons of reasons for and against a microservices architecture - many rooted in frustrations and limitations found in current business scenarios - but what does that have to do with us or our projects?
 
@@ -49,8 +49,8 @@ On the bright side, the standard issues we saw from the larger app are abated. O
 
 Let's talk architecture!
 
-Architecture {#h2-1-architecture}
----------------------------------
+Architecture
+------------
 
 Our eventual goal is to create a web of microservices that communicate and pass information without intervention. However, before we get to that point, we need to reduce everything to the base components and concepts. We need two things - more than one application (to have conversation), and communication between them.
 
@@ -64,8 +64,8 @@ There are several technologies we could use to build our two services and the ch
 
 With that in mind, I chose both [Spring Boot](https://spring.io/projects/spring-boot) to build my applications and [REST endpoints](https://restfulapi.net/) for my communication channels. Some microservices content insists REST is not "true microservices" (as it requires some mapping and knowledge of client services), but just to get the cogs turning, this is our initial stepping stone. As we get comfortable with the technologies, we will move from the abridged to the unabridged microservices forms. Now it's time to start building!
 
-Applications - Service 1 {#h2-2-applications-service-1}
--------------------------------------------------------
+Applications - Service 1
+------------------------
 
 We could build the front or the back service to start, but I usually like to start from the bottom and build up. So, `service1` will be our backend service. Because we are using Spring Boot to build these services, I can assemble the skeleton of the project from the [Spring Initializr](https://start.spring.io/).
 
@@ -79,7 +79,7 @@ In the `Dependencies` area, we need to add two things - `Spring Reactive Web` an
 
 After the project downloads, find the `.zip` file and uncompress it. Open the uncompressed folder in your favorite IDE, and let's start coding!
 
-### Service 1 - project code {#h3-3-service-1-project-code}
+### Service 1 - project code
 
 There is very little code we need to add to this project. Our goal is to create an REST endpoint that another application can reach, returning results so that we confirm the connection. That means we will need a REST endpoint and some return value.
 
@@ -102,8 +102,8 @@ class TextController {
 
 So short and sweet, right? Let's charge on to Service 2!
 
-Applications - Service 2 {#h2-4-applications-service-2}
--------------------------------------------------------
+Applications - Service 2
+------------------------
 
 Now that we have completed our backend service, we need to build the second service on the front to call it. Time to head back to the Spring Initializr! Our fields will look very similar to those in our last project, which makes this one faster. The only change is our artifact name. We will keep the same dependencies of `Spring Reactive Web` and `Lombok`. Click the `Generate` button, pick a place to save, unzip, and open the project in your IDE.
 
@@ -111,7 +111,7 @@ Now that we have completed our backend service, we need to build the second serv
 
 Let's add some code!
 
-### Service 2 - project code {#h3-5-service-2-project-code}
+### Service 2 - project code
 
 Just as with service1, we will keep our code light and as simple as possible. I haven't done anything unusually new from previous applications I have built, but this is where I add some new things. Most of my prior applications have used a data store and injected a bean for my data store's repository that I define. However, since we are removing the data store for this project, what do I inject?
 
@@ -167,8 +167,8 @@ class TextController {
 
 Time to test it out and see if it works!
 
-Put it to the test {#h2-6-put-it-to-the-test}
----------------------------------------------
+Put it to the test
+------------------
 
 Start each of the applications, either through your IDE or via the command line. Once both are running, open a browser and go to `localhost:8080/hello`. Alternatively, you can run this at the command line with `curl localhost:8080/hello` or (if you have [httpie](https://httpie.io/) tool installed) `http :8080/hello`.
 
@@ -176,8 +176,8 @@ And here should be the output!
 
 ![](microservices-lvl1-results-1.png)
 
-Wrapping up! {#h2-7-wrapping-up}
---------------------------------
+Wrapping up!
+------------
 
 Congratulations, we have created our first (albeit, rudimentary) pair of microservices!
 
@@ -187,8 +187,8 @@ The root of microservices is all about having multiple applications/technologies
 
 Happy coding!
 
-Resources {#h2-8-resources}
----------------------------
+Resources
+---------
 
 * Github: [microservices-level1](https://github.com/JMHReif/microservices-level1) repository
 * Documentation: [Spring Boot](https://spring.io/projects/spring-boot)

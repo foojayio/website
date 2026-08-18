@@ -22,7 +22,7 @@ Java Flight Recorder is the profiler you can use in production, continuously. Fl
 |---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |   | This page assumes JDK 11, that means there is no need to set `-XX:+UnlockCommercialFeatures`, `-XX:+FlightRecorder` flags. Or, more particular to JFR, the use of `-XX:+UnlockDiagnosticVMOptions` and `-XX:+DebugNonSafepoints` [source](https://github.com/openjdk/jmc/blob/bacb448fd4ed1a9a5d887c50aebff4e854d3512a/core/org.openjdk.jmc.common/src/main/java/org/openjdk/jmc/common/version/JavaVersionSupport.java#L59-L60) |
 
-### Brief Introduction to Java Flight Recorder {#_brief_introduction_to_jdk_flight_recorder}
+### Brief Introduction to Java Flight Recorder
 
 Flight Recorder is a feature in the JVM that **traces** what's happening inside the JVM with **events**. Flight Recorder development started a long time ago, in the early 2000, on a JVM named JRockit.
 
@@ -43,9 +43,9 @@ Here's great material provided by [Nitsan Wakart](https://twitter.com/nitsanw):
 * [Safepoints: Meaning, Side Effects and Overheads](https://psy-lob-saw.blogspot.com/2015/12/safepoints.html)
 * [The Pros and Cons of AsyncGetCallTrace Profilers](https://psy-lob-saw.blogspot.com/2016/06/the-pros-and-cons-of-agct.html)
 
-### Using JFR {#_using_jfr}
+### Using JFR
 
-#### How to Start a Recording ? {#_how_to_start_a_recording}
+#### How to Start a Recording ?
 
 One of the first interesting things you can do is to start a recording at runtime: `jcmd` is the tool for this job, it's the Swiss Army knife for servicing your Java app. If you don't know it, use it, it's great!
 
@@ -89,7 +89,7 @@ In production, you'll be most likely using `duration`, `maxsize`, `filename` and
 |---|---------------------------------------------------------------------------------------------------------------|
 |   | Later in this series we'll see how to start recording from the command line using `-XX:StartFlightRecording`. |
 
-#### Setting Files {#_setting_files}
+#### Setting Files
 
 The `settings` option refers to a configuration of the FlightRecorder, the JDK ships with two : `default` and `profile`. A configuration is an XML file, with `event` elements that describe how JFR in the JVM will handle events, if they are enabled, their threshold, if stacktraces are recorded, etc. And there is also a `control` element that is used by JDK Mission Control.
 
@@ -151,7 +151,7 @@ It actually has a tad more overhead, 2%. In most workload this should be ok.
 
 To value of the `settings` option is file name of these files `default` or `profile`. In addition, it's also possible to pass an absolute file path, in other words it's possible to use configuration of our own stored elsewhere.
 
-#### Dumping a Recording {#_dumping_a_recording}
+#### Dumping a Recording
 
 If it's needed to acquire the recording, it's possible to dump it at anytime.JFR.dump exampleJFR.dump help
 
@@ -166,7 +166,7 @@ Dumped recording, 239.5 MB written to:
 
 If there is a single recording at the time it's possible to just use `JFR.dump`, but JFR is powerful enough to support multiple concomitant recordings, in this case you need to specify which recording to dump, obviously. Some options override those defined in the start command like `filename` or `maxage` for the current dump in particular. THe other options are certainly interesting but I found them a bit less useful in practice.
 
-#### Details of the Active Recording(s) {#_details_of_the_active_recordings}
+#### Details of the Active Recording(s)
 
 If they are multiple active recordings or if it's necessary to check the event configuration of the active recording `jcmd` comes with the `JFR.check`.JFR.check exampleJFR.check help
 
@@ -179,7 +179,7 @@ Recording 2: name=2 maxsize=250.0MB (running)
 
 The `verbose` option allows examining which event are enabled for a recording.
 
-#### Stopping an Active Recording {#_stopping_a_active_recording}
+#### Stopping an Active Recording
 
 When the recording session is deemed over, then one can stop it providing a different file name than the one set in the start command.JFR.stop exampleJFR.stop help
 
@@ -190,7 +190,7 @@ $ jcmd $(pgrep java) JFR.stop \
 ```
 
 
-#### Global Flight Recorder configuration {#_global_flight_recorder_configuration}
+#### Global Flight Recorder configuration
 
 What we saw before is how to start a recording and how to configure this specific recording. But there is another class of options that modifies aspects of the JFR internals. As a reminder those affects all recording in some way.JFR.configure exampleJFR.configure help
 
@@ -248,7 +248,7 @@ Careful however as some of these options are not well documented, and may not ex
 |---|----------------------------------------------------------------------------------------------------------------------|
 |   | These options are also available at startup via `-XX:FlightRecorderOptions`, we'll see later how to use this option. |
 
-#### JFR Logs {#_jfr_logs}
+#### JFR Logs
 
 Thanks to unified logging, it's easy to open the hood on any JVM runtime feature. In order to follow JFR, it's possible to log the JFR component, to understand how it works and how options affect recordings.
 
@@ -279,7 +279,7 @@ Thanks to unified logging, it's easy to open the hood on any JVM runtime feature
 
 Increasing the log level may reveal additional details.
 
-#### Memory Usage in the Process {#_memory_usage_in_the_process}
+#### Memory Usage in the Process
 
 The section above describes where the actual data is saved for long or large (`duration`, `maxage`, `maxsize`) profiling sessions, e.g. the reposotory, on disk, will grow within these constraints. JFR is safe to enable in prod but there's an overhead in memory as well, although it's usually minimal compared to the heap or other native memory sections, but it's worth mentioning.
 

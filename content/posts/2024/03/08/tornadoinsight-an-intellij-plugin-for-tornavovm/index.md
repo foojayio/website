@@ -39,11 +39,11 @@ TornadoInsight has been implemented by Tianyu Zuo for his master thesis at the U
 
 
 
-Key Features: {#h2-0-key-features}
-----------------------------------
+Key Features:
+-------------
 
-1. On-the-Fly Static Checker {#h2-1-1-on-the-fly-static-checker}
-----------------------------------------------------------------
+1. On-the-Fly Static Checker
+----------------------------
 
 TornadoInsight is equipped with an on-the-fly static checker. This tool scans TornadoVM code in real-time, pinpointing any Java features that are not supported by TornadoVM. Through instant notifications, developers gain immediate insights into potential compatibility issues.
 
@@ -59,8 +59,8 @@ TornadoInsight provides a tool window to view the built-in static inspector for 
  <img loading="lazy" decoding="async" width="700" height="1014" src="TornadoInsight_Guidelines.webp" alt="" class="wp-image-106143" style="width:433px;height:auto">
 </figure>
 
-2. Dynamic Testing Framework {#h2-2-2-dynamic-testing-framework}
-----------------------------------------------------------------
+2. Dynamic Testing Framework
+----------------------------
 
 TornadoInsight simplifies the testing process for individual TornadoVM tasks. After creating a TornadoVM Task, there is no need to write the main method or initialize the method parameters. You only need to select the method to test from the tool window of TornadoInsight, as shown in the following image.  
 
@@ -83,11 +83,11 @@ If it is not compatible, it will output an exception stack trace. In addition, t
 
 
 
-How to use TornadoInsight? {#h2-3-how-to-use-tornadoinsight}
-------------------------------------------------------------
+How to use TornadoInsight?
+--------------------------
 
-1. Installation {#h2-4-1-installation}
---------------------------------------
+1. Installation
+---------------
 
 Getting started with TornadoInsight is a straightforward process:{#4uasp10988}
 
@@ -98,7 +98,7 @@ Getting started with TornadoInsight is a straightforward process:{#4uasp10988}
 
 {#sp8hymit0mn90779}
 
-### 2. Pre-requisites {#nu0wu11000}
+### 2. Pre-requisites
 
 TornadoInsight invokes Java and TornadoVM on the developers' local machine. Hence, developers must ensure that the following are already installed:{#3hnp311003}
 
@@ -107,7 +107,7 @@ TornadoInsight invokes Java and TornadoVM on the developers' local machine. Henc
 
 {#60i46mit0mn90786}
 
-### 3. Configuration of TornadoInsight {#t6jgt11013}
+### 3. Configuration of TornadoInsight
 
 In order to enable the dynamic inspection feature of TornadoInsight, developers need to configure the feature after installation, by performing the following steps: {#ud3fs11016}
 
@@ -131,11 +131,11 @@ $ sudo xattr -r -d com.apple.quarantine path/to/jdk
 ```
 
 
-### 4. Utilization of the TornadoInsight On-the-Fly Static Checker {#ieank24013}
+### 4. Utilization of the TornadoInsight On-the-Fly Static Checker
 
 During development, TornadoInsight will actively scan "on-the-fly" for unsupported Java features of TornadoVM in the project. The static checker will pop notifications and detailed explanations that can help developers to address compatibility issues promptly.{#td9py25077}
 
-### 5. Dynamic Testing Framework for TornadoVM Tasks {#2mhy325080}
+### 5. Dynamic Testing Framework for TornadoVM Tasks
 
 TornadoInsight provides a tool window to display TornadoVM tasks in the current editor at real time.{#zyrso25083}
 

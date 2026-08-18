@@ -26,13 +26,13 @@ frozen: false
 
 Foojay Podcast hits episode 100. No plan, no roadmap. It just happened. To mark the occasion, Frank turned the microphone around and invited other podcasters: Adam Bien (airhacks.fm), Jennifer Reif (Breaktime Tech Talks), Kadi McKean and Steve Pool (10xInsights), and Oumaima Zerouali (JCast). Same three questions for each: why did you start, what broke, and what did you learn?
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube PID--srP0_U >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -40,8 +40,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * **Adam Bien** --- [airhacks.fm](https://open.spotify.com/show/6nOTQLa2uZxeyGpMW8eppS) \| [LinkedIn](https://www.linkedin.com/in/adam-bien/)
 * **Jennifer Reif** --- [Breaktime Tech Talks](https://open.spotify.com/show/30PqTBEJY7Tr9iHrSCbhMb) \| [LinkedIn](https://www.linkedin.com/in/jmhreif/)
@@ -49,8 +49,8 @@ Guests {#h2-2-guests}
 * **Steve Pool** --- [10xInsights](https://10xinsights.dev/podcasts.html) \| [LinkedIn](https://www.linkedin.com/in/noregressions/)
 * **Oumaima Zerouali** --- [JCast](https://jcast.dev/) \| [LinkedIn](https://www.linkedin.com/in/oumaima-zerouali/)
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * [airhacks.fm on Spotify](https://open.spotify.com/show/6nOTQLa2uZxeyGpMW8eppS)
 * [Breaktime Tech Talks on Spotify](https://open.spotify.com/show/30PqTBEJY7Tr9iHrSCbhMb)
@@ -71,8 +71,8 @@ Links {#h2-3-links}
   * [The Standup](https://www.youtube.com/playlist?list=PL2Fq-K0QdOQiJpufsnhEd1z3xOv2JMHuk)
 * [Spring Documentary](https://www.youtube.com/watch?v=4qTwA6Y1-OI)
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 * 00:00 Introduction
 * 01:00 Adam Bien (airhacks.fm)

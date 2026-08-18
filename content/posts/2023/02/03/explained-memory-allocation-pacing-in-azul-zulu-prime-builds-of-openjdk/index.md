@@ -36,13 +36,13 @@ AP does this by introducing many small delays into the allocation paths, proport
 
 AP is available only in non-ZST mode. AP can be disabled with `-XX:-GPGCUseAllocationPacing`.
 
-What Is ZST? {#h2-0-what-is-zst}
---------------------------------
+What Is ZST?
+------------
 
 ZST coordinates memory use between Azul Platform Prime and the Linux operating system. [Learn more on docs.azul.com/prime/ZST](https://docs.azul.com/prime/ZST).
 
-What is Allocation Pacing? {#h2-1-what-is-allocation-pacing}
-------------------------------------------------------------
+What is Allocation Pacing?
+--------------------------
 
 Let's explain Allocation Pacing based on this example graph. The command-line argument Xmx defines the memory limit assigned to the JVM (**grey line**).
 
@@ -53,14 +53,14 @@ The application may surprise the GC with a higher allocation rate or live set th
 
 The enforced rate is computed dynamically depending on the remaining free space, thus "smoothing" the trajectory leading to the `Xmx` boundary. The reduction is equally proportional between the threads to the requested memory size, thus achieving a fair and proportional distribution of the pacing, without hiccups.
 
-### WITHOUT AP {#h3-2-without-ap}
+### WITHOUT AP
 
 |   What Happens?   | Allocation delay happens if the requested size doesn't fit in the remaining free space, which can result in two outcomes. |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------|
 | **Success**       | The GC successfully reclaims enough memory.                                                                               |
 | **OOM Exception** | The GC completes a few cycles but isn't able to reclaim enough memory.                                                    |
 
-### WITH AP {#h3-3-with-ap}
+### WITH AP
 
 |   What Happens?   | Allocation delay happens if the heap usage exceeds the pacing threshold, which can result in two outcomes. |
 |-------------------|------------------------------------------------------------------------------------------------------------|
@@ -69,8 +69,8 @@ The enforced rate is computed dynamically depending on the remaining free space,
 
 <br />
 
-Effects of Allocation Pacing {#h2-4-effects-of-allocation-pacing}
------------------------------------------------------------------
+Effects of Allocation Pacing
+----------------------------
 
 * Significantly reduces the maximum magnitude of allocation delays.
 * Threads can not suddenly consume the whole heap.
@@ -84,8 +84,8 @@ As AP is only active above a certain level, it has no impact at all on the perfo
 
 Starting early brings the risk of doing unneeded disturbance, as the GC may release memory at any moment. The memory scheduler that organizes the fair and smooth distribution of the allowed under-pacing allocation rate brings some extra cost, which may result in lower throughput when pacing is engaged.
 
-Benchmark to illustrate Application Pacing {#h2-5-benchmark-to-illustrate-application-pacing}
----------------------------------------------------------------------------------------------
+Benchmark to illustrate Application Pacing
+------------------------------------------
 
 To simulate allocation delays and illustrate the abilities of AP, we used EHCachePounder based benchmark that exercises [EHCache](https://www.ehcache.org/). We added a Java agent that periodically consumes a lot of heap. This makes both the allocation rate and live set suddenly jump up. The GC gets surprised, which leads to heap exhaustion before the GC can reclaim any memory. As a result, the benchmark threads start experiencing allocation delays.
 
@@ -106,23 +106,23 @@ The following chart shows the difference in the number of allocation delays happ
 Oppositely, with AP enabled, there are thousands of small delays (**violet line** -- "Allocation Paced Delays Count"). GC Log Analyzer provides distinct legends depending on the allocation delay origin to make them easy to differentiate. This chart is the best option to answer whether AP gets engaged.
 ![](ap-delays-compared-1024x295.png) Comparison of "Allocation Failed Delays Count" versus "Allocation Paced Delays Count"
 
-Troubleshooting {#h2-6-troubleshooting}
----------------------------------------
+Troubleshooting
+---------------
 
-### Detect if AP is active {#h3-7-detect-if-ap-is-active}
+### Detect if AP is active
 
 As illustrated in the benchmark, with [Azul GC Log Analyzer](https://docs.azul.com/prime/GC-Log-Analyzer) and a log file of your application, you can detect if the AP has been active.
 
 The "Allocation Paced Delays Count" (**violet line**) in the "GC and Safepoint/GC and Safepoint: Application Thread Delays Count" chart shows the number of small delays introduced by AP during each GC cycle.
 ![](allocation-paced-delays-count-smaller-1024x426-1.png) Allocation Paced Delays Count
 
-### Is AP indicating a problem? {#h3-8-is-ap-indicating-a-problem}
+### Is AP indicating a problem?
 
 * Minor AP activity is not a problem itself.
 * Active AP may cause a considerable reduction in throughput.
 * If the application metrics reveal a problem, coinciding with AP activity, is a concern.
 
-### How should I address a problem? {#h3-9-how-should-i-address-a-problem}
+### How should I address a problem?
 
 The best way to get rid of AP being engaged is to help GC to complete in time:
 

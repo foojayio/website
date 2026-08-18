@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### How a Java library is taking a completely new approach to understanding what the code does, and why it makes perfect developer sense. {#h3-0-how-a-java-library-is-taking-a-completely-new-approach-to-understanding-what-the-code-does-and-why-it-makes-perfect-developer-sense}
+### How a Java library is taking a completely new approach to understanding what the code does, and why it makes perfect developer sense.
 
 A while back, I [wrote](https://medium.com/gitconnected/breaking-the-fourth-wall-in-coding-189055955c85 "wrote") about the fact that logs need an overhaul, and that practices that were relevant when logs were still text messages in files may no longer be relevant in an age when logs traces and metrics are as artifacts and observations stored in cloud platforms.
 
@@ -29,7 +29,7 @@ We need a new metaphor, I argued, as traditional logging is prone to anti-patter
 
 More generally speaking, they don't offer a good way to specify intent. As a result, the logs become muddled with debugging messages, excavation attempts, warnings, and notices, to the point where we actually need AI systems to try and make sense of our mess.
 
-[![](twitter-362x510.png)](https://twitter.com/PR0GRAMMERHUM0R/status/1634902085228539905?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1634902085228539905%7Ctwgr%5E3f7b17a90d093b9c894fa7947b4e563a79dc5ad2%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Ftype%3Dtext2Fhtmlkey%3Da19fcc184b9711e1b4764040d3dc5c07schema%3Dtwitterurl%3Dhttps3A%2F%2Ftwitter.com%2FPR0GRAMMERHUM0R%2Fstatus%2F16349020852285399053Fs3D20image%3Dhttps3A%2F%2Fi.embed.ly%2F1%2Fimage3Furl3Dhttps253A252F252Fabs.twimg.com252Ferrors252Flogo46x38.png26key3Da19fcc184b9711e1b4764040d3dc5c07 "![](https://foojay.io/wp-content/uploads/2023/04/twitter-362x510.png)")
+[![](twitter-362x510.png)](https://twitter.com/PR0GRAMMERHUM0R/status/1634902085228539905?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1634902085228539905%7Ctwgr%5E3f7b17a90d093b9c894fa7947b4e563a79dc5ad2%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Ftype%3Dtext2Fhtmlkey%3Da19fcc184b9711e1b4764040d3dc5c07schema%3Dtwitterurl%3Dhttps3A%2F%2Ftwitter.com%2FPR0GRAMMERHUM0R%2Fstatus%2F16349020852285399053Fs3D20image%3Dhttps3A%2F%2Fi.embed.ly%2F1%2Fimage3Furl3Dhttps253A252F252Fabs.twimg.com252Ferrors252Flogo46x38.png26key3Da19fcc184b9711e1b4764040d3dc5c07 "![](https://foojay.io/wp-content/uploads/2023/04/twitter-362x510.png)")
 
 Newer standards such as OTEL have introduced new ways by which to holistically view logging, tracing, and metrics. These seem to demand similar innovation in the verbs and metaphors we use in our code in using them.
 

@@ -39,8 +39,8 @@ This is **Part 2**. Today, we solve this "configuration drift" and learn how to 
 
 
 
-**Problem #1: "It works on my machine, but fails on the server"** {#h2-0-problem-1-it-works-on-my-machine-but-fails-on-the-server}
-----------------------------------------------------------------------------------------------------------------------------------
+**Problem #1: "It works on my machine, but fails on the server"**
+-----------------------------------------------------------------
 
 You have a local plugin configuration. The DevOps team or Tech Lead has a different Quality Profile on the server.
 
@@ -99,8 +99,8 @@ Click on the + icon to add the connection
 
 
 
-**Problem #2: "Why did the server catch a SQL Injection my IDE missed?"** {#h2-1-problem-2-why-did-the-server-catch-a-sql-injection-my-ide-missed}
---------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #2: "Why did the server catch a SQL Injection my IDE missed?"**
+-------------------------------------------------------------------------
 
 You are running SonarQube for IDE, but the server still found a critical vulnerability. You feel betrayed. *"Why didn't you highlight this line?"*
 
@@ -134,8 +134,8 @@ Your IDE needs to be snappy. If the plugin paused your typing to trace how userN
 
 
 
-**Problem #3: "I hate switching windows to check why the build failed"** {#h2-2-problem-3-i-hate-switching-windows-to-check-why-the-build-failed}
--------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #3: "I hate switching windows to check why the build failed"**
+------------------------------------------------------------------------
 
 You pushed your code. The GitHub Actions build failed. Now you have to log in to the SonarQube dashboard, find your project, find your branch... too many clicks.
 
@@ -153,8 +153,8 @@ Comments from SonarQube Cloud directly appearing in the PR changes
 
 
 
-**Problem #4: "The Quality Gate is unreasonable! We are a startup!"** {#h2-3-problem-4-the-quality-gate-is-unreasonable-we-are-a-startup}
------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #4: "The Quality Gate is unreasonable! We are a startup!"**
+---------------------------------------------------------------------
 
 This is a common complaint. *"I cannot merge because the server asks for 80% coverage on the whole project, but we have a huge legacy monolith with 0% tests. I can't fix 5 years of debt in one day!"*
 
@@ -185,8 +185,8 @@ By tuning the gate, the tool becomes a helper, not a blocker. We can define our 
 
 
 
-**Problem #5: "Context is King: When a 'Bug' is actually a Feature"** {#h2-4-problem-5-context-is-king-when-a-bug-is-actually-a-feature}
-----------------------------------------------------------------------------------------------------------------------------------------
+**Problem #5: "Context is King: When a 'Bug' is actually a Feature"**
+---------------------------------------------------------------------
 
 General rules are great, but sometimes they don't fit your specific reality.
 
@@ -208,8 +208,8 @@ You have the final say. You can override the tool's judgment in the SonarQube Cl
  <img loading="lazy" decoding="async" width="1024" height="454" src="Screenshot-2025-12-16-at-10.25.23-1024x454.png" alt="" class="wp-image-122056" style="width:571px;height:auto">
 </figure>
 
-**Problem #6: "I'm lost in the details: How is the project actually doing?"** {#h2-5-problem-6-i-m-lost-in-the-details-how-is-the-project-actually-doing}
----------------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #6: "I'm lost in the details: How is the project actually doing?"**
+-----------------------------------------------------------------------------
 
 You fixed the PR issues, but your manager asks: *"Is the application getting better or worse?"* You need the helicopter view.
 
@@ -231,12 +231,12 @@ The dashboard gives you the famous Ratings (A, B, C, D, E) for:
 It's the report card for your code.
 ![](Screenshot-2025-12-16-at-10.25.30-1024x361.png)
 
-**🛠️ How to Feed the Monster (Maven \& CI/CD)** {#h2-6-how-to-feed-the-monster-maven-ci-cd}
---------------------------------------------------------------------------------------------
+**🛠️ How to Feed the Monster (Maven \& CI/CD)**
+------------------------------------------------
 
 So, how do we actually send the analysis reports to SonarQube Cloud? You don't need complex scripts.
 
-### **1. The Maven Configuration (** **pom.xml** **)** {#h3-7-1-the-maven-configuration-pom-xml}
+### **1. The Maven Configuration (** **pom.xml** **)**
 
 You don't strictly *need* to edit the pom.xml if you pass everything in the command line, but it's cleaner to define your project properties here.
 
@@ -266,7 +266,7 @@ mvn verify sonar:sonar -Dsonar.token=your_generated_token_here
 
 ![](Screenshot-2025-12-16-at-10.54.48-1024x317.png)
 
-### **2. The GitHub Actions Pipeline** {#h3-8-2-the-github-actions-pipeline}
+### **2. The GitHub Actions Pipeline**
 
 We don't want to run commands manually. We want this to happen automatically on every push.
 
@@ -351,8 +351,8 @@ jobs:
 
 
 
-**🎯 Summary** {#h2-9-summary}
-------------------------------
+**🎯 Summary**
+--------------
 
 In Part 2, we moved from "My Code" to "Our Code."
 

@@ -27,7 +27,7 @@ The quality of the logs is critical. Logging both too much or too little informa
 
 In this article, I am going to guide you through a pragmatic approach to Java logging---what should we log, what shouldn't we log, and how to implement Java logging properly.
 
-### What Should We Log? {#h3-0-what-should-we-log}
+### What Should We Log?
 
 Back in the military, whenever we had to report something, we had to use the 5W-H method---Who, What, Where, When, Why, and How. This method is an excellent rule for logging statements as well.
 
@@ -38,7 +38,7 @@ Back in the military, whenever we had to report something, we had to use the 5W-
 * **Why did it happen?**The "why" is generally what you need to find out. You can't always capture this in a single logline. In some cases, it is obvious. If so, make it part of the message. On many occasions, we can only explain the "why" once we see the relation between logs. Therefore make sure that your log messages are absolutely clear.
 * **How did it happen?**Like the "why," the "how" typically can't be caught in one statement. Therefore, to correlate between message, especially in a service-based architecture, is extremely important. To achieve this, you should create a unique correlation ID for each incoming request in every service with an outbound interface. Once you have this ID, you should log it in every statement. If you need to transport this ID to another service, you can use the specific HTTP header X-Correlation-ID in order to correlate and be stateless.
 
-### Logging Security Events {#h3-1-logging-security-events}
+### Logging Security Events
 
 Java is mostly used in backend processes and will directly interact with the data. Therefore, we must keep track of security-related events. We have to prioritize these security events accordingly and consider events that need high privileges (admin events) even more critical.
 
@@ -60,7 +60,7 @@ In addition, you should also log indicators that can point to specific attacks.
 
 It is a great tactic to set thresholds for certain security log events. You can actively send alerts when these thresholds are crossed. This way, you can - interfere accordingly and prevent more extensive damage.
 
-### What Should We Not Log? {#h3-2-what-should-we-not-log}
+### What Should We Not Log?
 
 Logging too much information is just as harmful as logging too little. You do not want your logs to be flooded by information that is not useful in production. Therefore, aim to always set the log level on a production system to a suitable level, like WARN or ERROR.
 
@@ -74,7 +74,7 @@ By logging personal information for debugging, we circumvent many of our own sec
 
 **Bottom line---personal and sensitive information must not appear in your production logging.**
 
-### Security Logging in Java {#h3-3-security-logging-in-java}
+### Security Logging in Java
 
 First and foremost, use a logging framework in Java. This seems like an open door, but in a ton of applications, people still use the old System.out.println() to write directly to the console. This should be prevented at all costs. A good linter (Spotbugs, PMD, SonarLint) could help you with this.
 
@@ -198,7 +198,7 @@ It is wise not to log to a single file per service for distributed systems. Inst
 
 In addition to centralized logging, you should also consider active monitoring and alerting on your log lines. Many different products can create real-time graphs based on your logs and actively alert you when things are above a predetermined threshold.
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Logging is not something that you just do. Having a closer look at what you log, when you log it, and utilizing your logs, is essential for doing quick research or intervention. Although prevention is better than a cure, it is always possible that someone breaches your system, and you want to prevent further damage.
 

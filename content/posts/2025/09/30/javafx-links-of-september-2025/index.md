@@ -20,8 +20,8 @@ frozen: false
 
 Here is the overview of the JavaFX LinksOfTheMonth of September 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * Java and JavaFX 25 are released! This new Long Term Support (LTS) will be maintained and updated for many more years, so we can expect a lot of production systems will be upgraded to this version...
   * Important: JavaFX 25 Requires JDK 23 or later.
@@ -37,8 +37,8 @@ Core {#h2-0-core}
   * Followed by a [request from **Johan Vos**](https://bsky.app/profile/johanvos.bsky.social/post/3lyfuw66pjs26): "_If you're on mac, please try JavaFX 26-ea+6 and share feedback. Tip: add `MARKDOWN_HASH2ad2e7464c1b84e91dbe41e72ff65eecMARKDOWN`*HASH* which will confirm you're really using metal, as shown below. Many thanks to Kevin, Ambarish, Ajit, Jayathirth and others for their great work."
 * [Message by **Johan Vos**](https://bsky.app/profile/johanvos.bsky.social/post/3lywvyv4jz22a) (inspired by the [Graal-related announcement of Oracle](https://blogs.oracle.com/java/post/detaching-graalvm-from-the-java-ecosystem-train)): "*To be very clear on the broader [OpenJDK-mobile initiative we announced last month with Gluon](https://openjdk-mobile.github.io/): this is all based on [open-source tech (github.com/openjdk/mobile)](https://github.com/openjdk/mobile). We deliberately avoided dependencies on company-owned products. We *very much* depend on, and leverage the great technical work, including the open discussions in OpenJDK mailing lists, GitHub PR's and JBS issues. Important to make the distinction between the top-quality work from engineers and the strategic decisions made by companies.*"
 
-Applications {#h2-1-applications}
----------------------------------
+Applications
+------------
 
 * **Dean Courtney** shared the [sources of DietAI](https://github.com/dean-703/dietai): "*It's a JavaFX application designed for diet analysis, allowing users to import CSV files from diet trackers. It displays entries in a table, summarizes nutritional data, and utilizes AI for personalized evaluations. Users can set profiles and goals and compare actual intake against targets.*"
 * **Helal Anwar** shared the [sources, including a video demo, of GradedAttendance](https://github.com/Hilal-Anwar/GradedAttendance): "*A comprehensive attendance management system with integrated grading capabilities, designed to streamline educational institution workflows and provide efficient student attendance tracking.* "
@@ -51,8 +51,8 @@ Applications {#h2-1-applications}
 * [LogoRRR shared a screenshot](https://bsky.app/profile/logorrr.bsky.social/post/3lysnfnjgy226): "*After the release of 25.1.0, work is ongoing for the 'NextRelease'! The searchterm toolbar gets a facelift - it looks far better, what do you think? [Download LogoRRR here](https://www.logorrr.app/)*."
 * [**Catherine Edelveis** refactored RaffleFX app](https://bsky.app/profile/cat-edelveis.bsky.social/post/3lynhk6wl5s2l) "*which demonstrates the usage of GraalVM Native Image with desktop apps, to use Gradle, so if you'd like to create native images of Gradle-based JavaFX projects, [you can use it as a starting point](https://github.com/code-with-bellsoft/raffle-gradle)*."
 
-Components, Libraries, Tools {#h2-2-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [jDeploy 5.0](https://www.jdeploy.com/docs/releases/5.0/release-notes.html), the tool the to distribute your Java(FX) app as a native bundle, has been released. It now includes [ARM64 support for Windows and Linux](https://jdeploy.substack.com/p/finally-arm64-support-for-windows) on both desktop and CLI apps.
 * **Dirk Lemmermann** is a fan of AtlantaFX: "*Our CRM system at Senapt / Tomato Energy has now been completely transitioned to the AtlantaFX theme / theming support. The result is a much more pleasant user experience. A clean, modern looking UI. The semantic colors give us multi-theme / dark-mode support for free.* " Check the [screenshots in his Bluesky message](https://bsky.app/profile/dlemmermann.bsky.social/post/3lxryso6uy223).
@@ -62,19 +62,19 @@ Components, Libraries, Tools {#h2-2-components-libraries-tools}
   * And a [follow-up message](https://bsky.app/profile/sosuisen.bsky.social/post/3lyyj2hqhus2x): "*The JavaFX Builder API has been updated to support JavaFX 25. Since the JavaFX API is quite stable, I believe that supporting it through a code generator approach is straightforward.*"
 * JPro (to run JavaFX in the browser) released version 2025.3.1: "*Now supports Java and JavaFX 25, and Gradle 9. The JPro Loadbalancer is now released together with the runtime, and we've made a lot of changes under the hood.* " Check the [release notes here](https://www.jpro.one/docs/jpro-webapi/changelog/1/1/2025.3.x).
 
-Podcasts, Videos, Books {#h2-3-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * Short video: [JavaFX vs Electron, The Ultimate Performance Showdown!](https://www.youtube.com/shorts/Wrl1_NnruyI) which is part of the [Ben \& Ryan Show - Episode 22 - BoxLang](https://www.youtube.com/watch?v=Pg7vuclC3KI): "*In this episode, your hosts Ben Nadel and Ryan Brown sit down with Luis Majano and Daniel Garcia from Ortus Solutions to dive deep into BoxLang, the dynamic new language for the JVM. From modular design to multi-runtime capabilities and modern tooling, this conversation explores past, present, and future of BoxLang.*"
 
-Tutorials {#h2-4-tutorials}
----------------------------
+Tutorials
+---------
 
 * [JavaFX Custom Shaped Buttons](https://genuinecoder.com/javafx-buttons-with-custom-shape/) with code examples and a video walk-through by **Muhammed Afsal Villan**.
 * A great article with a lot of code examples by **Catherine Edelveis** on DZone: [Top 7 Mistakes When Testing JavaFX Applications](https://dzone.com/articles/top-javafx-testing-mistakes). "*Testing JavaFX programs may seem non-trivial at first. This article describes the most common mistakes when testing desktop apps, their causes, and solutions.*"
 
-Miscellaneous {#h2-5-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * A [fun message by **Todd Mitchell**](https://bsky.app/profile/toddnotmitchell.com/post/3lxqm5io4322k) about "abused JavaFX code": "*Very distracting in the Unknown Number / High School Catfish doc that when the FBI guy starts talking about extracting phone data they show made up contact information for Charlie Brown, Ethan Hunt, and Kevin McCallister laid over a guy's JavaFX game code I was able to find on Russian StackOverflow.*"
 * Last week we had a Mandelbrot example by **A N M "Bazlur" Rahman** . This week, thanks to a [tip by **Max Rydahl Andersen**](https://bsky.app/profile/maxandersen.xam.dk/post/3lxzl67e3222v), we have another one. MandelbrotFx, a fractal (Mandelbrot, Julia, ...) explorer written with JavaFX, is a [project shared by **Clément de Tastes**](https://github.com/CodeSimcoe/MandelbrotFx).
@@ -84,8 +84,8 @@ Miscellaneous {#h2-5-miscellaneous}
 * [**Frank Delporte** bumped his Raspberry Pi's to version 25](https://bsky.app/profile/frankdelporte.be/post/3lz4fnslmus2c): "*Welcome to Java 25 on the Raspberry Pi! The install script in the [Pi4J OS repository](https://github.com/Pi4J/pi4j-os) to configure a new Raspberry Pi has been updated to install Azul Zulu 25 with JavaFX. Or you can [follow the updated instructions on the Pi4J website](https://www.pi4j.com/prepare/install-java/).*"
 * [**Clément de Tastes** published "Valhalla \& Value Types au pays des fractales"](https://blog.sciam.fr/2025/09/22/value-types-et-fractales.html) in French. Translated intro: "*We invite you to make a leap in the future of Java, especially through improvements that the Valhalla project prepares for us. We will take the opportunity to put them into practice on a talking example: the calculation and visualization of the whole of Mandelbrot.*" In the article, JavaFX is used to generate beautiful fractals.
 
-JFX Central {#h2-6-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * New content on JFX Central:
   * [Defold, the game engine for high-performance cross-platform games](https://www.jfx-central.com/showcases/defold).

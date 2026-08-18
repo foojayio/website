@@ -36,8 +36,8 @@ struct event {
 ```
 
 
-Struct Example {#h2-0-struct-example}
--------------------------------------
+Struct Example
+--------------
 
 Using [Pahole](https://manpages.debian.org/bullseye/dwarves/pahole.1.en.html) in the [Compiler Explorer](https://godbolt.org/#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:17,endLineNumber:11,positionColumn:17,positionLineNumber:11,selectionStartColumn:17,selectionStartLineNumber:11,startColumn:17,startLineNumber:11),source:'%23define+FILE_NAME_LEN+256%0A%23define+TASK_COMM_LEN++16%0A++++++++++++++++%0Astruct+event+%7B%0A++unsigned+int+e_pid%3B%0A++char+e_filename%5BFILE_NAME_LEN%5D%3B%0A++char+e_comm%5BTASK_COMM_LEN%5D%3B%0A%7D%3B%0A%0Aint+main()+%7B%0A++++struct+event+e%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:32.78470670708028,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:clang1810,filters:(b:'0',binary:'1',binaryObject:'0',commentOnly:'0',debugCalls:'1',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'0',trim:'1'),flagsViewOpen:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!(),options:'-O0',overrides:!(),selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:1),l:'5',n:'0',o:'+x86-64+clang+18.1.0+(Editor+%231)',t:'0')),k:27.81995935102858,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:tool,i:(args:'',argsPanelShown:'1',compilerName:'x86-64+clang+18.1.0',editorid:1,fontScale:14,fontUsePx:'0',j:1,monacoEditorHasBeenAutoOpened:'1',monacoEditorOpen:'1',monacoStdin:'1',stdin:'',stdinPanelShown:'1',toolId:pahole,wrap:'1'),l:'5',n:'0',o:'pahole+(trunk)+x86-64+clang+18.1.0+(Editor+%231,+Compiler+%231)',t:'0')),k:39.39533394189113,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4), we can see the memory layout on amd64:
 
@@ -83,8 +83,8 @@ private static final BPFStructType<Event> eventType =
 
 *eBPF is agnostic regarding alignment, as the compiler on your system compiles the eBPF and the C code, so the compiler can decide how to align everything.*
 
-Alignment Rules {#h2-1-alignment-rules}
----------------------------------------
+Alignment Rules
+---------------
 
 But where do these alignment rules come from? They come from how your CPU works. Your CPU usually only allows/is optimized for certain types of accesses. So, for example, x86 CPUs are optimized for accessing 32-bit integers that lay at addresses in memory that are a multiple of four. The rules are defined in the Application Binary Interface (ABI). The alignment rules for x86 (64-bit) on Linux are specified in the [System V ABI Specification](https://refspecs.linuxbase.org/elf/x86_64-abi-0.99.pdf):
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/image-2-2000x1623.png)
@@ -127,8 +127,8 @@ for member in struct:
 
 With this at hand, we can look at a slightly more complex example:
 
-Struct Example with Padding {#h2-2-struct-example-with-padding}
----------------------------------------------------------------
+Struct Example with Padding
+---------------------------
 
 The compiler, at times, has to create an unused memory section between two members to satisfy the individual alignments. This can be seen in the following example:
 
@@ -171,8 +171,8 @@ This means that we're essentially wasting memory. I recommend reading [The Lost 
 
 But what do we do with this knowledge?
 
-Auto-Layouting in hello-ebpf {#h2-3-auto-layouting-in-hello-ebpf}
------------------------------------------------------------------
+Auto-Layouting in hello-ebpf
+----------------------------
 
 The record that we defined in Java before contains all the information to auto-generate the BPFStructType for the class; we just need a little bit of annotation processor magic:
 
@@ -235,8 +235,8 @@ The annotation processor currently supports the following members in records:
 
 You can find the up-to-date list in the documentation for the [Type](https://github.com/parttimenerd/hello-ebpf/blob/main/annotations/src/main/java/me/bechberger/ebpf/annotations/bpf/Type.java) annotation.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 We have to model all C types that we use in both eBPF and Java in Java, too; this includes placing the different members of structs in memory and keeping them properly aligned.
 

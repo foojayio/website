@@ -39,8 +39,8 @@ But couldn't we just attach some context to every JFR event we're interested in?
 
 The main idea of Jaroslav's approach is to store a context in thread-local memory and attach it to every JFR event as configured. But before I dive into the custom context, I want to show you the example program, which you can find, as always, MIT-licensed on [GitHub](https://github.com/parttimenerd/jfr-context-example).
 
-Example {#h2-0-example}
------------------------
+Example
+-------
 
 We create a simple file server via [Javalin](https://javalin.io), which allows a user to
 
@@ -190,8 +190,8 @@ There are, of course, other events, but in our file server example, we're only i
 
 Now, we can start bringing the events into context.
 
-Adding Custom Context {#h2-1-adding-custom-context}
----------------------------------------------------
+Adding Custom Context
+---------------------
 
 Before we can add the context, we have to define it, as described in [Jaroslav's blog post](https://jbachorik.github.io/posts/seeing-in-context_2). We [create a context](https://github.com/parttimenerd/jfr-context-example/blob/e055b39a38fa7ee9dc4cf903d5d2b4fce9e2ac8d/src/main/java/me/bechberger/server/TracerContextType.java) that stores the current user, action, trace ID, and optional file:
 
@@ -278,8 +278,8 @@ public class TraceContextTypeRegistration implements ContextType.Registration {
 
 We use the [auto-service](https://github.com/google/auto/tree/main/service) project by Google to automatically create the required build files (read more in this [blog post](https://pedrorijo.com/blog/java-service-loader/) by Pedro Rijo.
 
-Using the Custom Context {#h2-2-using-the-custom-context}
----------------------------------------------------------
+Using the Custom Context
+------------------------
 
 After adding the context, we can see it in the `jdk.FileRead` events:
 
@@ -344,8 +344,8 @@ sue     80
 
 The empty user is for all the bytes read unrelated to any specific user (like class files), which is quite helpful.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 This small example is just a glimpse of what is possible with JFR contexts. Jaroslav's prototypical implementation is still limited; it, e.g., doesn't support contexts at method sampling events, but it is already a significant improvement over the status quo. I'll be creating follow-up blog posts as the prototype evolves and matures.
 

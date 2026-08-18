@@ -31,21 +31,21 @@ The Disco API (i.e., the short name for the Universal OpenJDK Discovery API) is 
 
 Most of the tools described here are developed by Gerrit Grunwald (aka hansolo on [Twitter/X](https://twitter.com/hansolo_) and [Mastodon](https://foojay.social/@hansolo_@mastodon.social)). As they are all open source, you can review them and propose improvements.
 
-Learn More About OpenJDK Versions and Distributions {#h2-0-learn-more-about-openjdk-versions-and-distributions}
----------------------------------------------------------------------------------------------------------------
+Learn More About OpenJDK Versions and Distributions
+---------------------------------------------------
 
 The Devoxx UK presentation ["Welcome to the Jungle" by Gerrit Grunwald](https://www.youtube.com/watch?v=7kURkyISzyM), gives you a lot of insights into the many OpenJDK versions and distributions and how the Disco API provides all the related information.
 
 {{< youtube 7kURkyISzyM >}}
 
-Disco API {#h2-1-disco-api}
----------------------------
+Disco API
+---------
 
-### Sources {#h3-2-sources}
+### Sources
 
 The Disco API is a Java project (of course...) you can find on [GitHub](https://github.com/foojayio/discoapi). The sources link to a [slideshow presentation with more details](https://de.slideshare.net/han_solo/disco-api-openjdk-distributions-as-a-service).
 
-### Rest Endpoints {#h3-3-rest-endpoints}
+### Rest Endpoints
 
 * <https://api.foojay.io/disco/v3.0/major_versions>
 * <https://api.foojay.io/disco/v3.0/distributions>
@@ -183,12 +183,12 @@ This filter will return the following result:
 ```
 
 
-Tools {#h2-4-tools}
--------------------
+Tools
+-----
 
 As mentioned in the introduction, the Disco API is integrated into many tools you may already be using. But there are even more!
 
-### IDE Plugins {#h3-5-ide-plugins}
+### IDE Plugins
 
 There are several plugins and extensions available that already make use of the Disco API, and that can help you to get the JDK of your choice even faster.
 
@@ -197,7 +197,7 @@ There are several plugins and extensions available that already make use of the 
 * Visual Studio Code: [DiscoVSC](https://marketplace.visualstudio.com/items?itemName=GerritGrunwald.discovsc&ssr=false#overview)
 * [Apache NetBeans](https://netbeans.apache.org/) (no plugin needed, the API is built into it)
 
-### JDK Mon {#h3-6-jdk-mon}
+### JDK Mon
 
 JDKMon is another little tool written in JavaFX that tries to detect all JDKs installed on your machine and will inform you about new updates and vulnerabilities of each OpenJDK distribution it has found. In addition, JDKMon is also able to monitor JavaFX SDK versions that are installed on your machine. You can download the latest version from the [GitHub repository](https://github.com/HanSolo/JDKMon/releases).
 
@@ -213,7 +213,7 @@ JDKMon is another little tool written in JavaFX that tries to detect all JDKs in
  </figure>
 </figure>
 
-### GitHub Actions {#h3-7-github-actions}
+### GitHub Actions
 
 To be able to use any OpenJDK distribution in a GitHub Action, you can't use the well-known `actions/setup-java@v2` as it only allows you to use the adopt, adopt-openj9, and zulu distributions. Thanks to `foojay2020/setup-java@disco`, that works with the same arguments, you can use all the distributions that are available in the Disco API.
 
@@ -245,8 +245,8 @@ You can check all available combinations on the [Disco Testing Matrix](https://g
  </figure>
 </figure>
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Foojay wants to support the OpenJDK community not only with blogs, podcasts, command line options, and other readable content.
 

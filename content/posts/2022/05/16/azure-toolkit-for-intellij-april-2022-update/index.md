@@ -31,8 +31,8 @@ In addition, we'll share some new features and enhancements of our latest releas
 
 So let us get right into it...
 
-Roadmap {#h2-0-roadmap}
------------------------
+Roadmap
+-------
 
 We are excited to announce our roadmap for the next few months.
 
@@ -40,10 +40,10 @@ Here is a picture that summarizes our investment areas:
 
 ![Toolkit roadmap 2022](Toolkit-roadmap-2022-1024x576.png)
 
-What is upcoming? {#h2-1-what-is-upcoming}
-------------------------------------------
+What is upcoming?
+-----------------
 
-### Integration with Azure Services {#h3-2-integration-with-azure-services}
+### Integration with Azure Services
 
 Our focus has always been to continually integrate with as many Azure services as possible.
 
@@ -51,7 +51,7 @@ We have been constantly hearing from customers demand to support additional Azur
 
 In addition, we will continue to keep up to date with latest Azure features.
 
-### User Experience Improvement {#h3-3-user-experience-improvement}
+### User Experience Improvement
 
 Our next area of investment is user experience. To help you manage your Azure resources easily, we will introduce a new application-centric view. Our goal is to allow all your Azure resources through the applications instead of resources (of course you can choose your preference).
 
@@ -59,34 +59,34 @@ In addition, we realize that the getting started experience is critical for deve
 
 We will also explore the possibility of integrating with Resource Connector for local and cloud development. Last but not least, we will provide better channel to provide feedback and direct users to our documentation.
 
-### Cloud-native Development {#h3-4-cloud-native-development}
+### Cloud-native Development
 
 Cloud-native has been the most talked-about topic recently in the industry.
 
 To keep up with developer's need in this area, we are planning on adding more cloud-native based samples and project scaffolding including Spring Boot for the upcoming quarters.
 
-### Inner-loop Optimization for Azure-based Code {#h3-5-inner-loop-optimization-for-azure-based-code}
+### Inner-loop Optimization for Azure-based Code
 
 Inner-loop optimization is also one of the top priorities in our investments in our investment. Our team is working on improvements in coding, debugging, and monitoring experiences in our toolkit. For coding experience, we plan to add more samples for Azure SDK, and provide better code analysis/completion support for Azure related code and configuration.
 
 In terms of debugging, we will keep providing some additional support, such as remote debugging. In addition, we plan to support log streaming on Azure services where applicable. Besides, we also plan to better support for Azure Monitor and logs as well as support Azure Storage Explorer.
 
-### Performance \& Reliability {#h3-6-performance-reliability}
+### Performance \& Reliability
 
 Performance matters. In order to provide better performance and reliability for users, we are aiming to optimize login performance before using Azure services and improve the stability with our toolkit.
 
-### Deep Integration with Java on Azure Services {#h3-7-deep-integration-with-java-on-azure-services}
+### Deep Integration with Java on Azure Services
 
 In addition to the areas above, we also plan to make deeper integration with key Azure services for Java workloads. For example, we are targeting to support remote debugging on Azure Spring Cloud in our toolkit.
 
 We hope these improvements will greatly increase developer's productivity when working with Azure applications in IntelliJ IDEA. Let us know if you have any feedback or questions regarding the roadmap above!
 
-New Features in April {#h2-8-new-features-in-april}
----------------------------------------------------
+New Features in April
+---------------------
 
 Besides the roadmap, we also want to share some exciting new product features in the latest release.
 
-### Pin Favorite Resources in Azure Explorer {#h3-9-pin-favorite-resources-in-azure-explorer}
+### Pin Favorite Resources in Azure Explorer
 
 In our roadmap sharing above, we have emphasized the improvements on user experience. With the latest release, developers now can pin any resources into the Favorites root node in Azure explorer.
 
@@ -96,7 +96,7 @@ To use this feature, simply find the resource and right click to choose "Mark as
 
 When you have many resources and only want to focus on some of them, you can manage these resources directly with pinning them into Favorites node rather than finding them level by level in our subscriptions. Please don't hesitate to try this new feature.
 
-### Trigger Function with IntelliJ Native Http Client {#h3-10-trigger-function-with-intellij-native-http-client}
+### Trigger Function with IntelliJ Native Http Client
 
 We have now supported Triggers in Http Functions with IntelliJ Native Http Client Tool when you are using IntelliJ IDEA Ultimate Edition. With this enhancement, developers can manually modify HTTP requests and configure relevant parameters to trigger their Functions.
 
@@ -108,7 +108,7 @@ Finally, you could click the button to run your requests in the IntelliJ IDEA co
 
 ![Toolkit April TriggerFunction](Toolkit-April-TriggerFunction.gif)
 
-### Integration with Azure Storage Explorer {#h3-11-integration-with-azure-storage-explorer}
+### Integration with Azure Storage Explorer
 
 It's common for some developers to navigate between IntelliJ IDEA and Azure Storage Explorer during development cycle, therefore, we have now supported the interaction between them.
 
@@ -124,13 +124,13 @@ In case you fail to open Azure Storage Explorer of Storage Account, we also have
 
 We hope this makes it easier for developers who need to visualize the data in the storage account often.
 
-### Performance Improvement {#h3-12-performance-improvement}
+### Performance Improvement
 
 The latest updates bring the improvements on the performance of authentication as well.
 
 With the recent 3.63.0 Release of Azure Toolkit for IntelliJ, the login performance with Azure CLI has been improved.
 
-### Feedback and Suggestions {#h3-13-feedback-and-suggestions}
+### Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 

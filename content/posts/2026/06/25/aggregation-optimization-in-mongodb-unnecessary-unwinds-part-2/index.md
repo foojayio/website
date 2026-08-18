@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-And why MongoDB might be a better relational database than you ever realized. {#h2-0-and-why-mongodb-might-be-a-better-relational-database-than-you-ever-realized}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+And why MongoDB might be a better relational database than you ever realized.
+-----------------------------------------------------------------------------
 
 <figure class="wp-block-image size-full is-resized">
  <img fetchpriority="high" decoding="async" width="700" height="307" src="tue11.png" alt="" class="wp-image-124328" style="aspect-ratio:2.2802192518511397;width:840px;height:auto">
@@ -38,8 +38,8 @@ And why MongoDB might be a better relational database than you ever realized. {#
 
 In this second part of the series, we'll discuss the first of four changes we made in the process of improving the query performance.
 
-The video streaming service use case: profiles, devices, and device types (a recap) {#h2-1-the-video-streaming-service-use-case-profiles-devices-and-device-types-a-recap}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The video streaming service use case: profiles, devices, and device types (a recap)
+-----------------------------------------------------------------------------------
 
 Based on the use case presented by the customer team during their design review, the scenario we introduced in Part 1 was for a fictional video streaming service. The specific part of the application we were focussing on mapped user profiles to the devices from which those users streamed the service.
 
@@ -65,8 +65,8 @@ With this design, a test run of 300 iterations of the query pipeline split up an
 
 With a target query response time of one second or less, this was obviously problematic.
 
-Optimization, Step 1: removing the $unwind stages {#h2-2-optimization-step-1-removing-the-unwind-stages}
---------------------------------------------------------------------------------------------------------
+Optimization, Step 1: removing the $unwind stages
+-------------------------------------------------
 
 The initial pipeline design included two [$unwind](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-unwind--aggregation-) stages. `$unwind` stages are used to flatten arrays in MongoDB documents, usually so that the data can be reorganized or grouped by a different field.  
 

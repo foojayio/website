@@ -26,12 +26,12 @@ frozen: false
 This is the second follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). It covers the platform APIs that moved into the framework core this release. There are two headline pieces (AI / LLM and the modern OAuth / OIDC stack), and two smaller pieces (WiFi / connectivity and share-sheet result callbacks). This continues the direction the previous release set when we moved NFC, biometrics, and cryptography into the framework core. The full background on that earlier set is in [NFC, Crypto, Biometrics, And A New Build Cloud](https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/).
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
-AI: a first-class LLM client and a ChatView component {#h2-0-ai-a-first-class-llm-client-and-a-chatview-component}
-------------------------------------------------------------------------------------------------------------------
+AI: a first-class LLM client and a ChatView component
+-----------------------------------------------------
 
 [PR #5035](https://github.com/codenameone/CodenameOne/pull/5035) lands the `com.codename1.ai` package, the `ChatView` UI component, the speech and TTS additions, and the build-time dependency injection that wires the native pieces in. [PR #5057](https://github.com/codenameone/CodenameOne/pull/5057) lands the developer-guide chapter and the agent-skill addition so any project generated from the [Initializr](https://www.codenameone.com/initializr/) inherits the new APIs through its bundled `AGENTS.md`.
 
-### LlmClient: the basic chat request {#h3-1-llmclient-the-basic-chat-request}
+### LlmClient: the basic chat request
 
 `com.codename1.ai.LlmClient` is the entry point. The simplest possible use:
 
@@ -57,7 +57,7 @@ client.chat(req).onResult((resp, err) -> {
 
 `LlmClient.openai(...)`, `LlmClient.anthropic(...)`, `LlmClient.gemini(...)`, `LlmClient.ollama(...)`, and `LlmClient.openAiCompatible(baseUrl, apiKey)` are the factories. All five are fully implemented native clients. The OpenAI client also drives Ollama, vLLM, llama.cpp, and any other endpoint that speaks the OpenAI wire format, so most local-model stacks plug in through `LlmClient.openAiCompatible(...)` without a separate driver.
 
-### Streaming chat (what you actually want for chat UIs) {#h3-2-streaming-chat-what-you-actually-want-for-chat-uis}
+### Streaming chat (what you actually want for chat UIs)
 
 For any UI that types responses out token-by-token, the streaming entry point is the one to reach for. The callback fires on the EDT, so you can append directly to a text component:
 
@@ -86,7 +86,7 @@ client.chatStream(req, new ChatStreamListener() {
 
 Under the hood this is a custom `ConnectionRequest` subclass that parses SSE line-by-line and dispatches each delta through `Display.callSerially`. `AsyncResource.cancel()` kills the socket. So a chat UI that has a cancel button is a one-line cancellation.
 
-### Tool calls {#h3-3-tool-calls}
+### Tool calls
 
 If you want the model to call back into your app, `Tool` / `ToolChoice` give you OpenAI-style function calling. Define the tool, hand the model your model and the available tools, and the response surfaces structured `ToolCall` objects you dispatch:
 
@@ -121,7 +121,7 @@ client.chat(req).onResult((resp, err) -> {
 
 The shape mirrors the OpenAI function-calling contract one for one, so anything you have written against the OpenAI API directly maps across without rethinking.
 
-### Embeddings {#h3-4-embeddings}
+### Embeddings
 
 `LlmClient.embed(...)` returns a vector for any input string. Useful for similarity search against a local SQLite store ([tomorrow's post](https://www.codenameone.com/blog/build-time-codegen/) will cover the new ORM that pairs with this):
 
@@ -138,7 +138,7 @@ client.embed(er).onResult((emb, err) -> {
 ```
 
 
-### Image generation {#h3-5-image-generation}
+### Image generation
 
 DALL-E and a Replicate scaffold are surfaced through `ImageGenerator`:
 
@@ -153,7 +153,7 @@ gen.generate("A red bicycle leaning against an olive tree", "1024x1024")
 ```
 
 
-### Working against Ollama in the simulator (no API charges) {#h3-6-working-against-ollama-in-the-simulator-no-api-charges}
+### Working against Ollama in the simulator (no API charges)
 
 `JavaSEPort` pings `localhost:11434` at startup. If it finds Ollama, it sets the `cn1.ai.ollamaDetected` property. With `cn1.ai.simulatorRedirect=auto` (or `=ollama`) every `LlmClient.openai(...)` call routes through the local Ollama endpoint instead of OpenAI's. Production code does not change. The iteration loop, your tests, and your offline debugging stop costing money and stop needing an internet connection.
 
@@ -166,7 +166,7 @@ simulator.cn1.ai.simulatorRedirect=auto
 
 (The `simulator.` prefix scopes the property to the JavaSE simulator path.) Then run Ollama locally with whichever model your code expects (`ollama run llama3.2` or similar) and your existing `LlmClient.openai(...)` calls go to localhost.
 
-### How to handle API keys {#h3-7-how-to-handle-api-keys}
+### How to handle API keys
 
 A direct word on credentials before any of the above sees production. LLM provider API keys (OpenAI, Anthropic, Gemini, your Auth0 / Firebase configs) are bearer tokens with a budget attached. **They must never be checked into source control, embedded in your app binary, or hard-coded in code.** A leaked key can be extracted from any APK or IPA in minutes and used to drain your account.
 
@@ -199,7 +199,7 @@ Your server gates the credential request behind the user's session, your app cac
 
 Existing biometric-gated `SecureStorage` calls keep working unchanged. The new overloads are additive.
 
-### ChatView: a ready-made streaming chat UI {#h3-8-chatview-a-ready-made-streaming-chat-ui}
+### ChatView: a ready-made streaming chat UI
 
 `com.codename1.components.ChatView` is the matching UI component. Scrollable message list, `ChatBubble` for the per-message bubble (theme-aware UIIDs so it picks up the iOS Modern / Material 3 native themes consistently), `ChatInput` for the bottom input bar, and a one-line `bindToLlm(...)` that wires the input to a streaming chat request:
 
@@ -269,7 +269,7 @@ view.setInputListener(userText -> {
 
 `appendToLastMessage(...)` is the streaming entry point; it marshals through `callSerially` so deltas land on the EDT in order. `ConversationStore` persists the thread (the default backing is `Storage`; pluggable via a custom implementation if you would rather keep it in SQLite or push it to your server).
 
-### The AI cn1libs {#h3-9-the-ai-cn1libs}
+### The AI cn1libs
 
 The core LLM stack is paired with a set of opt-in cn1libs that wrap specific on-device capabilities: Google ML Kit features, the TensorFlow Lite runtime, a local Whisper transcription engine, and an on-device Stable Diffusion model. Thirteen new cn1libs ship this release.
 
@@ -470,7 +470,7 @@ StableDiffusion.generate("a teal hot-air balloon over Lisbon, watercolour",
 ```
 
 
-### Why these are cn1libs and not part of the core {#h3-10-why-these-are-cn1libs-and-not-part-of-the-core}
+### Why these are cn1libs and not part of the core
 
 The core gets the AI plumbing every app that adopts AI at all wants: the LLM client, streaming, the chat UI, the secure storage primitive for credentials, the simulator Ollama redirect for offline iteration.
 
@@ -480,12 +480,12 @@ The Stable Diffusion cn1lib in particular is large enough that the cloud build s
 
 The corresponding chapter, including the full `LlmClient` API table, the `ChatView` reference, the `SecureStorage` overloads, the simulator Ollama redirect, and the full cn1lib coverage, is at [AI, Chat UI, and Speech](https://www.codenameone.com/developer-guide/#_ai_chat_ui_and_speech) in the developer guide.
 
-OAuth and OIDC: the modern identity stack {#h2-11-oauth-and-oidc-the-modern-identity-stack}
--------------------------------------------------------------------------------------------
+OAuth and OIDC: the modern identity stack
+-----------------------------------------
 
 The in-app-WebView `Oauth2` flow that Codename One has shipped since approximately forever was the way every cross-platform mobile framework solved "sign in with Google / Facebook / Microsoft" in the 2010s. It is also the way every one of those identity providers stopped wanting you to solve it. Google has been blocking embedded user agents for years. Apple does not want third-party apps wrapping the Apple ID flow in a `WKWebView`. Microsoft and Facebook joined the chorus. The right answer is the system browser: `ASWebAuthenticationSession` on iOS, Custom Tabs on Android, with PKCE on the wire. That is what [PR #5018](https://github.com/codenameone/CodenameOne/pull/5018) lands. [PR #5039](https://github.com/codenameone/CodenameOne/pull/5039) adds a portable WebAuthn / passkey client on top.
 
-### Sign in with Google (or any OIDC provider) {#h3-12-sign-in-with-google-or-any-oidc-provider}
+### Sign in with Google (or any OIDC provider)
 
 `com.codename1.io.oidc.OidcClient` is the entry point. Point it at the discovery URL of an OIDC provider, hand it the client id and the redirect URI you registered with the provider, ask for tokens:
 
@@ -517,7 +517,7 @@ Discovery JSON parsed and cached. PKCE S256 challenge generated and verified. St
 
 On iOS the system-browser piece routes through `ASWebAuthenticationSession`. On Android through `androidx.browser.customtabs` with a plain `ACTION_VIEW` fallback for the rare device with no Custom Tabs provider. `AuthenticationServices.framework` and `androidx.browser:browser` are auto-linked when the classpath scanner sees `OidcClient` in use.
 
-### Provider wrappers: Google, Apple, Microsoft, Facebook, Auth0, Firebase {#h3-13-provider-wrappers-google-apple-microsoft-facebook-auth0-firebase}
+### Provider wrappers: Google, Apple, Microsoft, Facebook, Auth0, Firebase
 
 If you would rather not configure OIDC by hand, the existing social classes get a `signIn(...)` method that drives the same stack with the provider's issuer URL pre-wired:
 
@@ -540,7 +540,7 @@ Auth0Connect.signIn("tenant.auth0.com", clientId, redirectUri,
 
 `FacebookConnect.signIn(...)` follows the same shape against the Facebook OIDC endpoint. `FirebaseAuth` covers the REST-based Firebase auth surface (email / password, IdP token exchange, refresh) which sits underneath any provider hand-off you might want to drive from app code.
 
-### Sign in with Apple {#h3-14-sign-in-with-apple}
+### Sign in with Apple
 
 Sign in with Apple is required on iOS for apps that offer any other social login, and on Android it must fall through to a web flow. `com.codename1.social.AppleSignIn` handles both transparently:
 
@@ -557,7 +557,7 @@ AppleSignIn.signIn()
 
 On iOS 13 and later this drops directly into the native Apple sheet via `ASAuthorizationAppleIDProvider`. On non-iOS platforms it falls through to the same OIDC web flow as everything else, so a single line of app code does the right thing on every port. The Maven plugin injects the `com.apple.developer.applesignin` entitlement on iOS when it sees `AppleSignIn` in use; Android does not see it because it is not there.
 
-### Migration from the legacy Oauth2 {#h3-15-migration-from-the-legacy-oauth2}
+### Migration from the legacy Oauth2
 
 `com.codename1.io.Oauth2` is now deprecated. Existing code still compiles, but the migration is short and almost always shorter than what it replaces:
 
@@ -586,7 +586,7 @@ OidcClient.builder()
 
 You stop owning the browser. The OS owns it. The cookies live in the platform's authentication session. The user gets the same login experience they have everywhere else on their device.
 
-### WebAuthn / passkeys {#h3-16-webauthn-passkeys}
+### WebAuthn / passkeys
 
 [PR #5039](https://github.com/codenameone/CodenameOne/pull/5039) layers a portable WebAuthn client on top:
 
@@ -608,8 +608,8 @@ One thing worth pulling out before you reach for it: if you sign in via OIDC aga
 
 Full chapter: [Authentication and Identity](https://www.codenameone.com/developer-guide/#_authentication_and_identity).
 
-Connectivity: WiFi, Bonjour, USB, network-type listeners {#h2-17-connectivity-wifi-bonjour-usb-network-type-listeners}
-----------------------------------------------------------------------------------------------------------------------
+Connectivity: WiFi, Bonjour, USB, network-type listeners
+--------------------------------------------------------
 
 [PR #5021](https://github.com/codenameone/CodenameOne/pull/5021) lands four packages for apps that need to do more with the network than open an HTTP socket. The shape:
 
@@ -646,8 +646,8 @@ Three new compile-time defines (`CN1_INCLUDE_WIFI_INFO`, `CN1_INCLUDE_HOTSPOT`, 
 
 Full reference: [Network Connectivity](https://www.codenameone.com/developer-guide/#_network_connectivity).
 
-Share-sheet result callbacks {#h2-18-share-sheet-result-callbacks}
-------------------------------------------------------------------
+Share-sheet result callbacks
+----------------------------
 
 [PR #5036](https://github.com/codenameone/CodenameOne/pull/5036) closes a small but persistent gap: `Display.share(...)` and `ShareButton` finally tell you what the user did with the share sheet:
 
@@ -667,7 +667,7 @@ btn.setShareResultListener(result -> {
 
 iOS routes through `UIActivityViewController.completionWithItemsHandler`; Android through `Intent.createChooser` with an `IntentSender` callback (API 22+). The framework normalizes the platform values into `SHARED_TO(packageName)`, `DISMISSED`, or `FAILED`.
 
-### Appearing in other apps' share menus {#h3-19-appearing-in-other-apps-share-menus}
+### Appearing in other apps' share menus
 
 The other half of sharing is the inverse direction: not "let the user share *from* your app", but "let your app *receive* content other apps share". If a user is in Safari, Photos, or Mail and taps the share icon, your app should be able to appear as a target there alongside Messages, WhatsApp, and Instagram. On iOS that requires a separate Share Extension target inside the `.ipa`, with its own bundle, its own `Info.plist`, an App Group string that links it to the host app, and a `ShareViewController` that handles the incoming payload. Historically the recommendation was to bootstrap that target by hand in Xcode, copy the resulting files into the Codename One project under `ios/app_extensions/`, and let the build server's extractor consume them. It worked, but it was a workflow most teams put off because the setup is fiddly.
 
@@ -703,8 +703,8 @@ if (shared != null) {
 
 After the next cloud or local build, your app appears in the iOS share sheet for the content types you declared. No Xcode work, no hand-rolled plist, no App Group string typed in three places. The build-time tooling owns it.
 
-Wrapping up {#h2-20-wrapping-up}
---------------------------------
+Wrapping up
+-----------
 
 [Tomorrow's post](https://www.codenameone.com/blog/build-time-codegen/) covers the architectural change in this release: a build-time bytecode annotation framework, the declarative router that is its first consumer, the SQLite ORM and JSON / XML mappers and component binder built on the same SPI, and the build-time SVG / Lottie transcoder that ships in the same release for related reasons.
 

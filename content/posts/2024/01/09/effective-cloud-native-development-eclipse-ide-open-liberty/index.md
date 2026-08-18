@@ -35,8 +35,8 @@ The Liberty Tools for Eclipse IDE plugin can help with all stages of the extende
 
 <br />
 
-Key capabilities of Liberty Tools {#h2-0-key-capabilities-of-liberty-tools}
----------------------------------------------------------------------------
+Key capabilities of Liberty Tools
+---------------------------------
 
 These tools introduce capabilities that really empower you to develop, test, debug, and manage applications without having to leave your IDE, including:
 
@@ -48,7 +48,7 @@ These tools introduce capabilities that really empower you to develop, test, deb
 
 In this article, we'll dive further into these capabilities. If you want to view a deep dive tutorial on this tool, then watch the [Developer Deep Dive of Liberty Tools for Eclipse IDE](https://ibm.biz/LibertyToolsForEclipseVideo) video. This video demonstrates many of the features and capabilities referenced in this article.
 
-### View and access all detected Liberty projects in your IDE in the Liberty Dashboard {#h3-1-view-and-access-all-detected-liberty-projects-in-your-ide-in-the-liberty-dashboard}
+### View and access all detected Liberty projects in your IDE in the Liberty Dashboard
 
 Liberty Tools automatically detects Liberty Maven or Gradle projects. These projects are added to a special Liberty Dashboard view in the Eclipse IDE. This can be accessed through the Open Liberty logo available in the top menu of the IDE. From this dashboard, you can access a command menu to manage your Liberty projects. Now you don't have to spend time creating and managing Liberty instances, which frees up your time to focus on the code itself.
 
@@ -58,7 +58,7 @@ If you're used to using actions in the Eclipse IDE through the project explorer 
 
 ![Screenshot of Liberty Tools run as options in the Eclipse IDE](EclipseLibertyTools3-700x429.png)
 
-### Rapid, iterative development with Liberty dev mode {#h3-2-rapid-iterative-development-with-liberty-dev-mode}
+### Rapid, iterative development with Liberty dev mode
 
 Liberty dev mode automatically detects, recompiles, and deploys code changes whenever you save a new change. It also runs unit and integration tests on demand and can attach a debugger to the running server to step through your code at any time. Liberty Tools brings these dev mode features directly into the command menu for the Liberty projects in your editor. With just a few clicks, you can start and stop your Liberty application, run tests, and view test reports.
 
@@ -70,13 +70,13 @@ In addition to the standard **Start** action, which enables Liberty to run in de
 
 You can also run your application in dev mode in a container through the **Start in container** action. When dev mode runs with container support, it builds a container image and runs the container. For more information on dev mode for containers, check out the [Liberty Maven devc goal](https://github.com/OpenLiberty/ci.maven/blob/main/docs/dev.md#devc-container-mode) or the [Liberty Gradle libertyDevc task](https://github.com/OpenLiberty/ci.gradle/blob/main/docs/libertyDev.md#libertydevc-task-container-mode).
 
-### Effective testing and debugging within the IDE {#h3-3-effective-testing-and-debugging-within-the-ide}
+### Effective testing and debugging within the IDE
 
 When your application is running on Liberty using dev mode, you can easily run the tests provided by your application. To do this, select the **Run tests** command for your application in the Liberty Dashboard, or alternatively, you can simply press **Enter** in the terminal running Liberty in dev mode. Additionally, you can also configure Liberty to automatically re-run tests after you've made changes. After the application tests finish running, you can access the test reports that were generated. The reports vary depending on what build tool you have used.
 
 You can follow the steps in the Liberty Tools user guide to [run your application tests](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#running-tests) and [view your application test results](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#viewing-test-reports). Or, check out the following video to see for yourself just how easy this can be with Liberty Tools.
 
-### Editing assistance for Liberty configuration files {#h3-4-editing-assistance-for-liberty-configuration-files}
+### Editing assistance for Liberty configuration files
 
 You can also use Liberty Tools to get editing assistance, such as [code completion, diagnostics, and quick-fixes](https://github.com/OpenLiberty/liberty-language-server#features), for Liberty server.xml, server.env, and bootstrap.properties files.
 
@@ -84,7 +84,7 @@ To use Liberty-specific code completion, press **Ctrl + Space**  or **Cmd 
 
 To see an example of what this editing assistance is like, try following the steps in the Liberty Tools user guide for [editing assistance for Liberty configuration files](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#configuring-a-liberty-server).
 
-### Coding assistance for Jakarta EE and MicroProfile APIs {#h3-5-coding-assistance-for-jakarta-ee-and-microprofile-apis}
+### Coding assistance for Jakarta EE and MicroProfile APIs
 
 Another feature enabled through the Liberty Tools plugin is coding assistance. This provides helpful features such as code completion, diagnostics, and quick-fixes for writing Jave code and editing configuration files for Jakarta EE and MicroProfile APIs.
 
@@ -94,8 +94,8 @@ You can see this coding assistance in action with Liberty Tools for Eclipse IDE 
 
 You can follow the steps in the Liberty Tools user guide to [developing with Jakarta EE](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#developing-with-jakarta-ee) and [developing with MicroProfile](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#developing-with-microprofile) APIs with coding assistance.
 
-Start using Liberty Tools in the Eclipse IDE {#h2-6-start-using-liberty-tools-in-the-eclipse-ide}
--------------------------------------------------------------------------------------------------
+Start using Liberty Tools in the Eclipse IDE
+--------------------------------------------
 
 Before you can use Liberty Tools in the Eclipse IDE, you must make sure that you satisfy the necessary [software requirements](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#software-requirements), which you can find in the User Guide. These requirements include the minimum version of Java and the Eclipse IDE that are needed. You'll also need to ensure that you have either the [Liberty Maven plugin](https://github.com/OpenLiberty/ci.maven#configuration) or [Liberty Gradle plugin](https://github.com/OpenLiberty/ci.gradle#adding-the-plugin-to-the-build-script) configured in the `pom.xml` or `build.gradle` file for your application project. Use the most recent version of the plugin to get the latest enhancements and fixes.
 
@@ -107,9 +107,9 @@ If you do not have any applications in your current workspace, you can [create
 
 ![Screenshot of Liberty Tools dashboard refresh icon highlighted in the Eclipse IDE](EclipseLibertyTools4-700x420.png)
 
-Summary and next steps {#h2-7-summary-and-next-steps}
------------------------------------------------------
+Summary and next steps
+----------------------
 
 With the Liberty Tools plugin, you can efficiently develop, deploy, debug, test, and manage your cloud-native Java applications all within your favourite Eclipse IDE.
 
-Now that you have Liberty Tools set up in your IDE, why not try using it with some of the [Open Liberty guides or tutorials](https://openliberty.io/guides/?utm_source=ibmd&amp;utm_medium=article&amp;utm_content=idevscode)?
+Now that you have Liberty Tools set up in your IDE, why not try using it with some of the [Open Liberty guides or tutorials](https://openliberty.io/guides/?utm_source=ibmd&utm_medium=article&utm_content=idevscode)?

@@ -23,7 +23,7 @@ frozen: false
 
 > Good design's not about what medium you're working in. It's about thinking hard about what you want to do and what you have to work with before you start." -- Susan Kare [\[6\]](https://en.wikipedia.org/wiki/Susan_Kare "Susan Kare")
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 Welcome to *Creating a JavaFX World Clock from Scratch (Part 1)*! In this series of blog entries I would like to show you how I created a "sci-fi" looking world clock that happens to be a cross-platform Java desktop application.
 
@@ -37,7 +37,7 @@ Before we begin, I would like to mention some assumptions the reader (you) may e
 
 If you are a novice or an advanced Java developer, you can expect brief code snippets and links to GitHub in which you can dig deeper into the code. My intent is to make each blog entry concise and each concept and strategy easy to recall. If you are impatient and just want to see the code head over to GitHub at [](https://github.com/carldea/worldclock)<https://github.com/carldea/worldclock>
 
-### What am I trying to solve? {#h3-1-what-am-i-trying-to-solve}
+### What am I trying to solve?
 
 We are all adjusting to a new normal[\[1\]](https://foojay.io/today/covid-19-time-series-analysis-with-software-ekg/ "JavaFX Covid 19 tracker"). Working remotely affords us the opportunity to work from home and attend virtual meetings and conferences. Even though this can be super convenient, developing a tool that can help us to be mindful of others (my coworkers) in different timezones is definitly a plus. Besides, it's fun to design and develop applications yourself.
 
@@ -50,7 +50,7 @@ We are all adjusting to a new normal[\[1\]](https://foojay.io/today/covid-19-tim
 * Display temperature
 * Display a map component
 
-### Get Inspired, Experiment \& Repeat {#h3-2-get-inspired-experiment-repeat}
+### Get Inspired, Experiment \& Repeat
 
 When designing applications I usually ask myself this question, "*What kind of design look am I trying to achieve?*"
 
@@ -156,7 +156,7 @@ An excerpt of the JavaFX Scene Builder's **FXML** representing the hour hand sha
 
 Looking at the XML above you'll notice the three children nodes Circle, Arc, and Circle representing the hour hand track, hour hand arc, and hour hand tip respectively. Each shape element will have its own styling attributes that I will describe in more details below.
 
-### Hour Hand Track {#h3-3-hour-hand-track}
+### Hour Hand Track
 
 The hour hand track is a subtle dark circle. This is layered underneath the hour hand arc shape.
 
@@ -167,7 +167,7 @@ The hour hand track is a subtle dark circle. This is layered underneath the hour
 | stroke      | #403939db | gray black                         |
 | strokeWidth | 4.0       | thick line stroke                  |
 
-### Hour Hand Arc {#h3-4-hour-hand-arc}
+### Hour Hand Arc
 
 The hour hand Arc is a glowing orange colored open arc with a transparent fill color. Layered over the hour hand track (circle) shape.
 
@@ -187,7 +187,7 @@ The hour hand Arc is a glowing orange colored open arc with a transparent fill c
 | effect           | Glow level 0.34 | make it look neon                                            |
 | input effect     | Bloom 1.0       | make it brighter                                             |
 
-### Hour Hand Tip {#h3-5-hour-hand-tip}
+### Hour Hand Tip
 
 The hour hand tip is a glowing orange colored ball shape with a radial gradient fill color. Layered over the hour hand Arc's end and over the hour hand track.
 
@@ -224,7 +224,7 @@ While this looks cool so far, the clock face isn't able to move its arms (minute
 
 In [Part 2](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-2/ "Part 2") I will show you how to make the world clock actually function.
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 In part 1 of this blog series, I introduced how I wanted the world clock to look and to behave.
 

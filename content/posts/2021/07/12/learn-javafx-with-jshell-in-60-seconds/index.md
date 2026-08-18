@@ -34,8 +34,8 @@ In the classic science fiction movie, The Matrix, there's a cool special effect 
 
 In this article, I will demonstrate how to use JShell and JavaFX in an interactive way. No IDE or Build tools are needed.
 
-Requirements {#h2-0-requirements}
----------------------------------
+Requirements
+------------
 
 Java 11 or greater (JDK builds containing JavaFX modules).
 
@@ -45,8 +45,8 @@ To jump right into the code, as a Maven project you'll want to clone the project
 
 Before we start the stop watch here's a quick introduction to jshell.
 
-Introduction to JShell {#h2-1-introduction-to-jshell}
------------------------------------------------------
+Introduction to JShell
+----------------------
 
 Once you've installed Java 11 or greater the JDK provides a command line tool for the Java language called `jshell`. Similar to Python's command line REPL tool, you will be able to interact with a Java runtime environment.
 
@@ -160,8 +160,8 @@ $6 ==> true
 
 Now that you are more familiar with jshell let's see how to launch a JavaFX application.
 
-JShell in 60 Seconds {#h2-2-jshell-in-60-seconds}
--------------------------------------------------
+JShell in 60 Seconds
+--------------------
 
 In the following steps you will learn how to run a JavaFX application and interact with it during runtime using JShell.
 
@@ -465,8 +465,8 @@ Another convenience is the ability to recall previously used commands. By using 
 
 To do simple edits, you can also type the command `/edit`. This will launch an simple text editor type UI allowing you to edit the current program in memory (current session). Subsequently, you can type the command `/save` to save changes.
 
-Observations {#h2-3-observations}
----------------------------------
+Observations
+------------
 
 If you run the application by entering `new Main().main(null)` on the jshell prompt instead of a `new Thread(...).start()` you'll notice the jshell command line will **block** (not allowing you to type or interact). Therefore, I included a step to create a thread instance to run separately.
 
@@ -487,8 +487,8 @@ jshell> Main.main(null)
 
 ```
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 We started with an introduction of the basics of using jshell. Next, you got a chance to learn how to run a JavaFX application file from a terminal command prompt and from within jshell's command prompt.
 

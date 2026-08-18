@@ -22,8 +22,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Two unit-testing approaches explained! {#h2-0-two-unit-testing-approaches-explained}
-------------------------------------------------------------------------------------
+Two unit-testing approaches explained!
+--------------------------------------
 
 Pick any topic around testing and there will be at least two very contrary approaches that seem to be at odds.
 
@@ -33,8 +33,8 @@ One of the many points of discussion around unit testing, and in particular TDD,
 
 Specifically: What can or should be considered the right size of a unit with regard to what is to be tested in isolation.
 
-What is a Unit? {#h2-1-what-is-a-unit}
---------------------------------------
+What is a Unit?
+---------------
 
 A Unit could be a method, a class or even a cohesive group of classes, that together compose a feature, as a unit.
 > \[...\] Object-oriented design tends to treat a class as the unit, procedural or functional approaches might consider a single function as a unit. But really it's a situational thing - the team decides what makes sense to be a unit for the purposes of their understanding of the system and its testing. Although I start with the notion of the unit being a class, I often take a bunch of closely related classes and treat them as a single unit. Rarely I might take a subset of methods in a class as a unit. However you define it doesn't really matter.
@@ -48,8 +48,8 @@ This makes sense in some context to make a specific approach more catchable, but
 
 Although everything we discuss here makes sense particularly in the context of TDD, for this article, we solely focus on how to define unit boundaries for tests rather than discussing TDD as an approach.
 
-Unit testing, two extremes! {#h2-2-unit-testing-two-extremes}
--------------------------------------------------------------
+Unit testing, two extremes!
+---------------------------
 
 We present two approaches for defining units and illustrate how these approaches to testing differ based on where we place boundaries for testing.
 
@@ -79,8 +79,8 @@ Ideally starting with the test and then building the matching behaviour, either 
 
 Both approaches we describe here follow a different approach to achieving that and are applied at different levels of granularity and as such have different benefits and drawbacks.
 
-The running example {#h2-3-the-running-example}
------------------------------------------------
+The running example
+-------------------
 
 Before we take a look at both approaches, let us introduce our running example: a simple calculator
 
@@ -135,7 +135,7 @@ public class Main {
 ```
 
 
-### Implementation {#h3-4-implementation}
+### Implementation
 
 Note: The implementation as discussed here, is intentionally more complex than necessary just as a means for us to highlight the differences between the **fine grained** and **coarse grained** units.
 
@@ -274,8 +274,8 @@ You can find code from the example here: <https://github.com/sebastiankonieczek/
 
 Now, let's dive into the first approach of testing this library.
 
-The Fine Grained Style {#h2-5-the-fine-grained-style}
------------------------------------------------------
+The Fine Grained Style
+----------------------
 
 To follow along, you can checkout the branch "fine-grained-testing" in the repository linked above for the full test implementation.
 
@@ -482,8 +482,8 @@ We have two tests here.
 
 Now let us go on with the coarse grained style.
 
-The coarse grained style {#h2-6-the-coarse-grained-style}
----------------------------------------------------------
+The coarse grained style
+------------------------
 
 We named this approach to defining units **coarse grained style** , because we try to build larger units which we will test.  
 
@@ -571,10 +571,10 @@ It is not the case in our example. But this coarse grained style does not confli
 
 Think for instance of a module that retrieves and/or stores data from an external datastore. That datastore could still be provided by a test double. On that test double interactions could be validated, if needed, or it could simply provide prepared data for the test. At the same time which classes exactly would interact with the external collaborator of the module is not constrained by the test.
 
-Pros and Cons of each approach {#h2-7-pros-and-cons-of-each-approach}
----------------------------------------------------------------------
+Pros and Cons of each approach
+------------------------------
 
-### The fine grained style: {#h3-8-the-fine-grained-style}
+### The fine grained style:
 
 #### Pros:
 
@@ -592,7 +592,7 @@ The fine grained style also makes you a little less flexible as the tests and th
 
 The fine grained style produces a lot of test classes. This can make it harder to understand the connections of the single classes and the functionality of the public api.
 
-### The coarse grained style: {#h3-9-the-coarse-grained-style}
+### The coarse grained style:
 
 #### Pros:
 
@@ -612,8 +612,8 @@ When a lot of external collaborators come into play while using the coarse grain
 
 The same holds true for complex input structures or a combination of both.
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 In this article we contrasted two approaches to defining units of abstraction in your code and tests. Which one should you use in the end? As many things in this profession, the answer is, it depends.
 

@@ -30,8 +30,8 @@ This is the second article of the series *How Gradle Works*.
 
 In this article, we'll explain what happens inside the `Gradle Daemon JVM`.
 
-Why Do We Need Gradle Daemon? {#h2-0-why-do-we-need-gradle-daemon}
-------------------------------------------------------------------
+Why Do We Need Gradle Daemon?
+-----------------------------
 
 In [the last article](https://foojay.io/today/how-gradle-works-startup/), we mentioned that Gradle starts a `Gradle Daemon JVM` ("the daemon") to run the build.
 
@@ -42,8 +42,8 @@ The Gradle daemon was introduced in Gradle 3.0 and matured over the years.
 
 It's enabled by default, and we don't recommend disabling it under any circumstances.
 
-What Happens in the Daemon? {#h2-1-what-happens-in-the-daemon}
---------------------------------------------------------------
+What Happens in the Daemon?
+---------------------------
 
 After `Gradle Client JVM` ("the client") connects to a compatible idle daemon, it sends the necessary build information (command line arguments, project directory, env variables, etc.) to the daemon.
 
@@ -57,7 +57,7 @@ But what exactly happens inside the daemon?
 
 [The userguide](https://docs.gradle.org/current/userguide/build_lifecycle.html) explains that there are three phases in a Gradle build: `Initialization`, `Configuration`, and `Execution`.
 
-### Initialization Phase: Creation of Build Objects {#h3-2-initialization-phase-creation-of-build-objects}
+### Initialization Phase: Creation of Build Objects
 
 Now that the daemon knows everything about the build, it starts creating the internal representations for the build.
 
@@ -75,7 +75,7 @@ There is a [Project](https://github.com/gradle/gradle/blob/6121fa83ce4ac07a27ee0
 
 This means these objects can be later interacted with in the build script. For example, when we say `println(name)` in a build script, we are actually calling [`Project.getName()` method](https://github.com/gradle/gradle/blob/6121fa83ce4ac07a27ee043d8e69b0f5f99d1c49/subprojects/core-api/src/main/java/org/gradle/api/Project.java#L311) on the `Project` instance.
 
-### Configuration Phase: Build Script Execution {#h3-3-configuration-phase-build-script-execution}
+### Configuration Phase: Build Script Execution
 
 After the necessary JVM objects are created, Gradle will load and execute the build scripts in the daemon.
 
@@ -117,7 +117,7 @@ After the build script execution finishes, the build data structures are configu
 
 Now we are ready for the next phase: select some tasks and execute them.
 
-### Execution Phase: Execution of Selected Tasks {#h3-4-execution-phase-execution-of-selected-tasks}
+### Execution Phase: Execution of Selected Tasks
 
 After the configuration phase, Gradle has all the necessary data for the build stored in the daemon JVM.
 
@@ -159,8 +159,8 @@ After that, the `Gradle Client JVM` disconnects from the daemon and exits.
 
 The daemon is now ready for the next build invocation.
 
-What's Next {#h2-5-what-s-next}
--------------------------------
+What's Next
+-----------
 
 In the next article in the series, we'll explain what happens under the hood of build script execution.
 

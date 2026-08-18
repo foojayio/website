@@ -23,8 +23,8 @@ In [the previous article](https://foojay.io/today/java-thread-programming-part-3
 
 We will discuss another similar situation in this article. However, we will use symbols and pseudocode to explain this.
 
-Symbols {#h2-0-symbols}
------------------------
+Symbols
+-------
 
 Let's define the symbols first.
 
@@ -39,8 +39,8 @@ In pseudocode, we will use thread number and line number as well. For example, `
 
 The local variables will have defaults unless they are initialized with a value. For example, for `Boolean`, the default value is `false`; for `integer`, the default value is `0`.
 
-Pseudocode {#h2-1-pseudocode}
------------------------------
+Pseudocode
+----------
 
 If we turn the program that we discussed [in the last article](https://foojay.io/?p=50525&preview_id=50525&preview_nonce=2c6db1d17c&preview=true) into symbols and pseudocode, we have the following:
 
@@ -111,8 +111,8 @@ The above output doesn't depend on the last two executions, `1.3`. or `2.3`.
 
 So the output will remain the same if though `2.3` executes first.
 
-Execution Order Optimization {#h2-2-execution-order-optimization}
------------------------------------------------------------------
+Execution Order Optimization
+----------------------------
 
 So far, we have have three execution orders, and it seems only the three outputs mentioned above are possible.
 
@@ -232,8 +232,8 @@ The above example can be found in [the Java language specification](https://docs
 
 From the above discussion, we have understood that the execution order can be different to the program order. The execution order depends on the compiler's optimization technique; it can further rely on the Java virtual machine and the CPU itself. Thus the output of a program becomes uncertain. In a multithread environment, we call this a **data race**.
 
-Benefits and Drawbacks of Volatility {#h2-3-benefits-and-drawbacks-of-volatility}
----------------------------------------------------------------------------------
+Benefits and Drawbacks of Volatility
+------------------------------------
 
 Now the question is, what can be the solution to this problem. Well, the solution is relatively straightforward: [we simply use the keyword "volatile"](https://foojay.io/today/java-thread-programming-part-3/).
 

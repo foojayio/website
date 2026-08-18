@@ -41,12 +41,12 @@ This part of the debugging series is designed for developers looking to effectiv
 
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-Introduction to Kubernetes and Distributed Systems {#h2-0-introduction-to-kubernetes-and-distributed-systems}
--------------------------------------------------------------------------------------------------------------
+Introduction to Kubernetes and Distributed Systems
+--------------------------------------------------
 
 Kubernetes, while often discussed in the context of cloud computing and large-scale operations, is not just a tool for managing containers. Its principles apply broadly to all large-scale distributed systems. In this post I want to explore Kubernetes from the ground up, emphasizing its role in solving real-world problems faced by developers in production environments.
 
-### The Evolution of Deployment Technologies {#h3-1-the-evolution-of-deployment-technologies}
+### The Evolution of Deployment Technologies
 
 Before Kubernetes, the deployment landscape was markedly different. Understanding this evolution helps appreciate the challenges Kubernetes aims to solve. The image below represents the road to Kubernetes and the technologies we passed along the way.
 
@@ -56,7 +56,7 @@ In the image we can see that initially, applications were deployed directly onto
 
 Imagine a retail company preparing for the holiday season surge. Each time they needed to handle increased traffic, they would manually set up additional servers. This was not only time-consuming but also prone to human error. Scaling down after the peak period was equally cumbersome, leading to wasted resources.
 
-### Enter Virtualization {#h3-2-enter-virtualization}
+### Enter Virtualization
 
 Virtualization technology introduced a layer that emulated the hardware, allowing for easier replication and migration of environments but at the cost of performance. However, fast virtualization enabled the cloud revolution. It let companies like Amazon lease its servers at scale without compromising their own workloads.
 
@@ -64,7 +64,7 @@ Virtualization involves running multiple operating systems on a single physical 
 
 Note that virtualization is often referred to as "virtual machines", I chose to avoid that terminology due to the focus of this blog on Java and the JVM where a virtual machine is typically a reference to the Java Virtual Machine (JVM).
 
-### Rise of Containers {#h3-3-rise-of-containers}
+### Rise of Containers
 
 Containers emerged as a lightweight alternative to full virtualization. Tools like Docker standardized container formats, making it easier to create and manage containers without the overhead associated with traditional virtual machines. Containers encapsulate an application's runtime environment, making them portable and efficient.
 
@@ -76,7 +76,7 @@ Containers operate using several key Linux kernel features:
 * **Control Groups (cgroups)**: Cgroups further enhance the functionality of containers by limiting and prioritizing the hardware resources a container can use. This includes parameters such as CPU time, system memory, network bandwidth, or combinations of these resources. By controlling resource allocation, cgroups ensure that containers do not interfere with each other's performance and maintain the efficiency of the underlying server.
 * **Union File Systems**: Containers use union file systems, such as OverlayFS, to layer files and directories in a lightweight and efficient manner. This system allows containers to appear as though they are running on their own operating system and file system, while they are actually sharing the host system's kernel and base OS image.
 
-### Rise of Orchestration {#h3-4-rise-of-orchestration}
+### Rise of Orchestration
 
 As containers began to replace virtualization due to their efficiency and speed, developers and organizations rapidly adopted them for a wide range of applications. However, this surge in container usage brought with it a new set of challenges, primarily related to managing large numbers of containers at scale.
 
@@ -89,8 +89,8 @@ While containers are incredibly efficient and portable, they introduce complexit
 
 To address these challenges, the concept of container orchestration was developed. Orchestration automates the scheduling, deployment, scaling, networking, and lifecycle management of containers, which are often organized into microservices. Efficient orchestration tools help ensure that the entire container ecosystem is healthy and that applications are running as expected.
 
-Enter Kubernetes {#h2-5-enter-kubernetes}
------------------------------------------
+Enter Kubernetes
+----------------
 
 Among the orchestration tools, Kubernetes emerged as a frontrunner due to its robust capabilities, flexibility, and strong community support. Kubernetes offers several features that address the core challenges of managing containers:
 
@@ -100,14 +100,14 @@ Among the orchestration tools, Kubernetes emerged as a frontrunner due to its ro
 * **Service Discovery and Load Balancing**: Kubernetes can expose a container using the DNS name or using its own IP address. If traffic to a container is high, Kubernetes is able to load balance and distribute the network traffic so that the deployment is stable.
 * **Automated Rollouts and Rollbacks**: Kubernetes allows you to describe the desired state for your deployed containers using declarative configuration, and can change the actual state to the desired state at a controlled rate, such as to roll out a new version of an application.
 
-### Why Kubernetes Stands Out {#h3-6-why-kubernetes-stands-out}
+### Why Kubernetes Stands Out
 
 Kubernetes not only solves practical, operational problems associated with running containers but also integrates with the broader technology ecosystem, supporting continuous integration and continuous deployment (CI/CD) practices. It is backed by the Cloud Native Computing Foundation (CNCF), ensuring it remains cutting-edge and community-focused.
 
 There used to be a site called "doyouneedkubernetes.com" when you visited that site it said "No". Most of us don't need Kubernetes and it is often a symptom of Resume Driven Design (RDD). However, even when we don't need its scaling capabilities the advantages of its standardization are tremendous. Kubernetes became the de-facto standard and created a cottage industry of tools around it. Features such as, observability and security can be plugged in easily. Cloud migration becomes arguably easier. Kubernetes is now the "lingua franca" of production environments.
 
-Kubernetes For Developers {#h2-7-kubernetes-for-developers}
------------------------------------------------------------
+Kubernetes For Developers
+-------------------------
 
 {{< youtube 4_uSwwGEK58 >}}
 
@@ -125,7 +125,7 @@ In the image above we can see:
 
 These components work together to ensure that an application runs smoothly and efficiently across the cluster.
 
-### Kubernetes Basics In Practice {#h3-8-kubernetes-basics-in-practice}
+### Kubernetes Basics In Practice
 
 Up until now this post has been theory heavy, let's review some commands we can use to work with a Kubernetes cluster. First we would want to list the pods we have within the cluster which we can do using the `get pods` command as such:
 
@@ -146,8 +146,8 @@ $ kubectl logs -f <pod>
 
 Most typical large scale applications logs are ingested by tools such as Elastic, Loki etc. As such, the logs command isn't as useful in production except for debugging edge cases.
 
-Final Word {#h2-9-final-word}
------------------------------
+Final Word
+----------
 
 This introduction to Kubernetes has set the stage for deeper exploration into specific debugging and troubleshooting techniques, which we will cover in the upcoming posts. The complexity of Kubernetes makes is much harder to debug, but there are facilities in place to workaround some of that complexity.
 

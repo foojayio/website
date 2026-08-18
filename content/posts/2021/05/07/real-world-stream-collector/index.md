@@ -231,8 +231,8 @@ var priceAndRows = cart.getProducts()
 ```
 
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 You can solve most use cases with one of the out-of-the-box collectors provided in the `Collectors` class. However, some require to implement a custom `Collector`, *e.g.*, when you need to collect more than a single collection or a single scalar.
 

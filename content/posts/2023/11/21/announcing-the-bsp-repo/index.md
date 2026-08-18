@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-### Build Server for Gradle {#h3-0-build-server-for-gradle}
+### Build Server for Gradle
 
 **In September, we shared that Microsoft and Gradle [have joined forces](https://devblogs.microsoft.com/java/new-build-server-for-gradle/) to explore a novel approach to Gradle project import and building, based on the [Build Server Protocol (BSP)](https://build-server-protocol.github.io/). The objective is address the existing Gradle issues on Visual Studio Code and improve support for Gradle projects.**
 
@@ -28,7 +28,7 @@ The Build Server for Gradle, developed in collaboration with Gradle, will delega
 
 The preview version for this was released in September version and stable version was released in October on Visual Studio Code. We have received many positive comments after the release.
 
-### Open-sourcing the Build Server for Gradle Project {#h3-1-open-sourcing-the-build-server-for-gradle-project}
+### Open-sourcing the Build Server for Gradle Project
 
 After two months of testing and collecting feedback, we have observed that Build Server has performed as expected. Based on data we have collected, the import success rate for non-Android Gradle projects has increased by 19%.
 
@@ -36,7 +36,7 @@ Additionally, we have received a lot of useful feedback from the community for t
 
 Therefore, we are excited to announce our decision to officially open-source [Build Server for Gradle](https://github.com/microsoft/build-server-for-gradle) project today! You can use [this link](https://github.com/microsoft/build-server-for-gradle) to visit the repo.
 
-### How to use Build Server for Gradle {#h3-2-how-to-use-build-server-for-gradle}
+### How to use Build Server for Gradle
 
 Using Build Server for Gradle is straightforward. You can follow these simple steps.
 
@@ -56,7 +56,7 @@ If you wish to disable Build Server for Gradle, you can go to the settings and s
 
 [![Turning build server for gradle off](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/11/bsg.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/11/bsg.png)
 
-### Future Plans {#h3-3-future-plans}
+### Future Plans
 
 We will continue to improve the Build Server for Gradle project in the future to enhance the development experience for Visual Studio Code Java users working on Gradle projects. This includes:
 
@@ -65,7 +65,7 @@ We will continue to improve the Build Server for Gradle project in the future to
 * Supporting the execution of Gradle tasks
 * Supporting test delegation
 
-### Feedback and suggestions {#h3-4-feedback-and-suggestions}
+### Feedback and suggestions
 
 Currently, the project is still in its early stages, and there will be many issues to explore and resolve in the future. We encourage everyone to try out Build Server for Gradle and provide feedback for improvement.
 

@@ -26,7 +26,7 @@ While the use of objects in object-oriented languages such as Java provides an e
 
 Carefully reusing objects provides a way to maintain performance while keeping most parts of the intended level of abstraction. This article explores several ways to reuse objects.
 
-### The Problem {#h3-0-the-problem}
+### The Problem
 
 By default (\*), the JVM will allocate new objects on the heap. This means these new objects will accumulate on the heap and the space occupied will eventually have to be reclaimed once the objects go out of scope (i.e. are not referenced anymore) in a process called "Garbage Collection" or GC for short. As several cycles with creating and removing objects are passed, memory often gets increasingly fragmented.
 
@@ -50,7 +50,7 @@ To make things worse, if the application mutates memory in a way that the GC can
 
 In recent years, there has been a significant improvement in GC algorithms that can mitigate some of the problems described above. However, fundamental memory access bandwidth limitations and CPU cache depletion problems still remain a factor when creating massive amounts of new objects.
 
-### Reusing Objects is Not Easy {#h3-1-reusing-objects-is-not-easy}
+### Reusing Objects is Not Easy
 
 Having read about the issues above, it might appear that reusing objects is a low-hanging fruit that can be easily picked at will. As it turns out, this is not the case as there are several restrictions imposed on object reuse.
 
@@ -60,7 +60,7 @@ However, once a **mutable** instance is constructed, Java's memory model mandate
 
 Hence, contrary to many beliefs, creating a POJO, setting some values in one thread, and handing that POJO off to another thread will simply not work. The receiving thread might see no updates, might see partial updates (such as the lower four bits of a *long* were updated but not the upper ones), or all updates. To make thighs worse, the changes might be seen 100 nanoseconds later, one second later or they might never be seen at all. There is simply no way to know.
 
-### Various Solutions {#h3-2-various-solutions}
+### Various Solutions
 
 One way to avoid the POJO problem is to declare primitive fields (such as *int* and *long* fields) *volatile* and use atomic variants for reference fields. Declaring an array as *volatile* means only the reference itself is volatile and does not provide volatile semantics to the elements. This can be solved but the general solution is outside the scope of this article although the *Atomic Array* classes provide a good start. Declaring all fields volatile and using concurrent wrapper classes may incur some performance penalty.
 
@@ -85,7 +85,7 @@ Higher order functionality can be obtained by composing a number of simpler serv
 
 The sum of this provides a completely deterministic and decoupled event-driven microservice solution.
 
-### Reusing Objects in Chronicle Queue {#h3-3-reusing-objects-in-chronicle-queue}
+### Reusing Objects in Chronicle Queue
 
 In a [previous article](https://chronicle.software/creating-terabyte-sized-queues-with-low-latency-2/ "previous article"), [open-source Chronicle Queue](https://chronicle.software/queue/ "open-source Chronicle Queue ")was benchmarked and demonstrated to have high performance. One objective of this article is to take a closer look at how this is possible and how object reuse works under the hood in Chronicle Queue (using version 5.22ea6).
 
@@ -130,7 +130,7 @@ public static void main(String[] args) {
 
 Since Chronicle Queue is serializing the objects to memory-mapped files, it is important that it does not create other unnecessary objects for the performance reasons stated above.
 
-### Memory Usage {#h3-4-memory-usage}
+### Memory Usage
 
 The application is started with the VM option "-verbose:gc" so that any potential GCs are clearly detectable by observing the standard output. Once the application starts, a histogram of the most used objects are dumped after inserting an initial 100 million messages:
 
@@ -174,7 +174,7 @@ As can be seen, there was only a slight increase in the number of objects alloca
 
 Designing such a relatively complex code path without creating any object while considering all the constraints above is of course non-trivial and indicates that the library has reached a certain level of maturity in terms of performance.
 
-### Profiling Methods {#h3-5-profiling-methods}
+### Profiling Methods
 
 Profiling methods called during execution reveals Chronicle Queue is using ThreadLocal variables:  
 ![](Screen-Shot-2022-11-07-at-1.28.58-PM-1024x253.png)
@@ -183,7 +183,7 @@ It spends about 7% of its time looking up thread local variables via the*ThreadL
 
 As can be seen, Chronicle Queue spends most of its time accessing field values in the POJO to be written to the queue using Java reflection. Even though it is a good indicator that the intended action (i.e. copying values from a POJO to a Queue) appears somewhere near the top, there are ways to improve performance even more by providing hand-crafted methods for serialization substantially reducing execution time. But that is another story.
 
-### What's Next? {#h3-6-what-s-next}
+### What's Next?
 
 In terms of performance, there are other features such as being able to isolate CPUs and lock Java threads to these isolated CPUs, substantially reducing application jitter as well as writing custom serializers.
 
@@ -191,7 +191,7 @@ Finally, there is an enterprise version with replication of queues across server
 
 The enterprise version also includes a set of other features such as encryption, time zone rolling, and asynchronous message handling.
 
-### Resources {#h3-7-resources}
+### Resources
 
 [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/ "Chronicle Queue Enterprise")  
 [Chronicle Queue (open-source)](https://chronicle.software/queue/ "Chronicle Queue (open-source)")

@@ -26,8 +26,8 @@ Part 2 describes how to use the new AOT capabilities offered by Leyden and prese
 
 Part 3 provides a more detailed account of how Leyden's proposed solution operates, and offers a first look at tooling that allows you to assess the benefits that result and tune your application to make the most of what Leyden offers.
 
-How to use an AOT Cache {#h2-0-how-to-use-an-aot-cache}
--------------------------------------------------------
+How to use an AOT Cache
+-----------------------
 
 To use an AOT cache (on JDK 25+), you need to add some JVM arguments to your app launch command. There are two ways of doing it, in 2 or 3 steps.
 
@@ -58,7 +58,7 @@ The 3 step workflow is sometimes preferable because it allows the training JVM t
 
 Also, with the Leyden premain release, the Assembly JVM will perform a 'cleanroom' compilation of all the methods to be included in the cache, possibly compiling them at more than one compilation level. This adds more time to the cache generation step.
 
-### How to properly execute the Training Run? {#h3-1-how-to-properly-execute-the-training-run}
+### How to properly execute the Training Run?
 
 The best way to train your application and generate the AOT cache is a *canary deployment*, where you run your application in the real production environment with training enabled, allowing it to collect training data as it runs. However, that's not always feasible, especially on containerized production environments that don't have disk-write privileges.
 
@@ -76,8 +76,8 @@ At the moment of writing this article, you also need to deploy on the same CPU f
 
 Remember to follow these basic constraints when generating the cache: same hardware, same Java version, same Operating System, and same JVM arguments.
 
-Should I start using AOT Cache in Java already? {#h2-2-should-i-start-using-aot-cache-in-java-already}
-------------------------------------------------------------------------------------------------------
+Should I start using AOT Cache in Java already?
+-----------------------------------------------
 
 The short answer is **yes**.
 
@@ -87,7 +87,7 @@ Note that you need at least JDK 25 to be able to use it. Performance gains are i
 
 Let's see some examples. We are going to run them over JDK 26.
 
-### Heavy Mathematical Example {#h3-3-heavy-mathematical-example}
+### Heavy Mathematical Example
 
 First we are going to use [a benchmark application](https://github.com/Delawen/jvm-performance-benchmarks-rest-wrapper.git) that runs heavy mathematical operations via a REST API. We are going to train this application twice to compare how different training affects performance on production.
 
@@ -143,7 +143,7 @@ However, it is also very clear that
 
 Note that JDK26 does store training data on the cache, but does not store compiled code. This means, future versions of the JDK will show a much larger difference between weak and strong training regimes.
 
-### Simple REST API {#h3-4-simple-rest-api}
+### Simple REST API
 
 Now, we are going to do the same with a [simple REST API application using Quarkus](https://github.com/gsmet/quarkus-aot/tree/main/quarkus-hibernate-orm-simple) that connects to a database to extract data. This time we employ the Leyden premain JVM which caches code compiled code as well as all the other AOT cache assets mentioned earlier.
 

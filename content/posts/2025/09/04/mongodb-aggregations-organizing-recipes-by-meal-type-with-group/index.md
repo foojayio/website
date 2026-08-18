@@ -33,8 +33,8 @@ MongoDB's [$group](https://www.mongodb.com/docs/manual/reference/operator/aggreg
 
 In this post, we'll walk through how to use \`$group\` to categorize recipes by type and explore grouping by tags to uncover popular recipe categories.
 
-Why Use $group for Organizing Recipes? {#h2-0-why-use-group-for-organizing-recipes}
------------------------------------------------------------------------------------
+Why Use $group for Organizing Recipes?
+--------------------------------------
 
 Let's consider some possible [user stories](https://www.atlassian.com/agile/project-management/user-stories):
 
@@ -52,8 +52,8 @@ Internal users can use these aggregations to analyze recipe distributions and ma
 
 By using MongoDB's \`$group\` operator, you can achieve all this directly within your aggregation pipeline.
 
-Setting Up the Data {#h2-1-setting-up-the-data}
------------------------------------------------
+Setting Up the Data
+-------------------
 
 Here's a sample document in our recipe collection:
 
@@ -170,12 +170,12 @@ Each recipe has a \`type\` field representing the meal type, such as "Dinner," "
 
 We'll start by grouping recipes by \`type\` and later explore how to group them by tags.
 
-Using $group to Organize Recipes by Type {#h2-2-using-group-to-organize-recipes-by-type}
-----------------------------------------------------------------------------------------
+Using $group to Organize Recipes by Type
+----------------------------------------
 
 To organize recipes, we'll set up an aggregation pipeline that groups documents by the type field.
 
-### Step 1: Grouping Recipes by Type {#h3-3-step-1-grouping-recipes-by-type}
+### Step 1: Grouping Recipes by Type
 
 Here's how we can group all recipes by their type:
 
@@ -212,7 +212,7 @@ Output example:
 
 This output shows the count of recipes for each type. Now, we can see how many "Dinner," "Breakfast," and "Lunch" recipes are available in the collection.
 
-### Step 2: Including Recipe Details in Each Group {#h3-4-step-2-including-recipe-details-in-each-group}
+### Step 2: Including Recipe Details in Each Group
 
 If you want to store additional details (such as an array of recipe titles for each meal type), use \`[$push](https://www.mongodb.com/docs/manual/reference/operator/update/push/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=recipe-foojay&utm_term=tony.kim)\` to add the titles to each group:
 
@@ -248,14 +248,14 @@ Output example:
 
 This output shows each meal type along with its recipe titles, which can make displaying the list in a frontend application easier.
 
-Grouping Recipes by Tags {#h2-5-grouping-recipes-by-tags}
----------------------------------------------------------
+Grouping Recipes by Tags
+------------------------
 
 Recipes often have multiple tags (e.g., "vegetarian," "quick," or "soup") to help users quickly find recipes with specific characteristics.
 
 We can use [$unwind](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=recipe-foojay&utm_term=tony.kim) along with [$group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=recipe-foojay&utm_term=tony.kim) to count the occurrences of each tag across all recipes.
 
-### Step 1: Using $unwind to Break Down Tags {#h3-6-step-1-using-unwind-to-break-down-tags}
+### Step 1: Using $unwind to Break Down Tags
 
 The tags field is an array, so we'll start by using $unwind to create a separate document for each tag.
 
@@ -306,8 +306,8 @@ By grouping recipes by type and tags, you can offer valuable features to users:
 * **Recipe tag analysis**
   * Use tag counts to suggest recipes based on user interests or identify popular recipe tags, enhancing the user experience with relevant suggestions.
 
-Advanced Tip: Using $match for Specific Filters {#h2-7-advanced-tip-using-match-for-specific-filters}
------------------------------------------------------------------------------------------------------
+Advanced Tip: Using $match for Specific Filters
+-----------------------------------------------
 
 You may want to group recipes of a specific type, such as only "Vegetarian" recipes. You can do this by adding a $match stage before $group to filter documents first.
 
@@ -328,8 +328,8 @@ You may want to group recipes of a specific type, such as only "Vegetarian" reci
 
 In this example, only recipes with \`vegetarian_option: true\` are included in the grouping, allowing you to analyze vegetarian meal types specifically.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Using MongoDB's $group operator, you can organize recipes by meal type and tags, making it easy for users to navigate your collection by category. By combining $group with other operators like $unwind and $match, you can create dynamic and user-friendly features that enrich the user experience on your recipe site.
 

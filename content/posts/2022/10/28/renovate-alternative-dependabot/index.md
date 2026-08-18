@@ -34,8 +34,8 @@ Recently, I watched Viktor Farcic's [Automate Dependency Management With Renovat
 * On my blog
 * For a demo using Docker Compose
 
-Keeping my blog up-to-date {#h2-0-keeping-my-blog-up-to-date}
--------------------------------------------------------------
+Keeping my blog up-to-date
+--------------------------
 
 I've already written multiple times about my blog's infrastructure. In the context of this post, the relevant parts are:
 
@@ -164,8 +164,8 @@ Here's a log snippet that shows the magic:
 ```
 
 
-Keeping a demo up-to-date {#h2-1-keeping-a-demo-up-to-date}
------------------------------------------------------------
+Keeping a demo up-to-date
+-------------------------
 
 While I host my blog on a private repository on GitLab, all my demos are public repositories on GitHub. As I mentioned, the integration of Dependabot on GitHub is excellent. However, it leaves out a few package managers I'm regularly using, Docker Compose files and Kubernetes manifests. Renovate to the rescue!
 
@@ -184,8 +184,8 @@ Even better, Renovate Bot limits the number of PRs to abide by [GitHub rate limi
 
 How to interact with the dashboard is pretty self-explanatory. Just check the relevant checkbox, and it opens a PR regarding the dependency. Renovate will also open PRs if below the rate limit.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Renovate is a great tool. It works seamlessly on GitHub; on GitLab, you need a dedicated runner.
 

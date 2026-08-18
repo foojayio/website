@@ -22,10 +22,10 @@ frozen: false
 
 We're excited to announce **BoxLang 1.10.0**, a feature-packed release that brings powerful functional programming capabilities, elegant loop syntax, and enterprise-grade distributed locking to the BoxLang runtime. This release represents a significant leap forward in developer productivity and application scalability.
 
-🎯 What's New {#h2-0-what-s-new}
---------------------------------
+🎯 What's New
+-------------
 
-### Nine New Array Methods for Functional Programming {#h3-1-nine-new-array-methods-for-functional-programming}
+### Nine New Array Methods for Functional Programming
 
 BoxLang 1.10.0 introduces nine powerful array methods that bring modern functional programming patterns to your collections. These methods enable cleaner, more expressive code while reducing the need for verbose iteration patterns.
 
@@ -213,7 +213,7 @@ record = headers.zip( values )
 ```
 
 
-### Elegant Loop Destructuring Syntax {#h3-2-elegant-loop-destructuring-syntax}
+### Elegant Loop Destructuring Syntax
 
 BoxLang 1.10.0 introduces destructuring syntax `for` for loops, eliminating verbose iteration patterns:
 
@@ -257,7 +257,7 @@ for ( key, value in userData ) {
 ```
 
 
-### Distributed Cache Locking for Clustered Environments {#h3-3-distributed-cache-locking-for-clustered-environments}
+### Distributed Cache Locking for Clustered Environments
 
 The `lock` component now integrates with cache providers implementing the `ILockableCacheProvider` interface, enabling distributed locking across multiple servers without external coordination systems.
 
@@ -284,7 +284,7 @@ lock( name="updateLocalCache", type="exclusive", timeout=10 ) {
 * Custom cache providers implementing the locking interface  
   Standard BoxLang caches and the default cache implementation do not support distributed locking.
 
-### Dynamic Module Management {#h3-4-dynamic-module-management}
+### Dynamic Module Management
 
 New module loading methods enable runtime module management, perfect for plugin architectures and dynamic extensions:
 
@@ -311,18 +311,18 @@ This is especially valuable for:
 * **Feature flags** - Enable/disable modules based on configuration
 * **Java integration** - Allow Java applications to extend BoxLang functionality at runtime
 
-⚡ Performance Optimizations {#h2-5-performance-optimizations}
--------------------------------------------------------------
+⚡ Performance Optimizations
+---------------------------
 
-### Fully-Qualified Name Resolution {#h3-6-fully-qualified-name-resolution}
+### Fully-Qualified Name Resolution
 
 Significant optimizations to fully-qualified name (FQN) resolution improve class loading and component instantiation performance. Applications with heavy component usage will see noticeable improvements in startup time and runtime performance.
 
-### ASM Compilation Improvements {#h3-7-asm-compilation-improvements}
+### ASM Compilation Improvements
 
 The ASM compiler now handles large methods with try/catch blocks more efficiently through improved method splitting. This reduces bytecode size and improves compilation speed for complex business logic.
 
-### Streaming Binary Responses {#h3-8-streaming-binary-responses}
+### Streaming Binary Responses
 
 The `content` component now uses chunked transfer encoding for binary responses instead of buffering the entire response in memory. This reduces memory pressure and improves performance for large file downloads, PDF generation, and image serving.
 
@@ -334,10 +334,10 @@ content( type="application/pdf" ) {
 ```
 
 
-🛠️ Developer Experience Enhancements {#h2-9-developer-experience-enhancements}
--------------------------------------------------------------------------------
+🛠️ Developer Experience Enhancements
+-------------------------------------
 
-### MiniServer Warmup URLs {#h3-10-miniserver-warmup-urls}
+### MiniServer Warmup URLs
 
 The MiniServer runtime now supports warmup URLs to pre-initialize your application before serving production traffic:
 
@@ -365,7 +365,7 @@ Warmup requests execute sequentially during server startup, ensuring:
 * Critical initialization is complete
 * The application is fully ready before accepting requests  
 
-  ### Runtime Introspection Variables {#h3-11-runtime-introspection-variables}
+  ### Runtime Introspection Variables
 
   Two new server scope variables aid debugging and runtime identification:
 
@@ -384,7 +384,7 @@ These variables are invaluable for:
 * **Performance profiling** - Connecting to the correct JVM for profiling tools
 * **Debugging** - Understanding which compilation strategy is active  
 
-  ### Module Binary Directory {#h3-12-module-binary-directory}
+  ### Module Binary Directory
 
   BoxLang now creates a `bin/` folder in the BoxLang home directory, preparing for future CommandBox integration where modules can provide CLI commands and executables:
 
@@ -396,7 +396,7 @@ These variables are invaluable for:
 ```
 
 
-### JSR-223 Configuration Flexibility {#h3-13-jsr-223-configuration-flexibility}
+### JSR-223 Configuration Flexibility
 
 The JSR-223 scripting engine integration now supports environment variables and system properties for configuration, enabling containerized deployments:
 
@@ -412,16 +412,16 @@ java -Dboxlang.jsr223.timeout=30000 \
 ```
 
 
-🔧 Additional Improvements {#h2-14-additional-improvements}
------------------------------------------------------------
+🔧 Additional Improvements
+--------------------------
 
-### Type System Enhancements {#h3-15-type-system-enhancements}
+### Type System Enhancements
 
 * **Numeric Casting** - General numeric casting now truncates by default for consistent behavior across integer conversions  
   **- Set Length Support** - The `len()` function now works on `java.util.Set` collections  
   **- BigDecimal/Long Support** - `formatBaseN()` now properly handles `java.lang.Long` types
 
-  ### Cache Hierarchy {#h3-16-cache-hierarchy}
+  ### Cache Hierarchy
 
   The cache retrieval system now properly follows the context cache hierarchy:
 
@@ -436,13 +436,13 @@ cacheGet( "key", "redisCache" )  // Direct provider access
 
 This ensures application-level cache isolation while maintaining fallback to global caches.
 
-### Date/Time Improvements {#h3-17-date-time-improvements}
+### Date/Time Improvements
 
 * New date mask support: `"January, 05 2026 17:39: 13 -0600"` format
 * Fixed date equality issues in compatibility mode with different timezones
 * Resolved `false` being incorrectly cast to DateTime objects in compat mode
 
-### Query Component Enhancements {#h3-18-query-component-enhancements}
+### Query Component Enhancements
 
 ```java
 // Columns now accept arrays
@@ -455,21 +455,21 @@ query.setSQL( "SELECT * FROM users" )
 ```
 
 
-### Oracle SQL Improvements {#h3-19-oracle-sql-improvements}
+### Oracle SQL Improvements
 
 The runtime now automatically removes trailing semicolons from Oracle SQL statements, eliminating common syntax errors.
 
-🐛 Notable Bug Fixes {#h2-20-notable-bug-fixes}
------------------------------------------------
+🐛 Notable Bug Fixes
+--------------------
 
-### Compilation \& ASM {#h3-21-compilation-asm}
+### Compilation \& ASM
 
 * **\[BL-1505\]** Reworked splitting of large methods in ASM compiler
 * **\[BL-2017\]** Fixed ASM compilation failure with closures inside ternary expressions
 * **\[BL-2094\]** Fixed double transpilation in string replace operations with nocase flag
 * **\[BL-2141\]** Resolved parser issue with text operator between two interpolated variables  
 
-  ### Class \& Component System {#h3-22-class-component-system}
+  ### Class \& Component System
 
 * **\[BL-2059\]** Fixed inheritance at three levels losing variables scope when functions assigned as variables
 * **\[BL-2110\]** Resolved error calling pseudo constructor when using `getClassMetadata()`
@@ -478,25 +478,25 @@ The runtime now automatically removes trailing semicolons from Oracle SQL statem
 * **\[BL-2121\]** Injected UDFs now have correct "current" template reference
 * **\[BL-2122\]** UDF called from thread inside class no longer loses class reference  
 
-  ### Struct \& Collection Handling {#h3-23-struct-collection-handling}
+  ### Struct \& Collection Handling
 
 * **\[BL-2138\]** Fixed struct assignment creating string keys instead of integer keys
 * **\[BL-2142\]** Resolved string hash collisions in structs causing key conflicts  
 
-  ### File \& I/O Operations {#h3-24-file-i-o-operations}
+  ### File \& I/O Operations
 
 * **\[BL-2095\]** File member methods no longer incorrectly accessible on `java.io.File` instances
 * **\[BL-2096\]** `getCanonicalPath()` now preserves trailing slash on directories
 * **\[BL-2118\]** Fixed `directoryCopy()` mishandling trailing slashes
 * **\[BL-2124\]** Compat mode `directoryCopy()` now overwrites by default for CFML compatibility  
 
-  ### HTTP \& Networking {#h3-25-http-networking}
+  ### HTTP \& Networking
 
 * **\[BL-2081\]** Fixed HTTP timeout error with BigDecimal to Integer casting
 * **\[BL-2098\]** HTTP component no longer fails when empty string passed for proxy server
 * **\[BL-2105\]** Resolved duplicate cookies being set with different paths  
 
-  ### Compatibility Mode Fixes {#h3-26-compatibility-mode-fixes}
+  ### Compatibility Mode Fixes
 
 * **\[BL-1917\]** Fixed `urlEncodedFormat()` differences from Lucee/ACF
 * **\[BL-2079\]** Regression fix for date equality with different timezones
@@ -505,21 +505,21 @@ The runtime now automatically removes trailing semicolons from Oracle SQL statem
 * **\[BL-2129\]** Variable attribute is now optional on execute component in compat mode
 * **\[BL-2131\]** Compat mode now allows duplicate UDF declarations in CF source files  
 
-  🚀 Get Started {#h2-27-get-started}
-  -----------------------------------
+  🚀 Get Started
+  --------------
 
-  ### Download BoxLang 1.10.0: {#h3-28-download-boxlang-1-10-0}
+  ### Download BoxLang 1.10.0:
 
 [BoxLang Runtime](http://https://boxlang.io/download?_gl=1*1ngsauj*_gcl_au*NDk3OTAwOTEuMTc2ODUxNjQ4Nw..*_ga*MTg5MDU4NDYzMS4xNzMyMDQwMzg2*_ga_663JFQ7YGX*czE3NzAxOTY1NjYkbzgyJGcxJHQxNzcwMTk2NzI2JGo1MCRsMCRoMA.. "BoxLang Runtime")  
 [VS Code Extension](http://https://marketplace.visualstudio.com/items?itemName=ortus-solutions.vscode-boxlang "VS Code Extension")
 
-### Resources: {#h3-29-resources}
+### Resources:
 
 [Documentation](http://https://boxlang.ortusbooks.com/ "Documentation")  
 [GitHub Repository](http://https://github.com/ortus-solutions/boxlang "GitHub Repository")  
 [Community Discord](http://https://discord.gg/boxlang "Community Discord")
 
-### 🙏 Thank You {#h3-30-thank-you}
+### 🙏 Thank You
 
 BoxLang 1.10.0 represents contributions from our amazing community, enterprise customers, and the Ortus Solutions team. Special thanks to everyone who reported issues, tested features, and provided feedback.
 

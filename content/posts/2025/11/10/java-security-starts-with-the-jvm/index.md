@@ -34,34 +34,34 @@ When it comes to securing your Java applications, the JVM might not be the first
 
 At Azul, security is baked into the way we build and maintain our JDK distributions. Here's how we think about Java security---and what you can do to reduce risk in production.
 
-1. Security starts with timely, predictable updates {#h-1-security-starts-with-timely-predictable-updates-nbsp-nbsp}
---------------------------------------------------------------------------------------------------------------------
+1. Security starts with timely, predictable updates
+---------------------------------------------------
 
 Not all Java updates are created equal. Some vendors offer only Patch Set Updates (PSUs) --- which include a mix of security fixes, bug fixes, and enhancements. While these can be valuable in development environments, they often introduce changes that require careful testing before production rollout.
 
-### Azul does it differently {#h-azul-does-it-differently-nbsp}
+### Azul does it differently
 
 We offer both security-only updates and PSUs, giving you the flexibility to choose the right approach for your environment:
 
 * Security-only Critical Patch Updates (CPUs) are released on the industry-standard quarterly schedule---January, April, July, and October---and include critical security patches addressing known vulnerabilities. These updates are designed for stability and predictability, making them ideal for production use.
 * Patch Set Updates (PSUs) are also available for customers who want additional non-critical fixes, performance improvements, and minor enhancements between major versions.
 
-### Why this matters {#h-why-this-matters-nbsp}
+### Why this matters
 
 Azul is the only vendor outside of Oracle to deliver timely security-focused updates on the OpenJDK CPU schedule. This means you can secure your Java workloads quickly and reliably---without being forced to adopt changes that could break your application or delay deployment.
 
 With Azul, you're in control: apply only what you need, when you need it---whether that's zero-risk security updates or broader enhancements through PSUs.
 
-2. Long-term support = long-term security {#h-2-long-term-support-long-term-security-nbsp-nbsp}
------------------------------------------------------------------------------------------------
+2. Long-term support = long-term security
+-----------------------------------------
 
-### The problem {#h-the-problem-nbsp}
+### The problem
 
 Many Java applications are mission-critical---and not easily upgraded on short timelines. Whether due to regulatory requirements, custom integrations, or complex testing cycles, enterprises often rely on older Java versions far beyond their original community support window.
 
 Without long-term support, these workloads face growing security risk and operational uncertainty.
 
-### Azul's solution {#h-azul-s-solution-nbsp}
+### Azul's solution
 
 Azul supports more Java versions than any other vendor, helping organizations secure both legacy and modern workloads under a single, consistent support model.
 
@@ -70,23 +70,23 @@ Azul supports more Java versions than any other vendor, helping organizations se
 
 This has a real-world impact: Financial institutions, healthcare platforms, and embedded systems often depend on legacy Java versions. With Azul, they stay secure without forced upgrades.
 
-3. A secure software supply chain {#h-3-a-secure-software-supply-chain-nbsp-nbsp}
----------------------------------------------------------------------------------
+3. A secure software supply chain
+---------------------------------
 
 The Java runtime is part of your build and deploy chain. If it's compromised, every app that runs on it could be too.
 
-### How Azul secures the supply chain {#h-how-azul-secures-the-supply-chain-nbsp}
+### How Azul secures the supply chain
 
 * All Azul builds are signed and verified, ensuring integrity and traceability.
 * We publish SBOMs (Software Bill of Materials in Cyclone DX format) for all builds and deliver binaries through secure, authenticated channels.
 * Our LTS builds are tested against the official TCK to ensure specification compliance and avoid unexpected behaviors.
 
-### Key Takeaway {#h-key-takeaway-nbsp}
+### Key Takeaway
 
 Using a verified, signed, and TCK-tested Azul JDK reduces your exposure to supply chain risks---and gives you confidence that what you deploy is exactly what you expect.
 
-4. Beyond the JDK: proactive insights {#h-4-beyond-the-jdk-proactive-insights-nbsp-nbsp}
-----------------------------------------------------------------------------------------
+4. Beyond the JDK: proactive insights
+-------------------------------------
 
 Many organizations focus on securing their Java runtime but still lack clear visibility into what's deployed. Over time, environments accumulate multiple JDK versions, unpatched workloads, and legacy installations that no one remembers---creating hidden risk.
 
@@ -102,12 +102,12 @@ With Azul Intelligence Cloud, you can:
 * Get alerts when known vulnerabilities (CVEs) affect specific builds.
 * Identify unused or obsolete Java installs so you can clean them up proactively.
 
-### Why this matters {#h-why-this-matters-nbsp-0}
+### Why this matters
 
 Knowing exactly what's deployed is critical to closing security gaps before they become incidents.
 
-5. Enterprise migration without the headaches {#h-5-enterprise-migration-without-the-headaches-nbsp-nbsp}
----------------------------------------------------------------------------------------------------------
+5. Enterprise migration without the headaches
+---------------------------------------------
 
 Switching to Azul isn't just about reducing licensing costs---it's also about simplifying operations and strengthening security. Azul makes the transition straightforward by providing:
 
@@ -115,12 +115,12 @@ Switching to Azul isn't just about reducing licensing costs---it's also about si
 * Best practices and a proven migration methodology, including advisory services to guide your teams.
 * A network of certified partners who can help manage, implement, and scale your migration.
 
-### The result {#h-the-result-nbsp}
+### The result
 
 You get a secure, fully supported Java environment with minimal disruption to your development and operations.
 
-Final thoughts {#h-final-thoughts-nbsp-nbsp}
---------------------------------------------
+Final thoughts
+--------------
 
 Java is built for stability, but without a secure and supported JDK, you're leaving the door open to avoidable risk. Whether you're running modern cloud-native services or maintaining legacy systems, Azul helps you keep your Java workloads secure, up to date, and compliant---without the headaches.
 

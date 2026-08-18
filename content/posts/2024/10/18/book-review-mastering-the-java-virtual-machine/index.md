@@ -48,8 +48,8 @@ Mastering the Java Virtual Machine
 
 <br />
 
-Part 1: Understanding the JVM {#h2-0-part-1-understanding-the-jvm}
-------------------------------------------------------------------
+Part 1: Understanding the JVM
+-----------------------------
 
 In **Chapter 1**, he primarily discussed the evolution of Java, introduced the JVM, and explained how the JVM works internally.
 
@@ -63,8 +63,8 @@ In **Chapter 3**, he explores Bytecode, Arithmetic Operations (Addition, Subtrac
 
 * ByteCode Instructions demonstrate how arithmetic and comparison operations function properly, how various method calls perform datatype conversions, and how the JVM coerces objects for Set and Get fields. The JVM primarily operates within two fundamental categories: 1. Primitives; 2. Reference Values.
 
-Part 2: Memory Management and Execution {#h2-1-part-2-memory-management-and-execution}
---------------------------------------------------------------------------------------
+Part 2: Memory Management and Execution
+---------------------------------------
 
 One of the most important aspects for developers and architects is optimizing the application's memory management.
 
@@ -74,8 +74,8 @@ In **Chapter 5** , he enthralled readers with very important topics such as how 
 
 In **Chapter 6**, he provided readers with an overview of garbage collections and algorithms, explaining how they work, the differences between algorithms, how we can configure GC for our applications, and recommending correct algorithms and configurations. And also discusses JVM tuning and ergonomics for achieving optimal performance.
 
-Part 3: Alternative JVMs {#h2-2-part-3-alternative-jvms}
---------------------------------------------------------
+Part 3: Alternative JVMs
+------------------------
 
 In **Chapter 7**, he explains how achieving performance and efficiency through Oracle Labs' new architecture, GraalVM, is important. He highlights its features and clarifies the role of JVM internals.
 
@@ -84,8 +84,8 @@ In **Chapter 7**, he explains how achieving performance and efficiency through O
 
 In **Chapter 8** , he explores the gallery of the great JVM ecosystem and alternative JVM implementations, highlighting their significance in various use cases such as **Eclipse J9, Amazon Corretto, Azul Zulu and Zing, IBM Semeru, and Eclipse Temurin**, before he moves on to JVM vendors and SDKMan.
 
-Part 4: Advanced Java Topics {#h2-3-part-4-advanced-java-topics}
-----------------------------------------------------------------
+Part 4: Advanced Java Topics
+----------------------------
 
 In **Chapter 9**, he explains the importance of Java Framework Principles and how they contribute to API Design, the preference for convention over configuration, and the importance of documentation and testing. Furthermore, he discusses how these principles help developers create robust, tailor-made frameworks that embrace Java Standards and Best Practices.
 
@@ -95,8 +95,8 @@ In **Chapter 11** , he captivated readers by showcasing the art of code generati
 
 In the final chapter, **Chapter 12** , the author focuses on topics such as the JVM landscape, how to navigate the system operation architecture, and how to become a master of garbage collection. Finally, he explains the importance of the **Virtual Threads** feature introduced in **JDK 21**, as well as the distinction between platform threads and virtual threads.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 **"Master the Java Virtual Machine"** offers an unparalleled deep dive into the JVM's inner workings. Its comprehensive coverage of both foundational concepts and cutting-edge features makes it an invaluable resource for Java developers looking to elevate their understanding and skills.
 
@@ -113,7 +113,7 @@ By mastering the concepts presented in this book, developers will be better equi
 * Make informed decisions about JVM configuration and alternative implementations
 * Leverage advanced features like reflection and code generation using Java Annotation Processor effectively
 
-Recommendation {#h2-5-recommendation}
--------------------------------------
+Recommendation
+--------------
 
 I strongly recommend that whether you're a novice, experienced, or seasoned Java developer, you read the book "Master the Java Virtual Machine." It will certainly help you enhance your knowledge of JVM internals, and after reading this book, you'll definitely notice a significant difference in your understanding of the JVM.

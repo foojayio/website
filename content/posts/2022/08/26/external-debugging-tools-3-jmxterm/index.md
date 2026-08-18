@@ -29,8 +29,8 @@ Management tools let us traverse through clouds of machines and manage the appli
 
 This is a remarkable feature that exposes information and tuning levers, for dynamic manipulation in runtime environments. Activating JMX is outside the scope of this tutorial so I won't go too much into detail but you can check some of the basics in this Oracle article [here](https://docs.oracle.com/javadb/10.10.1.2/adminguide/radminjmxenabledisable.html). Once we have this running we can use visual tools to debug but I'll focus on command-line tooling. This is important since I can use some of this tooling directly on the production servers right from the console.
 
-How does JMX Work? {#h2-0-how-does-jmx-work}
---------------------------------------------
+How does JMX Work?
+------------------
 
 JMX exposes management "beans" (MBeans), these are objects that represent control points in the application. Your application can publish its own beans which lets you expose functionality for runtime monitoring and configuration. This is very cool as you can export information that an administrator can wire directly to a dashboard (APM, Prometheus, Grafana, etc.) and use that for decision making.
 
@@ -38,8 +38,8 @@ If your server has multiple users connected concurrently you can expose that num
 
 Spring also supports exposing a lot of server details as management beans via actuator. This is a remarkably cool feature, you can read more about it [here](https://www.baeldung.com/spring-boot-actuators). It exposes very deep metrics about the application and helps you jump right into "production ready" status!
 
-JMXTerm Basics {#h2-1-jmxterm-basics}
--------------------------------------
+JMXTerm Basics
+--------------
 
 Usually one controls and reads JMX via web interface tools or dedicated administration tooling. If you have access to any of them I suggest you pick one of them up and use them as it would work pretty well. I've used some of those in some companies and I actually prefer them in some cases. I also enjoy using IntelliJ/IDEA Ultimates support for Actuator which is a pretty powerful visualization tool:
 
@@ -108,8 +108,8 @@ This is just the tip of the iceberg. We can get many things such as spring setti
 ```
 
 
-Finally {#h2-2-finally}
------------------------
+Finally
+-------
 
 JMX is a remarkable tool that we mostly use to wire management consoles. It's remarkable for that and you should very much export JMX settings for your projects. Having said that, you can take it to the next level by leveraging JMX as part of your debugging process.
 

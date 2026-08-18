@@ -51,8 +51,8 @@ In this article, I'll describe those seven JEPs and then dive into other changes
 
 By the way, my previous "[Java 20 sneak peek](https://blogs.oracle.com/javamagazine/post/java-20-preview)" article goes into the JEPs with coding examples, which are not duplicated here. This article is long enough without them!
 
-The JEPs in Java 20 {#h2-0-the-jeps-in-java-20}
------------------------------------------------
+The JEPs in Java 20
+-------------------
 
 Seven successful JEPs made it into the Java 20 release (one more than predicted in my previous article). Scoped values are a new incubating feature, while the remaining six JEPs are resubmissions and updates of already-known incubator and preview features that appeared in Java 19 or earlier.
 
@@ -69,7 +69,7 @@ These JEPs are often grouped based on their long-term Java projects:
   * 434: [Foreign function and memory API](https://openjdk.org/jeps/434) (second preview)
   * 438: [Vector API](https://openjdk.org/jeps/438) (fifth incubator)
 
-### Project Loom {#h3-1-project-loom}
+### Project Loom
 
 Project Loom is designed to deliver JVM features and APIs that support easy-to-use, high-throughput lightweight concurrency (virtual threads) and new programming models (structured concurrency). New in the project is a handy construct (scoped values) that provides a thread (and, if needed, a group of child threads) with a read-only, thread-specific value during its lifetime. Scoped values are a modern alternative to thread-local variables.
 
@@ -87,7 +87,7 @@ Java 19 introduced virtual threads to the Java platform as a first preview. In J
 
 JEP 437 essentially republishes the Java 19 version of JEP 428 - to allow time to gather more feedback. The only significant change is an updated StructuredTaskScope class that supports the inheritance of scoped values (from JEP 429) by threads created in a task scope. This streamlines the sharing of immutable data across all child threads.
 
-### Project Amber {#h3-2-project-amber}
+### Project Amber
 
 JEP 432 and JEP 433 are connected to Project Amber, which is designed to improve developers' productivity.
 
@@ -103,7 +103,7 @@ JEP 432 and JEP 433 are connected to Project Amber, which is designed to improve
 * The switch label's grammar has been simplified.
 * Inference of type arguments for generic record patterns is now supported in switch expressions and statements, along with the other constructs that support patterns.
 
-### Project Panama {#h3-3-project-panama}
+### Project Panama
 
 This initiative, which includes JEP 434 and JEP 438, aims to improve interoperability between the JVM and well-defined "foreign" (non-Java) APIs. These APIs often include interfaces that are used in C libraries.
 
@@ -117,8 +117,8 @@ There have been several versions of this feature since Java 17. Initially two se
 
 **Vector API (fifth incubator), JEP 438**. This API helps you express vector computations that reliably compile at runtime to optimal vector instructions on supported CPU architectures. The goal is to achieve much faster performance than with scalar computations. Versions of this API have been incubated since Java 16. This fifth version has a small set of bug fixes and performance enhancements.
 
-Hidden gems: The most important non-JEP changes {#h2-4-hidden-gems-the-most-important-non-jep-changes}
-------------------------------------------------------------------------------------------------------
+Hidden gems: The most important non-JEP changes
+-----------------------------------------------
 
 Java 20 shipped with hundreds of performance, stability, and security improvements beyond the seven JEPs described earlier. Here are the most significant non-JEP changes.
 
@@ -234,8 +234,8 @@ Also in Java 20, the locale data has been upgraded to use the [Unicode Consortiu
 
 **Time zone data updated to IANA version 2023c** . [Version 2023c tz](https://mm.icann.org/pipermail/tz-announce/2023-March/000079.html) incorporates modifications from the 2022b and 2022a releases, which have combined various regions with identical time stamp data post-1970 into a single time zone database. While all time zone IDs remain the same, the combined time zones refer to a shared zone database.
 
-Hidden gems: Java 20 enhancements {#h2-5-hidden-gems-java-20-enhancements}
---------------------------------------------------------------------------
+Hidden gems: Java 20 enhancements
+---------------------------------
 
 **Optimized intrinsic features for encryption algorithms** . Java 20 provides two new intrinsic features. Remember that flags controlling intrinsics require the option `-XX:+UnlockDiagnosticVMOptions`.
 
@@ -271,8 +271,8 @@ To prevent the JIT compiler from optimizing these methods, use the following com
 ```
 
 
-Hidden gems: Java 20 bug fixes and related changes {#h2-6-hidden-gems-java-20-bug-fixes-and-related-changes}
-------------------------------------------------------------------------------------------------------------
+Hidden gems: Java 20 bug fixes and related changes
+--------------------------------------------------
 
 **Java XSL Template limitations**. Suppose you use the JDK's XSLT processor to convert stylesheets to Java objects. If the XSL template is too large, you may encounter an exception.
 
@@ -327,8 +327,8 @@ The filter pattern is set in the `JDK/conf/management/management.properties` fil
 
 The serialization filtering and the filter pattern format are described in detail in the Java Core Libraries Developer Guide. If any additional Java types need to be passed, the default filter can be overridden by using the `-Dcom.sun.management.jmxremote.serial.filter.pattern= option`.
 
-Hidden gems: Java 20 deprecation and removals {#h2-7-hidden-gems-java-20-deprecation-and-removals}
---------------------------------------------------------------------------------------------------
+Hidden gems: Java 20 deprecation and removals
+---------------------------------------------
 
 **Methods changed to throw an UnsupportedOperationException** . Java 20 removes the ability to suspend or resume a thread using the `Thread.suspend()` and `Thread.resume()` methods. Those methods were prone to deadlock and have been deprecated since JDK 1.2. They have been changed to throw an UnsupportedOperationException.
 
@@ -370,8 +370,8 @@ You can re-enable these cipher suites at your own risk by removing `ECDH` from t
 
 This change is intended to make misconfigurations more obvious and avoid potential security issues caused by unexpected behavior.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 There's a lot more to a new Java release than the widely publicized JEPs. Study all these changes; even if you don't use the preview and incubator features, there are sufficient bug fixes and other enhancements to make Java 20 worth testing and using on production systems today.
 

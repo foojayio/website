@@ -26,8 +26,8 @@ frozen: false
 
 **Having written many Java GUI applications, I thought it would be cool to run them embedded in IntelliJ IDEA, Eclipse and NetBeans. I didn't want to write three plugins per application so I came up with this solution.**
 
-The embedded panel criteria {#h2-0-the-embedded-panel-criteria}
----------------------------------------------------------------
+The embedded panel criteria
+---------------------------
 
 To convert my Java Swing applications to run embedded in an IDE, I had to put the user interface in a panel with minimal implementation changes. I came up with these *should ideally* criteria:
 
@@ -44,8 +44,8 @@ Hopefully Java has a class for this: **`JApplet`**
 
 Applets were designed (in 1995) to run embedded Java applications in an HTML browser, but nothing in the API prevents them to run in an application that is not an HTML browser.
 
-Let's write our monitoring applet {#h2-1-let-s-write-our-monitoring-applet}
----------------------------------------------------------------------------
+Let's write our monitoring applet
+---------------------------------
 
 Let's write and deploy an application that monitors localhost and shows us when it's ready for testing.  
 
@@ -197,14 +197,14 @@ public class MonitorSite extends JApplet {
 ```
 
 
-### Let's analyze the code {#h3-2-let-s-analyze-the-code}
+### Let's analyze the code
 
 * No external libraries needed in the imports
 * Extends `JApplet`. Extending `java.applet.Applet` would also work.
 * Override the `start()` method. Overriding the `init()` method would also work.
 * Write your code like you would write a normal Swing application.
 
-### Compile, package, run and distribute {#h3-3-compile-package-run-and-distribute}
+### Compile, package, run and distribute
 
 As it's a single file, **compilation** can be done with
 
@@ -249,7 +249,7 @@ If you have JDK 18 or higher installed, you can test the monitoring by executing
 
 For the **distribution**, copy the html and class files on a network drive or website and send the location of the file to your colleagues.
 
-### Limitations {#h3-4-limitations}
+### Limitations
 
 * The Applet class is deprecated for removal, so it may not work forever.
 * Applet Runner supports local files and https URLs. Applet Runner Pro also supports http URLs.
@@ -257,8 +257,8 @@ For the **distribution**, copy the html and class files on a network drive or we
 * If you try to open an http or https applet that is not in your bookmarks, you will get a warning window before.
 * You can only run one applet at a time in Applet Runner. Applet Runner Pro allows multiple applets running.
 
-For the lazy ones {#h2-5-for-the-lazy-ones}
--------------------------------------------
+For the lazy ones
+-----------------
 
 Applet Runner is distributed with more than 100 applet bookmarks. And more are coming soon, such as [Control Dashboard](https://www.japplis.com/control-dashboard/) to monitor websites 😉.  
 
@@ -272,8 +272,8 @@ Here is a small overview:
 
 {{< youtube n2L4P4_ek4w >}}
 
-Links {#h2-6-links}
--------------------
+Links
+-----
 
 * [Applet Runner website](https://www.japplis.com/applet-runner/)
 * [Applet Runner plugin in **JetBrains** Marketplace](https://plugins.jetbrains.com/plugin/16682-applet-runner/)

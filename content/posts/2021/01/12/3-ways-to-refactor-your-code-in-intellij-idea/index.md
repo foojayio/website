@@ -30,8 +30,8 @@ Simplifying your code has lots of advantages, including improving readability, t
 
 The code samples are available in the [IntelliJ IDEA sample code repository](https://github.com/JetBrains/intellij-samples), specifically the [PlanetExtractions](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/PlanetExtractions.java) and [Planet](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/Planet.java) class.
 
-Extracting and Inlining {#h2-0-extracting-and-inlining}
--------------------------------------------------------
+Extracting and Inlining
+-----------------------
 
 The first way to simplify your code is to extract it. There are five types of extract refactoring that you can do in IntelliJ IDEA that we will look at in this blog:
 
@@ -41,7 +41,7 @@ The first way to simplify your code is to extract it. There are five types of ex
 * [Extract Variable](https://www.jetbrains.com/help/idea/extract-variable.html)
 * [Extract Parameter](https://www.jetbrains.com/help/idea/extract-parameter.html)
 
-### Extract Method {#h3-1-extract-method}
+### Extract Method
 
 The switch statement in this method isn't in keeping with the rest of the method so let's [extract it](https://www.jetbrains.com/help/idea/extract-method.html).
 
@@ -104,7 +104,7 @@ You can get additional options for extract Method by using the same shortcut aga
 
 **Tip** : You can navigate to the declaration or usages of a method by using **⌘B** on macOS, or **Ctrl** +**B** on Windows and Linux.
 
-### Extract Constant {#h3-2-extract-constant}
+### Extract Constant
 
 We can extract the number 365 to a constant in this line of code because the earth always takes about 365 days to complete its rotation around the sun:
 
@@ -127,7 +127,7 @@ System.out.println("Number of times the planet rotates around the sun is " + NUM
 ```
 
 
-### Extract Field {#h3-3-extract-field}
+### Extract Field
 
 The phrase "The Weather is" is repeated four times in the method that we extracted, so let's extract that to a field:
 
@@ -163,7 +163,7 @@ private void getWeather() {
 ```
 
 
-### Extract Variable {#h3-4-extract-variable}
+### Extract Variable
 
 Chained methods like this can be harder to understand, so let's refactor it into a separate variable:
 
@@ -185,7 +185,7 @@ IntelliJ IDEA has also created our new variable:
 
 `System.out.println("Number of characters in planet name = " + planetNameLength);`
 
-### Extract Parameter {#h3-5-extract-parameter}
+### Extract Parameter
 
 Let's extract the country `UK` in this code and pass it in as a parameter called `country`:
 
@@ -219,7 +219,7 @@ private void getWeather(String country) {
 ```
 
 
-### Extract Summary {#h3-6-extract-summary}
+### Extract Summary
 
 The shortcuts for **extract** refactorings have symmetry which can help you to remember them.
 
@@ -241,8 +241,8 @@ For example, we can inline the method that we previously extracted by placing ou
 
 ![Inline Method](inline-method.png)
 
-Change Signature {#h2-7-change-signature}
------------------------------------------
+Change Signature
+----------------
 
 We often need to [change the signature](https://www.jetbrains.com/help/idea/change-signature-dialog.html) of a method. IntelliJ IDEA can help us with this process, and the impact of the change on your wider code base. Using our [Planet](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/Planet.java) class, let's refactor this constructor to take the season as an argument as well as the name:
 
@@ -264,8 +264,8 @@ Planet myPlanet = new Planet("earth", "summer");
 ```
 
 
-Rename {#h2-8-rename}
----------------------
+Rename
+------
 
 Our last type of refactoring that can help you to simplify your code is [renaming](https://www.jetbrains.com/help/idea/rename-refactorings.html). We frequently need to rename files, or aspects of our code.
 
@@ -292,8 +292,8 @@ IntelliJ IDEA will also make changes everywhere that uses that class name, for e
 
 ![Alt Keyboard Shortcuts](alt-keyboard-shortcut.png)
 
-Summary {#h2-9-summary}
------------------------
+Summary
+-------
 
 These are just some of the refactorings that you can do in IntelliJ IDEA to help you to simplify your code:
 

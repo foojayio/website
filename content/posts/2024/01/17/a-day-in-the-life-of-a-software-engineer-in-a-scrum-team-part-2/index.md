@@ -37,23 +37,23 @@ On a typical day, Alex participates in a few key activities:
 
 Let's dive into more details:
 
-### 10:00 AM - 10:15 AM (Daily Stand-up Meeting)☀️🐓 {#h3-0-10-00-am-10-15-am-daily-stand-up-meeting}
+### 10:00 AM - 10:15 AM (Daily Stand-up Meeting)☀️🐓
 
 This is a quick meeting where everyone on the team discusses what they worked on yesterday, what they're planning to do today, and if they have any problems or blockers. Alex starts his day with a good breakfast and coffee ☕. At 10:00 AM, he joins his team's stand-up meeting. This meeting lasts for about 15 minutes.
 
-### 10:30 AM - 1:00 PM (Coding and Problem-Solving) 🚀💼 {#h3-1-10-30-am-1-00-pm-coding-and-problem-solving}
+### 10:30 AM - 1:00 PM (Coding and Problem-Solving) 🚀💼
 
 Alex spends a significant part of his day coding and working on tasks for the current sprint, like creating new features or fixing bugs. After the meeting, Alex gets to work. He tests the new Apple Pay setup. He wants to make sure it works well and can handle payment data safely.
 
-### 1:00 PM - 2:00 PM (Lunch Break) 🍔⏱️ {#h3-2-1-00-pm-2-00-pm-lunch-break}
+### 1:00 PM - 2:00 PM (Lunch Break) 🍔⏱️
 
 Alex takes a lunch break at 1:00 PM. After lunch, it's time for the next activity.
 
-### 2:00 PM - 4:00 PM (Pair Programming) 🧑💻🧑💻 {#h3-3-2-00-pm-4-00-pm-pair-programming}
+### 2:00 PM - 4:00 PM (Pair Programming) 🧑💻🧑💻
 
 Alex often teams up with a teammate to work together on complex tasks in the afternoon, sharing ideas and learning from each other. He works with Jamie, a security expert on the team. Together, they check the new Apple Pay feature for any possible security problems. This joint effort makes the task easier and more fun.
 
-### 4:00 PM - 5:00 PM (Progress Review and Planning for the Next Day) 🌆🏁 {#h3-4-4-00-pm-5-00-pm-progress-review-and-planning-for-the-next-day}
+### 4:00 PM - 5:00 PM (Progress Review and Planning for the Next Day) 🌆🏁
 
 As the day ends, Alex reviews his work, updates his tasks, and prepares for the next day. He looks at what he did during the day. He updates the tasks on the Scrum board. He marks what he finished and plans what he needs to do next.
 
@@ -61,6 +61,6 @@ Today, he found that the new Apple Pay feature doesn't have any big security pro
 
 **Scrum** helps Alex in many ways. It helps him break down big tasks into smaller ones. It also helps him stay focused and organized.
 
-### Is the End... Or is it just the beginning? 🌠🎢 {#h3-5-is-the-end-or-is-it-just-the-beginning}
+### Is the End... Or is it just the beginning? 🌠🎢
 
 Every day brings a new chance to make the software better. So, hats off to Alex and all the software engineers on the Payment Pioneers team. Together, they are making the tech world better, one sprint at a time! 🌐

@@ -28,8 +28,8 @@ Let's talk about the history and future of the Java community in the Philippines
 
 {{< youtube eo8m4Kia-hU >}}
 
-Podcast Apps {#h2-0-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,40 +37,40 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
-### Tristan Mahinay {#h3-2-tristan-mahinay}
+### Tristan Mahinay
 
 * <https://twitter.com/ph_tantan>
 * <https://www.linkedin.com/in/rjtmahinay/>
 * <https://blog.rjtmahinay.com/>
 * <https://www.facebook.com/rjtmahinay/>
 
-### Calen Legaspi {#h3-3-calen-legaspi}
+### Calen Legaspi
 
 * <https://www.linkedin.com/in/calenlegaspi/>
 * <https://twitter.com/calenlegaspi>
 
-### Jansen Marson Ang {#h3-4-jansen-marson-ang}
+### Jansen Marson Ang
 
 * <https://www.linkedin.com/in/jansen-ang/>
 
-### Kerby Martino {#h3-5-kerby-martino}
+### Kerby Martino
 
 * <https://www.linkedin.com/in/kerbymartino/>
 * <https://twitter.com/kerbymart>
 
-Podcast {#h2-6-podcast}
------------------------
+Podcast
+-------
 
-### Host: Frank Delporte {#h3-7-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-Links {#h2-8-links}
--------------------
+Links
+-----
 
 * <https://www.meetup.com/java-user-group-ph/>
 * <https://www.linkedin.com/company/jugph/>[](https://www.linkedin.com/company/jugph/)
@@ -78,8 +78,8 @@ Links {#h2-8-links}
 * <https://github.com/JUGPH>
 * <https://softconph.com/>
 
-Content {#h2-9-content}
------------------------
+Content
+-------
 
 00:00 Intro and introduction of the guests  
 

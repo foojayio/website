@@ -31,8 +31,8 @@ We have now covered three main aspects of MicroStream:
 
 In this last article of the series, we cover a few other features of MicroStream: caching, integrations into other products, and we discuss a major upcoming feature.
 
-Caching {#h2-0-caching}
------------------------
+Caching
+-------
 
 The MicroStream Cache project provides you with an implementation of the Cache specification. This specification describes how you can keep values cached for later usage if creating or retrieving certain results are too expensive and don't change often. Besides the implementation of this specification, MicroStream also adds the functionality to persist the values so that the cache is also available at the next start of your process.
 
@@ -64,8 +64,8 @@ But MicroStream provides more caching integrations than just JCache. You can als
 
 The documentation describes how you can set up this [caching functionality](https://docs.microstream.one/manual/cache/index.html) when using Hibernate as a JPA provider or within the Spring framework.
 
-Integrations {#h2-1-integrations}
----------------------------------
+Integrations
+------------
 
 Speaking of the Spring framework, there are several integrations available of MicroStream.
 
@@ -93,8 +93,8 @@ You can follow this [step-by-step tutorial](https://micronaut-projects.github.io
 
 As mentioned, we are working on improved integrations and also providing integrations for more products.
 
-MicroStream Cluster {#h2-2-microstream-cluster}
------------------------------------------------
+MicroStream Cluster
+-------------------
 
 The OpenSource version of MicroStream is a single node implementation. Only a single JVM is allowed to write to a certain store. When multiple JVMs are used, the storage can be corrupted as the Object Graph of the different JVM instances is not identical.
 
@@ -106,8 +106,8 @@ Later this year, we will launch a new product called MicroStream Cluster that ca
 
 More information will follow later on that will allow you to run MicroStream in a large-scale environment very easily.
 
-Resources {#h2-3-resources}
----------------------------
+Resources
+---------
 
 * [MicroStream website](https://microstream.one/)
 * [MicroStream reference manual](https://docs.microstream.one/manual/intro/welcome.html)

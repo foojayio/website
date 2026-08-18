@@ -32,8 +32,8 @@ You can use Azul Optimizer Hub on AWS to enhance the performance of Java applica
 
 Cloud DevOps teams and engineering teams use [Azul Platform Prime](https://www.azul.com/products/prime) to reduce cloud waste and leverage committed cloud spend, all while improving carrying capacity and maintaining service levels for growing workloads. Platform Prime includes the following components:
 
-Azul Zing Builds of OpenJDK {#h-azul-zing-builds-of-openjdk-nbsp-nbsp}
-----------------------------------------------------------------------
+Azul Zing Builds of OpenJDK
+---------------------------
 
 Azul Zing Builds of OpenJDK (Zing) is a modern, TCK-compliant Java runtime based on OpenJDK. You don't need to recompile your code to run your Java workloads with Zing. Zing delivers:
 
@@ -41,29 +41,29 @@ Azul Zing Builds of OpenJDK (Zing) is a modern, TCK-compliant Java runtime based
 * Higher throughput and lower median latency thanks to the [Falcon JIT compiler](https://www.azul.com/products/components/falcon-jit-compiler/)
 * Lower Java warmup time and fewer de-optimizations thanks to the [ReadyNow warmup optimizer](https://www.azul.com/products/components/readynow/) and [Cloud Native Compiler](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/)
 
-Azul Optimizer Hub {#h-azul-optimizer-hub-nbsp-nbsp}
-----------------------------------------------------
+Azul Optimizer Hub
+------------------
 
 [Azul Optimizer Hub](https://www.azul.com/products/components/azul-optimizer-hub/) is a scalable set of services that you deploy on Kubernetes in your Virtual Private Cloud (VPC). Using Optimizer Hub, Java applications can reach full speed more quickly and with minimal client-side CPU load. Optimizer Hub provides two services that solve the traditional Java warmup problem:
 
 * **ReadyNow Orchestrator:** Monitors usage patterns across your entire fleet to build optimization profiles that drive compilations on the JVM. Newly started JVMs skip the profiling stage and compile methods as soon as they're initialized, enabling much of your JIT compilation to happen during application initialization before taking traffic.
 * **Cloud Native Compiler:** Provides server-side optimization by offloading JIT compilation to a separate, dedicated JIT farm. Cloud Native Compiler caches optimizations to avoid repeating the same optimization hundreds of times, allowing clients to devote 100% of their CPU to handling requests without reserving capacity for initial JIT compilation spikes.
 
-Amazon Services to run Optimizer Hub {#h-amazon-services-to-run-optimizer-hub-nbsp-nbsp}
-----------------------------------------------------------------------------------------
+Amazon Services to run Optimizer Hub
+------------------------------------
 
 A full Java system on AWS that uses Optimizer Hub may consist of the following environments.
 ![](aws-warm-up-diagram.avif)
 
 In the above diagram, you replace the Java Virtual Machine (Oracle, OpenJDK, Corretto) on the instances running on EC2, EKS, or Fargate with Zing. Zing communicates with the Optimizer Hub instances closest to them. Each Optimizer Hub instance is a shared service that can serve thousands of Java apps.
 
-### Your applications and other Java systems {#h-your-applications-and-other-java-systems-nbsp-nbsp}
+### Your applications and other Java systems
 
 In addition to the applications that you code for yourself, third-party applications like Apache Kafka can benefit from Zing and Optimizer Hub. All these can be deployed on AWS using one of the available options like EC2-instances, Elastic Container Service (ECS), Elastic Kubernetes Service (EKS), etc.
 
 Many of those applications can run on Graviton-based systems which are more cost-effective compared to Intel-based systems.
 
-### Optimizer Hub on EKS {#h-optimizer-hub-on-eks-nbsp-nbsp-nbsp}
+### Optimizer Hub on EKS
 
 Optimizer Hub runs on any x86 Kubernetes-compliant system, so AWS EKS is a perfect environment to deploy it, taking these system requirements into account:
 
@@ -90,8 +90,8 @@ helm install opthub opthub-helm/azul-opthub \
 ```
 
 
-Connecting your applications to Optimizer Hub {#h-connecting-your-applications-to-optimizer-hub-nbsp-nbsp}
-----------------------------------------------------------------------------------------------------------
+Connecting your applications to Optimizer Hub
+---------------------------------------------
 
 Once an Optimizer Hub instance is available within your environment, you can instruct any Java application to connect to it to store or get ReadyNow profiles, and offload its compilations:
 
@@ -100,8 +100,8 @@ java -XX:OptHubHost=<host>[:<port>] <other-options> -jar yourapp.jar
 ```
 
 
-Java warmup improvement results {#h-java-warmup-improvement-results}
---------------------------------------------------------------------
+Java warmup improvement results
+-------------------------------
 
 Based on the extended garbage collector logs provided by Zing, we can dive into the behavior of an example application running without and with Cloud Native Compiler. The charts below are screenshots taken from [GC Log Analyzer](https://docs.azul.com/gc-log-analyzer/), a tool by Azul to visualize the data from garbage collector log files and ReadyNow profiles. The GC log files produced by Zing contain, next to info about the garbage collector, a lot more information about compilations and other behaviors of the runtime.
 
@@ -110,8 +110,8 @@ The application is an e-commerce application running in an 8 vCore container on 
 * Decrease the readiness wait period by finishing JIT optimizations earlier
 * Reduce the number of vCores the client needs to serve traffic within SLAs
 
-Compiler queues {#h-compiler-queues-nbsp-nbsp}
-----------------------------------------------
+Compiler queues
+---------------
 
 The compiler queue charts show how much work the JVM must handle to compile the Java bytecode to the best possible native code for the system it's running on, based on how the code is used.
 
@@ -133,8 +133,8 @@ The results mean we can change the readiness check to allow traffic 30 seconds e
  </figure>
 </figure>
 
-Compiler threads {#h-compiler-threads-nbsp-nbsp}
-------------------------------------------------
+Compiler threads
+----------------
 
 When running with local JIT compilation, the application was configured to give the maximum number of threads to the JIT compiler during the warmup period to finish as many compilations as possible before traffic starts. Once traffic starts, the allowed number of JIT threads is reduced to two, to ensure that the majority of the CPU is handling traffic.
 
@@ -151,8 +151,8 @@ In the second graph with Optimizer Hub and Cloud Native Compiler, there is no cl
  </figure>
 </figure>
 
-CPU use percentage {#h-cpu-use-percentage-nbsp-nbsp}
-----------------------------------------------------
+CPU use percentage
+------------------
 
 With the CPU Use percent chart, we get insights into how the available vCPUs are used. The important change here is that in our Optimizer Hub run, the team reduced the vCore requests from 8 to 5. So, in the CPU percentage charts here, the Optimizer Hub run is already running at 37.5% less CPU.
 
@@ -169,8 +169,8 @@ The second chart shows what happens when the compilation activity is removed fro
  </figure>
 </figure>
 
-Case study: real-world impact {#h-case-study-real-world-impact-nbsp-nbsp}
--------------------------------------------------------------------------
+Case study: real-world impact
+-----------------------------
 
 A major online retailer struggled with balancing cloud costs and customer satisfaction due to aggressive scaling requirements (up to 20x steady-state size during peak events). Their challenge: JVM warmup delays caused transaction processing slowdowns and missed requests whenever new nodes joined the rotation.
 
@@ -186,14 +186,14 @@ Results after implementing Optimizer Hub:
 
 The solution has since expanded to their supply chain, vendor management, and warehousing systems with similar cost reductions.
 
-Impact on errors {#h-impact-on-errors-nbsp-nbsp}
-------------------------------------------------
+Impact on errors
+----------------
 
 The following chart shows the impact the solution had on their indicators of customer satisfaction (reduction in error/abandonment rate) for their most critical business application. As you can see the number of these errors is heavily reduced.
 ![](aws-warm-up-impact-errors.avif)
 
-Conclusion {#h-conclusion-nbsp-nbsp}
-------------------------------------
+Conclusion
+----------
 
 Java applications running on AWS face a fundamental challenge: they perform at their worst precisely when you need them most, during scaling events and traffic spikes. Traditional JVM warmup creates a perfect storm where new instances consume CPU cycles for compilation while simultaneously trying to handle incoming requests. This leads to degraded performance, increased error rates, and potentially poor user experiences.
 

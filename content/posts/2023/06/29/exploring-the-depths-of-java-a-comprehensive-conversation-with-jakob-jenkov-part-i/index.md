@@ -30,8 +30,8 @@ Whether you're a professional developer, a student of programming, or simply int
 
 <br />
 
-Profile: {#h2-0-profile}
-------------------------
+Profile:
+--------
 
 🐦 Twitter: <https://twitter.com/jjenkov>
 
@@ -127,8 +127,8 @@ I am not "religious" about Java, though. The .NET ecosystem is doing quite well 
 
 
 
-Conclusion: {#h2-1-conclusion}
-------------------------------
+Conclusion:
+-----------
 
 That concludes Part One of our in-depth conversation with Java expert and AWS solution architect, Jakob Jenkov. From the intriguing tale of his career path to his forward-thinking views on Java's evolution, we've uncovered a wealth of insights. As we look forward to Part Two next week, expect even deeper dives into software development trends, the challenges of our time, and the future of data science and AI. Don't miss it!  
 

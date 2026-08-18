@@ -36,8 +36,8 @@ As far as I understand it, here's the conceptual model.
 
 ![](home-assistant-class-diagram.png)
 
-Integrations {#h2-0-integrations}
----------------------------------
+Integrations
+------------
 
 > Integrations are pieces of software that allow Home Assistant to connect to other software and platforms. For example, a product by Philips called Hue would use the Philips Hue integration and allow Home Assistant to talk to the hardware controller Hue Bridge. Any Home Assistant compatible devices connected to the Hue Bridge would appear in Home Assistant as devices.
 >
@@ -55,8 +55,8 @@ You can change it; the URL is stored on the browser.
 
 Some integrations require additional configuration, *e.g.*, authentication.
 
-Devices {#h2-1-devices}
------------------------
+Devices
+-------
 
 > Devices are a logical grouping for one or more entities. A device may represent a physical device, which can have one or more sensors. The sensors appear as entities associated with the device. For example, a motion sensor is represented as a device. It may provide motion detection, temperature, and light levels as entities. Entities have states such as detected when motion is detected and clear when there is no motion.
 >
@@ -67,8 +67,8 @@ Once you've added the integration, you can add `Device`:
 * some categorize as *Service* , when they need a Cloud connection, *e.g.* , [Google Cloud SDK](https://www.home-assistant.io/integrations/google_assistant_sdk/) or [GitHub](https://www.home-assistant.io/integrations/github/)![](ha-ui-service.jpeg)
 * some as *Device* , when they need one, *e.g.* , [Philips Hue](https://www.home-assistant.io/integrations/hue/).![](ha-ui-device.jpeg)
 
-Entities {#h2-2-entities}
--------------------------
+Entities
+--------
 
 > Entities are the basic building blocks to hold data in Home Assistant. An entity represents a sensor, actor, or function in Home Assistant. Entities are used to monitor physical properties or to control other entities. An entity is usually part of a device or a service. Entities have states.
 >
@@ -84,8 +84,8 @@ For example, the Philips Hue motion sensor device has three different available 
 
 Unexpectedly, a motion sensor provides a temperature sensor. Check your devices for such sensors; you might be in for a good surprise.
 
-Other objects {#h2-3-other-objects}
------------------------------------
+Other objects
+-------------
 
 * Areas:An `Area` represents a location. You can put a **physical** `Device` in an `Area`.
 * Automations:An `Automation` is pretty self-explanatory. Each consists of two main components: a trigger and an action. Note that you can add an optional condition.
@@ -100,8 +100,8 @@ Other objects {#h2-3-other-objects}
 * Add-ons:While an `Integration` allows interfacing with an external device or service, an `Add-On` provides a service. In other words, an `Add-On` extends the platform itself. For example, I installed the [Let's Encrypt](https://letsencrypt.org/) add-on to my Home Assistant installation to automatically manage a TLS certificate.
 * Scenes:A `Scene` for a `Device` is akin to a *profile* for your phone. It's a named set of configurations that you save and reuse. I must admit that I don't use profiles on my phone; I don't have any `Scene` objects at the moment, and I have to understand their usage beyond lighting.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, I described the model objects available in Home Assistant. In the next post, I'll migrate from the proprietary Philips Hue automation to Home Assistant.
 

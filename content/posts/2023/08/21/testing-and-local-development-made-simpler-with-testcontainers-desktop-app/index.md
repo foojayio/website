@@ -26,14 +26,14 @@ frozen: false
 
 While writing integration tests you should test with the same type of real dependencies instead of using mocks or in-memory variations of those services.
 
-Why should you test with real dependencies? {#h2-0-why-should-you-test-with-real-dependencies}
-----------------------------------------------------------------------------------------------
+Why should you test with real dependencies?
+-------------------------------------------
 
 Let's assume you are building a software product that uses PostgreSQL database, Kafka message broker, ElasticSearch for search capabilities, etc.
 
 While writing tests for Repositories that talk to the database, you may think of using an in-memory database such as HSQL or H2. But, this is not ideal and here is why.
 
-### False negatives: {#h3-1-false-negatives}
+### False negatives:
 
 There are cases where your embedded solution will not have the full capabilities of the real service, and you won't be able to use those in code and test the functionality. For example, you are using the following native SQL query which works fine with PostgreSQL but not with H2:
 
@@ -45,7 +45,7 @@ VALUES (?, ?, ?) ON CONFLICT DO NOTHING;
 
 When you test this query with the H2 database, by default this syntax is not supported and will throw an error. You can try to run H2 with PostgreSQL compatibility mode and get it working. But, not all the PostgreSQL features are supported by H2 and every time you are writing a query you need to verify that it works with both H2 and PostgreSQL as well. This is an unnecessary effort and leads to low productivity.
 
-### False positives: {#h3-2-false-positives}
+### False positives:
 
 What is even worse, sometimes you may write a query that works fine with H2 but not with PostgreSQL. This is way worse because your tests will pass and you will deploy the application and it breaks only when you start using it.
 
@@ -86,8 +86,8 @@ By configuring the special Testcontainers JDBC URL, the Testcontainers library w
 
 Testcontainers provides support for a wide range of SQL and NoSQL databases with easy to use modules. To view all the modules available, please take a look at the [Testcontainers Modules Catalog](https://testcontainers.com/modules/).
 
-Local Development with Testcontainers {#h2-3-local-development-with-testcontainers}
------------------------------------------------------------------------------------
+Local Development with Testcontainers
+-------------------------------------
 
 [Spring Boot 3.1.0 introduced excellent support for Testcontainers](https://www.atomicjar.com/2023/05/spring-boot-3-1-0-testcontainers-for-testing-and-local-development/) that not only simplifies writing tests but also helps in running the application locally during the development time. Now you can start the application dependencies such as databases, message brokers, etc as Docker containers using Testcontainers and run the application.
 
@@ -111,14 +111,14 @@ public class TestApplication {
 ```
 
 
-Getting Started with Testcontainers Desktop {#h2-4-getting-started-with-testcontainers-desktop}
------------------------------------------------------------------------------------------------
+Getting Started with Testcontainers Desktop
+-------------------------------------------
 
 [AtomicJar](https://www.atomicjar.com/) just introduced [Testcontainers Desktop](https://testcontainers.com/desktop/) which is a free companion app for the Testcontainers libraries that makes local development and testing with real dependencies easier.
 
 Let's explore various features of Testcontainers Desktop and how it helps while running and debugging your application locally.
 
-### Switching container runtimes {#h3-5-switching-container-runtimes}
+### Switching container runtimes
 
 Testcontainers Desktop will automatically detect your locally installed Docker runtime(s) and is configured to use it. You can choose which Docker runtime to use by the Testcontainers libraries by selecting from the menu options as shown below:
 
@@ -126,7 +126,7 @@ Testcontainers Desktop will automatically detect your locally installed Docker r
 
 You can also create your free [Testcontainers Cloud](https://testcontainers.com/cloud/) account and choose to save local resources by running your containers in the cloud instead of running them on your computer.
 
-### Using fixed ports to connect to the development services {#h3-6-using-fixed-ports-to-connect-to-the-development-services}
+### Using fixed ports to connect to the development services
 
 As mentioned in the earlier section, you can use Testcontainers for local development as well. Typically during the development, you may want to connect to the application dependencies such as databases, and message brokers using client tools and verify the data.
 
@@ -161,7 +161,7 @@ $ psql -h localhost -p 5432 -U test -d test
 
 The ability to use fixed ports and connect to those services is very helpful during the development time without trading off the dynamic configuration Testcontainers provide or the ability to run your tests in parallel.
 
-### Reusable containers to speed up the development {#h3-7-reusable-containers-to-speed-up-the-development}
+### Reusable containers to speed up the development
 
 During the development, you would like to quickly change the code and verify the behavior either by running the tests or running the application locally. But, recreating the containers for every code change may slow down your feedback cycle. One technique that you can apply to speed up testing and local development is using the [reusable containers](https://java.testcontainers.org/features/reuse/) feature.
 
@@ -185,8 +185,8 @@ Now if you run the test and then execute `docker ps` command you can see the Pos
 
 Please note that, as an experimental capability, the implementation of reusable containers currently differs across Testcontainers libraries. See the [release note](https://newsletter.testcontainers.com/announcements/enable-reusable-containers-with-a-single-click) for the main limitations.
 
-Summary {#h2-8-summary}
------------------------
+Summary
+-------
 
 Testcontainers libraries help you not only for testing your application with real dependencies but also to speed up and simplify local development. Various features of the free Testcontainers Desktop app greatly simplify running and debugging your application and Testcontainers based tests right from your IDE.
 

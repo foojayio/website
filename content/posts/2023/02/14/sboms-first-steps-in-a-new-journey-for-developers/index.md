@@ -31,13 +31,13 @@ Indeed, related terms like "software supply chain" or "security hygiene" were ab
 
 An SBOM, a software bill of materials, is often spoken about as a way to help supply chain security. To understand what it is, how it works and, most critically, why now? We must first step back and look at the broader landscape of software creation, software security and the threats to our systems.
 
-### Software runs the world --- and it's almost all open source {#h3-0-software-runs-the-world-and-it-s-almost-all-open-source}
+### Software runs the world --- and it's almost all open source
 
 Almost everything we do in modern life has some software component. Software is responsible for delivering food to our tables, lighting our homes, enabling communications, providing transport, and so on. Almost all of this software, or its constituent pieces, is open source. Ninety per cent of modern applications use open-source components and run on open-source operating systems in open-source Kubernetes clusters. Simply put, individuals outside the application development team produce 90% of the final application.
 
 On the one hand, it demonstrates the power of open source. We can build our solutions off the hard work and innovation of others. Without this pervasive sharing, our connected, software-controlled world would not exist, nor would we be able to produce software of such high quality as fast as we are now. On the other hand, we've built this world with assumptions about motive, behaviour, and trustworthiness. Assumptions that are currently being exploited by bad actors worldwide at an unprecedented scale.
 
-### Bad actors abound {#h3-1-bad-actors-abound}
+### Bad actors abound
 
 It's no coincidence that the U.S. government, the European Union, the U.K., and other nations are creating legislation to enforce behaviours, set standards, and generally tighten up the world's approach to software.
 
@@ -47,7 +47,7 @@ Supply chain attacks, which means bad actors corrupt the 'process' of software c
 
 Things have to change.
 
-### What does this have to do with SBOMs? {#h3-2-what-does-this-have-to-do-with-sboms}
+### What does this have to do with SBOMs?
 
 If 90% of an application is written by someone else, then 90% is likely to be shared with others.
 
@@ -55,7 +55,7 @@ A primary route for bad actors is to find these elements and shared dependencies
 
 To protect an application, it's vital to be completely aware of every one of the software components included: the less awareness, the higher the risk of unexpected (and often hidden) attacks.
 
-### Where's the cake? {#h3-3-where-s-the-cake}
+### Where's the cake?
 
 Imagine an application and its dependencies as ingredients in a fancy cake.
 
@@ -67,7 +67,7 @@ The effectiveness of SCA thus depends on the capability of the scanning tools, t
 
 Picking the less capable tools can lead to a false sense of security.
 
-### SBOMs to the rescue {#h3-4-sboms-to-the-rescue}
+### SBOMs to the rescue
 
 The reverse engineering approach has been the customary way of discovering what is included in an application. SBOMs are the antithesis of this practice.
 
@@ -79,7 +79,7 @@ This approach immediately reduces the impact of ineffectual scanning tools since
 
 Deep scanning tools are still needed to discover malware, intentionally corrupted components and more. Still, most attacks are through software vulnerabilities in open-source components, so SBOMs will help application owners dramatically manage their exposure from that vector.
 
-### It's more than tools and dependencies {#h3-5-it-s-more-than-tools-and-dependencies}
+### It's more than tools and dependencies
 
 SBOMs are a partial panacea to securing the software supply chain but the approach makes such a big difference that adopting SBOMs (both the consumption and production of them) is becoming law.
 
@@ -87,7 +87,7 @@ In the U.S., SBOMs are required when providing software to the government, and i
 
 Spoiler alert: Governments are as concerned about *how* we develop software as much as *what* we produce. SBOMs are the beginning of a focus on software development we've never seen before.
 
-### Next steps {#h3-6-next-steps}
+### Next steps
 
 To get ahead and start to understand the tools, the processes, and the consequences to software production, there are various places to go and many tools to evaluate.
 

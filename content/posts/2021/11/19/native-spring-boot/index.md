@@ -50,8 +50,8 @@ For that, I'll create a Kotlin-based application that can query the Marvel API u
 
 This post is dedicated to explaining the application and Spring Boot.
 
-The Marvel API {#h2-0-the-marvel-api}
--------------------------------------
+The Marvel API
+--------------
 
 Marvel offers a [REST API](https://developer.marvel.com/docs) to query their data. It requires the generation of an API key **and** a private key.
 
@@ -68,8 +68,8 @@ curl http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c513
 
 For more detailed information, please refer to the [documentation](https://developer.marvel.com/documentation/authorization).
 
-Creating a new project {#h2-1-creating-a-new-project}
------------------------------------------------------
+Creating a new project
+----------------------
 
 The Spring team was the first to offer a Web UI to configure one's project, the [Spring Initializr](https://start.spring.io/).
 
@@ -93,8 +93,8 @@ Additionally, the application also offers a REST API to use the CLI and automate
 
 Finally, while it's hosted, the underlying code is [available on GitHub](https://github.com/spring-io/initializr) under the Apache v2 license so that you can clone and configure it. It's designed with extensibility in mind to allow for upgrades.
 
-Bean configuration {#h2-2-bean-configuration}
----------------------------------------------
+Bean configuration
+------------------
 
 I've already written a [dedicated post](https://blog.frankel.ch/multiple-ways-configure-spring/) on the different ways one can create beans in Spring.
 
@@ -120,8 +120,8 @@ class BootNativeApplication
 ```
 
 
-Controller configuration {#h2-3-controller-configuration}
----------------------------------------------------------
+Controller configuration
+------------------------
 
 Spring was the first to introduce the annotation-based controller configuration on top of the Servlet API. Since then, there has been some pushback against annotations. For that reason, Spring introduced declarative routes. Kotlin makes it even more pleasant with the Route DSL:
 
@@ -151,8 +151,8 @@ class MarvelConfig {
 ```
 
 
-Non-blocking HTTP client {#h2-4-non-blocking-http-client}
----------------------------------------------------------
+Non-blocking HTTP client
+------------------------
 
 For ages, Spring has offered a *blocking* HTTP client in the form of `RestTemplate` as part of Web MVC. With its version 5, Spring introduced WebFlux, the reactive counterpart to Web MVC. WebFlux builds on top of Project Reactor, which itself builds upon Reactive Streams. You're probably familiar with Project Reactor's foundation primitives:
 
@@ -216,8 +216,8 @@ fun routes(client: WebClient, props: MarvelProperties, digest: MessageDigest) = 
 ```
 
 
-Parameterization {#h2-5-parameterization}
------------------------------------------
+Parameterization
+----------------
 
 The next step is to parameterize the application: the Marvel API requires us to authenticate, and we don't want to hardcode our credentials. Also, for testing purposes, we want to change the URL of the server we send request to quickly.
 
@@ -249,8 +249,8 @@ data class MarvelProperties(
 2. Integrate with Kotlin data class
 3. Spring is lenient and allows several cases: kebab-, snake- or camel-case
 
-Testing {#h2-6-testing}
------------------------
+Testing
+-------
 
 The size of the codebase doesn't lend itself to a lot of testing, especially unit testing. However, we can add an integration test that makes sure that the response from the API is unmarshalled to a class and marshalled back again from the application. In tests, we want to avoid relying on third-party infrastructure: a test shouldn't fail because a dependency out of our control fails.
 
@@ -398,8 +398,8 @@ class BootNativeApplicationTests {
 
 1. Reference the initialization class
 
-Docker and GraalVM integration {#h2-7-docker-and-graalvm-integration}
----------------------------------------------------------------------
+Docker and GraalVM integration
+------------------------------
 
 NOTE: This section assumes you're already familiar with GraalVM native.
 
@@ -484,8 +484,8 @@ curl 'localhost:8080?limit=1&offset=50'
 ```
 
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Spring has a long history of taking care of boilerplate code and letting developers focus on business code. In latter years, it has successfully integrated the Kotlin language to provide a fantastic developer experience.
 

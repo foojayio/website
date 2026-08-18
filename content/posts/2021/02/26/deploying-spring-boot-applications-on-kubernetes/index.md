@@ -18,7 +18,7 @@ frozen: false
 
 In this article, I will explain how you can create a pod, deploy a Spring Boot application, and manage the single node cluster with Lens IDE on Docker Desktop.
 
-### What you will learn. {#h3-0-what-you-will-learn}
+### What you will learn.
 
 * How to Enable Kubernetes With Docker Desktop for Mac
 * How to Create a Pod
@@ -27,14 +27,14 @@ In this article, I will explain how you can create a pod, deploy a Spring Boot a
 
 Moving on, you may not know this, but you can have a functional single-node Kubernetes cluster running locally with your Docker Desktop by following the below steps. But wait, What is Docker Desktop?
 
-### What is Docker Desktop? {#h3-1-what-is-docker-desktop}
+### What is Docker Desktop?
 
 As per the official [documentation](https://www.docker.com/products/docker-desktop):
 > Docker Desktop is an application for macOS and Windows machines for the building and sharing of containerized applications and microservices.
 
 You can follow the official Docker Desktop [installation](http://https://hub.docker.com/editions/community/docker-ce-desktop-mac "installation") guide if you have not installed it already.
 
-### How to Enable Kubernetes With Docker Desktop for Mac {#h3-2-how-to-enable-kubernetes-with-docker-desktop-for-mac}
+### How to Enable Kubernetes With Docker Desktop for Mac
 
 * Go to Preferences in the Docker menu bar. Then click the Kubernetes tab. Click the checkbox to enable Kubernetes and switch the default orchestrator to Kubernetes. It will take some time to enable Kubernetes.![](Screenshot-2020-12-07-at-7.29.06-PM-700x219.png)
 * Once it is enabled you will see something like below on your Docker menu bar.![](Screenshot-2020-12-06-at-9.45.07-PM.png)
@@ -51,7 +51,7 @@ docker-desktop   Ready    master   19d   v1.19.3
 ```
 
 
-### How to Create a Pod {#h3-3-how-to-create-a-pod}
+### How to Create a Pod
 
 A Pod in Kubernetes is the smallest possible execution unit. It can have one more container in it. However, we will test the setup by creating a simple pod with a single container image on the local Kubernetes cluster by following the below steps. This container runs an Nginx image.
 
@@ -121,7 +121,7 @@ Commercial support is available at
 ```
 
 
-### How to Deploy a Working Spring Boot Application on Kubernetes {#h3-4-how-to-deploy-a-working-spring-boot-application-on-kubernetes}
+### How to Deploy a Working Spring Boot Application on Kubernetes
 
 Let's deploy a working Spring Boot application on our local Kubernetes cluster. We will be using the Indian-states application for the demo. You can check out [this](https://github.com/yrashish/indian-states) GitHub repository to know more about this application.
 
@@ -157,7 +157,7 @@ curl localhost:31238/states
 ```
 
 
-### How to Monitor and Manage Kubernetes Cluster with Lens IDE {#h3-5-how-to-monitor-and-manage-kubernetes-cluster-with-lens-ide}
+### How to Monitor and Manage Kubernetes Cluster with Lens IDE
 
 Lens IDE for Kubernetes is a desktop application for macOS, Windows, and Linux to manage your cluster. It's completely free and open source. You can download it from [here](https://k8slens.dev/). Developers, DevOps engineers, SRE, and also people who are learning Kubernetes on their laptops can use this to view and manage their clusters. Following are some of the highlighted features that it provides.
 
@@ -201,7 +201,7 @@ Lens will start displaying metrics after a minute or so.
 
 We have only covered a handful of features that Lends IDE for Kubernetes provides. It's a wrap for now.
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 In this article, we have learned how to enable Kubernetes on Docker Desktop for Mac, created a basic pod, deployed a Spring Boot application, and managed our single-node Kubernetes cluster with the help of Lens IDE.
 
@@ -209,11 +209,11 @@ What are you waiting for?
 
 Go containerize and share your applications!
 
-### Support me {#h3-7-support-me}
+### Support me
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:  
 [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
 
-### Further Reading {#h3-8-further-reading}
+### Further Reading
 
 You can continue reading some of my previous [articles](https://ashishtechmill.com).

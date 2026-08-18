@@ -25,8 +25,8 @@ In this second article of the "[Getting Started with Jakarta EE 9](https://fooja
 
 For those who are not familiar with [Jakarta EE](https://blog.payara.fish/topic/jakartaee), this article should give you an indication how to create such a REST API with Jakarta EE 9.
 
-Configuration {#h2-0-configuration}
------------------------------------
+Configuration
+-------------
 
 Just as with the other Jakarta Specifications, you only need to add the Web API dependency to your project. This gives you access to all classes, interfaces, and annotations that you need to use in your application to write a Jakarta EE application. The server, Payara Server in this case, has all the code and implementations on board so you can have a lightweight WAR file that only contains your application code.
 
@@ -60,8 +60,8 @@ public class DemoApplication extends Application {
 
 The class extends jakarta.ws.rs.core.Application which is the base class for the configuration, and the annotation, jakarta.ws.rs.ApplicationPath, identifies the application path that serves as the base URI for all resource URIs. In the first example, it will become clear where this */api* part of the URL fits in the final URL of the endpoint.
 
-Hello World EndPoint {#h2-1-hello-world-endpoint}
--------------------------------------------------
+Hello World EndPoint
+--------------------
 
 Now that we have the application and Jakarta REST configuration in place, let us create the simplest possible endpoint.
 
@@ -107,8 +107,8 @@ Line 13 : The body of the response is of plain text type. We didn't specify this
 ```
 
 
-Reading URL Information {#h2-2-reading-url-information}
--------------------------------------------------------
+Reading URL Information
+-----------------------
 
 It's important that you can determine parts of the specified URL sent by the client when you write API endpoints as that will hold important information related to the request. We will cover two ways in this example, reading part of the URL and reading query parameters.
 
@@ -128,8 +128,8 @@ You can see that we also specify a @Path annotation and that it has curly braces
 
 When deployed, we can make a call to the URL*/api/hello/Payara?language=en* which will result in calling the Java method with the following parameters doGreeting("Payara","en").
 
-JSON Support {#h2-3-json-support}
----------------------------------
+JSON Support
+------------
 
 In the previous examples, we always used the content type *text/plain* as the return type for a response. In a production type application, most of the communication is performed using the JSON data format. In this next example, we show you how easy it is to return this type of data.
 
@@ -193,8 +193,8 @@ Besides support for JSON, you can also indicate, through the Media Type value, t
 
 Of course, several configuration options are possible and will be covered in a future blog in this series that discusses JSON support.
 
-Sending Data {#h2-4-sending-data}
----------------------------------
+Sending Data
+------------
 
 Now that we have explored the possibilities of retrieving data from the server, we want to send information to be processed. Within the *PersonResource* Java Class we can create the following method:
 
@@ -214,8 +214,8 @@ You can also see that we have specified the jakarta.ws.rs.Consumes annotation wi
 
 The Media type information is also used to convert the request body to the method Parameter. There can only be one method parameter that doesn't have any Jakarta REST annotations on it since you can only convert the body to one parameter. Additional parameters having the @PathParam and @QueryParam are allowed and the URL Information reading section we discussed earlier can be used when you send information.
 
-Take Control of HTTP Status in Response {#h2-5-take-control-of-http-status-in-response}
----------------------------------------------------------------------------------------
+Take Control of HTTP Status in Response
+---------------------------------------
 
 In this last section, we explore the option to take control of the HTTP status value that is returned in the response. Until now, we always returned 200 (status OK) since the call was successful and contained some payload in the result.
 
@@ -251,8 +251,8 @@ In the case of a correct request, you can use the Response.ok() method. The para
 
 In case the value is not correct, the Response.notAcceptable sends the desired status back to the client.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Jakarta REST can be used with a minimal amount of configuration and is mainly centered around the Java methods that perform or delegate the actual work without the need for concern about the infrastructure parts of the request.
 
@@ -262,8 +262,8 @@ And in the last example, we showed how you can have full control of the response
 
 This blog refers also on some other topics of Jakarta EE that will be described in future blogs like Validation, to perform validation on the received data, and CDI to delegate the work to other services. Subscribe to the blog to receive updates as new articles are published.
 
-Video Demonstration: How to Create a REST API {#h2-7-video-demonstration-how-to-create-a-rest-api}
---------------------------------------------------------------------------------------------------
+Video Demonstration: How to Create a REST API
+---------------------------------------------
 
 We've also created a demo video, which describes how to capture path parameters from the query parameters, how to define different methods such as get and post, encoding to use JSON formatting, and how to use the Response Builder for more control over what the server sends back to the client.
 

@@ -33,13 +33,13 @@ Moreover, it can be done in a lot of different formats with no need to change th
 
 This article covers the basics of serialization and discusses some of the key advantages of [Chronicle Wire](https://chronicle.software/wire/ "Chronicle Wire").
 
-### Serialisation and Deserialisation {#h3-0-serialisation-and-deserialisation}
+### Serialisation and Deserialisation
 
 Serialisation is about encoding java objects into bytes, for example, we have an object. Let's say our object holds our application state, if we were to shut down our application we would lose the state, we want to first store our application's state to disk, so we serialise our java state object. This will convert the object into bytes, which can be easily stored.
 
 Likewise, If we want to send the data stored in our java object, over the network, we first have to serialise the object, before it can be written to the TCP/IP buffer. Deserialisation is the opposite of serialisation, where we start with a byte and recreate an object instance.
 
-### About Chronicle Wire {#h3-1-about-chronicle-wire}
+### About Chronicle Wire
 
 [Chronicle Wire](https://chronicle.software/wire/ "Chronicle Wire ")is an Open Source library that was originally written to support Chronicle Queue and Chronicle Map. However, the library is useful in any code that uses serialisation. Chronicle Wire differs from native Java serialisation in that it actually supports a number of different formats, for example, binary, YAML, JSON, Raw binary data, and CSV.
 
@@ -47,7 +47,7 @@ The real innovation behind Chronicle Wire is that you don't have to change your 
 
 This is done by the objects (the POJOs that are to be serialised) implementing the Marshallable interface. "net.openhft.chronicle.wire.Marshallable" (When you use the Java Serialisation you add the marker interface on "java.io.Serializable".)
 
-### The Encoding {#h3-2-the-encoding}
+### The Encoding
 
 Let's dig a little bit into the encoding. We have already mentioned that Java serialisation is coding objects to and from a binary format, whereas Chronicle Wire can also encode to a lot of different formats. The encoding will affect the number of bytes used to store the data, the more compact the format, the fewer bytes used.
 
@@ -55,7 +55,7 @@ Chronicle Wire balances the compactness of the format without going to the extre
 
 Some encodings are more performant, perhaps by not encoding the field names to reduce the size of the encoded data, this can be achieved by using Chronicle Wire's Field Less Binary. However this is a trade-off, sometimes it is better to sacrifice a bit of performance and add the field names since it will give us both forwards and backward compatibility.
 
-### Different Formats {#h3-3-different-formats}
+### Different Formats
 
 There are various implementations of Chronicle Wire, each of them useful in different scenarios. For example, when we want to provide application configuration files or create data-driven tests, we often want to serialise or deserialise objects from and to human-readable formats like YAML, JSON. Also being able to send java objects serialised to a typed JSON allows us to send and receive messages from the JavaScript UI layer of our application.
 
@@ -302,7 +302,7 @@ public class WireExamples2 {
 ```
 
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Chronicle Wire allows you to serialize and deserialize objects to and from binary format, and also to a lot of different formats at the same time as it has higher performance than Java standard serialization.
 

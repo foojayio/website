@@ -25,7 +25,7 @@ Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around
 
 Multi-threading represents a very intriguing topic, even after years of research and development for high quality, robust, and efficient software. With equal emphasis on hardware improvements and the software that runs on it -- we have newer paradigms for parallelism. The most important yet basic concepts are the ones which I present here. I then explain the intricacies of multi-threading in the Java programming language. Some of these are newer features and supported only from the Java Platform Standard Edition 5.0. Let us start with a quick overview and understanding of the core concepts.
 
-### Thread Concepts in Operating Systems {#h3-0-thread-concepts-in-operating-systems}
+### Thread Concepts in Operating Systems
 
 **Thread:** A thread is a lightweight process, but it differs from a process in multiple ways. The primary features of a thread are that it creates a sense of execution of processes concurrently; it effectively distributes work and executes a single task, it can be used to schedule and asynchronously execute tasks, it has a more effective context switching mechanism than processes, and it shares the memory space along with other threads yet can have its own storage
 
@@ -49,7 +49,7 @@ Multi-threading represents a very intriguing topic, even after years of research
 
 ![Image title](https://dzone.com/storage/temp/4926946-4.png)
 
-### Thread Interfaces or Classes or in Java {#h3-1-thread-interfaces-or-classes-or-in-java}
+### Thread Interfaces or Classes or in Java
 
 **Thread:** The important methods of Thread Class are explained and usage shown in the code samples. The most confusing and common errors even for experienced Java programmers in multi-threading is in understanding locks. I have provided the status of locks on shared objects during each of these methods.
 
@@ -71,7 +71,7 @@ Multi-threading represents a very intriguing topic, even after years of research
 
 *stop(),* Lock Status: Locks Released, Deprecated; This thread method is deprecated as it produced inconsistent states due to damaged objects. I am not providing the code sample as it is pretty straight forward usage -- but I will not recommend the use of these methods, even if using a very old compiler version.
 
-### Object in Java {#h3-2-object-in-java}
+### Object in Java
 
 The Object class in Java inherently contains the methods that can control access to this object, especially in shared or multi-threaded applications.
 

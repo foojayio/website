@@ -30,8 +30,8 @@ Let's learn what the challenges are for a new JUG, how the culture of Dubai and 
 
 {{< youtube UARfri0jle8 >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,19 +39,19 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
 * Jad Salhani ([@JadSalhani](https://twitter.com/JadSalhani))
 * Chris Thalinger ([mastodon.social/@christhalinger](https://mastodon.social/@christhalinger), [@ChrisThalinger](https://twitter.com/ChrisThalinger))
 
-Podcast host {#h2-2-podcast-host}
----------------------------------
+Podcast host
+------------
 
 * Frank Delporte ([foojay.social/@frankdelporte](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 * 00'00 Intro and music
 * 00'10 About the topic of this podcast

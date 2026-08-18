@@ -41,8 +41,8 @@ If you're using the latest version of Java it would tell you, which is pretty co
 
 So without knowing anything about the code we can pretty much guess what failed at a line just by knowing the exception type. But this doesn't lead us directly to the bug in all cases.
 
-There Was a Null {#h2-0-there-was-a-null}
------------------------------------------
+There Was a Null
+----------------
 
 That `NullPointerException` probably happened due to a null in the list. Assuming you verified that you might still not know how that null got into the list in the first place...
 
@@ -56,8 +56,8 @@ Now this won't catch all the cases of `null` sneaking into the list. It can do s
 
 Since `addAll()` accepts a `Collection` we can use the standard `contains()` method to check if we have a `null` element in the `Collection` and if so stop.
 
-What if this is "sometimes" OK? {#h2-1-what-if-this-is-sometimes-ok}
---------------------------------------------------------------------
+What if this is "sometimes" OK?
+-------------------------------
 
 So we run this code and bingo it stops at a breakpoint... But unfortunately this isn't the right case. That breakpoint is related to a different list which we aren't debugging right now. Apparently in that list a `null` value is OK and expected.
 
@@ -69,8 +69,8 @@ So there are several ways around this problem. The most ideal one is to avoid th
 
 This isn't ideal but it works around the problem assuming it's localized enough.
 
-Nested Stack Traces {#h2-2-nested-stack-traces}
------------------------------------------------
+Nested Stack Traces
+-------------------
 
 So this is one of the "pains" in modern frameworks. The framework catches an exception and propagates it, wrapping it in its own exception. Rinse repeat. You end up with a Matryoshka doll of stack traces.
 
@@ -226,8 +226,8 @@ This sucks. If I was new to the team trying to get stuff to launch (which is exa
 
 Just keep reading the stack, the answer is usually in the edge (bottom or top). Don't give up if something isn't instantly clear.
 
-TL;DR {#h2-3-tl-dr}
--------------------
+TL;DR
+-----
 
 In many cases we can glean the cause of an exception we see in the log or get from the user by just reviewing the stack trace and digging deeper. Obviously, keep in mind nested exceptions and other such issues.
 

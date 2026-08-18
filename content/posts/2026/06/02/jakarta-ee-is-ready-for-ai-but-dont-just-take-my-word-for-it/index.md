@@ -21,10 +21,10 @@ Back in April I had the pleasure of attending Open Community Experience 2026 in 
 
 This post is a roundup of five talks I think belong well together. They don't cover the same topic but they tell a story about where enterprise Java is, where it's going and what it means to build serious software with it in 2026.
 
-**Where Jakarta EE Comes From and Where It's Headed** {#h2-0-where-jakarta-ee-comes-from-and-where-it-s-headed}
----------------------------------------------------------------------------------------------------------------
+**Where Jakarta EE Comes From and Where It's Headed**
+-----------------------------------------------------
 
-### The Past, Present, and Future of Enterprise Java - Ivar Grimstad (Eclipse Foundation) {#h3-1-the-past-present-and-future-of-enterprise-java-ivar-grimstad-eclipse-foundation}
+### The Past, Present, and Future of Enterprise Java - Ivar Grimstad (Eclipse Foundation)
 
 If you're going to watch one talk from OCX26 to orient yourself before watching the others, make it this one. Ivar traces the full arc from J2EE's famously painful complexity, through the birth of the Spring framework and eventual influence on the platform itself, all the way to where Jakarta EE is today.  
 
@@ -34,12 +34,12 @@ He is really good at explaining why Jakarta EE looks the way it does: every simp
 
 <br />
 
-**Jakarta EE Meets AI: Three Angles on the Same Problem** {#h2-2-jakarta-ee-meets-ai-three-angles-on-the-same-problem}
-----------------------------------------------------------------------------------------------------------------------
+**Jakarta EE Meets AI: Three Angles on the Same Problem**
+---------------------------------------------------------
 
 The next three talks are best understood as a series. They each ask a version of the same question - *how do you integrate AI into enterprise Java systems responsibly?* - but approach it from different angles and with a slightly different focus.
 
-### The Intelligent Monolith: Supercharging Jakarta EE with Local AI - Luqman Saeed (Azul) {#h3-3-the-intelligent-monolith-supercharging-jakarta-ee-with-local-ai-luqman-saeed-azul}
+### The Intelligent Monolith: Supercharging Jakarta EE with Local AI - Luqman Saeed (Azul)
 
 Luqman opens with a provocation that I think resonates with anyone who's been paying attention to how AI gets adopted in enterprise settings at the moment: what if the biggest risk in your AI strategy isn't the model - it's the dependency?
 
@@ -51,7 +51,7 @@ Luqman walks through four progressive patterns: declarative RAG pipelines, agent
 
 {{< youtube DNJUjlIFgJw >}}
 
-### Jakarta EE 11 Meets AI: Building Intelligent Microservices with Virtual Threads and Jakarta Data - Luqman Saeed (Azul) {#h3-4-jakarta-ee-11-meets-ai-building-intelligent-microservices-with-virtual-threads-and-jakarta-data-luqman-saeed-azul}
+### Jakarta EE 11 Meets AI: Building Intelligent Microservices with Virtual Threads and Jakarta Data - Luqman Saeed (Azul)
 
 With Luqman's second talk, we are now moving from monolithic architecture to microservices - and in doing so, we highlight just how much Jakarta EE 11 has to offer for teams building AI-enabled systems.
 
@@ -63,7 +63,7 @@ Luqman is being honest about when this approach reaches its limits. The in-memor
 
 {{< youtube l2tbVnqw1kc >}}
 
-### Production-ready Agentic AI: Building Enterprise-grade Java Systems with Jakarta EE and MicroProfile - Kenji Kazumura (Fujitsu) {#h3-5-production-ready-agentic-ai-building-enterprise-grade-java-systems-with-jakarta-ee-and-microprofile-kenji-kazumura-fujitsu}
+### Production-ready Agentic AI: Building Enterprise-grade Java Systems with Jakarta EE and MicroProfile - Kenji Kazumura (Fujitsu)
 
 Where Luqman's talks focus on architecture and implementation, Kenji's talk asks the harder question: what does it actually take to put an AI-enabled system into production?
 
@@ -79,10 +79,10 @@ This talk will be useful for anyone who has built an AI proof-of-concept and is 
 
 {{< youtube 46t5qxs0A6o >}}
 
-**Getting the Fundamentals Right** {#h2-6-getting-the-fundamentals-right}
--------------------------------------------------------------------------
+**Getting the Fundamentals Right**
+----------------------------------
 
-### API = Some REST and HTTP, right? RIGHT?! - Rustam Mehmandarov (Miles) {#h3-7-api-some-rest-and-http-right-right-rustam-mehmandarov-miles}
+### API = Some REST and HTTP, right? RIGHT?! - Rustam Mehmandarov (Miles)
 
 Every AI-enabled service in the previous three talks exposes APIs. Every agent that communicates with another service does so over an API. Every system Kenji secures with JWT and OpenID Connect is secured at its API boundary. The sophistication of your AI architecture means very little if the APIs it's built on are fragile, inconsistently versioned and poorly documented.
 

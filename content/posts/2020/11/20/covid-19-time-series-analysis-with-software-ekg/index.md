@@ -22,7 +22,7 @@ Our special COVID-19 Edition provides you with the latest data on COVID-19 from 
 
 The software was developed with Java 11 and JavaFX. The window management is based on Stagediver.fx, the framework that emulates basic parts of the NetBeans Platform for JavaFX.
 
-### Why Time Series Analysis Is Essential {#why-time-series-analysis-is-essential}
+### Why Time Series Analysis Is Essential
 
 When analyzing the impact of the Corona virus pandemic, considering only absolute numbers will not suffice. Instead, it is crucial to take the dimension of time into account. Thus, time series analysis is the key to fully understand current trends and developments regarding COVID-19 and to detect important correlations between metrics.
 
@@ -31,13 +31,13 @@ See, for example, the correlation between new death cases (black) and positive t
 
 We are not offering yet another dashboard. What we are offering is our best and most powerful tool for time series analysis, combined with the latest, comprehensive data on COVID-19.
 
-### Our Mission {#what-our-mission-is}
+### Our Mission
 
 Our goal is to provide you with raw data on COVID-19, together with a tool that lets you analyze, visualize, and interpret the impact of the pandemic on a *long term* basis.
 
 By providing Software EKG - COVID-19 Edition free of charge, QAware wants to contribute to a better understanding of the pandemic and support the global efforts against it.
 
-### Our Data Source {#our-data-source}
+### Our Data Source
 
 Software EKG - COVID-19 Edition uses data from [Our World in Data (OWID)](https://ourworldindata.org/), a scientific online publication based at the University of Oxford with a focus on large-scale global problems.
 
@@ -45,13 +45,13 @@ OWID data is trusted both in media (BBC, Washington Post, New York Times) and te
 
 Please note: We do *not*, in any way, manipulate or change data gathered by OWID.
 
-### How To Use Software EKG - COVID-19 Edition {#how-to-use-software-ekg---covid-19-edition}
+### How To Use Software EKG - COVID-19 Edition
 
 In order to create the best user experience when using Software EKG - COVID-19 Edition, we have recorded several [video tutorials](https://www.youtube.com/playlist?list=PLeUCKzjz0gD5D6OHRnKDQwr5Rnhm2BXsa) that are meant to give you an easily understandable, concise overview of the tool's most important features.
 
 {{< youtube PbVhHtFQI1I >}}
 
-### How To Interpret The Data {#how-to-interpret-the-data}
+### How To Interpret The Data
 
 Just as COVID-19 is a complex issue, so is the huge amount of data on the pandemic. Software EKG - COVID-19 Edition provides you with a plethora of metrics that can be used for further analysis.
 
@@ -72,7 +72,7 @@ The existence of reliable data also depends on the individual circumstances in a
 
 Just as COVID-19 is a complex issue, so is the huge amount of data on the pandemic. Software EKG - COVID-19 Edition provides you with a plethora of metrics that can be used for further analysis. To fully understand the meaning of each metric, please refer to the [official documentation](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv) by *Our World in Data*.
 
-### How To Get The Tool {#how-to-get-the-tool}
+### How To Get The Tool
 
 In order to download Software EKG - COVID-19 Edition, please visit the [official website](https://qaware.de/software-ekg-covid-edition):
 

@@ -31,8 +31,8 @@ In some cases, this is a simple issue that we can reproduce locally and deploy. 
 
 In those cases, we need to understand the problem in the parse tree before pushing an update. Otherwise, we might have a broken product in production.
 
-What is jsoup? The Java HTML Parser {#h2-0-what-is-jsoup-the-java-html-parser}
-------------------------------------------------------------------------------
+What is jsoup? The Java HTML Parser
+-----------------------------------
 
 Before we go into the nuts and bolts of debugging jsoup let's first answer, the question above and discuss the core concepts behind jsoup.
 
@@ -63,8 +63,8 @@ This code snippet fetches headlines from wikipedia. In the code above, you can s
 
 If you're looking at that and thinking "that looks fragile". Yes, it is.
 
-Simple jsoup Test {#h2-1-simple-jsoup-test}
--------------------------------------------
+Simple jsoup Test
+-----------------
 
 To demonstrate debugging, I created a simple demo that you can download here.
 
@@ -141,8 +141,8 @@ curl -H "Content-Type: application/json" "http://localhost:8080/parseLinks?url=h
 
 This prints out the list of URLs referred to in the Lightrun home page.
 
-Debugging Content Failures {#h2-2-debugging-content-failures}
--------------------------------------------------------------
+Debugging Content Failures
+--------------------------
 
 Typical string scraping issues occur when an element object changes. E.g. wikipedia can change the structure of their pages and the select method above can suddenly fail. This is often a nuanced failure, e.g. missing DOM element in the Java object hierarchy which can trigger a failure of the select method.
 
@@ -158,7 +158,7 @@ Lightrun offers a better way. Just track the specific failure directly in produc
 
 **NOTE:** This tutorial assumes you installed Lightrun and understand the basic concepts behind it. If not, please [check out the docs](https://docs.lightrun.com/).
 
-### Finding your way in Browser DOM {#h3-3-finding-your-way-in-browser-dom}
+### Finding your way in Browser DOM
 
 Assuming you don't know where to look, a good place to start is inside the jsoup API. This can lead you back to user code. The cool thing is that this works regardless of your code. We can find the right line/file for the snapshot by digging into the API call.
 
@@ -216,14 +216,14 @@ INFO: LOGPOINT: Executing query [src]
 ```
 
 
-Avoid Security and GDPR Issues {#h2-4-avoid-security-and-gdpr-issues}
----------------------------------------------------------------------
+Avoid Security and GDPR Issues
+------------------------------
 
 GDPR and security issues can be a problem with leaking user information into the logs. This can be a major problem, and Lightrun helps you reduce that risk significantly.
 
 Lightrun offers two potential solutions that can be used in tandem when applicable.
 
-### Log Piping {#h3-5-log-piping}
+### Log Piping
 
 The big problem with GDPR is the log ingestion. If you log private user data and then send it to the cloud, it's there for a long time. It's hard to find after the fact and it's very hard to fix.
 
@@ -233,14 +233,14 @@ To send logs only to the plugin, select the piping mode as "plugin".
 
 ![image3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650465790348/J8eYWzZC4.png)
 
-### PII Reduction/Blocklists {#h3-6-pii-reduction-blocklists}
+### PII Reduction/Blocklists
 
 Personally Identifiable Information (PII) is at the core of GDPR and is also a major security risk. A malicious developer in your organization might want to use Lightrun to siphon user information. Blocklists prevent developers from placing actions in specific files.
 
 PII reduction lets us hide information matching specific patterns from the logs (e.g. credit card format etc). This can be defined in the Lightrun web interface by a manager role.
 
-TL;DR {#h2-7-tl-dr}
--------------------
+TL;DR
+-----
 
 With Java content scraping, jsoup is the obvious leader. Development with jsoup is far more than string operations or even handling the connection aspects. Besides getting the document object, it also handles complex aspects required for DOM element and scripting.
 

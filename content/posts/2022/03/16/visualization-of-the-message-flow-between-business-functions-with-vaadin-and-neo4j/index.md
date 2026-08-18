@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-The Project {#_the_project}
----------------------------
+The Project
+-----------
 
 Analyzing and visualizing the message flow between business functions was the goal of my current project. At first we considered using a UML tool for this job, but we came to the conclusion that it might not be as flexible as we need it to be. Finally I've got the assigment to create a custom web application.
 
@@ -30,19 +30,19 @@ Since business functions and messages are related to each other, it made sense t
 
 Vaadin has a lot of great UI components but in my case there was no match. Finally I've found [vis.js](https://visjs.org/). The network diagram seemed appropriate for the visualization. Luckely Vaadin provides the [Vaadin Directory](https://vaadin.com/directory), a place to publish 3rd party components. From the Vaadin directory a component called [vis-network-vaadin](https://vaadin.com/directory/component/vis-network-vaadin) is available that provides a Java API on top of vis.js
 
-The Graph {#_the_graph}
------------------------
+The Graph
+---------
 
 The graph below is a simplyfied model of what my client wants to manged in the application. A business function can send many messages and a message can be received by many business functions.
 
 ![](Unbenanntes-Diagramm.drawio-1.png)
 
-The Implementation {#_the_ui}
------------------------------
+The Implementation
+------------------
 
 First I created a Vaadin project on [start.vaadin.com](https://start.vaadin.com/) and added the the vis-network-vaadin for the visualization. As Vaadin uses Spring Boot by default I could just add spring-boot-starter-data-neo4j for the data access.
 
-### Data Access {#h3-3-data-access}
+### Data Access
 
 [Spring Data Neo4j](https://spring.io/projects/spring-data-neo4j) provides easy access to Neo4j. As I already know Spring Data JPA and the programming model is very similar it was easy to get started. First I've mapped the nodes and defined the relationships using the Neo4j annotations.
 
@@ -103,8 +103,8 @@ public interface MessageRepository extends Neo4jRepository<Message, Long> {
 ```
 
 
-Diagram {#h2-4-diagram}
------------------------
+Diagram
+-------
 
 Finally I had to visualize the graph with a network diagram. Using the vis-network-vaadin API made it quite simple. I just had to map BusinessFunction and Message to nodes and create edges from the realtionships.
 
@@ -167,8 +167,8 @@ Finally the graph is displayed in the application.
 
 ![](graph.png)
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 The application is still in an early stage. The graph will be extended and the diagram must be improved. Especially the behavior when dragging around the edges seems to be quite tricky and vis.js provides a lot of configuration.
 

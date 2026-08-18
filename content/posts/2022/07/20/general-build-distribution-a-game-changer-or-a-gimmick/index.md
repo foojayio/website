@@ -33,18 +33,18 @@ In greater detail below, we will elaborate on these three findings:
 
 The analysis and findings presented here apply especially to projects for the JVM ecosystem. Future follow-up articles will address the Android and native/iOS ecosystems.
 
-Most Important Scenarios to Optimize {#h2-0-most-important-scenarios-to-optimize}
----------------------------------------------------------------------------------
+Most Important Scenarios to Optimize
+------------------------------------
 
 Two keys to improving the local developer experience lie in understanding the typical bottlenecks faced by engineers, as well as the types of changes built by engineers as they add new features, fix bugs and write tests.
 
-### Test Execution is the Bottleneck {#h3-1-test-execution-is-the-bottleneck}
+### Test Execution is the Bottleneck
 
 Test execution is frequently the single most time-consuming portion of build time. Optimizing builds to avoid unnecessary test execution can yield large productivity gains. The Gradle Build Tool already skips tests when no meaningful changes are detected on the classpath, and can also restore test execution results from the build cache. The post [Stop rerunning your tests](https://www.stefan-oehme.com/stop-rerunning-tests) does a great job of explaining the efficiencies available by minimizing test re-execution.
 
 In the context of distributed builds, this bottleneck is addressed by [modern test distribution](https://blog.gradle.org/remote-and-distributed-build-patterns#modern-test-distribution) such as the Test Distribution solution provided by Gradle Enterprise.
 
-### Frequency of Incremental Builds vs. Full Rebuilds {#h3-2-frequency-of-incremental-builds-vs-full-rebuilds}
+### Frequency of Incremental Builds vs. Full Rebuilds
 
 The next key point is that in the vast majority of cases engineers are building small, incremental changes. We posit that these small, incremental changes are unlikely to benefit from distributing the build steps beyond test distribution. Also, developers using modern build systems seldom perform a "full rebuild" without the benefit of a shared build cache or retained history of a previous build on the same machine.
 
@@ -54,8 +54,8 @@ Additionally, Java compilation is relatively fast compared to "native" languages
 
 Thus, we encourage skepticism at claims of building large projects "from scratch" as a true measure of build system performance, or as a justification for implementing a remote or distributed build.
 
-Parallelization Factor {#h2-3-parallelization-factor}
------------------------------------------------------
+Parallelization Factor
+----------------------
 
 The key to understanding the maximum speed potential of any build (locally built, hosted remotely or distributed) is to visualize the interdependencies of its outputs. Imagine a relatively small software project having three subprojects: A, B and C. If compiling subproject C requires the outputs of subprojects A and B, then C *depends on* A and B. Most importantly, we cannot begin building C until both A and B are complete; therefore the best-case build-time scenario can be denoted as ***max(A, B) + C*** . Given a local or remote build host with unlimited CPU cores, or a pool of unlimited distributed build agents, the build *cannot* be parallelized further than this bottleneck.
 
@@ -77,8 +77,8 @@ This last point is critical: tasks that operate as a single process - with no ot
 
 Setting aside test execution (addressed by Test Distribution, see [above](#test-execution-is-the-bottleneck)), and focusing on the remaining CPU-intensive 10-20% portion of build times, we find that the potential for optimization is low. The failure of half these tasks to execute in parallel with other processes means that, at best, a general distribution solution could expedite only 5-10% of overall build time, while incurring significant costs in terms of build complexity and management overhead.
 
-The Path Forward {#h2-4-the-path-forward}
------------------------------------------
+The Path Forward
+----------------
 
 As we discussed above, most of the changes done by developers are small, incremental changes and the biggest bottleneck is typically test execution. Therefore, focusing the build optimizations on those aspects will typically yield the best results. The following section lists some of the key steps your build process can implement today. These fundamentals of build performance optimization will not just improve any build whether local, remote or distributed, but will also ensure the best possible performance when potentially moving to a remote or distributed environment in the future.
 
@@ -97,8 +97,8 @@ Additionally, the following features in Gradle Enterprise drastically shorten te
 
 While general build distribution may demonstrate impressive build performance gains when measured in isolation, we've demonstrated that for most JVM projects it's unlikely to offer significant additional build performance improvements for typical scenarios in well-optimized builds. This is not to suggest that we find a general distribution solution uninteresting. Rather, we view this on our long-term roadmap as an evolutionary, not revolutionary, solution.
 
-Summary {#h2-5-summary}
------------------------
+Summary
+-------
 
 Anecdotal evidence and industry experience have shown two things: first, engineers are most likely to iterate and rebuild small, incremental changes - not rebuilding the entire project from scratch. Second, regardless of the type of change being built, test execution is the primary cause of build slowness and reduced developer productivity.
 
@@ -106,7 +106,7 @@ Using active process counts as a proxy for the potential parallelization of loca
 
 Running all aspects of a JVM build in a purely distributed fashion is not a panacea. Existing Gradle Build Tool features like incremental task execution, compilation avoidance, incremental compilation, build cache and configuration cache are available today and greatly reduce build times, especially for the most frequent incremental changes. Additionally, commercial features in Gradle Enterprise like [Test Distribution](https://gradle.com/gradle-enterprise-solutions/test-distribution/) and [Predictive Test Selection](https://gradle.com/gradle-enterprise-solutions/predictive-test-selection/) drastically reduce test execution time which is the primary bottleneck for most builds.
 
-Feedback {#h2-6-feedback}
--------------------------
+Feedback
+--------
 
 Let us know if you have any questions on our [forums](https://discuss.gradle.org/) or [Gradle Community Slack](https://gradle.com/slack-invite).

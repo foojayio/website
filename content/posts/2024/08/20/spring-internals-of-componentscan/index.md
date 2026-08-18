@@ -87,8 +87,8 @@ public @interface SpringBootApplication {
 
 
 
-Attributes used with ComponentScan annotation {#h2-0-attributes-used-with-componentscan-annotation}
----------------------------------------------------------------------------------------------------
+Attributes used with ComponentScan annotation
+---------------------------------------------
 
 The `value()` function acts as an alias for basePackages, allowing developers to make more specific annotation declarations when they do not require additional attributes. For instance, developers can use `@ComponentScan("com.bsmlabs.microservices")` as an alternative to `@ComponentScan(basePackages = "com.bsmlabs.microservices")`.
 
@@ -241,12 +241,12 @@ public class MovieApplication {
 
 **lazyInit():** It specifies whether scanned beans should be registered for lazy initiation.
 
-Conclusion {#h2-1-conclusion}
------------------------------
+Conclusion
+----------
 
 The \`@ComponentScan\` annotation streamlines the configuration process of Spring applications by minimizing the need for developers to manually define beans, promoting a convention-over-configuration methodology, and ensuring that the application context contains the essential components.
 
-Reference {#h2-2-reference}
----------------------------
+Reference
+---------
 
 <https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ComponentScan.html>

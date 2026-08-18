@@ -23,22 +23,22 @@ Again a busy month in JavaFX-world! Here is a nice list with links for your read
 
 This is the summary of the #LinksOfTheWeek as published on [jfx-central.com](https://www.jfx-central.com/) in May 2023.
 
-JavaFX Core {#h2-0-javafx-core}
--------------------------------
+JavaFX Core
+-----------
 
 * [JavaFX 21-ea+17 is available for download from GluonHQ or from Maven central](https://techhub.social/@gluonhq/110374163797572361).
 * [**Johan Vos** believes it's time to deprecate Java Swing](https://mastodon.social/@johanvos/110378814066039175): "It doesn't make sense to maintain Swing and move JavaFX forward. Deprecation doesn't mean it needs to be removed immediately. But let's deprecate it. We need to move forward, and we need the resources for this."
 
-SceneBuilder {#h2-1-scenebuilder}
----------------------------------
+SceneBuilder
+------------
 
 * [**Raumzeitfalle** is wondering if you want to conveniently install Scene Builder 20 for JavaFX](https://twitter.com/Raumzeitfalle/status/1657471102673715202)? You can now do this thanks to the use of JDeploy.
   * This new version now offers a [direct menu shortcut to jfx-central.com](https://twitter.com/Raumzeitfalle/status/1656697093463982083)!
   * This release uses [JDK 20.0.1 and JavaFX 20.0.1](https://techhub.social/@gluonhq/110337334600751096).
 * [Shared by **Johan Vos**](https://mastodon.social/@johanvos/110371523942727201): "Now that Scene Builder 20 is released, it is a good moment to work on functionality/bug fixes that can make it in 21. For most projects I work on, I prefer doing major changes shortly after a release, rather than shortly before a release."
 
-JavaFX Applications {#h2-2-javafx-applications}
------------------------------------------------
+JavaFX Applications
+-------------------
 
 * Shared by [**MarsX.dev**: Lunatics](https://twitter.com/marsxdev/status/1656911587163410432), a JavaFX-based email testing tool with a dummy SMTP server that lets you test email sending applications, monitor transactions, and simulate various network conditions.
 * [**Clemens Lanthaler** announced LibrawFX 1.8.4](https://twitter.com/lanthale/status/1642981173826842624) with speed updates and raw settings added, using JDK 20 and JavaFX 20.
@@ -60,8 +60,8 @@ JavaFX Applications {#h2-2-javafx-applications}
   * [Similar, using the Yule distance metric, with 2500 samples each with over 18k dimensions](https://twitter.com/SeanMiPhillips/status/1656462050804092928)!
   * Don't tell anyone, but Sean is actually a time traveler, who worked (will work?!) on the StarTrek user interfaces...
 
-JavaFX Games {#h2-3-javafx-games}
----------------------------------
+JavaFX Games
+------------
 
 * [Pac-Man and Ms. Pac-Man by **Armin Reichert** ported to the web with WebFX](https://twitter.com/WebFXProject/status/1661336335427182593).
 * [Rubik's cube v3.0 by **OrangoMango** is available on itch.io](https://twitter.com/orango_mango/status/1659545495704928257) for Windows, Android, Linux and Mac.
@@ -70,33 +70,33 @@ JavaFX Games {#h2-3-javafx-games}
 * [**Almas Baim** shared a video of a game where the player can now use the shockwave ability](https://twitter.com/AlmasBaim/status/1657718394064601089) once the meter is full. It allows the player to quickly clear out a safe path in front of them.
   * [And he had a fruitful discussion with game dev students on how to improve the UI](https://twitter.com/AlmasBaim/status/1658565437053980691). In the video, you can check out the new health and weapon indicators around the player, without the need to look elsewhere to get this info.
 
-JavaFX Components {#h2-4-javafx-components}
--------------------------------------------
+JavaFX Components
+-----------------
 
 * [**Matt Coley** made a minimal/flexible TreeMap chart](https://twitter.com/invokecoley/status/1660951086876749825).
 * [**Christopher Schnick** is feeling magic with dynamic OS theme detection](https://twitter.com/crschnick/status/1658174428612550671)! Done with jSystemThemeDetector.
 * [**Sean Phillips** got a lot of interest on the animated circular progress indicator](https://twitter.com/SeanMiPhillips/status/1658120303539519491) he made for Trinity and uploaded a version of it along with a tester app so folks could play with it.
 
-JavaFX on Foojay.io, the website for Friends of OpenJDK {#h2-5-javafx-on-foojay-io-the-website-for-friends-of-openjdk}
-----------------------------------------------------------------------------------------------------------------------
+JavaFX on Foojay.io, the website for Friends of OpenJDK
+-------------------------------------------------------
 
 * ["If the user has installed programs to connect to remote systems, why not try to use them from Java instead of via libraries?"](https://foojay.io/today/presenting-xpipe/) And then, on top of that, a tool for people who work with remote shell connections? **Christopher Schnick** presenting X-Pipe.
 * [Interview by **Frank Delporte** with **Paul Kocian** aka @Orango_Mango](https://foojay.io/today/interview-with-paul-kocian-aka-orango_mango/), who shared his progress on Twitter in creating a 3D engine with JavaFX, from a Rubik's cube in January '23, over a basic tumbling car in February, to a full Minecraft-like world in April! His age? 16!
 
-Podcast {#h2-6-podcast}
------------------------
+Podcast
+-------
 
 * [**Adam Bien** and **Shai Almog** discuss JavaFX, Codename One, Swing, Flutter, and a Bit Android](https://airhacks.fm/#episode_242).
 
-Miscellaneous {#h2-7-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Dirk Lemmermann** is about to rent 190 square meters of office space in Zurich for our Swiss subsidiary of Senapt](https://twitter.com/dlemmermann/status/1657027053202423808). Exciting times, and JavaFX made that happen!
 * Help! [**Almas Baim** is doing strange teleportation things with the Java Duke](https://twitter.com/AlmasBaim/status/1652066132872896512)...
 * It seems GraalVM is going to [announce some JavaFX related news with the next feature release, expected on June 13th](https://twitter.com/shaunmsmith/status/1651621631322726413).
 
-JFX-Central {#h2-8-jfx-central}
--------------------------------
+JFX-Central
+-----------
 
 * New content:
   * Real-world app: [Satergo](https://www.jfx-central.com/real_world/satergo), a desktop wallet app for the "Ergo" cryptocurrency.

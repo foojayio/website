@@ -32,8 +32,8 @@ It's ideal for students or anyone who wants to start experimenting with Java. It
 
 {{< youtube Wrx7iVCVTwg >}}
 
-JEP 330: "Launch Single-File Source-Code Programs" {#h2-0-jep-330-launch-single-file-source-code-programs}
-----------------------------------------------------------------------------------------------------------
+JEP 330: "Launch Single-File Source-Code Programs"
+--------------------------------------------------
 
 The video above and this post are inspired by [a post by Tom Cools](https://www.tomcools.be/post/april-2023-onboarding-now/), and to be honest, I stole a bit of his approach as I first want to show you the older [JEP 330: "Launch Single-File Source-Code Programs"](https://openjdk.org/jeps/330).
 
@@ -42,19 +42,19 @@ Thanks to this feature, introduced in Java 11 you can already execute a single J
 
 With the changes brought by JEP 330, the conversion from Java code to byte code, is "hidden". It still happens, but you, as a user, don't need to take care of it.
 
-JBang {#h2-1-jbang}
--------------------
+JBang
+-----
 
 Thanks to this JEP 330, it already became a lot easier to run Java code with one command, but it also has a limitation. When that single file application needs dependencies, you still need to go for a complete Maven or Gradle project to define these dependencies and versions.
 
 Not related to the JEP, but a possible alternative solution in this case is [JBang](https://www.jbang.dev/), it's a tool also directed towards students and others experimenting with Java. It has a syntax to define that it needs to be handled as a script and can define dependencies to be included. I used JBang to create [multiple tutorials in the Pi4J project](https://pi4j.com/examples/jbang/).
 
-JEP 445: "Unnamed Classes and Instance Main Methods" {#h2-2-jep-445-unnamed-classes-and-instance-main-methods}
---------------------------------------------------------------------------------------------------------------
+JEP 445: "Unnamed Classes and Instance Main Methods"
+----------------------------------------------------
 
 Now it's finally time to talk about the "main" subject of this post, JEP 445.
 
-### Code Examples {#h3-3-code-examples}
+### Code Examples
 
 Until now, a minimal "Hello World" Java application, needs this code:
 
@@ -83,7 +83,7 @@ java --source 21 --enable-preview HelloWorld.java
 ```
 
 
-### Foojay Podcast: "Java 21 Has Arrived!" {#h3-4-foojay-podcast-java-21-has-arrived}
+### Foojay Podcast: "Java 21 Has Arrived!"
 
 In [Foojay Podcast #28: "Java 21 Has Arrived!"](https://foojay.io/today/foojay-podcast-28), I talked with Simon Ritter, Mohamed Taman, and Piotr Przybyl about the many new features in Java 21. Not all of them find this JEP 445 the most interesting one, but they all agree it makes it easier to introduce the language to new people.
 
@@ -91,8 +91,8 @@ In [Foojay Podcast #28: "Java 21 Has Arrived!"](https://foojay.io/today/foojay-p
 
 <br />
 
-Tools to Install Java {#h2-5-tools-to-install-java}
----------------------------------------------------
+Tools to Install Java
+---------------------
 
 The [OpenJDK project](https://github.com/openjdk/jdk) only contains the sources for the full Java-project. The actual runtime and SDK are available from many different distributors.
 
@@ -100,8 +100,8 @@ Make sure to check out [SDKMan](https://sdkman.io/) and [JDKMon](https://github.
 
 More info about this topic is available on this Foojay post: ["Disco API: Helping You To Find Any OpenJDK Distribution"](https://foojay.io/today/disco-api-helping-you-to-find-any-openjdk-distribution/).
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 This JEP 445 won't bring many improvements for experienced developers, but it may bring Java closer to education and help to experiment with the language.
 

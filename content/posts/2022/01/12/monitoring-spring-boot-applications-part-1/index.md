@@ -24,19 +24,19 @@ frozen: false
 
 > In part 1 of this series, we will learn about JDK Flight Recorder and how we can use it to monitor a Spring Boot application.
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 Application monitoring is one thing that we as developers cannot overlook. It doesn't matter if you run a monolith or microservices application because application monitoring is a must for production workloads to know what's happening with your application. If you are using Spring Boot, there are different ways to monitor an application. The most popular way to monitor a Spring Boot application is to enable the [spring-boot-actuator](https://github.com/spring-projects/spring-boot/tree/v2.6.0/spring-boot-project/spring-boot-actuator) module to achieve the desired result.
 
 More often than not, we rely on third-party tools like Appdynamics, Dynatrace, Prometheus, and Grafana to monitor our workloads. But what if I told you that you could use a tool that comes with JDK to monitor your Spring Boot applications. Could you not believe me yet? Let me introduce you to the JDK flight recorder in this article that we will use to monitor a Spring Boot application.
 
-### What is a JDK Flight Recorder? {#h3-1-what-is-a-jdk-flight-recorder}
+### What is a JDK Flight Recorder?
 
 > JDK Flight Recorder is a diagnostic tool that collects events of running Java applications, JVM and OS.
 
 JFR was a commercial feature earlier, but it has been open-sourced and made GA from OpenJDK 11 onwards. See this [JEP](https://openjdk.java.net/jeps/328). If you are stuck on JDK 8 like everyone else, then no worries as it seems, the work is completed to [backport](https://bugs.openjdk.java.net/browse/JDK-8239140) it to OpenJDK 8. There is no need to download it separately as JFR comes bundled with your JDK.
 
-### JDK Flight Recorder Features {#h3-2-jdk-flight-recorder-features}
+### JDK Flight Recorder Features
 
 1. You can analyze the recordings offline.
 2. View detailed information on memory usage, garbage collection, hot methods and classes, threads, Java locks, and more.
@@ -45,7 +45,7 @@ JFR was a commercial feature earlier, but it has been open-sourced and made GA f
 5. Create customized events as per your need with API.
 6. Support for Event Streaming from OpenJDK 14 onwards.
 
-### Enabling JDK Flight Recorder {#h3-3-enabling-jdk-flight-recorder}
+### Enabling JDK Flight Recorder
 
 1. Using Command-line
 2. Using jcmd tool
@@ -53,7 +53,7 @@ JFR was a commercial feature earlier, but it has been open-sourced and made GA f
 
 Let's understand these options in detail.
 
-### Using Command-line {#h3-4-using-command-line}
+### Using Command-line
 
 If you are using OpenJDK 11 or higher version, you can enable flight recorder by passing the flag -`XX:StartFlightRecording` while starting your Spring Boot or Java applications. Since you can pass the flag at an application startup, it is good to rely on JFR for your application monitoring. Following is the example:
 
@@ -64,7 +64,7 @@ java -XX:StartFlightRecording:filename=myrecording.jfr,duration=60s -jar myapp.j
 
 In this example, after enabling JFR, the data is dumped to `myrecording.jfr` file and analyzed using a client-side tool JDK Mission Control. JMC has to be downloaded separately as it's not part of your JDK. It is available for download from [here](https://github.com/openjdk/jmc#downloading-builds).
 
-### Using jcmd tool {#h3-5-using-jcmd-tool}
+### Using jcmd tool
 
 Suppose you don't always want JFR to monitor your application as discussed in the first option but only want to diagnose when any issue occurs. In that case, jcmd is a handy option as it will send diagnostic commands to running Java applications. You have to pass the PID of the running java process or the main class and the actual command.
 
@@ -96,7 +96,7 @@ JFR.stop
 
 Here is a summary of those commands: <https://gist.github.com/yrashish/0fb966ef0294a5c336e9253ba78effe7>
 
-### Using JMC {#h3-6-using-jmc}
+### Using JMC
 
 JDK Mission Control aka JMC is a GUI tool for examining the recording created by JFR. Not just that with JMC you can start recording events of a running java process. As shown in the following screenshot from the left-hand side navigation bar in JMC first you have to choose a running java process. Then right-click and choose **Start Flight Recording**.
 
@@ -122,7 +122,7 @@ As shown in the following screenshots you can also view Java application Threads
 
 That's it we are done.
 
-### Conclusion {#h3-7-conclusion}
+### Conclusion
 
 In this article, we have only covered how we can enable and use the JDK flight recorder to monitor a Spring Boot application. JDK flight recorder is a reasonable tool for monitoring application performance.
 

@@ -25,7 +25,7 @@ While the traditional approach might involve using bash scripts or Python, as a 
 
 In this article, I will show you how to create a script with [JBang](https://www.jbang.dev/) and [PicoCLI](https://picocli.info/) to generate release notes.
 
-### **Step 1: Install JBang** {#h3-0-step-1-install-jbang}
+### **Step 1: Install JBang**
 
 If you don't already have JBang installed, you can install it by following these steps:
 
@@ -50,7 +50,7 @@ jbang --version
 ```
 
 
-### Step 2: Initialize Your JBang Script {#h3-1-step-2-initialize-your-jbang-script}
+### Step 2: Initialize Your JBang Script
 
 First, we need to initialize our JBang script. You can do this by running the following command:
 
@@ -72,7 +72,7 @@ This creates a sandbox environment and sets up a Gradle project for you. You can
 
 ![](Screenshot-2024-07-18-at-10.18.19-PM-1024x733.png)
 
-### **Step 3: Add Dependencies** {#h3-2-step-3-add-dependencies}
+### **Step 3: Add Dependencies**
 
 JBang's \*\*`//DEPS` directive makes dependency management a breeze. You just need to specify the dependencies at the top of your Java file:
 
@@ -93,7 +93,7 @@ JBang's \*\*`//DEPS` directive makes dependency management a breeze. You just ne
 
 When working with JBang, you can easily add dependencies to your script using the `//DEPS` directive. This format allows you to include external libraries directly in your script, simplifying the process of managing dependencies.
 
-### **Step 4: Set Up Logging** {#h3-3-step-4-set-up-logging}
+### **Step 4: Set Up Logging**
 
 Let's combine Logback with colourized output for those who love visual feedback. This involves setting up a custom appender to enhance your logging experience.
 
@@ -153,7 +153,7 @@ static class PicoCLIColorizedAppender extends ConsoleAppender<ILoggingEvent> {
 ```
 
 
-### **Step 5: Configure ObjectMapper** {#h3-4-step-5-configure-objectmapper}
+### **Step 5: Configure ObjectMapper**
 
 Next, we configure the `ObjectMapper` for JSON serialization and deserialization:
 
@@ -171,7 +171,7 @@ public class release_notes {
 ```
 
 
-### **Step 6: Feign-tastic GitHub Client** {#h3-5-step-6-feign-tastic-github-client}
+### **Step 6: Feign-tastic GitHub Client**
 
 We'll leverage Feign to create a GitHub client, making API interactions smooth. This involves defining an interface (`GitHubClient`) and implementing functions to fetch project details and commits.
 
@@ -265,7 +265,7 @@ This code fetches your GitHub API token securely. It first checks if a cached to
 
 **Important Note:** This script relies on the GitHub CLI (`gh`). If you haven't already installed it, you can find [instructions](https://github.com/cli/cli?tab=readme-ov-file#installation) for your operating system.
 
-### **Step 7: Create the Command Line Application** {#h3-6-step-7-create-the-command-line-application}
+### **Step 7: Create the Command Line Application**
 
 Now, the heart of the tool: PicoCLI takes over command-line argument parsing and execution of the core logic. We'll define options for GitHub user, repository, commit range, output format, and more.
 
@@ -337,7 +337,7 @@ Finally, it either saves the release notes to a specified file or prints them to
 
 (Note: Some methods used in this code, such as `getCommitsInRange`, `generateReleaseNotes`, and helper method, are not shown here but can be found in the complete code [here](https://gist.github.com/rokon12/fd039cdcfa98920ea9e881bf18e33b0b).)
 
-### **Step 8: Running the Show: Main Method** {#h3-7-step-8-running-the-show-main-method}
+### **Step 8: Running the Show: Main Method**
 
 Finally, implement the main method to execute the command:
 
@@ -396,7 +396,7 @@ It will print on the terminal if we don't want to save it in any file.
 
 That's it.
 
-### **Conclusion** {#h3-8-conclusion}
+### **Conclusion**
 
 Congratulations! You've built a versatile release notes generator powered by JBang and PicoCLI.
 

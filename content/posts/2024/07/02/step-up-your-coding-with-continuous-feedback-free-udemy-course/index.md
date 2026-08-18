@@ -19,8 +19,8 @@ frozen: false
 
 What do you know about the code changes that were just introduced into the codebase? When will you notice if something goes wrong?
 
-What is Continuous Feedback? {#h2-0-what-is-continuous-feedback}
-----------------------------------------------------------------
+What is Continuous Feedback?
+----------------------------
 
 First, let me explain Continuous Feedback. It's a new dev practice that aims to make practical usage of code runtime data to shorten the feedback loop during development.
 
@@ -28,8 +28,8 @@ OpenTelemetry makes it possible with great library support and a standard spec f
 
 By practicing CF, developers can increase productivity with shorter feedback loops, getting access to data about their code much earlier, and detecting and resolving issues in shorter iterations, as they code.
 
-What will you be learning in the CF Course {#h2-1-what-will-you-be-learning-in-the-cf-course}
----------------------------------------------------------------------------------------------
+What will you be learning in the CF Course
+------------------------------------------
 
 In our course, you will learn:
 
@@ -44,15 +44,15 @@ Throughout the talk, we'll go over code examples of common anti-patterns, code s
 
 Ultimately, the goal should not be simply observing the application or creating nice-looking dashboards. Rather, success is in leveraging observability data to achieve a more effective development process and write better code.
 
-Who is the course for: {#h2-2-who-is-the-course-for}
-----------------------------------------------------
+Who is the course for:
+----------------------
 
 Software developers (senior or junior) interested in improving their skills and creating new habits to stand out from the crowd with their new skills and practices.
 
 [Enroll now](https://www.udemy.com/course/continuous-feedback/?couponCode=96FB38D1E8A75F0615F6)
 
-Other resources: {#h2-3-other-resources}
-----------------------------------------
+Other resources:
+----------------
 
 [CI/CD/CF? --- The DevOps toolchain's "missing-link"](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/ "CI/CD/CF? — The DevOps toolchain’s “missing-link”")  
 [Effective Java Observability](https://digma.ai/blog/coding-with-java-observability/)  

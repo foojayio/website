@@ -22,8 +22,8 @@ frozen: false
 
 Every test engineer, eventually
 
-What's a flaky test? {#h2-0-what-s-a-flaky-test}
-------------------------------------------------
+What's a flaky test?
+--------------------
 
 A **flaky test** is a test that sometimes passes and sometimes fails without any code changes. They're the by‑product of non‑determinism: timing, concurrency, eventual consistency, network hiccups, clock drift, resource contention, and (our favorite) **tests leaking state across runs**.
 
@@ -37,8 +37,8 @@ One of our top issues is due to our queuing system; a test may receive a message
 
 Last year, CI was red often enough that we decided to go on a proper flake‑hunting journey.
 
-First try: retry them all! {#h2-1-first-try-retry-them-all}
------------------------------------------------------------
+First try: retry them all!
+--------------------------
 
 Our first try to bite them all was to retry the flaky tests.
 
@@ -48,8 +48,8 @@ This helped... a bit. But it also **inflated test times** and **masked real issu
 
 Verdict: good band‑aid, bad cure.
 
-Second try: fix them all! {#h2-2-second-try-fix-them-all}
----------------------------------------------------------
+Second try: fix them all!
+-------------------------
 
 We then decided to put effort into fixing the failing test! We remove all the usage of the `@RetryingTest(5)` annotation and either fix the test or disable it.
 
@@ -65,8 +65,8 @@ Using this test framework everywhere gives us more control over resource allocat
 
 But after weeks of effort, we had to disable too many tests, and even if the number of flaky tests decreased, some were still failing, even rarely, but with the high number of tests we have, this would still make our CI suffer.
 
-Third try: embrace the inevitability! {#h2-3-third-try-embrace-the-inevitability}
----------------------------------------------------------------------------------
+Third try: embrace the inevitability!
+-------------------------------------
 
 So tests will fail; we had to accept that, some pretty often, some rarely, but tests will fail.  
 
@@ -90,8 +90,8 @@ Of course, flagging a test as flaky is an easy thing to do, so we take care of f
 
 We have test observability in place to track flaky tests, so if they increase a lot, we would know.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 You won't beat every flaky test. That's fine. The goal is to get **reliable signals** back into CI so you can confidently merge and ship. Separate what must be green from what's allowed to wobble, invest in deterministic test lifecycles, and keep an eye on the flaky set so it doesn't quietly grow.
 

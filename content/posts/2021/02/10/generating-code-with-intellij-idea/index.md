@@ -29,14 +29,14 @@ Well, there's a [shortcut in IntelliJ IDEA](https://www.jetbrains.com/help/idea/
 
 These shortcuts load the **Generate** menu. Here's a quick tour of where you can use it in Java projects in IntelliJ IDEA. It's not a complete list; let me know where else we can use it please!
 
-New Java Class {#h2-0-new-java-class}
--------------------------------------
+New Java Class
+--------------
 
 In the [Project Window](https://www.jetbrains.com/help/idea/project-tool-window.html "Project Window"), you can use this shortcut to create a whole host of things which are project and folder specific. If you use the shortcut on your directory that is [marked as your sources root](https://www.jetbrains.com/help/idea/content-roots.html#folder-categories "marked as your sources root") (usually src) in a Java project you get the option to create a new Java file (among other things). You're then asked to select between a Class, Interface, Record (Preview), Enum or Annotation. It's a speedy way of creating new classes for your project.
 
 Before we move on, a closely related shortcut is the one we use for a new Scratch File. It's **⌘⇧N** on macOS, or **Ctrl+Shift+Alt+Ins** on Windows/Linux. You can select to create a new Scratch file using **⌘N** on macOS, or **Alt+Ins** on Windows and Linux in the Project Tool window, but it's worth committing the scratch file shortcut to memory too as it's handy to be able to dump some code or notes in an area outside your project and share it across IntelliJ IDEA projects.
 
-### Constructors {#h3-1-constructors}
+### Constructors
 
 Now that you've got your class, you may want to generate a constructor or two. However, before we do that, let's add a couple of variables to our class:
 
@@ -68,8 +68,8 @@ public class GenerateCode {
 ```
 
 
-Other Class-Based Generate Options {#h2-2-other-class-based-generate-options}
------------------------------------------------------------------------------
+Other Class-Based Generate Options
+----------------------------------
 
 We don't need to stop there either. There's a whole host of code that IntelliJ IDEA can generate for us at this stage including:
 
@@ -84,8 +84,8 @@ We don't need to stop there either. There's a whole host of code that IntelliJ I
 
 While we're here, [Java Records](https://openjdk.java.net/jeps/359 "Java Records") are coming and IntelliJ IDEA is ready. Another way you could generate code if you're not ready to move to Java Records is to use the Generate shortcut to create a new Java record, and then you can convert the Java record to a normal Java class with **⌥⏎** on macOS, or **Alt+Enter** on Windows and Linux with your caret on the class name.
 
-Implement Methods {#h2-3-implement-methods}
--------------------------------------------
+Implement Methods
+-----------------
 
 When our Java class implements an interface, we need to ensure that we implement that interface's methods. The Generate menu helps us here too. Let's say that our code looks like this, and we're implementing `NewInterface`:
 
@@ -124,8 +124,8 @@ public class GenerateCode implements NewInterface {
 
 This also works for overriding methods from superclasses/super abstract classes.
 
-Add Parameters / Arguments {#h2-4-add-parameters-arguments}
------------------------------------------------------------
+Add Parameters / Arguments
+--------------------------
 
 Another useful trick you so is to use **⌘N** on macOS, or **Alt+Insert** on Windows and Linux when you're in a dialogue, and you need to add more rows or data. For example, we added a default constructor to our class, but we now want to refactor it to change the signature. Our code currently reflects the default constructor:
 
@@ -145,8 +145,8 @@ Let's refactor the Constructor with **⌘F6** on macOS, or **Ctrl+F6** on Window
 
 This trick works in all the dialogue boxes that require additional lines to be added that I've found so far.
 
-Generate Test Methods {#h2-5-generate-test-methods}
----------------------------------------------------
+Generate Test Methods
+---------------------
 
 Finally, everyone loves a good test and rightly so. We've already mentioned that you can use the **Generate** menu from a Java method to generate a corresponding test class. However, once you're in the test class, you can use **⌘N** on macOS, or **Alt+Insert** on Windows and Linux again to create much of the boilerplate code you might need, including (for JUnit5 at least):
 
@@ -158,7 +158,7 @@ Finally, everyone loves a good test and rightly so. We've already mentioned that
 
 If you are working with a different testing framework, your **Generate** menu will give you other relevant options.
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 Java may be a little clunky on the boilerplate side of things, but IntelliJ IDEA takes the heavy lifting out of that to a large extent so along with the shorcut for [intention actions](https://www.jetbrains.com/help/idea/intention-actions.html#apply-intention-actions "intention actions"), it's a compelling combination.

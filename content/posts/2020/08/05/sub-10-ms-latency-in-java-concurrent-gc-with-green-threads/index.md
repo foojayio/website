@@ -26,7 +26,7 @@ In Part 3 we showed that a modern JVM running live stream aggregation can achiev
 
 In this round we want to look at the same problem from the opposite angle: what can we do to help Hazelcast Jet achieve the best performance available on a JVM? How much throughput can we get while staying within the tight 10 ms bound for 99.99th percentile latency? We found our opportunity in a distinct design feature of Jet: the Cooperative Thread Pool.
 
-### Native Threads with Concurrent GC {#h3-0-native-threads-with-concurrent-gc}
+### Native Threads with Concurrent GC
 
 Let's go through an example with a streaming job running on a four-core machine. In a typical execution engine design, every task (roughly corresponding to a [DAG vertex](https://jet-start.sh/docs/concepts/dag)) gets its own thread to execute it:
 
@@ -40,7 +40,7 @@ This is how it will look when we add a concurrent GC thread into the picture:
 
 There's one more thread now, the concurrent GC thread, and it's additionally interfering with the computation pipeline.
 
-### Green Threads with Concurrent GC {#h3-1-green-threads-with-concurrent-gc}
+### Green Threads with Concurrent GC
 
 In Hazelcast Jet, tasks are designed to be [cooperative](https://jet-start.sh/docs/architecture/execution-engine): every time you give it a bunch of data to process, the task will run for a short while and return. It doesn't have to process all the data in one go and the execution engine will give it control again later with all the still-pending data. This basic design is also present in the concepts of *green threads* and *coroutines* . In Hazelcast Jet we call them [*tasklets*](https://jet-start.sh/docs/architecture/execution-engine#tasklet).
 
@@ -58,7 +58,7 @@ There are still as many threads as CPU cores and the OS doesn't have to do any c
 
 We went to see if this setup really makes the difference we hope for, and found it indeed had a drammatic impact on the latency with both garbage collectors we tested (G1 and ZGC). The most important outcome was that we were now able to push G1 below the 10 ms line. Since G1 is stable across a wide range of throughputs, we immediately got it to perform within 10 ms at *double the throughput than in the previous round*.
 
-### The Setup {#h3-2-the-setup}
+### The Setup
 
 Based on the expectations set by the previous benchmark, we focused on the ZGC and G1 collectors and the latest pre-release of Java 15. Our setup stayed the same for the most part; we refreshed the code a bit and now use the released version 4.2 of Hazelcast Jet with OpenJDK 15 EA33.
 
@@ -75,7 +75,7 @@ Summarizing, these are the changes we made with respect to the setup in the prev
 3. Used the `MaxNewSize` JVM parameter for G1
 4. Updated Hazelcast Jet and JDK versions
 
-### The Results {#h3-3-the-results}
+### The Results
 
 Comparing ZGC's results below with those in the [previous round](https://foojay.io/today/performance-of-modern-java-on-data-heavy-workloads-the-low-latency-rematch/), we can see the latency stayed about the same where it was already good, but the range of throughputs got extended from 8 to 10 M items/second, a solid 25% improvement.
 
@@ -83,7 +83,7 @@ The effect on G1 is sort of dual to the above: while the G1 already had great th
 
 ![Latency on c5.4xlarge, 1 M Events per Second](2020-08-05-latency-1m-700x464.png)
 
-### Upgrading to 10 M Input Events per Second {#h3-4-upgrading-to-10-m-input-events-per-second}
+### Upgrading to 10 M Input Events per Second
 
 Encouraged by this strong result, we dreamed up a scenario like this: we have 100,000 sensors, each producing a 100 Hz measurement stream. Can a single-node Hazelcast Jet handle this load and produce, say, the time integral of the measured quantity from each sensor over a 1-second window, at a 10 ms latency? This implies an order-of-magnitude leap in the event rate, from 1 M to 10 M events per second, but also a reduction in window length by the same factor, from ten seconds to one.
 

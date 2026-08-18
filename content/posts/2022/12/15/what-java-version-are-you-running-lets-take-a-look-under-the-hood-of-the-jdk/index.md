@@ -25,8 +25,8 @@ But did you know there are multiple ways you can do this and even get much more 
 
 Let's find out...
 
-Reading the Java Version in the Terminal {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-ReadingtheJavaVersionintheTerminal}
----------------------------------------------------------------------------------------------------------------------------------------------
+Reading the Java Version in the Terminal
+----------------------------------------
 
 Probably the easiest way to find the installed version is by using the `java -version` terminal command:
 
@@ -38,8 +38,8 @@ OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
 ```
 
 
-Checking Version Files in the Installation Directory {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-CheckingVersionFilesintheInstallationDirectory}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Checking Version Files in the Installation Directory
+----------------------------------------------------
 
 The above output results from info read by the `java` executable from a file inside its installation directory.
 
@@ -82,8 +82,8 @@ SOURCE="git:f4b2b4c5882e"
 ```
 
 
-Getting More Information With showSettings {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-GettingMoreInformationWithshowSettings}
----------------------------------------------------------------------------------------------------------------------------------------------------
+Getting More Information With showSettings
+------------------------------------------
 
 In 2010, an experimental flag (indicated with the `X`) was added to OpenJDK to provide more configuration information: `-XshowSettings`.
 ![](Screenshot-2022-12-01-at-12.23.11.png) Twitter screenshot of a message by OpenJDK about adding the -XshowSettings flag
@@ -92,7 +92,7 @@ This flag can be called with different arguments, each producing an other inform
 
 The cleanest way to call this flag, is by adding `-version`, otherwise you will get the long Java manual output as no application code was found to be executed.
 
-### Reading the System Properties {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-ReadingtheSystemProperties}
+### Reading the System Properties
 
 By using the `-XshowSettings:properties` flag, a long list of various properties is shown.
 
@@ -169,7 +169,7 @@ It's an internal number used by Java to define the version.
 | **Java release**  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 |
 | **Class version** | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |
 
-### Reading the Locale Information {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-ReadingtheLocaleInformation}
+### Reading the Locale Information
 
 In case you didn't know yet, I live in Belgium and use English as my computer language, as you can see when using the `-XshowSettings:locale` flag:
 
@@ -192,7 +192,7 @@ OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
 ```
 
 
-### Reading the VM Settings {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-ReadingtheVMSettings}
+### Reading the VM Settings
 
 With the `-XshowSettings:vm` flag, some info is shown about the Java Virtual Machine.
 
@@ -219,11 +219,11 @@ OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
 ```
 
 
-### Reading all at Once {#WhatJavaversionareyourunning?TakingalookunderthehoodsoftheJDK.-ReadingallatOnce}
+### Reading all at Once
 
 If you want all of the information above with one call, use the `-XshowSettings:all` flag.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Next to `java -version`, we can also use `java -XshowSettings:all -version` to get more info about our Java environment.

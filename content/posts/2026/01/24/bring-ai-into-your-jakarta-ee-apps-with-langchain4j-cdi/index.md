@@ -28,8 +28,8 @@ frozen: false
 
 ***Note:** This is an updated article to the one published on the [JAVAPRO's magazine - "04-2025 \| Java 25 - Special Edition"](https://javapro.io/2025/10/28/04-2025-java-25-special-edition/). Since the release of LangChain4J-CDI version 1.0.0, there's been minor changes, but the fundamental architecture and usage of the library is the same.*
 
-What is LangChain4J-CDI? {#h2-0-what-is-langchain4j-cdi}
---------------------------------------------------------
+What is LangChain4J-CDI?
+------------------------
 
 Langchain4J is a Java library that simplifies the integration of AI and LLMs easier, and with their feature of AI services it provides a declarative and type-safe API for developers to define interfaces that represent AI services, abstracting away the complexities of direct LLM communication
 
@@ -51,8 +51,8 @@ The **Key features** provided by Langchain4J Microprofile:
 
 ***Please note:** Langchain4J-CDI is a module developed by the Microprofile members, initially called SmallRye-LLM. It has since been donated to Langchain. The SmallRye-LLM repo on GitHub has been retired.*
 
-Getting started with LangChain4J-CDI {#h2-1-getting-started-with-langchain4j-cdi}
----------------------------------------------------------------------------------
+Getting started with LangChain4J-CDI
+------------------------------------
 
 Langchain4J-CDI provides a [working example](https://github.com/langchain4j/langchain4j-cdi/tree/main/examples) on building a conversational AI agent for a car booking system. This demonstration is inspired by the insightful ["Java meets AI" talk from Lize Raes at Devoxx Belgium 2023](https://youtu.be/BD1MSLbs9KE?si=yBeR8-3IJUYMWd8v) (with further contributions from [Jean-François James](http://jefrajames.fr/). The original demo is from [Dmytro Liubarskyi](https://www.linkedin.com/in/dmytro-liubarskyi/)). Developers can view how the same example are implemented on popular Jakarta EE 10 application servers.
 
@@ -68,7 +68,7 @@ Let's start building our own AI service, purely in Java. Please ensure that your
 
 The current release of LangChain4J-CDI, as of the time of writing, is `1.0.0` and supports LangChain4J core version `1.10.0`, and the community version of `1.10.0-beta18` (the latest at this time of writing).
 
-### 1) Add dependencies (Maven) {#h3-2-1-add-dependencies-maven}
+### 1) Add dependencies (Maven)
 
 We always import the **langchain4j-cdi-core** library as your `dependency`:
 
@@ -97,7 +97,7 @@ You also need to import a LangChain4J model provider. For this example we'll use
 
 where *${dev.langchain4j.version}* is the latest Langchain4J main version (in this case `1.10.0`).
 
-### 2) Configure your model(s) with MicroProfile Config {#h3-3-2-configure-your-model-s-with-microprofile-config}
+### 2) Configure your model(s) with MicroProfile Config
 
 You can leverage Microprofile Config to define and customize Langchain4J AI service components to be used by your application.
 
@@ -177,7 +177,7 @@ dev.langchain4j.cdi.plugin.chat-model.config.logRequests=true
 
 The config creator (internally) will identify config values that contains dashes and rework it to its camel-case property and match it to the Builder and then assign the value accordingly.
 
-### 3) Declare an AI Service interface {#h3-4-3-declare-an-ai-service-interface}
+### 3) Declare an AI Service interface
 
 Using LangChain4J's AiServices, it allows developers the ability to plugin any of the AiServices component much more flexible. Now, we're powering the AI Services with the power of Jakarta EE CDI.
 
@@ -309,7 +309,7 @@ Then we register it to `@RegisterAIService` by providing the CDI name of the `Co
 ```
 
 
-### 4) Inject and use it {#h3-5-4-inject-and-use-it}
+### 4) Inject and use it
 
 Now, you can simply `@Inject` your AI `Assistant`.  
 
@@ -384,7 +384,7 @@ public class AnswerDto implements Serializable {
 
 Now, you can run your application by deploying it to your application server and do an HTTP POST to your RESTful endpoint.
 
-### 4) Observability and resiliency. {#h3-6-4-observability-and-resiliency}
+### 4) Observability and resiliency.
 
 #### 4.1) Fault Tolerance using Microprofile Fault Tolerance.
 
@@ -487,13 +487,13 @@ dev.langchain4j.cdi.plugin.<beanName>.config.listeners=dev.langchain4j.cdi.telem
 
 The value are comma separated, fully qualified class name. The class must implement the `ChatModelListener` interface.
 
-In Summary {#h2-7-in-summary}
------------------------------
+In Summary
+----------
 
 LangChain4J-CDI simplifies the process of integrating LangChain4J components into AI services. Its strong CDI integration and pluggability to MicroProfile, LangChain4J-CDI makes it an attractive choice for Jakarta EE and Microprofile developers who want to add LangChain4J AI capabilities without the usual overhead and boilerplate code. Thus, LangChain4J-CDI lets you focus on the value that generative AI can bring to your business logic.
 
-Important Links {#h2-8-important-links}
----------------------------------------
+Important Links
+---------------
 
 * LangChain4J-CDI GitHub Repo: <https://github.com/langchain4j/langchain4j-cdi/>
 * LangChain4J-CDI Examples GitHub Repo: <https://github.com/langchain4j/langchain4j-cdi/tree/main/examples>

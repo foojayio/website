@@ -30,8 +30,8 @@ After one of our customers requested it, the extension became available in our A
 
 After providing a brief overview of the gRPC extension in Payara in our [April release blog,](https://blog.payara.fish/whats-new-in-the-april-2022-payara-platform-release) here we provide more technical details about how to use it in Payara Community, where you will build the module yourself and place it in the modules directory.
 
-How Does gRPC Work? {#h2-0-how-does-grpc-work}
-----------------------------------------------
+How Does gRPC Work?
+-------------------
 
 [gRPC](https://grpc.io/) is based on the idea of defining a service by specifying the contract interface. The server implements this interface and runs a gRPC server to handle client requests. The client has a stub which has the same methods as the server on its side.
 
@@ -45,8 +45,8 @@ gRPC was designed for HTTP/2, which provides important performance benefits over
 It generates small payload messages which are suitable for limited bandwidth devices like mobile phones. The picture below shows the communication between a gRPC server implemented in Java and two different clients: a C++ Client and an Android App.
 ![](https://blog.payara.fish/hubfs/image-png-Apr-12-2022-05-35-20-81-PM.png)
 
-gRPC Support in Payara {#h2-1-grpc-support-in-payara}
------------------------------------------------------
+gRPC Support in Payara
+----------------------
 
 Payara has developed a module to support gRPC. It is available in Payara Community GitHub repository at: <https://github.com/payara/gRPC>. The user can clone and build the project using Maven or just download the JAR file from: [gRPC Support JAR.](https://github.com/payara/Payara/blob/master/appserver/tests/payara-samples/test-domain-setup/src/main/resources/grpc-support-1.0.0.jar)
 
@@ -77,8 +77,8 @@ After restarting Payara Server, the user should run the following commads to mak
 
 In the next sections, we will show an implementation based on the Java gRPC example defined in gRPC official tutorial: <https://grpc.io/docs/languages/java/basics/>
 
-Service Definition {#h2-2-service-definition}
----------------------------------------------
+Service Definition
+------------------
 
 We use Protbuf to define the gRPC Service with its types for request and response methods. The complete file can be found in[route_guide.proto](https://github.com/payara/Payara-Examples/blob/master/grpc/grpc-stubs/src/main/proto/route_guide.proto).
 
@@ -118,8 +118,8 @@ message Rectangle {
 
 At this point, we have the service defined. Then we can create the Stubs and work on Server and Client creations.
 
-Stubs Generation {#h2-3-stubs-generation}
------------------------------------------
+Stubs Generation
+----------------
 
 Once we have `.proto` file, we will create the gRPC client and server interfaces from it. We can do this using Maven as described here: <https://github.com/grpc/grpc-java/blob/master/README.md>[](https://github.com/grpc/grpc-java/blob/master/README.md)
 
@@ -138,14 +138,14 @@ The results can be found in `target->generated-sources`. The main files generate
 
 ![](https://blog.payara.fish/hubfs/image-png-Apr-14-2022-10-07-13-88-AM.png)
 
-Server Creation {#h2-4-server-creation}
----------------------------------------
+Server Creation
+---------------
 
 The RouteGuide server is implemented in our example by class[RouteGuideService.](https://github.com/payara/Payara-Examples/blob/master/grpc/grpc-web/src/main/java/fish/payara/example/grpc/RouteGuideService.java) It overrides the methods defined in `RouteGuideGrpc.RouteGuideImplBase` giving the actual behavior to the service.
 
 In the [official gRPC example](https://github.com/grpc/grpc-java/blob/master/examples/src/main/java/io/grpc/examples/routeguide/RouteGuideServer.java), specific methods are included for running the gRPC Server and responding to requests from clients. These methods are not necessary in the Payara example since we created a web project to be deployed in Payara Server. Therefore, we will now look into our RouteGuide implementation.
 
-### Route Guide Implementation {#h3-5-route-guide-implementation}
+### Route Guide Implementation
 
 First of all, our class implements the abstract base class:
 
@@ -280,8 +280,8 @@ The main difference is that the two `stream`s are completely independent.
 
 Server and client can write and read in any order.
 
-Client Creation {#h2-6-client-creation}
----------------------------------------
+Client Creation
+---------------
 
 We created our client into the same module: [`grpc-web`](https://github.com/payara/Payara-Examples/tree/master/grpc/grpc-web), but it belongs to the [`test`](https://github.com/payara/Payara-Examples/tree/master/grpc/grpc-web/src/test) source folder. Therefore, we encapulated the grpc client into our tests. As we have a dependency to project grpc-stubs in `grpc-web->pom.xml`:
 
@@ -297,7 +297,7 @@ We created our client into the same module: [`grpc-web`](https://github.com/paya
 
 Then the stubs are available to be instantiated by our client: [RouteGuideClient](https://github.com/payara/Payara-Examples/blob/master/grpc/grpc-web/src/test/java/fish/payara/example/grpc/RouteGuideClient.java).
 
-### Stubs Instantiation {#h3-7-stubs-instantiation}
+### Stubs Instantiation
 
 The first thing to notice is that into our class constructor we instantiate two stubs:
 
@@ -327,7 +327,7 @@ RouteGuideClient client = new RouteGuideClient(channel, clientIdPrefix);
 
 Inside `RouteGuideClient` constructor the channel is passed twice to create the stubs using methods: `newBlockingStub` and `newStub`.
 
-### Service Methods Invocation {#h3-8-service-methods-invocation}
+### Service Methods Invocation
 
 To finish this section let's see how we call our four service methods. The results showed in this subsection were generated by running:
 ![](https://blog.payara.fish/hubfs/image-png-Apr-15-2022-06-12-06-82-PM.png)
@@ -591,8 +591,8 @@ INFO: [] Finished RouteChat
 ```
 
 
-Test Environment {#h2-9-test-environment}
------------------------------------------
+Test Environment
+----------------
 
 To run the tests in client side, we used the following configuration:
 
@@ -601,8 +601,8 @@ To run the tests in client side, we used the following configuration:
 * Java: OpenJDK Zulu8 v1.8.0_322
 * Payara Server: v5.2022.2
 
-Summary {#h2-10-summary}
-------------------------
+Summary
+-------
 
 We hope you've found this helpful as a way to get started with gRPC and Payara Community. We have also added information on gRPC to our documentation and it is available [here.](https://docs.payara.fish/community/docs/documentation/extensions/grpc/README.html#what-is-grpc)
 

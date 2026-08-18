@@ -33,7 +33,7 @@ In my opinion the flexibility of this logging system brought a major downside fr
 
 Anyway, let's begin our exploration with a small recapitulation of [JEP-158](https://openjdk.java.net/jeps/158) which lays out the foundation of JVM unified logging.
 
-### Unified JVM Logging (JEP-158) {#_unified_jvm_logging_jep_158}
+### Unified JVM Logging (JEP-158)
 
 The JEP describes how the logging configuration works in the command line:
 
@@ -85,7 +85,7 @@ Also, if you already heard of `jcmd`, unified logging JEP enabled log configurab
 
 Now let's see what we can do with unified logging and profit from the insight it gives in the JVM.
 
-### Command Line {#_how_to_use_from_the_command_line}
+### Command Line
 
 While the JEP explains things, it's usually not how we get the first contact: We use the command line help, which is describing just as well how to use from the `java` binary.
 
@@ -180,7 +180,7 @@ Options: (options must be specified using the  or = syntax)
 ```
 
 
-### Configuration {#_configuring_unified_logging}
+### Configuration
 
 From the help and the JEP above here's what to retain:
 
@@ -233,7 +233,7 @@ $ jcmd $(pidof java) VM.log output=/var/log/%t-os-container-pagesise.log what=pa
 
 The above commands are equivalent, but note that depending on the specified tags and level, the log content may be less useful when enabled at a later time. In the above example in particular the `os+container=trace` will output some interesting logs only during JVM startup.
 
-#### Tag Set \& Tag Prefixes {#_tag_set_and_tag_prefixes}
+#### Tag Set \& Tag Prefixes
 
 In the rest of the article I will mention two related notions about tags. Tags are not hierarchic, however, when their use in the JDK code base suggests there is still some kind of *hierarchy*.
 
@@ -251,7 +251,7 @@ The log prefixes allow it to prepend the log message (that's the prefix) with so
 
 * [src/hotspot/share/logging/logPrefix.hpp](https://github.com/AdoptOpenJDK/openjdk-jdk11u/blob/jdk-11.0.8%2B10/src/hotspot/share/logging/logPrefix.hpp)
 
-#### Migrating the GC Log Configuration (JEP-271) {#_migrating_the_gc_log_configuration_jep_271}
+#### Migrating the GC Log Configuration (JEP-271)
 
 While this topic may seem covered by other blogs, I wasn't satisfied by the actual equivalence or not of the log configuration. I got the configuration wrong, understand *incomplete*, more than once until I decided to dive in.
 

@@ -139,8 +139,8 @@ $ java -m jdk.httpserver  -b 0.0.0.0 -p 8880 -d <PROJECT_PATH>/http-static -o ve
 
 Let us explore a bit the programmatic possibilities as command-line ones may already be pretty useful, IMHO.
 
-Starting "*SimpleFileServer*" Programmatically {#h2-0-starting-simplefileserver-programmatically}
--------------------------------------------------------------------------------------------------
+Starting "*SimpleFileServer*" Programmatically
+----------------------------------------------
 
 The class "*SimpleFileServer* " resides in the module "*com.sun.net.httpserver*".
 
@@ -148,7 +148,7 @@ For purposes of this article, we create a new class "*WebServerSimpleMain*" and 
 
 Our journey starts with basic programmatic server initiation.
 
-### Simple server serves a directory {#h3-1-simple-server-serves-a-directory}
+### Simple server serves a directory
 
 The example shows how to create a server with an absolute folder path (Example 8.). This path is used as the source for the served files and its subdirectories (Example 9.).
 
@@ -179,7 +179,7 @@ server.start();
 
 ***Image 2.**: Default configuration print the folder structure*
 
-### Adding request handlers and filters to HttpServer {#h3-2-adding-request-handlers-and-filters-to-httpserver}
+### Adding request handlers and filters to HttpServer
 
 The JEP-408 (Reference 2.) mentions that the class "*SimpleFileServer* ", added in Java 18, is based on the already existing "*HttpServer"* class that has been present since Java 1.6. In this section we explore its underlying components "*HttpServer* ", "*HttpHandler* " and "*OutputFilter*"
 
@@ -211,8 +211,8 @@ server.start();
 
 A closer look at the custom handlers (Example 10., *getHandler,h1, postHandler,h2,* notAllowedHandler) shows their concatenation.
 
-Running in Docker {#h2-3-running-in-docker}
--------------------------------------------
+Running in Docker
+-----------------
 
 The "*jwebserver* " can be pretty handy as it allows to execute it just as a command "*$ docker run*" (Example 10.) or create Docker containers with a mounted directory that can be used in a docker-compose file (Example 11.).
 
@@ -257,8 +257,8 @@ CMD ["sh", "-c", "jwebserver -b 0.0.0.0"]
 
 ***Example 14.**: Dockerfile snippet*
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 The newly added "*jwebserver*" is a pretty neat feature.
 
@@ -268,8 +268,8 @@ The "*jwebserver*" comes with Java 18.
 
 It is a hot candidate for cases where only simple content or responses are required and reduces the necessity to search for more complicated solutions like Jetty and Netty.
 
-References {#h2-5-references}
------------------------------
+References
+----------
 
 1. [GitHub Project, JVM-Lanuage-Examples](https://github.com/mirage22/jvm-language-examples) : https://github.com/mirage22/jvm-language-examples
 2. [JEP 408: Simple Web Server](https://openjdk.java.net/jeps/408): https://openjdk.java.net/jeps/408

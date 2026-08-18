@@ -37,8 +37,8 @@ In this article, I'll give you some advice and best practices for dealing with J
 * Update your Java dependencies
 * Removing Java dependencies from your project
 
-Why be more aware of your Java dependencies {#h2-0-why-be-more-aware-of-your-java-dependencies}
------------------------------------------------------------------------------------------------
+Why be more aware of your Java dependencies
+-------------------------------------------
 
 When it comes to managing code contributions, we generally turn to a process like [code reviews](https://snyk.io/learn/code-review/) for a first-pass quality assurance measure, before merging new code into our main branch. Check out our guide to [Java code review tools](https://snyk.io/learn/code-review/java-tools/) to learn more. Practicing pair programming is another way to cover this quality control process.
 
@@ -56,25 +56,25 @@ All of this can lead to:
 * Compatibility problems when updating libraries
 * And more
 
-Managing Java dependencies {#h2-1-managing-java-dependencies}
--------------------------------------------------------------
+Managing Java dependencies
+--------------------------
 
 One of the best practices for significantly using repositories, like Maven Central, is to set up your own repositories manager. This is a dedicated proxy server between your internal development and the public repositories --- which will not only gives you faster and more stable builds, but also allows you to set up [policies](https://snyk.io/series/open-source-security/open-source-policy/) for Java packages. You can, for instance, block certain versions so they cannot be downloaded and used in your applications.
 
 For more information about repository managers and a list of possible products, take a look at the [Maven documentation](https://maven.apache.org/repository-management.html).
 
-Including new dependencies in your Java project {#h2-2-including-new-dependencies-in-your-java-project}
--------------------------------------------------------------------------------------------------------
+Including new dependencies in your Java project
+-----------------------------------------------
 
 When you need to solve a problem, and there is a library available, you'll likely want to include it in your Java dependency manifest files.
 
 However, before including, you should consider:
 
-### 1. Does it solve the problem? {#h3-3-1-does-it-solve-the-problem}
+### 1. Does it solve the problem?
 
 The main reason for importing a package is to solve your problem. The question is whether the dependency you chose can do this. Also, does it solve the whole problem without introducing new challenges? If this isn't the case, there might be better solutions out there.
 
-### 2. Do I need the (whole) package? {#h3-4-2-do-i-need-the-whole-package}
+### 2. Do I need the (whole) package?
 
 Is it worth importing a large dependency, with many functions and data types, if you only need a single function? Sometimes, it might be easier and more manageable to write that function yourself. For instance, does it make sense to include entire Eclipse Collections if I only want to use the Tuple data type? Probably not.
 
@@ -84,7 +84,7 @@ A quick look at [mvnrepository.com](https://mvnrepository.com/) shows me that th
 
 Also, check to see if the dependencies you already have can do the job for you. Some similar functions or data types might already be available. On the other hand, including a new, extensive library can help you solve multiple problems at once --- it all depends on the situation.
 
-### 3. How many contributors are there? {#h3-5-3-how-many-contributors-are-there}
+### 3. How many contributors are there?
 
 We have a pretty low bus factor if the Java dependency you use has only one or just a few maintainers. What happens if the maintainer decides to quit, or doesn't have time to fix a bug? Alternatively, you might also choose to contribute to the project yourself --- making it more secure for everyone involved.
 
@@ -92,13 +92,13 @@ But, before including any dependencies in your project, be sure to check the cor
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-github-contributors-2048x214.png)
 
-### 4. Is it still maintained? {#h3-6-4-is-it-still-maintained}
+### 4. Is it still maintained?
 
 If a package is no longer maintained you definitely do not want to rely on it. Before integrating a package, check if there are new pushes on the GitHub repository, and take a look at the release cycle of a package. This will give you an idea of how well maintained the package is.
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-2-hrs.jpg)
 
-### 5. What is the latest version of the package? {#h3-7-5-what-is-the-latest-version-of-the-package}
+### 5. What is the latest version of the package?
 
 Code examples can give you great insight on a particular Java dependency. However, these examples might be outdated, and the intended package might already be updated. Consider using the latest stable version. For Eclipse Collections, we see that the latest stable release is 11.1.0 from July 5, 2022 on mvnpackage.com. Consider using that version.
 
@@ -114,7 +114,7 @@ If a Java dependency has the qualifier GA or final, you can generally consider i
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-central-1240x615.jpg)
 
-### 6. Are there any security vulnerabilities? {#h3-8-6-are-there-any-security-vulnerabilities}
+### 6. Are there any security vulnerabilities?
 
 Before you actively depend on a Java package, make sure you [scan it for known vulnerabilities](https://snyk.io/learn/vulnerability-scanner/).
 
@@ -122,10 +122,10 @@ The Snyk CLI is a great tool for scanning your Maven or Gradle file.
 
 If your library contains a security vulnerability, you might want to pick another package to depend on.
 
-Updating your Java dependencies {#h2-9-updating-your-java-dependencies}
------------------------------------------------------------------------
+Updating your Java dependencies
+-------------------------------
 
-### 1. Are there newer versions available? {#h3-10-1-are-there-newer-versions-available}
+### 1. Are there newer versions available?
 
 You don't want to manually check every Java dependency you have to see if newer versions are available. Luckily, there are easier ways to do this.
 
@@ -167,13 +167,13 @@ When connecting your GitHub repository to your Snyk account, we can provide you 
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-snyk-ui-1240x804.jpg)
 
-### 2. Are the packages you use still maintained? {#h3-11-2-are-the-packages-you-use-still-maintained}
+### 2. Are the packages you use still maintained?
 
 It is wise to revisit the GitHub repo, or mvnpackage.com, to see if there are recent updates and commits. If it looks like a package is no longer well maintained, you can choose to maintain it yourself or migrate to another, better updated, library.
 
 However, if you encounter a problem with a dependency that's critical to your application, consider fixing the problem yourself and contributing that fix to the open-source project. This will be greatly appreciated --- and often quicker than submitting issue reports and pushing the maintainer to fix the problem.
 
-### 3. Are there security issues with my Java dependencies? {#h3-12-3-are-there-security-issues-with-my-java-dependencies}
+### 3. Are there security issues with my Java dependencies?
 
 Even if your application is free from vulnerabilities now, it doesn't mean it will stay that way forever. New vulnerabilities and exploits are discovered and disclosed on a daily bases. This means that you need to rescan your libraries regularly to ensure they remain vulnerability free.
 
@@ -185,10 +185,10 @@ Alternatively, you can add your Git repository to Snyk, so we can scan and updat
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-snyk-vuln-report-1240x1036.jpg)
 
-Removing Java dependencies from your project {#h2-13-removing-java-dependencies-from-your-project}
---------------------------------------------------------------------------------------------------
+Removing Java dependencies from your project
+--------------------------------------------
 
-### 1. Is the package still in use? {#h3-14-1-is-the-package-still-in-use}
+### 1. Is the package still in use?
 
 If a Java dependency is not used anymore, we should remove it from our manifest file. Every package in that file is part of your binary and available on the classpath. Removing unused dependencies will make your binary smaller --- and lead to faster startup and download times in addition to better security. Minimizing the dependencies on your classpath is critical to protecting against attacks like a [deserialization gadget chain](https://snyk.io/blog/serialization-and-deserialization-in-java/).
 
@@ -218,8 +218,8 @@ I have to configure the plugin accordingly to set the `gradleLint.rules`. You ca
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-lint-violation.jpg)
 
-Create a solid dependency management strategy for your Java applications {#h2-15-create-a-solid-dependency-management-strategy-for-your-java-applications}
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Create a solid dependency management strategy for your Java applications
+------------------------------------------------------------------------
 
 When developing Java applications and using dependencies like libraries or frameworks, it's wise to create a strategy for how to handle them.
 
@@ -229,9 +229,9 @@ By creating a clear strategy, we prevent surprises when a high priority security
 
 Check out [this article to learn more about managing open source dependencies](https://snyk.io/series/open-source-security/software-dependencies/).
 
-Secure your dependencies for free {#h2-16-secure-your-dependencies-for-free}
-----------------------------------------------------------------------------
+Secure your dependencies for free
+---------------------------------
 
 Create a Snyk account today for effortless scanning and secure dependencies.
 
-[Sign up for free](https://app.snyk.io/login?cta=sign-up&amp;loc=body&amp;page=best-practices-for-managing-java-dependencies)
+[Sign up for free](https://app.snyk.io/login?cta=sign-up&loc=body&page=best-practices-for-managing-java-dependencies)

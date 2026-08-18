@@ -29,7 +29,7 @@ Since older technologies are removed like support for CORBA and other specificat
 
 We decided to start a 'Getting Started with Jakarta EE 9' a blog and video series to introduce those who are not familiar with the platform to the basics of Jakarta EE 9. And as you all probably know, the classic 'Hello World' example must start this series!
 
-### Setting Up with Maven {#h3-0-setting-up-with-maven}
+### Setting Up with Maven
 
 You can use the Maven build tools to compile and package your Jakarta EE 9 application. With the Maven Archetypes, you can bootstrap many types of applications. For the moment, there is no specific archetype for Jakarta EE 9 available. You can start from any other maven project and adopt the *pom.xml* file or you can use the quickstart archetype as follows:
 
@@ -83,7 +83,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
 You are now ready to open the Maven Project in your favorite IDE and start coding your application.
 
-### Setting Up with Gradle {#h3-1-setting-up-with-gradle}
+### Setting Up with Gradle
 
 You can also use Gradle as an alternative for Maven as your build tool. It doesn't have many templates available, but you can use the following command to generate a basic Gradle project.
 
@@ -134,7 +134,7 @@ war {
 
 You are now ready to open the Gradle Project in your favoriite IDE and start coding your application.
 
-### Hello Servlet {#h3-2-hello-servlet}
+### Hello Servlet
 
 Now that we have a project created, we can develop the Hello World Servlet. Servlets are not much used any more in today's development but are still very important as they form the basis for many frameworks that are built on top of it like REST endpoints and server-side applications like the Jakarta Faces (which was called Java Server Faces in Java EE)
 
@@ -174,7 +174,7 @@ Some background information on the example:
 * `HttpServletRequest.getSession()` returns the HTTP Session for the request and allows to set values in the session (with the method .`setAttribute()`) so that these values are avaiable the next time the user access your application again (depending on session timeout configuration)
 * The `HttpServletResponse` is a class to send information back to the user. In our cases, just the "*Hello World*" text.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 Getting started with Jakarta EE 9 is easy. You just have to define one single dependency for your application that brings in the entire API of the Java Enterprise framework. The API needs to be defined as provided as the Payara Platform products contain all the required code already, which means that the Web Archive file is small and efficient.
 

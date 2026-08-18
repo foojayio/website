@@ -25,7 +25,7 @@ In order to be able to configure JDK options for Elasticsearch before startup, t
 
 Let's dive into the mechanism to configure JVM options.
 
-### Configuring JVM Options with Elasticsearch {#h3-0-configuring-jvm-options-with-elasticsearch}
+### Configuring JVM Options with Elasticsearch
 
 The most commonly used jvm option that requires configuration before the Elasticsearch Java process is started, is setting the heap size. In order to do so, Elasticsearch makes use of [a mechanism](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/jvm-options.html), that not only reads the `config/jvm.options` file but also reads the `config/jvm.options.d` directory and appends the contents of all files to create a big list of JVM options. You could create a file like `config/jvm.options.d/heap.options` like this:
 
@@ -84,7 +84,7 @@ There is another [safeguard](https://github.com/elastic/elasticsearch/blob/7.9/d
 
 Also, Elasticsearch logs all JVM options on start up to allow for easy comparison of what is assumed by the user. Also, those options are not only logged, but can be retrieved using the [nodes info API](https://www.elastic.co/guide/en/elasticsearch/reference/7.9/cluster-nodes-info.html).
 
-### Ergonomic Defaults {#h3-1-ergonomic-defaults}
+### Ergonomic Defaults
 
 So, with an infrastructure in place like that, can we do more fancy things than just parsing JVM options? Of course we can! Ideas anyone?
 
@@ -136,7 +136,7 @@ We even managed to find a bug in our G1 configuration options. In order to under
 
 However this circuit breaker did not work in combination with the shipped G1 settings, as the configured settings assumed [a heap bigger than 100%](https://github.com/elastic/elasticsearch/pull/46169) of what was configured and so the circuit breaker tripped before the garbage collector started its job of garbage collection per the supplied configuration. Also, the memory circuit breaker was enhanced with some G1 specific code to [nudge G1 to do a young GC](https://github.com/elastic/elasticsearch/pull/58674) at some point.
 
-### Summary {#h3-2-summary}
+### Summary
 
 As you can see, properly handling and parsing as well as choosing good default JDK options like switching from one garbage collector to another involves quite a bit of steps, infrastructure, testing, running in production \& verification - and the same probably applies to your own applications as well.
 

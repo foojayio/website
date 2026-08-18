@@ -28,7 +28,7 @@ However, there are some unusual things in Java that could be surprisingly useful
 
 One of them is a class that extends Throwable but isn't an Error or an Exception.
 
-### StackTrace Extends Throwable {#h3-0-stacktrace-extends-throwable}
+### StackTrace Extends Throwable
 
 ```java
 package net.openhft.chronicle.core;
@@ -83,7 +83,7 @@ This is due to the JVM stopping the thread, and typically JVMs wait to stop ever
 
 I.e., It has a high overhead but can be very useful.
 
-### StackTrace as a Deferred Exception {#h3-1-stacktrace-as-a-deferred-exception}
+### StackTrace as a Deferred Exception
 
 We don't expect this Throwable to be thrown but it can record the cause of an Exception which may be thrown later.
 
@@ -166,7 +166,7 @@ Prints the following:
 
 This allows you to not just see where a resource was created so you can try to determine why it wasn't closed, but it's trivial to log in a manner your IDE understands, as your logger will already have support for printing out the stack trace. e.g. you can click on the line numbers to look through the code which created it.
 
-### Performance Monitoring a Critical Thread in Production {#h3-2-performance-monitoring-a-critical-thread-in-production}
+### Performance Monitoring a Critical Thread in Production
 
 In some environments, you want a low overhead way of monitoring the jitter of a critical event in production, without running a profiler. This can be achieved by adding your own monitoring to only sample a stack trace when it exceeds some threshold. This can find problems you can't reproduce in a test or development environment, so it can be invaluable.
 
@@ -209,7 +209,7 @@ Prints the following, which again you can see is easy to navigate the stack in y
 
 You might be wondering why this happens in this case. The most likely cause is that *Thread.sleep(time)* sleeps for a minimum amount of time, not a maximum and on Windows sleep 1 ms actually takes about 1.9 ms fairly consistently.
 
-### Detecting When a Single Threaded Resource is Accessed Concurrently Between Threads {#h3-3-detecting-when-a-single-threaded-resource-is-accessed-concurrently-between-threads}
+### Detecting When a Single Threaded Resource is Accessed Concurrently Between Threads
 
 ```java
 package net.openhft.chronicle.core;
@@ -252,7 +252,7 @@ Prints the following:
 
 You can see the resource was used by two threads with their names, however, you can also see where in the stack they were used to determine the possible cause.
 
-### Turning Off This Tracing {#h3-4-turning-off-this-tracing}
+### Turning Off This Tracing
 
 Creating a StackTrace has a significant impact on the thread and possibly the JVM. However it is easily turned off using a control flag such as a system property and replaced with a null value.
 
@@ -265,11 +265,11 @@ createdHere = Jvm.isResourceTracing()
 
 This use of a *null* doesn't require much special handling as loggers will ignore a Throwable which is *null* , and you can give a *null* cause to an Exception and it's the same as not providing one.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 While having a class that directly extends Throwable is surprising, it is allowed and is also surprisingly useful for providing additional information about the life cycle of a resource, or adding simple monitoring you can run in production.
 
-### Links {#h3-6-links}
+### Links
 
 [Chronicle Software](https://chronicle.software/ "Chronicle Software")  
 [OpenHFT Chronicle Core](https://github.com/OpenHFT/Chronicle-Core "OpenHFT Chronicle Core")

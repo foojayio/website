@@ -33,8 +33,8 @@ What you need is a way in which you could complete this diverse set of tasks, wi
 
 Liberty Tools is a set of intuitive developer tools that provide a simplified yet powerful development experience. They support popular integrated development environments (IDEs) including Visual Studio Code, available as an [extension](https://ibm.biz/LibertyToolsVSCodeMarketplace).
 
-Key Capabilities of Liberty Tools {#h2-0-key-capabilities-of-liberty-tools}
----------------------------------------------------------------------------
+Key Capabilities of Liberty Tools
+---------------------------------
 
 These tools introduce capabilities that really empower you to develop, test, debug, and manage applications without having to leave your IDE, including:
 
@@ -46,13 +46,13 @@ These tools introduce capabilities that really empower you to develop, test, deb
 
 In this article, we'll dive further into these capabilities. If you want to view a deep dive tutorial on this tool, then watch the [Developer Deep Dive of Liberty Tools for Visual Studio Code](https://www.youtube.com/watch?v=TOfQi-C8AEU) video. Clips of this video are used in this article to showcase these capabilities.
 
-### View and access all detected Liberty projects in your IDE in the Liberty Dashboard {#h3-1-view-and-access-all-detected-liberty-projects-in-your-ide-in-the-liberty-dashboard}
+### View and access all detected Liberty projects in your IDE in the Liberty Dashboard
 
 Liberty Tools automatically detects Liberty Maven or Gradle projects. These projects are added to a special Liberty dashboard view in Visual Studio Code. From this dashboard, you can access a command menu to manage your projects. Now, you don't have to spend time creating and managing Liberty instances, which frees up your time to focus on the code itself.
 
 ![Screenshot of Visual Studio Code IDE and Liberty Tools Dashboard and action menu.](VSCodeLibertyTools2-700x502.png)
 
-### Rapid, iterative development with Liberty dev mode {#h3-2-rapid-iterative-development-with-liberty-dev-mode}
+### Rapid, iterative development with Liberty dev mode
 
 Liberty dev mode automatically detects, recompiles, and deploys code changes whenever you save a new change. It also runs unit and integration tests on demand and can attach a debugger to the running server to step through your code at any time. Liberty Tools brings these dev mode features directly into the command menu for the Liberty projects in your editor. With just a few clicks, you can start and stop your Liberty application, run tests, and view test reports.
 
@@ -62,7 +62,7 @@ You can also run your application in dev mode in a container. When dev mode runs
 
 ![Screenshot of how to start Liberty in a container with dev mode using Liberty Tools Dashboard in Visual Studio Code.](VSCodeLibertyToolsStartContainer-684x510.png)
 
-### Effective testing and debugging within the IDE {#h3-3-effective-testing-and-debugging-within-the-ide}
+### Effective testing and debugging within the IDE
 
 When your application is running on Liberty using dev mode, you can easily run the tests provided by your application. To do the tests, select the Run tests command in the Liberty dashboard. You can also configure Liberty to automatically re-run tests after you've made changes. After the application tests finish running, you can access the test reports that were generated. The reports vary depending on what build tool you have used.
 
@@ -70,13 +70,13 @@ You can follow the steps in the Liberty Tools user guide to [run your applicatio
 
 You can also attach a debugger to a running Liberty instance using the "Attach debugger" command in the Liberty Dashboard, which makes the standard Visual Studio Code [debug options](https://code.visualstudio.com/docs/editor/debugging) available. The following video shows how this can be achieved with just a few clicks with Liberty Tools in your VS Code IDE. For more on this, you can see the steps required in the Liberty Tools user guide section: [debug your application](https://github.com/OpenLiberty/liberty-tools-vscode/blob/main/docs/user-guide.md#debug-your-application).
 
-### Editing assistance for configuration files {#h3-4-editing-assistance-for-configuration-files}
+### Editing assistance for configuration files
 
 You can also use Liberty Tools to get Liberty configuration editing assistance through the [Liberty Config Language Server](https://github.com/OpenLiberty/liberty-language-server#liberty-config-language-server), such as [code completion, diagnostics, and quick-fixes](https://github.com/OpenLiberty/liberty-language-server#features), in Liberty server.xml, server.env, and bootstrap.properties files.
 
 To use Liberty-specific code completion, press `Ctrl + Space` or `Cmd + Space` anywhere in the document and a drop-down list of completion suggestions will appear. To see an example of what this editing assistance is like, check out the following video, or try following the steps in the Liberty Tools user guide for [configuring a Liberty server with configuration assistance](https://github.com/OpenLiberty/liberty-tools-vscode/blob/main/docs/user-guide.md#configure-a-liberty-server).
 
-### Coding assistance for Jakarta EE and MicroProfile APIs {#h3-5-coding-assistance-for-jakarta-ee-and-microprofile-apis}
+### Coding assistance for Jakarta EE and MicroProfile APIs
 
 Liberty Tools coding assistance also provide helpful language-support features such as code completion, diagnostics, and quick-fixes in configuration and application files for Jakarta EE and MicroProfile APIs.
 
@@ -86,8 +86,8 @@ The MicroProfile EE API coding assistance is offered through [Eclipse LSP4MP](ht
 
 You can follow the steps in the Liberty Tools user guide to [develop with Jakarta EE and MicroProfile APIs with coding assistance](https://github.com/OpenLiberty/liberty-tools-vscode/blob/main/docs/user-guide.md#develop-with-jakarta-ee-and-microprofile-apis).
 
-Start using Liberty Tools in Visual Studio Code {#h2-6-start-using-liberty-tools-in-visual-studio-code}
--------------------------------------------------------------------------------------------------------
+Start using Liberty Tools in Visual Studio Code
+-----------------------------------------------
 
 Before you can use Liberty Tools in Visual Studio Code, you must satisfy these requirements:
 
@@ -102,12 +102,12 @@ When installed, the Liberty dashboard displays in the Project Explorer. Projects
 
 Projects that are already properly configured to run on Liberty and use Liberty dev mode are automatically added to the Liberty dashboard when it opens.
 
-Summary and next steps {#h2-7-summary-and-next-steps}
------------------------------------------------------
+Summary and next steps
+----------------------
 
 With the Liberty Tools extension in Visual Studio Code, you can efficiently develop, deploy, debug, test, and manage your cloud-native Java applications.
 
-Now that you have Liberty Tools set up in your IDE, why not try using it with some of the [Open Liberty guides or tutorials](https://openliberty.io/guides/?utm_source=ibmd&amp;utm_medium=article&amp;utm_content=idevscode)?
+Now that you have Liberty Tools set up in your IDE, why not try using it with some of the [Open Liberty guides or tutorials](https://openliberty.io/guides/?utm_source=ibmd&utm_medium=article&utm_content=idevscode)?
 
 We'd also love to get your feedback on our tools. So, if you do have a go with them or if you use them already, please do let us know what you think and what we can do to improve them! Our GitHub page can be found here where you can raise issues, create PRs or even star our project: <https://github.com/OpenLiberty/liberty-tools-vscode>.
 

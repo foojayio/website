@@ -46,8 +46,8 @@ In project [**Virtually**](https://github.com/japplis/Virtually), I've extended 
 
 Virtually is an open-source project under the Apache License 2.0 to help projects to migrate to virtual threads friendly code.
 
-1️⃣ Throttling {#h2-0-1-throttling}
------------------------------------
+1️⃣ Throttling
+--------------
 
 Virtual threads are great, you can create and run million of threads. With task scope, it's easy to make parallel calls to another web service or database but can it handle the load?  
 
@@ -55,35 +55,35 @@ You may not want to DDOS your system and send thousands of calls at the same tim
 
 In [`EnhancedTaskScope`](https://github.com/japplis/Virtually/blob/main/src/main/java/com/japplis/virtually/scope/EnhancedTaskScope.java), you can use the [`setMaxConcurrentTasks`](https://github.com/japplis/Virtually/blob/351de480d7e5d73f260031a201efa0ac9c02620d/src/main/java/com/japplis/virtually/scope/EnhancedTaskScope.java#L77) to specify the maximum of execution at the same time within this `StructuredTaskScope`. If the maximum is reached, tasks will wait until another sub-task finishes.
 
-2️⃣ Circuit breaker {#h2-1-2-circuit-breaker}
----------------------------------------------
+2️⃣ Circuit breaker
+-------------------
 
 If suddenly many sub-tasks fail within the scope at the same time, it is more likely a problem somewhere and you may want to stop executing sub-tasks within that scope as there are very likely to fail too.  
 `EnhancedTaskScope` has a method [setMaxConsecutiveFails](https://github.com/japplis/Virtually/blob/351de480d7e5d73f260031a201efa0ac9c02620d/src/main/java/com/japplis/virtually/scope/EnhancedTaskScope.java#L49). When consecutive failures have reached the maximum the whole task scope will stop.
 
-3️⃣ Default value on failure {#h2-2-3-default-value-on-failure}
----------------------------------------------------------------
+3️⃣ Default value on failure
+----------------------------
 
 You may not want a task to fail and provide a default value if the submitted task fails.  
 `EnhancedTaskScope` has a [forkWithDefault](https://github.com/japplis/Virtually/blob/351de480d7e5d73f260031a201efa0ac9c02620d/src/main/java/com/japplis/virtually/scope/EnhancedTaskScope.java#L110)`(Callable task, U defaultValue)`. This will never cause the sub-task to fail by providing a default return value if the `Callable` fails.
 
-4️⃣ Critical tasks {#h2-3-4-critical-tasks}
--------------------------------------------
+4️⃣ Critical tasks
+------------------
 
 In the provided `ShutdownOnFailure` scope, all tasks are critical and will fail the scope if one task fails.  
 
 Among the sub-tasks submitted, some may be more critical than others. `EnhancedTaskScope` provides a [`forkCritical`](https://github.com/japplis/Virtually/blob/351de480d7e5d73f260031a201efa0ac9c02620d/src/main/java/com/japplis/virtually/scope/EnhancedTaskScope.java#L90) method that will fail the scope if the submitted task fails.
 
-5️⃣ List conversion {#h2-4-5-list-conversion}
----------------------------------------------
+5️⃣ List conversion
+-------------------
 
 Quite often parallel calls within a task scope are done for converting a list. For example, you have a list of student IDs and would like to get the students information.  
 [ListTaskScope](https://github.com/japplis/Virtually/blob/main/src/main/java/com/japplis/virtually/scope/ListTaskScope.java) has been added to Virtually where you can provide a mapper to convert a list to another list using structured concurrency.  
 
 As `ListTaskScope` extends `EnhancedTaskScope`, you also benefits of the previous features.
 
-6️⃣ More ideas {#h2-5-6-more-ideas}
------------------------------------
+6️⃣ More ideas
+--------------
 
 `EnhancedTaskScope` and `ListTaskScope` can be extended to provide more features.  
 
@@ -94,8 +94,8 @@ For example:
 * If you're converting a list, you may want to do caching in your task scope in case the input list contains same values.
 * You may want to execute a lambda to get the default value
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 [StructuredTaskScope](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html) is a good class to extend to provide extended features when you want to execute multiple tasks in virtual threads.
 

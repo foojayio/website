@@ -18,16 +18,16 @@ related_posts:
 frozen: false
 ---
 
-**Quick version check:** the affected range for all seven is broadly `>=2.10.0 =2.19.0 =3.0.0 <3.1.4` --- with some CVEs affecting narrower ranges. If you're on a supported release, upgrade to 2.18.8, 2.21.4, or 3.1.4. If you're on an EOL line --- 2.13.x, 2.14.x, 2.15.x --- jump to the bottom of the page for more specifics or visit [HeroDevs Jackson Support](https://docs.herodevs.com/jackson?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global)
+**Quick version check:** the affected range for all seven is broadly `>=2.10.0 =2.19.0 =3.0.0 <3.1.4` --- with some CVEs affecting narrower ranges. If you're on a supported release, upgrade to 2.18.8, 2.21.4, or 3.1.4. If you're on an EOL line --- 2.13.x, 2.14.x, 2.15.x --- jump to the bottom of the page for more specifics or visit [HeroDevs Jackson Support](https://docs.herodevs.com/jackson?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global)
 
 
 
-### Not a sales pitch {#h3-0-not-a-sales-pitch}
+### Not a sales pitch
 
-Anyone who knows me knows I dont do that. In this case I'm pointing you at [HeroDevs](https://docs.herodevs.com/jackson?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global) because the Jackson issues are serious, [HeroDevs](https://docs.herodevs.com/jackson?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global) have a solution thats stupidly easy to use and I know the folks behind the fixes. It takes a particular type of engineer to create security fixes and I know they have that skillset. Do your own research.
+Anyone who knows me knows I dont do that. In this case I'm pointing you at [HeroDevs](https://docs.herodevs.com/jackson?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global) because the Jackson issues are serious, [HeroDevs](https://docs.herodevs.com/jackson?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global) have a solution thats stupidly easy to use and I know the folks behind the fixes. It takes a particular type of engineer to create security fixes and I know they have that skillset. Do your own research.
 
-What Just Happened {#h2-1-what-just-happened}
----------------------------------------------
+What Just Happened
+------------------
 
 On 22 June 2026, seven vulnerabilities in `jackson-databind` were published. All fixed in the same June 4th releases, all credited to a single researcher. Two critical-level RCEs. Five further access control and deserialization issues. One research effort, one codebase, seven findings.
 
@@ -37,11 +37,11 @@ In a [recent article](https://foojay.io/today/did-ai-just-break-software-securit
 
 This batch is that argument made concrete.
 
-### How findings like this are now getting made {#h3-2-how-findings-like-this-are-now-getting-made}
+### How findings like this are now getting made
 
 The short version: give a capable AI model the right context, remove the restrictions that exist to prevent misuse, and point it at a codebase. It reasons about trust boundaries, validator assumptions, and edge cases the way a senior security engineer would. But faster, and without getting bored or distracted.
 
-### This is mainstream {#h3-3-this-is-mainstream}
+### This is mainstream
 
 Both Anthropic and OpenAI now run formal programmes for exactly this. Anthropic's [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude) unlocks dual-use security capabilities for credentialed professionals. OpenAI's [Trusted Access for Cyber](https://openai.com/index/scaling-trusted-access-for-cyber-defense/) has expanded to thousands of verified defenders. Both are documented, public, and growing.
 
@@ -49,12 +49,12 @@ The result, when it works, is not one finding but many.
 
 FIRST's [mid-year vulnerability forecast](https://www.first.org/newsroom/releases/20260615), published June 15th, revised its 2026 projection upward to approximately 66,000 CVEs. 46% above what was predicted *just four months earlier*, driven in part by AI-assisted discovery.
 
-Seven Vulnerabilities {#h2-4-seven-vulnerabilities}
----------------------------------------------------
+Seven Vulnerabilities
+---------------------
 
 All seven are fixed in `jackson-databind` 2.18.8, 2.21.4, and 3.1.4. All seven were published as GHSAs on June 16th. For EOL versions (2.13.x, 2.14.x, 2.15.x), HeroDevs NES fixes are available for the two critical RCEs now, with the remaining five to follow.
 
-### The Critical RCEs {#h3-5-the-critical-rces}
+### The Critical RCEs
 
 **[CVE-2026-54512](https://www.herodevs.com/vulnerability-directory/cve-2026-54512)** ([GHSA-j3rv-43j4-c7qm](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-j3rv-43j4-c7qm)) --- CVSS v4 9.2 (Critical), EPSS 44%
 
@@ -66,7 +66,7 @@ The `PolymorphicTypeValidator` allowlist checks the container class name but nev
 
 Both score Critical under CVSS v4. The CVSS v3.1 scores are 8.1 (High) due to Attack Complexity: High, reflecting the prerequisite that polymorphic deserialization must be enabled.
 
-### The Access Control and Deserialization Bypasses {#h3-6-the-access-control-and-deserialization-bypasses}
+### The Access Control and Deserialization Bypasses
 
 **[CVE-2026-54514](https://www.herodevs.com/vulnerability-directory/cve-2026-54514)** ([GHSA-hgj6-7826-r7m5](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-hgj6-7826-r7m5)) --- CVSS 5.3 (Medium)
 
@@ -90,8 +90,8 @@ A property with `@JsonProperty("renamed")` on the getter and `@JsonIgnore` on th
 
 
 
-The Validator Is the Vulnerability {#h2-7-the-validator-is-the-vulnerability}
------------------------------------------------------------------------------
+The Validator Is the Vulnerability
+----------------------------------
 
 The two critical RCEs are the most serious findings, but all seven share a common thread: Jackson's own annotation-based security mechanisms are the attack surface.
 
@@ -103,8 +103,8 @@ The pattern is the same across all seven: a security boundary that looks closed 
 
 
 
-The Creaking Disclosure Pipeline {#h2-8-the-creaking-disclosure-pipeline}
--------------------------------------------------------------------------
+The Creaking Disclosure Pipeline
+--------------------------------
 
 The CVE pipeline , which most people rely on without knowing it, has multiple steps beyond the fix itself. A [CNA](https://www.cve.org/resourcessupport/allresources/cnarules "CNA") assigns an ID, [NVD](https://nvd.nist.gov/ "NVD") enriches it, and security scanners - from Dependabot to Snyk, to your SCA tool all sit downstream.
 
@@ -120,7 +120,7 @@ Don't assume your scanner's silence, or its alert, tells the whole story. Check 
 
 
 
-### Who's Effected {#h3-9-who-s-effected}
+### Who's Effected
 
 |                          | Supported (2.18.x, 2.21.x, 3.x) | EOL (2.13.x, 2.14.x, 2.15.x) |
 |--------------------------|---------------------------------|------------------------------|
@@ -135,12 +135,12 @@ Don't assume your scanner's silence, or its alert, tells the whole story. Check 
 
 **If you use `@JsonView`, `@JsonIgnore`, or `@JsonIgnoreProperties`** as security boundaries on writable fields, audit whether the five access control CVEs affect your configuration.
 
-### If you are on an EOL stream {#h3-10-if-you-are-on-an-eol-stream}
+### If you are on an EOL stream
 
-That's 2.13.x, 2.14.x, or 2.15.x, there is no community fix. The same CVE that prompts a team on 2.18.7 to upgrade in an afternoon sits unfixed for a team on 2.14.x with nowhere to go. Your options are migration, mitigations, or commercial support. NES for Jackson has backported fixes for the two critical RCEs to 2.13.6, 2.14.4, and 2.15.5. Use the [HeroDevs EOL Dataset](https://www.herodevs.com/eol-dataset/overview?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global) or [endoflife.date](https://endoflife.date/jackson-databind) to understand your full exposure.
+That's 2.13.x, 2.14.x, or 2.15.x, there is no community fix. The same CVE that prompts a team on 2.18.7 to upgrade in an afternoon sits unfixed for a team on 2.14.x with nowhere to go. Your options are migration, mitigations, or commercial support. NES for Jackson has backported fixes for the two critical RCEs to 2.13.6, 2.14.4, and 2.15.5. Use the [HeroDevs EOL Dataset](https://www.herodevs.com/eol-dataset/overview?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global) or [endoflife.date](https://endoflife.date/jackson-databind) to understand your full exposure.
 
-What This Actually Means {#h2-11-what-this-actually-means}
-----------------------------------------------------------
+What This Actually Means
+------------------------
 
 Seven vulnerabilities in `jackson-databind`, one researcher, one day. All fixed before the advisories were published. Some still not visible yet to the full ecosystem.
 
@@ -148,9 +148,9 @@ This is not a one-off. The formal infrastructure for AI-assisted security resear
 
 That silence is ending. It's really time to know your dependencies their versions and their EOL status.
 
-Just do it? {#h2-12-just-do-it}
--------------------------------
+Just do it?
+-----------
 
-You've got a scanner, an SCA tool and in anycase you can just generate an SBOM and use that. It's easy to do - why wait. Use the [HeroDevs EOL Dataset](https://www.herodevs.com/eol-dataset/overview?utm_source=devrel&amp;utm_medium=referral&amp;utm_campaign=2026q2_spring-boot-3-5-eol_global) or [endoflife.date](https://endoflife.date)
+You've got a scanner, an SCA tool and in anycase you can just generate an SBOM and use that. It's easy to do - why wait. Use the [HeroDevs EOL Dataset](https://www.herodevs.com/eol-dataset/overview?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global) or [endoflife.date](https://endoflife.date)
 
 *Having said that , I will be back with a EOL tooling / data article to help with getting started.*

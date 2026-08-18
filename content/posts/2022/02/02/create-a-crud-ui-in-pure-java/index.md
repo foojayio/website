@@ -22,18 +22,18 @@ frozen: false
 
 In this guide, we create a web UI that performs full CRUD (create, read, update, and delete) operations on a Spring Data JPA backend. This UI is developed entirely in pure Java using [Vaadin Flow](https://vaadin.com/docs/latest/flow/guide/quick-start "Vaadin Flow") (no HTML or JavaScript involved). You can explore the full source code on [GitHub](https://github.com/tarekoraby/crud-ui-tutorial "GitHub").
 
-### What You Need {#h3-0-what-you-need}
+### What You Need
 
 * About 15 minutes
 * JDK 17 or later
 
-### Step 1: Import a Starter Project {#h3-1-step-1-import-a-starter-project}
+### Step 1: Import a Starter Project
 
 [Click here to download an empty project starter](https://start.vaadin.com/dl?preset=no-views "Click here to download an empty project starter"). Unpack the downloaded zip into a folder on your computer, and import the project in the IDE of your choice.
 
 The `pom.xml` of the starter project comes with all the dependencies necessary to complete this tutorial.
 
-### Step 2: Create the Backend Classes {#h3-2-step-2-create-the-backend-classes}
+### Step 2: Create the Backend Classes
 
 Let's start by creating a simple JPA entity and a Spring Data repository.
 
@@ -140,7 +140,7 @@ public class DataGenerator {
 ```
 
 
-### Step 3: Create the Editor Layout {#h3-3-step-3-create-the-editor-layout}
+### Step 3: Create the Editor Layout
 
 Next, we create the Editor Layout, which is the part of the UI that will enable users to manipulate the currently selected `Person` entity. We can do this in pure Java using Vaadin, which comes with an extensive [set of UI components](https://vaadin.com/docs/latest/ds/components "set of UI components") that we can use as the building blocks for any application.
 
@@ -206,7 +206,7 @@ public class EditorLayout extends VerticalLayout {
 ```
 
 
-### Step 4: Create the CRUD View {#h3-4-step-4-create-the-crud-view}
+### Step 4: Create the CRUD View
 
 Now we define the main view that holds both the tabular data as well as the `EditorLayout` that was just created. This view extends Vaadin's `SplitLayout` component. This SplitLayout shows the tabular data inside a Vaadin `Grid` component on the left side of the screen, and the `EditorLayout` on its right side. When an item is selected from the Grid, the form is automatically updated.
 
@@ -333,13 +333,13 @@ public class CrudView extends SplitLayout {
 ```
 
 
-### Step 5: Run the Application {#h3-5-step-5-run-the-application}
+### Step 5: Run the Application
 
 To run the project from the command line, type `mvnw spring-boot:run` (on Windows), or `./mvnw spring-boot:run` (on macOS or Linux).
 
 Then, in your browser, open <http://localhost:8080/>.
 
-### Go further {#h3-6-go-further}
+### Go further
 
 Congratulations! You have created a web UI that performs full CRUD (create, read, update, and delete) operations on a Spring Data JPA backend. And you did it in pure Java -- without the need for any HTML or JavaScript, and without having to expose REST services or think about HTTP requests, responses, and filter chains.
 

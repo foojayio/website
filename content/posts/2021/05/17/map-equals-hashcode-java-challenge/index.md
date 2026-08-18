@@ -27,8 +27,8 @@ What about going deeply into the Map, equals, and hashcode method by trying out 
 
 It's time to improve your Java skills with this Map equals hashcode Challenge...
 
-Map equals hashcode Challenge {#h2-0-map-equals-hashcode-challenge}
--------------------------------------------------------------------
+Map equals hashcode Challenge
+-----------------------------
 
 What do you think will happen in the following code after running it?
 

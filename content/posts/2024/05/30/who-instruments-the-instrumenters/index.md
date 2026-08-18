@@ -29,8 +29,8 @@ This is the premise of my [meta-agent](https://github.com/parttimenerd/meta-agen
 
 This article is a collaboration with [Mikaël Francoeur](https://www.linkedin.com/in/mika%C3%ABl-francoeur/), who had the idea for the meta-agent and wrote most of this post. So it's my first ever post-collaboration. But I start with a short introduction to the agent itself before Mikaël takes over with real-world examples.
 
-Meta-Agent {#h2-0-meta-agent}
------------------------------
+Meta-Agent
+----------
 
 The meta-agent ([GitHub](https://github.com/parttimenerd/meta-agent)) is a Java agent that instruments the I`nstrumentation.`[addTransformer](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/Instrumentation.html#addTransformer(java.lang.instrument.ClassFileTransformer)) methods agents use to add bytecode transformers and wrap the added transformers to capture bytecode before and after each transformation.
 
@@ -53,8 +53,8 @@ Another nice feature is that the agent allows you to inspect almost all classes,
 
 Now I'm handing it over to Mikaël, who actually fixed bugs using my tool:
 
-Spring and Mockito {#h2-1-spring-and-mockito}
----------------------------------------------
+Spring and Mockito
+------------------
 
 Two of the tools I work the most with are Spring and Mockito, and both make liberal use of bytecode generation and modification.
 
@@ -244,8 +244,8 @@ This is decompiled code, and the Vineflower decompiler backing meta-agent strugg
 
 Fortunately, you can also pass `?mode=javap` or `?mode=javap-verbose` to meta-agent, and it will show the actual bytecode and other low-level information like constant pools.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 This was a fun project; there's probably more to uncover by analyzing generated code.
 

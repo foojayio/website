@@ -42,8 +42,8 @@ There are seven distinct patterns that further categorize the data management.
 
 In the next section, let's discuss each pattern individually.
 
-1.1 Database per Service {#h2-0-1-1-database-per-service}
----------------------------------------------------------
+1.1 Database per Service
+------------------------
 
 In monolithic architecture, a single database conducts data persistence and transaction processing, which can sometimes pose challenges in terms of maintenance and upgrades.
 
@@ -59,12 +59,12 @@ In the case of a relational database, the available alternatives are as follows:
 * Schema per service - This encompasses the database schema that is specific to that service and possesses reduced overhead.
 * Database server per service - Each service uses its own individual database server for high throughput.
 
-### **Pros** {#h3-1-pros}
+### **Pros**
 
 * It has a loose coupling and can achieve modularity.
 * Depending on the business requirement, we can use either relational databases such as MySQL, Oracle, and Postgres, or non-relational databases like MongoDB, Neo4j, and Amazon DynamoDB.
 
-### **Cons** {#h3-2-cons}
+### **Cons**
 
 * It is highly challenging to achieve distributed transactions with multiple services.
 * Consolidating data from various databases can be quite a daunting task.
@@ -75,8 +75,8 @@ However, we can implement transactions and queries that encompass multiple servi
 * The **Saga Pattern** makes it possible to implement transactions that span multiple services.
 * By utilizing **API composition** and the **Command Query Responsibility Segregation (CQRS)** pattern, you can achieve effective data joining, reading, and writing.
 
-1.2 Shared database {#h2-3-1-2-shared-database}
------------------------------------------------
+1.2 Shared database
+-------------------
 
 Consider creating a shared database for small or medium sized microservices, rather than having individual databases per service. This approach enables all services to easily access the data.
 
@@ -90,8 +90,8 @@ Consider creating a shared database for small or medium sized microservices, rat
 * Development and Runtime coupling
 * We could possibly encounter difficulties pertaining to the storage of data for all of our services.
 
-1.3 Saga Pattern {#h2-4-1-3-saga-pattern}
------------------------------------------
+1.3 Saga Pattern
+----------------
 
 The Saga Pattern is a widely adopted design pattern in distributed systems and microservices architectures. Developers widely adopt the Saga Pattern in distributed systems and microservices architectures. Its primary purpose is to manage complex, long-lasting transactions that involve multiple services or components.
 
@@ -103,8 +103,8 @@ In the context of distributed transactions, utilizing this particular pattern pr
 
 Utilizing technologies such as Apache Kafka, ActiveMQ, Amazon SQS, Microsoft Azure Service Bus or RabbitMQ, in conjunction with distributed transaction management frameworks like [Spring Saga](https://github.com/Dilsh0d/SpringBoot-Microservice-Saga "Spring Saga"), effectively implements the Saga Pattern.
 
-1.4 Command Query Responsibility Segregation (CQRS) {#h2-5-1-4-command-query-responsibility-segregation-cqrs}
--------------------------------------------------------------------------------------------------------------
+1.4 Command Query Responsibility Segregation (CQRS)
+---------------------------------------------------
 
 Currently, read and write operations primarily involve a significant number of distributed transactions. To illustrate, within the realm of e-commerce applications, a majority of transactions revolve around writing and persisting data in the database.
 
@@ -119,22 +119,22 @@ The **Command Model** and the **Query Model** effectively tackle the issue of re
 
 Implementing CQRS enables one to attain scalability, optimized read and write operations, and flexibility. Nevertheless, one finds it challenging to maintain complex and high-performance applications.
 
-1.5 API Composition {#h2-6-1-5-api-composition}
------------------------------------------------
+1.5 API Composition
+-------------------
 
 Contemporary enterprise applications commonly aggregate data from various microservices and present it to customers in a consolidated manner.
 
 The API Composition query designs to establish connections with various microservices, retrieves the necessary data, and combines the results in-memory.
 
-1.6 Domain Event {#h2-7-1-6-domain-event}
------------------------------------------
+1.6 Domain Event
+----------------
 
 In the microservice architecture, every service performs particular actions such as creating or updating via pub/sub, which in turn generates events. Other consumer services must capture and process these events.
 
 The domain is associated with the events pertaining to the CQRS pattern view and is responsible for updating or creating data.
 
-1.7 Event Sourcing {#h2-8-1-7-event-sourcing}
----------------------------------------------
+1.7 Event Sourcing
+------------------
 
 The service command usually involves creating, updating, or deleting aggregates in the database and sending messages or events to a message broker.
 

@@ -28,13 +28,13 @@ OpenJDK 23 introduces three new features to the language and runtime and many bu
 
 What are the most important facts about this release? Let's find out...
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube 7PGOhbiPoRY >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,22 +42,22 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Simon Ritter {#h3-3-simon-ritter}
+### Simon Ritter
 
 * <https://www.linkedin.com/in/siritter/>
 * <https://mastodon.social/@speakjava>
 * <https://twitter.com/speakjava>
 
-### Artur Skowroński {#h3-4-artur-skowro-ski}
+### Artur Skowroński
 
 * <https://www.linkedin.com/in/arturskowronski/>
 * <https://x.com/ArturSkowronski>
 
-Content {#h2-5-content}
------------------------
+Content
+-------
 
 00:00 Introduction
 

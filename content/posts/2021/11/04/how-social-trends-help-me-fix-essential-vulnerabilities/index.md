@@ -25,16 +25,16 @@ Following the social trends of security vulnerabilities makes practical sense. W
 
 Let's take a look at vulnerability social trends (sentiment analysis) in action.
 
-A trending example in Java {#h2-0-a-trending-example-in-java}
--------------------------------------------------------------
+A trending example in Java
+--------------------------
 
 I created a small Java application based on an outdated Spring Boot version, `2.2.0-RELEASE`. After [connecting the GitHub repo to my Snyk account](https://snyk.io/login), I found the following vulnerability on top of my list because it is currently trending on social media.
 ![](https://snyk.io/wp-content/uploads/blog-social-trends-usage-vuln-1240x363.png)
 
 It is a remote code execution (RCE) vulnerability in the embedded Apache Tomcat version that ships with the specific Spring Boot starter package I use. By clicking on the trending button, I found many tweets referring to this specific vulnerability and a working exploit that is published. I will come back to this later, but first, let me explain the vulnerability.
 
-Remote Code Execution Vulnerability CVE-2020-9484 explained {#h2-1-remote-code-execution-vulnerability-cve-2020-9484-explained}
--------------------------------------------------------------------------------------------------------------------------------
+Remote Code Execution Vulnerability CVE-2020-9484 explained
+-----------------------------------------------------------
 
 I will briefly explain the dynamics of this RCE vulnerability in Tomcat. This vulnerability exists in all Tomcat versions, including the embedded version supplied with Spring Boot. It is also good to know that a new update is already available for all versions fixing this issue.
 
@@ -48,8 +48,8 @@ If you want to know more about why deserialization vulnerabilities are harmful, 
 
 For more information about this vulnerability in Tomcat, a great article on [redtimmy.com](https://www.redtimmy.com/apache-tomcat-rce-by-deserialization-cve-2020-9484-write-up-and-exploit/) explains it in more detail. You can find an exploit proof of concept on this GitHub repository: <https://github.com/masahiro331/CVE-2020-9484>
 
-How Snyk Social Trends help you focus on the important stuff {#h2-2-how-snyk-social-trends-help-you-focus-on-the-important-stuff}
----------------------------------------------------------------------------------------------------------------------------------
+How Snyk Social Trends help you focus on the important stuff
+------------------------------------------------------------
 
 You might say that this vulnerability has a bunch of prerequisites before it can actually be exploited.
 

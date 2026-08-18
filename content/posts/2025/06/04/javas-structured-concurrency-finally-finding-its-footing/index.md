@@ -29,7 +29,7 @@ However, given its status as a preview API, such changes can occur, as was the c
 
 These changes lend considerable maturity to the API, and I am hopeful it will now stabilize without requiring further modifications.
 
-### **What Actually Changed This Time** {#h3-0-what-actually-changed-this-time}
+### **What Actually Changed This Time**
 
 When I first started working with structured concurrency back in its incubation phase, I was excited about the promise of cleaner concurrent code.
 
@@ -37,7 +37,7 @@ The idea was simple: treat concurrent tasks like a structured block, where all s
 
 The latest iteration in [JEP 505](https://openjdk.org/jeps/505) brings some significant refinements that I believe finally put this feature on solid ground. The most notable change is the introduction of more flexible task handling and better integration with virtual threads. This article will detail the differences and explain the significance of these changes.
 
-### **The Core Concept Remains Strong** {#h3-1-the-core-concept-remains-strong}
+### **The Core Concept Remains Strong**
 
 Before diving into the changes, let's establish what structured concurrency is trying to solve. In traditional concurrent programming, we often end up with scattered task management:
 
@@ -112,7 +112,7 @@ When you run this code, several issues typically emerge:
 
 Structured concurrency aims to resolve these challenges.
 
-### **The headline change: static factory methods** {#h3-2-the-headline-change-static-factory-methods}
+### **The headline change: static factory methods**
 
 The most obvious tweak in JEP 505 is that you no longer call `new StructuredTaskScope<>()`. You `open()` one instead:
 
@@ -154,7 +154,7 @@ This approach has several advantages I've come to appreciate:
 * Resource management: No thread pool management needed.
 * Composability: Scopes can be nested and combined.
 
-### **Joiners: pick your success policy** {#h3-3-joiners-pick-your-success-policy}
+### **Joiners: pick your success policy**
 
 A Joiner intercepts completion events and decides (1) whether to cancel siblings and (2) what join() should return. The JDK ships several factory helpers:
 
@@ -182,7 +182,7 @@ try (var scope = StructuredTaskScope.open(Joiner.<Result>allSuccessfulOrThrow())
 
 These little helpers make common patterns---"race", "gather", "wait-for-all"---painless.
 
-### **Rolling your own Joiner** {#h3-4-rolling-your-own-joiner}
+### **Rolling your own Joiner**
 
 Sometimes you need a custom policy. Suppose I want to collect every successful subtask but ignore failures:
 
@@ -236,7 +236,7 @@ java --enable-preview CollectingJoiner.java
 ```
 
 
-### **Better cancellation and deadlines** {#h3-5-better-cancellation-and-deadlines}
+### **Better cancellation and deadlines**
 
 Cancellation rules did not change in spirit, but the API got stricter. If the owner thread is interrupted before or during `join()`, the scope automatically cancels every unfinished subtask. Subtasks should promptly honor InterruptedException; otherwise, `close()` will block, waiting for them to complete. (If you're calling blocking I/O, you're fine; if you're polling, remember to check `Thread.currentThread().isInterrupted()`).
 
@@ -268,19 +268,19 @@ try (var scope = StructuredTaskScope.open(
 
 Thread naming alone makes thread dumps far more readable.
 
-### **Scoped values ride along** {#h3-6-scoped-values-ride-along}
+### **Scoped values ride along**
 
 All subtasks inherit bindings for `ScopedValues` established in the parent thread. That means you can pass request context, security credentials, or MDC information without packing it into every lambda. Once you experience this capability, you'll find it hard to revert to using ThreadLocal.
 
-### **Guard-rails against misuse** {#h3-7-guard-rails-against-misuse}
+### **Guard-rails against misuse**
 
 `StructuredTaskScope` strictly enforces structure. If `fork()` is called from any thread other than the owner, a `StructureViolationException` is thrown. Forget the try-with-resources and let the scope escape the method? Same result. This approach is strict, but it effectively prevents accidental resource exhaustion (akin to 'fork-bombs').
 
-### **Observability improvements** {#h3-8-observability-improvements}
+### **Observability improvements**
 
 Thread dumps now include the scope tree, so tools can show parent--child relationships directly. When I run `jcmd <pid> Thread.dump_to_file -format=json`, every scope appears with its forked threads nested below the owner. Finding the straggler that pins your virtual thread pool becomes a two-second grep instead of a half-hour investigation.
 
-### **Some more examples to try out** {#h3-9-some-more-examples-to-try-out}
+### **Some more examples to try out**
 
 #### **Example 1 -- 360° Product View (Gather--Then--Fail)**
 
@@ -484,7 +484,7 @@ public class QuoteServiceDemo {
 ```
 
 
-### **Final thoughts** {#h3-10-final-thoughts}
+### **Final thoughts**
 
 These changes represent a significant maturation of the structured concurrency API.
 

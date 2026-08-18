@@ -28,7 +28,7 @@ Drawing on my experience as a reviewer for [Voxxed Days Amsterdam](https://amste
 
 So, this is my humble effort to share a few criteria that have guided me (and others) in choosing your submissions for inclusion. This is not an exhaustive list but what we see most.
 
-### Speaker/Talk related reasons {#h3-0-speaker-talk-related-reasons}
+### Speaker/Talk related reasons
 
 #### You have a story to tell
 
@@ -64,7 +64,7 @@ If your topic resonates with the reviewers and organizers but there are multiple
 2. When you include a recording of your previous talks as part of your submission, reviewers have the opportunity to directly observe your presentation style, content delivery, and audience engagement. This tangible evidence can strongly support your application.
 3. If your talks are easily searchable online, organizers can independently reference your past presentations. This accessibility helps them gauge your experience and the reception of your previous sessions, further informing their decision. But make sure, if possible, provide a recording link of the talk you are submitting or one of your previous talks, because sometimes, helping the reviewers and organizers to find everything in one place helps your talk being selected as well.
 
-### Organization/Program related reasons {#h3-1-organization-program-related-reasons}
+### Organization/Program related reasons
 
 #### Your topic is related to the conference/meetup target audience
 

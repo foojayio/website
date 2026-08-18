@@ -26,7 +26,7 @@ It makes it easy for Java developers to quickly start using deep learning and it
 
 It supports commonly used neural network architectures (feed forward networks, convolutional networks) for classification, regression and image recogniton tasks.
 
-### Adding Deep Netts to your Project {#h3-0-adding-deep-netts-to-your-project}
+### Adding Deep Netts to your Project
 
 To be able to use Deep Netts in Maven based Java project, add the following dependency into dependencies section of your pom.xml file:
 
@@ -41,7 +41,7 @@ To be able to use Deep Netts in Maven based Java project, add the following depe
 
 You can also clone the entire library and examples from the GitHub: <https://github.com/deepnetts/deepnetts-communityedition>
 
-### Hello World: Iris Flowers Classifiction {#h3-1-hello-world-iris-flowers-classifiction}
+### Hello World: Iris Flowers Classifiction
 
 Iris flowers classification problem is commonly used as a "hello world" example for machine learning.
 
@@ -157,7 +157,7 @@ More examples like this that you can use as starter templates for your own AI/ma
 
 **Tip.** A very cool example of how Deep Netts can be used with Apache Groovy to get Python-like development experience created by Paul King is available at <https://github.com/paulk-asert/groovy-data-science/tree/master/subprojects/IrisGraalVM>.
 
-### Links {#h3-3-links}
+### Links
 
 * [Deep Netts Community Edition at GitHub](https://github.com/deepnetts/deepnetts-communityedition "Deep Netts Community Edition at GitHub")
 * [Official Deep Netts homepage](https://www.deepnetts.com "Official Deep Netts homepage")

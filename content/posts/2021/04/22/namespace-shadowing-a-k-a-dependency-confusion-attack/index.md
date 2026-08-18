@@ -19,11 +19,11 @@ related_posts:
 frozen: false
 ---
 
-### TL;DR: Yet Another Case for Using Exclude Patterns in Remote Repositories {#h3-0-tl-dr-yet-another-case-for-using-exclude-patterns-in-remote-repositories}
+### TL;DR: Yet Another Case for Using Exclude Patterns in Remote Repositories
 
 The npm Registry is vulnerable to supply chain namespace shadowing, also known as "Dependency Confusion" attacks. Make sure you create npm scoped packages and force exclude patterns.
 
-### Long-time Obsession with Exclude Patterns {#h3-1-long-time-obsession-with-exclude-patterns}
+### Long-time Obsession with Exclude Patterns
 
 I remember the first JFrog customer training I delivered in February 2012. This slide was the one where I explained the importance of setting exclude patterns on your repositories (you can see it is 2012 by the slide design, right? Also, Ant was a thing.):
 
@@ -60,7 +60,7 @@ Obviously, [the current documentation](https://www.jfrog.com/confluence/display/
 
 Well, you get the point; we are **big** on Exclude Patterns. But why? Is it really because we are afraid that someone in Sonatype (maintainers of Maven Central) or GitHub (maintainers of npm Registry) will scrutinize the logs and find out about Secret Almo?! Well, yes, but not only that. Enter the perfect storm of...
 
-### The Caret, the Bazaar, and the Virtual Repository {#h3-2-the-caret-the-bazaar-and-the-virtual-repository}
+### The Caret, the Bazaar, and the Virtual Repository
 
 Let's get back to the (now probably virtual) offices of Acme, where the work on the Secret Almo is still underway. Let's look at another component of the project, not secret at all, maybe a library, almo-common-utils. Its source might even publicly accessible, if, for instance, it is bundle as part of as Acme's publicly accessible products or web applications, it's written in Node and JFrog Artifactory now has a set of remote (proxying the official npm Registry), local (for sharing modules internally), and virtual npm repositories.
 
@@ -84,7 +84,7 @@ Remember I shouted "Nix!"? This is a double-nix. And an ouch.
 
 But this is where an experienced Node.js developer would stand up and say...
 
-### But scoped packages! {#h3-3-but-scoped-packages}
+### But scoped packages!
 
 Remember how I told you anyone can upload anything to the npm Registry? Well, not quite. If you create an organization in the npm Registry, you'll be assigned a namespace to which only the members of your organization can upload (this is what npm calls [public scoped packages](https://docs.npmjs.com/about-organization-scopes-and-packages)). Does it save you from the Namespace Shadowing attack? Yes, when done right.
 
@@ -92,14 +92,14 @@ First, the company has to create the organization and reserve the namespace, bec
 
 Solution? You know it by now...
 
-### Two simple rules to save your butt from the Namespace Shadowing (a.k.a. "Dependency Confusion") Attack {#h3-4-two-simple-rules-to-save-your-butt-from-the-namespace-shadowing-a-k-a-dependency-confusion-attack}
+### Two simple rules to save your butt from the Namespace Shadowing (a.k.a. "Dependency Confusion") Attack
 
 1. **Only publish scoped packages!** Register an official organization for your company in npm Registry. Always publish only public scoped packages. BTW, it also simplifies the exclude patterns (see next rule), as you only need to exclude .npm/@acme/\* now to exclude all the packages from being searched in remote repositories.
 2. **Use exclude patterns on your remote repositories!** You know for a fact almo-common-utils would never be found in npm Registry? Tell it to your repository manager! [Add your private dependencies in exclude patterns](https://www.jfrog.com/confluence/display/JFROG/Repository+Management#RepositoryManagement-AvoidingSecurityRiskswithanExcludePattern) and protect yourself from a serious (and quite clever) supply chain attack. It's so easy it's almost neglectful not to do so.
 
 We'll finish up with...
 
-### FAQ from Your Devil's Advocate {#h3-5-faq-from-your-devil-s-advocate}
+### FAQ from Your Devil's Advocate
 
 **Q: Are the Namespace Shadowing (a.k.a. "Dependency Confusion") attacks pose a security issue only if I use Artifactory?**
 

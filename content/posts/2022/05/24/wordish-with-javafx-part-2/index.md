@@ -24,8 +24,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Building Games and Having Fun with Java and JavaFX {#h2-0-building-games-and-having-fun-with-java-and-javafx}
--------------------------------------------------------------------------------------------------------------
+Building Games and Having Fun with Java and JavaFX
+--------------------------------------------------
 
 Welcome to Part 2 of this five part series!
 
@@ -48,8 +48,8 @@ Here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 2: Look and Feel Enhancements {#h2-1-part-2-look-and-feel-enhancements}
-----------------------------------------------------------------------------
+Part 2: Look and Feel Enhancements
+----------------------------------
 
 Wordish uses a specialized Label control that reflects the user's guess compared to the target word. Similarly, the virtual keyboard Button control must also reflect the matching status of its specific key.
 
@@ -63,7 +63,7 @@ It's straightforward to add our specialized controls as well as third-party libr
 
 Finally, we show you some of the CSS customizations we use to help keep our UI looking Wordishly.
 
-### Specialized Label Control {#h3-2-specialized-label-control}
+### Specialized Label Control
 
 For the Labels in TilePane and the Buttons in FlowPane, we add state to these controls to reflect the matching status of its letter as the user plays Wordish.
 
@@ -101,7 +101,7 @@ Figure 2 illustrates all five `DisplayType` enum states: The three lower rows of
  </figcaption>
 </figure>
 
-### Specialized Button Control {#h3-3-specialized-button-control}
+### Specialized Button Control
 
 Similar to LetterLabel, the virtual keyboard is made up of enhanced Button controls called KeyButton. Here, we add a single JavaFX property to reflect the status of that keyboard letter in the current game.
 
@@ -145,7 +145,7 @@ list.stream().forEach(ll -> keyLetters.get(ll.getText())
 
 Importantly, by calling the JavaFX property setter `setLetterDisplay() `for both LetterLabel and KeyButton, the UI styles automatically update to reflect the matching state. To see how this works, let's discuss CSS pseudo-classes with the well-known Button control.
 
-### CSS Pseudo-Classes {#h3-4-css-pseudo-classes}
+### CSS Pseudo-Classes
 
 Many JavaFX controls, including Button, have a JavaFX property called `disableProperty`. To disable button `myButton`, for example, use
 
@@ -212,7 +212,7 @@ getStyleClass().add("matching-letter");
 ```
 
 
-### Reacting to Property Updates {#h3-5-reacting-to-property-updates}
+### Reacting to Property Updates
 
 The final piece of scaffolding code is to react when the KeyButton and LetterLabel `letterDisplay` property updates. Since JavaFX properties are observable, we add this code to the property's `invalidated()` method. This method is invoked each time you call the property setter.
 
@@ -269,8 +269,8 @@ The `invalidated()` method for property `letterDisplay` must ensure that a pseud
 
 **Note** : See **[styles.css](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/style.css)** for the CSS styles used in Wordish.
 
-iKonli Font Library {#h2-6-ikonli-font-library}
------------------------------------------------
+iKonli Font Library
+-------------------
 
 It's easy to add flair to your applications with third party icon packs. In Wordish, we use the [iKonli Font Library](https://kordamp.org/ikonli/) for the Delete Key as well as the Replay, Information, and Stats (Bar Chart) buttons. In addition, the Close icon lets you return to the main view from either the Information or Stats view. These icons are based on Material Design. Using familiar icons and fonts help make an application intuitive when you match icons with common, expected behavior.
 
@@ -322,8 +322,8 @@ Here's how to add an icon graphic to either a Button or Label in FXML. For examp
 
 The [Material Design2 cheat sheet](https://kordamp.org/ikonli/cheat-sheet-material2.html) provides a handy list of other iconLiteral codes that you can incorporate into your UI.
 
-Adding Custom Controls to Scene Builder {#h2-7-adding-custom-controls-to-scene-builder}
----------------------------------------------------------------------------------------
+Adding Custom Controls to Scene Builder
+---------------------------------------
 
 To use customized controls with Scene Builder, supply a JAR file with these compiled classes. After you import them into Scene Builder, you can use Scene Builder's visual features with your custom controls. Similarly, to incorporate third party icons within Scene Builder, import the required JAR file or repository.
 
@@ -349,8 +349,8 @@ Once you add them, the classes appear in the Custom section under Library. You c
 
 For the iKonli Font Library, select **Search repositories** and provide the Group or Artifact ID. You can then select the libraries you need.
 
-Customizing CSS {#h2-8-customizing-css}
----------------------------------------
+Customizing CSS
+---------------
 
 Besides providing style classes to support the customized pseudo-classes, we also added custom styles to support the look you see in [Figure 2](#figure-2). We styled the application using root values for certain colors.
 

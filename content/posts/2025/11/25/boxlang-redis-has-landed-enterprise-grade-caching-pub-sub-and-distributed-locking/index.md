@@ -24,13 +24,13 @@ frozen: false
 
 We're thrilled to announce the release of the **BoxLang Redis Module** (`bx-redis`) - a powerful addition to BoxLang that brings enterprise-grade Redis functionality directly into your applications. Whether you're building distributed systems, implementing real-time messaging, or need high-performance caching, this module has you covered.
 
-🎯 What is the Redis Module? {#h2-0-what-is-the-redis-module}
--------------------------------------------------------------
+🎯 What is the Redis Module?
+----------------------------
 
 The BoxLang Redis Module provides native Redis functionality, enabling you to connect to Redis instances, clusters, or Sentinel setups with ease. It seamlessly integrates with BoxLang's caching infrastructure while adding powerful new capabilities like publish/subscribe messaging and distributed locking.
 
-⚡ Key Features {#h2-1-key-features}
------------------------------------
+⚡ Key Features
+--------------
 
 * **Native Redis Integration** - Connect to standalone Redis, Redis Cluster, or Redis Sentinel
 * **Built-in Cache Provider** - Drop-in replacement for any BoxLang cache
@@ -40,8 +40,8 @@ The BoxLang Redis Module provides native Redis functionality, enabling you to co
 * **High Performance** - Connection pooling and optimized operations
 * **Flexible Configuration** - Environment-based settings and multiple cache instances
 
-📦 Getting Started {#h2-2-getting-started}
-------------------------------------------
+📦 Getting Started
+------------------
 
 Installing the Redis module is straightforward. It's available to [BoxLang +/++ subscribers](https://www.boxlang.io/plans "BoxLang +/++ subscribers") and includes a 60-day trial so you can explore all features risk-free!
 
@@ -54,8 +54,8 @@ box install bx-redis
 ```
 
 
-🔧 Quick Configuration {#h2-3-quick-configuration}
---------------------------------------------------
+🔧 Quick Configuration
+----------------------
 
 Configure your Redis cache in `Application.bx`:
 
@@ -85,8 +85,8 @@ component {
 
 That's it! Your BoxLang application is now Redis-enabled and all sessions will be distributed to Redis.
 
-💾 Powerful Caching Made Simple {#h2-4-powerful-caching-made-simple}
---------------------------------------------------------------------
+💾 Powerful Caching Made Simple
+-------------------------------
 
 The Redis module works seamlessly with BoxLang's standard caching approaches:
 
@@ -147,8 +147,8 @@ function getCachedQuery( sql, params = {}, timeout = 1800 ) {
 ```
 
 
-📢 Publish/Subscribe: Real-Time Messaging {#h2-5-publish-subscribe-real-time-messaging}
----------------------------------------------------------------------------------------
+📢 Publish/Subscribe: Real-Time Messaging
+-----------------------------------------
 
 One of the most exciting features is Redis Pub/Sub support, enabling real-time event-driven architectures:
 
@@ -272,8 +272,8 @@ redisSubscribe(
 ```
 
 
-🔒 Distributed Locking: Coordinate Across Servers {#h2-6-distributed-locking-coordinate-across-servers}
--------------------------------------------------------------------------------------------------------
+🔒 Distributed Locking: Coordinate Across Servers
+-------------------------------------------------
 
 In clustered environments, you need to prevent multiple servers from executing the same code simultaneously. The `bx:RedisLock` component makes this trivial:
 
@@ -373,8 +373,8 @@ redisLock name="dbMigration" cache="redis" timeout=30 expires=600 {
 ```
 
 
-🎯 Deployment Modes {#h2-7-deployment-modes}
---------------------------------------------
+🎯 Deployment Modes
+-------------------
 
 The Redis module supports three deployment modes to match your infrastructure:
 
@@ -430,8 +430,8 @@ this.caches[ "redis" ] = {
 ```
 
 
-📚 Comprehensive Documentation {#h2-8-comprehensive-documentation}
-------------------------------------------------------------------
+📚 Comprehensive Documentation
+------------------------------
 
 The Redis module is fully documented with detailed guides covering:
 
@@ -451,8 +451,8 @@ Access the complete documentation at:
 You can even connect to our documentation via the Model Context Protocol (MCP):  
 [https://boxlang.ortusbooks.com/\~gitbook/mcp](https://boxlang.ortusbooks.com/readme/release-history/1.6.0?q=Model+Context+Protocol#boxlang-documentation-mcp-server "https://boxlang.ortusbooks.com/~gitbook/mcp")
 
-💡 Use Cases {#h2-9-use-cases}
-------------------------------
+💡 Use Cases
+------------
 
 The Redis module excels in these scenarios:
 
@@ -465,8 +465,8 @@ The Redis module excels in these scenarios:
 * **Rate Limiting** - Implement distributed rate limits
 * **Job Queues** - Coordinate background processing
 
-🎁 Get Access {#h2-10-get-access}
----------------------------------
+🎁 Get Access
+-------------
 
 bx-ldap is available exclusively to **BoxLang +/++ subscribers**. Join our subscription program to access this and other premium modules that extend BoxLang's capabilities:
 

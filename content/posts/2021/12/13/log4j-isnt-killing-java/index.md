@@ -24,12 +24,12 @@ There are [many good write-ups](https://www.infoq.com/news/2021/12/log4j-zero-da
 
 Here we will cover the Java ecosystem to describe what logging frameworks are, where/why they are used, and how teams can observe and control what their JVMs are doing.
 
-What Security Efforts Should Java Developers Do {#h2-0-what-security-efforts-should-java-developers-do}
--------------------------------------------------------------------------------------------------------
+What Security Efforts Should Java Developers Do
+-----------------------------------------------
 
 Patching the JDK and libraries quickly is the most effective technique to avoid most mass exploitation.
 
-### Patching the Library (Required) {#h3-1-patching-the-library-required}
+### Patching the Library (Required)
 
 When a vulnerability resides in a library, the most effective technique is to patch the library and remove the vulnerability. If you do not patch your library, there is a very high likelihood that your application will be hacked, with attackers gaining complete access to your system and its data.
 
@@ -41,7 +41,7 @@ Other open source tools that reveal dependencies are Maven dependency tree ([dep
 
 In the log4j2 vulnerability, you must upgrade to 2.16.0 or higher.
 
-### Patching JREs to the Java Security Baseline (Recommended, Periodic) {#h3-2-patching-jres-to-the-java-security-baseline-recommended-periodic}
+### Patching JREs to the Java Security Baseline (Recommended, Periodic)
 
 Every Java major version maintains an ongoing security baseline. As the JDK is patched each quarter with new security improvements, [the baseline moves forward](http://javadl-esd-secure.oracle.com/update/baseline.version). Java installations below the security baseline contain known security issues and should be updated.
 
@@ -78,7 +78,7 @@ jobs:
 ```
 
 
-### Regularly Detect Custom Security Flaws (Recommended in Test) {#h3-3-regularly-detect-custom-security-flaws-recommended-in-test}
+### Regularly Detect Custom Security Flaws (Recommended in Test)
 
 Automated security tools can catch security flaws without manual security expertise. By adding an integrated agent into a Java application, you can get passive detection in your application that records security information. Unlike tools that look at dependency numbers to determine if vulnerabilities are present, these track the same dependency information byt integrated analyzers can tell you about the resulting combination of these libraries and if they're used securely together.
 
@@ -92,14 +92,14 @@ In addition, a free analyzer like [Contrast Community Edition](https://www.contr
 * Do I combine libraries in a way that would create an unexpected and undesirable security surprise, like OGNL parsing of input?
 * And many more security flaws that are unique to your application
 
-### Monitor Security Events with JDK Flight Recorder {#h3-4-monitor-security-events-with-jdk-flight-recorder}
+### Monitor Security Events with JDK Flight Recorder
 
 [JDK Flight Recorder](https://www.azul.com/products/components/zulu-mission-control/) is a performance analysis tool included in modern OpenJDK distributions that can also produce some security information with low overhead. Teams can use JDK Flight Recorder to record many IO operations like what files the JRE accesses, or [what classes are paired with Deserialization](https://inside.java/2021/03/02/monitoring-deserialization-activity-in-the-jdk/).
 
 By monitoring Java application events with JDK Flight Recorder and streaming events into a Security Information and Event Management (SIEM) system, Java teams can monitor for anomalous behavior and/or pair known-safe classes with the [Java deserialization filters](https://openjdk.java.net/jeps/415) that prevent exploitation.
 
-What Security Efforts Yield Little Benefit {#h2-5-what-security-efforts-yield-little-benefit}
----------------------------------------------------------------------------------------------
+What Security Efforts Yield Little Benefit
+------------------------------------------
 
 In the case of log4j2 exploitation, network based defenses like Web Application Firewalls (WAFs) and similar tools may accomplish something in the short term, but generally their effectiveness is low and the amount of effort is extremely high.
 
@@ -110,7 +110,7 @@ In the case of log4j2 exploitation, network based defenses like Web Application 
 
 Above: a picture showing the exploitation payload that is infeasible to detect at a network layer.
 
-### System Properties and Dynamic Patches are Moderately Effective {#h3-6-system-properties-and-dynamic-patches-are-moderately-effective}
+### System Properties and Dynamic Patches are Moderately Effective
 
 There are several patches and system properties that can control the behavior of log4j2 and block exploitation. These are reasonable in cases where the library cannot be updated or to gain time while teams work to update the dependency.
 
@@ -123,8 +123,8 @@ Setting these to false will block remote loading.
 
 A dynamic patch is available that will [connect to a running JVM and patch it](https://github.com/corretto/hotpatch-for-apache-log4j2). This patch must be applied each time the JVM is started. This is decent for a couple uses but it is easier to update the library than to automate this patch.
 
-How is Java Logging Handled {#h2-7-how-is-java-logging-handled}
----------------------------------------------------------------
+How is Java Logging Handled
+---------------------------
 
 Java developers typically choose from several logging systems or facades. Many of these logging frameworks have grown to work together over the years as communities have grown, merged, and mingled:
 
@@ -135,7 +135,7 @@ Java developers typically choose from several logging systems or facades. Many o
 * [JBoss Logger](https://docs.jboss.org/process-guide/en/html/logging.html) is another logger popular in the JBoss ecosystem, it performed well and worked quickly. Today it supports other popular frameworks like Quarkus.
 * Apache Commons-Logging (2002) pre-dates the JDK logger and inspired many of the APIs. Its last release was in 2014 as people moved to other APIs the supported the goal of good logging rather than a single project.
 
-### Recommended Logger in 2022 {#h3-8-recommended-logger-in-2022}
+### Recommended Logger in 2022
 
 Newer greenfield projects with fewer dependencies should consider the System Logger.
 
@@ -143,7 +143,7 @@ Projects with many dependencies benefit from using the same logger as most of th
 
 When no other logger is present, System Logger is essentially JDK Logger with a good API.
 
-### What do the Loggers Actually Do {#h3-9-what-do-the-loggers-actually-do}
+### What do the Loggers Actually Do
 
 The logging frameworks enable application owners to see log messages, timestamps, thread names, and other data in a common format.
 

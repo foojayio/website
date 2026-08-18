@@ -20,24 +20,24 @@ ImageIO is part of Java, it is free and it supports a range of Image formats inc
 
 ImageIO does have some limitations which can be summed up as:-
 
-### 1. Could have better support for some image file formats. {#h3-0-1-could-have-better-support-for-some-image-file-formats}
+### 1. Could have better support for some image file formats.
 
 JPEG/JPEG2000 support in ImageIO is not as good as it could be and the main reason we started writing our own Image library.
 
-### 2. Does not support Image file formats {#h3-1-2-does-not-support-image-file-formats}
+### 2. Does not support Image file formats
 
 There are lots of image formats which ImageIO will not read and write.
 
-### 3. Memory issues and Bugs {#h3-2-3-memory-issues-and-bugs}
+### 3. Memory issues and Bugs
 
 ImageIO uses native memory so it runs out of memory even if there is lots of Java heap. This can be a big issue with server software being shared between multiple users.
 
-Alternatives? {#h2-3-alternatives}
-----------------------------------
+Alternatives?
+-------------
 
 Luckily there are options. Below we give you some reasons to use the excellent Open Source Apache Imaging library or own commercial JDeli image library. We think they provide the two best options if you need something more than ImageIO. Which one is best will depend on your exact requirements.
 
-### Why use Apache Imaging Library? {#h3-4-why-use-apache-imaging-library}
+### Why use Apache Imaging Library?
 
 * Free and Open source
 * prevents heap related JVM crashes

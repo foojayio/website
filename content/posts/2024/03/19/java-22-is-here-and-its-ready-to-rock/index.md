@@ -30,8 +30,8 @@ In this article, you'll go on a tour of the JEPs that are part of this release, 
 
 Where applicable, the differences with Java 21 are highlighted and a few typical use cases are provided, so that you'll be more than ready to use these features after reading this!
 
-From Project Amber {#h2-0-from-project-amber}
----------------------------------------------
+From Project Amber
+------------------
 
 Java 22 contains four features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -42,7 +42,7 @@ Java 22 contains four features that originated from [Project Amber](https://open
 
 > The goal of Project Amber is to explore and incubate smaller, productivity-oriented Java language features.
 
-### JEP 447: Statements before super(...) (Preview) {#h3-1-jep-447-statements-before-super-preview}
+### JEP 447: Statements before super(...) (Preview)
 
 In Java, constructors run from top to bottom. On top of that, a superclass constructor must finish initializing its fields before a subclass constructor starts. This ensures proper object state initialization and prevents access to uninitialized fields.
 
@@ -113,7 +113,7 @@ The JEP contains a few more details on the restrictions of instance accessing in
 
 Or if you want to try out 'statements before super(...)' for yourself, then here's a [GitHub repository](https://github.com/hannotify/java-22-release-day) to get you started.
 
-### JEP 456: Unnamed Variables \& Patterns {#h3-2-jep-456-unnamed-variables-patterns}
+### JEP 456: Unnamed Variables \& Patterns
 
 Data processing in Java has become increasingly streamlined since the introduction of [records](https://openjdk.org/jeps/395) and [record patterns](https://openjdk.org/jeps/440). But writing out an entire record pattern when some record components aren't even used in the logic that follows can be both cumbersome and confusing. Consider the following code example:
 
@@ -218,7 +218,7 @@ Compared to the preview version of this feature in Java 21, nothing was changed 
 
 For more information on this feature, see [JEP 456](https://openjdk.org/jeps/456).
 
-### JEP 459: String Templates (Second Preview) {#h3-3-jep-459-string-templates-second-preview}
+### JEP 459: String Templates (Second Preview)
 
 Several options in Java currently exist to compose a string from literal text and expressions:
 
@@ -395,7 +395,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 459](https://openjdk.org/jeps/459).
 
-### JEP 463: Implicitly Declared Classes and Instance Main Methods (Second Preview) {#h3-4-jep-463-implicitly-declared-classes-and-instance-main-methods-second-preview}
+### JEP 463: Implicitly Declared Classes and Instance Main Methods (Second Preview)
 
 Java's take on the classic [Hello, World!](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program) program is notoriously verbose:
 
@@ -469,8 +469,8 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 463](https://openjdk.org/jeps/463).
 
-From Project Loom {#h2-5-from-project-loom}
--------------------------------------------
+From Project Loom
+-----------------
 
 Java 22 contains two features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -479,7 +479,7 @@ Java 22 contains two features that originated from [Project Loom](http://openjdk
 
 > Project Loom strives to simplify maintaining concurrent applications in Java by introducing *virtual threads* and an API for *structured concurrency*, among other things.
 
-### JEP 462: Structured Concurrency (Second Preview) {#h3-6-jep-462-structured-concurrency-second-preview}
+### JEP 462: Structured Concurrency (Second Preview)
 
 Java's take on concurrency has always been *unstructured* , meaning that tasks run independently of each other. There's no hierarchy, scope, or other structure involved, which means errors or cancellation intent is hard to communicate.  
 
@@ -623,7 +623,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 462](https://openjdk.org/jeps/462).
 
-### JEP 464: Scoped Values (Second Preview) {#h3-7-jep-464-scoped-values-second-preview}
+### JEP 464: Scoped Values (Second Preview)
 
 *Scoped values* enable the sharing of immutable data within and across threads.  
 
@@ -683,8 +683,8 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 464](https://openjdk.org/jeps/464).
 
-From Project Panama {#h2-8-from-project-panama}
------------------------------------------------
+From Project Panama
+-------------------
 
 Java 22 contains two features that originated from [Project Panama](http://openjdk.java.net/projects/panama/):
 
@@ -693,7 +693,7 @@ Java 22 contains two features that originated from [Project Panama](http://openj
 
 > Project Panama aims to improve the connection between the JVM and foreign (non-Java) libraries.
 
-### JEP 454: Foreign Function \& Memory API {#h3-9-jep-454-foreign-function-memory-api}
+### JEP 454: Foreign Function \& Memory API
 
 Java programs have always had the option of interacting with code and data outside of the Java runtime, through the [Java Native Interface](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/) (JNI).  
 
@@ -773,7 +773,7 @@ On top of that, the feature has been finalized!
 
 For more information on this feature, see [JEP 454](https://openjdk.org/jeps/454).
 
-### JEP 460: Vector API (Seventh Incubator) {#h3-10-jep-460-vector-api-seventh-incubator}
+### JEP 460: Vector API (Seventh Incubator)
 
 The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
 
@@ -831,8 +831,8 @@ Aside from a minor set of bugfixes and (performance) enhancements in the API, th
 
 For more information on this feature, see [JEP 460](https://openjdk.org/jeps/460).
 
-HotSpot {#h2-11-hotspot}
-------------------------
+HotSpot
+-------
 
 Java 22 introduces a single change to [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -840,7 +840,7 @@ Java 22 introduces a single change to [HotSpot](https://openjdk.org/groups/hotsp
 
 > The HotSpot JVM is the runtime engine that is developed by Oracle. It translates Java bytecode into machine code for the host operating system's processor architecture.
 
-### JEP 423: Region Pinning for G1 {#h3-12-jep-423-region-pinning-for-g1}
+### JEP 423: Region Pinning for G1
 
 The Java Native Interface ([JNI](https://docs.oracle.com/en/java/javase/21/docs/specs/jni/index.html)) facilitates interaction between Java and unmanaged languages like C and C++. When using JNI, functions are employed to acquire and release pointers to Java objects in pairs. This creates what is called a *critical region* , where code operates on a *critical object*.
 
@@ -858,14 +858,14 @@ In Java 21, G1GC disables garbage collection during critical regions to avoid mo
 
 For more information on this feature, see [JEP 423](https://openjdk.org/jeps/423).
 
-Compiler {#h2-13-compiler}
---------------------------
+Compiler
+--------
 
 Java 22 also brings us an addition that's part of the compiler:
 
 * Launch Multi-File Source-Code Programs
 
-### JEP 458: Launch Multi-File Source-Code Programs {#h3-14-jep-458-launch-multi-file-source-code-programs}
+### JEP 458: Launch Multi-File Source-Code Programs
 
 Java is well-suited for building large, complex applications. But several recent additions to the JDK focus on the early stages of a software project instead, when it's still unclear of how big it might get. Features like [jshell](https://openjdk.org/jeps/222) and [instance main methods](https://openjdk.org/jeps/463) come to mind, but the ability to run `.java` source files directly without an explicit compilation step ([JEP 330](https://openjdk.org/jeps/330)) is probably the best example of Java's currenty focus on starter projects.
 
@@ -928,15 +928,15 @@ Up until Java 21, running a program on the command-line directly without a separ
 
 For more information on this feature, see [JEP 458](https://openjdk.org/jeps/458). It contains a few more details on launch-time semantics, how the launcher finds source files and how package structure comes into play.
 
-Core Libraries {#h2-15-core-libraries}
---------------------------------------
+Core Libraries
+--------------
 
 Java 22 also brings you two additions that are part of the core libraries:
 
 * Class-File API
 * Stream Gatherers
 
-### JEP 457: Class-File API (Preview) {#h3-16-jep-457-class-file-api-preview}
+### JEP 457: Class-File API (Preview)
 
 Java's ecosystem relies heavily on the ability to parse, generate and transform class files. Frameworks use on-the-fly bytecode transformation to transparently add functionality, for example. These frameworks typically bundle class-file libraries like [ASM](https://asm.ow2.io/) or [Javassist](https://www.javassist.org/) to handle class file processing. However, these libraries suffer from the fact that the six-month release cadence of the JDK causes the class-file format to evolve more quickly than before, meaning they might encounter class files that are newer than the class-file library that they bundle.
 
@@ -1030,7 +1030,7 @@ Note that the Class-File API is in the [preview](https://openjdk.org/jeps/12) st
 
 For more information on this feature, including more details on transforming class files, see [JEP 457](https://openjdk.org/jeps/457).
 
-### JEP 461: Stream Gatherers (Preview) {#h3-17-jep-461-stream-gatherers-preview}
+### JEP 461: Stream Gatherers (Preview)
 
 The Stream API has been around since Java 8 and it has definitely made its way into the heart of the typical Java developer. It enables a programming style that is both efficient and expressive. Recall that a stream pipeline consists of three parts: a source of elements, any number of intermediate operations, and a terminal operation. For example:
 
@@ -1189,8 +1189,8 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 461](https://openjdk.org/jeps/461) and the [blog post on gatherers](https://dev.to/khmarbaise/jdk22-gatherer-2a6e) by Karl Heinz Marbaise.
 
-Final thoughts {#h2-18-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 It seems clear to me that Java 22 is ready to rock, with no less than 12 JEPs delivered!
 

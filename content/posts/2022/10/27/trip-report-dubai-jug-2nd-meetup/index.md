@@ -22,7 +22,7 @@ frozen: false
 
 This was the second Dubai JUG meetup, yet the first **real** one. The first meetup was more of a practice team building session. Here is a trip report of the second Dubai JUG meetup at the PWC office.
 
-### First day in Dubai {#h3-0-first-day-in-dubai}
+### First day in Dubai
 
 This was my second time in Dubai. I had visited most of the landmarks the first time, making this a more relaxing visit without fear of missing out (FOMO). The temperatures were a lot more pleasant, where in June during my first visit it was above 40 degrees Celcius, this time around it was a more pleasant 30 degrees. I arrived Wednesday night in the hotel. I had set an alarm to make sure I wouldn't miss breakfast and woke up a bit jet lagged. It's surprising what just two hours of time difference can do!
 
@@ -30,8 +30,8 @@ Initially we planned the speaker dinner on Thursday, but Friday was a better fit
 
 ![](dubai-jug-running.png)
 
-Meetup day {#h2-1-meetup-day}
------------------------------
+Meetup day
+----------
 
 After a late breakfast and some work, I went to the PWC office for the meetup preparations. I met up with Jad Salhani, the JUG organizer, and Chris Thalinger, the other speaker. After testing the equipment, we had some time for lunch and our final preparations. Fun fact: we used an Apple TV for the presentations, quite convenient if you have a speaker that just uses their iPhone for slides.
 

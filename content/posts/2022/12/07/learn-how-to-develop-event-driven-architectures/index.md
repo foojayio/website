@@ -219,7 +219,7 @@ The only shared configuration between the two processes is the chronicle queue d
 
 Several other libraries are using Chronicle Queue internally such as [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") or [Apache Cassandra](https://cassandra.apache.org/_/index.html "Apache Cassandra").
 
-### Summary {#h3-0-summary}
+### Summary
 
 There is more to an Event-Driven Architecture than setting up a few method calls between a few Java processes. Other important considerations are:
 

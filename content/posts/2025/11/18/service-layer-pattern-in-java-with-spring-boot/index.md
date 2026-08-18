@@ -23,8 +23,8 @@ frozen: false
 
 In modern software design, it is important to develop code that is clean and maintainable. One way developers do this is using the **Service Layer pattern**.
 
-What you'll learn {#h2-0-what-you-ll-learn}
--------------------------------------------
+What you'll learn
+-----------------
 
 In this article, you'll learn:
 
@@ -34,8 +34,8 @@ In this article, you'll learn:
 * How to add MongoDB with minimal code.
 * Best practices and common mistakes to avoid.
 
-What is the Service Layer pattern? {#h2-1-what-is-the-service-layer-pattern}
-----------------------------------------------------------------------------
+What is the Service Layer pattern?
+----------------------------------
 
 The Service Layer pattern is an architectural pattern that defines an application's boundary with a layer of services that establishes a set of available operations and coordinates the application's response in each operation.
 
@@ -43,8 +43,8 @@ This pattern centralizes business rules, making applications more maintainable, 
 
 Think of it as the "brain" of your application. It contains your business logic and orchestrates the flow between your controllers (presentation layer) and your data access layer.
 
-Why use a service layer? {#h2-2-why-use-a-service-layer}
---------------------------------------------------------
+Why use a service layer?
+------------------------
 
 **Separation of concerns**: Bringing your business logic to one focused layer allows you to keep your code modular and decoupled. Your controllers stay thin and focused on HTTP concerns (routing, status codes, request/response handling), while your business logic lives in services. Your repository is left responsible for only your data interaction.
 
@@ -56,12 +56,12 @@ Why use a service layer? {#h2-2-why-use-a-service-layer}
 
 **Business logic encapsulation**: Complex business rules stay in one place rather than being scattered across your codebase.
 
-How the Service Layer fits with MVC {#h2-3-how-the-service-layer-fits-with-mvc}
--------------------------------------------------------------------------------
+How the Service Layer fits with MVC
+-----------------------------------
 
 If you're familiar with the **Model-View-Controller (MVC)** pattern, you might wonder where the Service Layer fits in. The short answer: It sits between your Controller and your Model, enhancing the traditional MVC architecture.
 
-### Traditional MVC {#h3-4-traditional-mvc}
+### Traditional MVC
 
 In a classic MVC pattern, you have three components:
 
@@ -76,7 +76,7 @@ In simpler applications, controllers might directly interact with repositories a
 * Testing becomes harder because business logic is tightly coupled to the web layer.
 * Transaction boundaries become unclear.
 
-### MVC + Service Layer {#h3-5-mvc-service-layer}
+### MVC + Service Layer
 
 The Service Layer pattern extends MVC by introducing an intermediate layer:
 
@@ -100,12 +100,12 @@ HTTP Response ← Controller ← Service ← Repository ← Database
 
 Think of it this way: MVC tells you *how* to structure your application's UI and request handling. The Service Layer tells you *where* to put your business logic. Together, they create a robust, maintainable architecture that scales with your application's complexity.
 
-A real example: User management service {#h2-6-a-real-example-user-management-service}
---------------------------------------------------------------------------------------
+A real example: User management service
+---------------------------------------
 
 Let's build a user management system to see the Service Layer pattern in action. I'll just include what is necessary in this article to show how the Service Layer pattern exists in an application. If you want the full code, check out the [GitHub repository](https://github.com/timotheekelly/spring-service-layer). We'll start simple and progressively add complexity, showing how each layer has a distinct responsibility.
 
-### The scenario {#h3-7-the-scenario}
+### The scenario
 
 We're building a user registration and management system. When someone creates an account or updates their profile, several things need to happen:
 
@@ -118,7 +118,7 @@ We're building a user registration and management system. When someone creates a
 
 This is a perfect use case for the Service Layer pattern---the controller shouldn't handle validation and email logic, and the repository shouldn't care about business rules. Let's see how we separate these concerns.
 
-### Step 1: The domain model {#h3-8-step-1-the-domain-model}
+### Step 1: The domain model
 
 First, we define our domain object---the User entity that represents a user in our system.
 
@@ -136,7 +136,7 @@ public class User {
 
 This is a plain Java object (POJO) that represents our core domain concept. It's framework-agnostic and contains no business logic---just data. This model will be used across all layers: The controller returns it as JSON, the service applies business rules to it, and the repository persists it to MongoDB.
 
-### Step 2: The repository interface {#h3-9-step-2-the-repository-interface}
+### Step 2: The repository interface
 
 The repository defines our data access contract. It focuses purely on CRUD operations and simple queries---no business logic here.
 
@@ -156,7 +156,7 @@ The repository is the **data access layer**. It sits at the bottom of our archit
 
 The repository doesn't enforce business rules. It will happily save a user with a duplicate email if you tell it to. That's not its job.
 
-### Step 3: The service interface {#h3-10-step-3-the-service-interface}
+### Step 3: The service interface
 
 The service interface defines our **business operations**. Notice how these methods are named from a business perspective, not a data perspective.
 
@@ -175,7 +175,7 @@ Compare createUser() with the repository's save(). The service method is busines
 
 This allows for multiple implementations (useful for testing with mocks) and makes it easy to swap implementations without changing dependent code.
 
-### Step 4: The service implementation {#h3-11-step-4-the-service-implementation}
+### Step 4: The service implementation
 
 This is where the real work happens---**the business logic layer**. The service orchestrates operations across multiple components and enforces business rules. This uses a fictitious EmailService to help create users and verify unique user creation.
 
@@ -270,7 +270,7 @@ public class UserServiceImpl implements UserService {
 
 Notice how the service is the only place that knows the complete business workflow. The controller just says "create a user," and the service handles all the details.
 
-### Step 5: The controller {#h3-12-step-5-the-controller}
+### Step 5: The controller
 
 The controller is the **presentation layer**. It stays thin and focused solely on HTTP concerns---routing requests, handling status codes, and formatting responses.
 
@@ -334,12 +334,12 @@ public class UserController {
 
 If you wanted to add a different way to access your users (like a GraphQL endpoint, a command-line interface, or a scheduled batch job), you'd just create a new controller/interface that calls the same UserService. The business logic stays in one place.
 
-Adding MongoDB to your application {#h2-13-adding-mongodb-to-your-application}
-------------------------------------------------------------------------------
+Adding MongoDB to your application
+----------------------------------
 
 Now, let's see how to add MongoDB to our user management system. **MongoDB** is a document database that stores data in flexible, JSON-like documents, making it a great fit for user profiles since the schema can easily evolve.
 
-### The simple approach: Spring Data MongoDB {#h3-14-the-simple-approach-spring-data-mongodb}
+### The simple approach: Spring Data MongoDB
 
 The easiest way to add MongoDB is to use [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb), which requires minimal code. If you want to see the full code, check out the [GitHub repository](https://github.com/timotheekelly/spring-service-layer) for the article:
 
@@ -395,7 +395,7 @@ That's it! Spring Data MongoDB automatically generates the implementation. You g
 
 No boilerplate code needed!
 
-### Configuration {#h3-15-configuration}
+### Configuration
 
 Add MongoDB to your pom.xml:
 
@@ -418,11 +418,11 @@ spring.data.mongodb.database=service-layer-demo
 
 Note: You will need a [MongoDB Atlas account](https://account.mongodb.com/account/register?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=service+layer+pattern&utm_term=tim.kelly) with a cluster set up to retrieve your [connection string](https://www.mongodb.com/docs/manual/reference/connection-string/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=service+layer+pattern&utm_term=tim.kelly).
 
-### The custom approach (optional) {#h3-16-the-custom-approach-optional}
+### The custom approach (optional)
 
 If you need more control over MongoDB operations, you can implement the repository manually using the [MongoDB Java Driver](https://www.mongodb.com/docs/languages/java/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=service+layer+pattern&utm_term=tim.kelly). This approach gives you fine-grained control over queries, indexing, and document mapping.
 
-### Why this works with the Service Layer pattern {#h3-17-why-this-works-with-the-service-layer-pattern}
+### Why this works with the Service Layer pattern
 
 Notice how adding MongoDB didn't require any changes to:
 
@@ -432,8 +432,8 @@ Notice how adding MongoDB didn't require any changes to:
 
 **The service depends on the** **UserRepository** **interface, not the MongoDB implementation.** This means you could swap MongoDB for other databases without touching your business logic. That's the power of the Service Layer pattern's separation of concerns!
 
-Best practices {#h2-18-best-practices}
---------------------------------------
+Best practices
+--------------
 
 **1. Keep services focused**: Each service should have a single responsibility. Don't create a "God service" that does everything.
 
@@ -459,8 +459,8 @@ public void createUser_duplicateEmail_throwsException() {
 ```
 
 
-Common mistakes to avoid {#h2-19-common-mistakes-to-avoid}
-----------------------------------------------------------
+Common mistakes to avoid
+------------------------
 
 **Anemic services**: Don't create services that just pass through to the repository. Services should add value through business logic.
 
@@ -482,8 +482,8 @@ public User getUser(String id) {
 
 **Tight coupling**: Depend on interfaces, not implementations. This makes testing easier and allows you to swap implementations.
 
-Conclusion {#h2-20-conclusion}
-------------------------------
+Conclusion
+----------
 
 The Service Layer pattern is a powerful way to organize your application's business logic. It creates clear boundaries, makes your code more testable, and keeps your controllers lean. When combined with a clean repository layer, you get a maintainable, scalable architecture that's easy to reason about and extend.
 

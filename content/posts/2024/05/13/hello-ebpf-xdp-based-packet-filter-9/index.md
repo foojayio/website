@@ -30,8 +30,8 @@ This week, we'll use this work together with new support for XDP to create a sim
 
 This blocks all incoming IPv4 packages from `twitter.com`. We see how it works in this blog post. First, we start with some background on networking and explain what XDP is.
 
-Network Packet {#h2-0-network-packet}
--------------------------------------
+Network Packet
+--------------
 
 All networking is packet-based, with multiple layers of protocol from shared medium (e.g., Ethernet) to application level (e.g., HTTP):
 ![](https://mostlynerdless.de/wp-content/uploads/2024/04/network_stack-2000x517.png)
@@ -83,8 +83,8 @@ This misses the last field officially specified field, the options field, but it
 
 Above the IP protocol is the TCP protocol, which essentially adds ports and acknowledged package delivery, and on the web, the topmost layer is usually HTTP, which adds URL paths and more.
 
-eXpress Data Path (XDP) {#h2-1-express-data-path-xdp}
------------------------------------------------------
+eXpress Data Path (XDP)
+-----------------------
 
 XDP is one of the most essential parts of the eBPF kernel land. It allows users to write firewalls, load balancers, and more, such as the packet filter of this blog post. To quote Jonathan Corbet:
 > The core idea behind the XDP initiative is to get the network stack out of the way as much as possible. While the network stack is highly flexible, XDP is built around a bare-bones packet transport that is as fast as it can be. When a decision needs to be made or a packet must be modified, XDP will provide a hook for a user-supplied BPF program to do the work. The result combines minimal overhead with a great deal of flexibility, at the cost of a little "some assembly required" label on the relevant man pages.
@@ -120,8 +120,8 @@ We're just focusing on the content that can be found between `data` and `data_en
 
 Armed with this knowledge, we can now create a package filter:
 
-Writing a Packet Filter {#h2-2-writing-a-packet-filter}
--------------------------------------------------------
+Writing a Packet Filter
+-----------------------
 
 The basic structure of our packet filter application consists of a Java part that handles the configuration and logging and an eBPF part that uses an XDP hook that is called for every received packet. As explained above, The XDP hook decides what to do with every packet. So the structures are as follows:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/04/xdp_filter-1-2000x1005.png)
@@ -348,8 +348,8 @@ Retrying.
 
 So we can't access twitter.com anymore till we stop our application.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Using XDP and eBPF, we can create a partial packet filter that is easily extended into a firewall and blocks incoming packets. The filtering overhead is low, as the packets are processed directly in the kernel. Using hello-ebpf, we can wrap the filter program in a neat command-line application.
 

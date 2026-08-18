@@ -29,8 +29,8 @@ Read in other languages: [中文](https://flounder.dev/zh/posts/debug-unresponsi
 
 In this article, we will learn how to locate code that causes a UI freeze without much prior knowledge of the project and fix faulty code on the fly.
 
-The problem {#h2-0-the-problem}
--------------------------------
+The problem
+-----------
 
 If you want to follow along, start by cloning this repository: <https://github.com/flounder4130/debugger-example>
 
@@ -48,8 +48,8 @@ In our example app, the hanging happens when you click **Button N**. However, it
 
 Let's see how we can use the debugger to find it.
 
-Method breakpoints {#h2-1-method-breakpoints}
----------------------------------------------
+Method breakpoints
+------------------
 
 The advantage of method breakpoints over line breakpoints is that they can be used on entire hierarchies of classes. How is this useful in our case?
 
@@ -70,8 +70,8 @@ Start the debugger session and click **Button N** . The application gets suspend
 
 Though in this article we are focused on finding the bug, this technique can also save you a lot of time when you want to understand how something works in a large codebase.
 
-Pause application {#h2-2-pause-application}
--------------------------------------------
+Pause application
+-----------------
 
 The approach with method breakpoints works well, but it is based on the assumption that we know something about the interface that the class implements. What if this assumption is wrong, or we cannot use this approach for some other reason?
 
@@ -87,8 +87,8 @@ This approach has some advantages over a more traditional thread dump, which we'
 
 For more tips and tricks with **Pause** see [Debug Without Breakpoints](https://flounder.dev/posts/debug-without-breakpoints/) and [Debugger.godMode()](https://flounder.dev/posts/debugger-god-mode/).
 
-Thread dumps {#h2-3-thread-dumps}
----------------------------------
+Thread dumps
+------------
 
 Finally, we can use a thread dump, which is not strictly a debugger feature. It is available regardless of whether you are using the debugger.
 
@@ -102,8 +102,8 @@ The downside of thread dumps is that they only provide a snapshot of the program
 
 In our example, we don't need to resort to a thread dump. However, I still wanted to mention this technique as it may be useful in other cases, like when you are trying to debug an application that has been launched without the debug agent.
 
-Understanding the issue {#h2-4-understanding-the-issue}
--------------------------------------------------------
+Understanding the issue
+-----------------------
 
 Regardless of the debugging technique, we arrive at `ActionImpl14`. In this class, someone intended to perform the work in a separate thread, but confused `Thread.start()` with `Thread.run()`, which runs the code in the same thread as the calling code.
 
@@ -115,8 +115,8 @@ IntelliJ IDEA's static analyzer even warns us about this at design time:
 
 A method that does heavy lifting (or heavy sleeping in this case) is called on the UI thread and blocks it until the method finishes. That's why we cannot do anything in the UI for some time after we click **Button N**.
 
-HotSwap {#h2-5-hotswap}
------------------------
+HotSwap
+-------
 
 Now that we've discovered the cause of the bug, let's fix the issue.
 
@@ -138,8 +138,8 @@ Let's go back to the application and check. Clicking **Button N** no longer hang
 
 **Note** : Keep in mind that HotSwap has its [limitations](https://www.jetbrains.com/help/idea/altering-the-program-s-execution-flow.html#hotswap-limitations). If you are interested in extended HotSwap capabilities, it might be a good idea to take a look at advanced tools like [DCEVM](http://dcevm.github.io) or [JRebel](https://www.jrebel.com).
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 Using our reasoning and a couple of debugger features, we were able to locate the code that was causing a UI freeze in our project. Then, we proceeded to fix the code without wasting any time on recompilation and redeployment, which can be lengthy in real-world projects.
 

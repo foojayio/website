@@ -29,8 +29,8 @@ Finally, I mentioned the `Ingress` object, which also allows routing.
 
 I deliberately left out the new kid on the block, the Gateway API. It's the subject of this post.
 
-From Ingress to the Gateway API {#h2-0-from-ingress-to-the-gateway-api}
------------------------------------------------------------------------
+From Ingress to the Gateway API
+-------------------------------
 
 External access to Kubernetes pods went through several evolutionary steps, *e.g.* , `Ingress` is the answer to the problem of the lack of routing in `LoadBalancer`.
 
@@ -70,8 +70,8 @@ Chances are that it's not a one-to-one mapping. Then, you need to translate the 
 
 The idea behind the Gateway API is to have a clean separation between standard objects and the proprietary implementation.
 
-The Gateway API {#h2-1-the-gateway-api}
----------------------------------------
+The Gateway API
+---------------
 
 > Gateway API is an open source project managed by the SIG-NETWORK community. It is a collection of resources that model service networking in Kubernetes. These resources - `GatewayClass`, `Gateway`, `HTTPRoute`, `TCPRoute`, `Service`, etc - aim to evolve Kubernetes service networking through expressive, extensible, and role-oriented interfaces that are implemented by many vendors and have broad industry support. -- <https://gateway-api.sigs.k8s.io>
 
@@ -85,19 +85,19 @@ Indeed, the concerns of a cluster operator and a developer are pretty different.
 
 IMHO, the most significant difference is that the specification was focused mainly on the developer experience; the rest was up to the implementors. The Gateway API seems to care about all personas.
 
-Configuring pod access via the Gateway API {#h2-2-configuring-pod-access-via-the-gateway-api}
----------------------------------------------------------------------------------------------
+Configuring pod access via the Gateway API
+------------------------------------------
 
 Let's replace the `Ingress` we previously configured with the Gateway API. Several steps are necessary.
 
-### Install the new Gateway s {#h3-3-install-the-new-gateway-crds}
+### Install the new Gateway s
 
 ```bash
 k apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.0/standard-install.yaml
 ```
 
 
-### Install an implementation {#h3-4-install-an-implementation}
+### Install an implementation
 
 I'll be using Apache APISIX. Alternatively, the SIG website maintains [a list of implementations](https://gateway-api.sigs.k8s.io/implementations/).
 
@@ -149,7 +149,7 @@ service/apisix-ingress-controller   ClusterIP   10.96.141.230   <none>        80
 
 At this point, the infrastructure is ready.
 
-### Declare the Gateway implementation {#h3-5-declare-the-gateway-implementation}
+### Declare the Gateway implementation
 
 As I mentioned above, the API makes a clean separation between the specification and the implementation. However, we need to bind it somehow. It's the responsibility of the `GatewayClass` object:
 
@@ -170,7 +170,7 @@ spec:
 
 Note that the `GatewayClass` has a cluster-wide scope. This model allows us to declare different Gateway API implementations and use them in parallel inside the same cluster.
 
-### Create the Gateway {#h3-6-create-the-gateway}
+### Create the Gateway
 
 With Apache APISIX, it's pretty straightforward:
 
@@ -197,7 +197,7 @@ Warning: The Gateway API specifies the option to *dynamically* change the port o
 
 The plan is to make it dynamic in the future. Please subscribe to this [GitHub issue](https://github.com/apache/apisix-ingress-controller/issues/610) to follow the progress.
 
-### Routes, routes, routes everywhere {#h3-7-routes-routes-routes-everywhere}
+### Routes, routes, routes everywhere
 
 Until now, everything was infrastructure; we can finally configure routing.
 
@@ -228,7 +228,7 @@ spec:
 4. Rule matches. In our case, we match regarding a path prefix, but plenty of rules are available. You can match based on a query parameter, on a header, etc.
 5. The "upstream" to forward to. We defined the `left` `Service` in the previous blog post.
 
-### Checking it works {#h3-8-checking-it-works}
+### Checking it works
 
 Now that we have configured our routes, we can check it works.
 
@@ -244,8 +244,8 @@ left
 ```
 
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 Many alternatives are available to access a pod from outside the cluster. The CNCF added most of them to improve on the previous one.
 

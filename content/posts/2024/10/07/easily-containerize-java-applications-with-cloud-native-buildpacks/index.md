@@ -31,14 +31,14 @@ This article focuses on Cloud Native Buildpacks, an open source project that is 
 
 Let's take a closer look at what buildpacks are, why they're advantageous, and how you can use them for your cloud-native Java applications.
 
-What are cloud native buildpacks? {#h2-0-what-are-cloud-native-buildpacks}
---------------------------------------------------------------------------
+What are cloud native buildpacks?
+---------------------------------
 
 The Cloud Native Buildpacks project was initiated by several organizations that were already using the concept of buildpacks. This project was donated to the Cloud Native Computing Foundation in 2018.
 
 The aim of this open source project was to unify the buildpack ecosystem with a well-defined platform-to-buildpack contract.
 
-### But what is a cloud native buildpack? {#h3-1-but-what-is-a-cloud-native-buildpack}
+### But what is a cloud native buildpack?
 
 A [buildpack](https://buildpacks.io/docs/for-app-developers/concepts/ "buildpack") is a set of executables that can analyze your app source code, create a build plan, and generate a container image that is ready for deployment to run your application. In essence, buildpacks help you to convert your source code into a secure, efficient, production-ready container image.
 
@@ -50,7 +50,7 @@ Buildpacks are designed to be flexible and modular. They can be customized to in
 
 Cloud Native Buildpacks embrace modern container standards, such as the [OCI image format](https://github.com/opencontainers/image-spec "OCI image format"), and take advantage of the latest capabilities of these standards. Cloud Native Buildpacks aim to bring advanced caching, multi-language support, minimal app images, and reproducibility to your images without forcing you, as the developer, to take care of all this yourself.
 
-### How do Cloud Native Buildpacks work? {#h3-2-how-do-cloud-native-buildpacks-work}
+### How do Cloud Native Buildpacks work?
 
 Each buildpack comprises two phases: **detect** and **build**.
 
@@ -60,7 +60,7 @@ During the build phase, the buildpack transforms the codebase, fulfilling the co
 
 To run these two phases (detect and build), builders are used. Under the hood, a builder runs the detect phase for all the buildpacks in order, and then it proceeds to run the build phase.
 
-### What is a builder? {#h3-3-what-is-a-builder}
+### What is a builder?
 
 The flexibility and modularity of buildpacks comes from the use of builders. A builder is an ordered combination of components that are required for building a container image.
 
@@ -78,8 +78,8 @@ Builders consist of the following components:
 
 This combination of components allows developers to use a single builder to automatically detect and build a wide variety of applications in different languages.
 
-Advantages of using buildpacks over alternative solutions {#h2-4-advantages-of-using-buildpacks-over-alternative-solutions}
----------------------------------------------------------------------------------------------------------------------------
+Advantages of using buildpacks over alternative solutions
+---------------------------------------------------------
 
 Buildpacks offer several critical advantages to developers:
 
@@ -99,8 +99,8 @@ In comparison to other similar, alternative solutions, such as source-to-image a
 
 Read [this document](https://buildpacks.io/features/ "this document") to dive deeper into the feature comparisons between all of these technologies.
 
-What are Paketo Buildpacks? {#h2-5-what-are-paketo-buildpacks}
---------------------------------------------------------------
+What are Paketo Buildpacks?
+---------------------------
 
 [Paketo Buildpacks](https://github.com/paketo-buildpacks "Paketo Buildpacks") is an open source project that makes use of the Cloud Native Buildpacks specification to provide production-ready buildpacks for the most popular frameworks and languages, including Java.
 
@@ -110,8 +110,8 @@ Many runtimes and frameworks have produced their own Paketo buildpacks for devel
 
 For this buildpack, the [Open Liberty](http://openliberty.io/ "Open Liberty") runtime is provided by default, although it can provide the WebSphere Liberty runtime if preferred. We'll use this buildpack in the following instructions to show you how you can make use of buildpacks and try them out for yourself.
 
-Getting started with buildpacks in 6 easy steps {#h2-6-getting-started-with-buildpacks-in-6-easy-steps}
--------------------------------------------------------------------------------------------------------
+Getting started with buildpacks in 6 easy steps
+-----------------------------------------------
 
 To get started, you'll need your application source code, Docker, and the Pack CLI.
 
@@ -182,8 +182,8 @@ find /tmp/demo-app-sbom/layers/sbom -name "*.json"
 ```
 
 
-Summary and next steps {#h2-7-summary-and-next-steps}
------------------------------------------------------
+Summary and next steps
+----------------------
 
 As this article has shown, developers can easily set up and use buildpacks and their many features when they develop cloud-native applications.
 

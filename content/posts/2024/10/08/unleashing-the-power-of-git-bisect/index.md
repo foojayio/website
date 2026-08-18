@@ -43,19 +43,19 @@ We don't usually think of Git as a debugging tool. Surprisingly, Git shines not 
 
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-The Essence of Debugging with Git {#h2-0-the-essence-of-debugging-with-git}
----------------------------------------------------------------------------
+The Essence of Debugging with Git
+---------------------------------
 
 Before we tap into the advanced aspects of `git bisect`, it's essential to understand its foundational premise. Git is known for tracking changes and managing code history, but the `git bisect` tool is a hidden gem for regression detection. Regressions are distinct from generic bugs, they signify a backward step in functionality---where something that once worked flawlessly now fails. Pinpointing the exact change causing a regression can be akin to finding a needle in a haystack, particularly in extensive codebases with long commit histories.
 
 Traditionally, developers would employ a manual, binary search strategy---checking out different versions, testing them, and narrowing down the search scope. This method, while effective, is painstakingly slow and error-prone. `Git bisect` automates this search, transforming what used to be a marathon into a swift sprint.
 
-Setting the Stage for Debugging {#h2-1-setting-the-stage-for-debugging}
------------------------------------------------------------------------
+Setting the Stage for Debugging
+-------------------------------
 
 Imagine you're working on a project, and recent reports indicate a newly introduced bug affecting the functionality of a feature that previously worked flawlessly. You suspect a regression but are unsure which commit introduced the issue among the hundreds made since the last stable version.
 
-### Initiating Bisect Mode {#h3-2-initiating-bisect-mode}
+### Initiating Bisect Mode
 
 To start, you'll enter bisect mode in your terminal within the project's Git repository:
 
@@ -66,7 +66,7 @@ git bisect start
 
 This command signals Git to prepare for the bisect process.
 
-### Marking the Known Good Revision {#h3-3-marking-the-known-good-revision}
+### Marking the Known Good Revision
 
 Next, you identify a commit where the feature functioned correctly, often a commit tagged with a release number or dated before the issue was reported. Mark this commit as "good":
 
@@ -77,7 +77,7 @@ git bisect good a1b2c3d
 
 Here, `a1b2c3d` represents the hash of the known good commit.
 
-### Marking the Known Bad Revision {#h3-4-marking-the-known-bad-revision}
+### Marking the Known Bad Revision
 
 Similarly, you mark the current version or a specific commit where the bug is present as "bad":
 
@@ -88,7 +88,7 @@ git bisect bad z9y8x7w
 
 `z9y8x7w` is the hash of the bad commit, typically the latest commit in the repository where the issue is observed.
 
-### Bisecting to Find the Culprit {#h3-5-bisecting-to-find-the-culprit}
+### Bisecting to Find the Culprit
 
 Upon marking the good and bad commits, Git automatically jumps to a commit roughly in the middle of the two and waits for you to test this revision. After testing (manually or with a script), you inform Git of the result:
 
@@ -97,7 +97,7 @@ Upon marking the good and bad commits, Git automatically jumps to a commit rough
 
 Git then continues to narrow down the range, selecting a new commit to test based on your feedback.
 
-### Expected Output {#h3-6-expected-output}
+### Expected Output
 
 After several iterations, Git will isolate the problematic commit, displaying a message similar to:
 
@@ -107,7 +107,7 @@ Bisecting: 0 revisions left to test after this (roughly 3 steps)
 ```
 
 
-### Reset and Analysis {#h3-7-reset-and-analysis}
+### Reset and Analysis
 
 Once the offending commit is identified, you conclude the bisect session to return your repository to its initial state:
 
@@ -122,14 +122,14 @@ This is where the non-linear, binary search pattern starts, as Git divides the s
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rf7xc1qn53lztck18jue.png)
 
-Advanced Usage and Tips {#h2-8-advanced-usage-and-tips}
--------------------------------------------------------
+Advanced Usage and Tips
+-----------------------
 
 The magic of `git bisect` lies in its ability to automate the binary search algorithm within your repository, systematically halving the search space until the rogue commit is identified.
 
 `Git bisect` offers a powerful avenue for debugging, especially for identifying regressions in a complex codebase. To elevate your use of this tool, consider delving into more advanced techniques and strategies. These tips not only enhance your debugging efficiency but also provide practical solutions to common challenges encountered during the bisecting process.
 
-### Script Automation for Precision and Efficiency {#h3-9-script-automation-for-precision-and-efficiency}
+### Script Automation for Precision and Efficiency
 
 Automating the bisect process with a script is a game-changer, significantly reducing manual effort and minimizing the risk of human error. This script should ideally perform a quick test that directly targets the regression, returning an exit code based on the test's outcome.
 
@@ -148,7 +148,7 @@ fi
 
 By passing this script to `git bisect run`, Git automatically executes it at each step of the bisect process, effectively automating the regression hunt.
 
-### Handling Flaky Tests with Strategy {#h3-10-handling-flaky-tests-with-strategy}
+### Handling Flaky Tests with Strategy
 
 Flaky tests, which sometimes pass and sometimes fail under the same conditions, can complicate the bisecting process. To mitigate this, your automation script can include logic to rerun tests a certain number of times or to apply more sophisticated checks to differentiate between a true regression and a flaky failure.
 
@@ -175,7 +175,7 @@ fi
 
 This approach reduces the chances that a flaky test will lead to incorrect bisect results.
 
-### Skipping Commits with Care {#h3-11-skipping-commits-with-care}
+### Skipping Commits with Care
 
 Sometimes, you'll encounter commits that cannot be tested due to reasons like broken builds or incomplete features. `git bisect skip` is invaluable here, allowing you to bypass these commits. However, use this command judiciously to ensure it doesn't obscure the true source of the regression.
 
@@ -189,8 +189,8 @@ This tells Git to exclude the current commit from the search and adjust its calc
 
 These advanced strategies enhance the utility of `git bisect` in your debugging toolkit. By automating the regression testing process, handling flaky tests intelligently, and knowing when to skip untestable commits, you can make the most out of `git bisect` for efficient and accurate debugging. Remember, the goal is not just to find the commit where the regression was introduced but to do so in the most time-efficient manner possible. With these tips and examples, you're well-equipped to tackle even the most elusive regressions in your projects.
 
-Unraveling a Regression Mystery {#h2-12-unraveling-a-regression-mystery}
-------------------------------------------------------------------------
+Unraveling a Regression Mystery
+-------------------------------
 
 In the past we got to use `git bisect`, when working on a large-scale web application. After a routine update, users began reporting a critical feature failure: the application's payment gateway stopped processing transactions correctly, leading to a significant business impact.
 
@@ -202,8 +202,8 @@ By running `git bisect start`, followed by marking the known good and bad commit
 
 Armed with this knowledge we reverted the problematic change, restoring the payment gateway's functionality and averting further business disruption. This experience not only resolved the immediate issue but also transformed our approach to debugging, making `git bisect` a go-to tool in our arsenal.
 
-Final Word {#h2-13-final-word}
-------------------------------
+Final Word
+----------
 
 The story of the payment gateway regression is just one example of how `git bisect` can be a lifesaver in the complex world of software development. By automating the tedious process of regression hunting, `git bisect` not only saves precious time but also brings a high degree of precision to the debugging process.
 

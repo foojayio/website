@@ -27,8 +27,8 @@ Java 18 was released last month (March 2022), and with it comes the second incub
 
 If you would prefer to follow along by watching a video, here's the recording of my FOSDEM'22 talk on this topic, from the [the OktaDev YouTube channel](https://youtu.be/lW69_AtAXzE).
 
-What is a Foreign Function Interface? {#h2-0-what-is-a-foreign-function-interface}
-----------------------------------------------------------------------------------
+What is a Foreign Function Interface?
+-------------------------------------
 
 A foreign function interface is the ability to call functions or routines written in one programming language from another programming language.
 
@@ -40,8 +40,8 @@ The term originated from common LISP, but it's known by different names in diffe
 
 Most languages use the C/C++ calling conventions for FFI and natively support calling C/C++ functions.
 
-Why is Foreign Function Interface needed? {#h2-1-why-is-foreign-function-interface-needed}
-------------------------------------------------------------------------------------------
+Why is Foreign Function Interface needed?
+-----------------------------------------
 
 Most of the use cases for FFI are around interacting with legacy apps and accessing host OS features or native libraries.
 
@@ -58,12 +58,12 @@ These days we use foreign functions for an array of use cases, some of which are
 * Deep learning (Tensorflow, cuDNN, Blas, and so on)
 * OpenSSL, V8, and many more
 
-A brief history of FFI in Java {#h2-2-a-brief-history-of-ffi-in-java}
----------------------------------------------------------------------
+A brief history of FFI in Java
+------------------------------
 
 Before we dwell on the current state of FFI in Java, let's look at a brief history of FFI in Java.
 
-### Java Native Interface (JNI) {#h3-3-java-native-interface-jni}
+### Java Native Interface (JNI)
 
 For a long time, the standard for FFI in Java has been Java Native Interface (JNI), and it is notorious for being slow and insecure.
 
@@ -91,7 +91,7 @@ The performance and memory safety of the JNI code depends on the developer, and 
 * Depends on Java developers to write safe C binding code manually
 * You need to compile and ship the C code for each target platform
 
-### Java Native Access (JNA) {#h3-4-java-native-access-jna}
+### Java Native Access (JNA)
 
 The complexity of JNI has given rise to some community-driven libraries that make it simpler to do FFI in Java. [Java Native Access (JNA)](https://github.com/java-native-access/jna) is one of them.
 
@@ -116,7 +116,7 @@ However, JNA is widely used and battle-tested, so definitely a better option tha
 * Has performance overhead and can be slower than JNI
 * Difficult to debug
 
-### Java Native Runtime (JNR) {#h3-5-java-native-runtime-jnr}
+### Java Native Runtime (JNR)
 
 Another popular option is [Java Native Runtime (JNR)](https://github.com/jnr/jnr-ffi). Though not as widely used or mature as JNA, it's much more modern and has better performance than JNA for most use cases. However, there are some cases where JNA might perform better.
 
@@ -134,14 +134,14 @@ Another popular option is [Java Native Runtime (JNR)](https://github.com/jnr/jnr
 * Built on top of JNI
 * Difficult to debug
 
-Enter Project Panama {#h2-6-enter-project-panama}
--------------------------------------------------
+Enter Project Panama
+--------------------
 
 Project Panama is the latest Java project aiming to simplify and improve FFI in Java, and as part of this, many proposals are currently being incubated.
 
 Let's take a look at some of the active proposals and how they will work, and let's see if we finally get proper native FFI in Java.
 
-### Foreign-Memory Access API {#h3-7-foreign-memory-access-api}
+### Foreign-Memory Access API
 
 The first piece of the puzzle is the foreign-memory access API. It was first incubated in JDK 14, and after three incubations, a new [JEP](https://openjdk.java.net/jeps/412) combined it into the Foreign Function \& Memory API.
 
@@ -154,7 +154,7 @@ The first piece of the puzzle is the foreign-memory access API. It was first inc
 * [JEP-383](https://openjdk.java.net/jeps/383) - Second incubator in JDK 15
 * [JEP-393](https://openjdk.java.net/jeps/393) - Third incubator in JDK 16
 
-### Foreign Linker API {#h3-8-foreign-linker-api}
+### Foreign Linker API
 
 Another essential part that makes FFI possible is Foreign Linker API. This was first incubated in JDK 16 and was combined into Foreign Function \& Memory API in the next revision.
 
@@ -165,7 +165,7 @@ Another essential part that makes FFI possible is Foreign Linker API. This was f
   * Creates a native function pointer to a Java method that can be passed to code in a native library
 * [JEP-389](https://openjdk.java.net/jeps/389) - First incubator in JDK 16
 
-### Vector API {#h3-9-vector-api}
+### Vector API
 
 Next is the vector API, which is crucial for FFI, especially in machine learning and advanced computations.
 
@@ -178,7 +178,7 @@ Next is the vector API, which is crucial for FFI, especially in machine learning
 * [JEP-414](https://openjdk.java.net/jeps/414) - Second incubator in JDK 17
 * [JEP-417](https://openjdk.java.net/jeps/417) - Third incubator in JDK 18
 
-### Foreign Function \& Memory API {#h3-10-foreign-function-memory-api}
+### Foreign Function \& Memory API
 
 Finally, the Foreign Linker API \& Foreign-Memory Access API has evolved together to become the Foreign Function \& Memory API. It was first incubated in JDK 17.
 
@@ -188,7 +188,7 @@ Finally, the Foreign Linker API \& Foreign-Memory Access API has evolved togethe
 * [JEP-419](https://openjdk.java.net/jeps/419) - Second incubator in JDK 18
 * [JEP-424](https://openjdk.java.net/jeps/424) - First preview expected in JDK 19
 
-### jextract {#h3-11-jextract}
+### jextract
 
 And finally, there is the fantastic jextract tool. While it's not an API or part of the JDK itself, it is an essential tool for Project Panama.
 
@@ -204,14 +204,14 @@ jextract --source -t org.opengl -I /usr/include /usr/include/GL/glut.h
 ```
 
 
-JNI vs. Panama {#h2-12-jni-vs-panama}
--------------------------------------
+JNI vs. Panama
+--------------
 
 Since JNI is the current standard and Panama aims to replace that, it makes sense to compare the two.
 
 Let's take a simple example of calling the `getpid` function from the standard C `unistd` header.
 
-### JNI {#h3-13-jni}
+### JNI
 
 ![getpid with JNI](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5jdqdni0gvv6zubwzq8f.png)
 
@@ -227,7 +227,7 @@ Pray, if you must, that all this works without exposing the app to a security vu
 
 Ooof! This was just a simple `getpid` call; imagine writing something like an OpenGL interface or GPU offloading program using JNI.
 
-### Panama {#h3-14-panama}
+### Panama
 
 ![getpid with panama](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3hj2rlctq3rnhi1o0mp4.png)
 
@@ -247,7 +247,7 @@ jextract generates everything using the Foreign Linker and Foreign Memory API. I
 
 For simple native calls, you can use the first approach, but for complex ones, the second approach is much better and scalable.
 
-### Benchmark {#h3-15-benchmark}
+### Benchmark
 
 Let's run some [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) benchmarks to compare the performance of JNI and Panama API. We will use the `getpid` function from the standard C `unistd` header for the comparison.
 
@@ -322,8 +322,8 @@ It seems like using Panama API is slightly faster than JNI, which is at the incu
 
 If you would like to run the benchmarks yourself, follow the instructions in the readme file on [the source repository](https://github.com/deepu105/Java-FFI-benchmarks)
 
-So, are we there yet? {#h2-16-so-are-we-there-yet}
---------------------------------------------------
+So, are we there yet?
+---------------------
 
 The current state of Project Panama, as of JDK 18, is as follows.
 
@@ -335,8 +335,8 @@ The current state of Project Panama, as of JDK 18, is as follows.
 * Native/off-heap memory access
 * Documentation needs huge improvement. It's an incubator feature, so expect this to improve.
 
-Learn more about Java and FFI {#h2-17-learn-more-about-java-and-ffi}
---------------------------------------------------------------------
+Learn more about Java and FFI
+-----------------------------
 
 If you want to learn more about Java and FFI in general, check out these additional resources.
 

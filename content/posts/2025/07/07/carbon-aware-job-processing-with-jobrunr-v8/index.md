@@ -28,8 +28,8 @@ We should not wait until something happens top-down. What if we as developers ca
 
 With JobRunr v8's Carbon Aware Job Processing feature, you can fire off smart jobs that will be processed when the least amount of CO2 is being generated. Let's explore new features of JobRunr v8 and how to schedule jobs in a smart way to reduce instead of further increase your carbon footprint.
 
-What is JobRunr? {#h2-0-what-is-jobrunr}
-----------------------------------------
+What is JobRunr?
+----------------
 
 JobRunr is an modern background job scheduling library that runs on the Java Virtual Machine. With JobRunr, firing off jobs becomes trivial:
 
@@ -49,8 +49,8 @@ The following Foojay articles explore the basics of JobRunr:
 
 This article focuses on the latest release of JobRunr: v8, that is packed with a slew of new features: from Kotlin data serialisation, Kubernetes autoscaling integration possibilities with KEDA, several database optimisations to Carbon Aware Job Processing. Let us take a closer look using a real-life example.
 
-Carbon Aware Job Processing {#h2-1-carbon-aware-job-processing}
----------------------------------------------------------------
+Carbon Aware Job Processing
+---------------------------
 
 As mentioned in the introduction, almost all modern web-based applications that are deployed in some kind of cloud environment make heavy use of asynchronous data processing as part of their core business. Many of these calculations or "serverless funcs" are not time bound. That is, they do not have to be processed immediately. JobRunr makes use of this to schedule these jobs in such a way that their energy consumption impact is minimised by relying on energy forecast information of energy data providers such as the [ENTSO-E](https://www.entsoe.eu/) services for the European Union (EU).
 
@@ -108,7 +108,7 @@ BackgroundJob.schedule(CarbonAwarePeriod.between(Instant.now().plus(1, HOURS), I
 
 More examples and the exact API usage can be found in [the JobRunr documentation](https://www.jobrunr.io/en/documentation/background-methods/carbon-aware-jobs/).
 
-### Carbon Aware Configuration {#h3-2-carbon-aware-configuration}
+### Carbon Aware Configuration
 
 Before you can make use of Carbon Aware jobs, you will have to enable the new feature, as JobRunr needs to know where your data centre is located that will run JobRunr's `BackgroundJobServer` actually processing the job. Depending on your location, and thus local energy provider and natural resources available to generate energy, the output of the Carbon Intensity forecast might be different. Scheduling that survey job at 18h in Belgium might work out fine in the summer, but in Norway it could be that the optimal time for the lowest CO2 emissions is two hours earlier. Without explicitly providing that area, JobRunr will make an estimated guess based on the IP, but VPNs might mess up the settings.
 
@@ -149,7 +149,7 @@ Some more examples when adding slack to a background job might be a good way to 
 * LLM data set training and ingestion;
 * ...
 
-### What If There Is No Forecast? {#h3-3-what-if-there-is-no-forecast}
+### What If There Is No Forecast?
 
 Sometimes the figurative forecast is not all rainbows and sunshine. Sometimes, things break, async stuff clashes with each other, and unexpected things happen: for instance when the Carbon Intensity API is down and no forecast can be downloaded for a particular period or area. Or how about the deadline that passed before JobRunr was able to calculate when to schedule the job. In those rare cases, the job will still be processed the same way as if Carbon Aware Job Processing was disabled. JobRunr guarantees that all jobs will be enqueued \& processed.
 
@@ -161,8 +161,8 @@ In the screenshot above, our example job is initially planned to run between 17h
 
 Additionally, you can see for which area the energy data was pulled from (in this case Belgium). It is very sunny and summertime right now, but in a few hours everyone will return home and start consuming more energy: as you can see from 19h and on, energy consumption will have a much bigger carbon impact.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 By leveraging JobRunr on the JVM, scheduling background jobs becomes a piece of cake.
 

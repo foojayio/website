@@ -29,7 +29,7 @@ JFR and its companion tool [JDK Mission Control](https://openjdk.java.net/projec
 
 Using the combination of JFR and JMC, you can get all kinds of information about your Java application, such as events on garbage collection, compilation, classloading, memory allocation, file and socket IO, method profiling data, and much more. You can find some more links to related useful resources towards the end of this post.
 
-### Custom Flight Recorder Events {#_custom_flight_recorder_events}
+### Custom Flight Recorder Events
 
 One thing that's really great about JFR and JMC is that you're not limited to the events and data baked into the JVM and platform libraries: JFR also provides an API for implementing custom events. That way you can use the low-overhead event recording infrastructure (its goal is to add at most 1% performance overhead) for your own event types. This allows you to record and analyze higher-level events, using the language of your application-specific domain.
 
@@ -182,7 +182,7 @@ public class Metrics {
 
 Note this step isn't strictly needed, the event type can also be used without explicit registration. But doing so will later on allow to apply specific settings for the event in Mission Control (see below), also if no event of this type has been emitted yet.
 
-### Creating JFR Recordings {#_creating_jfr_recordings}
+### Creating JFR Recordings
 
 Now let's capture some JAX-RS API events using Flight Recorder and inspect them in Mission Control.
 
@@ -241,7 +241,7 @@ jfr print --json --categories JAX-RS my-recording.jfr
 ```
 
 
-### Event Settings {#_event_settings}
+### Event Settings
 
 Sometimes it's desirable to configure detailed behaviors of a given event type. For the JAX-RS invocation event it might for instance make sense to only log invocations of particular paths in a specific recording, allowing for a smaller recording size and keeping the focus on a particular subset of all invocations. JFR supports this by the notion of event settings. Such settings can be specified when creating a recording; based on the active settings, particular events will be included or excluded in the recording.
 
@@ -327,7 +327,7 @@ Perform some tasks in the Todo web app and stop the recording. You should see on
 
 **Note:** In order to apply specific settings when creating a recording on the CLI using *jcmd* , edit the settings as described above. Then go to the Template Manager and export the profile you'd like to use. When starting the recording via *jcmd* , specify the settings file via the `settings=/path/to/settings.jfc` parameter.
 
-### JFR Event Streaming {#_jfr_event_streaming}
+### JFR Event Streaming
 
 Flight Recorder files are great for analyzing performance characteristics in an "offline" approach: you can take recordings in your production environment and ship them to your work station or a remote support team, without requiring live access to the running application. This is also an interesting mode for open-source projects, where maintainers typically don't have access to running applications of their users. Exchanging Flight Recordings (limited to a sensible subset of information, so to avoid exposure of confidential internals) might allow open source developers to gain insight into characteristics of their libraries when deployed to production at their users.
 
@@ -337,7 +337,7 @@ This is where [JEP 349](https://openjdk.java.net/jeps/349) ("JFR Event Streaming
 
 Now it may be prohibitively expensive to stream each and every event with all its detailed information to remote clients. But that's not needed for monitoring purposes anyways. Instead, we can expose metrics based on our events, such as the total number and frequency of REST API invocations, or the average and 99th percentile duration of the calls.
 
-### MicroProfile Metrics {#_microprofile_metrics}
+### MicroProfile Metrics
 
 The following shows a basic implementation of exposing these metrics for the JAX-RS API events to Prometheus/Grafana, where they can be visualized using a dashboard. Being based on Quarkus, the Todo web application can leverage all the [MicroProfile](https://microprofile.io/) APIs. On of them is the [MicroProfile Metrics API](https://github.com/eclipse/microprofile-metrics), which defines a "unified way for Microprofile servers to export Monitoring data ("Telemetry") to management agents".
 
@@ -429,7 +429,7 @@ Combining the monitoring of live key metrics with the deep insights possible via
 * Set up an alert in Grafana on the key metrics, e.g. mean duration of the REST calls, or 99th percentile thereof
 * If the alert triggers, take a dump of the last N minutes of the continuous recording via JMC or *jcmd* (using the `JFR.dump` command), and analyze that detailed recording to understand what was happening in the time leading to the alert
 
-### Summary and Related Work {#_summary_and_related_work}
+### Summary and Related Work
 
 Flight Recorder and Mission Control are excellent tools providing deep insight into the performance characteristics of Java applications. While there's a large amount of data and highly valuable information provided out the box, JFR and JMC also allow for the recording of custom, application-specific events. With its low overhead, JFR can be enabled on a permanent basis in production environments. Combined with the Event Streaming API introduced in Java 14, this opens up an attractive, very performant alternative to other means of capturing analysis information at application runtime, such as logging libraries. Providing live key metrics derived from JFR events to tools such as Prometheus and Grafana enables monitoring and alerting in "real-time".
 

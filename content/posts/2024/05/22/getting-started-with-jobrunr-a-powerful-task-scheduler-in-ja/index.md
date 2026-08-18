@@ -25,10 +25,10 @@ enlighterjs: true
 frozen: false
 ---
 
-What is JobRunr {#h2-0-what-is-jobrunr}
----------------------------------------
+What is JobRunr
+---------------
 
-### Task scheduler in Java {#h3-1-task-scheduler-in-java}
+### Task scheduler in Java
 
 JobRunr is an open-source Java library for **task scheduling** and **distributed background job** processing. It offers an effortless way to **perform background tasks using only Java 8 lambdas**.
 
@@ -38,13 +38,13 @@ In the event of a failure, JobRunr **automatically retries** the job. Thanks to 
 
 The **software** **integrates** **easily** **into** **any Java application** by adding JobRunr as a dependency. It also works seamlessly with frameworks like Spring Boot, Quarkus, and Micronaut.
 
-### JobRunr use cases in Java {#h3-2-jobrunr-use-cases-in-java}
+### JobRunr use cases in Java
 
 The applications of JobRunr are almost limitless: **anything that can be done in Java can be automated and scheduled with JobRunr**. Would you like to send mass notifications, fire webhooks, process images, or videos? JobRunr can do it all for you, so you can focus on solving the business problems at hand.
 
 JobRunr is **used in various industries** from retail to healthcare to marketing, no matter the size of your company. We have written a few articles about how JobRunr Pro is used in those industries: [visit to learn more](https://www.jobrunr.io/en/use-case/ "visit to learn more").
 
-### Core task scheduler features for Developers {#h3-3-core-task-scheduler-features-for-developers}
+### Core task scheduler features for Developers
 
 * **Developer friendly:** the API of JobRunr is simple, flexible and straightforward - with a simple, yet extensive set up.
 * **Simple adoption:** JobRunr fits into any software architecture and requires little changes to your codebase while requiring a low amount of dependencies.
@@ -57,12 +57,12 @@ JobRunr is **used in various industries** from retail to healthcare to marketing
 * **Virtual threads:** JobRunr supports virtual threads to allow for an increased throughput of I/O jobs.
 * **Comprehensive documentation:** the documentation covers everything from setup to advanced features, easing the learning curve.
 
-### What's next: Carbon-aware jobs {#h3-4-what-s-next-carbon-aware-jobs}
+### What's next: Carbon-aware jobs
 
 JobRunr is now in collaboration with MindWave to add [carbon-aware](https://www.linkedin.com/pulse/introducing-carbon-aware-jobs-jobrunr-jobrunr-wtyee/?trackingId=%2Fg1pS789Y0r6BoaHf%2B1ppg%3D%3D "carbon-aware") task scheduler in Java. The **carbon-aware job feature** aims to optimize job execution by selecting periods with the **highest availability of renewable energy** . The goal is to work towards achieving one of the [**SDGs' objectives**](https://sdgs.un.org/goals/goal12 "SDGs’ objectives").
 
-An example: Automated order fulfillment system using JobRunr {#h2-5-an-example-automated-order-fulfillment-system-using-jobrunr}
---------------------------------------------------------------------------------------------------------------------------------
+An example: Automated order fulfillment system using JobRunr
+------------------------------------------------------------
 
 To illustrate how JobRunr works, let's simulate an [order fulfillment](https://en.wikipedia.org/wiki/Order_fulfillment "order fulfillment") system. Order fulfillment involves tasks required to completely satisfy a customer order. It's a process where each step can affect another, which happens on several levels. For example, a confirmed order reduces stock and to avoid stock-outs it is important to monitor and replenish the inventory.
 
@@ -81,7 +81,7 @@ This setup will allow to learn:
 
 > Please note that this example focuses on JobRunr side of things, we leave the implementation of object such as the Inventory, the `Order`, the `Product`, etc. as an exercise. Also the running of tasks is simulated by `Thread.sleep` which implies explicit handling of `InterruptedException`, you probably won't need those in an actual application. Although if you encounter such a case in your project it's a [best practice to throw the InterruptedException](https://www.jobrunr.io/en/documentation/background-methods/deleting-jobs/ "best practice to throw the InterruptedException"), JobRunr will handle it.
 
-### Setting up JobRunr in a Spring Boot application {#h3-6-setting-up-jobrunr-in-a-spring-boot-application}
+### Setting up JobRunr in a Spring Boot application
 
 #### Adding the JobRunr Spring Boot starter dependency
 
@@ -125,11 +125,11 @@ Those will be useful to our recurring jobs as we'll see later!
 
 JobRunr offers [advanced configuration](https://www.jobrunr.io/en/documentation/configuration/spring/#advanced-configuration "advanced configuration") options allowing to fine tune the application. When using the JobRunr's Spring Boot starters or the other frameworks integrations, it's also possible to override the predefined Beans.
 
-### Implementing the order fulfillment system {#h3-7-implementing-the-order-fulfillment-system}
+### Implementing the order fulfillment system
 
 Now that the setup is done, we can start implementing our simulated order fulfillment processes. We'll focus on the JobRunr sides of things, i.e., enqueueing jobs, creating recurring jobs and hooking into a job lifecycle.
 
-### Triggering tasks on order confirmation {#h3-8-triggering-tasks-on-order-confirmation}
+### Triggering tasks on order confirmation
 
 Once an order is confirmed, our system will trigger three tasks:
 
@@ -220,7 +220,7 @@ public class OrderFulfillmentController {
 ```
 
 
-### Creating recurring tasks {#h3-9-creating-recurring-tasks}
+### Creating recurring tasks
 
 The first part of our order fulfillment system is done. Now, we'll add recurring tasks to know how well the company is doing and to make sure we never go out-of-stock!
 
@@ -286,7 +286,7 @@ public class OrderFulfillmentTasks {
 JobRunr will automatically register methods annotated with `@Reccuring` and schedule them for execution at the specified times!
 > Note the use of application properties, we promised to come back to them. We use them to configure the CRON expressions of our recurring jobs. The last property is used to provide the locations of our different warehouses. Here we have assumed that our imaginary company operates from Belgium and set the zoneId accordingly.
 
-### Triggering an alert on task failure {#h3-10-triggering-an-alert-on-task-failure}
+### Triggering an alert on task failure
 
 The system may encounter an issue that causes jobs to fail during execution. In our scenario, it's important to alert the operations team so they can make sure the failed task is one way or another completed.
 
@@ -328,7 +328,7 @@ public class BackgroundJobServerBeanPostProcessor implements BeanPostProcessor {
 ```
 
 
-### Running the application {#h3-11-running-the-application}
+### Running the application
 
 And we're done, let's enjoy the results! Start the application and head over to <http://localhost:8000/dashboard>. You should land on a beautiful dashboard, feel free to visit other pages.  
 
@@ -344,7 +344,7 @@ task scheduler in Java" class="wp-image-110991">
 
 If you haven't done so yet, visit <http://localhost:8000/reccuring-jobs> to see the recurring jobs. Have fun triggering them!
 
-### Going further {#h3-12-going-further}
+### Going further
 
 We could not include all the features of JobRunr in our example. We encourage interested developers to explore the library. You can [fork the example project](https://github.com/jobrunr/example-order-fulfillment "fork the example project") and make it your own! We also have a few more examples to get you started: [example-spring](https://github.com/jobrunr/example-spring "example-spring"), [example-quarkus](https://github.com/jobrunr/example-quarkus "example-quarkus"), [example-micronaut](https://github.com/jobrunr/example-micronaut "example-micronaut"). If you're having trouble, you can [find most of the information you need in the documentation](https://www.jobrunr.io/en/documentation/ "find most of the information you need in the documentation") or [start a discussion on Github](https://github.com/jobrunr/jobrunr/discussions "start a discussion on Github") to get help.
 
@@ -358,14 +358,14 @@ Here is a non-exhaustive list of potential things to explore:
 * **Logging job progress** : keep an eye on the [progress of a job](https://www.jobrunr.io/en/documentation/background-methods/logging-progress/ "progress of a job") by adding a progress bar. If you want to see this live in action, trigger the recurring job that with id `daily-resupply`, find the job on the jobs page, click on the job id and wait until it starts processing 👀
 * **Different ways of configuring jobs** : [check out 'Enqueueing jobs'](https://www.jobrunr.io/en/documentation/background-methods/enqueueing-jobs/ "Check out ‘Enqueueing jobs‘") for some usage examples on how to enqueue jobs configured using annotations or builders.
 
-Conclusion {#h2-13-conclusion}
-------------------------------
+Conclusion
+----------
 
 JobRunr is a great solution for processing your background jobs. It can be run in a distributed system and has built-in monitoring. The library is actively maintained, which means it's always getting new features and improving existing ones. That's in part thanks to the great community helping us by contributing and providing feedback. We'd love for you to contribute or provide feedback on [GitHub](https://github.com/jobrunr/jobrunr "GitHub").
 
 To make open source development sustainable, we develop and maintain JobRunr Pro. It offers [Enterprise grade features](https://www.jobrunr.io/en/documentation/pro/ "Enterprise grade features") such as Batches, Rate Limiters, Dashboard Single Sign-On (SSO), and many more. If you need those extra features, consider taking a [subscription](https://www.jobrunr.io/en/pricing/). You'll not only support open source development but also our [planet](https://www.jobrunr.io/en/blog/2024-01-18-trees-planted/ "planet").
 
-### Resources {#h3-14-resources}
+### Resources
 
 The complete source code for the example is available [over on GitHub](https://github.com/jobrunr/example-order-fulfillment "over on GitHub").
 

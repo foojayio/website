@@ -22,8 +22,8 @@ I got both boards for free, but what I write here and show in the video is not c
 
 {{< youtube X_t8DiUWBUo >}}
 
-OrangePi Lineup {#h2-0-orangepi-lineup}
----------------------------------------
+OrangePi Lineup
+---------------
 
 OrangePi offers a diverse range of single board computers at various price points. For this table, I focused on the two boards that I received:
 
@@ -37,12 +37,12 @@ OrangePi offers a diverse range of single board computers at various price point
 The OrangePi 5 Ultra is a high-end board with the powerful RK3588 SOC (same chip used in many Android TV boxes and mini PCs), while the OrangePi RV2 is their budget RISC-V with a Kylin X1 processor.
 ![](rpi5-orangepi5-orangepirv2-1024x540.jpg)
 
-Test Boards {#h2-1-test-boards}
--------------------------------
+Test Boards
+-----------
 
 I received two boards, two eMMC modules, and two power supplies. So everything to get me started! But to speed things up, I decided to use SD cards for the Operating System and will use the eMMC modules later, which should give a significant better performance.
 
-### OrangePi 5 Ultra {#h3-2-orangepi-5-ultra}
+### OrangePi 5 Ultra
 
 More info about the OrangePi 5 Ultra is available here:
 
@@ -53,7 +53,7 @@ More info about the OrangePi 5 Ultra is available here:
 
 I used the image: `Orangepi5ultra_1.0.0_ubuntu_jammy_desktop_xfce_linux6.1.43`.
 
-### OrangePi RV2 {#h3-3-orangepi-rv2}
+### OrangePi RV2
 
 More info about the OrangePi RV2 is available here:
 
@@ -64,20 +64,20 @@ More info about the OrangePi RV2 is available here:
 
 I used the image: `Orangepirv2_1.0.0_ubuntu_noble_desktop_gnome_linux6.6.63`.
 
-Getting Started {#h2-4-getting-started}
----------------------------------------
+Getting Started
+---------------
 
-### Hardware Setup {#h3-5-hardware-setup}
+### Hardware Setup
 
 Both boards arrived well-packaged. The OrangePi 5 Ultra looks almost identical as a Raspberry Pi 5. It has an excellent build quality with very similar connecters, except it has a full HDMI in and out, compared to two micro HDMI out on the Raspberry Pi 5. The RV2 has again the same size as a Raspberry Pi, but with a completely different port layout and only 26 GPIO pins compared to 40 on the Raspberry Pi 5 and OrangePi 5 Ultra. Both boards have a detachable Wi-Fi antenna-cable.
 ![](orangepi-connections-1024x429.jpg)
 
 Installation for both followed a similar pattern: download the Ubuntu image from OrangePi's Google Drive, flash to microSD, and boot.
 
-Java Installation and Testing {#h2-6-java-installation-and-testing}
--------------------------------------------------------------------
+Java Installation and Testing
+-----------------------------
 
-### OrangePi 5 Ultra (ARM) {#h3-7-orangepi-5-ultra-arm}
+### OrangePi 5 Ultra (ARM)
 
 For the ARM-based 5 Ultra, I wanted to test the full Java stack including JavaFX. With SDKMAN I could quickly install a JDK and JBang.
 
@@ -112,7 +112,7 @@ cd pi4j-jbang
 
 The plain Java examples worked perfectly. The JavaFX example also ran smoothly, demonstrating that the RK3588 GPU is well-supported in Ubuntu. The board feels very responsive with these first, quick tests.
 
-### OrangePi RV2 (RISC-V) {#h3-8-orangepi-rv2-risc-v}
+### OrangePi RV2 (RISC-V)
 
 The RV2 was more challenging, as expected with RISC-V hardware.
 
@@ -149,8 +149,8 @@ The RV2 scores lower than both the Raspberry Pi 4 and 5 across most tests. This 
 
 In contrast, the OrangePi 5 Ultra performs exceptionally well and should be comparable to the Raspberry Pi 5 performance thanks to the powerful RK3588 SOC. But that's an other personal goal for 2026, setting up a good benchmark to compare Java performance on various boards...
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 These two boards represent vastly different approaches. The OrangePi 5 Ultra is a premium board that competes directly with high-end single-board and desktop computers for many tasks. It's more expensive than a Raspberry Pi but delivers impressive performance. Thanks to SDKMAN and the various Java tools that work just as wel as on any other type of Linux computer, including JavaFX, it's an attractive platform for serious development work for a low price.
 

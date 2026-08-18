@@ -28,8 +28,8 @@ Rewriting a project isn't an immense challenge, mostly -- however, doing it whil
 
 That requires a lot of planning and coordination.
 
-Why Modernize? {#h2-0-why-modernize}
-------------------------------------
+Why Modernize?
+--------------
 
 I don't think we should update projects for the sake of the "latest and greatest". There's a reason common legacy systems like COBOL are still used. Valuable code doesn't lose its shine just because of age. There's a lot to be said for "code that works". Especially if it was built by hundreds of developers decades ago. There's a lot of hidden business logic model knowledge in there...
 
@@ -43,12 +43,12 @@ You usually shouldn't migrate for better tooling but better observability, orche
 
 Modernization gives you the opportunity to rethink the original system design. However, this is a risky proposition, as it makes it pretty easy to introduce subtle behavioral differences.
 
-Challenges {#h2-1-challenges}
------------------------------
+Challenges
+----------
 
 Before we head to preparations, there are several deep challenges we need to review and mitigate.
 
-### 1. Access to Legacy Source Code {#h3-2-1-access-to-legacy-source-code}
+### 1. Access to Legacy Source Code
 
 Sometimes, the source code of the legacy codebase is no longer workable. This might mean we can't add even basic features/functionality to the original project. This can happen because of many reasons (legal or technical) and would make migration harder. Unfamiliar code is an immense problem and would make the migration challenging, although possible.
 
@@ -58,7 +58,7 @@ This is important during the migration phase but can't always work. If we don't 
 
 Sometimes, the source is no longer available or was lost. This makes preparation harder.
 
-### 2. Inability to Isolate Legacy System {#h3-3-2-inability-to-isolate-legacy-system}
+### 2. Inability to Isolate Legacy System
 
 In order to analyze the legacy system, we need the ability to run it in isolation so we can test it and verify its behaviors. This is a common and important practice, but isn't always possible.
 
@@ -68,20 +68,20 @@ This is probably the biggest problem/challenge you can face. Sometimes an extern
 
 Another workaround is to set up a tenant for testing. E.g. if a system manages payroll, set up a fake employee for testing and perform the tasks discussed below against production. This is an enormous danger and a problem, so this situation is far from ideal and we should take it only if no other option exists.
 
-### 3. Odd Formats and Custom Stores {#h3-4-3-odd-formats-and-custom-stores}
+### 3. Odd Formats and Custom Stores
 
 Some legacy systems might rely on deeply historical approaches to coding. A great example is COBOL. In it, they stored numbers based on their form and are closer to BCD (Java's BigDecimal is the closest example). This isn't bad. For financial systems, this is actually the right way to go. But it might introduce incompatibilities when processing numeric data that might prevent the systems from running in parallel.
 
 Worse, COBOL has a complex file storage solution that isn't a standard SQL database. Moving away from something like that (or even some niche newer systems) can be challenging. Thankfully, there are solutions, but they might limit the practicality of running both the legacy and new product in parallel.
 
-Preparation {#h2-5-preparation}
--------------------------------
+Preparation
+-----------
 
 Before we need to even consider an endeavor of this type, we need to evaluate and prepare for the migration. The migration will be painful regardless of what you do, but this stage lets you shrink the size of the band aid you need to pull off.
 
 There are many general rules and setups you need to follow before undergoing a code migration. Each one of these is something you need to be deeply familiar with.
 
-### 1. Feature Extraction {#h3-6-1-feature-extraction}
+### 1. Feature Extraction
 
 When we have a long running legacy system, it's almost impossible to keep track of every feature it has and the role it plays in the final product. There are documents, but they are hard to read and go through when reviewing. Issue trackers are great for followup but they aren't great maps.
 
@@ -93,7 +93,7 @@ I often use a spreadsheet where we list each feature and minor behavior. These s
 
 Cutting corners is easy at this stage. You might pay for them later. There were times I assigned this requirement to a junior software developer without properly reviewing the output. I ended up regretting that, as there were cases where we missed nuances within the documentation or code.
 
-### 2. Compliance Tests {#h3-7-2-compliance-tests}
+### 2. Compliance Tests
 
 This is the most important aspect for a migration process. While unit tests are good, compliance and integration tests are crucial for a migration process.
 
@@ -113,32 +113,32 @@ Once we integrate a test and the issue is closed, we color the row green.
 
 Notice that we still need to test elements in isolation with unit tests. The compliance tests help verify compatibility. Unit tests check quality and also complete much faster, which is important to productivity.
 
-### 3. Code Coverage {#h3-8-3-code-coverage}
+### 3. Code Coverage
 
 Code coverage tools might not be available for your legacy system. However, if they are, you need to use them.
 
 One of the best ways to verify that your compliance tests are extensive enough is through these tools. You need to do code reviews on every coverage report. We should validate every line or statement that isn't covered to make sure there's no hidden functionality that we missed.
 
-### 4. Recording and Backup {#h3-9-4-recording-and-backup}
+### 4. Recording and Backup
 
 If it's possible, record network requests to the current server for testing. You can use a backup of the current database and the recorded requests to create an integration test of "real world usage" for the new version. Use live data as much as possible during development to prevent surprises in production.
 
 This might not be tenable. Your live database might be access restricted or it might be too big for usage during development. There's obviously privacy and security issues related to recording network traffic, so this is only applicable when it can actually be done.
 
-### 5. Scale {#h3-10-5-scale}
+### 5. Scale
 
 One of the great things about migrating an existing project is that we have a perfect sense of scale. We know the traffic. We know the amount of data and we understand the business constraints.
 
 What we don't know is whether the new system can handle the peak load througput we require. We need to extract these details and create stress tests for the critical portions of the system. We need to verify performance, ideally compare it to the legacy to make sure we aren't going back in terms of performance.
 
-Targets {#h2-11-targets}
-------------------------
+Targets
+-------
 
 Which parts should we migrate and in what way?
 
 What should we target first and how should we prioritize this work?
 
-### 1. Authentication and Authorization {#h3-12-1-authentication-and-authorization}
+### 1. Authentication and Authorization
 
 Many older systems embed the authorization modules as part of a monolith process. This will make your migration challenging regardless of the strategy you take. Migration is also a great opportunity to refresh these old concepts and introduce a more secure/scalable approach for authorization.
 
@@ -146,7 +146,7 @@ A common strategy in cases like this is to send a user to "sign up again" or "mi
 
 However, the benefit of separating authentication and authorization will help in future migrations and modularity. User details in the shared database is normally one of the hardest things to migrate.
 
-### 2. Database {#h3-13-2-database}
+### 2. Database
 
 When dealing with the legacy system, we can implement the new version on top of the existing database. This is a common approach and has some advantages:
 
@@ -161,7 +161,7 @@ There are also a few serious disadvantages:
 
 If the storage system is modern enough and powerful enough, the approach of migrating the data in this way makes sense. It removes, or at least postpones, a problematic part of the migration process.
 
-### 3. Caching {#h3-14-3-caching}
+### 3. Caching
 
 The following three tips are at the root of application performance. If you get them right, your apps will be fast:
 
@@ -173,26 +173,26 @@ That's it. Yet very few developers use enough caching. That's because proper cac
 
 Disabling caching during migration might not be a realistic option, but reducing retention might mitigate some issues.
 
-Strategy {#h2-15-strategy}
---------------------------
+Strategy
+--------
 
 There are several ways we can address a large-scale migration. We can look at the "big picture" in a migration e.g. Monolith to Microservices. But more often than not, there are more nuanced distinctions during the process.
 
 I'll skip the obvious "complete rewrite" where we instantly replace the old product with the new one. I think it's pretty obvious and we all understand the risks/implications.
 
-### 1. Module by Module {#h3-16-1-module-by-module}
+### 1. Module by Module
 
 If you can pick this strategy and slowly replace individual pieces of the legacy code with new modules, then this is the ideal way to go. This is also one of the biggest selling points behind microservices.
 
 This approach can work well if there's still a team that manages and updates the legacy code. If one doesn't exist, you might have a serious problem with this approach.
 
-### 2. Concurrent Deployment {#h3-17-2-concurrent-deployment}
+### 2. Concurrent Deployment
 
 This can work for a shared database deployment. We can deploy the new product to a separate server, with both products using the same database as mentioned above. There are many challenges with this approach, but I picked it often, as it's probably the simplest one to start with.
 
 Since the old product is still available, there's a mitigation workaround for existing users. It's often recommended to plan downtime for the legacy servers to force existing users to migrate. Otherwise, in this scenario, you might end up with users who refuse to move to the new product.
 
-### 3. Hidden Deployment {#h3-18-3-hidden-deployment}
+### 3. Hidden Deployment
 
 In this strategy, we hide the existing product from the public and set up the new system in its place. In order to ease migration, the new product queries the old product for missing information.
 
@@ -202,18 +202,18 @@ The enormous benefit is that we can migrate the database while keeping compatibi
 
 A major downside is that this might perpetuate the legacy code's existence. It might work against our development goals as a result of that.
 
-Implementation {#h2-19-implementation}
---------------------------------------
+Implementation
+--------------
 
 You finished writing the code. We're ready to pull the trigger and do the migration... Now we need to update the users that the migration is going to take place. You don't want an angry customer complaining that something suddenly stopped working.
 
-### 1. Rehearsal {#h3-20-1-rehearsal}
+### 1. Rehearsal
 
 If possible, perform a dry run and prepare a script for the migration process. When I say script, I don't mean code. I mean a script of responsibilities and tasks that need to be performed.
 
 We need to verify that everything works as the migration completes. If something is broken, there needs to be a script to undo everything. You're better off retreating to redeploy another day. I'd rather have a migration that fails early that we can "walk back" from than having something "half-baked" in production.
 
-### 2. Who? {#h3-21-2-who}
+### 2. Who?
 
 In my opinion you should use a smaller team for the actual deployment of the migrated software. Too many people can create confusion. You need the following personnel on board:
 
@@ -224,7 +224,7 @@ In my opinion you should use a smaller team for the actual deployment of the mig
 
 There's a tendency to make a code fix to get the migration through. This works OK for smaller startups and I'm pretty guilty of that myself. But if you're working at scale, there's no way to do it. A code change done "on the spot" can't pass the tests and might introduce terrible problems. It's probably a bad idea.
 
-### 3. When? {#h3-22-3-when}
+### 3. When?
 
 The axiom "don't deploy on a Friday" might be a mistake for this case. I find Fridays are a great migration period when I'm willing to sacrifice a weekend. Obviously I'm not advocating forcing people to work the weekend. But if there's interest in doing this (in exchange for vacation time) then low traffic days are the ideal time for making major changes.
 
@@ -232,18 +232,18 @@ If you work in multiple time zones, developers in the least active time zone mig
 
 Agility in these situations is crucial. Responding to changes quickly can make the difference between reverting a deployment and soldering on.
 
-### 4. Staged Rollout {#h3-23-4-staged-rollout}
+### 4. Staged Rollout
 
 With small updates, we can stage our releases and push the update to a subset of users. Unfortunately, when we do a major change, I find it more of a hindrance. The source of errors becomes harder to distinguish if you have both systems running. Both systems need to run concurrently, and it might cause additional friction.
 
-Post Migration {#h2-24-post-migration}
---------------------------------------
+Post Migration
+--------------
 
 A couple of weeks had passed, things calmed down, and the migration worked. Eventually.
 
 Now what?
 
-### 1. Retirement Plan {#h3-25-1-retirement-plan}
+### 1. Retirement Plan
 
 As part of the migration, we brought with us a large set of features from legacy. We probably need some of them, while some others might not be necessary. After finishing the deployment, we need to decide on the retirement plan. Which features that came from legacy should be retired and how?
 
@@ -257,20 +257,20 @@ Even more important is the retirement of the running legacy. If you chose a migr
 
 Tools such as network monitors can also help gauge the level of usage. If you have the ability to edit the legacy or a proxy into the legacy this is the time to collect data about the usage. Detect the users that still depend on that and plan the email campaign/process for moving them on.
 
-### 2. Use Tooling to Avoid Future Legacy {#h3-26-2-use-tooling-to-avoid-future-legacy}
+### 2. Use Tooling to Avoid Future Legacy
 
 A modern system can enjoy many of the newer capabilities at our disposal. CI/CD processes include sophisticated linters that detect security issues, bugs and perform reviews that are far superior to their human counterparts. A code quality tool can make a vast difference to the maintainability of a project.
 
 Your product needs to leverage these new tools so it won't deteriorate back to legacy code status. Security patches get delivered "seamlessly" as pull requests. Changes get implicit reviews to eliminate common mistakes. This enables easier long-term maintenance.
 
-### 3. Maintaining the Compliance Testing {#h3-27-3-maintaining-the-compliance-testing}
+### 3. Maintaining the Compliance Testing
 
 After the migration process, people often discard the compliance tests. It makes sense to convert them to integration tests if possible/necessary, but if you already have integration tests, it might be redundant and harder to maintain than your standard testing.
 
 The same is true for the feature extraction spreadsheet. It's not something that's maintainable and is only a tool for the migration period. Once we're done with that, we should discard it and we shouldn't consider it as authoritative.
 
-Finally {#h2-28-finally}
-------------------------
+Finally
+-------
 
 Migrating old code is always a challenge, as agile practices are crucial when taking on this endeavor.
 

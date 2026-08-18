@@ -32,8 +32,8 @@ Michael also discusses the challenges developers face today, particularly with t
 
 Overall, this interview provides a wealth of knowledge and advice for anyone interested in pursuing a career in software development.
 
-Profile: {#h2-0-profile}
-------------------------
+Profile:
+--------
 
 * 🏠 Home Page: <https://redlich.net/>
 * 📝 Blog: <https://mikesjavacafe.blogspot.com/>
@@ -43,22 +43,22 @@ Profile: {#h2-0-profile}
 * 🔒 Committer, Jakarta NoSQL specification: <https://projects.eclipse.org/content/michael-redlich-committer-jakarta-nosql>
 * 🔒 Committer, Jakarta Data Specification: <https://projects.eclipse.org/content/michael-redlich-committer-jakarta-data>
 
-Key Takeaways: {#h2-1-key-takeaways}
-------------------------------------
+Key Takeaways:
+--------------
 
 1. Young developers should be open to more than one programming language. They should consider contributing to open-source projects to learn more about programming languages and gain experience.
 2. Cloud computing has seen the most significant growth in the software development industry in the past 10-15 years, and developers will need to learn newer technologies to maintain success.
 3. Conferences and Java User Group meetups are great opportunities for developers to learn as much as possible and follow their passions for learning, developing, and contributing.
 4. A growth mindset and willingness to learn and adapt to new technologies is essential to succeed in the software industry.
 
-Fun Facts {#h2-2-fun-facts}
----------------------------
+Fun Facts
+---------
 
 > I'm an avid cyclist, along with my wife, Rowena. I'm also a former marathon runner, having completed 11 marathons and one ultramarathon (50K).  
 >
 > 
 >
-### Bazlur: First of all, congratulations, Mike, on your recent achievement of becoming the Java Champion. How are you feeling? {#h3-3-bazlur-first-of-all-congratulations-mike-on-your-recent-achievement-of-becoming-the-java-champion-how-are-you-feeling}
+### Bazlur: First of all, congratulations, Mike, on your recent achievement of becoming the Java Champion. How are you feeling?
 
 Mike: Thanks, Bazlur! It was an emotional afternoon the day I learned that I was named a Java Champion.
 
@@ -68,7 +68,7 @@ I am, of course, honoured and delighted to be in the company of the Java luminar
 
 
 
-### Bazlur: That's fantastic, Mike! It's great to see your hard work and dedication recognized. You have been a Java champion for many years already. What qualities or attributes do you possess that led to your becoming a Java Champion? {#h3-4-bazlur-that-s-fantastic-mike-it-s-great-to-see-your-hard-work-and-dedication-recognized-you-have-been-a-java-champion-for-many-years-already-what-qualities-or-attributes-do-you-possess-that-led-to-your-becoming-a-java-champion}
+### Bazlur: That's fantastic, Mike! It's great to see your hard work and dedication recognized. You have been a Java champion for many years already. What qualities or attributes do you possess that led to your becoming a Java Champion?
 
 Mike: I believe that having a passion for something is the most significant attribute. I started the Garden State JUG (formerly the ACGNJ JUG) in February 2001. It was a small, tight-knit group, but we weren't well-known for a number of years. It wasn't until 2020, during the height of the pandemic, that four of us, the current co-directors, decided to rebrand the JUG and go on our own.
 
@@ -76,7 +76,7 @@ As a not-for-profit 501(c)(3) organization, we worked hard to get everything in 
 
 
 
-### Bazlur: Your passion for Java and dedication to the community are truly inspiring, Mike. What do you hope to achieve or contribute to the Java community in the future? {#h3-5-bazlur-your-passion-for-java-and-dedication-to-the-community-are-truly-inspiring-mike-what-do-you-hope-to-achieve-or-contribute-to-the-java-community-in-the-future}
+### Bazlur: Your passion for Java and dedication to the community are truly inspiring, Mike. What do you hope to achieve or contribute to the Java community in the future?
 
 Mike: With my upcoming retirement from ExxonMobil, I will be able to dedicate additional time to contribute to the Java community. My plans include the following:
 
@@ -86,7 +86,7 @@ Mike: With my upcoming retirement from ExxonMobil, I will be able to dedicate ad
 
 
 
-### Bazlur: It's lovely to hear about your plans to contribute more to the Java community, Mike! We look forward to your book on Helidon and increased involvement in conferences and JUGs. As you prepare to retire from ExxonMobil, could you please share with us your journey into the software engineering field? Your story would serve as an example for many aspiring developers, and they might gain insight from your experiences. What were some pivotal moments or turning points in your career that you'd like to share? {#h3-6-bazlur-it-s-lovely-to-hear-about-your-plans-to-contribute-more-to-the-java-community-mike-we-look-forward-to-your-book-on-helidon-and-increased-involvement-in-conferences-and-jugs-as-you-prepare-to-retire-from-exxonmobil-could-you-please-share-with-us-your-journey-into-the-software-engineering-field-your-story-would-serve-as-an-example-for-many-aspiring-developers-and-they-might-gain-insight-from-your-experiences-what-were-some-pivotal-moments-or-turning-points-in-your-career-that-you-d-like-to-share}
+### Bazlur: It's lovely to hear about your plans to contribute more to the Java community, Mike! We look forward to your book on Helidon and increased involvement in conferences and JUGs. As you prepare to retire from ExxonMobil, could you please share with us your journey into the software engineering field? Your story would serve as an example for many aspiring developers, and they might gain insight from your experiences. What were some pivotal moments or turning points in your career that you'd like to share?
 
 Mike: Wow, this answer will be somewhat long-winded, so please bear with me.
 
@@ -104,7 +104,7 @@ One of my work colleagues at the time, Bill Varady, had already learned Java and
 
 
 
-### Bazlur: Thank you for sharing your journey, Mike! It's truly inspiring to hear about your experiences, from your early days learning Fortran IV to your contributions at ExxonMobil and becoming a seasoned Java developer. Your commitment to continuous learning and adapting to new technologies is a testament to your dedication to the field. Considering your years of experience in the software engineering field, what key pieces of advice would you give to junior developers or those just starting out in the industry today? Are there any specific skills or practices that you believe are crucial for success in the ever-evolving world of technology? {#h3-7-bazlur-thank-you-for-sharing-your-journey-mike-it-s-truly-inspiring-to-hear-about-your-experiences-from-your-early-days-learning-fortran-iv-to-your-contributions-at-exxonmobil-and-becoming-a-seasoned-java-developer-your-commitment-to-continuous-learning-and-adapting-to-new-technologies-is-a-testament-to-your-dedication-to-the-field-considering-your-years-of-experience-in-the-software-engineering-field-what-key-pieces-of-advice-would-you-give-to-junior-developers-or-those-just-starting-out-in-the-industry-today-are-there-any-specific-skills-or-practices-that-you-believe-are-crucial-for-success-in-the-ever-evolving-world-of-technology}
+### Bazlur: Thank you for sharing your journey, Mike! It's truly inspiring to hear about your experiences, from your early days learning Fortran IV to your contributions at ExxonMobil and becoming a seasoned Java developer. Your commitment to continuous learning and adapting to new technologies is a testament to your dedication to the field. Considering your years of experience in the software engineering field, what key pieces of advice would you give to junior developers or those just starting out in the industry today? Are there any specific skills or practices that you believe are crucial for success in the ever-evolving world of technology?
 
 **Mike**: I suppose the best piece of advice for young developers is not to limit themselves to one programming language.
 
@@ -116,7 +116,7 @@ Young developers should also consider contributing to open-source projects. Even
 
 
 
-### Bazlur: You mentioned contributing to open source, and I understand that you have been involved in two major Jakarta EE specifications. Please share with our audience how your contributions to open-source projects have impacted your career. {#h3-8-bazlur-you-mentioned-contributing-to-open-source-and-i-understand-that-you-have-been-involved-in-two-major-jakarta-ee-specifications-please-share-with-our-audience-how-your-contributions-to-open-source-projects-have-impacted-your-career}
+### Bazlur: You mentioned contributing to open source, and I understand that you have been involved in two major Jakarta EE specifications. Please share with our audience how your contributions to open-source projects have impacted your career.
 
 **Mike:** My work situation is unique since I spent a significant amount of my career at ExxonMobil working in the laboratory, utilizing my computing skills and analyzing instrument data.
 
@@ -124,7 +124,7 @@ For me, learning and practicing the GitHub process for contributing to open-sour
 
 
 
-### Bazlur: Could you provide some guidelines or recommendations for a junior developer looking to contribute to open-source projects? {#h3-9-bazlur-could-you-provide-some-guidelines-or-recommendations-for-a-junior-developer-looking-to-contribute-to-open-source-projects}
+### Bazlur: Could you provide some guidelines or recommendations for a junior developer looking to contribute to open-source projects?
 
 Mike: Contributing to open-source projects can be a rewarding experience. Knowing that you have provided value to a project provides a feeling of accomplishment and confidence in your skills. However, you should first know that you will have to complete a contributor agreement with the organization that maintains the project.
 
@@ -134,7 +134,7 @@ Contributing source code isn't the only way to participate in an open-source pro
 
 
 
-### Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges? {#h3-10-bazlur-let-s-shift-gears-and-talk-about-the-current-state-of-software-development-in-your-opinion-what-are-some-of-the-biggest-challenges-that-developers-face-today-additionally-do-you-have-any-advice-on-how-to-overcome-these-challenges}
+### Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges?
 
 Mike: A lot has changed in software development over the past 10-15 years. I believe that cloud computing has seen the most significant growth.
 
@@ -144,7 +144,7 @@ Developers will need to learn these newer technologies to maintain success. This
 
 
 
-### Bazlur: Thank you for sharing your valuable insight with us; I am sure our readers will benefit immensely. On a different note, could you tell us some funny or interesting stories from your time in the software industry? {#h3-11-bazlur-thank-you-for-sharing-your-valuable-insight-with-us-i-am-sure-our-readers-will-benefit-immensely-on-a-different-note-could-you-tell-us-some-funny-or-interesting-stories-from-your-time-in-the-software-industry}
+### Bazlur: Thank you for sharing your valuable insight with us; I am sure our readers will benefit immensely. On a different note, could you tell us some funny or interesting stories from your time in the software industry?
 
 Mike: I suppose a somewhat amusing anecdote would be the never-ending C++/Java debates I had with my former work colleague, Bill, whom I mentioned earlier. I was already a well-seasoned C++ developer in those days, and Bill was writing applications in Java.
 
@@ -152,7 +152,7 @@ Those debates, much to the delight of my other work colleagues, did shed light o
 
 
 
-### Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information? {#h3-12-bazlur-thank-you-so-much-for-sharing-your-insights-with-us-we-really-appreciate-your-time-if-we-have-any-further-questions-we-will-be-sure-to-reach-out-to-you-before-we-end-is-there-any-parting-advice-or-resources-you-would-like-to-share-with-our-readers-such-as-a-list-of-recommended-books-or-any-other-helpful-information}
+### Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?
 
 Mike: My mom told me many years ago that no one can take away the knowledge you acquire in life. With that in mind, developers should take advantage of conferences and Java User Group meetups and learn as much as possible. Also, follow your passions for learning, developing, and contributing.
 
@@ -160,8 +160,8 @@ I have always been a fan of the Head First series of computing books. They use a
 
 
 
-Conclusion {#h2-13-conclusion}
-------------------------------
+Conclusion
+----------
 
 In conclusion, the interview with Michael P. Redlich provides valuable insights into software development. Michael's journey inspires junior developers and those just starting in the industry.
 

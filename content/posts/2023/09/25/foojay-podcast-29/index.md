@@ -30,8 +30,8 @@ How can we use AI in Java programs or our job as a developer?
 
 {{< youtube Tvk8ykfbkDU >}}
 
-Podcast Apps {#h2-0-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,38 +39,38 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
-### Zoran Sevarac {#h3-2-zoran-sevarac}
+### Zoran Sevarac
 
 * <https://www.linkedin.com/in/zoran-sevarac-phd-49a9a411/>
 * <https://foojay.social/@zsevarac>
 * <https://twitter.com/zsevarac>
 
-### Frank Greco {#h3-3-frank-greco}
+### Frank Greco
 
 * <https://www.linkedin.com/in/frankdgreco/>
 * <https://twitter.com/frankgreco>
 * <https://www.javasig.com/>
 
-### Roni Dover {#h3-4-roni-dover}
+### Roni Dover
 
 * <https://www.linkedin.com/in/ronidover/>
 * <https://twitter.com/doppleware>
 
-Podcast {#h2-5-podcast}
------------------------
+Podcast
+-------
 
-### Host: Frank Delporte {#h3-6-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
 ![](episode_29_guests-1024x574.png)
 
-Content {#h2-7-content}
------------------------
+Content
+-------
 
 00:00 Intro and introduction of the guests  
 

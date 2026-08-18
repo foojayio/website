@@ -25,8 +25,8 @@ To show these possible gains, a dummy application will be presented, and many po
 
 All the code and some extra information used through this article can be found in the [GitHub](https://github.com/ArturGC/the-cost-of-not-knowing-mongodb) repository.
 
-The application: finding fraudulent behavior in transactions {#h2-0-the-application-finding-fraudulent-behavior-in-transactions}
---------------------------------------------------------------------------------------------------------------------------------
+The application: finding fraudulent behavior in transactions
+------------------------------------------------------------
 
 The application goal is to identify fraudulent behavior in a financial transaction system by analyzing the transactions' statuses over a time period for a determined user. The possible transaction statuses are \`approved\`, \`noFunds\`, \`pending\`, and \`rejected\`. Each user is uniquely identifiable by a 64-character hexadecimal \`key\` value.
 
@@ -42,8 +42,8 @@ The following document is an example of a \`reports\` document for the user of \
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | export const reports = \[ { id: 'oneYear', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2021-06-15T00:00:00.000Z'), totals: { approved: 4, noFunds: 1, pending: 1, rejected: 1 }, }, { id: 'threeYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2019-06-15T00:00:00.000Z'), totals: { approved: 8, noFunds: 2, pending: 2, rejected: 2 }, }, { id: 'fiveYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2017-06-15T00:00:00.000Z'), totals: { approved: 12, noFunds: 3, pending: 3, rejected: 3 }, }, { id: 'sevenYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2015-06-15T00:00:00.000Z'), totals: { approved: 16, noFunds: 4, pending: 4, rejected: 4 }, }, { id: 'tenYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2012-06-15T00:00:00.000Z'), totals: { approved: 20, noFunds: 5, pending: 5, rejected: 5 }, }, \]; |
 
-The load test {#h2-1-the-load-test}
------------------------------------
+The load test
+-------------
 
 Two functions for each application version were created to be executed simultaneously and load-test each application version's performance. One function is called \`Bulk Upsert\`, which inserts the event documents. The other is called \`Get Reports\`, which generates the \`reports\` for a specific user \`key\` and \`date\`. The parallelization of the execution of each function was made using worker threads, with 20 workers allocated to each function. The test's duration for each application version is 200 minutes, with different execution parameters being used through the load test.
 
@@ -54,8 +54,8 @@ The \`Get Reports\` function will generate one \`reports\` document per executio
 The following graph depicts the rates of \`Bulk Upsert\` and \`Get Reports\` for the test scenario presented above:
 ![](Screenshot-2025-10-09-at-11.48.21-AM.png)
 
-Initial scenario and data generator {#h2-2-initial-scenario-and-data-generator}
--------------------------------------------------------------------------------
+Initial scenario and data generator
+-----------------------------------
 
 To make a fair comparison between the application versions, the initial scenario/working set used in the tests had to be greater than the memory of the machine running the MongoDB server, forcing cache activity and avoiding the situation where all the working set would fit in the cache. To accomplish that, the following parameters were chosen:
 
@@ -73,42 +73,42 @@ To also approach a real-world scenario, the distribution of the event statuses i
 * 7.5% \`pending\`.
 * 2.5% \`rejected\`.
 
-The instances configuration {#h2-3-the-instances-configuration}
----------------------------------------------------------------
+The instances configuration
+---------------------------
 
 The EC2 instance running the MongoDB server is a \`c7a.large\` on the AWS cloud. It has 2vCPU and 4GB of memory. Two disks were attached to it: one for the operating system with \`15GB\` of size and \`GP3\` type, and the other for the MongoDB server, which stores its data with \`300GB\` of size, \`IO2\` type, and \`10.000IOPS\`. The operating system installed on the instance is Ubuntu 22.04, with all the updates and upgrades available at the time. All the recommended production notes were applied to the machine to allow MongoDB to extract the maximum performance of the available hardware.
 
 The EC2 instance running the application server is a \`c6a.xlarge\` on the AWS cloud. It has 4vCPU and 8GB of memory. Two disks were attached to it: one for the operating system with \`10GB\` of size and \`GP3\` type, and the other for the secondary MongoDB server, which stores its data with \`10GB\` of size and \`GP3\` type. The operating system installed on the instance is Ubuntu 22.04, with all the updates and upgrades available at the time. All the recommended production notes were applied to the machine to allow MongoDB to extract the maximum performance of the available hardware.
 
-Application Version 1 (appV1) {#h2-4-application-version-1-appv1}
------------------------------------------------------------------
+Application Version 1 (appV1)
+-----------------------------
 
 The first application version and the base case for our comparison would have been developed by someone with a junior knowledge level of MongoDB who just took a quick look at the documentation and learned that every document in a collection must have an \`_id\` field and this field is always unique indexed.
 
 To take advantage of the \`_id\` obligatory field and index, the developer decides to store the values of \`key\` and \`date\` in an embedded document in the \`_id\` field. With that, each document will register the status totals for one user, specified by the field \`_id.key\`, in one day, specified by the field \`_id.date\`.
 
-### Schema {#h3-5-schema}
+### Schema
 
 The application implementation presented above would have the following TypeScript document schema denominated \`ScemaV1\`:
 
 |-----------------------------------------------------------------------------------------------------------------------------------|
 | type SchemaV1 = { _id: { key: string; date: Date; }; approved?: number; noFunds?: number; pending?: number; rejected?: number; }; |
 
-### Bulk upsert {#h3-6-bulk-upsert}
+### Bulk upsert
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { _id: { date: event.date, key: event.key }, }, update: { $inc: { approved: event.approved, noFunds: event.noFunds, pending: event.pending, rejected: event.rejected, }, }, upsert: true, }, }; |
 
-### Get reports {#h3-7-get-reports}
+### Get reports
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the \`_id.date\` range in the \`$match\` filter being different:
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { '_id.key': request.key, '_id.date': { $gte: Date.now() - oneYear, $lt: Date.now() }, }, }, { $group: { _id: null, approved: { $sum: '$approved' }, noFunds: { $sum: '$noFunds' }, pending: { $sum: '$pending' }, rejected: { $sum: '$rejected' }, }, }, \]; |
 
-### Indexes {#h3-8-indexes}
+### Indexes
 
 As presented in the introduction of this application implementation, the main goal of embedding the fields \`key\` and \`date\` in the \`_id\` field was to take advantage of its obligatory existence and index. But, after some preliminary testing and research, it was discovered that the index on the \`_id\` field wouldn't support the filtering/match criteria in the \`Get Reports\` function. With that, the following extra index was created:
 
@@ -117,7 +117,7 @@ As presented in the introduction of this application implementation, the main go
 
 For those wondering why we need an extra index in the fields of the embedded document in the \`_id\` field, which is already indexed by default, a detailed explanation can be found in [Index on embedded documents](https://docs.google.com/document/d/106lg-shDFdP5nB96MjNkou_Lrb9FBCym3YuhOD0GKDk/edit#heading=h.e5y0d7i29gv0).
 
-### Initial scenario stats {#h3-9-initial-scenario-stats}
+### Initial scenario stats
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV1\` with the schema and \`Bulk Upsert\` function presented above, we have the following \`collection stats\`:
 
@@ -131,14 +131,14 @@ Another interesting metric that we can keep an eye on through the application ve
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
 
-### Load test results {#h3-10-load-test-results}
+### Load test results
 
 Executing the load test for \`appV1\`, we have the following results for \`Get Reports\` and \`Bulk Upsert\`:
 ![](Screenshot-2025-10-09-at-11.49.59-AM.png) ![](Screenshot-2025-10-09-at-11.51.20-AM.png)
 
 The graphs above show that in almost no moment, the \`appV1\` was able to reach the desired rates. The first stage of Bulk Upsert lasts for 50 minutes with a desired rate of 250 events per second. The event rate is only achieved in the first 10 minutes of the load test. The first stage of Get Reports lasts 10 minutes with a desired rate of 20 reports per second. The report rate is never achieved, with the highest value being 16.5 reports per second. As this is our first implementation and test, there is not much else to reason about.
 
-### Issues and improvements {#h3-11-issues-and-improvements}
+### Issues and improvements
 
 The first issue that can be pointed out and improved in this implementation is the document schema in combination with the two indexes. Because the fields \`key\` and \`date\` are in an embedded document in the field \`_id\`, their values are indexed twice: by the default/obligatory index in the \`_id\` field and by the index we created to support the \`Bulk Upserts\` and \`Get Reports\` operations.
 
@@ -148,8 +148,8 @@ The improvement here is to extract the fields \`key\` and \`date\` from the \`_i
 
 This first implementation can be seen as a forced worst-case scenario to make the more optimized solutions look better. Unfortunately, that is not the case. It's not hard to find implementations like this on the internet and I've worked on a big project with a schema like this one, from where I got the idea for this first case.
 
-Application Version 2 (appV2) {#h2-12-application-version-2-appv2}
-------------------------------------------------------------------
+Application Version 2 (appV2)
+-----------------------------
 
 As discussed in the issues and improvements of \`appV1\`, embedding the fields \`key\` and \`date\` as a document in the \`_id\` field trying to take advantage of its obligatory index is not a good solution for our application because we would still need to create an extra index and the index on the \`_id\` field would take more storage than needed.
 
@@ -157,35 +157,35 @@ To solve the issue of the index on the \`_id\` field being bigger than needed, t
 
 The second application version and the improvements to get to it would still have been developed by someone with a junior knowledge level of MongoDB but who has gone more depth in the documentation related to indexes in MongoDB, especially when indexing fields of type documents.
 
-### Schema {#h3-13-schema}
+### Schema
 
 The application implementation presented above would have the following TypeScript document schema denominated \`SchemaV2\`:
 
 |----------------------------------------------------------------------------------------------------------------------------------------|
 | type SchemaV2 = { _id: ObjectId; key: string; date: Date; approved?: number; noFunds?: number; pending?: number; rejected?: number; }; |
 
-### Bulk upsert {#h3-14-bulk-upsert}
+### Bulk upsert
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { key: event.key, date: event.date }, update: { $inc: { approved: event.approved, noFunds: event.noFunds, pending: event.pending, rejected: event.rejected, }, }, upsert: true, }, }; |
 
-### Get reports {#h3-15-get-reports}
+### Get reports
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the \`date\` range in the \`$match\` filter being different:
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { key: request.key, date: { $gte: Date.now() - oneYear, $lt: Date.now() }, }, }, { $group: { _id: null, approved: { $sum: '$approved' }, noFunds: { $sum: '$noFunds' }, pending: { $sum: '$pending' }, rejected: { $sum: '$rejected' }, }, }, \]; |
 
-### Indexes {#h3-16-indexes}
+### Indexes
 
 To support the filter/match criteria of \`Bulk Upsert\` and \`Get Reports\`, the following index was created in the \`appV2\` collection:
 
 |----------------------------------------------------------------------------------------------------------|
 | const keys = { key: 1, date: 1 }; const options = { unique: true }; db.appV2.createIndex(keys, options); |
 
-### Initial scenario stats {#h3-17-initial-scenario-stats}
+### Initial scenario stats
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV2\` with the schema and \`Bulk Upsert\` function presented above, and also presenting the values from the previous versions, we have the following \`collection stats\`:
 
@@ -205,7 +205,7 @@ Analyzing the tables above, we can see that from \`appV1\` to \`appV2\`, we incr
 
 Looking at the \`event stats\`, the total size per event value decreased only by 1.8%, from 128.1B to 125.8B. With this difference being so small, there is a good chance that we won't see big improvements from a performance point of view.
 
-### Load tests results {#h3-18-load-tests-results}
+### Load tests results
 
 Executing the load test for \`appV2\` and plotting it alongside the results for \`appV1\`, we have the following results for \`Get Reports\` and \`Bulk Upsert\`:
 ![](Screenshot-2025-10-09-at-11.52.13-AM.png) ![](Screenshot-2025-10-09-at-11.52.21-AM.png)
@@ -214,7 +214,7 @@ The graphs above show that in almost no moment, \`appV2\` reached the desired ra
 
 Comparing the two versions, we can see that \`appV2\` performed better than \`appV1\` for the \`Bulk Upsert\` operations and worse for the \`Get Reports\` operations. The improvement in the \`Bulk Upsert\` operations can be attributed to the indexes being smaller and the degradation in the \`Get Reports\` can be attributed to the document being bigger.
 
-### Issues and improvements {#h3-19-issues-and-improvements}
+### Issues and improvements
 
 The following document is a sample from the collection \`appV2\`:
 
@@ -227,8 +227,8 @@ The field \`key\`, as presented in the scenario section, is composed of hexadeci
 
 For the status field names, we can see that the names of the fields use more storage than the value itself. The field names are strings with at least 7 UTF-8 characters, which takes at least 7 bytes. The value of the status fields is a 32-bit integer, which takes 4 bytes. We can shorthand the status names by their first character, where \`approved\` becomes \`a\`, \`noFunds\` becomes \`n\`, \`pending\` becomes \`p\`, and \`rejected\` becomes \`r\`.
 
-Application Version 3 (appV3) {#h2-20-application-version-3-appv3}
-------------------------------------------------------------------
+Application Version 3 (appV3)
+-----------------------------
 
 As discussed in the issues and improvements of \`appV2\`, to reduce the document size, two improvements were proposed. One is to convert the data type of the field \`key\` from string to binary, requiring four bits to represent each hexadecimal character instead of the eight bits of a UTF-8 character. The other is to shorthand the name of the status fields by its first letter, requiring one byte for each field name instead of seven bytes. Each document would still register the status totals for one user, specified by the field \`key\`, in one day, specified by the field \`date\`, the same way it was done in the previous implementations.
 
@@ -239,35 +239,35 @@ To convert the \`key\` value from string to binary/buffer, the following TypeScr
 
 The third application version has two improvements compared to the second version. The improvement of storing the field \`key\` as binary data to reduce its storage need would have been thought of by an intermediate to senior MongoDB developer who has read the MongoDB documentation many times and worked on different projects. The improvement of shorthanding the name of the status fields would have been thought of by an intermediate MongoDB developer who has gone through some of the MongoDB documentation.
 
-### Schema {#h3-21-schema}
+### Schema
 
 The application implementation presented above would have the following TypeScript document schema denominated \`SchemaV3\`:
 
 |--------------------------------------------------------------------------------------------------------------|
 | type SchemaV3 = { _id: ObjectId; key: Buffer; date: Date; a?: number; n?: number; p?: number; r?: number; }; |
 
-### Bulk upsert {#h3-22-bulk-upsert}
+### Bulk upsert
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { key: buildKey(event.key), date: event.date }, update: { $inc: { a: event.approved, n: event.noFunds, p: event.pending, r: event.rejected, }, }, upsert: true, }, }; |
 
-### Get reports {#h3-23-get-reports}
+### Get reports
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the \`date\` range in the \`$match\` filter being different:
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { key: buildKey(event.key), date: { $gte: Date.now() - oneYear, $lt: Date.now() }, }, }, { $group: { _id: null, approved: { $sum: '$a' }, noFunds: { $sum: '$n' }, pending: { $sum: '$p' }, rejected: { $sum: '$r' }, }, }, \]; |
 
-### Indexes {#h3-24-indexes}
+### Indexes
 
 To support the filter/match criteria of \`Bulk Upsert\` and \`Get Reports\`, the following index was created in the \`appV3\` collection:
 
 |----------------------------------------------------------------------------------------------------------|
 | const keys = { key: 1, date: 1 }; const options = { unique: true }; db.appV3.createIndex(keys, options); |
 
-### Initial scenario stats {#h3-25-initial-scenario-stats}
+### Initial scenario stats
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV3\` with the schema and \`Bulk Upsert\` function presented above, and also presenting the values from the previous versions, we have the following \`collection stats\`:
 
@@ -289,7 +289,7 @@ Analyzing the tables above, we can see that from \`appV2\` to \`appV3\`, there w
 
 Looking at the \`event stats\`, the total size per event value decreased by 23%, from 125.8B to 96.8B. With this reduction, we'll probably see considerable improvements.
 
-### Load tests results {#h3-26-load-tests-results}
+### Load tests results
 
 Executing the load test for \`appV3\` and plotting it alongside the results for \`appV2\`, we have the following results for \`Get Reports\` and \`Bulk Upsert\`:
 ![](Screenshot-2025-10-09-at-11.53.26-AM.png) ![](Screenshot-2025-10-09-at-11.53.35-AM.png)
@@ -298,7 +298,7 @@ The graphs above clearly show that \`appV3\` is more performatic than \`appV2\` 
 
 The whole performance improvement can be attributed to the reduction of the document size, as it was the only change between \`appV2\` and \`appV3\`.
 
-### Issues and improvements {#h3-27-issues-and-improvements}
+### Issues and improvements
 
 Looking at the \`collection stats\` of \`appV3\` and thinking about how MongoDB is executing our queries and what indexes are being used, we can see that the \`_id\` field and its index aren't being used in our application. The field by itself is not a big deal from a performance standing point, but its obligatory unique index is, that every time a new document is inserted in the collection, the index structure on the \`_id\` field has to be updated.
 
@@ -317,8 +317,8 @@ As seen above, the \`key\` field is compared by equality in both cases, and the 
 
 One point of attention is how we are going to format the \`date\` field in this concatenation in a way that the range filter works and we don't store more data than we really need. One possible implementation will be presented and tested in the next application version, \`appV4\`.
 
-Application Version 4 (appV4) {#h2-28-application-version-4-appv4}
-------------------------------------------------------------------
+Application Version 4 (appV4)
+-----------------------------
 
 As presented in the issues and improvements of \`appV3\`, one way to take advantage of the obligatory field and index on \`_id\` is storing on it the concatenated value of \`key\` + \`date\`. One thing that we need to cover now is what data type the \`_id\` field will have and how we are going to format the \`date\` field.
 
@@ -338,32 +338,32 @@ To concatenate and convert the \`key\` and \`date\` fields to their desired form
 
 Each document would still register the status totals for one user in one day, specified by \`_id\` field, the same way it's done in the previous implementations.
 
-### Schema {#h3-29-schema}
+### Schema
 
 The application implementation presented above would have the following TypeScript document schema denominated\`SchemaV4\`:
 
 |-----------------------------------------------------------------------------------|
 | type SchemaV4 = { _id: Buffer; a?: number; n?: number; p?: number; r?: number; }; |
 
-### Bulk upsert {#h3-30-bulk-upsert}
+### Bulk upsert
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { _id: buildId(event.key, event.date) }, update: { $inc: { a: event.approved, n: event.noFunds, p: event.pending, r: event.rejected, }, }, upsert: true, }, }; |
 
-### Get reports {#h3-31-get-reports}
+### Get reports
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the date used in the function \`buildId\` being different:
 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { _id: { $gte: buildId(request.key, Date.now() - oneYear), $lt: buildId(request.key, Date.now()), }, }, }, { $group: { _id: null, approved: { $sum: '$a' }, noFunds: { $sum: '$n' }, pending: { $sum: '$p' }, rejected: { $sum: '$r' }, }, }, \]; |
 
-### Indexes {#h3-32-indexes}
+### Indexes
 
 As this implementation will use the \`_id\` field for its operations, it won't need an extra index to support the \`Bulk Upsert\` and \`Get Reports\` operations.
 
-### Scenario {#h3-33-scenario}
+### Scenario
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV4\` with the schema and \`Bulk Upsert\` function presented above, and also presenting the values from the previous versions, we have the following \`collection stats\`:
 
@@ -387,7 +387,7 @@ Analyzing the tables above, we can see that from \`appV3\` to \`appV4\`, we redu
 
 Looking at the \`event stats\`, the total size per event value decreased by 35%, from 96.8B to 62.6B. We'll probably see some improvements in this implementation.
 
-### Load tests results {#h3-34-load-tests-results}
+### Load tests results
 
 Executing the load test for \`appV4\` and plotting it alongside the results for \`appV3\`, we have the following results for \`Get Reports\` and \`Bulk Upsert\`:
 ![](Screenshot-2025-10-09-at-11.54.28-AM.png) ![](Screenshot-2025-10-09-at-11.54.42-AM.png)
@@ -396,7 +396,7 @@ The graphs above show that \`appV4\` is just a little better than \`appV3\`. For
 
 I confess that I was expecting more from \`appV4\` based on the values from the initial scenario stats.
 
-### Issues and improvements {#h3-35-issues-and-improvements}
+### Issues and improvements
 
 Enough of looking at our documents to get a better performance. Let's focus on the application behavior.
 
@@ -406,8 +406,8 @@ One way of doing that is using [the Bucket Pattern](https://www.mongodb.com/blog
 
 Looking at our application from the perspective of the bucket pattern, so far, we have bucketed our data by daily user, each document containing the status totals for one user in one day. We can increase the bucketing range or our schema and in one document, store events or status totals from a week, month, or even quarter.
 
-Conclusion {#h2-36-conclusion}
-------------------------------
+Conclusion
+----------
 
 That is the end of the first part of the series. We covered how indexes work on fields of type documents and saw some small changes that we can make to our application to reduce its storage and index needs, and as a consequence, improve its performance.
 
@@ -421,8 +421,8 @@ So far, none of our applications have gotten even close to the desired rates, bu
 
 For any further questions, you can go to the[MongoDB Community Forum](https://www.mongodb.com/community/forums/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part1-foojay&utm_term=tony.kim), or if you want to build your application using MongoDB, the MongoDB Developer Center has lots of examples in many different programming languages.
 
-Index on Embedded Documents {#h2-37-index-on-embedded-documents}
-----------------------------------------------------------------
+Index on Embedded Documents
+---------------------------
 
 Let's take a look at how MongoDB indexes a field with a value of type document and see why we need an extra index for the \`appV1\` implementation.
 

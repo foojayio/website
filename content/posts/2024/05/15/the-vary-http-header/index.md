@@ -22,8 +22,8 @@ frozen: false
 
 **I try to constantly to deepen my knowledge of HTTP and REST. Recently, I stumbled upon the list of all [registered HTTP Headers](https://www.iana.org/assignments/http-fields/http-fields.xhtml). This post is dedicated to the `Vary` HTTP Header.**
 
-The problem {#h2-0-the-problem}
--------------------------------
+The problem
+-----------
 
 Two years ago, I wrote about [web resource caching server-side](https://blog.frankel.ch/web-caching/server/). The idea is to set up a component between the client and the upstream to cache previously computed results to avoid overloading the latter. Depending on your infrastructure and requirements, this component can be a reverse proxy or an API Gateway. HTTP offers the [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) header to customize the different aspects of caching, *e.g.* , the time the server holds the resource in cache before it considers it stale. I used plugin configuration in the above post, but you can also delegate to `Cache-Control`.
 
@@ -44,8 +44,8 @@ The request succeeds; the result is cached. Now, I request the same resource, bu
 
 The problem is that the cache key has a single dimension, the URL, by default.
 
-The solution {#h2-1-the-solution}
----------------------------------
+The solution
+------------
 
 We need a configurable multi-dimension cache key. As you can probably guess by now, that's the role of the `Vary` header: it explicitly lists all dimensions of the cache key. In the example above, the upstream would communicate the additional cache key with the following:
 
@@ -79,8 +79,8 @@ Vary: Accept, Accept-Encoding
 ```
 
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 I've described the `Vary`response header in this post. As soon as you configure caching, you must consider possible cache keys and use the `Vary` header accordingly.
 

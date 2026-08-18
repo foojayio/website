@@ -36,10 +36,10 @@ We can use it to query \& mutate our data, and in the case of Spring Webflux/Web
 
 Feel free to check out the code from [this repository](https://github.com/SimonVerhoeven/spring-graphql-demo/tree/main) to more easily follow along.
 
-Setup {#_setup}
----------------
+Setup
+-----
 
-### Dependencies {#_dependencies}
+### Dependencies
 
 To get started we just need the following dependencies in our pom.xml:
 
@@ -70,7 +70,7 @@ To get started we just need the following dependencies in our pom.xml:
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | We're using Spring MVC here, but we could also use web/webflux/rsocket here (see for reference: [possible starters](https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.graphql)) |
 
-### Schema resources {#_schema_resources}
+### Schema resources
 
 We'll create a folder `src/main/resources/graphql/` where we'll put our `.graphqls` or `.gqls` file(s).  
 
@@ -113,7 +113,7 @@ More information on how to define a `Schema` can be found on the [GraphQL schema
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | * We can change the supported file type(s) by changing: `spring.graphql.schema.file-extensions` * The default schema location can be adapted using `spring.graphql.schema.locations`, we can even include files in our dependencies by using the `classpath*:` prefix * field introspection is enabled by default since tools like GraphiQL require it. If you do not want to expose your schema, set `spring.graphql.schema.introspection.enabled` to `false` |
 
-### Properties {#_properties}
+### Properties
 
 We'll also be enabling the graphical interactive GraphQL IDE ([GraphiQL](https://github.com/graphql/graphiql)), by adding:
 
@@ -140,7 +140,7 @@ Using the default [GraphiQL](http://localhost:8080/graphiql) path.
 |-----------|----------------------------------------------------------|
 | **Note:** | This can be adapted by configuring `spring.graphql.path` |
 
-### Registering extra scalar types {#_registering_extra_scalar_types}
+### Registering extra scalar types
 
 In some cases, you might need more than the default Scalar types that we mentioned earlier.
 
@@ -188,8 +188,8 @@ scalar Date @specifiedBy(url:"https://tools.ietf.org/html/rfc3339")
 
 And then when we query for this Article, we'll get our `publicationDate` back properly.
 
-Controller configuration {#_controller_configuration}
------------------------------------------------------
+Controller configuration
+------------------------
 
 Spring for GraphQL allows us to define handler methods using annotations in `@Controller` components.  
 
@@ -207,7 +207,7 @@ These are:
 * `@MutationMapping`
 * `@SubscriptionMapping`
 
-### Querying data {#_querying_data}
+### Querying data
 
 For our earlier book query, we can add:
 
@@ -271,7 +271,7 @@ Note that here we've explicitly added `authorById` to our `@QueryMapping`
 
 While both approaches are valid, the value annotation does encourage a higher level of abstraction and leaves us free to rename our method names without breaking the integration.
 
-### Mutations {#_mutations}
+### Mutations
 
 We use `@MutationMapping` for these, and jut like with `@QueryMapping` our method name/annotation value must match the operation name.
 
@@ -325,7 +325,7 @@ mutation addAuthor {
 ```
 
 
-### Subscriptions {#_subscriptions}
+### Subscriptions
 
 In case we want to stay up to date, we can also set up a subscription.
 
@@ -366,8 +366,8 @@ subscription {
 ```
 
 
-Testing {#_testing}
--------------------
+Testing
+-------
 
 So it's quite easy to set up our GraphQL API, but what about the testing?  
 
@@ -380,7 +380,7 @@ It offers us a fluent API to write our test.
 
 We can pass in a document (thank you text blocks!), or pass in a document filename ending with `.graphql` or `.gql` under `graphql-test/` in our `resources` folder.
 
-### Testing a request {#_testing_a_request}
+### Testing a request
 
 Let's start with a basic request test, where we check the expected output. (we could also )
 
@@ -401,7 +401,7 @@ void bookById() {
 2. passing in the variable we want to use for the call
 3. in case your request has no response data use `executeAndVerify` rather than `execute` to check whether there were no errors in the response, or `executeSubscription` for Subscriptions.
 
-### Testing a mutation {#_testing_a_mutation}
+### Testing a mutation
 
 The flow for a mutation is basically the same as for a query:
 
@@ -415,7 +415,7 @@ final Author author = this.graphQlTester
 ```
 
 
-### Testing a subscription {#_testing_a_subscription}
+### Testing a subscription
 
 Subscriptions are a bit different in that we invoke `executeSubscription` instead of `execute` and then use `StepVerifier` to inspect the Flux.
 
@@ -449,7 +449,7 @@ final var bookFlux = this.graphQlTester.document(document)
 ```
 
 
-### Handling errors {#_handling_errors}
+### Handling errors
 
 If we use verify, any errors in the "errors" key will lead to an Assertion failure.
 
@@ -509,8 +509,8 @@ This will lead to an assertion error if the expected error is not present.
 ```
 
 
-(Dis)advantages {#_disadvantages}
----------------------------------
+(Dis)advantages
+---------------
 
 GraphQL has its advantages, and disadvantages over REST, and one can even use both in the sample application.
 
@@ -536,10 +536,10 @@ However, if the data structure is stable, caching is critical, resource-based mo
 
 At the end of the day you need to evaluate which fits your use-cases the best, and maybe even use a mix of both.
 
-Extra {#_extra}
----------------
+Extra
+-----
 
-### Introspection report - detect mismatches {#_introspection_report_detect_mismatches}
+### Introspection report - detect mismatches
 
 We can make use of this report to easily detect whether all our schema fields have corresponding data fetchers.
 
@@ -572,11 +572,11 @@ Skipped types: []
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | **Warning:** | Introspected should be disabled in production as it exposes quite a bit of information about your API which might not be desireable. |
 
-### File uploads {#_file_uploads}
+### File uploads
 
 Whilst the GraphQL protocol is focused on textual data, there is the informal [graphql-multipart-request-spec](https://github.com/jaydenseric/graphql-multipart-request-spec) which allows file upload over HTTP. Keep in mind that this does lead to certain issues as documented on the [Appolo GraphQL blog](https://www.apollographql.com/blog/backend/file-uploads/file-upload-best-practices/). If you would like to use the spec in your application you can do so using: [multipart-spring-graphql](https://github.com/nkonev/multipart-spring-graphql)
 
-### Data access {#_data_access}
+### Data access
 
 GraphQL isn't tied to a specific database/storage engine. However, there are certainly a lot of interesting \& convenient things to be done using the [Spring data QueryDSL extension](https://docs.spring.io/spring-data/commons/docs/current/reference/html/#core.extensions).  
 
@@ -584,8 +584,8 @@ It allows us a flexible and typesafe approach for our query predicates.
 
 Spring Data allows us to use our QueryDSL/Query by Example repositories for a `DataFetcher`, which will build a QueryDSL `Predicate` from GraphQL arguments. We can also to mark our repositories with `@GraphQlRepository` for automated detection and GraphQL Query registration.
 
-References {#_references}
--------------------------
+References
+----------
 
 * [GraphQL](https://graphql.org/)
 * [Querydsl](https://querydsl.com/)

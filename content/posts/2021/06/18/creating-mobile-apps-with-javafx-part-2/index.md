@@ -24,7 +24,7 @@ In [Part 1](https://foojay.io/today/creating-mobile-apps-with-javafx---part-1/),
 
 In this article, we'll discuss the technologies we use with JavaFX to build the JVM byte code version as well as native images that target iOS and Android devices.
 
-### GluonFX plugin for Maven {#h3-0-gluonfx-plugin-for-maven}
+### GluonFX plugin for Maven
 
 Gluon ([https://docs.gluonhq.com/](https://docs.gluonhq.com/#_the_gluon_client_plugin_for_maven)) has a Maven plugin that lets you build native-image JavaFX applications targeting multiple platforms. While Java has always been about compiling Java byte code that runs in a Java Virtual Machine (JVM) anywhere and everywhere (Write Once, Run Anywhere), there are prohibitions with running byte code in the mobile environment. Besides the performance penalties of executing byte code in a virtual machine and the relatively long startup time, Apple prohibits JVM applications on mobile targets and Android Java is non-standard. If you choose to leave the JavaFX world for native toolkits, you need to acquire expertise in Objective C/Swift as well as the respective native UI toolkits to target these platforms. Spoiler alert: I didn't do that!
 
@@ -41,11 +41,11 @@ Enter Gluon, JavaFX, and GraalVM. The GluonFX plugin leverages GraalVM, OpenJDK 
  </div>
 </figure>
 
-### **GraalVM** {#h3-1-graalvm}
+### **GraalVM**
 
 What is GraalVM and why should I use it? GraalVM is a high-performance JDK distribution from Oracle designed to accelerate the execution of applications written in Java (and other JVM languages). GraalVM allows compiling Java applications ahead-of-time (AOT) into native executables for faster startup time and lower memory overhead. Gluon leverages the GraalVM Community Edition to build your mobile application to the target platform using AOT compilation and linking with native libraries. The package step builds the executable for the target device.
 
-### **Gluon Substrate** {#h3-2-gluon-substrate}
+### **Gluon Substrate**
 
 If your head is spinning, wondering how to collect all the native libraries, signing requirements, and packaging details into one native executable, fear not! Gluon Substrate (with its GluonFX Maven plugin) pulls together the pieces and dependencies for you. Gluon Substrate lets you build a specific target package that includes all the necessary dependencies.
 
@@ -57,7 +57,7 @@ We selected Glisten (to use the mobile-friendly skinned controls), Glisten After
 
 Note: Install maven here: <https://maven.apache.org/install.html>.
 
-### **JVM Desktop** {#h3-3-jvm-desktop}
+### **JVM Desktop**
 
 Although I use an IDE to edit my project, a command line interface performs all the builds to run and install the application. The first task is to build and run the application with regular byte code on the JVM for application design and debugging. My default host machine is Mac OSX with the standard JVM using the default installed (11+) Java and JavaFX. This is the environment we initially used to build and test TiltMaze; the build/run cycle is very fast and efficient for debugging. (For accelerometer testing, we built a small test program to react to the device readings and ran this test on the phone.)
 
@@ -70,7 +70,7 @@ $ mvn javafx:run
 
 At some point, though, you must test your application on the target hardware. Because native builds take much longer than Java byte code builds, you should perform as much coding, debugging, and testing as possible before you move to actual device testing.
 
-### **iOS** {#h3-4-ios}
+### **iOS**
 
 Gluon provides documentation on what you need to build native iOS images. If your goal is to create an app that others can install from the App Store, you'll need a Mac, Xcode (Apple's development tool, free to install), an Apple Developer License ($99/year), and Apple signing certificates (one for installing on your own device for testing and a different one for uploading the application to the Apple Connect site).
 
@@ -137,7 +137,7 @@ Note: If you're having issues getting a successful build or install, try
 
 * Return to the [Gluon Documents](https://docs.gluonhq.com/#platforms_ios) for the iOS platform to make sure your pom.xml file is configured correctly.
 
-### **IOS Configuration** {#h3-5-ios-configuration}
+### **IOS Configuration**
 
 The GluonFX plugin builds all its output in the `target` subdirectory. In the process, it generates default configurations for ios-specific settings, such as file **Default-Info.plist** , and a complete icon set under subdirectory `target/gluonfx/arm64-ios/gensrc/ios/`. File **Default-Info.plist** is an XML-based file where you specify ios-specific features, such as support for portrait or landscape modes, or if your app uses the accelerometer, for example.
 
@@ -183,7 +183,7 @@ Here are several resources to generate the icons for the various devices.
 Here is the TiltMaze icon. Be sure to leave generous margins around the icon, since Apple will round the corners, possibly cutting into your design.  
 ![](tiltmaze-logo-small.png) TiltMaze icon
 
-### **Android** {#h3-6-android}
+### **Android**
 
 For Android applications, your development environment is Linux. If you have a Linux box, great! You're ready to install GraalVM, Maven, and optionally your favorite IDE, and start building Android applications. Faced with the prospect of buying extra hardware, I decided to use Oracle's Virtual Box and install Ubuntu Linux on my Mac. This is a very workable solution, but there are a few cautions:
 
@@ -233,7 +233,7 @@ $ mvn -Pandroid gluonfx:nativerun
 
 The same as with the iOS target, you can configure `<verbose>true</verbose>` mode for help in identifying configuration errors.
 
-### **Android Configuration** {#h3-7-android-configuration}
+### **Android Configuration**
 
 Similar to the iOS targets, the Gluon Plugin generates default settings and application resources for the Android target in subdirectory `target/gluonfx/aarch64-android/gensrc/android/res`. Copy the configuration **AndroidManifest.xml** and icon PNG files to `src/android/res` before customizing these files.
 
@@ -246,6 +246,6 @@ In our case, we specify the application runs only in portrait mode and requires 
 
 We provide Android-specific icon resource files for TiltMaze under `src/android/res/`.
 
-### Next {#h3-8-next}
+### Next
 
 In [Part 3](https://foojay.io/today/creating-mobile-apps-with-javafx-part-3/), we'll show you how to upload a mobile application to the respective mobile app stores.

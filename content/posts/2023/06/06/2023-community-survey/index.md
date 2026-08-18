@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-### Here's the idea. {#h3-0-here-s-the-idea}
+### Here's the idea.
 
 A survey that allows the community to ask the questions they want, including (shock horror) occasional commercial ones.
 
@@ -28,7 +28,7 @@ The Foojay survey breaks this pattern. We will make all the data available, with
 
 The result will be a survey where the friends of OpenJDK ask themselves the burning questions that other surveys overlook, although some of the the usual ones will probably sneak in!
 
-### How to get involved? {#h3-1-how-to-get-involved}
+### How to get involved?
 
 If you have ideas for questions or want to see what we already have, visit the [related slack channel](https://foojay.slack.com/archives/C05AYK7L1B4 "related slack channel") on Foojay slack and share your thoughts.
 
@@ -36,6 +36,6 @@ If you have ideas for questions or want to see what we already have, visit the [
 
 If you are involve in the [Foojay Board](https://foojay.io/board/) or another organization and want to get connected reach out to me on slack.
 
-### Dates? {#h3-2-dates}
+### Dates?
 
 Not yet... visit the [survey slack channel](https://foojay.slack.com/archives/C05AYK7L1B4 "survey slack channel")!

@@ -31,13 +31,13 @@ In this episode, we are joined by Hanno Embregts, a Java Developer by day and mu
 
 Let's see what this new release brings us...
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube hIgw8lo0zgw >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,27 +45,27 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Read more about Java 24 on Foojay {#h2-2-read-more-about-java-24-on-foojay}
----------------------------------------------------------------------------
+Read more about Java 24 on Foojay
+---------------------------------
 
 * [Java 24 Rolls Out Today! Find Out Why It's Aptly Named](https://foojay.io/today/java-24-rolls-out-today-find-out-why-its-aptly-named/) by Hanno Embregts
 * [Java 24 : What's New?](https://foojay.io/today/java-24-whats-new/) by Loic Mathieu
 
-Guests {#h2-3-guests}
----------------------
+Guests
+------
 
-### Simon Ritter {#h3-4-simon-ritter}
+### Simon Ritter
 
 * <https://www.linkedin.com/in/siritter/>
 * <https://bsky.app/profile/speakjava.bsky.social>
 
-### Hanno Embregts {#h3-5-hanno-embregts}
+### Hanno Embregts
 
 * <https://www.linkedin.com/in/hannotify/>
 * <https://bsky.app/profile/hanno.codes>
 
-Content {#h2-6-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests  
 

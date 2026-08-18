@@ -24,8 +24,8 @@ related_posts:
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 In distributed, microservice-based applications, the management of state is one of the most important, yet difficult aspects of design.
 
@@ -33,8 +33,8 @@ Ensuring the accuracy and consistency of state without introducing excessive com
 
 This article discusses issues around state management and shows how the [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") framework provides support to deal with these in ways that maintain a resilient and high performing microservices architecture.
 
-What Do We Mean By State? {#h2-1-what-do-we-mean-by-state}
-----------------------------------------------------------
+What Do We Mean By State?
+-------------------------
 
 State is a term used to describe mutable data that is used by a software component to handle incoming requests or messages. One of the most important considerations when designing an application or system composed of a number of independent components is how to handle its state. There are often competing goals, which can affect the approach that is taken:
 
@@ -52,8 +52,8 @@ We want to ensure that if a component fails, we can minimise both the loss of se
 
 Normally the steps taken to optimise safety and robustness have costs that can adversely affect performance. Finding the right balance across these goals is therefore critical to building a system that is both fast and reliable.
 
-Microservices and State {#h2-2-microservices-and-state}
--------------------------------------------------------
+Microservices and State
+-----------------------
 
 The Microservices pattern aims to decouple components from each other, in order to maximise the flexibility and resilience of the overall application. A key part of this is to isolate any mutable state to the microservice that will modify it.
 
@@ -73,8 +73,8 @@ Case 3 leads to what are known as "stateful" components. There is a need to pres
 
 However, it has become clear that traditional databases, most notably relational database systems, have limitations when operating in a distributed environment. At the very least they introduce a significant overhead as a result of writing state changes to persistent storage.
 
-Managing State Through Events {#h2-3-managing-state-through-events}
--------------------------------------------------------------------
+Managing State Through Events
+-----------------------------
 
 In order to deal with the shortcomings of traditional databases, a number of alternative models have evolved for managing state in distributed applications. An increasingly popular approach is to use events as a means of communicating changes in state from one component to others.
 
@@ -88,8 +88,8 @@ This is not to say that there are no disadvantages in using events like this, es
 
 The event-based approach to managing state in applications has evolved into a set of patterns often referred to as "Event Sourcing", and several sophisticated event management systems have evolved to support it.
 
-The Chronicle Services Approach to State {#h2-4-the-chronicle-services-approach-to-state}
------------------------------------------------------------------------------------------
+The Chronicle Services Approach to State
+----------------------------------------
 
 The basic model of a [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") application is of a number of independent processing components (services), interacting with each other using events that are passed using [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") instances. [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") is a "store everything" data structure; in other words, all events posted by a service will be retained in perpetuity on persistent storage. As such, it is well suited to following the event-based approach to managing state described above.
 
@@ -102,7 +102,7 @@ We can see the service maintains state that represents the balance; its current 
 
 Now we can see how the service's local value is updated following the event.
 
-### Service Startup and Event Replay {#h3-5-service-startup-and-event-replay}
+### Service Startup and Event Replay
 
 If the service were to stop for some reason, its local state will be lost. However, [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") retains all the events in the queue on persistent storage. On service restart, the local value can be recreated by re-applying these events through the appropriate event handlers.
 
@@ -119,7 +119,7 @@ Through service configuration, we can define:
 
 By default, no event replay is performed, and the service will process inputs starting from the point at which the last output event was posted. In the case of a service starting for the first time, this will cause processing to begin with the first input event.
 
-### Queue Replication {#h3-6-queue-replication}
+### Queue Replication
 
 [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/ "Chronicle Queue Enterprise") offers the capability to replicate a queue to one or more secondary systems, providing a basis for implementing high-availability deployment architectures for applications.
 
@@ -127,7 +127,7 @@ Since the replica queue(s) contain all of the state-changing events posted by th
 
 A more detailed discussion of the implications of Queue Replication in [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") will be provided in a future article.
 
-### Checkpointing State {#h3-7-checkpointing-state}
+### Checkpointing State
 
 [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") applications are designed to operate over long time periods, and often extremely large number of events are posted to queues. Despite the performance of [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue"), the replaying of especially large numbers of events can introduce a delay in restarting a service instance that has failed, resulting in a lack of availability that may be unacceptable.
 
@@ -135,8 +135,8 @@ As well as providing a high level configuration based approach to state manageme
 
 We will discuss this approach in more detail in a future article.
 
-Summary {#h2-8-summary}
------------------------
+Summary
+-------
 
 When implementing an application using a Microservice architecture, it is crucially important to be aware of the potential pitfalls of managing mutable state in components.
 

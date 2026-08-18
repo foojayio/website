@@ -24,8 +24,8 @@ An uber-JAR, also known as a fat JAR or JAR with dependencies, is a JAR file tha
 
 In this article, we'll describe the different variants of the artifact and the advantages and drawbacks it has.
 
-What is an Uber-JAR? {#h2-0-what-is-an-uber-jar}
-------------------------------------------------
+What is an Uber-JAR?
+--------------------
 
 As indicated, the Uber-JAR contains all the program dependencies packaged in the JAR file.
 
@@ -38,8 +38,8 @@ This makes it easy to run the Java application. You only need the JAR file conta
 This is enough to run the application when you have defined the class name with the main method within the Manifest file. The uber-JAR for this reason can also be called an 'executable JAR file'.
 ![Uber Jar-01](https://blog.payara.fish/hs-fs/hubfs/Uber%20Jar-01.jpg?width=1920&name=Uber%20Jar-01.jpg)
 
-Can It Work For Running A Web Application? {#h2-1-can-it-work-for-running-a-web-application}
---------------------------------------------------------------------------------------------
+Can It Work For Running A Web Application?
+------------------------------------------
 
 Can this principle also be used for running a web application?
 
@@ -49,8 +49,8 @@ The concept of an executable WAR file also exists. It is a combination of the cl
 
 The main class can startup the runtime and use itself to deploy on the runtime. Since the WAR file also has the correct structure of a Web Archive, with code and dependencies placed in the WEB-INF directory, it deploys and runs perfectly.
 
-Why Uber-JAR? {#h2-2-why-uber-jar}
-----------------------------------
+Why Uber-JAR?
+-------------
 
 The Uber-JAR and Uber-WAR file format have some benefits in certain situations. Having to deal with only one file makes it a lot easier when you need to install and start an application.
 
@@ -60,15 +60,15 @@ Also, the executable WAR file makes it easy to run a program. As an example, you
 
 The same goes for our microservices-oriented application server, [Payara Micro](https://www.payara.fish/products/payara-micro/). As you will see in the example below, with a single command you can start the runtime and deploy the application. This makes it easy to get things started.
 
-When Not to Use Uber-JAR? {#h2-3-when-not-to-use-uber-jar}
-----------------------------------------------------------
+When Not to Use Uber-JAR?
+-------------------------
 
 There are some situations where it is *not* advantageous to use an Uber-JAR, especially in containerised environments. When developing a web application using the Uber-WAR solution of [Spring Boot,](https://spring.io/projects/spring-boot) for example, a single change in your application code results in the build of the Uber-WAR file that is placed inside a Docker image and transferred to the Container repository so that the cloud environment can pick up the change.
 
 This means that a single change results in the recreation of a file that is typically around 50 to 100 Mb and that needs to be transferred over the network. And in almost all situations, there is no change to the application runtime and thus there was no need to repackage that.
 
-Example of An Uber-JAR {#h2-4-example-of-an-uber-jar}
------------------------------------------------------
+Example of An Uber-JAR
+----------------------
 
 [Payara Micro](https://www.payara.fish/products/payara-micro/) is the microservices-ready version of [Payara Server,](https://www.payara.fish/products/) our [Jakarta EE](https://jakarta.ee/) runtime. It is compatible with Eclipse [MicroProfile](https://microprofile.io/).
 
@@ -86,8 +86,8 @@ However, unlike Spring Boot, it operates as an Uber-JAR on its own, so doesn't n
 
 This also means that the Payara Micro runtime can be placed in another layer of your container and only the relatively small WAR file containing your application code needs to be pushed to the Container registry. This makes the entire process of releasing an update much faster and more efficient.
 
-In Summary {#h2-5-in-summary}
------------------------------
+In Summary
+----------
 
 The Uber-JAR or Uber-WAR artifacts are very convenient as they pack everything together so that the application can be started up very easily. There is no need to assemble all the required dependencies on the classpath, everything is pre-bundled and ready to run.
 

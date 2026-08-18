@@ -36,8 +36,8 @@ Coding agents are known to solve typical tasks well. But what about a project th
 
 Here is how it went.
 
-Installation and overview {#h2-0-installation-and-overview}
------------------------------------------------------------
+Installation and overview
+-------------------------
 
 Junie is an IntelliJ IDEA plugin. Its UI adopts a familiar vertical tool window, similar to that of JetBrains AI Assistant or GitHub Copilot. Here's what it looks like:
 ![Junie UI consising of a text field, the 'add context' button, and the 'Brave Mode' checkbox](https://flounder.dev/img/trying-out-junie/overview.png "Junie UI consising of a text field, the 'add context' button, and the 'Brave Mode' checkbox")
@@ -46,8 +46,8 @@ Junie is an IntelliJ IDEA plugin. Its UI adopts a familiar vertical tool window,
 
 The minimalistic design only features a prompt field, a button for adding context, and a checkbox titled **Brave Mode**. This option controls whether Junie can run commands without double-checking with you. I'm not that brave yet, so I'll try that next time.
 
-Setting requirements {#h2-1-setting-requirements}
--------------------------------------------------
+Setting requirements
+--------------------
 
 Before giving Junie the coding task, I downloaded a topic from AsciiDoctor guide  
 
@@ -58,8 +58,8 @@ and placed it under `src/test/resources/` for Junie to use as test data and a re
 
 For debugging purposes, I asked Junie to add the parsed blocks to a separate collection. This is because the actual index is structured in multiple levels, which makes it inconvenient to debug. For simplicity, I'd rather view the parsed elements as a flat structure if I need to check the results at runtime.
 
-'Coding' {#h2-2-coding}
------------------------
+'Coding'
+--------
 
 After you enter the prompt, Junie breaks the task down into smaller items and starts to implement them. For adding the AsciiDoc support, it came up with the following plan:
 ![Initial plan consisting of several sub-items](https://flounder.dev/img/trying-out-junie/initial-plan.png "Initial plan consisting of several sub-items")
@@ -88,8 +88,8 @@ After running the tests, which were successful in this case, Junie provides the 
 
 <br />
 
-Code quality {#h2-3-code-quality}
----------------------------------
+Code quality
+------------
 
 Upon reviewing the code and tests, I found them well-structured and neat. What I really liked is that Junie changed not just the code required for the project to compile, but also took the extra step to introduce other meaningful changes in the context of the task.
 ![Diff view](https://flounder.dev/img/trying-out-junie/diff-2.png "Diff view")
@@ -102,8 +102,8 @@ Junie recognized that and added the corresponding command-line option together w
 
 Everything's good so far, but it appears that more work still needs to be done.
 
-Correcting the implementation {#h2-4-correcting-the-implementation}
--------------------------------------------------------------------
+Correcting the implementation
+-----------------------------
 
 One area where coding agents are not yet fully autonomous is identifying potential problems at runtime. Technically, the implementation is correct, and it passes all the tests. The results of the parsing are consistent, as seen in the **Evaluate** dialog.
 ![The debugger's evaluate dialog showing the list of parsed blocks](https://flounder.dev/img/trying-out-junie/evaluate.png "The debugger's evaluate dialog showing the list of parsed blocks")
@@ -121,8 +121,8 @@ Rather than starting a new task, I used the **Follow up** prompt for that:
 
 <br />
 
-Results {#h2-5-results}
------------------------
+Results
+-------
 
 Junie revised the implementation as requested. Although I'm not very familiar with the AsciiDoc format, the parsing seems to be largely correct at the first glance. There is some room for improvement in parsing of the preamble, and likely something else, but it does its job.
 

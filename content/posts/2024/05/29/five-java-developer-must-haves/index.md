@@ -43,8 +43,8 @@ Solutions that vastly improve the startup time of Java apps should:
 
 We'll briefly talk through each of these points and describe how we've achieved them with [Liberty InstantOn](https://openliberty.io/blog/2023/06/29/rapid-startup-instanton.html?utm_source=foojay&utm_medium=article&utm_id=instanton "Liberty InstantOn").
 
-Liberty InstantOn checkpoint/restore solution {#h2-0-liberty-instanton-checkpoint-restore-solution}
----------------------------------------------------------------------------------------------------
+Liberty InstantOn checkpoint/restore solution
+---------------------------------------------
 
 Liberty InstantOn is a checkpoint/restore-based solution for the fast startup of Java applications in serverless environments. Unlike other solutions, Liberty InstantOn was co-designed from the outset by the development teams working on a JDK ([IBM Semeru Runtimes](https://developer.ibm.com/languages/java/semeru-runtimes/downloads/?utm_source=foojay&utm_medium=article&utm_id=instanton "IBM Semeru Runtimes"), a free distribution of OpenJDK and Eclipse OpenJ9) and an application runtime ([Open Liberty](https://openliberty.io/?utm_source=foojay&utm_medium=article&utm_id=instanton "Open Liberty"), an open-source Java application runtime).
 
@@ -60,8 +60,8 @@ The three applications ranged from a very simple application with a single REST 
 
 As well as providing very fast startup and first response times, the collaborative Liberty InstantOn checkpoint/restore approach provides a better developer experience than removing the JVM completely or implementing a checkpoint/restore solution only at the JDK level and then just stating that many kinds of tasks should not be done before checkpoint.
 
-Easy to implement in apps {#h2-1-easy-to-implement-in-apps}
------------------------------------------------------------
+Easy to implement in apps
+-------------------------
 
 Checkpoint/restore solutions that are designed solely at the JDK level force you, as the application developer, to think about how the low-level OS tool [CRIU](https://criu.org/Main_Page "CRIU") works and how to set it up. They also require you to figure out when to checkpoint the application, how to make sure the application is in a safe state when at checkpoint, how to make sure the application runtime and the JVM are also in a safe state without having control over either, and how to make sure that all three (application, application runtime, and JVM) restore gracefully later.
 
@@ -71,8 +71,8 @@ With Liberty InstantOn, all you need to do to make your Java app start faster is
 
 You then just build an application layer on top of the [official Open Liberty container image](https://openliberty.io/docs/latest/container-images.html?utm_source=foojay&utm_medium=article&utm_id=instanton "official Open Liberty container image"), which includes Semeru and everything else you need.
 
-Use existing skills and APIs to write apps {#h2-2-use-existing-skills-and-apis-to-write-apps}
----------------------------------------------------------------------------------------------
+Use existing skills and APIs to write apps
+------------------------------------------
 
 Fast startup solutions that remove the JVM from the application force you to change how you think about developing applications. Also, most enterprise software is complex, with a lot of component reuse. Any dependencies on other open-source projects can mean waiting indefinitely for all those projects to be properly updated to adhere to the subset of standard Java features that can work without the JVM.
 
@@ -80,8 +80,8 @@ Liberty InstantOn performs a variety of tasks that allow you to stick with your 
 
 Liberty InstantOn works seamlessly with the Semeru Cloud Compiler, which enables the [benefits of JIT compilation](https://developer.ibm.com/articles/jitserver-optimize-your-java-cloud-native-applications/?utm_source=foojay&utm_medium=article&utm_id=instanton "benefits of JIT compilation") without the memory and CPU load for each instance of the restored application. Liberty InstantOn also supports the usual API specifications, old and new, including Jakarta EE, MicroProfile, and [Spring Boot (currently in beta)](https://dzone.com/articles/containerize-spring-boot-app-for-rapid-startup "Spring Boot (currently in beta)"). So, your new applications, as well as your existing applications, can be containerized to start up much faster.
 
-Enable on-the-fly configuration at deployment (restore) time {#h2-3-enable-on-the-fly-configuration-at-deployment-restore-time}
--------------------------------------------------------------------------------------------------------------------------------
+Enable on-the-fly configuration at deployment (restore) time
+------------------------------------------------------------
 
 Imagine it's 4 am, and you've been called out to diagnose problems in your production app. A native image solution to fast startup would require you to recompile the app and rebuild the application container image in order to debug certain problems that require further diagnostic information or disable certain configurations or optimizations.
 
@@ -89,8 +89,8 @@ Handily, with Liberty InstantOn, your operations team has already gathered trace
 
 These serviceability changes support practical use cases such as enabling method tracing or altering some Liberty behavior to work around a problem at deployment (restore) time. Importantly, you, as a developer, don't need to take most of these serviceability considerations into account when building the application container image because they're all handled by Liberty InstantOn.
 
-The app's peak throughput performance is not degraded {#h2-4-the-app-s-peak-throughput-performance-is-not-degraded}
--------------------------------------------------------------------------------------------------------------------
+The app's peak throughput performance is not degraded
+-----------------------------------------------------
 
 While scale-to-zero and container deployments make startup time an important performance metric, application throughput is still a critical consideration because it ends up affecting the cost of operating a service in the long run.
 
@@ -102,8 +102,8 @@ A restored container simply picks up execution from where it left off before the
 
 ![](throughput.png)
 
-The security of the app is not compromised {#h2-5-the-security-of-the-app-is-not-compromised}
----------------------------------------------------------------------------------------------
+The security of the app is not compromised
+------------------------------------------
 
 Checkpoint/restore solutions to fast startup can potentially compromise one of the most important considerations for enterprise deployments: security.
 
@@ -115,8 +115,8 @@ The Semeru JDK disallows most cryptographic algorithms from being used before ch
 
 For the limited set of cryptographic operations that are still permitted on the checkpoint side, Semeru ensures that it clears all the sensitive information so that there is no security exposure in the checkpoint.
 
-Fast startup with a slick developer experience without compromise {#h2-6-fast-startup-with-a-slick-developer-experience-without-compromise}
--------------------------------------------------------------------------------------------------------------------------------------------
+Fast startup with a slick developer experience without compromise
+-----------------------------------------------------------------
 
 While there is a range of approaches to improving Java startup times for serverless computing, it's essential that the developer experience is as slick as possible so that unnecessary additional responsibility, learning, and effort is not laid on the application developer.
 

@@ -24,14 +24,14 @@ In [Part 1](https://foojay.io/today/creating-mobile-apps-with-javafx---part-1/),
 
 In this article, we'll discuss how to upload your application to the respective mobile app stores so the world can install your application on their devices.
 
-### Applying to the App Stores {#h3-0-applying-to-the-app-stores}
+### Applying to the App Stores
 
 OK, you've tested your JavaFX mobile application on both iOS and Android devices. Now it's time to upload these applications to the respective app stores. This last step is fraught with tricky details and frustrations, especially for first time submitters.
 
 The challenges have to do with each app store's rules for user safety, application transparency, data privacy, software compliance, and specifying age-appropriate users. So, let's jump in and examine the process that will hopefully result in acceptance for your application.
 
-**Apple App Store** {#h2-1-apple-app-store}
--------------------------------------------
+**Apple App Store**
+-------------------
 
 Here's a summary of the steps required to submit a mobile app to the App Store. Gluon has very detailed, helpful instructions for each target platform. Read them carefully! Here you can find the instructions for ios targets. <https://docs.gluonhq.com/#platforms_ios>
 
@@ -100,7 +100,7 @@ To prepare your app for submission, you provide screenshots, app descriptions, a
 
 After you provide all the required information, submit your app for the app store review. After it passes, your app will appear in the App Store! Congratulations!
 
-### **Android Google Play** {#h3-2-android-google-play}
+### **Android Google Play**
 
 Here are the steps to upload your app to the Google Play Store.
 
@@ -132,7 +132,7 @@ You provide screenshots, descriptions of your application, a privacy policy, and
 
 Once your testing is complete, it's time to release your app into production. In this case, select **Move to Production** from the dropdown associated with your release. (You don't create a new release, unless you make changes from one of the Testing Releases.) When you move your app to production, the Google Play Console lets you create and manage production releases to make your app available to all users in your chosen countries.
 
-### Summary and Further Information {#h3-3-summary-and-further-information}
+### Summary and Further Information
 
 Together, JavaFX, Gluon, and GraalVM provide a viable technology stack for creating Mobile Applications targeting both iPhone/iPad iOS and Android phone and tablet devices. Create your UI with JavaFX and use the same JavaFX source code for all targets.
 

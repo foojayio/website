@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-What is Pitest? {#_what_is_pitest}
-----------------------------------
+What is Pitest?
+---------------
 
 Pitest is a library that helps us do mutation testing.
 
@@ -37,8 +37,8 @@ Mutations can take a lot of forms, relational operators (+, -, \*, /) being swit
 
 A full list of possible mutators can be found on the [Pitest Mutator Overview Page](https://pitest.org/quickstart/mutators/)
 
-Ok, but why should I use it? {#_ok_but_why_should_i_use_it}
------------------------------------------------------------
+Ok, but why should I use it?
+----------------------------
 
 The question we have to ask ourselves is: `Who watches the watchmen?`
 
@@ -50,8 +50,8 @@ It can also help us find issues if there were gaps in our **T** est **D** riven 
 
 `We test our tests`
 
-A short demo {#_a_short_demo}
------------------------------
+A short demo
+------------
 
 If you want to run the code yourself, please make sure you have `Maven` installed, and that you have cloned or downloaded the code from the [GitHub repository.](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
 
@@ -183,8 +183,8 @@ And as we can see after our run:
 
 In this manner, we can keep eliminating the gaps in our test coverage.
 
-Configuration {#_configuration}
--------------------------------
+Configuration
+-------------
 
 Pitest can be quite a resource-intensive plugin, so proper configuration is important.  
 
@@ -196,8 +196,8 @@ A list of configuration options can be found on the [command line quick start](h
 
 The list of possible features is shown when verbose logging is enabled.
 
-Sample setup {#_sample_setup}
------------------------------
+Sample setup
+------------
 
 Personally, I like to use this setup:
 
@@ -252,8 +252,8 @@ It's configured so that:
 * history in/output files are enabled to speed up the analysis
 * auto threads is enabled, so it uses the number of threads reported by my current machine **NOTE:** it is not recommended to use this on a CI server
 
-Advice {#_advice}
------------------
+Advice
+------
 
 The value of mutation testing lies in the analysis and the actions taken, not its execution.
 
@@ -267,8 +267,8 @@ It's a tool to help you receive quick feedback in your development lifecycle, no
 
 Please run it before your code's set in stone, especially as the implications of certain mutations might help point out spots where a different approach might be a better fit.
 
-Frequently Asked Questions {#_frequently_asked_questions}
----------------------------------------------------------
+Frequently Asked Questions
+--------------------------
 
 1. How can I speed up Pitest?
    * use proper slicing, and specific rules to target what's actually of interest to you (see for reference this [blogpost](https://blog.pitest.org/dont-let-your-code-dry))
@@ -291,8 +291,8 @@ Frequently Asked Questions {#_frequently_asked_questions}
 8. What is I want Subsumption analysis?  
    This is part of the [pitest extensions](https://www.arcmutate.com/) available through Arcmutate but does require a paid license
 
-References {#_references}
--------------------------
+References
+----------
 
 * [Source code for this project](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
 * [Official website](https://pitest.org/)

@@ -26,16 +26,16 @@ frozen: false
 
 For Java developers, CodeRabbit offers specialized analysis that understands Java syntax, best practices, and common patterns.
 
-**Getting Started** {#h2-0-getting-started}
--------------------------------------------
+**Getting Started**
+-------------------
 
-### **Prerequisites** {#h3-1-prerequisites}
+### **Prerequisites**
 
 * A GitHub, GitLab, Azure DevOps, or Bitbucket repository.
 * Java project with standard structure (Maven or Gradle).
 * Admin access to your repository.
 
-### **Setup Process** {#h3-2-setup-process}
+### **Setup Process**
 
 1. **Install CodeRabbit**
    * Visit [CodeRabbit.ai](https://coderabbit.ai/).
@@ -48,10 +48,10 @@ For Java developers, CodeRabbit offers specialized analysis that understands Jav
    * Create a test pull request with a simple Java change.
    * Verify CodeRabbit comments appear within minutes.
 
-**Core Features for Java Development** {#h2-3-core-features-for-java-development}
----------------------------------------------------------------------------------
+**Core Features for Java Development**
+--------------------------------------
 
-### **1. Code Quality Analysis** {#h3-4-1-code-quality-analysis}
+### **1. Code Quality Analysis**
 
 CodeRabbit analyzes your Java code for:
 
@@ -82,7 +82,7 @@ For example, when you ask CodeRabbit to check the style above, you'll get a resp
 * Null safety checks
 * Performance optimizations
 
-### **2. Security Vulnerability Detection** {#h3-5-2-security-vulnerability-detection}
+### **2. Security Vulnerability Detection**
 
 CodeRabbit identifies common Java security issues:
 
@@ -104,7 +104,7 @@ The above is analyzed in several ways, including this, by CodeRabbit:
 
 <br />
 
-### **3. Performance Optimization Suggestions** {#h3-6-3-performance-optimization-suggestions}
+### **3. Performance Optimization Suggestions**
 
 ```
 // CodeRabbit suggests improvements:
@@ -121,7 +121,7 @@ List<String> items = users.stream()
 ```
 
 
-### **4. Design Pattern Recognition** {#h3-7-4-design-pattern-recognition}
+### **4. Design Pattern Recognition**
 
 CodeRabbit understands common Java patterns and suggests improvements:
 
@@ -141,10 +141,10 @@ public class DatabaseConnection {
 ```
 
 
-**Working with CodeRabbit Reviews** {#h2-8-working-with-coderabbit-reviews}
----------------------------------------------------------------------------
+**Working with CodeRabbit Reviews**
+-----------------------------------
 
-### **Understanding Review Comments** {#h3-9-understanding-review-comments}
+### **Understanding Review Comments**
 
 CodeRabbit provides three types of feedback:
 
@@ -152,7 +152,7 @@ CodeRabbit provides three types of feedback:
 2. **Issues**: Potential bugs or problems
 3. **Nitpicks**: Minor style or convention issues
 
-### **Responding to Reviews** {#h3-10-responding-to-reviews}
+### **Responding to Reviews**
 
 **Accepting Suggestions**
 
@@ -170,10 +170,10 @@ CodeRabbit provides three types of feedback:
 * Address the feedback in your code
 * CodeRabbit automatically detects resolved issues in subsequent commits
 
-**Java-Specific Configuration** {#h2-11-java-specific-configuration}
---------------------------------------------------------------------
+**Java-Specific Configuration**
+-------------------------------
 
-### **Custom Rules Setup** {#h3-12-custom-rules-setup}
+### **Custom Rules Setup**
 
 Create a `.coderabbit.yaml` file in your repository root:
 
@@ -197,7 +197,7 @@ rules:
 ```
 
 
-### **Maven/Gradle Integration** {#h3-13-maven-gradle-integration}
+### **Maven/Gradle Integration**
 
 CodeRabbit automatically understands your build configuration:
 
@@ -206,10 +206,10 @@ CodeRabbit automatically understands your build configuration:
 * Identifies unused dependencies
 * Checks for security vulnerabilities in dependencies
 
-**Advanced Features** {#h2-14-advanced-features}
-------------------------------------------------
+**Advanced Features**
+---------------------
 
-### **1. Custom Prompts** {#h3-15-1-custom-prompts}
+### **1. Custom Prompts**
 
 Ask CodeRabbit specific questions about your Java code:
 
@@ -218,7 +218,7 @@ Ask CodeRabbit specific questions about your Java code:
 ```
 
 
-### **2. Architectural Reviews** {#h3-16-2-architectural-reviews}
+### **2. Architectural Reviews**
 
 CodeRabbit can analyze larger structural changes:
 
@@ -227,7 +227,7 @@ CodeRabbit can analyze larger structural changes:
 ```
 
 
-### **3. Testing Suggestions** {#h3-17-3-testing-suggestions}
+### **3. Testing Suggestions**
 
 CodeRabbit helps improve your test coverage:
 
@@ -245,10 +245,10 @@ public void testUserCreation() {
 ```
 
 
-**Best Practices** {#h2-18-best-practices}
-------------------------------------------
+**Best Practices**
+------------------
 
-### **1. Preparing Your Code for Review** {#h3-19-1-preparing-your-code-for-review}
+### **1. Preparing Your Code for Review**
 
 **Before Creating a PR:**
 
@@ -257,7 +257,7 @@ public void testUserCreation() {
 * Write meaningful commit messages
 * Keep PRs focused and reasonably sized
 
-### **2. Maximizing CodeRabbit's Effectiveness** {#h3-20-2-maximizing-coderabbit-s-effectiveness}
+### **2. Maximizing CodeRabbit's Effectiveness**
 
 **Provide Context:**
 
@@ -271,7 +271,7 @@ public void testUserCreation() {
 * Use follow-up commits for fixes
 * Learn from repeated suggestions
 
-### **3. Team Collaboration** {#h3-21-3-team-collaboration}
+### **3. Team Collaboration**
 
 **Code Review Workflow:**
 
@@ -280,10 +280,10 @@ public void testUserCreation() {
 3. Team members add a human perspective
 4. Address all feedback before merging
 
-**Common Java Patterns CodeRabbit Recognizes** {#h2-22-common-java-patterns-coderabbit-recognizes}
---------------------------------------------------------------------------------------------------
+**Common Java Patterns CodeRabbit Recognizes**
+----------------------------------------------
 
-### **1. Spring Framework** {#h3-23-1-spring-framework}
+### **1. Spring Framework**
 
 ```
 // CodeRabbit understands Spring annotations and suggests improvements
@@ -303,7 +303,7 @@ public class UserController {
 ```
 
 
-### **2. JPA/Hibernate** {#h3-24-2-jpa-hibernate}
+### **2. JPA/Hibernate**
 
 ```
 // CodeRabbit provides database-related suggestions
@@ -321,7 +321,7 @@ public class User {
 ```
 
 
-### **3. Stream API Usage** {#h3-25-3-stream-api-usage}
+### **3. Stream API Usage**
 
 ```
 // CodeRabbit optimizes stream operations
@@ -332,67 +332,67 @@ List<String> result = users.stream()
 ```
 
 
-**Troubleshooting Common Issues** {#h2-26-troubleshooting-common-issues}
-------------------------------------------------------------------------
+**Troubleshooting Common Issues**
+---------------------------------
 
-### **1. Review Not Triggering** {#h3-27-1-review-not-triggering}
+### **1. Review Not Triggering**
 
 * Check repository permissions
 * Verify CodeRabbit is installed on the repository
 * Ensure PR meets minimum criteria (not draft, has changes)
 
-### **2. False Positives** {#h3-28-2-false-positives}
+### **2. False Positives**
 
 * Use `@coderabbitai ignore` to dismiss incorrect suggestions
 * Provide feedback to improve future reviews
 * Add explanatory comments for complex logic
 
-### **3. Performance Issues** {#h3-29-3-performance-issues}
+### **3. Performance Issues**
 
 * Large PRs may take longer to review
 * Consider splitting large changes into smaller PRs
 * Use path filters to exclude generated files
 
-**Integration with Development Tools** {#h2-30-integration-with-development-tools}
-----------------------------------------------------------------------------------
+**Integration with Development Tools**
+--------------------------------------
 
-### **IDE Integration** {#h3-31-ide-integration}
+### **IDE Integration**
 
 * CodeRabbit works with any IDE through Git
 * Comments appear directly in your Git provider's interface
 * No additional IDE plugins required
 
-### **CI/CD Integration** {#h3-32-ci-cd-integration}
+### **CI/CD Integration**
 
 * CodeRabbit reviews happen automatically on PR creation
 * Can be configured to block merges until issues are resolved
 * Integrates with status checks
 
-**Measuring Success** {#h2-33-measuring-success}
-------------------------------------------------
+**Measuring Success**
+---------------------
 
-### **Key Metrics to Track** {#h3-34-key-metrics-to-track}
+### **Key Metrics to Track**
 
 * Reduction in post-merge bugs
 * Faster code review cycles
 * Improved code quality scores
 * Team learning and knowledge sharing
 
-### **Continuous Improvement** {#h3-35-continuous-improvement}
+### **Continuous Improvement**
 
 * Regularly review CodeRabbit's suggestions
 * Update the configuration based on team needs
 * Collect team feedback on review quality
 
-**Conclusion** {#h2-36-conclusion}
-----------------------------------
+**Conclusion**
+--------------
 
 CodeRabbit significantly enhances the Java development workflow by providing instant, intelligent code reviews. By understanding its capabilities and following these best practices, your team can enhance code quality, identify issues early, and expedite development cycles.
 
 Remember that CodeRabbit is a tool to augment, not replace, human code review. The combination of AI-powered analysis and human expertise creates the most effective code review process.
 
-**Next Steps** {#h2-37-next-steps}
-----------------------------------
+**Next Steps**
+--------------
 
 1. Set up CodeRabbit on a small Java project
 2. Experiment with different configuration options

@@ -32,8 +32,8 @@ While any tool won't completely make the pain go away, my colleague and I used t
 
 Let's dive in!
 
-Platform + Data {#_platform_data}
----------------------------------
+Platform + Data
+---------------
 
 A very common platform for managing events is called [Sessionize](https://sessionize.com/). Sessionize has a lot of really nice features, and the platform feels intuitive to use. Events are a complex beast, with each person/company/event probably having their own custom approach or features to handle certain things. Pair this with individual events vying for audience appeal, and you end up with unique challenges all over.
 
@@ -41,8 +41,8 @@ The NODES 2024 event is a completely virtual and free conference, focusing on li
 
 Sessionize houses data for sessions (topics to present), speakers (bio, social links, timezone), and evaluation results (scoring how well a submitted session fits for that event). As organizers, we can view each of these aspects and start assembling them into an event schedule, right?
 
-The Problem {#_the_problem}
----------------------------
+The Problem
+-----------
 
 *Right??* Not quite...​
 
@@ -54,8 +54,8 @@ We have 15-minute talks and 30-minute sessions, so we don't know how many of eac
 
 As a developer and data lover, I automatically turn to databases. They store and manage all kinds of structures, filtering, number crunching, and more every day. Why should conference scheduling be the exception?
 
-(Graph) Database to the Rescue {#_graph_database_to_the_rescue}
----------------------------------------------------------------
+(Graph) Database to the Rescue
+------------------------------
 
 While many databases could probably solve this problem, there are a couple of reasons for choosing a graph in this scenario.
 
@@ -63,8 +63,8 @@ While many databases could probably solve this problem, there are a couple of re
 2. Flexible schema. Many graph databases don't require a schema definition upfront, allowing you to dump data in and refactor it as you go. This avoids manipulating data by hand and looking at multiple data views.
 3. Visualization. Seeing the data can help you explore and analyze what is there. This is good for understanding the data, but also for showing others how the data is connected.
 
-How-To {#_how_to}
------------------
+How-To
+------
 
 Here's what we did...​
 
@@ -79,7 +79,7 @@ First, I mentioned that Sessionize had some really nice data views and export fe
 
 Remember that our event criteria requires us to need all these views. Let's import these to Neo4j!
 
-### Data Import {#_data_import}
+### Data Import
 
 I spun up a local instance of Neo4j using the Neo4j Desktop application and started with sessions data. Here's the import statement:
 
@@ -180,7 +180,7 @@ With all the data in, let's see what the data model looks like!
 
 Now we can start querying the data to see what we have and how we can start to piece together a schedule.
 
-### Data Query #1: Sessions by Region and Rating {#_data_query_1_sessions_by_region_and_rating}
+### Data Query #1: Sessions by Region and Rating
 
 First, we need to see what sessions are available in each region. We started with anything over a specific rating threshold and filtered by region timezones. The query looked something like this for Asia/Pacific:
 
@@ -201,7 +201,7 @@ The custom spreadsheets included session details, speaker data, and the rating i
 
 Once we had a good idea of the schedule, we could then accept the desired sessions and export that data to update Neo4j with accepted content/speakers.
 
-### Data Query #2: Speaker Cards {#_data_query_2_speaker_cards}
+### Data Query #2: Speaker Cards
 
 With our content solidified, we wanted to create speaker cards for each session, so that Neo4j and the speakers can highlight and promote their upcoming content. Because some sessions have a single speaker and some have multiple speakers, I needed two separate queries to populate two different templates.
 
@@ -214,8 +214,8 @@ RETURN sp.firstName+" "+sp.lastName as speakerName, sp.tagline as tagline, sp.pr
 ```
 
 
-Wrapping Up! {#_wrapping_up}
-----------------------------
+Wrapping Up!
+------------
 
 In the end, Neo4j allowed us to create custom data views that we couldn't get from Sessionize. There were three different tasks we were able to easily accomplish this way.
 
@@ -229,8 +229,8 @@ Do you want to be a part of the event and learn more about problems you can solv
 
 Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * [NODES 2024 event](https://dev.neo4j.com/nodes24)
 * [Neo4j Cypher CASE](https://neo4j.com/docs/cypher-manual/current/queries/case/)

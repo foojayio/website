@@ -34,8 +34,8 @@ The RiskReducer insurance company provides insurance for commercial structures. 
 
 Note that not all of these enrichment steps are occurring in the sequence shown above. Some may be happening in parallel and others may depend on prior steps. This gets even more complicated when we consider concurrency, workflow dependencies, etc...
 
-Concurrency in data enrichment {#h2-1-concurrency-in-data-enrichment}
----------------------------------------------------------------------
+Concurrency in data enrichment
+------------------------------
 
 Data enrichment often needs to occur in a specific order to fulfill dependencies in the workflow. A status indicator would normally be used to ensure that each step of the workflow happens in the proper sequence. RiskReducer insurance uses the following statuses for their workflow above:
 
@@ -51,7 +51,7 @@ Data enrichment often needs to occur in a specific order to fulfill dependencies
 
 There are two types of concurrency we need to consider for this workflow:
 
-### Machine concurrency {#h3-2-machine-concurrency}
+### Machine concurrency
 
 In this case, multiple processes may attempt to update the same document(s) at the same time. A common approach here is to add jobs to a queue to enrich data as needed. If jobs are taken from the queue by multiple processes, there is no way to guarantee that the tasks will be picked up in the order they were created. If jobs must be done in a specific sequence, we can use a combination of status, an in-process flag, and optimistic locking to ensure that tasks are completed in the correct order. For example, claim enrichment would issue the following update to set the status and begin its work:
 
@@ -80,7 +80,7 @@ It's entirely possible that a mix of both concurrent and sequential processing i
 
 The status array above indicates that the Claims step is complete and the Assets step has been started but is still in process. The lack of any other status section in the array indicates that those steps have not been started yet. Each step of the enrichment process can use this array to track what's going on.
 
-### Human concurrency {#h3-3-human-concurrency}
+### Human concurrency
 
 Whenever data is to be modified by a set of fingers and eyeballs (i.e., a human), concurrency is a bit of a different concern. A common approach in this case is pessimistic locking. In short, the user updating a section of the document can check out the entire document, or just a portion of it. This has some implications as humans work in a completely different timescale than computers do. In addition, humans can be interrupted in the middle of their work. When designing a locking mechanism for human data enrichment, ensure the following:
 
@@ -110,8 +110,8 @@ In the case that two people try to lock the same document at the same time, only
 
 In our example, 35 minutes after Mary's last update to the document, the TTL index will automatically remove the lock. At this point, the person assigned the job of completing the asset valuation in Mary's absence can then take the lock on the Asset section and complete the work. Note that the application should release the lock as part of the completion process.
 
-Schema design patterns {#h2-5-schema-design-patterns}
------------------------------------------------------
+Schema design patterns
+----------------------
 
 When enriching data, it's important to keep schema design patterns in mind. In our insurance policy example, there are many things to take into account. We typically recommend embedding data that is needed for most reads in a single document within reason. However, this is not always the case. For example, a policy can apply to any number of buildings. The needs of a single location business may differ widely from Starbucks, which has approximately one million\* locations. There is no way we can embed all of these locations in a document given the 16mb document size limit as well as other performance considerations.
 
@@ -145,14 +145,14 @@ Be sure to keep the following in mind:
 * Create an index starting with policyID in the Assets collection to ensure a quick retrieval of assets for the given policy.
 * Depending how you decide to track enrichment status, you may need to create an empty array of assets in the collection in order to use the $exists clause for optimistic locking of that section. If you are using separate fields to control workflow, then the externalFlag operation may not be needed as you can use $exists on the Assets array to determine if they are in-document or in a separate collection.
 
-Best practices {#h2-6-best-practices}
--------------------------------------
+Best practices
+--------------
 
-### Plan for concurrency {#h3-7-plan-for-concurrency}
+### Plan for concurrency
 
 Both human and machine concurrency are common issues in today's parallel processing architectures. It's best to assume that every human and every process will want to modify the same document at the same time. A good workflow and locking strategy are needed, especially when things start to scale.
 
-### Use a separate collection for pessimistic locking {#h3-8-use-a-separate-collection-for-pessimistic-locking}
+### Use a separate collection for pessimistic locking
 
 The locks collection can be a central place for all locks. This has several advantages of locking within the collection itself:
 
@@ -161,18 +161,18 @@ The locks collection can be a central place for all locks. This has several adva
 * A single ATOMIC statement should be used to obtain, update, or delete the lock.
 * Ensure the document is in the correct status immediately prior to taking the lock.
 
-### Add an auto-save to your application when humans and locks are involved {#h3-9-add-an-auto-save-to-your-application-when-humans-and-locks-are-involved}
+### Add an auto-save to your application when humans and locks are involved
 
 Although the user may not have changed any data, the application should periodically auto-save to update the lastUpdated field in the lock. This will prevent the lock from being released pre-maturely. The auto-save should only fire if the user is still logged into the application.
 
-### Release the lock app-side on logout {#h3-10-release-the-lock-app-side-on-logout}
+### Release the lock app-side on logout
 
 In most cases, the lock should be released when the user logs out of the application. The exception here is when a long, multi-day lock is needed. For short locks, release the lock regardless of whether the user logs out, or the application automatically logs them out after a time of inactivity. For longer, multi-day locks, rely on the TTL index to release the lock if the user has not.
 
-Anti-patterns {#h2-12-anti-patterns}
-------------------------------------
+Anti-patterns
+-------------
 
-### Using separate (temporary) collections to enrich data {#h3-13-using-separate-temporary-collections-to-enrich-data}
+### Using separate (temporary) collections to enrich data
 
 One pattern I've seen is to use a separate collection to create and enrich data. Once enrichment is complete, the document is then copied to the destination collection and removed from the temporary one. This can be problematic for a few reasons:
 
@@ -180,17 +180,17 @@ One pattern I've seen is to use a separate collection to create and enrich data.
 * The document(s) for *both* collections must be in cache when doing the copy, resulting in twice the memory consumption on the server for this step.
 * Concurrency can be an issue when copying as there is no way to do this as a single ACID transaction. Resist the urge to use a multi-document transaction here as it's not needed if the document is stored in a single place during the entire lifecycle.
 
-### Avoid using multi-document transactions for locking/unlocking {#h3-14-avoid-using-multi-document-transactions-for-locking-unlocking}
+### Avoid using multi-document transactions for locking/unlocking
 
 In some cases, a multi-document transaction is needed. Maintaining concurrency does not require this as we are only updating a single document whether we are storing the lock inside the collection or in a separate one. If two users attempt to lock the same document at the same time, one will win the lock and the other won't. Wrapping this inside of a transaction will only consume more resources on the server without providing any additional benefits as single document updates are already ATOMIC.
 
-### Using an optimistic locking strategy for human editing {#h3-15-using-an-optimistic-locking-strategy-for-human-editing}
+### Using an optimistic locking strategy for human editing
 
 Humans, with their fingers and eyeballs, tend to work in a non-linear fashion. For example, Mary is editing a document and heads off to one of the million\* Starbucks locations for a coffee. Since she is away from her desk for 20 minutes, another user may edit the same document. An optimistic locking strategy will cause Mary to lose her unsaved changes when she returns to editing the document. A pessimistic locking strategy is better in this case to accommodate the non-linear workflow of humans.
 
 \* Again, just a guess based on the number of locations near me.
 
-### Ignoring concurrency for machine enrichment {#h3-16-ignoring-concurrency-for-machine-enrichment}
+### Ignoring concurrency for machine enrichment
 
 When using an optimistic locking strategy for machine enrichment, be mindful of possible collisions due to concurrency. For example, if four worker processes attempt to update the same document at the same time, using "version" for an optimistic lock, a lot of extra work may be done. Use the update statement below:
 
@@ -204,7 +204,7 @@ On the first attempt, one of the workers will update the document and three will
 
 When processing is being done at scale via multiple workers, it's best to try and organize these workers so that any given document is processed sequentially by a single worker, rather than randomly by multiple workers. This will avoid the multiple failed attempts to update the document.
 
-Conclusion {#h2-17-conclusion}
-------------------------------
+Conclusion
+----------
 
 Data enrichment can be a complex process, especially when fingers and eyeballs are part of the mix. Use a solid concurrency strategy to ensure updates are not overwritten and any human can lock the document (or part of the document) they need in order to edit the data without worry of someone else obliterating their changes. A lock taken by a human (or a machine) may need to be forcibly released for a variety of reasons. Using a separate lock collection with a TTL index can do this for you without the need to manually intervene. Finally, enriching a document in-place using status indicators will consume fewer resources on the DB server than creating the document in one collection and then moving it to another after enrichment is complete.

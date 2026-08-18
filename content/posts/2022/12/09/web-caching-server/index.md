@@ -160,8 +160,8 @@ It serves the resource from the upstream regardless of the cache status:
 
 For more details on all available configuration parameters, check the [proxy-cache](https://apisix.apache.org/docs/apisix/plugins/proxy-cache/) plugin.
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 This post was relatively straightforward. The most challenging issue with server-side caching is the configuration: what to cache, for how long, etc.
 

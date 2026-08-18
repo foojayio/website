@@ -28,13 +28,13 @@ Let's explore the art of ensuring robust and bug-free code in the Java ecosystem
 
 Whether you're a seasoned developer or just starting out, there's a lot you can learn from the experts in this podcast about testing methodologies, tools, and best practices, empowering you to write reliable Java applications.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube PY7cyyVqxL4 >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,37 +42,37 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Oleg Šelajev {#h3-3-oleg-elajev}
+### Oleg Šelajev
 
 * <https://www.linkedin.com/in/shelajev/>
 * <https://medium.com/@shelajev>
 * <https://twitter.com/shelajev>
 
-### Roni Dover {#h3-4-roni-dover}
+### Roni Dover
 
 * <https://www.linkedin.com/in/ronidover/>
 * <https://twitter.com/doppleware>
 
-### Jonas Geiregat {#h3-5-jonas-geiregat}
+### Jonas Geiregat
 
 * <https://www.linkedin.com/in/jonas-geiregat-a8421a31/>
 * <https://jonasg.io/posts/>
 * <https://twitter.com/jonas_grgt>
 * <https://jonasg.io/posts/unit-test-ambiguity/>
 
-Podcast {#h2-6-podcast}
------------------------
+Podcast
+-------
 
-### Host: Frank Delporte {#h3-7-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Content {#h2-8-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests  
 
@@ -107,8 +107,8 @@ Content {#h2-8-content}
 
 <br />
 
-Music {#h2-9-music}
--------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

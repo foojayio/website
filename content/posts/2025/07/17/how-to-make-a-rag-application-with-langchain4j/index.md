@@ -34,8 +34,8 @@ This tutorial will take you through the ins and outs of creating a Q\&A chatbot 
 
 If you want to see the completed application, it is available in the [GitHub repository](https://github.com/mongodb-developer/langchainrag).
 
-Why use RAG? {#h2-0-why-use-rag}
---------------------------------
+Why use RAG?
+------------
 
 RAG works by retrieving relevant data from your knowledge base and using that information to enrich the input to the LLM. Here are some of the major benefits:
 
@@ -43,8 +43,8 @@ RAG works by retrieving relevant data from your knowledge base and using that in
 * Real-time updates: Instead of retraining the model to include the latest information, an expensive process, RAG enables real-time updates by pulling current data from your knowledge base.
 * Increased relevance: By grounding responses in your own corpus of data, RAG ensures answers are both accurate and contextually relevant.
 
-Use cases for RAG {#h2-1-use-cases-for-rag}
--------------------------------------------
+Use cases for RAG
+-----------------
 
 RAG is well-suited for a wide variety of applications, including:
 
@@ -52,15 +52,15 @@ RAG is well-suited for a wide variety of applications, including:
 * Customer support chatbots: Personalize interactions by referencing customer history, CRM data, and past interactions.
 * Dynamic BI tools: Enable business intelligence applications to provide insights using live operational data from databases or spreadsheets.
 
-LangChain4J for RAG {#h2-2-langchain4j-for-rag}
------------------------------------------------
+LangChain4J for RAG
+-------------------
 
 [LangChain4J](https://docs.langchain4j.dev/) is a Java-based library designed to simplify the integration of LLMs into Java applications by abstracting away a lot of the necessary components in your AI applications. It offers an extensive toolbox for building applications powered by retrieval-augmented generation, enabling us to build quicker and create modular applications.
 
 LangChain4J provides the building blocks to streamline your RAG implementation while maintaining full control over the underlying architecture.
 
-MongoDB for RAG {#h2-3-mongodb-for-rag}
----------------------------------------
+MongoDB for RAG
+---------------
 
 MongoDB is an ideal database for RAG implementations due to its:
 
@@ -69,8 +69,8 @@ MongoDB is an ideal database for RAG implementations due to its:
 3. Scalability: Handle high throughput and large datasets with MongoDB's horizontal scaling.
 4. Operational efficiency: Use MongoDB's aggregation pipelines, time-series collections, and multimodal capabilities to support both RAG and non-RAG workloads.
 
-Prerequisites {#h2-4-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this tutorial, you will need:
 
@@ -80,8 +80,8 @@ For this tutorial, you will need:
 * A [MongoDB Atlas account](https://www.mongodb.com/cloud/atlas/register?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=How%20to%20make%20a%20RAG%20application%20with%20LangChain4j&utm_term=tim.kelly) with a live cluster.
 * An [OpenAI API key](https://platform.openai.com/docs/overview).
 
-Our dependencies {#h2-5-our-dependencies}
------------------------------------------
+Our dependencies
+----------------
 
 First things first, let's add our dependencies to our POM:
 
@@ -124,12 +124,12 @@ First things first, let's add our dependencies to our POM:
   * Utilities for connecting and orchestrating various components like embedding models, vector stores, and content retrievers.
 * Jackson Databind simplifies the process of loading and handling JSON data.
 
-Setting up MongoDB and our embedding store {#h2-6-setting-up-mongodb-and-our-embedding-store}
----------------------------------------------------------------------------------------------
+Setting up MongoDB and our embedding store
+------------------------------------------
 
 To make our retrieval-augmented generation application work effectively, we need a robust and scalable solution for storing and querying embeddings. MongoDB, with its Atlas Search capabilities, serves as the backbone for this task. In this section, we'll walk through how to set up MongoDB and configure an embedding store using LangChain4J's MongoDB integration.
 
-### MongoDB setup {#h3-7-mongodb-setup}
+### MongoDB setup
 
 The first step is to initialize a connection to our MongoDB cluster. We use the `MongoClient` from the MongoDB Java driver to connect to our database:
 
@@ -179,7 +179,7 @@ Replace `"CONNECTION_URI"` with your actual MongoDB connection string, which inc
 
 We are also adding in our whole host of imports we will use throughout this tutorial. Don't worry, we will go through all these as we add them to our application.
 
-### Configuring the embedding store {#h3-8-configuring-the-embedding-store}
+### Configuring the embedding store
 
 The embedding store is the corpus of knowledge of our RAG application, where all embeddings and their associated metadata are stored. Let's add a method and call it from our main:
 
@@ -247,8 +247,8 @@ EmbeddingStore<TextSegment> embeddingStore = createEmbeddingStore(mongoClient);
 
 This `embeddingStore` is now ready to store, retrieve, and manage our embeddings, with all the beauty and benefits of MongoDB behind it.
 
-Creating our embedding model {#h2-9-creating-our-embedding-model}
------------------------------------------------------------------
+Creating our embedding model
+----------------------------
 
 The embedding model is the engine that converts raw text into numerical representations, also known as embeddings. These embeddings are high-dimensional representations of our data that capture the semantic meaning of text, making them the foundation for similarity searches in a retrieval-augmented generation application.
 
@@ -286,8 +286,8 @@ OpenAiEmbeddingModel embeddingModel = OpenAiEmbeddingModel.builder()
 
 This embedding model is critical for generating vector representations of the text data we work with.
 
-Configuring our chat model {#h2-10-configuring-our-chat-model}
---------------------------------------------------------------
+Configuring our chat model
+--------------------------
 
 In a retrieval-augmented generation application, the chat model serves as the conversational engine. It generates our context-aware, human-like responses based on the user's query and retrieved content. For this tutorial, we configure a chat model using OpenAI's GPT-4 (other AI models are available), simplified by LangChain4J's straightforward API.
 
@@ -329,8 +329,8 @@ For instance, a query like:
 
 Would involve retrieving our related embeddings about Atlas Vector Search from the MongoDB vector store, and then GPT-4 would generate a response using that context.
 
-How to load our data {#h2-11-how-to-load-our-data}
---------------------------------------------------
+How to load our data
+--------------------
 
 We are going to be loading our data, which we can download from [MongoDB's Hugging Face](https://huggingface.co/datasets/MongoDB/devcenter-articles). It is a collection of approximately 600 articles and tutorials from [MongoDB's Developer Center](https://www.mongodb.com/developer/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=How%20to%20make%20a%20RAG%20application%20with%20LangChain4j&utm_term=tim.kelly). We are going to place this [`devcenter-content-snapshot.2024-05-20 1.json`](https://huggingface.co/datasets/MongoDB/devcenter-articles/tree/main) file into the resources folder.
 
@@ -421,7 +421,7 @@ private static List<TextSegment> splitIntoChunks(List<Document> documents, int m
 ```
 
 
-### Parameters {#h3-12-parameters}
+### Parameters
 
 * `maxTokensPerChunk`: Maximum tokens allowed in each segment. This ensures compatibility with the model's token limit.
 * `overlapTokens`: Number of overlapping tokens between consecutive chunks. Overlaps help preserve context across segments.
@@ -463,8 +463,8 @@ public class LangChainRagApp {
 
 I added a few comments here to help us track our progress as we ingest our data. I also adjusted to only intake the first 10% of the documents. When I did this with the entire dataset, it took 30+ minutes to load in all the data on my slow internet. Feel free to adjust this, as the more data ingested, the more potentially accurate the answers.
 
-Creating our content retriever {#h2-13-creating-our-content-retriever}
-----------------------------------------------------------------------
+Creating our content retriever
+------------------------------
 
 In our retrieval-augmented generation application, the Content Retriever fetches the most relevant content from a data source based on our user query. LangChain4J provides an abstraction for this, allowing us to connect our embedding store and embedding model to retrieve content.
 
@@ -506,8 +506,8 @@ Let's break down what makes this Content Retriever:
 
 By tweaking these parameters, we can fine-tune how your retriever performs, ensuring it delivers exactly what we need!
 
-Asking questions {#h2-14-asking-questions}
-------------------------------------------
+Asking questions
+----------------
 
 Time to put the pieces together. We need a way to bring all our components together to query our enhanced LLM. First, we need to create an interface for our assistant. Create an interface, as shown below.
 
@@ -577,8 +577,8 @@ By combining MongoDB Atlas triggers with OpenAI's powerful models, large volumes
 
 This is a well informed response, and actually references the information available in the original tutorial, [Using MongoDB Atlas Triggers to Summarize Airbnb Reviews With OpenAI](https://www.mongodb.com/developer/products/mongodb/atlas-open-ai-review-summary/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=How%20to%20make%20a%20RAG%20application%20with%20LangChain4j&utm_term=tim.kelly). Want the code? Just ask in the query. It will tailor the responses to exactly what you ask!
 
-Conclusion {#h2-15-conclusion}
-------------------------------
+Conclusion
+----------
 
 There we have it---we used MongoDB with LangChain4j to create a simple RAG application. LangChain4j abstracted away a lot of the steps along the way, from segmenting our data, to connecting to our MongoDB database and embedding model.
 

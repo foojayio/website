@@ -37,12 +37,12 @@ Fundamental Principles of Microservices Design
 * Service Autonomy and Independence
 * Evolutionary Design and Continuous Improvement
 
-Single Responsibility Principle: Why Should Your Microservices Focus on a Single Capability? {#h2-0-single-responsibility-principle-why-should-your-microservices-focus-on-a-single-capability}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Single Responsibility Principle: Why Should Your Microservices Focus on a Single Capability?
+--------------------------------------------------------------------------------------------
 
 ![SRP](microsevices-part2-2-700x352.png)
 
-### **Problem: Managing multiple responsibilities within a microservice can lead to difficulties in maintenance and comprehension, much like a jack of all trades but a master of none.** {#h3-1-problem-managing-multiple-responsibilities-within-a-microservice-can-lead-to-difficulties-in-maintenance-and-comprehension-much-like-a-jack-of-all-trades-but-a-master-of-none}
+### **Problem: Managing multiple responsibilities within a microservice can lead to difficulties in maintenance and comprehension, much like a jack of all trades but a master of none.**
 
 * **Solution**: Apply the Single Responsibility Principle - each microservice should focus on one single capability that it masters.
 * **Benefits**: This specialization makes microservices easier to comprehend, test, scale, and upgrade. It's like having a coordinated team where each member excels at their role.
@@ -62,8 +62,8 @@ public class AuthenticationService {
 
 * **Real-World**: Amazon and Netflix decompose their platforms into focused microservices, achieving a high level of specialization, much like a team of specialists.
 
-Loose Coupling and High Cohesion: How To Avoid Tight Coupling and Low Cohesion? {#h2-2-loose-coupling-and-high-cohesion-how-to-avoid-tight-coupling-and-low-cohesion}
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Loose Coupling and High Cohesion: How To Avoid Tight Coupling and Low Cohesion?
+-------------------------------------------------------------------------------
 
 ![Low and high coupling](microservices-part2-3-700x394.png)
 
@@ -75,7 +75,7 @@ Coupling is a measure of the number of relationships that one component has with
 
 **Low coupling means that**: Components do not have many relationships with other components.
 
-### **Problem**: Tight coupling leads to fragility - a change in one microservice breaks connected services. {#h3-3-problem-tight-coupling-leads-to-fragility-a-change-in-one-microservice-breaks-connected-services}
+### **Problem**: Tight coupling leads to fragility - a change in one microservice breaks connected services.
 
 Low cohesion results in unclear responsibilities.
 
@@ -109,12 +109,12 @@ public class Order {
 
 * **Real World**: Uber adopted loose coupling and high cohesion for services like Payment, Trip History, and Driver Profile, enabling each service to evolve independently.
 
-Scalability and Resilience: Is Your Architecture Ready for Traffic Surges and Failures? {#h2-4-scalability-and-resilience-is-your-architecture-ready-for-traffic-surges-and-failures}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Scalability and Resilience: Is Your Architecture Ready for Traffic Surges and Failures?
+---------------------------------------------------------------------------------------
 
 ![Scalability](microservices-part2-4-700x390.png)
 
-### **Problem**: A system must handle spikes in traffic and recover from failures to ensure reliability. If a system can't handle increased workloads or recover from issues, it won't be reliable. {#h3-5-problem-a-system-must-handle-spikes-in-traffic-and-recover-from-failures-to-ensure-reliability-if-a-system-can-t-handle-increased-workloads-or-recover-from-issues-it-won-t-be-reliable}
+### **Problem**: A system must handle spikes in traffic and recover from failures to ensure reliability. If a system can't handle increased workloads or recover from issues, it won't be reliable.
 
 * **Solution**: Build scalability and resilience from the start.
 
@@ -129,10 +129,10 @@ Tools like Spring Boot and Netflix Eureka can help create microservices that sca
 * **Example**: Netflix uses horizontal scaling, redundancy, and circuit breakers to improve resilience. Similarly, an increase in viewership in a movie streaming service should not result in buffering or downtime.
 * **Real World**: Amazon handles massive traffic surges on Black Friday by leveraging these principles of scalable and resilient services.
 
-Service Autonomy and Independence: How To Streamline Evolution of Microservices? {#h2-6-service-autonomy-and-independence-how-to-streamline-evolution-of-microservices}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Service Autonomy and Independence: How To Streamline Evolution of Microservices?
+--------------------------------------------------------------------------------
 
-### **Problem**: Change cycles slow down if updating one microservice requires changing others. If changes in one microservice necessitate changes in others, it slows down development and complicates system maintenance. {#h3-7-problem-change-cycles-slow-down-if-updating-one-microservice-requires-changing-others-if-changes-in-one-microservice-necessitate-changes-in-others-it-slows-down-development-and-complicates-system-maintenance}
+### **Problem**: Change cycles slow down if updating one microservice requires changing others. If changes in one microservice necessitate changes in others, it slows down development and complicates system maintenance.
 
 * **Solution**: Architect microservices to be independent and self-contained.
 
@@ -143,8 +143,8 @@ Service Autonomy and Independence: How To Streamline Evolution of Microservices?
 * **Example**: In Uber's system, the User Management service can evolve separately from the Order Processing service, allowing for independent modifications. Similarly, consider a User microservice in an e-commerce application. Any changes in this service should not affect other services like the Product Catalog or Shopping Cart services.
 * **Real World**: Uber accelerated feature development by enabling teams to modify microservices independently.
 
-Evolutionary Design and Continuous Improvement {#h2-8-evolutionary-design-and-continuous-improvement}
------------------------------------------------------------------------------------------------------
+Evolutionary Design and Continuous Improvement
+----------------------------------------------
 
 ![](microservices-part2-5-700x280.png)
 
@@ -152,7 +152,7 @@ In a rapidly evolving technological landscape, systems must adapt and improve co
 
 Evolutionary design allows for the gradual development and refinement of the system, while continuous improvement ensures that the system constantly adapts to changing requirements and environments.
 
-### **Problem**: Technology, user requirements, and business goals change over time. If a system is not designed to evolve, it will become outdated, leading to increased maintenance costs, decreased user satisfaction, and potential loss of business. {#h3-9-problem-technology-user-requirements-and-business-goals-change-over-time-if-a-system-is-not-designed-to-evolve-it-will-become-outdated-leading-to-increased-maintenance-costs-decreased-user-satisfaction-and-potential-loss-of-business}
+### **Problem**: Technology, user requirements, and business goals change over time. If a system is not designed to evolve, it will become outdated, leading to increased maintenance costs, decreased user satisfaction, and potential loss of business.
 
 * **Solution**: Implement evolutionary design principles and adopt a culture of continuous improvement. Systems should be designed in a way that allows them to be updated, improved, and extended over time. This can be complemented by regular reviews, feedback mechanisms, and a willingness to refactor and improve the code.
 * **Benefits**: Systems designed to evolve can better adapt to changing requirements, which can lead to increased longevity, improved user satisfaction, and a competitive edge. Continuous improvement allows teams to learn, innovate, and improve their processes, leading to better productivity and quality.
@@ -160,7 +160,7 @@ Evolutionary design allows for the gradual development and refinement of the sys
 * **Example**: Consider a Payment microservice in an e-commerce application. Initially, it might only support credit card payments. However, as the platform grows and user needs change, the system should be designed to easily incorporate additional payment methods such as PayPal, Bitcoin, etc. This is an example of evolutionary design.
 * **Real World**: Amazon's transition from a monolithic architecture to a microservices architecture is a good example of evolutionary design and continuous improvement. They continuously evolved their architecture to support their rapidly growing business.
 
-### Conclusion {#h3-10-conclusion}
+### Conclusion
 
 In conclusion, **designing microservices is a marathon, not a sprint.**
 

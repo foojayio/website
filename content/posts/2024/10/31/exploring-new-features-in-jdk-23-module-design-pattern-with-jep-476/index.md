@@ -25,7 +25,7 @@ Although the module design pattern can be implemented in many different ways, th
 
 Before Java 9, each project using the module design pattern at any level was a bit difficult and many times broken. Such a situation had a direct impact on source code maintainability and event extensibility, as it was very easy to break module boundaries. Many times this state has been called a bit like "classpath hell". In order to avoid such a situation, it was necessary to preserve the coding discipline.
 
-### **Module** design pattern before Java 9 {#h3-0-module-design-pattern-before-java-9}
+### **Module** design pattern before Java 9
 
 Modular code base design can take many forms \[3\]. One possible approach is to create a Singleton object. Such an object serves as a gateway to basic services so that these services are not misused.
 
@@ -81,7 +81,7 @@ SecureModule, executeLogic name:maybe not wanted
 
 **Example 2.**: Compromising of access to internal module logic due to incorrect visibility of internal fields
 
-### Pushing modularization forward with JEP-476 {#h3-1-pushing-modularization-forward-with-jep-476}
+### Pushing modularization forward with JEP-476
 
 Starting with Java 9 \[5\], Java platform represents a module system. Although it may seem that for various reasons it is still not fully accepted or even considered a controversial decision by the architects of the Java platform, today's tech development shows otherwise.
 
@@ -164,7 +164,7 @@ FactoryTwo element:FactoryElement[name=factory2, value=42]
 
 **Example 5.**: Each factory is automatically available and can hide different implementations that remain hidden for the jep476mod1 module
 
-### Conclusion {#h3-2-conclusion}
+### Conclusion
 
 JEP-476 is another great example of Java platform evolution while enabling internal project stability, transparency and security.
 
@@ -172,7 +172,7 @@ Allowing the API of an entire module to be directly imported without having to s
 
 This state can lead not only to improving the general security of the codebase, but also to improving maintainability and preventing the occurrence of legacy code.
 
-### References {#h3-3-references}
+### References
 
 [\[1\] JEP 476: Module Import Declarations (Preview)](https://openjdk.org/jeps/476)  
 [\[2\] Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

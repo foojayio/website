@@ -26,7 +26,7 @@ Yet, I believe each of them focuses on a particular aspect of it: some on a spec
 
 I'd like this post to be the definitive guide on the subject, even though I'm pretty sure it won't. At least, I'll be able to point others to it!
 
-### Root Cause {#h3-0-root-cause}
+### Root Cause
 
 Whether you love or hate frameworks in general, they are nonetheless pretty common in the Java ecosystem. is the ORM standard and part of the Jakarta EE specifications. [Hibernate](https://hibernate.org/) is its most widespread implementation: for example, it's the default in Spring Boot.
 
@@ -89,7 +89,7 @@ assertThrows(LazyInitializationException.class, orders::isEmpty); // 9
 
 The above sample looks pretty convoluted to reproduce the problem. However, it's straightforward in web apps as each new request should spawn a new `EntityManager`.
 
-### Possible Solutions {#h3-1-possible-solutions}
+### Possible Solutions
 
 Now that we have framed the problem and what causes it, we can look at possible solutions.
 
@@ -181,7 +181,7 @@ The project provides the several `deepHydrate()` methods that require two parame
 
 The method fetches eagerly and indiscriminately all attributes that are proxies in the object graph.
 
-### Fetch Join {#h3-2-fetch-join}
+### Fetch Join
 
 All the above solutions have performance-related issues:
 
@@ -229,7 +229,7 @@ WHERE customer0_.id = 1
 ```
 
 
-### Entity Graph {#h3-3-entity-graph}
+### Entity Graph
 
 Fetch joins get the job done: they eagerly load lazy attributes for a query.
 
@@ -266,7 +266,7 @@ var customer = anotherManager.find(Customer.class, id, props);
 ```
 
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 In this post, we explained the reason behind Hibernate's `LazyInitializationException`. We browsed through a couple of hacky solutions. They all have performance issues, either memory-wise or network-wise.
 

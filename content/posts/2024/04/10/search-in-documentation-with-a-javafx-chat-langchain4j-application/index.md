@@ -26,8 +26,8 @@ At the Fosdem conference in Brussels on February 3rd, I gave a presentation abou
 
 The [video and links of that presentation are available here](https://webtechie.be/post/2024-02-02-links-presentation-experiment-ai-llm-chat-with-docs/), and this post is a more detailed explanation of that application.
 
-What is LangChain4j {#h2-0-what-is-langchain4j}
------------------------------------------------
+What is LangChain4j
+-------------------
 
 The goal of LangChain4j is to simplify the integration of AI and LLM capabilities into Java applications. The [project lives on GitHub](https://github.com/langchain4j/langchain4j/), and has a separate [repository with demo applications](https://github.com/langchain4j/langchain4j-examples).
 
@@ -35,7 +35,7 @@ I first learned about LangChain4j at the Devoxx conference in Antwerp in October
 
 In the last demo, she asked the application to give some answers based on a provided text. And that was exactly what I was looking for to be able to interact with an existing dataset.
 
-### JavaFX LangChain4J Example Application {#h3-1-javafx-langchain4j-example-application}
+### JavaFX LangChain4J Example Application
 
 As a first step, I added a [JavaFX example application to the LangChain4j examples project](https://github.com/langchain4j/langchain4j-examples/tree/main/javafx-example).
 
@@ -130,8 +130,8 @@ public class CustomStreamingResponseHandler {
  </figure>
 </figure>
 
-Chat With the Azul Documentation {#h2-2-chat-with-the-azul-documentation}
--------------------------------------------------------------------------
+Chat With the Azul Documentation
+--------------------------------
 
 As a docs writer, and someone who loves to experiment with code from time to time, I wanted to find out if I could have an application that uses a real documentation set and provide answers based on it. The solution described here is not unique, as a lot of people are researching this kind of project.
 
@@ -139,7 +139,7 @@ See, for example, this [blog post by Marcus Hellberg](https://marcushellberg.dev
 
 {{< youtube p5qFSMUM44I >}}
 
-### Problems to Solve {#h3-3-problems-to-solve}
+### Problems to Solve
 
 Based on experience with ChatGPT, these are some of the problems that should be handled by building a custom application:
 
@@ -149,7 +149,7 @@ Based on experience with ChatGPT, these are some of the problems that should be 
 * Provide links to the documentation pages where more info is available.
 * Be polite.
 
-### Structured Documentation {#h3-4-structured-documentation}
+### Structured Documentation
 
 At Azul, our documentation is created from different AsciiDocs projects per product, with a fully automated build pipeline to generate the HTML files and a JSON dataset for the Algolia search integration. And that JSON file is exactly what we need to feed into a search application to provide correct answers.
 
@@ -191,7 +191,7 @@ List<ContentSection> contentSections = objectMapper.readValue(json, new TypeRefe
 ```
 
 
-### Java Application {#h3-5-java-application}
+### Java Application
 
 The full [sources are available on GitHub](https://github.com/FDelporte/langchain4j-javafx-docs-chat). Most of the code is identical to the JavaFX demo application described above, which you can find in the LangChain4j examples repository.
 
@@ -313,8 +313,8 @@ void ask(SearchAction action) {
  </figure>
 </figure>
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 In this example, LangChain4j interacts with the OpenAI API. But the library can also interact with other LLM providers (like Google Vertex AI) and embedding (vector) stores (such as Pinecone or Vespa).
 

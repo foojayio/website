@@ -26,20 +26,20 @@ Hello and welcome back to the **Java Panama Polyglot** series where we will be p
 
 In [Part 1](https://foojay.io/today/java-panama-polyglot-part1/) you got a chance to learn about how to use Java [Project Panama](https://jdk.java.net/panama/)'s (foreign function interface) abilities to access native libraries written in C++. Today, we will be looking at Java code being able to talk to Apple's [Swift](https://developer.apple.com/swift/) language.
 
-Requirements {#h2-0-requirements}
----------------------------------
+Requirements
+------------
 
 * Project Panama EA release - Build 19-panama+1-13 (2022/1/18) - <https://jdk.java.net/panama/>
 * Apple's Swift compiler
   * MacOS - <https://developer.apple.com/technology/xcode.html>
 
-Problem {#h2-1-problem}
------------------------
+Problem
+-------
 
 As a **MacOS Swift developer** you want to expose functions allowing Java developers to call into.
 
-Solution {#h2-2-solution}
--------------------------
+Solution
+--------
 
 Create and **export C functions** as symbols that are available to linkers. As a Swift developer you will create Swift functions annotated to export them as C functions that will allow Java's foreign function APIs to access native symbols (CLinker).
 
@@ -51,12 +51,12 @@ Similar to jar files native libraries are operating system specific and can be c
 
 Before we create a Swift file let's get glimpse of the language by using the Swift REPL (Read-Evaluate-Print-line).
 
-Swift Primer {#h2-3-swift-primer}
----------------------------------
+Swift Primer
+------------
 
 Since this is a Java centric article, this section is going to be very brief. It will give you the very basics to get started with the Swift language.
 
-### Swift REPL - Hello World {#h3-4-swift-repl-hello-world}
+### Swift REPL - Hello World
 
 After installing Xcode you should have the swift REPL and compiler at the command prompt as shown below:
 
@@ -123,8 +123,8 @@ Hello, World!
 
 Assuming you've got the hang of it, let's create a simple Swift function.
 
-Swift functions {#h2-5-swift-functions}
----------------------------------------
+Swift functions
+---------------
 
 Still inside the REPL you can create a Swift function by starting with the `func` keyword, the **name** of the function, parameter list (in parens) and an optional return type prefixed with the arrow symbol `->`.
 
@@ -155,8 +155,8 @@ Above, you'll notice the output text of **authenticated** and subsequent a resul
 
 To exit the REPL type `:` (colon symbol) then the `(lldb)` prompt appears for you to type `quit`.
 
-Creating a dynamic link library on MacOS {#h2-6-creating-a-dynamic-link-library-on-macos}
------------------------------------------------------------------------------------------
+Creating a dynamic link library on MacOS
+----------------------------------------
 
 Now that you are familiar with how to create a function lets create a native library that will export the Swift function as a C (ABI) function. This will allow Java Panama to load the library to access it as a native symbol.
 
@@ -193,8 +193,8 @@ As a reminder the name of the library when loaded using `System.loadLibrary("mya
 
 Now, that we have a library we can now use Project Panama's foreign function access APIs to execute the exported function.
 
-Example {#h2-7-example}
------------------------
+Example
+-------
 
 Let's create a Java application that will use the foreign access APIs to load the native library and invoke the function. Create a file called `MyAuthMain.java` with the following code:
 
@@ -259,8 +259,8 @@ You may enter!
 
 For extra credit check out my example of using MacOS' Touch ID using your fingerprint on GitHub [https://github.com/carldea/panama4newbies](https://github.com/carldea/panama4newbies/tree/main/macos-touchID) (sub project `touchid`).
 
-How it Works {#h2-8-how-it-works}
----------------------------------
+How it Works
+------------
 
 Compiling and building a native library:
 
@@ -274,7 +274,7 @@ The following is the naming convention for the MacOS operating system:
 
 `java.lang.UnsatisfiedLinkError`
 
-### Java talking to Swift functions as (C functions) {#h3-9-java-talking-to-swift-functions-as-c-functions}
+### Java talking to Swift functions as (C functions)
 
 The code example using Java 18's Panama (FFI) APIs you don't need to use the `jextract` tool. Here you'll notice the code creating a method handle (`MethodHandle`) instance by obtaining the native symbol (C function) to be invoked. Shown below is the `FunctionDescriptor` of the signature for the `authenticate_user()` C function that ultimately calls the Swift function `authenticateUser()`.
 
@@ -284,8 +284,8 @@ FunctionDescriptor.of(ValueLayout.JAVA_BOOLEAN)
 ```
 
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 You got a chance to get familiar with Swift REPL to try out some language basics. Next, you learned about the `@_cdecl("")`annotation that enable Swift functions to be exported as native symbols that follow the C ABI (convention).
 

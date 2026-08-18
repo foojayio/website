@@ -34,8 +34,8 @@ Microsoft Access databases are everywhere. Decades of `.mdb` and `.accdb` files 
 
 
 
-A Brief History {#h2-0-a-brief-history}
----------------------------------------
+A Brief History
+---------------
 
 UCanAccess was originally created by Marco Amadei and Gord Thompson and quickly became the go-to solution for Java-to-Access connectivity. The project was invaluable, but development went quiet around 2020. After a period of community reliance on an unmaintained codebase, the project was forked and revived in 2022 by its current maintainer, ensuring the lights stay on and the code stays clean.
 
@@ -43,25 +43,25 @@ The current fork is not just a maintenance release. It is an active effort to mo
 
 
 
-What Problems Does It Solve? {#h2-1-what-problems-does-it-solve}
-----------------------------------------------------------------
+What Problems Does It Solve?
+----------------------------
 
-### The Disappeared Bridge {#h3-2-the-disappeared-bridge}
+### The Disappeared Bridge
 
 Java dropped the `sun.jdbc.odbc.JdbcOdbcBridge` in Java 8 --- the legacy workaround for reaching Access databases via ODBC. Many projects were left stranded. UCanAccess serves as its pure-Java replacement, filling that gap permanently.
 
-### Cross-Platform Compatibility {#h3-3-cross-platform-compatibility}
+### Cross-Platform Compatibility
 
 Because UCanAccess is 100% Java with zero native code, it runs on Linux, macOS, and Windows alike. This is essential for containerized environments, CI/CD pipelines, and server-side applications where installing Windows ODBC drivers is not an option or undesired.
 
-### Seamless Integration for Tooling {#h3-4-seamless-integration-for-tooling}
+### Seamless Integration for Tooling
 
 UCanAccess is not just for bespoke Java applications. Software environments that speak JDBC --- such as **LibreOffice Base** , **OpenOffice** , **DbVisualizer** , **SQuirreL SQL** , **DBeaver** , and **MATLAB** --- can connect to Access files through UCanAccess without any extra configuration.
 
 
 
-Tech Stack \& Requirements {#h2-5-tech-stack-requirements}
-----------------------------------------------------------
+Tech Stack \& Requirements
+--------------------------
 
 * **Java 11 or higher** (LTS versions 17 and 21 are fully tested)
 * **Build tool**: Maven or Gradle
@@ -72,10 +72,10 @@ Tech Stack \& Requirements {#h2-5-tech-stack-requirements}
 
 
 
-Getting Started {#h2-6-getting-started}
----------------------------------------
+Getting Started
+---------------
 
-### Add the Dependency {#h3-7-add-the-dependency}
+### Add the Dependency
 
 **Maven (`pom.xml`):**
 
@@ -95,7 +95,7 @@ implementation("io.github.spannm:ucanaccess:5.1.5")
 ```
 
 
-### Connect and Query {#h3-8-connect-and-query}
+### Connect and Query
 
 Connecting is as simple as using any standard JDBC driver. No class registration or native driver setup is required:
 
@@ -123,7 +123,7 @@ No class registration, no native driver setup.
 
 Standard `DriverManager.getConnection()` is all you'll need.
 
-### Write Data Back {#h3-9-write-data-back}
+### Write Data Back
 
 UCanAccess supports full **DML** (Data Manipulation Language) --- both reads and writes. Even some **DDL** operations like `ALTER TABLE` are supported:
 
@@ -147,18 +147,18 @@ try (Connection conn = DriverManager.getConnection(url);
 ```
 
 
-### Access-Specific Functions {#h3-10-access-specific-functions}
+### Access-Specific Functions
 
 One common pain point when working with Access queries is the use of Access-specific SQL functions that standard JDBC drivers simply do not understand. UCanAccess ships with built-in emulations of the most common ones --- `IIf()`, `Nz()`, `Format()`, and financial functions like `PMT()` and `PV()`. Queries originally written for Access often run without any modification at all.
 
-### Uber JAR for Non-Maven Projects {#h3-11-uber-jar-for-non-maven-projects}
+### Uber JAR for Non-Maven Projects
 
 If you are integrating UCanAccess into a tool that does not use Maven --- such as LibreOffice Base or SQuirreL SQL --- the project ships a so-called **Uber JAR** : a single self-contained archive with all dependencies bundled in. You can download it directly from [Maven Central](https://central.sonatype.com/artifact/io.github.spannm/ucanaccess) and drop it onto the classpath without any further setup.
 
 
 
-Quality \& Maintenance {#h2-12-quality-maintenance}
----------------------------------------------------
+Quality \& Maintenance
+----------------------
 
 The active fork maintains a high bar for code quality:
 
@@ -169,8 +169,8 @@ The active fork maintains a high bar for code quality:
 
 
 
-Get Involved {#h2-13-get-involved}
-----------------------------------
+Get Involved
+------------
 
 UCanAccess lives at [github.com/spannm/ucanaccess](https://github.com/spannm/ucanaccess). Whether you have a bug to report, a feature idea, or want to contribute a test case, contributions are warmly welcomed.
 

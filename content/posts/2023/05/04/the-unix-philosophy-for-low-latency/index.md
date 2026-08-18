@@ -34,13 +34,13 @@ The above simple rules allow a system to be composed of simple components, conne
 
 The canonical example of the power of the Unix Philosophy is the famous [Knuth vs McIlroy competition to build a word count](http://www.leancrew.com/all-this/2011/12/more-shell-less-egg/) program; McIlroy builds a six command shell pipeline that is a complete (and bug-free) solution to the problem.
 
-The Unix philosophy in Enterprise IT {#h2-0-the-unix-philosophy-in-enterprise-it}
----------------------------------------------------------------------------------
+The Unix philosophy in Enterprise IT
+------------------------------------
 
 The above has arguably never really translated to Enterprise IT -- an Enterprise application tends to deal with relatively complex problems, be made up of modules with a greater scope and business functionality, and despite numerous attempts over the years to try and come up with a *high performance* standard for connection of modules together (COM, CORBA, SOAP, JSON/REST/HTTP anyone?), an effective standardised connection mechanism has never "stuck".
 
-The Chronicle solution {#h2-1-the-chronicle-solution}
------------------------------------------------------
+The Chronicle solution
+----------------------
 
 [Chronicle's](https://chronicle.software/) solution for the Unix Philosophy in Enterprise IT involves composing systems from
 
@@ -53,7 +53,7 @@ These open source technologies not only provide the benefits of Unix tools plus 
 * Persist all data that is sent between modules, facilitating debugging, troubleshooting and [out-of-band](https://en.wikipedia.org/wiki/Out-of-band)reporting
 * Allow individual modules to be stopped/restarted/upgraded without interrupting others
 
-### Example {#h3-2-example}
+### Example
 
 Below is some example code that is a super-simplified version of a workflow that is common in the world of financial markets (most of Chronicle's users are in this space):
 ![](https://chronicle.software/wp-content/uploads/2022/08/Screen-Shot-2022-08-24-at-11.13.09-AM.png)
@@ -145,7 +145,7 @@ The DTO extends a Chronicle Wire class SelfDescribingMarshallable, which provide
 * Support for renderers e.g. transactTime is a microsecond timestamp stored efficiently as a long but rendered to the user by the MicroTimestampLongConverter to a friendly date/time string
 * A path from greatest convenience (Chronicle Wire) to lowest possible latency (Bytes Marshallable) -- our recommendation is to start with the SelfDescribingMarshallable's implementation of Wire serialisation and you can incrementally convert DTOs in the fast path to use Bytes Marshallable
 
-### Testing {#h3-3-testing}
+### Testing
 
 The microservice leverages the above functionality, and Chronicle Wire's YamlTester to allow very simple behaviour-driven YAML testing -- the test class looks like this:
 
@@ -204,7 +204,7 @@ marketDataSnapshot: {
 ```
 
 
-### Hooking it all up and running {#h3-4-hooking-it-all-up-and-running}
+### Hooking it all up and running
 
 The sample code contains maven exec java stanzas to run each microservice and also stanzas to run the ChronicleReaderMain tool which reads messages from the queues, deserialises them and displays them as YAML. To run:
 

@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Creating Non-Blocking Streaming Endpoints for High-Throughput Applications {#h2-0-creating-non-blocking-streaming-endpoints-for-high-throughput-applications}
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Creating Non-Blocking Streaming Endpoints for High-Throughput Applications
+--------------------------------------------------------------------------
 
 There are problems that only occur in production. Or rather, we only notice them in production.
 
@@ -38,8 +38,8 @@ In reactive programming in JVM environments, data is modeled as a stream of sign
 
 In this article, we will explore what this means in practice, especially when our application integrates with a real datastore such as [MongoDB](https://www.mongodb.com/lp/cloud/atlas/try4-reg/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=reactive-foojay&utm_term=hugh.murray) and exposes streaming endpoints via Spring WebFlux.
 
-From Snapshots to Streams {#h2-1-from-snapshots-to-streams}
------------------------------------------------------------
+From Snapshots to Streams
+-------------------------
 
 Traditional REST endpoints return responses that are very similar to snapshots. A call arrives at the controller, the controller calls the service, the service calls the repository that queries the database. At this point, the results are collected in memory, serialized, and returned to the caller. The request is only completed and sent when the complete data set is ready.
 
@@ -47,7 +47,7 @@ Reactive systems revolutionize this mental model. Instead of returning a complet
 
 Let's look at a concrete example with Spring Boot.
 
-### Project Setup {#h3-2-project-setup}
+### Project Setup
 
 We start with a minimal reactive stack: WebFlux and [Reactive MongoDB](https://www.mongodb.com/docs/languages/java/reactive-streams-driver/current/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=reactive-foojay&utm_term=hugh.murray).
 
@@ -74,7 +74,7 @@ spring.data.mongodb.uri=mongodb+srv://<db_user>:<db_pass>@<db-uri>/?appName=devr
 ```
 
 
-### Domain Model: Telemetry as a Streamable Document {#h3-3-domain-model-telemetry-as-a-streamable-document}
+### Domain Model: Telemetry as a Streamable Document
 
 Let's assume we collect telemetry events coming from different devices.
 
@@ -99,8 +99,8 @@ public class TelemetryEvent {
 
 There is nothing special about the definition of this document. The big difference lies in how we access this collection.
 
-Reactive Repository {#h2-4-reactive-repository}
------------------------------------------------
+Reactive Repository
+-------------------
 
 When using Spring Data Reactive MongoDB, the methods in the repository layer directly return Flux and Mono.
 
@@ -116,7 +116,7 @@ Within this interface, there is a big difference. We are not wrapping and retrie
 
 This mode has important implications, as memory usage becomes proportional to demand. Doing so reduces garbage collection pressure because large amounts of data are not accumulated. Fewer objects in memory to delete means fewer heavy garbage cycles to perform. And we also have another important advantage. Latency improves because the first elements can be forwarded to the client before the entire data set is available.
 
-### Service Layer: Explicit Backpressure Strategy {#h3-5-service-layer-explicit-backpressure-strategy}
+### Service Layer: Explicit Backpressure Strategy
 
 Within the service layer, we can explicitly manage backpressure.
 
@@ -141,7 +141,7 @@ The operator highlighted within the service class, onBackpressureLatest(), clear
 
 Reactive programming requires making these choices consciously.
 
-### Streaming Endpoint with Server-Sent Events {#h3-6-streaming-endpoint-with-server-sent-events}
+### Streaming Endpoint with Server-Sent Events
 
 Let's expose the data stream to clients through Spring WebFlux.
 
@@ -172,8 +172,8 @@ The key to our solution is MediaType.TEXT_EVENT_STREAM_VALUE. The HTTP connectio
 
 Congratulations. We have built a completely non-blocking endpoint capable of returning streaming data, backed by MongoDB.
 
-The Real Bottleneck: Waiting, Not Working {#h2-7-the-real-bottleneck-waiting-not-working}
------------------------------------------------------------------------------------------
+The Real Bottleneck: Waiting, Not Working
+-----------------------------------------
 
 In a classic Java application based on a blocking stack, each client connection uses a thread. When that thread is waiting for a response from an external object, such as a database or service, that thread remains idle but still reserved. If we multiply this by thousands of simultaneous connections, the number and management of threads becomes the bottleneck to the scalability of our application.
 
@@ -181,7 +181,7 @@ With Reactor, threads are not tied to waiting in any way: when a database query 
 
 This does not mean that the system does less work, but it does mean that it wastes fewer resources doing nothing.
 
-### The Most Dangerous Line of Code {#h3-8-the-most-dangerous-line-of-code}
+### The Most Dangerous Line of Code
 
 There is one method that can silently destroy reactive scalability: block().
 
@@ -213,8 +213,8 @@ private Mono<TelemetryEvent> enrich(TelemetryEvent event) {
 
 Reactive systems reward and perform best within an end-to-end non-blocking design. A single blocking point, and the entire pipeline loses all its advantages.
 
-Resource Efficiency Under Pressure {#h2-9-resource-efficiency-under-pressure}
------------------------------------------------------------------------------
+Resource Efficiency Under Pressure
+----------------------------------
 
 Let's imagine a scenario in which we have ten thousand simultaneous subscribers to a service that exposes telemetry data.
 
@@ -222,7 +222,7 @@ In a traditional servlet-based architecture, for each client-side connection, th
 
 In a WebFlux architecture with Reactor, we have a small event pool at the center that coordinates all incoming and outgoing connections. Threads are not reserved for a single call or temporarily inactive sockets. Work is triggered by availability events, which allow data to flow from upstream to downstream without waiting. This way, the CPU always remains active doing useful work, instead of spending time managing threads that spend most of their time waiting.
 
-### Error Handling in Streaming Pipelines {#h3-10-error-handling-in-streaming-pipelines}
+### Error Handling in Streaming Pipelines
 
 In APIs that expose streaming endpoints, errors behave differently than in traditional REST endpoints. In fact, in the reactive case, an exception interrupts the streaming and the connection with the client is interrupted.
 
@@ -239,7 +239,7 @@ public Flux<TelemetryEvent> resilientStream(String deviceId) {
 
 It is important to be careful when using retries: if thousands of clients simultaneously try to reestablish a connection after a temporary error, the recovery can overload the system and prevent it from resuming normal operation. Again, reactive programming offers control, but not immunity from a series of issues that must be taken into account during the system planning and design phase.
 
-### Testing the Stream {#h3-11-testing-the-stream}
+### Testing the Stream
 
 Testing reactive systems requires a different approach than testing a traditional system. In fact, it involves testing individual signals rather than collections:
 
@@ -254,7 +254,7 @@ StepVerifier.create(
 
 Within the tests, we can explicitly state the emission of events and the termination of streaming activities. Furthermore, we can simulate the passage of time virtually, thus building and testing long-duration flows instantly and deterministically. This is a major strength of Reactor: streaming systems become and remain testable in a deterministic manner.
 
-### Closing Thoughts {#h3-12-closing-thoughts}
+### Closing Thoughts
 
 In this article, we learned how to build reactive data flows, and we understood that building reactive data flows for streaming data does not mean replacing the return type of endpoints from List to Flux. It means rethinking the way we model waiting, demand, response, coordination, and resource utilization. This architecture, when combined with tools that support reactive patterns such as [MongoDB](https://www.mongodb.com/lp/cloud/atlas/try4-reg/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=reactive-foojay&utm_term=hugh.murray) and exposed via Spring WebFlux, allows us to expose streaming endpoints that adapt predictably to external pressure from clients. It is a paradigm shift and a change in perspective: the complexity of thread management shifts to flow management, and very often, this is an advantage.
 

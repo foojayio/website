@@ -26,8 +26,8 @@ Though the title is a bit misleading, as it's unrelated to REST, it does an exce
 
 I want to do the same for Apache APISIX; it's beneficial when you write a custom plugin.
 
-General setup {#h2-0-general-setup}
------------------------------------
+General setup
+-------------
 
 The general setup uses Docker Compose and static configuration.  
 
@@ -71,8 +71,8 @@ plugins:
 3. Regular plugin
 4. Custom plugin, one per alternative
 
-Path variables {#h2-1-path-variables}
--------------------------------------
+Path variables
+--------------
 
 Path variables are a straightforward way to pass data. Their main issue is that they are limited to simple values, *e.g.* , `/links/{n}/{offset}`. The naive approach is to write the following Lua code:
 
@@ -147,8 +147,8 @@ n: 15, offset: 3
 ```
 
 
-Query parameters {#h2-2-query-parameters}
------------------------------------------
+Query parameters
+----------------
 
 Query parameters are another regular way to pass data. Like path variables, you can only pass simple values, *e.g.* , `/?foo=bar`. The Lua code doesn't require regular expressions:
 
@@ -207,8 +207,8 @@ end
 ```
 
 
-Request headers {#h2-3-request-headers}
----------------------------------------
+Request headers
+---------------
 
 Request headers are another way to pass parameters. While they generally only contain simple values, you can also use them to send structured values, *e.g.*, JSON. Depending on your requirement, APISIX can list all request headers or a specific one. Here, I get all of them:
 
@@ -242,8 +242,8 @@ Key-Value pair: accept=*/*
 ```
 
 
-Request body {#h2-4-request-body}
----------------------------------
+Request body
+------------
 
 Setting a request body is the usual way to send structured data, *e.g*, JSON. Nginx offers a simple API to collect such data.
 
@@ -275,8 +275,8 @@ Body: { "foo": 1, "bar": { "baz": "two" } }
 ```
 
 
-Cookies {#h2-5-cookies}
------------------------
+Cookies
+-------
 
 Last but not least, we can send parameters via cookies. The difference with previous alternatives is that cookies persist on the client side, and the browser sends them with each request. On the Lua side, we need to know the cookie name instead of listing all query parameters or headers.
 
@@ -306,8 +306,8 @@ Cookie value: Bar
 ```
 
 
-Summary {#h2-6-summary}
------------------------
+Summary
+-------
 
 In this post, we listed five alternatives to pass parameters server-side and explained how to access them on Apache APISIX. Here's the API summary:
 

@@ -30,8 +30,8 @@ The Raspberry Pi also has an ARM processor, so I wanted to know if CRaC can impr
 >
 > TL;DR; It does work perfectly but still needs a modified kernel and changes in Zulu which will be part of the next release in July.
 
-Raspberry Pi OS {#h2-0-raspberry-pi-os}
----------------------------------------
+Raspberry Pi OS
+---------------
 
 On the [download page of Azul](https://www.azul.com/downloads/?package=jdk-crac#zulu), two versions of Zulu are available now, with CRaC included. As you can see in the screenshot, both aim Linux, one for x86 64-bit platforms and the other one for ARM v8 64-bit. The second one is the same processor used in the Raspberry Pi 4.
 
@@ -54,10 +54,10 @@ $ sudo apt upgrade
  </figure>
 </figure>
 
-Install Azul Zulu OpenJDK {#h2-1-install-azul-zulu-openjdk}
------------------------------------------------------------
+Install Azul Zulu OpenJDK
+-------------------------
 
-### Manual Install Steps {#h3-2-manual-install-steps}
+### Manual Install Steps
 
 Download the "ARM 64-bit" version from the Azul website and follow these steps to unpack it and make a link to easy use it for our tests.
 
@@ -82,7 +82,7 @@ OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)
 ```
 
 
-### Using SDKMAN {#h3-3-using-sdkman}
+### Using SDKMAN
 
 Another approach is to use [SDKMAN](https://sdkman.io/). When I started this test, the CRaC version of Zulu was not included yet in the list of Java distributions in SDKMAN, but thanks to a quick intervention of Gerrit Grunwald (creator of the [DiscoAPI](https://github.com/foojayio/discoapi)) and the SDKMAN-team, this got solved within minutes.
 
@@ -133,8 +133,8 @@ OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)
 ```
 
 
-Create a Checkpoint with a Java Test Application {#h2-4-create-a-checkpoint-with-a-java-test-application}
----------------------------------------------------------------------------------------------------------
+Create a Checkpoint with a Java Test Application
+------------------------------------------------
 
 Within the CRaC-project, a demo application was created to explain the usage of the checkpoint and restore system, as [described here](https://github.com/CRaC/docs/blob/master/STEP-BY-STEP.md). Clone this project, build it with Maven, and execute it with an extra command line argument `-XX:CRaCCheckpointTo=cr` to define the directory where the checkpoint must be created.
 
@@ -238,12 +238,12 @@ The file created in `example-jetty/cr/dump4.log` seems to lead to a possible cau
 ```
 
 
-Fix 1: Add CRIU to the Kernel {#h2-5-fix-1-add-criu-to-the-kernel}
-------------------------------------------------------------------
+Fix 1: Add CRIU to the Kernel
+-----------------------------
 
 Thanks to the support of my colleague Sergey Nazarkin, it quickly became apparent how we needed to solve this problem... It turned out that Raspberry Pi OS doesn't support CRIU out-of-the-box yet. Because this Linux component is used by CRaC, at this moment, to create checkpoints and restore them, we must add this to the kernel.
 
-### Building the Kernel Without Change {#h3-6-building-the-kernel-without-change}
+### Building the Kernel Without Change
 
 On the Raspberry Pi website, it's [clearly described how the Linux kernel can be compiled](https://www.raspberrypi.com/documentation/computers/linux_kernel.html). To validate this process, I built the kernel without modifications to ensure I understood this flow. This is an overview of all the steps:
 
@@ -289,7 +289,7 @@ The last line proves that we could build our own kernel version, and the board h
 
 FYI: the command `make -j4 Image.gz modules dtbs` takes the longest time: 2 hours!
 
-### Change the Kernel to Support Checkpoint/Restore {#h3-7-change-the-kernel-to-support-checkpoint-restore}
+### Change the Kernel to Support Checkpoint/Restore
 
 Within the same `linux` directory, run the following commands:
 
@@ -320,12 +320,12 @@ Linux crac 6.1.32-v8-CRAC+ #2 SMP PREEMPT Thu Jun 15 11:08:18 BST 2023 aarch64 G
  </figure>
 </figure>
 
-### Retry the Checkpoint Creation with Fix 1 {#h3-8-retry-the-checkpoint-creation-with-fix-1}
+### Retry the Checkpoint Creation with Fix 1
 
 Unfortunately, this kernel change is insufficient, as the same error occurs during checkpoint creation...
 
-Fix 2: Replace Zulu with a Dev Version {#h2-9-fix-2-replace-zulu-with-a-dev-version}
-------------------------------------------------------------------------------------
+Fix 2: Replace Zulu with a Dev Version
+--------------------------------------
 
 As it turns out, the current Zulu version 17.0.7 with CRaC doesn't support this Linux kernel. Luckily, Sergey could provide me a dev-version of Zulu with changes that will be part of the next release in July. First, I needed to upload them to my Raspberry Pi.
 
@@ -349,7 +349,7 @@ OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA-dev-20230614092542 (build 17.0.7+7
 ```
 
 
-### Retry the Checkpoint Creation with Fix 1 and 2 {#h3-10-retry-the-checkpoint-creation-with-fix-1-and-2}
+### Retry the Checkpoint Creation with Fix 1 and 2
 
 With the modified kernel in place and the dev-version of Zulu, the checkpoint creation command shows this result in the application log:
 
@@ -396,8 +396,8 @@ CR: Checkpoint ...
 
 It seems we have a breakthrough here, and the checkpoint was successfully created, after which the application was killed!
 
-Restart From Checkpoint {#h2-11-restart-from-checkpoint}
---------------------------------------------------------
+Restart From Checkpoint
+-----------------------
 
 In the `cr` directory that we defined at startup of the application with `-XX:CRaCCheckpointTo=cr`, we can now find the following files:
 
@@ -470,8 +470,8 @@ $ /opt/zulu-crac/bin/java -XX:CRaCRestoreFrom=cr
 
 There is still a fix required to show the correct startup duration, but based on the timestamps we can see that it only took 450-430 = 20 milliseconds!
 
-Conclusion {#h2-12-conclusion}
-------------------------------
+Conclusion
+----------
 
 You can't run this test in a few minutes as the kernel takes a long time to build. But this first test shows that CRaC on embedded / Raspberry Pi is definitely possible and dramatically improves the startup time!
 

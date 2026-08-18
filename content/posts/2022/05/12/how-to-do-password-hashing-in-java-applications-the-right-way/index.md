@@ -26,18 +26,18 @@ The first thing you should think through when deciding how to store sensitive pa
 
 If you *do* need to store passwords in your Java application yourself, then this article is right for you.
 
-Hashing passwords for storage {#h2-0-hashing-passwords-for-storage}
--------------------------------------------------------------------
+Hashing passwords for storage
+-----------------------------
 
 If you store usernames and passwords in your application, whatever you do, **do not** **store** **passwords in plain text** (I know, I know, seem obvious!)! If your system gets breached, an attacker will be able to simply read these plain text passwords and impersonate users.
 
 To avoid the dreaded plain text password, you'll want to store a hashed version of your users' passwords. For that, you'll need a password hashing algorithm.
 
-### What is a password hashing algorithm? {#h3-1-what-is-a-password-hashing-algorithm}
+### What is a password hashing algorithm?
 
 There are different types of hashing algorithms, but password hashing algorithms are one-way functions specifically designed for working with passwords. Password hashing algorithms convert a plain text password into a string of data you can safely store in a database that can never be reversed (you can transform a plain text password into a hash, but it's impossible to transform a hash into a password, hence the name "one-way" function).
 
-### How does password hashing work? {#h3-2-how-does-password-hashing-work}
+### How does password hashing work?
 
 The way you use password hashing algorithms is during user authentication. Every time a user sends you their password (in plain text), the password is hashed right away. Then the hash is either stored (for registration purposes) or matched against the user's stored hash to verify that the password is correct (authentication).
 
@@ -47,8 +47,8 @@ What you need is a **strong password hashing algorithm** for your users' passwor
 
 Strong password hashing algorithms are slow to run, which makes brute force attacks less effective. There's a lot more depth we could go into here, but the TL;DR of it is this: when it comes to passwords you want to use a strong, resource-intensive password hashing algorithm to provide your users with the most possible safety.
 
-What's the best password hashing algorithm? {#h2-3-what-s-the-best-password-hashing-algorithm}
-----------------------------------------------------------------------------------------------
+What's the best password hashing algorithm?
+-------------------------------------------
 
 The first rule of password hashing algorithms is: **Don't write your own password hashing algorithm!** The exception is if you are a skilled cryptographer. If you're not, please rely on the standards provided by the industry and choose vetted algorithms and libraries to use within your application.
 
@@ -56,7 +56,7 @@ The first rule of password hashing algorithms is: **Don't write your own passwor
 
 According to the [OWASP foundation](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html), only a few algorithms should be considered for modern password hashing. Let's take a look at the recommended password hashing algorithms!
 
-### ARGON2ID {#h3-4-argon2id}
+### ARGON2ID
 
 The best algorithm to use at the moment (in 2022) is Argon2id. [Argon2](https://en.wikipedia.org/wiki/Argon2) is a key derivation function that was selected as the winner of the [Password Hashing Competition](https://en.wikipedia.org/wiki/Password_Hashing_Competition). It has three different versions:
 
@@ -159,7 +159,7 @@ System.out.println(validPassword);
 ```
 
 
-### SCRYPT {#h3-5-scrypt}
+### SCRYPT
 
 If you're unable to use Argon2id for any reason, [scrypt](https://en.wikipedia.org/wiki/Scrypt) is a good second choice. Similar to argon2id, scrypt is another strong password hashing algorithm that allows you to configure a variety of cost parameters to increase the resources it consumes.
 
@@ -195,7 +195,7 @@ true
 ```
 
 
-### USING BCRYPT {#h3-6-using-bcrypt}
+### USING BCRYPT
 
 If Argon2id and scrypt are not available, another strong choice is [BCrypt](https://en.wikipedia.org/wiki/Bcrypt). If you decide to use BCrypt, the work factor parameter should be set to **no less than** **10**.
 
@@ -208,8 +208,8 @@ BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(14);
 
 The higher you set the work factor, the stronger the hash will be, but it will also take more CPU resources (and time!) to finish running. On my local machine, setting running BCrypt with a workload of 10 costs me about 89ms on average. For a workload of 14, it is 1033ms on average. That is almost 12x as long. This is by no means an accurate benchmark, but it does show the impact of an increased work factor.
 
-Best practices for password hashing {#h2-7-best-practices-for-password-hashing}
--------------------------------------------------------------------------------
+Best practices for password hashing
+-----------------------------------
 
 Whenever you need to implement password hashing in your application, there are a few best practices you should keep in mind.
 

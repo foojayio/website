@@ -24,8 +24,8 @@ frozen: false
 
 It is not meant to be JMetro 2, it will be an entirely new theme.
 
-Strengths and Key Principles {#h2-0-strengths-and-key-principles}
------------------------------------------------------------------
+Strengths and Key Principles
+----------------------------
 
 This theme follows some of the design principles and has some of the key strengths of JMetro:
 
@@ -53,25 +53,25 @@ The benefits of this approach are:
 * Very easy to switch to another theme either because you want to set another theme on a different environment (OS, etc) or you just want to start using another theme altogether;
 * You'll keep having features added to the controls you're using in your application every time there's a new version of this theme with new features, without the need to change any code. All you need is to update the version of Transit.
 
-High level architecture {#h2-1-high-level-architecture}
--------------------------------------------------------
+High level architecture
+-----------------------
 
 ![](image-1.png)
 
-### **FXSkins** {#h3-2-fxskins}
+### **FXSkins**
 
 The Transit Theme makes use of the FXSkins library. FXSkins adds behavior to existing JavaFX Controls without the developer having to do anything, by leveraging the JavaFX Skin API. For example, one of the controls FXSkins adds features to is the Slider control. It adds a popup that fades in and out when the user drags the thumb, that popup is always located over the thumb and shows the Slider current value. It also adds a fill color to the Slider which the default JavaFX Slider doesn't have. This is just an example, there are other controls that FXSkins adds behavior to (by setting new Skins on them).
 
 Now the advantage of this architecture for the developer using the library is that you can use FXSkins independent of the Transit Theme. That is, you can have better skins with added features to your standard controls in your already existing themes without having to use the transit theme styles. Or you can even use FXSkins just as is (without any new theme), because it is already, by default, made to look good with Modena (the standard JavaFX theme). Check FXSkins documentation to learn how.
 
-### **Transit Theme** {#h3-3-transit-theme}
+### **Transit Theme**
 
 Adds the CSS styles to your control to make them look more modern. It also adds some more API for added style definitions.
 
 If you want the whole package, add Transit Theme as a dependency and you'll get the styles and the added behavior on your controls (Transit Theme already depends on the FXSkins library).
 
-New in this release {#h2-4-new-in-this-release}
------------------------------------------------
+New in this release
+-------------------
 
 * **Conscious ScrollPane Skin and style.**This new Skin for the ScrollPane will show the scrollbars in a minimal style with just the thumb showing. When the user mouses over the thumb the scrollbars transform to show their full UI. All of this is styleable through CSS: the minimal scrollbar visuals, the full scrollbar visuals, etc.
 
@@ -83,7 +83,7 @@ New in this release {#h2-4-new-in-this-release}
 
 * **Clear architectural separation between skins and theme CSS definitions.** As mentioned previously there's now a clear separation between the new skin definition and the CSS theme definition. Transit Theme depends on FXSkins library which is an entirely different library.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 **A new theme called Transit has just been released, you can head on over to the [documentation page](https://pixelduke.com/transit-java-javafx-theme/) or [github page](https://github.com/dukke/Transit) for more information.**

@@ -30,8 +30,8 @@ Whether you want to become a software developer or have been doing it for years,
 
 Let's begin.
 
-Takeaways {#h2-1-takeaways}
----------------------------
+Takeaways
+---------
 
 1. The success of Java can be attributed to various factors. Still, the stability and expressiveness of the language from the start, the creation of many libraries, and the enthusiastic community have been instrumental in its widespread adoption and ongoing success.
 2. Geertjan's motivation for specializing in Java and its community came from his involvement with the language and community while working at Sun Microsystems, which he found stimulating.
@@ -46,7 +46,7 @@ Takeaways {#h2-1-takeaways}
 
 
 
-### Bazlur: Can you tell us about your background and how you got started in the software industry? {#h3-2-bazlur-can-you-tell-us-about-your-background-and-how-you-got-started-in-the-software-industry}
+### Bazlur: Can you tell us about your background and how you got started in the software industry?
 
 **Geertjan:** It was 1996; I had completed my Law degree in South Africa, where I grew up, though I couldn't see myself being a grown-up in a suit yet, so I started my world travels in the Netherlands, where I was born and had a lot of family, discovered I needed money for travels, applied for a job as a technical writer at a company called Supernova, which exploded like a star, then a few technical writing jobs later was at Sun Microsystems and learned basic Java on the job, which turned out to be Oracle a few years later and, after helping bring [NetBeans](https://netbeans.apache.org/) to the [Apache Software Foundation](https://www.apache.org/), joined Azul to be able to focus 100% on Java and the community.
 
@@ -54,7 +54,7 @@ Takeaways {#h2-1-takeaways}
 
 
 
-### Bazlur: Your journey is awe-inspiring! It's not always the case that software developers come from a computer science background. And you are an excellent example of that. I'm curious, what motivated you to specialize in Java and its community? Additionally, what factors do you believe have been instrumental in the widespread adoption and ongoing success of Java over the years? {#h3-3-bazlur-your-journey-is-awe-inspiring-it-s-not-always-the-case-that-software-developers-come-from-a-computer-science-background-and-you-are-an-excellent-example-of-that-i-m-curious-what-motivated-you-to-specialize-in-java-and-its-community-additionally-what-factors-do-you-believe-have-been-instrumental-in-the-widespread-adoption-and-ongoing-success-of-java-over-the-years}
+### Bazlur: Your journey is awe-inspiring! It's not always the case that software developers come from a computer science background. And you are an excellent example of that. I'm curious, what motivated you to specialize in Java and its community? Additionally, what factors do you believe have been instrumental in the widespread adoption and ongoing success of Java over the years?
 
 **Geertjan** : Java's success comes from a variety of factors, which you wrote a[great article about](https://foojay.io/today/7-reasons-why-after-26-years-java-still-makes-sense/) on Foojay.io, though I think the key factor is that success breeds success, i.e., Java was stable and expressive from the start so that organizations could rely on it from the beginning, resulting in many developers learning it and continuing to be able to implement their requirements as their knowledge grew, causing many libraries to be created so that common ideas could be repurposed, and along the way a massive community of enthusiastic developers came into existence, which has kept the ecosystem vibrant and regenerative.
 
@@ -64,7 +64,7 @@ What motivated me is that I got involved in Java, the language and community, wh
 
 
 
-### Bazlur: It's clear that the Java community has played a pivotal role in the language's success, which has been a boon for countless developers looking to build their careers. On that note, I'm curious if you have any enjoyable or memorable stories from your time working in the software industry that you'd be willing to share with us? {#h3-4-bazlur-it-s-clear-that-the-java-community-has-played-a-pivotal-role-in-the-language-s-success-which-has-been-a-boon-for-countless-developers-looking-to-build-their-careers-on-that-note-i-m-curious-if-you-have-any-enjoyable-or-memorable-stories-from-your-time-working-in-the-software-industry-that-you-d-be-willing-to-share-with-us}
+### Bazlur: It's clear that the Java community has played a pivotal role in the language's success, which has been a boon for countless developers looking to build their careers. On that note, I'm curious if you have any enjoyable or memorable stories from your time working in the software industry that you'd be willing to share with us?
 
 **Geertjan**: I think there are two memories that I'll always carry with me, both of which are both code and community-oriented and both which were (and continue to be) quite hard --- bringing NetBeans from Oracle into the ASF and starting the Friends of OpenJDK (Foojay.io) community.
 
@@ -74,7 +74,7 @@ As [Gil Tene](https://www.linkedin.com/in/giltene/), the CTO of Azul, recently t
 
 
 
-### Bazlur: Thank you for sharing those two memories with us. It sounds like both experiences were quite challenging but ultimately rewarding. What are some of your proudest accomplishments during your time in the software industry? Could you speak a bit more about the specific challenges you faced during those projects and what strategies you employed to overcome them? {#h3-5-bazlur-thank-you-for-sharing-those-two-memories-with-us-it-sounds-like-both-experiences-were-quite-challenging-but-ultimately-rewarding-what-are-some-of-your-proudest-accomplishments-during-your-time-in-the-software-industry-could-you-speak-a-bit-more-about-the-specific-challenges-you-faced-during-those-projects-and-what-strategies-you-employed-to-overcome-them}
+### Bazlur: Thank you for sharing those two memories with us. It sounds like both experiences were quite challenging but ultimately rewarding. What are some of your proudest accomplishments during your time in the software industry? Could you speak a bit more about the specific challenges you faced during those projects and what strategies you employed to overcome them?
 
 **Geertjan** : Well, in both cases, a great inspirational thought by Winston Churchill is applicable: *"Success is not final, and failure is not fatal. It is the courage to continue that count.* ***"***
 
@@ -88,7 +88,7 @@ The Java ecosystem --- from code to community --- is rich enough to sustain and 
 
 
 
-### Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges? (edited) {#h3-6-bazlur-let-s-shift-gears-and-talk-about-the-current-state-of-software-development-in-your-opinion-what-are-some-of-the-biggest-challenges-that-developers-face-today-additionally-do-you-have-any-advice-on-how-to-overcome-these-challenges-edited}
+### Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges? (edited)
 
 <br />
 
@@ -104,7 +104,7 @@ So, I'd say the key challenge is making the right choices and the need to consta
 
 
 
-### Bazlur: As someone who has taken an unconventional (!!) path into the software industry and has experience as a technical writer \& developer advocate, what advice would you give to someone who is just starting out and is unsure which career path to pursue? Could you also provide insights into the various roles within the industry, including technical writing, and the specific skills and interests needed for each of these roles? Specifically, could you highlight the benefits of being a technical writer/developer advocate for software development and how you would recommend pursuing that career path? {#h3-7-bazlur-as-someone-who-has-taken-an-unconventional-path-into-the-software-industry-and-has-experience-as-a-technical-writer-developer-advocate-what-advice-would-you-give-to-someone-who-is-just-starting-out-and-is-unsure-which-career-path-to-pursue-could-you-also-provide-insights-into-the-various-roles-within-the-industry-including-technical-writing-and-the-specific-skills-and-interests-needed-for-each-of-these-roles-specifically-could-you-highlight-the-benefits-of-being-a-technical-writer-developer-advocate-for-software-development-and-how-you-would-recommend-pursuing-that-career-path}
+### Bazlur: As someone who has taken an unconventional (!!) path into the software industry and has experience as a technical writer \& developer advocate, what advice would you give to someone who is just starting out and is unsure which career path to pursue? Could you also provide insights into the various roles within the industry, including technical writing, and the specific skills and interests needed for each of these roles? Specifically, could you highlight the benefits of being a technical writer/developer advocate for software development and how you would recommend pursuing that career path?
 
 <br />
 
@@ -120,7 +120,7 @@ Today the options are endless. Find some open-source technology you find interes
 
 
 
-### Bazlur: As someone who has been vocal about open-source development, what advice would you give to junior developers who are considering getting more involved in open-source projects? What are some of the potential rewards and benefits of contributing to open-source projects, and how can they help junior developers grow and improve their skills? {#h3-8-bazlur-as-someone-who-has-been-vocal-about-open-source-development-what-advice-would-you-give-to-junior-developers-who-are-considering-getting-more-involved-in-open-source-projects-what-are-some-of-the-potential-rewards-and-benefits-of-contributing-to-open-source-projects-and-how-can-they-help-junior-developers-grow-and-improve-their-skills}
+### Bazlur: As someone who has been vocal about open-source development, what advice would you give to junior developers who are considering getting more involved in open-source projects? What are some of the potential rewards and benefits of contributing to open-source projects, and how can they help junior developers grow and improve their skills?
 
 **Geertjan**:
 
@@ -128,7 +128,7 @@ Pick an open-source project and contribute to it. That's the path to success.
 
 
 
-### **Bazlur:** I know that you are a Java Champion. Could you speak about your journey towards achieving this title and what the potential benefits of being a Java Champion are? Additionally, what advice would you give to someone who aspires to become a Java Champion in the future? {#h3-9-bazlur-i-know-that-you-are-a-java-champion-could-you-speak-about-your-journey-towards-achieving-this-title-and-what-the-potential-benefits-of-being-a-java-champion-are-additionally-what-advice-would-you-give-to-someone-who-aspires-to-become-a-java-champion-in-the-future}
+### **Bazlur:** I know that you are a Java Champion. Could you speak about your journey towards achieving this title and what the potential benefits of being a Java Champion are? Additionally, what advice would you give to someone who aspires to become a Java Champion in the future?
 
 **Geertjan**: It's not something one aspires to become; it's something that overcomes you once you've been around for a while and contributed to projects, discussions, and conferences.
 
@@ -146,7 +146,7 @@ You discover the longer you're in a particular community, such as the Java commu
 
 
 
-### Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information? {#h3-10-bazlur-thank-you-so-much-for-sharing-your-insights-with-us-we-really-appreciate-your-time-if-we-have-any-further-questions-we-will-be-sure-to-reach-out-to-you-before-we-end-is-there-any-parting-advice-or-resources-you-would-like-to-share-with-our-readers-such-as-a-list-of-recommended-books-or-any-other-helpful-information}
+### Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?
 
 **Geertjan** :  
 
@@ -154,8 +154,8 @@ Pick an open-source project and contribute to it. That's the path to success.
 
 
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 Geertjan Wielenga's journey from law school graduate to Java champion can teach important lessons to software developers of all levels.
 

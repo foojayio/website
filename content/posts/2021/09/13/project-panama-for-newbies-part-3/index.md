@@ -31,8 +31,8 @@ frozen: false
  </figcaption>
 </figure>
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Welcome to the third part of the series on Java's Project Panama for newbies. Before jumping into this article, I want to congratulate you for getting this far, you deserve a virtual pat on the back!
 
@@ -63,8 +63,8 @@ Before diving deeper into calling 3rd party libraries, I want to talk about `Met
 
 **Note:** Throughout this article when referencing the word *function* I'm referring to C functions and when referencing the word *method* it's a Java class or object's function (member).
 
-What is a `MethodHandle`? {#h2-1-what-is-a-methodhandle}
---------------------------------------------------------
+What is a `MethodHandle`?
+-------------------------
 
 By now you should be familiar with `jextract` but have you ever thought about the generated source code it creates? When examining the generated source code you will notice low-level Java (Panama) code using the object `MethodHandle` to make native invocations.
 
@@ -98,12 +98,12 @@ MemorySegment getpidSymbol = stdlibLookup.findOrThrow("getpid");
 
 Now that we can obtain the symbol let's create a `MethodHandle` to access the system C function `getpid()` that typically is used to obtain a running application's process ID.
 
-Get Pid from a C perspective {#h2-2-get-pid-from-a-c-perspective}
------------------------------------------------------------------
+Get Pid from a C perspective
+----------------------------
 
 Getting the Pid via `getpid()` is a system level C function to obtain a **process id** number on Unix/Linux based operating systems.
 
-### C Function getpid() {#h3-3-c-function-getpid}
+### C Function getpid()
 
 Let's examine the `getpid()` function's definition as shown below.
 
@@ -117,7 +117,7 @@ pid_t getpid(void);
 
 Notice the header `sys/types.h` and `unistd.h` which contains the system's data type `pid_t` and a function `getpid(void)` respectively. Let's look at what exactly is a `pid_t` data type and a `void` parameter.
 
-### C's typedef and void parameter {#h3-4-c-s-typedef-and-void-parameter}
+### C's typedef and void parameter
 
 When looking at the function signiture above you're probably wondering what is a `pid_t` return type? In C (the language) there is a keyword called `typedef` (Type definition) that lets you create custom data types. For example, you could create a type called `human_age_t` of primitive data type byte (0-255). In this scenario the user of the API would use the custom type never needing to know the underlying type (byte).
 
@@ -125,7 +125,7 @@ In regards to the type `pid_t` you can examine closer by looking inside of the C
 
 Next lets look at what is a void parameter. In the definition you'll notice the `getpid(void)` function parameter signiture is a type **void**. This means there are no parameters to pass into the function.
 
-### Let's create a MethodHandle {#h3-5-let-s-create-a-methodhandle}
+### Let's create a MethodHandle
 
 To invoke the function `getpid(void)` we first need to create a `MethodHandle` instance via `Linker`'s [downcallHandle()](https://download.java.net/java/early_access/panama/docs/api/jdk.incubator.foreign/jdk/incubator/foreign/CLinker.html#downcallHandle(jdk.incubator.foreign.Addressable,jdk.incubator.foreign.SegmentAllocator,java.lang.invoke.MethodType,jdk.incubator.foreign.FunctionDescriptor)) method as shown below:
 
@@ -156,7 +156,7 @@ The following are descriptions of each parameter for the `downcallHandle()` meth
 * **[FunctionDescriptor](https://download.java.net/java/early_access/panama/docs/api/jdk.incubator.foreign/jdk/incubator/foreign/FunctionDescriptor.html)** `functionDescr` - A function descriptor is made up of zero or more argument layouts and zero or one return layout. A function descriptor is used to model the signature of foreign functions. Unless otherwise specified, passing a `null` argument, or an array argument containing one or more `null` elements to a method in this class causes a [`NullPointerException`](https://download.java.net/java/early_access/panama/docs/api/java.base/java/lang/NullPointerException.html) to be thrown. More on predefined and jextract generated memory layouts.   
 * [Linker.Option](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/Linker.Option.html) `options` - Variable arguments of `Linker.Option` objects -*the linker options associated with this linkage request*.
 
-### MemoryLayouts/ValueLayouts {#h3-6-memorylayouts-valuelayouts}
+### MemoryLayouts/ValueLayouts
 
 Like we've seen in Part 1 all C datatypes can be of type [ValueLayout](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html)`.OfXxx` or other types of [`MemoryLayout`](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/MemoryLayout.html) objects (`ValueLayout` inherits from `MemoryLayout`). Static instances of C primitive type are already defined as `ValueLayout`s in the `Linker` class such as [JAVA_INT](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html#JAVA_INT), [JAVA_LONG](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html#JAVA_LONG), [ADDRESS](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html#JAVA_ADDRESS) etc.   
 
@@ -172,7 +172,7 @@ public static FunctionDescriptor ofVoid(MemoryLayout... argLayouts) // void retu
 
 Now that you know how to lookup symbols and describe method signitures let's invoke the `getpid()` function using a `MethodHandle`.
 
-### Java calling the C function getpid() {#h3-7-java-calling-the-c-function-getpid}
+### Java calling the C function getpid()
 
 The following code will invoke the native C function `getpid()` via a MethodHandle and a jextract generated
 
@@ -228,8 +228,8 @@ Now that you know how to call functions in a low-level way using MethodHandles w
 
 Let's kick it up a notch with little more advanced C function `localtime_r()` defined in the header file `Time.h`.
 
-Time.h {#h2-8-time-h}
----------------------
+Time.h
+------
 
 Similar to Java's `java.util.Date` or `System.currentTimeMillis()`, the local time or some refer to epoch time in milliseconds since 1970. The C function `localtime_r()`, will be expecting seconds instead of milliseconds.
 
@@ -242,7 +242,7 @@ struct tm *localtime_r( const time_t * epochSeconds, struct tm * tmStruct );
 
 As you can see, the function signature takes a pointer to a `time_t` and a pointer to a struct `tm`. It looks very complex to mimic by using a `MethodHandle`, so let's use jextract!
 
-### Using jextract on multiple header files {#h3-9-using-jextract-on-multiple-header-files}
+### Using jextract on multiple header files
 
 Before using `jextract` on the `Time.h` header file, you might be wondering how to use multiple header files. Since `jextract` can only work with **one header file** at a time we encountered compilation issues when generating one header file at a time having the same package namespace.
 
@@ -258,7 +258,7 @@ An header file `foo.h` that contains multiple header includes as shown below:
 
 Next, you'll run `jextract` against `foo.h` to generate source code and/or classes.
 
-### Jextract foo.h {#h3-10-jextract-foo-h}
+### Jextract foo.h
 
 The following `jextract` command line statement will generate source code in the directory **generated/src** with a package namespace of `org.unix` with system includes on your preferred platform.
 
@@ -290,7 +290,7 @@ $ jextract \
 
 Now that you have generated the classes you can use the available convenience methods.
 
-### Calling the generated methods {#h3-11-calling-the-generated-methods}
+### Calling the generated methods
 
 After `jextract` the classes `foo_h`, `tm` and others contain all of the generated objects and methods that represent its C counter parts we can begin allocating objects and invoking native functions. Below is an excerpt of main a few objects and methods we are going to be using to invoke the C `localtime_r()` function:
 
@@ -329,7 +329,7 @@ public static MemoryAddress asctime ( Addressable x0)
 ```
 
 
-### Invoking localtime_r() function {#h3-12-invoking-localtime-r-function}
+### Invoking localtime_r() function
 
 The code listing (`PanamaTime.java`) below will demonstrate how to call the `localtime_r()` function by allocating variables (`MemorySegment`), invoking functions and populate objects(structs). To see the full source code listing visit [here](https://github.com/carldea/panama4newbies/blob/main/part03/src/PanamaTime.java).
 
@@ -387,7 +387,7 @@ printf(memorySession.allocateUtf8String("4. C's asctime() function to display da
 ```
 
 
-### How does it work? {#h3-13-how-does-it-work}
+### How does it work?
 
 The code listing above performs the following steps:
 
@@ -411,7 +411,7 @@ The code listing above performs the following steps:
 
 8.) Invoke `asctime()` function to return a Cstring to be outputted via C's `printf()`
 
-### Running PanamaTime.java {#h3-14-running-panamatime-java}
+### Running PanamaTime.java
 
 On the command line enter the following to run the `PanamaTime.java` program.
 
@@ -434,8 +434,8 @@ Running `PanamaTime.java` outputs the following:
 
 Now that you have some experience calling system level C functions it's time to look at a third party library. Popular among game developers are SDL and OpenGL API.
 
-A complete program using the SDL (Simple DirectMedia Layer) API {#h2-15-a-complete-program-using-the-sdl-simple-directmedia-layer-api}
---------------------------------------------------------------------------------------------------------------------------------------
+A complete program using the SDL (Simple DirectMedia Layer) API
+---------------------------------------------------------------
 
 Until now, most of the example in this series have been about single utility function, but we have now all building block to to make use of a complete C API. This section will feature a program written with the [SDL2](https://www.libsdl.org/) library. SDL is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL.
 
@@ -878,8 +878,8 @@ This example shows that porting a complete C or C++ program to Java using Panama
 
 Moreover, thinking about an allocation strategy will come to mind, since the above program uses a naive approach by using `MemorySegment.allocateNative`, while for performance reasons it might be worth it to consider `SegmentAllocator` and its different strategies.
 
-Conclusion {#h2-16-conclusion}
-------------------------------
+Conclusion
+----------
 
 In part 3, we looked down at what `jextract` actually does to generate bindings, in particular how `CLinker` uses `MethodHandle`s to perform calls to native functions. The *time* example makes use of a struct datatype whose reference, ie the memory address is passed to the native function. This last example mark a stepping stone in that a Java program has all building blocks to use a complete native API set. That's what has been done with the SDL / OpenGL example, it uses all items learned in this series.
 

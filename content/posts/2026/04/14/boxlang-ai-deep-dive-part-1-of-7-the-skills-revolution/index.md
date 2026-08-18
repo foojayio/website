@@ -37,8 +37,8 @@ This isn't a discipline problem: it's an architecture problem. System prompts ar
 
 **BoxLang AI 3.0 fixes this with the AI Skills system** --- a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills "Anthropic's Agent Skills open standard") that treats knowledge as a first-class, versioned, reusable asset. Define it once. Inject it everywhere. Let your codebase --- not copy-paste --- be the source of truth.
 
-🧠 What Is a Skill? {#h2-0-what-is-a-skill}
--------------------------------------------
+🧠 What Is a Skill?
+-------------------
 
 A skill is a named block of domain knowledge or instructions that can be injected into any agent or model's system context at runtime. Think of it as a reusable expertise module: a SQL style guide, a tone-of-voice policy, an API cheat sheet, a set of security rules.
 
@@ -54,8 +54,8 @@ property name="content"     type="string" default="";
 
 That's it. The `description` tells the LLM when to apply the skill. The `content` is the full instruction block. Simple by design.
 
-📄 The SKILL.md File Format {#h2-1-the-skill-md-file-format}
-------------------------------------------------------------
+📄 The SKILL.md File Format
+---------------------------
 
 Skills live in named subdirectories under `.ai/skills/`, following the Agent Skills open standard:
 
@@ -105,8 +105,8 @@ if ( descFromFrontmatter.len() ) {
 
 The directory name becomes the skill's default name when loaded from a path. So `sql-optimizer/SKILL.md` becomes the `sql-optimizer` skill automatically.
 
-🔧 Creating Skills {#h2-2-creating-skills}
-------------------------------------------
+🔧 Creating Skills
+------------------
 
 Three ways to create skills, for three different use cases.
 
@@ -139,12 +139,12 @@ sqlStyle = aiSkill(
 
 The `aiSkill()` BIF handles all three cases --- you pass either a path or named arguments, and it figures out the rest.
 
-⚡ Two Injection Modes {#h2-3-two-injection-modes}
--------------------------------------------------
+⚡ Two Injection Modes
+---------------------
 
 This is where the architecture gets genuinely clever. Skills support two injection strategies that you can mix freely within the same agent.
 
-### Always-On Skills {#h3-4-always-on-skills}
+### Always-On Skills
 
 Full content injected into the system message on every single call. Zero latency --- the LLM always has this knowledge in context.
 
@@ -161,7 +161,7 @@ agent = aiAgent(
 
 Best for: short, universally relevant guidance that applies to virtually every query.
 
-### Lazy / Available Skills {#h3-5-lazy-available-skills}
+### Lazy / Available Skills
 
 Only a compact index --- the skill name and one-line description --- is included in the system message. When the LLM determines it needs a skill, it calls a built-in `loadSkill( name )` tool to fetch the full content on demand.
 
@@ -187,7 +187,7 @@ Call loadSkill(name) to activate when needed:
 
 The LLM only pulls full content for skills it actually needs. A query about formatting a date never loads the SQL optimizer. **Token usage stays low even with hundreds of skills in the library.**
 
-### The `loadSkill` Tool --- Auto-Registered, Not Magic {#h3-6-the-loadskill-tool-auto-registered-not-magic}
+### The `loadSkill` Tool --- Auto-Registered, Not Magic
 
 One of the cleanest implementation details in the codebase is how lazy skills are wired up. When you add available skills to an agent, it automatically registers a `loadSkill` tool:
 
@@ -210,7 +210,7 @@ var loadSkillTool = aiTool(
 
 When the LLM calls `loadSkill( "sql-optimizer" )`, two things happen: the full content is returned as a tool result (so the LLM can use it immediately), and the skill is **promoted to always-on** for all subsequent calls in that session. The agent learns on the fly what it needs.
 
-### Promoting Lazy Skills Mid-Session {#h3-7-promoting-lazy-skills-mid-session}
+### Promoting Lazy Skills Mid-Session
 
 You can also promote a skill programmatically at any point:
 
@@ -221,8 +221,8 @@ agent.activateSkill( "sql-optimizer" )
 ```
 
 
-🌍 Global Skills Pool {#h2-8-global-skills-pool}
-------------------------------------------------
+🌍 Global Skills Pool
+---------------------
 
 Register skills once at the application level and have them automatically available to every new agent --- no explicit wiring required.
 
@@ -255,8 +255,8 @@ You can also configure global skills statically in `boxlang.json`:
 
 With `autoLoadSkills: true`, any `SKILL.md` file discovered in `skillsDirectory` at startup is automatically added to the global pool.
 
-🎨 How Skills Render {#h2-9-how-skills-render}
-----------------------------------------------
+🎨 How Skills Render
+--------------------
 
 `AiSkill` has two rendering methods that are used differently depending on whether the skill is always-on or lazy.
 
@@ -283,8 +283,8 @@ Prefer CTEs over nested sub-queries for readability.
 
 The `buildSkillsContent()` method on `AiBaseRunnable` assembles both sections into the final system message block --- always-on skills rendered in full, available skills as a compact index.
 
-🔍 Introspection {#h2-10-introspection}
----------------------------------------
+🔍 Introspection
+----------------
 
 Both `AiAgent` and `AiModel` expose full skill visibility:
 
@@ -315,8 +315,8 @@ private string function _buildSystemMessageFingerprint() {
 
 Cache invalidation happens automatically when you add or activate skills.
 
-📋 Full Skills API Reference {#h2-11-full-skills-api-reference}
----------------------------------------------------------------
+📋 Full Skills API Reference
+----------------------------
 
 |                       Method / BIF                       |       Where        |               Description                |
 |----------------------------------------------------------|--------------------|------------------------------------------|
@@ -330,8 +330,8 @@ Cache invalidation happens automatically when you add or activate skills.
 | `buildSkillsContent()`                                   | `AiModel, AiAgent` | Render the combined system-message block |
 | `listSkills() `                                          | `AiModel, AiAgent` | Get active and available skill summaries |
 
-🚀 Putting It Together {#h2-12-putting-it-together}
----------------------------------------------------
+🚀 Putting It Together
+----------------------
 
 Here's a complete real-world example: a code review agent with a curated skill library. Short, universal skills are always-on. A large specialized library is lazy-loaded on demand.
 
@@ -360,8 +360,8 @@ response = agent.run( "Is this query efficient? SELECT * FROM orders WHERE ..." 
 
 No hardcoded system prompts. No copy-paste. Skills live in files, travel with your codebase, and get reviewed alongside your code.
 
-What's Next {#h2-13-what-s-next}
---------------------------------
+What's Next
+-----------
 
 **In Part 2** , we'll go deep on the Tool System Overhaul --- `BaseTool`, `ClosureTool`, the Global Tool Registry, `@AITool` annotation scanning, and the built-in `now@bxai` tool that gives every agent temporal awareness for free.
 

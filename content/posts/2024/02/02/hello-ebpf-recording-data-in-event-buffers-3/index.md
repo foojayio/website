@@ -27,8 +27,8 @@ This week, I'll show you briefly how to use another kind of eBPF maps, the perf 
 
 *This article is shorter than the previous one as I'm preparing for the OpenJDK committers workshop in Brussels and my [Python and Java DevRoom talks](https://fosdem.org/2024/schedule/speaker/WS77F8/) at FOSDEM. I'm happy to meet my readers; say hi when you're there.*
 
-Perf Event Buffer {#h2-0-perf-event-buffer}
--------------------------------------------
+Perf Event Buffer
+-----------------
 
 Data structures, like the hash map described in the previous article, are great for storing data but have their limitation when we want to pass new bits of information continuously from the eBPF program to our user-land application. This is especially pertinent when recording performance events. So, [in 2015, the Linux kernel got a new map type](https://github.com/torvalds/linux/commit/457f44363a8894135c85b7a9afd2bd8196db24ab): `BPF_MAP_TYPE_PERF_EVENT_ARRAY`.
 
@@ -39,8 +39,8 @@ This map type functions as a fixed-size ring buffer that can store elements of a
 
 You can read more about Perf Event Buffers in the [Learning eBPF](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf) book by Liz Rice, pages 24 to 28.
 
-Example {#h2-1-example}
------------------------
+Example
+-------
 
 Now, to a small example, called [chapter2.HelloBuffer](https://github.com/parttimenerd/hello-ebpf/blob/main/bcc/src/test/java/me/bechberger/ebpf/bcc/HelloWorldTest.java), which records for every `execve` call the calling process id, the user id, and the current task name and transmits it to the Java application:
 
@@ -168,8 +168,8 @@ try (var b = BPF.builder("""
 ```
 
 
-Tests {#h2-2-tests}
--------------------
+Tests
+-----
 
 I'm happy to announce that [hello-ebpf](https://github.com/parttimenerd/hello-ebpf) now has its own test runner, which uses [virtme](https://github.com/amluto/virtme) and docker to run all tests in their own runtime with their own kernel. All this is wrapped in my [testutil/bin/java](https://github.com/parttimenerd/hello-ebpf/blob/main/testutil/bin/java) wrapper so that you can run the tests using `mvn test`:
 
@@ -205,8 +205,8 @@ public class HelloWorldTest {
 
 There are currently only two tests, but I plan to add many more.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, we learned about Perf Event Buffers, a valuable data structure for repeatedly pushing information from the eBPF program to the user-land application. Implementing this feature, we're getting closer and closer to completing chapter 2 of the [Learning eBPF](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf) book.
 

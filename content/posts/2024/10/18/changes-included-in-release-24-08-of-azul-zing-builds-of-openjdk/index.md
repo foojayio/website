@@ -30,50 +30,50 @@ Azul Zing Builds of OpenJDK, the optimized Java runtime within [Azul Platform Pr
 As stream builds happen in a fixed schedule, all changes are included in the [release notes](https://docs.azul.com/prime/release-notes). Twice a year (in February and August), a Stream build becomes the new Stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the 24.08 Stable Line.
 ![](Azul-Prime-Stable-2308-1024x400.jpg)
 
-Changes Included in the 24.08 Stable Line {#Changes-Included-in-the-24.08-Stable-Line}
---------------------------------------------------------------------------------------
+Changes Included in the 24.08 Stable Line
+-----------------------------------------
 
 As Stable Builds overlap, your system should be on the 24.02 Stable line, and you have a window of four months to test and migrate to the 24.08 Stable line. Let's look at some of the most significant changes between the Stream Build releases 24.02 and 24.08. Version 24.08.0.0 is the branching point for the new Stable Build line, and includes all the following changes compared to the previous [Stable Builds based on 24.02](https://www.azul.com/blog/changes-included-in-release-24-02-of-azul-zing-builds-of-openjdk/).
 
-### Security fixes {#Security-fixes}
+### Security fixes
 
 This version includes the April and July 2024 CPU and PSU release security fixes, including CPU and PSU fixes for Azul Zing Builds of OpenJDK 21.
 
-### General Improvements {#General-Improvements}
+### General Improvements
 
 * A more efficient way was implemented to encode deopt bundles, improving system performance.
 * Implementation of an intrinsification of the method `java.lang.reflect.Array.get`, leading to a significant performance improvement in some cases.
 * The logic around InlineTree has been greatly improved. This change allows the decisions reached by inlining to be reconstructed on request instead of running through the tree with each query, sometimes leading to bloated recursive inlinings.
 * Zing now handles requests for PrintJNI without safepoint pause, allowing PrintJNI to run concurrently with your VM process.
 
-### Optimizer Hub {#Optimizer-Hub}
+### Optimizer Hub
 
 * To establish a better client/server relationship between Zing and Optimizer Hub, Zing now sends its version to Optimizer Hub, making the current version of Zing available and viewable in Optimizer Hub.
 * The command line option `ProfileLogName` has been deprecated and replaced with `ProfileName`. `ProfileName` supports all existing macros available for `ProfileLogName`. It is still possible to use `ProfileLogName`, however, we recommend that you update your configuration to guarantee that you have access to all of the latest features implemented in `ProfileName`.Note that specifying ProfileName does not automatically enable ReadyNow Orchestrator processing of ReadyNow profiles. You also have to use the flag `EnableRNO`.
 
-### Falcon Compiler {#Falcon-Compiler}
+### Falcon Compiler
 
 * Prime JIT compilation logs (LogCompilation) are now fully supported for JITWatch for Zing.
 * Zing's crash handler has received a significant improvement, which allows it to properly generate diagnostic data when Falcon threads reach stack memory failure and OOM (Out Of Memory) errors.
 * The Falcon compiler has a new feature called Multi-Tiering. This allows Falcon to schedule methods for compilation under different optimization levels based on method hotness, leading to significantly better performance during application warmup. Multi-Tiering assigns hot and active methods to final-tier compilation and cold or inactive methods to mid-tier compilation. Final-tier uses the default Falcon optimization level (usually Falcon optimization level 2) while Mid-tier uses Falcon optimization level 0. You can enable Multi-Tiering using the command line option `-XX:+EnableMultiTiering`.For more information on Multi-Tiering, see [Analyzing and Tuning Warm-Up, Using Multiple Compiler Tiers](http://doc-builder.azulsystems.com:8081/prime/release/24.08/analyzing-tuning-warmup.html#multi-tiering)
 
-### Memory Size Improvements {#Memory-Size-Improvements}
+### Memory Size Improvements
 
 * On current Intel server CPUs (Ice Lake or newer), the supported heap size without ZST is increased from 2800 GB to 14000 GB.
 * For Arm64 server CPUs, a maximum heap size of 5600 GB is now supported.
 
-### ReadyNow {#ReadyNow}
+### ReadyNow
 
 You can now apply ReadyNow transformations at runtime. This is done using the newly implemented command line options `-XX:ApplyReadyNowTransformations` or `-XX:ApplyReadyNowTransformationsFile`. You can specify which transformations are used on which generation of your ReadyNow profiles. A transformation profile can be stored on your machine in YAML format and called using `-XX:ApplyReadyNowTransformationsFile=//path/to/file.yaml`. Or you can apply your transformation options directly in the parameters on the command line, using `-XX:ApplyReadyNowTransformations="\{transformations\:\[\{data: 0\}\]\}"`.  
 
 An offline tool is available for applying transformations to a local ReadyNow file. Please contact Azul Support if you want to experiment with this feature.
 
-### GC Log Analyzer {#GC-Log-Analyzer}
+### GC Log Analyzer
 
 * GC Log Analyzer's summary page now includes the ID of the current run from Ready Now Orchestrator, listed as "Current VM ID".
 * GC Log Analyzer's info page now includes the container OS, along with the node OS.
 
-### Extra Methods in Zing MXBeans {#Extra-Methods-in-Zing-MXBeans}
+### Extra Methods in Zing MXBeans
 
 Several methods have been added to Zing MXBean extensions, which can request several metrics from a running JVM. The following methods have been added to Zing MXBeans:
 
@@ -84,7 +84,7 @@ Several methods have been added to Zing MXBean extensions, which can request sev
 
 You can find a general overview of Zing MXBeans in the [Zing MXBeans documentation](https://docs.azul.com/prime/MXBeans), a complete description of all Zing MXBeans methods in the [Zing MXBeans API documentation](https://docs.azul.com/prime/ZingMXBeans_javadoc/index.html), or in the Javadocs included in the Zing documentation bundle found on the [Zing customer downloads page](https://www.azul.com/products/prime/customer-downloads/).
 
-### Changes in Command Line Options {#Changes-in-Command-Line-Options}
+### Changes in Command Line Options
 
 * With the new `MallocArenaMax` option, you can define the maximum amount of memory pools available for glibc. The default value is `0`.
 * `UseDefensiveHeapShrinking` is now disabled by default in cgroups where memory limiting is set. You can disable this option manually by using `-XX:-UseDefensiveHeapShrinking`. For more information about defensive heap shrinking, see [Command Line Options, Defensive Heap Shrinking](https://docs.azul.com/prime/Command-Line-Options#defensive-heap-shrinking).
@@ -98,7 +98,7 @@ You can find a general overview of Zing MXBeans in the [Zing MXBeans documentati
 * The MXBean PersistentProfileMXBean has been extended with `getReadyNowTier1CompilesRate()` and `getReadyNowTier2CompilesRate()`. These methods allow you to see what percentage of compiles are happening in ReadyNow, when compared to all compiles including non-ReadyNow.
 * The command line option `ProfileLogName` has been deprecated and replaced with `ProfileName`. `ProfileName` supports all existing macros available for `ProfileLogName`. It is still possible to use `ProfileLogName`, however, we recommend that you update your configuration in order to guarantee that you have access to all of the latest features implemented in `ProfileName`.Note that using `ProfileName` overrides `ProfileLogName`, `ProfileLogIn`, and `ProfileLogOut`. Also note that specifying `ProfileName` does not automatically enable ReadyNow Orchestrator processing of ReadyNow profiles. You also have to use the flag `EnableRNO`.
 
-Conclusion {#Conclusion}
-------------------------
+Conclusion
+----------
 
 This new 24.08 Stable Line of Azul Zing Builds of OpenJDK includes many changes and improvements and contains all the latest security fixes.

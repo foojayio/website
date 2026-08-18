@@ -6,7 +6,9 @@
        2. Root-relative static path (/images/... from pages/pedia) -> relURL,
           stripping the leading slash so the subpath is applied.
        3. External / data URLs -> untouched. */ -}}
-{{- $dest := .Destination -}}
+{{- /* htmlUnescape for the same reason as render-link.html: overriding the
+       renderer means reproducing the entity decoding goldmark would have done. */ -}}
+{{- $dest := .Destination | htmlUnescape -}}
 {{- $abs := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "data:") -}}
 {{- if not $abs -}}
   {{- with .Page.Resources.GetMatch $dest -}}
@@ -15,4 +17,4 @@
     {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
   {{- end -}}
 {{- end -}}
-<img src="{{ $dest }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
+<img src="{{ $dest }}" alt="{{ .Text | htmlUnescape }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }} loading="lazy">

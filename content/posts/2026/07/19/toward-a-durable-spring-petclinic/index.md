@@ -17,8 +17,8 @@ related_posts:
 frozen: false
 ---
 
-Overview {#h2-0-overview}
--------------------------
+Overview
+--------
 
 **Durable Execution** is a way of running code so that its progress survives failure. A normal program keeps its state in memory: if the process crashes, the machine reboots, or a network call times out halfway through a multi-step operation, that state is gone and the work is left half-done.
 
@@ -26,8 +26,8 @@ Temporal, the Durable Execution platform, persists every step of a process to it
 
 That makes it possible to write long-running, multi-step processes (ones that wait days for a Timer, call flaky external services, or must never run a step twice) as ordinary, linear code, while the platform guarantees they complete reliably and exactly once.
 
-What makes a process a good candidate for durability? {#h2-1-what-makes-a-process-a-good-candidate-for-durability}
-------------------------------------------------------------------------------------------------------------------
+What makes a process a good candidate for durability?
+-----------------------------------------------------
 
 But what makes a process a good candidate for durability? The processes that benefit most are the ones that are:
 
@@ -41,8 +41,8 @@ A plain, single-step database write that either commits or doesn't gets nothing 
 
 The interesting question is where a real application hides processes of the first three kinds.
 
-Spring PetClinic as an Exploratory Device {#h2-2-spring-petclinic-as-an-exploratory-device}
--------------------------------------------------------------------------------------------
+Spring PetClinic as an Exploratory Device
+-----------------------------------------
 
 To answer it concretely, let's take the canonical [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) sample application and interrogate its source code.
 
@@ -60,13 +60,13 @@ The result is a single and very clear recommendation in the context of the Sprin
 
 The other candidates are real, but they are either lower-stakes (owner onboarding), require inventing new capabilities (billing / payment), or add distributed-system complexity (external registries) before the core value is demonstrated. Visit booking is the shortest path to seeing durability earn its keep.
 
-Step 1 --- Download the Spring PetClinic source {#h2-3-step-1-download-the-spring-petclinic-source}
----------------------------------------------------------------------------------------------------
+Step 1 --- Download the Spring PetClinic source
+-----------------------------------------------
 
 The first step of this project is to download the official [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) sample application.
 
-Step 2 --- Analyze the application for durability candidates {#h2-4-step-2-analyze-the-application-for-durability-candidates}
------------------------------------------------------------------------------------------------------------------------------
+Step 2 --- Analyze the application for durability candidates
+------------------------------------------------------------
 
 Pointing Claude Code (or a similar AI) at the source of an application you already have and asking it where a technology you're interested in --- adopting, integrating, or simply learning about --- would fit is a natural first step.
 
@@ -80,7 +80,7 @@ That is exactly what this step does: it analyzes Spring PetClinic for processes 
 
 Both reach the same conclusions; 2b adds Temporal-specific vocabulary, corrected line numbers, and implementation guidance. See [Section 3](#step-3--conclusions) for a side-by-side comparison.
 
-### 2a --- Analysis: processes that are good candidates for durability {#h3-5-2a-analysis-processes-that-are-good-candidates-for-durability}
+### 2a --- Analysis: processes that are good candidates for durability
 
 Spring PetClinic is a textbook CRUD app. Every "process" is a single synchronous HTTP request that performs one local database transaction against one datasource. As it stands there are **no external service calls, no message queues, no multi-step orchestration, no background jobs, and no long-running operations** in the code. So out of the box nothing *strictly requires* durable execution --- a single JPA transaction already provides atomicity.
 
@@ -116,7 +116,7 @@ others are obvious extensions the domain implies.
 
 Given our intent and that `VisitController` already has a clean insertion point, **visit booking with a reminder** is the ideal first process to make durable --- it exercises the three things durability is *for* (durable timers, retriable side effects, and exactly-once execution) with minimal scaffolding.
 
-### 2b --- Analysis grounded in Temporal {#h3-6-2b-analysis-grounded-in-temporal}
+### 2b --- Analysis grounded in Temporal
 
 This section re-runs the same analysis, but grounded in [Temporal](https://temporal.io/) as the Durable Execution platform, using the [`temporal-developer` skill](https://github.com/temporalio/skill-temporal-developer) for terminology and Java/Spring Boot patterns. The candidates and ranking are unchanged from 2a; what follows maps each one onto concrete Temporal primitives.
 
@@ -157,8 +157,8 @@ There are no external calls, queues, timers, background jobs, or multi-step orch
 
 Wiring uses `temporal-spring-boot-starter`: keep `@WorkflowInterface` / `@ActivityInterface` on interfaces, add `@WorkflowImpl` / `@ActivityImpl` on implementations, and inject the auto-configured `WorkflowClient` bean into `VisitController` to start the booking workflow after the save.
 
-Step 3 --- Conclusions {#h2-7-step-3-conclusions}
--------------------------------------------------
+Step 3 --- Conclusions
+----------------------
 
 Sections 2a and 2b reach the **same conclusions** --- identical candidates, identical ranking, and the same #1 pick (visit booking + reminder). They differ only in framing and sourcing:
 

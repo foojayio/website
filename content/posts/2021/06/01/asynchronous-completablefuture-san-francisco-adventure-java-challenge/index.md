@@ -27,8 +27,8 @@ Now that we had the intro about CompletableFuture, let's go to the Java Challeng
 
 It's time to improve your Java skills with this Completable Future San Francisco Adventure
 
-Completable Future San Francisco Adventure {#h2-0-completable-future-san-francisco-adventure}
----------------------------------------------------------------------------------------------
+Completable Future San Francisco Adventure
+------------------------------------------
 
 In the following code, we are using a `CompletableFuture` invoking the `completeAsync` and `thenAccept` methods to perform actions asynchronously.
 

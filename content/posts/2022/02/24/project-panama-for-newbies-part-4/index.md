@@ -52,8 +52,8 @@ The article's agenda is as follows:
 * Run Java program `PanamaCallback.java`
 * Conclusion
 
-Application Layers {#h2-0-application-layers}
----------------------------------------------
+Application Layers
+------------------
 
 Whenever developing applications with dependencies it's a good idea to view component layers at a high-level (Top-down approach). This is especially important when you are sharing native resources that could potentially be used by other applications and services on the same node(device). Shown below are the components stacked upon each other.
 ![](panama_layers.png) Java's Project Panama Architecture Layers
@@ -62,8 +62,8 @@ Above you'll notice a Java Application block that depends on the JVM and Native 
 
 Enough about top-down views of the application layers let's look at things from a bottom-up approach by learning C language concepts and then later create a native library that will be accessed by a Java application. Before getting into code let's talk about **callbacks**.
 
-What is a Callback? {#h2-1-what-is-a-callback}
-----------------------------------------------
+What is a Callback?
+-------------------
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Callback_(computer_programming)):
 > A callback, also known as a "call-after" function, is any reference to executable code that is passed as an argument to other code; that other code is expected to call back (execute) the code at a given time. This execution may be immediate as in a synchronous callback, or it might happen at a later point in time as in a asynchronous callback. Programming languages support callbacks in different ways, often implementing them with subroutines, lambda expressions, blocks, or function pointers.
@@ -98,8 +98,8 @@ So, now that you know how to create callbacks in Java you may be wonder how is t
 
 **Answer:** Function Pointers
 
-What is a C Function Pointer? {#h2-2-what-is-a-c-function-pointer}
-------------------------------------------------------------------
+What is a C Function Pointer?
+-----------------------------
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Function_pointer) :
 > A **function pointer** , also called a **subroutine pointer** or **procedure pointer** , is a [pointer](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) that points to a function. As opposed to referencing a data value, a function pointer points to executable code within memory. [Dereferencing](https://en.wikipedia.org/wiki/Dereference_operator) the function pointer yields the referenced [function](https://en.wikipedia.org/wiki/Subroutine), which can be invoked and passed arguments just as in a normal function call.
@@ -121,8 +121,8 @@ You'll notice the naming convention for the Mac OS where the name of the library
 
 To make things simple I used the C examples from the popular site [Tutorials Point.com on C callbacks](https://www.tutorialspoint.com/callback-function-in-c). I modified the examples slightly to show program flow between Java and C.
 
-C header file [mylib.h](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.h) {#h2-3-c-header-file-mylib-h}
------------------------------------------------------------------------------------------------------------------------------
+C header file [mylib.h](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.h)
+-----------------------------------------------------------------------------------------------
 
 Let's examine the [mylib.h](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.h) file that consists of function declarations. These functions are exported or public to callers of the native library. Later, you will see the [mylib.c](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.c) file that will implement the declared functions from the `mylib.h` file.
 
@@ -147,8 +147,8 @@ Above you'll notice `my_function()` as an ordinary C function that can be passed
 
 The last my_callback_function2() function is another example of a callback, but the function pointer to be passed in has a signiture of a void return type and one argument of type `int`.
 
-C implementation file [mylib.c](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.c) {#h2-4-c-implementation-file-mylib-c}
----------------------------------------------------------------------------------------------------------------------------------------------
+C implementation file [mylib.c](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.c)
+-------------------------------------------------------------------------------------------------------
 
 Next, is the implementation file `mylib.c`. The code will begin by including the `mylib.h` as dependency. This is similar to Java interfaces. Shown in listing 2 is mylib.c file containing the function implementations of the functions define in `mylib.h` file header.
 
@@ -203,8 +203,8 @@ Keep in mind the variable `ptr` must follow the signiture of the function you wa
 
 With the header file and implementation file let's compile and create a native shared library.
 
-Creating a Native Shared Library {#h2-5-creating-a-native-shared-library}
--------------------------------------------------------------------------
+Creating a Native Shared Library
+--------------------------------
 
 Depending on the C compiler there are switches that will create a binary library. Most compilers will have the option `-o` to allow you to name the library suitable for your operating system. In this scenario to support MacOS the naming would be prefixed with `lib` and a file extension as `.dylib`.
 
@@ -224,8 +224,8 @@ Later, you'll use the name `mylib` as the library name for `jextract` to be able
 
 After creating a native library in C let's use Project Panama's `jextract` tool to generate classes and source code. Later, you will see how to access `mylib` native library purely in Java code.
 
-Using the `jextract` tool {#h2-6-using-the-jextract-tool}
----------------------------------------------------------
+Using the `jextract` tool
+-------------------------
 
 In Part 3 we mentioned that `jextract` only allows you to target one header file at a time. To overcome this limitation, you can simply create a dummy header file such as `foo.h` consists of multiple includes as shown below.
 
@@ -256,8 +256,8 @@ Above you'll notice the `-I .` is to let `jextract` know about the `mylib.h` in 
 
 Now, that you've successfully generated binding code let's see how to reference these C functions manually as opposed to the convenience methods created by `jextract`. Instead of using the generated code such as: `foo_h.`*my_callback_function*`()` I will be showing you how to do things in a lower level way. This helps you understand what is going on under the hood.
 
-Obtaining Native Symbols {#h2-7-obtaining-native-symbols}
----------------------------------------------------------
+Obtaining Native Symbols
+------------------------
 
 This has been discussed in Part 3, to obtain C native functions or symbols. In Part 4 we are using [](https://openjdk.java.net/jeps/454)[JEP-454](https://openjdk.java.net/jeps/454) updates to Panama's Foreign Function APIs.
 
@@ -292,8 +292,8 @@ void my_callback_function(void (*ptrToFunction)())
 
 Here you'll notice the C function `my_callback_function()` takes a **function pointer** as a parameter (`C_POINTER`). Next, let's see how to pass in a Java `static` method into the C native `my_callback_function()` function. To keep things simple the callback will be a function that returns **void** and has **void parameters** . The **void parameters** just means **empty arguments** or **no parameters**.
 
-Creating a Function Pointer with Java Code {#h2-8-creating-a-function-pointer-with-java-code}
----------------------------------------------------------------------------------------------
+Creating a Function Pointer with Java Code
+------------------------------------------
 
 To mimic a function pointer in Java as described above (returns void and no parameters) you can simply create a **static** method as shown below:
 
@@ -346,8 +346,8 @@ The output should look like the following:
 
 To get back on track with **callbacks** \& **function pointers** let's look at how to pass a Java **method** into a C callback function as a **function** **pointer**.
 
-Pass Callback into a C Function {#h2-9-pass-callback-into-a-c-function}
------------------------------------------------------------------------
+Pass Callback into a C Function
+-------------------------------
 
 Before passing the above `callMePlease()` Java method you'll have to create a `MethodHandle` as shown below:
 
@@ -396,8 +396,8 @@ To see the full listing head over to GitHub at [PanamaCallback.java](https://git
 
 Now that the code is able to talk to the native library let's compile and run the example (`PanamaCallback.java`).
 
-Running the Example {#h2-10-running-the-example}
-------------------------------------------------
+Running the Example
+-------------------
 
 To compile and run do the following:
 

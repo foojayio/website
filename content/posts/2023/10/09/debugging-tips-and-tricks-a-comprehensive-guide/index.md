@@ -47,8 +47,8 @@ As a side note, if you like the content of this and the other posts in this seri
 
 {#rubber-ducking-the-art-of-talking-it-out}
 
-**Rubber Ducking: The Art of Talking it Out** {#h2-0-rubber-ducking-the-art-of-talking-it-out}
-----------------------------------------------------------------------------------------------
+**Rubber Ducking: The Art of Talking it Out**
+---------------------------------------------
 
 The term "Rubber Ducking" traces back to a developer who carried a rubber duck to converse with when confronted with a problem.
 
@@ -65,8 +65,8 @@ As a very experienced developer, I gained the insight of no shame. I make fun of
 
 {#moving-the-goalposts-redefining-the-bug}
 
-**Moving the Goalposts: Redefining the Bug** {#h2-1-moving-the-goalposts-redefining-the-bug}
---------------------------------------------------------------------------------------------
+**Moving the Goalposts: Redefining the Bug**
+--------------------------------------------
 
 Bugs often start with a user-level description. As we delve deeper, we might discover the root cause lies elsewhere. Redefining the bug narrows our focus, making it easier to pinpoint the issue. This iterative process is not only a mental exercise but also aids team communication.
 
@@ -74,13 +74,13 @@ The phrase "Moving the Goalposts" might initially sound like a negative term, su
 
 {#the-evolution-of-a-bug}
 
-### The Evolution of a Bug {#h3-2-the-evolution-of-a-bug}
+### The Evolution of a Bug
 
 When users or testers report a bug, they often describe it in terms of its symptoms. For instance, a user might say, "The application crashes when I click this button." This is a user-level description, which, while accurate, is symptomatic of a deeper issue. As developers, our task is to trace the symptom back to its root cause.
 
 {#the-process-of-redefinition}
 
-### The Process of Redefinition {#h3-3-the-process-of-redefinition}
+### The Process of Redefinition
 
 * **Initial Identification**: Start with the user-level description. This is our starting point, our initial goalpost.
 * **Dive Deeper**: As we investigate, we might find that the crash is due to a particular function failing. Now, our understanding of the bug has evolved. It's no longer just about a button causing a crash; it's about a function not performing as expected.
@@ -89,8 +89,8 @@ When users or testers report a bug, they often describe it in terms of its sympt
 
 {#flipping-the-direction-multiple-angles-of-attack}
 
-**Flipping the Direction: Multiple Angles of Attack** {#h2-4-flipping-the-direction-multiple-angles-of-attack}
---------------------------------------------------------------------------------------------------------------
+**Flipping the Direction: Multiple Angles of Attack**
+-----------------------------------------------------
 
 Every system has multiple angles of approach. If one direction doesn't yield results, try another. Engage in "pair debugging" with a teammate to gain fresh perspectives on the problem.
 
@@ -98,7 +98,7 @@ Just as a detective might approach a case from various angles to uncover the tru
 
 {#the-linear-approach-to-debugging}
 
-### The Linear Approach to Debugging {#h3-5-the-linear-approach-to-debugging}
+### The Linear Approach to Debugging
 
 Traditionally, when faced with a bug, a developer might follow a linear path:
 
@@ -120,8 +120,8 @@ While this approach is systematic and often effective, it might not always lead 
 
 {#disruptive-environments-exposing-hidden-bugs}
 
-**Disruptive Environments: Exposing Hidden Bugs** {#h2-6-disruptive-environments-exposing-hidden-bugs}
-------------------------------------------------------------------------------------------------------
+**Disruptive Environments: Exposing Hidden Bugs**
+-------------------------------------------------
 
 Hard-to-reproduce bugs can be maddening. To unearth them we can use disruption such as introducing external limiting factors e.g. network throttling or slow-motion modes. Disruption can even be switching your OS or development environment. For instance, toggling between Firefox and Chrome dev tools can offer different insights.
 
@@ -145,8 +145,8 @@ Here are some tricks I used in the past to disrupt an environment I was debuggin
 
 {#leveraging-debugging-extensions-and-tools}
 
-**Leveraging Debugging Extensions and Tools** {#h2-7-leveraging-debugging-extensions-and-tools}
------------------------------------------------------------------------------------------------
+**Leveraging Debugging Extensions and Tools**
+---------------------------------------------
 
 Familiarize yourself with the debugging tools specific to your development environment. These tools can provide deeper insights and even disrupt the application in ways that expose hidden issues.
 
@@ -167,8 +167,8 @@ Tools are very domain-specific, in my current project I had to build custom tool
 
 {#disconnect-and-reconnect-the-power-of-a-fresh-mindset}
 
-**Disconnect and Reconnect: The Power of a Fresh Mindset** {#h2-8-disconnect-and-reconnect-the-power-of-a-fresh-mindset}
-------------------------------------------------------------------------------------------------------------------------
+**Disconnect and Reconnect: The Power of a Fresh Mindset**
+----------------------------------------------------------
 
 Sometimes, stepping away from the problem and returning with a fresh perspective can be the key to finding a solution. When you come back, approach the problem anew, without relying on previous assumptions.
 
@@ -180,8 +180,8 @@ Going to sleep, lunch or just taking a walk can make a tremendous difference in 
 
 {#embrace-the-challenge-finding-joy-in-debugging}
 
-**Embrace the Challenge: Finding Joy in Debugging** {#h2-9-embrace-the-challenge-finding-joy-in-debugging}
-----------------------------------------------------------------------------------------------------------
+**Embrace the Challenge: Finding Joy in Debugging**
+---------------------------------------------------
 
 Debugging should be a stimulating puzzle. If you're not enjoying it, try debugging unfamiliar code or tasks outside your job scope. Remember, even the best developers face challenges, and it's okay to seek help or share your experiences. The developers who are best at debugging treat it like a challenge and enjoy the bugs more than coding.
 
@@ -191,7 +191,7 @@ Every debugging session is a learning opportunity. It allows developers to deepe
 
 {#strategies-to-embrace-the-debugging-challenge}
 
-### Strategies to Embrace the Debugging Challenge {#h3-10-strategies-to-embrace-the-debugging-challenge}
+### Strategies to Embrace the Debugging Challenge
 
 You either love something or you don't and a lot of developers feel that they don't love debugging. I get that. It's frustrating. In fact, I often start my talks with the universal debugging gesture...
 
@@ -212,8 +212,8 @@ Most importantly, distinguish between job-related stress and personal embarrassm
 
 {#use-a-process}
 
-**Use a Process** {#h2-11-use-a-process}
-----------------------------------------
+**Use a Process**
+-----------------
 
 I discussed the process of debugging and the underlying theory quite a bit in previous posts. Specifically the [high-level process](https://debugagent.com/the-systemic-process-of-debugging) and the more hands-on [tongs approach](https://debugagent.com/eliminating-bugs-using-the-tong-motion-approach).
 
@@ -221,8 +221,8 @@ Both will make the process more rigid and less likely to drag you down a road ch
 
 {#conclusion}
 
-**Conclusion** {#h2-12-conclusion}
-----------------------------------
+**Conclusion**
+--------------
 
 I don't know if love for debugging is in the cards for you. It's hard to enjoy yourself when you're feeling that something isn't working and you need to fix it. But I think that most of these tips circle around three core ideas:
 

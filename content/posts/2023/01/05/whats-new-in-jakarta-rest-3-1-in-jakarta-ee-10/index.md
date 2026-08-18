@@ -32,8 +32,8 @@ The Jakarta RESTful Web Services specification is the Jakarta EE standard for cr
 
 The latest version of Jakarta REST is 3.1, which shipped with Jakarta EE 10. This version comes with two new noteworthy features that we will explore in this article.
 
-Java SE Bootstrap API {#h2-0-java-se-bootstrap-api}
----------------------------------------------------
+Java SE Bootstrap API
+---------------------
 
 In the past, to run a Jakarta EE REST application required a full deployment to a compatible runtime like the Payara Platform or Payara Cloud. Jakarta REST 3.1 in Jakarta EE 10 introduced a new API to bootstrap REST resources outside of a container.
 
@@ -97,8 +97,8 @@ SeBootstrap.Instance instance = SeBootstrap.start(new Application() {
 
 Jakarta EE with Jakarta REST 3.1 has a number of ways you can now configure and deploy REST resources outside of a typical runtime container. You can take a look at these examples from the Jakarta REST GitHub repo for inspiration for your own projects.
 
-Multipart Support {#h2-1-multipart-support}
--------------------------------------------
+Multipart Support
+-----------------
 
 Jakarta REST 3.1 in Jakarta EE 10 finally has standard, portable support for multipart as defined in RFC 7578. You can inject multipart EntityPart into a resource method through @FormParameter or as a list. The example below shows the injection of an EntityPart the represents a user's picture into a resource method.
 

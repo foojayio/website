@@ -27,10 +27,10 @@ In this article, you will learn about best practices for **comparative evaluatio
 
 By following this guide, you will be able to establish credible evidence that Azul Zulu Prime improves aspects of application behavior to a degree that justifies using it within your organization.
 
-Comparative Evaluation {#comparative-evaluation}
-------------------------------------------------
+Comparative Evaluation
+----------------------
 
-### What To Do {#what-to-do}
+### What To Do
 
 When comparing Azul Zulu Prime to different JDKs, the goal of your evaluation should be the testing of your application under real-world conditions. We strongly recommend production testing, to be 100% sure of the differences that can be achieved.
 
@@ -40,7 +40,7 @@ Also make sure you are running a long enough test that both systems are complete
 
 Measure at what point your JVM has reached optimal speed and only start measuring your business metrics after that point, using the same (maximum) warmup period for all JDK configurations.
 
-### What Not To Do {#what-not-to-do}
+### What Not To Do
 
 When doing a comparative evaluation, you want to make sure you are measuring one change at a time. You should therefore not combine testing different JDKs with additional tunings of applications, reconfiguration of the environment, or modifications to the code or the choice of third-party frameworks or libraries in the application.
 
@@ -52,12 +52,12 @@ Although this is a possible production scenario, it is very rare. In most cases,
 
 In general, all software components such as Linux, Java, Messaging platform, etc. work very differently in a typical production environment versus completely saturated conditions, and the behavior of saturated environments is not a good indicator of performance under normal loads.
 
-Defining the Test Goals {#defining-the-test-goals}
---------------------------------------------------
+Defining the Test Goals
+-----------------------
 
 Each application services its unique purpose and related goals and requirements. As such, different test goals can be defined.
 
-### Define the Maximum Reachable Capacity {#define-the-maximum-reachable-capacity}
+### Define the Maximum Reachable Capacity
 
 When running large Java workloads that take multiple JVMs, your primary concerns usually are:
 
@@ -74,7 +74,7 @@ Azul has developed the TUSSLE (Throughput Under Service Level Expectation) testi
 
 For more information about this tool, check the [GitHub project](https://github.com/AzulSystems/tussle-framework). To see it in action, look at our benchmarking of [Apache Cassandra carrying capacity](https://www.azul.com/blog/cassandra-performance-throughout-responsiveness-capacity-and-cost/).
 
-### Minimize the Response Time {#minimize-the-response-time}
+### Minimize the Response Time
 
 Often your primary concern is how low and consistent you can get your response times. Financial trading systems are one typical example of this use case.
 
@@ -82,7 +82,7 @@ Very fast responses with low latency and fewer outliers are one of the main bene
 
 The above-mentioned TUSSLE framework can help here too.
 
-### Reach the Shortest Warm-Up Time {#reach-the-shortest-warm-up-time}
+### Reach the Shortest Warm-Up Time
 
 In some use cases, you require an application to be warmed up and running at optimum speed as fast possible once it starts accepting traffic.
 
@@ -92,12 +92,12 @@ In default mode, Azul Zulu Prime actually takes a longer time to warm up than Op
 
 But when you use a tool like [ReadyNow](https://docs.azul.com/prime/Use-ReadyNow.html), you can in many cases reach optimum speed much quicker than with OpenJDK. How warm-up times can be measured, configured, and compared is described in detail on [Analyzing and Tuning Warm-up](https://docs.azul.com/prime/analyzing-tuning-warmup.html).
 
-Defining the Test Approach {#defining-the-test-approach}
---------------------------------------------------------
+Defining the Test Approach
+--------------------------
 
 When evaluating your application performance on Azul Zulu Prime, or any Java runtime, it is important to adhere to the following guidelines.
 
-### Important Test Strategy Considerations {#important-test-strategy-considerations}
+### Important Test Strategy Considerations
 
 It is important to establish a testing approach by asking the following questions:
 
@@ -117,7 +117,7 @@ It is important to establish a testing approach by asking the following question
 * Can the logs (GC, profile, etc.) be extracted post-run?
 * When evaluating ReadyNow: Can the application be restarted at certain intervals without losing the profile file from the previous run?
 
-### Test Conditions To Avoid {#test-conditions-to-avoid}
+### Test Conditions To Avoid
 
 |      Test Type      |                                                                                                                                     Why Avoid?                                                                                                                                      |
 |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -128,10 +128,10 @@ It is important to establish a testing approach by asking the following question
 | Insufficient memory | Prime can work with the same amount of memory as OpenJDK. However, Prime can use more memory without the usual drawbacks. Feel free to assign more memory to Prime, if available. More memory can allow for better performance.                                                     |
 | Poor metrics        | For instance, averages and no SLAs are considered as poor metrics. Looking at the average is rarely useful in the context of performance testing. Focus on where the pain is.                                                                                                       |
 
-Step-by-Step Guide {#step-by-step-guide}
-----------------------------------------
+Step-by-Step Guide
+------------------
 
-### Comparing your Current JDK with Azul Zulu Prime {#comparing-your-current-jdk-with-azul-zulu-prime}
+### Comparing your Current JDK with Azul Zulu Prime
 
 1. Create a baseline test with your current JDK.
    * Run long tests.
@@ -160,7 +160,7 @@ Step-by-Step Guide {#step-by-step-guide}
    * Otherwise, review the logs and tune accordingly.  
      Let us know, we can help!
 
-### Additional Linux Settings {#additional-linux-settings}
+### Additional Linux Settings
 
 Based on your results, further tuning can be done on your Linux environment to stretch the performance boost provided by Azul Zulu Prime.
 

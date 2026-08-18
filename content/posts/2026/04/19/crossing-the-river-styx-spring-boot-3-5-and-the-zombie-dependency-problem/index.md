@@ -24,8 +24,8 @@ Tomorrow I start (o so early) for [JCON Europe](https://2026.europe.jcon.one/) i
 
 After digging into the CVE stories behind [Tomcat 8.5's end of life](https://foojay.io/today/the-real-mechanics-of-vulnerabilities-in-an-upstream-downstream-topsy-turvy-eol-world/), I turned my attention to Spring Boot 3.5. Same question, different framework: what *actually* happens to your security posture when a project crosses the EOL line?
 
-The CVE Blind Spot {#h2-0-the-cve-blind-spot}
----------------------------------------------
+The CVE Blind Spot
+------------------
 
 Most of us understand the *idea* of a CVE. A vulnerability gets discovered, reported, assigned a severity score, and patched. We run our scanners, check our dashboards, update our dependencies. The system works.
 
@@ -37,8 +37,8 @@ And critically: what happens to that pipeline when a project reaches end of life
 
 The answer is that it dries up. Not all at once. Not even dramatically. It just... stops.
 
-The River Styx {#h2-1-the-river-styx}
--------------------------------------
+The River Styx
+--------------
 
 Think of moving from active development and maintenance into EOL mode as crossing the River Styx. On the living side, you have maintainers actively looking at the code. Security researchers submitting reports. A CNA (CVE Numbering Authority) assigning identifiers. A disclosure process that, for all its flaws, at least functions.
 
@@ -52,7 +52,7 @@ That's been the model forever.
 
 It's actually amazing that any of the problems are fixed at all. I'm certainly not pointing fingers at anyone to say that the way this has worked before was wrong. I'm always grateful to the people who develop and share their creations. Open Source is, well, amazing, and our developer lives would be immeasurably worse off without it.
 
-### The Rules Changed. The Habits Didn't. {#h3-2-the-rules-changed-the-habits-didn-t}
+### The Rules Changed. The Habits Didn't.
 
 However, the world has changed and open source is being weaponised against us. Our old certainties are being destroyed, diluted, compromised in the face of the relentless army of bad actors. When once it was ok to accept that EOL meant 'stable' and meant nothing-to-see-here-move-on, well now that's not true.
 
@@ -64,14 +64,14 @@ They watch the CVEs reported on maintained streams, take the juicy ones, and try
 
 And voilà: a compromise that the maintainers are conceptually aware of but that's not in any CVE database. A free ride for the bad actors.
 
-### What This Looks Like in Practice {#h3-3-what-this-looks-like-in-practice}
+### What This Looks Like in Practice
 
 A vulnerability exists in both the supported and the EOL branch. On the supported side, a researcher finds it, reports it, gets a CVE assigned, ships a patch.
 
 On the EOL side? The same vulnerability sits in the same code. But fewer researchers are looking. Fewer reports get filed. The vulnerability doesn't appear in your scanner results. Not because it doesn't exist, but because nobody filed the paperwork.
 
-When Dependencies Become Zombies {#h2-4-when-dependencies-become-zombies}
--------------------------------------------------------------------------
+When Dependencies Become Zombies
+--------------------------------
 
 Pretty quickly the public CVE count against an EOL project drops. If you're lucky, it's because there are none to be found. The codebase is what we'd traditionally call *stable* . But it's more likely the software didn't get safer. All that happened was the system that *records* the problems wound down.
 
@@ -81,14 +81,14 @@ Your dependencies end up in one of two states: actually stable, or more likely, 
 
 We need to stop thinking silence means stability. It's frequently the opposite.
 
-Spring Boot 3.5: The Next Crossing {#h2-5-spring-boot-3-5-the-next-crossing}
-----------------------------------------------------------------------------
+Spring Boot 3.5: The Next Crossing
+----------------------------------
 
 Spring Boot 3.5 reaches end of open-source support on June 30, 2026. That's roughly 80 days from now.
 
 When it crosses that line, it doesn't go alone. Spring Framework 6.2, Spring Security, and the entire Spring portfolio lose community patches simultaneously. The CVE reporting pipeline protecting a vast number of Java applications starts winding down for these versions.
 
-### We've Seen This Film Before {#h3-6-we-ve-seen-this-film-before}
+### We've Seen This Film Before
 
 Spring Boot 2.7 went EOL in November 2023. Since then, multiple CVEs have surfaced for that branch. CVE-2024-38807, for example: a signature spoofing vulnerability in the boot loader. No open-source patches available. Teams still running 2.7 have to find the fix themselves, pay for commercial support, or accept the risk.
 
@@ -96,14 +96,14 @@ And the longer 2.7 sits in EOL, the quieter the CVE stream gets. Not safer. Quie
 
 Based on that pattern, it's incredibly unlikely Spring Boot 3.5 *won't* follow the same trajectory. The transition from stable to zombie isn't a question of "if." It's a question of how fast the reporting pipeline dries up once the maintainers shift focus to 4.0.
 
-### The Window Is Open. For Now. {#h3-7-the-window-is-open-for-now}
+### The Window Is Open. For Now.
 
 But here's the thing: it doesn't happen overnight. There *is* time. The zombie transition is gradual, and that window matters.
 
 The quicker you assess the scale of the change from 3.5 to 4.0, the better positioned you'll be. Maybe that means migrating on your own terms. Maybe it means arranging commercial support to bridge the gap, or finding another path entirely. The worst move is to wait until the silence sets in and assume everything is fine.
 
-The Map, Not Just the Landscape {#h2-8-the-map-not-just-the-landscape}
-----------------------------------------------------------------------
+The Map, Not Just the Landscape
+-------------------------------
 
 That's the landscape. Now let's talk about the map.
 

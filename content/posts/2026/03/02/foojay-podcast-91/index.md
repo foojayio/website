@@ -26,13 +26,13 @@ Think about it: IntelliJ IDEA launched in 2000, and since then, it has become th
 
 For this episode, I'm joined by three people from the JetBrains team who know this story inside and out. Marit van Dijk, developer advocate and contributor to the Foojay community. Anton Arhipov, also a developer advocate at JetBrains. And Dmitry Jemerov, who has been part of the IntelliJ IDEA story for a very long time.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube Bi3wLP5ZCWw >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -40,8 +40,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * Marit van Dijk
   * <https://foojay.io/today/author/marit-van-dijk/>
@@ -52,8 +52,8 @@ Guests {#h2-2-guests}
 * Dmitry Jemerov
   * <https://www.linkedin.com/in/dmitry-jemerov-3a59b43a5/>
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * JetBrains IntelliJ IDEA:
   * [Website](http://www.jetbrains.com/idea/)
@@ -76,8 +76,8 @@ Links {#h2-3-links}
 * [Spring Debugger plugin](https://plugins.jetbrains.com/plugin/25302-spring-debugger)
 * [Plugin for IntelliJ IDEA (and other IDEs) created by Frank: Recent Projects Organized](https://webtechie.be/post/2025-09-18-jetbrains-intellijidea-plugin-recent-project-organizer/)
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topic and guests  
 

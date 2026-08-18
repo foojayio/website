@@ -40,7 +40,7 @@ The panel experts:
 
 **[Brian Vermeer](https://twitter.com/BrianVerm)**is a Developer Advocate for Snyk and Software Engineer with over 10 years of hands-on experience in creating and maintaining software. He is passionate about Java, (Pure) Functional Programming and Cybersecurity. Brian is an Oracle Groundbreaker Ambassador, Utrecht JUG Co-lead, Virtual JUG organizer and Co-lead at MyDevSecOps.
 
-### The Panel was hosted by: {#h3-0-the-panel-was-hosted-by}
+### The Panel was hosted by:
 
 [Miriam Oglesby](https://twitter.com/Jessieevaline) - IBM  
 [Jadon Ortlepp](https://twitter.com/Jadonblade) - Payara

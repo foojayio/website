@@ -30,8 +30,8 @@ While creating your own is always possible, it's sometimes necessary.
 
 Today, I'll show you how to route users according to their location without writing a single line of Lua code.
 
-Why geo-routing? {#h2-0-why-geo-routing}
-----------------------------------------
+Why geo-routing?
+----------------
 
 Geo-routing is to forward HTTP requests based on a user's physical location, inferred from their IP. There are many reasons to do that, and here is a couple of them.
 
@@ -47,8 +47,8 @@ Sometimes, you don't even have a choice. A country decides you have to store you
 
 Finally, you may also want to deploy a new app version for a single country only. In this case, you should monitor not (only) technical metrics but business ones over time. Then you'll decide whether to expand the new version to other countries based on them or work more on the latest version before deploying further.
 
-Setting up Apache APISIX for geo-routing {#h2-1-setting-up-apache-apisix-for-geo-routing}
------------------------------------------------------------------------------------------
+Setting up Apache APISIX for geo-routing
+----------------------------------------
 
 Though I'm a developer by trade (and passion!), I'm pragmatic. I'm convinced that every line of code I don't write is a line I don't need to maintain. Apache APISIX doesn't offer geo-routing, but it's built on top of Nginx. The latter provides a [geo-routing](http://nginx.org/en/docs/http/ngx_http_geoip_module.html) feature, albeit not by default.
 
@@ -134,8 +134,8 @@ From this point on, every request going through Apache APISIX is geo-located. It
 >
 > -- [Module ngx_http_geoip_module](http://nginx.org/en/docs/http/ngx_http_geoip_module.html)
 
-Testing geo-routing {#h2-2-testing-geo-routing}
------------------------------------------------
+Testing geo-routing
+-------------------
 
 You may believe that the above works - and it does, but I'd like to prove it.
 
@@ -229,8 +229,8 @@ curl -H "X-Forwarded-For: 212.27.48.10" localhost:9080 #1
 ```
 
 
-Bonus: logs and monitoring {#h2-3-bonus-logs-and-monitoring}
-------------------------------------------------------------
+Bonus: logs and monitoring
+--------------------------
 
 It's straightforward to use the new variable in the Apisix logs. I'd advise it for two reasons:
 
@@ -248,8 +248,8 @@ nginx_config:
 
 1. Keep the default log variables and add the country code
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Geo-routing is a requirement for successful apps and businesses.
 

@@ -31,8 +31,8 @@ I like my tests fast, the same way I like fast road bikes. Therefore, I am gonna
 
 In case you prefer a video, here's an animated version of this text in form of [amateur cycling-nutrition and pro-testing tips](https://www.youtube.com/watch?v=737xm5He8aU).
 
-The simple test {#_the_simple_test}
------------------------------------
+The simple test
+---------------
 
 Have a look at the following simple test:
 
@@ -115,8 +115,8 @@ On my rather fast machine this test takes about 10 seconds in total... Compared 
 
 But, fear not, there is...
 
-The Optimized test {#_optimized_test}
--------------------------------------
+The Optimized test
+------------------
 
 I left out the imports in the following listing. They are the same as the above.
 

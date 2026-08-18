@@ -50,8 +50,8 @@ In this article, I want to go over three big challenges we face when debugging m
 2. Debugging the Unreproducible
 3. Data Pollution
 
-1. Polyglot Debugging {#h2-0-1-polyglot-debugging}
---------------------------------------------------
+1. Polyglot Debugging
+---------------------
 
 This isn't a new problem. As a person who used to build JVMs for a living, I would occasionally "meta debug": debugging the debug support for the JVM. That sent me between Java and native code with both debuggers running and stepping through.
 
@@ -63,8 +63,8 @@ With serverless, this problem has become even worse. Reproducing a serverless en
 
 [Remote debugging is problematic, risky,](https://talktotheduck.dev/psa-the-risks-of-remote-jdwp-debugging) and it can't scale for complex deployments. So a lot of developers limit themselves to logging and maybe some observability tools. While that can help with some problems, these are poor replacements to local debugging. Continuous observability tools provide us with a way to go beyond simple monitoring. We can get source-level debugging similar to traditional debuggers on production servers.
 
-2. Debugging the Unreproducible {#h2-1-2-debugging-the-unreproducible}
-----------------------------------------------------------------------
+2. Debugging the Unreproducible
+-------------------------------
 
 There are two types of unreproducible bugs: those we can't reproduce locally and those we can't reproduce at all. If we can reproduce the issue in production, we can use a continuous observability tool to inspect the server.
 
@@ -72,8 +72,8 @@ However, if we can't, we're effectively stuck with log and observability analysi
 
 As developers, we need to fight the culture of closing bugs with "can't reproduce." This is a cop-out. A can't-reproduce scenario should add logs or similar guards to verify assumptions held by the developer. That way, we won't get caught again with the can't reproduce conundrum.
 
-3. Data Pollution {#h2-2-3-data-pollution}
-------------------------------------------
+3. Data Pollution
+-----------------
 
 We often think of bugs as failures, crashes and downtime. While those are indeed bad, they are often the best bugs. We know there's a problem and the solution is usually obvious and immediate.
 
@@ -87,8 +87,8 @@ A good example of this is "undefined," which pollutes databases everywhere as it
 
 This can be done with code and also with continuous observability tools such as [Lightrun](https://lightrun.com/).
 
-TL;DR {#h2-3-tl-dr}
--------------------
+TL;DR
+-----
 
 Debugging is a skill that we use daily but still don't invest enough time honing. We end up using the same tools and techniques over and over. We fall back to using logs and don't use sophisticated capabilities that have been around for years. Unfortunately, bugs aren't standing still. As we scale our infrastructure with amazing container technology, the bugs scale with our distributed solutions. They become more insidious at scale.
 

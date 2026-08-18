@@ -24,7 +24,7 @@ frozen: false
 
 Using reference object types or objects only for switch and instanceof statements slightly reduced the possibilities of its utilization. This has had an impact on its use in building code based on design patterns, including refactoring.
 
-### Functional nature of the code and null {#h3-0-functional-nature-of-the-code-and-null}
+### Functional nature of the code and null
 
 The functional programming paradigm seeks to provide a code as an application and composition of functions.That is, the function accepts input arguments, where an expression tree maps those arguments to output value of specific type. Although the keyword null can represent a justifiable state, when nothing is expected, null reference is nothing, null has been the source of many unpleasant surprises. The keyword null got its place in imperative programming style but in functional flow of the expressions and callbacks could be questionable.
 
@@ -115,7 +115,7 @@ unknown:NullSensor{type='undefined'}
 
 **Example 3.**: The support of primitive types inside the switch statements simplifies the code
 
-### Conclusion {#h3-1-conclusion}
+### Conclusion
 
 The newly added enhancements provided by JEP-455 are further evidence that Java remains in tune with industry needs.
 
@@ -125,7 +125,7 @@ Enabling the use of primitive types for instanceof, switch statement, and patter
 
 A null object pattern, in our case a NULL_SENSOR instance (Example 2.), can easily contribute to the process flow of a running program while remaining consistent and type-safe.
 
-### References {#h3-2-references}
+### References
 
 [\[1\] JEP 455: Primitive Types in Patterns, instanceof, and switch (Preview)](https://openjdk.org/jeps/455)  
 [\[2\] Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

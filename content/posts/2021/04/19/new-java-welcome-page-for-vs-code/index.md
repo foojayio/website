@@ -16,7 +16,7 @@ frozen: false
 
 For many of us, it's Spring now, a season for being refreshed, no exception to VS Code. In this blog, we will share with you our experiments with a new Welcome Page.
 
-### New Welcome Page {#h3-0-new-welcome-page}
+### New Welcome Page
 
 A common thing at first-time use is spending a couple of minutes browsing the Welcome Page and trying features from there. Users' satisfaction with the Welcome Page has a direct reflection on their satisfaction with the product and consequently affects their decision of adoption. Therefore, we believe it's worth the effort to experiment with a refreshed Java Welcome Page.
 

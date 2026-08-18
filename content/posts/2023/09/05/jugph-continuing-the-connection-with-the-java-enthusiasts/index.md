@@ -36,8 +36,8 @@ The meetup announced the availability of [Incub8 Space](https://incub8space.com/
 
 ![](incub8_space_introduction-1024x768.jpg)
 
-Quarkus and OpenShift Development {#h2-0-quarkus-and-openshift-development}
----------------------------------------------------------------------------
+Quarkus and OpenShift Development
+---------------------------------
 
 This meetup is all about Quarkus and OpenShift Development. The speaker did an introduction on what is Quarkus and had a live demonstration on how to code the fundamentals of the framework and the seamless experience in deploying to RedHat OpenShift.
 
@@ -53,8 +53,8 @@ Below is the official speaker poster for this event.
 
 You can check the presentation of this meetup here: [Quarkus and OpenShift Development](https://github.com/JUGPH/java-presentations/tree/main/event-2 "Quarkus and OpenShift Development")
 
-OpenLiberty {#h2-1-openliberty}
--------------------------------
+OpenLiberty
+-----------
 
 The presentation was formally called *Cloud-native Java innovations that matter with Open Liberty*. In this meetup, Yee Kang Chang explained what is Open Liberty and its features. He walkthrough us on its capability for seamless development, cloud-native deployment and differences to other Jakarta EE frameworks. He demonstrated on how to code a simple service using Open Liberty.
 

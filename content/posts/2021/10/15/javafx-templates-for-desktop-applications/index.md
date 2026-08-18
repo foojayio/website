@@ -27,7 +27,7 @@ Here on Foojay we already talked about JavaFX write-once-run-everywhere applicat
 
 In this post, we are going to take a look at other different approaches.
 
-### Modularized JavaFX Template with Gradle by [Gerrit Grunwald](https://twitter.com/hansolo_) {#h3-0-modularized-javafx-template-with-gradle-by-gerrit-grunwald}
+### Modularized JavaFX Template with Gradle by [Gerrit Grunwald](https://twitter.com/hansolo_)
 
 [This is a little project on GitHub](https://github.com/HanSolo/fxmodules) that can be used as a template for modularized JavaFX projects, based on JDK17. You can import the `build.gradle` file as a project into your IDE and start the application by using `gradlew Main` from the command line or from within the IDE.
 
@@ -68,7 +68,7 @@ fxmodules/.github/workflows
 
 The `ci.yml` file will build the native packages for each platform on GitHub after each push to the project. The artifacts will be attached to the build so that you can download it from there.
 
-### JPackageScriptFX by [Dirk Lemmermann](https://twitter.com/dlemmermann/status/1446045501577641986) and [Michael Paus](https://twitter.com/MichaelPaus) {#h3-1-jpackagescriptfx-by-dirk-lemmermann-and-michael-paus}
+### JPackageScriptFX by [Dirk Lemmermann](https://twitter.com/dlemmermann/status/1446045501577641986) and [Michael Paus](https://twitter.com/MichaelPaus)
 
 [This project, originally created by Michael Paus was turned into a template project by Dirk Lemmermann](https://github.com/dlemmermann/JPackageScriptFX). It demonstrates how projects can use scripts to build self-contained, platform-specific executables and installers of their JavaFX applications via the `jdeps`, `jlink`, and `jpackage` tools. Two scripts are included for running builds on Mac/Linux and Windows. The `jpackage` tool is bundled with the JDK since version 14.
 
@@ -83,13 +83,13 @@ The project in this repository uses a multi-module Maven setup with a parent mod
 
 The platform-specific versions are created with Maven and this whole process is very well and detailed explained [in the README file of the GitHub project](https://github.com/dlemmermann/JPackageScriptFX/blob/master/README.md).
 
-### maven-jpackage-template by [Will Iverson](https://twitter.com/wiverson) {#h3-3-maven-jpackage-template-by-will-iverson}
+### maven-jpackage-template by [Will Iverson](https://twitter.com/wiverson)
 
 And there is even [one more Maven template project](https://github.com/wiverson/maven-jpackage-template) we can share here! It generates a custom JVM and installer package for a JavaFX application. It can easily be adapted to work with Swing instead.
 
 The generated installers come in at around 30-40MB. The example source in the project includes demonstrations of several native desktop features - for example, drag-and-drop from the Finder/Explorer, as well as a few macOS Dock integration examples. Removing the code and the demonstration dependencies gets a "Hello World" build size closer to 30MB.
 
-### Build with GitHub Actions {#h3-4-build-with-github-actions}
+### Build with GitHub Actions
 
 All three projects produce the promised platform-specific runtime with GitHub Actions.
 
@@ -101,7 +101,7 @@ All three projects produce the promised platform-specific runtime with GitHub Ac
 
   * actions in [maven-jpackage-templates](https://github.com/wiverson/maven-jpackage-template/actions)
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 Both for Maven and Gradle lovers there are different possibilities to build Java executables and GitHub provides the free tools to do so.
 

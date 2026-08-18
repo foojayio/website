@@ -29,8 +29,8 @@ A bug was reported in the OpenJDK project: [\[AArch64\] Incorrect result of Vect
 
 Let's check, with the latest releases of OpenJDK 21 and 25 if the problem is solved.
 
-Reproducing The Problem {#h2-0-reproducing-the-problem}
--------------------------------------------------------
+Reproducing The Problem
+-----------------------
 
 I prepared a Raspberry Pi Zero 2 for the previous blog post, so took it out of my "experimentation box" to reproduce the problem. With the Java 24 version, installed at that time, the problem still exists. You can run `java` to get its version, but it throws an error when you try to execute any Java code.
 
@@ -66,8 +66,8 @@ java.lang.NoClassDefFoundError: com/sun/tools/javac/jvm/ClassReader$AttributeRea
 ```
 
 
-Fixed with Latest OpenJDK 21 and 25 {#h2-1-fixed-with-latest-openjdk-21-and-25}
--------------------------------------------------------------------------------
+Fixed with Latest OpenJDK 21 and 25
+-----------------------------------
 
 With the latest builds of Zulu 21 (based on OpenJDK 21.0.8, released on July 15, 2025) and Zulu 25 (based on OpenJDK 25.0.0, released on September 16, 2025), the problem is solved!
 
@@ -94,7 +94,7 @@ Hello, World!
 ```
 
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Switching to the latest version of an OpenJDK build not only brings you security and performance improvements. It can also solve other problems, for instance, this one which is related to the hardware running your application. Thanks to the new Azul Zulu releases, you can now use the latest versions of OpenJDK/Java on your Raspberry Pi Zero 2!

@@ -29,8 +29,8 @@ In this article, I'd like to describe how to add new behavior to an existing obj
 
 I apologize in advance that the below implementations are pretty simple: they are meant to highlight my point, not to handle corner cases, *e.g.*, empty strings, non-UTF 8, etc.
 
-JavaScript {#h2-0-javascript}
------------------------------
+JavaScript
+----------
 
 JavaScript is an interpreted dynamically- and weakly-typed language, which runs the World Wide Web - until WASM takes over? As far as I know, its design is unique, as it's prototype-based. A prototype is a mold for new "instances" of that type.
 
@@ -51,8 +51,8 @@ console.debug("OncE upOn a tImE in thE WEst".toTitleCase());
 
 Note that objects created from this prototype *after* the call to `defineProperty` will offer the new property; objects created *before* won't.
 
-Ruby {#h2-1-ruby}
------------------
+Ruby
+----
 
 Ruby is an interpreted dynamically- and strongly-typed language. While not as popular as it once was with the Ruby On Rails framework, I still use it with the Jekyll system that powers this blog.
 
@@ -74,8 +74,8 @@ puts "OncE upOn a tImE in thE WEst".to_camel_case()
 ```
 
 
-Python {#h2-2-python}
----------------------
+Python
+------
 
 Python is an interpreted dynamically- and strongly-typed language. I guess every developer has heard of Python nowadays.
 
@@ -129,8 +129,8 @@ It now becomes possible to extend `String`, because it's a class we have created
 
 With interpreted languages, it's reasonably easy to add behavior to types. Yet, Python already touches the limits because the built-in types are implemented in C.
 
-Java {#h2-3-java}
------------------
+Java
+----
 
 Java is a compiled-statically and strongly-typed language that runs on the JVM. Its static nature makes it impossible to add behavior to a type.
 
@@ -157,8 +157,8 @@ System.out.println(WordUtils.capitalize("OncE upOn a tImE in thE WEst"));
 
 In both cases, *the usage of static methods prevents fluent API usage* and thus impairs developer experience. But other JVM languages do offer exciting alternatives.
 
-Scala {#h2-4-scala}
--------------------
+Scala
+-----
 
 Like Java, Scala is a compiled, statically- and strongly-typed language that runs on the JVM. It was initially designed to bridge between Object-Oriented Programming and Functional Programming. Scala provides many powerful features. Among them, *implicit* classes allow adding behavior and state to an existing class. [Here](https://scastie.scala-lang.org/razUhHKRRcqamn9qlA0mhw) is how to add the `toCamelCase()` function to `String`:
 
@@ -191,8 +191,8 @@ extension(thiz: String)
 
 Note that the *bytecode* is somewhat similar to Java's *static* method approach in both cases. Yet, API usage is fluent, as you can chain method calls one after another.
 
-Kotlin {#h2-5-kotlin}
----------------------
+Kotlin
+------
 
 Like Java and Scala, Kotlin is a compiled, statically- and strongly-typed language that runs on the JVM. Several other languages, including Scala, inspired its design.
 
@@ -218,12 +218,12 @@ If you wonder why the Kotlin code is more verbose than the Scala one despite my 
 1. I don't know Scala well enough, so I didn't manage corner cases (empty capture, etc.), but Kotlin leaves you no choice
 2. The Kotlin team removed the `capitalize()` function from the `stdlib` in Kotlin 1.5
 
-Rust {#h2-6-rust}
------------------
+Rust
+----
 
 Last but not least in our list, Rust is a compiled language, statically and strongly typed. It was initially designed to produce native binaries. Yet, with the relevant configuration, it also allows to generate . In case you're interested, I've taken link:/focus/start-rust/\[a couple of notes\] while learning the language.
 
-Interestingly enough, though statically-typed, Rust also allows extending third-party APIs as [the following code shows](https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=8d1daecd7bd46d6352c131cbf8186839):
+Interestingly enough, though statically-typed, Rust also allows extending third-party APIs as [the following code shows](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=8d1daecd7bd46d6352c131cbf8186839):
 
 ```rust
 trait StringExt {                                                  // 1
@@ -254,8 +254,8 @@ println!("{}", "OncE upOn a tImE in thE WEst".to_camel_case());
 
 Trait implementation has one limitation: our code must declare at least one of either the trait or the structure. You cannot implement an existing trait for an existing structure.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 Before writing this article, I thought that interpreted languages would allow extending external APIs, while compiled languages wouldn't, with Kotlin being the exception. After gathering the material, my understanding has changed drastically.
 

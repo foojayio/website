@@ -30,8 +30,8 @@ Of course, at some point, a fanboy hijacked the thread and claimed the so-called
 
 To manage this, I need to get back in time. Software development is a fast-changing field, and much of our understanding is based on personal experience. So here's mine.
 
-My first build tool: Ant {#h2-0-my-first-build-tool-ant}
---------------------------------------------------------
+My first build tool: Ant
+------------------------
 
 <img decoding="async" class="wp-image-101837 size-thumbnail alignright" src="ant-300x260.jpg" alt="" width="300" height="260">
 
@@ -58,8 +58,8 @@ Every time, when arriving at a new project, you had to carefully read the Ant se
 
 I remember once a generic build file that tried accommodating the whole of an organization's project needs. It defined over 80 targets in over 2,000 lines of XML. It took me a non-trivial amount of time to understand how to use it with help and even more time to be able to tweak it without breaking projects.
 
-My second build tool: Maven {#h2-1-my-second-build-tool-maven}
---------------------------------------------------------------
+My second build tool: Maven
+---------------------------
 
 <img decoding="async" class="aligncenter wp-image-101838 size-medium" src="maven-700x189.jpg" alt="" width="700" height="189">
 
@@ -77,8 +77,8 @@ For the record, there were a couple of stored dependencies on the abovementioned
 
 Maven had a profound influence on all later build tools: they defined themselves in reference to Maven.
 
-No build tool of mine: Gradle {#h2-2-no-build-tool-of-mine-gradle}
-------------------------------------------------------------------
+No build tool of mine: Gradle
+-----------------------------
 
 <img loading="lazy" decoding="async" class="size-full wp-image-101839 alignright" src="gradle.jpg" alt="" width="375" height="187">
 
@@ -92,8 +92,8 @@ Maven and Gradle are both Java applications that run on the JVM. Starting a JVM 
 
 Chances are that your application will outlive your current build tools. What happens when you need to fix a bug five years from now, only to notice that the project's build tool isn't available online? The idea behind Gradle's wrapper is to keep the exact Gradle version along with the project and just enough code to download the full version over the Internet. As a side-effect, developers don't need to install Gradle locally; all use the same version, avoiding any discrepancy.
 
-Debunking Gradle's flexibility {#h2-3-debunking-gradle-s-flexibility}
----------------------------------------------------------------------
+Debunking Gradle's flexibility
+------------------------------
 
 Gradle brought the two above great features that Maven integrated, proving that competition is good. Despite this, I still find no benefit of Gradle.
 
@@ -103,7 +103,7 @@ Remember that before Maven took over, every Ant project was ad hoc. Maven did pu
 
 I did experience two symptoms of Gradle's flexibility. I suspect far more exist.
 
-### Custom lifecycle phases {#h3-4-custom-lifecycle-phases}
+### Custom lifecycle phases
 
 Maven manages integration testing in four phases, run in order:
 
@@ -118,7 +118,7 @@ On the other side, **Gradle has no notion of integration tests** whatsoever. Yet
 
 It's a mess, for each project will need to come up with both the number of phases required and their name: `integration-test`, `integration-tests`, `integration-testing`, `it` (for the lazy), etc. The options are endless.
 
-### The snowflake syndrome {#h3-5-the-snowflake-syndrome}
+### The snowflake syndrome
 
 Maven treats every project as a regular standard project. And if you have specific needs, it's possible to write a plugin for that. Writing a Maven plugin is definitely not fun; hence, you only write one when it's necessary, not just because you have decided that the law doesn't apply to you.
 
@@ -128,8 +128,8 @@ Gradle is the *de facto* build tool for Android projects. In one of the companie
 
 When another team created the company's second Android project, they copy-pasted the first project's structure and the build file. The intelligent thing to do would have been, at this time to make an internal Gradle plugin out of the Sonar-specific code. But they didn't do it because Gradle made it so easy to hack the build. And I, the Gradle-hater, took it upon myself to create the plugin. It could have been a better developer experience, to say the least. Lacking quality documentation and using an untyped language (Groovy), I used the console to print out the objects' structure to progress.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Competition is good, and Gradle has brought new ideas that Maven integrated, the wrapper and the daemon. However, Gradle is built on the premise that flexibility is good, while my experience has shown me the opposite. Ant was very flexible, and the cognitive load to go from one project to the next was high.
 

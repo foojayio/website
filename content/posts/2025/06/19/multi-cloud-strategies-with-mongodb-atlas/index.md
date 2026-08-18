@@ -30,8 +30,8 @@ With MongoDB Atlas' [Multi-Cloud support](https://www.mongodb.com/resources/basi
 
 In this article, we are going to look at the benefits of doing this and also how you can deploy a multi-cloud cluster on MongoDB Atlas.
 
-Why use a multi-cloud strategy? {#h2-0-why-use-a-multi-cloud-strategy}
-----------------------------------------------------------------------
+Why use a multi-cloud strategy?
+-------------------------------
 
 As mentioned earlier, one of the reasons you might want to use multiple cloud providers is to avoid vendor lock-in. If your data is stored with multiple providers and you no longer want to use one of them, you can carry on as normal using just the remaining providers your databases are deployed to. This gives you greater flexibility and less fear of choosing the "wrong" option for you.  
 
@@ -41,8 +41,8 @@ This can be an issue where data sovereignty laws exist---for example, in Germany
 
 You can get around this issue with multi-cloud, by using regions from multiple cloud providers within the same country, avoiding sovereignty issues. If one cloud goes down, it will just fall back to another and your users will be none the wiser!
 
-Setting up a multi-cloud deployment in MongoDB Atlas {#h2-1-setting-up-a-multi-cloud-deployment-in-mongodb-atlas}
------------------------------------------------------------------------------------------------------------------
+Setting up a multi-cloud deployment in MongoDB Atlas
+----------------------------------------------------
 
 Setting up a new cluster in MongoDB Atlas to be multi-cloud is very simple but let's go through the steps now.
 
@@ -57,8 +57,8 @@ Setting up a new cluster in MongoDB Atlas to be multi-cloud is very simple but l
 
 4. You can then pick what cluster tier you want to use, give it a name, and then click \`Create Cluster\`, and it will go ahead and deploy a multi-cloud cluster.
 
-**Summary** {#h2-2-summary}
----------------------------
+**Summary**
+-----------
 
 Implementing multi-cloud is a great way to avoid vendor lock-in and data sovereignty rules. It also helps with making your applications highly available, as any region or provider outages will allow it to revert automatically to another provider or region, meaning your customers face no impact!  
 

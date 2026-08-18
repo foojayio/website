@@ -35,8 +35,8 @@ In this post, I'll show how to benefit from the best of both worlds with [vClust
 
 With virtual clusters, we can have our cake---a single physical cluster for limited costs---and eat it with fully isolated virtual clusters.
 
-Weaving vCluster into the GitHub workflow {#h2-0-weaving-vcluster-into-the-github-workflow}
--------------------------------------------------------------------------------------------
+Weaving vCluster into the GitHub workflow
+-----------------------------------------
 
 Weaving vCluster into the GitHub workflow is a three-step process:
 
@@ -97,8 +97,8 @@ For fairness' sake, I used the time command to measure the creation time of a vi
 
 Installing vCluster and connecting to the virtual cluster take around one second. The creation of a virtual cluster takes about one minute; the creation of a full-fledged GKE instance takes at least five times more.
 
-Changes to the workflow {#h2-1-changes-to-the-workflow}
--------------------------------------------------------
+Changes to the workflow
+-----------------------
 
 Here comes the great news: there's absolutely no change to any of the workflow steps. We can keep using the same steps because a virtual cluster has the same interface as a regular Kubernetes cluster.
 
@@ -112,8 +112,8 @@ It includes:
 
 If you are already using Kubernetes, and you probably are because you read this post, introducing vCluster in our daily work does not require any breaking changes.
 
-Cleaning up {#h2-2-cleaning-up}
--------------------------------
+Cleaning up
+-----------
 
 So far, we haven't cleaned up any objects we created. It means pods with our app and PostgreSQL keep piling up in the cluster, not to mention `Service` objects, making available ports a scarce resource. It was not an oversight: the reason was that it was a lot of overload to delete each object individually. I could have deployed all objects of a workflow run into a dedicated namespace and deleted that namespace. Unfortunately, I've been bitten by [namespaces stuck in the `Terminating` state](https://www.baeldung.com/ops/delete-namespace-terminating-state) before.
 
@@ -140,8 +140,8 @@ GitHub provides an `if` attribute to run a step depending on conditions. For exa
 
 The above setup allows each Pull Request to run in its sandbox, avoiding conflicts while controlling costs. By leveraging this approach, you can simplify your workflows, reduce risks, and focus on delivering features without worrying about breaking shared environments.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 This post concludes our series on testing Pull Requests on Kubernetes. In the first post, we ran unit tests with Testcontainers locally and set up the foundations of the GitHub workflow. We also leveraged GitHub Service Containers in our pipeline. In the second post, we created a GKE instance, deployed our app and its PostgreSQL database, got the `Service` URL, and ran the end-to-end tests. In this post, we used vCluster to isolate each PR and manage the costs.
 

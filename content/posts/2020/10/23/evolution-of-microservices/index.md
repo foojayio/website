@@ -18,22 +18,22 @@ frozen: false
 For some time now, there has been an undeniable growth in interest for Microservices. The core concept itself, however, is not that new.
 ![Microservices Guide Final-05](https://blog.payara.fish/hs-fs/hubfs/Microservices%20Guide%20Final-05.jpg?width=9058&name=Microservices%20Guide%20Final-05.jpg)
 
-CORBA {#h2-0-corba}
--------------------
+CORBA
+-----
 
 As early as 1996, we talked about distributed objects, mainly in the context of an early and now mostly forgotten technology called [CORBA](https://en.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture). CORBA promised to deliver business objects, for which the network and their exact implementation was mostly abstracted away.
 
 In a CORBA world, these business objects representing a service that focused on a single thing could essentially live anywhere. If an application was the aggregation of a number of these distributed objects, each of them living on their own server, one could be updated or restarted without having to take down the entire application.
 
-EJB {#h2-1-ejb}
----------------
+EJB
+---
 
 Unfortunately, CORBA as both a spec and an implementation was riddled with issues and soon faded away. After CORBA came[EJB](https://en.wikipedia.org/wiki/Jakarta_Enterprise_Beans#:~:text=EJB%20is%20a%20server%2Dside,processing%2C%20and%20other%20web%20services.), which was originally a remote only technology, EJB re-used many parts of CORBA but also invented many parts of its own.
 
 Specifically, the component model was unique to EJB, and at the time was actually considered as "CORBA done right", after similar attempts to create such model all painfully failed in CORBA itself. Around the time of EJB, the term "distributed objects" changed to "remote objects".
 
-SOAP {#h2-2-soap}
------------------
+SOAP
+----
 
 With CORBA and Remote EJB being based on binary protocols, the next step in this evolution came when Microsoft came up with [SOAP (Simple Object Access Protocol)](https://en.wikipedia.org/wiki/SOAP) as an XML based format, using mainly HTTP as its network protocol. Of course, many technologies that have "Simple" in their name aren't actually simple at all, and for SOAP this indeed appeared to be true.
 
@@ -43,8 +43,8 @@ Despite simplifications in working with SOAP that JAX-WS had brought about, SOAP
 
 Java EE provides first-class support for REST via the JAX-RS API. This time the nomenclature stayed largely the same though; we still talk about a web service, although sometimes the term RESTful web service is used to distinguish it from a SOAP-based web service. With that, we finally arrive at Microservices.
 
-Microservices {#h2-3-microservices}
------------------------------------
+Microservices
+-------------
 
 [Microservices](https://en.wikipedia.org/wiki/Microservices) are an architectural type that builds on (mostly) RESTful web services. Where RESTful web services, in general, can be used for just about anything, for instance, to expose an API to external users, Microservices are specifically dedicated to be independent business services that together form a suite of such services that make up an application.
 

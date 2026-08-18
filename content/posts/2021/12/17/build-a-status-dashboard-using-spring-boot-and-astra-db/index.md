@@ -31,8 +31,8 @@ On top of this, we will be using a Spring Boot application to render the dashboa
 
 We will be building this with Java 16 or later, so make sure this is installed and ready to use before continuing.
 
-What Is Astra? {#h2-0-what-is-astra}
-------------------------------------
+What Is Astra?
+--------------
 
 DataStax Astra is a Database as a Service offering that is powered by Apache Cassandra. **This gives us a fully hosted, fully managed Cassandra database that we can use to store our data, which includes all of the power that Cassandra offers for scalability, high availability and performance.**
 
@@ -42,8 +42,8 @@ It also offers a JSON Document API that allows for much more flexible data acces
 
 This does come with a cost though -- the Document API is not interchangeable with the other APIs, so it is important to decide ahead of time how data needs to be modeled and which APIs are best used to access it.
 
-**Our Application Data Model** {#h2-1-our-application-data-model}
------------------------------------------------------------------
+**Our Application Data Model**
+------------------------------
 
 **We are building our system around the Astra system on top of Cassandra. This will have a direct reflection on the way that we model our data.**
 
@@ -87,8 +87,8 @@ Here we have some general data that doesn't change -- the *name* and *realName* 
 
 This article is focused on the *statuses* collection, and accessing it using the Document API. Our next article will show how to work with the *events* collection which is row-based data instead.
 
-**How to Set Up DataStax Astra** {#h2-2-how-to-set-up-datastax-astra}
----------------------------------------------------------------------
+**How to Set Up DataStax Astra**
+--------------------------------
 
 Before we can start our application, we need a store for our data. We are going to use the Cassandra offering from DataStax Astra. **To get started, we need to [register a free account with Astra](https://astra.dev/3BJ1lmW) and create a new database.** This needs to be given a reasonable name for both the database and the keyspace within:
 ![](db-setup-1024x582.png)
@@ -110,8 +110,8 @@ These can be found on the "Connect" tab.
 
 Finally, we need some data. For the purposes of this article, we are using some pre-populated data. This can be found in a shell script [here](https://github.com/Baeldung/datastax-cassandra/blob/main/data.sh).
 
-**How to Set Up Spring Boot** {#h2-3-how-to-set-up-spring-boot}
----------------------------------------------------------------
+**How to Set Up Spring Boot**
+-----------------------------
 
 We are going to create our new application using [Spring Initializr](https://start.spring.io/); **we're also going to use Java 16 -- allowing us to use [Records](https://www.baeldung.com/java-record-keyword).** This in turn means we need Spring Boot 2.5 -- currently this means 2.5.0-M3.
 
@@ -132,8 +132,8 @@ ASTRA_DB_APPLICATION_TOKEN=AstraCS:xxx-token-here
 
 These secrets are being managed like this purely for the purposes of this article. In a real application, they should be managed securely, for example using [Vault](https://www.baeldung.com/vault).
 
-Writing a Document Client {#h2-4-writing-a-document-client}
------------------------------------------------------------
+Writing a Document Client
+-------------------------
 
 **In order to interact with Astra, we need a client that can make the API calls necessary.** This will work directly in terms of the [Document API](https://docs.datastax.com/en/astra/docs/document-api.html) that Astra exposes, allowing our application to work in terms of rich documents. For our purposes here, we need to be able to fetch a single record by ID and to provide partial updates to the record.
 
@@ -190,12 +190,12 @@ Here, our *baseUrl* and *token* fields are configured from the properties that w
 
 Note that we need to change the request factory used by our *RestTemplate*. This is because the default one that is used by Spring doesn't support the PATCH method on HTTP calls.
 
-**Fetching Avengers Statuses via the Document API** {#h2-5-fetching-avengers-statuses-via-the-document-api}
------------------------------------------------------------------------------------------------------------
+**Fetching Avengers Statuses via the Document API**
+---------------------------------------------------
 
 **Our first requirement is to be able to retrieve the statuses of the members of our team. This is the document from the *statuses* collection that we mentioned earlier.** This will be built on top of the *DocumentClient* that we wrote earlier.
 
-### **Retrieving Statuses from Astra** {#h3-6-retrieving-statuses-from-astra}
+### **Retrieving Statuses from Astra**
 
 To represent these, we will need a [Record](https://www.baeldung.com/java-record-keyword) as follows:
 
@@ -242,7 +242,7 @@ public class StatusesService {
 
 **Here, we are using our client to get the record from the "statuses" collection, represented in our *Statuses* record.** Once retrieved we extract only the documents to return back to the caller. Note that we do have to rebuild the *Status* objects to also contain the IDs since these are actually stored higher up in the document within Astra.
 
-### **Displaying the Dashboard** {#h3-7-displaying-the-dashboard}
+### **Displaying the Dashboard**
 
 **Now that we have a service layer to retrieve the data, we need to do something with it.** This means a controller to handle incoming HTTP requests from the browser, and then render a template showing the actual dashboard.
 
@@ -320,14 +320,14 @@ And this makes use of another nested template, under "common/status.html", to di
 This makes use of [Bootstrap](https://getbootstrap.com/) to format up our page, and displays one card for each Avenger, coloured based on the status and displaying the current details of that Avenger:
 ![](avengers-dashboard.png)
 
-Status Updates**via the Document API** {#h2-8-status-updates-via-the-document-api}
-----------------------------------------------------------------------------------
+Status Updates**via the Document API**
+--------------------------------------
 
 We now have the ability to display the current status data of the various Avengers members. What we're missing is the ability to update them with feedback from the field. **This will be a new HTTP controller that can update our document via the Document API to reflect the newest status details.**
 
 In the next article, this same controller will record both the latest status into the *statuses* collection but also the *events* collection. This will allow us to record the entire history of events for later analysis from the same input stream. As such, the inputs into this controller are going to be the individual events and not the rolled-up statuses.
 
-### **Updating Statuses in Astra** {#h3-9-updating-statuses-in-astra}
+### **Updating Statuses in Astra**
 
 **Because we are representing the statuses data as a single document, we only need to update the appropriate portion of it.** This uses the *patchSubDocument()* method of our client, pointing at the correct portion for the identified avenger.
 
@@ -341,7 +341,7 @@ public void updateStatus(String avenger, String location, String status) throws 
 ```
 
 
-### **API to Update Statuses** {#h3-10-api-to-update-statuses}
+### **API to Update Statuses**
 
 **We now need a controller that can be called in order to trigger these updates.** This will be a new *RestController* endpoint that takes the avengers ID and the latest event details:
 
@@ -381,8 +381,8 @@ In a future article, this will be updated to also create a new events record wit
 
 Note that we are not correctly looking up the name of the location to use for the latitude and longitude -- it is just hard-coded. There are various options for implementing this but they are out of scope for this article.
 
-**Summary** {#h2-11-summary}
-----------------------------
+**Summary**
+-----------
 
 **Here we have seen how we can leverage the Astra Document API on top of Cassandra to build a dashboard of statuses.**
 

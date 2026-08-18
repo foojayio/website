@@ -25,8 +25,8 @@ Upgrading to Jakarta EE 10 from an older version of Jakarta EE or Java EE can be
 
 In this series of articles, we'll explain everything you need to know before upgrading to Jakarta EE 10 and guide you to complete the upgrade successfully and in almost no time.
 
-Types of challenges {#h2-0-types-of-challenges}
------------------------------------------------
+Types of challenges
+-------------------
 
 The challenges with upgrading to Jakarta EE 10 or to Eclipse GlassFish 7 fall into these 3 main categories:
 
@@ -36,13 +36,13 @@ The challenges with upgrading to Jakarta EE 10 or to Eclipse GlassFish 7 fall in
 
 All of the above applies not only to your codebase but also to all dependencies used by your application.
 
-Existing tools to automate upgrade steps {#h2-1-existing-tools-to-automate-upgrade-steps}
------------------------------------------------------------------------------------------
+Existing tools to automate upgrade steps
+----------------------------------------
 
 Fortunately, many of the challenges can be automated using free and opensource tools like [Openrewrite](https://github.com/openrewrite), and [Eclipse Transformer](https://github.com/eclipse/transformer). These tools can save you time and effort when upgrading to Jakarta EE 10, allowing you to focus on other important aspects of your application's development.
 
-So, what to do to successfully upgrade to Jakarta EE 10? {#h2-2-so-what-to-do-to-successfully-upgrade-to-jakarta-ee-10}
------------------------------------------------------------------------------------------------------------------------
+So, what to do to successfully upgrade to Jakarta EE 10?
+--------------------------------------------------------
 
 All that you need to know is covered or will be covered soon by this series of articles about upgrading to Jakarta EE 10 at the OmniFish blog:
 
@@ -68,8 +68,8 @@ We've prepared detailed instructions that explain how to use available automatin
  <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
 </figure>
 
-OmniFish - Jakarta EE experts {#h2-3-omnifish-jakarta-ee-experts}
------------------------------------------------------------------
+OmniFish - Jakarta EE experts
+-----------------------------
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

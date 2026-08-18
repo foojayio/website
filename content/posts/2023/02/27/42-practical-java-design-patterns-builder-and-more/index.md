@@ -101,7 +101,7 @@ The **builder** provides the fields that are required to create a new *SuperVehi
 
 The *SuperVehicle* record class automatically includes assessors, *hashCode* , *equals* , and *toString* methods. As the cherry on the top, the class is immutable by definition. Isn't that wonderful?
 
-### Conclusion {#h3-0-conclusion}
+### Conclusion
 
 **T** he newly updated **builder** pattern can contribute to the sustainability of the application code base as well as the stability of the application at runtime.
 
@@ -119,7 +119,7 @@ Everything is packed into a compact design and supported by closely discussed ex
 
 **Enjoy** reading and **happy** coding!
 
-### References {#h3-1-references}
+### References
 
 1. GitHub Repository: [Practical Design Pattern for Java Developers](https://github.com/PacktPublishing/Practical-Design-Patterns-for-Java-Developers)
 2. Packt: [Interview with Miroslav Wengner](https://partnerships.packt.com/interview-with-miroslav-wengner/)

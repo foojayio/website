@@ -32,8 +32,8 @@ As Linus Torvalds once wrote:
 
 I want to show how to do it within the scope of a small demo project to comply with the above statement.
 
-The use-case: pricing {#h2-0-the-use-case-pricing}
---------------------------------------------------
+The use-case: pricing
+---------------------
 
 In my career, I've spent some years in the e-commerce domain. E-commerce in the real world is much more complex than people might think. Yet, I found that simplifications of some parts of e-commerce are easy to understand because it "speaks" to the audience.
 
@@ -53,8 +53,8 @@ We can add items to the cart and check its content:
 
 ![Checkout page](checkout.jpg)
 
-The initial situation {#h2-1-the-initial-situation}
----------------------------------------------------
+The initial situation
+---------------------
 
 The following diagram models the existing flow:
 
@@ -100,8 +100,8 @@ fun price(cart: Cart): Double {
 
 At this point, pricing is strongly coupled to the `CheckoutHandler`.
 
-Chopping pricing {#h2-2-chopping-pricing}
------------------------------------------
+Chopping pricing
+----------------
 
 Before using an alternative pricing service, we have to chop the pricing service by moving it to its dedicated route. The new flow is the following:
 
@@ -146,8 +146,8 @@ Opening the browser dev tools reveals both HTTP requests on the checkout page:
 | 200    | `GET`  | localhost:9080 | `c`     | `checkout:1` | `json`  |
 | 200    | `POST` | localhost:9080 | `price` | `checkout:1` | `plain` |
 
-Using an alternative pricing service {#h2-3-using-an-alternative-pricing-service}
----------------------------------------------------------------------------------
+Using an alternative pricing service
+------------------------------------
 
 At this stage, if we decide to use an alternative pricing feature, we would have to deploy an updated version of the application with the client calling the alternative URL. Each change to the pricing alternative may require a new deployment. Since the idea is to keep the deployed monolith, we shall improve the architecture instead.
 
@@ -222,8 +222,8 @@ At this point, while the monolithic shop contains pricing code, it's never calle
 
 On the other side, we can update the pricing logic according to new business requirements without deploying anything but the function itself.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 My previous post focused on why to use microservices and, more importantly, why *not* to use them.
 

@@ -28,10 +28,10 @@ In addition, we make some improvements for users to search for subscriptions and
 
 We hope these features could improve your user experience. So let us get started.
 
-Azure Toolkit for IntelliJ Improvements {#h2-0-azure-toolkit-for-intellij-improvements}
----------------------------------------------------------------------------------------
+Azure Toolkit for IntelliJ Improvements
+---------------------------------------
 
-### AKS Management Support {#h3-1-aks-management-support}
+### AKS Management Support
 
 Azure Kubernetes Service (AKS) simplifies deploying a managed Kubernetes cluster in Azure by offloading the operational overhead to Azure. You can find more details about [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/ "Azure Kubernetes Service (AKS)").
 
@@ -49,7 +49,7 @@ And our plugin also provides the support to download kubeconfig (Admin/User) to 
 
 ![](AKS-operation-updates.gif)
 
-### Virtual Machine Support {#h3-2-virtual-machine-support}
+### Virtual Machine Support
 
 Azure Virtual Machines (VM) is one of several types of on-demand, scalable computing resources that Azure offers. You can see more details with [the documentation](https://docs.microsoft.com/en-us/azure/virtual-machines/ "the documentation").
 
@@ -64,7 +64,7 @@ With this new Virtual Machine support, you can directly run or debug application
 
 ![](vm-runend.gif)
 
-### Search Subscriptions Easily {#h3-3-search-subscriptions-easily}
+### Search Subscriptions Easily
 
 When you login in with your Azure account, you need to specify one or more subscriptions to use.
 
@@ -74,7 +74,7 @@ To improve this experience, we have added the support that you can use the searc
 
 ![](Search.gif)
 
-### Explore the Settings Menu {#h3-4-explore-the-settings-menu}
+### Explore the Settings Menu
 
 To help developers find official documents and blogs more easily, you can right click the settings button in Azure Explorer and explore more tutorials here.
 
@@ -84,7 +84,7 @@ Besides, the Dev Blogs and Documentation also bring more useful resources.
 
 ![](Explore-Settings.png)
 
-### Feedback and Suggestions {#h3-5-feedback-and-suggestions}
+### Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 
@@ -94,7 +94,7 @@ Please don't hesitate to try our product! Your feedback and suggestions are very
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new " Create a feature request or submit a bug") on our official GitHub Issues page
 * [Fill in our survey](https://microsoft.qualtrics.com/jfe/form/SV_b17fG5QQlMhs2up "Fill in our survey")
 
-### Resources {#h3-6-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Azure Tooling,
 

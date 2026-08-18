@@ -33,7 +33,7 @@ This article is also going to talk about performances. There are several ways to
 
 {#more-45289}
 
-### HTTP performance evolution {#_http_performance_evolution}
+### HTTP performance evolution
 
 The HTTP protocol was created between 1989 and 1991. Yes, 30 years ago! Performance was not a primary focus.  
 
@@ -93,7 +93,7 @@ It is constrained by the server, which informs the client about the number of in
 
 Noteworthy, previously, the client defined the concurrency (the connection pool size or a browser opening up to 5 connections per host). Since HTTP/2, the concurrency is defined by the server.
 
-### Database access performance {#_database_access_performance}
+### Database access performance
 
 Let's go back to databases.
 
@@ -152,7 +152,7 @@ The second (pipelining level 2) and third (pipelining level 4) results show the 
 
 The last result shows that greater levels of pipelining (16) have a minimal effect on performance in practice.
 
-### Summary {#_summary}
+### Summary
 
 Like HTTP, database protocols were created during the '80s and share similar protocol limitations.
 

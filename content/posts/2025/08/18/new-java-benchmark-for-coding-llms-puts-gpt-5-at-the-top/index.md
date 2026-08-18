@@ -32,7 +32,7 @@ As Jack Morris put it:
 
 But if the big labs have better benchmarks they haven't released them, so it has fallen to small teams like [Aider](https://aider.chat/docs/leaderboards/ "Aider") and now Brokk to step up and move the industry forward with independent evaluations.
 
-### GPT-5 is on top at every performance level and every price point {#h3-0-gpt-5-is-on-top-at-every-performance-level-and-every-price-point}
+### GPT-5 is on top at every performance level and every price point
 
 ![](Screenshot-2025-08-12-at-20-04-14-Brokk---AI-for-Large-Codebases-700x497.png)
 
@@ -46,7 +46,7 @@ And at the low end:
 
 ![](image-7-700x379.png)
 
-### ... but it's no speed demon {#h3-1-but-it-s-no-speed-demon}
+### ... but it's no speed demon
 
 The one chink in OpenAI's armor is that, at least as of release week, the entire GPT-5 family is slow. The only slower model in the A or B tiers is Gemini 2.5 Pro. By contrast, Sonnet 4 is screaming fast. Even Opus 4.1 is faster than GPT-5 Mini.
 
@@ -56,7 +56,7 @@ And if we drop down to the Open Round, GPT-5 nano is both slower and dumber than
 
 ![](image-6-700x379.png)
 
-### Performance by task length {#h3-2-performance-by-task-length}
+### Performance by task length
 
 The Power Ranking tasks are up to 108k tokens long. All the models get worse at larger tasks, with the top-performing models at large tasks (GPT-5 and Gemini 2.5 Pro) falling off more slowly than the rest, but still falling off.
 
@@ -64,7 +64,7 @@ The Power Ranking tasks are up to 108k tokens long. All the models get worse at 
 
 This also means that context length isn't the primary reason that newer models are passing former value king DeepSeek's offerings. Yes, V3 was only able to solve one task over 32k tokens long, but the other models in its class fall off sharply here, too. So if we look at scores counting only tasks under that threshold, V3 edges closer to Flash 2.5 but the relative rankings are unchanged.
 
-### Other observations {#h3-3-other-observations}
+### Other observations
 
 * [Unlike in SWEBench](https://x.com/chatgpt21/status/1954033383094296705 "Unlike in SWEBench"), enabling thinking makes a meaningful difference in Opus 4.1 performance in the Power Ranking. We speculate that this may be due to the larger, more complex tasks involved.
 * But almost no models benefited from `high` thinking over default or medium. o4 is the exception that does benefit; o3, Sonnet 4, Opus 4.1, Gemini Pro 2.5, and Gemini Flash 2.5 all saw negligible benefit, or even worse performance from overthinking. (We were unable to get reasoning=high working with GPT-5 through the litellm proxy that Brokk uses in this initial test. We will update the results when we have solved the problem.)
@@ -73,7 +73,7 @@ This also means that context length isn't the primary reason that newer models a
 * We were unable to get a reasonable API quota from xAI to test Grok 4.
 * Quantization matters. Qwen3 Coder fp8 scores significantly worse on both average and best scores than the native fp16 version. By default, you could get either one from Openrouter, or even fp4, so be careful to configure this correctly!
 
-### Implications for builders {#h3-4-implications-for-builders}
+### Implications for builders
 
 * Build noise matters. No model did well with JGit in particular until we special-cased its Maven build to be less noisy. Besides the standard -quiet mvn flag, we added -DskipScriptExecution=true to mvn and a special BRK_SUPPRESS_STDERR flag to the test harness to keep the pollution down to a level that they weren't overwhelming the build results with chaff.
 * Test quality also matters. If you have a flaky test that sometimes passes and sometimes fails, it will confuse the hell out of your LLM assistant. It's pretty confusing for humans, too. Fix your tests!
@@ -109,7 +109,7 @@ To capture the difference between a model that succeeds on the first try and one
 
 The Brokk Power Ranking is open source at *<https://github.com/BrokkAI/powerrank>* and the [full results are available here](https://brokk.ai/power-ranking).
 
-### A Note on Reasoning {#h3-5-a-note-on-reasoning}
+### A Note on Reasoning
 
 A bare model name indicates that it was run with default reasoning tokens for most thinking models; the exception is the Claude models, where the API defaults to no reasoning at all. These were set to "medium", with the -nothink variants for thinking disabled.
 

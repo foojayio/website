@@ -23,10 +23,10 @@ Jenkins supports clustering via master-slave mode. A build process can be delega
 
 In this article, we'll describe how to install Jenkins cluster with slave nodes auto-discovering and self-registering inside a master node. Jelastic PaaS implemented this solution in **Jenkins DevOps Pack** that can be installed from the [Marketplace](https://docs.jelastic.com/marketplace/) or through environment setup wizard as a **New Environment**. In this tutorial we'll cover both. Also, you will find out how to build a simple Java project hosted on GitHub using Jelastic Maven plugin.
 
-Jenkins DevOps Pack Installation {#_jenkins_devops_pack_installation}
----------------------------------------------------------------------
+Jenkins DevOps Pack Installation
+--------------------------------
 
-### Installation from Marketplace {#_installation_from_marketplace}
+### Installation from Marketplace
 
 1. Access the platform dashboard, click on **Marketplace \> Dev \& Admin Tools** , find Jenkins **DevOps Pack** and press **Install**.
 
@@ -42,14 +42,14 @@ Jenkins DevOps Pack Installation {#_jenkins_devops_pack_installation}
 
 <br />
 
-### Installation as New Environment {#_installation_as_new_environment}
+### Installation as New Environment
 
 In order to simplify cluster provisioning our team has prepared Jenkins certified templates for master and worker nodes. Once you click on the **New Environment** and add Jenkins application server, the **Auto-Clustering** functionality creates cluster topology which comprises one master node and one worker node by default. The worker nodes can be scaled out horizontally up to 16 nodes being automatically detected and registered at master node and vice versa.
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-auto-clustering.png)
 
-Jenkins Cluster Specifics {#_jenkins_cluster_specifics}
--------------------------------------------------------
+Jenkins Cluster Specifics
+-------------------------
 
 Each worker node has an [executor](https://wiki.jenkins.io/display/JENKINS/Terminology) process that is used for building the projects. By default one job at a time can be run since there is one executor configured in a worker. You may change the number of executors. To do this click on **Build Executor Status** and press **Configure** at node you need to change the number of executors in.
 
@@ -73,8 +73,8 @@ Once scaling is completed, make sure the all newly created worker nodes were dis
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Workers-and-Master.png)
 
-Create a New Job through Jenkins Admin Panel {#_create_a_new_job_through_jenkins_admin_panel}
----------------------------------------------------------------------------------------------
+Create a New Job through Jenkins Admin Panel
+--------------------------------------------
 
 Now let's see how to create a job that builds and publishes a simple project to a remote application server hosted on Jelastic PaaS. Here we use a [Maven](https://maven.apache.org/) to build [HelloWorld](https://github.com/jelastic/helloworld) project from GitHub and deploy it with the help of Jelastic Maven plugin.
 
@@ -154,8 +154,8 @@ Resulting from the **clean** and **package** phases you will get a war archive f
 
 The **jelastic:deploy** is performed by Jelastic Maven plugin on the fly during project build. The plugin allows you to deploy just built war file to Java application server in the remote environment at any available Jelastic Cloud Provider.
 
-Build Java Project with Maven Plugin {#_build_java_project_with_maven_plugin}
------------------------------------------------------------------------------
+Build Java Project with Maven Plugin
+------------------------------------
 
 1.Click on **Build Now**. Then confirm the parameters to be passed to the Jelastic Maven plugin.
 
@@ -165,8 +165,8 @@ Build Java Project with Maven Plugin {#_build_java_project_with_maven_plugin}
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Build-Maven-Project-in-Jenkins-1.png)
 
-Build Debug inside Jenkins {#_build_debug_inside_jenkins}
----------------------------------------------------------
+Build Debug inside Jenkins
+--------------------------
 
 By hovering over the sign next to the build, you can open the **Console Output** that may help you to debug project building.
 
@@ -178,8 +178,8 @@ If you want to execute project building on the specific node, go to the **Genera
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Label-Expression-1.png)
 
-Java Project Deployment via Jenkins {#_java_project_deployment_via_jenkins}
----------------------------------------------------------------------------
+Java Project Deployment via Jenkins
+-----------------------------------
 
 If the build procedure succeeds, it means that Jenkins deployed the result application archive to the application server (e.g. *myenv.vip.jelastic.cloud*).
 

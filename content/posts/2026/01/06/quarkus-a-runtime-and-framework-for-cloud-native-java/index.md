@@ -28,8 +28,8 @@ Quarkus is a Java runtime that seamlessly integrates popular frameworks and libr
 
 Quarkus itself can also work as a framework, as it constitutes a higher-level layer that provides structure and APIs.
 
-Why Quarkus stands out? {#_why_quarkus_stands_out}
---------------------------------------------------
+Why Quarkus stands out?
+-----------------------
 
 In modern software development, runtimes and frameworks form the foundation of productivity and consistency. Frameworks promote uniformity, simplify infrastructure, and enable automation at scale.
 
@@ -43,8 +43,8 @@ But beyond speed and live reload, Quarkus integrates established Java specificat
 
 In this sense, Quarkus is a development framework and runtime for cloud-native Java applications. It adheres to industry standards and offers compatibility with technologies such as Spring, Apache Kafka, and Apache Camel to support familiar, flexible development models.
 
-Quarkus as a versatile framework {#_quarkus_as_a_versatile_framework}
----------------------------------------------------------------------
+Quarkus as a versatile framework
+--------------------------------
 
 Beyond staple traits of modern frameworks, Quarkus introduces two platform-defining features: buildtime optimization and deep extensibility.
 
@@ -62,7 +62,7 @@ Beyond staple traits of modern frameworks, Quarkus introduces two platform-defin
   Figure 3. All the benefits of buildtime initialization also apply when compiling to a native binary.
 * **Extensibility** : Quarkus exposes extension points for everything from startup hooks to request filters. Over 800 [extensions](https://extensions.quarkus.io) allow seamless integration with modern technologies such as Kafka, OpenTelemetry, and OpenID Connect.These extensions integrate with Quarkus and participate in its buildtime and runtime lifecycle, making them first-class components of Quarkus.
 
-### Simplified developer experience {#_simplified_developer_experience}
+### Simplified developer experience
 
 Frameworks succeed when they reduce complexity without sacrificing flexibility.  
 
@@ -84,7 +84,7 @@ Figure 4. Frictionless developer experience: Vastly improved development feedbac
 
 These features give developers structure, sensible defaults, and clear conventions during development, and they deliver fast startup, low memory use, and operational consistency in production.
 
-### Performance that matters {#_performance_that_matters}
+### Performance that matters
 
 Teams optimize for different goals, such as startup latency, sustained throughput, memory footprint, elasticity, and cost. Quarkus addresses these needs by shifting work from run time to build time, keeping one development model across JVM and native, and exposing production signals such as health checks, metrics, and tracing.
 
@@ -110,7 +110,7 @@ Taken together, these in production choices provide measurable wins:
 * [Vodafone Greece replaces Spring Boot with Quarkus](https://quarkus.io/blog/vodafone-greece-replaces-spring-boot/)
 * [Quarkus vs. Spring Boot](https://www.logicmonitor.com/blog/quarkus-vs-spring)
 
-### Security {#_security}
+### Security
 
 Quarkus uses a standards-first composable security model.  
 
@@ -122,7 +122,7 @@ You enable what you need and configure it for your environment:
 
 This lets you apply the right security controls for each deployment.
 
-### Observability and control surfaces {#_observability_and_control_surfaces}
+### Observability and control surfaces
 
 Common control surfaces, such as metrics, logging, tracing, and configuration, are essential for site reliability engineers (SREs) and platform teams.
 
@@ -135,7 +135,7 @@ Quarkus exposes:
 
 This standardization enables automation and scalable monitoring.
 
-### Modular and production-ready {#_modular_and_production_ready}
+### Modular and production-ready
 
 Following a lean-core, modular-at-the-edge approach, Quarkus delivers:
 
@@ -148,7 +148,7 @@ Whether you are building a prototype or deploying to OpenShift, Quarkus adapts. 
 
 Because Quarkus modularity is declarative and unified across extensions, it supports a platform-like developer experience without the rigidity of traditional frameworks.
 
-### Building your stack with Quarkus {#_building_your_stack_with_quarkus}
+### Building your stack with Quarkus
 
 We will explore this topic in depth in part 3 of this series. For now, here is how Quarkus fits into the picture.
 
@@ -164,8 +164,8 @@ By packaging Quarkus extensions, curated defaults, and service templates into an
 
 For more information, see the [Logicdrop customer story](https://quarkus.io/blog/logicdrop-customer-story/) and their [GitLab automation write-up](https://quarkus.io/blog/logicdrop-automating-quarkus-with-gitlab/?utm_source=chatgpt.com).
 
-Conclusion {#_conclusion}
--------------------------
+Conclusion
+----------
 
 Quarkus unifies the strengths of a development framework and a runtime. As a framework, it provides structure, conventions, and a cohesive developer experience. As a runtime, it delivers fast startup, low memory use, and operational consistency in the cloud. This dual role helps teams standardize practices, reduce costs, and ship resilient cloud-native services.
 

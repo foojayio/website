@@ -40,8 +40,8 @@ As the name indicates, the IBM Semeru Runtime Certified Edition is also Java TCK
 
 IBM commercial support for the IBM Semeru Runtimes is optionally available with[IBM Runtimes for Business](https://www.ibm.com/cloud/support-for-runtimes " IBM Runtimes for Business"), which includes flexible licensing to meet your needs.
 
-IBM's long-term support for the Java language {#h2-0-ibm-s-long-term-support-for-the-java-language}
----------------------------------------------------------------------------------------------------
+IBM's long-term support for the Java language
+---------------------------------------------
 
 As a long-time leader in the Java ecosystem, IBM has invested in Java technology and innovation for decades. In 2016, we contributed our J9 Java Virtual Machine to the Eclipse Foundation. Our developers have worked directly in the Eclipse OpenJ9 project since then to support the growing community of Java users.
 
@@ -53,8 +53,8 @@ If you want to learn more about how OpenJ9 JVM innovation has been helping to op
 
 You can also learn about the significant [performance advantages](https://www.eclipse.org/openj9/performance/ "performance advantages ")OpenJ9 provides for different kinds of Java workloads.
 
-Give it a try {#h2-1-give-it-a-try}
------------------------------------
+Give it a try
+-------------
 
 Hybrid clouds need the flexibility of open and no-cost runtimes, and IBM Semeru Runtimes are a great choice. Whether you need a stable no-cost environment for developing Java workloads in the cloud, the performance benefits of a runtime deeply integrated across a broad set of platforms, or the experience of a mature Java provider for a large estate of critical Java workloads, we welcome you to [download](https://www.ibm.com/semeru-runtimes/downloads "download ")and try IBM Semeru Runtimes.
 

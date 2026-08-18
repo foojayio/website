@@ -37,8 +37,8 @@ On the other side, the JVM automatically releases objects from memory when they 
 
 As the ecosystem around the JVM is well developed, it makes sense to develop applications using the JVM and delegate the most memory-sensitive parts to Rust.
 
-Existing alternatives for JVM-Rust integration {#h2-0-existing-alternatives-for-jvm-rust-integration}
------------------------------------------------------------------------------------------------------
+Existing alternatives for JVM-Rust integration
+----------------------------------------------
 
 During the research for this article, I found quite a couple of approaches for JVM-Rust integration:
 
@@ -61,8 +61,8 @@ During the research for this article, I found quite a couple of approaches for J
 
   has been **the** way to integrate C/C++ with Java in the past. While it's not the most glamorous approach, it requires no specific platform and is stable. For this reason, I'll describe it in detail in the next section.
 
-Integrating Java and Rust via JNI {#h2-1-integrating-java-and-rust-via-jni}
----------------------------------------------------------------------------
+Integrating Java and Rust via JNI
+---------------------------------
 
 From a bird's eye view, integrating Java and Rust requires the following steps:
 
@@ -75,7 +75,7 @@ From a bird's eye view, integrating Java and Rust requires the following steps:
 
 Old-timers will have realized those are the same steps as when you need to integrate with C or C++. It's because they also can generate a system library. Let's have a look at each step in detail.
 
-### Java skeleton methods {#java-skeleton-methods}
+### Java skeleton methods
 
 We first need to create the Java skeleton methods. In Java, we learn that methods need to have a body unless they are `abstract`. Alternatively, they can be `native`: a native method delegates its implementation to a library.
 
@@ -132,7 +132,7 @@ JNIEXPORT jint JNICALL Java_ch_frankel_blog_rust_Main_doubleRust
 ```
 
 
-### Rust implementation {#h3-3-rust-implementation}
+### Rust implementation
 
 Now, we can start the Rust implementation. Let's create a new project:
 
@@ -201,7 +201,7 @@ cargo build
 
 The build produces a system-dependent library. For example, on OSX, the artifact has a `dylib` extension; on Linux, it will have a `so` one, etc.
 
-### Use the library on the Java side {#h3-4-use-the-library-on-the-java-side}
+### Use the library on the Java side
 
 The final part is to use the generated library on the Java side. It requires first to load it. Two methods are available for this purpose, `System.load(filename)` and `System.loadLibrary(libname)`.
 
@@ -219,7 +219,7 @@ public class Main {
 
 Note that on Mac OS, the `lib` prefix is **not** part of the library's name.
 
-### Working with objects {#h3-5-working-with-objects}
+### Working with objects
 
 The above code is pretty simple: it involves a **pure** function, which depends only on its input parameter(s) by definition. Suppose we want to have something a bit more involved. We come up with a new method that multiplies the argument with another one from the object's state:
 
@@ -267,8 +267,8 @@ pub extern "system" fn Java_ch_frankel_blog_rust_Main_timesRust(env: JNIEnv, obj
 2. Pass the object's reference, the field's name in Java and its type. The type refers to the correct [JVM type signature](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/types.html#type-signatures), *e.g.* `"I"` for `int`.
 3. `state` is a `Result<JValue>`. We need to unwrap it to a `JValue`, and then "cast" it to a `Result<jint>` via `i()`
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, we have seen how to call Rust from Java. It involves flagging methods to be delegated as `native`, generating the C header file, and using the `jni` crate. We have only scraped the surface with simple examples: yet, we've laid the road to more complex usages.
 

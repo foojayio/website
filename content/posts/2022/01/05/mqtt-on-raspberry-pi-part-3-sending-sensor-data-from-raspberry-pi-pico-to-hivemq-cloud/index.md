@@ -31,8 +31,8 @@ Now we are going to add some more data to our messaging system with another memb
 
 {{< youtube O3T_AlA7atE >}}
 
-About the Raspberry Pi Pico {#h2-0-about-the-raspberry-pi-pico}
----------------------------------------------------------------
+About the Raspberry Pi Pico
+---------------------------
 
 In January 2021 the Raspberry Pi Pico was introduced. This is a completely new type of board as it's not a full Linux PC, but a microcontroller chip (RP2040) developed by Raspberry Pi itself, on a small and versatile board. This RP2040 features a dual-core Arm Cortex-M0+ processor with 264KB internal RAM and support for up to 16MB of off-chip Flash, combined with a wide range of GPIOs (supporting I2C, SPI, and Programmable I/O (PIO)). So it's comparable to an Arduino or similar microcontroller board. But the biggest surprise of this Pico: the price of only 4$!
 
@@ -41,8 +41,8 @@ The Raspberry Pi Foundation made sure a very extensive [documentation site](http
 The Pico provides a lot of GPIOs which are grouped very nicely by separating them with a ground connection. These grounds even have a different shape on the board (no rounded corners), to make it easier to find the correct pin you want to use.
 ![](pico-pinout.svg) Pico pinout diagram
 
-Pico project {#h2-1-pico-project}
----------------------------------
+Pico project
+------------
 
 For this post, we will extend the Pico with a WiFi module and one distance sensor, as an example of how you can easily send sensor data to HiveMQ Cloud from this inexpensive board. To achieve this very low price, the Pico doesn't contain wireless functions. Luckily there are different possibilities to add WiFi to the Pico, of which the [Adafruit AirLift ESP32 WiFi Co-Processor Breakout Board](https://www.adafruit.com/product/4201) is probably the easiest and cheapest at 9.95$. An extra advantage of the Adafruit products is the big amount of documentation they provide on their website. Most of these examples use a different "flavor" of MicroPython, called **CircuitPython**, which is based on the same Python implementation, but more focused on beginners, education, and getting started tutorials.
 
@@ -54,12 +54,12 @@ The project in this post is a combination of different examples from Adafruit:
 * [Python \& CircuitPython](https://learn.adafruit.com/ultrasonic-sonar-distance-sensors/python-circuitpython)
 * [Installing the Mu Editor](https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor)
 
-Prepare the Pico for CircuitPython {#h2-2-prepare-the-pico-for-circuitpython}
------------------------------------------------------------------------------
+Prepare the Pico for CircuitPython
+----------------------------------
 
 Let's start with preparing our Pico for this tutorial. We need to connect the components, flash CircuitPython on the Pico, add libraries, and upload our code.
 
-### Wiring {#h3-3-wiring}
+### Wiring
 
 Take a breadboard and some wires to create this small test setup.
 ![](breadboard-wiring-1024x652.jpg) Breadboard wiring
@@ -92,7 +92,7 @@ The third component on the breadboard is an HC-SR04 distance sensor, similar to 
 | GP16 | ECHO    |
 | GP17 | TRIGGER |
 
-### CircuitPython on the Pico {#h3-4-circuitpython-on-the-pico}
+### CircuitPython on the Pico
 
 For our Pico to support this example CircuitPython project, we need to load the correct firmware and add some libraries.
 
@@ -117,14 +117,14 @@ To simplify the use of components, a whole set of libraries is available as one 
 
 ![](files-on-pico.png) Files on the Pico
 
-### IDE {#h3-5-ide}
+### IDE
 
 The code-files can be written directly to the Pico with any text editor or IDE. Adafruit advises to use the Mu editor as this allows to both write the code and see the application output in one tool. You can download this tool from[codewith.mu](https://codewith.mu/).
 
 Install the application on your PC, run it and select Mode \> CircuitPython.
 ![](mu-editor-1024x699.png) Mu Editor
 
-### Code {#h3-6-code}
+### Code
 
 The sources of this application are [available on GitHub in the same repository where you can find the sources of the previous two posts](https://github.com/FDelporte/HiveMQ-examples).
 
@@ -297,12 +297,12 @@ Starting the distance measurement
 ```
 
 
-Adding the data to our JavaFX dashboard {#h2-7-adding-the-data-to-our-javafx-dashboard}
----------------------------------------------------------------------------------------
+Adding the data to our JavaFX dashboard
+---------------------------------------
 
 With a few small changes, we can now add the data of the Pico messages to our JavaFX application we created in the previous post. The only file which needs to be modified is `DashboardView.java`.
 
-### Code changes {#h3-8-code-changes}
+### Code changes
 
 First, we add a new variable:
 
@@ -346,13 +346,13 @@ public void handlePicoData(Mqtt5Publish message) {
 ```
 
 
-### Extended layout {#h3-9-extended-layout}
+### Extended layout
 
 With these small modifications, we now will see the data of both the CrowPi and the Pico in one dashboard.
 ![](dashboard-app-with-pico.png)
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 The Raspberry Pi Pico is a very versatile device for a very low price. With the additional Adafruit WiFi module, you can easily add wireless communication. In the meantime, already many new boards based on this same RP2040 microcontroller are available and some of them even have WiFi onboard. A nice overview can be found on  
 [tomshardware.com/best-picks/best-rp2040-boards](https://www.tomshardware.com/best-picks/best-rp2040-boards).

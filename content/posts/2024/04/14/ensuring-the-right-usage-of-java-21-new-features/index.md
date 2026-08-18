@@ -41,8 +41,8 @@ The [11 rules](https://rules.sonarsource.com/java/tag/java21 "11 rules") are as 
 10. Use guarded pattern labels instead of if/else
 11. Use indexOf(char\|String, int, int) with correct ranges
 
-Use built-in "Math.clamp" methods {#h2-0-use-built-in-math-clamp-methods}
--------------------------------------------------------------------------
+Use built-in "Math.clamp" methods
+---------------------------------
 
 Sometimes you need to bounds check a number, ensuring that the value is not out of a certain range. To do this we've been using manual checks like these ones:
 
@@ -64,8 +64,8 @@ int clampedValue = Math​​.clamp(value, min, max);
 
 The new Java 21 [Math.clamp](https://bugs.openjdk.org/browse/JDK-8301226 "Math.clamp") method is clear, and focused and reduces the options to include a bug.
 
-Use correct ranges with Math.clamp {#h2-1-use-correct-ranges-with-math-clamp}
------------------------------------------------------------------------------
+Use correct ranges with Math.clamp
+----------------------------------
 
 When you use the Math.clamp method from Java 21 as suggested by the previous rule, you need to use the correct ranges, like other range-based APIs.
 
@@ -85,8 +85,8 @@ Math.clamp(42, 0, 0); // Non compliant
 ```
 
 
-Use SequencedCollection reversed() for reverse iteration order {#h2-2-use-sequencedcollection-reversed-for-reverse-iteration-order}
------------------------------------------------------------------------------------------------------------------------------------
+Use SequencedCollection reversed() for reverse iteration order
+--------------------------------------------------------------
 
 When you need to iterate a collection but in reverse order, often you do manual processes using the iterator.
 
@@ -111,8 +111,8 @@ for (var element: list.reversed()) {
 
 This approach is way clearer, doesn't give space to do it wrong, and ensures consistency across your code.
 
-Use reversed immutable lists with SequencedCollection reversed() view {#h2-3-use-reversed-immutable-lists-with-sequencedcollection-reversed-view}
--------------------------------------------------------------------------------------------------------------------------------------------------
+Use reversed immutable lists with SequencedCollection reversed() view
+---------------------------------------------------------------------
 
 Sometimes you need to iterate a collection in reverse order, and you have to do it manually, using the `Collections.reverse` method which mutates the list. Mutability can bring problems, especially in this case mutating the original list just to use a reversed view of it. Almost always [immutable approaches are preferred](https://www.sonarsource.com/blog/builders-withers-and-records-java-s-path-to-immutability/ "immutable approaches are preferred").
 
@@ -143,8 +143,8 @@ void foo(List<String> list) {
 ```
 
 
-Use switch instead of if-else for pattern matching {#h2-4-use-switch-instead-of-if-else-for-pattern-matching}
--------------------------------------------------------------------------------------------------------------
+Use switch instead of if-else for pattern matching
+--------------------------------------------------
 
 In versions of Java before 21, matching a variable against multiple patterns required you to chain if/else statements. However, since Java 21, the enhanced switch expression is a preferable alternative in most scenarios.
 
@@ -207,8 +207,8 @@ switch (shape) {
 ```
 
 
-Use record pattern matching instead of explicit field access {#h2-5-use-record-pattern-matching-instead-of-explicit-field-access}
----------------------------------------------------------------------------------------------------------------------------------
+Use record pattern matching instead of explicit field access
+------------------------------------------------------------
 
 When you use type pattern matching you also declare a local variable of the type you matched against, to easily access its specific members, which is a benefit on top of the use of the instanceOf conditionals.
 
@@ -234,8 +234,8 @@ static void printSum(Object obj) {
 ```
 
 
-Use VirtualThreads for heavy blocking operations {#h2-6-use-virtualthreads-for-heavy-blocking-operations}
----------------------------------------------------------------------------------------------------------
+Use VirtualThreads for heavy blocking operations
+------------------------------------------------
 
 Java 21 comes with a powerful feature called [Virtual Threads](https://openjdk.org/jeps/444 "Virtual Threads"). Before this, when you created a new Thread it was taking a thread from the OS. This basically meant that depending on the CPU we were capable of creating only a specific number of threads.
 
@@ -257,8 +257,8 @@ Thread t = Thread.ofVirtual.start(() -> {  // Compliant
 ```
 
 
-Don't misuse Thread methods with Virtual Threads {#h2-7-don-t-misuse-thread-methods-with-virtual-threads}
----------------------------------------------------------------------------------------------------------
+Don't misuse Thread methods with Virtual Threads
+------------------------------------------------
 
 If you want to migrate from the use of platform Threads to the new Java 21 Virtual Threads there are some methods that you should not use since they don't make any sense for the new type and can even cause runtime errors.
 
@@ -288,8 +288,8 @@ Virtual threads are always daemon threads, so invoking `.setDaemon()` will not c
 
 The same goes for .setPriority because the priority of virtual threads cannot be changed from `Thread.NORM_PRIORITY`, and finally virtual threads are not active members of a ThreadGroup, therefore invoking `.getThreadGroup()` on a virtual thread returns a dummy "VirtualThreads" group that is empty.
 
-Virtual threads should not run blocks with synchronized code {#h2-8-virtual-threads-should-not-run-blocks-with-synchronized-code}
----------------------------------------------------------------------------------------------------------------------------------
+Virtual threads should not run blocks with synchronized code
+------------------------------------------------------------
 
 The CPU usage optimization introduced with VirtualThread relies on the fact that these new types of threads can be "mounted" and "dismounted" from an OS thread whenever they find themselves waiting for some blocking operation ( I/O, network, etc..).
 
@@ -313,8 +313,8 @@ private synchronized void synchronizedMethod() {
 
 In order to obtain the best result from the Virtual Threads we should not use synchronized blocks that will block the thread.
 
-Use guarded pattern labels instead of if/else {#h2-9-use-guarded-pattern-labels-instead-of-if-else}
----------------------------------------------------------------------------------------------------
+Use guarded pattern labels instead of if/else
+---------------------------------------------
 
 When we check for the type of an object, often it also involves checking the object value. Even when we use pattern matching to make the code more readable and avoid the use of `instanceOf`, our code is still not using all the benefits of the Java language.
 
@@ -350,8 +350,8 @@ static void testStringNew(String response) {
 ```
 
 
-Use indexOf(char\|String, int, int) with correct ranges {#h2-10-use-indexof-char-string-int-int-with-correct-ranges}
---------------------------------------------------------------------------------------------------------------------
+Use indexOf(char\|String, int, int) with correct ranges
+-------------------------------------------------------
 
 Java 21 adds new indexOf methods that accept ranges rather than single start or stop indices. While these new API methods make it easier to provide ranges rather than having to do substring operations and adding/subtracting resulting offsets, they also throw StringIndexOutOfBounds exceptions when the range used is not considered legal.
 
@@ -365,8 +365,8 @@ message.indexOf(',', 0, message.length() + 1); // Noncompliant, endIndex is grea
 ```
 
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 Java 21 brings a lot of new features and methods that will help us to code in a more consistent way. But it's easy to not be aware of them or miss their usage as it's a relatively new version.
 

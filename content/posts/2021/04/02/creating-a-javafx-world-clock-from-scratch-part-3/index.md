@@ -28,7 +28,7 @@ Welcome back to the series of blog entries on how I created a "sci-fi" looking w
 
 As a small recap from Part 1, I mention how I get my inspiration and tools that were used in designing the clock face. In [Part 2](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-2/) the focus was on using the Scene Builder tool by GluonHQ [\[3\]](https://gluonhq.com "GluonHQ") to layout UI elements comprised of the clock face, and later implementation code using trig and JavaFX to animate the clock arms.
 
-### JavaFX UI Forms Validation \& Java Modules {#h3-0-javafx-ui-forms-validation-java-modules}
+### JavaFX UI Forms Validation \& Java Modules
 
 Do you ever get bored of the plain old UI Forms? Often, UI forms will have nice visual cues and validation icons as feedback when the user has typed something incorrectly.
 
@@ -46,7 +46,7 @@ To view the pre-recording of the talk click here: <https://video.fosdem.org/2021
 
 Let's begin already!
 
-### JavaFX Puzzle Pieces (Modules) {#h3-1-javafx-puzzle-pieces-modules}
+### JavaFX Puzzle Pieces (Modules)
 
 When developing modular apps in Java (9+) you can take advantage of encapsulation that non-modular apps cannot. Because non-modular apps use the Java class path many of packages are exposed. An example would be if you are making a library that depends on a 3rd party library.
 
@@ -102,7 +102,7 @@ exports com.carlfx.worldclock;
 
 Now that you know a little more about the basics of Java modules let's look at a high-level view on how to go about creating a JavaFX UI Form.
 
-### JavaFX UI Forms (MVC) {#h3-2-javafx-ui-forms-mvc}
+### JavaFX UI Forms (MVC)
 
 When creating a JavaFX UI form, you will have to know how a JavaFX application will assemble a controller, FXML, and CSS files into a displayable node on the scene graph.
 
@@ -166,13 +166,13 @@ On the left (1) shows the controller class referencing the `com.carlfx.worldcloc
 
 Now that you know how to load and display an FXML file onto a scene graph, let's look at how I created the World Clock's FXML Config UI Form.
 
-### Designing a Form {#h3-3-designing-a-form}
+### Designing a Form
 
 When creating a form you'll typical read UI/UX design books and websites to provide a great user experience, however I just wing it! Well, in all seriousness I basically have an idea of a look that I'm trying to shoot for such as a dark theme similar to aspects in the movie Tron[\[imdb\]](https://www.imdb.com/title/tt1104001/ "Tron Legacy"). I also will explore other great UI designs from others and take their UIs apart to examine their techniques (the magic behind the curtain) and try to mimic their style \& behavior.
 
 When it comes to UI forms and making things look cohesive or themed, it is no easy task and will likely take some time to experiment (but quite satisfying). For the World Clock, I try to strike a balance between its functionality (behavior of controls) and its visual appeal. I can always come back and refine the UI as long as it functions at a basic level while looking somewhat decent. 😉
 
-### Protyping a Form {#h3-4-protyping-a-form}
+### Protyping a Form
 
 When I sketch (wireframe) UIs I typically use a pen\&paper or a vector tool like Inkscape or Adobe Illustrator. Once I am settled with the wireframe, I will use the Scene Builder tool to layout components as close as possible similar to the wireframe.
 
@@ -190,7 +190,7 @@ In the cavas area shown below, you'll see UI controls and layouts not having muc
 
 You'll also see unusual buttons oddly positioned that overlap other textfields. These overlapping buttons are what is known as **validation icons** that appear when a user is entering invalid input. Validation icons will also show a tooltip popup text of the warning or error. These overlay buttons will be styled using JavaFX CSS with an SVG vector icon that will appear as a round icon with an 'X' denoting an error.
 
-### Styling a Form {#h3-5-styling-a-form}
+### Styling a Form
 
 To apply JavaFX CSS you simply can add them to the main Parent Node (AnchorPane). After selecting the top level AnchorPane node from the Document Hiearchy, I then add the CSS files from the Properties panel in the upper right side of the Scene builder tool as shown below:
 
@@ -207,7 +207,7 @@ The following JavaFX CSS files were applied to the UI Form:
 
 A good reference on how to custom style UI controls check out the JavaFX CSS Reference here: <https://openjfx.io/javadoc/16/javafx.graphics/javafx/scene/doc-files/cssref.html>
 
-### Validation Overlay Icons: Styling a Button {#h3-6-validation-overlay-icons-styling-a-button}
+### Validation Overlay Icons: Styling a Button
 
 In the Scene Builder tool the `gmtErrorOverlayIcon` Button is styled with `.error-overlay` CSS class. To make the JavaFX Button `gmtErrorOverlayIcon` into an overlay icon used in validation the following JavaFX CSS was used. (located in the config-locations.css file):
 
@@ -230,7 +230,7 @@ Here you'll notice the vector shape specified for the `-fx-shape` attribute to a
 
 ![Overlay icon](overlay-icon.png)
 
-### Validation Overlay Icons: Tooltips {#h3-7-validation-overlay-icons-tooltips}
+### Validation Overlay Icons: Tooltips
 
 In Scene Builder, I added a tooltip to the button with `fx:id` of `gmtErrorOverlayIcon`. When the button is visible (meaning there's a validation error) a tooltip pops up explaining the problem. In this case the GMT offset text field only allows an integer value between -12 to 12 (hour) inclusive.
 
@@ -245,7 +245,7 @@ The FXML or the view will contain the XML markup generated from the Scene Builde
 ```
 
 
-### Validation Overlay Icons: Behavior {#h3-8-validation-overlay-icons-behavior}
+### Validation Overlay Icons: Behavior
 
 When a user enters invalid data an error icon is overlayed just to the right side of the text field. Also, a tooltip message will popup to offer a suggestion. For example, when a user enters a number outside the range of GMT Offset, or entering non digit characters a overlay icon would appear.
 
@@ -310,7 +310,7 @@ The following illustrates the validation icon overlay appearing when the user en
 
 While there is much more to talk about in regard to what other features the UI form is capable of, I wanted to keep this blog entry brief. So, I trust you will examine the Controller code in depth here: [\[3\]](https://github.com/carldea/worldclock/blob/main/src/main/java/com/carlfx/worldclock/ConfigLocationsController.java "ConfigLocationsController.java").
 
-### Features Not Discussed {#h3-9-features-not-discussed}
+### Features Not Discussed
 
 * Config/Close buttons in the window title
 * State ComboBox field will find a state code based on key strokes
@@ -320,7 +320,7 @@ While there is much more to talk about in regard to what other features the UI f
 * Add/Remove buttons will clear or remove locations
 * The use of Custom Events to pass information up to the root node or down to children nodes.
 
-### Conclusion {#h3-10-conclusion}
+### Conclusion
 
 In Part 3, you got a chance to see how I prototyped and styled the UI Form. Then, we looked at JavaFX's MVC facility to inject UI controls and bind methods using the @FXML annotation. Lastly is an example of using validation overlay icons to provide feedback to the user when input is invalid.
 
@@ -328,7 +328,7 @@ Next, in [Part 4](https://foojay.io/today/creating-a-javafx-world-clock-from-scr
 
 As always comments \& questions are welcome. If you see any issues or how to improve things let me know! Happy coding.
 
-### References {#h3-11-references}
+### References
 
 * JFX WorldClock on GitHub [\[jfx-world-clock\]](https://github.com/carldea/worldclock "JFX World Clock at GitHub")
 * GluonHQ [gluonhq](https://gluonhq.com "GluonHQ")

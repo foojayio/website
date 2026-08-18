@@ -35,13 +35,13 @@ I got all these boards for free, but what I write here and show in the video is 
 
 {{< youtube 78Jm2sR33fI >}}
 
-ARM versus RISC-V? {#h2-0-arm-versus-risc-v}
---------------------------------------------
+ARM versus RISC-V?
+------------------
 
 ARM and RISC-V represent two different approaches to processor design. ARM is the established player we know from, e.g., the Raspberry Pi's. It's mature, and has a huge ecosystem of tools and support built over decades. RISC-V is the open-source alternative, free from licensing restrictions and fully transparent. While ARM still leads in performance and tooling today, RISC-V is catching up fast. The real difference isn't just about speed. It's about openness and flexibility. With RISC-V, you're not locked into a vendor's ecosystem, and you have complete visibility into how your hardware works.
 
-Banana Pi {#h2-1-banana-pi}
----------------------------
+Banana Pi
+---------
 
 Here's how the Banana Pi's I received, compare to some of the Raspberry Pi's. If you compare the Raspberry Pi prices with my earlier articles from +-6 months ago, you'll see that the prices have gone up a lot. The shortage of memory chips is really a problem and making these single-board-computers less attractive...
 
@@ -55,13 +55,13 @@ The Banana Pi BPI-M4 Zero was 44€ earlier this year, but now at 148€! The BP
 | [Banana Pi BPI-M4 Zero](https://www.banana-pi.org/en/banana-pi-sbcs/171.html) | H618        | ARMv8  | Cortex-A53 |   4   | 1.5Ghz |        44€ |                                     [148€ (4GB+32GB)](https://openelab.io/products/banana-pi-bpi-m4-zero) |
 | [Banana Pi BPI-F3](https://www.banana-pi.org/en/banana-pi-sbcs/175.html)      | SpacemiT K1 | RISC-V |            |   8   |        |        84€ |                                             [214€ (16GB)](https://banana-pi.eu/produit/banana-pi-bpi-f3/) |
 
-### First Impressions {#h3-2-first-impressions}
+### First Impressions
 
 Banana Pi suffers from the same problem as a lot of single-board-computer suppliers. They make great hardware but forget the user experience to get started... There is no tool available to select the board and create an SD card like you can do with the Raspberry Pi Imager tool. So you have to search through the documentation, ignore some broken links, and search further to find the right image...
 
 Below are the links I found with OS images for the Banana Pi boards and burned them to an SD card with the Raspberry Pi Imager tool. In the "Device" step select "No filtering", and in the "OS" step select "Other" and browse to the image file you have downloaded (and unzipped).
 
-### Banana Pi BPI-M4 Zero {#h3-3-banana-pi-bpi-m4-zero}
+### Banana Pi BPI-M4 Zero
 
 *Banana Pi BPI-M4 Zero is the successor model of BPI-M2 Zero. The SOC is upgraded to Allwinner H618 quad-core A53 . The memory is upgraded to 2G LPDDR4, and 8G eMMC onboard . It supports 5G WiFi and BT, and the USB interface has also been upgraded to type-C. It has the same form factor and 40-pin connector as the Raspberry Pi Zero W, and it will fit most Zero W cases and accessories.*
 
@@ -73,7 +73,7 @@ Below are the links I found with OS images for the Banana Pi boards and burned t
 
 ![](bananapi-pi4j.png)
 
-### Banana Pi BPI-F3 {#h3-4-banana-pi-bpi-f3}
+### Banana Pi BPI-F3
 
 *Banana Pi BPI-F3 is a industrial grade RISC-V development board, it design with SpacemiT K1 8 core RISC-V chip, CPU integrates 2.0 TOPs AI computing power. 2/4/8/16G DDR and 8/16/32/128G eMMC onboard.2x GbE Ethernet prot, 4x USB 3.0 and PCIe for M.2 interface, supprt HDMI and Dual MIPI-CSI Camera.*
 
@@ -86,12 +86,12 @@ Below are the links I found with OS images for the Banana Pi boards and burned t
 
 ![](bananapi-vs-raspberrypi-1024x971.jpg)
 
-Testing with Java and Pi4J {#h2-5-testing-with-java-and-pi4j}
--------------------------------------------------------------
+Testing with Java and Pi4J
+--------------------------
 
 I started with a lot of reserves... Both OS images are pretty outdated (2024 and 2025), so I'm wondering what I will find when I boot the boards. I also have no idea if the Banana Pi BPI-F3 RISC-V board will run Java 25, as it is a very new board and the OS image is already a bit outdated.
 
-### Banana Pi BPI-M4 Zero {#h3-6-banana-pi-bpi-m4-zero}
+### Banana Pi BPI-M4 Zero
 
 The Zero boots in terminal mode, and after the first boot asks to create a root password, user account, and WiFi credentials. After that, it's ready to be used and accessible via SSH. I used a USB-C dongle to connect keyboard, mouse, and network to get started quickly. After doing the usual steps I used on the previous boards I tested, I can confirm that Java runs fine on the Banana Pi BPI-M4 Zero. I installed Java 25 (25.0.3-zulu) and JBang, and ran the `HelloWorld.java` and `JsonParsing.java` examples from the [Pi4J JBang repository](https://github.com/Pi4J/pi4j-jbang). The result is shown in the video.
 
@@ -116,7 +116,7 @@ jbang JsonParsing.java
 
 I also executed my [SBC Java benchmark test](/sbc/) so we can compare the performance of this board with other single-board-computers. Results below...
 
-### Pi4j on the Banana Pi Zero {#h3-7-pi4j-on-the-banana-pi-zero}
+### Pi4j on the Banana Pi Zero
 
 In the [documentation of th Banana Pi BPI-M4 Zero](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero) I found a GPIO table that looks similar to the 40-pin layout of the Raspberry Pi. And as we are running the same kind of Linux used in the Raspberry Pi OS, we should be able to use Pi4J V4, based on the Foreign Function and Memory API (FFM API) to access the GPIO pins. I tried to run `jbang RgbLed.java` from the Pi4J JBang repo.
 
@@ -260,12 +260,12 @@ void main() throws Exception {
 
 Now executing `jbang RgbLed.java` finally worked, and the RGB LED started blinking in the expected colors. Success! This is my very first working Pi4J example on a non-Raspberry Pi board!!! One of my 2026-goals is achieved 🙂
 
-### Banana Pi BPI-F3 {#h3-8-banana-pi-bpi-f3}
+### Banana Pi BPI-F3
 
 The Banana Pi BPI-F3 boots in desktop mode! So that's a lot nicer for a first test 😉 As this board has a RISC-V processor, we can't use SDKMAN to install Java as we learned from experiments with other RISC-V boards before. So I installed `openjdk-25-jdk` with `apt`, but to my surprise, this installed an `ea` (Early Access) version. Maybe because the OS is outdated and got stuck on older JDK releases? Anyhow, I could run the `HelloWorld.java` and `JsonParsing.java` examples again without a problem, and ran the SBC benchmark.
 
-Benchmark Results {#h2-9-benchmark-results}
--------------------------------------------
+Benchmark Results
+-----------------
 
 To have a fair comparison in the benchmarks, I also ran one on a Raspberry Pi Zero 2 as this is the closest competitor to the Banana Pi BPI-M4 Zero. The full results are available on the [SBC Java benchmark page](/sbc/), where you can compare them with the other boards I tested before.
 ![](sbc-benchmarks-bananapi-1024x526.png)
@@ -278,8 +278,8 @@ Some highlights:
 * Compared to the StarFive VisionFive 2 Lite, the BPI-F3 is almost twice as fast on the heavily multi-threaded `fj-kmeans` (33.0s vs 62.3s), but the VisionFive 2 edges ahead by 10-17% on the more single-threaded `scala-kmeans` and `future-genetic` tests.
 * Two benchmarks, `akka-uct` and `db-shootout`, failed to complete on the BPI-F3. Considering the outdated Bianbu OS image, take these RISC-V numbers with a grain of salt.
 
-Conclusion {#h2-10-conclusion}
-------------------------------
+Conclusion
+----------
 
 Performance-wise, the Banana Pi's are a pleasant surprise! The BPI-M4 Zero, the cheapest and smallest board in this whole comparison, if you take the amount of memory and eMMC into account, outran both its direct rival, the Raspberry Pi Zero 2, and the pricier BeagleY-AI on every single benchmark. And the BPI-F3 holds its own on the RISC-V side too, landing right next to the OrangePi RV2 and comfortably ahead of the BeagleV-Fire.
 

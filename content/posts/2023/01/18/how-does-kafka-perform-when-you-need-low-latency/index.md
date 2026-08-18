@@ -31,7 +31,7 @@ Benchmarks tend to focus on clustering Kafka, in a high-throughput configuration
 
 While this is perhaps the most common use case, how does it perform if you need lower latencies?
 
-### Where are Some Latency Benchmarks Available? {#h3-0-where-are-some-latency-benchmarks-available}
+### Where are Some Latency Benchmarks Available?
 
 These are various benchmarks testing higher throughputs of 200kmsg/s to 800kmsg/s, with end-to-end latencies between 2.5 and 30 milliseconds.
 
@@ -43,7 +43,7 @@ These are various benchmarks testing higher throughputs of 200kmsg/s to 800kmsg/
 
 My impression is that these benchmarks aren't so much an attempt to show low latency, but rather show what the authors consider good latency under high load.
 
-### Benchmarking Kafka for Low Latency {#h3-1-benchmarking-kafka-for-low-latency}
+### Benchmarking Kafka for Low Latency
 
 For a low-latency system, you want the hardware which will best support your requirements. This is often plenty of the fastest CPUs you can afford and more than enough IO bandwidth as well.
 
@@ -51,7 +51,7 @@ The best way to go fast is often to do as little as possible, keep the solution 
 
 Obviously cluster support is an important use case for Kafka, but let's start with a really simple end-to-end use case: one machine, two message hops and a trivial microservice in between.
 
-### One Machine, One Trivial Microservice, End-to-End Latency {#h3-2-one-machine-one-trivial-microservice-end-to-end-latency}
+### One Machine, One Trivial Microservice, End-to-End Latency
 
 This benchmark is similar to a previous one found [here](https://chronicle.software/benchmarking-kafka-vs-chronicle-for-microservices-which-is-750-times-faster "here").
 
@@ -67,7 +67,7 @@ To put this in perspective I added the results for a single producer using [Chro
 
 This indicates the performance between processes on the same machine.
 
-### No Conclusion {#h3-3-no-conclusion}
+### No Conclusion
 
 I'd like to finish with a conclusion but this leaves me with more questions than answers.
 

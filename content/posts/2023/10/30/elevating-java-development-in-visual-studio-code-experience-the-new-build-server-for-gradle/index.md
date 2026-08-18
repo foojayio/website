@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-### Introducing Build Server for Gradle {#h3-0-introducing-build-server-for-gradle}
+### Introducing Build Server for Gradle
 
 In recent years, Gradle has become one of the most popular Java build tools due to its flexibility in configuring build processes and its powerful extensibility. In Visual Studio Code, users can import Gradle projects into their workspace for development. However, there are some areas where support for Gradle projects is not entirely satisfactory, with two major issues that users have below:
 
@@ -32,7 +32,7 @@ The Build Server for Gradle, developed in collaboration with Gradle, will delega
 
 This ensures that the results of building in VS Code will be consistent with the output obtained by running Gradle build commands, fundamentally resolving the two major issues below.
 
-### What is Build Server Protocol (BSP) {#h3-1-what-is-build-server-protocol-bsp}
+### What is Build Server Protocol (BSP)
 
 The [Build Server Protocol](https://build-server-protocol.github.io/) (BSP) draws inspiration from another protocol, the Language Server Protocol (LSP). The purpose behind LSP's creation was to establish an abstraction layer between development tools and programming languages. With this abstraction layer in place, different development tools that aim to support a particular programming language do not need to individually implement complex functionalities such as code analysis. Instead, they only need to correctly respond to events defined by LSP. For more information about LSP, you can refer to the [official LSP website](https://microsoft.github.io/language-server-protocol/).
 
@@ -40,13 +40,13 @@ BSP, inspired by LSP, seeks to create a similar abstraction layer between develo
 
 Currently, BSP protocol has found widespread application in the Scala development ecosystem, and readers can [explore known projects](https://build-server-protocol.github.io/docs/overview/implementations/) based on BSP on its official website.
 
-### Why Gradle {#h3-2-why-gradle}
+### Why Gradle
 
 Apart from addressing the issues mentioned at the beginning of this article regarding the current support for Gradle projects in VS Code for Java, one of the reasons for prioritizing the implementation of a Gradle-oriented build service is Gradle's rich Tooling API. At present, nearly all the requests involved in BSP can be achieved through the Gradle Tooling API.
 
 Details and design considerations regarding the Gradle build service we have implemented will be shared in future articles. Please stay tuned for more updates!
 
-### How to Get Started {#h3-3-how-to-get-started}
+### How to Get Started
 
 If you want to explore the new Gradle project development experience based on the Gradle Build Server Protocol (BSP) in VS Code, you can follow these steps:
 
@@ -67,13 +67,13 @@ If you want to explore the new Gradle project development experience based on th
 [![Image buildserver](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/buildserver.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/buildserver.png)
 > If you encounter any issues during your trial or have any suggestions, please feel free to let us know by [creating a GitHub Issue](https://github.com/microsoft/vscode-gradle/issues).
 
-### Future Plans {#h3-4-future-plans}
+### Future Plans
 
 We will continue to maintain and enhance the Build Server for Gradle project in the future. In the coming months, in addition to addressing bugs and improving accuracy and stability, we also plan to delegate the running and testing tasks to Gradle execution.
 
 This way, even if users have customized complex build processes for testing or running tasks in Gradle scripts, they can be directly handed over to Gradle without the need for additional configuration in the development tool, ensuring an elegant out-of-the-box experience.
 
-### Install Extension Pack for Java {#h3-5-install-extension-pack-for-java}
+### Install Extension Pack for Java
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
@@ -83,7 +83,7 @@ If you are a Spring developer working on a Spring Boot application, you can also
 
 [![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
 
-### Feedback and suggestions {#h3-6-feedback-and-suggestions}
+### Feedback and suggestions
 
 As always, your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to give us feedback
 
@@ -91,7 +91,7 @@ As always, your feedback and suggestions are very important to us and will help 
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-### Resources {#h3-7-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

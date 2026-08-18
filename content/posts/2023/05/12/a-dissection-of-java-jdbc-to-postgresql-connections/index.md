@@ -37,8 +37,8 @@ By looking in the communication internals between the JDBC driver and database, 
 
 Note that he observations in this article are based on OpenJDK version 17.0.6, JDBC version 42.6.0, and PostgreSQL 15.
 
-The Extended Query Protocol {#h2-0-the-extended-query-protocol}
----------------------------------------------------------------
+The Extended Query Protocol
+---------------------------
 
 The default PostgreSQL protocol used by the PostgreSQL JDBC driver is the extended query protocol. The extended query protocol requires a database execution to use three messages: Parse, Bind and Execute. The extended query protocol is part of the general PostgreSQL network protocol called [the Frontend/Backend protocol](https://www.postgresql.org/docs/current/protocol.html "the Frontend/Backend protocol").
 
@@ -58,8 +58,8 @@ The reason for these options is the ability of the PostgreSQL database to use tw
 
 The reason for having two protocols performing the same task is that before the current version of the Frontend/Backend protocol (version 3), the extended protocol didn't exist. The Frontend/Backend protocol version 3 was introduced with PostgreSQL version 7.4.
 
-The Simple Query Protocol {#h2-1-the-simple-query-protocol}
------------------------------------------------------------
+The Simple Query Protocol
+-------------------------
 
 A lot of PostgreSQL database applications and utilities use the simple query protocol, most prominently the general PostgreSQL database CLI 'psql', which currently uniquely uses the simple query protocol.
 
@@ -69,8 +69,8 @@ Another reason to use the simple query protocol is when the database client mess
 
 The final reason for using the simple query protocol is that it allows multiple messages to be sent for certain messages separated by a semicolon, which is called statement batching.
 
-PostgreSQL Database Execution Steps {#h2-2-postgresql-database-execution-steps}
--------------------------------------------------------------------------------
+PostgreSQL Database Execution Steps
+-----------------------------------
 
 The reason the extended query protocol uses three messages has to do with the way the PostgreSQL database performs the execution of statements. Every SQL statement in PostgreSQL has to perform these four steps to execute a statement:
 
@@ -94,8 +94,8 @@ The extended query protocol needs to send at least three messages to execute a s
 
 By now,you should have an understanding of the two common PostgreSQL JDBC implementation protocols and how they map to the PostgreSQL database side execution. You might also wonder why sending the JDBC driver selects the extended protocol, that uses three messages, by default over the simple protocol that can do that with a single message. This is explained below, when we look at the network dataframe contents.
 
-Sample Java test {#h2-3-sample-java-test}
------------------------------------------
+Sample Java test
+----------------
 
 ```java
 // begin file: simple.java
@@ -144,8 +144,8 @@ Or you can use an IDE, which will help with some of the work.
 
 Note that you might have to change the PostgreSQL pg_hba.conf file to enable the database listening on the 5432 port if you're testing with PostgreSQL instance installed to look at this.
 
-Wireshark: Network Sniffer and Protocol Dissector {#h2-4-wireshark-network-sniffer-and-protocol-dissector}
-----------------------------------------------------------------------------------------------------------
+Wireshark: Network Sniffer and Protocol Dissector
+-------------------------------------------------
 
 To understand what is going on between the client and database it is useful to know how they communicate with each other.
 
@@ -172,8 +172,8 @@ sudo tshark -i any -f 'tcp port 5432' -d tcp.port==5432,pgsql -O pgsql
 ```
 
 
-The First Look at JDBC Traffic Using Wireshark {#h2-5-the-first-look-at-jdbc-traffic-using-wireshark}
------------------------------------------------------------------------------------------------------
+The First Look at JDBC Traffic Using Wireshark
+----------------------------------------------
 
 When you start the sample test, Wireshark will capture the following traffic between the JDBC driver and the database:
 
@@ -293,8 +293,8 @@ I explicitly call out the execution that is performed in this test: the time it 
 
 At this point it's not possible to understand that execution of the statement was in frames 14 and 15. This will become clear in the text below, which takes you through a more detailed packet captures. However, for the sake of brevity, we will continue to look inside the packets/frames that are part of the actual execution.
 
-Analyzing Statement Execution Frames {#h2-6-analyzing-statement-execution-frames}
----------------------------------------------------------------------------------
+Analyzing Statement Execution Frames
+------------------------------------
 
 Let's look at the statement execution flow in more detail, because that is what will generally be done when using a PostgreSQL database. The below statement execution details are from the frames captured above, but now with the traffic fully decoded. This shows all the details required to understand that frame 14 was the frame which sent the statement to the PostgreSQL backend:
 
@@ -397,8 +397,8 @@ For the response frame we see that the response messages are all sent inside a s
 
 The important thing to learn here is that the statement execution flow for the extended protocol uses a number of messages. These are Parse, Bind, and Execute from the client, but also other messages, which can be combined in a single frame. The java statement execution used the absolute minimum of frames possible: two.
 
-Testing With the Simple Protocol {#h2-7-testing-with-the-simple-protocol}
--------------------------------------------------------------------------
+Testing With the Simple Protocol
+--------------------------------
 
 Let's compare the network traffic of the extended protocol to the simple protocol. We'll do that by running the sample test with the preferQueryMode set to "simple".
 
@@ -425,8 +425,8 @@ A good question here is what is the best choice for executing a statement: the s
 
 There is a distinct property that the simple query protocol allows which the extended query protocol doesn't in the same way. This simply means adding more statements separated by a semicolon: the simple query protocol allows submission of multiple statements in a single message. This is limited to statements that do not return results, such as DDL typically. However, the extended query protocol has a specific option that can achieve the same principle, which is called 'batching'.
 
-Prepared Statements Advantages {#h2-8-prepared-statements-advantages}
----------------------------------------------------------------------
+Prepared Statements Advantages
+------------------------------
 
 That begs the question why the extended query protocol has more moving parts, with no clear advantage that we can see so far? The answer is twofold:
 
@@ -507,8 +507,8 @@ Look at the wireshark output again:
 
 The first execution with frame 14 and the response with frame 15 can be seen. The next execution can be seen in frame 16, which does include P/parse again. This does not show the optimization that prepared statements promise by having the ability to skip the parse phase. What is going on?
 
-JDBC PrepareThreshold Setting {#h2-9-jdbc-preparethreshold-setting}
--------------------------------------------------------------------
+JDBC PrepareThreshold Setting
+-----------------------------
 
 What is happening here is both a blessing and a curse in my opinion. To prevent the database backend from filling up with prepared statements that are not reused, there is another mechanism built into the JDBC driver and controlled with the `prepareThreshold` property.
 
@@ -518,8 +518,8 @@ This means that a PreparedStatement object needs five executions to cause a Post
 
 The blessing here is that you can just create every statement as a PreparedStatement object without giving it much thought. Only if it is executed enough times (five times by default), it will actually create a database side prepared statement. The curse is that, if you expect the prepared statement declaration to create an actual database prepared statement (which I don't think is entirely unreasonable to expect) it will not do what you explicitly programmed, but rather do it some time later, depending on the number of executions.
 
-Looking at Actual Database Prepared Statement Execution {#h2-10-looking-at-actual-database-prepared-statement-execution}
-------------------------------------------------------------------------------------------------------------------------
+Looking at Actual Database Prepared Statement Execution
+-------------------------------------------------------
 
 Change the code of the class with the following code:
 
@@ -692,8 +692,8 @@ PostgreSQL
 
 In general, my experience is that the prepareThreshold is almost never changed from the default, and therefore requires a PreparedStatement object to be executed five times before it will create a database prepared statement. However, it is possible to change the prepareThreshold value to a different value to influence when to create a database prepared statement. A Java side prepared statement is always created. Setting the prepareThreshold to zero disables database side prepared statements.
 
-Binding Values for a Prepared Statement {#h2-11-binding-values-for-a-prepared-statement}
-----------------------------------------------------------------------------------------
+Binding Values for a Prepared Statement
+---------------------------------------
 
 Besides the advantage of prepared statements to skip the parse phase, the other advantage is the ability to create a statement with bind variables that can be bound to their values before sending the bind and execution messages. In many cases, reusing a statement requires the variables to change. This is an example of using a prepared statement with bind variables:
 
@@ -761,8 +761,8 @@ PostgreSQL
 
 The important thing to see is that the statement with the parse message has two bind variable placeholders ($1 and $2), for which both the type is explicitly defined, thereby mitigating the risk of SQL injection. The bind message also specifies the bind variables, and their actual values. During the bind phase, the database plans the execution and at that point requires the data to be known in order to calculate the cost of the execution plan options for generating the plan, because the bind can change the cardinality of the plan lines it is involved with.
 
-Prepared Statements and the Simple Query Protocol {#h2-12-prepared-statements-and-the-simple-query-protocol}
-------------------------------------------------------------------------------------------------------------
+Prepared Statements and the Simple Query Protocol
+-------------------------------------------------
 
 Here is an oddity: what if you explicitly set usage of the simple query protocol using `properties.setProperty("preferQueryMode", "simple");` and then try to use prepared statements using a Java prepared statement object and execute it?
 
@@ -772,8 +772,8 @@ Purely based on logic I would say that it should fail, because the simple query 
 
 The idea of having the ability to use Java PreparedStatement objects using the simple query protocol is probably that a Java side prepared statement object is independent from the database side prepared statement. When executing it using the extended query protocol during the first five executions there is no database side prepared statement, and therefore it can exist as a Java prepared statement, totally independent from a database side prepared statement.
 
-Close Prepared Statements {#h2-13-close-prepared-statements}
-------------------------------------------------------------
+Close Prepared Statements
+-------------------------
 
 A commonly overlooked fact is that prepared statements should be closed after they will no longer be reused. During development this is simply good housekeeping. But, in real life with lots of prepared statements and database connections, the memory taken in the Java heap, as well as in the database backend, can be significant, or when used in a loop ever increasing. Not closing obsolete closed statements will appear in a real life application as a memory leak, because if a prepared statement is not closed, the memory it is using cannot be released.
 

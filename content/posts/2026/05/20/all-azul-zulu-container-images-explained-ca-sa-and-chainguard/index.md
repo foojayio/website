@@ -29,8 +29,8 @@ frozen: false
 The launch of [Azul Zulu as Docker Official Images](https://hub.docker.com/_/azul-zulu) was a milestone, but it's just one of several ways to get Azul Zulu Builds of OpenJDK in a container. Depending on whether you're evaluating Azul Zulu, running it in production under a support contract, or operating in a high-security environment, the right image source will vary. In this post, I'll show you all the possibilities.
 ![](azul-zulu-ca-sa-chainguard-1024x576.avif)
 
-First: Understanding Community vs. Subscriber Availability {#h-first-understanding-community-vs-subscriber-availability}
-------------------------------------------------------------------------------------------------------------------------
+First: Understanding Community vs. Subscriber Availability
+----------------------------------------------------------
 
 Before looking at what's available where, it helps to understand the two flavors of Azul Zulu Builds of OpenJDK (Zulu):
 
@@ -46,12 +46,12 @@ Before looking at what's available where, it helps to understand the two flavors
 
 If you're running Java in production and need guaranteed support when something breaks, SA is the right choice.
 
-Getting Zulu CA in a Container {#h-getting-zulu-ca-in-a-container}
-------------------------------------------------------------------
+Getting Zulu CA in a Container
+------------------------------
 
 You can get Community Availability images from two sources, as explained below and with more details in the Azul Documentation in [Running Azul Zulu CA in a Docker Container](http://docs.azul.com/core/install/linux-ca-docker). The full list of available CA tags is also documented on [Zulu CA Docker Tags](https://docs.azul.com/core/docker-image-tags#ca-docker-tags) and [Zulu CA Docker Official Tags](https://docs.azul.com/core/docker-image-tags#ca-docker-official-tags).
 
-### Docker Official Images (new) {#h-docker-official-images-new}
+### Docker Official Images (new)
 
 The newest addition: `azul-zulu` is now a [Docker Official Image on Docker Hub](https://hub.docker.com/_/azul-zulu). These images don't have a namespace prefix, are maintained by Azul, get reviewed by Docker, and are continuously scanned for CVEs.
 
@@ -64,7 +64,7 @@ docker pull azul-zulu:25
 
 This is the recommended starting point for any new project. Full details and example usage are explained in the previous posts of this blog post series (**s**ee links above).
 
-### Legacy Docker Hub Images (`azul/zulu-openjdk-*`) {#h-legacy-docker-hub-images-azul-zulu-openjdk}
+### Legacy Docker Hub Images (`azul/zulu-openjdk-*`)
 
 The original Azul images on Docker Hub are still available and cover a wider range of base OS combinations:
 
@@ -86,12 +86,12 @@ docker run --rm azul/zulu-openjdk:21 java -version
 
 These images will be **deprecated later in 2026** as the Official Images expand to cover the same variants. If you're starting something new today, prefer `azul-zulu`. If you're using the old images, plan your migration.
 
-Getting Zulu SA in a Container {#h-getting-zulu-sa-in-a-container}
-------------------------------------------------------------------
+Getting Zulu SA in a Container
+------------------------------
 
 Subscriber Availability images are delivered through two channels: Azul's own private registry, and Chainguard's registry.
 
-### Azul Customer Registry {#h-azul-customer-registry}
+### Azul Customer Registry
 
 SA images are hosted on Azul's private container registry and require authentication with an access token. Azul customers can manage their access tokens through [access.azul.com](https://access.azul.com).
 
@@ -116,7 +116,7 @@ The SA registry provides images based on multiple base systems:
 
 The full documentation is available on docs.azul.com: [Running Azul Zulu SA in a Docker Container](https://docs.azul.com/core/install/linux-sa-docker).
 
-#### CPU vs PSU: Choosing the Right Update Track {#h-cpu-vs-psu-choosing-the-right-update-track}
+#### CPU vs PSU: Choosing the Right Update Track
 
 SA builds are available in two update types:
 
@@ -128,7 +128,7 @@ You can identify the release type from the Zulu minor version in the tag:
 * odd minor = CPU, e.g. `21.43`
 * even minor = PSU, e.g. `21.44`
 
-#### SA Tagging Scheme {#h-sa-tagging-scheme}
+#### SA Tagging Scheme
 
 SA images use both fixed version tags (pinned to a specific build) and mutable alias tags (always pointing to the latest of a given type):
 
@@ -165,7 +165,7 @@ FROM sa.registry.azul.com/zulu-sa-ubuntu:21-cpu-jre AS runtime
 
 For the complete tag listing, see the [Zulu SA Docker Tags](https://docs.azul.com/core/docker-image-tags#sa-docker-tags) in the Azul Documentation.
 
-### Chainguard Images {#h-chainguard-images}
+### Chainguard Images
 
 For environments with strict supply chain security requirements, Azul Zulu SA is also available through [Chainguard's registry](https://www.chainguard.dev/containers). This is part of the Chainguard Images collection, built on [Wolfi](https://edu.chainguard.dev/open-source/wolfi/overview/), a purpose-built Linux undistro designed for minimal, secure containers.
 
@@ -187,8 +187,8 @@ Replace `ORGANIZATION` with your organization's name in the Chainguard registry.
 
 You can find more resources at [Chainguard Academy](https://edu.chainguard.dev/), [Chainguard Courses](https://courses.chainguard.dev/), and [Running Azul Zulu SA in a Chainguard Container](https://docs.azul.com/core/install/linux-sa-docker-chainguard) in the Azul Documentation.
 
-Choosing the Right Image {#h-choosing-the-right-image}
-------------------------------------------------------
+Choosing the Right Image
+------------------------
 
 Here's a quick decision guide:
 
@@ -201,8 +201,8 @@ Here's a quick decision guide:
 
 CPU versus PSU is a secondary choice for SA users: if your priority is minimizing the risk of change when applying security patches, pin to CPU releases. If you want all quarterly bug fixes alongside security fixes, use PSU.
 
-What's Missing? Tell Us. {#h-what-s-missing-tell-us}
-----------------------------------------------------
+What's Missing? Tell Us.
+------------------------
 
 The SA and Official image offerings are actively growing. If you need a specific Java version, base OS combination, or architecture that isn't currently available, create an issue on GitHub in [AzulSystems/azul-zulu-images](https://github.com/AzulSystems/azul-zulu-images). The Azul team is actively prioritizing based on demand.
 

@@ -23,8 +23,8 @@ frozen: false
 
 The main reason is that I haven't worked in a development team for over six years. However, I'm now working for Loft Labs, and we have a product: [DevPod](https://devpod.sh/). I wanted to understand our value proposition as was on my way to [FOSDEM](https://fosdem.org/) operating the [DevPod booth](https://fosdem.org/2025/news/2024-11-16-stands-announced/).
 
-The problem {#h2-0-the-problem}
--------------------------------
+The problem
+-----------
 
 As a former developer, I vividly remember the pain of setting up each developer's development environment. At the beginning of my career, the architect had to configure my development machine painfully, so it was similar to his setup. Later on, I did the same for my team members repeatedly. The scope of possible discrepancies impacting development is virtually endless: Operating System, of course, version **and** flavour of the SDKs, *e.g.*, Java's Eclipse Temurin vs SapMachine, git hooks, etc. It was sweat, toil, and blood on every project.
 
@@ -36,8 +36,8 @@ Times have changed. It's not uncommon for apps to need a SQL database, a NoSQL d
 
 It doesn't solve the initial issue, though: how do you align the IDE, its plugins, the SDK(s), the git hooks, and everything else? You probably guessed it from the title-Remote Development Environments.
 
-Development Containers {#h2-1-development-containers}
------------------------------------------------------
+Development Containers
+----------------------
 
 In the introduction, I mentioned that RDEs are called Cloud Development Environments. The main idea behind RDEs is to store all you can in a Cloud and share it with all developers. In addition, you want them to work across the most widespread Cloud providers and the most commonly used IDEs. When such a need appears, it's time for industry actors to gather around a standard. Microsoft initiated the Development Container standard for their VS Code Remove development plugin for this exact purpose.
 > A development container (or dev container for short) allows you to use a container as a full-featured development environment. It can be used to run an application, to separate tools, libraries, or runtimes needed for working with a codebase, and to aid in continuous integration and testing. Dev containers can be run locally or remotely, in a private or public cloud, in a variety of supporting tools and editors.
@@ -48,8 +48,8 @@ In the introduction, I mentioned that RDEs are called Cloud Development Environm
 
 The configuration file is `devcontainer.json`. You can find the schema reference [here](https://containers.dev/implementors/json_reference/). VS Code, Visual Studio, and IntelliJ products can leverage a `devcontainer.json` file. On the provider side, GitHub Codespaces, CodeSandbox, and DevPod suport it.
 
-Introducing DevPod {#h2-2-introducing-devpod}
----------------------------------------------
+Introducing DevPod
+------------------
 
 [DevPod](https://devpod.sh/) is a solution that leverages `devcontainer.json`. It implements three main properties:
 
@@ -100,8 +100,8 @@ Note that the first time you use this setup, DevPod will download the JetBrains 
 
 The same holds for Git pre-commit hooks, for example. If you prefer to develop within another IDE, select it at launch time, and you're good. When done with your day's work, stop the container. If you're running in the Cloud, it saves money. On the next day, resume the container and continue your work.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 DevPod is a nice tool around your toolbelt that allows your development team(s) to share the same machine configuration without hassle.
 

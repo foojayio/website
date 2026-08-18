@@ -38,7 +38,7 @@ This post is a bit longer than usual (I didn't have the time to write shorter ;)
 4. [Discussion](#Discussion)
 5. [Summary and Outlook](#Summary%20and%20Outlook)
 
-### Getting Started With JfrUnit {#h3-0-getting-started-with-jfrunit}
+### Getting Started With JfrUnit
 
 JfrUnit is an extension for [JUnit 5](https://junit.org/junit5/docs/current/user-guide/) which integrates Flight Recorder into unit tests; it makes it straight forward to initiate a JFR recording for a given set of event types, execute some test routine, and then assert the JFR events which should have been produced.
 
@@ -89,7 +89,7 @@ JfrUnit persists a JFR recording file for each test method, which you can examin
 
 Now that you've taken the JfrUnit quick tour, let's put that knowledge into practice. Our example project will be the [Todo Manager](https://github.com/gunnarmorling/jfr-custom-events) Quarkus application you may already be familiar with from my [earlier post](https://foojay.io/today/monitoring-rest-apis-with-custom-flight-recorder-events/) about custom JFR events. We're going to discuss two examples for using JfrUnit to identify potential performance regressions.
 
-### Case Study 1: Spotting Increased Memory Allocation {#h3-1-case-study-1-spotting-increased-memory-allocation}
+### Case Study 1: Spotting Increased Memory Allocation
 
 At first, let's explore how to identify increased memory allocation rates. Typically, it's mostly library and middleware authors who are interested in this. For a library such as Hibernate ORM it can make a huge difference whether a method that is invoked many times on a hot code path allocates a few objects more or less. Less object allocations mean less work for the garbage collector, which in turn means those precious CPU cores of your machine can spend more cycles processing your actual business logic.
 
@@ -338,7 +338,7 @@ Pause times are worse, directly impacting the application's latency, and the lar
 
 Now such drastic increase of object allocation and thus potential impact on performance should hopefully be an exception rather than a regular situation. But the example shows how continuous performance unit tests on impacting metrics like memory allocation, using JfrUnit and JDK Flight Recorder and, can help to identify performance issues in an automated and reliable way, preventing such regression to sneak into production. Being able to identify this kind of issue by running tests locally on a developer laptop or a CI server can be a huge time-saver and productivity boost.
 
-### Case Study 2: Identifying Increased I/O With the Database {#h3-2-case-study-2-identifying-increased-i-o-with-the-database}
+### Case Study 2: Identifying Increased I/O With the Database
 
 Once you've started to look at performance regression tests through the lense of JfrUnit, more and more possibilities pop up. Asserting a maximum number of garbage collections? Not a problem. Avoiding an unexpected amount of file system IO? The jdk.FileRead and jdk.FileWrite events are our friend. Examining and asserting the I/O done with the database? Easily doable. Assertions on application-specific [JFR event types](https://www.morling.dev/blog/rest-api-monitoring-with-custom-jdk-flight-recorder-events/) you've defined yourself? Sure thing!
 
@@ -446,7 +446,7 @@ We now would have to decide whether this image attribute actually should be load
 
 Solely working with the raw socket read and write events can be a bit cumbersome, though. Wouldn't it be nice if we also had the actual SQL statement which caused this I/O? Glad you asked! Neither Hibernate nor the Postgres JDBC driver emit any JFR events at the moment (although well-informed sources are telling me that the Hibernate team wants to look into this). Therefore, in part two of this blog post series, we'll discuss how to instrument an existing library to emit events like this, using a Java agent, without modifying the library in question.
 
-### Discussion {#h3-3-discussion}
+### Discussion
 
 JfrUnit in conjunction with JDK Flight Recorder opens up a very interesting approach for identifying potential performance regressions in Java applications. Instead of directly measuring an application's performance metrics, most notably latency and throughput, the idea is to measure and assert metrics that impact the performance characteristics. This allows you to implement stable and reliable automated performance regression tests, whose outcome does not depend on the capabilities of the execution environment (e.g. number/size of CPUs), or other influential factors like concurrently running programs.
 
@@ -467,7 +467,7 @@ Needless to say, that you should be aware of the limitations of this approach, t
 * **Only identifies regressions in the application itself:** A traditional integrative performance test of an enterprise application will also capture issues in related components, such as the application's database. A query run with a sub-optimal execution plan won't be noticed with this testing approach
 * **Volatile results for timer-based tasks:** While metrics like object allocations should be stable e.g. for a specific web request, events which are timing-based, would yield more events on a slower environment than on a faster machine
 
-### Summary and Outlook {#h3-4-summary-and-outlook}
+### Summary and Outlook
 
 JUnit tests based on performance-impacting factors can be a very useful part of the performance testing strategy for an application. They can help to identify potential performance regressions very early in the development lifecycle, when they can be fixed comparatively easy and cheap. Of course they are no silver bullet; you should consider them as *complement* for classic performance tests running on production-like hardware, not a *replacement*.
 

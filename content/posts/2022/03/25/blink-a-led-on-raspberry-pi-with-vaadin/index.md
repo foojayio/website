@@ -41,8 +41,8 @@ And yes, there are some projects ongoing to bring JavaFX fully to the browser, b
 Let's look at another approach: Vaadin Flow and run it on a Raspberry Pi to control a LED and show the state of a button.
 ![](https://dz2cdn1.dzone.com/storage/temp/15731206-screenshot-2022-03-17-at-164350.jpg)
 
-About Vaadin {#h2-0-about-vaadin}
----------------------------------
+About Vaadin
+------------
 
 Only recently, I re-discovered [Vaadin to build Web User Interfaces](https://vaadin.com/), and this really feels like JavaFX in the browser.
 
@@ -54,8 +54,8 @@ In this tutorial, I'm using Vaadin Flow combined with **Pi4J** to create a web i
 
 [The finished project is available on GitHub](https://github.com/FDelporte/Vaadin-examples).
 
-About Pi4J {#h2-1-about-pi4j}
------------------------------
+About Pi4J
+----------
 
 [Pi4J, the Java I/O library for the Raspberry Pi](https://pi4j.com/), aims to unite Java programming with electronics.
 
@@ -67,8 +67,8 @@ By using the Pi4J-dependency in a project, controlling electronic components con
 
 Pi4J uses native libraries to control the GPIOs so you as a programmer don't need to fully be aware of all the "magic" which relates to hardware communication.
 
-Why run Java on a Raspberry Pi?! {#h2-2-why-run-java-on-a-raspberry-pi}
------------------------------------------------------------------------
+Why run Java on a Raspberry Pi?!
+--------------------------------
 
 The goal of the Raspberry Pi project was to build an inexpensive PC (starting at 15$) that is affordable for all. You can connect it to your TV if you don't have a computer screen and different versions are available, depending on your budget. The Raspberry Pi is a "full" Linux PC and offers different versions of the Raspberry Pi Operating System to get you started easily with all programming languages, yes also Java.
 
@@ -78,8 +78,8 @@ These GPIOs pins are the main factors to make the Raspberry Pi such a success! Y
 
 And one final pro for the Raspberry Pi: its power! The 4-version is fast and has a lot of memory. I wrote a full book on it and created a lot of different Java applications with it. You can connect up to two 4K monitors, which means a lot of space to have different applications, terminals, file explorer, etc. open at once.
 
-Example Spring + Vaadin + Pi4J application {#h2-3-example-spring-vaadin-pi4j-application}
------------------------------------------------------------------------------------------
+Example Spring + Vaadin + Pi4J application
+------------------------------------------
 
 Let's create a Spring-based demo project to illustrate how a Vaadin User Interface (website) can interact with the GPIOs of a Raspberry Pi by using the [Pi4J library](https://www.pi4j.com). The GPIO interaction is based on the [Pi4J minimal example application](https://pi4j.com/getting-started/minimal-example-application/) and uses a button and a LED to demonstrate the digital input and output interaction. The wiring is very simple and only needs a few components.
 ![Wiring diagram](https://dz2cdn1.dzone.com/storage/temp/15731188-led-button-bb.png) Breadboard wiring
@@ -95,7 +95,7 @@ The base code was generated on [start.vaadin.com/app](https://start.vaadin.com/a
 
 Download the sources, unzip and open in your preferred IDE. It's a Maven project, so you can immediately run it and check the code that was generated automatically. When you start it, the application will be available on \[http://localhost:8080\](http://localhost:8080).
 
-### Extra dependencies {#h3-4-extra-dependencies}
+### Extra dependencies
 
 As we want to interact with the GPIOs with Pi4J, we need some extra dependencies to be added to pom.xml:
 
@@ -103,7 +103,7 @@ As we want to interact with the GPIOs with Pi4J, we need some extra dependencies
 * pi4j-plugin-raspberrypi
 * pi4j-plugin-pigpio
 
-### Pi4J service {#h3-5-pi4j-service}
+### Pi4J service
 
 Because we already have a Spring application pre-generated, we can easily extend it with a service to manage all the Pi4J-related methods. Let's start with the initialization of the Pi4J Context that is responsible for all GPIO interactions.
 
@@ -199,7 +199,7 @@ public String getProviders() {
 ```
 
 
-### UI to toggle the LED {#h3-6-ui-to-toggle-the-led}
+### UI to toggle the LED
 
 Now let's change the first page to control the LED. The code is actually very limited as we are using a `Checkbox` and add a value-listener to tell our Pi4JService to change the state of the LED.
 
@@ -234,7 +234,7 @@ public class ButtonView extends HorizontalLayout implements ButtonListener {
 
 ![](https://dz2cdn1.dzone.com/storage/temp/15731191-ui-led.png)
 
-### UI to see the state of the button {#h3-7-ui-to-see-the-state-of-the-button}
+### UI to see the state of the button
 
 This UI has a bit more code. It extends the `ButtonListener` so needs to override the `onButtonEvent`, but the other parts of the code are very self-explaining. One extra thing to notice here: we need to use `ui.accessSynchronously` to change the component which is part of the view as the Pi4JService and user interface are running in separate threads.
 
@@ -280,7 +280,7 @@ public class Application extends SpringBootServletInitializer implements AppShel
 ```
 
 
-### UI with Pi4J Information {#h3-8-ui-with-pi4j-information}
+### UI with Pi4J Information
 
 To be able to debug how Pi4J interacts with the GPIOs, some additional info is added to the "About" screen to show the loaded platforms and providers. The Registry contains a list of all the initialized inputs and outputs, so we expect to see the LED and button here.
 
@@ -306,8 +306,8 @@ public class AboutView extends VerticalLayout {
 
 ![](https://dz2cdn1.dzone.com/storage/temp/15731197-ui-about.png)
 
-Build and upload to Raspberry Pi {#h2-9-build-and-upload-to-raspberry-pi}
--------------------------------------------------------------------------
+Build and upload to Raspberry Pi
+--------------------------------
 
 If you are developing on a PC, you can build the application with the following command
 
@@ -318,8 +318,8 @@ and upload to your Raspberry Pi with the following command (replace login `pi` a
 
 `$ scp target/pi4jdemo-1.0-SNAPSHOT.jar `[[email protected]](/cdn-cgi/l/email-protection)`://home/pi`
 
-Run on Raspberry Pi {#h2-10-run-on-raspberry-pi}
-------------------------------------------------
+Run on Raspberry Pi
+-------------------
 
 We can now start the application on our Raspberry Pi, but need to run with `sudo` as Pi4J (still) needs this to be able
 
@@ -373,8 +373,8 @@ In this video, you can see the logs of the running application on the Raspberry 
 
 {{< youtube pvfHbqp8igw >}}
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 Thanks to the start-site provided by Vaadin, you can get a fully running application with a few clicks.
 

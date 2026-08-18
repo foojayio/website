@@ -20,8 +20,8 @@ frozen: false
 
 Here is the overview of the JavaFX LinksOfTheMonth of March 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * March 18th, OpenJDK and OpenJFX 24 were released! Check the [release notes of FX 24 here](https://github.com/openjdk/jfx/blob/jfx24/doc-files/release-notes-24.md): "*These release notes cover the standalone JavaFX 24 release. JavaFX 24 requires JDK 22 or later. JDK 24 is recommended.* " Downloads are available on the [Gluon website](https://gluonhq.com/products/javafx/), or you can install bundles which include JavFX with [SDKMAN!](https://sdkman.io/):
 
@@ -38,8 +38,8 @@ Core {#h2-0-core}
 
 * The [JVM Weekly newsletter by **Artur Skowroński**](https://www.linkedin.com/pulse/march-rest-story-jvm-weekly-vol-123-artur-skowro%C5%84ski-vktof/) also highlights some facts from the JavaFX 24 release notes: "*JavaFX 24 hits the scene with significant changes, including a requirement to use at least JDK 22 (targeting 24), a need to explicitly enable native access (--enable-native-access) in the context of JEP 472, the inclusion of the jdk.jsobject module (now part of JavaFX, replacing the one from the JDK), and support for pluggable image loaders via javax.imageio. The ability to run with the Security Manager (which itself was completely disabled in JDK 24) has also been removed. Among the new features on the list are, for instance, the incubating RichTextArea control, pluggable InputMap, support for @1x in image filenames, or the reducedMotion preference. These updates are complemented by a substantial set of fixes in areas such as UI, WebView, tools, and multimedia support. Additionally, ScrollPane now only responds to keyboard events when it actually has focus.*"
 
-Applications {#h2-1-applications}
----------------------------------
+Applications
+------------
 
 * [**JabRef** is excited](https://foojay.social/@jabref/114082584649148423): "*Once again, we get the chance to be part of the outstanding Google Summer of Code program! We are looking forward to some high-quality projects that benefit our large user base. You are interested in Java, JavaFX, and opensource and want to work on a project with a large user base? Check out [our application guide](https://summerofcode.withgoogle.com/programs/2025/organizations/jabref-ev).*"
 * [**Carl Dea** shared a video](https://www.linkedin.com/posts/carldea_java-jpro-javafx-ugcPost-7304272653765230592-XJ2q/): "*[Integrated Knowledge Management (IKM)](https://www.ikm.dev/). We created a cross platform installed application for MacOS, Windows, Linux. Now it can run as a Web App using [JPro.one](https://www.jpro.one/)'s technology. It uses Java 23 and JavaFX 23.*"
@@ -51,19 +51,19 @@ Applications {#h2-1-applications}
 * [**Catherine Edelveis** is combining JavaFX with Spring Boot](https://bsky.app/profile/did:plc:tenw77gbf6i5ftndeidw6k64/post/3lkvkthb6xc2r): "*I'm such a weirdo 🫢 Every time I start learning something, I can't wait to share my knowledge! I've only been studying solfeggio for two months, and ALREADY I'm writing an app that builds scales and chords for the beginners to learn and practice 😅*"
 * [**Jago de Vreede** released version 0.3.1 of SDKman-UI](https://bsky.app/profile/did:plc:qyi6hspkvd2mrtyut5cpw4xg/post/3ll5faaz5xk25): "*Small release with usability fixes. Now sorts version numbers correctly, and no longer bugs users about environment settings (setting in config). And some more little stuff, [grab it here](https://github.com/jagodevreede/sdkman-ui/releases/tag/v0.3.1).*"
 
-Games {#h2-2-games}
--------------------
+Games
+-----
 
 * A new release of [Randomizer-CS2](https://github.com/Metaphoriker/randomizer-cs2) by **Benjamin Sommerfeld** : "*A JavaFX application that allows you to create custom sequences of random actions to trigger them randomly in Counter-Strike 2. Make your friends in the game jump, shoot, reload, or drop their weapons at unfavorable moments -- all without injecting into the game itself.*"
 
-Components, Libraries, Tools {#h2-3-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [Great work by **Hidekazu Kubota**](https://x.com/sosuisen_net/status/1899918084401750466): "*I developed five VSCode extensions to assist Java beginners in creating applications with JavaFX. Additionally, I worked on several Maven archetypes. Drawing on my three years of teaching experience, I aimed to eliminate the common stumbling blocks my students faced.*"
 * **Dumilde Paulo Fernando** is [working on Jamba UI](https://github.com/DumiJDev/jamba-ui): "*It's a modular Java-based UI framework built in my free time to empower developers with a lightweight, rapid, and enjoyable way to create desktop applications. Inspired by the simplicity of Spring Boot and the speed of Vaadin, this framework is designed to make UI development fun and hassle-free.*"
 
-Podcasts, Videos, Books {#h2-4-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * A new JavaFX In Action interview was published by **Frank Delporte** : "***Brian Schlining** has a dream job! He is responsible for a complex system at the Monterey Bay Aquarium Research Institute (MBARI) that allows scientific researchers to research animals in the deep sea. He provides them with the tools to annotate videos and images made by submarines diving thousands of meters deep in the oceans. While he works on this software, he gets to know all the amazing creatures living in this mysterious world.* " Check the [video on YouTube](https://www.youtube.com/watch?v=W9cs44DHIlA) or read more [in this blog post](https://webtechie.be/post/2025-03-20-jfxinaction-brian-schlining-annotating-deep-sea/).
 * [Published on Foojay: Part 4 of the overview of "JavaFX In Action" interviews](https://foojay.io/today/video-series-javafx-in-action-part-4/) by **Frank Delporte** , with:
@@ -71,8 +71,8 @@ Podcasts, Videos, Books {#h2-4-podcasts-videos-books}
   * **Sven Reimers** (JTaccuino)
   * **Chris Newland** (DemoFX, JitWatch,...).
 
-Tutorials {#h2-5-tutorials}
----------------------------
+Tutorials
+---------
 
 * By [**Catherine Edelveis**](https://bsky.app/profile/cat-edelveis.bsky.social)
   * YouTube tutorial: [*Use Scene Builder to Create User Interfaces with Java FX*](https://www.youtube.com/watch?v=PKvuXsfWe_M).
@@ -82,13 +82,13 @@ Tutorials {#h2-5-tutorials}
   * Create a number guessing game: [*Advanced JavaFX Tutorial for Java GUI Developers and Desktop Programmers*](https://www.youtube.com/watch?v=dJlHpcibo8c).
 * [Video tutorial by **Natsoft**](https://www.youtube.com/watch?v=fGqvk7C1FRo): "*JavaFX \& Spring Boot 2024 Integration - Graphical User Interface (GUI) \| IntelliJ IDEA 2024*"
 
-Miscellaneous {#h2-6-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Lost Arcadia** needs feedback](https://bsky.app/profile/lostarcadia.bsky.social/post/3ll6re4ymp22j): "*I wanna start doing some coding stuffs on stream. Toying with the idea of a small little minigame compilation like you would see on a late 90's website made in JavaFX. Just not sure what games I should add.*"
 
-JFX Central {#h2-7-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * New content:
   * Video: [JavaFX In Action with Brian Schlining: Annotating the Deep-Sea Wildlife](https://www.jfx-central.com/videos/W9cs44DHIlA)

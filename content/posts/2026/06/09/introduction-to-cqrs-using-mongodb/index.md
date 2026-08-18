@@ -39,8 +39,8 @@ git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemai
 ```
 
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this tutorial, you'll need:
 
@@ -91,8 +91,8 @@ jnosql.mongodb.application.name=devrel-article-java-jnosql
 
 PRO TIP: MongoDB Atlas is a valuable Database-as-a-Service option. It simplifies operations by delegating database management to MongoDB experts.
 
-Step 1: Create the entities {#h2-1-step-1-create-the-entities}
---------------------------------------------------------------
+Step 1: Create the entities
+---------------------------
 
 The first step is to create the necessary entities. We need entities for managing status and a separate entity for queries, which can serve as an aggregator or summary. On the command side, we define two entities: Card, which holds the current status and available amount, and OperationResult, which records each card operation attempt. OperationResult is immutable and cannot be changed once it is stored in the database.
 
@@ -341,8 +341,8 @@ public class CardResource {
 
 With this structure, we can now work with cards. In a real-world scenario, additional card statuses such as frozen or canceled would be included. Here, we focus on a small part of the problem to highlight the architectural pattern.
 
-Step 2: Creating Command {#h2-2-step-2-creating-command}
---------------------------------------------------------
+Step 2: Creating Command
+------------------------
 
 The next step is to create the command responsible for write operations. Here, we use the AuthorizeCardCommand, which encapsulates the attributes needed for card operations. This approach avoids handling numerous parameters by using a single class.
 
@@ -499,8 +499,8 @@ public class CardCommandResource {
 ```
 
 
-Step 3: Create Query {#h2-3-step-3-create-query}
-------------------------------------------------
+Step 3: Create Query
+--------------------
 
 The final step is to create the query resource. While the command writes transactions, the query retrieves processed transactions for a given card.
 
@@ -552,8 +552,8 @@ public class CardQueryResource {
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 CQRS is not simply about dividing code for architectural reasons. It recognizes that reads and writes have distinct purposes. Separating commands from queries allows each to focus on its role: commands enforce business rules and generate decisions, while queries deliver optimized views of the system's state. In this tutorial, we demonstrated this approach using a basic card authorization flow, highlighting the difference between a decision (OperationResult) and the data used for reading (TransactionView).
 

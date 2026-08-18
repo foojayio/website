@@ -21,8 +21,8 @@ frozen: false
 
 The terrible `NullPointerException` (NPE for short) is the most frequent Java exception occurring in production, according to [a 2016 study](https://www.overops.com/blog/the-top-10-exceptions-types-in-production-java-applications-based-on-1b-events/). In this article we'll explore the main techniques to fight it: the self-validating model and the `Optional` wrapper.
 
-Self-Validating Model {#h2-0-self-validating-model}
----------------------------------------------------
+Self-Validating Model
+---------------------
 
 Imagine a business rule: every Customer has to have a birth date set. There are a number of ways to implement this constraint: validating the user data on the create and update use-cases, enforcing it via `NOT NULL` database constraint and/or implementing the null-check right in the constructor of the Customer entity. In this article we'll explore the last one.
 
@@ -57,8 +57,8 @@ So, in general, whenever a null represents a data inconsistency case, throw exce
 
 But what if that `null` is indeed a valid value? For example, imagine our Customer might not have a Member Card because she didn't yet create one or maybe she didn't want to sign up for a member card. We'll discuss this case in the following section.
 
-Getters returning Optional {#h2-1-getters-returning-optional}
--------------------------------------------------------------
+Getters returning Optional
+--------------------------
 
 > **Best-practice** : Since Java 8, whenever a function needs to return `null`, it should declare to return `Optional` instead
 
@@ -131,7 +131,7 @@ applyDiscount(order, customer.getMemeberCard().orElse(null).getPoints());
 
 Signaling the caller at compile-time that there might be nothing returned to her is an extremely powerful technique that can defeat the most frequent bug in Java applications. Most NPEs occur in large projects mainly because developers aren't fully aware some parts of the data might be `null`. It happened on our project: we discovered dozens of `NullPointerExcepton`s just waiting to happen when we moved to `Optional` getters.
 
-### Frameworks and Optional getters {#h3-2-frameworks-and-optional-getters}
+### Frameworks and Optional getters
 
 Would frameworks allow getters to return Optional?
 
@@ -139,13 +139,13 @@ First of all, to make it clear, we only changed the return type of the getter. T
 
 All modern object-mapper frameworks (eg Hibernate, Mongo, Cassandra, Jackson, JAXB ...) can be instructed to read from private fields via reflection (Hibernated does it by default). So really, the frameworks don't care about your getters.
 
-### When is Optional overkill? {#h3-3-when-is-optional-overkill}
+### When is Optional overkill?
 
 You should consider making null-safe the objects you write logic on: Entities and Value Objects. As I explained in my [Clean Architecture talk](https://www.youtube.com/watch?v=tMHO7_RLxgQ&list=PLggcOULvfLL_MfFS_O0MKQ5W_6oWWbIw5&index=3), you should avoid writing logic on API data objects (aka Data Transfer Objects). Since no logic uses them, null-protection is overkill.
 > Use `Optional` in your Domain Model not in your DTO/API Model.
 
-Pre-instantiate sub-structures {#h2-4-pre-instantiate-sub-structures}
----------------------------------------------------------------------
+Pre-instantiate sub-structures
+------------------------------
 
 Never do this:
 
@@ -172,8 +172,8 @@ private BillingInfo billingInfo = new BillingInfo();
 
 This would allow the users of your model to do `e.getBillingInfo().setCity(city);` without worrying about nulls.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 You should consider upgrading your entity model to either reject a `null` via self-validation or present the nullable field via a getter that returns `Optional`. The effort of changing the getters of the core entities in your app is considerable, but along the way, you may find many dormant NPEs.
 

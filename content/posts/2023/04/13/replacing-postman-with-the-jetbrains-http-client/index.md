@@ -28,8 +28,8 @@ I work a lot with APIs, whether for an app I develop myself, or to interact with
 
 With a combination of the [JetBrains HTTP Client](https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html "Jetbrains HTTP Client") and [OpenAPI generators](https://openapi-generator.tech/ "OpenAPI generators") we can do (in my opinion) better, in a semi automated way and even reuse our code on our CI/CD. Let's dive into how!
 
-Quick Introduction to the JetBrains HTTP Client {#h2-0-quick-introduction-to-the-jetbrains-http-client}
--------------------------------------------------------------------------------------------------------
+Quick Introduction to the JetBrains HTTP Client
+-----------------------------------------------
 
 A lot of people don't know about the JetBrains HTTP Client, which is a JetBrains proprietary text file format that allows you to run API requests easily.
 
@@ -75,8 +75,8 @@ The best thing about all this is that everything is a text file, so I can put my
 
 I hope that by this time you're convinced of the value of the Client 😊. But wait, we can do much more!
 
-Generating Full API Clients {#h2-1-generating-full-api-clients}
----------------------------------------------------------------
+Generating Full API Clients
+---------------------------
 
 Many of you are probably aware of the OpenAPI specification (formerly swagger files). It is basically a standard to describe your API. If you write a spec file for it, you basically write a "contract" for how your API works.
 
@@ -186,8 +186,8 @@ I can also decide to run the Health endpoint and see whether the DOTA or Steam s
 
 Objective reached! I can play against external APIs locally, in source code, without having to use any tool like Postman and without going out of IntelliJ.
 
-Adding Tests {#h2-2-adding-tests}
----------------------------------
+Adding Tests
+------------
 
 Running endpoints is nice, but we also want to be able to make sure expectations are fulfilled!
 
@@ -216,8 +216,8 @@ This should fail, as DOTA 2 currently has 123 heroes:
 
 *Bingo!*
 
-Going Even Further {#h2-3-going-even-further}
----------------------------------------------
+Going Even Further
+------------------
 
 I've always been a bit frustrated at JetBrains for their HTTP Client, because it was completely bound to Intellij. As amazing as it is, I can't spend a lot of time crafting nice custom API calls if I still have to create tests for my CI anyways. At the end of the day, it's double the work for me.
 
@@ -302,8 +302,8 @@ We check out, set the Java version to 17, and run the ijhttp package like we did
 
 *GitHub action run results.*
 
-Next Steps {#h2-4-next-steps}
------------------------------
+Next Steps
+----------
 
 There is so much more I could talk about, like the fact that the HTTP Client supports other protocols like GraphQL, handles redirections and more, but I'll keep it to this for now.
 

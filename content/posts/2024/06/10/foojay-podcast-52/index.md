@@ -34,13 +34,13 @@ In this episode, we have 5 new guests for you.
 * Piotr Przybyl came to JCON to give a talk about Test Containers and how to test your application in an environment that is similar to your production environment. Another important topic related to testing is Flaky Tests. How do you handle tests that only fail from time to time and make your whole test report unreliable?
 * François Martin had a talk about this subject, and he came to the conference together with Annelore Egger, who was one of the many volunteers.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube 9q7kSibmVBA >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -48,8 +48,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:37 Gerrit Grunwald: Talks about Garbage collectors, What is Intelligence Cloud and how can you find out which of your code is actually used in production and which dependencies are known to have vulnerabilities
 

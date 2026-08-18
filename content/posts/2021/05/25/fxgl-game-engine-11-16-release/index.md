@@ -18,15 +18,15 @@ frozen: false
 
 FXGL is a JavaFX game engine: <https://github.com/AlmasB/FXGL>
 
-Release Highlights {#h2-0-release-highlights}
----------------------------------------------
+Release Highlights
+------------------
 
 1. The restored Multiplayer Service allows easy replications of input, events and entities on a remote machine. For example, by just adding a single line of code (see MultiplayerService API), any key or mouse inputs that occur on one end of the connection can be replicated on the other end.
 2. The new FPS camera allows easy control of the player (or their "line of sight") in the context of a first-person 3D game.
 3. There is no longer a transitive dependency on the `javafx.swing` module. This means FXGL users will not need an extra module in their module graph.
 
-Release Notes {#h2-1-release-notes}
------------------------------------
+Release Notes
+-------------
 
 * Restored and refactored MultiplayerService
 * Added ReplicationEvent (javafx event that can be replicated on a remote machine)
@@ -46,8 +46,8 @@ Release Notes {#h2-1-release-notes}
 * JavaFX 15 -\> 16
 * Compile target for Kotlin: 1.8 -\> 11
 
-Video {#h2-2-video}
--------------------
+Video
+-----
 
 {{< youtube fuDQg7W0v4g >}}
 

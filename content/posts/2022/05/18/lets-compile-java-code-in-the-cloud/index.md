@@ -27,8 +27,8 @@ Relying on elastic horizontal scaling to deal with spikes in traffic means that 
 
 But some antiquated features of the JVM make it hard to effectively utilize the resources on your cloud instances.
 
-Reimagining How Java Runs In The Cloud {#h2-0-reimagining-how-java-runs-in-the-cloud}
--------------------------------------------------------------------------------------
+Reimagining How Java Runs In The Cloud
+--------------------------------------
 
 At Azul, we're re-imagining how Java runs in a cloud-centric world. The recent release of Azul Intelligence Cloud's newest offering, [Cloud Native Compiler](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/), is a huge step in this direction.
 
@@ -50,8 +50,8 @@ In this article we will look at:
 * The drawbacks of on-JVM JIT compilation
 * How Cloud Native Compilation delivers better performance with less time and compute resources
 
-**A Look Back at JIT Compilation** {#h-a-look-back-at-jit-compilation}
-----------------------------------------------------------------------
+**A Look Back at JIT Compilation**
+----------------------------------
 
 First, a refresher on JIT compilation. When a JVM starts, it runs the compiled portable byte code in the Java program in the slower interpreter until it can identify a profile of "hot" methods and how they are run.
 
@@ -69,8 +69,8 @@ So what are the drawbacks of this approach? Well...
 * JVMs have no memory of past runs. Even if a JVM is running a workload which it has run a hundred times before, it must run it in the interpreter from scratch as if it's the first time.
 * JVMs have no knowledge of other nodes running the same program. Each JVM builds up a profile based on its traffic, but a more performant profile could be built up by aggregating the experience of hundreds of JVMs running the same code.
 
-**Offloading JIT Compilation to the Cloud** {#h2-2-offloading-jit-compilation-to-the-cloud}
--------------------------------------------------------------------------------------------
+**Offloading JIT Compilation to the Cloud**
+-------------------------------------------
 
 Today, we do have a "magic cloud" of resources that we can use to offload JVM processes that could be more effectively done elsewhere.
 
@@ -86,8 +86,8 @@ When you use Cloud Native Compiler on your Java workloads:
 * You can always afford to run the most aggressive optimizations resulting in peak top line performance, regardless of the capacity of your JVM client instance.
 * The wall-clock time of warming up your JVM decreases significantly as the JIT compilation requests are run more in parallel thanks to more available threads on the Cloud Native Compiler service.
 
-**So Does It Really Make a Difference?** {#h2-3-so-does-it-really-make-a-difference}
-------------------------------------------------------------------------------------
+**So Does It Really Make a Difference?**
+----------------------------------------
 
 Azul Platform Prime's highly optimized Falcon compiler is already capable of producing optimizations that are much faster than OpenJDK's Hotspot compiler.
 
@@ -108,8 +108,8 @@ We've already shown above how Cloud Native Compiler reduces warm-up time and CPU
 Let's look at a more realistic workload -- running a three-node Cassandra cluster on an 8 vCore r5.2xlarge AWS instance. With optimization set to the highest level, resulting in high and consistent throughput, warm-up time goes from 20 minutes with local JIT to less than two minutes with Cloud Native Compiler.
 ![](https://www.azul.com/wp-content/uploads/cassandra-throughput-1024x405.png)
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Azul's Cloud Native Compiler is a major advancement in how Java runtimes perform their work.
 

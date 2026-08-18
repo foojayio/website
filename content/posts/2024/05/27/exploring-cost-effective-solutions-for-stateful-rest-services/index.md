@@ -26,23 +26,23 @@ enlighterjs: true
 frozen: false
 ---
 
-A Case Study with IBM Cloud Code Engine, EclipseStore, and IBM Cloud Object Storage {#h2-0-a-case-study-with-ibm-cloud-code-engine-eclipsestore-and-ibm-cloud-object-storage}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+A Case Study with IBM Cloud Code Engine, EclipseStore, and IBM Cloud Object Storage
+-----------------------------------------------------------------------------------
 
 In the dynamic realm of cloud computing, finding cost-effective solutions for stateful rest services that don't necessarily require scaling can be a nuanced challenge.
 
 In this article, we'll take a pragmatic look at a use case leveraging [IBM Cloud Code Engine](https://www.ibm.com/products/code-engine "IBM Cloud Code Engine"), [EclipseStore](https://eclipsestore.io/ "EclipseStore"), and [IBM Cloud Object Storage (COS)](https://www.ibm.com/products/cloud-object-storage "IBM Cloud Object Storage (COS)"). The goal is to shed light on how this can be a practical and economical alternative, particularly when scalability is not a primary concern.
 
-Decoding the Components {#h2-1-decoding-the-components}
--------------------------------------------------------
+Decoding the Components
+-----------------------
 
 1. **IBM Cloud Code Engine** provides an environment where developers can focus on coding without managing the underlying infrastructure. This serverless compute platform is not just applicable for stateless workload that scales very dynamically, but also very applicable for stateful services that are constantly running.
 2. **EclipseStore**: Positioned as an in-memory storage system, EclipseStore offers a lightweight solution for persistent data storage in Java projects. Its efficiency makes it suitable for applications requiring high-speed data access, without the need for extensive scaling capabilities. Being a member of the Eclipse Foundation and Open Source ensures prolonged support and maintenance.
 3. **IBM Cloud Object Storage**: This component acts as the foundational storage layer. Its pay-as-you-go model ensures businesses only pay for the storage they use, making it a flexible and cost-effective choice for cloud storage.
 4. **Eclipse Store COS Connector** : The use of the [XDEV EclipseStore COS Connector](https://xdev.software/en/news/detail/now-available-ibm-cloud-object-store-connectors-for-microstream-eclipsestore?utm_source=ibm-ms-case-study "XDEV EclipseStore COS Connector") enables EclipseStore to write and read data directly on a COS Bucket. The project is available as open source on GitHub: <https://github.com/xdev-software/eclipse-store-afs-ibm-cos>.
 
-Value Proposition {#h2-2-value-proposition}
--------------------------------------------
+Value Proposition
+-----------------
 
 Let's evaluate the trio based on the following criteria:
 
@@ -51,8 +51,8 @@ Let's evaluate the trio based on the following criteria:
 2. **Infrastructure Management**: IBM Cloud Code Engine's serverless architecture eliminates the need for manual infrastructure management, a characteristic that simplifies operations and reduces operational overhead.
 3. **Scalability**: In scenarios where scaling is not a primary concern, the lightweight nature of EclipseStore coupled with a stateful rest service on IBM Cloud Code Engine provides a tailored solution.
 
-Measurements {#h2-3-measurements}
----------------------------------
+Measurements
+------------
 
 For our demo scenario, we'll assume data of about 5 GB with 5,000,000 entries. Our service is called about 2,592,000 times for reading and 259,200 times for writing in one month (1 read/s, 0.1 write/s).
 
@@ -66,8 +66,8 @@ The same constellation with EclipseStore costs about 2.81$ (0.11$ storing + 1.35
 
 This saves us over 95% of storage costs every month.
 
-Demo {#h2-4-demo}
------------------
+Demo
+----
 
 To show you how this could work in the real world, we prepared a demo project for you. You can either use [the completed Repository from GitHub](https://github.com/xdev-software/eclipse-store-code-engine-demo "the completed Repository from GitHub") as template or follow the Step-by-step instructions here:
 
@@ -79,12 +79,12 @@ We will create a Code Engine application from our [Maven](https://maven.apache.o
 
 This App will be reachable by the customer through the public cloud and will read and write data to the COS-Bucket.
 
-Getting Started {#h2-5-getting-started}
----------------------------------------
+Getting Started
+---------------
 
-### Spring Boot with EclipseStore {#h3-6-spring-boot-with-eclipsestore}
+### Spring Boot with EclipseStore
 
-To get started quickly we create a Spring Boot project through the start.spring.io Website: [Template](https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=3.2.3&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=software.xdev&amp;artifactId=eclipse-store-code-engine-demo&amp;name=eclipse-store-code-engine-demo&amp;description=Demo%20project%20for%20Spring%20Boot%20with%20Eclipse%20Store%20in%20IBM%20Code%20Engine&amp;packageName=software.xdev.eclipse.store.ibm.code.engine.demo&amp;dependencies=web "Template")
+To get started quickly we create a Spring Boot project through the start.spring.io Website: [Template](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.2.3&packaging=jar&jvmVersion=17&groupId=software.xdev&artifactId=eclipse-store-code-engine-demo&name=eclipse-store-code-engine-demo&description=Demo%20project%20for%20Spring%20Boot%20with%20Eclipse%20Store%20in%20IBM%20Code%20Engine&packageName=software.xdev.eclipse.store.ibm.code.engine.demo&dependencies=web "Template")
 
 We need to add the two dependencies for [Eclipse-Store-Spring-Integration](https://docs.eclipsestore.io/manual/misc/integrations/spring-boot.html "Eclipse-Store-Spring-Integration") and the [IBM COS Connector](https://github.com/xdev-software/eclipse-store-afs-ibm-cos "IBM COS Connector"):
 
@@ -239,8 +239,8 @@ And now we already have a fully working Spring Application with local EclipseSto
 | Retrieve all products | `curl http://localhost:8080/products`                                                                                                                                                                                                                                                                                               |
 | Add a product         | Linux `curl --request POST --header 'Content-Type: application/json' --data '{"id":"vxr3i5","name":"Couch","price":199.99}' http://localhost:8080/products` Windows `curl --request POST --header 'Content-Type: application/json' --data "{\"id\":\"vxr3i5\",\"name\":\"Couch\",\"price\":199.99}" http://localhost:8080/products` |
 
-IBM Cloud Object Storage {#h2-7-ibm-cloud-object-storage}
----------------------------------------------------------
+IBM Cloud Object Storage
+------------------------
 
 We can finally move to the cloud. The only thing that's left to do in the code is add the CosCustomizer. This class configures the EclipseStore storage in a way that it reads the COS-Config from environment variables, connects to the IBM Cloud Object Storage (COS) and the reads/writes all the data to it.
 
@@ -252,8 +252,8 @@ In the application we use the [SingleAccessManager](https://github.com/xdev-soft
 
 Be aware that to keep this demo as simple as possible, our demo project will be publicly reachable and therefore accessible for everybody.
 
-Deploying the good stuff {#h2-8-deploying-the-good-stuff}
----------------------------------------------------------
+Deploying the good stuff
+------------------------
 
 First things first: if you have not yet, [create an account in the IBM Cloud](https://cloud.ibm.com/registration "create an account in the IBM Cloud") and [install the IBM Cloud command line interface (CLI)](https://cloud.ibm.com/docs/cli?topic=cli-getting-started "install the IBM Cloud command line interface (CLI)").
 
@@ -340,8 +340,8 @@ ibmcloud ce project select -n spring-eclipsestore-ce
 ```
 
 
-Postproduction {#h2-9-postproduction}
--------------------------------------
+Postproduction
+--------------
 
 The default configuration is optimized for costs and allows the application to scale down (to zero) to avoid idling CPU when no workload is running. This comes with the additional latency of about 30s when the application is scaling up from zero. In a real production environment where we are talking about truly lightning-fast responses times, we want to keep the application active and pick the best suitable number of CPUs.
 
@@ -356,14 +356,14 @@ Be aware that EclipseStore is an in-memory-datastore. That means that it loads a
 
 Finally, we should weight the pros and cons of using EclipseStore with Code Engine:
 
-### Pro {#h3-10-pro}
+### Pro
 
 * Scale to zero is possible with minimal cost. This is useful e.g. scheduled, periodic jobs.
 * Even without scaling to zero instances, we can use a very small and cheap instance to persist data.
 * Complex data structures can be easily persisted without the overhead of defining database schemas, adding annotations or creating layers to access the data.
 * Simplifies code by using native java classes.
 
-### Con {#h3-11-con}
+### Con
 
 * Scale to zero can be too slow for some use cases. Though, you can explore more options around [scale-down-delays](https://cloud.ibm.com/docs/codeengine?topic=codeengine-app-scale#app-scale-timeconcurrency "scale-down-delays") that allow your app to stay up during the day even if there is no request for some time, while it still eventually scales down to 0 when there is no traffic for a longer time during the night.
 * Horizontal scaling is not possible since EclipseStore can only use the bucket data with one instance. In a microservice environment it's easily possible to create a simple REST Service that manages only the data persistency in that environment.

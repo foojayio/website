@@ -37,8 +37,8 @@ But why should you disconnect and then reattach a debugger? It allows you to not
 
 Before we cover how to (re)attach a debugger in IDEs, we'll see how this works on the JDWP/JDI level:
 
-On JVM Level {#h2-0-on-jvm-level}
----------------------------------
+On JVM Level
+------------
 
 The JDWP agent does not prevent the debugger from reattaching. There are two ways that Debugging sessions can be closed by the debugger: dispose and exit. Disposing of a connection via the [JDWP `Dispose`](https://docs.oracle.com/en/java/javase/17/docs/specs/jdwp/jdwp-protocol.html#JDWP_VirtualMachine_Dispose) command is the least intrusive way. This command is exposed to the debugger in JDI via the [`VirtualMachine#dispose()`](https://docs.oracle.com/en/java/javase/21/docs//api/jdk.jdi/com/sun/jdi/VirtualMachine.html#dispose()) method:
 > Invalidates this virtual machine mirror. **The communication channel to the target VM is closed, and the target VM prepares to accept another subsequent connection from this debugger or another debugger**, including the following tasks:
@@ -58,13 +58,13 @@ The other way is using the [exit](https://docs.oracle.com/en/java/javase/17/docs
 
 This, of course, prevents the debugger from reattaching.
 
-Reattaching with IDEs {#h2-1-reattaching-with-ides}
----------------------------------------------------
+Reattaching with IDEs
+---------------------
 
 NetBeans, IntelliJ IDEA, and Eclipse all support reattaching after ending a debugging session by just creating a new remote debugging session. Be aware that this only works straightforwardly when using remote debugging, as the local debugging UI is usually directly intertwined with the UI for running the application. I would recommend trying remote debugging once in a while, even when debugging on your local machine, to be able to use all the advanced features.
 
-Terminating an Application with IDEs {#h2-2-terminating-an-application-with-ides}
----------------------------------------------------------------------------------
+Terminating an Application with IDEs
+------------------------------------
 
 NetBeans is the only IDE of the three that does not support this (as far as I can ascertain). IntelliJ IDEA and Eclipse both support it, with Eclipse having the more straight-forward UI:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/eclipse_buttons.png)
@@ -78,8 +78,8 @@ IntelliJ IDEA's UI is, in this instance, arguably less discoverable: To terminat
 This then results in a popup that offers you the ability to terminate:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/image-9.png)
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 The ability to disconnect and then reattach debuggers is helpful for many complex debugging scenarios and can help you debug faster. Being able to terminate the application directly from the debugger is an additional time saver when working with remote debugging sessions. Both are often overlooked gems of Java debugging, showing once more how versatile the JDWP agent and UI debuggers are.
 

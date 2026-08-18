@@ -26,8 +26,8 @@ Whether you're already building AI-powered systems or just starting to explore w
 
 
 
-📅 Event Details {#h2-0-event-details}
---------------------------------------
+📅 Event Details
+----------------
 
 **Date:** 19 September 2025  
 **Location:** iO Campus Amsterdam, Spaklerweg 52  
@@ -35,8 +35,8 @@ Whether you're already building AI-powered systems or just starting to explore w
 
 
 
-🔎 A Program for Every Developer {#h2-1-a-program-for-every-developer}
-----------------------------------------------------------------------
+🔎 A Program for Every Developer
+--------------------------------
 
 This year's schedule brings together sessions across **Python, Java, Data Science, and JavaScript** .  
 
@@ -58,8 +58,8 @@ Attendees will also find deep dives into:
 
 
 
-🎤 Meet the Speakers \& Sessions {#h2-2-meet-the-speakers-sessions}
--------------------------------------------------------------------
+🎤 Meet the Speakers \& Sessions
+--------------------------------
 
 Here's a quick snapshot of who's speaking and what they'll be covering:
 
@@ -85,8 +85,8 @@ Here's a quick snapshot of who's speaking and what they'll be covering:
 
 
 
-🌟 Why This Year is Special {#h2-3-why-this-year-is-special}
-------------------------------------------------------------
+🌟 Why This Year is Special
+---------------------------
 
 * **Code-first learning**: Every session has at least 50% code.
 * **Top-tier speakers**: From Java Champions and CTOs to engineers shaping AI frameworks.
@@ -97,8 +97,8 @@ This is **not** a fluffy AI hype conference---it's a developer-first gathering f
 
 
 
-🔗 Join Us {#h2-4-join-us}
---------------------------
+🔗 Join Us
+----------
 
 Ready to dive in?  
 

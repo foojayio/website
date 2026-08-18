@@ -34,8 +34,8 @@ So... today we're announcing a new section: [Java Quick Start](https://foojay.io
  </figure>
 </figure>
 
-What You Will Learn {#h2-0-what-you-will-learn}
------------------------------------------------
+What You Will Learn
+-------------------
 
 The quick start is divided into these sections.
 
@@ -45,8 +45,8 @@ The quick start is divided into these sections.
 
 We hope [this new section will help new users to start programming with Java](https://foojay.io/java-quick-start/), so please spread the word.
 
-Conclusion {#h2-1-conclusion}
------------------------------
+Conclusion
+----------
 
 I do these morning walks together with my dog Wifi. If you hear some snoring during the videos, that's because she is also my not-so-very-active-office-assistent, and you can see her behind me in the movies.
 

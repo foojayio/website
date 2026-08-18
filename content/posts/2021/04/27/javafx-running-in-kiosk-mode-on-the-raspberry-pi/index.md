@@ -30,7 +30,7 @@ We have done something before already in the post ["Light Up your Christmas Tree
 1. We are going to use [V2 of Pi4J](https://pi4j.com/), the friendly object-oriented I/O API and implementation libraries for Java programmers to access the full I/O capabilities of the Raspberry Pi platform.
 2. We will combine this with Gluon's JavaFX 17-ea to run the application in two modes: desktop window versus "kiosk mode".
 
-### Prepare the Raspberry Pi {#h3-0-prepare-the-raspberry-pi}
+### Prepare the Raspberry Pi
 
 This demo will work with any Raspberry Pi with an ARMv7 or ARMv8: Raspberry Pi A (version 3), B (version 2 or higher), or Compute (version 3 or higher).
 
@@ -111,7 +111,7 @@ OS name: "linux", version: "5.10.17-v7l+", arch: "arm", family: "unix"
 ```
 
 
-### Get the Example Project {#h3-1-get-the-example-project}
+### Get the Example Project
 
 The Pi4J project and website provide multiple example projects. Let's use the "minimal JavaFX example". This application is fully documented on the [Pi4J website \> "Getting Started" \> "User interface with JavaFX"](https://pi4j.com/getting-started/user-interface-with-javafx/). We can get the sources from GitHub and build it with Maven.
 
@@ -140,10 +140,10 @@ slf4j-simple-2.0.0-alpha0.jar
 
 ![](maven-build-finished-1024x675.png)
 
-Run Modes {#h2-2-run-modes}
----------------------------
+Run Modes
+---------
 
-### Desktop Mode {#h3-3-desktop-mode}
+### Desktop Mode
 
 When we want to run our application as a "normal desktop application", we need to use **GTK, which depends on a Window Manager, e.g. X11**. That's what desktop users use as a Window Manager and allows you to have multiple windows, where you can drag a window, open new ones etc.
 
@@ -176,7 +176,7 @@ $ sudo bash run.sh
 As you can see in the video, because we are using an example application from the Pi4J project, we are able to control a LED with the button in the application.
 ![](running-application-1024x626.png)
 
-### Kiosk Mode {#h3-4-kiosk-mode}
+### Kiosk Mode
 
 There is also a different approach with "kiosk mode", where our application is the only thing you see on the screen. This prevents the user to open any other applications or mess up your system. In this case, there is no need for a window manager, and the application directly uses the underlying (hardware) framebuffer. To achieve this, we use Monocle with EGL and DRM, as that is the Linux approach to directly address the hardware acceleration, without a window manager. The JavaFX application is using Direct Rendering Mode (DRM) to be visualized. An extra benefit is the performance boost, as your program is the only thing that needs to be handled towards the screen.
 
@@ -216,7 +216,7 @@ $ sudo bash run-kiosk.sh
  </div>
 </figure>
 
-### Extra Tips {#h3-5-extra-tips}
+### Extra Tips
 
 #### Gluon Documentation
 
@@ -237,7 +237,7 @@ sudo apt install unclutter
 ```
 
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 Write once, run everywhere? Yes, even on Raspberry Pi and in kiosk mode! Java and JavaFX rule once more!
 

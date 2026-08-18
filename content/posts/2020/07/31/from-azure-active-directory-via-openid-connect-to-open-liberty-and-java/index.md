@@ -20,8 +20,8 @@ Long gone are the days when you had to create your own user account management, 
 
 The code used in this blog post is hosted on this [GitHub repository](https://github.com/Azure-Samples/liberty-aad-oidc) as part of the official Azure samples - feel free to check it out and follow its user guide to run the Java EE demo application before or after reading this blog.
 
-**Set Up Azure Active Directory** {#h2-0-set-up-azure-active-directory}
------------------------------------------------------------------------
+**Set Up Azure Active Directory**
+---------------------------------
 
 Azure Active Directory (Azure AD) implements OpenID Connect (OIDC), an authentication protocol built on OAuth 2.0, which lets you securely sign in a user from Azure AD to an application. Before going into the sample code, you must first set up an Azure AD tenant and create an application registration with a redirect URL and client secret. The tenant ID, application (client) ID and client secret are used by Open Liberty to negotiate with Azure AD to complete an [OAuth 2.0 authorization code flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow).
 
@@ -31,8 +31,8 @@ Learn how to set up Azure AD from these articles:
 * [Register an application](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app)
 * [Add a new client secret](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#create-a-new-application-secret)
 
-**Configure Social Login as OpenID Connect Client** {#h2-1-configure-social-login-as-openid-connect-client}
------------------------------------------------------------------------------------------------------------
+**Configure Social Login as OpenID Connect Client**
+---------------------------------------------------
 
 The following sample code shows how an application running on an Open Liberty server is configured with the `socialLogin-1.0` feature as an OpenID Connect client to authenticate a user from an OpenID Connect Provider, with Azure AD as the designated security provider.
 
@@ -81,8 +81,8 @@ Using Azure AD allows your application to use a certificate with a root CA signe
 
 In our case, we assign all users authenticated via Azure AD the `users` role. More complex role mappings are possible with Liberty if desired.
 
-**Use OpenID Connect to Authenticate Users** {#h2-2-use-openid-connect-to-authenticate-users}
----------------------------------------------------------------------------------------------
+**Use OpenID Connect to Authenticate Users**
+--------------------------------------------
 
 The sample application exposes a JSF client which defines a Java EE security constraint that only users with role `users` can access.
 
@@ -129,8 +129,8 @@ public class Cafe implements Serializable {
 ```
 
 
-**Secure Internal REST Calls Using JWT RBAC** {#h2-3-secure-internal-rest-calls-using-jwt-rbac}
------------------------------------------------------------------------------------------------
+**Secure Internal REST Calls Using JWT RBAC**
+---------------------------------------------
 
 The `Cafe` bean depends on `CafeResource`, a REST service built with JAX-RS, to create, read, update and delete coffees. The `CafeResource` implements RBAC (role based access control) using MicroProfile JWT to verify the groups claim of the token.
 
@@ -211,8 +211,8 @@ Note, the `groups` claim is not propagated by default and requires additional Az
 * [Create a new group and add members](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal)
 * [Configuring groups optional claims](https://docs.microsoft.com/azure/active-directory/develop/active-directory-optional-claims#configuring-groups-optional-claims)
 
-**Summary** {#h2-4-summary}
----------------------------
+**Summary**
+-----------
 
 In this blog entry, we demonstrated how to effectively secure an Open Liberty application using OpenID Connect and Azure Active Directory. This write-up and the underlying [official Azure sample](https://github.com/Azure-Samples/liberty-aad-oidc) should also easily work for WebSphere Liberty.
 

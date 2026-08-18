@@ -23,8 +23,8 @@ frozen: false
 
 Analytics are crucial for understanding how users interact with your web application. In this guide, I'll show you how to integrate Google Analytics with your Vaadin Flow application in a clean, maintainable way.
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 Before we start, you'll need:
 
@@ -32,8 +32,8 @@ Before we start, you'll need:
 * A Google Analytics account with a measurement ID (usually starts with "G-")
 * Basic understanding of Vaadin components
 
-Creating the Analytics Component {#h2-1-creating-the-analytics-component}
--------------------------------------------------------------------------
+Creating the Analytics Component
+--------------------------------
 
 First, let's create a reusable component that handles the Google Analytics integration. This component will:
 
@@ -115,10 +115,10 @@ public class GoogleAnalytics extends Component implements HasSize {
 ```
 
 
-Using the Component {#h2-2-using-the-component}
------------------------------------------------
+Using the Component
+-------------------
 
-### Step 1: Add To Main Layout {#h3-3-step-1-add-to-main-layout}
+### Step 1: Add To Main Layout
 
 Add the Google Analytics component to your main layout to initialize tracking:
 
@@ -137,7 +137,7 @@ public class MainLayout extends AppLayout {
 ```
 
 
-### Step 2: Track Custom Events {#h3-4-step-2-track-custom-events}
+### Step 2: Track Custom Events
 
 You can track custom events anywhere in your application:
 
@@ -163,8 +163,8 @@ public class UserProfileView extends VerticalLayout {
 ```
 
 
-How It Works {#h2-5-how-it-works}
----------------------------------
+How It Works
+------------
 
 The component uses Vaadin's JavaScript execution capabilities to:
 
@@ -175,8 +175,8 @@ The component uses Vaadin's JavaScript execution capabilities to:
 
 The JavaScript code is structured for readability and maintainability, with clear variable names and comments explaining each step.
 
-Best Practices {#h2-6-best-practices}
--------------------------------------
+Best Practices
+--------------
 
 1. Initialize analytics only once in your main layout
 2. Use descriptive event names and parameters
@@ -184,8 +184,8 @@ Best Practices {#h2-6-best-practices}
 4. Consider user privacy and GDPR compliance
 5. Add error handling for analytics calls
 
-Common Use Cases {#h2-7-common-use-cases}
------------------------------------------
+Common Use Cases
+----------------
 
 Here are some events you might want to track:
 
@@ -195,8 +195,8 @@ Here are some events you might want to track:
 * Error occurrences
 * User preferences
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 This integration provides a clean, type-safe way to use Google Analytics in your Vaadin Flow application. The component approach makes it easy to maintain and extend the tracking functionality as needed.
 

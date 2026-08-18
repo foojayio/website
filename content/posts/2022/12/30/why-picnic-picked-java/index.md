@@ -30,8 +30,8 @@ Java 8 was released just the year before, adding the beloved lambdas and streams
 
 NodeJS was on the rise, and Kotlin was just a pre-release blip on the radar.
 
-Why Java? {#h2-0-why-java}
---------------------------
+Why Java?
+---------
 
 So why did we end up picking Java as our backend development stack?
 
@@ -44,8 +44,8 @@ So why did we end up picking Java as our backend development stack?
 
 All in all, enough reasons for picking Java to take Picnic from day one to where we are today.
 
-Why Java, the language? {#h2-1-why-java-the-language}
------------------------------------------------------
+Why Java, the language?
+-----------------------
 
 Still there, **there's Java *the platform* , and Java *the language***.
 
@@ -70,8 +70,8 @@ Still, the more things change, the more they stay the same. Currently a similar 
 
 Would it be something for us to adopt now? Let's park that question for a bit, since there's more to tell about *how* we adopted Java throughout the years first.
 
-Adopting Java {#h2-2-adopting-java}
------------------------------------
+Adopting Java
+-------------
 
 Picking a tech stack is one thing, but making the most of its adoption is something else entirely. Early on, Picnic established a Java Platform team to gradually build up our [Java developer platform](https://blog.picnic.nl/becoming-a-multiplier-on-our-java-developer-platform-17fe87de2e20 "Java developer platform").
 
@@ -88,8 +88,8 @@ Some notable achievements of our Java platform team are:
 
 The list goes on, but the important point is that we invest heavily in our internal Java development platform. As a result, Picnic's teams benefit from a uniform and modern approach to Java development for maximum developer happiness and effectiveness.
 
-Enter Kotlin {#h2-3-enter-kotlin}
----------------------------------
+Enter Kotlin
+------------
 
 You now understand why we picked Java when starting out. But we're living in a different world today. One in which Kotlin, as mentioned earlier, is gaining traction as the alternative JVM language. So should we switch to Kotlin? A simple question with a multi-faceted answer.
 
@@ -106,8 +106,8 @@ Jake Wharton, an active Kotlin community member, also observed this closing of t
 
 Switching languages is a big investment. From re-working a lot of our Java platform tooling to re-skilling hundreds of developers and re-establishing best coding practices, this is not something to take lightly. As a scale-up, we have many other challenges to solve. Given the diminishing benefits of switching, and looking at the rise and fall of earlier alternative JVM languages (Groovy, then Scala), such an investment just doesn't add up for us.
 
-Are we missing out? {#h2-4-are-we-missing-out}
-----------------------------------------------
+Are we missing out?
+-------------------
 
 Does that mean we're not looking enviously at some Kotlin features? Of course we are! Even though Java is catching up with Kotlin in many ways, there are still parts where it hasn't (yet), or won't. However, with a couple of smart choices, we can get closer to some of the benefits from the Java side as well.
 
@@ -123,8 +123,8 @@ Rather than adopting Kotlin's coroutines approach, Java will offer a much more c
 
 It's great that a language like Kotlin advances the JVM ecosystem. For us, it's even better to see many of the best ideas making their way back into Java proper.
 
-Making your own choice {#h2-5-making-your-own-choice}
------------------------------------------------------
+Making your own choice
+----------------------
 
 As has become clear, finding the right tech stack is a very context-dependent journey.
 

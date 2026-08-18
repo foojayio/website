@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction: Why JMH? {#h2-0-introduction-why-jmh}
----------------------------------------------------
+Introduction: Why JMH?
+----------------------
 
 Performance matters in Java applications, but measuring it accurately is harder than you might think. I've seen countless developers try to measure performance by wrapping code in System.currentTimeMillis() calls or using simple timing loops, only to get misleading results due to JVM optimizations, garbage collection, or just mistakes during measurement.
 
@@ -30,8 +30,8 @@ The JVM is incredibly good at optimizing code, sometimes so good that it optimiz
 
 That's where JMH (Java Microbenchmark Harness) comes in. In this post, I'll walk you through everything you need to know to start benchmarking your Java code, from basic setup to advanced profiling techniques that can help you identify performance bottlenecks.
 
-Dependencies {#h2-1-dependencies}
----------------------------------
+Dependencies
+------------
 
 For this post, we will use the following dependencies:
 
@@ -53,8 +53,8 @@ These dependencies are needed to run the benchmarks and to use the annotations. 
 
 To use the async profiler, you need to download the async profiler from [here](https://github.com/jvm-profiling-tools/async-profiler/releases). Add the async profiler to the classpath. If you are using Linux you can also copy the async profiler to one of the following directories: `/usr/java/packages/lib`, `/usr/lib64`, `/lib64`, `/lib`, `/usr/lib`.
 
-Creating your first benchmark {#h2-2-creating-your-first-benchmark}
--------------------------------------------------------------------
+Creating your first benchmark
+-----------------------------
 
 The easiest way to get started is to create a new class and give it a main method to start the benchmark. In the following example, you can see one way of doing this using the OptionsBuilder. It lets you configure everything from which benchmarks to run to how many iterations to perform.
 
@@ -83,8 +83,8 @@ public void myFirstBenchmark() {
 
 The `@Benchmark` annotation tells JMH that this method is a benchmark. The code inside the method will be executed during the benchmark. This is just an empty method for now, but this should be enough to get you started with your own code. The next section shows the different modes for running benchmarks. We will also add some code to this example later on.
 
-Benchmark modes {#h2-3-benchmark-modes}
----------------------------------------
+Benchmark modes
+---------------
 
 There are really only four modes you can use to run your benchmarks. These modes are:
 
@@ -95,8 +95,8 @@ There are really only four modes you can use to run your benchmarks. These modes
 
 You can set the mode using this annotation `@BenchmarkMode(Mode.Throughput)`. The mode you should use depends on what you want to measure. For example, if you want to measure the time needed to execute a single method, you should use the `SingleShotTime` mode. If you want to measure the throughput of your code, you should use the `Throughput` mode. If you want to measure the average time needed to execute a method, you should use the `AverageTime` mode.
 
-State management {#h2-4-state-management}
------------------------------------------
+State management
+----------------
 
 When you write benchmarks, you will probably need some state at a point in time. For example, you might need to have some objects in place for your benchmark to run. If you create these objects during the benchmark, they will be timed as well. To avoid this, you can use the `@State` annotation and move the initialization of the objects outside the benchmark method to a `@Setup` method. You can use `@State` on the benchmark class or on a separate class.
 
@@ -135,11 +135,11 @@ public void myFirstBenchmark(BenchState benchState) {
 
 When you run this benchmark it will sort the array that is stored in the `unsorted` variable.
 
-### Keeping the state correct {#h3-5-keeping-the-state-correct}
+### Keeping the state correct
 
 In the previous example, there is a bug hiding in plain sight. The unsorted array is only sorted once. The problem is that Arrays.sort() modifies the original array. After the first benchmark iteration, you're no longer sorting random data, but you're sorting an already sorted array, which is much faster and gives you misleading results. To fix this, you can use the `unsorted.clone();`. Now each benchmark will sort a new array. The downside is that the clone method will be counted towards the benchmark.
 
-### Using state to create variants. {#h3-6-using-state-to-create-variants}
+### Using state to create variants.
 
 If you want to benchmark a lot of different parameters, you can use a @state annotated class to keep track of things. For example, you use a state object to test different inputs or to activate different behavior. In the following example, I use it to test different inputs.
 
@@ -157,8 +157,8 @@ public class ExecutionPlan {
 
 The example will make JMH run six different benchmarks. If I add another value like `@Param({"true", "false"})` JMH will create 2 \* 6 = 12 benchmarks. One for each combination. This works great if you want to test lots of combinations, but the more combinations you have the longer the benchmark will take to run. That is something to keep in mind.
 
-Understanding JMH output {#h2-7-understanding-jmh-output}
----------------------------------------------------------
+Understanding JMH output
+------------------------
 
 After each benchmark run, JMH will print the results. The output will look something like you can see in the following example. It looks like a table with rows and columns. The first line shows you what each column means. In the first column, you see the name of the benchmark. If you are using `@Param` the second column will show you the value of the parameter. In the third column, you see the mode that was used. In the fourth column, you see the number of iterations. In the fifth column, you see the score of the benchmark. What this score means depends on the benchmark mode used. In the sixth column, you see the standard deviation of the benchmark.
 
@@ -171,8 +171,8 @@ b.r.read.RandomReadBenchMark.libUring       4096  thrpt    5  1323.459 ±  93.74
 
 This should help you to understand what the different columns mean and to interpret the results.
 
-Prevent dead code optimizations {#h2-8-prevent-dead-code-optimizations}
------------------------------------------------------------------------
+Prevent dead code optimizations
+-------------------------------
 
 To prevent optimizations of unused objects, you can use a black hole. The JVM is very good at optimizing code. If you are creating objects but don't use them, the JVM can optimize this. In your production code, you use all the objects you create so that is also what you want to do in your benchmark. One way to achieve this is to use a black hole. A black hole will fool the JVM into thinking that the object is actually used.
 
@@ -189,8 +189,8 @@ public void AddingToString(Blackhole blackhole, ExecutionPlan plan){
 
 After adding it, you can use it to consume objects in your benchmark code.
 
-Constant folding {#h2-9-constant-folding}
------------------------------------------
+Constant folding
+----------------
 
 Constant folding is one of the most common ways the JVM can make your benchmarks lie to you. The JVM is smart enough to evaluate constant expressions at compile time, which means your benchmark might be measuring almost nothing. Here's a simple example that demonstrates the problem:
 
@@ -268,8 +268,8 @@ As you can see, the scores differ a lot between the good and bad examples. This 
 
 To detect constant folding check if your benchmark results are suspiciously fast or show unrealistic performance improvements, if so you're probably hitting constant folding. The fix is always the same use a variable from a state object that the JVM can't predict at compile time.
 
-Using async profiler with JMH {#h2-10-using-async-profiler-with-jmh}
---------------------------------------------------------------------
+Using async profiler with JMH
+-----------------------------
 
 JMH tells you what is slow, but it doesn't tell you why. That's where the async profiler comes in. Async profiler is a low-overhead sampling profiler that can show you exactly where your application spends its time, down to the method.
 
@@ -307,8 +307,8 @@ In this real flame graph, you can immediately see the problem: an enormous amoun
 
 This is the kind of insight you can't get from JMH alone. JMH might tell you that your file processing benchmark is slow, but the flame graph shows you that the problem isn't reading or processing it's in cleanup operations that you might not have even considered measuring separately.
 
-Bonus: Linux tools {#h2-11-bonus-linux-tools}
----------------------------------------------
+Bonus: Linux tools
+------------------
 
 Perf is another great tool if you are working on Linux especially if you are working with native calls using JNI or foreign function API. Like many other tools, it shows you where your application spends most of its time.
 
@@ -356,8 +356,8 @@ nvme0n1          0,00      0,00     0,00   0,00    0,00     0,00   29,00    168,
 
 As I said, it shows you a lot of stats about the devices and what it is doing, it also shows the CPU usage. All this is to help you get an insight into what the system is doing.
 
-Conclusion {#h2-12-conclusion}
-------------------------------
+Conclusion
+----------
 
 JMH makes performance measurement a lot more exact and less guessing. By handling JVM optimizations, providing scores, and integrating with profiling tools, JMH gives you a lot of reliable insights into your application.
 

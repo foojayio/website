@@ -38,8 +38,8 @@ You can find all the code presented in this tutorial in the GitHub repository:
 ```
 
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this tutorial, you'll need:
 
@@ -55,8 +55,8 @@ Vector databases aid this process by storing text as numerical representations k
 
 <br />
 
-Step 1: Generate the Project {#h2-1-step-1-generate-the-project}
-----------------------------------------------------------------
+Step 1: Generate the Project
+----------------------------
 
 In this tutorial, we will build a JAX-RS application designed to answer questions using the context of a human resources policy. Users will be able to both ask questions and provide context through the resource. To begin, create a new project using Helidon, as in[the previous article](https://www.mongodb.com/community/forums/t/introduction-to-mongodb-and-helidon/303061/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=versioning-foojay&utm_term=hugh.murray). Visit[Helidon Starter](https://helidon.io/starter/), select Microprofile and Quickstart, then download the project.
 
@@ -108,8 +108,8 @@ After downloading the project, we will add the required dependencies, including 
 
 The next step is to add credentials, including the LLM provider and API key, to src/main/resources/META-INF/microprofile-config.properties. Please ensure you update the Open API key or MongoDB Atlas configuration as needed.
 
-Step 2: Create the Service {#h2-2-step-2-create-the-service}
-------------------------------------------------------------
+Step 2: Create the Service
+--------------------------
 
 With the project and credentials set up, we can begin by creating the agent that will serve as the bridge between Java and the LLM. Using Langchain4J with CDI, this can be achieved through a single interface. Our implementation will include one method to handle questions, utilizing SystemMessage for the prompt and UserMessage for user input.
 
@@ -346,8 +346,8 @@ public class HRPolicyLoader {
 ```
 
 
-Step 3: Create the producers {#h2-3-step-3-create-the-producers}
-----------------------------------------------------------------
+Step 3: Create the producers
+----------------------------
 
 The purpose of these producers is to demonstrate how to create and inject instances, or make them available to CDI containers. The following example uses the @Produces method in CDI.
 
@@ -503,8 +503,8 @@ class ContentRetrieverProducer {
 ```
 
 
-Step 4: Define Resources {#h2-4-step-4-define-resources}
---------------------------------------------------------
+Step 4: Define Resources
+------------------------
 
 The configuration, credentials, services, and producers are ready. The remaining step is to expose this service to users. We will use a REST API by creating a resource class with JAX-RS. This resource class will expose both question and context endpoints using the POST method. JAX-RS provides a straightforward API for our REST application, allowing us to easily identify operations through annotations such as POST for the HTTP verb and Path to define the URL.
 
@@ -564,8 +564,8 @@ public class HRPolicyResource {
 
 Once the application is running, you can test it locally or deploy it to a cloud environment. If testing locally, ensure your IP address is included to allow access to the MongoDB Atlas database.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 This tutorial showed how to implement Retrieval-Augmented Generation in Java using Jakarta EE, LangChain4j, and MongoDB Atlas. We demonstrated how to convert contextual information into embeddings, store them in a vector database, retrieve them through semantic similarity, and provide them to a Large Language Model for grounded responses. MongoDB Atlas adds value by keeping operational data, document content, metadata, and vector embeddings on a single managed platform. This reduces architectural complexity and enables scalable semantic search. As a result, Java applications can move beyond isolated AI integrations and use RAG to make organizational knowledge more accessible, up-to-date, and practical for business needs.
 

@@ -36,8 +36,8 @@ JSR 335 has greatly facilitated programming in a multicore environment by introd
 
 If Lambda Expressions had been integrated into the Collections API from the beginning, their development could have taken a different path. However, they have enriched the Collections API by introducing new methods to current interfaces and introducing new Interfaces such as **'Stream'**.
 
-Why Lambda Expressions? {#_why_lambda_expressions}
---------------------------------------------------
+Why Lambda Expressions?
+-----------------------
 
 Before the introduction of**Lambda Expressions**, developers commonly used ubiquitous anonymous inner classes, which were more verbose and overwhelming.
 
@@ -45,8 +45,8 @@ However, Lambda expressions are simplified, made more concise, and made it elega
 
 So,
 
-What is Lambda Expression? {#_what_is_lambda_expression}
---------------------------------------------------------
+What is Lambda Expression?
+--------------------------
 
 According to Oracle documentation, **a lambda expression is just a shorter way of writing an implementation of a method for later execution.**
 
@@ -112,8 +112,8 @@ And, Lambdas cannot modify local variables that are defined outside of their bod
 
 This concept of accessing variables is known as **capturing** : `lambdas have the ability to capture values, not variables`. A `final` variable essentially represents a value.
 
-2. Method References {#_2_method_references}
---------------------------------------------
+2. Method References
+--------------------
 
 Typically, developers utilize Lambda Expressions for writing business logic within parentheses or for invoking custom defined methods. On the other hand, Method References can serve as replacements for lambda expressions when there is an existing method available.
 
@@ -121,7 +121,7 @@ Using Method References can make your code more concise and often improve its re
 
 A lambda expression can be substituted with a method reference in the following situations:
 
-### 1. Static Method References {#_1_static_method_references}
+### 1. Static Method References
 
 Suppose you have the following Lambda Expression code:
 
@@ -141,7 +141,7 @@ names.sort(String::compareTo);
 
 In this instance, the `compareTo` method within the String class serves as a Method Reference for `String::compareTo`, effectively substituting the lambda expression `(str1, str2) -> str1.compareTo(str2)`.
 
-### 2. Instance Methods of a Particular Object or Unbounded Method Reference {#_2_instance_methods_of_a_particular_object_or_unbounded_method_reference}
+### 2. Instance Methods of a Particular Object or Unbounded Method Reference
 
 The general syntax of instance methods of a particular object:
 
@@ -182,7 +182,7 @@ names.sort(comparator::compareStrings);
 
 The method reference `comparator::compareStrings` refers to the compareStrings method of the comparator object, replacing the lambda expression `(str1, str2) -> comparator.compareStrings(str1, str2`. This substitution enhances the code's conciseness and readability.
 
-### 3. Instance Methods of a Particular Object or Bounded Method References {#_3_instance_methods_of_a_particular_object_or_bounded_method_references}
+### 3. Instance Methods of a Particular Object or Bounded Method References
 
 The general syntax for a bound method reference is `expression:instanceMethod`. In this syntax, `expression` represents an expression that yields an object, and `instanceMethod` denotes the name of an instance method.
 
@@ -202,7 +202,7 @@ Consumer<String> printer = System.out::println;
 ```
 
 
-### 4. Constructor Method References {#_4_constructor_method_references}
+### 4. Constructor Method References
 
 This is pretty straigthforward, for example
 
@@ -220,8 +220,8 @@ Supplier<List<String>> supplier = ArrayList::new;
 ```
 
 
-3. Functional Interfaces {#_3_functional_interfaces}
-----------------------------------------------------
+3. Functional Interfaces
+------------------------
 
 A **functional interface** is an interface that has only **Single Abstract Method (SAM)**.
 
@@ -343,8 +343,8 @@ System.out.println("The length of the string is: " + length);
 ```
 
 
-Key Benefits {#_key_benefits}
------------------------------
+Key Benefits
+------------
 
 * Improving Readability: Reducing boilerplate code enhances the clarity of the logic.
 * Increasing Efficiency: Writing less code accelerates the development process.

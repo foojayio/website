@@ -25,8 +25,8 @@ frozen: false
 
 Jakarta Concurrency is a small, but fundamental, specification under the Jakarta EE umbrella. As project lead, I provide more information on what it is, its future and how to be involved.
 
-Why Do We Need Concurrency? {#h2-0-why-do-we-need-concurrency}
---------------------------------------------------------------
+Why Do We Need Concurrency?
+---------------------------
 
 When programming in Java, you need to take into consideration the level of context for your application when you move between different threads. For example, if you've logged into a REST API and then need to create a task on a new thread, you need to retain the security context. To do this in [Java SE](https://www.oracle.com/java/technologies/downloads/), you use concurrency primitives: units of code related to concurrency, multithreading, and parallelism.  
 
@@ -38,7 +38,7 @@ Jakarta EE concurrency provides consistency between the Java SE and Jakarta EE p
 
 Jakarta EE aims to allow developers to concentrate on business logic code, taking away infrastructural and operational tasks. One of these tasks is thread management. Jakarta Concurrency, therefore, allows you to access these in a managed Jakarta EE runtime.
 
-### Use Case 1: Adding an Asynchronous Task in Your Application {#h3-1-use-case-1-adding-an-asynchronous-task-in-your-application}
+### Use Case 1: Adding an Asynchronous Task in Your Application
 
 Before Jakarta Concurrency, a Java EE developer would need to use JMS to build an asynchronous task into the application. A HTTP request coming in to a servlet or REST endpoint, and needing a long-running action in response, would require packaging the request info and pushing it into a JMS queue using a message driven bean. This is a heavyweight process.  
 
@@ -70,7 +70,7 @@ public class GenericResource {
 ```
 
 
-### Use Case 2: Running Tasks in Parallel {#h3-2-use-case-2-running-tasks-in-parallel}
+### Use Case 2: Running Tasks in Parallel
 
 You may have a REST request coming in, and want to run two tasks in parallel, merge the result and return it to a user. With Jakarta Concurrency you can inject the Managed Executor Service into your REST endpoint, and then you can use the Managed Executor API to submit two jobs at once. The method returns immediately and you get back an instance of Future class. You can get the outcome of the job by calling the *get()* method and merge it and then return to the user.  
 
@@ -98,8 +98,8 @@ public String getParallelJob() throws ExecutionException, InterruptedException {
 ```
 
 
-What Are The Main Components of Jakarta Concurrency? {#h2-3-what-are-the-main-components-of-jakarta-concurrency}
-----------------------------------------------------------------------------------------------------------------
+What Are The Main Components of Jakarta Concurrency?
+----------------------------------------------------
 
 * **Managed Executor Services.**Managed Executor Service in Jakarta EE maps on to Executor Service in Java SE, Managed Scheduled Executor Service maps on to Scheduled Executive Service (as you have seen in the use cases above). The API is the same, but the task is run in the context required for Jakarta EE.
 
@@ -111,14 +111,14 @@ What Are The Main Components of Jakarta Concurrency? {#h2-3-what-are-the-main-co
 
 * **Context Service.** Context Service enables you to wrap your *Runnable*, creating a contextual proxy to submit to any raw thread. It will establish all the context you expect, and therefore is useful for if you are using an API or library that has no knowledge of Jakarta EE but is spawning threads.
 
-Future Outlook of Jakarta Concurrency {#h2-4-future-outlook-of-jakarta-concurrency}
------------------------------------------------------------------------------------
+Future Outlook of Jakarta Concurrency
+-------------------------------------
 
 Jakarta Concurrency arrived in Java EE 7, in 2013. As with other specifications, it was moved into the Jakarta EE namespace with the [Jakarta EE 9](https://blog.payara.fish/jakarta-ee-9-is-here) release, and made compatible with Java SE 11 within [Jakarta EE 9.1](https://blog.payara.fish/jakarta-ee-9.1-launches). Now the transition is complete, it is in the place to start making substantial, functional changes to specifications.  
 
 Some of the ideas in development (available to view in[GitHub](https://github.com/eclipse-ee4j/concurrency-api)) are:
 
-### Deployable Managed Objects {#h3-5-deployable-managed-objects}
+### Deployable Managed Objects
 
 Currently all Managed Objects (other than the default ones) must be created by the application server administrator.  
 
@@ -126,18 +126,18 @@ Jakarta EE 9 has deployable application scoped data sources. What is suggested h
 
 If you have an application which really needs to have fine-grained control of the threading, concurrency and pooling of threads, this feature will allow you to set these processes up without needing administration consoles.
 
-### New @Asynchronous annotation {#h3-6-new-asynchronous-annotation}
+### New @Asynchronous annotation
 
 Currently there are annotations in Jakarta EE to indicate asynchronous execution, but they are quite specific to each individual specification. This suggested new annotation could be used with CDI Beans. Adding and being able to configure executor service pools will enable fine grained concurrency management when combined with deployable executor services. You could choose different thread pools for different methods, for example.  
 
 This new feature could eventually result in a single @Asynchronous annotation common to all the specifications. This would simplify the platform and make it more unified.
 
-### Catch up with java.until.concurrent {#h3-7-catch-up-with-java-until-concurrent}
+### Catch up with java.until.concurrent
 
 Jakarta Concurrency was released in Java EE 7, so has not been brought up to date to match concurrency primitives brought in with Java SE 9, 11 and 17. Some of these include support for the ForkJoinPool in a standard way, and updated APIs for current Java SE Managed Executor Services.
 
-Get Involved! {#h2-8-get-involved}
-----------------------------------
+Get Involved!
+-------------
 
 As the project lead of Jakarta Concurrency, my goal is not to define its future, but lead a community group that can drive the specification forwards. In short, I need your help to make the specification happen!  
 

@@ -20,7 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Java introduces several new language features in the 22 to 24 versions which collectively simplify code, enhance documentation, and provide powerful tools for bytecode manipulation and advanced stream processing. This article shows you how to leverage these new features with simple examples. {#h3-0-java-introduces-several-new-language-features-in-the-22-to-24-versions-which-collectively-simplify-code-enhance-documentation-and-provide-powerful-tools-for-bytecode-manipulation-and-advanced-stream-processing-this-article-shows-you-how-to-leverage-these-new-features-with-simple-examples}
+### Java introduces several new language features in the 22 to 24 versions which collectively simplify code, enhance documentation, and provide powerful tools for bytecode manipulation and advanced stream processing. This article shows you how to leverage these new features with simple examples.
 
 Understanding these new features in Java is crucial for writing updated, efficient, and high quality code. To assist developers in adopting these changes correctly, SonarQube has introduced [several new rules](https://rules.sonarsource.com/java/tag/java22) designed to check for the proper usage of unnamed variables and patterns, javadoc and markdown, Class-file new API and Stream gatherers, ensuring your code adheres to best practices and avoids common pitfalls.
 
@@ -38,7 +38,7 @@ By replacing these placeholder names with a simple underscore, developers can re
 
 SonarQube introduces a suite of new rules to ensure proper adoption of Java 22's unnamed variables and patterns. These rules --- including [S7466](https://rules.sonarsource.com/java/RSPEC-7466/), [S7467](https://rules.sonarsource.com/java/RSPEC-7467), and [S7475](https://rules.sonarsource.com/java/RSPEC-7475) --- guide developers in leveraging this feature for more maintainable code. Adhering to these guidelines enables teams to significantly improve code clarity and address redundant warnings.
 
-### **Rule S7466: Unnamed variable declarations should use the `var` identifier** {#h3-1-rule-s7466-unnamed-variable-declarations-should-use-the-var-identifier}
+### **Rule S7466: Unnamed variable declarations should use the `var` identifier**
 
 When declaring an unnamed variable, the type declaration often becomes redundant. The primary purpose of an unnamed variable is to signal that it won't be used, making its specific type less critical. Using `var` in this context enhances conciseness and maintains focus on the intent: to intentionally ignore the variable.
 
@@ -82,7 +82,7 @@ By using `var`, the code becomes less verbose and the intent remains clear.
 
 
 
-### **Rule S7467: Unused exception parameters should use the unnamed variable pattern** {#h3-2-rule-s7467-unused-exception-parameters-should-use-the-unnamed-variable-pattern}
+### **Rule S7467: Unused exception parameters should use the unnamed variable pattern**
 
 A common scenario in Java is catching an exception where the exception object itself is not needed. Previously, developers would have to declare the exception variable, even if it was never referenced, leading to "unused variable" warnings from static analysis tools. Java 22's unnamed variables provide a perfect solution for this.
 
@@ -116,7 +116,7 @@ This compliant solution is cleaner and explicitly communicates that the exceptio
 
 
 
-### **Rule S7475: Types of unused record components should be removed from pattern matching** {#h3-3-rule-s7475-types-of-unused-record-components-should-be-removed-from-pattern-matching}
+### **Rule S7475: Types of unused record components should be removed from pattern matching**
 
 Record patterns, a powerful feature for deconstructing record instances, are also enhanced by unnamed patterns. When pattern matching against a record, you might only be interested in a subset of its components. With unnamed patterns, you can ignore the components you don't need.
 
@@ -169,7 +169,7 @@ SonarQube has introduced new rules to assist developers in adopting Java 23's Ja
 
 By leveraging these rules, developers can seamlessly integrate Markdown into their Javadoc comments to improve clarity and maintainability, ensuring that the old code is completely aligned with the new features.
 
-### **Rule S7476: Comments should not start with more than two slashes** {#h3-4-rule-s7476-comments-should-not-start-with-more-than-two-slashes}
+### **Rule S7476: Comments should not start with more than two slashes**
 
 With Java 23, comments starting with `///` are now officially interpreted as Javadoc comments that use Markdown syntax. Before, they were simply ignored by the Javadoc tool and treated as regular implementation comments.
 
@@ -211,7 +211,7 @@ public class Calculator {
 
 The compliant solution is to ensure regular comments use the standard `//` syntax.
 
-### **Rule S7474: Markdown, HTML and Javadoc tags should not be mixed** {#h3-5-rule-s7474-markdown-html-and-javadoc-tags-should-not-be-mixed}
+### **Rule S7474: Markdown, HTML and Javadoc tags should not be mixed**
 
 Java 23's introduction of Markdown in Javadoc comments is a significant step towards cleaner, more readable documentation.
 
@@ -263,7 +263,7 @@ SonarQube provides a new set of rules to help developers effectively utilize the
 
 Adhering to these guidelines helps developers avoid common pitfalls and leverage the full potential of Java 24's Class-File API.
 
-### **Rule S7479: `withMethodBody` should be used to define methods with a body** {#h3-6-rule-s7479-withmethodbody-should-be-used-to-define-methods-with-a-body}
+### **Rule S7479: `withMethodBody` should be used to define methods with a body**
 
 The new Class-File API ([JEP 484](https://openjdk.org/jeps/484)) provides a standardized and flexible way to programmatically generate and modify Java class files. When building a class, the `ClassBuilder` API offers two similar methods for adding a method: `withMethod` and `withMethodBody`.
 
@@ -309,7 +309,7 @@ The compliant solution uses `withMethodBody`, which directly accepts the code-bu
 
 
 
-### **Rule S7477: The simpler `transformClass` overload should be used when the class name is unchanged** {#h3-7-rule-s7477-the-simpler-transformclass-overload-should-be-used-when-the-class-name-is-unchanged}
+### **Rule S7477: The simpler `transformClass` overload should be used when the class name is unchanged**
 
 The Class-File API, introduced in Java via [JEP 484](https://openjdk.org/jeps/484), provides powerful methods for transforming class files. Among these is the `transformClass` method, which comes in several overloaded versions to handle different use cases.
 
@@ -356,7 +356,7 @@ public static void transformClassFile(Path path) throws IOException {
 
 The compliant solution uses the simpler, two-argument overload of `transformClass`. By removing the redundant class name parameter, the code becomes more direct and effectively communicates that the transformation modifies the class in place without renaming it.
 
-### **Rule S7478: `transformClass` should be used to modify existing classes** {#h3-8-rule-s7478-transformclass-should-be-used-to-modify-existing-classes}
+### **Rule S7478: `transformClass` should be used to modify existing classes**
 
 The Class-File API ([JEP 484](https://openjdk.org/jeps/484)) provides developers with two primary methods for generating class files: `build` and `transformClass`. While `build` is a general-purpose tool for creating a class from scratch, `transformClass` is specifically designed for the common task of modifying an existing class.
 
@@ -417,7 +417,7 @@ SonarQube continues its commitment to code quality by introducing new rules spec
 
 They ensure that your custom intermediate stream operations are implemented efficiently and clearly, promoting best practices and helping to avoid common pitfalls associated with stateful and stateless gatherers, leading to more robust and readable stream pipelines.
 
-### **Rule S7481: Sequential gatherers should use `Gatherer.ofSequential`** {#h3-9-rule-s7481-sequential-gatherers-should-use-gatherer-ofsequential}
+### **Rule S7481: Sequential gatherers should use `Gatherer.ofSequential`**
 
 The introduction of Stream Gatherers ([JEP 461](https://openjdk.org/jeps/461)) in Java provides a powerful way to create custom intermediate operations in stream pipelines. When creating a gatherer, the API offers two main factories: `Gatherer.of(...)` for gatherers that can be used in both sequential and parallel streams, and `Gatherer.ofSequential(...)` for those designed exclusively for sequential processing.
 
@@ -470,7 +470,7 @@ public static List<Integer> diffWithFirstPositive(List<Integer> list) {
 
 By switching to `Gatherer.ofSequential`, the code becomes more obvious about its intent. It clearly communicates that the operation is sequential-only and eliminates the unnecessary and misleading throwing combiner, resulting in a cleaner implementation.
 
-### **Rule S7482: Stateless gatherers should be created without a null initializer** {#h3-10-rule-s7482-stateless-gatherers-should-be-created-without-a-null-initializer}
+### **Rule S7482: Stateless gatherers should be created without a null initializer**
 
 Stream Gatherers can be either stateful---maintaining a state across elements---or stateless, processing each element independently. For stateless gatherers, there is no need to initialize a state object. The `java.util.stream.Gatherer` API reflects this distinction by providing overloaded factory methods, including versions that do not take an `initializer` function.
 

@@ -27,16 +27,16 @@ But the range of possible status codes is much broader than that and can improve
 
 While many discussions about REST focus on entities and methods, using the correct response status codes can make your API stand out.
 
-201: Created {#h2-0-201-created}
---------------------------------
+201: Created
+------------
 
 Many applications allow creating entities: accounts, orders, what have you. In general, one uses HTTP status code 200 is used, and that's good enough. However, the **201** code is more specific and fits better:
 > The HTTP `201 Created` success status response code indicates that the request has succeeded and has led to the creation of a resource. The new resource is effectively created before this response is sent back. and the new resource is returned in the body of the message, its location being either the URL of the request, or the content of the `Location` header.
 >
 > -- [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201)
 
-205: Reset Content {#h2-1-205-reset-content}
---------------------------------------------
+205: Reset Content
+------------------
 
 Form-based authentication can either succeed or fail. When failing, the usual behavior is to display the form again with all fields cleared.
 
@@ -45,8 +45,8 @@ Guess what? The **205** status code is dedicated to that:
 >
 > -- [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/205)
 
-428: Precondition Required {#h2-2-428-precondition-required}
-------------------------------------------------------------
+428: Precondition Required
+--------------------------
 
 When using [Optimistic Locking](https://en.wikipedia.org/wiki/Optimistic_concurrency_control), validation might fail during an update because data has already been updated by someone else. By default, frameworks (such as Hibernate) throw an exception in that case. Developers, in turn, catch it and display a nice information box asking to reload the page and re-enter data.
 
@@ -59,8 +59,8 @@ The code describes exactly the conflict case in optimistic locking!
 
 Note that [RFC 6585](https://tools.ietf.org/html/rfc6585#section-3) mentions the word **conditional** and shows an example using the `If-Match` header. However, it doesn't state exactly how to achieve that condition.
 
-409: Conflict {#h2-3-409-conflict}
-----------------------------------
+409: Conflict
+-------------
 
 Interestingly enough, the *409* code states:
 > The HTTP `409 Conflict` response status code indicates a request conflict with current state of the server.
@@ -69,8 +69,8 @@ Interestingly enough, the *409* code states:
 
 It can also apply to the previous case but is more general. For example, a typical use case would be to update a resource that has been deleted.
 
-410: Gone {#h2-4-410-gone}
---------------------------
+410: Gone
+---------
 
 Most of the time, when you `GET` a resource that is not found, the server returns a 404 code. What if the resource existed before but doesn't anymore? Interestingly enough, there's an alternative for a particular use case: The semantics of the returned HTTP code could tell that. That is precisely the reason for 410.
 > The HTTP `410 Gone` client error response code indicates that access to the target resource is no longer available at the origin server and that this condition is likely to be permanent.
@@ -79,8 +79,8 @@ Most of the time, when you `GET` a resource that is not found, the server return
 >
 > -- [MDN web docs](https://developer.mozilla.org/en/docs/Web/HTTP/Status/410)
 
-300: Multiple choices {#h2-5-300-multiple-choices}
---------------------------------------------------
+300: Multiple choices
+---------------------
 
 WARNING: This one seems a bit far-fetched, but the IETF specification fits the case.
 
@@ -122,8 +122,8 @@ No regular resource is present at this location. The server provides a set of re
 >
 > -- [IETF HTTP 1.1: Semantics and Content](https://tools.ietf.org/html/rfc7231#section-6.4.1)
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Generally, specific HTTP statuses only make sense when having a REST backend accessed by a JavaScript frontend. For example, resetting the form (205) doesn't make sense if the server generates the page.
 

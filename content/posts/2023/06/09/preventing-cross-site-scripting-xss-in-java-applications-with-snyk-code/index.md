@@ -33,8 +33,8 @@ It is, therefore, essential for developers to take steps to ensure the security 
 
 A solution like the one below is an easy way to implement a server-side rendered page without any fancy framework that normally comes with specific instructions. However, there are obviously some downsides to this method.
 
-Writing HTML output in Spring MVC without a templating framework {#h2-0-writing-html-output-in-spring-mvc-without-a-templating-framework}
------------------------------------------------------------------------------------------------------------------------------------------
+Writing HTML output in Spring MVC without a templating framework
+----------------------------------------------------------------
 
 Suppose you have a web application that takes a product's name and displays it on a web page using the `HttpServletResponse` object. Here's an example of how you might implement this feature in a Spring MVC controller:
 
@@ -66,8 +66,8 @@ Suppose you have a web application that takes a product's name and displays it o
 
 Can you figure out what sorts of security vulnerabilities may be introduced with the above Java code?
 
-Finding XSS with Snyk Code {#h2-1-finding-xss-with-snyk-code}
--------------------------------------------------------------
+Finding XSS with Snyk Code
+--------------------------
 
 When closely looking at the function above, you might already recognize at least one XSS vulnerability and maybe even two. When scanning my application with [++Snyk Code++](https://snyk.io/product/snyk-code/) we get notified of two different XSS problems in this method.
 
@@ -88,7 +88,7 @@ Web UI output:
 
 All three different scanning options show me that there are two distinct XSS security issues I need to address --- with Snyk Code pinpointing their exact location in my code. Let's break them down and see how we can mitigate them.
 
-### Reflective XSS {#h3-2-reflective-xss}
+### Reflective XSS
 
 Reflective XSS is a type of XSS attack that occurs when a user injects malicious code into a web application that is then reflected back to the user as part of a response. In the example I provided, if the user input was not properly validated or sanitized before being written to the response, a malicious user could inject a script that would be executed by other users who view the web page. This type of XSS attack is often used to steal user data, modify website content, or perform other malicious actions.
 
@@ -105,7 +105,7 @@ For instance: `.../direct?param=<script>alert(document.cookie);</script>` might 
 
 Snyk Code caught this mistake for me by pointing out the XSS on line 93.
 
-### Stored XSS {#h3-3-stored-xss}
+### Stored XSS
 
 Stored XSS, on the other hand, is a type of XSS attack where the malicious code is stored on the server and then served to all users who access the affected page. In the example I provided, if the user input was not properly validated or sanitized and was instead stored in a database, a malicious user could inject a script that would be served to all users who view the affected page. This type of XSS attack can be particularly dangerous because it can affect a large number of users and may persist even after the initial injection has been fixed.
 
@@ -113,8 +113,8 @@ The code above retrieves a product from the `ProductService` and then displays t
 
 Snyk Code pointed out this potential XSS problem on line 103, where we insert the `product.description` into the output String without validating or sanitizing it.
 
-Mitigating XSS vulnerabilities with Snyk Code {#h2-4-mitigating-xss-vulnerabilities-with-snyk-code}
----------------------------------------------------------------------------------------------------
+Mitigating XSS vulnerabilities with Snyk Code
+---------------------------------------------
 
 To prevent XSS vulnerabilities, it is important to properly validate and sanitize user input before writing it to the response. Snyk Code already helps us by pointing out possible solutions. One way to do this is to use a library like [++Apache Commons Text++](https://commons.apache.org/proper/commons-text/)to encode the input and prevent malicious code from being executed.
 ![blog-preventing-xss-string-path](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1682439081%2Fblog-preventing-xss-string-path.jpg&w=2560&q=75)
@@ -152,7 +152,7 @@ When using Apache Commons text, the properly escaped code could look like this:
 ```
 
 
-### Be careful with templating frameworks {#h3-5-be-careful-with-templating-frameworks}
+### Be careful with templating frameworks
 
 Templating frameworks like Thymeleaf can help protect agains XSS vulnerabilities. Thymeleaf is a popular templating engine for Java that includes built-in support for HTML escaping, which helps prevent XSS attacks by encoding any user input that is included in the rendered HTML.
 
@@ -170,8 +170,8 @@ However it strongly depends on how you create the template. For example, here's 
 
 In this example, the `th:text` attributes will be escaped, but the `th:utext` attribute won't. This `th:utext` attribute renders the comment text without escaping any HTML tags or special characters and is potentially vulnerable to XSS. When using a particular framework, knowing how certain elements behave is essential.
 
-Catching XSS before you deploy to production {#h2-6-catching-xss-before-you-deploy-to-production}
--------------------------------------------------------------------------------------------------
+Catching XSS before you deploy to production
+--------------------------------------------
 
 Preventing XSS attacks is a critical concern for developers working on Java web applications.
 

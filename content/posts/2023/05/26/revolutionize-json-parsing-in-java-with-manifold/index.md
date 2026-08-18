@@ -33,8 +33,8 @@ Manifold is a revolutionary set of language extensions for Java that completely 
 
 <br />
 
-Getting Started with Manifold {#h2-0-getting-started-with-manifold}
--------------------------------------------------------------------
+Getting Started with Manifold
+-----------------------------
 
 The code for this tutorial can be found on my [GitHub page](https://github.com/shai-almog/java-book/). Manifold is relatively young but already vast in its capabilities. You can learn more about the project on their website and Slack channel.
 
@@ -46,7 +46,7 @@ We can install the plugin from IntelliJ/IDEAs settings UI by navigating to the m
 
 Manifold consists of multiple smaller projects, each offering a custom language extension. Today, we'll discuss one such extension, but there's much more to explore.
 
-### Setting Up a Maven Project {#h3-1-setting-up-a-maven-project}
+### Setting Up a Maven Project
 
 To demonstrate Manifold, we'll use a simple Maven project (it also works with Gradle). We first need to paste the current Manifold version from their website and add the necessary dependencies. The main dependency for JSON is the `manifold-json-rt` dependency. Other dependencies can be added for YAML, XML, and CSV support. We need to add this to the `pom.xml` file in the project.
 
@@ -105,8 +105,8 @@ The compilation plugin is the boilerplate that weaves Manifold into the bytecode
 
 With the setup complete, let's dive into the code.
 
-Parsing JSON with Manifold {#h2-2-parsing-json-with-manifold}
--------------------------------------------------------------
+Parsing JSON with Manifold
+--------------------------
 
 We place a sample JSON file in the project directory under the resources hierarchy. I placed this file under `src/main/resources/com/debugagent/json/Test.json`:
 
@@ -228,8 +228,8 @@ details:
 ```
 
 
-Working with JSON Schema {#h2-3-working-with-json-schema}
----------------------------------------------------------
+Working with JSON Schema
+------------------------
 
 Manifold also works seamlessly with JSON schema, allowing you to enforce strict rules and constraints. This is particularly useful when working with dates and enums. Manifold seamlessly creates/updates byte code that adheres to the schema, making it much easier to work with complex JSON data.
 
@@ -289,8 +289,8 @@ User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf
 
 That can be made even shorter with static imports but the gist of the idea is clear. JSON is effectively native to Java in Manifold.
 
-The Tip of The Iceberg {#h2-4-the-tip-of-the-iceberg}
------------------------------------------------------
+The Tip of The Iceberg
+----------------------
 
 Manifold is a powerful and exciting project. It revolutionizes JSON parsing in Java but that's just one tiny portion of what it can do!
 

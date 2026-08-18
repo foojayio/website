@@ -29,8 +29,8 @@ Last year, I wrote a [post](https://blog.frankel.ch/end-to-end-tracing-opentelem
 
 I've recently improved the demo to deepen my understanding and want to share my learning.
 
-Using a regular database {#h2-0-using-a-regular-database}
----------------------------------------------------------
+Using a regular database
+------------------------
 
 In the initial demo, I didn't bother with a regular database. Instead:
 
@@ -42,8 +42,8 @@ I replaced all of them with a regular PostgreSQL database, with a dedicated sche
 
 The OpenTelemetry agent added a new span when connecting to the database on the JVM and in Python. For the JVM, it's automatic when one uses the Java agent. One needs to install the relevant package in Python - see next section.
 
-OpenTelemetry integrations in Python libraries {#h2-1-opentelemetry-integrations-in-python-libraries}
------------------------------------------------------------------------------------------------------
+OpenTelemetry integrations in Python libraries
+----------------------------------------------
 
 Python requires you to explicitly add the package that instruments a specific library for OpenTelemetry. For example, the demo uses Flask; hence, we should add the Flask integration package. However, it can become a pretty tedious process.
 
@@ -79,8 +79,8 @@ The above setup adds a new automated trace for connections.
 
 ![](connect-span-1024x511.jpg)
 
-Gunicorn on Flask {#h2-2-gunicorn-on-flask}
--------------------------------------------
+Gunicorn on Flask
+-----------------
 
 Every time I started the Flask service, it showed a warning in red that it shouldn't be used in production. While it's unrelated to OpenTelemetry, and though nobody complained, I was not too fond of it. For this reason, I added a "real" HTTP server. I chose [Gunicorn](https://gunicorn.org/), for no other reason than because my knowledge of the Python ecosystem is still shallow.
 
@@ -99,8 +99,8 @@ ENTRYPOINT ["opentelemetry-instrument", "gunicorn", "-b", "0.0.0.0", "-w", "4", 
 
 Gunicorn usage doesn't impact OpenTelemetry integrations.
 
-Heredocs for the win {#h2-3-heredocs-for-the-win}
--------------------------------------------------
+Heredocs for the win
+--------------------
 
 You may benefit from this if you write a lot of `Dockerfile`.
 
@@ -138,8 +138,8 @@ EOF
 
 Heredocs are a great way to have more readable and more optimized Dockerfiles. Try them!
 
-Explicit API call on the JVM {#h2-4-explicit-api-call-on-the-jvm}
------------------------------------------------------------------
+Explicit API call on the JVM
+----------------------------
 
 In the initial demo, I showed two approaches:
 
@@ -188,14 +188,14 @@ span.end()                                                             //6
 5. Start the span
 6. End the span; after this step, send the data to the OpenTelemetry endpoint configured
 
-Adding a message queue {#h2-5-adding-a-message-queue}
------------------------------------------------------
+Adding a message queue
+----------------------
 
 When I did the talk based on the post, attendees frequently asked whether OpenTelemetry would work with messages such as MQ or Kafka. While I thought it was the case in theory, I wanted to make sure of it: I added a message queue in the demo under the pretense of analytics.
 
 The Kotlin service will publish a message to an MQTT topic on each request. A NodeJS service will subscribe to the topic.
 
-### Attaching OpenTelemetry data to the message {#h3-6-attaching-opentelemetry-data-to-the-message}
+### Attaching OpenTelemetry data to the message
 
 So far, OpenTelemetry automatically reads the context to find out the trace ID and the parent span ID. Whatever the approach, auto-instrumentation or manual, annotations-based or explicit, the library takes care of it. I didn't find any existing similar automation for messaging; we need to code our way in. The gist of OpenTelemetry is the `traceparent` HTTP header. We need to read it and send it along with the message.
 
@@ -240,7 +240,7 @@ client.publish(mqtt.options, message)                                           
 5. Create the client
 6. Publish the message
 
-### Getting OpenTelemetry data from the message {#h3-7-getting-opentelemetry-data-from-the-message}
+### Getting OpenTelemetry data from the message
 
 The subscriber is a new component based on NodeJS.
 
@@ -296,8 +296,8 @@ client.on('message', (aTopic, payload, packet) => {
 
 For the record, I tried to migrate to TypeScript, but when I did, I didn't receive the message. Help or hints very welcome!
 
-Apache APISIX for messaging {#h2-8-apache-apisix-for-messaging}
----------------------------------------------------------------
+Apache APISIX for messaging
+---------------------------
 
 Though it's not common knowledge, Apache APISIX can proxy HTTP calls as well as UDP and TCP messages. It only offers a few plugins at the moment, but it will add more in the future. An OpenTelemetry one will surely be part of it. In the meantime, let's prepare for it.
 
@@ -341,8 +341,8 @@ stream_routes:                                                                  
 
 Finally, we can replace the MQTT URLs in the Docker Compose file with APISIX URLs.
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 I've described several items I added to improve my OpenTelemetry demo in this post. While most are indeed related to OpenTelemetry, some of them aren't. I may add another component in another different stack, a front-end.
 

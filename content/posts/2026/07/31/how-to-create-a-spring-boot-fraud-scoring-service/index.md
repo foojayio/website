@@ -34,10 +34,10 @@ Expect to spend as much time on operational concerns --- dependency resolution i
 
 Plan around two hours for working through the scenario below!
 
-Step 1 --- Get the original example running {#h2-0-step-1-get-the-original-example-running}
--------------------------------------------------------------------------------------------
+Step 1 --- Get the original example running
+-------------------------------------------
 
-### 1.1 Install Deep Netts into your local Maven repository {#h3-1-1-1-install-deep-netts-into-your-local-maven-repository}
+### 1.1 Install Deep Netts into your local Maven repository
 
 Deep Netts Pro is not on Maven Central, you need it for this scenario, and it is free (unless the annual revenue generated through the product is over USD 100,000 and the total company revenue is over USD 1,000,000, as explained in step 11 "Licensing, before you go live", below).
 
@@ -56,7 +56,7 @@ ls ~/.m2/repository/com/deepnetts/
 ```
 
 
-### 1.2 Clone and run the example {#h3-2-1-2-clone-and-run-the-example}
+### 1.2 Clone and run the example
 
 ```
 git clone https://github.com/deepnetts/CreditCardFraudDetection.git
@@ -78,7 +78,7 @@ The project's `pom.xml` declares:
 
 Get this running before you write a line of Spring code. If the license jar isn't resolving, nothing downstream will work and you'll waste an hour blaming Spring.
 
-### 1.3 Understand what's in the data {#h3-3-1-3-understand-what-s-in-the-data}
+### 1.3 Understand what's in the data
 
 Two files ship with the repo:
 
@@ -93,8 +93,8 @@ Training on the balanced file is the standard starting move, but understand the 
 
 
 
-Step 2 --- Make the split deterministic {#h2-4-step-2-make-the-split-deterministic}
------------------------------------------------------------------------------------
+Step 2 --- Make the split deterministic
+---------------------------------------
 
 The example splits data at runtime with a random shuffle. For a service, you need to persist a scaler alongside the model, and the scaler's parameters must come from *exactly* the training rows --- not a fresh random split. So split once, to files, and keep them.
 
@@ -162,8 +162,8 @@ Run it once. Commit the seed, not the CSVs.
 
 
 
-Step 3 --- Train and export a deployable artifact {#h2-5-step-3-train-and-export-a-deployable-artifact}
--------------------------------------------------------------------------------------------------------
+Step 3 --- Train and export a deployable artifact
+-------------------------------------------------
 
 Training produces **two** files. Everyone remembers the model. The forgotten one causes most production incidents.
 
@@ -262,8 +262,8 @@ Ship `fraud-model.dnet` and `scaler.json` as a pair, versioned together, always.
 
 
 
-Step 4 --- Pick a threshold (do not use 0.5) {#h2-6-step-4-pick-a-threshold-do-not-use-0-5}
--------------------------------------------------------------------------------------------
+Step 4 --- Pick a threshold (do not use 0.5)
+--------------------------------------------
 
 Before writing any Spring code, decide what score means "fraud". Add this to the end of training:
 
@@ -293,8 +293,8 @@ Remember the calibration caveat from step 1.3: a model trained on a balanced set
 
 
 
-Step 5 --- Create the Spring Boot project {#h2-7-step-5-create-the-spring-boot-project}
----------------------------------------------------------------------------------------
+Step 5 --- Create the Spring Boot project
+-----------------------------------------
 
 ```
 curl https://start.spring.io/starter.zip \
@@ -346,8 +346,8 @@ Copy `fraud-model.dnet` and `scaler.json` into `src/main/resources/model/`.
 
 
 
-Step 6 --- Load the model and scaler {#h2-8-step-6-load-the-model-and-scaler}
------------------------------------------------------------------------------
+Step 6 --- Load the model and scaler
+------------------------------------
 
 `FraudProperties.java`:
 
@@ -443,8 +443,8 @@ Two things that matter here:
 
 
 
-Step 7 --- Scaler and scoring service {#h2-9-step-7-scaler-and-scoring-service}
--------------------------------------------------------------------------------
+Step 7 --- Scaler and scoring service
+-------------------------------------
 
 `Scaler.java`:
 
@@ -531,8 +531,8 @@ public class ScoringUnavailableException extends RuntimeException {
 
 
 
-Step 8 --- The REST layer {#h2-10-step-8-the-rest-layer}
---------------------------------------------------------
+Step 8 --- The REST layer
+-------------------------
 
 Thirty positional floats in a JSON array is a terrible public contract --- one silently reordered field and the model reads `Amount` as `V7`. Name the fields.
 
@@ -613,8 +613,8 @@ curl -X POST localhost:8080/api/v1/transactions/score \
 
 
 
-Step 9 --- Health check and tests {#h2-11-step-9-health-check-and-tests}
-------------------------------------------------------------------------
+Step 9 --- Health check and tests
+---------------------------------
 
 A health check that only reports "the bean exists" tells you nothing. Run a known vector through the model:
 
@@ -676,8 +676,8 @@ Also worth adding: a concurrency test that fires the same vector from 50 threads
 
 
 
-Step 10 --- Package and deploy {#h2-12-step-10-package-and-deploy}
-------------------------------------------------------------------
+Step 10 --- Package and deploy
+------------------------------
 
 **Model location.** Bundling `.dnet` into the jar is simplest and gives you immutable, atomically-deployed builds. It also means every retrain is a full app deploy. The alternative --- mount from a volume or pull from S3 at startup --- decouples the two but demands you version the model/scaler pair rigorously and handle a bad artifact at boot. Start bundled; move it out when retrain frequency actually hurts.
 
@@ -705,8 +705,8 @@ Deep Netts is pure Java, so everything lives on the heap --- no off-heap surpris
 
 
 
-Step 11 --- Licensing, before you go live {#h2-13-step-11-licensing-before-you-go-live}
----------------------------------------------------------------------------------------
+Step 11 --- Licensing, before you go live
+-----------------------------------------
 
 The free tier is genuinely restrictive for a service like this. It permits deployment in **no more than one production environment** , requires annual revenue generated through the product under **USD 100,000** and total company revenue under **USD 1,000,000** , and explicitly prohibits use to operate or enable any hosted AI platform, managed service, or **SaaS offering**.
 
@@ -714,8 +714,8 @@ An internal fraud-scoring service inside a single production environment at a sm
 
 
 
-Step 12 --- What you still need for production {#h2-14-step-12-what-you-still-need-for-production}
---------------------------------------------------------------------------------------------------
+Step 12 --- What you still need for production
+----------------------------------------------
 
 The service works now. These are the things that separate it from a demo:
 
@@ -727,8 +727,8 @@ The service works now. These are the things that separate it from a demo:
 
 
 
-Reference: project layout {#h2-15-reference-project-layout}
------------------------------------------------------------
+Reference: project layout
+-------------------------
 
 ```
 fraud-service/

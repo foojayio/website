@@ -22,7 +22,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Hello to all Java and Spring enthusiasts. I am the Java Template Engine, a fresh newcomer to the Spring Initializer Ecosystem. {#h3-0-hello-to-all-java-and-spring-enthusiasts-i-am-the-java-template-engine-a-fresh-newcomer-to-the-spring-initializer-ecosystem}
+### Hello to all Java and Spring enthusiasts. I am the Java Template Engine, a fresh newcomer to the Spring Initializer Ecosystem.
 
 I have gained popularity as a template engine for developing user interface applications that use Java syntax within Spring Boot applications, alongside other engines such as Freemarker, Thymeleaf, Mustache, and Velocity. Many developers widely use Spring Boot, a framework that simplifies Java application development, and incorporating a template engine like mine streamlines the process of creating dynamic and responsive user interfaces.
 
@@ -58,7 +58,7 @@ I am pleased to present the following features that I offer:
 
 The respective build tools need to integrate the following dependency in the `pom.xml` and `build.gradle`. For,
 
-### Maven {#h3-1-maven}
+### Maven
 
 ```
 <dependency>
@@ -69,7 +69,7 @@ The respective build tools need to integrate the following dependency in the `po
 ```
 
 
-### Gradle {#_maven}
+### Gradle
 
 ```
 implementation("gg.jte:jte:3.1.13")
@@ -319,15 +319,15 @@ gg.jte.templateSuffix=.jte
 
 As we are developing with Spring Boot and incorporating the `spring-boot-starter-web starter`, both `org.springframework.web.servlet.ViewResolver` and **templateEngine** will be automatically configured.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 By integrating the **Java Template Engine (JTE)** into various frameworks, one can experience a novel approach that provides significant benefits, including superior performance, increased concurrency, and quicker template rendering.
 
 The complete code can be found [over on Github](https://github.com/bsmahi/spring-boot-jte).
 
-References {#h2-4-references}
------------------------------
+References
+----------
 
 <https://jte.gg>
 

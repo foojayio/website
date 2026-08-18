@@ -39,8 +39,8 @@ Some (most?) people I know planned or already had moved away. The target seems t
 
 Forewarned is forearmed. I plan to stay on Twitter as long as possible while building up my Mastodon account with the same content. Then, if (when?) all hell breaks loose, I can just jump ship.
 
-Evaluating the alternatives {#h2-0-evaluating-the-alternatives}
----------------------------------------------------------------
+Evaluating the alternatives
+---------------------------
 
 Let's state things clearly: I believe I'm a good developer because I'm lazy. There's no way I'm going to copy-paste content on both channels. Plus, I'm using Twitter's scheduling feature, so I need something else.
 
@@ -54,8 +54,8 @@ There's no way I'd give my credentials to a third party! I searched further and 
 
 It looked exactly what I was searching for!
 
-Mastodon Twitter Sync {#h2-1-mastodon-twitter-sync}
----------------------------------------------------
+Mastodon Twitter Sync
+---------------------
 
 The tool provides two execution options:
 
@@ -99,7 +99,7 @@ jobs:
 4. The toolchain comes in different flavors called [profiles](https://rust-lang.github.io/rustup/concepts/profiles.html). For scripting, `minimal` is enough, providing only `rustc`, `rust-std`, and `cargo`
 5. Run the code
 
-### Managing credentials {#h3-2-managing-credentials}
+### Managing credentials
 
 Spoiler: the workflow doesn't work. By default, the code runs interactively: it will ask for credentials to connect to both Twitter and Mastodon. Alternatively, the project accepts a configuration file containing all data - `mastodon-twitter-sync.toml`.
 
@@ -201,7 +201,7 @@ jobs:
 1. Decrypt from the `job` subfolder in the current root folder
 2. Run in the current folder using the `code` subfolder
 
-### Sync only once {#h3-3-sync-only-once}
+### Sync only once
 
 The project creates a `post_cache.json` file that contains all previously synced content to avoid duplicating the same content during each execution. We need to take it into account:
 
@@ -225,7 +225,7 @@ jobs:
 1. Copy the `post_cache.json` in the `job` subfolder. Only succeed the step if the job synchronizes no content, and the file is generated.
 2. Commit back the file if it has changed
 
-### Workflow optimization {#h3-4-workflow-optimization}
+### Workflow optimization
 
 In the current state, each run downloads the dependencies and compiles the project, even though the source code stays the code; it's highly inefficient.
 
@@ -251,7 +251,7 @@ jobs:
 1. Must be installed after Rust install, as the cache key contains Rust-specific data
 2. Cache artifacts located in the `code` subfolder
 
-### Final notes {#h3-5-final-notes}
+### Final notes
 
 With this setup, I need to update the repo with the new JSON cache file before I commit any change to the workflow. I could create a dedicated repo for it to improve the situation, but it's good enough for now.
 
@@ -286,8 +286,8 @@ It's not an issue *per se*; it just means that synchronization lags. Should I mo
 
 So far, I've kept Twitter as my source of truth. I post content there, and it should appear on Mastodon. However, synchronization should happen both ways. Once I make Mastodon my main channel, I don't need to change the above work.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Twitter's new owner claims to promote "comedy" but suspends accounts that make fun of him. At the same time, he claims to be a proponent of free speech but confuses opinion with information. The advertising market may curb his misguided views, but it's still being determined.
 

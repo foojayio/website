@@ -28,8 +28,8 @@ See how FEPCOS-J relieves developers of the network programming required to impl
 #FepcosJ_video1, #FepcosJ.](fuchs2024FepcosJ_video1-512x512-1.png)](https://youtu.be/qtPP7kZbriQ) **External link to** : G. Fuchs: *Video: Easy Implementation of a Client-Server Application in Java with FEPCOS-J*; On: YouTube, FEPCOS-Project (@FepcosInfo); 29-July-2024; https://youtu.be/qtPP7kZbriQ.  
 ![FEPCOS-J provides annotations for programming a client-server application in Java.](fuchs-2024-implementing-a-service-with-fepcos-j-1024x576.png) **Impression of the above-linked video**: FEPCOS-J provides annotations like @AYSpec, @In, @Out, and @Behavior for programming a client-server application in Java. Watch the video for a complete example application of FEPCOS-J.
 
-Do you want to use FEPCOS-J to implement a Client-Server Application, too? {#h2-0-do-you-want-to-use-fepcos-j-to-implement-a-client-server-application-too}
------------------------------------------------------------------------------------------------------------------------------------------------------------
+Do you want to use FEPCOS-J to implement a Client-Server Application, too?
+--------------------------------------------------------------------------
 
 FEPCOS-J will become a Free/Libre and Open Source Software (FLOSS).
 
@@ -47,8 +47,8 @@ Thanks for reading!
 
 <br />
 
-See also: {#h2-1-see-also}
---------------------------
+See also:
+---------
 
 * G. Fuchs: FEPCOS-J (4) Easy programming of a multithreaded TCP/IP server in Java; At: Foojay Today; 2024-03-21; [blog post](https://foojay.io/today/fuchs-2024-fepcos-j-multithreaded-server/).
 * G. Fuchs: FEPCOS-J (3) -- Build native executables of Java-coded networked systems; At: Foojay Today; 2023-12-13; [blog post](https://foojay.io/today/fuchs-2023-fepcos-j-03-native-executables/).

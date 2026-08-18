@@ -30,8 +30,8 @@ Recently, we described [several criteria to look at to choose a cache](https://f
 * [Geode](#geode)
 * [Hazelcast](#hazelcast)
 
-Java Caching System {#java-caching-system}
-------------------------------------------
+Java Caching System
+-------------------
 
 > JCS is a distributed caching system written in Java. It is intended to speed up applications by providing a means to manage cached data of various dynamic natures. Like any caching system, JCS is most useful for high read, low put applications. Latency times drop sharply and bottlenecks move away from the database in an effectively cached system.
 >
@@ -49,8 +49,8 @@ Java Caching System {#java-caching-system}
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 | ``` jcs.default= jcs.default.cacheattributes=\ org.apache.commons.jcs3.engine.CompositeCacheAttributes jcs.default.cacheattributes.MaxObjects=1000 jcs.default.cacheattributes.MemoryCacheName=\ org.apache.commons.jcs3.engine.memory.lru.LRUMemoryCache ``` |
 
-Guava {#guava}
---------------
+Guava
+-----
 
 > Guava is a set of core Java libraries from Google that includes new collection types (such as multimap and multiset), immutable collections, a graph library, and utilities for concurrency, I/O, hashing, **caching**, primitives, strings, and more! It is widely used on most Java projects within Google, and widely used by many other companies as well.
 >
@@ -72,8 +72,8 @@ Guava {#guava}
 | The [API](https://github.com/google/guava/wiki/CachesExplained#reference-based-eviction) uses soft and weak references in keys and values  |
 | Allows you to attach [event handlers](https://github.com/google/guava/wiki/CachesExplained#removal-listeners) when entries are evicted     |
 
-Caffeine {#caffeine}
---------------------
+Caffeine
+--------
 
 > Caffeine is a [high performance](https://github.com/ben-manes/caffeine/wiki/Benchmarks), [near optimal](https://github.com/ben-manes/caffeine/wiki/Efficiency) caching library. For more details, see our [user's guide](https://github.com/ben-manes/caffeine/wiki) and browse the [API docs](http://www.javadoc.io/doc/com.github.ben-manes.caffeine/caffeine) for the latest release.
 >
@@ -93,8 +93,8 @@ Caffeine {#caffeine}
 | ``` var cache = Caffeine.newBuilder() .maximumSize(1000) .<Long, String>buildAsync();        // 1 CompletableFuture future = cache.get(1L, k -> expensiveLookup(1L)); ``` 1. Build an asynchronous cache                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | > * [Automatic loading of entries](https://github.com/ben-manes/caffeine/wiki/Population) into the cache, optionally asynchronously > * [Size-based eviction](https://github.com/ben-manes/caffeine/wiki/Eviction#size-based) when a maximum is exceeded based on [frequency and recency](https://github.com/ben-manes/caffeine/wiki/Efficiency) > * [Time-based expiration](https://github.com/ben-manes/caffeine/wiki/Eviction#time-based) of entries, measured since last access or last write > * [Asynchronously refresh](https://github.com/ben-manes/caffeine/wiki/Refresh) when the first stale request for an entry occurs > * Keys automatically wrapped in [weak references](https://github.com/ben-manes/caffeine/wiki/Eviction#reference-based) > * Values automatically wrapped in [weak or soft references](https://github.com/ben-manes/caffeine/wiki/Eviction#reference-based) > * [Notification](https://github.com/ben-manes/caffeine/wiki/Removal) of evicted (or otherwise removed) entries > * [Writes propagated](https://github.com/ben-manes/caffeine/wiki/Compute) to an external resource > * Accumulation of cache access [statistics](https://github.com/ben-manes/caffeine/wiki/Statistics) |
 
-Ehcache {#ehcache}
-------------------
+Ehcache
+-------
 
 > Ehcache is an open source, standards-based cache that boosts performance, offloads your database, and simplifies scalability. It's the most widely-used Java-based cache because it's robust, proven, full-featured, and integrates with other popular libraries and frameworks. Ehcache scales from in-process caching, all the way to mixed in-process/out-of-process deployments with terabyte-sized caches.
 >
@@ -113,8 +113,8 @@ Ehcache {#ehcache}
 | ``` var cacheManager = CacheManagerBuilder .newCacheManagerBuilder() .withCache( "cache", CacheConfigurationBuilder.newCacheConfigurationBuilder( Long.class, String.class, ResourcePoolsBuilder.heap(10) ) ).build(); cacheManager.init(); var cache = cacheManager.getCache( "cache", Long.class, String.class ); ``` |
 | Terracota is the Enterprise version of Ehcache. It provides distributed capabilities.                                                                                                                                                                                                                                   |
 
-Infinispan {#infinispan}
-------------------------
+Infinispan
+----------
 
 Infinispan is an open-source in-memory data grid that offers flexible deployment options and robust capabilities for storing, managing, and processing data. Infinispan provides a key/value data store that can hold all types of data, from Java objects to plain text. Infinispan distributes your data across elastically scalable clusters to guarantee high availability and fault tolerance, whether you use Infinispan as a volatile cache or a persistent data store.  
 --- https://infinispan.org/
@@ -133,8 +133,8 @@ Infinispan is an open-source in-memory data grid that offers flexible deployment
 | ``` CompletableFuture<String> future = cache.getAsync(1L, k -> expensiveLookup(1L)); ```                                                                                                                                                                                                                                                                                                                                                 |
 | > * Interoperability: access data across multiple protocols and programming languages > * Resilient and Fault Tolerant Data: ensure data is always available to meet demanding workloads > * ACID Transactions: guarantee that data is always valid and consistent > * Clustered Processing: process data in real-time without burdening resources > * Queries: perform simple, accurate, and fast searches across distributed data sets |
 
-Coherence Community Edition {#coherence-community-edition}
-----------------------------------------------------------
+Coherence Community Edition
+---------------------------
 
 > Coherence is scalable, fault-tolerant, cloud-ready, distributed platform for building grid-based applications and reliably storing data. The product is used at scale, for both compute and raw storage, in a vast array of industries such as critical financial trading systems, high performance telecommunication products, and eCommerce applications.
 >
@@ -155,8 +155,8 @@ Coherence Community Edition {#coherence-community-edition}
 | Commercial versions are available: * * Enterprise * Grid                                                                                                                                                                                                                                                                                            |
 | * Clustering and Data Sharding * Scalability and High Avalability * Disk-Based Persistence * Key-Value Data Store * Parallel Queries * Efficient Aggregation * In-Place Processing * Sophisticated Event Model                                                                                                                                      |
 
-Ignite {#ignite}
-----------------
+Ignite
+------
 
 > Distributed Database For High-Performance Computing With In-Memory Speed
 >
@@ -177,8 +177,8 @@ Ignite {#ignite}
 | ``` IgniteFuture<String> future = cache.getAsync(1L);    // 1 ``` 1. Ignite provides its own asynchronous primitives, which are different from the JDK's                                                                                                                                                                                                        |
 | GridGrain offers an enterprise version of Ignite named GridGain In-Memory Computing Platform                                                                                                                                                                                                                                                                    |
 
-Geode {#geode}
---------------
+Geode
+-----
 
 > Apache Geode is a data management platform that provides real-time, consistent access to data-intensive applications throughout widely distributed cloud architectures.
 >
@@ -200,8 +200,8 @@ Geode {#geode}
 | ``` var cache = new CacheFactory().create(); var factory = cache.<Long, String>createRegionFactory(); factory.setEvictionAttributes( EvictionAttributes.createLRUEntryAttributes(1000) ); var region = factory.create("cache"); ```                                                                                                                                                                                                                                                                                                                                    |
 | > \[...\] [main features and key functionality](https://geode.apache.org/docs/guide/114/getting_started/product_intro.html): > * High Read-and-Write Throughput > * Low and Predictable Latency > * High Scalability > * Continuous Availability > * Reliable Event Notifications > * Parallelized Application Behavior on Data Stores > * Shared-Nothing Disk Persistence > * Reduced Cost of Ownership > * Single-Hop Capability for Client/Server > * Client/Server Security > * Multisite Data Distribution > * Continuous Querying > * Heterogeneous Data Sharing |
 
-Hazelcast {#hazelcast}
-----------------------
+Hazelcast
+---------
 
 I work for Hazelcast at the time of this writing.
 > Hazelcast is a streaming and memory-first application platform for fast, stateful, data-intensive workloads on-premises, at the edge or as a fully managed cloud service.

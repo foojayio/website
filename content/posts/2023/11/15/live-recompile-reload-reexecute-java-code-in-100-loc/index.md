@@ -51,8 +51,8 @@ What we'll need:
 4. A way to reload the generated class file after the compilation
 5. A method to call when the new code is reloaded
 
-The source code {#h2-0-the-source-code}
----------------------------------------
+The source code
+---------------
 
 ```java
 import java.util.Random;
@@ -70,8 +70,8 @@ public class PlayWithNumbers implements Supplier<String> {
 ```
 
 
-The Reloader {#h2-1-the-reloader}
----------------------------------
+The Reloader
+------------
 
 ```java
 import java.io.File;
@@ -178,8 +178,8 @@ public class Reloader {
 Now start it with ***java Reloader.java PlayWithNumbers.java*** and edit the *PlayWithNumbers.java* file as you wish.  
 [![](hot-reload-code-netbeans2-1024x576.png)](hot-reload-code-netbeans2.png) Playing with numbers and stream.
 
-Going further {#h2-2-going-further}
------------------------------------
+Going further
+-------------
 
 In this example, we created a minimal version (100 lines of code) that could easily be extended with the following features:
 

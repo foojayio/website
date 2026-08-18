@@ -36,8 +36,8 @@ This is **Part 1** of our series. Today, we focus on the **Standalone Mode** ---
 
 
 
-**Problem #1: "I don't have time for complex tool setups"** {#h2-0-problem-1-i-don-t-have-time-for-complex-tool-setups}
------------------------------------------------------------------------------------------------------------------------
+**Problem #1: "I don't have time for complex tool setups"**
+-----------------------------------------------------------
 
 We are busy. We don't want to spend 2 hours configuring a linter script or messing with XML files.
 
@@ -55,8 +55,8 @@ That's it. No servers. No heavy configuration. It just works.
 
 
 
-**Problem #2: "I think my code is right, but is it?"** {#h2-1-problem-2-i-think-my-code-is-right-but-is-it}
------------------------------------------------------------------------------------------------------------
+**Problem #2: "I think my code is right, but is it?"**
+------------------------------------------------------
 
 You are typing fast. The logic seems sound. But are you accidentally introducing a memory leak? Or a security flaw?
 
@@ -72,8 +72,8 @@ It catches the things our eyes miss because we have been staring at the screen f
 
 
 
-**Problem #3: "Is this urgent, or can it wait?"** {#h2-2-problem-3-is-this-urgent-or-can-it-wait}
--------------------------------------------------------------------------------------------------
+**Problem #3: "Is this urgent, or can it wait?"**
+-------------------------------------------------
 
 Great, now you have 10 warnings. Which one should you fix first? The naming convention issue or the potential crash?
 
@@ -89,8 +89,8 @@ You can sort the list by severity and tackle the fires first.
 
 
 
-**Problem #4: "I'm not just writing Java anymore..."** {#h2-3-problem-4-i-m-not-just-writing-java-anymore}
-----------------------------------------------------------------------------------------------------------
+**Problem #4: "I'm not just writing Java anymore..."**
+------------------------------------------------------
 
 In modern projects, a Java developer is never *just* a Java developer. You are editing a **Dockerfile** , tweaking a **Jenkinsfile** , writing some **JavaScript** for the frontend, or fixing **JSON** config.
 
@@ -109,8 +109,8 @@ It ensures that your deployment scripts are just as secure as your Java classes.
 
 
 
-**Problem #5: "I opened a legacy file and got 500 errors. I'm overwhelmed."** {#h2-4-problem-5-i-opened-a-legacy-file-and-got-500-errors-i-m-overwhelmed}
----------------------------------------------------------------------------------------------------------------------------------------------------------
+**Problem #5: "I opened a legacy file and got 500 errors. I'm overwhelmed."**
+-----------------------------------------------------------------------------
 
 This is the main reason developers uninstall quality tools. You open a class written 5 years ago, and the screen lights up with errors that aren't yours.
 
@@ -123,12 +123,12 @@ Then in the analysis
 
 
 
-**Problem #6: "I know it's bad, but how do I fix it?"** {#h2-5-problem-6-i-know-it-s-bad-but-how-do-i-fix-it}
--------------------------------------------------------------------------------------------------------------
+**Problem #6: "I know it's bad, but how do I fix it?"**
+-------------------------------------------------------
 
 SonarQube for IDE doesn't just complain; it teaches.
 
-### **Real Example: The "Optional" Trap ⚠️** {#h3-6-real-example-the-optional-trap}
+### **Real Example: The "Optional" Trap ⚠️**
 
 We use Optional to avoid nulls, but if we are lazy, we crash the app.
 
@@ -159,8 +159,8 @@ String name = user.map(User::getName).orElse("Unknown");
 
 
 
-**Problem #7: "The 'Oops' Moment (Hardcoded Secrets)" 🔓** {#h2-7-problem-7-the-oops-moment-hardcoded-secrets}
---------------------------------------------------------------------------------------------------------------
+**Problem #7: "The 'Oops' Moment (Hardcoded Secrets)" 🔓**
+----------------------------------------------------------
 
 This is the nightmare scenario. You are testing a DB connection, so you hardcode the password. You plan to remove it later. You forget. You commit. You push. Too late. Bots have already scraped your repo.
 
@@ -189,8 +189,8 @@ public Connection getDBConnection() {
 
 It acts as a safety net, reminding you to move that sensitive data to an environment variable or a properties file.
 
-**⚙️ A Note on Configuration** {#h2-8-a-note-on-configuration}
---------------------------------------------------------------
+**⚙️ A Note on Configuration**
+------------------------------
 
 Out of the box, it works great. But if you feel a rule is too strict (e.g., "Method has too many lines"), you are in control.
 
@@ -203,8 +203,8 @@ You can go to **Settings** -\> **Tools** -\> **SonarQube for IDE** -\> **Rules**
 
 
 
-**Summary** {#h2-9-summary}
----------------------------
+**Summary**
+-----------
 
 Using **SonarQube for IDE** is about coding with confidence. It catches the silly mistakes, the security holes, and the bad practices in real-time, across all your project files (not just Java!).
 

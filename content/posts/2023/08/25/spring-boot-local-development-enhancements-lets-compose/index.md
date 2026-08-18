@@ -39,8 +39,8 @@ Both of these functionalities are built atop the [ConnectionDetails abstraction]
 
 Feel free to clone [the demo repository](https://github.com/SimonVerhoeven/sbldi), to run the samples!
 
-Docker compose support {#_docker_compose_support}
--------------------------------------------------
+Docker compose support
+----------------------
 
 This method allows us to leverage our existing `docker-compose.yml` files, with some extra quality of live functionality.
 
@@ -70,7 +70,7 @@ dependencies {
 
 **note** : the docker-compose support is limited at the moment (such as no Kafka) when we're using `spring-boot-testcontainers` we can use any container with the programmatic API.
 
-### How it works {#_how_it_works}
+### How it works
 
 When we then start our application Spring boot will:
 
@@ -80,7 +80,7 @@ When we then start our application Spring boot will:
 
 And when the application stops, the defined containers/services are shut down using `docker compose down`
 
-### Configuration {#_configuration}
+### Configuration
 
 There are a slew of configuration options, but some useful ones to know:
 
@@ -91,10 +91,10 @@ There are a slew of configuration options, but some useful ones to know:
   * start-and-stop
 * making use of spring profile-specific docker compose files (`docker--compose-{profile}.yaml`) can be done using: `spring.docker.compose.profiles.active`
 
-Testcontainers at development time {#_testcontainers_at_development_time}
--------------------------------------------------------------------------
+Testcontainers at development time
+----------------------------------
 
-### The setup {#_the_setup}
+### The setup
 
 We just need to add a dependency on `spring-boot-testcontainers`
 
@@ -152,7 +152,7 @@ Alternatively, we can make use of: `./gradlew bootTestRun` or `./mvnw spring-boo
 
 After this, we can see that our application has started up ***including*** our Testcontainers.
 
-#### What if my desired container does not have a ServiceConnection yet? {#_what_if_my_desired_container_does_not_have_a_serviceconnection_yet}
+#### What if my desired container does not have a ServiceConnection yet?
 
 Using `@ServiceConnection` is recommended, but not all technologies support this method yet.
 
@@ -176,7 +176,7 @@ public GenericContainer mailhogContainer(DynamicPropertyRegistry registry) {
 
 To provide the required information at development time.
 
-### Keeping our data {#_keeping_our_data}
+### Keeping our data
 
 You will notice that when your application stops, the containers are also stopped.  
 
@@ -184,7 +184,7 @@ This does mean that you'll also lose your data.
 
 There are two options to work around this in case you want to keep your data.
 
-#### Reusable testcontainers (experimental) {#_reusable_testcontainers_experimental}
+#### Reusable testcontainers (experimental)
 
 The first option, [Reusable Testcontainers](https://java.testcontainers.org/features/reuse/) is an experimental feature that can be used by adding `.withReuse(true)`.  
 
@@ -211,7 +211,7 @@ Given the experimental state there are still some limitations which you will hav
 .
 ```
 
-#### Spring Boot devtools with @RestartScope {#_spring_boot_devtools_with_restartscope}
+#### Spring Boot devtools with @RestartScope
 
 The second option requires you to annotate the desired containers with `@RestartScope`, and to have devtools set up.  
 
@@ -250,8 +250,8 @@ GenericContainer<?> redisContainer() {
 ```
 
 
-**Testcontainers desktop app** {#_testcontainers_cloud_desktop_client}
-----------------------------------------------------------------------
+**Testcontainers desktop app**
+------------------------------
 
 This software is not needed, but it's still a nice extra utility to get even more mileage out of your testcontainer usage.
 
@@ -265,8 +265,8 @@ There are some quite useful features in there such as:
 * tweak Testcontainer behaviour such as freezing containers on shutdown/enable reusable testcontainers
 * ...
 
-Wrap up {#_wrap_up}
--------------------
+Wrap up
+-------
 
 I hope this brief showcase was helpful and offered some new insights as to how to ease local development.
 
@@ -274,8 +274,8 @@ In case of any questions, feel free to reach out.
 
 The people at the [testcontainers slack](https://slack.testcontainers.org/) are also very kind, and always willing to help out.
 
-References {#_references}
--------------------------
+References
+----------
 
 * [Testcontainers](https://testcontainers.com/): the official Testcontainers website
 * [Testcontainers in the cloud](https://testcontainers.com/cloud/)

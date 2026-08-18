@@ -39,13 +39,13 @@ Wouter De Geus shares his inspiring journey from finance and mathematics into Ja
 
 And finally, Roald Nefs demonstrates something truly unique - using Java and the Foreign Function \& Memory API to hack into automotive systems, revealing important security considerations for both hardware and software.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube qw-x3_pZ0wI >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -53,8 +53,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topics and guests
 

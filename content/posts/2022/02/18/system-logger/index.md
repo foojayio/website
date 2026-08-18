@@ -33,8 +33,8 @@ In short, `System.Logger` is a façade over your logging engine. Instead of usin
 
 <br />
 
-System.Logger API {#h2-0-system-logger-api}
--------------------------------------------
+System.Logger API
+-----------------
 
 The API is a bit different than other logging APIs: it avoids different logging methods such as `debug()`, `info()` in favor of a single `log()` one where you pass a logging `Level` parameter.
 
@@ -67,8 +67,8 @@ INFO: Hello world!
 ```
 
 
-Compatible implementations {#h2-1-compatible-implementations}
--------------------------------------------------------------
+Compatible implementations
+--------------------------
 
 Most applications currently use [Log4J2](https://logging.apache.org/log4j/2.x/) or [SLF4J](https://www.slf4j.org/). Both provide a compatible `System.Logger` implementation.
 
@@ -128,8 +128,8 @@ The snippet outputs:
 ```
 
 
-Your own `System.Logger` implementation {#h2-2-your-own-system-logger-implementation}
--------------------------------------------------------------------------------------
+Your own `System.Logger` implementation
+---------------------------------------
 
 `System.Logger` relies on Java's [ServiceLoader](https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html) mechanism. Both `log4j-jpl` and `slf4j-jdk-platform-logging` contain a `META-INF/services/java.lang.System$LoggerFinder` file that points to a `LoggerFinder` implementation.
 
@@ -210,8 +210,8 @@ Hello world!
 ```
 
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 While the API is more limited than other more established logging APIs, `System.Logger` is a great idea. It offers a façade that's part of the JDK. Thus, it avoids using a third-party façade that needs to wire calls to another unrelated implementation, *e.g.* SLF4J to Log4J2.
 

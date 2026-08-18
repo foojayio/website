@@ -32,8 +32,8 @@ This year, Azul will be bringing the following swag and activities at **booth #3
 * **Nintendo Switch competition**: A console will be available to play at the Azul stand. Compete with your fellow peers, beat them and win a surprise gift.
 * **Raffle** : Azul is hosting a contest on **4 October at 16h30 CEST** for all event attendees, where two lucky winners will each walk away with an awesome prize. Prizes to be won will be displayed at the booth from 3 October at 8h00 CEST.
 
-Don't miss the Azul-led talks scheduled for Wednesday, 4 October {#h-don-t-miss-the-azul-led-talks-scheduled-for-wednesday-4-october}
--------------------------------------------------------------------------------------------------------------------------------------
+Don't miss the Azul-led talks scheduled for Wednesday, 4 October
+----------------------------------------------------------------
 
 * *[Unlocking the Potential of Bits and Bytes: Reducing Data Footprint for Cost and Eco-Efficiency](https://devoxx.be/talk/?id=17255?utm_medium=event&utm_campaign=20231003-SEV-Devoxx%20Belgium&utm_source=unbounce&utm_content=&utm_term=)* from **12h00 to 12h50**, presented by Frank Delporte in room 7.
 * *[Keeping Your Java Hot by Solving the JVM Warmup Problem](https://devoxx.be/talk/?id=70107?utm_medium=event&utm_campaign=20231003-SEV-Devoxx%20Belgium&utm_source=unbounce&utm_content=&utm_term=)* from **13h05 to 13h50**, presented by Simon Ritter in room 4.
@@ -45,8 +45,8 @@ Don't miss the Azul-led talks scheduled for Wednesday, 4 October {#h-don-t-miss-
 
 While enjoying complimentary drinks and appetizers, you'll learn more about the OpenJDK migration process and will receive **a free physical copy of the book signed by me, Simon Ritter, the author himself**! Spots are limited, so make sure you register in advance to join us!
 
-Details for the party {#h-details-for-the-party}
-------------------------------------------------
+Details for the party
+---------------------
 
 **When**: Wednesday, 4 October 2023
 

@@ -30,8 +30,8 @@ Time has passed. Staffware is now part of Tibco. I didn't use workflow engines i
 
 Years ago, I started to automate my conference submission process. [I documented it](https://blog.frankel.ch/automating-conference-submission-workflow) in parallel. Since then, I changed the infrastructure on which I run the software. This post takes you through the journey of how I leveraged this change and updated the software accordingly, showcasing the evolution of my approach.
 
-Generalities {#h2-0-generalities}
----------------------------------
+Generalities
+------------
 
 I started on Heroku with the free plan, which no longer exists. I found that the idea was pretty brilliant at the time. The offering was based on *dynos* , something akin to containers. You could have a single one for free; when it was not used for some time, the platform switched it off, and it would spin a new one again when receiving an HTTP request. I believe it was one of the earliest *serverless* offerings.
 
@@ -39,8 +39,8 @@ In addition, I developed a Spring Boot application with Kotlin based on the [Cam
 
 One of the key advantages of workflow engines is their ability to store the state of a particular instance, providing a comprehensive view of the process. For example, in the above diagram, the first task, labeled "Request Purchase", would store the requester's identity and the requested item (or service) references. The Purchase Department can examine the details of the requested item in the task after. The usual storage approach is to rely on a database.
 
-The initial design {#h2-1-the-initial-design}
----------------------------------------------
+The initial design
+------------------
 
 At the time, Heroku didn't provide free storage *dyno* . However, I had to design my initial workflow around this limitation, which posed its own set of challenges. I couldn't store anything permanently, so every run had to be self-contained. My fallback option was to run in memory with the help of [H2](https://www.h2database.com/).
 
@@ -59,8 +59,8 @@ Two things happened with time:
 * Salesforce bought Heroku and canceled its free plan. At the same time, Scaleway offered their own free plan for startups. Their Serverless Container is similar to Heroku's - nodes start when the app receives a request. I decided to migrate from Heroku to Scaleway. You can read about [my first evaluation of Scaleway](https://blog.frankel.ch/evaluation-scaleway/).
 * I migrated from H2 to the free [Cockroach Cloud](https://cockroachlabs.cloud/) plan
 
-Refactoring to a new design {#h2-2-refactoring-to-a-new-design}
----------------------------------------------------------------
+Refactoring to a new design
+---------------------------
 
 With persistent storage, I could think about the problems of my existing workflow.
 
@@ -86,8 +86,8 @@ For example, imagine a Trello hook that translates to an Abandoned message. If t
 
 If it finds an existing instance, it looks at its current state: it can be either Submitted or Accepted. Depending on the state, it continues the flow.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I explained how I first limited my usage of BPMN and then unlocked its true power when I benefited from persistent storage.
 

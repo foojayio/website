@@ -41,14 +41,14 @@ In the last two ducklings, I talked about threading issues:
 
 Today we'll discuss the process of debugging threading issues, dealing with deadlocks and race conditions in the debugger.
 
-Multithreaded Debugging {#h2-0-multithreaded-debugging}
--------------------------------------------------------
+Multithreaded Debugging
+-----------------------
 
 Debugging in a multi-threaded environment is often perceived as difficult because it's hard to know what's going on. You place a breakpoint and a thread that might deadlock is suspended in the background. As a result, you can no longer reproduce the problem with a debugger. Instead of modifying the debugging technique, developers blame the tooling.
 
 That's throwing the baby with the bathwater. Debuggers have so many amazing tools to control their environment. Once you learn how to master these resources, things like deadlock detection will become trivial.
 
-### Thread View {#h3-1-thread-view}
+### Thread View
 
 If you've used JetBrains IDEs such as IntelliJ, you're probably familiar with the thread combo box that lives above the stack trace panel in the UI. This widget lets us toggle the current thread and with it the stack that we're looking at.
 
@@ -82,8 +82,8 @@ Most threads you'll receive from a pool or a framework would already be grouped 
 
 ![](thread-debugging-5-700x474.png)
 
-Debugging a Deadlock Situation {#h2-2-debugging-a-deadlock-situation}
----------------------------------------------------------------------
+Debugging a Deadlock Situation
+------------------------------
 
 Wikipedia defines a deadlock as:
 
@@ -105,8 +105,8 @@ This might mean nothing, but it's pretty easy to review this list and the stack 
 
 You can switch between threads and walk the stack. In this screenshot, the stack is one method deep so it isn't representative of "real-world cases". However, this is an easy way to detect such issues.
 
-Debugging Race Conditions {#h2-3-debugging-race-conditions}
------------------------------------------------------------
+Debugging Race Conditions
+-------------------------
 
 The most common issue with multi-threading is race conditions. Wikipedia defines race conditions as:
 
@@ -114,7 +114,7 @@ _"A **race condition** or **race hazard** is the condition of an [electronics](h
 
 This is a far more insidious problem, since it's nearly impossible to detect. I wrote about it I the past and about [debugging it with Lightrun here](https://lightrun.com/tutorials/debug-race-condition-production/). Derrick also [wrote about this in the Lightrun blog](https://lightrun.com/debugging/how-to-debug-race-conditions-between-threads-in-java/), but he covered it a bit differently. My technique is simpler in my opinion...
 
-### Method Breakpoints Done Right {#h3-4-method-breakpoints-done-right}
+### Method Breakpoints Done Right
 
 I had some harsh things to say about method breakpoints before. They're inefficient and problematic. But for this truck, we need them. They give us the type of control over the breakpoint location we need.
 
@@ -142,7 +142,7 @@ After we create a method breakpoint, we set it to not suspend and enable logging
 
 We can now log that we're exiting the method and log the thread name. This will print every exit from the method.
 
-### Method Entry Event {#h3-5-method-entry-event}
+### Method Entry Event
 
 We can do the same thing for method entry, but here we can use a regular breakpoint:
 
@@ -160,8 +160,8 @@ In some cases, the output might be so verbose and from a single thread. In that 
 
 We can also build a poor man's deadlock detector using a similar technique. It can give us a sense of shared resource usage so we can properly evaluate deadlock potentials.
 
-TL;DR {#h2-6-tl-dr}
--------------------
+TL;DR
+-----
 
 Possibility of deadlock code makes debugging a process pretty challenging. A lock on resources can make things worse and the traditional usage of breakpoints just doesn't work...
 

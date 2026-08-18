@@ -65,8 +65,8 @@ If you want to learn more on how to write an agent, consider reading my [Instrum
 
 More information on class loaders can be found in the Baeldung article [Class Loaders in Java](https://www.baeldung.com/java-classloaders).
 
-How to get the class loader hierarchy of your project {#h2-0-how-to-get-the-class-loader-hierarchy-of-your-project}
--------------------------------------------------------------------------------------------------------------------
+How to get the class loader hierarchy of your project
+-----------------------------------------------------
 
 I wanted to know the class loader hierarchy for my own projects, so of course, I wrote an agent for it: The [ClassLoader Hierarchy Agent](https://github.com/parttimenerd/classloader-hierarchy-agent) prints the class loader hierarchy at agent load time, the JVM shutdown, and in regular intervals.
 
@@ -133,8 +133,8 @@ Class loaders can have names, but sadly not many class loader creators use this 
 
 Feel free to try this agent on your applications; maybe you gain some new insights.
 
-Conclusion {#h2-1-conclusion}
------------------------------
+Conclusion
+----------
 
 Understanding class loader hierarchies helps to understand subtle problems in writing instrumenting agents. Knowing how to write small agents can empower you to write simple tools to understand the properties of your application.
 

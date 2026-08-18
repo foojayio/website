@@ -20,7 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 This is part one of a two part articles series on Running Apache Kafka Server, Configuring Kafka Topics, and Creating a Kafka Consumer and Kafka Producer.
 
@@ -28,7 +28,7 @@ All this is demonstrated step-by-step example that works from the Command Line.
 
 All of this is for Apache Kafka v3.4 on Windows 10.
 
-### Pre-Requisites {#h3-1-pre-requisites}
+### Pre-Requisites
 
 1. Install Java ( v8.0 is used in this Example )
 2. Install Apache Kafka v3.4.0 from the Given Link
@@ -38,11 +38,11 @@ All of this is for Apache Kafka v3.4 on Windows 10.
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEhDK7xTGu-H4ZyFHWetkwEfKxIEjdMZuqYwimNrD-hIblKuBYqaW1Fttr8V_f19Q73z0MS09mNQYEhjuX8noY92cQ0dy4koVTnEmGSV76byHwHgM2uJ9ePcLSQYwFlcqBiWRI4QgXHE1nZYNsFPV3v0Nf2ozGkGc91DE3aKxOrDZV2IsPGlzFEKpNB8txrF)
 
-### Version 3.4.0 {#h3-2-version-3-4-0}
+### Version 3.4.0
 
 Apache Kafka Version 3.4.0 was Released on Feb 7, 2023, This article specifically is for the Kafka Version (2.13-3.4.0). For Purposes of this Article, I use {KAFKA_HOME} as the windows folder where Kafka was installed.
 
-### Step-By-Step Guide {#h3-3-step-by-step-guide}
+### Step-By-Step Guide
 
 #### 0. Configure Zookeeper (Data Directory)
 

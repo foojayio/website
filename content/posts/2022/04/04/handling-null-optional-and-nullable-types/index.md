@@ -50,8 +50,8 @@ Exception in thread "main" java.lang.NullPointerException:
 
 On JVM 15, it becomes the default behavior: you don't need a specific flag.
 
-Handling NullPointerException {#h2-0-handling-nullpointerexception}
--------------------------------------------------------------------
+Handling NullPointerException
+-----------------------------
 
 In the above snippet, the developer assumed that every part had been initialized.
 
@@ -80,8 +80,8 @@ It fixes the problem but is far from the best developer experience - to say the 
 1. Developers need to be careful about their coding practice
 2. The pattern makes the code harder to read.
 
-The Option wrapper type {#h2-1-the-option-wrapper-type}
--------------------------------------------------------
+The Option wrapper type
+-----------------------
 
 On the JVM, Scala's `Option` was the first attempt that I'm aware of of a sane `null` handling approach, even if the concept is baked into the foundations of Functional Programming. The concept behind `Option` is indeed quite simple: it's a wrapper around a value that can potentially be `null`.
 
@@ -106,8 +106,8 @@ var option = Optional.ofNullable(foo)
 
 If any of the values in the call chain is `null`, `option` is `null`. Otherwise, it returns the computed value. In any case, gone are the NPEs.
 
-Nullable types {#h2-2-nullable-types}
--------------------------------------
+Nullable types
+--------------
 
 Regardless of the language, the main problem with *Option* types is its chicken-and-egg nature. To use an *Option* , you need to be sure it's not `null` in the first place. Consider the following method:
 
@@ -172,8 +172,8 @@ val value = foo?.bar?.baz?.lowercase()
 ```
 
 
-Option or nullable type? {#h2-3-option-or-nullable-type}
---------------------------------------------------------
+Option or nullable type?
+------------------------
 
 You have no choice if you're using a language where the compiler does not enforce null safety. The question raises only within the scope of languages that do, *e.g.* , Kotlin. Kotlin's standard library doesn't offer an Option type. However, the [Arrow](https://arrow-kt.io/docs/apidocs/arrow-core/arrow.core/-option/) library does. Alternatively, you can still use Java's `Optional`.
 
@@ -219,8 +219,8 @@ val option = Some(foo).map(Foo::bar)
 ```
 
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 If `null` was a million-dollar mistake, modern engineering practices and languages could cope with it. Compiler-enforced null safety, as found in Kotlin, is a great start.
 

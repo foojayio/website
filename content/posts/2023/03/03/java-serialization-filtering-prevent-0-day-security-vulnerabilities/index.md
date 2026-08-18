@@ -38,15 +38,15 @@ I'm not a security expert, I care more about the solution. How do we make sure t
 
 How do we harden our server code against serialization attacks?
 
-Do we need Serialization? {#h2-0-do-we-need-serialization}
-----------------------------------------------------------
+Do we need Serialization?
+-------------------------
 
 We rarely need serialization. Ideally, if you can remove serialization entirely from your code and can avoid 3rd party code that uses serialization, you can just block it completely. This will mean that even if a zero-day comes up, the serialization portion will fail. You might have a bug, but it won't be an exploitable vulnerability.
 
 Sometimes we need a bit of serialization. In that case, we can include only the well-known classes needed and block everything else out.
 
-JEP 290: Serialization Filtering {#h2-1-jep-290-serialization-filtering}
-------------------------------------------------------------------------
+JEP 290: Serialization Filtering
+--------------------------------
 
 The solution came in Java 9 in the form of serialization filtering as part of JEP 290. There are critical patch updates for older JDKs such as JDK 8u121. So if you must stay in an older version it's still possible to use this feature.
 
@@ -54,8 +54,8 @@ It is possible to use this feature with no code changes, although we might want 
 
 A cache might serialize objects to synchronize them between nodes over the network. We might miss that dependency when running tests locally, but fail in production. In those cases, you can follow the strategies listed below to solve the problems.
 
-Whitelist vs. Blacklist {#h2-2-whitelist-vs-blacklist}
-------------------------------------------------------
+Whitelist vs. Blacklist
+-----------------------
 
 There are two approaches we can take when filtering specific serializable objects:
 
@@ -97,8 +97,8 @@ java “-Djdk.serialFilter=mypackage.*;!*” -jar MyJar.jar
 ```
 
 
-What about Complexity? {#h2-3-what-about-complexity}
-----------------------------------------------------
+What about Complexity?
+----------------------
 
 How do you know which classes are serialized in the code? How do you get an alert if your code blocked a serialization attempt? This might be something you would want to track since it might be the system breaking or it might be an attempted hack. Both are valid reasons for an alert. You can't do that declaratively but you can write code that can use sophisticated logic to determine whether serialization should succeed.
 
@@ -109,8 +109,8 @@ ObjectInputFilter.Config.setSerialFilter(info -> info.depth() > 10 ? Status.REJE
 ```
 
 
-TL;DR {#h2-4-tl-dr}
--------------------
+TL;DR
+-----
 
 You should always use serialization filtering when running a JVM deployment. This should always be the case.
 

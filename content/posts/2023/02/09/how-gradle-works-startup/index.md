@@ -31,8 +31,8 @@ We'll explain the first topic *How Gradle Starts Up* in this blog.
 
 Before reading on, we assume you are familiar with basic JVM/Gradle concepts (jar, classpath, wrapper, daemon, project, task, etc.).
 
-How Gradle Starts Up {#h2-0-how-gradle-starts-up}
--------------------------------------------------
+How Gradle Starts Up
+--------------------
 
 There are many ways to start a Gradle build:
 
@@ -44,7 +44,7 @@ What's the difference? What happens under the hood?
 
 Before we start, we need to remember that Gradle is software running on top of a JVM ([Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine)).
 
-### Local Gradle Distribution in CLI {#h3-1-local-gradle-distribution-in-cli}
+### Local Gradle Distribution in CLI
 
 You may have downloaded a Gradle distribution to your local computer, either manually or by some package management tools.
 
@@ -88,7 +88,7 @@ But if `--no-daemon` is present and the client JVM is not compatible with build 
 
 This is how local Gradle distribution starts up on UNIX OSes. On Windows, the mechanism is very similar - the only difference is that we invoke `/path/to/distribution/bin/gradle.bat` instead of `/path/to/distribution/bin/gradle`.
 
-### Gradle Wrapper in CLI {#h3-2-gradle-wrapper-in-cli}
+### Gradle Wrapper in CLI
 
 As you may know, [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) is the recommended way to execute Gradle builds.  
 
@@ -102,7 +102,7 @@ This JVM will locate or download a specific version of Gradle distribution decla
 
 The entry point of `Gradle Wrapper JVM` is the [`org.gradle.wrapper.GradleWrapperMain` class](https://github.com/gradle/gradle/blob/acc6044325b11874e9626d98dec976a0e495cb62/subprojects/wrapper/src/main/java/org/gradle/wrapper/GradleWrapperMain.java).
 
-### Gradle in IDE {#h3-3-gradle-in-ide}
+### Gradle in IDE
 
 In the previous sections, `Gradle Client JVM` is a dedicated JVM started via CLI.
 
@@ -118,8 +118,8 @@ For example, when you click `Gradle Sync` button in IntelliJ IDEA, IDEA will sta
 
 Still, all the build logic happens in a `Gradle Daemon JVM`, and the Tooling API just reads a build result and returns it to the caller.
 
-What's Next {#h2-4-what-s-next}
--------------------------------
+What's Next
+-----------
 
 In the next blog post of the series we'll explain how many JVMs are involved in a Gradle build.
 

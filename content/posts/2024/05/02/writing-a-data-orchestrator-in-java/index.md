@@ -36,14 +36,14 @@ Unlike many existing data orchestrators, Kestra is written in Java.
 
 Let's discover what makes Kestra unique amongst all the data orchestrators and how we leverage the power of the Java platform and its ecosystem to build a performant, scalable, and feature-rich data orchestrator.
 
-Kestra's Distributed Architecture Explained {#h2-0-kestra-s-distributed-architecture-explained}
------------------------------------------------------------------------------------------------
+Kestra's Distributed Architecture Explained
+-------------------------------------------
 
 Kestra's architecture is built on a distributed system, where various components interact asynchronously, primarily through messaging queues. Below is an overview of the key components that make up Kestra's architecture:
 
 ![](kestra-software-architecture-700x394.png)
 
-### Core Components of Kestra: {#h3-1-core-components-of-kestra}
+### Core Components of Kestra:
 
 * **Executor**: This component is the component behind the orchestration logic, managing the execution lifecycle of data workflows.
 * **Scheduler**: Responsible for initiating workflows based on trigger events, the Scheduler ensures tasks are executed at the right time.
@@ -51,7 +51,7 @@ Kestra's architecture is built on a distributed system, where various components
 * **Indexer**: An optional but valuable component, the Indexer enhances data retrieval by indexing workflow metadata into a database.
 * **Webserver**: The front-facing component of Kestra, providing user interface and API access to manage and monitor their workflows.
 
-### Deployment Modes and Runners: {#h3-2-deployment-modes-and-runners}
+### Deployment Modes and Runners:
 
 Kestra supports several deployment modes, with all components in a single process or microservice with one component per process.
 
@@ -60,7 +60,7 @@ For data management and queueing, Kestra offers two runners:
 * **JDBC Runner**: Ideal for environments preferring traditional databases, this runner supports H2, PostgreSQL, and MySQL for both queueing and repository functions.
 * **Kafka Runner**: For more demanding scalability requirements, this runner employs Kafka for queue and Elasticsearch for repository, available exclusively in the enterprise edition.
 
-### Implementation details: {#h3-3-implementation-details}
+### Implementation details:
 
 This micro-service architecture with flexible deployment mode is allowed thanks to the microservice Java framework Micronaut that offers built-in configuration management, dependency injection, database connectivity, and way more.
 
@@ -68,8 +68,8 @@ For example, switching from one runner to another is a question of changing a si
 
 To support different modes of deployment, we package all services in a single Jar via the Gradle build tool then decide at runtime which Kestra service to run based on the options passed to the Kestra CLI. The Kestra CLI is a Picocli application, when launched we will select which server component to start, locate its bean inside the Micronaut application context then run it.
 
-Kestra's extensibility {#h2-4-kestra-s-extensibility}
------------------------------------------------------
+Kestra's extensibility
+----------------------
 
 Kestra is an extensible platform: almost everything is a plugin.
 
@@ -89,8 +89,8 @@ Plugins can be used to extend Kestra's:
 
 If you want to create your own plugin, start from the Plugin Template (<https://github.com/kestra-io/plugin-template>), then follow our Plugin Developer Guide (<https://kestra.io/docs/plugin-developer-guide> ).
 
-API first {#h2-5-api-first}
----------------------------
+API first
+---------
 
 Kestra is API first, everything that you can do with its UI can also be done by directly calling its API.
 
@@ -98,8 +98,8 @@ This allows us to support automation via Terraform or Github actions easily, the
 
 Thanks to Swagger, the API is automatically documented so the API is easily discoverable. By the way, we use the same documentation mechanism used by Swager (OpenAPI) to document tasks and triggers.
 
-Written in Java {#h2-6-written-in-java}
----------------------------------------
+Written in Java
+---------------
 
 Kestra takes advantage of the Java language:
 
@@ -138,8 +138,8 @@ Kestra Enterprise Edition leverages Kafka Stream:
 * Kafka Stream Punctuation allows to process timely event distributed, we used it for example, to handle paused execution globally on the cluster.
 * Fault tolerance
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 We strongly believe that Java is a good fit for a data orchestrator and allows us to deliver a robust, performant, and scalable platform without compromising the set of data-oriented features that we provide.
 

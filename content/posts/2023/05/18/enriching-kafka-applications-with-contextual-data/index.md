@@ -28,8 +28,8 @@ However, the cost becomes relatively high if we end up with two or more tools to
 
 Simply put, you need to multiply development time, deployment time, and maintenance costs by the number of tools.
 
-Kafka {#h2-0-kafka}
--------------------
+Kafka
+-----
 
 Kafka is great for event streaming architectures, continuous data integration (ETL), and messaging systems of record (database).
 
@@ -37,8 +37,8 @@ However, Kafka has some challenges, such as a complex architecture with many mov
 
 Moreover, Kafka does not offer batch processing and all intermediate steps are materialised to disk in Kafka. This leads to enormous disk space usage.
 
-Hazelcast {#h2-1-hazelcast}
----------------------------
+Hazelcast
+---------
 
 Hazelcast is a real-time stream processing platform that can enhance Kafka (and many more sources).
 
@@ -50,16 +50,16 @@ Hazelcast can process real-time and batch data in one platform, making it the ri
 
 ![](1683707203791-700x289.png)
 
-Prerequisites {#h2-2-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 * If you are new to Kafka or you're just getting started, I recommend you start with [Kafka Documentation](https://kafka.apache.org/documentation/)
 * If you are new to Hazelcast or you're just getting started, I recommend you start with [Hazelcast Documentation](https://docs.hazelcast.com/home/)
 * For Kafka, you need to download Kafka, start the environment, create a topic to store events, write some events to your topic, and finally read these events. Here's a [Kafka Quick Start](https://kafka.apache.org/quickstart).
 * For Hazelcast, you can use either the [Platform](https://docs.hazelcast.com/hazelcast/latest/) or the [Cloud](https://docs.hazelcast.com/cloud/overview). I will use a local cluster.
 
-Step 1 {#h2-3-step-1}
----------------------
+Step 1
+------
 
 Start a Hazelcast local cluster: This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
 
@@ -105,8 +105,8 @@ docker run --name kafka --network hazelcast-network --rm hazelcast/hazelcast-qui
 ```
 
 
-Step 2 {#h2-4-step-2}
----------------------
+Step 2
+------
 
 Once we have all components up and running, we need to create a Kafka mapping to allow Hazelcast to access messages in the trades topic.
 
@@ -176,8 +176,8 @@ Go back to the terminal where you created the streaming query.
 
 You should see that Hazelcast has executed the query and filtered the results.
 
-Step 3 {#h2-5-step-3}
----------------------
+Step 3
+------
 
 While the previous step is possible to execute with Kafka only, this step will enrich the data in Kafka message, taking your Kafka processing to the next step. Kafka messages are often small and contain minimal data to reduce network latency. For example, the trades topic does not contain any information about the company that's associated with a given ticker.
 
@@ -236,8 +236,8 @@ INSERT INTO trades VALUES
 
 Go back to the terminal where you created the streaming query that merges results from the companies map and trades topic.
 
-Step 4 {#h2-6-step-4}
----------------------
+Step 4
+------
 
 Finally, we will ingest query results into a Hazelcast map. We create a mapping to a new map in which to ingest your streaming query results.
 

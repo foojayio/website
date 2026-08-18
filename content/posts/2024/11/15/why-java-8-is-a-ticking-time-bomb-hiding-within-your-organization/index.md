@@ -25,14 +25,14 @@ When I spoke to developers at Devoxx in Belgium in October, I was surprised to l
 
 I know I'm biased, as I experiment extensively with the latest Java versions to learn what improvements they bring. But it hurts my heart to think of all those developers maintaining old systems, missing out on all the coding and performance improvements that newer versions offer. In this post, I want to highlight some of the many reasons why staying on Java 8 is a ticking time bomb...
 
-Critical Reasons to Upgrade {#h2-0-critical-reasons-to-upgrade}
----------------------------------------------------------------
+Critical Reasons to Upgrade
+---------------------------
 
 Yes, your old applications may have been running stable for many years. But isn't that precisely the thread? How long since someone has looked into the sources, and are they even still available? How long will it be before the system they are running on breaks? Does your team still know how all features are implemented? These are critical questions that should make you feel uncomfortable.
 
 While there are many reasons to move on!
 
-### Fixed Security Vulnerabilities {#h3-1-fixed-security-vulnerabilities}
+### Fixed Security Vulnerabilities
 
 As you can see on the [Azul roadmap](https://www.azul.com/products/azul-support-roadmap/), Oracle support has ended for Java 6 in 2018 and 7 in 2022 and will end for Java 8 in 2030. Azul will support 6 and 7 until 2027 and 8 until 2030. But that means there is an end date for all these versions, or it has already passed!
 
@@ -52,13 +52,13 @@ Or look at it from another perspective: if you didn't upgrade every three months
  </figure>
 </figure>
 
-### Performance Improvements {#h3-2-performance-improvements}
+### Performance Improvements
 
 Every new version of OpenJDK brings many improvements to the runtime itself, for instance, optimizations in the garbage collector and improved memory management. You may be surprised how much better your application performs if you [deploy the existing JAR on a newer runtime version](https://www.azul.com/blog/benchmarks-show-faster-java-performance-improvement/).
 
 So, imagine what performance boost you can achieve by bumping both the runtime and your code!
 
-### Developer Productivity {#h3-3-developer-productivity}
+### Developer Productivity
 
 With OpenJDK, the runtime improved, and a long list of language features was added, optimized, and extended. This means that for a developer, the current Java is not the same as the one used many years ago. In many cases, the same functionality can be achieved with less code and fewer dependencies, resulting in code that is easier to read and maintain.
 
@@ -74,7 +74,7 @@ These improvements range from the introduction of `var` in Java 10, over switch 
 
 Your team wouldn't be happy if you would force them to work with a computer, phone, and internet connection from five years ago. Then why would they love their job if the code they need to work in is even older? And it's not only Java that got better, but also the IDEs and all the tooling to test, build, and run your applications. All of this will result in a happier developer team.
 
-### Reduced Business Cost {#h3-4-reduced-business-cost}
+### Reduced Business Cost
 
 What do you think if you can increase the performance of your application and your developers can be more productive? Yes, of course, reduced costs!
 
@@ -82,14 +82,14 @@ You need fewer servers or can run more load on the existing ones. New features g
 
 Following the three monthly updates significantly reduces the risk of a potential security drama. You don't want to be the person who needs to tell your company owners how a simple runtime update could have prevented a security breach...
 
-### Ready for Cloud Native {#h3-5-ready-for-cloud-native}
+### Ready for Cloud Native
 
 Java wasn't initially created to run in containers. Of course not; they didn't exist in 1995! Docker, microservices, observability,... are standard nowadays but were invented after Java was born.
 
 Thanks to the six-monthly release of new OpenJDK versions, the architects and the community can continue adapting and evolving it. Maybe not as fast as some want, but OpenJDK has always focused on stability. Still, each new version brings new features that enable Java to be used in all modern use cases.
 
-Reasons to Do Nothing {#h2-6-reasons-to-do-nothing}
----------------------------------------------------
+Reasons to Do Nothing
+---------------------
 
 Of course, doing nothing is an option. Just let things run as they are. But remember, every patch you don't apply is a technical debt you don't have to acknowledge. Every upgrade you postpone is a problem waiting to happen in the future. Yes, you can wait until you are retired or have moved to a new job; someone else will need to handle it.
 
@@ -99,8 +99,8 @@ Or did the original developer leave and there is no documentation? Then how can 
 
 No, there isn't a single reason that convinces me that "doing nothing" is an option...
 
-Read More {#h2-7-read-more}
----------------------------
+Read More
+---------
 
 Yes, this is not a new message. But it turns out that it needs to be repeated over and over again as too many companies keep being stuck on outdated systems! Some other posts may help you to convince your managers that a change is urgent and required:
 
@@ -110,8 +110,8 @@ Yes, this is not a new message. But it turns out that it needs to be repeated ov
 * [The Importance of Java Security Updates](https://www.azul.com/blog/the-importance-of-java-security-updates/)
 * [The Definitive Guide to Updating Azul Zulu Builds of OpenJDK](https://www.azul.com/blog/the-definitive-guide-to-updating-azul-zulu-builds-of-openjdk/)
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Companies like Azul can help you to maintain your Java 6, 7, and 8 environments for many more years. But there are a lot of reasons to move on. Support for these versions will end one day, and you want to be prepared for it. Make your systems future-proof now. Make your Developer and DevOps team happy and give them the tools they deserve by ensuring your runtime is secure and you reach maximum performance with modern Java versions.
 > You can find reactions on this blog post in this follow-up post:   

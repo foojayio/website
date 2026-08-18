@@ -23,20 +23,20 @@ Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around
 
 
 
-**Java Memory Architecture (Pre Java 8.0)** {#h2-0-java-memory-architecture-pre-java-8-0}
------------------------------------------------------------------------------------------
+**Java Memory Architecture (Pre Java 8.0)**
+-------------------------------------------
 
 Before we get started, you might want to take a look at Part 1. It explains the core concepts of the Java Memory Architecture, the ones that should get you started to understand this evolution better.
 
 Link to [Part 1](https://foojay.io/today/java-roots-1-java-memory-architecture/ "Part 1").  
 String Literals in Java are stored in a String Pool. String Interning refers to a process or method by which only one copy of a specific string is stored in memory. This is done to allow the efficient usage of memory while also taking less time to retrieve, except when the string is first created. This immutable single copy of the String is called an _intern._ Java provides a method in the _String_ class, _intern(),_ to actually create/retrieve this copy of the string.
 
-### **Pre-Java 7 Era (String Handling)** {#h3-1-pre-java-7-era-string-handling}
+### **Pre-Java 7 Era (String Handling)**
 
 Prior to Java 7, Interned Strings or String Literals were stored as part of the PermGen Space. In the above article, the way to configure the non-expandable or fixed PermGen has been provided, along with a diagram of where exactly it is located in memory. The PermGen space is always \*\*fixed.\*\*  
 One more point to note here is that _String Interns_ are candidates for garbage collection just like other Objects in Java. The default string pool size is 1009 and can be set through the switch -XX:StringTableSize.
 
-### **Java 7 Changes (String Handling)** {#h3-2-java-7-changes-string-handling}
+### **Java 7 Changes (String Handling)**
 
 So, with Java 7, Oracle engineers decided to move _String Interns_ to the Heap. As mentioned above, this decision has to do with the following factors:1. Fixed/non-expandable size of PermGen (leading to Out of Memory: PermGen Space).
 
@@ -44,15 +44,15 @@ So, with Java 7, Oracle engineers decided to move _String Interns_ to the Heap. 
 
 3. Set a higher number of Strings, even up to millions.
 
-### **Java 8 Changes (String Handling)** {#h3-3-java-8-changes-string-handling}
+### **Java 8 Changes (String Handling)**
 
 The above Java 7 changes of String handling continued into Java 8. Furthermore, in Java 8, the following change was made to the memory handling related to _StringInterning_.
 
 * The default number of Strings in the _String Pool_ is now 60013, as compared to 1009
 * At any point in time, you can check the _String Interning and Pooling_ usage statistics in the JVM by using -XX:+PrintStringTableStatistics (Symbol Table Statistics).
 
-**Java 8 Changes (PermGen to MetaSpace)** {#h2-4-java-8-changes-permgen-to-metaspace}
--------------------------------------------------------------------------------------
+**Java 8 Changes (PermGen to MetaSpace)**
+-----------------------------------------
 
 The most impactful change to Java has been the movement from PermGen to MetaSpace. The following are the changes in Java 8:
 

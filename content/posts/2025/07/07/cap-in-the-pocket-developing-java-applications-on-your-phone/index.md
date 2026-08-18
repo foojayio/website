@@ -24,8 +24,8 @@ Smartphones are more powerful then ever, with processors rivaling old laptops. S
 Below I'll show you how to do use run and develop a [CAP Java](https://cap.cloud.sap/docs/java/) [Spring Boot](https://spring.io/projects/spring-boot) application on your smartphone and how to run [VSCode](https://code.visualstudio.com/) locally to develop and modify it. This, of course, works only on Android phones, as they are a Linux at their core.
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_28_58-PM-2000x900.png)
 
-Termux {#h2-0-termux}
----------------------
+Termux
+------
 
 We first need a proper Linux environment with a package manager and more. The most popular app that facilitates this is [Termux](https://termux.dev/):
 > Termux is an **Android terminal emulator and Linux environment app** that works directly with no rooting or setup required. A minimal base system is installed automatically - additional packages are available using the APT package manager.
@@ -39,8 +39,8 @@ We have now two ways to go forward, we could
 2. Use an emulated Ubuntu in Termux
 3. Use the new Linux Terminal App
 
-Develop Directly in Termux {#h2-1-develop-directly-in-termux}
--------------------------------------------------------------
+Develop Directly in Termux
+--------------------------
 
 We start by using pure Termux, as it's [faster](https://www.reddit.com/r/termux/comments/hvzp9x/cpu_battle_termux_vs_linux_proot/) and more integrated into Android than the second approach. But we'll also see soon, why running in Ubuntu can have it's benefits.
 
@@ -99,8 +99,8 @@ You can still install the Java extensions from file by downloading the latest Li
 
 This is why I looked for other possibilities.
 
-Use an Emulated Ubuntu {#h2-2-use-an-emulated-ubuntu}
------------------------------------------------------
+Use an Emulated Ubuntu
+----------------------
 
 The problem with trying to run the official VSCode directly in Termux is that the Termux environment is too different from a normal Linux. Using [proot](https://wiki.termux.com/wiki/PRoot) we can emulate an Ubuntu environment and use it to install VSCode ([dev.to](https://dev.to/junaid_dev/setup-official-vs-code-on-android-5a)) and even a proper SapMachine on our phone.
 
@@ -184,8 +184,8 @@ In this we can install all the extensions we want and can start developing appli
 
 I would recommend to use "Add to Home screen" in your browser menu to create a VSCode web app on your home screen. This app then omits the browser menu bar, giving you more space to see your code.
 
-SAP CAP SFlight {#h2-3-sap-cap-sflight}
----------------------------------------
+SAP CAP SFlight
+---------------
 
 Let's start running and developing our application. You can of course create any application to your hearts content and use either Termux or the emulated Ubuntu. But I'll choose the latter and as a sample application the [SAP CAP SFlight application](https://github.com/SAP-samples/cap-sflight).
 
@@ -202,8 +202,8 @@ Let's start running and developing our application. You can of course create any
 
 I'm neither a CAP nor an SAP Fiori expert, but CAP is really important in the SAP context and can be used to write Java web applications. The initial idea for this whole blog post came out-of a discussion with the CAP Java folks (Robin de Silva Jayasinghe), which is why I'm choosing SFlight.
 
-Building and Running SAP CAP SFlight {#h2-4-building-and-running-sap-cap-sflight}
----------------------------------------------------------------------------------
+Building and Running SAP CAP SFlight
+------------------------------------
 
 Let's start by building SFlight on device. First we clone it:
 
@@ -303,8 +303,8 @@ Leading you to:
  <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_55_39-PM-1-900x2000.png" alt="" class="wp-image-2118" style="width:300px">
 </figure>
 
-Modifying the Application via VSCode {#h2-5-modifying-the-application-via-vscode}
----------------------------------------------------------------------------------
+Modifying the Application via VSCode
+------------------------------------
 
 We can use the VSCode instance that we launched before to access our SFlight project (`nohup code serve-web --port 8080 --without-connection-token &` to start it again if you stopped yours) and work with the code:
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_27_10-PM-2000x900.png)
@@ -336,8 +336,8 @@ Decreases the price to 0 USD:
 
 Nothing prevents us from using git to commit our change to some repo. This shows how we can easily modify our CAP/Spring-Boot application locally on our phone.
 
-Android Linux Terminal {#h2-6-android-linux-terminal}
------------------------------------------------------
+Android Linux Terminal
+----------------------
 
 In March Google [launched](https://www.androidpolice.com/android-15-linux-terminal-app/?ref=news.itsfoss.com) the native Linux Terminal app for Android on Google Pixel devices. Luckily the Android phone I use for all these tests is Pixel 8a which is one of the supported devices. The app offers essentially the same experience as the emulated Ubuntu in Termux:
 > The Terminal app operates by launching a Debian Linux environment within a virtual machine, powered by Android's Virtualization Framework (AVF). Rather than exposing the underlying Android file system, it gives you an isolated Linux shell---much like what ChromeOS has offered developers and enthusiasts for years.
@@ -453,8 +453,8 @@ Hopefully I can revisit this in a few months and it's fixed.
 
 **Update:** This terminal works much better with Android 16. It's still flaky, but it can run a proper CAP build-pipeline and VSCode without any issues.
 
-Extra: CAP-in-the-Pocket VSCode Extension {#h2-7-extra-cap-in-the-pocket-vscode-extension}
-------------------------------------------------------------------------------------------
+Extra: CAP-in-the-Pocket VSCode Extension
+-----------------------------------------
 
 Switching between VSCode for editing and the shell for killing the previous SFlight server instance is too cumbersome for my demo. So I created the [CAP-in-the-Pocket](https://github.com/parttimenerd/cap-in-the-pocket-extension) extension for VSCode:  
 
@@ -496,8 +496,8 @@ Creating this little plugin (with the help of Claude Sonnet and GitHub Copilot) 
 
 Please be aware that you should only use the extension when you access VSCode in the normal browser, as opening links in the web-app added to the home-screen doesn't work properly.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 In this blog post, I showed you how to install and use VSCode and Java on your Android phone and develop applications, using three different options. Of course there a cloud-offerings that allow you to develop applications from mobile devices too, but I like the simplicity of running the web application directly on your phone, with full control. All of this is possible because Android phones use Linux as their base level operating system.
 

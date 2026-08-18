@@ -58,8 +58,8 @@ record Data(
 
 This is what this week's article is all about.
 
-Communication {#h2-0-communication}
------------------------------------
+Communication
+-------------
 
 When two regular programs want to share information, they either send data via sockets or use shared memory that both programs can access:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/01/sockets_and_shared_mem-2000x865.png)
@@ -68,7 +68,7 @@ eBPF uses none of the above two approaches: Working with sockets makes a shared 
 
 Accessing any userland memory from eBPF at all is deemed to be experimental, according to the official BPF Design Q\&A:
 >
-> ### [Q: Can BPF overwrite arbitrary user memory?](https://www.kernel.org/doc/html/v6.6-rc5/bpf/bpf_design_QA.html#id29) {#h3-1-q-can-bpf-overwrite-arbitrary-user-memory}
+> ### [Q: Can BPF overwrite arbitrary user memory?](https://www.kernel.org/doc/html/v6.6-rc5/bpf/bpf_design_QA.html#id29)
 >
 > A: Sort-of.
 >
@@ -83,8 +83,8 @@ But how can we then communicate? This is where eBPF maps come in:
 
 These fixed-size data structures form the backbone of every eBPF application, and their support is vital to creating any non-trivial tool.
 
-Using basic eBPF maps {#h2-2-using-basic-ebpf-maps}
----------------------------------------------------
+Using basic eBPF maps
+---------------------
 
 Using these maps, we can implement our execve-call-counter eBPF program. We start with the simple version that just stores the counter in a simple user-id-to-counter hash map:
 
@@ -211,8 +211,8 @@ Storing simple numbers in a map is great, but what if we want to keep more compl
 
 The most recent addition to the hello-ebpf project is the support of record/struct values in maps:
 
-Storing more complex structs in maps {#h2-3-storing-more-complex-structs-in-maps}
----------------------------------------------------------------------------------
+Storing more complex structs in maps
+------------------------------------
 
 The eBPF code for this [example](https://github.com/parttimenerd/hello-ebpf/blob/a5e7f979b0560d9603b6736b9beb8874618d93fb/bcc/src/main/java/me/bechberger/ebpf/samples/own/HelloStructMap.java) is a slight extension of the previous example:
 
@@ -416,8 +416,8 @@ ID 0 (GID 0): 5 ID 1000 (GID 1000): 14
 
 Granted, it doesn't give you more insights into the observed system, but it is a showcase of the current state of the map support in hello-ebpf.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 eBPF maps are the primary way to communicate information between the eBPF program and the userland application.
 

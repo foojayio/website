@@ -29,8 +29,8 @@ Java 24 brings a diverse set of features, delivering performance improvements li
 Apart from these, a few new features from older releases have been repreviewed.
 > Short descriptions of the repreviewed features are provided to prevent this article from becoming a bit too lengthy. Each repreviewed feature has a link to a longer description of the feature should you wish to learn more.
 
-JEP Overview {#h2-0-jep-overview}
----------------------------------
+JEP Overview
+------------
 
 To start off, let's look at an overview of the JEPs that ship with Java 24. This table contains the preview status for all JEP's, to which project they belong, what kind of features they add and the things that have changed since Java 23.
 
@@ -61,12 +61,12 @@ To start off, let's look at an overview of the JEPs that ship with Java 24. This
 | **499** | Structured Concurrency                                             | Fourth Preview  | Loom          | Concurrency      | None                      |
 | **501** | Deprecate the 32-bit x86 Port for Removal                          |                 | HotSpot       | Deprecation      | Deprecation               |
 
-New features {#h2-1-new-features}
----------------------------------
+New features
+------------
 
 Let's start with the JEP's that add brand-new features to Java 24.
 
-### HotSpot {#h3-2-hotspot}
+### HotSpot
 
 Java 24 introduces five new features in [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -359,7 +359,7 @@ In cases like this, the JDK Flight Recorder will record a [`jdk.VirtualThreadPin
 
 For more information on this feature, read [JEP 491](https://openjdk.org/jeps/491).
 
-### Security Libs {#h3-3-security-libs}
+### Security Libs
 
 Java 24 introduces three new features that are part of the Security Libs:
 
@@ -572,7 +572,7 @@ boolean verified = sv.verify(sig);
 
 For more information on this feature, read [JEP 497](https://openjdk.org/jeps/497).
 
-### Tools {#h3-4-tools}
+### Tools
 
 Java 24 contains a single feature that is part of the JLink tool:
 
@@ -652,12 +652,12 @@ Note that the JEP also states that the feature may be enabled by default in a fu
 
 For more information on this feature, read [JEP 493](https://openjdk.org/jeps/493).
 
-Repreviews and finalizations {#h2-5-repreviews-and-finalizations}
------------------------------------------------------------------
+Repreviews and finalizations
+----------------------------
 
 Now it's time to take a look at a few features that might already be familiar to you, because they were introduced in a previous version of Java. They have been repreviewed (or finalized) in Java 24, with only minor changes compared to Java 23 in most cases. Therefore, to avoid a very lengthy article, we'll outline these changes and link to a previous article for a full feature description, should you wish to refresh your memory.
 
-### JEP 484: Class-File API {#h3-6-jep-484-class-file-api}
+### JEP 484: Class-File API
 
 Java frameworks often use bytecode transformation to add functionality, relying on libraries like [ASM](https://asm.ow2.io/) or [Javassist](https://www.javassist.org/). However, the JDK's six-month release cycle can outpace these libraries, causing compatibility issues. JEP 484 addresses this by proposing a standard class-file API that evolves with the JDK, ensuring up-to-date class file processing.
 
@@ -669,7 +669,7 @@ A few minor things changed to the API, based on feedback from the second preview
 
 For more information on this feature, read [JEP 484](https://openjdk.org/jeps/484) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-466-class-file-api-second-preview) from a previous article.
 
-### JEP 485: Stream Gatherers {#h3-7-jep-485-stream-gatherers}
+### JEP 485: Stream Gatherers
 
 The Stream API offers a relatively diverse but predetermined range of intermediate operations, including mapping, filtering, sorting and more. JEP 485 introduces *stream gatherers*, which allow developers to define their own custom intermediate stream operations, so they can transform streams in their own preferred ways.
 
@@ -681,7 +681,7 @@ Nothing was changed, apart from the fact that the API is now finalized in Java 2
 
 For more information on this feature, read [JEP 485](https://openjdk.org/jeps/485) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-473-stream-gatherers-second-preview) from a previous article.
 
-### JEP 487: Scoped Values (Fourth Preview) {#h3-8-jep-487-scoped-values-fourth-preview}
+### JEP 487: Scoped Values (Fourth Preview)
 
 *Scoped values* enable the sharing of immutable data within and across threads.  
 
@@ -701,7 +701,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, read [JEP 487](https://openjdk.org/jeps/487) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-481-scoped-values-third-preview) from a previous article.
 
-### JEP 488: Primitive Types in Patterns, instanceof and switch (Second Preview) {#h3-9-jep-488-primitive-types-in-patterns-instanceof-and-switch-second-preview}
+### JEP 488: Primitive Types in Patterns, instanceof and switch (Second Preview)
 
 Pattern matching now supports primitive types in all pattern contexts. On top of that, the `instanceof` and `switch` constructs have been extended to also work with all primitive types.
 
@@ -717,7 +717,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, read [JEP 488](https://openjdk.org/jeps/488) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-455-primitive-types-in-patterns-instanceof-and-switch-preview) from a previous article.
 
-### JEP 489: Vector API (Ninth Incubator) {#h3-10-jep-489-vector-api-ninth-incubator}
+### JEP 489: Vector API (Ninth Incubator)
 
 The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
 
@@ -739,7 +739,7 @@ The Vector API will keep incubating until necessary features of Project Valhalla
 
 For more information on this feature, read [JEP 489](https://openjdk.org/jeps/489) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-469-vector-api-eighth-incubator) from a previous article.
 
-### JEP 492: Flexible Constructor Bodies (Third Preview) {#h3-11-jep-492-flexible-constructor-bodies-third-preview}
+### JEP 492: Flexible Constructor Bodies (Third Preview)
 
 Flexible constructor bodies allow statements to appear before an explicit constructor invocation, like `super(..)` or `this(..)`. The statements cannot reference the instance under construction, but they can initialize its fields. Initializing fields before invoking another constructor makes a class more reliable when methods are overridden.
 
@@ -755,7 +755,7 @@ Compared to the preview version of this feature in Java 23, no significant chang
 
 For more information on this feature, read [JEP 492](https://openjdk.org/jeps/492) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-482-flexible-constructor-bodies-second-preview) from a previous article.
 
-### JEP 494: Module Import Declarations (Second Preview) {#h3-12-jep-494-module-import-declarations-second-preview}
+### JEP 494: Module Import Declarations (Second Preview)
 
 Module import declarations import all of the public top-level classes and interfaces in the packages exported by that module. They are a shorter alternative for listing many imports that originate from the same root package.
 
@@ -770,7 +770,7 @@ This feature is repreviewed in Java 24, with two additions:
 
 For more information on this feature, read [JEP 494](https://openjdk.org/jeps/494) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-476-module-import-declarations-preview) from a previous article.
 
-### JEP 495: Simple Source Files and Instance Main Methods (Fourth Preview) {#h3-13-jep-495-simple-source-files-and-instance-main-methods-fourth-preview}
+### JEP 495: Simple Source Files and Instance Main Methods (Fourth Preview)
 
 Simple source files allow developers to write Java programs without the need to explicitly declare a class. They can contain 'instance main methods': a shorter form of the classic `main()` method without requiring program arguments or imports. These two features simplify the process of writing small programs and scripts by reducing boilerplate code.
 
@@ -782,7 +782,7 @@ The two features in this JEP didn't change in Java 24; however, the feature that
 
 For more information on this feature, read [JEP 495](https://openjdk.org/jeps/495) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-477-implicitly-declared-classes-and-instance-main-methods-third-preview) from a previous article.
 
-### JEP 499: Structured Concurrency (Fourth Preview) {#h3-14-jep-499-structured-concurrency-fourth-preview}
+### JEP 499: Structured Concurrency (Fourth Preview)
 
 *Structured concurrency* treats groups of related tasks running in different threads as a single unit of work, thereby streamlining error handling and cancellation, improving reliability, and enhancing observability.
 
@@ -800,12 +800,12 @@ If you're interested in the future of this feature, [JEP draft #8340343](https:/
 
 If you prefer to get more information on the current state of this feature, then read [JEP 499](https://openjdk.org/jeps/499) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-480-structured-concurrency-third-preview) from a previous article.
 
-Deprecations \& Restrictions {#h2-15-deprecations-restrictions}
----------------------------------------------------------------
+Deprecations \& Restrictions
+----------------------------
 
 Java 24 also deprecates a few older features that weren't used that much and restricts a few other features that came with certain risks. Let's see which ones were involved in this effort to improve stability.
 
-### JEP 472: Prepare to Restrict the Use of JNI {#h3-16-jep-472-prepare-to-restrict-the-use-of-jni}
+### JEP 472: Prepare to Restrict the Use of JNI
 
 The Java Native Interface has been the factory standard of invoking foreign functions (outside of the JVM but on the same machine) for many years now. In Java 22 a more modern approach became available: the [Foreign Function \& Memory API](https://hanno.codes/2024/03/19/java-22-is-here/#jep-454-foreign-function--memory-api). Although the new FFM API is the preferred alternative to JNI, that doesn't mean that JNI will be phased out. On the contrary, the Java language designers want to make sure that migrating from one to the other can be done easily. To make that happen, this JEP introduces certain warnings to JNI to mirror the warnings that the FFM API already produces.
 
@@ -815,7 +815,7 @@ To be more precise, calling native code via JNI requires you to load a native li
 
 For more information on this feature, read [JEP 472](https://openjdk.org/jeps/472).
 
-### JEP 486: Permanently Disable the Security Manager {#h3-17-jep-486-permanently-disable-the-security-manager}
+### JEP 486: Permanently Disable the Security Manager
 
 The Security Manager has not been the primary method for securing client-side Java code for many years and is seldom used for server-side code. It is also costly to maintain. Consequently, it was deprecated for removal in Java 17 via [JEP 411](https://openjdk.org/jeps/411). JEP 486 takes the next logical step: developers are now prevented from enabling the Security Manager at all. The Java Language Designers feel this is a safe step to take, as the deprecation in Java 17 hardly had any impact. The Security Manager API will be removed in a future release.
 
@@ -827,7 +827,7 @@ That is a fair question, because it has rarely been used. The Security Manager, 
 
 For more information on this change, read [JEP 486](https://openjdk.org/jeps/486).
 
-### JEP 490: ZGC: Remove the Non-Generational Mode {#h3-18-jep-490-zgc-remove-the-non-generational-mode}
+### JEP 490: ZGC: Remove the Non-Generational Mode
 
 The Z Garbage Collector (ZGC) is a scalable, low-latency garbage collector. It has been [available for production use since Java 15](https://openjdk.org/jeps/377) and has been designed to keep pause times consistent and short, even for very large heaps. It uses techniques like region-based memory management and compaction to achieve this.
 
@@ -855,7 +855,7 @@ $ java -XX:+UseZGC -XX:-ZGenerational ...
 
 For more information on this feature, read [JEP 490](https://openjdk.org/jeps/490).
 
-### JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe {#h3-19-jep-498-warn-upon-use-of-memory-access-methods-in-sun-misc-unsafe}
+### JEP 498: Warn upon Use of Memory-Access Methods in sun.misc.Unsafe
 
 The `sun.misc.Unsafe` class contains 87 methods to perform low-level operations, such as accessing off-heap memory.  
 
@@ -888,7 +888,7 @@ A future release of Java will start throwing exceptions in these situations. In 
 
 For more information on this feature, see [JEP 498](https://openjdk.org/jeps/498). It has more details on the targeted methods, their alternatives from `VarHandle` and `MemorySegment` and how to configure the deprecation warnings with the new command-line option `--sun-misc-unsafe-memory-access` (to promote the warnings to `UnsupportedOperationException`s already, for example). It also provides a few migration examples.
 
-### JEP 501: Deprecate the 32-bit x86 Port for Removal {#h3-20-jep-501-deprecate-the-32-bit-x86-port-for-removal}
+### JEP 501: Deprecate the 32-bit x86 Port for Removal
 
 Supporting multiple platforms has been the focus of the Java ecosystem since the beginning.  
 
@@ -906,7 +906,7 @@ This means 32-bit users can still use JDK 24; however a future release will actu
 
 For more information on this deprecation, read [JEP 501](https://openjdk.org/jeps/501).
 
-### JEP 479: Remove the Windows 32-bit x86 Port {#h3-21-jep-479-remove-the-windows-32-bit-x86-port}
+### JEP 479: Remove the Windows 32-bit x86 Port
 
 This JEP removes the Windows 32-bit x86 port, which was to be expected after [its deprecation in Java 21](https://hanno.codes/2023/09/19/java-21-release-day/#jep-449-deprecate-the-windows-32-bit-x86-port-for-removal). This is due to the fact that Windows 10, the last Windows operating system to support 32-bit operation, [will reach end-of-life in October 2025](https://learn.microsoft.com/lifecycle/products/windows-10-home-and-pro). On top of that, the implementation of virtual threads on Windows 32-bit x86 is rudimentary to say the least: it uses a single platform thread for each virtual thread, effectively rendering the feature useless on this platform. So it's time to say goodbye to this port!
 
@@ -914,7 +914,7 @@ This JEP removes the Windows 32-bit x86 port, which was to be expected after [it
 
 For more information on this removal, read [JEP 479](https://openjdk.org/jeps/479).
 
-Final thoughts {#h2-22-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 And that concludes our discussion of the 24 JEP's that come with Java 24. But that's not even all that's new: [many other updates](https://jdk.java.net/24/release-notes) were included in this release, including various performance, stability and security updates. So what are you waiting for? Time to take this brand-new Java release for a spin!

@@ -27,8 +27,8 @@ Sooner or later any Spring application needs to store data. And of course, the f
 
 It is the easiest and most convenient way to store data (in a relational database like PostgreSQL), yet in the cloud environment it is also an expensive way. Pricing at AWS RDS starts at 30$/month with tiny-Instances and always have **fixed monthly costs regardless of its usage**.
 
-Enter EclipseStore {#h2-0-enter-eclipsestore}
----------------------------------------------
+Enter EclipseStore
+------------------
 
 Relational Databases are optimized for long runtimes. They take quite some time to startup and then should run for days at a time. Then every request is computed within milliseconds.
 
@@ -40,7 +40,7 @@ An approach like this means that no computing is done if it is not needed. **No 
 
 Even though it is not necessary to have servers with EclipseStore, it still needs storage to place and read the persisted data. Usually this is done on the hard drive, but with a little configuration, EclipseStore can store to a **variety of cloud storage providers** , including AWS S3, Azure Storage, Oracle Cloud Object Storage and [IBM COS](https://github.com/xdev-software/eclipse-store-afs-ibm-cos "IBM COS"). ([see all providers](https://docs.eclipsestore.io/manual/storage/storage-targets/index.html "see all providers"))
 
-### Rethink storage - Good Times Bad Times {#h3-1-rethink-storage-good-times-bad-times}
+### Rethink storage - Good Times Bad Times
 
 EclipseStore stores Java objects as binary data. So instead of mapping Java POJOs to a structure of tables like JPA, it simply serializes the data in a fast and efficient way. This poses a big, initial problem for developers: **They must rethink how the storage is working** . Rethink what they have been taught about databases all their lives. [Rethink when and what to store](https://docs.eclipsestore.io/manual/storage/storing-data/index.html#_storing_modified_objects "Rethink when and what to store").
 
@@ -57,8 +57,8 @@ In other words: **There are no working copies for your objects.** This enhances 
  </figcaption>
 </figure>
 
-Spring Integration with Spring-Data-Eclipse-Store {#h2-2-spring-integration-with-spring-data-eclipse-store}
------------------------------------------------------------------------------------------------------------
+Spring Integration with Spring-Data-Eclipse-Store
+-------------------------------------------------
 
 But what if you could have the best of both worlds: The **abstract storing/reading-Repositories of Spring Data JPA** and the **fast serialization** with cloud storages of your choosing?
 
@@ -71,8 +71,8 @@ This solves two issues that developers have with EclipseStore:
 
 ![Diagram showing an application that works with working copies of the java objects in memory by using Spring-Data-Eclipse-Store](WorkingCopy_2.svg) With Spring-Data-Eclipse-Store the application works with the working copies of the java objects
 
-Usage {#h2-3-usage}
--------------------
+Usage
+-----
 
 Using Spring-Data-Eclipse-Store is as easy as adding three code snippets:
 
@@ -100,8 +100,8 @@ public interface CustomerRepository extends CrudRepository<Customer, String>
 
 This minimal effort makes the Spring-Data-Eclipse-Store library **compatible as drop in replacement**.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 The Spring-Data-Eclipse-Store library helps to set up a **fast and versatile storage system** with **accustomed Spring Data JPA behavior**.
 

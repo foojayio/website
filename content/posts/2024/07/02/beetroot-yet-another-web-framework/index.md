@@ -28,8 +28,8 @@ A few years ago, I evaluated around 10 of these frameworks for a project for a S
 It was only later that [SpringBoot](https://spring.io/projects/spring-boot) came along, which seemed to fulfill all the requirements and there was actually very little to criticize about it. Then came microservices such as [Quarkus](https://quarkus.io/) or [Micronaut](https://micronaut.io/), which are often compiled into native code for small web service applications, but which can then rarely be embedded in a more mature architecture.
 ![beetRoot starting on console](https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-login.webp)
 
-The "Buts" {#h2-0-the-buts}
----------------------------
+The "Buts"
+----------
 
 Something that has always bothered me is that with full-blown frameworks, the configuration layer of the components is too opaque and complicated and the web microservices don't really offer much out of the box.
 
@@ -37,8 +37,8 @@ So what I want is a fully-fledged, high-performance Java web development framewo
 
 <br />
 
-What is beetRoot? {#h2-1-what-is-beetroot}
-------------------------------------------
+What is beetRoot?
+-----------------
 
 beetRoot is a slim and rapid Java web development as well as a full \& secure client-server framework ready to run.
 
@@ -55,10 +55,10 @@ autumo beetRoot is open source ([Apache License 2.0](https://www.apache.org/lice
 
 <br />
 
-How to QuickStart? {#h2-2-how-to-quickstart}
---------------------------------------------
+How to QuickStart?
+------------------
 
-### Linux, macOS {#h3-3-linux-macos}
+### Linux, macOS
 
 Enter the following statements into your UNIX terminal:
 
@@ -102,16 +102,16 @@ Now go to <http://localhost:8778> and log in:
 
 <br />
 
-QuickStart Video {#h2-4-quickstart-video}
------------------------------------------
+QuickStart Video
+----------------
 
 Take a look at the QuickStart Video if you want to play around with the framework.
 [![Quickstart Video](https://i3.ytimg.com/vi/X2_FVYiMnIE/hqdefault.jpg)](https://youtu.be/X2_FVYiMnIE)
 
 <br />
 
-Full Feature List {#h2-5-full-feature-list}
--------------------------------------------
+Full Feature List
+-----------------
 
 The Web framework is shipped with the following features ready to use:
 
@@ -151,8 +151,8 @@ The Web framework is shipped with the following features ready to use:
 
 <br />
 
-Links {#h2-6-links}
--------------------
+Links
+-----
 
 * [Project website](https://github.com/autumoswitzerland/autumo-beetroot)
 * [API Docs](https://products.autumo.ch/javadoc/autumo-beetroot/index.html)

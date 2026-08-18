@@ -33,8 +33,8 @@ Please feel free to clone [this repository](https://github.com/SimonVerhoeven/ar
 
 
 
-Defining what is analyzed {#h2-0-defining-what-is-analyzed}
------------------------------------------------------------
+Defining what is analyzed
+-------------------------
 
 There are a couple of ways to determine what should be analyzed:
 
@@ -47,10 +47,10 @@ Examples can be found in the `analysismanagement` package
 
 
 
-Areas {#h2-1-areas}
--------------------
+Areas
+-----
 
-### Core {#h3-2-core}
+### Core
 
 This contains well, the Core API of ArchUnit which offers us ways to access fields, methods, classes, ... (`JavaMethod, JavaField, getMethods(), getRawParametersTypes(), ...`)
 
@@ -82,7 +82,7 @@ services.forEach(service -> {
 
 As you can see this is a tad cumbersome, and this is where the higher-level Lang API comes into play
 
-### Lang {#h3-3-lang}
+### Lang
 
 The lang API offers us some nice functionalities to be more expressive about our architectural concepts.
 
@@ -98,7 +98,7 @@ rule.check(importedClasses);
 ```
 
 
-### Library {#h3-4-library}
+### Library
 
 The library API offers us some nice convenience functions to easily check some common, but complex patterns
 
@@ -179,10 +179,10 @@ An example can be found in the [SliceTest](https://github.com/SimonVerhoeven/arc
 
 
 
-Customization {#h2-5-customization}
------------------------------------
+Customization
+-------------
 
-### Custom rules {#h3-6-custom-rules}
+### Custom rules
 
 We can also define our own rules that adhere to the general architectural rule of `classes that {PREDICATE} should {CONDITION}` by creating our own implementation of `DescribedPredicate` and `ArchCondition` respectively in case the predefined rules do not quite fit our needs.
 
@@ -215,7 +215,7 @@ void controllerCheck() {
 
 An example can be found in the [CustomPredicateAndConditionTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomPredicateAndConditionTest.java) where we define a predicate for what we think a controller looks like, and our condition with the rules we agreed it should adhere to.
 
-### Custom concepts {#h3-7-custom-concepts}
+### Custom concepts
 
 ArchUnit also allows us to control the type of objects that our different concepts (business modules/modules/slices/...) target using `AbstractClassesTransformer`.
 
@@ -237,7 +237,7 @@ ClassesTransformer<JavaField> constantClassFields = new AbstractClassesTransform
 
 An example can be found in the [CustomConceptsTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomConceptsTest.java) where we check all our fields in our constants are defined as `Static` and `Final`. You can transform to other concepts such as a BookModule for example.
 
-### Display format {#h3-8-display-format}
+### Display format
 
 It is possible to customize the format of the generated messages by creating an implementation of `FailureDisplayFormat` and configuring it in `archunit.properties`.
 
@@ -265,8 +265,8 @@ An example implementation can be found in the [UppercasingFailureFormat](https:/
 
 
 
-Predefined predicates and conditions {#h2-9-predefined-predicates-and-conditions}
----------------------------------------------------------------------------------
+Predefined predicates and conditions
+------------------------------------
 
 Now custom predicates like in the [custom predicates and conditions](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomPredicateAndConditionTest.java) example can often be created using predefined elements which ArchUnit tends to put in an inner `Predicates` class in the targeted type.
 
@@ -292,8 +292,8 @@ An example implementation can be found in the [PredefinedPredicatesAndConditions
 
 
 
-PlantUML {#h2-10-plantuml}
---------------------------
+PlantUML
+--------
 
 ArchUnit also allows us to import [PlantUML](https://plantuml.com/component-diagram) diagrams and derive our rules from it to validate our imported `JavaClasses`.
 
@@ -329,8 +329,8 @@ An example implementation can be found in the [PlantUMLTest](src%5Ctest%5Cjava%5
 
 
 
-Architecture metrics {#h2-11-architecture-metrics}
---------------------------------------------------
+Architecture metrics
+--------------------
 
 ArchUnit also allows us to calculate metrics using some well-known software architecture metrics such as:
 
@@ -382,8 +382,8 @@ For more information on these metrics, you check out the references at the end o
 
 
 
-Resolution behaviour {#h2-12-resolution-behaviour}
---------------------------------------------------
+Resolution behaviour
+--------------------
 
 By default ArchUnit searches for missing classes (a class within the import scope has a reference to a class outside it) on your classpath.  
 
@@ -424,8 +424,8 @@ Keep in mind that these should be set to a reasonable default, as the depth can 
 
 
 
-Adding ArchUnit to an existing application {#h2-13-adding-archunit-to-an-existing-application}
-----------------------------------------------------------------------------------------------
+Adding ArchUnit to an existing application
+------------------------------------------
 
 In case you want to add `ArchUnit` to an existing application, you might run into a situation where there are a lot of existing violations, this is where `FreezingArchRule` comes into play.
 
@@ -467,8 +467,8 @@ One can also just tailor their `.that()` to ignore these legacy classes, but tha
 
 
 
-Notes {#h2-14-notes}
---------------------
+Notes
+-----
 
 1)  
 
@@ -524,8 +524,8 @@ It is possible to run ArchUnit rules directly from Maven using the Maven plugin 
 
 
 
-References {#h2-15-references}
-------------------------------
+References
+----------
 
 * Cumulative dependency metrics - Large-Scale C++ Software Design by John Lakos
 * Component dependency metrics - Clean Architecture by Robert C. Martin

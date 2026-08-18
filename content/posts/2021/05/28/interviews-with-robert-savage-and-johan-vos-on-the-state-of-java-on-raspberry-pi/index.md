@@ -29,8 +29,8 @@ Here on Foojay.io, you can find already [a long list of articles about Java on t
 
 But maybe you don't have / want to believe me? So let's ask two experts what they think is the future of [#JavaOnRaspberryPi](https://twitter.com/search?q=%23JavaOnRaspberryPi&src=typed_query).
 
-Pi4J, the Java I/O library for the Raspberry Pi {#h2-0-pi4j-the-java-i-o-library-for-the-raspberry-pi}
-------------------------------------------------------------------------------------------------------
+Pi4J, the Java I/O library for the Raspberry Pi
+-----------------------------------------------
 
 [The Pi4J project](https://pi4j.com/) aims to unite Java programming with electronics. The project started in 2012. Version 1.3 was released in February 2021 to support the newest Raspberry Pi boards (4, 400, and Compute 4) and is the last version that is based on Java 8. V1.4 is targeting Java 11 and in the final test.
 
@@ -39,8 +39,8 @@ By using the Pi4J-dependency in a project, controlling electronic components con
 
 Work is ongoing for a totally refactored V2 which will bring modules and improved architecture to make the project easier to maintain, test and release. In the next articles in this series, we will use this V2 to show you how to program on the Raspberry Pi and control different electronic components.
 
-Interview with Robert Savage {#h2-1-interview-with-robert-savage}
------------------------------------------------------------------
+Interview with Robert Savage
+----------------------------
 
 Robert is the founding father of the Pi4J project. He started in 2012 and quickly got a lot of attention from the Java community. Pi4J is now actively in use in a lot of projects. He also presented his work in the Devoxx 2014 and Oracle Code One 2019 conferences.
 
@@ -83,15 +83,15 @@ That is a tricky question. By nature, at least historically speaking, embedded s
 
 My sincere hope is that Pi4J remains a viable and relevant resource for Java enthusiasts and continues to provide a simple object-oriented approach to interacting with the low-level IO offered on the RaspberryPi. I have always thought of Pi4J as the conduit allowing Java programmers to interact with the physical world and help abstract as much of the low-level complexity as possible. With greater community involvement and a new software architecture established in Pi4J version 2, I think we are much better positioned to embrace future changes and greater extensibility.
 
-Building user interfaces with JavaFX {#h2-2-building-user-interfaces-with-javafx}
----------------------------------------------------------------------------------
+Building user interfaces with JavaFX
+------------------------------------
 
 An important plus for Java on the Raspberry Pi is JavaFX. This framework allows you to build beautiful user interfaces which look and behave exactly the same on all devices, yes, also our Raspberry Pi! This means you only need to master one programming language for both the logic of your application, the user interface and controlling electronic components when combined with Pi4J.
 
 Although in the current trend a backend is mostly combined with a loosely coupled web-user interface, I strongly believe that one integrated solution is more performant and easier to build and maintain. That's where Java and JavaFX are a perfect match.
 
-Interview with Johan Vos {#h2-3-interview-with-johan-vos}
----------------------------------------------------------
+Interview with Johan Vos
+------------------------
 
 We asked Johan Vos, co-founder of Gluon, why Java on embedded devices is a hot topic. Gluon is the company leading the open-source development of JavaFX within the openjfx.io project. On [their website](https://gluonhq.com/developers/samples/), you can also find a lot of tools, documentation, and samples to get started with JavaFX.
 ![](gluon-team-duke-choice-awards-1024x683.jpg)
@@ -122,8 +122,8 @@ The Gluon JavaFX 11 LTS program is also supporting embedded devices, which is an
 
 Yes, that is the idea from the previous questions: we don't want specific API's, we want Java API's that have different implementations on different devices. Developers use those Java API's and don't have to worry about how they are implemented.
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Indeed, Java and JavaFX are a great match with the Raspberry Pi. Maybe you are not convinced yet, but in the next articles in Java Magazine, and here on Foojay you can find a lot of examples to get you started!
 

@@ -31,14 +31,14 @@ We discuss why that is and how debuggers solve that problem. We also explain how
 
 <br />
 
-Transcript {#h2-0-transcript}
------------------------------
+Transcript
+----------
 
 Welcome back to the seventh part of debugging at scale where we don't treat debugging like taking out the garbage.
 
 Concurrency and parallelism are some of the hardest problems in computer science. But debugging them doesn't have to be so hard. In this section we'll review some of the IDE capabilities related to threading as well various tricks and asynchronous code features.
 
-### Thread Views {#h3-1-thread-views}
+### Thread Views
 
 Let's start by discussing some of the elements we can enable in terms of the thread view. In the stack frame we can look at all the current threads in the combo box above the stack frame. We can toggle the currently selected thread and see the stack for that thread and the thread status. Notice that here we chose to suspend all threads on this breakpoint. If the threads were running we wouldn't be able to see their stack as it's constantly changing.
 
@@ -50,7 +50,7 @@ The thread groups option is probably the most obvious change as it arranges all 
 
 Other than that we can show additional information such as the file name, line number, class name and argument types. I personally like showing everything but this does create a somewhat noisy view that might not be as helpful. Now that we switched on the grouping we can see the hierarchy of the threads. This mode is a bit of a double-edged sword since you might miss out on an important thread in this case but If you have a lot of threads in a specific group it might be the only way you can possibly work. I think we'll see more features like this as project Loom becomes the standard and the thread count increases exponentially. I'm sure this section will see a lot of innovation moving forward.
 
-### Debugging a Race Condition {#h3-2-debugging-a-race-condition}
+### Debugging a Race Condition
 
 Next we'll discuss debugging race conditions. The first step of debugging a race condition is a method breakpoint. I know what I said about them but in this case we need it. Notice the return statement in this method includes a lot of code. If I place a breakpoint on the last line it will happen before that code executes and my coverage won't include that part.
 
@@ -60,11 +60,11 @@ I now do the exact same thing for a line breakpoint on the first line in the met
 
 Going down the list it's obvious that multiple threads enter the code. That means there's a risk of a race condition. Now it means I need to read the logs and see if an enter for one thread happened before the exit of another thread. This is a bit of work but is doable.
 
-### Debugging a Deadlock {#h3-3-debugging-a-deadlock}
+### Debugging a Deadlock
 
 Next let's discuss deadlocks. Here we have two threads each is waiting on a monitor held by the other thread. This is a trivial deadlock but debugging is trivial even for more complex cases. Notice the bottom two threads have a "MONITOR" status. This means they're waiting on a lock and can't continue until it's released. Typically, you'd see this in Java as a thread is waiting on a synchronized block. You can expand these threads and see what's going on and which monitor is held by each thread. If you're able to reproduce a deadlock or a race in the debugger they are both simple to fix.
 
-### Asynchronous Stack Traces {#h3-4-asynchronous-stack-traces}
+### Asynchronous Stack Traces
 
 Stack traces are amazing in synchronous code but what do we do when we have asynchronous callbacks?
 
@@ -72,7 +72,7 @@ Here we have a standard Async Example from JetBrains that uses a list of tasks a
 
 Here's where things get interesting. As you can see there's a line that separates the async stack from the current stack on the top. The IDE detected the invocation of a separate thread and kept the stack trace on the side. Then when it needed the information it took the stack trace from before and glued it to the bottom. The lower part of the stack trace is from the main thread and the top portion is on the executor thread. Notice that this works seamlessly with Swing, executors, Spring Async annotation etc. Very cool!
 
-### Asynchronous Annotations {#h3-5-asynchronous-annotations}
+### Asynchronous Annotations
 
 That's pretty cool but there's still a big problem. How does that work and what if I have custom code?
 
@@ -80,7 +80,7 @@ It works by saving the stack trace in places where we know an asynchronous opera
 
 By adding the async schedule and async executor annotations I can determine the point where an async code might launch which is the schedule marker. I can place it on a variable to indicate the variable I want to use to lookup the right stack trace. I do the same thing with execute and get custom async stack traces. I can put the annotations on a method and the current object will be used instead.
 
-### Final Word {#h3-6-final-word}
+### Final Word
 
 In the next video we'll discuss memory debugging. This goes beyond what the profiler provides, the debugger can be a complimentary surgical tool you can use to pinpoint a specific problem and find out the root cause.  
 

@@ -38,10 +38,10 @@ So the Spring team decided to introduce the `RestClient` which:
 
 Now let's have some fun with it, and please do feel free to check out [the repository](https://github.com/SimonVerhoeven/restclient-demo)!
 
-Usage {#_usage}
----------------
+Usage
+-----
 
-### Using rest client builder {#_using_rest_client_builder}
+### Using rest client builder
 
 We start out by creating our rest client:
 
@@ -81,7 +81,7 @@ Now in case we're interested in the whole response including the status code, we
 
 Or in case of a call where the response does not interest us, we can use `.toBodilessEntity()`.
 
-### Using a declarative HTTP interface {#_using_declarative_http_interface}
+### Using a declarative HTTP interface
 
 Now as mentioned at the start, one of the upsides of the new RestClient is that we can also use it for declarative HTTP clients.
 
@@ -124,7 +124,7 @@ And we'll receive:
 ```
 
 
-### Error handling {#h3-3-error-handling}
+### Error handling
 
 By default, RestClient will throw a subclass of RestClientException upon a `4**` or `5**` status code, but we can override this using `onStatus` so that we can define our own status handlers:
 
@@ -135,7 +135,7 @@ By default, RestClient will throw a subclass of RestClientException upon a `4**`
 ```
 
 
-### More granular control {#h3-4-more-granular-control}
+### More granular control
 
 In some cases, we might want to do some more advanced things for which we need access to the underlying HTTP request or HTTP response. This can be achieved by using`exchange`.
 
@@ -153,8 +153,8 @@ return this.restClient
 ```
 
 
-Wrap-up {#_wrap_up}
--------------------
+Wrap-up
+-------
 
 I hope this sheds some light on the how, and why. And if you're adding `Webflux` just to make use of `WebClient` please consider changing to `RestClient`.
 

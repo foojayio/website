@@ -25,7 +25,7 @@ In [Part 1](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/) and [Pa
 
 *The use case I am trying to build here is for the given URL; it navigates the entire website and retrieves the content and gives key points and the summary of the page using **the AgentCore Browser** tool.*
 
-### 1. Adding Built-in Tools: AgentCore Browser {#h3-0-1-adding-built-in-tools-agentcore-browser}
+### 1. Adding Built-in Tools: AgentCore Browser
 
 AgentCore provides specialized tools, such as the Browser and Code Interpreter, which the SDK exposes as Spring AI tool callbacks through the [ToolCallbackProvider](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/ToolCallbackProvider.html){#https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/ToolCallbackProvider.html} interface.
 
@@ -41,7 +41,7 @@ To start with, add the below dependency in pom.xml
 ```
 
 
-### 2. Add the below class. {#h3-1-2-add-the-below-class}
+### 2. Add the below class.
 
 ```java
 package com.bsmlabs.springai.agents;
@@ -241,7 +241,7 @@ The key concept here is ***.defaultToolCallbacks(browserTools)***. This line ena
 ```
 
 
-### 3. Create a Controller {#h3-2-3-create-a-controller}
+### 3. Create a Controller
 
 ```java
 package com.bsmlabs.springai.agents;
@@ -324,7 +324,7 @@ public class SummaryController {
 ```
 
 
-### 4. Create a Thymeleaf UI page {#h3-3-4-create-a-thymeleaf-ui-page}
+### 4. Create a Thymeleaf UI page
 
 #### 4.1. Add the thymeleaf dependency
 
@@ -499,7 +499,7 @@ under ***/src/main/resources/template*s** folder add the below ***summary.html**
 ```
 
 
-### 5. Verify {#h3-4-5-verify}
+### 5. Verify
 
 Start the application and then access the following: <http://localhost:8080> and verify using the below URL.
 
@@ -591,7 +591,7 @@ Return only HTML.
 
 Happy Learning!
 
-### References {#h3-5-references}
+### References
 
 * <https://aws.amazon.com/blogs/machine-learning/spring-ai-sdk-for-amazon-bedrock-agentcore-is-now-generally-available>
 * <https://www.thymeleaf.org/>

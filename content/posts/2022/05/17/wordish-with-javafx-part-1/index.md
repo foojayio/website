@@ -22,8 +22,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Building Games and Having Fun with Java and JavaFX {#h2-0-building-games-and-having-fun-with-java-and-javafx}
--------------------------------------------------------------------------------------------------------------
+Building Games and Having Fun with Java and JavaFX
+--------------------------------------------------
 
 Wordish is a JavaFX implementation of the game Wordle. It's like Wordle. It is Wordle-ish. It's Wordish.
 ![](playgame5-308x510.png) Figure 1. Wordish main layout view
@@ -34,7 +34,7 @@ As I played Wordle, I realized how much fun it would be to create a JavaFX imple
 
 As you work through successive guesses, the virtual keyboard letters reflect the same color-coded feedback to help with your next submission. *(Cool CSS customizations!)* And, when you figure out the correct word, a cute little word happy dance rewards your efforts. *(Yet more animation!)* I couldn't resist!
 
-### **Here's how to play:** {#h3-1-here-s-how-to-play}
+### **Here's how to play:**
 
 Guess the word in six tries or less. Each guess must be a valid five-letter word. When you've typed in your five letters, hit the ENTER button to submit. After each guess, the color of the tiles changes to reflect your guess, as follows. Green indicates the correct letter in the correct position. Yellow indicates the correct letter in the wrong position. And gray indicates the letter is not in the word at all.
 
@@ -42,8 +42,8 @@ Wordish is a JavaFX implementation of Wordle. Wordish is a bit different from Wo
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>. Let's get started!
 
-Wordish Roadmap {#h2-2-wordish-roadmap}
----------------------------------------
+Wordish Roadmap
+---------------
 
 We present this discussion in the following five parts:
 
@@ -53,8 +53,8 @@ We present this discussion in the following five parts:
 4. What's in a Word, Anyway: Getting the target word, is a word valid? Coming soon.
 5. Chart Your Guesses: Customizing charts with orientation and colors, adding nodes to the chart scene graph, implementing a customized Popup control. Coming soon.
 
-Part 1: The Main UI Layout {#h2-3-part-1-the-main-ui-layout}
-------------------------------------------------------------
+Part 1: The Main UI Layout
+--------------------------
 
 JavaFX typically uses FXML to describe a UI scene. FXML, an XML-based markup language, is well-suited to define a JavaFX scenegraph, since both have a hierarchical structure. [Scene Builder](https://gluonhq.com/products/scene-builder/), an open-source drag-and-drop tool, lets you build your view visually and produces FXML. Figure 2 shows the view we built using Scene Builder for the Wordish main application view, **wordish.fxml** and Figure 3 shows the layout containers that hold the scene graph. Let's start with the layout.
 
@@ -76,7 +76,7 @@ Part of the challenge of building a view is picking the best layout containers. 
 
 Under the AnchorPane, we have a VBox (vertical box), since our main scene consists of vertically placed controls. These are the action buttons, the title, the labels that hold the user's letters, and the virtual keyboard.
 
-### **GridPane** {#h3-4-gridpane}
+### **GridPane**
 
 The top three buttons and the title are in a three-column by two-row grid pane, as shown in Figure 4. The title is centered and spans all columns of the grid pane. We widen the title by inserting blanks between its letters. The action buttons are spread out by increasing the GridPane's Vgap property to 15.
 
@@ -89,7 +89,7 @@ The top three buttons and the title are in a three-column by two-row grid pane, 
 
 Note that the top action buttons have customized graphics. First, on the left, the *Replay* icon lets you play a new game. Next, in the middle, the *Information* icon displays the rules of Wordish. Finally, on the right, the *Bar Chart*icon displays the game and guess statistics for this session. We show how to configure the icon library in Part 2.
 
-### **TilePane** {#h3-5-tilepane}
+### **TilePane**
 
 Under the GridPane is the TilePane, as shown in Figure 5. TilePane arranges its child nodes in rows and columns, where each tile is the same size. This is perfect for our view, since the letter guess labels appear in equal-sized controls. We use the visual capabilities of Scene Builder to set the TilePane's properties: the Preferred Tile Width (55), Preferred Tile Height (50), Preferred Columns (5), and Preferred Rows (6). The Vgap and Hgap are both 5. Although you could use a GridPane here, the TilePane is easier to configure. You don't need to assign specific row and column numbers to the child nodes because the TilePane layout manager takes care of that for you.
 
@@ -100,7 +100,7 @@ Under the GridPane is the TilePane, as shown in Figure 5. TilePane arranges its 
  </figcaption>
 </figure>
 
-### **FlowPane** {#h3-6-flowpane}
+### **FlowPane**
 
 We build our virtual keyboard with the FlowPane layout container, as shown in Figure 6. We add multiple Button controls to the FlowPane container, where each Button corresponds to a letter key, Enter, or Delete. FlowPane is similar to TilePane, but here we are not limited to equal-sized tiles and the tiles do not have to align in a grid. Using Scene Builder, we can experiment with the FlowPane size, as well as the specific size of the buttons, to achieve the keyboard layout that we want.
 
@@ -111,7 +111,7 @@ We build our virtual keyboard with the FlowPane layout container, as shown in Fi
  </figcaption>
 </figure>
 
-### **Resizing the Window** {#h3-7-resizing-the-window}
+### **Resizing the Window**
 
 When running the desktop version of Wordish, the user can resize the top window, as shown in Figure 7. Here, we increase the window width from the default size as compared to Figure 2.
 
@@ -126,8 +126,8 @@ Normally, when you increase the width of a TilePane or FlowPane control, the lay
 
 **Note** : See file [**wordish.fxml**](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/wordish.fxml)in the github repository for the above UI code.
 
-**Controller Class** {#h2-8-controller-class}
----------------------------------------------
+**Controller Class**
+--------------------
 
 Each view described by an FXML file has an associated controller class specified in the fxml. JavaFX includes an FXMLLoader class that builds the scene graph from the JavaFX controls you specify in your FXML file. The FXMLLoader class also instantiates the controller class and injects any of the FXML-defined controls that your controller class needs to access.
 
@@ -151,7 +151,7 @@ public class WordishController {
 ```
 
 
-### Accessing the Letter Label \& Key Button Controls {#h3-9-accessing-the-letter-label-key-button-controls}
+### Accessing the Letter Label \& Key Button Controls
 
 So far, so good. But what's the best way to access the Label controls that display the letters a user picks for their guess? Clearly, providing individual `fx:id` attribute names for each of the 30 label controls is not only tedious, but we also need a way to efficiently manipulate these controls. In every guess activity, the user provides a five-letter word; each letter must be displayed and accessed during play. We also require access to the virtual keyboard buttons during play.
 
@@ -164,7 +164,7 @@ Figure 8 shows the labels in the first row containing the word "STONE." Accessin
  </figcaption>
 </figure>
 
-### Using Modern Java {#h3-10-using-modern-java}
+### Using Modern Java
 
 The good news is that JavaFX is Java and JavaFX is *modern* Java. That means we can use recent features of Java, starting with Lambdas and Streams in Java 8 and even newer features like Records and Switch Expressions. You'll see that we leverage modern Java to manage these controls in the appropriate list and map collections.
 
@@ -172,7 +172,7 @@ The JavaFX layout containers (such as TilePane, GridPane, VBox, and FlowPane) ma
 
 **Note:** LetterLabel is a class that extends Label and KeyButton is a class that extends Button. We discuss these two customized controls in Part 2.
 
-### Leveraging Streams {#h3-11-leveraging-streams}
+### Leveraging Streams
 
 Here is how the WordishController class initializes the data structures `letters` (a List) and `keyLetters` (a Map) with these customized controls.
 
@@ -214,12 +214,12 @@ The lettered keys are the ones that reflect the game-playing status. As shown in
 
 **Note** : See **[WordishController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/WordishController.java)** for the above described code.
 
-**Mobile Phone Settings: iOS and Android** {#h2-12-mobile-phone-settings-ios-and-android}
------------------------------------------------------------------------------------------
+**Mobile Phone Settings: iOS and Android**
+------------------------------------------
 
 While it's easy and quick to run this program on the desktop using the standard JVM, we'd also like to target the application for a mobile environment. Using the [Gluon Substrate GraalVM](https://start.gluon.io/) plugin, which uses an ahead-of-time compiler and bundles all the support libraries you need to run the application natively, we can install the application on both an iPhone and Android device. We discussed how to do this in a separate three-part article [here](https://foojay.io/today/creating-mobile-apps-with-javafx-part-1/).
 
-### **iOS Customization** {#h3-13-ios-customization}
+### **iOS Customization**
 
 For iOS, we modify the **Default-Info.pList** file and provide application-specific icons. Gluon substrate generates default values for both the icons and **Default-Info.plist** under the subdirectory **target** . Copy these to **src/ios** to customize.
 
@@ -252,7 +252,7 @@ Next, we create an icon for our app. We use [Inkscape](https://inkscape.org/) to
  </figcaption>
 </figure>
 
-### **Android Customizations** {#h3-14-android-customizations}
+### **Android Customizations**
 
 For Android, modify file **AndroidManifest.xml** to customize the Android application. Here, we again want to limit the application to portrait mode, as follows.
 

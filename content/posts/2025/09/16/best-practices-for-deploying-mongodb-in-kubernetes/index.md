@@ -31,8 +31,8 @@ If you're new to the Atlas Kubernetes Operator, check out our [quick start guide
 
 In this guide, we'll explore production-ready [best practices for deploying MongoDB with Kubernetes](https://www.mongodb.com/docs/kubernetes/current/tutorial/plan-k8s-op-considerations/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly).
 
-1. Use the MongoDB Kubernetes Operator {#h2-0-1-use-the-mongodb-kubernetes-operator}
-------------------------------------------------------------------------------------
+1. Use the MongoDB Kubernetes Operator
+--------------------------------------
 
 Managing MongoDB manually in Kubernetes can quickly become complex. You'd need to configure [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), wire up persistent storage, manage services for each pod, and ensure the cluster maintains high availability through scaling events and upgrades. It's doable, but error-prone, and even small mistakes can lead to data loss or downtime.
 
@@ -65,8 +65,8 @@ To install the MongoDB Kubernetes Operator, you can use [Helm](https://helm.sh/)
 
 Before we go deeper into scaling and availability, we need to understand how MongoDB maintains identity and state inside a Kubernetes environment.
 
-2. StatefulSets and persistent volumes: Running MongoDB the right way {#h2-1-2-statefulsets-and-persistent-volumes-running-mongodb-the-right-way}
--------------------------------------------------------------------------------------------------------------------------------------------------
+2. StatefulSets and persistent volumes: Running MongoDB the right way
+---------------------------------------------------------------------
 
 MongoDB is a stateful database, and running it safely in Kubernetes means respecting both its need for stable identity and durable storage. Kubernetes offers two key building blocks to make that possible: StatefulSets and persistent volumes. When deploying MongoDB, they always go hand-in-hand.
 
@@ -76,7 +76,7 @@ Behind the scenes, the MongoDB Kubernetes Operator [creates these StatefulSets a
 
 You can configure this persistence behavior in your CRD under spec.persistent, which should be set to true (this is the default). You can also choose between a single shared volume for all data and logs, or separate volumes to isolate I/O:
 
-### Example: Recommended multiple volume configuration {#h3-2-example-recommended-multiple-volume-configuration}
+### Example: Recommended multiple volume configuration
 
 ```
 spec:
@@ -98,14 +98,14 @@ For a full example of persistent volumes configuration, see [replica-set-persist
 
 Together, StatefulSets and persistent volumes give MongoDB what it needs to run reliably in Kubernetes: stable identities, durable data, and predictable recovery. Understanding how these pieces work, even if the Operator is managing them for you, is key to operating MongoDB clusters confidently at scale.
 
-3. Set CPU and memory resources for MongoDB and the Operator {#h2-3-3-set-cpu-and-memory-resources-for-mongodb-and-the-operator}
---------------------------------------------------------------------------------------------------------------------------------
+3. Set CPU and memory resources for MongoDB and the Operator
+------------------------------------------------------------
 
 Kubernetes is excellent at sharing cluster resources efficiently, but it needs clear instructions to do so. This is especially important when deploying MongoDB with the Kubernetes Operator, where both the database pods and the Operator itself must be resource-aware to avoid performance issues, evictions, or startup delays.
 
 Let's break this down into two areas: resource configuration for the [Kubernetes Operator Pod](https://www.mongodb.com/docs/kubernetes/current/tutorial/plan-k8s-op-considerations/#set-cpu-and-memory-utilization-bounds-for-the-k8s-op-short-pod?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly), and for the [MongoDB replica set members](https://www.mongodb.com/docs/kubernetes/current/tutorial/plan-k8s-op-considerations/#set-cpu-and-memory-utilization-bounds-for-mongodb-pods?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly) themselves.
 
-### MongoDB Kubernetes Operator: Plan for initial spikes {#h3-4-mongodb-kubernetes-operator-plan-for-initial-spikes}
+### MongoDB Kubernetes Operator: Plan for initial spikes
 
 The Kubernetes Operator performs many actions behind the scenes, including reconciliation, configuration validation, and cluster orchestration. During the initial deployment or when managing several MongoDB clusters, its CPU usage can spike significantly, especially if you're deploying multiple replica sets or sharded clusters in parallel. However, when the replica set deployment process completes, the CPU usage by the Kubernetes Operator reduces considerably.
 
@@ -146,7 +146,7 @@ This ensures the Operator has enough headroom to spin up large numbers of cluste
 
 For a full example of CPU and memory utilization resources and limits for the Kubernetes Operator Pod that can satisfy parallel deployment of up to 50 MongoDB replica sets, see the [mongodb-kubernetes.yaml](https://github.com//mongodb/mongodb-kubernetes/blob/master/public/mongodb-kubernetes.yaml#L219-L235) file.
 
-### MongoDB replica set pods: Allocate predictably {#h3-5-mongodb-replica-set-pods-allocate-predictably}
+### MongoDB replica set pods: Allocate predictably
 
 The Operator also allows you to define resource requests and limits for each MongoDB database pod it creates. This ensures that pods are scheduled on nodes with enough capacity and are protected from memory overuse or unexpected eviction.
 
@@ -203,18 +203,18 @@ For more examples, check out the the [replica-set-podspec.yaml](https://github.c
 
 By clearly defining resource requests and limits for both the Operator and MongoDB pods, you create a Kubernetes environment that is more predictable, resilient, and production-ready. Proper sizing helps avoid performance spikes, prevents out-of-memory errors, and ensures MongoDB clusters scale reliably as workloads grow.
 
-4. Spread replica set members across failure domains {#h2-6-4-spread-replica-set-members-across-failure-domains}
-----------------------------------------------------------------------------------------------------------------
+4. Spread replica set members across failure domains
+----------------------------------------------------
 
 High availability isn't just about running multiple MongoDB pods. It's also about ensuring they aren't all vulnerable to the same point of failure. If every replica set member ends up scheduled on the same [node](https://kubernetes.io/docs/concepts/architecture/nodes/), or worse, in the same availability zone, a single failure could bring down your entire cluster.
 
 To prevent this, Kubernetes gives you control over where pods are scheduled using node affinity and pod anti-affinity rules. These features let you guide the scheduler to spread MongoDB pods across nodes and zones, increasing fault tolerance significantly.
 
-### Why this matters for MongoDB {#h3-7-why-this-matters-for-mongodb}
+### Why this matters for MongoDB
 
 MongoDB replica sets [rely on quorum](https://www.mongodb.com/docs/manual/core/replica-set-elections/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly) to function. If you lose too many members due to a node or zone outage, your replica set may become read-only or fully unavailable. Even if data is safe on disk, your application will experience downtime. Kubernetes won't fix that automatically---you need to tell it how to schedule smarter.
 
-### Use node affinity and pod anti-affinity {#h3-8-use-node-affinity-and-pod-anti-affinity}
+### Use node affinity and pod anti-affinity
 
 The goal is simple: Spread MongoDB pods across multiple nodes and, ideally, across multiple availability zones. Here's how you can define that in your MongoDB Custom Resource:
 
@@ -242,7 +242,7 @@ spec:
 
 This combination helps guarantee that a failure in one node or zone won't impact the majority of your replica set.
 
-### Example with custom zone and node labels {#h3-9-example-with-custom-zone-and-node-labels}
+### Example with custom zone and node labels
 
 In some environments, you may want to use custom labels (e.g., for internal node groups or simulated zones). Here's a sample configuration with more specific label matching:
 
@@ -277,8 +277,8 @@ You can find full examples in the replica-set-affinity.yaml file in the [MongoDB
 
 By default, Kubernetes will schedule pods wherever it finds room, which might be great for stateless web services, but is risky for databases. For MongoDB, you must be explicit about fault tolerance. Spreading your pods across zones and nodes ensures that a localized failure won't turn into a full cluster outage.
 
-5. Increase reconciliation throughput with thread count configuration {#h2-10-5-increase-reconciliation-throughput-with-thread-count-configuration}
----------------------------------------------------------------------------------------------------------------------------------------------------
+5. Increase reconciliation throughput with thread count configuration
+---------------------------------------------------------------------
 
 The MongoDB Kubernetes Operator reconciles resources one at a time by default. For most small-scale deployments, this is sufficient. However, if you plan to deploy more than 10 MongoDB replica sets or sharded clusters in parallel, the Operator can become a bottleneck. In this case, you should consider increasing the number of concurrent reconciliation threads.
 
@@ -286,7 +286,7 @@ The Operator supports this through the [MDB_MAX_CONCURRENT_RECONCILES](https://w
 
 Increasing the thread count of the Kubernetes Operator allows you to vertically scale your Kubernetes Operator deployment to hundreds of MongoDB resources running within your Kubernetes cluster and optimize CPU utilization.
 
-### Example: Helm values.yaml configuration {#h3-11-example-helm-values-yaml-configuration}
+### Example: Helm values.yaml configuration
 
 ```
 operator:
@@ -305,13 +305,13 @@ env:
 
 This setting should be adjusted based on your operational needs and the available compute resources in your Kubernetes cluster. The more concurrent threads the Operator runs, the more CPU and memory it will require---and the more load it will place on the Kubernetes API server.
 
-### Monitor API load and resource usage closely {#h3-12-monitor-api-load-and-resource-usage-closely}
+### Monitor API load and resource usage closely
 
 Increasing the thread count has trade-offs. Higher concurrency can lead to increased throughput, but also increases the number of requests hitting the Kubernetes API server. If the API server or the Operator itself becomes overwhelmed, you may experience degraded performance or downtime during critical operations.
 
 Proceed with caution when setting the thread count above 10. Monitor both the Operator and API server closely. You may need to adjust the Operator's CPU and memory requests and limits to ensure stability.
 
-### Running multiple operators {#h3-13-running-multiple-operators}
+### Running multiple operators
 
 As an alternative to increasing concurrency on a single Operator, you can deploy multiple instances of the MongoDB Kubernetes Operator. This can allow for greater horizontal scalability, but it requires strict separation of concerns. You must ensure that no two Operator instances watch the same resources.
 
@@ -325,15 +325,15 @@ Running multiple Operators without proper isolation will introduce race conditio
 
 Importantly, scaling the API server is not a valid justification for deploying multiple Operators. If the API server is already under pressure, adding more Operators will worsen the problem, not solve it.
 
-### Summary {#h3-14-summary}
+### Summary
 
 * Use MDB_MAX_CONCURRENT_RECONCILES or Helm's operator.maxConcurrentReconciles to increase parallel reconciliation.
 * The recommended maximum is 10 unless you've tested higher under production conditions.
 * Monitor Operator resource usage and Kubernetes API load closely.
 * Only run multiple Operators if they are scoped to different resources and managed carefully.
 
-Conclusion {#h2-15-conclusion}
-------------------------------
+Conclusion
+----------
 
 Running MongoDB in Kubernetes introduces challenges that don't exist with stateless applications. By default, Kubernetes doesn't understand MongoDB's replica set topology, quorum requirements, or data durability constraints. The MongoDB Kubernetes Operator bridges that gap, enabling you to declaratively deploy and manage replica sets and sharded clusters using familiar Kubernetes patterns.
 

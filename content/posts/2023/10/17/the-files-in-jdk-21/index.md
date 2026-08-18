@@ -23,10 +23,10 @@ As Java developers, we all have it installed on our computer: the Java Developme
 
 For this article, Eclipse Temurin [JDK 21](https://foojay.io/today/java-21-is-available-today-and-its-quite-the-update/) for Windows has been used.
 
-Files {#h2-0-files}
--------------------
+Files
+-----
 
-### The statistics {#h3-1-the-statistics}
+### The statistics
 
 * Total size: 325 MB
 * Number of files: 572
@@ -37,7 +37,7 @@ Files {#h2-0-files}
 
 ![](jdk21-all-files.png)
 
-### Modules {#h3-2-modules}
+### Modules
 
 The first observation is that class files are included twice in the JDK, first in the *jmods/\*.jmod* files and in *lib/modules* file. The JDK includes a *bin/jimage* utility to unpack of list the files in it. There doesn't seem to be that [much documentation](https://docs.oracle.com/en/java/javase/21/docs/specs/man/index.html) about this tool online.
 
@@ -45,10 +45,10 @@ The class files in *lib/modules* are less compressed than in the *jmod* files th
 > **Tip:**
 > If you distribute the JDK with your software, for example in a Docker image, create a light version of the JDK with bin/jlink first. The result will be a smaller directory as it won't include files like src.zip (50 MB), jmods/\*.jmod (79 MB), tools and the modules you don't use.
 
-Classes {#h2-3-classes}
------------------------
+Classes
+-------
 
-### The statistics: {#h3-4-the-statistics}
+### The statistics:
 
 * Total size: 126 MB
 * Number of class files: 27,871
@@ -64,16 +64,16 @@ Classes {#h2-3-classes}
 
 Most of the largest class files are related to the internationalization with charsets and time zones but *javac* and the new vector API also have large class files.
 
-Evolution {#h2-5-evolution}
----------------------------
+Evolution
+---------
 
 Contrary to what I said in the introduction, even if the JDK has grown size since 1.0, this hasn't been the case in the recent years. Post JDK 8, the largest JDK was JDK 9 (JavaFX, Nashorn) with 500 MB and the smallest was JDK 17 with 297 MB.
 
 When comparing new files in the *java.base* module with JDK 20, you see that a lot of new files are related to a new *jdk.internal.classfile* package.
 ![](jdk-21-diff-base-1024x649.png)
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 OpenJDK is an always evolving software mostly composed of a lot of small files. Most of them are not needed at runtime.
 

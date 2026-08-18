@@ -19,7 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Introduction {#h3-0-introduction}
+### Introduction
 
 Observability is paramount to every distributed system and it's becoming increasingly complicated in a cloud native world where we might deploy multiple ephemeral clusters and we want to keep their metrics beyond their lifecycle span.
 
@@ -29,7 +29,7 @@ This solution builds upon well-established Cloud Native Computing Foundation ([C
 
 This article was inspired by several sources, most importantly this two articles: [Using Azure Kubernetes Service with Grafana and Prometheus](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/using-azure-kubernetes-service-with-grafana-and-prometheus/ba-p/3020459) and [Store Prometheus Metrics with Thanos, Azure Storage and Azure Kubernetes Service](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/store-prometheus-metrics-with-thanos-azure-storage-and-azure/ba-p/3067849) on [Microsoft Techcommunity blog](https://techcommunity.microsoft.com).
 
-### Prerequisites {#h3-1-prerequisites}
+### Prerequisites
 
 * An 1.23 or 1.24 AKS cluster with either a user-managed identity assigned to the kubelet identity or system-assigned identity
 * Ability to assign roles on Azure resources (User Access Administrator role)
@@ -38,13 +38,13 @@ This article was inspired by several sources, most importantly this two articles
 * Azure CLI
 * Helm CLI
 
-### Architecture {#h3-2-architecture}
+### Architecture
 
 We will deploy all components of Thanos and Prometheus in a single cluster, but since they are couple only via the ingress they don't need to be co-located.
 
 ![Diagram](https://raw.githubusercontent.com/ams0/ams0/deddfb117c95f739fda88c00a963604b9df3dd59/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/images/stateless_thanos.png)
 
-### Cluster-wide services {#h3-3-cluster-wide-services}
+### Cluster-wide services
 
 For Thanos receive and query components to be available outside the cluster and secured with TLS, we will need [ingress-nginx](https://github.com/kubernetes/ingress-nginx) and [cert-manager](https://cert-manager.io/). For ingress, deploy the Helm chart using the following command, to account for this [issue](https://github.com/Azure/AKS/issues/2955) with AKS clusters \>1.23:
 
@@ -98,7 +98,7 @@ az network dns record-set a add-record  -n "*.thanos" -g dns -z cookingwithazure
 
 Note how we use `kubectl` with `jsonpath` type output to get the ingress public IP. We can now leverage the wildcard FQDN `*.thanos.cookingwithazure.com` in our ingresses and cert-manager will be able to obtain the relative certificate seamlessly.
 
-### Storage account preparation {#h3-4-storage-account-preparation}
+### Storage account preparation
 
 Because we do not want to store any secret or service principal in-cluster, we will leverage the Managed Identities assigned to the cluster and assign the relevant Azure Roles to the storage account.
 
@@ -118,7 +118,7 @@ az role assignment create --role "Storage Blob Data Contributor" --assignee $cli
 ```
 
 
-### Create basic auth credentials {#h3-5-create-basic-auth-credentials}
+### Create basic auth credentials
 
 Ok, we kinda cheated in the title: you **do** need one credential at least for this setup, and it's the one to access the Prometheus API exposed by Thanos from Azure Managed Grafana.
 
@@ -143,7 +143,7 @@ kubectl create secret generic -n prometheus remotewrite-secret \
 
 We now have the secrets in place for the ingresses and for deploying Prometheus.
 
-### Deploying Thanos {#h3-6-deploying-thanos}
+### Deploying Thanos
 
 We will use the [Bitnami chart](https://github.com/bitnami/charts/tree/master/bitnami/thanos/) to deploy the Thanos components we need.
 
@@ -202,7 +202,7 @@ The annotation references the `basic-auth` secret we created before from the `ht
 
 Note that the same annotations are also under the `receive` section, as we're using the exact same secret for pushing metrics *into* Thanos (although with a different `hostname`).
 
-### Prometheus remote-write {#h3-7-prometheus-remote-write}
+### Prometheus remote-write
 
 Until full support for Agent mode lands in the Prometheus operator (follow this [issue](https://github.com/prometheus-community/helm-charts/issues/1519)), we can use the [remote write feature](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage) to ship every metrics instantly to a remote endpoint, in our case represented by the Thanos Query Frontend ingress. Let's start by deploying Prometheus using the [kube-prometheus-stack helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack):
 
@@ -243,7 +243,7 @@ This section points to the remote endpoint (secured via SSL using Let's Encrypt 
 
 Note here that although Prometheus is deployed in the same cluster as Thanos for simplicity, it sends the metrics to the ingress FQDN, thus it's trivial to extend this setup to multiple, remote clusters and collect their metrics into a single, centralized Thanos receive collector (and a single blob storage), with all metrics correctly tagged and identifiable.
 
-### Observing the stack with Azure Managed Grafana {#h3-8-observing-the-stack-with-azure-managed-grafana}
+### Observing the stack with Azure Managed Grafana
 
 [Azure Managed Grafana](https://azure.microsoft.com/en-us/services/managed-grafana/) (AME) is a new offering in the toolset of observability tools in Azure, and it's based on the popular open source dashboarding system [Grafana](https://grafana.com).
 
@@ -263,7 +263,7 @@ Go to (on the left side navigation bar) Dashboards-\> Browse and click on Import
 
 The imported dashboard has no filter for cluster or region, thus will show all cluster metrics aggregated. We will show in a future post how to add a variable to a Grafana dashboard to properly select and filter cluster views.
 
-### Future work {#h3-9-future-work}
+### Future work
 
 This setup allows for autoscaling of receiver and query frontend as horizontal pod autoscalers are deployed and associated with the Thanos components.
 

@@ -22,8 +22,8 @@ Every so often a story comes along that belongs to an entire community rather th
 
 [Watch the trailer and set a reminder for the premiere here](https://www.youtube.com/watch?v=ZqGSg4b_cZA).
 
-Why It's Important To Foojay Community {#h2-0-why-it-s-important-to-foojay-community}
--------------------------------------------------------------------------------------
+Why It's Important To Foojay Community
+--------------------------------------
 
 Java's story, as much as it's about the history and evolution of the programming language we use day-to-day, is most of all a story about a community that, more than once, could have let something great quietly fade. But that community chose to fight for it, rebuild it and hand it forward to the next generation of developers. That's the Java story, the OpenJDK story, the Jakarta EE story. It's the story a lot of us have been living for years without necessarily stopping to appreciate how remarkable it is - but it's great to take a step back and actually watch how it unfolded over the last 31 (!) years.
 
@@ -33,8 +33,8 @@ The rest of the guest list is as impressive and relevant: **Joshua Bloch** , cre
 
 The film also follows the story into enterprise Java territory toward its later chapters - which is where I can personally feel part of it - Jakarta EE's emergence from the old Java EE and the community effort that kept enterprise Java alive and moving forward.
 
-How the Premiere Works {#h2-1-how-the-premiere-works}
------------------------------------------------------
+How the Premiere Works
+----------------------
 
 If you have time to take part in the live online premiere, here are a few practical things worth knowing:
 
@@ -43,8 +43,8 @@ If you have time to take part in the live online premiere, here are a few practi
 * **LIVE CHAT:** once the countdown hits zero, the film plays and the chat opens up - this is where you'll find James Gosling and members of the early Java team.
 * **AFTER THE PREMIERE**: the film stays up on the channel as a regular upload, so there's no pressure if you can't make it live.
 
-Our Ask {#h2-2-our-ask}
------------------------
+Our Ask
+-------
 
 If Java, OpenJDK or Jakarta EE has been part of your career (as you're reading this on Foojay, it probably has 😉 ) - take some time on July 17th if you're around, to watch this with the rest of us. Set your reminder, show up for the live chat and share it with the developers who came up through this same community. Stories like this don't get told very often and - as Java Community - this one's about all of us.  
 

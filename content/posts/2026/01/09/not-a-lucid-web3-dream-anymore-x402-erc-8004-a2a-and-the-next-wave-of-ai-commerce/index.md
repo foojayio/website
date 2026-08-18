@@ -32,7 +32,7 @@ frozen: false
 *This article is for technically savvy readers, especially developers, protocol designers, and product teams working with AI agents, APIs, or crypto rails, who want a clear view of how these areas connect.*   
 *It explains how x402, ERC-8004, and agent discovery layers turn APIs and agents into small usage-based businesses, and what that means for real systems over the next 1--3 years.*
 >
-> ### Vocabulary for this article {#h3-0-vocabulary-for-this-article}
+> ### Vocabulary for this article
 >
 > * In this article, I use the term *micro business* for a very small overall business, and *nano business* for a single x402-priced endpoint or agent that earns on its own from per-call payments in stablecoins.
 > * **AP2 (Agent Payment Protocol):** AP2 defines how agents pay each other. It standardizes how a service quotes a price, how payment is confirmed, and how both sides record what was bought, so payments fit directly into automated agent workflows. In practice, it is a protocol that lets one machine pay another machine for work, without a human in the loop.
@@ -40,8 +40,8 @@ frozen: false
 > * **x402:** x402 is an HTTP-based payment protocol for APIs. A server responds with status `402 Payment Required`, the price, and a payment route, and the client pays by using stablecoins on-chain and then retries the request to get the result.
 > * **ERC-8004 (8004):** ERC-8004 standard is an on-chain registry for agents. It gives each agent an identity and a place to store reputation data, so other agents and tools can decide whom to trust and which services to call.
 
-Foreword {#h2-1-foreword}
--------------------------
+Foreword
+--------
 
 **x402** and **ERC-8004** .  
 
@@ -87,8 +87,8 @@ Finally, I will look at an example development team, *DayDreams.Systems*, that b
 
 The goal is not to promote any specific team, but to show why this kind of plumbing is likely to matter if the agent economy becomes real.
 
-Part 1 - **Bringing companies on-chain with x402** {#h2-2-part-1-bringing-companies-on-chain-with-x402}
--------------------------------------------------------------------------------------------------------
+Part 1 - **Bringing companies on-chain with x402**
+--------------------------------------------------
 
 Today, most x402 experiments start with crypto-native builders, but the long-term impact sits with traditional companies.  
 
@@ -166,8 +166,8 @@ From this perspective, when people talk about "bringing companies on-chain," the
 
 It shifts to something more mundane and more powerful: moving the billing layer for everyday AI APIs and SaaS endpoints onto x402, so the internet can support billions of sub-cent payments per day without collapsing under its own business model.
 
-Part 2- Introduction: Beyond Ads and Subscriptions: Agent Commerce on x402 and ERC-8004 {#h2-3-part-2-introduction-beyond-ads-and-subscriptions-agent-commerce-on-x402-and-erc-8004}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Part 2- Introduction: Beyond Ads and Subscriptions: Agent Commerce on x402 and ERC-8004
+---------------------------------------------------------------------------------------
 
 Imagine you run a website with real value.  
 
@@ -370,10 +370,10 @@ They have something stronger.
 
 They have a business model and an interface that speaks the native language of the new internet: **agents, APIs, and fine-grained payments**.
 
-Part 3 - Tech that will change the internet {#h2-4-part-3-tech-that-will-change-the-internet}
----------------------------------------------------------------------------------------------
+Part 3 - Tech that will change the internet
+-------------------------------------------
 
-### **Agent commerce, x402, and ERC-8004: from ad-funded web to paid APIs** {#h3-5-agent-commerce-x402-and-erc-8004-from-ad-funded-web-to-paid-apis}
+### **Agent commerce, x402, and ERC-8004: from ad-funded web to paid APIs**
 
 #### **Where we are now: ads, subscriptions, and hard-coded APIs**
 
@@ -744,8 +744,8 @@ Disclosure: I hold positions on projects working on the x402/8004 ecosystems.
 
 This article is for educational purposes and is not investment advice.
 
-Part 4 - DayDreams.Systems: an x402 / 8004 implementation example {#h2-6-part-4-daydreams-systems-an-x402-8004-implementation-example}
---------------------------------------------------------------------------------------------------------------------------------------
+Part 4 - DayDreams.Systems: an x402 / 8004 implementation example
+-----------------------------------------------------------------
 
 The current article discusses AI agents that do real work, pay each other for APIs, and build an economy on top of standards such as x402 and ERC-8004.
 
@@ -767,7 +767,7 @@ It aims to provide a place where agents can act as economic actors: they communi
 2. Reputation and volume will pool around useful endpoints, putting early movers in front when traffic jumps.
 3. Built with Lucid -\\\> Distribute through XGATE -\\\> Get paid on x402.
 
-### **How DayDreams structures the stack** {#h3-7-how-daydreams-structures-the-stack}
+### **How DayDreams structures the stack**
 
 ![Lab scene](lab.png)
 
@@ -812,7 +812,7 @@ The intended user experience is as follows:
 
 Build agents → manage them in Lucid → discover and consume them via XGATE → pay agents → build more agents → repeat.
 
-### **Lucid as an abstraction over AP2, A2A, x402, and 8004** {#h3-8-lucid-as-an-abstraction-over-ap2-a2a-x402-and-8004}
+### **Lucid as an abstraction over AP2, A2A, x402, and 8004**
 
 Lucid serves as both a runtime and a control plane for agent commerce.  
 
@@ -842,7 +842,7 @@ The goal is for developers to focus on what an agent does, while Lucid handles h
 
 Over time, this forms what the team calls the **Lucid Network**: many agents trading, collaborating, and compounding value rather than operating in isolation.
 
-### **What kinds of agents is Lucid designed for** {#h3-9-what-kinds-of-agents-is-lucid-designed-for}
+### **What kinds of agents is Lucid designed for**
 
 The ecosystem already sketches a wide range of agent types that could live on this stack:
 
@@ -864,7 +864,7 @@ A clear design choice is to rank agents by actual earnings, so revenue serves as
 
 In this model, x402 is how an agent charges for its work, and ERC-8004 provides a structured surface to prove that the work is worth paying for.
 
-### **Lucid Agents: BYO framework with x402 and 8004 baked in** {#h3-10-lucid-agents-byo-framework-with-x402-and-8004-baked-in}
+### **Lucid Agents: BYO framework with x402 and 8004 baked in**
 
 Under the name **Lucid Agents**, DayDreams offers a toolkit designed to be a "bring your own framework" while remaining commerce-ready.
 
@@ -900,7 +900,7 @@ A public tutorial shows how to launch a full-stack TanStack agent in a few minut
 
 The aim is to keep business logic and framework choice flexible, while Lucid Agents provides a consistent layer for payments, identity, and networking.
 
-### **Reliability and Router v2: from per-request to balance-based flows** {#h3-11-reliability-and-router-v2-from-per-request-to-balance-based-flows}
+### **Reliability and Router v2: from per-request to balance-based flows**
 
 One recurring theme around x402 is that **pure per-request payment** is not always enough for robust systems.
 
@@ -930,7 +930,7 @@ The message is that the x402 ecosystem still needs significant engineering work 
 
 ![Lucid Agents composability model](lucid-agents-compo-models.png)
 
-### **From SEO to AEO: optimizing for agents instead of humans** {#h3-12-from-seo-to-aeo-optimizing-for-agents-instead-of-humans}
+### **From SEO to AEO: optimizing for agents instead of humans**
 
 A key conceptual shift in this ecosystem is the move from **SEO** to what some builders already call **AEO**.
 
@@ -952,7 +952,7 @@ A simple rule captures the design:
 
 This is aligned with the idea that search will shift from an ad-driven human interface to an agent layer that ranks and pays based on performance and reputation.
 
-### **Privacy, z402, and Starknet** {#h3-13-privacy-z402-and-starknet}
+### **Privacy, z402, and Starknet**
 
 The stack also has open questions around privacy.  
 
@@ -967,7 +967,7 @@ One of the directions in the DayDreams context is private x402 transactions on *
 
 This is still early work, but it shows that the stack is not limited to fully transparent flows.
 
-### **Where the value in x402 is likely to appear** {#h3-14-where-the-value-in-x402-is-likely-to-appear}
+### **Where the value in x402 is likely to appear**
 
 Several themes around value capture appear repeatedly:
 
@@ -980,7 +980,7 @@ From the user's perspective, the expectation is that "on-chain" will become invi
 * Apps will either accept stablecoins or expose paid endpoints in an agent-friendly way.
 * Or they will feel like legacy products, tied to subscription forms and card payments.
 
-### **Macro backdrop and current stage** {#h3-15-macro-backdrop-and-current-stage}
+### **Macro backdrop and current stage**
 
 The broader environment is shaped by:
 
@@ -1000,7 +1000,7 @@ Right now:
 
 * The next 24 months will determine which stacks make agent commerce practical in production.
 
-### Conclusion {#h3-16-conclusion}
+### Conclusion
 
 The move from ad-funded pages to paid APIs and agent commerce is already underway.  
 

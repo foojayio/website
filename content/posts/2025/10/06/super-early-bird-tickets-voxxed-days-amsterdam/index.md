@@ -26,7 +26,7 @@ After this year's success, the Voxxed Amsterdam team is proud to announce that n
 **Location:** Pathé Amsterdam (North)  
 **Details \& tickets:** [amsterdam.voxxeddays.com](http://amsterdam.voxxeddays.com)
 
-### Speaker Line-up {#h3-0-speaker-line-up}
+### Speaker Line-up
 
 These industry leaders will be sharing their unique insights at the conference:
 
@@ -38,7 +38,7 @@ These industry leaders will be sharing their unique insights at the conference:
 * Jeroen Egelmeers -- Prompt Engineering Advocate, GenAI Whisperer, Author
 * Venkat Subramaniam -- Programmer, Author, Speaker, Professor
 
-### Tickets \& Participation {#h3-1-tickets-participation}
+### Tickets \& Participation
 
 Tickets for Voxxed Amsterdam are sold in batches. The first batch of **Super Early Bird** tickets will go on sale on **October 8, 2026 at 09:30 CET**. Please note: availability is limited (first come, first served).
 

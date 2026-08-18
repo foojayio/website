@@ -18,8 +18,8 @@ related_posts:
 frozen: false
 ---
 
-🌍 Celebrating 30 Years of Java \& 10 Years of JCON -- with the Global Java Community {#h2-0-celebrating-30-years-of-java-10-years-of-jcon-with-the-global-java-community}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+🌍 Celebrating 30 Years of Java \& 10 Years of JCON -- with the Global Java Community
+-------------------------------------------------------------------------------------
 
 Welcome to JCON EUROPE 2025, the international Java conference where the heart of the Java community beats loud and proud! Over 60 countries will be represented as Java developers from around the globe come together in Cologne to learn, connect, and celebrate three decades of Java innovation and a decade of JCON magic.
 
@@ -27,7 +27,7 @@ And we're doing it in style: JCON EUROPE is hosted in a multiplex movie theater,
 
 ![](53721494882_6f31f6da3b_k-700x422.jpg)
 
-### 🧡 2025 marks a double milestone {#h3-1-2025-marks-a-double-milestone}
+### 🧡 2025 marks a double milestone
 
 This year we're throwing the ultimate Java birthday bash:
 
@@ -42,7 +42,7 @@ To mark the occasion, we're bringing out the big names:
 
 These are keynotes you won't want to miss, delivering strategic, behind-the-scenes perspectives from the leaders driving Java forward.
 
-### 💙 Foojay.io friends, you're invited---for free! {#h3-2-foojay-io-friends-you-re-invited-for-free}
+### 💙 Foojay.io friends, you're invited---for free!
 
 As proud members of the Java ecosystem, Foojay collaborators of all shapes and sizes can join JCON EUROPE 2025 at no cost via this link: <https://pretix.eu/impuls/europe2025/redeem?voucher=FOOJAY-COMMUNITY>
 

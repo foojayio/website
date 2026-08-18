@@ -25,7 +25,7 @@ JFR (JDK Flight Recorder) has been providing the support for on-the fly allocati
 * **ObjectAllocationInNewTLAB** event is emitted each time the TLAB is filled up and contains the information about the instance type, the instance size and the full stack trace where the allocation happened.
 * **ObjectAllocationOutsideTLAB** event is fired when the size of the instance to be allocated is bigger than the TLAB size. Also for this event JFR provides the instance type, size and the stacktrace where the allocation was initiated.
 
-### TLAB Based Allocation Sampling {#h3-0-tlab-based-allocation-sampling}
+### TLAB Based Allocation Sampling
 
 By utilising the properties of these two events, namely the fact that they are emitted **only** when TLAB is filled up or the instance size is bigger than TLAB we can relatively cheaply obtain a heap allocation profile which can help us to identify allocation hot-spots.
 
@@ -37,8 +37,8 @@ Well, it turns out that some applications can generate a huuuuge amount of TLAB 
 
 In addition to this performance regression the TLAB events contributed to a very significant increase in the recording size - again causing problems for our continuous profiler which needs to deal with hundreds of thousands such profiles daily. And to solve the size problem we would need a new way of collecting allocation samples which would guarantee a maximum number of samples per recording (to have a predictable recording size) while still providing statistically accurate picture.
 
-Rate Limited Allocation Profiling {#h2-1-rate-limited-allocation-profiling}
----------------------------------------------------------------------------
+Rate Limited Allocation Profiling
+---------------------------------
 
 This is an incremental improvement on top of the TLAB based allocation profiling. It is using the same data source (TLAB filled up, outside of TLAB allocation) but is applying an adaptive throttling mechanism to guarantee the maximum number of samples per recording (or time unit, more generally speaking).
 
@@ -46,7 +46,7 @@ The samples are emitted as **ObjectAllocationSample** events with *throttled* em
 
 The generic throttling option has been built into JFR but is currently in use only by the **ObjectAllocationSample** event.
 
-### Throttling Sampler: Implementation Details {#h3-2-throttling-sampler-implementation-details}
+### Throttling Sampler: Implementation Details
 
 The main objective is to reduce the number of events emitted per time unit while maintaining statistical relevancy. Typically, this could be done by e.g., [reservoir sampling](https://en.wikipedia.org/wiki/Reservoir_sampling) where a fixed size of random elements is maintained for the duration of the specified time unit.
 
@@ -82,7 +82,7 @@ As already mentioned in the previous paragraph the adaptive sampler is employing
 
 Hence the 'budget' term - windows producing less samples than the requested number will 'store' unused samples which can later be used by other windows to accommodate occasional bursts.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 The introduction of a throughput management mechanism in JFR allows getting fine details about the application behavior without the risk of being overwhelmed by the sheer number of JFR events.
 

@@ -318,14 +318,14 @@ var response = RestClient.builder(restTemplate);
 
 <br />
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 `RestClient` is poised to replace `RestTemplate` as it provides a more intuitive and concise method for developing Restful Services, built on top of WebClient.
 
 The complete code can be found [over on Github](https://github.com/bsmahi/spring-rest-client-example)
 
-### References {#h3-1-references}
+### References
 
 <https://docs.spring.io/spring-framework/reference/integration/rest-clients.html>
 

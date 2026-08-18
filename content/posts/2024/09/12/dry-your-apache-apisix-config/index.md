@@ -22,8 +22,8 @@ frozen: false
 
 is an important principle in software development. In this article, you learn how to apply it to Apache APISIX configuration.
 
-The DRY principle {#h2-0-the-dry-principle}
--------------------------------------------
+The DRY principle
+-----------------
 
 > "Don't repeat yourself" (DRY) is a principle of software development aimed at reducing repetition of information which is likely to change, replacing it with abstractions that are less likely to change, or using data normalization which avoids redundancy in the first place.
 >
@@ -40,12 +40,12 @@ Most people associate DRY with code. However, it could be more limiting and cont
 
 Sound configuration systems allow DRY or even encourage it.
 
-DRY in Apache APISIX {#h2-1-dry-in-apache-apisix}
--------------------------------------------------
+DRY in Apache APISIX
+--------------------
 
 Apache APISIX offers DRY configuration in two places.
 
-### DRY upstreams {#h3-2-dry-upstreams}
+### DRY upstreams
 
 In an e-commerce context, your beginner journey to define a route on Apache APISIX probably starts like the following:
 
@@ -126,7 +126,7 @@ If anything happens in the topology, we must update the change only in the singl
 
 Note that defining the `upstream` embedded and referencing it with `upstream_id` are **mutually exclusive**.
 
-### DRY plugin configuration {#h3-3-dry-plugin-configuration}
+### DRY plugin configuration
 
 Another area where APISIX can help you DRY your configuration with the *Plugin* abstraction. APISIX implements most features, if not all, through plugins
 
@@ -213,8 +213,8 @@ This way, you can move the shared configuration to a `plugin_config` object and 
 
 In short, the `plugin` configuration in a `route` overrules the configuration in the `plugin_config_id`. It also allows us to provide the `apikey` variable for the `key-auth` plugin in a `consumer` and only set it in a route. APISIX will find and use the key for each `consumer`!
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 DRY is not only about code; it's about data management in general. Configuration is data and thus falls under this general umbrella.
 

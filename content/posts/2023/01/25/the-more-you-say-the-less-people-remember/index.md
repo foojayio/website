@@ -20,14 +20,14 @@ related_posts:
 frozen: false
 ---
 
-...The Fewer the Words, the Greater the Profit." {#h2-0-the-fewer-the-words-the-greater-the-profit}
----------------------------------------------------------------------------------------------------
+...The Fewer the Words, the Greater the Profit."
+------------------------------------------------
 
 These wise words were written by François Fénelon, a writer and theologian living during the 17th century.
 
 This is an article summarising different approaches to the development of IT solutions. Learn why the above quote is very relevant for developers in the 21st century.
 
-### Business Driven Development {#h3-1-business-driven-development}
+### Business Driven Development
 
 [Business-driven development](https://en.wikipedia.org/wiki/Business-driven_development "Business-driven development ")is a meta-methodology for developing IT solutions that directly satisfy [business requirements](https://en.wikipedia.org/wiki/Requirement "business requirements"). This leads to increased flexibility and shorter turnaround times when changing the business and adapting the IT systems.
 
@@ -35,27 +35,27 @@ This is achieved by adopting a [model-driven](https://en.wikipedia.org/wiki/Mode
 
 In [Agile](https://en.wikipedia.org/wiki/Agile_software_development "Agile") terminology, this is partially replaced by Domain-Driven Design and Behaviour Driven Development.
 
-### Domain Driven Development {#h3-2-domain-driven-development}
+### Domain Driven Development
 
 [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design "Domain-Driven Design") is a means of capturing requirements from domain experts to automate a business process using a common language.
 
-### Behaviour Driven Development {#h3-3-behaviour-driven-development}
+### Behaviour Driven Development
 
 [Behaviour Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development "Behaviour Driven Development") is a means of automating the testing of an application as a high-level description of what the application must do.
 
 This is a form of [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development "Test-Driven Development") that uses inputs, and expected results are modelled as data, e.g., events, data structures, or tables in a [Domain Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language "Domain Specific Language"), rather than in code, allowing these descriptions of functional requirements to be written before coding starts, and automatically checked when code changes.
 
-### Service Oriented Architecture {#h3-4-service-oriented-architecture}
+### Service Oriented Architecture
 
 To divide functionality into easily maintainable, deployable, and replaced parts, a [Service Orientated Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture "Service Orientated Architecture") models the applications as a collection of microservices.
 
 SOA is often implemented with request/response APIs to support user interfaces.
 
-### Event Driven Architecture {#h3-5-event-driven-architecture}
+### Event Driven Architecture
 
 However, backend automated services, where servers communicate with other services are more efficient when an [Event-Driven Architecture](https://en.wikipedia.org/wiki/Event-driven_architecture "Event-Driven Architecture") is used, allowing a higher volume of concurrent events to be in-flight at once.
 
-### Keeping It Simple {#h3-6-keeping-it-simple}
+### Keeping It Simple
 
 While all these things are important during the development of a project, a solution can easily cost many times its initial development over its lifetime.
 

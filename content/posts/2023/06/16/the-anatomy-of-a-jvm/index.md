@@ -32,7 +32,7 @@ What is it exactly, and how does it work?
 
 
 
-### *Java is consistently in the top of most popular languages. The real reason for this is not the language itself but the JVM. And the power that it gives to the developer.* {#h3-0-java-is-consistently-in-the-top-of-most-popular-languages-the-real-reason-for-this-is-not-the-language-itself-but-the-jvm-and-the-power-that-it-gives-to-the-developer}
+### *Java is consistently in the top of most popular languages. The real reason for this is not the language itself but the JVM. And the power that it gives to the developer.*
 
 Simon Ritter, Deputy CTO, Azul
 
@@ -40,13 +40,13 @@ Simon Ritter, Deputy CTO, Azul
 
 
 
-Understanding JDK versus JRE versus JVM {#TheAnatomyofaJVM-UnderstandingJDKversusJREversusJVM}
-----------------------------------------------------------------------------------------------
+Understanding JDK versus JRE versus JVM
+---------------------------------------
 
 The software world is overloaded with abbreviations, which can be confusing and lead to misuse of specific terms, so we first need to understand the difference between the following terms.
 ![CHART: Understanding JDK versus JRE versus JVM](FY24-Q2-Oracle-Compete-Anatomy-of-a-JDK-hero-1.jpg)
 
-### JDK: Java Development Kit {#TheAnatomyofaJVM-JDK:JavaDevelopmentKit}
+### JDK: Java Development Kit
 
 The JDK lives at the highest level of the Java ecosystem. It is the "source" of everything else.
 
@@ -60,7 +60,7 @@ Each new Java version is a new version of the JDK containing improvements, bug a
   * `jshell`: interact with and execute Java code in a Shell terminal
   * and many more...
 
-### JRE: Java Runtime Environment {#TheAnatomyofaJVM-JRE:JavaRuntimeEnvironment}
+### JRE: Java Runtime Environment
 
 Until Java 9, each JDK had an accompanying JRE, that contained the same JVM and libraries but only a limited set of tools. So as such, it was a subset of the JDK. The goal of the JRE was to be used on devices where the application is executed without the overhead of all the tools and was a smaller file to download and distribute.
 
@@ -68,14 +68,14 @@ But with Java 9, modules were introduced, which allow you to build a runtime wit
 
 Because many organizations still depend on a JRE approach, Azul and other providers still create JREs for newer versions. Look at the [Azul Core download page](https://www.azul.com/downloads/?package=jre) for a list of all available JREs.
 
-What's happening inside the JVM {#TheAnatomyofaJVM-What'sHappeningInsidetheJVM}
--------------------------------------------------------------------------------
+What's happening inside the JVM
+-------------------------------
 
 As we learned, the Java Virtual Machine (JVM) is part of the JDK, runs our application, and is called a "**managed runtime environment."** The "managed" part of this term is essential as it means it not only executes the code but handles a lot of extra functionality on top of that.
 
 The JVM acts as a layer between your application and the machine it runs on.
 
-### 1. Write once, run everywhere {#TheAnatomyofaJVM-WriteOnce,RunEverywhere}
+### 1. Write once, run everywhere
 
 This has been a promise by Java from the start. As a developer, you need to write only a single code base to execute your program on any platform, meaning both the operating system (Windows, Mac, Linux, etc.) and the hardware (x86, ARM, aarch64, etc).
 
@@ -86,7 +86,7 @@ To achieve this, the JVM bytecode has to be "translated" for each of the support
 You can take a look at the source code to see how this is done within the Java project. All this code is freely available on GitHub. For example, on [this link](https://github.com/openjdk/jdk/tree/master/src/hotspot), you can find the different implementations of the HotSpot, as shown in a few screenshots of the project below.
 ![Screenshot: JVMbytecode on GitHub](https://www.azul.com/wp-content/uploads/openjdk_sources_hotspot_os-1024x287.png) ![Screenshot: JVMbytecode on GitHub](https://www.azul.com/wp-content/uploads/openjdk_hotspot_cpu-1024x345.png)
 
-### 2. Just-In-Time compilation {#TheAnatomyofaJVM-Just-In-Timecompilation}
+### 2. Just-In-Time compilation
 
 When your application starts, the byte code is converted directly into platform instructions using a template model in the JVM. At that moment, no optimizations are performed yet, and Java will run slower than similar native compiled code.
 
@@ -113,7 +113,7 @@ If you would like to learn more about this process of how bytecode is converted 
 * [Understanding Java Compilation: From Bytecodes to Machine Code in the JVM](https://www.azul.com/blog/understanding-java-compilation-from-bytecodes-to-machine-code/)
 * [A Matter of Interpretation: From Bytecodes to Machine Code in the JVM](https://www.azul.com/blog/a-matter-of-interpretation-from-bytecodes-to-machine-code-in-the-jvm/)
 
-### 3. Memory management {#TheAnatomyofaJVM-MemoryManagement}
+### 3. Memory management
 
 Another responsibility of the JVM is automated **memory management**. In other programming languages like C, C++,... you as a developer need to allocate (malloc) and free memory, and if you don't do this correctly, memory issues can occure.
 
@@ -122,7 +122,7 @@ The Garbage Collector (GC) is that part of the JVM that will handle this for you
 You can find an entire article about the Garbage Collector here: [What Should I Know About Garbage Collection as a Java Developer?](https://www.azul.com/blog/what-should-i-know-about-garbage-collection-as-a-java-developer/)
 [![What Should I Know About Garbage Collection as a Java Developer?](https://www.azul.com/wp-content/uploads/11-23-garbage-1024x400.jpg)](https://www.azul.com/blog/what-should-i-know-about-garbage-collection-as-a-java-developer/)
 
-### 4. Thread management {#TheAnatomyofaJVM-ThreadManagement}
+### 4. Thread management
 
 **Managing threads** and interaction between threads is also a topic handled by the JVM.
 
@@ -132,7 +132,7 @@ Being independent of the number of operating system threads allows much greater 
 
 More info is available here: [JDK 19 and What Java Users Should Know About It](https://www.azul.com/blog/jdk-19-and-what-java-users-should-know-about-it/).
 
-### 5. Statically versus dynamically {#TheAnatomyofaJVM-Dynamicclassloading}
+### 5. Statically versus dynamically
 
 Another often-heard term related to Java says it is a "**statically typed language** ". The "statically" refers to how variables are used. When you declare a new value, you need to define a type, which can't be changed later. For example, `String label = "Hello, World!"` will not allow you to assign a number to the label variable later.
 
@@ -142,8 +142,8 @@ Keep in mind that "statically" is linked to how values are defined because, on t
 
 For instance, based on environment settings, you can use different databases during testing versus in-production. In each case, other classes can be loaded dynamically to interact with the database.
 
-What are "Azul Builds of OpenJDK?" {#TheAnatomyofaJVM-WhatisAzulBuildsofOpenJDK}
---------------------------------------------------------------------------------
+What are "Azul Builds of OpenJDK?"
+----------------------------------
 
 All Java runtimes have to behave the same way, so that you, as a user, are guaranteed that your application will produce the same results, independent of which JDK you are using.
 
@@ -153,7 +153,7 @@ To verify this, distributions must pass all the tests of the Java Technology Com
 
 **Azul provides two distributions** that are TCK-compliant but very different.
 
-### Azul Zulu Build of OpenJDK (aka Zulu) {#TheAnatomyofaJVM-AzulZuluBuildofOpenJDK(akaZulu)}
+### Azul Zulu Build of OpenJDK (aka Zulu)
 
 * This build of OpenJDK is almost *identical to OpenJDK*.
 * It has no functional changes.
@@ -168,7 +168,7 @@ To verify this, distributions must pass all the tests of the Java Technology Com
     * Azul Zulu Builds of OpenJDK + support + upgrades + extra tools.
     * Available in a free version for evaluation and development and a licensed version.
 
-### Azul Prime Builds of OpenJDK (aka Prime) {#TheAnatomyofaJVM-AzulZuluPrimeBuildofOpenJDK(akaPrime)}
+### Azul Prime Builds of OpenJDK (aka Prime)
 
 * This distribution is *based on OpenJDK*.
 * But there are functional changes:
@@ -183,8 +183,8 @@ To verify this, distributions must pass all the tests of the Java Technology Com
 
 The Azul JDK distributions can be downloaded from ["Download Azul JDKs](https://www.azul.com/downloads/?package=jdk)."
 
-Conclusion {#TheAnatomyofaJVM-Conclusion}
------------------------------------------
+Conclusion
+----------
 
 The JVM handles many tasks that you, as a developer, don't want and need to take care of compared to other languages.
 

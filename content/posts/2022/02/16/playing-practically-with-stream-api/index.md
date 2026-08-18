@@ -25,7 +25,7 @@ In this article, I tried to make scenarios based problems where I have tried to 
 
 I have added the boilerplate codes of Model classes and initialization [here](https://gist.github.com/mainul35/fc728c7397a73a538cc3df9142ddc353 "here"). Perhaps, "Cart" would be more appropriate rather than naming the class as "Order".
 
-### Problem 1: {#h3-0-problem-1}
+### Problem 1:
 
 #### Find out 3 products with maximum ratings. Sort products by (i) product ratings. If more than 1 products have same number of ratings, (ii) sort by names
 
@@ -64,13 +64,13 @@ customer1.getOrders()
 
 **Note**: over here we've used distinct. The reason is, in our first attempt, we have first put the result in Set. The elements of the Set is always unique. In our second attempt, if we don't use distinct, then we will lose the unique property and the result will be different.
 
-### Problem 2: {#h3-1-problem-2}
+### Problem 2:
 
 #### Find out 3 products with minimum ratings. Sort products by (i) product ratings. If 2 products have same amount of ratings, sort by names
 
 Well, this is a practice problem to solve for the new learners.
 
-### Problem 3: {#h3-2-problem-3}
+### Problem 3:
 
 #### Find out total orders of each specific kind of product
 
@@ -97,7 +97,7 @@ var customer1Orders = customer1.getOrders()
 ```
 
 
-### Problem 4: {#h3-3-problem-4}
+### Problem 4:
 
 #### Find out customer 1's favorite product. A favorite product is the maximum quantity a customer ordered of a specific product
 
@@ -142,7 +142,7 @@ customer1Orders
 ```
 
 
-### Problem 5: {#h3-4-problem-5}
+### Problem 5:
 
 #### Calculate the total cost of a order for a customer (customer 1, 2nd order)
 
@@ -160,7 +160,7 @@ System.out.println(total);
 ```
 
 
-### Problem 6: {#h3-5-problem-6}
+### Problem 6:
 
 #### Find out all books written by each author
 

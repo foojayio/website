@@ -57,7 +57,7 @@ To effectively explore structured concurrency, one must grasp several fundamenta
 
 With those essential concepts as our foundation, let us explore *Structured Concurrency* in greater detail. So,
 
-### **What is Structured Concurrency?** {#h3-0-what-is-structured-concurrency}
+### **What is Structured Concurrency?**
 
 Succinctly, a method for concurrent programming that
 
@@ -68,7 +68,7 @@ Succinctly, a method for concurrent programming that
 
 In a nutshell, *Structured Concurrency occurs when a primary task divides into multiple simultaneous subtasks, and the primary task cannot proceed until those subtasks are finished.*
 
-### How Structured Concurrency Works? {#h3-1-how-structured-concurrency-works}
+### How Structured Concurrency Works?
 
 The structured concurrency API includes the primary class *StructuredTaskScope* , which resides in the `java.util.concurrent` package.
 
@@ -209,15 +209,15 @@ Steps to follow
 * Use this command. `jcmd <PID> Thread.print -format=json` Replace `<PID>` with the **process ID** of the Java application.
 * Analyze the Output: Look for threads related to `StructuredTaskScope` and their stack traces.
 
-### Benefits of Strutured Concurrency {#h3-2-benefits-of-strutured-concurrency}
+### Benefits of Strutured Concurrency
 
 * **Simplicity:** Users can easily understand limits and manage tasks running at the same time.
 * **Error Handling:**The system handles and reports failures in a uniform way.
 * **Resource Safety:** The system automatically cleans up tasks and their resources when the process finishes.
 * **Predictability:** The connection between parent and child tasks ensures that no task continues running in the background.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 * **Simplified Task Management:** Structured concurrency organizes tasks in a clear hierarchy, ensuring that all smaller tasks finish or stop when the main task is done.
 
@@ -235,8 +235,8 @@ Conclusion {#h2-3-conclusion}
 
 *Structured concurrency* encourages clean, predictable, and safer patterns in concurrency, marking an important step forward for Java developers.
 
-References {#h2-4-references}
------------------------------
+References
+----------
 
 * <https://openjdk.org/jeps/428>
 * <https://openjdk.org/jeps/453>

@@ -29,8 +29,8 @@ I'd say Java's driving philosophy is that the early bird is swallowed by a snake
 
 <br />
 
-Checked Exceptions {#h2-0-checked-exceptions}
----------------------------------------------
+Checked Exceptions
+------------------
 
 One of the most universally hated features in Java is checked exceptions. They are the only innovative feature Java introduced as far as I recall. Most of the other concepts in Java existed in other languages, checked exceptions are a brand new idea that other languages rejected. They aren't a "fun" feature, I get why people don't like them. But they are an amazing tool.
 
@@ -54,8 +54,8 @@ This is, to a great extent, a mistake... We can declare that main throws an exce
 
 I think a lot of the hate towards the API comes from bad versions of this exception such as `MalformedURLException` or encoding exceptions. These exceptions are often thrown for constant input that should never fail. That's just redundant and a bad use of language capabilities. Checked exceptions should only be thrown when there's cleanup we can do. That's an API problem, not a problem with the language feature.
 
-Null {#h2-1-null}
------------------
+Null
+----
 
 Pouring hate on null has been trending for the past 15+ years. Yes, I know [that quote](https://en.wikipedia.org/wiki/Tony_Hoare). I think people misuse it.
 
@@ -71,7 +71,7 @@ Let's break this down into three separate debates:
 * Failures
 * Ease of programming
 
-### Performance {#h3-2-performance}
+### Performance
 
 Null is fast. Super fast. Literally free. The CPU performs a null check for us and handles exceptions as interrupts. We don't need to write code to handle null. The alternatives can be very low overhead and can sometimes translate to null for CPU performance benefits. But this is harder to tune.
 
@@ -81,7 +81,7 @@ There is a caveat. We need the ability to mark some objects as non-null for bett
 
 I would argue that null takes this round.
 
-### Failures {#h3-3-failures}
+### Failures
 
 People hate NullPointerException. This baffles me.
 
@@ -99,7 +99,7 @@ In my experience, corrupt data in storage is far worse. The problem is insidious
 
 In my opinion, null has this one hands down...
 
-### Ease of Programming {#h3-4-ease-of-programming}
+### Ease of Programming
 
 An important point to understand is that null is a requirement of modern computing. Our entire ecosystem is built on top of null. Languages like Kotlin demonstrate this perfectly, they have null and non-null objects.
 
@@ -107,8 +107,8 @@ This means we have duplication. Every concept related to objects is expressed tw
 
 This in itself would be fine if the complexity paid off. Unfortunately, such features only resolve the most trivial non-issue cases of null. The complex objects aren't supported since they contain null retrieved from external sources. We're increasing language complexity for limited benefit.
 
-Boilerplate {#h2-5-boilerplate}
--------------------------------
+Boilerplate
+-----------
 
 This used to be a bigger issue in the past but looking at a typical Java file vs. TypeScript or JavaScript the difference isn't as big. Still, people nitpick. A smart engineer I know online called the use of semicolons in languages: "Laziness".
 
@@ -124,15 +124,15 @@ That's terrible. I block these in my style requirements; they are a recipe for d
 
 Java forces organization, this is a remarkable thing. Classes must be in a specific file and packages map to directories. This might not matter when your project is tiny, but as you handle a huge code base, this becomes a godsend. You would instantly know where to look for clues. That is a powerful tool. Yet, it leads to some verbosity and some deep directory structures. But Java was designed by people who build 1M LoC projects, it scales nicely thanks to the boilerplate. We can't say the same for some other languages.
 
-Moving Fast {#h2-6-moving-fast}
--------------------------------
+Moving Fast
+-----------
 
 Many things aren't great in Java, especially when building more adventurous startup projects. That's why I'm so [excited about Manifold](https://debugagent.com/series/manifold). I think it's a way to patch Java with all the "cool stuff" we want while keeping the performance, compatibility and stability we love.
 
 This can let the community move forward faster and experiment, while Java as a platform can take the slow and steady route.
 
-Final Word {#h2-7-final-word}
------------------------------
+Final Word
+----------
 
 Conventional wisdom is problematic. Especially when it is so one-sided and presents a single-dimension argument in which a particular language feature is inferior. There are tradeoffs to be made and my bias probably shines through my words.
 

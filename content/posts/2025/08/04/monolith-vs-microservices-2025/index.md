@@ -32,20 +32,20 @@ So, what has actually changed?
 
 🔵⚪⚪⚪⚪⚪
 
-🔁 Terraform and IaC: Changing Architecture with Confidence {#h2-0-terraform-and-iac-changing-architecture-with-confidence}
----------------------------------------------------------------------------------------------------------------------------
+🔁 Terraform and IaC: Changing Architecture with Confidence
+-----------------------------------------------------------
 
-### How Infrastructure as Code helps teams adapt architecture efficiently {#h3-1-how-infrastructure-as-code-helps-teams-adapt-architecture-efficiently}
+### How Infrastructure as Code helps teams adapt architecture efficiently
 
 Infrastructure as Code tools like Terraform make architecture changes easier. Nevertheless, the process is not effortless.
 
-### Why IaC Helps {#h3-2-why-iac-helps}
+### Why IaC Helps
 
 * Firstly, infrastructure becomes versionable, allowing easier testing, validation, or rollback.
 * Secondly, provisioning environments for proofs of concept is faster, thus reducing risks.
 * Additionally, Terraform supports microservices with elements like networking, databases, and monitoring.
 
-### But Be Careful {#h3-3-but-be-careful}
+### But Be Careful
 
 * IaC does not solve problems in code organization or inter-service communication.
 * Furthermore, many challenges remain organizational rather than infrastructural.
@@ -61,20 +61,20 @@ Infrastructure as Code tools like Terraform make architecture changes easier. Ne
 
 🔵🔵⚪⚪⚪⚪
 
-🎧 Vibecoding Culture Favors Monorepos and Monoliths {#h2-4-vibecoding-culture-favors-monorepos-and-monoliths}
---------------------------------------------------------------------------------------------------------------
+🎧 Vibecoding Culture Favors Monorepos and Monoliths
+----------------------------------------------------
 
-### Why developer happiness drives simpler, centralized architectures {#h3-5-why-developer-happiness-drives-simpler-centralized-architectures}
+### Why developer happiness drives simpler, centralized architectures
 
 Vibecoding---the focus on great developer experience---often favors centralized architectures like monoliths or monorepos.
 
-### Why Developers Prefer It {#h3-6-why-developers-prefer-it}
+### Why Developers Prefer It
 
 * One repository, one build, one entry point reduce friction and improve flow.
 * Tools like hot reload, local tests, and integrated demos work more smoothly.
 * Moreover, even microservice fans see value in recentralizing to speed development.
 
-### It's Not Always Binary {#h3-7-it-s-not-always-binary}
+### It's Not Always Binary
 
 * A monorepo can still host microservices, depending on tooling like Nx, Turborepo, or Bazel.
 * Also, microservices can be "vibe-friendly" with tools such as Tilt, devcontainers, and nx-cloud.
@@ -90,14 +90,14 @@ Vibecoding---the focus on great developer experience---often favors centralized 
 
 🔵🔵🔵⚪⚪⚪
 
-🏢 Enterprises Now Embrace the Monolith Party {#h2-8-enterprises-now-embrace-the-monolith-party}
-------------------------------------------------------------------------------------------------
+🏢 Enterprises Now Embrace the Monolith Party
+---------------------------------------------
 
-### Why big companies prefer modular monoliths or packaged microservices {#h3-9-why-big-companies-prefer-modular-monoliths-or-packaged-microservices}
+### Why big companies prefer modular monoliths or packaged microservices
 
 Surprisingly, many large enterprises now return to modular monoliths or packaged microservices like moduliths and self-contained systems.
 
-### Why This Is Happening {#h3-10-why-this-is-happening}
+### Why This Is Happening
 
 * Microservices bring high coordination, deployment, and security costs.
 * When organizations are unprepared, the return on investment often falls short.
@@ -114,10 +114,10 @@ Surprisingly, many large enterprises now return to modular monoliths or packaged
 
 🔵🔵🔵🔵⚪⚪
 
-🔄 2025 Marks a Shift from Red to Blue Mindsets {#h2-11-2025-marks-a-shift-from-red-to-blue-mindsets}
------------------------------------------------------------------------------------------------------
+🔄 2025 Marks a Shift from Red to Blue Mindsets
+-----------------------------------------------
 
-### How priorities shifted from 2024 to 2025 in software architecture {#h3-12-how-priorities-shifted-from-2024-to-2025-in-software-architecture}
+### How priorities shifted from 2024 to 2025 in software architecture
 
 Why would someone who chose "red" in 2024 choose "blue" in 2025? Because priorities changed significantly.
 
@@ -140,10 +140,10 @@ In 2025, sustainability and clarity matter more than theoretical elasticity.
 
 🔵🔵🔵🔵🔵⚪
 
-🧭 Conclusion -- From Hype to Balance {#h2-13-conclusion-from-hype-to-balance}
-------------------------------------------------------------------------------
+🧭 Conclusion -- From Hype to Balance
+-------------------------------------
 
-### Why the debate is about context and balance, not choosing sides {#h3-14-why-the-debate-is-about-context-and-balance-not-choosing-sides}
+### Why the debate is about context and balance, not choosing sides
 
 The monolith vs microservices 2025 debate is not about choosing sides. Instead, it is about making context-driven decisions.
 

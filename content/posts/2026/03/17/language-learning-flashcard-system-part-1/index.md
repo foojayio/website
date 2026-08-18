@@ -28,13 +28,13 @@ These apps are flashcard tools, where you have the front of a card with a questi
 
 In this post, we'll write a Java Spring Boot REST API backend application without any frontend, that will store flash cards and decks in MongoDB. In a second post, we'll add the SRS part and a functional React frontend to use our cards.
 
-****GitHub Repository: Complete SRS Flashcard App Code**** {#h2-0-github-repository-complete-srs-flashcard-app-code}
---------------------------------------------------------------------------------------------------------------------
+****GitHub Repository: Complete SRS Flashcard App Code****
+----------------------------------------------------------
 
 If you want to follow along, but don't want to copy/paste code, you can get the app at: <https://github.com/mongodb-developer/srsapp>
 
-****How to Create a Spring Boot Project with Spring Initializr**** {#h2-1-how-to-create-a-spring-boot-project-with-spring-initializr}
--------------------------------------------------------------------------------------------------------------------------------------
+****How to Create a Spring Boot Project with Spring Initializr****
+------------------------------------------------------------------
 
 Let's start by creating our base, empty project in Spring Initializr. This is a web-based tool to create a Spring Boot project quickly. Head over to <https://start.spring.io/index.html> and select:
 
@@ -70,8 +70,8 @@ com.mongodb.MongoSocketOpenException: Exception opening socket
 
 This happens because Spring Boot is already trying to connect to MongoDB, as MongoDB is part of the starter dependencies, and we don't have yet a database. Let's fix this by creating a free MongoDB Atlas cluster. You need to [register for a free Atlas account](https://account.mongodb.com/account/register/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-boot-foojay&utm_term=hugh.murray) and then follow the instructions on how to [Deploy a Free Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/). Select the Atlas UI, to create the cluster using your browser (you can also create a cluster using the command line and Atlas CLI).
 
-****Configure MongoDB Connection URI in Spring Boot**** {#h2-2-configure-mongodb-connection-uri-in-spring-boot}
----------------------------------------------------------------------------------------------------------------
+****Configure MongoDB Connection URI in Spring Boot****
+-------------------------------------------------------
 
 Once we have that cluster created, we can [copy the connection string](https://www.mongodb.com/docs/manual/reference/connection-string/?deployment-type=atlas&interface-atlas-only=atlas-ui&utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-boot-foojay&utm_term=hugh.murray) and add it to the properties file that Spring Boot reads on startup.
 
@@ -183,15 +183,15 @@ MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf
 
 And you should see in the log messages from org.mongodb.driver.client
 
-****Flashcard System: Logical Data Model \& ERD**** {#h2-3-flashcard-system-logical-data-model-erd}
----------------------------------------------------------------------------------------------------
+****Flashcard System: Logical Data Model \& ERD****
+---------------------------------------------------
 
 From a logical point of view, cards are organized in Decks. A Deck of Cards will have a name and will contain cards. There's no limit to the number of Decks and Cards we can have in our system. A Card will have some text in the front, some text in the back, and will belong to a Deck. A Card can be in only one Deck, so this is a one-to-many relationship: a Deck can have 0..n Cards. We can represent that with the following ERD:
 
 erDiagram DECK \|\|--o{ CARD : contains DECK { string id string name string description } CARD { string id date frontText string backText }
 
-****MongoDB Schema Design: One-to-Many Relationships**** {#h2-4-mongodb-schema-design-one-to-many-relationships}
-----------------------------------------------------------------------------------------------------------------
+****MongoDB Schema Design: One-to-Many Relationships****
+--------------------------------------------------------
 
 To model our entities, we have several options. Let's reason through them and find the best schema for this particular problem.
 
@@ -244,8 +244,8 @@ And our Cards:
 ```
 
 
-****Java Model Classes: Deck and FlashCard (Spring Boot Records)**** {#h2-5-java-model-classes-deck-and-flashcard-spring-boot-records}
---------------------------------------------------------------------------------------------------------------------------------------
+****Java Model Classes: Deck and FlashCard (Spring Boot Records)****
+--------------------------------------------------------------------
 
 Based on the previous schema, we'll have these two model classes:
 
@@ -291,8 +291,8 @@ public record FlashCard(
 
 We'll store everything in a cards collection, and use a parentDeckId as a link to the Deck this Card belongs.
 
-****Spring Boot DevTools: How to Enable Automatic Restarts**** {#h2-6-spring-boot-devtools-how-to-enable-automatic-restarts}
-----------------------------------------------------------------------------------------------------------------------------
+****Spring Boot DevTools: How to Enable Automatic Restarts****
+--------------------------------------------------------------
 
 Every single time we change something in our code, we need to stop the application and start it again. This can become a tedious process quickly, and also one that is prone to changes. If I got a penny every time I changed something without saving and then was puzzled about the fix not being deployed, I won't be writing this now. I'll be retired a sailing the world in a luxury yacht.
 
@@ -311,12 +311,12 @@ Open your pom.xml file and add this dependency:
 
 Now, stop and relaunch the app for the last time, and from now on, every time you change anything in your code, your app will recompile and relaunch automagically.
 
-****REST API Design for Flashcard Decks and Cards**** {#h2-7-rest-api-design-for-flashcard-decks-and-cards}
------------------------------------------------------------------------------------------------------------
+****REST API Design for Flashcard Decks and Cards****
+-----------------------------------------------------
 
 We need several endpoints for our app.
 
-### **Decks** {#h3-8-decks}
+### **Decks**
 
 * to create a new Deck
   * POST /decks
@@ -332,7 +332,7 @@ We need several endpoints for our app.
   * GET /decks/{deckId} (fetch one deck)
 * GET /decks/{deckId}/cards/{cardId} (fetch one card)
 
-### **Cards** {#h3-9-cards}
+### **Cards**
 
 * to add a new Card to a Deck
   * POST /decks/{deckId}/cards
@@ -350,8 +350,8 @@ We need several endpoints for our app.
     * 204 No Content on success, or
     * 404 Not Found if the deckId doesn't exist.
 
-****Create a Spring Boot REST Controller for Decks**** {#h2-10-create-a-spring-boot-rest-controller-for-decks}
---------------------------------------------------------------------------------------------------------------
+****Create a Spring Boot REST Controller for Decks****
+------------------------------------------------------
 
 To test that our Spring Data API points work, we'll start by adding an empty Deck controller. Create a BaseController.java and DeckController.java file in web/controller like:
 
@@ -446,8 +446,8 @@ public class DeckController extends BaseController{
 
 If you look at the code, you'll see that we are just returning empty responses. We want to call these endpoints and make sure the web part is working properly.
 
-****How to Change the Default Spring Boot Port (Port 5400)**** {#h2-11-how-to-change-the-default-spring-boot-port-port-5400}
-----------------------------------------------------------------------------------------------------------------------------
+****How to Change the Default Spring Boot Port (Port 5400)****
+--------------------------------------------------------------
 
 Then, we'll change the default port (8080) to 5400 and add some options to improve the debugging logs. Open application.yml and change it to:
 
@@ -472,8 +472,8 @@ logging:
 ```
 
 
-****Test Spring Boot REST APIs with cURL Commands**** {#h2-12-test-spring-boot-rest-apis-with-curl-commands}
-------------------------------------------------------------------------------------------------------------
+****Test Spring Boot REST APIs with cURL Commands****
+-----------------------------------------------------
 
 To test our endpoints, we will use cURL, available in Linux/macOS and Windows.
 
@@ -519,8 +519,8 @@ curl "http://localhost:5400/decks/search?term=lang"
 
 But wait! All this is just working with the placeholder DeckController that is not storing or retrieving anything from a database! Let's fix this by adding our MongoDB code for Decks!
 
-****Spring Data MongoDB Repositories: DeckRepository \& CardRepository**** {#h2-13-spring-data-mongodb-repositories-deckrepository-cardrepository}
---------------------------------------------------------------------------------------------------------------------------------------------------
+****Spring Data MongoDB Repositories: DeckRepository \& CardRepository****
+--------------------------------------------------------------------------
 
 To access MongoDB, we will create an interface DeckRepository that extends MongoRepository. This is the quickest way to access MongoDB, as MongoRepository includes several useful methods to access our collections. We can even add our own methods to the interface to get custom behaviour. If we need something more advanced or customized, we will need to use MongoTemplate.
 
@@ -618,8 +618,8 @@ public interface CardRepository extends MongoRepository<FlashCard, String> {
 ```
 
 
-****Implementing Business Logic with Spring Boot Services**** {#h2-14-implementing-business-logic-with-spring-boot-services}
-----------------------------------------------------------------------------------------------------------------------------
+****Implementing Business Logic with Spring Boot Services****
+-------------------------------------------------------------
 
 Services is where we actually use the database code. Our services will interact with the database, sending the queries, inserts, updates, etc., and will expose a set of business-level operations consumed by our web controllers. Go ahead and create DeckService.java in the new folder service. Here, we will use DeckRepository and CardRepository to access the database. For instance, to get a Deck by its identifier, we'll use findById, which is part of CrudRepository and in this case will be implemented by our MongoDB driver.
 
@@ -857,8 +857,8 @@ public class CardService {
 ```
 
 
-****Connecting Controllers to Database: DeckController Implementation**** {#h2-15-connecting-controllers-to-database-deckcontroller-implementation}
----------------------------------------------------------------------------------------------------------------------------------------------------
+****Connecting Controllers to Database: DeckController Implementation****
+-------------------------------------------------------------------------
 
 Now that we have our Repositories (defining the operations we want to perform on the database) and the Services (the business use cases), we can wire everything up in our controllers.
 
@@ -1045,7 +1045,7 @@ public class Constants {
 ```
 
 
-**Next steps** {#h2-16-next-steps}
-----------------------------------
+**Next steps**
+--------------
 
 In this post, we've covered a lot of ground: building a Spring Boot API that stores our data in MongoDB and testing it. In the second part of this post, we'll add a Spaced Repetition System library and a couple of endpoints to actually do our reviews, along with the schema changes. Stay tuned!

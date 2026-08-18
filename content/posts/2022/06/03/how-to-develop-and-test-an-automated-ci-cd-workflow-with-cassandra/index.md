@@ -28,7 +28,7 @@ If you have projects that depend on [Apache Cassandra](https://cassandra.apache.
 
 In this post, we'd like to show you how you can develop and test your own CI/CD workflows with Cassandra using a GitHub Actions runner.{#7fbd}
 
-### Challenges that vex developers building CI/CD workflows {#56e9}
+### Challenges that vex developers building CI/CD workflows
 
 Say you want to support any number of workflows (within reason, of course) all running at the same time. But if you find your test environment is broken, migrated, scaled down to save costs, or you encounter any one of the many other common situations that developers have to work around, all of your great automation is totally wrecked.{#2e18}
 
@@ -36,7 +36,7 @@ A big "gotcha" when you're implementing continuous integration is that you need 
 
 You might think all you need is a container running Cassandra. However, it can be more challenging than it looks to get Cassandra going. If you're going to do all this with containers, it's better to take advantage of the best parts of a container orchestration system like Kubernetes. Then you can deploy your app AND database with close-to-production configuration, test it, and tear everything down at the end, reducing costs. No magical, came-from-the-DevOps-team dependencies or expensive test environment databases to maintain!{#c69f}
 
-### Let's try it out without leaving GitHub!! {#72b8}
+### Let's try it out without leaving GitHub!!
 
 We've built out a[GitHub repo](https://github.com/DataStax-Examples/cassandra-cicd-example) to show you how you can configure and deploy your app and database and test it in an ephemeral way, leveraging a GitHub Actions runner and [Kubernetes-in-Docker (kind)](https://kind.sigs.k8s.io/docs/user/quick-start/).{#09fd}
 
@@ -48,7 +48,7 @@ This process also works with [self-hosted GitHub runners](https://docs.github.co
 
 The public GitHub will provide plenty of RAM to support the learning experience and show you what you can do. And, if you're working on a private project and using GitHub, it isn't difficult to port your workflow to a self-hosted runner after having tested it in the public GitHub. So, let's just stick with that.{#62de}
 
-### The Basic Steps {#f4ce}
+### The Basic Steps
 
 Here's a brief rundown of the basic steps you can use for building and testing an automated CI/CD workflow in GitHub:{#b744}
 
@@ -66,7 +66,7 @@ Check it out now on our [GitHub repo](https://github.com/DataStax-Examples/cassa
 
 <br />
 
-### Resources {#377c}
+### Resources
 
 1. [Apache Cassandra](https://cassandra.apache.org/_/index.html)
 2. [DataStax](https://www.datastax.com/)

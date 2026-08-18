@@ -23,8 +23,8 @@ frozen: false
 
 A few years later, emerged, revolutionizing the way we approached web development. The emergence of AJAX marked a significant shift in web development, transferring more logic from the server to the client, and this shift was not without reason.
 
-Client-Side Rendering {#h2-0-client-side-rendering}
----------------------------------------------------
+Client-Side Rendering
+---------------------
 
 This shift gained momentum due to two key factors: advancements in the JavaScript language and improvements in browser capabilities. JavaScript modules, for example, have greatly enhanced the separation of concerns, leading to more maintainable code. Meanwhile, the introduction of the Local Storage API has been a game-changer.
 
@@ -34,8 +34,8 @@ I mentioned the Local Storage API earlier. Along with Web Workers, it enables of
 
 Another advantage of migrating logic to the user's machine is reducing server computational load. This not only improves performance but also reduces cloud costs.
 
-Some Organizational Insights {#h2-1-some-organizational-insights}
------------------------------------------------------------------
+Some Organizational Insights
+----------------------------
 
 In parallel with these technical advancements, mobile devices rose to prominence. Many companies split their applications into client web apps and server APIs to adapt. With the advent of native applications, this approach became the norm and is often taken for granted.
 
@@ -43,8 +43,8 @@ This separation of concerns has profound implications. Given the rapid pace of c
 
 This artificial separation between client and server is an unnecessary hurdle for many small to mid-sized organizations. A simple webapp with well-adjusted CSS is often more than sufficient. That is why I'm a big fan of the Vaadin framework. With Vaadin, your developers only need to learn a single technology stack using one programming language and a small set of APIs. Each developer can work on both the backend and the UI, making the process simpler and more cost-effective. Yet, like with microservices, the herd mentality has been strong.
 
-The Rise of Server-Side Rendering {#h2-2-the-rise-of-server-side-rendering}
----------------------------------------------------------------------------
+The Rise of Server-Side Rendering
+---------------------------------
 
 As with any new technology, early adopters jump on the bandwagon, the technology gains traction, and issues arise over time. Client-side rendering is no different.
 

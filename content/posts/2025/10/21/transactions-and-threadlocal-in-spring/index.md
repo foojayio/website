@@ -27,12 +27,12 @@ I was intrigued because though I used Spring transactions a lot via the `@Transa
 
 It made sense, because how would you propagate the context, but I wanted to make sure. In this post, I'd like to share my findings.
 
-Finding usage of `ThreadLocal` {#h2-0-finding-usage-of-threadlocal}
--------------------------------------------------------------------
+Finding usage of `ThreadLocal`
+------------------------------
 
 The hardest part of the research was to find the usage itself.
 
-I started with doing [a search](https://github.com/spring-projects/) for `ThreadLocal` on the GitHub Spring projects organizations. It returns a list of 364 different files. If you [limit the results](https://github.com/search?q=org%3Aspring-projects+ThreadLocal+repo%3Aspring-projects%2Fspring-framework&amp;type=code) to the `spring-framework` project, it shrinks down to 78 files. I had enough and asked ChatGPT:
+I started with doing [a search](https://github.com/spring-projects/) for `ThreadLocal` on the GitHub Spring projects organizations. It returns a list of 364 different files. If you [limit the results](https://github.com/search?q=org%3Aspring-projects+ThreadLocal+repo%3Aspring-projects%2Fspring-framework&type=code) to the `spring-framework` project, it shrinks down to 78 files. I had enough and asked ChatGPT:
 > Find if Spring transactions uses ThreadLocal. If yes, tell me how and points to sources to prove your claims.
 >
 > Yes, **Spring transactions** use `ThreadLocal` as part of their transaction management mechanism. Here's an explanation of how it works:
@@ -61,8 +61,8 @@ Indeed, the magic happens in the `TransactionSynchronizationManager`.
 
 Note: In the above search results, it appears on the second page, and doesn't give an inkling that it's the answer. ChatGPT was a great help!
 
-The `TransactionSynchronizationManager` class {#h2-1-the-transactionsynchronizationmanager-class}
--------------------------------------------------------------------------------------------------
+The `TransactionSynchronizationManager` class
+---------------------------------------------
 
 ![](tx-sync-mgr-class-diagram.png)
 
@@ -84,8 +84,8 @@ In this regard, `TransactionSynchronizationManager` acts as a global variable.
 
 Let's have a look at a simplified sequence diagram.  
 
-How transactions use `TransactionSynchronizationManager` {#how-transactions-use-transactionsynchronizationmanager}
-------------------------------------------------------------------------------------------------------------------
+How transactions use `TransactionSynchronizationManager`
+--------------------------------------------------------
 
 I'll use the `DataSourceTransactionManager`, but other Spring-provided transaction managers behave in a similar way.
 
@@ -99,8 +99,8 @@ During startup, Spring searches for all `@Transactional`-annotated methods. For 
 5. Removes the synchronization from the `ThreadLocal`
 6. Removes the data source key from the `resources` map
 
-What about Reactive transaction management? {#what-about-reactive-transaction-management}
------------------------------------------------------------------------------------------
+What about Reactive transaction management?
+-------------------------------------------
 
 In Reactive Programming, tasks are executed asynchronously across multiple threads to maximize resource utilization. Since `ThreadLocal` ties data to a specific thread, Spring can't use it reliably in reactive environments. Instead, Spring's reactive transaction management uses a `Context` object associated with the reactive stream. Still, Spring designers kept the same class name-quite confusing.
 
@@ -123,8 +123,8 @@ Here's a quick comparison chart of how Spring passes the transaction context in 
 | Thread Dependence | Tied to a single thread | Propagates across threads |
 | Immutability      | Mutable                 | `Context` is immutable    |
 
-Discussion {#discussion}
-------------------------
+Discussion
+----------
 
 Spring's Reactive API isn't bound to a thread. Migrating the API to virtual threads isn't an issue, because it offers the `Context` object to pass data across threads.
 

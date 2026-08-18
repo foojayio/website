@@ -48,8 +48,8 @@ Be sure always to pass `JTREG="VERBOSE=all"`: vsreg executes the command, parses
 
 *The utility is MIT licensed and only tested on Linux.*
 
-Example Usage {#h2-0-example-usage}
------------------------------------
+Example Usage
+-------------
 
 You're now able to select "ASGCT debug" in "Run and Debug":  
 
@@ -75,8 +75,8 @@ The debugger pauses on a segfault, but there are always a few at the beginning o
  <img loading="lazy" decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-13-18.png" alt="" class="wp-image-906" width="767" height="545">
 </figure>
 
-Recompilation {#h2-1-recompilation}
------------------------------------
+Recompilation
+-------------
 
 If you want to recompile the tests, use `make images test-image`. You can add a task to your `.vscode/tasks.json` file and pass the label to the `--build-task` option:
 
@@ -100,8 +100,8 @@ If you want to recompile the tests, use `make images test-image`. You can add a 
 ```
 
 
-Options {#h2-2-options}
------------------------
+Options
+-------
 
 vsreg has a few options:
 
@@ -160,8 +160,8 @@ An example template looks like this:
 
 vsreg fills in `$NAME` (with the label), `program` (with the used Java binary), `args`, `cwd`, environment and `preLaunchTask`.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 vsreg is one of these utilities that solve one specific itch: I hope it also helps others; feel free to contribute to this tool, adding new templates and other improvements on [GitHub](https://github.com/parttimenerd/vsreg).
 

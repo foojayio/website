@@ -31,13 +31,13 @@ Does Java 22 also bring that much innovation, or is it just a bug-fix release?
 
 And what needs to be done to get such a release published on time? Let's find out...
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube _NYuuoCQgO8 >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,10 +45,10 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Speakers {#h2-2-speakers}
--------------------------
+Speakers
+--------
 
-### Loïc Mathieu {#h3-3-lo-c-mathieu}
+### Loïc Mathieu
 
 * https://foojay.io/today/java-22-whats-new/
 * <https://www.linkedin.com/in/lo%C3%AFc-mathieu-475b144/>
@@ -57,20 +57,20 @@ Speakers {#h2-2-speakers}
 * <https://twitter.com/loicmathieu>
 * <https://kestra.io/>
 
-### Simon Ritter {#h3-4-simon-ritter}
+### Simon Ritter
 
 * <https://www.linkedin.com/in/siritter/>
 * <https://mastodon.social/@speakjava>
 * <https://twitter.com/speakjava>
 * <https://www.azul.com/>
 
-### Podcast Host: Frank Delporte {#h3-5-podcast-host-frank-delporte}
+### Podcast Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Content {#h2-6-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests   
 
@@ -163,8 +163,8 @@ Content {#h2-6-content}
 
 <br />
 
-Music {#h2-7-music}
--------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

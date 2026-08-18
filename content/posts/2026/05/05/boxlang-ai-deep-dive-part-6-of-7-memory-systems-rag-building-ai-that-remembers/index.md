@@ -34,8 +34,8 @@ Memory is what separates a useful AI application from a toy. BoxLang AI ships wi
 
 This post is a complete tour.
 
-🧠 Two Categories of Memory {#h2-0-two-categories-of-memory}
-------------------------------------------------------------
+🧠 Two Categories of Memory
+---------------------------
 
 ```html
            +-----------------------------------+
@@ -77,8 +77,8 @@ BoxLang AI memory breaks into two fundamentally different categories, solving tw
 
 Both categories share the same `IAiMemory` interface, the same `aiMemory()` BIF, and the same per-call identity routing --- your application code barely changes between them.
 
-📋 Standard Memory Types {#h2-1-standard-memory-types}
-------------------------------------------------------
+📋 Standard Memory Types
+------------------------
 
 Create any memory with our lovely global function: `aiMemory( type, config: {} )`. Our default memory type is a `window` memory of `20` messages:
 
@@ -119,7 +119,7 @@ mem = aiMemory( "jdbc", config: {
 | `cache`   | Distributed applications, multi-server deployments           |
 | `jdbc`    | Enterprise multi-user systems, full persistence              |
 
-### Summary Memory --- How It Actually Works {#h3-2-summary-memory-how-it-actually-works}
+### Summary Memory --- How It Actually Works
 
 The `summary` type deserves special attention. When the message count exceeds `summaryThreshold`, it calls the configured LLM to produce a one-paragraph summary of the oldest messages, replaces them with that summary as a single system message, then continues accumulating. Conversation context survives without the token cost of carrying the full history.
 
@@ -135,8 +135,8 @@ agent = aiAgent(
 ```
 
 
-🔍 Vector Memory Types {#h2-3-vector-memory-types}
---------------------------------------------------
+🔍 Vector Memory Types
+----------------------
 
 Vector memory stores embeddings and retrieves by semantic similarity --- the right tool when "find relevant context" matters more than "recall what was said recently."
 
@@ -190,7 +190,7 @@ Full vector memory roster:
 | `weaviate`   | GraphQL vector database                     |
 | `milvus`     | Enterprise-scale vector DB                  |
 
-### Hybrid Memory --- The Best of Both {#h3-4-hybrid-memory-the-best-of-both}
+### Hybrid Memory --- The Best of Both
 
 `hybrid` combines a recent message window with semantic vector retrieval --- you get recency and relevance:
 
@@ -205,8 +205,8 @@ mem = aiMemory( "hybrid", config: {
 
 For most production support-bot or assistant scenarios, `hybrid` is the sweet spot --- recent context for coherence, semantic retrieval for depth.
 
-🏢 Per-Call Multi-Tenant Identity Routing {#h2-5-per-call-multi-tenant-identity-routing}
-----------------------------------------------------------------------------------------
+🏢 Per-Call Multi-Tenant Identity Routing
+-----------------------------------------
 
 This is the architectural feature that makes BoxLang AI memory extensible. Memory instances are stateless and safe to use as singletons --- `userId` and `conversationId` route each operation to the correct isolated conversation. Or you can create memories with seeded identities if you want a specific agent with specific memory; your choice.
 
@@ -242,8 +242,8 @@ sharedAgent.run( "Can you help me reset my password?",  {}, { userId: "bob",   c
 
 No per-user agent factories. No thread-local hacks. No shared-state concurrency bugs. One instance, many tenants.
 
-📚 Document Loaders {#h2-6-document-loaders}
---------------------------------------------
+📚 Document Loaders
+-------------------
 
 Document loaders are the ingestion layer for RAG pipelines. They normalize content from 30+ source types into the `Document` format that vector memory understands.
 
@@ -306,12 +306,12 @@ docs = aiDocuments(
 | `DirectoryLoader`  | `directory`  | Batch file processing                |
 | `WebCrawlerLoader` | `webcrawler` | Multi-page crawl                     |
 
-🔗 Building a Complete RAG Pipeline {#h2-7-building-a-complete-rag-pipeline}
-----------------------------------------------------------------------------
+🔗 Building a Complete RAG Pipeline
+-----------------------------------
 
 Here's the full picture --- ingest documents into vector memory, then use an agent with that memory to answer questions grounded in your content.
 
-### Step 1: Ingest {#h3-8-step-1-ingest}
+### Step 1: Ingest
 
 ```java
 // Create vector memory backed by ChromaDB
@@ -345,7 +345,7 @@ println( "Estimated cost   : $#result.estimatedCost#" )
 
 The `toMemory()` method handles chunking via `aiChunk()`, embedding via the configured provider, deduplication, and storage --- everything in one fluent call with a detailed report back.
 
-### Step 2: Query {#h3-9-step-2-query}
+### Step 2: Query
 
 ```java
 // Agent with the same vector memory — retrieves relevant chunks automatically
@@ -366,7 +366,7 @@ response = agent.run(
 
 When the agent runs, vector memory retrieves the most semantically similar document chunks for the query and injects them as context before the LLM call. The LLM answers based on your actual content --- not hallucinations.
 
-### Step 3: Hybrid for Production {#h3-10-step-3-hybrid-for-production}
+### Step 3: Hybrid for Production
 
 For most production RAG scenarios, `hybrid` memory beats pure vector:
 
@@ -388,8 +388,8 @@ agent = aiAgent(
 
 The first 8 messages keep conversations coherent. The semantic layer ensures relevant documentation is always surfaced. Together they handle both "what did I just ask?" and "what does our policy say about X?"
 
-🔧 Token Management {#h2-11-token-management}
----------------------------------------------
+🔧 Token Management
+-------------------
 
 Two BIFs help you reason about context window usage:
 
@@ -407,8 +407,8 @@ chunks = aiChunk( largeText, {
 
 `aiChunk()` is used internally by `toMemory()`, but you can call it directly when building custom ingestion pipelines.
 
-🏗️ Multiple Memories Per Agent {#h2-12-multiple-memories-per-agent}
---------------------------------------------------------------------
+🏗️ Multiple Memories Per Agent
+-------------------------------
 
 Agents can have multiple memory instances simultaneously --- useful when you want different retention policies for different types of information:
 
@@ -433,8 +433,8 @@ agent.addMemory( aiMemory( "file", config: { filePath: "/audit/" } ) )
 
 All memories are read from and written to in parallel. Messages retrieved from all memories are merged before each LLM call.
 
-📦 The `aiPopulate()` BIF --- Structured Memory Without Live Calls {#h2-13-the-aipopulate-bif-structured-memory-without-live-calls}
------------------------------------------------------------------------------------------------------------------------------------
+📦 The `aiPopulate()` BIF --- Structured Memory Without Live Calls
+------------------------------------------------------------------
 
 One often-overlooked feature: `aiPopulate()` fills a typed BoxLang class from JSON without making any LLM call. This is essential for caching and testing:
 
@@ -462,8 +462,8 @@ println( restoredProfile.getName() ) // "John Doe"
 
 Perfect for: pre-populated test fixtures, cached AI extractions, converting existing JSON data to typed objects.
 
-What's Next {#h2-14-what-s-next}
---------------------------------
+What's Next
+-----------
 
 In **Part 7** --- the final post in the series --- we go deep on MCP: how to consume tools from any MCP server, how `MCPTool` proxies work, and how to expose your own BoxLang functions as an enterprise MCP server with full security, CORS, API key validation, and rate limiting.
 

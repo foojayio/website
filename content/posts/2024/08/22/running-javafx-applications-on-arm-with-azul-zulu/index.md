@@ -30,17 +30,17 @@ The Raspberry Pi is a perfect board for testing Java and JavaFX on ARM, and that
 
 {{< youtube XhDQvkcYJ88 >}}
 
-Azul Zulu Builds with JavaFX {#RunningJavaFXonRaspberryPiwithAzulZulu-AzulZuluBuildswithJavaFX}
------------------------------------------------------------------------------------------------
+Azul Zulu Builds with JavaFX
+----------------------------
 
 As [described in our documentation](https://docs.azul.com/core/install/debian), there are multiple ways to get the latest version of Zulu for your system. This post highlights two of these options.
 
-### Downloading From Azul Downloads {#RunningJavaFXonRaspberryPiwithAzulZulu-DownloadingFromAzulDownloads}
+### Downloading From Azul Downloads
 
 You can check the [available builds on the Azul Downloads page](https://www.azul.com/downloads/?os=linux&architecture=arm-64-bit&package=jdk-fx#zulu). Thanks to the search filters, it's very easy to find the correct download for, for instance, a Linux ARM system:
 ![](azul-downloads-arm-javafx-1024x813.png)
 
-### Using SDKMAN {#RunningJavaFXonRaspberryPiwithAzulZulu-UsingSDKMAN}
+### Using SDKMAN
 
 Another very convenient way to install Java and switch between different versions is the [SDKMAN](https://sdkman.io/) tool. For instance, when using it on a Raspberry Pi 5 with the 64-bit Raspberry Pi Operating System, `sdk list java` gives you a nice list of the available Zulu runtimes for the platform, of which several with JavaFX.
 
@@ -82,8 +82,8 @@ Using java version 22.0.1.fx-zulu in this shell.
 ```
 
 
-JavaFX Demo Experiment {#RunningJavaFXonRaspberryPiwithAzulZulu-JavaFXExperiment}
----------------------------------------------------------------------------------
+JavaFX Demo Experiment
+----------------------
 
 Let's try it out with a simple JavaFX application on this Raspberry Pi. You can find the complete code in [this GitHub Gist](https://gist.github.com/FDelporte/c69a02c57acc892b4c996a9779d4f830). It starts a user interface with labels to show the Java and JavaFX versions and a framerate counter. Additionally, one or more circles are added that bounce around on the screen and change direction when they hit a border of the application.
 
@@ -159,8 +159,8 @@ $ DISPLAY=:0 jbang FxDemo.java
 ```
 
 
-Conclusion {#RunningJavaFXonRaspberryPiwithAzulZulu-Conclusion}
----------------------------------------------------------------
+Conclusion
+----------
 
 Once more, Azul brings Java to more platforms by adding JavaFX support for ARM 64-bit Linux systems.
 

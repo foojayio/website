@@ -27,7 +27,7 @@ Are you prepared to have fun with this Java Challenge and refine your Java skill
 
 Take 5 minutes of your time and get this challenge done!
 
-### Optional TakeDropWhile ChallengeOptional TakeDropWhile Challenge {#h3-0-optional-takedropwhile-challengeoptional-takedropwhile-challenge}
+### Optional TakeDropWhile ChallengeOptional TakeDropWhile Challenge
 
 What will happen in the following code?
 

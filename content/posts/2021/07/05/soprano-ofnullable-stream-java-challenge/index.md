@@ -25,8 +25,8 @@ In this Java Challenge, we will explore the use of a stream in an Optional!
 
 Are you ready to solve this Java Challenge? It's time to improve your Java skills with this Soprano ofNullable stream Challenge...
 
-Soprano ofNullable filter Challenge {#h2-0-soprano-ofnullable-filter-challenge}
--------------------------------------------------------------------------------
+Soprano ofNullable filter Challenge
+-----------------------------------
 
 What will happen after the main method is executed as follows?
 

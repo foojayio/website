@@ -24,7 +24,7 @@ Typically in low-latency development, a trade-off must be made between minimisin
 
 This article explores how Chronicle's Pausers can be used to automatically apply a back-off strategy when there is no data to be processed, providing an excellent balance between resource usage and responsive, low-latency, low-jitter applications.
 
-### Description of the Problem {#h3-0-description-of-the-problem}
+### Description of the Problem
 
 In a typical application stack multiple threads are used for servicing events, processing data, pipelining etc.
 
@@ -34,7 +34,7 @@ An important design consideration is how threads become aware that there is work
   -**Busy Waiting**: In this case the receiving thread continually spins checking for some indication that there is work to do. This has the benefit of quick response (low latency) when there is work for the thread to do, however comes at the expense of high CPU usage, wasting cycles when there is nothing to do. In addition, the constant high CPU usage in turns leads to appreciably higher power demand, and associated cooling load.
 * **Fixed Sleep**: In this case, when there is no further work to be done the receiving thread sleeps for a fixed period of time before checking again for more work. This has the benefit of low resource usage, but the clear downside of this strategy is that worst case latency is at least as large as the sleep period.
 
-### The Problems with Sleeping, and how to Sleep Soundly {#h3-1-the-problems-with-sleeping-and-how-to-sleep-soundly}
+### The Problems with Sleeping, and how to Sleep Soundly
 
 The actual behaviour when a thread requests a `sleep` varies not only across platforms, but also across different versions and usage patterns for the same platform.
 
@@ -56,7 +56,7 @@ Careful use of affinity, isolation, and short `sleep` periods can result in resp
 
 `1` Other options include running with real-time priorities, however we want to keep the focus of this document on standard setups as much as possible
 
-### What are Pausers? {#h3-2-what-are-pausers}
+### What are Pausers?
 
 [Chronicle](https://chronicle.software/ "Chronicle")'s Pausers provide a sliding scale of behaviours between the above extremes of Signal/Notification, Fixed Sleep, and Busy Waiting, by using an intelligent back-off strategy which enables a more nuanced control to better balance low latency and resource utilisation.
 
@@ -74,7 +74,7 @@ while (running) {
 ```
 
 
-### Pauser Modes {#h3-3-pauser-modes}
+### Pauser Modes
 
 This table illustrates several different Pauser modes, as well as the benefits and downsides to using each of them.
 
@@ -85,7 +85,7 @@ This table illustrates several different Pauser modes, as well as the benefits a
 
 Of note, the Busy Pauser used for lowest latency internally uses busy waiting, and as such will consume 100% of one core. It is therefore important to ensure Busy Pausers do not contend for the same core, and CPU affinity and isolation should be considered when using Busy Pausers to control this aspect. More information about CPU isolation and its benefits in event loops can be found [here](https://chronicle.software/why-the-cool-kids-use-event-loops/ "here").
 
-### Performance of Pauser Modes {#h3-4-performance-of-pauser-modes}
+### Performance of Pauser Modes
 
 The graph below plots the time waiting for an event (x-axis) against the pause/response time for a selection of Pausers.
 
@@ -96,7 +96,7 @@ The `Sleepy` and `Balanced` strategies show step changes and steady growth in re
 ![](Screenshot-2023-05-09-at-11.00.15-AM-1024x813.png)  
 *Figure 1. Pauser Mode Performance*
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 This article explored the use of Chronicle's Pausers and how they are used to build responsive, low-latency, low-jitter applications with relatively low CPU utilisation.
 

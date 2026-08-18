@@ -36,8 +36,8 @@ You can find all the code presented in this tutorial in the GitHub repository:
 ```
 
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this tutorial, you'll need:
 
@@ -68,8 +68,8 @@ The implementation uses [Jakarta EE](https://jakarta.ee/) as the application pla
 For example, when a user executes any question, this will be the flow that the application will follow:
 ![](foojay3-1024x691.png)
 
-Step 1: Generate the Project {#h2-1-step-1-generate-the-project}
-----------------------------------------------------------------
+Step 1: Generate the Project
+----------------------------
 
 Begin by generating a new Jakarta EE project using the [Jakarta EE starter](https://start.jakarta.ee/). For this example, we will use Glassfish version 8.0.3.
 
@@ -224,8 +224,8 @@ jnosql.mongodb.application.name=devrel-article-java-jnosql
 ```
 
 
-Step 2: Generate the domain classes {#h2-2-step-2-generate-the-domain-classes}
-------------------------------------------------------------------------------
+Step 2: Generate the domain classes
+-----------------------------------
 
 Once the setup is complete, the next step is to create the entities: City and its attractions. The annotation approach is similar to Jakarta Persistence (formerly JPA), but each attribute must be marked with either Id or Column annotations. The overall structure remains similar. We will define two entities and one embedded class.
 
@@ -676,8 +676,8 @@ public class DataLoader {
 ```
 
 
-Step 3: Defining the AI layer over MongoDB integration {#h2-3-step-3-defining-the-ai-layer-over-mongodb-integration}
---------------------------------------------------------------------------------------------------------------------
+Step 3: Defining the AI layer over MongoDB integration
+------------------------------------------------------
 
 Once all services are available, the next step is to expose them through tools using the [Tool annotation](https://docs.langchain4j.dev/tutorials/tools/), which defines functions the language model can call. Tool classes should provide as much context as possible for these services. Langchain4j will automatically handle the response, which may be returned as JSON and passed to the language model.
 
@@ -881,8 +881,8 @@ public interface TravelService {
 ```
 
 
-Step 4: Showing the result with UI {#h2-4-step-4-showing-the-result-with-ui}
-----------------------------------------------------------------------------
+Step 4: Showing the result with UI
+----------------------------------
 
 With all services and tools in place, the next step is to present them and enable user interaction. We will use Jakarta Faces, which simplifies development for those without extensive front-end experience. The TravelBean class will display information in HTML. By combining its attributes with Jakarta Expression Language, we will expose getters and setters for use as inputs and outputs on the webpage. We will also define the scope here as View.
 
@@ -1297,8 +1297,8 @@ body {
 ```
 
 
-Step 5: Execute the application {#h2-5-step-5-execute-the-application}
-----------------------------------------------------------------------
+Step 5: Execute the application
+-------------------------------
 
 To complete the process, package the application and start it using the embedded GlassFish plugin:
 
@@ -1314,8 +1314,8 @@ http://localhost:8080/
 ```
 
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 This tutorial introduced the Planning Pattern as a practical method for integrating AI into enterprise applications. Instead of tasking a language model with solving complex problems in one step, this pattern breaks objectives into smaller actions handled by deterministic tools. This approach elevates reliability, transparency, and maintainability by enabling AI to reason about goals while delegating data access and business operations to traditional software components. As AI becomes more embedded in business workflows, patterns like Planning offer a structured way to balance autonomy and control.
 

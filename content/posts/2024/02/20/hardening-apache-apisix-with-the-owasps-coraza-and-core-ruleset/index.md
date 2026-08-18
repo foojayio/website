@@ -28,8 +28,8 @@ The OWASP regularly publishes a Top 10 vulnerability report. The report targets 
 
 In this post, I'd like to describe how to fix some of them via the [Apache APISIX API Gateway](https://apisix.apache.org/).
 
-The OWASP Top 10 2021 {#h2-0-the-owasp-top-10-2021}
----------------------------------------------------
+The OWASP Top 10 2021
+---------------------
 
 In 2021, the report mentions:
 
@@ -48,8 +48,8 @@ For more details, please check the complete [report](https://owasp.org/www-proje
 
 Fixing a vulnerability depends on its exact nature. For example, fixing *Vulnerable and Outdated Components* is process-driven, requiring discipline in managing versions and retiring older ones. Some, however, are technical and only require proper configuration in the reverse proxy or API Gateway, *e.g.* , *Server Side Request Forgery*.
 
-Nobody cares about security {#h2-1-nobody-cares-about-security}
----------------------------------------------------------------
+Nobody cares about security
+---------------------------
 
 Security is a touchy subject because hardening security doesn't bring any value to the business. Career-driven managers won't care about security as they won't be able to showcase they increased the company's profit by X% on their next yearly evaluation. Unless the board considers security seriously, chances are nobody will care. For this reason, most organizations implement checkbox-based security, aka plausible deniability. If you're interested in implementing security properly, I've written some thoughts in a previous blog post: [Treat security as a risk](https://blog.frankel.ch/treat-security-as-risk/).
 
@@ -60,8 +60,8 @@ All in all, securing applications will not get a lot of budget, if any. Hence, w
 
 While it's theoretically possible to configure Nnginx via Apache APISIX configuration, there's another more straightforward way.
 
-The OWASP Core Ruleset and Coraza {#h2-2-the-owasp-core-ruleset-and-coraza}
----------------------------------------------------------------------------
+The OWASP Core Ruleset and Coraza
+---------------------------------
 
 The description of the Core Ruleset is pretty relevant to our needs:
 > The OWASP® ModSecurity Core Rule Set (CRS) is a set of generic attack detection rules for use with ModSecurity or compatible web application firewalls. The CRS aims to protect web applications from a wide range of attacks, including the OWASP Top Ten, with a minimum of false alerts. The CRS provides protection against many common attack categories, including:
@@ -83,8 +83,8 @@ The description of the Core Ruleset is pretty relevant to our needs:
 
 OWASP also provides [Coraza](https://coraza.io/), a port of ModSecurity available as a Go library. [Coraza Proxy Wasm](https://github.com/proxy-wasm/spec) is built on top of Coraza and implements the [proxy-wasm ABI](https://github.com/proxy-wasm/spec), which specifies a set of Wasm interfaces for proxies. Finally, Apache APISIX offers proxy-wasm integration.
 
-Putting it all together {#h2-3-putting-it-all-together}
--------------------------------------------------------
+Putting it all together
+-----------------------
 
 Let's sum up:
 
@@ -213,8 +213,8 @@ Coraza: Access denied (phase 1). Inbound Anomaly Score Exceeded in phase 1
 
 Coraza did the job!
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Most organizations don't incentivize for security. Hence, we need to be smart about it and use existing components as much as possible.
 

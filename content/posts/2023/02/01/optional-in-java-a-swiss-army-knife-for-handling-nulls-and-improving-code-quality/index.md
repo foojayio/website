@@ -24,7 +24,7 @@ In Java, dealing with null values can be a real headache. Nulls can cause all so
 
 So let's deep dive into a few examples of uses of Optionals.
 
-### Avoiding NullPointerExceptions {#h.11oy0vy8jeji}
+### Avoiding NullPointerExceptions
 
 One of the most common use cases of Optional is to avoid NullPointerExceptions. By wrapping a potentially null value in an Optional, you can safely access the value without risking a NullPointerException. For example, if you have a method that returns a value that might be null, you can return an Optional instead and then use Optional methods to access the value safely.
 
@@ -39,7 +39,7 @@ if (optionalValue.isPresent()) {
 
 In this example, we created an Optional from a potentially null value. We then use the Optional.isPresent() method to check if the value is present, and use Optional.get() to access the value safely.
 
-### Simplifying Exception Handling {#h.pihx88gud5tc}
+### Simplifying Exception Handling
 
 Another compelling use case of Optional is to simplify exception handling. You can use the Optional.orElseThrow() method to throw an exception if the value is not present. This can make your code more concise and easier to read, especially when handling multiple potential exceptions. Example-
 
@@ -51,7 +51,7 @@ String value = optionalValue.orElseThrow(() -> new RuntimeException("Value is no
 
 In this example, we create an empty Optional and use Optional.orElseThrow() to throw a RuntimeException if the value is not present. This simplifies the exception-handling code and makes it more concise and readable.
 
-### Delaying error handling to the caller {#h3-2-delaying-error-handling-to-the-caller}
+### Delaying error handling to the caller
 
 An Optional in Java is also very good for delaying the decision of what needs to happen in case it goes wrong in a higher context. Instead of the function deciding the behaviour (kill the thread or use a default value), the caller can now decide what is best in the caller's context.   
 
@@ -103,7 +103,7 @@ In this example, the caller will print an error message if the book with the giv
 
 Thanks to my friend [Ties van de Ven](https://twitter.com/ties_ven) for sharing this one.
 
-### Chaining Optional Values {#h.5lggcr8talwm}
+### Chaining Optional Values
 
 <br />
 
@@ -117,7 +117,7 @@ Optional<Author> optionalAuthor = Optional.ofNullable(book)
 
 In this example, we chain two Optional values using Optional.flatMap(). We create an Optional from a potentially null book object and then use Optional.flatMap() to access the author value if it is present. This simplifies the code and avoids the need for null checks.
 
-### Defining Default Values {#h.cv55uoh3j7vl}
+### Defining Default Values
 
 Optional can also be used to define default values for missing or null values. You can use Optional.orElse() to specify a default value to return if the Optional is empty. This can make your code more resilient and reduce the likelihood of errors caused by null or missing values.
 
@@ -131,7 +131,7 @@ String result = Optional.ofNullable(value)
 
 In this example, we created an Optional from a potentially null value, and used Optional.orElse() to specify a default value if the Optional is empty. This makes the code more resilient and avoids errors caused by null or missing values.
 
-### Avoiding Boilerplate Code {#h.5vd1kth8qrfg}
+### Avoiding Boilerplate Code
 
 By using Optional, you can avoid writing boilerplate code to check for null values. Optional provides a concise and expressive way to handle null values, which can make your code more readable and maintainable. For example, you can use Optional.map() to perform a transformation on a value only if it is present, without having to write an if statement to check for null. Example-
 
@@ -145,7 +145,7 @@ String result = optionalValue.map(s -> s.toUpperCase())
 
 In this example, we create an Optional from a potentially null value, and use Optional.map() to perform a transformation on the value only if it is present. This avoids the need for an if statement to check for null, and makes the code more concise and readable.
 
-### Facilitating Method Composition {#h.748qku5dw9os}
+### Facilitating Method Composition
 
 Optional can be used to compose methods together more concisely and expressively. By wrapping the return value of a method in an Optional, you can use Optional methods to chain multiple methods calls together. This can make your code more readable and easier to understand. For example:
 
@@ -158,7 +158,7 @@ Optional<String> optionalValue = Optional.of("Hello")
 
 In this example, we create an Optional from a string, use Optional.map() to convert it to uppercase, and then use Optional.filter() to remove any values that do not start with "H". This allows us to compose multiple methods calls together in a single expression.
 
-### Handling Optional Collections {#h.b53zwnn49r8l}
+### Handling Optional Collections
 
 Optional can be used to handle collections of Optional values in a more concise and readable way. For example, if you have a collection of Optional values, you can use Optional.stream() to create a stream of non-empty values, and then use stream methods to perform operations on the values. This can make your code more expressive and easier to understand. For example:
 
@@ -175,7 +175,7 @@ String result = optionalList.stream()
 
 In this example, we create a list of Optional values, use Optional.stream() to create a stream of non-empty values, and then use stream methods to join the non-empty values into a single string. This allows us to handle collections of Optional values more elegantly and expressively.
 
-### Simplifying Configurations {#h3-8-simplifying-configurations}
+### Simplifying Configurations
 
 Optional can simplify configuration management by providing a default value for a configuration parameter. For example, if you have a configuration parameter that might be missing, you can use Optional to provide a default value if the parameter is not present. This can make your code more resilient and easier to maintain. For example:
 
@@ -187,7 +187,7 @@ String value = Optional.ofNullable(System.getProperty("my.property"))
 
 In this example, we create an Optional from a system property value and use Optional.orElse() to specify a default value if the property is not present. This makes the configuration more resilient and avoids errors caused by missing configuration parameters.
 
-### Simplifying Method Signatures {#h.ht8inlzf8ydy}
+### Simplifying Method Signatures
 
 Optional can be used to simplify method signatures by allowing methods to return Optional values. This can provide a concise and expressive way to indicate that a value might be missing. For example:
 
@@ -200,7 +200,7 @@ In this example, we define a method that returns an Optional value, indicating t
 
 <br />
 
-### Providing Default Implementation {#h.gexe514391q9}
+### Providing Default Implementation
 
 Optional can be used to provide default implementations for methods that might not be implemented. This can simplify code by providing a default behavior that can be overridden if necessary. For example:
 
@@ -216,7 +216,7 @@ public interface UserService {
 
 In this example, we define an interface that provides a default implementation for a method that returns an Optional value. This simplifies the implementation of the interface and provides a default behavior that can be overridden if necessary.
 
-### Enhancing Readability {#h.y9matd9l6xwi}
+### Enhancing Readability
 
 Optional can be used to enhance the readability of code by providing a clear and concise way to handle null values. For example, instead of writing code that checks for null values using if statements, you can use Optional methods to handle null values more elegantly. This can make your code more readable and easier to understand. For example:
 
@@ -228,7 +228,7 @@ Optional.ofNullable(value)
 
 In this example, we create an Optional from a potentially null value, and use Optional.ifPresentOrElse() to perform one action if the value is present, and a different action if the value is not present. This provides a clear and concise way to handle null values, and makes the code more readable and maintainable.
 
-### Enabling Method Composition {#h.fbmk0wvci42l}
+### Enabling Method Composition
 
 Optional can be used to enable method composition by providing a way to chain method calls together concisely and expressively. This can make your code more expressive and easier to read. For example:
 
@@ -242,7 +242,7 @@ Optional.ofNullable(value)
 
 In this example, we create an Optional from a potentially null value, use Optional.map() to convert it to uppercase, use Optional.filter() to remove any values that do not start with "A", and then use Optional.ifPresent() to perform an action if the value is present. This provides a clear and concise way to chain method calls together and makes the code more expressive and readable.
 
-### Handling Complex Object {#h.31m3wdl1w9cl}
+### Handling Complex Object
 
 Optional can be used to handle complex objects that contain optional values. This can make your code more resilient and easier to maintain. For example:
 
@@ -255,7 +255,7 @@ Optional<Color> colorOptional = Optional.ofNullable(square)
 
 In this example, we create an Optional from a potentially null object, use Optional.map() to access a sub-object, and then use Optional.map() to access a value in the sub-object. This allows us to handle complex objects more elegantly and expressively, making the code more resilient and maintainable.
 
-### Providing an Alternative Value {#h.wwhd3vsyro6x}
+### Providing an Alternative Value
 
 Optional can be used to provide an alternative value if a value is not present. This can make your code more resilient and easier to read. For example:
 
@@ -267,7 +267,7 @@ Optional<String> optionalValue = Optional.ofNullable(value)
 
 In this example, we create an Optional from a potentially null value, and use Optional.or() to provide an alternative value if the value is not present. This allows us to handle missing values more elegantly and expressively.
 
-### Providing a Lazy Evaluation {#h.afi3xgruwxmz}
+### Providing a Lazy Evaluation
 
 Optional can be used to provide a lazy evaluation of a value that is expensive to compute. For example, if you have an expensive value, you can use Optional to defer the computation until the value is actually needed. This can improve the performance of your code by avoiding unnecessary computations. For example:
 
@@ -279,7 +279,7 @@ Optional<String> lazyValue = Optional.ofNullable(null)
 
 In this example, we create an Optional from a potentially null value and use Optional.map() to defer the computation of the value until the value is actually needed. This provides a lazy evaluation of the value, and can improve the performance of the code.
 
-### Handling Multiple Optional Values {#h.r8bulxeexy3q}
+### Handling Multiple Optional Values
 
 Optional can be used to handle multiple optional values more elegantly and expressively. For example, if you have multiple optional values that you need to handle, you can use Optional methods to combine and manipulate the values more expressively. For example:
 
@@ -292,7 +292,7 @@ Optional<String> result = optionalValue1.flatMap(v1 -> optionalValue2.map(v2 -> 
 
 In this example, we create two Optional values, use Optional.flatMap() and Optional.map() to combine the values into a single string, and then use the resulting Optional to perform additional operations. This provides a concise and expressive way to handle multiple optional values and makes the code more readable and maintainable.
 
-### Simplifying JPA Criteria Queries {#h.k81h7w3rmjec}
+### Simplifying JPA Criteria Queries
 
 Optional can be used to simplify the handling of JPA Criteria Queries in Java. For example, you can use Optional to handle cases where a criteria query might not have any results. This can make your code more expressive and easier to read. For example:
 
@@ -308,7 +308,7 @@ Optional<User> result = query.getResultList().stream().findFirst();
 
 In this example, we create a JPA Criteria Query, use Optional to handle the case where the query might not have any results, and then use the resulting Optional to perform additional operations. This provides a simple and expressive way to handle JPA Criteria Queries, and avoids null checks and if statements.
 
-### Simplifying Database Operations {#h.wb3jccr3sxaf}
+### Simplifying Database Operations
 
 Optional can be used to simplify database operations in Java. For example, you can use Optional to handle cases where a database query might not have any results. This can make your code more expressJavaand easier to read. For example:
 

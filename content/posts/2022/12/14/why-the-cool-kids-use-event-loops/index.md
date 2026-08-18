@@ -19,7 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### A Discussion On the Benefits of Event Loops in Java. {#h3-0-a-discussion-on-the-benefits-of-event-loops-in-java}
+### A Discussion On the Benefits of Event Loops in Java.
 
 When I was working in software development back in the 1990s, nearly all the software libraries that I worked on made use of event loops. This was because at the time most hardware had just one single CPU.
 
@@ -73,7 +73,7 @@ In summary, single-threaded event loops can still be scaled by striping the even
 
 This approach can be applied to a wide range of use cases -- for example, the [Chronicle Matching Engine](https://chronicle.software/matching-engine/ "Chronicle Matching Engine") which has excellent performance and implementation simplicity, and we are able to scale by running any number of independent engines as needed to meet demand.
 
-### Code Example {#h3-1-code-example}
+### Code Example
 
 To illustrate how you can use the Chronicle Event loop in your code we have put together a code example called [SingleAndMultiThreadedExample](https://github.com/OpenHFT/Chronicle-Threads/blob/develop/src/test/java/net/openhft/chronicle/threads/example/SingleAndMultiThreadedExample.java "SingleAndMultiThreadedExample"):
 
@@ -169,7 +169,7 @@ public class SingleAndMultiThreadedExample {
 ```
 
 
-### Conclusion {#h3-2-conclusion}
+### Conclusion
 
 Favouring event loops over threads and adopting an [EDA single-threaded microservices architecture](https://chronicle.software/services/ "EDA single-threaded microservices architecture"), where either single or multiple microservices are striped using a single-threaded event loop has been successful in reducing the burden of concurrency.
 

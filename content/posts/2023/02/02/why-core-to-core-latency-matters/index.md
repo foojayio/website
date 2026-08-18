@@ -26,7 +26,7 @@ Java has done an excellent job at shielding developers from their platform; it i
 
 However, some sectors, such as FinTech, benefit from fast software with predictable latencies, where every last microsecond can make a massive difference to their bottom line. For these sectors, it can be beneficial to have a reasonable grasp of the underlying hardware and basic knowledge of the areas described in the following sections.
 
-### Thread Scheduler {#h3-0-thread-scheduler}
+### Thread Scheduler
 
 Many popular Java frameworks provide horizontal scalability by distributing their workloads over several concurrent compute units. If the number of concurrent threads exceeds the number of cores, the application will suffer a performance degradation every time the thread is swapped out to run another process. The performance cost of this swap will typically add tens of unnecessary microseconds to the overall processing time, not to mention the amount of time that is being used to process the other perhaps not-so-critical task.
 
@@ -34,7 +34,7 @@ Even if the number of critical threads does not exceed the number of cores, thre
 
 To control threads from being scheduled-out we can pin each of our critical threads to a single core. Used in combination with core isolation to reduce interruptions from other tasks, this largely eliminates jitter caused by scheduler interruptions and core migrations, and maximises the benefits available from instruction and data caches.
 
-### Core-To-Core Latency {#h3-1-core-to-core-latency}
+### Core-To-Core Latency
 
 One often overlooked consideration is core-to-core latency; if we are using the techniques mentioned above to pin our threads to cores, then it is also important to consider which threads we pin to which cores.
 
@@ -42,7 +42,7 @@ For example, if we are exchanging data between two cores on the same socket, the
 
 AMD architecture differs from Intel by introducing core complexes (CCX) which are subsets of cores within each socket sharing an L3 cache (vs Intel's socket-wide L3 cache design). The number of cores in a CCX varies depending on the specific CPU, with 2, 4, and 8 being common configurations. This means that there is now a difference in performance depending on the placement of threads within a socket, as well as between sockets, with the best performance achieved when exchanging data between cores within the same CCX as is clearly seen in the second and third heatmaps below with 4- and 2-core CCXs respectively.
 
-### Heatmaps {#h3-2-heatmaps}
+### Heatmaps
 
 The following heatmaps show the latency when exchanging data between a pair of threads running on different cores, colour-coded with the lowest numbers green, and moving through yellow to red for the highest numbers. All three heatmaps use the same scale.
 
@@ -55,7 +55,7 @@ The following heatmaps show the latency when exchanging data between a pair of t
 **AMD EPYC 73F3 (2×16 core, 2-core CCX)**   
 ![](Screen-Shot-2023-01-24-at-9.30.57-AM-1024x508.png)
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 In tuned Linux environments where threads have been pinned to isolated cores, the best core-to-core performance is available on AMD between cores within the same CCX. When exchanging data between cores in the same socket but across CCX groups, Intel outperforms AMD by around a factor of 2 in these tests. Intel also performs better than AMD by a similar margin when exchanging data between sockets.
 

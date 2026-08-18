@@ -25,8 +25,8 @@ Without further ado, let's go to the Java Challenge!
 
 It's time to improve your Java skills with this Neo Stream Search Challenge
 
-Neo Stream Search Challenge {#_neo_stream_search_challenge}
------------------------------------------------------------
+Neo Stream Search Challenge
+---------------------------
 
 What do you think will happen when running the following code?
 

@@ -20,8 +20,8 @@ related_posts:
 frozen: false
 ---
 
-Two Approaches {#h2-0-two-approaches}
--------------------------------------
+Two Approaches
+--------------
 
 There's little doubt that modern software architectures lean towards asynchronous models for communication between distributed components (where "distributed" means components that are not part of the same process, be they on the same or on different physical machines). Synchronous models such as Remote Procedure Call (RPC) are now largely discredited \[[Waldo](https://www.researchgate.net/profile/Ellen-Isaacs/publication/220168963_Why_do_users_like_video/links/02e7e5186b67219c70000000/Why-do-users-like-video.pdf#page=89 "Waldo"), [Vinoski](http://steve.vinoski.net/blog/2008/07/01/convenience-over-correctness/ "Vinoski")\]; even asynchronous variants of these are not seen as desirable.
 
@@ -72,7 +72,7 @@ The scenarios may relate to a single component, a subset of components in the ap
 
 While these two approaches do not mandate each other, they do tend to work well together, and the [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") framework provides developers with support in building components and applications that follow the guidelines.
 
-### Events, Events, Events {#h3-1-events-events-events}
+### Events, Events, Events
 
 Some Event-Driven Architecture framework approaches draw differences between certain broad types of messages/events sent between components, for example, CQRS. It is perfectly reasonable to consider that *all* communications between components as events, even given the idea of an event as being an indication that something "has happened":
 
@@ -92,7 +92,7 @@ There is also a larger discussion to be had around logging in general, and its f
 
 Of course, not every component is necessarily going to follow these guidelines. Some form of interaction with components, for example, external components that are not event-driven, will be likely. This could be talking to a database, or to a UI. Gateway components may be used to manage this interaction, mapping between event-based communication and an alternative, perhaps request-response model without losing any information in our event store.
 
-### Putting it into Practice {#h3-2-putting-it-into-practice}
+### Putting it into Practice
 
 ![](Screenshot-2023-10-17-at-4.15.21-PM-1024x230.png)
 
@@ -122,8 +122,8 @@ Results can be displayed in a terminal, or within an IDE such as IntelliJ. Faili
 
 Having input and output events kept separately makes it easier to keep track of output for variations of invalid input, which in turn makes regression testing easier.
 
-Summary {#h2-3-summary}
------------------------
+Summary
+-------
 
 The practices of Event-Driven Architecture and Behaviour-Driven Development have more in common than may at first be apparent. At [Chronicle](https://chronicle.software/ "Chronicle"), we have embraced both of these approaches and implemented them through our Chronicle Services Framework.
 

@@ -25,8 +25,8 @@ While [Vaadin 24.0](http://https://foojay.io/today/vaadin-24-java-17-jakarta-ee-
 
 Here are the best of them!
 
-Visual View Builder {#h2-0-visual-view-builder}
------------------------------------------------
+Visual View Builder
+-------------------
 
 [![Vaadin View Builder](https://vaadin.com/docs/latest/static/37d22f0783d625059a3b94ed276b7d7a/cfb07/view-builder-start.webp "Vaadin View Builder")](https://vaadin.com/docs/latest/tools/view-builder "Vaadin View Builder")
 
@@ -34,8 +34,8 @@ Built into start.vaadin.com, Visual View Builder helps you to create application
 
 [Try it out →](https://vaadin.com/docs/latest/tools/view-builder "Try it out -&gt;")
 
-Visual Theme Editor {#h2-1-visual-theme-editor}
------------------------------------------------
+Visual Theme Editor
+-------------------
 
 [![Vaadin Real-time Theme Editor](https://vaadin.com/docs/latest/static/c50310949470420af2bc09943c940a4f/5f228/theme-editor.webp "Vaadin Real-time Theme Editor")](https://vaadin.com/docs/latest/tools/theme-editor "Vaadin Real-time Theme Editor")
 
@@ -43,8 +43,8 @@ Visually fine-tune the appearance of your UI components in-app while in real-tim
 
 [Read more →](https://vaadin.com/docs/latest/tools/theme-editor "Read more -&gt;")
 
-Faster, easier production builds {#h2-2-faster-easier-production-builds}
-------------------------------------------------------------------------
+Faster, easier production builds
+--------------------------------
 
 Pre-compiled production bundle eliminates the need to run front-end tools like npm and Vite.
 
@@ -52,8 +52,8 @@ Faster, error-free process, if no add-ons or front-end files are used in the app
 
 [Read more about production builds →](https://vaadin.com/docs/latest/production/production-build "Read more -&gt;")
 
-Code splitting for component loading {#h2-3-code-splitting-for-component-loading}
----------------------------------------------------------------------------------
+Code splitting for component loading
+------------------------------------
 
 Faster initial load time of the application by only loading components when they are needed.
 
@@ -63,8 +63,8 @@ For other routes, components are first loaded when navigating to these routes.
 
 [Read more about bundle optimizations →](https://vaadin.com/docs/latest/production/production-build#bundle-component-loading-optimizations "Read more -&gt;")
 
-Faster Grids and lazyloading for columns {#h2-4-faster-grids-and-lazyloading-for-columns}
------------------------------------------------------------------------------------------
+Faster Grids and lazyloading for columns
+----------------------------------------
 
 Significant improvements to enhance the performance of all Vaadin grids, including Grid, Tree Grid, Grid Pro, and CRUD components.
 

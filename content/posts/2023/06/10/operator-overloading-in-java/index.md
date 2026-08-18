@@ -39,8 +39,8 @@ Additionally, we'll touch upon a solution that Manifold offers to address some l
 
 Before we begin as always, you can find the code examples for this post and other videos in this series on my [GitHub page](https://github.com/shai-almog/java-book/). Be sure to check out the project, give it a star, and follow me on GitHub to stay updated!
 
-Arithmetic Operators {#h2-0-arithmetic-operators}
--------------------------------------------------
+Arithmetic Operators
+--------------------
 
 Operator overloading allows us to use familiar mathematical notation in code, making it more expressive and intuitive. While Java doesn't support operator overloading by default, Manifold provides a solution to this limitation.
 
@@ -99,7 +99,7 @@ In this code, we demonstrate that Manifold can swap the order to invoke `Vec.plu
 
 As implied by the previous code Manifold also supports primitive wrapper objects specifically in the context of autoboxing. In Java, primitive types have corresponding wrapper objects. Manifold handles the conversion between primitives and their wrapper objects seamlessly, thanks to autoboxing and unboxing. This enables us to work with objects and primitives interchangeably in our code. There are caveats to this as we will find out.
 
-### BigDecimal Support {#h3-1-bigdecimal-support}
+### BigDecimal Support
 
 Manifold goes beyond simple arithmetic and supports more complex scenarios. For example, the `manifold-science` dependency includes built-in support for `BigDecimal` arithmetic. `BigDecimal` is a Java class used for precise calculations involving large numbers or financial computations. By using Manifold, we can perform arithmetic operations with BigDecimal objects using familiar operators, such as `+`, `-`, `*`, and `/`. Manifold's integration with `BigDecimal` simplifies code and ensures accurate calculations.
 
@@ -114,7 +114,7 @@ var z = x + y;
 
 Under the hood, Manifold adds the applicable plus, minus, times, etc. methods to the class. It does so by leveraging class extensions which [I discussed before](https://debugagent.com/extending-java-apis-add-missing-features-without-the-hassle).
 
-### Limits of Boxing {#h3-2-limits-of-boxing}
+### Limits of Boxing
 
 We can also extend existing classes to support operator overloading. Manifold allows us to extend classes and add methods that accept custom types or perform specific operations.
 
@@ -146,7 +146,7 @@ public class BigDecimalExt {
 ```
 
 
-### List of Arithmetic Operators {#h3-3-list-of-arithmetic-operators}
+### List of Arithmetic Operators
 
 So far we focused on the plus operator but Manifold supports a wide range of operators. The following table lists the method name and the operators it supports:
 
@@ -163,8 +163,8 @@ So far we focused on the plus operator but Manifold supports a wide range of ope
 
 Notice that the increment and decrement operators don't have a distinction between the prefix and postfix positioning. Both `a++` and `++a` would lead to the `inc` method.
 
-Index Operator {#h2-4-index-operator}
--------------------------------------
+Index Operator
+--------------
 
 The support for the index operator took me completely off guard when I looked at it. This is a complete game-changer... The index operator is the square brackets we use to get an array value by index.
 
@@ -198,8 +198,8 @@ Yes!
 
 You're reading valid code in Manifold. An index operator is used to lookup in a map. Notice that a map has a put() method and not a set method. That's an annoying inconsistency that Manifold fixed with an extension method. We can then use an object to look up within a map using the operator.
 
-Relational and Equality Operators {#h2-5-relational-and-equality-operators}
----------------------------------------------------------------------------
+Relational and Equality Operators
+---------------------------------
 
 We still have a lot to cover... Can we write code like this (referring to the `Vec` object from before):
 
@@ -240,8 +240,8 @@ However, we can implement the `ComparableUsing` interface which is a sub-interfa
 
 That interface also lets us override the `compareToUsing(T, Operator)` method. This is similar to the compareTo method but lets us create operator-specific behavior which might be important in some edge cases.
 
-Unit Expressions for Scientific Coding {#h2-6-unit-expressions-for-scientific-coding}
--------------------------------------------------------------------------------------
+Unit Expressions for Scientific Coding
+--------------------------------------
 
 {{< youtube r4iycWnI5fE >}}
 
@@ -295,8 +295,8 @@ If you look at that code the problem should be apparent. We need an exchange rat
 
 I suspect that this is the reason this is still experimental. I'm very curious to see how something like this can be solved elegantly.
 
-Pitfalls of Operator Overloading {#h2-7-pitfalls-of-operator-overloading}
--------------------------------------------------------------------------
+Pitfalls of Operator Overloading
+--------------------------------
 
 While Manifold provides powerful operator overloading capabilities, it's important to be mindful of potential challenges and performance considerations.
 
@@ -329,14 +329,14 @@ This is an optimization we often do for high-performance matrix calculations. Yo
 
 In fact they're as fast as a method invocation, but sometimes the specific method invoked and amount of allocations are unintuitive.
 
-Type Safety Features {#h2-8-type-safety-features}
--------------------------------------------------
+Type Safety Features
+--------------------
 
 The following aren't related to operator overloading but they were a part of the second video so I feel they make sense as part of a wide-sweeping discussion on type safety.
 
 One of my favorite things about Manifold is its support of strict typing and compile time errors. To me, both represent the core spirit of Java.
 
-### JailBreak: Type-Safe Reflection {#h3-9-jailbreak-type-safe-reflection}
+### JailBreak: Type-Safe Reflection
 
 `@JailBreak` is a feature that grants access to the private state within a class. While it may sound bad, `@JailBreak` offers a better alternative to using traditional reflection to access private variables. By jailbreaking a class, we can access its private state seamlessly, with the compiler still performing type checks. In that sense, it's the lesser of two evils.
 
@@ -367,7 +367,7 @@ long t = d.jailbreak().fastTime;
 ```
 
 
-### Self Annotation: Enforcing Method Parameter Type {#h3-10-self-annotation-enforcing-method-parameter-type}
+### Self Annotation: Enforcing Method Parameter Type
 
 In Java, certain APIs accept objects as parameters, even when a more specific type could be used. This can lead to potential issues and errors at runtime. However, Manifold introduces the `@Self` annotation, which helps enforce the type of the object passed as a parameter.
 
@@ -405,7 +405,7 @@ size.equals(new MySizeClass());
 
 With the `@Self` annotation the string comparison will fail during compilation.
 
-### Auto Keyword: A Stronger Alternative to Var {#h3-11-auto-keyword-a-stronger-alternative-to-var}
+### Auto Keyword: A Stronger Alternative to Var
 
 I'm not a huge fan of the `var` keyword. I feel it didn't simplify much and the price is coding to an implementation instead of to an interface. I understand why the devs at Oracle chose this path. Conservative decisions are the main reason I find Java so appealing.
 
@@ -413,8 +413,8 @@ Manifold has the benefit of working outside of those constraints and it offers a
 
 Auto is particularly useful when working with tuples, a feature not yet discussed in this post. It allows for elegant and concise code, enhancing readability and maintainability. You can effectively use auto as a drop-in replacement for var.
 
-Finally {#h2-12-finally}
-------------------------
+Finally
+-------
 
 Operator overloading with Manifold brings expressive and intuitive mathematical notation to Java, enhancing code readability and simplicity.
 

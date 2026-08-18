@@ -24,8 +24,8 @@ frozen: false
 
 **In this article, we will cover how to store files in a database using Spring Boot and discuss some alternatives.**
 
-**Introduction** {#h2-0-introduction}
--------------------------------------
+**Introduction**
+----------------
 
 Recently, a fellow developer who I helped in past reached out to me on Slack seeking assistance with handling file uploads in a Spring Boot application. After providing some guidance, I decided to compile this article to assist others facing similar challenges.
 
@@ -33,10 +33,10 @@ When dealing with file data, storing these files in your database as Binary Larg
 
 That being said, if you're building a small-scale application or have specific requirements that warrant the use of a database for file storage, this approach can work.
 
-**Process Overview for Database File Storage** {#h2-1-process-overview-for-database-file-storage}
--------------------------------------------------------------------------------------------------
+**Process Overview for Database File Storage**
+----------------------------------------------
 
-### **Step 1: Entity Class** {#h3-2-step-1-entity-class}
+### **Step 1: Entity Class**
 
 To begin, we create an Entity class. This class represents the data that we will store in the database. An example Document entity with fields name, type, and data might look like this:
 
@@ -90,7 +90,7 @@ In the Document class, I've added **@Column** annotation to the data variable an
 
 Please ensure that your MySQL database can indeed support that maximum size. If not, you may have to reconfigure your MySQL settings or consult with your DBA.
 
-### **Step 2: Repository Class** {#h3-3-step-2-repository-class}
+### **Step 2: Repository Class**
 
 <br />
 
@@ -103,7 +103,7 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
 
 <br />
 
-### Step 3: Service Class {#h3-4-step-3-service-class}
+### Step 3: Service Class
 
 ```
 @Slf4j
@@ -123,7 +123,7 @@ public class FileUploadService {
 
 <br />
 
-### Step 4: Controller Class {#h3-5-step-4-controller-class}
+### Step 4: Controller Class
 
 ```
 @Slf4j
@@ -148,12 +148,12 @@ When the user sends an HTTP POST request to upload a file, the uploadFile method
 
 It then uses the fileUploadService.saveFileInDatabase(file) **;** to persist this object in the database.
 
-**Alternatives to Database File Storage** {#h2-6-alternatives-to-database-file-storage}
----------------------------------------------------------------------------------------
+**Alternatives to Database File Storage**
+-----------------------------------------
 
 While storing files in a database can work for some cases, it's not suitable for all. Here are a couple of alternatives:
 
-### **Local or Network File Systems** {#h3-7-local-or-network-file-systems}
+### **Local or Network File Systems**
 
 You can write your files to your server's local file system. While this can be viable for smaller applications, it does not scale well as your application grows.
 
@@ -183,7 +183,7 @@ Now run the application and do curl:
 curl -X POST -H 'Content-Type: multipart/form-data' -F 'file=@/home/uses/uploads/_cd03deb1-489d-4867-9b5b-2ffde99a3e20.jpeg http://localhost:8080/files/upload
 ```
 
-### **Cloud Storage Services** {#h3-8-cloud-storage-services}
+### **Cloud Storage Services**
 
 Services like Amazon S3, Google Cloud Storage, and Azure Blob Storage are built for storing and retrieving any amount of data from anywhere.
 
@@ -209,13 +209,13 @@ public void uploadFileToS3(MultipartFile multipartFile) throws IOException {
 
 <br />
 
-### **Content Delivery Network (CDN) Storage** {#h3-9-content-delivery-network-cdn-storage}
+### **Content Delivery Network (CDN) Storage**
 
 CDNs are used to serve content to end-users with high availability and high performance. CDNs can also handle file uploads and storage.
 
 An advantage of CDN storage is that files can automatically be distributed and cached close to the end user, which can greatly reduce download times if you have a geographically diverse user base.
 
-### **Object Storage** {#h3-10-object-storage}
+### **Object Storage**
 
 Object storage provides an optimized solution for storing large amounts of data, each as a discrete unit or "object". Amazon S3 and Google Cloud Storage are examples of object storage services.
 
@@ -223,7 +223,7 @@ Unlike files in a file system, there are no folders or hierarchy in object stora
 
 This design allows for great scalability and cost-effectiveness when dealing with massive amounts of unstructured data.
 
-### **Block Storage** {#h3-11-block-storage}
+### **Block Storage**
 
 Block storage divides data into standardized chunks called "blocks", each with its own address but without any additional metadata.
 
@@ -231,20 +231,20 @@ This method is often used for databases or file systems and is suitable for edit
 
 Popular Block Storage providers include Amazon EBS and Google Persistent Disk.
 
-### **Distributed File Systems (e.g., Hadoop HDFS, GlusterFS)** {#h3-12-distributed-file-systems-e-g-hadoop-hdfs-glusterfs}
+### **Distributed File Systems (e.g., Hadoop HDFS, GlusterFS)**
 
 In a distributed file system, the data is stored across multiple servers yet appears to the user as a single cohesive file system.
 
 Distributed file systems can handle huge amounts of data and are designed to be highly fault-tolerant. However, the setup and management of such systems can be relatively complex.
 
-### **Managed File Storage Services (e.g., Google Drive API, Dropbox API)** {#h3-13-managed-file-storage-services-e-g-google-drive-api-dropbox-api}
+### **Managed File Storage Services (e.g., Google Drive API, Dropbox API)**
 
 These services provide built-in file storage, organization, and security and can be accessed via APIs to integrate them into your application seamlessly.
 
 The advantage of these services is that they offload much of the work of file management and allow you to leverage their well-designed interfaces and organizational structures.
 
-Pros and Cons {#h2-14-pros-and-cons}
-------------------------------------
+Pros and Cons
+-------------
 
 Storing files in a database offers consistency and simplicity but can lead to performance and scalability issues. Local and network file systems provide performance benefits but struggle with scalability and data integrity. Cloud storage services offer scalability and performance but might be costly for small applications. Content Delivery Networks (CDNs) enhance performance but at a cost.
 
@@ -252,8 +252,8 @@ Object storage offers scalability and affordability but may lack in performance,
 
 Ultimately, the choice of storage depends on the unique requirements of the application, such as volume, performance, budget, and use case.
 
-Conclusion {#h2-15-conclusion}
-------------------------------
+Conclusion
+----------
 
 In this article, we showed you a simple setup for storing uploaded files in a database using Spring Boot and gave some alternatives.
 

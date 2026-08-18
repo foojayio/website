@@ -29,8 +29,8 @@ In this article, we take you on a tour of everything that is part of this releas
 
 Where applicable the differences with Java 22 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
 
-From Project Amber {#h2-0-from-project-amber}
----------------------------------------------
+From Project Amber
+------------------
 
 Java 23 contains 4 features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -41,7 +41,7 @@ Java 23 contains 4 features that originated from [Project Amber](https://openjdk
 
 > The goal of Project Amber is to explore and incubate smaller, productivity-oriented Java language features.
 
-### JEP 455: Primitive Types in Patterns, instanceof, and switch (Preview) {#h3-1-jep-455-primitive-types-in-patterns-instanceof-and-switch-preview}
+### JEP 455: Primitive Types in Patterns, instanceof, and switch (Preview)
 
 Pattern matching has become more prominent in Java since Java 16, but its support for primitives was always limited to nested record patterns. This JEP proposes to support primitive types in all pattern contexts, and to extend `instanceof` and `switch` to work with all primitive types.
 
@@ -204,7 +204,7 @@ Java 22 didn't support primitive types in patterns, instanceof and switch yet. N
 
 For more information on this feature, see [JEP 455](https://openjdk.org/jeps/455).
 
-### JEP 476: Module Import Declarations (Preview) {#h3-2-jep-476-module-import-declarations-preview}
+### JEP 476: Module Import Declarations (Preview)
 
 Many essential classes in the Java Class Library require imports to be usable.  
 
@@ -277,7 +277,7 @@ Up until Java 22, to import all public top-level classes and interfaces from a m
 
 For more information on this feature, see [JEP 476](https://openjdk.org/jeps/476).
 
-### JEP 477: Implicitly Declared Classes and Instance Main Methods (Third Preview) {#h3-3-jep-477-implicitly-declared-classes-and-instance-main-methods-third-preview}
+### JEP 477: Implicitly Declared Classes and Instance Main Methods (Third Preview)
 
 Java's take on the classic [Hello, World!](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program) program is notoriously verbose:
 
@@ -412,7 +412,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 477](https://openjdk.org/jeps/477).
 
-### JEP 482: Flexible Constructor Bodies (Second Preview) {#h3-4-jep-482-flexible-constructor-bodies-second-preview}
+### JEP 482: Flexible Constructor Bodies (Second Preview)
 
 Suppose we have a superclass `Orchestra` and a subclass `StringQuartet`. The constructors of these classes must work together to ensure a valid instance. The `StringQuartet` constructor is responsible for any `StringQuartet`-specific fields, while the `Orchestra` constructor is responsible for fields declared in the `Orchestra` class. Since code in the `StringQuartet` constructor might refer to fields initialized by the `Orchestra` constructor, the latter must run first.
 
@@ -480,7 +480,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 482](https://openjdk.org/jeps/482).
 
-### What Happened to String Templates? {#h3-5-what-happened-to-string-templates}
+### What Happened to String Templates?
 
 Java 22 had a feature called [string templates](https://hanno.codes/2024/03/19/java-22-is-here/#jep-459-string-templates-second-preview), which was in second preview back then.  
 
@@ -516,8 +516,8 @@ There's no way for us to know exactly when a new proposal will be ready, so we'l
 
 And in the meantime, if you're interested, [this excellent video](https://inside.java/2024/06/20/newscast-71) by Nicolai Parlog has a few more interesting details to keep you occupied.
 
-From Project Loom {#h2-6-from-project-loom}
--------------------------------------------
+From Project Loom
+-----------------
 
 Java 23 contains 2 features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -526,7 +526,7 @@ Java 23 contains 2 features that originated from [Project Loom](http://openjdk.j
 
 > Project Loom strives to simplify maintaining concurrent applications in Java by introducing *virtual threads* and an API for *structured concurrency*, among other things.
 
-### JEP 480: Structured Concurrency (Third Preview) {#h3-7-jep-480-structured-concurrency-third-preview}
+### JEP 480: Structured Concurrency (Third Preview)
 
 Java's take on concurrency has always been *unstructured* , meaning that tasks run independently of each other. There's no hierarchy, scope, or other structure involved, which means errors or cancellation intent is hard to communicate.  
 
@@ -692,7 +692,7 @@ Compared to the preview version of this feature in Java 22, nothing was changed 
 
 For more information on this feature, see [JEP 480](https://openjdk.org/jeps/480).
 
-### JEP 481: Scoped Values (Third Preview) {#h3-8-jep-481-scoped-values-third-preview}
+### JEP 481: Scoped Values (Third Preview)
 
 *Scoped values* enable the sharing of immutable data within and across threads.  
 
@@ -762,8 +762,8 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 481](https://openjdk.org/jeps/481).
 
-HotSpot {#h2-9-hotspot}
------------------------
+HotSpot
+-------
 
 Java 23 introduces a single change to [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -771,7 +771,7 @@ Java 23 introduces a single change to [HotSpot](https://openjdk.org/groups/hotsp
 
 > The HotSpot JVM is the runtime engine that is developed by Oracle. It translates Java bytecode into machine code for the host operating system's processor architecture.
 
-### JEP 474: ZGC: Generational Mode by Default {#h3-10-jep-474-zgc-generational-mode-by-default}
+### JEP 474: ZGC: Generational Mode by Default
 
 The Z Garbage Collector (ZGC) is a scalable, low-latency garbage collector. It has been [available for production use since Java 15](https://openjdk.org/jeps/377) and has been designed to keep pause times consistent and short, even for very large heaps. It uses techniques like region-based memory management and compaction to achieve this.
 
@@ -813,8 +813,8 @@ And you would get two warnings:
 
 For more information on this feature, see [JEP 474](https://openjdk.org/jeps/474).
 
-Core Libraries {#h2-11-core-libraries}
---------------------------------------
+Core Libraries
+--------------
 
 Java 23 also brings you 4 additions that are part of the core libraries:
 
@@ -823,7 +823,7 @@ Java 23 also brings you 4 additions that are part of the core libraries:
 * Stream Gatherers (Second Preview)
 * Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal
 
-### JEP 466: Class-File API (Second Preview) {#h3-12-jep-466-class-file-api-second-preview}
+### JEP 466: Class-File API (Second Preview)
 
 Java's ecosystem relies heavily on the ability to parse, generate and transform class files. Frameworks use on-the-fly bytecode transformation to transparently add functionality, for example. These frameworks typically bundle class-file libraries like [ASM](https://asm.ow2.io/) or [Javassist](https://www.javassist.org/) to handle class file processing. However, they suffer from the fact that the six-month release cadence of the JDK causes the class-file format to evolve more quickly than before, meaning they might encounter class files that are newer than the class-file library that they bundle.
 
@@ -922,7 +922,7 @@ Note that the Class-File API is in the [preview](https://openjdk.org/jeps/12) st
 
 For more information on this feature, including the minor refinements and more details on transforming class files, see [JEP 466](https://openjdk.org/jeps/466).
 
-### JEP 469: Vector API (Eighth Incubator) {#h3-13-jep-469-vector-api-eighth-incubator}
+### JEP 469: Vector API (Eighth Incubator)
 
 The Vector API makes it possible to express vector computations that reliably compile at runtime to optimal vector instructions.  
 
@@ -984,7 +984,7 @@ When that happens, the Vector API will be adapted to use them, and it will be pr
 
 For more information on this feature, see [JEP 469](https://openjdk.org/jeps/469).
 
-### JEP 473: Stream Gatherers (Second Preview) {#h3-14-jep-473-stream-gatherers-second-preview}
+### JEP 473: Stream Gatherers (Second Preview)
 
 The Stream API has been around since Java 8 and it has definitely made its way into the heart of the typical Java developer. It enables a programming style that is both efficient and expressive. Recall that a stream pipeline consists of three parts: a source of elements, any number of intermediate operations, and a terminal operation. For example:
 
@@ -1131,7 +1131,7 @@ Compared to the preview version of this feature in Java 22, nothing was changed 
 
 For more information on this feature, see [JEP 473](https://openjdk.org/jeps/473).
 
-### JEP 471: Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal {#h3-15-jep-471-deprecate-the-memory-access-methods-in-sun-misc-unsafe-for-removal}
+### JEP 471: Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal
 
 The `sun.misc.Unsafe` class contains 87 methods to perform low-level operations, such as accessing off-heap memory.  
 
@@ -1156,14 +1156,14 @@ All uses of memory-access methods in `sun.misc.Unsafe` will generate compile-tim
 
 For more information on this feature, see [JEP 471](https://openjdk.org/jeps/471). It has more details on the targeted methods, their alternatives from `VarHandle` and `MemorySegment` and how to configure the deprecation warnings with the new command-line option `--sun-misc-unsafe-memory-access` (to promote the warnings to `UnsupportedOperationException`s already, for example). It also provides a few migration examples.
 
-Tools {#h2-16-tools}
---------------------
+Tools
+-----
 
 Java 23 contains a single feature that is part of the JavaDoc tool:
 
 * Markdown Documentation Comments
 
-### JEP 467: Markdown Documentation Comments {#h3-17-jep-467-markdown-documentation-comments}
+### JEP 467: Markdown Documentation Comments
 
 The JavaDoc documentation standard has been part of Java since its inception in 1995.  
 
@@ -1228,7 +1228,7 @@ In Java 22, it wasn't yet possible to include Markdown in documentation comments
 
 For more information on this feature, see [JEP 467](https://openjdk.org/jeps/467).
 
-Final thoughts {#h2-18-final-thoughts}
---------------------------------------
+Final thoughts
+--------------
 
 This release of Java didn't have as many new features as previous versions, but there's still more than enough going on in our favourite language. Project Amber is still going strong, making Java more expressive and elegant. String templates might be missing from this release, but its omission shows that the preview process is working as intended. We can look forward to getting a redesigned version in the future. Also, Java is becoming friendlier towards newcomers now that beginner programs can be shorter than before. And that's not all that's new: [many other updates](https://jdk.java.net/23/release-notes) were included in this release, including thousands of performance, stability and security updates. So what are you waiting for? Time to take this brand-new Java version for a test drive!

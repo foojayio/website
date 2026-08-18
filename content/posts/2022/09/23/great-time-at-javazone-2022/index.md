@@ -40,22 +40,22 @@ Unfortunately, due to the connections and logistics I had to leave very early an
 
 ![Oslo is a special city](image02-oslo-287x510.jpg)
 
-The Duck Teaches: Learn to debug from the masters. Local to production - kill the bugs - Shai Almog (me) {#h2-0-the-duck-teaches-learn-to-debug-from-the-masters-local-to-production-kill-the-bugs-shai-almog-me}
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The Duck Teaches: Learn to debug from the masters. Local to production - kill the bugs - Shai Almog (me)
+--------------------------------------------------------------------------------------------------------
 
 This year I gave a workshop which is a two hour "hands-on" experience. I liked it and got some good feedback but I feel there's room for improvement. The main culprit was getting Kubernetes to play nice with the demo code. I hoped that since I picked [Skaffold](https://talktotheduck.dev/cloud-native-skaffold-book-review) for the demo things will work smoothly. Skaffold is indeed magical but there are limits to its powers. Half of the students couldn't get the environment working which was frustrating and ate up a lot of our time. Next time I give this talk I will structure it so the Kubernetes part is in the end and people would still be able to get a lot even without running it.
 
 Another option is to set up the Kubernetes cluster for them so they can connect to it remotely, if this workshop gets accepted into other conferences I might choose to go that route. Regardless, the class was lovely and I got good feedback so hopefully they enjoyed it. I hope to create a video of this workshop so people can follow it at home as it's a pretty cool workshop.
 
-Speaker Dinner {#h2-1-speaker-dinner}
--------------------------------------
+Speaker Dinner
+--------------
 
 Because of the flight delays I literally landed and had to rush to the workshop. From there I had less than an hour to go to the speaker dinner. This is usually one of the highlights of a conference. You get to meet the conference friends, those of us who go from conference to conference. I've taken a long hiatus from conferences 7 years ago so I don't know as many people as I used to but I'm starting to run into familiar faces. There are also other "old timers" like myself who I know from back in the Sun days.
 
 I got to meet some people who I've never met in person but interacted with online which was great. The pub where it was happening was a nice one too. I was very tired so I left relatively early with a few friends.
 
-What's cooking in Maven? - Maarten Mulders {#h2-2-what-s-cooking-in-maven-maarten-mulders}
-------------------------------------------------------------------------------------------
+What's cooking in Maven? - Maarten Mulders
+------------------------------------------
 
 Maarten who's an Apache maven committer talked about what's new in that build tool. He covered the maven wrapper, the build/consumer POM, reactor and the maven daemon. The maven wrapper are the scripts that let us build a maven project from the CLI. The `./mvnw` script, etc. It let's us ignore the version of maven the users have on their system.
 
@@ -77,8 +77,8 @@ Dependency downloads might also be parallelized but this is a separate process u
 
 You can follow Maarten on twitter here [mthmulders](https://twitter.com/mthmulders).
 
-Building Kotlin DSL - Anton Arhipov {#h2-3-building-kotlin-dsl-anton-arhipov}
------------------------------------------------------------------------------
+Building Kotlin DSL - Anton Arhipov
+-----------------------------------
 
 While I coded in Kotlin I didn't do so at scale and consider myself a novice in that language. I understand the concepts and the code is familiar due to its JVM roots but it's a bit unintuitive to me. I love the concepts of DSL so decided to attend this talk.
 
@@ -92,8 +92,8 @@ DSLs in kotlin tend to look very similar since they're derived from the kotlin s
 
 You can follow Anton on twitter [@antonarhipov](https://twitter.com/antonarhipov).
 
-Deserialization exploits in Java: Why should I care? - Brian Vermeer {#h2-4-deserialization-exploits-in-java-why-should-i-care-brian-vermeer}
----------------------------------------------------------------------------------------------------------------------------------------------
+Deserialization exploits in Java: Why should I care? - Brian Vermeer
+--------------------------------------------------------------------
 
 I missed this great talk from Brian at previous conferences due to scheduling conflicts. This time around I refused to miss it. This remarkably important talk presented in a compelling fashion is a must. Serialization (and deserialization) is "the gift that keeps giving". At least in terms of security vulnerabilities.
 
@@ -121,8 +121,8 @@ In XML we can refer to an external entity that points to arbitrary files such as
 
 You can follow Brian on twitter [@BrianVerm](https://twitter.com/BrianVerm).
 
-Myth Busters: Building a High-Performance Database in Java - Vlad Ilyushchenko {#h2-5-myth-busters-building-a-high-performance-database-in-java-vlad-ilyushchenko}
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Myth Busters: Building a High-Performance Database in Java - Vlad Ilyushchenko
+------------------------------------------------------------------------------
 
 Vlad is the creator of the open source [QuestDB](https://github.com/questdb/questdb) project. He used the `sun.misc.Unsafe` class to implement fast memory access in Java and provide native level performance for the DB without GC. You can allocate a massive array in native RAM and traverse it without data copying. This lets Java and C code interact much faster than the typical slow JNI bridge.
 
@@ -138,8 +138,8 @@ They built their own logging system before newer loggers came out. It has a synt
 
 You can follow Vlad on twitter [@ilyusvl](https://twitter.com/ilyusvl).
 
-Event Streaming and Processing with Apache Pulsar - Mary Grygleski {#h2-6-event-streaming-and-processing-with-apache-pulsar-mary-grygleski}
--------------------------------------------------------------------------------------------------------------------------------------------
+Event Streaming and Processing with Apache Pulsar - Mary Grygleski
+------------------------------------------------------------------
 
 What is an event, generically speaking?
 > "The fundamental entity of observed physical reality represented by a point designated by three coordinates of place and one of time in the space-time continuum postulated by the theory of relativity"
@@ -188,8 +188,8 @@ Pulsar schema defines the serialization to the data structure you want such as J
 
 You can find Mary on twitter [@mgrygles](https://twitter.com/mgrygles).
 
-The Secret Life of Maven Central - Steve Poole {#h2-7-the-secret-life-of-maven-central-steve-poole}
----------------------------------------------------------------------------------------------------
+The Secret Life of Maven Central - Steve Poole
+----------------------------------------------
 
 At some point we all find ourselves searching for code. So we can add a new dependency. 90% of modern application are open source dependencies. Our applications live or die off dependency management and repositories. Like the stars in the sky, maven central is "just there" and we don't think about it.
 
@@ -235,8 +235,8 @@ Maven central doesn't have a logo so reach out to Steve on twitter or other chan
 
 For more information and suggestions follow [@spoole167](https://twitter.com/spoole167).
 
-Thriving on the Cloud-Native path with Java and Kubernetes - Ana-Maria Mihalceanu {#h2-8-thriving-on-the-cloud-native-path-with-java-and-kubernetes-ana-maria-mihalceanu}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Thriving on the Cloud-Native path with Java and Kubernetes - Ana-Maria Mihalceanu
+---------------------------------------------------------------------------------
 
 ![Ana-Maria Mihalceanu](image12-Ana-Maria-Mihalceanu-370x510.jpg)  
 
@@ -269,17 +269,17 @@ You can use quarkus tests to test that a Kubernetes pod is deployed correctly ev
 
 Check out Ana-Maria on twitter [@ammbra1508](https://twitter.com/ammbra1508)
 
-Secrets of Performance Tuning Java on Kubernetes - Bruno Borges {#h2-9-secrets-of-performance-tuning-java-on-kubernetes-bruno-borges}
--------------------------------------------------------------------------------------------------------------------------------------
+Secrets of Performance Tuning Java on Kubernetes - Bruno Borges
+---------------------------------------------------------------
 
-Addressing the transaction challenge in a cloud-native world - Grace Jansen {#h2-10-addressing-the-transaction-challenge-in-a-cloud-native-world-grace-jansen}
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Addressing the transaction challenge in a cloud-native world - Grace Jansen
+---------------------------------------------------------------------------
 
 For my last two sessions at JavaZone I just couldn't decide so I broke down and went to the overflow. This is a pretty common scenario of two great speakers talking concurrently. But to my knowledge, JavaZone is the only conference that has some solution for that. Both Bruno and Grace are amazing speakers with fascinating subjects so my indecision resulted in a split understanding of both talks. Luckily JavaZone usually uploads high quality talk videos after the fact so I can catch up later. Hopefully the following two sections aren't too much of a mess.
 
 ![Bruno Borges and Grace Jansen](image14-grace-bruno-700x270.jpg)
 
-### Grace {#h3-11-grace}
+### Grace
 
 Treat backing services as attached resources, stateless microservices == cloud-native. Is this really the case? What does it mean to be cloud native?
 
@@ -307,7 +307,7 @@ LRA uses annotations for declaring that an LRA transaction in microprofile. You 
 
 Check out Grace on Twitter [@gracejansen27](https://twitter.com/gracejansen27).
 
-### Bruno {#h3-12-bruno}
+### Bruno
 
 Microsoft uses Java on LinkedIn, Minecraft and many other Microsoft properties.
 
@@ -353,8 +353,8 @@ Unfortunately due to time constraints I had to run out before Bruno finished his
 
 Check out Bruno on Twitter [@brunoborges](https://twitter.com/brunoborges/)
 
-Finally {#h2-13-finally}
-------------------------
+Finally
+-------
 
 As I mentioned at the top, it's been an amazing conference and I had a great time. I'm sorry I missed so many talks that ran concurrently to the ones I attended. I also feel I didn't get as much as I could out of the pavilion and parties because I was so exhausted (and had to rush to the airport). But if JavaZone isn't on your conference schedule you probably should add it. It's a unique gem that never disappoints.
 

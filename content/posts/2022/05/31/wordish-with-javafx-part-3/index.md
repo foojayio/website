@@ -47,8 +47,8 @@ Before we start, here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 3: JavaFX Controller Code {#h2-0-part-3-javafx-controller-code}
---------------------------------------------------------------------
+Part 3: JavaFX Controller Code
+------------------------------
 
 Let's now turn our attention to the controller code that maintains game state and responds to user input with appropriate updates to the UI. We'll first examine the idea of sharing data between views.
 
@@ -58,7 +58,7 @@ The fun part of implementing Wordish is codifying the algorithm for matching use
 
 And finally, we'll examine the code that performs tile animations.
 
-### Sharing Data Objects {#h3-1-sharing-data-objects}
+### Sharing Data Objects
 
 After navigating from the Wordish game view to the How to Play view, we must return to the Wordish game view in its same state.
 
@@ -128,7 +128,7 @@ private static final GameStatus gameStatus = GameStatus.getInstance();
 
 **Note** : See **[GameStatus.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/GameStatus.java)** , **[WordStats.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/WordStats.java)** , and **[LetterState.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/LetterState.java)** for the above described code. ***Bonus***: LetterState uses the Java 17 record feature.
 
-### JavaFX Properties and Bindings to Manage UI State {#h3-2-javafx-properties-and-bindings-to-manage-ui-state}
+### JavaFX Properties and Bindings to Manage UI State
 
 At times you must prevent certain actions during game play. This requirement not only applies to Wordish, but to any application where certain actions don't make sense or overly complicate the program.
 
@@ -168,7 +168,7 @@ keyLetters.values()
 
 **Note** : See **[WordishController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/WordishController.java)**.
 
-### The Guess Algorithm and Leveraging Streams {#h3-3-the-guess-algorithm-and-leveraging-streams}
+### The Guess Algorithm and Leveraging Streams
 
 Wordish processes a guess in the `processWord()` method. Its argument is a list of LetterLabel controls that correspond to the row of letters that the user submits. Let's go through the steps, which we order as follows.
 
@@ -212,7 +212,7 @@ Next, we check if the word is in the valid world list. Note that a service calle
 
 For now, we treat WordData as a black box and use it to validate the word with boolean method `isAWord()`. If the word is not valid, a popup message displays and processing terminates.
 
-### The Matching Methods {#h3-4-the-matching-methods}
+### The Matching Methods
 
 The three matching methods each perform a similar, but distinct task. Note that these tasks are ordered so that we find matching letters first. We then replace matching letters in both the guess word and target word with a hyphen ('-').
 
@@ -298,7 +298,7 @@ private void doProcessNoMatch(List<LetterLabel> list) {
 
 The row is now ready for animation and for displaying the color-coded result maintained by property `letterDisplay`, which we explain in the next section.
 
-### Implementing Animations {#h3-5-implementing-animations}
+### Implementing Animations
 
 Wordish performs three different sets of animation.
 

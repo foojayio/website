@@ -30,8 +30,8 @@ If you're a JVM developer, you're probably used to those HTML/XML report files s
 
 Let's give Kover a spin and see what we can do with it! For this experiment, I'll be using the Kotlin flavor of the very famous [Spring Pet Clinic](https://github.com/jlengrand/spring-petclinic-kotlin/actions).
 
-Installing the plugin {#h2-0-installing-the-plugin}
----------------------------------------------------
+Installing the plugin
+---------------------
 
 The setup to add the plugin to you project can hardly be simpler if you use gradle. You have to add the Kover plugin to your `build.gradle(.kts)` file.
 
@@ -65,8 +65,8 @@ This is how the report look like when running the task on the spring pet clinic 
 
 ![An HTML report with total coverage, and coverage breakdown per package](kover1-700x152.png)
 
-About the Kover gradle tasks {#h2-1-about-the-kover-gradle-tasks}
------------------------------------------------------------------
+About the Kover gradle tasks
+----------------------------
 
 As we can see by using the `taskinfo` gradle [plugin](https://plugins.gradle.org/plugin/org.barfuin.gradle.taskinfo) (which is used to see the relations between gradle tasks), there is no need to specifically run the kover tasks because they are transitively called by other tasks already.
 
@@ -96,8 +96,8 @@ Of course, this is something we may not want, for example to avoid slowing down 
 ```
 
 
-A look at KoverVerify {#h2-2-a-look-at-koververify}
----------------------------------------------------
+A look at KoverVerify
+---------------------
 
 One of the nice goodies that I really like from Kover is the `koverVerify` task.
 
@@ -121,8 +121,8 @@ This basically tells `koverVerify` to make the build fail in case the code cover
 
 In case you rather want to look into trends ( this new pull requests lowers the code coverage), then you'll have to rely on external tools like [CodeCov](https://codecov.io/). That's what we'll look into now.
 
-Uploading Coverage information {#h2-3-uploading-coverage-information}
----------------------------------------------------------------------
+Uploading Coverage information
+------------------------------
 
 Having code coverage in your project is nice by itself, but seeing trends over time and using that information as part of your workflow is much more interesting.
 
@@ -214,7 +214,7 @@ But because I am running 2 different action files, I also get extra (clickable) 
 
 CodeCov report in my Pull Request with diff coverage{#caption-attachment-52439}
 
-### About the IntelliJ "Run with code coverage" {#h3-4-about-the-intellij-run-with-code-coverage}
+### About the IntelliJ "Run with code coverage"
 
 In case you want to have code coverage information straight from IntelliJ, this is already possible without Kover.
 
@@ -232,15 +232,15 @@ The IntelliJ website has a whole page dedicated to code coverage so I'm not goin
 
 The good thing to know though is that when running code coverage straight from IntelliJ, well by definition it isn't part of the build and it runs only on your system. But there (to my knowledge) also isn't an easy way to set a set of rules for success/failure.
 
-Why not run JaCoCo? {#h2-5-why-not-run-jacoco}
-----------------------------------------------
+Why not run JaCoCo?
+-------------------
 
 Some folks might wonder why Kover is actually needed. After all, Kotlin runs on the JVM and you could run straight JaCoCo on your Kotlin projects before. Well, JetBrains has a video that explains it better than I can [in this video](https://youtu.be/jNu5LY9HIbw?t=215), but in short the support for Kotlin specific feature is subpar when running the tool on bytecode.
 
 Anyone that has tried to run static code analysis on bytecode knows what I'm talking about I think :).
 
-Final words {#h2-6-final-words}
--------------------------------
+Final words
+-----------
 
 In short I'm super happy that this 1.6 release doesn't only focus on the ecosystem but also the tooling. Having a dedicated code coverage tool makes a lot of sense for Kotlin and I'm sure it will fill a gap in a lot of teams.
 

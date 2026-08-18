@@ -30,15 +30,15 @@ I do not deny there are some valid reasons to transform data. However, there are
 2. Transform the BO to a DTO in the presentation layer.
 3. Return the DTO from the presentation layer.
 
-Return the entity itself {#h2-0-return-the-entity-itself}
----------------------------------------------------------
+Return the entity itself
+------------------------
 
 When the entity's properties are a superset of the properties that need to be displayed, aggregating additional properties is not required. Transforming the entity to a DTO is not only overkill. It hinders performance.
 
 In that case, the best approach is to return the entity itself.
 
-JPA projection {#h2-1-jpa-projection}
--------------------------------------
+JPA projection
+--------------
 
 We make requests for specific data in a particular context. Thus, when the call reaches the data access layer, the scope of the required data is fully known: it makes sense to execute a SQL query that is tailor-fitted to this scope.
 
@@ -55,23 +55,23 @@ q.select(cb.construct(PersonDetails.class,
 ```
 
 
-Jackson converter {#h2-2-jackson-converter}
--------------------------------------------
+Jackson converter
+-----------------
 
 Regarding JSON specifically, we can delegate the process of providing the correct data to the serializer framework, *e.g.* [Jackson](https://github.com/FasterXML/jackson). The idea behind it is the following: the main code processes the entity as usual, and at the edge, a Jackson converter converts it to the required JSON structure.
 
 If less data is necessary, it's child's play. If more, then the converter needs additional dependencies to get data where it is. Of course, if this data comes from the same datastore, this is not great, and the alternative above is more relevant. If not, it's an option.
 
-GraphQL {#h2-3-graphql}
------------------------
+GraphQL
+-------
 
 Last but not least, one could return the full-blown entities and let the client decide what data makes sense in its context.
 
 [GraphQL](http://graphql.github.io) is built around this idea: Facebook created it, and it is now fully Open Source. Its main advantage is to offer a specification and [a lot](http://graphql.github.io/code/#server-libraries) of language-specific implementations on top of it.
 > "A query language for your API. GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools." -- [GraphQL website](http://graphql.github.io)
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 When a gap exists between the business and presentation models, it's easy to get back to age-old "patterns" such as the DTO. However, any of the alternatives above are probably more relevant.
 

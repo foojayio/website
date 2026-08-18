@@ -32,8 +32,8 @@ This could have easily been a major release for the team. This has been a really
 
 **Let's walk through everything.**
 
-Dynamic Sets - A First-Class Collection {#h2-0-dynamic-sets-a-first-class-collection}
--------------------------------------------------------------------------------------
+Dynamic Sets - A First-Class Collection
+---------------------------------------
 
 BoxLang 1.14.0 delivers `BoxSet` as a genuine first-class type - not a thin wrapper, not a library afterthought - a fully integrated collection with literal syntax, functional pipelines, operator overloads for set algebra, and three backing variants to suit whatever your workload demands.
 
@@ -99,8 +99,8 @@ Structs now expose `.keySet()` and `.valueSet()` to extract keys or values as se
 Sets are also fully immutable-capable. Call `.toUnmodifiable()` to freeze a set, and `.toModifiable()` to thaw a copy when you need to mutate again.
 > **Full reference:** [BoxSet Documentation](https://boxlang.ortusbooks.com/boxlang-language/syntax/sets)
 
-Ranges - Lazy, Typed, Extensible Intervals {#h2-1-ranges-lazy-typed-extensible-intervals}
------------------------------------------------------------------------------------------
+Ranges - Lazy, Typed, Extensible Intervals
+------------------------------------------
 
 The `..` operator has existed in BoxLang since version 1.12, but it used to materialize an array eagerly. That was fine for small sequences. It was a problem for anything large, and it completely blocked representing infinite sequences, non-integer intervals, or domain-specific progressions.
 
@@ -187,8 +187,8 @@ import java:java.lang.Number
 
 **Full reference:** [BoxLang Ranges Documentation](https://boxlang.ortusbooks.com/boxlang-language/syntax/ranges)
 
-Inner Classes and Template Classes {#h2-2-inner-classes-and-template-classes}
------------------------------------------------------------------------------
+Inner Classes and Template Classes
+----------------------------------
 
 BoxLang 1.14.0 introduces **locally defined classes** - classes you can declare inline inside a `.bxs` script, a `.bxm` template's block, or nested inside another class. This is structural expressiveness that matters for keeping code organized without forcing every concern into its own file.
 
@@ -281,8 +281,8 @@ result = new Widget( "aliased-widget" )
 
 **Full references:** [Inner Classes](https://boxlang.ortusbooks.com/boxlang-language/classes/inner-classes) \| [Template Classes](https://boxlang.ortusbooks.com/boxlang-language/classes/template-classes)
 
-Class References as Callable Constructors {#h2-3-class-references-as-callable-constructors}
--------------------------------------------------------------------------------------------
+Class References as Callable Constructors
+-----------------------------------------
 
 This one changes how you think about object creation. In BoxLang 1.14.0, imported class references are **callable** . Invoking a class reference as a function executes the constructor and returns a new instance. The `new` keyword remains fully supported - this is additive, not a replacement.
 
@@ -313,8 +313,8 @@ users = names.map( name -> User( name ) )
 
 The shorthand `names.map( User )` is the real win - transforming a collection of raw values into domain objects becomes a single expression. Under the hood, class references are wrapped in a `ClassInvokerFunction` that delegates to the same constructor pipeline as `new`, so behavior is identical. Java classes and BoxLang classes participate equally.
 
-DataNavigator JSONPath Support {#h2-4-datanavigator-jsonpath-support}
----------------------------------------------------------------------
+DataNavigator JSONPath Support
+------------------------------
 
 The `DataNavigator` has been a useful tool for safely traversing nested structs and arrays. In 1.14.0 it gains full **JSONPath-style expression support** - dot notation, array indexing, slicing, wildcards, recursive descent, and filter expressions - directly in `get()`, `has()`, `from()`, and the new `query()` method.
 
@@ -356,8 +356,8 @@ nav.getByKey( "value.sep" )
 All path expressions are whitespace-tolerant. The result is dramatically less boilerplate when consuming external JSON, API payloads, or deeply nested configuration.
 > **Full reference:** [DataNavigator Documentation](https://boxlang.ortusbooks.com/boxlang-language/syntax/data-navigators#jsonpath-style-path-expressions)
 
-Query Transformers - Own Your Result Shape {#h2-5-query-transformers-own-your-result-shape}
--------------------------------------------------------------------------------------------
+Query Transformers - Own Your Result Shape
+------------------------------------------
 
 `queryExecute()` has always locked you into three return types: `query`, `array`, or `struct`. Any other shape - domain objects, JSON strings, tabular arrays with column descriptors, rich metadata structs - required a separate post-processing step. That friction adds up fast.
 
@@ -421,7 +421,7 @@ The `bx:query` component supports transformers too:
 ```
 
 
-### Global Query Defaults {#h3-6-global-query-defaults}
+### Global Query Defaults
 
 Alongside transformers, `BL-2477` introduces a `queries` section in `boxlang.json` and `this.queryOptions` in `Application.bx` for application-level query defaults:
 
@@ -449,8 +449,8 @@ this.queryOptions = {
 Per-query options always win. `this.queryOptions `is the application-level default. `boxlang.json` is the runtime fallback. Clean precedence, no surprises.
 > **Full reference:** [Query Transformers](https://boxlang.ortusbooks.com/boxlang-language/syntax/queries#query-transformers-custom-result-formatting) \| [Global Query Options](https://boxlang.ortusbooks.com/getting-started/configuration/queries)
 
-Companion Release: bx-mcp Is Here {#h2-7-companion-release-bx-mcp-is-here}
---------------------------------------------------------------------------
+Companion Release: bx-mcp Is Here
+---------------------------------
 
 Paired with BoxLang 1.14.0 comes the public debut of `bx-mcp` - the module that gives your AI a live window into your running BoxLang application. While 1.14.0 advances the language itself, `bx-mcp` advances how you operate that language in production.
 
@@ -484,10 +484,10 @@ The result is a fundamentally different way to work with a running BoxLang appli
 >
 > **Documentation:** [bx-mcp Documentation](https://boxlang.ortusbooks.com/boxlang-+-++/modules/bx-mcp)
 
-Other Notable Additions {#h2-8-other-notable-additions}
--------------------------------------------------------
+Other Notable Additions
+-----------------------
 
-### `schedulerNew()` BIF {#h3-9-schedulernew-bif}
+### `schedulerNew()` BIF
 
 Create and register lightweight ad-hoc schedulers without a dedicated class file. `schedulerNew()` is the right tool when you need a runtime scheduler without lifecycle callbacks; `schedulerStart() `remains the choice when you need `onStartup`, `onShutdown`, and `onAnyTaskError`:
 
@@ -504,7 +504,7 @@ myScheduler.task( "welcome-email" )
 ```
 
 
-### `server.webMode` {#h3-10-server-webmode}
+### `server.webMode`
 
 A new boolean on the `server` scope tells you whether the runtime is operating in web mode (servlet or MiniServer):
 
@@ -515,7 +515,7 @@ if ( server.webMode ) {
 ```
 
 
-### String BIFs: `stringStartsWith` and `stringEndsWith` {#h3-11-string-bifs-stringstartswith-and-stringendswith}
+### String BIFs: `stringStartsWith` and `stringEndsWith`
 
 Four new BIFs with full member-method support:
 
@@ -531,11 +531,11 @@ stringEndsWithNoCase( "WORLD", "world" )      // true
 ```
 
 
-### Java Interop: Varargs Improvements {#h3-12-java-interop-varargs-improvements}
+### Java Interop: Varargs Improvements
 
 BoxLang arrays passed to Java varargs methods no longer need manual unpacking into `Object[]`. The runtime handles the conversion automatically.
 
-### Java Import Aliases in `extends` and `implements` {#h3-13-java-import-aliases-in-extends-and-implements}
+### Java Import Aliases in `extends` and `implements`
 
 Import aliases now work in class inheritance declarations:
 
@@ -548,7 +548,7 @@ class extends="MyMap" {
 ```
 
 
-### Formatter Maturity {#h3-14-formatter-maturity}
+### Formatter Maturity
 
 The formatter received significant investment in 1.14.0:
 
@@ -558,13 +558,13 @@ The formatter received significant investment in 1.14.0:
 * **`template.enabled` flag** - gates experimental `.bxm` formatting until it exits preview (defaults to `false`)
 * **`class.property_spacing` rule** - controls blank lines between property declarations (defaults to `1`, matching Ortus standards)  
 
-  ### MiniServer Health Metrics {#h3-15-miniserver-health-metrics}
+  ### MiniServer Health Metrics
 
   <br />
 
   The `/health` endpoint now includes Undertow worker pool statistics, WebSocket session counts, and expanded JVM metrics - giving you a richer operational picture without any extra tooling.
 
-### Application Runtime Introspection {#h3-16-application-runtime-introspection}
+### Application Runtime Introspection
 
 Application objects expose three new introspection methods:
 
@@ -588,8 +588,8 @@ function onDatasourceInitialized( event, interceptData ) {
 ```
 
 
-Bug Fix Highlights {#h2-17-bug-fix-highlights}
-----------------------------------------------
+Bug Fix Highlights
+------------------
 
 Sixty-five issues means a lot of ground covered. Some fixes worth calling out specifically:
 
@@ -603,8 +603,8 @@ Sixty-five issues means a lot of ground covered. Some fixes worth calling out sp
 * **`BL-2483`** - URISyntaxException on paths containing spaces is resolved.
 * **`BL-1007`** - `snakeCase()`, `pascalCase()`, and `kebabCase()` now correctly handle camelCase, PascalCase, snake_case, kebab-case, and mixed inputs.  
 
-  Getting 1.14.0Update via CommandBox: {#h2-18-getting-1-14-0update-via-commandbox}
-  ---------------------------------------------------------------------------------
+  Getting 1.14.0Update via CommandBox:
+  ------------------------------------
 
 ```java
 box update boxlang

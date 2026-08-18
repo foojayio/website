@@ -37,13 +37,13 @@ In this episode you'll hear Simon Martinelli, Nicolas Fränkel, Marcus Hellberg,
 
 We talked about a bunch of topics like evolving your APIs, GraphQL, Java versus Kotlin versus Rust, Vaadin, AI and ChatGPT, OpenRewrite, ErrorProne, Infrastructure, and a lot more.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube 6ops5sU_UiY >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -51,8 +51,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:45 Simon Martinelli -- Talks about CQRS, REST, APIs, JOOQ, Vaadin
 

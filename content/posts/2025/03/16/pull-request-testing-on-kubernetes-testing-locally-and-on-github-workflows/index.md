@@ -48,8 +48,8 @@ In this series of posts, I'll show how you can do it. My plan is the following:
 * The second blog post will detail the setup of a Google Kubernetes Engine instance and how to adapt the workflow to use it
 * The third and final post will describe how to isolate each run in a [dedicate virtual Kubernetes cluster](https://www.vcluster.com/)
 
-Unit testing vs. integration testing {#h2-0-unit-testing-vs-integration-testing}
---------------------------------------------------------------------------------
+Unit testing vs. integration testing
+------------------------------------
 
 I wrote the book [Integration Testing from the Trenches](https://leanpub.com/integrationtest). In there, I defined *Integration testing* as:
 > Integration Testing is a strategy to test the collaboration of at least two components.
@@ -62,8 +62,8 @@ I doubled down on the definition a [couple of years later](https://blog.frankel.
 
 However, technology has evolved since that time.
 
-Testcontainers {#h2-1-testcontainers}
--------------------------------------
+Testcontainers
+--------------
 
 I use the word "technology" very generally, but I have [Testcontainers](https://testcontainers.com/) in mind:
 > *Unit tests with real dependencies*
@@ -85,8 +85,8 @@ In any case, the golden rule still applies: the closer you are to the final envi
 
 For the purposes of this blog post, we will use GitHub as the base testing environment for unit testing and a full-fledged Kubernetes cluster for integration testing. There is no absolute truth regarding what is the best practice™, as contexts vary widely across organizations and even across teams within the same organization. It's up to every engineer to decide within their specific context the ROI of setting up such an environment because the closer you are to production, the more complex and, thus, expensive it will be.
 
-Use-case: application with database {#h2-2-use-case-application-with-database}
-------------------------------------------------------------------------------
+Use-case: application with database
+-----------------------------------
 
 Let's jump into how to test an app that uses a database to store its data. I don't want anything fancy, just solid, standard engineering practices. I'll be using a -based app, but most of the following can easily apply to other stacks as well. The following blog posts will involve less language-specific content.
 
@@ -107,8 +107,8 @@ Spring Boot fully integrates Flyway and Liquibase. When the app starts, the fram
 
 I don't want to bore you with the app details; you can find the code at [GitHub](https://github.com/ajavageek/vcluster-pipeline).
 
-"Unit" testing {#h2-3-unit-testing}
------------------------------------
+"Unit" testing
+--------------
 
 Per my definition above, unit testing should be easy to set up. With Testcontainers, it is.
 
@@ -212,8 +212,8 @@ class VClusterPipelineTest @Autowired constructor(private val repository: Produc
 
 Spring Boot offers a couple of options to [activate profiles](https://docs.spring.io/spring-boot/reference/features/external-config.html). For local development, we can use a simple JVM property, *e.g.* , `mvn test -Dspring.profiles.active=local`; in the CI pipeline, we will use environment variables instead.
 
-"Integration" testing {#h2-4-integration-testing}
--------------------------------------------------
+"Integration" testing
+---------------------
 
 I'll also use Flyway to create the database structure for integration testing. In the scope of this example, the System Under Test will be the entire app; hence, I'll test from the HTTP endpoints. It's end-to-end testing for APIs. The code will test the same behavior, albeit treating the as a black box.
 
@@ -278,8 +278,8 @@ class VClusterPipelineIT {
 
 Before going further, let's run the tests in a GitHub workflow.
 
-The GitHub workflow {#h2-5-the-github-workflow}
------------------------------------------------
+The GitHub workflow
+-------------------
 
 I'll assume you're familiar with [GitHub workflows](https://docs.github.com/en/actions/writing-workflows). If you aren't, a GitHub workflow is a declarative description of an automated job. A job consists of several steps. GitHub offers several triggers: Manual, scheduled, or depending on an event.
 
@@ -347,8 +347,8 @@ For the same reason, we should cache our built artifacts. While researching for 
 
    At this point, we should run the integration test. Yet, we need the app deployed to run this test. For this, we need available infrastructure.
 
-   Alternative "Unit testing" on GitHub {#h2-6-alternative-unit-testing-on-github}
-   -------------------------------------------------------------------------------
+   Alternative "Unit testing" on GitHub
+   ------------------------------------
 
    The above works perfectly on GitHub, but we can move closer to the deployment setup by leveraging GitHub [service containers](https://docs.github.com/en/actions/use-cases-and-examples/using-containerized-services/about-service-containers). Let's migrate PostgreSQL from Testcontainers to a GitHub service container.
 
@@ -403,8 +403,8 @@ jobs:
 
    For more information on `job.services.`, please check the [GitHub documentation](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idservices).
 
-   Conclusion {#h2-7-conclusion}
-   -----------------------------
+   Conclusion
+   ----------
 
    In this article, we laid the ground for a simple app's unit- and integration-testing, leveraging Testcontainers in the local environment. We then proceeded to automate unit testing via a GitHub workflow with the help of GitHub service containers. In the next post, we will prepare the Kubernetes environment on a Cloud provider infrastructure, build the image, and deploy it to the latter.
 

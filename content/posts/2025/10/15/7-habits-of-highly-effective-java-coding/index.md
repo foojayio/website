@@ -22,7 +22,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### **From AI User to AI Pro** {#h3-0-from-ai-user-to-ai-pro}
+### **From AI User to AI Pro**
 
 Let's be real, AI coding tools are everywhere now. 🤖 They're no longer some shiny new toy---they're a part of our daily grind as developers, just like our morning coffee. ☕
 
@@ -36,7 +36,7 @@ This means we have to level up from being copy-paste machines and become smart d
 
 So, I'm sharing 7 key habits that will help you do just that. This isn't just about speed; it's about getting way better at the job you love. 💡
 
-### **1. The Golden Rule: Take Pride and Ownership in Your Craft 🥇** {#h3-1-1-the-golden-rule-take-pride-and-ownership-in-your-craft}
+### **1. The Golden Rule: Take Pride and Ownership in Your Craft 🥇**
 
 The first and most important habit isn't about blame; it's about **pride and ownership**. As developers, we are modern-day craftspeople. There's a deep, intrinsic satisfaction that comes from delivering high-quality, elegant, and robust code.
 
@@ -121,7 +121,7 @@ This professional solution is vastly superior. It handles failures gracefully wi
 
 By explaining these choices in the PR---discussing the principles of resilient design and fault tolerance---**YOU** demonstrate deep expertise that goes far beyond simply making the code "work." This is how you build a reputation for excellence and drive your career forward.
 
-### **2. Feed the Beast: Your Project's Context is its Fuel ⛽** {#h3-2-2-feed-the-beast-your-project-s-context-is-its-fuel}
+### **2. Feed the Beast: Your Project's Context is its Fuel ⛽**
 
 AI coding assistants are incredibly powerful, but they aren't mind readers. They operate on a simple principle: garbage in, garbage out. If you give them a vague, one-line request, you'll get back a generic, probably useless, chunk of code. The secret to getting amazing results is to "feed the beast" with as much high-quality context as you possibly can.
 
@@ -229,7 +229,7 @@ MCP Servers can help to expand the capabilities of our AI Agents. Directories li
 
 This information then serves as excellent context for your primary coding assistant, helping it understand the system's architecture when you ask it to write related code. This creates a virtuous cycle: you use AI to generate clear documentation, which in turn helps your coding AI generate better code.
 
-### **3. Dodge the "Ball of Mud": Keep Your Code Maintainable 🧠** {#h3-3-3-dodge-the-ball-of-mud-keep-your-code-maintainable}
+### **3. Dodge the "Ball of Mud": Keep Your Code Maintainable 🧠**
 
 "Keep it simple" is easy advice to give, but in the real world of enterprise Java, it's not so simple, is it? A 20-line method might be simple, but if you have a hundred of them in a tangled mess, you've created a classic "Big Ball of Mud" architecture. 👎
 
@@ -311,7 +311,7 @@ This same principle applies at a higher level. Resist the urge to let an AI push
 
 Choose boring, maintainable solutions. Your future self will thank you. 🙏
 
-### **4. Clean Your Room: No Stray Code or Sketchy Dependencies 🧹** {#h3-4-4-clean-your-room-no-stray-code-or-sketchy-dependencies}
+### **4. Clean Your Room: No Stray Code or Sketchy Dependencies 🧹**
 
 Think of your AI assistant as a super-enthusiastic and brilliant, but slightly messy, collaborator. In its rush to build something cool, it might leave some tools out, grab a sketchy-looking part from a random website, or leave unused scraps of code lying on the floor.
 
@@ -354,7 +354,7 @@ In Java, this isn't always a critical failure. An unused import is harmless. But
 
 The habit here is simple hygiene. Before you commit, run your IDE's code cleanup tools. Remove unused imports, variables, and methods. Use static analysis to flag unused dependencies. It's the digital equivalent of sweeping the workshop floor before you lock up for the night. It keeps your project lean, clean, and predictable. ✨
 
-### **5. Trust but review: Analyze the AI, the Code, and the Supply Chain 🕵️‍♀️** {#h3-5-5-trust-but-review-analyze-the-ai-the-code-and-the-supply-chain}
+### **5. Trust but review: Analyze the AI, the Code, and the Supply Chain 🕵️‍♀️**
 
 Working with an AI is like getting advice from a brilliant expert who sometimes hallucinates. This is the core of my article "[AI gives you TIME not CONFIDENCE](https://dev.to/jonathanvila/ai-gives-you-not-developer-productivity-toolkit-1n9d).". The AI gives you a head start, but it doesn't give you a guarantee.
 
@@ -368,7 +368,7 @@ We must analyze three distinct areas:
 
 
 
-### **First, Analyze Your AI System** {#h3-6-first-analyze-your-ai-system}
+### **First, Analyze Your AI System**
 
 Before you even write a prompt, remember that the AI is not an oracle. It's a tool with known limitations.
 
@@ -377,7 +377,7 @@ Before you even write a prompt, remember that the AI is not an oracle. It's a to
 
 
 
-### **Second, Analyze the Generated Code: Accuracy, Bugs, Security and Outdated Knowledge** {#h3-7-second-analyze-the-generated-code-accuracy-bugs-security-and-outdated-knowledge}
+### **Second, Analyze the Generated Code: Accuracy, Bugs, Security and Outdated Knowledge**
 
 This is where the rubber meets the road. Recent research confirms that while AI boosts speed, it comes with significant risks to quality and security.
 
@@ -439,7 +439,7 @@ public double getArea(Shape shape) {
 
 
 
-### **Third, Analyze the Dependencies (The Software Supply Chain)** {#h3-8-third-analyze-the-dependencies-the-software-supply-chain}
+### **Third, Analyze the Dependencies (The Software Supply Chain)**
 
 This is where things get really serious. An AI might suggest a cool, niche library to solve your problem. Here's your analysis checklist before you ever add it to your `pom.xml`.
 
@@ -463,7 +463,7 @@ Even if a library is well-maintained and properly licensed, older versions (or e
 
 Analyzing your dependencies is a non-negotiable part of a professional developer's job. The AI is just a recommender; you are the gatekeeper. ✅
 
-### **6. Beyond Coverage: Mandate *Meaningful* Tests ✅** {#h3-9-6-beyond-coverage-mandate-meaningful-tests}
+### **6. Beyond Coverage: Mandate *Meaningful* Tests ✅**
 
 For years, we've been told to chase the holy grail of 100% code coverage. But as you astutely noted, that's often a vanity metric. A suite of heavily mocked unit tests that covers every line of code can still completely miss the point. The real goal of testing isn't to cover code; it's to **build confidence** that your software correctly solves a real-world business problem.
 
@@ -610,7 +610,7 @@ The AI handles the tedious mapping, and you focus on implementing the meaningful
 
 And if you want to be extra sure your tests are good, look into **mutation testing** (e.g., with Pitest) to see if your test suite can actually catch bugs.
 
-### **7. The Human Gateway: A Code Review for What AI Can't See 🧠** {#h3-10-7-the-human-gateway-a-code-review-for-what-ai-can-t-see}
+### **7. The Human Gateway: A Code Review for What AI Can't See 🧠**
 
 Let's get one thing straight: automated code reviewers and SAST tools are fantastic. They are tireless defenders against simple bugs, style violations, and common security flaws. Let the machines handle that stuff. That is their job now.
 
@@ -672,8 +672,8 @@ And here's the **human-centric review** in the PR comments:
 
 This review accomplishes everything a human review should. It validates the work, shares deep knowledge about distributed systems, prevents a future production issue, and does it all in a collaborative, respectful way. This is a conversation AI can't have. This is where we, the humans, provide the real value.
 
-**Conclusion: Your AI Co-Pilot Needs a Safety Net 🚀** {#h2-11-conclusion-your-ai-co-pilot-needs-a-safety-net}
---------------------------------------------------------------------------------------------------------------
+**Conclusion: Your AI Co-Pilot Needs a Safety Net 🚀**
+------------------------------------------------------
 
 The age of AI-assisted development isn't about replacing developers; it's about upgrading them.
 

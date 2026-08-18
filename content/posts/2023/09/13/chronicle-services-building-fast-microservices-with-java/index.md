@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### Low Latency? {#h3-0-low-latency}
+### Low Latency?
 
 In computing, latency is defined as the length of time to perform some task. This could be the time it takes to respond to an interrupt from hardware or the time it takes for a message sent by one component to be available to its recipient.
 
@@ -42,7 +42,7 @@ At [Chronicle Software](https://chronicle.software/ "Chronicle Software"), our p
 
 It's often felt that Java is not a suitable language to use for such software, however as discussed in [this article](https://dzone.com/articles/java-and-low-latency "this article"), it is possible to achieve latency figures that approach those of lower-level languages such as C++ and Rust.
 
-### Challenges in Building Low Latency Software {#h3-1-challenges-in-building-low-latency-software}
+### Challenges in Building Low Latency Software
 
 Modern applications tend to be implemented using architectural approaches based on loosely coupled components (microservices) that interact with each other based on asynchronous message passing. Several toolkits and frameworks exist that help in implementing such microservices in Java.
 
@@ -52,7 +52,7 @@ Other approaches lean towards stripping away almost all abstractions, exposing d
 
 Even at this level of detail, however, it is often necessary to understand and be able to tune operating system level parameters to achieve consistent low latency. [Chronicle Tune](https://chronicle.software/tune/ "Chronicle Tune") is a product that can be used to perform this level of analysis and configuration based on Chronicle's extensive knowledge and experience in this area.
 
-### Introducing Chronicle Services {#h3-2-introducing-chronicle-services}
+### Introducing Chronicle Services
 
 Over many years, Chronicle Software has been involved in building libraries, applications and systems that operate in environments where low latency is critical, primarily in the financial sector.
 
@@ -63,13 +63,13 @@ We have created the [Chronicle Services](https://chronicle.software/services/ "C
 
 [Chronicle Services](https://portal.chronicle.software/docs/services-cookbook/chronicle-services-documentation/RG00-introduction/introduction.html "Chronicle Services") presents an opinionated view of several of the specialised libraries we have developed to support low-latency applications.
 
-### Philosophy {#h3-3-philosophy}
+### Philosophy
 
 A key requirement in achieving the strict requirements of minimal latency is the elimination of accidental complexity. Frameworks such as Spring Boot, Quarkus and Micronaut offer rich sets of abstractions to support the construction of microservices and patterns such as event sourcing and CQRS. These are useful parts of frameworks that are necessarily designed to support general-purpose applications, but they can introduce complexity that should be avoided when building highly focused, low-latency components.
 
 [Chronicle Services](https://portal.chronicle.software/docs/services-cookbook/chronicle-services-documentation/RG00-introduction/introduction.html "Chronicle Services") offers a smaller set of abstractions, leading to considerable simplification in the framework, less load on the underlying JVM and hence much smaller overhead in processing events. This leads to a throughput of 1 million events per second for a single service. We have also been able to help customers refactor systems that were required to be run on multiple servers to run on a single server (plus one server for continuity in the event of failure).
 
-### How it Works {#h3-4-how-it-works}
+### How it Works
 
 There are two key concepts in[Chronicle Services](https://portal.chronicle.software/docs/services-cookbook/chronicle-services-documentation/RG00-introduction/introduction.html " Chronicle Services"): Services and Events.
 
@@ -80,7 +80,7 @@ By default, events are transmitted between services using [Chronicle Queue](http
 
 In a comparison, described [here](https://chronicle.software/benchmarking-kafka-vs-chronicle-for-microservices-which-is-750-times-faster/ "here"), Chronicle Services transmitted messages some 750 times faster than Kafka.
 
-### Building a Service {#h3-5-building-a-service}
+### Building a Service
 
 The public interface of a Service is defined by the types of Events it expects as input and the types of Events that it outputs. The Service implementation itself provides implementations of handlers for each of the input events.
 

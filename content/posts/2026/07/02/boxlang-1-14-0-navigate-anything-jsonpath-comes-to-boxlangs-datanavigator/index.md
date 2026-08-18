@@ -31,8 +31,8 @@ BoxLang introduced DataNavigators in version 1 so you can use `dataNavigate()`, 
 
 BoxLang 1.14.0 changes that. The `DataNavigator` now understands **JSONPath-style path expressions** natively, and a new `query()` method lets you fan out across a structure and collect every match in a single call. Less ceremony. More signal.
 
-A Quick Refresher: What is the DataNavigator? {#h2-0-a-quick-refresher-what-is-the-datanavigator}
--------------------------------------------------------------------------------------------------
+A Quick Refresher: What is the DataNavigator?
+---------------------------------------------
 
 The `DataNavigator` is BoxLang's fluent helper for safely moving through nested data structures: Structs, Arrays, parsed JSON, configuration documents, runtime metadata. The key feature is that it never throws when a path doesn't exist -- it returns a null, a default, or an empty navigator depending on how you call it.
 
@@ -53,8 +53,8 @@ You create a navigator with the `dataNavigate()` BIF, which accepts a Struct, a 
 
 That API still works exactly as it always did. What 1.14.0 adds is a compact expression language that you can drop directly into those same methods.
 
-What Is New in 1.14.0 {#h2-1-what-is-new-in-1-14-0}
----------------------------------------------------
+What Is New in 1.14.0
+---------------------
 
 Four focused additions to the `DataNavigator`:
 
@@ -73,14 +73,14 @@ Four focused additions to the `DataNavigator`:
 * `getOrDefault(key, value)` -- an explicit-fallback variant of `get()`. Guaranteed non-null. Cleaner than the null-check pattern.
 * `getByKey(key)` / `hasByKey(key)` -- exact key lookup where dots and brackets are literal, not separators. For payloads that have keys like `"db.host"` as an actual key name.
 
-The Path Expression Syntax {#h2-2-the-path-expression-syntax}
--------------------------------------------------------------
+The Path Expression Syntax
+--------------------------
 
 BoxLang's JSONPath dialect covers the operations that matter day-to-day. Here is the full reference:
 
 Path Expression Syntax
 
-### Path Expression Syntax {#h3-3-path-expression-syntax}
+### Path Expression Syntax
 
 |         Path expression         |                     Meaning                     |
 |---------------------------------|-------------------------------------------------|
@@ -110,10 +110,10 @@ Trigger rule:
 
 All of this syntax is available inside `get()`, `has()`, `from()`, and `query()`.
 
-Real-World Scenarios {#h2-4-real-world-scenarios}
--------------------------------------------------
+Real-World Scenarios
+--------------------
 
-### Scenario 1: Processing an API Response {#h3-5-scenario-1-processing-an-api-response}
+### Scenario 1: Processing an API Response
 
 You are consuming a third-party REST API. The payload looks like this:
 
@@ -173,7 +173,7 @@ count = nav.getOrDefault( "data.store.meta.count", 0 )
 
 Note the distinction: `get()` returns the **first match** . `query()` returns **all matches** as an Array.
 
-### Scenario 2: Configuration Introspection {#h3-6-scenario-2-configuration-introspection}
+### Scenario 2: Configuration Introspection
 
 You are writing a module that needs to inspect the runtime's `boxlang.json` and extract settings across nested paths. Some keys may or may not be present depending on the deployment environment.
 
@@ -204,7 +204,7 @@ jdbcUrl = config.getByKey( "datasources.main.db.url" )
 
 The `getByKey()` / `hasByKey()` distinction matters whenever your data was shaped by a Java properties system, a dotted-key config library, or any payload where a key name contains` .` or `[` as real characters.
 
-### Scenario 3: Wildcard and Slice Extraction {#h3-7-scenario-3-wildcard-and-slice-extraction}
+### Scenario 3: Wildcard and Slice Extraction
 
 You have a module's metadata struct and want to extract specific slices for a dashboard or diagnostic tool.
 
@@ -248,8 +248,8 @@ nav.query( "providers[?(@.models)]" )
 ```
 
 
-Choosing the Right Method {#h2-8-choosing-the-right-method}
------------------------------------------------------------
+Choosing the Right Method
+-------------------------
 
 The four retrieval methods serve distinct purposes. Use this as a guide:
 
@@ -265,8 +265,8 @@ Use `get()` or `getOrDefault()` when a value may or may not exist, `getOrThrow()
 
 One rule of thumb: if your path expression contains` [*]`, `[n:m]`, `..`, or a filter `[?(...)]`, reach for `query()`. These operators can match zero, one, or many nodes. `get()` only returns the first hit and silently drops the rest.
 
-Putting It All Together {#h2-9-putting-it-all-together}
--------------------------------------------------------
+Putting It All Together
+-----------------------
 
 Here is a complete, realistic example: loading and validating a multi-environment application config, then extracting just what you need from each section.
 
@@ -320,8 +320,8 @@ class AppConfigLoader {
 
 No loops. No null guard towers. No nested `structKeyExists()` chains. The path expressions describe the shape of the data you want, and the navigator handles the traversal.
 
-Upgrade and Explore {#h2-10-upgrade-and-explore}
-------------------------------------------------
+Upgrade and Explore
+-------------------
 
 JSONPath support in the `DataNavigator` ships in **BoxLang 1.14.0** , available today. No dependencies to add, no configuration to change. If you are already using `dataNavigate()`, the new expressions are a drop-in enhancement. Existing variadic-key calls are untouched.
 
@@ -329,8 +329,8 @@ Full documentation is at [boxlang.ortusbooks.com/boxlang-language/syntax/data-na
 
 The complete 1.14.0 release notes, including Dynamic Sets, Ranges, Inner Classes, Query Transformers, and all 65 closed issues, are at [boxlang.ortusbooks.com/readme/release-history/1.14.0](https://boxlang.ortusbooks.com/readme/release-history/1.14.0 "boxlang.ortusbooks.com/readme/release-history/1.14.0").
 
-Resources {#h2-11-resources}
-----------------------------
+Resources
+---------
 
 * [BoxLang Documentation](https://boxlang.ortusbooks.com/ "BoxLang Documentation")
 * [DataNavigator Reference](https://boxlang.ortusbooks.com/boxlang-language/syntax/data-navigators "DataNavigator Reference")

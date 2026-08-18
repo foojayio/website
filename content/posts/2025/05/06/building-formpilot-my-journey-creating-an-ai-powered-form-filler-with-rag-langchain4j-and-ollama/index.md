@@ -28,8 +28,8 @@ Have you ever found yourself filling out the same information on web forms over 
 
 In this article, I'll take you through my journey of creating FormPilot, a Chrome extension backed by a Java Spring Boot application that uses Retrieval-Augmented Generation (RAG), LangChain4j, and Ollama to fill out web forms intelligently. I'll share the challenges I faced, the solutions I implemented, and the lessons I learned along the way.
 
-**The Inspiration** {#h2-0-the-inspiration}
--------------------------------------------
+**The Inspiration**
+-------------------
 
 The idea for FormPilot came to me during a conference registration season. I found myself registering for multiple tech conferences, each with their own registration forms asking for the same information. As I filled out yet another form with my name, email, and bio for the fifth time, I thought, "There has to be a better way."
 
@@ -37,8 +37,8 @@ Sure, there are password managers and form fillers out there, but they typically
 
 That's when I decided to leverage my experience with Java and my interest in AI to build FormPilot.
 
-**The Architecture** {#h2-1-the-architecture}
----------------------------------------------
+**The Architecture**
+--------------------
 
 I designed FormPilot with two main components:
 
@@ -54,12 +54,12 @@ This architecture allows the extension to be lightweight while offloading the he
 5. The server returns these values to the extension
 6. The extension fills the form with the generated values
 
-**Getting Started: Setting Up Your Environment** {#h2-2-getting-started-setting-up-your-environment}
-----------------------------------------------------------------------------------------------------
+**Getting Started: Setting Up Your Environment**
+------------------------------------------------
 
 Before we dive into the specific code implementation for FormPilot's backend, let's set up the necessary tools: Ollama for running the language model locally and the initial Spring Boot project structure.
 
-### **Part 1: Installing and Running Ollama Locally** {#h3-3-part-1-installing-and-running-ollama-locally}
+### **Part 1: Installing and Running Ollama Locally**
 
 Ollama enables you to run open-source large language models (LLMs) directly on your own machine. This is great for privacy (data stays local) and avoids API costs.
 
@@ -106,9 +106,9 @@ ollama list
 
 ```
 
-### ![](https://bazlur.ca/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-9.48.13%E2%80%AFPM-1024x448.png) {#h3-4-}
+### ![](https://bazlur.ca/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-9.48.13%E2%80%AFPM-1024x448.png)
 
-### **Part 2: Creating the Spring Boot Project via Spring Initializr** {#h3-5-part-2-creating-the-spring-boot-project-via-spring-initializr}
+### **Part 2: Creating the Spring Boot Project via Spring Initializr**
 
 Spring Initializr is a web tool that generates a basic Spring Boot project structure for you.
 
@@ -125,8 +125,8 @@ dependencies { implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1
 
 With Ollama running and the basic Spring Boot project created, you're ready to start adding the FormPilot-specific code.
 
-**Implementing RAG with LangChain4j** {#h2-6-implementing-rag-with-langchain4j}
--------------------------------------------------------------------------------
+**Implementing RAG with LangChain4j**
+-------------------------------------
 
 One of the most exciting parts of building FormPilot was implementing Retrieval-Augmented Generation (RAG) using [LangChain4j](https://docs.langchain4j.dev/). RAG is a technique that enhances LLM outputs by retrieving relevant information from a knowledge base before generating a response.
 
@@ -240,8 +240,8 @@ This configuration:
 4. Converts these segments into vector embeddings using the configured EmbeddingModel and stores them.
 5. Creates a **ContentRetriever** that will query this embedding store to find the most relevant text segments based on semantic similarity to the input query (e.g., a form field label).
 
-**The Magic of LangChain4j's @AiService** {#h2-7-the-magic-of-langchain4j-s-aiservice}
---------------------------------------------------------------------------------------
+**The Magic of LangChain4j's @AiService**
+-----------------------------------------
 
 One of the most elegant aspects of FormPilot is how it uses LangChain4j's **@AiService** annotation to create a declarative interface for interacting with the LLM. This approach dramatically simplifies the code required to prompt the model and parse its response.
 
@@ -364,8 +364,8 @@ With just this interface and the `@AiService` annotation (from `dev.langchain4j.
 
 This declarative approach keeps the service layer clean and focuses on *what* needs to be done rather than the low-level details of LLM interaction and RAG integration.
 
-**Integrating with Ollama** {#h2-8-integrating-with-ollama}
------------------------------------------------------------
+**Integrating with Ollama**
+---------------------------
 
 I chose to use Ollama for the LLM backend, which allows for the local running of LLMs. This provides several advantages:
 
@@ -408,8 +408,8 @@ Make sure you have downloaded the specified models using Ollama (e.g., `ollama r
 
 These properties tell the LangChain4j Spring Boot starter to configure both the chat model (for generating the form values) and the embedding model (for RAG) to use your local Ollama server.
 
-**Building the Chrome Extension** {#h2-9-building-the-chrome-extension}
------------------------------------------------------------------------
+**Building the Chrome Extension**
+---------------------------------
 
 The Chrome extension acts as the user-facing part of FormPilot. It needs to:
 
@@ -650,7 +650,7 @@ The background script (`background.js`) would handle the `chrome.runtime.onMessa
 
 Check out the chrome-extension: <https://github.com/rokon12/form-pilot/tree/main/chrome-extension>
 
-### **Setting up the Spring Boot Server** {#h3-10-setting-up-the-spring-boot-server}
+### **Setting up the Spring Boot Server**
 
 Build the Spring Boot application:
 
@@ -685,14 +685,14 @@ http://localhost:8080/api/form/health
 
 ```
 
-### **Setting up the Chrome Extension** {#h3-11-setting-up-the-chrome-extension}
+### **Setting up the Chrome Extension**
 
 1. Open Google Chrome and navigate to: `chrome://extensions/`
 2. Enable "Developer mode" by toggling the switch in the top right corner.
 3. Click "Load unpacked" and select the `chrome-extension` directory from this project.
 4. The extension should now be installed and visible in your Chrome toolbar.
 
-### **Using the Demo Form** {#h3-12-using-the-demo-form}
+### **Using the Demo Form**
 
 A demo form is included in this project to help you test the Smart Form Filler extension:
 
@@ -716,8 +716,8 @@ Then visit `http://localhost:8000/demo/demo-form.html` in your browser.
 
 ![](https://bazlur.ca/wp-content/uploads/2025/04/Screenshot-2025-04-06-at-6.38.24%E2%80%AFPM-713x1024.png)
 
-**Testing with a Demo Form** {#h2-13-testing-with-a-demo-form}
---------------------------------------------------------------
+**Testing with a Demo Form**
+----------------------------
 
 To test FormPilot thoroughly, I created a comprehensive demo HTML form (demo.html) that included a wide variety of field types:
 
@@ -734,30 +734,30 @@ To test FormPilot thoroughly, I created a comprehensive demo HTML form (demo.htm
 
 Using this demo form locally allowed me to iterate quickly on both the backend logic (ensuring correct values were generated for each type) and the frontend JavaScript (ensuring fields were detected and filled correctly, including event triggering).
 
-**Challenges and Solutions** {#h2-14-challenges-and-solutions}
---------------------------------------------------------------
+**Challenges and Solutions**
+----------------------------
 
 Building FormPilot wasn't without its hurdles. Here are some key challenges and how I addressed them:
 
-### **Challenge 1: Robust Form Field Detection \& Label Association** {#h3-15-challenge-1-robust-form-field-detection-label-association}
+### **Challenge 1: Robust Form Field Detection \& Label Association**
 
 As mentioned, reliably finding input fields and their corresponding labels across diverse HTML structures is tricky.
 
 * **Solution:** Implemented a multi-strategy approach in content.js (checking for attribute, parent labels, aria-label, siblings) as shown in the snippet. Added checks for visibility (offsetParent !== null) and avoided filling already completed fields. It's not perfect, but covers many common patterns.
 
-### **Challenge 2: Handling Diverse Field Types Correctly** {#h3-16-challenge-2-handling-diverse-field-types-correctly}
+### **Challenge 2: Handling Diverse Field Types Correctly**
 
 Simply setting `element.value` doesn't work for all types (selects, checkboxes, radio buttons).
 
 * **Solution:** Created specific logic within the fillField function in content.js to handle different type `attributes` or `tagName`. For selects, it searches for matching option values or text. For checkboxes/radio buttons, it sets the checked property based on the received value.
 
-### **Challenge 3: Triggering JavaScript Events for Framework Compatibility** {#h3-17-challenge-3-triggering-javascript-events-for-framework-compatibility}
+### **Challenge 3: Triggering JavaScript Events for Framework Compatibility**
 
 Modern web apps heavily rely on JavaScript frameworks (React, Vue, Angular) that listen for input events (input, change, blur, focus) to update their internal state. Just setting the field's value programmatically often doesn't trigger these listeners.
 
 * **Solution:** Implemented the triggerEvents function in content.js to manually create and dispatch input, change, focus, and blur events on the element after setting its value. This significantly improves compatibility with framework-based forms.
 
-### **Challenge 4: Backend Communication \& CORS** {#h3-18-challenge-4-backend-communication-cors}
+### **Challenge 4: Backend Communication \& CORS**
 
 Chrome extensions have security restrictions. Content scripts cannot directly make cross-origin requests (like to http://localhost:8080).
 
@@ -768,7 +768,7 @@ Chrome extensions have security restrictions. Content scripts cannot directly ma
    2. The background script (which has fewer restrictions) uses the fetch API to call the Spring Boot backend.
    3. Crucially, the Spring Boot application must be configured to handle Cross-Origin Resource Sharing (CORS) by sending the appropriate headers (e.g., `Access-Control-Allow-Origin`: `chrome-extension://YOUR_EXTENSION_ID`). This can be done globally using `@Configuration` and `WebMvcConfigurer` or on specific `@RestController` endpoints using `@CrossOrigin`.
 
-### **Challenge 5: Prompt Engineering \& Model Compliance** {#h3-19-challenge-5-prompt-engineering-model-compliance}
+### **Challenge 5: Prompt Engineering \& Model Compliance**
 
 Getting LLMs to follow detailed instructions exactly---especially when it comes to the output format and using logic like "try RAG first"---can be tricky.
 
@@ -776,29 +776,29 @@ Larger models like OpenAI's GPT-4o usually follow detailed system instructions w
 
 * **Solution:** You often need to fine-tune the prompt to get better results with smaller models. This means making the system instructions clearer and simpler, giving good examples of the exact format you want, and even adding warnings like, "Don't write anything before or after the JSON." Sometimes, it also helps to add a cleanup step in your Java backend---like extracting just the JSON from the output---even if the model includes extra text. It's a balance between how powerful the model is, how complex your prompt is, and how much cleanup you're willing to do afterward.
 
-**Lessons Learned** {#h2-20-lessons-learned}
---------------------------------------------
+**Lessons Learned**
+-------------------
 
 This project was a fantastic learning experience, reinforcing several key concepts:
 
-### **1. The Power of RAG for Contextual Personalization** {#h3-21-1-the-power-of-rag-for-contextual-personalization}
+### **1. The Power of RAG for Contextual Personalization**
 
 Implementing RAG was the most impactful part. Instead of generic placeholders, FormPilot could potentially pull *my actual bio* or project details from the `content.txt` file when filling out a relevant field. This moves beyond simple auto-fill to context-aware generation, making the tool significantly more useful. The quality depends heavily on the relevance of the data source and the effectiveness of the embedding model and retrieval parameters.
 
-### **2. LangChain4j Simplifies Java LLM Integration** {#h3-22-2-langchain4j-simplifies-java-llm-integration}
+### **2. LangChain4j Simplifies Java LLM Integration**
 
 LangChain4j, especially with its Spring Boot starter, abstracts away much of the complexity of interacting with LLMs and integrating RAG. The @AiService annotation is incredibly powerful, allowing a declarative approach that keeps the business logic clean and focuses on the desired interaction rather than the plumbing.
 
-### **3. Local LLMs (Ollama) Offer Privacy \& Control** {#h3-23-3-local-llms-ollama-offer-privacy-control}
+### **3. Local LLMs (Ollama) Offer Privacy \& Control**
 
 Using Ollama provided complete control over the model and ensured user data privacy, which is paramount when dealing with potentially sensitive form information. It also decouples the application from reliance on third-party API keys and costs, although it requires users to have sufficient hardware resources. The ease of switching models locally (just change `application.properties` and run `ollama run <new_model>`) is also a plus for experimentation.
 
-### **4. Chrome Extension Development** {#h3-24-4-chrome-extension-development}
+### **4. Chrome Extension Development**
 
 Building the Chrome extension highlighted the importance of understanding the different script contexts (content, background, popup), their capabilities, and limitations (especially around DOM access and network requests). Proper event handling (triggerEvents) is essential for compatibility with modern web applications. Careful consideration of permissions and security (like CORS) is mandatory.
 
-**Conclusion** {#h2-25-conclusion}
-----------------------------------
+**Conclusion**
+--------------
 
 This a demonstration of how modern AI techniques like RAG can be combined with frameworks like LangChain4j and local LLMs via Ollama to create genuinely intelligent tools within the familiar Java ecosystem. It moves beyond simple automation to provide context-aware assistance for repetitive tasks like filling forms.
 

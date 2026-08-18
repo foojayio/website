@@ -27,8 +27,8 @@ Open the Git window in IntelliJ IDEA using **⌘+9** on Mac (or **Alt+9** on Win
 
 We will use a Git demo project available on [GitHub](https://github.com/mlvandijk/gitdemo). This example uses [TDD (Test Driven Development)](https://martinfowler.com/bliki/TestDrivenDevelopment.html) to add a new feature. In TDD, we start by adding a failing test, writing the minimum of code we need to get that test to pass and finally do some refactoring. Even though we made the necessary changes in multiple commits, we don't need to keep all these individual commits for future reference.
 
-Using Git interactive rebase in the UI {#h2-0-using-git-interactive-rebase-in-the-ui}
--------------------------------------------------------------------------------------
+Using Git interactive rebase in the UI
+--------------------------------------
 
 We can use Git Interactive Rebase in IntelliJ IDEA as follows:
 
@@ -48,7 +48,7 @@ Notice there are several options at the top of this popup, that become active wh
 * The **Squash** button is actually a dropdown that allows us to choose between **Squash** and **Fixup** . Both options will combine the changes made in the selected commits into one commit. If we select squash, by default the individual commit messages will be combined. If we select fixup, the commit message of the fixup commit will be discarded. You can select fixup while in the "**Rebasing Commits** " popup with **⌥+F** on Mac (or **Alt+F** on Windows \& Linux)
 * **Drop** allows us to drop one or more commits.
 
-### Changing the order of the commits {#h3-1-changing-the-order-of-the-commits}
+### Changing the order of the commits
 
 Let's say we want to change the order of the commits; we want to keep the unrelated change, but separately from the changes for the new feature. We can select this commit and use the up and down buttons on the top left to change where in the order this commit will be.
 
@@ -58,7 +58,7 @@ Let's say we want to change the order of the commits; we want to keep the unrela
 
 Once we're sure about the order, select "**Start Rebasing**". We see in the Git log that the order of the commits has changed.
 
-### Combining multiple commits into one commit {#h3-2-combining-multiple-commits-into-one-commit}
+### Combining multiple commits into one commit
 
 Next, we want to combine multiple commits where we added the tests and implemented the new feature. Let's reopen the "**Rebasing Commits**" window and select those commits.
 
@@ -72,7 +72,7 @@ Now, because we want to combine those commits into one commit with one commit me
 
 In the Git log, we can see that multiple individual commits are now combined into one commit with one commit message.
 
-### Drop a commit {#h3-3-drop-a-commit}
+### Drop a commit
 
 Finally, we want to drop the commit with a mistake that we made. Let's reopen the "**Rebasing Commits** " window, select the mistaken commit, select "**Drop** " and select "**Start Rebasing**".
 
@@ -82,7 +82,7 @@ Finally, we want to drop the commit with a mistake that we made. Let's reopen th
 
 We see in the Git log that the commit is dropped.
 
-### Rename a commit {#h3-4-rename-a-commit}
+### Rename a commit
 
 Now that we have cleaned up our commit history, we might want to rename the commit where we added the new feature. We have several options to do so.
 
@@ -98,12 +98,12 @@ This will open a "**Edit Commit Message** " popup, where you can edit the commit
 
 ![](edit-commit-message-popup.png)
 
-### See which Git commands were executed {#h3-5-see-which-git-commands-were-executed}
+### See which Git commands were executed
 
 To see which Git commands IntelliJ IDEA performed, open the "Console" tab in the Git window.
 
-Using Git interactive rebase from the command line {#h2-6-using-git-interactive-rebase-from-the-command-line}
--------------------------------------------------------------------------------------------------------------
+Using Git interactive rebase from the command line
+--------------------------------------------------
 
 Let's take a look at how to use Git interactive rebase from the command line.
 
@@ -123,7 +123,7 @@ This will open an editor in the terminal with the list of commits that were done
 
 By default, Git will use whatever you have set as your default text editor. If you haven't set one, it will fall back to the vi editor, which is what we will use in this tutorial.
 
-### Changing the order of the commits {#h3-7-changing-the-order-of-the-commits}
+### Changing the order of the commits
 
 Let's say we want to change the order of the commits; we want to keep the unrelated change, but separately from the changes for the new feature. We can do so by changing the order of the lines (individual commits) to reflect the order we want.
 
@@ -145,7 +145,7 @@ Note: If you made changes to the file that you do not want to save, type `:q!` t
 
 The interactive rebase will be applied. We see in the Git log that the order of the commits has changed.
 
-### Combining multiple commits into one commit {#h3-8-combining-multiple-commits-into-one-commit}
+### Combining multiple commits into one commit
 
 Next, we want to combine multiple commits where we added the tests and implemented the new feature. In the terminal, type `git rebase -i 34bb0f99` to start rebasing. If you have already run this command, you can press the up arrow `↑` in the terminal to show the last used command(s).
 
@@ -165,7 +165,7 @@ In vi, press `esc` to exit edit mode and type `:wq` to save the file.
 
 The interactive rebase will be applied. In the Git log, we can see that multiple individual commits are now combined into one commit with one commit message.
 
-### Drop a commit {#h3-9-drop-a-commit}
+### Drop a commit
 
 Finally, we want to drop the commit with a mistake that we made. In the terminal, type `git rebase -i 34bb0f99` to start rebasing.
 
@@ -177,12 +177,12 @@ In vi, we can remove a line by placing the cursor anywhere on the line we want t
 
 Save the file by typing `:wq` and the interactive rebase will be applied. We see in the Git log that the commit is dropped.
 
-Summary {#h2-10-summary}
-------------------------
+Summary
+-------
 
 Now we know how to use git interactive rebase either from the IntelliJ IDEA UI or from the command line. Give them a try and use whichever way you prefer.
 
-### IntelliJ IDEA Shortcuts Used {#h3-11-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -194,7 +194,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Select Fixup (in the "Rebasing Commits" popup)                                                   | **⌥F12**       | **Alt+F**                |
 | Edit commit message (in the Git Log)                                                             | **F2**         | **F2**                   |
 
-### Git commands Used {#h3-12-git-commands-used}
+### Git commands Used
 
 Here are the Git commands that we used.
 
@@ -205,7 +205,7 @@ Here are the Git commands that we used.
 | Fixup this commit (add changes to previous commit under the same commit message)       | **fixup**                  |
 | Squash this commit (add changes to previous commit and combine commit messages)        | **squash**                 |
 
-### vi Shortcuts Used {#h3-13-vi-shortcuts-used}
+### vi Shortcuts Used
 
 Here are the shortcuts that we used.
 
@@ -218,7 +218,7 @@ Here are the shortcuts that we used.
 | Write and quit                             | **:wq**  |
 | Force quit                                 | **:q!**  |
 
-### Related Links {#h3-14-related-links}
+### Related Links
 
 * [(video) JetBrains Using Git Interactive Rebase](https://www.youtube.com/watch?v=bPX9VHjviEM)
 * [(docs) JetBrains - Edit project history by performing interactive rebase](https://www.jetbrains.com/help/idea/edit-project-history.html#interactive-rebase)

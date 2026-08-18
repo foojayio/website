@@ -23,8 +23,8 @@ frozen: false
 
 In the [previous installment](https://foojay.io/today/debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1/), I talked about the Java garbage collector. In this part, I'll discuss the most common memory issue: the memory leak. I focus on managed languages, specifically Java, but I will mention some native code tools which are interesting. A memory leak contributes to heap size, which isn't the most pressing bug in most cases. But when left alone, memory usage can become a problem and, by that point, finding the issue is hard. Unlike a crash dump, where we get a reference to a specific line, a memory leak can remain hidden.
 
-What are the Consequences of Memory Leaks? {#h2-0-what-are-the-consequences-of-memory-leaks}
---------------------------------------------------------------------------------------------
+What are the Consequences of Memory Leaks?
+------------------------------------------
 
 Unfortunately, this often means that memory leaks can carry into production and even cause problems to end users. E.g. This recent story about [memory leaks hobbling Apples latest M1 computers](https://www.macworld.com/article/549755/m1-macbook-app-memory-leaks-macos.html). Virtual memory effectively means operating systems can carry memory leaks for a very long time. The performance overhead will be noticeable, though.
 
@@ -32,8 +32,8 @@ With the garbage collector, we often rely on the automatic memory management to 
 
 There are powerful tools for application memory profiling, but even they often show data as byte arrays. This doesn't bring us any closer to solving the issue. In this article, I'll walk you through debugging memory usage. I'm assuming that you already know there's a leak after reviewing memory usage. So the focus here is on narrowing it down.
 
-Types of Heap RAM {#h2-1-types-of-heap-ram}
--------------------------------------------
+Types of Heap RAM
+-----------------
 
 One problem with tracking heap memory is managing expectations. You would expect that a memory allocation will cause an equivalent growth in memory and freeing the memory would restore things. This isn't always the case.
 
@@ -45,8 +45,8 @@ Most memory leaks happen in the heap, but there are rare cases where the source 
 
 Notice that this isn't accurate, since a leak in native memory can deplete the Java heap and vice versa. We'll need to check both, but it will give us a sense of where to start...
 
-Your Tool Box {#h2-2-your-tool-box}
------------------------------------
+Your Tool Box
+-------------
 
 There are **MANY** profiling tools for tracking/fixing memory leaks. It's impossible to give a proper review for even a small segment of the available richness. I won't go even into a fraction of what's available. Instead, I'll focus on two tools: VisualVM and Chrome DevTools (with a focus on Node).
 
@@ -61,7 +61,7 @@ I won't be discussing:
 * [CRT Library](https://docs.microsoft.com/en-us/visualstudio/debugger/finding-memory-leaks-using-the-crt-library?view=vs-2022) - For visual studio Microsoft provides some great primitives
 * Some static analysis tools such as SonarCloud, or FindBugs can detect leaks. This won't detect all leaks, but they can point at some problematic cases
 
-### VisualVM {#h3-3-visualvm}
+### VisualVM
 
 You can get VisualVM [here](https://visualvm.github.io/). Once installed, you can launch VisualVM and connect it to our running application to see the process.
 
@@ -69,14 +69,14 @@ You can get VisualVM [here](https://visualvm.github.io/). Once installed, you ca
 
 In the image above VisualVM is monitoring itself, that's pretty meta. You can perform manual garbage collection, which is very important to get a sense of the size of a leak. The heap graph provides you a bird's-eye view of the amount of memory over time and the trend.
 
-### Chrome DevTools {#h3-4-chrome-devtools}
+### Chrome DevTools
 
 If you did front end work with Chrome, surely you ran into the "everything but the kitchen sink" debugging tools that are integrated into Chrome. Personally, I prefer the Firefox equivalents. They can connect pretty seamlessly to Node where they can provide many of the standard debugging capabilities, such as snapshots.
 
 ![Chrome Dev Tools](https://cdn.hashnode.com/res/hashnode/image/upload/v1643110058053/wtfbmQZ07.png)
 
-How to detect Leaks? {#h2-5-how-to-detect-leaks}
-------------------------------------------------
+How to detect Leaks?
+--------------------
 
 Leaks are pretty obvious when you see the memory grow and you don't see it shrinking back. But how can you pinpoint the source of the leak?
 
@@ -115,13 +115,13 @@ Let's look at a less "automated" way to detect leaks. Ideally, this is something
 
 We can detect leaks using VisualVM while we reproduce the issue. Press the garbage collector button and keep your eye on memory usage. This should bring you to a point where the graph slowly grows based on a specific action you take. Once you have that you can narrow it down to a method and a test case.
 
-### Is RAM Increasing Periodically? {#h3-6-is-ram-increasing-periodically}
+### Is RAM Increasing Periodically?
 
 What if RAM is just getting chewed up while you're literally doing nothing?
 
 This is never the case. Something is happening in the background, and this background process causes the problem. That's actually an excellent thing. It means you can isolate this background process and debug only that.
 
-### Compare Snapshots to Find the Object type {#h3-7-compare-snapshots-to-find-the-object-type}
+### Compare Snapshots to Find the Object type
 
 The most important tool in our arsenal is the heap dump. In VisualVM, you can grab a dump by pressing the button on the top right side. It looks like this:
 
@@ -141,20 +141,20 @@ This is a very similar process to the one in VisualVM or pretty much any monitor
 
 You can also make use of verbose GC (trace GC in NodeJS) to see details about the collected object. I often feel that this is a bit like drinking from a firehose. It's very hard to debug even a simple application with that output. But it can be useful if you're looking for something very specific.
 
-Common Types of Memory Leaks {#h2-8-common-types-of-memory-leaks}
------------------------------------------------------------------
+Common Types of Memory Leaks
+----------------------------
 
 Leaks in managed platforms are effectively references to an element that is no longer necessary. There are many samples of this, but they all boil down to discarding said reference. The most common problem is caching. Creating an efficient caching solution without leaking is almost impossible.
 
 Also, static context is always a risk, so you need to guard yourself against that and try to minimize it. Notice that singleton is still a static context...
 
-### Strings {#h3-9-strings}
+### Strings
 
 Java strings are interned, which effectively means they can enter a global application scope. If you parse a lot of data, try to avoid strings to keep memory usage down and use streams/NIO instead.
 
 Strings also take up a lot of space in NodeJS. Interning happens there too, but since strings and string objects are pretty different, the problem isn't as obvious.
 
-### Hidden Semantics {#h3-10-hidden-semantics}
+### Hidden Semantics
 
 A good example here is Swing code like this:
 
@@ -171,7 +171,7 @@ The solution for this is simple: Use debuggers!
 
 Not just to debug code. But to inspect 3rd party objects. You need to familiarize yourself with the objects that are stored as part of these libraries.
 
-### Context Leak {#h3-11-context-leak}
+### Context Leak
 
 I mentioned statics as an obvious source of a leak, but there are other places that trigger a similar function. `ThreadLocal` in Java effectively serves that purpose. Storing an object in a place such as session scope can lead to its retention well past its usefulness.
 
@@ -188,7 +188,7 @@ Worse, this is a security vulnerability. A hacker can start opening sessions unt
 
 Whatever is stored in static, thread or any global context must always be a flat object or verifiably small object. This is a good practice for scalability, security, etc.
 
-### Resource Leak {#h3-12-resource-leak}
+### Resource Leak
 
 When doing research for this article, pretty much every post mentioned leaking file resources, etc.  
 
@@ -196,8 +196,8 @@ This is a separate problem. File resource leaks used to be a problem 20 years ag
 
 However, database connections should be recycled to the pool and leaking them is indeed an issue. The problem is that those aren't exactly a leak like the other ones mentioned here. You will run into a different error, such as a problem connecting to the database since connection resources were exhausted. Despite having a lot of RAM. So I don't think this is the right article to discuss those.
 
-How can we Prevent Leaks? {#h2-13-how-can-we-prevent-leaks}
------------------------------------------------------------
+How can we Prevent Leaks?
+-------------------------
 
 The most ideal situation is to never run into the problem. Obviously, having unit tests that check for RAM (with the reasonable stipulations above) is helpful. But as I mentioned above, they are flaky.
 
@@ -211,8 +211,8 @@ Finally, run a memory monitor on your app. Review the objects, do they make sens
 
 Try to explain the logic of the objects you see in RAM. E.g. if your app has a lot of `byte[]` objects but doesn't use images or primitive data, there might be a leak.
 
-TL;DR {#h2-14-tl-dr}
---------------------
+TL;DR
+-----
 
 Memory profilers are almost identical across platforms. We can look at the graph of memory growth and grab snapshots for the current memory state. We can then compare the snapshots to narrow down the general location of a leak.
 

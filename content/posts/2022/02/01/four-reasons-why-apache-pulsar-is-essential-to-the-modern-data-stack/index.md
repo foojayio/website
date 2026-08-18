@@ -69,8 +69,8 @@ Pulsar enables us to manage multiple tenants across multiple regions from a sing
 
 DataStax's Admin Console for Pulsar makes this even easier.
 
-Queuing (as well as streaming) {#h2-0-queuing-as-well-as-streaming}
--------------------------------------------------------------------
+Queuing (as well as streaming)
+------------------------------
 
 Kafka offers a classic pub/sub (publish/subscribe) messaging model --- publishers send messages to Kafka, which orders them by partition within a topic, and sends a copy to every subscriber (or "consumer").
 ![](0_DPuwhv3ObpTKaFVT.png)

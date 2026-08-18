@@ -29,8 +29,8 @@ This occurrence is not limited to a developer having to fix a bug; it can be a s
 
 Hence, I want to describe how I approach the situation so it can benefit others.
 
-An example issue {#h2-0-an-example-issue}
------------------------------------------
+An example issue
+----------------
 
 To illustrate my point, I'll use a common GitHub issue requesting a new feature on an Open Source project.
 
@@ -47,8 +47,8 @@ At the time, I found this interesting issue:
 
 As an OpenSource contributor, how would I approach the work?
 
-Diagramming is key {#h2-1-diagramming-is-key}
----------------------------------------------
+Diagramming is key
+------------------
 
 Documentation is the first step to embark on a new project. On a regular project, the documentation will probably be missing, incomplete, or partly (if not entirely) misleading; at a hackathon, time may be too short to read it in detail.
 
@@ -101,8 +101,8 @@ For the tooling, plenty of alternatives are available. My preferences go to [Pla
 * It's Open Source and free
 * It's maintained regularly
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Understanding an existing codebase is a crucial skill regardless of one's exact technical role.
 

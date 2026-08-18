@@ -33,8 +33,8 @@ The latest version of **Hilla now makes it faster to build React apps that conne
 * **Zero-configuration build tooling** runs and auto-reloads both frontend and backend code
 * Over **45 UI components** included
 
-TypeScript generation for easy backend access {#h2-0-typescript-generation-for-easy-backend-access}
----------------------------------------------------------------------------------------------------
+TypeScript generation for easy backend access
+---------------------------------------------
 
 Hilla apps use **Java and Spring Boot on the backend** and **TypeScript on the frontend**. This means you have type-safety through your entire app.
 
@@ -100,8 +100,8 @@ export default function ContactsList() {
 
 **There are no REST endpoint URLs, no Swagger docs you need to read.** Your IDE helps you explore APIs through auto-complete, and ensure correct use with type checking.
 
-One project, one build -- optimized for productivity {#h2-1-one-project-one-build-optimized-for-productivity}
--------------------------------------------------------------------------------------------------------------
+One project, one build -- optimized for productivity
+----------------------------------------------------
 
 Hilla speeds up development by having the frontend and backend code in the same project. There is only one build tool to run. The Maven build runs both the Spring Boot backend and a Vite dev server for the frontend.
 
@@ -109,15 +109,15 @@ This way, whenever you change code, the browser updates automatically - no matte
 
 **But wait, isn't coupling the frontend and backend a bad idea?** Hilla is built around the [backends for frontends (BFF) pattern](https://hilla.dev/blog/why-we-built-hilla/ "backends for frontends (BFF) pattern") because we have found that full-stack teams with control over the API they need for their frontend are more productive. Hilla apps are stateless (and start in a fraction of a second when compiled to native) for efficient scaling.
 
-UI components included {#h2-2-ui-components-included}
------------------------------------------------------
+UI components included
+----------------------
 
 Hilla includes more than [45 great-looking and accessible UI components](https://vaadin.com/docs/latest/components "45 great-looking and accessible UI components") by Vaadin. You can customize colors, sizing, roundness, flatness, and other properties through CSS properties to make them fit your brand.
 
 [![A line chart, data grid, and date picker](https://hilla.dev/static/6213de6a6291a6335a77df85d256e195/8c76f/components.png "A line chart, data grid, and date picker")](https://hilla.dev/static/6213de6a6291a6335a77df85d256e195/8c76f/components.png "A line chart, data grid, and date picker")
 
-Get started {#h2-3-get-started}
--------------------------------
+Get started
+-----------
 
 Learn the basics of Hilla with React through the [basics tutorial](https://hilla.dev/docs/react/start/basics "basics tutorial"). Or jump right in and create a project with the CLI:
 
@@ -132,7 +132,7 @@ Need help? Join us on the [Vaadin Discord](https://discord.gg/vaadin "Vaadin Dis
 
 Follow [@hillaframework](https://twitter.com/hillaframework "@hillaframework") on Twitter for updates and be sure to tag us when you share cool stuff you've built with Hilla!
 
-What does this mean for Lit support? {#h2-4-what-does-this-mean-for-lit-support}
---------------------------------------------------------------------------------
+What does this mean for Lit support?
+------------------------------------
 
 Hilla added React support as an alternative to Lit, not as a replacement to it. We continue to build and support both to give you more options to choose the stack you prefer.

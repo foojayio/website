@@ -48,7 +48,7 @@ EDA supports loosely coupled services, greater fault tolerance, and observable i
 
 *Table 2. Pros and Cons of Event Driven Architectures*
 
-### Regression Tests {#h3-0-regression-tests}
+### Regression Tests
 
 When we came to design our kitchen recently, there were some things we knew we wanted, but couldn't imagine the details. However, once we could see an initial design based on what we knew we wanted, we were able to get down to the details.
 
@@ -62,7 +62,7 @@ From the output of such a test, the user can see with each iteration, how they w
 
 *Figure 3. Using known inputs and designed output to iteratively specify requirement*
 
-### How BDD and EDA are More Effective in Combination {#h3-1-how-bdd-and-eda-are-more-effective-in-combination}
+### How BDD and EDA are More Effective in Combination
 
 EDA naturally supports the recording and replaying of events produced by each microservice. EDA allows regression tests to be constructed and maintained easily with minimal input from end-users.
 
@@ -80,13 +80,13 @@ Recording the outputs of EDA microservices makes it easy to create test input da
 
 BDD can determine functionality requirements to turn inputs into outputs. Breaking this functionality into stages, you can construct the events that should occur at the stages in between.
 
-### Microservices Framework {#h3-2-microservices-framework}
+### Microservices Framework
 
 [Chronicle Software](https://bit.ly/3RCLXjj "Chronicle Software") has a testing methodology and libraries for behaviour-driven development of event-driven systems. This methodology will be introduced in a following article.
 
 Our [microservice framework](https://bit.ly/3RDT2Ao "microservice framework") supports low latency; it uses restartable, scalable, distributed, highly available processes that are very easy to test and debug.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 We have used Behaviour Driven Development to establish the application's requirements from users, and Event Driven Architecture to automate testing to ensure the application meets those requirements as it is developed and changes are made to add more functionality.
 

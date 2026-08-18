@@ -24,8 +24,8 @@ Today, I'd like to provide some help on how to choose a cache solution. I will o
 * In this post, we will list what features a cache must have and which ones it can optionally provide. Most criteria are general and can be used regardless of the tech stack, while a couple is specific to the JVM.
 * In the second part, I'll list providers and verify their respective capabilities
 
-Why cache? {#h2-0-why-cache}
-----------------------------
+Why cache?
+----------
 
 First, let's bust a common myth. Using a cache is not the sign of a badly-designed system *per se*, though it might be the case. Like in many design decisions, a cache is a trade-off.
 
@@ -46,8 +46,8 @@ From a scientific point of view, wrong data is terrible. From an e-commerce one,
 
 Hence, caching is a trade-off where you accept stale data to have them available/fast.
 
-Mandatory cache features {#h2-1-mandatory-cache-features}
----------------------------------------------------------
+Mandatory cache features
+------------------------
 
 You are probably familiar with the quote, "Don't roll your own cryptography library". It hints that designing such a library may look simple at first glance, but chances are you'll make a significant security mistake if you're not a security expert - and even so. You shouldn't design your own cache either, but for slightly different reasons.
 
@@ -55,13 +55,13 @@ You might think that a cache is just an In-Memory Key-Value Store. It's what a h
 
 As a junior developer, I believed it as well, but I've changed my mind since then. A professional cache provides additional features that a mere hashtable doesn't.
 
-### Size limit {#h3-2-size-limit}
+### Size limit
 
 Let's start with a simple feature.
 
 The longer an application stays up, the bigger its cache will potentially grow. Depending on the exact usage, e.g., if one caches many entries with different keys, it can grow even more. An unbounded cache will compete with your application regarding memory usage, up to the point where no memory will be available anymore. That's something you want to avoid!
 
-### Eviction strategy(ies) {#h3-3-eviction-strategy-ies}
+### Eviction strategy(ies)
 
 When a cache has hit its size limit, which entry do we remove when a new entry arrives? Choosing the entry to remove is known as the **eviction** strategy. A couple of such strategies are pretty widespread:
 
@@ -75,7 +75,7 @@ When a cache has hit its size limit, which entry do we remove when a new entry a
 
 You can find other possible strategies on [Wikipedia](https://en.wikipedia.org/wiki/Cache_replacement_policies).
 
-### Time-To-Live {#h3-4-time-to-live}
+### Time-To-Live
 
 You might know about the quote:
 > There are two hard things in computer science:
@@ -88,12 +88,12 @@ It relates to how long the cache considers an entry valid before it removes it. 
 
 A possible implementation is to add a field to each entry: the timestamp when the entry will expire (current time + ). A thread may occasionally visit entries and remove the expired ones eagerly. Alternatively, the cache may evict the expired entries lazily when it needs more space.
 
-Other criteria {#h2-5-other-criteria}
--------------------------------------
+Other criteria
+--------------
 
 Other criteria are optional but still worthy of consideration. Here they are, in no particular order.
 
-### Configuration {#h3-6-configuration}
+### Configuration
 
 While configuration is not a feature, it impacts the *developer experience*. As such, it should be a part of any analysis regarding the choice of a cache.
 
@@ -101,13 +101,13 @@ Some cache may be able to run out-of-the-box with sensible defaults, but others 
 
 Two options are possible: file-based configuration and programmatic configuration. Of course, a third option is to provide both.
 
-### Integration with cache abstractions {#h3-7-integration-with-cache-abstractions}
+### Integration with cache abstractions
 
 The JVM ecosystem has an official Cache API, known as [JCache](https://github.com/jsr107/jsr107spec), or 107. It's a specification with an API that describes four annotations, *i.e.* , `@CacheResult`, `@CachePut`, `@CacheRemove`, and `@CacheRemoveAll`. Vendors are to implement the specification.
 
 The Spring framework is pretty widespread in the JVM ecosystem. It also provides a caching API. Historically, it predates JCache. While different, the API is very similar to JCache's. Spring offers out-of-the-box integration code for a couple of caches, while a couple of others do provide Spring integration.
 
-### Caching patterns {#h3-8-caching-patterns}
+### Caching patterns
 
 I've described several caching patterns in the [following talk](https://youtu.be/na2HqjBexbU).
 
@@ -121,7 +121,7 @@ Because it's pretty long, here's a summary:
 
 Generally, people start with Cache-Aside, *i.e.*, the application orchestrates the reads/writes between the cache and the source of truth. However, a cache's true power lies in the more advanced patterns.
 
-### Distributed vs. local {#h3-9-distributed-vs-local}
+### Distributed vs. local
 
 Early caches shared the same runtime as the application. Then, architects designed caches that ran in their process. In parallel, you can choose from single-node and distributed caches, caches made out of nodes belonging to the same cluster.
 
@@ -143,14 +143,14 @@ Of course, none of these features are "free". A distributed cache is a distribut
 * Does it work on Kubernetes?
 * etc.
 
-### Non-blocking API {#h3-10-non-blocking-api}
+### Non-blocking API
 
 The goal of a cache is to improve performance, as it's faster to access local in-memory data than data on disk or over the network. If data access takes long, either reads or writes, blocking slows down the whole client code. To solve this issue, caches can provide a non-blocking .
 
 You need to consider several aspects; the most important one is the API used by the cache. For example, `CompletableFuture` requires Java 8. Depending on the stack you're using, you might favor a cache that integrates with RxJava, Project Reactor, Kotlin coroutines, or any combination thereof.
 
-Standard project's health indicators {#h2-11-standard-project-s-health-indicators}
-----------------------------------------------------------------------------------
+Standard project's health indicators
+------------------------------------
 
 Besides all criteria mentioned above, I'd advise you to consider indicators that should be part of every product evaluation:
 
@@ -170,8 +170,8 @@ Besides all criteria mentioned above, I'd advise you to consider indicators that
 * **Support**: what are the support channels? Stackoverflow? Google Groups? Slack? How often do questions get an answer?
 * etc.
 
-Conclusion {#h2-12-conclusion}
-------------------------------
+Conclusion
+----------
 
 In this post, I described several criteria on which to base your choice of cache provider. I'll attempt to list and compare the most common Open Source cache providers in the JVM ecosystem in the next post.
 

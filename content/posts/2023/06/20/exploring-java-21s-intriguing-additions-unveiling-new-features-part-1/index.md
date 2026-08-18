@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction: {#h2-0-introduction}
-----------------------------------
+Introduction:
+-------------
 
 Java 21 is going to introduce several intriguing additions that enhance the language's capabilities.
 
@@ -30,8 +30,8 @@ This article aims to discuss a few notable features that stand out, providing an
 
 <br />
 
-Character Enhancements: {#h2-1-character-enhancements}
-------------------------------------------------------
+Character Enhancements:
+-----------------------
 
 1. `Character.isEmoji(int codePoint)`: This method determines whether a character is considered an emoji based on its Unicode properties defined in Unicode Emoji ([Unicode Emoji Technical Standard #51](https://unicode.org/reports/tr51/#Emoji_Properties_and_Data_Files)). For example, executing `Character.isEmoji(9203)` would return `true` for the character ⏳, which has the code point 9203.
 2. `Character.isEmojiPresentation(int codePoint)`: Similar to `isEmoji()`, this method checks if a character has the Emoji Presentation property. It helps identify characters that display as emojis when rendered.
@@ -50,8 +50,8 @@ You can find more details about these methods in the [Java documentation](https:
 
 <br />
 
-StringBuffer and StringBuilder Improvements: {#h2-2-stringbuffer-and-stringbuilder-improvements}
-------------------------------------------------------------------------------------------------
+StringBuffer and StringBuilder Improvements:
+--------------------------------------------
 
 Java 21 enhances the `StringBuffer` and `StringBuilder` classes with the `repeat()` method, which allows repetitive concatenation of characters or character sequences. The two overloaded versions of `repeat()` are as follows:
 
@@ -73,8 +73,8 @@ The output will be `⏳⏳⏳⏳⏳`, as the code point 9203 (⏳) is repeated f
 
 <br />
 
-String Enhancements: {#h2-3-string-enhancements}
-------------------------------------------------
+String Enhancements:
+--------------------
 
 Java 21 introduces two new methods in the `String` class, namely `indexOf(String str, int beginIndex, int endIndex)` and `indexOf(int ch, int beginIndex, int endIndex)`, which expand the searching capabilities within a specified range of a string.
 
@@ -96,8 +96,8 @@ The output will be: `splits = [boo, :::, and, ::, foo]`, where the string is spl
 
 <br />
 
-Collections Framework Enhancements: {#h2-4-collections-framework-enhancements}
-------------------------------------------------------------------------------
+Collections Framework Enhancements:
+-----------------------------------
 
 Java 21 introduces several new methods in the `Collections` class that enhance the Collections Framework's functionality.
 
@@ -113,8 +113,8 @@ To know more about Sequence Collection, read my news item on infoQ: [Collections
 
 <br />
 
-HashMap and HashSet Improvements: {#h2-5-hashmap-and-hashset-improvements}
---------------------------------------------------------------------------
+HashMap and HashSet Improvements:
+---------------------------------
 
 Java 21 introduces convenient factory methods for creating `HashMap` and `HashSet` instances.
 
@@ -123,8 +123,8 @@ Java 21 introduces convenient factory methods for creating `HashMap` and `HashSe
 
 <br />
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 <br />
 

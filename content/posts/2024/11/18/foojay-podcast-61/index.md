@@ -24,13 +24,13 @@ At Devoxx and JFall, we talked with Georgios Diamantopoulos, Lutske de Leeuw, To
 
 There are many topics to handle, like the impact of AI on how valuable we feel, how COVID-19 impacted careers, how we work in and with remote teams, how to get to know new colleagues and much more. Yes, there is even a sidestep where we compared the Java and .NET communities.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube OYX_X2x3vl8 >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,34 +38,34 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Georgios Diamantopoulos {#h3-3-georgios-diamantopoulos}
+### Georgios Diamantopoulos
 
 * <https://www.linkedin.com/in/georgiosd/>
 * <https://x.com/georgiosd>
 
-### Tom Cools {#h3-4-tom-cools}
+### Tom Cools
 
 * <https://www.linkedin.com/in/tom-cools-17547548/>
 * <https://bsky.app/profile/tcoolsit.bsky.social>
 
-### Lutske de Leeuw {#h3-5-lutske-de-leeuw}
+### Lutske de Leeuw
 
 * <https://www.linkedin.com/in/lutske/>
 
-### Jessica Siewert {#h3-6-jessica-siewert}
+### Jessica Siewert
 
 * <https://www.linkedin.com/in/jesiewert/>
 
-### Rijo Sam {#h3-7-rijo-sam}
+### Rijo Sam
 
 * <https://www.linkedin.com/in/rijosam19/>
 * <https://github.com/Rijosam>
 
-Content {#h2-8-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topic and guests
 

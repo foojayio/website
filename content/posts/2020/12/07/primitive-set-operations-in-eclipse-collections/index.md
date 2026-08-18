@@ -29,7 +29,7 @@ The last section covers the takeaways.
 
 
 
-### Union: What Does This Operation Do? {#h3-0-union-what-does-this-operation-do}
+### Union: What Does This Operation Do?
 
 Method signature: `setA.union(setB)`
 
@@ -115,7 +115,7 @@ public void union()
 
 
 
-### Intersect: What Does This Operation Do? {#h3-1-intersect-what-does-this-operation-do}
+### Intersect: What Does This Operation Do?
 
 Method signature: `setA.intersect(setB)`
 
@@ -156,7 +156,7 @@ Unit tests for intersect covering [scenarios](https://github.com/eclipse/eclipse
 
 
 
-### Difference: What Does This Operation Do? {#h3-2-difference-what-does-this-operation-do}
+### Difference: What Does This Operation Do?
 
 Method signature: `setA.difference(setB)`
 
@@ -188,7 +188,7 @@ Unit tests for difference covering scenarios for equal-sized, unequal-sized, and
 
 
 
-### Takeaways {#h3-3-takeaways}
+### Takeaways
 
 1. **Naming convention.**  Naming is of utmost significance when it comes to code readability. In Eclipse Collections, we have chosen to name these operations as union, intersect and difference to effectively communicate the mathematical set operations.
 2. **Write Unit Tests.**  This point is worth reiterating. I started writing unit tests to confirm my understanding of how these new APIs should behave. Once I had the first implementation ready, the next step was to verify that the unit tests were still passing after adding the API's optimization logic.
@@ -196,4 +196,4 @@ Unit tests for difference covering scenarios for equal-sized, unequal-sized, and
 
 I am a committer to the Eclipse Collections OSS project at Eclipse Foundation. Eclipse Collections is open for contributions.
 
-This article was originally posted [here](https://pratha-sirisha.medium.com/primitive-set-operations-in-eclipse-collections-b126c9121d15?source=friends_link&amp;sk=8c6645ba69f66b01c18796fa21b0163f) by the author.
+This article was originally posted [here](https://pratha-sirisha.medium.com/primitive-set-operations-in-eclipse-collections-b126c9121d15?source=friends_link&sk=8c6645ba69f66b01c18796fa21b0163f) by the author.

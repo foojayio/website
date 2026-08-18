@@ -37,8 +37,8 @@ One of the most significant advantages of Java applications over those developed
 
 This also enables JVM-based applications to frequently outperform natively compiled ones, as the Just-in-Time (JIT) compiler has information about how the application is *actually* being used, and is not making generalized assumptions about how it *might* be used.
 
-Limitations of OpenJDK {#h-limitations-of-openjdk-nbsp}
--------------------------------------------------------
+Limitations of OpenJDK
+----------------------
 
 The drawback to runtime profiling and JIT compilation in traditional JVMs, like vanilla distributions of OpenJDK, is that it leads to a delay in when the application can deliver its peak performance. Frequently used code must be identified, how that code is being used must be profiled, and it must be compiled while the application is running. The time this takes is what is referred to as the *warm-up time* for a Java application.
 
@@ -57,8 +57,8 @@ To achieve this, the application is run in a production environment, allowing fo
 
 The profile contains all the critical information related to JIT compilation, specifically a list of loaded classes, a list of initialized classes, all the profiling data collected by the [JIT compiler](https://www.azul.com/products/components/falcon-jit-compiler/), any deoptimizations that occurred and a copy of the compiled code.
 
-How Azul Platform Prime removes the limits of traditional JVMs {#h-how-azul-platform-prime-removes-the-limits-of-traditional-jvms}
-----------------------------------------------------------------------------------------------------------------------------------
+How Azul Platform Prime removes the limits of traditional JVMs
+--------------------------------------------------------------
 
 When the application is restarted, rather than starting from scratch, the JVM can immediately load and initialize classes in the profile lists. It then compiles the necessary code (if required) or reuses the code from the profile.
 

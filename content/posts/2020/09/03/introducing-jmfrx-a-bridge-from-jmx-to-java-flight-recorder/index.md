@@ -29,8 +29,8 @@ This is useful for a number of reasons:
 
 In this blog post I'm going to explain how to use JmFrX for recording JMX data in your applications, point out some interesting JmFrX implemention details, and lastly will discuss some potential steps for future development of the tool.
 
-Why JmFrX? {#_why_jmfrx}
-------------------------
+Why JmFrX?
+----------
 
 [Java Flight Recorder](https://openjdk.java.net/jeps/328) is a "low-overhead data collection framework for troubleshooting Java applications and the HotSpot JVM". In combination with the JDK Mission Control client application it allows to gain deep insights into the performance characteristics of Java applications.
 
@@ -40,7 +40,7 @@ At the same time, many library authors are not (yet) in a position where they co
 
 JmFrX isn't the first effort that seeks to bridge JMX and JFR; JDK Mission Control project lead [Marcus Hirt](https://twitter.com/hirt/) discusses a similar project in a [blog post](http://hirt.se/blog/?p=689) in 2016. But unlike the implementation described by Marcus in this post, JmFrX is based on the public and supported APIs for defining, configuring and emitting JFR events, as available since OpenJDK 11.
 
-### How To Use JmFrX {#_how_to_use_jmfrx}
+### How To Use JmFrX
 
 In order to use JmFrX, make sure to run OpenJDK 11 or newer. OpenJDK 8 also contains the open-sourced Flight Recorder bits as of release 8u262 ([from July this year](https://blog.adoptopenjdk.net/2020/07/adoptopenjdk-8u262-1108-and-1402-available/)); so this should work, too, but I haven't tested it yet.
 
@@ -112,7 +112,7 @@ When not using JDK Mission Control to initiate recordings, but the [*jcmd*](http
 Now using JmFrX to observe JMX data from for the `java.lang` MBeans like `Runtime` and `OperatingSystem` in JFR isn't too exciting yet, as there's dedicated JFR event types which contain most of that information. But things get more interesting when capturing data from custom MBean types, as e.g. here for the stream threads metrics from a [Kafka Streams](https://kafka.apache.org/26/documentation/streams/) application:
 ![JmFrX Events for Kafka Streams in JDK Mission Control](https://www.morling.dev/images/jmfrx_kafka_streams.png)
 
-### Customizing Event Formats {#_customizing_event_formats}
+### Customizing Event Formats
 
 By default, JmFrX will propagate the raw attribute values from a JMX MBean to the corresponding JFR event. This makes sure that all the information can be retrieved from recordings, but the data format can be a bit unwieldy, e.g. when it comes to data amounts in bytes, or time periods in milli-seconds since epoch.
 
@@ -170,7 +170,7 @@ There's a small (yet hopefully growing) set of event profiles built into JmFrX. 
 
 Also your pull requests for contributing event profiles for common JMX applications to JmFrX itself will be very welcome!
 
-### How It Works {#_how_it_works}
+### How It Works
 
 If you solely want to **use** JmFrX, you can pretty much stop reading this post at this point. But if you're curious about how it is working internally, stay with me for a bit longer: JmFrX uses two lesser known JFR features which also might be interesting for your own application-specific event types, *periodic JFR events* and *dynamic event types*.
 
@@ -272,7 +272,7 @@ public static EventDescriptor getDescriptorFor(String mBeanName) {
 
 The actual implemention is slightly more complex, as it deals with integrating metadata from JmFrX event profiles and more. You can find the complete code in the [`EventProfile`](https://github.com/gunnarmorling/jmfrx/blob/master/src/main/java/dev/morling/jmfrx/internal/profile/EventProfile.java) class.
 
-### Takeaways {#_takeaways}
+### Takeaways
 
 JmFrX is a small utility which allows you to capture JMX data with Java Flight Recorder. It's open-source (Apache License, version 2), you can find the [source code](https://github.com/gunnarmorling/jmfrx/) on GitHub. With the wide usage of JMX for application monitoring in the Java world, JmFrX can help to bring that information into JFR recordings, making it available for offline investigations and analyses.
 

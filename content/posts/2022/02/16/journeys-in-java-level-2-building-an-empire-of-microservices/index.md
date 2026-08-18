@@ -29,8 +29,8 @@ One way to do this is by adding a data domain. Applications often model some sce
 
 While microservices systems vary greatly in size, technologies, etc., data can be found at the center of nearly all of them.
 
-Architecture {#_architecture}
------------------------------
+Architecture
+------------
 
 Our goal is still to create microservices that communicate and pass information without intervention. These blog posts will take us from the beginning to that goal stage in a (hopefully) understandable way. In our last post, we connected two Spring Boot applications communicating via a REST endpoint using the analogy of a bridge connecting two bits of land.
 
@@ -44,8 +44,8 @@ There are all kinds of data sets we could use, but a few things led me to use bo
 
 Now let's add some books! If you are following along from the previous blog post, feel free to start with the [microservices-level1](https://github.com/JMHReif/microservices-level1) version of the code and make modifications as we discuss them below. If you are starting from this blog post, you can either start fresh with today's [level2 code](https://github.com/JMHReif/microservices-level2) or start from the [level1 code](https://github.com/JMHReif/microservices-level1).
 
-Applications - Service 1 {#_applications_service_1}
----------------------------------------------------
+Applications - Service 1
+------------------------
 
 Just as before, I like to work from the backend up (or out). Since we are dealing with data now, we will need some sort of datastore. There are too many options to fathom, but we can limit our choices.
 
@@ -69,7 +69,7 @@ Flapdoodle provides the embedded version of MongoDB, although only scoped for te
 
 Then, we need to include the Spring Data MongoDB starter, which allows us access to all the [goodies Spring Data offers with MongoDB](https://spring.io/projects/spring-data-mongodb) (annotations for entities, domain-specific language for custom queries, and more).
 
-### Service 1 - project code {#_service_1_project_code}
+### Service 1 - project code
 
 I'll keep all the code in the `Service1Application` file, since we don't have too many lines yet. We will start at the bottom of the file with the `Book` entity that represents objects of our book data. As always, there is [full code on Github](https://github.com/JMHReif/microservices-level2/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java).
 
@@ -148,14 +148,14 @@ We log all this to find any errors (`.log()`) and subscribe to put the publisher
 
 We can run the application now, though it only confirms data gets loaded via logging. This completes the backing service. Updating service2 will allow us to access the backend we just set up to ensure our services can still communicate.
 
-Applications - Service 2 {#_applications_service_2}
----------------------------------------------------
+Applications - Service 2
+------------------------
 
 In service2, we don't need to add any dependencies because we are not changing the functionality, only the data being passed. Our frontend service still sends a request and displays a response, and while the format of that data is different (books), the technologies to sending and receiving it isn't.
 
 That means no changes to our `pom.xml` file. On to the application class code!
 
-### Service 2 - project code {#_service_2_project_code}
+### Service 2 - project code
 
 As in service1, we will start from the bottom of the `Service2Application.java` class and work our way up. First, we need to define our `Book` domain class again because we need the frontend application to recognize and map the same objects our backend service uses. However, the code is slightly different from our service1 `Book` class.
 
@@ -196,8 +196,8 @@ On the [eleventh line of controller](https://github.com/JMHReif/microservices-le
 
 None of the code in the `Service2Application` class needs to change, so now it's time to test it out and see if it works!
 
-Put it to the test {#_put_it_to_the_test}
------------------------------------------
+Put it to the test
+------------------
 
 Start each of the applications, either through your IDE or via the command line. Once both are running, open a browser and go to `localhost:8080/hello`. Alternatively, you can run this at the command line with `curl localhost:8080/hello` or (if you have [httpie](https://httpie.io/) tool installed) `http :8080/hello`.
 
@@ -207,8 +207,8 @@ And here is the resulting output!
 
 <br />
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 Congratulations, we have taken the next step to add a data domain (with database) to our microservices project!
 
@@ -218,8 +218,8 @@ Microservices are all about having multiple applications/technologies as service
 
 Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github: [microservices-level2](https://github.com/JMHReif/microservices-level2) repository
 * Documentation: [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb)

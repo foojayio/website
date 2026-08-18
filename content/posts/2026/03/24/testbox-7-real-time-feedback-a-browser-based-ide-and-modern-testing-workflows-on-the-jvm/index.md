@@ -80,7 +80,7 @@ Every setting is also overridable via URL query params, making CI integration cl
 ```
 
 
-### Keyboard Shortcuts {#h3-0-keyboard-shortcuts}
+### Keyboard Shortcuts
 
 |    Shortcut    |               Action               |
 |----------------|------------------------------------|
@@ -106,7 +106,7 @@ testbox generate harness --help
 
 We're actively building a **native desktop app** version of TestBox RUN on the **BoxLang Desktop Runtime** --- connect to any local or remote runner URL and get the same streaming UI without a browser. Watch [testbox.run](http://https://www.testbox.run/ "testbox.run") for early access.
 
-### Streaming Test Execution via SSE {#h3-1-streaming-test-execution-via-sse}
+### Streaming Test Execution via SSE
 
 TestBox 7 ships a brand-new `StreamingRunner` that pushes each spec result to the client the moment it completes, rather than buffering the entire suite.
 
@@ -140,8 +140,8 @@ The BoxLang CLI runner gets native streaming support:
 
 This is especially useful in CI pipelines where live progress matters more than waiting for a buffered final report.
 
-Dry Run \& Spec Discovery {#h2-2-dry-run-spec-discovery}
---------------------------------------------------------
+Dry Run \& Spec Discovery
+-------------------------
 
 Two long-requested features land in TestBox 7: **spec discovery** and **dry run** mode. Audit exactly what would run before committing to a full suite execution.
 
@@ -180,7 +180,7 @@ Need to feed results into another tool?
 
 Dry run respects all the same filters as a normal run: `--labels`, `--bundles`, `--directory`, `--testSuites`, `--testSpecs`.
 
-### BoxLang CLI Runner --- New Power Options {#h3-3-boxlang-cli-runner-new-power-options}
+### BoxLang CLI Runner --- New Power Options
 
 The BoxLang runner gets a substantial set of new flags for fine-grained control over output, failures, and performance analysis.
 
@@ -228,7 +228,7 @@ Combine them for a tight CI workflow:
 
 The BoxLang runner now automatically loads `Application.bx` mappings from your project root before running tests. Custom path mappings, datasources, and settings are available to your specs with zero extra configuration --- bringing the CLI experience much closer to a full web server environment.
 
-### Other Notable Improvements {#h3-4-other-notable-improvements}
+### Other Notable Improvements
 
 #### `ConsoleReporter` --- Hide Skipped Tests (TESTBOX-433)
 
@@ -256,7 +256,7 @@ Direct suite name matching is now reliable at any nesting depth. If a suite's na
 ```
 
 
-### TestBox CLI Updates (v1.8.0) {#h3-5-testbox-cli-updates-v1-8-0}
+### TestBox CLI Updates (v1.8.0)
 
 ![](AAAAAAAAAAAA-700x332.webp)
 
@@ -293,7 +293,7 @@ testbox run --streaming --verbose   # include passing specs in live output
 
 Adobe 2021 is no longer supported. Upgrade to Adobe 2023+ or migrate to BoxLang.
 
-### Upgrade Now {#h3-6-upgrade-now}
+### Upgrade Now
 
 TestBox 7 is available today via CommandBox:
 

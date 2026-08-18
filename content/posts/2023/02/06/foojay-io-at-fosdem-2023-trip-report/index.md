@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-### "What if Simon Ritter's Friends of OpenJDK keynote session at FOSDEM entitled '[After Nearly 30 Years, How Is Java So Popular?](https://fosdem.org/2023/schedule/event/javapopularity/)' ends up being held... in an empty room?" {#h3-0-what-if-simon-ritter-s-friends-of-openjdk-keynote-session-at-fosdem-entitled-after-nearly-30-years-how-is-java-so-popular-ends-up-being-held-in-an-empty-room}
+### "What if Simon Ritter's Friends of OpenJDK keynote session at FOSDEM entitled '[After Nearly 30 Years, How Is Java So Popular?](https://fosdem.org/2023/schedule/event/javapopularity/)' ends up being held... in an empty room?"
 
 In a nutshell, this was my worst case scenario slash biggest 'concern' over the past weeks, narrowly followed by the image of someone taking a pic of Simon in an empty room talking about Java's popularity.
 
@@ -42,7 +42,7 @@ There turned out to be heaps of OpenJDK-related developers, specifically Java si
 
 The program was split more or less into sections, the initial topics focusing mostly around migrating to the latest OpenJDK releases, the second set of topics focusing on security, then followed topics around performance and speed of OpenJDK-based applications, and finally there were several sessions on miscellaneous topics of all kinds, from hardware to compilers to libraries to frameworks to tools to languages. Yes, the Java landscape is very rich, varied, and innovative.
 
-### Stickers {#h3-1-stickers}
+### Stickers
 
 There were also stickers, which hundreds must have received, they were going around the room, and there were none left by the end of it, designed by Gerrit Grunwald...
 
@@ -54,13 +54,13 @@ There were also stickers, which hundreds must have received, they were going aro
 
 On the sticker is the URL to this site, so everyone should be able to get to it and join in with the community.
 
-### Many Thanks To... {#h3-2-many-thanks-to}
+### Many Thanks To...
 
 ...everyone involved: [Simon](https://fosdem.org/2023/schedule/event/javapopularity/) for explaining why and how Java is still so popular; [Johan](https://fosdem.org/2023/schedule/event/upgrade/) for showing how to upgrade to the latest OpenJDK releases; [Fawaz](https://fosdem.org/2023/schedule/event/hazelcast/) for discussing real-time stream processing and Hazelcast; [Marit](https://fosdem.org/2023/schedule/event/dependencies/) for exploring dependency management including vulnerability checking with a range of tools including IntelliJ IDEA; [Tim](https://fosdem.org/2023/schedule/event/migrations/) for introducing us to OpenRewrite for bulk refactoring; [Steve and Mikael](https://fosdem.org/2023/schedule/event/log4shell/) for alerting (and scaring everyone!) about the need to rethink ecosystem security after Log4Shell; [Martin](https://fosdem.org/2023/schedule/event/elasticsearch/) for succinctly and comprehensively outlining Elasticsearch's internals; [Lori and Fatih](https://fosdem.org/2023/schedule/event/supplychain/) on securing software supply chains one open source project at a time.
 
 Also, many thanks to [Nicolas](https://fosdem.org/2023/schedule/event/miss/) for sharing the perspectives on Java of a Kotlin developer; [Frank](https://fosdem.org/2023/schedule/event/pi/) on updating us on the current state of Java and the Raspberry Pi; [Thanos](https://fosdem.org/2023/schedule/event/hardware/) for discussing in detail TornadoVM and its new API; [Rich](https://fosdem.org/2023/schedule/event/jit/) for taking us to just-in-time Java compilation as a service; [Ondro](https://fosdem.org/2023/schedule/event/serverless/) for removing the fear of Java cold starts in serverless; [Volker](https://fosdem.org/2023/schedule/event/firecracer/) on process snapshotting, fast startup via Firecracker and CRaC (and his super helpful paperclip that solved the broken mic issue); [Dmitry](https://fosdem.org/2023/schedule/event/graalvm/) for discussing interesting developments in GraalVM; [Johannes](https://fosdem.org/2023/schedule/event/asyncgetstacktrace_the_improved_version_of_asyncgetcalltrace_jep_435/) for discussing his research related to AsyncGetStackTrace (JEP Candidate 435); [Kevin](https://fosdem.org/2023/schedule/event/quarkus/) for introducing Quarkus; [Mary and Enrico](https://fosdem.org/2023/schedule/event/pulsar/) on modernizing legacy messaging systems with Apache Pulsar; and [Fridtjof](https://fosdem.org/2023/schedule/event/fuzion/) for managing to squeeze the highlights of an entire new OpenJDK language into 20 minutes!
 
-### Next Steps {#h3-3-next-steps}
+### Next Steps
 
 Each link above brings you to a summary of the topic and, once the videos have been edited and uploaded, you should see videos there too, in most cases.
 

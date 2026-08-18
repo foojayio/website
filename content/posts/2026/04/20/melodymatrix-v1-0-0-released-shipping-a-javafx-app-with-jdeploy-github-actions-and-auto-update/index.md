@@ -24,15 +24,15 @@ That changed now: live, on camera, together with Steve Hannah, the creator of jD
 
 {{< youtube _-IL7uHalIU >}}
 
-What Is MelodyMatrix? {#h2-0-what-is-melodymatrix}
---------------------------------------------------
+What Is MelodyMatrix?
+---------------------
 
 [MelodyMatrix](https://melodymatrix.rocks/) is a JavaFX application for musicians. It connects to MIDI devices, lets you practice and record, and has a set of views that help you understand what you are playing. Those views are open source and available on [GitHub](https://github.com/codewriterbv/melodymatrix-app-views). The full app is free, but has some features that are only available with a license. The download packages are published via [GitHub Releases](https://github.com/codewriterbv/melodymatrix-app-releases/releases).
 
 Building it has been a long journey. JavaFX, MIDI, and musical theory in one app, keeping it working across Windows, macOS, and Linux, while also building and distributing it automatically from GitHub Actions. That last part is where jDeploy comes in.
 
-What Is jDeploy? {#h2-1-what-is-jdeploy}
-----------------------------------------
+What Is jDeploy?
+----------------
 
 If you have not heard of jDeploy yet, Steve explains it very well in a few sentences: "*Once you finish building a desktop application, you hit a wall. How do you share it? How does your user install it? And when you update it, how do they get the new version without manually downloading and reinstalling?*"
 
@@ -40,8 +40,8 @@ jDeploy solves all of that. It creates native installers for Windows (`.exe`), m
 
 I did a full interview with Steve earlier where he explains the background of the tool: [JavaFX In Action #12 with Steve Hannah about jDeploy](https://webtechie.be/post/2024-12-12-jfxinaction-steve-hannah-jdeploy/). Worth watching if you want the full picture.
 
-The Video: Preparing and Triggering the First Release Together {#h2-2-the-video-preparing-and-triggering-the-first-release-together}
-------------------------------------------------------------------------------------------------------------------------------------
+The Video: Preparing and Triggering the First Release Together
+--------------------------------------------------------------
 
 This new video is about an hour long and covers the whole process of getting MelodyMatrix ready for V1.0.0. Steve joined me, and we walked through the project configuration together, fixed a few things in the GitHub Actions workflow, discussed best practices around git tags, and then actually triggered the first release build while the camera was still running.
 
@@ -60,20 +60,20 @@ Some of the things we covered:
 
 And around the 57-minute mark, the release build finished on GitHub Actions and **MelodyMatrix V1.0.0 was live**.
 
-Why jDeploy, and Why It Is Free {#h2-3-why-jdeploy-and-why-it-is-free}
-----------------------------------------------------------------------
+Why jDeploy, and Why It Is Free
+-------------------------------
 
 jDeploy is completely free! Steve wants Java desktop apps to be easy to deploy, and any barrier to entry works against that goal. He is working on a paid tier with private repositories and deployment authentication, but the core tool stays free.
 
 For a solo developer building a side project like MelodyMatrix, that matters. I can push a new version by tagging a commit, and within minutes there is a new installer available for every platform. Users get it automatically on the next launch. No manual distribution, no "please re-download the installer" emails.
 
-A Side Note on Lottie4J {#h2-4-a-side-note-on-lottie4j}
--------------------------------------------------------
+A Side Note on Lottie4J
+-----------------------
 
 While waiting for the GitHub Actions build to finish, Steve mentioned he had been experimenting with adding Lottie animation support to the jDeploy splash screen, and we talked about [Lottie4J](https://lottie4j.com/) for a bit. That is the kind of thing that happens in a live session. 🙂 Steve even built a Claude Code skill for creating a custom HTML splash screen with a LottieFiles animation. If you want to try it: [jdeploy-claude on GitHub](https://github.com/shannah/jdeploy-claude) and the [custom launcher splash screen skill](https://github.com/shannah/jdeploy-claude/tree/main/plugins/jdeploy/skills/custom-launcher-splash).
 
-Timeline {#h2-5-timeline}
--------------------------
+Timeline
+--------
 
 * 00:00 Introduction
 * 00:48 Who is Steve Hannah and why he created jDeploy to distribute Java applications with automatic updates
@@ -97,8 +97,8 @@ Timeline {#h2-5-timeline}
 * 01:00:40 jDeploy is free! Steve just wants Java to be easy to deploy
 * 01:02:31 Conclusion
 
-Links {#h2-6-links}
--------------------
+Links
+-----
 
 * [JavaFX In Action #12 with Steve Hannah about jDeploy, to distribute your Java app as a native bundle](https://webtechie.be/post/2024-12-12-jfxinaction-steve-hannah-jdeploy/)
 * Steve Hannah:

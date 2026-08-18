@@ -23,8 +23,8 @@ frozen: false
 
 **Currently, I'm teaching JMS with Spring Boot at the University of Applied Science in Bern, Switzerland. We use [Apache ActiveMQ Artemis](https://activemq.apache.org/components/artemis/) as the JMS message broker. But how can we test our Spring Boot application?**
 
-Testcontainers to the Rescue {#h2-0-testcontainers-to-the-rescue}
------------------------------------------------------------------
+Testcontainers to the Rescue
+----------------------------
 
 Currently, there is no [Testcontainers Java](https://java.testcontainers.org%24/) module for ActiveMQ Artemis. As you can see in the [Testcontainers GitHub repository](https://github.com/testcontainers/testcontainers-java), there is an active activemq branch that may be released soon. But in the meantime, we need another solution.
 
@@ -53,8 +53,8 @@ static void artemisProperties(DynamicPropertyRegistry registry) {
 ```
 
 
-Writing the Test {#h2-1-writing-the-test}
------------------------------------------
+Writing the Test
+----------------
 
 Finally, everything is prepared, and we can write a test that sends and receives a message:
 
@@ -75,8 +75,8 @@ void sendMessage() throws JMSException {
 ```
 
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Testcontainers is a fantastic way to start resources as containers. Even if there is no pre-made container, you can always use GenericContainer to run virtually any container image.
 

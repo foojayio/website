@@ -24,8 +24,8 @@ This means that we can focus more on open standards for governance, open-source 
 
 It is also a great way to include openness to all vendors, a clear flow of intellectual property (IP), well-defined procedures for defining specifications, and a level playing field.
 
-Eclipse Starter for Jakarta EE {#h2-0-eclipse-starter-for-jakarta-ee}
----------------------------------------------------------------------
+Eclipse Starter for Jakarta EE
+------------------------------
 
 To ensure there are more users and participants and that they have an easy path to Jakarta EE, the Eclipse Foundation has started a new project called Eclipse Starter for Jakarta EE as a new open-source initiative.
 
@@ -37,8 +37,8 @@ However, in today's attention economy, making it more palatable and attractive t
 
 It would be helpful if there were one official place where everyone could go to configure what they need, get the project structure as a ZIP file they could download, and start playing with it for Jakarta EE.
 
-User Interface for Eclipse Starter {#h2-1-user-interface-for-eclipse-starter}
------------------------------------------------------------------------------
+User Interface for Eclipse Starter
+----------------------------------
 
 With that requirement in mind, we have started creating a UI project that is slightly better than what we already have.
 
@@ -50,8 +50,8 @@ The backend part of the application is already written with Java and a Servlet. 
 
 Once we build the application through Maven, it makes a WAR file. We can throw the WAR at any web server, such as Tomcat, JBoss, Wildfly, etc. Fortunately, we have a JBoss EAP instance from the Azure App Service that we can use for this application. Thanks to Azure for sponsoring it!
 
-Improving the UI for the Eclipse Starter {#h2-2-improving-the-ui-for-the-eclipse-starter}
------------------------------------------------------------------------------------------
+Improving the UI for the Eclipse Starter
+----------------------------------------
 
 Then we decided to improve the UI. The simple HTML form, in fact, works. But we need validation as well. We have some drop-down input fields that will change in the future. We have new options as well. Plain HTML implies having them in two places: the backend and the frontend. Duplication is wrong, we learned.
 
@@ -61,8 +61,8 @@ There are a lot of JavaScript frameworks that can be used to make fancy user int
 
 Besides, most of the time, we all work on the backend, and the programming language we're good at is Java. Choosing React over Angular or Vue.js isn't as straightforward as choosing Spring over other frameworks. Being familiar with an ecosystem is essential when deciding on a technology.
 
-Jakarta Faces Wins {#h2-3-jakarta-faces-wins}
----------------------------------------------
+Jakarta Faces Wins
+------------------
 
 After consulting with the current contributors, we decided to go with [**Jakarta Faces**](https://projects.eclipse.org/projects/ee4j.starter) (previously called JavaServer Faces, or JSF).
 
@@ -108,8 +108,8 @@ Overall, whether or not JSF is a good choice for a particular project depends on
 
 This article explains why we chose JSF to build the Eclipse starter for Jakarta EE.
 
-**Conclusion:** {#h2-4-conclusion}
-----------------------------------
+**Conclusion:**
+---------------
 
 ***The UI with JSF is still being worked on, so it might take a while to be accessible*** . But you can get access to the source code now: <https://github.com/eclipse-ee4j/starter/tree/master/starter-ui.>
 

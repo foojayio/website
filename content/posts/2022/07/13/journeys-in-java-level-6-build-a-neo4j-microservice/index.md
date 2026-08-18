@@ -44,8 +44,8 @@ In this post, we will create our Neo4j database and get the data loaded, then bu
 
 Let's get into the technical stuff!
 
-Architecture {#_architecture}
------------------------------
+Architecture
+------------
 
 We began this microservices project with minimum functionality explained in the [level 1 blog post](https://jmhreif.com/blog/microservices-level1/). In our last post ([level5](https://jmhreif.com/blog/microservices-level5/)), we used our existing services with book and author data, but set up Docker Compose to manage all the services together using a yaml file and a couple of commands.
 
@@ -59,8 +59,8 @@ The items outside the grey box are what we are adding today - Neo4j database and
 
 Notice that we are not yet incorporating Neo4j and our new service to Docker Compose. I prefer to build things in small increments, so that there is less room for errors. We will add these new pieces to our existing architecture in a later post.
 
-Database-as-a-service: AuraDB {#_database_as_a_service_auradb}
---------------------------------------------------------------
+Database-as-a-service: AuraDB
+-----------------------------
 
 We want to add a new database into our microservices system, and we know we want to use [AuraDB](https://dev.neo4j.com/aura-java) free tier. Signing up and creating the database instance requires a couple steps and a bit of information, such as verifying your email address and waiting for the instance to spin up (takes a few minutes).
 
@@ -68,8 +68,8 @@ Details of that process (with screenshots) are shown in most of my colleague [Mi
 
 Once the instance is running, we can get started with our data load.
 
-Graph data load {#_graph_data_load}
------------------------------------
+Graph data load
+---------------
 
 I could just load reviews to Neo4j, but graphs gain power from relationships between data. So, we can load all the entities for books, authors, and reviews.
 
@@ -79,8 +79,8 @@ My [data Github repository](https://github.com/JMHReif/graph-demo-datasets/tree/
 
 Time to start building our application to pull review data.
 
-Applications - Service 4 {#_applications_service_4}
----------------------------------------------------
+Applications - Service 4
+------------------------
 
 For those following along from previous iterations of this project, our new `service4` will look pretty similar to `service1` and `service3` for books and authors, respectively. For those jumping in with this blog post, we will build a Spring Boot application with a couple of REST endpoints to access the data from the connected database (in this case, Neo4j).
 
@@ -117,7 +117,7 @@ Because we have multiple services, we need the `server.port` property to ensure 
 
 On to the project code!
 
-### Service 4 - project code {#_service_4_project_code}
+### Service 4 - project code
 
 As mentioned above, code for `service4` will look similar to services 1 and 3, with the exception that we are mapping graph data instead of document data. A few changes go into that shift, so let's walk through them starting with the domain class.
 
@@ -190,8 +190,8 @@ Our [final method](https://github.com/JMHReif/microservices-level6/blob/main/ser
 
 Time to test our new service!
 
-Put it to the test {#_put_it_to_the_test}
------------------------------------------
+Put it to the test
+------------------
 
 Since `service4` is currently separate from our other services and using a different database, we will test this individually for now and test everything together once we are ready to incorporate `service4` with the rest in Docker Compose.
 
@@ -209,8 +209,8 @@ And here is the resulting output from authors api results from service4!
 
 ![microservices lvl6 results book](microservices-lvl6-results-book.png)
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 We walked through creating a graph database instance using Neo4j AuraDB free tier and loaded data for books, authors, and reviews.
 
@@ -226,8 +226,8 @@ Another area of exploration is to take further advantage of graph benefits by pu
 
 Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Github: [microservices-level6](https://github.com/JMHReif/microservices-level6) repository
 * Github: [Meta repository for all related content](https://github.com/JMHReif/microservices-java)

@@ -39,8 +39,8 @@ Debugging network communication issues is a critical skill for any front-end dev
 
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-**Network Debugging Powerhouse** {#h2-0-network-debugging-powerhouse}
----------------------------------------------------------------------
+**Network Debugging Powerhouse**
+--------------------------------
 
 Modern browsers come equipped with developer tools that rival standalone IDE debuggers in capability and convenience. Both Chrome and Firefox have robust network monitoring features that allow developers to observe/analyze requests and responses without leaving the browser.
 
@@ -56,8 +56,8 @@ While this post focuses on debugging techniques, it's worth noting that these to
 
 ![](image19-chrome-network-monitor-614x510.png)
 
-**Re-Issuing and Modifying Requests** {#h2-1-re-issuing-and-modifying-requests}
--------------------------------------------------------------------------------
+**Re-Issuing and Modifying Requests**
+-------------------------------------
 
 One of the most powerful debugging features is the ability to re-issue requests. Instead of switching to external tools like cURL or Postman, browsers allow us to modify and resend requests directly.
 
@@ -69,20 +69,20 @@ This lets us quickly test variations of a failing API call to pinpoint issues wi
 
 Chrome provides similar functionality, though its interface for modifying and resending requests is slightly less direct than Firefox's.
 
-### cURL and Postman {#h3-2-curl-and-postman}
+### cURL and Postman
 
 Both browsers let you copy a request as a cURL command via the context menu. This is useful for reproducing issues in the terminal or sharing with back-end developers. I use this frequently as part of creating a reproducible issue.
 
 If you prefer Postman, you can copy request headers and payloads from the browser and paste them into Postman to replicate requests.
 
-**Throttling and Debugging Race Conditions** {#h2-3-throttling-and-debugging-race-conditions}
----------------------------------------------------------------------------------------------
+**Throttling and Debugging Race Conditions**
+--------------------------------------------
 
 Network throttling is a highly underrated feature that can be a game-changer for debugging specific classes of bugs. Both Chrome and Firefox allow developers to simulate various network speeds, from 2G connections to fast 4G.
 
 ![](image21-throttling-700x411.png)
 
-### Why Throttling Matters: {#h3-4-why-throttling-matters}
+### Why Throttling Matters:
 
 Some bugs only surface when requests arrive out of their expected order. Slowing down the network can help replicate and analyze these situations. Typical examples would be race conditions and related issues.
 
@@ -90,7 +90,7 @@ This is also very useful for simulating real-world conditions. Many users may no
 
 I use this frequently when testing loading indicators which disappear too quickly when running locally. Instead of adding sleep code into the JavaScript or server code I can simulate slow-loading assets to verify that loading spinners or placeholders appear correctly.
 
-### How to Use {#h3-5-how-to-use}
+### How to Use
 
 In Chrome we Open Developer Tools → Network tab.
 
@@ -98,12 +98,12 @@ We then use the "No throttling" dropdown to select pre-configured speeds or crea
 
 In Firefox we have similar functionality is available under the Network Monitor.
 
-**Managing State with Storage Tools** {#h2-6-managing-state-with-storage-tools}
--------------------------------------------------------------------------------
+**Managing State with Storage Tools**
+-------------------------------------
 
 Local storage, session storage, and indexedDB often hold data critical to reproducing bugs, especially those tied to specific user states or devices.
 
-### Challenges of State Management {#h3-7-challenges-of-state-management}
+### Challenges of State Management
 
 Even in incognito mode, state can persist if multiple private windows are open simultaneously. Persistence across sessions is a big challenge in these situations.
 
@@ -123,8 +123,8 @@ This functionality has many powerful uses for debugging:
 2. **Share Local State:** Users can export their local storage, cookies, or indexedDB entries, allowing developers to reproduce issues locally.
 3. **Clear Cache Strategically:** Clear only the relevant entries instead of a blanket cache clear, preserving useful state for debugging.
 
-**Analyzing Request and Response Headers** {#h2-8-analyzing-request-and-response-headers}
------------------------------------------------------------------------------------------
+**Analyzing Request and Response Headers**
+------------------------------------------
 
 Request and response headers often hold the key to understanding network issues. We can use the network monitor to inspect:
 
@@ -134,15 +134,15 @@ Request and response headers often hold the key to understanding network issues.
 
 These tools are especially useful when debugging missing headers: Look for required headers like `Content-Type` or `Authorization`. Debugging Authentication: Use the "Copy as cURL" feature to test API calls with modified headers directly in the terminal.
 
-**Debugging in Incognito Mode: Limitations and Best Practices** {#h2-9-debugging-in-incognito-mode-limitations-and-best-practices}
-----------------------------------------------------------------------------------------------------------------------------------
+**Debugging in Incognito Mode: Limitations and Best Practices**
+---------------------------------------------------------------
 
 Incognito mode can help isolate issues by providing a clean slate, however it has some limitations. Multiple incognito windows share the same state, which can lead to unintentional persistence of local data.
 
 I suggest using **storage management tools** to manually clear or modify local data instead of relying solely on incognito mode. Keep only one incognito window open during testing to avoid unintended state sharing.
 
-**Connecting the Front-End to the Database** {#h2-10-connecting-the-front-end-to-the-database}
-----------------------------------------------------------------------------------------------
+**Connecting the Front-End to the Database**
+--------------------------------------------
 
 The front-end is often a transition point between user interaction and back-end data processing. While this post focuses on debugging the network layer, it's important to remember that:
 
@@ -151,8 +151,8 @@ The front-end is often a transition point between user interaction and back-end 
 
 We can use **custom response headers** to include diagnostic information from the back end, such as query execution time or error codes. We can leverage **server logs** in conjunction with front-end debugging to get a complete picture of the issue.
 
-Final Word {#h2-11-final-word}
-------------------------------
+Final Word
+----------
 
 Browser developer tools are indispensable for debugging network communication issues, offering features like request replay, throttling, and storage management that simplify the debugging process. By mastering these tools, front-end developers can efficiently identify and resolve issues, ensuring a smoother user experience.
 

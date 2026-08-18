@@ -31,8 +31,8 @@ We'll have a look at how to view known vulnerabilities in your Maven or Gradle p
 
 There are several ways to view known vulnerabilities for the dependencies to your project.
 
-View vulnerable dependencies in Maven projects {#h2-0-view-vulnerable-dependencies-in-maven-projects}
------------------------------------------------------------------------------------------------------
+View vulnerable dependencies in Maven projects
+----------------------------------------------
 
 In a Maven project, all of your project's dependencies are declared in the pom.xml.
 
@@ -54,8 +54,8 @@ This will open the Vulnerable Dependencies tool window.
 
 [![Vulnerable Dependencies tool window](vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")](vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")
 
-View vulnerable dependencies in Gradle projects {#h2-1-view-vulnerable-dependencies-in-gradle-projects}
--------------------------------------------------------------------------------------------------------
+View vulnerable dependencies in Gradle projects
+-----------------------------------------------
 
 In a Gradle project, all of your project's dependencies are declared in the build.gradle.
 
@@ -69,8 +69,8 @@ We can right-click the build.gradle file and go to **Analyze** \> **Show Vulnera
 
 [![Vulnerable Dependencies tool window](gradle-vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")](gradle-vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")
 
-View vulnerable dependencies in the Vulnerable Dependencies tool window {#h2-2-view-vulnerable-dependencies-in-the-vulnerable-dependencies-tool-window}
--------------------------------------------------------------------------------------------------------------------------------------------------------
+View vulnerable dependencies in the Vulnerable Dependencies tool window
+-----------------------------------------------------------------------
 
 We can also open the Vulnerable Dependencies tool window without having to open the files where our dependencies are declared.
 
@@ -102,8 +102,8 @@ We can use the **Show safe** button to toggle between showing all dependencies o
 
 [![Show safe](show-safe.png "Show safe")](show-safe.png "Show safe")
 
-Remediate dependencies using IntelliJ IDEA Ultimate {#h2-3-remediate-dependencies-using-intellij-idea-ultimate}
----------------------------------------------------------------------------------------------------------------
+Remediate dependencies using IntelliJ IDEA Ultimate
+---------------------------------------------------
 
 Finally, we can remediate these vulnerabilities.
 
@@ -133,14 +133,14 @@ We see that the overview in the Vulnerable Checker tool window is updated, and w
 
 [![Updated](updated-1.png "Updated")](updated-1.png "Updated")
 
-Summary and Shortcuts {#h2-4-summary-and-shortcuts}
----------------------------------------------------
+Summary and Shortcuts
+---------------------
 
 As we have seen, the [Package Checker plugin](https://plugins.jetbrains.com/plugin/18337-package-checker) bundled with [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) offers several different ways in which we can view vulnerable dependencies in our project inside IntelliJ IDEA Ultimate, get more information about these vulnerabilities, and remediate them.
 
 This plugin can help keep your projects safe and secure right inside your IDE!
 
-### IntelliJ IDEA Shortcuts Used {#h3-5-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -150,7 +150,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Context Actions                                                                                                        | **⌥⏎**         | **Alt+Enter**            |
 | [Load Maven Changes](https://www.jetbrains.com/help/idea/delegate-build-and-run-actions-to-maven.html?#maven_reimport) | **⌘⇧I**        | **Ctrl+Shift+O**         |
 
-### Further reading and viewing {#h3-6-further-reading-and-viewing}
+### Further reading and viewing
 
 * [(video) JetBrains - IntelliJ IDEA Ultimate: Package Checker](https://www.youtube.com/watch?v=RWtN4WNQsX4)
 * [(blog) JetBrains - Ensure Greater Software Security With Package Analysis by Checkmarx in IntelliJ IDEA](https://blog.jetbrains.com/idea/2022/04/ensure-greater-software-security-with-package-analysis-by-checkmarx-in-intellij-idea/)

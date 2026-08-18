@@ -28,8 +28,8 @@ We also know that immutable objects are easier to maintain, lead to fewer errors
 
 In this article, I will talk about two different approaches to creating objects: Builders and Withers, typically used in the context of immutable objects, along with a new type of immutable object in Java: Records.
 
-JavaBean pattern {#h2-0-javabean-pattern}
------------------------------------------
+JavaBean pattern
+----------------
 
 The usual way of defining classes in Java follows the [JavaBean pattern](https://en.wikipedia.org/wiki/JavaBeans "JavaBean pattern"). This involves using a default constructor with no arguments, and accessors and mutators for properties.
 
@@ -62,8 +62,8 @@ person.setName("Antonio");
 
 This approach implies that the state of the object can be "unsafe" as we could create an instance of Person without specifying any mandatory and key values. It even allows mutating the object during its lifetime, potentially making the system [less safe](https://blogs.oracle.com/javamagazine/post/java-immutable-objects-strings-date-time-records "less safe"), especially with multithreaded approaches. [Immutability brings a lot of benefits](https://dzone.com/articles/java-and-immutability-avoid "Immutability brings a lot of benefits").
 
-The path to immutability and a safe state {#h2-1-the-path-to-immutability-and-a-safe-state}
--------------------------------------------------------------------------------------------
+The path to immutability and a safe state
+-----------------------------------------
 
 So, the next step in order to fix this issue would be to create a constructor with the mandatory and key properties, and not expose mutators (setters) for them.
 
@@ -122,8 +122,8 @@ public Person(String name, int age, String id, String phoneNumber) {...}
 ```
 
 
-The Builder approach {#h2-2-the-builder-approach}
--------------------------------------------------
+The Builder approach
+--------------------
 
 To fix this we can use Builders, which will help with readability and also on future changes making it easier to add the new properties.
 
@@ -218,8 +218,8 @@ Person person = Person.builder().name("Antonio").socialNumber(2023452).build();
 ```
 
 
-The Wither approach {#h2-3-the-wither-approach}
------------------------------------------------
+The Wither approach
+-------------------
 
 Another approach to having a fluent API and immutability is the usage of "withers", or with\* methods, that create a new instance on every property change.
 
@@ -282,8 +282,8 @@ person.withName(“John”).withAge(50)
 
 Those objects are not used in the end and we will need to wait for the garbage collector to remove them. This can impact performance in systems with high object creation rates.
 
-Records {#h2-4-records}
------------------------
+Records
+-------
 
 Finally, the language itself, since Java 16, provides a struct definition called [Records](https://docs.oracle.com/en/java/javase/16/language/records.html "Records"), which is focused on immutability, mainly to store data values, reduce boilerplate code, and increase readability. With Records, we can be sure our objects are immutable as they don't provide mutators, only accessors, and fields are final.
 
@@ -319,8 +319,8 @@ Car car2 = car.withModel("Cordoba");
 
 Despite these issues, Records are a great solution for representing data with immutable state, while also reducing the boilerplate code in order to define the structures.
 
-Conclusions {#h2-5-conclusions}
--------------------------------
+Conclusions
+-----------
 
 **Immutability** is a concept that will [provide many benefits](https://supakon-k.medium.com/the-advantages-of-using-immutable-objects-in-java-e32f6d326738 "provide many benefits") to our code, like predictability, easy testing, thread safety, and others that will impact our code's intentionality, consistency, adaptability, and responsibility.
 

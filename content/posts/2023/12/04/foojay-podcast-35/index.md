@@ -22,13 +22,13 @@ Once a month in this podcast, we talk about the history of a Java User Group and
 
 Today, we are traveling to Dublin to learn more about its Java community!
 
-Video edit {#h2-0-video-edit}
------------------------------
+Video edit
+----------
 
 {{< youtube LH7TUruz28Y >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -36,8 +36,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Links {#h2-2-links}
--------------------
+Links
+-----
 
 * <https://dubjug.org/>
 * <https://www.linkedin.com/groups/8513472/>
@@ -49,24 +49,24 @@ Links {#h2-2-links}
 
 <br />
 
-Guest: Barry Alistair {#h2-3-guest-barry-alistair}
---------------------------------------------------
+Guest: Barry Alistair
+---------------------
 
 * <https://twitter.com/BarryAlistair>
 * <https://www.linkedin.com/in/barryalistair/>
 
 <br />
 
-Podcast Host: Frank Delporte {#h2-4-podcast-host-frank-delporte}
-----------------------------------------------------------------
+Podcast Host: Frank Delporte
+----------------------------
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
 <br />
 
-Content {#h2-5-content}
------------------------
+Content
+-------
 
 00:00 Introduction  
 

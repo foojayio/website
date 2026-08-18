@@ -23,7 +23,7 @@ frozen: false
 
 *Note! This post is part of a three-part series. If you're not sure it's worth remediating flaky tests, read [Part 1: Seven Reasons You Should Not Ignore Flaky Tests](https://foojay.io/today/seven-reasons-you-should-not-ignore-flaky-tests/). Read Part 2 to understand the keys to identifying and tracking flaky tests, called 5 Ways to Use Gradle Enterprise to Identify and Manage Flaky Tests. Now, let's explore my multi-faceted approach to fixing flaky tests.*
 
-### 1. Deploy best practice strategies {#h3-0-1-deploy-best-practice-strategies}
+### 1. Deploy best practice strategies
 
 Once you have identified which of your tests are flaky, you can use one of these strategies to mitigate the problems they cause.
 
@@ -39,7 +39,7 @@ Once you have identified which of your tests are flaky, you can use one of these
 
 You can also read about how the [Gradle Build Tool team handles flaky tests](https://blog.gradle.org/how-we-handle-flaky-tests-in-gradle "Gradle Build Tool team handles flaky tests").
 
-### 2. Align your process \& resources {#h3-1-2-align-your-process-resources}
+### 2. Align your process \& resources
 
 If you don't want to rely on a few individuals with the discipline and determination to fix your flaky tests, you'll need to implement some process changes to make sure time is allocated to fixing the problems.
 
@@ -47,7 +47,7 @@ When a developer commits a change that breaks a test, the developer or developer
 
 If your application already has a number of flaky tests that aren't owned by a developer, you may want to schedule regular [Flaky Test Days](https://gradle.com/blog/do-you-regularly-schedule-flaky-test-days/). These dedicated sessions not only aim to decrease the number of flaky tests in your test suite, they also emphasize the importance of addressing test flakiness, and foster a culture of collective responsibility toward improving test reliability.
 
-### 3. Understand the causes of flaky tests {#h3-2-3-understand-the-causes-of-flaky-tests}
+### 3. Understand the causes of flaky tests
 
 The causes of test intermittency are varied and nuanced, as discussed by Dave Farley in his video, [5 Reasons Automated Tests Fail](https://youtu.be/vHBzZHE4tJ0), and collated in a research paper on [the impact and causes of intermittent tests](https://mcminn.info/publications/c72.pdf). Each test may be a unique case, but you may also find that one cause of intermittency affects multiple tests.
 
@@ -83,7 +83,7 @@ Even when the data is isolated from other tests, you may still run into unpredic
 
 For example, test environments can sometimes trigger genuine race conditions in concurrent code or uncover bugs in third-party libraries. These can sometimes be the most difficult issues to identify but are arguably the most important reason to address flaky tests.
 
-### Conclusion \& next steps {#h3-3-conclusion-next-steps}
+### Conclusion \& next steps
 
 Efficient management of flaky tests is a combination of strategic actions, process changes, and a deep understanding of root causes.
 

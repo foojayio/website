@@ -24,8 +24,8 @@ frozen: false
 
 Many companies use Microsoft 365, so letting users log in with their Microsoft account is a good choice. This blog post shows how to secure your Vaadin applications using Microsoft Entra for authentication and authorization and explains how Karibu Testing must be configured.
 
-Step 1: Create an Application in Entra {#h2-0-step-1-create-an-application-in-entra}
-------------------------------------------------------------------------------------
+Step 1: Create an Application in Entra
+--------------------------------------
 
 The first step is to create an application, configure roles, assign users, and set the redirect URI.
 
@@ -34,7 +34,7 @@ To create an application, log in to http://entra.microsoft.com and select "Appli
 Set a name and add a Redirect URI like in the screenshot. Choose Web and set `http://localhost:8080/login/oauth2/code/` as the URI. As you can see, this URI is application-environment-specific, and you will need to create an app registration per stage (dev, test, production, etc.).
 ![](image-9-1536x1000-1-1024x667.png)
 
-### Create App Role {#h3-1-create-app-role}
+### Create App Role
 
 We want to use role-based security in our application. To create an app role, go to "App registrations" and select the application. Click on "App roles":
 ![](image-7-1536x705-1-1024x470.png)
@@ -42,12 +42,12 @@ We want to use role-based security in our application. To create an app role, go
 And create the app role. In this case, we will create an Administrator account. The value will be what you will get in the JWT token. I prefer to have the role names in uppercase.
 ![](image-2-768x618-1.png)
 
-### Assign Users {#h3-2-assign-users}
+### Assign Users
 
 Once you've created your application role, return to "Enterprise applications" and click "Users and groups." You can assign existing users or groups to the application roles:
 ![](image-3-1024x483.png)
 
-### Create Client Secret {#h3-3-create-client-secret}
+### Create Client Secret
 
 To be able to connect to Entra from the application, we must create a client secret that allows our application to connect to Entra:
 ![](image-4-1536x656-1-1024x437.png)
@@ -58,12 +58,12 @@ Make sure to copy the value of the client secret; we'll need that in the applica
 We also need to copy the ClientId and the TenantId. The ClientId (Application (client) ID) can be found on the App registration overview page (below), and the TenantId is located on the Entra overview page.
 ![](image-6-1024x380.png)
 
-Step 2: Configure OAuth2 with Entra in our Application {#h2-4-step-2-configure-oauth2-with-entra-in-our-application}
---------------------------------------------------------------------------------------------------------------------
+Step 2: Configure OAuth2 with Entra in our Application
+------------------------------------------------------
 
 As we have a Vaadin application, we will use the [OAuth 2.0 authorization code grant flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow).
 
-### Add Dependencies {#h3-5-add-dependencies}
+### Add Dependencies
 
 First, add the Microsoft starter dependencies and the OAuth2 client starter. Don't be confused about the dependency's name. Entra is the new name for Azure Active Directory (Azure AD).
 
@@ -79,7 +79,7 @@ First, add the Microsoft starter dependencies and the OAuth2 client starter. Don
 ```
 
 
-### Configure the Application {#h3-6-configure-the-application}
+### Configure the Application
 
 There are four properties to set. For simplicity, the snippet below shows them as Java properties. But you must be careful with secret values.  
 **Please don't put them into application.properties or commit them to your Git repository because they are secret values you don't want to share with the public.**   
@@ -94,7 +94,7 @@ spring.cloud.azure.active-directory.credential.client-secret=<clientSecret>
 ```
 
 
-### Enable Entra Security {#h3-7-enable-entra-security}
+### Enable Entra Security
 
 To integrate Entra with Spring Security, we need to adjust the security configuration. We extend from VaadinWebSecurity because we have a Vaadin application.   
 
@@ -121,7 +121,7 @@ public class SecurityConfiguration extends VaadinWebSecurity {
 ```
 
 
-### Configure Role Prefix {#h3-8-configure-role-prefix}
+### Configure Role Prefix
 
 The security configuration will prefix the roles with APPROLE_. To use the role name that we set in Microsoft Entra, we must configure the default prefix because ROLE_ is the prefix by default.
 
@@ -136,7 +136,7 @@ public class RolePrefixConfiguration {
 ```
 
 
-### Roles in Action {#h3-9-roles-in-action}
+### Roles in Action
 
 The setup is completed, and we can use role-based security in the Vaadin application.   
 
@@ -149,8 +149,8 @@ public class EventRegistrationView extends Div implements HasUrlParameter<Long>,
 ```
 
 
-Step 3: Setup Karibu Testing {#h2-10-step-3-setup-karibu-testing}
------------------------------------------------------------------
+Step 3: Setup Karibu Testing
+----------------------------
 
 To use [Browserless Testing of Vaadin Applications with Karibu Testing](https://martinelli.ch/browserless-testing-of-vaadin-applications-with-karibu-testing/), we must fake the Entra setup's security context.
 
@@ -236,8 +236,8 @@ public abstract class KaribuTest {
 ```
 
 
-Summary {#h2-11-summary}
-------------------------
+Summary
+-------
 
 Thanks to the spring-cloud-azure-starter-active-directory, the setup is straightforward. The Karibu Testing setup was more difficult, but thanks to Martin Mysny's help, I was able to make it work.
 

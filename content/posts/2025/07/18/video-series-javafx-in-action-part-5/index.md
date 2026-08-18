@@ -27,8 +27,8 @@ This is the next part in the series of "JavaFX in Action" interviews. Are you wo
 * [December '24: Özkan Pakdil, Clément de Tastes, Almas Baim, Steve Hannah, Jago de Vreede](https://foojay.io/today/video-series-javafx-in-action-part-3/)
 * [March '25: Mike Hearn, Sven Reimers, Chris Newland](https://foojay.io/today/video-series-javafx-in-action-part-4/)
 
-Cormac Redmond: KafkIO, the Kafka UI for Engineers and Admins {#h2-0-cormac-redmond-kafkio-the-kafka-ui-for-engineers-and-admins}
----------------------------------------------------------------------------------------------------------------------------------
+Cormac Redmond: KafkIO, the Kafka UI for Engineers and Admins
+-------------------------------------------------------------
 
 [Cormac Redmond](https://www.linkedin.com/in/cormacredmond/) is an "All-things Java / Spring / MicroServices" expert who has been computing and programming from a young age. He has 20 years of professional experience spanning several industries, building everything from complex distributed systems to bespoke intranets and mobile apps. He enjoys fully and deeply understanding any domain or technology and is happiest when working within cultures that value the importance of building clean, elegant, testable, self-documenting systems while adopting forward-thinking practices and techniques.
 
@@ -40,8 +40,8 @@ The UI is created with JavaFX and uses different libraries, which are all styled
 
 More info in this [blog post](https://webtechie.be/post/2025-02-27-jfxinaction-cormac-redmond-kafkio/).
 
-Brian Schlining: Annotating the Deep-Sea Wildlife {#h2-1-brian-schlining-annotating-the-deep-sea-wildlife}
-----------------------------------------------------------------------------------------------------------
+Brian Schlining: Annotating the Deep-Sea Wildlife
+-------------------------------------------------
 
 [Brian Schlining](https://www.linkedin.com/in/brianschlining/) is a Software Engineer at the [Monterey Bay Aquarium Research Institute (MBARI)](https://www.mbari.org/), specializing in designing software systems to support scientific research. This includes data systems design, database development, user interface development (desktop and web applications), GIS, image and video analysis, micro-services, and analysis of large data sets.
 
@@ -53,8 +53,8 @@ Within [MBARI, a full system of micro-services](https://github.com/mbari-media-m
 
 More info in this [blog post](https://webtechie.be/post/2025-03-20-jfxinaction-brian-schlining-annotating-deep-sea/).
 
-Gerrit Grunwald: Creator of Many Amazing JavaFX Libraries {#h2-2-gerrit-grunwald-creator-of-many-amazing-javafx-libraries}
---------------------------------------------------------------------------------------------------------------------------
+Gerrit Grunwald: Creator of Many Amazing JavaFX Libraries
+---------------------------------------------------------
 
 [Gerrit Grunwald](https://www.linkedin.com/in/gerritgrunwald/) loves coding for around 40 years already. He is interested in desktop, mobile and IoT projects based on all possible technologies. But above all, he loves all-things-Java. He is the founder and leader of the Java User Group Münster (Germany), JavaOne rockstar and Java Champion. As Developer Advocate at Azul, he speaks a lot at conferences and user groups all around the world.
 
@@ -72,14 +72,14 @@ In the video, we discuss some of the libraries Gerrit has created, but there are
 
 More info in this [blog post](https://webtechie.be/post/2025-04-10-jfxinaction-gerrit-grunwald-amazing-javafx-libraries/).
 
-Dirk Lemmermann: Creator of JavaFX Libraries and Applications {#h2-3-dirk-lemmermann-creator-of-javafx-libraries-and-applications}
-----------------------------------------------------------------------------------------------------------------------------------
+Dirk Lemmermann: Creator of JavaFX Libraries and Applications
+-------------------------------------------------------------
 
 [Dirk Lemmermann](https://www.linkedin.com/in/dlemmermann/) has over 40 years of programming and 30 years of professional experience. He is a seasoned and passionate software engineer and leader with a master's degree in computer science and multiple honors and awards for his work in UI development and design, tool development, and scheduling applications.
 
 As the CEO of Senapt and DLSC, he oversees the development of CRM systems for energy suppliers in England and Java and JavaFX consulting and software development for various domains and applications. His mission is to deliver high-quality, innovative, and user-friendly solutions that meet the needs and expectations of his clients and partners.
 
-### JavaFX Libraries {#h3-4-javafx-libraries}
+### JavaFX Libraries
 
 Dirk has created, or contributed to, a lot of libraries, and most of them are available as open source libraries!
 
@@ -90,7 +90,7 @@ Dirk has created, or contributed to, a lot of libraries, and most of them are av
 * [CalendarFX](https://www.jfx-central.com/libraries/calendarfx)
 * [GitHub repositories with more work by Dirk](https://github.com/orgs/dlsc-software-consulting-gmbh/repositories)
 
-### JFX Central {#h3-5-jfx-central}
+### JFX Central
 
 JFX Central, the home to anything JavaFX related, is a website, desktop application, and mobile app, all based on the same code base. Both the tool itself, as the data it uses, are open source projects.
 
@@ -98,7 +98,7 @@ JFX Central, the home to anything JavaFX related, is a website, desktop applicat
 * [JFX Central, sources](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2)
 * [JFX Central, data sources](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data)
 
-### [](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-home.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-showcases.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-videos.png)Senapt Applications {#h3-6-senapt-applications}
+### [](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-home.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-showcases.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-videos.png)Senapt Applications
 
 [Senapt](https://www.senapt.co.uk/) provides "Energy-as-a-Service Platform", by providing an energy transactions platform for energy sellers and energy buyers in the UK. As the energy landscape has continued to change, retail electricity providers have been looking for strategies to meet the ever-growing, ever-changing demands for their customers. Senapt's products have been designed to help energy suppliers to facilitate this changing relationship and allow them to seize the opportunities of the smart grid.
 

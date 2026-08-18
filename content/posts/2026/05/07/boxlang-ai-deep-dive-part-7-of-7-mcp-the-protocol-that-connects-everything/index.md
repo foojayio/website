@@ -33,8 +33,8 @@ The **Model Context Protocol (MCP)** is the industry's answer --- a standardized
 
 **BoxLang AI** is a first-class MCP citizen. You can **consume** any MCP server from your agents with zero configuration. You can **build** production-grade MCP servers that expose your BoxLang functions to any MCP client in the ecosystem. And thanks to the `MCPTool` class from Part 2, the two sides connect seamlessly inside the same agent.
 
-🔌 Consuming MCP Servers --- The Client Side {#h2-0-consuming-mcp-servers-the-client-side}
-------------------------------------------------------------------------------------------
+🔌 Consuming MCP Servers --- The Client Side
+--------------------------------------------
 
 The `MCP()` BIF creates an `MCPClient` connected to any MCP server. It handles JSON-RPC, tool discovery, invocation, and response normalization:
 
@@ -64,7 +64,7 @@ prompt  = mcpClient.getPrompt( "code-review", { language: "BoxLang" } )
 ```
 
 
-### Seeding Agents with MCP Servers {#h3-1-seeding-agents-with-mcp-servers}
+### Seeding Agents with MCP Servers
 
 The most powerful use of MCP in BoxLang AI is seeding agents directly. When you call `withMCPServer()`, every tool the server exposes is automatically discovered and registered as an `MCPTool` instance --- the agent can use them exactly like any native tool:
 
@@ -95,7 +95,7 @@ println( agent.listMCPServers() )
 
 The agent's system message is automatically updated with the MCP server list so the LLM knows which tools came from which server --- critical for complex multi-server setups where tool names might overlap.
 
-### How `MCPTool` Works {#h3-2-how-mcptool-works}
+### How `MCPTool` Works
 
 Each tool discovered from an `MCP` server becomes an `MCPTool` instance that extends BaseTool. This means it gets the full lifecycle --- `beforeAIToolExecute`/`afterAIToolExecute events`, result serialization, middleware interception --- exactly like any native tool.
 
@@ -125,12 +125,12 @@ public any function doInvoke( required struct args, AiChatRequest chatRequest ) 
 
 The schema conversion is also automatic --- `generateSchema()` wraps the MCP `inputSchema` (already in OpenAI-compatible format) in the standard function wrapper. LLM providers see MCP tools identically to native tools.
 
-🖥️ Building MCP Servers --- The Server Side {#h2-3-building-mcp-servers-the-server-side}
------------------------------------------------------------------------------------------
+🖥️ Building MCP Servers --- The Server Side
+--------------------------------------------
 
 BoxLang AI lets you expose your own functions as an MCP server accessible by any MCP client --- Claude Desktop, other BoxLang agents, Python scripts, anything that speaks the protocol.
 
-### Simple Server {#h3-4-simple-server}
+### Simple Server
 
 ```java
 import ProcbxModules.bxai.models.mcp.MCPRequestProcessor
@@ -163,7 +163,7 @@ MCPRequestProcessor::processStdio()
 ```
 
 
-### HTTP Transport for Web {#h3-5-http-transport-for-web}
+### HTTP Transport for Web
 
 ```java
 import ProcbxModules.bxai.models.mcp.MCPRequestProcessor
@@ -195,7 +195,7 @@ MCPRequestProcessor::processHttp()
 ```
 
 
-### Web Application Integration {#h3-6-web-application-integration}
+### Web Application Integration
 
 ```java
 // Application.bx
@@ -215,12 +215,12 @@ class {
 ```
 
 
-🔒 Enterprise Security Features {#h2-7-enterprise-security-features}
---------------------------------------------------------------------
+🔒 Enterprise Security Features
+-------------------------------
 
 MCP servers handling sensitive data need real security. BoxLang AI ships a comprehensive security layer covering CORS, body limits, API key validation, and automatic security headers.
 
-### CORS {#h3-8-cors}
+### CORS
 
 ```java
 myServer
@@ -231,7 +231,7 @@ myServer
 ```
 
 
-### Request Body Size Limits {#h3-9-request-body-size-limits}
+### Request Body Size Limits
 
 ```java
 // Protect against payload DoS attacks
@@ -241,7 +241,7 @@ myServer.withBodyLimit( 1024 * 1024 )  // 1MB max request body
 
 Returns HTTP 413 when exceeded.
 
-### API Key Validation {#h3-10-api-key-validation}
+### API Key Validation
 
 ```java
 // Custom validation callback — full control
@@ -254,7 +254,7 @@ myServer.withApiKeyProvider( ( apiKey, requestData ) => {
 
 Returns HTTP 401 for invalid keys.
 
-### Automatic Security Headers {#h3-11-automatic-security-headers}
+### Automatic Security Headers
 
 Every response from a BoxLang MCP server includes industry-standard security headers automatically --- no configuration needed:
 
@@ -269,7 +269,7 @@ Permissions-Policy: geolocation=(), microphone=(), camera=()
 ```
 
 
-### Security Processing Order {#h3-12-security-processing-order}
+### Security Processing Order
 
 When all features are active, requests are processed in this order:
 
@@ -296,8 +296,8 @@ myServer
 ```
 
 
-📊 Statistics and Monitoring {#h2-13-statistics-and-monitoring}
----------------------------------------------------------------
+📊 Statistics and Monitoring
+----------------------------
 
 The MCP server tracks per-tool invocation counts and error rates:
 
@@ -318,8 +318,8 @@ println( stats )
 ```
 
 
-📢 MCP Events {#h2-14-mcp-events}
----------------------------------
+📢 MCP Events
+-------------
 
 The MCP system fires BoxLang events you can intercept for logging, authentication, and monitoring:
 
@@ -343,8 +343,8 @@ bxEvents.listen( "onMCPRequest", ( data ) => {
 ```
 
 
-🚀 A Complete Real-World Example {#h2-15-a-complete-real-world-example}
------------------------------------------------------------------------
+🚀 A Complete Real-World Example
+--------------------------------
 
 Here's the full picture: a BoxLang application that both exposes internal tools via MCP and consumes external MCP servers through its AI agents.
 
@@ -406,8 +406,8 @@ response = supportAgent.run(
 
 The agent uses get_order from the internal MCP server, searches the KB MCP for damage policies, checks customer history via hybrid memory, then calls update_order --- which triggers the HumanInTheLoopMiddleware and suspends for manager approval. The whole thing is logged, guarded, and fully introspectable.
 
-🎯 Wrapping Up the Full Series {#h2-16-wrapping-up-the-full-series}
--------------------------------------------------------------------
+🎯 Wrapping Up the Full Series
+------------------------------
 
 Seven posts. One framework. The complete picture.
 
@@ -415,8 +415,8 @@ BoxLang AI 3.0 isn't a wrapper around OpenAI. It's a complete AI application pla
 
 And it all runs on the JVM, ships with BoxLang's full ecosystem, and takes a single install [\[email protected\]](/cdn-cgi/l/email-protection) to get started.
 
-Get Started {#h2-17-get-started}
---------------------------------
+Get Started
+-----------
 
 ```java
 # CommandBox / Web applications

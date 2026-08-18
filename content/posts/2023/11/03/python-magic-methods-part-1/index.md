@@ -28,12 +28,12 @@ Conversely, Python was not initially built on OOP principles and is dynamically 
 
 The documentation is pretty exhaustive, but it needs examples for beginners. The goal of this post is to list most of these methods and provide these examples so that I can remember them. I've divided it into two parts to make it more digestible.
 
-Lifecycle methods {#h2-0-lifecycle-methods}
--------------------------------------------
+Lifecycle methods
+-----------------
 
 Methods in this section are related to the lifecycle of new objects.
 
-### `object.__new__(cls[, ...])` {#h3-1-object-new-cls}
+### `object.__new__(cls[, ...])`
 
 The `__new()__` method is static, though it doesn't need to be explicitly marked as such. The method **must** return a new object instance of type `cls`; then, the runtime will call the `__init__()` (see below) method on the new instance.
 
@@ -53,7 +53,7 @@ print(FooStr('Hello'))                                 #3
 2. Create a new `str` instance, whose value is the value passed to the constructor, suffixed with `Foo`
 3. Print `HelloFoo`
 
-### `object.__init__(self[, ...])` {#h3-2-object-init-self}
+### `object.__init__(self[, ...])`
 
 `__init__()` is the regular initialization method, which you probably know if you've read any basic Python tutorial. The most significant difference with Java is that the superclass `__init__()` method has no implicit calling. One can only wonder how many bugs were introduced because somebody forgot to call the superclass method.
 
@@ -76,12 +76,12 @@ print(f'a={foo.a}, b={foo.b}, c={foo.c}')              #3
 2. Initialize the instance
 3. Print `a=one, b=two, c=three`
 
-### `object.__del__(self)` {#h3-3-object-del-self}
+### `object.__del__(self)`
 
 If `__init()__` is akin to an *initializer* , then `__del__()` is it's *finalizer* . As in Java, finalizers are unreliable, *e.g.*, there's no guarantee that the interpreter finalizes instances when it shuts down.
 
-Representation methods {#h2-4-representation-methods}
------------------------------------------------------
+Representation methods
+----------------------
 
 Python offers two main ways to represent objects: one "official" for debugging purposes and the other "informal". You can use the former to reconstruct the object.
 
@@ -138,8 +138,8 @@ print(bytes(foo))                                     #3
 2. Delegage to the [dumps()](https://docs.python.org/3/library/pickle.html#pickle.dumps) method
 3. Print the byte representation of `foo`
 
-Comparison methods {#h2-5-comparison-methods}
----------------------------------------------
+Comparison methods
+------------------
 
 Let's start with similarities with Java: Python has two methods `object.__eq__(self, other)` and `object.__hash__(self)` that work in the same way. If you define `__eq__()` for a class, you **must** define `__hash__()` as well. Contrary to Java, if you don't define the former, you *must not* define the latter.
 
@@ -219,8 +219,8 @@ print(foo2 <= foo2)                                   #5
 
 Note that comparison methods may return something other than a boolean. In this case, Python will transform the value in a boolean using the `bool()` function. I advise you not to use this implicit conversion.
 
-Attribute access methods {#h2-6-attribute-access-methods}
----------------------------------------------------------
+Attribute access methods
+------------------------
 
 As seen above, Python allows accessing an object's attributes via the dot notation. If the attribute doesn't exist, Python complains: `'Foo' object has no attribute 'a'`. However, it's possible to define *synthetic* accessors on a class, via the `object.__getattr__(self, name)` and `object.__setattr__(self, name, value)` methods. The rule is that they are fallbacks: if the attribute doesn't exist, Python calls the method.
 
@@ -298,8 +298,8 @@ print(dir(foo))                                       #2
 1. Implement the method
 2. Display `['a', 'foo']`; Python sorts the list. Note that there's no `foo` member, though.
 
-Descriptors {#h2-7-descriptors}
--------------------------------
+Descriptors
+-----------
 
 Python descriptors are accessors delegates, akin to Kotlin's [delegated properties](https://kotlinlang.org/docs/delegated-properties.html). The idea is to factor a behavior somewhere so other classes can reuse it. In this way, they are the direct consequence of favoring composition over inheritance. They are available for getters, setters, and finalizers, respectively:
 
@@ -347,8 +347,8 @@ print(foo2.lazy)                                      #9
 2. Initialize the cache
 3. Call the intensive computation.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 This concludes the first part of Python magic methods. The [second part](https://foojay.io/today/python-magic-methods-part-2/) will focus on class, container, and number-related methods.
 

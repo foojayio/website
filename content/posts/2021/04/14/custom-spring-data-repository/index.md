@@ -29,7 +29,7 @@ Functional Programming is becoming more and more popular. Spring provides a coup
 
 In this post, I'd like to describe how one can use Arrow's type system with Spring Data. Ultimately, you can benefit from the explanations to craft your custom Spring Data repository.
 
-### The starting architecture {#h3-0-the-starting-architecture}
+### The starting architecture
 
 The starting architecture for my application is pretty standard:
 
@@ -62,7 +62,7 @@ fun main(args: Array<String>) {
 ```
 
 
-### Toward a more functional approach {#h3-1-toward-a-more-functional-approach}
+### Toward a more functional approach
 
 This step has nothing to do with Spring Data and is not required, but it fits the functional approach better. As mentioned above, we can benefit from using the Routes and Beans DSL. Let's refactor the above code to remove annotations as much as possible.
 
@@ -102,7 +102,7 @@ fun main(args: Array<String>) {
 5. `ref()` retrieves bean with the configured type from Spring's application context
 6. Explicitly call the `beans()` function, no more magic!
 
-### Introducing Arrow {#h3-2-introducing-arrow}
+### Introducing Arrow
 
 > Functional companion to Kotlin's Standard Library
 >
@@ -117,7 +117,7 @@ Arrow comes with four different components:
 
 The Core library offers the `Either` type. Arrow advises using `Either` to model an optional value. On the other side, Spring Data JDBC `findById()` returns a `java.util.Optional`.
 
-### Bridging the gap {#h3-3-bridging-the-gap}
+### Bridging the gap
 
 How do we bridge the gap between `Optional` and `Either`?
 
@@ -169,7 +169,7 @@ repository
 
 It looks nicer this way, but it would be so much better to have the repository return an `Either` directly.
 
-### Spring Data customization {#h3-4-spring-data-customization}
+### Spring Data customization
 
 Let's check how we can customize Spring Data to achieve that.
 
@@ -225,7 +225,7 @@ repository.arrowFindById(req.pathVariable("id").toLong())
 
 This approach works but has one major flaw. To avoid a clash in the functions' signature, we have to invent an original name for our function that returns `Either` *i.e.* `arrowFindById()`.
 
-### Changing the default base repository {#h3-5-changing-the-default-base-repository}
+### Changing the default base repository
 
 To overcome this limitation, we can leverage another extension point: change the default base repository.
 
@@ -294,7 +294,7 @@ class SpringDataArrowApplication
 
 At this point, we can move the Arrow repository code into its project and distribute it for other "client" projects to use. No further extension is necessary, though Spring Data offers much more, *e.g.*, switching the factory bean.
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 Spring Data provides a ready-to-use repository implementation out-of-the-box. When it's not enough, its flexible design makes it possible to extend the code at different abstraction levels.
 

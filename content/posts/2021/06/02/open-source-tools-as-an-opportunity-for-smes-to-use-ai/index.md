@@ -20,10 +20,10 @@ Time-traveling cyborgs and robots that are able to love. These interesting and r
 
 The goal of my research at [Hochschule Pforzheim](https://www.hs-pforzheim.de/en/), summarized in this article, is to explore how SMEs can be sensitized to the topic of AI with the help of Open Source Tools. Firstly, the relevance of AI for SMEs will be addressed. Afterwards, relevant Open Source Tools are identified and a decision aid for SMEs will be provided. The focus of this article is on German SMEs, but the learnings can be applied all over the globe.
 
-Relevance of Artifical Intelligence for SMEs {#h2-0-relevance-of-artifical-intelligence-for-smes}
--------------------------------------------------------------------------------------------------
+Relevance of Artifical Intelligence for SMEs
+--------------------------------------------
 
-### Current state of Digitalization {#h3-1-current-state-of-digitalization}
+### Current state of Digitalization
 
 Small and medium-sized enterprises play a key role in the German economy. More than 99% of all German companies are SMEs. In addition, more than half of all employees in Germany are employed in these companies. ^\[2\]^
 
@@ -39,7 +39,7 @@ Definition of SME ^\[3\]^
 However, SMEs are generally not up to date with digitalization compared to large companies. A study by Sames and Diener shows a significant correlation between company size and the degree of digitalization. They determined an average value to all questions about business processes in a company. In general, a maximum average of 4 can be achieved on their scale. For companies with more than 1,000 employees, the average value is at 2.31. Companies with fewer than 500 employees cannot exceed an average value of 1.83. Nonetheless, the degree of digitalization for both average values is still too low. ^\[4\]^
 ![](image-5-1024x303.png) Degree of Digitalization by size class in Germany ^\[4\]^
 
-### Artificial Intelligence from an Economic Perspective {#h3-2-artificial-intelligence-from-an-economic-perspective}
+### Artificial Intelligence from an Economic Perspective
 
 One way to increase the level of digitalization is to use a future key technology: Artificial Intelligence. In the context of Industry 4.0, the following advantages of AI can be concluded:
 
@@ -53,7 +53,7 @@ One way to increase the level of digitalization is to use a future key technolog
 However, AI should not be treated exclusively as a growth potential. It can also serve as a profitable business model for companies. In 2016, the market research company Tractica forecast an expected global turnover of 4.8 billion US-Dollar for the year 2020 in the field of AI. They also determined an increase in sales up to 31.2 billion US-Dollar by the year 2025. ^\[6\]^
 ![](image-6-1024x371.png) Revenue from business applications in the field of AI worldwide by 2025 ^\[6\]^
 
-### Uses of Artificial Intelligence {#h3-3-uses-of-artificial-intelligence}
+### Uses of Artificial Intelligence
 
 Both SMEs and large corporations are aware of the potential of AI. Yet, SMEs have difficulties transferring the potential to their own business model. That is why only about 9% of all SMEs use AI, despite the significant benefits. For large companies, the percentage is almost twice as high in comparison. \[1\] Nevertheless, AI is only used by around 10% of all German companies. In addition, only 6% of German companies procure AI services from third-party providers. \[1\] These services are also called AI-as-a-Service. ^\[7\]^ However, these services are mainly used by large companies while SMEs only use them sporadically. ^\[8\]^
 ![](image-7.png) Use of AI in German companies ^\[1\]^
@@ -80,10 +80,10 @@ Other barriers for the use of AI include the available investment limit \[1\], l
 
 But how can SMEs integrate AI into their business model? Around 40% of all SMEs still see AI as a threat. However, an equally large proportion of SMEs see AI as an opportunity for themselves and their industry. ^\[1\]^ Above all, these companies need a cost-effective AI solution. At this point, it would be an option for SMEs to consider Open Source Tools.
 
-Open Source Tools for Articial Intelligence {#h2-4-open-source-tools-for-articial-intelligence}
------------------------------------------------------------------------------------------------
+Open Source Tools for Articial Intelligence
+-------------------------------------------
 
-### Overview of Open Source Tools {#h3-5-overview-of-open-source-tools}
+### Overview of Open Source Tools
 
 The Open Source Tools are classified in the following table based on the categories AI area, framework and license model. The order of the tools is irrelevant, as they are sorted alphabetically:
 
@@ -123,7 +123,7 @@ The Open Source Tools are classified in the following table based on the categor
 
 Identified Open Source Tools for AI
 
-### Choosing an Open Source Tool {#h3-6-choosing-an-open-source-tool}
+### Choosing an Open Source Tool
 
 If SMEs choose an open source tool as a way to use AI, there are numerous applications on the market. But which tool should be chosen? The following four steps should serve as a guide:
 
@@ -134,8 +134,8 @@ If SMEs choose an open source tool as a way to use AI, there are numerous applic
 
 Once all these steps have been followed, a narrowed down selection of tools should then be available. In the next step, these should be compared with the company's investment plan and readiness for AI. Only then can SMEs make a final decision in favor of a particular Open Source Software. In this way, they can exploit the potential of AI.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 The purpose of this article is to raise awareness of AI among SMEs with the help of Open Source Tools.
 
@@ -147,8 +147,8 @@ Artificial Intelligence was, is and will be a relevant topic of digitalization. 
 
 
 
-Sources {#h2-8-sources}
------------------------
+Sources
+-------
 
 \[1\] Demary, Vera und Goecke, Henry (2019): Künstliche Intelligenz: Deutsche Unternehmen zwischen Risiko und Chance. In: IW-Trends -- Vierteljahresschrift zur empirischen Wirtschaftsforschung. 46. Jg. Nr.4. S.3-18. Cologne
 

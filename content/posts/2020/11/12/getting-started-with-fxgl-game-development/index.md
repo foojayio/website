@@ -32,8 +32,8 @@ We will make a *very* simple clone of Geometry Wars using [FXGL](https://github.
 
 To complete this tutorial you first need to [get FXGL](https://github.com/AlmasB/FXGL/wiki/Get-FXGL-%28Maven%2C-Gradle%2C-Uber%29) either via Maven / Gradle, or as an uber-jar. Ensure you use FXGL 11, the current latest version is `11.8`. This tutorial is standalone and does not require previous FXGL knowledge.
 
-Dependencies {#h2-0-dependencies}
----------------------------------
+Dependencies
+------------
 
 I started with an empty Maven project and extended the pom.xml file with this dependency:
 
@@ -46,15 +46,15 @@ I started with an empty Maven project and extended the pom.xml file with this de
 ```
 
 
-Code {#h2-1-code}
------------------
+Code
+----
 
 The code is split into two classes
 
 * GeoWarsApp.java which is the main application
 * GeoWarsFactory.java which defines how the graphical elements look like and how they behave
 
-### GeoWarsApp minimal code {#h3-2-geowarsapp-minimal-code}
+### GeoWarsApp minimal code
 
 Create a file `GeoWarsApp.java` and let's import all of these and forget about them for the rest of the tutorial. **Note:** the static imports allow us to write for instance `getAppHeight()` instead of `FXGL.getAppHeight()`, which makes the code cleaner.
 
@@ -110,7 +110,7 @@ public enum EntityType {
 ```
 
 
-### GeoWarsFactory {#h3-3-geowarsfactory}
+### GeoWarsFactory
 
 In this factory we create the element types. In FXGL, there is one place where all entities are created and it is called an entity factory. To create your own factory, we create a second class with the listed imports, again some are static to keep the code clean:
 
@@ -232,7 +232,7 @@ For our enemy, we will use a circle as the view. Most methods have already been 
 
 We are done with the factory class now!
 
-### GeoWarsApp further extended {#h3-4-geowarsapp-further-extended}
+### GeoWarsApp further extended
 
 Now FXGL knows how to create the entities, let's go back to the application class GeoWarsApp to add input and logic.
 
@@ -306,8 +306,8 @@ protected void initPhysics() {
 
 We set up two collision handlers. The first one handles the collision between the bullet type and the enemy type. When such a collision occurs, we simply remove both entities from the game. In the second handler, we show an information dialog with text "You Died!" and restart the game.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Hit run in your IDE on the main-method and that is all! A first working JavaFX game created with FXGL.
 

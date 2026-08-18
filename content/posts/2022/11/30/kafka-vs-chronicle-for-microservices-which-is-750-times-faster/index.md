@@ -32,7 +32,7 @@ In this article, I will describe how Kafka does not scale in terms of throughput
 As a teaser, I will show you this chart showing that Chronicle Queue is around 750 times faster even when handling 5x the throughput of Kafka.  
 ![](Screen-Shot-2022-11-22-at-9.24.24-AM-1024x704.png)
 
-### Visualising Delay as a Distance {#h3-0-visualising-delay-as-a-distance}
+### Visualising Delay as a Distance
 
 In order to illustrate the difference, let me start with an analogy.
 
@@ -56,7 +56,7 @@ To use the same analogy as above, this is the time it takes for a signal to trav
 
 ![](Screen-Shot-2022-11-22-at-9.26.21-AM-889x1024.png)
 
-### Log Aggregation {#h3-1-log-aggregation}
+### Log Aggregation
 
 Kafka was originally designed for log aggregation.
 
@@ -95,7 +95,7 @@ For Kafka to process 250k msg/s at least four consumers were needed, and a bench
 
 The low latency configuration (linger.ms=0) failed for throughputs over 25k msg/s from a single producer.
 
-### Publish Latency {#h3-2-publish-latency}
+### Publish Latency
 
 ![](Screen-Shot-2022-11-22-at-11.10.30-AM-1024x769.png)  
 
@@ -105,7 +105,7 @@ In each case, the events published were 512-byte JSON messages. Two fields were 
 
 ![](Screen-Shot-2022-11-22-at-11.11.19-AM.png)
 
-### Microservice Messaging Transport {#h3-3-microservice-messaging-transport}
+### Microservice Messaging Transport
 
 While the time to publish, or the time to send/receive a pre-serialized message can be a good comparison of messaging solutions, this is only a piece of the puzzle.
 
@@ -128,7 +128,7 @@ For a microservices benchmark, we look at the time to send the same event as abo
 
 NOTE: every message produced creates a second message as a response, so the actual number of messages is doubled compared to a single-hop messaging benchmark.
 
-### How does Kafka Perform in Their Published Benchmarks? {#h3-4-how-does-kafka-perform-in-their-published-benchmarks}
+### How does Kafka Perform in Their Published Benchmarks?
 
 While publishing events on Kafka typically takes single-digit microseconds, the end-to-end transport can take **milliseconds**.
 
@@ -136,7 +136,7 @@ Confluent published a [benchmark](https://www.confluent.io/blog/kafka-fastest-me
 
 In our benchmark, we have two hops, serialization, and deserialization, all on one host. I expect that for 100k msg/s out and 100k msg/s returned we should get a similar delay as 200k msg/s over a single hop.
 
-### End to End Latency {#h3-5-end-to-end-latency}
+### End to End Latency
 
 It's hard to illustrate how much lower latency Chronicle exhibits compared to Kafka, so in the series of charts below, each chart also has a zoomed-out version at 10x the scale of the previous one.
 
@@ -172,7 +172,7 @@ While this can be more readable, it can be harder to appreciate how different th
 
 ![](Screen-Shot-2022-11-22-at-11.27.15-AM-1024x799.png)
 
-### How much higher are the latencies? {#h3-6-how-much-higher-are-the-latencies}
+### How much higher are the latencies?
 
 Another way to visualise just how much higher the latencies are for Kafka is to plot the ratio of latencies between Kafka and Chronicle.
 
@@ -184,7 +184,7 @@ For Kafka to achieve its lowest latencies with a 100k msg/s throughput, four par
 
 ![](Screen-Shot-2022-11-22-at-11.27.55-AM-1024x706.png)
 
-### Heap usage {#h3-7-heap-usage}
+### Heap usage
 
 #### Chronicle Queue Heap Usage
 
@@ -204,7 +204,7 @@ This can be run with a 128 MB heap size but results in over 139k GCs which is su
 
 ![](Screen-Shot-2022-11-22-at-11.29.14-AM-1024x563.png)
 
-### Conclusion {#h3-8-conclusion}
+### Conclusion
 
 While Kafka is a good choice for log aggregation, it might not be low latency enough for many use cases involving microservices due to its relatively high end-to-end latencies.
 

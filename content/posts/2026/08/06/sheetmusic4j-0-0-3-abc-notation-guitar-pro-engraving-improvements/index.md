@@ -23,15 +23,15 @@ The answers arrived faster than I expected. And they gave me more homework...
 
 {{< youtube b9dP2HHtKkQ >}}
 
-Two Comments, Two New Formats {#h2-0-two-comments-two-new-formats}
-------------------------------------------------------------------
+Two Comments, Two New Formats
+-----------------------------
 
 I posted about the release on [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7486390283673247744/), and almost immediately two comments landed with the same kind of challenge: "Nice, but does it support **ABC notation** ?" and "What about **Guitar Pro** files?"
 
 That's exactly the feedback loop I hoped the 0.0.1 release would trigger. The whole point of shipping something small and early is to find out where people actually want it to go, instead of guessing. So I took the challenge, wrote plans in Theia IDE with the @Architect and followed up with the @Coder. And now, one week later, **Sheetmusic4J 0.0.3** is out with support for both formats, plus a lot of polish on how the notation actually looks on the staff. There is also a 0.0.2, but that has a bug which don't correctly load the abc-files...
 
-ABC Notation, In and Out {#h2-1-abc-notation-in-and-out}
---------------------------------------------------------
+ABC Notation, In and Out
+------------------------
 
 Requested by [Peter De Coninck](https://www.linkedin.com/in/peter-de-coninck-7656b0b4/).
 
@@ -67,8 +67,8 @@ ScoreFile.save(score, Path.of("speed-the-plough-copy.abc"));
 ABC is a big enough format that not every corner is covered yet, so real-world tunes that don't render correctly are exactly the kind of bug report I want.
 ![](sheetdemo-0.0.3-1024x604.png)
 
-Guitar Pro: An Experiment {#h2-2-guitar-pro-an-experiment}
-----------------------------------------------------------
+Guitar Pro: An Experiment
+-------------------------
 
 Requested by [Soheil Rahsaz](https://www.linkedin.com/in/soheilrahsaz/).
 
@@ -84,8 +84,8 @@ Score score = ScoreFile.load(Path.of("song.gp"));
 
 I added it deliberately early, because I genuinely don't know yet how people would want to use Guitar Pro files here. Is rendering them as standard notation enough, or is tablature-specific rendering the whole point? That's the kind of thing I'd rather learn from real use than guess at. If you have a use case or a file that doesn't import cleanly, [let me know on GitHub](https://github.com/sheetmusic4j/sheetmusic4j/issues).
 
-Better-Looking Engraving {#h2-3-better-looking-engraving}
----------------------------------------------------------
+Better-Looking Engraving
+------------------------
 
 The rest of this release is behind-the-scenes work of making the notation look right. Some of the improvements:
 
@@ -96,14 +96,14 @@ The rest of this release is behind-the-scenes work of making the notation look r
 
 There's also a new `NoteBackgroundStyle` in the FX viewer to configure the highlight box drawn behind a note (handy for play-along views), and a fix for a crash on very large scores by rendering through a windowed canvas instead of one oversized texture.
 
-Under the Hood {#h2-4-under-the-hood}
--------------------------------------
+Under the Hood
+--------------
 
 The demo app got reorganized and gained a standalone strip play-along demo, the library now logs through SLF4J, the MusicXML reader correctly merges multiple `<attributes>` blocks per part instead of overwriting, and MIDI import produces fewer spurious rests.
 ![](stripdemo-0.0.3-1024x517.png)
 
-Still 0.0.x, Still Listening {#h2-5-still-0-0-x-still-listening}
-----------------------------------------------------------------
+Still 0.0.x, Still Listening
+----------------------------
 
 This is version **0.0.3**, not a stable release. The API and the rendering can still change, and that's the point of publishing this early. The first release asked whether anyone cared; this one is what happened when a couple of people answered in the comments.
 

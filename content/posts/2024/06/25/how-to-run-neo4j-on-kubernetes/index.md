@@ -22,12 +22,12 @@ enlighterjs: true
 frozen: false
 ---
 
-### Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. In this post, we walk through how to run the Neo4j graph database on Kubernetes. {#h3-0-kubernetes-is-an-open-source-container-orchestration-platform-that-automates-the-deployment-scaling-and-management-of-containerized-applications-in-this-post-we-walk-through-how-to-run-the-neo4j-graph-database-on-kubernetes}
+### Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. In this post, we walk through how to run the Neo4j graph database on Kubernetes.
 
 **For an upcoming event, I was asked to give a demo of how to run Neo4j on Kubernetes. I had very little experience with Kubernetes, so I decided to document my journey for later reference.**
 
-What is Kubernetes? {#_what_is_kubernetes}
-------------------------------------------
+What is Kubernetes?
+-------------------
 
 Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation.
 
@@ -39,8 +39,8 @@ For a glimpse, check out the [Google's Kubernetes Comic](https://cloud.google.co
 
 ![Google Kubernetes Comic](google-k8s-comic.png)
 
-Neo4j on Kubernetes {#_neo4j_on_kubernetes}
--------------------------------------------
+Neo4j on Kubernetes
+-------------------
 
 Neo4j is a graph database and it is an excellent choice for applications that require complex data and relationships. Running a database on Kubernetes is a bit more complex than other services because there are a few more components involved (such as persistent storage, stateful sets, etc.).
 
@@ -54,13 +54,13 @@ There are config maps, stateful set, persistent volume, and services containers.
 
 This is the approach we will use for this post. Let's start there!
 
-Setting Up Kubernetes {#_setting_up_kubernetes}
------------------------------------------------
+Setting Up Kubernetes
+---------------------
 
 We need a few things set up for our environment. However, the Neo4j documentation is very thorough, and I was able to follow all the steps on [this page](https://neo4j.com/docs/operations-manual/current/kubernetes/quickstart-standalone/prerequisites/) to get everything ready (I used Docker Desktop for the Kubernetes environment).
 
-Helm Chart for Neo4j Kubernetes {#_helm_chart_for_neo4j_kubernetes}
--------------------------------------------------------------------
+Helm Chart for Neo4j Kubernetes
+-------------------------------
 
 Once the environment is ready, we can create our [Helm deployment for Neo4j](https://neo4j.com/docs/operations-manual/current/kubernetes/quickstart-standalone/create-value-file/). Neo4j publishes a Helm chart for running Neo4j on Kubernetes, so we need to set the config with a `values.yaml` file, which the documentation also provides a great starter file for us to use and customize as needed.
 
@@ -109,8 +109,8 @@ MATCH (b:Book)<-[r:AUTHORED]-(a:Author) RETURN * LIMIT 20;
 
 The next step is to run an application alongside the database. For that, we'll use Spring Boot with Spring Data Neo4j to interact with the database.
 
-Spring Data Neo4j application {#_spring_data_neo4j_application}
----------------------------------------------------------------
+Spring Data Neo4j application
+-----------------------------
 
 The application is not anything fancy. It creates an API that allows us to hit an endpoint to retrieve some data from the Neo4j database. All of the code is available on the repository under the `book-service` folder.
 
@@ -190,8 +190,8 @@ kubectl apply -f deployment.yaml
 
 Let's test our Neo4j cluster with the Spring Boot application.
 
-Testing everything! {#_testing_everything}
-------------------------------------------
+Testing everything!
+-------------------
 
 First, I like to check the status of the pods and services to make sure everything is running as expected. You can do this by running `kubectl get all`, which should show a list of all the resources in the cluster. You should see the Neo4j pod (along with related services like load balancer), as well as the Spring Boot application pod and service.
 
@@ -222,8 +222,8 @@ kubectl delete pvc --all --namespace neo4j
 ```
 
 
-Wrapping Up! {#_wrapping_up}
-----------------------------
+Wrapping Up!
+------------
 
 Today, we deployed Neo4j and a Spring Boot application to Kubernetes.
 
@@ -241,8 +241,8 @@ Happy coding!
 
 ![Feelings of Power: Kubernetes](feelings-of-power.jpeg)
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Code (today's Github repository): [Neo4j on Kubernetes](https://github.com/JMHReif/kubernetes-neo4j-java)
 * For fun: [Google's Kubernetes Comic](https://cloud.google.com/kubernetes-engine/kubernetes-comic)

@@ -77,6 +77,37 @@ IntelliJ's terminal, read this before making changes.
   this into a second blanket unescape: content/ has a JSF snippet whose
   `value="Food &amp; Culture"` and a post that appends a literal `"&nbsp;"`
   string, and a blanket pass corrupts both.
+
+  The repair covers **fence bodies, inline code spans and Markdown link
+  destinations** — the three places WP damage can land. Code spans get the same
+  `resolveDoubleEscaped` rule as fences (Markdown doesn't decode entities inside
+  `` ` `` either, so `` `DESCRIBE KEYSPACE &lt;name>` `` renders a literal
+  `&lt;`). Destinations get `HtmlToMarkdown.resolveEscapedUrl` instead, which
+  collapses `&amp;` to `&` repeatedly. Note what that is and isn't fixing:
+  `?a=1&amp;b=2` is CORRECT Markdown (CommonMark decodes entities in
+  destinations) and only the over-escaped `?a=1&amp;amp;b=2` actually renders
+  wrong. The collapse is applied anyway so storage matches what an author would
+  type and what a re-scrape now emits — of the 78 files it touched, 76 were
+  provably no-ops (built HTML diffed before/after: 2 pages changed). Bare prose
+  and preserved raw-HTML blocks are never touched — a post has a *table of
+  entity names* as its subject matter, and in raw HTML `&amp;` is correct
+  markup.
+- **`scripts/StripHeadingAnchors.java`**: one-off migration that removed the
+  WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
+  stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id
+  over as Markdown attribute syntax, and Goldmark applies it — the round trip
+  worked, which is why it went unnoticed. Dropped because the ids are
+  **positional** (inserting an H2 leaves `h2-3-` above `h2-2-`), a good few are
+  corrupt at the source (WP's slugifier eats leading capitals: "Podcast Apps" →
+  `h2-1--odcast-pps`, which foojay.io really does serve), and a contributor
+  writing a new post would never type one. Handles ATX, setext and
+  blockquote-wrapped headings; resizes setext underlines; skips fenced code,
+  where `{#…}` is CSS or shell parameter expansion. 1835 files, 14344 anchors
+  (plus one heading whose text the conversion had wrapped onto a second line,
+  rejoined by hand).
+  `HtmlToMarkdown.toMarkdown` now drops heading ids at the source, so a
+  re-scrape is a no-op; the script stays for the same reason
+  `MigrateEnlighterToFences.java` does. `--dry-run` / `--path` as usual.
 - **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
   `authors:` slug without a matching author bundle), run by
@@ -185,7 +216,23 @@ IntelliJ's terminal, read this before making changes.
   during the trial period against the still-live WP site.
 - **URLs are load-bearing**: every converted post/author/page keeps its
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
-  URLs without adding an alias.
+  URLs without adding an alias. **One deliberate exception**: heading
+  *fragments*. `StripHeadingAnchors.java` (above) dropped WP's `#h2-N-slug`
+  anchors, so section-level deep links minted before cutover land at the top of
+  the post instead. Paths, aliases and frontmatter are untouched, and Hugo still
+  generates an id per heading from its text — the "On this page" panel and its
+  scroll-spy resolve every one of their 14k links. Accepted knowingly; fragment
+  links into a blog post are rare next to the cost of keeping two conventions.
+- **Render hooks must redo the escaping Goldmark would have done.** Overriding
+  a renderer means taking over its entity handling too, and getting it wrong is
+  invisible in the template and obvious on the page. Two shapes, both live:
+  `render-codeblock.html` needs `htmlEscape .Inner | safeHTML` — without
+  `safeHTML`, `htmlEscape` returns a plain string that html/template escapes a
+  **second** time, so `->` reaches the reader as `-&gt;` (this was breaking ~950
+  posts). `render-link.html`/`render-image.html` need `htmlUnescape` on
+  `.Destination`/`.Title`, because those arrive raw and CommonMark decodes
+  entities in a destination, so `?a=1&amp;b=2` otherwise renders as a query
+  param literally named `amp;b` (~90 posts). Check both when editing a hook.
 - **Code blocks are stored as Markdown fences, rendered as EnlighterJS.**
   `content/` holds ```` ```java ````; `themes/foojay/layouts/_default/_markup/render-codeblock.html`
   turns every fence back into the `<pre class="EnlighterJSRAW">` element the

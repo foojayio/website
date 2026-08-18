@@ -28,8 +28,8 @@ Retrieval-Augmented Generation (RAG) is a technique that enhances the accuracy a
 
 In this blog post, we'll look at how to write GenAI applications with Java using the Spring AI framework and utilize RAG for improving answers.
 
-What is Spring AI? {#_what_is_spring_ai}
-----------------------------------------
+What is Spring AI?
+------------------
 
 Spring AI is a framework for building generative AI applications in Java. It provides a set of tools and utilities for working with generative AI models and architectures, such as large language models (LLMs) and retrieval augmented generation (RAG).
 
@@ -37,8 +37,8 @@ Spring AI is built on top of the Spring Framework, which is a popular Java frame
 
 There are also other options for GenAI in Java, such as Langchain4j, but we'll focus on Spring AI for this post.
 
-Creating a project {#_creating_a_project}
------------------------------------------
+Creating a project
+------------------
 
 To get started with Spring AI, you'll need to either create a new project or add the appropriate dependencies to an existing project. You can create a new project using the Spring Initializr at <https://start.spring.io/>, which is a web-based tool for generating Spring Boot projects.
 
@@ -57,8 +57,8 @@ Finally, adding the Spring Data Neo4j dependency provides support for working wi
 
 Go ahead and generate the project, and then open it in your favorite IDE. Looking at the `pom.xml` file, you should see that the milestone repository is included. Since Spring AI is not a general-availability release yet, we need to include the milestone repository to get the pre-release version of the dependencies.
 
-A bit of boilerplate {#_a_bit_of_boilerplate}
----------------------------------------------
+A bit of boilerplate
+--------------------
 
 First thing that we need is a Neo4j database. I like to use the [Neo4j Aura free tier](https://dev.neo4j.com/aura-java) because the instance is managed for me, but there are also Docker images and other methods.
 
@@ -109,15 +109,15 @@ The `Driver` bean creates a connection to the Neo4j database by passing in the c
 
 We customize the configuration by specifying the label for the nodes that will store the embeddings, as Spring's default looks for `Document` entities. We also specify our index name for the embeddings (default is `spring-ai-document-index`).
 
-Data set {#_data_set}
----------------------
+Data set
+--------
 
 For this example, we'll use a dataset of books and reviews from Goodreads. You can pull a curated version of the dataset from [here](https://github.com/JMHReif/graph-demo-datasets/blob/main/goodreadsUCSD/ai-embeddings/ai-load-data.cypher). The dataset contains information about books, as well as related reviews.
 
 I have already generated embeddings using OpenAI's API, so if you want to generate your own, you will need to comment out the [final Cypher statement in the script](https://github.com/JMHReif/graph-demo-datasets/blob/main/goodreadsUCSD/ai-embeddings/ai-load-data.cypher#L92) and instead run the `generate-embeddings.py` script (or your custom version) to generate and load the review embeddings to Neo4j.
 
-Application model {#_application_model}
----------------------------------------
+Application model
+-----------------
 
 Next, we need to create a domain model in our application to map to our database model. In this example, we'll create a `Book` entity that represents a book node. We'll also create a `Review` entity that represents a review of a book. The `Review` entity will have an embedding (vector) associated with it, which we'll use for similarity searches.
 
@@ -135,8 +135,8 @@ Next, the core of this application where all the magic happens is the controller
 
 We can then pass those similar reviews into a Neo4j query to retrieve connected entities, providing additional context in the prompt for the LLM. It will use all the information provided to respond with some similar book recommendations for the original searched phrase.
 
-Controller {#_controller}
--------------------------
+Controller
+----------
 
 Our controller class contains a couple of common annotations, to start. We'll also inject the `Neo4jVectorStore` and `BookRepository` beans that we defined earlier, as well as the `OpenAiChatClient` for our embedding client.
 
@@ -298,8 +298,8 @@ Finally, we call the template's `create()` method to generate the response from 
 
 Let's test it out!
 
-Running the application {#_running_the_application}
----------------------------------------------------
+Running the application
+-----------------------
 
 To run our Goodreads AI application, you can use the `./mvnw spring-boot:run` command in the terminal. Once the application is running, you can make a GET request to the `/rag` endpoint with a search phrase as a query parameter. Some examples are included next.
 
@@ -310,7 +310,7 @@ http ":8080/rag?searchPhrase=high%tech"
 ```
 
 
-### Sample call and output + full prompt {#_sample_call_and_output_full_prompt}
+### Sample call and output + full prompt
 
 Call and returned book recommendations:
 
@@ -348,8 +348,8 @@ encouragement
 
 We can see that the LLM generated a response with a list of book recommendations based on the books found in the database (CONTEXT section of prompt). The results of the similarity search + graph retrieval query for the user's search phrase are in the prompt, and the LLM's answer uses that data for a reponse.
 
-Wrapping Up! {#_wrapping_up}
-----------------------------
+Wrapping Up!
+------------
 
 In today's post, you learned how to build a GenAI application with Spring AI in Java.
 
@@ -361,8 +361,8 @@ We also mapped the domain model to our database model, wrote a repository interf
 
 I hope this post helps to get you started with Spring AI and beyond. Happy coding!
 
-Resources {#_resources}
------------------------
+Resources
+---------
 
 * Code (Github repository): [Spring AI Goodreads](https://github.com/JMHReif/springai-goodreads)
 * Documentation: [Spring AI](https://docs.spring.io/spring-ai/reference/index.html)

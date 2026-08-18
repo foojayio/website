@@ -38,8 +38,8 @@ Azul has developed different solutions to help applications reach the maximum po
 
 While CRaC and ReadyNow aim to solve the same challenge, they take different approaches. In this post, I will explain the differences.
 
-What happens at Java startup {#What-Happens-at-Java-Startup}
-------------------------------------------------------------
+What happens at Java startup
+----------------------------
 
 Java application startup involves a few different tasks:
 
@@ -52,7 +52,7 @@ The combined duration of tasks 1 and 2 is called the "**time to first response**
 In step 3, we see a performance improvement as soon as the code gets compiled into native code, called the "warmup."
 ![](java-total-warm-up-process.avif)
 
-### Java warmup phase {#Warm-Up-Phase}
+### Java warmup phase
 
 A Java application goes through three phases when it starts executing the code, which leads to the warmup:
 
@@ -63,19 +63,19 @@ A Java application goes through three phases when it starts executing the code, 
 After this Java warmup phase, we reach the "**time to full speed**."
 ![](java-warmup-chart.avif)
 
-### Deoptimizations {#Deoptimizations}
+### Deoptimizations
 
 The Tier 2 compiler makes certain decisions based on how the code is used. But if some of those are wrong, the compiled code gets deoptimized and goes through the compilation steps again. In the example we used before, one of those non-compiled `case`s could turn out to be needed, e.g., when the application starts handling different data. This can lead to minor performance drops because the execution falls back to the byte code before it has been recompiled.
 ![](java-deoptimizations.avif)
 
 This effect is minimal and, in most cases, not even noticeable. However, in some industries where timing is critical, for instance, financial transactions, such deoptimizations should be avoided at all costs.
 
-Solutions Provided by Azul {#Solutions-Provided-by-Azul}
---------------------------------------------------------
+Solutions Provided by Azul
+--------------------------
 
 As the largest company 100% focused on Java and the JVM, Azul developed several solutions to accelerate Java applications to their optimal speed.
 
-### Coordinated Restore at Checkpoint (CRaC) {#Coordinated-Restore-at-Checkpoint}
+### Coordinated Restore at Checkpoint (CRaC)
 
 Coordinated Restore at Checkpoint (CRaC) is an OpenJDK project implemented in the Azul Zulu Builds of OpenJDK (Zulu). Once an application runs and is warmed up, you can instruct it to create a checkpoint. Such a checkpoint contains a "dump" of the application's state. You can restart your application using this checkpoint, bringing it back to the state where it was when the checkpoint was created, without going through Java warmup again.
 
@@ -91,7 +91,7 @@ To use the CRaC system, you will need to change your code to handle the closing 
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [What Is CRaC?](https://docs.azul.com/core/crac/crac-introduction) [Coordinated Restore at Checkpoint (CRaC)](https://www.azul.com/products/components/crac/) [Reduce Java Application Startup and Warmup Times with CRaC](https://www.azul.com/blog/reduce-java-application-startup-and-warmup-times-with-crac/) |
 
-### ReadyNow {#ReadyNow}
+### ReadyNow
 
 ReadyNow is a feature in Azul Zing Builds of OpenJDK (Zing), a modern, TCK-compliant Java platform based on OpenJDK with extended functionalities. ReadyNow helps the compiler to produce the best possible native code right from the start of the application. ReadyNow is available for customers of [Azul Platform Prime](https://www.azul.com/products/prime/), Azul's high-performance OpenJDK distribution.
 
@@ -109,7 +109,7 @@ For large-scale deployments, Azul offers the additional [Optimizer Hub](https://
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [About ReadyNow](https://docs.azul.com/prime/Use-ReadyNow) [ReadyNow Start Up Faster and Stay Fast](https://www.azul.com/products/components/readynow/) [GC Log Analyzer Documentation](https://docs.azul.com/gc-log-analyzer/) [About Optimizer Hub](https://docs.azul.com/optimizer-hub/) |
 
-### Cloud Native Compiler {#Cloud-Native-Compiler}
+### Cloud Native Compiler
 
 Cloud Native Compiler is a component of Optimizer Hub with Azul Platform Prime that provides a server-side optimization solution that offloads JIT compilation to separate and dedicated resources. This approach offers more processing power to the JIT compilation while freeing your client JVMs from the burden of doing JIT compilation locally.
 
@@ -119,8 +119,8 @@ As such, it relates to the challenges mentioned in this article but complements 
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [About Cloud Native Compiler](https://docs.azul.com/optimizer-hub/about/cloud-native-compiler) [Cloud Native Compiler: Powerful optimizations at a dramatically reduced cost](https://www.azul.com/products/prime/cloud-native-compiler/) |
 
-CRaC Compared to ReadyNow {#CRaC-Compared-to-ReadyNow}
-------------------------------------------------------
+CRaC Compared to ReadyNow
+-------------------------
 
 Let's summarize the differences between CRaC and ReadyNow:
 
@@ -139,8 +139,8 @@ Let's summarize the differences between CRaC and ReadyNow:
 
 (\*\*\*): Unlike native compiled applications (with GraalVM), both CRaC and ReadyNow still have the original byte code to optimize the code further when needed, can dynamically load classes, etc.
 
-Conclusion {#Conclusion}
-------------------------
+Conclusion
+----------
 
 Although CRaC and ReadyNow are both solutions to shorten Java applications' warmup phase, they take a very different approach. In cases where no code changes are possible, server systems need to be available as fast as possible, and increased performance and/or reduced total cost of ownership are required, ReadyNow is the perfect choice to improve Java performance!
 

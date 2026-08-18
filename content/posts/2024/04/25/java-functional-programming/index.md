@@ -43,8 +43,8 @@ As I mentioned, Functional Programming has its roots in Mathematics and it draws
 
 So,
 
-What is Lambda(λ) Calculus? {#h2-0-what-is-lambda-calculus}
------------------------------------------------------------
+What is Lambda(λ) Calculus?
+---------------------------
 
 **Lambda calculus** is a formal system in mathematical logic for expressing computation based on function abstraction and application using variable binding and substitution.
 
@@ -61,8 +61,8 @@ Enough on Maths. Let's discuss about functional programming now...
 
 So,
 
-What is Functional Programming? {#h2-1-what-is-functional-programming}
-----------------------------------------------------------------------
+What is Functional Programming?
+-------------------------------
 
 In computer science, functional programming is a programming paradigm that considers computation as the evaluation of mathematical functions and emphasizes the use of expressions or declarations over statements. This approach focuses on constructing the structure and components of computer programs without modifying state or utilizing mutable data.
 
@@ -76,7 +76,7 @@ Incorporating Functional Programming (FP) has a few justifications:
 * Writing code this way makes it shorter, easier to understand, and more about saying what you want to happen.
 * Code that is more readable and expressive is allowed by declarative programming.
 
-### Fundamental Principles \& Concepts of Functional Programming (FP) {#h3-2-fundamental-principles-concepts-of-functional-programming-fp}
+### Fundamental Principles \& Concepts of Functional Programming (FP)
 
 1. **Immutablity:** Data is considered unchangeable, which means that once it is defined, it remains the same. This simplifies things and makes the code easier to understand.
 2. **Function:** In functional programming, different types of functions exist, such as **Pure Functions, High-Order Functions, First-Order Functions, First-Class Functions, and Monads**, each representing a mapping between input and output.
@@ -94,8 +94,8 @@ A *function* is a fundamental concept that represents a mapping from input value
 3. **First-Order Function:** A function which receive or give inputs and cannot assigned to another functions.
 4. **First-Class Function:** A function that can be assigned to a variable, passed as an argument to another function, or returned from a function
 
-Features of Functional Programming in Java {#h2-3-features-of-functional-programming-in-java}
----------------------------------------------------------------------------------------------
+Features of Functional Programming in Java
+------------------------------------------
 
 1. Functional Interfaces
 2. Lambda Expressions

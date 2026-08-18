@@ -35,8 +35,8 @@ But it's also tedious. Before we continue, if you prefer, I cover most of these 
 
 <br />
 
-Watch Annotations {#h2-0-watch-annotations}
--------------------------------------------
+Watch Annotations
+-----------------
 
 Last time we discussed customizing the watch UI to render complex objects more effectively. But there's one problem with that: "We aren't alone".
 
@@ -73,8 +73,8 @@ Notice we need to escape the strings in the annotation so they will be valid Jav
 
 Again everything else matches the content and result we saw in the previous duckling.
 
-Memory Debugger {#h2-1-memory-debugger}
----------------------------------------
+Memory Debugger
+---------------
 
 The primary focus of this post is the memory debugging capabilities. By default, JetBrains disables most of these capabilities to boost program execution performance. We can enable the memory debugger view by checking it on the right-hand side of the bottom tool window.
 
@@ -92,7 +92,7 @@ As you can imagine, this gets old fast. If your machine is slow, then this is a 
 
 This effectively disables the requirement to click at the cost of slower step over execution. But what do we get as a result?
 
-### Memory Usage {#h3-2-memory-usage}
+### Memory Usage
 
 The panel shows us where a memory block is used when stepping over code or jumping between breakpoints. The memory footprint isn't as obvious, but the scale of memory allocation is.
 
@@ -104,7 +104,7 @@ But there's more. We can double click every object on the list and see this:
 
 Here we can see all the objects of this type that were allocated in the entire heap. We can get a sense of what's really held in a memory location and again gain deeper insight into potential memory leaks.
 
-### Memory Checks {#h3-3-memory-checks}
+### Memory Checks
 
 "Track New Instances" enables even more tracking of heap allocations. We can enable this on a per object type basis. Notice this only applies to "proper object" and not arrays. You can enable it through the right click:
 
@@ -120,8 +120,8 @@ The backtraces for memory allocations are the missing piece that would show you 
 
 This is difficult to see sometimes in memory intensive applications. When multiple threads allocate multiple objects in memory, the noise is hard to filter. But of all the tools I used, this is by far the easiest.
 
-Finally {#h2-4-finally}
------------------------
+Finally
+-------
 
 One of my favorite things in Java is the lack of real memory errors. There are no invalid memory addresses. No uninitialized memory that leads to invalid memory accesses. No invalid pointers, no memory address (that we're exposed to) or manual configuration. Things "just work".
 

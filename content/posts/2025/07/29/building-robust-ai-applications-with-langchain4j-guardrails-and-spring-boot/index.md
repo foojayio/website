@@ -28,8 +28,8 @@ frozen: false
 This article demonstrates how to implement comprehensive guardrails in a Spring Boot application, with practical examples that you can adapt to your use cases.
 > 📦 **Complete source code available at** : [github.com/rokon12/guardrails-demo](https://github.com/rokon12/guardrails-demo)
 
-Understanding LangChain4j Guardrails {#h2-0-understanding-langchain4j-guardrails}
----------------------------------------------------------------------------------
+Understanding LangChain4j Guardrails
+------------------------------------
 
 In LangChain4j, guardrails are validation mechanisms that operate exclusively on AI Services, the framework's high-level abstraction for interacting with language models. Unlike simple validators, guardrails provide sophisticated control over the entire AI interaction lifecycle.
 
@@ -46,8 +46,8 @@ In LangChain4j, guardrails are validation mechanisms that operate exclusively on
 
 This dual-layer approach ensures that your AI applications remain safe, compliant, and aligned with business requirements.
 
-Setting Up a Spring Boot Project with LangChain4j {#h2-1-setting-up-a-spring-boot-project-with-langchain4j}
------------------------------------------------------------------------------------------------------------
+Setting Up a Spring Boot Project with LangChain4j
+-------------------------------------------------
 
 Let's start by creating a Spring Boot application with the necessary dependencies. You can use [Spring Initializr](https://start.spring.io/) to bootstrap your project or create it directly in your IDE (IntelliJ IDEA, Eclipse, or VS Code).
 > 🚀 **Quick Start with Spring Initializr:**
@@ -132,12 +132,12 @@ app:
 ```
 
 
-Implementing Input Guardrails {#h2-2-implementing-input-guardrails}
--------------------------------------------------------------------
+Implementing Input Guardrails
+-----------------------------
 
 Input guardrails shield your application from malicious, inappropriate, or out-of-scope user inputs. Here are several practical examples.
 
-### Content Safety Input Guardrail {#h3-3-content-safety-input-guardrail}
+### Content Safety Input Guardrail
 
 ```
 @Component
@@ -191,7 +191,7 @@ public class ContentSafetyInputGuardrail implements InputGuardrail {
 ```
 
 
-### **Smart Context-Aware Guardrail** {#h3-4-smart-context-aware-guardrail}
+### **Smart Context-Aware Guardrail**
 
 This guardrail uses conversation history to make intelligent decisions:
 
@@ -271,7 +271,7 @@ public class ContextAwareInputGuardrail implements InputGuardrail {
 ```
 
 
-### **Intelligent Input Sanitizer** {#h3-5-intelligent-input-sanitizer}
+### **Intelligent Input Sanitizer**
 
 This guardrail not only validates but also improves input quality:
 
@@ -355,12 +355,12 @@ public class IntelligentInputSanitizerGuardrail implements InputGuardrail {
 
 **ProTip:**Input sanitizers should be the last guardrail in your input chain. They clean and normalize input after all validation checks have passed.
 
-Implementing Output Guardrails {#h2-6-implementing-output-guardrails}
----------------------------------------------------------------------
+Implementing Output Guardrails
+------------------------------
 
 Output guardrails ensure that LLM responses meet your quality standards and business requirements.
 
-### Professional Tone Output Guardrail {#h3-7-professional-tone-output-guardrail}
+### Professional Tone Output Guardrail
 
 ```
 @Component
@@ -415,7 +415,7 @@ public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
 
 <br />
 
-### Hallucination Detection Guardrail {#h3-8-hallucination-detection-guardrail}
+### Hallucination Detection Guardrail
 
 ```
 package ca.bazlur.guardrailsdemo.guardrail;
@@ -554,8 +554,8 @@ public class HallucinationDetectionGuardrail implements OutputGuardrail {
 
 > **ProTip:** Hallucination detection can be computationally expensive. Consider using it selectively for critical responses or implementing caching for repeated content.
 
-Testing Your Guardrails {#h2-9-testing-your-guardrails}
--------------------------------------------------------
+Testing Your Guardrails
+-----------------------
 
 Before integrating guardrails into your AI services, it's crucial to thoroughly test them. Here's a comprehensive test suite for the ContentSafetyInputGuardrail:
 
@@ -779,8 +779,8 @@ class ContentSafetyInputGuardrailTest {
 > * Test case sensitivity and special character handling
 > * Use the `GuardrailAssertions` utility for cleaner test code
 
-Creating AI Services with Guardrails {#h2-10-creating-ai-services-with-guardrails}
-----------------------------------------------------------------------------------
+Creating AI Services with Guardrails
+------------------------------------
 
 Now let's combine our guardrails into comprehensive AI services.
 
@@ -837,7 +837,7 @@ public class ProfessionalToneOutputGuardrail implements OutputGuardrail {
 
 <br />
 
-### **Rest endpoint** {#h3-11-rest-endpoint}
+### **Rest endpoint**
 
 Now that we have everything set up, let's create our REST endpoint so that we can invoke it:
 
@@ -962,8 +962,8 @@ Expected response:
 
 <br />
 
-Demo {#h2-12-demo}
-------------------
+Demo
+----
 
 ```
 # Clone the project
@@ -992,8 +992,8 @@ open http://localhost:8080
 It will provide an interface similar to the one above, and you can then try out the example shown on the right side of the panel.
 ![](https://bazlur.ca/wp-content/uploads/2025/06/Screenshot-2025-06-21-at-12.17.07%E2%80%AFPM-1024x832.png)
 
-Conclusion {#h2-13-conclusion}
-------------------------------
+Conclusion
+----------
 
 LangChain4j's guardrails provide a robust framework for building safe and reliable AI applications. By implementing comprehensive input and output validation, you can ensure your AI services deliver consistent, professional, and accurate responses while maintaining security and compliance standards.
 

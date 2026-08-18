@@ -29,7 +29,7 @@ This webinar focuses on practical predictive AI/ML approaches in pure Java. We'l
 
 If you're a Java developer or architect interested in learning more about AI/ML with structured data, this session will show you how to do it efficiently using native Java tools.
 
-### Practical {#h3-0-practical}
+### Practical
 
 * Online streaming via YouTube
 * Date: Monday, April 28th 2025
@@ -39,13 +39,13 @@ If you're a Java developer or architect interested in learning more about AI/ML 
 
 Please register here: <https://forms.gle/p9wxXhcMDfBwCXsUA>
 
-### Guests {#h3-1-guests}
+### Guests
 
 Frank Greco, Senior AI/ML Consultant, Technology Strategist, Java Champion, Developer Ecosystem (Crossroads)
 
 Zoran Sevarac, CEO of @Deep Netts, Full Professor at University of Belgrade, Java Champion, AI Consultant \| Deep Learning Development Platform
 
-### Moderator {#h3-2-moderator}
+### Moderator
 
 Pratik Patel, VP Developer Advocacy at Azul, Java Champion
 ![](20250428_Java_AI-1024x576.png)

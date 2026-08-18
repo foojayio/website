@@ -28,8 +28,8 @@ In this article I'll walk you through how each part of the Spring ecosystem maps
 
 <br />
 
-What does an AI agent need? {#h2-0-what-does-an-ai-agent-need}
---------------------------------------------------------------
+What does an AI agent need?
+---------------------------
 
 Before we look at code, think about what an AI agent has to do beyond just chatting:
 
@@ -43,8 +43,8 @@ Before we look at code, think about what an AI agent has to do beyond just chatt
 
 None of these were built for AI agents. They're mature, battle-tested tools that happen to solve exactly the problems agents have.
 
-Spring AI: the LLM layer {#h2-1-spring-ai-the-llm-layer}
---------------------------------------------------------
+Spring AI: the LLM layer
+------------------------
 
 At the core of ClawRunr is a `DefaultAgent` that wraps Spring AI's `ChatClient`. The entire class is 20 lines:
 
@@ -109,8 +109,8 @@ chatClientBuilder
 
 The LLM decides which tool to call based on the conversation. Spring AI handles the tool calling protocol. You just declare what each tool does.
 
-Spring Events: instant multi-channel support {#h2-2-spring-events-instant-multi-channel-support}
-------------------------------------------------------------------------------------------------
+Spring Events: instant multi-channel support
+--------------------------------------------
 
 An agent should work on Telegram, in a browser, eventually on Discord or Slack. ClawRunr solves this with a pattern Spring developers already know: events.
 
@@ -155,8 +155,8 @@ public class ChannelRegistry {
 The agent itself doesn't know or care where a message came from. It processes the request, returns a response, and the runtime routes it back through the same channel. Want to add Discord? Implement the `Channel` interface. The agent code stays untouched.
 ![](https://www.jobrunr.io/blog/ClawRunr-Telegram-Schedule-Job.png)
 
-JobRunr: the piece nobody thinks about {#h2-3-jobrunr-the-piece-nobody-thinks-about}
-------------------------------------------------------------------------------------
+JobRunr: the piece nobody thinks about
+--------------------------------------
 
 Here's a question: what does your agent do when you say "summarize my emails every morning at 8"?
 
@@ -246,8 +246,8 @@ public String scheduleRecurringTask(String cronExpression,
 
 Zero custom scheduling code. No cron parser. No job persistence layer. No retry logic. JobRunr handles all of it out of the box, plus gives you a full dashboard to monitor every task your agent has ever run.
 
-Spring Modulith: keeping it extensible {#h2-4-spring-modulith-keeping-it-extensible}
-------------------------------------------------------------------------------------
+Spring Modulith: keeping it extensible
+--------------------------------------
 
 ClawRunr uses Spring Modulith to enforce clean boundaries between modules:
 
@@ -264,8 +264,8 @@ This matters for an open-source project. When someone in the community wants to 
 
 Within three days of release, someone in the community had already written a plugin that streams bot messages to the web interface. They didn't need to touch the agent core. Just a new module, implementing the right interface.
 
-What ClawRunr can do today {#h2-5-what-clawrunr-can-do-today}
--------------------------------------------------------------
+What ClawRunr can do today
+--------------------------
 
 With these building blocks wired together, ClawRunr already handles a lot out of the box:
 
@@ -278,8 +278,8 @@ With these building blocks wired together, ClawRunr already handles a lot out of
 
 All of this powered by the ecosystem components we walked through. JobRunr handles the scheduling and retries. Spring AI handles the LLM and tool calling. Spring Events routes messages across channels. Spring Modulith keeps everything modular so the community can extend it without breaking things.
 
-Try it {#h2-6-try-it}
----------------------
+Try it
+------
 
 ```
 git clone https://github.com/jobrunr/javaclaw.git

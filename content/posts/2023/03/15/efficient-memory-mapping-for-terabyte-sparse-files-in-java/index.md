@@ -70,7 +70,7 @@ The RSS (Resident Set Size) is only 129,272 KB, or 122 MB and the disk usage is 
 ![](Screen-Shot-2023-03-06-at-11.15.39-AM-1024x299.png)  
 *Figure 6. Disk usage for Test 2*
 
-### Conclusion {#h3-0-conclusion}
+### Conclusion
 
 Mapping large areas of memory avoids having to know in advance how much memory we need or having to resize the memory mappings while in use, while accessing the data as direct memory without the overhead of system calls.
 

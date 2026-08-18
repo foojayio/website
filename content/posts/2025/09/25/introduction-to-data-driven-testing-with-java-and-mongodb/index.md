@@ -39,8 +39,8 @@ git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemai
 ```
 
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 For this tutorial, you'll need:
 
@@ -65,8 +65,8 @@ This approach aligns naturally with MongoDB, where application logic frequently 
 
 In this tutorial, we'll use aJava SE project---without any heavyweight frameworks---to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
 
-Step 1: Create the entities {#h2-1-step-1-create-the-entities}
---------------------------------------------------------------
+Step 1: Create the entities
+---------------------------
 
 The first step is to create a plain Maven project, where we can use Maven Archetype[quick start](https://maven.apache.org/archetypes/maven-archetype-quickstart/). After making the Maven project, the next step is to include Jupiter, Mockito, AssertJ, and Testcontainers for test proposals. For the Java integration and MongoDB, we will explore it using the Java Enterprise specification, Jakarta EE, where we will utilize both specifications, Jakarta NoSQL and Jakarta Data, both of which are implemented by Eclipse JNoSQL. We don't need to spend a considerable amount of time setting it up; you can clone the GitHub repository. The pom.xml shows the dependencies using Java with the Apache Maven Project:
 
@@ -217,8 +217,8 @@ public enum CleanStatus {
 ```
 
 
-Explanation of annotations: {#h2-2-explanation-of-annotations}
---------------------------------------------------------------
+Explanation of annotations:
+---------------------------
 
 * **@Entity**: Marks the Room class as a database entity for management by Jakarta NoSQL.
 * **@Id:** Indicates the primary identifier for the entity, uniquely distinguishing each document in the MongoDB collection.
@@ -257,8 +257,8 @@ public interface RoomRepository {
 
 We have those queries that explore Jakarta Data Queries, but are they properly working? In the next step, we will generate some tests to check it.
 
-Step 2: Create a database container {#h2-3-step-2-create-a-database-container}
-------------------------------------------------------------------------------
+Step 2: Create a database container
+-----------------------------------
 
 After the entity and repository are done, the next step is to generate the test structure. Use Testcontainer to ensure that the database is running when we use this container. We will generate an enum to implement the Singleton pattern, which will create a MongoDB database container and start a MongoDB instance for testing purposes.
 
@@ -349,8 +349,8 @@ public class ManagerSupplier implements Supplier<DatabaseManager> {
 
 On this class, we can see that we are overwriting the behavior at test where we are using the DatabaseContainer where the database is called hotel. With the structure done, the next step is playing with tests and DDT.
 
-Step 3: Generate our first DDT {#h2-4-step-3-generate-our-first-ddt}
---------------------------------------------------------------------
+Step 3: Generate our first DDT
+------------------------------
 
 One of the goals of data-driven testing is to achieve test coverage across various input combinations and capture the expected output. The first test we will generate is to verify that we are saving the information properly in the database. In this case, it does not matter which room is selected; it should insert and also generate an ID for it.
 
@@ -627,8 +627,8 @@ class RoomServiceTest {
 ```
 
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 In software development, the gap between business rules and database logic is often where subtle bugs and misunderstandings live. By adopting data-driven testing, we shift the focus from checking technical details to validating actual business behavior---across a wide range of scenarios and edge cases.
 

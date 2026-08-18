@@ -26,8 +26,8 @@ Part 2 described how to use the new capabilities offered by Leyden and presented
 
 Part 3 provides a more detailed account of how Leyden's proposed solution operates and presents a first look at tooling that allows you to assess the benefits that result and tune your application to make the most of what Leyden offers.
 
-What is inside the Ahead of Time Cache? {#h2-0-what-is-inside-the-ahead-of-time-cache}
---------------------------------------------------------------------------------------
+What is inside the Ahead of Time Cache?
+---------------------------------------
 
 Ideally, an AOT cache would simply include everything needed to allow a production run to skip straight through to its warmed up state. However, in practice training runs don't always cover all the things that can happen at runtime and hence that the assets contained in any generated AOT cache will be more or less complete.
 
@@ -53,7 +53,7 @@ On the other hand we also have Leyden's own Cache Management Data, i.e. training
 
 Let's see in detail what each data type means.
 
-### JVM Metadata {#h3-1-jvm-metadata}
+### JVM Metadata
 
 Metadata stored in the AOT cache is a superset of what was stored in a CDS archive. The subset which overlaps with CDS is the static metadata. The latter represents the structure and hierarchy of classes in JDK and application code. Primarily, it helps avoid the cost of parsing bytecode, as it is in the same format as the JVM's own internal metadata model: classes, methods, fields, inheritance between classes,... which can be mapped directly into memory. Having this information stored in the cache speeds up the time the Hotspot takes to decode the different class files, and to build the dependency graph.
 
@@ -61,7 +61,7 @@ While starting the application, the Java Heap memory gets filled with objects an
 
 The heap data cached at the moment is restricted to very specific cases as it has to behave exactly the same on each and every run, but the type of data cached is expanding on each JDK version.
 
-### JVM Profile and Linkage Data {#h3-2-jvm-profile-and-linkage-data}
+### JVM Profile and Linkage Data
 
 The cache also includes dynamic JVM metadata i.e. MethodCounter, MethodData and ConstantPoolCache objects. These objects are created and attached to the static metadata methods and classes and their content is updated as a side-effect of executing method code.
 
@@ -73,7 +73,7 @@ ConstantPoolCache objects are attached to a clasImage descriptions and track the
 
 Linking a lambda involves running Java 'bootstrap' code that identifies a private class that owns the bytecode for the lambda body, asking it to construct and return a MethodHandle that can be used to execute the target. If a lambda can be run during training then the target class and method can be pre-loaded and the MethodHandle stored in the heap and linked from the ConstantPoolCache, avoiding the need to run the 'bootstrap' in production. If the lambda is executed repeatedly in production the called bytecode may even be inlined into the compiled code for the caller. Effectively, executing as lambda in training removes all setup overheads in production, making lambdas as cheap to use as a direct method call.
 
-### JVM Code and Code Management Data {#h3-3-jvm-code-and-code-management-data}
+### JVM Code and Code Management Data
 
 AdapterHandlers are a set of utilities used by the Hotspot to marshall method parameters when performing certain types of call. AdapterHandlers can be cached, avoiding the need to generate them on demand. They are identified by their AdapterFingerprint and indexed via a table of AdapterHandleEntry objects.
 
@@ -81,12 +81,12 @@ Alongside these handlers various StubBlobs needed by the runtime are also cached
 
 Leyden premain also includes CompiledMethods, i.e. pre-compiled Java methods, in the cache. This includes both C1 and C2 (Tiers 1 - 4) and in some cases different tier compiled versions of the same method. Having compiled code immediately available, especially Tier 4 code, is an enormous boost to performance. Lower tier code may be useful when the method only reached that tier during training or as a fallback if we need to deoptimize and reprofile. Pre-compiled Java methods are an enhancement we expect to add soon to the mainline JDK.
 
-### Leyden Training Data {#h3-4-leyden-training-data}
+### Leyden Training Data
 
 Training data is part of the Leyden specific code. It tracks which methods have actually been loaded, executed, and used during the training run and how they have been used. Normally all loaded classes have associated class training data, but these may be omitted if, say, the class is loaded by a custom (user-defined) loader, is modified by an agent or fails to resolve because of linkage errors.There is a usage threshold which means that only methods that have been executed above that threshold will have associated method training data. Likewise, compiled method training data only exists for methods actually compiled during training. This helps both in keeping a smaller footprint in the cache and removing less useful data so processing the cache is faster.
 
-How Do I Know Leyden Is Helping? {#h2-5-how-do-i-know-leyden-is-helping}
-------------------------------------------------------------------------
+How Do I Know Leyden Is Helping?
+--------------------------------
 
 Depending on how well you train your deployment you may see different improvements in time to reach application start (startup time) and time to reach peak performance (warmup time). Log output is one useful way to measure these two metrics but the details will depend on what monitoring capabilities are available in your test or production environment. However, simply measuring these two times (or even recording warmup profiles) doesn't help with the problem of explaining why, for some given training regime, you get a specific improvement or perhaps, in some cases, no measurable improvement.
 
@@ -102,8 +102,8 @@ The first thing we need to do is to compile this application on the root folder:
 
 ![mvn clean package](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tm6pz4hlp6od2017a0s7.gif)
 
-Training the application {#h2-6-training-the-application}
----------------------------------------------------------
+Training the application
+------------------------
 
 Once we have the jar created, we use it to start a training run:
 
@@ -144,8 +144,8 @@ The arguments we are going to use are the following:
 
 On this run, we created the *production.log* file.
 
-Analyzing the Cache {#h2-7-analyzing-the-cache}
------------------------------------------------
+Analyzing the Cache
+-------------------
 
 After using it, we can stop it and analyze how the AOT Cache behaved with our AOT Cache diagnostics tool: <https://github.com/Delawen/leyden-analyzer>
 
@@ -163,7 +163,7 @@ Now we are ready to start our analysis. A good place to start is the info comman
 
 ![Info](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2uiwzejfxl06c1s6j52n.png)
 
-### Are we training the right thing? {#h3-8-are-we-training-the-right-thing}
+### Are we training the right thing?
 
 The first thing that should catch our attention is that there's more than 10% of classes that were used on the production run but were not cached. That's not usual, so let's dig into whatImage description those classes are. There are hundreds of them, so if we filter by our package name, that would make our exploration easier:
 
@@ -197,7 +197,7 @@ If we analyze the results again with our tool, we should see a different result:
 
 We have increased the percentage of the classes used (96%) in production that were cached compared to our last attempt (89%). That's an improvement.
 
-### Did we load all relevant classes during Training? {#h3-9-did-we-load-all-relevant-classes-during-training}
+### Did we load all relevant classes during Training?
 
 Let's check again for classes loaded in production that were not cached:
 
@@ -237,7 +237,7 @@ We made sure that:
 
 Although we still don't have the aspiring ideal 100% classes cached, we are really close (98%) and we can be happy with the list of classes cached. We can now focus on how good the profiling of the methods is.
 
-### Are our methods properly trained? {#h3-10-are-our-methods-properly-trained}
+### Are our methods properly trained?
 
 Maybe you already noticed another important information we have been ignoring until now: all our classes are labelled as "**\[Untrained\]**". Let's take a closer look at that.
 

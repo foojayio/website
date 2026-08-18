@@ -39,7 +39,7 @@ JWT authentication is everywhere. But rolling it correctly --- with proper algor
 
 It ships with two APIs that serve different tastes: a **fluent builder** for expressive, chainable token construction, and a suite of **BIF functions** for direct, functional-style usage. Both share the same engine, key registry, and security model.
 
-### The Fluent Builder --- `jwtNew()` {#h3-0-the-fluent-builder-jwtnew}
+### The Fluent Builder --- `jwtNew()`
 
 When readability matters, the fluent builder gives you a clean, chainable surface for token construction. Call `jwtNew()` and chain your claims. Terminate with `.sign()` or `.encrypt()`.
 
@@ -57,7 +57,7 @@ token = jwtNew()
 
 Every standard claim has a named method. Custom claims go through `.claim( key, val )`. Headers via `.header( key, val )`. Swap `.sign()` for `.encrypt()` and you have a JWE. It reads like what it does. 🎯
 
-### The BIF Functions {#h3-1-the-bif-functions}
+### The BIF Functions
 
 For teams that prefer a direct, functional style, all operations are available as first-class BoxLang BIFs:
 
@@ -73,7 +73,7 @@ For teams that prefer a direct, functional style, all operations are available a
 | `jwtGenerateSecret()`  | Cryptographically random HMAC secret (Base64-encoded)            |
 | `jwtGenerateKeyPair()` | RSA or EC key pair as PEM strings                                |
 
-### HMAC Sign and Verify {#h3-2-hmac-sign-and-verify}
+### HMAC Sign and Verify
 
 ```java
 secret  = jwtGenerateSecret( 256 );
@@ -83,7 +83,7 @@ writeOutput( payload.sub ); // user-123
 ```
 
 
-### RSA Sign and Verify {#h3-3-rsa-sign-and-verify}
+### RSA Sign and Verify
 
 ```java
 keys    = jwtGenerateKeyPair( "RS256" );
@@ -92,7 +92,7 @@ payload = jwtVerify( token, keys.publicKey, "RS256" );
 ```
 
 
-### JWE Encryption {#h3-4-jwe-encryption}
+### JWE Encryption
 
 Sensitive payloads --- PII, PHI, internal claims that must stay opaque --- belong in a JWE, not a JWS. bx-jwt handles both:
 
@@ -173,11 +173,11 @@ jwtService.registerKey( "session-key", { algorithm: "HS256", secret: generateSec
 
 `bx-jwt` is built with the attack surface in mind. Security properties are **unconditional** --- they cannot be turned off:
 
-### `alg:none` Rejection {#h3-5-alg-none-rejection}
+### `alg:none` Rejection
 
 The classic JWT attack. bx-jwt **unconditionally rejects** tokens with `alg:none`. Passing an unsigned token to `jwtVerify()` or `jwtRefresh()` always throws `JWTVerificationException`. No configuration switch, no override. It simply doesn't work.
 
-### HMAC Minimum Key Lengths (RFC 7518 §3.2) {#h3-6-hmac-minimum-key-lengths-rfc-7518-3-2}
+### HMAC Minimum Key Lengths (RFC 7518 §3.2)
 
 Short HMAC secrets are a real-world vulnerability. bx-jwt enforces RFC 7518 minimums:
 
@@ -189,7 +189,7 @@ Short HMAC secrets are a real-world vulnerability. bx-jwt enforces RFC 7518 mini
 
 Use `jwtGenerateSecret( bits )` and you're always compliant.
 
-### Algorithm Allowlist {#h3-7-algorithm-allowlist}
+### Algorithm Allowlist
 
 Algorithm-confusion attacks exploit servers that accept any algorithm the token header declares. Lock your application to a known set:
 
@@ -199,7 +199,7 @@ allowedAlgorithms: [ "HS256", "RS256" ]
 ```
 
 
-### Clock Skew Tolerance {#h3-8-clock-skew-tolerance}
+### Clock Skew Tolerance
 
 Distributed systems have clock drift. bx-jwt ships with a configurable `clockSkew` (default: 60 seconds) that prevents legitimate tokens from failing `exp`/`nbf` validation due to minor time differences between services. Tune it per environment:
 
@@ -212,7 +212,7 @@ payload = jwtVerify( token, secret, "HS256", { clockSkew: 120 } );
 ```
 
 
-### Authentication Middleware {#h3-9-authentication-middleware}
+### Authentication Middleware
 
 ```java
 function requireAuth() {
@@ -236,7 +236,7 @@ function requireAuth() {
 ```
 
 
-### Token Refresh with Grace Period {#h3-10-token-refresh-with-grace-period}
+### Token Refresh with Grace Period
 
 ```java
 function refreshToken( token ) {
@@ -254,7 +254,7 @@ function refreshToken( token ) {
 ```
 
 
-### Kid-Based Key Rotation {#h3-11-kid-based-key-rotation}
+### Kid-Based Key Rotation
 
 ```java
 function verifyWithKeyRotation( token ) {
@@ -266,7 +266,7 @@ function verifyWithKeyRotation( token ) {
 ```
 
 
-### Signing (JWS) {#h3-12-signing-jws}
+### Signing (JWS)
 
 |      Algorithm      |      Type      |                     Notes                     |
 |---------------------|----------------|-----------------------------------------------|
@@ -274,7 +274,7 @@ function verifyWithKeyRotation( token ) {
 | RS256, RS384, RS512 | RSA            | Asymmetric --- private signs, public verifies |
 | ES256, ES384, ES512 | Elliptic Curve | Smaller keys than RSA, equivalent security    |
 
-### Encryption (JWE) {#h3-13-encryption-jwe}
+### Encryption (JWE)
 
 | Key Algorithm | Content Encryption |         Key Type         |
 |---------------|--------------------|--------------------------|

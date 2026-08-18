@@ -17,35 +17,35 @@ enlighterjs: true
 frozen: false
 ---
 
-Problem statement {#h2-0-problem-statement}
--------------------------------------------
+Problem statement
+-----------------
 
 In the production environment, in a MongoDB Atlas database, a collection contains massive amounts of data stored, including aged and current data. However, aged data is not frequently accessed through applications, and the data piles up daily in the collection, leading to performance degradation and cost consumption. This results in needing to upgrade the cluster tier size to maintain sufficient resources according to workload, as it would be difficult to continue with the existing tier size.
 
 Overall, this negatively impacts application performance and equates to higher resource utilization and increased costs for business.
 
-Resolution {#h2-1-resolution}
------------------------------
+Resolution
+----------
 
 To avoid overpaying, you can offload aged data to a cheaper storage area based on the date criteria, which is called *archival storage* in MongoDB. Later, you can access those infrequently archived data by using MongoDB federated databases. Hence, cluster size, performance, and resource utilization are optimized.
 
 To better manage data in the Atlas cluster, MongoDB introduced the Online Archive feature from MongoDB Atlas 4.4 version onward.
 
-### Advantages {#h3-2-advantages}
+### Advantages
 
 * It archives data based on the date criteria in the archival rule, and the job runs every five minutes by default.
 * Query the data through a [federated database connection](https://www.mongodb.com/docs/atlas/data-federation/tutorial/connect/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-mongodb-foojay&utm_term=tony.kim), which is available in the Data Federation tab.
 * Infrequent data access through federated connections apart from the main cluster improves performance and reduces traffic on the main cluster.
 * Archived data can be queried by downstream environments and consumed in read-only mode.
 
-### Limitations {#h3-3-limitations}
+### Limitations
 
 * Archived data is available for reading purposes, but it does not support writing or modification.
 * [Capped collections](https://www.mongodb.com/docs/manual/core/capped-collections/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-mongodb-foojay&utm_term=tony.kim) do not support online archival.
 * [Atlas serverless clusters](https://www.mongodb.com/docs/atlas/manage-serverless-instances/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-mongodb-foojay&utm_term=tony.kim) do not support online archival.
 * Separate federated connection strings connect archived data.
 
-### Pre-requisites {#h3-4-pre-requisites}
+### Pre-requisites
 
 * Online Archive is supported by cluster tier M10 and above.
 * Indexes offer better performance during archival.
@@ -53,8 +53,8 @@ To better manage data in the Atlas cluster, MongoDB introduced the Online Archiv
 
 Project Data Access Admin, Project Cluster Manager, or Project Owner.
 
-Online archival configuration setup {#h2-5-online-archival-configuration-setup}
--------------------------------------------------------------------------------
+Online archival configuration setup
+-----------------------------------
 
 The cluster DemoCluster has a collection called movies in the database sample_mflix. As per the business rule, you are storing aged and the latest data in the main cluster, but day by day, data keeps piling up, as expected. Therefore, right-sizing your cluster resources by upgrading tier size leads to increased costs.
 
@@ -214,8 +214,8 @@ MongoShell prompt: To connect both archived data from the Data Federation tab, y
 MongoShell prompt: Here in the main cluster, you can view a list of databases where you can access, read, and write frequent data through a cluster connection string.  
 ![ShellPrompt → Base cluster list of databases where CRUD operations are performed from the application](Screenshot-2026-03-10-at-2.09.17-PM.png)
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 Overall, MongoDB Atlas's online archival feature empowers organizations to optimize storage costs, enhance performance, adhere to data retention policies by securely storing data for long-term retention periods, and effectively manage data and storage efficiency throughout its lifecycle.
 

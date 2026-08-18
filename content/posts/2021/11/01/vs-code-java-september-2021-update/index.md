@@ -22,19 +22,19 @@ Hi everyone, welcome to the September edition of the Visual Studio Code Java upd
 
 In this article, we are going cover the new release of Gradle extension, more convenient Code Actions and the recent 1.0 language server release.
 
-Language Server for Java™ 1.0 Release {#h2-0-language-server-for-java-1-0-release}
-----------------------------------------------------------------------------------
+Language Server for Java™ 1.0 Release
+-------------------------------------
 
 The 1.0 release of the Language Server for Java™ was officially released recently! We believe this is an important milestone and result of a multi-year collaboration between Microsoft and Red Hat. Please visit this [special announcement here on Foojay](https://foojay.io/today/announcing-the-1-0-release-of-language-support-for-java-on-visual-studio-code/) to see the release highlights as well as future plans in detail.
 
-Gradle for Java Extension Release {#h2-1-gradle-for-java-extension-release}
----------------------------------------------------------------------------
+Gradle for Java Extension Release
+---------------------------------
 
 Better Gradle support has been one of the top asks in the community. To better address the Gradle needs for developers, we are excited to announce that we have now released the "[Gradle for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle)" extension (previously called "Gradle Tasks" extension). This extension was originally started by [@badsyntax](https://github.com/badsyntax) and is now maintained by Microsoft. Please note that this extension is not yet part of [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) and you may need to download it separately.
 
 Let's take a look at some highlights of this new version:
 
-### Local Gradle installation support {#h3-2-local-gradle-installation-support}
+### Local Gradle installation support
 
 In previous version, Gradle wrapper in the project folder is the requirement for the extension. There was a feature request ([Issue #1004](https://github.com/microsoft/vscode-gradle/issues/1004)) to support Gradle projects without wrapper, this feature was added to the recent release. Developers can now use the following settings to control the activation behavior.
 
@@ -44,7 +44,7 @@ In previous version, Gradle wrapper in the project folder is the requirement for
 
 More details about these settings can be found at
 
-### Dependency Management and Project View {#h3-3-dependency-management-and-project-view}
+### Dependency Management and Project View
 
 Another exciting new feature is the project dependency view. Developers can now easily view the dependencies in a project from the extension.
 
@@ -52,7 +52,7 @@ To view the dependencies of a project, simply click on the "Dependencies" item a
 
 [![Gradle dependency](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/dependency.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/dependency.png)
 
-### Gradle Authoring Experience (Groovy) {#h3-4-gradle-authoring-experience-groovy}
+### Gradle Authoring Experience (Groovy)
 
 Gradle file authoring experience in Groovy is also greatly improved! There are a few new features we want to highlight:
 
@@ -86,7 +86,7 @@ The Gradle language server will use Groovy compile engine to analyze the Gradle 
 
 There are many more features in this extension. Please visit [the GitHub documentation](https://github.com/microsoft/vscode-gradle#feature-overview) to see the full list of features! You can follow [this link](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle) to get this Gradle extension.
 
-### More Convenient Code Actions {#h3-5-more-convenient-code-actions}
+### More Convenient Code Actions
 
 We have been constantly receiving feedback that the current code actions are sometimes hard to find. Previously, developer has to right click, select "Source Action" and then find all the Java code actions in the menu.
 
@@ -99,14 +99,14 @@ Now, developers can simply use the lightbulb icon (Quick Fix) to generate common
 Here is a quick demo:  
 ![](codeactions.gif)
 
-### Feedback and Suggestions {#h3-6-feedback-and-suggestions}
+### Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to leave us feedback
 
 * Leave your comment on this blog post
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 
-### Resources {#h3-7-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

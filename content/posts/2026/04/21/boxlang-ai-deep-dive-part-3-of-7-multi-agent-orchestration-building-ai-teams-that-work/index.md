@@ -32,8 +32,8 @@ The problem with most multi-agent frameworks is that the orchestration layer is 
 
 BoxLang AI 3.0 changes this. `AiAgent` now tracks its position in a full hierarchy tree, and sub-agents are wired as tools automatically --- the coordinator doesn't need to know how to delegate, only that it can.
 
-🌲 The Agent Tree {#h2-0-the-agent-tree}
-----------------------------------------
+🌲 The Agent Tree
+-----------------
 
 Every `AiAgent` carries a `parentAgent` property and a full set of hierarchy helpers. The relationship is bidirectional: `addSubAgent()` registers the sub-agent as a callable tool and sets the parent reference in one call.
 
@@ -70,7 +70,7 @@ getAncestors()             // [immediateParent, grandparent, ..., root]
 ```
 
 
-### Cycle Detection Built-In {#h3-1-cycle-detection-built-in}
+### Cycle Detection Built-In
 
 Setting a parent that would create a cycle throws immediately --- no silent infinite loops:
 
@@ -94,8 +94,8 @@ AiAgent function setParentAgent( required AiAgent parent ) {
 ```
 
 
-🤖 Sub-Agents as Tools {#h2-2-sub-agents-as-tools}
---------------------------------------------------
+🤖 Sub-Agents as Tools
+----------------------
 
 The magic of `addSubAgent()` is that each sub-agent is automatically wrapped as a tool the parent can call --- no manual wiring, no custom callback code.
 
@@ -122,8 +122,8 @@ When `addSubAgent()` is called, the parent's `AiModel` gets a new tool named `de
 
 **The coordinator doesn't need special logic. It just has more tools.**
 
-🏢 AiAgent is Now Fully Stateless {#h2-3-aiagent-is-now-fully-stateless}
-------------------------------------------------------------------------
+🏢 AiAgent is Now Fully Stateless
+---------------------------------
 
 One of the most important architectural changes in 3.0: `AiAgent` no longer holds `userId` or `conversationId` as instance state. They are resolved per-call.
 
@@ -152,8 +152,8 @@ sharedAgent.run( "Hello",           {}, { userId: "bob",   conversationId: "sess
 ```
 
 
-🧠 Per-Call Identity Routing on Memory {#h2-4-per-call-identity-routing-on-memory}
-----------------------------------------------------------------------------------
+🧠 Per-Call Identity Routing on Memory
+--------------------------------------
 
 All memory types follow the same pattern --- `add()`, `getAll()`, `clear()`, and `trim()` all accept optional `userId` and `conversationId`:
 
@@ -172,8 +172,8 @@ bobHistory   = sharedMemory.getAll( userId: "bob",   conversationId: "conv-2" )
 
 When the agent calls `loadMemoryMessages()` internally, it passes the resolved per-call `userId` and `conversationId` down to all attached memories. Memory is naturally tenant-isolated without any extra wiring.
 
-🏗️ The Agent Run Lifecycle {#h2-5-the-agent-run-lifecycle}
------------------------------------------------------------
+🏗️ The Agent Run Lifecycle
+---------------------------
 
 Understanding what happens inside `run()` is useful when you're debugging or building middleware (more on that in Part 4). Here's the sequence:
 
@@ -196,8 +196,8 @@ Understanding what happens inside `run()` is useful when you're debugging or bui
 
 The system message is also cached and fingerprinted --- if description, instructions, and skill pools haven't changed since the last call, the cached version is used instead of rebuilding. This matters for high-throughput scenarios where the same agent handles many requests.
 
-🌊 Streaming with Multi-Agent Teams {#h2-6-streaming-with-multi-agent-teams}
-----------------------------------------------------------------------------
+🌊 Streaming with Multi-Agent Teams
+-----------------------------------
 
 Streaming works the same way in multi-agent setups --- each agent can stream independently:
 
@@ -219,8 +219,8 @@ coordinator.stream(
 
 When the coordinator decides to delegate to the researcher, that sub-call happens synchronously inside the tool invocation --- the streaming coordinator gets back the researcher's result as a tool response, then continues streaming.
 
-🔄 Suspend and Resume {#h2-7-suspend-and-resume}
-------------------------------------------------
+🔄 Suspend and Resume
+---------------------
 
 When `HumanInTheLoopMiddleware` (covered in Part 4) suspends an agent, the state needs to be preserved. The `checkpointer` property handles this:
 
@@ -273,8 +273,8 @@ any function resume( required string decision, required string threadId, struct 
 ```
 
 
-🔍 Introspection {#h2-8-introspection}
---------------------------------------
+🔍 Introspection
+----------------
 
 The `getConfig()` method gives you full visibility into an agent's state --- useful for debugging, monitoring dashboards, and logging:
 
@@ -306,8 +306,8 @@ println( config.middleware )    // [{ name, description }]
 ```
 
 
-🚀 A Complete Multi-Agent Example {#h2-9-a-complete-multi-agent-example}
-------------------------------------------------------------------------
+🚀 A Complete Multi-Agent Example
+---------------------------------
 
 Here's a practical orchestration: a coordinator that delegates research to a specialized researcher and writing to a specialized writer, both with their own skills and tools.
 
@@ -353,8 +353,8 @@ response = coordinator.run(
 
 The LLM driving the coordinator sees two tools: `delegate_to_researcher` and `delegate_to_writer`. It decides to call the researcher first, gets back a detailed summary, then calls the writer with that summary and the original request, and finally synthesizes the writer's output into a final response. You didn't write any of that logic --- the LLM figured it out from the tool descriptions.
 
-What's Next {#h2-10-what-s-next}
---------------------------------
+What's Next
+-----------
 
 In Part 4, we tackle the middleware system --- the six built-in middleware classes, how the hook lifecycle works, writing your own middleware, and the `FlightRecorderMiddleware` that makes AI agents properly testable in CI.
 

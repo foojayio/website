@@ -27,8 +27,8 @@ It is an agentic IDE that understands what you are trying to do across your whol
 
 
 
-**What is Windsurf AI?** {#h2-0-what-is-windsurf-ai}
-----------------------------------------------------
+**What is Windsurf AI?**
+------------------------
 
 **Windsurf** is an AI-powered IDE developed by the team at Codeium. You can find it at[windsurf.com](https://windsurf.com/). While it feels familiar because it is built on the VS Code foundation, it is designed from the ground up to be "agentic".
 
@@ -36,8 +36,8 @@ Unlike tools that just sit in a side panel, Windsurf is deeply integrated into t
 
 
 
-**Main characteristics that make Windsurf different** {#h2-1-main-characteristics-that-make-windsurf-different}
----------------------------------------------------------------------------------------------------------------
+**Main characteristics that make Windsurf different**
+-----------------------------------------------------
 
 What makes this IDE stand out from other tools is how it handles "Flows":
 
@@ -52,8 +52,8 @@ What makes this IDE stand out from other tools is how it handles "Flows":
 
 
 
-**The Usual Flow and the "Verification" Problem** {#h2-2-the-usual-flow-and-the-verification-problem}
------------------------------------------------------------------------------------------------------
+**The Usual Flow and the "Verification" Problem**
+-------------------------------------------------
 
 In a typical flow, you ask the agent: *"Create a REST controller for managing Books."* The agent generates the code, and it looks good. But how do you know it follows your team's quality standards? 🧐
 
@@ -61,12 +61,12 @@ Usually, you would have to manually run a scan, wait for the results, and then t
 
 
 
-**What are Agent Skills?** {#h2-3-what-are-agent-skills}
---------------------------------------------------------
+**What are Agent Skills?**
+--------------------------
 
 [**Agent Skills**](https://agentskills.io/) are reusable sets of instructions and procedural knowledge that you give to the agent to resolve specific problems. Technically, a Skill is a folder containing a SKILL.md file with specific instructions and, optionally, scripts or reference files to tackle concrete problems.
 
-### **Example: A Skill with Command Execution** {#h3-4-example-a-skill-with-command-execution}
+### **Example: A Skill with Command Execution**
 
 You can create a skill that tells the agent how to run a local script to verify a snippet against a **SonarQube** instance using its API through a client that will send a request to SonarQube API.
 
@@ -92,8 +92,8 @@ Instructions:
 
 
 
-**The Problem: Local Skills vs. The Cloud ☁️** {#h2-5-the-problem-local-skills-vs-the-cloud}
---------------------------------------------------------------------------------------------
+**The Problem: Local Skills vs. The Cloud ☁️**
+----------------------------------------------
 
 Skills are powerful, but they have a "spatial" limitation: they need to be stored **locally** in your project or IDE configuration.
 
@@ -101,8 +101,8 @@ If you work across different machines or teams, managing these local files becom
 
 
 
-**What is MCP technology?** {#h2-6-what-is-mcp-technology}
-----------------------------------------------------------
+**What is MCP technology?**
+---------------------------
 
 [**MCP (Model Context Protocol)**](https://docs.windsurf.com/windsurf/cascade/mcp) is an open standard that acts like a universal connector for AI agents.
 
@@ -114,8 +114,8 @@ If you work across different machines or teams, managing these local files becom
 
 The adaptability of the MCP standard means that a Windsurf agent isn't limited to just one system. Beyond the crucial [**SonarQube MCP Server**](https://github.com/SonarSource/sonarqube-mcp-server) for static analysis, agents can be empowered with connections to other enterprise tools. Common MCP servers include the **Jira MCP Server** (enabling the agent to read/update tickets and synchronize tasks), and the **OpenAPI MCP Server** (allowing the agent to interact with internal APIs), [among hundreds](https://mcpmarket.com/). This ability to connect to diverse, specialized servers makes the Agent a truly versatile orchestrator of development workflow.
 
-Let me introduce you to SonarQube MCP Server? 👋 {#h2-7-let-me-introduce-you-to-sonarqube-mcp-server}
------------------------------------------------------------------------------------------------------
+Let me introduce you to SonarQube MCP Server? 👋
+------------------------------------------------
 
 The [**SonarQube MCP Server**](https://github.com/SonarSource/sonarqube-mcp-server) is a specialized remote service designed to bridge the powerful code analysis capabilities of SonarQube directly into the Windsurf agentic IDE via the **Model Context Protocol (MCP)** .  
 
@@ -125,8 +125,8 @@ It acts as a secure, stateless middleware, allowing the Windsurf agent (Cascade)
 
 This remote approach resolves the "local trace" problem associated with Agent Skills, enabling consistent, enterprise-grade code quality checks across all developer environments.
 
-Tools Provided by the SonarQube MCP Server {#h2-8-tools-provided-by-the-sonarqube-mcp-server}
----------------------------------------------------------------------------------------------
+Tools Provided by the SonarQube MCP Server
+------------------------------------------
 
 Once the SonarQube MCP Server is configured and active in Windsurf, it exposes a set of "tools" or specialized functions that the Cascade agent can autonomously invoke. These tools are the agent's new capabilities for interacting with code quality.
 
@@ -141,8 +141,8 @@ The SonarQube MCP server provides **25 distinct tools** for agent interaction at
 
 
 
-**How to install the SonarQube MCP server in Windsurf** {#h2-9-how-to-install-the-sonarqube-mcp-server-in-windsurf}
--------------------------------------------------------------------------------------------------------------------
+**How to install the SonarQube MCP server in Windsurf**
+-------------------------------------------------------
 
 To bring **Code Quality** checks into Windsurf via MCP, you can use Docker:
 
@@ -164,8 +164,8 @@ Or even easier, using the free extension [SonarQube for IDE](https://docs.sonars
 
 
 
-**Example: Analyzing a snippet with** **analyze_code_snippet** **tool** {#h2-10-example-analyzing-a-snippet-with-analyze-code-snippet-tool}
--------------------------------------------------------------------------------------------------------------------------------------------
+**Example: Analyzing a snippet with** **analyze_code_snippet** **tool**
+-----------------------------------------------------------------------
 
 Once the SonarQube MCP server is active, Windsurf has a new "tool" called analyze_code_snippet, among other 24 tools to interact with SonarQube.You can highlight a Java method and tell Cascade: *"@Utils.java#L22-31 Analyze this with Sonar and fix it."*
 ![](Screenshot-2026-02-16-at-09.06.32-1024x381.png)
@@ -191,7 +191,7 @@ public void logInfo(String msg) {
 
 
 
-**Conclusion: Agentic Superpowers 🦸‍♂️** {#h2-11-conclusion-agentic-superpowers}
----------------------------------------------------------------------------------
+**Conclusion: Agentic Superpowers 🦸‍♂️**
+-----------------------------------------
 
 By supporting both **Skills** and **MCP** , Windsurf gives us the best of both worlds. You can use **Skills** for quick, project-specific local automations, and **MCP** to connect your agent to powerful, remote platforms like **SonarQube** .This combination turns the IDE from a simple text editor into a true AI partner that ensures your **Code Quality** is top-notch without you having to lift a finger.

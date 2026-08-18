@@ -29,8 +29,8 @@ You're on deadline to finish a project, and you open the application to do your 
 
 The guilty pleasure of foosball or ping pong during work hours is also a productivity killer.
 
-Put a stake through the heart of undead code {#h-put-a-stake-through-the-heart-of-undead-code}
-----------------------------------------------------------------------------------------------
+Put a stake through the heart of undead code
+--------------------------------------------
 
 What's the problem? A time vampire is a thing that sucks your time, not your blood, because a lot of Java applications have just gotten too big. In Azul's research and conversations with customers, about 10-30% of the custom code in applications is undead code and can just be deleted. Multiple people have been in the organization over several years, that code has changed, and new people either are afraid to delete code or don't have time to investigate.
 
@@ -52,8 +52,8 @@ In this webinar, you will learn how to:
 
 [Click here to watch the on-demand webinar!](https://www.azul.com/webinar/your-undead-code-is-a-time-vampire/)
 
-Azul Code Inventory can help remove undead code {#h-azul-code-inventory-can-help-remove-undead-code}
-----------------------------------------------------------------------------------------------------
+Azul Code Inventory can help remove undead code
+-----------------------------------------------
 
 [Azul Code Inventory](https://www.azul.com/products/components/code-inventory/)®, a service of [Azul Intelligence Cloud](https://www.azul.com/products/intelligence-cloud), is the only solution that precisely catalogs what code runs in production across all of an enterprise's Java workloads. It slashes the time and burden of maintaining and testing unused code, significantly improving developer productivity and saving money. Code Inventory collects and aggregates detailed information from the Java Virtual Machine (JVM) of what code actually runs in production over time. It provides highly accurate, strong signals to confidently identify and prioritize unused code for removal. It helps reduce clutter so teams can work only on active code, lowering maintenance effort and increasing development velocity.
 
@@ -62,8 +62,8 @@ In December, Azul Intelligence Cloud won InfoWorld's Technology of the Year Awar
 
 [Click here to watch the on-demand webinar!](https://www.azul.com/webinar/your-undead-code-is-a-time-vampire/)
 
-Gradle Devlocity can help automate tasks to improve productivity {#h-gradle-devlocity-can-help-automate-tasks-to-improve-productivity-nbsp}
--------------------------------------------------------------------------------------------------------------------------------------------
+Gradle Devlocity can help automate tasks to improve productivity
+----------------------------------------------------------------
 
 Devlocity is Gradle's developer productivity tool. It allows developers to see the results of all their local builds. They can see when a build has failed and when it's passed all its tests. It can show all the dependencies that were used in a build, which dependencies are needed, and which versions are different. It can even show the versions of libraries, like Log 4j, that are being used.
 

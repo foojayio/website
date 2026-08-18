@@ -18,7 +18,7 @@ frozen: false
 
 *[JEP 411](https://openjdk.java.net/jeps/411) specifies the "deprecation of the Security Manager for removal in a future release. The Security Manager dates from Java 1.0. It has not been the primary means of securing client-side Java code for many years, and it has rarely been used to secure server-side code. To move Java forward, we intend to deprecate the Security Manager for removal in concert with the legacy Applet API (JEP 398)." Below, Peter Firmstone describes how this relates to the principle of least privilege and what the impact of this JEP will be. Agree or disagree, add your comments, or your full articles on this topic are also welcome here on Foojay.*
 
-### The Principle of Least Privilege {#h3-0-the-principle-of-least-privilege}
+### The Principle of Least Privilege
 
 The principle of least privilege is simply that users and code must only have access to resources and information required to perform their intended tasks.
 
@@ -31,7 +31,7 @@ The benefits are:
 * Better system stability, when code is limited in the changes it can make to the system, or connections it can make. Unexpected changes are prevented from happening.
 * Improved security, if you use a library that has a vulnerability, the damage it can do is limited by the privileges it has.
 
-### Why the principle of least privilege is important for Java developers. {#h3-1-why-the-principle-of-least-privilege-is-important-for-java-developers}
+### Why the principle of least privilege is important for Java developers.
 
 1. Most if not all Java programs utilize open source library dependencies.
 2. Some programs will use freeware libraries or commercial libraries.
@@ -115,7 +115,7 @@ Then set the following property:
 
 This replaces the built-in horribly slow Java policy provider with a modern performant and highly scalable implementation, with identical functionality.
 
-### How does running Java with a SecurityManager enforcing the principle of least privilege benefit my programs? {#h3-2-how-does-running-java-with-a-securitymanager-enforcing-the-principle-of-least-privilege-benefit-my-programs}
+### How does running Java with a SecurityManager enforcing the principle of least privilege benefit my programs?
 
 In Java's early days, Sun Microsystems tried to create a sandbox to lock down the Java public API, however, as Java's popularity and API grew, so did the burden of locking it down. Unfortunately, the Java sandbox was broken by Java Serialization and XML parsers. However, by limiting permissions, we are taking advantage of years of API hardening permission checks, which can be used to reduce the privileges to only those required, to mitigate the consequences of successful zero day attacks on your software.
 
@@ -138,7 +138,7 @@ You still need to be observant of other typical Java problems, like sanitizing u
 * <https://owasp.org/www-project-top-ten/2017/A9_2017-Using_Components_with_Known_Vulnerabilities>
 * <https://owasp.org/www-project-dependency-check/>
 
-### JEP 411 Deprecates the Security Manager for Removal {#h3-3-jep-411-deprecates-the-security-manager-for-removal}
+### JEP 411 Deprecates the Security Manager for Removal
 
 #### What has JEP 411 got to do with the principle of least privilege?
 

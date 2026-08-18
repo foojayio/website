@@ -25,8 +25,8 @@ In the following Java Challenge, we will explore the use of parallel streams wit
 
 It's time to improve your Java skills with this Parallel Stream Java Challenge
 
-Parallel Stream Java Challenge {#h2-0-parallel-stream-java-challenge}
----------------------------------------------------------------------
+Parallel Stream Java Challenge
+------------------------------
 
 What will happen in the following code when running the main method?
 

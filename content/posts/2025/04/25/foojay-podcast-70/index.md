@@ -27,13 +27,13 @@ In this podcast, we look at how Foojay started with founder Geertjan Wielenga. W
 
 Thank you all for being part of the Foojay community, whether as a listener of this podcast, a visitor to the website, a user of the Disco API, or through any other touchpoint!
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube wyE_Z8ZVC5s >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +41,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:00 Introduction
 

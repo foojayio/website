@@ -20,12 +20,12 @@ frozen: false
 
 Disclaimer: this post includes affiliate links; I may receive compensation if you purchase the book from the different links provided in this post.
 
-This review is about [DuckDB in Action](https://www.manning.com/books/duckdb-in-action?utm_source=frankel&amp;utm_medium=affiliate&amp;utm_campaign=affiliate&amp;a_aid=frankel) by JoMark Needham, Michael Hunger, and Michael Simons from Manning.
+This review is about [DuckDB in Action](https://www.manning.com/books/duckdb-in-action?utm_source=frankel&utm_medium=affiliate&utm_campaign=affiliate&a_aid=frankel) by JoMark Needham, Michael Hunger, and Michael Simons from Manning.
 
 The book was sent to me by [Michael Simons](https://mastodon.social/@rotnroll666). He asked for my feedback: I changed my reading schedule, took a few months, and here it is.
 
-Facts {#h2-0-facts}
--------------------
+Facts
+-----
 
 * 10 chapters
 * 288 pages
@@ -33,8 +33,8 @@ Facts {#h2-0-facts}
 
 Note that MotherDuck, the company behind DuckDB, offers a [free PDF copy](https://motherduck.com/duckdb-book-brief/).
 
-Chapters {#h2-1-chapters}
--------------------------
+Chapters
+--------
 
 1. An introduction to DuckDB
 2. Getting started with DuckDB
@@ -50,15 +50,15 @@ Chapters {#h2-1-chapters}
 
 The book takes a step-by-step approach, starting from the basics of DuckDB **and** SQL.
 
-Pros and cons {#h2-2-pros-and-cons}
------------------------------------
+Pros and cons
+-------------
 
 After the mandatory section about introducing DuckDB and installing it, the book explains SQL. At first, I admit I thought that the book was for newbies, as it explained things as simple as `JOIN`. However, the chapter afterwards explained Common Table Expressions and built complex queries upon them.
 
 I like how the authors describe DuckDB in its "natural environment", *i.e.*, how it integrates into different ecosystems, such as Python's Pandas and Apache Spark. In addition, a complete appendix section focuses on DuckDB in Java. Finally, the authors dedicate a section to MotherDuck, a DuckDB cloud provider.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 My thoughts on the book are a bit divided. On one side, it tries to explain DuckDB itself and its integration in different environments. On the other hand, it teaches regular and advanced SQL, which users of an SQL database product should know IMHO. The book can't decide between a Learn SQL with DuckDB approach and a DuckDB in Action one. The role of a book editor is to help authors make hard decisions. It feels as if this one didn't want to stop the authors' enthusiasm and couldn't bring themselves to rein them in.
 

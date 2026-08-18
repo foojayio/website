@@ -35,8 +35,8 @@ You can choose the technology based on the specific use case and customer requir
 
 A wide array of message brokers and binder implementations available in the market is offered by Spring Cloud Stream, with each possessing its own unique strengths.
 
-The Role of MessageBrokers {#h2-0-the-role-of-messagebrokers}
--------------------------------------------------------------
+The Role of MessageBrokers
+--------------------------
 
 **Messaging brokers** simplify the complexities of event-driven systems:
 
@@ -44,8 +44,8 @@ The Role of MessageBrokers {#h2-0-the-role-of-messagebrokers}
 * Provide guarantees based on the **CAP** theorem (**C** onsistency, **A** vailability, **P**artitioning).
 * Offer client APIs to interact with them for building event-driven and stream-processing applications.
 
-Frameworks or Binder Implementations {#h2-1-frameworks-or-binder-implementations}
----------------------------------------------------------------------------------
+Frameworks or Binder Implementations
+------------------------------------
 
 To simplify complexity, frameworks conceal the low-level specifics and provide user-friendly APIs for developers. Examples include:
 
@@ -66,12 +66,12 @@ To simplify complexity, frameworks conceal the low-level specifics and provide u
 
 Developers have the opportunity to utilize abstractions and frameworks, which allows them to concentrate on constructing business logic without needing to worry about the intricate details of messaging systems. Nevertheless, they face a degree of risk when they employ frameworks that closely integrate with the application code. If you change messaging platforms, you must rewrite and recompile your code. This situation makes applications less portable and more challenging to maintain.
 
-Spring Cloud Stream: The Solution {#h2-2-spring-cloud-stream-the-solution}
---------------------------------------------------------------------------
+Spring Cloud Stream: The Solution
+---------------------------------
 
 Developers can use **Spring Cloud Stream** to create sophisticated abstractions for event-driven applications, removing their reliance on particular messaging brokers.
 
-### Key Features: {#h3-3-key-features}
+### Key Features:
 
 #### Consistent Programming Model:
 
@@ -103,12 +103,12 @@ Developers can use **Spring Cloud Stream** to create sophisticated abstractions 
 
 To incorporate Spring Cloud Stream into your current Spring Boot application, you must identify the appropriate release train cadence based on the version of Spring Boot you are utilizing. For more details you can refer to the [link](https://spring.io/projects/spring-cloud "link") under *Adding Spring Cloud To An Existing Spring Boot Application* section
 
-LightWeight Architecture with Spring Cloud Stream {#h2-4-lightweight-architecture-with-spring-cloud-stream}
------------------------------------------------------------------------------------------------------------
+LightWeight Architecture with Spring Cloud Stream
+-------------------------------------------------
 
 In the **Spring Cloud Stream** methodology, the framework actively manages the message broker communication activities for both producer and consumer applications. This management results in a more straightforward and uniform architecture.
 
-### Transition to Spring Cloud Stream: {#h3-5-transition-to-spring-cloud-stream}
+### Transition to Spring Cloud Stream:
 
 If you have experience in developing Spring Boot applications, you will find that incorporating Spring Cloud Stream is quite simple. You just need to add two more dependencies:
 
@@ -134,11 +134,11 @@ If you have experience in developing Spring Boot applications, you will find tha
 
 In the forthcoming article, we will explore the main functions utilized in Spring Cloud Stream and demonstrate how to integrate with binder implementations using RabbitMQ, Kafka, Apache Pulsar, or Amazon Kinesis through an example.
 
-### Conclusion {#h3-6-conclusion}
+### Conclusion
 
 Spring Cloud Stream offers a sophisticated, flexible, and scalable approach to building event-driven systems, which eliminates the challenges associated with direct broker integration.
 
-### References {#h3-7-references}
+### References
 
 <https://spring.io/projects/spring-cloud>  
 <https://spring.io/projects/spring-cloud-stream>

@@ -25,8 +25,8 @@ But as every month, there is a lot more to read and learn about JavaFX...
 
 Have fun with this overview of the "JavaFX LinksOfTheWeek" that got published on [jfx-central.com](https://www.jfx-central.com/) during October.
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * Last month Java and JavaFX 21 were released. And [**Johan Vos** already had an update](https://mastodon.social/@johanvos/111147510047965780): "JavaFX 22-ea+11 has just been released to maven central (and on [gluonhq.com/products/javafx](https://gluonhq.com/products/javafx)). This contains the much anticipated memory improvements :)"
   * "This contains a major change in some CSS processing, see [this commit by **John Hendrikx**](https://github.com/openjdk/jfx/commit/5e145cc06ef68c50a4ffc95574fdafd44e054100), that leads to improved performance (less GC). Please test and evaluate."
@@ -41,8 +41,8 @@ Core {#h2-0-core}
   * Missing 3D point and line drawing methods.
 * JavaFX 21.0.1 and JavaFX 17.0.9 are now available for download from the [Gluon website](https://gluonhq.com/products/javafx) and from Maven Central. "[Enjoy Java on the client!](https://techhub.social/@gluonhq/111255546373474509)".
 
-SceneBuilder {#h2-1-scenebuilder}
----------------------------------
+SceneBuilder
+------------
 
 * Version 21 is [now available](https://github.com/gluonhq/scenebuilder/releases/tag/21.0.0)!
   * Refactored: Clean up DocumentWatchingController
@@ -53,8 +53,8 @@ SceneBuilder {#h2-1-scenebuilder}
     * José Pereda
 * Scene Builder 21.0.1 RC1 is [available for testing](https://github.com/gluonhq/scenebuilder/releases).
 
-Applications {#h2-2-applications}
----------------------------------
+Applications
+------------
 
 * At Devoxx we got blown away by the demos given by Florian Enner to visualize robot arms and interact with them. He wasn't a speaker at the conference, but we sure hope he will be next year or on any other conference. Make sure to check out of few of his videos...
   * [JavaFX w/ GraalVM native image (Windows)](https://www.youtube.com/watch?v=XxVoG1ft7w8): a desktop application with charts and controls, but a robot simulated in 3D.
@@ -72,8 +72,8 @@ Applications {#h2-2-applications}
   * And he has a ["JavaFX app that uses Tesseract OCR to detect words in the slide images, allowing users to underline them accurately"](https://www.linkedin.com/posts/tobiasbriones_softwareengineering-machinelearning-ai-activity-7117552150427095040-uYtb/).
 * **OrangoMango** shared a [video showing his logic simulator app](https://youtube.com/shorts/bP25LmL8TCk). More info, link to the sources and browser version can be found on [orangomango.itch.io/logicsimulator](https://orangomango.itch.io/logicsimulator).
 
-Games {#h2-3-games}
--------------------
+Games
+-----
 
 * **GZYangKui** has spent some time optimizing the audio and video output of his Nintendo-like game: ["The results were quite satisfactory"](https://twitter.com/YangKui7/status/1711764945946501188).
   * And shared a few retro game videos:
@@ -82,8 +82,8 @@ Games {#h2-3-games}
 * **Alessio Vinerbi** is making a [trash game](https://twitter.com/Alessio_Vinerbi/status/1710307540775354454).
 * [**Almas Baim** shared a video](https://twitter.com/AlmasBaim/status/1658565437053980691) after a "fruitful discussion with game dev students on how to improve the UI. Check out the new health and weapon indicators around the player. Now there is no need to look elsewhere to get this info."
 
-Components, Libraries, Tools {#h2-4-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [A new library announcement by **Pedro Duque Vieira**, FXThemes](https://pixelduke.com/2023/10/02/fxthemes-java-javafx-library-released/): "It is a Java library that contains classes to help in advanced JavaFX theme development. Right now, it contains helper classes to change the appearance of a native window frame as well as the backdrop of JavaFX native Windows." The announcement page also contains more info about the reason of providing this functionality in a new library.
   * True Dark Mode on Windows10 [will be available soon in a new release of FXThemes](https://twitter.com/P_Duke/status/1714655184327168474): "Win10 is the most used Windows version (Windows being the most used OS). This was a pain to implement. Native code is different from win11. On win10 this API is undocumented."
@@ -94,8 +94,8 @@ Components, Libraries, Tools {#h2-4-components-libraries-tools}
 * **JPro** announced [version 2023.3.0](https://www.jpro.one/docs/current/3.1/2023.3.X): JavaFX 21 is used by default, and many more improvements!
   * And [version 2023.3.1](https://jpro.one/docs/current/3.1/2023.3.X) with a critical bugfix to handle bot traffic better, and a new feature regarding MimeTypes.
 
-Podcast, Video, Books {#h2-5-podcast-video-books}
--------------------------------------------------
+Podcast, Video, Books
+---------------------
 
 * **Robert von Burg** and **Frank Delporte** had some fun during a live [video stream with LED strips and a JavaFX UI](https://www.youtube.com/watch?v=eToIXACqSuY).
 * Presentations at Devoxx in Antwerpen, Belgium:
@@ -115,21 +115,21 @@ Podcast, Video, Books {#h2-5-podcast-video-books}
   * **Thanos Stratikopoulos** : [TornadoVM: Write once, run everywhere everywhere!](https://www.youtube.com/watch?v=POanHvoC4qA). He demonstrates an impressive performance boost with a JavaFX ray tracer using the GPU. Sources of the demo are available on [github.com/Vinhixus/TornadoVM-Ray-Tracer](https://github.com/Vinhixus/TornadoVM-Ray-Tracer).
   * **Nicolai Parlog** published the [second half of his video report of Devoxx Belgium](https://www.youtube.com/watch?v=WoQJnnMIlFY), including an interview with **Kevin Rushforth** about GUI development with Java.
 
-Tutorials {#h2-6-tutorials}
----------------------------
+Tutorials
+---------
 
 * Please keep an eye on **Edward Nyirenda Jr** 's website as he keeps on giving! For instance, ["JavaFX with Gradle"](https://coderscratchpad.com/javafx-with-gradle/) was published this month.
 
-Miscellaneous {#h2-7-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Pedro Duque Vieira** shares a video](https://twitter.com/P_Duke/status/1711370140216955086) to illustrate that a JavaFX scene graph can handle a lot of nodes: "The view on the left is using retained mode rendering. There are more than 1k nodes visible at a time and yet without major optimizations it runs fine. Tip: No need to rush to a Canvas implementation (immediate mode)."
 * Impressive 3D results by **OrangoMango** , considering he is running it on a Raspberry Pi: ["If I render the triangles, the application runs at 5 fps."](https://twitter.com/orango_mango/status/1711777605702005138).
 * **Homebookner** shared a link to an interesting project by **Sheikah45** : [FX2J - FXML to Java Builder](https://github.com/Sheikah45/fx2j): a post-processor that converts fxml files into Java builder source files.
 * **Christopher Schnick** [reported some issues on new gnome-based desktops](https://mail.openjdk.org/pipermail/openjfx-dev/2023-October/043118.html), e.g. on Ubuntu 23: "For the JavaFX devs who use the system tray, note that there are various GTK issues. If you are using FXTrayIcon, your app will freeze."
 
-JFX Central {#h2-8-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * New content
   * Libraries

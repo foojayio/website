@@ -30,12 +30,12 @@ But I still wanted to try out the same with the Canvas approach, so I extended m
 
 {{< youtube nJGRW5xP_AE >}}
 
-Node versus Canvas {#h2-0-node-versus-canvas}
----------------------------------------------
+Node versus Canvas
+------------------
 
 In JavaFX, both Node and Canvas are part of the scene graph, but they have different use cases. The choice between the two often depends on your application's specific needs. You use Nodes for static content like input forms, data tables, dashboards with graphs, etc., which is usually more convenient and efficient. Canvas gives you more flexibility when you need to generate dynamic or custom content.
 
-### JavaFX Node {#h3-1-javafx-node}
+### JavaFX Node
 
 `javafx.scene.Node` is the base class, and all visual JavaFX components extend it. That goes several "layers" deep. For instance, for a Button \> ButtonBase \> Labeled \> Control \> Region \> Parent \> Node.
 
@@ -55,7 +55,7 @@ Button button = new Button("Click Me!");
 ```
 
 
-### JavaFX Canvas {#h3-2-javafx-canvas}
+### JavaFX Canvas
 
 `javafx.scene.canvas` also extends Node, with special functionality. You can draw your own content on the Canvas using a set of graphics commands provided by a `GraphicsContext`.
 
@@ -75,8 +75,8 @@ gc.fillRect(50, 50, 100, 70);
 ```
 
 
-Demo Code {#h2-3-demo-code}
----------------------------
+Demo Code
+---------
 
 The demo application can be found in [this GitHub Gist](https://gist.github.com/FDelporte/c74cdf59ecd9ef1b14df86e08faa0c56). The value at the beginning of the code defines which approach is used:
 
@@ -85,7 +85,7 @@ private static int TYPE_OF_TEST = 1; // 1 = Nodes, 2 = Canvas
 ```
 
 
-### Using Nodes {#h3-4-using-nodes}
+### Using Nodes
 
 When you use Nodes, a Pane is added to the screen in which balls gets added. Each ball is a Circle Node with a move method:
 
@@ -126,7 +126,7 @@ class BallNode extends Circle {
 ```
 
 
-### Using Canvas {#h3-5-using-canvas}
+### Using Canvas
 
 When you use the Canvas, each Ball is a data object, and all balls get drawn on the Canvas at every tick:
 
@@ -165,7 +165,7 @@ class BallDrawing {
 ```
 
 
-### Moving the Objects {#h3-6-moving-the-objects}
+### Moving the Objects
 
 The application uses a Timeline to add more objects, and move them, every five milliseconds:
 
@@ -205,7 +205,7 @@ private void onTick() {
 ```
 
 
-### Executing the Applications {#h3-7-executing-the-applications}
+### Executing the Applications
 
 I used the following approach to run the application:
 
@@ -214,8 +214,8 @@ I used the following approach to run the application:
 * Install J'BANG!, either from [jbang.dev](https://www.jbang.dev/) or with SDKMAN (`sdk install jbang`).
 * Start the application with `jbang FxNodesVersusCanvas.java`
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 As you can see in the video, with this example, you can add roughly 10 times more objects to the Canvas before the framerate drops compared to the number of Nodes.
 

@@ -22,32 +22,32 @@ We are excited to announce the 1.0 release of [Language Support for Java™ by R
 
 We believe this is a significant milestone for Java support on Visual Studio Code and the result of a multi-year collaboration between Microsoft, Red Hat and the entire Visual Studio Code and Java community. This release wouldn't have been possible without your support and we want to thank everyone who has provided feedback or made contributions.
 
-Release highlights {#h2-0-release-highlights}
----------------------------------------------
+Release highlights
+------------------
 
 When we started with our very first release, our goal was to provide an outstanding Java development experience on Visual Studio Code. Since then, we have maintained a release cycle of 1-2 times per month, through many iterations.
 
 In this 1.0 release, we want to highlight several improvements:
 
-### Java 17 support {#h3-1-java-17-support}
+### Java 17 support
 
 Our focus has always been to support the latest technology provided by the Java language whenever possible. In our 1.0 release, Java 17 is now officially supported on our Java extensions.
 
 ![](java17.png)
 
-### Performance Improvements {#h3-2-performance-improvements}
+### Performance Improvements
 
 Performance is also another area of improvement in this release. Thanks to the new features in the LSP specification, we were able to defer certain computations for better performance in many scenarios.
 
 In addition, default JVM options are used to improve the user experience of larger and more complicated projects. Last but not least, we made many [smaller improvements](https://github.com/eclipse/eclipse.jdt.ls/issues?q=is%3Aissue+label%3Aperformance+updated%3A%3E2021-08-01 "smaller improvements") to boost responsiveness of the language server.
 
-### Type Hierarchy {#h3-3-type-hierarchy}
+### Type Hierarchy
 
 ![](typehierachy.gif)
 
 Type hierarchy can now be easily accessed in Visual Studio Code! This is a feature that was introduced recently and has been one of the top asks in the Java community.
 
-### Source Lookup {#h3-4-source-lookup}
+### Source Lookup
 
 Currently, developers can quickly locate the source code of a library. Now we have expanded this support to unmanaged projects. As long as the library comes from Maven Central repo, we can resolve its sources.
 
@@ -55,13 +55,13 @@ Currently, developers can quickly locate the source code of a library. Now we ha
 
 More advanced configurations are supported as well.
 
-### More Code Actions {#h3-5-more-code-actions}
+### More Code Actions
 
 Usability is another area we continue to improve. We have adopted more code actions to provide an easier development experience.
 
 ![](morecodeactions.gif)
 
-### Gradle Kotlin (.kts) support {#h3-6-gradle-kotlin-kts-support}
+### Gradle Kotlin (.kts) support
 
 We already support Gradle projects using Groovy scripts, but we heard the need for Kotlin support from the community and now provide basic support for this.
 
@@ -69,8 +69,8 @@ We already support Gradle projects using Groovy scripts, but we heard the need f
 
 Our hope is that we can continue to expand upon this and deliver a great experience for Kotlin in the future.
 
-Java Journey on Visual Studio Code {#h2-7-java-journey-on-visual-studio-code}
------------------------------------------------------------------------------
+Java Journey on Visual Studio Code
+----------------------------------
 
 The language support for Java™ by Red Hat extension is a fundamental piece of the Java expansion pack and offers essential components such as Java code editing, completion, refactoring and navigation. Over the past few years, Microsoft have been working together closely with Red Hat and adding new features to this language server. We have also been fine-tuning the performance of the language server and improving the stability by addressing issues and bugs.
 
@@ -78,8 +78,8 @@ In addition to the main Java language support, we have built various Java extens
 
 Our goal behind all this work is to provide the best Java development experience possible on Visual Studio Code.
 
-Going Forward {#h2-8-going-forward}
------------------------------------
+Going Forward
+-------------
 
 Going forward, we have planned many items for the Java language support on Visual Studio Code.
 

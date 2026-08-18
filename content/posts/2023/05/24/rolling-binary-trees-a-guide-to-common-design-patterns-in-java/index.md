@@ -24,8 +24,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 Binary trees are fundamental data structures, ubiquitous in computer science and software engineering. We use them to represent hierarchical data and implement more complex data structures, such as search trees, syntax trees, cryptographic hash trees, space partitioning trees, heaps, and so on. Common binary tree operations include insertion, deletion, traversal, and rotation.
 
@@ -40,7 +40,7 @@ where **T1** is the original tree, **T2** is the rolled tree, and **↔** denote
 
 We can deduce that the two roll variants are **inverse** to one another, i.e., applying the roll operation to a binary tree twice in succession in opposite directions always produces the original tree.
 
-### Binary tree roll examples {#h3-1-binary-tree-roll-examples}
+### Binary tree roll examples
 
 Below is a simple illustration of a binary tree (T1) and its clockwise-rolled counterpart (T2) to its right. Due to the inverse nature of the roll variants, we can also say that T1 is the counterclockwise-rolled counterpart of T2.
 
@@ -62,7 +62,7 @@ If we compare T3 to a literal -90° view of T2, the subtrees rooted at nodes **�
 
 This time we get a rolled tree that has the same root as the original tree, since T3's root node is also its leftmost node. And the subtrees rooted at **④** and **⑥** appear to be adjusted again, to correct for the aforementioned double-parent "anomaly."
 
-### Pseudocode and complexity {#h3-2-pseudocode-and-complexity}
+### Pseudocode and complexity
 
 ```python
 def cRoll(root, parent = null) 
@@ -89,12 +89,12 @@ The algorithm has a time complexity of **Θ(𝑛)** , where 𝑛 is the number o
 
 For a detailed analysis of this algorithm and its complexity, please refer to the following paper: [**A linear time algorithm for rolling binary trees**](https://ieeexplore.ieee.org/document/8011115).
 
-Implementation {#h2-3-implementation}
--------------------------------------
+Implementation
+--------------
 
 In this section, we are going to present a step by step implementation of the binary tree roll algorithm in Java, by following basic design principles of object-oriented programming and implementing a few design patterns along the way.
 
-### Project setup {#h3-4-project-setup}
+### Project setup
 
 Let's start by bootstrapping a new Java project using Maven. We are going to use the JUnit 5 framework to test our implementation, so we need to add the following dependency to the `pom.xml` file of the project:
 
@@ -123,7 +123,7 @@ public class Node<T> {
 ```
 
 
-### Static factory methods {#h3-5-static-factory-methods}
+### Static factory methods
 
 With the recursive `Node` structure in place, we create a `BinaryTree` class that holds a reference to the root node of the tree and provides a **static factory method** for creating new instances of the class from a list of values provided in a nullable level-order traversal format. This format uses a "null identifier" value to denote empty (null) nodes. For example, the sequence `[1, 2, 3, -1, -1, 4, 5, -1, 6]`, where `-1` is the null identifier, represents the following binary tree:
 
@@ -193,7 +193,7 @@ public static <T> BinaryTree<T> of(T... values) {
 ```
 
 
-### The Visitor pattern {#h3-6-the-visitor-pattern}
+### The Visitor pattern
 
 To obtain the preorder, inorder, and postorder traversals of the binary tree, we can make use of the **Visitor** design pattern. This will allow us to separate the traversal algorithms from the binary tree data structure and avoid unnecessary coupling.
 
@@ -351,7 +351,7 @@ void testTraversalsWithLambdas() {
 ```
 
 
-### The binary tree roll algorithm {#h3-7-the-binary-tree-roll-algorithm}
+### The binary tree roll algorithm
 
 To implement the algorithm for rolling binary trees, we need to consider the two roll directions, clockwise and counterclockwise. We also need to take into account the fact that, in most cases, the root node of the rolled tree is not going to be the same as the root node of the original tree.
 
@@ -437,13 +437,13 @@ class CounterclockwiseRollHandler<T> extends RollHandler<T> {
 ```
 
 
-### To mutate or not to mutate? {#h3-8-to-mutate-or-not-to-mutate}
+### To mutate or not to mutate?
 
 Aside from the two different roll variants, there is another important implementation aspect we need to consider. And that is the fact that mutating the original data structure might not always be desirable.
 
 There might be use cases where we want to preserve the original tree, and for this reason, we will provide two different top-level implementations of the roll algorithm: one that mutates the original tree, and one that preserves the original tree and creates a new one.
 
-### A Factory of Strategies {#h3-9-a-factory-of-strategies}
+### A Factory of Strategies
 
 We can combine the **Strategy** and the **Factory** design patterns to create the mutating (mutable) and non-mutating (immutable) versions of the clockwise and counterclockwise roll algorithm, and to allow the user to choose the desired implementation at runtime.
 
@@ -606,7 +606,7 @@ public class BinaryTree<T> {
 
 Note that the `BinaryTree` class does not have to be aware of the roll strategies, so if we want to keep the code as loosely coupled as possible, we can skip this step, and let the user invoke the `RollStrategy.roll` method directly and pass the tree they want to roll as an argument.
 
-### Design for extension, or else prohibit it {#h3-10-design-for-extension-or-else-prohibit-it}
+### Design for extension, or else prohibit it
 
 Rolling a binary tree is a straightforward operation with a finite number of variants, and we have implemented both mutable and immutable versions of these variants, exhausting all possible use case scenarios. To create a closed hierarchy of roll strategies and prevent side effects that could break the algorithm, we can seal the `RollStrategy` interface and all abstract classes below it by declaring them **sealed** and associating them with their intended inheritors or implementers.
 
@@ -642,8 +642,8 @@ abstract sealed class RollHandler<T>
 ```
 
 
-Testing {#h2-11-testing}
-------------------------
+Testing
+-------
 
 We can now use our roll algorithm implementation to roll binary trees clockwise and counterclockwise. But before we do that, let's create a simple helper class that we can use to print binary trees to the console. We will use a basic recursive algorithm that prints the tree in a sideways, left-to-right fashion.
 
@@ -848,8 +848,8 @@ Friends ————┤
 
 As we can see, the immutable strategy constructed the rolled tree properly, while preserving the state of the original tree.
 
-Summary {#h2-12-summary}
-------------------------
+Summary
+-------
 
 In this article, we introduced a **linear time algorithm for rolling binary trees** and implemented it in Java. We relied on common design patterns and principles to make the implementation clean and flexible, while ensuring appropriate encapsulation and loose coupling between the components.
 

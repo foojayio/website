@@ -20,14 +20,14 @@ related_posts:
 frozen: false
 ---
 
-### ***The recent announcement of Foojay's intention to create a community-driven certification exam for Java software development has spurred a lot of interest. This article explains how any member of the Java community can participate in the creation of tasks for the certification.*** {#h3-0-the-recent-announcement-of-foojay-s-intention-to-create-a-community-driven-certification-exam-for-java-software-development-has-spurred-a-lot-of-interest-this-article-explains-how-any-member-of-the-java-community-can-participate-in-the-creation-of-tasks-for-the-certification}
+### ***The recent announcement of Foojay's intention to create a community-driven certification exam for Java software development has spurred a lot of interest. This article explains how any member of the Java community can participate in the creation of tasks for the certification.***
 
 **In the [previous article](https://foojay.io/today/foojay-developer-certification-measure-skills/ "previous article") about the Foojay Developer Certification, we introduced the need for an objective way to measure the skills of Java developers. While there are many assessments and certifications that test the theoretical knowledge of a developer, very few measure the practical ability to write code, find and fix bugs and apply proper design principles. As a community, we have a large collection of de facto best practices and common sense about what makes a developer good at their job. That is why we need your help in creating a certificate that actually communicates a Developer's skill.**
 
 Right from the start, we planned on including community members in the creative process that is necessary to create the tasks that will be used to certify the skill level of a developer. In such a process, it is important to maintain a balance between openness and quality. In order to make sure the certification can be held to the highest standards, we are proposing a process that allows you to submit your idea for a task.
 
-The Process {#h2-1-the-process}
--------------------------------
+The Process
+-----------
 
 Any community member can come up with an idea for a task. This allows for everyone to contribute ideas from their own expertise and help build the variety of tasks that makes up a good certification test. At this point we are not yet offering any categories to which tasks must conform, so any idea really is welcome.
 
@@ -46,8 +46,8 @@ To bring your idea into the certification exams, it will have to go through thes
 5. **GrepS Review** - If the task has been selected for inclusion, it will go through one final round of review at the GrepS-platform. Changes here will be to make sure the task can operate properly inside the platform
 6. **Incorporation** - The task has been incorporated into the platform. When the task is new, it will enter a phase of calibration and finally become part of the scoring process
 
-The Task Format {#h2-2-the-task-format}
----------------------------------------
+The Task Format
+---------------
 
 Since we are using the GrepS platform to determine the skills of candidates, we need to create tasks that fit into this platform. At the FCC (Foojay Certification Committee), we are in the process of providing a repository containing a skeleton project with the basic layout. It will also include a README explaining the structure in more depth than this post allows.
 
@@ -62,8 +62,8 @@ In this post, I will provide an overview of the components inside a task-project
 * Score definition -- A file containing the description of the scoring of a task. This is defined using a DSL that allows for the use of different "graders", able to assign a partial score through analysis of the solution (e.g. number of correct tests, specific test outcomes, etc).
 * Workflow definition -- A file containing the flow of the entire task. A DSL allows you to define the number of sub-tasks, which instruction file to show, which files to copy into the candidate's workspace, how much time they have etc.
 
-Your Contributions {#h2-3-your-contributions}
----------------------------------------------
+Your Contributions
+------------------
 
 The above description should be enough to give you the ability to generate ideas for tasks. That then raises the question of what sort of tasks would be good submissions. The GrepS-platform is based on the science that developer skill is best tested using regular, everyday tasks that any developer would do as part of their day job. While some consider it fun to create algorithms for balanced trees, those tasks actually are not the best indicators.
 

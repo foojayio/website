@@ -25,8 +25,8 @@ frozen: false
 
 **Please help me to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS).**
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 FEPCOS-J arises in the frame of the FEPCOS-Project [\[1\]](#references), which aims to simplify the programming of composed networked systems.
 
@@ -47,12 +47,12 @@ The post is organized as follows: Firstly, the post introduces [how to use FEPCO
 
 I would also like to ask you to [help me to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS)](#help).
 
-Use FEPCOS-J to declaratively compose networked systems in Java {#sec1}
------------------------------------------------------------------------
+Use FEPCOS-J to declaratively compose networked systems in Java
+---------------------------------------------------------------
 
 FEPCOS-J enables a Java developer to compose networked systems like building blocks. Having programmed a system as described in my previous post, the developer can use the ***fjp***-generated system interface to compose other systems. This means that systems become parts of other systems.
 
-### FEPCOS-J provides the annotation *@Part* to declare a part of a system {#h3-2-fepcos-j-provides-the-annotation-part-to-declare-a-part-of-a-system}
+### FEPCOS-J provides the annotation *@Part* to declare a part of a system
 
 Within the system declaration, the annotation *@Part* allows the developer to declare the parts of a system.
 
@@ -79,7 +79,7 @@ declares a system's part named `bar`, accessible via internet socket 10.0.0.1:80
 
 declares a capability `usePart` realized by the activity specification `AY` to demonstrate how to access the part in the following.
 
-### Declared parts are accessible within activity specifications {#h3-3-declared-parts-are-accessible-within-activity-specifications}
+### Declared parts are accessible within activity specifications
 
 The method that specifies the desired behavior of an activity is annotated with *@Behavior* within an activity specification. This method can accept the system declaration as a parameter, which provides access to the declared parts.
 
@@ -107,22 +107,22 @@ accepts the system declaration `SY sy` as a parameter.
 
 As described above, `sy.bar` is the member variable of the part, which has the type `foo.S`, a ***fjp*** -generated system interface. Thus, `sy.bar` provides blocking access via `sy.bar.b` and concurrent access via `sy.bar.c`. In this example, the part's assumed capability is `doSth(/*`*... **`/)`.
 
-### The developer declares a system, and FEPCOS-J generates code for him {#h3-4-the-developer-declares-a-system-and-fepcos-j-generates-code-for-him}
+### The developer declares a system, and FEPCOS-J generates code for him
 
 To sum up, a developer declares a part of a system by using the annotation *@Part* and specifying an IPv4 address, a port, a ***fjp***-generated system interface, and the name of a member variable.
 
 To point out, the developer does not instantiate the system interface. FEPCOS-J, generates the required code.
 
-Example scenario realized by using FEPCOS-J {#sec2}
----------------------------------------------------
+Example scenario realized by using FEPCOS-J
+-------------------------------------------
 
-### A typical use-case scenario for FEPCOS-J {#h3-6-a-typical-use-case-scenario-for-fepcos-j}
+### A typical use-case scenario for FEPCOS-J
 
 A composed networked system is a whole that accesses the capabilities of its parts, which are realized as basic systems, via an IPv4 network.
 
 Further, the composed networked system provides its capabilities to a system user via another IPv4 network. This means the composed system is a **kind of facade** that makes its complexity transparent to the system user.
 
-### Exemplary realization {#h3-7-exemplary-realization}
+### Exemplary realization
 
 The following post describes an example scenario that realizes the use-case depicted in **Fig. 1** : The composed networked system is called *calculator* . Its parts are the two basic systems: *adder* and *multiplier* . The system user is called *app*.  
 
@@ -137,10 +137,10 @@ The following post describes an example scenario that realizes the use-case depi
 ![A composed system calculator consists of two parts, which are the basic systems adder and multiplier. Both the composed system and the basic systems can execute activities: Firstly, adder can execute add(x,y). Secondly, multiplier can execute mul(x,y). Finally, calculator can execute add(x,y) and mul(x,y). A system user named app accesses calculator. This causes calculator to access adder or multiplier, thereupon. Both the composing and the accessing are realized via IPv4 networks.](fuchs2023-fepcos-j-composed-system-example-brief.png) **Fig. 2) Example scenario, in brief:** A composed system calculator consists of two parts, which are the basic systems *adder* and *multiplier* . Both the composed system and the basic systems can execute activities: Firstly, *adder* can execute *add(x,y)* . Secondly, *multiplier* can execute *mul(x,y)* . Finally, *calculator* can execute *add(x,y)* and *mul(x,y)* . A system user named *app* accesses *calculator* . This causes *calculator* to access *adder* or *multiplier*, thereupon. Both the composing and the accessing are realized via IPv4 networks.  
 ![A composed system calculator is connected to two separate IPv4 networks: app and calculator communicate within 10.0.0.0/24; calculator and its parts, adder and multiplier, communicate within 10.1.0.0/24. The systems provide their capabilities via internet sockets: adder provides add(x,y) via 10.1.0.1:8001; multiplier provides mul(x,y) via 10.1.0.2:8001; calculator provides both add(x,y) and mul(x,y) via 10.0.0.1:8001.](fuchs2023-fepcos-j-example-composed-system-detail.png) **Fig. 3) Example scenario, in detail:** A composed system *calculator* is connected to two separate IPv4 networks: *app* and *calculator* communicate within 10.0.0.0/24; *calculator* and its parts, *adder* and *multiplier* , communicate within 10.1.0.0/24. The systems provide their capabilities via internet sockets: *adder* provides *add(x,y)* via 10.1.0.1:8001; *multiplier* provides *mul(x,y)* via 10.1.0.2:8001; *calculator* provides both *add(x,y)* and *mul(x,y)* via 10.0.0.1:8001.
 
-FEPCOS-J based realizing of the example scenario {#sec3}
---------------------------------------------------------
+FEPCOS-J based realizing of the example scenario
+------------------------------------------------
 
-### Development workflow {#h3-9-development-workflow}
+### Development workflow
 
 **Fig. 4** illustrates the development workflow, which realizes the example scenario. The basic systems *adder* and *multiplier* can be realized independently of each other. The composed system *calculator* requires *adder* and *multiplier* . The system user *app* requires *calculator*.  
 ![Development workflow using FEPCOS-J: a) realize the basic system adder; b) realize the basic system multiplier; c) realize the composed system calculator; d) realize the system user app.](fuchs2023-fepcos-j-workflow-composed-system-example.png) **Fig. 4) Development workflow: a)** realize the basic system *adder* ; **b)** realize the basic system *multiplier* ; **c)** realize the composed system *calculator* ; **d)** realize the system user *app*.
@@ -157,7 +157,7 @@ The following provides an overview of the development process:
 
 The next subsections describe the individual implementations.
 
-### Implementing the basic system *multiplier* {#h3-10-implementing-the-basic-system-multiplier}
+### Implementing the basic system *multiplier*
 
 The developer realizes *multiplier's* system specification within the directory *multiplier* . The source code is in the subdirectory *src* and consists of the module information *module-info.java* , the system declaration *SY.java* , and the activity specification *Multiply.java*.
 
@@ -228,7 +228,7 @@ multiplier/tgt/
 ```
 
 
-### Implementing the composed system *calculator* {#h3-11-implementing-the-composed-system-calculator}
+### Implementing the composed system *calculator*
 
 The developer realizes the system specification within the directory *calculator* and stores the required modular Jar flies in the subdirectory *mlib* and the source code in the subdirectory *src*.
 
@@ -394,7 +394,7 @@ calculator/tgt/
 ```
 
 
-### Implementing the application *app* {#h3-12-implementing-the-application-app}
+### Implementing the application *app*
 
 The developer realizes the system user *app* within the directory *app* and stores the required modular Jar files in the subdirectory *mlib* and the source code in the subdirectory *src*.
 
@@ -502,8 +502,8 @@ app/build/
 ```
 
 
-FEPCOS-J based deployment of the example {#sec4}
-------------------------------------------------
+FEPCOS-J based deployment of the example
+----------------------------------------
 
 Basically, all realized Java classes and modular Jar files are deployed to four diverse networked Java runtime environments (JREs) as shown in **Fig. 5**.  
 ![An example deployment of a composed networked system, realized by using FEPCOS-J: app, calculator, adder, multiplier interact via two different IPv4 networks.](fuchs2023-fepcos-j-deployment-composed-system-example.png) **Fig. 5) Deployment:** Four diverse networked Java runtime environments running **a)** the application *app* ; **b)** the composed system *calculator* ; **c)** the basic system *adder* ; and **d)** the basic system *multiplier*.
@@ -528,13 +528,13 @@ Accessing *calculator.exp* causes it to access its corresponding parts.
 
 In detail, *calculator.exp* accesses *adder.exp* via the ***fjp*** -generated system interface of *adder.imp* , modules FEPCOS-J provides, the IPv4-network, and modules FEPCOS-J provides. Further, *calculator.exp* accesses *multiplier.exp*, analogous to this.
 
-FEPCOS-J based execution of the example {#sec5}
------------------------------------------------
+FEPCOS-J based execution of the example
+---------------------------------------
 
 As shown in **Fig. 6** , both the composed networked system *calculator* and the basic systems *adder* and *multiplier* must be exported with ***fjx*** before the system user *app* can be executed.  
 ![An example execution of a composed networked system, realized by using FEPCOS-J: Three instances of the FEPOCS-J Exporter corss-system concurrently export the systems adder, multiplier and calculator before java executes the system user app.](fuchs2023-fepcos-j-execution-composed-system-example.png) **Fig. 6) Execution of the example:** Three instances of ***fjx*** corss-system concurrently export the systems *adder* , *multiplier* and *calculator* before Java executes the system user *app*.
 
-### Exporting the systems: *adder* , *multiplier* , and *calculator* {#h3-15-exporting-the-systems-adder-multiplier-and-calculator}
+### Exporting the systems: *adder* , *multiplier* , and *calculator*
 
 Executed in the project directory *adder*, the command
 
@@ -554,7 +554,7 @@ Executed in the project directory *calculator*, the command
 
 causes *calculator* to listen at internet socket 10.0.0.1:8001 for incoming requests.
 
-### Executing the system user: *app* {#h3-16-executing-the-system-user-app}
+### Executing the system user: *app*
 
 The system user is executed in the project directory *app*. Thus, the module path for the execution
 
@@ -569,8 +569,8 @@ The execution of app by using the command
 returns the output as depicted in **Fig .7**.  
 ![](fuchs2023-fepcos-j-example-screenshot-execution-app.png) **Fig. 7) Screenshot of the execution of the example:** After setting the module path MP, the execution of the system user *app* using Java returns the expected output.
 
-Conclusion {#sec6}
-------------------
+Conclusion
+----------
 
 FEPCOS-J enables a Java developer to declaratively compose a networked system by providing the annotation *@Part*.
 
@@ -584,8 +584,8 @@ In brief, a Java developer can declaratively compose networked systems using FEP
 
 To sum up, a Java developer who uses FEPCOS-J does not need to care about low-level network programming.
 
-I need your help to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS). {#help}
-----------------------------------------------------------------------------------------
+I need your help to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS).
+--------------------------------------------------------------------------------
 
 Have you thought about how FEPCOS-J can support your work?
 
@@ -597,8 +597,8 @@ Please let me know what you think about it and provide me with any feedback. Con
 
 Thanks for reading!
 
-External References {#references}
----------------------------------
+External References
+-------------------
 
 1. fepcos.info: "*Website of the FEPCOS-Project* "; <http:fepcos.info/> (last accessed: 2023-10-12).
 2. fepcos.info: "*FEPCOS-Model* "; <http://fepcos.info/en/fepcos-model.html> (last accessed: 2023-10-12).

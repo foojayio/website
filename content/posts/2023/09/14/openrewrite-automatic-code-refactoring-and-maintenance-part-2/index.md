@@ -141,8 +141,8 @@ To rectify our coding errors and execute the Spring Boot upgrade, it is imperati
 
 These recipes comprise numerous smaller refactoring recipes. The complete inventory of recipes encompassed within `CommonStaticAnalysis` can be accessed [here](https://docs.openrewrite.org/recipes/staticanalysis/commonstaticanalysis), `JavaApiBestPractices` can be found [here](https://docs.openrewrite.org/recipes/staticanalysis/javaapibestpractices), while the list for the `UpgradeSpringBoot_3_0`\` recipe can be found [here](https://docs.openrewrite.org/recipes/java/spring/boot3/upgradespringboot_3_0).
 
-Add the OpenRewrite Maven Plugin {#h2-0-add-the-openrewrite-maven-plugin}
--------------------------------------------------------------------------
+Add the OpenRewrite Maven Plugin
+--------------------------------
 
 Below is the configuration of OpenRewrite Maven Plugin for the Spring Boot Project
 
@@ -290,7 +290,7 @@ OpenRewrite fixed many coding problems in our code, making it easier to switch t
 
 You can find the sample spring boot project [here](https://github.com/bsmahi/migrate-spring-boot-demo)
 
-References {#h2-1-references}
------------------------------
+References
+----------
 
 * OpenRewrite Documentation -<https://docs.openrewrite.org/>

@@ -29,8 +29,8 @@ This approach allows APISIX to provide out-of-the-box Lua plugins that should fi
 
 However, if Lua is not part of your tech stack, [diving into a new ecosystem is a considerable investment](https://blog.frankel.ch/on-learning-new-programming-language/). Therefore, Apache APISIX offers developers to write plugins in several other languages. In this post, I'd like to highlight how to write such a plugin with Rust.
 
-A bit of context {#h2-0-a-bit-of-context}
------------------------------------------
+A bit of context
+----------------
 
 Before I dive into the "how", let me first describe a bit of context surrounding the Rust integration in Apache APISIX. I believe it's a good story because it highlights the power of Open Source.
 
@@ -48,8 +48,8 @@ The specification is available on [GitHub](https://github.com/proxy-wasm/spec).
 * Developers can create SDK for their tech stack
 * Proxy and API Gateway providers can integrate `proxy-wasm` in their product
 
-Apache APISIX and proxy-wasm {#h2-1-apache-apisix-and-proxy-wasm}
------------------------------------------------------------------
+Apache APISIX and proxy-wasm
+----------------------------
 
 The Apache APISIX project decided to integrate `proxy-wasm` into the product to benefit from the standardization effort. It also allows end-users to start with Envoy, or any other `proxy-wasm`-compatible reverse proxy, to migrate to Apache APISIX when necessary.
 
@@ -58,12 +58,12 @@ APISIX doesn't implement `proxy-wasm` but integrates [wasm-nginx-module](https:/
 
 Apache APISIX and WebAssemby architecture overview{#caption-attachment-60106}
 
-Let's code! {#h2-2-let-s-code}
-------------------------------
+Let's code!
+-----------
 
 Now that we have explained how everything fits together, it's time to code.
 
-### Preparing Rust for WebAssembly {#h3-3-preparing-rust-for-webassembly}
+### Preparing Rust for WebAssembly
 
 Before developing the first line of code, we need to give Rust compilation capabilities.
 
@@ -84,7 +84,7 @@ The WASM code is found in:
 * `target/wasm32-wasi/debug/sample.wasm`
 * `target/wasm32-wasi/release/sample.wasm` (when compiled with the `--release` flag)
 
-### Setting up the project {#h3-4-setting-up-the-project}
+### Setting up the project
 
 The setup of the project is pretty straightforward:
 
@@ -95,7 +95,7 @@ cargo new sample --lib           #1
 
 1. Create a `lib` project with the expected structure
 
-### The code itself {#h3-5-the-code-itself}
+### The code itself
 
 Let me first say that the available documentation is pretty sparse. For example, `proxy-wasm`'s is limited to the [methods' signature](https://github.com/proxy-wasm/spec/tree/master/abi-versions/vNEXT) (think JavaDocs). Rust SDK is sample-based. However, one can get some information from the [C++ SDK](https://github.com/proxy-wasm/proxy-wasm-cpp-sdk/blob/master/docs/wasm_filter.md).
 > WASM module is running in a stack-based virtual machine and its memory is isolated from the host environment. All interactions between host and WASM module are through functions and callbacks wrapped by context object.
@@ -144,8 +144,8 @@ impl HttpContext for HttpCall {                                                 
 
 After generating the WebAssembly code (see above), we have to configure Apache APISIX.
 
-Configuring Apache APISIX for WASM {#h2-6-configuring-apache-apisix-for-wasm}
------------------------------------------------------------------------------
+Configuring Apache APISIX for WASM
+----------------------------------
 
 Apache APISIX's [documentation](https://apisix.apache.org/docs/apisix/wasm/) is geared toward Go. Still, since both Go and Rust generate WebAssembly, we can reuse most of it.
 
@@ -193,8 +193,8 @@ rust-wasm-plugin-apisix-1  | 2022/09/21 13:43:14 [warn] 44#44: *286 on_http_requ
 ```
 
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I described the history behind the `proxy-wasm` and how Apache APISIX integrates it via the WASM Nginx module. I explained how to set up your Rust local environment to generate WebAssembly. Finally, I created a dummy plugin and deployed it to Apache APISIX.
 

@@ -31,13 +31,13 @@ Cloud servers, Docker, Kubernetes, distributed systems, scaling up and down... t
 
 In this episode, we want to learn if the recent evolutions in OpenJDK, and ongoing related projects, will make Java a full Cloud member.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube xU4rKnzkSpo >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,36 +45,36 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Grace Jansen {#h3-3-grace-jansen}
+### Grace Jansen
 
 * <https://www.linkedin.com/in/grace-jansen/>
 * <https://twitter.com/gracejansen27>
 
-### Mark Heckler {#h3-4-mark-heckler}
+### Mark Heckler
 
 * <https://mastodon.cloud/@mkheck>
 * <https://twitter.com/mkheck>
 * <https://www.linkedin.com/in/markheckler/>
 
-### Guillaume Laforge {#h3-5-guillaume-laforge}
+### Guillaume Laforge
 
 * <https://uwyn.net/@glaforge>[](https://uwyn.net/@glaforge)
 * <https://twitter.com/glaforge>[](https://twitter.com/glaforge)
 * <https://www.linkedin.com/in/glaforge/>
 
-Podcast {#h2-6-podcast}
------------------------
+Podcast
+-------
 
-### Host: Frank Delporte {#h3-7-host-frank-delporte}
+### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-Content {#h2-8-content}
------------------------
+Content
+-------
 
 00:00 Introduction of the topic and guests  
 
@@ -128,8 +128,8 @@ Content {#h2-8-content}
 
 <br />
 
-Related Foojay Posts {#h2-9-related-foojay-posts}
--------------------------------------------------
+Related Foojay Posts
+--------------------
 
 * <https://foojay.io/today/java-21-and-the-upcoming-jakarta-ee-11-a-new-era-of-cloud-native-java/>
 * <https://foojay.io/today/how-to-build-and-deploy-a-real-time-cloud-based-logging-system/>
@@ -141,8 +141,8 @@ Related Foojay Posts {#h2-9-related-foojay-posts}
 
 <br />
 
-Music {#h2-10-music}
---------------------
+Music
+-----
 
 * Barbershop John
 * Hermine Deurloo

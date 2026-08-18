@@ -24,7 +24,7 @@ After about one year of development, my client (he himself an energy rater) and 
 
 The feedback and reception to our application has gone far beyond what we expected even though the application is still in Beta (at the time this article was first published).
 
-### Background {#h3-0-background}
+### Background
 
 My responsibility in this project was to define the higher level architecture, do the implementation, User Interface Design and User Experience and all the aspects of setting up a professional environment and workflow for developing a software application.
 
@@ -32,7 +32,7 @@ My client, Nick, an energy rater by profession, has always been pushing energy r
 
 The purpose of the tool, called HERO, is to do the energy efficiency assessment of buildings and in the end generate an energy rating certificate. These certificates are mandatory and every building must meet a minimum value of energy efficiency. Applications that have this purpose must be certified by a public entity (ours already is) and the professional doing the energy rating must himself be a certified energy rater (having completed an accredited course with success).
 
-### High Level View {#h3-1-high-level-view}
+### High Level View
 
 ![](showcase-model-view2-1024x555.png)
 
@@ -45,7 +45,7 @@ There are also other views, inside the Model view, not shown in the picture. Lik
 
 After you run the simulation, you can also see the results of your energy efficiency modelling (picture above). The Results View shows a dashboard, with charts, tables, etc, that lets the user view at a glance how efficient the dwelling or dwellings are and quickly notice what might need to be readjusted.
 
-### Details and Features {#h3-2-details-and-features}
+### Details and Features
 
 The calculations for the energy rating can get really complex. They can depend on a multitude of factors. To name a few:
 
@@ -71,14 +71,14 @@ Another thing that HERO automatically computes are adjacencies between Walls and
 
 For this post not to get too long, too tedious, and too technical I just pointed out some of the features of Hero, there are a lot more. I think you can get a general idea of Hero's features from what was mentioned above.
 
-### Reception and Feedback {#h3-3-reception-and-feedback}
+### Reception and Feedback
 
 My client and I were surprised with the reception the application got. Given that, at the time this article was first written (and at the time the application got its first release), the application was still in Beta and that there were already 3 applications in the market, 2 of them well established, we were expecting a much more moderate reaction.
 
 Before 24 hours had passed since the first release, we had already 50 registered users and 1 certificate issued. In our issue tracker, which has the purpose of only storing bug reports from our users, we were getting thanks messages.
 ![](comentario-1-1.jpg) ![](comentario-2-2.jpg)
 
-### Technology and Form Factor {#h3-4-technology-and-form-factor}
+### Technology and Form Factor
 
 *Notice: I might be a bit biased because I've been working with JavaFX (and Java) since the very first release. However, I'm going to be as impartial as possible.*
 
@@ -102,7 +102,7 @@ To be fair and to try to be impartial, I'll conclude this section with what, in 
 * Some Font rendering issues (this might only happen with some fonts and only on some platforms -- Windows is worse than Mac).
 * Better separation of concerns in JavaFX Controls. There was a plan a few years ago to make Behavior classes public, which would probably provide a better separation between the View, Controller and Model aspects of a Control. Right now it's a bit difficult to create a new Skin for an existing JavaFX SDK Control if your only requirement is to tweak some of its View aspects and when that can't be done through CSS. This often results in developers preferring to create a new Control altogether than providing a new Skin for an existing one which will mean more work and a higher degree of coupling with those Controls (for instance, you won't be able to easily switch between Skins). The fact that the API is often too closed also means that, usually, extending an existing Control isn't an option.
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 Despite being a quite complex application, I believe HERO was created in a record time. Not only that but the feedback from our users makes us feel the application fills a gap and that they are keen to start using it and pushing it to be the default tool for their company.
 

@@ -25,8 +25,8 @@ This is the next part in the series of "JavaFX in Action" interviews published i
 * [July: Pedro Duque Vieira, Daniel Zimmermann, Christopher Schnick, and Robert Ladstätter](https://foojay.io/today/new-video-series-javafx-in-action-part-1/)
 * [November: Maciej Gorywoda, Ramiro Domínguez Ayub, Christoph Schwentker, Ulas Ergin](https://foojay.io/today/video-series-javafx-in-action-part-2/)
 
-Özkan Pakdil: Swaggerific, an open-source Postman alternative written in JavaFX {#h2-0-zkan-pakdil-swaggerific-an-open-source-postman-alternative-written-in-javafx}
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Özkan Pakdil: Swaggerific, an open-source Postman alternative written in JavaFX
+-------------------------------------------------------------------------------
 
 [Özkan Pakdil](https://www.linkedin.com/in/ozkanpakdil/) is a seasoned full-stack developer with over 15 years of experience, deeply rooted in both back-end and front-end technologies. His expertise spans from Varnish cache servers and New Relic to Node.js, Quarkus, Micronaut, Rust, Java, JavaFX,...
 
@@ -36,8 +36,8 @@ This is the next part in the series of "JavaFX in Action" interviews published i
 
 More info in [this blog post](https://webtechie.be/post/2024-11-05-jfxinaction-ozkan-pakdil/).
 
-Clément de Tastes: QuarkusFX, combining the strengths of Quarkus and JavaFX {#h2-1-cl-ment-de-tastes-quarkusfx-combining-the-strengths-of-quarkus-and-javafx}
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Clément de Tastes: QuarkusFX, combining the strengths of Quarkus and JavaFX
+---------------------------------------------------------------------------
 
 [Clément de Tastes](https://www.linkedin.com/in/cl%C3%A9ment-de-tastes-a19734120/) is Technical Lead at SCIAM in France. He has a long history in software development and uses Quarkus in his daytime job. Out of personal interest, he created a Quarkus extension that allows him to combine it with JavaFX to use dependency injection and the many other extensions available for the Quarkus system.
 
@@ -47,8 +47,8 @@ QuarkusFX is a Quarkus extension that allows you to use JavaFX in your Quarkus a
 
 More info in [this blog post](https://webtechie.be/post/2024-11-19-jfxinaction-clement-de-tastes/).
 
-Almas Baim: FXGL, a multipurpose game library for JavaFX {#h2-2-almas-baim-fxgl-a-multipurpose-game-library-for-javafx}
------------------------------------------------------------------------------------------------------------------------
+Almas Baim: FXGL, a multipurpose game library for JavaFX
+--------------------------------------------------------
 
 [Almas Baim](https://www.linkedin.com/in/almasb/) is Computing and Maths Department Lead at the University of Brighton and the creator of the JavaFX game library FXGL.
 
@@ -65,8 +65,8 @@ FXGL is a JavaFX Game Development Framework with the following highlights:
 
 More info in [this blog post](https://webtechie.be/post/2024-12-05-jfxinaction-almas-baim/).
 
-Steve Hannah: jDeploy, to distribute your Java app as a native bundle {#h2-3-steve-hannah-jdeploy-to-distribute-your-java-app-as-a-native-bundle}
--------------------------------------------------------------------------------------------------------------------------------------------------
+Steve Hannah: jDeploy, to distribute your Java app as a native bundle
+---------------------------------------------------------------------
 
 [Steve Hannah](https://www.linkedin.com/in/sjhannah/) is the creator of jDeploy, Xataface, SWeTE, PDF OCR X, and Java-Objective-C bridge. He's also the co-Founder of Web Lite Translation Corp. and software engineer at Codename One.
 
@@ -76,8 +76,8 @@ jDeploy helps you distribute your Java app as a native bundle to macOS, Linux, a
 
 More info in [this blog post](https://webtechie.be/post/2024-12-12-jfxinaction-steve-hannah-jdeploy/).
 
-Jago de Vreede: SDKman UI, a user interface on top of SDKMAN for all platforms {#h2-4-jago-de-vreede-sdkman-ui-a-user-interface-on-top-of-sdkman-for-all-platforms}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Jago de Vreede: SDKman UI, a user interface on top of SDKMAN for all platforms
+------------------------------------------------------------------------------
 
 [Jago de Vreede](https://www.linkedin.com/in/jagod/) is a full-stack software engineer at OpenValue. As a software engineer he has seen a broad-spectrum of projects and he has been working on multiple large scale educational software and banking projects for the last years. His work is not exclusive to Java and Scala development but also does front-end development, and the integration between these.
 

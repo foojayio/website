@@ -34,8 +34,8 @@ Also, regardless of whether you are a plugin author, the described case might be
 
 <br />
 
-The problem {#h2-0-the-problem}
--------------------------------
+The problem
+-----------
 
 In this post, we'll look at a rather interesting performance bottleneck I stumbled upon a couple of years ago. While working on a side project in IntelliJ IDEA, I noticed that finding tests (**Navigate** \| **Test** ) for classes with certain short names, such as `A`, was surprisingly slow, often taking 2 minutes or longer.
 
@@ -45,8 +45,8 @@ The presence of the bottleneck didn't seem to depend on the size of the project 
 
 Why was this happening? And, more importantly, how to approach similar issues, should you encounter them in your project?
 
-Recreate the environment {#h2-1-recreate-the-environment}
----------------------------------------------------------
+Recreate the environment
+------------------------
 
 I originally wrote this article for internal use at JetBrains, however, the idea to make it public came to me only recently. Fortunately, as the time passed, the article hasn't aged well, and the problem seems no longer reproducible on the current versions of IntelliJ IDEA and more recent hardware.
 
@@ -63,8 +63,8 @@ public class A {
 ```
 
 
-IntelliJ Profiler {#h2-2-intellij-profiler}
--------------------------------------------
+IntelliJ Profiler
+-----------------
 
 As you already know, IntelliJ IDEA has an integrated [JVM profiler](https://www.jetbrains.com/pages/intellij-idea-profiler/). You can launch applications [with the profiler attached](https://flounder.dev/posts/get-started-with-profiling/#get-a-snapshot). Alternatively, you can attach the profiler to an already running process, which is what we are going to do.
 
@@ -85,8 +85,8 @@ We need to attach the profiler *before* the problem happens. For example, if the
 
 When you detach the profiler or terminate the process, IntelliJ IDEA automatically opens the resulting [snapshot](https://flounder.dev/posts/get-started-with-profiling/#get-a-snapshot).
 
-Analyzing the report {#h2-3-analyzing-the-report}
--------------------------------------------------
+Analyzing the report
+--------------------
 
 To analyze the snapshots, you have several [views](https://www.jetbrains.com/help/idea/read-the-profiling-report.html) at your disposal. You can choose to examine call trees, stats for particular methods, CPU load per thread, GC activity, and more.
 
@@ -112,8 +112,8 @@ The newer snapshot contains 93-95% fewer samples with `JavaTestFinder.findTestsF
 
 The next question is why that happens. Let's try to find that out with the debugger.
 
-Why such huge difference? {#h2-4-why-such-huge-difference}
-----------------------------------------------------------
+Why such huge difference?
+-------------------------
 
 Setting a breakpoint in `findTestsForClass()` and a little bit of stepping through the code bring us to the following point:
 
@@ -143,8 +143,8 @@ When I executed the program, it logged about 25000 classes, a surprisingly large
 
 The logged class names are clearly coming from somewhere else, not my 'Hello World' project. The mystery is solved: IntelliJ IDEA takes so long to find tests for class `A`, because it checks *all* the cached classes, including dependencies, JDKs, and even classes from other projects. Too many of them pass the filter because they [all have](https://en.wikipedia.org/wiki/Letter_frequency) the letter `A` in their names. With longer and more realistic class names, this inefficiency would have remained unnoticed, just because most of these names would have been filtered out by the regex.
 
-The fix? {#h2-5-the-fix}
-------------------------
+The fix?
+--------
 
 Unfortunately, I couldn't find a simple and reliable fix for this issue. One potential strategy would be to exclude dependencies from the search scope. This looks viable at first glance, but there's a possibility that dependencies might contain tests. This doesn't happen too often, but still, this approach would break the feature for such dependencies.
 
@@ -152,8 +152,8 @@ An alternative approach is to introduce the `*.java` file mask, which would filt
 
 Regardless of the approach, the fix warrants a post of its own, so we are not implementing it right now. What we did, however, is discover the root cause of a slowdown, which is exactly why one would use a profiler.
 
-Share the snapshot {#h2-6-share-the-snapshot}
----------------------------------------------
+Share the snapshot
+------------------
 
 Before wrapping up, there's one more thing worth discussing. Did you notice I used a snapshot [taken on a different computer](#recreate-the-environment)? Furthermore, the snapshot wasn't just from a different machine. The operating system and version of IntelliJ IDEA were also different.
 

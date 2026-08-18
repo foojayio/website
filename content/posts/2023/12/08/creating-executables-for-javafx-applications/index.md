@@ -32,10 +32,10 @@ Let's take a look in this article at the current state of what can be done with 
 
 All the sources and workflow files used here [can be found in the `JavaPackageDemo` repository](https://github.com/heshanthenura/JavaPackageDemo).
 
-General Configuration {#h2-0-general-configuration}
----------------------------------------------------
+General Configuration
+---------------------
 
-### JavaFX Launch File {#h3-1-javafx-launch-file}
+### JavaFX Launch File
 
 A `Launcher.java` file is needed as an entry point to your JavaFX application.
 
@@ -52,7 +52,7 @@ public class Launcher {
 ```
 
 
-### Prerequisites {#h3-2-prerequisites}
+### Prerequisites
 
 The process that is used here, is based on Gradle. Include the following code snippet in your `build.gradle` file to generate a standalone FatJar for your project.
 
@@ -82,7 +82,7 @@ This `customFatJar` task amalgamates your project's code and its dependencies in
 
 To validate the functionality of your JAR file, execute it using the command: `java -jar <path to your JAR file>`. This command verifies the proper execution of your Java application encapsulated within the JAR.
 
-### Building Executables with jpackage {#h3-3-building-executables-with-jpackage}
+### Building Executables with jpackage
 
 `jpackage` is generally included as part of the JDK starting from Java 14. However, in certain cases or older versions where it might not be bundled or available by default, you can manually download the JDK that includes `jpackage` from the official [Oracle](https://www.oracle.com/java/technologies/downloads/) or [OpenJDK](https://openjdk.org/) website. Ensure you download a JDK version that explicitly mentions support for `jpackage`. After downloading and installing the JDK, you should have access to the `jpackage` tool in the JDK's bin directory
 
@@ -108,11 +108,11 @@ Sample usages:
 
 Creating a native executable application requires performing the build on the target platform. For each platform, the required additional steps and the `jpackage` command are explained.
 
-### GitHub Workflows {#h3-4-github-workflows}
+### GitHub Workflows
 
 By using GitHub Actions, we can remove the need to have different platforms available to build native applications. Within the repository of the example project, [workflows are provided for each platform](https://github.com/heshanthenura/JavaPackageDemo/tree/master/.github/workflows) which can be used as a guideline if you want to run the same process on your own machine.
 
-### Windows {#h3-5-windows}
+### Windows
 
 Installing the [WiX Toolset](https://wixtoolset.org/), version 3.0 or later for Windows is necessary. After completing the prerequisites, execute the following command:
 
@@ -128,7 +128,7 @@ jpackage --input build/ --name PackageDemo --main-jar <mPackageDemoJAR.jar > --m
 ```
 
 
-### Linux {#h3-6-linux}
+### Linux
 
 For Linux, it's required to [install `fakeroot`](https://wiki.debian.org/FakeRoot). Run the following command to install fake root: `apt-get install fakeroot -y`.
 
@@ -141,7 +141,7 @@ jpackage --input <direcory of jar file> --name <name> --main-jar <main jar file>
 ```
 
 
-### MacOS {#h3-7-macos}
+### MacOS
 
 For macOS, no additional installations are needed and you can immediately execute the following example command:
 
@@ -150,8 +150,8 @@ jpackage --input build/libs/ --name PackageDemo --main-jar PackageDemoJAR-1.0-SN
 ```
 
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Creating a native executable with JavaFX and `jpackage` for Windows, macOS, and Linux streamlines deployment across multiple operating systems.
 

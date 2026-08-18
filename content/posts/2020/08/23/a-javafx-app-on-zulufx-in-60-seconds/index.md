@@ -29,8 +29,8 @@ Oracle encourages companies to get paid [support](https://www.oracle.com/java/ja
 
 In this article, I will show you how to use a popular distribution from [Azul](https://www.azul.com/) to build a JavaFX HelloWorld Application in 60 seconds!
 
-Requirements {#h2-0-requirements}
----------------------------------
+Requirements
+------------
 
 * Java 11 SDK or above. The following are some of the vendors that have binary distributions of the JDK:
   * [Oracle OpenJDK](https://www.oracle.com/java/technologies/javase-downloads.html)
@@ -44,8 +44,8 @@ Requirements {#h2-0-requirements}
 
 Before we start the stopwatch (60 seconds), let's install the ZuluFX distribution. Below are instruction on how to install the ZuluFX distribution. If you've already installed **Java/JavaFX** 11 or greater (from elsewhere) you can skip to the **Getting Started** section.
 
-Installing ZuluFX {#h2-1-installing-zulufx}
--------------------------------------------
+Installing ZuluFX
+-----------------
 
 [Azul](https://www.azul.com/downloads/zulu-community) creates a free and user-friendly distribution of the JDK bundled with JavaFX. Azul provides a simple user interface shown in figure 1 that allows you to pick and choose an appropriate version of the JDK and JavaFX in one compressed file to be downloaded. To get paid commercial Java support check out Azul's [support](https://www.azul.com/products/zulu-enterprise/) subscriptions.
 
@@ -109,8 +109,8 @@ $ java --list-modules
 
 <br />
 
-Getting Started {#h2-2-getting-started}
----------------------------------------
+Getting Started
+---------------
 
 On your mark, get set, **GO!**
 
@@ -311,8 +311,8 @@ The following is the output of the previous command:
 
 <br />
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 I'm not sure if you've taken more than 60 seconds to complete the steps, but assuming your environment is setup and the JDK 11+ and JavaFX is installed you should be able to cut and paste the code in seconds.
 
@@ -322,8 +322,8 @@ While we are living in strange times I still believe there are more exciting tim
 
 Happy coding and stay safe!
 
-References: {#h2-4-references}
-------------------------------
+References:
+-----------
 
 * OpenJFX.io - A community driven site to help developer get started with JavaFX [https://openjfx.io](https://openjfx.io/)
 * Project Jigsaw: Module System Quick-Start Guide: <http://openjdk.java.net/projects/jigsaw/quick-start>

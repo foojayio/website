@@ -24,8 +24,8 @@ frozen: false
 
 Text is represented by the *String* class in Java. In this article we'll explore how to sort String, the advantages and drawbacks of each possibility.
 
-Level 1: Comparable {#h2-0-level-1-comparable}
-----------------------------------------------
+Level 1: Comparable
+-------------------
 
 The class String implements *Comparable* so sorting a list of String is as simple as
 
@@ -59,8 +59,8 @@ which fixes the case sensitivity problem.
 
 =\> **\[3test, test, test11, test2, test2, test2a, test2b, test3, Test4, test4a, test5, testa, tést2\]**
 
-Level 2: Collator {#h2-1-level-2-collator}
-------------------------------------------
+Level 2: Collator
+-----------------
 
 To sort text in a more accurate way, Java includes the class *java.text.[Collator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/Collator.html)* (and its direct sub-class *java.text.[RuleBasedCollator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/RuleBasedCollator.html)*)
 
@@ -109,8 +109,8 @@ collator.compare("test", "tEst"); => -1
 ```
 
 
-Level 3: External library {#h2-2-level-3-external-library}
-----------------------------------------------------------
+Level 3: External library
+-------------------------
 
 A good resource for different sorting text algorithms with numbers is the [natural order benchmark](https://github.com/ChristianLutz/natural-order-benchmark/) GitHub project from Christian Lutz.
 
@@ -130,8 +130,8 @@ I noted that a few algorithms were using `Character.isDigit()` which was a big p
 * Performance varies based on library used
 * Can be quite complex to read how they work
 
-Level 4: Custom algorithm {#h2-3-level-4-custom-algorithm}
-----------------------------------------------------------
+Level 4: Custom algorithm
+-------------------------
 
 For my file manager [Ant Commander Pro](https://www.antcommander.com) and for my text utilities software [Japplis Toolbox](https://www.japplis.com/toolbox/), I wanted a fast and accurate sorting algorithm.
 

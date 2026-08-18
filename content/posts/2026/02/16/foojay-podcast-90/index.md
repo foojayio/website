@@ -25,13 +25,13 @@ Every six months, we get a new version of Java. Java 26 is just around the corne
 
 If you are doubting moving from 21 to 25, or even from an earlier version to the latest LTS, this podcast is for you! Together with Jakob Jenkov, we discussed the most important changes, and this episode includes a few quotes from interviews recorded at conferences last year.
 
-YouTube {#h2-0-youtube}
------------------------
+YouTube
+-------
 
 {{< youtube fKDhVUEVT3g >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,8 +39,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
 * Jakob Jenkov
   * <https://www.linkedin.com/in/jakob-jenkov-4a3a8/>
@@ -57,8 +57,8 @@ Guests {#h2-2-guests}
 * Jonathan Ellis
   * <https://www.linkedin.com/in/jbellis/>
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 00:00 Introduction of topic and guest
 

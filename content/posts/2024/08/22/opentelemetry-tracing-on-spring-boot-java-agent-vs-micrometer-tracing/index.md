@@ -25,8 +25,8 @@ frozen: false
 
 I want to compare these three different ways in this post: Java agent v1, Java agent v2, and Micrometer Tracing.
 
-The base application and its infrastructure {#h2-0-the-base-application-and-its-infrastructure}
------------------------------------------------------------------------------------------------
+The base application and its infrastructure
+-------------------------------------------
 
 I'll use the same base application: a simple Spring Boot application, coded in Kotlin. It offers a single endpoint.
 
@@ -70,8 +70,8 @@ class MicrometerController {
 
 For every setup, I'll check two stages: the primary stage, with OpenTelemetry enabled, and a customization stage to create additional internal spans.
 
-Micrometer Tracing {#h2-1-micrometer-tracing}
----------------------------------------------
+Micrometer Tracing
+------------------
 
 Micrometer Tracing stems from [Micrometer](https://micrometer.io/), a "vendor-neutral application observability facade".
 > Micrometer Tracing provides a simple facade for the most popular tracer libraries, letting you instrument your JVM-based application code without vendor lock-in. It is designed to add little to no overhead to your tracing collection activity while maximizing the portability of your tracing effort.
@@ -167,8 +167,8 @@ The added observation calls reflect upon the generated traces:
 
 image:{assetsdir}/trace-micrometer-custom.webp\[Micrometer traces on Jaeger with the Observation API,840\]
 
-OpenTelemetry Agent v1 {#h2-2-opentelemetry-agent-v1}
------------------------------------------------------
+OpenTelemetry Agent v1
+----------------------
 
 An alternative to Micrometer Tracing is the generic [OpenTelemetry Java Agent](https://github.com/open-telemetry/opentelemetry-java-instrumentation). Its main benefit is that it impacts neither the code nor the developers; the agent is a pure runtime-scoped concern.
 
@@ -227,8 +227,8 @@ It yields the expected new `intermediate()` trace:
 
 ![](trace-agent-1x-custom.png)
 
-OpenTelemetry Agent v2 {#h2-3-opentelemetry-agent-v2}
------------------------------------------------------
+OpenTelemetry Agent v2
+----------------------
 
 OpenTelemetry released a new major version of the agent in January of this year. I updated my demo with it; traces are now only created when the app receives and sends requests.
 
@@ -238,8 +238,8 @@ As for the previous version, we can add traces with the `@WithSpan` annotation. 
 
 ![Agent v2 traces on Jaeger with annotations](trace-agent-2x-custom.png)
 
-Discussion {#h2-4-discussion}
------------------------------
+Discussion
+----------
 
 Spring became successful for two reasons: it simplified complex solutions, *i.e.*, EJBs 2, and provided an abstraction layer over competing libraries. Micrometer Tracing started as an abstraction layer over Zipkin and Jaeger, and it made total sense. This argument becomes moot with OpenTelemetry being supported by most libraries across programming languages and trace collectors. The Observation API is still a considerable benefit of Micrometer Tracing, as it uses a single API over Metrics and Traces.
 

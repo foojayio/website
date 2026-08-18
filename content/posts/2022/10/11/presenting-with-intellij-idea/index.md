@@ -20,8 +20,8 @@ frozen: false
 
 In this article, we will take a look at ways to level up your presentation skills with IntelliJ IDEA.
 
-Presentation Assistant plugin {#h2-0-presentation-assistant-plugin}
--------------------------------------------------------------------
+Presentation Assistant plugin
+-----------------------------
 
 Our first tip is to use the Presentation Assistant plugin. The Presentation Assistant plugin will show which shortcuts are being used.
 
@@ -41,8 +41,8 @@ To configure the Presentation Assistant plugin, go back to **Preferences** and g
 
 Here we can configure font size, duration, alignment, and which keymaps to show. We are using macOS, with Windows as the alternative keymap. We have also configured the Presentation Assistant plugin to show the shortcuts at the top of the screen.
 
-Presentation Mode {#h2-1-presentation-mode}
--------------------------------------------
+Presentation Mode
+-----------------
 
 When presenting, you can use **Presentation Mode**. The IDE switches to full screen and everything is hidden except for the main editor window. The font size is increased, so it is easier to read from a distance.
 
@@ -78,8 +78,8 @@ We can use **Quick Switch Scheme** again to **Exit Presentation Mode**.
 
 <br />
 
-Mouse Zoom {#h2-2-mouse-zoom}
------------------------------
+Mouse Zoom
+----------
 
 To enable mouse zoom, you need to turn it on explicitly. Go to **Preferences \> Editor \> General** and select **Change font size with Command+Mouse Wheel** (on Mac) or **Change font size with Control+Mouse** (on Windows/Linux). Click **OK** to apply the changes and close the dialog or click **Apply** to keep the dialog open.
 
@@ -91,8 +91,8 @@ Now we can use **Command+Mouse Wheel** (on Mac) or **Control+Mouse Wheel** (on W
 
 ![Reset font size](resize.png)
 
-Font {#h2-3-font}
------------------
+Font
+----
 
 To configure font and font size, go to **Preferences \> Editor \> Font**. We can select the font we want to use, and set the font size.
 
@@ -102,8 +102,8 @@ To configure font and font size, go to **Preferences \> Editor \> Font**. We can
 
 When presenting in person, make sure the font can be read from a distance. If possible, check out the room where you'll be speaking, do your setup before your talk, and walk to the back of the room to check if the code is readable.
 
-Theme {#h2-4-theme}
--------------------
+Theme
+-----
 
 By default, IntelliJ IDEA uses the Darcula theme. To change it, go to **Preferences \> Appearance \& Behavior \> Appearance**.
 
@@ -120,8 +120,8 @@ Select the UI theme from the Theme list:
 
 Which theme to use depends on your personal preference. When presenting in front of an audience, you may want to take into account how light or dark the room is. If possible, try different themes and walk to the back of the room to see which one works best before your presentation. When sharing your screen during an online meeting, you may also want to check with teammates which theme works best.
 
-Tool windows {#h2-5-tool-windows}
----------------------------------
+Tool windows
+------------
 
 We recommend closing all unused windows so we can focus on the code we're looking at. Use **Command + Shift + F12** (on Mac) or **Control+Shift+F12** (on Windows/Linux) to hide all tool windows.
 
@@ -140,8 +140,8 @@ We can always reopen them using shortcuts. Here are the shortcuts to some of the
 
 You can also use keyboard shortcuts to stretch the active window. Go to the relevant window, and use **⌃ ⌥ ←** or **⌃ ⌥ →** (on Mac) or **Control+Alt+Shift+Left** or **Control+Alt+Shift+Right** (on Windows/Linux) to stretch the window left or right. This also works with the tool windows at the bottom, using the up or down arrows to stretch the window up or down.
 
-Find action {#h2-6-find-action}
--------------------------------
+Find action
+-----------
 
 If you want to do something, but don't remember the shortcut or menu option, use **Find Action** . Press **⇧⌘A** (on Mac) or **Control+Shift+A** (on Windows/Linux) to open the **Find Action** dialog. Search for the action you want, and select the relevant action.
 
@@ -151,8 +151,8 @@ If you want to do something, but don't remember the shortcut or menu option, use
 
 For example, let's use **Find Action** to apply soft-wrap.
 
-Soft-wrap {#h2-7-soft-wrap}
----------------------------
+Soft-wrap
+---------
 
 When using a file that has long lines, we can prevent horizontal scrolling by using soft-wrap. Let's use **Find Action** to enable soft-wrap. Press **⇧⌘A** (on Mac) or **Control+Shift+A** (on Windows/Linux) to open the Find Action dialog, and search for "soft-wrap".
 
@@ -172,8 +172,8 @@ Alternatively, we can configure soft-wrap. Let's select "**Soft wrap these files
 
 <br />
 
-Shortcuts {#h2-8-shortcuts}
----------------------------
+Shortcuts
+---------
 
 We recommend using shortcuts as much as possible when presenting. This is easier to do during a presentation than using a mouse or trackpad, especially if you get nervous and your hands might get slippery. There are several ways to learn shortcuts.
 
@@ -184,8 +184,8 @@ We recommend using shortcuts as much as possible when presenting. This is easier
 
 Let's take a look at some shortcuts for navigation.
 
-Navigation {#h2-9-navigation}
------------------------------
+Navigation
+----------
 
 We can use several shortcuts to navigate around a project:
 
@@ -219,8 +219,8 @@ Finally, we can find **Recent Files** using **⌘ E** (on Mac) or **Ctrl+E** (on
 
 <br />
 
-Bookmarks {#h2-10-bookmarks}
-----------------------------
+Bookmarks
+---------
 
 Another way to navigate through code, is to use bookmarks. Press **F3** (on Mac) or **F11** (on Windows/Linux) to create an anonymous line bookmark.
 
@@ -244,12 +244,12 @@ There are several ways to navigate between bookmarks. Press **⌘ F3** (on Mac) 
 
 To jump straight to a mnemonic bookmark, hold **\^** (on Mac) or **Control** (on Windows/Linux) and press the mnemonic digit or letter on the keyboard.
 
-Summary and Shortcuts {#h2-11-summary-and-shortcuts}
-----------------------------------------------------
+Summary and Shortcuts
+---------------------
 
 Now we know several tricks that will level up our presentation skills with IntelliJ IDEA.
 
-### IntelliJ IDEA Shortcuts Used {#h3-12-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -280,7 +280,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Mnemonic Bookmark                                                                                | **⌥F3**             | **Control+F11**             |
 | Save Mnemonic Bookmark                                                                           | **⏎**               | **Enter**                   |
 
-### Related Links {#h3-13-related-links}
+### Related Links
 
 * [(video) JetBrains - Presenting with IntelliJ IDEA](https://www.youtube.com/watch?v=h-HGg9b6Dqw)
 * [(docs) JetBrains - Settings/Preferences](https://www.jetbrains.com/help/idea/settings-preferences-dialog.html)

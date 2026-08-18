@@ -32,7 +32,7 @@ The Quarkus Pi4J Extension brings these two worlds together, making it easier th
 Project repository:  
 <https://github.com/quarkiverse/quarkus-pi4j>
 
-### Why Combine Quarkus and Pi4J? {#h3-0-why-combine-quarkus-and-pi4j}
+### Why Combine Quarkus and Pi4J?
 
 Modern IoT and edge computing applications often require much more than hardware access.
 
@@ -53,7 +53,7 @@ The Quarkus Pi4J extension allows developers to use Pi4J naturally within a Quar
 
 <br />
 
-### What Does the Extension Provide? {#h3-1-what-does-the-extension-provide}
+### What Does the Extension Provide?
 
 The extension automatically configures and manages the Pi4J Context, the central component responsible for hardware access and device lifecycle management.
 
@@ -70,7 +70,7 @@ Key benefits include:
 * Native Quarkus developer experience
 * Seamless integration with REST endpoints and services
 
-### A Simple Example {#h3-2-a-simple-example}
+### A Simple Example
 
 One of the easiest ways to understand the value of the extension is by controlling a GPIO pin.
 
@@ -93,7 +93,7 @@ public class LedService {
 ```
 
 
-### Configuration Without Recompilation {#h3-3-configuration-without-recompilation}
+### Configuration Without Recompilation
 
 One of the most powerful features of the Quarkus Pi4J extension is the ability to externalize hardware configuration using standard Quarkus configuration properties.
 
@@ -117,7 +117,7 @@ This approach offers several advantages:
 * Cleaner separation between configuration and implementation
 * Simplified maintenance and testing
 
-### GPIO Injection by Number or Name {#h3-4-gpio-injection-by-number-or-name}
+### GPIO Injection by Number or Name
 
 The extension also introduces a developer-friendly programming model based on annotations.
 
@@ -147,7 +147,7 @@ This pattern aligns perfectly with Quarkus' philosophy of configuration-driven d
 
 In this example, the Pi4J Context is injected directly into the application component. The extension takes care of initialization and shutdown, allowing developers to focus entirely on business logic instead of infrastructure concerns.
 
-### Health Checks for Raspberry Pi Applications {#h3-5-health-checks-for-raspberry-pi-applications}
+### Health Checks for Raspberry Pi Applications
 
 A particularly interesting feature of the extension is its integration with Quarkus Health.
 
@@ -163,7 +163,7 @@ This is especially useful for:
 
 Having operational visibility built into the application makes it easier to manage Raspberry Pi deployments at scale.
 
-### Building Modern IoT Applications {#h3-6-building-modern-iot-applications}
+### Building Modern IoT Applications
 
 The combination of Quarkus and Pi4J opens the door to a wide range of projects.
 
@@ -180,7 +180,7 @@ A developer can use Pi4J to collect data from sensors while simultaneously expos
 
 This creates a complete Java-based stack running directly on Raspberry Pi hardware.
 
-### Part of the Quarkiverse Ecosystem {#h3-7-part-of-the-quarkiverse-ecosystem}
+### Part of the Quarkiverse Ecosystem
 
 The extension is hosted within the Quarkiverse, the community ecosystem for Quarkus extensions. Quarkiverse provides a home for community-driven integrations that expand the capabilities of Quarkus while benefiting from shared infrastructure, testing, documentation, and release processes.
 
@@ -189,7 +189,7 @@ Being part of Quarkiverse makes the extension easier to discover, maintain, and 
 
 <br />
 
-### Looking Ahead {#h3-8-looking-ahead}
+### Looking Ahead
 
 The Quarkus Pi4J extension represents an important step toward making Raspberry Pi development feel like a first-class experience within modern Java frameworks.
 
@@ -197,7 +197,7 @@ Combined with projects such as Pi4J Drivers, developers can build applications t
 
 As Java continues to grow in areas such as IoT, edge computing, education, and robotics, integrations like Quarkus Pi4J help bridge the gap between enterprise-grade development practices and physical computing.
 
-### Conclusion {#h3-9-conclusion}
+### Conclusion
 
 The Quarkus Pi4J extension brings together the best of both worlds: Pi4J's powerful hardware access capabilities and Quarkus' modern cloud-native development experience.
 

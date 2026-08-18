@@ -27,8 +27,8 @@ This article explores how these new features can make your code more concise wit
 
 If you're more of an interactive learner, watch my [on-demand webinar on pattern matching in Java](https://www.azul.com/resources-hub/webinars-2/the-art-of-java-language-pattern-matching-on-demand-webinar) from June 2022. First, let's back up and explain what pattern matching is.
 
-What Is Pattern Matching? {#h-what-is-pattern-matching}
--------------------------------------------------------
+What Is Pattern Matching?
+-------------------------
 
 A pattern consists of two distinct things:
 
@@ -43,16 +43,16 @@ There are several different pattern types that we can use.
 4. **Var:** Like local variable type inference, introduced in JDK 10, this type of pattern matching uses the compiler to infer types for us.
 5. **Any:** Like var, it will match anything; but in this case, we simply ignore the value. This will become clear when we look at an example later.
 
-Why Do We Need Pattern Matching? {#h-why-do-we-need-pattern-matching}
----------------------------------------------------------------------
+Why Do We Need Pattern Matching?
+--------------------------------
 
 Pattern matching allows us to test for a specific pattern on a character sequence or a data structure. It makes code easier to read, easier to understand, faster to create, and more resistant to bugs.
 
 * **Pattern matching creates cleaner, shorter code** by relying less on reflection and casting. Code expresses more complex logic with fewer lines.
 * **Pattern matching reduces bugs** caused by pattern dominance (pattern dominance is when a previous pattern supersedes another, making it unreachable) and pattern non-exhaustiveness (pattern exhaustiveness is when the compiler warns you that you have not checked for all possible variants of a type).
 
-The instanceof Operator in JDK 18 {#h-the-instanceof-operator-in-jdk-18}
-------------------------------------------------------------------------
+The instanceof Operator in JDK 18
+---------------------------------
 
 Let's look at how we use the *instanceof* operator. Because Java is object-oriented, we have polymorphism: we can view an object as any of the types that it is -- its exact type, any of the superclasses, and any of the interfaces it implements.
 
@@ -100,8 +100,8 @@ if (o instanceof Float n) {
 ```
 
 
-Switch Statements and Expressions in JDK 18 {#h-switch-statements-and-expressions-in-jdk-18}
---------------------------------------------------------------------------------------------
+Switch Statements and Expressions in JDK 18
+-------------------------------------------
 
 The next use of pattern matching in Java is in switch. Until JDK 17, even with the introduction of switch expressions, we were still constrained to a small set of types we could switch over: integral values, strings, and enumerations. JDK 17 introduced pattern matching for switch, which allows us to use a type pattern as a case.
 
@@ -195,8 +195,8 @@ In JDK 19, the syntax for guarded patterns will change, replacing the \&\& opera
 
 More pattern matching will be added to Java in the future. Already, JDK 19 is scheduled to include pattern matching for records, which is a deconstruction pattern. We'll cover that and some other aspects in a later blog post.
 
-All the Readability Without the Unnecessary Code {#h-all-the-readability-without-the-unnecessary-code}
-------------------------------------------------------------------------------------------------------
+All the Readability Without the Unnecessary Code
+------------------------------------------------
 
 As you can see, pattern matching is a powerful addition to the Java language that reduces the amount of boilerplate code required without sacrificing readability.
 

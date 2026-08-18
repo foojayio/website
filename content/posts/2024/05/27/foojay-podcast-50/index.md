@@ -35,13 +35,13 @@ In the first part, you'll hear Karl Heinz Marbaise and Steve Poole discuss the M
 
 But next to security, we developers are also responsible for creating readable and maintainable code. Miro Wengner, Marit van Dijk, and Hinse ter Schuur dive into this topic, in the second part!
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube UDe5YfjkFX8 >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -49,8 +49,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:28 Karl Heinz Marbaise: Apache Maven version 4, Sonatype, Maven Repository  
 <https://www.linkedin.com/in/khmarbaise/>  

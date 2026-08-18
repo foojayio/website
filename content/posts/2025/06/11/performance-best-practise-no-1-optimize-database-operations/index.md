@@ -42,14 +42,14 @@ You can address the above issues and boost Jakarta EE database performance by le
 
 > "Connection establishment is the most expensive database operation; the obvious optimization that Java developers have been using for ages is connection pooling which avoids creating connections at runtime (unless you exhaust the pool capacity)." -- Kuassi Mensah [^\[1\]^](https://medium.com/oracledevs/revisiting-java-applications-performance-scalability-with-rdbms-68d9f85466ca)
 
-How GlassFish helps with improving database performance {#how-glassfish-helps-with-improving-database-performance}
-------------------------------------------------------------------------------------------------------------------
+How GlassFish helps with improving database performance
+-------------------------------------------------------
 
 [GlassFish](https://omnifish.ee/) provides built-in connection pools. If an application uses a datasource defined in GlassFish, connections are managed by GlassFish via the built-in connection pooling mechanism and can be configured externally, outside of your application, via GlassFish Admin Console or admin commands.
 
 JDBC statement caching involves storing frequently executed SQL statements, such as `Statement`, `PreparedStatement`, and `CallableStatement`, in a cache, so that they can be reused later if the same request is executed again. Instead of preparing an SQL statement from scratch every time it needs to be executed, an already prepared statement is used if it's stored in the cache. While statement caching is often a built-in feature of JDBC drivers, GlassFish provides its own statement caching mechanism that can be used even with JDBC drivers that do not have native support for it[^\[2\]^](https://glassfish.org/docs/latest/administration-guide.html#statement-caching).
 
-### Connection pool configuration {#connection-pool-configuration}
+### Connection pool configuration
 
 You can configure connection pools in the Admin Console as follows:
 ![](blog-conn-pool-size-idle.png) ![](image-1.png)
@@ -87,7 +87,7 @@ Or using in an application using an annotation:
 ```
 
 
-### JDBC batching {#jdbc-batching}
+### JDBC batching
 
 JDBC batching is a feature in Java Database Connectivity (JDBC) that allows you to group multiple SQL statements together and send them to the database in a single request. In other words, the batched statements will not be executed immediately when they are submitted, but will be submitted together in a single request after the last statement is submitted.
 
@@ -103,7 +103,7 @@ statement.executeBatch();
 ```
 
 
-### Jakarta Persistence (JPA) batching {#jakarta-persistence-jpa-batching}
+### Jakarta Persistence (JPA) batching
 
 With JPA (Jakarta Persistence), a batching behavior can be enabled via [EclipseLink extensions for JPA](https://eclipse.dev/eclipselink/documentation/4.0/solutions/solutions.html#CHDHDFAD). If your applications use Hibernate or another JPA provider, these wouldn't be available to you. In that case, check the documentation of your provider if it supports similar extensions.
 
@@ -139,7 +139,7 @@ query.setHint(QueryHints.BATCH_WRITING, HintValues.FALSE);
 ```
 
 
-### Next Steps {#statement-caching-with-glassfish}
+### Next Steps
 
 To put these ideas into action, you should think about how your application works with the database, what are your database settings, and how much load (parallel queries and connections) your database can handle.
 

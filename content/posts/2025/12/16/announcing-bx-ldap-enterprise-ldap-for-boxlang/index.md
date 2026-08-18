@@ -26,15 +26,15 @@ frozen: false
 We're excited to announce the release of **bx-ldap**, a comprehensive LDAP module that brings enterprise-grade directory access to BoxLang! This module goes above and beyond traditional CFML LDAP implementations, offering modern features like connection pooling, event-driven programming, multiple return formats, and a clean, intuitive API.
 > **Note:** bx-ldap is a premium module available exclusively to BoxLang +/++ **subscribers**.
 
-🎯 Why? {#h2-0-why}
--------------------
+🎯 Why?
+-------
 
 Whether you're integrating with Active Directory, OpenLDAP, or any LDAP-compliant directory service, **bx-ldap** makes it simple and powerful. From basic queries to complex directory operations, this module handles it all with grace and performance.
 
-✨ Amazing Features {#h2-1-amazing-features}
--------------------------------------------
+✨ Amazing Features
+------------------
 
-### 🔍 Seven Powerful Actions {#h3-2-seven-powerful-actions}
+### 🔍 Seven Powerful Actions
 
 The module supports seven core LDAP operations:
 
@@ -46,7 +46,7 @@ The module supports seven core LDAP operations:
 * **Open** - Create named connections for reuse
 * **Close** - Explicitly close and release connections
 
-### 📊 Flexible Return Formats {#h3-3-flexible-return-formats}
+### 📊 Flexible Return Formats
 
 Choose the data format that works best for your application, either native Queries or Arrays.
 
@@ -82,7 +82,7 @@ return jsonSerialize( apiResponse );
 ```
 
 
-### 🔌 Smart Connection Pooling {#h3-4-smart-connection-pooling}
+### 🔌 Smart Connection Pooling
 
 Forget about managing connections manually! bx-ldap includes automatic connection pooling and tracking, ensuring optimal performance and resource management:
 
@@ -120,7 +120,7 @@ bx:ldap
 ```
 
 
-### 📢 Event-Driven Programming {#h3-5-event-driven-programming}
+### 📢 Event-Driven Programming
 
 Monitor and react to LDAP operations with built-in event announcements! bx-ldap integrates seamlessly with BoxLang's interception system:
 
@@ -156,8 +156,8 @@ Perfect for:
 * Resource management
 * Custom metrics
 
-💡 Code Samples {#h2-6-code-samples}
-------------------------------------
+💡 Code Samples
+---------------
 
 Quick User Lookup
 
@@ -269,8 +269,8 @@ bx:ldap
 ```
 
 
-🔒 Enterprise-Grade Security {#h2-7-enterprise-grade-security}
---------------------------------------------------------------
+🔒 Enterprise-Grade Security
+----------------------------
 
 * **SSL/TLS Support** - Secure connections with server authentication
 * **Mutual TLS** - Client certificate authentication
@@ -278,8 +278,8 @@ bx:ldap
 * **Credential Management** - Secure handling of authentication
 * **Access Control** - Fine-grained permission handling
 
-🚀 Performance Optimized {#h2-8-performance-optimized}
-------------------------------------------------------
+🚀 Performance Optimized
+------------------------
 
 * **Connection Pooling** - Automatic connection reuse and management
 * **Result Pagination** - Handle large datasets efficiently
@@ -287,8 +287,8 @@ bx:ldap
 * **Scope Control** - Optimize searches with base/onelevel/subtree scopes
 * **Query Caching** - Cache frequently accessed data
 
-📦 Installation {#h2-9-installation}
-------------------------------------
+📦 Installation
+---------------
 
 **Remember that in order to get started you will need a BoxLang +/++ subscription as this is an enterprise module professionally supported.**
 
@@ -306,8 +306,8 @@ install-bx-module bx-ldap@ortus
 ```
 
 
-📚 Documentation {#h2-10-documentation}
----------------------------------------
+📚 Documentation
+----------------
 
 [https://boxlang.ortusbooks.com/boxlang-framework/modularity/ldap-+](https://boxlang.ortusbooks.com/boxlang-framework/modularity/ldap-+ "https://boxlang.ortusbooks.com/boxlang-framework/modularity/ldap-+")
 
@@ -321,8 +321,8 @@ Comprehensive documentation is available with:
 
 Check out the full documentation in the module's README for everything you need to get started!
 
-🎁 Get Access {#h2-11-get-access}
----------------------------------
+🎁 Get Access
+-------------
 
 bx-ldap is available exclusively to **BoxLang +/++ subscribers**. Join our subscription program to access this and other premium modules that extend BoxLang's capabilities:
 
@@ -331,7 +331,7 @@ bx-ldap is available exclusively to **BoxLang +/++ subscribers**. Join our subsc
 * **Early Access** - Be first to try new features
 * **Exclusive Benefits** - CFCasts account, FORGEBOX Pro, and more
 
-### 🛒 Purchase Options {#h3-12-purchase-options}
+### 🛒 Purchase Options
 
 Ready to unlock bx-ldap and other premium modules? Choose your plan:
 

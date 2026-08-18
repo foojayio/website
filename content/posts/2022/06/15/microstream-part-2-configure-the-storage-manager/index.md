@@ -33,8 +33,8 @@ And the Java instances are serialised to a persistent medium so that they can be
 
 In this article, we have a look at how you define what is considered as the database for MicroStream and how you can configure the storage manager.
 
-The Storage Manager {#h2-0-the-storage-manager}
------------------------------------------------
+The Storage Manager
+-------------------
 
 You as a developer will interact with the class *StorageManager* to persist your data. When supplying the configuration, a StorageManager is ready to write the Java Instances in a binary format to the persistent medium. But more on the format later on, let us jump directly into some pieces of code to show you the gist of the *StorageManager*.
 
@@ -65,8 +65,8 @@ public class DataRoot {
 
 As indicated earlier, no need for a mapping, annotation, or interface, just plain Java POJOs.
 
-Configuration {#h2-1-configuration}
------------------------------------
+Configuration
+-------------
 
 What dependencies do you need to add to your project? You just need a single dependency to have access to the *StorageManager* class that writes to the file system.
 
@@ -107,8 +107,8 @@ StorageManager storageManager = EmbeddedStorage.start(root, storageConfiguration
 ```
 
 
-Abstract File System (AFS) {#h2-2-abstract-file-system-afs}
------------------------------------------------------------
+Abstract File System (AFS)
+--------------------------
 
 To allow for different kinds of persistence storages, MicroStream uses internally an Abstract File System. The systems that read and write the data use implementations of this AFS so that not only a directory on the disk can be used, but also data can be stored inside a database. You can create even your custom implementation of this AFS and use any system you like.
 
@@ -154,8 +154,8 @@ StorageConfiguration storageConfiguration = StorageConfiguration.Builder()
 ```
 
 
-Configuration through Configuration Files {#h2-3-configuration-through-configuration-files}
--------------------------------------------------------------------------------------------
+Configuration through Configuration Files
+-----------------------------------------
 
 Until now, we have always used the programmatic configuration of the *StorageManager*. Through some Java statements, we defined the file locations and the number of channels that need to be used. MicroStream has the option to read the configuration properties from external sources like properties files, ini files, and XML files.
 
@@ -191,8 +191,8 @@ The *EmbeddedStorageFoundation* class is actually the configuration class that g
 
 The list of all configuration properties and their description can be found on this documentation page <https://docs.microstream.one/manual/storage/configuration/properties.html>
 
-Conclusion {#h2-4-conclusion}
------------------------------
+Conclusion
+----------
 
 Setting up the Storage Manager can be as easy as pointing a directory on disk to the root object of the Object Graph that we consider as our in-memory database.
 
@@ -206,7 +206,7 @@ The Storage Manager does not write to disk directly but makes use of the MicroSt
 
 This AFS makes it possible that the binary data can be written to many types of storage, including databases, No-SQL solutions, and cloud storage.
 
-### Resources {#h3-5-resources}
+### Resources
 
 * [MicroStream reference manual chapter around configuration](https://docs.microstream.one/manual/storage/configuration/index.html "Documentation of MicroStream around configuration")
 * [MicroStream storage targets - AFS](https://docs.microstream.one/manual/storage/storage-targets/index.html)

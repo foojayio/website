@@ -54,8 +54,8 @@ OK. Enough theory let's get started.
 
 In this tutorial, I will be using a Spring Boot application which when accessed via /states REST endpoint shows Indian states and their capitals. This application uses an in-memory H2 database which inserts rows at the start of the application and keeps it in memory. The source code is available [here](https://github.com/yrashish/indian-states).
 
-Prerequisite {#h2-0-prerequisite}
----------------------------------
+Prerequisite
+------------
 
 For this demo following are required to be installed.
 

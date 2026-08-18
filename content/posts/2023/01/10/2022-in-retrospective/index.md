@@ -23,8 +23,8 @@ frozen: false
 
 On the personal and technical side, here's a summary of the past year from my perspective.
 
-Job change {#h2-0-job-change}
------------------------------
+Job change
+----------
 
 <img fetchpriority="high" decoding="async" class="alignright size-full wp-image-61589" src="apache-apisix.jpeg" alt="" width="300" height="300">
 
@@ -52,8 +52,8 @@ When I joined Hazelcast, I had to *understand* distributed systems and concepts 
 
 It means I had to shift the subjects I write about: you won't find any Java and hardly any Kotlin.
 
-My blog {#h2-1-my-blog}
------------------------
+My blog
+-------
 
 In 2022, I published 50 blog posts on : one each week on Sunday, but on Christmas and the New Year - for obvious reasons. Here are the top 5 most viewed pages:
 
@@ -84,8 +84,8 @@ You can notice a couple of huge spikes. They are [Hacker News](https://news.ycom
 | 4    | [What I miss in Java, the perspective of a Kotlin developer](https://blog.frankel.ch/miss-in-java-kotlin-developer/) | 2,180  | 7.70  |
 | 5    | [Toying with Kotlin's context receivers](https://blog.frankel.ch/kotlin-context-receivers/)                          | 1,023  | 3.61  |
 
-Cross-posting {#h2-2-cross-posting}
------------------------------------
+Cross-posting
+-------------
 
 2022 also saw consistent cross-posting on third-party content aggregator sites, which allow linking to the original post. As a reminder, Google (and other search sites) flag similar content as duplicate.
 
@@ -102,8 +102,8 @@ That being said, here are my followers depending on the site:
 
 It's interesting to see that though I thought dev.to focused on web and front-end, I got many followers though I rarely write on such subjects. Conversely, I still need to understand why my follower base on Hashnode doesn't take off.
 
-Public speaking {#h2-3-public-speaking}
----------------------------------------
+Public speaking
+---------------
 
 [![](Screenshot-2023-01-02-at-15.32.08-752x1024.png)](https://twitter.com/nicolas_frankel/status/1608043464146710528)
 
@@ -124,8 +124,8 @@ Regarding content, I mainly did two talks:
 
 It's below the number of talks I usually try to achieve, but they were pretty popular, especially the first one. I'm working on more diversity for 2023.
 
-GitHub contributions {#h2-4-github-contributions}
--------------------------------------------------
+GitHub contributions
+--------------------
 
 As a Developer Advocate, my [GitHub contributions](https://github.com/nfrankel/) are different from the ones of a regular software developer, especially one working on Open Source.
 
@@ -135,8 +135,8 @@ As a Developer Advocate, my [GitHub contributions](https://github.com/nfrankel/)
 
 Most of my contributions are commits because I'm the only one working on my demos. Furthermore, I regularly update them with the latest version of whatever dependency I use. I'm trying to open issues on Apache APISIX since I'm a huge user. Eating one's dog food is a great way to uncover either bugs or usability improvements. Finally, pull requests are for blog posts and reviews for my colleagues' blog posts.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Years when one changes jobs are always challenging but very interesting; 2022 was no different. My resolution for 2023 are:
 

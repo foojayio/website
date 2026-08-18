@@ -34,16 +34,16 @@ After evaluating multiple frameworks, Orange chose Quarkus as the optimal soluti
 
 For a collection of user stories from the community, see the [Quarkus user stories blog](https://quarkus.io/userstories/) series. These stories highlight how different teams and organizations are using Quarkus in the real world.
 
-What does Quarkus have to offer? {#_what_does_quarkus_have_to_offer}
---------------------------------------------------------------------
+What does Quarkus have to offer?
+--------------------------------
 
-### Developer joy with live coding and dev mode {#_developer_joy_with_live_coding_and_dev_mode}
+### Developer joy with live coding and dev mode
 
 Quarkus streamlines the traditional write-compile-deploy-refresh cycle by offering live coding support out of the box. As developers make changes, Quarkus automatically detects, recompiles, and redeploys the application, which eliminates the need for manual restarts.
 
 While similar functionality has existed through third-party tools, Quarkus integrates it natively and without licensing overhead. This significantly boosts productivity and enhances the developer experience.
 
-### Cost efficiency and performance {#_cost_efficiency_and_performance}
+### Cost efficiency and performance
 
 By optimizing for low memory usage and fast startup times, Quarkus enables higher-density deployments and rapid scaling.
 
@@ -51,7 +51,7 @@ For comparable workloads, Quarkus typically consumes fewer resources such as CPU
 
 However, organizations considering the switch should always measure and evaluate their specific workloads to validate these benefits in practice.
 
-### Reactive at its core {#_reactive_at_its_core}
+### Reactive at its core
 
 At its core, Quarkus is built on Eclipse Vert.x, a high-performance reactive toolkit. Still, it allows developers to work primarily in an imperative style while leveraging the performance benefits of its reactive underpinnings.
 
@@ -94,20 +94,20 @@ public class GreetingRoute {
 
 This route handles HTTP GET requests reactively using `Uni` from Mutiny, making it easy to build non-blocking, low-latency APIs.
 
-Which of your current development pains could Quarkus solve? {#_which_of_your_current_development_pains_could_quarkus_solve}
-----------------------------------------------------------------------------------------------------------------------------
+Which of your current development pains could Quarkus solve?
+------------------------------------------------------------
 
 One often-overlooked benefit of Quarkus is how it improves onboarding and standardization across teams.
 
 With built-in conventions, automatic service provisioning, and curated extension defaults, Quarkus helps developers get up to speed quickly and encourages consistent patterns across projects.
 
-### Dev Services {#_dev_services}
+### Dev Services
 
 Quarkus Dev Services reduce friction during development and testing by automatically provisioning required services such as databases, message brokers, or identity providers.
 
 For example, if your application includes PostgreSQL, Kafka, or Keycloak extensions, Quarkus can spin up the necessary containers without any manual setup. This allows you to focus on coding instead of configuring infrastructure, accelerating your local development workflow.
 
-### Vast extension ecosystem {#_vast_extension_ecosystem}
+### Vast extension ecosystem
 
 Quarkus offers a rich extension ecosystem that simplifies integration with essential technologies such as databases, messaging systems, authentication providers, and cloud services.
 
@@ -123,7 +123,7 @@ Popular extensions include:
 
 These extensions are widely adopted because they reduce boilerplate, provide reliable default configurations out of the box, and follow cloud-native best practices---making it easy to plug Quarkus into real-world architectures.
 
-### "OK, I would like to try it, but is it easy enough to migrate my workflow to Quarkus?" {#_ok_i_would_like_to_try_it_but_is_it_easy_enough_to_migrate_my_workflow_to_quarkus}
+### "OK, I would like to try it, but is it easy enough to migrate my workflow to Quarkus?"
 
 Migrating to a new framework can feel daunting, even when it promises better performance, lower costs, and an improved developer experience. It's like being offered a better house in a better neighborhood, but hesitating because of the hassle of packing, moving, and settling in.
 
@@ -135,8 +135,8 @@ Need assistance getting started? You're not alone. The Quarkus team offers exper
 
 All it takes is a decision to move forward. Your team deserves a faster, leaner, and cloud-native future.
 
-Concluding note {#_concluding_note}
------------------------------------
+Concluding note
+---------------
 
 Quarkus is redefining Java development by combining modern features with the robustness of the Java ecosystem.
 

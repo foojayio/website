@@ -21,8 +21,8 @@ enlighterjs: true
 frozen: false
 ---
 
-When Event-Driven Architecture Is Not the Right Choice {#h2-0-when-event-driven-architecture-is-not-the-right-choice}
----------------------------------------------------------------------------------------------------------------------
+When Event-Driven Architecture Is Not the Right Choice
+------------------------------------------------------
 
 Event-Driven Architecture (EDA) can help teams build scalable, loosely coupled and highly responsive distributed systems. Technologies such as Apache Kafka, RabbitMQ, Pulsar and cloud messaging platforms have made this architectural style increasingly popular.
 
@@ -33,8 +33,8 @@ The important question is therefore not only **"When should we use Event-Driven 
 
 In this article, we will examine seven situations where synchronous APIs, direct service calls or traditional database transactions may be the better choice. The goal is not to discourage event-driven systems, but to help architects and developers use them where they create real value rather than unnecessary complexity.
 
-TL;DR ☕ {#h2-1-tl-dr}
----------------------
+TL;DR ☕
+-------
 
 Event-Driven Architecture (EDA) is one of the most powerful architectural styles for scalable distributed systems, but it is **not** a universal solution.
 
@@ -50,8 +50,8 @@ Great architects also know when **not** to use it.
 
 
 
-Why This Article? {#h2-2-why-this-article}
-------------------------------------------
+Why This Article?
+-----------------
 
 Modern software architecture often swings between extremes.
 
@@ -76,8 +76,8 @@ Don't use EDA for everything{#caption-attachment-124878}
 
 
 
-1. Avoid EDA for Simple CRUD Applications {#h2-3-1-avoid-eda-for-simple-crud-applications}
-------------------------------------------------------------------------------------------
+1. Avoid EDA for Simple CRUD Applications
+-----------------------------------------
 
 If your application has:
 
@@ -126,7 +126,7 @@ You just added:
 
 All of that just to update one row.
 
-### Direct CRUD Is Often Enough {#h3-4-direct-crud-is-often-enough}
+### Direct CRUD Is Often Enough
 
 ```java
 @PostMapping("/customers")
@@ -142,8 +142,8 @@ One request, one transaction and one database update. For small CRUD application
 
 
 
-2. Avoid EDA When Strong Consistency Is Required {#h2-5-2-avoid-eda-when-strong-consistency-is-required}
---------------------------------------------------------------------------------------------------------
+2. Avoid EDA When Strong Consistency Is Required
+------------------------------------------------
 
 Some domains cannot tolerate eventual consistency.
 
@@ -173,7 +173,7 @@ Some business rules require either everything to succeed or everything to fail.
 
 Those are classic ACID transaction scenarios.
 
-### Preserve Atomicity with One Transaction {#h3-6-preserve-atomicity-with-one-transaction}
+### Preserve Atomicity with One Transaction
 
 ```java
 @Transactional
@@ -190,8 +190,8 @@ Some business operations require atomicity. Distributed events introduce tempora
 
 
 
-3. Avoid EDA When Users Expect an Immediate Response {#h2-7-3-avoid-eda-when-users-expect-an-immediate-response}
-----------------------------------------------------------------------------------------------------------------
+3. Avoid EDA When Users Expect an Immediate Response
+----------------------------------------------------
 
 Imagine clicking:
 
@@ -227,7 +227,7 @@ EDA works wonderfully for background processing such as:
 
 Those actions do not need to block the user experience.
 
-### Use Synchronous APIs for Immediate Responses {#h3-8-use-synchronous-apis-for-immediate-responses}
+### Use Synchronous APIs for Immediate Responses
 
 ```java
 @PostMapping("/login")
@@ -241,8 +241,8 @@ Authentication is conversational. The client waits for the answer before continu
 
 
 
-4. Avoid EDA When There Is No Fan-Out {#h2-9-4-avoid-eda-when-there-is-no-fan-out}
-----------------------------------------------------------------------------------
+4. Avoid EDA When There Is No Fan-Out
+-------------------------------------
 
 One of the biggest strengths of EDA is fan-out:
 
@@ -294,7 +294,7 @@ service.process(order);
 
 That is not always a good trade-off.
 
-### Prefer a Direct Service Call for One Consumer {#h3-10-prefer-a-direct-service-call-for-one-consumer}
+### Prefer a Direct Service Call for One Consumer
 
 ```java
 orderValidator.validate(order);
@@ -306,8 +306,8 @@ If only one service consumes the information, direct calls are usually simpler, 
 
 
 
-5. Avoid EDA When Your Team Is Not Operationally Ready {#h2-11-5-avoid-eda-when-your-team-is-not-operationally-ready}
----------------------------------------------------------------------------------------------------------------------
+5. Avoid EDA When Your Team Is Not Operationally Ready
+------------------------------------------------------
 
 EDA is an operational architecture, not just a programming model.
 
@@ -334,7 +334,7 @@ Nobody knows.
 
 Without observability, debugging distributed systems becomes painful.
 
-### Reliable EDA Requires Idempotent Consumers {#h3-12-reliable-eda-requires-idempotent-consumers}
+### Reliable EDA Requires Idempotent Consumers
 
 ```java
 if(processedIds.contains(event.id())) {
@@ -349,8 +349,8 @@ Consumers should safely process duplicate events. Idempotency is one of the foun
 
 
 
-6. Avoid EDA When the Business Process Is a Conversation {#h2-13-6-avoid-eda-when-the-business-process-is-a-conversation}
--------------------------------------------------------------------------------------------------------------------------
+6. Avoid EDA When the Business Process Is a Conversation
+--------------------------------------------------------
 
 EDA excels at notifications.
 
@@ -379,7 +379,7 @@ This is more of a conversation than a reaction.
 
 REST or gRPC are usually better suited.
 
-### Use Synchronous Calls for Sequential Workflows {#h3-14-use-synchronous-calls-for-sequential-workflows}
+### Use Synchronous Calls for Sequential Workflows
 
 ```java
 Quote quote = pricingService.calculate(order);
@@ -391,8 +391,8 @@ Sequential workflows where each step depends on the previous result are often ea
 
 
 
-7. Avoid EDA When You Do Not Have a Real Event Model {#h2-15-7-avoid-eda-when-you-do-not-have-a-real-event-model}
------------------------------------------------------------------------------------------------------------------
+7. Avoid EDA When You Do Not Have a Real Event Model
+----------------------------------------------------
 
 Some teams create events such as:
 
@@ -420,7 +420,7 @@ Examples include:
 
 Those events have meaning beyond the database.
 
-### Model Business Facts, Not Database Updates {#h3-16-model-business-facts-not-database-updates}
+### Model Business Facts, Not Database Updates
 
 ```java
 publisher.publish(
@@ -433,8 +433,8 @@ Events should describe something meaningful that happened in the business domain
 
 
 
-What Event-Driven Architecture Is Excellent At {#h2-17-what-event-driven-architecture-is-excellent-at}
-------------------------------------------------------------------------------------------------------
+What Event-Driven Architecture Is Excellent At
+----------------------------------------------
 
 EDA shines when you need:
 
@@ -459,8 +459,8 @@ It becomes even more powerful when combined with patterns such as:
 
 
 
-Common Event-Driven Architecture Anti-Patterns {#h2-18-common-event-driven-architecture-anti-patterns}
-------------------------------------------------------------------------------------------------------
+Common Event-Driven Architecture Anti-Patterns
+----------------------------------------------
 
 * ❌ Kafka replacing every REST call
 * ❌ Events for simple CRUD updates
@@ -473,8 +473,8 @@ Common Event-Driven Architecture Anti-Patterns {#h2-18-common-event-driven-archi
 
 
 
-Key Takeaways 🎯 {#h2-19-key-takeaways}
----------------------------------------
+Key Takeaways 🎯
+----------------
 
 * EDA is a powerful architectural style, not a silver bullet.
 * Complexity should be introduced only when it solves a real problem.
@@ -497,21 +497,21 @@ Sometimes the best event is...
 
 
 
-Go Further with Java Certification {#h2-20-go-further-with-java-certification}
-------------------------------------------------------------------------------
+Go Further with Java Certification
+----------------------------------
 
-### Java {#h3-21-java}
+### Java
 
 <https://bit.ly/javaOCP>
 
-### Spring {#h3-22-spring}
+### Spring
 
 <https://bit.ly/2v7222>
 
-### Spring Book {#h3-23-spring-book}
+### Spring Book
 
 <https://bit.ly/springtify>
 
-### Java Book {#h3-24-java-book}
+### Java Book
 
 <https://bit.ly/jroadmap>

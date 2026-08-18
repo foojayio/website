@@ -24,12 +24,12 @@ frozen: false
 
 **In this article, we explore how to integrate OpenAI API with Quarkus. We will create a Quarkus application using the new REST Client Reactive to invoke the OpenAI DALL.E API for images generation.**
 
-OpenAI API Overview {#h2-0-openai-api-overview}
------------------------------------------------
+OpenAI API Overview
+-------------------
 
 Before jumping into the code, let's explore the OpenAI [Create Image](https://platform.openai.com/docs/api-reference/images/create) API and how it works.
 
-### Create Image Request {#h3-1-create-image-request}
+### Create Image Request
 
 The body request is made of the following parameters:
 
@@ -56,7 +56,7 @@ curl https://api.openai.com/v1/images/generations \
 ```
 
 
-### Create Image Response {#h3-2-create-image-response}
+### Create Image Response
 
 The response will be a JSON object with *created* and *data* fields. The *data* field will be an array of objects. Each object will have a *url* field containing the response to the prompt.
 
@@ -79,8 +79,8 @@ Here is a sample API response:
 ```
 
 
-Setting up the Quarkus Application {#h2-3-setting-up-the-quarkus-application}
------------------------------------------------------------------------------
+Setting up the Quarkus Application
+----------------------------------
 
 To startup our application, go to and configure it by selecting the following extensions:
 
@@ -107,7 +107,7 @@ openai.api.key=$OPENAI_API_KEY
 ```
 
 
-### The Model {#h3-4-the-model}
+### The Model
 
 Now starting from what we have seen before, we create a class to model the API request body of OpenAI Image Generation API:
 
@@ -201,7 +201,7 @@ public class Item {
 ```
 
 
-### REST Client {#h3-5-rest-client}
+### REST Client
 
 To invoke the OpenAI API we define our REST client using the new REST Client Reactive, which allows a declarative way to define the API to be invoked using the new Jakarta EE and Microprofile annotations.
 
@@ -228,7 +228,7 @@ The `@RegisterRestClient` allows Quarkus to know that this interface should be a
 
 To manage API auth, as we have seen before, we need to pass the API KEY inside the header of the request. To do this in our client, we use the `@ClientHeaderParam` passing the name and the value of the entries. In this case, we read the key from the *application.properties* using the notation *${opena.ai.key}* that allows injecting the properties' value directly.
 
-### Testing the client {#h3-6-testing-the-client}
+### Testing the client
 
 To test our client, let's define a REST resource that we will call from out browser.
 
@@ -284,15 +284,15 @@ and the output will be:
 
 Try with other prompts and enjoy the results.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 This article we explored how to use the OpenAI DALL.E API to generate images from prompts. We created a Quarkus application that calls the API using the new REST Client Reactive and manage the result.
 
 The code examples for this tutorial are available on [GitHub](https://github.com/fushji/quarkus-openai-app).
 
-References {#h2-8-references}
------------------------------
+References
+----------
 
 * [OpenAI DALL.E API Reference](https://platform.openai.com/docs/api-reference/images/create)
 * [Quarkus REST Client Reactive](https://quarkus.io/guides/rest-client-reactive)

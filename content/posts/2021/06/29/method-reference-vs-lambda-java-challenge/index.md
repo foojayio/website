@@ -27,7 +27,7 @@ Now that you know the main context, it's time for the Java Challenge!
 
 It's time to improve your Java skills with this Method Reference VS Lambda Challenge.
 
-### Method Reference VS Lambda Challenge {#h3-0-method-reference-vs-lambda-challenge}
+### Method Reference VS Lambda Challenge
 
 What will happen when we run the following main method?
 

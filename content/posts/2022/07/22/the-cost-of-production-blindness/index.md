@@ -30,8 +30,8 @@ A part of this major shift in our industry is a change to our fundamental roles 
 
 Production is in the amorphous Cloud, which is accessible everywhere. Yet it's never been further away from the people who wrote the software powering it. We no longer have the fundamental insight we took for granted a bit over a decade ago.
 
-Is That So Bad? {#h2-0-is-that-so-bad}
---------------------------------------
+Is That So Bad?
+---------------
 
 Yes, and no. We gave up some insight and control and got a lot in return:
 
@@ -41,8 +41,8 @@ Yes, and no. We gave up some insight and control and got a lot in return:
 
 These are pretty incredible benefits. We don't want to give these benefits up. But we also lost some insight, debugging became harder and complexity rose. We discussed these problems before but today I want to talk about one impact only...
 
-Cost {#h2-1-cost}
------------------
+Cost
+----
 
 This is a form of blindness.
 
@@ -60,8 +60,8 @@ Before we proceed, I'd like to take a moment to discuss the concept of cost. The
 
 We don't see the underlying hardware, but it's there, and it carries a carbon footprint. By optimizing, we can affect both costs significantly.
 
-Observing Production Effectively {#h2-2-observing-production-effectively}
--------------------------------------------------------------------------
+Observing Production Effectively
+--------------------------------
 
 APMs are great for measuring performance at a high level. But they provide very little detail about the dynamic inner workings of the application and the cost-cutting measures we can take inside. I often liken them to the bat signal or check engine light. They notify us of a problem but leave us without the tool to inspect the details.
 
@@ -69,13 +69,13 @@ That's where [developer observability tools](https://lightrun.com/) can fill in 
 
 Instead of discussing the theory, let's give some examples of actions you can take today with developer observability tools to reduce the costs of your production.
 
-### 1. Reduce Logs {#h3-3-1-reduce-logs}
+### 1. Reduce Logs
 
 Log ingestion is probably the most expensive feature in your application. Removing a single line of log code can end up saving thousands of dollars in ingestion and storage costs. We tend to overlog since the alternative is production issues that we can't trace to their root cause.
 
 We need a middle ground. We want the ability to follow an issue through without overlogging. Developer observability lets you add logs dynamically as needed into production. This frees you from the need to overlog and lets you focus on logging a reasonable amount. You can also raise the log level to keep the logs down. I wrote about this in depth [here](https://lightrun.com/best-practices/logging-best-practices-mdc-ingestion-and-scale/).
 
-### 2. Caching {#h3-4-2-caching}
+### 2. Caching
 
 My top three tips for performance have always been:
 
@@ -93,7 +93,7 @@ However, there's a bigger payout here. Many developers just ignore L2 caches ent
 
 We built developer observability solutions to debug these exact types of problems. By placing snapshots and logs over cache population/invalidation, we can narrow down the point of corruption and fix cache relation issues. By deploying these solutions to your production server, overhead can be reduced significantly!
 
-### 3. Micro Benchmarks {#h3-5-3-micro-benchmarks}
+### 3. Micro Benchmarks
 
 APMs provide us with high-level numbers on performance and a general direction. They don't provide the lines of code we need to address. That's left up to our guesswork. If the system behaves identically when it's running locally, this should be fine. Unfortunately, this is rarely the case. E.g. a database query can have a significantly different impact when running in production. Based on local profiling results, you might waste your energy on the wrong optimization.
 
@@ -101,7 +101,7 @@ Developer observability tools provide the ability to narrow down the performance
 
 We can mark a block of code and get statistics about its execution time. As in the common case of a specific query taking longer in production, we can quickly prove that this is the cause of the performance problem using this tool. The impact of many "small" issues like this can be significant in a large system and can easily mean the difference between scaling and a bottleneck.
 
-### 4. Verification and Dead Code {#h3-6-4-verification-and-dead-code}
+### 4. Verification and Dead Code
 
 A common problem is under utilized resources. APMs expose some of those problems but don't expose them all. When we have dead-code, its impact on our bottom line can be significant.
 
@@ -115,8 +115,8 @@ What if it's used by very few people?
 
 That's exactly what the counter metric does. It counts the number of times a line was reached. It can tell us which methods are important to us and how frequently they're reached. You wouldn't be as concerned about a refactor if only three people reach that line of code...
 
-Finally {#h2-7-finally}
------------------------
+Finally
+-------
 
 I could carry on with the discussion of these techniques, but the gist is simple: we need to "see" what's going on. As developers, we're given a task to build a product. But the tools that let us peer into production aren't as capable as our local tools. The results we get from production can be very misleading.
 

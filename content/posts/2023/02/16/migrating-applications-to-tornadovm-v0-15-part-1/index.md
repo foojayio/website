@@ -30,8 +30,8 @@ This article has the following objectives:
 * Provide guidelines on how to define what to run on a device.
 * Provide guidelines on how existing TornadoVM programs can migrate to use the TornadoVM v0.15 API.
 
-1. TornadoVM Programming Model {#h2-0-1-tornadovm-programming-model}
---------------------------------------------------------------------
+1. TornadoVM Programming Model
+------------------------------
 
 TornadoVM uses a programming model that derives from the state-of-the-art programming models of heterogeneous hardware accelerators, such as OpenCL, Level Zero, and CUDA. A key aspect for software applications that require to offload computations for hardware acceleration is that they are composed of two parts:
 
@@ -61,8 +61,8 @@ To follow the TornadoVM execution model, a programmer needs to use:
 * the **TaskGraph** object for the definition of the data to be transferred and the processing,
 * the **TornadoExecutionPlan** object for the configuration of the execution.
 
-2. *TornadoVM TaskGraphs: What to run on a device?* {#h2-1-2-tornadovm-taskgraphs-what-to-run-on-a-device}
-----------------------------------------------------------------------------------------------------------
+2. *TornadoVM TaskGraphs: What to run on a device?*
+---------------------------------------------------
 
 TaskGraphs (or formerly known as TaskSchedules) are used in TornadoVM as a way to define the TornadoVM execution model within the host code. This is a TornadoVM object that is exposed to Java programmers and enables them to configure which data have to be transferred between the host and a device (Steps 1 and 3) and which Java method will be offloaded for hardware acceleration (Step 2).
 
@@ -82,7 +82,7 @@ The following code snippet creates a new TaskGraph:
 
 
 
-### 2.1. Definition of data to be transferred to device {#h3-2-2-1-definition-of-data-to-be-transferred-to-device}
+### 2.1. Definition of data to be transferred to device
 
 The TaskGraph API defines a method, named **transferToDevice** to set which arrays need to be transferred to the target device. This method receives two types of arguments:
 
@@ -103,7 +103,7 @@ The following code snippet sets one input array (input) to be transferred from t
 
 
 
-### 2.2. Definition of the accelerated code for data processing {#h3-3-2-2-definition-of-the-accelerated-code-for-data-processing}
+### 2.2. Definition of the accelerated code for data processing
 
 This part remains the same as in the previous TornadoVM API. A Java method that is meant to be offloaded for hardware acceleration corresponds to a **task**, which has inputs and outputs. A TaskGraph can contain one or more tasks which can be chained for execution on a target device. The maximum number of tasks depends on the amount of code that can be shipped to the accelerator.
 
@@ -125,7 +125,7 @@ Unless, the data is also passed in the **transferToHost** method. The TornadoVM 
 
 
 
-### 2.3. Definition of data to be transferred to host {#h3-4-2-3-definition-of-data-to-be-transferred-to-host}
+### 2.3. Definition of data to be transferred to host
 
 The TaskGraph API defines a method, named **transferToHost** to set which arrays need to be transferred back to the host code. This method receives two types of arguments:
 
@@ -146,8 +146,8 @@ The following code snippet sets one output array (output) to be transferred from
 
 
 
-3. Create an Immutable Task Graph {#h2-5-3-create-an-immutable-task-graph}
---------------------------------------------------------------------------
+3. Create an Immutable Task Graph
+---------------------------------
 
 Once a TaskGraph is defined, and the programmer is confident that the shape of the TaskGraph will not be altered, then it is necessary to capture a snapshot of the TaskGraph which will return an object of type **ImmutableTaskGraph**.  
 
@@ -169,8 +169,8 @@ An immutable task graph cannot be modified. Thus, if programmers need to update 
 
 
 
-4. Further reading and examples {#h2-6-4-further-reading-and-examples}
-----------------------------------------------------------------------
+4. Further reading and examples
+-------------------------------
 
 The TornadoVM modules for the [tornado-unittests](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-unittests) and the [tornado-examples](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples) contain a list of diverse applications that showcase how to use the new TornadoVM API. For more information see [here](https://tornadovm.readthedocs.io/en/latest/programming.html).
 

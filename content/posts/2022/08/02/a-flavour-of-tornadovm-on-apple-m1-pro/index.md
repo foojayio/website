@@ -29,7 +29,7 @@ This article aims to describe the main steps required to install and run [Tornad
 * Execute Unit Tests
 * Performance Evaluation: Running Matrix-Multiplication on Apple M1 GPU
 
-### 1. Install Prerequisites {#h3-0-1-install-prerequisites}
+### 1. Install Prerequisites
 
 To install TornadoVM, it is necessary to have some packages installed. For instance, you will have to install [Maven](https://maven.apache.org/) and [wget](https://mac.install.guide/homebrew/index.html) in order to enable the TornadoVM installer to be functional.
 
@@ -41,7 +41,7 @@ $ brew install maven
 ```
 
 
-### 2. Run TornadoVM Installer {#h3-1-2-run-tornadovm-installer}
+### 2. Run TornadoVM Installer
 
 Now that prerequisites are in place, the next step is to use the TornadoVM installer which will download, install all dependencies, and build TornadoVM. In the example below, TornadoVM is installed with OpenJDK 11 and the OpenCL backend; which is the only backend that can currently operate on Apple M1 Pro.
 
@@ -82,7 +82,7 @@ $ tornado --devices
 
 The first device is the CPU of Apple M1 Pro, while the second device is the GPU.
 
-### 3. Execute Unit Tests {#h3-2-3-execute-unit-tests}
+### 3. Execute Unit Tests
 
 The TornadoVM version that is demonstrated in this blog is v0.14 and the exact commit is [#5e5fbbc](https://github.com/beehive-lab/TornadoVM/commit/5e5fbbc8cc2e79f3ecb87c32dedfec48d0f6b44d). TornadoVM contains a set of 528 unit-tests for the OpenCL backend.
 
@@ -96,7 +96,7 @@ A second issue is that some default features, such as [native functions](https:/
 
 Another reason that unit-tests fail is an exception regarding `CL_INVALID_WORK_GROUP_SIZE`, which means that the total work group size (256) used in the tests exceeds the size supported by the device, which is 1.
 
-### 4. Performance Evaluation: Running Matrix-Multiplication on Apple M1 GPU {#h3-3-4-performance-evaluation-running-matrix-multiplication-on-apple-m1-gpu}
+### 4. Performance Evaluation: Running Matrix-Multiplication on Apple M1 GPU
 
 We opted to run the Matrix Multiplication application for two dimensional matrices on the GPU device with id (0:1). To reproduce the result you can execute the following command:
 
@@ -108,7 +108,7 @@ $ tornado --threadInfo -Ds0.t0.device=0:1 -m tornado.examples/uk.ac.manchester.t
 The result is 738.5x performance increase compared to a single threaded execution, as shown below.  
 ![](mxm-m1-pro-700x227.png)
 
-### Final Remarks {#h3-4-final-remarks}
+### Final Remarks
 
 To sum up, the installation of TornadoVM along with all its dependencies was not a tedious process. Everything was executed in a straightforward manner and the TornadoVM installer is functional also on the Apple M1 Pro silicon.
 

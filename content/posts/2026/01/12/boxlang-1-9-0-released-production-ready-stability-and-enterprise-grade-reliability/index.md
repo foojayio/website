@@ -24,8 +24,8 @@ frozen: false
 
 **Houston, Texas -- January 2025** -- Ortus Solutions, a leading innovator in professional open-source development, today announced the release of BoxLang 1.9.0, a major stability and compatibility release focused on production-readiness. This release resolves over 50 critical bugs and introduces significant enhancements to datasource management, context lifecycle handling, and web form processing for mission-critical enterprise applications.
 
-Production-Ready Enhancements {#h2-0-production-ready-enhancements}
--------------------------------------------------------------------
+Production-Ready Enhancements
+-----------------------------
 
 BoxLang 1.9.0 delivers critical improvements based on real-world client migrations and production deployments:
 
@@ -35,10 +35,10 @@ BoxLang 1.9.0 delivers critical improvements based on real-world client migratio
 * **Enterprise Database Support**: Comprehensive Oracle, MySQL, and PostgreSQL improvements including named parameters, ref cursors, and query-of-queries enhancements
 * **Fluent SOAP Integration**: Enhanced SOAP client with automatic WSDL discovery and intelligent type conversion
 
-Key Features and Code Examples {#h2-1-key-features-and-code-examples}
----------------------------------------------------------------------
+Key Features and Code Examples
+------------------------------
 
-### Array-Based Form Field Parsing {#h3-2-array-based-form-field-parsing}
+### Array-Based Form Field Parsing
 
 BoxLang now automatically parses query parameters and form fields as arrays using modern naming conventions:
 
@@ -67,7 +67,7 @@ tags = url.tags;
 ```
 
 
-### Datasource Lifecycle Management {#h3-3-datasource-lifecycle-management}
+### Datasource Lifecycle Management
 
 Critical fixes prevent connection pool leaks and resource exhaustion:
 
@@ -94,7 +94,7 @@ class {
 ```
 
 
-### Oracle Database Improvements {#h3-4-oracle-database-improvements}
+### Oracle Database Improvements
 
 Named parameters and ref cursors now work correctly:
 
@@ -117,7 +117,7 @@ bx:storedproc procedure="getUserData" datasource="oracle_ds" {
 ```
 
 
-### Enhanced SOAP Client with Fluent API {#h3-5-enhanced-soap-client-with-fluent-api}
+### Enhanced SOAP Client with Fluent API
 
 BoxLang 1.9.0 includes major enhancements to the SOAP client introduced in 1.8.0, now with full class capabilities and improved reliability:
 
@@ -151,8 +151,8 @@ if ( ws.hasOperation( "ProcessOrder" ) ) {
 * **Operation Inspection**: Programmatically discover and validate operations
 * **Enhanced Reliability**: Improved error handling and connection management
 
-Technical Specifications {#h2-6-technical-specifications}
----------------------------------------------------------
+Technical Specifications
+------------------------
 
 **50+ Critical Bug Fixes** including:
 
@@ -167,8 +167,8 @@ Technical Specifications {#h2-6-technical-specifications}
 
 The complete engineering release notes are available at:
 
-Availability and Licensing {#h2-7-availability-and-licensing}
--------------------------------------------------------------
+Availability and Licensing
+--------------------------
 
 BoxLang 1.9.0 is available immediately for download at with installation guides at
 
@@ -180,13 +180,13 @@ BoxLang operates under a transparent three-tier licensing model:
 
 All tiers feature straightforward pricing with no hidden fees or complex calculation models.
 
-About BoxLang {#h2-8-about-boxlang}
------------------------------------
+About BoxLang
+-------------
 
 BoxLang is a modern, dynamic, multi-runtime JVM language and productivity framework. With it's multi-parser architecture it can be also used to run CFML applications. Backed by Ortus Solutions' 20 years of professional open-source expertise, BoxLang delivers enterprise-grade reliability for mission-critical applications.
 
-About Ortus Solutions {#h2-9-about-ortus-solutions}
----------------------------------------------------
+About Ortus Solutions
+---------------------
 
 Ortus Solutions is a leading provider of professional open-source software with two decades of experience in enterprise application development. The company specializes in JVM languages, web frameworks, and modern development tooling for Fortune 500 companies and government agencies.
 

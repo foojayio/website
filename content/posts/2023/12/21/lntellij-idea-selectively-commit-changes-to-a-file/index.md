@@ -64,8 +64,8 @@ Next, we can name our new changelist. The changes will be assigned to this chang
 
 {{< youtube AW5Xv8n3iEo >}}
 
-Links {#h2-0-links}
--------------------
+Links
+-----
 
 * (documentation) [IntelliJ IDEA - Select chunks and specific lines you want to commit](https://www.jetbrains.com/help/idea/2023.3/commit-and-push-changes.html#select_chunks_in_commit_changes_dialog)
 * (documentation) [IntelliJ IDEA - New Changelist dialog](https://www.jetbrains.com/help/idea/2023.3/new-changelist-dialog.html)

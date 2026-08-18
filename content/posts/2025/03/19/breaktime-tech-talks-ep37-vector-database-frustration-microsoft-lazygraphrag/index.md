@@ -36,8 +36,8 @@ It's been a bit of a week over here, from daylight savings time last weekend, to
 
 Which is a good reminder to put things in perspective and escape a little bit of the imposter syndrome by reminding myself that others are experiencing similar things.
 
-Devnexus conference shout-out {#_devnexus_conference_shout_out}
----------------------------------------------------------------
+Devnexus conference shout-out
+-----------------------------
 
 First of all this week, I want to give a huge shout out to the Devnexus conference. It was a fabulous event that I attended last week, and I gave a keynote presentation there which I loved doing.
 
@@ -45,8 +45,8 @@ I was a little nervous about, but I was super thrilled and excited to do it and 
 
 That was a ton of fun. I made a whole lot of new connections and got to hear some ideas and inspiration as well.
 
-Vector database exploration {#_vector_database_exploration}
------------------------------------------------------------
+Vector database exploration
+---------------------------
 
 But the first topic that I started digging in hard on this week was some vector database exploration and a few frustrations I ran into along the way, too. I'm working on this for an upcoming presentation and demo.
 
@@ -54,7 +54,7 @@ I'm looking at vector databases and graph databases and RAG and how all of those
 
 And I'd spun up an account a couple of years back on Pinecone and had spun up a database and then just never really did much with it. So I circled back on that this week and thought I would explore Pinecone a little bit more just seeing what vector databases look like, how they index, what their data looks like, what the similarity searches do, and so on.
 
-### Issues getting up and running {#_issues_getting_up_and_running}
+### Issues getting up and running
 
 But there were a few issues I ran into along the way. The first thing was that I got the database up and running with no problem and I wanted to connect to it in any way that I felt like I could. And so I went out to the documentation and I was super excited. They have a Java SDK.
 
@@ -80,7 +80,7 @@ But I popped into the APOC and Pinecone stuff and some of the documentation's a 
 
 So I'm still running into some roadblocks. I did finally get the connection up and running - able to create indexes and am able to put the data into something Pinecone is looking for, but I'm still not able to get it upstarted. But again, I'm making progress. I will get there, working through it just a little bit more slowly.
 
-### Overall experience {#_overall_experience}
+### Overall experience
 
 Overall, my thoughts and my experiences on this. I tried multiple different approaches, ran into a few different roadblocks along the way. And it gave me a reminder that Neo4j, yes, from my point of view, because I'm on the inside, I do see some of the gaps and the things that are missing. But honestly, no product is perfect. And there are things that Neo4j really handles very well and at least matches market on several other things.
 
@@ -98,8 +98,8 @@ Then, the last piece of which is that data and databases are the crux of technol
 
 You have to take some form of raw data, put it into a usable and interesting format for your use case, and then put that into your database and get value from it. So there's a little bit of that work that has to be done up front, no matter what database you choose.
 
-Microsoft LazyGraphRAG {#_microsoft_lazygraphrag}
--------------------------------------------------
+Microsoft LazyGraphRAG
+----------------------
 
 The content highlight I want to look at today is I was trying to catch up on all of the AI stuff, hence the vector side of things that we just talked about, but I came across an [article on Microsoft's LazyGraphRAG](https://medium.com/data-science-in-your-pocket/microsofts-lazygraphrag-smarter-faster-and-more-cost-effective-data-retrieval-63823d8b8622), and this is something that has been mentioned a couple of different times.
 
@@ -115,8 +115,8 @@ It might be worthwhile if you have very, very large data sets from what I can te
 
 So that was just my take on it, but feel free to read the article for yourself and check it out and see what you think. I'm happy to take input or if someone knows a little bit more in depth or has explored this a little bit more, I'd love to hear your take on that.
 
-Wrapping up! {#_wrapping_up}
-----------------------------
+Wrapping up!
+------------
 
 Even though progress was slow this week, I am learning a lot, so that makes it worthwhile in the long run. Today, I recounted some frustrations and learnings and I'm going to be exploring trying to get data into a vector database from a Java developers perspective. Then I caught up on the recent Microsoft LazyGraphRAG and the opportunities and implications that I see from an initial review.
 

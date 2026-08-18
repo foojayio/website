@@ -27,8 +27,8 @@ The objective of Jakarta EE 9.1 is to provide certification on Java SE 11 and no
 
 In this article, we describe how you can use Jakarta EE 9.1 and some background around Jakarta EE 9.1.
 
-Using Jakarta EE 9.1 {#h2-0-using-jakarta-ee-9-1}
--------------------------------------------------
+Using Jakarta EE 9.1
+--------------------
 
 Just as with Jakarta EE 9, you can easily define all dependencies on Jakarta EE 9.1 for your web application by defining the `jakarta.jakartaee-web-api` artifact in your Maven pom file.
 
@@ -82,15 +82,15 @@ compileJava {
 
 All the API artifacts are still compiled against Java SE 8, so you can still use and compile your applications using JDK 8.
 
-What Changed Between Jakarta EE 9 and 9.1? {#h2-1-what-changed-between-jakarta-ee-9-and-9-1}
---------------------------------------------------------------------------------------------
+What Changed Between Jakarta EE 9 and 9.1?
+------------------------------------------
 
 What is the real difference between Jakarta EE 9 and Jakarta EE 9.1? To be honest, there isn't one. Jakarta EE 9.1 is released to allow vendors to certify their implementations against Java SE 11. Since there was an important breaking change in Jakarta EE 9, the namespace change from *javax* to *jakarta*, no other changes were introduced in that version.
 
 It is a good practice that when you make changes, you do so in incremental small steps. The introduction of the namespace was a large one, so that was the reason why the official support for Java SE 11 was deferred to Jakarta EE 9.1.
 
-What About CORBA? {#h2-2-what-about-corba}
-------------------------------------------
+What About CORBA?
+-----------------
 
 Between Java SE 8 and 11, not only was the modular structure of the JDK, and optionally your application, introduced but there was also the removal of several subsystems like CORBA and the XML support for Web Services.
 
@@ -98,22 +98,22 @@ Within the TCK, the Technology Compatibility Test Kit, or the several thousands 
 
 But the [Payara Server Full Platform](https://www.payara.fish/) still supports them, just as we did with Jakarta EE 8. This means that all of your applications that run fine on Jakarta EE 8 (Payara Server 5) will also run on the Jakarta EE 9 version.
 
-What About the Namespace Change? {#h2-3-what-about-the-namespace-change}
-------------------------------------------------------------------------
+What About the Namespace Change?
+--------------------------------
 
 Jakarta EE 9 and Jakarta EE 9.1 use the *jakarta* namespace. The specification itself does not require any backward compatibility. This is up to the implementations themselves. Payara Server includes the Eclipse transformer and converts an application using the javax namespace to the new jakarta namespace during the deployment of your application.
 
 With Payara, you can decide when you are ready to move to the jakarta namespace in your application but you can use [Payara Server 6 (Alpha1),](https://blog.payara.fish/payara-server-community-6.2021.1.alpha1-certified-jakarta-ee-9.1-compatible) which is based on the jakarta namespace, if you want. Changing the namespace can be done with a search and replace command within your IDE, although there are still some package names in JDK itself that start with javax which have not changed. You can also have a look at the migration support of IntelliJ in version 2021.2 to perform the required changes for the namespace.
 
-Should I Start using Jakarta EE 9.1? {#h2-4-should-i-start-using-jakarta-ee-9-1}
---------------------------------------------------------------------------------
+Should I Start using Jakarta EE 9.1?
+------------------------------------
 
 Whether or not you should start using Jakarta EE 9.1 depends on your situation. The impact of the namespace change of Jakarta EE 9 is large. Many libraries are also using the Jakarta specification like Servlet or Rest, which means they also need to be updated. So in many cases, you will need to wait to migrate your application until all your dependencies have migrated, too. One of those dependencies that are in the progress of migrating is MicroProfile - with a planned Jakarta EE 9 compatible version in the last quarter of 2021.
 
 This doesn't mean that you can't run your application on Java SE 11. Many implementations, including Payara Server, [supports running Jakarta EE 8 applications on JDK 11](https://blog.payara.fish/jdk-11-support-available-in-payara-platform-194).
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 From a developer's perspective, Jakarta EE 9.1 is identical to Jakarta EE 9.
 

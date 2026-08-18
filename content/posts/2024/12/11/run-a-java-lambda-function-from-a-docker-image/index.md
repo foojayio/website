@@ -30,18 +30,18 @@ Here follows instructions from AWS Document on building [Lambda for Java](https:
 
 The sample code seen below can be found in my GitHub repository: [hello-lambda](https://github.com/charlfasching/hello-lambda).
 
-Prerequisites {#h2-0-prerequisites}
------------------------------------
+Prerequisites
+-------------
 
 * Java JDK (Archetype supplies 8, but we use 21 in this example)
 * Apache Maven
 * Docker
 * AWS CLI
 
-Development {#h2-1-development}
--------------------------------
+Development
+-----------
 
-### Maven Archetype {#h3-2-maven-archetype}
+### Maven Archetype
 
 The archetype used can be found on Github [here](https://github.com/aws/aws-sdk-java-v2/tree/master/archetypes/archetype-lambda).
 
@@ -63,7 +63,7 @@ The configured AWS Java SDK client is created in `DependencyFactory` class.
 
 You can add the code in App class to interact with the SDK client based on your use case.
 
-### Lambda {#h3-3-lambda}
+### Lambda
 
 The default code does inject an S3 Client, but does not do much.  
 
@@ -71,7 +71,7 @@ The generated function handler class merely returns back what was given as input
 
 Seeing as we just wanted a hello world lambda, I removed the S3 client, and kept the hello part.
 
-### Docker {#h3-4-docker}
+### Docker
 
 Most of the Dockerfile can be left as is, but some adjustment is need on CMD in order to execute our Lambda Handler.
 
@@ -80,7 +80,7 @@ Most of the Dockerfile can be left as is, but some adjustment is need on CMD in 
 * The CMD line is what specifies which Java class to call from the Lambda runtime
   * In this case it would be "cap.cca.mig.App::handleRequest"
 
-### Building the project {#h3-5-building-the-project}
+### Building the project
 
 #### Maven
 
@@ -106,14 +106,14 @@ The build command specifies the *--platform linux/amd64* option to ensure that y
 
 To add more service clients, you need to add the specific services modules in `pom.xml` and create the clients in `DependencyFactory` following the same pattern as s3Client.
 
-Deployment {#h2-6-deployment}
------------------------------
+Deployment
+----------
 
 The default template included wit the mvn archetype suggests to deploy with SAM, but I don't like it for simple demos where we want to understand the steps.  
 
 Feel free to read more below and try it for yourself.
 
-### Supporting AWS Infrastructure {#h3-7-supporting-aws-infrastructure}
+### Supporting AWS Infrastructure
 
 Before we can deploy the Lambda function, we need to set up a few other components it would need.
 
@@ -268,7 +268,7 @@ $ aws ecr set-repository-policy \
 ```
 
 
-### Upload Docker {#h3-8-upload-docker}
+### Upload Docker
 
 1) Login to ECR  
 
@@ -332,7 +332,7 @@ aws ecr list-images --repository-name hello-lambda-java
 ```
 
 
-### Lambda Deployment {#h3-9-lambda-deployment}
+### Lambda Deployment
 
 1) The time has come to finally create the lambda function.
 
@@ -429,7 +429,7 @@ aws lambda update-function-code --function-name hello-lambda-java --image-uri 00
 ```
 
 
-### SAM Deployment (Alternative) {#h3-10-sam-deployment-alternative}
+### SAM Deployment (Alternative)
 
 The generated project contains a default [SAM template](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html) file `template.yaml` where you can  
 
@@ -446,10 +446,10 @@ sam deploy --guided
 
 See [Deploying Serverless Applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html) for more info.
 
-Testing {#h2-11-testing}
-------------------------
+Testing
+-------
 
-### Local Testing {#h3-12-local-testing}
+### Local Testing
 
 If you use the lambda docker image provided by AWS, it will have the Lambda Interface Emulator included in the Image.
 
@@ -520,7 +520,7 @@ You may use any HTTP Client to make the call, I included a http request for Inte
 
 Here is a curl for reference.
 
-### Remote Testing {#h3-13-remote-testing}
+### Remote Testing
 
 * This means we use the aws cli to send payload through the sdk to a deployed lambda
 * Here is the aws [reference documentation](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) for invoking lambda through cli
@@ -543,8 +543,8 @@ aws lambda invoke \
 ```
 
 
-References {#h2-14-references}
-------------------------------
+References
+----------
 
 Here are some documentation links for further reading, also where the some content for this post originated from.
 

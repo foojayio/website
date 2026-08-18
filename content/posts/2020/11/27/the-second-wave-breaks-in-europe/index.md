@@ -22,7 +22,7 @@ Software-ECG is a free time series analysis tool originally developed for time s
 
 Software-ECG ist build on OpenJDK and JavaFX. It leverages the power of a compiled language with a native rich client framework.{#1887}
 
-### CW 48: The Second Wave Breaks in Europe {#3a67}
+### CW 48: The Second Wave Breaks in Europe
 
 In Europe, the number of people who tested positive is now declining. For this purpose, the respective countries can be entered in the selection box using the pipe operator.{#4d9c}
 ![](ekg-2-1.png) Pipe operator for multiple country selection   
@@ -40,7 +40,7 @@ The data shows also here a flattening or breaking of the 2nd wave. Since at the 
 A very useful feature is the date selection. The date period can be set by zooming in or out or by using the Date Picker in the upper right corner.{#2b03}
 ![](ekg-2-4.png) Selection of the positive rate in the period 7./1/2020 until today   
 
-### Some Countries Already Have Constant Or Even Falling Mortality Rates {#c7f2}
+### Some Countries Already Have Constant Or Even Falling Mortality Rates
 
 The number of people who have died of or with Covid-19 is also flattening out in all countries except Italy and Germany.{#40c3}
 [![](ekg-2-5.png)](ekg-2-5.png) Number of deceased people (2nd wave)   
@@ -49,7 +49,7 @@ It is interesting to note that Italy has almost three times as high a death rate
 
 The curves are smooth --- this smooth metric makes a lot of sense, because the curves fluctuate a lot on a daily basis, which has to do not only with statistical and medical reasons, but also with organizational reasons of data transfer from laboratories and authorities. The non flattend peek values are also available (new_deaths).{#40c3}
 
-### Summary {#0039}
+### Summary
 
 With the Software ECG Covid-19 Edition, you can evaluate the most important Covid-19 time series across countries.{#255e}
 

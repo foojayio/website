@@ -30,8 +30,8 @@ So for today, let's focus on the good, the bad, and the ugly parts of functional
 
 {{< youtube AYZMzyKjtoM >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,8 +39,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
 * Alejandro Serrano, Software Engineer at 47 Degrees, author of "Practical Haskell", "The Book of Monads", and "FP Ideas for the Curious Kotliner"
   * <https://serranofp.com/>
@@ -52,8 +52,8 @@ Guests {#h2-1-guests}
   * <https://deepu.tech/>
   * <https://www.linkedin.com/in/deepu05/>
 
-Podcast {#h2-2-podcast}
------------------------
+Podcast
+-------
 
 * Host: Ties van de Ven
   * <https://www.tiesvandeven.nl/>
@@ -65,15 +65,15 @@ Podcast {#h2-2-podcast}
 
 ![](guests-podcast-functional-programming-1024x575.png)
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * <https://foojay.io/today/7-functional-programming-techniques-in-java-a-primer/> (Deepu)
 * <https://foojay.io/today/the-problem-with-functional-programming/> (Ties)
 * <https://www.baeldung.com/java-functional-programming>   
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 * 00'00 Intro
 * 00'17 Introduction of the guests

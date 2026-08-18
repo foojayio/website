@@ -20,15 +20,15 @@ enlighterjs: true
 frozen: false
 ---
 
-At [Chronicle](https://chronicle.software/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=jasmine-article "Chronicle"), we know that efficient code doesn't just run faster; if it's using less compute-resource, it may also be cheaper to run.
+At [Chronicle](https://chronicle.software/?utm_source=foojay&utm_medium=article&utm_campaign=jasmine-article "Chronicle"), we know that efficient code doesn't just run faster; if it's using less compute-resource, it may also be cheaper to run.
 
 In particular, distributed cloud applications can benefit from fast, lightweight serialisation.
 
 In this article, we will demonstrate the efficiencies of using Chronicle Wire to encode small Strings into long primitives, with a few step-by-step examples of object marshalling, and show how this can improve the performance of your application's serialisation.
 
-### Chronicle Wire {#h3-0-chronicle-wire}
+### Chronicle Wire
 
-[Chronicle-Wire](https://chronicle.software/wire/?utm_source=foojay&amp;utm_medium=article&amp;utm_campaign=jasmine-article "Chronicle-Wire") is an open source Java serialiser that is able to read and write to different message formats such as JSON, YAML, and raw binary data.
+[Chronicle-Wire](https://chronicle.software/wire/?utm_source=foojay&utm_medium=article&utm_campaign=jasmine-article "Chronicle-Wire") is an open source Java serialiser that is able to read and write to different message formats such as JSON, YAML, and raw binary data.
 
 Chronicle Wire is able to find a middle ground between compacting data formatting (storing more data into the same space) versus compressing data (reducing the amount of storage required).
 
@@ -374,7 +374,7 @@ For further understanding on trivially copyable objects, refer to [this article]
 
 \*Microseconds to both serialise and deserialise a message
 
-### Conclusion {#h3-1-conclusion}
+### Conclusion
 
 Overall, [Chronicle Wire's](https://github.com/OpenHFT/Chronicle-Wire "Chronicle Wire’s") Long Converters are beneficial due to the fact that comparing primitive longs is more efficient than comparing strings.
 

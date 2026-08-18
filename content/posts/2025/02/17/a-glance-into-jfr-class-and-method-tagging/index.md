@@ -24,8 +24,8 @@ Ever wonder how the JDK Flight Recorder (JFR) keeps track of the classes and met
 
 In this short article, I'll explore JFR tagging and how it works in the OpenJDK.
 
-Tags {#h2-0-tags}
------------------
+Tags
+----
 
 JFR files consist of self-contained chunks. Every chunk contains:
 
@@ -48,8 +48,8 @@ This is where JFR tags come in. Every class, module, and package entity has a 64
 
 In a world without any concurrency, the tag could just be a single bit, telling us whether an entity is used. But in reality, an entity can be used in the new chunk while we're writing out the old chunk. So, we need to have two distinctive periods (0 and 1) and toggle between them whenever we write a chunk.  
 
-Tagging {#h2-1-tagging}
------------------------
+Tagging
+-------
 
 We can visualize the whole life cycle of a tag for a given entity:
 ![](https://mostlynerdless.de/wp-content/uploads/2025/02/tag-1-2000x1086.png)
@@ -81,8 +81,8 @@ Then, when a chunk is written out. First, a safepoint is requested to initialize
 
 But how does it ensure that the tagged classes aren't unloaded before they are emitted? By writing out the classes when any class is unloaded. This is simple yet effective and doesn't need any change in the GC.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Tagging is used in JFR to record classes properly, methods, and other entities while also preventing them from accidentally being garbage collected before they are written out. This is a simple but memory-effective solution. It works well in the context of concurrency but assumes entities are used in the event creation directly when tagging them. It is not supported to tag the entities and then push them into the queue to later create events asynchronously. This would probably require something akin to reference counting.
 

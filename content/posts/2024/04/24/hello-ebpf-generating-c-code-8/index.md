@@ -23,8 +23,8 @@ frozen: false
 
 *This is a rather short article, but the implementation and fixing all the bugs took far more time then expected.*
 
-Generating Struct Definitions {#h2-0-generating-struct-definitions}
--------------------------------------------------------------------
+Generating Struct Definitions
+-----------------------------
 
 We saw in the last article how powerful Java annotation processing is for generating Java code; this week, we'll tackle the generation of C code: In the previous article, we still had to write the C struct and map definitions ourselves, but writing
 
@@ -83,8 +83,8 @@ This leads us to an annotation processor that can add automatically insert struc
 
 But can we do more with annotation processing?
 
-Generating Map Definitions {#h2-1-generating-map-definitions}
--------------------------------------------------------------
+Generating Map Definitions
+--------------------------
 
 There is another definition that we can auto-generate: Map definitions like
 
@@ -129,8 +129,8 @@ public class BPFRingBuffer<E> extends BPFMap {
 
 Here `$field` is the Java field name, `$maxEntries` the value in the BPFMapDefinition annotation and `$class` the name of the Java class. `$cX`, `$bX`, `$jX` give the C type name, BPFType and Java class names related to the `X`^th^ type parameter.
 
-Ring Buffer Sample Program {#h2-2-ring-buffer-sample-program}
--------------------------------------------------------------
+Ring Buffer Sample Program
+--------------------------
 
 When we combine all this together we can have a much simpler ring buffer sample program (see [TypeProcessingSample2](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/TypeProcessingSample2.java) on GitHub):
 
@@ -192,8 +192,8 @@ public abstract class TypeProcessingSample2 extends BPFProgram {
 
 There are two other things missing in the C code that are also auto-generated: Constant defining macros and the license definition. Macros are generated for all static final fields in the program class that are defined at compile time.
 
-Conclusion {#h2-3-conclusion}
------------------------------
+Conclusion
+----------
 
 Using annotation processing allows to reduce the amount of C code we have to write and reduces errors by generating all definitions from the Java code. This simplifies writing eBPF applications.
 
@@ -201,8 +201,8 @@ See you in two weeks when we tackle global variables, moving closer and closer t
 
 *This will also be the topic of a talk that I submitted together with Mohammed Aboullaite to several conferences for autumn.*
 
-Addendum {#h2-4-addendum}
--------------------------
+Addendum
+--------
 
 The more I work on writing my own ebpf library, the more I value the effort that the developers of other libraries like bcc, the Go or Rust ebpf libraries put it in to create usable libraries.
 

@@ -21,7 +21,7 @@ frozen: false
 
 I always struggled with how to implement equals and hashcode, until I learned about the difference between entities and value objects.
 
-### Why implement equals and hashcode? {#_why_implement_equals_and_hashcode}
+### Why implement equals and hashcode?
 
 All classes in Java inherit from `java.lang.Object`.
 
@@ -33,7 +33,7 @@ We will see in a bit what that means exactly for different types of objects.
 
 `hashCode()` is important if you put your object in a `HashSet` or a `HashMap`. It facilitates the [hashing](https://www.educative.io/edpresso/what-is-hashing) that is used by those data structures.
 
-### Entity vs Value Object {#_entity_vs_value_object}
+### Entity vs Value Object
 
 Even if you don't know [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design), you might have heared about entities and value objects.  
 
@@ -42,7 +42,7 @@ If you have not, here is a small recap about their differences:
 * **Entity** : An object that has a distinct identity within the application domain. For instance, a `User` or an `Invoice`.
 * **Value Object** : Objects that only matter because of the value they represent. For instance, a `Money` or `Temperature` object. Usually, these objects are immutable.
 
-### Equals and hashcode for value objects {#_equals_and_hashcode_for_value_objects}
+### Equals and hashcode for value objects
 
 Let's imagine a fairly simple value object that represents temperature.
 
@@ -147,7 +147,7 @@ Note that the opposite does not need to be true.
 
 Different objects (as determined by the `equals()` implementation) can return the same hashcode, this is not a problem at all.
 
-### Equals and hashcode for entities {#_equals_and_hashcode_for_entities}
+### Equals and hashcode for entities
 
 For an entity, all that really matters is the identifier.
 
@@ -251,7 +251,7 @@ Luckily, Vlad Mihalcea shows us [how to implement this correctly](https://vladmi
 
 See [How to implement equals and hashCode using the JPA entity identifier (Primary Key)](https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier) for more in-depth details on this.
 
-### Equals and hashcode for entities using early primary key generation {#_equals_and_hashcode_for_entities_using_early_primary_key_generation}
+### Equals and hashcode for entities using early primary key generation
 
 If you don't like the way we need to implement `equals()` and `hashCode()` for JPA entities, then there is a different route you can take.
 
@@ -360,7 +360,7 @@ This might be counter-intuative at first, but this is really what you want.
 
 Entities are defined by their id, when the id is the same, we are talking about *the same thing*.
 
-### Testing equals and hashCode implementations {#_testing_equals_and_hashcode_implementations}
+### Testing equals and hashCode implementations
 
 The tests that I have shown here only scratch the surface of all the things that you need to test to fully implement the `equals()` and `hashCode` contracts.
 
@@ -391,7 +391,7 @@ This will test if `equals()` is reflexive, symmetric, transitive and consistent.
 |------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Note | When writing the blog entry, the test pointed out equals of `Temperature` was not `final` (See <https://jqno.nl/equalsverifier/errormessages/subclass-equals-is-not-final/>). The best fix was to make the whole class final as the class was not intended to be subclassed anyway. So verifying your implementation is certainly worth it. |
 
-### Conclusion {#_conclusion}
+### Conclusion
 
 To correctly implement the `equals()` and `hashCode()`, it is important to first determine if your object is a value object or an entity.
 

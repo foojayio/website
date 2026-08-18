@@ -24,7 +24,7 @@ The programs for 2020 and 2019 are listed below:
 
 You can see in the above that the room was organized by developers connected to, in particular, Eclipse, IntelliJ IDEA, and NetBeans.
 
-### **Overview of Foojay at FOSDEM 2021** {#h3-0-overview-of-foojay-at-fosdem-2021}
+### **Overview of Foojay at FOSDEM 2021**
 
 In next year's implementation of the same concept, developers connected to [Foojay](https://foojay.io/) (friends of OpenJDK) are running the program:
 
@@ -34,7 +34,7 @@ Organizations included in setting up this dev room, active in [Foojay](https://f
 
 The content is focused on being similar to previous years, that is, short presentations on a variety of tools and technologies, though more narrowly focused on Java than in the previous two years, which featured tools and technologies using or promoting a variety of programming languages.
 
-### Submission Details and Deadlines {#h3-1-submission-details-and-deadlines}
+### Submission Details and Deadlines
 
 The upcoming FOSDEM, 6 and 7 February 2021, will be virtual and everything will be prerecorded. Go here to sign up and submit your abstracts, making sure to use the "Friends of OpenJDK devroom" in the "Track" field:
 

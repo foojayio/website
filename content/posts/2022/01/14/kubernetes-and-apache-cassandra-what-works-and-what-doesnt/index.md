@@ -36,8 +36,8 @@ If you go back to when we were using shell scripts on bare-metal, you'll find [A
 
 It's common to Cassandra and K8s described as the "most logical pairing" since they allow you to keep your data and operations close for better performance at scale.So let's take a closer look at what makes Cassandra and K8s a dream team --- and why this isn't always true.
 
-**Why Cassandra and K8s work so well together** {#h-why-cassandra-and-k8s-work-so-well-together}
-------------------------------------------------------------------------------------------------
+**Why Cassandra and K8s work so well together**
+-----------------------------------------------
 
 Like any great story of modern infrastructure, it all started with the need to scale. Before the term "cloud native" became mainstream, Cassandra was inspired by the distributed storage and replication techniques from Amazon's [DynamoDB](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf), as well as the data storage engine model from Google's [Bigtable](https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf). The idea was to build the best of both into one package to help guarantee availability and resiliency for large-scale, business-critical applications.
 
@@ -56,8 +56,8 @@ The reason both K8s and Cassandra can accomplish similar things is rooted in the
 
 The concept of a node in distributed computing is a basic unit of scale and resilience. Cassandra overlays nicely on a K8s cluster with concerns for compute, network, and storage being managed independently. Again, the main difference is the control plane, which leads us to our next point.
 
-**How sometimes they don't work well together** {#h-how-sometimes-they-don-t-work-well-together}
-------------------------------------------------------------------------------------------------
+**How sometimes they don't work well together**
+-----------------------------------------------
 
 It would appear Kubernetes and Cassandra are highly compatible and can coexist peacefully in your tech stack. After all, they're both distributed, scalable, and resilient --- except they're actually more like two pieces from different puzzles that don't quite fit together without some elbow grease.
 
@@ -69,8 +69,8 @@ As compatible as K8s and Cassandra may be, sometimes you don't want to have to p
 
 In the next post, we'll take a closer look at how Cassandra pushes the boundaries of K8s, and explore how the pipe dream of a cloud-native database *designed specifically for K8s* might not be just a dream after all.
 
-Resources {#h-resources}
-------------------------
+Resources
+---------
 
 Curious to learn more about (or play with) Cassandra itself? We recommend trying it on the [Astra DB](https://astra.dev/3uYxgxN) free plan for the fastest setup.
 

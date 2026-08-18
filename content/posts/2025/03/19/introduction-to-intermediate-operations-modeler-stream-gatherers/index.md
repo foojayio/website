@@ -23,7 +23,7 @@ frozen: false
 
 Gatherers is a powerful extension of the Stream API that introduces support for customized intermediate operations. Initially introduced as a preview feature in JDK 22, it became a standard feature in JDK 24.
 
-### What are Gatherers? {#h3-0-what-are-gatherers}
+### What are Gatherers?
 
 Gatherers were developed to model intermediate operations in the Stream API. Just as a collector models a terminal operation, a gatherer is an object that models an intermediate operation. Gatherers support the characteristics of intermediate operations---they can push any number of elements to the stream they produce, maintain an internal mutable state, short-circuit a stream, delay consumption, be chained, and execute in parallel.
 
@@ -60,7 +60,7 @@ BiConsumer<A, Downstream<? super R>> finisher();
 
 Among these four elements, only the Integrator is mandatory because it has the role of integrating a new element into the stream produced by the Gatherer. The other elements may or may not be required, depending on the operation you intend to model, making them optional.
 
-### Creating a Gatherer {#h3-1-creating-a-gatherer}
+### Creating a Gatherer
 
 Gatherers are created using factory methods, or you can implement the Gatherer interface. Depending on the operation you want to model, you can use the overloaded variants of `Gatherer.of` and `Gatherer.ofSequential`.
 
@@ -88,7 +88,7 @@ Stream.of("a", "b", "c", "d", "e", "f", "g")
 ```
 
 
-### Built-in Gaterers {#h3-2-built-in-gaterers}
+### Built-in Gaterers
 
 The `java.util.stream.Gatherers` class is a factory class that contains predefined implementations of the `java.util.stream.Gatherer` interface, defining five different gatherers.
 
@@ -105,7 +105,7 @@ The `java.util.stream.Gatherers` class is a factory class that contains predefin
 
 All of the above gatherers are stateful. Fold and Scan are very similar to the Stream reduce operation. The key difference is that both can take an input of type T and produce an output of type R, and their identity element is mandatory, not optional.
 
-### Create your own Gatherer {#h3-3-create-your-own-gatherer}
+### Create your own Gatherer
 
 Let's see how we can write our custom gatherer using a real-world scenario. Imagine you are processing a system's log stream. Each log entry represents an event, and it is evaluated based on certain rules to determine whether it is anomalous. The rule and scenario are as follows.
 
@@ -248,13 +248,13 @@ similar to the one above, we get the following result.
 
 The code example is accessible in the [GitHub repository](https://github.com/hakdogan/stream-gatherers).
 
-### Conclusion {#h3-4-conclusion}
+### Conclusion
 
 Gatherers is a new and powerful API that enhances the Stream API by modeling intermediate operations and allowing the definition of custom intermediate operations.
 
 A gatherer supports the features that intermediate operations have, it can push any number of elements to the resulting stream, maintain an internal mutable state, short-circuit a stream, delay consumption, be chained, and execute in parallel.
 
-### References {#h3-5-references}
+### References
 
 * [JEP 485](https://openjdk.org/jeps/485 "JEP 485")
 * [cr.openjdk.org](https://cr.openjdk.org/~vklang/Gatherers.html "cr.openjdk.org")

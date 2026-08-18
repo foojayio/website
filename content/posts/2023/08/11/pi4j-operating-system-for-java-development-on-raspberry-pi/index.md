@@ -27,8 +27,8 @@ frozen: false
 
 The project is shared on [GitHub](https://github.com/Pi4J/pi4j-os) and documented on [the Pi4J website](https://pi4j.com/pi4j-os/). The zip-compressed archives of released versions can be downloaded from [pi4j-download.com](https://pi4j-download.com).
 
-Why Pi4J OS? {#h2-0-why-pi4j-os}
---------------------------------
+Why Pi4J OS?
+------------
 
 By using these images, you will get a lot of preconfigurations (locale, keyboard, wireless,...), pre-installations (Java, JavaFX, starter scripts), and a very useful desktop background showing the ethernet and/or WLAN address and hostname.
 
@@ -52,8 +52,8 @@ For all the info about what's included in each version, check the overview on [p
  </figure>
 </figure>
 
-History of the project {#h2-1-history-of-the-project}
------------------------------------------------------
+History of the project
+----------------------
 
 This project was originally started by [Pascal Mathis](https://www.linkedin.com/in/ppmathis/) as a student at the [FHNW University in Switzerland](https://www.fhnw.ch), while working on a project to control all the electronic components in an [Elecrow CrowPi](https://www.elecrow.com/steam-education/crowpi.html) with Java code.
 
@@ -68,7 +68,7 @@ This project was originally started by [Pascal Mathis](https://www.linkedin.com/
 >
 > In the third phase, using our [JavaFX-template-project](https://github.com/Pi4J/pi4j-template-javafx), they start with their "real" project. If they want to build a [FXGL game](http://almasb.github.io/FXGL/), the Picade-Image is used. The main advantage here is, that ENTER-, cursor-, and ESC-keys are mapped on OS-Level. This is necessary to get the default FXGL-behaviour for the main-menu.
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Pi4J is an ideal way to introduce the Java language into experiments with electronic components. And Pi4J OS makes this even easier for students and everyone interested in [#JavaOnRaspberryPi](https://foojay.social/tags/JavaOnRaspberryPi).

@@ -26,8 +26,8 @@ The Java API is vast. That's great, but sometimes a missing method or capability
 
 Before I proceed, the code for this tutorial and the previous tutorials in the series is available [here](https://github.com/shai-almog/java-book/tree/main/Manifold). I will skip setting up as it was covered in the previous installments of the series. You can see the specific pom file settings for this time in [the project directly](https://github.com/shai-almog/java-book/blob/main/Manifold/ManifoldExtensions/pom.xml).
 
-Extensions {#h2-0-extensions}
------------------------------
+Extensions
+----------
 
 One frequent complaint about Java is verbosity. With Manifold, developers can remove unnecessary code by using a simple trick. For instance, the stream() method in Java is redundant. With Manifold, we can remove that stream method using extensions.
 
@@ -71,8 +71,8 @@ List<Integer> numbers = strings.map(Integer::parseInt).toList();
 
 That is a small change but it makes Java a bit less verbose. You might read that code and think this is a lot of code to write in order to save nine characters. You'd be right. We don't need to write that code at all...
 
-Extension Libraries {#h2-1-extension-libraries}
------------------------------------------------
+Extension Libraries
+-------------------
 
 Manifold has ready-made extensions for many built-in Java classes. In fact, all the methods of `Stream` are already mapped to `Collection` by Manifold. We can package our extensions as libraries and use the ones from Manifold, they don't collide. E.g. if Manifold extends a class by adding method `x()` and add method `y()` to the same class they will both work as expected.
 
@@ -127,8 +127,8 @@ Defined in module `manifold-json` this library extends:
 * `java.net.URL`
 * `manifold.rt.api.Bindings`
 
-Extending Arrays {#h2-2-extending-arrays}
------------------------------------------
+Extending Arrays
+----------------
 
 Arrays in Java are special objects. You can't inherit them or override them. Sure, they are technically an object, but there isn't much we can do. An array in Java has only one attribute and it's pretty limited. With Manifold, any array has many methods that are already built in. Most of them are from the Arrays class and now occupy their rightful place within the object itself.
 
@@ -143,8 +143,8 @@ if(arr.isEmpty()) {
 
 We can extend an array like we can extend any other class. We extend it using the special case class name `manifold.rt.api.Array`. In that class, the methods are the same as the other extension code but since primitive arrays and object arrays are incompatible, the `@This` parameter is always an Object.
 
-Structural Interfaces {#h2-3-structural-interfaces}
----------------------------------------------------
+Structural Interfaces
+---------------------
 
 Manifold can add methods to classes and interfaces. But it can't make a class implement an arbitrary interface e.g. I can't make `ArrayList` implement `Runnable`. However, we can do something else. The main limitation is due to the way Manifold works. Since Manifold changes the call at compile time, the method isn't "really" added to the class. As a result it can't generate an interface, only a proxy of sorts. This might seem good on the surface but it creates some compatibility issues as it can impact object identity, etc.
 
@@ -206,15 +206,15 @@ Sizable z = new MySizeClass();
 
 This effectively makes Java into a structurally typed language. I don't know how I feel about that particular feature, but it sure is an interesting feature.
 
-Adding Annotations {#h2-4-adding-annotations}
----------------------------------------------
+Adding Annotations
+------------------
 
 Amazingly enough, Manifold supports extending a class with custom compile-time annotations. This means we can inject Structural to an interface in the JDK such as Runnable. This will surprisingly work to some degree.
 
 However, since the JDK itself can't be changed, we won't see this impacting code in the JDK. Only our code will be impacted by any such change we make.
 
-Final Word {#h2-5-final-word}
------------------------------
+Final Word
+----------
 
 Manifold makes it easy to change Java and experiment with new features. Developers can contribute to Project Manifold and help a broader audience see the value of their proposed change. If you ever felt like Java was missing something, Manifold is your way to add that to Java. It's much easier to change something there than in OpenJDK...
 

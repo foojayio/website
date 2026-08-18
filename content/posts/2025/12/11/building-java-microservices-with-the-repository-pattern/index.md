@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### What you'll learn {#h3-0-what-you-ll-learn}
+### What you'll learn
 
 * How the MongoDB Spring repository can be used to abstract MongoDB operations
 * Ensuring data access is separate from core application logic
@@ -34,8 +34,8 @@ Spring Boot applications generally have two main components to a repository patt
 
 The code in this article is based on the [grocery item sample app](https://github.com/mongodb-developer/mongodb-springboot). View the [updated version of this code](https://github.com/mongodb-developer/RepositryModelSpring) used in this article.
 
-The Spring standard repository {#h2-1-the-spring-standard-repository}
----------------------------------------------------------------------
+The Spring standard repository
+------------------------------
 
 The standard repo items can extend the base MongoRepositry class. This greatly reduces the amount of code needed for standard CRUD operations. Note the use of the @Query annotation to allow for shorthanding the various functions---for example:
 
@@ -68,8 +68,8 @@ project({"name" : 1, "quantity" : 1})
 ```
 
 
-Custom repository functions {#h2-2-custom-repository-functions}
----------------------------------------------------------------
+Custom repository functions
+---------------------------
 
 Next, we need a repository model for our specific entity/collection CRUD handling in MongoDB. This is done using the 'CustomItemRepository' class to define any functions we want to provide:
 
@@ -110,8 +110,8 @@ public class CustomItemRepositoryImpl implements CustomItemRepository {
 
 In this case, we're sending an update to the database to do the actual update. We'll see why that's a good idea in the next section.
 
-When requirements change {#h2-3-when-requirements-change}
----------------------------------------------------------
+When requirements change
+------------------------
 
 At some point, the requirement to change the item category was added. A developer added the function 'updateCategoryName' to the MdbSpringBootApplication app. This also moves data operations out of the repository functions and directly into the application code. In general, this is not a good idea as it breaks the abstraction between the application and the repository model:
 
@@ -175,8 +175,8 @@ customRepo.bulkUpdateItemCategories(category, newCategory);
 ```
 
 
-The double-edged sword of Spring updates in MongoDB {#h2-4-the-double-edged-sword-of-spring-updates-in-mongodb}
----------------------------------------------------------------------------------------------------------------
+The double-edged sword of Spring updates in MongoDB
+---------------------------------------------------
 
 In the revised code examples above, we wrote our own update statement to change a category. This is preferred to the original code of reading all items to the client, updating, and then calling the saveAll repository function for several reasons:
 
@@ -186,13 +186,13 @@ In the revised code examples above, we wrote our own update statement to change 
 
 Why should we avoid save() and saveAll() when updating documents? The main reasons to avoid these are for network traffic and oplog bloat. Let's discuss these individually.
 
-### Increased network traffic {#h3-5-increased-network-traffic}
+### Increased network traffic
 
 In the original example, changing the category of a set of items required each document to be retrieved to the client. When there are only a couple of documents, this amount of overhead won't make much of a difference. However, imagine the amount of traffic we would incur if there were thousands of items that had to have the category changed. This would also potentially consume a great deal of memory on the client fetching this list.
 
 When the saveAll() method is called, Spring will iterate through each document in the list to determine if it's a new document needing to be inserted, or an existing one needing to be replaced. This is also a drag on performance as it must iterate through the list and check for the existence of the document by _id and then decide what to do. Each document in this list will be sent to the DB one by one. This is also a non-atomic operation, which could result in a partial update should there be some sort of error or outage.
 
-### Oplog bloat and replacing documents {#h3-6-oplog-bloat-and-replacing-documents}
+### Oplog bloat and replacing documents
 
 The MongoDB operation log (or oplog) is how MongoDB replicates writes from the primary to secondaries. The oplog is a capped collection in MongoDB, meaning it is a fixed size. As the size of each operation grows in the oplog, fewer can fit before the oldest ones are overwritten in the collection. This translates into a smaller oplog window, which is the time a secondary can be offline and able to catch up when coming back online.
 
@@ -228,8 +228,8 @@ Using the 'updateMulti' function in our bulkUpdateItemCategories function, this 
 
 In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 
-Why schema and indexing matter {#h2-7-why-schema-and-indexing-matter}
----------------------------------------------------------------------
+Why schema and indexing matter
+------------------------------
 
 Regardless of what repository model you use, good schema design is key for performant operations in MongoDB. You may be tempted to embed GroceryItems in another collection as an array. This is fine as long as nearly all carts have a reasonable number of GroceryItems (\<=200). Once arrays grow beyond 200 or so items, performance can suffer. In addition, updating the category of a few items in the cart could be very inefficient if you're using the save() method to replace the entire document. Updates to individual array items would be more efficient.
 
@@ -240,8 +240,8 @@ Indexing also matters a great deal at scale. Note that we have two update functi
 
 For best performance, both the fields 'category' and 'name' should have an index. In our small example, there are only a few documents in this collection. Imagine how poorly this would perform doing these updates for thousands or even millions of items! The cost of not having an index on these fields can be catastrophic in terms of performance, when at scale.
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 The repository model can (and should) be used to abstract database I/O from the core application logic. This has several benefits:
 
@@ -255,7 +255,7 @@ Avoid using the standard Spring save() and saveAll() methods to update documents
 
 As with any software, the concepts of schema design as well as indexing strategy are very important to ensure that the system performs well at scale.
 
-### Further reading {#h3-9-further-reading}
+### Further reading
 
 * [MongoDB oplog](https://www.mongodb.com/docs/manual/core/replica-set-oplog/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=repository-pattern-mongodb&utm_term=megan.grant)
 

@@ -26,7 +26,7 @@ frozen: false
 
 <br />
 
-### PrimeFaces 15.0.15 has just been released. 🚀 {#h3-0-primefaces-15-0-15-has-just-been-released}
+### PrimeFaces 15.0.15 has just been released. 🚀
 
 And no, this is not "React for Java".
 
@@ -52,7 +52,7 @@ Let's look at what changed, then at the most common PrimeFaces concepts with sma
 
 
 
-### 🔵 TL;DR {#h3-1-tl-dr}
+### 🔵 TL;DR
 
 #### A quick overview of why PrimeFaces 15.0.15 matters and what kind of improvements it brings.
 
@@ -68,10 +68,10 @@ Let's look at what changed, then at the most common PrimeFaces concepts with sma
 
 
 
-🔵 WHAT PRIMEFACES 15.0.15 BRINGS {#h2-2-what-primefaces-15-0-15-brings}
-------------------------------------------------------------------------
+🔵 WHAT PRIMEFACES 15.0.15 BRINGS
+---------------------------------
 
-### 🔵 1. SCHEDULE TOOLTIP ESCAPING {#h3-3-1-schedule-tooltip-escaping}
+### 🔵 1. SCHEDULE TOOLTIP ESCAPING
 
 #### PrimeFaces now gives better control over how tooltip content is escaped in p:schedule.
 
@@ -97,7 +97,7 @@ The escape property controls whether HTML content in schedule tooltip descriptio
 
 
 
-### 🔵 2. SCHEDULE TOOLTIP WITH TRUSTED HTML {#h3-4-2-schedule-tooltip-with-trusted-html}
+### 🔵 2. SCHEDULE TOOLTIP WITH TRUSTED HTML
 
 #### HTML tooltips can still be rendered when the content is trusted and properly controlled.
 
@@ -127,7 +127,7 @@ If the content comes from users, databases, imports, or external systems, escapi
 
 
 
-### 🔵 3. SELECTONEMENU ACCESSIBILITY {#h3-5-3-selectonemenu-accessibility}
+### 🔵 3. SELECTONEMENU ACCESSIBILITY
 
 #### SelectOneMenu gets improved ARIA behavior for better accessibility support.
 
@@ -161,7 +161,7 @@ PrimeFaces 15.0.15 restores some ARIA attributes on SelectOneMenu.
 
 
 
-### 🔵 4. PANEL TOGGLE HEADER BEHAVIOR {#h3-6-4-panel-toggle-header-behavior}
+### 🔵 4. PANEL TOGGLE HEADER BEHAVIOR
 
 #### Panel headers now expose more accurate accessibility behavior when toggleable headers are used.
 
@@ -194,7 +194,7 @@ The header should behave like a button only when the header is actually toggleab
 
 
 
-### 🔵 5. CONFIRM BEFORE SHOW CALLBACK {#h3-7-5-confirm-before-show-callback}
+### 🔵 5. CONFIRM BEFORE SHOW CALLBACK
 
 #### Confirmation dialogs can better respect logic executed before the dialog is displayed.
 
@@ -236,7 +236,7 @@ That means you can decide before the confirmation popup opens.
 
 
 
-### 🔵 6. INPUTNUMBER AND AUTONUMERIC UPDATE {#h3-8-6-inputnumber-and-autonumeric-update}
+### 🔵 6. INPUTNUMBER AND AUTONUMERIC UPDATE
 
 #### Numeric inputs benefit from improvements around formatting, precision and user interaction.
 
@@ -266,7 +266,7 @@ PrimeFaces 15.0.15 updates/fixes behavior around AutoNumeric, the JavaScript lib
 
 
 
-### 🔵 7. TEXTEDITOR PASTE CLEANUP {#h3-9-7-texteditor-paste-cleanup}
+### 🔵 7. TEXTEDITOR PASTE CLEANUP
 
 #### Text pasted into the editor is handled more cleanly, especially around invisible spacing issues.
 
@@ -293,7 +293,7 @@ The TextEditor fix handles non-breaking spaces during paste operations.
 
 
 
-### 🔵 8. PANELMENU STATEFULNESS {#h3-10-8-panelmenu-statefulness}
+### 🔵 8. PANELMENU STATEFULNESS
 
 #### Nested menu items better remember their expanded or collapsed state after navigation.
 
@@ -326,7 +326,7 @@ The release improves statefulness for nested menu items. (submenus better rememb
 
 
 
-### 🔵 9. AJAX ERROR HANDLING {#h3-11-9-ajax-error-handling}
+### 🔵 9. AJAX ERROR HANDLING
 
 #### Ajax behavior is improved around redirects and error situations during partial page updates.
 
@@ -359,7 +359,7 @@ PrimeFaces apps rely heavily on partial page updates.
 
 
 
-### 🔵 10. BLOCKUI CLEANUP {#h3-12-10-blockui-cleanup}
+### 🔵 10. BLOCKUI CLEANUP
 
 #### Blocked UI areas are cleaned up more reliably after Ajax updates and widget lifecycle changes.
 
@@ -395,7 +395,7 @@ The fix ensures the target element is properly unlocked during widget cleanup.
 
 
 
-### 🔵 11. AUTOCOMPLETE MORETEXT FIX {#h3-13-11-autocomplete-moretext-fix}
+### 🔵 11. AUTOCOMPLETE MORETEXT FIX
 
 #### Autocomplete now handles the "more results" message more consistently.
 
@@ -428,7 +428,7 @@ This fix improves how that text is rendered and exposed.
 
 
 
-### 🔵 12. SLIDER PRECISION {#h3-14-12-slider-precision}
+### 🔵 12. SLIDER PRECISION
 
 #### Slider values are displayed with precision that better matches the configured step.
 
@@ -463,7 +463,7 @@ The Slider display now uses the same precision as the configured step.
 
 
 
-### 🔵 TAKEAWAYS {#h3-15-takeaways}
+### 🔵 TAKEAWAYS
 
 #### Small maintenance fixes can have a meaningful impact on security, accessibility and daily user experience.
 
@@ -484,7 +484,7 @@ The Slider display now uses the same precision as the configured step.
 
 
 
-### Go further with Java certification: {#h3-16-go-further-with-java-certification}
+### Go further with Java certification:
 
 #### Java👇
 

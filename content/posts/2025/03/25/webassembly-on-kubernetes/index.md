@@ -27,8 +27,8 @@ Like a couple of innovative technologies, different people have different viewpo
 
 In this post, I'll stay away from these debates and focus solely on how to use WebAssembly on Kubernetes.
 
-My approach and the use case {#h2-0-my-approach-and-the-use-case}
------------------------------------------------------------------
+My approach and the use case
+----------------------------
 
 Unlike regular programming languages, you don't write WebAssembly directly: you write code that generates WebAssembly. At the moment, Go and Rust are the main source languages. I know Kotlin and Python are working toward this objective. There might be other languages I'm not aware of.
 
@@ -42,8 +42,8 @@ Don't worry; I'll explain the difference between the two last approaches later.
 
 The use case should be more advanced than Hello World to highlight the capabilities of WebAssembly. I've implemented an HTTP server mimicking a single endpoint of the excellent [https://httpbin.org/\[httpbin](https://httpbin.org/%5Bhttpbin)\^\] API testing utility. The code itself is not essential as the post is not about Rust, but in case you're interested, you can find it on [GitHub](https://github.com/ajavageek/wasm-kubernetes/blob/master/src/main.rs). I add a field to the response to explicitly return the underlying approach, respectively `native`, `embed`, or `runtime`.
 
-Baseline: regular Rust-to-native {#h2-1-baseline-regular-rust-to-native}
-------------------------------------------------------------------------
+Baseline: regular Rust-to-native
+--------------------------------
 
 For the regular native compilation, I'm using a multistage Docker file:
 
@@ -85,8 +85,8 @@ ENTRYPOINT ["./httpbin"]
 
 The final `wasm-kubernetes:native` image weighs 8.71M, with its base image `distroless/static` taking 6.03M of them.
 
-Adapting to WebAssembly {#h2-2-adapting-to-webassembly}
--------------------------------------------------------
+Adapting to WebAssembly
+-----------------------
 
 The main idea behind WebAssembly is that it's secure because it can't access the host system. However, we must open a socket to listen to incoming requests to run an HTTP server. WebAssembly can't do that. We need a runtime that provides this feature and other system-dependent capabilities. It's the goal of .
 > The WebAssembly System Interface (WASI) is a group of standards-track API specifications for software compiled to the W3C WebAssembly (Wasm) standard. WASI is designed to provide a secure standard interface for applications that can be compiled to Wasm from any language, and that may run anywhere---from browsers to clouds to embedded devices.
@@ -188,8 +188,8 @@ ENTRYPOINT ["/httpbin.wasm"]
 
 The `native` approach is slightly better than the `embed` one, but the `runtime` is the leanest since it contains only a single Webassembly file.
 
-Running the Wasm image on Docker {#h2-3-running-the-wasm-image-on-docker}
--------------------------------------------------------------------------
+Running the Wasm image on Docker
+--------------------------------
 
 Not all Docker runtimes are equal, and to run Wasm workloads, we need to delve a bit into the Docker name. While Docker, the company, created Docker as the product, the current reality is that containers have evolved beyond Docker and now answer to specifications.
 > The **Open Container Initiative** is an open governance structure for the express purpose of creating open industry standards around container formats and runtimes.
@@ -243,8 +243,8 @@ Wasi on Docker Desktop allows you to spin up an HTTP server that behaves like a 
 | ghcr.io/ajavageek/wasm-kubernetes | embed   | 12.4      |
 | ghcr.io/ajavageek/wasm-kubernetes | native  | 8.7       |
 
-Running the Wasm image on Kubernetes {#h2-4-running-the-wasm-image-on-kubernetes}
----------------------------------------------------------------------------------
+Running the Wasm image on Kubernetes
+------------------------------------
 
 Now comes the fun part: your favorite Cloud provider(s) isn't using Docker Desktop. Despite this, we can still run WebAssembly workloads on Kubernetes. For this, we need to understand a bit about the not-too-low levels of what happens when you run a container, regardless of whether it's from an OCI runtime or Kubernetes.
 
@@ -394,8 +394,8 @@ Notice the many levels of indirection:
 2. The `wasmedge` runtime class points to the `wasmedgev1` handler
 3. The `wasmedgev1` handler in the TOML file specifies the `io.containerd.wasmedge.v1` runtime type
 
-Final steps {#h2-5-final-steps}
--------------------------------
+Final steps
+-----------
 
 To compare the approaches and test our work, we can use the `minikube` `ingress` addon and [vCluster](https://www.vcluster.com/). The former offers a single access point for all three workloads, `native`, `embed`, and `runtime`, while vCluster isolates workloads from each other in their virtual cluster.
 
@@ -577,8 +577,8 @@ We get the expected output:
 
 We should get similar results with the other approaches, with different `flavor` values.
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 In this post, I showed how to use Webassembly on Kubernetes with the Wasmedge runtime. I created three flavors for comparison purposes: `native`, `embed`, and `runtime`. The first two are "regular" Docker images, while the latter contains only a single Wasm file, which makes it very lightweight and secure. However, we need a dedicated runtime to run it.
 

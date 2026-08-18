@@ -29,8 +29,8 @@ Without further ado, it's time to solve the Java Challenge quiz!
 
 It's time to improve your Java skills with this Type Erasure Generics Simpson Java Challenge.
 
-Type Erasure Generics Simpson Java Challenge {#h2-0-type-erasure-generics-simpson-java-challenge}
--------------------------------------------------------------------------------------------------
+Type Erasure Generics Simpson Java Challenge
+--------------------------------------------
 
 What will happen when running the following code?
 

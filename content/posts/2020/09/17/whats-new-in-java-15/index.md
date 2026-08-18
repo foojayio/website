@@ -23,7 +23,7 @@ Now that Java 15 has been released, let's take a look at what's new!
 [Here on foojay](https://foojay.io/java-15/?quarter=072020), the fixes that went into the release are listed, giving you a unique and readable changelog in helpful categories, with the invitation for you to vote on those that are most relevant to you:
 [![](new-java-15-foojay-1024x617.png)](https://foojay.io/java-15/?quarter=072020)
 
-### New Features {#h3-0-new-features}
+### New Features
 
 #### JVM
 

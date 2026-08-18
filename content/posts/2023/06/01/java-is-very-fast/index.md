@@ -23,7 +23,7 @@ enlighterjs: true
 frozen: false
 ---
 
-This article looks at a benchmark passing events over TCP/IP at 4 billion events per minute using the net.openhft.chronicle.wire.channel package in [Chronicle Wire](https://chronicle.software/wire/?utm_source=article&amp;utm_medium=foojay&amp;utm_campaign=java-is-fast "Chronicle Wire") and why we aim to avoid object allocations.
+This article looks at a benchmark passing events over TCP/IP at 4 billion events per minute using the net.openhft.chronicle.wire.channel package in [Chronicle Wire](https://chronicle.software/wire/?utm_source=article&utm_medium=foojay&utm_campaign=java-is-fast "Chronicle Wire") and why we aim to avoid object allocations.
 
 One of the key optimisations is creating almost no garbage. Allocation is supposed to be a very cheap operation and garbage collection of very short lived objects is also very cheap.
 
@@ -31,7 +31,7 @@ Does not allocating really make such a difference? What difference does one smal
 
 While allocation is as efficient as possible, it cannot avoid the memory pressure on the L1/L2 caches of your CPUs and when many cores are busy, they are contending for memory in the shared L3 cache.
 
-### Results {#h3-0-results}
+### Results
 
 #### Benchmark on a Ryzen 5950X with Ubuntu 22.10.
 
@@ -56,7 +56,7 @@ A benchmark that just creates short lived TopOfBook objects, across multiple CPU
 
 ![](Screenshot-2023-05-24-at-10.23.46-AM-1024x471.png)
 
-### The Benchmarks {#h3-1-the-benchmarks}
+### The Benchmarks
 
 ![](Screenshot-2023-05-24-at-10.32.39-AM-1024x487.png)  
 
@@ -125,7 +125,7 @@ topOfBook: {
 
 Is available [here](https://chronicle.software/email-submit/ "here").
 
-This library is used in [Chronicle Services](https://chronicle.software/services/?utm_source=article&amp;utm_medium=foojay&amp;utm_campaign=java-is-fast "Chronicle Services")
+This library is used in [Chronicle Services](https://chronicle.software/services/?utm_source=article&utm_medium=foojay&utm_campaign=java-is-fast "Chronicle Services")
 
 #### Conclusion
 

@@ -26,13 +26,13 @@ Source code maintainability plays a very important role as complexity of nowaday
 
 Let's take a look at one particular brand new preview feature added to the latest JDK release 23 \[2\], JEP-482: Flexible Constructor Bodies \[1\] in its second iteration.
 
-### Creational design pattern factory review {#h3-0-creational-design-pattern-factory-review}
+### Creational design pattern factory review
 
 One of the most frequent creational design patterns could be considered factory method\[3\]. Factory methods aim to centralize a new instance creation at the runtime. It separates the code base responsibilities.
 
 This separation makes it possible to hide the creation of a complex object while keeping the focus not only on maintainability. The class constructor flexibility can greatly contribute to simplifying creation patterns, as the flexibility to create any new instance can be crucial for most demanding projects.
 
-### Simplifying factory method with JEP-482 {#h3-1-simplifying-factory-method-with-jep-482}
+### Simplifying factory method with JEP-482
 
 Let's code a bit and introduce the *VehicleSensorFactory* with an overloaded method *createVehicleSensor* (Example 1.).
 
@@ -114,7 +114,7 @@ class EngineValueSensor extends AbstractValueSensor {
 
 **Example 4.**: Throwing an exception due to invalid arguments without instantiating an object
 
-### Conclusion {#h3-2-conclusion}
+### Conclusion
 
 The newly proposed JEP-482 aims to solve the much-discussed limitation introduced in the early stages of Java, resp. Java 1.0. The rule where *super(..)* or *this(..)* must be placed as the first statement inside a constructor before placing any other statement \[3\]. The impact of the rule usually caused unclear solutions that could lead to unsustainable code composition.
 
@@ -147,7 +147,7 @@ Exception in thread "main" java.lang.IllegalArgumentException: value grater than
 
 **Example 5.**: The example output compares two approaches to instantiation, one considering state versus an exception-throwing style.
 
-### Resources {#h3-3-resources}
+### Resources
 
 [\[1\] JEP-482: Flexible Constructor Bodies (Second Preview](https://openjdk.org/jeps/482)  
 [\[2\] Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

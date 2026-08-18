@@ -37,8 +37,8 @@ This phenomenon can manifest within any build tool, but for our exploration, I'l
 
 I'll surface the most common sources of build rot and then describe how Developer Productivity Engineering practices can be deployed to address build rot pains.
 
-Sources of Build Rot {#h2-0-sources-of-build-rot}
--------------------------------------------------
+Sources of Build Rot
+--------------------
 
 So what are the most common sources of build rot?
 
@@ -48,8 +48,8 @@ So what are the most common sources of build rot?
 * **Sub-optimal parallelization:** Another silent perpetrator of build rot is the underutilization of parallel execution capabilities offered by both Maven and Gradle. Both support parallel builds, and not taking advantage of this feature can lead to unnecessarily long build times. Similarly, not properly organizing your project into modules can result in unnecessary rebuilds of unchanged code, further slowing down your build process.
 * **Deprecated features and APIs:** Sticking with deprecated features or APIs in your build scripts can also contribute to build rot. These deprecated features might be less efficient than their newer counterparts and might be removed in future build tool versions. The time and effort needed to refactor your scripts, once these features are eventually removed, add to the maintenance burden and deepen the build rot.
 
-Developer Productivity Engineering to the rescue {#h2-1-developer-productivity-engineering-to-the-rescue}
----------------------------------------------------------------------------------------------------------
+Developer Productivity Engineering to the rescue
+------------------------------------------------
 
 So, how do we fight off build rot? The answer lies in a software development practice known as Developer Productivity Engineering (DPE). DPE is a proactive approach to improving the efficiency of the development cycle---a significant part of which involves managing and reducing build rot.
 
@@ -59,8 +59,8 @@ So, how do we fight off build rot? The answer lies in a software development pra
 * **Deploy Observability Solutions:** Observability is critical in managing build rot. Tracking build and test times, identifying trends, and analyzing the impact of changes all offer valuable insights. A tool like Gradle Enterprise, which provides build observability through data on build and test performance and trends, helps foster a culture of evidence-based decision-making crucial in DPE.
 * **Conduct Build Reviews:** Regular build reviews are akin to code reviews. They provide an opportunity to spot potential build rot early, suggest improvements, and share best practices within the team. Such reviews support a culture of continuous improvement, central to DPE, by ensuring that the build system evolves with the codebase.
 
-Learn more about Developer Productivity Engineering {#h2-2-learn-more-about-developer-productivity-engineering}
----------------------------------------------------------------------------------------------------------------
+Learn more about Developer Productivity Engineering
+---------------------------------------------------
 
 In summary, build rot is an often overlooked form of technical debt that can silently impede development efficiency.
 

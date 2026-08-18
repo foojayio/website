@@ -37,8 +37,8 @@ The aim of this article is not to dissuade or scare you away from refactoring yo
 
 One of the benefits of Java is that observability is almost free. Significantly, no code changes are necessary and with the right toolings, you can activate advanced tracing almost immediately. Let's review how this is done:
 
-Collecting tracing data to understand code dependencies {#h2-0-collecting-tracing-data-to-understand-code-dependencies}
------------------------------------------------------------------------------------------------------------------------
+Collecting tracing data to understand code dependencies
+-------------------------------------------------------
 
 In this example, we'll be using a developer tool called [`Digma`](https://digma.ai/how-it-works/ "<code>Digma</code>") to collect and analyze the tracing data. Digma is an IntelliJ plugin and uses OpenTelemetry behind the scenes to collect data about the code. To get started, all you have to do is install Digma from the [IntelliJ marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "IntelliJ marketplace") and run your code. Even locally you can gather a log of data just by activating your code or running tests. You can get even more comprehensive data by connecting Digma with a CI, Staging, or Production environment.
 
@@ -46,8 +46,8 @@ In this example, we'll be using a developer tool called [`Digma`](https://digma.
 
 Digma Continuous Feedback plugin
 
-Using Digma Analytic Insights to identify dependencies in your codebase: {#h2-1-using-digma-analytic-insights-to-identify-dependencies-in-your-codebase}
---------------------------------------------------------------------------------------------------------------------------------------------------------
+Using Digma Analytic Insights to identify dependencies in your codebase:
+------------------------------------------------------------------------
 
 As you run your code Digma will start analyzing the tracing data to discover issues, but also come up with useful analytics. There are many types of analytics that Digma can glean but in the context of this post, I'll review four types of insights that can be extremely useful during your codebase analysis before the migration.
 
@@ -58,8 +58,8 @@ As you run your code Digma will start analyzing the tracing data to discover iss
 
 Learn more: [Here](https://docs.digma.ai/digma-developer-guide "Here")
 
-Code Nexus Point Insight {#h2-2-code-nexus-point-insight}
----------------------------------------------------------
+Code Nexus Point Insight
+------------------------
 
 This insight highlights areas in the code with high levels of runtime dependencies. By identifying these nexus points, developers gain insight into the areas that require meticulous attention and thoughtful refactoring. This insight can help prevent a dependency hell as you refactor your code and better select candidates for extraction into modular components.
 
@@ -71,8 +71,8 @@ In the example above, we can see that the "Services" property reveals that only 
 
 ![](https://digma.ai/wp-content/uploads/2024/04/image-7.png)
 
-Top Usage Insight {#h2-3-top-usage-insight}
--------------------------------------------
+Top Usage Insight
+-----------------
 
 With this insight you see more specific information about how the code is used, we can check the 'Top Usage' insight. This can definitely come in handy when dealing with dependencies during a microservices migration. The insight reveals how the code is being used within our application and allows us to navigate those usages without debugging each individual one.
 
@@ -82,8 +82,8 @@ By using this insight, you can see all the places that call your method and thei
 
 Top Usage Insight
 
-Discovering Dead Code {#h2-4-discovering-dead-code}
----------------------------------------------------
+Discovering Dead Code
+---------------------
 
 The above insights allow us to reveal important information pieces about how the code is being used -- but what if we're interested in finding code that isn't used at all?
 
@@ -91,8 +91,8 @@ Digma provides annotations over such areas in the IDE editor to draw your attent
 
 ![](https://lh7-us.googleusercontent.com/WQX3wvdWrU4S-9ZSwSKeHD1098x5J4klfm6gNnA8gve4YSj_EqEtUtpVcR5HPV3OnNPgxwMY0UvRvY5hbHzTxsbae3iuJoxfRuGZJEuDyMmBF5-yMPohCuc3fbhWp5fxFGB0c8M7XRSUK-D0mEsaNRQ)
 
-Duration Breakdown Insight {#h2-5-duration-breakdown-insight}
--------------------------------------------------------------
+Duration Breakdown Insight
+--------------------------
 
 Lastly, for each area in our application, Digma will reveal the Duration Breakdown insight. The value of this information is two-fold. First, it allows us to see not only who uses this code (which we saw in the previous insights) but also which other components this code is calling out to. Next, this insight provides important performance baselines that we can use to detect performance issues before the migration resulting in slow invocations so the migration will go smoother.
 

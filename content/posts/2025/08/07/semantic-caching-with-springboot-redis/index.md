@@ -34,7 +34,7 @@ frozen: false
 LLMs are powerful but expensive. Every API call costs money and takes time. When users ask similar questions like "What beer goes with grilled meat?" and "Which beer pairs well with barbecue?", traditional systems would make separate LLM calls even though these queries are essentially asking the same thing.
 
 Traditional exact-match caching only works if users ask the identical question word-for-word. But in real applications, users phrase questions differently while seeking the same information.
-> Video: [What is a semantic cache?](https://www.youtube.com/watch?v=AtVTT_s8AGc&amp;t=1s)
+> Video: [What is a semantic cache?](https://www.youtube.com/watch?v=AtVTT_s8AGc&t=1s)
 
 Semantic caching solves this by understanding the ***meaning*** behind queries rather than matching exact text. When a user asks a question:
 
@@ -48,7 +48,7 @@ Behind the scenes, this works thanks to vector similarity search. It turns text 
 Today, we're gonna build a semantic caching system for a beer recommendation assistant. It will remember previous responses to similar questions, dramatically improving response times and reducing API costs.
 
 To do that, we'll build a Spring Boot app from scratch and use Redis as our semantic cache store. It'll handle vector embeddings for similarity matching, enabling our application to provide lightning-fast responses for semantically similar queries.
-> Video: [What's a vector database](https://www.youtube.com/watch?v=Yhv19le0sBw&amp;t=1s)
+> Video: [What's a vector database](https://www.youtube.com/watch?v=Yhv19le0sBw&t=1s)
 
 Redis Open Source 8 not only turns the community version of Redis into a Vector Database, but also makes it the fastest and most scalable database in the market today. Redis 8 allows you to scale to one billion vectors without penalizing latency.
 
@@ -58,7 +58,7 @@ For semantic caching, Redis serves as:
 * A metadata store for cached responses and additional context
 * A high-performance search engine for finding semantically similar queries
 
-> Video: [What's an embedding model?](https://www.youtube.com/watch?v=0U1S0WSsPuE&amp;t=1s)
+> Video: [What's an embedding model?](https://www.youtube.com/watch?v=0U1S0WSsPuE&t=1s)
 
 Spring AI provides a unified API for working with various AI models and vector stores. Combined with Redis, it allows developers to easily build semantic caching systems that can:
 
@@ -69,15 +69,15 @@ Spring AI provides a unified API for working with various AI models and vector s
 
 Our application will be built using Spring Boot with Spring AI and Redis. It will implement a beer recommendation assistant that caches responses semantically, providing fast answers to similar questions about beer pairings.
 
-0. GitHub Repository {#h2-0-0-github-repository}
-------------------------------------------------
+0. GitHub Repository
+--------------------
 
 The full application can be found on GitHub
 
 <https://github.com/redis-developer/redis-springboot-resources/tree/main/artificial-intelligence/semantic-caching-with-spring-ai>
 
-1. Add the required dependencies {#h2-1-1-add-the-required-dependencies}
-------------------------------------------------------------------------
+1. Add the required dependencies
+--------------------------------
 
 From a Spring Boot application, add the following dependencies to your Maven or Gradle file:
 
@@ -88,8 +88,8 @@ implementation("org.springframework.ai:spring-ai-starter-model-openai")
 ```
 
 
-2. Configure the Semantic Cache Vector Store {#h2-2-2-configure-the-semantic-cache-vector-store}
-------------------------------------------------------------------------------------------------
+2. Configure the Semantic Cache Vector Store
+--------------------------------------------
 
 We'll use Spring AI's `RedisVectorStore` to store and search vector embeddings of cached queries and responses:
 
@@ -127,8 +127,8 @@ Let's break this down:
 * **Prefix** : `semantic-caching:` --- All keys in Redis will be prefixed with this to organize the data
 * **Vector Algorithm**: HSNW --- Hierarchical Navigable Small World algorithm for efficient approximate nearest neighbor search
 
-3. Implement the Semantic Caching Service {#h2-3-3-implement-the-semantic-caching-service}
-------------------------------------------------------------------------------------------
+3. Implement the Semantic Caching Service
+-----------------------------------------
 
 The SemanticCachingService handles storing and retrieving cached responses from Redis:
 
@@ -181,8 +181,8 @@ Key features of the semantic caching service:
 * Configurable similarity threshold for cache hits
 * Comprehensive logging for debugging and monitoring
 
-4. Integrate with the RAG Service {#h2-4-4-integrate-with-the-rag-service}
---------------------------------------------------------------------------
+4. Integrate with the RAG Service
+---------------------------------
 
 The RagService orchestrates the semantic caching with the standard RAG pipeline:
 
@@ -271,8 +271,8 @@ Key features of the integrated RAG service:
 
 The easiest way to run the demo is with Docker Compose, which sets up all required services in one command.
 
-Step 1: Clone the repository {#h2-5-step-1-clone-the-repository}
-----------------------------------------------------------------
+Step 1: Clone the repository
+----------------------------
 
 ```
 git clone https://github.com/redis-developer/redis-springboot-resources.git
@@ -280,8 +280,8 @@ cd redis-springboot-resources/artificial-intelligence/semantic-caching-with-spri
 ```
 
 
-Step 2: Configure your environment {#h2-6-step-2-configure-your-environment}
-----------------------------------------------------------------------------
+Step 2: Configure your environment
+----------------------------------
 
 Create a `.env` file with your OpenAI API key:
 
@@ -290,8 +290,8 @@ OPENAI_API_KEY=sk-your-api-key
 ```
 
 
-Step 3: Start the services {#h2-7-step-3-start-the-services}
-------------------------------------------------------------
+Step 3: Start the services
+--------------------------
 
 ```
 docker compose up --build
@@ -304,8 +304,8 @@ This will start:
 * **redis-insight**: a UI to explore the Redis data
 * **semantic-caching-app**: the Spring Boot app that implements the semantic caching system
 
-Step 4: Use the application {#h2-8-step-4-use-the-application}
---------------------------------------------------------------
+Step 4: Use the application
+---------------------------
 
 When all services are running, go to `localhost:8080` to access the demo. You'll see a beer recommendation interface:
 
@@ -345,5 +345,5 @@ Whether you're building chatbots, recommendation engines, or question-answering 
 
 Try it out, experiment with different similarity thresholds, explore other embedding models, and see how much you can save on LLM costs while delivering faster responses!
 
-**Stay Curious!** {#h2-9-stay-curious}
---------------------------------------
+**Stay Curious!**
+-----------------

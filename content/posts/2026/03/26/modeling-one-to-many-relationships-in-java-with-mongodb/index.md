@@ -27,8 +27,8 @@ Consider a common scenario: a BlogPost that has many Comment objects. In Java, t
 
 This tutorial walks you through both approaches --- **embedded documents** and **references** --- using plain Java POJOs and the MongoDB Java Sync Driver. You'll build a small blogging application, see the resulting document structures, and learn when each pattern shines (and when it doesn't). Along the way, we'll also introduce a hybrid strategy known as the **Subset Pattern** that combines the best of both worlds.
 
-**What You'll Learn** {#h2-0-what-you-ll-learn}
------------------------------------------------
+**What You'll Learn**
+---------------------
 
 * What a one-to-many relationship is and how it maps from Java objects to MongoDB documents.
 * When to embed documents vs. when to use references, and the trade-offs of each.
@@ -36,8 +36,8 @@ This tutorial walks you through both approaches --- **embedded documents** and *
 * How to query and update each pattern effectively.
 * Best practices for avoiding common schema design pitfalls.
 
-**Prerequisites** {#h2-1-prerequisites}
----------------------------------------
+**Prerequisites**
+-----------------
 
 To follow along, you'll need:
 
@@ -48,7 +48,7 @@ To follow along, you'll need:
 
 The full source code for this tutorial is available on [GitHub](https://github.com/arthurmr96/mongodb-java-modeling-relationships). The appName for this repo is devrel-tutorial-java-driver-foojay
 
-### **Project Setup** {#h3-2-project-setup}
+### **Project Setup**
 
 Create a Maven project with the following dependencies in your pom.xml:
 
@@ -88,7 +88,7 @@ MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrit
 ```
 
 
-### **Configuring the MongoClient with POJO Support** {#h3-3-configuring-the-mongoclient-with-pojo-support}
+### **Configuring the MongoClient with POJO Support**
 
 Before we dive into the relationship patterns, we need a MongoClient configured with the PojoCodecProvider. This tells the driver how to automatically map Java objects to BSON documents and vice versa --- no manual serialization required.
 
@@ -154,8 +154,8 @@ public class MongoConfig {
 
 The key line here is PojoCodecProvider.builder().automatic(true).build(). Setting automatic(true) tells the driver to handle any POJO it encounters, not just ones you register explicitly. This is what makes the entire POJO-to-BSON mapping work seamlessly throughout the examples that follow.
 
-**What Is a One-to-Many Relationship in Java?** {#h2-4-what-is-a-one-to-many-relationship-in-java}
---------------------------------------------------------------------------------------------------
+**What Is a One-to-Many Relationship in Java?**
+-----------------------------------------------
 
 In object-oriented terms, a one-to-many relationship means that one object contains or is associated with a collection of other objects. A BlogPost has many Comment objects. In Java, this is typically expressed as a List:
 
@@ -171,8 +171,8 @@ This is intuitive and familiar. But how does this translate to a document databa
 
 The core question becomes: should those Comment objects live *inside* the BlogPost document, or should they live in a separate collection with a pointer back to the post?
 
-**How Does MongoDB Store Documents Differently Than a Relational Database?** {#h2-5-how-does-mongodb-store-documents-differently-than-a-relational-database}
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+**How Does MongoDB Store Documents Differently Than a Relational Database?**
+----------------------------------------------------------------------------
 
 In a relational database, data is normalized into tables. A blog_posts table and a comments table are connected by a post_id foreign key. To read a post with its comments, you write a JOIN query. The database enforces referential integrity, and the schema is fixed.
 
@@ -185,10 +185,10 @@ This flexibility means MongoDB lets you *choose* your relationship strategy per 
 
 Neither is universally "better. The right choice depends on your data access patterns, update frequency, and growth expectations. Let's explore both.
 
-**Pattern 1: Embedded Documents** {#h2-6-pattern-1-embedded-documents}
-----------------------------------------------------------------------
+**Pattern 1: Embedded Documents**
+---------------------------------
 
-### **When Should You Embed?** {#h3-7-when-should-you-embed}
+### **When Should You Embed?**
 
 Embedding means storing the related data directly inside the parent document. When you fetch the parent, you get everything in a single read --- no second query needed.
 
@@ -204,7 +204,7 @@ Use embedding when:
 | Atomic updates on parent + children | Hard to query/update children in isolation |
 | Simple Java mapping with POJOs      | 16 MB document size limit                  |
 
-### **Modeling Embedded Documents in Java** {#h3-8-modeling-embedded-documents-in-java}
+### **Modeling Embedded Documents in Java**
 
 Let's model our blogging scenario with embedding. The Comment and User (the post author) are embedded directly inside the BlogPost document.
 
@@ -298,7 +298,7 @@ public class BlogPost {
 
 The @BsonProperty annotation maps each Java field to its corresponding BSON field name. The @BsonId annotation marks the id field as the document's _id. Every POJO needs a no-argument constructor for the PojoCodecProvider to deserialize documents back into Java objects.
 
-### **Inserting and Querying Embedded Documents** {#h3-9-inserting-and-querying-embedded-documents}
+### **Inserting and Querying Embedded Documents**
 
 With our POJOs defined, let's see how to insert a blog post with embedded comments and then read it back:
 
@@ -398,10 +398,10 @@ Everything --- the post content, the author profile, and all comments --- lives 
 
 You can also query into the embedded data using dot notation. Filters.eq("comments.author", "Bob") finds all posts that have at least one comment authored by Bob, and Filters.eq("author.username", "alice") filters by the embedded author's username.
 
-**Pattern 2: References** {#h2-10-pattern-2-references}
--------------------------------------------------------
+**Pattern 2: References**
+-------------------------
 
-### **When Should You Use References?** {#h3-11-when-should-you-use-references}
+### **When Should You Use References?**
 
 Referencing means storing a pointer --- typically an ObjectId --- to a document that lives in a separate collection. To assemble the full object, you need multiple queries.
 
@@ -417,7 +417,7 @@ Use references when:
 | Children can be queried independently | More complex Java code to assemble objects    |
 | Scales to large, growing datasets     | No atomic cross-document updates by default   |
 
-### **Modeling References in Java** {#h3-12-modeling-references-in-java}
+### **Modeling References in Java**
 
 In the referenced approach, users, blog posts, and comments each live in their own collection. The BlogPost stores an ObjectId pointing to the author in the users collection, and a list of ObjectIds pointing to comments in the comments collection.
 
@@ -526,7 +526,7 @@ public class BlogPost {
 
 Notice the difference: instead of private User author and private List\<Comment\> comments, we now have private ObjectId authorId and private List\<ObjectId\> commentIds. The data itself lives elsewhere.
 
-### **Inserting and Querying Referenced Documents** {#h3-13-inserting-and-querying-referenced-documents}
+### **Inserting and Querying Referenced Documents**
 
 Working with references requires more steps. You insert documents into separate collections, maintain the reference list, and resolve references with additional queries:
 
@@ -699,24 +699,24 @@ A key advantage shows up in step 6: you can query the comments collection direct
 
 **Note:** For scenarios where you'd rather resolve references on the server side, MongoDB's [$lookup](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=many-mongodb-foojay&utm_term=hugh.murray) aggregation stage can perform left-outer-join-like operations between collections. This is useful for analytics queries or dashboards, but for most application reads, the multi-step approach shown here gives you more control over what gets loaded and when.
 
-**Best Practices for Schema Design in MongoDB** {#h2-14-best-practices-for-schema-design-in-mongodb}
-----------------------------------------------------------------------------------------------------
+**Best Practices for Schema Design in MongoDB**
+-----------------------------------------------
 
 Now that you've seen both patterns in action, here are the principles that should guide your schema design decisions.
 
-### **Design for Your Query Patterns, Not Your Data Structure** {#h3-15-design-for-your-query-patterns-not-your-data-structure}
+### **Design for Your Query Patterns, Not Your Data Structure**
 
 This is the single most important rule in MongoDB schema design. Don't start by drawing an entity-relationship diagram and normalizing it. Instead, ask: *What questions will my application ask most often?* If your app always displays a blog post with its comments, embedding makes those reads fast. If your app has a separate "all comments by user" page, references give you direct access.
 
-### **Avoid Unbounded Arrays** {#h3-16-avoid-unbounded-arrays}
+### **Avoid Unbounded Arrays**
 
 Embedding works well when the array has a predictable upper bound. A blog post with 5--50 comments? Embedding is fine. A social media post that could accumulate hundreds of thousands of reactions? That array will grow without limit, eventually hitting MongoDB's 16 MB document size limit. Use references when a list can grow indefinitely.
 
-### **Think About Atomicity** {#h3-17-think-about-atomicity}
+### **Think About Atomicity**
 
 MongoDB guarantees atomic updates at the single-document level. When you embed comments inside a blog post, updating the post and adding a comment is a single atomic operation. With references, updating documents across multiple collections is not atomic by default. If you need atomic updates across parent and children, embedding gives you that guarantee out of the box. For cross-collection atomicity, you'd need to use [multi-document transactions](https://www.mongodb.com/docs/manual/core/transactions/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=many-mongodb-foojay&utm_term=hugh.murray).
 
-### **Consider the Subset Pattern** {#h3-18-consider-the-subset-pattern}
+### **Consider the Subset Pattern**
 
 What if you need the read performance of an embedding, but your dataset is too large to embed entirely? The **Subset Pattern** offers a middle ground: embed a *subset* of the related data for fast access, while keeping the full dataset in a separate collection.
 
@@ -854,12 +854,12 @@ The AuthorSnapshot carries the user's _id alongside the display fields, so it se
 
 The trade-off is clear: if a user changes their display name, you need to update the embedded snapshots in every post where they appear. For a blogging platform where profile changes are infrequent compared to post reads, this is usually an excellent trade-off.
 
-### **Keep Documents Under the 16 MB Limit** {#h3-19-keep-documents-under-the-16-mb-limit}
+### **Keep Documents Under the 16 MB Limit**
 
 This is MongoDB's hard constraint on document size. If your embedded arrays could push a document past this limit, use references. The Subset Pattern is particularly useful here: you get the read performance of embedding for the most common view while the full dataset lives safely in its own collection.
 
-**Choosing the Right Relationship Model for Your Java App** {#h2-20-choosing-the-right-relationship-model-for-your-java-app}
-----------------------------------------------------------------------------------------------------------------------------
+**Choosing the Right Relationship Model for Your Java App**
+-----------------------------------------------------------
 
 The choice between embedded documents and references comes down to your application's access patterns:
 
@@ -878,29 +878,29 @@ mvn compile exec:java
 ```
 
 
-**FAQs** {#h2-21-faqs}
-----------------------
+**FAQs**
+--------
 
-### **Can I mix embedded and referenced documents in the same MongoDB schema?** {#h3-22-can-i-mix-embedded-and-referenced-documents-in-the-same-mongodb-schema}
+### **Can I mix embedded and referenced documents in the same MongoDB schema?**
 
 Yes --- and often you should. The Subset Pattern is a perfect example: you embed the most recent comments for quick display while storing the full comment history as references in a separate collection. Schema design in MongoDB is flexible by nature, and mixing strategies per relationship is a common and recommended practice.
 
-### **How do I handle one-to-many relationships in Spring Data MongoDB?** {#h3-23-how-do-i-handle-one-to-many-relationships-in-spring-data-mongodb}
+### **How do I handle one-to-many relationships in Spring Data MongoDB?**
 
 Spring Data MongoDB provides @DBRef and embedded document support out of the box. The schema design patterns covered here --- embedded documents, references, and the Subset Pattern --- apply regardless of your framework. This tutorial uses the core Java Sync Driver to explain the underlying mechanics, but the concepts translate directly to Spring Data, Quarkus, and Micronaut.
 
-### **Does this work with the MongoDB Java Reactive Streams driver?** {#h3-24-does-this-work-with-the-mongodb-java-reactive-streams-driver}
+### **Does this work with the MongoDB Java Reactive Streams driver?**
 
 The schema design patterns covered in this tutorial apply universally regardless of which driver or framework you use. MongoDB's official [Java Reactive Streams driver](https://www.mongodb.com/docs/languages/java/reactive-streams-driver/current/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=many-mongodb-foojay&utm_term=hugh.murray) offers the same operations with an asynchronous, non-blocking API. Community integrations like [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb), [Quarkus MongoDB](https://quarkus.io/guides/mongodb), and [Micronaut MongoDB](https://micronaut-projects.github.io/micronaut-mongodb/latest/guide/) also build on these same underlying concepts while adding framework-specific conveniences.
 
-### **What happens if my embedded array grows too large?** {#h3-25-what-happens-if-my-embedded-array-grows-too-large}
+### **What happens if my embedded array grows too large?**
 
 MongoDB documents have a 16 MB size limit. If your array can grow unboundedly --- event logs, chat messages, IoT sensor readings --- you should use references instead of embedding. The Subset Pattern offers a middle ground if you still want fast reads for a recent slice of the data.
 
-### **Is there a performance difference between embedded and referenced documents?** {#h3-26-is-there-a-performance-difference-between-embedded-and-referenced-documents}
+### **Is there a performance difference between embedded and referenced documents?**
 
 Yes. Embedded documents are fetched in a single read operation, making them faster for read-heavy use cases where the child data is always needed alongside the parent. References require at least two reads, adding latency --- but they keep documents smaller and more efficient to update individually.
 
-### **Do I need to manage referential integrity manually with MongoDB references?** {#h3-27-do-i-need-to-manage-referential-integrity-manually-with-mongodb-references}
+### **Do I need to manage referential integrity manually with MongoDB references?**
 
 Yes. Unlike SQL foreign keys, MongoDB does not enforce referential integrity on ObjectId references. Your application code --- typically your Java service layer --- is responsible for keeping references consistent. This means handling cascading deletes, orphaned references, and ensuring that IDs point to existing documents is up to you.

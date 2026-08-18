@@ -28,7 +28,7 @@ Enter [Chronicle Services](https://chronicle.software/services/ "Chronicle Servi
 
 Let's examine the world of failover strategies and explore how they safeguard software continuity.
 
-### Stateless vs. Stateful Services {#h3-0-stateless-vs-stateful-services}
+### Stateless vs. Stateful Services
 
 It's important to appreciate the difference between stateless and stateful services. Your choice of failover approach is highly influenced by this understanding, especially if the aim is to resume services seamlessly from where they were interrupted.
 
@@ -72,7 +72,7 @@ The 'History Record,' an integral part of event replay, includes meta-informatio
 
 However, maintaining exact event order can be complex with multiple input queues. To navigate this challenge, [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") uses History Records for each input event, ensuring a strict time-ordered replay regardless of the queue origin.
 
-### Addressing Stateless Services in Failover Scenarios {#h3-1-addressing-stateless-services-in-failover-scenarios}
+### Addressing Stateless Services in Failover Scenarios
 
 In contrast, implementing failover for stateless services like Service-a and Service-b is relatively straightforward due to their lack of internal state. Upon restart, these services can directly read new events from the queue, conveniently ignoring those that don't impact their state.
 

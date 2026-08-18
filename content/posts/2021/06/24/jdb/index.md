@@ -29,7 +29,7 @@ For Java applications, typical production and test machines are Linux servers wi
 
 In such scenarios, we can use `jdb`. `jdb` is a command line debugger and it is part of the OpenJDK.
 
-### Troubleshoot Java with "jdb" Utility {#h3-0-troubleshoot-java-with-jdb-utility}
+### Troubleshoot Java with "jdb" Utility
 
 jdb is available in the jdk/bin directory. It uses the Java Debug Interface (JDI) to launch and connect to the target JVM. The Java Debug Interface (JDI) provides a Java programming language interface for debugging Java programming language applications. JDI is a part of the [Java Platform Debugger Architecture](https://docs.oracle.com/en/java/javase/16/docs/specs/jpda/architecture.html).
 
@@ -216,7 +216,7 @@ main[1] help
 ```
 
 
-### Command List {#h3-1-command-list}
+### Command List
 
 ```
 connectors -- list available connectors and transports in this VM
@@ -320,7 +320,7 @@ quit
 ```
 
 
-### Conclusion {#h3-2-conclusion}
+### Conclusion
 
 OpenJDK provides many amazing troubleshooting and diagnosis tools. These tools help you to fix issues in your production application quickly.
 

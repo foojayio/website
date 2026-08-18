@@ -49,8 +49,8 @@ You may also enjoy these related Foojay topics:
 
 
 
-Quality in Development: Simplicity Still Wins {#_quality_in_development_simplicity_still_wins}
-----------------------------------------------------------------------------------------------
+Quality in Development: Simplicity Still Wins
+---------------------------------------------
 
 One topic came back constantly during the interviews: software quality.
 
@@ -100,14 +100,14 @@ Therefore, software quality is not a final validation step. Instead, it becomes 
 
 
 
-Favorite Java Framework: Spring Boot vs Quarkus {#_favorite_java_framework_spring_boot_vs_quarkus}
---------------------------------------------------------------------------------------------------
+Favorite Java Framework: Spring Boot vs Quarkus
+-----------------------------------------------
 
 Another major topic was the favorite Java framework.
 
 Interestingly, two frameworks dominated the discussions: Spring Boot and Quarkus.
 
-### Why Developers Still Love Spring Boot {#_why_developers_still_love_spring_boot}
+### Why Developers Still Love Spring Boot
 
 Many interviewees described Spring Boot as:
 
@@ -133,7 +133,7 @@ Moreover, developers appreciated the ecosystem maturity and the confidence it pr
 
 One recurring idea was simple: Spring Boot allows developers to focus more on business problems and less on infrastructure complexity.
 
-### Why Quarkus Generates Excitement {#_why_quarkus_generates_excitement}
+### Why Quarkus Generates Excitement
 
 At the same time, Quarkus generated strong enthusiasm among developers focused on cloud-native systems.
 
@@ -165,8 +165,8 @@ Finally, the Quarkus community itself received a lot of praise. Multiple intervi
 
 
 
-Welcoming Girls in Tech: Inclusion Through Everyday Actions {#_welcoming_girls_in_tech_inclusion_through_everyday_actions}
---------------------------------------------------------------------------------------------------------------------------
+Welcoming Girls in Tech: Inclusion Through Everyday Actions
+-----------------------------------------------------------
 
 Another important question concerned welcoming women into tech teams.
 
@@ -199,8 +199,8 @@ Different perspectives often produce better ideas, better architecture decisions
 
 
 
-Best Thing About Tech Communities {#_best_thing_about_tech_communities}
------------------------------------------------------------------------
+Best Thing About Tech Communities
+---------------------------------
 
 One of the strongest themes across all interviews was the importance of tech communities.
 
@@ -252,8 +252,8 @@ Most importantly, communities create learning environments where developers cont
 
 
 
-Best Java Developer Skill Today: Adaptability {#_best_java_developer_skill_today_adaptability}
-----------------------------------------------------------------------------------------------
+Best Java Developer Skill Today: Adaptability
+---------------------------------------------
 
 When asked about the most valuable skill for Java developers today, one word came back several times: adaptability.
 
@@ -292,12 +292,12 @@ One interviewee summarized it perfectly:
 
 
 
-Why Not Java? Kotlin, TypeScript, and Node.js Perspectives {#_why_not_java_kotlin_typescript_and_node_js_perspectives}
-----------------------------------------------------------------------------------------------------------------------
+Why Not Java? Kotlin, TypeScript, and Node.js Perspectives
+----------------------------------------------------------
 
 Some interviewees also explained why they sometimes choose technologies other than Java.
 
-### Kotlin for the JVM Ecosystem {#_kotlin_for_the_jvm_ecosystem}
+### Kotlin for the JVM Ecosystem
 
 Kotlin appeared frequently as an alternative language.
 
@@ -315,7 +315,7 @@ Developers appreciated:
 
 Android developers especially explained that Kotlin progressively became the natural standard within the Android ecosystem.
 
-### TypeScript and JavaScript {#_typescript_and_javascript}
+### TypeScript and JavaScript
 
 Other developers preferred TypeScript and JavaScript because of their immediacy and flexibility.
 
@@ -333,8 +333,8 @@ Nevertheless, most interviewees still respected Java deeply and continued using 
 
 
 
-Becoming a Java Architect {#_becoming_a_java_architect}
--------------------------------------------------------
+Becoming a Java Architect
+-------------------------
 
 Another major question focused on architecture careers.
 
@@ -372,8 +372,8 @@ Instead, architecture should always serve business goals and user needs.
 
 
 
-IntelliJ IDEA: Still the Favorite IDE {#_intellij_idea_still_the_favorite_ide}
-------------------------------------------------------------------------------
+IntelliJ IDEA: Still the Favorite IDE
+-------------------------------------
 
 IntelliJ IDEA received overwhelmingly positive feedback.
 
@@ -407,8 +407,8 @@ Therefore, IntelliJ was repeatedly described as more than an editor. It became a
 
 
 
-Working Efficiently With Ops Teams {#_working_efficiently_with_ops_teams}
--------------------------------------------------------------------------
+Working Efficiently With Ops Teams
+----------------------------------
 
 Finally, many interviewees highlighted the growing importance of DevOps collaboration.
 
@@ -442,8 +442,8 @@ This collaborative approach improves software quality while also reducing fricti
 
 
 
-Final Thoughts {#_final_thoughts}
----------------------------------
+Final Thoughts
+--------------
 
 What started as short spontaneous interviews during DevLille 2026 eventually revealed something bigger about the Java ecosystem.
 

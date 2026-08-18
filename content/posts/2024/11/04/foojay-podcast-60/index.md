@@ -29,13 +29,13 @@ As I was doing interviews at Devoxx in October, I met several of these people, a
 
 This podcast will teach you more about Devoxx, VoxxedDays, Devoxx4Kids, JobRunr, Timefold, OpenJDK Mobile, OpenJFX, Thymelead, htmx, and more!
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube zWs35DyF8sE >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,10 +43,10 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-2-guests}
----------------------
+Guests
+------
 
-### Stephan Janssen {#h3-3-stephan-janssen}
+### Stephan Janssen
 
 * <https://www.linkedin.com/in/stephanjanssen/>
 * <https://x.com/Stephan007>
@@ -54,19 +54,19 @@ Guests {#h2-2-guests}
 * <https://events.voxxeddays.com>
 * <https://www.devoxx4kids.org/>
 
-### Ronald Dehuysser {#h3-4-ronald-dehuysser}
+### Ronald Dehuysser
 
 * <https://www.linkedin.com/in/ronalddehuysser/>
 * <https://x.com/rdehuyss>
 * <https://www.jobrunr.io/en/>
 
-### Geoffrey De Smet {#h3-5-geoffrey-de-smet}
+### Geoffrey De Smet
 
 * <https://www.linkedin.com/in/ge0ffrey/>
 * <https://x.com/GeoffreyDeSmet>
 * <https://timefold.ai/>
 
-### Johan Vos {#h3-6-johan-vos}
+### Johan Vos
 
 * <https://www.linkedin.com/in/johanvos/>
 * <https://mastodon.social/@johanvos>
@@ -75,7 +75,7 @@ Guests {#h2-2-guests}
 * <https://github.com/openjdk/mobile>
 * <https://github.com/openjdk/jfx/>
 
-### Wim Deblauwe {#h3-7-wim-deblauwe}
+### Wim Deblauwe
 
 * <https://www.linkedin.com/in/wimdeblauwe/>
 * <https://x.com/wimdeblauwe>
@@ -83,8 +83,8 @@ Guests {#h2-2-guests}
 * <https://www.wimdeblauwe.com/books/taming-thymeleaf/>
 * <https://www.wimdeblauwe.com/projects/>
 
-Content {#h2-8-content}
------------------------
+Content
+-------
 
 00:00 Introduction
 

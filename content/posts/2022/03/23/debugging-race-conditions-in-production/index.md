@@ -30,8 +30,8 @@ For me personally, the biggest problem is the undefined behavior which can trigg
 
 Note that I used Java as the language of this tutorial but it should work similarly for other programming languages.
 
-Serialize Everything? {#h2-0-serialize-everything}
---------------------------------------------------
+Serialize Everything?
+---------------------
 
 Unfortunately, race conditions are remarkably hard to solve. Exclusive access or critical sections slow down application performance considerably. They block usage of computer resources and demolish our CPU cache utilization.
 
@@ -41,14 +41,14 @@ There are many optimizations and strategies for building performant multi-thread
 
 But the real problem is knowing that you have a race condition. How do you detect it?
 
-Detecting a Race Condition {#h2-1-detecting-a-race-condition}
--------------------------------------------------------------
+Detecting a Race Condition
+--------------------------
 
 There are some great race detection tools in the market. Some work with static analysis where they review the application code and show the risky areas. Others work during runtime and inspect the activity of the threads. They aren't as common since the debug environment isn't as representative of the "real world".
 
 Our production environments are remarkably complex and getting more complex every day. Detecting a race in that environment and verifying it is challenging...
 
-### Solving the Gap With Static Analysers {#h3-2-solving-the-gap-with-static-analysers}
+### Solving the Gap With Static Analysers
 
 The problem with static analyzers is often they often issue false-positive results. They point at a risk, not something that might occur in reality. As a result, developers often discount their output. What if you could verify a potential race?
 
@@ -80,8 +80,8 @@ Finally, we can use a snapshot with multiple captures:
 
 Notice the "Max Hit Count" below. It will trigger 20 separate hits. We can then review them and see the corresponding stack traces. If the path doesn't include synchronization or includes a bad monitor, there could be a problem here.
 
-The Race we don't Know... {#h2-3-the-race-we-don-t-know}
---------------------------------------------------------
+The Race we don't Know...
+-------------------------
 
 Concurrency is hard enough when we know what we're looking for. Tracking a race when we don't already have a clue about the direction is challenging.
 
@@ -101,8 +101,8 @@ The condition is:
 
 Notice the "NOT" operator in the beginning. The assumption is that only "Thread 1" makes mutations, so you will literally see the stack trace to the code that accesses this operation from a different thread. You can leave an action like that in a long running system for days (don't forget to update expiry in the advanced mode) and the process will trigger this if there's access to that block.
 
-TL;DR {#h2-4-tl-dr}
--------------------
+TL;DR
+-----
 
 We deploy modern programs on a scale like never before. Even a simple function on Lambda can change the dynamics of a complex deployment and trigger a synchronization problem that we can't see when debugging locally because of differences in connection times, environment, etc.
 

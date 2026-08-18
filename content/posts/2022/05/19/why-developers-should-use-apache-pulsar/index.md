@@ -37,8 +37,8 @@ If you are building at any scale or for maximum uptime, you will have to think a
 
 These considerations should also apply to your approach to streaming. When your application components have to work across multiple locations or services and scale locally or geographically, then your streaming implementation and message bus will have to support that same distributed model too.
 
-**Why Apache Pulsar?** {#h2-0-why-apache-pulsar}
-------------------------------------------------
+**Why Apache Pulsar?**
+----------------------
 
 The most common approach to application streaming is to use Apache Kafka. However, there are some important limitations that are now even more important in cloud-native applications. Apache Pulsar is an open source streaming project that was built at Yahoo as a streaming platform to solve for some of the limitations in Kafka. There are four areas where Pulsar is particularly strong: geo-replication, scaling, multitenancy, and queuing.
 
@@ -60,15 +60,15 @@ Just like Cassandra, Pulsar includes support for data center aware geo-replicati
 
 This architecture allows for multitenant infrastructure that can be shared across multiple users and organizations while isolating them from each other. The activities of one tenant should not be able to affect the security or the SLAs of other tenants. Like geo-replication, multitenancy is hard to graft on to a system that wasn't designed for it.
 
-**Why is streaming good for developers?** {#h2-1-why-is-streaming-good-for-developers}
---------------------------------------------------------------------------------------
+**Why is streaming good for developers?**
+-----------------------------------------
 
 Application developers can use streaming to share messages out to different components based on what's called a publish/subscribe pattern, or pub/sub for short. Applications that create data, called publishers, send messages to the message bus, which manages them in strict serial order and sends them out to applications that subscribe to them. The publishers and subscribers are not aware of each other, and the list of subscribers for any messages can evolve and grow over time.
 
 For streaming, it can be critical to consume messages in the same serialized order in which they were published. When those requirements are not as important, it's possible for Pulsar to use a queuing model where processing order is not important compared to managing activity. This means that Pulsar can be used to replace Advanced Message Queuing Protocol (AMQP) implementations that might use RabbitMQ or other message queuing systems.
 
-**Getting started with Apache Pulsar** {#h2-2-getting-started-with-apache-pulsar}
----------------------------------------------------------------------------------
+**Getting started with Apache Pulsar**
+--------------------------------------
 
 For those who want a more hands-on approach to Pulsar, you can create your own cluster. This will involve creating a set of machines that will host your Pulsar brokers and BookKeeper, and a set of machines that will run ZooKeeper. The Pulsar brokers manage the messages that are coming in and pushed out to subscribers, the BookKeeper installation provides storage for all persistent data created, and ZooKeeper is used to keep everything coordinated and consistent over time.
 
@@ -78,8 +78,8 @@ Once you have initialized the cluster, then you will have to deploy your BookKee
 
 If you are using Kubernetes and containers already, then deploying Pulsar is easier still. To start with, you will have to prepare your cloud provider storage settings by creating a YAML file with the right information to create persistent volumes; each cloud provider will require its own set up steps and details. Once cloud storage configuration is completed, you can use Helm to deploy your Pulsar cluster and associated ZooKeeper and BookKeeper machines into a Kubernetes cluster. This is an automated process that can make deploying Pulsar easier and reproducible.
 
-**Streaming data everywhere** {#h2-3-streaming-data-everywhere}
----------------------------------------------------------------
+**Streaming data everywhere**
+-----------------------------
 
 Looking ahead, application developers will have to think more about the data that their applications create and how this data is used for real-time activities based on streaming. Because streaming features often serve users and systems that are geographically dispersed, it's critical that streaming capabilities provide performance, replication, and resiliency across multiple locations or cloud platforms.
 

@@ -41,7 +41,7 @@ If you don't see a similar output, it means Java isn't installed. Sorry to make 
 
 In one of my previous articles, I explained how to build CLI applications with [PicoCLI](https://bazlur.ca/2024/07/18/creating-a-command-line-tool-with-jbang-and-picocli-to-generate-release-notes/). If you're interested, feel free to check that out. But in this article, we'll keep it simple, using plain Java with no external libraries.
 
-### Getting Started {#getting-started}
+### Getting Started
 
 First, create a new file called `hello.java`:
 
@@ -112,7 +112,7 @@ public class HelloCLI {
 ```
 
 
-### Key Point: Shebang Line {#key-point-shebang-line}
+### Key Point: Shebang Line
 
 Notice the first line: `#!/usr/bin/java --source 21`. This is the crucial part of the file, instructing the shell to use Java to run the script in source form using Java 21.
 
@@ -123,7 +123,7 @@ mv hello.java hello
 ```
 
 
-### Make It Executable {#make-it-executable}
+### Make It Executable
 
 Now, to make this script executable, run the following command:
 
@@ -170,7 +170,7 @@ Exiting... Goodbye!
 ```
 
 
-### Bonus Tip: Running From Anywhere {#bonus-tip-running-from-anywhere}
+### Bonus Tip: Running From Anywhere
 
 If you'd like to run this script from anywhere on your machine, simply move the file to the `/usr/local/bin/` folder:
 

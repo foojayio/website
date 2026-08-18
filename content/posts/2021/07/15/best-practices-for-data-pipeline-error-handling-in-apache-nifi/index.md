@@ -37,12 +37,12 @@ Lastly, we must concentrate on implementing best practices. In our case, this me
 
 This article focuses on this last point and what the author has learned working with NiFi developers. It gives you some actionable strategies that will increase the probability that your NiFi data pipeline function without unwanted interruptions and using quality data. However, these strategies are simple enough that the concepts can apply outside of the Apache NiFi, to other data pipelining or data flow tools, like Google Data Flow, AWS Kinesis, and Azure Data Factory.
 
-What is Apache NiFi {#h2-0-what-is-apache-nifi}
------------------------------------------------
+What is Apache NiFi
+-------------------
 
 Apache NiFi is an end-to-end platform that allows us to collect and act on our data pipeline in real-time. Its advantages are many. From providing a visual programming interface based on directed graphs that enables rapid development and testing, to the capacity to modify our NiFi pipeline at runtime, to its data provenance functionality that helps us track what happens with our data from beginning to end. As a consequence, businesses can start from a simple model that provides insights and results from the very beginning, and that expands into a comprehensive NiFi data pipeline.
 
-### Why Error Handling in Your Pipelines Is Important {#h3-1-why-error-handling-in-your-pipelines-is-important}
+### Why Error Handling in Your Pipelines Is Important
 
 Big data brings new opportunities, and also new challenges. Apache NiFi developers cite a variety of challenges with dataflows:
 
@@ -56,7 +56,7 @@ Big data brings new opportunities, and also new challenges. Apache NiFi develope
 
 All these cases are the sources of potential problems, and error handling can reduce their impact on business by taking preventive measures.
 
-### An Ounce of Error Handling Prevention Beats a Pound of Debugging Cure {#h3-2-an-ounce-of-error-handling-prevention-beats-a-pound-of-debugging-cure}
+### An Ounce of Error Handling Prevention Beats a Pound of Debugging Cure
 
 > **"There is an easy way and a hard way. The hard part is finding the easy way."**
 >
@@ -77,13 +77,13 @@ Considering the inbound data for a moment, we can immediately identify two poten
 
 Processes can also be the source of errors. However, not all these problems can be self-resolved. For example, wrong component designs and settings within the model can cause problems. An example is given in strategy 4.
 
-### Error Handling Strategies for Apache NiFi {#h3-3-error-handling-strategies-for-apache-nifi}
+### Error Handling Strategies for Apache NiFi
 
 The more complex the model, the more possible sources of problems exist. Forecasting every single potential problem is, of course, impossible. Identifying the most important ones and providing self-solving solutions can greatly reduce the operational uncertainty of our NiFi pipeline and improve its [robustness](https://en.wikipedia.org/wiki/Robustness_(computer_science)).
 
 To see how to do this analysis, we will consider four possible strategies: one external and three internal. They certainly do not cover all potential error scenarios, they are just examples that we can extrapolate from, and inform how to handle other potential failure domains.
 
-### Error Handling Strategy 1: Retry Approach {#h3-4-error-handling-strategy-1-retry-approach}
+### Error Handling Strategy 1: Retry Approach
 
 External sources are outside our control. Therefore, we neither know the root cause of the problem nor can we try to solve it. As a result, the best approach is to ask the source if it is back to normal or not. We will call this the retry approach.
 
@@ -94,7 +94,7 @@ An example would be when our model receives information from a database or data 
 
 Another way could be to create a counter, initialize it to one and then try the operation. If successful then the system continues with the process as normal. If it fails, the system increases the counter by one, checks if the counter has reached its limit, and if not, retries. If the counter reached its limit, then the system logs the error for later manual intervention.
 
-### Error Handling Strategy 2: Using Back Pressure {#h3-5-error-handling-strategy-2-using-back-pressure}
+### Error Handling Strategy 2: Using Back Pressure
 
 Apache NiFi provides a mechanism to manage data flow named back pressure. It consists of two thresholds, which define the maximum amount of data allowed to queue in the connector. This allows Apache NiFi to avoid data and memory overload.
 
@@ -115,7 +115,7 @@ In order to monitor the queue, we must hover over the scroll line on the connect
 
 By default, this prediction framework uses the ordinary least square method and a frequency interval of 1 minute. If we need more frequent predictions, we can set a different value for the nifi.components.status.snapshot.frequency property in the nifi.properties file.
 
-### Error Handling Strategy 3: Using Filters {#h3-6-error-handling-strategy-3-using-filters}
+### Error Handling Strategy 3: Using Filters
 
 In this case, we want to check the incoming or generated data and classify it according to its quality. For example, if we connect to our Astra database via the [Stargate Document API](https://docs.datastax.com/en/astra/docs/document-api.html) and we receive the incoming data in the form of a JSON dataset, one classification could be:
 
@@ -136,15 +136,15 @@ In Apache NiFi, this could be modeled using a set of components similar to the o
 
 **Important note:** if the data was generated outside and received by the system, we can still consider it an internal problem as the data is now within the model's realm.
 
-### Error Handling Strategy 4: Manual Intervention Required! {#h3-7-error-handling-strategy-4-manual-intervention-required}
+### Error Handling Strategy 4: Manual Intervention Required!
 
 Some problems just need our intervention, no way around it. An example would be an outdated setting in one of the Apache NiFi pipeline's processors. As such, the best solution is to alert your team and store the error information and data involved in a log, so you can proceed to solve the problem immediately. Issue tracking workflow automation via an issue tracker using [NiFi HTTP processors](https://ddewaele.github.io/http-communication-with-apache-nifi/) can be very helpful here, as can considering integration to Slack or PagerDuty for critical escalations.
 ![](14774005-screen-shot-2021-05-19-at-34942-pm-min.png)
 
 Logging errors for manual intervention with Apache Nifi
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 > **"Most improved things can be improved."**
 >
@@ -154,7 +154,7 @@ Using data flow and data pipeline tools, in general, has many benefits: from cle
 
 Error handling planning becomes more essential as models become more complex. Apache NiFi provides a wide variety of built-in tools such as backpressure, retry options, data provenance, and much more. When used properly, a design that incorporates an upfront approach to error management translates into faster recovery, less time wasted troubleshooting and sustained performance.
 
-### Learn More: {#h3-9-learn-more}
+### Learn More:
 
 * [Gentle Introduction to Apache NiFi for Data Flow... and Some Clojure](https://dzone.com/articles/gentle-introduction-to-apache-nifi-for-dataflow-an)
 * [Apache NiFi Overview](https://dzone.com/articles/apache-nifi-overview)

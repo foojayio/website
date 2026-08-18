@@ -26,12 +26,12 @@ This article is part of a series comparing different ways to implement asynchron
 
 I'll follow the same structure as previously.
 
-Laying out the work {#h2-0-laying-out-the-work}
------------------------------------------------
+Laying out the work
+-------------------
 
 Here's the setup, server- and client-side.
 
-### Server-side {#h3-1-server-side}
+### Server-side
 
 Here is how I integrate Thymeleaf and Alpine.js in the POM:
 
@@ -69,7 +69,7 @@ Here is how I integrate Thymeleaf and Alpine.js in the POM:
 
 It's similar to Vue's setup.
 
-### Client-side {#h3-2-client-side}
+### Client-side
 
 Here's the code on the HTML side:
 
@@ -95,12 +95,12 @@ Here's the code on the HTML side:
 
 As for the POM, it's the same code for Alpine as for Vue.
 
-The Alpine code {#h2-3-the-alpine-code}
----------------------------------------
+The Alpine code
+---------------
 
 We want to implement the same features as for Vue.
 
-### Our first steps into Alpine {#h3-4-our-first-steps-into-alpine}
+### Our first steps into Alpine
 
 The first step is to bootstrap the framework. We already added the link to our custom `alpine.js` file above.
 
@@ -128,7 +128,7 @@ Until now, it's very similar to Vue.js, a straight one-to-one mapping.
 
 Unlike Vue.js, Alpine doesn't seem to have [templates](https://github.com/alpinejs/alpine/issues/414). The official [UI components](https://alpinejs.dev/components) are not free. I found an [Open Source approach](https://github.com/markmead/alpinejs-component), but it's unavailable on WebJars.
 
-### Basic interactions {#h3-5-basic-interactions}
+### Basic interactions
 
 Let's implement the check of the complete checkbox.
 
@@ -156,7 +156,7 @@ Alpine.data('app', () => ({
 ```
 
 
-### Client-side model {#h3-6-client-side-model}
+### Client-side model
 
 You might wonder where the `todo` above comes from. The answer is: from the local model.
 
@@ -174,7 +174,7 @@ Alpine.data('app', () => ({
 2. Initialize the `todos` list;  
    at this point, it's read-only but we are going to update it the next section
 
-### Updating the model {#h3-7-updating-the-model}
+### Updating the model
 
 In this section, we will implement adding a new `Todo`.
 
@@ -219,8 +219,8 @@ Alpine.data('app', () => ({
 3. Get the response payload and add it to the local model of `Todo`
 4. Reset the `label` value
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 Alpine is very similar to Vue, with the notable difference of the lack of templating; components are only available via a price. All other features have an equivalent.
 

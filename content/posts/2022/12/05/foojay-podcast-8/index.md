@@ -26,8 +26,8 @@ For this first Foojay JUG Podcast, we are flying to Manchester in the UK!
 
 {{< youtube 8saJoj_4AFQ >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -35,19 +35,19 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
 * Jonathan Bullock ([@jonbullock](https://twitter.com/jonbullock), [@\[email protected\]](https://foojay.social/@jonbullock))
 * Nick Ebbitt ([@nickebbitt](https://twitter.com/nickebbitt))
 
-Podcast host {#h2-2-podcast-host}
----------------------------------
+Podcast host
+------------
 
 * Frank Delporte ([@frankdelporte](https://twitter.com/frankdelporte), [@\[email protected\]](https://foojay.social/@frankdelporte))
 
-Content {#h2-3-content}
------------------------
+Content
+-------
 
 * 00'00 Short intro and music
 * 00'15 Introduction about the topic of this podcast

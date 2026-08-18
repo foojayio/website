@@ -30,10 +30,10 @@ Please download and install [the Azure Toolkit for IntelliJ](https://aka.ms/azur
 
 We hope you like these features and enjoy the smooth experience with our Azure toolkit. So let us get started.
 
-Azure Toolkit for IntelliJ Improvements {#h2-0-azure-toolkit-for-intellij-improvements}
----------------------------------------------------------------------------------------
+Azure Toolkit for IntelliJ Improvements
+---------------------------------------
 
-### Azure Cosmos DB Support {#h3-1-azure-cosmos-db-support}
+### Azure Cosmos DB Support
 
 Database management support is always one of our key investment areas. [Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/introduction "Azure Cosmos DB") is a fully managed, serverless NoSQL database for high-performance applications of any size or scale.
 
@@ -47,7 +47,7 @@ For more details about these new features, please see [IntelliJ support for Azur
 
 Here is also a demonstration for you to get started.
 
-### Azure Virtual Machine Enhancement {#h3-2-azure-virtual-machine-enhancement}
+### Azure Virtual Machine Enhancement
 
 In [August's update](https://foojay.io/today/java-on-azure-tooling-update-august-2022/ "August’s update"), we have added the entry of 'Azure Virtual Machine' under 'Run On' targets list of run/debug configurations of IntelliJ IDEA.
 
@@ -72,7 +72,7 @@ Here is a quick demonstration.
 
 ![](VM-vm-ssh-sftp-new1.gif)
 
-### Azure SDK Reference Book Enhancement {#h3-3-azure-sdk-reference-book-enhancement}
+### Azure SDK Reference Book Enhancement
 
 The Azure SDKs are collections of libraries built to make it easier to use Azure services from your language of choice.
 
@@ -87,7 +87,7 @@ To use it, you just need to find the relevant Azure Service and right click with
 
 ![](Open-SDK-Book.gif)
 
-### Feedback and Suggestions {#h3-4-feedback-and-suggestions}
+### Feedback and Suggestions
 
 Please don't hesitate to [try our product](https://aka.ms/azuretoolkit/intellijidea "try our product")! Your feedback and suggestions are very important to us and will help shape our product in future.
 
@@ -97,7 +97,7 @@ Please don't hesitate to [try our product](https://aka.ms/azuretoolkit/intelliji
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new " Create a feature request or submit a bug") on our official GitHub Issues page
 * [Fill in our survey](https://microsoft.qualtrics.com/jfe/form/SV_b17fG5QQlMhs2up "Fill in our survey")
 
-### Resources {#h3-5-resources}
+### Resources
 
 Here is a list of links that are helpful to learn Java on Azure Tooling,
 

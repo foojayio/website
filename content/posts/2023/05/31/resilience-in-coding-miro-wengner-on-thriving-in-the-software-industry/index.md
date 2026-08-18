@@ -24,8 +24,8 @@ frozen: false
 
 In this insightful discussion, we sit down with Miro Wengner, an accomplished software engineer with a deep-rooted affinity for Java. Miro shares his professional journey, highlights the significant challenges in the field, and reflects on the key moments that shaped his career.  
 
-Profile {#h2-0-profile}
------------------------
+Profile
+-------
 
 * 🐦 Twitter: <https://twitter.com/miragemiko>
 * 👔 LinkedIn: <https://www.linkedin.com/in/mwengner/>

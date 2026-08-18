@@ -24,12 +24,12 @@ This is it. The [debugging book is live](https://www.amazon.com/dp/1484290410/).
 
 I also finished recording and editing the [entire course](https://course.debugagent.com/).
 
-There are 50 total videos which total in 7 hours... I also recorded additional videos for the two other free courses [for beginners](https://www.youtube.com/watch?v=1Bum2gYETUQ&amp;list=PL8GhfcywW9YMucwRw2IbpeCp1FBMEgsmk) and for [modern Java](https://www.youtube.com/watch?v=3oNT_VRrfqE&amp;list=PL8GhfcywW9YNuNHrG0FAg5xiprfYcYyuL).
+There are 50 total videos which total in 7 hours... I also recorded additional videos for the two other free courses [for beginners](https://www.youtube.com/watch?v=1Bum2gYETUQ&list=PL8GhfcywW9YMucwRw2IbpeCp1FBMEgsmk) and for [modern Java](https://www.youtube.com/watch?v=3oNT_VRrfqE&list=PL8GhfcywW9YNuNHrG0FAg5xiprfYcYyuL).
 
 So keep an eye on those!
 
-Renderers {#h2-0-renderers}
----------------------------
+Renderers
+---------
 
 In today's video we discuss one of my favorite obscure IDE features: renderers. Very few people are aware of them. I explained them in the past but I feel I didn't properly explain why they are so much better than any other alternative. This time I think I got the explanation right.
 
@@ -39,8 +39,8 @@ If you work with JPA or any elaborate API you should check this out, I think the
 
 <br />
 
-Transcript {#h2-1-transcript}
------------------------------
+Transcript
+----------
 
 Welcome back to the sixth part of debugging at scale where the bugs come to die.  
 
@@ -48,7 +48,7 @@ In this section we discuss the watch area. The watch is one of the most importan
 
 Yet we don't give it nearly as much attention as we should. In this segment we'll discuss a few of the powerful things we can do in the watch area and how we can extend it to support some fantastic capabilities.
 
-### Mute Renderers {#h3-2-mute-renderers}
+### Mute Renderers
 
 Let's start with mute renderers which lets us improve the performance of the watch area. Before we discuss that I'd like to talk about the watch area itself. This is the watch area. In it, we can see most of the visible variables for the current stack frame and their values. We can expand entries within the watch area. Every variable value or expression we have in the watch is an entry. We can add arbitrary elements to the watch and even embed watch expressions directly into the IDE user interface.
 
@@ -58,7 +58,7 @@ In the right click menu we have the mute renderers option. By checking this opti
 
 If we want to see the value we can click the toString label and the value is extracted dynamically. Notice that this only impacts the objects. Primitives, arrays etc. are unaffected by this feature.
 
-### Customize Rendering {#h3-3-customize-rendering}
+### Customize Rendering
 
 Rendering is the process of drawing the element values in the watch. To get started with rendereres we need to customize them through the right click menu here. This launches the renderer customization dialog which lets us do amazing things in intellij.
 
@@ -70,7 +70,7 @@ We can include hex values for primitives by default which is a feature I always 
 
 But the real power of this dialog is in the second tab. The java type renderer which is the next subject.
 
-### Data Rendering {#h3-4-data-rendering}
+### Data Rendering
 
 We can go so much further with renderers. You might recall the visit objects I've shown before. This is from a standard Spring Boot demo called pet clinic. Spring Boot has the concept of a Repository which is an interface that represents a datasource. Often a repository is just a table, it can do more, but it has a strong relation to an underlying SQL table, and it helps to think about it in these terms.  
 
@@ -96,7 +96,7 @@ We can optionally check if there's a reason to show the expand widget. In this c
 
 This is truly spectacular, and you can't fake it with a `toString()` call...
 
-### Doing it for Everyone {#h3-5-doing-it-for-everyone}
+### Doing it for Everyone
 
 That was a cool feature right? But it's so annoying to configure all of that stuff for every project. Here we see the same renderer from before, you'll notice that everything looks exactly the same. The numbering, the list of entities etc. But when we open the list of renderers it's blank, there are no renderers!
 
@@ -114,8 +114,8 @@ We add an import to the renderer then we scroll down and we added simple rendere
 
 If you're building libraries or frameworks you can integrate this to make the debugging experience easier to your users without impacting the behavior of the `toString()` methods or similar semantics.
 
-Finally {#h2-6-finally}
------------------------
+Finally
+-------
 
 In the next video we'll discuss threading issues. Their reputation as "hard to debug" isn't always justified.
 

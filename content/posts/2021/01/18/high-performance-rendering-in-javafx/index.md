@@ -36,14 +36,14 @@ All of the source code developed for this article can be found on [GitHub](https
 
 ![1M Particles in JavaFX](https://raw.githubusercontent.com/AlmasB/git-server/master/storage/images/javafx_render_particles.png)
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 There is a number of use cases that involve rendering a huge number of individual pixels as quickly as possible, including point cloud visualizations, particle effects and simulations. As mentioned above, in JavaFX, developers have several approaches (techniques) of rendering pixels to the screen.
 
 In this section, we provide a brief overview of these techniques. In the next section, we specify how the evaluation was set up. Thereafter, the evaluation results are provided with a brief discussion on the limitations of these findings. Finally, we discuss how the evaluation can be improved in future iterations.
 
-### Canvas {#h3-1-canvas}
+### Canvas
 
 The [Canvas](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/canvas/Canvas.html) API has been available since the early versions of JavaFX and is the most commonly used API. It is both intuitive and simple to use as it provides command-style methods to manipulate the associated [GraphicsContext](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/canvas/GraphicsContext.html), simulating [immediate rendering mode](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-render-multi-thread-render). One considerable limitation of Canvas is that only one thread can use its graphics context at a time. Given this limitation, we expect Canvas to be slowest in our evaluation. Sample code:
 
@@ -56,7 +56,7 @@ g.fillRect(x, y, 1, 1);
 ```
 
 
-### PixelBuffer CPU {#h3-2-pixelbuffer-cpu}
+### PixelBuffer CPU
 
 The [PixelBuffer](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/image/PixelBuffer.html) API has been introduced in JavaFX 13 and allows drawing into a [WritableImage](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/image/WritableImage.html) without copying the pixel data. Unlike the Canvas API, this buffer does not provide any means of [rasterization](https://www.scratchapixel.com/lessons/3d-basic-rendering/rasterization-practical-implementation/rasterization-stage). In other words, the developer is responsible for converting shapes into pixels, which is a significant limitation of this approach. In the following sample code, there are two major differences, when compared to the Canvas API. First, colors are represented as a single [ARGB](https://docs.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/ms653055(v=vs.95)?redirectedfrom=MSDN) `int` and second, we need to manually update the buffer once rendering is done. Sample code:
 
@@ -83,7 +83,7 @@ pixelBuffer.updateBuffer(b -> null);
 ```
 
 
-### PixelBuffer AWT {#h3-3-pixelbuffer-awt}
+### PixelBuffer AWT
 
 As can be seen from above, in PixelBuffer, there is no high-level API to draw arbitrary shapes. Clearly, this is not ideal since the developer would need to reimplement many of the rasterization methods. To avoid this, we can make use of AWT [BufferedImage](https://docs.oracle.com/en/java/javase/15/docs/api/java.desktop/java/awt/image/BufferedImage.html) and its [Graphics2D](https://docs.oracle.com/en/java/javase/15/docs/api/java.desktop/java/awt/Graphics2D.html) API, since both BufferedImage and PixelBuffer can share the same pixel data. An [example implementation](https://github.com/mipastgt/JFXToolsAndDemos/blob/master/jfxtools-awtimage/src/main/java/de/mpmediasoft/jfxtools/awtimage/AWTImage.java) has been provided by [Michael Paus](https://github.com/mipastgt). The same implementation is used in our evaluation with negligble changes, which were required to incorporate the code into our framework. Sample code:
 
@@ -99,7 +99,7 @@ image.getPixelBuffer().updateBuffer(b -> null);
 ```
 
 
-### PixelBuffer GPU {#h3-4-pixelbuffer-gpu}
+### PixelBuffer GPU
 
 Having seen preliminary tests with the three techniques above, [Dirk Lemmermann](https://github.com/dlemmermann) and [Tom Schindl](https://github.com/tomsontom) have hinted that moving the drawing algorithm to GPU would improve performance. It is known that running particles on the GPU can significantly outperform the CPU approach, particularly in games. It is not suprising given modern graphics cards, such as NVIDIA RTX 2080, have 2944 CUDA cores, capable of [GPGPU](http://computing.help.inf.ed.ac.uk/gpgpu-computing). However, by using only public API in JavaFX we do not have a straightforward way of accessing the GPU video memory. As a result, our approach can be described as follows:
 
@@ -134,7 +134,7 @@ int[] pixels = gpuKernel.get(gpuKernel.pixels);
 ```
 
 
-### Evaluation {#h3-5-evaluation}
+### Evaluation
 
 The model used for the evaluation is a particle system with 1M (`1_000_000`) particles. Conceptually, each particle is defined as follows:
 
@@ -169,8 +169,8 @@ The evaluation was performed on a 6-core Intel i9-8950HK, running at a fixed 2.6
 
 No active foreground applications, except for the IntelliJ IDE, were running at the time of the evaluation.
 
-Results {#h2-6-results}
------------------------
+Results
+-------
 
 The evaluation results are available from the table below, which shows the amount of time that each approach took to compute a single frame. The values are given to 2d.p. in milliseconds. Each column provides the following information:
 
@@ -194,8 +194,8 @@ We should be mindful that the results of the evaluation are limited to the imple
 
 Another potential limitation is the particle system model implementation, which could have affected the runtime performance of these techniques. Whilst the same model was used for each technique, it is not clear whether the model architecture could have favored one approach over the other.
 
-Conclusion {#h2-7-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, we evaluated four different approaches to render individual pixels to the screen in JavaFX. By appealing to their runtime performance, the evaluation revealed that the PixelBuffer approach in conjunction with running on GPU is fastest among the evaluated techniques.
 
@@ -203,7 +203,7 @@ It would be interesting to see if custom rasterization methods, such as drawing 
 
 A further evaluation of such an approach against existing state-of-the-art would be needed to provide a relative ranking of techniques in terms of performance.
 
-Acknowledgements {#h2-8-acknowledgements}
------------------------------------------
+Acknowledgements
+----------------
 
 Many thanks to the members of the JavaFX community on Twitter who have pointed me towards relevant sources of information. If you spot an error in implementation or have suggestions on how to improve performance, please contact me on Twitter.

@@ -25,7 +25,7 @@ From that point on, I submitted the talk at meetups and conferences, where it wa
 
 It allowed me to update the demo with version 16 of the JDK. In this blog post, I want to share some findings regarding the security changes regarding changing a field's type across JDK versions.
 
-### Fun with JDK 8 {#h3-0-fun-with-jdk-8}
+### Fun with JDK 8
 
 Let's start with the JDK. Here's a quiz I show early in my talk:
 
@@ -66,7 +66,7 @@ Exception in thread "main" java.lang.NoSuchFieldException: type
 
 The exception explicitly mentions line 12: `Field.class.getDeclaredField("type")`. It seems as if the implementation of the `Field` class changed.
 
-### Looking at the Source Code of JDK 16 {#h3-1-looking-at-the-source-code-of-jdk-16}
+### Looking at the Source Code of JDK 16
 
 Let's look at the source code in JDK 16:
 
@@ -122,7 +122,7 @@ static {
 
 For this reason, none of the attributes of `Field` are accessible via reflection!
 
-### An Alternative Way to Change the Type {#h3-2-an-alternative-way-to-change-the-type}
+### An Alternative Way to Change the Type
 
 Since version 9, the JDK offers a new API to access fields as part of the `java.lang.invoke` package.
 
@@ -183,7 +183,7 @@ public Field getDeclaredField(String name)
 
 Since the JDK code returns a copy of the field, the change happens on this copy, and we cannot change the original field's type.
 
-### Conclusion {#h3-3-conclusion}
+### Conclusion
 
 Though Java touts itself as a statically-typed language, version 8 of the JVM allows us to change the type at runtime dynamically. One of my favorite jokes during the talk mentioned above is that though we have learned that Java is statically-typed, it is dynamically-typed in reality.
 

@@ -115,8 +115,8 @@ More information:
  <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
 </figure>
 
-OmniFish - Jakarta EE experts {#h2-0-omnifish-jakarta-ee-experts}
------------------------------------------------------------------
+OmniFish - Jakarta EE experts
+-----------------------------
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

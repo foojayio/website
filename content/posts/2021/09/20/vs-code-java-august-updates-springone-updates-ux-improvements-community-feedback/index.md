@@ -25,8 +25,8 @@ In this article, we are going to share some exciting updates from the SpringOne 
 
 When it comes to Java development, we always keep Spring developers in mind. In this year's [SpringOne conference](https://devblogs.microsoft.com/java/join-microsoft-at-springone-2021/ "SpringOne conference"), we shared an update on our Spring tooling support in Visual Studio Code, and showcased various Spring related features in two breakout sessions.
 
-Spring Support on GitHub Codespaces {#h2-0-spring-support-on-github-codespaces}
--------------------------------------------------------------------------------
+Spring Support on GitHub Codespaces
+-----------------------------------
 
 We are excited to share that Spring framework is fully supported on [GitHub Codespaces](https://aka.ms/Bootiful-Tools "GitHub Codespaces") via partnership with VMWare. This means developers can develop a Spring application seamlessly in a browser-based environment without installing anything on the local machine. Here is a quick demo of starting a Spring Boot application on Codespaces.
 
@@ -34,8 +34,8 @@ We are excited to share that Spring framework is fully supported on [GitHub Code
 
 We had a full demo-focused session at SpringOne to talk about Spring on GitHub Codespaces. If you are interested in this session, [follow the link](https://aka.ms/Bootiful-Tools "follow the link") here to watch the whole recording.
 
-Spring Tooling on Visual Studio Code {#h2-1-spring-tooling-on-visual-studio-code}
----------------------------------------------------------------------------------
+Spring Tooling on Visual Studio Code
+------------------------------------
 
 In addition to Spring support on GitHub Codespaces, we have also delivered a session to talk about how various Spring tools are supported in Visual Studio Code in general. This includes a full demonstration of how to start a Spring Boot application from scratch as well as opening and running an existing sample project such as Spring PetClinic. We also touched upon Visual Studio Code's rich extension selection that allows developer to deploy Spring applications to cloud directly. You can watch the complete session [using this link](https://aka.ms/Bootiful-Tools "using this link").
 
@@ -43,8 +43,8 @@ Spring ecosystem is a critical part of the Java application development and we w
 
 Apart from Spring updates, we have made various improvements on user experience in the latest release. To see those new features, please make sure to have the [latest Expansion Pack](https://foojay.io/ "latest Expansion Pack") for Java installed.
 
-Maven Project Creation {#h2-2-maven-project-creation}
------------------------------------------------------
+Maven Project Creation
+----------------------
 
 Previously, when creating a new Maven project from the Explorer, a dialog always pops up in Visual Studio Code and asks the developer if they want to directly open the project. However, we realize in some scenarios developers might want different actions.
 
@@ -56,8 +56,8 @@ To address this, we have added a new setting that allows developer to customize 
 
 ![](mavenprojectopen.png)
 
-New Java File Creation {#h2-3-new-java-file-creation}
------------------------------------------------------
+New Java File Creation
+----------------------
 
 "New File Contribution Point" is a new feature that came from recent release of Visual Studio Code. We have adopted this feature to make Java file creation workflow more intuitive and user-friendly
 
@@ -69,7 +69,7 @@ As part of product improvement process, we recently launched a [Twitter poll](ht
 
 * **Support for large projects.** We are aware of the performance issues when it comes to complicated project strcture, and we have been working diligently to identify those performance bottlenecks. As we shared in our roadmap in June, this is one of our areas of focus for the next few months.
 * **Gradle support.** Gradle is one of the top asks from the community. We are close to a milestone that aims to provide much better Gradle support. Please stay tuned.
-* **Kotlin.** We are excited to learn that developers are using Visual Studio Code for Kotin development. While we do not have immediate plan to support Kotlin officially, we do already have some great choices from the community (Such as [Code Runner extension](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner "Code Runner extension") and [Kotlin Language extension](https://marketplace.visualstudio.com/items?itemName=mathiasfrohlich.Kotlin "Kotlin Language extension")). You can see more Kotlin related extensions[via this link](https://marketplace.visualstudio.com/search?term=kotlin&amp;target=VSCode&amp;category=All%20categories&amp;sortBy=Relevance " via this link").
+* **Kotlin.** We are excited to learn that developers are using Visual Studio Code for Kotin development. While we do not have immediate plan to support Kotlin officially, we do already have some great choices from the community (Such as [Code Runner extension](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner "Code Runner extension") and [Kotlin Language extension](https://marketplace.visualstudio.com/items?itemName=mathiasfrohlich.Kotlin "Kotlin Language extension")). You can see more Kotlin related extensions[via this link](https://marketplace.visualstudio.com/search?term=kotlin&target=VSCode&category=All%20categories&sortBy=Relevance " via this link").
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to leave us feedback
 

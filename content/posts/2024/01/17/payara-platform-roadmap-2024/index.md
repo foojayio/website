@@ -30,12 +30,12 @@ You can also [watch the Payara Roadmap 2024 presented](https://www.crowdcast.io/
 
 <br />
 
-Jakarta EE, MicroProfile \& Payara Platform in 2023 - Recap {#h2-0-jakarta-ee-microprofile-payara-platform-in-2023-recap}
--------------------------------------------------------------------------------------------------------------------------
+Jakarta EE, MicroProfile \& Payara Platform in 2023 - Recap
+-----------------------------------------------------------
 
 We've had a busy year with some exciting new products and features being launched.
 
-### Payara 6 is Born! {#h3-1-payara-6-is-born}
+### Payara 6 is Born!
 
 In March 2023 we released [Payara 6 Enterprise](https://www.payara.fish/page/payara-enterprise-downloads/), and MicroProfile 6 Community and Enterprise editions, which are Jakarta EE 10 certified and compiled with JDK 11, along with the related tooling support.​
 
@@ -43,7 +43,7 @@ In May 2023, we made the Payara 5 to 6 upgrade tooling and support available, in
 
 And by June 2023, Payara Cloud also supported Payara 6.
 
-### There's more - JDK 21, Payara Cloud, MicroProfile \& Payara Starter {#h3-2-there-s-more-jdk-21-payara-cloud-microprofile-payara-starter}
+### There's more - JDK 21, Payara Cloud, MicroProfile \& Payara Starter
 
 In August 2023, we launched [Payara Cloud free trial](https://www.payara.fish/products/payara-cloud/). ​
 
@@ -55,23 +55,23 @@ Then at the end of the year, [MicroProfile 6.1](https://blog.payara.fish/whats-n
 
 [Our last release of the year](https://blog.payara.fish/whats-new-in-the-december-2023-payara-platform-release) is supporting JDK21 on Payara 6 Enterprise and providing Micro Maven Tools.
 
-### Payara Starter​ {#h3-3-payara-starter}
+### Payara Starter​
 
 At the end of 2023, we launched [our new Payara Starter](https://start.payara.fish/) application which simplifies the process of starting new projects on the Payara Platform with a user friendly interface to generate Payara Server or Micro Sample projects, and we continued to provide new functionality for Payara Cloud.​
 ![](image-2-1024x576.png)
 
 [](https://info.payara.fish/hubfs/Slide4.jpg)
 
-Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud {#h2-4-summary-of-2023-jakarta-ee-microprofile-payara-cloud}
------------------------------------------------------------------------------------------------------------------------
+Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud
+----------------------------------------------------------
 
-### Jakarta EE 10​ {#h3-5-jakarta-ee-10}
+### Jakarta EE 10​
 
 * Major release with backwards incompatible changes
 * New functionality in over 20 component specifications
 * New features for building modernised, simplified, and lightweight cloud native Java applications
 
-### ​Payara 6 and MicroProfile 6 ​ {#h3-6-payara-6-and-microprofile-6}
+### ​Payara 6 and MicroProfile 6 ​
 
 * Jakarta EE 10 certified runtime and runs on JDK 11, JDK 17 and JDK 21
 * Affects all Jakarta EE 8 and below applications
@@ -81,7 +81,7 @@ Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud {#h2-4-summary-of-202
 * MicroProfile Telemetry added and replaces MicroProfile OpenTracing
 * Allows products to be certified on Java SE 11 or higher
 
-### Payara Cloud {#h3-7-payara-cloud}
+### Payara Cloud
 
 [![payara cloud roadmap 1](https://blog.payara.fish/hs-fs/hubfs/payara%20cloud%20roadmap%201.png?width=307&height=310&name=payara%20cloud%20roadmap%201.png)](https://info.payara.fish/hubfs/payara%20cloud%20roadmap%201.png)
 
@@ -97,14 +97,14 @@ Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud {#h2-4-summary-of-202
 * PAAS
 * [Free 15 days trial](https://www.payara.fish/products/payara-cloud/)
 
-2024 and Beyond {#h2-8-2024-and-beyond}
----------------------------------------
+2024 and Beyond
+---------------
 
-### Payara Platform Vision {#h3-9-payara-platform-vision}
+### Payara Platform Vision
 
 ![](image-3-1024x576.png)
 
-### [](https://info.payara.fish/hubfs/Slide9.jpg)Payara Core {#h3-10-payara-core}
+### [](https://info.payara.fish/hubfs/Slide9.jpg)Payara Core
 
 * Foundation of the platform
 * Single JVM runtime - MicroProfile X and Jakarta EE X
@@ -119,7 +119,7 @@ Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud {#h2-4-summary-of-202
 
 ![](image-4.png)
 
-### [](https://info.payara.fish/hubfs/payara%20Core.png)Payara Server {#h3-11-payara-server}
+### [](https://info.payara.fish/hubfs/payara%20Core.png)Payara Server
 
 **Payara Server is focused on:**​
 
@@ -129,8 +129,8 @@ Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud {#h2-4-summary-of-202
 * Managing and Monitoring capabilities
 * Adapting to new architectures and deployment infrastructure such as cloud and containers
 
-![Slide13](https://blog.payara.fish/hs-fs/hubfs/Slide13.jpg?width=1280&height=720&name=Slide13.jpg)Jakarta EE 11 {#h2-12-jakarta-ee-11}
----------------------------------------------------------------------------------------------------------------------------------------
+![Slide13](https://blog.payara.fish/hs-fs/hubfs/Slide13.jpg?width=1280&height=720&name=Slide13.jpg)Jakarta EE 11
+----------------------------------------------------------------------------------------------------------------
 
 Previous work on Jakarta EE has focused on establishing a framework and foundation for future innovation so as to make Jakarta EE a solid basis for open source developers to build on. ​
 
@@ -169,13 +169,13 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 
 ​There are also some new specifications which are candidates for inclusion, such as Jakarta Data 1.0, Jakarta MVC 3.0 and Jakarta NoSQL 1.0, which you will also have seen in our roadmap.​
 
-​Payara Developer Tools​ {#h2-13-payara-developer-tools}
---------------------------------------------------------
+​Payara Developer Tools​
+------------------------
 
 ![](image-5-1024x576.png)
 
-[](https://info.payara.fish/hubfs/Slide16.jpg)**Payara Connectors**​ {#h2-14-payara-connectors}
------------------------------------------------------------------------------------------------
+[](https://info.payara.fish/hubfs/Slide16.jpg)**Payara Connectors**​
+--------------------------------------------------------------------
 
 * Supports additional non-standard connectors to other Enterprise infrastructure e.g. Kafka, JMS Providers, Config Sources, Notification Sinks, Security providers.
 * Usable across Payara Core, Payara Server and Payara Cloud.
@@ -186,13 +186,13 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 * Deployment of applications to any of the other Payara products.
 * Support for other standard developer tool chains including; CI/CD tools, Maven, Gradle, test frameworks like Arquillian.
 
-Payara Cloud PaaS and Project Aquarium​ {#h2-15-payara-cloud-paas-and-project-aquarium}
----------------------------------------------------------------------------------------
+Payara Cloud PaaS and Project Aquarium​
+---------------------------------------
 
 ![](image-6-1024x576.png)
 
-[](https://info.payara.fish/hubfs/Slide18.jpg) {#h2-16-}
---------------------------------------------------------
+[](https://info.payara.fish/hubfs/Slide18.jpg)
+----------------------------------------------
 
 We currently offer **Payara Cloud PaaS, which**is a fully managed installation of Payara Cloud on Payara managed infrastructure (on Azure). It is billed to the customer based on usage. ​
 
@@ -232,8 +232,8 @@ Normally, a developer has to manually manage all the related operations, like pr
 * Azure Edition
 * Native K8s Edition - OpenShift, Rancher, CharmedK8s
 
-Summary {#h2-17-summary}
-------------------------
+Summary
+-------
 
 * Payara Platform is first for Jakarta EE, leveraging all the benefits of separating the application from the runtime
 * Developers write business logic, and Payara Platform manages the infrastructure and simplifies deployment
@@ -246,7 +246,7 @@ Summary {#h2-17-summary}
   * **Payara Cloud**
 * We have exciting plans for all of our products with a jam-packed roadmap for the coming years!
 
-[Watch the full Payara 2024 Roadmap presentation by clicking here.](https://www.crowdcast.io/c/virtualpayaraconference/xstAZ) {#h2-18-watch-the-full-payara-2024-roadmap-presentation-by-clicking-here}
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[Watch the full Payara 2024 Roadmap presentation by clicking here.](https://www.crowdcast.io/c/virtualpayaraconference/xstAZ)
+-----------------------------------------------------------------------------------------------------------------------------
 
 <br />

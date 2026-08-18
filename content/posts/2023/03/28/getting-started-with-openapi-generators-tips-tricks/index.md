@@ -33,8 +33,8 @@ Some of those tools are open source, while others have a pro license. I won't go
 
 **In this article, we'll dive into tips and tricks on how to quickly get productive with the OpenAPI Generators project so you too can work with them and generate cool stuff. Tips follow each other, in order of importance (for me).**
 
-Using the Debugging Flags {#h2-0-using-the-debugging-flags}
------------------------------------------------------------
+Using the Debugging Flags
+-------------------------
 
 Typically, if you're playing with a generator, you either want to generate a model file (your data structure), an operation file (your logic), or a supporting file (basically anything else, READMEs, docs, ...).
 
@@ -90,8 +90,8 @@ I won't print the entire output here because it's huge, but as part of the outpu
 ```
 
 
-Running and Debugging a Generator {#h2-1-running-and-debugging-a-generator}
----------------------------------------------------------------------------
+Running and Debugging a Generator
+---------------------------------
 
 Whether you want to play with an existing generator or [create a new one](https://openapi-generator.tech/docs/new-generator/ "create a new one"), the existing documentation tends to offer you to compile and run the generators using the generic `./mvnw clean package` followed by `./bin/generate-samples.sh bin/configs/spring-boot.yaml` (replace with the file you want to use) command.
 
@@ -137,8 +137,8 @@ Pick your generator name, input yaml file and output folder (the same as in the 
 
 Now you can go in the generator's `CodeGen` file , (for example `JMeterClientCodegen` if your generator name is `jmeter` ) and set breakpoints where you want 😊.
 
-Setting Breakpoints in the Right Locations {#h2-2-setting-breakpoints-in-the-right-locations}
----------------------------------------------------------------------------------------------
+Setting Breakpoints in the Right Locations
+------------------------------------------
 
 As described above already OpenAPI generators take a specification file, transform it into a set of objects in memory, and use those objects to generates code / files using mustache template files.
 
@@ -166,8 +166,8 @@ Above, a screenshot of a debug of the model, showing the content of the "allMode
 
 Once you're in there, you can dive into the data and find out what you want to do with it.
 
-Extending the Default Generator {#h2-3-extending-the-default-generator}
------------------------------------------------------------------------
+Extending the Default Generator
+-------------------------------
 
 (Thanks [Beppe](https://twitter.com/beppecatanese "Beppe") for the tip!)
 
@@ -196,8 +196,8 @@ Which you could then use inside a `README.mustache` template, for example:
 ```
 
 
-Generating Custom Lambdas {#h2-4-generating-custom-lambdas}
------------------------------------------------------------
+Generating Custom Lambdas
+-------------------------
 
 One of the super powers of mustache is its lambdas, which you can declare in the templates.
 
@@ -251,8 +251,8 @@ Two things happen here:
 
 Once that is done, I can use it inside my `api.mustache` template! For example: `{{#lambda.doubleMustache}}{{path}}{{/lambda.doubleMustache}}`
 
-Finding OpenAPI Spec Files for Testing {#h2-5-finding-openapi-spec-files-for-testing}
--------------------------------------------------------------------------------------
+Finding OpenAPI Spec Files for Testing
+--------------------------------------
 
 One of my struggles when playing around with OpenAPI Generators is to find files to test stuff with. After a little while, sample files and the [PetStore](https://petstore3.swagger.io/ "PetStore") don't cut it any more.
 
@@ -267,8 +267,8 @@ Armed with those two, it's much easier to go on and try things out.
 
 Hope this helps you too!
 
-Conclusion {#h2-6-conclusion}
------------------------------
+Conclusion
+----------
 
 I hope those tips will help you hit the ground running with OpenAPI generators.
 

@@ -24,8 +24,8 @@ frozen: false
 
 ![](CLAS12-side.png)
 
-Background {#h2-0-background}
------------------------------
+Background
+----------
 
 The CLAS12 detector at Jefferson Lab conducts nuclear physics experiments to study the structure of nucleons and new particle states.
 
@@ -43,8 +43,8 @@ The figure below shows two reactions where missing nucleon was identified throug
 
 ![](https://userweb.jlab.org/~gavalian/figures/physics_scan.png)
 
-Implementation {#h2-1-implementation}
--------------------------------------
+Implementation
+--------------
 
 We used the Deep Netts library to implement our neural networks to do track classification, using Multi-Layer Perceptron (MLP) Neural Network (aka [Feed Forward Neural Network](https://www.deepnetts.com/apidocs/deepnetts/net/FeedForwardNetwork.html "Feed Forward Neural Network")).
 
@@ -83,8 +83,8 @@ neuralNet.train(trainingSet);
 ```
 
 
-Our Experience {#h2-2-our-experience}
--------------------------------------
+Our Experience
+--------------
 
 One of the attractive points of Deep Netts is that it is written in pure Java which makes it very easy to deploy on any platform.
 
@@ -94,8 +94,8 @@ One of the weak parts of Community Edition of Deep Netts is multi-threading supp
 
 In our experience, Deep Netts is definitely the best starting place for someone trying to implement platform-independent neural networks software for small or big projects.
 
-Links {#h2-3-links}
--------------------
+Links
+-----
 
 * Full reseach paper [CLAS12 Track Reconstruction with Artificial Intelligence](https://arxiv.org/abs/2202.06869 "CLAS12 Track Reconstruction with Artificial Intelligence ")
 * [Thomas Jefferson National Accelerator Facility](https://www.jlab.org/ "Thomas Jefferson National Accelerator Facility ")

@@ -26,8 +26,8 @@ WebAssembly is the new implementation of an old idea. While WebAssembly is meant
 
 In this post, I want to explore how it can work.
 
-Prerequisite {#h2-0-prerequisite}
----------------------------------
+Prerequisite
+------------
 
 Running WebAssembly is a *beta* feature and requires using `containerd`. To enable `containerd`, go to the Docker Desktop dashboard, then Settings \> Features in development \> Beta features \> Use containerd for storing and pulling image.
 
@@ -35,8 +35,8 @@ Be warned that enabling `containerd` previously broke one of my Kubernetes demos
 
 I want to compare regular images with WebAssembly; hence, I require a project that can compile to both native code and WASM. For this reason, I chose to use the Rust language. I'll have a single simple project with two Dockerfiles: one that compiles to native, the other that compiles to WASM.
 
-Building locally {#h2-1-building-locally}
------------------------------------------
+Building locally
+----------------
 
 Here's the Rust expected Hello World:
 
@@ -59,8 +59,8 @@ The file is relatively small:
 
     -rwxr-xr-x  1 nico  staff   2.0M Jun  4 15:44   wasm-native.wasm
 
-Building the basic Docker images {#h2-2-building-the-basic-docker-images}
--------------------------------------------------------------------------
+Building the basic Docker images
+--------------------------------
 
 The `Dockerfile` that builds the Webassembly image is the following:
 
@@ -136,8 +136,8 @@ The Webassembly image is about one-third of the native binary package.
 
 We cheat a bit because we add the WASM runtime... at runtime.
 
-Building more complex images {#h2-3-building-more-complex-images}
------------------------------------------------------------------
+Building more complex images
+----------------------------
 
 Let's see how we can add parameters to the binary and update the code accordingly:
 
@@ -166,8 +166,8 @@ docker-wasm        1.1      41e38b68f4e4   39 minutes ago   2.63MB
 ```
 
 
-Executing HTTP calls? {#h2-4-executing-http-calls}
---------------------------------------------------
+Executing HTTP calls?
+---------------------
 
 With this, it's easy to get carried away and start thinking big: what if we could execute HTTP calls?
 
@@ -303,8 +303,8 @@ I didn't fiddle with the optimization of the native image. However, it would be 
 
 There's no chance to implement an Axum server, though.
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 I implemented a couple of WASM Docker images in this post, from the most straightforward Hello World to an HTTP client.
 

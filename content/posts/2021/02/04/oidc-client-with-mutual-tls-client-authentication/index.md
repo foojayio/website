@@ -22,19 +22,19 @@ You can achieve a much higher security level by implementing mutual TLS in the c
 
 In this article, you'll learn how to set up an OpenID Connect (OIDC) client with Spring Security using mutual TLS as a method for authenticating the client. Mutual TLS is not supported out-of-the-box by Spring Security, so there are a few steps that need to be completed to use this feature.
 
-**Before You Start** {#h2-0-before-you-start}
----------------------------------------------
+**Before You Start**
+--------------------
 
 There are a few prerequisites that you'll need to complete this tutorial. You will need:
 
 * An Authorization Server that supports OpenID Connect. The server also needs to support mutual TLS connections, and it should expose the OIDC metadata endpoint.
 * A client registered with the Authorization Server which has mutual TLS enabled as an authentication option. You will need to provide the server with your client's certificate. See the section below to learn how to generate a certificate locally, if you don't have one.
 
-### **Using the Curity Identity Server as an Example** {#h3-1-using-the-curity-identity-server-as-an-example}
+### **Using the Curity Identity Server as an Example**
 
 In order to make the example code a bit more tangible, we will be using the Curity Identity Server as the Authorization Server, but you can use any Authorization Server that fulfills the requirements listed above. If you want to learn more about the Curity Identity Server, or need help in installing and configuring it, have a look at the[](https://curity.io/resources/getting-started?utm_source=partner&utm_medium=azul&utm_campaign=foojay)[Getting Started section of Curity's web site](https://curity.io/resources/getting-started?utm_source=partner&utm_medium=azul&utm_campaign=foojay). If you have an instance of the Curity Identity Server running and only need help with configuring mutual TLS for the client, then have a look at the[](https://developer.curity.io/docs/latest/token-service-admin-guide/mutual-tls.html#configuring-trust?utm_source=partner&utm_medium=azul&utm_campaign=foojay)[Token Service Admin Guide](https://developer.curity.io/docs/latest/token-service-admin-guide/mutual-tls.html#configuring-trust?utm_source=partner&utm_medium=azul&utm_campaign=foojay), where this is described in detail.
 
-### **Parameters Used in this Tutorial** {#h3-2-parameters-used-in-this-tutorial}
+### **Parameters Used in this Tutorial**
 
 The values listed below are used in the code and configuration examples throughout this article. They are example values, so remember to tailor them according to your implementation details and deployment setup.
 
@@ -50,8 +50,8 @@ The values listed below are used in the code and configuration examples througho
 | Scopes                 | openid                                                  |
 | Redirect Uri           | https://localhost:9443/login/oauth2/code/idsvr          |
 
-**Create a Client Certificate** {#h2-3-create-a-client-certificate}
--------------------------------------------------------------------
+**Create a Client Certificate**
+-------------------------------
 
 We'll need a private key and client certificate that we can use in our OIDC client for the mutual TLS authentication. For this tutorial, we'll use a self-signed certificate. We will store the certificate and its private key in a Java keystore. Run this command from a terminal to create one:
 
@@ -83,8 +83,8 @@ keytool -export \
 ```
 
 
-**Prepare Your Project** {#h2-4-prepare-your-project}
------------------------------------------------------
+**Prepare Your Project**
+------------------------
 
 We will create a simple Spring Boot application from scratch using[](https://start.spring.io)[Spring Initializr](https://start.spring.io). In the configuration window that opens, enter io.curity.example for the name of the group and call the artifact demo-client.
 
@@ -97,8 +97,8 @@ Search for and add the following dependencies:
 
 Generate the application. Spring Initializr creates an archive with a bootstrap application that includes the selected dependencies. Download and extract the archive, and import the project into an IDE of your choice.
 
-**Setup HTTPS** {#h2-5-setup-https}
------------------------------------
+**Setup HTTPS**
+---------------
 
 It is a good practice to secure web applications with HTTPS. Below is a quick explanation how to secure your app with SSL.
 
@@ -134,8 +134,8 @@ The application will now run on https://localhost:9443.
 > Insecure Certificate
 > **The browser will not trust this self-signed server certificate. You may notice an SSLHandshakeException in the console when running this example. Make sure your browser trusts the certificate if you want to get rid of the error.**
 
-**Add a Controller** {#h2-6-add-a-controller}
----------------------------------------------
+**Add a Controller**
+--------------------
 
 We will add a controller to demonstrate how to obtain tokens by returning some access and ID token data. Use the @RegisteredOAuth2AuthorizedClient annotation to get the client and the access token it obtained. Use @AuthenticationPrincipal for accessing information about the user. When using OpenID Connect, choose OidcUser for the class representing the authenticated principal. This class holds the ID token and additional user information if available.
 
@@ -162,8 +162,8 @@ public class OidcLoginController {
 ```
 
 
-**Configure the OAuth Client** {#h2-7-configure-the-oauth-client}
------------------------------------------------------------------
+**Configure the OAuth Client**
+------------------------------
 
 Register the following client in the application configuration file src/main/resources/application.yml:
 
@@ -208,12 +208,12 @@ Note that we specify the client authentication method as none. At first, this ma
 
 When obtaining a token - either as part of the code flow or when using refresh tokens - the client must authenticate with a client certificate. For the TLS connection to work, it also must trust the certificate presented by the server. We will use the custom.client.ssl settings to configure the client (mutual) TLS settings. In this example, the keystore with the client key and the truststore with the server certificate will be fetched from the resources folder.
 
-**Configure Security** {#h2-8-configure-security}
--------------------------------------------------
+**Configure Security**
+----------------------
 
 Let's configure mutual TLS for the OAuth 2.0 client authentication. We want Spring Security to use our client certificate in a mutual TLS connection with the Authorization Server when requesting the access token. For that, we will have to load the client keystore that we prepared, use that keystore in an SSL context, and apply that context to an HTTP client that we tell the framework to use when requesting the access token.
 
-### **Load Client Key** {#h3-9-load-client-key}
+### **Load Client Key**
 
 * Place the client keystore in the resources folder of your application.
 * Create a configuration-class and call it TrustStoreConfig. This class will be responsible for reading the custom.client.ssl properties from application.yml.
@@ -279,7 +279,7 @@ public class TrustStoreConfig {
 > Trust Store
 > **The trust store can be loaded accordingly but was not outlined here for readability. You can see a complete example on [GitHub](https://github.com/curityio/spring-boot-openid-client-mtls/blob/bc39f9324e3ab481e7740d4c145b9546445353ee/src/main/java/io/curity/example/oidcspringbootmutualtls/TrustStoreConfig.java#L41).**
 
-### **Configure OAuth 2.0 with Mutual TLS** {#h3-10-configure-oauth-2-0-with-mutual-tls}
+### **Configure OAuth 2.0 with Mutual TLS**
 
 * Create a configuration-class and call it SecurityConfig.java. This class makes use of the TrustStoreConfig to get the SslContext for the web clients used in the different parts of the OAuth 2.0 flow. It will also enable OAuth 2.0 login.
 
@@ -359,8 +359,8 @@ ReactiveOAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> rea
 
 Take into account that there is another implementation for when refresh tokens are used to obtain a new access token. Update ReactiveOAuth2AccessTokenResponseClient\<OAuth2RefreshTokenGrantRequest\> accordingly, like in the example above. Also, Spring Security will fetch the public key from the Authorization Server to verify the tokens using the value from the jwkSetUri setting. The web client retrieving those keys must trust the server certificate.
 
-**Run the Demo Application** {#h2-11-run-the-demo-application}
---------------------------------------------------------------
+**Run the Demo Application**
+----------------------------
 
 Start the demo application with mvn spring-boot:run if you use maven or ./gradlew bootRun for a gradle project.
 
@@ -370,14 +370,14 @@ Navigate to https://localhost:9443 to access the index site and trigger a login.
 After successful login, you will be presented with details retrieved from the ID token.
 ![](image-10.png)
 
-**Conclusion** {#h2-12-conclusion}
-----------------------------------
+**Conclusion**
+--------------
 
 Authenticating the client with a key that it proves possession of by using it to establish two-way SSL instead of a shared secret gives you a much higher level of security in the communication with the Authorization Server. It also opens up possibilities for further security improvements, like using sender-constrained or Proof-of-Possession access tokens. In this article, we have shown you how to implement mutual TLS authentication in a Spring Security OIDC client.
 
 Even though Spring Security does not support mutual TLS out of the box, using it for client authentication is a great way to enhance your security. You need to be aware, however, of the details of the OAuth / OIDC flows that your application will use, such as the code flow and refresh tokens. Each web client that handles requests to your Authorization Server that requires authentication must be updated in the way it establishes a TLS context. The configuration of a custom trust store may be cumbersome due to the lack of customizable web clients - the web client has to be updated separately in every place where Spring sends requests to the Authorization Server. This sometimes requires knowledge of Spring Security's implementation details. The framework is under constant development. Some of the drawbacks mentioned in this tutorial have registered issues (see Spring Security Issues [4498](https://github.com/spring-projects/spring-security/issues/4498) and [8882](https://github.com/spring-projects/spring-security/issues/8882)) and may be solved in future versions.
 
-**Further Information and Source Code** {#h2-13-further-information-and-source-code}
-------------------------------------------------------------------------------------
+**Further Information and Source Code**
+---------------------------------------
 
 You can find the source code of the example on[](https://github.com/curityio/spring-boot-openid-client-mtls)[Curity's GitHub](https://github.com/curityio/spring-boot-openid-client-mtls) page. For further examples and help regarding OAuth 2 and Spring Security visit[](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2)[Spring Security Reference](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2). More information on the Curity Identity Server can be found [on the Curity web site](https://curity.io/product/token-service/?utm_source=partner&utm_medium=azul&utm_campaign=foojay).

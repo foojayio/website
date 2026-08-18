@@ -30,8 +30,8 @@ I started using GlassFish while GlassFish was in Oracle's hands as a reference i
  <img decoding="async" src="https://omnifish.ee/wp-content/uploads/2023/09/GlassFish-embedded.png" alt="" class="wp-image-2518" style="width:264px;height:135px" width="264" height="135">
 </figure>
 
-Overview of the APILoader Project {#h2-0-overview-of-the-apiloader-project}
----------------------------------------------------------------------------
+Overview of the APILoader Project
+---------------------------------
 
 My project is APILoader. APILoader is, I believe (quite possibly wrongly) the seed for the next generation of software performance testing tools. I won't say a lot about APILoader since it hasn't been released yet and there is IP to protect. But I can say a bit about how it uses GlassFish Embedded.
 > For an individual, I intend that APILoader be deployed using GlassFish Embedded. This obviates the server administration, as the server is created and destroyed by the tool on each tool session.
@@ -44,23 +44,23 @@ For an individual, I intend that APILoader be deployed using GlassFish Embedded.
 
 There is potentially a hybrid approach where each engineer runs an embedded GlassFish instance but they choose to share a single (networked) database. The issue is that the 'database' in APILoader is distributed with some data held in a relational database and some held in files associated with the server. So, in this scenario, those artefacts that are held in the database would be shared but those held by the server are not (since each engineer has their own (embedded) server). This scenario doesn't appear useful as it stands because the relational database is used to access the file-based artefacts held by the server and only a subset of file-based artefacts would be reachable by each engineer. It could be made an installation option that the file-based artefacts be held in one repository, independent of the servers. Then all artefacts would be shared. This would appear that the installation is shared by the team but with a greater degree of isolation for each engineer since the server isn't shared.
 
-Simple Setup with GlassFish Embedded {#h2-1-simple-setup-with-glassfish-embedded}
----------------------------------------------------------------------------------
+Simple Setup with GlassFish Embedded
+------------------------------------
 
 Running GlassFish Embedded is pretty straightforward - you start GlassFish within a client application and deploy the server application to the running embedded GlassFish. There is very little to do in the server application to cater for being runnable both as a remote server or embedded. (Or maybe there was more than I remember but it is a once-only thing.)
 
 However, there is one major consideration. GlassFish Embedded runs in the same JVM as the client. In remote server mode it doesn't - it runs in a separate JVM process, often on a remote machine. This has significant implications for static resources. In embedded use, a static resource is shared between the client application and the embedded server. This allows some tempting shortcuts in coding that won't work in non-embedded deployment.
 > With EJBs, the serialisation is done automatically. With http-based communication, it would have to be done explicitly via SOAP, XML, or Gson/JSON.
 
-Benefits of Remote EJBs as a communication method {#h2-2-benefits-of-remote-ejbs-as-a-communication-method}
------------------------------------------------------------------------------------------------------------
+Benefits of Remote EJBs as a communication method
+-------------------------------------------------
 
 The APILoader client is a (very) fat GUI. It started life as a web client but I found myself spending inordinate amounts of time on the minutiae of HTML presentation. So now its a GUI. As such, communication with the server presents new options. I have chosen to use remote EJBs. These work just as well against a remote or embedded GlassFish server. Once you overcome the issue of making the remote class definitions available to the client application, server EJBs are pretty straightforward to use. And, with a GUI client, they are simpler to use than http-based messaging. The APILoader server and client communicate complex objects. With EJBs, the serialisation is done automatically. With http-based communication, it would have to be done explicitly via SOAP, XML, or Gson/JSON.
 
 Note that the APILoader client is not an enterprise client. So it isn't deployed to the server to run, and the EJBs aren't injected. Instead, the client gets access to the server's remotely accessible methods by doing context lookup() calls.
 
-Simplified Distribution and Support {#h2-3-simplified-distribution-and-support}
--------------------------------------------------------------------------------
+Simplified Distribution and Support
+-----------------------------------
 
 The other benefit of GlassFish Embedded is simplified distribution and support for APILoader to those clients that select it. Packaging and distributing the APILoader only has to cater for one brand of server, and one release of that server. On the other hand, support for the server option is easier in bigger teams because the server environment is usually better understood by infrastructure teams.
 
@@ -79,8 +79,8 @@ This article was published in collaboration with [OmniFish](https://omnifish.ee)
  <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px" width="200" height="200">
 </figure>
 
-OmniFish - Jakarta EE experts {#h2-4-omnifish-jakarta-ee-experts}
------------------------------------------------------------------
+OmniFish - Jakarta EE experts
+-----------------------------
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

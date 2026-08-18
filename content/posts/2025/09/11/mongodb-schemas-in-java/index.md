@@ -47,8 +47,8 @@ Put your connection string in and you'll see the sea surface temperatures displa
 
 (If you're a screen-reader user, there's a way for you to [read the data](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/resources/static/index.html#L187-L190) too.)
 
-Why MongoDB and Java are such good friends {#h2-0-why-mongodb-and-java-are-such-good-friends}
----------------------------------------------------------------------------------------------
+Why MongoDB and Java are such good friends
+------------------------------------------
 
 ![Diagram showing the interaction between a loosely-typed browser client, a strongly-typed Java server, and a schemaless MongoDB database. The client and server communicate using JSON, ensuring consistent responses. The Java server validates API inputs, returns consistent structured results, filters data from MongoDB according to the defined schema, and ensures stored documents match the current schema.](Screenshot-2025-09-09-at-10.52.21-AM.png)
 
@@ -68,8 +68,8 @@ No more awkward wrangling of relational and document concepts. No more long time
 
 Suddenly, developers were in charge of the schema, defined in one place, in the Java code.
 
-The missing schema of loosely typed systems {#h2-1-the-missing-schema-of-loosely-typed-systems}
------------------------------------------------------------------------------------------------
+The missing schema of loosely typed systems
+-------------------------------------------
 
 Stepping outside of the Java world, as, sadly, we must, I have encountered a bundle of problems with untyped or loosely typed languages.
 
@@ -87,8 +87,8 @@ As a couple of examples, I've seen:
 
 JavaScript migration scripts used to update MongoDB which had no validation, intellisense, or checks which easily led to bugs (admittedly, this flexibility can also be convenient for transformations of data too---especially when adding/removing a field from a structure, but should be done with checks and balances).
 
-Bringing schema back {#h2-2-bringing-schema-back}
--------------------------------------------------
+Bringing schema back
+--------------------
 
 Java's hierarchical types naturally provide the missing schema for MongoDB documents. Using immutable record types which may be safely cached and passed around in concurrent services allows for highly safe and scalable applications built around MongoDB.  
 ![The image shows that an unexpected field (jank: ‘undefined’) sent from the browser is safely ignored by the Java API, preventing it from being stored in the Mongo document.](Screenshot-2025-09-09-at-10.56.01-AM.png)
@@ -99,8 +99,8 @@ The rest of the article, we will work through a code example that shows schema d
 
 We'll discuss some tips to get the most out of Java with MongoDB and some of the traps to avoid.
 
-Example: Spring Boot sea temperature service {#h2-3-example-spring-boot-sea-temperature-service}
-------------------------------------------------------------------------------------------------
+Example: Spring Boot sea temperature service
+--------------------------------------------
 
 In this example, we're going to build a [Spring Boot](https://spring.io/projects/spring-boot) web service using [Java 24](https://openjdk.org/projects/jdk/24/) and the [MongoDB synchronous driver (with virtual threads!)](https://www.mongodb.com/developer/products/mongodb/jdk-21-virtual-threads/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant).
 
@@ -245,7 +245,7 @@ A few things about this document:
 
 Here's the API I'd like to build:
 
-### Sea temperatures {#h3-4-sea-temperatures}
+### Sea temperatures
 
 ```
 SSE /weather/sea/temperature?south={lower latitude}&west={lower longitude}&north={upper latitude}&east={upper longitude}
@@ -268,7 +268,7 @@ data: [{...}]
 ```
 
 
-### Weather reports {#h3-5-weather-reports}
+### Weather reports
 
 ```
 GET /weather?id={id}
@@ -297,7 +297,7 @@ Returns a paged list of weather reports with a few key fields:
 ```
 
 
-### Schemas {#h3-6-schemas}
+### Schemas
 
 Let's get into the schema definitions for the weather report document to support our APIs.
 
@@ -442,7 +442,7 @@ A couple more things might catch you out when implementing these record types:
 2. Don't use the primitive type of numeric values field int/double in general \*(unless you are certain all values will be present)---use the object type Integer/Double. Why? Because if a field has a null or is missing in the document, you will get serialization errors.
 3. Use List\<\> instead of \[\] arrays to represent a MongoDB array of values or subdocuments. Why? The POJO codec will throw an error because it can't locate the type if you try it :).
 
-### Data access {#h3-7-data-access}
+### Data access
 
 Let's build our data access class to retrieve the data for our API!
 
@@ -852,7 +852,7 @@ Because records have built-in comparison for their values, we can use them as th
 
 \> Note: Admittedly, this undoes some of the good work I am doing by streaming in batches by building an in-memory set of all the unique coordinates. 🙁 In practice, I would recommend taking care of this kind of thing in the database or query. I'm keeping it in the example though, to demonstrate the use of an inline record within a method.
 
-### Creating our API {#h3-8-creating-our-api}
+### Creating our API
 
 Alright! Now, let's define our API. Here's the implementation of our [WeatherAPI](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/api/WeatherApi.java) class:
 
@@ -978,12 +978,12 @@ What do we want? Index usage!
 
 This is also a super deep topic, but I highly recommend spending time getting to know your [query explain plans](https://www.mongodb.com/docs/manual/tutorial/analyze-query-plan/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant).
 
-### Why not Spring Data? {#h3-9-why-not-spring-data}
+### Why not Spring Data?
 
 You might be wondering why we didn't use Spring Data in this example. I'm a big fan of Spring Boot as a web service framework, but also a little cautious of getting too tangled up in its many conventions and abstractions. It's my view that I want my services to be fairly portable between frameworks. If I decide I want to switch to Micronaut tomorrow, I want to be able to do it without too much deep surgery. I also think the MongoDB Java driver is plenty easy enough to use and configure with a simple connection string rather than relying on magical annotations to create connections and wire up your data. I'd be curious to learn if you have a strong opposing opinion on that---let me know!
 
-Java benefits {#h2-10-java-benefits}
-------------------------------------
+Java benefits
+-------------
 
 Let's wrap up and talk about some of the benefits you get by defining schemas in Java in this way.
 
@@ -991,7 +991,7 @@ Throughout this example, we have shown Java record types being used to express t
 
 Here are a few of the benefits I've found using Java APIs with a schemaless MongoDB document database and a typeless JavaScript browser client.
 
-### Schema in one place {#h3-11-schema-in-one-place}
+### Schema in one place
 
 When using MongoDB with Java, you define your schema in a single place---the Java code.
 
@@ -1001,11 +1001,11 @@ The reason it is so beneficial is that you reduce the coordination efforts requi
 
 \* It's worth noting that this does put an additional responsibility on the Java developers, and requires discipline and additional knowledge to keep the data's integrity and good performance in the database.
 
-### Database pollution {#h3-12-database-pollution}
+### Database pollution
 
 An instance of a Java record structure will always conform to its type, no matter what you throw at it. So if there were extra fields in the database, they would never flow through to API clients. This is a real issue I've encountered when building TypeScript APIs, where fields were showing up in the browser that the API was not even aware of. There is a potential security risk being avoided here too, if one of these fields polluting the schema were to have sensitive information in it, for instance.
 
-### API input pollution {#h3-13-api-input-pollution}
+### API input pollution
 
 If your API accepts data and stores it in the database, Java's type strictness will save you from storing something you didn't intend.
 
@@ -1013,11 +1013,11 @@ This works for incorrect data types being passed into a field (say, an integer i
 
 It also works for additional data---if you were to pass an extra field to an API endpoint (either as a query string parameter or a post body), this will get safely ignored and have no side effects.
 
-### Compile-time and runtime checks for transformation {#h3-14-compile-time-and-runtime-checks-for-transformation}
+### Compile-time and runtime checks for transformation
 
 An API will often have to do some transformation from one data structure to another. Using strict typing in this kind of code saves countless bugs where types need to be converted safely and efficiently.
 
-### Approaches to schema evolution {#h3-15-approaches-to-schema-evolution}
+### Approaches to schema evolution
 
 Having the schema of a collection defined in the way we have demonstrated gives a clear, source-controlled history to the schema.
 
@@ -1105,7 +1105,7 @@ This single-owner principle (only one Java service should ever define the schema
 
 This is a kind of approach recommended in microservices designs, which I think makes a lot of sense. Personally, I am a big fan of the Monolith! But even with the best will in the world, you will have temptations to access the database of one service directly rather than going through its API. It's a huge mistake, in my view.
 
-### Test approaches and regression prevention {#h3-16-test-approaches-and-regression-prevention}
+### Test approaches and regression prevention
 
 Another strength of Java in maintaining a schema is its excellent testing libraries. In this example, we did end to end tests driving the API with regular HTTP calls, and used TestContainers MongoDB Docker instances for some tests and Mockito mocks in others to provide the database in different conditions.
 
@@ -1115,8 +1115,8 @@ Take a look through the tests here and let me know what you think about the appr
 
 I use a code coverage tool (JetBrains IntelliJ built in one) to show me what edge cases I'm missing in my tests.
 
-Other languages {#h2-17-other-languages}
-----------------------------------------
+Other languages
+---------------
 
 A lot of what I have said would also apply to other strongly typed languages too---but for most of the problems I am solving at the moment, Java feels like the best tool for the job. In addition to its excellent strengths as a language, ease of maintenance, and the benefits I have mentioned, it also has an excellent community of experienced developers you can easily find and hire (which you can't say for many other languages).
 
@@ -1124,8 +1124,8 @@ I would also say that I am a regular developer of Python, TypeScript, and JavaSc
 
 MongoDB also supports JSON Schema validation rules that enforce schemas at the database layer. This may be a useful guardrail to add if the language you are using is not enforcing the schema through the type system.
 
-Wrap {#h2-18-wrap}
-------------------
+Wrap
+----
 
 I hope you've enjoyed (as I have!) this little exploration of managing schemas for your application with Java.
 

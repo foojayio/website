@@ -26,7 +26,7 @@ A lot of the documentation out there assumes you already have additional context
 
 Here, I'll explain package managers.
 
-### What even is that? {#h3-0-what-even-is-that}
+### What even is that?
 
 From Wikipedia, a package manager or package-management system is a collection of software tools that automates the process of installing, upgrading, configuring, and removing computer programs for a computer's operating system in a consistent manner.
 
@@ -36,7 +36,7 @@ In plain English, a package manager is what handles the heavy lifting involved i
 
 Modern package managers are why you can reliably run `pip install Django=-1.3.3` or whatever and be pretty sure you are getting version 1.3.3 of Django, or just `pip install Django` and take whatever is the most recent version.
 
-### The Before Times {#h3-1-the-before-times}
+### The Before Times
 
 We didn't always have this, though. The earliest versions of what you could call a package manager are from the mid to late 90s, with Debian introducing dpkg in 1994 and RedHat's RPM in 1997. Before then, and until package management really took off, we had to do a lot of things manually and we had way less information about the things we were installing.
 
@@ -50,7 +50,7 @@ As the popularity of package managers for Linux grew, so did the demand for some
 
 This introduced a whole new problem, though. Applications are easier to install, update, manage, and remove, so we start building more complex applications, and with Continuous Integration becoming popular in the 90s, we start releasing more often, too. One organization might be using multiple languages, and we also start caring about security. This is where binary repository managers enter the playing field.
 
-### What's a binary repository manager? {#h3-2-what-s-a-binary-repository-manager}
+### What's a binary repository manager?
 
 A binary repository manager is there to manage all of those binaries we now have into a system of repositories. Some of them support just one or two package types for very specialized applications, but the one I'll talk about supports more. This isn't the same thing as source control, which is where your code lives, but more of an extension of it. While your code might live in a repository on GitHub or BitBucket or whatever, the result of that code being built or compiled -- your artifacts -- live in a binary repository manager like [JFrog Artifactory](https://jfrog.com/artifactory/). For DevOps to really work, this is an important part of the equation. We're delivering updates far more often now, and we need a way to organize our build artifacts in a sensible way so they're easier for our other tools, like our CI/CD system, to interact with them and ultimately deploy the updates to the user. Without one, it's much more difficult to track version numbers, control access, promote builds from testing to production, collect metadata, or detect security problems.
 
@@ -66,13 +66,13 @@ A lot of headaches are saved here, from an organizational standpoint. Things get
 
 This improvement alone decreases the likelihood of a bad build making it out into the wild, because we humans are really bad at repetitive tasks, and this takes over a lot of repetition for us.
 
-### Cool cool cool, how do I try using one of these things? Sounds enterprisey. {#h3-3-cool-cool-cool-how-do-i-try-using-one-of-these-things-sounds-enterprisey}
+### Cool cool cool, how do I try using one of these things? Sounds enterprisey.
 
 It's definitely a thing that's more beneficial to whole companies or dev teams than for an individual person on a side project, but it's still good to learn. There are a handful available, but Artifactory is free up to a certain amount of storage and data transfer.
 
 [Try it here](https://jfrog.com/artifactory/start-free/#saas "Try it here") on the cloud provider of your choice. It also comes with Xray, a vulnerability detection tool, and Pipelines, a CI/CD system, so you're pretty close to an end-to-end DevOps solution to play with and learn on right out of the box. If you don't quite understand CI/CD (or you just need some recommendations for where to start!), check out the previous article in this series: [DevOps 101: CI/CD](https://foojay.io/today/devops-101-part-i-ci-cd/).
 
-### Summarize this for me, high school essay style. {#h3-4-summarize-this-for-me-high-school-essay-style}
+### Summarize this for me, high school essay style.
 
 In conclusion, package managers are a set of tools that make it easier for you to install, use, update, and remove applications. They go further than just automating the steps we used to have to take manually, with config scripts and Makefiles, by also installing your dependencies and managing a bunch of extra metadata we didn't have clear access to before. The next leap from there is the use of a binary repository as an extension of our source code repositories, to manage all of these binaries and build artifacts produced by our package managers.
 

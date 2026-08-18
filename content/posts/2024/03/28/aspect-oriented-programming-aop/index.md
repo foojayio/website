@@ -29,7 +29,7 @@ This improves modularity and makes the codebase easier to maintain.
 
 In large-scale Java applications, AOP is invaluable for avoiding code duplication and keeping the core code focused on business goals.
 
-### Understanding Cross-Cutting Concerns {#h3-0-understanding-cross-cutting-concerns}
+### Understanding Cross-Cutting Concerns
 
 Cross-cutting concerns are features or behaviors spread across multiple locations in code. Some examples include:
 
@@ -41,7 +41,7 @@ Cross-cutting concerns are features or behaviors spread across multiple location
 
 Traditional object-oriented code leads to code duplication and tight coupling when implementing these kinds of concerns. AOP solves this by providing means to modularize cross-cutting concerns into cohesive units.
 
-### Core Concepts of AOP 🛠️ {#h3-1-core-concepts-of-aop}
+### Core Concepts of AOP 🛠️
 
 The main concepts in AOP are:
 
@@ -59,7 +59,7 @@ The main concepts in AOP are:
 
 **Weaving:** The process of applying advice at join points selected by pointcuts. It is done by the AOP framework.
 
-### AOP in Java: The AspectJ Framework 🌐 {#h3-2-aop-in-java-the-aspectj-framework}
+### AOP in Java: The AspectJ Framework 🌐
 
 The most widely used AOP framework for Java is AspectJ. It extends Java with language constructs for implementing aspects and pointcuts directly in code. AspectJ supports compile-time and runtime weaving. Some key features are:
 
@@ -106,7 +106,7 @@ public class LoggingAspect {
 
 The pointcut expression identifies the join points (method executions) where advice will be applied.
 
-### Benefits of AOP ✨ {#h3-3-benefits-of-aop}
+### Benefits of AOP ✨
 
 Some key benefits of using AOP:
 
@@ -120,7 +120,7 @@ Some key benefits of using AOP:
 
 AOP allows clean separation of concerns in Java code, enhancing readability and maintainability. By encapsulating cross-cutting behaviors in aspects, duplication is eliminated leading to more cohesive and focused code.
 
-### Conclusion 📚 {#h3-4-conclusion}
+### Conclusion 📚
 
 Aspect-oriented programming enables better separation of concerns in Java applications through the use of aspects and pointcuts.
 
@@ -128,7 +128,7 @@ The AspectJ framework streamlines AOP adoption in Java. AOP improves modularity 
 
 In the upcoming article we will see the AOP in Action, stay tuned.
 
-### References 📖 {#h3-5-references}
+### References 📖
 
 * [AspectJ Project Homepage](https://www.eclipse.org/aspectj/):
 * [Aspect-Oriented Programming with AspectJ by Ivan Kiselev](https://www.amazon.com/Aspect-Oriented-Programming-AspectJ-Ivan-Kiselev/dp/0672324105)

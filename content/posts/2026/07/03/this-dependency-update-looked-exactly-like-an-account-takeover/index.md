@@ -30,8 +30,8 @@ If you have read the post-mortems of real supply-chain attacks, that pattern sho
 
 So which one is javax.activation? It turns out to be the boring one, sort of. This artifact changed hands during the Sun to Oracle transition, and the signing discipline broke along the way. It is benign. But I only know that because I went and checked, and that is the actual point of this article: the signal that separates a routine handoff from an account takeover does not live in any CVE database, because at the moment it happens, there is nothing to file a CVE about.
 
-The gap CVE scanners cannot see {#h2-0-the-gap-cve-scanners-cannot-see}
------------------------------------------------------------------------
+The gap CVE scanners cannot see
+-------------------------------
 
 I want to be precise here, because this is not a "your scanner is bad" argument. Snyk, Dependabot, OWASP Dependency-Check, they all do their job. Their job is matching your dependency tree against known, disclosed, published advisories. That makes them lagging indicators by construction. Every major supply-chain attack of the last several years, event-stream, ua-parser-js, node-ipc, the XZ Utils backdoor, walked straight past CVE scanning, because when the malicious version shipped there was no CVE yet. The disclosure came days or weeks later. Teams on auto-update had already pulled the poisoned version within hours.
 
@@ -39,8 +39,8 @@ The behavioral tools that do exist for this problem are npm-first, basically all
 
 That gap annoyed me enough that I built something for it.
 
-Marshal {#h2-1-marshal}
------------------------
+Marshal
+-------
 
 Marshal is an open source CLI (Apache 2.0, Java 21) that scans a Maven or Gradle project and scores every dependency update on how it changed, not on what is known to be broken. It is deliberately complementary to CVE scanning. Keep your CVE scanner. Marshal covers the window before a CVE can exist.
 
@@ -58,8 +58,8 @@ Each dependency gets a 0 to 100 risk score built from seven behavioral rules:
 
 Scores land in four buckets. GREEN (0 to 20) passes silently. YELLOW (21 to 50) shows up as a count in the terminal summary, with full detail in the JSON output. ORANGE (51 to 80) gets a PR comment. RED (81 to 100) fails CI.
 
-How the scoring actually works {#h2-2-how-the-scoring-actually-works}
----------------------------------------------------------------------
+How the scoring actually works
+------------------------------
 
 The number one killer of developer security tools is false-positive fatigue, so most of the engine design is about not crying wolf.
 
@@ -71,8 +71,8 @@ And for findings you have personally vetted, there is a suppression whitelist. I
 
 Back to javax.activation. Two rules fired: signature dropped (weight 40, the historical event: this package had signing discipline and abandoned it) and missing signature (weight 15, the current posture: this release is unverifiable right now). Total 55, ORANGE. Not RED, and that is correct. There was no second identity signal, no new key, no dependency changes, so the engine says "review this before merging" rather than "block everything." Had the drop come with a maintainer key change, it would have gone RED. That is the account-takeover shape.
 
-Try it on your own pom.xml {#h2-3-try-it-on-your-own-pom-xml}
--------------------------------------------------------------
+Try it on your own pom.xml
+--------------------------
 
 The whole thing is one jar. You need a JRE 21.
 
@@ -100,15 +100,15 @@ There is also a `diff` command that compares a base and head build file and repo
 
 If you expect a wall of red on your first scan: no. Most well-maintained packages score zero, and they should. The interesting question was never "how much can a tool flag." It is whether the two or three things it does flag are worth your attention.
 
-What ships today {#h2-4-what-ships-today}
------------------------------------------
+What ships today
+----------------
 
 v0.2.0 is current. Maven and Gradle are at parity across scan, diff, and the Action. Three output formats via the `--output` flag (`human`, `json`, `md`), configurable thresholds and rule weights via marshal.yml, Slack webhooks on critical findings, an SQLite metadata cache so repeat scans are fast and work offline, and the whitelist system described above. The engine is verified against a replay corpus of real historical incidents, event-stream, ua-parser-js, node-ipc among them, as CI fixtures, so every release has to keep catching the attacks that already happened.
 
 One honest limitation worth naming: Maven Central does not expose publisher identity beyond the signing key, so the new-maintainer rule fires on key changes only. And an XZ Utils style attack, months of patient social engineering by a trusted-looking contributor, is mostly beyond what static behavioral signals can catch. Marshal would have flagged the maintainer handoff, not the payload. I would rather say that plainly than let you believe otherwise.
 
-What is in the pipeline {#h2-5-what-is-in-the-pipeline}
--------------------------------------------------------
+What is in the pipeline
+-----------------------
 
 All open source work, in rough order:
 
@@ -118,8 +118,8 @@ All open source work, in rough order:
 * `marshal watch --package` for keeping an eye on a single artifact.
 * npm support, eventually. Maven first until it is genuinely solid.
 
-Links {#h2-6-links}
--------------------
+Links
+-----
 
 * Code and README: <https://github.com/marshal-hq/marshal>
 * Project site: <https://marshalhq.dev>

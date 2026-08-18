@@ -35,8 +35,8 @@ There are also many different things you can contribute. Code is one, but projec
 
 For this blog post, let's assume we've found a project we want to work on, and an issue we want to fix.
 
-Getting the project {#h2-0-getting-the-project}
------------------------------------------------
+Getting the project
+-------------------
 
 When making your first contribution, you won't have access to push to the open source project directly. So, the first thing we will need to do is **fork** this project to our own profile. This means we create a copy of the original project on our profile.
 
@@ -64,8 +64,8 @@ If we already have a project open, we can open the **Get from Version Control** 
 
 IntelliJ IDEA will open the project on our machine.
 
-Making and committing our changes {#h2-1-making-and-committing-our-changes}
----------------------------------------------------------------------------
+Making and committing our changes
+---------------------------------
 
 Before making any changes, we'll want to make sure that we can build the project. Hopefully, how to build the project will be described in the **README**, as it is for this example. Let's open the terminal and build the project as described. In this example, we need Docker, which is already installed and running.
 
@@ -89,8 +89,8 @@ If we don't have access to the original project, we need to push our code to our
 
 ![Push](push.png)
 
-Creating the pull request {#h2-2-creating-the-pull-request}
------------------------------------------------------------
+Creating the pull request
+-------------------------
 
 Once we are happy with our changes, we can create a pull request.
 
@@ -104,8 +104,8 @@ We need to provide a title and description for our pull request. Make sure the t
 
 ![Create pull request](create-pr2.png)
 
-Negotiating the review process {#h2-3-negotiating-the-review-process}
----------------------------------------------------------------------
+Negotiating the review process
+------------------------------
 
 Now the waiting starts. On an active project, hopefully your PR will be reviewed soon. Your PR might get comments from reviewers that you need to fix. For complex changes, this might take several iterations. For smaller changes, hopefully it won't. Before doing a lot of work on an issue you might want to check that your contribution is wanted and your solution is what they are looking for. Don't be discouraged by review comments. Keep in mind that the maintainers will have to maintain your solution in the future and they want to make sure that it fits their project.
 
@@ -115,12 +115,12 @@ As you can see, reviewers can comment on your PR, approve the PR or request chan
 
 ![Checks](checks.png)
 
-Summary and shortcuts {#h2-4-summary-and-shortcuts}
----------------------------------------------------
+Summary and shortcuts
+---------------------
 
 In this blog post, we've seen how to do an open source pull request. For more information on what you can contribute and how to find something to contribute, please have a look at [this video](https://www.youtube.com/watch?v=GAqfMNB-YBU).
 
-### IntelliJ IDEA Shortcuts Used {#h3-5-intellij-idea-shortcuts-used}
+### IntelliJ IDEA Shortcuts Used
 
 Here are the IntelliJ IDEA shortcuts that we used.
 
@@ -132,7 +132,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 | Commit tool window                                                                               | **⌘1**         | **Alt+1**                |
 | Show diff                                                                                        | **⌘D**         | **Ctrl+D**               |
 
-### Related Links {#h3-6-related-links}
+### Related Links
 
 * (video) [How I Started Contributing to Open Source and Why You Should Too, by Marit van Dijk](https://www.youtube.com/watch?v=GAqfMNB-YBU)
 * (blog) [Collaborating on open source](https://maritvandijk.com/collaborating-on-open-source/)

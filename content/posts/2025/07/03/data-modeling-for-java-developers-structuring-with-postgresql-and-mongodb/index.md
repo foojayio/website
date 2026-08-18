@@ -27,25 +27,25 @@ This tutorial will ease your pain with these or other relationships defined in d
 
 In this article, we'll understand both approaches, contrasting PostgreSQL's relational rigour with MongoDB's document-oriented simplicity. You'll learn how to weigh trade-offs like ACID compliance versus scalability and discover why MongoDB's design might save you time.
 
-Relationships in databases {#h2-0-relationships-in-databases}
--------------------------------------------------------------
+Relationships in databases
+--------------------------
 
 Relationships in databases introduce the connection between the entities of two or more different collections or tables. These relationships help the applications to have the dependencies interlinked with each other. To understand this in brief, let's look at an example of a library management system that has tables for authors, books, issue details, etc. inside the database.
 
-### One-to-one relationship {#h3-1-one-to-one-relationship}
+### One-to-one relationship
 
 Each record in Table A is related to only one record in Table B. Example: A **Library Member** table and an **Issue Details** table can have a one-to-one relationship, where each member can have only one active book issued at a time.
 
-### One-to-many relationship {#h3-2-one-to-many-relationship}
+### One-to-many relationship
 
 A single record in Table A can be related to multiple records in Table B. For instance, a **Book** can have many **Reviews** or a user can have many contact addresses.
 
-### Many-to-many relationship {#h3-3-many-to-many-relationship}
+### Many-to-many relationship
 
 In this type of relationship, multiple records in Table A can relate to various records in Table B, requiring a junction (or bridge) table. For example, a **Book** can be issued to multiple **Members** over time, and a **Member** can borrow numerous **Books**.
 
-Relational vs. document databases {#h2-4-relational-vs-document-databases}
---------------------------------------------------------------------------
+Relational vs. document databases
+---------------------------------
 
 A relational database is based on rigid predefined schemas and emphasises relationships. These work well when the structure is strict and is not subjected to much change in the future. SQL or MySQL has been the backbone of relational databases for many years now.
 
@@ -55,8 +55,8 @@ A document database, on the other hand, is meant for a more flexible structure. 
 
 MongoDB is the most popular database used in modern application development. The flexible storage capability allows the application to scale horizontally and grow efficiently with the rapid changes.
 
-Postgres implementation with Java {#h2-5-postgres-implementation-with-java}
----------------------------------------------------------------------------
+Postgres implementation with Java
+---------------------------------
 
 To understand how data in a Postgres database would be implemented with Java, let us consider an example ER diagram for a library management system consisting of Books, Authors, and Issue Details.
 
@@ -145,8 +145,8 @@ public class IssueDetails {
 
 The relationships implemented in the above code snippet could be very simple. If you are wondering how, the answer to this is in the next section where we will understand how simple it can be to use MongoDB as the database.
 
-MongoDB implementation with Java {#h2-6-mongodb-implementation-with-java}
--------------------------------------------------------------------------
+MongoDB implementation with Java
+--------------------------------
 
 Let us understand the representation in a simpler way using the MongoDB document model and its data modelling techniques.
 
@@ -231,8 +231,8 @@ public class Book {
 
 From the above code snippet, you can see cleaner and less complex code without any complicated annotations to represent the relationships.
 
-Scalability and performance {#h2-7-scalability-and-performance}
----------------------------------------------------------------
+Scalability and performance
+---------------------------
 
 After the demonstration of a few small code snippets from both databases, it is also important to understand the scalability and the performance considerations while creating a Java application.
 
@@ -242,12 +242,12 @@ On the other hand, MongoDB is designed for scalability and high performance, esp
 
 The performance of Java applications with MongoDB is optimised using demoralizations and indexing. Embedding and referencing the data reduces the need for expensive joins and enhances the query and application performance.
 
-Migration considerations {#h2-8-migration-considerations}
----------------------------------------------------------
+Migration considerations
+------------------------
 
 When you migrate the data from Postgres to MongoDB, the process involves more than just moving the data. It specifically requires you to think about the structuring of the data and also how to manage the data. In the next section, we'll talk about those briefly.
 
-### Rethinking schema design {#h3-9-rethinking-schema-design}
+### Rethinking schema design
 
 In a relational database like Postgres, data is often normalised across multiple tables---in our case, between Authors, Books, and Issue Details. In MongoDB, we need to combine the related data into embedded documents. For example, instead of storing authors and books in separate tables, you can embed author information directly within a book document.
 
@@ -261,7 +261,7 @@ public class Book {
 ```
 
 
-### Replacing joins with aggregations {#h3-10-replacing-joins-with-aggregations}
+### Replacing joins with aggregations
 
 Postgres makes use of joins to retrieve the related data. On the other hand, MongoDB relies mostly on writing aggregation pipelines to retrieve the related information. For example, a Postgres query might be:
 
@@ -281,8 +281,8 @@ AggregateIterable<Document> result = booksCollection.aggregate(Arrays.asList(loo
 ```
 
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 Data modelling is a crucial step in application development and selecting the right database can significantly impact the scalability, performance, and maintainability of the system. For Java developers, identifying the strengths and weaknesses of the relational and non-relational databases is essential to correctly structure and manage the data.
 

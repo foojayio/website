@@ -32,8 +32,8 @@ Created in 2012, the 12-factor app methodology was designed to provide a set of 
 
 <br />
 
-What is a 12-factor application and why should you care? {#h2-0-what-is-a-12-factor-application-and-why-should-you-care}
-------------------------------------------------------------------------------------------------------------------------
+What is a 12-factor application and why should you care?
+--------------------------------------------------------
 
 The 12-factor app is a methodology defined by the developers at Heroku for building cloud-native applications that (quoting from [12factor.net](http://12factor.net "12factor.net")):
 
@@ -58,8 +58,8 @@ The original 12 factors from this methodology are:
 11. **[Logs](#Logs)** -- Treat logs as event streams
 12. **[Admin processes](#Admin)** -- Run admin/management tasks as one-off processes
 
-A practical application of these 12 factors {#h2-1-a-practical-application-of-these-12-factors}
------------------------------------------------------------------------------------------------
+A practical application of these 12 factors
+-------------------------------------------
 
 Rather than just talk about the 12 factors as abstract concepts, we have developed a demo application to use as a reference. This application makes use of many open source technologies, including [Open Liberty](https://openliberty.io/ "Open Liberty"), [Quarkus](https://quarkus.io/ "Quarkus"), [MicroProfile](https://microprofile.io/ "MicroProfile"), [Vert.x](https://vertx.io/ "Vert.x"), [Kubernetes](https://kubernetes.io/ "Kubernetes"), and [Maven](https://maven.apache.org/ "Maven")).
 
@@ -71,8 +71,8 @@ Alternatively, throughout this article there are links to many of the Open Liber
 
 {#Codebase}
 
-Factor 1 -- Codebase {#h2-2-factor-1-codebase}
-----------------------------------------------
+Factor 1 -- Codebase
+--------------------
 
 ![Diagram representing one codebase for one application with many deployments](image01-700x450.png)
 
@@ -82,8 +82,8 @@ This codebase could be a Git repository (including GitHub, GitHub Enterprise, Gi
 
 {#Dependencies}
 
-Factor 2 -- Dependencies {#h2-3-factor-2-dependencies}
-------------------------------------------------------
+Factor 2 -- Dependencies
+------------------------
 
 ![Diagram representing dependencies of application being used by app source code](images02-700x320.png)
 
@@ -101,8 +101,8 @@ In our demo application, we utilize Maven, but you can use either Maven or Gradl
 
 {#Configuration}
 
-Factor 3 -- Configuration {#h2-4-factor-3-configuration}
---------------------------------------------------------
+Factor 3 -- Configuration
+-------------------------
 
 ![Diagram representing configuration being used by app](image03-700x237.png)
 
@@ -125,8 +125,8 @@ Utilizing tools like MicroProfile Config can help you to externalize your conf
 
 {#BackingServices}
 
-Factor 4 -- Backing services {#h2-5-factor-4-backing-services}
---------------------------------------------------------------
+Factor 4 -- Backing services
+----------------------------
 
 ![Diagram representing backing services app could make use of](image04-700x284.png)
 
@@ -144,8 +144,8 @@ Embracing backing services as bound resources enables cloud-native applications 
 
 {#BuildReleaseRun}
 
-Factor 5 -- Build, release, and run {#h2-6-factor-5-build-release-and-run}
---------------------------------------------------------------------------
+Factor 5 -- Build, release, and run
+-----------------------------------
 
 ![Diagram representing build, release, run and design phases of lifecycle](image5-700x279.png)
 
@@ -159,8 +159,8 @@ The *run* stage, which occurs on the cloud provider, usually uses tooling like c
 
 {#Processes}
 
-Factor 6 -- Processes {#h2-7-factor-6-processes}
-------------------------------------------------
+Factor 6 -- Processes
+---------------------
 
 ![Diagram representing processes of application](image06-700x343.png)
 
@@ -175,8 +175,8 @@ REST is a widely adopted transport protocol, and JAX-RS can be used to achieve a
 
 {#PortBinding}
 
-Factor 7 -- Port binding {#h2-8-factor-7-port-binding}
-------------------------------------------------------
+Factor 7 -- Port binding
+------------------------
 
 ![Diagram representing port binding](image07-700x210.png)
 
@@ -192,8 +192,8 @@ The [Open Liberty Operator](https://openliberty.io/docs/latest/open-liberty-oper
 
 {#Concurrency}
 
-Factor 8 -- Concurrency {#h2-9-factor-8-concurrency}
-----------------------------------------------------
+Factor 8 -- Concurrency
+-----------------------
 
 ![Diagram representing concurrency](image08-700x391.png)
 
@@ -210,8 +210,8 @@ Another useful tool, especially when deploying to OpenShift is the Open Liberty 
 
 {#Disposability}
 
-Factor 9 -- Disposability {#h2-10-factor-9-disposability}
----------------------------------------------------------
+Factor 9 -- Disposability
+-------------------------
 
 ![Diagram representing concept of disposablity](image09-700x267.png)
 
@@ -234,8 +234,8 @@ Additionally, implementing fault-tolerant behaviors can enable this disposable b
 
 {#DevProdParity}
 
-Factor 10 -- Dev/Prod parity {#h2-11-factor-10-dev-prod-parity}
----------------------------------------------------------------
+Factor 10 -- Dev/Prod parity
+----------------------------
 
 ![Diagram representing dev/prod parity](image10-700x233.png)
 
@@ -254,8 +254,8 @@ In our demo application, we are making use of container technologies like Docker
 
 {#Logs}
 
-Factor 11 -- Logs {#h2-12-factor-11-logs}
------------------------------------------
+Factor 11 -- Logs
+-----------------
 
 ![Diagram representing logging in an application](image11-700x248.png)
 
@@ -272,13 +272,13 @@ Open Liberty has a unified logging component that handles messages that are writ
 
 {#Admin}
 
-Factor 12 -- Administrative processes {#h2-13-factor-12-administrative-processes}
----------------------------------------------------------------------------------
+Factor 12 -- Administrative processes
+-------------------------------------
 
 This factor discourages putting one-off admin or management tasks inside your microservices. Examples given on [12factor.net](https://12factor.net/ "12factor.net") include migrating databases and running one-time scripts to do clean-up. Instead, these should be run as one-off process and they can be run as Kubernetes tasks. In this way, your microservices can focus on business logic. It also enables safe debugging and admin of production applications and enables greater resiliency for cloud-native applications.
 
-Summary and next steps {#h2-14-summary-and-next-steps}
-------------------------------------------------------
+Summary and next steps
+----------------------
 
 We hope this article has helped you to put these cloud native factors into context, understand how they apply to real-life applications, and understand what tools are available to help you when you are developing your application.
 

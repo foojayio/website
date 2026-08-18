@@ -21,14 +21,14 @@ frozen: false
 
 Here is the overview of the JavaFX LinksOfTheMonth of June 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month.
 
-Core {#h2-0-core}
------------------
+Core
+----
 
 * New JavaFX 23 Early-Access Builds are [available on jdk.java.net/javafx23](https://jdk.java.net/javafx23/).
 * [**Friedhold Matz** shared a screenshot](https://x.com/FriedholdMatz/status/1776354116517732465) showing that WebView in JavaFX 22 now works with GraalVM 22+36.1.
 
-Applications {#h2-1-applications}
----------------------------------
+Applications
+------------
 
 * [**Christopher Schnick** shared screenshots](https://x.com/crschnick/status/1797530886289940828): "XPipe 9.4 comes with a JavaFX markdown view for notes that works through the WebView. It supports using external editors and updates in real time." Check the sources on [GitHub](https://github.com/xpipe-io/xpipe).
 * [Smartfinder now runs on Java 22](https://x.com/SerendigityInfo/status/1797164327763357725). It's a Desktop Search alternative to Windows Search/Mac OS Finder.
@@ -39,16 +39,16 @@ Applications {#h2-1-applications}
 * In a XTwitter Thread, [**Emad Hanif** shares several videos of Barcodify](https://x.com/EmadHanif_/status/1806383935083233771): "Check out how easy it is to configure and export barcodes."
 * [**Patrik Karlström** is working on nbLauncher](https://x.com/PatrikKarlstrom/status/1804865421918491014), an app to build launcher configs for NetBeans Platform Apps: "Expect a release after testing and polishing." You can [find it on GitHub](https://github.com/trixon/nbLauncher).
 
-Games {#h2-2-games}
--------------------
+Games
+-----
 
 * [**WebFX** published a new version of SpaceFX](https://x.com/WebFXProject/status/1797963817659600978) a game originally created by [**Gerrit Grunwald**](https://x.com/hansolo_). It's playable online at [spacefx.webfx.dev](https://spacefx.webfx.dev) with a few updates to make the game even more challenging for true gamers. More WebFX demos on [github.com/webfx-demos](https://github.com/webfx-demos).
   * And [another new update](https://x.com/WebFXProject/status/1803038702693740734) of the [online SpaceFX](https://spacefx.webfx.dev): "2 new weapons: Autofire Fury and Rainbow Blaster. Can you now score 100,000? All of this made possible only by the amazingly performant JavaFX game engine written by **Gerrit Grunwald** and the power of GWT."
 * [The Trinity XAI analysis tool by **Sean Phillips** now supports video playback and automatic clustering algorithms](https://x.com/SeanMiPhillips/status/1801354864162967663). Because data science is also fun, he integrated the ability to turn your AI analysis data and clusters into a playable Asteroids 3D minigame. [Watch the video here](https://www.youtube.com/watch?v=vFThM9BoTLg), and the [code is available here](https://github.com/Birdasaur/Trinity). "Watch out for those alien Opticons..."
 * [**OrangoMango** shared](https://x.com/orango_mango/status/1805585806863602035) a [video showcase of his best projects since February 2020](https://www.youtube.com/watch?v=npwdeEwLjpY): "JavaFX is the best 💪."
 
-Components, Libraries, Tools {#h2-3-components-libraries-tools}
----------------------------------------------------------------
+Components, Libraries, Tools
+----------------------------
 
 * [**vlaaad** released version 1.9.0 of cljfx](https://twitter.com/v1aaad/status/1800614531191996618), a reactive UI wrapper of JavaFX for Clojure: "The new features bring cljfx a bit further away from re-frame and a bit closer to react." Check out the [changelog on GitHub](https://github.com/cljfx/cljfx/blob/master/CHANGELOG.md).
 * Updates shared by [**Pedro Duke**](https://x.com/P_Duke):
@@ -61,8 +61,8 @@ Components, Libraries, Tools {#h2-3-components-libraries-tools}
   * [Added an AvatarView control to GemsFX](https://twitter.com/dlemmermann/status/1801010129237598714), which can be used to either display the image/avatar of a user or his/her initials. Clipping will give you a round or a square view.
   * Doing a "[2nd attempt at providing a reusable control in GemsFX that features a table view with built-in column-based filtering](https://x.com/dlemmermann/status/1805595281209118818) (aka iTunes-style filtering). Trying to use what I learned since I started coding JavaFX in 2013."
 
-Podcasts, Videos, Books {#h2-4-podcasts-videos-books}
------------------------------------------------------
+Podcasts, Videos, Books
+-----------------------
 
 * [**Frank Delporte**](https://x.com/FrankDelporte) started a new series of videos: "JavaFX In Action":
   * [**Pedro Duque Vieira**, aka Duke about Hero, PDFSam, FXThemes, FXComponents,...](https://webtechie.be/post/2024-06-05-jfxinaction-pedro-duque-vieira-duke/)
@@ -70,15 +70,15 @@ Podcasts, Videos, Books {#h2-4-podcasts-videos-books}
   * [**Christopher Schnick** about XPipe](https://webtechie.be/post/2024-06-18-jfxinaction-christopher-schnick/), an app to manage all your servers.
   * [**Robert Ladstätter** about LogoRRR](https://webtechie.be/post/2024-06-26-jfxinaction-robert-ladstatter/), a cross-platform log analysis tool written with Scala and JavaFX to find problems blazingly fast in log files with millions of lines.
 
-Tutorials {#h2-5-tutorials}
----------------------------
+Tutorials
+---------
 
 * [**Mark Leveque** shares a side project](https://www.linkedin.com/pulse/side-project-local-llm-powered-image-renaming-tool-marc-leveque-sdkfe/): "Local LLM-Powered Image Renaming JavaFX Tool. Use case: you have a disk full of randomly named images and you want to give them filenames relevant to their content. The article will covers: llama.cpp with Java, JavaFX as GUI, packaging the application and pitfalls along the way."
 * Video tutorial by [**Balkrishna Srivastava**](https://twitter.com/iamBalkrishnaS): ["JavaFX GUI App to play the game of TicTacToe in Java."](https://www.youtube.com/watch?v=8h0CJCsnsa4)
 * Video tutorial by **Kensoft PH** : ["JavaFX Pie Chart: World Population with National Flag."](https://www.youtube.com/watch?v=1u0boNYDGNI)
 
-Miscellaneous {#h2-6-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**OrangoMango** shared a quick video of a handwritten digits recognizer using neural networks](https://x.com/orango_mango/status/1800494415674577288): "Of course built from scratch and in Java and JavaFX".
 * JavaFX love by...
@@ -94,8 +94,8 @@ Miscellaneous {#h2-6-miscellaneous}
   * "[Git branch graph like JavaFx visualization entirely made by Claude 3.5 Sonnet](https://x.com/konczdev/status/1804825701134082331). All iterations. The input was just an image and a short prompt."
   * "[A little fun with Java 22, JavaFX and Project Panama](https://x.com/konczdev/status/1804591278073532624). Modified JavaFX window with a custom JavaFX title bar without any refection, JNI, JNA or native code."
 
-JFX Central {#h2-7-jfx-central}
--------------------------------
+JFX Central
+-----------
 
 * The videos of "JavaFX In Action", mentioned above, are also added to the [video section of JFX Central](https://www.jfx-central.com/videos), select "JFX In Action" in the "Type" filter. More to come after the summer break...
 * [**Dirk Lemmermann** shared visitor statistics](https://x.com/dlemmermann/status/1798688644133486973): "We are seeing more and more traffic on JFX Central coming from China and the United States. Normally Germany was on the number 1 spot. Interesting..."

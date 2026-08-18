@@ -121,8 +121,8 @@ Why did I choose this event, then? Because it allows you to compare the LLM gene
 You can find my implementation on [GitHub](https://github.com/parttimenerd/jfreventcollector/blob/main/src/main/kotlin/me/bechberger/collector/AIDescriptionAdder.kt) (GPLv2.0 licensed) and the generated documentation on the [JFR Event Collection](https://sap.github.io/SapMachine/jfrevents/):
 [![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-12.png)](https://sap.github.io/SapMachine/jfrevents/index.html#reservedstackactivation)
 
-Conclusion {#h2-0-conclusion}
------------------------------
+Conclusion
+----------
 
 I'm unsure whether I like or dislike the results of this experiment: It's, on the one hand, great to generate descriptions for events that didn't have any, using the code as the source of truth.
 

@@ -28,8 +28,8 @@ Want to get started with Java programming on the Raspberry Pi?
 
 JBang is a great way to create your first program to control electronic components connected to the GPIO pins.
 
-What is JBang? {#h2-0-what-is-jbang}
-------------------------------------
+What is JBang?
+--------------
 
 As described on their [website](https://www.jbang.dev/):
 
@@ -46,8 +46,8 @@ This video shows you all the steps described further in this article.
 
 {{< youtube 33CWAN1dQvA >}}
 
-Prepare a Raspberry Pi {#h2-1-prepare-a-raspberry-pi}
------------------------------------------------------
+Prepare a Raspberry Pi
+----------------------
 
 For this manual you can use the following approach:
 
@@ -63,8 +63,8 @@ bash: java: command not found
 ```
 
 
-Installing JBang {#h2-2-installing-jbang}
------------------------------------------
+Installing JBang
+----------------
 
 As described on [jbang.dev/download](https://www.jbang.dev/download/) installing JBang is enough to get started, even if you don't have Java installed already, as JBang will also take care of this.
 
@@ -77,8 +77,8 @@ OpenJDK Server VM Temurin-11.0.14+9 (build 11.0.14+9, mixed mode)
 ```
 
 
-Minimal JBang example {#h2-3-minimal-jbang-example}
----------------------------------------------------
+Minimal JBang example
+---------------------
 
 A minimal JBang Java-file looks like the following code block, take note of the special first line that tricks the system to run this as a script while still being valid Java-code.
 
@@ -105,8 +105,8 @@ Hello World!
 ```
 
 
-JBang Pi4J example {#h2-4-jbang-pi4j-example}
----------------------------------------------
+JBang Pi4J example
+------------------
 
 If your project needs dependencies - which is the case for a Pi4J project - you can [define them in the java-file with the following gradle-style locators format](https://www.jbang.dev/documentation/guide/latest/dependencies.html), for example:  
 `//DEPS com.pi4j:pi4j-core:2.1.1`.
@@ -238,8 +238,8 @@ $ sudo `which jbang` JBangPi4JExample.java
 ```
 
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 JBang is a great way to simply run Java-files, helps you to quickly get started with Pi4J on the Raspberry Pi, and can be the ideal getting-started method to experiment with electronics and Java.
 

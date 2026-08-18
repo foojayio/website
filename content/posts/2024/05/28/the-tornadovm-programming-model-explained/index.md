@@ -20,8 +20,8 @@ enlighterjs: true
 frozen: false
 ---
 
-Key Takeaways {#h2-0-key-takeaways}
------------------------------------
+Key Takeaways
+-------------
 
 ![](https://raw.githubusercontent.com/jjfumero/jjfumero.github.io/master/files/blog/24-02-prog-model/back.jpg)
 
@@ -33,8 +33,8 @@ In this blog post, I will explain how developers can start programming with Torn
 
 I will explain the TornadoVM programming model and I will show an example from scratch that illustrates all the steps to be done to run on GPUs (or any other TornadoVM-compatible hardware).
 
-Overview of the TornadoVM Software Stack {#h2-1-overview-of-the-tornadovm-software-stack}
------------------------------------------------------------------------------------------
+Overview of the TornadoVM Software Stack
+----------------------------------------
 
 Let's start with a general overview of the TornadoVM Software stack and the main components, as shown in the following Figure.
 
@@ -54,8 +54,8 @@ Then, the TornadoVM runtime takes care of data migration, data handling and exec
 
 Thus, in a way, TornadoVM is a full-package solution that is not only used for programming on modern hardware but also for orchestrating, running, and optimising a subset of Java programs on heterogeneous hardware.
 
-How do we start programming with TornadoVM? {#h2-2-how-do-we-start-programming-with-tornadovm}
-----------------------------------------------------------------------------------------------
+How do we start programming with TornadoVM?
+-------------------------------------------
 
 So, let's focus now on the API level and how developers can start using TornadoVM to program their applications. To understand the main ideas behind each API component in TornadoVM, we need to think about the following aspects:
 
@@ -65,8 +65,8 @@ So, let's focus now on the API level and how developers can start using TornadoV
 
 The TornadoVM API tries to tackle all these questions with different API components. Let's discuss this briefly one by one.
 
-1. Representing Parallelism {#h2-3-1-representing-parallelism}
---------------------------------------------------------------
+1. Representing Parallelism
+---------------------------
 
 There are two ways to express parallelism with TornadoVM, and developers can choose one or the other:
 
@@ -156,8 +156,8 @@ CPUs, usually offer the same performance when computing fp32 and fp64 operations
 
 Now, let's move on to create our compute graphs.
 
-2. Identifying the Java Methods to Offload {#h2-4-2-identifying-the-java-methods-to-offload}
---------------------------------------------------------------------------------------------
+2. Identifying the Java Methods to Offload
+------------------------------------------
 
 TornadoVM offloads code at the method level (similar to the [JIT compiler in Hotspot](https://developers.redhat.com/articles/2021/06/23/how-jit-compiler-boosts-java-performance-openjdk)). To specify which method/s to offload, TornadoVM offers a Task-Graph API, in which each node in the graph represents a task.
 
@@ -193,8 +193,8 @@ We see that, for creating and defining all data and tasks of our computation, we
 
 Note that the Task-Graph is never executed. It only defines which method/s, and which object/s to use. To execute a Task-Graph, we need to instantiate an object of type `TornadoExecutionPlan`.
 
-3. Deploying and Running Task-Graphs {#h2-5-3-deploying-and-running-task-graphs}
---------------------------------------------------------------------------------
+3. Deploying and Running Task-Graphs
+------------------------------------
 
 We are almost done. To execute a task graph, we need to instantiate an execution plan. The execution plan, receives, as an argument, a snapshot of an existing task graph.
 
@@ -255,7 +255,7 @@ public class HelloTornado {
 ```
 
 
-### Interacting with the Dispatcher {#h3-6-interacting-with-the-dispatcher}
+### Interacting with the Dispatcher
 
 We can also change the default decisions of the TornadoVM runtime, and perform some actions (e.g., enable the profiler, change the hardware accelerator, enable dynamic reconfiguration, etc).
 
@@ -292,8 +292,8 @@ There are more methods in the `TornadoExecutionPlan` class. We covered just two 
 
 [![](https://markdown-videos-api.jorgenkh.no/youtube/R3gwI0qijGk)](https://youtu.be/R3gwI0qijGk)
 
-Summary {#h2-7-summary}
------------------------
+Summary
+-------
 
 In this article, we have explained the basics of the TornadoVM programming model and the main API blocks.
 
@@ -301,8 +301,8 @@ With these tools, developers can start integrating these components into their a
 
 If you want to know more, I invite you to explore the [example suite](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples/src/main/java/uk/ac/manchester/tornado/examples) in TornadoVM to get an idea of the types of applications that can be expressed using the TornadoVM API with more complex [use cases](https://tornadovm.readthedocs.io/en/latest/resources.html#demos-artefacts).
 
-References {#h2-8-references}
------------------------------
+References
+----------
 
 * [TornadoVM on GitHub](https://github.com/beehive-lab/TornadoVM/)
 * [TornadoVM Website](https://www.tornadovm.org/)

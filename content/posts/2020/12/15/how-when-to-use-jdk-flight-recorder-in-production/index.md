@@ -24,7 +24,7 @@ While it would certainly be useful to record the whole lifetime, this is unpract
 
 For more details on this topic, see [Continuous Production Profiling and Diagnostics](https://foojay.io/today/continuous-production-profiling-and-diagnostics/), by Marcus Hirt.
 
-### Record Application Startup {#_record_application_startup}
+### Record Application Startup
 
 I mentioned startup as a separate time frame, because it's useful to inspect startup recording. During this time, the JVM initialize a lot of things, most code has yet to be warmed up, depending on the workload there may be a lot of allocations.
 
@@ -63,7 +63,7 @@ Use jcmd 6 JFR.start to start a recording.
 
 I'll show how to use this recording later in this article.
 
-### Record Application Post-Startup or Continuous Recording {#_record_application_post_startup_or_continuous_recording}
+### Record Application Post-Startup or Continuous Recording
 
 Once startup has been recording, it's useful to set up a continuous recording. The good thing is that the JVM allows to define multiple recording in the command line. Let's add another `-XX:StartFlightRecording` with the `delay` parameter. Delayed continuous recording:
 
@@ -92,13 +92,13 @@ Recording 1: name=app-startup maxage=10m (running) [2]
 
 Note that in the case of the continuous recording it's necessary to dump the recording via `JFR.dump`.
 
-### Recording for Shutdown {#_recording_for_shutdown}
+### Recording for Shutdown
 
 The only thing to do is to set the recording parameter `dumponexit=true` (on each recording). The record will be stored in the configured `filename` otherwise JFR will create a file similar to this the working directory of the process `hotspot-pid-6-id-1-2020_05_03_12_54_14.jfr`
 
 The JVM source code suggests that JFR has the notion of [emergency JFR dump](https://github.com/openjdk/jdk11u/blob/e81745c5c5e8194791047728a73b74a5262f1634/src/hotspot/share/jfr/recorder/repository/jfrEmergencyDump.cpp#L250-L289), but the mechanism is different as it seems those are dumped in the working directory of the process, which may not be writable in a container. I don't think it's currently possible to change the location. But from what I've seen SOE or OOM are dumped fine via `dumponexit=true` and `filename=...​`.OutOfMemory ⇒ `hs_oom_pid<pid>.jfr`StackOverflowError ⇒ `hs_soe_pid<pid>.jfr`Other error ⇒ `hs_err_pid<pid>.jfr`
 
-### Putting It All Together {#_putting_it_all_together}
+### Putting It All Together
 
 Putting it all together, let's put these in the `JDK_JAVA_OPTIONS`. Record startup then record continuously, and dump on exit:
 

@@ -21,7 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### **In this article, I'll be implementing an OpenAPI generator from scratch so you can too! We'll be creating a very simple generator for the Jetbrains HTTP Client.** {#h3-0-in-this-article-i-ll-be-implementing-an-openapi-generator-from-scratch-so-you-can-too-we-ll-be-creating-a-very-simple-generator-for-the-jetbrains-http-client}
+### **In this article, I'll be implementing an OpenAPI generator from scratch so you can too! We'll be creating a very simple generator for the Jetbrains HTTP Client.**
 
 ![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lengrand.fr/content/images/2023/11/F9_7HZZW4AEvcHF.jpeg)
 

@@ -25,7 +25,7 @@ Hey Java devs! 👋 Ever feel like you're drowning in a sea of code, trying to k
 
 
 
-### **A Day in the Life of a Java Developer ☕** {#h3-0-a-day-in-the-life-of-a-java-developer}
+### **A Day in the Life of a Java Developer ☕**
 
 Your typical day probably looks something like this:
 
@@ -39,7 +39,7 @@ Now, imagine having an AI assistant to help with these tasks. That's the power o
 
 
 
-### **Getting Started: Accessing the MCP Server from IntelliJ 🛠️** {#h3-1-getting-started-accessing-the-mcp-server-from-intellij}
+### **Getting Started: Accessing the MCP Server from IntelliJ 🛠️**
 
 Here's how to set it up:
 
@@ -80,7 +80,7 @@ For other IDEs like VS Code, it's even easier ... just clicking 👇 a button an
 
 
 
-### **Supercharge Your Daily Tasks with SonarQube MCP Server ⚡** {#h3-2-supercharge-your-daily-tasks-with-sonarqube-mcp-server}
+### **Supercharge Your Daily Tasks with SonarQube MCP Server ⚡**
 
 Let's see how our AI-powered buddy can help with your daily tasks:
 
@@ -215,11 +215,11 @@ Furthermore, a rich contextual understanding---derived from elements like the `p
 
 
 
-### **Conclusion: Your MCP for Supercharged Code ✅** {#h3-3-conclusion-your-mcp-for-supercharged-code}
+### **Conclusion: Your MCP for Supercharged Code ✅**
 
 The SonarQube MCP server is more than just a tool; it's a co-pilot that helps you write better, high quality, and more secure code. By integrating it into your daily workflow, you can catch issues earlier, learn best practices, and spend less time on tedious tasks. So, what are you waiting for? Give it a try and take your Java development to the next level! 🚀
 
-### **Resources 📚** {#h3-4-resources}
+### **Resources 📚**
 
 * **Source Code:** [SonarSource/sonarqube-mcp-server on GitHub](https://github.com/SonarSource/sonarqube-mcp-server)
 * **Documentation:** [SonarQube for MCP Server](https://docs.sonarsource.com/sonarqube-mcp-server)

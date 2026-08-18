@@ -27,8 +27,8 @@ If you didn't know already, [Pi4J](https://pi4j.com/) has had a [Kotlin DSL](htt
 
 And I'm here to announce the [latest release `v2.4.0`](https://github.com/Pi4J/pi4j-kotlin/releases/tag/2.4.0) with a sack of additions and to tell you about all the good stuff that's been added since the [first release](https://foojay.io/today/kotlin-on-the-raspberrypi-pi4j-kotlin/).
 
-1. Coroutines {#h2-0-1-coroutines}
-----------------------------------
+1. Coroutines
+-------------
 
 If the `pi4j { ... }` wasn't good enough for ya, and you want to use coroutines instead of weaving fat threads on your precious precious Pi, you can now use the new `pi4jAsync { ... }` block---It can do everything `pi4j { ... }` does + you can run `suspend`ed functions within.
 
@@ -54,8 +54,8 @@ pi4jAsync {
 
 Feel free to visit the [docs](https://pi4j.com/kotlin/coroutines/) on coroutines support, and the full example.
 
-2. I²C DSL {#h2-1-2-i-c-dsl}
-----------------------------
+2. I²C DSL
+----------
 
 This will add a little beauty to your life when dealing with `I²C`
 
@@ -71,8 +71,8 @@ i2c(1, 0x3f) {
 
 Feel free to visit the [docs](https://pi4j.com/kotlin/i2c/) on `I²C` support, and the full example.
 
-3. Serial DSL {#h2-2-3-serial-dsl}
-----------------------------------
+3. Serial DSL
+-------------
 
 I know I'm messing with "taboos" right now, but I've just made Serial look nice. You guessed it right, it's as simple as just a `serial { ... }` block
 
@@ -92,8 +92,8 @@ serial(“/dev/ttyS0”) {
 
 You know the drill, feel free to visit the [docs](https://pi4j.com/kotlin/serial/) on Serial support, and the full example.
 
-4. Misc {#h2-3-4-misc}
-----------------------
+4. Misc
+-------
 
 * Updated Pi4J to `v2.3.0`
 * Updated docs and examples

@@ -19,16 +19,16 @@ related_posts:
 frozen: false
 ---
 
-JavaFX Core {#h2-0-javafx-core}
--------------------------------
+JavaFX Core
+-----------
 
 * [**Gluon** announced JavaFX update releases](https://twitter.com/GluonHQ/status/1649078581887205377): 20.0.1 (latest release), 17.0.7 (latest LTS), and for Gluon LTS customers 11.0.19.
 * [In this video with **Kevin Rushforth** he talks about JavaFX 20 and beyond](https://www.youtube.com/watch?v=f8TOo8TL4-k).
   * [**Dirk Lemmermann** tweeted some of the highlights](https://twitter.com/dlemmermann/status/1648267569663492096) like RichTextArea, ideas for future releases,...
   * [The Notebook demo is looking really nice](https://youtu.be/f8TOo8TL4-k?t=1240) to learn JavaFX in an easy way.
 
-Conferences {#h2-1-conferences}
--------------------------------
+Conferences
+-----------
 
 * As announced a few weeks ago, **Sean Phillips** was one of the keynote speakers at DevNexus in Atlanta. And his talk did not go unnoticed...
   * [**Ixchel Ruiz**: "Blowing the ceiling of technology, passion, visualization"](https://twitter.com/ixchelruiz/status/1643970024015556608)
@@ -37,35 +37,35 @@ Conferences {#h2-1-conferences}
   * And [many more...](https://twitter.com/search?q=%40SeanMiPhillips&src=typed_query&f=live)
   * The [intro animation of his talk was shared on Reddit](https://www.reddit.com/r/JavaFX/comments/12biesq/matrix_1_end_scene_special_effect_of_digital_rain/) and shows the creators of the libraries used in his application as if they are trapped in the Matrix...
 
-Building apps {#h2-2-building-apps}
------------------------------------
+Building apps
+-------------
 
 * [**CodeDead**](https://twitter.com/C0DEDEAD) shared a GitHub Actions workflow for the people that are using JDK 20, Gradle and JavaFX 20 [on Reddit](https://www.reddit.com/r/JavaFX/comments/129mkmx/javafx_20_jdk20_gradle_github_actions) to test, build and package your JavaFX application on Windows, Linux and macOS when creating a pull request on either the main/master or development branches of your GIT project.
 
-JavaFX Scene Builder {#h2-3-javafx-scene-builder}
--------------------------------------------------
+JavaFX Scene Builder
+--------------------
 
 * Version 20 is about ready. Feel free to test the [latest snapshots](https://github.com/gluonhq/scenebuilder/releases/tag/early-access) and report blocking issues.
 * [**Chad Preisler** shared a video](https://twitter.com/cpreisler/status/1643748294898896897) on how to use GemsFX in Scene Builder.
 
-Bumped to Java and JavaFX 20: {#h2-4-bumped-to-java-and-javafx-20}
-------------------------------------------------------------------
+Bumped to Java and JavaFX 20:
+-----------------------------
 
 * [LibHEIF 1.2.3](https://twitter.com/lanthale/status/1643943442945306625)
 * [JabRef with speed improvements on macOS](https://foojay.social/@jabref/110148247312318923)
 * [Opal v1.1.0](https://twitter.com/C0DEDEAD/status/1642571326639538176)
 * [LibrawFX 1.8.4](https://twitter.com/lanthale/status/1642981173826842624)
 
-Regular guests {#h2-5-regular-guests}
--------------------------------------
+Regular guests
+--------------
 
-### OrangoMango {#h3-6-orangomango}
+### OrangoMango
 
 * [Found a performance problem in his 3D engine](https://twitter.com/orango_mango/status/1642948896484737025), thanks to **Almas Baim** and VisualVM.
 * [Added transparent blocks](https://twitter.com/orango_mango/status/1645098431046725640) to his 3D engine.
 * [Is creating a chess game](https://twitter.com/orango_mango/status/1650868150836113409) and shares the code on GitHub. You can play chess in LAN (Java sockets) and export a game to FEN and PGN.
 
-### Almas Baim {#h3-7-almas-baim}
+### Almas Baim
 
 * [Adding hex support for tiled .tmx maps to FXGL](https://twitter.com/AlmasBaim/status/1642661319668031488).
 * [Playing with a cat and PixelBuffer on April 1st](https://twitter.com/AlmasBaim/status/1642277058033139712).
@@ -76,12 +76,12 @@ Regular guests {#h2-5-regular-guests}
 * [Shared a video showing a game with many subtle visual effects](https://twitter.com/AlmasBaim/status/1651351553578500097). Go fullscreen to see all details!
 * [And he is also trying to hypnotize you...](https://twitter.com/AlmasBaim/status/1649882265986424832).
 
-### Gerrit Grunwald {#h3-8-gerrit-grunwald}
+### Gerrit Grunwald
 
 * [Created a PoincarePlots while being on a plane](https://twitter.com/hansolo_/status/1648381819052589056) and added it to [version 17.1.35 of his charts library](https://twitter.com/hansolo_/status/1648383683202523141).
 
-Miscellaneous {#h2-9-miscellaneous}
------------------------------------
+Miscellaneous
+-------------
 
 * [**Tobias Briones** is using math to draw flowers](https://twitter.com/tobiasbriones_/status/1648576020293771265).
   * And in an oher tweet it's [not a bird, not a cat: It's the bird cat](https://twitter.com/tobiasbriones_/status/1650900771263717377)!
@@ -99,8 +99,8 @@ Miscellaneous {#h2-9-miscellaneous}
 * [**siedlerchr** shared a link to an excellent article explaining the concepts of Bindings](https://twitter.com/siedlerchr/status/1649518550996987911), it's from 2020 but still very valid.
 * [**Jeannot Muller** wrote about "JavaFX or Swing in 2023"](https://jeannot-muller.com/javafx-or-swing-in-2023).
 
-About jfx-central.com {#h2-10-about-jfx-central-com}
-----------------------------------------------------
+About jfx-central.com
+---------------------
 
 * New content: [X-Pipe](https://www.jfx-central.com/real_world/xpipe): a flexible connection manager and remote file explorer.
 * Coding for [version 2 of the jfx-central has started](https://twitter.com/dlemmermann/status/1646587048957018119), check the Twitter thread if you want to join the development team.

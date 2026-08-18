@@ -28,8 +28,8 @@ frozen: false
 
 Grafana dashboard for all running frameworks
 
-Introduction {#h2-0-introduction}
----------------------------------
+Introduction
+------------
 
 In times of Cloud and distributed applications, it is becoming more and more important to be able to evaluate a functionality at runtime, an aspect which is referred to as [observability](https://en.wikipedia.org/wiki/Observability).
 
@@ -43,8 +43,8 @@ The article focuses on utilising metrics and provisioning subsystem data to the 
 
 The article explores the configuration and libraries required over the selected frameworks by using two different JVM languages, namely Java and Kotlin.
 
-Sample Scenario {#h2-1-sample-scenario}
----------------------------------------
+Sample Scenario
+---------------
 
 For the purposes of this article, a simple application scenario has been created that will be referred to throughout this article.
 
@@ -58,8 +58,8 @@ The code is available on GitHub:
 
 <https://github.com/mirage22/fw-monitoring-examples>
 
-Tools {#h2-2-tools}
--------------------
+Tools
+-----
 
 Most probably the best open-source solution that's able to visualize data points is Grafana. **Grafana** allows for the creation of very useful graphical dashboards with the utilization of mathematical and statistical functions. Grafana also provides a very neat alerting system and can be connected with various types of databases, out of the article scope.
 
@@ -75,8 +75,8 @@ Having all parts of the puzzle lined up to get usage data drained from JVM based
 
 * Grafana is designed to visualize metrics from different sources and enforce availability of the data.
 
-Enabling Metrics for Java Frameworks {#h2-3-enabling-metrics-for-java-frameworks}
----------------------------------------------------------------------------------
+Enabling Metrics for Java Frameworks
+------------------------------------
 
 Popular Java frameworks were selected to represent the Java language in the examples that follow. The following section describes in more detail the initiation of the metrics.
 
@@ -136,8 +136,8 @@ public MainController(PrometheusMeterRegistry registry, HelloService helloServic
 
 **Example 4.** Injecting "***PrometheusMeterRegistry*** " to the "***MainController***"
 
-Enabling Metrics for Kotlin Frameworks {#h2-4-enabling-metrics-for-kotlin-frameworks}
--------------------------------------------------------------------------------------
+Enabling Metrics for Kotlin Frameworks
+--------------------------------------
 
 The following section provides additional details on how to enable metrics for the selected Kotlin frameworks.
 
@@ -216,8 +216,8 @@ class MainController(private val registry: PrometheusMeterRegistry, private val 
 
 **Example 9**. Injecting registry to the main controller
 
-Creating and Exposing Custom Counters and More {#h2-5-creating-and-exposing-custom-counters-and-more}
------------------------------------------------------------------------------------------------------
+Creating and Exposing Custom Counters and More
+----------------------------------------------
 
 Each considered scenario is intended to be very trivial and similar across different frameworks to help for a complete picture of the Micrometer instrumentation wrapper "***Counter"*** class.
 
@@ -281,8 +281,8 @@ counters.getOrPut(name) {
 
 **Example 13.**Initiate and increment counters in Kotlin
 
-Visualizing Applications with Docker Compose {#h2-6-visualizing-applications-with-docker-compose}
--------------------------------------------------------------------------------------------------
+Visualizing Applications with Docker Compose
+--------------------------------------------
 
 By setting up the previous parts we have configured and initiated counters and similar endpoints for each framework.
 
@@ -341,8 +341,8 @@ services:
 
 Now everything is configured and the connection between all considered frameworks, Prometheus and Grafana docker nodes is configured. It is possible to run and play with the data.
 
-Playing with Grafana {#h2-7-playing-with-grafana}
--------------------------------------------------
+Playing with Grafana
+--------------------
 
 All nodes are up and running (Example 17.)! Now let's generate some traffic in order to be able to observe some actions. Luckily there is one commonly used tool that allows us to generate a continual traffic without much effort.
 
@@ -382,12 +382,12 @@ As has been already mentioned, Grafana provides a very neat environment to work 
 
 **Image 5.** Timeline of requested name endpoints and the customer "**Counter**" provided by each docker node
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article we have discovered how to expose metrics that provide JVM specific information, which may be helpful and relevant for gaining a closer understanding of the implemented code.
 
-#### Technologies Used {#technology-used-and-discussed}
+#### Technologies Used
 
 * Docker 20.10
 * OpenJDK 17

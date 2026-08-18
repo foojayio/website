@@ -31,8 +31,8 @@ Most of the time, you don't know whether it's worth it: you'd like to offer a Mi
 
 I want to show how you can achieve it without writing a single line of code.
 
-The solution {#h2-0-the-solution}
----------------------------------
+The solution
+------------
 
 The main requirement of the solution is to use the [PostgreSQL database](https://www.postgresql.org/). It's a well-established Open Source SQL database.
 
@@ -121,8 +121,8 @@ We immediately get the results:
 
 That was a quick win!
 
-Improving the solution {#h2-1-improving-the-solution}
------------------------------------------------------
+Improving the solution
+----------------------
 
 Though the solution works, it has a lot of room for improvement.
 
@@ -193,8 +193,8 @@ curl localhost:9080/product
 
 It returns the same result as above.
 
-DDoS protection {#h2-2-ddos-protection}
----------------------------------------
+DDoS protection
+---------------
 
 We haven't added anything, but we're ready to start the work. Let's first protect our API from attacks. Apache APISIX is designed around a plugin architecture.
 
@@ -235,8 +235,8 @@ curl localhost:9080/product
 ```
 
 
-Per-route authorization {#h2-3-per-route-authorization}
--------------------------------------------------------
+Per-route authorization
+-----------------------
 
 PostgREST also offers an Open API endpoint at the root. We thus have two routes: `/` for the Open API spec and `/product` for the products.
 
@@ -312,8 +312,8 @@ curl -H "apikey: admin" localhost:9080
 
 This time, it returns the Open API spec as expected.
 
-Monitoring {#h2-4-monitoring}
------------------------------
+Monitoring
+----------
 
 A much-undervalued feature of any software system is monitoring. As soon as you deploy any component in production, you must monitor its health. Nowadays, many services are available to monitor.
 
@@ -379,8 +379,8 @@ Send a couple of queries and open the Grafana dashboard. It should look similar 
 
 <br />
 
-Conclusion {#h2-5-conclusion}
------------------------------
+Conclusion
+----------
 
 Creating a full-fledged REST(ful) API is a huge investment. One can quickly test a simple API by exposing one's database in a CRUD API via PostgREST. However, such an architecture is not fit for production usage.
 

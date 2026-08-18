@@ -28,8 +28,8 @@ I also created a video describing the same topics based on this article, so you 
 
 {{< youtube U09ZQ3kjuqM >}}
 
-What is an Enum? {#h2-0-what-is-an-enum}
-----------------------------------------
+What is an Enum?
+----------------
 
 Enums are the preferred way to define fixed values you want to use in your code. They are a special type of Java class and contain a group of unchangeable variables.
 
@@ -44,8 +44,8 @@ enum Level {
 ```
 
 
-Projects Using Enums {#h2-1-projects-using-enums}
--------------------------------------------------
+Projects Using Enums
+--------------------
 
 A few of my "pet projects" make extensive use of Java enums, and while working on these, I learned that it's not clear to everyone that these are really powerful and can contain much more than just a list of fixed values.
 
@@ -63,7 +63,7 @@ Let's take a look at a few of these use cases.
  </figure>
 </figure>
 
-### Raspberry Pi Boards in an Enum Database {#h3-2-raspberry-pi-boards-in-an-enum-database}
+### Raspberry Pi Boards in an Enum Database
 
 For the [Pi4J project](https://pi4j.com/), a library was needed that contains some information about the various Raspberry Pi boards, and which protocols they support on their GPIO (General Purpose Input/Output) pins. As this information should be available inside the code, on boards running without an internet connection, an API was not the right solution.
 
@@ -71,11 +71,11 @@ Therefore the decision was made to generate a Java library that contains all thi
 
 On top of this library, a website and API are created at [api.pi4j.com](https://api.pi4j.com/web/). As a result, the database can now be used in offline and online modes.
 
-### Parsing of LottieFiles {#h3-3-parsing-of-lottiefiles}
+### Parsing of LottieFiles
 
 In another project [Lottie4J](https://lottie4j.com/) I'm trying to parse animations in JSON format into Java objects to create a JavaFX player. To make the LottieFiles-format easier to understand within this Java project, enums are used for the [various definitions as you can see in the GitHub project](https://github.com/lottie4j/lottie4j/tree/main/core/src/main/java/com/lottie4j/core/definition).
 
-### Video Categories for [4drums.media](https://4drums.media/) {#h3-4-video-categories-for-4drums-media}
+### Video Categories for [4drums.media](https://4drums.media/)
 
 This is a project inspired by my 12y son, who wants to collect and share drum videos, and hopes he can build a community around this. It's fun to be able to use my "professional knowledge" to build such a project quickly, thanks to Spring and Vaadin, but it's a work in progress as my son created a TODO list with ideas with 100 remaining bullet points...
 
@@ -108,12 +108,12 @@ public enum VideoCategory {
 ```
 
 
-Examples of Enum Usage {#h2-5-examples-of-enum-usage}
------------------------------------------------------
+Examples of Enum Usage
+----------------------
 
 Let's look at some examples, step-by-step. The full code is available on [GitHub as EnumExtended.java](https://github.com/foojayio/getting_started_with_java/blob/main/EnumExtended.java) and can be executed with [JBang!](https://www.jbang.dev/) with `jbang EnumExtended.java`.
 
-### Basic Functionality {#h3-6-basic-functionality}
+### Basic Functionality
 
 A basic example of the use of an Enum is the following:
 
@@ -149,7 +149,7 @@ class MyProgram {
 
 But an enum can do a lot more! Let's take a look at some examples...
 
-### Using Enums in Switch {#h3-7-using-enums-in-switch}
+### Using Enums in Switch
 
 By using enums, `switch - case` code can be written in a very clean way.
 
@@ -170,7 +170,7 @@ public int getLevelValue(Level level) {
 
 But as we will see further, this code can still be improved a lot, by extending the Level enum...
 
-### Use Enum Instead of Boolean {#h3-8-use-enum-instead-of-boolean}
+### Use Enum Instead of Boolean
 
 Enums are also a good use case to replace boolean checks. Let's take an example with customers that can become "inactive" in a system. Typically you would do this with a boolean.
 
@@ -200,7 +200,7 @@ class Customer {
 ```
 
 
-### Extra Data in an Enum Value {#h3-9-extra-data-in-an-enum-value}
+### Extra Data in an Enum Value
 
 For me, the true power of an enum, is the fact that it can actually hold a lot of information and provide methods to use these values.
 
@@ -269,7 +269,7 @@ Level ERROR
 
 So this means `level.getSeverity()` fully replaces the `getLevelValue(Level level)` method with `switch-case` we've seen before.
 
-### JSON parsing with Enums {#h3-10-json-parsing-with-enums}
+### JSON parsing with Enums
 
 In many cases where you want to generate JSON output or parse JSON to Java objects, enums can be involved.
 
@@ -438,8 +438,8 @@ This generates JSON with the ZonedDateTime in the defined format:
 ```
 
 
-Conclusion {#h2-11-conclusion}
-------------------------------
+Conclusion
+----------
 
 Java enums can contain much more than just a list of definitions, but also data and extended functionality!
 

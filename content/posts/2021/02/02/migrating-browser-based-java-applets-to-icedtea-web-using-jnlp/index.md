@@ -35,14 +35,14 @@ Here the original Pathfinder Applet Page: [​https://areo.info/mpf/java11.html]
 
 Instead, use the recipe explained below to create a JNLP file so you can run the Applet on current OpenJDK 11 with IcedTea-Web independently from any Web Browser.
 
-Overview {#h2-0-overview}
--------------------------
+Overview
+--------
 
 For those who consider this rocket science and just want to see the result after migration, the migrated Pathfinder application is accessible here: ​<https://areo.info/mpf>. For those who are curious about all the details, here is the general workflow with code:
 
 The idea provided here utilizes the Applet-feature of Java Web Start which was integrated into the JNLP file format to help during the migration of Java Applets to standalone applications. With that feature, it is possible to run at least those Applets which don't interact much with the HTML page they are embedded into. Simple interaction though, like calling URLs over http or https still works. While the same name "Applet" is used in JNLP, it is technically a normal standalone application, not connected to any web browser.
 
-### **Preparation** {#h3-1-preparation}
+### **Preparation**
 
 To start, you first need to install OpenJDK 11 and IcedTea-Web on the desktop system where you like to run the Applet. Both are offered on various download locations. For example, you can get them from azul.com here:
 
@@ -51,7 +51,7 @@ To start, you first need to install OpenJDK 11 and IcedTea-Web on the desktop sy
 
 IcedTea-Web also runs on OpenJDK 8, but I recommend to start first with JDK 11, even for decade-old Applets. After installation of both, the next step is to check details about the web page containing the Applet you want to migrate.
 
-### **Locating the Applet in the HTML Page** {#h3-2-locating-the-applet-in-the-html-page}
+### **Locating the Applet in the HTML Page**
 
 Usually, an Applet is embedded in a single large web page using the \<applet\>, \<object\> or \<embed\> tag.
 
@@ -112,7 +112,7 @@ This was used by the Netscape Browser.
 ```
 
 
-### **Creating a JNLP file** {#h3-3-creating-a-jnlp-file}
+### **Creating a JNLP file**
 
 Based on the copied \<applet\>, \<object\> or \<embed\> section, create a JNLP file named myapp.jnlp here in this example. The content should look similar to the following, with all attributes, parameters and URLs replaced by the actual values from your application:
 
@@ -147,7 +147,7 @@ Based on the copied \<applet\>, \<object\> or \<embed\> section, create a JNLP f
 
 I'm using an empty "codebase" attribute as for the first step the file will only be used locally. Because of the empty codebase, we then have to add the complete absolute URLs in the jar href attributes. Without this, IcedTea-Web would try to update the local JNLP file from the codebase URL, which will fail. We'll now try to run the newly created file on IcedTea-Web.
 
-### **Running the Migrated Applet** {#h3-4-running-the-migrated-applet}
+### **Running the Migrated Applet**
 
 To run the Applet now on IcedTea-Web, enter the following commands depending on the OS you use on your desktop system.
 
@@ -185,7 +185,7 @@ itweb-settings
 
 Then enable logging to the terminal at Debugging -\> Enable debugging. Writing the logs to a file can also enabled there. The configuration tool also allows to wipe the local JAR cache which is helpful during implementing the solution: Cache -\> View Files -\> Purge
 
-### **Placing the JNLP file on a Web Server** {#h3-5-placing-the-jnlp-file-on-a-web-server}
+### **Placing the JNLP file on a Web Server**
 
 This step is not always needed and often not possible, but it allows for easier start of the migrated Applet. This step is about copying the JNLP file to a Web Server and add a link to it from the original Applet start page to help users to migrate away from the Plugin-based Applet.
 

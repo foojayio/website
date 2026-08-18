@@ -61,7 +61,7 @@ JDKMon **17.0.18** has just been released!
 
 This versions brings two new features, described below.
 
-### **Vulnerability Info** {#h3-0-vulnerability-info}
+### **Vulnerability Info**
 
 JDKMon will check for all version numbers of the OpenJDK distributions it finds if there are known vulnerabilities. Meaning to say if you have a distribution with 16.0.1 installed on your machine. JDKMon will check if there are known vulnerabilities for OpenJDK 16.0.1.
 
@@ -75,7 +75,7 @@ When you click on the yellow circle another window will pop up which shows you t
 
 The CVE entries in that window are links that when clicked will open the clicked CVE in your standard browser with a more detailed description.
 
-### **TCK Test Info (Experimental)** {#h3-1-tck-test-info-experimental}
+### **TCK Test Info (Experimental)**
 
 If an OpenJDK distribution is TCK tested and provides information about that (e.g. like a certificate etc.), JDKMon will indicate this when you want to downlad an OpenJDK distribution.
 

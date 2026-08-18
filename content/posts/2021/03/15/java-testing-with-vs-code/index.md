@@ -22,7 +22,7 @@ In our [last post](https://foojay.io/today/welcome-to-vs-code-for-java/ "last po
 
 To run Java tests on VS Code, we recommend using the [Java Test Runner extension](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test "Java Test Runner extension") or the [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack "Java Extension Pack"), which includes the extension. The extension supports the JUnit4, JUnit5, and TestNG frameworks.
 
-### Running Tests {#h3-0-running-tests}
+### Running Tests
 
 When a project with test cases is imported into VS Code, VS Code can automatically detect the test cases and get them ready for you to run.
 
@@ -50,7 +50,7 @@ It's a handy feature that allows you to focus on coding by minimizing context sw
 
 ![](code-lens-running-test.gif)
 
-### Accessing Testing Reports {#h3-1-accessing-testing-reports}
+### Accessing Testing Reports
 
 After running tests, VS Code generates a testing report for you.
 

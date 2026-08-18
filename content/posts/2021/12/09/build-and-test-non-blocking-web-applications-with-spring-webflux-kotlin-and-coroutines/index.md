@@ -60,8 +60,8 @@ Instead of the annotation-based model with `@RestController`, `@RequestMapping`,
 
 We follow the journey of an incoming request and, therefore, start on the outside. A request starts at the router functions, which are the functional alternative of the controller's `@RequestMapping`. The request is then passed to the functional variant of a service, which we call a handler. Finally, we arrive at the already familiar repository. This last layer has the same name as in Spring MVC, but the technology behind it is quite different to make it all non-blocking. If you want to stick with your controllers and services then that is also fully supported by WebFlux and most articles actually show that approach. However, I would like to explore an approach that is more idiomatic Kotlin. All code examples can be found in [this GitHub repository](https://github.com/BjornvdLaan/spring-boot-webflux-kotlin-h2-example "GitHub repository").
 
-Our Example {#h2-0-our-example}
--------------------------------
+Our Example
+-----------
 
 As our example, we build an API for our very own CMS (Cat Management System) which is able to perform Create, Read, Update, and Delete (CRUD) operations. Below you find an overview of the routes we will define and the possible responses the application can come back with.
 
@@ -78,8 +78,8 @@ As our example, we build an API for our very own CMS (Cat Management System) whi
 | DELETE      | /api/cats/{id} | 204 No Content       | Existing cat is now deleted                  |
 | DELETE      | /api/cats/{id} | 404 Not Found        | Deletion of non-existing cat was requested   |
 
-Setting Up the Project {#h2-1-setting-up-the-project}
------------------------------------------------------
+Setting Up the Project
+----------------------
 
 We start by creating a fresh Spring Boot project using the [Spring Initializr](https://start.spring.io/). We tell it to be a Gradle project using Kotlin and packaged as a jar. We also add the dependencies we need: Spring Reactive Web which includes WebFlux and Netty, Spring Data R2DBC for our repositories, and H2 to create a simple in-memory database to test our application.
 
@@ -99,8 +99,8 @@ dependencies {
 
 These are not strictly required to run our application but are used in the tests. I recommend you to check Maven Central for the latest versions.
 
-Router {#h2-2-router}
----------------------
+Router
+------
 
 Router functions take an argument of type `ServerRequest` and return a `ServerResponse`. These are the WebFlux variants of Spring MVC's `RequestEntity` and `ResponseEntity`, respectively. We use the Kotlin router DSL to define our routes:
 
@@ -136,8 +136,8 @@ class CatRouterConfiguration(
 
 The `coRouter` function creates a RouterFunction based on the further nested statements. You can use the `String.nest` extension function to group routes that share a common path prefix. Similar groupings can be made based on accept and contentType headers, as well as other predicates. The actual routes are added through functions that correspond to the HTTP methods: `GET`, `POST`, `PUT`, `DELETE` and the others. The actual processing is handled by the Handler.
 
-Handler {#h2-3-handler}
------------------------
+Handler
+-------
 
 Implementations of `HandlerFunction` represent functions that takes in requests and generates responses based on these. Similar to the methods in a service, related handler functions are grouped in a handler class using a Kotlin-specific DSL. These functions read and parse the path variables and request bodies, reach out to the repositories, and build a `ServerResponse` to return to the router.
 
@@ -225,8 +225,8 @@ suspend fun ServerResponse.BodyBuilder.bodyValueAndAwait(body: Any): ServerRespo
 
 As we can see, the Reactor method `bodyValue` is called and chained by `awaitSingle` from the `kotlinx.coroutines` package, which awaits the single value from the Publisher and returns the resulting value, to create the coroutines variant called `bodyValueAndAwait`.
 
-Repository {#h2-4-repository}
------------------------------
+Repository
+----------
 
 The last stop before the database are the repositories at the persistence infrastructure layer. Similar to the other layers, we need to be non-blocking here. We, therefore, cannot use the blocking JDBC and need to use the reactive alternative called [R2DBC](https://r2dbc.io/). Spring Data Reactive luckily offers interfaces for non-blocking repositories that look a lot like their blocking counterparts `JpaRepository` or `CrudRepository`. If we choose to implement the R2DBC variant called `ReactiveCrudRepository` then these methods would return the Reactor data types `Mono` and `Flux`. Fortunately for us, as with the other layers, WebFlux provides extensions for Kotlin and coroutines in the form of `CoroutineCrudRepository` that return just the entities:
 
@@ -241,14 +241,14 @@ interface CatRepository : CoroutineCrudRepository<Cat, Long> {
 ```
 
 
-Tests {#h2-5-tests}
--------------------
+Tests
+-----
 
 Well behaved software engineering practitioners as we are, we want to test our applications thoroughly. Below are two test suites, one mocks the repository to not be dependent on an actual database and the other uses an in-memory H2 database. They both provide a simple test for each HTTP status that each route can respond with.
 
 Both tests have two helper functions `aCat()` and `anotherCat()` that create a new `Cat` with some default values and offer the possibility to supply custom values. This approach to creating objects for our tests hides away all details of the cats except those that are relevant to the test, in which case you would define a custom value for those relevant fields.
 
-### 1. Tests with mocking {#h3-6-1-tests-with-mocking}
+### 1. Tests with mocking
 
 This first approach is the one I see most often in other articles: we mock the `CatRepository` to test the router and handler without being dependent on a database. We use a combination of Spring WebFlux's `@WebFluxTest` together with `@Import` that adds the router and handler class. We could use `@SpringBootTest` and `@AutoConfigureWebTestClient` to achieve the same thing without needing to manually import the classes with `@Import`. However, in this way our tests are faster and I also like how the specific router and hander under test are explicitly mentioned at the top.
 
@@ -495,7 +495,7 @@ class MockedRepositoryIntegrationTest(
 ```
 
 
-### 2. Tests without mocking {#h3-7-2-tests-without-mocking}
+### 2. Tests without mocking
 
 We can also perform an integration test with an actual database. Nothing better than the real thing, right? Different options exist such as testcontainers, actual databases, and in-memory databases. We will pick the third option here and use `@DirtiesContext` to recreate the application context, including the database, after each test.
 
@@ -683,8 +683,8 @@ class InMemoryDatabaseIntegrationTest(
 ```
 
 
-Conclusion {#h2-8-conclusion}
------------------------------
+Conclusion
+----------
 
 In this article, we saw how to build a non-blocking web application with Spring WebFlux using the extensions for Kotlin.
 

@@ -19,8 +19,8 @@ frozen: false
 
 I asked on [Twitter](https://twitter.com/bazlur_rahman/status/1610800339405389826 "Twitter") and [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7016566492548775936/ "LinkedIn") why many developers don't write or give talks, and I was amused by the response I received. This article is about that.
 
-The problems: {#h2-0-the-problems}
-----------------------------------
+The problems:
+-------------
 
 It turns out, developers do not write blogs or give presentations for a variety of reasons. Some developers may believe they lack interesting experiences or information to share or that they are not experts in their profession. Others may be shy or fearful of public speaking. Due to their hectic schedules, individuals may not have time to write about or discuss their jobs, which is another reason.
 
@@ -36,8 +36,8 @@ They may have complex relationships with others, writing blogs requires a differ
 
 On the other hand, **Bruno** says that being an introvert can help you write good content because introverts tend to pay more attention to other people and are good listeners. They also talk about how hard it is to get noticed for writing and suggest that shy people start by writing for their team or close friends before sharing with a broader audience.
 
-The benefits: {#h2-1-the-benefits}
-----------------------------------
+The benefits:
+-------------
 
 However, many of the people who answered, though, said that the benefits of sharing one's knowledge and experiences with others are well worth the effort, even if it takes time and practice to get better at writing or public speaking.
 
@@ -49,8 +49,8 @@ And I agree with that. There are several compelling reasons why one should write
 4. **Community building.** Sharing information and experiences may also help the development community by creating a culture of sharing and working together. It may help developers generate a sense of community and support.
 5. **Personal growth.** Publishing and speaking about one's work might be a unique chance for developers to flourish. It might help people think about their own lives, find ways to improve, and feel good about what they've done.
 
-Solutions: {#h2-2-solutions}
-----------------------------
+Solutions:
+----------
 
 Now that we all know the benefits, the question becomes: how do we start?
 
@@ -62,7 +62,7 @@ Now that we all know the benefits, the question becomes: how do we start?
 6. **Get feedback:** Seeking feedback from others, whether it's from colleagues, friends, or editors, can be a great way to improve your writing and speaking. Don't be afraid to ask for constructive criticism; use it to improve your work.
 7. **Be yourself:** Finally, being authentic and genuine when writing or speaking about your work is essential. Feel free to let your personality shine and share your experiences and perspectives. This can do your writing and talks more relatable and engaging for your audience.
 
-Conclusion: {#h2-3-conclusion}
-------------------------------
+Conclusion:
+-----------
 
 Even though it might be difficult, writing and speaking can provide numerous rewards that we all desire to reap.

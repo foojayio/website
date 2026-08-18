@@ -50,8 +50,8 @@ Before I proceed I think it's important to disclose a bias: I am personally not 
 
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-Introduction to Serverless Computing {#h2-0-introduction-to-serverless-computing}
----------------------------------------------------------------------------------
+Introduction to Serverless Computing
+------------------------------------
 
 Serverless computing, often referred to as Function as a Service (FaaS), allows developers to build and run applications without managing servers. In this model, cloud providers automatically handle the infrastructure, scaling, and management tasks, enabling developers to focus purely on writing and deploying code. Popular serverless platforms include AWS Lambda, Azure Functions, and Google Cloud Functions.
 
@@ -64,43 +64,43 @@ The "catch" is two fold:
 * Serverless programming removes the need to understand the servers but also removes the ability to rely on them resulting in more complex architectures.
 * Pricing starts off cheap. Practically free. It can quickly escalate especially in case of an attack or misconfiguration.
 
-Challenges of Serverless Debugging {#h2-1-challenges-of-serverless-debugging}
------------------------------------------------------------------------------
+Challenges of Serverless Debugging
+----------------------------------
 
 While serverless architectures offer some benefits, they also introduce unique debugging challenges. The primary issues stem from the inherent complexity and distributed nature of serverless environments. Here are some of the most pressing challenges.
 
-### Disconnected Environments {#h3-2-disconnected-environments}
+### Disconnected Environments
 
 One of the major hurdles in serverless debugging is the lack of consistency between development, staging, and production environments. While traditional development practices rely on these separate environments to test and validate code changes, serverless architectures often complicate this process. The differences in configuration and scale between these environments can lead to bugs that only appear in production, making them difficult to reproduce and fix.
 
-### Lack of Standardization {#h3-3-lack-of-standardization}
+### Lack of Standardization
 
 The serverless ecosystem is highly fragmented, with various vendors offering different tools and frameworks. This lack of standardization can make it challenging to adopt a unified debugging approach. Each platform has its own set of practices and tools, requiring developers to learn and adapt to multiple environments.
 
 This is slowly evolving with some platforms gaining traction, but since this is a vendor driven industry there are many edge cases.
 
-### Limited Debugging Tools {#h3-4-limited-debugging-tools}
+### Limited Debugging Tools
 
 Traditional debugging tools, such as step-through debugging and breakpoints, are often unavailable in serverless environments. The managed and controlled nature of serverless functions restricts access to these tools, forcing developers to rely on alternative methods, such as logging and remote debugging.
 
-### Concurrency and Scale {#h3-5-concurrency-and-scale}
+### Concurrency and Scale
 
 Serverless functions are designed to handle high concurrency and scale seamlessly. However, this can introduce issues that are hard to reproduce in a local development environment. Bugs that manifest only under specific concurrency conditions or high load are particularly challenging to debug.
 
 Notice that when I discuss concurrency here I'm often referring to race conditions between separate services.
 
-Effective Strategies for Serverless Debugging {#h2-6-effective-strategies-for-serverless-debugging}
----------------------------------------------------------------------------------------------------
+Effective Strategies for Serverless Debugging
+---------------------------------------------
 
 Despite these challenges, several strategies can help make serverless debugging more manageable. By leveraging a combination of local debugging, feature flags, staged rollouts, logging, idempotency, and Infrastructure as Code (IaC), developers can effectively diagnose and fix issues in serverless applications.
 
-### Local Debugging with IDE Remote Capabilities {#h3-7-local-debugging-with-ide-remote-capabilities}
+### Local Debugging with IDE Remote Capabilities
 
 While serverless functions run in the cloud, you can simulate their execution locally using tools like AWS SAM (Serverless Application Model). This involves setting up a local server that mimics the cloud environment, allowing you to run tests and perform basic trial-and-error debugging.
 
 To get started, you need to install Docker or Docker Desktop, create an AWS account, and set up the AWS SAM CLI. Deploy your serverless application locally using the SAM CLI, which enables you to run the application and simulate Lambda functions on your local machine. Configure your IDE for remote debugging, launching the application in debug mode, and connecting your debugger to the local host. Set breakpoints to step through the code and identify issues.
 
-### Using Feature Flags for Debugging {#h3-8-using-feature-flags-for-debugging}
+### Using Feature Flags for Debugging
 
 Feature flags allow you to enable or disable parts of your application without deploying new code. This can be invaluable for isolating issues in a live environment. By toggling specific features on or off, you can narrow down the problematic areas and observe the application's behavior under different configurations.
 
@@ -110,13 +110,13 @@ This is essentially "debugging in production". Working on a new feature?
 
 Wrap it in a feature flag which is effectively akin to wrapping the entire feature (client and server) in if statements. You can then enable it conditionally globally or on a per user basis. This means you can test the feature, enable or disable it based on configuration without redeploying the application.
 
-### Staged Rollouts and Canary Deployments {#h3-9-staged-rollouts-and-canary-deployments}
+### Staged Rollouts and Canary Deployments
 
 Deploying changes incrementally can help catch bugs before they affect all users. Staged rollouts involve gradually rolling out updates to a small percentage of users before a full deployment. This allows you to monitor the performance and error logs of the new version in a controlled manner, catching issues early.
 
 Canary deployments take this a step further by deploying new changes to a small subset of instances (canaries) while the rest of the system runs the stable version. If issues are detected in the canaries, you can roll back the changes without impacting the majority of users. This method limits the impact of potential bugs and provides a safer way to introduce updates. This isn't great as in some cases some demographics might be more reluctant to report errors. However, for server side issues this might make sense as you can see the impact based on server logs and metrics.
 
-### Comprehensive Logging {#h3-10-comprehensive-logging}
+### Comprehensive Logging
 
 Logging is one of the most common and essential tools for debugging serverless applications. I wrote and [spoke a lot about logging in the past](https://www.youtube.com/watch?v=53qCLRFcBSs). By logging all relevant data points, including inputs and outputs of your functions, you can trace the flow of execution and identify where things go wrong.
 
@@ -128,7 +128,7 @@ I talk about striking the delicate balance between debuggable code, performance 
 
 <br />
 
-### Embracing Idempotency {#h3-11-embracing-idempotency}
+### Embracing Idempotency
 
 Idempotency, a key concept from functional programming, ensures that functions produce the same result given the same inputs, regardless of the number of times they are executed. This simplifies debugging and testing by ensuring consistent and predictable behavior.
 
@@ -136,8 +136,8 @@ Designing your serverless functions to be idempotent involves ensuring that they
 
 Testing is always important but in serverless and complex deployments it becomes critical. Awareness and embrace of idempotency allows for more testable code and easier to reproduce bugs.
 
-Debugging a Lambda Application Locally with AWS SAM {#h2-12-debugging-a-lambda-application-locally-with-aws-sam}
-----------------------------------------------------------------------------------------------------------------
+Debugging a Lambda Application Locally with AWS SAM
+---------------------------------------------------
 
 {{< youtube SlFA-JlTYGM >}}
 
@@ -145,7 +145,7 @@ Debugging a Lambda Application Locally with AWS SAM {#h2-12-debugging-a-lambda-a
 
 Debugging serverless applications, particularly AWS Lambda functions, can be challenging due to their distributed nature and the limitations of traditional debugging tools. However, AWS SAM (Serverless Application Model) provides a way to simulate Lambda functions locally, enabling developers to test and debug their applications more effectively. I will use it as a sample to explore the process of setting up a local debugging environment, running a sample application, and configuring remote debugging.
 
-### Setting Up the Local Environment {#h3-13-setting-up-the-local-environment}
+### Setting Up the Local Environment
 
 Before diving into the debugging process, it's crucial to set up a local environment that can simulate the AWS Lambda environment. This involves a few key steps:
 
@@ -153,7 +153,7 @@ Before diving into the debugging process, it's crucial to set up a local environ
 2. **Create an AWS Account** : If you don't already have an AWS account, you need to create one. Follow the instructions on the [AWS account creation page](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 3. **Set Up AWS SAM CLI** : The AWS SAM CLI is essential for building and running serverless applications locally. You can install it by following the [AWS SAM installation guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html).
 
-### Running the Hello World Application Locally {#h3-14-running-the-hello-world-application-locally}
+### Running the Hello World Application Locally
 
 To illustrate the debugging process, let's use a simple "Hello World" application. The code for this application can be found in the [AWS Hello World tutorial](https://github.com/shai-almog/HelloLambda).
 
@@ -172,7 +172,7 @@ To illustrate the debugging process, let's use a simple "Hello World" applicatio
 
    This command sends a request to the local server, allowing you to test the function's response.
 
-### Configuring Remote Debugging {#h3-15-configuring-remote-debugging}
+### Configuring Remote Debugging
 
 While running tests locally is a valuable step, it doesn't provide full debugging capabilities. To debug the application, you need to configure remote debugging. This involves several steps.
 
@@ -200,7 +200,7 @@ The application will pause at the breakpoints you set, allowing you to step thro
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yzpgf6da5rpw332ednvm.png)
 
-### Handling Debugger Timeouts {#h3-16-handling-debugger-timeouts}
+### Handling Debugger Timeouts
 
 One significant challenge when debugging Lambda functions is the quick timeout setting. Lambda functions are designed to execute quickly, and if they take too long, the costs can become prohibitive. By default, the timeout is set to a short duration, but you can configure this in the `template.yaml` file e.g.:
 
@@ -217,8 +217,8 @@ After updating the timeout value, re-issue the `sam build` command to apply the 
 
 In some cases, running the application locally might not be enough. You may need to simulate running on the actual AWS stack to get more accurate debugging information. Solutions like SST (Serverless Stack) or MerLoc can help achieve this, though they are specific to AWS and relatively niche.
 
-Final Word {#h2-17-final-word}
-------------------------------
+Final Word
+----------
 
 Serverless debugging requires a combination of strategies to effectively identify and resolve issues. While traditional debugging methods may not always apply, leveraging local debugging, feature flags, staged rollouts, comprehensive logging, idempotency, and IaC can significantly improve your ability to debug serverless applications. As the serverless ecosystem continues to evolve, staying adaptable and continuously updating your debugging techniques will be key to success.
 

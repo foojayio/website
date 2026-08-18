@@ -19,7 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-### **Introduction** {#h3-0-introduction}
+### **Introduction**
 
 The introduction of Sealed Classes in Java and the combination with pattern matching in switch statements has sparked a debate among software developers.
 
@@ -27,7 +27,7 @@ The argument in question raises concerns about the real-life use cases for Seale
 
 This article aims to counter these assertions by examining the principles and practical applications of Sealed Classes and pattern matching.
 
-### **Understanding Sealed Classes** {#h3-1-understanding-sealed-classes}
+### **Understanding Sealed Classes**
 
 #### **Definition and Purpose**
 
@@ -41,7 +41,7 @@ Contrary to the belief that Sealed Classes will have few real-life applications,
 2. **Robust Security**: Sealed Classes prevent unauthorized classes from extending critical parts of a system.
 3. **Improved Performance**: Compiler optimizations are possible as the compiler knows the entire hierarchy, potentially improving runtime performance.
 
-### **Pattern Matching and Switch Statements** {#h3-2-pattern-matching-and-switch-statements}
+### **Pattern Matching and Switch Statements**
 
 #### **Definition and Application**
 
@@ -55,7 +55,7 @@ The claim that pattern matching with switch promotes dubious coding practices in
 2. **Flexibility**: It offers a flexible way to deal with various object structures without violating OO principles.
 3. **Type Safety**: This approach promotes type safety and ensures that developers adhere to proper coding practices.
 
-### **Code Examples** {#h3-3-code-examples}
+### **Code Examples**
 
 **Sealed Classes**
 
@@ -104,7 +104,7 @@ public static String getShapeDescription(Shape shape){
 ```
 
 
-### **Functional Paradigm and Its Relevance** {#h3-4-functional-paradigm-and-its-relevance}
+### **Functional Paradigm and Its Relevance**
 
 The functional paradigm emphasizes immutability, first-class functions, and declarative programming. Java has increasingly adopted features that align with functional programming, enhancing OO principles in various ways.
 
@@ -140,7 +140,7 @@ public static String getShapeDescription(Shape shape) {
 ```
 
 
-### **Conclusion** {#h3-5-conclusion}
+### **Conclusion**
 
 Sealed Classes and pattern matching with switch statements are not merely syntactic sugar but tools that provide real value to Java programmers.
 

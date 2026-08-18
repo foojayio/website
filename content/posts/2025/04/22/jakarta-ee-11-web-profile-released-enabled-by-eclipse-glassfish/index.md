@@ -25,7 +25,7 @@ Although it comes later than planned, due to unexpected challenges in refactorin
 
 
 
-### Key Technical Changes in Jakarta EE 11 Web Profile {#key-technical-changes-in-jakarta-ee-11-web-profile}
+### Key Technical Changes in Jakarta EE 11 Web Profile
 
 Jakarta EE 11 Web Profile delivers an updated and streamlined set of specifications designed for lightweight, server-side Java applications. Major technical highlights include:
 
@@ -44,7 +44,7 @@ Jakarta EE 11 Web Profile delivers an updated and streamlined set of specificati
 
 
 
-### GlassFish: The first compatible implementation for Jakarta EE 11 Web Profile {#glassfish-the-first-compatible-implementation-for-jakarta-ee-11-web-profile}
+### GlassFish: The first compatible implementation for Jakarta EE 11 Web Profile
 
 **GlassFish** , maintained in the [Eclipse EE4J top-level project](https://github.com/eclipse-ee4j/glassfish), was the ratifying **compatible implementation (CI)** used to verify the **Jakarta EE 11 Web Profile TCK** and ensure compliance.
 
@@ -56,7 +56,7 @@ As the **first runtime to pass the full TCK**, GlassFish played a critical role 
 
 
 
-### OmniFish Engineering Contributions {#omnifish-engineering-contributions}
+### OmniFish Engineering Contributions
 
 The **OmniFish engineering team** was deeply involved in this release cycle --- not only in maintaining and evolving GlassFish, but also in the **Jakarta EE specification process** itself. Our contributions include:
 
@@ -69,7 +69,7 @@ OmniFish remains committed to improving GlassFish and Jakarta EE and to deliveri
 
 
 
-### What's Coming: GlassFish 8 {#what-s-coming-glassfish-8}
+### What's Coming: GlassFish 8
 
 The team at OmniFish is now working on the **final release of GlassFish 8**, which will build on the Jakarta EE 11 foundation, will support the whole Jakarta EE 11 Platform when it's ready, and will introduce several other enhancements and new features:
 
@@ -102,8 +102,8 @@ More information:
  <img decoding="async" width="400" height="400" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px">
 </figure>
 
-[OmniFish - Jakarta EE experts](https://omnifish.ee) {#h2-4-omnifish-jakarta-ee-experts}
-----------------------------------------------------------------------------------------
+[OmniFish - Jakarta EE experts](https://omnifish.ee)
+----------------------------------------------------
 
 * Enterprise Support For Eclipse GlassFish
 * Jakarta EE Support: Payara Community, Piranha, Quarkus

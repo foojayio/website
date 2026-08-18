@@ -25,13 +25,13 @@ frozen: false
 
 On May 13th and 14th, Foojay attended the JCON conference in Köln, Germany, where we did over 30 live-stream interviews. In this episode, we present to you the first set of these interviews, in which we focus on celebrating 30 years of Java, how you can grow your career, become a public speaker and writer, make your code more green, a bit of AI (of course...), and how the connections between open-source contributors can be visualized.
 
-Video {#h2-0-video}
--------------------
+Video
+-----
 
 {{< youtube bBSr3iGQ9HU >}}
 
-Podcast Apps {#h2-1-podcast-apps}
----------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,8 +39,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content {#h2-2-content}
------------------------
+Content
+-------
 
 00:00 Introduction
 

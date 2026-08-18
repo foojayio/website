@@ -31,8 +31,8 @@ We use IDE tools to search for connections, but this is really hard. It's like f
 
 As a consultant for over a decade, I picked up new client projects on a weekly basis. In this post, I'll describe the approach I used to do that and how I adapted this approach further at Lightrun.
 
-Finding Usage {#h2-0-finding-usage}
------------------------------------
+Finding Usage
+-------------
 
 The programming language can help a lot. As Java developers, we're lucky, codebase exploration tools are remarkably reliable. We can dig into the code and find usage. IDEs highlight unused code and they're pretty great for this. But this has several problems:
 
@@ -43,14 +43,14 @@ The programming language can help a lot. As Java developers, we're lucky, codeba
 
 There has to be a better way than randomly combing through source files.
 
-### UML Generation {#h3-1-uml-generation}
+### UML Generation
 
 Another option is UML chart generation from source files. My personal experience with these tools hasn't been great. They're supposed to help with the "big picture" but I often felt even more confused by these tools.
 
 They elevate minor implementation details and unused code into equal footing in a mind-boggling confusing chart. With a typical codebase, we need more than a high level view. The devil is in the details and our perception should be of the actual codebase in version control. Not some theoretical model.
 
-Debugging as a Learning Tool {#h2-2-debugging-as-a-learning-tool}
------------------------------------------------------------------
+Debugging as a Learning Tool
+----------------------------
 
 Debuggers instantly solve all these problems. We can instantly verify assumptions, see "real world" usage, and step over a code block to understand the flow. We can place a breakpoint to see if we reached a piece of code. If it's reached too frequently and we can't figure out what's going on, we can make this breakpoint conditional.
 
@@ -62,7 +62,7 @@ If it doesn't, then I have something to look at and figure out. With this tool, 
 
 Notice I use Java, but this should work for any other programming language as the concepts are (mostly) universal.
 
-### Field Watchpoint {#h3-3-field-watchpoint}
+### Field Watchpoint
 
 I think most developers know about [field watchpoints](https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know#heading-field-watchpoint) and just forget about them!
 
@@ -70,7 +70,7 @@ I think most developers know about [field watchpoints](https://talktotheduck.dev
 
 Understanding state mutation and propagation is probably the most important thing you can do when studying a codebase.
 
-### The Return Value {#h3-4-the-return-value}
+### The Return Value
 
 One of the most important things to understand when stepping through methods is the return value. Unfortunately, with debuggers, this information is often "lost" when returning from a method and might miss a critical part of the flow.
 
@@ -78,7 +78,7 @@ Luckily, most IDEs let us inspect the return value dynamically and see what the 
 
 ![](image-1.png)
 
-### Flow Control as a Learning Tool {#h3-5-flow-control-as-a-learning-tool}
+### Flow Control as a Learning Tool
 
 Why is this line needed?
 
@@ -90,7 +90,7 @@ Simple. Just drag the execution back a bit and invoke the method again with a di
 
 ![](image-2-700x311.png)
 
-### Keeping Track With Object Marking {#h3-6-keeping-track-with-object-marking}
+### Keeping Track With Object Marking
 
 [Object Marking](https://talktotheduck.dev/debugging-tutorial-java-return-value-intellij-jump-to-line-and-more#heading-object-marking) is one of those unknown debugger capabilities that's invaluable and remarkably powerful. It has a big role in understanding "what the hell is going on".
 
@@ -102,7 +102,7 @@ This is also remarkably useful in keeping track of threads, which can help in un
 
 ![](image-3-538x510.png)
 
-### Check The Objects In Memory {#h3-7-check-the-objects-in-memory}
+### Check The Objects In Memory
 
 A common situation I run into is a case where I see a component in the debugger. But I've been looking for a different instance of this object. E.g. if you have an object called UserMetaData. Does every user object have a corresponding UserMetaData object?
 
@@ -112,7 +112,7 @@ Seeing actual object instance values and reviewing them helps put numbers/facts 
 
 ![](image-4-700x394.png)
 
-### Use Tracepoint Statements to Follow Complex Logic {#h3-8-use-tracepoint-statements-to-follow-complex-logic}
+### Use Tracepoint Statements to Follow Complex Logic
 
 During development, we often just add logs to see "was this line reached". Obviously a breakpoint has advantages, but we don't always want to stop. Stopping might change threading behavior, and it can also be pretty tedious.
 
@@ -122,8 +122,8 @@ Thankfully, we have [tracepoints](https://talktotheduck.dev/basics-of-breakpoint
 
 ![](image-5-680x510.png)
 
-What's Going on in Production -- AKA "Reality Coverage" {#h2-9-what-s-going-on-in-production-aka-reality-coverage}
-------------------------------------------------------------------------------------------------------------------
+What's Going on in Production -- AKA "Reality Coverage"
+-------------------------------------------------------
 
 This works great for "simple" systems. But there are platforms and settings in our industry that are remarkably hard to reproduce in a debugger. Knowledge about the way our code works locally is one thing. The way it works in production is something completely different.
 
@@ -139,7 +139,7 @@ Without this information, we might waste our time. E.g. when dealing with millio
 
 In order to get an insight into production and debug that environment, we'll need a developer observability tool, like Lightrun. You can [install it for free here](https://lightrun.com/free).
 
-### Measuring with Counters {#h3-10-measuring-with-counters}
+### Measuring with Counters
 
 A counter lets us see how frequently a line of code was reached. This is one of the most valuable tools at our disposal.
 
@@ -151,7 +151,7 @@ If you want to understand where to focus your energies first, the counter is pro
 
 ![](image-6.png)
 
-### Assumption Verification with Conditions {#h3-11-assumption-verification-with-conditions}
+### Assumption Verification with Conditions
 
 We often look at a statement and make various assumptions. When the code is new to us, these assumptions might be pivotal to our understanding of the code. A good example is something like most of the users who use this feature have been with the system for a while and should be familiar with it.
 
@@ -159,7 +159,7 @@ You can test that with conditional statements that you can attach to any action 
 
 You can add this to a counter and literally count the users that don't match your expectations.
 
-### Logs and Piping to Learn without the Noise {#h3-12-logs-and-piping-to-learn-without-the-noise}
+### Logs and Piping to Learn without the Noise
 
 I think it's obvious how injecting a log in runtime can make a vast difference to understanding our system. But in production, this comes at a price. I'm studying the system while looking at the logs and all my "methodX reached with value Y" logs add noise to our poor DevOps/SRE teams.
 
@@ -169,7 +169,7 @@ With [piping](https://docs.lightrun.com/logs/#configure-piping) we can log every
 
 ![](image-7-700x134.gif)
 
-### Snapshots for Easier Learning {#h3-13-snapshots-for-easier-learning}
+### Snapshots for Easier Learning
 
 One of the enormous challenges in learning is understanding the things we don't know "yet". [Snapshots](https://docs.lightrun.com/snapshots-plugin/) help us get a bigger picture of the code. Snapshots are like placing any breakpoint and reviewing the values of the variables in the stack to see if we understand the concepts. They just "don't break" so you get all the information you can use to study, but the system keeps performing as usual, including threading behavior.
 
@@ -179,8 +179,8 @@ Simple, place a conditional snapshot for the permission. Then inspect the result
 
 ![](image-8-700x229.gif)
 
-Final Word {#h2-14-final-word}
-------------------------------
+Final Word
+----------
 
 Developers often have a strained relationship with debugging tools.
 

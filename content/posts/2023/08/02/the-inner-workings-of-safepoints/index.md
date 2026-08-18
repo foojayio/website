@@ -30,8 +30,8 @@ But this article isn't about what (global) safepoints are. Fr this, please refer
 
 I'll cover in this article the actual implementation of safepoints in the OpenJDK and present a related bug that I found along the way.
 
-Implementing Safepoint Checks {#h2-0-implementing-safepoint-checks}
--------------------------------------------------------------------
+Implementing Safepoint Checks
+-----------------------------
 
 Global safepoints are implemented using thread-local safepoints by stopping the threads at thread-local safepoints till all threads reach a barrier (source code), so we only have thread-local checks. Therefore I'll only cover thread-local safepoints here and call them "safepoints."
 
@@ -95,8 +95,8 @@ More on watermarks and how they can be used to reduce the latency of garbage col
 
 {{< youtube zsrSUs65xZA >}}
 
-Bug with Interpreted Aarch64 Methods {#h2-1-bug-with-interpreted-aarch64-methods}
----------------------------------------------------------------------------------
+Bug with Interpreted Aarch64 Methods
+------------------------------------
 
 The OpenJDK uses multiple compilation tiers; methods can be interpreted or compiled; see Mastering the Art of Controlling the JIT: Unlocking Reproducible Profiler Tests for more information. A common misconception is that "interpreted" means that the method is evaluated by a kind of interpreter loop that has the basic structure:
 
@@ -202,8 +202,8 @@ I'm neither an expert on the TemplateInterpreter nor on the different architectu
 
 I'm happy to hear the opinion of any experts on this topic, the related bug is [JBS-8313419](https://bugs.openjdk.org/browse/JDK-8313419).
 
-Conclusion {#h2-2-conclusion}
------------------------------
+Conclusion
+----------
 
 Understanding the implementation of safepoints can be helpful when working on the OpenJDK. This article has shown the inner workings, focusing on a bug in the TemplateInterpreter related to the safepoints checks.
 

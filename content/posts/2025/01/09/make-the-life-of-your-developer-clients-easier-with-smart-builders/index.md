@@ -30,7 +30,7 @@ Talk about good practices and technics is a long conversation and, I'm not here 
 
 In this content, we'll discuss how to make the life of developers easier by using good strategies to build complex objects.
 
-### The scenario: The complex object {#_the_scenario_the_complex_object}
+### The scenario: The complex object
 
 A good way to learn things is by examples. So, here is our challenge:
 
@@ -412,7 +412,7 @@ Coming back to our challenge, something is still not right: if `highPriority`, a
 
 We can solve this issue by using a traditional approach that it's called **Telescoping constructors**.
 
-### The traditional approach: Telescoping constructors {#_the_traditional_approach_telescoping_constructors}
+### The traditional approach: Telescoping constructors
 
 A common approach to object creation is to provide multiple constructors with different numbers of parameters. Each constructor calls application constructor with the required parameters and sets the optional parameters to default values. It's called **telescoping constructors**. You can use this approach on any java class, including Java Records.
 
@@ -482,7 +482,7 @@ Great! Let's review the issues we had and how we solved them:
 
 Well, the third one about the verbosity and error-prone of the constructors is still there yet. The fourth issue item, about the documentation, can help developers to know which constructor should be used with its argument ordering, but we can do more to make it easier.
 
-### Favor Static Factory Methods over Class Constructors {#_favor_static_factory_methods_over_class_constructors}
+### Favor Static Factory Methods over Class Constructors
 
 To help developers to know which constructor should be used, we can use static method factories to create objects.
 
@@ -575,7 +575,7 @@ Great! We're improving our code step by step. Maybe it's even good shape for som
 
 In our implementation, each static method factory is requiring four arguments. It's not a big deal, but what if we have more attributes? The static factory methods will become even more complex and error-prone. Let's try to address this issue.
 
-### Many parameters? Use the Builder pattern {#_many_parameters_use_the_builder_pattern}
+### Many parameters? Use the Builder pattern
 
 The Builder pattern is a creational design pattern that allows you to construct complex objects step by step. It's useful when you have many optional attributes in your class and you want to make the object creation more readable and maintainable.
 
@@ -750,7 +750,7 @@ Runtime exceptions explode in production and affect the image and perception of 
 
 In summary, compilation or runtime errors still showing that there are issues in the solution, but compilation errors help developers to discover issues in compile time, which is better! Let's try to use the Builder pattern to enforce the constraints of the `Notification` class in compile time.
 
-### Restricts the order of method calls in the Builder pattern {#_restricts_the_order_of_method_calls_in_the_builder_pattern}
+### Restricts the order of method calls in the Builder pattern
 
 The Builder pattern allows developers to construct complex objects step by step. The Builder pattern can be used to enforce the constraints of the class in compile time.
 
@@ -1086,7 +1086,7 @@ As Ben Parker used to say - "With great powers come great responsibilities" - be
 
 Once you have to deal with many attributes to create objects, the Builder pattern can be a good choice to create objects with many optional attributes. As the builder is getting help from the compiler, refactoring the code will be easier and safer.
 
-### Conclusion {#_conclusion}
+### Conclusion
 
 In this content, we discussed some approaches to create objects with many optional attributes. We started with the traditional approach, using constructors and setters to create objects. We saw that this approach can lead to invalid objects, thread-safety issues, and verbose code. We then explored some approaches like:
 
@@ -1102,7 +1102,7 @@ The Static Method Factory can offer a good alternative to build objects when few
 
 The Builder pattern allows developers to construct complex objects step by step using the Fluent API design style providing a fluent interface, making the object creation more readable and maintainable and, the Step Builder pattern can be used to enforce the constraints of the class in compile time. In the end, we were able to see how these approaches can help developers to get their life easier when creating objects with many attributes.
 
-### Key Takeaways {#_key_takeaways}
+### Key Takeaways
 
 * Making the lives of developers easier may be as important as making the lives of the final customers easier;
 * The **Telescoping Constructors** approach can solve some scenarios, but it may be error-prone and verbose when dealing with many attributes;
@@ -1111,7 +1111,7 @@ The Builder pattern allows developers to construct complex objects step by step 
 * The **Fluent API** design style can help developers to create specialized code focused in method chaining improving the developer experience. It's normally used to express domain-specific languages. In our context, it was used to create a builder easier to use, allowing developers to create objects in a readable and maintainable way;
 * The **Step Builder pattern** is a variation of the Builder pattern. As a Builder's variant, it allows developers to create complex objects by setting the attributes following a predefined order.
 
-### Final Thoughts {#_final_thoughts}
+### Final Thoughts
 
 I hope you enjoyed this content! If you have any questions or feedback, please feel free to reach out. I'd love to hear from you!
 

@@ -30,7 +30,7 @@ And yet, sometimes, the underlying store offers no straightforward query mechani
 
 In this article, I'd like to describe how you can take advantage of Hazelcast to query your cached data in different ways and still be fast.
 
-### Our Use Case: Collecting User Interactions {#h3-0-our-use-case-collecting-user-interactions}
+### Our Use Case: Collecting User Interactions
 
 Collecting user interactions with the application is the first step when you want to improve your application. Whether it's documentation to make it more relevant or e-commerce to increase your sales, so-called "clickstreams" can be seen as the new oil. We will use a (significantly) simplified click-collecting application architecture:
 
@@ -52,7 +52,7 @@ In a real-world setup, we probably would want to store the event data in a persi
 
 When users interact with the application, the front-end will send a JSON payload that contains client-related data to the server. The server will also enrich the JSON with server-related data, *e.g.* , IP and session ID, and store the complete JSON in a Hazelcast `IMap`. The key is not that important; the value is the JSON. Now, our marketing team wants to query the data to understand how users interact with our application.
 
-### The Predicate API {#h3-1-the-predicate-api}
+### The Predicate API
 
 The Predicate API is the one that predates all other ways presented in this post. The idea behind it is that it will serve as a filter before returning the values of an `IMap`. Before going further, we need to understand what it means to query a distributed system. From the [documentation](https://docs.hazelcast.com/imdg/latest/query/how-distributed-query-works.html):
 > The requested predicate is sent to each member in the cluster. Each member looks at its own local entries and filters them according to the predicate. At this stage, key/value pairs of the entries are deserialized and then passed to the predicate. The predicate requester merges all the results coming from each member into a single set.
@@ -87,8 +87,7 @@ Collection<HazelcastJsonValue> values = map.values(predicate);
 ```
 
 
-### The Shape of
-~~Water~~ Stored Data {#h3-2-the-shape-of-water-stored-data}
+### The Shape of ~~Water~~ Stored Data
 
 Using HazelcastJsonValue means we are still storing data as JSON-formatted Strings. While some language ecosystems favor the usage of JSON, *e.g.* , JavaScript, some others favor the usage of dedicated data structures, *e.g.* , Java and Go. If developers on different language stacks use your Hazelcast cluster, you need to store the data in the most "consumable" shape. Enters `Portable`Another data serialization format that is query-friendly. With Portable, you need to
 
@@ -167,7 +166,7 @@ values.stream()
 ```
 
 
-### Indexing Data {#h3-3-indexing-data}
+### Indexing Data
 
 Indexing data is not (only!) related to databases and how one stores data on disk. If you already know about indexes, please feel free to skip this introduction. Key-Value stores, such as Hazelcast's `IMap`, provide fast key-based access: that's their *raison d'être*. However, to query the value - or part of it, the engine needs to:
 
@@ -215,7 +214,7 @@ hazelcast:
 
 At this point, we know how to query an `IMap` with the Criteria API and make it fast with the proper index configuration.
 
-### SQL and JDBC {#h3-4-sql-and-jdbc}
+### SQL and JDBC
 
 As a Java developer, you might already be familiar with SQL and JDBC. Learning a new API might feel like a roadblock. The good news is that Hazelcast now offers a JDBC driver. To use it:
 
@@ -258,7 +257,7 @@ for result in results:
 ```
 
 
-### Conclusion {#h3-5-conclusion}
+### Conclusion
 
 In this post, we went through several core concepts covering querying your data on Hazelcast:
 

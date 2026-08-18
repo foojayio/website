@@ -31,14 +31,14 @@ Below is the last video in the series:
 
 <br />
 
-Transcript {#h2-0-transcript}
------------------------------
+Transcript
+----------
 
 Welcome back to the ninth part of debugging at scale where we really know the quality of your code. Remote debugging doesn't always deal with a remote machine, we often need it when debugging into Kubernetes or Docker.
 
 We'll delve more into that later but for now we'll discuss the basic mechanics. How to connect, how to make it slightly less vulnerable to security attacks, and then we'll discuss the problems of remote debugging.
 
-### The Connection and Command Line {#h3-1-the-connection-and-command-line}
+### The Connection and Command Line
 
 We'll start with a discussion around the connection. We first need to run the process that we'll connect to remotely. To do that we need to run a command similar to this one. Notice that this is a simplified version, in many cases the argument should be embedded in configuration files. When you inspect your maven or gradle files you might see many of the arguments listed here. This is how these things work under the hood. Let's go over the command and break it down piece by piece to see that we understand it correctly.
 
@@ -52,7 +52,7 @@ We can optionally suspend the virtual machine on launch if you want to debug som
 
 This is the rest of the command, the class we're running. Typically you would have something more substantial here. In this case I'm just running the PrimeMain class. To start debugging we need to edit the run configuration in intellij.
 
-### Connecting from IntelliJ/IDEA {#h3-2-connecting-from-intellij-idea}
+### Connecting from IntelliJ/IDEA
 
 Next we need to locate a configuration for remote debugging. Once I select that we can add it. Notice it's pre-configured with the defaults such as port 5005. I give the new run configuration a name, and we're ready to go with debugging the app. Notice there are many options to tune here, but we don't need any of them. Also check out this area right here. Seems familiar? That's the exact line we discussed before. The IDE is showing us how to set up the command line for the remote process. This lets us verify that we entered everything correctly.
 
@@ -62,7 +62,7 @@ We are now instantly connected to the running process. Once that is done this fe
 
 In some cases running the server locally in the IDE is impractical. A good example would be debugging a container on your own machine. That might not be trivial.
 
-### Security Implications of JDWP {#h3-3-security-implications-of-jdwp}
+### Security Implications of JDWP
 
 Calling JDWP insecure is inaccurate.
 
@@ -72,7 +72,7 @@ JDWP is very insecure when used remotely. Locally on your own machine it isn't a
 
 We can't ssh into a Kubernetes container but we can port forward which is almost identical. We can do something similar to this command to forward the port from the given pod to the local machine and vice versa. Same idea as the SSH tunneling but appropriate to the Kubernetes world.
 
-### Dangers of Remote Debugging {#h3-4-dangers-of-remote-debugging}
+### Dangers of Remote Debugging
 
 In this final section I want to talk about the dangers of remote debugging in production. Breakpoints break seems obvious. That's what they're here to do. But if we run on a server we block it completely by mistake. We can use tracepoints. As I said, they're great. But they are no replacement to breakpoints and an accidental click in the gutter can literally stop your server in its tracks.
 
@@ -88,7 +88,7 @@ Imagine placing a breakpoint where the user password is passed to authentication
 
 I discuss some of the solutions for those problems both in the low level tooling and in higher level observability solutions. This is covered in the book and in the full course.
 
-Final Word {#h2-5-final-word}
------------------------------
+Final Word
+----------
 
 With this we finished the first part of the course. If you want to check out the full course go to debugagent.com to learn more... The next video covers the strategies for debugging and the science of debugging. If you have any questions please use the comments section. Thank you!

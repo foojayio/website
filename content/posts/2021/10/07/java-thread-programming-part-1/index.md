@@ -19,8 +19,8 @@ enlighterjs: true
 frozen: false
 ---
 
-What is a Thread? {#h2-0-what-is-a-thread}
-------------------------------------------
+What is a Thread?
+-----------------
 
 We write code in a file line by line, and then it gets executed. To be able to execute a piece of code requires an execution environment. In Java, **a thread is an execution environment**. If a program has only one execution environment, then we call this program a single-threaded program.
 
@@ -28,22 +28,22 @@ Interestingly, in Java, we can create a lot of threads to run different parts of
 
 In short, **a thread executes a piece of code on a computer**.
 
-What are some benefits of multiple threads? {#h2-1-what-are-some-benefits-of-multiple-threads}
-----------------------------------------------------------------------------------------------
+What are some benefits of multiple threads?
+-------------------------------------------
 
 The benefits of having multiple threads are enormous. Think about a web application that serves hundreds of thousands of users at a time, then the question would be, how does it do that? Well, the answer is simple: it usually runs different requests on a separate thread. So each user gets a thread to themselves to execute their request.
 
 Similarly, when I'm typing on this computer on a word processor, it's doing multiple things simultaneously. One is perhaps checking my spelling, and one is possibly taking input from when I type on the keyboard. That way, we can achieve various tasks simultaneously. Otherwise, if the word processor would be a single-threaded program, it would need to first read input from the keyboard, and then only it would check the spelling. Naturally, then, the experience wouldn't be pleasant, at all.
 
-Why do we need to learn about threads? {#h2-2-why-do-we-need-to-learn-about-threads}
-------------------------------------------------------------------------------------
+Why do we need to learn about threads?
+--------------------------------------
 
 We could think of many more similar examples in addition to the one mentioned above, but let's think about the current computer architecture. The modern computer comes with multiple cores, since clock speed isn't increasing anymore nowadays. The laptop I'm using at this moment has 16 cores. That means that at a point in time, it can run 16 different things. If a program is single-threaded, then it can only utilize 1 core at the moment, the rest of the 15 would be just idle. We shouldn't waste valuable resources like this.
 
 So, we should be able to write our program in a way to utilize the available resources in the best possible way. On the other hand, if an application can do multiple things at once, we can achieve substantial progress quickly, and the application can become more responsive. We can even subdivide a program into various independent units and then execute them in parallel, resulting in faster results.
 
-Do all Java programs have a thread associated with them? {#h2-3-do-all-java-programs-have-a-thread-associated-with-them}
-------------------------------------------------------------------------------------------------------------------------
+Do all Java programs have a thread associated with them?
+--------------------------------------------------------
 
 The answer is yes. Java was designed to have threads from the very beginning. If we just start a "hello world" program in the main method, it will be executed through a thread, which is called the "main Thread". Let's see an example:
 
@@ -71,8 +71,8 @@ Hello world
 
 So, the output ensures us that running a Java program is all about running its different pieces of code on one or multiple threads.
 
-How do I create my own threads? {#h2-4-how-do-i-create-my-own-threads}
-----------------------------------------------------------------------
+How do I create my own threads?
+-------------------------------
 
 The code that writes in the main method executes by means of the main Thread. However, we can have more threads to run multiple pieces of code at once. There are two ways of creating threads:
 

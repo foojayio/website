@@ -33,8 +33,8 @@ Observability, monitoring, and debugging at scale for your production...
 
 {{< youtube ozcC3scY0Ig >}}
 
-Podcast Apps {#h2-1--odcast-pps}
---------------------------------
+Podcast Apps
+------------
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,8 +42,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests {#h2-1-guests}
----------------------
+Guests
+------
 
 * A lot of rubber ducks
 * Johannes Bechberger
@@ -65,8 +65,8 @@ Guests {#h2-1-guests}
   * <https://twitter.com/ties_ven>
   * [6 Steps to help you debug your application](https://blog.jdriven.com/2017/10/6-steps-to-help-you-debug-your-application/)
 
-Host {#h2-2-host}
------------------
+Host
+----
 
 * Shai Almog
   * Author of "[Practical Debugging at Scale](https://www.amazon.com/dp/1484290410/)"
@@ -74,15 +74,15 @@ Host {#h2-2-host}
   * <https://mastodon.social/@debugagent>
   * <https://twitter.com/debugagent>
 
-Producer {#h2-3-producer}
--------------------------
+Producer
+--------
 
 * Frank Delporte
   * <https://foojay.social/@frankdelporte>
   * <https://twitter.com/frankdelporte>
 
-Content {#h2-4-content}
------------------------
+Content
+-------
 
 * 00'00 Intro and music
 * 00'24 About the topic of this podcast

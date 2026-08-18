@@ -62,8 +62,8 @@ If you would like to know more about the implementation or if you would like to 
 
 [Github Page](https://github.com/CRaC)
 
-Preparations {#h2-0-preparations}
----------------------------------
+Preparations
+------------
 
 The idea is to have an application or service that consists of a single executable JAR file.
 

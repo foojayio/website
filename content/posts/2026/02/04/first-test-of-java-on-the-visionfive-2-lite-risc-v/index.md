@@ -29,13 +29,13 @@ I got all these boards for free, but what I write here and show in the video is 
 
 {{< youtube 70FYg1YzFfM >}}
 
-Why RISC-V? {#h2-0-why-risc-v}
-------------------------------
+Why RISC-V?
+-----------
 
 RISC-V is an open standard instruction set architecture, driving by the community. Unlike architectures from ARM, Intel, and AMD which must be licensed. This openness has lead to innovation across the industry, and boards like the VisionFive 2 Lite make it accessible to developers like us who want to experiment with (Java) applications on alternative architectures.
 
-StarFive VisionFive {#h2-1-starfive-visionfive}
------------------------------------------------
+StarFive VisionFive
+-------------------
 
 The VisionFive from StarFive is a range of affordable boards for your first steps into the RISC-V world. Here's how the VisionFive's compare to the latest Raspberry Pi's:
 
@@ -47,7 +47,7 @@ The VisionFive from StarFive is a range of affordable boards for your first step
 | [VisionFive 2](https://www.starfivetech.com/en/site/boards)        | JH7110  | RISC-V |            | 4     | 1.5GHz  | [87€ (4GB)](https://www.amazon.com.be/-/en/Waveshare-VisionFive2-Integrated-4GB-Compatible/dp/B0BRN9RP1N/) |
 | [VisionFive 2 Lite](https://www.starfivetech.com/en/site/boards)   | JH7110S | RISC-V |            | 4     | 1.25GHz | [59€ (4GB)](https://www.amazon.com.be/-/en/StarFive-VisionFive-4-Core-Gigabit-Ethernet/dp/B0FSZZDXL4/)     |
 
-### Test Board {#h3-2-test-board}
+### Test Board
 
 I received a VisionFive 2 Lite for testing:
 
@@ -73,14 +73,14 @@ I burned the Ubuntu image to an SD card, but if you want to use eMMC, you can fo
 
 On the Ubuntu website, more installation instructions are [available for a lot of different boards](https://canonical-ubuntu-hardware-support.readthedocs-hosted.com/boards/how-to/), e.g. for the [VisionFive 2 Lite](https://canonical-ubuntu-hardware-support.readthedocs-hosted.com/boards/how-to/starfive-visionfive-2-lite/).
 
-Getting Started {#h2-3-getting-started}
----------------------------------------
+Getting Started
+---------------
 
-### Hardware Setup {#h3-4-hardware-setup}
+### Hardware Setup
 
 The board arrived well-packaged, and has a very similar layout to the Raspberry Pi 5. Biggest connection difference: one big HDMI connector instead of two micro-HDMI ports.
 
-### Installing Ubuntu {#h3-5-installing-ubuntu}
+### Installing Ubuntu
 
 StarFive provides several OS options, but I opted for Ubuntu 24.04.3 LTS Desktop for RISC-V. The process is well-documented:
 
@@ -92,12 +92,12 @@ StarFive provides several OS options, but I opted for Ubuntu 24.04.3 LTS Desktop
 
 4. The first boot took a bit longer than expected before the desktop appeared. Once up, the system felt responsive for basic tasks, though noticeably slower than a Raspberry Pi 5.
 
-Java Installation and Testing {#h2-6-java-installation-and-testing}
--------------------------------------------------------------------
+Java Installation and Testing
+-----------------------------
 
 This is where things get interesting. RISC-V support in the Java ecosystem has improved significantly, but it's still relatively new compared to ARM and x86_64.
 
-### Installing Java {#h3-7-installing-java}
+### Installing Java
 
 Ubuntu for RISC-V includes OpenJDK in the repositories, so it can be installed with `sudo apt install`, after you have done update and upgrade:
 
@@ -115,12 +115,12 @@ java -version
 ```
 
 
-### Simple Java Tests {#h3-8-simple-java-tests}
+### Simple Java Tests
 
 I just wanted to quickly try out a few existing test scripts, and used my [JBang project in the Pi4J repositories](https://github.com/Pi4J/pi4j-jbang). As you can see in the video "plain" Java and libraries work as expected. [Pi4J](https://www.pi4j.com/) and JavaFX were not successful, but also that was expected. I will try Pi4J after the release of its version 4, when it uses the [Foreign Function and Memory (FFM) API](https://openjdk.org/jeps/454). As we installed a "normal OpenJDK Build", which doesn't include the JavaFX dependencies, we can't run the example.
 
-Conclusion {#h2-9-conclusion}
------------------------------
+Conclusion
+----------
 
 The VisionFive 2 Lite is an intriguing board for Java developers curious about RISC-V. At around 60€, it's an accessible way to explore this "other type of" architecture without significant investment. The performance isn't going to compete with a recent Raspberry Pi, but that's not really the point. My first goal was to find out if Java works on it (of course!), and how easy it us to use. And of course, to feed my curiosity to learn new stuff...
 
