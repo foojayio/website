@@ -32,14 +32,14 @@ Indexes can significantly improve query performance by allowing the database to 
 ⛔ **Avoid Practice:**
 
 ```
-SELECT * FROM users WHERE email = '[email protected]';
+SELECT * FROM users WHERE email = 'ali@gmail.com';
 ```
 
 🟢 **Good Practice**:
 
 ```
 CREATE INDEX idx_users_email ON users (email);
-SELECT name, email FROM users WHERE email = '[email protected]';
+SELECT name, email FROM users WHERE email = 'ali@gmail.com';
 ```
 
 This creates an index on the `email` column of the `users` table, speeding up searches based on email.
@@ -73,7 +73,7 @@ In PostgreSQL, these are called expression indexes. Here's an example:
 
 ```
 CREATE INDEX idx_lower_email ON users (LOWER(email)); 
-SELECT * FROM users WHERE LOWER(email) = '[email protected]';
+SELECT * FROM users WHERE LOWER(email) = 'user@example.com';
 ```
 
 This creates an expression index on the lowercase version of the email column, optimizing case-insensitive email searches.

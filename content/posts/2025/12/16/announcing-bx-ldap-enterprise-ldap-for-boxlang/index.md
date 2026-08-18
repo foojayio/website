@@ -104,7 +104,7 @@ bx:ldap
     action="modify"
     connection="myLdap"
     dn="uid=jdoe,ou=users,dc=example,dc=org"
-    attributes={ "mail" : "[email protected]" }
+    attributes={ "mail" : "newemail@example.com" }
     modifyType="replace";
 
 // Explicitly close when done
@@ -199,7 +199,7 @@ newUser = {
     "cn" : "John Doe",
     "sn" : "Doe",
     "uid" : "jdoe",
-    "mail" : "[email protected]",
+    "mail" : "john.doe@example.com",
     "userPassword" : "SecurePassword123",
     "telephoneNumber" : "+1-555-0123"
 };
@@ -318,6 +318,6 @@ Ready to unlock bx-ldap and other premium modules? Choose your plan:
 
 Need help choosing the right plan or have questions? **Contact us directly:**
 
-[📧 \[email protected\]](/cdn-cgi/l/email-protection#234a4d454c63414c5b4f424d440d4a4c "📧 info@boxlang.io")
+[📧 info@boxlang.io](mailto:info@boxlang.io "📧 info@boxlang.io")
 
 **Ready to supercharge your LDAP integration?** Get started with bx-ldap today and experience enterprise-grade directory access in BoxLang!

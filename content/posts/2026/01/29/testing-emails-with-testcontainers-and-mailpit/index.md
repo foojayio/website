@@ -90,8 +90,8 @@ class EmailServiceTest {
   @Test
   void shouldSendAndVerifyEmail() {
     var msg = new SimpleMailMessage();
-    msg.setFrom("[email protected]");
-    msg.setTo("[email protected]");
+    msg.setFrom("noreply@myapp.com");
+    msg.setTo("user@example.com");
     msg.setSubject("Welcome");
     msg.setText("Hello!");
 
@@ -126,8 +126,8 @@ class PlainEmailTest {
     Session session = Session.getInstance(props);
 
     MimeMessage message = new MimeMessage(session);
-    message.setFrom(new InternetAddress("[email protected]"));
-    message.setRecipient(RecipientType.TO, new InternetAddress("[email protected]"));
+    message.setFrom(new InternetAddress("sender@example.com"));
+    message.setRecipient(RecipientType.TO, new InternetAddress("recipient@example.com"));
     message.setSubject("Test Subject");
     message.setText("Hello, this is a test email!");
 
@@ -157,8 +157,8 @@ void shouldVerifyEmailSent() {
       .hasMessages()
       .hasMessageCount(1)
       .hasMessageWithSubject("Welcome")
-      .hasMessageTo("[email protected]")
-      .hasMessageFrom("[email protected]");
+      .hasMessageTo("user@example.com")
+      .hasMessageFrom("noreply@myapp.com");
 }
 ```
 
@@ -172,8 +172,8 @@ void shouldVerifyMessageDetails() {
   assertThat(mailpit)
       .firstMessage()
       .hasSubject("Order Confirmation")
-      .isFrom("[email protected]")
-      .hasRecipient("[email protected]")
+      .isFrom("orders@shop.com")
+      .hasRecipient("customer@example.com")
       .hasNoAttachments()
       .hasSnippetContaining("Thank you");
 }
@@ -193,7 +193,7 @@ void shouldWaitForAsyncEmail() {
       .withPollInterval(Duration.ofSeconds(1))
       .awaitMessage()
       .withSubject("Password Reset")
-      .to("[email protected]")
+      .to("user@example.com")
       .isPresent();
 }
 ```

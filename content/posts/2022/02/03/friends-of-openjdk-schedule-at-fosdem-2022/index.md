@@ -28,7 +28,7 @@ Also... there is a quiz and cool prizes. Aside from the FOSDEM chat where you'll
 
 Once you're in, you'll find there's a **#fosdem22** channel, where after each session the speaker will put the next question in the quiz, based on something from the session. E.g., after a session focusing on Java 17, the question that the speaker might put in the channel could be: "What are the three key features of Java 17?"
 
-Put the answers to as many questions as you can in an e-mail to [\[email protected\]](/cdn-cgi/l/email-protection) and whoever has the most correct answers will be able to pick the prize of their choice first, whoever has the second most correct answers picks second, etc.
+Put the answers to as many questions as you can in an e-mail to [hello@foojay.io](mailto:hello@foojay.io) and whoever has the most correct answers will be able to pick the prize of their choice first, whoever has the second most correct answers picks second, etc.
 
 And what are the prizes? Here some of them, (an [Oculus](https://www.oculus.com/quest-2/) from Azul, Raspberry Pis from [Open Liberty](https://openliberty.io/), a range of cool techy toys from [OpenValue](https://www.openvalue.eu/), and five one year [Deep Netts](https://www.deepnetts.com/) licenses, amongst others), with more coming to be announced soon:
 ![](image-4-1024x576.png)

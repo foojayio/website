@@ -184,7 +184,7 @@ With native capabilities for **scheduling** , **asynchronous execution** , **eve
 
 Ortus Solutions, Corp.  
 
-📧 [\[email protected\]](/cdn-cgi/l/email-protection#b5dcdbd3daf5dac7c1c0c6c6dad9c0c1dcdadbc69bd6dad8)  
+📧 [info@ortussolutions.com](mailto:info@ortussolutions.com)  
 
 🌍 [www.ortussolutions.com](https://www.ortussolutions.com)  
 

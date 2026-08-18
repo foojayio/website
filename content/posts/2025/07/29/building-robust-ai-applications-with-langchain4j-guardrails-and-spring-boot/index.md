@@ -926,7 +926,7 @@ Expected response:
 
 ```
 # Clone the project
-git clone [email protected]:rokon12/guardrails-demo.git
+git clone git@github.com:rokon12/guardrails-demo.git
 cd guardrails-demo
 
 # Set your OpenAI API key

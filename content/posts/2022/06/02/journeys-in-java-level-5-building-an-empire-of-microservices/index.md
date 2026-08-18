@@ -70,7 +70,7 @@ FROM openjdk:11
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,[email protected],@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,jennifer@thehecklers.org,@JMHReif"
 
 #Copy jar and expose entrypoints
 #--------------------------------

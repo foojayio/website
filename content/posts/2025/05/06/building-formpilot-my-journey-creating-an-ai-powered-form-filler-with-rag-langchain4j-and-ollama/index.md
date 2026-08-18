@@ -274,7 +274,7 @@ public interface FormAssistant {
               1.  **Context First:** Use any provided text context or user-supplied data to fill the fields. Match data to relevant field types/labels (e.g., use provided phone number for `tel` field, biography text for `textarea` bio field).
               2.  **Generation:** If context is insufficient for a field, generate a realistic and contextually appropriate value based on its `type`, `label`, and `placeholder`.
           * **Type-Specific Generation Rules:**
-              * `email`: Generate a plausible email (e.g., `[email protected]`) if not in context.
+              * `email`: Generate a plausible email (e.g., `jane.doe@example.com`) if not in context.
               * `password`: Use a placeholder strong password (e.g., `P@ssw0rd123!`).
               * `date`: Generate a valid date (e.g., `1995-06-15`).
               * `number`: Generate a sensible number based on context (e.g., `85000` for annual income).
@@ -283,7 +283,7 @@ public interface FormAssistant {
               * `select-one` (often paired):
                   * Fill the associated text input (`field-id-selectized`) with the *text label* (e.g., "Intermediate").
                   * Leave the `select-one` field (`field-id`) value as `""` (empty string) unless the specific *internal value* is known from context.
-          * **Required Fields:** If `required: true` and no value can be determined from context, generate a placeholder value (e.g., `"N/A - Required"`, `"[email protected]"`, `"https://example.com/placeholder"`) instead of leaving it empty.
+          * **Required Fields:** If `required: true` and no value can be determined from context, generate a placeholder value (e.g., `"N/A - Required"`, `"user@example.com"`, `"https://example.com/placeholder"`) instead of leaving it empty.
           * **Duplicate Sections:** Fill apparently duplicated sections (e.g., `User` vs. `ImpersonatedUser`) consistently with the same data unless context specifies otherwise.
 
           Now, process the following form fields and context, providing only the JSON output. 

@@ -47,7 +47,7 @@ If you have macOS \& Homebrew, you can install Hazelcast using the following com
 ```
 brew tap hazelcast/hz
 
-brew install [email protected]
+brew install hazelcast@5.2.1
 ```
 
 Check if Hazelcast is installed:
@@ -85,7 +85,7 @@ To install Management Center, use one of the following methods, depending on you
 ```
 brew tap hazelcast/hz
 
-brew install [email protected]
+brew install hazelcast-management-center@5.2.1
 ```
 
 Check that Management Center is installed:

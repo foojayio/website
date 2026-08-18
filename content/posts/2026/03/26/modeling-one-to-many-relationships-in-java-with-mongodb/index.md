@@ -310,7 +310,7 @@ public class EmbeddedExample {
 
     public void run() {
         // 1. Build the author as an embedded User object
-        User alice = new User("alice", "Alice Johnson", "[email protected]",
+        User alice = new User("alice", "Alice Johnson", "alice@example.com",
                 "Java developer and MongoDB enthusiast.");
 
         // 2. Build the post with the embedded author and comments
@@ -366,7 +366,7 @@ The resulting MongoDB document looks like this:
   "author": {
     "username": "alice",
     "display_name": "Alice Johnson",
-    "email": "[email protected]",
+    "email": "alice@example.com",
     "bio": "Java developer and MongoDB enthusiast."
   },
   "published_at": ISODate("2025-01-01T00:00:00Z"),
@@ -541,11 +541,11 @@ public class ReferencedExample {
 
     public void run() {
         // 1. Insert users into the users collection
-        User alice = new User("alice", "Alice Johnson", "[email protected]",
+        User alice = new User("alice", "Alice Johnson", "alice@example.com",
                 "Java developer and MongoDB enthusiast.");
-        User bob = new User("bob", "Bob Smith", "[email protected]",
+        User bob = new User("bob", "Bob Smith", "bob@example.com",
                 "Backend engineer who loves databases.");
-        User carol = new User("carol", "Carol Williams", "[email protected]",
+        User carol = new User("carol", "Carol Williams", "carol@example.com",
                 "Full-stack developer and tech blogger.");
         usersCollection.insertMany(Arrays.asList(alice, bob, carol));
 
@@ -637,7 +637,7 @@ The resulting MongoDB documents span three collections:
   "_id": ObjectId("uuu"),
   "username": "alice",
   "display_name": "Alice Johnson",
-  "email": "[email protected]",
+  "email": "alice@example.com",
   "bio": "Java developer and MongoDB enthusiast.",
   "joined_at": ISODate("...")
 },
@@ -645,7 +645,7 @@ The resulting MongoDB documents span three collections:
   "_id": ObjectId("uuu2"),
   "username": "bob",
   "display_name": "Bob Smith",
-  "email": "[email protected]",
+  "email": "bob@example.com",
   "bio": "Java developer and MongoDB enthusiast.",
   "joined_at": ISODate("...")
 }]

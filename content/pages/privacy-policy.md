@@ -12,7 +12,7 @@ Please read the following to learn more about our Privacy Policy. The foojay.io 
 
 You post any Content (as that term is defined in the Company's Terms of Use located at https://foojay.io/terms-of-use/) on the Website at your own risk. Although we may allow you to set privacy options that limit access to your pages, please be aware that no security measures are perfect or impenetrable. We cannot control the actions of other users with whom you may choose to share your pages and information. Therefore, we cannot and do not guarantee that Content you post on the Website will not be viewed by unauthorized persons. We are not responsible for circumvention of any privacy settings or security measures contained on the Website. You understand and acknowledge that, even after removal, copies of Content may remain viewable in cached and archived pages or if other users have copied or stored your Content.
 
-Any improper collection or misuse of Content or other information accessible on the Website is a violation of the Company's Terms of Use and should be reported to [\[email protected\]](/cdn-cgi/l/email-protection).
+Any improper collection or misuse of Content or other information accessible on the Website is a violation of the Company's Terms of Use and should be reported to [privacy_consumers@azul.com](mailto:privacy_consumers@azul.com).
 
 **What personal data we collect and why we collect it**
 
@@ -44,7 +44,7 @@ Generally, our service automatically collects usage information, such as the num
 
 We often receive a confirmation when you open an email from Company if your computer supports this type of program. Company uses this confirmation to help us make emails more interesting and helpful. We also compare our user list to lists received from other companies, in an effort to avoid sending unnecessary messages to our users.
 
-If you provide your email address(es) to us, your email address data may be communicated, hashed, stored and/or combined with other identifiers, for cross-device recognition purposes, targeted advertising purposes, and analytics purposes by our advertising partners. If you would like to opt-out, please send an email to [\[email protected\]](/cdn-cgi/l/email-protection).
+If you provide your email address(es) to us, your email address data may be communicated, hashed, stored and/or combined with other identifiers, for cross-device recognition purposes, targeted advertising purposes, and analytics purposes by our advertising partners. If you would like to opt-out, please send an email to [privacy_consumers@azul.com](mailto:privacy_consumers@azul.com).
 
 **Cookies**
 
@@ -108,7 +108,7 @@ Personal Information about our users is an integral part of our business. We nei
 
 Your Company account Personal Information is protected by a password for your privacy and security. You need to assist in preventing unauthorized access to your account and Personal Information by selecting and protecting your password appropriately and limiting access to your computer and browser by signing off after you have finished accessing your account.
 
-Company endeavors to protect user information to ensure that user account information is kept private; however, Company cannot guarantee the security of user account information. Unauthorized entry or use, hardware or software failure, and other factors may compromise the security of user information at any time. For additional information about the security measures Company uses in connection with the Website, please contact us at [\[email protected\]](/cdn-cgi/l/email-protection).
+Company endeavors to protect user information to ensure that user account information is kept private; however, Company cannot guarantee the security of user account information. Unauthorized entry or use, hardware or software failure, and other factors may compromise the security of user information at any time. For additional information about the security measures Company uses in connection with the Website, please contact us at [info@azul.com](mailto:info@azul.com).
 
 **++Extensions Pertaining to EU Residents++**
 
@@ -116,7 +116,7 @@ If you are a resident of the European Union ("EU"), United Kingdom, Lichtenstein
 
 For this section, we use the terms "Personal Data" and "processing" as they are defined in the GDPR, but "Personal Data" generally means information that can be used to individually identify a person, and "processing" generally covers actions that can be performed in connection with data such as collection, use, storage and disclosure. We further use the term "Services" in this section to denote visiting our using the Company's websites, applications, domain names or other linked pages or our products and services that you purchase from us or otherwise download install or use (which may also be subject to additional terms and conditions). Company will be the controller of your Personal Data processed in connection with the Services.
 
-If there are any conflicts between this section and any other provision of this Agreement or portion that is more protective of Personal Data shall control to the extent of such conflict. If you have any questions about this section or whether any of the following applies to you, please contact us at [\[email protected\]](/cdn-cgi/l/email-protection), with "GDPR Request" included in the Subject line. Please note that we may also process Personal Data of our customers' end users or employees in connection with our provision of services to customers, in which case we are the processor of Personal Data. If we are the processor of your Personal Data (i.e., not the controller), please contact the controller party in the first instance to address your rights with respect to such data.
+If there are any conflicts between this section and any other provision of this Agreement or portion that is more protective of Personal Data shall control to the extent of such conflict. If you have any questions about this section or whether any of the following applies to you, please contact us at [info@azul.com](mailto:info@azul.com), with "GDPR Request" included in the Subject line. Please note that we may also process Personal Data of our customers' end users or employees in connection with our provision of services to customers, in which case we are the processor of Personal Data. If we are the processor of your Personal Data (i.e., not the controller), please contact the controller party in the first instance to address your rights with respect to such data.
 
 **++Extensions to Azul Privacy Policy for California Residents++**.
 
@@ -201,7 +201,7 @@ Exercising Access, Data Portability, and Deletion Rights
 
 To exercise the access, data portability, and deletion rights described above, please submit a verifiable consumer request to us at:
 
-Email: [\[email protected\]](/cdn-cgi/l/email-protection) with "Privacy Data CCPA Request" included in the Subject line, or
+Email: [privacy_consumer@azul.com](mailto:privacy_consumer@azul.com) with "Privacy Data CCPA Request" included in the Subject line, or
 
 Postal Address: Azul Systems, Inc.
 

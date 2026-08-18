@@ -438,7 +438,7 @@ Over these five posts, we've covered the full depth of BoxLang AI 3.0:
 
 ```
 # Install via CommandBox
-install [email protected]
+install bx-ai@3.0.0
 
 # Or for OS/CLI applications
 install-bx-module bx-ai

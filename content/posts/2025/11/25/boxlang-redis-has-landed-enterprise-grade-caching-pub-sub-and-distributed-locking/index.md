@@ -85,7 +85,7 @@ The Redis module works seamlessly with BoxLang's standard caching approaches:
 userData = {
     userID: 123,
     name: "John Doe",
-    email: "[email protected]",
+    email: "john@example.com",
     preferences: { theme: "dark", language: "en" }
 };
 
@@ -453,4 +453,4 @@ Ready to unlock bx-ldap and other premium modules? Choose your plan:
 
 Need help choosing the right plan or have questions? **Contact us directly:**
 
-[📧 **\[email protected\]**](/cdn-cgi/l/email-protection#543d3a323b14363b2c38353a337a3d3b "📧 **info@boxlang.io**")
+[📧 **info@boxlang.io**](mailto:info@boxlang.io "📧 **info@boxlang.io**")

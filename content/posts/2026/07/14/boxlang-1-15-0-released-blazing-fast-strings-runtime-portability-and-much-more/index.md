@@ -349,10 +349,10 @@ Remote methods (marked` access="remote"`) now automatically deserialize JSON str
 
 ```java
 remote function saveUser( required struct userData ) {
-    // Called via HTTP with userData={"name":"Alice","email":"[email protected]"}
+    // Called via HTTP with userData={"name":"Alice","email":"alice@example.com"}
     // userData is automatically deserialized to a BoxLang Struct:
     writeOutput( userData.name )   // Alice
-    writeOutput( userData.email )  // [email protected]
+    writeOutput( userData.email )  // alice@example.com
 }
 ```
 

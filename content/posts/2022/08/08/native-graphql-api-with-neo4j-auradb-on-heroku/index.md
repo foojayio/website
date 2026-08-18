@@ -182,7 +182,7 @@ Before we highlight some things in the project, let's have a look what is includ
 # Should print something like java version "17.0.2" 2022-01-18 LTS
 java -version
 # Clone the project
-git clone [email protected]:michael-simons/neo4j-aura-quarkus-graphql.git
+git clone git@github.com:michael-simons/neo4j-aura-quarkus-graphql.git
 cd neo4j-aura-quarkus-graphql
 # Start Quarkus in development mode
 ./mvnw compile quarkus:dev

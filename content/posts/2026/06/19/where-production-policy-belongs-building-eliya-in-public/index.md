@@ -119,14 +119,14 @@ curl -fsSLO https://github.com/asymmsystems/eliya-jdk/releases/download/eliya-jd
 # Fetch the signing key, then cross-check its fingerprint 
 # against at least one independent channel before trusting it
 gpg --keyserver keys.openpgp.org --recv-keys 076DE547397A5D27EECEE0B307A90689B71A158F
-gpg --fingerprint [email protected]
+gpg --fingerprint eliya@asymm.systems
 # Expected: 076D E547 397A 5D27 EECE  E0B3 07A9 0689 B71A 158F
 
 # Verify the signature on the checksums file, 
 # then verify the checksum on the tarball:
 gpg --verify SHA256SUMS.txt.asc SHA256SUMS.txt
 sha256sum -c SHA256SUMS.txt --ignore-missing
-# Expected: "Good signature from "Eliya Releases (Asymm Systems) <[email protected]>"" + "OK" on the tarball checksum.
+# Expected: "Good signature from "Eliya Releases (Asymm Systems) <eliya@asymm.systems>"" + "OK" on the tarball checksum.
 ```
 
 The full multi-channel verification ceremony is documented at [verify download](https://asymm.systems/product/eliya/user-guide/verify-download) page.

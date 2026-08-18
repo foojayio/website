@@ -140,6 +140,32 @@ should catch a mistake at PR time rather than letting it fail silently.
   scrapers now use too, so a re-scrape emits the same thing and a re-run here is
   a no-op. `--dry-run` / `--path` as usual. See the gallery convention below for
   what the shortcode derives rather than stores.
+- **`scripts/FixCloudflareEmails.java`**: one-off migration that put back the
+  email addresses Cloudflare hid from the scrapers. foojay.io is behind
+  Cloudflare with **Email Address Obfuscation** on, so an address never reaches
+  a non-browser client: the HTML carries a placeholder plus an XOR-encoded copy,
+  and a script in the *reader's* browser swaps them back. Nothing here runs
+  JavaScript, so the literal `[email protected]` landed in `content/` and every
+  mailto became a dead `](/cdn-cgi/l/email-protection)` -- 293 occurrences across
+  161 files. Cloudflare matches a loose `x@y`, so it also mangled things that
+  merely look like addresses, **inside code**: `git@github.com:...` in a clone
+  command and every line of `java --list-modules` output (`javafx.base@14.0.2`).
+  `HtmlToMarkdown.decodeCloudflareEmails` now undoes all of it at conversion
+  time, so a re-scrape emits the right thing and a re-run here is a no-op.
+
+  Unlike the other migrations this one **cannot repair from what it has** -- the
+  stored files kept only the placeholder, the encoded copy was dropped by the
+  converter -- so it re-fetches each affected page and reads the addresses back
+  out of the live HTML. That makes the safety rule the interesting part: a file
+  is only written when its placeholder count matches the number of obfuscated
+  elements in the live page body, so the n-th placeholder provably pairs with
+  the n-th address; a file that doesn't match is left alone and reported, never
+  guessed at. `--dry-run` / `--path` as usual. 148 files, 279 addresses. Two
+  known leftovers, both correct: `content/pages/terms-of-use.md` reproduces
+  WordPress's own `[info@azul.com](mailto:info@azul.io)` mismatch, and one post
+  really does contain the words "[email protected]" in a prompt example (the
+  live page has the same literal). Run it again after any late re-scrape, before
+  cutover kills the only source of these addresses.
 - **`scripts/ImportWpComments.java`**: one-off migration that moves the legacy
   WordPress comments (580 approved, across 270 posts, read from foojay.io's open
   `/wp-json/wp/v2/comments` — no admin access needed) into the GitHub Discussions
@@ -416,6 +442,20 @@ should catch a mistake at PR time rather than letting it fail silently.
   fences from the conversion scripts, so a re-scrape produces the same shape;
   `MigrateEnlighterToFences.java` above cleans up anything that slips through.
   Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
+- **Email addresses are decoded on the way in, never left obfuscated.**
+  foojay.io is behind Cloudflare with Email Address Obfuscation on, so every
+  address in the HTML it serves is a placeholder plus an XOR-encoded copy that
+  only a browser puts back. `HtmlToMarkdown.decodeCloudflareEmails` reverses it
+  (the first hex byte is the key) as the **first** thing `toMarkdown` does --
+  before the code-block and preserve passes, which would otherwise bake
+  `[email protected]` into a fence. Two rules worth keeping: a decode that
+  isn't an address becomes text rather than a link, because Cloudflare's matcher
+  has false positives (`javafx.base@14.0.2`, `setup-java@v5.5.0`,
+  `<code>@name</code>`); and an address **inside code** is always plain text,
+  because Flexmark renders an `<a>` in a `<pre>` as its bare href, which would
+  turn `--docker-email="a@b"` into `--docker-email="mailto:a@b"`.
+  `FixCloudflareEmails.java` above cleaned up what was already in `content/`.
+
 - **WordPress's decorative `<hr>`s and `<br>` spacers are dropped, not
   converted.** Flexmark
   renders `<hr>` as `*** ** * ** ***`, and WP bodies are full of them between

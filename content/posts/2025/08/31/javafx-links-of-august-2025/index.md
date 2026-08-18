@@ -18,7 +18,7 @@ frozen: false
 
 Here are the links shared on [jfx-central.com](https://www.jfx-central.com/links) in the August summary.
 
-Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
+Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [links@jfx-central.com](mailto:links@jfx-central.com).
 
 ## Core
 

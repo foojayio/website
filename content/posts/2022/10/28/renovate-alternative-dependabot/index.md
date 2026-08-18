@@ -51,7 +51,7 @@ In the end, I ended up with the following Renovate runner configuration:
 
 ```yaml
 variables:
-  RENOVATE_GIT_AUTHOR: Renovate Bot <[email protected]>
+  RENOVATE_GIT_AUTHOR: Renovate Bot <bot@renovate.com>
   RENOVATE_REQUIRE_CONFIG: optional
 
 include:

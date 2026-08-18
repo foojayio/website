@@ -169,7 +169,7 @@ To build the Windows version of the application, Visual Studio is required, whic
 
 ```
 - name: Add msbuild to PATH
-  uses: microsoft/[email protected]
+  uses: microsoft/setup-msbuild@v1.0.2
 - name: Visual Studio shell
   uses: egor-tensin/vs-shell@v1
 ```

@@ -82,7 +82,7 @@ We suggest investing in ongoing production support to ensure smooth operation an
 
 Website: <https://chronicle.software/services/>
 
-Email: [\[email protected\]](/cdn-cgi/l/email-protection)
+Email: [support@chronicle.software](mailto:support@chronicle.software)
 
 Demo request: <https://chronicle.software/demo/?product=services>
 

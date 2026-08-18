@@ -173,10 +173,10 @@ Copy/paste the following statements into the CQLSH prompt and press enter:
 CREATE KEYSPACE medusa_test  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 USE medusa_test;
 CREATE TABLE users (email TEXT PRIMARY KEY, name TEXT, state TEXT);
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Alice Smith', 'TX');
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Bob Jones', 'VA');
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Carol Jackson', 'CA');
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'David Yang', 'NV');
+INSERT INTO users (email, name, state) VALUES ('alice@example.com', 'Alice Smith', 'TX');
+INSERT INTO users (email, name, state) VALUES ('bob@example.com', 'Bob Jones', 'VA');
+INSERT INTO users (email, name, state) VALUES ('carol@example.com', 'Carol Jackson', 'CA');
+INSERT INTO users (email, name, state) VALUES ('david@example.com', 'David Yang', 'NV');
 ```
 
 Check that the rows were properly inserted:
@@ -186,10 +186,10 @@ SELECT * FROM medusa_test.users;
 
  email             | name          | state
 -------------------+---------------+-------
- [email protected] |   Alice Smith |    TX
-   [email protected] |     Bob Jones |    VA
- [email protected] |    David Yang |    NV
- [email protected] | Carol Jackson |    CA
+ alice@example.com |   Alice Smith |    TX
+   bob@example.com |     Bob Jones |    VA
+ david@example.com |    David Yang |    NV
+ carol@example.com | Carol Jackson |    CA
 
 (4 rows)
 ```
@@ -257,10 +257,10 @@ Check that you can read the data from the previously truncated table:
 
  email             | name          | state
 -------------------+---------------+-------
- [email protected] |   Alice Smith |    TX
-   [email protected] |     Bob Jones |    VA
- [email protected] |    David Yang |    NV
- [email protected] | Carol Jackson |    CA
+ alice@example.com |   Alice Smith |    TX
+   bob@example.com |     Bob Jones |    VA
+ david@example.com |    David Yang |    NV
+ carol@example.com | Carol Jackson |    CA
 
 (4 rows)
 ```

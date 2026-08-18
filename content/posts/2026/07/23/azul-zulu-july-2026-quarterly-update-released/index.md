@@ -75,7 +75,7 @@ Azul releases Azul Zulu Builds of OpenJDK in versions 26, 25, 21, 17, 11, 8, 7, 
 
 Azul removes the Lucida fonts licensed from Monotype from Azul Zulu Builds of OpenJDK 8 in this release. Later Zulu versions already ship without these fonts.
 
-If your application depends on the bundled Lucida fonts, install the Azul Commercial Compatibility Kit or contact Azul Support at [\[email protected\]](/cdn-cgi/l/email-protection).
+If your application depends on the bundled Lucida fonts, install the Azul Commercial Compatibility Kit or contact Azul Support at [support@azul.com](mailto:support@azul.com).
 
 ### Intelligence Cloud: CRS Agent Retires
 

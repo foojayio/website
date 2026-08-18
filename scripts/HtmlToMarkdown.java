@@ -7,6 +7,8 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
+import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -196,6 +198,11 @@ public final class HtmlToMarkdown {
      */
     public static String toMarkdown(Element content) {
         List<String> preserved = new ArrayList<>();
+
+        // Cloudflare's email obfuscation, undone before anything else -- the
+        // placeholder it leaves otherwise ends up baked into code fences and
+        // preserved HTML blocks by the passes below. See decodeCloudflareEmails.
+        decodeCloudflareEmails(content);
 
         // WordPress stamps every heading with a positional anchor
         // (<h2 id="h2-2-where-the-dedup-check-actually-lives">), which Flexmark
@@ -399,6 +406,106 @@ public final class HtmlToMarkdown {
             url = url.replace("&amp;", "&");
         } while (!url.equals(prev));
         return url;
+    }
+
+    /**
+     * Undoes Cloudflare's "Email Address Obfuscation".
+     *
+     * foojay.io is behind Cloudflare with that feature on, so every address in
+     * the HTML it serves -- in a mailto: href, in prose, and inside a <pre> --
+     * is rewritten server-side into a placeholder plus an XOR-encoded copy, and
+     * only put back by a script that runs in the READER's browser:
+     *
+     *   <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+     *      data-cfemail="94fcf1f8f8fbd4f2fbfbfef5edbafdfb">[email&#160;protected]</a>
+     *   <a href="/cdn-cgi/l/email-protection#0d327e78...">let us know</a>
+     *
+     * A scraper runs no JavaScript, so without this pass the literal text
+     * "[email protected]" is what lands in content/ -- and it is not only
+     * addresses: Cloudflare's matcher is a loose `x@y`, so `git@github.com` in a
+     * shell sample and `javafx.base@14.0.2` in `java --list-modules` output get
+     * mangled the same way, inside fenced code. Decoding therefore has to happen
+     * FIRST in toMarkdown, before the code-block and preserve passes lift those
+     * bodies out as text.
+     *
+     * The encoding is trivially reversible (first hex byte is the XOR key), so
+     * nothing is guessed. Two shapes, and they nest -- an obfuscated mailto link
+     * around an obfuscated address is encoded twice, with a different key each
+     * time:
+     *   .__cf_email__ + data-cfemail  -> the address itself
+     *   href .../email-protection#HEX -> the whole mailto: target, which for a
+     *                                    share-by-email button is a recipient-less
+     *                                    `?subject=...&body=...`
+     *
+     * A decode that is not an address is left as text rather than linked: the
+     * matcher has false positives (a post has `<code>@name</code>` wrapped this
+     * way), and `mailto:code&gt;@name` would be worse than the words.
+     */
+    static void decodeCloudflareEmails(Element content) {
+        // Links first: the href carries the whole target, and the anchor text may
+        // itself be an obfuscated address handled by the pass below.
+        for (Element a : content.select("a[href*=/cdn-cgi/l/email-protection#]")) {
+            String href = a.attr("href");
+            String decoded = decodeCfEmail(href.substring(href.indexOf('#') + 1));
+            if (decoded == null) continue;
+            if (inCode(a)) {
+                a.replaceWith(new TextNode(decoded)); // see the code note below
+            } else if (decoded.startsWith("?") || looksLikeEmail(decoded)) {
+                a.attr("href", "mailto:" + decoded);
+            } else {
+                a.unwrap(); // false positive -- keep the words, drop the dead link
+            }
+        }
+        for (Element el : content.select(".__cf_email__[data-cfemail]")) {
+            String decoded = decodeCfEmail(el.attr("data-cfemail"));
+            if (decoded == null) continue;
+            // Inside code, always plain text: the address was a literal in a
+            // shell command or a config sample, and a link there is not just
+            // ugly -- Flexmark renders an <a> inside <pre> as its bare HREF, so
+            // leaving one turns `--docker-email="a@b"` into
+            // `--docker-email="mailto:a@b"`.
+            if (!inCode(el) && "a".equals(el.tagName()) && looksLikeEmail(decoded)) {
+                el.attr("href", "mailto:" + decoded).text(decoded);
+                el.removeClass("__cf_email__").removeAttr("data-cfemail");
+            } else {
+                el.replaceWith(new TextNode(decoded));
+            }
+        }
+    }
+
+    /**
+     * Decodes one Cloudflare-obfuscated value: hex bytes, the first of which is
+     * the XOR key for all the others. Returns null on anything that isn't that
+     * (so a caller leaves the element alone rather than writing nonsense).
+     */
+    static String decodeCfEmail(String hex) {
+        if (hex == null) return null;
+        hex = hex.trim();
+        if (hex.length() < 4 || hex.length() % 2 != 0 || !hex.matches("(?i)[0-9a-f]+")) return null;
+        int key = Integer.parseInt(hex.substring(0, 2), 16);
+        // Cloudflare XORs the UTF-8 BYTES of the source, so the result is read
+        // back as UTF-8 rather than assembled char by char.
+        byte[] bytes = new byte[hex.length() / 2 - 1];
+        for (int i = 2; i < hex.length(); i += 2) {
+            bytes[i / 2 - 1] = (byte) (Integer.parseInt(hex.substring(i, i + 2), 16) ^ key);
+        }
+        String decoded = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+        // The source was HTML, so an address inside markup arrives entity-encoded.
+        return decoded.isEmpty() ? null : Parser.unescapeEntities(decoded, false);
+    }
+
+    /** Whether an element sits inside a code block or code span. */
+    private static boolean inCode(Element el) {
+        for (Element p = el.parent(); p != null; p = p.parent()) {
+            if ("pre".equals(p.tagName()) || "code".equals(p.tagName())) return true;
+        }
+        return false;
+    }
+
+    /** Loose enough for the addresses WordPress bodies hold, strict enough to
+     *  reject Cloudflare's false positives (`code&gt;@name&lt;/code`). */
+    static boolean looksLikeEmail(String s) {
+        return s.matches("[^\\s@<>\"']+@[^\\s@<>\"']+\\.[A-Za-z][^\\s@<>\"']*");
     }
 
     /** Applies resolveEscapedUrl to every href/src in the body. */

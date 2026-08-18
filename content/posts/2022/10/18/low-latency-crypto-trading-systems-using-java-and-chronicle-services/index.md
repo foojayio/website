@@ -181,7 +181,7 @@ The demo project connects to Binance and performs simple analytics on the market
 
 It's implemented with all the best practices mentioned above.
 
-Access to this project is available upon request to [\[email protected\]](/cdn-cgi/l/email-protection)
+Access to this project is available upon request to [info@chronicle.software](mailto:info@chronicle.software)
 
 #### References:
 

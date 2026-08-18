@@ -15,7 +15,7 @@ The foojay.io website and domain name and all other websites and domain names af
 
 **Company reserves the right, in its sole discretion, to modify this Agreement at any time by posting a notice on the Website, or by sending you a notice via email or other reasonable means. You shall be responsible for reviewing and becoming familiar with any such modifications. Your use of the Services following such notification constitutes your acceptance of the terms and conditions of this Agreement as modified.**
 
-Company does not knowingly collect or solicit personal information from anyone under the age of 13 or knowingly allow such persons to register for the Services. If you are under 13, please do not attempt to send any information about yourself to us, including your name, address, telephone number, or email address. No one under age 13 may provide any personal information to Company or on the Services. In the event that we learn that we have collected personal information from a child under age 13 without verification of parental consent, we will delete that information as quickly as possible. If you believe that we might have any information from or about a child under 13, please contact us at [\[email protected\]](/cdn-cgi/l/email-protection#264f48404966475c534a084f49).
+Company does not knowingly collect or solicit personal information from anyone under the age of 13 or knowingly allow such persons to register for the Services. If you are under 13, please do not attempt to send any information about yourself to us, including your name, address, telephone number, or email address. No one under age 13 may provide any personal information to Company or on the Services. In the event that we learn that we have collected personal information from a child under age 13 without verification of parental consent, we will delete that information as quickly as possible. If you believe that we might have any information from or about a child under 13, please contact us at info@azul.com.
 
 You represent and warrant to Company, that: (i) you are at least 18 years or age or older; (ii) all registration information you submit is accurate and truthful; and (iii) you will maintain the accuracy of such information. You also certify that you are legally permitted to use and access the Services and take full responsibility for the selection and use of and access to the Services. This Agreement is void where prohibited by law, and the right to access the Services is revoked in such jurisdictions.
 
@@ -150,18 +150,14 @@ Please contact Company's Designated Agent to Receive Notification of Claimed Inf
 Designated Agent to Receive Notification of Claimed Infringement:
 
 Tomas Flores  
-
 Vice President, Legal  
-
 Azul Systems, Inc.  
-
 385 Moffet Park Drive, Suite 115  
-
 Sunnyvale, CA 94089  
 
-Tel: [650.230.6540](tel:6502306540)  
+Tel: 650.230.6540
+Fax: 650.230.6600
 
-Fax: [650.230.6600](tel:6502306600)  
-[**\[email protected\]**](/cdn-cgi/l/email-protection#fc889a90938e998fbc9d868990d29f9391)
+**tflores@azul.com**
 
 *Effective date: October 17, 2024*

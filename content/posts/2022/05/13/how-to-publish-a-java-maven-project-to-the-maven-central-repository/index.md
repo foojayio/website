@@ -164,7 +164,7 @@ As you can see, the first tags are just general project information:
     <developers>
         <developer>
             <name>Tobias Briones</name>
-            <email>[email protected]</email>
+            <email>dev@mathsoftware.engineer</email>
             <organization>Tobias Briones</organization>
             <organizationUrl>https://mathsoftware.engineer</organizationUrl>
         </developer>

@@ -188,7 +188,7 @@ println( "Status: #result.statusCode#" );
 result = http( "https://api.example.com/users" )
     .post()
     .header( "Content-Type", "application/json" )
-    .body( { name : "John Doe", email : "[email protected]" } )
+    .body( { name : "John Doe", email : "john@example.com" } )
     .send();
 
 // Transform response inline
@@ -635,7 +635,7 @@ Ready to experience revolutionary HTTP capabilities, SOAP integration, and rock-
 
 ```java
 # Update with CommandBox
-box install [email protected]
+box install boxlang@1.8.0
 
 # Or download from boxlang.io
 https://boxlang.io/download

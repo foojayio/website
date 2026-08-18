@@ -108,7 +108,7 @@ Below, let's try to imagine a simple document representing a user
 ```
 {
   "_id": "user-123",
-  "email": "[email protected]",
+  "email": "alice@example.com",
   "roles": ["CUSTOMER"],
   "status": "ACTIVE"
 }

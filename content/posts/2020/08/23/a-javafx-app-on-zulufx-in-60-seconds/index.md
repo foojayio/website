@@ -84,13 +84,13 @@ OpenJDK 64-Bit Server VM Zulu14.29+23-CA (build 14.0.2+12, mixed mode, sharing)
 # Verify JavaFX Modules are included in Zulu's Open JDK
 $ java --list-modules
 ...
-[email protected]
-[email protected]
-[email protected]
-[email protected]
-[email protected]
-[email protected]
-[email protected]
+javafx.base@14.0.2
+javafx.controls@14.0.2
+javafx.fxml@14.0.2
+javafx.graphics@14.0.2
+javafx.media@14.0.2
+javafx.swing@14.0.2
+javafx.web@14.0.2
 ...
 ```
 

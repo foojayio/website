@@ -32,7 +32,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/data-driven-test-mongodb):
 
 ```
-git clone [email protected]:soujava/data-driven-test-mongodb.git
+git clone git@github.com:soujava/data-driven-test-mongodb.git
 ```
 
 ## Prerequisites

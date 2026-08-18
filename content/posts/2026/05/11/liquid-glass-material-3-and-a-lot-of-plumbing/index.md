@@ -55,7 +55,7 @@ raised.setUIID("RaisedButton");
 row.add(raised);
 form.add(row);
 
-TextField tf = new TextField("[email protected]");
+TextField tf = new TextField("hello@example.com");
 form.add(tf);
 
 Container toggles = new Container(BoxLayout.x());

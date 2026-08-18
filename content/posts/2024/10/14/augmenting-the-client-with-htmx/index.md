@@ -59,7 +59,7 @@ Here is how I integrate Thymeleaf and HTMX in the POM:
 The code on the HTML side is straightforward :
 
 ```html
-<script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/htmx.min.js"></script> <!--1-->
+<script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/htmx.org@1.9/dist/htmx.min.js"></script> <!--1-->
 ```
 
 1. Add the HTMX dependency

@@ -99,7 +99,7 @@ There will be lots of exciting updates for Java on Visual Studio Code in 2022, a
 
 * Leave your comment on this blog post
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
-* Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
+* Send an email to: [vscjfeedback@microsoft.com](mailto:vscjfeedback@microsoft.com)
 
 ### Resources
 

@@ -196,7 +196,7 @@ combined = names.zip( ages, cities )
 
 // Real-world: combine headers with data
 headers = [ "Name", "Email", "Role" ]
-values = [ "Alice", "[email protected]", "Admin" ]
+values = [ "Alice", "alice@example.com", "Admin" ]
 record = headers.zip( values )
 ```
 
@@ -208,7 +208,7 @@ BoxLang 1.10.0 introduces destructuring syntax `for` for loops, eliminating verb
 // Struct iteration with key and value
 userData = {
     name: "Alice",
-    email: "[email protected]",
+    email: "alice@example.com",
     role: "admin"
 }
 

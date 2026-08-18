@@ -76,7 +76,7 @@ This is the result:
     packages        │ 272
 ## Packages and Vulnerabilities
    0C     1H     0M     0L  org.yaml/snakeyaml 1.33
-pkg:maven/org.yaml/[email protected]
+pkg:maven/org.yaml/snakeyaml@1.33
     ✗ HIGH CVE-2022-1471 [Improper Input Validation]
       https://scout.docker.com/v/CVE-2022-1471
       Affected range : <=1.33
@@ -84,7 +84,7 @@ pkg:maven/org.yaml/[email protected]
       CVSS Score     : 8.3
       CVSS Vector    : CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L
    0C     1H     0M     0L  io.netty/netty-handler 4.1.100.Final
-pkg:maven/io.netty/[email protected]
+pkg:maven/io.netty/netty-handler@4.1.100.Final
     ✗ HIGH CVE-2023-4586 [OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities]
       https://scout.docker.com/v/CVE-2023-4586
       Affected range : >=4.1.0

@@ -216,7 +216,7 @@ jobs:
           ./mvnw -Pnative package
 
       - name: Archive Release
-        uses: thedoctor0/[email protected]
+        uses: thedoctor0/zip-release@0.7.5
         with:
           type: 'zip'
           filename: "raffle-${{ matrix.platform }}.zip"

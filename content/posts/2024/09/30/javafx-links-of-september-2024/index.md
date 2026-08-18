@@ -19,7 +19,7 @@ frozen: false
 
 Here is the overview of the JavaFX LinksOfTheMonth of September 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month.
 
-Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
+Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [links@jfx-central.com](mailto:links@jfx-central.com).
 
 A lot of milestones this month...
 
@@ -33,7 +33,7 @@ More info and links below in this overview...
 
 * [**Pedro Duke** shared the following](https://x.com/P_Duke/status/1830644652287926277): "Noteworthy features coming in the next release of JavaFX (23) coming this month (September 17):"
   * CSS transitions: This introduces basic animation support in CSS. Won't be able to do it on Background and Borders for now. Work is already underway to also support that in a next release.
-  * Support "@3x" and greater high-density image naming convention. Currently JavaFX supports `img.png` and `[email protected]`, soon also `[email protected]`.
+  * Support "@3x" and greater high-density image naming convention. Currently JavaFX supports `img.png` and `img@2x.png`, soon also `img@3x.png`.
   * Horizontal scroll support with the keyboard on controls like ListView, TreeView
   * TextTruncated property to know when text is being truncated
   * Add support for EXT-X-MEDIA tag in HTTP Live Streaming
@@ -101,7 +101,7 @@ More info and links below in this overview...
   * With a video preview [in this tweet](https://x.com/dlemmermann/status/1831649178440630603).
 * [**Dirk Lemmermann** shared App Store screenshots](https://x.com/dlemmermann/status/1832065670030283200) for the JFX Central app, [created with @AppScreensASO](https://x.com/AppScreensASO). But ... "[Apple review is giving me a hard time](https://x.com/dlemmermann/status/1833421417913675942) to get the app into the App Store. E.g. '"'the app is not using any native iPhone features, e.g. Core location'"'. So simply making lots of data available doesn't seem to be good enough for Apple. But it would be for the users..."
 * The [JFX Central App is now available from the Apple App Store](https://apps.apple.com/ch/app/jfxcentral/id1613971561)!!! Keep being informed about all JavaFX news, libraries, persons, books, tutorials with this very handy app! Based on the same source code of the JFX Central website and with the same database, it brings the same content now to desktop, web, and (iOS) mobile! Soon also on Android...
-* [**Dirk Lemmermann** calls out to all developers](https://x.com/dlemmermann/status/1834983836389642275): "Got a cool JavaFX application? Wanna showcase it so the entire world can see it? Just submit it to [\[email protected\]](/cdn-cgi/l/email-protection) and we will make it happen... on everybody's desktop, in the browser, on their phones."
+* [**Dirk Lemmermann** calls out to all developers](https://x.com/dlemmermann/status/1834983836389642275): "Got a cool JavaFX application? Wanna showcase it so the entire world can see it? Just submit it to [links@jfx-central.com](mailto:links@jfx-central.com) and we will make it happen... on everybody's desktop, in the browser, on their phones."
 * New content:
   * Showcase: [MelodyMatrix - Look at your music...](https://www.jfx-central.com/real_world/melodymatrix). It's a desktop application created by **Frank Delporte** and his 14y old son **Vik** to visualize music being played on MIDI instruments.
   * Tutorial: [JavaFX with Kotlin versus Java](https://www.jfx-central.com/learn-javafx/kotlin-versus-java). Kotlin also runs on the Java Virtual Machine (JVM) and is a very close sister of Java. In this tutorial, you'll learn the difference in code style when combining it with JavaFX.

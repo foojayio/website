@@ -158,7 +158,7 @@ release:
          java-version: 17
      - name: Set Git user
        run: |
-         git config user.email "[email protected]"
+         git config user.email "ghactions@brianvermeer.nl"
          git config user.name "GitHub Actions"
      - name: Publish JAR
        run: mvn -B release:prepare release:perform -DskipTests

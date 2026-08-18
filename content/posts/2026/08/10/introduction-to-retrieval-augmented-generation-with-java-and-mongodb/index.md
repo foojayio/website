@@ -30,7 +30,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the GitHub repository:
 
 ```
-[email protected]:soujava/mongodb-rag.git
+git@github.com:soujava/mongodb-rag.git
 ```
 
 ## Prerequisites

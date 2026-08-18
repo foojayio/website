@@ -93,7 +93,7 @@ class UserService {
      * Safe navigation with elvis operator
      */
     public function getEmail() {
-        return this.user?.email ?: "[email protected]";
+        return this.user?.email ?: "no-email@example.com";
     }
 }
 ```

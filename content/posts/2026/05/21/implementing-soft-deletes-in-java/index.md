@@ -52,7 +52,7 @@ What we want to do is to change the schema of the users collection from its curr
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "[email protected]",
+  "email": "paul_kaye@gameofthron.es",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G"
 }
 ```
@@ -65,7 +65,7 @@ To something that includes a flag regarding the deletion:
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "[email protected]",
+  "email": "paul_kaye@gameofthron.es",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G",
   "deletedAt": null
 }
@@ -408,7 +408,7 @@ When using this method we need to make sure to also cascade deletions into relat
     "$oid": "5a9427648b0beebeb69579e7"
   },
   "name": "Mercedes Tyler",
-  "email": "[email protected]",
+  "email": "mercedes_tyler@fakegmail.com",
   "movie_id": {
     "$oid": "573a1390f29313caabcd4323"
   },

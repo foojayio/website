@@ -113,7 +113,7 @@ You can configure the CycloneDX plugin in different ways. In this case, I bound 
 All dependencies, both direct and transitive, are mentioned in the SBOM individually like below. The `jackson-databind` package, in this case, was transitively included in my application via `sprint-boot-starter-web`.
 
 ```
-<component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/[email protected]?type=jar">
+<component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.13.4?type=jar">
  <publisher>FasterXML</publisher>
  <group>com.fasterxml.jackson.core</group>
  <name>jackson-databind</name>
@@ -134,7 +134,7 @@ All dependencies, both direct and transitive, are mentioned in the SBOM individu
      <id>Apache-2.0</id>
    </license>
  </licenses>
- <purl>pkg:maven/com.fasterxml.jackson.core/[email protected]?type=jar</purl>
+ <purl>pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.13.4?type=jar</purl>
  <externalReferences><reference type="vcs"><url>http://github.com/FasterXML/jackson-databind</url></reference><reference type="website"><url>http://fasterxml.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference></externalReferences>
 </component>
 ```

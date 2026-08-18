@@ -37,7 +37,7 @@ bx-couchbase introduces a complete cache provider with replication, fault tolera
 ```
 cache("default").set("user:123", {
     name: "Alice Smith",
-    email: "[email protected]",
+    email: "alice@example.com",
     role: "admin"
 } )
 

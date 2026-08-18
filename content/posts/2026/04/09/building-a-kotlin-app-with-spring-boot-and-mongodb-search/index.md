@@ -167,7 +167,7 @@ To establish our connection, we need to follow these steps. First, update the ap
 ```
 spring.application.name=Airbnb Searcher
 
-spring.data.mongodb.uri=mongodb+srv://user:[email protected]/
+spring.data.mongodb.uri=mongodb+srv://user:pass@cluster0.cluster.mongodb.net/
 
 spring.data.mongodb.database=sample_airbnb
 ```

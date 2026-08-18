@@ -43,7 +43,7 @@ The next day, I woke early to fly to Montréal, Canada. It was a pretty long fli
 I had two talks there: Open Telemetry (again) and [Chopping](https://blog.frankel.ch/chopping-monolith/) [the Monolith](https://blog.frankel.ch/chopping-monolith-smarter-way/). I had rebuilt my images, and both talks went flawlessly this time.
 > [@nicolas_frankel](https://twitter.com/nicolas_frankel?ref_src=twsrc%5Etfw) talking about decomposing the monolith. The first step on the micro services journey is reorg /cc [@adrianco](https://twitter.com/adrianco?ref_src=twsrc%5Etfw) [pic.twitter.com/YU6yFR8IJF](https://t.co/YU6yFR8IJF)
 >
-> — Spencer Gibb (@[\[email protected\]](/cdn-cgi/l/email-protection)) (@spencerbgibb) [February 23, 2024](https://twitter.com/spencerbgibb/status/1761046658303877615?ref_src=twsrc%5Etfw)
+> — Spencer Gibb (@[spencergibb@social.sdf.org](mailto:spencergibb@social.sdf.org)) (@spencerbgibb) [February 23, 2024](https://twitter.com/spencerbgibb/status/1761046658303877615?ref_src=twsrc%5Etfw)
 
 Over the weekend, my friend [Anthony](https://framapiaf.org/@anthonydahanne) invited me to ski in Sutton. The temperature was very low compared to what I'm used to, around-10°C. Fortunately, Anthony was prepared and gave me self-heating thingies for my hands; unfortunately, he only had one - but it was enough nonetheless. Anthony also connected me with all the meetups I have the pleasure of presenting at in Canada, so I'm fortunate to count him as a friend.
 

@@ -153,7 +153,7 @@ public class NotificationProgram {
         Notification notification = new Notification();
         notification.setTitle("New message");
         notification.setMessage("Hello, world!");
-        notification.setRecipient("[email protected]");
+        notification.setRecipient("johndoe@system.com");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
@@ -257,7 +257,7 @@ Let's update the `NotificationProgram` that creates a `Notification` object:
 public class NotificationProgram {
 
     public static void main(String[] args) {
-        Notification notification = new Notification("New message", "Hello, world!", "[email protected]");
+        Notification notification = new Notification("New message", "Hello, world!", "johndoe@system.com");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
@@ -358,7 +358,7 @@ public class NotificationProgram {
         Notification notification = new Notification(
                 "New message",
                 "Hello, world!",
-                "[email protected]",
+                "johndoe@system.com",
                 true,
                 Notification.Type.INFO,
                 "/path/to/attachment.txt");
@@ -448,13 +448,13 @@ public class NotificationProgram {
                 new Notification(
                         "New message",
                         "Hello, world!",
-                        "[email protected]");
+                        "johndoe@system.com");
 
         var notificationWithCustomOptionalValues =
                 new Notification(
                         "Another message",
                         "Oh no! Something wrong happened",
-                        "[email protected]",
+                        "johndoe@system.com",
                         true,
                         Notification.Type.ERROR,
                         "/path/to/attachment.txt");
@@ -544,14 +544,14 @@ public class NotificationProgram {
                         Notification.Type.GENERAL,
                         "General Notification",
                         "This is a general notification",
-                        "[email protected]");
+                        "johndoe@system.com");
 
         var highPrioryInfoNotification = Notification
                 .createHighPriorityNotification(
                         Notification.Type.INFO,
                         "High Priority Info Notification",
                         "This is a high priority info notification",
-                        "[email protected]");
+                        "johndoe@system.com");
     }
 }
 ```
@@ -688,7 +688,7 @@ public class NotificationProgram {
         var generalNotification = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("[email protected]")
+                .recipient("johndoe@system.com")
                 .build();
 
         // do something with generalNotification
@@ -696,7 +696,7 @@ public class NotificationProgram {
         var highPriorityInfoNotificationWithAttachment = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("[email protected]")
+                .recipient("johndoe@system.com")
                 .type(Type.INFO)
                 .highPriority(true)
                 .attachment("attachment.pdf")
@@ -719,7 +719,7 @@ Before to add the builder solution in the `Notification` class, developers whose
 public class NotificationProgram {
     public static void main(String[] args) {
         var anotherNotification = Notification.builder()
-                .recipient("[email protected]")
+                .recipient("johndoe@system.com")
                 .build();
     }
 }
@@ -1024,7 +1024,7 @@ public class NotificationProgram {
         var generalNotification = Notification.builder()
                 .title("Another title")
                 .message("Another message")
-                .recipient("[email protected]")
+                .recipient("johndoe@system.com")
                 .build();
 
         // do something with generalNotification
@@ -1032,7 +1032,7 @@ public class NotificationProgram {
         var highPriorityWarningNotification = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("[email protected]")
+                .recipient("johndoe@sytem.com")
                 .addMore()
                 .highPriority(true)
                 .type(Notification.Type.WARNING)
@@ -1043,7 +1043,7 @@ public class NotificationProgram {
         var highPriorityErrorNotificationWithAttachment = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("[email protected]")
+                .recipient("johndoe@sytem.com")
                 .addMore()
                 .type(Notification.Type.ERROR)
                 .attachment("error.log")

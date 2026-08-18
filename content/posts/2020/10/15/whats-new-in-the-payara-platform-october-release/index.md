@@ -94,6 +94,6 @@ See more detailed overview of the fixes and improvements in the Release Notes:
 
 Don't forget to update your Payara Platform to the new version! You can [Download the Payara Community Edition here](https://www.payara.fish/downloads/payara-platform-community-edition/), or request the Payara Enterprise Edition [via this form.](https://www.payara.fish/page/payara-enterprise-downloads/)
 
-As usual: if you have any questions, feedback or suggestions, please post them in the comments below or email us at [\[email protected\]](/cdn-cgi/l/email-protection#294a4644445c47405d5069594850485b48074f405a41)
+As usual: if you have any questions, feedback or suggestions, please post them in the comments below or email us at [community@payara.fish](mailto:community@payara.fish)
 
 Original blog can be found here, reused with thanks and permission: <https://blog.payara.fish/whats-new-in-payara-platform-october-2020>

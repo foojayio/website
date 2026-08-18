@@ -304,7 +304,7 @@ Unfortunately, this kernel change is insufficient, as the same error occurs duri
 As it turns out, the current Zulu version 17.0.7 with CRaC doesn't support this Linux kernel. Luckily, Sergey could provide me a dev-version of Zulu with changes that will be part of the next release in July. First, I needed to upload them to my Raspberry Pi.
 
 ```
-% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz [email protected]:/home/crac/
+% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz crac@172.16.1.145:/home/crac/
 ```
 
 And then installed in the `/opt/` directory as described above.

@@ -90,13 +90,13 @@ Given this history for a file, consisting of the important change as well as a c
 ```
 ❯ git log
 commit 301b7eca0eb57737e160f5d2d16208f65c4156d6 (HEAD -> master)
-Author: Benjamin Muskalla <[email protected]>
+Author: Benjamin Muskalla <bmuskalla@gradle.com>
 Date:   Tue Jan 12 11:38:40 2021 +0100
 
     Reformat all source files
 
 commit bd3fca50ee1659e740e2f6744d95e737418f1f40
-Author: Benjamin Muskalla <[email protected]>
+Author: Benjamin Muskalla <bmuskalla@gradle.com>
 Date:   Tue Jan 12 11:38:12 2021 +0100
 
     Important change

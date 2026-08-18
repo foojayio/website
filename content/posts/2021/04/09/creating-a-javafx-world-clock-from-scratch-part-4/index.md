@@ -149,7 +149,7 @@ Verify external modules located in file:///Users/cdea/projects/worldclock/.bach/
 Verified 3 external modules
 Build 1 main module: worldclock
   javac    --module worldclock --module-version 17-bach --module-source-path worldclock=src/main/java --module-path .bach/e[...]
-  jar      --create --file .bach/workspace/modules/[email protected] -C .bach/workspace/classes-main-16/worldclock . -[...]
+  jar      --create --file .bach/workspace/modules/worldclock@17-bach.jar -C .bach/workspace/classes-main-16/worldclock . -[...]
 Assemble custom runtime image
   jlink    --add-modules worldclock --module-path .bach/workspace/modules:.bach/external-modules --launcher worldclock=worl[...]
 Build took 3.739s

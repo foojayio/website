@@ -36,7 +36,7 @@ You'll find practical advice you can use today—like configuring build caching 
 
 The project has grown out of the Foojay (Friends of OpenJDK) community, where members from different companies and countries found they shared the same concerns about sustainability. In January 2024, the writing has started with the first commits in the GitHub repository. Yes, of course, this book is managed as a software project 😉
 
-Thanks to the automated publishing process, provided by Leanpub, the book keep evolving and regularly gets new contributions, based on reader feedback. Let us know via our [Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or [\[email protected\]](/cdn-cgi/l/email-protection) if you want to join with your own content!
+Thanks to the automated publishing process, provided by Leanpub, the book keep evolving and regularly gets new contributions, based on reader feedback. Let us know via our [Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or [hello@foojay.io](mailto:hello@foojay.io) if you want to join with your own content!
 
 ## Get it Now!
 

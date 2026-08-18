@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Here is the overview of the JavaFX LinksOfTheMonth of October 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
+Here is the overview of the JavaFX LinksOfTheMonth of October 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [links@jfx-central.com](mailto:links@jfx-central.com).
 
 ## Core
 

@@ -2,12 +2,36 @@
 
 ## ConverPosts
 
-* [ ] Search for `[\[email protected\]](/cdn-cgi/l/email-protection)`
-  * Email address in posts seem to get lost in the conversion to Hugo markdown. 
-  * Some examples:
-    * content/posts/2020/08/23/a-javafx-app-on-zulufx-in-60-seconds/index.md
-    * content/posts/2026/07/31/javafx-links-of-july-2026/index.md
-  * For instance, for JFX Links of the month posts it should link to links@jfx-central.com
+* [X] Search for `[\[email protected\]](/cdn-cgi/l/email-protection)`
+  * Not a conversion bug of ours: foojay.io runs behind Cloudflare with **Email
+    Address Obfuscation** on, so an address never reaches a non-browser client.
+    The HTML carries a placeholder plus an XOR-encoded copy, and a script in the
+    *reader's* browser swaps them back. The scrapers run no JavaScript, so the
+    literal "[email protected]" is what landed in content/ -- 293 occurrences
+    across 161 files.
+  * Cloudflare matches a loose `x@y`, so it also mangled things that only look
+    like addresses, **inside code**: `git@github.com:...` in a clone command,
+    every line of `java --list-modules` output (`javafx.base@14.0.2`),
+    `setup-java@v5.5.0`, and one `<code>@name</code>`.
+  * Fixed in two places, the usual split:
+    * `HtmlToMarkdown.decodeCloudflareEmails` undoes it at conversion time, so a
+      re-scrape is correct. The encoding is reversible (first hex byte is the XOR
+      key), so nothing is guessed. Anything that decodes to a non-address is
+      restored as text, never linked.
+    * `scripts/FixCloudflareEmails.java` repaired what was already in content/.
+      Unlike the other migrations it cannot repair from what it has -- the stored
+      files kept only the placeholder -- so it re-fetches each page and reads the
+      addresses back out, and only writes when the placeholder count matches the
+      live page's, so the n-th placeholder provably pairs with the n-th address.
+      148 files, 279 addresses, including `links@jfx-central.com` on every JFX
+      Links post.
+  * Two things left deliberately:
+    * `content/pages/terms-of-use.md` has `[info@azul.com](mailto:info@azul.io)`
+      -- that mismatch is in the WordPress source, faithfully reproduced. Fix it
+      there (or here) if `azul.io` is a typo.
+    * `.../best-practices-for-working-with-ai-agents-...` really does contain the
+      words "[email protected]" in two prompt examples; the live page has the
+      same literal, so it is the author's own text, not damage.
 * [X] Em dashes became `---` in the conversion — real fix was for GitHub comments
   * Flexmark's html2md converter rewrites the characters WP serves (`—` → `---`,
     `–` → `--`, `…` → `...`). **But Hugo turns them back**: Goldmark's typographer

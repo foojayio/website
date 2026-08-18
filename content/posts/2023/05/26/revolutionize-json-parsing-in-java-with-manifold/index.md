@@ -254,13 +254,13 @@ This schema is copied and pasted from the [Manifold github project](https://gith
 It's a relatively simple schema but I'd like to turn your attention to several things here. It defines name and email as required. This is why when we try to create a `User` object using a builder in Manifold, the `build()` method requires both parameters:
 
 ```java
-User.builder("Name", "/cdn-cgi/l/email-protection")
+User.builder("Name", "email@domain.com")
 ```
 
 That is just the start... The schema includes a date. Dates are a painful prospect in JSON, the standardization is poor and fraught with issues. The schema also includes a gender field which is effectively an enum. This is all converted to type-safe semantics using common Java classes such as LocalDate:
 
 ```
-User u = User.builder("Name", "[email protected]")
+User u = User.builder("Name", "email@domain.com")
        .withDate_of_birth(LocalDate.of(1999, 10, 11))
        .withGender(User.Gender.male)
        .build();

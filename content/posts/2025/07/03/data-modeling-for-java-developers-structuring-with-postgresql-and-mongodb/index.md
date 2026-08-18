@@ -150,7 +150,7 @@ Depending on the modelling technique chosen, the documents inside in the collect
 {
   _id: ObjectId("60d5ec9f4b1a8e2a1c8f7a1"), 
   name: "J.K. Rowling",
-  email: "[email protected]",
+  email: "jkrowling@example.com",
   nationality: "British",
   books: [
     ObjectId("60d5ec9f4b1a8e2a1c8f7a2"), 

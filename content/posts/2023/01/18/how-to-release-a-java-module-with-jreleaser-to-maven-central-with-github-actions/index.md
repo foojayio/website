@@ -57,7 +57,7 @@ gpg --list-keys --keyid-format=long
 --------------------------------------
 pub   rsa4096/XXXXXXXX9925B017 2022-11-17 [SC] [expires: 2026-11-17]
       C20FC085CF5B0D4D861E8CEDXXXXXXXX9925B017
-uid                 [ultimate] Jago de Vreede <[email protected]>
+uid                 [ultimate] Jago de Vreede <redacted@mail.com>
 sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]
 ```
 

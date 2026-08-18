@@ -196,7 +196,7 @@ jlink {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '[email protected]'
+                '--linux-deb-maintainer', 'info@autumo.ch'
             ]
         }
         if (installerType == 'rpm') {
@@ -390,7 +390,7 @@ runtime {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '[email protected]'
+                '--linux-deb-maintainer', 'info@autumo.ch'
             ]
         }
         if (installerType == 'rpm') {

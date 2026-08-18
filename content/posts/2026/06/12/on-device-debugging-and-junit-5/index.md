@@ -227,7 +227,7 @@ class EmailValidatorTest {
 
     @Test
     void acceptsCommonAddress() {
-        assertTrue(new EmailValidator().isValid("[email protected]"));
+        assertTrue(new EmailValidator().isValid("name@example.com"));
     }
 }
 ```

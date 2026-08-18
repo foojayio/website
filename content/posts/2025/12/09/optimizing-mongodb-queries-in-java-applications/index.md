@@ -119,7 +119,7 @@ This pattern stays consistent with standard Java configuration approaches. You c
 Many teams also rely on the explain plan built into MongoDB. Unlike relational databases where explain plans often feel abstract, MongoDB's explain output presents actionable information about index usage, examined documents, and winning plans. The two most important metrics are \`nReturned\` and \`totalDocsExamined\`. If the latter is significantly larger than the former, your query is scanning more documents than necessary. This indicates a missing or misaligned index. The explain plan is also helpful when confirming that compound indexes match your query pattern correctly.
 
 ```
-db.users.find({ email: "[email protected]" }).explain("executionStats");
+db.users.find({ email: "alice@example.com" }).explain("executionStats");
 ```
 
 The \`executionStats\` mode gives the most practical insights because it includes execution time and the number of index keys scanned. Use this mode when validating a new index or comparing similar queries side by side.

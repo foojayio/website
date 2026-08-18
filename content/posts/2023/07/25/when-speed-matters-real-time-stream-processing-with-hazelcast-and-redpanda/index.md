@@ -205,7 +205,7 @@ Start a Hazelcast local cluster. This will run a Hazelcast cluster in client/ser
 
 ```
 brew tap hazelcast/hz
-brew install [email protected]
+brew install hazelcast@5.3.1
 hz -V
 ```
 

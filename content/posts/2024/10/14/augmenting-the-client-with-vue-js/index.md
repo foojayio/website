@@ -83,7 +83,7 @@ If you're used to developing APIs, you're familiar with the `body()` function; i
 Here's the code on the HTML side:
 
 ```html
-<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/axios.min.js"></script> <!--1-->
+<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/axios@1.7/dist/axios.min.js"></script> <!--1-->
 <script th:src="@{/webjars/vue/dist/vue.global.js}" src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script> <!--2-->
 <script th:src="@{/vue.js}" src="../static/vue.js"></script>             <!--3-->
 <script th:inline="javascript">

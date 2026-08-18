@@ -164,7 +164,7 @@ Then run your application again.
 Finally, if we provide a URI, the app starts:
 
 ```
-MONGODB_URI=mongodb+srv://user:[email protected]/srsapp ./mvnw spring-boot:run
+MONGODB_URI=mongodb+srv://user:password@your-cluster.mongodb.net/srsapp ./mvnw spring-boot:run
 ```
 
 And you should see in the log messages from org.mongodb.driver.client

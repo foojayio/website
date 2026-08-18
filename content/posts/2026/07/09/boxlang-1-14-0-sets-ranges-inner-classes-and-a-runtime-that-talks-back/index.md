@@ -268,9 +268,9 @@ import java.lang.StringBuilder
 import models.User
 
 // These three forms are equivalent
-u1 = new User( "Bob", "[email protected]" )
-u2 = User.init( "Bob", "[email protected]" )
-u3 = User( "Bob", "[email protected]" )      // class reference called as function
+u1 = new User( "Bob", "bob@example.com" )
+u2 = User.init( "Bob", "bob@example.com" )
+u3 = User( "Bob", "bob@example.com" )      // class reference called as function
 ```
 
 Where this becomes genuinely powerful is functional programming. Because class references are now callable objects, you can pass them directly to higher-order functions:

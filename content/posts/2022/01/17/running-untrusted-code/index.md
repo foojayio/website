@@ -109,7 +109,7 @@ PGP key:
         bits:        2048
         fingerprint: 0xF3A90E6B10E809F851AB4FC54CC08E7F47C3EC76
         create date: Wed Sep 18 02:51:23 CEST 2013
-        uids:        [Brett Wooldridge (Sonatype) <[email protected]>]
+        uids:        [Brett Wooldridge (Sonatype) <brett.wooldridge@gmail.com>]
 ```
 
 However, none of this amounts to much. Signing doesn't assert the identity of the provider. It tells that a private key with the referenced email signed it with a private key with the referenced email. Nothing prevents a malicious actor from creating another private key with the same email or a similar one.

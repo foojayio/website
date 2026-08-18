@@ -32,7 +32,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/helidon-mongodb-cqrs):
 
 ```bash
-git clone [email protected]:soujava/helidon-mongodb-cqrs.git
+git clone git@github.com:soujava/helidon-mongodb-cqrs.git
 ```
 
 ## Prerequisites

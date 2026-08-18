@@ -549,8 +549,8 @@ When you pass `userId` and `conversationId` through `agent.run()` options, they 
 
 ```java
 // Same agent instance, fully isolated per user
-agent.run( "My order is late.", {}, { userId: "[email protected]", conversationId: "ticket-101" } )
-agent.run( "I need a refund.",  {}, { userId: "[email protected]",   conversationId: "ticket-102" } )
+agent.run( "My order is late.", {}, { userId: "alice@example.com", conversationId: "ticket-101" } )
+agent.run( "I need a refund.",  {}, { userId: "bob@example.com",   conversationId: "ticket-102" } )
 ```
 
 No per-user agent factories. No thread-local hacks. One instance handles thousands of concurrent users safely.

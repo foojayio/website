@@ -24,7 +24,7 @@ Virtual threads have become one of the most popular resources in Java and are tr
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/mongodb-virtual-threads):
 
 ```
-git clone [email protected]:soujava/mongodb-virtual-threads.git
+git clone git@github.com:soujava/mongodb-virtual-threads.git
 ```
 
 ## Prerequisites

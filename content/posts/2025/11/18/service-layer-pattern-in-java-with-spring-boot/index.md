@@ -432,9 +432,9 @@ Notice how adding MongoDB didn't require any changes to:
 @Test
 
 public void createUser_duplicateEmail_throwsException() {
-    when(userRepository.existsByEmail("[email protected]")).thenReturn(true);
+    when(userRepository.existsByEmail("test@example.com")).thenReturn(true);
     assertThrows(DuplicateEmailException.class, () -> {
-        userService.createUser("[email protected]", "Test User");
+        userService.createUser("test@example.com", "Test User");
     });
 }
 ```

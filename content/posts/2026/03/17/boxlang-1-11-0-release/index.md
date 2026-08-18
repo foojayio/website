@@ -350,7 +350,7 @@ BoxLang 1.11.0 is a drop-in upgrade. No code changes are required to benefit fro
 
 ```java
 # CommandBox
-box install [email protected]
+box install boxlang@1.11.0
 
 # BVM
 bvm install 1.11.0 && bvm use 1.11.0

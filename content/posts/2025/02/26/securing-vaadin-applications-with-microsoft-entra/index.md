@@ -156,7 +156,7 @@ public abstract class KaribuTest {
     @Autowired
     protected ApplicationContext ctx;
     // Default user and role
-    private String username = "[email protected]";
+    private String username = "john.doe@test.com";
     private String name = "John Doe";
     private String role = Roles.ADMIN;
     private OAuth2AuthenticationToken oAuth2AuthenticationToken;

@@ -301,7 +301,7 @@ If you are developing on a PC, you can build the application with the following 
 
 and upload to your Raspberry Pi with the following command (replace login `pi` and the IP address with the one of your board):
 
-`$ scp target/pi4jdemo-1.0-SNAPSHOT.jar [email protected]://home/pi`
+`$ scp target/pi4jdemo-1.0-SNAPSHOT.jar pi@192.168.0.222://home/pi`
 
 ## Run on Raspberry Pi
 

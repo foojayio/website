@@ -146,7 +146,7 @@ BiConsumer<String, Throwable> updateWeatherUI =  (dayForecastJson, err) -> {
         Map<String, Object> weatherIconInfo = weatherInfo.size() > 0 ? weatherInfo.get(0) : null;
         Map<String, Object> tempInfo = (Map<String, Object>) dayForecast.get("main");
         // Load weather icon asynchronously
-        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%[email protected]".formatted(weatherIconInfo.get("icon")), true);
+        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%s@2x.png".formatted(weatherIconInfo.get("icon")), true);
         weatherIconImageView.setImage(weatherIcon);
 
         // Apply Tooltip

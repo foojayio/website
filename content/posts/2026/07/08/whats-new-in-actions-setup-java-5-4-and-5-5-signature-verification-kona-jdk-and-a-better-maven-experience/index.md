@@ -31,7 +31,7 @@ Here's an uncomfortable truth about most CI pipelines: the JDK that compiles and
 v5.5.0 adds **detached GPG signature verification** for downloaded JDK archives:
 
 ```
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -47,7 +47,7 @@ A few important details:
 * **Bring your own key:** If you mirror JDKs internally or want to pin to a specific trusted key, supply your own with `verify-signature-public-key`:
 
 ```
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -64,7 +64,7 @@ If you care about reproducible, supply-chain-safe builds, this is the flag to re
 `actions/setup-java` now speaks **Tencent Kona JDK** natively:
 
 ```
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     distribution: 'kona'
     java-version: '21'
@@ -82,13 +82,13 @@ Sometimes you need a specific JDK available to *one* step (say, a tool that must
 
 ```
 # Main build JDK
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     distribution: 'temurin'
     java-version: '21'
 
 # An extra JDK, available but NOT the default
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     distribution: 'temurin'
     java-version: '17'
@@ -113,7 +113,7 @@ This makes it possible for a single job to juggle multiple JDKs cleanly, without
 SDKMAN identifiers carry a vendor suffix --- `-tem` for Temurin, `-zulu` for Zulu, and so on. The action now maps that suffix to a distribution automatically:
 
 ```
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     java-version-file: '.sdkmanrc'
 ```
@@ -134,7 +134,7 @@ Several changes in these releases target one of the most common Java build tools
 Maven loves to print a line for *every* artifact it downloads. On a cold cache that's hundreds of noisy lines burying the output you actually care about. `setup-java` now sets `--no-transfer-progress` (`-ntp`) in the `MAVEN_ARGS` environment variable by default:
 
 ```
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -148,7 +148,7 @@ Details worth knowing:
 * Want the progress back? Set `show-download-progress: true`.
 
 ```
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -176,7 +176,7 @@ Three more things from that release deserve a callout:
 * **Free GraalVM Community distribution** (`graalvm-community`): install GraalVM Community Edition builds (stable JDK 17+) directly, no license gymnastics required.
 
 ```
-- uses: actions/[email protected]
+- uses: actions/setup-java@v5.5.0
   with: 
     distribution: 'graalvm-community'
     java-version: '21'
@@ -197,14 +197,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Java (verified, from .sdkmanrc)
-        uses: actions/[email protected]
+        uses: actions/setup-java@v5.5.0
         with:
           java-version-file: '.sdkmanrc'   # e.g. java=21.0.5-tem
           verify-signature: true            # fail if the JDK signature is bad
           cache: maven
 
       - name: Add a Java 17 toolchain (not the default)
-        uses: actions/[email protected]
+        uses: actions/setup-java@v5.5.0
         with:
           distribution: 'temurin'
           java-version: '17'

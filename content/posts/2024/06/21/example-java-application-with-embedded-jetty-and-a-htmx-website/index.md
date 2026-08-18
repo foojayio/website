@@ -40,7 +40,7 @@ It's a JavaScript library you add to your website, that allows you to "swap" HTM
 The htmx website gives this minimal example for a webpage with the action: _"When a user clicks on this button, issue an AJAX request to `MARKDOWN_HASH15537f6d76c78712ccd209e4e3f83362MARKDOWN`*HASH*, and replace the entire button with the HTML response":
 
 ```
-<script src="https://unpkg.com/[email protected]"></script>
+<script src="https://unpkg.com/htmx.org@1.9.11"></script>
 <!-- have a button POST a click via AJAX -->
 <button hx-post="/clicked" hx-swap="outerHTML">
     Click Me

@@ -69,8 +69,8 @@ It's similar to Vue's setup.
 Here's the code on the HTML side:
 
 ```html
-<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/axios.min.js"></script> <!--1-->
-<script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/cdn.min.js" defer></script> <!--2-->
+<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/axios@1.7/dist/axios.min.js"></script> <!--1-->
+<script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script> <!--2-->
 <script th:src="@{/alpine.js}" src="../static/alpine.js"></script>  <!--3-->
 <script th:inline="javascript">
 /*<![CDATA[*/

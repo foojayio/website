@@ -58,8 +58,8 @@ Knowing all of this and combining that knowledge with the tpstats output I decid
 ```
 "Native-Transport-Requests-2" #173 daemon prio=5 os_prio=0 cpu=462214.94ms elapsed=19374.32s tid=0x00007efee606eb00 nid=0x385d waiting on condition  [0x00007efec18b9000]
 4   java.lang.Thread.State: TIMED_WAITING (parking)
-5 at jdk.internal.misc.Unsafe.park([email protected]/Native Method)
-6 at java.util.concurrent.locks.LockSupport.parkNanos([email protected]/LockSupport.java:357)
+5 at jdk.internal.misc.Unsafe.park(java.base@11.0.6/Native Method)
+6 at java.util.concurrent.locks.LockSupport.parkNanos(java.base@11.0.6/LockSupport.java:357)
 7 at org.apache.cassandra.concurrent.SEPWorker.doWaitSpin(SEPWorker.java:268)
 ```
 

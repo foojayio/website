@@ -35,7 +35,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/behavior-driven-development-mongodb):
 
 ```
-git clone [email protected]:soujava/behavior-driven-development-mongodb.git
+git clone git@github.com:soujava/behavior-driven-development-mongodb.git
 ```
 
 ## Prerequisites

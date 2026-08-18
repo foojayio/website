@@ -59,7 +59,7 @@ Start a Hazelcast local cluster: This will run a Hazelcast cluster in client/ser
 ```
 brew tap hazelcast/hz
 
-brew install [email protected]
+brew install hazelcast@5.2.3
 
 hz -V
 
@@ -73,7 +73,7 @@ To add more members to your cluster, open another terminal window and rerun the 
 ```
 brew tap hazelcast/hz
 
-brew install [email protected]
+brew install hazelcast-management-center@5.2.3
 
 hz-mc -V
 

@@ -32,7 +32,7 @@ In this conversation, we delve into Chris's journey, his motivations, and his th
 
 * 🌐 Home page:<https://www.chrisnewland.com/>
 * 🐦 Twitter:<https://twitter.com/chriswhocodes>
-* 🐘 Mastodon: @[\[email protected\]](/cdn-cgi/l/email-protection)
+* 🐘 Mastodon: @[chriswhocodes@mastodon.social](mailto:chriswhocodes@mastodon.social)
 * 💼 LinkedIn:<https://www.linkedin.com/in/chriswhocodes/>
 * 📂 Github:<https://github.com/chriswhocodes>
 
@@ -89,7 +89,7 @@ If you want to specialize in Java performance, then I have two pieces of advice:
 
 #### **Bazlur: You've developed a number of open-source JVM tools that have been widely used and contributed to. For individuals interested in joining and contributing to these projects, could you provide a brief guide on how they can get started?**
 
-**Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#0e6d667c677d4e6d667c677d606b79626f606a206d6163) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
+**Chris:** Please talk to me first 🙂 Drop me an email at [chris@chrisnewland.com](mailto:chris@chrisnewland.com) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
 
 #### **Bazlur: Java has evolved significantly over the years, with new features and functionalities being introduced in each release. Out of these numerous updates, is there a specific feature that you find particularly exciting or innovative? Can you share why this feature stands out to you?**
 

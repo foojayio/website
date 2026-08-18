@@ -32,7 +32,7 @@ Sign-up here: <https://hazelcast.com/lp/unconference/>
 
 Are you interested in speaking or joining the Real-Time Stream Processing Roundtable?
 
-Send a mail over to: [\[email protected\]](/cdn-cgi/l/email-protection)
+Send a mail over to: [RTSPUnconf@hazelcast.com](mailto:RTSPUnconf@hazelcast.com)
 
 **Workshop: Stream Processing Fundamentals**
 

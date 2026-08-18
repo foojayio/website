@@ -140,7 +140,7 @@ class ClubsViewTest extends KaribuTest {
 
     @BeforeEach
     public void login() {
-        login("[email protected]", "", List.of(Role.ADMIN));
+        login("simon@martinelli.ch", "", List.of(Role.ADMIN));
 
         UI.getCurrent().navigate(ClubsView.class);
     }

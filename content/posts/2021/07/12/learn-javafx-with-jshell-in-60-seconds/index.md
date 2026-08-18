@@ -160,13 +160,13 @@ java --list-modules | grep javafx
 You should see something like the following:
 
 ```
-[email protected]
-[email protected]
-[email protected]
-[email protected]
-[email protected]
-[email protected]
-[email protected]
+javafx.base@11.0.9
+javafx.controls@11.0.9
+javafx.fxml@11.0.9
+javafx.graphics@11.0.9
+javafx.media@11.0.9
+javafx.swing@11.0.9
+javafx.web@11.0.9
 ```
 
 If you don't see the modules shown above, you probably downloaded just the JDK itself (not containing JavaFX's modules). (Head over to Azul to download Zulu builds with JavaFX here: <https://www.azul.com/downloads/?package=jdk-fx>.)

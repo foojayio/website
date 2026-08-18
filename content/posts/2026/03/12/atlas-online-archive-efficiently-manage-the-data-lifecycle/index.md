@@ -182,7 +182,7 @@ As discussed earlier, the main cluster DemoCluster contains the latest data as p
 Connection string:
 
 ```
-mongodb+srv://Username:[email protected]/
+mongodb+srv://Username:Password@democluster.abcd6.mongodb.net/
 ```
 
 In this scenario, after archiving aged data, you can see only 2186 documents for the movies collection with data less than 10 years old.  

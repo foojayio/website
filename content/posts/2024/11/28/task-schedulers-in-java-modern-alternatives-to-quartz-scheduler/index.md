@@ -82,7 +82,7 @@ Here's a simple example of how to schedule a job using JobRunr:
 // Schedule a one-off job to run in 1 hour
 jobScheduler.schedule(
     Instant.now().plus(1, ChronoUnit.HOURS),
-    () -> sendEmail("[email protected]")
+    () -> sendEmail("user@example.com")
 );
 ```
 

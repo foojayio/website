@@ -172,10 +172,10 @@ Copy/paste the following statements into the CQLSH prompt and press enter:
 CREATE KEYSPACE medusa_test  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 USE medusa_test;
 CREATE TABLE users (email TEXT PRIMARY KEY, name TEXT, state TEXT);
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Alice Smith', 'TX');
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Bob Jones', 'VA');
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Carol Jackson', 'CA');
-INSERT INTO users (email, name, state) VALUES ('[email protected]', 'David Yang', 'NV');
+INSERT INTO users (email, name, state) VALUES ('alice@example.com', 'Alice Smith', 'TX');
+INSERT INTO users (email, name, state) VALUES ('bob@example.com', 'Bob Jones', 'VA');
+INSERT INTO users (email, name, state) VALUES ('carol@example.com', 'Carol Jackson', 'CA');
+INSERT INTO users (email, name, state) VALUES ('david@example.com', 'David Yang', 'NV');
 ```
 
 Check that the rows were properly inserted:
@@ -185,10 +185,10 @@ SELECT * FROM medusa_test.users;
 
  email             | name          | state
 -------------------+---------------+-------
- [email protected] |   Alice Smith |    TX
-   [email protected] |     Bob Jones |    VA
- [email protected] |    David Yang |    NV
- [email protected] | Carol Jackson |    CA
+ alice@example.com |   Alice Smith |    TX
+   bob@example.com |     Bob Jones |    VA
+ david@example.com |    David Yang |    NV
+ carol@example.com | Carol Jackson |    CA
 
 (4 rows)
 ```
@@ -256,10 +256,10 @@ Check that you can read the data from the previously truncated table:
 
  email             | name          | state
 -------------------+---------------+-------
- [email protected] |   Alice Smith |    TX
-   [email protected] |     Bob Jones |    VA
- [email protected] |    David Yang |    NV
- [email protected] | Carol Jackson |    CA
+ alice@example.com |   Alice Smith |    TX
+   bob@example.com |     Bob Jones |    VA
+ david@example.com |    David Yang |    NV
+ carol@example.com | Carol Jackson |    CA
 
 (4 rows)
 ```
@@ -268,4 +268,4 @@ You've successfully restored your lost data in just a few commands!
 
 ## Many backends available
 
-MinIO, while being an obvious choice in the Kubernetes world, is not the only S3 compatible backend that K8ssandra can use. K8ssandra has supported AWS S3 and Google Cloud Storage as Medusa backends since 1.0.0. There are also a wide variety of solutions that can run on-prem (including CEPH, Cloudian, Riak S2, and Dell EMC ECS) or in cloud environments (including IBM Cloud Object Storage, and OVHcloud Object Storage). See the [K8ssandra backup/restore documentation](https://docs.k8ssandra.io/tasks/backup-restore/) for more detailed instructions and [let us know](/cdn-cgi/l/email-protection#6a015219190b040e180b471f190f18192a0d05050d060f0d18051f1a1944090507) if you have questions, we love to help! If you are looking to learn Cassandra, or want to see how backups are handled on a Cassandra managed service, please head over to the [Astra DB](https://astra.dev/3q5iv9v) website and try the free tier.
+MinIO, while being an obvious choice in the Kubernetes world, is not the only S3 compatible backend that K8ssandra can use. K8ssandra has supported AWS S3 and Google Cloud Storage as Medusa backends since 1.0.0. There are also a wide variety of solutions that can run on-prem (including CEPH, Cloudian, Riak S2, and Dell EMC ECS) or in cloud environments (including IBM Cloud Object Storage, and OVHcloud Object Storage). See the [K8ssandra backup/restore documentation](https://docs.k8ssandra.io/tasks/backup-restore/) for more detailed instructions and [let us know](mailto:k8ssandra-users@googlegroups.com) if you have questions, we love to help! If you are looking to learn Cassandra, or want to see how backups are handled on a Cassandra managed service, please head over to the [Astra DB](https://astra.dev/3q5iv9v) website and try the free tier.

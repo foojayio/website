@@ -374,7 +374,7 @@ println( "Middleware       : #config.middlewareCount#" )
 
 // Run — the agent orchestrates across internal tools, KB, and memory automatically
 response = supportAgent.run(
-    "Customer [email protected] says order #ORD-78291 arrived damaged. Resolve this.",
+    "Customer alice@example.com says order #ORD-78291 arrived damaged. Resolve this.",
     {},
     { userId: "support-agent-maria", conversationId: "ticket-45892" }
 )
@@ -388,13 +388,13 @@ Seven posts. One framework. The complete picture.
 
 BoxLang AI 3.0 isn't a wrapper around OpenAI. It's a complete AI application platform — skills for reusable knowledge, a type-safe tool ecosystem, a full agent hierarchy with stateless multi-tenant design, six battle-tested middleware classes, 17 providers with capability-safe routing, 20+ memory types with vector RAG support, and first-class MCP for both consuming and exposing tools.
 
-And it all runs on the JVM, ships with BoxLang's full ecosystem, and takes a single install [\[email protected\]](/cdn-cgi/l/email-protection) to get started.
+And it all runs on the JVM, ships with BoxLang's full ecosystem, and takes a single install bx-ai@3.0.0 to get started.
 
 ## Get Started
 
 ```java
 # CommandBox / Web applications
-install [email protected]
+install bx-ai@3.0.0
 
 # OS / CLI applications
 install-bx-module bx-ai

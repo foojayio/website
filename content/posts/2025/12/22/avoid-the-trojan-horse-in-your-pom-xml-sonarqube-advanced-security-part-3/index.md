@@ -189,7 +189,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
     "type" : "library",
 
-    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/[email protected]",
+    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.9.10",
 
     "supplier" : {
 
@@ -209,13 +209,13 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
     } ],
 
-    "purl" : "pkg:maven/com.fasterxml.jackson.core/[email protected]"
+    "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.9.10"
 
   }, {
 
     "type" : "library",
 
-    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/[email protected]",
+    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.9.10",
 
     "supplier" : {
 
@@ -235,7 +235,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
     } ],
 
-    "purl" : "pkg:maven/com.fasterxml.jackson.core/[email protected]"
+    "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.9.10"
 
   }
 

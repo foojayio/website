@@ -136,7 +136,7 @@ cargo new lib-rust
 [package]
 name = "dummymath"
 version = "0.1.0"
-authors = ["Nicolas Frankel <[email protected]>"]
+authors = ["Nicolas Frankel <nicolas@frankel.ch>"]
 edition = "2018"
 
 [dependencies]

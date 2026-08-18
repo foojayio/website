@@ -209,14 +209,14 @@ feedItems = [
         "link" : "https://myblog.com/getting-started-boxlang",
         "description" : "Learn the basics of BoxLang in this comprehensive guide",
         "publishedDate" : now(),
-        "author" : "[email protected]"
+        "author" : "developer@myblog.com"
     },
     {
         "title" : "Building REST APIs with BoxLang",
         "link" : "https://myblog.com/rest-apis-boxlang",
         "description" : "Create powerful REST APIs using BoxLang",
         "publishedDate" : dateAdd( "d", -1, now() ),
-        "author" : "[email protected]"
+        "author" : "developer@myblog.com"
     }
 ];
 
@@ -258,7 +258,7 @@ episodes = [
         "link" : "https://podcast.boxlang.io/episode-1",
         "description" : "Introduction to BoxLang and what makes it special",
         "publishedDate" : now(),
-        "author" : "[email protected]",
+        "author" : "podcast@boxlang.io",
         // iTunes episode metadata
         "itunesTitle" : "Welcome to BoxLang",
         "itunesDuration" : "00:42: 15",

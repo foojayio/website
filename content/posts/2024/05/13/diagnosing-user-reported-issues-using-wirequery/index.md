@@ -51,7 +51,7 @@ Do take note, however, that in real world applications, the user is probably bet
 To get started, first clone the WireQuery repository and start the server:
 
 ```bash
-git clone [email protected]:wirequery/wirequery.git
+git clone git@github.com:wirequery/wirequery.git
 cd wirequery
 docker-compose up
 ```

@@ -175,17 +175,17 @@ Here are the steps:
 
    ```bash
    gcloud projects add-iam-policy-binding vcluster-pipeline \
-     --member "serviceAccount:/cdn-cgi/l/email-protection" \
+     --member "serviceAccount:github-actions@vcluster-pipeline.iam.gserviceaccount.com" \
      --role "roles/editor"
    ```
 
        Updated IAM policy for project [vcluster-pipeline].
        bindings:
        - members:
-         - serviceAccount:/cdn-cgi/l/email-protection
+         - serviceAccount:github-actions@vcluster-pipeline.iam.gserviceaccount.com
          role: roles/editor
        - members:
-         - user:/cdn-cgi/l/email-protection
+         - user:nicolas.frankel@loft.sh
          role: roles/owner
        etag: BwYobXrNz_w=
        version: 1
@@ -220,13 +220,13 @@ Here are the steps:
 
    ```bash
    gcloud iam service-accounts add-iam-policy-binding \
-     "/cdn-cgi/l/email-protection" \
+     "github-actions@vcluster-pipeline.iam.gserviceaccount.com" \
      --project="vcluster-pipeline" \
      --role="roles/iam.workloadIdentityUser" \
      --member="principalSet://iam.googleapis.com/projects/49535911505/locations/global/workloadIdentityPools/github-actions/*"
    ```
 
-       Updated IAM policy for serviceAccount [/cdn-cgi/l/email-protection].
+       Updated IAM policy for serviceAccount [github-actions@vcluster-pipeline.iam.gserviceaccount.com].
        bindings:
        - members:
          - principalSet://iam.googleapis.com/projects/49535911505/locations/global/workloadIdentityPools/github-actions/*
@@ -245,7 +245,7 @@ Using the authentication setup above within the GitHub workflow requires the fol
   uses: google-github-actions/auth@v2
   with:
     workload_identity_provider: projects/49535911505/locations/global/workloadIdentityPools/github-actions/providers/github-provider #1
-    service_account: [email protected] #2
+    service_account: github-actions@vcluster-pipeline.iam.gserviceaccount.com #2
 ```
 
 1. The full path to the WIPP we created above. For reference, the pattern is `projects/$PROJECT_ID/locations/global/workloadIdentityPools/$WORKLOAD_ID_POOL_NAME/providers/$WORKLOAD_ID_POOL_PROVIDER_NAME`
@@ -379,7 +379,7 @@ That being settled, we should follow the nominal path: create a Kubernetes secre
   run: |
     kubectl create secret docker-registry github-docker-registry \      #1
       --docker-server=${{ env.REGISTRY }} \                             #2
-      --docker-email="[email protected]" \                             #3
+      --docker-email="noreply@github.com" \                             #3
       --docker-username="${{ github.actor }}" \                         #4
       --docker-password="${{ secrets.GITHUB_TOKEN }}" \                 #5
       --dry-run=client -o yaml | kubectl apply -f -                     #6

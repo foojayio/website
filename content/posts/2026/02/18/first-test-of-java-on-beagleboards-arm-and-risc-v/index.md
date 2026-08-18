@@ -118,7 +118,7 @@ This board proved challenging due to my Raspberry Pi habits. I initially created
 Default username and password are `beagle:temppwd`.
 
 ```
-% ssh [email protected]
+% ssh beagle@10.120.10.11
 Ubuntu 23.04
 
 BeagleBoard.org Ubuntu 23.04 Console Image 2023-10-19

@@ -18,7 +18,7 @@ frozen: false
 
 Here is the final JavaFX LinksOfTheMonth for 2025... Thank you all for sharing your knowledge and experience with JavaFX. And we hope to see even more in the next year!
 
-You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
+You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [links@jfx-central.com](mailto:links@jfx-central.com).
 
 ## Core
 

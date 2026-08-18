@@ -100,7 +100,7 @@ Of course if you choose to make environment variables persistent you'll need to 
 After setting up JDK 19 you can fork / clone the GitHub project `jextract` with the following command:
 
 ```bash
-git clone [email protected]:openjdk/jextract.git
+git clone git@github.com:openjdk/jextract.git
 cd jextract
 ```
 

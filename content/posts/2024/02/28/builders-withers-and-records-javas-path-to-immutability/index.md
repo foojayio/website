@@ -99,7 +99,7 @@ With this approach though, we face potential issues in terms of readability and 
 ```
 public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) { ... }
 
-Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "[email protected]", juan, carla);
+Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "antonio@example.com", juan, carla);
 ```
 
 In case we add more mandatory properties, as we see above, we need to add more parameters to the constructor and this will impact the existing code making us modify it on every call to the constructor.

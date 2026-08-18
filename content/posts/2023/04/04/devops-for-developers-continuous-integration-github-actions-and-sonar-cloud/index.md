@@ -223,7 +223,7 @@ void testActivateAccount() throws Exception {
     final String activationKey = "some activation key";
     User user = new User();
     user.setLogin("activate-account");
-    user.setEmail("[email protected]");
+    user.setEmail("activate-account@example.com");
     user.setPassword(RandomStringUtils.randomAlphanumeric(60));
     user.setActivated(false);
     user.setActivationKey(activationKey);

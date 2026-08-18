@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Here is the overview of the JavaFX LinksOfTheMonth of August 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month. Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
+Here is the overview of the JavaFX LinksOfTheMonth of August 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month. Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [links@jfx-central.com](mailto:links@jfx-central.com).
 
 ## Core
 

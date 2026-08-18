@@ -584,7 +584,7 @@ To time or trace multiple methods, a filter can mention a class or an annotation
 For example, to see the number of times that a Jakarta REST endpoint is invoked, and measure the approximate execution time:
 
 ```bash
-$ jcmd <pid> JFR.start /cdn-cgi/l/email-protection
+$ jcmd <pid> JFR.start method-timing=@jakarta.ws.rs.GET
 ```
 
 Multiple filters can be specified, separated by semicolons.

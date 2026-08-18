@@ -38,7 +38,7 @@ There are also many exciting improvements to Jakarta EE specifications. For exam
 
 By supporting Jakarta EE 10 as soon as possible, Payara Server continues to be easy to learn, simple to use, and the first choice for Jakarta EE 10 applications.
 
-**For more information about Payara, please contact: [\[email protected\]](/cdn-cgi/l/email-protection)**
+**For more information about Payara, please contact: [marketing@payara.fish](mailto:marketing@payara.fish)**
 
 **About Payara**:
 

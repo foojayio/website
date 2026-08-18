@@ -75,7 +75,7 @@ To keep the translation templates up to date, I use a simple script that uses ge
 
 ```bash
 #!/bin/sh
-xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' [email protected] --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8
+xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' --msgid-bugs-address=me@example.com --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8
 ```
 
 ## Introducing Zanata
