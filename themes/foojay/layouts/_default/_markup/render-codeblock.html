@@ -58,6 +58,16 @@
 
 {{- /* .Inner is the raw code. htmlEscape is what keeps a snippet containing
        </pre> or <script> from escaping the block; EnlighterJS un-escapes it
-       client-side. No newline between the tag and the code -- a leading blank
-       line would show up as one inside the rendered block. */ -}}
-<pre class="EnlighterJSRAW" data-enlighter-language="{{ $lang }}"{{ with .Attributes.title }} data-enlighter-title="{{ . }}"{{ end }}{{ with .Attributes.highlight }} data-enlighter-highlight="{{ . }}"{{ end }}>{{ htmlEscape .Inner }}</pre>
+       client-side.
+
+       safeHTML is NOT optional here. htmlEscape hands back a plain string, and
+       html/template then escapes that string a SECOND time on output, so a `>`
+       in the source lands in the page as `&amp;gt;` and the reader sees a
+       literal `&gt;`. Marking the already-escaped result safe is what stops the
+       second pass -- this is the shape Hugo's own docs use
+       (`.Inner | htmlEscape | safeHTML`). Dropping safeHTML re-breaks every
+       code block containing < > & " ' (~950 posts).
+
+       No newline between the tag and the code -- a leading blank line would
+       show up as one inside the rendered block. */ -}}
+<pre class="EnlighterJSRAW" data-enlighter-language="{{ $lang }}"{{ with .Attributes.title }} data-enlighter-title="{{ . }}"{{ end }}{{ with .Attributes.highlight }} data-enlighter-highlight="{{ . }}"{{ end }}>{{ htmlEscape .Inner | safeHTML }}</pre>

@@ -69,7 +69,6 @@ Later we changed it to require every upstream to carry a business-level idempote
 }
 ```
 
-
 Note that the idempotent key is often compound. The same order triggers several status changes, so you can't just use the order ID: "paid" and "shipped" are two different things, and you have to add the status or version number to tell them apart.
 
 "Uniquely identifying an entity" and "uniquely identifying that an event happened once" are two different things, and a lot of people mix them up.
