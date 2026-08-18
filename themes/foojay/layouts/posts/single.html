@@ -2,7 +2,13 @@
 <div class="layout-with-sidebar">
   <article class="post-single">
     <header class="post-header{{ if .Params.image }} post-header--with-hero{{ end }}">
-      {{ with .Params.image }}<img class="post-hero is-zoomable" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
+      {{/* Explicit data-pagefind-meta, same reason as on the author photo in
+           authors/single.html: Pagefind's automatic image detection picks the
+           first image that comes AFTER the <h1>, and the hero sits before it --
+           so a search result showed the first image in the body, or, on a post
+           with no images of its own, the author photo from the "Written by"
+           block at the foot of the page. */}}
+      {{ with .Params.image }}<img class="post-hero is-zoomable" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
       {{ with .Params.categories }}
       <div class="post-categories post-categories--top">
         {{ range first 2 . }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
@@ -36,7 +42,13 @@
       {{ $author := partial "author-page.html" . }}
       {{ with $author }}
       <section class="author-callout">
-        {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
+        {{/* data-pagefind-ignore="all": a post with no hero and no images of
+             its own would otherwise hand this photo to Pagefind as the post's
+             search thumbnail. "all" rather than the bare attribute, whose
+             default ("index") drops the element from the text index but still
+             lets it supply metadata -- which is exactly what has to stop here.
+             The photo carries no text (alt=""), so nothing is lost either way. */}}
+        {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-ignore="all" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
         <div>
           <span class="eyebrow">Written by</span>
           <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
