@@ -287,7 +287,7 @@ class ExposedConfig {
 
 ### Step 6: Create Course Table Entity
 
-We can create different datatypes with primary keys; we will use [LongIdTable](https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html){#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html}. For more details, <https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html>{#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html}
+We can create different datatypes with primary keys; we will use [LongIdTable](https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html). For more details, <https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html>{#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html}
 
 ```java
 package com.courses.explore_exposed.model

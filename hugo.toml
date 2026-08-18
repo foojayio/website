@@ -227,6 +227,8 @@ enableRobotsTXT = true
   parent = "Java Basics"
   url = "/java-quick-start/other-tutorials/"
   weight = 32
+  [menu.main.params]
+    desc = "Many more places where you can learn more about Java"
 
 # -- column: Install Java -------------------------------------------------
 [[menu.main]]
@@ -353,37 +355,45 @@ enableRobotsTXT = true
   parent = "About"
   url = "/who-we-are/"
   weight = 41
-
-[[menu.main]]
-  name = "Meet the Team"
-  parent = "About"
-  url = "/meet-the-team/"
-  weight = 42
-
-[[menu.main]]
-  name = "Authors"
-  parent = "About"
-  url = "/today/author/"
-  weight = 43
   [menu.main.params]
-    desc = "Everyone who writes for foojay.io"
+    desc = "About Foojay, it's history, and logo"
 
 [[menu.main]]
   name = "Where to Find Friends of OpenJDK"
   parent = "About"
   url = "/where/"
-  weight = 44
+  weight = 42
+  [menu.main.params]
+    desc = "Foojay is not only this website, but a lot more..."
 
 [[menu.main]]
-  name = "Advisory Board"
+  name = "Meet the Team"
   parent = "About"
-  url = "/board/"
-  weight = 45
+  url = "/meet-the-team/"
+  weight = 43
+  [menu.main.params]
+    desc = "The team that keeps foojay.io running"
+
+[[menu.main]]
+  name = "Authors"
+  parent = "About"
+  url = "/today/author/"
+  weight = 44
+  [menu.main.params]
+    desc = "Everyone who writes for foojay.io"
 
 [[menu.main]]
   name = "Our Sponsors"
   parent = "About"
   url = "/our-sponsors/"
-  weight = 46
+  weight = 45
   [menu.main.params]
     desc = "The organisations that keep foojay.io running"
+
+[[menu.main]]
+  name = "Advisory Board"
+  parent = "About"
+  url = "/board/"
+  weight = 46
+  [menu.main.params]
+    desc = "Organizations deciding on Foojay’s roadmap and direction"

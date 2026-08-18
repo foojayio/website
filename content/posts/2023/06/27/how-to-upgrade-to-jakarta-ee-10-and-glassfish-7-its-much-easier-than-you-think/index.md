@@ -23,7 +23,7 @@ Upgrading to Jakarta EE 10 from an older version of Jakarta EE or Java EE can be
 
 In this series of articles, we'll explain everything you need to know before upgrading to Jakarta EE 10 and guide you to complete the upgrade successfully and in almost no time.
 
-## Types of challenges {#more-98870}
+## Types of challenges
 
 The challenges with upgrading to Jakarta EE 10 or to Eclipse GlassFish 7 fall into these 3 main categories:
 

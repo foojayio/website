@@ -151,8 +151,8 @@ Useful Links:
 
 TornadoVM: <https://www.tornadovm.org/>{#7s1my157954}
 
-JetBrains Marketplace: [++https://plugins.jetbrains.com/plugin/23309-tornadoinsight++](https://plugins.jetbrains.com/plugin/23309-tornadoinsight){#7s1my157954}
+JetBrains Marketplace: [++https://plugins.jetbrains.com/plugin/23309-tornadoinsight++](https://plugins.jetbrains.com/plugin/23309-tornadoinsight)
 
-GitHub Repository: [++https://github.com/beehive-lab/tornado-insight++](https://github.com/beehive-lab/tornado-insight){#7s1my157954}
+GitHub Repository: [++https://github.com/beehive-lab/tornado-insight++](https://github.com/beehive-lab/tornado-insight)
 
 This work has been supported by research funding from the European Union ([++P2Code++](https://p2code-project.eu/), [++AERO++](aero-project.eu)).

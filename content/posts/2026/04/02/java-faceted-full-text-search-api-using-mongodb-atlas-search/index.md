@@ -31,7 +31,7 @@ cd atlas-search-coco
 docker compose up java-app
 ```
 
-(You'll need [Docker Desktop](https://www.docker.com/products/docker-desktop/){#https://www.docker.com/products/docker-desktop/} installed.)
+(You'll need [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed.)
 
 Then, you can try it out with the little sample UI:
 
@@ -50,12 +50,12 @@ Alright, let's walk through building this solution step by step. By the end, you
 You'll need the following on your machine:
 
 * Java developer kit (JDK) 25+ and a Java IDE
-  * In this tutorial, we'll use [IntelliJ Idea](https://www.jetbrains.com/idea/){#https://www.jetbrains.com/idea/}.
+  * In this tutorial, we'll use [IntelliJ Idea](https://www.jetbrains.com/idea/).
   * IntelliJ can also download and configure the JDK for you (e.g., Amazon Corretto 25).
   * If you prefer another IDE, you should be able to translate the instructions pretty easily.
 * Docker Desktop
 * [MongoDB Compass](https://www.mongodb.com/products/tools/compass/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim)
-* [Apache Maven](https://maven.apache.org/){#https://maven.apache.org/}
+* [Apache Maven](https://maven.apache.org/)
 
 ## 1. Project setup
 
@@ -896,8 +896,8 @@ If you'd like to, you can check out the [same code refactored](https://github.co
 
 So there you have it. The beginnings of an awesome service using Atlas Search to perform advanced text search, filtering, and facet counting! The use of the COCO dataset here shows an interesting example of how data generated using machine learning can be combined with more traditional lexical text searching. This provides repeatable, consistent, and intuitive search results to consumers of your API. Faceting allows us to create filterable result sets with counts on each filterable category returned. This supports advanced user interfaces in a highly performant single search query. Using the Java language and the Java Virtual Machine (JVM) as the runtime provides a highly consistent, strongly typed, and reliable platform for building scalable APIs. The language features in particular pair well with MongoDB. Java is a great language to enforce your schema with and evolve it over time. This combination of compile time and runtime checks for consistency in the code schema, along with flexible changes in the MongoDB database schema as you evolve it over time, is a great match.   
 
-Read more about [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim){#https://www.mongodb.com/docs/atlas/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim}, [Atlas Search faceting](https://www.mongodb.com/docs/atlas/atlas-search/tutorial/facet-tutorial/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim), [running Atlas locally with Docker](https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-docker/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim){#https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-docker/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim}, and the Java [driver for MongoDB's Atlas search features](https://github.com/mongodb/mongo-java-driver/tree/main/driver-core/src/main/com/mongodb/client/model/search).
+Read more about [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim), [Atlas Search faceting](https://www.mongodb.com/docs/atlas/atlas-search/tutorial/facet-tutorial/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim), [running Atlas locally with Docker](https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-docker/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim), and the Java [driver for MongoDB's Atlas search features](https://github.com/mongodb/mongo-java-driver/tree/main/driver-core/src/main/com/mongodb/client/model/search).
 
-Finally, take a peek at the [internals of Atlas Search](https://medium.com/@luketn/mongodb-local-atlas-deployments-under-the-hood-225b1b685fb7){#https://medium.com/@luketn/mongodb-local-atlas-deployments-under-the-hood-225b1b685fb7}.
+Finally, take a peek at the [internals of Atlas Search](https://medium.com/@luketn/mongodb-local-atlas-deployments-under-the-hood-225b1b685fb7).
 
-If you have any questions or would like to know more, please don't hesitate to reach out to me on [LinkedIn](https://www.linkedin.com/in/lukethompson9/) and check out my personal blog page [here](https://tech-blog.luketn.com/series/mongodb-atlas-search){#https://tech-blog.luketn.com/series/mongodb-atlas-search}. Happy coding!
+If you have any questions or would like to know more, please don't hesitate to reach out to me on [LinkedIn](https://www.linkedin.com/in/lukethompson9/) and check out my personal blog page [here](https://tech-blog.luketn.com/series/mongodb-atlas-search). Happy coding!

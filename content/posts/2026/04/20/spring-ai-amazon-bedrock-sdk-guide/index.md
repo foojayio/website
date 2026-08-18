@@ -142,7 +142,7 @@ Using **[start.spring.io](https://start.spring.io/)**, you can scaffold the proj
 
 You can use the following link to quickly create the project with the required configuration and dependencies:
 
-[Generate Project](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.13&packaging=jar&configurationFileFormat=yaml&jvmVersion=21&groupId=com.example&artifactId=demo&packageName=com.example.demo&dependencies=web,actuator,springdoc-openapi,spring-ai-bedrock-converse){#https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.13&packaging=jar&configurationFileFormat=yaml&jvmVersion=21&groupId=com.example&artifactId=demo&packageName=com.example.demo&dependencies=web,actuator,springdoc-openapi,spring-ai-bedrock-converse}
+[Generate Project](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.5.13&packaging=jar&configurationFileFormat=yaml&jvmVersion=21&groupId=com.example&artifactId=demo&packageName=com.example.demo&dependencies=web,actuator,springdoc-openapi,spring-ai-bedrock-converse)
 
 This link preconfigures a Spring Boot project with the necessary setup, allowing you to get started quickly.
 

@@ -18,7 +18,7 @@ frozen: false
 ---
 
 *If you're joining us from [Part 1](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/) or need a quick refresher on the architecture, listen to this brief overview of how Spring AI and Amazon Bedrock work together.*
-*Generated using Notebook LLM for my previous [article](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/){#https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/}*
+*Generated using Notebook LLM for my previous [article](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/)*
 
 In this article, we explore one of the AgentCore capabilities i.e., ***memory***
 ![](https://a.b.cdn.console.awsstatic.com/a/v1/ACHOUHHJ3XZF7J5AYP2XIR2NCZIPH56WAM33AFJA44HJSRMAO4DA/assets/images/Overview/ac_overviewchart_04_07.png) ***Source: Amazon***

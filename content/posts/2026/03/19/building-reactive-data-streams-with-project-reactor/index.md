@@ -242,4 +242,4 @@ In this article, we learned how to build reactive data flows, and we understood 
 
 All this comes at a cost: reactive systems are not magic. They require discipline, a clear and consistent architectural design, but above all, they must not block. However, this complexity can be a valuable ally in building high-throughput systems that produce data continuously. And resources are grateful too.
 
-In fact, in modern Java applications, making efficient use of waiting time is often the most important optimization of all. All the code is available at this [repository](https://github.com/matteoroxis/reactive-streaming){#https://github.com/matteoroxis/reactive-streaming}.
+In fact, in modern Java applications, making efficient use of waiting time is often the most important optimization of all. All the code is available at this [repository](https://github.com/matteoroxis/reactive-streaming).

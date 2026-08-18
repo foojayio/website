@@ -52,7 +52,7 @@ What we used to call "boilerplate" is now signal. A Java method signature tells 
 
 ### The research backs this up
 
-[Atlassian published a study at ICSME'25](https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm){#https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm} across 118 practitioners and production code. They found that 81% of developers say readability is still crucial — even with LLMs in the loop. The top motivation? Reducing long-term maintenance costs.
+[Atlassian published a study at ICSME'25](https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm) across 118 practitioners and production code. They found that 81% of developers say readability is still crucial — even with LLMs in the loop. The top motivation? Reducing long-term maintenance costs.
 
 They also found something more specific. AI-generated code in TypeScript and Python tended to be slightly longer and less maintainable. Java, Kotlin, Go, and Scala showed negligible differences from human-written code.
 

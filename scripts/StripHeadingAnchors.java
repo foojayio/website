@@ -75,6 +75,17 @@ public class StripHeadingAnchors {
     /** Trailing `{#anchor}` on a heading line, with the whitespace before it. */
     static final Pattern ANCHOR = Pattern.compile("[ \\t]*\\{#[^}\\s]*\\}[ \\t]*$");
     /** ATX heading: `## Title`. */
+    /**
+     * The same WordPress id, carried over onto a LINK rather than a heading:
+     * `[Ty Morton](https://.../){#31db}`. Medium-imported posts are full of
+     * them (`<a id="31db">`). Unlike the heading case this one does NOT round
+     * trip -- Goldmark's attribute syntax only applies to a whole block, so an
+     * id sitting mid-paragraph is rendered as the literal text "{#31db}" in the
+     * middle of a sentence. Anchored to the link's closing paren so a `{#id}`
+     * in a CSS example is never touched.
+     */
+    static final Pattern LINK_ANCHOR = Pattern.compile("\\)\\{#[^}\\n]*\\}");
+
     static final Pattern ATX = Pattern.compile("^[ \\t]{0,3}#{1,6}[ \\t]");
     /** Setext underline: a run of `=` or `-` and nothing else. */
     static final Pattern SETEXT_RULE = Pattern.compile("^([ \\t]*)([=-])\\2*[ \\t]*$");
@@ -102,7 +113,7 @@ public class StripHeadingAnchors {
             files = s.filter(p -> p.toString().endsWith(".md")).sorted().toList();
         }
 
-        int changedFiles = 0, anchors = 0;
+        int changedFiles = 0, anchors = 0, linkAnchors = 0;
         List<String> skipped = new ArrayList<>();
 
         for (Path file : files) {
@@ -113,18 +124,20 @@ public class StripHeadingAnchors {
             if (!body.contains("{#")) continue;
 
             int[] count = new int[1];
+            int[] linkCount = new int[1];
             int[] inCode = new int[1];
-            String newBody = strip(body, count, inCode);
+            String newBody = strip(body, count, linkCount, inCode);
             if (inCode[0] > 0) skipped.add(file + " (" + inCode[0] + " inside code)");
             if (newBody.equals(body)) continue;
 
             changedFiles++;
             anchors += count[0];
+            linkAnchors += linkCount[0];
             if (!dryRun) Files.writeString(file, head + newBody);
         }
 
-        System.out.printf("%s %d file(s), %d heading anchor(s)%n",
-                dryRun ? "[dry-run] would change" : "Changed", changedFiles, anchors);
+        System.out.printf("%s %d file(s), %d heading anchor(s), %d link anchor(s)%n",
+                dryRun ? "[dry-run] would change" : "Changed", changedFiles, anchors, linkAnchors);
         if (!skipped.isEmpty()) {
             System.out.println("Left alone (inside a fenced code block):");
             skipped.forEach(s -> System.out.println("  " + s));
@@ -144,7 +157,7 @@ public class StripHeadingAnchors {
      * meaning in Markdown, but leaving a 79-character rule under a 36-character
      * heading looks like damage to the next person reading the file.
      */
-    static String strip(String body, int[] count, int[] inCode) {
+    static String strip(String body, int[] count, int[] linkCount, int[] inCode) {
         String[] lines = body.split("\n", -1);
         String openMarker = null; // non-null while inside a fence
         for (int i = 0; i < lines.length; i++) {
@@ -167,6 +180,16 @@ public class StripHeadingAnchors {
                     inCode[0]++;
                 }
                 continue;
+            }
+
+            // Link anchors first: they sit mid-line, so none of the heading
+            // logic below applies to them, and a heading line can carry one too.
+            Matcher link = LINK_ANCHOR.matcher(lines[i]);
+            if (link.find()) {
+                int n = 0;
+                do { n++; } while (link.find());
+                lines[i] = LINK_ANCHOR.matcher(lines[i]).replaceAll(")");
+                linkCount[0] += n;
             }
 
             if (!ANCHOR.matcher(lines[i]).find()) continue;

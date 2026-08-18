@@ -134,5 +134,5 @@ Today, 36% of the Fortune 100 and many of the world's most respected brands rely
 
 And we're just getting started.
 
-I invite you to [dive deeper into the full report](https://www.azul.com/state-of-java-2026/){#https://www.azul.com/state-of-java-2026/} and join the conversation about where Java is heading next.
+I invite you to [dive deeper into the full report](https://www.azul.com/state-of-java-2026/) and join the conversation about where Java is heading next.
 [![](SoJ26-Download.png)](https://www.azul.com/state-of-java-2026/)

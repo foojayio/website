@@ -29,7 +29,7 @@ The following figure illustrates the code interoperability of the generated Open
 
 {{< img src="TornadoVM-Code-Interoperability-Mode.png" class="aligncenter is-resized" width="512" height="180" >}}
 
-**Note:** The code interoperability is prototyped as a complementary mode[^\[1\]^](#_ftn1){#_ftnref1} to enable TornadoVM-generated kernels to be transferable for execution from other programming languages, beyond Java.
+**Note:** The code interoperability is prototyped as a complementary mode[^\[1\]^](#_ftn1) to enable TornadoVM-generated kernels to be transferable for execution from other programming languages, beyond Java.
 
 Learning Outcome:
 
@@ -262,4 +262,4 @@ $ make jdk-11-plus
 $ tornado --printKernel --jvm="-Dtornado.cim.mode=True" -m tornado.examples/uk.ac.manchester.tornado.examples.VectorAddIntCim --params 1024
 ```
 
-[^\[1\]^](#_ftnref1){#_ftn1} <https://github.com/elegant-h2020/TornadoVM/tree/feat/code-interoperability-mode>
+[^\[1\]^](#_ftnref1) <https://github.com/elegant-h2020/TornadoVM/tree/feat/code-interoperability-mode>

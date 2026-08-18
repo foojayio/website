@@ -20,7 +20,7 @@ frozen: false
 
 Co-authored by *Slav Babanin*.
 
-[Donald Knuth](https://www-cs-faculty.stanford.edu/~knuth/){#https://www-cs-faculty.stanford.edu/~knuth/}, widely recognized as the 'father of the analysis of algorithms,' warned against premature optimization—spending effort on code that appears inefficient but is not on the critical path. He observed that programmers often focus on the wrong 97% of the codebase. Real performance gains come from identifying and optimizing the critical 3%. But, how can you identify the critical 3%? Well, that's where the philosophy of 'never guess, always measure' comes in.
+[Donald Knuth](https://www-cs-faculty.stanford.edu/~knuth/), widely recognized as the 'father of the analysis of algorithms,' warned against premature optimization—spending effort on code that appears inefficient but is not on the critical path. He observed that programmers often focus on the wrong 97% of the codebase. Real performance gains come from identifying and optimizing the critical 3%. But, how can you identify the critical 3%? Well, that's where the philosophy of 'never guess, always measure' comes in.
 
 In this blog, we share how the Java developer experience team optimized the MongoDB Java Driver by strictly adhering to this principle. We discovered that performance issues were rarely where we thought they were. This post explains how we achieved throughput improvements between 20% to over 90% in specific workloads. We'll cover specific techniques, including using SWAR (SIMD Within A Register) for null-terminator detection, caching BSON array indexes, and eliminating redundant invariant checks.
 

@@ -1,0 +1,57 @@
+{{ define "main" }}
+{{/* /java-quick-start/other-tutorials/ -- external Java courses as tiles, the
+     same card rhythm as the advisory board (layouts/board/list.html).
+
+     The board derives its members from a folder of pages, and this page
+     deliberately does NOT: a board member has a profile of their own worth a
+     URL, whereas each entry here exists to send the reader somewhere else. A
+     page per tutorial would mint five URLs, five view-counter keys and five
+     files to open, all to hold four fields. So the list is frontmatter on this
+     page -- case 3 of the derive/default/ask rule in CLAUDE.md, since which
+     tutorials to recommend genuinely lives in an editor's head. Adding one is
+     five lines above the `---`, and the count below follows on its own.
+
+     Note this page has no `.TableOfContents` any more (the entries stopped
+     being h3s), so _default/single.html's TOC sidebar would not have fired
+     here regardless. */}}
+{{ $tutorials := .Params.tutorials }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow"><a href="{{ "java-quick-start/" | relURL }}">Java Quick Start</a></span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    <div class="page-head__meta">
+      <p>{{ len $tutorials }} recommended {{ if eq (len $tutorials) 1 }}resource{{ else }}resources{{ end }}, all free.</p>
+    </div>
+    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <div class="tutorial-grid">
+    {{ range $tutorials }}
+    <article class="tutorial-card">
+      <a class="tutorial-card__link" href="{{ .url }}" target="_blank" rel="noopener">
+        {{/* Same tile treatment as a board logo: the artwork is a mix of
+             portraits, course screenshots and wordmarks, so `contain` on a
+             sunken tile keeps them on the same visual footing without cropping
+             anyone's face. `imagebackground` is the same escape hatch board
+             logos have, for art that needs its own ground. */}}
+        <div class="tutorial-card__art"{{ with .imagebackground }} style="background-color: {{ . }}"{{ end }}>
+          {{ with .image }}
+          <img src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="" loading="lazy" decoding="async">
+          {{ end }}
+        </div>
+        <h2 class="tutorial-card__title">{{ .title }}</h2>
+      </a>
+      {{ with .by }}<p class="tutorial-card__by">by {{ . }}</p>{{ end }}
+      {{ with .description }}<p class="tutorial-card__desc">{{ . }}</p>{{ end }}
+      <div class="tutorial-card__actions">
+        <a href="{{ .url }}" target="_blank" rel="noopener">{{ .label | default "Visit" }}</a>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

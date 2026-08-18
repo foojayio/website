@@ -29,7 +29,7 @@ The [sources for OpenJFX are hosted on GitHub](https://github.com/openjdk/jfx) w
 
 Without Gluon's sustained investment, the question of whether JavaFX had a future would have been answered a long time ago. But not in a good way...
 
-Beyond Gluon, the broader OpenJFX community contributed bug fixes, improvements, and tooling. And several JDK vendors, including [Azul](https://www.azul.com/downloads/#zulu){#https://www.azul.com/downloads/#zulu}, continued distributing JDK builds that included JavaFX, which helped ensure that the organizations depending on it did not face a cliff edge when Oracle stopped bundling it.
+Beyond Gluon, the broader OpenJFX community contributed bug fixes, improvements, and tooling. And several JDK vendors, including [Azul](https://www.azul.com/downloads/#zulu), continued distributing JDK builds that included JavaFX, which helped ensure that the organizations depending on it did not face a cliff edge when Oracle stopped bundling it.
 
 ## OpenJFX Inspired Project Skara
 

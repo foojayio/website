@@ -81,7 +81,7 @@ Community reactions suggest a clear use case: onboarding developers and guiding 
 
 ## Community Perspective
 
-In a short exchange about the motivation behind the project, [Bruno Borges](https://www.linkedin.com/in/brunocborges/){#https://www.linkedin.com/in/brunocborges/} explained that the gap is largely about awareness rather than resistance to change:
+In a short exchange about the motivation behind the project, [Bruno Borges](https://www.linkedin.com/in/brunocborges/) explained that the gap is largely about awareness rather than resistance to change:
 > > *"As Java developers find themselves being able to use newer versions of the JDK, I believe they do start adopting new language idioms, but new API usage requires deeper thinking and learning. Then, there is also the element of non-Java developers having the misconception that Java today is still the same as Java from more than a decade ago. The website helps bring awareness to both cases!"*
 
 This perspective aligns with the project's goal: not convincing developers to abandon existing code, but giving them a concrete reference point for how the language has evolved.

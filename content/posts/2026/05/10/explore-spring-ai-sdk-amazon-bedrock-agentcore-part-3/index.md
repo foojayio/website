@@ -17,14 +17,14 @@ frozen: false
 ---
 
 In [Part 1](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/) and [Part 2](https://foojay.io/today/explore-spring-ai-sdk-amazon-bedrock-agentcore-part-2/), we explored the Spring AI SDK and Amazon Bedrock AgentCore features, including the agentcore runtime starter and integration of agentcore memory. In this article, we will explore the integration of AgentCore built-in tools, including the Browser and Code Interpreter features.
-> **Repository containing the companion code for the tutorial. [Go to GitHub](https://github.com/bsmahi/simple-spring-boot-agent){#https://github.com/bsmahi/simple-spring-boot-agent}.**
+> **Repository containing the companion code for the tutorial. [Go to GitHub](https://github.com/bsmahi/simple-spring-boot-agent).**
 > ![AgentCore Built-In Tool Browser](AgentcoreBrowser.png) Built-In Tool Browser
 
 *The use case I am trying to build here is for the given URL; it navigates the entire website and retrieves the content and gives key points and the summary of the page using **the AgentCore Browser** tool.*
 
 ### 1. Adding Built-in Tools: AgentCore Browser
 
-AgentCore provides specialized tools, such as the Browser and Code Interpreter, which the SDK exposes as Spring AI tool callbacks through the [ToolCallbackProvider](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/ToolCallbackProvider.html){#https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/ToolCallbackProvider.html} interface.
+AgentCore provides specialized tools, such as the Browser and Code Interpreter, which the SDK exposes as Spring AI tool callbacks through the [ToolCallbackProvider](https://docs.spring.io/spring-ai/docs/current/api/org/springframework/ai/tool/ToolCallbackProvider.html) interface.
 
 By adding the [AgentCore Browser](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/browser-tool.html), agents can navigate websites, perform actions such as parsing content and fetching images, and provide summaries of the given URL.
 

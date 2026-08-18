@@ -29,7 +29,7 @@ At Picnic, we use one of the tools that almost every Java developer has, directl
 
 In principle, a Java agent can run in any environment, not just during development — as is typically the case with JaCoCo. Why not run it also in production to see actual code coverage?{#71a0}
 
-Carlos Becker^[1](#b5c1e9e5-5fce-4bfe-9cb7-6477372782a0){#b5c1e9e5-5fce-4bfe-9cb7-6477372782a0-link}^ and Markus Harrer^[2](#90d3d782-1949-4ee2-adf5-14f96c7f0444){#90d3d782-1949-4ee2-adf5-14f96c7f0444-link}^ also brought this up before. We wanted to follow in their footsteps but instead fetch the coverage at any time in an ephemeral context, that is, Kubernetes. So let's get started!{#a909}
+Carlos Becker^[1](#b5c1e9e5-5fce-4bfe-9cb7-6477372782a0)^ and Markus Harrer^[2](#90d3d782-1949-4ee2-adf5-14f96c7f0444)^ also brought this up before. We wanted to follow in their footsteps but instead fetch the coverage at any time in an ephemeral context, that is, Kubernetes. So let's get started!{#a909}
 
 First, we need to get the JaCoCo Java agent JAR. We can retrieve it from the latest [release](https://github.com/jacoco/jacoco/releases/latest) or the central Maven repository. There are several ways to get this JAR in your Kubernetes pod, such as copying it into the container's image or making it available through a mounted volume. Once it's available, it's time to start configuring the JVM. We can configure the agent using the `-javaagent` JVM argument. There are plenty of [configuration options](https://www.eclemma.org/jacoco/trunk/doc/agent.html). At Picnic, we run it as follows:{#b736}
 

@@ -212,6 +212,15 @@ public final class HtmlToMarkdown {
         // reasoning and for the one-off cleanup of already-converted content.
         content.select("h1, h2, h3, h4, h5, h6").removeAttr("id");
 
+        // The same id, stamped on a LINK instead of a heading -- Medium-imported
+        // posts carry `<a id="31db">` on every paragraph's first link. Flexmark
+        // carries it over identically (`[Ty Morton](https://.../){#31db}`), but
+        // this one does not round trip: Goldmark's attribute syntax applies to a
+        // whole block, so an id sitting mid-paragraph is rendered as the literal
+        // text "{#31db}" in the middle of a sentence. 39 of them were live
+        // across 28 posts; StripHeadingAnchors.java cleaned those up.
+        content.select("a[id]").removeAttr("id");
+
         // YouTube embeds -> Hugo shortcode. Done first so the wrapping
         // figure.wp-block-embed isn't grabbed by SELECTOR_PRESERVE below.
         for (Element el : outermostMatches(content, SELECTOR_YOUTUBE)) {

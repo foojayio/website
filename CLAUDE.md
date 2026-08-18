@@ -242,6 +242,17 @@ should catch a mistake at PR time rather than letting it fail silently.
   `HtmlToMarkdown.toMarkdown` now drops heading ids at the source, so a
   re-scrape is a no-op; the script stays for the same reason
   `MigrateEnlighterToFences.java` does. `--dry-run` / `--path` as usual.
+
+  It also strips the same id where WordPress stamped it on a **link** rather
+  than a heading -- `[Ty Morton](https://.../){#31db}`, which Medium-imported
+  posts carry on every paragraph's first link. That case is worse than the
+  heading one and was still live: Goldmark's attribute syntax applies to a whole
+  block, so an id sitting mid-paragraph never round-tripped -- it rendered as
+  the literal text `{#31db}` in the middle of a sentence, on 28 posts. 39
+  removed (plus 21 heading anchors that a later re-scrape had put back).
+  `HtmlToMarkdown` drops `a[id]` alongside the heading ids now. Anchored to the
+  link's closing paren, so a `{#id}` in a CSS example is never touched, and
+  fenced code is skipped as before.
 - **`scripts/NormalizeMarkdown.java`**: one-off migration that brought
   `content/` in line with the storage format the converter now emits. Two
   things, both Flexmark defaults that were never a deliberate choice:
@@ -643,6 +654,19 @@ should catch a mistake at PR time rather than letting it fail silently.
   `content/pages/`, which is also what keeps the `pages/all-events` view key
   (20,984 legacy views) resolving; a root-level `content/*.md` has no section
   and `views-key.html` would not count it.
+- **`/java-quick-start/other-tutorials/` is tiles from a frontmatter list.**
+  `type: "tutorials"` -> `themes/foojay/layouts/tutorials/single.html`, with the
+  same card rhythm as the advisory board. It deliberately does NOT copy the
+  board's mechanism, though: the board derives its members from a folder of
+  pages because each member has a profile worth a URL, whereas every entry here
+  exists to send the reader somewhere else. A page per tutorial would mint a
+  URL, a view-counter key and a file each, to hold four fields. So the list is
+  `tutorials:` in the page's own frontmatter -- case 3 of the derive/default/ask
+  rule, since which tutorials to recommend genuinely lives in an editor's head.
+  Adding one is five lines above the `---`; the count in the header follows on
+  its own. `imagebackground` is the same escape hatch board logos have, for
+  artwork that needs its own ground in both themes.
+
 - **Sponsors appear site-wide via the sidebar**, not just on `/our-sponsors/`:
   `themes/foojay/layouts/partials/sidebar-sponsors.html` lists every sponsor
   tier-ordered, with the logo sized by tier (gold largest). Deliberately NOT

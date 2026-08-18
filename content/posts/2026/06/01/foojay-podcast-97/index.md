@@ -51,7 +51,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * On the [BoxLang website](https://www.boxlang.io):
   * [BoxLang docs](https://boxlang.ortusbooks.com/)
   * [BoxLang AI docs](https://ai.ortusbooks.com)
-  * [BoxLang Academy](https://learn.boxlang.io/){#https://learn.boxlang.io/}
+  * [BoxLang Academy](https://learn.boxlang.io/)
   * [BoxLang for desktop applications](https://boxlang.ortusbooks.com/getting-started/running-boxlang/desktop-applications)
   * [BoxLang Spring Boot Starter](https://boxlang.ortusbooks.com/getting-started/running-boxlang/spring-boot)
   * [BoxLings](https://foojay.io/today/introducing-boxlings-an-interactive-teacher-for-boxlang-and-tdd-bdd/)

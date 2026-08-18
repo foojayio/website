@@ -24,7 +24,7 @@ frozen: false
 
 ![](0_ntxtNVffHhl99weW-1-1024x535.jpg)
 
-By [Christopher Bradford](https://www.linkedin.com/in/bradfordcp/) and [Ty Morton](https://www.linkedin.com/in/ty-morton-2b55b82/){#31db}
+By [Christopher Bradford](https://www.linkedin.com/in/bradfordcp/) and [Ty Morton](https://www.linkedin.com/in/ty-morton-2b55b82/)
 
 Global applications need a data layer that is as distributed as the users they serve. [Apache Cassandra](https://cassandra.apache.org/_/index.html) has risen to this challenge, handling data needs for the likes of Apple, Netflix and Sony. Traditionally, managing data layers for a distributed application was handled with dedicated teams to manage the deployment and operations of thousands of nodes — both on-premises and in the cloud.
 

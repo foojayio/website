@@ -557,7 +557,7 @@ This setup is not only easy to implement but also flexible enough to grow with y
 
 You can find this implementation in **Java** and **Kotlin**:{#4fa7}
 
-* Java ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/main/java/io/redis/SlidingWindowCounterRateLimiter.java), [Test](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/test/java/io/redis/SlidingWindowCounterRateLimiterTest.java)){#8b02}
+* Java ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/main/java/io/redis/SlidingWindowCounterRateLimiter.java), [Test](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/test/java/io/redis/SlidingWindowCounterRateLimiterTest.java))
 {#8b02}
-* Kotlin ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/main/kotlin/org/example/SlidingWindowCounterRateLimiter.kt), [Test](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/test/kotlin/org/example/SlidingWindowCounterRateLimiterTest.kt)){#88f0}
+* Kotlin ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/main/kotlin/org/example/SlidingWindowCounterRateLimiter.kt), [Test](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/test/kotlin/org/example/SlidingWindowCounterRateLimiterTest.kt))
 {#88f0}

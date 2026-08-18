@@ -86,7 +86,7 @@ On the security front, GlassFish now supports the **PKCS12 keystore format**and 
 ### Learn More About Modern GlassFish
 
 * [Eclipse GlassFish: Official website](https://glassfish.org)
-* [Eclipse GlassFish: OmniFish website](https://omnifish.ee/glassfish/){#https://omnifish.ee/glassfish/}
+* [Eclipse GlassFish: OmniFish website](https://omnifish.ee/glassfish/)
 * [GlassFish 8 Released: Enterprise-Grade Java, Redefined. What's new?](https://omnifish.ee/blog/glassfish-8-released-enterprise-grade-java-redefined/)
 * [Azul Acquires Payara: GlassFish Supported by OmniFish Is A Reliable Choice](https://omnifish.ee/blog/azul-acquires-payara-glassfish-supported-by-omnifish-is-a-reliable-choice/)
 

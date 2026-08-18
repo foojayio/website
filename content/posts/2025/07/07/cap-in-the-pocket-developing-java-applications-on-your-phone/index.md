@@ -21,7 +21,7 @@ Smartphones are more powerful then ever, with processors rivaling old laptops. S
 Below I'll show you how to do use run and develop a [CAP Java](https://cap.cloud.sap/docs/java/) [Spring Boot](https://spring.io/projects/spring-boot) application on your smartphone and how to run [VSCode](https://code.visualstudio.com/) locally to develop and modify it. This, of course, works only on Android phones, as they are a Linux at their core.
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_28_58-PM-2000x900.png)
 
-## Termux {#more-116511}
+## Termux
 
 We first need a proper Linux environment with a package manager and more. The most popular app that facilitates this is [Termux](https://termux.dev/):
 > Termux is an **Android terminal emulator and Linux environment app** that works directly with no rooting or setup required. A minimal base system is installed automatically - additional packages are available using the APT package manager.
