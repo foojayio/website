@@ -818,6 +818,32 @@ should catch a mistake at PR time rather than letting it fail silently.
   dates, the "N conferences" count (and whether that word widens to
   "conferences & workshops") from the entries themselves.
 
+- **`partials/calendar-events.html` is the single definition of what an event
+  is**, and it is what makes the home page band possible without a second
+  source of truth. It flattens both sources, enriches every event with the
+  fields the templates and the JavaScript need (dates formatted, place folded,
+  colour hashed, `days` expanded) and returns `{events, conferences, errored,
+  generatedAt}`. `/calendar/` and `partials/upcoming-events.html` both call it
+  — `partialCached`, since the result depends on the data files and not on the
+  page — so neither can disagree with the other about a date, a place or a
+  group's colour, and a third caller gets all of it free. Same move as
+  `sponsor-posts.html`, `author-posts.html`, `board-members.html` and
+  `series-steps.html`.
+
+- **The home page's "next two weeks" band is a WINDOW, not a top-N.**
+  `partials/upcoming-events.html` renders the events whose date range overlaps
+  the next fourteen days, as one sideways-scrolling row under the article grid.
+  Two details are deliberate: the filter is an **overlap** (`end >= today` and
+  `start <= today+14`), not "starts within the window", because a five-day
+  conference that opened yesterday is still on this week and dropping it is a
+  bug a reader would notice; and the band renders **nothing** when the window
+  is empty, the way the podcast band does — a quiet fortnight is a reason to
+  show no section, not an empty one. A top-N would look similar and quietly
+  stretch to next spring, which is not what "what could I still go to?" means.
+  It sits on a plain band with sunken cards rather than the reverse, because
+  the podcast band below it is sunken and two sunken bands in a row read as one
+  block with two headings.
+
 - **`/calendar/` is two views of its events, and only one of them is
   content.** `themes/foojay/layouts/events/single.html` flattens
   `jug-events.json`'s groups into a single list, joins each group's `jug` slug

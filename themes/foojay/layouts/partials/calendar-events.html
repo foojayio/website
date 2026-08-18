@@ -1,0 +1,246 @@
+{{/* Every event on the calendar, from BOTH of its sources, flattened into one
+     slice with one set of keys.
+
+     This is the single definition of what an event is here -- /calendar/
+     (layouts/events/single.html) and the home page band
+     (partials/upcoming-events.html) both call it, so neither can disagree with
+     the other about a date, a place or a colour, and a third caller gets all of
+     it for free. Same reasoning as partials/sponsor-posts.html and
+     partials/board-members.html.
+
+     Returns a dict:
+       events      every upcoming event, sorted by start time
+       conferences just the hand-added ones, sorted (the /calendar/ legend)
+       errored     names of JUG groups whose last sync failed
+       generatedAt when the JUG feed was last synced
+
+     Cached: the result depends on the data files, not on the page, so it is
+     built once per build rather than once per caller. */}}
+
+{{ $data := index hugo.Data "jug-events" }}
+
+{{/* Join key: jug-events.json's `jug` is a data/jugs.yaml slug -- verified, all 32
+     groups match -- which is where the country comes from. */}}
+{{ $jugBySlug := dict }}
+{{ range hugo.Data.jugs }}
+  {{ $jugBySlug = merge $jugBySlug (dict .slug .) }}
+{{ end }}
+
+{{/* Flatten groups -> events, and enrich each one with everything the grid,
+     the agenda and the detail dialog need, so neither the templates below nor
+     the JavaScript has to re-derive it. Times are formatted here, in the
+     event's OWN offset (that is what the JUG means by "19:00" and what Meetup
+     shows); rebuilding them from the ISO string in the browser would silently
+     restate them in the reader's zone instead. */}}
+{{ $events := slice }}
+{{ $errored := slice }}
+{{ range $g := $data.groups }}
+  {{ if $g.error }}
+    {{ $errored = $errored | append $g.name }}
+  {{ end }}
+  {{ $jug := index $jugBySlug $g.jug }}
+  {{ $country := "" }}
+  {{ with $jug }}{{ $country = .country | default "" }}{{ end }}
+  {{/* One hue per group, derived from its slug, so a JUG keeps the same dot
+       colour everywhere on the page without a colour ever being configured. */}}
+  {{ $hue := mod (hash.FNV32a $g.jug) 360 }}
+  {{ range $e := ($g.events | default slice) }}
+    {{/* One string for where the event is: "Online", else venue + city as the
+         JSON-LD gave them, else nothing (and the templates below fall back to
+         the JUG's country). Built once here so the grid, the agenda and the
+         dialog can't disagree about it. */}}
+    {{ $place := "" }}
+    {{ if eq $e.online true }}
+      {{ $place = "Online" }}
+    {{ else }}
+      {{ $parts := slice }}
+      {{ with $e.venue }}{{ $parts = $parts | append . }}{{ end }}
+      {{ with $e.city }}{{ $parts = $parts | append . }}{{ end }}
+      {{ $place = delimit $parts ", " }}
+    {{ end }}
+    {{/* The short form, for a month-grid cell ~140px wide: the city alone
+         ("Darmstadt"), not the whole venue line ("DICOS GmbH
+         Kommunikationssysteme, Darmstadt"). Falls back to the venue and then
+         to the JUG's country, so a chip always says where. */}}
+    {{ $placeShort := "" }}
+    {{ if eq $e.online true }}
+      {{ $placeShort = "Online" }}
+    {{ else }}
+      {{ $placeShort = $e.city | default $e.venue | default $country }}
+    {{ end }}
+    {{ $start := time.AsTime $e.startTime }}
+    {{ $endDate := "" }}
+    {{ $endTime := "" }}
+    {{ with $e.endTime }}
+      {{ $end := time.AsTime . }}
+      {{ $endDate = $end.Format "2006-01-02" }}
+      {{ $endTime = $end.Format "15:04" }}
+    {{ end }}
+    {{/* A meetup occupies ONE cell in the month grid even when its feed claims
+         an end a week later: a handful of recurring "Stammtisch" entries carry
+         exactly that, and smearing them across seven days would fill the grid
+         with an upstream typo. A conference below genuinely spans its days,
+         which is why `days` exists at all. */}}
+    {{ $events = $events | append (dict
+        "kind"       "meetup"
+        "days"       (slice ($start.Format "2006-01-02"))
+        "allDay"     false
+        "when"       (printf "%s%s" ($start.Format "15:04") (cond (ne $endTime "") (printf "\u2013%s" $endTime) ""))
+        "title"      $e.title
+        "url"        $e.url
+        "group"      $g.name
+        "groupUrl"   ($g.url | default "")
+        "jug"        $g.jug
+        "country"    $country
+        "hue"        $hue
+        "sort"       $start.Unix
+        "date"       ($start.Format "2006-01-02")
+        "endDate"    $endDate
+        "day"        ($start.Format "2")
+        "weekday"    ($start.Format "Mon")
+        "time"       ($start.Format "15:04")
+        "endTime"    $endTime
+        "dateLabel"  ($start.Format "Monday, 2 January 2006")
+        "dateShort"  ($start.Format "2 Jan")
+        "monthKey"   ($start.Format "2006-01")
+        "monthLabel" ($start.Format "January 2006")
+        "venue"      ($e.venue | default "")
+        "city"       ($e.city | default "")
+        "online"     (eq $e.online true)
+        "place"      $place
+        "placeShort" $placeShort
+      ) }}
+  {{ end }}
+{{ end }}
+
+{{/* ------------------------------------------------------------------------
+     Hand-added events: data/events/<slug>.yaml, one file per event, opened as
+     a pull request (data/events/README.md is the contributor's instructions,
+     template/event.yaml the starter file, and
+     ValidateFrontmatter.checkEvents the PR-time check).
+
+     They land in the same $events slice as the JUG meetups above and carry the
+     same keys, so the grid, the agenda, the dialog and the JSON island stay
+     one code path -- the ONLY thing that differs downstream is `kind`.
+
+     Everything here is derived from the file except the eight fields the
+     README documents: the colour from the filename, the day cells a
+     conference occupies from its dates, the counts in the page header from
+     the entries themselves.
+     ------------------------------------------------------------------------ */}}
+{{ $today := now.Format "2006-01-02" }}
+{{ $conferences := slice }}
+{{ range $slug, $c := (index hugo.Data "events" | default dict) }}
+  {{/* A README.md sitting in the folder is not an entry. Hugo ignores it (it
+       only reads yaml/json/toml), but guard anyway: a file that somehow parses
+       without a name is skipped rather than rendered as a blank row. */}}
+  {{ if $c.name }}
+    {{ if not $c.start }}
+      {{ errorf "data/events/%s.yaml: missing `start` -- see data/events/README.md" $slug }}
+    {{ end }}
+    {{ $start := time.AsTime $c.start }}
+    {{ $end := $start }}
+    {{ with $c.end }}{{ $end = time.AsTime . }}{{ end }}
+    {{ $endDate := $end.Format "2006-01-02" }}
+
+    {{/* Past events drop off on their own, the day after they end -- so
+         nobody has to remember to delete last year's file, and forgetting to
+         is not a bug. */}}
+    {{ if ge $endDate $today }}
+      {{/* Whether the entry carries a time of day, rather than a flag saying
+           so: "2026-10-05" is midnight and means all day, while
+           "2026-10-05T19:00:00+02:00" means 19:00. Derive it, don't ask. */}}
+      {{ $allDay := and (eq $start.Hour 0) (eq $start.Minute 0) }}
+
+      {{/* Every date the event covers, so a five-day conference is five cells
+           in the month grid rather than one chip on the Monday. Capped: a
+           mistyped year would otherwise expand into thousands of entries, and
+           the PR check rejects a span this long anyway. */}}
+      {{ $span := int (div (sub $end.Unix $start.Unix) 86400) }}
+      {{ if lt $span 0 }}{{ $span = 0 }}{{ end }}
+      {{ if gt $span 30 }}{{ $span = 30 }}{{ end }}
+      {{ $days := slice }}
+      {{ range $i := seq 0 $span }}
+        {{ $days = $days | append (($start.AddDate 0 0 $i).Format "2006-01-02") }}
+      {{ end }}
+
+      {{/* One line for when it is: a day range for a multi-day event, the
+           clock for a timed one, nothing for a single all-day event (the date
+           beside it already says it). */}}
+      {{ $when := "" }}
+      {{ if gt (len $days) 1 }}
+        {{ if eq ($start.Format "2006-01") ($end.Format "2006-01") }}
+          {{ $when = printf "%s–%s" ($start.Format "2") ($end.Format "2 January") }}
+        {{ else }}
+          {{ $when = printf "%s – %s" ($start.Format "2 January") ($end.Format "2 January") }}
+        {{ end }}
+      {{ else if not $allDay }}
+        {{ $when = $start.Format "15:04" }}
+      {{ end }}
+
+      {{/* The same fact in a badge's worth of space: "5-9 Oct" on a card where
+           "5-9 October" would wrap. */}}
+      {{ $dateShort := $start.Format "2 Jan" }}
+      {{ if gt (len $days) 1 }}
+        {{ if eq ($start.Format "2006-01") ($end.Format "2006-01") }}
+          {{ $dateShort = printf "%s–%s" ($start.Format "2") ($end.Format "2 Jan") }}
+        {{ else }}
+          {{ $dateShort = printf "%s – %s" ($start.Format "2 Jan") ($end.Format "2 Jan") }}
+        {{ end }}
+      {{ end }}
+
+      {{ $place := "" }}
+      {{ if eq $c.online true }}
+        {{ $place = "Online" }}
+      {{ else }}
+        {{ $parts := slice }}
+        {{ with $c.venue }}{{ $parts = $parts | append . }}{{ end }}
+        {{ with $c.city }}{{ $parts = $parts | append . }}{{ end }}
+        {{ $place = delimit $parts ", " }}
+      {{ end }}
+
+      {{ $event := dict
+          "kind"       "event"
+          "type"       ($c.type | default "Conference")
+          "days"       $days
+          "allDay"     $allDay
+          "when"       $when
+          "title"      $c.name
+          "url"        ($c.url | default "")
+          "group"      ($c.type | default "Conference")
+          "groupUrl"   ($c.url | default "")
+          "jug"        ""
+          "country"    ($c.country | default "")
+          "hue"        (mod (hash.FNV32a $slug) 360)
+          "sort"       $start.Unix
+          "date"       ($start.Format "2006-01-02")
+          "endDate"    $endDate
+          "day"        ($start.Format "2")
+          "weekday"    ($start.Format "Mon")
+          "time"       ($start.Format "15:04")
+          "endTime"    ""
+          "dateLabel"  ($start.Format "Monday, 2 January 2006")
+          "dateShort"  $dateShort
+          "monthKey"   ($start.Format "2006-01")
+          "monthLabel" ($start.Format "January 2006")
+          "venue"      ($c.venue | default "")
+          "city"       ($c.city | default "")
+          "online"     (eq $c.online true)
+          "place"      $place
+          "placeShort" (cond (eq $c.online true) "Online" ($c.city | default $c.venue | default ($c.country | default "")))
+        }}
+      {{ $events = $events | append $event }}
+      {{ $conferences = $conferences | append $event }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $conferences = sort $conferences "sort" }}
+
+{{ $events = sort $events "sort" }}
+
+{{ return (dict
+    "events"      $events
+    "conferences" $conferences
+    "errored"     $errored
+    "generatedAt" ($data.generatedAt | default "")
+  ) }}

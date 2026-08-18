@@ -38,6 +38,11 @@
 </section>
 {{ end }}
 
+{{/* What's on in the next fortnight, straight off /calendar/'s own data --
+first band under the articles because it is the one thing here that
+expires. */}}
+{{ partial "upcoming-events.html" . }}
+
 <section class="band">
   <div class="shell">
     <div class="section-head">

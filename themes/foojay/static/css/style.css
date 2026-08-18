@@ -457,6 +457,62 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .band { padding: clamp(2.25rem, 4vw, 3.5rem) 0; }
 .band--sunken { background: var(--surface-sunken); border-block: 1px solid var(--border); }
 
+/* --------------------------------------------------- home: events strip -- */
+/* The "next two weeks" band (partials/upcoming-events.html). One row that
+   scrolls sideways, not a grid that wraps: the band is a glance at what is
+   coming, and a wrapped second row of eleven meetups is a list -- which is
+   what /calendar/ is for. */
+.event-strip {
+  list-style: none; margin: 0; padding: 0 .25rem .5rem 0;
+  display: grid; grid-auto-flow: column;
+  /* A card wide enough for two lines of title, and no wider than a third of a
+     narrow viewport, so the next one always peeks in and the row reads as
+     scrollable without a scrollbar having to say so. */
+  grid-auto-columns: minmax(min(17rem, 78%), 1fr);
+  gap: clamp(.75rem, 1.5vw, 1.1rem);
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
+}
+.event-strip__item {
+  scroll-snap-align: start;
+  display: flex; flex-direction: column; gap: .35rem; min-width: 0;
+  padding: .9rem 1rem; border-radius: var(--radius);
+  /* Sunken cards on a plain band, rather than plain cards on a sunken one:
+     the podcast band below is sunken, and two sunken bands in a row read as
+     one block with two headings. */
+  background: var(--surface-sunken); border: 1px solid var(--border);
+  /* The group's own colour, the same hue the calendar gives it. */
+  border-left: 3px solid var(--cal-dot, var(--brand-secondary));
+}
+.event-strip__date {
+  font-family: var(--font-display); font-weight: 700; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--brand-accent-strong);
+  font-variant-numeric: tabular-nums;
+}
+.event-strip__title {
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+  line-height: 1.3; color: var(--ink);
+  /* Two lines then ellipsis: the cards are one row, so they share a height and
+     a four-line title would set it for all of them. */
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration: none; }
+.event-strip__meta {
+  margin: auto 0 0; display: flex; flex-wrap: wrap; gap: .2rem .5rem;
+  font-size: .82rem; color: var(--ink-muted); line-height: 1.4;
+}
+.event-strip__group { color: var(--ink-soft); font-weight: 600; }
+/* Outlined, for the same reason the agenda's is: the hue is hashed, so light
+   text on it is a contrast lottery. */
+.event-strip__group--type {
+  padding: .02rem .4rem; border-radius: 999px;
+  border: 1px solid var(--cal-dot, var(--border)); color: var(--ink-soft);
+  font-size: .92em; text-transform: uppercase; letter-spacing: .05em;
+}
+.event-strip__where { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.event-strip__time { font-variant-numeric: tabular-nums; }
+
 /* ------------------------------------------------------------ post grid -- */
 
 .post-grid {

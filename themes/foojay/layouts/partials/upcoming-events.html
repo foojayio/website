@@ -1,0 +1,69 @@
+{{/* The next two weeks, as a horizontal band on the home page.
+
+     Everything comes from partials/calendar-events.html -- the same slice
+     /calendar/ renders -- so a conference added as a pull request appears here
+     and there at the same build, and the two can't disagree about a date, a
+     place or a group's colour. There is nothing to configure and no second list
+     to keep.
+
+     Renders NOTHING when the window is empty, the way the podcast band does: a
+     quiet fortnight is a reason to show no section, not to show an empty one.
+     Two weeks is the point of it -- "what could I still go to?" -- so it is a
+     window, not a top-N that would quietly stretch to next spring. */}}
+
+{{ $cal := partialCached "calendar-events.html" . }}
+{{ $today := now.Format "2006-01-02" }}
+{{ $cutoff := (now.AddDate 0 0 14).Format "2006-01-02" }}
+
+{{/* Overlap, not "starts within": a five-day conference that opened yesterday
+     is on this week, and dropping it because its START is behind us is exactly
+     the bug a reader would notice. Dates are ISO strings, which compare
+     correctly as strings. */}}
+{{ $soon := slice }}
+{{ range $cal.events }}
+  {{ $end := .endDate | default .date }}
+  {{ if and (ge $end $today) (le .date $cutoff) }}
+    {{ $soon = $soon | append . }}
+  {{ end }}
+{{ end }}
+
+{{ with $soon }}
+<section class="band">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <h2>Happening in the next two weeks</h2>
+        <p>Meetups from Java User Groups worldwide, plus the conferences and workshops on the calendar.</p>
+      </div>
+      <a class="more" href="{{ "calendar/" | relURL }}">Full calendar &rarr;</a>
+    </div>
+
+    {{/* One row that scrolls sideways rather than a grid that wraps: the band is
+         a glance at what is coming, and a wrapped second row of eleven meetups
+         is a list, which is what /calendar/ is for. */}}
+    <ul class="event-strip">
+      {{ range . }}
+        <li class="event-strip__item" style="--cal-dot: hsl({{ .hue }} 62% 46%)">
+          <span class="event-strip__date">{{ .dateShort }}</span>
+          {{ if .url }}
+            <a class="event-strip__title" href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+          {{ else }}
+            <span class="event-strip__title">{{ .title }}</span>
+          {{ end }}
+          <p class="event-strip__meta">
+            {{/* A meetup's "group" is a JUG's name and reads as one; a
+                 hand-added event's is its type ("Conference", "Workshop"),
+                 which is a label -- same distinction the agenda makes. */}}
+            <span class="event-strip__group{{ if ne .kind "meetup" }} event-strip__group--type{{ end }}">{{ .group }}</span>
+            {{ $where := or .place .country }}
+            {{ with $where }}<span class="event-strip__where">{{ . }}</span>{{ end }}
+            {{/* Only a timed event says when: a conference's day range is
+                 already the badge above. */}}
+            {{ if eq .kind "meetup" }}<span class="event-strip__time">{{ .time }}</span>{{ end }}
+          </p>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}
