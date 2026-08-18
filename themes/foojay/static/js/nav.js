@@ -96,6 +96,42 @@
     if (!isMobile() && document.body.dataset.navOpen === 'true') setDrawer(false);
   });
 
+  /* Collapsible header search. The field is a magnifier until asked for, so
+     the bar does not carry an always-open 210px input; the drawer copy is left
+     alone because CSS keeps it open there. The button is a real submit, so a
+     no-JS visitor lands on the search page instead of poking a dead icon —
+     which is why "open" is a preventDefault on the FIRST click only. */
+  var searchForms = Array.prototype.slice.call(header.querySelectorAll('[data-search]'))
+    .filter(function (form) { return !form.closest('.header-actions--mobile'); });
+
+  searchForms.forEach(function (form) {
+    var trigger = form.querySelector('[data-search-toggle]');
+    var input   = form.querySelector('input[type="search"]');
+    if (!trigger || !input) return;
+
+    function setOpen(open) {
+      form.dataset.open = open ? 'true' : 'false';
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) input.focus(); else input.blur();
+    }
+
+    trigger.addEventListener('click', function (e) {
+      var open = form.dataset.open === 'true';
+      // Open, or close again when there is nothing to search for. With a query
+      // typed, the click falls through and the form submits.
+      if (!open || !input.value.trim()) { e.preventDefault(); setOpen(!open); }
+    });
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { setOpen(false); trigger.focus(); }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (form.dataset.open !== 'true' || form.contains(e.target)) return;
+      if (!input.value.trim()) setOpen(false);
+    });
+  });
+
   // Subtle elevation once the page scrolls under the sticky header.
   var onScroll = function () {
     header.dataset.scrolled = window.scrollY > 4 ? 'true' : 'false';

@@ -172,9 +172,11 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 .logo:hover { text-decoration: none; color: var(--ink); }
 .logo__mark { width: 34px; height: 34px; }
 /* The logo PNG carries the wordmark, so it is sized by height and replaces the
-   text mark entirely. */
-.logo__img { height: 34px; width: auto; }
-.site-footer .logo__img { height: 30px; }
+   text mark entirely. The file is cropped to the artwork (no transparent
+   margin), so these heights are the height the mark actually renders at —
+   re-export a padded PNG and it silently shrinks again. */
+.logo__img { height: 36px; width: auto; }
+.site-footer .logo__img { height: 44px; }
 .logo__word {
   font-family: var(--font-display);
   font-size: 1.4rem; font-weight: 500; letter-spacing: -.02em; line-height: 1;
@@ -190,7 +192,11 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 }
 
 /* Primary nav -------------------------------------------------- */
-.primary-nav { margin-left: auto; }
+/* The nav sits right after the brand and the free space collects before the
+   actions, rather than `margin-left: auto` on the nav pushing every item to the
+   far right — which left a void beside the logo and made the bar read as one
+   1240px-wide strip on a big screen. */
+.primary-nav { margin-left: .5rem; }
 .primary-nav__list { display: flex; align-items: center; gap: .15rem; list-style: none; margin: 0; padding: 0; }
 
 .nav-link {
@@ -301,20 +307,42 @@ a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); 
 
 /* Header actions ----------------------------------------------- */
 .header-actions { display: flex; align-items: center; gap: .6rem; flex: 0 0 auto; }
+.site-header__inner > .header-actions { margin-left: auto; }
 /* The drawer copy exists only for the <=900px off-canvas menu. */
 .header-actions--mobile { display: none; }
 
-.site-search { position: relative; }
+/* Collapsed to its magnifier until asked for — see search-form.html. The input
+   stays in the DOM (and in the tab order only when open) so the form still
+   submits, and so no layout jump happens on expand. */
+.site-search { position: relative; display: flex; align-items: center; gap: .35rem; }
 .site-search input {
   font: inherit; font-size: .92rem;
-  width: 150px; padding: .5rem .8rem;
+  /* `visibility` rather than only opacity: a 0-width invisible input would
+     otherwise still be a tab stop. */
+  width: 0; padding: .5rem 0; opacity: 0; visibility: hidden;
   background: var(--surface-sunken);
   border: 1px solid transparent; border-radius: 999px;
   color: var(--ink);
-  transition: width .2s var(--ease), background .15s var(--ease), border-color .15s var(--ease);
+  transition: width .2s var(--ease), padding .2s var(--ease), opacity .15s var(--ease),
+              visibility .2s var(--ease), background .15s var(--ease), border-color .15s var(--ease);
 }
 .site-search input::placeholder { color: var(--ink-muted); }
-.site-search input:focus { width: 210px; background: var(--surface); border-color: var(--border-strong); outline-offset: 0; }
+.site-search[data-open="true"] input {
+  width: 210px; padding: .5rem .9rem; opacity: 1; visibility: visible;
+  background: var(--surface); border-color: var(--border-strong);
+}
+.site-search input:focus { outline-offset: 0; }
+
+.site-search__toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex: 0 0 auto;
+  background: none; border: 1px solid var(--border); border-radius: 999px;
+  color: var(--ink-soft); cursor: pointer;
+  transition: border-color .15s var(--ease), color .15s var(--ease), background .15s var(--ease);
+}
+.site-search__toggle:hover { border-color: var(--brand-accent); color: var(--brand-accent-strong); background: var(--brand-accent-soft); }
+.site-search__toggle svg { width: 19px; height: 19px; }
+.site-search[data-open="true"] .site-search__toggle { border-color: var(--border-strong); color: var(--ink); }
 
 .btn {
   display: inline-flex; align-items: center; gap: .45rem;
@@ -771,7 +799,7 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 
 @media (max-width: 1080px) {
   .header-actions .btn { display: none; }
-  .site-search input { width: 128px; }
+  .site-search[data-open="true"] input { width: 160px; }
 }
 
 @media (max-width: 960px) {
@@ -831,7 +859,11 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   .site-header__inner > .header-actions { display: none; }
   .primary-nav .header-actions--mobile { display: flex; position: static; flex-direction: column; align-items: stretch; gap: .75rem; margin-top: 1.25rem; }
   .primary-nav .header-actions--mobile .btn { display: inline-flex; justify-content: center; }
-  .primary-nav .header-actions--mobile .site-search input { width: 100%; }
+  .primary-nav .header-actions--mobile .site-search { display: flex; }
+  .primary-nav .header-actions--mobile .site-search label { flex: 1 1 auto; min-width: 0; }
+  .primary-nav .header-actions--mobile .site-search input {
+    width: 100%; padding: .5rem .9rem; opacity: 1; visibility: visible;
+  }
 }
 
 @media (max-width: 560px) {
