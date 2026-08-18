@@ -1,7 +1,12 @@
 {{ define "main" }}
 <div class="layout-with-sidebar">
   <div class="content-col">
-    <div class="author-profile">
+    {{/* An author with no photo gets an explicitly EMPTY image meta rather
+         than none: with no meta at all, Pagefind falls back to scanning the
+         page and hands the search result the hero of whatever article happens
+         to sit first in the grid below. The search page treats "" as no
+         image, which is the honest answer here. */}}
+    <div class="author-profile"{{ if not (or .Params.avatarFull .Params.avatar) }} data-pagefind-meta="image:"{{ end }}>
       {{/* Explicit data-pagefind-meta so Pagefind's site search uses the
            author's own photo as the result thumbnail. Without this, Pagefind's
            automatic image detection scans the whole indexed page -- including

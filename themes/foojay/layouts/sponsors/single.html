@@ -53,9 +53,13 @@
 
     <div class="sponsor-profile">
       {{/* Pagefind picks a result thumbnail by scanning the indexed page; without
-           this the article grid further down can win over the sponsor's own logo. */}}
-      <div class="sponsor-profile__head" data-pagefind-meta="image[src]">
-        {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--large") }}
+           this the article grid further down wins over the sponsor's own logo.
+           The meta has to sit on the <img> itself -- on this wrapper it reads a
+           `src` that isn't there and stores an empty string, which silently
+           means "no thumbnail". That IS what a sponsor with no logo wants,
+           though, so the empty form is kept for exactly that case. */}}
+      <div class="sponsor-profile__head"{{ if not .Params.logo }} data-pagefind-meta="image:"{{ end }}>
+        {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--large" "pagefindImage" true) }}
         <div class="sponsor-profile__intro">
           {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ title . }} Sponsor</span>{{ end }}
           <h1>{{ .Title }}</h1>

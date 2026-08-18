@@ -17,10 +17,14 @@
 
     <div class="board-profile">
       {{/* Pagefind picks a result thumbnail by scanning the indexed page; this
-           makes it the member's own logo rather than whatever image the
-           footer or a widget happens to supply. */}}
-      <div class="board-profile__head" data-pagefind-meta="image[src]">
-        {{ partial "board-logo.html" (dict "page" . "class" "board-logo--large") }}
+           makes it the member's own logo rather than whatever image the page
+           happens to supply further down. The meta has to sit on the <img>
+           itself -- on this wrapper it reads a `src` that isn't there and
+           stores an empty string, which silently means "no thumbnail". That
+           IS what a member with no logo wants, though, so the empty form is
+           kept for exactly that case. */}}
+      <div class="board-profile__head"{{ if not .Params.logo }} data-pagefind-meta="image:"{{ end }}>
+        {{ partial "board-logo.html" (dict "page" . "class" "board-logo--large" "pagefindImage" true) }}
         <div class="board-profile__intro">
           <span class="board-badge">Advisory Board member</span>
           <h1>{{ .Title }}</h1>

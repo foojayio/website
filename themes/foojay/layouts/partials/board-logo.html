@@ -6,11 +6,15 @@
        (Chronicle, Gradle) disappears on the light theme. Same reasoning, and
        deliberately the same shape, as partials/sponsor-logo.html.
 
-       Params: page (the member Page), class (extra CSS class, optional). */ -}}
+       Params: page (the member Page), class (extra CSS class, optional),
+       pagefindImage (optional; tags this img as the page's Pagefind result
+       thumbnail -- only the profile page passes it, since the meta key is
+       taken by whichever element carries it first and the grids would
+       otherwise claim it). */ -}}
 {{- $p := .page -}}
 <div class="board-logo{{ with .class }} {{ . }}{{ end }}"{{ with $p.Params.logoBackground }} style="background-color: {{ . }}"{{ end }}>
   {{- with $p.Params.logo -}}
-  <img src="{{ partial "resource-url.html" (dict "page" $p "src" .) }}" alt="{{ $p.Title }}" loading="lazy" decoding="async">
+  <img{{ if $.pagefindImage }} data-pagefind-meta="image[src]"{{ end }} src="{{ partial "resource-url.html" (dict "page" $p "src" .) }}" alt="{{ $p.Title }}" loading="lazy" decoding="async">
   {{- else -}}
   <span class="board-logo__fallback">{{ substr $p.Title 0 1 }}</span>
   {{- end -}}
