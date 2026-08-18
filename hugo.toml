@@ -188,18 +188,24 @@ enableRobotsTXT = true
   parent = "Resources"
   url = "/java-almanac/"
   weight = 22
+  [menu.main.params]
+    desc = "Every Java version, its docs and API diffs, in one place"
 
 [[menu.main]]
   name = "Java User Groups"
   parent = "Resources"
   url = "/jugs/"
   weight = 23
+  [menu.main.params]
+    desc = "Find a JUG near you on the world map"
 
 [[menu.main]]
   name = "Java Champions"
   parent = "Resources"
   url = "/java-champions/"
   weight = 24
+  [menu.main.params]
+    desc = "The community members recognized by the Java Champions program"
 
 # ---------------------------------------------------------------------------
 # Java Basics: the deep Quick Start tree. Third level renders as columns, so
