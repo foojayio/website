@@ -38,7 +38,11 @@
 ## Missing Content
 
 * [X] log4j-cve.md
-* [ ] advisory board text
+* [X] advisory board text -> `content/pages/board.md` (intro + grid) with one
+  page per member under `content/pages/board/`, rendered by
+  `themes/foojay/layouts/board/{list,single}.html`. WordPress hid all 19 in an
+  accordion; splitting them gives each a linkable page. Adding a member is a
+  copy of `template/board-member.md` plus a logo -- no list to update.
 * [X] Foojay.io AI Portal -> `content/pages/ai.md` + `themes/foojay/layouts/ai/single.html`
   * On WordPress the page is the **"Machine Learning" category landing page**
     (WP category slug `ai-ml`, 66 posts) with an editorial intro on top -- not a

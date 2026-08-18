@@ -66,6 +66,7 @@ public class ValidateFrontmatter {
         problems.addAll(checkDir(Path.of("content/sponsors"), List.of("title", "tier")));
         problems.addAll(checkRelatedPosts(postsDir, postSlugs));
         problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs()));
+        problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs()));
 
         if (problems.isEmpty()) {
@@ -166,6 +167,37 @@ public class ValidateFrontmatter {
                                     + "' (expected a folder name under content/authors/)");
                         }
                     }
+                }
+            }
+        }
+        return problems;
+    }
+
+    /**
+     * An advisory board member is a page under content/pages/board/ carrying
+     * `type: "board"` -- that type is how partials/board-members.html finds the
+     * members, and how layouts/board/single.html gets used instead of the plain
+     * page template. Miss it and the member simply doesn't appear on /board/,
+     * the same silent-drop failure the two checks above exist for.
+     *
+     * `logo` is required for the same reason it is on a sponsor: the tile falls
+     * back to an initial, which looks like a design choice rather than a
+     * mistake, so nothing about the page says the logo was forgotten.
+     */
+    static List<String> checkBoardMembers(Path boardDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(boardDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(boardDir)) {
+            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                Map<String, Object> fm = readFrontmatter(file);
+                if (fm == null) continue;
+                if (!"board".equals(String.valueOf(fm.get("type")))) {
+                    problems.add(file + ": board members need `type: \"board\"` to be listed on /board/");
+                }
+                Object logo = fm.get("logo");
+                if (logo == null || logo.toString().isBlank()) {
+                    problems.add(file + ": missing/empty required field 'logo'");
                 }
             }
         }

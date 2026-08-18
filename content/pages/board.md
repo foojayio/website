@@ -1,10 +1,15 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Foojay Advisory Board"
+description: "The organizations that make up the Foojay Advisory Board, meeting periodically on Foojay's roadmap and direction."
 canonical: "https://foojay.io/board/"
 url: "/board/"
 aliases:
   - "/board/"
+type: "board"
+layout: "list"
 frozen: false
 ---
 
+Together, the organizations below make up the Foojay Advisory Board, holding periodic meetings on Foojay's roadmap and direction.
+
+OpenJDK technology organizations actively contributing content to Foojay are welcome to join the Foojay Advisory Board.

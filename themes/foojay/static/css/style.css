@@ -1454,3 +1454,126 @@ body.lightbox-open { overflow: hidden; }
   --tier-silver: #a7b3c0;
   --tier-bronze: #cd8b4e;
 }
+
+/* ---------------------------------------------------------------------------
+   Advisory board: /board/ and the per-member pages under it.
+
+   Deliberately close to the sponsor styling (same card rhythm, same logo-tile
+   treatment) without reusing the .sponsor-* classes: those carry tier accents
+   and article counts a board member has neither of, so sharing them would mean
+   a tier colour or a badge leaking onto a page that has no tiers. */
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.board-card {
+  display: flex; flex-direction: column;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--brand-accent);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.board-card__link { text-decoration: none; color: inherit; }
+.board-card__title { margin: .9rem 0 0; font-size: 1.15rem; line-height: 1.3; }
+.board-card__desc { margin: .5rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+/* Pushed to the bottom so the cards line up however long a description runs. */
+.board-card__actions {
+  display: flex; flex-wrap: wrap; gap: .9rem;
+  margin: auto 0 0; padding-top: .9rem;
+  font-size: .9rem; font-weight: 600;
+}
+
+/* Logos are the members' own artwork, a mix of dark-on-transparent and
+   light-on-transparent, so the tile paints the optional `logoBackground` from
+   frontmatter. object-fit: contain keeps a very wide wordmark and a square
+   icon on the same visual footing. */
+.board-logo {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 84px;
+  padding: .9rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.board-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.board-logo__fallback { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--ink-muted); }
+.board-logo--large { width: 180px; height: 130px; flex: 0 0 auto; }
+.board-logo--mini { width: 52px; height: 52px; padding: .35rem; flex: 0 0 auto; border-radius: 8px; }
+
+/* Same 88ch reading measure as .page-single: a member page is mostly prose
+   (the About text and the quote), and the mini-list at the foot wraps. */
+.board-single { max-width: 88ch; }
+
+.board-back { margin: 0 0 1.25rem; }
+.board-back a { font-weight: 600; font-size: .95rem; }
+.board-back--foot { margin: 2.5rem 0 0; }
+
+.board-profile {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.board-profile__head { display: flex; gap: 1.5rem; align-items: center; }
+.board-profile__intro h1 { margin: .5rem 0 0; font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+.board-profile__views { margin-top: .5rem; }
+.board-profile__links {
+  display: flex; flex-wrap: wrap; gap: .6rem;
+  margin-top: 1.25rem;
+}
+.board-profile__links a {
+  padding: .4rem .85rem;
+  font-size: .9rem; font-weight: 600;
+  border: 1px solid var(--border); border-radius: 999px;
+  text-decoration: none;
+}
+.board-profile__links a:hover { color: var(--brand-accent-strong); border-color: var(--border-strong); }
+
+.board-badge {
+  display: inline-block;
+  padding: .2rem .65rem;
+  font-family: var(--font-display);
+  font-size: .78rem; font-weight: 700; letter-spacing: .02em;
+  color: #fff; background: var(--ink-muted);
+  border-radius: 999px;
+}
+
+.board-section { margin: 2.5rem 0; }
+.board-section h2 { font-size: 1.35rem; margin: 0 0 1rem; }
+.prose.board-section h2 { margin-top: 0; }
+
+/* The member's statement about Foojay. A <figure>, so the attribution is a
+   real <figcaption> rather than a paragraph that happens to sit underneath. */
+.board-quote { margin: 0; }
+.board-quote blockquote {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface-sunken);
+  border-left: 3px solid var(--brand-accent);
+  border-radius: 0 10px 10px 0;
+  font-size: 1.05rem; line-height: 1.6;
+}
+.board-quote blockquote p { margin: 0; }
+.board-quote blockquote p + p { margin-top: .9rem; }
+.board-quote figcaption { margin-top: .75rem; color: var(--ink-muted); font-size: .9rem; }
+
+.board-sponsor-note { color: var(--ink-soft); }
+
+.board-mini-list { display: flex; flex-wrap: wrap; gap: 1rem; }
+.board-mini {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .5rem .85rem .5rem .5rem;
+  text-decoration: none; color: inherit;
+  border: 1px solid var(--border); border-radius: 999px;
+  font-size: .9rem; font-weight: 600;
+}
+.board-mini:hover { border-color: var(--border-strong); }
+
+@media (max-width: 560px) {
+  .board-profile__head { flex-direction: column; align-items: flex-start; }
+  .board-logo--large { width: 100%; }
+}

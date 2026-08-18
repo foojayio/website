@@ -1,0 +1,39 @@
+{{ define "main" }}
+{{/* /board/ -- the board overview. content/pages/board.md holds the intro and
+     nothing else: the grid, the count and every card below are derived from
+     the member pages in content/pages/board/, the same derive-don't-store
+     idiom the AI portal and the sponsor pages use. Adding a member is one new
+     markdown file plus a logo; there is no list here to keep in step. */}}
+{{ $members := partial "board-members.html" . }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow">Friends of OpenJDK</span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    <div class="page-head__meta">
+      <p>{{ len $members }} organization{{ if ne (len $members) 1 }}s{{ end }} on the board.</p>
+    </div>
+    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <div class="board-grid">
+    {{ range $members }}
+    {{ $m := . }}
+    <article class="board-card">
+      <a class="board-card__link" href="{{ .RelPermalink }}">
+        {{ partial "board-logo.html" (dict "page" .) }}
+        <h2 class="board-card__title">{{ .Title }}</h2>
+      </a>
+      {{ with .Params.description }}<p class="board-card__desc">{{ . }}</p>{{ end }}
+      <div class="board-card__actions">
+        <a href="{{ .RelPermalink }}">Read more</a>
+        {{ with .Params.website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $m.Params.websiteLabel | default "Website" }}</a>{{ end }}
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

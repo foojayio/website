@@ -1,0 +1,8 @@
+{{- /* Every board member page, alphabetically. The single definition of "who
+       is on the board": content/pages/board.md lists them, a member page links
+       to the others, and neither stores a list -- adding
+       content/pages/board/<slug>.md is the whole job.
+
+       Members are the `board`-typed pages other than the /board/ landing page
+       itself, which shares the type so it can use layouts/board/list.html. */ -}}
+{{- return (where (where site.RegularPages "Type" "board") "Layout" "!=" "list").ByTitle -}}

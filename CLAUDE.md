@@ -31,7 +31,8 @@ should catch a mistake at PR time rather than letting it fail silently.
 ## What exists so far
 
 - **Hugo skeleton**: `hugo.toml`, `themes/foojay/` (layouts + `static/css/style.css`),
-  and `template/` (article / author / page starter files + the category list;
+  and `template/` (article / author / page / board-member starter files + the
+  category list;
   see `template/README.md`). There is deliberately no `archetypes/` folder —
   nothing runs `hugo new`, and keeping a second set of starter files under a
   Hugo-specific name meant two places to look. They drifted: the post archetype
@@ -514,6 +515,37 @@ should catch a mistake at PR time rather than letting it fail silently.
   instead — that's two files to edit per rotation and, worse, two to remember to
   unset, which is exactly how a "featured" author silently stays featured
   forever.
+- **The Advisory Board is a folder, not a list.** `/board/`
+  (`content/pages/board.md`, `type: "board"` + `layout: "list"` ->
+  `themes/foojay/layouts/board/list.html`) holds the two-paragraph intro and
+  nothing else. Each member is its own page at `/board/<slug>/`
+  (`content/pages/board/<slug>.md`, `type: "board"` ->
+  `themes/foojay/layouts/board/single.html`), and `partials/board-members.html`
+  is the single definition of who is on the board -- the overview grid, the "19
+  organizations" count and the "other board members" strip on a member page all
+  come from it. Adding a member is one markdown file (copy
+  `template/board-member.md`) plus a logo in `static/images/pages/board/`;
+  there is no list to edit and no count to update. `ValidateFrontmatter.java`
+  fails the PR on a member missing `type: "board"` or `logo`, because both fail
+  silently -- a missing type drops the member off `/board/` entirely, and a
+  missing logo renders an initial that looks deliberate.
+
+  WordPress put all 19 members in one accordion on `/board/`, so a member could
+  not be linked to and their quote was a click away. Splitting them is the same
+  move `/pedia/` makes, and it is why `content/pages/board.md` stays the
+  landing page rather than becoming a `content/board/` section: the page has
+  58,754 WordPress views recorded under the `pages/board` key, and the section
+  form would have renamed that key (see "read counter" below). Member pages are
+  counted automatically as `pages/<slug>` -- they are under `content/pages/`,
+  which `views-key.html` already counts.
+
+  Logos carry `logoBackground` for the same reason sponsor logos do: the
+  artwork is a mix of dark-on-transparent (white tile) and white-on-transparent
+  (Chronicle, Gradle -- a tile in the brand's own dark tone), and without it one
+  or the other disappears depending on the theme. A member that also sponsors
+  Foojay links to its sponsor profile, matched on title rather than recorded in
+  frontmatter, so a new sponsor bundle wires itself up.
+
 - **The AI portal is a derived category landing page.** `/ai/`
   (`content/pages/ai.md`, `type: "ai"` -> `themes/foojay/layouts/ai/single.html`)
   is what WordPress serves as the **"Machine Learning" category page** (WP slug

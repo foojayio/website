@@ -9,6 +9,7 @@ file you need, fill it in, open a pull request.
 | `post.md` | `draft/<your-article-slug>/index.md` | **An article.** Start here — rename it to `index.md`. |
 | `categories.md` | *(nowhere — read it)* | The list of categories already in use. Reuse one where it fits. |
 | `page.md` | `content/pages/...` | A static site page. **Maintainers only**, not article contributors. |
+| `board-member.md` | `content/pages/board/<slug>.md` | An **Advisory Board member**. **Maintainers only.** |
 
 Full walkthrough: [How To Submit Your Next Article On Foojay.io](https://foojay.io/today/how-to-submit-your-next-article-on-foojay-io/).
 
