@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Getting Started with Java"
+description: "Install Java, then go from choosing an editor to using streams in under 30 minutes with the Foojay Java Quick Start."
 canonical: "https://foojay.io/java-quick-start/"
 url: "/java-quick-start/"
 aliases:
@@ -12,8 +12,7 @@ frozen: false
 
 **Let friends of OpenJDK, i.e., the open source Java development kit that includes the Java programming language, help you get started!**  
 
-1. Install Java
----------------
+## 1. Install Java
 
 Let's first check if you already have Java installed. If not, we provide step-by-step instructions for each operating system below.
 
@@ -27,8 +26,7 @@ d. [Install Java (Linux)](https://foojay.io/java-quick-start/install-java/instal
 
 e. [Find Another Java Version](https://foojay.io/java-quick-start/install-java/find-another-java-version/)
 
-2. Get Started
---------------
+## 2. Get Started
 
 In ***less than 30 minutes***, let's go from choosing an editor to using the latest Java language features.
 
@@ -54,8 +52,7 @@ j. [Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using
 
 k. [What's Next?](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next/) (00:00:035)
 
-3. Next Steps
--------------
+## 3. Next Steps
 
 You've now absorbed the basics of the Java programming language!
 
@@ -65,9 +62,8 @@ Here are some of the next steps you can take with the knowledge you now have.
 
 Here on Foojay.io you can find hundreds of blog posts, but we filtered out the ones that will help you to get started with Java:
 
-[Foojay Today Posts for Java Beginners](/today/category/java-beginner/){#/today/category/java-beginner/}
+[Foojay Today Posts for Java Beginners](/today/category/java-beginner/)
 
 ### Learn more from on-line tutorials.
 
-Of course, there are many more tutorials online, [we made a selection for you](/java-quick-start/other-tutorials/){#/java-quick-start/other-tutorials/}.  
-RSS Feed
+Of course, there are many more tutorials online, [we made a selection for you](/java-quick-start/other-tutorials/).
