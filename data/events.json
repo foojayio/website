@@ -1,4 +1,431 @@
 {
-  "generatedAt": null,
-  "groups": []
+  "generatedAt": "2026-08-18T16:14:18Z",
+  "source": "meetup.com public iCal feeds (seed data -- replaced by scripts/FetchMeetupEvents.java once a Meetup Pro OAuth token exists)",
+  "groups": [
+    {
+      "slug": "jug-hamburg",
+      "name": "Java User Group Hamburg",
+      "url": "https://www.meetup.com/jug-hamburg/",
+      "jug": "HamburgJUG",
+      "events": [
+        {
+          "title": "LLM Oberservability",
+          "url": "https://www.meetup.com/jug-hamburg/events/316034004/",
+          "startTime": "2026-08-20T19:00:00+02:00",
+          "endTime": "2026-08-20T20:30:00+02:00",
+          "venue": null,
+          "city": null
+        }
+      ]
+    },
+    {
+      "slug": "Java-User-Group-Hannover",
+      "name": "Java User Group Hannover",
+      "url": "https://www.meetup.com/Java-User-Group-Hannover/",
+      "jug": "HannoverJUG",
+      "events": [
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/315401023/",
+          "startTime": "2026-08-28T19:00:00+02:00",
+          "endTime": "2026-09-04T22:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcmbhc/",
+          "startTime": "2026-09-25T19:00:00+02:00",
+          "endTime": "2026-10-02T22:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcnbnc/",
+          "startTime": "2026-10-30T19:00:00+01:00",
+          "endTime": "2026-11-06T22:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcpbkc/",
+          "startTime": "2026-11-27T19:00:00+01:00",
+          "endTime": "2026-12-04T22:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcqbhc/",
+          "startTime": "2026-12-25T19:00:00+01:00",
+          "endTime": "2027-01-01T22:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykccbmc/",
+          "startTime": "2027-01-29T19:00:00+01:00",
+          "endTime": "2027-02-05T22:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcdbjc/",
+          "startTime": "2027-02-26T19:00:00+01:00",
+          "endTime": "2027-03-05T22:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcfbjc/",
+          "startTime": "2027-03-26T19:00:00+01:00",
+          "endTime": "2027-04-02T23:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcgbnc/",
+          "startTime": "2027-04-30T19:00:00+02:00",
+          "endTime": "2027-05-07T22:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Java Stammtisch",
+          "url": "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykchblc/",
+          "startTime": "2027-05-28T19:00:00+02:00",
+          "endTime": "2027-06-04T22:00:00+02:00",
+          "venue": null,
+          "city": null
+        }
+      ]
+    },
+    {
+      "slug": "jugstuttgart",
+      "name": "Java User Group Stuttgart",
+      "url": "https://www.meetup.com/jugstuttgart/",
+      "jug": "StuttgartJUG",
+      "events": [
+        {
+          "title": "AI-Driven Development Meets Jakarta EE: Why Standards Matter More Than Ever",
+          "url": "https://www.meetup.com/jugstuttgart/events/315684595/",
+          "startTime": "2026-10-08T18:30:00+02:00",
+          "endTime": "2026-10-08T20:30:00+02:00",
+          "venue": null,
+          "city": null
+        }
+      ]
+    },
+    {
+      "slug": "jug-bb",
+      "name": "Java Usergroup Berlin-Brandenburg",
+      "url": "https://www.meetup.com/jug-bb/",
+      "jug": "Berlin-BrandenburgJUG",
+      "events": [
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/316084501/",
+          "startTime": "2026-09-01T18:30:00+02:00",
+          "endTime": "2026-09-01T21:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/315816842/",
+          "startTime": "2026-10-06T18:30:00+02:00",
+          "endTime": "2026-10-06T21:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/316084510/",
+          "startTime": "2026-11-03T18:30:00+01:00",
+          "endTime": "2026-11-03T21:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/316084512/",
+          "startTime": "2026-12-01T18:30:00+01:00",
+          "endTime": "2026-12-01T21:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/316084513/",
+          "startTime": "2027-01-05T18:30:00+01:00",
+          "endTime": "2027-01-05T21:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/kvnqltykcdbdb/",
+          "startTime": "2027-02-02T18:30:00+01:00",
+          "endTime": "2027-02-02T21:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/kvnqltykcfbdb/",
+          "startTime": "2027-03-02T18:30:00+01:00",
+          "endTime": "2027-03-02T21:00:00+01:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/kvnqltykcgbjb/",
+          "startTime": "2027-04-06T18:30:00+02:00",
+          "endTime": "2027-04-06T21:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/kvnqltykchbgb/",
+          "startTime": "2027-05-04T18:30:00+02:00",
+          "endTime": "2027-05-04T21:00:00+02:00",
+          "venue": null,
+          "city": null
+        },
+        {
+          "title": "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+          "url": "https://www.meetup.com/jug-bb/events/kvnqltykcjbcb/",
+          "startTime": "2027-06-01T18:30:00+02:00",
+          "endTime": "2027-06-01T21:00:00+02:00",
+          "venue": null,
+          "city": null
+        }
+      ]
+    },
+    {
+      "slug": "orlando-jug-java-user-group",
+      "name": "Orlando JUG (Java User Group)",
+      "url": "https://www.meetup.com/orlando-jug-java-user-group/",
+      "jug": "OrlandoJUG",
+      "events": [
+        {
+          "title": "Power and Perils of AI Aided Coding",
+          "url": "https://www.meetup.com/orlando-jug-java-user-group/events/315768313/",
+          "startTime": "2026-08-27T18:30:00-04:00",
+          "endTime": "2026-08-27T20:30:00-04:00",
+          "venue": null,
+          "city": null
+        }
+      ]
+    },
+    {
+      "slug": "ottawa-java-user-group",
+      "name": "Ottawa Java User Group",
+      "url": "https://www.meetup.com/ottawa-java-user-group/",
+      "jug": "OttawaJUG",
+      "events": [
+        {
+          "title": "Cold Starts, Hot JVMs & Modern Java Surprises",
+          "url": "https://www.meetup.com/ottawa-java-user-group/events/315767728/",
+          "startTime": "2026-08-24T18:00:00-04:00",
+          "endTime": "2026-08-24T20:30:00-04:00",
+          "venue": null,
+          "city": null
+        }
+      ]
+    },
+    {
+      "slug": "toronto-java-users-group",
+      "name": "Toronto Java Users Group",
+      "url": "https://www.meetup.com/toronto-java-users-group/",
+      "jug": "TorontoJUG",
+      "events": [
+        {
+          "title": "Modern Java Puzzlers",
+          "url": "https://www.meetup.com/toronto-java-users-group/events/315973447/",
+          "startTime": "2026-08-27T18:30:00-04:00",
+          "endTime": "2026-08-27T20:30:00-04:00",
+          "venue": null,
+          "city": null
+        }
+      ]
+    },
+    {
+      "slug": "almaty-java-user-group",
+      "name": "Almaty Java Community",
+      "url": "https://www.meetup.com/almaty-java-user-group/",
+      "jug": "AlmatyJUG",
+      "events": []
+    },
+    {
+      "slug": "belgian-java-user-group",
+      "name": "Belgian Java User Group",
+      "url": "https://www.meetup.com/belgian-java-user-group/",
+      "jug": "BelgianJUG",
+      "events": []
+    },
+    {
+      "slug": "bpjavabar",
+      "name": "Budapest JavaBár",
+      "jug": "BpJavaBar",
+      "error": "ValueError: no such Meetup group (HTTP 404) -- slug is stale in jugs.yaml"
+    },
+    {
+      "slug": "ChicagoJUG",
+      "name": "Chicago Java Users Group",
+      "url": "https://www.meetup.com/ChicagoJUG/",
+      "jug": "ChicagoJUG",
+      "events": []
+    },
+    {
+      "slug": "jugbremen",
+      "name": "Java User Group (JUG) Bremen/Oldenburg",
+      "url": "https://www.meetup.com/jugbremen/",
+      "jug": "BremenOldenburgJUG",
+      "events": []
+    },
+    {
+      "slug": "Java-User-Group-Augsburg",
+      "name": "Java User Group Augsburg",
+      "jug": "AugsburgJUG",
+      "error": "ValueError: no such Meetup group (HTTP 404) -- slug is stale in jugs.yaml"
+    },
+    {
+      "slug": "Java-User-Group-Bielefeld",
+      "name": "Java User Group Bielefeld",
+      "url": "https://www.meetup.com/Java-User-Group-Bielefeld/",
+      "jug": "BielefeldJUG",
+      "events": []
+    },
+    {
+      "slug": "JUG-Dortmund",
+      "name": "Java User Group Dortmund",
+      "url": "https://www.meetup.com/JUG-Dortmund/",
+      "jug": "DortmundJUG",
+      "events": []
+    },
+    {
+      "slug": "rheinJUG",
+      "name": "Java User Group Duesseldorf Rhein",
+      "jug": "Duesseldorf_RheinJUG",
+      "error": "ValueError: no such Meetup group (HTTP 404) -- slug is stale in jugs.yaml"
+    },
+    {
+      "slug": "Java-User-Group-Freiburg",
+      "name": "Java User Group Freiburg",
+      "jug": "FreiburgJUG",
+      "error": "ValueError: no such Meetup group (HTTP 404) -- slug is stale in jugs.yaml"
+    },
+    {
+      "slug": "Java-User-Group-Hessen-JUGH",
+      "name": "Java User Group Hessen (JUGH)",
+      "url": "https://www.meetup.com/Java-User-Group-Hessen-JUGH/",
+      "jug": "HessenJUG",
+      "events": []
+    },
+    {
+      "slug": "Java-User-Group-Karlsruhe",
+      "name": "Java User Group Karlsruhe",
+      "url": "https://www.meetup.com/Java-User-Group-Karlsruhe/",
+      "jug": "KarlsruheJUG",
+      "events": []
+    },
+    {
+      "slug": "JUG-Mainz",
+      "name": "Java User Group Mainz",
+      "jug": "MainzJUG",
+      "error": "ValueError: no such Meetup group (HTTP 404) -- slug is stale in jugs.yaml"
+    },
+    {
+      "slug": "Java-User-Group-Munchen-JUGM",
+      "name": "Java User Group München (JUGM)",
+      "url": "https://www.meetup.com/Java-User-Group-Munchen-JUGM/",
+      "jug": "MuenchenJUG",
+      "events": []
+    },
+    {
+      "slug": "Java-User-Group-Saarland-jugsaar",
+      "name": "Java User Group Saarland (JUGSaar)",
+      "url": "https://www.meetup.com/Java-User-Group-Saarland-jugsaar/",
+      "jug": "SaarlandJUG",
+      "events": []
+    },
+    {
+      "slug": "jugthde",
+      "name": "Java User Group Thüringen",
+      "url": "https://www.meetup.com/jugthde/",
+      "jug": "ThueringenJUG",
+      "events": []
+    },
+    {
+      "slug": "javaIL",
+      "name": "Java.IL - the Israeli Java Community",
+      "url": "https://www.meetup.com/javaIL/",
+      "jug": "JavaIL",
+      "events": []
+    },
+    {
+      "slug": "JUG-Bonn",
+      "name": "JUG Bonn",
+      "url": "https://www.meetup.com/JUG-Bonn/",
+      "jug": "BonnJUG",
+      "events": []
+    },
+    {
+      "slug": "jug-nicaragua",
+      "name": "JUG Nicaragua",
+      "url": "https://www.meetup.com/jug-nicaragua/",
+      "jug": "NicaraguaJUG",
+      "events": []
+    },
+    {
+      "slug": "JUG-Nurnberg",
+      "name": "JUG Nürnberg",
+      "url": "https://www.meetup.com/JUG-Nurnberg/",
+      "jug": "NuernbergJUG",
+      "events": []
+    },
+    {
+      "slug": "ManchesterUK-Java-Community",
+      "name": "Manchester Java Community",
+      "url": "https://www.meetup.com/ManchesterUK-Java-Community/",
+      "jug": "ManchesterJavaCommunity",
+      "events": []
+    },
+    {
+      "slug": "nairobi-jvm",
+      "name": "Nairobi Java User Group",
+      "jug": "NairobiJavaCommunity",
+      "error": "ValueError: no such Meetup group (HTTP 404) -- slug is stale in jugs.yaml"
+    },
+    {
+      "slug": "nashvillejug",
+      "name": "Nashville (Not Just) Java Users Group",
+      "url": "https://www.meetup.com/nashvillejug/",
+      "jug": "NashvilleJUG",
+      "events": []
+    },
+    {
+      "slug": "SVQJUG",
+      "name": "Sevilla Java User Group (SVQJUG)",
+      "url": "https://www.meetup.com/SVQJUG/",
+      "jug": "SevillaJUG",
+      "events": []
+    },
+    {
+      "slug": "ValenciaJUG",
+      "name": "ValenciaJUG",
+      "url": "https://www.meetup.com/ValenciaJUG/",
+      "jug": "ValenciaJUG",
+      "events": []
+    }
+  ]
 }

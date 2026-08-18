@@ -65,7 +65,13 @@ public class FetchJugs {
 
     // Matches meetup.com URLs so we can hand FetchMeetupEvents.java a clean
     // group slug without every JUG file needing its own dedicated field for it.
-    static final Pattern MEETUP_URL = Pattern.compile("meetup\\.com/([^/?#]+)", Pattern.CASE_INSENSITIVE);
+    // The optional locale segment is why this isn't just "the first path
+    // segment": Meetup serves a group under /de-DE/JUG-Bonn/ as readily as
+    // /JUG-Bonn/, and two JUG files upstream link the localized form -- taking
+    // the first segment stored `meetup_slug: de-DE` for both, which is not a
+    // group and resolves to nothing at all.
+    static final Pattern MEETUP_URL = Pattern.compile(
+            "meetup\\.com/(?:(?-i:[a-z]{2}-[A-Z]{2})/)?([^/?#]+)", Pattern.CASE_INSENSITIVE);
 
     static final ObjectMapper JSON = new ObjectMapper();
     static final HttpClient HTTP = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(20)).build();

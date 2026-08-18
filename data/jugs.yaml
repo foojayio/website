@@ -250,7 +250,7 @@
   name: Java User Group Bonn
   country: Germany
   website: https://www.meetup.com/de-DE/JUG-Bonn/
-  meetup_slug: de-DE
+  meetup_slug: JUG-Bonn
   meetup_url: https://www.meetup.com/de-DE/JUG-Bonn/
   twitter: JUGBonn
   founded_date: '2018-05-03'
@@ -545,7 +545,7 @@
   name: Java User Group Stuttgart
   country: Germany
   website: https://www.jugs.org
-  meetup_slug: de-DE
+  meetup_slug: jugstuttgart
   meetup_url: https://www.meetup.com/de-DE/jugstuttgart/
   calendar: https://www.meetup.com/de-DE/jugstuttgart/events/ical/
   contact: Michael Paus ; Rainer Anglett
