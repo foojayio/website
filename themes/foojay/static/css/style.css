@@ -798,9 +798,9 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .cal-stats { margin: 0; color: var(--ink-soft); font-size: .95rem; }
 .cal-stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
 
-/* Two ways onto the calendar, so two buttons: a JUG is added upstream in the
-   World Wide JUGs directory, a conference by a pull request here. Wrapped so
-   they sit together rather than inheriting the aside's 1.5rem section gap. */
+/* Two ways onto the calendar, so two buttons: an event by a pull request here,
+   a JUG upstream in the World Wide JUGs directory. Wrapped so they sit together
+   rather than inheriting the aside's 1.5rem section gap. */
 .cal-ctas { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
 /* Side by side in a 300px rail, so they need to be narrower than a default
    button and their labels centred -- .btn is an inline-flex box, so text-align

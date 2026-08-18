@@ -100,12 +100,14 @@
   <div class="calendar" data-calendar>
     <aside class="calendar__aside">
       {{/* The two routes onto this calendar, as two buttons, because they are
-           genuinely different jobs: a JUG's meetups are synced from its feed
-           once its entry exists upstream, while a conference is a pull request
-           against this repo. */}}
+           genuinely different jobs: an event is a pull request against this
+           repo, while a JUG's meetups sync from its own feed once its entry
+           exists upstream. Adding an event leads, and is the accent button,
+           because it is the one a reader of this page can act on today -- the
+           JUG route is for the handful of people who run one. */}}
       <div class="cal-ctas">
-        <a class="btn btn--accent cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs" target="_blank" rel="noopener">+ Add your JUG</a>
-        <a class="btn btn--ghost cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
+        <a class="btn btn--accent cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
+        <a class="btn btn--ghost cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs" target="_blank" rel="noopener">+ Add your JUG</a>
       </div>
 
       {{ with $conferences }}
