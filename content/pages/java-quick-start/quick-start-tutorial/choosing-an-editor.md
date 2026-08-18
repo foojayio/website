@@ -10,7 +10,7 @@ frozen: false
 weight: 1
 ---
 
-This tutorial uses single Java source files, i.e., not projects, which means that you can use any text editor, such as Notepad on Windows, and you do not need a dedicated development environment.
+This tutorial uses single Java source files, i.e., not full projects. This means that you can use any text editor, such as Notepad on Windows, and you do not have to install a dedicated development environment, but it's recommended to use an Integrated Development Environment (IDE) or a code editor with Java support. These tools provide features like syntax highlighting, code completion, and debugging, which can significantly enhance your coding experience.
 
 The videos in this tutorial are created with Visual Studio Code (VSC), though others will work just as well. VSC is a lightweight free Integrated Development Environment (IDE) that can be extended with plugins for various programming languages and other use cases. You can download it from [Visual Studio Code by Microsoft](https://code.visualstudio.com/).
 

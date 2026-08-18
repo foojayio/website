@@ -18,7 +18,12 @@ Traditionally, we start our first experiment with a "Hello World" application.
 Create a new file, named "HelloWorld.java" and add the following code:
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
- public class HelloWorld { public static void main (String[] args) { String txt = "Hello World"; System.out.println(txt); } }
+ public class HelloWorld {
+     public static void main (String[] args) {
+         String txt = "Hello World";
+         System.out.println(txt);
+     }
+ }
 </div>
 
 1. **Public Class.** Java requires us to "package" our code in a public class. By convention, this has the same name as the file, which you see in this first line. All our code starts after this line, after which we finish the class with a closing bracket `}`.

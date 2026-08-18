@@ -274,8 +274,8 @@ should catch a mistake at PR time rather than letting it fail silently.
   already renders as list + thematic break — 203 left underlined for this).
 - **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
-  `authors:` slug without a matching author bundle, no emoji in a post title),
-  run by
+  `authors:` slug without a matching author bundle, no emoji in a post title, no
+  two pages in a folder claiming the same series `weight`), run by
   `.github/workflows/pr-check.yml` in lieu of a visual preview (GitHub Pages
   has no per-PR preview URLs).
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
@@ -654,6 +654,35 @@ should catch a mistake at PR time rather than letting it fail silently.
   `content/pages/`, which is also what keeps the `pages/all-events` view key
   (20,984 legacy views) resolving; a root-level `content/*.md` has no section
   and `views-key.html` would not count it.
+- **A multi-page series is a folder of pages with a `weight`, and nothing else.**
+  The 11 Java Quick Start tutorial steps used to hand-write the same
+  `<< Prev` / `Next >>` markdown pair TWICE each (top and bottom of every page),
+  which is 20 links restating an order that is a property of the series, not of
+  any one page -- and they had already drifted: two of the eleven were missing
+  their bottom pair. Now `partials/series-steps.html` is the single definition
+  ("the pages in this folder that carry a weight, sorted"), and
+  `series-progress.html` (a step counter + clickable progress bar under the page
+  head) and `series-nav.html` (previous/next cards at the foot) derive
+  everything from it -- titles, how many steps there are, which page is first or
+  last. Reordering is renumbering; inserting a step is one new file.
+
+  Both partials are called from `_default/single.html` and render **nothing**
+  when the page has no weight, so no other page is affected and any future
+  folder of ordered pages gets the navigation for free. That self-disabling is
+  load-bearing: the five `install-java/` pages next door are alternatives
+  (Windows / macOS / Linux), not a sequence, so they carry no weight and
+  correctly get no navigation. `linkTitle:` carries the short step name, because
+  the full titles all begin "Getting Started with Java - " and a nav card should
+  not repeat that; `.LinkTitle` falls back to `.Title`, so it stays optional.
+  `ValidateFrontmatter.checkSeriesWeights` fails the PR on two pages in a folder
+  claiming the same weight -- Hugo's sort is stable, so that would silently
+  mis-order the series rather than error.
+
+  One CSS gotcha, since both render inside `.prose`: `.prose li + li` and
+  `.prose ul, .prose ol` are 0-1-1 selectors and outrank a single class, so the
+  series rules are written class-on-class. Without that the first progress tick
+  sat 0.35rem higher than the other ten.
+
 - **`/java-quick-start/other-tutorials/` is tiles from a frontmatter list.**
   `type: "tutorials"` -> `themes/foojay/layouts/tutorials/single.html`, with the
   same card rhythm as the advisory board. It deliberately does NOT copy the

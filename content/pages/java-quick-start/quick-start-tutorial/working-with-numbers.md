@@ -24,7 +24,17 @@ Depending on the type of number, they use more or less memory. In most cases, in
 We create both the example float and double with 20 decimals to see the number of decimals that are really stored in the variable.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
- public class NumberValues { public static void main (String[] args) { int intValue = 2; float floatValue = 1.12345678901234567890F; double doubleValue = 1.12345678901234567890D; System.out.println("Integer: " + intValue); System.out.println("Float: " + floatValue); System.out.println("Double: " + doubleValue); System.out.println("Multiply: " + (intValue * floatValue) + ", rounded: " + Math.round(intValue * floatValue)); } }
+ public class NumberValues {
+     public static void main (String[] args) {
+         int intValue = 2;
+         float floatValue = 1.12345678901234567890F;
+         double doubleValue = 1.12345678901234567890D;
+         System.out.println("Integer: " + intValue);
+         System.out.println("Float: " + floatValue);
+         System.out.println("Double: " + doubleValue);
+         System.out.println("Multiply: " + (intValue * floatValue) + ", rounded: " + Math.round(intValue * floatValue));
+     }
+ }
 </div>
 
 When we run this code, you see how many decimals are stored in the values and also how you can round a value.

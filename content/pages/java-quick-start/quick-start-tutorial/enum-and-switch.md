@@ -18,7 +18,29 @@ In the previous example, we used an integer value to define testValue. But if we
 Enums are, by convention, typed in uppercase.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
- public class EnumSwitch { public static void main (String[] args) { // Define value based on an enum TestOption option = TestOption.TYPE_2; // Compare the value with the available options switch(option) { case TYPE_1: System.out.println("Do something specific for Type 1"); break; case TYPE_2: System.out.println("Do something specific for Type 2"); break; case TYPE_3: System.out.println("Do something specific for Type 3"); break; default: System.out.println("No action defined for this type: " + option); } } enum TestOption { TYPE_1, TYPE_2, TYPE_3, TYPE_4, TYPE_5, UNKNOWN; } }
+ public class EnumSwitch {
+     public static void main (String[] args) {
+         // Define value based on an enum
+         TestOption option = TestOption.TYPE_2;
+         // Compare the value with the available options
+         switch(option) {
+             case TYPE_1:
+                 System.out.println("Do something specific for Type 1");
+                 break;
+             case TYPE_2:
+                 System.out.println("Do something specific for Type 2");
+                 break;
+             case TYPE_3:
+                 System.out.println("Do something specific for Type 3");
+                 break;
+             default:
+                 System.out.println("No action defined for this type: " + option);
+         }
+     }
+     enum TestOption {
+         TYPE_1, TYPE_2, TYPE_3, TYPE_4, TYPE_5, UNKNOWN;
+     }
+ }
 </div>
 
 Change the value in line 4 to check the output, for instance when running with `TYPE_2` and `TYPE_4`:

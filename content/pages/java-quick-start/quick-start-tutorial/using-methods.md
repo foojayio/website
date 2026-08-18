@@ -18,7 +18,20 @@ Let's now use some different methods to keep the code simple and easy to read an
 Methods help you to organize your code. Each method does one specific thing, either with or without input values.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
- import java.text.SimpleDateFormat; import java.util.Date; public class UsingMethod { public static void main (String[] args) { System.out.println("2 x Raspberry Pi 4 4Gb, price: " + getTotal(2, 59.95F) + " Euro"); System.out.println("Current date and time is: " + getNow()); } public static float getTotal(int quantity, float price) { return quantity * price; } public static String getNow() { return new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new Date()); } }
+ import java.text.SimpleDateFormat;
+ import java.util.Date;
+ public class UsingMethod {
+     public static void main (String[] args) {
+         System.out.println("2 x Raspberry Pi 4 4Gb, price: " + getTotal(2, 59.95F) + " Euro");
+         System.out.println("Current date and time is: " + getNow());
+     }
+     public static float getTotal(int quantity, float price) {
+         return quantity * price;
+     }
+     public static String getNow() {
+         return new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new Date());
+     }
+ }
 </div>
 
 1. First, look at the import statements at the top. Because we use methods that are not part of "basic Java", we need to tell our program which additional classes need to be imported.

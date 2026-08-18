@@ -18,7 +18,46 @@ Java is an object-oriented programming language. This means we can turn any part
 Just like the previous example, this one also uses some methods which are not part of "base Java". That's why our code starts with the import lines to determine where ArrayList and List can be found.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
- import java.util.ArrayList; import java.util.List; public class UsingObject { public static void main (String[] args) { List&lt;ShoppingCartItem&gt; items = new ArrayList&lt;&gt;(); items.add(new ShoppingCartItem("Raspberry Pi 4, 4Gb", 1, 59.95F)); items.add(new ShoppingCartItem("Micro-HDMI cable", 2, 5.9F)); items.add(new ShoppingCartItem("Raspberry Pi 4 power supply", 1, 9.95F)); double total = 0D; for (ShoppingCartItem item : items) { System.out.println(item.getName()); System.out.println(" " + item.getQuantity() + "\tx\t" + item.getPrice() + "\t= " + item.getTotal() + " Euro"); total += item.getTotal(); } System.out.println("\nTotal for shopping cart:\n " + total + " Euro"); } public static class ShoppingCartItem { // These values are final as they should not be changed private final String name; private final int quantity; private final float price; public ShoppingCartItem(String name, int quantity, float price) { this.name = name; this.quantity = quantity; this.price = price; } public String getName() { return name; } public int getQuantity() { return quantity; } public float getPrice() { return price; } public float getTotal() { return quantity * price; } } }
+ import java.util.ArrayList;
+ import java.util.List;
+ public class UsingObject {
+     public static void main (String[] args) {
+         List&lt;ShoppingCartItem&gt; items = new ArrayList&lt;&gt;();
+         items.add(new ShoppingCartItem("Raspberry Pi 4, 4Gb", 1, 59.95F));
+         items.add(new ShoppingCartItem("Micro-HDMI cable", 2, 5.9F));
+         items.add(new ShoppingCartItem("Raspberry Pi 4 power supply", 1, 9.95F));
+         double total = 0D;
+         for (ShoppingCartItem item : items) {
+             System.out.println(item.getName());
+             System.out.println(" " + item.getQuantity() + "\tx\t" + item.getPrice() + "\t= " + item.getTotal() + " Euro");
+             total += item.getTotal();
+         }
+         System.out.println("\nTotal for shopping cart:\n " + total + " Euro");
+     }
+     public static class ShoppingCartItem {
+         // These values are final as they should not be changed
+         private final String name;
+         private final int quantity;
+         private final float price;
+         public ShoppingCartItem(String name, int quantity, float price) {
+             this.name = name;
+             this.quantity = quantity;
+             this.price = price;
+         }
+         public String getName() {
+             return name;
+         }
+         public int getQuantity() {
+             return quantity;
+         }
+         public float getPrice() {
+             return price;
+         }
+         public float getTotal() {
+             return quantity * price;
+         }
+     }
+ }
 </div>
 
 The class `ShoppingCartItem` is an object that can hold the data for each item in the shopping list. The constructor `ShoppingCartItem(String name, int quantity, float price)` enables us to make an item that has a name, quantity, and price. The method `getTotal()` inside the item will return the total cost for the item based on quantity and price.
