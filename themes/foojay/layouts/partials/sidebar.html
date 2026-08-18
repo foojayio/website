@@ -28,7 +28,14 @@
   <section class="widget widget-authors">
     <h4>Authors</h4>
     <ul>
-      {{ range first 6 (where .Site.RegularPages "Section" "authors") }}
+      {{/* Shuffled, not the first 6: unshuffled this is `where` order, i.e.
+           whichever six authors happen to sort first -- the same six names on
+           every page of the site, and 336 authors who never appear here at all.
+           Hugo shuffles per call, so each page gets its own six and the widget
+           is a way to stumble on someone new. It re-rolls at every build, which
+           is fine (a deploy is the only thing that changes the pages anyway);
+           the Featured Authors widget below is the deliberate pick. */}}
+      {{ range first 5 (shuffle (where .Site.RegularPages "Section" "authors")) }}
         <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
       {{ end }}
     </ul>
@@ -41,14 +48,29 @@
       {{/* .website covers every JUG, Meetup-based or not (data/jugs.yaml,
            regenerated from GlobalWWJugs by scripts/FetchJugs.java) --
            a hardcoded meetup.com URL would 404 for the majority of JUGs
-           that don't use Meetup. */}}
-      {{ range first 8 hugo.Data.jugs }}
-        {{ $jug := . }}
-        {{ with .website }}<li><a href="{{ . }}">{{ $jug.name }}</a></li>{{ end }}
+           that don't use Meetup.
+
+           Shuffled per page, same as the authors widget above: unshuffled,
+           data/jugs.yaml's own (alphabetical) order meant the same handful of
+           groups on every page and the rest of the 91 never shown. Filtered
+           BEFORE the shuffle, not after -- picking five and then dropping the
+           one JUG with no website would leave a short list on ~5% of pages. */}}
+      {{ $linked := where hugo.Data.jugs "website" "!=" nil }}
+      {{ range first 5 (shuffle $linked) }}
+        <li><a href="{{ .website }}">{{ .name }}</a></li>
       {{ end }}
     </ul>
     <a class="view-all" href="{{ "jugs/" | relURL }}">All Java User Groups</a>
   </section>
   {{ end }}
+
+  {{- /* Home page only: /today/author/ already leads with the full Featured
+         Authors band, and the aside would repeat the same two people. Placed
+         last so the sponsors widget keeps its position under the TOC.
+         Whitespace-trimmed so every other page's markup is byte-identical to
+         what it was before this widget existed. */ -}}
+  {{- if .IsHome }}
+  {{ partial "featured-authors-widget.html" . }}
+  {{- end }}
 
 </aside>

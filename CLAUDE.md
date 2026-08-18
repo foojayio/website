@@ -388,6 +388,24 @@ should catch a mistake at PR time rather than letting it fail silently.
   go through `resource-url.html`, so a bare name means the file next to
   `index.md`. No lightbox wiring needed: `static/js/lightbox.js` binds every
   `.prose img`.
+- **Featured Authors are two slugs in `hugo.toml`, and nothing else.**
+  `params.featuredAuthors` lists the author slugs (folder names under
+  `content/authors/`) currently spotlighted; foojay rotates the pick monthly and
+  announces it in a post, so it genuinely lives in an editor's head — case 3 of
+  the derive/default/ask rule. Everything on display is derived from there:
+  `partials/featured-authors.html` resolves the slugs to author pages,
+  `partials/author-posts.html` (the author-side twin of `sponsor-posts.html`,
+  and now the single definition used by the profile page too) supplies the
+  article count and latest article, and the bio/photo/socials come from the
+  author's own bundle. So a rotation is one line, and no second place goes
+  stale. Two renderings, one source: `featured-authors-band.html` (two cards
+  atop `/today/author/`) and `featured-authors-widget.html` (sidebar, home page
+  only — the authors page already leads with the band). An unknown slug is
+  skipped by the template rather than rendered dead; `ValidateFrontmatter.java`
+  is what fails the PR on it. Don't add a `featured: true` frontmatter flag
+  instead — that's two files to edit per rotation and, worse, two to remember to
+  unset, which is exactly how a "featured" author silently stays featured
+  forever.
 - **Sponsors appear site-wide via the sidebar**, not just on `/our-sponsors/`:
   `themes/foojay/layouts/partials/sidebar-sponsors.html` lists every sponsor
   tier-ordered, with the logo sized by tier (gold largest). Deliberately NOT

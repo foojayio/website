@@ -583,6 +583,79 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .author-card:hover { border-color: var(--brand-accent); text-decoration: none; }
 .author-card img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; }
 
+/* Featured authors: the monthly editorial spotlight (params.featuredAuthors).
+   Two shapes, one source -- a two-up band at the top of /today/author/
+   (partials/featured-authors-band.html) and a sidebar widget on the home page
+   (partials/featured-authors-widget.html). */
+
+.featured-authors { margin-bottom: 2.25rem; }
+.featured-author-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;
+}
+.featured-author {
+  display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 1.25rem;
+  align-items: start;
+  padding: 1.4rem 1.5rem;
+  background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.featured-author__portrait { display: block; }
+/* Column + auto margin on the latest-article box so the two cards line their
+   boxes up at the bottom however long the bios above them run. */
+.featured-author__body { display: flex; flex-direction: column; min-height: 100%; }
+.featured-author__name { margin: 0; font-size: 1.25rem; }
+.featured-author__name a { color: var(--ink); }
+.featured-author__name a:hover { color: var(--brand-accent-strong); }
+.featured-author__count { margin: .15rem 0 .7rem; font-size: .88rem; }
+.featured-author__count a { color: var(--ink-muted); }
+.featured-author .author-bio { font-size: .95rem; }
+.featured-author .author-social { margin-top: .9rem; margin-bottom: 1rem; }
+/* Latest article: a whole-block link, so the title reads as the target and the
+   label/date are supporting text rather than three separate link targets. */
+.featured-author__latest {
+  display: grid; gap: .2rem; margin-top: auto; padding: .8rem .95rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--ink);
+}
+.featured-author__latest:hover { border-color: var(--brand-accent); text-decoration: none; }
+.featured-author__latest:hover strong { color: var(--brand-accent-strong); }
+.featured-author__latest-label {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .11em; color: var(--ink-muted);
+}
+.featured-author__latest strong { font-family: var(--font-display); font-size: .98rem; line-height: 1.35; }
+.featured-author__latest time { font-size: .82rem; color: var(--ink-muted); }
+
+@media (max-width: 560px) {
+  .featured-author { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Sidebar widget (home page). Same content, one column, smaller type. */
+.featured-side-list { display: grid; gap: 1.1rem; }
+.featured-side + .featured-side { padding-top: 1.1rem; border-top: 1px solid var(--border); }
+.featured-side__head { display: flex; align-items: center; gap: .7rem; color: var(--ink); }
+.featured-side__head img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.featured-side__head strong { font-family: var(--font-display); font-size: .95rem; }
+.featured-side__head:hover { text-decoration: none; }
+.featured-side__head:hover strong { color: var(--brand-accent-strong); }
+.featured-side__latest {
+  display: block; margin-top: .55rem; font-size: .9rem; line-height: 1.35; color: var(--ink-soft);
+}
+.featured-side__latest:hover { color: var(--brand-accent-strong); }
+.featured-side__label {
+  display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .11em;
+  color: var(--ink-muted);
+}
+/* The shared social pills are sized for a full-width column; shrink them so
+   four of them still fit the aside without wrapping to four lines. The two
+   layout declarations are not cosmetic: `.sidebar ul`/`.sidebar li a` are more
+   specific than `.author-social`/`.author-social a`, so inside the aside the
+   pill row would otherwise inherit the widget-list treatment (grid + block
+   links) and stack as four full-width bars. */
+.featured-side__social { margin-top: .55rem; }
+.featured-side__social .author-social { display: flex; flex-wrap: wrap; gap: .3rem; }
+.featured-side__social .author-social a {
+  display: inline-block; font-size: .74rem; padding: .12rem .5rem;
+}
+
 /* --------------------------------------------------------------- events -- */
 
 .events-updated { color: var(--ink-muted); font-size: .88rem; }
@@ -872,6 +945,7 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 :root[data-theme="dark"] .post-card-image,
 :root[data-theme="dark"] .author-card img,
 :root[data-theme="dark"] .author-avatar,
+:root[data-theme="dark"] .featured-side__head img,
 :root[data-theme="dark"] .post-single img { filter: brightness(.92); }
 :root[data-theme="dark"] .pagination .page-item.active span { color: #14100a; }
 /* A light-background PNG logo needs no change, but a dark-ink one would vanish

@@ -1,0 +1,17 @@
+{{- /* The Featured Authors of the month, as author Pages.
+
+       Reads params.featuredAuthors from hugo.toml (a list of author slugs --
+       see the comment there) and resolves each to its author page through the
+       same cached index bylines use. A slug with no bundle is skipped rather
+       than rendered as a dead entry; ValidateFrontmatter.java is what catches
+       the typo, at PR time.
+
+       Returns a slice of Pages, empty when nothing is configured -- so callers
+       can `with` it and the whole block disappears between rotations. */ -}}
+{{- $featured := slice -}}
+{{- range site.Params.featuredAuthors -}}
+  {{- with partial "author-page.html" . -}}
+    {{- $featured = $featured | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $featured -}}

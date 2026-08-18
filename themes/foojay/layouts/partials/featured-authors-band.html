@@ -1,0 +1,50 @@
+{{- /* The "Featured authors" block at the top of /today/author/.
+
+       Two spotlight cards, one per slug in params.featuredAuthors. Everything
+       in them -- photo, bio, socials, article count, latest article -- comes
+       from the author's own bundle and from author-posts.html, so a rotation is
+       the one-line config change and nothing here goes stale.
+
+       Renders nothing when no featured authors are configured. */ -}}
+{{- $featured := partial "featured-authors.html" . -}}
+{{- with $featured }}
+<section class="featured-authors">
+  <div class="section-head">
+    <div>
+      <h2>Featured authors</h2>
+      <p>Two of our contributors, spotlighted this month.</p>
+    </div>
+  </div>
+  <div class="featured-author-grid">
+    {{ range . }}
+    {{ $author := . }}
+    {{ $posts := partial "author-posts.html" $author }}
+    <article class="featured-author">
+      {{ with (or .Params.avatarFull .Params.avatar) }}
+      <a class="featured-author__portrait" href="{{ $author.Permalink }}" tabindex="-1" aria-hidden="true">
+        <img class="author-avatar" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy" decoding="async">
+      </a>
+      {{ end }}
+      <div class="featured-author__body">
+        <h3 class="featured-author__name"><a href="{{ $author.Permalink }}">{{ $author.Title }}</a></h3>
+        {{ with $posts }}
+        <p class="featured-author__count">
+          <a href="{{ $author.Permalink }}">{{ len . }} article{{ if ne (len .) 1 }}s{{ end }}</a>
+        </p>
+        {{ end }}
+        {{ with $author.Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
+        {{ partial "author-social.html" $author }}
+        {{ with $posts }}
+        {{ $latest := index . 0 }}
+        <a class="featured-author__latest" href="{{ $latest.Permalink }}">
+          <span class="featured-author__latest-label">Latest article</span>
+          <strong>{{ $latest.Title }}</strong>
+          <time datetime="{{ $latest.Date.Format "2006-01-02" }}">{{ $latest.Date.Format "Jan 2, 2006" }}</time>
+        </a>
+        {{ end }}
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</section>
+{{ end -}}

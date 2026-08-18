@@ -43,6 +43,11 @@ enableRobotsTXT = true
   # on the GitHub Pages test deploy) to paths that DON'T already start with "/".
   logo = "images/foojay-logo.png"
   favicon = "images/favicon.png"
+  # The two authors currently spotlighted as Featured Authors.
+  # This is an editorial pick that rotates monthly.
+  # Values are author slugs, the same identifiers posts and sponsors use.
+  # The list isn't limited to two, but the layouts are designed for that.
+  featuredAuthors = ["cristobal-escobar", "shai-almog"]
   # Path to the JUG list consumed by the events sidebar/calendar page.
   jugsDataFile = "jugs"
   eventsDataFile = "events"

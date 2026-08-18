@@ -1,0 +1,37 @@
+{{- /* Sidebar version of the Featured Authors block -- same source of truth as
+       featured-authors-band.html (params.featuredAuthors), scaled down to a
+       widget: photo, name, latest article, socials.
+
+       Called from sidebar.html on the home page only; /today/author/ carries
+       the full band instead, and repeating it in the aside there would be the
+       same two authors twice on one page.
+
+       Renders nothing when no featured authors are configured. */ -}}
+{{- $featured := partial "featured-authors.html" . -}}
+{{- with $featured }}
+<section class="widget widget-featured-authors">
+  <h4>Featured authors</h4>
+  <div class="featured-side-list">
+    {{ range . }}
+    {{ $author := . }}
+    <div class="featured-side">
+      <a class="featured-side__head" href="{{ $author.Permalink }}">
+        {{ with .Params.avatar }}
+        <img src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy" decoding="async">
+        {{ end }}
+        <strong>{{ $author.Title }}</strong>
+      </a>
+      {{ with partial "author-posts.html" $author }}
+      {{ $latest := index . 0 }}
+      <a class="featured-side__latest" href="{{ $latest.Permalink }}">
+        <span class="featured-side__label">Latest article</span>
+        {{ $latest.Title }}
+      </a>
+      {{ end }}
+      <div class="featured-side__social">{{ partial "author-social.html" $author }}</div>
+    </div>
+    {{ end }}
+  </div>
+  <a class="view-all" href="{{ "today/author/" | relURL }}">View all authors</a>
+</section>
+{{ end -}}

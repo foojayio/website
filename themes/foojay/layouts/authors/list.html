@@ -8,6 +8,10 @@
 </div>
 
 <div class="content-col full-width">
+  {{/* Editorial spotlight, ahead of the full A-Z grid -- see
+       partials/featured-authors-band.html and params.featuredAuthors. */}}
+  {{ partial "featured-authors-band.html" . }}
+
   <div class="list-filter">
     <input type="search" id="list-filter" class="list-filter__input" placeholder="Filter authors by name…" aria-label="Filter authors by name" autocomplete="off">
   </div>

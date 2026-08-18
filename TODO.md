@@ -17,9 +17,13 @@
 
 * [ ] Read counter
 * [ ] Discussions
-* [ ] Featured authors
+* [X] Featured authors
   * See for background info: https://foojay.io/today/featured-authors-july-and-august-2026/
-  * How to specify featured authors? in hugo.toml?
-  * Current: cristobal-escobar and shai-almog
-  * To add on page https://foojayio.github.io/website/today/author/: two featured authors on the top of the page with bigger block containing latest post, social links, etc.
-  * To add on homepage: new block bottom right column with featured authors, each with a small block containing latest post, social links, etc.
+  * Specified in `hugo.toml`: `params.featuredAuthors = ["cristobal-escobar", "shai-almog"]`
+    (author slugs). Rotating them monthly = editing that one line; everything
+    shown comes from the author's own bundle. `ValidateFrontmatter.java` fails
+    the PR on a slug with no matching author.
+  * `/today/author/`: two spotlight cards above the A-Z grid
+    (`partials/featured-authors-band.html`).
+  * Homepage: bottom of the right column (`partials/featured-authors-widget.html`,
+    called from `sidebar.html` on the home page only).

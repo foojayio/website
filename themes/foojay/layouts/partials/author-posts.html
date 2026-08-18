@@ -1,0 +1,19 @@
+{{- /* Every post an author wrote, newest first.
+
+       Param: the author Page. Returns: a slice of Pages (possibly empty).
+
+       The author->posts link is the mirror of sponsor-posts.html: a post
+       credits its authors as an `authors:` list of slugs (the bundle folder
+       names under content/authors/), and older ones may still carry a single
+       `author:` slug -- match both and de-dupe. Sorted explicitly rather than
+       relying on site.RegularPages' default order, because `union` appends the
+       legacy-key matches after the list-key ones.
+
+       One definition, so the author profile page, the Featured Authors block
+       and its sidebar widget all agree on what "this author's articles" and
+       "their latest article" mean. */ -}}
+{{- $slug := .File.ContentBaseName -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $written := where $posts "Params.authors" "intersect" (slice $slug) -}}
+{{- $written = $written | union (where $posts "Params.author" $slug) -}}
+{{- return sort $written "Date" "desc" -}}

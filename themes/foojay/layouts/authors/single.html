@@ -13,11 +13,9 @@
       {{ partial "author-social.html" . }}
     </div>
 
-    {{ $slug := .File.ContentBaseName }}
-    {{ $posts := where site.RegularPages "Section" "posts" }}
-    {{/* Posts credit authors as an `authors:` list; older ones may still use a
-         single `author:` slug -- match both and de-dupe. */}}
-    {{ $written := where $posts "Params.authors" "intersect" (slice $slug) | union (where $posts "Params.author" $slug) }}
+    {{/* One shared definition of "this author's articles", also used by the
+         Featured Authors block and its sidebar widget. */}}
+    {{ $written := partial "author-posts.html" . }}
     <div class="section-head"><h2>{{ len $written }} article{{ if ne (len $written) 1 }}s{{ end }}</h2></div>
     <div class="post-grid">
       {{ range $written }}{{ partial "post-card.html" . }}{{ end }}
