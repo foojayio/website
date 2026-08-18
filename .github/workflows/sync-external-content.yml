@@ -7,7 +7,12 @@ on:
     # edits their entry, readers keep reading -- so a once-daily sync meant the
     # site could be most of a day behind an upstream change. Kept off the hour
     # boundary GitHub's cron queue is busiest on.
-    - cron: "20 1,7,13,19 * * *"
+    #
+    # Split into two entries only so the Meetup sync can tell them apart: it
+    # runs once a day, on the 01:20 one (see its `if:` below). Everything else
+    # runs on all four.
+    - cron: "20 1 * * *"
+    - cron: "20 7,13,19 * * *"
   workflow_dispatch: {}
 
 jobs:
@@ -21,25 +26,30 @@ jobs:
       - name: Set up JBang
         uses: jbangdev/setup-jbang@main
 
+      # Independent. Keeps the view counts on the site
+      # within a few hours of the counter even when nothing is pushed.
+      - name: Refresh view counts
+        run: jbang scripts/FetchViewCounts.java
+
       # Refresh the JUG list first so this always targets the current
       # upstream World Wide JUGs directory, not whatever was last committed
       # (also refreshed independently at every deploy by build-deploy.yml).
       - name: Refresh JUG list
+      - if: github.event_name != 'schedule' || github.event.schedule == '20 1 * * *'
         run: jbang scripts/FetchJugs.java
 
       # Independent of the JUG list above -- just piggybacking on the same
       # schedule/workflow rather than adding a whole new one.
       - name: Refresh Java Champions list
+      - if: github.event_name != 'schedule' || github.event.schedule == '20 1 * * *'
         run: jbang scripts/FetchJavaChampions.java
 
-      # Also independent -- same piggyback. Keeps the view counts on the site
-      # within a few hours of the counter even when nothing is pushed.
-      - name: Refresh view counts
-        run: jbang scripts/FetchViewCounts.java
-
+      # Once a day, not four times like the steps above: this one makes ~130
+      # requests to meetup.com (an iCal feed per group, then a page per event),
+      # and a JUG's event list doesn't move hour to hour -- an event is
+      # announced days or weeks ahead. Needs no credential; see the script.
       - name: Fetch events from Meetup
-        env:
-          MEETUP_OAUTH_TOKEN: ${{ secrets.MEETUP_OAUTH_TOKEN }}
+        if: github.event_name != 'schedule' || github.event.schedule == '20 1 * * *'
         run: jbang scripts/FetchMeetupEvents.java
 
       - name: Commit updated data

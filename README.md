@@ -282,9 +282,11 @@ held in a separate column and are never overwritten.
 - **Cloudflare cache**: the `/today/` listing is CDN-cached, so a *just*-published
   post can be missing from a crawl for a while even though its own page is live.
   Convert it directly with `--url` if you need it immediately.
-- **Meetup GraphQL query** (in `FetchMeetupEvents.java`) needs verifying against
-  Meetup's current schema once Pro access + an OAuth token (`MEETUP_OAUTH_TOKEN`)
-  are set up.
+- **Meetup events** (`FetchMeetupEvents.java`) come from each group's public
+  iCal feed plus the schema.org JSON-LD on each event page — no Meetup Pro
+  subscription, no OAuth token, no secret to configure. Both sources are
+  permitted by meetup.com's `robots.txt`; re-check it before widening what the
+  script fetches. It runs once a day from `sync-external-content.yml`.
 - **Theme** (`themes/foojay/`) recreates the current site's structure (nav, post
   grid, sidebar widgets, footer) but not its exact visual design — treat
   `static/css/style.css` as a starting point to refine against real brand assets.

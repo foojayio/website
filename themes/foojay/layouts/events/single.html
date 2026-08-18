@@ -42,6 +42,19 @@
        colour everywhere on the page without a colour ever being configured. */}}
   {{ $hue := mod (hash.FNV32a $g.jug) 360 }}
   {{ range $e := ($g.events | default slice) }}
+    {{/* One string for where the event is: "Online", else venue + city as the
+         JSON-LD gave them, else nothing (and the templates below fall back to
+         the JUG's country). Built once here so the grid, the agenda and the
+         dialog can't disagree about it. */}}
+    {{ $place := "" }}
+    {{ if eq $e.online true }}
+      {{ $place = "Online" }}
+    {{ else }}
+      {{ $parts := slice }}
+      {{ with $e.venue }}{{ $parts = $parts | append . }}{{ end }}
+      {{ with $e.city }}{{ $parts = $parts | append . }}{{ end }}
+      {{ $place = delimit $parts ", " }}
+    {{ end }}
     {{ $start := time.AsTime $e.startTime }}
     {{ $endDate := "" }}
     {{ $endTime := "" }}
@@ -70,6 +83,8 @@
         "monthLabel" ($start.Format "January 2006")
         "venue"      ($e.venue | default "")
         "city"       ($e.city | default "")
+        "online"     (eq $e.online true)
+        "place"      $place
       ) }}
   {{ end }}
 {{ end }}
@@ -184,11 +199,13 @@
                     <p class="cal-row__meta">
                       <span class="cal-dot" style="--cal-dot: hsl({{ $e.hue }} 62% 46%)" aria-hidden="true"></span>
                       <span class="cal-row__group">{{ $e.group }}</span>
-                      {{ with $e.country }}<span class="cal-row__sep">&middot;</span><span>{{ . }}</span>{{ end }}
                       <span class="cal-row__sep">&middot;</span>
                       <span class="cal-row__time">{{ $e.time }}{{ with $e.endTime }}&ndash;{{ . }}{{ end }}</span>
                       {{ if and $e.endDate (ne $e.endDate $e.date) }}<span class="cal-row__sep">&middot;</span><span class="cal-row__span">until {{ dateFormat "2 Jan" $e.endDate }}</span>{{ end }}
-                      {{ with $e.venue }}<span class="cal-row__sep">&middot;</span><span>{{ . }}{{ with $e.city }}, {{ . }}{{ end }}</span>{{ end }}
+                      {{/* The venue already names the city, so the country is
+                           only worth showing when there is no venue at all. */}}
+                      {{ $where := or $e.place $e.country }}
+                      {{ with $where }}<span class="cal-row__sep">&middot;</span><span{{ if eq . "Online" }} class="cal-row__online"{{ end }}>{{ . }}</span>{{ end }}
                     </p>
                   </div>
                 </li>
@@ -321,9 +338,8 @@
         var when = e.dateLabel + ', ' + e.time + (e.endTime ? '–' + e.endTime : '');
         dialog.querySelector('[data-cal-dialog-when]').textContent = when;
         var where = dialog.querySelector('[data-cal-dialog-where]');
-        var place = [e.venue, e.city].filter(Boolean).join(', ');
-        where.textContent = place;
-        where.hidden = !place;
+        where.textContent = e.place;
+        where.hidden = !e.place;
         dialog.querySelector('[data-cal-dialog-link]').href = e.url;
         dialog.showModal();
       }

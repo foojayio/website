@@ -67,12 +67,51 @@ should catch a mistake at PR time rather than letting it fail silently.
   adds `location: {lat, lng}` via a one-time geocoding script, but it hasn't
   merged; pick that field up here once it does, same way `FetchJugs.java`
   reads JUG coordinates.
-- **`scripts/FetchMeetupEvents.java`**: pulls JUG events via Meetup's GraphQL
-  API for `.github/workflows/sync-external-content.yml` (cron, four times a day), writing
-  `data/events.json`. Only queries JUGs that have a `meetup_slug` (i.e. that
-  actually use Meetup) in `data/jugs.yaml`. Requires a Meetup Pro
-  subscription + OAuth token (`MEETUP_OAUTH_TOKEN` secret) — Meetup retired
-  the old open REST API.
+- **`scripts/FetchMeetupEvents.java`**: pulls JUG events for
+  `.github/workflows/sync-external-content.yml`, writing `data/events.json`.
+  Only queries JUGs that have a `meetup_slug` (i.e. that actually use Meetup)
+  in `data/jugs.yaml`. **Needs no credential.** It used to POST to Meetup's
+  GraphQL API, which requires a Meetup Pro subscription plus an OAuth client —
+  a paid dependency for reading events Meetup already publishes to anyone — and
+  reads two public machine-readable sources instead:
+
+  1. `https://www.meetup.com/<slug>/events/ical/`, the feed a member subscribes
+     to from their calendar app: id, title, event URL, start/end and status.
+     One ~2.5 KB request per group. Note the start/end carry a real IANA
+     `TZID:Europe/Berlin` rather than a fixed offset, so a monthly event stays
+     correct across a DST change.
+  2. Each event's own page, for the schema.org JSON-LD `Event` block Meetup
+     publishes there for search engines — the venue, city and
+     online/in-person flag, which is the **one** thing the iCal feed omits (it
+     carries no `LOCATION` property at all, which is why every event in the
+     first `data/events.json` had `venue: null`; 24 of 25 have one now).
+
+  Both are permitted by meetup.com's `robots.txt`, which disallows the
+  rss/atom/xml variants of that same events route but not iCal, and lists event
+  pages in its own sitemap. Checked, not assumed — check it again before
+  widening what this fetches. The requests identify themselves as foojay.io
+  (`USER_AGENT`) rather than posing as a browser, go one at a time with a pause
+  between them, and the calendar links every event back to Meetup. **Don't**
+  reach for the `__NEXT_DATA__` Apollo state on the group page instead: it has
+  more (RSVP counts), but it is the internal state of Meetup's front-end app,
+  it changes with any deploy of theirs, and `/_next/data/*` is disallowed.
+
+  Step 2 is best-effort on purpose — a page that fails or won't parse leaves
+  `venue`/`city` null and keeps the event, which is exactly what the calendar
+  renders for an online event anyway. A **404 on the iCal feed is recorded as
+  "group not found"**, not as a fetch failure: it means the `meetup_slug` in
+  GlobalWWJugs is wrong or the group was renamed, which is something a JUG lead
+  can fix (6 of 32 are in that state today, named under the calendar).
+
+  It runs **once a day**, not four times like the rest of that workflow (whose
+  cron is split into two entries purely so this step's `if:` can tell them
+  apart) — ~130 requests a run, and an event is announced days ahead, not
+  hours. And it **only rewrites `data/events.json` when the events themselves
+  changed**: `generatedAt` moves on every run, so writing unconditionally would
+  commit, and therefore deploy, four times a day over a timestamp.
+  `--dry-run` / `--limit N` / `--slug <group>` print the JSON instead of
+  writing a file that would be missing every group they skipped;
+  `--no-venues` skips the JSON-LD pass.
 - **`scripts/ConvertSponsors.java`**: converts the sponsor section from the live
   WP site into `content/sponsors/<wp-slug>/index.md` page bundles (logo pulled
   local as a bundle resource, About text through `HtmlToMarkdown`). Reads the
@@ -322,8 +361,9 @@ should catch a mistake at PR time rather than letting it fail silently.
    network access to arbitrary domains (only a markdown-fetch tool was
    available — enough to confirm the GlobalWWJugs and java-champions.yml
    frontmatter/schema by hand, not enough to run the actual GitHub API +
-   raw-file fetch loop), so nothing here has been run against the live site,
-   a real Meetup Pro account, or the GitHub API. Treat all of it as
+   raw-file fetch loop), so nothing here has been run against the live site
+   or the GitHub API (`FetchMeetupEvents.java` is now an exception -- it has
+   been run in full, see gap 3). Treat all of it as
    reviewed-but-untested code, same as `FetchJugs.java` was before Frank ran
    it locally. **First thing to do for `FetchJavaChampions.java`**: run it
    locally once (`jbang scripts/FetchJavaChampions.java`) and check
@@ -331,9 +371,13 @@ should catch a mistake at PR time rather than letting it fail silently.
    nested objects in the source flattened correctly, and that the
    `/java-champions/` table renders sensibly for the ~700 entries missing
    most optional fields.
-3. **`FetchMeetupEvents.java`'s GraphQL query/endpoint need verification**
-   against Meetup's current schema once you have Pro/OAuth credentials —
-   noted inline in the file.
+3. ~~**`FetchMeetupEvents.java`'s GraphQL query/endpoint need verification**~~
+   — gone: the script no longer uses the API, needs no Meetup Pro subscription
+   and no `MEETUP_OAUTH_TOKEN`, and has been run for real against all 32 groups
+   (25 events, 24 with a venue). See its entry above for what it reads instead.
+   What to watch now is the *shape* of the two public sources: if venues start
+   coming back empty, Meetup changed its JSON-LD; if whole groups start
+   failing, check `robots.txt` and the iCal route still behave as described.
 4. **The theme is structural, not visual.** `themes/foojay/static/css/style.css`
    reproduces the section layout (nav, post grid, sidebar widgets, footer)
    but not the real foojay.io branding/design. Needs a design pass against
@@ -692,6 +736,13 @@ should catch a mistake at PR time rather than letting it fail silently.
   every event in the reader's timezone. An event chip is a real link to the
   event on Meetup with the click intercepted for the detail dialog, so
   middle-click and copy-link still do the obvious thing.
+
+  Where an event is happens in ONE place too: the layout folds `online`,
+  `venue` and `city` into a single `place` string ("Online", else "venue,
+  city", else empty), which the agenda, the dialog and the JSON island all
+  read. The agenda falls back to the JUG's country only when there is no place
+  at all -- a venue already names its city, so printing the country next to it
+  is noise.
 
   Groups whose sync failed (`error` in the JSON) are named under the calendar
   rather than dropped -- an empty month should not be indistinguishable from a

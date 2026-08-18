@@ -879,6 +879,9 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .cal-row__group { color: var(--ink-soft); font-weight: 600; }
 .cal-row__time { font-variant-numeric: tabular-nums; }
 .cal-row__sep { opacity: .5; }
+/* An online event has no venue to name, so say so rather than leaving the
+   place silently blank. */
+.cal-row__online { color: var(--brand-secondary); font-weight: 600; }
 
 /* Event detail dialog ------------------------------------------- */
 
