@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Using Objects"
+linkTitle: "Using Objects"
 description: "Java is object-oriented: turn part of your program into an object with its own variables and methods."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/"
 url: "/java-quick-start/quick-start-tutorial/using-objects/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/using-objects/"
 frozen: false
+weight: 7
 ---
-
-[\<\< Using Methods](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/)  
-[Reading a Text File \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)
 
 {{< youtube vJf6_d0c56I >}}
 
@@ -73,6 +72,3 @@ record ShoppingCartItem(String name, int quantity, float price) {
     }
 }
 ```
-
-[\<\< Using Methods](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/)  
-[Reading a Text File \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)

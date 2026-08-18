@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - If, Then, Else"
+linkTitle: "If, Then, Else"
 description: "Compare values and branch on the result with if, then and else - the most-used construct in any programming language."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/"
 url: "/java-quick-start/quick-start-tutorial/if-then-else/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/if-then-else/"
 frozen: false
+weight: 5
 ---
-
-[\<\< Working with Numbers](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/)  
-[Enum and Switch \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/)
 
 {{< youtube J2VbPjPASns >}}
 
@@ -35,6 +34,3 @@ Are string1 and string3 equal? false
 Are string1 and string3 equal ignoring the case? true
 string1 and string3 are equal ignoring the case
 ```
-
-[\<\< Working with Numbers](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/)  
-[Enum and Switch \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/)

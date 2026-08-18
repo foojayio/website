@@ -69,6 +69,7 @@ public class ValidateFrontmatter {
         problems.addAll(checkRelatedPosts(postsDir, postSlugs));
         problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs()));
         problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
+        problems.addAll(checkSeriesWeights(Path.of("content/pages")));
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs()));
 
         if (problems.isEmpty()) {
@@ -260,6 +261,47 @@ public class ValidateFrontmatter {
      * PR check for it isn't worth it. An absent or empty list is fine (no
      * spotlight is rendered between rotations).
      */
+    /**
+     * Two steps of one series claiming the same position.
+     *
+     * A folder of pages that carry a `weight` IS a series
+     * (partials/series-steps.html): the progress bar, the step count and the
+     * prev/next cards all come from sorting on it. A duplicate doesn't fail the
+     * build -- Hugo's sort is stable, so it silently picks one -- it just makes
+     * "Step 7 of 11" point at the wrong page and lets prev/next skip a step.
+     * That is precisely the kind of wrong-but-quiet the PR check exists for.
+     *
+     * Weights are only compared WITHIN a folder, because that is the unit a
+     * series is scoped to: the Java Quick Start steps are a sequence, while the
+     * install-java pages next door are alternatives and carry no weight at all.
+     */
+    static List<String> checkSeriesWeights(Path pagesDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(pagesDir)) return problems;
+
+        Map<Path, Map<Integer, List<Path>>> byDir = new LinkedHashMap<>();
+        try (Stream<Path> files = Files.walk(pagesDir)) {
+            for (Path file : files.filter(p -> p.toString().endsWith(".md")).sorted().toList()) {
+                if (file.getFileName().toString().equals("_index.md")) continue;
+                Map<String, Object> fm = readFrontmatter(file);
+                if (fm == null || !(fm.get("weight") instanceof Integer weight)) continue;
+                byDir.computeIfAbsent(file.getParent(), d -> new LinkedHashMap<>())
+                        .computeIfAbsent(weight, w -> new ArrayList<>())
+                        .add(file);
+            }
+        }
+        for (Map.Entry<Path, Map<Integer, List<Path>>> dir : byDir.entrySet()) {
+            for (Map.Entry<Integer, List<Path>> e : dir.getValue().entrySet()) {
+                if (e.getValue().size() > 1) {
+                    problems.add(dir.getKey() + ": weight " + e.getKey()
+                            + " is claimed by more than one page, so the series order is ambiguous: "
+                            + e.getValue());
+                }
+            }
+        }
+        return problems;
+    }
+
     static List<String> checkFeaturedAuthors(Path configFile, Set<String> authorSlugs) throws IOException {
         List<String> problems = new ArrayList<>();
         if (!Files.isRegularFile(configFile)) return problems;

@@ -12,7 +12,14 @@
 {{ $hasToc := partial "has-toc.html" . }}
 <div class="{{ if $hasToc }}layout-with-sidebar{{ else }}content-col full-width{{ end }}">
   <article class="{{ if $hasToc }}content-col {{ end }}page-single prose">
+    {{/* Both render nothing unless the page carries a `weight`, i.e. is a step
+         in a multi-page series (the Java Quick Start tutorial today). Kept here
+         rather than in a series-specific layout so any folder of ordered pages
+         gets the navigation by adding one number per page, and every other page
+         using this template is untouched. */}}
+    {{ partial "series-progress.html" . }}
     {{ .Content }}
+    {{ partial "series-nav.html" . }}
   </article>
   {{ if $hasToc }}
   <aside class="sidebar" data-pagefind-ignore>

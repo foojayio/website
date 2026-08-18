@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Using Methods"
+linkTitle: "Using Methods"
 description: "Split a Java program into methods to keep the code simple, readable and maintainable long after you wrote it."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/"
 url: "/java-quick-start/quick-start-tutorial/using-methods/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/using-methods/"
 frozen: false
+weight: 7
 ---
-
-[\<\< Enum and Switch](https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/)  
-[Using Objects \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)
 
 {{< youtube KKxQMlTQtn4 >}}
 
@@ -34,6 +33,3 @@ $ java UsingMethod.java
 2 x Raspberry Pi 4 4Gb, price: 119.9000015258789 Euro
 Current date and time is: 2022.12.09 21:35:23
 ```
-
-[\<\< Enum and Switch](https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/)  
-[Using Objects \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)

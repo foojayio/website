@@ -1,0 +1,29 @@
+{{- /* Previous / next cards at the foot of a series step.
+
+       Derived from partials/series-steps.html, so a step's title comes from the
+       step itself and the first and last pages simply have one card instead of
+       two -- the old hand-written version had to remember that, and the pair on
+       every page was written out twice (top and bottom) in the markdown. */ -}}
+{{- $steps := partial "series-steps.html" . -}}
+{{- if $steps -}}
+{{- $current := 0 -}}
+{{- range $i, $s := $steps }}{{ if eq $s.RelPermalink $.RelPermalink }}{{ $current = add $i 1 }}{{ end }}{{ end -}}
+{{- $prev := cond (gt $current 1) (index $steps (sub $current 2)) false -}}
+{{- $next := cond (lt $current (len $steps)) (index $steps $current) false -}}
+<nav class="series-nav" aria-label="Tutorial navigation">
+  {{- with $prev }}
+  <a class="series-nav__card series-nav__card--prev" href="{{ .RelPermalink }}" rel="prev">
+    <span class="series-nav__dir">&larr; Previous</span>
+    <span class="series-nav__title">{{ .LinkTitle }}</span>
+  </a>
+  {{- else }}
+  <span class="series-nav__spacer"></span>
+  {{- end }}
+  {{- with $next }}
+  <a class="series-nav__card series-nav__card--next" href="{{ .RelPermalink }}" rel="next">
+    <span class="series-nav__dir">Next &rarr;</span>
+    <span class="series-nav__title">{{ .LinkTitle }}</span>
+  </a>
+  {{- end }}
+</nav>
+{{- end -}}

@@ -16,41 +16,27 @@ frozen: false
 
 Let's first check if you already have Java installed. If not, we provide step-by-step instructions for each operating system below.
 
-a. [Check Your Java Installation](https://foojay.io/java-quick-start/install-java/check-your-java-installation/)
-
-b. [Install Java (Windows)](https://foojay.io/java-quick-start/install-java/install-java-on-windows/)
-
-c. [Install Java (Mac OS X)](https://foojay.io/java-quick-start/install-java/install-java-on-macos/)
-
-d. [Install Java (Linux)](https://foojay.io/java-quick-start/install-java/install-java-on-linux/)
-
-e. [Find Another Java Version](https://foojay.io/java-quick-start/install-java/find-another-java-version/)
+* [Check Your Java Installation](https://foojay.io/java-quick-start/install-java/check-your-java-installation/)
+* [Install Java (Windows)](https://foojay.io/java-quick-start/install-java/install-java-on-windows/)
+* [Install Java (Mac OS X)](https://foojay.io/java-quick-start/install-java/install-java-on-macos/)
+* [Install Java (Linux)](https://foojay.io/java-quick-start/install-java/install-java-on-linux/)
+* [Find Another Java Version](https://foojay.io/java-quick-start/install-java/find-another-java-version/)
 
 ## 2. Get Started
 
 In ***less than 30 minutes***, let's go from choosing an editor to using the latest Java language features.
 
-a. [Choosing an Editor](https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/) (00:01:07)
-
-b. ["Hello World!"](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world) (00:02:42)
-
-c. [Using Arguments and String Arrays](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/) (00:02:10)
-
-d. [Working with Numbers](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/) (00:02:08)
-
-e. [If, Then, Else](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/) (00:03:14)
-
-f. [Enum and Switch](https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/) (00:02:45)
-
-g. [Using Methods](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/) (00:02:32)
-
-h. [Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/) (00:04:07)
-
-i. [Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/) (00:05:39)
-
-j. [Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams/) (00:02:53)
-
-k. [What's Next?](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next/) (00:00:035)
+* [Choosing an Editor](https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/) (00:01:07)
+* ["Hello World!"](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world) (00:02:42)
+* [Using Arguments and String Arrays](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/) (00:02:10)
+* [Working with Numbers](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/) (00:02:08)
+* [If, Then, Else](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/) (00:03:14)
+* [Enum and Switch](https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/) (00:02:45)
+* [Using Methods](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/) (00:02:32)
+* [Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/) (00:04:07)
+* [Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/) (00:05:39)
+* [Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams/) (00:02:53)
+* [What's Next?](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next/) (00:00:035)
 
 ## 3. Next Steps
 

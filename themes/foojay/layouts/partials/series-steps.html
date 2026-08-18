@@ -1,0 +1,23 @@
+{{- /* The ordered steps of the multi-page series a page belongs to, or an empty
+       slice when it isn't in one. The single definition of "what the series is"
+       -- the progress bar at the top of a step, the prev/next cards at the
+       bottom, and the step count all come from here.
+
+       A series is simply "the pages in this folder that carry a `weight`", so
+       the only thing an author states is the ORDER, which is the one thing a
+       layout cannot work out for itself. Everything else (titles, links, how
+       many steps there are, which one is first or last) is derived, so the 20
+       hand-written "<< Prev / Next >>" links these pages used to carry -- which
+       had already drifted, two pages were missing their bottom pair -- have
+       nothing to go out of date with.
+
+       Sibling pages WITHOUT a weight are not part of a series: the five
+       install-java pages are alternatives (Windows / macOS / Linux), not a
+       sequence, so they get no nav rather than a wrong one. */ -}}
+{{- $p := . -}}
+{{- $steps := slice -}}
+{{- if and $p.File (gt $p.Weight 0) -}}
+  {{- $siblings := where site.RegularPages "File.Dir" $p.File.Dir -}}
+  {{- $steps = sort (where $siblings "Weight" ">" 0) "Weight" -}}
+{{- end -}}
+{{- return $steps -}}

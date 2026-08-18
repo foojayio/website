@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Enum and Switch"
+linkTitle: "Enum and Switch"
 description: "Replace loose integer values with an enum, and use a switch to react to each of its options in Java."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/"
 url: "/java-quick-start/quick-start-tutorial/enum-and-switch/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/enum-and-switch/"
 frozen: false
+weight: 6
 ---
-
-[\<\< If, Then, Else](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)  
-[Using Methods \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/)
 
 {{< youtube G-M2uMq7FrY >}}
 
@@ -44,5 +43,3 @@ No action defined for this type: TYPE_2
 ```
 
 That does not what we wanted to achieve! All the cases after the valid one are returned now... That's also the reason we don't need to add a break in the `default` block, as this is the last one anyhow.  
-[\<\< If, Then, Else](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)  
-[Using Methods \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/)

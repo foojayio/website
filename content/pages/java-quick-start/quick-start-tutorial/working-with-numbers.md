@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Working with numbers"
+linkTitle: "Working with Numbers"
 description: "The Java number types you will actually use - int, float, double and long - and how to work with them."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/"
 url: "/java-quick-start/quick-start-tutorial/working-with-numbers/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/working-with-numbers/"
 frozen: false
+weight: 4
 ---
-
-[\<\< Using Arguments and String Arrays](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)  
-[If, Then, Else \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)
 
 {{< youtube ZzJP-NIi5zU >}}
 
@@ -38,6 +37,3 @@ Float: 1.1234568
 Double: 1.1234567890123457
 Multiply: 2.2469137, rounded: 2
 ```
-
-[\<\< Using Arguments and String Arrays](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)  
-[If, Then, Else \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)

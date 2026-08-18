@@ -1,0 +1,29 @@
+{{- /* "Quick Start Tutorial - Step 2 of 11" plus a progress bar, shown under the
+       page head of a series step.
+
+       This replaces the TOP copy of the old hand-written prev/next pair. The
+       bottom pair is the one a reader actually uses (you navigate on when you
+       have finished reading), so repeating it above the fold said nothing;
+       "where am I in this, and how much is left" is the question a reader
+       genuinely has at the top of a tutorial step. */ -}}
+{{- $steps := partial "series-steps.html" . -}}
+{{- if $steps -}}
+{{- $total := len $steps -}}
+{{- $current := 0 -}}
+{{- range $i, $s := $steps }}{{ if eq $s.RelPermalink $.RelPermalink }}{{ $current = add $i 1 }}{{ end }}{{ end -}}
+{{- $parentPath := printf "%s.md" (strings.TrimSuffix "/" .File.Dir) -}}
+{{- $parents := where site.RegularPages "File.Path" $parentPath -}}
+<nav class="series-progress" aria-label="Tutorial progress">
+  <p class="series-progress__label">
+    {{- with $parents }}<a href="{{ (index . 0).RelPermalink }}">{{ (index . 0).LinkTitle }}</a>{{ end -}}
+    <span class="series-progress__step">Step {{ $current }} of {{ $total }}</span>
+  </p>
+  <ol class="series-progress__bar">
+    {{- range $i, $s := $steps -}}
+    <li class="series-progress__tick{{ if lt $i $current }} is-done{{ end }}{{ if eq (add $i 1) $current }} is-current{{ end }}">
+      <a href="{{ $s.RelPermalink }}" title="{{ $s.LinkTitle }}"><span class="visually-hidden">{{ $s.LinkTitle }}</span></a>
+    </li>
+    {{- end -}}
+  </ol>
+</nav>
+{{- end -}}

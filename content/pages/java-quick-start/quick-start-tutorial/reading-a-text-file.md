@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Reading a Text File"
+linkTitle: "Reading a Text File"
 description: "Read a CSV file from disk in Java, combining files, loops and objects into one small working program."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/"
 url: "/java-quick-start/quick-start-tutorial/reading-a-text-file/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/reading-a-text-file/"
 frozen: false
+weight: 9
 ---
-
-[\<\< Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)  
-[Using Streams \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams)
 
 {{< youtube cUmrGaGkTkU >}}
 
@@ -125,6 +124,3 @@ public class ReadTextFile {
     }
 }
 ```
-
-[\<\< Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)  
-[Using Streams \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams)

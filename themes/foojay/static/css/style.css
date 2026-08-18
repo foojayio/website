@@ -1670,3 +1670,102 @@ body.lightbox-open { overflow: hidden; }
   margin: auto 0 0; padding-top: .9rem;
   font-size: .9rem; font-weight: 600;
 }
+
+/* ---------------------------------------------------------------------------
+   Multi-page series navigation (partials/series-progress.html + series-nav.html).
+
+   Used by the Java Quick Start tutorial steps, and by any folder of ordered
+   pages that gives its pages a `weight`. Two halves answering two different
+   questions: the bar at the top says where you are, the cards at the bottom say
+   where to go next. The old markdown carried the same two links in both
+   places. */
+
+/* The tick links carry their step's title for a screen reader; sighted readers
+   get it from the title attribute on hover. No such utility existed yet. */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+.series-progress {
+  margin: 0 0 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.series-progress__label {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem;
+  margin: 0 0 .6rem;
+  font-size: .9rem;
+}
+.series-progress__label a { font-weight: 600; text-decoration: none; }
+.series-progress__label a:hover { text-decoration: underline; }
+.series-progress__step { color: var(--ink-muted); }
+.series-progress__step::before { content: "·"; margin-right: .5rem; }
+
+/* One tick per step, each a link to it -- a progress bar you can also navigate
+   with. Ticks flex to share the width, so 11 steps or 4 both fill the row. */
+.series-progress__bar {
+  display: flex; gap: 4px;
+  list-style: none; margin: 0; padding: 0;
+}
+.series-progress__tick { flex: 1 1 0; }
+.series-progress__tick a {
+  display: block; height: 6px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.series-progress__tick.is-done a { background: var(--brand-accent); border-color: var(--brand-accent); }
+.series-progress__tick.is-current a { box-shadow: 0 0 0 3px var(--brand-accent-soft); }
+.series-progress__tick a:hover { border-color: var(--border-strong); }
+
+/* Two fixed columns rather than auto-fit: the first and last steps have only
+   one card, and auto-fit collapses to a single column for them -- so "Next"
+   stretched the full width on step 1 and sat on the wrong side. The empty
+   .series-nav__spacer holds the missing cell open so prev is always left and
+   next always right, whichever one is absent. */
+.series-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.series-nav__card {
+  display: flex; flex-direction: column; gap: .3rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none; color: inherit;
+}
+.series-nav__card:hover { border-color: var(--brand-accent); }
+/* The "next" card is the one a reader wants at the end of a step, so it sits
+   on the right and reads right-aligned even when "previous" is absent. */
+.series-nav__card--next { text-align: right; grid-column: 2; }
+.series-nav__dir { font-size: .8rem; font-weight: 700; color: var(--brand-accent); text-transform: uppercase; letter-spacing: .04em; }
+.series-nav__title { font-weight: 600; line-height: 1.35; }
+.series-nav__spacer { display: block; }
+
+/* Both navs render INSIDE .prose (they are part of the article, so they scroll
+   with it), and .prose styles lists and links generically. Three of its rules
+   reach in here and have to be beaten on specificity -- a single class is 0-1-0
+   and `.prose li + li` is 0-1-1, so these are written class-on-class rather
+   than bumped with !important:
+     .prose ul, .prose ol { padding-left: 1.4rem }  - indents the whole bar
+     .prose li + li { margin-top: .35rem }          - pushed every tick EXCEPT
+                                                      the first one down, so the
+                                                      first step sat visibly
+                                                      higher than the other ten
+     .prose a { ... }                               - underlines the nav cards */
+.series-progress .series-progress__bar { padding-left: 0; margin: 0; }
+.series-progress .series-progress__tick + .series-progress__tick { margin-top: 0; }
+.series-nav .series-nav__card { text-decoration: none; }
+
+@media (max-width: 560px) {
+  .series-nav { grid-template-columns: 1fr; }
+  .series-nav__card--next { grid-column: 1; text-align: left; }
+  .series-nav__spacer { display: none; }
+}

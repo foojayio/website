@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Using the Arguments"
+linkTitle: "Using Arguments and String Arrays"
 description: "Use the start-up arguments of the main method to learn Java arrays: their length, and how to loop through them."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/"
 url: "/java-quick-start/quick-start-tutorial/using-the-arguments/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/using-the-arguments/"
 frozen: false
+weight: 3
 ---
-
-[\<\< Hello World!](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world/)  
-[Working with Numbers \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/)
 
 {{< youtube oKBQaesKJJI >}}
 
@@ -36,6 +35,3 @@ First argument: Hello World
 Argument 1: Hello World
 Argument 2: Bye
 ```
-
-[\<\< Hello World!](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world/)  
-[Working with Numbers \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/)

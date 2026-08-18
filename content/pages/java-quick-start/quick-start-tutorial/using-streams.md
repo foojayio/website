@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Using Streams"
+linkTitle: "Using Streams"
 description: "Streams, added in Java 8, let you chain steps over a collection. Extend the text-file example with filtering and mapping."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-streams/"
 url: "/java-quick-start/quick-start-tutorial/using-streams/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/using-streams/"
 frozen: false
+weight: 10
 ---
-
-[\<\< Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)  
-[What's Next? \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next)
 
 {{< youtube v07_Z3ILyVU >}}
 
@@ -181,6 +180,3 @@ public class ReadTextFile {
     }
 }
 ```
-
-[\<\< Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)  
-[What's Next? \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next)

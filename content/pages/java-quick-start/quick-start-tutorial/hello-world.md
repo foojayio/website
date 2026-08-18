@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with Java - Hello World"
+linkTitle: "Hello World!"
 description: "Write and run your first Java program with a simple Hello World example, including the Java 25 shorthand syntax and the classic class-based approach."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/hello-world/"
 url: "/java-quick-start/quick-start-tutorial/hello-world/"
@@ -7,10 +8,8 @@ jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/hello-world/"
 frozen: false
+weight: 2
 ---
-
-[\<\< Choosing an Editor](https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/)  
-[Using Arguments and String Arrays \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)
 
 {{< youtube 0w0ddtnMCUk >}}
 
@@ -47,6 +46,3 @@ void main() {
     IO.println("Hello World");
 }
 ```
-
-[\<\< Choosing an Editor](https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/)  
-[Using Arguments and String Arrays \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)
