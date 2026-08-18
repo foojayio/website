@@ -1,14 +1,16 @@
 ---
 title: "Idempotent Write Paths: Keeping an Integration Pipeline Correct When Messages Repeat"
 date: "2026-08-17T06:46:00+00:00"
-lastmod: "2026-08-18T03:35:47+00:00"
+lastmod: "2026-08-18T08:02:07+00:00"
 description: "A reconciliation that didn't add up Let me start with a real one. After a big sales promo, during reconciliation, finance said a batch of orders had the - by Yuelin Ou"
 authors:
   - "yuelin-ou"
 image: "A1_featured_image.png"
 categories:
+  - "Java"
   - "Observability"
   - "Streaming"
+  - "Tutorials"
 related_posts:
 frozen: false
 ---
