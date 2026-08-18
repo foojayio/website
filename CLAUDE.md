@@ -188,7 +188,13 @@ should catch a mistake at PR time rather than letting it fail silently.
   posts and all 30 pedia entries match. The 7 items it reports as unmatched are
   WordPress listing pages (`today`, `author`, `sitemap`, `home-page`, …) with no
   single Hugo page behind them; `PAGE_ALIASES` covers the one page whose Hugo
-  file is named differently (`jugs` → `java-user-groups-jugs`).
+  file is named differently (`jugs` → `java-user-groups-jugs`), and
+  `SECTION_MOVES` the one that changed *section* (WP page `log4j-cve` → Hugo
+  post `posts/log4j-cve`). Add to `SECTION_MOVES` whenever a WP page is
+  republished here as a post: WordPress can't be edited to follow, so without
+  the entry the item resolves against the wrong section's slugs, lands in
+  `unmatched`, and its whole count is silently dropped at the next run. The
+  key in `data/legacy-views.json`/`data/views.json` has to move with it.
 - **`scripts/FetchViewCounts.java`**: the CI half — reads
   `/api/views/all` into `data/views.json` at every deploy and four times a day, so the
   numbers are baked into the HTML. **Never fails the build**: if the counter is

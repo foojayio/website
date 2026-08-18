@@ -1,11 +1,20 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
-canonical: "https://foojay.io/log4j-cve/"
-url: "/log4j-cve/"
+title: "Apache Log4j CVE-2021-44228"
+date: "2021-12-13T07:10:19+00:00"
+lastmod: "2021-12-13T14:48:44+00:00"
+description: "Everything foojay collected on Log4Shell (CVE-2021-44228): the RCE itself, the LDAP attack vectors on recent JDKs, how to find out what leaked, and how to mitigate."
+authors:
+  - "geertjan-wielenga"
+image: "image-13-1024x692.png"
+categories:
+  - "Security"
+related_posts:
+  - "log4shell-critical-log4j-rce-vulnerabilty-update-to-version-2-15-0"
+  - "log4j-isnt-killing-java"
+  - "java-security-log4j-the-securitymanager-and-funding"
 aliases:
   - "/log4j-cve/"
-frozen: false
+frozen: true
 ---
 
 On Dec.10, 2021, a new, critical [Log4j](https://logging.apache.org/log4j/2.x/) vulnerability was disclosed: [Log4Shell](https://techcrunch.com/2021/12/10/apple-icloud-twitter-and-minecraft-vulnerable-to-ubiquitous-zero-day-exploit/).
@@ -21,7 +30,7 @@ Many application frameworks in the Java ecosystem use this logging framework by 
 (Read the complete article on [Snyk.io](https://snyk.io/blog/log4j-rce-log4shell-vulnerability-cve-2021-4428/).)
 
 The above describes the RCE (remote code execution vulnerability), illustrated below by [GovCERT.ch](https://www.govcert.admin.ch/blog/zero-day-exploit-targeting-popular-java-library-log4j/#general):
-![](/images/pages/log4j-cve/image-13-1024x692.png)
+![Diagram of the Log4Shell remote code execution flow, by GovCERT.ch](image-13-1024x692.png)
 
 Note the following on the attack vulnerabilities relating to system properties, environment variables, and deserialization, provided by [Lari Hotari from DataStax](https://gist.github.com/lhotari/18292c08586d1982e88658d239f02c57).
 
@@ -88,8 +97,8 @@ There's also [Java Serialization Filtering](https://docs.oracle.com/en/java/java
 
 ## Relevant Tweets
 
- <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="/images/pages/log4j-cve/image-950x1024.png" alt="" width="436" height="469" >}}</a>
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="image-950x1024.png" alt="" width="436" height="469" >}}</a>
 
- <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="/images/pages/log4j-cve/kryptos-1024x1000.png" alt="" width="438" height="428" >}}</a>
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="kryptos-1024x1000.png" alt="" width="438" height="428" >}}</a>
 
- <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885">{{< img src="/images/pages/log4j-cve/checking-1024x802.png" alt="" width="440" height="345" >}}</a>
+ <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885">{{< img src="checking-1024x802.png" alt="" width="440" height="345" >}}</a>

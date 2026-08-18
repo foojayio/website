@@ -99,6 +99,17 @@ public class FetchWpViews {
      */
     static final Map<String, String> PAGE_ALIASES = Map.of("jugs", "java-user-groups-jugs");
 
+    /**
+     * WordPress objects that live in a different SECTION here, keyed
+     * `<wp-type>/<wp-slug>` -> the Hugo `<section>/<slug>` key. WordPress can't
+     * be edited to follow, so the mapping has to live on this side: without it
+     * the item resolves against the wrong section's slugs, lands in `unmatched`
+     * and its whole count is silently dropped at the next run.
+     *
+     * /log4j-cve/ is a WP page and a Hugo post (content/posts/2021/12/13/).
+     */
+    static final Map<String, String> SECTION_MOVES = Map.of("pages/log4j-cve", "posts/log4j-cve");
+
     // WP Engine's WAF 403s a bare Java/Python user agent on these routes while
     // letting a browser through. Nothing about the request is otherwise
     // unusual, so this is the only thing standing between the script and an
@@ -134,6 +145,11 @@ public class FetchWpViews {
             Set<String> local = isPost ? localPosts : localPages;
             String section = isPost ? "posts" : "pages";
             for (WpItem item : listItems(type)) {
+                String moved = SECTION_MOVES.get(type + "/" + item.slug);
+                if (moved != null) {
+                    targets.add(new Target(moved, item.id));
+                    continue;
+                }
                 String slug = resolveSlug(item.slug, local, isPost ? Map.of() : PAGE_ALIASES);
                 if (slug == null) unmatched.add(type + " " + item.slug);
                 else targets.add(new Target(section + "/" + slug, item.id));

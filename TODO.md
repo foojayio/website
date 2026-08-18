@@ -37,7 +37,7 @@
 
 ## Missing Content
 
-* [ ] log4j-cve.md
+* [X] log4j-cve.md
 * [ ] advisory boardext
 * [ ] Foojay.io AI Portal
 
