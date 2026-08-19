@@ -214,11 +214,18 @@ def convert_gif(gif, budget, dry_run):
         for cap, q in LADDER:
             written = encode_webp(frames, durations, loop, tmp, cap, q)
             size = tmp.stat().st_size
-            # Verify the animation survived before trusting this result at all.
+            # Verify the animation survived -- but NOT by frame equality. libwebp
+            # merges duplicate consecutive frames as an optimisation (221 in, 198
+            # out on the TestBox recording), which is correct and desirable. An
+            # equality check rejected 23 of 65 GIFs, leaving the biggest offenders
+            # in place; reading durations back is no help either, since Pillow
+            # reports 0 ms for a WebP it just wrote. So the test is: still animated,
+            # and not truncated to a fraction of its length.
             with Image.open(tmp) as check:
-                if getattr(check, "n_frames", 1) != written:
-                    print(f"  SKIP {gif.name} -- animation did not survive encoding")
-                    return None
+                got = getattr(check, "n_frames", 1)
+            if written > 1 and (got < 2 or got < written * 0.5):
+                print(f"  SKIP {gif.name} -- animation truncated ({written} -> {got} frames)")
+                return None
             best = size
             if size <= budget:
                 break

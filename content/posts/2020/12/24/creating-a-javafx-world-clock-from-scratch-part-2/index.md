@@ -212,7 +212,7 @@ To use the function tipPointXY() it will return an array of type double containi
 You should notice the method call to `setTranslateY(hourTipPoint[1] * -1)` where its value is multiplied by **-1**. This is to convert to the screen coordinate system where the Y coordinate going in a southerly direction are positive values.
 
 Shown below is the hour hand **arc** and **tip** moving around the clock face.  
-![Hour Hand Animation with tip](hourhand-animation.gif)
+![Hour Hand Animation with tip](hourhand-animation.webp)
 
 *Hour Hand Animation with tip*{#caption-attachment-36630}
 

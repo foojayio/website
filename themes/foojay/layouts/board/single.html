@@ -9,7 +9,11 @@
      recorded in frontmatter, so a new sponsor bundle links itself up and there
      is no second place to update when one lapses. */}}
 {{ $sponsor := "" }}
-{{ with where (where site.RegularPages "Section" "sponsors") "Title" .Title }}{{ $sponsor = index . 0 }}{{ end }}
+{{/* Via sponsors-ordered.html rather than site.RegularPages -- sponsor
+     profiles are branch bundles, which site.RegularPages does not contain,
+     so the old filter silently matched nothing and every board member who
+     also sponsors Foojay quietly lost the link to their profile. */}}
+{{ with where (partial "sponsors-ordered.html" .) "Title" .Title }}{{ $sponsor = index . 0 }}{{ end }}
 
 <div class="content-col full-width">
   <article class="board-single">

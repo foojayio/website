@@ -54,11 +54,11 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 * **Per-bundle Run button** — re-run a single bundle without touching the rest
 
-![](444.gif)
+![](444.webp)
 
 * **Debug Buffer Panel** — captured TestBox debug output surfaced per-bundle
 
-![](555.gif)
+![](555.webp)
 
 * **Floating progress widget** — current bundle, specs completed vs. total, animated progress bar
 
