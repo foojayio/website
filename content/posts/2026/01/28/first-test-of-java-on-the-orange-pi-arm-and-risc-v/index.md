@@ -2,7 +2,7 @@
 title: "First Test of Java on the Orange Pi (ARM and RISC-V)"
 date: "2026-01-28T06:52:00+00:00"
 lastmod: "2026-01-28T10:51:49+00:00"
-description: "As part of my 2026 learning goals around Java on Single Board Computers and RISC-V (see this post about x86 versus ARM versus RISC-V), I've been asking - by Frank Delporte"
+description: "As part of my 2026 learning goals around Java on Single Board Computers and RISC-V (see this post about x86 versus ARM versus RISC-V), I've been asking…"
 canonical: "https://webtechie.be/post/2026-01-12-first-test-orangepi-java/"
 authors:
   - "frankdelporte"

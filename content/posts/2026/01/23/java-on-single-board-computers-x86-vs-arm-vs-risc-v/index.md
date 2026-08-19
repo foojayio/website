@@ -1,7 +1,7 @@
 ---
 title: "Java on Single Board Computers: x86 vs ARM vs RISC-V"
 date: "2026-01-23T06:17:00+00:00"
-description: "Ever since I started my #JavaOnRaspberryPi journey in 2019, which resulted in my book \"Getting Started with Java on the Raspberry Pi\", I've been - by Frank Delporte"
+description: "Ever since I started my #JavaOnRaspberryPi journey in 2019, which resulted in my book \"Getting Started with Java on the Raspberry Pi\", I've been…"
 canonical: "https://webtechie.be/post/2026-01-07-x86-arm-riscv/"
 authors:
   - "frankdelporte"

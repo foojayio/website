@@ -2,7 +2,7 @@
 title: "Enabling AI Agents to Use a Real Debugger Instead of Logging"
 date: "2026-02-16T21:12:13+00:00"
 lastmod: "2026-02-17T07:57:14+00:00"
-description: "Every Java developer has been there. Something breaks, and the first instinct is to litter the code with System.out.println(\">>> HERE - by Bruno Borges"
+description: "Every Java developer has been there. Something breaks, and the first instinct is to litter the code with System.out.println(\">>> HERE…"
 authors:
   - "bruno-borges"
 image: "debugger-ai.webp"

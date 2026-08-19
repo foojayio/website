@@ -2,7 +2,7 @@
 title: "Managing MongoDB Database Changes Using Liquibase Pro"
 date: "2025-08-20T14:21:51+00:00"
 lastmod: "2025-08-20T14:34:12+00:00"
-description: "This article explores how Liquibase and MongoDB can be integrated with Git actions to implement source control for database changes. What is Liquibase? - by Ravindar Karampuri"
+description: "This article explores how Liquibase and MongoDB can be integrated with Git actions to implement source control for database changes. What is Liquibase?"
 authors:
   - "ravindar-karampuri"
 image: "mongologo.png"

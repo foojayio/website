@@ -1,7 +1,7 @@
 ---
 title: "JavaFX Links of November 2025"
 date: "2025-11-30T06:42:41+00:00"
-description: "Here is the overview of the JavaFX LinksOfTheMonth of November 2025. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there - by Frank Delporte"
+description: "Here is the overview of the JavaFX LinksOfTheMonth of November 2025. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there…"
 canonical: "https://webtechie.be/post/2025-11-28-javafx-links-of-november-2025/"
 authors:
   - "frankdelporte"

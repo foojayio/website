@@ -1,7 +1,7 @@
 ---
 title: "Oracle's Java Verified Portfolio and JavaFX: What It Actually Means"
 date: "2026-04-02T07:01:48+00:00"
-description: "Oracle's JavaOne 2026 brought an announcement that caught some attention in the Java community: the Java Verified Portfolio (JVP), a new program that - by Frank Delporte"
+description: "Oracle's JavaOne 2026 brought an announcement that caught some attention in the Java community: the Java Verified Portfolio (JVP), a new program that…"
 authors:
   - "frankdelporte"
 image: "javafx_logo.jpg"

@@ -2,7 +2,7 @@
 title: "Why a Cloud-Native Database Must Run on K8s"
 date: "2022-07-19T17:44:09+00:00"
 lastmod: "2022-07-19T17:44:10+00:00"
-description: "We’ve been talking about migrating workloads to the cloud for a long time, but a look at the application portfolios of many IT organizations demonstrates - by Jeff Carpenter"
+description: "We’ve been talking about migrating workloads to the cloud for a long time, but a look at the application portfolios of many IT organizations demonstrates…"
 canonical: "https://containerjournal.com/kubeconcnc/why-a-cloud-native-database-must-run-on-k8s/"
 authors:
   - "jeff-carpenter"

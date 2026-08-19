@@ -2,7 +2,7 @@
 title: "Foojay Podcast #93: Update Your JDK, Read More Code, and Talk to Your Users: Interviews From VoxxedDays Amsterdam"
 date: "2026-04-13T06:35:00+00:00"
 lastmod: "2026-04-27T12:06:10+00:00"
-description: "In this episode of the Foojay Podcast, we're bringing you something special: a full batch of hallway-track conversations recorded live at VoxxedDays - by Frank Delporte"
+description: "In this episode of the Foojay Podcast, we're bringing you something special: a full batch of hallway-track conversations recorded live at VoxxedDays…"
 authors:
   - "frankdelporte"
   - "johannes-bechberger"

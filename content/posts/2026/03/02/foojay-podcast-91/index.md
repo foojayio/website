@@ -1,7 +1,7 @@
 ---
 title: "25 Years of IntelliJ IDEA: The IDE That Grew Up With Java"
 date: "2026-03-02T07:21:06+00:00"
-description: "In this Foojay Podcast, we're celebrating a major milestone in Java development history: 25 years of IntelliJ IDEA. Think about it: IntelliJ IDEA launched - by Frank Delporte"
+description: "In this Foojay Podcast, we're celebrating a major milestone in Java development history: 25 years of IntelliJ IDEA. Think about it: IntelliJ IDEA launched…"
 authors:
   - "frankdelporte"
   - "marit-van-dijk"

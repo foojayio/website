@@ -2,7 +2,7 @@
 title: "BoxLang Redis Has Landed: Enterprise-Grade Caching, Pub/Sub, and Distributed Locking"
 date: "2025-11-25T09:33:34+00:00"
 lastmod: "2025-11-25T09:35:45+00:00"
-description: "We're thrilled to announce the release of the BoxLang Redis Module (bx-redis) - a powerful addition to BoxLang that brings enterprise-grade Redis - by Cristobal Escobar"
+description: "We're thrilled to announce the release of the BoxLang Redis Module (bx-redis) - a powerful addition to BoxLang that brings enterprise-grade Redis…"
 authors:
   - "cristobal-escobar"
 image: "BoxLang-Logo-Dark.png"

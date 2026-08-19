@@ -1,7 +1,7 @@
 ---
 title: "First Test of Java on BeagleBoards (ARM and RISC-V)"
 date: "2026-02-18T07:10:00+00:00"
-description: "As part of my 2026 learning goals around Java on RISC-V (see this post about x86 versus ARM versus RISC-V), I've asked various suppliers to send me - by Frank Delporte"
+description: "As part of my 2026 learning goals around Java on RISC-V (see this post about x86 versus ARM versus RISC-V), I've asked various suppliers to send me…"
 canonical: "https://webtechie.be/post/2026-02-10-first-test-beagleboard-java/"
 authors:
   - "frankdelporte"

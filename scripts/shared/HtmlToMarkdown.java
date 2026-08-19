@@ -473,6 +473,60 @@ public final class HtmlToMarkdown {
     }
 
     /**
+     * Strips the " - by &lt;Author&gt;" tail Yoast appends when it builds a meta
+     * description by truncating the body instead of using one the author wrote:
+     *
+     *     ...copy-pasting code that may or may not still - by Cristobal Escobar
+     *
+     * 290 of 2148 descriptions in content/ carry it. It is worth removing for
+     * two reasons: it restates a byline the search result and the link preview
+     * already show separately, and it does so inside the ~155 characters Google
+     * renders -- so on a long description the suffix is the part that survives
+     * and the actual subject is the part that gets cut.
+     *
+     * AUTHOR-AWARE ON PURPOSE, and this is the whole safety story. " - by
+     * &lt;Capitalised Words&gt;" at the end of a sentence is also how a human
+     * writes "a new translation of the Odyssey - by Emily Wilson", and no
+     * lexical rule tells the two apart. So the tail is only removed when the
+     * name it gives is one of the post's OWN credited authors -- which is
+     * exactly what makes it Yoast's stamp rather than the author's prose. 289 of
+     * the 290 match that way; the one that does not is a description with the
+     * byline buried mid-string, left alone and reported.
+     *
+     * The remainder is then re-terminated with an ellipsis when it does not
+     * already end in sentence punctuation. That is not cosmetic: Yoast cut the
+     * body mid-sentence to make room for the byline, so removing the byline
+     * leaves a fragment ("...code that may or may not still"), and a trailing
+     * "…" is how a snippet says it is a snippet. Only applied where a byline was
+     * actually removed -- a description that merely lacks a full stop is
+     * somebody's deliberate wording, not a truncation.
+     *
+     * Idempotent: with the tail gone the pattern no longer matches, and the
+     * ellipsis is itself terminal punctuation.
+     *
+     * @param authorNames the display names of the post's credited authors; an
+     *                    empty or null collection means nothing is stripped.
+     */
+    public static String stripBylineSuffix(String description, java.util.Collection<String> authorNames) {
+        if (description == null || description.isBlank() || authorNames == null) return description;
+        for (String name : authorNames) {
+            if (name == null || name.isBlank()) continue;
+            String tail = " - by " + name.trim();
+            if (!description.endsWith(tail)) continue;
+            String head = description.substring(0, description.length() - tail.length()).stripTrailing();
+            if (head.isBlank()) return description;   // the byline was the whole thing
+            return endsSentence(head) ? head : head + "…";
+        }
+        return description;
+    }
+
+    /** True when the text already closes on sentence punctuation or a quote. */
+    private static boolean endsSentence(String text) {
+        char c = text.charAt(text.length() - 1);
+        return c == '.' || c == '!' || c == '?' || c == '…' || c == '"' || c == '\u201d' || c == ')';
+    }
+
+    /**
      * Resolves the HTML entities left over in code by WordPress's double-escaping.
      *
      * Some post bodies store a Java lambda arrow as `-&amp;gt;`, so the HTML

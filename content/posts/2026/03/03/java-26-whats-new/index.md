@@ -2,7 +2,7 @@
 title: "Java 26: What’s New?"
 date: "2026-03-03T10:00:28+00:00"
 lastmod: "2026-03-11T10:52:20+00:00"
-description: "This article was first published in my personal blog: Java 26: What's new? and is part of a serie on what’s new on the last versions of Java). Now that - by Loic Mathieu"
+description: "This article was first published in my personal blog: Java 26: What's new? and is part of a serie on what’s new on the last versions of Java). Now that…"
 canonical: "https://www.loicmathieu.fr/wordpress/informatique/java-26-whats-new/"
 authors:
   - "loic-mathieu"

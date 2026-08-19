@@ -2,7 +2,7 @@
 title: "Java Conferences in 2025"
 date: "2025-01-01T16:12:00+00:00"
 lastmod: "2025-07-16T10:03:37+00:00"
-description: "Also see javaconferences.org, a subset of which is below. January 15: Voxxed Days CERN, Switzerland 17: Voxxed Days Ticino, Switzerland 23, 24, 27, 28: - by Geertjan Wielenga"
+description: "Also see javaconferences.org, a subset of which is below. January 15: Voxxed Days CERN, Switzerland 17: Voxxed Days Ticino, Switzerland 23, 24, 27, 28:…"
 authors:
   - "geertjan-wielenga"
 image: "Favicon-3-2.png"

@@ -1,7 +1,7 @@
 ---
 title: "HTTP QUERY Method Explained: RFC 10008, Ecosystem Adoption, and a Quarkus Implementation"
 date: "2026-07-31T08:00:37+00:00"
-description: "When you build a search API, you usually start with HTTP GET, the natural choice for a read operation: it is safe, idempotent, and cacheable. Then the - by Hüseyin Akdoğan"
+description: "When you build a search API, you usually start with HTTP GET, the natural choice for a read operation: it is safe, idempotent, and cacheable. Then the…"
 authors:
   - "huseyin-akdogan"
 image: "article-cover-scaled.png"

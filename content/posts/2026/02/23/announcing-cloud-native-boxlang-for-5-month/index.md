@@ -2,7 +2,7 @@
 title: "Announcing Cloud-Native BoxLang for $5/Month"
 date: "2026-02-23T16:39:44+00:00"
 lastmod: "2026-02-25T12:38:06+00:00"
-description: "TL;DR: We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5 - by Cristobal Escobar"
+description: "TL;DR: We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5…"
 authors:
   - "cristobal-escobar"
 image: "boxlang-digitalocean-wave.jpg"

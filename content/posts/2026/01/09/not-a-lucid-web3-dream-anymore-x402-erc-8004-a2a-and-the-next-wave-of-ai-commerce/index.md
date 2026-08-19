@@ -1,7 +1,7 @@
 ---
 title: "Not a Lucid Web3 Dream Anymore: x402, ERC-8004, A2A, and The Next Wave of AI Commerce"
 date: "2026-01-09T16:05:58+00:00"
-description: "This article is for technically savvy readers, especially developers, protocol designers, and product teams working with AI agents, APIs, or crypto rails, - by Michal Maléř"
+description: "This article is for technically savvy readers, especially developers, protocol designers, and product teams working with AI agents, APIs, or crypto rails,…"
 authors:
   - "michal-maler"
 image: "daydreams-scaled.jpg"

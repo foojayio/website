@@ -2,7 +2,7 @@
 title: "A Week of Housekeeping: What Changed on Foojay.io"
 date: "2026-07-06T10:04:00+00:00"
 lastmod: "2026-07-06T11:58:10+00:00"
-description: "Running a community website is a bit like maintaining a codebase: the content that matters most is never completely done. And if you don't schedule - by Dominika Tasarz"
+description: "Running a community website is a bit like maintaining a codebase: the content that matters most is never completely done. And if you don't schedule…"
 authors:
   - "dominika-tasarz"
   - "frankdelporte"

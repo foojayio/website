@@ -2,7 +2,7 @@
 title: "Find Undead Code in Your Java Environments"
 date: "2025-02-17T09:36:55+00:00"
 lastmod: "2025-05-15T12:21:53+00:00"
-description: "10-30% of the custom code in applications is undead code and can just be deleted. Eliminating undead code can enhance the overall performance and - by Erik Costlow"
+description: "10-30% of the custom code in applications is undead code and can just be deleted. Eliminating undead code can enhance the overall performance and…"
 canonical: "https://www.azul.com/blog/find-undead-code-in-your-java-environments/"
 authors:
   - "erikcostlow"

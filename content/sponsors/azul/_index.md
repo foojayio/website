@@ -56,6 +56,6 @@ frozen: false
 
 Azul is the trusted leader in enterprise Java for today's AI and cloud-first world. Its open source-based Java platform empowers organisations to optimise the entire Java lifecycle to accelerate performance, strengthen security, reduce licensing and cloud costs, and boost developer productivity. Azul powers mission-critical systems for 36% of the Fortune 100, 50% of the Forbes Top Ten World's Most Valuable Brands, and the world's top 10 financial trading companies.
 
-**[Data Sheet - Azul Platform Core - Download](https://foojay.io/wp-content/uploads/2025/02/DS-Platform-Core-for-Distribution-Use-Cases.pdf)**
+**[Data Sheet - Azul Platform Core - Download](ds-platform-core-for-distribution-use-cases.pdf)**
 
 {{< youtube 1KjEmAieIMo >}}

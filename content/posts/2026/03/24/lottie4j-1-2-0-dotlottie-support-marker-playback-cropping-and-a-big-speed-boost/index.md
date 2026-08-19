@@ -1,7 +1,7 @@
 ---
 title: "Lottie4J 1.2.0: dotLottie Support, Marker Playback, Cropping, and a Big Speed Boost"
 date: "2026-03-24T07:51:00+00:00"
-description: "Version 1.2.0 of Lottie4J is out, and it's again a big release! The headline feature is support for the .lottie container format, but that's just the - by Frank Delporte"
+description: "Version 1.2.0 of Lottie4J is out, and it's again a big release! The headline feature is support for the .lottie container format, but that's just the…"
 authors:
   - "frankdelporte"
 image: "lottie4j-v1.2.0-scaled.jpg"

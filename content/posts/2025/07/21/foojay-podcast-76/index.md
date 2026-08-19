@@ -2,7 +2,7 @@
 title: "Foojay Podcast #76: DevBcn Report, Part 1 – Learn from the Community"
 date: "2025-07-21T06:41:00+00:00"
 lastmod: "2025-11-13T08:34:42+00:00"
-description: "In early July, the DevBcn conference in Barcelona featured a diverse lineup of speakers, covering topics across multiple technology domains. Geertjan - by Frank Delporte"
+description: "In early July, the DevBcn conference in Barcelona featured a diverse lineup of speakers, covering topics across multiple technology domains. Geertjan…"
 authors:
   - "frankdelporte"
   - "geertjan-wielenga"
@@ -18,6 +18,11 @@ related_posts:
   - "foojay-podcast-73"
   - "foojay-podcast-72"
 frozen: false
+# WordPress keeps every slug a post has ever had and 301s the old one; the
+# migration only carried the CURRENT slug, so this URL -- still live on
+# foojay.io today -- had nothing behind it here.
+aliases:
+  - "/today/foojay-podcast-76-devbcn-report-part-1-learn-from-the-community/"
 ---
 
 In early July, the DevBcn conference in Barcelona featured a diverse lineup of speakers, covering topics across multiple technology domains. Geertjan Wielenga took the camera and microphone with him to Spain. Together with Nacho Cougil and Jonathan Vila, two of the organizers, he spoke with many visitors about what they like most in Java, how AI influences their work, and what is important to them in the work they do.

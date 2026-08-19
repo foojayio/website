@@ -2,7 +2,7 @@
 title: "BoxLang AI Deep Dive — Part 4 of 7: Middleware — The Missing Layer in Every AI Framework"
 date: "2026-04-23T14:25:53+00:00"
 lastmod: "2026-05-14T09:54:42+00:00"
-description: "BoxLang AI 3.0 Series · Part 4 of 7 Here's the question every team eventually asks about their AI agents: how do we test these things? Agents make live - by Cristobal Escobar"
+description: "BoxLang AI 3.0 Series · Part 4 of 7 Here's the question every team eventually asks about their AI agents: how do we test these things? Agents make live…"
 authors:
   - "cristobal-escobar"
 image: "bxai-series-cover-04S.png"
@@ -17,6 +17,13 @@ related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 frozen: false
+# The WordPress slug for this post ends in an emoji, which Posts.stripEmoji
+# removed from the title before the bundle folder was named from it -- so the
+# legacy URL (percent-encoded by WordPress) had no page here and 404'd, while
+# still returning 200 on the live site. Three posts are in this state; the
+# character below is the literal emoji, which is what %F0%9F... decodes to.
+aliases:
+  - "/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-🧵/"
 ---
 
 ![](bxai-series-cover-04-700x368.png)

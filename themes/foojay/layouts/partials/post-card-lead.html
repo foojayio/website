@@ -1,7 +1,13 @@
 <article class="post-card post-card--lead">
   {{ with .Params.image }}
   <a href="{{ $.RelPermalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
-    <img src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="" decoding="async">
+    {{/* fetchpriority="high", and deliberately no loading="lazy": this is the
+         LCP element of the home page. Without the hint the browser gives it
+         the same default priority as the ten card images below the fold and
+         schedules it behind the stylesheet and the fonts. Same reasoning as
+         the post hero in posts/single.html; post-card.html keeps lazy, because
+         those really are below the fold. */}}
+    <img src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="" fetchpriority="high" decoding="async">
   </a>
   {{ end }}
   <div class="post-card-body">

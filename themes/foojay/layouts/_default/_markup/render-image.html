@@ -10,11 +10,30 @@
        renderer means reproducing the entity decoding goldmark would have done. */ -}}
 {{- $dest := .Destination | htmlUnescape -}}
 {{- $abs := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "data:") -}}
+{{- /* width/height are emitted whenever the image is a page-bundle resource
+       Hugo can measure, which is every in-article image except the 76 posts
+       that reference a remote URL. They are not cosmetic: without them the
+       browser reserves no space, so every image in a 2000-word post shoves the
+       text below it down the moment it decodes -- cumulative layout shift on
+       all 2147 article pages. The CSS already caps them (`.prose img {
+       max-width: 100% }`), and a browser scales the reserved box by the same
+       ratio, so the attributes fix the shift without fixing the size.
+
+       Only a RASTER can be measured. Hugo reports an SVG as ResourceType
+       "image" too, but .Width on one raises "this method is only available
+       for raster images" and halts the build, so the media subtype is what is
+       tested -- not the resource type. */ -}}
+{{- $w := 0 -}}
+{{- $h := 0 -}}
 {{- if not $abs -}}
   {{- with .Page.Resources.GetMatch $dest -}}
     {{- $dest = .RelPermalink -}}
+    {{- if and (eq .ResourceType "image") (in (slice "png" "jpeg" "gif" "webp" "bmp" "tiff") .MediaType.SubType) -}}
+      {{- $w = .Width -}}
+      {{- $h = .Height -}}
+    {{- end -}}
   {{- else -}}
     {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
   {{- end -}}
 {{- end -}}
-<img src="{{ $dest }}" alt="{{ .Text | htmlUnescape }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }} loading="lazy">
+<img src="{{ $dest }}" alt="{{ .Text | htmlUnescape }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }}{{ if and $w $h }} width="{{ $w }}" height="{{ $h }}"{{ end }} loading="lazy" decoding="async">

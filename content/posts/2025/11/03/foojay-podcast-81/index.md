@@ -2,7 +2,7 @@
 title: "Foojay Podcast #81: Maven 4 - The Future of Java Build Automation"
 date: "2025-11-03T06:03:12+00:00"
 lastmod: "2025-11-03T10:36:46+00:00"
-description: "Maven 4 is approaching its release, bringing many improvements to the build tool powering millions of Java projects. In this Foojay Podcast episode, we - by Frank Delporte"
+description: "Maven 4 is approaching its release, bringing many improvements to the build tool powering millions of Java projects. In this Foojay Podcast episode, we…"
 authors:
   - "frankdelporte"
   - "mthmulders"

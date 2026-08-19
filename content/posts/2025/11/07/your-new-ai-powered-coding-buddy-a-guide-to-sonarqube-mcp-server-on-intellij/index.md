@@ -16,6 +16,13 @@ related_posts:
   - "lets-talk-about-mcp"
   - "ai-newsletter-1"
 frozen: false
+# The WordPress slug for this post ends in an emoji, which Posts.stripEmoji
+# removed from the title before the bundle folder was named from it -- so the
+# legacy URL (percent-encoded by WordPress) had no page here and 404'd, while
+# still returning 200 on the live site. Three posts are in this state; the
+# character below is the literal emoji, which is what %F0%9F... decodes to.
+aliases:
+  - "/today/your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-🤖/"
 ---
 
 Hey Java devs! 👋 Ever feel like you're drowning in a sea of code, trying to keep it reliable,, efficient, and secure? We've all been there. Juggling new features, bug fixes, and pull requests is a daily grind. But what if you had an AI-powered assistant to help you out? That's where the [**SonarQube MCP Server**](https://github.com/SonarSource/sonarqube-mcp-server) comes in. Let's dive into how this cool new MCP can supercharge your daily coding routine. 🚀

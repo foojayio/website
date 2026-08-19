@@ -2,7 +2,7 @@
 title: "Runtime Code Analysis in the Age of Vibe Coding"
 date: "2026-02-17T14:00:00+00:00"
 lastmod: "2026-02-17T18:33:34+00:00"
-description: "In the era of vibe coding—where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs—you need immediate - by Suneet Kamath"
+description: "In the era of vibe coding—where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs—you need immediate…"
 authors:
   - "suneet-kamath"
 image: "what.png"

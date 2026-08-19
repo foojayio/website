@@ -2,7 +2,7 @@
 title: "Data Modeling in Cassandra and Astra DB"
 date: "2022-06-16T19:22:05+00:00"
 lastmod: "2022-06-16T19:22:06+00:00"
-description: "What does it take to build an efficient and sound data model for Apache Cassandra® and DataStax Astra DB? Where would one start? Are there any - by Artem Chebotko"
+description: "What does it take to build an efficient and sound data model for Apache Cassandra® and DataStax Astra DB? Where would one start? Are there any…"
 canonical: "https://medium.com/building-the-open-data-stack/data-modeling-in-cassandra-and-datastax-astra-db-3f89b9c133c9"
 authors:
   - "artem-chebotko"

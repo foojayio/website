@@ -2,7 +2,7 @@
 title: "Changes Included in Release 24.08 of Azul Zing Builds of OpenJDK"
 date: "2024-10-18T13:53:56+00:00"
 lastmod: "2024-10-18T13:53:57+00:00"
-description: "Azul Zing Builds of OpenJDK, the optimized Java runtime within Azul Platform Prime, has reached the release of the 24.08 Stable Release line. Zing builds - by Frank Delporte"
+description: "Azul Zing Builds of OpenJDK, the optimized Java runtime within Azul Platform Prime, has reached the release of the 24.08 Stable Release line. Zing builds…"
 canonical: "https://www.azul.com/blog/changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk/"
 authors:
   - "frankdelporte"

@@ -2,7 +2,7 @@
 title: "BoxLang AI 3.2.0 — Image Generation, Web Search, Fluent Audio, Agent Registry & MCP Observability"
 date: "2026-06-02T12:27:07+00:00"
 lastmod: "2026-06-02T12:33:49+00:00"
-description: "BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a - by Cristobal Escobar"
+description: "BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a…"
 authors:
   - "cristobal-escobar"
 image: "bx-jwt-2.png"

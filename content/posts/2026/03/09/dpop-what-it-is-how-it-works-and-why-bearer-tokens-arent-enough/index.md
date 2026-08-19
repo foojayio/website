@@ -2,7 +2,7 @@
 title: "DPoP: What It Is, How It Works, and Why Bearer Tokens Aren't Enough"
 date: "2026-03-09T08:08:06+00:00"
 lastmod: "2026-03-09T08:08:08+00:00"
-description: "DPoP is one of the most exciting developments in the IAM (Identity and Access Management) space in recent years. Yet many backend developers either have - by Hüseyin Akdoğan"
+description: "DPoP is one of the most exciting developments in the IAM (Identity and Access Management) space in recent years. Yet many backend developers either have…"
 authors:
   - "huseyin-akdogan"
 image: "Screenshot-2026-03-09-at-09.33.06-scaled.png"

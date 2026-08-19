@@ -2,7 +2,7 @@
 title: "Tiberius: A Security Testing Framework for LLM Applications in Java"
 date: "2026-06-04T20:09:09+00:00"
 lastmod: "2026-06-06T11:23:18+00:00"
-description: "Tiberius: A Security Testing Framework for LLM Applications in Java How do you write a regression test for a system that is non-deterministic by design? - by Iryna Dohndorf"
+description: "Tiberius: A Security Testing Framework for LLM Applications in Java How do you write a regression test for a system that is non-deterministic by design?"
 authors:
   - "iryna-dohndorf"
 image: "AdobeStock_975408349-scaled.jpeg"

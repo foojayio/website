@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Retrieval-Augmented Generation with Java and MongoDB"
 date: "2026-08-10T10:08:50+00:00"
-description: "Modern organizations store large volumes of information in documents, databases, internal platforms, support systems, policies, and operational tools. - by Otavio Santana"
+description: "Modern organizations store large volumes of information in documents, databases, internal platforms, support systems, policies, and operational tools."
 authors:
   - "otavio-santana"
 image: "Technical_MDB_CreateMemory.png"

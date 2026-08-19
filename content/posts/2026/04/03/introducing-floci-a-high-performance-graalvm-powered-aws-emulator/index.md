@@ -2,7 +2,7 @@
 title: "Introducing Floci: A High-Performance, GraalVM-Powered AWS Emulator"
 date: "2026-04-03T19:00:53+00:00"
 lastmod: "2026-04-04T14:26:12+00:00"
-description: "The Motivation: Why Another AWS Emulator? As Java developers, we are used to local-first development. Tools that emulate the cloud environment have become - by Hector Ventura"
+description: "The Motivation: Why Another AWS Emulator? As Java developers, we are used to local-first development. Tools that emulate the cloud environment have become…"
 authors:
   - "hector-ventura"
 image: "perf-chart-light.png"

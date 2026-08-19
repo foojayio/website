@@ -2,7 +2,7 @@
 title: "Getting Started with TornadoVM 2.0 for Accelerating Java Applications"
 date: "2025-12-22T10:00:00+00:00"
 lastmod: "2025-12-22T17:37:05+00:00"
-description: "Starting with TornadoVM 2.0, installing and using TornadoVM is easier than ever. The project now provides prebuilt SDKs for multiple operating systems, - by Thanos Stratikopoulos"
+description: "Starting with TornadoVM 2.0, installing and using TornadoVM is easier than ever. The project now provides prebuilt SDKs for multiple operating systems,…"
 authors:
   - "thanos-stratikopoulos"
 image: "tornado-insight.webp"

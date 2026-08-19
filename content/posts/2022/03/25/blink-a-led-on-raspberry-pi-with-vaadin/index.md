@@ -2,7 +2,7 @@
 title: "Blink a LED on Raspberry Pi with Vaadin"
 date: "2022-03-25T14:44:02+00:00"
 lastmod: "2022-03-25T14:54:49+00:00"
-description: "Thanks to Vaadin, you can get a fully running application with a few clicks. And Adding GPIO-interaction is easy with the Pi4J library. - by Frank Delporte"
+description: "Thanks to Vaadin, you can get a fully running application with a few clicks. And Adding GPIO-interaction is easy with the Pi4J library."
 canonical: "https://dzone.com/articles/blink-a-led-on-a-raspberry-pi-with-vaadin"
 authors:
   - "frankdelporte"

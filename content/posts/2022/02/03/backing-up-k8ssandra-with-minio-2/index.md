@@ -2,7 +2,7 @@
 title: "Backing up K8ssandra with MinIO"
 date: "2022-02-03T22:50:09+00:00"
 lastmod: "2022-02-03T22:50:11+00:00"
-description: "K8ssandra includes Medusa for Apache Cassandra® to handle backup and restore for your Cassandra nodes. Recently Medusa was upgraded to introduce support - by Alexander Dejanovski"
+description: "K8ssandra includes Medusa for Apache Cassandra® to handle backup and restore for your Cassandra nodes. Recently Medusa was upgraded to introduce support…"
 canonical: "https://k8ssandra.io/blog/articles/backing-up-k8ssandra-with-minio/"
 authors:
   - "alexander-dejanovski"

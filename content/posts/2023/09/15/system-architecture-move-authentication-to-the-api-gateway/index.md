@@ -243,7 +243,7 @@ We implemented it with Apache APISIX, Keycloak, and Spring Security.
 
 Many other options are available, depending on your environment.
 
-The complete source code for this post can be found on [GitHub](_wp_link_placeholder).
+The complete source code for this post can be found on GitHub.
 
 **To go further:**
 

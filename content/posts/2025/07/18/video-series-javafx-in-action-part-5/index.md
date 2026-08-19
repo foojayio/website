@@ -2,7 +2,7 @@
 title: "Video series “JavaFX In Action”, Part 5 with Cormac Redmond (KafkIO), Brian Schlining (Annotating the Deep-Sea Wildlife), Gerrit Grunwald (JavaFX Libraries), Dirk Lemmermann (JavaFX Libraries and Applications, JFX Central)"
 date: "2025-07-18T06:18:00+00:00"
 lastmod: "2025-12-08T07:57:10+00:00"
-description: "This is the next part in the series of \"JavaFX in Action\" interviews. Are you working on a fantastic JavaFX application? Let me know, and let's discuss it - by Frank Delporte"
+description: "This is the next part in the series of \"JavaFX in Action\" interviews. Are you working on a fantastic JavaFX application? Let me know, and let's discuss it…"
 authors:
   - "frankdelporte"
   - "gerrit-grunwald"

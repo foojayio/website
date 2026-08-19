@@ -1,7 +1,7 @@
 ---
 title: "double, BigDecimal, or Fixed-Point? Precision, Performance, and Sane Choices for Numbers in Java"
 date: "2026-06-24T07:38:07+00:00"
-description: "There is an evergreen debate in the Java world: Should you always use MARKDOWN_HASHeb731dbabfc7392f8ad8c1cdb326a26aMARKDOWNHASH for money? The short - by Stefano Fago"
+description: "There is an evergreen debate in the Java world: Should you always use MARKDOWN_HASHeb731dbabfc7392f8ad8c1cdb326a26aMARKDOWNHASH for money? The short…"
 canonical: "https://blog.frankel.ch/bigdecimal-vs-double/"
 authors:
   - "stefano-fago"

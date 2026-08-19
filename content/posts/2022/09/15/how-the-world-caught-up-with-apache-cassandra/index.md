@@ -2,7 +2,7 @@
 title: "How the world caught up with Apache Cassandra"
 date: "2022-09-15T16:50:50+00:00"
 lastmod: "2022-09-15T16:50:52+00:00"
-description: "The O’Reilly book, Cassandra: The Definitive Guide, features a quote from Ray Kurzweil, the noted inventor and futurist:  “An invention has - by Jeff Carpenter"
+description: "The O’Reilly book, Cassandra: The Definitive Guide, features a quote from Ray Kurzweil, the noted inventor and futurist:  “An invention has…"
 canonical: "https://techcrunch.com/sponsor/datastax/how-the-world-caught-up-with-apache-cassandra/"
 authors:
   - "jeff-carpenter"

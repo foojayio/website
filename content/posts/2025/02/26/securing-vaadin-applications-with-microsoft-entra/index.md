@@ -2,7 +2,7 @@
 title: "Securing Vaadin Applications with Microsoft Entra"
 date: "2025-02-26T12:55:43+00:00"
 lastmod: "2025-02-26T12:57:16+00:00"
-description: "Many companies use Microsoft 365, so letting users log in with their Microsoft account is a good choice. This blog post shows how to secure your Vaadin - by Simon Martinelli"
+description: "Many companies use Microsoft 365, so letting users log in with their Microsoft account is a good choice. This blog post shows how to secure your Vaadin…"
 canonical: "https://martinelli.ch/securing-vaadin-applications-with-microsoft-entra/"
 authors:
   - "simon-martinelli"

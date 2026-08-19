@@ -2,7 +2,7 @@
 title: "Managing Distributed Applications in Kubernetes Using Cilium and Istio with Helm and Operator for Deployment"
 date: "2022-06-07T14:51:03+00:00"
 lastmod: "2022-06-07T14:51:06+00:00"
-description: "This post will show you the benefits of managing your distributed applications with Kubernetes in cross-cloud, multi-cloud, and hybrid cloud scenarios - by Christopher Bradford"
+description: "This post will show you the benefits of managing your distributed applications with Kubernetes in cross-cloud, multi-cloud, and hybrid cloud scenarios…"
 canonical: "https://medium.com/building-the-open-data-stack/managing-distributed-applications-in-kubernetes-using-cilium-and-istio-with-helm-and-operator-for-9652d71d6432"
 authors:
   - "christopher-bradford"

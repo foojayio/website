@@ -1,7 +1,7 @@
 ---
 title: "First Test of Java on the VisionFive 2 Lite (RISC-V"
 date: "2026-02-04T07:59:16+00:00"
-description: "As part of my 2026 learning goals around Java on RISC-V (see this post about x86 versus ARM versus RISC-V), I've asking various suppliers to send me - by Frank Delporte"
+description: "As part of my 2026 learning goals around Java on RISC-V (see this post about x86 versus ARM versus RISC-V), I've asking various suppliers to send me…"
 canonical: "https://webtechie.be/post/2026-01-16-first-test-visionfive-java/"
 authors:
   - "frankdelporte"

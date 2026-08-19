@@ -2,7 +2,7 @@
 title: "BoxLang AI Deep Dive — Part 5 of 7: One API, 17 Providers — The Provider Architecture Deep Dive"
 date: "2026-04-29T16:38:08+00:00"
 lastmod: "2026-05-05T15:23:49+00:00"
-description: "BoxLang AI 3.0 Series · Part 5 of 7 Vendor lock-in is the silent killer of AI projects. You pick OpenAI, build everything against the OpenAI API, and then - by Cristobal Escobar"
+description: "BoxLang AI 3.0 Series · Part 5 of 7 Vendor lock-in is the silent killer of AI projects. You pick OpenAI, build everything against the OpenAI API, and then…"
 authors:
   - "cristobal-escobar"
 image: "Captura-de-pantalla-2026-04-29-125804.png"
@@ -18,6 +18,11 @@ related_posts:
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
   - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 frozen: false
+# The emoji variant of this slug still resolves on foojay.io (WordPress 301s
+# it to the clean one). stripEmoji dropped it here, so the legacy URL had
+# no page. The character below is what %F0%9F... decodes to.
+aliases:
+  - "/today/boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive-🛡️/"
 ---
 
 ![](bxai-series-cover-05-700x368.png)

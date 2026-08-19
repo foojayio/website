@@ -15,6 +15,11 @@ related_posts:
   - "virtual-foojay-openjdk-17-jug-tour"
   - "the-javafx-revival"
 frozen: false
+# WordPress keeps every slug a post has ever had and 301s the old one; the
+# migration only carried the CURRENT slug, so this URL -- still live on
+# foojay.io today -- had nothing behind it here.
+aliases:
+  - "/today/creating-mobile-apps-with-javafx---part-1/"
 ---
 
 Mobile application offerings for both IOS and Android [continue increasing each year](https://www.statista.com/statistics/271644/worldwide-free-and-paid-mobile-app-store-downloads/).

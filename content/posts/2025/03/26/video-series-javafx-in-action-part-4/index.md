@@ -2,7 +2,7 @@
 title: "Video series “JavaFX In Action”, Part 4 with Mike Hearn (Conveyor), Sven Reimers (JTaccuino), and Chris Newland (DemoFX, JitWatch)"
 date: "2025-03-26T06:51:35+00:00"
 lastmod: "2025-03-26T07:01:10+00:00"
-description: "This is the next part in the series of \"JavaFX in Action\" interviews. Are you working on a fantastic JavaFX application? Let me know, and let's talk! July - by Frank Delporte"
+description: "This is the next part in the series of \"JavaFX in Action\" interviews. Are you working on a fantastic JavaFX application? Let me know, and let's talk! July…"
 authors:
   - "frankdelporte"
 image: "jfxinaction-part-4.jpg"

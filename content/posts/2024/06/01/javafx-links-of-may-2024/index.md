@@ -1,7 +1,7 @@
 ---
 title: "JavaFX Links of May 2024"
 date: "2024-06-01T08:12:12+00:00"
-description: "Here is the overview of the JavaFX LinksOfTheMonth of May 2024, published on jfx-central.com during this month. Core When Johan Vos shares his notes, you - by Frank Delporte"
+description: "Here is the overview of the JavaFX LinksOfTheMonth of May 2024, published on jfx-central.com during this month. Core When Johan Vos shares his notes, you…"
 canonical: "https://webtechie.be/post/2024-05-31-javafx-links-of-may-2024/"
 authors:
   - "frankdelporte"

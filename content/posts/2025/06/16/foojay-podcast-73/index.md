@@ -2,7 +2,7 @@
 title: "Foojay Podcast #73: JCon Report, Part 2 – Evolutions in the Java language and runtime"
 date: "2025-06-16T07:42:00+00:00"
 lastmod: "2025-11-13T08:36:26+00:00"
-description: "In the second part of our JCON interviews, recorded at the conference in May, we focuses on general evolutions within the Java world and how they - by Cay Horstmann"
+description: "In the second part of our JCON interviews, recorded at the conference in May, we focuses on general evolutions within the Java world and how they…"
 authors:
   - "cay-horstmann"
   - "frankdelporte"

@@ -2,7 +2,7 @@
 title: "What 2,000+ Professionals Told Us About the State of Java, AI, Cloud Costs, and the Future of the Java Ecosystem"
 date: "2026-02-17T08:58:26+00:00"
 lastmod: "2026-02-17T08:58:51+00:00"
-description: "Every year, I look forward to our State of Java Survey & Report because it gives us a view into how organizations are using Java - by Scott Sellers"
+description: "Every year, I look forward to our State of Java Survey & Report because it gives us a view into how organizations are using Java…"
 canonical: "https://www.azul.com/blog/what-2000-professionals-told-us-about-the-state-of-java-ai-cloud-costs-and-the-future-of-the-java-ecosystem/"
 authors:
   - "scott-sellers"

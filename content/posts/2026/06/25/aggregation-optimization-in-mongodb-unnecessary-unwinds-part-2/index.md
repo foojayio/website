@@ -2,7 +2,7 @@
 title: "Aggregation Optimization in MongoDB: Unnecessary Unwinds (Part 2)"
 date: "2026-06-25T10:01:00+00:00"
 lastmod: "2026-06-25T12:01:22+00:00"
-description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice - by Graeme Robinson"
+description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice…"
 authors:
   - "graeme-robinson"
 image: "tue11.png"

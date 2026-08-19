@@ -2,7 +2,7 @@
 title: "The FFM API: How OpenJDK Changed the Game for Native Interactions (And Made Pi4J Better!)"
 date: "2026-01-16T08:18:00+00:00"
 lastmod: "2026-01-16T12:15:52+00:00"
-description: "The Pi4J project is a Java library that allows you to control the GPIO pins and electronic components connected to a Raspberry Pi with pure Java code. It - by Frank Delporte"
+description: "The Pi4J project is a Java library that allows you to control the GPIO pins and electronic components connected to a Raspberry Pi with pure Java code. It…"
 canonical: "https://www.javaadvent.com/2025/12/ffm-api-for-java-on-raspberry-pi.html"
 authors:
   - "frankdelporte"

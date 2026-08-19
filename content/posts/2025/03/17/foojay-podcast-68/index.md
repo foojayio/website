@@ -2,7 +2,7 @@
 title: "Foojay Podcast #68: Welcome to OpenJDK (Java) 24"
 date: "2025-03-17T06:44:08+00:00"
 lastmod: "2025-11-13T08:38:56+00:00"
-description: "We serve you a podcast about the new Java version every six months. Our regular guest, Simon Ritter, Deputy CTO of Azul, is known on social media as - by Frank Delporte"
+description: "We serve you a podcast about the new Java version every six months. Our regular guest, Simon Ritter, Deputy CTO of Azul, is known on social media as…"
 authors:
   - "frankdelporte"
   - "hanno-embregts"

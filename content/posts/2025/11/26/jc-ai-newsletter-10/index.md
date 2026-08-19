@@ -2,7 +2,7 @@
 title: "JC-AI Newsletter #10"
 date: "2025-11-26T18:39:40+00:00"
 lastmod: "2025-11-26T18:39:42+00:00"
-description: "Fourteen days have passed, and it is time to present a fresh collection of readings that could influence developments in the field of artificial - by Miro Wengner"
+description: "Fourteen days have passed, and it is time to present a fresh collection of readings that could influence developments in the field of artificial…"
 authors:
   - "miro-wengner"
 image: "ai-insider-1.png"

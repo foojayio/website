@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-> **This guide is outdated since 2024. There is a new version here: [https://foojay.io/today/how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide/](_wp_link_placeholder)**
+> **This guide is outdated since 2024. There is a new version here: [https://foojay.io/today/how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide/](https://foojay.io/today/how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide/)**
 
 {#more-61688}
 

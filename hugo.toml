@@ -270,7 +270,9 @@ enableGitInfo = true
 [[menu.main]]
   name = "Java Terms Explained"
   parent = "Java Basics"
-  url = "/pedia"
+  # Trailing slash, like every other menu entry: without it the nav link cost a
+  # 301 to /pedia/ on every click, from a menu that renders on all 2712 pages.
+  url = "/pedia/"
   weight = 31
   [menu.main.params]
     desc = "The Java and OpenJDK jargon dictionary"

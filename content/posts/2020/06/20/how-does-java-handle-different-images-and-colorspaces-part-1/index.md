@@ -2,7 +2,7 @@
 title: "How does Java handle different Images and ColorSpaces – Part 1"
 date: "2020-06-20T17:03:00+00:00"
 lastmod: "2021-08-23T12:24:46+00:00"
-description: "Java makes images simple to use. You can work with a BufferedImage and just load or save this to any supported image file format. A BufferedImage includes lots of functionality which allows you to render and process the image, with all the complexity and implementation hidden by Java. A BufferedImage can even be used as a Graphics2D canvas which can be drawn on. Here is some example code.  While Java removes a lot of Image complexity, it is worth understanding in more detail how images work. In this series of articles, we will be diving deep into how BufferedImage provides this abstraction, how different types of images work and how you can access the low-level Image data. - by Mark Stephens"
+description: "Java makes images simple to use. You can work with a BufferedImage and just load or save this to any supported image file format. A BufferedImage includes lots of functionality which allows you to render and process the image, with all the complexity and implementation hidden by Java. A BufferedImage can even be used as a Graphics2D canvas which can be drawn on. Here is some example code.  While Java removes a lot of Image complexity, it is worth understanding in more detail how images work. In this series of articles, we will be diving deep into how BufferedImage provides this abstraction, how different types of images work and how you can access the low-level Image data."
 authors:
   - "mark-stephens"
 image: "Favicon-3-2.png"

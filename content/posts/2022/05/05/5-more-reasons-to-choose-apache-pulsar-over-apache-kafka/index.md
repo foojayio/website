@@ -2,7 +2,7 @@
 title: "5 More Reasons to Choose Apache Pulsar Over Apache Kafka"
 date: "2022-05-05T18:11:20+00:00"
 lastmod: "2022-05-05T18:11:21+00:00"
-description: "Author’s note: I originally published this blog post in 2019, while I was CEO of Kesque, a real-time messaging service built on Apache Pulsar, the - by Chris Bartholomew"
+description: "Author’s note: I originally published this blog post in 2019, while I was CEO of Kesque, a real-time messaging service built on Apache Pulsar, the…"
 canonical: "https://datastax.medium.com/5-more-reasons-to-choose-apache-pulsar-over-apache-kafka-c09b259e3691"
 authors:
   - "chris-bartholomew"

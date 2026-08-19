@@ -1,7 +1,7 @@
 ---
 title: "The Art of Performance Tuning: Why Saving 30% in the Cloud Means Nothing if Your Code Wastes 1000× More"
 date: "2025-11-25T06:46:00+00:00"
-description: "The Hidden Cost of “Good Enough” Code A few weeks ago, Kirk Pepperdine published a fascinating performance challenge — a small Java code snippet that - by Daniel Witkowski"
+description: "The Hidden Cost of “Good Enough” Code A few weeks ago, Kirk Pepperdine published a fascinating performance challenge — a small Java code snippet that…"
 authors:
   - "daniel-witkowski"
 image: "fj_art1_results_5.png"

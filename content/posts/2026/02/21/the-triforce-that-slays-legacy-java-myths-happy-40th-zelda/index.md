@@ -2,7 +2,7 @@
 title: "The Triforce That Slays Legacy Java Myths – Happy 40th Zelda!"
 date: "2026-02-21T18:13:03+00:00"
 lastmod: "2026-02-21T18:17:57+00:00"
-description: "Happy 40th Anniversary to The Legend of Zelda! 🎉🗡️ Today, February 21, 2026, marks exactly 40 years since the original game launched in Japan on February - by Igor De Souza"
+description: "Happy 40th Anniversary to The Legend of Zelda! 🎉🗡️ Today, February 21, 2026, marks exactly 40 years since the original game launched in Japan on February…"
 authors:
   - "igor-de-souza"
 image: "zelda01.png"

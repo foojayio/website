@@ -2,7 +2,7 @@
 title: "How to Get Started with the Hazelcast Viridian Serverless"
 date: "2023-03-10T10:28:45+00:00"
 lastmod: "2023-03-10T11:16:47+00:00"
-description: "Quickly learn how to connect Hazelcast Viridian to a Confluent Cloud Kafka cluster, and more! - by Fawaz Ghali"
+description: "Quickly learn how to connect Hazelcast Viridian to a Confluent Cloud Kafka cluster, and more!"
 authors:
   - "fawaz-ghali"
 image: "hazelcast.png"

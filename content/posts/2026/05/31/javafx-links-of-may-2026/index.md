@@ -2,7 +2,7 @@
 title: "JavaFX Links of May 2026"
 date: "2026-05-31T08:19:07+00:00"
 lastmod: "2026-06-01T11:48:36+00:00"
-description: "Here are the JavaFX LinksOfTheMonth of May 2026. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything you want to - by Frank Delporte"
+description: "Here are the JavaFX LinksOfTheMonth of May 2026. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything you want to…"
 canonical: "https://webtechie.be/post/2026-05-29-javafx-links-of-may-2026/"
 authors:
   - "frankdelporte"

@@ -1,7 +1,7 @@
 ---
 title: "Jurassic JDK: Migrate or Extinct"
 date: "2026-06-26T07:28:00+00:00"
-description: "65 million years ago, dinosaurs didn't adapt. They're gone. Your JDK 7 app is giving the same energy. 🫠 I spent a year and a half migrating more than 15 - by Aicha Laafia"
+description: "65 million years ago, dinosaurs didn't adapt. They're gone. Your JDK 7 app is giving the same energy. 🫠 I spent a year and a half migrating more than 15…"
 authors:
   - "aicha-laafia"
 image: "1_wul-KqE6vXk4ynnh_IljSQ.webp"

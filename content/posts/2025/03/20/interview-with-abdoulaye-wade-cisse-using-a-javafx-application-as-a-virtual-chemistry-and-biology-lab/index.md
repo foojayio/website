@@ -2,7 +2,7 @@
 title: "Interview with Abdoulaye Wade Cissé: Using a JavaFX application as a virtual chemistry and biology lab"
 date: "2025-03-20T13:46:59+00:00"
 lastmod: "2025-03-20T13:47:00+00:00"
-description: "I continuously collect JavaFX-related content for the JFX Central Links Of The Week. Recently, I saw a video on LinkedIn, shared by Abdoulaye Wade Cissé, - by Frank Delporte"
+description: "I continuously collect JavaFX-related content for the JFX Central Links Of The Week. Recently, I saw a video on LinkedIn, shared by Abdoulaye Wade Cissé,…"
 canonical: "https://webtechie.be/post/2025-02-11-interview-abdoulaye-lab-app-in-javafx/"
 authors:
   - "frankdelporte"

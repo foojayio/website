@@ -1,7 +1,7 @@
 ---
 title: "Foojay Podcast #85: Code, Community, and Opportunity: Making Tech Accessible for Everyone"
 date: "2025-12-08T06:07:00+00:00"
-description: "What if the future of Java depends on who we invite to learn it today? In this Foojay Podcast, we're diving into something that affects all of us in the - by Frank Delporte"
+description: "What if the future of Java depends on who we invite to learn it today? In this Foojay Podcast, we're diving into something that affects all of us in the…"
 authors:
   - "frankdelporte"
   - "igor-de-souza"

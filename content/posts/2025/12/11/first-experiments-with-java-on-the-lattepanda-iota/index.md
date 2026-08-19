@@ -2,7 +2,7 @@
 title: "First Experiments with Java on the LattePanda IOTA: An Alternative to Raspberry Pi?"
 date: "2025-12-11T09:13:14+00:00"
 lastmod: "2025-12-11T16:25:58+00:00"
-description: "After years of experimenting with Raspberry Pi boards, Java, JavaFX, and Pi4J to control electronics, I wanted to explore whether my knowledge and - by Frank Delporte"
+description: "After years of experimenting with Raspberry Pi boards, Java, JavaFX, and Pi4J to control electronics, I wanted to explore whether my knowledge and…"
 canonical: "https://webtechie.be/post/2025-11-25-first-test-lattepanda-iota-with-ubuntu-and-java/"
 authors:
   - "frankdelporte"

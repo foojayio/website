@@ -2,7 +2,7 @@
 title: "BoxLang 1.14.0 : Navigate Anything: JSONPath Comes to BoxLang's DataNavigator"
 date: "2026-07-02T18:17:16+00:00"
 lastmod: "2026-07-02T18:17:18+00:00"
-description: "Every application eventually has to deal with deeply nested data. JSON API responses with payloads six levels deep. Configuration files where the key you - by Cristobal Escobar"
+description: "Every application eventually has to deal with deeply nested data. JSON API responses with payloads six levels deep. Configuration files where the key you…"
 authors:
   - "cristobal-escobar"
 image: "BoxLang-release-1.14.0-1701-x-1701-px-3-1024x1024.png"

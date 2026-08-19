@@ -2,7 +2,7 @@
 title: "Cloudflare Tunnel for Home Assistant"
 date: "2025-06-03T11:29:18+00:00"
 lastmod: "2025-06-04T12:32:27+00:00"
-description: "I continue to take care of my Home Assistant. This week, I replaced my original setup with Cloudflare Tunnel. This is the 6th post in the My journey with - by Nicolas Frankel"
+description: "I continue to take care of my Home Assistant. This week, I replaced my original setup with Cloudflare Tunnel. This is the 6th post in the My journey with…"
 canonical: "https://blog.frankel.ch/home-assistant/6/"
 authors:
   - "nicolas-frankel"

@@ -1,7 +1,7 @@
 ---
 title: "Will OpenJFX Be Merged Into OpenJDK? It Would Be a Perfect Match with Java on Mobile!"
 date: "2025-11-26T09:18:36+00:00"
-description: "While looking for articles for the JFX Central Links Of The Week, I found this very interesting article by Paul Krill on InfoWorld. It's based on an - by Frank Delporte"
+description: "While looking for articles for the JFX Central Links Of The Week, I found this very interesting article by Paul Krill on InfoWorld. It's based on an…"
 canonical: "https://webtechie.be/post/2025-11-05-openjfx-returning-to-openjdk/"
 authors:
   - "frankdelporte"

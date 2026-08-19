@@ -2,7 +2,7 @@
 title: "Introducing the BoxLang Spring Boot Starter: Dynamic JVM Templating for Spring"
 date: "2026-03-19T14:20:02+00:00"
 lastmod: "2026-03-20T06:51:26+00:00"
-description: "Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful — - by Cristobal Escobar"
+description: "Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful —…"
 authors:
   - "cristobal-escobar"
 image: "boxlang-spring-boot-release.jpg"

@@ -560,7 +560,30 @@ should catch a mistake at PR time rather than letting it fail silently.
    one switched on the day it has to work. The GoatCounter scaffold that used to
    live in `partials/stats.html` is gone — deleted, not migrated; it also
    carried an unwired share button, which nothing has replaced.
-8. **The paid homepage banner carousel is NOT built — and it's revenue-bearing.**
+8. **17 `/pedia/` entries are missing — the glossary was migrated and then the
+   live site grew.** `foojay.io/terminology-sitemap.xml` lists 47 published
+   `terminology` posts; `content/pedia/` has 30. All 17 return 200 on the live
+   site with real content (`/pedia/virtual-threads/`, `/pedia/records/`,
+   `/pedia/text-blocks/`, `/pedia/sealed-classes/`, `/pedia/pattern-matching/`,
+   `/pedia/structured-concurrency/`, `/pedia/scoped-values/`,
+   `/pedia/project-leyden/`, `/pedia/switch-expressions/`, `/pedia/tck/`,
+   `/pedia/thread-dump/`, `/pedia/stop-the-world-pause/`,
+   `/pedia/the-heap-stack-and-metaspace/`, `/pedia/value-objects-project-valhalla/`,
+   `/pedia/preview-and-incubator-features/`,
+   `/pedia/security-vulnerability-management/`,
+   `/pedia/visual-c-and-windows-backwards-compatibility/`), and several are
+   linked from the pedia entries that DID make it, so they are dead links here
+   as well as missing pages. Note the WP `/pedia/` index page itself lists only
+   31, which is why nothing noticed -- the sitemap is the honest count.
+
+   This is the one place the "hand-maintained now" decision has already cost
+   something: `ConvertPedia.java` was retired once the section was converted, so
+   there is nothing to re-run. Decide with Frank whether to write them by hand
+   (they are short glossary definitions) or to resurrect the scraper for one
+   pass before cutover. `transfer/LegacyViews.java`'s "all 30 resolve" line
+   becomes 47 either way.
+
+9. **The paid homepage banner carousel is NOT built — and it's revenue-bearing.**
    The live WP home page (its page title is literally "Home – CTA and Sponsor
    Blocks") opens with a Splide carousel of "Sponsored Content" teasers —
    currently CodeRabbit, Azul and foojay's own Sustainability eBook. Each slide
@@ -584,7 +607,26 @@ should catch a mistake at PR time rather than letting it fail silently.
   during the trial period against the still-live WP site.
 - **URLs are load-bearing**: every converted post/author/page keeps its
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
-  URLs without adding an alias. **One deliberate exception**: heading
+  URLs without adding an alias.
+
+  **WordPress carries a redirect layer this repo does not reproduce, and it is
+  the biggest open cutover risk.** Checked against the live site: 2143 of 2147
+  post slugs match exactly, but on top of those WP serves (a) `/blog/<anything>/`
+  -> `/today/<anything>/` as a blanket prefix rule, and (b) a 301 for every slug
+  a post has EVER had (`_wp_old_slug`), which is why
+  `/today/foojay-podcast-33-j-fall-report-part-1/` still resolves today. Neither
+  is enumerable from outside: the old slugs live in `wp_postmeta` and are not
+  exposed over REST, so the only ones found so far are those that happened to be
+  linked from inside `content/` -- 9 have been added as `aliases:`, plus
+  `/download/` -> `/java-quick-start/install-java/`. **Before cutover, get the
+  `_wp_old_slug` postmeta dump (or the redirect table) out of the WordPress host
+  and turn it into aliases; and put the `/blog/*` prefix rule into Cloudflare,
+  where one rule covers all 2147 rather than 2147 alias files.**
+
+  Three post URLs additionally 404'd because the WP slug ends in an emoji that
+  `stripEmoji` removed before the bundle folder was named from it. Those now
+  carry the emoji URL as an `aliases:` entry, written as the literal character
+  (which is what `%F0%9F...` decodes to). **One deliberate exception**: heading
   *fragments*. `cleanup/HeadingAnchors.java` (above) dropped WP's `#h2-N-slug`
   anchors, so section-level deep links minted before cutover land at the top of
   the post instead. Paths, aliases and frontmatter are untouched, and Hugo still
@@ -807,18 +849,62 @@ should catch a mistake at PR time rather than letting it fail silently.
   padding does to the header).
 
 - **Structured data covers three page kinds, and nothing else.**
-  `partials/json-ld.html`: a post -> `BlogPosting` (each credited author a full
-  `Person` with `sameAs`, plus `articleSection` from `categories:` and
-  `inLanguage` from the site -- both derived, nothing per post to write), an
-  author -> `Person`, the home page -> an `@graph` of `Organization` +
-  `WebSite`. The Organization's `sameAs` is the four profiles foojay controls and
-  is kept in step with `partials/footer.html`; the footer's Slack link is
-  deliberately excluded, being a join invite rather than an identity. The
-  WebSite's `SearchAction` targets the real working `?q=` route Pagefind reads,
-  so it is a claim that holds. Nothing is emitted on other list/section/taxonomy
-  pages -- they are not a single creative work, person or site.
+  `partials/json-ld.html`: a post -> an `@graph` of `BlogPosting` +
+  `Organization` + `BreadcrumbList` (each credited author a full `Person` with
+  `sameAs`, plus `articleSection` from `categories:` and `inLanguage` from the
+  site -- all derived, nothing per post to write), an author -> `Person`, the
+  home page -> an `@graph` of `Organization` + `WebSite`. The Organization's
+  `sameAs` is the four profiles foojay controls and is kept in step with
+  `partials/footer.html`; the footer's Slack link is deliberately excluded,
+  being a join invite rather than an identity. The WebSite's `SearchAction`
+  targets the real working `?q=` route Pagefind reads, so it is a claim that
+  holds. Nothing is emitted on other list/section/taxonomy pages -- they are not
+  a single creative work, person or site.
   `site.Language.LanguageCode` is deprecated in Hugo 0.158+; use
   `site.Language.Locale`.
+
+  **The Organization is ONE node, in `partials/json-ld-organization.html`.** A
+  post used to inline its own `publisher` -- so foojay was two entities that
+  happened to share a name, and the inline copy carried `params.logo`
+  (`foojay-logo.png`, the wide light-blue-on-transparent wordmark), which is the
+  one image Google cannot use: it composites a publisher logo onto white, where
+  that artwork is invisible. The shared node points at the 512x512 square built
+  for exactly this. It is *emitted* in the post's graph rather than only
+  referenced by `@id`, because a bare `{"@id": ".../#organization"}` on a post
+  page points at a node that is not in that document.
+
+  **Breadcrumbs follow the post's FIRST category, and the last crumb has no
+  `item`.** One path from the root, not the set of places the post can be
+  reached from -- a post carries up to eight categories and listing them all
+  would be a nonsense trail. The trail matches what the page itself shows (the
+  chips above the `<h1>` link exactly there), and the current page is left
+  unlinked, which is schema.org's own guidance.
+
+- **`partials/meta-description.html` is the single definition of a page's
+  description**, used by `baseof.html` for `<meta name=description>` and
+  `og:description` and by `json-ld.html` for the `BlogPosting` description --
+  so the three cannot disagree. It replaced a bare
+  `.Params.description | default site.Params.description`, which put ONE
+  boilerplate string on 470 URLs: no author bundle carries a `description:`
+  (0 of 344) and a taxonomy term has no frontmatter at all, so 345 author
+  profiles and 124 category pages -- 17% of the sitemap -- all told Google
+  "Foojay is a place for Friends Of OpenJDK, providing free, reference materials
+  and blogs for daily Java usage.", which describes none of them.
+
+  All three derivations follow the derive/default/ask rule rather than adding a
+  key to 470 files: an author's is their own `bio:` (332 of 344 have one), a
+  term's is its name and `len .Pages`, and a sponsor's is its name and its
+  article count from `sponsor-posts.html` -- 6 of the 7 sponsor bundles carry
+  `description: ""`, so the pages with money attached were the ones describing
+  themselves with the site boilerplate. A hand-written `description:` always
+  wins (Azul has one). A new author, category or sponsor gets a real description
+  on the build that first sees it.
+
+  It also **length-guards every source at 200 characters**, cutting on a word
+  boundary with an ellipsis. Not cosmetic: 525 of 2148 post descriptions came out
+  of Yoast over 160 characters and the longest was 1231 -- a whole paragraph. The
+  stored text is untouched; this only shapes the tag, and repairing the
+  descriptions themselves is `cleanup/Descriptions.java`'s job.
 
 - **`/search/` and the 404 are out of the index, and `/search/` is out of the
   sitemap.** The search page has no server-rendered content of its own to rank on
@@ -827,6 +913,43 @@ should catch a mistake at PR time rather than letting it fail silently.
   carries `sitemap: {disable: true}`. The 404 additionally has **no** canonical:
   it is not a page with a URL of its own, and it used to self-canonicalise to
   `/404.html`.
+
+- **The home page's `<h1>` is visually hidden, and that is the only one on the
+  site that is.** `index.html` opens straight into the lead card, so its first
+  heading was the `<h2>` on the Podcasts band -- the most linked-to page on the
+  site had no top-level heading for a search engine or a screen reader. It is
+  hidden rather than drawn because the page deliberately has no hero to put one
+  in, and adding a visible title would push the lead article down the fold to
+  satisfy a crawler. The text is `site.Title` -- what the page IS, not a keyword
+  line written for a robot, which is the thing Google actually penalises.
+
+- **The LCP image is eager and `fetchpriority="high"`; everything else is
+  lazy.** The post hero (`posts/single.html`) and the home page's lead card are
+  the LCP element on 2147 posts and the home page respectively, and both were
+  being lazy-loaded or left at default priority -- so the one image the score is
+  measured on was scheduled behind the stylesheet, the fonts and the ten cards
+  below the fold. `post-card.html` keeps `loading="lazy"`, because those really
+  are below the fold.
+
+- **`render-image.html` emits `width`/`height`, and only for rasters.** Without
+  them the browser reserves no space and every image in a 2000-word post shoves
+  the text below it down as it decodes -- cumulative layout shift on all 2147
+  article pages. The CSS still caps the display size (`.prose img { max-width:
+  100% }`) and the browser scales the reserved box by the same ratio, so the
+  attributes fix the shift without fixing the size. Hugo reports an SVG as
+  `ResourceType` "image" too, but `.Width` on one raises "this method is only
+  available for raster images" and halts the build -- so the check is on
+  `.MediaType.SubType`, not the resource type. The 76 posts on remote image URLs
+  get nothing, which is correct: those cannot be measured at build time.
+
+- **`render-link.html` resolves page-bundle resources, the same way
+  `render-image.html` does.** Without it a link to a file in the author's own
+  folder -- a PDF, a video, a zip -- fell through to `relURL` and resolved
+  against the SITE ROOT (`/website/handout.pdf`) while Hugo published the file
+  inside the bundle (`/website/today/<slug>/handout.pdf`), so the link 404'd and
+  nothing said so. **143 internal links across `content/` were dead this way.**
+  It went unnoticed because the asymmetry is invisible in the source:
+  `![](shot.png)` resolved and `[handout](handout.pdf)` did not.
 
 - **Render hooks must redo the escaping Goldmark would have done.** Overriding
   a renderer means taking over its entity handling too, and getting it wrong is

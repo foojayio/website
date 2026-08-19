@@ -2,7 +2,7 @@
 title: "Unified Event-Driven Architecture for the Cloud Native Enterprise"
 date: "2022-10-06T19:58:06+00:00"
 lastmod: "2023-02-15T08:05:57+00:00"
-description: "CTOs and enterprise architects have long recognized the importance of event-driven architectures (EDA). - by Chris Latimer"
+description: "CTOs and enterprise architects have long recognized the importance of event-driven architectures (EDA)."
 canonical: "https://thenewstack.io/unified-event-driven-architecture-for-the-cloud-native-enterprise/"
 authors:
   - "chris-latimer"

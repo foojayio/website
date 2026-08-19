@@ -2,7 +2,7 @@
 title: "\"Contrast Security Joins Foojay Advisory Board to Accelerate Java Developer Community Growth, Raise Security Perspective\" — PR News"
 date: "2022-04-12T11:52:00+00:00"
 lastmod: "2022-04-18T11:53:12+00:00"
-description: "\"We're honored to join the Foojay Advisory Board because we know Java developers rely on the Foojay community and the foundation's mission of sharing information and improving the entire market as a whole,\" said Steve Wilson, Chief Product Officer at Contrast Security. - by Geertjan Wielenga"
+description: "\"We're honored to join the Foojay Advisory Board because we know Java developers rely on the Foojay community and the foundation's mission of sharing information and improving the entire market as a whole,\" said Steve Wilson, Chief Product Officer at Contrast Security."
 authors:
   - "geertjan-wielenga"
 image: "Favicon-3-2.png"

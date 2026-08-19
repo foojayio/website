@@ -1,7 +1,7 @@
 ---
 title: "Gotta Code 'Em All: How Java Evolved Beyond Verbosity – Celebrating 30 Years of Pokémon"
 date: "2026-02-27T09:57:35+00:00"
-description: "Happy 30th Anniversary to Pokémon! 🎉 February 27, 2026 marks exactly 30 years since the original Pokémon Red and Green launched in Japan on February 27, - by Igor De Souza"
+description: "Happy 30th Anniversary to Pokémon! 🎉 February 27, 2026 marks exactly 30 years since the original Pokémon Red and Green launched in Japan on February 27,…"
 authors:
   - "igor-de-souza"
 image: "pokemon01.jpg"

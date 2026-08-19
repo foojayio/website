@@ -1,7 +1,7 @@
 ---
 title: "Debugging BentoFX in MelodyMatrix with Matt Coley, Scenic View, and an Honest Look at AI-Generated Code"
 date: "2026-05-15T10:02:40+00:00"
-description: "There are bugs you can solve by yourself, and bugs where you just need to sit down with someone who knows the internals. This video is in the second - by Frank Delporte"
+description: "There are bugs you can solve by yourself, and bugs where you just need to sit down with someone who knows the internals. This video is in the second…"
 canonical: "https://webtechie.be/post/2026-04-21-improving-melodymatrix-ui-with-bentofx/"
 authors:
   - "frankdelporte"

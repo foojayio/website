@@ -389,6 +389,17 @@ public class Posts {
             if (fallback != null && !fallback.isBlank()) d.authors.add(fallback);
         }
 
+        // Now that the credited authors are known, drop the " - by <Author>" tail
+        // Yoast appends to an auto-generated description. It has to happen HERE
+        // rather than next to repairRunOnSentences above, because the strip is
+        // author-aware by design: the same shape is how a human writes "...- by
+        // Emily Wilson", so only a name this post actually credits is removed.
+        // The link text in the .article__author block IS the display name, which
+        // is the form the suffix uses. Keeps a re-scrape in step with what
+        // cleanup/Descriptions.java already wrote into content/.
+        d.description = HtmlToMarkdown.stripBylineSuffix(
+                d.description, linksToNames(doc, SELECTOR_AUTHOR_LINKS, "/today/author/"));
+
         d.categories = linksToNames(doc, SELECTOR_CATEGORY_LINKS, "/today/category/");
         normalizeCategories(d);
         d.relatedSlugs = relatedPostSlugs(doc);

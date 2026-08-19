@@ -2,7 +2,7 @@
 title: "From a JAR to a full-fledged MacOS app"
 date: "2026-02-05T10:15:05+00:00"
 lastmod: "2026-02-05T10:18:16+00:00"
-description: "A couple of years ago, I developed a small Kotlin GUI to help me rename my files in batch. I actually created it with different JVM frameworks to compare - by Nicolas Frankel"
+description: "A couple of years ago, I developed a small Kotlin GUI to help me rename my files in batch. I actually created it with different JVM frameworks to compare…"
 canonical: "https://blog.frankel.ch/jar-to-macos-app/"
 authors:
   - "nicolas-frankel"

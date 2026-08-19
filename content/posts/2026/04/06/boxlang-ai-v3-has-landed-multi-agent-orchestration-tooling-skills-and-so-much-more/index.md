@@ -1,7 +1,7 @@
 ---
 title: "BoxLang AI v3 Has Landed - Multi-Agent Orchestration, Tooling, Skills and so much more"
 date: "2026-04-06T12:03:58+00:00"
-description: "It's been a while since we've shipped something this big. BoxLang AI 3.0 is a ground-up rethink of how AI agents, models, and tools work in the BoxLang - by Luis Majano"
+description: "It's been a while since we've shipped something this big. BoxLang AI 3.0 is a ground-up rethink of how AI agents, models, and tools work in the BoxLang…"
 authors:
   - "luis-majano"
 image: "boxlang-ai-v3.jpg"

@@ -2,7 +2,7 @@
 title: "Foojay Podcast #64: Interviews at JFall about opensource, OpenJDK evolutions, Project Loom, JVM,..."
 date: "2024-12-23T10:51:20+00:00"
 lastmod: "2025-11-13T08:40:12+00:00"
-description: "Let's wrap up this year with more interviews from the JFall conference. In this episode you'll learn more about Foojay, JVM internals and writing your own - by Anthony Goubard"
+description: "Let's wrap up this year with more interviews from the JFall conference. In this episode you'll learn more about Foojay, JVM internals and writing your own…"
 authors:
   - "anthony-goubard"
   - "frankdelporte"

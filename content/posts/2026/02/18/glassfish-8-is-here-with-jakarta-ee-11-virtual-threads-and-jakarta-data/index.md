@@ -2,7 +2,7 @@
 title: "GlassFish 8 is here with Jakarta EE 11, virtual threads, and Jakarta Data"
 date: "2026-02-18T16:06:02+00:00"
 lastmod: "2026-05-13T10:22:04+00:00"
-description: "The final version of Eclipse GlassFish 8 is here, released on 5 February 2026. As a GlassFish committer, I'd like to share what it brings for the Java - by Ondro Mihalyi"
+description: "The final version of Eclipse GlassFish 8 is here, released on 5 February 2026. As a GlassFish committer, I'd like to share what it brings for the Java…"
 authors:
   - "ondro-mihalyi"
 image: "glassfish-8-smaller.jpeg"

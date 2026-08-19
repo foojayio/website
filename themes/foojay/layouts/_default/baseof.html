@@ -50,7 +50,11 @@
        Google renders, on 2147 post titles that already average past that. The
        page number keeps the pagers from sharing one title. */}}
   <title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .Kind "404" }}Page not found{{ else }}{{ .Title }}{{ end }}{{ if $pageNum }} (page {{ $pageNum }}){{ end }}</title>
-  {{ $desc := .Params.description | default .Site.Params.description }}
+  {{/* Derived for the kinds that carry no description of their own (author
+       profiles, category terms), and length-guarded for the ones that do --
+       see partials/meta-description.html for why, and for the 470 URLs that
+       used to share one boilerplate string. */}}
+  {{ $desc := partial "meta-description.html" . }}
   <meta name="description" content="{{ $desc }}">
 
   {{/* .Params.canonical is for the 838 cross-posted articles that point at the
@@ -69,7 +73,10 @@
   {{ if $noindex }}<meta name="robots" content="noindex, nofollow">{{ end }}
 
   <meta property="og:site_name" content="foojay">
-  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
+  {{/* The pager suffix belongs here as well as in <title>: without it every
+       pager of a listing shared one Open Graph title, so a link to page 7 of
+       /today/ previewed as identical to page 1. */}}
+  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}{{ if $pageNum }} (page {{ $pageNum }}){{ end }}">
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:url" content="{{ $self }}">
   {{/* .IsPage matters here, not just Section: content/posts/_index.md (the
@@ -133,8 +140,15 @@
     })();
   </script>
 
+  {{/* The feed is titled after the PAGE, not the site: every category term,
+       every author profile and every section gets its own feed, and titling
+       them all "foojay.io - Friends Of OpenJDK" meant a reader subscribing
+       from /today/category/java/ filed it under the site name and could not
+       tell two subscriptions apart. The site name is kept as the suffix so the
+       source is still obvious in a reader's sidebar. */}}
   {{ range .AlternativeOutputFormats }}
-    {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ $feedTitle := cond $.IsHome $.Site.Title (printf "%s | %s" $.Title $.Site.Title) }}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $feedTitle | safeHTML }}
   {{ end }}
 </head>
 <body>

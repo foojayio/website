@@ -2,7 +2,7 @@
 title: "Taking Java Arrays to Another Dimension"
 date: "2025-08-29T12:53:09+00:00"
 lastmod: "2025-08-29T12:55:41+00:00"
-description: "Explore the intricacies of Java’s multidimensional arrays with this in-depth guide. Learn how to declare, initialize, and utilize arrays of Java arrays to - by Simon Ritter"
+description: "Explore the intricacies of Java’s multidimensional arrays with this in-depth guide. Learn how to declare, initialize, and utilize arrays of Java arrays to…"
 canonical: "https://thenewstack.io/multi-dimensional-array-java/"
 authors:
   - "simonritter"

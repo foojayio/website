@@ -1,7 +1,7 @@
 ---
 title: "JavaFX Links of July 2025"
 date: "2025-07-31T06:25:20+00:00"
-description: "Here is the overview of the JavaFX LinksOfTheMonth of July 2025. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything - by Frank Delporte"
+description: "Here is the overview of the JavaFX LinksOfTheMonth of July 2025. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything…"
 canonical: "https://webtechie.be/post/2025-07-28-javafx-links-of-july-2025/"
 authors:
   - "frankdelporte"

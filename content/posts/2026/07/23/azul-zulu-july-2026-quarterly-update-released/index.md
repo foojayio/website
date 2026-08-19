@@ -1,7 +1,7 @@
 ---
 title: "Azul Zulu July 2026 Quarterly Update Released"
 date: "2026-07-23T12:35:26+00:00"
-description: "Every three months your production JDKs fall further behind on security patches. Azul closes that gap today with the July 2026 quarterly update for Azul - by Frank Delporte"
+description: "Every three months your production JDKs fall further behind on security patches. Azul closes that gap today with the July 2026 quarterly update for Azul…"
 authors:
   - "frankdelporte"
 image: "Azul-Prime-Stable-2308.jpg"

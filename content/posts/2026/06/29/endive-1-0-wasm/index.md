@@ -2,7 +2,7 @@
 title: "Endive 1.0 Is Here: Wasm on the JVM Ships Under the Bytecode Alliance"
 date: "2026-06-29T00:11:00+00:00"
 lastmod: "2026-06-29T10:32:40+00:00"
-description: "A few weeks ago, we wrote about a new generation of Java libraries powered by WebAssembly. SQLite, QuickJS, Protocol Buffers, the Ruby Prism parser, all - by Andrea Peruffo"
+description: "A few weeks ago, we wrote about a new generation of Java libraries powered by WebAssembly. SQLite, QuickJS, Protocol Buffers, the Ruby Prism parser, all…"
 authors:
   - "andrea-peruffo"
 image: "log_plus_text_green-1.png"

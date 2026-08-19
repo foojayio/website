@@ -2,7 +2,7 @@
 title: "\"This Can't Possibly Work\": What I Learned at a Temporal.io Workshop"
 date: "2026-07-10T08:41:22+00:00"
 lastmod: "2026-07-11T11:03:47+00:00"
-description: "When developers first hear about Temporal, they tend to move through a predictable sequence of emotions. First comes disbelief — the claim that your - by Geertjan Wielenga"
+description: "When developers first hear about Temporal, they tend to move through a predictable sequence of emotions. First comes disbelief — the claim that your…"
 authors:
   - "geertjan-wielenga"
 image: "IMG_2976-scaled.jpeg"

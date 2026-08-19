@@ -89,7 +89,7 @@ Our application will be built using Spring Boot with Redis OM Spring. **It will 
 
 ### 0. GitHub Repository
 
-**The full application can be found on GitHub: \[** [https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/\](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/src](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/%5D(https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/src))
+**The full application can be found on GitHub: [https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies)**
 
 ### 1. Add the required dependencies
 

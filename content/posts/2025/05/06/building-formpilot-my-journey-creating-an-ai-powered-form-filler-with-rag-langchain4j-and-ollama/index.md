@@ -6,7 +6,14 @@ description: "My Journey Creating an AI-Powered Form Filler with RAG, LangChain4
 canonical: "https://bazlur.ca/2025/04/06/building-formpilot-my-journey-creating-an-ai-powered-form-filler-with-rag-langchain4j-and-ollama/"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2025/05/Screenshot-2025-04-06-at-6.50.38 PM.png"
+# No `image:`. WordPress points this post at
+#   https://foojay.io/wp-content/uploads/2025/05/Screenshot-2025-04-06-at-6.50.38 PM.png
+# and that file 404s on the LIVE site too -- it is not in the media library
+# (checked via /wp-json/wp/v2/media), so there is nothing to pull local. The
+# hero rendered as a broken image and og:image pointed at a dead URL; without
+# the key the post simply has no hero and previews with the social card.
+# NOTE: transfer/Posts.java rebuilds frontmatter from scratch, so re-scraping
+# this post puts the dead URL back.
 categories:
   - "LangChain4j"
   - "Machine Learning"

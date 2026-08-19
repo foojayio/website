@@ -2,7 +2,7 @@
 title: "Does Language Still Matter in the Age of AI? Yes — But the Tradeoff Has Changed"
 date: "2026-03-25T16:37:20+00:00"
 lastmod: "2026-03-26T07:12:39+00:00"
-description: "I keep hearing the same question in architecture reviews, slack threads, and conference Hallways: \"If AI is writing the code, does language even matter - by David Parry"
+description: "I keep hearing the same question in architecture reviews, slack threads, and conference Hallways: \"If AI is writing the code, does language even matter…"
 authors:
   - "david-parry"
 image: "dominance-1024x683.png"

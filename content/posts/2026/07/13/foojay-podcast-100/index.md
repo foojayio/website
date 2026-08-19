@@ -2,7 +2,7 @@
 title: "Foojay Podcast #100: Java Podcasters on Why They Started, What Broke, and What They Learned"
 date: "2026-07-13T07:05:59+00:00"
 lastmod: "2026-07-15T07:26:03+00:00"
-description: "Foojay Podcast hits episode 100. No plan, no roadmap. It just happened. To mark the occasion, Frank turned the microphone around and invited other - by Frank Delporte"
+description: "Foojay Podcast hits episode 100. No plan, no roadmap. It just happened. To mark the occasion, Frank turned the microphone around and invited other…"
 authors:
   - "frankdelporte"
   - "jennifer-reif"

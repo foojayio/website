@@ -2,7 +2,7 @@
 title: "BoxLang AI Deep Dive — Part 1 of 7: The Skills Revolution"
 date: "2026-04-14T11:50:53+00:00"
 lastmod: "2026-05-14T09:46:38+00:00"
-description: "This article is part of our 7-part deep dive on building production-ready AI systems with BoxLang. BoxLang AI 3.0 Series · Part 1 of 7 Every AI framework - by Cristobal Escobar"
+description: "This article is part of our 7-part deep dive on building production-ready AI systems with BoxLang. BoxLang AI 3.0 Series · Part 1 of 7 Every AI framework…"
 authors:
   - "cristobal-escobar"
 image: "Imagen1.png"
@@ -19,6 +19,13 @@ related_posts:
   - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
+# The WordPress slug for this post ends in an emoji, which Posts.stripEmoji
+# removed from the title before the bundle folder was named from it -- so the
+# legacy URL (percent-encoded by WordPress) had no page here and 404'd, while
+# still returning 200 on the live site. Three posts are in this state; the
+# character below is the literal emoji, which is what %F0%9F... decodes to.
+aliases:
+  - "/today/boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution-🎓/"
 ---
 
 ![](bxai-series-cover-01-700x368.png)

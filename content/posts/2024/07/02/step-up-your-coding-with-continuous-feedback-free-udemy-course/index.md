@@ -2,7 +2,7 @@
 title: "Step up your coding with Continuous Feedback: Free Udemy Course"
 date: "2024-07-02T06:57:02+00:00"
 lastmod: "2024-07-10T10:13:17+00:00"
-description: "What do you know about the code changes that were just introduced into the codebase? When will you notice if something goes wrong? - by Roni Dover"
+description: "What do you know about the code changes that were just introduced into the codebase? When will you notice if something goes wrong?"
 authors:
   - "roni-dover"
 image: "Digma-white-260.png"

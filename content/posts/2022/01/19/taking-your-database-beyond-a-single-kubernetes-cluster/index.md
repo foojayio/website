@@ -2,7 +2,7 @@
 title: "Taking Your Database Beyond a Single Kubernetes Cluster"
 date: "2022-01-19T10:31:47+00:00"
 lastmod: "2022-05-30T14:12:16+00:00"
-description: "Running a database (or indeed any application) across multiple regions or K8s clusters is tricky without proper care and planning up front. - by Christopher Bradford"
+description: "Running a database (or indeed any application) across multiple regions or K8s clusters is tricky without proper care and planning up front."
 canonical: "https://datastax.medium.com/taking-your-database-beyond-a-single-kubernetes-cluster-6933d7492013"
 authors:
   - "christopher-bradford"

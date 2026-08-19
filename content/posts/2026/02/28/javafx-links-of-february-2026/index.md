@@ -1,7 +1,7 @@
 ---
 title: "JavaFX Links of February 2026"
 date: "2026-02-28T10:13:52+00:00"
-description: "Here are the JavaFX LinksOfTheMonth of February 2026. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything you want - by Frank Delporte"
+description: "Here are the JavaFX LinksOfTheMonth of February 2026. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything you want…"
 canonical: "https://webtechie.be/post/2026-02-26-javafx-links-of-february-2026/"
 authors:
   - "frankdelporte"

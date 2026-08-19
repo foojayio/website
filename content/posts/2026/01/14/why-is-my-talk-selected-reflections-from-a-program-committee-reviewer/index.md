@@ -2,7 +2,7 @@
 title: "Why is my Talk selected? Reflections from a Program Committee Reviewer"
 date: "2026-01-14T15:14:56+00:00"
 lastmod: "2026-01-15T13:44:23+00:00"
-description: "If you are like me, get the adrenaline rush of getting up on stage and can’t wait to share things that you experienced and learned, then submitting talks - by Soham Dasgupta"
+description: "If you are like me, get the adrenaline rush of getting up on stage and can’t wait to share things that you experienced and learned, then submitting talks…"
 authors:
   - "soham-dasgupta"
 image: "why.png"

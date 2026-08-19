@@ -2,7 +2,7 @@
 title: "Baeldung Series Part 2: Build a Dashboard With Cassandra, Astra and CQL – Mapping Event Data"
 date: "2022-09-13T17:46:02+00:00"
 lastmod: "2022-09-13T17:46:04+00:00"
-description: "1. Introduction In our previous article, we looked at augmenting our dashboard to store and display individual events from the Avengers - by Graham Cox"
+description: "1. Introduction In our previous article, we looked at augmenting our dashboard to store and display individual events from the Avengers…"
 canonical: "https://www.baeldung.com/cassandra-astra-rest-dashboard-map"
 authors:
   - "graham-cox"

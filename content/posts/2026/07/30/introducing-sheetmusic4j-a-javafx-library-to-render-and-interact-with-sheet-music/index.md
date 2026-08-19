@@ -1,7 +1,7 @@
 ---
 title: "Introducing Sheetmusic4J, a Java(FX) Library to Render and Interact with Sheet Music"
 date: "2026-07-30T07:28:00+00:00"
-description: "I'm building MelodyMatrix with my son, an application to look at and play along with music. The app already shows a song in different views: falling - by Frank Delporte"
+description: "I'm building MelodyMatrix with my son, an application to look at and play along with music. The app already shows a song in different views: falling…"
 canonical: "https://webtechie.be/post/introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music/"
 authors:
   - "frankdelporte"

@@ -2,7 +2,7 @@
 title: "Preparing to Move Away from Twitter"
 date: "2022-12-16T06:42:40+00:00"
 lastmod: "2022-12-16T07:36:16+00:00"
-description: "I opened my Twitter account more than 13 years ago, in August 2009. For 12 years, I kept focusing on professional-related content: Java, the JVM, - by Nicolas Frankel"
+description: "I opened my Twitter account more than 13 years ago, in August 2009. For 12 years, I kept focusing on professional-related content: Java, the JVM,…"
 canonical: "https://blog.frankel.ch/move-away-twitter/"
 authors:
   - "nicolas-frankel"

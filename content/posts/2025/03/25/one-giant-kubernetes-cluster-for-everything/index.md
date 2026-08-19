@@ -2,7 +2,7 @@
 title: "One giant Kubernetes cluster for everything"
 date: "2025-03-25T10:33:50+00:00"
 lastmod: "2025-03-25T10:33:52+00:00"
-description: "The ideal size of your Kubernetes clusters is a day 0 question and demands a definite answer. You find one giant cluster on one end of the spectrum and - by Nicolas Frankel"
+description: "The ideal size of your Kubernetes clusters is a day 0 question and demands a definite answer. You find one giant cluster on one end of the spectrum and…"
 canonical: "https://www.loft.sh/blog/one-giant-kubernetes-cluster"
 authors:
   - "nicolas-frankel"

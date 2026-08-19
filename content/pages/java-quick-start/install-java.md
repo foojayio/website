@@ -3,7 +3,11 @@ title: "Install Java: Overview"
 description: "One-time setup to get Java on your machine: check whether you already have it, then install it on Windows, macOS or Linux."
 url: "/java-quick-start/install-java/"
 aliases:
-  - "/java-quick-start/install-java/"
+  # WordPress serves /download/ as a 301 to this page -- a redirect the
+  # migration did not carry, so the URL 404'd here while still resolving on
+  # foojay.io. (The alias that used to sit here was this page's OWN url, which
+  # Hugo discards as a self-redirect.)
+  - "/download/"
 frozen: false
 ---
 

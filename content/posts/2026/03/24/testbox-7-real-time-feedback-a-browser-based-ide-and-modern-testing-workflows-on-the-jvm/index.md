@@ -2,7 +2,7 @@
 title: "TestBox 7: Real-Time Feedback, a Browser-Based IDE, and Modern Testing Workflows on the JVM"
 date: "2026-03-24T16:58:53+00:00"
 lastmod: "2026-03-26T06:40:39+00:00"
-description: "TestBox 7.x focuses on improving testing workflows for BoxLang and CFML applications. This release introduces improvements to the BoxLang CLI runner, - by Cristobal Escobar"
+description: "TestBox 7.x focuses on improving testing workflows for BoxLang and CFML applications. This release introduces improvements to the BoxLang CLI runner,…"
 authors:
   - "cristobal-escobar"
 image: "testbox-7-1-700x467-1.jpg"

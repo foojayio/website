@@ -2,7 +2,7 @@
 title: "Foojay Podcast #84: Developing Performant, Cost Efficient, and Eco-friendly Code"
 date: "2025-12-01T06:43:36+00:00"
 lastmod: "2025-12-01T11:56:58+00:00"
-description: "In this Foojay Podcast, we're exploring a critical topic that's becoming increasingly important in our industry: developing sustainable software that is - by Daniel Witkowski"
+description: "In this Foojay Podcast, we're exploring a critical topic that's becoming increasingly important in our industry: developing sustainable software that is…"
 authors:
   - "daniel-witkowski"
   - "frankdelporte"

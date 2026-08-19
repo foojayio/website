@@ -2,7 +2,7 @@
 title: "Testing Emails with Testcontainers and Mailpit"
 date: "2026-01-29T08:38:10+00:00"
 lastmod: "2026-01-29T10:00:03+00:00"
-description: "Testing email functionality is often painful. SMTP servers are external, tests become slow or flaky, and local setups differ from CI environments. As a result, many teams either mock the mail sender or skip proper email tests completely. - by Simon Martinelli"
+description: "Testing email functionality is often painful. SMTP servers are external, tests become slow or flaky, and local setups differ from CI environments. As a result, many teams either mock the mail sender or skip proper email tests completely."
 authors:
   - "simon-martinelli"
 image: "maven.png"

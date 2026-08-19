@@ -2,7 +2,7 @@
 title: "How to Create a Spring Boot Fraud Scoring Service"
 date: "2026-07-31T08:45:43+00:00"
 lastmod: "2026-07-31T11:36:10+00:00"
-description: "Most Java teams who want a machine learning model in production end up standing up a Python service and calling it over HTTP. That works, but it buys you, - by Geertjan Wielenga"
+description: "Most Java teams who want a machine learning model in production end up standing up a Python service and calling it over HTTP. That works, but it buys you,…"
 authors:
   - "geertjan-wielenga"
   - "zoran-sevarac"

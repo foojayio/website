@@ -2,7 +2,7 @@
 title: "Shai-Hulud and the npm Worm: How Speed-Optimised Dev Ecosystems Made a Self-Propagating Supply Chain Attack Inevitable"
 date: "2026-02-12T11:47:48+00:00"
 lastmod: "2026-02-12T11:48:52+00:00"
-description: "first, a word about ecosystems Before we dive into Shai-Hulud, before we label it “sophisticated” or “advanced” or “next generation,” we need to be honest - by Steve Poole"
+description: "first, a word about ecosystems Before we dive into Shai-Hulud, before we label it “sophisticated” or “advanced” or “next generation,” we need to be honest…"
 authors:
   - "steve-poole"
 image: "ChatGPT-Image-Sep-19-2025-11_39_44-AM.png"

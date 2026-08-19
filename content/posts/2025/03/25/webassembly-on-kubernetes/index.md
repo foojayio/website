@@ -2,7 +2,7 @@
 title: "WebAssembly on Kubernetes"
 date: "2025-03-25T10:32:31+00:00"
 lastmod: "2025-03-25T10:32:33+00:00"
-description: "Like a couple of innovative technologies, different people have different viewpoints on where WebAssembly fits the technology landscape. WebAssembly (also - by Nicolas Frankel"
+description: "Like a couple of innovative technologies, different people have different viewpoints on where WebAssembly fits the technology landscape. WebAssembly (also…"
 canonical: "https://www.loft.sh/blog/webassembly-on-kubernetes"
 authors:
   - "nicolas-frankel"

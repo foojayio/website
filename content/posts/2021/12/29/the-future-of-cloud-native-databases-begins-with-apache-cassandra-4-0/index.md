@@ -2,7 +2,7 @@
 title: "The future of cloud-native databases begins with Apache Cassandra 4.0"
 date: "2021-12-29T07:40:00+00:00"
 lastmod: "2022-01-25T17:12:32+00:00"
-description: "“Reliability at massive scale is one of the biggest challenges we face at Amazon.com, one of the largest e-commerce operations in the world; even the - by Patrick McFadin"
+description: "“Reliability at massive scale is one of the biggest challenges we face at Amazon.com, one of the largest e-commerce operations in the world; even the…"
 canonical: "https://www.datastax.com/blog/future-cloud-native-databases-begins-apache-cassandra-4"
 authors:
   - "patrick-mcfadin"

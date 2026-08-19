@@ -2,7 +2,7 @@
 title: "Foojay Podcast #90: Highlights of the Java Features Between LTS 21 and 25"
 date: "2026-02-16T07:32:52+00:00"
 lastmod: "2026-07-28T13:24:18+00:00"
-description: "Every six months, we get a new version of Java. Java 26 is just around the corner and will be released soon. But most companies stick to LTS (Long-Term - by Frank Delporte"
+description: "Every six months, we get a new version of Java. Java 26 is just around the corner and will be released soon. But most companies stick to LTS (Long-Term…"
 authors:
   - "frankdelporte"
   - "jakob-jenkov"
@@ -17,6 +17,11 @@ related_posts:
   - "foojay-podcast-28"
   - "foojay-podcast-78"
 frozen: false
+# WordPress keeps every slug a post has ever had and 301s the old one; the
+# migration only carried the CURRENT slug, so this URL -- still live on
+# foojay.io today -- had nothing behind it here.
+aliases:
+  - "/today/foojay-podcast-90-highlights-of-the-java-features-between-lts-21-and-25/"
 ---
 
 Every six months, we get a new version of Java. Java 26 is just around the corner and will be released soon. But most companies stick to LTS (Long-Term Support) versions, which are maintained and receive security updates for many more years. Versions 8, 11, 17, 21, and 25 are such LTS versions. Hopefully, most of your systems are already on the latest versions and you are not stuck on 8 or earlier. As a reminder, 8 was released in 2014, so much has changed since then.

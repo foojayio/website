@@ -1,7 +1,7 @@
 ---
 title: "GlassFish 8.0.2 Released: With important security fixes, other improvements, and commercial support"
 date: "2026-05-19T13:32:00+00:00"
-description: "The latest version of Eclipse GlassFish 8.0.2 was released on May 5, 2026, with fixes for several critical vulnerabilities. It builds on top of a lot of - by Ondro Mihalyi"
+description: "The latest version of Eclipse GlassFish 8.0.2 was released on May 5, 2026, with fixes for several critical vulnerabilities. It builds on top of a lot of…"
 authors:
   - "ondro-mihalyi"
 image: "glassfish-802-banner-2-smaller.png"

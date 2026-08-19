@@ -1,7 +1,7 @@
 ---
 title: "Lottie4J 1.1.0: Better Rendering, Smarter Debugging, and an animated Lottie4J Logo!"
 date: "2026-03-13T07:30:00+00:00"
-description: "Just one week after the first public release of Lottie4J, the open-source Java library for rendering Lottie animations in JavaFX, version 1.1.0 is already - by Frank Delporte"
+description: "Just one week after the first public release of Lottie4J, the open-source Java library for rendering Lottie animations in JavaFX, version 1.1.0 is already…"
 canonical: "https://webtechie.be/post/2026-03-10-new-release-of-lottie4j/"
 authors:
   - "frankdelporte"

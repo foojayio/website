@@ -2,7 +2,7 @@
 title: "Introducing skills.boxlang.io — The Open Agent Skills Ecosystem for BoxLang & the Ortus World"
 date: "2026-05-21T11:42:26+00:00"
 lastmod: "2026-05-21T11:44:10+00:00"
-description: "Today we're launching something we've been quietly building for months: skills.boxlang.io — a public, agent-agnostic directory for AI skills covering - by Cristobal Escobar"
+description: "Today we're launching something we've been quietly building for months: skills.boxlang.io — a public, agent-agnostic directory for AI skills covering…"
 authors:
   - "cristobal-escobar"
 image: "Captura-de-pantalla-2026-05-21-134045.png"

@@ -2,7 +2,7 @@
 title: "Domain-Driven Design in Java: A Practical Guide"
 date: "2025-08-15T09:30:31+00:00"
 lastmod: "2025-08-15T09:42:11+00:00"
-description: "While waiting for your flight in an airport, have you ever wondered how much behind-the-scenes planning it takes to keep an airport running smoothly? - by Rajesh Nair"
+description: "While waiting for your flight in an airport, have you ever wondered how much behind-the-scenes planning it takes to keep an airport running smoothly?"
 authors:
   - "rajesh-nair"
 image: "mongologo.png"

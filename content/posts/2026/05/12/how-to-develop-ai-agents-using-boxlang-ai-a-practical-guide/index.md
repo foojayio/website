@@ -2,7 +2,7 @@
 title: "How to Develop AI Agents Using BoxLang AI: A Practical Guide"
 date: "2026-05-12T12:52:39+00:00"
 lastmod: "2026-05-14T10:03:42+00:00"
-description: "AI agents are transforming how we build software. Unlike traditional chatbots that just answer questions, agents can reason about what tools they need, - by Cristobal Escobar"
+description: "AI agents are transforming how we build software. Unlike traditional chatbots that just answer questions, agents can reason about what tools they need,…"
 authors:
   - "cristobal-escobar"
 image: "Captura-de-pantalla-2026-05-11-195950.png"

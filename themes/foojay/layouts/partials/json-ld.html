@@ -1,9 +1,12 @@
-{{- /* Structured data (schema.org). Two cases, both built from data that
+{{- /* Structured data (schema.org). Three cases, all built from data that
        already exists in frontmatter -- nothing new to maintain:
-         1. A post page -> BlogPosting, with each credited author (resolved
-            via author-page.html, same lookup byline.html uses) turned into
-            a Person, so search engines can attribute authorship instead of
-            just seeing a generic byline string.
+         1. A post page -> an @graph of BlogPosting + Organization +
+            BreadcrumbList. Each credited author (resolved via
+            author-page.html, same lookup byline.html uses) becomes a Person,
+            so search engines can attribute authorship instead of just seeing
+            a generic byline string; the breadcrumb trail comes from the post's
+            own first category, which is also what the chips above the <h1>
+            link to.
          2. An author page itself -> Person, built from the same author
             frontmatter (bio/avatar/social links) the profile page renders.
          3. The home page -> Organization + WebSite. The Organization is what
@@ -24,7 +27,7 @@
 {{- $isAuthor := eq .Type "author" -}}
 
 {{- if $isPost -}}
-  {{- $desc := .Params.description | default .Site.Params.description -}}
+  {{- $desc := partial "meta-description.html" . -}}
   {{- $authorSlugs := .Params.authors -}}
   {{- if and (not $authorSlugs) .Params.author }}{{ $authorSlugs = slice .Params.author }}{{ end -}}
   {{- $people := slice -}}
@@ -48,15 +51,28 @@
       {{- $people = $people | append (dict "@type" "Person" "name" .) -}}
     {{- end -}}
   {{- end -}}
+  {{/* No "@context" here: this node goes into an @graph at the foot of this
+       branch, which carries the context for all three of its members.
+
+       `publisher` is a REFERENCE to the shared #organization node emitted in
+       that graph, not a second description of it. Inlining one here made
+       foojay two entities that happened to share a name, and the inline copy
+       carried params.logo -- foojay-logo.png, the wide
+       light-blue-on-transparent wordmark, which is the one image Google cannot
+       use: it composites a publisher logo onto white, where that artwork is
+       invisible. json-ld-organization.html points at the 512x512 square built
+       for exactly this, so the logo now changes in one place rather than two.
+
+       (A comment cannot live INSIDE the dict literal below -- Hugo's parser
+       rejects it with "unexpected { in operand".) */}}
   {{- $data := dict
-    "@context" "https://schema.org"
     "@type" "BlogPosting"
     "headline" .Title
     "description" $desc
     "url" .Permalink
     "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
     "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
-    "publisher" (dict "@type" "Organization" "name" "foojay.io" "logo" (dict "@type" "ImageObject" "url" (.Site.Params.logo | absURL)))
+    "publisher" (dict "@id" (printf "%s#organization" site.Home.Permalink))
   -}}
   {{- if not .Lastmod.IsZero }}{{ $data = merge $data (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
   {{/* Both derived, so no post has to carry them: the section is the post's own
@@ -69,7 +85,44 @@
   {{- $data = merge $data (dict "inLanguage" (or site.Language.Locale site.Language.Lang "en")) -}}
   {{- with .Params.image }}{{ $data = merge $data (dict "image" (slice (partial "resource-url.html" (dict "page" $ "src" . "abs" true)))) }}{{ end -}}
   {{- if gt (len $people) 0 }}{{ $data = merge $data (dict "author" $people) }}{{ end -}}
-  <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
+
+  {{/* Breadcrumbs, derived from the post's own first category -- nothing to
+       write per post, and every one of the 2147 has at least one. This is what
+       replaces the bare URL under a search result with
+       "foojay.io > Java > <title>", and it is the trail the site itself shows:
+       the category chips above the <h1> link exactly here.
+
+       First category only, deliberately. A BreadcrumbList is a single path from
+       the root to this page, not a set of the places it could be reached from,
+       and posts carry up to eight categories -- listing them all would be a
+       nonsense trail. `first 2` is what the page header renders; the first is
+       what the trail follows. */}}
+  {{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "Home" "item" site.Home.Permalink) -}}
+  {{- with .Params.categories -}}
+    {{- $cat := index . 0 -}}
+    {{- with site.GetPage (printf "/categories/%s" (urlize $cat)) -}}
+      {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink) -}}
+    {{- end -}}
+  {{- end -}}
+  {{/* The last crumb carries NO `item`: it is the page you are already on, and
+       schema.org's guidance is to leave the current page unlinked. */}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" (add (len $crumbs) 1) "name" .Title) -}}
+  {{- $breadcrumb := dict
+    "@type" "BreadcrumbList"
+    "@id" (printf "%s#breadcrumb" .Permalink)
+    "itemListElement" $crumbs
+  -}}
+  {{- $data = merge $data (dict "breadcrumb" (dict "@id" (printf "%s#breadcrumb" .Permalink))) -}}
+
+  {{/* One @graph rather than three separate <script> blocks, so the
+       BlogPosting's `publisher` and `breadcrumb` @id references resolve inside
+       the document that makes them. */}}
+  {{- $graph := dict "@context" "https://schema.org" "@graph" (slice
+    $data
+    (partial "json-ld-organization.html" .)
+    $breadcrumb
+  ) -}}
+  <script type="application/ld+json">{{ $graph | jsonify (dict "indent" "  ") | safeJS }}</script>
 {{- end -}}
 
 {{- if $isAuthor -}}
@@ -89,31 +142,10 @@
 {{- end -}}
 
 {{- if .IsHome -}}
-  {{/* sameAs is the set of profiles foojay actually controls, kept in step with
-       partials/footer.html. The Slack link in the footer is deliberately absent:
-       it is a join invite, not a profile page, so it is not an identity search
-       engines can reconcile. */}}
-  {{- $sameAs := slice
-    "https://bsky.app/profile/foojay.io"
-    "https://foojay.social/@foojay"
-    "https://www.linkedin.com/company/foojayio/"
-    "https://github.com/foojayio"
-  -}}
-  {{/* A dedicated square, white-ground raster: Google composites a logo onto
-       white and wants at least 112px on its short side, and the header wordmark
-       is 1022x352 light-blue-on-transparent -- which disappears exactly where
-       Google would draw it. See themes/foojay/static/images/. */}}
-  {{- $org := dict
-    "@type" "Organization"
-    "@id" (printf "%s#organization" site.Home.Permalink)
-    "name" "foojay.io"
-    "alternateName" "Friends Of OpenJDK"
-    "url" site.Home.Permalink
-    "description" site.Params.description
-    "foundingDate" "2020"
-    "logo" (dict "@type" "ImageObject" "url" ("images/foojay-logo-square.png" | absURL) "width" 512 "height" 512)
-    "sameAs" $sameAs
-  -}}
+  {{/* The organization node is shared with every post page (where it is the
+       BlogPosting's publisher), so it lives in one partial -- see
+       partials/json-ld-organization.html for the logo and sameAs reasoning. */}}
+  {{- $org := partial "json-ld-organization.html" . -}}
   {{- $site := dict
     "@type" "WebSite"
     "@id" (printf "%s#website" site.Home.Permalink)

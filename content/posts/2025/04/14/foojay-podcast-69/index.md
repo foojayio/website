@@ -2,7 +2,7 @@
 title: "Foojay Podcast #69: All Things Java at VoxxedDays Amsterdam"
 date: "2025-04-14T11:23:24+00:00"
 lastmod: "2025-11-13T08:38:35+00:00"
-description: "On April 3rd, the first VoxxedDays event in Amsterdam took place. VoxxedDays are tech events organized by local community groups, with support from the - by Frank Delporte"
+description: "On April 3rd, the first VoxxedDays event in Amsterdam took place. VoxxedDays are tech events organized by local community groups, with support from the…"
 authors:
   - "frankdelporte"
   - "geertjan-wielenga"

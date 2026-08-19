@@ -2,7 +2,7 @@
 title: "How to Train ReadyNow to Achieve Optimal Java Performance"
 date: "2025-06-20T19:31:00+00:00"
 lastmod: "2025-06-27T11:17:17+00:00"
-description: "This is the third blog post in a series on faster Java application warmup with ReadyNow. If you haven’t been following the series, go back to the first - by Frank Delporte"
+description: "This is the third blog post in a series on faster Java application warmup with ReadyNow. If you haven’t been following the series, go back to the first…"
 canonical: "https://www.azul.com/blog/how-to-train-readynow-to-achieve-optimal-java-performance/"
 authors:
   - "frankdelporte"

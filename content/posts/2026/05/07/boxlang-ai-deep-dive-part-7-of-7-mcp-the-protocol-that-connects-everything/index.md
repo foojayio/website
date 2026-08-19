@@ -2,7 +2,7 @@
 title: "BoxLang AI Deep Dive — Part 7 of 7: MCP — The Protocol That Connects Everything"
 date: "2026-05-07T21:51:08+00:00"
 lastmod: "2026-05-14T09:59:03+00:00"
-description: "BoxLang AI 3.0 Series · Part 7 of 7 The AI ecosystem has a tool problem. Every framework has its own way of defining tools, every agent has its own way of - by Cristobal Escobar"
+description: "BoxLang AI 3.0 Series · Part 7 of 7 The AI ecosystem has a tool problem. Every framework has its own way of defining tools, every agent has its own way of…"
 authors:
   - "cristobal-escobar"
 image: "Captura-de-pantalla-2026-05-07-234306.png"

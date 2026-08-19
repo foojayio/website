@@ -2,7 +2,7 @@
 title: "The End of the Beginning for Apache Cassandra"
 date: "2022-07-12T17:43:39+00:00"
 lastmod: "2022-07-13T13:23:48+00:00"
-description: "Image: Pixabay Editor’s note: This story originally ran on July 27, 2021, the day that Apache Cassandra 4.0 was released. Today is a big day for - by Patrick McFadin"
+description: "Image: Pixabay Editor’s note: This story originally ran on July 27, 2021, the day that Apache Cassandra 4.0 was released. Today is a big day for…"
 canonical: "https://datastax.medium.com/the-end-of-the-beginning-for-apache-cassandra-f58b5b4b7504"
 authors:
   - "patrick-mcfadin"

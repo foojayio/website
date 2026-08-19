@@ -1,7 +1,7 @@
 ---
 title: "Flaky Tests: a journey to beat them all"
 date: "2026-01-13T13:00:07+00:00"
-description: "“Sleep is not a synchronization primitive.” Every test engineer, eventually What’s a flaky test? A flaky test is a test that sometimes passes and - by Loic Mathieu"
+description: "“Sleep is not a synchronization primitive.” Every test engineer, eventually What’s a flaky test? A flaky test is a test that sometimes passes and…"
 authors:
   - "loic-mathieu"
 image: "Flaky-test.jpg"

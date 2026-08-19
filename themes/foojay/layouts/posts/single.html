@@ -8,7 +8,14 @@
            so a search result showed the first image in the body, or, on a post
            with no images of its own, the author photo from the "Written by"
            block at the foot of the page. */}}
-      {{ with .Params.image }}<img class="post-hero is-zoomable" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}" loading="lazy">{{ end }}
+      {{/* NOT loading="lazy", and fetchpriority="high": the hero is the first
+           thing on the page and is the LCP element on all 2147 posts, so
+           lazy-loading it deferred the one image the score is measured on
+           until after layout -- the browser has to discover it, then decide it
+           is in view, then start the request. Eager + high priority puts it in
+           the very first batch, ahead of the sidebar avatars and the card
+           images further down that DO deserve lazy. */}}
+      {{ with .Params.image }}<img class="post-hero is-zoomable" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}" fetchpriority="high" decoding="async">{{ end }}
       {{ with .Params.categories }}
       <div class="post-categories post-categories--top">
         {{ range first 2 . }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}

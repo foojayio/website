@@ -1,7 +1,7 @@
 ---
 title: "Free Webinar: Making AI useful for Java developers in Real Applications with BoxLang!"
 date: "2026-05-29T15:43:47+00:00"
-description: "AI is everywhere right now, but for many development teams, the biggest question is no longer “What is AI?” it’s “How do we actually use it in real - by Cristobal Escobar"
+description: "AI is everywhere right now, but for many development teams, the biggest question is no longer “What is AI?” it’s “How do we actually use it in real…"
 authors:
   - "cristobal-escobar"
 image: "bx-jwt-1.png"

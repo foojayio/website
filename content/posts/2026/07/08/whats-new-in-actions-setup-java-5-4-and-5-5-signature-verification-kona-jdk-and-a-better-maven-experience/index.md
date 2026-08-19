@@ -2,7 +2,7 @@
 title: "What's New in actions/setup-java 5.4 and 5.5: Signature Verification, Kona JDK, and a Better Maven Experience"
 date: "2026-07-08T18:56:31+00:00"
 lastmod: "2026-07-08T20:28:22+00:00"
-description: "If you build Java on GitHub Actions, actions/setup-java is almost certainly the first step in your workflow. It installs a JDK, wires up JAVA_HOME and the - by Bruno Borges"
+description: "If you build Java on GitHub Actions, actions/setup-java is almost certainly the first step in your workflow. It installs a JDK, wires up JAVA_HOME and the…"
 authors:
   - "bruno-borges"
 image: "new-actions-setup-java.png"

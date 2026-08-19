@@ -1,7 +1,7 @@
 ---
 title: "Introducing a New Java DMX512 Library With Demo JavaFX User Interface"
 date: "2025-07-25T06:17:00+00:00"
-description: "In this post, I would like to inform you about a new Java library that is now available on Maven Central, allowing interaction with DMX512 devices using - by Frank Delporte"
+description: "In this post, I would like to inform you about a new Java library that is now available on Maven Central, allowing interaction with DMX512 devices using…"
 canonical: "https://webtechie.be/post/2025-07-17-introducing-java-dmx512-library-with-demo-javafx-ui/"
 authors:
   - "frankdelporte"

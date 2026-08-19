@@ -1,5 +1,5 @@
 ---
-title: "adesso"
+title: "Adesso"
 tier: "bronze"
 tagline: "IT Services and IT Consulting"
 description: ""

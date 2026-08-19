@@ -2,7 +2,7 @@
 title: "Using the Azul Zulu Docker Official Images: From Simple Pull to Lean Container"
 date: "2026-05-08T09:05:22+00:00"
 lastmod: "2026-05-08T12:32:12+00:00"
-description: "Previously in this series: Trusted Java Containers: Azul Zulu OpenJDK Joins Docker’s Official Images The Road to Docker Official Images for Java: The Azul - by Frank Delporte"
+description: "Previously in this series: Trusted Java Containers: Azul Zulu OpenJDK Joins Docker’s Official Images The Road to Docker Official Images for Java: The Azul…"
 canonical: "https://www.azul.com/blog/using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container/"
 authors:
   - "frankdelporte"

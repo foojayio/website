@@ -2,7 +2,7 @@
 title: "From “Crypto AI” to general AI: Do AI agents dream of electric langoustines?"
 date: "2026-02-23T18:11:54+00:00"
 lastmod: "2026-03-03T16:19:55+00:00"
-description: "x402, ERC-8004, A2A, and The Next Wave of AI Commerce: Do AI Agents Dream of Electric Langoustines? A Blade Runner riff for a world where the lobster - by Michal Maléř"
+description: "x402, ERC-8004, A2A, and The Next Wave of AI Commerce: Do AI Agents Dream of Electric Langoustines? A Blade Runner riff for a world where the lobster…"
 authors:
   - "michal-maler"
 image: "daydreams-2-scaled.jpg"

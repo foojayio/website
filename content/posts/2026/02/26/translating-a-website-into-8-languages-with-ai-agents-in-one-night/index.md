@@ -2,7 +2,7 @@
 title: "Translating a Website into 8 Languages with AI Agents in One Night"
 date: "2026-02-26T14:15:15+00:00"
 lastmod: "2026-02-26T14:16:01+00:00"
-description: "How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved — from spec to deployment java.evolved is a - by Bruno Borges"
+description: "How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved — from spec to deployment java.evolved is a…"
 authors:
   - "bruno-borges"
 image: "Screenshot-2026-02-25-at-22.43.09.png"

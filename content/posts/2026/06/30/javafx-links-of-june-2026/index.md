@@ -1,7 +1,7 @@
 ---
 title: "JavaFX Links of June 2026"
 date: "2026-06-30T07:23:31+00:00"
-description: "Here are the JavaFX LinksOfTheMonth of June 2026. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything you want to - by Frank Delporte"
+description: "Here are the JavaFX LinksOfTheMonth of June 2026. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there anything you want to…"
 authors:
   - "frankdelporte"
 image: "jfxcentral.png"

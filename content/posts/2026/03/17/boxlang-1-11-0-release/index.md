@@ -2,7 +2,7 @@
 title: "BoxLang 1.11.0 Release"
 date: "2026-03-17T09:40:04+00:00"
 lastmod: "2026-03-17T15:45:32+00:00"
-description: "We're proud to announce BoxLang 1.11.0, a highly focused performance and stability release that delivers measurable speed improvements across every - by Cristobal Escobar"
+description: "We're proud to announce BoxLang 1.11.0, a highly focused performance and stability release that delivers measurable speed improvements across every…"
 authors:
   - "cristobal-escobar"
 image: "boxlang-v1.11.0.jpg"

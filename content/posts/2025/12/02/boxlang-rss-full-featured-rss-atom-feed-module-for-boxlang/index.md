@@ -2,7 +2,7 @@
 title: "BoxLang RSS : Full-Featured RSS/Atom Feed Module for BoxLang"
 date: "2025-12-02T11:19:11+00:00"
 lastmod: "2025-12-02T11:44:24+00:00"
-description: "We're thrilled to announce the release of bx-rss, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to BoxLang! - by Cristobal Escobar"
+description: "We're thrilled to announce the release of bx-rss, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to BoxLang!"
 authors:
   - "cristobal-escobar"
 image: "BoxLang-Logo-Dark.png"

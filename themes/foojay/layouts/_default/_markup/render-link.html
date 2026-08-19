@@ -1,9 +1,10 @@
-{{- /* Link render hook. Three jobs:
+{{- /* Link render hook. Four jobs:
        1. Absolute foojay.io links in migrated content (e.g. "See also" links)
           point at the live WordPress site -- rewrite them to this site's path.
        2. Root-relative internal links get the baseURL subpath (relURL only
           prefixes it when the path doesn't already start with "/").
        3. Links to any other host are external -> open in a new tab.
+       4. A bare filename that matches a page-bundle resource -> that resource.
        String checks (not urls.Parse, which errors on malformed migrated URLs).
 
        htmlUnescape on .Destination/.Title is what goldmark's own link renderer
@@ -24,6 +25,24 @@
   {{- $dest = replaceRE "^(https?:)?//(www\\.)?foojay\\.io" "" $dest -}}
 {{- end -}}
 {{- if not (or $external (hasPrefix $dest "http") (hasPrefix $dest "//") (hasPrefix $dest "mailto:") (hasPrefix $dest "#") (hasPrefix $dest "data:")) -}}
-  {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
+  {{- /* 4. A bare filename co-located with index.md -> that page-bundle
+         resource, the same lookup render-image.html does. Without it a link to
+         a file in the author's own folder -- a PDF, a video, a zip -- fell
+         through to relURL and resolved against the SITE ROOT
+         (/website/handout.pdf) while Hugo published the file inside the bundle
+         (/website/today/<slug>/handout.pdf), so the link 404'd and nothing said
+         so. An image already worked, which is exactly why this went unnoticed:
+         ![](shot.png) resolves and [pdf](handout.pdf) does not.
+
+         Only a destination that actually matches a resource is rewritten;
+         everything else (/today/..., ../foo/) falls through to the relURL
+         branch untouched. */ -}}
+  {{- $res := false -}}
+  {{- with .Page }}{{ $res = .Resources.GetMatch $dest }}{{ end -}}
+  {{- with $res -}}
+    {{- $dest = .RelPermalink -}}
+  {{- else -}}
+    {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
+  {{- end -}}
 {{- end -}}
 <a href="{{ $dest }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>

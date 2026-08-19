@@ -1,7 +1,7 @@
 ---
 title: "Does Java Really Use Too Much Memory? Let’s Look at the Facts (JEPs)"
 date: "2026-04-03T07:28:09+00:00"
-description: "Breaking news: Java has been confirmed to consume all available RAM. Developers worldwide shocked. … okay, not really. Happy April 1st. It’s only fair to - by Igor De Souza"
+description: "Breaking news: Java has been confirmed to consume all available RAM. Developers worldwide shocked. … okay, not really. Happy April 1st. It’s only fair to…"
 authors:
   - "igor-de-souza"
 image: "duke_Pinocchio01.jpg"

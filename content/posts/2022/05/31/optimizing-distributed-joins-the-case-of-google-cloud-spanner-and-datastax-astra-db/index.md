@@ -2,7 +2,7 @@
 title: "Optimizing Distributed Joins: The Case of Google Cloud Spanner and DataStax Astra DB"
 date: "2022-05-31T16:25:25+00:00"
 lastmod: "2022-05-31T16:25:26+00:00"
-description: "In this post, learn how relational and NoSQL databases, Google Cloud Spanner and DataStax Astra DB, optimize distributed joins for real-time applications. - by Artem Chebotko"
+description: "In this post, learn how relational and NoSQL databases, Google Cloud Spanner and DataStax Astra DB, optimize distributed joins for real-time applications."
 canonical: "https://medium.com/building-the-open-data-stack/optimizing-distributed-joins-the-case-of-google-cloud-spanner-and-datastax-astra-db-fbdaecc2863b"
 authors:
   - "artem-chebotko"

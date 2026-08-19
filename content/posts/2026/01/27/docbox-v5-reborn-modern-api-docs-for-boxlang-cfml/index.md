@@ -2,7 +2,7 @@
 title: "DocBox v5 - Reborn: Modern API Docs for BoxLang & CFML"
 date: "2026-01-27T12:15:45+00:00"
 lastmod: "2026-01-27T17:12:15+00:00"
-description: "Welcome to DocBox v5! We didn't just update DocBox. We rebuilt it from the ground up. DocBox v5.0.0 represents a complete architectural rewrite—modern - by Cristobal Escobar"
+description: "Welcome to DocBox v5! We didn't just update DocBox. We rebuilt it from the ground up. DocBox v5.0.0 represents a complete architectural rewrite—modern…"
 authors:
   - "cristobal-escobar"
 image: "docbox.png"

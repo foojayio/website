@@ -2,7 +2,7 @@
 title: "Foojay Podcast #86: Agents, MCP, and Graph Databases: Java Developers Navigate the AI Revolution"
 date: "2025-12-15T06:45:00+00:00"
 lastmod: "2025-12-29T13:17:59+00:00"
-description: "The AI revolution isn't replacing Java developers. No, it's forcing us to think harder. Welcome to another episode of the Foojay Podcast! Today, we're - by Frank Delporte"
+description: "The AI revolution isn't replacing Java developers. No, it's forcing us to think harder. Welcome to another episode of the Foojay Podcast! Today, we're…"
 authors:
   - "frankdelporte"
 image: "episode-86-ai-facts.jpg"

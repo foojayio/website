@@ -2,7 +2,7 @@
 title: "Why Java 8 is a Ticking Time Bomb Hiding Within Your Organization"
 date: "2024-11-15T11:16:00+00:00"
 lastmod: "2024-12-12T09:33:07+00:00"
-description: "When I spoke to developers at Devoxx in Belgium in October, I was surprised to learn how many of them are maintaining systems that are still running on - by Frank Delporte"
+description: "When I spoke to developers at Devoxx in Belgium in October, I was surprised to learn how many of them are maintaining systems that are still running on…"
 canonical: "https://webtechie.be/post/2024-10-30-java-8-ticking-time-bomb/"
 authors:
   - "frankdelporte"

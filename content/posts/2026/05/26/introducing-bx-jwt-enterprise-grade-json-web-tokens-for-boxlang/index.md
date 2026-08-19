@@ -2,7 +2,7 @@
 title: "Introducing bx-jwt: Enterprise-Grade JSON Web Tokens for BoxLang"
 date: "2026-05-26T10:14:00+00:00"
 lastmod: "2026-05-26T10:19:43+00:00"
-description: "JWT authentication is everywhere. But rolling it correctly — with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and - by Cristobal Escobar"
+description: "JWT authentication is everywhere. But rolling it correctly — with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and…"
 authors:
   - "cristobal-escobar"
 image: "bx-jwt.png"

@@ -2,7 +2,7 @@
 title: "Review: OpenJDK Migration for Dummies"
 date: "2023-09-15T18:46:59+00:00"
 lastmod: "2024-06-30T11:19:47+00:00"
-description: "Have you been thinking of moving away from the Oracle JDK to OpenJDK? The book \"OpenJDK Migration for Dummies\", written by Simon Ritter of Azul, provides - by Josh Juneau"
+description: "Have you been thinking of moving away from the Oracle JDK to OpenJDK? The book \"OpenJDK Migration for Dummies\", written by Simon Ritter of Azul, provides…"
 authors:
   - "josh-juneau"
 image: "Favicon-3-2.png"

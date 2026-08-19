@@ -1,7 +1,7 @@
 ---
 title: "AI-Assisted Unused & Dead Code Removal"
 date: "2026-06-28T07:19:42+00:00"
-description: "Why Your Codebase Is Forcing AI to Underperform, and What to Do About It Your AI coding assistant is only as good as the codebase it works on. If your - by Frank Delporte"
+description: "Why Your Codebase Is Forcing AI to Underperform, and What to Do About It Your AI coding assistant is only as good as the codebase it works on. If your…"
 canonical: "https://www.azul.com/blog/ai-assisted-unused-dead-code-removal/"
 authors:
   - "erikcostlow"

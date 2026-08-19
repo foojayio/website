@@ -1,7 +1,7 @@
 ---
 title: "JavaFX Links of December 2025"
 date: "2025-12-31T06:05:54+00:00"
-description: "Here is the final JavaFX LinksOfTheMonth for 2025... Thank you all for sharing your knowledge and experience with JavaFX. And we hope to see even more in - by Frank Delporte"
+description: "Here is the final JavaFX LinksOfTheMonth for 2025... Thank you all for sharing your knowledge and experience with JavaFX. And we hope to see even more in…"
 canonical: "https://webtechie.be/post/2025-12-19-javafx-links-of-december-2025/"
 authors:
   - "frankdelporte"

@@ -2,7 +2,7 @@
 title: "Build a Status Dashboard Using Spring Boot and Astra DB"
 date: "2021-12-17T09:28:19+00:00"
 lastmod: "2022-09-22T17:21:14+00:00"
-description: "Learn how to leverage the Astra Document API on top of Cassandra to build a dashboard of statuses, with Spring Boot for rendering.  - by Graham Cox"
+description: "Learn how to leverage the Astra Document API on top of Cassandra to build a dashboard of statuses, with Spring Boot for rendering. …"
 canonical: "https://www.baeldung.com/cassandra-astra-stargate-dashboard"
 authors:
   - "graham-cox"

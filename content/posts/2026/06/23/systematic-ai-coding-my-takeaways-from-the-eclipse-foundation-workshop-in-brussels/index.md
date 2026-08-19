@@ -2,7 +2,7 @@
 title: "Systematic AI Coding: My Takeaways from the Eclipse Foundation Workshop in Brussels"
 date: "2026-06-23T19:48:42+00:00"
 lastmod: "2026-08-17T05:40:40+00:00"
-description: "Most developers using AI tools are still guessing. The Eclipse Foundation's first AI Coding Workshop in Brussels was built to change that. It's a brand - by Frank Delporte"
+description: "Most developers using AI tools are still guessing. The Eclipse Foundation's first AI Coding Workshop in Brussels was built to change that. It's a brand…"
 authors:
   - "frankdelporte"
 image: "eclipse-ai-brussels-jonas-scaled.jpg"

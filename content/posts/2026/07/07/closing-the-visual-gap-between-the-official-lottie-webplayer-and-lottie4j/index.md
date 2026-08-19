@@ -1,7 +1,7 @@
 ---
 title: "Closing the Visual Gap Between the Official Lottie Webplayer and Lottie4J"
 date: "2026-07-07T08:25:55+00:00"
-description: "A Lottie library is only as good as its output looks. If an animation renders differently in Lottie4J than it does in the official web player, that's a - by Frank Delporte"
+description: "A Lottie library is only as good as its output looks. If an animation renders differently in Lottie4J than it does in the official web player, that's a…"
 canonical: "https://webtechie.be/post/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/"
 authors:
   - "frankdelporte"

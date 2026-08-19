@@ -2,7 +2,7 @@
 title: "Foojay Podcast #60: Proud Of Belgium - Devoxx, JobRunr, Timefold, OpenJDK Mobile, OpenJFX, Thymeleaf, htmx,..."
 date: "2024-11-04T14:29:12+00:00"
 lastmod: "2025-11-13T08:41:36+00:00"
-description: "Belgium might be tiny, but we have a strong Java Community! As I was doing interviews at Devoxx in October, I met several of these people, and we talked - by Frank Delporte"
+description: "Belgium might be tiny, but we have a strong Java Community! As I was doing interviews at Devoxx in October, I met several of these people, and we talked…"
 authors:
   - "frankdelporte"
   - "geoffrey-de-smet"

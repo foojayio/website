@@ -1,7 +1,7 @@
 ---
 title: "Build Secure AI Chat Applications with BoxLang, RAG, Ollama, and Amazon Bedrock with Dan Card"
 date: "2026-08-13T14:52:13+00:00"
-description: "Build Secure AI Chat Applications with BoxLang, RAG, Ollama, and Amazon Bedrock AI demos are everywhere. Building an AI-powered feature that can securely - by Cristobal Escobar"
+description: "Build Secure AI Chat Applications with BoxLang, RAG, Ollama, and Amazon Bedrock AI demos are everywhere. Building an AI-powered feature that can securely…"
 authors:
   - "cristobal-escobar"
 image: "dancardWorkshop.png"

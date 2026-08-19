@@ -1,7 +1,7 @@
 ---
 title: "Spring Cloud Stream: Demystifying Event-Driven Architecture"
 date: "2025-02-28T08:34:32+00:00"
-description: "Introduction Consider a bustling restaurant environment. The kitchen receives a flood of orders, waitstaff dart between tables, and patrons anxiously - by Mahendra Rao B"
+description: "Introduction Consider a bustling restaurant environment. The kitchen receives a flood of orders, waitstaff dart between tables, and patrons anxiously…"
 authors:
   - "mahendra1413"
 image: "spring-cloud-stream-event-driven.webp"

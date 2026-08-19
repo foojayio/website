@@ -1,7 +1,7 @@
 ---
 title: "Release V0.0.2 of Java DMX512 Library With Universes and USB-to-DMX support"
 date: "2025-08-04T14:19:25+00:00"
-description: "Earlier this month, I released V0.0.1 of my new Java library to interact with DMX512 devices using (optionally) the Open Fixture Library (OFL). After some - by Frank Delporte"
+description: "Earlier this month, I released V0.0.1 of my new Java library to interact with DMX512 devices using (optionally) the Open Fixture Library (OFL). After some…"
 canonical: "https://webtechie.be/post/2025-07-29-java-dmx512-library-v0.0.2-universes-and-usb/"
 authors:
   - "frankdelporte"

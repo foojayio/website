@@ -1,7 +1,7 @@
 ---
 title: "Java 26 Is Here, And With It a Solid Foundation for the Future"
 date: "2026-03-17T07:00:00+00:00"
-description: "Java 26 is here, and its main purpose seems to be to provide a solid foundation for future things to come. It comes with a few new features, some performance improvements and multiple enhancements that mention Project Valhalla as the inspiration for their existence. This post has all the info! - by Hanno Embregts"
+description: "Java 26 is here, and its main purpose seems to be to provide a solid foundation for future things to come. It comes with a few new features, some performance improvements and multiple enhancements that mention Project Valhalla as the inspiration for their existence. This post has all the info!"
 canonical: "https://hanno.codes/2026/03/17/java-26-is-here/"
 authors:
   - "hanno-embregts"

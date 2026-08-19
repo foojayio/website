@@ -2,7 +2,7 @@
 title: "Foojay Status Report: July – December 2021"
 date: "2022-01-13T14:21:20+00:00"
 lastmod: "2022-01-13T14:58:08+00:00"
-description: "Foojay doubled in usage from the first half to the second half of the year. - by Geertjan Wielenga"
+description: "Foojay doubled in usage from the first half to the second half of the year."
 authors:
   - "geertjan-wielenga"
 image: "first-half-second-half.png"

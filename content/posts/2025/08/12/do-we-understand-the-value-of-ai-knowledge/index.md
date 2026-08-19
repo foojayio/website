@@ -136,4 +136,4 @@ Willingness to contribute to the development, among other things, I helped creat
 
 \[9\] <https://foojay.io/today/jc-ai-newsletter-2>
 
-\[10\] [Value of AI knowledge: Does evolution call for deterministic or LLM biased results?](_wp_link_placeholder)
+\[10\] Value of AI knowledge: Does evolution call for deterministic or LLM biased results?

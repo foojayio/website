@@ -2,7 +2,7 @@
 title: "Quarkus Unpacked: Insights from the Foojay Podcast"
 date: "2026-06-23T12:36:54+00:00"
 lastmod: "2026-06-24T07:15:41+00:00"
-description: "I recently had the pleasure of joining the Foojay podcast to talk about Quarkus in depth. The conversation covered a lot of ground, from what makes - by Michal Maléř"
+description: "I recently had the pleasure of joining the Foojay podcast to talk about Quarkus in depth. The conversation covered a lot of ground, from what makes…"
 authors:
   - "michal-maler"
 image: "3-Quarkus-Unpacked-2-2.jpeg"
