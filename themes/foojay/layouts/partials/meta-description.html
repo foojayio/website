@@ -1,0 +1,66 @@
+{{- /* The single definition of a page's meta description -- used by
+       baseof.html for <meta name="description"> and og:description, and by
+       json-ld.html for the BlogPosting/Person description, so the three can
+       never disagree.
+
+       It exists because the bare `.Params.description | default
+       site.Params.description` it replaces put ONE boilerplate string on 470
+       URLs: 345 author profiles and 124 category terms carry no description of
+       their own (no author bundle has one, and a term page has no frontmatter
+       at all), so every one of them told Google "Foojay is a place for Friends
+       Of OpenJDK, providing free, reference materials and blogs for daily Java
+       usage." -- 17% of the sitemap sharing a snippet that describes none of
+       them.
+
+       Both are DERIVED rather than asked for, per the rule in CLAUDE.md: an
+       author already writes a `bio:`, and a term page knows its own name and
+       how many articles it holds. Nothing was added to 470 files, and a new
+       author or category gets a real description on the build that first sees
+       it.
+
+       Order: an explicit description always wins, then the derivation for the
+       kinds that have one, then the site string as the genuine last resort. */ -}}
+
+{{- $desc := "" -}}
+
+{{- with .Params.description }}{{ $desc = . }}{{ end -}}
+
+{{- if not $desc -}}
+  {{- if eq .Type "author" -}}
+    {{/* 332 of 344 authors have a bio. The remaining 12 get their name and what
+         the page actually is, which still beats the site boilerplate. */}}
+    {{- with .Params.bio -}}
+      {{- $desc = . -}}
+    {{- else -}}
+      {{- $desc = printf "Articles by %s on foojay.io, the place for Friends Of OpenJDK." .Title -}}
+    {{- end -}}
+  {{- else if eq .Type "sponsor" -}}
+    {{/* 6 of the 7 sponsor bundles carry `description: ""` -- transfer/Sponsors.java
+         writes an empty string when the WordPress profile had no meta of its
+         own -- so the sponsors, the one set of pages with money attached, were
+         the ones describing themselves with the site boilerplate. Derived from
+         what the profile already knows; a bundle that writes its own
+         description (Azul does) still wins. */}}
+    {{- $n := len (partial "sponsor-posts.html" .) -}}
+    {{- $desc = printf "%s sponsors foojay.io, the place for Friends Of OpenJDK. Read their %d article%s and meet the team behind them." .Title $n (cond (eq $n 1) "" "s") -}}
+  {{- else if eq .Kind "term" -}}
+    {{- $n := len .Pages -}}
+    {{- $desc = printf "%d article%s about %s, written by the Java community on foojay.io — the place for Friends Of OpenJDK." $n (cond (eq $n 1) "" "s") .Title -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $desc }}{{ $desc = site.Params.description }}{{ end -}}
+
+{{- /* One length guard for every source, because none of them is reliably
+       short: 525 of 2148 post descriptions came out of Yoast over 160
+       characters (the longest is 1231 -- a whole paragraph), and a bio is
+       written to be read on the profile rather than to fit a search result.
+       Nothing past ~200 characters is ever rendered by an engine or a link
+       preview, so `truncate` cuts it on a WORD boundary and adds the ellipsis
+       instead of letting Google cut it mid-word.
+
+       The stored text is untouched -- this only shapes the tag. Repairing the
+       descriptions themselves (Yoast's " - by <Author>" suffix, the 363 that
+       stop mid-sentence) is scripts/cleanup/Descriptions.java's job, and this
+       guard is what keeps a missed one from reaching a search result whole. */ -}}
+{{- return (plainify $desc | truncate 200 "…") -}}
