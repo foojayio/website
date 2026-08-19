@@ -332,14 +332,14 @@ public class Posts {
         d.url = stripTrailingSlash(url) + "/";
         d.slug = sanitizeSlug(lastPathSegment(d.url));
 
-        d.title = stripEmoji(stripSiteName(firstNonBlank(
+        d.title = normalizeBrandName(stripEmoji(stripSiteName(firstNonBlank(
                 metaContent(doc, "og:title"),
                 textOrNull(doc.selectFirst("h1")),
-                doc.title())));
+                doc.title()))));
 
-        d.description = firstNonBlank(
+        d.description = normalizeBrandName(firstNonBlank(
                 attrContent(doc, "meta[name=description]"),
-                metaContent(doc, "og:description"));
+                metaContent(doc, "og:description")));
 
         // Only keep a canonical when it points to a DIFFERENT site (cross-posted
         // content). A self-canonical is redundant -- Hugo/the theme already emit
