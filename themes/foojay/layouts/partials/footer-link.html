@@ -1,0 +1,25 @@
+{{/*
+  One footer link, from a [[menu.footer]] / [[menu.legal]] entry. Both
+  menus render their links identically, which is why this is a partial rather
+  than the same six lines twice.
+
+  An http(s) or mailto: URL is emitted verbatim: piping it through relURL would
+  leave it alone today, but the point is that these are not site-relative paths
+  and must never pick up the baseURL subpath. Only http(s) gets target="_blank"
+  -- a mailto: in a new tab leaves the reader on a blank page.
+
+  `rss = true` means the URL is Hugo's to work out, not the config's: it follows
+  [outputs] home and the RSS format's baseName, the same way _default/term.html
+  and partials/author-social.html already derive theirs.
+*/}}
+{{- $url := .URL -}}
+{{- if .Params.rss -}}
+  {{- with site.Home.OutputFormats.Get "rss" }}{{ $url = .RelPermalink }}{{ end -}}
+{{- else if not (or (hasPrefix .URL "http") (hasPrefix .URL "mailto:")) -}}
+  {{- $url = .URL | relURL -}}
+{{- end -}}
+{{- if $url -}}
+  <a href="{{ $url }}"
+     {{- with .Params.rel }} rel="{{ . }}"{{ end }}
+     {{- if hasPrefix .URL "http" }} target="_blank"{{ end }}>{{ .Name }}</a>
+{{- end -}}

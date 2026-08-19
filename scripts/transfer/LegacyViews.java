@@ -128,7 +128,16 @@ public class LegacyViews {
             // resolve to that key and fetchAll() merges with Math::max, so the
             // page keeps the higher of the two counts rather than summing two
             // views of the same content.
-            "all-events", "calendar");
+            "all-events", "calendar",
+            // WordPress had a second team page at /team/ -- a profile of the web
+            // agency that built the WP site -- which is gone here, with /team/
+            // aliased onto /meet-the-team/. Mapping the key keeps the WP item out
+            // of `unmatched`; note fetchAll() merges with Math::max, so
+            // meet-the-team keeps the higher of the two counts (31201) rather than
+            // summing in /team/'s 3654. Both were real pages, so this does discard
+            // that number -- leaving the mapping out would discard it too AND
+            // print a line every run, so the mapping is the better of the two.
+            "team", "meet-the-team");
 
     /**
      * WordPress objects that live in a different SECTION here, keyed

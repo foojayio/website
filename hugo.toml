@@ -414,7 +414,7 @@ enableGitInfo = true
     desc = "About Foojay, it's history, and logo"
 
 [[menu.main]]
-  name = "Where to Find Friends Of OpenJDK"
+  name = "Where to Find Foojay"
   parent = "About"
   url = "/where/"
   weight = 42
@@ -452,3 +452,247 @@ enableGitInfo = true
   weight = 46
   [menu.main.params]
     desc = "Organizations deciding on Foojay’s roadmap and direction"
+
+# ---------------------------------------------------------------------------
+# Footer navigation
+#
+# Same two-level shape as menu.main above: a top-level entry is a column
+# HEADING and its children are the links inside it, so a column is added,
+# reordered or relabelled HERE rather than in partials/footer.html.
+#
+# That is the point of it being config at all. The footer used to be hardcoded
+# in the template, i.e. a second definition of the site's navigation with
+# nothing tying it to the first -- and it had drifted exactly the way a second
+# definition does: three labels disagreed with the header ("Meet The Team" vs
+# "Meet the Team", "Where to Find Foojay" vs the long form), the podcast sat in
+# the resources column while the nav filed it under News, and four pages the
+# nav offers (Java Champions, the Sustainability eBook, the AI portal, Write
+# for Foojay) were reachable from the hover panel and nowhere else. One
+# convention for both menus means a mismatch is now something you can see.
+#
+# Params per column: none.
+# Params per link:
+#   rel   value for the link's rel attribute (rel="me" on the profiles Foojay
+#         owns, so they verify back -- see Mastodon/Bluesky identity links)
+#   rss   true -> the URL is DERIVED from the home page's RSS output format
+#         rather than read from `url`. The feed path is Hugo's to decide (it
+#         follows [outputs] home and the format's baseName), and the rest of
+#         the theme already derives it via .OutputFormats.Get "rss"; hardcoding
+#         "/index.xml" here would be the one copy that goes stale silently.
+#
+# An http(s) or mailto: `url` is detected as external by the template: it is
+# emitted as-is instead of through relURL, and http(s) opens in a new tab.
+# ---------------------------------------------------------------------------
+
+[[menu.footer]]
+  name = "Java Resources"
+  identifier = "footer-resources"
+  weight = 10
+
+[[menu.footer]]
+  name = "Java Quick Start"
+  parent = "footer-resources"
+  url = "/java-quick-start/"
+  weight = 11
+
+[[menu.footer]]
+  name = "Java Terms Explained"
+  parent = "footer-resources"
+  url = "/pedia/"
+  weight = 12
+
+[[menu.footer]]
+  name = "Java Almanac"
+  parent = "footer-resources"
+  url = "/java-almanac/"
+  weight = 13
+
+[[menu.footer]]
+  name = "Java Champions"
+  parent = "footer-resources"
+  url = "/java-champions/"
+  weight = 14
+
+[[menu.footer]]
+  name = "Sustainability eBook"
+  parent = "footer-resources"
+  url = "/sustainability-for-java-developers/"
+  weight = 15
+
+# ---------------------------------------------------------------------------
+
+[[menu.footer]]
+  name = "Content Hub"
+  identifier = "footer-community"
+  weight = 20
+
+[[menu.footer]]
+  name = "Friends Of OpenJDK Today"
+  parent = "footer-community"
+  url = "/today/"
+  weight = 21
+
+[[menu.footer]]
+  name = "Podcast"
+  parent = "footer-community"
+  url = "/today/category/podcast/"
+  weight = 22
+
+[[menu.footer]]
+  name = "Foojay.io AI Portal"
+  parent = "footer-community"
+  url = "/ai/"
+  weight = 23
+
+[[menu.footer]]
+  name = "Events Calendar"
+  parent = "footer-community"
+  url = "/calendar/"
+  weight = 24
+
+[[menu.footer]]
+  name = "Java User Groups"
+  parent = "footer-community"
+  url = "/jugs/"
+  weight = 25
+
+[[menu.footer]]
+  name = "Where to Find Foojay"
+  parent = "footer-community"
+  url = "/where/"
+  weight = 26
+
+[[menu.footer]]
+  name = "Write for Foojay"
+  parent = "footer-community"
+  url = "/today/how-to-submit-your-next-article-on-foojay-io/"
+  weight = 27
+
+# ---------------------------------------------------------------------------
+
+[[menu.footer]]
+  name = "About Foojay"
+  identifier = "footer-about"
+  weight = 30
+
+[[menu.footer]]
+  name = "What is Foojay?"
+  parent = "footer-about"
+  url = "/who-we-are/"
+  weight = 31
+
+[[menu.footer]]
+  name = "Meet the Team"
+  parent = "footer-about"
+  url = "/meet-the-team/"
+  weight = 32
+
+[[menu.footer]]
+  name = "Authors"
+  parent = "footer-about"
+  url = "/today/author/"
+  weight = 33
+
+[[menu.footer]]
+  name = "Advisory Board"
+  parent = "footer-about"
+  url = "/board/"
+  weight = 34
+
+# Sponsors sit under About here and under About in the header nav too -- one
+# section owns them, rather than the WordPress footer's split where they were a
+# "Community Hub" item and an About item at the same time.
+[[menu.footer]]
+  name = "Our Sponsors"
+  parent = "footer-about"
+  url = "/our-sponsors/"
+  weight = 35
+
+# ---------------------------------------------------------------------------
+
+[[menu.footer]]
+  name = "Join the community"
+  identifier = "footer-social"
+  weight = 40
+
+[[menu.footer]]
+  name = "Bluesky"
+  parent = "footer-social"
+  url = "https://bsky.app/profile/foojay.io"
+  weight = 41
+  [menu.footer.params]
+    rel = "me"
+
+[[menu.footer]]
+  name = "Mastodon"
+  parent = "footer-social"
+  url = "https://foojay.social/@foojay"
+  weight = 42
+  [menu.footer.params]
+    rel = "me"
+
+[[menu.footer]]
+  name = "LinkedIn"
+  parent = "footer-social"
+  url = "https://www.linkedin.com/company/foojayio/"
+  weight = 43
+
+[[menu.footer]]
+  name = "Slack"
+  parent = "footer-social"
+  url = "https://bit.ly/join-foojay-slack"
+  weight = 44
+
+# In partials/json-ld-organization.html's `sameAs` since it went in, but never
+# in the footer -- so the one Foojay channel a reader can contribute code to
+# was advertised to search engines and not to people.
+[[menu.footer]]
+  name = "GitHub"
+  parent = "footer-social"
+  url = "https://github.com/foojayio"
+  weight = 45
+
+[[menu.footer]]
+  name = "RSS"
+  parent = "footer-social"
+  weight = 46
+  [menu.footer.params]
+    rss = true
+
+# ---------------------------------------------------------------------------
+# The utility row under the columns. Rendered inline, without a heading, so
+# it is its own menu (menu.legal) rather than a fifth column. The copyright line beside it is
+# derived from now.Year and stays in the template.
+#
+# hello@foojay.io is the address the WordPress footer carries (Cloudflare
+# obfuscates it on delivery, which is why it reads as "[email protected]" to
+# anything that doesn't run the page's JavaScript). Plain mailto: here on
+# purpose -- foojay.io is behind the same Cloudflare, which re-applies the
+# obfuscation, and storing the decoded address is the rule everywhere else in
+# this repo (see HtmlToMarkdown.decodeCloudflareEmails).
+# ---------------------------------------------------------------------------
+
+[[menu.legal]]
+  name = "hello@foojay.io"
+  url = "mailto:hello@foojay.io"
+  weight = 10
+
+[[menu.legal]]
+  name = "Search"
+  url = "/search/"
+  weight = 20
+
+[[menu.legal]]
+  name = "Sitemap"
+  url = "/sitemap/"
+  weight = 30
+
+[[menu.legal]]
+  name = "Terms of Use"
+  url = "/terms-of-use/"
+  weight = 40
+
+[[menu.legal]]
+  name = "Privacy Policy"
+  url = "/privacy-policy/"
+  weight = 50

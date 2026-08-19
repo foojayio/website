@@ -560,28 +560,19 @@ should catch a mistake at PR time rather than letting it fail silently.
    one switched on the day it has to work. The GoatCounter scaffold that used to
    live in `partials/stats.html` is gone — deleted, not migrated; it also
    carried an unwired share button, which nothing has replaced.
-8. **17 `/pedia/` entries are missing — the glossary was migrated and then the
-   live site grew.** `foojay.io/terminology-sitemap.xml` lists 47 published
-   `terminology` posts; `content/pedia/` has 30. All 17 return 200 on the live
-   site with real content (`/pedia/virtual-threads/`, `/pedia/records/`,
-   `/pedia/text-blocks/`, `/pedia/sealed-classes/`, `/pedia/pattern-matching/`,
-   `/pedia/structured-concurrency/`, `/pedia/scoped-values/`,
-   `/pedia/project-leyden/`, `/pedia/switch-expressions/`, `/pedia/tck/`,
-   `/pedia/thread-dump/`, `/pedia/stop-the-world-pause/`,
-   `/pedia/the-heap-stack-and-metaspace/`, `/pedia/value-objects-project-valhalla/`,
-   `/pedia/preview-and-incubator-features/`,
-   `/pedia/security-vulnerability-management/`,
-   `/pedia/visual-c-and-windows-backwards-compatibility/`), and several are
-   linked from the pedia entries that DID make it, so they are dead links here
-   as well as missing pages. Note the WP `/pedia/` index page itself lists only
-   31, which is why nothing noticed -- the sitemap is the honest count.
+8. ~~**17 `/pedia/` entries are missing**~~ — fixed. `content/pedia/` now holds
+   all 47 the live site publishes. The one-off scraper that ported them was
+   deleted again once it had run, the same way `ConvertPedia.java` was, so the
+   section stays hand-maintained.
 
-   This is the one place the "hand-maintained now" decision has already cost
-   something: `ConvertPedia.java` was retired once the section was converted, so
-   there is nothing to re-run. Decide with Frank whether to write them by hand
-   (they are short glossary definitions) or to resurrect the scraper for one
-   pass before cutover. `transfer/LegacyViews.java`'s "all 30 resolve" line
-   becomes 47 either way.
+   **Keep the discovery lesson, since the scraper is gone:** the gap existed
+   because the WordPress `/pedia/` index page is **paginated and lists 31 of
+   47**, so it silently looks complete. `foojay.io/terminology-sitemap.xml` is
+   the honest count — check that, not the index, if the glossary is ever
+   compared against the live site again. At the time of the port 41 of 47
+   entries matched the live page exactly and the 6 that differed were
+   storage-level only (`--` versus a real en dash, which Goldmark's typographer
+   renders identically), so nothing upstream was left behind.
 
 9. **The paid homepage banner carousel is NOT built — and it's revenue-bearing.**
    The live WP home page (its page title is literally "Home – CTA and Sponsor
@@ -1220,6 +1211,33 @@ should catch a mistake at PR time rather than letting it fail silently.
   is to find a specific one. Everything on it is derived from the taxonomy --
   a new category appears when a post carries it, and there is no count stored.
 
+- **A pedia entry is: prose, then optional "More reading on Foojay:", then
+  `## See Also`.** One convention across all 47, and the two blocks mean
+  different things -- More reading links foojay ARTICLES, `## See Also` links
+  other GLOSSARY TERMS, which is what a reader following a definition wants
+  next. Headings inside an entry start at `##`, because the layout renders the
+  term as the `<h1>`; ten entries were on `###` and one mixed both.
+
+  The See Also lists are **derived, in three tiers**: the pedia links the entry
+  already made (author intent, order preserved), then entries that link TO it
+  (reciprocity, so a relationship stated once shows up on both ends), then its
+  topical group -- only to top a short list up to three, and never across
+  groups. Capped at six, because a longer list stops being navigation. Links are
+  root-relative (`/pedia/<slug>/`), not the absolute `https://foojay.io/...`
+  form the scraper emits, so they work under `hugo server` too.
+
+- **A pedia image lives in `static/images/pedia/<slug>/`, never hotlinked.**
+  Entries are single FILES, not page bundles, so there is no folder beside the
+  markdown to co-locate a resource in — `resource-url.html` resolves the
+  root-relative path instead. `latency`'s figure had been left pointing at
+  azul.com, which is what a re-scrape does with a third-party image
+  (`HtmlToMarkdown.localizeImages` only pulls foojay-hosted ones local), and the
+  URL WordPress stores for it now 404s — on the live foojay.io page too, so that
+  entry renders a broken image there today. The working copy is under
+  `/wp-content/uploads/2020/11/`; it is now in
+  `static/images/pedia/latency/`. Check the figure still loads if that entry is
+  ever re-scraped, because the scraper will hotlink it again.
+
 - **The Advisory Board is a folder, not a list.** `/board/`
   (`content/pages/board.md`, `type: "board"` + `layout: "list"` ->
   `themes/foojay/layouts/board/list.html`) holds the two-paragraph intro and
@@ -1485,6 +1503,71 @@ should catch a mistake at PR time rather than letting it fail silently.
   file rather than the CSS. The file is now cropped, so the height in CSS is the
   height the mark renders at (36px in the header, 44px in the footer). Re-export
   a padded PNG and both shrink again with nothing in the templates to show why.
+- **The footer navigation is `[[menu.footer]]` in `hugo.toml`, not markup.** Same
+  two-level shape as `[[menu.main]]`: a top-level entry is a column heading, its
+  children are the links in it, and `partials/footer.html` is a `range` over
+  them. `partials/footer-link.html` renders one entry for both menus.
+
+  It was hardcoded in the template, which made it a **second definition of the
+  site's navigation with nothing tying it to the first** -- and it had drifted
+  exactly the way a second definition does. Three labels disagreed with the
+  header (`Meet The Team` vs `Meet the Team`, the short vs long "Where to Find"
+  form), the podcast sat in the resources column while the nav files it under
+  News, sponsors were a Community Hub item in the footer and an About item in
+  the nav, and four pages the nav offers (Java Champions, the Sustainability
+  eBook, the AI portal, Write for Foojay) were reachable from the hover panel
+  and nowhere else. None of that is visible while the two live in different
+  languages in different files.
+
+  Three things stay in the template because none of them is a link an editor
+  picks: the brand blurb, `now.Year`, and the **RSS URL**. That last one is the
+  interesting case -- it carries `rss = true` instead of a `url`, and
+  `footer-link.html` resolves it from `site.Home.OutputFormats.Get "rss"`. The
+  feed path is Hugo's to decide (it follows `[outputs] home` and the format's
+  baseName) and the rest of the theme already derives it that way
+  (`_default/term.html`, `partials/author-social.html`), so a literal
+  `"/index.xml"` in config would have been the one copy that goes stale in
+  silence. Everything else about an entry -- label, order, column, `rel="me"` --
+  is config.
+
+  Two traps found while building it. **Hugo lowercases config keys**, so
+  `[[menu.footerLegal]]` registers as `footerlegal` and `site.Menus.footerLegal`
+  resolves to nothing -- the whole utility row rendered as an empty `<div>`, no
+  error. The menu is `[[menu.legal]]` for that reason; keep footer menu names
+  all-lowercase. And `relURL` **does** normalise a trailing slash on
+  `"pedia"` -> `/website/pedia/`, so the slashless URLs that were in both the
+  footer and the nav were a source-consistency wart and not the 301 they looked
+  like. Verify a claim like that against built HTML, not against the template.
+
+- **The old WordPress `/team/` page is gone, and it was not `/meet-the-team/`.**
+  WordPress served two team pages: `/meet-the-team/` (Foojay's own people) and
+  `/team/`, a profile of the web development agency that built the WP site,
+  naming five staff by first name and city. The second is not Foojay's team and
+  nothing here linked it -- it was built and sitemapped on every deploy,
+  reachable only by typing the URL. Deleted, together with
+  `static/images/pages/team/`.
+
+  Two things had to move with it, and both fail silently. Its **aliases** --
+  `/team/` *and* the legacy `/about-our-team/`, which existed nowhere else -- are
+  now `aliases:` on `content/pages/meet-the-team.md`; the built page list is what
+  caught the second one (4188 pages before, 4187 after, one removal that was not
+  the file deleted). And its **view-counter key**: `transfer/LegacyViews.java`'s
+  `PAGE_ALIASES` maps `team` -> `meet-the-team`, without which the WP item lands
+  in `unmatched` and prints every run. Note `fetchAll` merges with `Math::max`,
+  so meet-the-team keeps its 31201 rather than summing in `/team/`'s 3654 --
+  these were two real pages, so that number is genuinely discarded; leaving the
+  mapping out would discard it too and add report noise, which is why the
+  mapping wins. `data/views.json`'s dead `pages/team` key clears itself on the
+  next run; don't hand-edit it.
+
+- **`content/pages/community-support.md` (`/community-support/`) is a stub nothing
+  links.** A half-scraped duplicate of `/our-sponsors/` -- one sponsor (Azul),
+  hardcoded counts that `partials/sponsor-posts.html` derives correctly next
+  door, and a "View Profile" link to the pre-rename bundle path. Left in place
+  rather than deleted because it holds WordPress view counts and the same
+  alias/key dance the `/team/` removal needed; **don't link it from anywhere**
+  while it says what it currently says.
+
 - **The header search field is collapsed to its magnifier, and the button is a
   real submit.** An always-open 210px input plus two CTAs made the top bar run
   the full 1240px on a big screen. `search-form.html` now renders the field plus

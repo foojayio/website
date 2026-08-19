@@ -4,6 +4,13 @@ description: "Get to know the team behind Foojay.io, the Java community platform
 url: "/meet-the-team/"
 aliases:
   - "/meet-the-team/"
+  # The old WordPress /team/ page (an "our web development team" profile of the
+  # agency that built the WP site) is gone; its URLs redirect here. Both of its
+  # aliases have to move with it -- /about-our-team/ is a legacy WordPress path
+  # that only existed as team.md's second alias, so deleting the file without
+  # this line 404s it.
+  - "/team/"
+  - "/about-our-team/"
 frozen: false
 ---
 

@@ -1,3 +1,14 @@
+{{/*
+  Footer navigation is DATA, not markup -- the columns, their headings, their
+  order and their links all come from [[menu.footer]] / [[menu.legal]] in
+  hugo.toml, next to the header's [[menu.main]]. See the comment on that block
+  for why: this template used to hold a second, hand-maintained copy of the
+  site's navigation, and it had drifted away from the first.
+
+  Only three things are the template's own, because none of them is a link an
+  editor picks: the brand blurb, the copyright year, and the RSS URL (derived
+  from the home page's output format for the entry carrying `rss = true`).
+*/}}
 <footer class="site-footer">
   <div class="footer-cols">
 
@@ -8,54 +19,23 @@
       <p>A place for Friends Of OpenJDK — free reference material, community news and daily Java insight.</p>
     </div>
 
-    <div class="footer-col">
-      <h4>OpenJDK Hub</h4>
-      <ul>
-        <li><a href="{{ "java-quick-start/" | relURL }}">Java Quick Start</a></li>
-        <li><a href="{{ "pedia/" | relURL }}">Java Terms Explained</a></li>
-        <li><a href="{{ "java-almanac/" | relURL }}">Java Almanac</a></li>
-        <li><a href="{{ "today/category/podcast/" | relURL }}">Podcast</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Community Hub</h4>
-      <ul>
-        <li><a href="{{ "today/" | relURL }}">Friends Of OpenJDK Today</a></li>
-        <li><a href="{{ "calendar/" | relURL }}">Events Calendar</a></li>
-        <li><a href="{{ "jugs/" | relURL }}">Java User Groups</a></li>
-        <li><a href="{{ "where/" | relURL }}">Where to Find Foojay</a></li>
-        <li><a href="{{ "our-sponsors/" | relURL }}">Our Sponsors</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>About</h4>
-      <ul>
-        <li><a href="{{ "who-we-are/" | relURL }}">What is Foojay?</a></li>
-        <li><a href="{{ "meet-the-team/" | relURL }}">Meet The Team</a></li>
-        <li><a href="{{ "today/author/" | relURL }}">Authors</a></li>
-        <li><a href="{{ "board/" | relURL }}">Advisory Board</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Join the community</h4>
-      <ul class="social-links">
-        <li><a href="https://bsky.app/profile/foojay.io" rel="me" target="_blank">Bluesky</a></li>
-        <li><a href="https://foojay.social/@foojay" rel="me" target="_blank">Mastodon</a></li>
-        <li><a href="https://www.linkedin.com/company/foojayio/" target="_blank">LinkedIn</a></li>
-        <li><a href="https://bit.ly/join-foojay-slack" target="_blank">Slack</a></li>
-        <li><a href="{{ "index.xml" | relURL }}" target="_blank">RSS</a></li>
-      </ul>
-    </div>
+    {{ range site.Menus.footer }}
+      <div class="footer-col">
+        <h4>{{ .Name }}</h4>
+        <ul{{ if eq .Identifier "footer-social" }} class="social-links"{{ end }}>
+          {{- range .Children }}
+          <li>{{ partial "footer-link.html" . }}</li>
+          {{- end }}
+        </ul>
+      </div>
+    {{- end }}
 
   </div>
 
   <div class="footer-legal">
     <span>&copy; {{ now.Year }} foojay.io</span>
-    <a href="{{ "sitemap/" | relURL }}">Sitemap</a>
-    <a href="{{ "terms-of-use/" | relURL }}">Terms of Use</a>
-    <a href="{{ "privacy-policy/" | relURL }}">Privacy Policy</a>
+    {{- range site.Menus.legal }}
+    {{ partial "footer-link.html" . }}
+    {{- end }}
   </div>
 </footer>
