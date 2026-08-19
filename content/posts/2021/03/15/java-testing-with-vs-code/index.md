@@ -5,7 +5,7 @@ lastmod: "2021-10-25T07:57:11+00:00"
 description: "To run Java tests on VS Code, we recommend using the Java Test Runner extension or the Java Extension Pack, which includes the extension."
 authors:
   - "yaojin-yang"
-image: "test-explorer-running-test2.gif"
+image: "test-explorer-running-test2-poster.jpg"
 categories:
   - "VS Code"
 related_posts:

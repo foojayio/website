@@ -5,7 +5,7 @@ lastmod: "2023-08-01T07:11:40+00:00"
 description: "Learn about the improved decompiler functionality. Additionally, we are going to do a deep-dive into our code completion."
 authors:
   - "nick-zhu"
-image: "decompile_debugging.gif"
+image: "decompile_debugging-poster.jpg"
 categories:
   - "Developer Tools"
   - "VS Code"

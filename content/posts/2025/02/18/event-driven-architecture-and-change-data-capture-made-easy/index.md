@@ -5,7 +5,7 @@ lastmod: "2025-02-18T16:44:16+00:00"
 description: "Learn about Event-Driven Architecture (EDA) and Change Data Capture (CDC), their use cases, and how they can work together. learn more"
 authors:
   - "abo-saad-muaath"
-image: "change-data-capture.gif"
+image: "change-data-capture-poster.png"
 categories:
   - "DataEngineering"
   - "Kafka"

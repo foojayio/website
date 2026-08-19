@@ -5,7 +5,7 @@ lastmod: "2021-08-16T07:28:45+00:00"
 description: "Product roadmap progress, with improved user experiences of features for testing, Maven dependency management, and project management."
 authors:
   - "nick-zhu"
-image: "Testing-Decoration.gif"
+image: "Testing-Decoration-poster.png"
 categories:
   - "VS Code"
 related_posts:

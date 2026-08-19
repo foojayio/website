@@ -5,7 +5,7 @@ lastmod: "2022-04-25T08:16:19+00:00"
 description: "Java 18 support, inlay hints for parameter names, new language server status UX, lambda expression support in debugging and more!"
 authors:
   - "nick-zhu"
-image: "lambda.gif"
+image: "lambda-poster.png"
 categories:
   - "Release Notes"
   - "VS Code"

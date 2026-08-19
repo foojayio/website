@@ -50,7 +50,7 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 * **Live search + status filters** — filter by bundle, suite, or spec name; chips for Passed / Failed / Errored / Skipped
 
-![](333.gif)
+![](333.webp)
 
 * **Per-bundle Run button** — re-run a single bundle without touching the rest
 
@@ -66,7 +66,7 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 * **Configurable settings** — runner URL, directory, bundle pattern, labels, excludes — all saved in `localStorage`
 
-![](777.gif)
+![](777.webp)
 
 Every setting is also overridable via URL query params, making CI integration clean:
 
@@ -152,7 +152,7 @@ var results = tb.dryRun();
 ./testbox/run --dry-run
 ```
 
-![](888.gif)
+![](888.webp)
 
 Lists every suite and spec that would execute, with labels and skip reasons — perfect for coverage audits and CI test inventory reporting.
 

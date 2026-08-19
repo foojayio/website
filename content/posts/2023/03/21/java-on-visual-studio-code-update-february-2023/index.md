@@ -5,7 +5,7 @@ lastmod: "2023-03-21T15:48:43+00:00"
 description: "In this article, we will bring you new features related to JUnit 5 parallel testing as well as new filter widget for Spring Boot dashboard."
 authors:
   - "nick-zhu"
-image: "parallel-test.gif"
+image: "parallel-test-poster.jpg"
 categories:
   - "Tools"
   - "VS Code"

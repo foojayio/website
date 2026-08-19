@@ -5,7 +5,7 @@ lastmod: "2022-10-18T08:59:56+00:00"
 description: "In this update, we will introduce the new AKS support and Virtual Machine support. Check it out and try it out!"
 authors:
   - "jialuo-gan"
-image: "vm-runend.gif"
+image: "vm-runend-poster.jpg"
 categories:
   - "Azure"
   - "Developer Tools"

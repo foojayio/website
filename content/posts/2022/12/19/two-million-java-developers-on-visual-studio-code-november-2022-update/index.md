@@ -5,7 +5,7 @@ lastmod: "2022-12-19T13:12:39+00:00"
 description: "New code editing features, the debugger gets a nice update, and visual enhancements to the Spring components."
 authors:
   - "nick-zhu"
-image: "postfix.gif"
+image: "postfix-poster.jpg"
 categories:
   - "Tools"
   - "VS Code"

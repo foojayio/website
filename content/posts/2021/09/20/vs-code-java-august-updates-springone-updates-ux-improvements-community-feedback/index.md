@@ -5,7 +5,7 @@ lastmod: "2021-09-23T07:02:45+00:00"
 description: "Let's share some exciting updates from the SpringOne 2021 conference, as well as various user experience improvements!"
 authors:
   - "nick-zhu"
-image: "Spring-Boot.gif"
+image: "Spring-Boot-poster.jpg"
 categories:
   - "Kotlin"
   - "Spring"

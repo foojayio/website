@@ -5,7 +5,7 @@ lastmod: "2021-07-12T11:01:43+00:00"
 description: "Learn the basics of using jshell. Next, combine that with learning how to run a JavaFX application file from a terminal command prompt!"
 authors:
   - "carldea"
-image: "matrix-rain-effect.gif"
+image: "matrix-rain-effect-poster.png"
 categories:
   - "JavaFX"
   - "JShell"

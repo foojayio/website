@@ -5,7 +5,7 @@ lastmod: "2023-09-22T10:15:44+00:00"
 description: "A new library for Java / JavaFX has just been released. The library’s name is FXComponents and it is a Java library that contains a collection of new controls to be used in JavaFX applications."
 authors:
   - "pedro-vieira"
-image: "List-Builder.gif"
+image: "List-Builder-poster.jpg"
 categories:
   - "Java"
   - "JavaFX"
@@ -35,12 +35,12 @@ The target list will contain all the elements the user chose from the source lis
 The user can drag and drop items from the source list onto the target list or use the buttons available to accomplish that.
 
 Reordering of the lists is also possible through drag and drop.
-![List Builder, FXComponents](List-Builder.gif)
+![List Builder, FXComponents](List-Builder.webp)
 
 ### Reordable ListView
 
 A ListView that the user can reorder by drag and dropping each cell.
-![](Reordable-ListView.gif)
+![](Reordable-ListView.webp)
 
 ### Blocking Progress Bar
 
@@ -52,8 +52,8 @@ The developer passes a Runnable to the showAndWait method. That Runnable will be
 
 #### Indeterminate
 
-![](Blocking-ProgressBar.gif)
+![](Blocking-ProgressBar.webp)
 
 #### Determinate
 
-![](Blocking-ProgressBar-determinate.gif)
+![](Blocking-ProgressBar-determinate.webp)

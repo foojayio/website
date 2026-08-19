@@ -5,7 +5,7 @@ lastmod: "2021-05-18T07:16:39+00:00"
 description: "We have made progresses in all key areas including core language support, testing, debugging, refactoring and project management."
 authors:
   - "yaojin-yang"
-image: "type-hierarchy.gif"
+image: "type-hierarchy-poster.jpg"
 categories:
   - "VS Code"
 related_posts:
@@ -39,7 +39,7 @@ When a .java file is moved from one folder to another, VS Code can automatically
 
 The latest release of [Language Support for Java published by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java "Language Support for Java published by Red Hat") now supports this feature. In addition to automatic updating, the feature also allows you to review and undo package changes:
 
-![](moveRefactoring.gif)
+![](moveRefactoring.webp)
 
 ### Classpath configuration
 
