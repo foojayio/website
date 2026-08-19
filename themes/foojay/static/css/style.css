@@ -1549,6 +1549,24 @@ body.lightbox-open { overflow: hidden; }
 .jugs-table tbody tr[hidden] { display: none !important; }
 .champions-table tbody tr[hidden] { display: none !important; }
 .list-filter__empty { color: var(--ink-muted); margin: 0; }
+.term-grid .term-card[hidden] { display: none !important; }
+
+/* --- Taxonomy index (/today/category/) --- */
+/* A card per category rather than the chip row the sidebar and home page use:
+   at 123 entries a ragged chip flow is hard to scan, and the count wants a
+   column of its own. */
+.term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; }
+.term-card {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  padding: .7rem .95rem;
+  background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius);
+  color: var(--ink); font-family: var(--font-display); font-weight: 600; font-size: .95rem;
+}
+.term-card:hover { border-color: var(--brand-accent); color: var(--brand-accent-strong); text-decoration: none; }
+.term-card__count {
+  flex: none; font-size: .85rem; font-weight: 700; color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
 
 /* --- Team page (meet-the-team) member cards --- */
 /* Photo is floated (not flex) so the member's name can be a real Markdown ##

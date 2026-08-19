@@ -15,7 +15,7 @@
         <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="count">{{ .Count }}</span></a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "today/" | relURL }}">All categories</a>
+    <a class="view-all" href="{{ "today/category/" | relURL }}">All categories</a>
   </section>
 
   {{/* Authors + JUGs are dropped whenever a TOC is showing: a post long

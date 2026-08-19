@@ -206,6 +206,14 @@ enableGitInfo = true
   [menu.main.params]
     desc = "JUG meetups, conferences, and other events"
 
+[[menu.main]]
+  name = "All Categories"
+  parent = "News"
+  url = "/today/category/"
+  weight = 16
+  [menu.main.params]
+    desc = "Every topic the community writes about, A-Z"
+
 # ---------------------------------------------------------------------------
 
 [[menu.main]]

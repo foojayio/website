@@ -1053,6 +1053,20 @@ should catch a mistake at PR time rather than letting it fail silently.
   instead — that's two files to edit per rotation and, worse, two to remember to
   unset, which is exactly how a "featured" author silently stays featured
   forever.
+- **The category index lives at `/today/category/`, next to its terms.**
+  Hugo puts a taxonomy's own list page at `/categories/` while `hugo.toml`'s
+  `[permalinks] categories` puts every term at `/today/category/<slug>/`, so the
+  index was orphaned one level up from its own children -- built on every deploy
+  and linked from nowhere, which is why the sidebar's "All categories" and the
+  home page band both pointed at `/today/` (all *articles*) instead.
+  `content/categories/_index.md` moves it with `url:` and keeps `/categories/`
+  as an alias, since the site has already been deployed under that path.
+  `_default/terms.html` renders it **alphabetically**, with the same filter box
+  `/today/author/` uses: the sidebar widget and the home page band already show
+  the top categories by count, so the only reason to open a page listing all 123
+  is to find a specific one. Everything on it is derived from the taxonomy --
+  a new category appears when a post carries it, and there is no count stored.
+
 - **The Advisory Board is a folder, not a list.** `/board/`
   (`content/pages/board.md`, `type: "board"` + `layout: "list"` ->
   `themes/foojay/layouts/board/list.html`) holds the two-paragraph intro and

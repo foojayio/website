@@ -1,17 +1,61 @@
 {{ define "main" }}
+{{/* The A-Z index of a taxonomy -- /today/category/ (see
+     content/categories/_index.md for why it sits there and not at /categories/).
+
+     Alphabetical, deliberately: the sidebar widget and the home page band
+     already show the top categories BY COUNT, so what is missing everywhere
+     else -- and the only reason to open a page listing all 123 -- is finding a
+     specific one. Hence the filter box on top, the same one /today/author/ uses
+     for 344 authors. Everything here is derived from the taxonomy, so a new
+     category appears by a post carrying it; there is no list to maintain. */}}
+{{ $terms := .Data.Terms.Alphabetical }}
 <div class="page-head">
   <div class="page-head__inner">
     <span class="eyebrow">Browse</span>
     <h1>{{ .Title }}</h1>
-    <p>All {{ .Data.Plural }} used across foojay.io.</p>
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    <div class="page-head__meta">
+      <p>{{ len $terms }} {{ .Data.Plural }} across foojay.io.</p>
+    </div>
   </div>
 </div>
 
 <div class="content-col full-width">
-  <div class="chip-row chip-row--lg">
-    {{ range .Data.Terms.ByCount }}
-      <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="chip-count">{{ .Count }}</span></a>
+  <div class="list-filter">
+    <input type="search" id="list-filter" class="list-filter__input" placeholder="Filter {{ .Data.Plural }}…" aria-label="Filter {{ .Data.Plural }}" autocomplete="off">
+  </div>
+
+  <div class="term-grid" id="term-grid">
+    {{ range $terms }}
+      <a class="term-card" href="{{ .Page.RelPermalink }}" data-name="{{ lower .Page.Title }}">
+        <span class="term-card__name">{{ .Page.Title }}</span>
+        <span class="term-card__count">{{ .Count }}</span>
+      </a>
     {{ end }}
   </div>
+  <p class="list-filter__empty" id="list-filter-empty" hidden>No {{ .Data.Plural }} match your filter.</p>
 </div>
+
+{{/* Same small client-side narrowing as the author list -- the site-wide
+     search (Pagefind) is separate, and without JavaScript the full list is
+     still right there. */}}
+<script>
+  (function () {
+    var input = document.getElementById('list-filter');
+    var grid = document.getElementById('term-grid');
+    if (!input || !grid) return;
+    var empty = document.getElementById('list-filter-empty');
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.term-card'));
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (card) {
+        var match = q === '' || card.getAttribute('data-name').indexOf(q) !== -1;
+        card.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    });
+  })();
+</script>
 {{ end }}

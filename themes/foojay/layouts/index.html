@@ -70,7 +70,7 @@ expires. */}}
         <h2>More blog categories</h2>
         <p>Explore the full breadth of what the community writes about.</p>
       </div>
-      <a class="more" href="{{ "today/" | relURL }}">View more &rarr;</a>
+      <a class="more" href="{{ "today/category/" | relURL }}">View all categories &rarr;</a>
     </div>
     <div class="chip-row chip-row--lg">
       {{ range first 14 .Site.Taxonomies.categories.ByCount }}
