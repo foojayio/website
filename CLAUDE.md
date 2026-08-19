@@ -1560,13 +1560,33 @@ should catch a mistake at PR time rather than letting it fail silently.
   mapping wins. `data/views.json`'s dead `pages/team` key clears itself on the
   next run; don't hand-edit it.
 
-- **`content/pages/community-support.md` (`/community-support/`) is a stub nothing
-  links.** A half-scraped duplicate of `/our-sponsors/` -- one sponsor (Azul),
-  hardcoded counts that `partials/sponsor-posts.html` derives correctly next
-  door, and a "View Profile" link to the pre-rename bundle path. Left in place
-  rather than deleted because it holds WordPress view counts and the same
-  alias/key dance the `/team/` removal needed; **don't link it from anywhere**
-  while it says what it currently says.
+- **`/community-support/` is an ALIAS of `/our-sponsors/`, and never was a page
+  here.** It is one on WordPress too -- a redirect, added to
+  `content/sponsors/_index.md`'s `aliases:` by "Missing redirects currently in
+  place in WordPress". So the scraper had followed that redirect and stored its
+  target as a page of its own, `content/pages/community-support.md`: a
+  half-captured duplicate of the sponsor listing with one sponsor (Azul),
+  hardcoded article/podcast/event counts that `partials/sponsor-posts.html`
+  derives correctly next door, and a "View Profile" link to the pre-rename bundle
+  path. Deleted, with `static/images/pages/community-support/`.
+
+  What it was doing in the meantime is the part worth remembering, because
+  nothing reported it. Its `url:` and the section's `aliases:` entry **both
+  claimed `/community-support/`** -- the same collision as
+  `all-events`/`calendar`, which Hugo does not warn about -- and the alias won,
+  so the stub was built into **no** page at all. It was still listed in
+  `sitemap.xml` and on `/sitemap/` though, i.e. crawlers were being pointed at a
+  URL that redirects, and a reader clicking it in the HTML sitemap bounced to the
+  sponsor page. Deleting the file removed the entry from both.
+
+  Nothing had to be carried over, which is worth checking rather than assuming:
+  the alias that preserves the URL already lives on `content/sponsors/_index.md`,
+  and there is no view key to move -- `pages/community-support` is absent from
+  both `data/views.json` and `data/legacy-views.json` (WordPress records the
+  redirect, not a page with reads of its own). Note there would have been
+  nowhere to put one: `views-key.html`'s `$counted` is `posts pages pedia
+  authors`, so the sponsor listing is not counted at all, and a `SECTION_MOVES`
+  entry aimed at it would have minted a key nothing ever displays.
 
 - **The header search field is collapsed to its magnifier, and the button is a
   real submit.** An always-open 210px input plus two CTAs made the top bar run
