@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 /**
  * Shared body conversion for the WordPress -> Hugo migration scripts. Now used
  * by transfer/Posts.java (which includes this file via jbang's
- * `//SOURCES shared/HtmlToMarkdown.java`); the one-off page/glossary scrapers that also
+ * `//SOURCES ../shared/HtmlToMarkdown.java`); the one-off page/glossary scrapers that also
  * used it have been retired now that content/pages and content/pedia are done.
  *
  * Given the scraped article-content element it:
@@ -114,6 +114,26 @@ public final class HtmlToMarkdown {
     // never touched. A <br> with text on the line is a real hard break and stays.
     private static final Pattern STANDALONE_BREAK =
             Pattern.compile("(?im)^[ \\t]*(?:<br\\s*/?>[ \\t]*)+$");
+
+    // "Friends Of OpenJDK" is a brand, so it is capitalized like one wherever it
+    // appears in a body -- including the middle of a sentence, which is where WP
+    // authors write it in lower case ("Foojay.io, a place for friends of
+    // OpenJDK"). content/ is already 103 to 1 in favour of the capitalized form,
+    // so this guards a re-scrape from reintroducing the odd one out rather than
+    // changing the house style.
+    //
+    // The separators are CAPTURED and written back rather than replaced with
+    // literal spaces, so the rule can neither invent nor drop whitespace around
+    // the phrase -- a WP body wraps its source, so it really does arrive with a
+    // newline inside it. In a BODY that hardly shows, since Flexmark reflows the
+    // paragraph afterwards anyway; it is the normalizeBrandName(String) callers
+    // (a title, a bio) that get their own line breaks back untouched.
+    //
+    // "OpenJDK" on its own is deliberately NOT normalized. That would be a far
+    // wider rule than a brand name -- it would hit package names, `--list-modules`
+    // output and URLs -- and only the three-word phrase is the brand.
+    private static final Pattern BRAND_NAME =
+            Pattern.compile("(?i)\\bfriends(\\s+)of(\\s+)openjdk\\b");
 
     // ATX headings (`## Title`) rather than Flexmark's default, which underlines
     // h1/h2 with ==== / ---- and only uses ### from h3 down. That split leaves
@@ -286,6 +306,12 @@ public final class HtmlToMarkdown {
             el.replaceWith(new Element("p").text(token));
         }
 
+        // Brand capitalization, applied LAST -- after every preserve pass above, so
+        // a code fence, a widget, a gallery and a shortcode are all placeholder
+        // tokens by now and none of them can be rewritten. What is left in the DOM
+        // is prose plus the inline <code> spans, which normalizeBrandName skips.
+        normalizeBrandName(content);
+
         String md = FlexmarkHtmlConverter.builder(CONVERTER_OPTIONS).build()
                 .convert(content.html()).trim();
 
@@ -327,6 +353,47 @@ public final class HtmlToMarkdown {
         }
         String fence = "`".repeat(Math.max(3, longestRun + 1));
         return fence + fenceLanguage(enlighterLanguage) + "\n" + body + "\n" + fence;
+    }
+
+    /**
+     * Capitalizes the brand name in every prose text node of a body.
+     *
+     * Element-by-element rather than over the converted Markdown, because at
+     * this point in toMarkdown the fences, widgets, galleries and shortcodes are
+     * placeholder tokens, so the only thing left that must not be rewritten is
+     * an inline <code> span -- and inCode() already answers that question. Doing
+     * it on the Markdown string instead would mean re-finding backtick spans by
+     * hand.
+     *
+     * Attribute values (href, src, alt, title) are deliberately out of scope: a
+     * text-node walk never sees them, which is what keeps a URL containing the
+     * words out of it.
+     */
+    private static void normalizeBrandName(Element content) {
+        for (Element el : content.select("*")) {
+            if ("pre".equals(el.tagName()) || "code".equals(el.tagName()) || inCode(el)) continue;
+            for (TextNode tn : el.textNodes()) {
+                String text = tn.getWholeText();
+                String fixed = normalizeBrandName(text);
+                if (!fixed.equals(text)) tn.text(fixed);
+            }
+        }
+    }
+
+    /**
+     * "friends of openjdk", in any casing, becomes "Friends Of OpenJDK".
+     *
+     * Public so the callers that handle a body's METADATA rather than its prose
+     * -- a scraped title, description or author bio, none of which pass through
+     * toMarkdown -- can apply the same rule. Change the capitalization here and
+     * it changes everywhere; there is no second copy of the brand name.
+     *
+     * Only the full three-word phrase matches, so "a friend of OpenJDK" and a
+     * bare "OpenJDK" are both left as written. See BRAND_NAME.
+     */
+    public static String normalizeBrandName(String text) {
+        if (text == null) return "";
+        return BRAND_NAME.matcher(text).replaceAll("Friends$1Of$2OpenJDK");
     }
 
     /**
