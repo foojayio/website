@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Choosing an Editor"
+title: "Choosing an Editor"
 linkTitle: "Choosing an Editor"
 description: "Learn how to choose the right Java editor or IDE for your workflow, from lightweight tools like VS Code to full-featured options such as IntelliJ IDEA, NetBeans, and Eclipse."
 url: "/java-quick-start/quick-start-tutorial/choosing-an-editor/"

@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - If, Then, Else"
+title: "If, Then, Else"
 linkTitle: "If, Then, Else"
 description: "Compare values and branch on the result with if, then and else - the most-used construct in any programming language."
 url: "/java-quick-start/quick-start-tutorial/if-then-else/"

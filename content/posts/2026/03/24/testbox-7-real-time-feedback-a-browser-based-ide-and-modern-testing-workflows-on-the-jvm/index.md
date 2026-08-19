@@ -35,7 +35,7 @@ Check out the what's new here: <https://testbox.ortusbooks.com/readme/release-hi
 
 The centerpiece of TestBox 7 is **TestBox RUN** : a self-hosted, single-page web app (`bx/tests/index.bxm`) that you drop into any **BoxLang** project and open in a browser. No build toolchain. No external service. Just BoxLang.
 
-![](spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-b75a32f56aca939912a78a80d63affb60323d894_testbox-run.gif)
+![](spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-b75a32f56aca939912a78a80d63affb60323d894_testbox-run.webp)
 
 It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and streams spec results in real time via **Server-Sent Events**. Results appear in the test tree as each spec finishes, green for passing, red for failures, with full error messages; long before the full suite completes.
 

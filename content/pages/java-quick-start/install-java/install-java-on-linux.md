@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Install Java on Linux"
+title: "Install Java on Linux"
 description: "Install Java on Linux with a Debian package installer, and find the other distributions and versions available for your system."
 url: "/java-quick-start/install-java/install-java-on-linux/"
 aliases:

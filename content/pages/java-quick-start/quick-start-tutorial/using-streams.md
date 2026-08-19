@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Using Streams"
+title: "Using Streams"
 linkTitle: "Using Streams"
 description: "Streams, added in Java 8, let you chain steps over a collection. Extend the text-file example with filtering and mapping."
 url: "/java-quick-start/quick-start-tutorial/using-streams/"

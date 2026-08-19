@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Hello World"
+title: "Hello World"
 linkTitle: "Hello World!"
 description: "Write and run your first Java program with a simple Hello World example, including the Java 25 shorthand syntax and the classic class-based approach."
 url: "/java-quick-start/quick-start-tutorial/hello-world/"

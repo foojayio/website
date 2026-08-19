@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Working with numbers"
+title: "Working with numbers"
 linkTitle: "Working with Numbers"
 description: "The Java number types you will actually use - int, float, double and long - and how to work with them."
 url: "/java-quick-start/quick-start-tutorial/working-with-numbers/"

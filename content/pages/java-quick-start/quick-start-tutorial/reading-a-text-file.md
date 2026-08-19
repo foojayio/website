@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Reading a Text File"
+title: "Reading a Text File"
 linkTitle: "Reading a Text File"
 description: "Read a CSV file from disk in Java, combining files, loops and objects into one small working program."
 url: "/java-quick-start/quick-start-tutorial/reading-a-text-file/"

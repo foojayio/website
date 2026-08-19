@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Find Another Java Version"
+title: "Find Another Java Version"
 description: "OpenJDK is the source; the runtime you install comes from a distribution. An overview of the free builds you can choose between."
 url: "/java-quick-start/install-java/find-another-java-version/"
 aliases:

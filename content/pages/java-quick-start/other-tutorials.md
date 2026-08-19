@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Other Tutorials"
+title: "Other Tutorials"
 description: "Free Java courses, tutorials and catalogs from some of the best educators in the community, to continue after the Quick Start."
 url: "/java-quick-start/other-tutorials/"
 type: "tutorials"

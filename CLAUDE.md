@@ -673,7 +673,15 @@ should catch a mistake at PR time rather than letting it fail silently.
      A-Z grid, the sidebar widget, the HTML sitemap and the byline lookup rendered
      *nothing* rather than failing. `partials/authors-all.html` is now the single
      definition (`where site.Pages "Type" "author"`), and the four callers go
-     through it.
+     through it. **Sponsors were converted in the same change and two callers of
+     theirs were missed**, both silent in exactly the same way: `/sitemap/`'s
+     Sponsors section rendered empty (and its header counted "0 sponsors"), and a
+     board member who also sponsors Foojay lost the link to their profile. Both go
+     through `partials/sponsors-ordered.html` now -- it takes no arguments and
+     returns every sponsor, so it is the sponsor-side `authors-all.html`. Reach for
+     one of those two partials rather than filtering `site.RegularPages` by
+     section: for authors and sponsors that filter compiles, runs, and matches
+     nothing.
   2. **`.IsPage` is false for a profile.** `views-key.html` used it to decide what
      gets counted, so every author's read count would have silently stopped being
      recorded; `json-ld.html` used it too and stopped emitting `Person` on all 344.
@@ -1290,9 +1298,17 @@ should catch a mistake at PR time rather than letting it fail silently.
   folder of ordered pages gets the navigation for free. That self-disabling is
   load-bearing: the five `install-java/` pages next door are alternatives
   (Windows / macOS / Linux), not a sequence, so they carry no weight and
-  correctly get no navigation. `linkTitle:` carries the short step name, because
-  the full titles all begin "Getting Started with Java - " and a nav card should
-  not repeat that; `.LinkTitle` falls back to `.Title`, so it stays optional.
+  correctly get no navigation. `linkTitle:` is an optional override for the
+  wording a nav card shows -- `.LinkTitle` falls back to `.Title`. It was
+  introduced when every step title still began "Getting Started with Java - "
+  and a card should not repeat that on all eleven; the titles have since been
+  shortened to the step name itself ("Choosing an Editor", "Hello World"), so
+  eight of the eleven `linkTitle:` lines now merely restate `title:` and only
+  three still say anything ("Using the Arguments" -> "Using Arguments and String
+  Arrays", and two punctuation/case fixes). By this file's own rule a key always
+  set to the same value is a chore, not configuration -- so the eight redundant
+  ones can go, and a new step needs `linkTitle:` only when the nav should read
+  differently from the page's H1.
   `Frontmatter.checkSeriesWeights` fails the PR on two pages in a folder
   claiming the same weight -- Hugo's sort is stable, so that would silently
   mis-order the series rather than error.

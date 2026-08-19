@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Install Java on MacOS"
+title: "Install Java on MacOS"
 description: "Install Java on macOS with a ready-made installer, for both Intel and Apple silicon Macs."
 url: "/java-quick-start/install-java/install-java-on-macos/"
 aliases:

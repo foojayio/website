@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Using the Arguments"
+title: "Using the Arguments"
 linkTitle: "Using Arguments and String Arrays"
 description: "Use the start-up arguments of the main method to learn Java arrays: their length, and how to loop through them."
 url: "/java-quick-start/quick-start-tutorial/using-the-arguments/"

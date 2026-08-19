@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Install Java"
+title: "Install Java: Overview"
 description: "One-time setup to get Java on your machine: check whether you already have it, then install it on Windows, macOS or Linux."
 url: "/java-quick-start/install-java/"
 aliases:

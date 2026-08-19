@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Java - Using Objects"
+title: "Using Objects"
 linkTitle: "Using Objects"
 description: "Java is object-oriented: turn part of your program into an object with its own variables and methods."
 url: "/java-quick-start/quick-start-tutorial/using-objects/"
