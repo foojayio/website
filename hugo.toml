@@ -100,7 +100,7 @@ enableGitInfo = true
   # Array of tables (not a single table) so more than one header button can
   # be listed -- header.html ranges over these rather than using `with`.
   [[params.headerCta]]
-    label = "Write for foojay"
+    label = "Write for Foojay"
     url = "/today/how-to-submit-your-next-article-on-foojay-io/"
   [[params.headerCta]]
     label = "Join our Slack"
