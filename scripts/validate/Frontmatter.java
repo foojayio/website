@@ -78,6 +78,7 @@ public class Frontmatter {
         problems.addAll(checkSeriesWeights(Path.of("content/pages")));
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs));
         problems.addAll(checkEvents(Path.of("data/events")));
+        problems.addAll(checkImageWeight(Path.of("content")));
 
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
@@ -510,6 +511,53 @@ public class Frontmatter {
      * back to an initial, which looks like a design choice rather than a
      * mistake, so nothing about the page says the logo was forgotten.
      */
+    /**
+     * The biggest a single bundle image may be. Set from what content/ actually
+     * looks like after cleanup/images.py has run, with headroom -- not from a
+     * round number -- so this fails on a NEW offender rather than on the archive.
+     */
+    static final long MAX_IMAGE_BYTES = 3_000_000L;
+    static final Set<String> IMAGE_EXTS = Set.of(".png", ".jpg", ".jpeg", ".gif", ".webp", ".avif", ".svg");
+
+    /**
+     * Fails the PR on an image too large to ship.
+     *
+     * This is the check that stops the whole problem coming back. The deploy
+     * artifact reached 1.26 GB against GitHub Pages' hard 1 GB limit, and the
+     * warning for that ("Deployment might fail") appears on a run that otherwise
+     * goes GREEN -- so the site sails past the limit invisibly until a deploy
+     * finally fails, at which point the cause is 2000 posts old. Three bundles
+     * each carried the same 52 MB animated GIF.
+     *
+     * A contributor cannot see any of that from their own PR: one image looks
+     * harmless. So the budget is enforced per file, at PR time, where it is
+     * actionable and where the fix is obvious.
+     *
+     * Deliberately a per-FILE budget and not a total-size one: a total would fail
+     * whichever PR happened to cross the line, blaming an author whose own images
+     * were fine.
+     */
+    static List<String> checkImageWeight(Path contentDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(contentDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(contentDir)) {
+            for (Path file : files.filter(Files::isRegularFile).toList()) {
+                String name = file.getFileName().toString().toLowerCase();
+                int dot = name.lastIndexOf('.');
+                if (dot < 0 || !IMAGE_EXTS.contains(name.substring(dot))) continue;
+                long size = Files.size(file);
+                if (size <= MAX_IMAGE_BYTES) continue;
+                problems.add(String.format(
+                        "%s: image is %.1f MB, over the %.0f MB budget -- resize or compress it"
+                        + " (an animated GIF should be an animated WebP; `python3 scripts/cleanup/images.py"
+                        + " --path %s` does both)",
+                        file, size / 1e6, MAX_IMAGE_BYTES / 1e6, file.getParent()));
+            }
+        }
+        return problems;
+    }
+
     static List<String> checkBoardMembers(Path boardDir) throws IOException {
         List<String> problems = new ArrayList<>();
         if (!Files.isDirectory(boardDir)) return problems;

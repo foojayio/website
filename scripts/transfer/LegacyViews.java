@@ -67,8 +67,30 @@ import java.util.stream.Stream;
  * review. One generated file matches what data/jugs.yaml, data/jug-events.json and
  * data/java-champions.yaml already do here.
  *
+ * --write-views: THE BRIDGE UNTIL THE WORKER IS UP.
+ *
+ * The read counter (worker/views/) is not deployed yet, so fetch/ViewCounts.java
+ * gets a WordPress 404 from foojay.io/api/views/all, correctly keeps the committed
+ * data/views.json and exits 0 -- which means the numbers on the site are frozen at
+ * whenever that file was last seeded, and drift further behind every day.
+ *
+ * WordPress is still live and still counting, though, and this script already asks
+ * it for exactly the right numbers. With --write-views it writes data/views.json
+ * too, so the site shows WordPress's current counts instead of a stale snapshot.
+ * No Cloudflare, no credential, no new moving part.
+ *
+ * It is a BRIDGE, not a replacement, and it retires itself: the sync workflow runs
+ * this first and fetch/ViewCounts.java second, so the moment the Worker answers,
+ * its `legacy + live` overwrites this file and nothing needs changing. Keep
+ * re-running --seed as well, or the Worker's `legacy` baseline will be older than
+ * what this bridge was already showing and the number would visibly drop.
+ *
+ * Being in transfer/ is the point: it reads the WordPress site, so it dies at
+ * cutover along with the workflow step that calls it. Do not move it to fetch/.
+ *
  * Usage:
  *   jbang scripts/transfer/LegacyViews.java                    # fetch -> data/legacy-views.json
+ *   jbang scripts/transfer/LegacyViews.java --write-views   (also refresh data/views.json)
  *   jbang scripts/transfer/LegacyViews.java --seed             # ...and push to the Worker
  *   jbang scripts/transfer/LegacyViews.java --limit 20         # quick test run
  *   jbang scripts/transfer/LegacyViews.java --endpoint https://foojay.io/api/views
@@ -81,6 +103,8 @@ public class LegacyViews {
     static final String WP_BASE = "https://foojay.io/wp-json";
     static final String DEFAULT_ENDPOINT = "https://foojay.io/api/views";
     static final Path OUTPUT_FILE = Path.of("data/legacy-views.json");
+    /** The file the SITE reads (partials/views.html). Written only with --write-views. */
+    static final Path VIEWS_FILE = Path.of("data/views.json");
     /** How many view-count requests are in flight at once. See fetchAll(). */
     static final int CONCURRENCY = 8;
 
@@ -134,6 +158,7 @@ public class LegacyViews {
     public static void main(String[] args) throws Exception {
         List<String> argList = List.of(args);
         boolean seed = argList.contains("--seed");
+        boolean writeViews = argList.contains("--write-views");
         int limit = intArg(argList, "--limit", Integer.MAX_VALUE);
         String endpoint = stringArg(argList, "--endpoint", DEFAULT_ENDPOINT);
 
@@ -180,8 +205,15 @@ public class LegacyViews {
             for (String s : unmatched) System.out.println("  " + s);
         }
 
-        write(counts);
+        write(OUTPUT_FILE, counts);
         System.out.println("Wrote " + OUTPUT_FILE);
+
+        if (writeViews) {
+            write(VIEWS_FILE, counts);
+            System.out.printf("Wrote %s as well (--write-views): the site now shows WordPress's%n"
+                    + "  live numbers directly. Harmless once the Worker is up -- fetch/ViewCounts.java%n"
+                    + "  runs after this and overwrites the file whenever the counter answers.%n", VIEWS_FILE);
+        }
 
         if (seed) pushSeed(endpoint, counts);
         else System.out.println("Not seeded. Re-run with --seed (and VIEWS_SEED_TOKEN set) to push these to " + endpoint);
@@ -371,11 +403,11 @@ public class LegacyViews {
 
     // ------------------------------------------------------------------ output
 
-    static void write(Map<String, Integer> counts) throws IOException {
+    static void write(Path file, Map<String, Integer> counts) throws IOException {
         ObjectNode root = JSON.createObjectNode();
         counts.forEach(root::put);
-        Files.createDirectories(OUTPUT_FILE.getParent());
-        Files.writeString(OUTPUT_FILE, JSON.writerWithDefaultPrettyPrinter().writeValueAsString(root) + "\n");
+        Files.createDirectories(file.getParent());
+        Files.writeString(file, JSON.writerWithDefaultPrettyPrinter().writeValueAsString(root) + "\n");
     }
 
     static void pushSeed(String endpoint, Map<String, Integer> counts) throws Exception {

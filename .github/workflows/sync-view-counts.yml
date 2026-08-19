@@ -8,10 +8,17 @@ name: Sync view counts
 #
 # Offset from the 01:20 daily sync so the two don't collide; they also share a
 # concurrency group in case a run ever overlaps.
+#
+# TWO schedules, not one, because the two sources cost very different amounts.
+# Reading the Worker is a single request, so it can run six-hourly. The
+# WordPress bridge below is ~2200 requests against foojay.io's live WP, so it
+# runs once a day -- the 03:50 entry -- and the step keys off which cron fired.
+# Both entries can go back to a single six-hourly line once the bridge is gone.
 
 on:
   schedule:
-    - cron: "50 3,9,15,21 * * *"
+    - cron: "50 3 * * *"        # WordPress bridge + counter
+    - cron: "50 9,15,21 * * *"  # counter only
   workflow_dispatch: {}
 
 concurrency:
@@ -29,9 +36,34 @@ jobs:
       - name: Set up JBang
         uses: jbangdev/setup-jbang@main
 
-      # Never fails the run: if the counter is unreachable the script keeps the
-      # committed data/views.json and exits 0, so a Worker outage costs the
-      # site nothing but staler numbers.
+      # BRIDGE, DELETE WITH THE REST OF transfer/ AT CUTOVER.
+      #
+      # worker/views/ is not deployed yet, so the step below gets a WordPress 404
+      # from /api/views/all, keeps the committed data/views.json and exits 0 --
+      # correct behaviour, but it means the numbers on the site are frozen at
+      # whenever that file was last seeded and drift further behind every day.
+      #
+      # WordPress is still live and still counting, and transfer/LegacyViews.java
+      # already asks it for exactly these numbers. --write-views has it refresh
+      # data/views.json too, so the site shows WordPress's current counts in the
+      # meantime. No Cloudflare, no credential, nothing new to run.
+      #
+      # It retires itself: "Refresh view counts" runs AFTER this and overwrites
+      # data/views.json the moment the Worker answers, so when the route goes up
+      # nothing here has to change -- and this step, plus the second cron entry
+      # above, is all that needs deleting.
+      #
+      # Only on the daily cron (and a manual run): one request per post, eight at
+      # a time, ~3 minutes. Cheap enough daily against our own site, pointless
+      # four times a day for a number that is baked into the HTML anyway.
+      - name: Refresh view counts from WordPress (bridge)
+        if: github.event.schedule == '50 3 * * *' || github.event_name == 'workflow_dispatch'
+        run: jbang scripts/transfer/LegacyViews.java --write-views
+
+      # Never fails the run: if the counter is unreachable the script keeps
+      # data/views.json as it stands -- which, thanks to the step above, is now
+      # WordPress's current numbers rather than a stale snapshot -- and exits 0,
+      # so a Worker outage costs the site nothing but staler numbers.
       - name: Refresh view counts
         run: jbang scripts/fetch/ViewCounts.java
 
@@ -39,7 +71,9 @@ jobs:
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
-          git add data/views.json
+          # legacy-views.json too: the bridge refreshes it on the same run, and it
+          # is the ONLY copy of the WordPress numbers once that site is gone.
+          git add data/views.json data/legacy-views.json
           if git diff --cached --quiet; then
             echo "No view count changes."
           else

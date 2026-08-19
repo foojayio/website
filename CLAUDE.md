@@ -322,6 +322,26 @@ should catch a mistake at PR time rather than letting it fail silently.
   (`sync-view-counts.yml`, its own workflow — see below), so the
   numbers are baked into the HTML. **Never fails the build**: if the counter is
   unreachable it keeps the committed file and exits 0.
+
+  That degradation is what is happening today, and it is why
+  `sync-view-counts.yml` also runs **`transfer/LegacyViews.java --write-views`**
+  once a day: with no Worker on the route, "keep the committed file" means the
+  counts are frozen at the last seed and drift further behind daily. WordPress is
+  still live and still counting, and that script already asks it for exactly these
+  numbers, so it writes `data/views.json` too. No Cloudflare, no credential.
+
+  The bridge **retires itself** — `fetch/ViewCounts.java` runs after it in the
+  same job, so the Worker's `legacy + live` wins the moment the route answers.
+  Two things follow: re-run `--seed` when the Worker goes up, or its `legacy`
+  snapshot will be older than what the bridge was already showing and the number
+  on the page will visibly DROP; and the bridge lives in `transfer/` because it
+  reads WordPress, so it dies at cutover together with the workflow step and the
+  second cron entry that exist only for it. Don't move it to `fetch/`.
+
+  The workflow has **two cron entries** for the same reason: reading the Worker is
+  one request and can be six-hourly, while the bridge is ~2200 requests against
+  foojay.io's live WordPress and runs once a day. The step keys off
+  `github.event.schedule` to tell them apart.
 - **`scripts/cleanup/HeadingAnchors.java`**: one-off migration that removed the
   WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
   stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id

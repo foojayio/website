@@ -12,6 +12,31 @@ value, so the site shows one number instead of adding two together in a
 template. The longer version is in the header comment of `src/index.js` and in
 the repo's `CLAUDE.md`.
 
+## Until this is deployed: the WordPress bridge
+
+`fetch/ViewCounts.java` asks `foojay.io/api/views/all` for the numbers. While no
+Worker is attached to that route the request gets WordPress's 404, the script
+keeps the committed `data/views.json` and exits 0 — correct, but it means the
+counts on the site are frozen at whenever that file was last seeded.
+
+WordPress is still live and still counting, so until the route is up
+`.github/workflows/sync-view-counts.yml` refreshes the numbers straight from it,
+once a day:
+
+```bash
+jbang scripts/transfer/LegacyViews.java --write-views
+```
+
+That writes `data/views.json` as well as `data/legacy-views.json`. The bridge
+**retires itself**: the workflow runs `fetch/ViewCounts.java` immediately after,
+so the moment this Worker answers, its `legacy + live` overwrites the file and
+nothing needs changing. When that happens, delete the bridge step and fold the
+two cron entries back into one six-hourly line.
+
+One thing to keep doing meanwhile: re-run `--seed` when you deploy the Worker.
+Its `legacy` column is a snapshot, and if it is older than what the bridge has
+already been showing, the number on the page visibly drops.
+
 ## Setup (once)
 
 Needs `wrangler` (`npm i -g wrangler`) and an account on the Cloudflare zone
