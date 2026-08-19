@@ -45,10 +45,10 @@ import java.util.stream.Stream;
  * soon as a page contributes no new author URLs.
  *
  * Usage:
- *   jbang scripts/ConvertAuthors.java
- *   jbang scripts/ConvertAuthors.java --url https://foojay.io/today/author/frankdelporte/   (single author, for tuning selectors)
+ *   jbang scripts/transfer/Authors.java
+ *   jbang scripts/transfer/Authors.java --url https://foojay.io/today/author/frankdelporte/   (single author, for tuning selectors)
  *
- * Same caveat as ConvertPosts.java: selectors are best-effort WordPress
+ * Same caveat as transfer/Posts.java: selectors are best-effort WordPress
  * conventions, not verified against the site's actual raw HTML/class names.
  * Tune SELECTOR_* below against a couple of real author pages first.
  *
@@ -57,7 +57,7 @@ import java.util.stream.Stream;
  * already-downloaded avatar. Respects `frozen: true` to skip hand-edited
  * profiles (checked before any network fetch).
  */
-public class ConvertAuthors {
+public class Authors {
 
     static final String BASE_URL = "https://foojay.io";
     static final Path OUTPUT_DIR = Path.of("content/authors");

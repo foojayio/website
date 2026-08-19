@@ -23,8 +23,8 @@ import java.util.regex.Pattern;
 
 /**
  * Shared body conversion for the WordPress -> Hugo migration scripts. Now used
- * by ConvertPosts.java (which includes this file via jbang's
- * `//SOURCES HtmlToMarkdown.java`); the one-off page/glossary scrapers that also
+ * by transfer/Posts.java (which includes this file via jbang's
+ * `//SOURCES shared/HtmlToMarkdown.java`); the one-off page/glossary scrapers that also
  * used it have been retired now that content/pages and content/pedia are done.
  *
  * Given the scraped article-content element it:
@@ -192,7 +192,7 @@ public final class HtmlToMarkdown {
      * classes/attributes they depend on. Both are restored after conversion (the
      * shortcode/raw HTML never passes through the Markdown converter).
      *
-     * Public because ImportWpComments.java converts WordPress *comment* bodies
+     * Public because transfer/Comments.java converts WordPress *comment* bodies
      * with it -- same repairs (entities, code fences, nbsp indents), but none of
      * convert()'s image localization, which a comment doesn't need.
      */
@@ -208,7 +208,7 @@ public final class HtmlToMarkdown {
         // (<h2 id="h2-2-where-the-dedup-check-actually-lives">), which Flexmark
         // faithfully carries over as Markdown attribute syntax -- `## Title
         // {#h2-2-...}`. Dropped here so Hugo generates its own readable id from
-        // the heading text instead. See StripHeadingAnchors.java for the
+        // the heading text instead. See cleanup/HeadingAnchors.java for the
         // reasoning and for the one-off cleanup of already-converted content.
         content.select("h1, h2, h3, h4, h5, h6").removeAttr("id");
 
@@ -218,7 +218,7 @@ public final class HtmlToMarkdown {
         // this one does not round trip: Goldmark's attribute syntax applies to a
         // whole block, so an id sitting mid-paragraph is rendered as the literal
         // text "{#31db}" in the middle of a sentence. 39 of them were live
-        // across 28 posts; StripHeadingAnchors.java cleaned those up.
+        // across 28 posts; cleanup/HeadingAnchors.java cleaned those up.
         content.select("a[id]").removeAttr("id");
 
         // YouTube embeds -> Hugo shortcode. Done first so the wrapping
@@ -379,7 +379,7 @@ public final class HtmlToMarkdown {
      * It LOOKS like an indent in the rendered block but isn't one: copy the
      * sample into an editor and the compiler/shell chokes on a character it
      * doesn't recognise as whitespace, which is the whole point of a code block
-     * on this site. MigrateEnlighterToFences has always done this to the blocks
+     * on this site. EnlighterToFences has always done this to the blocks
      * it converted; the scraper did not, so a re-scrape put 10,270 of them back
      * across 36 posts. The rule lives here now so both paths agree -- the same
      * arrangement as resolveDoubleEscaped.

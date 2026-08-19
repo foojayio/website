@@ -52,8 +52,8 @@ curl https://foojay.io/api/views/posts/some-post    # {"key":"posts/some-post","
 From the repo root, with the token from step 3:
 
 ```bash
-jbang scripts/FetchWpViews.java                       # writes data/legacy-views.json
-VIEWS_SEED_TOKEN=... jbang scripts/FetchWpViews.java --seed   # ...and pushes it
+jbang scripts/transfer/LegacyViews.java                       # writes data/legacy-views.json
+VIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed   # ...and pushes it
 ```
 
 Re-run this whenever you want to catch up with WordPress — right up to cutover.
@@ -66,7 +66,7 @@ in a separate `live` column and are not touched.
 | | |
 |---|---|
 | `POST /api/views/hit/<key>` | Count a view. Always 204. Fired by `partials/views-beacon.html`. |
-| `GET /api/views/all` | `{"<key>": <total>, ...}`. Read at build time by `scripts/FetchViewCounts.java`. Public. |
+| `GET /api/views/all` | `{"<key>": <total>, ...}`. Read at build time by `scripts/fetch/ViewCounts.java`. Public. |
 | `GET /api/views/<key>` | One page's total. Debugging. |
 | `POST /api/views/seed` | Set the `legacy` baseline. `Authorization: Bearer $SEED_TOKEN`. |
 

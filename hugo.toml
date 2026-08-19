@@ -16,7 +16,7 @@ enableRobotsTXT = true
   posts = "/today/:slugorcontentbasename/"
   authors = "/today/author/:slugorcontentbasename/"
   # Sponsors keep their WordPress URL (singular /sponsor/, plural section) --
-  # scripts/ConvertSponsors.java names each bundle folder after the WP slug, so
+  # scripts/transfer/Sponsors.java names each bundle folder after the WP slug, so
   # this pattern reproduces the legacy path exactly and no alias is needed.
   sponsors = "/sponsor/:slugorcontentbasename/"
   # Taxonomy term pages live under /today/ too, matching the links the theme and
@@ -73,7 +73,7 @@ enableRobotsTXT = true
 # repoId/categoryId are not secrets (they're public node ids, and they end up in
 # the page's HTML), but they can only be read from the GitHub API: get them from
 # https://giscus.app or from
-#   jbang scripts/ImportWpComments.java --print-config
+#   jbang scripts/transfer/Comments.java --print-config
 # The comment section renders only when all four values are filled in, so it stays
 # invisible until the "Blog Comments" category exists and its id is pasted here.
 [params.giscus]
@@ -91,7 +91,7 @@ enableRobotsTXT = true
 # Setting `endpoint` is what switches counting on: partials/views-beacon.html
 # renders nothing without it, so an unconfigured or local build never posts a
 # hit. DISPLAYING a count is independent of it -- that comes from
-# data/views.json, which the build refreshes via scripts/FetchViewCounts.java.
+# data/views.json, which the build refreshes via scripts/fetch/ViewCounts.java.
 [params.views]
   endpoint = "https://foojay.io/api/views"
 

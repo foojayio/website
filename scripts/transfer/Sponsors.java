@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
-//SOURCES HtmlToMarkdown.java
+//SOURCES ../shared/HtmlToMarkdown.java
 //JAVA 17+
 
 import org.jsoup.Connection;
@@ -44,8 +44,8 @@ import java.util.stream.Stream;
  * at build time by the template, so it never goes stale.
  *
  * Usage:
- *   jbang scripts/ConvertSponsors.java
- *   jbang scripts/ConvertSponsors.java --url https://foojay.io/sponsor/coderabbit/   (single sponsor, for tuning selectors)
+ *   jbang scripts/transfer/Sponsors.java
+ *   jbang scripts/transfer/Sponsors.java --url https://foojay.io/sponsor/coderabbit/   (single sponsor, for tuning selectors)
  *
  * Selectors below were read off the live markup (2026-08) rather than guessed,
  * unlike the older Convert* scripts -- foojay's sponsor templates use stable
@@ -55,7 +55,7 @@ import java.util.stream.Stream;
  * wherever they live), reuses an already-downloaded logo, and preserves both
  * `authors:` and any bundle whose frontmatter says `frozen: true`.
  */
-public class ConvertSponsors {
+public class Sponsors {
 
     static final String BASE_URL = "https://foojay.io";
     static final String INDEX_URL = BASE_URL + "/our-sponsors/";
@@ -455,7 +455,7 @@ public class ConvertSponsors {
         // by hand (they're the folder names under content/authors/); this script
         // reads them back and writes them out unchanged.
         fm.append("# Hand-maintained: author slugs (content/authors/<letter>/<slug>/) whose posts\n");
-        fm.append("# are this sponsor's articles. ConvertSponsors.java preserves this list verbatim.\n");
+        fm.append("# are this sponsor's articles. transfer/Sponsors.java preserves this list verbatim.\n");
         fm.append("authors:\n");
         for (String a : d.authors) fm.append("  - ").append(yamlString(a)).append("\n");
 

@@ -12,7 +12,7 @@
     {{ .Content }}
 
     {{/* data/jugs.yaml is regenerated at every build and daily
-         (scripts/FetchJugs.java, .github/workflows/build-deploy.yml +
+         (scripts/fetch/Jugs.java, .github/workflows/build-deploy.yml +
          meetup-sync.yml) from the community-run World Wide JUGs directory --
          nobody should ever hand-edit that file, so say so here where the
          data is actually shown, not just in a code comment. */}}
@@ -30,7 +30,7 @@
 
     {{/* World map of every JUG with coordinates (data/jugs.yaml's
          latitude/longitude, derived from GlobalWWJugs's `location` field by
-         scripts/FetchJugs.java). Leaflet + marker clustering, same approach
+         scripts/fetch/Jugs.java). Leaflet + marker clustering, same approach
          and library versions as Frank's map page for javachampions.org
          (https://github.com/aalmiray/java-champions/pull/318) -- CDN-loaded
          here rather than in baseof.html since no other page needs it. */}}

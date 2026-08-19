@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  * `aliases:` entry. Also drops any now-redundant `slug:` frontmatter (the folder
  * name is the slug -- permalink :slugorcontentbasename). Idempotent.
  *
- * Usage: jbang scripts/SanitizeSlugs.java
+ * Usage: jbang scripts/cleanup/SanitizeSlugs.java
  */
 public class SanitizeSlugs {
 

@@ -35,18 +35,18 @@ jobs:
       # rather than whatever was last committed (also refreshed independently
       # at every deploy by build-deploy.yml).
       - name: Refresh JUG list
-        run: jbang scripts/FetchJugs.java
+        run: jbang scripts/fetch/Jugs.java
 
       # Independent of the JUG list above -- just piggybacking on the same
       # schedule rather than adding a whole workflow for one script.
       - name: Refresh Java Champions list
-        run: jbang scripts/FetchJavaChampions.java
+        run: jbang scripts/fetch/JavaChampions.java
 
       # ~150 requests across meetup.com, Google Calendar and the JUGs' own
       # sites: an iCal feed per JUG, then a page per event that still needs a
       # venue. Needs no credential; see the script.
       - name: Fetch JUG events
-        run: jbang scripts/FetchJugEvents.java
+        run: jbang scripts/fetch/JugEvents.java
 
       - name: Commit updated data
         run: |

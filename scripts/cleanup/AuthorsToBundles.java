@@ -19,9 +19,9 @@ import java.util.stream.Stream;
  * resources), and the now-redundant `slug:` frontmatter is dropped (the folder name
  * is the slug -- permalink :slugorcontentbasename).
  *
- * Idempotent. Usage: jbang scripts/MigrateAuthorsToBundles.java
+ * Idempotent. Usage: jbang scripts/cleanup/AuthorsToBundles.java
  */
-public class MigrateAuthorsToBundles {
+public class AuthorsToBundles {
 
     static final Path AUTHORS = Path.of("content/authors");
     static final Path IMG_ROOT = Path.of("static/images/author");

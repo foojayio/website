@@ -10,7 +10,7 @@
     2. Install the giscus app on the repo: https://github.com/apps/giscus
     3. Fill in [params.giscus] in hugo.toml. The two ids come from
        https://giscus.app, or straight out of
-       `jbang scripts/ImportWpComments.java --print-config`.
+       `jbang scripts/transfer/Comments.java --print-config`.
   Until all four values are set this partial renders nothing, so an
   unconfigured build simply has no comment section.
 
@@ -29,7 +29,7 @@
   of the term instead, which is exact.
 
   Legacy comments: the WordPress comments (580 of them, on 270 posts) are moved
-  into these discussions by scripts/ImportWpComments.java, which writes each
+  into these discussions by scripts/transfer/Comments.java, which writes each
   thread exactly the way giscus itself would, so an imported thread and one
   giscus creates for a brand-new post are indistinguishable. Each imported
   comment opens with an "Originally posted by ... in Foojay.io Discussions" line,

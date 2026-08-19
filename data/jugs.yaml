@@ -1,4 +1,4 @@
-# Java User Groups -- generated automatically by scripts/FetchJugs.java
+# Java User Groups -- generated automatically by scripts/fetch/Jugs.java
 # from https://github.com/World-Wide-JUGs/GlobalWWJugs (the community-run,
 # crowd-sourced directory of JUGs worldwide).
 #
@@ -11,7 +11,7 @@
 # folder instead: https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs
 #
 # meetup_slug/meetup_url are set only when a JUG's file has an explicit
-# `meetup` field (never inferred from `website`); scripts/FetchJugEvents.java
+# `meetup` field (never inferred from `website`); scripts/fetch/JugEvents.java
 # uses meetup_slug to pull calendar events.
 
 - slug: AlmatyJUG

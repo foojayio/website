@@ -72,7 +72,7 @@ import java.util.stream.Stream;
  *    converter no longer emitting `---`, a re-scrape of any old post would
  *    otherwise show a dash change in its diff on top of the real edits. Where the
  *    ASCII form genuinely reached a reader was OUTSIDE Hugo -- GitHub Discussions
- *    have no typographer, so `ImportWpComments.java` would have posted `Fair
+ *    have no typographer, so `transfer/Comments.java` would have posted `Fair
  *    challenge --- JEP 491` verbatim. That was fixed at the converter, not here.
  *
  *    Only the two unambiguous shapes are converted: ` --- ` between non-blanks,
@@ -106,13 +106,13 @@ import java.util.stream.Stream;
  * The conversion scripts produce this shape directly from now on
  * (HtmlToMarkdown: FlexmarkHtmlConverter.SETEXT_HEADINGS = false, plus the
  * STANDALONE_BREAK pass), so a re-scrape is a no-op. The script stays in the
- * repo for the same reason MigrateEnlighterToFences.java does: the WordPress
+ * repo for the same reason cleanup/EnlighterToFences.java does: the WordPress
  * site keeps serving this markup until cutover.
  *
  * Usage:
- *   jbang scripts/NormalizeMarkdown.java --dry-run   (report only, changes nothing)
- *   jbang scripts/NormalizeMarkdown.java
- *   jbang scripts/NormalizeMarkdown.java --path content/pages
+ *   jbang scripts/cleanup/NormalizeMarkdown.java --dry-run   (report only, changes nothing)
+ *   jbang scripts/cleanup/NormalizeMarkdown.java
+ *   jbang scripts/cleanup/NormalizeMarkdown.java --path content/pages
  *
  * VERIFIED BY DIFFING THE BUILT SITE before and after: of 2,241 files changed,
  * 567 pages render differently because a decorative <br> is gone, 3 because a

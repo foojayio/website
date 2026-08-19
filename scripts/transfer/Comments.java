@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS com.fasterxml.jackson.core:jackson-databind:2.17.1
-//SOURCES HtmlToMarkdown.java
+//SOURCES ../shared/HtmlToMarkdown.java
 //JAVA 17+
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -33,11 +33,11 @@ import java.util.stream.Stream;
  * conversation instead of starting every post at zero.
  *
  * Usage:
- *   jbang scripts/ImportWpComments.java --dry-run          (report only, writes nothing)
- *   jbang scripts/ImportWpComments.java --print-config      (resolve + print the [params.giscus] block)
- *   jbang scripts/ImportWpComments.java                     (do the import)
- *   jbang scripts/ImportWpComments.java --slug some-post    (one post, for a first live test)
- *   jbang scripts/ImportWpComments.java --limit 300         (stop after 300 creations, then re-run)
+ *   jbang scripts/transfer/Comments.java --dry-run          (report only, writes nothing)
+ *   jbang scripts/transfer/Comments.java --print-config      (resolve + print the [params.giscus] block)
+ *   jbang scripts/transfer/Comments.java                     (do the import)
+ *   jbang scripts/transfer/Comments.java --slug some-post    (one post, for a first live test)
+ *   jbang scripts/transfer/Comments.java --limit 300         (stop after 300 creations, then re-run)
  *
  * Needs GITHUB_TOKEN (or GH_TOKEN) in the environment, holding a token of the
  * account the comments should be posted as -- the foojay.io account, since the
@@ -50,14 +50,14 @@ import java.util.stream.Stream;
  * which is the only honest way to attribute it, and the original comment's WP
  * id is left in an HTML comment underneath for idempotency (see below).
  *
- * WHY THIS IS NOT PART OF ConvertPosts.java
+ * WHY THIS IS NOT PART OF transfer/Posts.java
  * The TODO asked whether the post converter could take this over. It shouldn't:
- * ConvertPosts writes files into content/ and is re-run against the live WP site
+ * Posts writes files into content/ and is re-run against the live WP site
  * throughout the trial period, while this posts irreversible public content into
  * a third-party API, needs a write token, and needs to run exactly once (plus
  * top-ups for comments posted on WP before cutover). Mixing the two would mean
  * every routine content re-scrape carries a credential and a side effect on
- * GitHub. Same reason ConvertSponsors.java is run by hand and FetchJugs.java
+ * GitHub. Same reason transfer/Sponsors.java is run by hand and fetch/Jugs.java
  * isn't.
  *
  * WHERE THE COMMENTS COME FROM
@@ -112,7 +112,7 @@ import java.util.stream.Stream;
  * hint rather than hammering it. Because the whole thing is idempotent, running
  * it again an hour later picks up where it left off.
  */
-public class ImportWpComments {
+public class Comments {
 
     // ---- CONFIG -------------------------------------------------------
     static final String WP_BASE = "https://foojay.io";
@@ -368,7 +368,7 @@ public class ImportWpComments {
                 Imports the legacy WordPress comments on foojay.io into GitHub Discussions,
                 in the shape giscus expects (see comments.html).
 
-                  jbang scripts/ImportWpComments.java [options]
+                  jbang scripts/transfer/Comments.java [options]
 
                   --dry-run            report what would happen, write nothing
                   --print-config       resolve repoId/categoryId and print the hugo.toml block
@@ -447,7 +447,7 @@ public class ImportWpComments {
      * (the value hugo.toml's `:slugorcontentbasename` resolves to, i.e. the
      * `slug` frontmatter if set and otherwise the bundle folder name). Legacy
      * `aliases:` paths map to the same term, so a post whose folder was renamed
-     * (SanitizeSlugs.java) is still found from its WordPress URL.
+     * (cleanup/SanitizeSlugs.java) is still found from its WordPress URL.
      */
     static PostIndex indexLocalPosts() throws IOException {
         Map<String, String> slugToTerm = new HashMap<>();
@@ -507,7 +507,7 @@ public class ImportWpComments {
     /**
      * The WP slug is usually the local one. When it isn't, it's because the
      * folder was sanitized (an emoji or a capital in the WP slug), so try the
-     * same sanitization SanitizeSlugs.java applies.
+     * same sanitization cleanup/SanitizeSlugs.java applies.
      */
     static String resolveTerm(String wpSlug, Map<String, String> index) {
         String direct = index.get(wpSlug);
@@ -759,7 +759,7 @@ public class ImportWpComments {
                 + title + "\n\n"
                 + SITE_BASE + "/today/" + term + "/\n\n"
                 + "_Comments below were imported from the foojay.io WordPress site "
-                + "(scripts/ImportWpComments.java)._\n\n"
+                + "(scripts/transfer/Comments.java)._\n\n"
                 + SHA1_MARKER_PREFIX + sha1(term) + " -->";
         String mutation = """
                 mutation($repoId:ID!, $categoryId:ID!, $title:String!, $body:String!) {

@@ -33,7 +33,7 @@ jobs:
       # committed data/views.json and exits 0, so a Worker outage costs the
       # site nothing but staler numbers.
       - name: Refresh view counts
-        run: jbang scripts/FetchViewCounts.java
+        run: jbang scripts/fetch/ViewCounts.java
 
       - name: Commit updated data
         run: |

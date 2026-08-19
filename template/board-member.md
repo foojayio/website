@@ -16,7 +16,7 @@ description: "What the organization does, in a sentence."
 # this under /pages/.
 url: "/board/<slug>/"
 # Required. This is how the member is found -- without it the page still
-# builds, but it never appears on /board/. ValidateFrontmatter.java fails the
+# builds, but it never appears on /board/. validate/Frontmatter.java fails the
 # PR on a missing or misspelled one.
 type: "board"
 logo: "/images/pages/board/<slug>.png"

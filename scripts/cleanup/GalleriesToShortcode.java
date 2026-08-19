@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
-//SOURCES HtmlToMarkdown.java
+//SOURCES ../shared/HtmlToMarkdown.java
 //JAVA 17+
 
 import org.jsoup.Jsoup;
@@ -44,17 +44,17 @@ import java.util.stream.Stream;
  * (HtmlToMarkdown.galleryShortcode -- the SAME method this script calls, so
  * both agree by construction), which makes a re-scrape produce the same shape.
  * This script stays in the repo for as long as the WordPress site is still
- * being scraped, exactly like MigrateEnlighterToFences.java.
+ * being scraped, exactly like cleanup/EnlighterToFences.java.
  *
  * Usage:
- *   jbang scripts/MigrateGalleriesToShortcode.java --dry-run   (report only, changes nothing)
- *   jbang scripts/MigrateGalleriesToShortcode.java
- *   jbang scripts/MigrateGalleriesToShortcode.java --path content/posts/2022
+ *   jbang scripts/cleanup/GalleriesToShortcode.java --dry-run   (report only, changes nothing)
+ *   jbang scripts/cleanup/GalleriesToShortcode.java
+ *   jbang scripts/cleanup/GalleriesToShortcode.java --path content/posts/2022
  *
  * Idempotent: a file with no gallery markup left is not rewritten. Frontmatter
  * is never touched -- only the body below the closing `---` is scanned.
  */
-public class MigrateGalleriesToShortcode {
+public class GalleriesToShortcode {
 
     static final Path DEFAULT_ROOT = Path.of("content");
 

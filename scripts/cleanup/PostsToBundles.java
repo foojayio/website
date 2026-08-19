@@ -21,9 +21,9 @@ import java.util.stream.Stream;
  * Idempotent: a post already at <dir>/<slug>/index.md is skipped, and images
  * already moved are left in place.
  *
- * Usage: jbang scripts/MigratePostsToBundles.java
+ * Usage: jbang scripts/cleanup/PostsToBundles.java
  */
-public class MigratePostsToBundles {
+public class PostsToBundles {
 
     static final Path POSTS = Path.of("content/posts");
     static final Path IMG_ROOT = Path.of("static/images/posts");

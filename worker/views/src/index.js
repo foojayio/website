@@ -22,11 +22,11 @@
  *                                from partials/views-beacon.html.
  *   GET  /api/views/all          { "<key>": <legacy+live>, ... } for the whole
  *                                site. Read at build time by
- *                                scripts/FetchViewCounts.java -> data/views.json.
+ *                                scripts/fetch/ViewCounts.java -> data/views.json.
  *   GET  /api/views/<key>        one page's total. Debugging convenience.
  *   POST /api/views/seed         { "<key>": <count>, ... } -> the `legacy`
  *                                column. Bearer SEED_TOKEN. Re-runnable; see
- *                                scripts/FetchWpViews.java --seed.
+ *                                scripts/transfer/LegacyViews.java --seed.
  *
  * A <key> is `<section>/<slug>` -- see KEY below.
  */
@@ -35,7 +35,7 @@
  * Keys are `<section>/<slug>` -- "posts/some-article", "pedia/bytecode",
  * "authors/jbellis", "pages/who-we-are". The section half keeps the counted
  * sections from colliding in what is a permanent store; the slug half mirrors
- * ConvertPosts.sanitizeSlug(), which is lowercase [a-z0-9_-] and nothing else.
+ * Posts.sanitizeSlug(), which is lowercase [a-z0-9_-] and nothing else.
  * The single definition of what a key is lives in the Hugo theme
  * (partials/views-key.html) -- this is the same rule expressed as validation.
  *

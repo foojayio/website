@@ -46,7 +46,7 @@ import java.util.stream.Stream;
  *   GET /wp-json/post-views-counter/get-post-views/<id>  ->  11459
  *
  * So this needs no WP admin, DB access or credential -- same posture as
- * ImportWpComments.java reading /wp-json/wp/v2/comments. Note the route sums
+ * transfer/Comments.java reading /wp-json/wp/v2/comments. Note the route sums
  * when handed several ids at once rather than returning one number each, so
  * there is no batching to be had: it is one request per page. Eight run at a
  * time (see fetchAll()), which puts the whole site at two to three minutes.
@@ -56,10 +56,10 @@ import java.util.stream.Stream;
  * custom post type WordPress does not expose to REST, so it is resolved a
  * different way -- see pediaTargets().
  *
- * Run by hand, never in CI, for the same reason ConvertSponsors.java is: it
+ * Run by hand, never in CI, for the same reason transfer/Sponsors.java is: it
  * reads the WordPress site that disappears at cutover, and --seed writes to a
  * third-party API with a credential. What CI runs is the other half,
- * FetchViewCounts.java, which only reads.
+ * fetch/ViewCounts.java, which only reads.
  *
  * WHY A DATA FILE AND NOT `legacy_views:` FRONTMATTER. The TODO wondered about
  * a frontmatter field. It would mean rewriting 2145 content files on every
@@ -68,15 +68,15 @@ import java.util.stream.Stream;
  * data/java-champions.yaml already do here.
  *
  * Usage:
- *   jbang scripts/FetchWpViews.java                    # fetch -> data/legacy-views.json
- *   jbang scripts/FetchWpViews.java --seed             # ...and push to the Worker
- *   jbang scripts/FetchWpViews.java --limit 20         # quick test run
- *   jbang scripts/FetchWpViews.java --endpoint https://foojay.io/api/views
+ *   jbang scripts/transfer/LegacyViews.java                    # fetch -> data/legacy-views.json
+ *   jbang scripts/transfer/LegacyViews.java --seed             # ...and push to the Worker
+ *   jbang scripts/transfer/LegacyViews.java --limit 20         # quick test run
+ *   jbang scripts/transfer/LegacyViews.java --endpoint https://foojay.io/api/views
  *
  * --seed reads the Worker's token from the VIEWS_SEED_TOKEN environment
  * variable (set with `wrangler secret put SEED_TOKEN`, see worker/views/README.md).
  */
-public class FetchWpViews {
+public class LegacyViews {
 
     static final String WP_BASE = "https://foojay.io/wp-json";
     static final String DEFAULT_ENDPOINT = "https://foojay.io/api/views";
@@ -319,7 +319,7 @@ public class FetchWpViews {
      *
      * These agree for 2142 of 2145 posts. The exceptions are the posts whose WP
      * slug ends in a percent-encoded emoji: the conversion ran the decoded slug
-     * through ConvertPosts.sanitizeSlug(), which turns the emoji into a dash and
+     * through Posts.sanitizeSlug(), which turns the emoji into a dash and
      * then trims it. Applying the same two steps here reproduces the bundle name
      * exactly, which is why this is derived rather than a hand-kept exception list.
      */
@@ -331,7 +331,7 @@ public class FetchWpViews {
         return local.contains(sanitized) ? sanitized : null;
     }
 
-    /** Kept identical to ConvertPosts.sanitizeSlug(). */
+    /** Kept identical to Posts.sanitizeSlug(). */
     static String sanitizeSlug(String s) {
         if (s == null) return "";
         return s.toLowerCase(Locale.ROOT)

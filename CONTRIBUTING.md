@@ -92,5 +92,5 @@ in the page header from the entries themselves.
 
 One file per event, so two people adding two conferences in the same week never
 touch the same file and never get a merge conflict. The PR check
-(`jbang scripts/ValidateFrontmatter.java`) validates your entry — it will tell
+(`jbang scripts/validate/Frontmatter.java`) validates your entry — it will tell
 you about a misspelled field, a date it can't read, or an end before the start.

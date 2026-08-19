@@ -25,7 +25,7 @@ So **validate every change against this**, and prefer, in order:
    (`title`, `related_posts`, a sponsor's `authors:` list).
 
 A flag that is always set to the same value is not configuration, it's a
-chore — delete it. When a knob does have to exist, `ValidateFrontmatter.java`
+chore — delete it. When a knob does have to exist, `validate/Frontmatter.java`
 should catch a mistake at PR time rather than letting it fail silently.
 
 ## What exists so far
@@ -38,36 +38,50 @@ should catch a mistake at PR time rather than letting it fail silently.
   Hugo-specific name meant two places to look. They drifted: the post archetype
   wrote a singular `author:` against author *files*, while posts take an
   `authors:` list of author *folders*, so anything created from it failed
-  `ValidateFrontmatter`. Add starter files to `template/`, not `archetypes/`.
-- **Two jbang conversion scripts** in `scripts/`: `ConvertPosts.java` and
-  `ConvertAuthors.java`. They scrape the live foojay.io site (no WP admin/DB
+  `validate/Frontmatter.java`. Add starter files to `template/`, not `archetypes/`.
+- **`scripts/` is grouped by lifetime, not by verb** — `fetch/` (external data,
+  runs in CI, outlives the migration), `transfer/` (reads the live WordPress
+  site, deleted at cutover), `cleanup/` (one-off rewrites of what is already in
+  `content/`, deleted at cutover), `validate/` (PR-time checks) and `shared/`
+  (common code, never run on its own). The question a folder answers is "does
+  this still exist after cutover?", which is the one that actually matters here:
+  two of the five folders get deleted whole, and nothing has to be untangled
+  from the ones that stay. So a script is named for **what it produces**, with
+  the folder supplying the verb — `fetch/Jugs.java`, not `FetchJugs.java` in a
+  flat directory of twenty. `shared/HtmlToMarkdown.java` is pulled in with
+  `//SOURCES ../shared/HtmlToMarkdown.java`; jbang resolves that relative to the
+  calling script, and every script still runs from the repo root because they
+  resolve `content/`/`data/` against the working directory, not their own path.
+  `scripts/README.md` is the per-folder index — add a new script's line there.
+- **Two jbang conversion scripts** in `scripts/`: `transfer/Posts.java` and
+  `transfer/Authors.java`. They scrape the live foojay.io site (no WP admin/DB
   access was used or assumed) and write Hugo content markdown. Both are
   idempotent (safe to re-run repeatedly) and respect a `frozen: true` frontmatter
   flag to avoid clobbering hand-edited files. (The one-off `ConvertPages.java`
   and `ConvertPedia.java` scrapers were removed once `content/pages/` and
   `content/pedia/` were converted — those sections are hand-maintained now; only
   posts and authors keep growing on the live site, so only those are re-scraped.)
-- **`scripts/FetchJugs.java`**: regenerates `data/jugs.yaml` from the
+- **`scripts/fetch/Jugs.java`**: regenerates `data/jugs.yaml` from the
   community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs)
   (one Markdown-with-YAML-frontmatter file per JUG under its `_jugs/`
   folder). Run at every deploy (`build-deploy.yml`, before the Hugo build)
-  and once a day (`sync-external-content.yml`, before `FetchJugEvents.java`), both of
+  and once a day (`sync-external-content.yml`, before `fetch/JugEvents.java`), both of
   which commit the refreshed file back to `main` — same pattern as
   `jug-events.json`. JUG leaders add/update their own group by opening a PR
   against that repo, not this one. Derives `meetup_slug`/`meetup_url`
   whenever a JUG's `website` is a meetup.com URL.
-- **`scripts/FetchJavaChampions.java`**: regenerates `data/java-champions.yaml`
+- **`scripts/fetch/JavaChampions.java`**: regenerates `data/java-champions.yaml`
   from [aalmiray/java-champions](https://github.com/aalmiray/java-champions)'s
   single `java-champions.yml` file — the data behind
   [javachampions.org](https://javachampions.org/). Run at every deploy and
-  once a day, same as `FetchJugs.java` above. Champions add/update their own entry
+  once a day, same as `fetch/Jugs.java` above. Champions add/update their own entry
   by editing that file directly upstream, not this repo. No coordinates yet
   (unlike JUGs) — a pending PR
   ([aalmiray/java-champions#318](https://github.com/aalmiray/java-champions/pull/318))
   adds `location: {lat, lng}` via a one-time geocoding script, but it hasn't
-  merged; pick that field up here once it does, same way `FetchJugs.java`
+  merged; pick that field up here once it does, same way `fetch/Jugs.java`
   reads JUG coordinates.
-- **`scripts/FetchJugEvents.java`** (was `FetchMeetupEvents.java`): pulls JUG
+- **`scripts/fetch/JugEvents.java`** (was `FetchMeetupEvents.java`): pulls JUG
   events for `.github/workflows/sync-external-content.yml`, writing
   `data/jug-events.json`. **Needs no credential, and is not Meetup-specific.** It
   used to POST to Meetup's GraphQL API, which requires a Meetup Pro
@@ -133,12 +147,12 @@ should catch a mistake at PR time rather than letting it fail silently.
   commit, and therefore deploy, on a timestamp. `--dry-run` / `--limit N` /
   `--jug <slug>` print the JSON instead of writing a file that would be missing
   every group they skipped; `--no-venues` skips the JSON-LD pass.
-- **`scripts/DiscoverJugCalendars.java`**: run by hand, never in CI. Reports
+- **`scripts/fetch/DiscoverJugCalendars.java`**: run by hand, never in CI. Reports
   JUGs whose own website advertises a calendar their GlobalWWJugs entry doesn't
   record — 45 of the 90 have neither `calendar:` nor `meetup_slug:`, so they
   can't appear on `/calendar/` at all. It exists because the answer belongs
   **upstream**: `data/jugs.yaml` is generated, a local edit would be wiped by
-  the next `FetchJugs.java` run, and a fetcher that scraped 45 home pages on
+  the next `fetch/Jugs.java` run, and a fetcher that scraped 45 home pages on
   every sync would be fragile and invisible. So this finds them once and prints
   the frontmatter lines to add (`--yaml`).
 
@@ -154,17 +168,17 @@ should catch a mistake at PR time rather than letting it fail silently.
   (`DubJUG` → "Dublin Java User Group", `WarsawJUG` → "Warszawa JUG"), 5 for a
   human. All 15 went upstream as
   [GlobalWWJugs#98](https://github.com/World-Wide-JUGs/GlobalWWJugs/pull/98).
-- **`scripts/ConvertSponsors.java`**: converts the sponsor section from the live
+- **`scripts/transfer/Sponsors.java`**: converts the sponsor section from the live
   WP site into `content/sponsors/<wp-slug>/index.md` page bundles (logo pulled
   local as a bundle resource, About text through `HtmlToMarkdown`). Reads the
   index at `/our-sponsors/` for the tier, then each `/sponsor/<slug>/` profile
-  for the rest. Idempotent and `frozen: true`-aware like the `Convert*`
-  scripts, and run by hand for the same reason they are — it scrapes the
+  for the rest. Idempotent and `frozen: true`-aware like the other
+  `transfer/` scrapers, and run by hand for the same reason they are — it scrapes the
   WordPress site that goes away at cutover, so it does **not** belong in CI
-  next to `FetchJugs`/`FetchJavaChampions` (those pull from upstream GitHub
+  next to `fetch/Jugs.java`/`fetch/JavaChampions.java` (those pull from upstream GitHub
   repos that outlive the migration). See "sponsors ↔ articles" below for the
   one field it deliberately does not own.
-- **`scripts/MigrateEnlighterToFences.java`**: rewrites legacy EnlighterJS code
+- **`scripts/cleanup/EnlighterToFences.java`**: rewrites legacy EnlighterJS code
   markup already sitting in `content/` (`<pre class="EnlighterJSRAW"
   data-enlighter-language="java" …>`, inline `<code class="EnlighterJSRAW">`,
   and hand-written ` ```EnlighterJSRAW ` info strings) as plain Markdown
@@ -211,17 +225,17 @@ should catch a mistake at PR time rather than letting it fail silently.
   and preserved raw-HTML blocks are never touched — a post has a *table of
   entity names* as its subject matter, and in raw HTML `&amp;` is correct
   markup.
-- **`scripts/MigrateGalleriesToShortcode.java`**: one-off migration that
+- **`scripts/cleanup/GalleriesToShortcode.java`**: one-off migration that
   replaced the WordPress gallery markup in `content/` with the
   `{{< gallery >}}` shortcode — 55 posts, 94 galleries, 259 images, both block
   shapes (nested `<figure>`s and the older `<ul class="blocks-gallery-grid">`).
-  Same reasoning and same shape as `MigrateEnlighterToFences.java`: a
+  Same reasoning and same shape as `cleanup/EnlighterToFences.java`: a
   contributor can't be asked to type 30 lines of block markup, and a gallery is
   a list of filenames. It calls `HtmlToMarkdown.galleryShortcode`, which the
   scrapers now use too, so a re-scrape emits the same thing and a re-run here is
   a no-op. `--dry-run` / `--path` as usual. See the gallery convention below for
   what the shortcode derives rather than stores.
-- **`scripts/FixCloudflareEmails.java`**: one-off migration that put back the
+- **`scripts/cleanup/CloudflareEmails.java`**: one-off migration that put back the
   email addresses Cloudflare hid from the scrapers. foojay.io is behind
   Cloudflare with **Email Address Obfuscation** on, so an address never reaches
   a non-browser client: the HTML carries a placeholder plus an XOR-encoded copy,
@@ -247,7 +261,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   really does contain the words "[email protected]" in a prompt example (the
   live page has the same literal). Run it again after any late re-scrape, before
   cutover kills the only source of these addresses.
-- **`scripts/ImportWpComments.java`**: one-off migration that moves the legacy
+- **`scripts/transfer/Comments.java`**: one-off migration that moves the legacy
   WordPress comments (580 approved, across 270 posts, read from foojay.io's open
   `/wp-json/wp/v2/comments` — no admin access needed) into the GitHub Discussions
   that giscus reads, so cutover doesn't reset every post to zero comments. Posts
@@ -256,10 +270,10 @@ should catch a mistake at PR time rather than letting it fail silently.
   <author> on <date> in Foojay.io Discussions.` — the attribution the TODO asked
   for. Bodies go through `HtmlToMarkdown.toMarkdown` (made public for this), so a
   comment gets the same entity/fence/nbsp repairs the post bodies got.
-  Deliberately **not** part of `ConvertPosts.java`, which the TODO wondered about:
+  Deliberately **not** part of `transfer/Posts.java`, which the TODO wondered about:
   that script writes files and is re-run against the live WP site constantly,
   while this writes irreversible public content to a third-party API and needs a
-  credential — the same reason `ConvertSponsors.java` is run by hand. Idempotent
+  credential — the same reason `transfer/Sponsors.java` is run by hand. Idempotent
   with the state derived from GitHub rather than a file here (a discussion is
   reused when its term already has one; a comment is skipped when its
   `<!-- wp-comment-id: N -->` marker is already in the thread), which is what
@@ -271,14 +285,14 @@ should catch a mistake at PR time rather than letting it fail silently.
 - **`worker/views/`**: the read counter — a Cloudflare Worker over a D1 table
   of `<section>/<slug> -> (legacy, live)`, routed at `foojay.io/api/views/*`. Deployed by
   hand (`wrangler deploy`), never by CI, for the same reason
-  `ConvertSponsors.java` is run by hand: it writes outside the repo and needs a
+  `transfer/Sponsors.java` is run by hand: it writes outside the repo and needs a
   credential. See "read counter" under the conventions below for why this
   exists instead of a hosted analytics service, and `worker/views/README.md`
   for the setup steps. **Not yet deployed.**
-- **`scripts/FetchWpViews.java`**: captures the view counts WordPress holds for
+- **`scripts/transfer/LegacyViews.java`**: captures the view counts WordPress holds for
   every post, page and pedia entry (the Post Views Counter plugin exposes them
   on an open REST route — no admin, DB or credential needed, same posture as
-  `ImportWpComments.java`) into `data/legacy-views.json`, and with `--seed`
+  `transfer/Comments.java`) into `data/legacy-views.json`, and with `--seed`
   loads them into the Worker as its `legacy` baseline. Posts and pages come
   from `/wp/v2/`; the **pedia glossary is a custom post type (`terminology`)
   that WordPress does not expose to REST**, so each entry's id is read back out
@@ -303,12 +317,12 @@ should catch a mistake at PR time rather than letting it fail silently.
   the entry the item resolves against the wrong section's slugs, lands in
   `unmatched`, and its whole count is silently dropped at the next run. The
   key in `data/legacy-views.json`/`data/views.json` has to move with it.
-- **`scripts/FetchViewCounts.java`**: the CI half — reads
+- **`scripts/fetch/ViewCounts.java`**: the CI half — reads
   `/api/views/all` into `data/views.json` at every deploy and four times a day
   (`sync-view-counts.yml`, its own workflow — see below), so the
   numbers are baked into the HTML. **Never fails the build**: if the counter is
   unreachable it keeps the committed file and exits 0.
-- **`scripts/StripHeadingAnchors.java`**: one-off migration that removed the
+- **`scripts/cleanup/HeadingAnchors.java`**: one-off migration that removed the
   WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
   stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id
   over as Markdown attribute syntax, and Goldmark applies it — the round trip
@@ -323,7 +337,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   rejoined by hand).
   `HtmlToMarkdown.toMarkdown` now drops heading ids at the source, so a
   re-scrape is a no-op; the script stays for the same reason
-  `MigrateEnlighterToFences.java` does. `--dry-run` / `--path` as usual.
+  `cleanup/EnlighterToFences.java` does. `--dry-run` / `--path` as usual.
 
   It also strips the same id where WordPress stamped it on a **link** rather
   than a heading -- `[Ty Morton](https://.../){#31db}`, which Medium-imported
@@ -335,7 +349,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   `HtmlToMarkdown` drops `a[id]` alongside the heading ids now. Anchored to the
   link's closing paren, so a `{#id}` in a CSS example is never touched, and
   fenced code is skipped as before.
-- **`scripts/NormalizeMarkdown.java`**: one-off migration that brought
+- **`scripts/cleanup/NormalizeMarkdown.java`**: one-off migration that brought
   `content/` in line with the storage format the converter now emits. Two
   things, both Flexmark defaults that were never a deliberate choice:
   **setext headings → ATX** (Flexmark underlines h1/h2 with `====`/`----` and
@@ -354,7 +368,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   separators would otherwise become headings), and a `---` under a **list item**
   (CommonMark says a setext underline can't interrupt a list, so that pair
   already renders as list + thematic break — 203 left underlined for this).
-- **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
+- **`scripts/validate/Frontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
   `authors:` slug without a matching author bundle, no emoji in a post title, no
   two pages in a folder claiming the same series `weight`), run by
@@ -392,25 +406,25 @@ should catch a mistake at PR time rather than letting it fail silently.
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
   GitHub Pages on push to `main`. Also refreshes and commits `data/jugs.yaml`,
   `data/java-champions.yaml` and `data/views.json` before building
-  (see `FetchJugs.java` above) — needs `permissions.contents:
+  (see `fetch/Jugs.java` above) — needs `permissions.contents:
   write` and a `[skip ci]` commit message for exactly this reason (otherwise
   that commit would re-trigger the same workflow).
-- **`data/jugs.yaml`**: auto-generated by `scripts/FetchJugs.java` — see
+- **`data/jugs.yaml`**: auto-generated by `scripts/fetch/Jugs.java` — see
   above. Never hand-edit it; add/fix a JUG upstream in GlobalWWJugs instead.
   Rendered at `/jugs/` (`content/pages/java-user-groups-jugs.md`, `type:
   "jugs"` → `themes/foojay/layouts/jugs/single.html`), including a Leaflet +
   marker-clustering world map built from its `latitude`/`longitude` fields.
-- **`data/views.json`**: auto-generated by `scripts/FetchViewCounts.java` —
+- **`data/views.json`**: auto-generated by `scripts/fetch/ViewCounts.java` —
   `slug -> total reads`, the numbers rendered on posts and cards. Never
   hand-edit it. Seeded from `data/legacy-views.json` so the counts are live on
   the site *now*, before the Worker exists; once it is deployed this is
   overwritten with `legacy + live` on every build.
-- **`data/legacy-views.json`**: auto-generated by `scripts/FetchWpViews.java` —
+- **`data/legacy-views.json`**: auto-generated by `scripts/transfer/LegacyViews.java` —
   each post's WordPress view count at the last import. Committed because it is
   the **only** copy: these numbers vanish with the WordPress site, and they are
   what seeds the counter.
 - **`data/java-champions.yaml`**: auto-generated by
-  `scripts/FetchJavaChampions.java` — see above. Never hand-edit it; add/fix
+  `scripts/fetch/JavaChampions.java` — see above. Never hand-edit it; add/fix
   an entry upstream in aalmiray/java-champions instead. Rendered at
   `/java-champions/` (`content/pages/java-champions.md`, `type: "champions"`
   → `themes/foojay/layouts/champions/single.html`) — no map there yet, see
@@ -420,8 +434,8 @@ should catch a mistake at PR time rather than letting it fail silently.
 
 1. **Scraping selectors are unverified against real HTML.** The environment
    this was built in could only fetch pages through a markdown-extraction
-   tool, not raw HTML, so the CSS selectors in the three `Convert*.java`
-   scripts (categories, tags, author link, related-posts links) are
+   tool, not raw HTML, so the CSS selectors in the three `scripts/transfer/`
+   scrapers (categories, tags, author link, related-posts links) are
    best-effort WordPress/Yoast conventions, not confirmed against
    foojay.io's actual theme markup. Title/description/canonical/image are
    solid (they come from standard meta tags + JSON-LD, which foojay.io does
@@ -429,22 +443,22 @@ should catch a mistake at PR time rather than letting it fail silently.
    and check the output; fix the `SELECTOR_*` constants at the top of the
    file if something's empty.
 2. **None of the jbang scripts have been executed**, including the newest,
-   `FetchJavaChampions.java`. The sandbox they were written in blocks outbound
+   `fetch/JavaChampions.java`. The sandbox they were written in blocks outbound
    network access to arbitrary domains (only a markdown-fetch tool was
    available — enough to confirm the GlobalWWJugs and java-champions.yml
    frontmatter/schema by hand, not enough to run the actual GitHub API +
    raw-file fetch loop), so nothing here has been run against the live site
-   or the GitHub API (`FetchJugEvents.java` is now an exception -- it has
+   or the GitHub API (`fetch/JugEvents.java` is now an exception -- it has
    been run in full, see gap 3). Treat all of it as
-   reviewed-but-untested code, same as `FetchJugs.java` was before Frank ran
-   it locally. **First thing to do for `FetchJavaChampions.java`**: run it
-   locally once (`jbang scripts/FetchJavaChampions.java`) and check
+   reviewed-but-untested code, same as `fetch/Jugs.java` was before Frank ran
+   it locally. **First thing to do for `fetch/JavaChampions.java`**: run it
+   locally once (`jbang scripts/fetch/JavaChampions.java`) and check
    `data/java-champions.yaml` — in particular that the `country`/`social`
    nested objects in the source flattened correctly, and that the
    `/java-champions/` table renders sensibly for the ~700 entries missing
    most optional fields.
 3. ~~**`FetchMeetupEvents.java`'s GraphQL query/endpoint need verification**~~
-   — gone: `FetchJugEvents.java` no longer uses the API, needs no Meetup Pro
+   — gone: `fetch/JugEvents.java` no longer uses the API, needs no Meetup Pro
    subscription and no `MEETUP_OAUTH_TOKEN`, and has been run for real against
    all 43 feeds (34 events, 32 with a venue). See its entry above.
    What to watch now is the *shape* of the two public sources: if venues start
@@ -475,7 +489,7 @@ should catch a mistake at PR time rather than letting it fail silently.
    the partial renders nothing until those are filled in, so **three manual
    steps remain**: enable Discussions on the repo with a comment-accepting
    "Blog Comments" category, install the giscus app, paste the two ids
-   (`jbang scripts/ImportWpComments.java --print-config` prints the block).
+   (`jbang scripts/transfer/Comments.java --print-config` prints the block).
    Then run the comment import (see the script's entry above and README
    "Comments"); nothing here has been run against GitHub yet, so treat both the
    import and the widget as reviewed-but-untested.
@@ -486,7 +500,7 @@ should catch a mistake at PR time rather than letting it fail silently.
    and `data/views.json` stays `{}` (the partial then renders nothing, which is
    the correct degradation, not a bug). Four steps, all in
    `worker/views/README.md`: create the D1 database, load `schema.sql`, set
-   `SEED_TOKEN`, deploy. Then `jbang scripts/FetchWpViews.java --seed`. Do it
+   `SEED_TOKEN`, deploy. Then `jbang scripts/transfer/LegacyViews.java --seed`. Do it
    early rather than at cutover: the route can go up while WordPress is still
    live (nothing in WP serves `/api/`), and a counter proven over weeks beats
    one switched on the day it has to work. The GoatCounter scaffold that used to
@@ -517,7 +531,7 @@ should catch a mistake at PR time rather than letting it fail silently.
 - **URLs are load-bearing**: every converted post/author/page keeps its
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
   URLs without adding an alias. **One deliberate exception**: heading
-  *fragments*. `StripHeadingAnchors.java` (above) dropped WP's `#h2-N-slug`
+  *fragments*. `cleanup/HeadingAnchors.java` (above) dropped WP's `#h2-N-slug`
   anchors, so section-level deep links minted before cutover land at the top of
   the post instead. Paths, aliases and frontmatter are untouched, and Hugo still
   generates an id per heading from its text — the "On this page" panel and its
@@ -536,7 +550,7 @@ should catch a mistake at PR time rather than letting it fail silently.
 - **Headings are stored as ATX (`##`), not setext underlines.** Levels map 1:1
   to WordPress's `<h1>`–`<h6>`, so nesting is exactly what the author wrote —
   verified by diffing the built site: across 3543 pages, **zero** changed their
-  heading-level sequence when `NormalizeMarkdown.java` restyled 8053 of them.
+  heading-level sequence when `cleanup/NormalizeMarkdown.java` restyled 8053 of them.
   (Content nesting is mostly sane on its own: posts start at h2, and only 87
   skips — mostly h2 → h4 — exist across 15,930 headings in 50 files. Those are
   the authors' own markup, not a conversion artifact.) Note that a setext
@@ -568,7 +582,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   touches). Verified by rebuilding — byte-identical output apart from those 4.
   Don't reintroduce a flag for this. `HtmlToMarkdown.codeFence`/`fenceLanguage` emit
   fences from the conversion scripts, so a re-scrape produces the same shape;
-  `MigrateEnlighterToFences.java` above cleans up anything that slips through.
+  `cleanup/EnlighterToFences.java` above cleans up anything that slips through.
   Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
 - **Email addresses are decoded on the way in, never left obfuscated.**
   foojay.io is behind Cloudflare with Email Address Obfuscation on, so every
@@ -582,7 +596,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   `<code>@name</code>`); and an address **inside code** is always plain text,
   because Flexmark renders an `<a>` in a `<pre>` as its bare href, which would
   turn `--docker-email="a@b"` into `--docker-email="mailto:a@b"`.
-  `FixCloudflareEmails.java` above cleaned up what was already in `content/`.
+  `cleanup/CloudflareEmails.java` above cleaned up what was already in `content/`.
 
 - **WordPress's decorative `<hr>`s and `<br>` spacers are dropped, not
   converted.** Flexmark
@@ -597,7 +611,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   (`STANDALONE_BREAK`) — WP uses them as vertical spacers after images and
   embeds. A `<br>` with text on its line is a real hard break and stays.
 - **Posts are filed by publish date, not flat**: `content/posts/<year>/<month>/<slug>.md`,
-  bucketed by the post's original publish date (parsed in `ConvertPosts.java`'s
+  bucketed by the post's original publish date (parsed in `transfer/Posts.java`'s
   `bucketDirFor()`), purely to keep a 1000+-post directory browsable. This has
   no effect on the URL (`hugo.toml`'s permalinks are slug-only). `isFrozen()`
   and `writePost()` look up a post's existing file by slug recursively
@@ -617,7 +631,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   `/wp-json/wp/v2/posts?slug=…&_fields=tags` plus `/wp-json/wp/v2/tags?include=…`
   (both open, verified) — but only until cutover. Categories are the taxonomy.
 - **Emoji come off post TITLES, never out of bodies.**
-  `ConvertPosts.stripEmoji` runs on the scraped title, because a title isn't
+  `Posts.stripEmoji` runs on the scraped title, because a title isn't
   just text on the post -- it is the card in every grid, the RSS item, the
   browser tab, the `og:title` a link preview renders and the text a search
   result shows, and a decorative glyph reads as noise or breaks alignment in all
@@ -632,7 +646,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   needed an alias.
 
   The converter only covers what it scrapes, and a contributor writes their own
-  frontmatter by hand -- so `ValidateFrontmatter.checkTitleEmoji` applies the
+  frontmatter by hand -- so `Frontmatter.checkTitleEmoji` applies the
   same rule at PR time. Both use the same character class on purpose; change one
   and change the other.
 - **`related_posts` is manual**, chosen by the author — never replace it
@@ -646,9 +660,9 @@ should catch a mistake at PR time rather than letting it fail silently.
   post any of them wrote. That partial is the single definition — the article
   grid, the article/podcast/author counts and the "Topics covered" list on a
   sponsor page are all derived from it at build time, so nothing goes stale
-  and no counts are stored. `ConvertSponsors.java` reads `authors:` back out of
+  and no counts are stored. `transfer/Sponsors.java` reads `authors:` back out of
   the existing file and writes it through unchanged, so re-scraping never
-  clobbers it; `ValidateFrontmatter.java` fails the PR on a slug that matches
+  clobbers it; `validate/Frontmatter.java` fails the PR on a slug that matches
   no author. Note this makes our numbers legitimately differ from WordPress's
   (Redis shows 11 articles here vs 1 there) — author-based attribution is
   broader than whatever WP was doing. That's the intended semantics; if a
@@ -678,7 +692,7 @@ should catch a mistake at PR time rather than letting it fail silently.
 
   The 55 migrated posts (94 galleries, 259 images) previously carried WordPress
   block markup verbatim: modern nested `<figure>`s, plus 15 posts on the older
-  `<ul class="blocks-gallery-grid">`. `MigrateGalleriesToShortcode.java`
+  `<ul class="blocks-gallery-grid">`. `cleanup/GalleriesToShortcode.java`
   converted them and `HtmlToMarkdown.galleryShortcode` — the same method — emits
   the shortcode from the scrapers, so a re-scrape produces the same shape. Both
   WP shapes and their CSS are gone from the repo; don't reintroduce them.
@@ -697,7 +711,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   stale. Two renderings, one source: `featured-authors-band.html` (two cards
   atop `/today/author/`) and `featured-authors-widget.html` (sidebar, home page
   only — the authors page already leads with the band). An unknown slug is
-  skipped by the template rather than rendered dead; `ValidateFrontmatter.java`
+  skipped by the template rather than rendered dead; `validate/Frontmatter.java`
   is what fails the PR on it. Don't add a `featured: true` frontmatter flag
   instead — that's two files to edit per rotation and, worse, two to remember to
   unset, which is exactly how a "featured" author silently stays featured
@@ -712,7 +726,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   organizations" count and the "other board members" strip on a member page all
   come from it. Adding a member is one markdown file (copy
   `template/board-member.md`) plus a logo in `static/images/pages/board/`;
-  there is no list to edit and no count to update. `ValidateFrontmatter.java`
+  there is no list to edit and no count to update. `validate/Frontmatter.java`
   fails the PR on a member missing `type: "board"` or `logo`, because both fail
   silently -- a missing type drops the member off `/board/` entirely, and a
   missing logo renders an initial that looks deliberate.
@@ -780,19 +794,19 @@ should catch a mistake at PR time rather than letting it fail silently.
   name (`views-key.html` uses `.File.ContentBaseName`, not the URL) and
   WordPress counted 52,272 views on `/calendar/` against 20,984 on
   `/all-events/`: the events page is now named `calendar.md`, serves
-  `/calendar/`, and carries `/all-events/` as an alias. `FetchWpViews.java`'s
+  `/calendar/`, and carries `/all-events/` as an alias. `transfer/LegacyViews.java`'s
   `PAGE_ALIASES` maps WP's `all-events` page onto the `calendar` key so it does
   not land in `unmatched`; `fetchAll` merges duplicate keys with `Math::max`, so
   the page keeps the higher count rather than summing two views of one page.
   Renaming the file back would silently move the key and drop the bigger number.
 - **The calendar has two sources, and the split is "does it publish a feed?"**
-  `scripts/FetchJugEvents.java` syncs JUG meetups into `data/jug-events.json`
+  `scripts/fetch/JugEvents.java` syncs JUG meetups into `data/jug-events.json`
   daily; a conference has no feed anyone can subscribe to, so those are
   **hand-added, one file per event, by pull request**:
   `data/events/<slug>.yaml`, `name`/`url`/`start` required, `end`/`type`/
   `venue`/`city`/`country`/`online` optional. `template/event.yaml` is the
   starter file (its comments are the schema), `CONTRIBUTING.md` the
-  walkthrough, and `ValidateFrontmatter.checkEvents` the PR-time check.
+  walkthrough, and `Frontmatter.checkEvents` the PR-time check.
 
   Three things about it are load-bearing:
   1. **The generated file is `jug-events.json`, not `events.json`.** Hugo maps
@@ -928,7 +942,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   correctly get no navigation. `linkTitle:` carries the short step name, because
   the full titles all begin "Getting Started with Java - " and a nav card should
   not repeat that; `.LinkTitle` falls back to `.Title`, so it stays optional.
-  `ValidateFrontmatter.checkSeriesWeights` fails the PR on two pages in a folder
+  `Frontmatter.checkSeriesWeights` fails the PR on two pages in a folder
   claiming the same weight -- Hugo's sort is stable, so that would silently
   mis-order the series rather than error.
 
@@ -989,7 +1003,7 @@ should catch a mistake at PR time rather than letting it fail silently.
 
   One post carried the same string as a PREFIX -- "foojay – a place for friends
   of OpenJDKJava 21+ on Raspberry Pi Zero 2 ..." -- because the `<h1>` fallback
-  in `ConvertPosts.scrapePost` picked up a site-title element sitting next to the
+  in `Posts.scrapePost` picked up a site-title element sitting next to the
   post title and Jsoup's `text()` ran the two together. `stripSiteSuffix` is now
   `stripSiteName` and strips that leading copy as well as the trailing "| foojay"
   one, so a re-scrape cannot put it back. Anchored to that exact wording, so a
@@ -1005,7 +1019,7 @@ should catch a mistake at PR time rather than letting it fail silently.
 - **Sponsor folders can be renamed; the WP URL still has to work.**
   `hugo.toml`'s `[permalinks] sponsors` maps the section to
   `/sponsor/:slugorcontentbasename/`, so the bundle FOLDER name is the URL. By
-  default `ConvertSponsors.java` names it after the WordPress slug, which
+  default `transfer/Sponsors.java` names it after the WordPress slug, which
   reproduces the legacy path exactly. Some WP slugs are SEO strings rather than
   names, though (Azul's was
   `azul-enterprise-java-platform-foojay-io-gold-sponsor`), so folders do get
@@ -1033,7 +1047,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   30 foojay slugs are substrings of another slug
   (`...-postgresql-connections` inside `...-postgresql-connections-part-2-batching`),
   so it would silently show one post's comments on another. Strict matches a hash
-  of the term in the discussion body instead. `ImportWpComments.java` writes that
+  of the term in the discussion body instead. `transfer/Comments.java` writes that
   hash marker exactly the way giscus does (`<!-- sha1: … -->`, SHA-1 of the term,
   verified against giscus's `lib/utils.ts`), so an imported thread and one giscus
   creates for a new post are indistinguishable. Change one of these three
@@ -1046,7 +1060,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   body posted by a reader is not ours to rewrite afterwards. So `baseof.html`
   emits `<meta name="giscus:backlink">` on post pages from
   `partials/production-url.html` (= `params.productionBaseURL` + the page's path,
-  with the trial prefix stripped), and `ImportWpComments.java` writes the same
+  with the trial prefix stripped), and `transfer/Comments.java` writes the same
   `https://foojay.io/today/<slug>/` form. That URL is correct *today* as well —
   it's the live WordPress post — so nothing is broken before the switch. Note the
   backlink is deliberately not `.Params.canonical`: on the 838 cross-posted
@@ -1080,14 +1094,14 @@ should catch a mistake at PR time rather than letting it fail silently.
   nothing on the page waits for it) and renders nothing unless
   `[params.views] endpoint` is set, so a local or unconfigured build never
   counts. The number shown comes from `data/views.json`, refreshed by
-  `scripts/FetchViewCounts.java` at every deploy and four times a day, and is baked into
+  `scripts/fetch/ViewCounts.java` at every deploy and four times a day, and is baked into
   the HTML — no JavaScript, no dash that becomes a number after paint, and it
   works on cards, which a per-page client-side fetch cannot do well.
   Up-to-a-day-stale is not a defect in a view count.
 
   **`partials/views-key.html` is the single definition of what gets counted and
   under which key** — `views.html` (display), `views-beacon.html` (counting) and
-  `FetchWpViews.java` (the import) all follow it, and a drift between them shows
+  `transfer/LegacyViews.java` (the import) all follow it, and a drift between them shows
   up as a number that silently stays at zero rather than as an error. Add a
   section to the `$counted` slice there and it starts being counted; nothing
   else changes, because the Worker validates the key's *shape* rather than an
@@ -1111,6 +1125,6 @@ should catch a mistake at PR time rather than letting it fail silently.
   off on foojay.io. Don't go looking for the import that "must have failed".
 - Posts are contributed via PR (see `CONTRIBUTING.md`); the repo is public.
 - **`data/jugs.yaml` is generated, not authored here** — it's overwritten by
-  `scripts/FetchJugs.java` at every deploy and every external-content sync. Never add/edit a
+  `scripts/fetch/Jugs.java` at every deploy and every external-content sync. Never add/edit a
   JUG entry directly in this repo; changes belong upstream in
   [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs).

@@ -1,7 +1,7 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
 //DEPS com.fasterxml.jackson.core:jackson-databind:2.17.1
-//SOURCES HtmlToMarkdown.java
+//SOURCES ../shared/HtmlToMarkdown.java
 //JAVA 21+
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -36,12 +36,12 @@ import java.util.stream.Stream;
  * markdown files under content/posts/.
  *
  * Usage:
- *   jbang scripts/ConvertPosts.java                       (full crawl)
- *   jbang scripts/ConvertPosts.java --max-pages 5         (cap listing pages -- quick test)
- *   jbang scripts/ConvertPosts.java --days 14             (only posts published in the last 14 days)
- *   jbang scripts/ConvertPosts.java --since 2026-01-01    (only posts published on/after a date)
- *   jbang scripts/ConvertPosts.java --concurrency 12      (posts scraped per page in parallel; default 8)
- *   jbang scripts/ConvertPosts.java --url https://foojay.io/today/some-post/   (single post)
+ *   jbang scripts/transfer/Posts.java                       (full crawl)
+ *   jbang scripts/transfer/Posts.java --max-pages 5         (cap listing pages -- quick test)
+ *   jbang scripts/transfer/Posts.java --days 14             (only posts published in the last 14 days)
+ *   jbang scripts/transfer/Posts.java --since 2026-01-01    (only posts published on/after a date)
+ *   jbang scripts/transfer/Posts.java --concurrency 12      (posts scraped per page in parallel; default 8)
+ *   jbang scripts/transfer/Posts.java --url https://foojay.io/today/some-post/   (single post)
  *
  * Each listing page's posts are scraped + converted concurrently on virtual
  * threads (see crawlAndConvert), bounded by --concurrency to stay polite.
@@ -58,7 +58,7 @@ import java.util.stream.Stream;
  * theme changes; scrapePost() logs a WARNING when the content selector matches nothing.
  *
  * BODY CONVERSION:
- * The body is converted to Markdown by HtmlToMarkdown.java (included via
+ * The body is converted to Markdown by shared/HtmlToMarkdown.java (included via
  * `//SOURCES`), which also pulls foojay-hosted images local
  * (co-located per post under static/images/posts/<year>/<month>/<slug>/) and flags
  * the JDoodle / EnlighterJS widgets so the theme only loads their scripts where used.
@@ -84,7 +84,7 @@ import java.util.stream.Stream;
  * reuses an existing bundle by slug). The public URL stays /today/<slug>/ via the
  * `slug` frontmatter + hugo.toml permalinks, wherever the bundle lives.
  */
-public class ConvertPosts {
+public class Posts {
 
     // ---- CONFIG -------------------------------------------------------
     static final String BASE_URL = "https://foojay.io";
@@ -101,7 +101,7 @@ public class ConvertPosts {
     // Each post is a Hugo leaf bundle: content/posts/<y>/<m>/<d>/<slug>/index.md
     // with its images co-located in that directory (referenced by bare filename,
     // resolved as page-bundle resources). Body conversion is shared with the other
-    // converters via HtmlToMarkdown.java; the image Options are built per-post
+    // converters via shared/HtmlToMarkdown.java; the image Options are built per-post
     // (imageBaseDir = the bundle dir, empty url prefix -> relative filenames).
     static final String USER_AGENT = "foojay-hugo-migration-bot/1.0";
 

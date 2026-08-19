@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
-//SOURCES HtmlToMarkdown.java
+//SOURCES ../shared/HtmlToMarkdown.java
 //JAVA 17+
 
 import org.jsoup.parser.Parser;
@@ -39,20 +39,20 @@ import java.util.stream.Stream;
  *
  * This runs over content that has already been converted. The conversion
  * scripts emit fences directly from now on (HtmlToMarkdown.codeFence), so a
- * re-run of ConvertPosts/ConvertPages produces the same shape and this script
+ * re-run of Posts/ConvertPages produces the same shape and this script
  * becomes a no-op. It stays in the repo because the WordPress site keeps
  * serving Enlighter markup until cutover, so a late re-scrape of an
  * already-migrated page can reintroduce blocks.
  *
  * Usage:
- *   jbang scripts/MigrateEnlighterToFences.java --dry-run   (report only, changes nothing)
- *   jbang scripts/MigrateEnlighterToFences.java
- *   jbang scripts/MigrateEnlighterToFences.java --path content/pages
+ *   jbang scripts/cleanup/EnlighterToFences.java --dry-run   (report only, changes nothing)
+ *   jbang scripts/cleanup/EnlighterToFences.java
+ *   jbang scripts/cleanup/EnlighterToFences.java --path content/pages
  *
  * Idempotent: a file with no Enlighter blocks left is not rewritten. Frontmatter
  * is never touched -- only the body below the closing `---` is scanned.
  */
-public class MigrateEnlighterToFences {
+public class EnlighterToFences {
 
     static final Path DEFAULT_ROOT = Path.of("content");
 

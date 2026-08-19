@@ -42,10 +42,10 @@ import java.util.TreeMap;
  * blinked is not a trade worth making.
  *
  * Usage:
- *   jbang scripts/FetchViewCounts.java
- *   jbang scripts/FetchViewCounts.java --endpoint https://foojay.io/api/views
+ *   jbang scripts/fetch/ViewCounts.java
+ *   jbang scripts/fetch/ViewCounts.java --endpoint https://foojay.io/api/views
  */
-public class FetchViewCounts {
+public class ViewCounts {
 
     static final String DEFAULT_ENDPOINT = "https://foojay.io/api/views";
     static final Path OUTPUT_FILE = Path.of("data/views.json");
@@ -88,7 +88,7 @@ public class FetchViewCounts {
             if (counts.isEmpty()) {
                 // An empty counter is indistinguishable from a broken one here,
                 // and blanking every number on the site is the worse outcome of
-                // the two. Seed it first (scripts/FetchWpViews.java --seed).
+                // the two. Seed it first (scripts/transfer/LegacyViews.java --seed).
                 keepExisting("counter returned no rows");
                 return;
             }

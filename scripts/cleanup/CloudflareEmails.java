@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.jsoup:jsoup:1.17.2
-//SOURCES HtmlToMarkdown.java
+//SOURCES ../shared/HtmlToMarkdown.java
 //JAVA 21+
 
 import org.jsoup.Jsoup;
@@ -35,7 +35,7 @@ import java.util.stream.Stream;
  *
  * HtmlToMarkdown.decodeCloudflareEmails now undoes all of this at conversion
  * time, so a re-scrape emits the right thing and a re-run here is a no-op. This
- * script exists for the same reason MigrateEnlighterToFences.java does: the
+ * script exists for the same reason cleanup/EnlighterToFences.java does: the
  * damage is already sitting in content/, and the stored files carry only the
  * placeholder -- the encoded copy was dropped by the converter. So unlike the
  * other migrations this one cannot repair from what it has: it re-fetches each
@@ -47,25 +47,25 @@ import java.util.stream.Stream;
  * doesn't match is left untouched and reported, never guessed at.
  *
  * Usage:
- *   jbang scripts/FixCloudflareEmails.java              (repair content/)
- *   jbang scripts/FixCloudflareEmails.java --dry-run    (report only)
- *   jbang scripts/FixCloudflareEmails.java --path content/pages
+ *   jbang scripts/cleanup/CloudflareEmails.java              (repair content/)
+ *   jbang scripts/cleanup/CloudflareEmails.java --dry-run    (report only)
+ *   jbang scripts/cleanup/CloudflareEmails.java --path content/pages
  */
-public final class FixCloudflareEmails {
+public final class CloudflareEmails {
 
     private static final Path CONTENT_DIR = Path.of("content");
     private static final String SITE = "https://foojay.io";
     // WP Engine's WAF 403s a bare Java user agent (same finding as
-    // FetchWpViews.java), and this script is read-only against public pages.
+    // transfer/LegacyViews.java), and this script is read-only against public pages.
     private static final String USER_AGENT =
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
             + "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
     private static final int TIMEOUT_MS = 30_000;
 
-    // Same containers ConvertPosts.java converts from, so the elements counted
+    // Same containers transfer/Posts.java converts from, so the elements counted
     // here are exactly the ones that produced the placeholders -- the site
     // chrome (footer "hello@foojay.io", share-by-email button) is outside them.
-    // .article__main-content is what ConvertPosts.java converts a post from;
+    // .article__main-content is what transfer/Posts.java converts a post from;
     // .about__content is the equivalent container on foojay's WordPress *pages*
     // (privacy policy, terms of use). Scoping to them keeps the site chrome out
     // -- the footer menu carries a "hello@foojay.io" link on every page.
@@ -95,7 +95,7 @@ public final class FixCloudflareEmails {
     private static final Pattern ENCODED_LINK = Pattern.compile(
             "\\[([^\\]]*)\\]\\(/cdn-cgi/l/email-protection#([0-9a-fA-F]+)((?:\\s+\"[^\"]*\")?)\\)");
 
-    private FixCloudflareEmails() {
+    private CloudflareEmails() {
     }
 
     public static void main(String[] args) throws Exception {
@@ -115,7 +115,7 @@ public final class FixCloudflareEmails {
         List<Path> files;
         try (Stream<Path> walk = Files.walk(root)) {
             files = walk.filter(p -> p.toString().endsWith(".md"))
-                    .filter(FixCloudflareEmails::isAffected)
+                    .filter(CloudflareEmails::isAffected)
                     .sorted()
                     .toList();
         }

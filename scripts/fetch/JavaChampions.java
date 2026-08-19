@@ -32,10 +32,10 @@ import java.util.*;
  * NOTE: unlike data/jugs.yaml, there are no coordinates here (yet). A
  * pending PR (aalmiray/java-champions#318, not merged as of writing) adds a
  * `location: {lat, lng}` per member via a one-time geocoding script. Once
- * that merges, this can pick it up the same way scripts/FetchJugs.java
+ * that merges, this can pick it up the same way scripts/fetch/Jugs.java
  * reads JUG coordinates from GlobalWWJugs's `location` field.
  */
-public class FetchJavaChampions {
+public class JavaChampions {
 
     static final String SOURCE_URL = "https://raw.githubusercontent.com/aalmiray/java-champions/main/java-champions.yml";
     static final String EDIT_URL = "https://github.com/aalmiray/java-champions/edit/main/java-champions.yml";
@@ -136,7 +136,7 @@ public class FetchJavaChampions {
 
     static void writeYaml(List<Map<String, Object>> champions) throws IOException {
         String header = """
-                # Java Champions -- generated automatically by scripts/FetchJavaChampions.java
+                # Java Champions -- generated automatically by scripts/fetch/JavaChampions.java
                 # from https://github.com/aalmiray/java-champions's java-champions.yml, the
                 # data behind https://javachampions.org/.
                 #

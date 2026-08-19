@@ -1,9 +1,9 @@
 # Deployed by hand, not by CI -- see README.md in this folder.
 #
-# Same reasoning as scripts/ConvertSponsors.java and ImportWpComments.java:
+# Same reasoning as scripts/transfer/Sponsors.java and transfer/Comments.java:
 # this writes to something outside the repo, on the live foojay.io domain,
 # with a credential CI has no business holding. The Hugo build only ever READS
-# the counts (scripts/FetchViewCounts.java), and that needs no secret.
+# the counts (scripts/fetch/ViewCounts.java), and that needs no secret.
 
 name = "foojay-views"
 main = "src/index.js"

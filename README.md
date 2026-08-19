@@ -8,7 +8,7 @@ over once it proves to be solid and better.
 ## Structure
 
 Content is a mix of **converted** pages (scraped from the live WordPress site by
-the `Convert*` scripts) and a few **hand-written** pages. Blog posts and author
+the `scripts/transfer/` scrapers) and a few **hand-written** pages. Blog posts and author
 profiles are [Hugo leaf bundles](https://gohugo.io/content-management/page-bundles/) —
 a folder per item, with the Markdown in `index.md` and any images co-located in
 the same folder.
@@ -45,7 +45,11 @@ the same folder.
   disappears with the WordPress site.
 - `themes/foojay/` — the Hugo theme (structural recreation of the current site;
   see "Known limitations" below).
-- `scripts/` — jbang/Java conversion, external-data, and validation scripts (see below).
+- `scripts/` — jbang/Java scripts, grouped by lifetime and job: `fetch/`
+  (external data, keeps running after cutover), `transfer/` (pulls from the
+  live WordPress site), `cleanup/` (one-off rewrites of what's already in
+  `content/`), `validate/` (PR-time checks) and `shared/` (common code).
+  `scripts/README.md` is the index; see also "Scripts" below.
 - `worker/views/` — the read counter: a Cloudflare Worker + D1 table on
   `foojay.io/api/views/*`. Deployed by hand, not by CI (see "Read counter").
 - `template/` — starter files (all fields documented) for a post, an author, a
@@ -55,15 +59,15 @@ the same folder.
 
 ## Scripts (jbang)
 
-Requires [JBang](https://www.jbang.dev/) and **Java 21+** (`ConvertPosts.java`
-uses virtual threads and `FetchWpViews.java` an auto-closing executor; the rest
+Requires [JBang](https://www.jbang.dev/) and **Java 21+** (`transfer/Posts.java`
+uses virtual threads and `transfer/LegacyViews.java` an auto-closing executor; the rest
 need 17+).
 
 **Content conversion** — scrape the live WordPress site into `content/`:
 
 ```bash
-jbang scripts/ConvertPosts.java     # /today/ posts        -> content/posts/
-jbang scripts/ConvertAuthors.java   # /today/author/       -> content/authors/
+jbang scripts/transfer/Posts.java     # /today/ posts        -> content/posts/
+jbang scripts/transfer/Authors.java   # /today/author/       -> content/authors/
 ```
 
 These are **idempotent** — safe to re-run on a schedule during the trial. They
@@ -71,25 +75,25 @@ update existing bundles rather than duplicating them, look posts/authors up by
 slug so a bundle stays put across re-runs, and skip any file whose frontmatter is
 hand-marked `frozen: true`. Body-HTML→Markdown conversion (image localization,
 YouTube/`{{< img >}}` shortcodes, widget preservation) is shared via
-`HtmlToMarkdown.java`.
+`shared/HtmlToMarkdown.java`.
 
 The one-off page and glossary scrapers (`ConvertPages.java`, `ConvertPedia.java`)
 have been removed — `content/pages/` and `content/pedia/` are done and now
 maintained by hand. Only posts and authors still get re-scraped, since those keep
 growing on the live site.
 
-Each `Convert*` script also supports `--url <single page URL>` to test/tune its
-scraping against one real page, and `ConvertPosts` supports `--days N` / `--since
+Each `transfer/` scraper also supports `--url <single page URL>` to test/tune its
+scraping against one real page, and `transfer/Posts.java` supports `--days N` / `--since
 <date>` to convert only a recent window.
 
 **External data** — regenerate the `data/*` files from community-run upstreams
 (run at every deploy, and on a cron; see "Workflows"):
 
 ```bash
-jbang scripts/FetchJugs.java            # -> data/jugs.yaml          (World-Wide-JUGs/GlobalWWJugs)
-jbang scripts/FetchJavaChampions.java   # -> data/java-champions.yaml (aalmiray/java-champions)
-jbang scripts/FetchJugEvents.java      # -> data/jug-events.json     (iCal feeds: JUG sites, Google Calendar, Meetup)
-jbang scripts/FetchViewCounts.java      # -> data/views.json          (our own counter, worker/views/)
+jbang scripts/fetch/Jugs.java            # -> data/jugs.yaml          (World-Wide-JUGs/GlobalWWJugs)
+jbang scripts/fetch/JavaChampions.java   # -> data/java-champions.yaml (aalmiray/java-champions)
+jbang scripts/fetch/JugEvents.java      # -> data/jug-events.json     (iCal feeds: JUG sites, Google Calendar, Meetup)
+jbang scripts/fetch/ViewCounts.java      # -> data/views.json          (our own counter, worker/views/)
 ```
 
 The `data/*` files are **generated — never hand-edit them.** Add or fix a JUG or
@@ -100,17 +104,17 @@ sync.
 **Validation / one-offs:**
 
 ```bash
-jbang scripts/ValidateFrontmatter.java  # PR-time content check (also runs in CI)
+jbang scripts/validate/Frontmatter.java  # PR-time content check (also runs in CI)
 ```
 
 ```bash
-jbang scripts/ImportWpComments.java --dry-run   # legacy WP comments -> GitHub Discussions
-jbang scripts/FetchWpViews.java                 # legacy WP view counts -> data/legacy-views.json
+jbang scripts/transfer/Comments.java --dry-run   # legacy WP comments -> GitHub Discussions
+jbang scripts/transfer/LegacyViews.java                 # legacy WP view counts -> data/legacy-views.json
 ```
 
-`MigratePostsToBundles.java`, `MigrateAuthorsToBundles.java`, and
-`SanitizeSlugs.java` are one-time migrations that have already been run — kept for
-reference, not part of the normal loop. `ImportWpComments.java` is a one-off too,
+Everything under `scripts/cleanup/` is a one-time migration that has already
+been run — kept for reference (and because a late re-scrape can reintroduce
+what it repaired), not part of the normal loop. `transfer/Comments.java` is a one-off too,
 but it hasn't been run yet — see "Comments".
 
 ## Local preview
@@ -159,7 +163,7 @@ One-time setup:
    secrets — read them from [giscus.app](https://giscus.app) or from:
 
    ```bash
-   GITHUB_TOKEN=... jbang scripts/ImportWpComments.java --print-config
+   GITHUB_TOKEN=... jbang scripts/transfer/Comments.java --print-config
    ```
 
 A thread is keyed on the **post slug** (`data-mapping="specific"`), not its
@@ -171,16 +175,16 @@ comments to the wrong thread.
 
 ### Importing the legacy WordPress comments
 
-`scripts/ImportWpComments.java` moves the existing foojay.io comments (580
+`scripts/transfer/Comments.java` moves the existing foojay.io comments (580
 approved ones across 270 posts) into those discussions, so cutover doesn't reset
 every post to zero comments.
 
 ```bash
 export GITHUB_TOKEN=...                                   # the foojay.io account's token
-jbang scripts/ImportWpComments.java --dry-run             # mapping check, writes nothing
-jbang scripts/ImportWpComments.java --dry-run --slug java-for-scripting   # + the exact bodies
-jbang scripts/ImportWpComments.java --slug java-for-scripting             # one post, for real
-jbang scripts/ImportWpComments.java                       # the lot
+jbang scripts/transfer/Comments.java --dry-run             # mapping check, writes nothing
+jbang scripts/transfer/Comments.java --dry-run --slug java-for-scripting   # + the exact bodies
+jbang scripts/transfer/Comments.java --slug java-for-scripting             # one post, for real
+jbang scripts/transfer/Comments.java                       # the lot
 ```
 
 - The token must belong to **the foojay.io account**, since the original
@@ -224,7 +228,7 @@ Two halves, deliberately separate:
 | | |
 |---|---|
 | **Counting** | `partials/views-beacon.html` posts the slug via `navigator.sendBeacon` on a post page. Renders nothing unless `[params.views] endpoint` is set in `hugo.toml`, so a local build never counts. A `sessionStorage` flag keeps a refresh from counting twice; it dies with the tab. |
-| **Displaying** | `partials/views.html` reads `data/views.json`, refreshed at every deploy and four times a day by `scripts/FetchViewCounts.java`. The number is baked into the HTML — no JavaScript, no dash that turns into a number after paint. |
+| **Displaying** | `partials/views.html` reads `data/views.json`, refreshed at every deploy and four times a day by `scripts/fetch/ViewCounts.java`. The number is baked into the HTML — no JavaScript, no dash that turns into a number after paint. |
 
 `data/views.json` currently holds the WordPress numbers (copied from
 `data/legacy-views.json`), so the counts are already on the site before the
@@ -241,7 +245,7 @@ store. `partials/views-key.html` is the single definition — **add a section
 there and it starts being counted**, no other change needed.
 
 Baking the number in means it can be a few hours stale, which for a view count
-is not a defect, and `FetchViewCounts.java` never fails a build: if the counter
+is not a defect, and `fetch/ViewCounts.java` never fails a build: if the counter
 is unreachable it keeps the committed `data/views.json` and carries on.
 
 ### Importing the WordPress view counts
@@ -259,9 +263,9 @@ Worker goes live. The script says so on every run rather than leaving a section
 quietly empty.
 
 ```bash
-jbang scripts/FetchWpViews.java                 # -> data/legacy-views.json (~3 min)
-jbang scripts/FetchWpViews.java --limit 20      # quick test run
-VIEWS_SEED_TOKEN=... jbang scripts/FetchWpViews.java --seed   # ...and push to the counter
+jbang scripts/transfer/LegacyViews.java                 # -> data/legacy-views.json (~3 min)
+jbang scripts/transfer/LegacyViews.java --limit 20      # quick test run
+VIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed   # ...and push to the counter
 ```
 
 **Run it again whenever you want to catch up with WordPress, right up to
@@ -281,12 +285,12 @@ held in a separate column and are never overwritten.
 - **`sync-external-content.yml`** — cron, once a day: refreshes `data/jugs.yaml`,
   `data/java-champions.yaml`, `data/views.json` and `data/jug-events.json`,
   committing the results.
-- **`pr-check.yml`** — on PRs: runs `ValidateFrontmatter.java` and a Hugo build
+- **`pr-check.yml`** — on PRs: runs `validate/Frontmatter.java` and a Hugo build
   (GitHub Pages has no per-PR preview URL).
 
 ## Known limitations / needs verification
 
-- **Scraping selectors** (in the `Convert*` scripts) are best-effort, based on
+- **Scraping selectors** (in the `transfer/` scrapers) are best-effort, based on
   foojay.io's current theme markup + standard WordPress/Yoast conventions.
   Title/description/canonical/image are reliable (standard meta tags + JSON-LD).
   Categories, tags, author links, and related-posts links use configurable CSS
@@ -295,11 +299,11 @@ held in a separate column and are never overwritten.
 - **Cloudflare cache**: the `/today/` listing is CDN-cached, so a *just*-published
   post can be missing from a crawl for a while even though its own page is live.
   Convert it directly with `--url` if you need it immediately.
-- **JUG events** (`FetchJugEvents.java`) come from whatever iCal feed a JUG
+- **JUG events** (`fetch/JugEvents.java`) come from whatever iCal feed a JUG
   publishes — its own `.ics`, a public Google Calendar, or Meetup's iCal export
   — plus the schema.org JSON-LD on each event page for venues. No Meetup Pro
   subscription, no OAuth token, no secret to configure. Runs once a day from
-  `sync-external-content.yml`. `DiscoverJugCalendars.java` (by hand) reports
+  `sync-external-content.yml`. `fetch/DiscoverJugCalendars.java` (by hand) reports
   JUGs whose site advertises a calendar their upstream directory entry doesn't
   record, so it can be fixed in GlobalWWJugs.
 - **Theme** (`themes/foojay/`) recreates the current site's structure (nav, post

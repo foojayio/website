@@ -24,7 +24,7 @@
       re-scrape is correct. The encoding is reversible (first hex byte is the XOR
       key), so nothing is guessed. Anything that decodes to a non-address is
       restored as text, never linked.
-    * `scripts/FixCloudflareEmails.java` repaired what was already in content/.
+    * `scripts/cleanup/CloudflareEmails.java` repaired what was already in content/.
       Unlike the other migrations it cannot repair from what it has -- the stored
       files kept only the placeholder -- so it re-fetches each page and reads the
       addresses back out, and only writes when the placeholder count matches the
@@ -50,7 +50,7 @@
     sets `TYPOGRAPHIC_SMARTS = false`, so every imported comment (and every future
     scrape) keeps the real character. `TYPOGRAPHIC_QUOTES` stays ON deliberately:
     ASCII quotes are easier to type and diff and render identically.
-  * `content/` was normalized too (`NormalizeMarkdown.java` pass 3: 2207 stand-ins
+  * `content/` was normalized too (`cleanup/NormalizeMarkdown.java` pass 3: 2207 stand-ins
     in 499 files) — **cosmetic**, done so a re-scrape of an old post doesn't show
     a dash change on top of the real edits. Verified render-neutral: of 10,021
     built files every HTML page is byte-identical once `&mdash;` is decoded, and
@@ -62,7 +62,7 @@
   * Watch out when diffing builds in this repo: `sidebar.html` shuffles its author
     and JUG widgets per page, so 1483 files differ build-to-build with identical
     content. Exclude the `<aside class="sidebar">` block or you'll chase ghosts.
-* [X] Image galleries -> `{{< gallery >}}` shortcode, migrated with `scripts/MigrateGalleriesToShortcode.java`
+* [X] Image galleries -> `{{< gallery >}}` shortcode, migrated with `scripts/cleanup/GalleriesToShortcode.java`
 * [X] Tags -> won't do as we have fixed list of categories
 
 ### Missing Content
@@ -114,7 +114,7 @@
     colliding in a permanent store. `partials/views-key.html` is the single
     definition: add a section there and it starts being counted, no other change
     and no Worker redeploy.
-  * `scripts/FetchWpViews.java` is the import. foojay.io runs the Post Views
+  * `scripts/transfer/LegacyViews.java` is the import. foojay.io runs the Post Views
     Counter plugin, which serves the numbers on an **open** REST route, so no WP
     admin, database or credential is needed — same posture as the comment import.
     **2210 entries, 13.8M views**: all 2145 posts (the 3 emoji slugs resolve
@@ -144,15 +144,15 @@
     `[params.giscus]` is in `hugo.toml`. **It renders nothing until you finish
     three manual steps** (see README "Comments"): enable Discussions with a
     comment-accepting "Blog Comments" category, install the giscus app, and paste
-    `repoId`/`categoryId` — `jbang scripts/ImportWpComments.java --print-config`
+    `repoId`/`categoryId` — `jbang scripts/transfer/Comments.java --print-config`
     prints the block ready to paste.
   * A thread is keyed on the post **slug**, not the pathname: the trial deploy
     serves `/website/today/<slug>/` and production `/today/<slug>/`, so
     pathname-keyed threads would all be orphaned at cutover. `data-strict="1"`
     with it, because 30 slugs are substrings of another slug and fuzzy matching
     would show one post's comments on another.
-  * Existing comments: **not** ConvertPosts.java — a new one-off,
-    `scripts/ImportWpComments.java`. ConvertPosts writes files and gets re-run
+  * Existing comments: **not** transfer/Posts.java — a new one-off,
+    `scripts/transfer/Comments.java`. Posts writes files and gets re-run
     constantly; this writes irreversible public content to GitHub and needs a
     token, so mixing them would put a credential and a GitHub side effect in
     every routine re-scrape.
@@ -175,7 +175,7 @@
   * See for background info: https://foojay.io/today/featured-authors-july-and-august-2026/
   * Specified in `hugo.toml`: `params.featuredAuthors = ["cristobal-escobar", "shai-almog"]`
     (author slugs). Rotating them monthly = editing that one line; everything
-    shown comes from the author's own bundle. `ValidateFrontmatter.java` fails
+    shown comes from the author's own bundle. `validate/Frontmatter.java` fails
     the PR on a slug with no matching author.
   * `/today/author/`: two spotlight cards above the A-Z grid
     (`partials/featured-authors-band.html`).

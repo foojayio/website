@@ -3,7 +3,7 @@
 
   partials/views-key.html decides what is counted and under which key; this
   partial only renders. The number is baked in at build time from
-  data/views.json (refreshed by scripts/FetchViewCounts.java from the counter in
+  data/views.json (refreshed by scripts/fetch/ViewCounts.java from the counter in
   worker/views/), so it needs no JavaScript and can't shift the layout after
   paint. Renders nothing when a page has no count yet -- correct on a brand new
   post, on every author page until the Worker has been live a while (WordPress

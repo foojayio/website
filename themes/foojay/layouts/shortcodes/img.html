@@ -1,5 +1,5 @@
 {{- /* Formatted content image (float / resized / with caption), emitted by
-       HtmlToMarkdown.java instead of raw <img> HTML so the src goes through
+       shared/HtmlToMarkdown.java instead of raw <img> HTML so the src goes through
        relURL and picks up the baseURL subpath. Params: src, class, alt, width,
        height, caption. */ -}}
 {{- $src := partial "resource-url.html" (dict "page" .Page "src" (.Get "src")) -}}

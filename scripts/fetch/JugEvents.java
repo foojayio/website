@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
  * Pulls upcoming events for every JUG in data/jugs.yaml that publishes a
  * calendar, and writes data/jug-events.json for the calendar page at /calendar/.
  * Runs once a day from .github/workflows/sync-external-content.yml, which runs
- * FetchJugs.java first so this always sees the current upstream JUG list.
+ * fetch/Jugs.java first so this always sees the current upstream JUG list.
  *
  * NOT MEETUP-SPECIFIC, and NO CREDENTIAL IS NEEDED. It was
  * FetchMeetupEvents.java, POSTing to Meetup's GraphQL API behind a paid Meetup
@@ -61,19 +61,19 @@ import java.util.regex.Pattern;
  * posing as a browser, run one at a time with a pause between them, and the
  * calendar links every event back to its source page.
  *
- * A JUG with neither field is skipped, not guessed at: scripts/DiscoverJugCalendars.java
+ * A JUG with neither field is skipped, not guessed at: scripts/fetch/DiscoverJugCalendars.java
  * reports the ones whose own website advertises a calendar or a Meetup group
  * so the missing field can be fixed upstream in GlobalWWJugs, where the rest
  * of data/jugs.yaml comes from.
  *
  * Usage:
- *   jbang scripts/FetchJugEvents.java                  # full sync
- *   jbang scripts/FetchJugEvents.java --dry-run        # report, write nothing
- *   jbang scripts/FetchJugEvents.java --limit 3        # first 3 JUGs only
- *   jbang scripts/FetchJugEvents.java --jug DarmstadtJUG
- *   jbang scripts/FetchJugEvents.java --no-venues      # skip the JSON-LD pass
+ *   jbang scripts/fetch/JugEvents.java                  # full sync
+ *   jbang scripts/fetch/JugEvents.java --dry-run        # report, write nothing
+ *   jbang scripts/fetch/JugEvents.java --limit 3        # first 3 JUGs only
+ *   jbang scripts/fetch/JugEvents.java --jug DarmstadtJUG
+ *   jbang scripts/fetch/JugEvents.java --no-venues      # skip the JSON-LD pass
  */
-public class FetchJugEvents {
+public class JugEvents {
 
     static final Path JUGS_FILE = Path.of("data/jugs.yaml");
     static final Path OUTPUT_FILE = Path.of("data/jug-events.json");
@@ -200,7 +200,7 @@ public class FetchJugEvents {
                 Instant.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS)));
         output.put("source", "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) "
                 + "and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION "
-                + "or the schema.org JSON-LD on the event page -- see scripts/FetchJugEvents.java");
+                + "or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java");
         output.put("groups", allGroups);
 
         String json = JSON.writerWithDefaultPrettyPrinter().writeValueAsString(output) + "\n";

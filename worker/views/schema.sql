@@ -4,7 +4,7 @@
 --
 --   legacy  the view count WordPress's Post Views Counter plugin had for this
 --           page at the last import. Overwritten wholesale by /seed, which is
---           re-run until cutover (see scripts/FetchWpViews.java). Author pages
+--           re-run until cutover (see scripts/transfer/LegacyViews.java). Author pages
 --           have none -- the plugin's user-archive counting is off on
 --           foojay.io -- so they simply start at zero.
 --   live    views counted by this Worker since it went up. Only ever

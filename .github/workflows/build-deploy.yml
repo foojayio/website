@@ -33,14 +33,14 @@ jobs:
       # a day by .github/workflows/sync-external-content.yml, independent of
       # deploys.
       - name: Refresh JUG list
-        run: jbang scripts/FetchJugs.java
+        run: jbang scripts/fetch/Jugs.java
 
       # Refreshes data/java-champions.yaml from the official Java Champions
       # directory (https://github.com/aalmiray/java-champions) so /java-champions/
       # is never more than one build behind it. Also run once a day by
       # .github/workflows/sync-external-content.yml, independent of deploys.
       - name: Refresh Java Champions list
-        run: jbang scripts/FetchJavaChampions.java
+        run: jbang scripts/fetch/JavaChampions.java
 
       # Refreshes data/views.json from the read counter (worker/views/), so the
       # view count on each post and card is baked into the HTML rather than
@@ -51,7 +51,7 @@ jobs:
       # the one data source here that moves continuously, which is why it has
       # its own workflow instead of riding the daily external-content sync.
       - name: Refresh view counts
-        run: jbang scripts/FetchViewCounts.java
+        run: jbang scripts/fetch/ViewCounts.java
 
       - name: Commit updated data
         run: |

@@ -22,7 +22,7 @@ jobs:
         uses: jbangdev/setup-jbang@main
 
       - name: Validate post/author/page frontmatter
-        run: jbang scripts/ValidateFrontmatter.java
+        run: jbang scripts/validate/Frontmatter.java
 
       - name: Build site (catches template/content errors)
         run: hugo --gc --minify

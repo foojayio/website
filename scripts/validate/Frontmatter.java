@@ -21,10 +21,10 @@ import java.util.stream.Stream;
  * substitute: catches missing required frontmatter fields and dangling
  * related_posts references before merge, without needing a rendered preview.
  *
- * Usage: jbang scripts/ValidateFrontmatter.java
+ * Usage: jbang scripts/validate/Frontmatter.java
  * Exits non-zero (failing the PR check) if any problems are found.
  */
-public class ValidateFrontmatter {
+public class Frontmatter {
 
     /** A clean URL slug: lowercase letters/digits, separated by single dashes or
      *  underscores. Flags emoji, spaces, uppercase, etc. */
@@ -286,7 +286,7 @@ public class ValidateFrontmatter {
     /**
      * A post title carrying an emoji.
      *
-     * `ConvertPosts.stripEmoji` takes these off everything it scrapes, but a
+     * `Posts.stripEmoji` takes these off everything it scrapes, but a
      * contributor writes their own frontmatter by hand and the scraper never
      * sees that title -- so without this a decorated headline sails straight
      * into the repo. It fails at PR time rather than silently, because a title

@@ -54,21 +54,21 @@ import java.util.stream.Stream;
  * The conversion scripts drop heading ids from now on
  * (HtmlToMarkdown.toMarkdown), so a re-scrape of the still-live WordPress site
  * produces the same shape and this script becomes a no-op. It stays in the repo
- * for the same reason MigrateEnlighterToFences.java does: WordPress keeps
+ * for the same reason cleanup/EnlighterToFences.java does: WordPress keeps
  * serving the anchors until cutover, so a late re-scrape through an older
  * checkout can reintroduce them.
  *
  * Usage:
- *   jbang scripts/StripHeadingAnchors.java --dry-run   (report only, changes nothing)
- *   jbang scripts/StripHeadingAnchors.java
- *   jbang scripts/StripHeadingAnchors.java --path content/pages
+ *   jbang scripts/cleanup/HeadingAnchors.java --dry-run   (report only, changes nothing)
+ *   jbang scripts/cleanup/HeadingAnchors.java
+ *   jbang scripts/cleanup/HeadingAnchors.java --path content/pages
  *
  * Idempotent: a file with no anchors left is not rewritten. Frontmatter is never
  * touched -- only the body below the closing `---` is scanned -- and neither are
  * fenced code blocks, where `{#...}` is somebody's CSS or shell parameter
  * expansion rather than a heading anchor.
  */
-public class StripHeadingAnchors {
+public class HeadingAnchors {
 
     static final Path DEFAULT_ROOT = Path.of("content");
 

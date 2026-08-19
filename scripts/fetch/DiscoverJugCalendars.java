@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * upstream World Wide JUGs directory doesn't record it -- so they are absent
  * from /calendar/ even though their events are public.
  *
- * scripts/FetchJugEvents.java only reads `calendar:` and `meetup_slug:` from
+ * scripts/fetch/JugEvents.java only reads `calendar:` and `meetup_slug:` from
  * data/jugs.yaml, and deliberately doesn't go looking: data/jugs.yaml is
  * generated from GlobalWWJugs and a fetcher that scraped a JUG's home page on
  * every run would be both fragile and invisible. But 45 of the 90 JUGs have
@@ -30,9 +30,9 @@ import java.util.regex.Pattern;
  * the rest of the directory lives and where every other consumer of it
  * benefits too.
  *
- * Run by hand, like ConvertSponsors.java and for the same reason. It never
+ * Run by hand, like transfer/Sponsors.java and for the same reason. It never
  * writes data/jugs.yaml: that file is generated, and a local edit would be
- * overwritten by the next FetchJugs.java run.
+ * overwritten by the next fetch/Jugs.java run.
  *
  * A candidate is only reported as confident when it VERIFIES: the Meetup slug
  * has to resolve to a real group whose iCal feed loads, and that group's name
@@ -42,9 +42,9 @@ import java.util.regex.Pattern;
  * "needs a human", never as a suggestion.
  *
  * Usage:
- *   jbang scripts/DiscoverJugCalendars.java              # report
- *   jbang scripts/DiscoverJugCalendars.java --all        # include JUGs that already have a feed
- *   jbang scripts/DiscoverJugCalendars.java --yaml       # print the upstream frontmatter lines
+ *   jbang scripts/fetch/DiscoverJugCalendars.java              # report
+ *   jbang scripts/fetch/DiscoverJugCalendars.java --all        # include JUGs that already have a feed
+ *   jbang scripts/fetch/DiscoverJugCalendars.java --yaml       # print the upstream frontmatter lines
  */
 public class DiscoverJugCalendars {
 
