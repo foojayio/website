@@ -1,0 +1,50 @@
+{{- /*
+  The site feed: the newest posts, and nothing else.
+
+  Hugo's embedded RSS template ranges over the home page's .RegularPages, which
+  here means every page on the site -- so /index.xml shipped 2584 items and
+  3.85 MB, led by the Java Quick Start tutorial steps carrying `pubDate Mon, 01
+  Jan 0001` because those pages have no date. A reader polling that on a phone
+  pays for the whole archive every time, and some aggregators drop an item whose
+  pubDate won't parse.
+
+  So: filtered to Section "posts" (a feed of "what's new on foojay" means
+  articles, which is also what the WordPress feed served), newest first, and cut
+  to [services.rss] limit in hugo.toml -- the same value the section, term and
+  per-author feeds honour, so there is one number to change.
+*/ -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $posts = $posts.ByDate.Reverse -}}
+{{- $limit := site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 }}{{ $posts = $posts | first $limit }}{{ end -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ site.Title }}</title>
+    <link>{{ site.Home.Permalink }}</link>
+    <description>{{ site.Params.description }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale }}</language>
+    {{- with (index $posts 0) }}
+    <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    {{- with .OutputFormats.Get "rss" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q/>" .Permalink .MediaType.Type | safeHTML }}
+    {{- end }}
+    {{- range $posts }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{- range .Params.authors }}
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">{{ with partial "author-page.html" . }}{{ .Title }}{{ else }}{{ . }}{{ end }}</dc:creator>
+      {{- end }}
+      {{- range .Params.categories }}
+      <category>{{ . }}</category>
+      {{- end }}
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ .Description | default .Summary | plainify | htmlUnescape | transform.XMLEscape | safeHTML }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

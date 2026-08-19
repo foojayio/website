@@ -7,7 +7,7 @@ url: "/today/author/"
 # without affecting posts, pedia, or generic pages elsewhere in the site.
 # Template: themes/foojay/layouts/authors/page.rss.xml
 cascade:
-  - _target:
+  - target:
       kind: page
     outputs:
       - html

@@ -13,7 +13,7 @@
 {{- $key := partial "views-key.html" . -}}
 {{- $count := 0 -}}
 {{- with $key -}}
-  {{- with site.Data.views -}}
+  {{- with hugo.Data.views -}}
     {{- with index . $key -}}{{- $count = . -}}{{- end -}}
   {{- end -}}
 {{- end -}}
