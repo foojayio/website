@@ -9,6 +9,7 @@
 
 <div class="layout-with-sidebar">
   <div class="content-col">
+    {{ partial "pagination.html" (dict "page" . "position" "top") }}
     <div class="post-grid">
       {{/* Which posts, and how they page, is defined once in
            partials/paginator.html -- baseof.html needs the same pager in <head>
@@ -19,7 +20,7 @@
         {{ partial "post-card.html" . }}
       {{ end }}
     </div>
-    {{ template "_internal/pagination.html" . }}
+    {{ partial "pagination.html" (dict "page" . "position" "bottom") }}
   </div>
   {{ partial "sidebar.html" . }}
 </div>

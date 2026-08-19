@@ -1,0 +1,121 @@
+{{- /*
+  The pager control, rendered above AND below a paginated grid.
+
+  Replaces `{{ template "_internal/pagination.html" . }}`, which produced three
+  problems the CSS could not fix from the outside:
+
+    1. It wraps each ARROW's glyph in a nested `<span>` inside the `<a>`. The
+       theme styles both `.page-item a` and `.page-item span` as a button, so an
+       arrow rendered a box inside a box -- padding twice over, which is why the
+       arrows stood taller than the numbers.
+    2. It marks the current page `<li class="page-item active"><a aria-current>`,
+       an ANCHOR -- while the theme's highlight rule targeted `.active span`,
+       written against an older Hugo template that used a span there. So the
+       selected page was never highlighted.
+    3. It renders a disabled First/Previous as an `<a>` with no href, which is
+       not a link at all.
+
+  Here every cell is one element with one class (`pagination__btn`), so arrows,
+  numbers, the current page and the disabled ends are the same box by
+  construction and cannot drift apart again. Non-links are `<span>`, so keyboard
+  focus only ever lands on somewhere you can actually go.
+
+  The ends are NUMBERED rather than "««"/"»»": a button reading 215 both jumps to
+  the last page and says how many there are, which is why there is no "Page 3 of
+  215" caption under the row -- the row already answers it. The « and » arrows are
+  pinned to the row's outer edges instead of riding along with the numbers, so
+  they stay under the cursor while paging.
+
+  Called as `partial "pagination.html" (dict "page" . "position" "top")`.
+  `position` only picks the spacing modifier; omit it for the default (bottom).
+
+  The pager comes from partials/paginator.html, the same single definition
+  baseof.html uses for the canonical -- see there for why .Paginate is never
+  called directly.
+*/ -}}
+
+{{- $page := .page | default . -}}
+{{- $position := .position | default "bottom" -}}
+{{- $pager := partial "paginator.html" $page -}}
+
+{{- with $pager -}}
+{{- if gt .TotalPages 1 -}}
+{{- $cur := .PageNumber -}}
+{{- $total := .TotalPages -}}
+{{/* ALWAYS five numbered pages when there are at least five, centred on the
+     current one and slid (not truncated) at either end -- so page 1 shows 1-5
+     and page 215 shows 211-215, rather than trailing off into two buttons. 215
+     pages will not fit on a phone, which is what the window plus the First/Last
+     arrows are for.
+
+     Integer arithmetic throughout, deliberately: math.Min/math.Max return
+     float64, so comparing their result to an int with `eq` is always false and
+     the end-clamp silently never fired -- page 215 rendered three buttons. */}}
+{{- $size := 5 -}}
+{{- if gt $size $total }}{{ $size = $total }}{{ end -}}
+{{- $from := sub $cur 2 -}}
+{{- if lt $from 1 }}{{ $from = 1 }}{{ end -}}
+{{- $to := add $from (sub $size 1) -}}
+{{- if gt $to $total -}}
+  {{- $to = $total -}}
+  {{- $from = add (sub $total $size) 1 -}}
+{{- end -}}
+
+<nav class="pagination pagination--{{ $position }}" aria-label="Pagination">
+  {{/* Three parts, not one flat list: the row is a fixed width with the arrows
+       pushed to its outer edges and the numbers centred in between, so &laquo;
+       and &raquo; sit at the SAME x-position on every page. In a single flex row
+       they drifted sideways as the cell count changed (the "1" and last-page
+       buttons and the ellipses come and go) and as 1-digit numbers became
+       3-digit ones -- which moves the two controls you click repeatedly out from
+       under the cursor while paging. */}}
+  <div class="pagination__row">
+    {{/* A span, not a hrefless anchor, when there is nowhere to go -- and
+         aria-hidden, because "Previous, unavailable" is noise to a screen reader
+         on a page already announced as current. */}}
+    {{- if .HasPrev }}
+    <a class="pagination__btn" href="{{ .Prev.URL }}" rel="prev" aria-label="Previous page"><span aria-hidden="true">&laquo;</span></a>
+    {{- else }}
+    <span class="pagination__btn is-disabled" aria-hidden="true">&laquo;</span>
+    {{- end }}
+
+    <ul class="pagination__list">
+      {{/* The jump to page 1 is the NUMBER 1, not a "&laquo;&laquo;" glyph, and the jump
+           to the end is the last page's number -- so the control states how many
+           pages there are instead of needing a "Page 3 of 215" line under it.
+           Only shown when the window doesn't already reach that end, and the
+           ellipsis only when a page is actually skipped: at 6 pages the window
+           covers 1-5, so "5 &hellip; 6" would claim a gap that isn't there. */}}
+      {{- if gt $from 1 }}
+      <li><a class="pagination__btn" href="{{ (index $pager.Pagers 0).URL }}" aria-label="Page 1">1</a></li>
+        {{- if gt $from 2 }}
+      <li><span class="pagination__gap" aria-hidden="true">&hellip;</span></li>
+        {{- end }}
+      {{- end }}
+
+      {{- range $p := seq $from $to }}
+        {{- $target := index $pager.Pagers (sub $p 1) }}
+        {{- if eq $p $cur }}
+      <li><span class="pagination__btn is-current" aria-current="page" aria-label="Page {{ $p }}, current page">{{ $p }}</span></li>
+        {{- else }}
+      <li><a class="pagination__btn" href="{{ $target.URL }}" aria-label="Page {{ $p }}">{{ $p }}</a></li>
+        {{- end }}
+      {{- end }}
+
+      {{- if lt $to $total }}
+        {{- if lt $to (sub $total 1) }}
+      <li><span class="pagination__gap" aria-hidden="true">&hellip;</span></li>
+        {{- end }}
+      <li><a class="pagination__btn" href="{{ (index $pager.Pagers (sub $total 1)).URL }}" aria-label="Page {{ $total }} (last page)">{{ $total }}</a></li>
+      {{- end }}
+    </ul>
+
+    {{- if .HasNext }}
+    <a class="pagination__btn" href="{{ .Next.URL }}" rel="next" aria-label="Next page"><span aria-hidden="true">&raquo;</span></a>
+    {{- else }}
+    <span class="pagination__btn is-disabled" aria-hidden="true">&raquo;</span>
+    {{- end }}
+  </div>
+</nav>
+{{- end -}}
+{{- end -}}

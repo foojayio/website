@@ -1057,15 +1057,57 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 /* ----------------------------------------------------------- pagination -- */
 
-.pagination { display: flex; gap: .35rem; flex-wrap: wrap; justify-content: center; list-style: none; margin: 2.5rem 0 0; padding: 0; }
-.pagination .page-item a, .pagination .page-item span {
-  display: inline-block; min-width: 40px; text-align: center;
-  padding: .45rem .7rem; border-radius: var(--radius-sm);
-  border: 1px solid var(--border); color: var(--ink); font-weight: 600; font-size: .92rem;
+/* Markup comes from partials/pagination.html, not Hugo's internal template --
+   see that file for the three things this could not fix from the outside. Every
+   cell (arrow, number, current, disabled) is ONE .pagination__btn, so they share
+   a box by construction. The old rules styled `.page-item a` AND
+   `.page-item span`, which double-boxed the arrows (their glyph sits in a nested
+   span) and highlighted `.active span` -- an element Hugo stopped emitting. */
+.pagination { margin: 2rem 0 0; }
+.pagination--top { margin: 0 0 1.75rem; }
+/* Fixed-width row with the arrows at its outer edges and the numbers centred
+   between them, so « and » land on the same x-position on every page. The
+   number of cells in the middle changes as you page (the "1"/last buttons and
+   the ellipses come and go, and 1-digit numbers become 3-digit) -- in one flat
+   flex row that dragged the two most-clicked controls sideways under the cursor.
+   `flex: 1` on the list is what holds the arrows out at the edges. */
+.pagination__row {
+  display: flex; align-items: center; gap: .35rem;
+  width: min(34rem, 100%); margin-inline: auto;
 }
-.pagination .page-item.active span { background: var(--brand-accent); border-color: var(--brand-accent); color: #1c1204; }
-.pagination .page-item a:hover { border-color: var(--ink); text-decoration: none; }
-.pagination .page-item.disabled span { color: var(--ink-muted); opacity: .5; }
+.pagination__list {
+  flex: 1;
+  display: flex; gap: .35rem; flex-wrap: wrap; justify-content: center;
+  list-style: none; margin: 0; padding: 0;
+}
+/* Below the fixed width there is no space to hold the arrows apart, so let the
+   whole thing collapse to a centred wrapping row rather than overflow. */
+@media (max-width: 30rem) {
+  .pagination__row { flex-wrap: wrap; justify-content: center; }
+  .pagination__list { flex: 0 1 auto; }
+}
+/* inline-flex + a fixed height, rather than padding: a glyph and a 3-digit
+   number have different intrinsic box sizes, and padding alone let them differ. */
+.pagination__btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.5rem; height: 2.5rem; padding: 0 .6rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--ink); font-weight: 600; font-size: .92rem; line-height: 1;
+  background: var(--surface);
+}
+.pagination__btn > span { display: block; line-height: 1; }
+a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
+.pagination__btn.is-current {
+  background: var(--brand-accent); border-color: var(--brand-accent);
+  color: #1c1204; cursor: default;
+}
+.pagination__btn.is-disabled { color: var(--ink-muted); opacity: .45; background: transparent; }
+.pagination__gap {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 1.5rem; height: 2.5rem; color: var(--ink-muted);
+}
+/* No .pagination__count: the first/last buttons are numbered, so the row itself
+   says how many pages there are (see partials/pagination.html). */
 
 /* --------------------------------------------------------------- footer -- */
 
@@ -1350,7 +1392,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 :root[data-theme="dark"] .author-avatar,
 :root[data-theme="dark"] .featured-side__head img,
 :root[data-theme="dark"] .post-single img { filter: brightness(.92); }
-:root[data-theme="dark"] .pagination .page-item.active span { color: #14100a; }
+:root[data-theme="dark"] .pagination__btn.is-current { color: #14100a; }
 /* A light-background PNG logo needs no change, but a dark-ink one would vanish
    on the dark surface — set params.logoDark to supply an alternate file, or
    uncomment this to invert the single asset.

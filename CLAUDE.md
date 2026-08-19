@@ -617,6 +617,35 @@ should catch a mistake at PR time rather than letting it fail silently.
   assigning into a variable, because Hugo rejects a `return` that other
   statements fall through past.
 
+- **`partials/pagination.html` is ours, not `_internal/pagination.html`.** Hugo's
+  internal template produced three faults that could not be fixed from the CSS
+  side, because they are in the markup: it wraps each arrow's glyph in a nested
+  `<span>` inside the `<a>` (and the theme styled both `.page-item a` and
+  `.page-item span` as a button, so arrows were a box inside a box and stood
+  taller than the numbers); it marks the current page with an `<a
+  aria-current>` while the theme's highlight rule targeted `.active span`, an
+  element Hugo stopped emitting, so the selected page was never highlighted at
+  all; and it renders a disabled First/Previous as an `<a>` with no href, which
+  is not a link. Now every cell is one `.pagination__btn` -- arrows, numbers,
+  current and disabled share a box by construction -- sized with `inline-flex` +
+  a fixed `height` rather than padding, because a glyph and a 3-digit number
+  have different intrinsic widths and padding alone let their heights drift.
+  Non-links are `<span>`, so focus only lands on somewhere you can go.
+
+  Three behaviours worth keeping: it renders **above and below** the grid (a
+  215-page archive is several screens, so a pager only at the bottom means
+  scrolling past everything to page again); the window is **always five numbers**
+  when five exist, slid rather than truncated at the ends, so page 1 shows 1-5
+  and page 215 shows 211-215; and the ends are the **numbers** 1 and `$total`
+  rather than `««`/`»»`, which is what removed the "Page 3 of 215" caption -- a
+  button reading 215 already says how many pages there are. The ellipsis appears
+  only when a page is genuinely skipped, so at 6 pages the row reads `1 2 3 4 5 6`
+  and not `1 2 3 4 5 … 6`.
+
+  Use **integer arithmetic** for the window. `math.Min`/`math.Max` return
+  float64, so `eq` against an int page number is always false -- the end-clamp
+  written that way silently never fired and page 215 rendered three buttons.
+
 - **Feeds are posts-only and capped at 30.** `[services.rss] limit = 30` in
   `hugo.toml` -- Hugo's default is unbounded, which made `/index.xml` 3.85 MB of
   2584 items led by Quick Start pages carrying `pubDate Mon, 01 Jan 0001`, a date
