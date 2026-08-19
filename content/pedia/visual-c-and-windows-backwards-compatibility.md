@@ -28,3 +28,9 @@ Windows 7 and Server 2008 are no longer supported by any current OpenJDK version
 ## The DLL Runtime Model
 
 The JVM native library (`jvm.dll`) is statically linked against the MSVC runtime. The Java tools (`java.exe`, `javac.exe`, etc.) are dynamically linked. This means `vcruntime140.dll` must be present on the system or bundled with the JRE. Most JDK distributions include it in `<JRE>/bin` to avoid dependency issues.
+
+## See Also
+
+* [JDK Distributions](/pedia/jdk-distributions/)
+* [OpenJDK](/pedia/openjdk/)
+* [Compact Profiles](/pedia/compactprofiles/)

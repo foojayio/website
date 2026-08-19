@@ -17,3 +17,9 @@ OpenJDK does not have a single exhaustive coding style guide. Sub-components com
 Changes to OpenJDK are reviewed and approved by **Reviewers** — contributors with Reviewer role in a given repository. Multiple Reviewers must approve a change before it is integrated; the exact number depends on the sub-project. The integration itself is performed by a **Committer** using the [OpenJDK GitHub bots](https://github.com/openjdk/skara) (the Skara tooling).
 
 Overall compatibility is assured through the [TCK](https://foojay.io/pedia/tck/) test suite. New features, compatibility-breaking changes, and reproducible bugs should be accompanied by [jtreg](https://foojay.io/pedia/jtreg-test-suites/) test cases. Larger changes are tracked via [JEPs](https://foojay.io/pedia/jep-jdk-enhancement-proposal/).
+
+## See Also
+
+* [Technology Compatibility Kit](/pedia/tck/)
+* [jtreg Test Suites](/pedia/jtreg-test-suites/)
+* [JEP (JDK Enhancement Proposal)](/pedia/jep-jdk-enhancement-proposal/)

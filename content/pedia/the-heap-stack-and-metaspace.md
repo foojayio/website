@@ -14,3 +14,9 @@ The JVM divides memory into several distinct regions, each serving a different p
 **Metaspace** (called PermGen in Java 7 and earlier) stores class metadata — the structure of loaded classes, method bytecode, and constant pool data. Unlike the old PermGen, Metaspace lives in native memory outside the Java heap and grows automatically by default, though you can cap it with `-XX:MaxMetaspaceSize`. A `OutOfMemoryError: Metaspace` usually signals a class-loader leak, where new class definitions are being generated continuously without the old ones being unloaded.
 
 More reading on Foojay: [Debugging RAM: Java Garbage Collection – Java Heap Deep Dive](https://foojay.io/today/debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1/)
+
+## See Also
+
+* [Garbage Collection](/pedia/garbage-collection/)
+* [GC Algorithms: G1, ZGC, and Shenandoah](/pedia/gc-algorithms-g1-zgc-and-shenandoah/)
+* [Epsilon GC](/pedia/epsilon-gc/)

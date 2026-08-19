@@ -16,3 +16,9 @@ More reading on Foojay:
 * [What Should I Know About Garbage Collection as a Java Developer?](https://foojay.io/today/what-should-i-know-about-garbage-collection-as-a-java-developer/)
 * [The Ultimate 10 Years Java Garbage Collection Guide (2016--2026)](https://foojay.io/today/the-ultimate-10-years-java-garbage-collection-guide-2016-2026-choosing-the-right-gc-for-every-workload/)
 * [Debugging RAM: Java Garbage Collection -- Java Heap Deep Dive (Part 1)](https://foojay.io/today/debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1/)
+
+## See Also
+
+* [Epsilon GC](/pedia/epsilon-gc/)
+* [GC Algorithms: G1, ZGC, and Shenandoah](/pedia/gc-algorithms-g1-zgc-and-shenandoah/)
+* [The Heap, Stack, and Metaspace](/pedia/the-heap-stack-and-metaspace/)

@@ -22,3 +22,9 @@ Distributions from Adoptium (Temurin), Azul, Amazon Corretto, Red Hat, BellSoft,
 ## Java 8 Legacy Note
 
 During the Java 8 era (2014--2019), Oracle published CPU and PSU updates as distinct downloadable packages. Free public CPU updates for Java 8 ended for commercial users in January 2019. Extended support for Java 8 is available commercially from Oracle and multiple third-party vendors through at least 2030.
+
+## See Also
+
+* [LTS and Non-LTS Releases](/pedia/lts-and-non-lts-releases/)
+* [JDK Distributions](/pedia/jdk-distributions/)
+* [Security and Vulnerability Management](/pedia/security-vulnerability-management/)

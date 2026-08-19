@@ -27,3 +27,9 @@ An incubator module is a provisional API module (`jdk.incubator.*`) shipped in a
 * Graduate to standard modules, change significantly, or be dropped based on feedback
 
 The Vector API (for SIMD-style operations using Java) has been in incubation since Java 16; it has been progressively refined and is expected to finalise once Project Valhalla delivers the value type support it depends on.
+
+## See Also
+
+* [Records](/pedia/records/)
+* [Sealed Classes](/pedia/sealed-classes/)
+* [Pattern Matching](/pedia/pattern-matching/)

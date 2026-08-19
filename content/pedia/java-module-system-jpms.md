@@ -12,3 +12,9 @@ Before JPMS, the JVM had only the concept of the classpath — a flat list of ja
 JPMS also enables the `jlink` tool, which can assemble a custom, minimal JRE containing only the JDK modules your application actually needs. The result can be significantly smaller than a full JDK installation.
 
 Adoption in the wider ecosystem has been gradual. Many libraries ship unnamed (classpath) modules alongside or instead of proper named modules, so it is common to run modularised JDK internals while leaving application code on the classpath.
+
+## See Also
+
+* [Class Loading](/pedia/class-loading/)
+* [Compact Profiles](/pedia/compactprofiles/)
+* [Foreign Function & Memory API](/pedia/foreign-function-memory-api/)

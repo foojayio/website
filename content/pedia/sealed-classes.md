@@ -16,3 +16,9 @@ Each permitted subtype must itself be declared `final`, `sealed`, or `non-sealed
 The main benefit is enabling exhaustive `switch` expressions. If you switch over a sealed `Shape`, the compiler can verify that you have handled every permitted subtype and will warn you if you add a new subtype without updating existing switch statements. This eliminates an entire class of bugs that previously required discipline and code review to catch.
 
 Sealed classes work best in combination with records (for the leaf types) and pattern matching (for the switch logic).
+
+## See Also
+
+* [Switch Expressions](/pedia/switch-expressions/)
+* [Records](/pedia/records/)
+* [Pattern Matching](/pedia/pattern-matching/)

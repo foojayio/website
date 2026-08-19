@@ -22,3 +22,12 @@ The most significant active and recent projects:
 **Project CRaC** — Developed [CRaC (Coordinated Restore at Checkpoint)](https://foojay.io/pedia/crac-coordinated-restore-at-checkpoint/), a mechanism for checkpointing a warmed JVM and restoring it instantly. Led by Azul.
 
 More information on all OpenJDK projects: [openjdk.org/projects/](https://openjdk.org/projects/)
+
+## See Also
+
+* [JEP (JDK Enhancement Proposal)](/pedia/jep-jdk-enhancement-proposal/)
+* [Virtual Threads](/pedia/virtual-threads/)
+* [Foreign Function & Memory API](/pedia/foreign-function-memory-api/)
+* [AOT Compilation (Ahead-of-Time)](/pedia/aot-compilation-ahead-of-time/)
+* [CRaC (Coordinated Restore at Checkpoint)](/pedia/crac-coordinated-restore-at-checkpoint/)
+* [Value Objects (Project Valhalla)](/pedia/value-objects-project-valhalla/)

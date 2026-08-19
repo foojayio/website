@@ -24,4 +24,9 @@ try (Arena arena = Arena.ofConfined()) {
 
 The FFM API supersedes both JNI (for calling native functions) and the older `sun.misc.Unsafe` (for off-heap memory). JNI remains available for backwards compatibility but is no longer the recommended approach for new code.
 
-See also: [Bytecode](https://foojay.io/pedia/bytecode/), [Java Module System (JPMS)](https://foojay.io/pedia/java-module-system-jpms/)
+## See Also
+
+* [Bytecode](/pedia/bytecode/)
+* [Java Module System (JPMS)](/pedia/java-module-system-jpms/)
+* [Java Native Interface (JNI)](/pedia/java-native-interface-jni/)
+* [OpenJDK Projects](/pedia/openjdk-projects/)

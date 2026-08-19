@@ -13,4 +13,8 @@ Class loaders follow a **parent-delegation model** : before attempting to load a
 
 The JPMS (Java Module System, introduced in Java 9) added a layer of explicit control on top of class loading: modules declare which packages they export and which modules they require, and the JVM enforces those boundaries at load time. This makes accidental access to internal APIs a hard error rather than a runtime surprise.
 
-See also: [Java Module System (JPMS)](https://foojay.io/pedia/java-module-system-jpms/), [Bytecode](https://foojay.io/pedia/bytecode/)
+## See Also
+
+* [Java Module System (JPMS)](/pedia/java-module-system-jpms/)
+* [Bytecode](/pedia/bytecode/)
+* [Java Native Interface (JNI)](/pedia/java-native-interface-jni/)

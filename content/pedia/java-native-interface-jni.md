@@ -13,4 +13,8 @@ Using JNI requires writing glue code in C/C++ that bridges Java method signature
 
 For new code in Java 22+, the **Foreign Function \& Memory (FFM) API** is the recommended alternative. FFM achieves the same goals — calling native functions, reading and writing native memory — entirely from Java, without any native glue code, and with explicit lifetime management that prevents many classes of memory safety bugs. JNI remains available for backwards compatibility.
 
-See also: [Foreign Function \& Memory API](https://foojay.io/pedia/foreign-function-memory-api/), [Bytecode](https://foojay.io/pedia/bytecode/)
+## See Also
+
+* [Foreign Function & Memory API](/pedia/foreign-function-memory-api/)
+* [Bytecode](/pedia/bytecode/)
+* [Java Module System (JPMS)](/pedia/java-module-system-jpms/)

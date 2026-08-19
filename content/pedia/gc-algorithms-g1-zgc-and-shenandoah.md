@@ -31,11 +31,15 @@ Developed by Red Hat and included in mainline OpenJDK since Java 15, Shenandoah 
 
 A no-op collector: it allocates memory but **never reclaims it** . When the heap is exhausted, the JVM exits. Epsilon is useful for performance benchmarking (eliminating GC noise from measurements), short-lived tools where GC overhead would outweigh its benefit, and testing applications for allocation behaviour. Not suitable for long-running production workloads. Use `-XX:+UseEpsilonGC` (requires `-XX:+UnlockExperimentalVMOptions`).
 
-## See Also
+More reading on Foojay:
 
-* [Garbage Collection](https://foojay.io/pedia/garbage-collection/)
-* [Stop-the-World Pause](https://foojay.io/pedia/stop-the-world-pause/)
-* [Latency](https://foojay.io/pedia/latency/)
 * [What Should I Know About Garbage Collection as a Java Developer?](https://foojay.io/today/what-should-i-know-about-garbage-collection-as-a-java-developer/)
 * [Apache Cassandra 4.0: Taming Tail Latencies with Java 16 ZGC](https://foojay.io/today/apache-cassandra-4-0-taming-tail-latencies-with-java-16-zgc/)
 * [Optimizing the Garbage Collector when Migrating Cloud Workloads](https://foojay.io/today/optimizing-the-garbage-collector-when-migrating-cloud-workloads/)
+
+## See Also
+
+* [Garbage Collection](/pedia/garbage-collection/)
+* [Stop-the-World Pause](/pedia/stop-the-world-pause/)
+* [Latency](/pedia/latency/)
+* [Epsilon GC](/pedia/epsilon-gc/)

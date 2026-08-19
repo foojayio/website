@@ -10,3 +10,9 @@ The Disco API (short for Universal OpenJDK Discovery API) is a database and REST
 The API is maintained by Foojay and developed by Gerrit Grunwald. Its source code is available on [GitHub](https://github.com/foojayio/discoapi). The base URL for the REST endpoints is `https://api.foojay.io/disco/v3.0/`, and a full [Swagger UI](https://api.foojay.io/swagger-ui) makes the API easy to explore interactively. Key endpoints let you query major versions, list all distributions, and filter packages by any combination of version, architecture, OS, and JavaFX bundling.
 
 Read more about the Disco API in [this Foojay post](https://foojay.io/today/disco-api-helping-you-to-find-any-openjdk-distribution/).
+
+## See Also
+
+* [JDK Distributions](/pedia/jdk-distributions/)
+* [OpenJDK](/pedia/openjdk/)
+* [OpenJDK Projects](/pedia/openjdk-projects/)

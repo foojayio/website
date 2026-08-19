@@ -19,3 +19,10 @@ Several tools can generate thread dumps:
 * **`kill -3 <pid>` (Linux/macOS)** — Sends SIGQUIT to the JVM, which prints a thread dump to stdout. Useful when the process is unresponsive.
 
 > **Note on jconsole:** jconsole (the GUI monitoring tool) has been deprecated and its removal is planned for a future JDK release. For new workflows, prefer `jcmd`, JDK Mission Control, or a profiler.
+
+## See Also
+
+* [JFR (Java Flight Recorder)](/pedia/jfr-java-flight-recorder/)
+* [Heap Dump](/pedia/heap-dump/)
+* [JDK Mission Control (JMC)](/pedia/jdk-mission-control-jmc/)
+* [Virtual Threads](/pedia/virtual-threads/)

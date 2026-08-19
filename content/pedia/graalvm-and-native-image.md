@@ -20,4 +20,9 @@ GraalVM Native Image is widely used in the cloud-native space — notably by the
 
 GraalVM is available in two editions: **GraalVM Community** (open source, GPLv2+CE, maintained at [github.com/oracle/graal](https://github.com/oracle/graal)) and **GraalVM Oracle** (free under GFTC, with additional optimisations and support).
 
-See also: [AOT Compilation](https://foojay.io/pedia/aot-compilation-ahead-of-time/), [JIT Compilation](https://foojay.io/pedia/jit-compilation-just-in-time/), [JDK Distributions](https://foojay.io/pedia/jdk-distributions/)
+## See Also
+
+* [AOT Compilation (Ahead-of-Time)](/pedia/aot-compilation-ahead-of-time/)
+* [JIT Compilation (Just-in-Time)](/pedia/jit-compilation-just-in-time/)
+* [JDK Distributions](/pedia/jdk-distributions/)
+* [Project Leyden](/pedia/project-leyden/)

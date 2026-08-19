@@ -13,4 +13,8 @@ Subsequent Leyden phases will extend the idea to profile-guided AOT compilation:
 
 Leyden's design goals are deliberately conservative: full JVM semantics must be preserved, and the training/restore process must be transparent to application code. Applications do not need to be modified; the optimisation is applied at the JVM layer.
 
-See also: [AOT Compilation](https://foojay.io/pedia/aot-compilation-ahead-of-time/), [CRaC](https://foojay.io/pedia/crac-coordinated-restore-at-checkpoint/), [GraalVM and Native Image](https://foojay.io/pedia/graalvm-and-native-image/)
+## See Also
+
+* [AOT Compilation (Ahead-of-Time)](/pedia/aot-compilation-ahead-of-time/)
+* [CRaC (Coordinated Restore at Checkpoint)](/pedia/crac-coordinated-restore-at-checkpoint/)
+* [GraalVM and Native Image](/pedia/graalvm-and-native-image/)

@@ -12,3 +12,10 @@ The JVM starts by interpreting bytecode. When a method has been called enough ti
 Modern JDKs ship with two JIT compilers: the traditional HotSpot C2 compiler, and optionally the **Graal JIT compiler** (available via GraalVM distributions or as an experimental option in mainline JDK via JVMCI). Graal is written in Java and can perform more sophisticated optimisations in some workloads, but C2 remains the default for most use cases.
 
 The cost of JIT compilation is a warm-up period: an application running for the first time may take seconds to minutes before it reaches peak throughput. This is a significant disadvantage in short-lived or serverless deployments. The alternatives are [AOT Compilation](https://foojay.io/pedia/aot-compilation-ahead-of-time/) (pre-compiling to native code) and [CRaC](https://foojay.io/pedia/crac-coordinated-restore-at-checkpoint/) (checkpointing a warmed JVM and restoring it).
+
+## See Also
+
+* [Bytecode](/pedia/bytecode/)
+* [AOT Compilation (Ahead-of-Time)](/pedia/aot-compilation-ahead-of-time/)
+* [CRaC (Coordinated Restore at Checkpoint)](/pedia/crac-coordinated-restore-at-checkpoint/)
+* [GraalVM and Native Image](/pedia/graalvm-and-native-image/)

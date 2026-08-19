@@ -12,3 +12,9 @@ JFR was originally a commercial feature in Oracle JDK and was open-sourced and c
 The companion tool for viewing JFR recordings is **JDK Mission Control (JMC)**, which provides a graphical interface for exploring the captured data. Together, JFR and JMC let you diagnose performance problems, memory pressure, lock contention, and other production issues — often without having to reproduce the problem in a controlled environment.
 
 More reading on Foojay: [JDK Flight Recorder article archive](https://foojay.io/today/category/tools/jdk-flight-recorder/)
+
+## See Also
+
+* [JDK Mission Control (JMC)](/pedia/jdk-mission-control-jmc/)
+* [Thread Dump](/pedia/thread-dump/)
+* [Virtual Threads](/pedia/virtual-threads/)

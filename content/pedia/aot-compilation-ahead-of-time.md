@@ -15,4 +15,10 @@ Within OpenJDK itself, **Project Leyden** ([JEP 483](https://openjdk.org/jeps/48
 
 A simpler built-in mechanism is **AppCDS (Application Class Data Sharing)**, available since Java 13, which serialises the parsed and linked class state to a shared archive that future JVM launches reload in milliseconds. AppCDS requires no code changes and is compatible with any JDK distribution.
 
-See also: [JIT Compilation](https://foojay.io/pedia/jit-compilation-just-in-time/), [CRaC](https://foojay.io/pedia/crac-coordinated-restore-at-checkpoint/)
+## See Also
+
+* [JIT Compilation (Just-in-Time)](/pedia/jit-compilation-just-in-time/)
+* [CRaC (Coordinated Restore at Checkpoint)](/pedia/crac-coordinated-restore-at-checkpoint/)
+* [GraalVM and Native Image](/pedia/graalvm-and-native-image/)
+* [OpenJDK Projects](/pedia/openjdk-projects/)
+* [Project Leyden](/pedia/project-leyden/)

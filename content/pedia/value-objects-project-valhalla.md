@@ -23,4 +23,8 @@ The trade-off is that value objects cannot be used as synchronisation monitors (
 
 Project Valhalla is a long-running effort. Its current state can be tracked at [openjdk.org/projects/valhalla](https://openjdk.org/projects/valhalla).
 
-See also: [OpenJDK Projects](https://foojay.io/pedia/openjdk-projects/), [Records](https://foojay.io/pedia/records/)
+## See Also
+
+* [OpenJDK Projects](/pedia/openjdk-projects/)
+* [Records](/pedia/records/)
+* [Sealed Classes](/pedia/sealed-classes/)

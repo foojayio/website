@@ -13,4 +13,11 @@ Popular distributions include Adoptium Temurin, Amazon Corretto, Azul Zulu, Azul
 
 When choosing a distribution, the key questions are: do you need commercial support and SLAs? How long do you need free security updates for a given LTS version? Do you need certified builds for regulated environments? For most open-source projects and self-managed deployments, Adoptium Temurin is a natural default due to its vendor-neutral governance under the Eclipse Foundation.
 
-See also: [LTS and Non-LTS Releases](https://foojay.io/pedia/lts-and-non-lts-releases/), [TCK](https://foojay.io/pedia/tck/), [Disco API](https://foojay.io/pedia/disco-api/)
+## See Also
+
+* [LTS and Non-LTS Releases](/pedia/lts-and-non-lts-releases/)
+* [Technology Compatibility Kit](/pedia/tck/)
+* [Disco API](/pedia/disco-api/)
+* [Basic Java Concepts](/pedia/basic-java-concepts/)
+* [CPU and PSU](/pedia/cpu-and-psu/)
+* [GraalVM and Native Image](/pedia/graalvm-and-native-image/)

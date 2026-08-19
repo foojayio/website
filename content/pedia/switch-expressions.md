@@ -34,4 +34,8 @@ Switch expressions require exhaustiveness: the compiler verifies that all possib
 
 Switch expressions laid the groundwork for [pattern matching in switch](https://foojay.io/pedia/pattern-matching/) (finalised in Java 21), which allows patterns — not just constants — to appear in case labels.
 
-See also: [Pattern Matching](https://foojay.io/pedia/pattern-matching/), [Sealed Classes](https://foojay.io/pedia/sealed-classes/)
+## See Also
+
+* [Pattern Matching](/pedia/pattern-matching/)
+* [Sealed Classes](/pedia/sealed-classes/)
+* [Records](/pedia/records/)

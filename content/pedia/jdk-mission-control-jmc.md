@@ -18,4 +18,8 @@ Key capabilities:
 
 JMC download and documentation: [github.com/openjdk/jmc](https://github.com/openjdk/jmc)
 
-See also: [JFR (Java Flight Recorder)](https://foojay.io/pedia/jfr-java-flight-recorder/), [Heap Dump](https://foojay.io/pedia/heap-dump/), [Thread Dump](https://foojay.io/pedia/thread-dump/)
+## See Also
+
+* [JFR (Java Flight Recorder)](/pedia/jfr-java-flight-recorder/)
+* [Heap Dump](/pedia/heap-dump/)
+* [Thread Dump](/pedia/thread-dump/)

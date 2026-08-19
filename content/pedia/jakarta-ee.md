@@ -27,3 +27,9 @@ More reading on Foojay:
 * [GlassFish 8 is here with Jakarta EE 11, virtual threads, and Jakarta Data](https://foojay.io/today/glassfish-8-is-here-with-jakarta-ee-11-virtual-threads-and-jakarta-data/)
 * [From Spring Boot To Jakarta EE 11: How Payara Starter Eases The Transition](https://foojay.io/today/from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition/)
 * [Jakarta EE is Ready for AI](https://foojay.io/today/jakarta-ee-is-ready-for-ai-but-dont-just-take-my-word-for-it/)
+
+## See Also
+
+* [OpenJDK](/pedia/openjdk/)
+* [OpenJDK Projects](/pedia/openjdk-projects/)
+* [JEP (JDK Enhancement Proposal)](/pedia/jep-jdk-enhancement-proposal/)

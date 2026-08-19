@@ -12,3 +12,10 @@ A JEP describes the motivation for the change, its goals and non-goals, the prop
 New language features often progress through a preview stage first, appearing in a release marked as *preview* so developers can experiment and give feedback before the feature is finalised. This is why features like records and pattern matching went through one or more preview rounds before becoming permanent. An incubator module serves a similar purpose for new APIs.
 
 You can browse all JEPs at [openjdk.org/jeps](https://openjdk.org/jeps/0). A good starting point on Foojay for understanding how JEPs drive the platform is [Does Java Really Use Too Much Memory? Let's Look at the Facts (JEPs)](https://foojay.io/today/does-java-really-use-too-much-memory-lets-look-at-the-facts-jeps/).
+
+## See Also
+
+* [Java Community Process (JCP)](/pedia/java-community-process-jcp/)
+* [OpenJDK](/pedia/openjdk/)
+* [OpenJDK Coding Guidelines and Code Reviews](/pedia/openjdk-coding-guidelines/)
+* [OpenJDK Projects](/pedia/openjdk-projects/)

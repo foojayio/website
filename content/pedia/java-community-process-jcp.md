@@ -14,3 +14,9 @@ The JCP is managed by a **Program Management Office (PMO)** at Oracle and govern
 In practice, day-to-day evolution of the OpenJDK codebase (JVM improvements, library additions, language features) is primarily driven by [JEPs (JDK Enhancement Proposals)](https://foojay.io/pedia/jep-jdk-enhancement-proposal/) within the OpenJDK project, with the JCP serving as the formal standardisation layer. A significant language or API change will typically have both a JEP (for the implementation) and a JSR (for the specification), though these processes have become more tightly coupled in recent years.
 
 More information: [jcp.org](https://jcp.org)
+
+## See Also
+
+* [JEP (JDK Enhancement Proposal)](/pedia/jep-jdk-enhancement-proposal/)
+* [OpenJDK](/pedia/openjdk/)
+* [OpenJDK Projects](/pedia/openjdk-projects/)

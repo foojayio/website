@@ -37,12 +37,16 @@ Virtual threads are not designed for CPU-intensive work (which should still use 
 
 Major frameworks (Spring Boot 3.2+, Quarkus, Micronaut, Helidon) support virtual threads with minimal or no configuration. Simply set the thread model to virtual threads and the framework handles the rest.
 
-## See Also
+More reading on Foojay:
 
-* [Structured Concurrency](https://foojay.io/pedia/structured-concurrency/)
-* [Scoped Values](https://foojay.io/pedia/scoped-values/)
-* [Thread Dump](https://foojay.io/pedia/thread-dump/)
-* [Heap Dump](https://foojay.io/pedia/heap-dump/)
-* [JFR (Java Flight Recorder)](https://foojay.io/pedia/jfr-java-flight-recorder/)
 * [Project Loom: Structured Concurrency – Java](https://foojay.io/today/project-loom-structured-concurrency-java/)
 * [Thinking About Massive Throughput? Meet Virtual Threads!](https://foojay.io/today/thinking-about-massive-throughput-meet-virtual-threads/)
+
+## See Also
+
+* [Structured Concurrency](/pedia/structured-concurrency/)
+* [Scoped Values](/pedia/scoped-values/)
+* [Thread Dump](/pedia/thread-dump/)
+* [Heap Dump](/pedia/heap-dump/)
+* [JFR (Java Flight Recorder)](/pedia/jfr-java-flight-recorder/)
+* [OpenJDK Projects](/pedia/openjdk-projects/)

@@ -23,3 +23,9 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 Two built-in policies ship with Java 24: `ShutdownOnFailure` (cancels remaining tasks if any subtask fails) and `ShutdownOnSuccess` (cancels remaining tasks as soon as any subtask succeeds). Custom policies can be written for more complex scenarios.
 
 Structured Concurrency prevents several concurrency hazards that are difficult to avoid with `ExecutorService`: thread leaks (tasks outliving their logical scope), lost exceptions (failure in one task being silently ignored while others run), and difficult cancellation semantics. It integrates directly with [Virtual Threads](https://foojay.io/pedia/virtual-threads/) and [Scoped Values](https://foojay.io/pedia/scoped-values/).
+
+## See Also
+
+* [Virtual Threads](/pedia/virtual-threads/)
+* [Scoped Values](/pedia/scoped-values/)
+* [Records](/pedia/records/)

@@ -26,3 +26,9 @@ The key advantages over `ThreadLocal`:
 * **Virtual-thread friendly** — with millions of virtual threads, per-thread mutable state is expensive; immutable scoped values are shared cheaply.
 
 Scoped Values are designed to work in conjunction with [Structured Concurrency](https://foojay.io/pedia/structured-concurrency/) and [Virtual Threads](https://foojay.io/pedia/virtual-threads/).
+
+## See Also
+
+* [Structured Concurrency](/pedia/structured-concurrency/)
+* [Virtual Threads](/pedia/virtual-threads/)
+* [Records](/pedia/records/)

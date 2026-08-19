@@ -38,8 +38,12 @@ The JVM is the core of the runtime environment. Although colloquially use as a s
 
 The JVM defines a consistent object, memory, garbage collection and threading model for executing the semantics defined in byte code. Other languages have been defined making use of the JVM semantics relying on the Java APIs more or less. E.g the Android Runtime follows the JVM model but is not Java SE compliant (also it tries to be, to make the life of Java developers easier on Android).
 
+More reading on Foojay:
+
+* [OpenJDK, JDKs and Every Java Acronym in Between](https://foojay.io/today/openjdk-jdks-and-every-java-acronym-in-between/)
+
 ## See Also
 
-* [JDK Distributions](https://foojay.io/pedia/jdk-distributions/)
-* [Bytecode](https://foojay.io/pedia/bytecode/)
-* [OpenJDK, JDKs and Every Java Acronym in Between](https://foojay.io/blog/openjdk-jdks-and-every-java-acronym-in-between/)
+* [JDK Distributions](/pedia/jdk-distributions/)
+* [Bytecode](/pedia/bytecode/)
+* [Text Blocks](/pedia/text-blocks/)

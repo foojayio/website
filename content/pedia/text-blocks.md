@@ -24,4 +24,8 @@ Before text blocks, the equivalent code required string concatenation with expli
 
 Text blocks are plain `String` objects at runtime — there is no new type, no runtime overhead, and no change to the String API.
 
-See also: [Basic Java Concepts](https://foojay.io/pedia/basic-java-concepts/), [Records](https://foojay.io/pedia/records/)
+## See Also
+
+* [Basic Java Concepts](/pedia/basic-java-concepts/)
+* [Records](/pedia/records/)
+* [Sealed Classes](/pedia/sealed-classes/)

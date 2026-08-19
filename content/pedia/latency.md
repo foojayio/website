@@ -52,3 +52,9 @@ Let's consider a few use cases where high tail latency is totally unacceptable, 
 * **Phone-Based Apps:** Users of phone-based apps understand that sometimes there are issues with networks. But, if they notice that even when the network appears fine, your app is randomly highly unresponsive (due to your own application's high tail latency), they are unlikely to keep using your app for very long.
 
 Low latency is critical for any application to succeed in the marketplace. However, tail latency can be a much greater determinant to the possibility of success for an application than average latency. Java itself very well illustrates the problem of high tail latency, through garbage collection.
+
+## See Also
+
+* [GC Algorithms: G1, ZGC, and Shenandoah](/pedia/gc-algorithms-g1-zgc-and-shenandoah/)
+* [Stop-the-World Pause](/pedia/stop-the-world-pause/)
+* [Garbage Collection](/pedia/garbage-collection/)
