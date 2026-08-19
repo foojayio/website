@@ -7,7 +7,7 @@ Two things arrive here by pull request: **articles** and **calendar events**.
 The full, up-to-date guide for writing and submitting an article lives on the
 site itself:
 
-**→ [How to submit your next article on foojay.io](https://foojayio.github.io/website/today/how-to-submit-your-next-article-on-foojay-io/)**
+**→ [How to submit your next article on foojay.io](https://foojay.io/today/how-to-submit-your-next-article-on-foojay-io/)**
 
 It walks through creating your author profile, preparing your post folder, adding
 images, and delivering it (pull request, fork, or zip).
@@ -20,9 +20,12 @@ images, and delivering it (pull request, fork, or zip).
   `template/post.md` as your starting point.
 - New author? Add yourself as `content/authors/<your-slug>/_index.md` in the same
   PR (note the underscore — see `template/author.md`).
-- Preview locally with `hugo server -D`, then check
-  `http://localhost:1313/today/<your-slug>/` before opening the PR. The PR check
-  validates your frontmatter and builds the site — fix anything it flags.
+- You don't need to build anything: the PR check validates your frontmatter and
+  builds the site, so it catches a bad author slug or a missing image for you.
+- If you *do* want to preview it, note that `draft/` is deliberately not built —
+  `hugo server -D` will not show it. Copy your folder to
+  `content/posts/<year>/<month>/<day>/<your-slug>/`, run `hugo server`, and open
+  `http://localhost:1313/website/today/<your-slug>/`.
 
 See the guide linked above for the details.
 
