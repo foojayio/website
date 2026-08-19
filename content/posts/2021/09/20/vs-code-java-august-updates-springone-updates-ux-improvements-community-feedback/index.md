@@ -27,7 +27,7 @@ When it comes to Java development, we always keep Spring developers in mind. In 
 
 We are excited to share that Spring framework is fully supported on [GitHub Codespaces](https://aka.ms/Bootiful-Tools "GitHub Codespaces") via partnership with VMWare. This means developers can develop a Spring application seamlessly in a browser-based environment without installing anything on the local machine. Here is a quick demo of starting a Spring Boot application on Codespaces.
 
-![](Spring-Boot.gif)
+![](Spring-Boot.webp)
 
 We had a full demo-focused session at SpringOne to talk about Spring on GitHub Codespaces. If you are interested in this session, [follow the link](https://aka.ms/Bootiful-Tools "follow the link") here to watch the whole recording.
 

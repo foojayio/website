@@ -308,7 +308,7 @@ I've showed how quickly it is to create a custom chat application and integrate 
 
 The basic chat waits for the AI platform to fully return the response. Thus, waiting time may be longer.
 
-![](watsonx-chat.gif)
+![](watsonx-chat.webp)
 
 ### Streaming Chat
 

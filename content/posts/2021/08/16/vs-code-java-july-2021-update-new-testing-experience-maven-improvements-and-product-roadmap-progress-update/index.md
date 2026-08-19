@@ -34,7 +34,7 @@ More options can also be seen by right clicking in the area. Different from Code
 
 The Test Explorer has been completely revamped. Developers can now customize the display mode and sorting order of the testing explorer for different scenarios and habits. Tests can also be directly kicked off from the test explorer.
 
-![](Test-Explorer.gif)
+![](Test-Explorer.webp)
 
 In addition, the new Testing Explorer has built-in search bar support to help users quickly find target test cases and accelerate development efficiency.
 
@@ -44,7 +44,7 @@ In addition, the new Testing Explorer has built-in search bar support to help us
 
 By adopting the new Testing API, the developer can now directly see the test execution result directly in the editor area, making it easer to see the errors and stack trace information.
 
-![](Test-Error-Message.gif)
+![](Test-Error-Message.webp)
 
 For more detailed information on what Java Test Runner has to offer, please refer to the [official documentation here](https://code.visualstudio.com/docs/java/java-testing "official documentation here")
 

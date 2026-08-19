@@ -164,7 +164,7 @@ hourHandArc.setLength(hourExtentAngle);
 ```
 
 Similar to a time lapse an animation of the hour hand is shown below. It doesn't show the hour hand tip, more on that next.  
-![Hour Hand Animation without the tip](hourhand-animation-without-tip.gif)
+![Hour Hand Animation without the tip](hourhand-animation-without-tip.webp)
 
 *Hour Hand Animation without the tip*{#caption-attachment-36631}
 

@@ -62,7 +62,7 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 * **Floating progress widget** — current bundle, specs completed vs. total, animated progress bar
 
-![](666.gif)
+![](666.webp)
 
 * **Configurable settings** — runner URL, directory, bundle pattern, labels, excludes — all saved in `localStorage`
 
