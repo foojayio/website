@@ -2,7 +2,7 @@
 title: "Beyond Keywords: Hybrid Search With Atlas and Vector Search (Part 3)"
 date: "2025-11-13T13:56:23+00:00"
 lastmod: "2025-12-12T21:19:43+00:00"
-description: "Bringing together semantic vectors and exact keyword matching with $rankFusionIf you’ve been following along this series, you already know we started by giving our movie search app the ability to understand meaning—not just keywords—using semantic search, as discussed in Part 1: Implementing Semantic Search in Java With Spring Data. Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in Part 2: Optimizing Vector Search With Filters and Caching.Now, in this final installment, we’re taking our search capability to its ultimate form: combining the precision of full-text search with the semantic understanding of vector search. Welcome to hybrid search."
+description: "Bringing together semantic vectors and exact keyword matching with $rankFusionIf you’ve been following along this series, you already know we started by giving our movie search app the ability to understand meaning—not just keywords—using semantic search, as discussed in Part 1: Implementing Semantic Search in Java With Spring Data. Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in Part 2: Optimizing Vector Search With Filters and Caching. Now, in this final installment, we’re taking our search capability to its ultimate form: combining the precision of full-text search with the semantic understanding of vector search. Welcome to hybrid search."
 authors:
   - "ricardo-mello"
 image: "Screenshot-2025-11-11-at-1.58.35-PM.png"
