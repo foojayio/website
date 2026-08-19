@@ -7,7 +7,7 @@
   {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
   {{- $author := partial "author-page.html" $slug -}}
   {{- if $author -}}
-    <a class="byline" href="{{ $author.Permalink }}">{{ $author.Title }}</a>
+    <a class="byline" href="{{ $author.RelPermalink }}">{{ $author.Title }}</a>
   {{- else -}}
     <span class="byline">{{ $slug }}</span>
   {{- end -}}

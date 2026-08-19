@@ -21,16 +21,16 @@
     {{ $posts := partial "author-posts.html" $author }}
     <article class="featured-author">
       {{ with (or .Params.avatarFull .Params.avatar) }}
-      <a class="featured-author__portrait" href="{{ $author.Permalink }}" tabindex="-1" aria-hidden="true">
+      <a class="featured-author__portrait" href="{{ $author.RelPermalink }}" tabindex="-1" aria-hidden="true">
         <img class="author-avatar" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy" decoding="async">
       </a>
       {{ end }}
       <div class="featured-author__body">
-        <h3 class="featured-author__name"><a href="{{ $author.Permalink }}">{{ $author.Title }}</a></h3>
+        <h3 class="featured-author__name"><a href="{{ $author.RelPermalink }}">{{ $author.Title }}</a></h3>
         {{ $views := partial "views.html" $author }}
         {{ if or $posts $views }}
         <p class="featured-author__count">
-          {{ with $posts }}<a href="{{ $author.Permalink }}">{{ len . }} article{{ if ne (len .) 1 }}s{{ end }}</a>{{ end }}
+          {{ with $posts }}<a href="{{ $author.RelPermalink }}">{{ len . }} article{{ if ne (len .) 1 }}s{{ end }}</a>{{ end }}
           {{ $views }}
         </p>
         {{ end }}
@@ -38,7 +38,7 @@
         {{ partial "author-social.html" $author }}
         {{ with $posts }}
         {{ $latest := index . 0 }}
-        <a class="featured-author__latest" href="{{ $latest.Permalink }}">
+        <a class="featured-author__latest" href="{{ $latest.RelPermalink }}">
           <span class="featured-author__latest-label">Latest article</span>
           <strong>{{ $latest.Title }}</strong>
           <time datetime="{{ $latest.Date.Format "2006-01-02" }}">{{ $latest.Date.Format "Jan 2, 2006" }}</time>

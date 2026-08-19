@@ -33,12 +33,16 @@
       {{ $pageNum = .PageNumber }}
       {{/* A pager's .URL is root-relative and ALREADY carries the baseURL's path
            prefix (/website/today/page/2/ on the trial deploy), so `absURL` would
-           prepend that prefix a second time. Scheme + host off the parsed baseURL
-           is the one join that is right in both deploys -- and it needs no
-           knowledge of the pagination path, which is not readable from the site
-           config in Hugo 0.165 (page.SiteConfig has no Pagination field). */}}
-      {{ $base := urls.Parse site.BaseURL }}
-      {{ $self = printf "%s://%s%s" $base.Scheme $base.Host .URL }}
+           prepend that prefix a second time. The origin is taken from THIS PAGE
+           instead -- .Permalink minus .RelPermalink is exactly "scheme://host" --
+           rather than from site.BaseURL, which reports the CONFIGURED value and
+           is not what `hugo server` serves: locally that made every pager
+           canonical and og:url point at foojayio.github.io. This form needs no
+           knowledge of the pagination path either, which is not readable from
+           the site config in Hugo 0.165 (page.SiteConfig has no Pagination
+           field). */}}
+      {{ $origin := strings.TrimSuffix $.RelPermalink $.Permalink }}
+      {{ $self = printf "%s%s" $origin .URL }}
     {{ end }}
   {{ end }}
 

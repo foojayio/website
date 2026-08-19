@@ -1,0 +1,60 @@
+{{- /* A sponsor's `authors:` list, normalised to one shape.
+
+       Param: the sponsor Page. Returns: a slice of
+       { slug, from, till, dated } -- `from`/`till` are "" when unset, and
+       `dated` is true when either is set.
+
+       WHY THE LIST IS MIXED. An author's posts belong to a sponsor because the
+       author worked there, and people join and leave. Two Azul authors left on
+       2026-04-01, and without a date their later articles -- written for someone
+       else -- kept appearing on Azul's page. So an entry may be either:
+
+         authors:
+           - "tim-kelly"                    # currently there: nothing to say
+           - slug: "pratik-patel"
+             till: "2026-04-01"             # the day they left
+           - slug: "someone-else"
+             from: "2024-06-01"             # arrived; earlier posts aren't theirs
+
+       The bare string stays the default because it is the common case (16 of
+       Azul's 18), and a maintainer should not have to write a two-line map to say
+       "still here" -- that is the derive/default/ask rule in CLAUDE.md.
+
+       SEMANTICS: a HALF-OPEN range, [from, till). `from` is the first day
+       attributed, `till` is the first day NOT attributed -- i.e. the day they
+       left, which is the date a maintainer actually knows. That choice is not
+       arbitrary: it makes the SAME date correct for both sponsors when someone
+       moves (old employer `till: "2026-04-01"`, new one `from: "2026-04-01"`)
+       with no gap and no double-attribution, which an inclusive `till` cannot do
+       without an off-by-one. Both keys are optional and independent, so `till`
+       alone means "everything up to then" and neither means "everything".
+
+       Dates are pushed through `time.Format` rather than compared as written,
+       because YAML turns an unquoted 2026-04-01 into a date object and a quoted
+       one into a string -- and comparing those two to each other silently fails
+       rather than erroring. Normalising both to ISO strings also makes the
+       comparison in sponsor-posts.html a plain lexicographic one, which is
+       correct for ISO-8601 and needs no time arithmetic.
+
+       One definition, because three things read this list: sponsor-posts.html
+       (which posts count), and the author list plus the author COUNT on
+       sponsor/section.html. Before this they each re-read `.Params.authors`
+       assuming it was a list of strings. */ -}}
+
+{{- $entries := slice -}}
+{{- range .Params.authors -}}
+  {{- if reflect.IsMap . -}}
+    {{- $from := "" -}}
+    {{- $till := "" -}}
+    {{- with .from }}{{ $from = time.Format "2006-01-02" . }}{{ end -}}
+    {{- with .till }}{{ $till = time.Format "2006-01-02" . }}{{ end -}}
+    {{- $entries = $entries | append (dict
+        "slug" (.slug | default "")
+        "from" $from
+        "till" $till
+        "dated" (or $from $till | not | not)) -}}
+  {{- else -}}
+    {{- $entries = $entries | append (dict "slug" . "from" "" "till" "" "dated" false) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $entries -}}

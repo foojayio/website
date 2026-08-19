@@ -2,9 +2,13 @@
 # ============================================================================
 #  Author profile — starter template
 # ----------------------------------------------------------------------------
-#  Copy this file to  content/authors/<first-letter>/<your-slug>/index.md
+#  Copy this file to  content/authors/<your-slug>/_index.md
 #  and put your avatar image(s) in that same folder. Pick the slug yourself:
-#  lowercase, dashes, usually your name (e.g. content/authors/j/jane-doe/).
+#  lowercase, dashes, usually your name (e.g. content/authors/jane-doe/).
+#
+#  NOTE the underscore: _index.md, not index.md. That is what makes the profile a
+#  page Hugo will paginate, so a long list of articles gets a pager instead of one
+#  endless grid. A file named index.md here renders nothing.
 #
 #  The FOLDER NAME is the slug your posts reference in their `authors:` list,
 #  and it is also the URL: /today/author/<folder>/

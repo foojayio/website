@@ -16,7 +16,7 @@
      lists itself is noise. */}}
 {{ $pages := where (where site.RegularPages "Section" "in" (slice "pages" "")) "Permalink" "!=" .Permalink }}
 {{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
-{{ $authors := (where site.RegularPages "Section" "authors").ByTitle }}
+{{ $authors := partialCached "authors-all.html" "authors" }}
 {{ $sponsors := (where site.RegularPages "Section" "sponsors").ByTitle }}
 {{ $pedia := (where site.RegularPages "Section" "pedia").ByTitle }}
 

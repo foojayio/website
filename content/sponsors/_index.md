@@ -1,5 +1,11 @@
 ---
 title: "Our Sponsors"
+# EXPLICIT, and load-bearing: Hugo applies a cascade to the page that declares it
+# as well as to its descendants, so without this the cascaded `type: "sponsor"`
+# landed on THIS page too and /our-sponsors/ silently rendered with the
+# sponsor-profile layout instead of the tier listing. An explicit value always
+# beats a cascaded one.
+type: "sponsors"
 heroTitle: "Who Keeps Foojay Running"
 # Served from static/images/sponsors/ and resolved through resource-url.html,
 # which strips the leading slash so the baseURL subpath applies.
@@ -40,6 +46,17 @@ tiers:
     label: "Bronze"
     blurb: "The essential package: prominent logo placement on the sponsor page and 3 homepage banner displays per year, with unlimited author accounts and published articles so your engineering team can share insights freely."
 frozen: true
+# Each sponsor bundle is a BRANCH bundle (_index.md), i.e. a Hugo section rather
+# than a page -- that is the only page kind .Paginate accepts, and a sponsor with
+# 100+ attributed articles needs a pager rather than one endless grid.
+#
+# The cascade gives every child `type: "sponsor"` (singular) so it resolves to
+# layouts/sponsor/section.html. Without it a sponsor and the /our-sponsors/ index
+# are both `type: "sponsors"` sections and would fight over one layout.
+cascade:
+  - target:
+      kind: section
+    type: "sponsor"
 ---
 
 Foojay.io is built by the Java community, for the Java community — and kept free for everyone. Our sponsors make that possible. By supporting Foojay, these organisations help fund the platform, podcast, events and content that hundreds of thousands of Java and OpenJDK developers rely on every day. In return, our sponsors become a visible, trusted part of the ecosystem they're investing in.

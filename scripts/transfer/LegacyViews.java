@@ -353,7 +353,14 @@ public class LegacyViews {
             tree.filter(Files::isRegularFile).forEach(p -> {
                 String name = p.getFileName().toString();
                 if (bundles) {
-                    if (name.equals("index.md")) slugs.add(p.getParent().getFileName().toString());
+                    // A post bundle is a leaf bundle (index.md); an author or sponsor
+                    // bundle is a BRANCH bundle (_index.md) so .Paginate will accept
+                    // it. Both name their slug with the folder. The section's own
+                    // _index.md is excluded -- otherwise "authors" would be counted
+                    // as an author slug and the section root would shadow a real one.
+                    boolean isBundleIndex = name.equals("index.md")
+                            || (name.equals("_index.md") && !p.getParent().equals(dir));
+                    if (isBundleIndex) slugs.add(p.getParent().getFileName().toString());
                 } else if (name.endsWith(".md") && !name.equals("_index.md")) {
                     slugs.add(name.substring(0, name.length() - 3));
                 }

@@ -323,16 +323,31 @@ public class Sponsors {
     }
 
     /**
-     * Reads the `authors:` YAML list out of an existing bundle. This is the
-     * hand-maintained sponsor<->article link (see class javadoc); losing it on a
-     * re-run would silently empty a sponsor's article list, so it is parsed back
-     * out rather than regenerated. Simple line scan: the block is always written
-     * by writeSponsor() below as `authors:` followed by `  - "slug"` lines.
+     * Reads the `authors:` block out of an existing bundle AS RAW LINES, so
+     * writeSponsor() can put it back byte for byte.
+     *
+     * This is the hand-maintained sponsor<->article link (see class javadoc), and
+     * losing it on a re-run would silently empty a sponsor's article list. It used
+     * to be parsed into a List of slug strings and re-emitted as `  - "slug"`
+     * lines, which was fine while every entry WAS a bare slug -- and became
+     * destructive the moment an entry could carry an attribution window:
+     *
+     *   authors:
+     *     - "tim-kelly"
+     *     - slug: "pratik-patel"
+     *       till: "2026-04-01"
+     *
+     * The old scan turned that second entry into the slug `slug: "pratik-patel"`
+     * and then STOPPED at the `till:` line -- which does not start with "- " and
+     * so looked like the next key -- silently dropping every author after it.
+     * Keeping the lines verbatim removes the whole class of problem: this script
+     * has no reason to understand the shape of a list it does not own, and a
+     * future key needs no change here.
      */
     static List<String> existingAuthors(Path bundleDir) {
-        List<String> authors = new ArrayList<>();
-        Path md = bundleDir.resolve("index.md");
-        if (!Files.isRegularFile(md)) return authors;
+        List<String> lines = new ArrayList<>();
+        Path md = bundleDir.resolve("_index.md");
+        if (!Files.isRegularFile(md)) return lines;
         try {
             boolean inBlock = false;
             for (String line : Files.readAllLines(md)) {
@@ -341,22 +356,26 @@ public class Sponsors {
                     continue;
                 }
                 if (inBlock) {
-                    String t = line.trim();
-                    if (t.startsWith("- ")) {
-                        authors.add(t.substring(2).trim().replaceAll("^\"|\"$", ""));
-                    } else {
-                        break; // next key (or the closing ---) ends the list
-                    }
+                    // Indented lines belong to the block: "  - slug" entries and the
+                    // "    till: ..." continuations under them. Anything at column 0
+                    // is the next key (or the closing ---) and ends it.
+                    if (line.isBlank() || !Character.isWhitespace(line.charAt(0))) break;
+                    lines.add(line);
                 }
             }
         } catch (IOException e) {
             System.err.println("  could not read existing authors from " + md + ": " + e.getMessage());
         }
-        return authors;
+        return lines;
+    }
+
+    /** How many entries the raw `authors:` block holds -- one per "- " line. */
+    static long countAuthors(List<String> authorLines) {
+        return authorLines.stream().filter(l -> l.trim().startsWith("- ")).count();
     }
 
     static boolean isFrozen(String slug) {
-        Path md = bundleDirFor(slug).resolve("index.md");
+        Path md = bundleDirFor(slug).resolve("_index.md");
         try {
             return Files.isRegularFile(md) && Files.readString(md).contains("frozen: true");
         } catch (IOException e) {
@@ -389,7 +408,7 @@ public class Sponsors {
     static Path findExistingBundle(String slug) {
         if (!Files.isDirectory(OUTPUT_DIR)) return null;
         try (Stream<Path> s = Files.walk(OUTPUT_DIR)) {
-            List<Path> bundles = s.filter(p -> p.getFileName().toString().equals("index.md")
+            List<Path> bundles = s.filter(p -> p.getFileName().toString().equals("_index.md")
                             && p.getParent() != null
                             && !p.getParent().equals(OUTPUT_DIR))
                     .map(Path::getParent)
@@ -398,7 +417,7 @@ public class Sponsors {
                 if (b.getFileName().toString().equals(slug)) return b;
             }
             for (Path b : bundles) {
-                if (slug.equals(frontmatterValue(b.resolve("index.md"), "wpSlug"))) return b;
+                if (slug.equals(frontmatterValue(b.resolve("_index.md"), "wpSlug"))) return b;
             }
             // There used to be a third pass here matching on `canonical:`, for
             // bundles written before `wpSlug:` existed. Both halves of it are
@@ -453,10 +472,12 @@ public class Sponsors {
         // and their categories become the "Topics covered" list. Add slugs here
         // by hand (they're the folder names under content/authors/); this script
         // reads them back and writes them out unchanged.
-        fm.append("# Hand-maintained: author slugs (content/authors/<letter>/<slug>/) whose posts\n");
+        fm.append("# Hand-maintained: author slugs (content/authors/<slug>/) whose posts\n");
         fm.append("# are this sponsor's articles. transfer/Sponsors.java preserves this list verbatim.\n");
         fm.append("authors:\n");
-        for (String a : d.authors) fm.append("  - ").append(yamlString(a)).append("\n");
+        // Verbatim, not re-serialised: an entry may be a bare slug or a map with
+        // from:/till: (see existingAuthors above for what re-emitting cost us).
+        for (String line : d.authors) fm.append(line).append("\n");
 
         // Fallback only: shown when the sponsor has no `authors:` yet, so the
         // page isn't blank. Once authors are set the template derives the real
@@ -490,10 +511,10 @@ public class Sponsors {
         fm.append(d.body == null ? "" : d.body.strip()).append("\n");
 
         Files.createDirectories(d.bundleDir);
-        Files.writeString(d.bundleDir.resolve("index.md"), fm.toString());
+        Files.writeString(d.bundleDir.resolve("_index.md"), fm.toString());
 
         System.out.printf("Done sponsor: %-45s tier=%-7s authors=%d topics=%d%n",
-                d.slug, d.tier, d.authors.size(), d.topics.size());
+                d.slug, d.tier, countAuthors(d.authors), d.topics.size());
     }
 
     static String slugFromUrl(String url) {

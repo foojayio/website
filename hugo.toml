@@ -54,6 +54,14 @@ enableGitInfo = true
   # the WordPress site use (default would be /categories/…).
   categories = "/today/category/:slug/"
 
+  # Sponsor (and author) bundles are SECTIONS, not pages -- see the cascade in
+  # content/sponsors/_index.md for why. The keys above only apply to `page` kind,
+  # so a section needs its pattern here or Hugo would fall back to the file path
+  # and serve /sponsors/azul/ instead of the legacy /sponsor/azul/.
+  [permalinks.section]
+    sponsors = "/sponsor/:slugorcontentbasename/"
+    authors = "/today/author/:slugorcontentbasename/"
+
 # Only categories. WordPress DOES tag its posts, but its theme never renders
 # tags on a page, so the scrapers (which read the public site) could never see
 # them and every post landed with an empty `tags:`. Rather than keep a taxonomy

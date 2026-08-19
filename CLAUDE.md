@@ -621,6 +621,79 @@ should catch a mistake at PR time rather than letting it fail silently.
   assigning into a variable, because Hugo rejects a `return` that other
   statements fall through past.
 
+- **Author and sponsor profiles are BRANCH bundles, and that is what makes them
+  paginate.** `.Paginate` accepts only `home`, `section`, `taxonomy` and `term`
+  kinds -- on a page kind it errors with "pagination not supported for this
+  page". A prolific author has 290+ articles and Azul's authors 360 between them,
+  which was one grid several screens long with no way to reach the older half. So
+  each profile is `content/authors/<slug>/_index.md` and
+  `content/sponsors/<slug>/_index.md`, i.e. a section, and
+  `partials/paginator.html` gained a branch for each. `template/author.md` and the
+  `/today/how-to-submit-your-next-article-on-foojay-io/` guide both spell out the
+  underscore, because an `index.md` there renders nothing.
+
+  URLs are unchanged, which needed `[permalinks.section]` in `hugo.toml`: the flat
+  `[permalinks]` keys apply to the `page` kind only, so without it Hugo would
+  serve `/sponsors/azul/` from the file path instead of the legacy
+  `/sponsor/azul/`. **The view-counter keys are unchanged too** --
+  `.File.ContentBaseName` returns the folder name for `_index.md` exactly as it
+  did for `index.md`, so `authors/frankdelporte` still resolves.
+
+  **`content/authors/` is now FLAT.** The letter buckets
+  (`content/authors/f/frankdelporte/`) existed only to keep 344 folders
+  browsable, and they cannot survive this: Hugo turns every directory holding
+  pages into a section, so the 23 letter folders became 23 sections claiming URLs
+  like `/today/author/a/`. `transfer/Authors.java` writes flat now and its
+  `bucketFor` is gone.
+
+  Four things broke silently in the conversion, all of the same shape -- a filter
+  that still parses, still runs, and now matches nothing:
+  1. **`site.RegularPages` does not contain branch bundles.** Every
+     `where site.RegularPages "Section" "authors"` returned an empty list, so the
+     A-Z grid, the sidebar widget, the HTML sitemap and the byline lookup rendered
+     *nothing* rather than failing. `partials/authors-all.html` is now the single
+     definition (`where site.Pages "Type" "author"`), and the four callers go
+     through it.
+  2. **`.IsPage` is false for a profile.** `views-key.html` used it to decide what
+     gets counted, so every author's read count would have silently stopped being
+     recorded; `json-ld.html` used it too and stopped emitting `Person` on all 344.
+     Both key off `type: "author"` now.
+  3. **A cascade applies to the page that declares it, not just its
+     descendants.** `cascade: {target: {kind: section}, type: "author"}` in
+     `content/authors/_index.md` therefore hit that file as well, and
+     `/today/author/` rendered with the *profile* layout -- an empty "0 articles"
+     page where the A-Z grid belongs. `/our-sponsors/` did the same. Both index
+     files now set `type:` explicitly, which always beats a cascaded value.
+  4. **The RSS cascade targeted `kind: page`.** After the conversion that matched
+     nothing and would have dropped every author feed. It targets `kind: section`
+     now, and the template moved to `layouts/author/section.rss.xml`.
+
+  A profile and its section's landing page are both sections in the same section,
+  so they are told apart by `type` -- `author`/`sponsor` (singular, cascaded onto
+  the children) versus `authors`/`sponsors` (explicit, on the index). That is also
+  what routes them to `layouts/author/section.html` rather than a shared layout.
+
+- **Internal links are `.RelPermalink`; only absolute-by-contract URLs are
+  `.Permalink`.** `.Permalink` is built from the CONFIGURED baseURL, which is not
+  what `hugo server` serves -- so with the trial baseURL in `hugo.toml` every post
+  card on a local preview linked to `foojayio.github.io`, and clicking a result
+  left localhost. 14 templates were changed. Keep `.Permalink` where the URL must
+  be absolute and is not a navigation `href`: canonical, `og:url`, the JSON-LD
+  `url`/`@id`, RSS `<link>`/`<guid>`, and the alternate-format `<link>` tags.
+
+  Same trap, same cause, in `baseof.html`'s pager canonical: it built the URL from
+  `site.BaseURL` and so pointed every local pager at the trial host. The origin
+  now comes from the page itself -- `strings.TrimSuffix .RelPermalink .Permalink`
+  is exactly `scheme://host` -- which is correct under `hugo server` and in a
+  build, and still needs no pagination-path config lookup.
+
+- **A pager on a profile carries an `#articles` anchor; one on a listing does
+  not.** `partials/pagination.html` takes an optional `anchor`, appended to every
+  link. On an author or sponsor profile the grid sits below a bio, stats and an
+  About section, so paging without it threw the reader back to the top of the page
+  and they had to scroll down again to page once more. `/today/` and the category
+  pages pass nothing, because there the grid already *is* the top of the content.
+
 - **`partials/pagination.html` is ours, not `_internal/pagination.html`.** Hugo's
   internal template produced three faults that could not be fixed from the CSS
   side, because they are in the markup: it wraps each arrow's glyph in a nested
@@ -857,6 +930,60 @@ should catch a mistake at PR time rather than letting it fail silently.
   (Redis shows 11 articles here vs 1 there) — author-based attribution is
   broader than whatever WP was doing. That's the intended semantics; if a
   sponsor should own fewer posts, narrow its `authors:` list.
+
+  **An entry can be date-bounded, because people change employer.** Two Azul
+  authors left on 2026-04-01 and their later articles, written elsewhere, kept
+  appearing on Azul's page. So an entry is EITHER a bare slug or a map with
+  optional `from:`/`till:`:
+
+  ```yaml
+  authors:
+    - "tim-kelly"                 # still there: nothing to say
+    - slug: "pratik-patel"
+      till: "2026-04-01"          # the day they left
+  ```
+
+  The bare string stays the default because it is the common case (16 of Azul's
+  18) -- case 2 of the derive/default/ask rule. `partials/sponsor-authors.html`
+  normalises the two shapes into one and is the single definition; the post
+  filter, the author list and the author COUNT all read it, where each used to
+  re-read `.Params.authors` assuming a list of strings.
+
+  Four things about it are load-bearing:
+  1. **The range is HALF-OPEN, `[from, till)`** -- `till` is the first day *not*
+     attributed, i.e. the day they left, which is the date a maintainer actually
+     knows. That is not arbitrary: it makes the same date correct for both
+     sponsors when someone moves (old employer `till: "2026-04-01"`, new one
+     `from: "2026-04-01"`) with no gap and no double-attribution, which an
+     inclusive `till` cannot do without an off-by-one.
+  2. **A post counts when it is inside the window of AT LEAST ONE of its
+     authors**, so a piece co-written by a current colleague and a departed one
+     is still the sponsor's (`foojay-podcast-94` is exactly this -- Geertjan
+     Wielenga plus five current Azul authors). That is why the check is per-post
+     rather than a filter on the slug list.
+  3. **Dates go through `time.Format` before comparison.** YAML turns an
+     unquoted `2026-04-01` into a date object and a quoted one into a string, and
+     comparing those two silently fails rather than erroring. Normalising to ISO
+     strings also makes the comparison plain lexicographic, which is correct for
+     ISO-8601 and needs no time arithmetic. There is also a fast path: with no
+     dated entry the per-post loop is skipped entirely, which is 6 of 7 sponsors.
+  4. **`Sponsors.java` keeps the block as RAW LINES.** It used to parse the list
+     into slug strings and re-emit `  - "slug"` lines, which became destructive
+     the moment an entry could be a map: the scan read `slug: "pratik-patel"` as a
+     slug and then stopped at the `till:` line -- which does not start with `- `
+     and so looked like the next key -- silently dropping every author after it.
+     Verified byte-identical on Azul's 20-line/18-entry block. The script has no
+     reason to understand the shape of a list it does not own, and a future key
+     needs no change there.
+
+  `Frontmatter.checkSponsorAuthorEntry` fails the PR on each way this goes wrong
+  silently: an unknown key (a **closed** key set -- `until:` for `till:` is simply
+  ignored by the template, so the departed author's new posts keep appearing and
+  nothing says why), a map with no `slug` (matches nobody, dropping all their
+  articles), a date `time.Format` can't read (halts the build pointing at the
+  template rather than the content), and `from >= till` (an empty window: the
+  author is listed with none of their articles). All five paths were exercised
+  against a real bundle, not assumed.
 - **Galleries are the `{{< gallery >}}` shortcode — migrated posts included.**
   A gallery is a list of filenames, so that is what `content/` holds: one per
   line between `{{< gallery >}}` and `{{< /gallery >}}`, `| caption` after a

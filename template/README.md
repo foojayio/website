@@ -5,7 +5,7 @@ file you need, fill it in, open a pull request.
 
 | File | Copy it to | For |
 |------|------------|-----|
-| `author.md` | `content/authors/<first-letter>/<your-slug>/index.md` | **Your author profile** — needed once, before your first article. |
+| `author.md` | `content/authors/<your-slug>/_index.md` | **Your author profile** — needed once, before your first article. |
 | `post.md` | `draft/<your-article-slug>/index.md` | **An article.** Start here — rename it to `index.md`. |
 | `categories.md` | *(nowhere — read it)* | The list of categories already in use. Reuse one where it fits. |
 | `page.md` | `content/pages/...` | A static site page. **Maintainers only**, not article contributors. |

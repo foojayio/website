@@ -33,9 +33,8 @@ date: 2026-01-01T09:00:00+00:00
 # previews. Required.
 description: "A short, one- or two-sentence summary of the article."
 
-# Author slug(s): the FOLDER name of your author profile in content/authors/,
-# which is grouped by first letter
-# (e.g. content/authors/f/frankdelporte/  ->  "frankdelporte"). One or more.
+# Author slug(s): the FOLDER name of your author profile in content/authors/
+# (e.g. content/authors/jane-doe/  ->  "jane-doe"). One or more.
 # Required — every post needs at least one author. If you don't have a profile
 # yet, copy template/author.md to that folder and include it in the same PR.
 authors:

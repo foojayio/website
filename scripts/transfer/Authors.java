@@ -23,12 +23,12 @@ import java.util.stream.Stream;
  * Why a markdown file per author (and not a data/authors.yaml)? Authors are
  * first-class pages: each keeps its legacy URL (/today/author/<slug>/ via
  * aliases), renders a profile page listing that author's articles
- * (themes/foojay/layouts/authors/single.html), and is referenced by posts via
+ * (themes/foojay/layouts/author/section.html), and is referenced by posts via
  * their `author:` slug. A Hugo data file produces no pages and no URLs, so it
  * can't carry any of that. Content files are the correct model here.
  *
  * Files are bucketed by the first letter of the slug
- * (content/authors/a/<slug>.md, .../b/..., non-letters -> _) purely to keep the
+ * (formerly content/authors/a/<slug>.md, .../b/..., non-letters -> _) to keep the
  * directory browsable, exactly like posts are bucketed by publish date. The
  * permalink is slug-only (see hugo.toml), so the subdirectory has NO effect on
  * the URL. author<->post linking uses the base filename, not the path, so it is
@@ -87,7 +87,7 @@ public class Authors {
             AuthorData d = scrapeAuthor(singleUrl, slug);
             localizeAvatars(d);
             writeAuthor(d);
-            System.out.println("Wrote " + d.slug + "/index.md (single-author test run), avatar=" + d.avatar);
+            System.out.println("Wrote " + d.slug + "/_index.md (single-author test run), avatar=" + d.avatar);
             return;
         }
 
@@ -323,31 +323,31 @@ public class Authors {
         Path bundle = findExistingAuthorBundle(slug);
         if (bundle == null) return false;
         try {
-            return Files.readString(bundle.resolve("index.md")).contains("frozen: true");
+            return Files.readString(bundle.resolve("_index.md")).contains("frozen: true");
         } catch (IOException e) {
             return false;
         }
     }
 
-    /** First-letter bucket for the author folder (content/authors/<letter>/<slug>/). */
-    static String bucketFor(String slug) {
-        if (slug == null || slug.isEmpty()) return "_";
-        char c = Character.toLowerCase(slug.charAt(0));
-        return (c >= 'a' && c <= 'z') ? String.valueOf(c) : "_";
-    }
-
-    /** The author's bundle dir (content/authors/<letter>/<slug>/), reused if it
-     *  already exists elsewhere so re-runs don't move it. */
+    /** The author's bundle dir, content/authors/<slug>/ -- reused if it already
+     *  exists so a re-run never moves or duplicates a bundle.
+     *
+     *  There is no first-letter bucket any more. Author bundles used to live in
+     *  content/authors/<letter>/<slug>/ purely to keep 344 folders browsable, but
+     *  each profile is now a BRANCH bundle (so .Paginate accepts it -- see
+     *  content/authors/_index.md), and Hugo turns every directory holding pages
+     *  into a section: the 23 letter folders became 23 sections of their own,
+     *  claiming URLs like /today/author/a/. Flat is what removes them. */
     static Path bundleDirFor(String slug) {
         Path existing = findExistingAuthorBundle(slug);
-        return existing != null ? existing : OUTPUT_DIR.resolve(bucketFor(slug)).resolve(slug);
+        return existing != null ? existing : OUTPUT_DIR.resolve(slug);
     }
 
-    /** Locates an existing content/authors/**&#47;<slug>/index.md bundle, wherever it lives. */
+    /** Locates an existing content/authors/<slug>/_index.md bundle. */
     static Path findExistingAuthorBundle(String slug) {
         if (!Files.isDirectory(OUTPUT_DIR)) return null;
         try (Stream<Path> s = Files.walk(OUTPUT_DIR)) {
-            return s.filter(p -> p.getFileName().toString().equals("index.md")
+            return s.filter(p -> p.getFileName().toString().equals("_index.md")
                             && p.getParent() != null
                             && p.getParent().getFileName().toString().equals(slug))
                     .map(Path::getParent)
@@ -378,7 +378,7 @@ public class Authors {
         fm.append("---\n");
 
         Files.createDirectories(bundleDir);
-        Files.writeString(bundleDir.resolve("index.md"), fm.toString());
+        Files.writeString(bundleDir.resolve("_index.md"), fm.toString());
 
         System.out.println("Done author: " + d.slug);
     }

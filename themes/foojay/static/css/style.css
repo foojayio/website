@@ -1139,6 +1139,16 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
+/* The footer grid's tracks have hard minimums (220px + 170px + a 24px gap =
+   414px), so below roughly 446px they no longer fit the content box and the last
+   column overflowed it -- clipped rather than scrollable, so it read as a
+   mis-centred page rather than as an overflow. Two flexible columns with the
+   brand across the top fits a 390px phone (2 x 140 + 24 = 304) and keeps the
+   footer from becoming five stacked blocks. */
+@media (max-width: 560px) {
+  .footer-cols { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .footer-brand { grid-column: 1 / -1; }
+}
 .footer-brand .logo { color: var(--footer-head); margin-bottom: .75rem; }
 .footer-brand .logo:hover { color: var(--footer-head); }
 .footer-brand .logo__tag { display: inline-block; color: var(--footer-muted); border-color: var(--footer-border); }

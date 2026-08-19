@@ -1,9 +1,12 @@
-{{- /* Returns a map { <slug> : <author Page> } for every author profile,
-       keyed by filename (the slug posts reference). Bucketing of the author
-       files (content/authors/<letter>/…) doesn't matter here. Call via
-       partialCached so the map is built once per site build, not per lookup. */ -}}
+{{- /* Returns a map { <slug> : <author Page> } for every author profile, keyed by
+       the bundle folder name -- the slug posts reference in `authors:`.
+
+       Built from partials/authors-all.html (the single definition of which pages
+       are author profiles) so this cannot disagree with the A-Z grid about who
+       exists. Call via partialCached so the map is built once per site build
+       rather than per lookup. */ -}}
 {{- $m := dict -}}
-{{- range where site.RegularPages "Section" "authors" -}}
+{{- range partialCached "authors-all.html" "authors" -}}
   {{- $m = merge $m (dict .File.ContentBaseName .) -}}
 {{- end -}}
 {{- return $m -}}

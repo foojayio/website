@@ -38,4 +38,21 @@
   {{- $pager = .Paginate .RegularPagesRecursive.ByDate.Reverse -}}
 {{- end -}}
 
+{{/* An author profile and a sponsor profile paginate a list that is NOT their own
+     children -- the posts belong to content/posts/ and are attributed by slug. So
+     each is keyed on `type` (set by the cascade in the section's _index.md, which
+     is also what routes them to layouts/<type>/section.html), not on Kind alone:
+     the parent listing pages /today/author/ and /our-sponsors/ are sections in the
+     same section and must NOT paginate posts.
+
+     Both are branch bundles (_index.md) purely because .Paginate refuses a page
+     kind -- see those _index.md files. */}}
+{{- if eq .Type "author" -}}
+  {{- $pager = .Paginate (partial "author-posts.html" .) -}}
+{{- end -}}
+
+{{- if eq .Type "sponsor" -}}
+  {{- $pager = .Paginate (partial "sponsor-posts.html" .) -}}
+{{- end -}}
+
 {{- return $pager -}}

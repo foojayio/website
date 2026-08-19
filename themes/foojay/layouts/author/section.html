@@ -1,0 +1,51 @@
+{{ define "main" }}
+<div class="layout-with-sidebar">
+  <div class="content-col">
+    {{/* An author with no photo gets an explicitly EMPTY image meta rather
+         than none: with no meta at all, Pagefind falls back to scanning the
+         page and hands the search result the hero of whatever article happens
+         to sit first in the grid below. The search page treats "" as no
+         image, which is the honest answer here. */}}
+    <div class="author-profile"{{ if not (or .Params.avatarFull .Params.avatar) }} data-pagefind-meta="image:"{{ end }}>
+      {{/* Explicit data-pagefind-meta so Pagefind's site search uses the
+           author's own photo as the result thumbnail. Without this, Pagefind's
+           automatic image detection scans the whole indexed page -- including
+           the post-grid below -- and can end up picking a post's hero image
+           instead of the avatar. */}}
+      {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}">{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
+      {{/* Author pages start from zero rather than from a WordPress number:
+           the Post Views Counter plugin's user-archive counting is switched
+           off on foojay.io, so there is nothing to import (verified against
+           several authors -- see scripts/transfer/LegacyViews.java). This renders
+           nothing until the counter has seen some traffic. */}}
+      {{ with partial "views.html" . }}<p class="author-meta">{{ . | safeHTML }}</p>{{ end }}
+      {{ partial "author-social.html" . }}
+    </div>
+
+    {{/* One shared definition of "this author's articles", also used by the
+         Featured Authors block and its sidebar widget. Kept for the TOTAL in the
+         heading -- the grid below shows one page of it. */}}
+    {{ $written := partial "author-posts.html" . }}
+    {{/* Paginated: a prolific author has 150+ articles and this was a single
+         grid several screens long. The pager comes from partials/paginator.html,
+         the same definition baseof.html uses for this page's canonical, so the
+         two cannot disagree about which posts page 2 holds. */}}
+    {{ $pager := partial "paginator.html" . }}
+    <div class="section-head">
+      {{/* id + the pager's `anchor` below: paging returns the reader to the
+           grid rather than to the top of the profile. */}}
+      <h2 id="articles">{{ len $written }} article{{ if ne (len $written) 1 }}s{{ end }}</h2>
+    </div>
+    {{ if $written }}
+    {{ partial "pagination.html" (dict "page" . "position" "top" "anchor" "articles") }}
+    <div class="post-grid">
+      {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
+    </div>
+    {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" "articles") }}
+    {{ end }}
+  </div>
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

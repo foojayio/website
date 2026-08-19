@@ -25,7 +25,17 @@
        the Worker accepts any `<section>/<slug>` key. */ -}}
 {{- $counted := slice "posts" "pages" "pedia" "authors" -}}
 {{- $key := "" -}}
-{{- if and .IsPage .File (in $counted .Section) -}}
+{{/* `.IsPage` was the test here, and it silently stopped matching author
+     profiles when they became BRANCH bundles (sections) so that .Paginate would
+     accept them -- every author's count would have quietly reverted to nothing
+     being recorded. What actually matters is that the page has a FILE, so the
+     slug half can be derived, and that it is not a section LISTING (the
+     /today/author/ landing page, which is counted under `pages/...` if at all).
+     A profile is identified the same way everywhere: `type: "author"`.
+     .File.ContentBaseName returns the folder name for _index.md exactly as it
+     did for index.md, so the key itself is unchanged by the conversion. */}}
+{{- $isProfile := eq .Type "author" -}}
+{{- if and .File (in $counted .Section) (or .IsPage $isProfile) -}}
   {{- $key = printf "%s/%s" .Section (or .Params.slug .File.ContentBaseName) -}}
 {{- end -}}
 {{- return $key -}}

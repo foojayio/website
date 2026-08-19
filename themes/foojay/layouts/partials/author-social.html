@@ -16,6 +16,6 @@
        (see themes/foojay/layouts/authors/page.rss.xml). Shown here rather than
        gated on a specific social param so it appears both on the author's own
        profile page and in the "Written by" callout on each of their posts. */}}
-  {{ with $rss }}<li><a href="{{ .Permalink }}" rel="alternate" type="application/rss+xml">RSS</a></li>{{ end }}
+  {{ with $rss }}<li><a href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml">RSS</a></li>{{ end }}
 </ul>
 {{- end -}}

@@ -18,8 +18,8 @@ images, and delivering it (pull request, fork, or zip).
 - Each post is a folder under `content/posts/<year>/<month>/<day>/<your-slug>/`
   with the text in `index.md` and its images in the same folder. Copy
   `template/post.md` as your starting point.
-- New author? Add yourself under `content/authors/<first-letter>/<your-slug>/`
-  in the same PR.
+- New author? Add yourself as `content/authors/<your-slug>/_index.md` in the same
+  PR (note the underscore — see `template/author.md`).
 - Preview locally with `hugo server -D`, then check
   `http://localhost:1313/today/<your-slug>/` before opening the PR. The PR check
   validates your frontmatter and builds the site — fix anything it flags.

@@ -11,7 +11,7 @@
   {{/* A glossary: list terms alphabetically, no dates. */}}
   <div class="pedia-grid">
     {{ range .Pages.ByTitle }}
-      <a class="pedia-card" href="{{ .Permalink }}">
+      <a class="pedia-card" href="{{ .RelPermalink }}">
         <h3>{{ .Title }}</h3>
         {{ with .Params.description }}<p>{{ . | truncate 150 }}</p>{{ end }}
         {{ partial "views.html" . }}

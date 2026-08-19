@@ -16,7 +16,12 @@
        add Article/Person markup to pages that aren't one. */ -}}
 
 {{- $isPost := and (eq .Section "posts") .IsPage -}}
-{{- $isAuthor := and (eq .Section "authors") .IsPage -}}
+{{/* Type, not `and (eq .Section "authors") .IsPage`: an author profile is a
+     BRANCH bundle now, so .IsPage is false for it and the Person markup silently
+     stopped being emitted on all 344 of them. `type: "author"` comes from the
+     cascade in content/authors/_index.md and is set on the profiles only, never
+     on the /today/author/ landing page. */}}
+{{- $isAuthor := eq .Type "author" -}}
 
 {{- if $isPost -}}
   {{- $desc := .Params.description | default .Site.Params.description -}}

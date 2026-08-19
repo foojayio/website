@@ -51,7 +51,7 @@
         {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-ignore="all" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
         <div>
           <span class="eyebrow">Written by</span>
-          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
           {{ with .Params.bio }}<p>{{ . | truncate 260 }}</p>{{ end }}
           {{ partial "author-social.html" . }}
         </div>
@@ -69,7 +69,7 @@
              and without scanning every post per slug. */}}
         {{ range . }}
           {{ with index $posts . }}
-            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
           {{ end }}
         {{ end }}
       </ul>

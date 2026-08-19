@@ -18,7 +18,7 @@
       {{/* The portal has no feed of its own; the category it curates does. */}}
       {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
         {{ with .OutputFormats.Get "rss" }}
-        <a class="btn btn--ghost btn--sm" href="{{ .Permalink }}" rel="alternate" type="application/rss+xml">Subscribe via RSS</a>
+        <a class="btn btn--ghost btn--sm" href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml">Subscribe via RSS</a>
         {{ end }}
       {{ end }}
     </div>
@@ -72,7 +72,7 @@
     {{ end }}
 
     {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
-    <p class="section-more"><a class="btn btn--ghost" href="{{ .Permalink }}">Browse the {{ .Title }} category</a></p>
+    <p class="section-more"><a class="btn btn--ghost" href="{{ .RelPermalink }}">Browse the {{ .Title }} category</a></p>
     {{ end }}
   </div>
   {{ partial "sidebar.html" . }}

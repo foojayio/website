@@ -15,7 +15,7 @@
     {{ range . }}
     {{ $author := . }}
     <div class="featured-side">
-      <a class="featured-side__head" href="{{ $author.Permalink }}">
+      <a class="featured-side__head" href="{{ $author.RelPermalink }}">
         {{ with .Params.avatar }}
         <img src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy" decoding="async">
         {{ end }}
@@ -23,7 +23,7 @@
       </a>
       {{ with partial "author-posts.html" $author }}
       {{ $latest := index . 0 }}
-      <a class="featured-side__latest" href="{{ $latest.Permalink }}">
+      <a class="featured-side__latest" href="{{ $latest.RelPermalink }}">
         <span class="featured-side__label">Latest article</span>
         {{ $latest.Title }}
       </a>

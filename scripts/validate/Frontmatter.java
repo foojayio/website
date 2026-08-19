@@ -95,7 +95,12 @@ public class Frontmatter {
 
         try (Stream<Path> files = Files.walk(dir)) {
             for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
-                if (file.getFileName().toString().equals("_index.md")) continue;
+                // Skip only the SECTION's own _index.md, not every _index.md in the
+                // tree. Author and sponsor profiles are branch bundles now
+                // (content/authors/<slug>/_index.md -- .Paginate refuses a page kind),
+                // so a blanket skip on the filename silently stopped checking all 344
+                // author profiles and all 7 sponsors for their required fields.
+                if (file.equals(dir.resolve("_index.md"))) continue;
                 Map<String, Object> fm = readFrontmatter(file);
                 if (fm == null) {
                     problems.add(file + ": no frontmatter block found");
@@ -258,7 +263,7 @@ public class Frontmatter {
                     String a = author.toString();
                     if (a.equals(PLACEHOLDERS.get("authors")) || authorSlugs.contains(a)) continue;
                     problems.add(index + ": authors references unknown author slug '" + a
-                            + "' -- add content/authors/" + a.charAt(0) + "/" + a + "/index.md"
+                            + "' -- add content/authors/" + a + "/_index.md"
                             + " in this same PR (start from template/author.md)");
                 }
             }
@@ -309,6 +314,8 @@ public class Frontmatter {
 
         try (Stream<Path> files = Files.walk(postsDir)) {
             for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                // Posts are LEAF bundles (index.md), so any _index.md under
+                // content/posts/ is a section index and never an article.
                 if (file.getFileName().toString().equals("_index.md")) continue;
                 Map<String, Object> fm = readFrontmatter(file);
                 if (fm == null) continue;
@@ -331,6 +338,8 @@ public class Frontmatter {
 
         try (Stream<Path> files = Files.walk(postsDir)) {
             for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                // Posts are LEAF bundles (index.md), so any _index.md under
+                // content/posts/ is a section index and never an article.
                 if (file.getFileName().toString().equals("_index.md")) continue;
                 Map<String, Object> fm = readFrontmatter(file);
                 if (fm == null) continue;
@@ -348,16 +357,20 @@ public class Frontmatter {
     }
 
     /**
-     * Every author slug that exists, i.e. every content/authors/**&#47;<slug>/index.md
-     * bundle folder name. Author bundles are bucketed by first letter, so the
-     * folder name -- not the path -- is the slug, exactly as posts and the
-     * templates treat it.
+     * Every author slug that exists, i.e. every content/authors/<slug>/_index.md
+     * bundle folder name -- which is what posts reference in `authors:` and what
+     * :slugorcontentbasename resolves to.
+     *
+     * `_index.md`, not `index.md`: an author profile is a BRANCH bundle so that
+     * .Paginate will accept it (see content/authors/_index.md). The section's own
+     * _index.md is excluded, or "authors" itself would count as an author slug.
      */
     static Set<String> authorSlugs() throws IOException {
         Path dir = Path.of("content/authors");
         if (!Files.isDirectory(dir)) return Set.of();
         try (Stream<Path> files = Files.walk(dir)) {
-            return files.filter(p -> p.getFileName().toString().equals("index.md"))
+            return files.filter(p -> p.getFileName().toString().equals("_index.md"))
+                    .filter(p -> !p.equals(dir.resolve("_index.md")))
                     .map(p -> p.getParent().getFileName().toString())
                     .collect(java.util.stream.Collectors.toSet());
         }
@@ -365,7 +378,7 @@ public class Frontmatter {
 
     /**
      * A sponsor's `authors:` list IS its article list: the profile template
-     * (themes/foojay/layouts/sponsors/single.html) shows every post written by
+     * (themes/foojay/layouts/sponsor/section.html) shows every post written by
      * those slugs. A typo therefore doesn't error, it just silently drops
      * articles off the sponsor's page -- which is exactly the class of mistake
      * a PR check should catch, same reasoning as the related_posts check above.
@@ -379,20 +392,111 @@ public class Frontmatter {
         if (!Files.isDirectory(sponsorsDir)) return problems;
 
         try (Stream<Path> files = Files.walk(sponsorsDir)) {
-            for (Path file : files.filter(p -> p.getFileName().toString().equals("index.md")).toList()) {
+            // Sponsor bundles are branch bundles (_index.md), same reason as authors.
+            for (Path file : files.filter(p -> p.getFileName().toString().equals("_index.md"))
+                    .filter(p -> !p.equals(sponsorsDir.resolve("_index.md"))).toList()) {
                 Map<String, Object> fm = readFrontmatter(file);
                 if (fm == null) continue;
                 if (fm.get("authors") instanceof List<?> list) {
-                    for (Object slug : list) {
-                        if (slug != null && !authorSlugs.contains(slug.toString())) {
-                            problems.add(file + ": authors references unknown author slug '" + slug
-                                    + "' (expected a folder name under content/authors/)");
-                        }
+                    for (Object entry : list) {
+                        if (entry == null) continue;
+                        problems.addAll(checkSponsorAuthorEntry(file, entry, authorSlugs));
                     }
                 }
             }
         }
         return problems;
+    }
+
+    /** Keys allowed on a dated `authors:` entry. Closed on purpose -- see below. */
+    static final Set<String> SPONSOR_AUTHOR_KEYS = Set.of("slug", "from", "till");
+    static final Pattern ISO_DAY = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+
+    /**
+     * One entry of a sponsor's `authors:` list, which is either a bare slug or a
+     * map carrying an attribution window:
+     *
+     *   authors:
+     *     - "tim-kelly"
+     *     - slug: "pratik-patel"
+     *       till: "2026-04-01"
+     *
+     * The window exists because people change employer (see
+     * partials/sponsor-authors.html): `[from, till)` is half-open, so `till` is
+     * the day they left and their later articles stop being the sponsor's.
+     *
+     * Every rule here is a SILENT failure otherwise, which is the bar for adding
+     * a check at all:
+     *
+     *   - a misspelled key (`until:` for `till:`, `since:` for `from:`) is simply
+     *     ignored by the template, so the departed author's new posts keep
+     *     appearing and nothing says why. Hence a CLOSED key set, the same
+     *     reasoning as checkEvents.
+     *   - a map with no `slug` matches no author at all, silently dropping every
+     *     article that person wrote.
+     *   - a date Hugo's time.Format can't read halts the build with a template
+     *     error rather than a content error, which points at the wrong file.
+     *   - from >= till is an empty window: the author is listed on the page and
+     *     contributes nothing, which reads as a bug in the site.
+     */
+    static List<String> checkSponsorAuthorEntry(Path file, Object entry, Set<String> authorSlugs) {
+        List<String> problems = new ArrayList<>();
+
+        if (!(entry instanceof Map<?, ?> map)) {
+            String slug = entry.toString();
+            if (!authorSlugs.contains(slug)) {
+                problems.add(file + ": authors references unknown author slug '" + slug
+                        + "' (expected a folder name under content/authors/)");
+            }
+            return problems;
+        }
+
+        for (Object key : map.keySet()) {
+            if (!SPONSOR_AUTHOR_KEYS.contains(String.valueOf(key))) {
+                problems.add(file + ": authors entry has unknown key '" + key
+                        + "' -- allowed: " + new java.util.TreeSet<>(SPONSOR_AUTHOR_KEYS));
+            }
+        }
+
+        Object slugValue = map.get("slug");
+        if (slugValue == null || slugValue.toString().isBlank()) {
+            problems.add(file + ": authors entry " + map + " has no 'slug'"
+                    + " (a dated entry is `- slug: \"name\"` plus from:/till:)");
+            return problems;
+        }
+        String slug = slugValue.toString();
+        if (!authorSlugs.contains(slug)) {
+            problems.add(file + ": authors references unknown author slug '" + slug
+                    + "' (expected a folder name under content/authors/)");
+        }
+
+        String from = sponsorAuthorDay(file, map.get("from"), "from", slug, problems);
+        String till = sponsorAuthorDay(file, map.get("till"), "till", slug, problems);
+        if (from != null && till != null && from.compareTo(till) >= 0) {
+            problems.add(file + ": authors entry '" + slug + "' has from: " + from
+                    + " on or after till: " + till + " -- an empty window, so the author"
+                    + " would be listed with none of their articles"
+                    + " (the range is half-open: till is the first day NOT attributed)");
+        }
+        return problems;
+    }
+
+    /**
+     * A `from:`/`till:` value as an ISO yyyy-MM-dd string, or null when absent or
+     * unusable. YAML turns an unquoted 2026-04-01 into a Date and a quoted one
+     * into a String, and both are accepted -- the templates normalise via
+     * time.Format either way.
+     */
+    static String sponsorAuthorDay(Path file, Object value, String key, String slug, List<String> problems) {
+        if (value == null) return null;
+        if (value instanceof java.util.Date d) {
+            return new java.text.SimpleDateFormat("yyyy-MM-dd").format(d);
+        }
+        String text = value.toString().trim();
+        if (ISO_DAY.matcher(text).matches()) return text;
+        problems.add(file + ": authors entry '" + slug + "' has " + key + ": '" + text
+                + "' -- expected a yyyy-MM-dd date");
+        return null;
     }
 
     /**

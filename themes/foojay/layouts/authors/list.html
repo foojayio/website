@@ -16,9 +16,9 @@
     <input type="search" id="list-filter" class="list-filter__input" placeholder="Filter authors by name…" aria-label="Filter authors by name" autocomplete="off">
   </div>
   <div class="author-grid" id="author-grid">
-    {{ range where .Site.RegularPages "Section" "authors" }}
+    {{ range partialCached "authors-all.html" "authors" }}
       {{ $author := . }}
-      <a class="author-card" href="{{ .Permalink }}" data-name="{{ lower $author.Title }}">
+      <a class="author-card" href="{{ .RelPermalink }}" data-name="{{ lower $author.Title }}">
         {{ with .Params.avatar }}<img src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
         <span>{{ $author.Title }}</span>
       </a>

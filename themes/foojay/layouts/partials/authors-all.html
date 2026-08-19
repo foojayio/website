@@ -1,0 +1,19 @@
+{{- /* Every author profile, ordered by name. Takes no arguments.
+
+       One definition, because the filter is no longer obvious and was repeated
+       in four templates. Author bundles are BRANCH bundles now (see the cascade
+       in content/authors/_index.md for why), which means:
+
+         - `site.RegularPages` does NOT contain them. That is the trap: the old
+           `where site.RegularPages "Section" "authors"` still parses, still runs,
+           and now returns an EMPTY list -- so the A-Z grid, the sidebar widget,
+           the sitemap and the byline lookup would all just quietly render
+           nothing rather than fail the build.
+         - filtering on Section "authors" would also catch content/authors/_index.md
+           itself (the /today/author/ landing page), so the match is on
+           `Type "author"`, which the cascade sets on the children only.
+
+       Called via partialCached -- the list is the same for every page on the
+       site, and it is walked by the author index, the profile pages and the
+       sidebar on all 3500 of them. */ -}}
+{{- return (where site.Pages "Type" "author").ByTitle -}}

@@ -8,18 +8,63 @@
        summarises articles goes through this partial, so there is exactly one
        definition of "a sponsor's articles".
 
+       AN AUTHOR'S ATTRIBUTION CAN BE DATE-BOUNDED. An entry in `authors:` may
+       carry `from:`/`till:` (see partials/sponsor-authors.html), because people
+       change employer: two Azul authors left on 2026-04-01 and their later
+       articles, written elsewhere, were still being listed under Azul. A post
+       counts when it falls inside the window of AT LEAST ONE of its authors --
+       so a piece co-written by a current colleague and a departed one is still
+       the sponsor's, which is the right answer and the reason this is a per-post
+       check rather than a filter on the slug list.
+
        Posts credit authors as an `authors:` list; older ones may still carry a
-       single `author:` slug -- match both and de-dupe, same as
-       authors/single.html does for one author.
+       single `author:` slug -- match both and de-dupe. (Nothing in content/ uses
+       the singular key today, and transfer/Posts.java only ever writes the list,
+       but it costs two lines to keep honouring it.)
 
        Param: the sponsor Page. Returns: a slice of Pages (empty when the
        sponsor has no authors listed yet). */ -}}
-{{- $authors := .Params.authors -}}
+
+{{- $entries := partial "sponsor-authors.html" . -}}
 {{- $result := slice -}}
-{{- if $authors -}}
+
+{{- if $entries -}}
+  {{- $slugs := slice -}}
+  {{- range $entries }}{{ $slugs = $slugs | append .slug }}{{ end -}}
+
   {{- $posts := where site.RegularPages "Section" "posts" -}}
-  {{- $result = where $posts "Params.authors" "intersect" $authors -}}
-  {{- $result = $result | union (where $posts "Params.author" "in" $authors) -}}
+  {{- $candidates := where $posts "Params.authors" "intersect" $slugs -}}
+  {{- $candidates = $candidates | union (where $posts "Params.author" "in" $slugs) -}}
+
+  {{/* Fast path: with no dated entry there is nothing to filter, so skip the
+       per-post loop entirely -- 6 of the 7 sponsors are in that state. */}}
+  {{- if not (where $entries "dated" true) -}}
+    {{- $result = $candidates -}}
+  {{- else -}}
+    {{- range $p := $candidates -}}
+      {{/* The post's authors, singular key folded in, so the window check sees
+           one list whichever key the post uses. */}}
+      {{- $credits := $p.Params.authors | default slice -}}
+      {{- with $p.Params.author }}{{ $credits = $credits | append . }}{{ end -}}
+      {{- $day := $p.Date.Format "2006-01-02" -}}
+      {{- $keep := false -}}
+      {{- range $e := $entries -}}
+        {{- if not $keep -}}
+          {{- if in $credits $e.slug -}}
+            {{/* [from, till) -- half-open, so `till` is the first day NOT
+                 attributed. ISO-8601 compares correctly as a plain string, and
+                 both sides were normalised to it by sponsor-authors.html. */}}
+            {{- $after := or (not $e.from) (ge $day $e.from) -}}
+            {{- $before := or (not $e.till) (lt $day $e.till) -}}
+            {{- if and $after $before }}{{ $keep = true }}{{ end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if $keep }}{{ $result = $result | append $p }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+
   {{- $result = sort $result "Date" "desc" -}}
 {{- end -}}
+
 {{- return $result -}}

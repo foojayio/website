@@ -36,6 +36,14 @@
 
 {{- $page := .page | default . -}}
 {{- $position := .position | default "bottom" -}}
+{{/* Optional `anchor`: an element id on the page, appended to every pager link so
+     the browser lands back at the list instead of the top of the document. On an
+     author or sponsor profile the grid sits below a bio, stats and an About
+     section, so paging without it threw the reader back to the header and they
+     had to scroll down again to page a second time. Omitted on /today/ and the
+     category pages, where the grid is already the top of the content. */}}
+{{- $anchor := "" -}}
+{{- with .anchor }}{{ $anchor = printf "#%s" . }}{{ end -}}
 {{- $pager := partial "paginator.html" $page -}}
 
 {{- with $pager -}}
@@ -74,7 +82,7 @@
          aria-hidden, because "Previous, unavailable" is noise to a screen reader
          on a page already announced as current. */}}
     {{- if .HasPrev }}
-    <a class="pagination__btn" href="{{ .Prev.URL }}" rel="prev" aria-label="Previous page"><span aria-hidden="true">&laquo;</span></a>
+    <a class="pagination__btn" href="{{ .Prev.URL }}{{ $anchor }}" rel="prev" aria-label="Previous page"><span aria-hidden="true">&laquo;</span></a>
     {{- else }}
     <span class="pagination__btn is-disabled" aria-hidden="true">&laquo;</span>
     {{- end }}
@@ -87,7 +95,7 @@
            ellipsis only when a page is actually skipped: at 6 pages the window
            covers 1-5, so "5 &hellip; 6" would claim a gap that isn't there. */}}
       {{- if gt $from 1 }}
-      <li><a class="pagination__btn" href="{{ (index $pager.Pagers 0).URL }}" aria-label="Page 1">1</a></li>
+      <li><a class="pagination__btn" href="{{ (index $pager.Pagers 0).URL }}{{ $anchor }}" aria-label="Page 1">1</a></li>
         {{- if gt $from 2 }}
       <li><span class="pagination__gap" aria-hidden="true">&hellip;</span></li>
         {{- end }}
@@ -110,7 +118,7 @@
         {{- if eq $p $cur }}
       <li><span class="pagination__btn is-current" aria-current="page" aria-label="Page {{ $p }}, current page">{{ $p }}</span></li>
         {{- else }}
-      <li{{ if $far }} class="pagination__cell--far"{{ end }}><a class="pagination__btn" href="{{ $target.URL }}" aria-label="Page {{ $p }}">{{ $p }}</a></li>
+      <li{{ if $far }} class="pagination__cell--far"{{ end }}><a class="pagination__btn" href="{{ $target.URL }}{{ $anchor }}" aria-label="Page {{ $p }}">{{ $p }}</a></li>
         {{- end }}
       {{- end }}
 
@@ -118,12 +126,12 @@
         {{- if lt $to (sub $total 1) }}
       <li><span class="pagination__gap" aria-hidden="true">&hellip;</span></li>
         {{- end }}
-      <li><a class="pagination__btn" href="{{ (index $pager.Pagers (sub $total 1)).URL }}" aria-label="Page {{ $total }} (last page)">{{ $total }}</a></li>
+      <li><a class="pagination__btn" href="{{ (index $pager.Pagers (sub $total 1)).URL }}{{ $anchor }}" aria-label="Page {{ $total }} (last page)">{{ $total }}</a></li>
       {{- end }}
     </ul>
 
     {{- if .HasNext }}
-    <a class="pagination__btn" href="{{ .Next.URL }}" rel="next" aria-label="Next page"><span aria-hidden="true">&raquo;</span></a>
+    <a class="pagination__btn" href="{{ .Next.URL }}{{ $anchor }}" rel="next" aria-label="Next page"><span aria-hidden="true">&raquo;</span></a>
     {{- else }}
     <span class="pagination__btn is-disabled" aria-hidden="true">&raquo;</span>
     {{- end }}
