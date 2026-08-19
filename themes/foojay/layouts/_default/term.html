@@ -17,7 +17,9 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
     <div class="post-grid">
-      {{ range .Paginator.Pages }}{{ partial "post-card.html" . }}{{ end }}
+      {{/* Via the partial, not .Paginator directly: see partials/paginator.html. */}}
+      {{ $paginator := partial "paginator.html" . }}
+      {{ range $paginator.Pages }}{{ partial "post-card.html" . }}{{ end }}
     </div>
     {{ template "_internal/pagination.html" . }}
   </div>

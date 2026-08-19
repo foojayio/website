@@ -2,7 +2,7 @@
 title: "Beyond Keywords: Implementing Semantic Search in Java With Spring Data (Part 1)"
 date: "2025-10-16T13:39:59+00:00"
 lastmod: "2026-01-05T19:33:09+00:00"
-description: "Have you ever tried to search for something such as a product, a song, or a movie but couldn’t quite remember its exact name? Maybe you recall only a clue—a desert pyramid, a short melody, or “that ship that hit an iceberg.” Keyword search struggles with that. Vector search doesn’t: It lets you search by meaning.It works by turning text into embeddings, vectors (arrays of numbers) that capture semantic similarity, so results are ranked by what they mean, not just what they say.With recent vector query support in Spring Data, Java developers can build semantic search using familiar repositories and queries."
+description: "Have you ever tried to search for something such as a product, a song, or a movie but couldn’t quite remember its exact name? Maybe you recall only a clue—a desert pyramid, a short melody, or “that ship that hit an iceberg.” Keyword search struggles with that. Vector search doesn’t: It lets you search by meaning. It works by turning text into embeddings, vectors (arrays of numbers) that capture semantic similarity, so results are ranked by what they mean, not just what they say. With recent vector query support in Spring Data, Java developers can build semantic search using familiar repositories and queries."
 authors:
   - "ricardo-mello"
 image: "458-4589658_spring-framework-logo-spring-boot-png-transparent-png.png"

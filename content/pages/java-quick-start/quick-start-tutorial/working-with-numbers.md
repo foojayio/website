@@ -2,7 +2,6 @@
 title: "Getting Started with Java - Working with numbers"
 linkTitle: "Working with Numbers"
 description: "The Java number types you will actually use - int, float, double and long - and how to work with them."
-canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/"
 url: "/java-quick-start/quick-start-tutorial/working-with-numbers/"
 jdoodle: true
 aliases:

@@ -2,7 +2,7 @@
 title: "Receiving mails in Java with IMAP or POP3"
 date: "2025-01-24T10:33:44+00:00"
 lastmod: "2025-01-24T10:46:33+00:00"
-description: "There is a lot of documentation for sending mails, but gathering information about the receiving and processing part is less easy.This example shows you how to receive mails in Java either using the IMAP or the POP3 protocol."
+description: "There is a lot of documentation for sending mails, but gathering information about the receiving and processing part is less easy. This example shows you how to receive mails in Java either using the IMAP or the POP3 protocol."
 canonical: "https://jensknipper.de/blog/receiving-emails-in-java/"
 authors:
   - "jens-knipper"

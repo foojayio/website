@@ -1,7 +1,6 @@
 ---
 title: "Foojay.io AI Portal"
 description: "Where Java meets AI: practical guides, tutorials and success stories on building AI-powered Java applications, from pure-Java ML to LangChain4j and Deep Netts."
-canonical: "https://foojay.io/ai/"
 url: "/ai/"
 aliases:
   - "/ai/"

@@ -1,7 +1,6 @@
 ---
 title: "Meet the Foojay Team"
 description: "Get to know the team behind Foojay.io, the Java community platform built by Friends Of OpenJDK for the Java ecosystem."
-canonical: "https://foojay.io/meet-the-team/"
 url: "/meet-the-team/"
 aliases:
   - "/meet-the-team/"

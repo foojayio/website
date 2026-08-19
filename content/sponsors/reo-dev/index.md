@@ -18,7 +18,6 @@ github: ""
 authors:
 topics:
 wpSlug: "reo-dev"
-canonical: "https://foojay.io/sponsor/reo-dev/"
 frozen: false
 ---
 

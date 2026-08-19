@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java"
 description: "Install Java, then go from choosing an editor to using streams in under 30 minutes with the Foojay Java Quick Start."
-canonical: "https://foojay.io/java-quick-start/"
 url: "/java-quick-start/"
 aliases:
   - "/java-quick-start/"

@@ -1,7 +1,6 @@
 ---
 title: "Java User Groups"
 description: "Find a Java User Group (JUG) near you, sourced live from the community-run World Wide JUGs directory."
-canonical: "https://foojay.io/jugs/"
 url: "/jugs/"
 type: "jugs"
 aliases:

@@ -5,6 +5,37 @@ title = "foojay.io - Friends of OpenJDK"
 theme = "foojay"
 enableRobotsTXT = true
 
+# Derives each page's lastmod from the last commit that touched its file, which
+# is the only thing that can date the 441 pages with no `date:` of their own
+# (the Quick Start steps, install-java, the board members). Without it those
+# pages ship a <url> with no <lastmod> in sitemap.xml and a `pubDate` of
+# 0001-01-01 in any feed they appear in -- an invalid date some readers drop the
+# whole item over.
+#
+# NOTE: this needs the full git history at build time. .github/workflows/
+# build-deploy.yml therefore checks out with `fetch-depth: 0`; on the default
+# shallow clone every file resolves to the same single commit, so every page
+# would claim the same lastmod and the field would be worse than absent.
+enableGitInfo = true
+
+# The order matters and is not the default. `:git` sits BELOW `date` on purpose:
+# a post's real publish date is in its frontmatter, while its git date is when
+# the migration happened -- so leading with :git would stamp all 2147 posts with
+# an Aug 2026 lastmod, telling Google the entire archive changed at once. :git
+# is the last resort, which is exactly the dateless pages it was added for.
+[frontmatter]
+  date = ["date", "publishDate", "lastmod", ":git"]
+  lastmod = ["lastmod", "date", ":git", "publishDate"]
+
+# Caps every feed the site emits. Hugo's default is -1 (unbounded), which made
+# /index.xml a 3.85 MB document of 2584 items -- a feed that size is slow for
+# every reader on every poll and is dropped outright by some aggregators.
+# Honoured by the embedded RSS template and by layouts/authors/page.rss.xml,
+# which reads this same value.
+[services]
+  [services.rss]
+    limit = 30
+
 # Legacy WordPress URLs used explicit per-page overrides (see each .md's `url:`
 # frontmatter) rather than relying purely on permalink patterns, because the
 # old page tree has inconsistent nesting (e.g. /java-quick-start/install-java/...).

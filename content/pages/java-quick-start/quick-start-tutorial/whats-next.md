@@ -2,7 +2,6 @@
 title: "Getting Started with Java - What's Next?"
 linkTitle: "What's Next?"
 description: "You have the basics. Where to go next: beginner posts on Foojay.io, and free tutorials from the wider Java community."
-canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/whats-next/"
 url: "/java-quick-start/quick-start-tutorial/whats-next/"
 aliases:
   - "/java-quick-start/quick-start-tutorial/whats-next/"

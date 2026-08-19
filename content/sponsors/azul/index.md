@@ -42,7 +42,6 @@ topics:
 wpSlug: "azul-enterprise-java-platform-foojay-io-gold-sponsor"
 aliases:
   - "/sponsor/azul-enterprise-java-platform-foojay-io-gold-sponsor/"
-canonical: "https://foojay.io/sponsor/azul-enterprise-java-platform-foojay-io-gold-sponsor/"
 frozen: false
 ---
 

@@ -332,14 +332,21 @@ public class Posts {
         d.url = stripTrailingSlash(url) + "/";
         d.slug = sanitizeSlug(lastPathSegment(d.url));
 
-        d.title = normalizeBrandName(stripEmoji(stripSiteName(firstNonBlank(
+        d.title = HtmlToMarkdown.normalizeBrandName(stripEmoji(stripSiteName(firstNonBlank(
                 metaContent(doc, "og:title"),
                 textOrNull(doc.selectFirst("h1")),
                 doc.title()))));
 
-        d.description = normalizeBrandName(firstNonBlank(
-                attrContent(doc, "meta[name=description]"),
-                metaContent(doc, "og:description")));
+        // repairRunOnSentences: Yoast builds the description by concatenating the
+        // body's text nodes with no separator, so a heading runs into the
+        // paragraph after it ("...the Service Layer pattern.What you'll learn").
+        // Repaired here so a re-scrape emits what cleanup/Descriptions.java
+        // already put in content/ -- see the method for the two guards that keep
+        // it off System.Logger and sun.misc.Unsafe.
+        d.description = HtmlToMarkdown.repairRunOnSentences(
+                HtmlToMarkdown.normalizeBrandName(firstNonBlank(
+                        attrContent(doc, "meta[name=description]"),
+                        metaContent(doc, "og:description"))));
 
         // Only keep a canonical when it points to a DIFFERENT site (cross-posted
         // content). A self-canonical is redundant -- Hugo/the theme already emit

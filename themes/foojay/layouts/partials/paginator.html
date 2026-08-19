@@ -1,0 +1,41 @@
+{{- /*
+  The single definition of "how does this page paginate", returning the current
+  pager, or false for a page that doesn't paginate.
+
+  It exists because of an ordering trap. baseof.html needs the pager in <head>
+  to write a self-referencing canonical on /today/page/2/ instead of pointing
+  every pager at page 1 -- and <head> is rendered BEFORE `{{ block "main" }}`.
+  Hugo lets .Paginate be called any number of times but errors out if the
+  arguments differ between calls ("invoked multiple times with different
+  arguments"), so a bare .Paginator in the head would collide with
+  posts/list.html's `.Paginate .RegularPagesRecursive.ByDate.Reverse`. Routing
+  both callers through one partial makes the arguments identical by
+  construction; a future paginated section adds a branch here and gets its
+  canonical for free.
+
+  Deliberately plain `partial`, NOT `partialCached`: Hugo renders /today/,
+  /today/page/2/, ... by re-executing this same Page with the pager advanced, so
+  a cache keyed on the page would hand page 2 the page-1 pager and every pager
+  would list the same posts.
+
+  ONE return, at the end, assigning into a variable along the way. Hugo rejects
+  a partial with a `return` that other statements fall through past
+  ("wrong number of args for return: want 0 got 1"), which is what an early
+  `{{ return .Paginator }}` per branch produces.
+*/ -}}
+
+{{- $pager := false -}}
+
+{{- if eq .Kind "term" -}}
+  {{/* Category term pages paginate .Pages, which is what .Paginator does. */}}
+  {{- $pager = .Paginator -}}
+{{- end -}}
+
+{{- if and (eq .Kind "section") (eq .Section "posts") -}}
+  {{/* Posts are bucketed into <year>/<month>/<day>/ subdirectories, so .Pages
+       (direct children) would only see the year sub-sections. Paginate all
+       posts recursively, newest first. */}}
+  {{- $pager = .Paginate .RegularPagesRecursive.ByDate.Reverse -}}
+{{- end -}}
+
+{{- return $pager -}}

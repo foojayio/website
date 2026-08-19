@@ -1,7 +1,6 @@
 ---
 title: "Java Champions"
 description: "The Java Champions program recognizes influential members of the Java community. Sourced live from the official Java Champions directory."
-canonical: "https://foojay.io/java-champions/"
 url: "/java-champions/"
 type: "champions"
 aliases:

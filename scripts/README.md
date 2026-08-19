@@ -72,6 +72,7 @@ them take `--dry-run` (report, change nothing) and most take `--path <dir>`.
 | `CloudflareEmails.java` | email addresses Cloudflare had obfuscated away from the scrapers (re-fetches the live page) |
 | `HeadingAnchors.java` | WordPress's positional `{#h2-N-slug}` heading and link ids |
 | `NormalizeMarkdown.java` | setext headings → ATX, decorative `<br>` spacers dropped |
+| `Descriptions.java` | the spaces Yoast dropped building a `description:` from the body (`…pattern.What you'll learn`) — 22 posts; prints the 7 it can't tell apart from a type name |
 | `SanitizeSlugs.java` | slugs → lowercase `[a-z0-9_-]` |
 | `PostsToBundles.java` | flat post files → leaf bundles |
 | `AuthorsToBundles.java` | flat author files → leaf bundles |

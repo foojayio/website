@@ -169,7 +169,9 @@ public class Sponsors {
                 textOrNull(doc.selectFirst(SELECTOR_PROFILE_NAME)),
                 metaContent(doc, "og:title").replaceAll("\\s*-\\s*foojay$", ""));
         d.tagline = textOrEmpty(doc.selectFirst(SELECTOR_PROFILE_TAGLINE));
-        d.description = attrContent(doc, "meta[name=description]");
+        // Same WordPress artefact the post descriptions carry -- see
+        // HtmlToMarkdown.repairRunOnSentences.
+        d.description = HtmlToMarkdown.repairRunOnSentences(attrContent(doc, "meta[name=description]"));
 
         Element badge = doc.selectFirst(SELECTOR_PROFILE_BADGE);
         d.tier = firstNonBlank(
@@ -398,14 +400,11 @@ public class Sponsors {
             for (Path b : bundles) {
                 if (slug.equals(frontmatterValue(b.resolve("index.md"), "wpSlug"))) return b;
             }
-            // Bundles written before `wpSlug:` existed don't carry it, but they
-            // do carry `canonical:` -- which ends in the same WP slug. Without
-            // this fallback, the first run after a rename can't recognise such a
-            // bundle and duplicates the sponsor with an empty `authors:` list.
-            String canonical = BASE_URL + "/sponsor/" + slug + "/";
-            for (Path b : bundles) {
-                if (canonical.equals(frontmatterValue(b.resolve("index.md"), "canonical"))) return b;
-            }
+            // There used to be a third pass here matching on `canonical:`, for
+            // bundles written before `wpSlug:` existed. Both halves of it are
+            // gone: every bundle in content/sponsors/ now carries `wpSlug`, and
+            // writeSponsor no longer emits `canonical` at all (see there for
+            // why), so the pass could only ever return null.
             return null;
         } catch (IOException e) {
             return null;
@@ -479,7 +478,13 @@ public class Sponsors {
             fm.append("  - ").append(yamlString("/sponsor/" + d.slug + "/")).append("\n");
         }
 
-        fm.append("canonical: ").append(yamlString(BASE_URL + "/sponsor/" + d.slug + "/")).append("\n");
+        // No `canonical:`. It used to be written as BASE_URL + /sponsor/<wpSlug>/,
+        // which is either identical to the page's own permalink (redundant) or --
+        // once a folder is renamed, as content/sponsors/azul/ is -- the OLD path,
+        // i.e. a URL that only exists as the `aliases:` redirect emitted just
+        // above. A canonical pointing at a redirect is a canonical search engines
+        // discard. baseof.html self-canonicalises every page that carries no
+        // `canonical:`, so dropping the field IS the correct value.
         fm.append("frozen: false\n");
         fm.append("---\n\n");
         fm.append(d.body == null ? "" : d.body.strip()).append("\n");

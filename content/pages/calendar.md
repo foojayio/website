@@ -1,7 +1,6 @@
 ---
 title: "Events Calendar"
 description: "Upcoming meetups, conferences and workshops from the Java community worldwide."
-canonical: "https://foojay.io/calendar/"
 url: "/calendar/"
 type: "events"
 aliases:

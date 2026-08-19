@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java - Check your Java installation"
 description: "Find out whether Java is already installed and which version you have, using java -version in a terminal on Windows, macOS or Linux."
-canonical: "https://foojay.io/java-quick-start/install-java/check-your-java-installation/"
 url: "/java-quick-start/install-java/check-your-java-installation/"
 aliases:
   - "/java-quick-start/install-java/check-your-java-installation/"

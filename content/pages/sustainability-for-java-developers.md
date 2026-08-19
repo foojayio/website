@@ -1,7 +1,6 @@
 ---
 title: "Sustainability for Java Developers"
 description: "A free community eBook in which Java Champions, architects and writers explore what sustainable Java software development means."
-canonical: "https://foojay.io/sustainability-for-java-developers/"
 url: "/sustainability-for-java-developers/"
 aliases:
   - "/sustainability-for-java-developers/"

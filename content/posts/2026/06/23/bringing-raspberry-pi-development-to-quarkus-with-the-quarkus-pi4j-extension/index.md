@@ -1,7 +1,7 @@
 ---
 title: "Bringing Raspberry Pi Development to Quarkus with the Quarkus Pi4J Extension"
 date: "2026-06-23T07:30:00+00:00"
-description: "Pi4J has become the standard way to access GPIO, I2C, SPI, UART, and other Raspberry Pi interfaces from Java applications. On the other hand, Quarkus has established itself as one of the most innovative Java frameworks, offering fast startup times, low memory consumption, and a developer-friendly experience.The Quarkus Pi4J Extension brings these two worlds together, making it easier than ever to build hardware-enabled applications using the Quarkus ecosystem."
+description: "Pi4J has become the standard way to access GPIO, I2C, SPI, UART, and other Raspberry Pi interfaces from Java applications. On the other hand, Quarkus has established itself as one of the most innovative Java frameworks, offering fast startup times, low memory consumption, and a developer-friendly experience. The Quarkus Pi4J Extension brings these two worlds together, making it easier than ever to build hardware-enabled applications using the Quarkus ecosystem."
 authors:
   - "igor-de-souza"
 image: "quarkus_pi4j01-1024x819.png"

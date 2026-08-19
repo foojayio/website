@@ -18,7 +18,6 @@ github: ""
 authors:
 topics:
 wpSlug: "zencoder"
-canonical: "https://foojay.io/sponsor/zencoder/"
 frozen: false
 ---
 

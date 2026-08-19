@@ -1,4 +1,24 @@
+{{- /*
+  Two robots.txt files in one, chosen by which URL is being built for -- the
+  same derivation baseof.html uses for its noindex, and for the same reason: the
+  trial deploy at foojayio.github.io/website is a byte-for-byte copy of the live
+  WordPress site, so a crawlable copy competes with foojay.io for foojay.io's own
+  rankings. Advertising the sitemap from it made that worse, not better.
+
+  It flips itself at cutover: when baseURL becomes params.productionBaseURL this
+  renders the permissive version, with nothing to remember to unset.
+*/ -}}
+{{- $prod := strings.TrimSuffix "/" (site.Params.productionBaseURL | default site.BaseURL) -}}
+{{- $isTrial := ne (strings.TrimSuffix "/" site.BaseURL) $prod -}}
+{{ if $isTrial -}}
+# Trial deploy of the foojay.io Hugo rebuild -- not the live site.
+# The content here duplicates https://foojay.io/ , so it must stay out of search
+# indexes until cutover. Every page also carries <meta name="robots" content="noindex">.
+User-agent: *
+Disallow: /
+{{- else -}}
 User-agent: *
 Disallow:
 
 Sitemap: {{ "sitemap.xml" | absURL }}
+{{- end }}

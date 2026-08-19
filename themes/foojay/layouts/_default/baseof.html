@@ -3,15 +3,71 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1">
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else if eq .Kind "404" }}Page not found | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  {{/* ---------------------------------------------------------------------
+       Is this the throwaway trial deploy, or the real site?
+
+       DERIVED from baseURL rather than configured, so it flips itself at
+       cutover: the moment baseURL becomes params.productionBaseURL the site
+       turns indexable, with nothing to remember to unset. (build-deploy.yml
+       passes --baseURL on the command line, and site.BaseURL reflects that
+       override, so this is the URL actually being built for.)
+       --------------------------------------------------------------------- */}}
+  {{ $prod := strings.TrimSuffix "/" (site.Params.productionBaseURL | default site.BaseURL) }}
+  {{ $isTrial := ne (strings.TrimSuffix "/" site.BaseURL) $prod }}
+
+  {{/* ---------------------------------------------------------------------
+       This page's own URL, pager included.
+
+       .Permalink on a paginated list is the URL of page 1 for EVERY pager, so
+       using it directly made /today/page/2/ (and all 123 category pages'
+       pagers) declare themselves duplicates of page 1 -- telling Google to drop
+       them, and with them the only crawl path into the older archive.
+       partials/paginator.html explains why the pager is fetched through a
+       partial instead of calling .Paginator here.
+       --------------------------------------------------------------------- */}}
+  {{ $pager := partial "paginator.html" . }}
+  {{ $self := .Permalink }}
+  {{ $pageNum := 0 }}
+  {{ with $pager }}
+    {{ if gt .PageNumber 1 }}
+      {{ $pageNum = .PageNumber }}
+      {{/* A pager's .URL is root-relative and ALREADY carries the baseURL's path
+           prefix (/website/today/page/2/ on the trial deploy), so `absURL` would
+           prepend that prefix a second time. Scheme + host off the parsed baseURL
+           is the one join that is right in both deploys -- and it needs no
+           knowledge of the pagination path, which is not readable from the site
+           config in Hugo 0.165 (page.SiteConfig has no Pagination field). */}}
+      {{ $base := urls.Parse site.BaseURL }}
+      {{ $self = printf "%s://%s%s" $base.Scheme $base.Host .URL }}
+    {{ end }}
+  {{ end }}
+
+  {{/* No site name suffix: the brand was costing 33 of the ~60 characters
+       Google renders, on 2147 post titles that already average past that. The
+       page number keeps the pagers from sharing one title. */}}
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .Kind "404" }}Page not found{{ else }}{{ .Title }}{{ end }}{{ if $pageNum }} (page {{ $pageNum }}){{ end }}</title>
   {{ $desc := .Params.description | default .Site.Params.description }}
   <meta name="description" content="{{ $desc }}">
-  <link rel="canonical" href="{{ .Params.canonical | default .Permalink }}">
+
+  {{/* .Params.canonical is for the 838 cross-posted articles that point at the
+       original publisher. Everything else is self-referencing. The 404 gets
+       none at all -- it is not a page with a URL of its own. */}}
+  {{ if ne .Kind "404" }}<link rel="canonical" href="{{ .Params.canonical | default $self }}">{{ end }}
+
+  {{/* Three separate reasons to keep a page out of the index, in one tag:
+       1. The whole trial deploy -- it is a byte-for-byte copy of the live
+          WordPress site, so 2600 crawlable duplicates of foojay.io would
+          compete with foojay.io for its own rankings.
+       2. The search page has no server-rendered content of its own to rank on.
+       3. The 404 -- GitHub Pages serves it with a 404 status, but it is
+          reachable at /404.html too. */}}
+  {{ $noindex := or $isTrial (eq .Type "search") (eq .Kind "404") }}
+  {{ if $noindex }}<meta name="robots" content="noindex, nofollow">{{ end }}
 
   <meta property="og:site_name" content="foojay">
-  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
   <meta property="og:description" content="{{ $desc }}">
-  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:url" content="{{ $self }}">
   {{/* .IsPage matters here, not just Section: content/posts/_index.md (the
        /today/ listing) has Section "posts" too, but it's a list page, not an
        article -- without the .IsPage check it was getting og:type=article
@@ -19,10 +75,24 @@
        page. */}}
   {{ $isPost := and (eq .Section "posts") .IsPage }}
   <meta property="og:type" content="{{ if $isPost }}article{{ else }}website{{ end }}">
-  {{ with .Params.image }}<meta property="og:image" content="{{ partial "resource-url.html" (dict "page" $ "src" . "abs" true) }}">{{ end }}
-  <meta name="twitter:card" content="{{ if .Params.image }}summary_large_image{{ else }}summary{{ end }}">
+
+  {{/* Falls back to the social card so a link to the home page, /today/, a
+       category or an author profile still previews as something. The card is
+       themes/foojay/static/images/foojay-social-card.png -- 1200x630, the
+       wordmark on --surface-navy, because the logo is light-blue-on-transparent
+       and vanishes on a white ground. */}}
+  {{ $ogImage := "" }}
+  {{ with .Params.image }}{{ $ogImage = partial "resource-url.html" (dict "page" $ "src" . "abs" true) }}{{ end }}
+  {{ if not $ogImage }}{{ $ogImage = "images/foojay-social-card.png" | absURL }}{{ end }}
+  <meta property="og:image" content="{{ $ogImage }}">
+  <meta name="twitter:card" content="summary_large_image">
   {{ if $isPost }}
   <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  {{ with .Lastmod }}{{ if not $.Lastmod.IsZero }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}{{ end }}
+  {{/* One article:section per category, which is what the property is for --
+       derived from `categories:`, so nothing extra to write per post. */}}
+  {{ range .Params.categories }}<meta property="article:section" content="{{ . }}">
+  {{ end }}
   {{/* giscus stamps a link to the article into the discussion body when it
        creates that article's thread, and it uses THIS meta tag if present,
        otherwise the URL of the page it happens to be running on (see
@@ -35,9 +105,6 @@
        point at the foojay.io article the thread belongs to. */}}
   <meta name="giscus:backlink" content="{{ partial "production-url.html" . }}">
   {{ end }}
-  {{/* Thin/JS-only content shouldn't be indexed as a normal page: the search
-       results page has no server-rendered content of its own to rank on. */}}
-  {{ if eq .Type "search" }}<meta name="robots" content="noindex, follow">{{ end }}
 
   {{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
 

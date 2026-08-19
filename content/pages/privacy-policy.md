@@ -1,7 +1,6 @@
 ---
 title: "Privacy Policy"
 description: "What personal data foojay.io collects, why we collect it, how long we keep it and who we share it with."
-canonical: "https://foojay.io/privacy-policy/"
 url: "/privacy-policy/"
 aliases:
   - "/privacy-policy/"

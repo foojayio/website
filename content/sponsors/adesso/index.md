@@ -18,7 +18,6 @@ github: ""
 authors:
 topics:
 wpSlug: "adesso"
-canonical: "https://foojay.io/sponsor/adesso/"
 frozen: false
 ---
 

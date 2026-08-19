@@ -1,7 +1,6 @@
 ---
 title: "Sitemap"
 description: "Every page, article, author and sponsor on foojay.io, in one list."
-canonical: "https://foojay.io/sitemap/"
 url: "/sitemap/"
 type: "sitemap"
 ---

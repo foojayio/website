@@ -1,7 +1,6 @@
 ---
 title: "Foojay Advisory Board"
 description: "The organizations that make up the Foojay Advisory Board, meeting periodically on Foojay's roadmap and direction."
-canonical: "https://foojay.io/board/"
 url: "/board/"
 aliases:
   - "/board/"

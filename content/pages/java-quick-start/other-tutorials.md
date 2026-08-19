@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java - Other Tutorials"
 description: "Free Java courses, tutorials and catalogs from some of the best educators in the community, to continue after the Quick Start."
-canonical: "https://foojay.io/java-quick-start/other-tutorials/"
 url: "/java-quick-start/other-tutorials/"
 type: "tutorials"
 aliases:

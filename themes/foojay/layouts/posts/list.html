@@ -10,11 +10,11 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
     <div class="post-grid">
-      {{/* Posts are bucketed into <year>/<month>/ subdirectories, so .Pages
-           (direct children) would only see the year sub-sections. Paginate all
-           posts recursively, newest first. */}}
-      {{ $posts := .RegularPagesRecursive.ByDate.Reverse }}
-      {{ $paginator := .Paginate $posts }}
+      {{/* Which posts, and how they page, is defined once in
+           partials/paginator.html -- baseof.html needs the same pager in <head>
+           to write this pager's canonical, and Hugo errors if .Paginate is
+           called twice with different arguments. */}}
+      {{ $paginator := partial "paginator.html" . }}
       {{ range $paginator.Pages }}
         {{ partial "post-card.html" . }}
       {{ end }}

@@ -368,6 +368,36 @@ should catch a mistake at PR time rather than letting it fail silently.
   separators would otherwise become headings), and a `---` under a **list item**
   (CommonMark says a setext underline can't interrupt a list, so that pair
   already renders as list + thematic break — 203 left underlined for this).
+- **`scripts/cleanup/Descriptions.java`**: one-off migration that put back the
+  spaces Yoast dropped when it built a post's meta description by concatenating
+  the body's text nodes with no separator -- so a heading ran into the paragraph
+  after it and the boundary punctuation lost its space
+  (`...using the Service Layer pattern.What you'll learn`). That string is what a
+  reader sees in a search result, a link preview and the `BlogPosting` JSON-LD,
+  even though the page itself renders fine. 22 posts.
+
+  The rule lives in `HtmlToMarkdown.repairRunOnSentences`, which
+  `transfer/Posts.java` and `transfer/Sponsors.java` now apply to the scraped
+  description, so a re-scrape emits the repaired form and a re-run here is a
+  no-op. **The guards are the whole design**, because the damage is spelled
+  exactly like a Java identifier: the word before the punctuation must start
+  lowercase (which rules out `System.Logger`, `FetchType.EAGER`) and its
+  whitespace-delimited token must hold no other `.` (which rules out
+  `sun.misc.Unsafe`). `:` is repaired alongside `.!?` -- same heading-boundary
+  artefact, and no identifier spelling to collide with.
+
+  What it **declines** is printed rather than guessed at, the way
+  `fetch/DiscoverJugCalendars.java` reports its near-misses: 7 candidates whose
+  preceding word is capitalised, of which 3 are correctly left alone
+  (`System.Logger`, `FetchType.EAGER`, and `DALL.E API` -- a mis-typed DALL-E) and
+  4 are real damage (`ReadyNow.Azul`, `MongoDB.In`, `Hibernate API.If`,
+  `Caching.Now`). No lexical rule separates those two groups, and a space inserted
+  into a type name reads as our bug where a missing space reads as WordPress's --
+  so don't "finish the job" with an exception list, which would silently corrupt
+  the next post to end a sentence on `Duration.ZERO`. Note the residual
+  `learnIn`-style damage (a lowercase letter running straight into a capital, no
+  punctuation at all) is **not** repairable: it is indistinguishable from
+  `JavaFX`, `OpenJDK` and `MongoDB`. `--dry-run` / `--path` as usual.
 - **`scripts/validate/Frontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
   `authors:` slug without a matching author bundle, no emoji in a post title, no
@@ -537,6 +567,120 @@ should catch a mistake at PR time rather than letting it fail silently.
   generates an id per heading from its text — the "On this page" panel and its
   scroll-spy resolve every one of their 14k links. Accepted knowingly; fragment
   links into a blog post are rare next to the cost of keeping two conventions.
+- **The trial deploy is noindex, and that is derived from baseURL.** The site is
+  a byte-for-byte copy of the still-live WordPress content, so a crawlable
+  foojayio.github.io/website put ~2600 duplicate URLs into Google's index
+  competing with foojay.io for foojay.io's own rankings -- made worse by a
+  permissive `robots.txt` that advertised the sitemap. Both `baseof.html` and
+  `layouts/robots.txt` now compute `$isTrial` as `baseURL != params.productionBaseURL`
+  and emit `noindex, nofollow` + `Disallow: /` when it holds. **Never turn this
+  into a config flag**: as a derivation it flips itself the moment `baseURL`
+  becomes the production URL, and there is nothing to remember to unset on the
+  day it matters most. `build-deploy.yml` passes `--baseURL` on the command
+  line and `site.BaseURL` reflects that override, so this reads the URL actually
+  being built for. Verified both ways: a `--baseURL https://foojay.io/` build has
+  no `noindex` outside `/search/` and the 404.
+
+- **Every page self-canonicalises, pagers included, and `canonical:` frontmatter
+  means "not ours".** `.Params.canonical | default $self` -- and `$self` is
+  **not** `.Permalink`, because `.Permalink` on a paginated list is page 1's URL
+  for *every* pager, so `/today/page/2/` and all 123 category pagers used to
+  declare themselves duplicates of page 1, i.e. ask Google to drop the only crawl
+  path into the older archive. `$self` comes from the pager's own `.URL`, joined
+  to scheme+host off `urls.Parse site.BaseURL` -- **not** `absURL`, which would
+  prepend the `/website` prefix a second time to a `.URL` that already carries
+  it. (Hugo 0.165 has no readable pagination path: `page.SiteConfig` has no
+  `Pagination` field, so don't reach for `site.Config.Pagination.Path`.)
+
+  So the only legitimate `canonical:` is one pointing at a **different** page or
+  site: the 838 cross-posted articles naming their original publisher, and
+  `content/pages/download.md`, which is genuinely the same page as
+  `/java-quick-start/install-java/`. The other 43 were removed -- 42 restated the
+  page's own permalink, and `content/sponsors/azul/` pointed at
+  `/sponsor/azul-enterprise-java-platform-foojay-io-gold-sponsor/`, the renamed
+  bundle's OLD path, which exists only as the `aliases:` redirect the same script
+  emits. A canonical aimed at a redirect is one search engines discard.
+  `transfer/Sponsors.java` no longer writes the field (and its dead
+  `canonical:`-based bundle lookup went with it), so a re-scrape can't put it
+  back.
+
+- **`partials/paginator.html` is the single definition of how a page paginates.**
+  Not a tidiness move: `<head>` renders before `{{ block "main" }}`, so the
+  canonical above needs the pager *first*, and Hugo errors if `.Paginate` is
+  called twice with different arguments -- a bare `.Paginator` in the head would
+  collide with `posts/list.html`'s `.Paginate .RegularPagesRecursive.ByDate.Reverse`.
+  One partial makes the arguments identical by construction, and a new paginated
+  section gets its canonical by adding a branch. Two traps inside it: it must be
+  plain `partial`, **never `partialCached`** (Hugo renders each pager by
+  re-executing the same Page with the pager advanced, so a page-keyed cache would
+  serve page 1's posts on every pager), and it uses one `return` at the end
+  assigning into a variable, because Hugo rejects a `return` that other
+  statements fall through past.
+
+- **Feeds are posts-only and capped at 30.** `[services.rss] limit = 30` in
+  `hugo.toml` -- Hugo's default is unbounded, which made `/index.xml` 3.85 MB of
+  2584 items led by Quick Start pages carrying `pubDate Mon, 01 Jan 0001`, a date
+  some aggregators drop the whole item over. `layouts/index.rss.xml` overrides the
+  embedded template to filter `Section "posts"`, because the home page's
+  `.RegularPages` is every page on the site and "what's new on foojay" means
+  articles (which is what the WordPress feed served). One number governs the home,
+  section, term and per-author feeds -- `authors/page.rss.xml` already read the
+  same value.
+
+- **`enableGitInfo` dates the pages that have no date, and sits BELOW `date:`.**
+  441 URLs shipped without `<lastmod>` (the Quick Start steps, install-java, the
+  board members) because those pages carry no `date:`. The `[frontmatter]` chains
+  put `:git` last -- `lastmod = ["lastmod", "date", ":git", "publishDate"]` -- on
+  purpose: a post's real date is in its frontmatter while its git date is when the
+  *migration* ran, so leading with `:git` would stamp all 2147 posts with an
+  Aug 2026 lastmod and tell Google the entire archive changed at once. Now 0 of
+  2713 URLs lack a lastmod and posts keep their own dates.
+
+  This needs **full git history at build time**, which is why
+  `build-deploy.yml` checks out with `fetch-depth: 0`. On the default shallow
+  clone every file resolves to the same single commit, so every page would claim
+  one identical lastmod -- worse than having none, and invisible locally.
+
+- **A post title carries no site name.** `<title>` is `.Title` alone (the home
+  page is the exception, and a pager appends `(page N)` so pagers don't share a
+  title). The `" | foojay.io - Friends of OpenJDK"` suffix cost 33 of the ~60
+  characters Google renders, on 2147 titles that already average past that.
+
+- **`og:image` always resolves, via a dedicated social card.** Pages without an
+  `image:` -- the home page, `/today/`, 123 category pages, 345 author profiles --
+  used to preview as a bare `summary` card with no picture. `baseof.html` falls
+  back to `images/foojay-social-card.png` (1200x630, the wordmark on
+  `--surface-navy`) and the card is always `summary_large_image`. There is a
+  second generated asset, `images/foojay-logo-square.png` (512x512, white ground),
+  used only as the schema.org `Organization` logo: Google composites a logo onto
+  white and wants >=112px on its short side, and the header wordmark is
+  light-blue-on-transparent, i.e. invisible exactly where Google would draw it.
+  Both are derived from `foojay-logo.png` -- **don't** re-crop or resize
+  `foojay-logo.png` itself to make one of them (see the logo note below for what
+  padding does to the header).
+
+- **Structured data covers three page kinds, and nothing else.**
+  `partials/json-ld.html`: a post -> `BlogPosting` (each credited author a full
+  `Person` with `sameAs`, plus `articleSection` from `categories:` and
+  `inLanguage` from the site -- both derived, nothing per post to write), an
+  author -> `Person`, the home page -> an `@graph` of `Organization` +
+  `WebSite`. The Organization's `sameAs` is the four profiles foojay controls and
+  is kept in step with `partials/footer.html`; the footer's Slack link is
+  deliberately excluded, being a join invite rather than an identity. The
+  WebSite's `SearchAction` targets the real working `?q=` route Pagefind reads,
+  so it is a claim that holds. Nothing is emitted on other list/section/taxonomy
+  pages -- they are not a single creative work, person or site.
+  `site.Language.LanguageCode` is deprecated in Hugo 0.158+; use
+  `site.Language.Locale`.
+
+- **`/search/` and the 404 are out of the index, and `/search/` is out of the
+  sitemap.** The search page has no server-rendered content of its own to rank on
+  (Pagefind fills it in client-side), so it was being listed in `sitemap.xml` and
+  then told `noindex` -- two contradictory instructions about one URL. It now
+  carries `sitemap: {disable: true}`. The 404 additionally has **no** canonical:
+  it is not a page with a URL of its own, and it used to self-canonicalise to
+  `/404.html`.
+
 - **Render hooks must redo the escaping Goldmark would have done.** Overriding
   a renderer means taking over its entity handling too, and getting it wrong is
   invisible in the template and obvious on the page. Two shapes, both live:

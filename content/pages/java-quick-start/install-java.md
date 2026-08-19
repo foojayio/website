@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java - Install Java"
 description: "One-time setup to get Java on your machine: check whether you already have it, then install it on Windows, macOS or Linux."
-canonical: "https://foojay.io/java-quick-start/install-java/"
 url: "/java-quick-start/install-java/"
 aliases:
   - "/java-quick-start/install-java/"

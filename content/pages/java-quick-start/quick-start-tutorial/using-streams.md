@@ -2,7 +2,6 @@
 title: "Getting Started with Java - Using Streams"
 linkTitle: "Using Streams"
 description: "Streams, added in Java 8, let you chain steps over a collection. Extend the text-file example with filtering and mapping."
-canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-streams/"
 url: "/java-quick-start/quick-start-tutorial/using-streams/"
 jdoodle: true
 aliases:

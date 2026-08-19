@@ -397,6 +397,82 @@ public final class HtmlToMarkdown {
     }
 
     /**
+     * Puts back the spaces WordPress dropped when it built a post's meta
+     * description by stripping the tags out of the body.
+     *
+     * Yoast generates the description by concatenating the body's text nodes with
+     * no separator, so a heading runs straight into the paragraph that follows
+     * it and the boundary punctuation loses its space:
+     *
+     *     ...using the Service Layer pattern.What you'll learn
+     *     ...we'll walk through:What sharding actually is
+     *
+     * That reaches the reader in the search result, in the link preview and in
+     * the BlogPosting JSON-LD, so it's worth repairing -- but ONLY where the
+     * missing space is provable, because the same shape is how a Java identifier
+     * is spelled. Three real cases in content/ are NOT damage:
+     *
+     *     System.Logger          FetchType.EAGER          sun.misc.Unsafe
+     *
+     * Hence two guards, each of which rules one of them out:
+     *
+     *   1. The word ending at the punctuation must start LOWERCASE. A dotted name
+     *      whose first segment is capitalised is a type, not a sentence
+     *      (System.Logger, FetchType.EAGER).
+     *   2. The whitespace-delimited token holding the punctuation must contain no
+     *      OTHER `.`. A chain of dots is a package path, never two sentences
+     *      (sun.misc.Unsafe).
+     *
+     * A single-letter word is skipped too, so initials ("J.K. Rowling" with the
+     * space already missing) aren't split mid-name.
+     *
+     * `:` is included alongside `.!?` because a colon jammed against a capital is
+     * the same heading-boundary artefact ("we'll walk through:What"), and unlike
+     * `.` it has no identifier spelling to collide with -- a time reads "10:30",
+     * digits not capitals.
+     *
+     * Idempotent: once a space is there the pattern no longer matches. Applied to
+     * scraped descriptions, never to bodies -- a body keeps its real markup, so it
+     * never had this damage in the first place.
+     */
+    public static String repairRunOnSentences(String text) {
+        if (text == null || text.isBlank()) return text;
+        Matcher m = RUN_ON.matcher(text);
+        StringBuilder out = new StringBuilder();
+        int last = 0;
+        while (m.find()) {
+            // m.group(1) is the word before the punctuation, m.group(2) the mark.
+            String word = m.group(1);
+            if (word.length() >= 2
+                    && Character.isLowerCase(word.charAt(0))
+                    && !hasOtherDot(text, m.start(2))) {
+                out.append(text, last, m.start(2)).append(m.group(2)).append(' ');
+                last = m.end(2);
+            }
+        }
+        return last == 0 ? text : out.append(text.substring(last)).toString();
+    }
+
+    /** A word, then sentence punctuation, then an immediate capital. */
+    private static final Pattern RUN_ON = Pattern.compile("([A-Za-z]+)([.!?:])(?=[A-Z])");
+
+    /**
+     * True when the whitespace-delimited token containing the character at
+     * {@code at} holds a `.` other than that one -- i.e. it is a dotted path such
+     * as sun.misc.Unsafe rather than a sentence boundary.
+     */
+    private static boolean hasOtherDot(String text, int at) {
+        int start = at;
+        while (start > 0 && !Character.isWhitespace(text.charAt(start - 1))) start--;
+        int end = at + 1;
+        while (end < text.length() && !Character.isWhitespace(text.charAt(end))) end++;
+        for (int i = start; i < end; i++) {
+            if (i != at && text.charAt(i) == '.') return true;
+        }
+        return false;
+    }
+
+    /**
      * Resolves the HTML entities left over in code by WordPress's double-escaping.
      *
      * Some post bodies store a Java lambda arrow as `-&amp;gt;`, so the HTML

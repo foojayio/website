@@ -2,7 +2,7 @@
 title: "Service Layer Pattern in Java With Spring Boot"
 date: "2025-11-18T14:40:26+00:00"
 lastmod: "2025-11-18T14:40:28+00:00"
-description: "In modern software design, it is important to develop code that is clean and maintainable. One way developers do this is using the Service Layer pattern.What you'll learnIn this article, you'll learn:What the Service Layer pattern is and why it matters.How it fits with the MVC architecture.How to implement it in a real Spring Boot application.How to add MongoDB with minimal code.Best practices and common mistakes to avoid."
+description: "In modern software design, it is important to develop code that is clean and maintainable. One way developers do this is using the Service Layer pattern. What you'll learnIn this article, you'll learn: What the Service Layer pattern is and why it matters. How it fits with the MVC architecture. How to implement it in a real Spring Boot application. How to add MongoDB with minimal code. Best practices and common mistakes to avoid."
 authors:
   - "tim-kelly"
 image: "Screenshot-2025-11-11-at-2.17.07-PM.png"

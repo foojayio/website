@@ -1,7 +1,6 @@
 ---
 title: "Java Community Sponsors | Support Foojay.io"
 description: "Meet the organisations that keep Foojay.io free and independent. Our sponsors fund the platform, podcast, and events that Java and OpenJDK developers rely on every day."
-canonical: "https://foojay.io/community-support/"
 url: "/community-support/"
 aliases:
   - "/community-support/"

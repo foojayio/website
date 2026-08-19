@@ -1,7 +1,6 @@
 ---
 title: "The Foojay.io Team"
 description: "The team maintaining the foojay.io website and other channels."
-canonical: "https://foojay.io/team/"
 url: "/team/"
 aliases:
   - "/team/"

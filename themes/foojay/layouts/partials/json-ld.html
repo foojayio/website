@@ -6,9 +6,14 @@
             just seeing a generic byline string.
          2. An author page itself -> Person, built from the same author
             frontmatter (bio/avatar/social links) the profile page renders.
-       Nothing is emitted on list/section/taxonomy/home pages -- those aren't
-       a single creative work or person, and Google's guidance is not to add
-       Article/Person markup to pages that aren't one. */ -}}
+         3. The home page -> Organization + WebSite. The Organization is what
+            lets a knowledge panel attach the right name, logo and social
+            profiles to the brand; the WebSite carries a SearchAction pointing
+            at /search/, which is the one piece of markup that can put a search
+            box in the result for foojay.io itself.
+       Nothing is emitted on other list/section/taxonomy pages -- those aren't
+       a single creative work, person or site, and Google's guidance is not to
+       add Article/Person markup to pages that aren't one. */ -}}
 
 {{- $isPost := and (eq .Section "posts") .IsPage -}}
 {{- $isAuthor := and (eq .Section "authors") .IsPage -}}
@@ -49,6 +54,14 @@
     "publisher" (dict "@type" "Organization" "name" "foojay.io" "logo" (dict "@type" "ImageObject" "url" (.Site.Params.logo | absURL)))
   -}}
   {{- if not .Lastmod.IsZero }}{{ $data = merge $data (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
+  {{/* Both derived, so no post has to carry them: the section is the post's own
+       `categories:` (a string when there is one, a list when there are several,
+       which is what schema.org's articleSection expects), and the language is
+       the site's. */}}
+  {{- with .Params.categories -}}
+    {{- $data = merge $data (dict "articleSection" (cond (eq (len .) 1) (index . 0) .)) -}}
+  {{- end -}}
+  {{- $data = merge $data (dict "inLanguage" (or site.Language.Locale site.Language.Lang "en")) -}}
   {{- with .Params.image }}{{ $data = merge $data (dict "image" (slice (partial "resource-url.html" (dict "page" $ "src" . "abs" true)))) }}{{ end -}}
   {{- if gt (len $people) 0 }}{{ $data = merge $data (dict "author" $people) }}{{ end -}}
   <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
@@ -67,5 +80,52 @@
   {{- $img := or .Params.avatarFull .Params.avatar -}}
   {{- with $img }}{{ $data = merge $data (dict "image" (partial "resource-url.html" (dict "page" $ "src" . "abs" true))) }}{{ end -}}
   {{- if gt (len $sameAs) 0 }}{{ $data = merge $data (dict "sameAs" $sameAs) }}{{ end -}}
+  <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{- end -}}
+
+{{- if .IsHome -}}
+  {{/* sameAs is the set of profiles foojay actually controls, kept in step with
+       partials/footer.html. The Slack link in the footer is deliberately absent:
+       it is a join invite, not a profile page, so it is not an identity search
+       engines can reconcile. */}}
+  {{- $sameAs := slice
+    "https://bsky.app/profile/foojay.io"
+    "https://foojay.social/@foojay"
+    "https://www.linkedin.com/company/foojayio/"
+    "https://github.com/foojayio"
+  -}}
+  {{/* A dedicated square, white-ground raster: Google composites a logo onto
+       white and wants at least 112px on its short side, and the header wordmark
+       is 1022x352 light-blue-on-transparent -- which disappears exactly where
+       Google would draw it. See themes/foojay/static/images/. */}}
+  {{- $org := dict
+    "@type" "Organization"
+    "@id" (printf "%s#organization" site.Home.Permalink)
+    "name" "foojay.io"
+    "alternateName" "Friends Of OpenJDK"
+    "url" site.Home.Permalink
+    "description" site.Params.description
+    "foundingDate" "2020"
+    "logo" (dict "@type" "ImageObject" "url" ("images/foojay-logo-square.png" | absURL) "width" 512 "height" 512)
+    "sameAs" $sameAs
+  -}}
+  {{- $site := dict
+    "@type" "WebSite"
+    "@id" (printf "%s#website" site.Home.Permalink)
+    "name" site.Title
+    "url" site.Home.Permalink
+    "description" site.Params.description
+    "inLanguage" (or site.Language.Locale site.Language.Lang "en")
+    "publisher" (dict "@id" (printf "%s#organization" site.Home.Permalink))
+  -}}
+  {{/* Pagefind reads ?q= on the search page (see layouts/search/single.html),
+       so this template is the real, working query URL -- not an aspiration. */}}
+  {{- with site.GetPage "/search" -}}
+    {{- $site = merge $site (dict "potentialAction" (dict
+      "@type" "SearchAction"
+      "target" (dict "@type" "EntryPoint" "urlTemplate" (printf "%s?q={search_term_string}" .Permalink))
+      "query-input" "required name=search_term_string")) -}}
+  {{- end -}}
+  {{- $data := dict "@context" "https://schema.org" "@graph" (slice $org $site) -}}
   <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
 {{- end -}}

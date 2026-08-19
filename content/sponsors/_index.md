@@ -12,7 +12,6 @@ heroTitle: "Who Keeps Foojay Running"
 # x 320..530, y 0..308.
 heroImage: "/images/sponsors/sponsors-banner.png"
 description: "The organisations funding foojay.io — the platform, podcast, events and content that hundreds of thousands of Java and OpenJDK developers rely on every day."
-canonical: "https://foojay.io/our-sponsors/"
 # The section listing lives at the WordPress path, not at /sponsors/. Individual
 # sponsor pages keep /sponsor/<slug>/ via hugo.toml's [permalinks].
 url: "/our-sponsors/"
