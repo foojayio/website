@@ -8,6 +8,7 @@ aliases:
   # foojay.io. (The alias that used to sit here was this page's OWN url, which
   # Hugo discards as a self-redirect.)
   - "/download/"
+  - "/java-learning-trail/install-java/"
 frozen: false
 ---
 

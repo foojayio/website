@@ -18,6 +18,8 @@ related_posts:
   - "azul-datadog-datastax-jfrog-payara-and-snyk-form-inaugural-foojay-advisory-board"
   - "foojay-podcast-67"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-6-welcome-to-foojay/"
 ---
 
 In this episode of the Foojay Podcast, we want to give you a look behind the **curtains of Foojay.io**.

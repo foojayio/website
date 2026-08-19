@@ -20,6 +20,8 @@ related_posts:
   - "foojay-podcast-99"
   - "foojay-podcast-67"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-100-when-a-podcaster-interviews-podcasters-and-what-they-all-have-in-common/"
 ---
 
 Foojay Podcast hits episode 100. No plan, no roadmap. It just happened. To mark the occasion, Frank turned the microphone around and invited other podcasters: Adam Bien (airhacks.fm), Jennifer Reif (Breaktime Tech Talks), Kadi McKean and Steve Pool (10xInsights), and Oumaima Zerouali (JCast). Same three questions for each: why did you start, what broke, and what did you learn?

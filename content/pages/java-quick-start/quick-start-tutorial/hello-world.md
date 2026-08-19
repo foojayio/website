@@ -6,6 +6,7 @@ url: "/java-quick-start/quick-start-tutorial/hello-world/"
 jdoodle: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/hello-world/"
+  - "/getting-started-with-java/quick-start-tutorial/helloworld-running-a-single-file-java-application/"
 frozen: false
 weight: 2
 ---

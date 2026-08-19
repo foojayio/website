@@ -11,6 +11,8 @@ categories:
   - "Kubernetes"
 related_posts:
 frozen: false
+aliases:
+  - "/today/deploying-spring-boot-application-on-kubernetes/"
 ---
 
 In this article, I will explain how you can create a pod, deploy a Spring Boot application, and manage the single node cluster with Lens IDE on Docker Desktop.

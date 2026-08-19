@@ -16,6 +16,8 @@ related_posts:
   - "observability-is-cultural"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
+aliases:
+  - "/today/writting-a-data-orchestrator-in-java/"
 ---
 
 **A data orchestrator is a platform to schedule, organize, and monitor data-oriented workflows. A workflow is a set of tasks, most data orchestrators come with built-in tasks for a wide range of technologies and provide support for custom processing via a scripting language. A data orchestrator can have multiple types of triggers to start a workflow.**

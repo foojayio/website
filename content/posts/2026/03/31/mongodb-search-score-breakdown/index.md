@@ -16,6 +16,8 @@ related_posts:
   - "mongodb-sharding-what-to-know-before-you-shard"
   - "power-your-ai-application-with-vector-search"
 frozen: false
+aliases:
+  - "/today/atlas-search-score-breakdown/"
 ---
 
 Full-text search powers all of our digital lives — googling for this and that; asking Siri where to find a tasty, nearby dinner; shopping at Amazon; and so on. We receive relevant results, often even in spite of our typos, voice transcription mistakes, or vaguely formed queries. We have grown accustomed to expecting the best results for our searching intentions, right there, at the top.

@@ -14,6 +14,8 @@ related_posts:
   - "great-time-at-javazone-2022"
   - "open-source-bait-and-switch"
 frozen: false
+aliases:
+  - "/today/internal-security-hardening-internal-ystems/"
 ---
 
 60% of security breaches are internal to the organization and yet when we think about security we usually think about vulnerabilities, exploits, etc. All the while, 60% of hacks are just from a person just logging into the system and taking whatever the hell they want.

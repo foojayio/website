@@ -27,6 +27,8 @@ related_posts:
   - "foojay-podcast-50"
   - "foojay-podcast-19"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-53-jcon-report-part-5-cqrs-jooq-graphql-api-vaadin-openrewrite-errorprone-gateways-proxies/"
 ---
 
 This is the final part of the JCON interviews. Did I save the best for last? It's up to you to decide...

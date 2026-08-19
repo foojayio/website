@@ -18,6 +18,8 @@ related_posts:
   - "foojay-podcast-54"
   - "foojay-podcast-92"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-57-welcome-to-openjdk-java-23/"
 ---
 
 OpenJDK (Java) 23 is (almost) here!

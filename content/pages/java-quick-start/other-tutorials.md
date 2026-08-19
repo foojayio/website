@@ -5,6 +5,7 @@ url: "/java-quick-start/other-tutorials/"
 type: "tutorials"
 aliases:
   - "/java-quick-start/other-tutorials/"
+  - "/java-learning-trail/other-tutorials/"
 frozen: false
 tutorials:
   - title: "Foojay Java in Education Catalog"

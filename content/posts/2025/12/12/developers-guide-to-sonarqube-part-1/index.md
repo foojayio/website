@@ -15,6 +15,8 @@ related_posts:
   - "java-22-to-24-level-up-your-java-code-by-embracing-new-features-in-a-safe-way"
   - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
 frozen: false
+aliases:
+  - "/today/🚀-a-java-developers-guide-to-sonarqube-for-ide-stop-fixing-bugs-on-fridays-part-1/"
 ---
 
 Hola Java developers! 👋

@@ -4,6 +4,7 @@ description: "The team maintaining the foojay.io website and other channels."
 url: "/team/"
 aliases:
   - "/team/"
+  - "/about-our-team/"
 frozen: false
 ---
 

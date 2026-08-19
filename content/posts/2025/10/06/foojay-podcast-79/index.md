@@ -15,6 +15,8 @@ related_posts:
   - "foojay-podcast-76"
   - "foojay-podcast-75"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-79-ai4devs-interviews-part-1/"
 ---
 
 On September 19th, 2025, the first [AI4Devs conference](https://amsterdam.ai4devs.io/) took place in Amsterdam. I grabbed my camera and microphone to talk with speakers and attendees about the revolution in AI-powered coding and application development. In this first part, we'll explore Spring libraries, security, infrastructure and scaling, real-world use cases, event streaming, JetBrains tools, and more...

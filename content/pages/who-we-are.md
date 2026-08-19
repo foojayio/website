@@ -4,6 +4,7 @@ description: "Foojay is the vendor-neutral home for the Java community - daily n
 url: "/who-we-are/"
 aliases:
   - "/who-we-are/"
+  - "/foojay-brand-and-logo/"
 frozen: false
 ---
 

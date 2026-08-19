@@ -17,6 +17,8 @@ categories:
   - "Performance"
 related_posts:
 frozen: false
+aliases:
+  - "/today/the-cloud-evolves-and-meets-unikernels-quarkus-superfast-on-nanos-unikernel/"
 ---
 
 ## AWS Nitro and CPU Graviton Meets Unikernels: Java and Quarkus on ARM64 AWS Graviton with Nanos Unikernel

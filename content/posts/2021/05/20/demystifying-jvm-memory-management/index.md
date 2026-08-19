@@ -16,6 +16,8 @@ related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 frozen: false
+aliases:
+  - "/today/🚀-demystifying-jvm-memory-management/"
 ---
 
 ![cover-image](https://i.imgur.com/Kv9ichJ.gif)

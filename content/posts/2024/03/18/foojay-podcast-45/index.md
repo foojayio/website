@@ -21,6 +21,8 @@ related_posts:
   - "foojay-podcast-4"
   - "where-production-policy-belongs-building-eliya-in-public"
 frozen: false
+aliases:
+  - "/today/welcome-to-java-22/"
 ---
 
 Last September, we got Java 21, a Long Term Support (LTS) version with eight new big features and seven incubator or preview features.

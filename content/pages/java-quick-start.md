@@ -4,6 +4,8 @@ description: "Install Java, then go from choosing an editor to using streams in 
 url: "/java-quick-start/"
 aliases:
   - "/java-quick-start/"
+  - "/java-learning-trail/"
+  - "/getting-started-with-java/"
 frozen: false
 ---
 

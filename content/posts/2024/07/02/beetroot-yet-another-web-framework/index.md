@@ -14,6 +14,8 @@ related_posts:
   - "getting-started-with-rife2-java-web-framework-v1-0-0"
   - "creating-executables-for-javafx-applications"
 frozen: false
+aliases:
+  - "/today/beetroot-yet-another-web-dev-framework/"
 ---
 
 *News: beetRoot 3.2.0 was released on December 8, 2025*.

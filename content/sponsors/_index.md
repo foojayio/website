@@ -23,6 +23,7 @@ description: "The organisations funding foojay.io — the platform, podcast, eve
 url: "/our-sponsors/"
 aliases:
   - "/sponsors/"
+  - "/community-support/"
 # Sponsorship prospectus, linked from every CTA. Held IN THIS REPO rather than
 # linked to wp-content, which disappears at cutover. To publish a new edition,
 # drop the PDF in static/files/ and point this at it (keeping the same filename

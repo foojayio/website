@@ -5,6 +5,7 @@ url: "/jugs/"
 type: "jugs"
 aliases:
   - "/jugs/"
+  - "/jugs-2/"
 frozen: true
 ---
 

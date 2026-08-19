@@ -13,6 +13,8 @@ related_posts:
   - "are-java-security-updates-important"
   - "new-java-17-features-for-improved-security-and-serialization"
 frozen: false
+aliases:
+  - "/today/friends-of-openjdk-at-fosdem-with-prizes/"
 ---
 
 A great line up of known and less known OpenJDK users will be presenting new and unique content in the Friends Of OpenJDK room at FOSDEM this weekend.

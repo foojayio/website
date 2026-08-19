@@ -5,6 +5,7 @@ description: "A high-speed introduction to Java in single source files: no proje
 url: "/java-quick-start/quick-start-tutorial/"
 aliases:
   - "/java-quick-start/quick-start-tutorial/"
+  - "/java-learning-trail/quick-start-tutorial/"
 frozen: false
 ---
 
