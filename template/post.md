@@ -18,7 +18,8 @@
 # ============================================================================
 
 # Article title. Rendered as the page H1 — do NOT repeat it as a "# " heading in
-# the content (start your sections at "## "). Required.
+# the content (start your sections at "## "). 
+# Required.
 title: "Your Article Title Here"
 
 # Publish date (ISO 8601). 
@@ -29,14 +30,16 @@ date: 2026-01-01T09:00:00+00:00
 # Optional: last-updated date, if you revise the article later.
 # lastmod: 2026-01-02T09:00:00+00:00
 
-# One or two sentences. Shown on cards/listings and used for SEO and social
-# previews. Required.
+# One or two sentences (keep it below 160 characters). 
+# Shown on cards/listings and used for SEO and social previews. 
+# Required.
 description: "A short, one- or two-sentence summary of the article."
 
 # Author slug(s): the FOLDER name of your author profile in content/authors/
 # (e.g. content/authors/jane-doe/  ->  "jane-doe"). One or more.
-# Required — every post needs at least one author. If you don't have a profile
+# Every post needs at least one author. If you don't have a profile
 # yet, copy template/author.md to that folder and include it in the same PR.
+# Required.
 authors:
   - "your-author-slug"
 
@@ -44,14 +47,16 @@ authors:
 # Required as it is used in the preview card of your post and when sharing your post on social media.
 image: ""
 
-# Categories (see categories.md for the existing list — prefer existing ones). Required.
+# Categories (see categories.md for the existing list — prefer existing ones). 
+# Required.
 categories:
   - "Java"
 
-# Slugs (folder names) of related foojay articles to show at the bottom. Optional.
+# Slugs (folder names) of related foojay articles to show at the bottom. 
+# Optional.
 related_posts: []
 
-# Advanced / optional:
+# Advanced / Optional:
 # slug: "override-url-slug"   # only to make the URL differ from the folder name
 # canonical: "https://example.com/original/"  # only if first published elsewhere
 ---
