@@ -13,7 +13,7 @@ The vendor or creator of a Java application may choose to bundle the application
 
 As Java is fully standardized, the JVM (within a major version) is interchangeable and the Java application OS and CPU independent for a correctly designed and standard compliant Java application. No recompilation is required in any case.
 
-### **Key concepts of Java**
+## **Key concepts of Java**
 
 * **Java.** The programming language as standardized in the Java SE standard.
 * **Java source code.** A collection of files with the .java extension. Java source code is compiled into Byte Code.
@@ -24,21 +24,21 @@ As Java is fully standardized, the JVM (within a major version) is interchangeab
 
 {{< img src="/images/pedia/basic-java-concepts/image2020-11-4_13-5-7-700x359.png" class="size-medium" width="700" height="359" >}}
 
-### JDK
+## JDK
 
 [Java Development Kits (JDKs)](https://en.wikipedia.org/wiki/Java_Development_Kit) are implementations of the [Java SE platform specification](https://www.oracle.com/java/technologies/java-se-glance.html) by different vendors and groups of people, such as the open source community. Some of them are built from the [OpenJDK code on GitHub](https://github.com/openjdk). JDKs include the Java Runtime Environment (JRE), as well as other tools that help you develop Java.
 
-### JRE
+## JRE
 
 The Java Runtime Environment (JRE) is the minimal component of the JDK that is required to run Java. Since Java 11 the JRE is a part of the JDK itself rather than a separate entity meaning you can no longer download it separately.
 
-### JVM
+## JVM
 
 The JVM is the core of the runtime environment. Although colloquially use as a synonym to JRE, strictly speaking the JVM does not include the API libraries.
 
 The JVM defines a consistent object, memory, garbage collection and threading model for executing the semantics defined in byte code. Other languages have been defined making use of the JVM semantics relying on the Java APIs more or less. E.g the Android Runtime follows the JVM model but is not Java SE compliant (also it tries to be, to make the life of Java developers easier on Android).
 
-### See also
+## See Also
 
 * [JDK Distributions](https://foojay.io/pedia/jdk-distributions/)
 * [Bytecode](https://foojay.io/pedia/bytecode/)

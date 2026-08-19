@@ -13,12 +13,12 @@ From Java 9 onward, Oracle moved to a **six-month release cadence**, releasing a
 
 These terms originated in the Java 8 / Java 11 support era when Oracle published separate CPU and PSU installers. Under the current model, the distinction is largely internal to Oracle; what most users experience are the quarterly Oracle CPU releases and the updates published by their chosen JDK distributor.
 
-### Free Updates and Commercial Support
+## Free Updates and Commercial Support
 
 Since Java 17, Oracle JDK is free to use in production under the Oracle No-Fee Terms and Conditions (NFTC). Free updates are provided for Oracle JDK only until the next LTS release ships. After that, continued Oracle JDK updates require a commercial Java SE subscription.
 
 Distributions from Adoptium (Temurin), Azul, Amazon Corretto, Red Hat, BellSoft, and others provide free LTS updates under open-source licences (GPLv2+CE) for longer periods — often the full lifetime of a major Java version and beyond. See [LTS and Non-LTS Releases](https://foojay.io/pedia/lts-and-non-lts-releases/) and [JDK Distributions](https://foojay.io/pedia/jdk-distributions/) for details.
 
-### Java 8 Legacy Note
+## Java 8 Legacy Note
 
 During the Java 8 era (2014--2019), Oracle published CPU and PSU updates as distinct downloadable packages. Free public CPU updates for Java 8 ended for commercial users in January 2019. Extended support for Java 8 is available commercially from Oracle and multiple third-party vendors through at least 2030.

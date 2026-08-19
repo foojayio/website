@@ -7,7 +7,7 @@ frozen: false
 
 A **thread dump** is a snapshot of the state of all threads in a running Java process at a specific point in time, written as plain text. It captures each thread's name, state (RUNNABLE, BLOCKED, WAITING, etc.), and full stack trace. Thread dumps are the primary tool for diagnosing deadlocks, thread contention, hung threads, and unexpected blocking behaviour.
 
-### Generating a Thread Dump
+## Generating a Thread Dump
 
 Several tools can generate thread dumps:
 

@@ -7,7 +7,7 @@ frozen: false
 
 Java ships new language features and APIs in two provisional states before they are finalised: **Preview features** (for language changes and JVM features) and **Incubator modules** (for new APIs). Both mechanisms exist to gather real-world feedback before a feature is locked in.
 
-### Preview Features
+## Preview Features
 
 A preview feature is a complete, fully specified language or JVM feature that is available in a JDK release but **not yet finalised**. Feedback from real-world use may cause the feature to change between releases before it becomes permanent. Preview features:
 
@@ -18,7 +18,7 @@ A preview feature is a complete, fully specified language or JVM feature that is
 
 Examples: pattern matching for `instanceof` (preview in Java 14–15, finalised Java 16), records (preview Java 14–15, finalised Java 16), virtual threads (preview Java 19–20, finalised Java 21).
 
-### Incubator Modules
+## Incubator Modules
 
 An incubator module is a provisional API module (`jdk.incubator.*`) shipped in a JDK release so that the community can experiment with it. Incubator modules:
 

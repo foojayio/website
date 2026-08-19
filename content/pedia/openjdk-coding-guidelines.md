@@ -12,7 +12,7 @@ OpenJDK does not have a single exhaustive coding style guide. Sub-components com
 * **HotSpot Style Guide:** [wiki.openjdk.org/display/HotSpot/StyleGuide](https://wiki.openjdk.org/display/HotSpot/StyleGuide) --- C++ conventions for JVM internals.
 * **OpenJFX:** [wiki.openjdk.org/display/OpenJFX/Committing+the+Code](https://wiki.openjdk.org/display/OpenJFX/Committing+the+Code) and [Code Reviews](https://wiki.openjdk.org/display/OpenJFX/Code+Reviews).
 
-### Code Reviews and Code Quality
+## Code Reviews and Code Quality
 
 Changes to OpenJDK are reviewed and approved by **Reviewers** — contributors with Reviewer role in a given repository. Multiple Reviewers must approve a change before it is integrated; the exact number depends on the sub-project. The integration itself is performed by a **Committer** using the [OpenJDK GitHub bots](https://github.com/openjdk/skara) (the Skara tooling).
 
