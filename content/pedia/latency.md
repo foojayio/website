@@ -32,7 +32,7 @@ In addition, input data sets can affect latency, particularly in cases where the
 
 Here is a simple graphical example of what latency can look like for a typical high-performance application. We have a process being initiated repeatedly over time, with latency results that are mostly small, mostly within a narrow range; but occasionally very high latency occurs. For high-performance applications, grouping latency by percentile often produces a plot similar to this:
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-30904" src="https://www.azul.com/files/Application_Latency_Percentile-300x240.png" sizes="(max-width: 300px) 100vw, 300px" srcset="https://www.azul.com/files/Application_Latency_Percentile-300x240.png 300w, https://www.azul.com/files/Application_Latency_Percentile.png 489w" alt="" width="300" height="240">
+{{< img src="https://www.azul.com/files/Application_Latency_Percentile-300x240.png" class="size-medium" width="300" height="240" >}}
 
 The Y-axis represents some arbitrary units of time that represent your application's typical performance. The X-axis is the result of grouping all the latency results over a period of time into percentiles. The blue line is the latency for each percentile. The orange line is the average latency over the entire time span.
 
