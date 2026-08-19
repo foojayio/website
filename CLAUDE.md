@@ -609,19 +609,41 @@ should catch a mistake at PR time rather than letting it fail silently.
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
   URLs without adding an alias.
 
-  **WordPress carries a redirect layer this repo does not reproduce, and it is
-  the biggest open cutover risk.** Checked against the live site: 2143 of 2147
-  post slugs match exactly, but on top of those WP serves (a) `/blog/<anything>/`
-  -> `/today/<anything>/` as a blanket prefix rule, and (b) a 301 for every slug
-  a post has EVER had (`_wp_old_slug`), which is why
-  `/today/foojay-podcast-33-j-fall-report-part-1/` still resolves today. Neither
-  is enumerable from outside: the old slugs live in `wp_postmeta` and are not
-  exposed over REST, so the only ones found so far are those that happened to be
-  linked from inside `content/` -- 9 have been added as `aliases:`, plus
-  `/download/` -> `/java-quick-start/install-java/`. **Before cutover, get the
-  `_wp_old_slug` postmeta dump (or the redirect table) out of the WordPress host
-  and turn it into aliases; and put the `/blog/*` prefix rule into Cloudflare,
-  where one rule covers all 2147 rather than 2147 alias files.**
+  **WordPress runs a redirect layer on top of the slugs, and it is now carried
+  over -- in two places, because Hugo can only express one of the two shapes.**
+  Checked against the live site: 2143 of 2147 post slugs match exactly, and on
+  top of those the Redirection plugin serves 89 concrete 301s plus 3 regular
+  expressions. The plugin's own export (`redirects.json`, taken 2026-08-19) is
+  what these were built from -- it is the authoritative list, not a guess, and
+  it is worth re-exporting just before cutover in case a rule is added
+  meanwhile.
+
+  1. **The 89 concrete rules are `aliases:` in `content/`.** Per-URL, so Hugo
+     emits a redirect page for each and there is nothing to configure and
+     nothing to forget. 62 were added from the export and carry a "From
+     WordPress's Redirection plugin table" comment. **Chains are resolved to the
+     final destination** -- the plugin has rules pointing at rules (`/china/` ->
+     `/jugchain/` -> `/china-jug/` -> ...), and an alias aimed at another
+     redirect is one search engines discard. Two rules also had to be
+     **re-pointed**: the Quick Start section was renamed twice after they were
+     written (`/getting-started-with-java/` -> `/java-learning-trail/` ->
+     `/java-quick-start/`), so the recorded target 404s while the page is alive
+     one path over.
+
+     17 rules were **deliberately skipped**: their targets 404 on the live
+     WordPress site too, so recreating them would mint a redirect to a missing
+     page. `cutover/legacy-redirects.md` lists them, so nobody rediscovers that
+     they were skipped on purpose.
+
+  2. **The 3 regexes cannot be aliases and must be configured on the host.**
+     `^/blog/(.*)` -> `/today/$1` (209,365 hits -- foojay's original URL scheme,
+     and it covers `/blog/author/…`, `/blog/category/…` and the feeds, which
+     per-post aliases could not), `^/almanac/(jdk|java)-([0-9+])` ->
+     javaalmanac.io (102,636) and `^/docs/(.*)` -> `/today/` (530).
+     **`cutover/legacy-redirects.md` has them as ready-to-paste Cloudflare
+     Redirect Rules plus a verification script.** 312,531 hits between them, so
+     this is the one item on the cutover list that is bigger than everything the
+     aliases cover put together.
 
   Three post URLs additionally 404'd because the WP slug ends in an emoji that
   `stripEmoji` removed before the bundle folder was named from it. Those now

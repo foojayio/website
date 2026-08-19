@@ -3,6 +3,12 @@
 ## Still TODO
 
 * [ ] Visualization of events/calendar
+* [ ] **Before cutover:** configure the 3 regex redirects on Cloudflare --
+  `/blog/*`, `/almanac/jdk-N`, `/docs/*`. 312,531 recorded hits, and they are
+  the only part of WordPress's redirect table that Hugo `aliases:` cannot
+  express. Rules, reasoning and a verification script:
+  `cutover/legacy-redirects.md`. Re-export `redirects.json` from the Redirection
+  plugin first, in case a rule was added since 2026-08-19.
 
 ## Finished
 
