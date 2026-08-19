@@ -95,10 +95,22 @@
 
       {{- range $p := seq $from $to }}
         {{- $target := index $pager.Pagers (sub $p 1) }}
+        {{/* The two outermost cells of the window are marked so CSS can drop them
+             on a phone: nine cells (1 … 106-110 … 215) overflow a 390px screen,
+             and the numbers you actually reach for are the ones next to the one
+             you're on. `--far` is derived from the distance to the current page,
+             not from position in the list, because which cells exist changes
+             page by page -- an :nth-child rule would hit a different button on
+             page 3 than on page 108. Integer arithmetic again: math.Abs returns
+             float64, so `gt (math.Abs ...) 1` is always false and the class
+             silently never rendered. */}}
+        {{- $d := sub $p $cur }}
+        {{- if lt $d 0 }}{{ $d = sub 0 $d }}{{ end }}
+        {{- $far := gt $d 1 }}
         {{- if eq $p $cur }}
       <li><span class="pagination__btn is-current" aria-current="page" aria-label="Page {{ $p }}, current page">{{ $p }}</span></li>
         {{- else }}
-      <li><a class="pagination__btn" href="{{ $target.URL }}" aria-label="Page {{ $p }}">{{ $p }}</a></li>
+      <li{{ if $far }} class="pagination__cell--far"{{ end }}><a class="pagination__btn" href="{{ $target.URL }}" aria-label="Page {{ $p }}">{{ $p }}</a></li>
         {{- end }}
       {{- end }}
 

@@ -47,14 +47,16 @@ import java.util.stream.Stream;
  * ambiguous ones are reported as "needs a human" rather than guessed at (the same
  * posture fetch/DiscoverJugCalendars.java takes).
  *
- * Seven are reported in content/ today, and the split is why this stays a report
- * rather than a rule: three are correctly left alone (System.Logger, FetchType.EAGER
- * and "DALL.E API", which is a mis-typed DALL-E, not two sentences) and four are
- * real damage -- ReadyNow.Azul, MongoDB.In, "Hibernate API.If", Caching.Now. A list
- * of exceptions would let the other four be fixed automatically, but it would also
- * rot: the next post to end a sentence on Duration.ZERO gets silently corrupted,
- * and a space inserted into a type name reads as our bug where a missing space
- * reads as WordPress's.
+ * THREE are reported in content/ today and all three are correct refusals:
+ * System.Logger, FetchType.EAGER and "DALL.E API" (a mis-typed DALL-E, not two
+ * sentences). The four that WERE real damage -- ReadyNow.Azul, MongoDB.In,
+ * "Hibernate API.If", Caching.Now -- were fixed by hand, which is why the report
+ * is now clean. An exception list would have let the script fix those four
+ * itself, and was rejected deliberately: it rots, the next post to end a sentence
+ * on Duration.ZERO gets silently corrupted, and a space inserted into a type name
+ * reads as our bug where a missing space reads as WordPress's. So the standing
+ * rule is: anything this prints is a human decision, and a non-empty report is
+ * not necessarily a problem.
  *
  * Usage:
  *   jbang scripts/cleanup/Descriptions.java                 (rewrite content/)

@@ -1080,11 +1080,21 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   display: flex; gap: .35rem; flex-wrap: wrap; justify-content: center;
   list-style: none; margin: 0; padding: 0;
 }
-/* Below the fixed width there is no space to hold the arrows apart, so let the
-   whole thing collapse to a centred wrapping row rather than overflow. */
-@media (max-width: 30rem) {
-  .pagination__row { flex-wrap: wrap; justify-content: center; }
-  .pagination__list { flex: 0 1 auto; }
+/* On a phone there is no width left to hold the arrows apart -- keeping the
+   three-part row there overflowed the viewport and stranded « on a line of its
+   own. So below the fixed width it becomes two stacked rows: the numbers, then
+   « and » paired underneath, which is a better thumb target than one at each
+   screen edge anyway. `order` does the stacking, so the DOM keeps
+   prev -> numbers -> next for a screen reader and for tab order. */
+@media (max-width: 34rem) {
+  .pagination__row { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
+  .pagination__list { flex: 1 1 100%; order: -1; }
+  .pagination__btn { min-width: 2.25rem; height: 2.25rem; padding: 0 .45rem; }
+  .pagination__gap { min-width: 1.1rem; height: 2.25rem; }
+  /* Five numbers plus both numbered ends and two ellipses is nine cells, which
+     overflows a 390px screen and silently clipped the last-page button -- the
+     one carrying the total. Drop to current +/-1 instead; the ends stay. */
+  .pagination__cell--far { display: none; }
 }
 /* inline-flex + a fixed height, rather than padding: a glyph and a 3-digit
    number have different intrinsic box sizes, and padding alone let them differ. */

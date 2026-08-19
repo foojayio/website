@@ -387,14 +387,18 @@ should catch a mistake at PR time rather than letting it fail silently.
   artefact, and no identifier spelling to collide with.
 
   What it **declines** is printed rather than guessed at, the way
-  `fetch/DiscoverJugCalendars.java` reports its near-misses: 7 candidates whose
-  preceding word is capitalised, of which 3 are correctly left alone
-  (`System.Logger`, `FetchType.EAGER`, and `DALL.E API` -- a mis-typed DALL-E) and
-  4 are real damage (`ReadyNow.Azul`, `MongoDB.In`, `Hibernate API.If`,
-  `Caching.Now`). No lexical rule separates those two groups, and a space inserted
-  into a type name reads as our bug where a missing space reads as WordPress's --
-  so don't "finish the job" with an exception list, which would silently corrupt
-  the next post to end a sentence on `Duration.ZERO`. Note the residual
+  `fetch/DiscoverJugCalendars.java` reports its near-misses: candidates whose
+  preceding word is capitalised, which no lexical rule can tell apart from a type
+  name. It reports **3** today and all three are correct refusals
+  (`System.Logger`, `FetchType.EAGER`, `DALL.E API` -- a mis-typed DALL-E), so a
+  non-empty report is not automatically a problem. The 4 that were real damage
+  (`ReadyNow.Azul`, `MongoDB.In`, `Hibernate API.If`, `Caching.Now`) were fixed by
+  hand. An exception list would have automated those 4 and was rejected on
+  purpose: it rots, and a space inserted into a type name reads as our bug where a
+  missing space reads as WordPress's. Note that a hand fix here is only as durable
+  as the post -- `transfer/Posts.java` rebuilds frontmatter from scratch, so
+  re-scraping one of those 4 reverts it, and the script's report is what catches
+  that. Note the residual
   `learnIn`-style damage (a lowercase letter running straight into a capital, no
   punctuation at all) is **not** repairable: it is indistinguishable from
   `JavaFX`, `OpenJDK` and `MongoDB`. `--dry-run` / `--path` as usual.
@@ -642,9 +646,22 @@ should catch a mistake at PR time rather than letting it fail silently.
   only when a page is genuinely skipped, so at 6 pages the row reads `1 2 3 4 5 6`
   and not `1 2 3 4 5 … 6`.
 
-  Use **integer arithmetic** for the window. `math.Min`/`math.Max` return
-  float64, so `eq` against an int page number is always false -- the end-clamp
-  written that way silently never fired and page 215 rendered three buttons.
+  Use **integer arithmetic** throughout. Hugo's `math.*` helpers return float64,
+  so a comparison against an int page number is always false -- this bit twice,
+  silently: `math.Min`/`math.Max` in the window clamp (page 215 rendered three
+  buttons) and `math.Abs` in the `--far` test (the class never rendered at all).
+  Neither errors; both just quietly do nothing.
+
+  **On a phone it becomes two rows and drops the outer numbers.** Nine cells
+  (`1 … 106-110 … 215`) overflow a 390px screen, so under 34rem the numbers take
+  their own line with « and » paired beneath (a better thumb target than one at
+  each screen edge), and `.pagination__cell--far` -- current ±2, marked in the
+  template from the distance to the current page, never by `:nth-child`, since
+  which cells exist changes page by page -- is hidden, leaving `1 … 107 108 109 …
+  215`. Separately: the whole site overflows horizontally at 390px (headings and
+  cards are cut off, right edge flush at the viewport with no gutter). That is
+  **pre-existing** and unrelated -- it reproduces at HEAD with the pagination
+  changes stashed -- but it is why a mobile pager looks off-centre.
 
 - **Feeds are posts-only and capped at 30.** `[services.rss] limit = 30` in
   `hugo.toml` -- Hugo's default is unbounded, which made `/index.xml` 3.85 MB of
