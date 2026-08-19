@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/samiekblad/"
 github: ""
 youtube: ""
 website: "https://x.com/samiekblad"
-aliases:
-  - "/today/author/sami-ekblad/"
 frozen: false
 ---
-

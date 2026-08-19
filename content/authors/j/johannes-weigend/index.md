@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/johannes-weigend-48b855151/"
 github: ""
 youtube: ""
 website: "https://x.com/JohannesWeigend"
-aliases:
-  - "/today/author/johannes-weigend/"
 frozen: false
 ---
-

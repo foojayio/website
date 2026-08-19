@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/kadi-grigg/"
 github: ""
 youtube: ""
 website: "https://x.com/KadiGrigg"
-aliases:
-  - "/today/author/kadi-grigg/"
 frozen: false
 ---
-

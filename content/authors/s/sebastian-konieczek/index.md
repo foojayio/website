@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/sebastian-konieczek/"
 github: ""
 youtube: ""
 website: "https://x.com/the_real_sko"
-aliases:
-  - "/today/author/sebastian-konieczek/"
 frozen: false
 ---
-

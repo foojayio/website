@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/richardfichtner/"
 github: ""
 youtube: ""
 website: "https://x.com/RichardFichtner"
-aliases:
-  - "/today/author/r-fichtner/"
 frozen: false
 ---
-

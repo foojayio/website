@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/bradfordcp/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/christopher-bradford/"
 frozen: false
 ---
-

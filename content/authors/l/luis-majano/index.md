@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/lmajano/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/luis-majano/"
 frozen: false
 ---
-

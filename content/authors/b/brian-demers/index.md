@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/bdemers/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/brian-demers/"
 frozen: false
 ---
-

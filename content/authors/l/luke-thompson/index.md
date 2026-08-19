@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/lukethompson9/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/luke-thompson/"
 frozen: false
 ---
-

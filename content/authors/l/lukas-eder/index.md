@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/lukaseder/"
 github: ""
 youtube: ""
 website: "https://x.com/lukaseder"
-aliases:
-  - "/today/author/lukas-eder/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/felipe-maschio-18742a17/"
 github: "https://github.com/maschiojv"
 youtube: ""
 website: "https://threadmine.dev/en"
-aliases:
-  - "/today/author/felipe-maschio/"
 frozen: false
 ---
-

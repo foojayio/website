@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/julienlengrand/"
 github: ""
 youtube: ""
 website: "https://x.com/jlengrand"
-aliases:
-  - "/today/author/jlengrand/"
 frozen: false
 ---
-

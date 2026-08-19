@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/cay-horstmann-659a4b/"
 github: ""
 youtube: ""
 website: "https://x.com/cayhorstmann"
-aliases:
-  - "/today/author/cay-horstmann/"
 frozen: false
 ---
-

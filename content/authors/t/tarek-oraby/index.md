@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/tarek-oraby/"
 github: ""
 youtube: ""
 website: "https://x.com/tarek_oraby"
-aliases:
-  - "/today/author/tarek-oraby/"
 frozen: false
 ---
-

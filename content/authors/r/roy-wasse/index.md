@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/roywasse/"
 github: ""
 youtube: ""
 website: "https://x.com/roywasse"
-aliases:
-  - "/today/author/roy-wasse/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jeffbanks/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/jeff-banks/"
 frozen: false
 ---
-

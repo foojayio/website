@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/reneschwietzke/"
 github: ""
 youtube: ""
 website: "https://x.com/ReneSchwietzke"
-aliases:
-  - "/today/author/rene-schwietzke/"
 frozen: false
 ---
-

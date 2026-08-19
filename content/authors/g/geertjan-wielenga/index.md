@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/geertjanwielenga/"
 github: ""
 youtube: ""
 website: "https://x.com/geertjanw"
-aliases:
-  - "/today/author/geertjan-wielenga/"
 frozen: false
 ---
-

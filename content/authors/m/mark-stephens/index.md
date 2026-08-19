@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mnstephens/"
 github: ""
 youtube: ""
 website: "https://x.com/markee174"
-aliases:
-  - "/today/author/mark-stephens/"
 frozen: false
 ---
-

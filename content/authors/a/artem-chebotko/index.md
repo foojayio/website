@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/artemchebotko/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/artem-chebotko/"
 frozen: false
 ---
-

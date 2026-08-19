@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/schneider-david/"
 github: ""
 youtube: ""
 website: "https://x.com/zalando"
-aliases:
-  - "/today/author/david-schneider/"
 frozen: false
 ---
-

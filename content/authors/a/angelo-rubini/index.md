@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/angelo-rubini-1754379/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/angelo-rubini/"
 frozen: false
 ---
-

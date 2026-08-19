@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/samuelmolling/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/samuel-molling/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/pkolaczk/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/pkolaczk/"
 frozen: false
 ---
-

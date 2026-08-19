@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ariwaller/"
 github: ""
 youtube: ""
 website: "https://x.com/ariwaller"
-aliases:
-  - "/today/author/ari-waller/"
 frozen: false
 ---
-

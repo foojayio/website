@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/michal-maléř-69344692/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/michal-maler/"
 frozen: false
 ---
-

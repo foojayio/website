@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/adamwarski/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/adam-warski/"
 frozen: false
 ---
-

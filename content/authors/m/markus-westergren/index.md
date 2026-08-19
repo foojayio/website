@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/markuswestergren/"
 github: ""
 youtube: ""
 website: "http://www.empatheticdev.com"
-aliases:
-  - "/today/author/markus-westergren/"
 frozen: false
 ---
-

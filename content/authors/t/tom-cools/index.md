@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/tom-cools-17547548/"
 github: "https://github.com/TomCools"
 youtube: ""
 website: "https://x.com/TCoolsIT"
-aliases:
-  - "/today/author/tom-cools/"
 frozen: false
 ---
-

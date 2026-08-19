@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/crschnick/"
 github: ""
 youtube: ""
 website: "https://x.com/crschnick"
-aliases:
-  - "/today/author/christopher-schnick/"
 frozen: false
 ---
-

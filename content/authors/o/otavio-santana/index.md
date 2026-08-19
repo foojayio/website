@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/otaviojava/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/otavio-santana/"
 frozen: false
 ---
-

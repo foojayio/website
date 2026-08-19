@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/igfasouza/"
 github: ""
 youtube: ""
 website: "https://x.com/Igfasouza"
-aliases:
-  - "/today/author/igor-de-souza/"
 frozen: false
 ---
-

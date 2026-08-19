@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/timtebeek/"
 github: "https://github.com/timtebeek/"
 youtube: ""
 website: "https://x.com/TimteBeek"
-aliases:
-  - "/today/author/timtebeek/"
 frozen: false
 ---
-

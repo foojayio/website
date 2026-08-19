@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/gianr/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/gianluca-righetto/"
 frozen: false
 ---
-

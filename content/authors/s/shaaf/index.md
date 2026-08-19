@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/shaaf/"
 github: ""
 youtube: ""
 website: "https://shaaf.dev/"
-aliases:
-  - "/today/author/shaaf/"
 frozen: false
 ---
-

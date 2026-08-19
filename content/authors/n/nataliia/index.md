@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://nataliiadziubenko.com"
-aliases:
-  - "/today/author/nataliia/"
 frozen: false
 ---
-

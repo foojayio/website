@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ksilz"
 github: ""
 youtube: ""
 website: "https://x.com/karsilz"
-aliases:
-  - "/today/author/karsten-silz/"
 frozen: false
 ---
-

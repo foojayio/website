@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/dominikatasarz/"
 github: ""
 youtube: ""
 website: "https://sessionize.com/dominika-tasarz/"
-aliases:
-  - "/today/author/dominika-tasarz/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/sheajerry/"
 github: ""
 youtube: ""
 website: "https://x.com/melb_jezza"
-aliases:
-  - "/today/author/jerry-shea/"
 frozen: false
 ---
-

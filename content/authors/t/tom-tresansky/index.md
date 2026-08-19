@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/tom-t-373ba0b/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/tom-tresansky/"
 frozen: false
 ---
-

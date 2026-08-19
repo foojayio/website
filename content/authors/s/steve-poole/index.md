@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/noregressions/"
 github: ""
 youtube: ""
 website: "https://x.com/spoole167"
-aliases:
-  - "/today/author/steve-poole/"
 frozen: false
 ---
-

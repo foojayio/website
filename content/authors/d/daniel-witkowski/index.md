@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/danielwitkowski/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/daniel-witkowski/"
 frozen: false
 ---
-

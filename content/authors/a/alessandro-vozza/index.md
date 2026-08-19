@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/alessandrovozza/"
 github: ""
 youtube: ""
 website: "https://x.com/bongo"
-aliases:
-  - "/today/author/alessandro-vozza/"
 frozen: false
 ---
-

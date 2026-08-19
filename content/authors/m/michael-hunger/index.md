@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jexpde/"
 github: ""
 youtube: ""
 website: "https://x.com/mesirii"
-aliases:
-  - "/today/author/michael-hunger/"
 frozen: false
 ---
-

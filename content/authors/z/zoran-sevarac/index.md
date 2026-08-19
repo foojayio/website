@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/zoran-sevarac-phd-49a9a411/"
 github: ""
 youtube: ""
 website: "https://x.com/zsevarac"
-aliases:
-  - "/today/author/zoran-sevarac/"
 frozen: false
 ---
-

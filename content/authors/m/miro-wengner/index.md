@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mwengner/"
 github: ""
 youtube: ""
 website: "https://x.com/miragemiko"
-aliases:
-  - "/today/author/miro-wengner/"
 frozen: false
 ---
-

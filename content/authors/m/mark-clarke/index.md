@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/markxclarke/"
 github: ""
 youtube: ""
 website: "https://x.com/jumpingbeansa"
-aliases:
-  - "/today/author/mark-clarke/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/kieran-hejmadi-88920815b/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/kieran-hejmadi/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/karl-heinz-marbaise-17a15614/"
 github: ""
 youtube: "https://www.youtube.com/channel/UCIZzIp6FiUaxFVOz1LGF7jQ/"
 website: "https://x.com/khmarbaise"
-aliases:
-  - "/today/author/karl-heinz-marbaise/"
 frozen: false
 ---
-

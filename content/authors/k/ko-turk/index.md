@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ko-turk-b271b929/"
 github: ""
 youtube: ""
 website: "https://x.com/KoTurk77"
-aliases:
-  - "/today/author/ko-turk/"
 frozen: false
 ---
-

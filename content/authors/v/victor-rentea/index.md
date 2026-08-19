@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/victor-rentea-trainer/"
 github: ""
 youtube: ""
 website: "https://x.com/VictorRentea"
-aliases:
-  - "/today/author/victor-rentea/"
 frozen: false
 ---
-

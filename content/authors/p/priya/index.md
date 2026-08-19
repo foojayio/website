@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/priya-khaira-hanks-00319516a/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/priya/"
 frozen: false
 ---
-

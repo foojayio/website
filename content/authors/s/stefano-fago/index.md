@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/stefano-fago/"
 frozen: false
 ---
-

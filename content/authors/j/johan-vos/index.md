@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/johanvos/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/johan-vos/"
 frozen: false
 ---
-

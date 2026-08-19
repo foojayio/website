@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ronidover/"
 github: ""
 youtube: ""
 website: "https://x.com/doppleware"
-aliases:
-  - "/today/author/roni-dover/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/sjhannah/"
 github: ""
 youtube: ""
 website: "https://x.com/shannah78"
-aliases:
-  - "/today/author/steve-hannah/"
 frozen: false
 ---
-

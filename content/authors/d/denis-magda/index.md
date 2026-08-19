@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/dmagda"
 github: ""
 youtube: ""
 website: "https://x.com/denismagda"
-aliases:
-  - "/today/author/denis-magda/"
 frozen: false
 ---
-

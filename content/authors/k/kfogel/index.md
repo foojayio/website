@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/kenfogel/"
 github: ""
 youtube: ""
 website: "https://x.com/omniprof"
-aliases:
-  - "/today/author/kfogel/"
 frozen: false
 ---
-

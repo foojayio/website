@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://x.com/gail_asgteach"
-aliases:
-  - "/today/author/gail-anderson/"
 frozen: false
 ---
-

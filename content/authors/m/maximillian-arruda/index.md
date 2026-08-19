@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://x.com/maxdearruda"
-aliases:
-  - "/today/author/maximillian-arruda/"
 frozen: false
 ---
-

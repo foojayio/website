@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/timothyspann/"
 github: ""
 youtube: ""
 website: "https://x.com/FutureOfDataPrx"
-aliases:
-  - "/today/author/tim-spann/"
 frozen: false
 ---
-

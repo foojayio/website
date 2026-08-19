@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/dpukyle/"
 github: ""
 youtube: ""
 website: "https://x.com/dpukyle"
-aliases:
-  - "/today/author/kyle-moore/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/noga-badhav-79196b137/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/noga-badhav/"
 frozen: false
 ---
-

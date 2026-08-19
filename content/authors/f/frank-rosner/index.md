@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/frosnerd/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/frank-rosner/"
 frozen: false
 ---
-

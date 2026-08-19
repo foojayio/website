@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/gerritgrunwald/"
 github: ""
 youtube: "https://www.youtube.com/user/hansolo312"
 website: "https://x.com/hansolo_"
-aliases:
-  - "/today/author/gerrit-grunwald/"
 frozen: false
 ---
-

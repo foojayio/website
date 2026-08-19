@@ -9,8 +9,5 @@ linkedin: ""
 github: "https://github.com/AntonLem"
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/anton-lem/"
 frozen: false
 ---
-

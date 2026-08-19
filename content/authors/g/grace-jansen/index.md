@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/grace-jansen/"
 github: ""
 youtube: ""
 website: "https://x.com/gracejansen27"
-aliases:
-  - "/today/author/grace-jansen/"
 frozen: false
 ---
-

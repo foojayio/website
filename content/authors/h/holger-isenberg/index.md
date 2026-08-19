@@ -9,8 +9,5 @@ linkedin: "https://linkedin.com/in/holgerisenberg"
 github: ""
 youtube: ""
 website: "https://x.com/areoinfo"
-aliases:
-  - "/today/author/holger-isenberg/"
 frozen: false
 ---
-

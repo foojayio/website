@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/olimpiupop/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/olimpiu-pop/"
 frozen: false
 ---
-

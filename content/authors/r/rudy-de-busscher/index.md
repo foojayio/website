@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/rudy-de-busscher-71480036/"
 github: ""
 youtube: ""
 website: "https://x.com/rdebusscher"
-aliases:
-  - "/today/author/rudy-de-busscher/"
 frozen: false
 ---
-

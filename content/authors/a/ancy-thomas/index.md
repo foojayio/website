@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ancymariamthomas/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/ancy-thomas/"
 frozen: false
 ---
-

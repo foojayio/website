@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/lin-wei-8a02b011a/"
 github: ""
 youtube: ""
 website: "https://x.com/wlnirvana"
-aliases:
-  - "/today/author/wei-lin/"
 frozen: false
 ---
-

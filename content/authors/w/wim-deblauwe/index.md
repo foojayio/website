@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/wimdeblauwe/"
 github: ""
 youtube: ""
 website: "https://x.com/wimdeblauwe"
-aliases:
-  - "/today/author/wim-deblauwe/"
 frozen: false
 ---
-

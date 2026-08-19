@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/alexanderreelsen/"
 github: ""
 youtube: ""
 website: "https://x.com/spinscale"
-aliases:
-  - "/today/author/alexander-reelsen/"
 frozen: false
 ---
-

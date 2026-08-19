@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/smillidge/"
 github: ""
 youtube: ""
 website: "https://x.com/l33tj4v4"
-aliases:
-  - "/today/author/steve-millidge/"
 frozen: false
 ---
-

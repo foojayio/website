@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://x.com/gunnarmorling"
-aliases:
-  - "/today/author/gunnarmorling/"
 frozen: false
 ---
-

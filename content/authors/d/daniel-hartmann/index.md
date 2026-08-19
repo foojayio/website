@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/daniel-hartmann-0b5827197/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/daniel-hartmann/"
 frozen: false
 ---
-

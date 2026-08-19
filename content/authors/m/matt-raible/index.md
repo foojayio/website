@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mraible/"
 github: ""
 youtube: ""
 website: "https://x.com/mraible"
-aliases:
-  - "/today/author/matt-raible/"
 frozen: false
 ---
-

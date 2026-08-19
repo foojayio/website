@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mikaël-francoeur/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/mikael-francoeur/"
 frozen: false
 ---
-

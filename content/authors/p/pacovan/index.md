@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/pacovanbeckhoven/"
 github: "https://github.com/pacbeckh"
 youtube: ""
 website: "https://x.com/DevPaco"
-aliases:
-  - "/today/author/pacovan/"
 frozen: false
 ---
-

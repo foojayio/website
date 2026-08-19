@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/greghigginsv12/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/greg-higgins/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/stratika/"
 github: ""
 youtube: ""
 website: "https://x.com/thanos_str"
-aliases:
-  - "/today/author/thanos-stratikopoulos/"
 frozen: false
 ---
-

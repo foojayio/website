@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/marcushellberg/"
 github: ""
 youtube: ""
 website: "https://x.com/marcushellberg"
-aliases:
-  - "/today/author/marcus-hellberg/"
 frozen: false
 ---
-

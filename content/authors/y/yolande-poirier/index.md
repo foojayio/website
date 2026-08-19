@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/yolande-poirier/"
 frozen: false
 ---
-

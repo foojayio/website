@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/bruno-oliveira-78181176/"
 github: ""
 youtube: ""
 website: "https://x.com/oliv_bruno8"
-aliases:
-  - "/today/author/bruno-oliveira/"
 frozen: false
 ---
-

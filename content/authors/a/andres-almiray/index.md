@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/aalmiray/"
 github: ""
 youtube: ""
 website: "https://x.com/aalmiray"
-aliases:
-  - "/today/author/andres-almiray/"
 frozen: false
 ---
-

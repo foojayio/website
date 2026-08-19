@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/dutheilbrice/"
 github: ""
 youtube: ""
 website: "https://x.com/BriceDutheil"
-aliases:
-  - "/today/author/brice-dutheil/"
 frozen: false
 ---
-

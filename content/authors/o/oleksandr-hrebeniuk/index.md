@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/oleksandr-hrebeniuk/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/oleksandr-hrebeniuk/"
 frozen: false
 ---
-

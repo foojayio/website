@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/michał-trojanowski-58664932/"
 github: ""
 youtube: ""
 website: "https://x.com/mz_trojan"
-aliases:
-  - "/today/author/michal-trojanowski/"
 frozen: false
 ---
-

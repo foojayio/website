@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/gilbert-kwan-972a4217a/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/gilbert-kwan/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://x.com/clementplop"
-aliases:
-  - "/today/author/clement-escoffier/"
 frozen: false
 ---
-

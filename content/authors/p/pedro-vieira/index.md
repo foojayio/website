@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/pedro-duque-vieira-2644038/"
 github: ""
 youtube: ""
 website: "https://x.com/P_Duke"
-aliases:
-  - "/today/author/pedro-vieira/"
 frozen: false
 ---
-

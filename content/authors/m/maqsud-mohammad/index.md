@@ -9,8 +9,5 @@ linkedin: "http://linkedin.com/in/maqsud-mohammad-mba"
 github: ""
 youtube: ""
 website: "https://x.com/mmohammadmba"
-aliases:
-  - "/today/author/maqsud-mohammad/"
 frozen: false
 ---
-

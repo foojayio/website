@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/richedwardslinked/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/rich-edwards/"
 frozen: false
 ---
-

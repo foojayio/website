@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/anitakumari42/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/anita-kumari/"
 frozen: false
 ---
-

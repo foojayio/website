@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/julienviet/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/julien-viet/"
 frozen: false
 ---
-

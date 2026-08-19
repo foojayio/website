@@ -9,8 +9,5 @@ linkedin: ""
 github: "https://github.com/spannm"
 youtube: ""
 website: "https://www.speedbanking.de/"
-aliases:
-  - "/today/author/markus-spann/"
 frozen: false
 ---
-

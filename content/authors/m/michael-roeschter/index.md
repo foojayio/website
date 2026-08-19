@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/michaelroeschter/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/michael-roeschter/"
 frozen: false
 ---
-

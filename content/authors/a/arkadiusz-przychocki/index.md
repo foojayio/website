@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/arkstack/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/arkadiusz-przychocki/"
 frozen: false
 ---
-

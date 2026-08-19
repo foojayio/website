@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/rchernobelskiy/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/roman-chernobelskiy/"
 frozen: false
 ---
-

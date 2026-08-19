@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/costlow/"
 github: ""
 youtube: ""
 website: "https://x.com/costlow"
-aliases:
-  - "/today/author/erikcostlow/"
 frozen: false
 ---
-

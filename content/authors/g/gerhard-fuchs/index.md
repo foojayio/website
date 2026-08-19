@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "http://fepcos.info/en/fuchs.html"
-aliases:
-  - "/today/author/gerhard-fuchs/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/patrick-mcfadin-53a8046/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/patrick-mcfadin/"
 frozen: false
 ---
-

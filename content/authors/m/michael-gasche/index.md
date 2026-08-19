@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: "https://www.youtube.com/@autumoswitzerland"
 website: "https://x.com/autumo"
-aliases:
-  - "/today/author/michael-gasche/"
 frozen: false
 ---
-

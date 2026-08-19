@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/chengenzhao/"
 github: ""
 youtube: ""
 website: "https://x.com/WhiteWoodCity"
-aliases:
-  - "/today/author/chengen-zhao/"
 frozen: false
 ---
-

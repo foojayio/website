@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/scott-sosna/"
 github: ""
 youtube: ""
 website: "https://dzone.com/authors/scsosna"
-aliases:
-  - "/today/author/scott-sosna/"
 frozen: false
 ---
-

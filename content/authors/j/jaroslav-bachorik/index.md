@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jbachorik/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/jaroslav-bachorik/"
 frozen: false
 ---
-

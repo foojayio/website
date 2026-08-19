@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mohibulhassan/"
 github: ""
 youtube: ""
 website: "https://x.com/dhrubo555"
-aliases:
-  - "/today/author/mohibul-chowdhury/"
 frozen: false
 ---
-

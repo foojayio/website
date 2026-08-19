@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/joekuhel/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/joe-kuhel/"
 frozen: false
 ---
-

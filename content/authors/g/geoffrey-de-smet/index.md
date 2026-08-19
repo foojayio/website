@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ge0ffrey/"
 github: ""
 youtube: ""
 website: "https://x.com/GeoffreyDeSmet"
-aliases:
-  - "/today/author/geoffrey-de-smet/"
 frozen: false
 ---
-

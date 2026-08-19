@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/farhanhasin/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/farhan-chowdhury/"
 frozen: false
 ---
-

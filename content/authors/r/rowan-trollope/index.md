@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/rowant/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/rowan-trollope/"
 frozen: false
 ---
-

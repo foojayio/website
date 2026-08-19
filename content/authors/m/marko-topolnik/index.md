@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/marko-topolnik-23659689/"
 github: ""
 youtube: ""
 website: "https://x.com/mtopolnik"
-aliases:
-  - "/today/author/marko-topolnik/"
 frozen: false
 ---
-

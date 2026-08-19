@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/johannes-bechberger-381296149/"
 github: ""
 youtube: "https://www.youtube.com/channel/UCt-5efMWS1lhq2ituH5JtJA"
 website: "https://x.com/parttimen3rd"
-aliases:
-  - "/today/author/johannes-bechberger/"
 frozen: false
 ---
-

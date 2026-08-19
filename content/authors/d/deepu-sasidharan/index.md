@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/deepu05/"
 github: ""
 youtube: ""
 website: "https://x.com/deepu105"
-aliases:
-  - "/today/author/deepu-sasidharan/"
 frozen: false
 ---
-

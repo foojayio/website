@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://x.com/grahamcox82"
-aliases:
-  - "/today/author/graham-cox/"
 frozen: false
 ---
-

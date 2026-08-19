@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jasmine-taylor/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/jasmine-taylor/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ghgeek/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/luqman-saeed/"
 frozen: false
 ---
-

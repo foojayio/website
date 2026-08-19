@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/glaforge/"
 github: ""
 youtube: ""
 website: "https://x.com/https://twitter.com/glaforge"
-aliases:
-  - "/today/author/guillaume-laforge/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/bjorn-van-der-laan/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/bjorn-vdlaan/"
 frozen: false
 ---
-

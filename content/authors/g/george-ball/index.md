@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/georgeball/"
 github: ""
 youtube: ""
 website: "https://x.com/georgerball"
-aliases:
-  - "/today/author/george-ball/"
 frozen: false
 ---
-

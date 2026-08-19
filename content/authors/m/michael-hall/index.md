@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mhall119/"
 github: ""
 youtube: ""
 website: "https://x.com/mhall119"
-aliases:
-  - "/today/author/michael-hall/"
 frozen: false
 ---
-

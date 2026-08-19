@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/javareza/"
 github: ""
 youtube: ""
 website: "https://x.com/reza_rahman"
-aliases:
-  - "/today/author/m-reza-rahman/"
 frozen: false
 ---
-

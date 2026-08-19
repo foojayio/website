@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/hannotify/"
 github: ""
 youtube: ""
 website: "https://x.com/hannotify"
-aliases:
-  - "/today/author/hanno-embregts/"
 frozen: false
 ---
-

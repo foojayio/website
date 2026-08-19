@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/rayjtsang/"
 github: ""
 youtube: ""
 website: "https://x.com/saturnism"
-aliases:
-  - "/today/author/saturnism/"
 frozen: false
 ---
-

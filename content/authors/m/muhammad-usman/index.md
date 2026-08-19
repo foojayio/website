@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/muhammad-usman-5b398722"
 github: "https://github.com/marshal-hq"
 youtube: ""
 website: "https://marshalhq.dev/"
-aliases:
-  - "/today/author/muhammad-usman/"
 frozen: false
 ---
-

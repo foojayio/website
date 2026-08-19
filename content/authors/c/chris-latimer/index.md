@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/chrislatimer/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/chris-latimer/"
 frozen: false
 ---
-

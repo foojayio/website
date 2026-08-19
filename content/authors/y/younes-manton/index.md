@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ymanton/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/younes-manton/"
 frozen: false
 ---
-

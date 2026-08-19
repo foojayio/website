@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/zikani03/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/zikani-mwase/"
 frozen: false
 ---
-

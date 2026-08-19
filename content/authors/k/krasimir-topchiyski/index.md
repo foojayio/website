@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/topchiyski/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/krasimir-topchiyski/"
 frozen: false
 ---
-

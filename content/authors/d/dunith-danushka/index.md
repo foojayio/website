@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/dunithd/"
 github: ""
 youtube: ""
 website: "https://x.com/dunithd"
-aliases:
-  - "/today/author/dunith-danushka/"
 frozen: false
 ---
-

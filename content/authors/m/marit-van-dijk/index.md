@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/maritvandijk/"
 github: "https://github.com/mlvandijk"
 youtube: "https://www.youtube.com/@maritvandijk"
 website: "https://x.com/MaritvanDijk77"
-aliases:
-  - "/today/author/marit-van-dijk/"
 frozen: false
 ---
-

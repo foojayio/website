@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/helenjoscott/"
 github: ""
 youtube: ""
 website: "https://www.helenjoscott.com"
-aliases:
-  - "/today/author/helenjoscott/"
 frozen: false
 ---
-

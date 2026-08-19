@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/vipinsharma/"
 github: ""
 youtube: ""
 website: "https://x.com/vipinbit"
-aliases:
-  - "/today/author/vipin-sharma/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/roaustin/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/rob-austin/"
 frozen: false
 ---
-

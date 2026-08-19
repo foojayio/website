@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/shai-almog-81a42/"
 github: ""
 youtube: "https://youtube.com/@debugagent/"
 website: "https://x.com/debugagent"
-aliases:
-  - "/today/author/shai-almog/"
 frozen: false
 ---
-

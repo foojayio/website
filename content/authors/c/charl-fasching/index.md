@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/charl-fasching-77843288/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/charl-fasching/"
 frozen: false
 ---
-

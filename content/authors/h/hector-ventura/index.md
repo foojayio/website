@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/hectorvent/"
 github: "https://github.com/hectorvent/"
 youtube: ""
 website: "https://hectorvent.dev"
-aliases:
-  - "/today/author/hector-ventura/"
 frozen: false
 ---
-

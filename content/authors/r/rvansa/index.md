@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/radim-vansa-957b6430/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/rvansa/"
 frozen: false
 ---
-

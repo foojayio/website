@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/torakiki/"
 github: ""
 youtube: ""
 website: "https://soberlemur.com"
-aliases:
-  - "/today/author/andrea-vacondio/"
 frozen: false
 ---
-

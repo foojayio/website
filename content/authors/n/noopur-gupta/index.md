@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/noopur2507/"
 github: ""
 youtube: ""
 website: "https://x.com/noopur2507"
-aliases:
-  - "/today/author/noopur-gupta/"
 frozen: false
 ---
-

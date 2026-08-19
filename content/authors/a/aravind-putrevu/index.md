@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/aravindputrevu/"
 github: ""
 youtube: ""
 website: "https://x.com/aravindputrevu"
-aliases:
-  - "/today/author/aravind-putrevu/"
 frozen: false
 ---
-

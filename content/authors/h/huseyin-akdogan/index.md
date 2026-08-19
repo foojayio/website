@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/hakdogan/"
 github: ""
 youtube: ""
 website: "https://x.com/hakdoganhoca"
-aliases:
-  - "/today/author/huseyin-akdogan/"
 frozen: false
 ---
-

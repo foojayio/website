@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/svenruppert/"
 github: ""
 youtube: ""
 website: "https://x.com/SvenRuppert"
-aliases:
-  - "/today/author/sven-ruppert/"
 frozen: false
 ---
-

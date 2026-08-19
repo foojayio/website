@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/john-sanda-a382671/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/john-sanda/"
 frozen: false
 ---
-

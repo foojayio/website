@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ji-holua-16987874/"
 github: ""
 youtube: ""
 website: "https://x.com/jholusa"
-aliases:
-  - "/today/author/jiri-holusa/"
 frozen: false
 ---
-

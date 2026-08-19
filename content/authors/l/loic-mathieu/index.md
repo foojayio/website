@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/loïc-mathieu-475b144/"
 github: ""
 youtube: ""
 website: "https://x.com/loicmathieu"
-aliases:
-  - "/today/author/loic-mathieu/"
 frozen: false
 ---
-

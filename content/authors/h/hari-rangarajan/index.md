@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/hari-rangarajan/"
 github: ""
 youtube: ""
 website: "https://x.com/solacedotcom"
-aliases:
-  - "/today/author/hari-rangarajan/"
 frozen: false
 ---
-

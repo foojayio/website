@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jonathanvila/"
 github: ""
 youtube: ""
 website: "https://x.com/vilojona"
-aliases:
-  - "/today/author/jonathan-vila/"
 frozen: false
 ---
-

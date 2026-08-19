@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/siritter/"
 github: ""
 youtube: ""
 website: "https://x.com/speakjava"
-aliases:
-  - "/today/author/simonritter/"
 frozen: false
 ---
-

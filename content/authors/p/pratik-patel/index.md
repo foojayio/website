@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/prpatel/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/pratik-patel/"
 frozen: false
 ---
-

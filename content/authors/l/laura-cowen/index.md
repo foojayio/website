@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/lauracowen/"
 github: ""
 youtube: ""
 website: "https://x.com/lauracowen"
-aliases:
-  - "/today/author/laura-cowen/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/nickebbitt/"
 github: ""
 youtube: ""
 website: "https://x.com/nickebbitt"
-aliases:
-  - "/today/author/nick-ebbitt/"
 frozen: false
 ---
-

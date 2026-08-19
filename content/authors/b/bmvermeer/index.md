@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/brianvermeer/"
 github: ""
 youtube: ""
 website: "https://x.com/brianverm"
-aliases:
-  - "/today/author/bmvermeer/"
 frozen: false
 ---
-

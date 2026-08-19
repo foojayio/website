@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mhirt/"
 github: ""
 youtube: ""
 website: "https://x.com/hirt"
-aliases:
-  - "/today/author/hirt/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/nehalgajraj/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/nehal-gajraj/"
 frozen: false
 ---
-

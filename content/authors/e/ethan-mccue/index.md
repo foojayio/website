@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ethan-m-53a817100/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/ethan-mccue/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/chriswhocodes/"
 github: ""
 youtube: ""
 website: "https://chriswhocodes.com"
-aliases:
-  - "/today/author/chriswhocodes/"
 frozen: false
 ---
-

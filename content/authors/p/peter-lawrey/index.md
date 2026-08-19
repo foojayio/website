@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/peterlawrey/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/peter-lawrey/"
 frozen: false
 ---
-

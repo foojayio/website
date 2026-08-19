@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/thejustinjenkins/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/justin-jenkins/"
 frozen: false
 ---
-

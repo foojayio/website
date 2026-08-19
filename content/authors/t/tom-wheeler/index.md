@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/tomwheelerstl/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/tom-wheeler/"
 frozen: false
 ---
-

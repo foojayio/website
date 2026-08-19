@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/blowagie/"
 github: ""
 youtube: ""
 website: "https://lowagie.com"
-aliases:
-  - "/today/author/bruno-lowagie/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/heshanthenura/"
 github: ""
 youtube: ""
 website: "https://x.com/Heshantk"
-aliases:
-  - "/today/author/heshan-thenura-kariyawasam/"
 frozen: false
 ---
-

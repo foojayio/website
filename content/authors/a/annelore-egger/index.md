@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/anneloredev/"
 github: "https://github.com/anneloredev"
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/annelore-egger/"
 frozen: false
 ---
-

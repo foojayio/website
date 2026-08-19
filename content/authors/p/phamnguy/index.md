@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/nguyenphamde"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/phamnguy/"
 frozen: false
 ---
-

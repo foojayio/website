@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jonatan-ivanov/"
 github: ""
 youtube: ""
 website: "https://x.com/jonatan_ivanov"
-aliases:
-  - "/today/author/jonatan-ivanov/"
 frozen: false
 ---
-

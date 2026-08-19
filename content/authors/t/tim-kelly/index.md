@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/timothee-kelly/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/tim-kelly/"
 frozen: false
 ---
-

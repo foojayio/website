@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/zbynek-roubalik/"
 github: "https://github.com/zroubalik"
 youtube: ""
 website: "https://kedify.io/"
-aliases:
-  - "/today/author/zbynek-roubalik/"
 frozen: false
 ---
-

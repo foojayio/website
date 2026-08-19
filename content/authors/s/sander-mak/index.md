@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/sandermak/"
 github: ""
 youtube: ""
 website: "https://x.com/Sander_Mak"
-aliases:
-  - "/today/author/sander-mak/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/tmammarella/"
 github: ""
 youtube: ""
 website: "https://x.com/t_mammarella"
-aliases:
-  - "/today/author/theresa-mammarella/"
 frozen: false
 ---
-

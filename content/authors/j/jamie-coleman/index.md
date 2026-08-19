@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jamie-coleman/"
 github: ""
 youtube: ""
 website: "https://x.com/Jamie_Lee_C"
-aliases:
-  - "/today/author/jamie-coleman/"
 frozen: false
 ---
-

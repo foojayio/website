@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/fawazghali/"
 github: ""
 youtube: ""
 website: "https://x.com/FawazGhali"
-aliases:
-  - "/today/author/fawaz-ghali/"
 frozen: false
 ---
-

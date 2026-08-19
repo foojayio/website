@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/erikhatcher/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/erik-hatcher/"
 frozen: false
 ---
-

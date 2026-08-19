@@ -9,8 +9,5 @@ linkedin: "https://de.linkedin.com/in/irina-mariasova-b4777656"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/irina-mariasova/"
 frozen: false
 ---
-

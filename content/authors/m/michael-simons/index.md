@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/michael-simons-196712139/"
 github: ""
 youtube: ""
 website: "https://x.com/rotnroll666"
-aliases:
-  - "/today/author/michael-simons/"
 frozen: false
 ---
-

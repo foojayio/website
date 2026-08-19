@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/raphaeldelio/"
 github: ""
 youtube: ""
 website: "https://raphaeldelio.com"
-aliases:
-  - "/today/author/raphael-delio/"
 frozen: false
 ---
-

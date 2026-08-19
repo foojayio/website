@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/amorg/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/amorgan/"
 frozen: false
 ---
-

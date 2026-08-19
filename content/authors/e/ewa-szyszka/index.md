@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ewa-szyszka-305855132/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/ewa-szyszka/"
 frozen: false
 ---
-

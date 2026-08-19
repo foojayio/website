@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/matt-van-order-92901458/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/matt-van-order/"
 frozen: false
 ---
-

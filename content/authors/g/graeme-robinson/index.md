@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/graemecrobinson/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/graeme-robinson/"
 frozen: false
 ---
-

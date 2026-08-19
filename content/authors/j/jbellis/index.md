@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jbellis/"
 github: ""
 youtube: "https://www.youtube.com/@Brokk_AI"
 website: "https://x.com/spyced"
-aliases:
-  - "/today/author/jbellis/"
 frozen: false
 ---
-

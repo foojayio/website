@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/steve-wilcockson-94ab451/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/steve-wilcockson/"
 frozen: false
 ---
-

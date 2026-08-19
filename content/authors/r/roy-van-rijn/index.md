@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/royvanrijn/"
 github: ""
 youtube: ""
 website: "https://x.com/royvanrijn"
-aliases:
-  - "/today/author/roy-van-rijn/"
 frozen: false
 ---
-

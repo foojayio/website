@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/antonepple/"
 github: ""
 youtube: ""
 website: "https://x.com/monacotoni"
-aliases:
-  - "/today/author/eppleton/"
 frozen: false
 ---
-

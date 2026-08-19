@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/amanda-martin-69350067/"
 github: ""
 youtube: ""
 website: "https://x.com/DrAmandaLMartin"
-aliases:
-  - "/today/author/amanda-martin/"
 frozen: false
 ---
-

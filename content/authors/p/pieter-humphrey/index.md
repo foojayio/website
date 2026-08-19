@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/pieterhumphrey/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/pieter-humphrey/"
 frozen: false
 ---
-

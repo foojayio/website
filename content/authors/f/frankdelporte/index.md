@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/frankdelporte/"
 github: "https://github.com/FDelporte/"
 youtube: "https://www.youtube.com/@FrankDelporte"
 website: "https://webtechie.be/"
-aliases:
-  - "/today/author/frankdelporte/"
 frozen: false
 ---
-

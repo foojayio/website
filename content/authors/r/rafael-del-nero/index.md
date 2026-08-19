@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/rafadelnero/"
 github: ""
 youtube: ""
 website: "https://x.com/RafaDelNero"
-aliases:
-  - "/today/author/rafael-del-nero/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ashish-choudhary-8856122a/"
 github: ""
 youtube: ""
 website: "https://x.com/iASHeeesh"
-aliases:
-  - "/today/author/yrashish/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/oumaima-zerouali-16b189223/"
 github: ""
 youtube: ""
 website: "https://www.ozerouali.com/"
-aliases:
-  - "/today/author/oumaima-zerouali/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://x.com/sormuras"
-aliases:
-  - "/today/author/sormuras/"
 frozen: false
 ---
-

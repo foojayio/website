@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/dazdeboer/"
 github: ""
 youtube: ""
 website: "https://x.com/dazdeboer"
-aliases:
-  - "/today/author/daz-deboer/"
 frozen: false
 ---
-

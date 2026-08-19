@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/imisilence/"
 github: ""
 youtube: ""
 website: "https://x.com/jialuogan"
-aliases:
-  - "/today/author/jialuo-gan/"
 frozen: false
 ---
-

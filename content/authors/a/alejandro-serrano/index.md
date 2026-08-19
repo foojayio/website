@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/alejandroserranomena/"
 github: ""
 youtube: ""
 website: "https://x.com/trupill"
-aliases:
-  - "/today/author/alejandro-serrano/"
 frozen: false
 ---
-

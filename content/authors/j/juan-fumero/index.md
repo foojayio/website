@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: "https://www.youtube.com/@juanfumero"
 website: "https://x.com/snatverk"
-aliases:
-  - "/today/author/juan-fumero/"
 frozen: false
 ---
-

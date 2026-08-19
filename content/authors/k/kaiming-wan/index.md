@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/kaiming-wan/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/kaiming-wan/"
 frozen: false
 ---
-

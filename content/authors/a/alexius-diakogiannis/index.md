@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/diakogiannis/"
 github: ""
 youtube: "https://www.youtube.com/@JEE-gr"
 website: "https://x.com/Diakogiannis"
-aliases:
-  - "/today/author/alexius-diakogiannis/"
 frozen: false
 ---
-

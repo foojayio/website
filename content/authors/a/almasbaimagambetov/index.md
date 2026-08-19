@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/almasb/"
 github: "https://github.com/AlmasB"
 youtube: "https://www.youtube.com/c/AlmasB0/videos"
 website: "https://x.com/AlmasBaim"
-aliases:
-  - "/today/author/almasbaimagambetov/"
 frozen: false
 ---
-

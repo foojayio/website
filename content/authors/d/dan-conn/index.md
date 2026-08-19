@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/danconn/"
 github: ""
 youtube: ""
 website: "https://x.com/danjconn"
-aliases:
-  - "/today/author/dan-conn/"
 frozen: false
 ---
-

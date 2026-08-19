@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/lomagnette/"
 github: ""
 youtube: ""
 website: "https://x.com/LoMagnette"
-aliases:
-  - "/today/author/loic-magnette/"
 frozen: false
 ---
-

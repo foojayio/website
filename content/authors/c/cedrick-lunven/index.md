@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/clunven/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/cedrick-lunven/"
 frozen: false
 ---
-

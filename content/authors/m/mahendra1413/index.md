@@ -9,8 +9,5 @@ linkedin: "http://linkedin.com/in/mahendra-rao-bandaru-8754432b"
 github: ""
 youtube: ""
 website: "https://bs-mahi.medium.com/"
-aliases:
-  - "/today/author/mahendra1413/"
 frozen: false
 ---
-

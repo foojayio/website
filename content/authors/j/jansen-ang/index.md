@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jansen-ang/"
 github: ""
 youtube: ""
 website: "https://x.com/senjugph"
-aliases:
-  - "/today/author/jansen-ang/"
 frozen: false
 ---
-

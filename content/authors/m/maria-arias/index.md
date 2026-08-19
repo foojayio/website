@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/delawen/"
 github: ""
 youtube: ""
 website: "https://delawen.com/"
-aliases:
-  - "/today/author/maria-arias/"
 frozen: false
 ---
-

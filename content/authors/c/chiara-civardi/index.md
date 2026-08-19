@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/chiaracivardi/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/chiara-civardi/"
 frozen: false
 ---
-

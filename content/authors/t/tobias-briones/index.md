@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/tobiasbriones/"
 github: ""
 youtube: ""
 website: "https://x.com/tobiasbriones_"
-aliases:
-  - "/today/author/tobias-briones/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ssellers/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/scott-sellers/"
 frozen: false
 ---
-

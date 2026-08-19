@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ethauvin/"
 github: ""
 youtube: ""
 website: "https://x.com/ethauvin"
-aliases:
-  - "/today/author/erik-thauvin/"
 frozen: false
 ---
-

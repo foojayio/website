@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jeff-dinoto/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/jeff-dinoto/"
 frozen: false
 ---
-

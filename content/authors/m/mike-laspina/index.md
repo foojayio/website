@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/mike-laspina/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/mike-laspina/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ramirez/"
 github: "https://github.com/questdb"
 youtube: ""
 website: "https://x.com/supercoco9"
-aliases:
-  - "/today/author/javier-ramirez/"
 frozen: false
 ---
-

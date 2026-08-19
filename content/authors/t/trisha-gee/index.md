@@ -9,8 +9,5 @@ linkedin: ""
 github: ""
 youtube: ""
 website: "https://x.com/trisha_gee"
-aliases:
-  - "/today/author/trisha-gee/"
 frozen: false
 ---
-

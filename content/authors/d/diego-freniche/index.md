@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/dfreniche/"
 github: "https://github.com/dfreniche"
 youtube: ""
 website: "https://www.freniche.com/posts/"
-aliases:
-  - "/today/author/diego-freniche/"
 frozen: false
 ---
-
