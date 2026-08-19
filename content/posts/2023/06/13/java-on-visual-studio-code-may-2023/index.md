@@ -5,7 +5,7 @@ lastmod: "2023-06-13T11:03:10+00:00"
 description: "Tons of new features covering performance improvement, user experience as well as Spring Boot integration."
 authors:
   - "nick-zhu"
-image: "projectexplorer.gif"
+image: "projectexplorer-poster.jpg"
 categories:
   - "Developer Tools"
   - "Tools"
@@ -42,7 +42,7 @@ We introduced our new Java Project Explorer UI last month, and we have been maki
 
 Here's a demo that covers all the features above. Please let us know if you have any [feedback](https://github.com/Microsoft/vscode-java-pack) regarding these UI updates.
 
-![Java Project Explorer New UX](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/05/projectexplorer.gif)
+![Java Project Explorer New UX](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/05/projectexplorer.webp)
 
 #### Whitelist for exception types
 

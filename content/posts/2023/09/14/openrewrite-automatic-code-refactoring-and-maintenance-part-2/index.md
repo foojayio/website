@@ -5,7 +5,7 @@ lastmod: "2023-09-14T06:56:37+00:00"
 description: "Discover OpenRewrite Library, the ultimate solution for code refactoring and maintenance. Optimize your code with ease and efficiency."
 authors:
   - "mahendra1413"
-image: "OpenRewrite.gif"
+image: "OpenRewrite.webp"
 categories:
   - "Java"
   - "OpenRewrite"
@@ -20,7 +20,7 @@ frozen: false
 In the [previous article](https://foojay.io/today/openrewrite-automatic-code-refactoring-and-maintenance/), we outlined the significance of the OpenRewrite Library and its integration at an elevated level.
 
 This article explains how to improve, refactor, and move a Spring Boot application with OpenRewrite.  
-![Open Rewrite](OpenRewrite.gif)
+![Open Rewrite](OpenRewrite.webp)
 
 Source: OpenReWrite{#caption-attachment-102151}
 

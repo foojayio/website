@@ -79,6 +79,7 @@ public class Frontmatter {
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs));
         problems.addAll(checkEvents(Path.of("data/events")));
         problems.addAll(checkImageWeight(Path.of("content")));
+        problems.addAll(checkHeroImageStill(Path.of("content")));
 
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
@@ -511,6 +512,91 @@ public class Frontmatter {
      * back to an initial, which looks like a design choice rather than a
      * mistake, so nothing about the page says the logo was forgotten.
      */
+    /**
+     * A hero `image:` must be a STILL image.
+     *
+     * Not a format rule -- 41 posts use .webp, 5 .avif and one .svg as their hero
+     * and all are fine. The constraint is animation, because of where a hero
+     * actually goes: the card in every grid, `og:image` in the link preview, and
+     * the `image` in the BlogPosting JSON-LD. None of those animate. A social
+     * preview shows frame one, a grid of animating cards is unreadable, and the
+     * file is downloaded in full for a thumbnail -- three 52 MB animated GIFs were
+     * heroes, which is where the 1 GB artifact problem came from.
+     *
+     * The animation is not lost: it belongs in the BODY, where it plays. 17 of the
+     * 20 posts that tripped this already referenced the same file in their body.
+     *
+     * Detection is per container, and deliberately FAILS OPEN -- a format we can't
+     * inspect is passed rather than guessed at:
+     *   GIF   more than one image in the stream (ImageIO; the JDK reads GIF).
+     *   WebP  an ANIM chunk in the RIFF container. Java has no WebP reader at all,
+     *         so this is read from the bytes.
+     *   AVIF  an `avis` brand in ftyp, i.e. an image sequence.
+     */
+    static List<String> checkHeroImageStill(Path contentDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(contentDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(contentDir)) {
+            for (Path md : files.filter(p -> {
+                String n = p.getFileName().toString();
+                return n.equals("index.md") || n.equals("_index.md");
+            }).toList()) {
+                Map<String, Object> fm = readFrontmatter(md);
+                if (fm == null) continue;
+                if (!(fm.get("image") instanceof String hero) || hero.isBlank()) continue;
+                if (hero.contains("://") || hero.startsWith("/")) continue; // remote or site-absolute
+                Path img = md.getParent().resolve(hero);
+                if (!Files.isRegularFile(img)) continue; // checkDrafts/authors cover missing files
+                String why = animationKind(img);
+                if (why == null) continue;
+                problems.add(md + ": hero image '" + hero + "' is " + why
+                        + " -- a hero is used as the card thumbnail, og:image and JSON-LD image,"
+                        + " none of which animate. Point `image:` at a still frame"
+                        + " (cleanup/images.py writes one as <name>-poster.png) and keep the"
+                        + " animation in the body.");
+            }
+        }
+        return problems;
+    }
+
+    /** A description of how this file is animated, or null when it is a still. */
+    static String animationKind(Path file) {
+        String name = file.getFileName().toString().toLowerCase();
+        try {
+            if (name.endsWith(".gif")) {
+                try (javax.imageio.stream.ImageInputStream in =
+                             javax.imageio.ImageIO.createImageInputStream(file.toFile())) {
+                    var readers = javax.imageio.ImageIO.getImageReaders(in);
+                    if (!readers.hasNext()) return null;
+                    var reader = readers.next();
+                    try {
+                        reader.setInput(in);
+                        int n = reader.getNumImages(true);
+                        return n > 1 ? "an animated GIF (" + n + " frames)" : null;
+                    } finally {
+                        reader.dispose();
+                    }
+                }
+            }
+            if (name.endsWith(".webp") || name.endsWith(".avif")) {
+                byte[] head = new byte[4096];
+                int read;
+                try (var in = Files.newInputStream(file)) {
+                    read = in.readNBytes(head, 0, head.length);
+                }
+                String marker = name.endsWith(".webp") ? "ANIM" : "avis";
+                String text = new String(head, 0, Math.max(read, 0), java.nio.charset.StandardCharsets.ISO_8859_1);
+                if (text.contains(marker)) {
+                    return name.endsWith(".webp") ? "an animated WebP" : "an animated AVIF";
+                }
+            }
+        } catch (Exception e) {
+            return null; // unreadable: not this check's job to fail the build
+        }
+        return null;
+    }
+
     /**
      * The biggest a single bundle image may be. Set from what content/ actually
      * looks like after cleanup/images.py has run, with headroom -- not from a

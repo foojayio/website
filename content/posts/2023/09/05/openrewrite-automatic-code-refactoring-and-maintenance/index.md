@@ -5,7 +5,7 @@ lastmod: "2023-09-18T12:24:50+00:00"
 description: "OpenRewrite is a powerful tool for automatic code refactoring and maintenance, utilizing customizable recipes to streamline your coding process."
 authors:
   - "mahendra1413"
-image: "OpenRewrite.gif"
+image: "OpenRewrite.webp"
 categories:
   - "Java"
   - "OpenRewrite"
@@ -24,7 +24,7 @@ The [OpenRewrite](https://docs.openrewrite.org/) library will alleviate this pro
 
 In this article, we will understand how the OpenRewrite library addresses these developer challenges.
 
-![OpenRewrite](OpenRewrite.gif)   
+![OpenRewrite](OpenRewrite.webp)   
 
 Source: OpenReWrite
 

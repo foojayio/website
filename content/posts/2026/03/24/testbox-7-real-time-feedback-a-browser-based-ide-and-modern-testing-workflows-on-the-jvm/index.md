@@ -41,7 +41,7 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 #### What You GetWhat You Get
 
-![](222.gif)
+![](222.webp)
 
 * **Real-time streaming test tree** — live updates per spec, not per suite
 * **Dark / Light theme** with `localStorage` persistence
