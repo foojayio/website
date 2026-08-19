@@ -3,7 +3,6 @@ title: "Detect and Fix Memory Leaks in Managed Languages"
 date: "2022-02-10T08:45:27+00:00"
 lastmod: "2022-02-10T08:47:28+00:00"
 description: "Java and JavaScript are garbage collected languages. But memory leaks can still plague them. How to avoid, detect, and fix heap problems?"
-canonical: "https://talktotheduck.dev/debugging-ram-detectfix-memory-leaks-in-managed-languages-heap-deep-dive-part-2"
 authors:
   - "shai-almog"
 image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"

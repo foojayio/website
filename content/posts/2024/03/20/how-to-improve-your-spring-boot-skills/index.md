@@ -3,7 +3,6 @@ title: "How to improve your spring boot skills"
 date: "2024-03-20T15:10:29+00:00"
 lastmod: "2024-08-14T13:05:42+00:00"
 description: "How to make sure you're unlocking the full potential of Spring Boot. 9 ways to improve your Spring Boot Skills."
-canonical: "https://digma.ai/the-spring-way-of-doing-things-9-ways-to-improve-your-spring-boot-skills/"
 authors:
   - "lee-sheinberg"
 image: "digmalovejava-spring.png"

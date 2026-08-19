@@ -3,7 +3,6 @@ title: "Effective cloud-native Java dev in Eclipse IDE with Open Liberty"
 date: "2024-01-09T12:50:12+00:00"
 lastmod: "2024-01-09T12:50:13+00:00"
 description: "Use Liberty Tools for the Eclipse IDE to enable fast, easy, and efficient development of cloud native Java applications with Open Liberty"
-canonical: "https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-eclipse-ide/"
 authors:
   - "grace-jansen"
 image: "EclipseLibertyTools1.png"

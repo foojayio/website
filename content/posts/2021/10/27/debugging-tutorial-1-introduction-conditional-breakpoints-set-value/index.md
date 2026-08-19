@@ -3,7 +3,6 @@ title: "Debugging Tutorial 1 – Introduction: Conditional Breakpoints & Set Val
 date: "2021-10-27T08:03:53+00:00"
 lastmod: "2021-10-27T08:05:13+00:00"
 description: "Debug conditional breakpoints, setValue, and more, for VSCode, IntelliJ/IDEA, PyCharm, WebStorm, Java, JavaScript (NodeJS), Kotlin & Python."
-canonical: "https://talktotheduck.dev/debugging-tutorial-1-introduction-conditional-breakpoints"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-scaled.jpg"

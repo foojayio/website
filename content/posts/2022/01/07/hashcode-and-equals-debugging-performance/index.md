@@ -3,7 +3,6 @@ title: "Hashcode and Equals: Debugging and Performance"
 date: "2022-01-07T13:31:35+00:00"
 lastmod: "2022-01-07T13:31:36+00:00"
 description: "Standard Java methods hashcode & equals are crucial to performance but this is very hard to detect as they're often too small for profilers."
-canonical: "https://talktotheduck.dev/hashcode-and-equals-debugging-performance"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Time-Travel-Debuggers-01.jpg"

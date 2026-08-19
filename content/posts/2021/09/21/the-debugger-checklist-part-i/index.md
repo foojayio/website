@@ -3,7 +3,6 @@ title: "Debugger Checklist: Bug Solving Process"
 date: "2021-09-21T09:37:32+00:00"
 lastmod: "2021-09-21T09:51:23+00:00"
 description: "A methodology of working with debuggers to solve almost any bug. This focuses on IntelliJ & Java but applies to almost all languages/IDEs."
-canonical: "https://talktotheduck.dev/the-debugger-checklist-part-i"
 authors:
   - "shai-almog"
 image: "Blog-Header-1200x600-px1.jpeg"

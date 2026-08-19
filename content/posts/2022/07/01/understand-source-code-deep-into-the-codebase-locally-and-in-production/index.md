@@ -3,7 +3,6 @@ title: "Understand Source Code – Deep into the Codebase, Locally & Production"
 date: "2022-07-01T07:17:53+00:00"
 lastmod: "2022-07-22T14:24:50+00:00"
 description: "Learn a new codebase by diving into it with debuggers to understand the full extent of internal semantics and interactions in the project."
-canonical: "https://lightrun.com/tutorials/understand-source-code-deep-into-the-codebase-locally-and-in-production/"
 authors:
   - "shai-almog"
 image: "Code-exploration.png"

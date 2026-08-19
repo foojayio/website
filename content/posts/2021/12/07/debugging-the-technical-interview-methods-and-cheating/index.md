@@ -3,7 +3,6 @@ title: "Debugging the Technical Interview: Methods and Cheating"
 date: "2021-12-07T09:00:30+00:00"
 lastmod: "2021-12-07T09:00:32+00:00"
 description: "Can you cheat in a technical interview? This approach for hiring tuned over decades is how you moneyball hiring and work with great people!"
-canonical: "https://talktotheduck.dev/debugging-the-technical-interview-methods-and-cheating"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt1.jpg"

@@ -3,7 +3,6 @@ title: "Spring Boot: Strategy Design Pattern - Convenience and Limitation"
 date: "2020-10-30T09:22:41+00:00"
 lastmod: "2021-08-23T12:29:40+00:00"
 description: "with a few changes in our code we can easily solve the problem of having different strategies which using the same keys in our code."
-canonical: "https://blog.soebes.de/blog/2020/09/20/spring-boot-strategy-pattern/"
 authors:
   - "karl-heinz-marbaise"
 image: "Favicon-3-2.png"

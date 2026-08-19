@@ -3,7 +3,6 @@ title: "Polyglot Cloud Native Debugging: Beyond Logs/APM"
 date: "2022-01-18T07:55:51+00:00"
 lastmod: "2022-01-18T08:02:40+00:00"
 description: "Continuous observability can facilitate a new generation of applications that will change the customer experience and yours."
-canonical: "https://talktotheduck.dev/polyglot-cloud-native-debugging-beyond-apm-and-logging"
 authors:
   - "shai-almog"
 image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-03.jpg"

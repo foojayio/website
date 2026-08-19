@@ -679,6 +679,39 @@ should catch a mistake at PR time rather than letting it fail silently.
   `/sponsor/azul-enterprise-java-platform-foojay-io-gold-sponsor/`, the renamed
   bundle's OLD path, which exists only as the `aliases:` redirect the same script
   emits. A canonical aimed at a redirect is one search engines discard.
+
+  **A cross-post canonical rots, and a dead one is worse than none** -- it tells
+  Google the real version of the article is at a URL that 404s, so foojay's copy
+  is suppressed in favour of nothing. All 838 were checked against the live web
+  (2026-08-19): 790 resolve, **48 were removed** and one was a typo
+  (`blog.franke.ch` -> `blog.frankel.ch`, which resolves). Those posts now
+  self-canonicalise, which is the honest answer once the original is gone.
+
+  Two things make this check harder than it looks, and both cost a false
+  positive if ignored:
+
+  1. **A 4xx from a bot wall is indistinguishable from a deleted page.** Medium
+     (24 URLs) and blogs.oracle.com answer a script with 403 -- and Medium
+     flip-flops between 403 and **410 Gone** on the SAME url between requests,
+     so its 410 is bot mitigation, not a claim about the post. Those were kept.
+     DZone's 410 WAS reproducible three times running, so that one went.
+  2. **Check with two clients before believing a failure.** Python's urllib
+     reported 5 `hirt.se` URLs as SSL failures and 6 `ashishtechmill.com` as
+     timeouts; curl got 200 for hirt.se. `talktotheduck.dev` looked like a dead
+     domain (connection refused) but actually resolves, serves a redirect stub
+     over plain http, and 404s every article -- so those 26 are genuinely gone,
+     which only the second client could establish.
+
+  What was deliberately NOT removed: 35 URLs behind bot protection or a 502
+  (`ashishtechmill.com` serves its root but 502s every article -- a server
+  error is not "gone"). Dropping a canonical there would wrongly assert the
+  article is original to foojay.
+
+  **`transfer/Posts.java` reverts this.** It rebuilds frontmatter from the live
+  WordPress page and copies `link[rel=canonical]` through without knowing
+  whether the target still exists, so re-scraping any of those 48 posts puts the
+  dead canonical back. Re-run the check before cutover, and after any bulk
+  re-scrape.
   `transfer/Sponsors.java` no longer writes the field (and its dead
   `canonical:`-based bundle lookup went with it), so a re-scrape can't put it
   back.

@@ -3,7 +3,6 @@ title: "The Basics of Breakpoints you Might not Know"
 date: "2022-03-17T10:41:08+00:00"
 lastmod: "2022-03-17T10:41:10+00:00"
 description: "We work with debuggers practically every day & yet so much remains unknown. We’re operating this complex tool while using 4 basic features"
-canonical: "https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"

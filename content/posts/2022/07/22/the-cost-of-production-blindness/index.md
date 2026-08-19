@@ -3,7 +3,6 @@ title: "The Cost of Production Blindness"
 date: "2022-07-22T08:11:03+00:00"
 lastmod: "2022-07-22T08:11:04+00:00"
 description: "Cloud rose to fame on the banner of cutting costs but with its tremendous growth, spend is rocketing. Learn how you can cut down overspend!"
-canonical: "https://lightrun.com/best-practices/the-cost-of-production-blindness/"
 authors:
   - "shai-almog"
 image: "Cost-Saving-with-Lightrun.png"

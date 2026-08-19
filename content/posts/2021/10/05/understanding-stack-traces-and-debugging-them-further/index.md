@@ -3,7 +3,6 @@ title: "Understand Stack Traces and how you can Debug Better With them"
 date: "2021-10-05T10:57:28+00:00"
 lastmod: "2021-10-05T11:18:49+00:00"
 description: "When we get an exception stack, it can often contain the solution for our problem. But in more than one case, it's the edge of a thread..."
-canonical: "https://talktotheduck.dev/understanding-stack-traces-and-debugging-them-further"
 authors:
   - "shai-almog"
 image: "Understanding-Stack-Traces1.jpg"

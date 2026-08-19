@@ -3,7 +3,6 @@ title: "Exception Breakpoint that Doesn't Suck and Other Use Cases"
 date: "2022-04-22T07:37:25+00:00"
 lastmod: "2022-04-22T07:37:27+00:00"
 description: "Dial your debugging skills to 11 by leveraging some of the lesser known capabilities for debugging highly complex systems such as filters!"
-canonical: "https://talktotheduck.dev/exception-breakpoint-that-doesnt-suck"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"

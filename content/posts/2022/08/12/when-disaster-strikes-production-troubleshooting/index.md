@@ -3,7 +3,6 @@ title: "When Disaster Strikes: Production Troubleshooting"
 date: "2022-08-12T11:03:08+00:00"
 lastmod: "2022-08-12T11:06:37+00:00"
 description: "Production is failing and everything is lost? That used to be the case. Fail whale, hysteria and panic. Developer observability fixes this!"
-canonical: "https://lightrun.com/inside-lightrun/when-disaster-strikes-production-troubleshooting/"
 authors:
   - "shai-almog"
 image: "Lightrun-developer-productivity-dark-29.png"
