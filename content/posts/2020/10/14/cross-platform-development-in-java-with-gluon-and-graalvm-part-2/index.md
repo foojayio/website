@@ -12,7 +12,7 @@ related_posts:
 frozen: false
 ---
 
-[Continued from part 1.](https://foojay.io/blog/cross-platform-development-in-java-with-gluon-and-graalvm/)
+[Continued from part 1.](https://foojay.io/today/cross-platform-development-in-java-with-gluon-and-graalvm/)
 
 ## Introducing Gluon
 

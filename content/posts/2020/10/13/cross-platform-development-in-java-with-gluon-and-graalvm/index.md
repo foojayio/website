@@ -77,4 +77,4 @@ If you are working in a Microsoft environment and your team is well-versed in C#
 
 Developers create their code once in Visual Studio, they use Xamarin to compile it to different platforms, and they can easily integrate Azure if they need Cloud functionality. Wouldn't it be great if a similar solution existed for the Java Platform?
 
-[Continue to part 2...](https://foojay.io/blog/cross-platform-development-in-java-with-gluon-and-graalvm-part-2/)
+[Continue to part 2...](https://foojay.io/today/cross-platform-development-in-java-with-gluon-and-graalvm-part-2/)

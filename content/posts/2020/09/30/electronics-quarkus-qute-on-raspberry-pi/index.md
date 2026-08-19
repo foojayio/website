@@ -22,7 +22,7 @@ frozen: false
 
 The "Hello World" version of electronics programming is a blinking LED. But, in this post, we will go a few steps further and control 8 LEDs inside a number display.
 
-We will do this by taking a closer look at one of the projects in the list "[Spectacular Java Projects on the Raspberry Pi](https://foojay.io/blog/spectacular-java-projects-on-the-raspberry-pi/)".  
+We will do this by taking a closer look at one of the projects in the list "[Spectacular Java Projects on the Raspberry Pi](https://foojay.io/today/spectacular-java-projects-on-the-raspberry-pi/)".  
 
 {{< img src="led-number-display-300x260.jpg" class="alignleft size-thumbnail is-resized" width="99" height="86" >}}
 

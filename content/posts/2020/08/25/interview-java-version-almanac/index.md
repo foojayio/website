@@ -12,13 +12,13 @@ related_posts:
 frozen: false
 ---
 
-From this week, we're happy to announce that we're hosting Marc Hoffmann's [Java Version Almanac](http://javaalmanac.io) [right here on foojay](https://foojay.io/almanac/jdk-8/), providing details per release on OpenJDK distributions, new features, and differences between APIs across releases.
+From this week, we're happy to announce that we're hosting Marc Hoffmann's [Java Version Almanac](http://javaalmanac.io) [right here on foojay](https://javaalmanac.io/jdk/8/), providing details per release on OpenJDK distributions, new features, and differences between APIs across releases.
 ![](Screenshot-2020-08-25-at-08.35.09-1024x559.png)
 
 It also shows differences between the APIs of the currently selected Java release and all previous releases, handy when you're upgrading!
 ![](Screenshot-2020-08-25-at-08.55.35-1024x435.png)
 
-Go here to take a look, yourself: <http://foojay.io/almanac/jdk-8>
+Go here to take a look, yourself: <https://javaalmanac.io/jdk/8/>
 
 And, let's meet Marc, here's a quick interview with him about the Java Version Almanac**!**  
 
@@ -53,7 +53,7 @@ As the repository became more and more popular, people started to contribute wit
 
 **Maybe the data can be exposed as a REST endpoint?**   
 
-Nice idea! While I started out with markdown files, over time I converted most of the content into JSON files. This makes the content machine readable and can be used in other contexts — [like on foojay](https://foojay.io/almanac/jdk-8/). I really like the idea of sharing knowledge and data!
+Nice idea! While I started out with markdown files, over time I converted most of the content into JSON files. This makes the content machine readable and can be used in other contexts — [like on foojay](https://javaalmanac.io/jdk/8/). I really like the idea of sharing knowledge and data!
 
 Currently, the JSON files can be simply obtained from the [GitHub repository](https://github.com/marchof/java-almanac/tree/master/site/data). The next step would to provide a proper API from that data.
 
@@ -73,4 +73,4 @@ Simply the fact several collaborations were triggered with this little site. For
 
 For me this is wonderful proof of the concept that data and knowledge can be shared when information is provided in a well structured way and — most importantly — with an open license that allows the re-use of information.
 
-And maybe [foojay is the place](https://foojay.io/blog/foojay-a-place-for-friends-of-openjdk/) where we, the Java community, will be collecting and maintaining all knowledge about OpenJDK!
+And maybe [foojay is the place](https://foojay.io/today/foojay-a-place-for-friends-of-openjdk/) where we, the Java community, will be collecting and maintaining all knowledge about OpenJDK!

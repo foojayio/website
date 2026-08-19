@@ -29,7 +29,7 @@ OpenJDK 64-Bit Server VM (build 11.0.8+10-post-Ubuntu-0ubuntu120.04, mixed mode)
 
 ### Installing Azul Zulu OpenJDK 15
 
-OpenJDK Java 15 was released on 2020-09-15, check out the [Java Version Almanac](https://foojay.io/almanac/jdk-15/) for more details.
+OpenJDK Java 15 was released on 2020-09-15, check out the [Java Version Almanac](https://javaalmanac.io/jdk/15/) for more details.
 
 Immediately after that, Azul released [Azul Zulu OpenJDK 15](https://www.azul.com/downloads/zulu-community/?architecture=x86-64-bit&package=jdk), including a new version of their free [Zulu Embedded JDK, including a version for ARM 64-bit](https://www.azul.com/downloads/zulu-community/?version=java-15-mts&os=linux&architecture=arm-64-bit&package=jdk), which is ideal for the latest Raspberry Pi boards!
 ![](Screenshot-2020-09-21-at-10.21.40-1024x264.png)
@@ -72,7 +72,7 @@ OpenJDK 64-Bit Server VM Zulu15.27+17-CA (build 15+36, mixed mode)
 
 ### Comparing Startup Speeds
 
-To compare the startup speeds, I reused the Spring and Quarkus applications [of the previous article](https://foojay.io/blog/startup-spring-quarkus-raspberry-pi/).
+To compare the startup speeds, I reused the Spring and Quarkus applications [of the previous article](https://foojay.io/today/startup-spring-quarkus-raspberry-pi/).
 
 ```
 $ cd JavaOnRaspberryPi/Chapter_10_Spring/java-spring-rest-db/target/

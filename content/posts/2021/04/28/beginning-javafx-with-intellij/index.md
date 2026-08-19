@@ -29,7 +29,7 @@ While this article may seem elementary for some, I believe it can help newcomers
 
 Warning: This tutorial will touch the basics on how to create a JavaFX project using the new Java Platform Module System (JPMS) since Java 9. There are redundant naming of directories that may look peculiar to you. This is in regards to the naming of a module directory and Java package namespace in the initial creation of the project. To learn more about Java Platform Module System's naming convention check out [Java SE 9 - JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) by [Stephen Colebourne](https://blog.joda.org/). For a deep dive into modules check out [Understanding Java 9 Modules](https://www.oracle.com/corporate/features/understanding-java-9-modules.html) by Paul Deitel.
 
-New comers to the JavaFX platform that want things even more basic (fundamental) such as using the command line or terminal should look at "[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/blog/a-javafx-app-on-zulufx-in-60-seconds/)".
+New comers to the JavaFX platform that want things even more basic (fundamental) such as using the command line or terminal should look at "[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/today/a-javafx-app-on-zulufx-in-60-seconds/)".
 
 Next, you'll need to download and install the required software.
 
@@ -42,7 +42,7 @@ The following are requirements for this tutorial.
 
 When downloading IntelliJ the free version is called the community edition.
 
-To see how to install ZuluFX please refer to the section '**Installing ZuluFX** ' at "[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/blog/a-javafx-app-on-zulufx-in-60-seconds/)".
+To see how to install ZuluFX please refer to the section '**Installing ZuluFX** ' at "[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/today/a-javafx-app-on-zulufx-in-60-seconds/)".
 
 ## Plain JavaFX Project
 
@@ -53,7 +53,7 @@ The following steps will show you how to create a new JavaFX project from scratc
 After installing and launching **IntelliJ** click on the '**New Project**' option. In Figure 1 below are three options allowing you to create a Java project.
 ![](IntelliJ-NewProject.png) Figure 1. Three ways to create a Java project.
 
-**\*Note:** If you've already completed the tutorial **"[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/blog/a-javafx-app-on-zulufx-in-60-seconds/)"** then you could select the option '**Open or Import**' and select the project directory and jump all the way down to step 15 executing the Hello World FX application.
+**\*Note:** If you've already completed the tutorial **"[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/today/a-javafx-app-on-zulufx-in-60-seconds/)"** then you could select the option '**Open or Import**' and select the project directory and jump all the way down to step 15 executing the Hello World FX application.
 
 **Step 2:** Select Java as a project type
 

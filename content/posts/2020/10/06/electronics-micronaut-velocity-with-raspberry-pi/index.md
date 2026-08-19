@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-In a previous post, we looked at the project "[Electronics \& Quarkus Qute on Raspberry Pi](https://foojay.io/blog/electronics-quarkus-qute-on-raspberry-pi/)" by [Igor De Souza](https://twitter.com/Igfasouza).
+In a previous post, we looked at the project "[Electronics \& Quarkus Qute on Raspberry Pi](https://foojay.io/today/electronics-quarkus-qute-on-raspberry-pi/)" by [Igor De Souza](https://twitter.com/Igfasouza).
 
 In this article, we present you another great example of Java on Raspberry Pi created by Igor. It shows how to create a Micronaut Velocity demo using an 8x8 LED matrix display.
 ![](raspberry_micronaut.jpg)
@@ -55,7 +55,7 @@ You can check Igor's blog post with additional info on the Sense HAT [here](http
 
 ## Idea
 
-Igor started with the idea to do something similar to the [Quarkus Qute 7 segment display demo](https://foojay.io/blog/electronics-quarkus-qute-on-raspberry-pi/), using Micronaut, but pivoted a little bit and ended up with a Micronaut Vecolcity interface that provides a way to control the 8×8 Led Matrix on the Sense HAT.
+Igor started with the idea to do something similar to the [Quarkus Qute 7 segment display demo](https://foojay.io/today/electronics-quarkus-qute-on-raspberry-pi/), using Micronaut, but pivoted a little bit and ended up with a Micronaut Vecolcity interface that provides a way to control the 8×8 Led Matrix on the Sense HAT.
 
 This project uses the [Java wrapper for Sense Hat](https://github.com/cinci/rpi-sense-hat-java).
 

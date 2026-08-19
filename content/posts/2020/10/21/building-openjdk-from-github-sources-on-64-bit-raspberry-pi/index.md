@@ -23,7 +23,7 @@ This also means we are now able to build OpenJDK ourselves from the latest sourc
 >
 > For more info, see   
 >
-> "[Faster \& More Reliable 64-bit OS on Raspberry Pi 4 with USB Boot](https://foojay.io/blog/64-bit-raspbian-os-on-raspberry-pi-4-with-usb-boot/)"
+> "[Faster \& More Reliable 64-bit OS on Raspberry Pi 4 with USB Boot](https://foojay.io/today/64-bit-raspbian-os-on-raspberry-pi-4-with-usb-boot/)"
 
 The build process is [very well explained in the sources](https://github.com/openjdk/jdk/blob/master/doc/building.md). And each time you run one of the steps (e.g. \`bash configure\`), you will be alerted if additional tools are required and how to install them. By just running the given command, the missing tools will be installed and you can run the command again. That's how I ended up with this list of commands.
 

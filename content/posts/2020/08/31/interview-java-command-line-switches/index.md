@@ -12,7 +12,7 @@ related_posts:
 frozen: false
 ---
 
-We're happy to announce that we're hosting Chris Newland's [VMOptionsExplorer](http://javaalmanac.io) [right here on foojay](https://foojay.io/almanac/jdk-8/), providing all details per release on Java command line switches.
+We're happy to announce that we're hosting Chris Newland's [VMOptionsExplorer](http://javaalmanac.io) [right here on foojay](https://javaalmanac.io/jdk/8/), providing all details per release on Java command line switches.
 ![](Screenshot-2020-08-29-at-23.09.05-1024x514.png)
 
 It also shows a diff between the currently selected release and the previous release, showing a tab for the switches that have been added and those that have been removed.

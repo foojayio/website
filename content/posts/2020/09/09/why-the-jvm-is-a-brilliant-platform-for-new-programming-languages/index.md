@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-In my [previous post](https://foojay.io/blog/why-java-c-and-python-are-todays-most-utilized-programming-languages/), I speculated that Java, Python, and C are likely to be the most prominent programming languages going pretty far into the future.
+In my [previous post](https://foojay.io/today/why-java-c-and-python-are-todays-most-utilized-programming-languages/), I speculated that Java, Python, and C are likely to be the most prominent programming languages going pretty far into the future.
 
 Another point in my speculation was that utilizing the Java Virtual Machine facilitates the invention of new programming languages created for special purposes that could not be easily created by other means. The JVM takes care of all of the low-level infrastructure problems that are involved in the creation of any software that you'd like to be runnable on any device or operating system.
 

@@ -21,7 +21,7 @@ With this tutorial, you'll get the basic idea of Java code, that is, the program
 
 [github.com/foojayio/getting_started_with_java](https://github.com/foojayio/getting_started_with_java)
 
-If you haven't checked that you have Java on your computer, go to [Install Java](https://foojay.io/getting-started-with-java/install-java/). If everything's OK and you're ready to get started, select one or more of the topics below or simply start at the top.
+If you haven't checked that you have Java on your computer, go to [Install Java](https://foojay.io/java-quick-start/install-java/). If everything's OK and you're ready to get started, select one or more of the topics below or simply start at the top.
 
 1. [Choosing an Editor](https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/)
 2. [Hello World!](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world/): our first Java program

@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-In a previous post "[Installing Java and JavaFX on the Raspberry Pi](https://foojay.io/blog/installing-java-and-javafx-on-the-raspberry-pi/)", you can read how to install BellSoft LibericaJDK to be able to run JavaFX applications with a graphical user interface on a Raspberry Pi with ARMv7 or ARMv8 processor.
+In a previous post "[Installing Java and JavaFX on the Raspberry Pi](https://foojay.io/today/installing-java-and-javafx-on-the-raspberry-pi/)", you can read how to install BellSoft LibericaJDK to be able to run JavaFX applications with a graphical user interface on a Raspberry Pi with ARMv7 or ARMv8 processor.
 
 But this won't work for some (older) versions of the Raspberry Pi, as these use an ARMv6 processor, which is not compatible with the default OpenJDK 11 that is part of Raspbian OS.
 

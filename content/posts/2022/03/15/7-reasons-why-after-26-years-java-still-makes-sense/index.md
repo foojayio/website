@@ -78,7 +78,7 @@ Furthermore, the OpenJDK itself has multiple implementations. Oracle is by no me
 
 Performance may differ from OpenJDK vendor to OpenJDK vendor, but the output remains the same. For example, the default GC of [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) is G1, which is highly performant. However, if we want to use a commercial GC, such as [Azul C4,](https://www.azul.com/products/components/pgc/) that's also fine. We can do that without changing our application code. That's a tremendous freedom.
 
-Here's a list of OpenJDK vendors: <https://foojay.io/almanac/java-17/>
+Here's a list of OpenJDK vendors: <https://javaalmanac.io/jdk/17/>
 
 ## 4. Stability
 

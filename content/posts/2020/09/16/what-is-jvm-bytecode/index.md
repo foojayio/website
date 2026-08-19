@@ -18,7 +18,7 @@ frozen: false
 
 Everyone who programs in Java, or any of the other languages built on top of the Java Virtual Machine (Scala, Closure, Kotlin, Groovy, Nashorn, Jython, JRuby, et al.) is familiar with the term "bytecode." But how many of us understand what JDK bytecode actually is?
 
-I became more curious about this after I wrote my last foojay.io post, [Why the JVM Is a Brilliant Platform for New Programming Languages](https://foojay.io/blog/why-the-jvm-is-a-brilliant-platform-for-new-programming-languages/). What exactly *is* bytecode?
+I became more curious about this after I wrote my last foojay.io post, [Why the JVM Is a Brilliant Platform for New Programming Languages](https://foojay.io/today/why-the-jvm-is-a-brilliant-platform-for-new-programming-languages/). What exactly *is* bytecode?
 
 Bytecode is clearly a layer of code that lies between a higher level programming language and the JVM. And the JVM itself takes that bytecode and solves all the problems that distinguish different operating systems and hardware platforms, by translating that bytecode into the machine language that is needed for each particular platform.
 

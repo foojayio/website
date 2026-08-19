@@ -24,7 +24,7 @@ Welcome to foojay, a place for **f** riends **o** f **O** pen**J** DK, sponsored
 Together with Java enthusiasts around the world, the foojay team works to identify critical aspects of each new OpenJDK release and update -- with related information such as OpenJDK distributions, download locations, and JVM command line arguments -- and brings to the fore precisely the content and services that have value and relevance to those that use Java on a daily basis throughout the industry.
 ![](Screenshot-2020-08-20-at-17.19.43-1024x647.png) OpenJDK Update Release Details
 
-[Go here to see all the fixes and CVEs of the recent OpenJDK update releases](https://foojay.io/java-8/?tab=highlights), while indicating their relevance to you by voting on them. Use the Highlights tab to see what the community as a whole thinks about them. More details on the motivations for the OpenJDK update release details dashboard [are described here on foojay](https://foojay.io/blog/dashboard-for-openjdk-update-release-details/).  
+[Go here to see all the fixes and CVEs of the recent OpenJDK update releases](https://foojay.io/java-8/?tab=highlights), while indicating their relevance to you by voting on them. Use the Highlights tab to see what the community as a whole thinks about them. More details on the motivations for the OpenJDK update release details dashboard [are described here on foojay](https://foojay.io/today/dashboard-for-openjdk-update-release-details/).  
 
 {{< img src="Screenshot-2020-08-21-at-09.20.34.png" class="alignleft size-large is-resized" width="88" height="100" caption="Marc Hoffmann" >}}
 
@@ -36,7 +36,7 @@ That information he's also made available here on foojay, where it is known as t
 Take special note at the lower end of each page of the almanac, where you'll find details on the differences between the APIs of the currently selected Java version compared to all previous Java versions:
 ![](Screenshot-2020-08-21-at-09.19.51-1024x525.png)
 
-[Go here to explore the Java Version Almanac on foojay](https://foojay.io/almanac/jdk-8/), with thanks to Marc.  
+[Go here to explore the Java Version Almanac on foojay](https://javaalmanac.io/jdk/8/), with thanks to Marc.  
 
 {{< img src="0-2.jpeg" class="alignleft size-large is-resized" width="92" height="92" caption="Chris Newland" >}}
 
@@ -49,7 +49,7 @@ At the same time, he's also been making his data available here as part of the i
 
 #### Foojay Today
 
-The Java community is rich with up to date and cutting edge insights and knowledge into everything related to Java and the OpenJDK. A [dedicated blogging area](http://foojay.io/blog/) is available on foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem.
+The Java community is rich with up to date and cutting edge insights and knowledge into everything related to Java and the OpenJDK. A [dedicated blogging area](http://foojay.io/today/) is available on foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem.
 
 Let's introduce some of the bloggers active on foojay.  
 
@@ -57,13 +57,13 @@ Let's introduce some of the bloggers active on foojay.
 
 **Marcus Hirt** is the project lead for the Open JDK JMC project. Once upon the time he co-founded Appeal, the company creating the JRockit JVM.
 
-Marcus blogs on topics relating to Java Mission Control (JMC) and Java Flight Recorder (JFR). [Check out his posts here.](https://foojay.io/blog/author/hirt/)  
+Marcus blogs on topics relating to Java Mission Control (JMC) and Java Flight Recorder (JFR). [Check out his posts here.](https://foojay.io/today/author/hirt/)  
 
 {{< img src="51e2bcc080bf5b4acaf66b8071f80610.png" class="alignleft size-large is-resized" width="73" height="73" >}}
 
 **Kevin Farnham** is a technology writer and software engineer. He's focused on high-performance low-latency big-data Java, Python, C/C++ programming.
 
-Kevin blogs on general high level Java topics, focusing on how Java has evolved over the years and its place relative to other programming languages. [Check out his posts here.](https://foojay.io/blog/author/kevinfarnham/)
+Kevin blogs on general high level Java topics, focusing on how Java has evolved over the years and its place relative to other programming languages. [Check out his posts here.](https://foojay.io/today/author/kevinfarnham/)
 
 [Go here to see the full blog roll](https://foojay.io/blog), and watch that space, there's many more blog posts coming!
 

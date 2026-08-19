@@ -46,4 +46,4 @@ Now that Java 15 has been released, let's take a look at what's new!
 * Foreign-Memory Access API (Second Incubator) ( [JEP 383](https://openjdk.java.net/jeps/383) )
 * Deprecate RMI Activation for Removal ( [JEP 385](https://openjdk.java.net/jeps/385) )
 
-Go here for foojay's almanac of all the info about where to go to download Java 15, including a comparison of Java 15 APIs versus those from previous releases: [foojay.io/almanac/jdk-15](https://foojay.io/almanac/jdk-15)
+Go here for foojay's almanac of all the info about where to go to download Java 15, including a comparison of Java 15 APIs versus those from previous releases: [foojay.io/almanac/jdk-15](https://javaalmanac.io/jdk/15/)

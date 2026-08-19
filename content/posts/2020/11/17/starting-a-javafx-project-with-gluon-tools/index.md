@@ -21,8 +21,8 @@ frozen: false
 
 Here on foojay.io you can already find two posts by Carl Dea to get you started with JavaFX:
 
-1. [Beginning JavaFX Applications with IntelliJ IDE](https://foojay.io/blog/beginning-javafx-with-intellij/): step-by-step how to start a new JavaFX project without any tools, are by using the Maven and Gradle tools.
-2. [A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/blog/a-javafx-app-on-zulufx-in-60-seconds/): how to use a popular distribution from [Azul](https://www.azul.com/) to build a JavaFX HelloWorld Application in 60 seconds.
+1. [Beginning JavaFX Applications with IntelliJ IDE](https://foojay.io/today/beginning-javafx-with-intellij/): step-by-step how to start a new JavaFX project without any tools, are by using the Maven and Gradle tools.
+2. [A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/today/a-javafx-app-on-zulufx-in-60-seconds/): how to use a popular distribution from [Azul](https://www.azul.com/) to build a JavaFX HelloWorld Application in 60 seconds.
 
 In this post, I want to show you yet another approach that uses the tools provided by [Gluon](https://gluonhq.com/), who are the maintainers, and the driving force behind [OpenJFX](https://openjfx.io/).
 

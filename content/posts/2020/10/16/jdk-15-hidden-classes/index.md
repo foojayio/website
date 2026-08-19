@@ -12,7 +12,7 @@ related_posts:
 frozen: false
 ---
 
-Unlike [sealed classes](https://foojay.io/blog/jdk-15-sealed-classes/), *hidden classes* ([JEP 371](https://openjdk.java.net/jeps/371)) are a JVM rather than a language-level feature. One of the specific goals of this feature is not to make any changes to the Java language.
+Unlike [sealed classes](https://foojay.io/today/jdk-15-sealed-classes/), *hidden classes* ([JEP 371](https://openjdk.java.net/jeps/371)) are a JVM rather than a language-level feature. One of the specific goals of this feature is not to make any changes to the Java language.
 
 Languages compiled into bytecodes, including Java, often use bytecodes that are generated at runtime, rather than fixing the implementation at compile time. An example of this is Lambda expressions, introduced in JDK 8. These represent the implementation of the single abstract method of a functional interface. Rather than restricting the compilation strategy to the simple use of an equivalent anonymous inner class, the compiler uses the invokedynamic bytecode, added to the JVM in JDK 7. At runtime, the JVM will generate a dynamic class that implements the functional interface and delivers the concrete implementation of the abstract method.
 

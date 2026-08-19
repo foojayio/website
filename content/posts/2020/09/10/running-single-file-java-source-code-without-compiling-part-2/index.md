@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-[Let's continue from part 1 of this series](https://foojay.io/blog/running-single-file-java-source-code-without-compiling-part-1/), by looking at JEP 330, Launch Single-File Source-Code Programs, which is one of the new features introduced in the OpenJDK 11 release. This feature allows you to execute a Java source code file directly using the `java` interpreter. The source code is compiled in memory and then executed by the interpreter, without producing a .class file on disk.
+[Let's continue from part 1 of this series](https://foojay.io/today/running-single-file-java-source-code-without-compiling-part-1/), by looking at JEP 330, Launch Single-File Source-Code Programs, which is one of the new features introduced in the OpenJDK 11 release. This feature allows you to execute a Java source code file directly using the `java` interpreter. The source code is compiled in memory and then executed by the interpreter, without producing a .class file on disk.
 
 However, this feature is limited to code that resides in a single source file. You cannot add additional source files to be compiled in the same run.
 
@@ -27,7 +27,7 @@ Now let's begin the way we always do when we start learning something new, yes, 
 
 We will focus our efforts on demonstrating how to use this feature by trying out different samples, so that you'll get the idea of how this feature can be used in your day-to-day coding.
 
-If you haven't already, create the `HelloUniverse.java` file [as listed in the previous part of this series](https://foojay.io/blog/running-single-file-java-source-code-without-compiling-part-1/), compile it, and run the resulting class file.
+If you haven't already, create the `HelloUniverse.java` file [as listed in the previous part of this series](https://foojay.io/today/running-single-file-java-source-code-without-compiling-part-1/), compile it, and run the resulting class file.
 
 Now let's delete the class file. You'll understand why in a moment:
 
