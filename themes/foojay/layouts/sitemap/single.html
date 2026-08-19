@@ -17,7 +17,15 @@
 {{ $pages := where (where site.RegularPages "Section" "in" (slice "pages" "")) "Permalink" "!=" .Permalink }}
 {{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
 {{ $authors := partialCached "authors-all.html" "authors" }}
-{{ $sponsors := (where site.RegularPages "Section" "sponsors").ByTitle }}
+{{/* Sponsors come from partials/sponsors-ordered.html, NOT from
+     site.RegularPages: a sponsor profile is a BRANCH bundle (_index.md, so
+     it can paginate its article grid), and site.RegularPages does not
+     contain branch bundles -- the old `where site.RegularPages "Section"
+     "sponsors"` still parsed and still ran, it just matched nothing, so this
+     section rendered empty and the count above read "0 sponsors". Same trap
+     partials/authors-all.html exists for. Re-sorted by title here because the
+     partial returns tier order, and every other list on this page is A-Z. */}}
+{{ $sponsors := sort (partial "sponsors-ordered.html" .) "Title" }}
 {{ $pedia := (where site.RegularPages "Section" "pedia").ByTitle }}
 
 <div class="page-head">
