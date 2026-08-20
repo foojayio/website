@@ -1546,9 +1546,18 @@ body.lightbox-open { overflow: hidden; }
 }
 .list-filter__input:focus { border-color: var(--brand-accent); outline: none; }
 .author-grid .author-card[hidden] { display: none !important; }
+/* A filtered-out row needs this: [hidden] is display:none in the UA
+   stylesheet, but `display: table-row` from the table's own layout wins over
+   it, so a hidden <tr> stays visible without the override. */
 .jugs-table tbody tr[hidden] { display: none !important; }
 .champions-table tbody tr[hidden] { display: none !important; }
+.sitemap-table tbody tr[hidden] { display: none !important; }
 .list-filter__empty { color: var(--ink-muted); margin: 0; }
+/* The generic filter box (static/js/table-filter.js) puts a live match count
+   beside its input. Scoped to [data-filter-wrap] so the four older filters,
+   which have an input and nothing else, keep their block layout. */
+.list-filter[data-filter-wrap] { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; }
+.list-filter__count { color: var(--ink-muted); font-size: .9rem; font-variant-numeric: tabular-nums; }
 .term-grid .term-card[hidden] { display: none !important; }
 
 /* --- Taxonomy index (/today/category/) --- */
@@ -2020,7 +2029,9 @@ body.lightbox-open { overflow: hidden; }
    A long page of nothing but links, so the styling's whole job is scanning:
    multi-column where the entries are short and independent (pedia, sponsors,
    authors), single column where order carries meaning (the page tree's
-   indentation, and articles newest-first inside a year). */
+   indentation), and a table where each entry has FIELDS to compare -- the
+   articles, which carry a date, an author and a read count as well as a
+   title. */
 
 .sitemap__section { margin-top: 2.5rem; }
 .sitemap__section > h2 {
@@ -2045,18 +2056,94 @@ body.lightbox-open { overflow: hidden; }
 .sitemap__item--d2 { padding-left: 2.5rem; }
 .sitemap__item--d1, .sitemap__item--d2 { color: var(--ink-muted); }
 
-.sitemap__year {
-  margin: 1.75rem 0 0;
-  font-size: 1.1rem;
+/* The Articles table (themes/foojay/layouts/sitemap/single.html): 2000+ rows
+   of date / author / views / title, sortable by any of the four. Styled from
+   scratch rather than via `.prose table`, because this page is a scanning
+   surface and not body copy -- it deliberately isn't inside .prose. */
+.sitemap-table-wrap { margin-top: 1rem; }
+.sitemap-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.sitemap-table th, .sitemap-table td {
+  text-align: left; padding: .45rem .75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: baseline;
 }
-.sitemap__count {
-  margin-left: .4rem;
-  color: var(--ink-muted);
-  font-weight: 400; font-size: .85rem;
+/* Sticky, because the table is 2000 rows: without it, scrolling into 2019
+   leaves the reader with four unlabelled columns and no way back to the sort
+   buttons short of going to the top. Needs an OPAQUE background (the rows
+   scroll under it) and one that follows the theme, hence the token rather than
+   white. Turned off below, where the table scrolls sideways instead -- an
+   overflow container becomes the sticky positioning context, so `top` would be
+   measured against the table itself and the header would never stick. */
+.sitemap-table thead th {
+  position: sticky; top: var(--header-h); z-index: 5;
+  background: var(--page-bg);
+  border-bottom: 1px solid var(--border-strong);
+  font-family: var(--font-display); font-size: .78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ink-muted); white-space: nowrap;
 }
+.sitemap-table thead th[aria-sort="ascending"],
+.sitemap-table thead th[aria-sort="descending"] { color: var(--ink); }
+.sitemap-table tbody tr:hover { background: var(--surface-sunken); }
+
+.sitemap-table__date { white-space: nowrap; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.sitemap-table__author { color: var(--ink-muted); }
+/* Every numeric column in either table -- reads, and an author's article
+   count. `td.` / `th.`, not the bare class: `.sitemap-table td` above is a
+   class PLUS a type selector and so outranks a single class -- the same
+   specificity trap the .prose rules have. Written as a single class this
+   silently kept text-align: left and the digits didn't line up. Right-aligned
+   so magnitudes are comparable down the column, with extra room on the right
+   so the numbers don't crowd whatever sits against them. */
+.sitemap-table th.sitemap-table__num,
+.sitemap-table td.sitemap-table__num {
+  text-align: right; padding-right: 1.6rem; white-space: nowrap;
+  font-variant-numeric: tabular-nums; color: var(--ink-muted);
+}
+
+/* The authors table's links column reuses partials/author-social.html -- the
+   same pills, labels and RSS entry the profile page and the "Written by"
+   callout show, so there is one definition of an author's links. Only the
+   scale changes: eight full-size pills per row over 344 rows is a wall. */
+.sitemap-table .author-social { gap: .3rem; }
+.sitemap-table .author-social a { font-size: .76rem; padding: .08rem .5rem; }
+.sitemap-table__name a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.sitemap-table__name a:hover { text-decoration: underline; }
+/* A post the counter has never seen. Present but quiet -- it is the absence of
+   a number, not a zero. */
+.sitemap-table__none { opacity: .45; }
+.sitemap-table__title a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.sitemap-table__title a:hover { text-decoration: underline; }
+
+/* The sort control. Created by static/js/sortable-table.js, so none of this
+   renders without JavaScript -- and the heading it wraps is then plain text
+   rather than a button that does nothing. Inherits the <th>'s own typography
+   so a sortable column looks identical to an unsortable one apart from the
+   arrow. */
+.sort-btn {
+  display: inline-flex; align-items: center; gap: .35rem;
+  margin: 0; padding: 0; border: 0; background: none;
+  font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
+  cursor: pointer;
+}
+.sort-btn:hover { color: var(--brand-accent-strong); }
+/* The neutral glyph is the affordance: it says "this column sorts" before
+   anything is clicked, which a bare label does not. */
+th[data-sort-type] .sort-btn::after { content: "\2195"; opacity: .4; }
+th[aria-sort="ascending"] .sort-btn::after { content: "\2191"; opacity: 1; }
+th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 
 @media (max-width: 700px) {
   .sitemap__list--cols { columns: 1; }
+}
+
+/* Four columns don't fit a phone, and squeezing them turns the title into a
+   two-word-per-line ribbon. Scroll sideways instead, which keeps every column
+   readable -- see the sticky note above for why the header stops sticking. */
+@media (max-width: 60rem) {
+  .sitemap-table-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
+  .sitemap-table { min-width: 44rem; }
+  .sitemap-table thead th { position: static; }
 }
 
 /* ---------------------------------------------------------------------------

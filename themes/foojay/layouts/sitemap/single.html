@@ -73,23 +73,158 @@
 
     <section class="sitemap__section">
       <h2>Authors</h2>
-      <ul class="sitemap__list sitemap__list--cols">
-        {{ range $authors }}<li class="sitemap__item"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
-      </ul>
+      {{/* A table for the same reason the articles below are one: an author is
+           not just a name here -- how much they have written and how much it is
+           read are the two things this page can say about them, and a column
+           each makes 344 of them comparable. A-Z in the HTML, which is the
+           order authors-all.html returns and the order /today/author/ shows.
+
+           The Links column is deliberately NOT sortable: it holds up to eight
+           links and there is no order to put them in that anyone would ask
+           for. The script skips any <th> with no data-sort-type, so leaving it
+           off is all it takes. */}}
+      {{/* Hidden until static/js/table-filter.js reveals it, so it is never a
+           search box that does nothing. Searches the NAME column only
+           (data-filter-cols): the links column would match "linkedin" on half
+           the site and the two number columns would match the digits of a
+           count. */}}
+      <div class="list-filter" data-filter-wrap hidden>
+        <input type="search" class="list-filter__input" data-filter-for="sitemap-authors"
+               data-filter-count="sitemap-authors-count" data-filter-noun="authors"
+               placeholder="Filter authors by name…" aria-label="Filter authors by name" autocomplete="off">
+        <span class="list-filter__count" id="sitemap-authors-count" aria-live="polite"></span>
+      </div>
+      <div class="sitemap-table-wrap">
+        <table class="sitemap-table" id="sitemap-authors" data-sortable data-filter-cols="0">
+          <thead>
+            <tr>
+              <th scope="col" data-sort-type="text" aria-sort="ascending">Name</th>
+              <th scope="col">Links</th>
+              <th scope="col" class="sitemap-table__num" data-sort-type="number" data-sort-first="descending">Articles</th>
+              <th scope="col" class="sitemap-table__num" data-sort-type="number" data-sort-first="descending">Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range $authors }}
+            {{/* Resolved once and used for both numbers: author-posts.html is
+                 the single definition of "this author's articles" (the profile
+                 page, the Featured Authors band and its widget all call it), so
+                 a count here cannot disagree with the heading on their own
+                 page. views-total.html then sums exactly that set -- the same
+                 pairing the profile shows above its article grid. */}}
+            {{ $written := partial "author-posts.html" . }}
+            {{ $views := partial "views-total.html" $written }}
+            <tr>
+              <td class="sitemap-table__name" data-sort-value="{{ lower .Title }}">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              </td>
+              <td class="sitemap-table__links">{{ partial "author-social.html" . }}</td>
+              {{/* An author with nothing published yet is a real state -- a
+                   bundle exists before or after their first article -- so the
+                   0 is printed rather than dashed. The em dash next to it means
+                   something different: articles the counter has no number for. */}}
+              <td class="sitemap-table__num" data-sort-value="{{ len $written }}">{{ len $written }}</td>
+              <td class="sitemap-table__num" data-sort-value="{{ $views }}">
+                {{- if gt $views 0 }}{{ lang.FormatNumberCustom 0 $views }}{{ else }}<span class="sitemap-table__none">&mdash;</span>{{ end -}}
+              </td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section class="sitemap__section">
       <h2>Articles</h2>
-      {{/* Grouped by year rather than WordPress's flat run of 2000+ titles --
-           same links, but a reader can find the year they remember. */}}
-      {{ range $posts.GroupByDate "2006" }}
-        <h3 class="sitemap__year">{{ .Key }} <span class="sitemap__count">{{ len .Pages }}</span></h3>
-        <ul class="sitemap__list">
-          {{ range .Pages }}<li class="sitemap__item"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
-        </ul>
-      {{ end }}
+      {{/* A table rather than WordPress's flat run of 2000+ titles, and
+           rather than the year-grouped lists this used to be: date, author,
+           reads and title are all things a reader might be looking the
+           archive up BY, and a column each makes them comparable down the
+           page. The year headings went with the grouping -- sorting on the
+           date column is the same order, and a table can only have one.
+
+           Sorted newest-first in the HTML, so the default order is right
+           before any JavaScript runs and the page is fully readable without
+           it (static/js/sortable-table.js only adds the header buttons --
+           see the aria-sort below, which is what tells it where it starts).
+
+           Every cell that shows a formatted value sorts on
+           `data-sort-value` instead: a timestamp behind "7 Sep 2020", the
+           raw integer behind "68,330" and the first author behind a list of
+           them, so sorting never depends on how a value is spelled. */}}
+      {{/* Searches date, title and author (data-filter-cols) -- not the view
+           count, where "42" would pull up every article read 42 times. Including
+           the DATE column is what gives back the year lookup the old year
+           headings did: "2021" narrows to that year, "aug 2021" to that month,
+           and it composes with the rest, since the terms are ANDed
+           ("frank javafx 2024"). */}}
+      <div class="list-filter" data-filter-wrap hidden>
+        <input type="search" class="list-filter__input" data-filter-for="sitemap-articles"
+               data-filter-count="sitemap-articles-count" data-filter-noun="articles"
+               placeholder="Filter articles by title, author or date…" aria-label="Filter articles by title, author or date" autocomplete="off">
+        <span class="list-filter__count" id="sitemap-articles-count" aria-live="polite"></span>
+      </div>
+      <div class="sitemap-table-wrap">
+        <table class="sitemap-table" id="sitemap-articles" data-sortable data-filter-cols="0,1,2">
+          <thead>
+            <tr>
+              <th scope="col" data-sort-type="number" data-sort-first="descending" aria-sort="descending">Date</th>
+              <th scope="col" data-sort-type="text">Title</th>
+              <th scope="col" data-sort-type="text">Author</th>
+              <th scope="col" class="sitemap-table__num" data-sort-type="number" data-sort-first="descending">Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range $posts }}
+            {{/* The author cell is partials/byline.html -- the same multi-author,
+                 legacy-`author:`-aware rendering the post cards use, so this page
+                 can't credit a post differently from the rest of the site. The
+                 SORT key is the first credited author's display name, resolved
+                 through the same cached slug->page index: sorting on the slug
+                 would file "frankdelporte" under F and "frank-delporte" under a
+                 different F, and sorting on the cell's text would sort a
+                 two-author post under the joined string. */}}
+            {{ $authorSlugs := .Params.authors }}
+            {{ if and (not $authorSlugs) .Params.author }}{{ $authorSlugs = slice .Params.author }}{{ end }}
+            {{ $authorKey := "" }}
+            {{ with $authorSlugs }}
+              {{ $first := index . 0 }}
+              {{ $page := partial "author-page.html" $first }}
+              {{ $authorKey = lower (cond (ne $page nil) (string $page.Title) (string $first)) }}
+            {{ end }}
+            {{/* views-total.html over a one-page slice: the read count of a
+                 single page, from the one place that reads data/views.json. The
+                 number is bare here because the column heading already says
+                 "Views" -- views.html's "68,330 views" would repeat it 2000
+                 times. */}}
+            {{ $views := partial "views-total.html" (slice .) }}
+            <tr>
+              <td class="sitemap-table__date" data-sort-value="{{ .Date.Unix }}">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+              </td>
+              <td class="sitemap-table__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+              <td class="sitemap-table__author" data-sort-value="{{ $authorKey }}">{{ partial "byline.html" . }}</td>
+              {{/* An em dash, not an empty cell or a 0: a post the counter has
+                   never seen has no number, and a blank in a column of numbers
+                   reads as a rendering fault. It sorts as 0. */}}
+              <td class="sitemap-table__num" data-sort-value="{{ $views }}">
+                {{- if gt $views 0 }}{{ lang.FormatNumberCustom 0 $views }}{{ else }}<span class="sitemap-table__none">&mdash;</span>{{ end -}}
+              </td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      </div>
     </section>
 
   </div>
 </div>
+
+{{/* Loaded here rather than from baseof.html alongside nav/lightbox/toc:
+     these two tables are the only ones on the site that need them, and the
+     other 4000 pages have no reason to fetch either file. Both are generic --
+     any template rendering a `data-sortable` table, or an input pointing at a
+     table with `data-filter-for`, gets the behaviour by adding the tag. */}}
+<script src="{{ "js/sortable-table.js" | relURL }}" defer></script>
+<script src="{{ "js/table-filter.js" | relURL }}" defer></script>
 {{ end }}
