@@ -2026,6 +2026,31 @@ should catch a mistake at PR time rather than letting it fail silently.
      to prevent. Same trap applies anywhere else a comment is meant to reach
      the reader's view-source.
 
+  **GA4 and `data/views.json` will never agree, and GA4 is always the lower
+  one. That is not a bug in either.** `google-analytics.com` and
+  `region1.analytics.google.com` are on Firefox's Enhanced Tracking Protection
+  blocklist, which is **strict by default in private windows** — the requests
+  are dropped at the network layer before any tag, consent or Ketch logic runs.
+  Observed live, not assumed: a `/g/collect` hit that was invisible in a
+  Firefox private window appeared the moment tracking protection was lowered.
+  Every adblocker does the same, and this audience is Java developers, so the
+  shortfall is large and systematic rather than noise.
+
+  This is the same argument the read counter above is built on, now with a
+  measurement behind it: the counter is first-party on foojay.io and
+  indistinguishable from the rest of the site, so nothing blocks it, while GA4
+  is a third-party domain a mainstream browser rejects on its default settings.
+  The two are counting different populations. **Don't "reconcile" them, don't
+  swap the view counts for GA4 numbers because GA4 looks more authoritative,
+  and don't treat a growing gap as drift** — a published number on a post is
+  exactly the place a silent tens-of-percent undercount cannot be tolerated,
+  which is why that number comes from the Worker and not from here.
+
+  Also worth knowing when debugging what fires and when: a consent test run in
+  a Firefox private window measures ETP, not consent. Use a normal window with
+  a fresh profile, or another browser, or the absence of a hit will be read as
+  a consent manager doing its job.
+
   Two things on the live site are **not** carried over and were not asked for:
   Hotjar (`hjid` 2547610) and Reo.dev (`b38cec169d83063`), both loaded straight
   from the WordPress `<head>` rather than through GTM. Decide on them
