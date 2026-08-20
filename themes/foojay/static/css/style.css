@@ -428,6 +428,12 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .page-head__intro { margin: 0 0 1.1rem; }
 .page-head__intro p { margin: 0; }
 .page-head__intro p + p { margin-top: .75rem; }
+/* /sitemap/'s jump links: a chip row in the page head rather than the sidebar
+   "On this page" panel, because that page is full-width so its 2000-row
+   articles table and 344-row authors table get the whole shell -- a rail would
+   take ~300px back off exactly the thing that needs them. Reuses .chip-row, so
+   there is nothing here but the spacing. */
+.page-head__jump { margin-top: .9rem; }
 /* A section-head whose subject is a chip list (the portal's "Topics covered")
    rather than a lead paragraph. */
 .section-head .chip-row { margin-top: .75rem; }
@@ -2033,7 +2039,12 @@ body.lightbox-open { overflow: hidden; }
    articles, which carry a date, an author and a read count as well as a
    title. */
 
-.sitemap__section { margin-top: 2.5rem; }
+.sitemap__section {
+  margin-top: 2.5rem;
+  /* So a jump link doesn't park the heading under the sticky site header --
+     same reason .prose h2 and .sponsor-section h2 carry one. */
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
 .sitemap__section > h2 {
   padding-bottom: .5rem;
   border-bottom: 1px solid var(--border);

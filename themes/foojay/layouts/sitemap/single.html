@@ -28,13 +28,36 @@
 {{ $sponsors := sort (partial "sponsors-ordered.html" .) "Title" }}
 {{ $pedia := (where site.RegularPages "Section" "pedia").ByTitle }}
 
+{{/* The one list of what this page contains. It drives BOTH the jump links in
+     the page head and each section's own id and <h2>, so a link can't point at
+     an anchor that doesn't exist and a heading can't disagree with the link to
+     it -- each section pulls its entry back out by id rather than repeating the
+     wording. Adding a section means adding a line here.
+
+     The links are a plain chip row in the page head, NOT the sidebar "On this
+     page" panel the posts and sponsor profiles use: this page is `full-width`
+     precisely because the articles and authors TABLES need every pixel of the
+     shell, and a rail would take ~300px of it back. */}}
+{{ $sections := slice
+     (dict "id" "pages"    "title" "Pages"      "count" (len $pages))
+     (dict "id" "pedia"    "title" "Java Pedia" "count" (len $pedia))
+     (dict "id" "sponsors" "title" "Sponsors"   "count" (len $sponsors))
+     (dict "id" "authors"  "title" "Authors"    "count" (len $authors))
+     (dict "id" "articles" "title" "Articles"   "count" (len $posts)) }}
+
 <div class="page-head">
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p>{{ len $pages }} pages, {{ len $posts }} articles, {{ len $authors }} authors and {{ len $sponsors }} sponsors.</p>
-    </div>
+    {{/* These replaced the "N pages, N articles, N authors and N sponsors"
+         sentence that used to sit here: the same numbers from the same source,
+         plus the one it left out (pedia), and each of them now takes you to
+         the section it counts instead of only reporting it. */}}
+    <nav class="page-head__jump chip-row chip-row--lg" aria-label="Jump to a section">
+      {{ range $sections }}
+        <a href="#{{ .id }}">{{ .title }} <span class="chip-count">{{ lang.FormatNumberCustom 0 .count }}</span></a>
+      {{ end }}
+    </nav>
     {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
   </div>
 </div>
@@ -42,8 +65,9 @@
 <div class="content-col full-width">
   <div class="sitemap">
 
-    <section class="sitemap__section">
-      <h2>Pages</h2>
+    {{ $s := index (where $sections "id" "pages") 0 }}
+    <section class="sitemap__section" id="{{ $s.id }}">
+      <h2>{{ $s.title }}</h2>
       <ul class="sitemap__list">
         {{ range sort $pages "File.Path" }}
           {{/* "pages/board/azul.md" -> dir "pages/board/" -> 3 parts -> depth 1.
@@ -57,22 +81,25 @@
       </ul>
     </section>
 
-    <section class="sitemap__section">
-      <h2>Java Pedia</h2>
+    {{ $s := index (where $sections "id" "pedia") 0 }}
+    <section class="sitemap__section" id="{{ $s.id }}">
+      <h2>{{ $s.title }}</h2>
       <ul class="sitemap__list sitemap__list--cols">
         {{ range $pedia }}<li class="sitemap__item"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
       </ul>
     </section>
 
-    <section class="sitemap__section">
-      <h2>Sponsors</h2>
+    {{ $s := index (where $sections "id" "sponsors") 0 }}
+    <section class="sitemap__section" id="{{ $s.id }}">
+      <h2>{{ $s.title }}</h2>
       <ul class="sitemap__list sitemap__list--cols">
         {{ range $sponsors }}<li class="sitemap__item"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
       </ul>
     </section>
 
-    <section class="sitemap__section">
-      <h2>Authors</h2>
+    {{ $s := index (where $sections "id" "authors") 0 }}
+    <section class="sitemap__section" id="{{ $s.id }}">
+      <h2>{{ $s.title }}</h2>
       {{/* A table for the same reason the articles below are one: an author is
            not just a name here -- how much they have written and how much it is
            read are the two things this page can say about them, and a column
@@ -134,8 +161,9 @@
       </div>
     </section>
 
-    <section class="sitemap__section">
-      <h2>Articles</h2>
+    {{ $s := index (where $sections "id" "articles") 0 }}
+    <section class="sitemap__section" id="{{ $s.id }}">
+      <h2>{{ $s.title }}</h2>
       {{/* A table rather than WordPress's flat run of 2000+ titles, and
            rather than the year-grouped lists this used to be: date, author,
            reads and title are all things a reader might be looking the
