@@ -5,7 +5,7 @@ lastmod: "2026-05-10T15:14:28+00:00"
 description: "💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release"
 authors:
   - "vincent-vauban"
-image: "toge-herculer-1024x576.png"
+image: "toge-herculer-1024x576.jpg"
 categories:
   - "Jakarta EE"
   - "Java"
@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="toge-herculer-700x394.png" class="size-medium" alt="💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release" width="700" height="394" >}}
+{{< img src="toge-herculer-700x394.jpg" class="size-medium" alt="💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release" width="700" height="394" >}}
 
 💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release
 

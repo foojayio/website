@@ -6,7 +6,7 @@ description: "Nulls & checked exceptions are often promoted as bad things in Jav
 canonical: "https://debugagent.com/everything-bad-in-java-is-good-for-you"
 authors:
   - "shai-almog"
-image: "Shai_Almog_a_rube_goldberg_machine_drawing_bb1e8dd8-b6bb-4518-8175-6834556eedf4-1024x585.png"
+image: "Shai_Almog_a_rube_goldberg_machine_drawing_bb1e8dd8-b6bb-4518-8175-6834556eedf4-1024x585.jpg"
 categories:
   - "Opinion"
 related_posts:

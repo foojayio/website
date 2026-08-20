@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:50:50+00:00"
 description: "Today, we are traveling to the Dominican Republic to learn more about the country and its Java community."
 authors:
   - "frankdelporte"
-image: "podcast-guests-jugdominica.png"
+image: "podcast-guests-jugdominica.jpg"
 categories:
   - "Conference"
   - "JUGs"

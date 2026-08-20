@@ -5,7 +5,7 @@ lastmod: "2026-01-26T14:27:10+00:00"
 description: "JDK 25 has arrived as the latest long-term support (LTS) release for Java, bringing performance improvements and enhanced stability for modern…"
 authors:
   - "geertjan-wielenga"
-image: "sritter.png"
+image: "sritter.jpg"
 categories:
   - "Performance"
   - "Webinar"

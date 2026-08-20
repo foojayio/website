@@ -48,7 +48,7 @@ The new `BoardInfoHelper` class and the related enums and methods can provide th
 This new class is already used as the basis for the website [api.pi4j.com](https://api.pi4j.com), which visualizes all the info defined inside the library, like board info, header pins, type of pins, etc. This website runs on a Raspberry Pi board, so the [System Information screen](https://api.pi4j.com/system-information) shows the info about that board, using this new class.
 
 {{< gallery >}}
-api-boards-915x1024.png
+api-boards-915x1024.jpg
 api-system-information-1024x813.png
 {{< /gallery >}}
 

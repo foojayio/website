@@ -5,7 +5,7 @@ lastmod: "2021-10-13T13:29:34+00:00"
 description: "Check out out-of-box GlassFish & Payara auto-clustering implementation details and infrastructure topology specifics!"
 authors:
   - "tetiana-fydorenchyk"
-image: "GlassFish-Payara-Clustering.png"
+image: "GlassFish-Payara-Clustering.jpg"
 categories:
   - "DevOps"
   - "Jakarta EE"

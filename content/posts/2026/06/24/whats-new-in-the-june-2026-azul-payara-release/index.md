@@ -6,7 +6,7 @@ description: "The June 2026 Azul Payara release ships a critical security fix ac
 authors:
   - "dominika-tasarz"
   - "luqman-saeed"
-image: "Whats-New-in-the-Payara-Platform-April-2026-Release-2.png"
+image: "Whats-New-in-the-Payara-Platform-April-2026-Release-2.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

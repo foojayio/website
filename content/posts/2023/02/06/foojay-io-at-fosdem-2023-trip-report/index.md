@@ -5,7 +5,7 @@ lastmod: "2023-02-07T16:00:21+00:00"
 description: "\"What if Simon Ritter's keynote at FOSDEM entitled 'After Nearly 30 Years, How Is Java So Popular?' ends up being held... in an empty room?\""
 authors:
   - "geertjan-wielenga"
-image: "image-1-1024x631.png"
+image: "image-1-1024x631.jpg"
 categories:
   - "Events"
   - "Foojay"
@@ -23,20 +23,20 @@ In a nutshell, this was my worst case scenario slash biggest 'concern' over the 
 After all, it's been several years since the last in-person [FOSDEM](https://fosdem.org/) was held in Brussels, Belgium, so maybe there wouldn't be that many people. Secondly, the abovementioned keynote session was scheduled at 09:00 AM on a Sunday morning. Also, thirdly, is Java at all still a hot enough topic to attract people at FOSDEM, where there are multiple rooms and tracks competing for attention and attendance, with lots of young fresh faced developers who might prefer spending time in any of the other many rooms.
 
 The night before, we'd had a great gathering of Foojay.io speakers, plus many others, including their friends and colleagues, a subset of whom are in the pic below, the nice Bier Central manager who ran the whole evening not having been able to squeeze us all into one pic.
-![](image-1024x768.png)
+![](image-1024x768.jpg)
 
 The dinner was sponsored by Sonatype, JFrog, and Azul (many thanks to each and all of them!) — and it was great to hang out with so many people, most of whom already knew each other from collaborating over the past years in and around Foojay.io, especially on the [Foojay.io Slack channel](https://bit.ly/join-foojay-slack), but several had never seen each other before in real life.
 
 Also, really great when Johannes from SAP got out his laptop in the middle of the dinner and demonstrated his brand new IntelliJ IDEA plugin to Marit from JetBrains and Tim from OpenRewrite!
-![](image-4-1024x768.png)
+![](image-4-1024x768.jpg)
 
 What I personally really enjoy and have always been focused on is bringing new hip up and coming developers into contact with those who've been running around for a long time — and those who were at the dinner may have noticed Duart and David from Fontys Venlo University of Applied Sciences (working on a license management solution, which I predict will be included in the FOSDEM program next year), as well as Ties (very experienced and mad about monads, certainly not a student, aside from 'of life'), seen below in a cool discussion with Simon, as well as several others, from the young in age to the young at heart. 🙂
-![](image-5-1024x768.png)
+![](image-5-1024x768.jpg)
 
 And, of course, on the day itself — and in retrospect only, of course — one needn't have worried.
 
 There turned out to be heaps of OpenJDK-related developers, specifically Java since that was the focus of everything throughout the day (even Nicolas from a Kotlin perspective was a really nice and entertaining talk about Java), the room was well attended throughout the day and, especially wonderful, the room was full of engagement and discusion in between the talks, plus the quick fire 20 minute sessions worked out quite well, with a continuous program of content from first thing in the morning until the moment the equipment started getting packed up at the end of the day. ([Check out the full schedule here.](https://fosdem.org/2023/schedule/track/friends_of_openjdk/))
-![](image-1-1024x631.png)
+![](image-1-1024x631.jpg)
 
 The program was split more or less into sections, the initial topics focusing mostly around migrating to the latest OpenJDK releases, the second set of topics focusing on security, then followed topics around performance and speed of OpenJDK-based applications, and finally there were several sessions on miscellaneous topics of all kinds, from hardware to compilers to libraries to frameworks to tools to languages. Yes, the Java landscape is very rich, varied, and innovative.
 

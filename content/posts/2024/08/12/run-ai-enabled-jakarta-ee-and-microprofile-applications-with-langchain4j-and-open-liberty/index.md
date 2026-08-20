@@ -7,7 +7,7 @@ canonical: "https://openliberty.io/blog/2024/04/01/open-liberty-with-langchain4j
 authors:
   - "gilbert-kwan"
   - "grace-jansen"
-image: "llms.png"
+image: "llms.jpg"
 categories:
   - "Cloud"
   - "Jakarta EE"

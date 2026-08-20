@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "hanno-embregts"
   - "trisha-gee"
-image: "podcast-versioncontrol-guests.png"
+image: "podcast-versioncontrol-guests.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"

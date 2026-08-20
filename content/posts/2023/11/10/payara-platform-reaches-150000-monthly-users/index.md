@@ -7,7 +7,7 @@ authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
   - "priya"
-image: "150000-downloads.png"
+image: "150000-downloads.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

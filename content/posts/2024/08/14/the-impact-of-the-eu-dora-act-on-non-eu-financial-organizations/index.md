@@ -6,7 +6,7 @@ description: "DORA is not just a regional EU regulation but one with far-reachin
 authors:
   - "geertjan-wielenga"
   - "simonritter"
-image: "dora.png"
+image: "dora.jpg"
 categories:
   - "EU DORA Act"
   - "Java Core"

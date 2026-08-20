@@ -136,7 +136,7 @@ Tools like Spring Boot and Netflix Eureka can help create microservices that sca
 
 ## Evolutionary Design and Continuous Improvement
 
-![](microservices-part2-5-700x280.png)
+![](microservices-part2-5-700x280.jpg)
 
 In a rapidly evolving technological landscape, systems must adapt and improve continuously.
 

@@ -70,7 +70,7 @@ As I mentioned before, **Pause** allows you to ignore the source code. Actually,
 
 ... which is not a problem for **Pause**.
 
-{{< img src="hehe.png" class="size-full is-resized" alt="hehe cat meme" width="680" height="766" style="width:200px" >}}
+{{< img src="hehe.jpg" class="size-full is-resized" alt="hehe cat meme" width="680" height="766" style="width:200px" >}}
 
 For a hands-on example of this scenario, see [Debugger.godMode()](https://flounder.dev/posts/debugger-god-mode/).
 

@@ -59,7 +59,7 @@ It will be complex for developers to launch and connect with an Azure Virtual Ma
 
 With this new Virtual Machine support, you can directly run or debug applications on Azure Virtual Machine in IntelliJ IDEA. Here is a short demonstration for it.
 
-![](vm-runend.gif)
+![](vm-runend.webp)
 
 ### Search Subscriptions Easily
 

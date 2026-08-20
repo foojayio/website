@@ -6,7 +6,7 @@ description: "As soon as Java 22 is out, it'll be time to walk through all the f
 canonical: "https://www.loicmathieu.fr/wordpress/en/informatique/java-22-quoi-de-neuf/"
 authors:
   - "loic-mathieu"
-image: "podcast-guests-java-22.png"
+image: "podcast-guests-java-22.jpg"
 categories:
   - "Java"
   - "JEPs"

@@ -6,7 +6,7 @@ description: "DORA significantly impacts investments by the financial sector in 
 authors:
   - "geertjan-wielenga"
   - "simonritter"
-image: "dora.png"
+image: "dora.jpg"
 categories:
   - "EU DORA Act"
   - "Java Core"

@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:44:57+00:00"
 description: "Today, we are traveling to Cape Town and Johannesburg to learn more about its Java communities!"
 authors:
   - "frankdelporte"
-image: "podcast-guests-south-africa-jugs.png"
+image: "podcast-guests-south-africa-jugs.jpg"
 categories:
   - "JUGs"
   - "Podcast"

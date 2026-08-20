@@ -6,7 +6,7 @@ description: "The “enlightenment roadmap” of a Java developer can be scary. 
 authors:
   - "olimpiu-pop"
   - "steve-poole"
-image: "10xdev.png"
+image: "10xdev.jpg"
 categories:
   - "Book Announcement"
   - "Books"

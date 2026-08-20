@@ -5,7 +5,7 @@ lastmod: "2024-03-26T10:53:12+00:00"
 description: "I went traveling again, read more on my travels to FOSDEM, Canada and Zurich in February/early March in this travel report."
 authors:
   - "johannes-bechberger"
-image: "image-1-2000x745-1.png"
+image: "image-1-2000x745-1.jpg"
 categories:
   - "Trip Reports"
 related_posts:

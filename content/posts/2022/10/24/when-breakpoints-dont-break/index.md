@@ -6,7 +6,7 @@ description: "Tracepoints, also known as Logpoints, are gaining name recognition
 canonical: "https://debugagent.com/when-breakpoints-dont-break"
 authors:
   - "shai-almog"
-image: "DALL-E-2022-10-04-12.24.32-driving-fast-without-breaks.png"
+image: "DALL-E-2022-10-04-12.24.32-driving-fast-without-breaks.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

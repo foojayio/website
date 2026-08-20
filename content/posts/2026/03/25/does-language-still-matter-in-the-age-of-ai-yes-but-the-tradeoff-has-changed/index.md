@@ -5,7 +5,7 @@ lastmod: "2026-03-26T07:12:39+00:00"
 description: "I keep hearing the same question in architecture reviews, slack threads, and conference Hallways: \"If AI is writing the code, does language even matter…"
 authors:
   - "david-parry"
-image: "dominance-1024x683.png"
+image: "dominance-1024x683.jpg"
 categories:
   - "AI"
   - "Cloud"
@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-## ![](dominance-700x467.png)
+## ![](dominance-700x467.jpg)
 
 I keep hearing the same question in architecture reviews, slack threads, and conference Hallways:
 > **"If AI is writing the code, does language even matter anymore?"**
@@ -64,7 +64,7 @@ That last point is worth sitting with. AI-generated Java looks like human-writte
 * Verbosity is no longer a flaw — it's a verification accelerator
 * Clarity determines how fast AI-generated code can ship
 
-![](foojay-700x467.png)
+![](foojay-700x467.jpg)
 
 ## The Other Half: Runtime Performance
 

@@ -5,7 +5,7 @@ lastmod: "2025-10-07T14:01:54+00:00"
 description: "MongoDB makes it really easy to work with location data (sometimes called Geo Data) by simplifying how to store this type of data and streamlining how you query for it so you can easily create “find nearby” queries, or plot your location data with ease! Let’s start with the basics: modeling your data, indexing it properly, running geo queries, and then displaying results on a map."
 authors:
   - "justin-jenkins"
-image: "Screenshot-2025-10-06-at-1.23.35-PM.png"
+image: "Screenshot-2025-10-06-at-1.23.35-PM.jpg"
 categories:
   - "Databases"
   - "Mongo"
@@ -140,7 +140,7 @@ Let's break this down a little:
 **Search Within a Custom Area**
 
 Lastly we can do something more ad hoc than a circle. Imagine we are taking a walk across the Millennium Bridge from North London into South London, and want to search a very specific area like so:
-![](Screenshot-2025-10-06-at-1.23.35-PM-1024x738.png)
+![](Screenshot-2025-10-06-at-1.23.35-PM-1024x738.jpg)
 
 We can do that by setting our type as a polygon and providing each point (roughly below):
 

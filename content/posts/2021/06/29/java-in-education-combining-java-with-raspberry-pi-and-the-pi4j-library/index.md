@@ -48,8 +48,8 @@ The second project started from [the Snake FXLG game which was already handled h
 
 {{< gallery cols="3" >}}
 arcade_parts_kit-1024x683.jpg
-assembled_closeup-1024x567.png
-assembled-1024x768.png
+assembled_closeup-1024x567.jpg
+assembled-1024x768.jpg
 {{< /gallery >}}
 
 ## Interviews with Barbara Scheuner and Dieter Holz

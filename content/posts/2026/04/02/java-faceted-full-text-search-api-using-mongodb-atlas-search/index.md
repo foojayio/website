@@ -6,7 +6,7 @@ description: "This is going to be a fun, practical tutorial demonstrating how to
 canonical: "https://tech-blog.luketn.com/java-faceted-full-text-search-api-using-mongodb-atlas-search"
 authors:
   - "luke-thompson"
-image: "Screenshot-2026-03-16-at-4.44.02-PM.png"
+image: "Screenshot-2026-03-16-at-4.44.02-PM.jpg"
 categories:
   - "Databases"
   - "Java"
@@ -414,7 +414,7 @@ Example result:
 }
 ```
 
-![](Screenshot-2026-03-12-at-1.56.21-PM.png)
+![](Screenshot-2026-03-12-at-1.56.21-PM.jpg)
 
 ## 3. Java service implementation
 

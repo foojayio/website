@@ -5,7 +5,7 @@ lastmod: "2023-02-14T10:02:29+00:00"
 description: "Software bill of materials, anyone? A year ago, developers had not heard of the 'SBOM' acronym... and now SBOM visualiser called BOM Doctor."
 authors:
   - "steve-poole"
-image: "Screenshot-2023-02-10-at-11.23.35.png"
+image: "Screenshot-2023-02-10-at-11.23.35.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"

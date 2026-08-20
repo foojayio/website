@@ -5,7 +5,7 @@ lastmod: "2026-02-05T21:12:14+00:00"
 description: "Two weeks have passed, and it is time to present a new collection of readings that may shape developments, utilization or ideas in the field of artificial…"
 authors:
   - "miro-wengner"
-image: "ai-insider.png"
+image: "ai-insider.jpg"
 categories:
   - "AI"
   - "Data Engineering"

@@ -1,7 +1,7 @@
 ---
 title: "Shai Almog"
 avatar: "shai-almog.png"
-avatarFull: "shai-almog-full.png"
+avatarFull: "shai-almog-full.jpg"
 bio: "Author, DevRel, Blogger, Open Source Hacker, Java Rockstar, Conference Speaker, Instructor and Entrepreneur."
 bluesky: ""
 mastodon: ""

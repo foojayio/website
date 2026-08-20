@@ -81,6 +81,6 @@ Now, you can directly execute common lifecycle phases from Maven explorer view b
 
 #### Refined creating project experience
 
-![](createMavenProject.gif)
+![](createMavenProject.webp)
 
 Until next time, happy coding!

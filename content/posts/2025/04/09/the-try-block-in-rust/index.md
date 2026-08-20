@@ -6,7 +6,7 @@ description: "I wrote previously about libs for error management in Rust. This w
 canonical: "https://blog.frankel.ch/try-block-rust/"
 authors:
   - "nicolas-frankel"
-image: "812441_A_dwarf_jedi_master_is_in_a_foggy_marsh.png"
+image: "812441_A_dwarf_jedi_master_is_in_a_foggy_marsh.jpg"
 categories:
   - "Research"
 related_posts:

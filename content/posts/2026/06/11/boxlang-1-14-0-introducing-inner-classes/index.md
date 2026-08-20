@@ -5,7 +5,7 @@ lastmod: "2026-06-11T10:29:34+00:00"
 description: "BoxLang has always embraced a simple truth: the way you organize code shapes the way you think about problems. For a long time, if you needed a helper…"
 authors:
   - "cristobal-escobar"
-image: "BoxLang-release-1.14.0-1701-x-1701-px-1024x1024.png"
+image: "BoxLang-release-1.14.0-1701-x-1701-px-1024x1024.jpg"
 categories:
   - "BoxLang"
   - "Design Patterns"
@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-![](BoxLang-release-1.14.0-700x394.png)
+![](BoxLang-release-1.14.0-700x394.jpg)
 
 BoxLang has always embraced a simple truth: the way you organize code shapes the way you think about problems. For a long time, if you needed a helper class, you needed a file. One class, one `.bx` file, no exceptions. This also stemmed from the CFML days. That's clean and predictable, but it creates real friction when a class is tightly coupled to exactly one caller and has no business existing anywhere else.
 

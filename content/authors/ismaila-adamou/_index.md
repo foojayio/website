@@ -1,7 +1,7 @@
 ---
 title: "Ismaila Abdoulahi"
 avatar: "ismaila-adamou.png"
-avatarFull: "ismaila-adamou-full.png"
+avatarFull: "ismaila-adamou-full.jpg"
 bio: "Software developer and maintainer of the amazing JobRunr"
 bluesky: ""
 mastodon: ""

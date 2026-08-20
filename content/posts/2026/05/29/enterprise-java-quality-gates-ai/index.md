@@ -5,7 +5,7 @@ lastmod: "2026-06-03T07:07:46+00:00"
 description: "Learn how enterprise Java teams can use deterministic quality gates, CI checks and tooling to keep AI-assisted code reviewable, consistent and safe."
 authors:
   - "anton-lem"
-image: "ChatGPT-Image-May-26-2026-04_44_09-PM-1536x864-1.png"
+image: "ChatGPT-Image-May-26-2026-04_44_09-PM-1536x864-1.jpg"
 categories:
   - "AI"
   - "Developer Tools"
@@ -21,7 +21,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="ChatGPT-Image-May-26-2026-04_44_09-PM-700x394.png" class="size-medium" alt="Illustration of human developers and an AI assistant writing code together, with the code passing through an enterprise quality gate before reaching a trusted repository." width="100%" >}}
+{{< img src="ChatGPT-Image-May-26-2026-04_44_09-PM-700x394.jpg" class="size-medium" alt="Illustration of human developers and an AI assistant writing code together, with the code passing through an enterprise quality gate before reaching a trusted repository." width="100%" >}}
 
 People and AI can write code together, but enterprise repositories still need deterministic quality gates to protect code quality.
 
@@ -147,7 +147,7 @@ So I built [JHarmonizer](https://github.com/lemon-ant/JHarmonizer).
 
 [
 
-{{< img src="b74099b4-5ea3-4832-9b32-6e6a8e06c16e-700x467.png" class="size-medium" alt="Before-and-after illustration showing JHarmonizer transforming a chaotic Java class layout into a predictable canonical order with dependency-safe structure and cleaner diffs." width="100%" >}}
+{{< img src="b74099b4-5ea3-4832-9b32-6e6a8e06c16e-700x467.jpg" class="size-medium" alt="Before-and-after illustration showing JHarmonizer transforming a chaotic Java class layout into a predictable canonical order with dependency-safe structure and cleaner diffs." width="100%" >}}
 
 ](https://github.com/lemon-ant/JHarmonizer)
 JHarmonizer reorganizes Java class members into a canonical structure, making code easier to scan, safer to review, and more consistent across teams.

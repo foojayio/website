@@ -6,7 +6,7 @@ description: "I was experimenting with a Java application that can act as a web 
 canonical: "https://webtechie.be/post/2024-03-28-java-jetty-htmx-websocket-example/"
 authors:
   - "frankdelporte"
-image: "java-jetty-htmx.png"
+image: "java-jetty-htmx.jpg"
 categories:
   - "Developer Tools"
   - "Videos"

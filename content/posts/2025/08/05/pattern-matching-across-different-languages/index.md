@@ -6,7 +6,7 @@ description: "With destructuring, pattern matching is a huge help to developers 
 canonical: "https://blog.frankel.ch/pattern-matching-different-languages/"
 authors:
   - "nicolas-frankel"
-image: "cover-1024x683.png"
+image: "cover-1024x683.jpg"
 categories:
   - "Java"
   - "Kotlin"

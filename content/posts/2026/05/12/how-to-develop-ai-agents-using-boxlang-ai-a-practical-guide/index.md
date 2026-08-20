@@ -5,7 +5,7 @@ lastmod: "2026-05-14T10:03:42+00:00"
 description: "AI agents are transforming how we build software. Unlike traditional chatbots that just answer questions, agents can reason about what tools they need,…"
 authors:
   - "cristobal-escobar"
-image: "Captura-de-pantalla-2026-05-11-195950.png"
+image: "Captura-de-pantalla-2026-05-11-195950.jpg"
 categories:
   - "AI"
   - "BoxLang"

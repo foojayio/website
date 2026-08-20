@@ -5,7 +5,7 @@ lastmod: "2023-06-15T14:58:47+00:00"
 description: "While Vaadin 24.0 was about upgrading the technology baseline and compatibility, this version brings you new features!"
 authors:
   - "sami-ekblad"
-image: "vvb.png"
+image: "vvb.jpg"
 categories:
   - "Cloud"
   - "Release Notes"

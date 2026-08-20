@@ -6,7 +6,7 @@ description: "JFX Central is the place to be for all JavaFX info. The website is
 canonical: "https://webtechie.be/post/2023-09-07-jfxcentral-new-user-interface/"
 authors:
   - "frankdelporte"
-image: "homepage-intro-1024x769-1.png"
+image: "homepage-intro-1024x769-1.jpg"
 categories:
   - "JavaFX"
 related_posts:
@@ -31,8 +31,8 @@ Both the [site/app source code](https://github.com/dlsc-software-consulting-gmbh
 The homepage provides links to the [GitHub projects of JFX Central](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2) and its [data](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data), but also to the [latest download of the desktop application](https://downloads.hydraulic.dev/jfxcentral2/download.html) version, and a [page providing more information about OpenJFX Project](https://www.jfx-central.com/openjfx), the open source project behind JavaFX. Furthermore, this page links to randomly selected highlights of the website's various sections and the most recent "Links Of The Week."
 
 {{< gallery >}}
-homepage-intro-1024x769.png |  | Homepage of JFX Central
-homepage-highlights.png |  | Some of the highlights on the homepage
+homepage-intro-1024x769.jpg |  | Homepage of JFX Central
+homepage-highlights.jpg |  | Some of the highlights on the homepage
 homepage-lotw.png |  | The most recent Links Of The Week on the homepage
 {{< /gallery >}}
 
@@ -41,9 +41,9 @@ homepage-lotw.png |  | The most recent Links Of The Week on the homepage
 The Resources section of the JFX Central website contains an overview of libraries, tools, videos, books, blogs, tips, tutorials, and icons. All related to JavaFX.
 
 {{< gallery >}}
-books-1024x890.png |  | Books on JFX Central
+books-1024x890.jpg |  | Books on JFX Central
 tools-1024x912.png |  | Tools on JFX Central
-videos-1024x1003.png |  | Videos on JFX Central
+videos-1024x1003.jpg |  | Videos on JFX Central
 {{< /gallery >}}
 
 The icons are a new part of version 2 of JFX Central, allowing you to search and explore many icon packs.
@@ -59,9 +59,9 @@ icons-details-1024x282.png |  | Details of a selected icon
 The Community section gives you more info about the people and companies in the JavaFX community. This is also the place where you can find all the previous Links Of The Week and the team involved in the JFX Central project.
 
 {{< gallery >}}
-people-1024x950.png |  | People on JFX Central
-companies-1022x1024.png |  | Companies on JFX Central
-linksoftheweek-1024x861.png |  | History of the Links Of The Week on JFX Central
+people-1024x950.jpg |  | People on JFX Central
+companies-1022x1024.jpg |  | Companies on JFX Central
+linksoftheweek-1024x861.jpg |  | History of the Links Of The Week on JFX Central
 {{< /gallery >}}
 
 ### Showcases
@@ -69,9 +69,9 @@ linksoftheweek-1024x861.png |  | History of the Links Of The Week on JFX Central
 Head over to the Showcases section to find real-world applications based on JavaFX. This section doesn't aim to be an overview of all available applications but a summary of uses in different markets, industries, use cases, etc.
 
 {{< gallery >}}
-showcases-899x1024.png |  | Showcases on JFX Central
-showcase-binjr-1024x874.png |  | The binjr showcase
-showcase-nerstar-941x1024.png |  | The NERstar showcase
+showcases-899x1024.jpg |  | Showcases on JFX Central
+showcase-binjr-1024x874.jpg |  | The binjr showcase
+showcase-nerstar-941x1024.jpg |  | The NERstar showcase
 {{< /gallery >}}
 
 ### Documentation
@@ -86,7 +86,7 @@ The Downloads section contains a mix of libraries and apps with a direct link to
 This section shows the power (and a bit of its weakness) of JFX Central, as it is up to the tool's creators to keep the download links up-to-date.
 
 {{< gallery >}}
-downloads-956x1024.png |  | Downloads on JFX Central
+downloads-956x1024.jpg |  | Downloads on JFX Central
 download-gluostatusfx-info-1024x774.png |  | GlucoStatusFX download page
 download-gluostatusfx-links.png |  | GlucoStatusFX links
 {{< /gallery >}}

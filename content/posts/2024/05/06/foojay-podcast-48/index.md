@@ -6,7 +6,7 @@ description: "In this episode, we are in Oberpfalz, Germany, for a particular re
 authors:
   - "frankdelporte"
   - "r-fichtner"
-image: "podcast_48_guests.png"
+image: "podcast_48_guests.jpg"
 categories:
   - "Conference"
   - "JUGs"

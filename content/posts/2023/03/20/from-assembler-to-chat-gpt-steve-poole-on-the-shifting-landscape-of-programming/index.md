@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="image-4-921x1024.png" class="alignright size-large is-resized" width="461" height="512" >}}
+{{< img src="image-4-921x1024.jpg" class="alignright size-large is-resized" width="461" height="512" >}}
 
 Welcome to our exclusive interview with [Steve Poole](https://www.linkedin.com/in/noregressions/), a seasoned Java developer, leader, and evangelist with a lot of experience in the tech industry.
 

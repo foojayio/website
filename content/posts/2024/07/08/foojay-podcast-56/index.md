@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:43:29+00:00"
 description: "In this Foojay podcast, we enter the world of mathematics by discussing Vectors and how they are crucial for AI and machine learning. "
 authors:
   - "frankdelporte"
-image: "vectors-podcast.png"
+image: "vectors-podcast.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

@@ -6,7 +6,7 @@ description: "The Foojay Java User Group World Tour has already brought us all o
 authors:
   - "frankdelporte"
   - "tom-cools"
-image: "podcast-24-belgium-guests.png"
+image: "podcast-24-belgium-guests.jpg"
 categories:
   - "Conference"
   - "JUGs"

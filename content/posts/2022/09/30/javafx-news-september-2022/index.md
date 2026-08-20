@@ -5,7 +5,7 @@ lastmod: "2022-10-05T07:46:46+00:00"
 description: "The JavaFX links of the week are back on jfx-central.com, and here we collect the complete month for you in an excellent overview."
 authors:
   - "frankdelporte"
-image: "Screen-Shot-2021-05-17-at-12.15.51-AM.png"
+image: "Screen-Shot-2021-05-17-at-12.15.51-AM.jpg"
 categories:
   - "JavaFX"
 related_posts:

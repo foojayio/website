@@ -4,7 +4,7 @@ date: "2026-06-05T08:52:01+00:00"
 description: "Spring Boot 3.5 reaches EOL on June 30. The legal context is about to change. Here's what 'without undue delay' means when commercial patches exist.."
 authors:
   - "steve-poole"
-image: "Gemini_Generated_Image_jf93u3jf93u3jf93.png"
+image: "Gemini_Generated_Image_jf93u3jf93u3jf93.jpg"
 categories:
   - "Java"
   - "Security"

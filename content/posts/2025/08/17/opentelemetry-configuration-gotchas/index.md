@@ -6,7 +6,7 @@ description: "Operators of OpenTelemetry can't treat services as black boxes. Th
 canonical: "https://blog.frankel.ch/opentelemetry-gotchas/"
 authors:
   - "nicolas-frankel"
-image: "cover-1024x683.png"
+image: "cover-1024x683.jpg"
 categories:
   - "Observability"
 related_posts:

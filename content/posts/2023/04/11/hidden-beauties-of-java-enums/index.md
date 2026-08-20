@@ -48,7 +48,7 @@ Let's take a look at a few of these use cases.
 {{< gallery >}}
 pi4j-940x1024.png
 lottie4j-1024x638.png
-4drums-1024x832.png
+4drums-1024x832.jpg
 {{< /gallery >}}
 
 ### Raspberry Pi Boards in an Enum Database

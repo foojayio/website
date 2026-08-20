@@ -4,7 +4,7 @@ date: "2026-04-17T13:09:24+00:00"
 description: "Three days at Spring I/O 2026 in Barcelona. Agents, Embabel, the sessions that didn't get the main stage, and a booth full of dragons"
 authors:
   - "steve-poole"
-image: "Gemini_Generated_Image_4mkc4s4mkc4s4mkc-1024x559.png"
+image: "Gemini_Generated_Image_4mkc4s4mkc4s4mkc-1024x559.jpg"
 categories:
   - "Java"
   - "Spring"

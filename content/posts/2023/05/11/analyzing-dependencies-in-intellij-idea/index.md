@@ -54,7 +54,7 @@ We can hide all tool windows (**⇧⌘F12** on macOS / **Control+Shift+F12** on 
 
 We can view the dependencies as a tree by clicking the **Show as Tree** button and **Expand** or **Collapse** them as needed by pressing the corresponding buttons.
 
-![Show as Tree](show-as-tree.png)
+![Show as Tree](show-as-tree.jpg)
 
 We can also click the **View Options** button and toggle **Show GroupId**, to show the GroupId for dependencies or not.
 
@@ -118,7 +118,7 @@ We can zoom in and out using the + and - keys, or the + and - buttons in the dia
 
 ![Dependency Diagram](dependency-diagram.png)
 
-![Zoom in](zoom-in.png)
+![Zoom in](zoom-in.jpg)
 
 ## Finding a specific dependency
 
@@ -128,9 +128,9 @@ We can search for a dependency using **⌘F** (on macOS) or **Ctrl+F** (on Windo
 
 We can check the path for this dependency and click related dependencies to follow this path to the root.
 
-![Find Elements in Diagram](find-elements.png)
+![Find Elements in Diagram](find-elements.jpg)
 
-![Show paths](show-paths.png)
+![Show paths](show-paths.jpg)
 
 ![Root](root.png)
 

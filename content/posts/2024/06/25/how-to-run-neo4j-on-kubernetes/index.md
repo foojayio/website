@@ -33,7 +33,7 @@ This technology is notorious for being complex and difficult to learn, and there
 
 For a glimpse, check out the [Google's Kubernetes Comic](https://cloud.google.com/kubernetes-engine/kubernetes-comic).
 
-![Google Kubernetes Comic](google-k8s-comic.png)
+![Google Kubernetes Comic](google-k8s-comic.jpg)
 
 ## Neo4j on Kubernetes
 

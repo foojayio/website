@@ -5,7 +5,7 @@ lastmod: "2025-10-14T05:36:45+00:00"
 description: "After brainstorming, our Java Champion Education group agreed to create a newsletter with a 14 days cadence."
 authors:
   - "miro-wengner"
-image: "ai-insider.png"
+image: "ai-insider.jpg"
 categories:
   - "AI"
   - "Design Patterns"

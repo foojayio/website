@@ -28,7 +28,7 @@ What's good about all this is that we can now look at more meaningful measures o
 Over the past 6 months, the activity that most clearly highlights all the key strengths and relevance of the Friends Of OpenJDK community was [FOSDEM 2023](https://fosdem.org/2023/schedule/track/friends_of_openjdk/).
 
 After having collaborated with and supported FOSDEM during the two virtual years of the Corona period, we came together for the first time in person this year, bringing together developers from across the Java community, and beyond, and had an awesome and truly united experience, [as described in detail here](https://foojay.io/today/foojay-io-at-fosdem-2023-trip-report/), with a speaker dinner and full rooms and well known as well as less well known engaging speakers.
-![](image-1-1024x631.png)
+![](image-1-1024x631.jpg)
 
 We fully intend to continue the tradition next year. Maybe we could try to use both FOSDEM days, since we have so much content, and 20 minute sessions are entertaining and fun, though occasionally also a bit stressful.
 

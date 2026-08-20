@@ -5,7 +5,7 @@ lastmod: "2022-04-30T03:41:23+00:00"
 description: "Building Java apps using the new module system can be a challenge, here I will show you how I was able to build a modern MVC based JavaFX UI!"
 authors:
   - "carldea"
-image: "Screen-Shot-2021-03-25-at-4.04.43-PM.png"
+image: "Screen-Shot-2021-03-25-at-4.04.43-PM.jpg"
 categories:
   - "Bach"
   - "JavaFX"
@@ -19,7 +19,7 @@ frozen: false
 
 > An old trick well done is far better than a new trick with no effect. -- Harry Houdini
 
-![World Clock Location Config Form](Screen-Shot-2021-03-25-at-4.04.43-PM.png)
+![World Clock Location Config Form](Screen-Shot-2021-03-25-at-4.04.43-PM.jpg)
 
 Welcome back to the series of blog entries on how I created a "sci-fi" looking world clock using JavaFX. If you are new to this series you can visit Part [\[1\]](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-1/ "Creating a JavaFX World Clock from Scratch (Part 1)") \& [\[2\]](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-2/ "Creating a JavaFX World Clock from Scratch (Part 2)").
 

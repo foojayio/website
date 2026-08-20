@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "jago-de-vreede"
   - "steve-hannah"
-image: "jfxinaction-part-3.png"
+image: "jfxinaction-part-3.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

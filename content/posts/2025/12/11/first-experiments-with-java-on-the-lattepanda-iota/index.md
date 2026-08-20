@@ -50,7 +50,7 @@ In the same box, I also received:
 4. **Power over Ethernet shield**: handy, will test later
 5. **4G LTE module** with SIM card support
 
-![](unboxed-1024x573.png)
+![](unboxed-1024x573.jpg)
 
 The cooling fan has a nice logo and excellent build quality. The PoE shield connects directly to a new network connector on the board, unlike Raspberry Pi expansion boards that use the Pi's existing network connection.
 
@@ -63,7 +63,7 @@ Following the documentation, I applied thermal paste to the processor, attached 
 ### First Boot: Windows Pre-installed
 
 After finding the power button, the LattePanda logo appeared on screen, and... Windows started booting. Windows was pre-installed, though I'm not sure if this is default or just for evaluation units. Either way, I immediately noticed 100% CPU usage, the exact reason I left Windows long ago, as I never understood that it's an ongoing problem with Windows... Memory usage was also pretty high.
-![](windows-cpu.png)
+![](windows-cpu.jpg)
 
 This thing definitely works with Windows, but I don't use Windows myself. Time to turn this into a Linux device.
 

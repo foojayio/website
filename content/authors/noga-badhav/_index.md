@@ -1,7 +1,7 @@
 ---
 title: "Noga Badhav"
 avatar: "noga-badhav.png"
-avatarFull: "noga-badhav-full.png"
+avatarFull: "noga-badhav-full.jpg"
 bio: "Noga Badhav is a software developer with 6 years of experience. She has a deep understanding of complex Java systems and she strives for high standards of clean code and tests."
 bluesky: ""
 mastodon: ""

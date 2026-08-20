@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:52:04+00:00"
 description: "Today, we are traveling to Dublin to learn more about its Java community!"
 authors:
   - "frankdelporte"
-image: "dublin-jug-podcast-guest.png"
+image: "dublin-jug-podcast-guest.jpg"
 categories:
   - "JUGs"
   - "Podcast"
@@ -40,7 +40,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://twitter.com/dubjug>
 * [https://www.youtube.com/@dubjug/videos?view=0\&sort=dd\&shelf_id=0](https://www.youtube.com/@dubjug/videos?view=0&sort=dd&shelf_id=0)
 
-![](dublin-jug-podcast-guest-1024x289.png)
+![](dublin-jug-podcast-guest-1024x289.jpg)
 
 ## Guest: Barry Alistair
 

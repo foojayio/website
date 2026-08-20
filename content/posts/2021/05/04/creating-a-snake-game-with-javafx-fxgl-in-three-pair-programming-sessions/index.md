@@ -6,7 +6,7 @@ description: "Start with an idea for a game, bring it to life in a prototype, mo
 authors:
   - "almasbaimagambetov"
   - "frankdelporte"
-image: "picade_hat_pin_numbers-915x1024.png"
+image: "picade_hat_pin_numbers-915x1024.jpg"
 categories:
   - "Game Development"
   - "JavaFX"
@@ -39,8 +39,8 @@ For the first video, we started from a minimal project I prepared, containing th
 Wouldn't it be fun to control the game with a real joystick? That was the challenge in our second video where we used the sources of the first one to extend them and make them run them on a Raspberry Pi with a physical controller.
 
 {{< gallery cols="3" >}}
-picade_hat_pin_numbers-915x1024.png
-assembled-1024x768.png
+picade_hat_pin_numbers-915x1024.jpg
+assembled-1024x768.jpg
 arcade_parts_kit-1024x683.jpg
 {{< /gallery >}}
 

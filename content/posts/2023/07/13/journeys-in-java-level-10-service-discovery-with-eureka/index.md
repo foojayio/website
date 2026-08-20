@@ -73,7 +73,7 @@ We will use the Spring Initializr at [start.spring.io](https://start.spring.io/)
 
 On the form, we choose Maven for the `Project`, then leave `Language` and `Spring Boot` version fields defaulted. Under the `Project Metadata` section, I updated the group name for my personal projects, but you are welcome to leave it defaulted. I named the artifact `eureka-server`, though naming is up to you, as long as we map it properly where needed. All other fields in this section can remain as they are. Under the `Dependencies` section, we need only `Eureka Server`. Finally, we can click the `Generate` button at the bottom to download the project.
 
-![Spring Initializr Eureka server project](springio-eurekaserver.png)
+![Spring Initializr Eureka server project](springio-eurekaserver.jpg)
 
 *Note: the Spring Initializr displays in dark mode or light mode via the moon or sun icons in the right column of the page.*
 
@@ -93,7 +93,7 @@ In the `EurekaServerApplication` class, we only need to add the annotation `@Ena
 
 Let's test this locally by starting the application in our IDE and navigating a web browser window to `localhost:8761`. This should show us a page like the one below, which gives details about the server and a section for `Instances currently registered with Eureka`. Since we haven't connected any other services with Eureka, we don't have any services registered with the server.
 
-![Test Eureka server](eureka-server-test.png)
+![Test Eureka server](eureka-server-test.jpg)
 
 That's it for the server, so let's start retrofitting our other services as Eureka clients.
 

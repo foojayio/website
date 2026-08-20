@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "mohamed-taman"
   - "simonritter"
-image: "episode-28-guests.png"
+image: "episode-28-guests.jpg"
 categories:
   - "Java"
   - "Java Core"
@@ -70,7 +70,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](episode-28-guests-1024x578.png)
+![](episode-28-guests-1024x578.jpg)
 
 ## Content
 

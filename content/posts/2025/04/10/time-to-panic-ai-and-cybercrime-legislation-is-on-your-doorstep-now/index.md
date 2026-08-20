@@ -5,7 +5,7 @@ lastmod: "2025-04-10T07:25:54+00:00"
 description: "As we settle into 2025, legislation around AI and cybercrime is no longer a distant threat or vague aspiration."
 authors:
   - "steve-poole"
-image: "foojaypanic.png"
+image: "foojaypanic.jpg"
 categories:
   - "Security"
 related_posts:

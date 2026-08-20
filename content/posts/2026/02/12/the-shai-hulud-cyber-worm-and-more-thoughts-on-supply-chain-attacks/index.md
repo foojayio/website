@@ -5,7 +5,7 @@ lastmod: "2026-02-12T11:48:52+00:00"
 description: "first, a word about ecosystems Before we dive into Shai-Hulud, before we label it “sophisticated” or “advanced” or “next generation,” we need to be honest…"
 authors:
   - "steve-poole"
-image: "ChatGPT-Image-Sep-19-2025-11_39_44-AM.png"
+image: "ChatGPT-Image-Sep-19-2025-11_39_44-AM.jpg"
 categories:
   - "DevOps"
   - "Security"

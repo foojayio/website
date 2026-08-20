@@ -5,7 +5,7 @@ lastmod: "2026-04-19T14:25:30+00:00"
 description: "Spring Boot 3.5 goes EOL June 30, 2026. But the real risk isn't the migration. It's what happens to CVE reporting once a project reaches end of life."
 authors:
   - "steve-poole"
-image: "Gemini_Generated_Image_4mkc4s4mkc4s4mkc-1024x559.png"
+image: "Gemini_Generated_Image_4mkc4s4mkc4s4mkc-1024x559.jpg"
 categories:
   - "Java"
   - "Security"

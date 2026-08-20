@@ -5,7 +5,7 @@ lastmod: "2023-07-18T21:13:51+00:00"
 description: "What are examples of things that observability can tell you, right now, about your code and how can it help you improve it?"
 authors:
   - "roni-dover"
-image: "image-16-1024x512-1.png"
+image: "image-16-1024x512-1.jpg"
 categories:
   - "Developer Tools"
   - "Observability"
@@ -40,7 +40,7 @@ At one time, in one of these crazy product launch stages when myself and the oth
 #### Let's take a more practical example
 
 To illustrate how we can utilize observability for improving our dev cycle, let's take a more practical example of a real-life scenario: Bob, a senior developer in the team, has been asked to add some functionality to the [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) example. It seems like vaccination records for pets are extremely important to keep track of and Bob has been asked to integrate with an external data source to do so. For the initial MVP, Bob creates a feature branch and moves forward to implement some new pieces of functionality.
-![](image-32.png)
+![](image-32.jpg)
 
 Having read many tutorials on how to collect observability data from Java applications, Bob has several OSS and free tools running in the background to assist him in his task. In the context of this post, I won't go into the details of how to set that entire stack up (as it's also widely documented) but would be happy to do that in a follow-up post if there is demand for it. You can, however, find the entire stack available as a docker_compose file [here](https://github.com/doppleware/spring-petclinic-cf/blob/main/observability/tracing/docker-compose.trace.yml).
 
@@ -193,7 +193,7 @@ Finally, Bob adds a new field that will indicate whether a pet vaccine is overdu
 ```
 
 That's it! The changes are ready. Bob even writes some tests and watches them turn into a happy shade of green. Pleased with the quick progress and feeling confident about the code that runs without incident when testing out locally, Bob turns to the collected runtime data to see what it can reveal about his changes. He decides to [stretch the Definition of Done](https://digma.ai/blog/youre-never-done-by-definition/) and spends additional effort in examining the data related to his changes.
-![](image-20.png)
+![](image-20.jpg)
 
 ## Observability to the rescue
 

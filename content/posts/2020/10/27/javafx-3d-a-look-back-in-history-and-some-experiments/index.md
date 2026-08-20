@@ -5,7 +5,7 @@ lastmod: "2020-11-08T20:53:12+00:00"
 description: "JavaFX 3D really is a hidden gem! I've been using JavaFX already for a long time now but wasn't aware of these 3D features!"
 authors:
   - "frankdelporte"
-image: "Screenshot-from-2020-10-25-22-04-10.png"
+image: "Screenshot-from-2020-10-25-22-04-10.jpg"
 categories:
   - "Embedded"
   - "JavaFX"
@@ -31,7 +31,7 @@ But by JavaFX 8, it became apparent that certain use cases needed 3D graphics. F
 {{< youtube AS26gZrYNy8 >}}
 
 Work on 3D graphics capabilities within JavaFX progressed to the point that 3D characters could be animated with JavaFX. At JavaOne 2013, a chessboard with animated Duke chess pieces was presented at the keynote demo. This animated demo was presented along with a robotic arm that controlled a 3D-printed version of these Duke chess pieces, controlled from the same server.
-![](Screenshot-from-2020-10-25-22-04-10-1024x521.png)
+![](Screenshot-from-2020-10-25-22-04-10-1024x521.jpg)
 
 {{< youtube 4og3QCOnSaQ >}}
 

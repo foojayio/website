@@ -5,7 +5,7 @@ lastmod: "2026-06-11T09:06:23+00:00"
 description: "Over the past two weeks, the field of artificial intelligence has continued its remarkable pace of advancement. As AI becomes increasingly woven into the…"
 authors:
   - "miro-wengner"
-image: "ai-insider-1.png"
+image: "ai-insider-1.jpg"
 categories:
   - "Data Engineering"
   - "Interviews"

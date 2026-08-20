@@ -5,7 +5,7 @@ lastmod: "2022-04-30T03:36:27+00:00"
 description: "Join Carl Dea in his JavaFX clock tutorial series where he shows you how he animates the clock face's hands using basic trigonometry."
 authors:
   - "carldea"
-image: "Screen-Shot-2020-12-19-at-9.35.09-PM.png"
+image: "Screen-Shot-2020-12-19-at-9.35.09-PM.jpg"
 categories:
   - "JavaFX"
   - "Tutorials"

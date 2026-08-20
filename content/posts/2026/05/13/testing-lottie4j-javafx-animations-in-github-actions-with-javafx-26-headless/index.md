@@ -5,7 +5,7 @@ description: "When I released Lottie4J 1.1.0, I mentioned something a bit embarr
 canonical: "https://webtechie.be/post/2026-04-20-lottie4j-unit-test-with-headless-javafx/"
 authors:
   - "frankdelporte"
-image: "manual-comparison.png"
+image: "manual-comparison.jpg"
 categories:
   - "JavaFX"
 related_posts:

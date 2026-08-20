@@ -5,7 +5,7 @@ lastmod: "2024-02-06T14:18:18+00:00"
 description: "In Spring Boot 3.1, Docker Compose support was added to simplify local development with external resources."
 authors:
   - "simon-martinelli"
-image: "springboot.png"
+image: "springboot.jpg"
 categories:
   - "Java"
   - "Spring"

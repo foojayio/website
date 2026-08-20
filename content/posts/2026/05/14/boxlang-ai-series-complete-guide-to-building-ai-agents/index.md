@@ -5,7 +5,7 @@ lastmod: "2026-05-18T09:04:50+00:00"
 description: "The world of AI development is moving fast, but building real, production-ready AI agents doesn’t have to be complex. This series walks you step by step…"
 authors:
   - "cristobal-escobar"
-image: "Captura-de-pantalla-2026-05-13-120114.png"
+image: "Captura-de-pantalla-2026-05-13-120114.jpg"
 categories:
   - "AI"
   - "BoxLang"

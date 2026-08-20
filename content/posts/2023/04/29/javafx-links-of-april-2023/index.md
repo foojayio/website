@@ -6,7 +6,7 @@ description: "JavaFX Core, Conferences, Scene Builder, Gluon, JFX Central, Almas
 canonical: "https://webtechie.be/post/2023-04-28-javafx-links-of-april-2023/"
 authors:
   - "frankdelporte"
-image: "Screen-Shot-2021-05-17-at-12.15.51-AM.png"
+image: "Screen-Shot-2021-05-17-at-12.15.51-AM.jpg"
 categories:
   - "JavaFX"
 related_posts:

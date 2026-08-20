@@ -9,7 +9,7 @@ authors:
   - "jbaruch"
   - "markus-westergren"
   - "r-fichtner"
-image: "episode-72-jcon-part-1.png"
+image: "episode-72-jcon-part-1.jpg"
 categories:
   - "Conference"
   - "Podcast"

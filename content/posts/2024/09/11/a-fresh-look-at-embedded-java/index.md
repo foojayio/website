@@ -6,7 +6,7 @@ description: "Java is the environment that offers the highest developer producti
 canonical: "https://www.azul.com/blog/a-fresh-look-at-embedded-java/"
 authors:
   - "frankdelporte"
-image: "fresh-look-embedded-java.png"
+image: "fresh-look-embedded-java.jpg"
 categories:
   - "Embedded"
   - "Java"
@@ -25,7 +25,7 @@ frozen: false
 But soon, it became one of the leading programming languages powering high-scale business applications that can handle massive amounts of transactions with high throughput.
 
 Because those use cases are very visible and there are a lot of job opportunities within that area, we tend to forget that Java on embedded is also still very much alive and kicking!
-![](fresh-look-embedded-java-1024x400.png)
+![](fresh-look-embedded-java-1024x400.jpg)
 
 Java is used on embedded platforms for in-car infotainment and information displays, home automation and production environment edge gateways, medical devices, appliances, and the list goes on.
 

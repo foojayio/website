@@ -5,7 +5,7 @@ lastmod: "2025-05-26T08:12:58+00:00"
 description: "AI can generate tests, but the result is not totally reliable. This article covers best practices to incorporate AI into the test generation."
 authors:
   - "jonathan-vila"
-image: "ai-test-generation.png"
+image: "ai-test-generation.jpg"
 categories:
   - "Java"
   - "Testing"

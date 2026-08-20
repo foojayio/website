@@ -5,7 +5,7 @@ lastmod: "2026-01-06T21:48:03+00:00"
 description: "This article explores how Quarkus can help organizations reduce costs, streamline development, and modernize their Java applications for today’s cloud-native environments."
 authors:
   - "michal-maler"
-image: "optimizing-java-with-quarkus-cloud-scaled.png"
+image: "optimizing-java-with-quarkus-cloud-scaled.jpg"
 categories:
   - "Cloud"
   - "Kubernetes"

@@ -6,7 +6,7 @@ description: "Let's take a look at contributing to Open Source Software, specifi
 canonical: "https://maritvandijk.com/contributing-to-open-source-software-creating-a-pull-request/"
 authors:
   - "marit-van-dijk"
-image: "checks-1.png"
+image: "checks-1.jpg"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
@@ -37,27 +37,27 @@ For this blog post, let's assume we've found a project we want to work on, and a
 
 When making your first contribution, you won't have access to push to the open source project directly. So, the first thing we will need to do is **fork** this project to our own profile. This means we create a copy of the original project on our profile.
 
-![Fork project](fork-project.png)
+![Fork project](fork-project.jpg)
 
-![Fork](fork.png)
+![Fork](fork.jpg)
 
 We then need to **clone** this project to our local machine. We see that we have several options to get the code. Let's use HTTPS as that can be the simplest option. When we click the clipboard icon, the URL will be copied to our clipboard.
 
-![Clone](clone.png)
+![Clone](clone.jpg)
 
-![Copied](copied.png)
+![Copied](copied.jpg)
 
 When we open [IntelliJ IDEA](https://www.jetbrains.com/idea/) and don't already have a project open, we'll see the **Welcome screen** . Here we have the option to **Get from VCS** (version control system).
 
-![Welcome screen](get-from-vcs.png)
+![Welcome screen](get-from-vcs.jpg)
 
 When we click the button, the **Get from Version Control** dialog opens. We can paste the URL we just copied. We can select where we want to store this project on our computer; let's stick with the default. When we select **Clone**, IntelliJ IDEA will clone the GitHub repository to the selected directory.
 
-![Clone project](clone-project.png)
+![Clone project](clone-project.jpg)
 
 If we already have a project open, we can open the **Get from Version Control** dialog by going to **File \> New \> Project from version control**.
 
-![New Project from version control menu](menu-project-vcs.png)
+![New Project from version control menu](menu-project-vcs.jpg)
 
 IntelliJ IDEA will open the project on our machine.
 
@@ -65,25 +65,25 @@ IntelliJ IDEA will open the project on our machine.
 
 Before making any changes, we'll want to make sure that we can build the project. Hopefully, how to build the project will be described in the **README**, as it is for this example. Let's open the terminal and build the project as described. In this example, we need Docker, which is already installed and running.
 
-![Build the project](build-project.png)
+![Build the project](build-project.jpg)
 
 Now that we know we can build the project, we can start making changes. First, we need to look for the right place to make the change. We might navigate the project in the **Project tool window** (**⌘1** on macOS, or **Alt+1** on Windows/Linux), or look for a specific file or code snippet using **Find in Files** (**⌘⇧F** on macOS, or **Ctrl+Shift+F** on Windows/Linux).
 
-![Project tool window](project-tool-window.png)
+![Project tool window](project-tool-window.jpg)
 
-![Find in files](find-in-files.png)
+![Find in files](find-in-files.jpg)
 
 We might want to create a specific branch for our changes.
 
 Once we are done making our changes and the project still builds, we can **commit our changes** (**⌘K** on macOS, or **Ctrl+K** on Windows/Linux). We can check our changes in the **Commit tool window** (**⌘1** on macOS, or **Alt+1** on Windows/Linux) to see if these are the right files and use **Show Diff** (**⌘D** on macOS, or **Ctrl+D** on Windows/Linux) to see if the changes are correct.
 
-![Commit changes](commit-window.png)
+![Commit changes](commit-window.jpg)
 
-![Check the differences](show-diff.png)
+![Check the differences](show-diff.jpg)
 
 If we don't have access to the original project, we need to push our code to our fork.
 
-![Push](push.png)
+![Push](push.jpg)
 
 ## Creating the pull request
 
@@ -91,13 +91,13 @@ Once we are happy with our changes, we can create a pull request.
 
 We go back to our GitHub profile and create a pull request from there. After we have pushed our changes, we can see that our fork is **1 commit ahead** . We can start creating our pull request by clicking **Contribute**.
 
-![Contribute](contribute.png)
+![Contribute](contribute.jpg)
 
 We need to provide a title and description for our pull request. Make sure the title is a good description of the changes you want to contribute. If your PR fixes an issue, you can add "fixed #x" (where x is the issue number) to the title; this will automatically close the linked issue when the PR is merged. Once you are happy with the title and description, click the button **Create pull request** to open your pull request.
 
-![Open the pull request](open-pr.png)
+![Open the pull request](open-pr.jpg)
 
-![Create pull request](create-pr2.png)
+![Create pull request](create-pr2.jpg)
 
 ## Negotiating the review process
 
@@ -105,9 +105,9 @@ Now the waiting starts. On an active project, hopefully your PR will be reviewed
 
 As you can see, reviewers can comment on your PR, approve the PR or request changes which must be addressed before merging. A project might have other checks set up that need to pass before merging. You might want to check that these checks pass and that there are no conflicts with the main branch.
 
-![Review](review.png)
+![Review](review.jpg)
 
-![Checks](checks.png)
+![Checks](checks.jpg)
 
 ## Summary and shortcuts
 

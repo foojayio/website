@@ -6,7 +6,7 @@ description: "As developers, we read code more than we write it. When reading co
 canonical: "https://maritvandijk.com/tips-reading-code/"
 authors:
   - "marit-van-dijk"
-image: "Tips-for-reading-code.png"
+image: "Tips-for-reading-code.jpg"
 categories:
   - "Debugging"
   - "Developer Tools"
@@ -80,7 +80,7 @@ To understand intended behavior of the code, we can look at the tests in the cod
 We can run a test (or our application) through the debugger to actually see how the code is executed. First, we need to place a breakpoint at the location in the code we're interested in. Click the gutter next to the line of code where you want to place the breakpoint, or use **⌘ F8** on macOS or **Ctrl+F8** on Windows/Linux to toggle the breakpoint.
 
 Next, we run our test (or application) using the **Debug** option. Execution will stop at the breakpoint, so we can investigate the state of our application. Once code execution stops at the breakpoint, we can see current values of variables and objects.
-![](Debug-1024x576.png) *Debug information*
+![](Debug-1024x576.jpg) *Debug information*
 
 We can also evaluate an expression, to see its current value and look at more details. We can even change the expressions to evaluate different results.
 *Evaluate Expression*

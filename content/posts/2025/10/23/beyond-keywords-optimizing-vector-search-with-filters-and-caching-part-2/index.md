@@ -449,7 +449,7 @@ With the backend already running, simply open http://localhost:8080 in your brow
 * **Genres** = (Drama, Action)
 
 Then, click to view movie details.
-![](Screenshot-2025-10-13-at-12.52.44-PM.png)
+![](Screenshot-2025-10-13-at-12.52.44-PM.jpg)
 
 ## Wrapping up
 

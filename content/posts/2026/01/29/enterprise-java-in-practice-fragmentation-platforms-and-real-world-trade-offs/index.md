@@ -5,7 +5,7 @@ description: "Learn how enterprise Java teams are modernizing, adopting Kubernet
 authors:
   - "chiara-civardi"
   - "dominika-tasarz"
-image: "Image-20-scaled-1.png"
+image: "Image-20-scaled-1.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

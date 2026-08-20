@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:40:51+00:00"
 description: "AI, LLMs, ChatGPT—these are just a few of the buzzwords of the massive revolution unfolding right now."
 authors:
   - "frankdelporte"
-image: "podcast-62-ai-and-programming.png"
+image: "podcast-62-ai-and-programming.jpg"
 categories:
   - "Conference"
   - "Jakarta EE"

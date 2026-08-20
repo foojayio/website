@@ -5,7 +5,7 @@ lastmod: "2023-12-14T10:41:35+00:00"
 description: "Or: I just released version 0.0.11 with a cool new feature that I can't wait to tell you about..."
 authors:
   - "johannes-bechberger"
-image: "image-8-2000x1279-1.png"
+image: "image-8-2000x1279-1.jpg"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"

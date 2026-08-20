@@ -5,7 +5,7 @@ lastmod: "2024-02-16T09:07:34+00:00"
 description: "With Spring Boot 3.1, Testcontainers support for local development was added. This video will show you how this works and how to use it."
 authors:
   - "simon-martinelli"
-image: "springboot-testcontainers.png"
+image: "springboot-testcontainers.jpg"
 categories:
   - "Spring"
   - "Testcontainers"

@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:51:27+00:00"
 description: "Check the previous Foojay Podcasts for the first three parts of our J-Fall report. In this episode, you’ll get the remaining interviews we made that day."
 authors:
   - "frankdelporte"
-image: "podcast-jfall-4.png"
+image: "podcast-jfall-4.jpg"
 categories:
   - "Conference"
   - "Podcast"

@@ -5,7 +5,7 @@ lastmod: "2026-07-08T20:28:22+00:00"
 description: "If you build Java on GitHub Actions, actions/setup-java is almost certainly the first step in your workflow. It installs a JDK, wires up JAVA_HOME and the…"
 authors:
   - "bruno-borges"
-image: "new-actions-setup-java.png"
+image: "new-actions-setup-java.jpg"
 categories:
   - "DevOps"
 related_posts:

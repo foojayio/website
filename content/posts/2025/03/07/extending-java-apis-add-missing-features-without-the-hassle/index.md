@@ -6,7 +6,7 @@ description: "Do you ever pull your hair out in frustration, why isn't this a pa
 canonical: "https://debugagent.com/extending-java-apis-add-missing-features-without-the-hassle"
 authors:
   - "shai-almog"
-image: "thumbnail-20.png"
+image: "thumbnail-20.jpg"
 categories:
   - "Tutorials"
 related_posts:

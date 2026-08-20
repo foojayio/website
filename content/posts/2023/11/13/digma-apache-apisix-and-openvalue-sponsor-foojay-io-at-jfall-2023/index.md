@@ -5,7 +5,7 @@ lastmod: "2023-11-13T22:31:11+00:00"
 description: "Last week at JFall 2023, was a high point in the evolution of Foojay.io, the place for Friends Of OpenJDK."
 authors:
   - "geertjan-wielenga"
-image: "booth-1-jfall-2023-1024x768.png"
+image: "booth-1-jfall-2023-1024x768.jpg"
 categories:
   - "Events"
   - "Foojay"
@@ -21,7 +21,7 @@ frozen: false
 We had a very big booth right by the entrance to the venue, consisting of a large rollout banner featuring all the organizations involved in Foojay.io, a table totally covered in stickers (hundreds, maybe thousands, of Foojay.io stickers, as well as sponsor stickers, such as Digma), and a podcast zone, where Frank spent most of the day recording short podcast interviews with a very wide range of Java enthusiasts attending the event.
 
 Below you see the above described setup, featuring Paco and Johannes in the middle, certainly the most actively involved and engaged Foojay.io collaborators at the booth, constantly handing out stickers to promote Foojay.io and the OpenJDK user community at large, showing the website, and talking about how to get involved.
-![](booth-1-jfall-2023-1024x768.png)
+![](booth-1-jfall-2023-1024x768.jpg)
 
 Also, it was very cool to join Frank in a short talk about Foojay.io, which was attended by several people involved in Foojay.io, plus many that heard about it for the first time.
 ![](F-gPzDGWUAAm7if-1024x578.jpeg)

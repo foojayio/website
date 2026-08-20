@@ -5,7 +5,7 @@ lastmod: "2026-05-05T15:23:32+00:00"
 description: "From time to time, I'll run a design review for an application being migrated from a relational database onto MongoDB, where the customer shares an architectural diagram showing a caching layer (typically Redis) sitting between the app server and MongoDB."
 authors:
   - "amorgan"
-image: "Screenshot-2026-04-21-at-1.44.45-PM.png"
+image: "Screenshot-2026-04-21-at-1.44.45-PM.jpg"
 categories:
   - "Databases"
   - "Mongo"

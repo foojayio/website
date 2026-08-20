@@ -21,7 +21,7 @@ This library is targeted for the most recent Java versions.
 
 ## FXSkins Details
 
-![FXSkins ScrollPane Skin](ScrollPane4.gif)
+![FXSkins ScrollPane Skin](ScrollPane4.webp)
 
 FXSkins is a Java / JavaFX library targeted for Java 11 and above, up until the most recent Java version (but should also work with Java 9 and 10). It is currently being built and tested using the current LTS Java version which is Java 11.
 

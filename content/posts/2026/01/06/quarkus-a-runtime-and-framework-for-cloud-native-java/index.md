@@ -53,7 +53,7 @@ Beyond staple traits of modern frameworks, Quarkus introduces two platform-defin
 
   Figure 2. Thanks to buildtime initialization, the resulting application starts faster and consumes less memory.
 
-  ![Benefits of Quarkus native image compared to JVM](4-BuildTimeP-Benefits-native.png)
+  ![Benefits of Quarkus native image compared to JVM](4-BuildTimeP-Benefits-native.jpg)
 
   Figure 3. All the benefits of buildtime initialization also apply when compiling to a native binary.
 * **Extensibility** : Quarkus exposes extension points for everything from startup hooks to request filters. Over 800 [extensions](https://extensions.quarkus.io) allow seamless integration with modern technologies such as Kafka, OpenTelemetry, and OpenID Connect.These extensions integrate with Quarkus and participate in its buildtime and runtime lifecycle, making them first-class components of Quarkus.
@@ -74,7 +74,7 @@ This makes Quarkus both powerful and approachable.
 
 You can start with a simple REST endpoint and scale it into a production-grade service without changing your development model.
 
-![Frictionless developer experience: live reload, dev services, continuous testing](6-Frictionless.png)
+![Frictionless developer experience: live reload, dev services, continuous testing](6-Frictionless.jpg)
 
 Figure 4. Frictionless developer experience: Vastly improved development feedback loop, unified approach to producing different package types, and using proven APIs that Java developers already know.
 
@@ -101,7 +101,7 @@ Always measure your workload:
 
 Taken together, these in production choices provide measurable wins:
 
-![Real-world success stories using Quarkus](7-success-stories.png)
+![Real-world success stories using Quarkus](7-success-stories.jpg)
 
 * [Vodafone Greece replaces Spring Boot with Quarkus](https://quarkus.io/blog/vodafone-greece-replaces-spring-boot/)
 * [Quarkus vs. Spring Boot](https://www.logicmonitor.com/blog/quarkus-vs-spring)
@@ -166,7 +166,7 @@ Quarkus unifies the strengths of a development framework and a runtime. As a fra
 
 Quarkus is built in the open under the Apache License 2.0, governed with the Commonhaus model, and developed end-to-end on GitHub. Beyond the core project, the ecosystem includes the [Quarkiverse Hub](https://hub.quarkiverse.io/), a community-run collection of [Quarkus extensions](https://quarkus.io/extensions/) and related projects. The Quarkiverse Hub provides repository hosting with build, CI, and release publishing, so features land as versioned, testable modules you can adopt, fork, or extend.
 
-![Setting expectations for performance and developer experience with Quarkus](8-expectations.png)
+![Setting expectations for performance and developer experience with Quarkus](8-expectations.jpg)
 
 So, that's all for now, thank you for reading, and let's meet again in the third article of this series, which will cover building your own stack with Quarkus.
 

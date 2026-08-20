@@ -6,7 +6,7 @@ description: "Since December last year, the Foojay podcast visited a Java User G
 authors:
   - "frankdelporte"
   - "mgrygles"
-image: "foojay-podcast-guests-chicago.png"
+image: "foojay-podcast-guests-chicago.jpg"
 categories:
   - "Java"
   - "JUGs"
@@ -55,7 +55,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](foojay-podcast-guests-chicago-1024x576.png)
+![](foojay-podcast-guests-chicago-1024x576.jpg)
 
 ## Links
 

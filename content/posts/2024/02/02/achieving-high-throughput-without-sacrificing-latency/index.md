@@ -5,7 +5,7 @@ lastmod: "2024-02-02T10:07:26+00:00"
 description: "Low latency coding techniques are designed to keep a processor core as busy as possible, executing at its full potential and so getting work done as quickly as possible."
 authors:
   - "george-ball"
-image: "latencythroughput.png"
+image: "latencythroughput.jpg"
 categories:
   - "Chronicle Software"
   - "FinOps"

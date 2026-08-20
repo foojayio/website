@@ -288,7 +288,7 @@ Now you are no longer a learner.
 
 You are building systems like the Jedi rebuilt themselves after Order 66.
 
-![](java_start_wars_end-1024x683.png)
+![](java_start_wars_end-1024x683.jpg)
 
 ## Final Wisdom from the Jedi Archives
 

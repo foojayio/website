@@ -5,7 +5,7 @@ lastmod: "2023-02-27T08:14:41+00:00"
 description: "Let's learn all about software composition analysis, how they work and why it is important for developers to get started as soon as possible!"
 authors:
   - "jamie-coleman"
-image: "cake-image.png"
+image: "cake-image.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"
@@ -24,7 +24,7 @@ frozen: false
 
 #### I hope you are still hungry after the first article as more cake is available below!
 
-![Cake and Dependencies](cake-image.png "Cake and Dependencies")
+![Cake and Dependencies](cake-image.jpg "Cake and Dependencies")
 
 **If you have read the first article in this series that introduces SBOMs [SBOMs: First Steps in a New Journey for Developers \| Foojay.io](https://foojay.io/today/sboms-first-steps-in-a-new-journey-for-developers/ "SBOMs: First Steps in a New Journey for Developers") then you already know how important they are and will be increasingly going forward.**
 

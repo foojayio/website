@@ -6,7 +6,7 @@ description: "Watch a 10 minute discussion on Log4j, security processes and prio
 canonical: "https://blog.payara.fish/java-after-log4j"
 authors:
   - "jadon-ortlepp"
-image: "quickfire.png"
+image: "quickfire.jpg"
 categories:
   - "Payara"
   - "Security"

@@ -5,7 +5,7 @@ lastmod: "2026-05-18T09:25:50+00:00"
 description: "Payara Platform Community is now Azul Payara Community. Find out what's changing, what's staying the same, and what's new in the April and May 2026 releases."
 authors:
   - "dominika-tasarz"
-image: "Azul-Payara-Community-New-Release-1.png"
+image: "Azul-Payara-Community-New-Release-1.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"
@@ -51,7 +51,7 @@ We'll also be at a number of Java conferences this year. More details to come, b
 
 We didn't want to announce the rebrand without also catching you up on recent releases ([download here!](https://payara.fish/downloads/payara-platform-community-edition/ "download here!")), so here's a combined look at what landed for Azul Payara Community in April and May.
 
-![](Azul-Payara-Community-New-Release-1.png)
+![](Azul-Payara-Community-New-Release-1.jpg)
 
 ### May: Azul Payara Community 7.2026.5
 

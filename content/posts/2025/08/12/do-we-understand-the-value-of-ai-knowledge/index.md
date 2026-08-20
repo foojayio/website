@@ -5,7 +5,7 @@ lastmod: "2025-08-12T11:26:51+00:00"
 description: "The future is not yet written and every moment is important."
 authors:
   - "miro-wengner"
-image: "20250810_Neuron_wiki.png"
+image: "20250810_Neuron_wiki.jpg"
 categories:
   - "AI"
   - "Design Patterns"

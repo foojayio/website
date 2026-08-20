@@ -91,7 +91,7 @@ The ATEM is recognized as a webcam when connected via USB to your computer. You 
 {{< gallery >}}
 atem-software-1024x590.png
 atem-in-action-1-1024x768.jpg
-atem-p-in-p-1024x573.png
+atem-p-in-p-1024x573.jpg
 {{< /gallery >}}
 
 Be careful, webcams only have a USB output, so they can not be used with the ATEM. If you can find a Raspberry Pi (chip and stock problems...), you can use those as a cheap camera as [described here](https://webtechie.be/post/2021-12-20-raspberry-pi-as-hdmi-camera-for-atem-mini/).

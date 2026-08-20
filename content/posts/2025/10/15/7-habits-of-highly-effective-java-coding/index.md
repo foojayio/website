@@ -5,7 +5,7 @@ lastmod: "2025-10-15T12:37:10+00:00"
 description: "Habits to work with the AI to write code that's actually good—solid, secure, and won't give the next person on your team a headache or your company a serious problem."
 authors:
   - "jonathan-vila"
-image: "Screenshot-2025-09-23-at-19.14.51.png"
+image: "Screenshot-2025-09-23-at-19.14.51.jpg"
 categories:
   - "AI"
   - "Developer Tools"

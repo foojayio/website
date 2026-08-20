@@ -6,7 +6,7 @@ description: "In this episode, Frank and the Foojay Podcast leave the European U
 authors:
   - "frankdelporte"
   - "simon-martinelli"
-image: "podcast-guests-swiss-jug.png"
+image: "podcast-guests-swiss-jug.jpg"
 categories:
   - "JUGs"
   - "Podcast"

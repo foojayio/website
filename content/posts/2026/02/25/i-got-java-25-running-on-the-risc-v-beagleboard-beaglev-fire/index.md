@@ -35,8 +35,8 @@ The key to solving this problem was updating the operating system using the [Bea
 As described on the [BeagleBoard Documentation \> Boards \> BeagleV-Fire \> Quick Start](https://docs.beagle.cc/boards/beaglev/fire/02-quick-start.html), you need a serial connection to see what the board is doing and interrupt it at the right moment to make it accessible from the Imaging Utility. I used a [DSD TECH USB to TTL Serial Cable](https://www.amazon.com.be/dp/B083HVM7VZ?ref=ppx_yo2ov_dt_b_fed_asin_title).
 
 {{< gallery >}}
-beaglev-fire-serial.png
-beaglev-fire-connected.png
+beaglev-fire-serial.jpg
+beaglev-fire-connected.jpg
 beaglev-fire-usb-disc.png
 {{< /gallery >}}
 

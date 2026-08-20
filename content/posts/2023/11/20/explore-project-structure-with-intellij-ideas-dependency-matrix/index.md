@@ -6,7 +6,7 @@ description: "Use IntelliJ IDEA's Dependency Matrix to explore the structure of 
 canonical: "https://maritvandijk.com/explore-project-structure-with-dependency-matrix/"
 authors:
   - "marit-van-dijk"
-image: "dependency-matrix-menu.png"
+image: "dependency-matrix-menu.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
@@ -26,25 +26,25 @@ It offers a matrix of the components in our project to help you and highlights t
 
 You can open the Dependency Matrix from the main menu by going to **Code \| Analyze Code \| Dependency Matrix**.
 
-![Open Dependency Matrix from the menu](dependency-matrix-menu.png)
+![Open Dependency Matrix from the menu](dependency-matrix-menu.jpg)
 
 Alternatively, use **Find Action** (**⌘⇧A** on macOS, or **Ctrl+Shift+A** on Windows/Linux) and search for "matrix".
 
-![Open Dependency Matrix using Find Action](dependency-matrix-find-action.png)
+![Open Dependency Matrix using Find Action](dependency-matrix-find-action.jpg)
 
 To use this feature, the **Dependency Matrix plugin** needs to be enabled.
 
-![Dependency Matrix plugin](dependency-matrix-plugin.png)
+![Dependency Matrix plugin](dependency-matrix-plugin.jpg)
 
 When opening the Dependency Matrix, specify the scope you want to analyze. You can select the **Whole project** or specify a **Custom scope**, and whether to include test sources or not.
 
-![Dependency Matrix scope](dependency-matrix-scope.png)
+![Dependency Matrix scope](dependency-matrix-scope.jpg)
 
 After defining the scope, click **Analyze**.
 
 If the project's class files are out of date, the analysis may result in incomplete or incorrect data. To avoid this, IntelliJ IDEA will prompt you to compile the project before continuing the DSM analysis. Click **Yes** to build the project and make sure everything is up-to-date.
 
-![Dependency Matrix - Project is out of date](dependency-matrix-out-of-date.png)
+![Dependency Matrix - Project is out of date](dependency-matrix-out-of-date.jpg)
 
 The **DSM tool window** will open in a popup, showing a matrix of your project's components.
 
@@ -52,7 +52,7 @@ The **DSM tool window** will open in a popup, showing a matrix of your project's
 
 Let's take a look at how to interpret the Dependency Matrix.
 
-![Dependency Matrix](dependency-matrix.png)
+![Dependency Matrix](dependency-matrix.jpg)
 
 The row headers represent the program structure. In this example, the matrix contains the same modules from the **Project tool window** as rows.
 
@@ -70,13 +70,13 @@ As you can see in the legend at the top right of the **DSM tool window**:
 
 Dependencies are shown in blue. The numbers in the cells show the number of dependencies of the selected row on the selected column. An ellipsis (the three dots) in a cell means that there are more than 99 dependencies. Hover over the cell to get more information. In the example below, we see the tooltip "cucumber-java -\> cucumber-core (209)". This means that in this project the component cucumber-java (represented in the column) depends on the component cucumber-core 209 times.
 
-![Dependency Matrix - Information on hover](dependency-matrix-hover.png)
+![Dependency Matrix - Information on hover](dependency-matrix-hover.jpg)
 
 You can click rows or cells to examine the relationship between the components in more detail.
 
 When you select a row to see the relationship between the selected component and others, the selected row and corresponding column are highlighted to visualize row dependencies.
 
-![Dependency Matrix - Selected row](dependency-matrix-select-row.png)
+![Dependency Matrix - Selected row](dependency-matrix-select-row.jpg)
 
 The column shows the dependencies ***of*** the selected row.
 
@@ -90,7 +90,7 @@ You can select different rows to see which components they use or are used by. Y
 
 You can drill down further into specific cells. When you click a cell, one component will be marked green and the other will be marked yellow. The green component ***uses*** the yellow component. The corresponding cell (marked purple) will show dependencies in the other direction, in this case 0.
 
-![Dependency Matrix - Selected cell](dependency-matrix-select-cell.png)
+![Dependency Matrix - Selected cell](dependency-matrix-select-cell.jpg)
 
 We can drill down even further.
 
@@ -98,7 +98,7 @@ We can drill down even further.
 
 Right now everything is collapsed and only the modules are shown. You can click a module to expand its packages. The module name is shown to the left, the packages are shown as rows and the dependencies between the packages are shown in the matrix inside the box marked with a black line.
 
-![Dependency Matrix - Expand](dependency-matrix-expand.png)
+![Dependency Matrix - Expand](dependency-matrix-expand.jpg)
 
 You can expand the packages further to show the classes in that package, and see the dependencies between classes inside the packages. You can expand modules and packages by clicking the arrows in the rows on the left, and collapse them again.
 
@@ -108,45 +108,45 @@ You can also expand the modules and packages by double-clicking a cell. We can c
 
 You can limit the scope of your Dependency Matrix. Right-click the row you want to look at in more detail, and from the context menu, select **Limit Scope To Selection**.
 
-![Dependency Matrix - Limit Scope to Selection](dependency-matrix-limit-scope.png)
+![Dependency Matrix - Limit Scope to Selection](dependency-matrix-limit-scope.jpg)
 
 The limited scope will be opened in a new tab in the **DSM tool window**.
 
-![Dependency Matrix - Limit Scope to Selection](dependency-matrix-limit-scope-result.png)
+![Dependency Matrix - Limit Scope to Selection](dependency-matrix-limit-scope-result.jpg)
 
 You can limit the view to see only selected dependencies. In the **DSM tool window** , right-click the cell representing the dependency you're interested in and select **Explore Dependencies Between**.
 
-![Dependency Matrix - Explore Dependencies Between](dependency-matrix-explore.png)
+![Dependency Matrix - Explore Dependencies Between](dependency-matrix-explore.jpg)
 
 The classes that produce these dependencies will be opened in a new tab in the **DSM tool window** . In contrast to the **Limit Scope** option, only classes which produce selected dependencies are left.
 
-![Dependency Matrix - Explore Dependencies Between](dependency-matrix-explore-result.png)
+![Dependency Matrix - Explore Dependencies Between](dependency-matrix-explore-result.jpg)
 
 Another way to open the Dependency Matrix, with the option to select a specific scope, is from the **Project tool window** (**⌘1** on macOS, or **Alt+1** on Windows/Linux). Right-click an item in the **Project tool window** and select **Analyze \| Analyze Dependency Matrix**.
 
-![Analyze Dependency Matrix](analyze-dependency-matrix.png)
+![Analyze Dependency Matrix](analyze-dependency-matrix.jpg)
 
 Notice how you can now select the module or directory as scope for the Dependency Matrix, in addition to the whole project or a custom scope.
 
-![Analyze Dependency Matrix scope](analyze-dependency-matrix-scope.png)
+![Analyze Dependency Matrix scope](analyze-dependency-matrix-scope.jpg)
 
 ### Navigate to relevant code
 
 We can also navigate to the relevant code from the Dependency Matrix. To select a specific dependency for further source-code analysis, right-click the dependency you are interested in in the **DSM tool window** , and select **Find Usages for Dependencies**.
 
-![Dependency Matrix - Find Usages](dependency-matrix-find-usages.png)
+![Dependency Matrix - Find Usages](dependency-matrix-find-usages.jpg)
 
 The **Find tool window** will open, showing the usages of the selected dependency. Close the **DSM tool window** to look at the results and explore the code you're interested in. We can open the relevant code by double-clicking it in the **Find tool window** (**⌘3** on macOS, or **Alt+3** on Windows/Linux).
 
-![Find tool window](find-tool-window.png)
+![Find tool window](find-tool-window.jpg)
 
 You can reopen the window again from the main menu by going to **View \| Tool Windows \| DSM**.
 
-![Reopen Dependency Matrix](dsm.png)
+![Reopen Dependency Matrix](dsm.jpg)
 
 And remember that all windows can be opened from **Recent Files** (**⌘E** on macOS, or **Ctrl+E** on Windows/Linux) as well.
 
-![Reopen Dependency Matrix](recent-files-dsm.png)
+![Reopen Dependency Matrix](recent-files-dsm.jpg)
 
 ### Cyclic dependencies
 
@@ -154,7 +154,7 @@ Remember from the legend that mutual or cyclic dependencies are shown in red. Th
 
 In a large application with multiple cyclic dependencies, you don't need to expand all the nodes one by one to find all the cyclic dependencies. You can press **F2** or select **Go to Next Cycle** from the context menu to quickly jump to the next cycle.
 
-![Dependency Matrix - Go to Next Cycle](go-to-next-cycle.png)
+![Dependency Matrix - Go to Next Cycle](go-to-next-cycle.jpg)
 
 ## Summary
 

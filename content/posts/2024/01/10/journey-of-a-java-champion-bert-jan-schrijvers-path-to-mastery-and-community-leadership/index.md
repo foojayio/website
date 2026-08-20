@@ -5,7 +5,7 @@ lastmod: "2024-01-10T16:05:43+00:00"
 description: "Explore the insightful journey of Bert Jan Schrijver, a Java Champion, as he discusses his path in software development, the role of community, and the evolution of Java in this enlightening interview."
 authors:
   - "bazlur-rahman"
-image: "Simon-Martinelli-2.png"
+image: "Simon-Martinelli-2.jpg"
 categories:
   - "Interviews"
 related_posts:
@@ -100,7 +100,7 @@ And for attendees to give feedback to the speaker or the organization when this 
 The first one was by Jago de Vreede, who wanted to play a guitar. But instead of learning to play the guitar himself, he automated it using a Raspberry Pi, servo motors and a bit of Java 😉
 
 Here's a picture of Jago and his automatic guitar:
-![](image-1.png)
+![](image-1.jpg)
 
 <https://x.com/JagoVreede/status/1192378065516683264?s=20>.
 

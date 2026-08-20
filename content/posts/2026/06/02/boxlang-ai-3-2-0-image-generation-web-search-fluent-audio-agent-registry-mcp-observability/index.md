@@ -5,7 +5,7 @@ lastmod: "2026-06-02T12:33:49+00:00"
 description: "BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a…"
 authors:
   - "cristobal-escobar"
-image: "bx-jwt-2.png"
+image: "bx-jwt-2.jpg"
 categories:
   - "AI"
   - "BoxLang"

@@ -5,7 +5,7 @@ lastmod: "2026-03-20T06:54:34+00:00"
 description: "How to use the AOT capabilities by Leyden and show test results which show that very significant progress has already been made."
 authors:
   - "maria-arias"
-image: "training-maria-training.png"
+image: "training-maria-training.jpg"
 categories:
   - "Java"
   - "Performance"

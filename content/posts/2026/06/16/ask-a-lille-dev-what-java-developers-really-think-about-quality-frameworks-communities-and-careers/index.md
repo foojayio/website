@@ -4,7 +4,7 @@ date: "2026-06-16T00:35:19+00:00"
 description: "Ask a Lille Dev: Java developers from DevLille 2026 share insights on Spring Boot, Quarkus, IntelliJ, software quality, tech communities, architecture, and DevOps."
 authors:
   - "vincent-vauban"
-image: "lilledev.png"
+image: "lilledev.jpg"
 categories:
   - "Events"
   - "IntelliJ IDEA"

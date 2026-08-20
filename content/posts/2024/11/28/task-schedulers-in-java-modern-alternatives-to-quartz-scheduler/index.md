@@ -6,7 +6,7 @@ description: "Quartz is often considered the standard job scheduling library in 
 authors:
   - "ismaila-adamou"
   - "ronald-dehuysser"
-image: "db-scheduler.png"
+image: "db-scheduler.jpg"
 categories:
   - "Developer Tools"
   - "Java"

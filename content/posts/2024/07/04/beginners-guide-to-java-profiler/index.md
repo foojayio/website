@@ -6,7 +6,7 @@ description: "Learn how to troubleshoot and optimize Java code with IntelliJ Pro
 canonical: "https://flounder.dev/posts/get-started-with-profiling/"
 authors:
   - "igor-kulakov"
-image: "banner-1.png"
+image: "banner-1.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Java"

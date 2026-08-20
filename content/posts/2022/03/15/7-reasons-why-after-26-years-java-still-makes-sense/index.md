@@ -5,7 +5,7 @@ lastmod: "2025-01-24T10:39:56+00:00"
 description: "After many discussions with Java developers, combined with my personal experiences with the Java community and platform, here are the key reasons why Java developers love Java after all these years!"
 authors:
   - "bazlur-rahman"
-image: "brunosouza.png"
+image: "brunosouza.jpg"
 categories:
   - "Java Beginner"
   - "Java Core"

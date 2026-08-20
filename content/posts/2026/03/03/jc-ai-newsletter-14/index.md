@@ -5,7 +5,7 @@ lastmod: "2026-03-03T15:11:55+00:00"
 description: "Two weeks have passed and a lot have been happening on the field of artificial-intelligence. Two weeks have passed and a lot has been silently yet visibly…"
 authors:
   - "miro-wengner"
-image: "ai-insider.png"
+image: "ai-insider.jpg"
 categories:
   - "AI"
   - "Cloud"

@@ -6,7 +6,7 @@ description: "Remember mainframes? Serverless is that: we own the machine and yo
 canonical: "https://debugagent.com/serverless-is-the-new-timeshare"
 authors:
   - "shai-almog"
-image: "DALL-E-2022-08-17-13.51.17-mainframe-in-the-clouds-artistic-epic.png"
+image: "DALL-E-2022-08-17-13.51.17-mainframe-in-the-clouds-artistic-epic.jpg"
 categories:
   - "Cloud"
 related_posts:

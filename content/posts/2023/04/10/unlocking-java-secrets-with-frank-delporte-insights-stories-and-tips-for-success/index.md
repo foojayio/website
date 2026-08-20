@@ -5,7 +5,7 @@ lastmod: "2023-04-10T17:13:08+00:00"
 description: "Learn about Frank Delporte, Java Champion and Azul technical writer at Azul, on Java, resources for beginners, insights into in the industry."
 authors:
   - "bazlur-rahman"
-image: "Frank.png"
+image: "Frank.jpg"
 categories:
   - "Interviews"
 related_posts:

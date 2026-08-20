@@ -5,7 +5,7 @@ lastmod: "2021-09-16T14:47:47+00:00"
 description: "Extend WildFly from standalone server to cluster in managed domain mode inside containers for running cloud-native scalable applications!"
 authors:
   - "tetiana-fydorenchyk"
-image: "wildfly-managed-domain-containers.png"
+image: "wildfly-managed-domain-containers.jpg"
 categories:
   - "Jakarta EE"
   - "Jelastic"

@@ -5,7 +5,7 @@ lastmod: "2025-11-12T15:21:14+00:00"
 description: "Fourteen days have passed, and it is time to present a fresh collection of readings that could influence developments in the field of artificial…"
 authors:
   - "miro-wengner"
-image: "ai-insider.png"
+image: "ai-insider.jpg"
 categories:
   - "AI"
   - "Design Patterns"

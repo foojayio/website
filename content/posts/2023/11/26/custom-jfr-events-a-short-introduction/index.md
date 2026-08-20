@@ -5,7 +5,7 @@ lastmod: "2023-11-26T21:09:21+00:00"
 description: "Find out how JFR allows you to implement your events to record custom information directly in your profiling file."
 authors:
   - "johannes-bechberger"
-image: "custom_jfr_event-2000x1203-1.png"
+image: "custom_jfr_event-2000x1203-1.jpg"
 categories:
   - "Java Core"
   - "Performance"

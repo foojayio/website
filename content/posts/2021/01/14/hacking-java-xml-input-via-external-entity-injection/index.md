@@ -5,7 +5,7 @@ lastmod: "2021-01-14T08:45:42+00:00"
 description: "In this video, I explain and demonstrate how an XXE injection attack works by extracting system data that should not be exposed."
 authors:
   - "bmvermeer"
-image: "briansnykxxe-1024x574.png"
+image: "briansnykxxe-1024x574.jpg"
 categories:
   - "Security"
   - "Videos"

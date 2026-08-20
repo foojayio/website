@@ -5,7 +5,7 @@ lastmod: "2021-01-25T08:41:17+00:00"
 description: "In this article, I’ll talk about some tricks that I use in my day to day job and show some best practices that can boost your productivity."
 authors:
   - "hamza-belmellouki"
-image: "beyond-basics-intellij.png"
+image: "beyond-basics-intellij.jpg"
 categories:
   - "IntelliJ IDEA"
 related_posts:

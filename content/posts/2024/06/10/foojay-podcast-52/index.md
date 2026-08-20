@@ -6,7 +6,7 @@ description: "Garbage Collectors, Intelligence Cloud, Test Containers and Flaky 
 authors:
   - "frankdelporte"
   - "gerrit-grunwald"
-image: "jconpic.png"
+image: "jconpic.jpg"
 categories:
   - "CRaC"
   - "Java"

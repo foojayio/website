@@ -6,7 +6,7 @@ description: "Let's talk to volunteers from different organizations where coding
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "podcast-22-guests.png"
+image: "podcast-22-guests.jpg"
 categories:
   - "Embedded"
   - "Interviews"

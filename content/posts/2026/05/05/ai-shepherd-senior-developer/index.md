@@ -4,7 +4,7 @@ date: "2026-05-05T08:59:45+00:00"
 description: "AI is automating the code, not the engineering. A guide for senior developers on shepherding AI through the work that was always the actual job."
 authors:
   - "markus-westergren"
-image: "image.png"
+image: "image.jpg"
 categories:
   - "Java"
 related_posts:

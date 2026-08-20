@@ -5,7 +5,7 @@ lastmod: "2026-04-12T12:35:16+00:00"
 description: "This guide walks through the complete process of deploying a minimal Spring Boot service to Kubernetes and adding full observability using the Dash0 operator — without making any changes to the application code."
 authors:
   - "geertjan-wielenga"
-image: "og-image.png"
+image: "og-image.jpg"
 categories:
   - "Cloud"
   - "Java"

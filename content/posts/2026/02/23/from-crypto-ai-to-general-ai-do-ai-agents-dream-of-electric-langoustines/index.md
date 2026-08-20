@@ -59,7 +59,7 @@ At a system level, the goal is simple.
 Replace "one provider, many API keys" with "one payment-enabled access surface that can reach many paid APIs and models," so agents can quote, pay, and retrieve results without account setup.
 
 To tackle this topic, we need to start by breaking down discovery, routing, identity, and paid endpoints in a production-shaped workflow.  
-![](ChatGPT-Image-19.-2.-2026-18_43_09.png)
+![](ChatGPT-Image-19.-2.-2026-18_43_09.jpg)
 
 ## What changed in x402 and ERC-8004 in the last month or so?
 

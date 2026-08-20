@@ -5,7 +5,7 @@ lastmod: "2023-10-27T08:56:22+00:00"
 description: "I can heartily recommend this book, it offers a lot of valuable insights into persistence in Cloud computing, the involved technologies, and technical and architectural considerations by two developers with years of experience."
 authors:
   - "simon-verhoeven"
-image: "image-830x1024.png"
+image: "image-830x1024.jpg"
 categories:
   - "Book Review"
   - "Books"
@@ -23,7 +23,7 @@ frozen: false
 
 Luckily all these topics, and so many more are covered in the magnificent new book "Persistence Best Practices for Java Applications" by [Otàvio Santana](https://otaviojava.com/) and [Karina Varela](https://karinavarela.me/)  
 
-{{< img src="image-830x1024.png" class="aligncenter size-large is-resized" width="456" height="563" style="width:456px;height:563px" >}}
+{{< img src="image-830x1024.jpg" class="aligncenter size-large is-resized" width="456" height="563" style="width:456px;height:563px" >}}
 
 ## About the book
 

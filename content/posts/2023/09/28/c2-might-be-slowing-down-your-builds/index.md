@@ -5,7 +5,7 @@ lastmod: "2023-09-28T09:55:14+00:00"
 description: "Disabling C2 can be an option to speed up builds of smaller Java applications in CI systems, mainly when restricted to one or two CPU cores."
 authors:
   - "johannes-bechberger"
-image: "image-7-2000x462-1.png"
+image: "image-7-2000x462-1.jpg"
 categories:
   - "Maven"
   - "Performance"

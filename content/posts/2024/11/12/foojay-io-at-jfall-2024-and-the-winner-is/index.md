@@ -5,7 +5,7 @@ lastmod: "2024-11-12T13:24:19+00:00"
 description: "It was a great day, with a lot of reconnecting to new and existing (not old!) friends, a solid basis for more Foojay.io booths at conferences, just like this and last year at JFall!"
 authors:
   - "geertjan-wielenga"
-image: "IMG_8957-1024x768.png"
+image: "IMG_8957-1024x768.jpg"
 categories:
   - "Events"
   - "Foojay"
@@ -17,7 +17,7 @@ frozen: false
 ---
 
 Last week [JFall](https://jfall.nl/)---the "Biggest Java Conference of the Netherlands"---took place. Foojay.io, the Friends Of OpenJDK, were there in full force, including a booth with stickers and other swag, as well as Frank Delporte with his popular Foojay.io Podcast, doing live interviews with attendees.
-![](IMG_8957-1024x768.png)
+![](IMG_8957-1024x768.jpg)
 
 Not only Frank was present throughout the day, doing interviews for upcoming podcast episodes, but so was his 14-year-old son Vik (in yellow sweater in the pic above), handling the technical side and directing the interviews like a true and enthusiastic professional.
 

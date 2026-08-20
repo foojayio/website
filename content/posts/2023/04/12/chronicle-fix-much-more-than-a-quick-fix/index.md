@@ -101,7 +101,7 @@ The engine can be controlled from customers' tooling via API, or with the GUI.
 
 And all FIX messages are stored, indexed and are searchable with a sophisticated query language.
 
-![](Screen-Shot-2023-04-03-at-2.07.05-PM-1024x576.png)
+![](Screen-Shot-2023-04-03-at-2.07.05-PM-1024x576.jpg)
 
 All important metrics, including latency numbers, are exposed via the monitoring features and can be surfaced in your monitoring tool of choice, e.g. [Grafana](https://grafana.com/ "Grafana")
 

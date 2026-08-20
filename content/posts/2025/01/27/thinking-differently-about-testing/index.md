@@ -5,7 +5,7 @@ lastmod: "2025-01-28T14:53:09+00:00"
 description: "The takeaways of moving to a data-driven and test portability approach are more than a quality improvement."
 authors:
   - "steve-poole"
-image: "banner1.png"
+image: "banner1.jpg"
 categories:
   - "Testing"
 related_posts:

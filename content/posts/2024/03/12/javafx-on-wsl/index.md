@@ -5,7 +5,7 @@ lastmod: "2024-03-14T17:46:26+00:00"
 description: "What does it take to run JavaFX applications on exotic Linux systems like the Windows Subsystem for Linux or some embedded systems?"
 authors:
   - "christopher-schnick"
-image: "Screen-Shot-2021-05-17-at-12.15.51-AM.png"
+image: "Screen-Shot-2021-05-17-at-12.15.51-AM.jpg"
 categories:
   - "Desktop"
   - "Java"

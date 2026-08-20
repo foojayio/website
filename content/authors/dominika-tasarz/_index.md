@@ -1,7 +1,7 @@
 ---
 title: "Dominika Tasarz"
 avatar: "dominika-tasarz.png"
-avatarFull: "dominika-tasarz-full.png"
+avatarFull: "dominika-tasarz-full.jpg"
 bio: "I'm a community builder focused on growing the global Java and Jakarta EE ecosystems. I specialise in community strategy, open source engagement and developer-focused technical marketing, building strong and collaborative communities through events, content and advocacy. I currently work as a Senior Developer Advocate at Azul, supporting community growth and ecosystem engagement around Azul Payara Community & Jakarta EE."
 bluesky: "https://bsky.app/profile/payaracommunity.bsky.social"
 mastodon: "https://mastodon.social/@PayaraCommunity"

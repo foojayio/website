@@ -5,7 +5,7 @@ lastmod: "2025-10-30T12:06:35+00:00"
 description: "This newsletter focuses on examining how AI enhances productivity through enterprise studies, agentic system architecture, attack vectors, and more!"
 authors:
   - "miro-wengner"
-image: "ai-insider-1.png"
+image: "ai-insider-1.jpg"
 categories:
   - "AI"
   - "Design Patterns"

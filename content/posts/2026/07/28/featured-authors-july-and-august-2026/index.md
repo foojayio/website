@@ -5,7 +5,7 @@ lastmod: "2026-07-28T11:03:57+00:00"
 description: "Foojay wouldn't exist without the many contributions from its community, whether it's a single post or an ongoing stream of knowledge sharing. That's why…"
 authors:
   - "frankdelporte"
-image: "foojay-featured-authors.png"
+image: "foojay-featured-authors.jpg"
 categories:
   - "Foojay"
 related_posts:

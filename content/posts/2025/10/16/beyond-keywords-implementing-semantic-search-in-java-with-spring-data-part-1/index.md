@@ -29,7 +29,7 @@ It works by turning text into embeddings, vectors (arrays of numbers) that captu
 With recent vector query support in Spring Data, Java developers can build semantic search using familiar repositories and queries.
 
 In this article, we'll build a small **movie search** app that understands intent beyond keywords. You'll type queries like "movie with pyramids in Egypt" or "a science fiction movie about rebels fighting an empire in space" and the app will surface relevant titles.
-![](Screenshot-2025-10-09-at-12.11.48-PM.png)
+![](Screenshot-2025-10-09-at-12.11.48-PM.jpg)
 
 Along the way, we'll explore how to generate embeddings, perform vector searches, and retrieve the most relevant results.
 

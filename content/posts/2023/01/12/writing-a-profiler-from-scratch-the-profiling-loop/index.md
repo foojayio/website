@@ -5,7 +5,7 @@ lastmod: "2023-01-12T15:36:10+00:00"
 description: "How do profilers like async-profiler work? How to write your own? This is the second part, covering wall-clock profiling."
 authors:
   - "johannes-bechberger"
-image: "java-coffee-cup-on-fire-without-marks-from-scratch.png"
+image: "java-coffee-cup-on-fire-without-marks-from-scratch.jpg"
 categories:
   - "Developer Tools"
   - "Performance"

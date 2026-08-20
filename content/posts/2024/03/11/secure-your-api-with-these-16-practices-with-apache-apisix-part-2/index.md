@@ -6,7 +6,7 @@ description: "In this two-post series, I've addressed most of 16 different pract
 canonical: "https://blog.frankel.ch/secure-api-practices-apisix/2/"
 authors:
   - "nicolas-frankel"
-image: "img-BuLDzx81CexYQAzkaF36h-1.png"
+image: "img-BuLDzx81CexYQAzkaF36h-1.jpg"
 categories:
   - "Security"
 related_posts:

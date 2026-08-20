@@ -6,7 +6,7 @@ description: "String manipulation is improving (JEP 430), but Manifold can help 
 canonical: "https://debugagent.com/java-string-templates-today"
 authors:
   - "shai-almog"
-image: "thumbnail-19.png"
+image: "thumbnail-19.jpg"
 categories:
   - "Developer Tools"
   - "Tutorials"

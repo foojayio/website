@@ -4,7 +4,7 @@ date: "2026-02-02T22:52:20+00:00"
 description: "Is open source hitting a watershed moment? After 8,000 developers converged for FOSDEM 2026, it’s clear that legal obligations and supply chain security are rewriting the rules. Discover why the hardest problems are no longer technical—they’re about how we sustain and secure the software we ship."
 authors:
   - "steve-poole"
-image: "Gemini_Generated_Image_5oqhzv5oqhzv5oqh.png"
+image: "Gemini_Generated_Image_5oqhzv5oqhzv5oqh.jpg"
 categories:
   - "AI"
   - "Conference"

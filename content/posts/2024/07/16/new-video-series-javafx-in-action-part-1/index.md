@@ -74,4 +74,4 @@ Another supporter is [Oliver Loeffler](https://x.com/Raumzeitfalle) who also pro
 ## Videos on JFX Central
 
 These videos are also added to the [video section of JFX Central](https://www.jfx-central.com/videos), select "JFX In Action" in the "Type" filter. More to come after the summer break...
-![](jfxcentral-videos-940x1024.png)
+![](jfxcentral-videos-940x1024.jpg)

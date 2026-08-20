@@ -6,7 +6,7 @@ description: "Command completion (..) extends regular completion. It lets you di
 canonical: "https://maritvandijk.com/command-completion/"
 authors:
   - "marit-van-dijk"
-image: "command.png"
+image: "command.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Java"

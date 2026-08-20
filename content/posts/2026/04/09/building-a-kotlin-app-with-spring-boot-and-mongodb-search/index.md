@@ -59,7 +59,7 @@ While this article will not delve deeply into all available operators, those int
 ## Load sample dataset
 
 Before starting, you'll need to import the sample dataset, which includes several databases and collections, like the Airbnb list. After setting up your cluster, just click on "Database" in the left menu and choose "Load sample dataset," as shown in the image:  
-![](Screenshot-2026-03-27-at-9.31.10-AM-1024x751.png)
+![](Screenshot-2026-03-27-at-9.31.10-AM-1024x751.jpg)
 
 If everything goes smoothly, after the import, you will see our databases and collections displayed as shown in the image.  
 ![](Screenshot-2026-03-27-at-9.31.42-AM-1024x751.png)

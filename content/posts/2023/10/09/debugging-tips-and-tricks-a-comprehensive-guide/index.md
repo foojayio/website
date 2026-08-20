@@ -6,7 +6,7 @@ description: "Master the art of debugging with strategies like Rubber Ducking, l
 canonical: "https://debugagent.com/debugging-tips-and-tricks-a-comprehensive-guide"
 authors:
   - "shai-almog"
-image: "shaialmog_a_person_wearing_a_tshirt_sitting_on_a_chair_working__cfb7bedb-0a46-4813-a4dd-e9c928e8509a.png"
+image: "shaialmog_a_person_wearing_a_tshirt_sitting_on_a_chair_working__cfb7bedb-0a46-4813-a4dd-e9c928e8509a.jpg"
 categories:
   - "Debugging"
   - "Tutorials"

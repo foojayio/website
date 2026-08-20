@@ -5,7 +5,7 @@ lastmod: "2026-05-26T10:19:43+00:00"
 description: "JWT authentication is everywhere. But rolling it correctly — with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and…"
 authors:
   - "cristobal-escobar"
-image: "bx-jwt.png"
+image: "bx-jwt.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"

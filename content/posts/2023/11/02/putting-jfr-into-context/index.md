@@ -5,7 +5,7 @@ lastmod: "2023-11-02T14:03:26+00:00"
 description: "Have you ever wanted to bring your JFR events into context? Adding information on sessions, user IDs, and more can improve your ability to make sense of all the events in your profile."
 authors:
   - "johannes-bechberger"
-image: "Screenshot-2023-10-19-at-12.28.35-2000x1509-1.png"
+image: "Screenshot-2023-10-19-at-12.28.35-2000x1509-1.jpg"
 categories:
   - "Java Core"
   - "Performance"

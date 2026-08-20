@@ -6,7 +6,7 @@ description: "Parsing JSON in Java (and other formats) can be as easy as in JS. 
 canonical: "https://debugagent.com/revolutionize-json-parsing-in-java-with-manifold"
 authors:
   - "shai-almog"
-image: "thumbnail-18.png"
+image: "thumbnail-18.jpg"
 categories:
   - "Developer Tools"
   - "Tutorials"

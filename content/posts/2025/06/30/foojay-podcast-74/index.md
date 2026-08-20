@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:36:07+00:00"
 description: "Let's have an AI Bingo and talk about ChatGPT, LLM, ML, RAG, MCP, GenAI, and more! This is part 3 of the interviews recorded at the JCON conference in…"
 authors:
   - "frankdelporte"
-image: "episode-74-jcon-part-3.png"
+image: "episode-74-jcon-part-3.jpg"
 categories:
   - "Conference"
   - "LangChain4j"

@@ -48,7 +48,7 @@ Type hierarchy can now be easily accessed in Visual Studio Code! This is a featu
 
 Currently, developers can quickly locate the source code of a library. Now we have expanded this support to unmanaged projects. As long as the library comes from Maven Central repo, we can resolve its sources.
 
-![](sourcelookup.gif)
+![](sourcelookup.webp)
 
 More advanced configurations are supported as well.
 

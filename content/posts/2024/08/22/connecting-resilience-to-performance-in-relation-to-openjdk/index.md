@@ -6,7 +6,7 @@ description: "Given the requirements of the DORA Act, which mandates strong oper
 authors:
   - "geertjan-wielenga"
   - "simonritter"
-image: "dora.png"
+image: "dora.jpg"
 categories:
   - "EU DORA Act"
   - "Java Core"

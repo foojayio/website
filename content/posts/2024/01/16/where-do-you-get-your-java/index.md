@@ -6,7 +6,7 @@ description: "Which Java should you download and use? A brief history of Java, t
 canonical: "https://developer.ibm.com/articles/awb-where-do-you-get-your-java/"
 authors:
   - "rich-hagarty"
-image: "EclipseOpenJ9Performance.png"
+image: "EclipseOpenJ9Performance.jpg"
 categories:
   - "Java"
   - "Opinion"

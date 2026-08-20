@@ -25,7 +25,7 @@ Over the last weeks, we looked at the current development in [Europe](https://fo
 However, the numbers in Germany and Russia have not dropped yet. Here, both the number of people who tested positive and the number of people who died (with a positive COVID-19 test result) have continued to rise.
 
 The number of deaths are significantly higher in Germany (green line) and Russia (purple line) than in spring 2020.  
-[![Daily Covid-19 related deaths in Europe](CW51-software-ecg-number-deaths-europe-17-12.png)](CW51-software-ecg-number-deaths-europe-17-12.png)
+[![Daily Covid-19 related deaths in Europe](CW51-software-ecg-number-deaths-europe-17-12.jpg)](CW51-software-ecg-number-deaths-europe-17-12.jpg)
 
 *Daily Covid-19 related deaths in Europe*{#caption-attachment-36609}
 

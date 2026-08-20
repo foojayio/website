@@ -5,7 +5,7 @@ lastmod: "2024-01-09T12:50:13+00:00"
 description: "Use Liberty Tools for the Eclipse IDE to enable fast, easy, and efficient development of cloud native Java applications with Open Liberty"
 authors:
   - "grace-jansen"
-image: "EclipseLibertyTools1.png"
+image: "EclipseLibertyTools1.jpg"
 categories:
   - "Developer Tools"
   - "Eclipse"

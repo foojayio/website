@@ -5,7 +5,7 @@ lastmod: "2026-03-23T15:13:53+00:00"
 description: "A cleaner, more modern baseline to the Jakarta EE platform, with strong alignment to recent Java versions, improved modularity, and the removal of legacy specifications."
 authors:
   - "ondro-mihalyi"
-image: "jakarta-ee-11-web-1.png"
+image: "jakarta-ee-11-web-1.jpg"
 categories:
   - "Cloud"
   - "Jakarta EE"
@@ -36,7 +36,7 @@ Jakarta EE 11 Web Profile delivers an updated and streamlined set of specificati
   * And many others, with bigger or smaller changes (see the table below)
 * **Deprecation cleanup**: Removal of some EJB features, JAXB support, and Jakarta Faces Managed Beans
 
-![](jakarta-ee-11-web.png) [Full specification list for Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/jakarta-webprofile-spec-11.0#web-profile-definition)
+![](jakarta-ee-11-web.jpg) [Full specification list for Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/jakarta-webprofile-spec-11.0#web-profile-definition)
 
 ### GlassFish: The first compatible implementation for Jakarta EE 11 Web Profile
 

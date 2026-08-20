@@ -7,7 +7,7 @@ canonical: "https://blog.payara.fish/watch-the-recording-enterprise-java-app-dev
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "enterprise-java.png"
+image: "enterprise-java.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"

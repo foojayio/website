@@ -6,7 +6,7 @@ description: "Learn from the experts in this podcast about testing methodologies
 authors:
   - "frankdelporte"
   - "roni-dover"
-image: "podcast-43-guests.png"
+image: "podcast-43-guests.jpg"
 categories:
   - "Podcast"
   - "Testcontainers"

@@ -57,7 +57,7 @@ To address this, we have added a new setting that allows developer to customize 
 
 In the "File" menu of Visual Studio Code, you will see a new option called "New File..." (Note the extra dots at the end). When you click on this, Visual Studio Code will prompt you to select the type of file to add. If you select "New Java class" from the dropdown, Visual Studio Code will generate the basic Java class snippet for you and you can then also pick type of Java file (Class/Interface/Enum/etc). Here is a quick demonstration of the feature.
 
-![](New-File.gif)
+![](New-File.webp)
 
 As part of product improvement process, we recently launched a [Twitter poll](https://twitter.com/foojayio/status/1427179687948734464 "Twitter poll") via [Foojay.io](https://foojay.io/ "Foojay.io"). We really appreciate all the comments and feedback regarding Visual Studio Code Java development experience. There are a few areas we'd like to call out here:
 

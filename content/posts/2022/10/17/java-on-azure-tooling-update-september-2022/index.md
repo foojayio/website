@@ -82,7 +82,7 @@ To enhance the experience for using Azure SDKs with Java Language, we have suppo
 
 To use it, you just need to find the relevant Azure Service and right click with the option "View Azure SDK". And then you can select the relevant SDK to add/update the dependency for your project. Here is a short demo.
 
-![](Open-SDK-Book.gif)
+![](Open-SDK-Book.webp)
 
 ### Feedback and Suggestions
 

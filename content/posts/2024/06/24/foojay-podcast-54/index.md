@@ -6,7 +6,7 @@ description: "Within OpenJDK, there is a whole Java package dedicated to MIDI co
 authors:
   - "frankdelporte"
   - "geert-bevin"
-image: "podcast-guests-java-midi.png"
+image: "podcast-guests-java-midi.jpg"
 categories:
   - "Desktop"
   - "Java Core"

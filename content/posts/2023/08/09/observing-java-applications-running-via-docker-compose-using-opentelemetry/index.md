@@ -5,7 +5,7 @@ lastmod: "2023-08-09T21:55:39+00:00"
 description: "An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files."
 authors:
   - "roni-dover"
-image: "doppleware_someone_watching_a_shipping_container_using_a_telesc_96929aa6-ccc4-478c-bffe-df76d290173e-1-1024x512-1.png"
+image: "doppleware_someone_watching_a_shipping_container_using_a_telesc_96929aa6-ccc4-478c-bffe-df76d290173e-1-1024x512-1.jpg"
 categories:
   - "Observability"
 related_posts:

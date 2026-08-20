@@ -6,7 +6,7 @@ description: "Tests can run limited sets of assertions on your code, or reveal i
 canonical: "https://www.atomicjar.com/2023/10/beyond-pass-fail-a-modern-approach-to-java-integration-testing/"
 authors:
   - "roni-dover"
-image: "1_JAiQsj-ez608WsovCheXVQ-1024x512-1.png"
+image: "1_JAiQsj-ez608WsovCheXVQ-1024x512-1.jpg"
 categories:
   - "Developer Tools"
   - "Observability"
@@ -19,7 +19,7 @@ frozen: false
 
 ## Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!
 
-![](1_JAiQsj-ez608WsovCheXVQ-1024x512.png)
+![](1_JAiQsj-ez608WsovCheXVQ-1024x512.jpg)
 
 Automated testing will assuredly go down in the annals of software development history as one of these industry-changing trends. Although few actually adhere to full-metal, OCD mode, TDD discipline (I am in awe of those that do, just to be clear), most developers make sure to prioritize and include testing in their dev cycle.
 
@@ -178,7 +178,7 @@ The test passed, but looking at the code we see the test result analysis already
 ![](1_ZxlVxN3FZws-361kp-ltag-1024x555.png)
 
 If I am interested in learning more about exactly what is going on, the tracing integration allows me to to drill into the anatomy of the requests simulated by the tests to understand exactly what is going on and what could be wrong:
-![](1_ax_VIStcYPD9ouT6r5n5VQ-1024x832.png)
+![](1_ax_VIStcYPD9ouT6r5n5VQ-1024x832.jpg)
 
 #### Enter Continuous Feedback
 

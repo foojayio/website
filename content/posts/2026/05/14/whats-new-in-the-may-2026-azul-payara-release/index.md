@@ -5,7 +5,7 @@ lastmod: "2026-05-14T17:01:44+00:00"
 description: "The May 2026 Payara Platform release delivers Azul Payara Server 7 and Payara Micro 7 as the first commercially supported Jakarta EE 11 runtime certified across all three profiles, plus a critical security fix across every supported branch from Payara 4 through 7."
 authors:
   - "luqman-saeed"
-image: "Whats-New-in-the-Payara-Platform-April-2026-Release.png"
+image: "Whats-New-in-the-Payara-Platform-April-2026-Release.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"

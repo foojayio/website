@@ -5,7 +5,7 @@ lastmod: "2024-10-30T15:12:43+00:00"
 description: "Learn how to write a Java CLI shebang script and run it from the terminal, leveraging Java 11 and beyond to create simple, effective command-line tools for developers."
 authors:
   - "bazlur-rahman"
-image: "Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137-6b73-4ed7-9c61-090471b880f4.png"
+image: "Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137-6b73-4ed7-9c61-090471b880f4.jpg"
 categories:
   - "Java"
 related_posts:

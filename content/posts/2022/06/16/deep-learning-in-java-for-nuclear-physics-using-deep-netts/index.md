@@ -5,7 +5,7 @@ lastmod: "2023-07-11T09:38:24+00:00"
 description: "We use the Deep Netts library to implement our neural networks to do track classification, using Multi-Layer Perceptron (MLP) Neural Network."
 authors:
   - "gagik-gavalian"
-image: "CLAS12-side.png"
+image: "CLAS12-side.jpg"
 categories:
   - "Deep Netts"
   - "Machine Learning"
@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-![](CLAS12-side.png)
+![](CLAS12-side.jpg)
 
 ## Background
 

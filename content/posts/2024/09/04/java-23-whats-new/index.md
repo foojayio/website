@@ -6,7 +6,7 @@ description: "The latest version of Java is rather sparse in terms of new featur
 canonical: "https://www.loicmathieu.fr/wordpress/en/informatique/java-23-quoi-de-neuf/"
 authors:
   - "loic-mathieu"
-image: "java23.png"
+image: "java23.jpg"
 categories:
   - "Java"
   - "JDK 23"

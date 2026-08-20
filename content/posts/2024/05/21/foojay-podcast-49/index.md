@@ -9,7 +9,7 @@ authors:
   - "mgrygles"
   - "r-fichtner"
   - "soham-dasgupta"
-image: "foojay-jcon.png"
+image: "foojay-jcon.jpg"
 categories:
   - "Conference"
   - "Java Core"

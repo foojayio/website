@@ -5,7 +5,7 @@ lastmod: "2024-11-22T14:31:12+00:00"
 description: "In this part, we have four new interviews for you! Learn more about JavaFX combined with Scala, Swing, React, trains, scientific research, banking, and more..."
 authors:
   - "frankdelporte"
-image: "jfxinaction-part-2.png"
+image: "jfxinaction-part-2.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

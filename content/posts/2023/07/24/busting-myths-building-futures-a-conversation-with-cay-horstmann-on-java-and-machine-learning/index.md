@@ -5,7 +5,7 @@ lastmod: "2023-07-24T15:37:44+00:00"
 description: "Cay Horstmann shares his experiences with Java, his writing process for technical books, the challenges of teaching Java, and discusses its role in education."
 authors:
   - "bazlur-rahman"
-image: "Cay-Horstmann.png"
+image: "Cay-Horstmann.jpg"
 categories:
   - "Interviews"
 related_posts:

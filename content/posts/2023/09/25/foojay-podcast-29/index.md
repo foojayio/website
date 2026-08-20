@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:57:30+00:00"
 description: "Every conference has several talks about these technologies, and on Foojay, you can find multiple posts about it. Let's take a look at it from the Java point of view."
 authors:
   - "frankdelporte"
-image: "episode_29_guests.png"
+image: "episode_29_guests.jpg"
 categories:
   - "Deep Netts"
   - "Machine Learning"
@@ -62,7 +62,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](episode_29_guests-1024x574.png)
+![](episode_29_guests-1024x574.jpg)
 
 ## Content
 

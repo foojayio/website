@@ -5,7 +5,7 @@ lastmod: "2025-12-22T10:42:43+00:00"
 description: "Your code is safe, but are your dependencies? Part 3 reveals how SonarQube Advanced Security detects hidden CVEs, manages licenses, and generates SBOMs to secure your Java supply chain."
 authors:
   - "jonathan-vila"
-image: "Gemini_Generated_Image_y2e57wy2e57wy2e5-1.png"
+image: "Gemini_Generated_Image_y2e57wy2e57wy2e5-1.jpg"
 categories:
   - "Developer Tools"
   - "Security"

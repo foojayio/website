@@ -5,7 +5,7 @@ lastmod: "2021-10-15T08:19:20+00:00"
 description: "Quickly and thoroughly learn how to simplify the development and deployment of Cloud-native SpringBoot applications on Kubernetes."
 authors:
   - "geertjan-wielenga"
-image: "effortless-cloud-skaffold-835x1024.png"
+image: "effortless-cloud-skaffold-835x1024.jpg"
 categories:
   - "Book Review"
   - "Books"
@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="effortless-cloud-skaffold-835x1024.png" class="size-large is-resized" width="299" height="367" >}}
+{{< img src="effortless-cloud-skaffold-835x1024.jpg" class="size-large is-resized" width="299" height="367" >}}
 
 In "[Effortless Cloud-Native App Development Using Skaffold](https://www.packtpub.com/product/effortless-cloud-native-app-development-using-skaffold/9781801077118)", Ashish Choudhary provides a thorough overview of [Skaffold](https://skaffold.dev/), with the book's subtitle clearly defining its agenda: "Simplify the development and deployment of Cloud-native SpringBoot applications on Kubernetes with Skaffold".
 

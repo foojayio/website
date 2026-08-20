@@ -8,7 +8,7 @@ authors:
   - "marcus-hellberg"
   - "nicolas-frankel"
   - "simon-martinelli"
-image: "part5-1024x781.png"
+image: "part5-1024x781.jpg"
 categories:
   - "Cloud"
   - "DevOps"

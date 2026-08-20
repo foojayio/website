@@ -5,7 +5,7 @@ lastmod: "2023-07-28T07:59:53+00:00"
 description: "The Raspberry Pi, Pi4J and JBang are a perfect combination to experiment with electronics. Find out more here!"
 authors:
   - "frankdelporte"
-image: "controllingled.png"
+image: "controllingled.jpg"
 categories:
   - "Embedded"
   - "JBang"

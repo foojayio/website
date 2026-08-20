@@ -44,7 +44,7 @@ The 99%ile single microservice end-to-end latency for Chronicle Queue Enterprise
 
 To visualise this timeframe, a signal travels a distance of 750 m. This can be compared to a 10-minute walk in central London.
 
-![](Screen-Shot-2022-11-22-at-9.25.31-AM.png)
+![](Screen-Shot-2022-11-22-at-9.25.31-AM.jpg)
 
 #### Microservice Latency Using Kafka
 

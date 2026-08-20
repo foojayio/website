@@ -4,7 +4,7 @@ date: "2026-05-19T13:32:00+00:00"
 description: "The latest version of Eclipse GlassFish 8.0.2 was released on May 5, 2026, with fixes for several critical vulnerabilities. It builds on top of a lot of…"
 authors:
   - "ondro-mihalyi"
-image: "glassfish-802-banner-2-smaller.png"
+image: "glassfish-802-banner-2-smaller.jpg"
 categories:
   - "Jakarta EE"
 related_posts:
@@ -17,7 +17,7 @@ frozen: false
 
 The latest version of Eclipse GlassFish 8.0.2 was released on May 5, 2026, with fixes for several critical vulnerabilities. It builds on top of a lot of subtle work and improvements in GlassFish components like the Eclipse Grizzly HTTP framework, or in related components like Eclipse OpenMQ message broker and Eclipse ORB (CORBA) for remote EJB calls. The release of GlassFish 8.0.2 serves as further evidence that GlassFish remains an actively evolving platform, backed by the dedicated maintenance and commercial support of the OmniFish team. As I was deeply involved in this release, I'd like to share a deeper look into the technical advancements within this new version.  
 
-{{< img src="glassfish-802-banner-2-smaller.png" class="aligncenter size-full is-resized" width="791" height="483" style="width:433px;height:auto" >}}
+{{< img src="glassfish-802-banner-2-smaller.jpg" class="aligncenter size-full is-resized" width="791" height="483" style="width:433px;height:auto" >}}
 
 ## Security fixes
 

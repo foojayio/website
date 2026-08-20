@@ -5,7 +5,8 @@ lastmod: "2025-02-20T10:53:16+00:00"
 description: "Today we introduce a community manager for all things Raspberry Pi on foojay, Frank Delporte. He'd love to publish your Java/Raspberry Pi content on foojay!"
 authors:
   - "geertjan-wielenga"
-image: "vik.png"
+  - "frankdelporte"
+image: "vik.jpg"
 categories:
   - "Interviews"
   - "JavaFX"

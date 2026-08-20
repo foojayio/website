@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "pratik-patel"
   - "zoran-sevarac"
-image: "20250428_Java_AI.png"
+image: "20250428_Java_AI.jpg"
 categories:
   - "Events"
   - "Machine Learning"

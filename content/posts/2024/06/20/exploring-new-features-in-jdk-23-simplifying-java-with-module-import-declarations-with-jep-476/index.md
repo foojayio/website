@@ -5,7 +5,7 @@ lastmod: "2024-06-20T16:15:54+00:00"
 description: "JEP 476 represents a significant step towards simplifying Java programming by reducing boilerplate code and improving readability."
 authors:
   - "bazlur-rahman"
-image: "Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137-6b73-4ed7-9c61-090471b880f4.png"
+image: "Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137-6b73-4ed7-9c61-090471b880f4.jpg"
 categories:
   - "Java"
   - "JEPs"

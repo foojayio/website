@@ -66,7 +66,7 @@ In addition to our roadmap, we also have several new features to showcase for th
 
 In our roadmap sharing above, we have emphasized how important security is for our developers. With the latest Visual Studio Code update, developers can choose whether or not to trust the workspace. For Java developers, this means when you work in an untrusted workspace, all our Java tools will be in restricted mode and certain capabilities will be disabled. To manage workspace trust, simply open command palette (Ctrl+Shift+P) and run "Workspaces: Manage Workspace Trust" command
 
-![](untrustedspace.gif)
+![](untrustedspace.webp)
 
 ## Java 16 Enabled in Dev Container for Remote Development
 

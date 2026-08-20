@@ -48,7 +48,7 @@ IntelliJ IDEA allows you to debug your reactive projects. Prior to starting the 
 
 Now, when the necessary configurations are there, let's see how the IntelliJ IDEA debugger works with reactive projects. The first thing worth noting is that it detects the Flux and Mono types while debugging. You can see them marked with green icons. Once you click on them, you'll see the results of calculations inside them on the right, in the Variables view.
 
-![ReactiveDebugger](image3.gif)
+![ReactiveDebugger](image3.webp)
 
 It's now possible to evaluate these types. To do so, click the get or collectList link next to the displayed result. The IDE will then instantly compute the reactive stream items.
 

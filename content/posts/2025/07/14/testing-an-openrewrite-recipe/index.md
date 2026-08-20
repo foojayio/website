@@ -6,7 +6,7 @@ description: "Let's migrate ad hoc test code to rely on OpenRewrite's provided c
 canonical: "https://blog.frankel.ch/openrewrite-recipes/3/"
 authors:
   - "nicolas-frankel"
-image: "cover-testing-1024x683.png"
+image: "cover-testing-1024x683.jpg"
 categories:
   - "OpenRewrite"
 related_posts:

@@ -5,7 +5,7 @@ lastmod: "2023-12-29T05:47:05+00:00"
 description: "Learn about the website that gives an overview of JFR events, with descriptions from the OpenJDK, their properties, examples, configurations, and the JDK versions in which every event is present."
 authors:
   - "johannes-bechberger"
-image: "image-10-2000x1604-1.png"
+image: "image-10-2000x1604-1.jpg"
 categories:
   - "Developer Tools"
   - "Machine Learning"

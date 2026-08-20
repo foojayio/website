@@ -5,7 +5,7 @@ lastmod: "2021-10-11T14:04:44+00:00"
 description: "Pitfalls, failures, and disadvantages of microservices, a one stop reference and gateway for principal architects for decisions of go/no-go."
 authors:
   - "sumith-puri"
-image: "microservices.png"
+image: "microservices.jpg"
 categories:
   - "DevOps"
   - "Microservices"

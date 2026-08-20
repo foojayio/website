@@ -76,7 +76,7 @@ Still unclear? Let's take a look at an analogy.
 
 To illustrate object allocation, let's imagine a set of shelves, which you want to add your coffee mugs to:
 
-![](Screenshot-2023-09-22-at-5.40.48-PM.png)  
+![](Screenshot-2023-09-22-at-5.40.48-PM.jpg)  
 *Image 1. Mugs organised on a shelf, representing objects in a system*
 
 Each coffee mug represents an object in a system, and the person organising the shelves can symbolise the JVM managing memory. Similar to a computer's memory having limited space, the shelf too has limited capacity for storing your mugs.

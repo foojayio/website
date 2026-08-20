@@ -6,7 +6,7 @@ description: "WebAssembly is already running inside Java applications, most deve
 authors:
   - "andrea-peruffo"
   - "frankdelporte"
-image: "edit-98-webassembly.png"
+image: "edit-98-webassembly.jpg"
 categories:
   - "Podcast"
 related_posts:

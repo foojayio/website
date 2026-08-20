@@ -5,7 +5,7 @@ lastmod: "2023-10-02T08:44:29+00:00"
 description: "Between 2nd and 17th September, I gave three talks in three different cities!"
 authors:
   - "johannes-bechberger"
-image: "image-14.png"
+image: "image-14.jpg"
 categories:
   - "Events"
 related_posts:
@@ -23,7 +23,7 @@ Between 2nd and 17th September, I gave three talks in three different cities:
 
 I traveled from Karlsruhe to Oslo (via Stuttgart Airport) and from Oslo to Hanover via plane, then to Hamburg, Hanover, back to Hamburg, and the end via Bonn back to Karlsruhe via train:  
 
-{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/09/image-14.png" class="aligncenter size-full is-resized" width="422" height="675" style="width:422px;height:675px" caption="This was my first time traveling to a conference by plane because traveling to Oslo by train takes far longer (20 hours or more)." >}}
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/09/image-14.jpg" class="aligncenter size-full is-resized" width="422" height="675" style="width:422px;height:675px" caption="This was my first time traveling to a conference by plane because traveling to Oslo by train takes far longer (20 hours or more)." >}}
 
 This was my second two-week-long tour giving talks, after my tour d'Europe in May/June this year (see [Report of my small Tour d'Europe](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/)), but this time it consisted solely of talks at conferences. The following is a short report of my trip that saw me brewing beer, giving a talk at one of my favorite conferences, and visiting Hamburg for the first time.
 

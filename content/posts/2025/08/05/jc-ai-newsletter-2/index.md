@@ -5,7 +5,7 @@ lastmod: "2025-10-14T05:40:12+00:00"
 description: "The JC-AI Newsletter Vol.2 brings again a very interesting collection of articles worth considering."
 authors:
   - "miro-wengner"
-image: "ai-insider-1.png"
+image: "ai-insider-1.jpg"
 categories:
   - "AI"
   - "Design Patterns"

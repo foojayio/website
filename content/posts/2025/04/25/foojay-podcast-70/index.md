@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "geertjan-wielenga"
   - "gerrit-grunwald"
-image: "episode-70-foojay-5.png"
+image: "episode-70-foojay-5.jpg"
 categories:
   - "Foojay"
   - "Podcast"

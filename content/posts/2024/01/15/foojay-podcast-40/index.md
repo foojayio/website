@@ -7,7 +7,7 @@ authors:
   - "deepu-sasidharan"
   - "frankdelporte"
   - "matt-raible"
-image: "podcast-java-for-beginners-guests.png"
+image: "podcast-java-for-beginners-guests.jpg"
 categories:
   - "Java Beginner"
   - "Podcast"

@@ -30,7 +30,7 @@ We can open the GitLab Merge Requests using the **GitLab** logo on the left, or 
 
 ![Open Merge Requests from logo](logo.png)
 
-![Open Show GitLab Merge Requests from menu](menu.png)
+![Open Show GitLab Merge Requests from menu](menu.jpg)
 
 If we aren't already logged in to GitLab via IntelliJ IDEA, the GitLab Merge Requests tool window will prompt us to **Log In**.
 
@@ -40,9 +40,9 @@ We can log into GitLab with a token. When we click **Generate** , this will take
 
 ![Generate a token](generate.png)
 
-![Create Personal Access Token](personal-access-token.png)
+![Create Personal Access Token](personal-access-token.jpg)
 
-![Copy the token](copied.png)
+![Copy the token](copied.jpg)
 
 We can copy the token into the **Token** field in the popup and click **Log In**.
 
@@ -54,15 +54,15 @@ We can also log in to our GitLab account in the **Settings** . Open the Settings
 
 Click **Add Account** (**⌘N** on macOS \| **Alt+Insert** on Windows/Linux) to add an account if there is no account logged in, or click the + button at the top left to add an account. In the popup, add the **Server** if needed, paste the token from GitLab into the **Token** field in the popup and click **Log In**.
 
-![Add GitLab account in Settings](add-account.png)
+![Add GitLab account in Settings](add-account.jpg)
 
-![Paste the token into the Token field in Settings](settings-token.png)
+![Paste the token into the Token field in Settings](settings-token.jpg)
 
-![Account added in Settings](settings-account.png)
+![Account added in Settings](settings-account.jpg)
 
 Once we're logged in, the GitLab Merge Requests tool window will show all open Merge Requests for the GitLab repository.
 
-![GitLab Merge Requests tool window](mr-tool-window.png)
+![GitLab Merge Requests tool window](mr-tool-window.jpg)
 
 We can change the search criteria to look for specific Merge Requests. We can use predefined filters, or search for something more specific.
 
@@ -72,9 +72,9 @@ We can change the search criteria to look for specific Merge Requests. We can us
 
 If the Merge Request has assignees and/or reviewers assigned, we can see them here.
 
-![Assignee](assignee.png)
+![Assignee](assignee.jpg)
 
-![Reviewer](reviewer.png)
+![Reviewer](reviewer.jpg)
 
 We can see the details of a specific Merge Request by double-clicking on it.
 
@@ -86,19 +86,19 @@ We can go back to the list of search results by clicking the project name in the
 
 Usually, you'll want to look for open Merge Requests, since these are the ones that need attention. Let's double-click, or press **Enter**, on one of these Merge Requests.
 
-![Open Merge Requests](open.png)
+![Open Merge Requests](open.jpg)
 
 If the Merge Request does not have a reviewer assigned, we can assign one from the Merge Request tool window in IntelliJ IDEA.
 
 Click the three dots at the bottom left of the Merge Request details and select the action **Request Review**. From the list that pops up, select the reviewer(s) to assign this Merge Request to.
 
-![Request Review](request-review.png)
+![Request Review](request-review.jpg)
 
-![Assign reviewer](assign-reviewer.png)
+![Assign reviewer](assign-reviewer.jpg)
 
 We can see the files that have been changed in the Merge Request in the bottom left window, and the timeline in the main editor pane.
 
-![Changed files and timeline](changed-files.png)
+![Changed files and timeline](changed-files.jpg)
 
 We can also select a file to see the diff as well as the comments for that file. We can go back to the timeline by clicking **View Timeline**.
 
@@ -106,15 +106,15 @@ The timeline shows the same information as the GitLab Merge Request activity pag
 
 It also shows the result of any checks that were run. We can go to the details to see which checks failed, and even click them to go straight to the failing check on GitLab, so we can look at the details.
 
-![Checks failed](checks.png)
+![Checks failed](checks.jpg)
 
 We can open the Merge Request in our browser in several ways. We can right-click the Merge Request number and select **Open in Browser**.
 
 Alternatively, we can open the Merge Request in our browser by right-clicking it, either when it's already open, or in the list of Merge Requests and selecting **Open Merge Request in Browser**.
 
-![Open on GitLab](open-on-gitlab.png)
+![Open on GitLab](open-on-gitlab.jpg)
 
-![Open in browser](open-in-browser.png)
+![Open in browser](open-in-browser.jpg)
 
 IntelliJ IDEA also shows if there are any conflicts, so we know if this request is safe to merge or not.
 
@@ -124,19 +124,19 @@ We can open any of the files that make up the Merge Request, and IntelliJ IDEA w
 
 Alternatively, we can open the diff view by selecting the file and using the shortcut for **Show Diff** (**⌘D** on macOS \| **Ctrl+D** on Windows/Linux).
 
-![Show diff](diff.png)
+![Show diff](diff.jpg)
 
 If the Merge Request contains changes to multiple files, we can navigate between those files.
 
 We can do so using the arrows at the top of the diff viewer, or using the shortcuts to **Compare Next File** (**⌃⇧→** on macOS \| **Alt+→** on Windows/Linux) or **Compare Previous File** (**⌃⇧←** on macOS \|**Alt+←** on Windows/Linux).
 
-![Navigate between files](navigate-between-files.png)
+![Navigate between files](navigate-between-files.jpg)
 
 If the Merge Request consists of multiple commits, we can see the individual commits in the **Changes from** dropdown list.
 
 We can look at the changes for an individual commit if we want.
 
-![Multiple commits](commits.png)
+![Multiple commits](commits.jpg)
 
 We can also see the number of comments for the Merge Request, and for each file.
 
@@ -144,7 +144,7 @@ We can **Hide All Windows** (**⇧⌘F12** on macOS \| **Ctrl+Shift+F12** on Win
 
 Alternatively, we can reopen the Merge Requests window by opening the Recent Files dialog (**⌘ E** on macOS \| **Ctrl+E** on Windows/Linux), which also lets us open up any of the Tool Windows. Here we can search for "merge" to find the Merge Request tool window.
 
-![Recent files](recent-files.png)
+![Recent files](recent-files.jpg)
 
 Let's look at comments on our Merge Request.
 
@@ -154,57 +154,57 @@ We can see these comments inside IntelliJ IDEA too.
 
 We might need to refresh our Merge Request window, either using the shortcut to **Refresh Reviews** (**⌘R** on macOS \| **Ctrl+F5** on Windows/Linux) or by right-clicking the Merge Request window and selecting **Refresh Merge Request**.
 
-![Comment from GitLab](comment-from-gitlab.png)
+![Comment from GitLab](comment-from-gitlab.jpg)
 
-![Refresh reviews](refresh-reviews.png)
+![Refresh reviews](refresh-reviews.jpg)
 
 We can also add comments from inside IntelliJ IDEA. We can place high-level comments, like the comment we just placed from GitLab.
 
-![Comment from IntelliJ IDEA](comment-from-intellij-idea.png)
+![Comment from IntelliJ IDEA](comment-from-intellij-idea.jpg)
 
 We might also want to add comments on particular parts of the code. We can do so from inside IntelliJ IDEA by clicking on the plus in the gutter of the diff viewer. For example, let's add a comment to the current Merge Request.
 
-![Inline comment](inline-comment.png)
+![Inline comment](inline-comment.jpg)
 
 We can edit or delete comments. We can also reply to comments or resolve a comment that is no longer relevant, for example, if the code has been updated in line with the comment.
 
-![Working with comments](edit.png)
+![Working with comments](edit.jpg)
 
 From the diff viewer, we can submit our review and approve the Merge Request if we think it's ready to be merged.
 
-![Submit Review and Approve](approve.png)
+![Submit Review and Approve](approve.jpg)
 
 One feature that's really helpful when we're reviewing a Merge Request is that we can check out the code that is in the Merge Request. In this project, I'm currently on the `main` branch. Let's check out the branch for this Merge Request.
 
-![Check out branch locally](checkout.png)
+![Check out branch locally](checkout.jpg)
 
 With the branch checked out locally, we can navigate the code related to this Merge Request. This lets us not only look at the code, but also make sure that the project still builds and tests pass. We can potentially make changes too.
 
-![Build success](build.png)
+![Build success](build.jpg)
 
 Finally, let's look at how to finish off the Merge Request.
 
 If a Merge Request is no longer relevant, and we're not going to take the changes that went into the Merge Request, we can close it. We can do so by clicking the three dots at the bottom left of the Merge Request tool window and selecting **Close Merge Request**.
 
-![Close](close.png)
+![Close](close.jpg)
 
 If the Merge Request is ready, meaning all the checks have passed, questions have been answered and requested changes to the code have been made, we can merge it. We can do so by clicking the **Merge** button at the bottom left of the Merge Request window.
 
 We also have the option to **Squash and Merge**, meaning all commits will be combined into a single commit when merging. We can add our own commit message for the merge, or edit the default one if we want to.
 
-![Merge](merge.png)
+![Merge](merge.jpg)
 
-![Edit commit message](commit-message.png)
+![Edit commit message](commit-message.jpg)
 
 The Merge Request will be merged, and if we do a **Fetch** we can see the updated branches for this repository.
 
-![Fetch](fetch.png)
+![Fetch](fetch.jpg)
 
-![Updated branches](updated-branches.png)
+![Updated branches](updated-branches.jpg)
 
 We can see in our browser that the Merge Request has been closed.
 
-![Merged](merged.png)
+![Merged](merged.jpg)
 
 As we've seen, we can work with GitLab Merge Requests right inside IntelliJ IDEA.
 

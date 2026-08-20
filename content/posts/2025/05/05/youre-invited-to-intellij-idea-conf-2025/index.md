@@ -23,7 +23,7 @@ frozen: false
 IntelliJ IDEA Conf is a celebration of the developer community, bringing together professionals who strive for excellence in software development. Join us for this free, live online conference and learn from industry leaders and experts on June 3--4, 2025.
 
 You'll be able to learn about a variety of topics, including Core Java, Kotlin, Java and AI, Spring Boot, GraalVM, Gradle, Junit and Kafka. For more details, see the agenda below.
-![](IntelliJ-IDEA-Conf-2025.png)
+![](IntelliJ-IDEA-Conf-2025.jpg)
 
 [Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf)
 

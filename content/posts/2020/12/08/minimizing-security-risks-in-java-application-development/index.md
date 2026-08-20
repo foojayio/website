@@ -5,7 +5,7 @@ lastmod: "2020-12-16T20:29:04+00:00"
 description: "United by their passion for open source, Payara and IBM recently teamed up for a panel discussion on security in Java application development."
 authors:
   - "bmvermeer"
-image: "panel.png"
+image: "panel.jpg"
 categories:
   - "Security"
   - "Videos"

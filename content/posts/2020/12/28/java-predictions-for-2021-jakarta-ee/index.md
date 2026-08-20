@@ -25,7 +25,7 @@ frozen: false
 
 *Steve Millidge, Payara CEO and Founder*
 
-{{< img src="image-1.png" class="size-large is-resized" width="133" height="143" >}}
+{{< img src="image-1.jpg" class="size-large is-resized" width="133" height="143" >}}
 
 ### "I'm very interested in Fibers (part of Project Loom) which will revolutionise the way we use multithreading in Java.
 

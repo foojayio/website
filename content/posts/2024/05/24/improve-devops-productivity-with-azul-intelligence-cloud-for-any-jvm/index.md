@@ -5,7 +5,7 @@ lastmod: "2024-05-24T09:54:53+00:00"
 description: "Intelligence Cloud works with any JVM from any vendor or distribution to slash time from tasks across an enterprise’s entire Java estate."
 authors:
   - "erikcostlow"
-image: "ic-benefits.png"
+image: "ic-benefits.jpg"
 categories:
   - "Java Core"
   - "Performance"

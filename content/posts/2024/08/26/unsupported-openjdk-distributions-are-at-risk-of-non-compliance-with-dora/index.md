@@ -5,7 +5,7 @@ lastmod: "2024-09-05T06:31:09+00:00"
 description: "Read the only logical conclusion of reading DORA in the context of OpenJDK, assuming that it has meaning and intent in the context of OpenJDK or any ICT asset that is vulnerable to the risk that DORA seeks to mitigate."
 authors:
   - "geertjan-wielenga"
-image: "dora.png"
+image: "dora.jpg"
 categories:
   - "EU DORA Act"
   - "Java Core"

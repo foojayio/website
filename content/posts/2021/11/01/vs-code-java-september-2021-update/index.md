@@ -66,13 +66,13 @@ When you're typing a dependency in "dependencies" closure, the extension will au
 
 When opening a Groovy Gradle file, the Gradle language server will start and provide language features for you. Basically, we offer Groovy syntax highlighting (using VS Code default style) in Gradle files. After language server starts, it will analyze the opened Gradle file and provide semantic tokens information, providing more precise highlighting results.
 
-![](syntax.gif)
+![](syntax.webp)
 
 #### Document outline
 
 The Gradle language server will provide the document outline for the current Gradle file. This type of view will help you to navigate to any part of the Gradle file easily
 
-![](documentoutline.gif)
+![](documentoutline.webp)
 
 #### Error reporting
 
@@ -93,7 +93,7 @@ Now, developers can simply use the lightbulb icon (Quick Fix) to generate common
 * Generate toString()
 
 Here is a quick demo:  
-![](codeactions.gif)
+![](codeactions.webp)
 
 ### Feedback and Suggestions
 

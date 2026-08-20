@@ -5,7 +5,7 @@ lastmod: "2025-11-13T09:07:48+00:00"
 description: "SouJava, the Brazil JUG, was founded in 1999, is recognized as the world’s largest Java User Group with 40,000 members."
 authors:
   - "frankdelporte"
-image: "podcast-guests-brazil-jug.png"
+image: "podcast-guests-brazil-jug.jpg"
 categories:
   - "JUGs"
   - "Podcast"

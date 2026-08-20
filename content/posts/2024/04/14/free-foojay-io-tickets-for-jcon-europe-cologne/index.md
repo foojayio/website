@@ -18,7 +18,7 @@ frozen: false
 ---
 
 [Welcome to JCON EUROPE](https://2024.europe.jcon.one/) (May 13 - 16, 2024) - a conference and unique platform to come together with Java developers from all over the world to network, learn from each other and develop your personal skills. At JCON EUROPE, we create room for complex topics to unfold. Literally, hosted in a multiplex movie theater, Java code, concepts and programming are brought to life on impressively large cinema screens.
-[![](image-1024x263.png)](https://2024.europe.jcon.one/)
+[![](image-1024x263.jpg)](https://2024.europe.jcon.one/)
 
 What makes JCON EUROPE truly special is the strong community that characterizes the conference. Organized and hosted by developers for developers, the inclusive atmosphere makes the difference, coined by a strong and joint passion that drives progress and creates value for everyone on site.
 

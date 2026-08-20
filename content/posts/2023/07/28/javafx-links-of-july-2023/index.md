@@ -6,7 +6,7 @@ description: "Changes to the JavaFX core, new and enhanced applications, games, 
 canonical: "https://webtechie.be/post/2023-07-28-javafx-links-of-july-2023/"
 authors:
   - "frankdelporte"
-image: "dockable.png"
+image: "dockable.jpg"
 categories:
   - "JavaFX"
 related_posts:

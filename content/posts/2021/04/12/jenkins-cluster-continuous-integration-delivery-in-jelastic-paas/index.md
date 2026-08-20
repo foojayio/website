@@ -5,7 +5,7 @@ lastmod: "2021-09-16T14:50:47+00:00"
 description: "Automate Java applications continuous integration and delivery with pre-configured master-slave Jenkins cluster from Jelastic PaaS."
 authors:
   - "tetiana-fydorenchyk"
-image: "Jenkins-Cluster-Hosting-for-Continuous-Integration-and-Delivery.png"
+image: "Jenkins-Cluster-Hosting-for-Continuous-Integration-and-Delivery.jpg"
 categories:
   - "DevOps"
   - "Jelastic"

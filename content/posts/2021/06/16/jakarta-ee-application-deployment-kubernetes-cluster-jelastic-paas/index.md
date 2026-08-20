@@ -5,7 +5,7 @@ lastmod: "2021-09-16T14:47:03+00:00"
 description: "Explore how to deploy the Jakarta EE projects to Kubernetes cluster within Jelastic PaaS using Cargo Tracker as an example."
 authors:
   - "tetiana-fydorenchyk"
-image: "2-3-1.png"
+image: "2-3-1.jpg"
 categories:
   - "DevOps"
   - "Jakarta EE"

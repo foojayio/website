@@ -5,7 +5,7 @@ lastmod: "2025-09-12T09:09:14+00:00"
 description: "The name “Stochastic AI Agility” suggests that the output of using AI-LLM definitely contributes to the goal, but the impact may not be exactly predicted."
 authors:
   - "miro-wengner"
-image: "adp.png"
+image: "adp.jpg"
 categories:
   - "Agile"
   - "AI"

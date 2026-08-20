@@ -5,7 +5,7 @@ lastmod: "2025-12-22T13:20:16+00:00"
 description: "What if work-life balance is a myth, and the real secret is just... life? In this Foojay Podcast we're stepping away from pure code and diving into…"
 authors:
   - "frankdelporte"
-image: "podcast.png"
+image: "podcast.jpg"
 categories:
   - "Podcast"
 related_posts:

@@ -5,7 +5,7 @@ lastmod: "2024-06-18T10:42:28+00:00"
 description: "An exciting new AI related feature for Java developers on Visual Studio Code."
 authors:
   - "nick-zhu"
-image: "pack.png"
+image: "pack.jpg"
 categories:
   - "Java"
   - "Tools"
@@ -113,7 +113,7 @@ If you want to reset the coverage data before every coverage execution, you can 
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.jpg)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.jpg)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 

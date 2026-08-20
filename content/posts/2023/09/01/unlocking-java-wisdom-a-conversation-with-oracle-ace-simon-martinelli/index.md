@@ -5,7 +5,7 @@ lastmod: "2023-09-01T16:00:04+00:00"
 description: "Explore insights from Simon Martinelli, Oracle ACE Associate, as he discusses his journey in Java development, the importance of simplicity in software architecture, and the value of mentoring."
 authors:
   - "bazlur-rahman"
-image: "Simon-Martinelli.png"
+image: "Simon-Martinelli.jpg"
 categories:
   - "Interviews"
 related_posts:

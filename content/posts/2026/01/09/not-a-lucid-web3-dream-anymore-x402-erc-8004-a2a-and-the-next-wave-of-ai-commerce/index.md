@@ -762,7 +762,7 @@ It aims to provide a place where agents can act as economic actors: they communi
 
 ### **How DayDreams structures the stack**
 
-![Lab scene](lab.png)
+![Lab scene](lab.jpg)
 
 DayDreams.Systems currently present four core components.
 
@@ -849,7 +849,7 @@ The ecosystem already sketches a wide range of agent types that could live on th
 * Creative agents that output music, art, or video snippets as small digital products.
 * Coordination agents that connect other agents into larger workflows and act as orchestrators.
 
-![Lucid Agents overview](lucid-agents.png)
+![Lucid Agents overview](lucid-agents.jpg)
 
 All of these can operate in the same economy.  
 
@@ -865,7 +865,7 @@ At the center is the Lucid Agent Kit, a commerce SDK for AI agents.
 
 In its current release, Lucid Agents includes bi-directional payment tracking, persistent storage backends (SQLite, in-memory, and Postgres), strict policies for incoming and outgoing payments, an analytics module for financial reporting, and a scheduler for automated paid agent hires.
 
-![Lucid Agents release notes](DayDreamsLucidAgents.png)
+![Lucid Agents release notes](DayDreamsLucidAgents.jpg)
 
 These capabilities help teams run agents as accountable economic actors rather than as one-off scripts.
 
@@ -921,7 +921,7 @@ Each layer can introduce timeouts and sync issues, especially in a decentralized
 
 The message is that the x402 ecosystem still needs significant engineering work to be fully robust, and Lucid's roadmap is shaped around those concrete failure modes.
 
-![Lucid Agents composability model](lucid-agents-compo-models.png)
+![Lucid Agents composability model](lucid-agents-compo-models.jpg)
 
 ### **From SEO to AEO: optimizing for agents instead of humans**
 

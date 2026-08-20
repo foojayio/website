@@ -5,7 +5,7 @@ lastmod: "2025-11-13T08:47:49+00:00"
 description: "The way we search for information and develop software has changed a lot since then as the use of Artificial Intelligence suddenly became a lot easier. What can we expect in the near future, and how can we program AI ourselves with Java? Let's find out…"
 authors:
   - "frankdelporte"
-image: "podcast-47-guests-ai-ml-java.png"
+image: "podcast-47-guests-ai-ml-java.jpg"
 categories:
   - "Machine Learning"
   - "Podcast"

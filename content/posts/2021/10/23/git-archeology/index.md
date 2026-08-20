@@ -45,7 +45,7 @@ A simple `git blame` shows us only the most recent changes. Assuming it's a simp
 
 The above flags are already useful. Most of them are not only available on the command line though, they're usually available in the various editors as well (feel free to show how it's done in your editor and share [on Twitter](https://twitter.com/bmuskalla)).
 
-![IntelliJ VCS Annotation Options](intellij_options.png)
+![IntelliJ VCS Annotation Options](intellij_options.jpg)
 
 Usually, this allows to hide some of the more trivial commits but requires `git` to detect them as such. More often, we (as engineers) can easily gauge whether a commit is relevant for our search based on commit message, author, and coding practices.
 

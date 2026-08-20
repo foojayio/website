@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "rijo-sam"
   - "tom-cools"
-image: "episode-61-thumbnail.png"
+image: "episode-61-thumbnail.jpg"
 categories:
   - "Podcast"
 related_posts:

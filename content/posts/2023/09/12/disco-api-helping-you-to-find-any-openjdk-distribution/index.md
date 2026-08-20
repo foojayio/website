@@ -212,7 +212,7 @@ You can check all available combinations on the [Disco Testing Matrix](https://g
 
 {{< gallery >}}
 matrix-overview.png |  | Part of the overview, the actual page is much longer...
-matrix-workflows-1024x928.png |  | A part of the GitHub Actions
+matrix-workflows-1024x928.jpg |  | A part of the GitHub Actions
 matrix-action-1024x638.png |  | One of the GitHub Actions
 {{< /gallery >}}
 

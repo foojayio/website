@@ -9,7 +9,7 @@ authors:
   - "kadi-grigg"
   - "oumaima-zerouali"
   - "steve-poole"
-image: "episode-100-podcast-of-podcasts-1024x576.png"
+image: "episode-100-podcast-of-podcasts-1024x576.jpg"
 categories:
   - "Foojay"
   - "Java"

@@ -109,7 +109,7 @@ It's common for some developers to navigate between IntelliJ IDEA and Azure Stor
 
 In our latest update, we have supported the action to open local Azure Storage Explorer from our toolkit. You could simply right click the node and find the option of "Open Azure Storage Explorer".
 
-![Toolkit April OpenStorage](Toolkit-April-OpenStorage.gif)
+![Toolkit April OpenStorage](Toolkit-April-OpenStorage.webp)
 
 By doing this, you will navigate into Microsoft Azure Storage Explorer of the desktop version that you have installed and be located with the relevant storage account.
 

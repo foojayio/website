@@ -5,7 +5,7 @@ lastmod: "2026-06-24T10:46:18+00:00"
 description: "BoxLang 1.14.0 ships a lot of exciting features - Dynamic Sets, Ranges, Inner Classes, JSONPath navigation - but one quietly powerful addition will…"
 authors:
   - "cristobal-escobar"
-image: "BoxLang-release-1.14.0-1701-x-1701-px-2-1024x1024.png"
+image: "BoxLang-release-1.14.0-1701-x-1701-px-2-1024x1024.jpg"
 categories:
   - "BoxLang"
   - "Databases"
@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-![](BoxLang-release-1.14.0-2-700x394.png)
+![](BoxLang-release-1.14.0-2-700x394.jpg)
 
 BoxLang 1.14.0 ships a lot of exciting features -- Dynamic Sets, Ranges, Inner Classes, JSONPath navigation -- but one quietly powerful addition will change the way you think about every database call in your application: **Query Transformers**, and this is just the start, we have plans for a whole lot more cool query features.
 

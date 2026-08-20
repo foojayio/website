@@ -5,7 +5,7 @@ description: "As part of my 2026 learning goals around Java on RISC-V (see this 
 canonical: "https://webtechie.be/post/first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j/"
 authors:
   - "frankdelporte"
-image: "thumb-bananapi.png"
+image: "thumb-bananapi.jpg"
 categories:
   - "Embedded"
   - "Java"
@@ -64,7 +64,7 @@ Below are the links I found with OS images for the Banana Pi boards and burned t
 * [Operating System](https://drive.google.com/drive/folders/1-MzSVsduPX8qHKgbAOM3wmcCbwfkffAz)
   * I used "20241011_Bananapi-Armbian_24.8.2_Bpi-m4zero_ubuntu22.04_jammy_legacy_5.4.125_xfce_desktop.zip"
 
-![](bananapi-pi4j.png)
+![](bananapi-pi4j.jpg)
 
 ### Banana Pi BPI-F3
 

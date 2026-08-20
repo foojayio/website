@@ -1,7 +1,7 @@
 ---
 title: "Johannes Weigend"
 avatar: "johannes-weigend.png"
-avatarFull: "johannes-weigend-full.png"
+avatarFull: "johannes-weigend-full.jpg"
 bio: "Johannes Weigend is a computer scientist, software architect and technical director of QAware Germany. He works as a lecturer at the Technical University of Rosenheim and gives lectures on distributed computing, modern programming languages and graphical user interfaces. Find him on Twitter @JohannesWeigend."
 bluesky: ""
 mastodon: ""

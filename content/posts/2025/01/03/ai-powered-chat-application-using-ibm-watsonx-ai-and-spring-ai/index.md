@@ -5,7 +5,7 @@ lastmod: "2025-01-03T08:39:32+00:00"
 description: "Discover on how quickly to integrate the IBM watsonx.ai platform in your Java application using Spring AI by creating a chat application"
 authors:
   - "tristan-mahinay"
-image: "generative-ai-in-enterprise-systems-1024x589.png"
+image: "generative-ai-in-enterprise-systems-1024x589.jpg"
 categories:
   - "Java"
   - "JDK21"
@@ -314,7 +314,7 @@ The basic chat waits for the AI platform to fully return the response. Thus, wai
 
 The streaming chat responds by chunks and prevents frustration to the end user.
 
-![](watsonx-streaming-chat.gif)
+![](watsonx-streaming-chat.webp)
 
 watsonx.ai can seamlessly connected to Spring AI and build a chat application with minimal coding changes. Using this platform, we used the IBM Granite model as the foundation model and generated both a basic and streaming response.
 

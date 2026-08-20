@@ -6,7 +6,7 @@ description: "Have you ever wondered how libraries like Spring and Mockito modif
 authors:
   - "johannes-bechberger"
   - "mikael-francoeur"
-image: "johannescode.png"
+image: "johannescode.jpg"
 categories:
   - "Developer Tools"
   - "Spring"

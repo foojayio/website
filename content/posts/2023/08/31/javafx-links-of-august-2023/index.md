@@ -6,7 +6,7 @@ description: "I've taken a holiday this month, so probably missed a lot of the a
 canonical: "https://webtechie.be/post/2023-08-25-javafx-links-of-august-2023/"
 authors:
   - "frankdelporte"
-image: "homepage.png"
+image: "homepage.jpg"
 categories:
   - "JavaFX"
 related_posts:
@@ -24,7 +24,7 @@ But the most essential and thrilling news is the release of the new version of [
 {{< gallery >}}
 homepage-1024x616.png
 libraries-1024x812.png
-showcases-1024x749.png
+showcases-1024x749.jpg
 {{< /gallery >}}
 
 ## Applications

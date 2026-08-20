@@ -6,7 +6,7 @@ description: "Cloud servers, Docker, Kubernetes, distributed systems, scaling up
 authors:
   - "frankdelporte"
   - "grace-jansen"
-image: "podcast-38-cloud-guests.png"
+image: "podcast-38-cloud-guests.jpg"
 categories:
   - "Cloud"
   - "DevOps"

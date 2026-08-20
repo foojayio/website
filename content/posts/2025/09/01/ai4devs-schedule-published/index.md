@@ -4,7 +4,7 @@ date: "2025-09-01T20:05:04+00:00"
 description: "We are happy to announce the Schedule for AI4Devs. Talks 50% live coding showing libraries in Python, Java, Kotlin, Data Science and JScript."
 authors:
   - "jonathan-vila"
-image: "Screenshot_20250901_220109.png"
+image: "Screenshot_20250901_220109.jpg"
 categories:
   - "AI"
   - "Conference"

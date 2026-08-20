@@ -6,7 +6,7 @@ description: "Your Java AI app is live. But have you tested whether it can be ja
 authors:
   - "frankdelporte"
   - "iryna-dohndorf"
-image: "episode-99-tiberius.png"
+image: "episode-99-tiberius.jpg"
 categories:
   - "AI"
   - "Podcast"

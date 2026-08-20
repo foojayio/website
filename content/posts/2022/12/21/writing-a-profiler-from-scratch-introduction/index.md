@@ -5,7 +5,7 @@ lastmod: "2022-12-21T15:31:47+00:00"
 description: "How do profilers like async-profiler work? How to write your own? This series tries to write a tiny sampling-based profiler from scratch!"
 authors:
   - "johannes-bechberger"
-image: "java-coffee-cup-on-fire-without-marks-from-scratch.png"
+image: "java-coffee-cup-on-fire-without-marks-from-scratch.jpg"
 categories:
   - "Developer Tools"
   - "Performance"

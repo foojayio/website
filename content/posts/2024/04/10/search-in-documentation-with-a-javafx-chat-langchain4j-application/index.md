@@ -285,7 +285,7 @@ void ask(SearchAction action) {
 ```
 
 {{< gallery >}}
-langchain4j-docs-azul-home-1024x722.png
+langchain4j-docs-azul-home-1024x722.jpg
 langchain4j-docs-azul-json-1024x486.png
 langchain4j-docs-what-is-prime-1024x609.png
 {{< /gallery >}}

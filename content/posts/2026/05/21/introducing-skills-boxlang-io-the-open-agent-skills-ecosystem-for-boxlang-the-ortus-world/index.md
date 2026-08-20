@@ -5,7 +5,7 @@ lastmod: "2026-05-21T11:44:10+00:00"
 description: "Today we're launching something we've been quietly building for months: skills.boxlang.io — a public, agent-agnostic directory for AI skills covering…"
 authors:
   - "cristobal-escobar"
-image: "Captura-de-pantalla-2026-05-21-134045.png"
+image: "Captura-de-pantalla-2026-05-21-134045.jpg"
 categories:
   - "AI"
   - "BoxLang"

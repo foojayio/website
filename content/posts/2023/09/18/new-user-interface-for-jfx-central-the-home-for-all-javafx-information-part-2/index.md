@@ -6,7 +6,7 @@ description: "JFX Central is a not-for-profit team effort. Many people are invol
 canonical: "https://webtechie.be/post/2023-09-07-jfxcentral-new-user-interface/"
 authors:
   - "frankdelporte"
-image: "homepage-intro-1024x769-1.png"
+image: "homepage-intro-1024x769-1.jpg"
 categories:
   - "JavaFX"
 related_posts:

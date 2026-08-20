@@ -6,7 +6,7 @@ description: "For people that work in infrastructure and application development
 canonical: "https://www.datastax.com/blog/new-survey-finds-data-kubernetes-no-longer-pipe-dream"
 authors:
   - "patrick-mcfadin"
-image: "91c65ac68f07ecb105ff7b3685ed49aed7dd8b80-1460x968-1.png"
+image: "91c65ac68f07ecb105ff7b3685ed49aed7dd8b80-1460x968-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

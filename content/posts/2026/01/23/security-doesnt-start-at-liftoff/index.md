@@ -5,7 +5,7 @@ lastmod: "2026-01-23T12:06:07+00:00"
 description: "This is a follow-on to the article The Real Mechanics of Vulnerabilities in an Upstream/Downstream, Topsy-Turvy EOL World. What you'll learn in this…"
 authors:
   - "steve-poole"
-image: "Gemini_Generated_Image_cuv3ntcuv3ntcuv3-scaled.png"
+image: "Gemini_Generated_Image_cuv3ntcuv3ntcuv3-scaled.jpg"
 categories:
   - "Security"
 related_posts:

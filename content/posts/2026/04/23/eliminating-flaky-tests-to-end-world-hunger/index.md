@@ -6,7 +6,7 @@ description: "Tired of rerunning the same broken pipeline? Learn how to find and
 canonical: "https://dev.karakun.com/2025/01/25/eliminating-flaky-tests.html"
 authors:
   - "francois-martin"
-image: "eliminating-flaky-tests.png"
+image: "eliminating-flaky-tests.jpg"
 categories:
   - "Conference"
   - "Gradle"

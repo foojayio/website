@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "loic-mathieu"
   - "simonritter"
-image: "podcast-guests-java-22.png"
+image: "podcast-guests-java-22.jpg"
 categories:
   - "Java"
   - "Java Beginner"

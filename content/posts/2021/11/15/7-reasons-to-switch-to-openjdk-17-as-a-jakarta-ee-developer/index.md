@@ -6,7 +6,7 @@ description: "If you are using enterprise-orientated specifications should you m
 canonical: "https://blog.payara.fish/switch-to-open-jdk-as-a-jakarta-ee-developer"
 authors:
   - "jadon-ortlepp"
-image: "7reasonsopenjdk.png"
+image: "7reasonsopenjdk.jpg"
 categories:
   - "Jakarta EE"
   - "Videos"

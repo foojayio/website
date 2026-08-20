@@ -5,7 +5,7 @@ lastmod: "2025-12-09T16:41:19+00:00"
 description: "AI MCP is awesome to connect our Agents to real time data, but also open a dangerous door to security threats"
 authors:
   - "jonathan-vila"
-image: "Gemini_Generated_Image_fkvuf4fkvuf4fkvu-scaled.png"
+image: "Gemini_Generated_Image_fkvuf4fkvuf4fkvu-scaled.jpg"
 categories:
   - "AI"
   - "Security"

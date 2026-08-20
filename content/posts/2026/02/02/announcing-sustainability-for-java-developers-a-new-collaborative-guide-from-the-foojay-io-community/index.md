@@ -11,7 +11,7 @@ authors:
   - "markus-westergren"
   - "mthmulders"
   - "simon-martinelli"
-image: "sustainabilitybook-1.png"
+image: "sustainabilitybook-1.jpg"
 categories:
   - "Book Announcement"
   - "Books"

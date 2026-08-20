@@ -252,12 +252,12 @@ db.image.aggregate([
 ]);
 ```
 
-![](Screenshot-2026-05-08-at-3.35.37-PM-1-1024x966.png)
+![](Screenshot-2026-05-08-at-3.35.37-PM-1-1024x966.jpg)
 
 You can step through and see it create the Lucene query object instances, e.g., TermQuery ($type:string/caption:frisbee) being built from the Atlas Search facet compound clauses.
 
 Continue stepping through, you'll eventually get to LuceneFacetCollectorSearchManager.initialSearch:  
-![](Screenshot-2026-05-08-at-3.37.52-PM-1024x851.png)
+![](Screenshot-2026-05-08-at-3.37.52-PM-1024x851.jpg)
 
 Here you can see the fully composed BooleanQuery, combining the string-type TermQuery on frisbee with the token-type TermQuery on dog.
 
@@ -269,8 +269,8 @@ The results from Lucene include the docs matched and the facets:
 You can keep digging around and see all the ways the wrapper is marshaling documents from Lucene indexes.
 
 You'll notice some interesting things, like the _ids in Lucene Indexes are integers. This is core to the way Lucene works, and I'll get into why in a minute:  
-![](Screenshot-2026-05-08-at-3.39.12-PM-1-1024x657.png)  
-![](Screenshot-2026-05-08-at-3.39.37-PM-1024x663.png)
+![](Screenshot-2026-05-08-at-3.39.12-PM-1-1024x657.jpg)  
+![](Screenshot-2026-05-08-at-3.39.37-PM-1024x663.jpg)
 
 The MongoDB ObjectID (or whatever type you use) _id is stored as metadata and returned as part of the result set if required:  
 

@@ -5,7 +5,7 @@ lastmod: "2026-07-11T00:34:05+00:00"
 description: "Learn when not to use Event-Driven Architecture (EDA), from simple CRUD apps to strong consistency, immediate responses, and operational complexity."
 authors:
   - "vincent-vauban"
-image: "4coverNoEDA-1024x576.png"
+image: "4coverNoEDA-1024x576.jpg"
 categories:
   - "Java"
   - "Kafka"
@@ -60,7 +60,7 @@ A useful rule of thumb is:
 
 Let us examine the most common situations where EDA may actually be the wrong architectural choice.  
 
-{{< img src="2noeda-700x467.png" class="size-medium" alt="Don't use EDA for everything" width="700" height="467" >}}
+{{< img src="2noeda-700x467.jpg" class="size-medium" alt="Don't use EDA for everything" width="700" height="467" >}}
 
 Don't use EDA for everything{#caption-attachment-124878}
 

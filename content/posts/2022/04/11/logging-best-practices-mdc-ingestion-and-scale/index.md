@@ -6,7 +6,7 @@ description: "Where should you add logs in a method? Should you log in this meth
 canonical: "https://lightrun.com/best-practices/logging-best-practices-mdc-ingestion-and-scale/"
 authors:
   - "shai-almog"
-image: "Logs.png"
+image: "Logs.jpg"
 categories:
   - "Developer Tools"
   - "Tutorials"

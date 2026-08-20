@@ -25,7 +25,7 @@ frozen: false
 
 -- The Matrix, a conversation between Neo and Spoon boy.
 
-![Matrix Rain Code Effect](matrix-rain-effect.gif)
+![Matrix Rain Code Effect](matrix-rain-effect.webp)
 
 In the classic science fiction movie, The Matrix, there's a cool special effect better known as the *falling* or *raining green code* effect. In [one scene](https://youtu.be/MvEXkd3O2ow?t=27 "one scene") the character named **'Cypher'** played by [Joe Pantoliano](https://www.imdb.com/name/nm0001592/ "Joe Pantoliano") explains how they can monitor activity inside the **matrix** by looking at the patterns as the code rains down. He claims it's done this way to simplify seeing people in the matrix than other means due to the fact that there is just way too much data (movie scifi magic talk).
 

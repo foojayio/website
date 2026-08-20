@@ -61,7 +61,7 @@ Once your click one of these two samples, our plugin will guide you to finish an
 
 When you're done, you will have your first application successfully running on Azure. Next, you could click the button "View in Azure Explorer" to focus on your app resources in Azure Explorer. Here is a short demonstration for it.
 
-![](Overview-end5.gif)
+![](Overview-end5.webp)
 
 ### EAP and Snapshot Version Support
 
@@ -75,7 +75,7 @@ The managed identities for Azure resources help you safely access Azure resource
 
 To use it, you can simply configure your system-assigned or user-assigned managed identity in the portal at first. Next, it could be used to authenticate services when you deploy the application with Maven/Gradle Plugin. The following demonstration shows how you can use system-assigned managed identity when you deploy Azure Functions on a virtual machine.
 
-![](managed-identity-full.gif)
+![](managed-identity-full.webp)
 
 ## Feedback and Suggestions
 

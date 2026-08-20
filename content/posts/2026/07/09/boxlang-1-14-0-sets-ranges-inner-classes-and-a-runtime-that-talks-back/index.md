@@ -5,7 +5,7 @@ lastmod: "2026-07-10T13:46:44+00:00"
 description: "BoxLang has never stood still, but 1.14.0 is something different. This is the release where the language stops filling gaps and starts defining what a…"
 authors:
   - "cristobal-escobar"
-image: "BoxLang-release-1.14.0-1701-x-1701-px-4-1024x1024.png"
+image: "BoxLang-release-1.14.0-1701-x-1701-px-4-1024x1024.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-![](BoxLang-release-1.14.0-4-700x394.png)
+![](BoxLang-release-1.14.0-4-700x394.jpg)
 
 BoxLang has never stood still, but 1.14.0 is something different. This is the release where the language stops filling gaps and starts defining what a modern dynamic JVM language looks like on its own terms. Sixty-five issues closed. Four innovative language features. A formatter that has grown up. And a companion module - `bx-mcp` - that fundamentally changes how you operate a running BoxLang application with AI.
 

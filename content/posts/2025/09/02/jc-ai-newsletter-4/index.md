@@ -5,7 +5,7 @@ lastmod: "2025-10-14T05:41:38+00:00"
 description: "14 days have passed and it's time for a new batch of readings that could shape developments in the field of artificial intelligence."
 authors:
   - "miro-wengner"
-image: "ai-insider-1.png"
+image: "ai-insider-1.jpg"
 categories:
   - "AI"
   - "GenAI"

@@ -5,7 +5,7 @@ lastmod: "2026-07-14T17:57:12+00:00"
 description: "BoxLang 1.15.0 is a high-impact release with two big headlines and a long tail of hardening. The first headline is a massive performance upgrade to string…"
 authors:
   - "cristobal-escobar"
-image: "boxlang-v1.15.0-1024x683.png"
+image: "boxlang-v1.15.0-1024x683.jpg"
 categories:
   - "BoxLang"
   - "Cloud"
@@ -24,7 +24,7 @@ related_posts:
 frozen: false
 ---
 
-![](boxlang-v1.15.0-700x467.png)
+![](boxlang-v1.15.0-700x467.jpg)
 
 **BoxLang 1.15.0** is a high-impact release with two big headlines and a long tail of hardening. The first headline is a **massive performance upgrade to string handling** : a new first-class `BoxStringBuilder` type, compile-time literal folding, smarter `&=` semantics, and a runtime concat strategy that automatically switches to builder-backed accumulation once your expression gets big enough. Your existing string-heavy code just got faster. No rewrites required.
 

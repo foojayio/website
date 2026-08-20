@@ -7,7 +7,7 @@ authors:
   - "cullen-gray"
   - "geertjan-wielenga"
   - "kadi-grigg"
-image: "devignition.png"
+image: "devignition.jpg"
 categories:
   - "Events"
 related_posts:
@@ -31,4 +31,4 @@ Links:
 * [Call for Papers](https://www.papercall.io/devignition2024) (closes September 27, 2024 14:00 UTC)
 * [Tickets](https://devignition.ticketleap.com/devignition2024/)
 
-![](grouppic-1024x257.png)
+![](grouppic-1024x257.jpg)

@@ -6,7 +6,7 @@ description: "Read on to find out more about Payara Rodmap in the coming months 
 canonical: "https://blog.payara.fish/payara-platform-roadmap-2024"
 authors:
   - "jadon-ortlepp"
-image: "image-3.png"
+image: "image-3.jpg"
 categories:
   - "Payara"
   - "Tools"
@@ -51,7 +51,7 @@ Then at the end of the year, [MicroProfile 6.1](https://blog.payara.fish/whats-n
 ### Payara Starter​
 
 At the end of 2023, we launched [our new Payara Starter](https://start.payara.fish/) application which simplifies the process of starting new projects on the Payara Platform with a user friendly interface to generate Payara Server or Micro Sample projects, and we continued to provide new functionality for Payara Cloud.​
-![](image-2-1024x576.png)
+![](image-2-1024x576.jpg)
 
 [](https://info.payara.fish/hubfs/Slide4.jpg)
 
@@ -93,7 +93,7 @@ At the end of 2023, we launched [our new Payara Starter](https://start.payara.fi
 
 ### Payara Platform Vision
 
-![](image-3-1024x576.png)
+![](image-3-1024x576.jpg)
 
 ### [](https://info.payara.fish/hubfs/Slide9.jpg)Payara Core
 
@@ -161,7 +161,7 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 
 ## ​Payara Developer Tools​
 
-![](image-5-1024x576.png)
+![](image-5-1024x576.jpg)
 
 ## [](https://info.payara.fish/hubfs/Slide16.jpg)**Payara Connectors**​
 
@@ -176,7 +176,7 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 
 ## Payara Cloud PaaS and Project Aquarium​
 
-![](image-6-1024x576.png)
+![](image-6-1024x576.jpg)
 
 ## [](https://info.payara.fish/hubfs/Slide18.jpg)
 

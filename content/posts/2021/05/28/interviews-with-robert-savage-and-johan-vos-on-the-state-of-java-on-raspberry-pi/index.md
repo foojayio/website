@@ -43,7 +43,7 @@ Robert is the founding father of the Pi4J project. He started in 2012 and quickl
 {{< gallery cols="3" >}}
 github-pi4j-search-1024x901.png
 robert-savage-devoxx-2014-1024x768.jpg
-robert-savage.png
+robert-savage.jpg
 {{< /gallery >}}
 
 **The very first version of Pi4J dates from 2012. What was your trigger to start using Java on the Raspberry Pi and build this framework?**

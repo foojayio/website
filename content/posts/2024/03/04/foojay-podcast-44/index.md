@@ -6,7 +6,7 @@ description: "Did you know? The Quarkus Clubd initiative started less than a ye
 authors:
   - "frankdelporte"
   - "igor-de-souza"
-image: "podcast-quarkus-club-guests.png"
+image: "podcast-quarkus-club-guests.jpg"
 categories:
   - "JUGs"
   - "Podcast"
