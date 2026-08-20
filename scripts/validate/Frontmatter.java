@@ -598,11 +598,20 @@ public class Frontmatter {
     }
 
     /**
-     * The biggest a single bundle image may be. Set from what content/ actually
-     * looks like after cleanup/images.py has run, with headroom -- not from a
-     * round number -- so this fails on a NEW offender rather than on the archive.
+     * The biggest a single bundle image may be.
+     *
+     * 4 MB, set from what content/ actually looks like after cleanup/images.py has
+     * run -- the largest legitimate asset is moveRefactoring.webp at 3.53 MB, a
+     * 228-frame screen recording -- rather than from a round number that happens to
+     * look strict. 3 MB would have forced that one down to roughly 550px, where the
+     * code being refactored is no longer readable, which is a worse outcome than a
+     * slightly looser guard.
+     *
+     * The point is to catch the egregious, and it still does: the files that put
+     * the artifact 255 MB over GitHub Pages' 1 GB limit were 52 MB, 26 MB, 10 MB
+     * and 6.4 MB. Nothing in content/ is within 500 KB of this ceiling.
      */
-    static final long MAX_IMAGE_BYTES = 3_000_000L;
+    static final long MAX_IMAGE_BYTES = 4_000_000L;
     static final Set<String> IMAGE_EXTS = Set.of(".png", ".jpg", ".jpeg", ".gif", ".webp", ".avif", ".svg");
 
     /**
