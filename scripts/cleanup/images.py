@@ -249,7 +249,12 @@ def convert_gif(gif, budget, dry_run):
             if leftover.exists():
                 leftover.unlink()
 
-    if best is None or best >= before:  # pathological; leave the GIF alone
+    # This threshold MUST match the one the file was written under, above. It said
+    # `best >= before` while the write required `best < before * 0.9`, so a result
+    # landing in that 10% gap was never saved -- and the code fell straight through
+    # to rewriting the references and DELETING the GIF. Two images (image3.gif,
+    # codeactions.gif) were lost that way and had to be recovered from git.
+    if best is None or best >= before * 0.9:
         return None
 
     # Order matters: references first, THEN delete. A run killed between the two
@@ -371,7 +376,14 @@ def shrink_webp(webp, budget, cap, dry_run):
             size = tmp.stat().st_size
             with Image.open(tmp) as check:
                 got = getattr(check, "n_frames", 1)
-            if written > 1 and (got < 2 or got < written * 0.5):
+            # A LOOSE floor on purpose. libwebp merges duplicate consecutive
+            # frames, and re-encoding an already-lossy animation at lower quality
+            # makes many more frames identical -- moveRefactoring.webp went from
+            # 228 frames to under half, so a 50% floor rejected every rung and the
+            # file was silently left at 6.2 MB. What actually matters is that the
+            # animation still exists and was not truncated to a handful; the merged
+            # frames keep their summed durations, so its length is unchanged.
+            if written > 1 and (got < 2 or got < written * 0.2):
                 continue
             if best is None or size < best:
                 best = size

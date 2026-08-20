@@ -93,7 +93,7 @@ Now, developers can simply use the lightbulb icon (Quick Fix) to generate common
 * Generate toString()
 
 Here is a quick demo:  
-![](codeactions.webp)
+![](codeactions.gif)
 
 ### Feedback and Suggestions
 
