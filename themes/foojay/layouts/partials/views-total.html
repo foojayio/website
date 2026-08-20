@@ -1,0 +1,24 @@
+{{- /* The combined read count of a set of pages.
+
+       Param: a slice of Pages. Returns: an int (0 when none of them has a
+       count yet, so a caller can `with` it and render nothing).
+
+       Keys come from views-key.html and the numbers from data/views.json --
+       the same two sources views.html displays a single page's count from, so
+       a total can never disagree with the numbers on the cards it sums. A page
+       that isn't counted, or that has no count yet, contributes nothing rather
+       than breaking the sum.
+
+       Not a stored field on the author bundle: it changes every time
+       scripts/fetch/ViewCounts.java runs, and every time the author publishes. */ -}}
+{{- $total := 0 -}}
+{{- $pages := . -}}
+{{- with hugo.Data.views -}}
+  {{- $data := . -}}
+  {{- range $pages -}}
+    {{- with partial "views-key.html" . -}}
+      {{- with index $data . -}}{{- $total = add $total . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $total -}}

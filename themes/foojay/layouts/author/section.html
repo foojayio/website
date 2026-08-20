@@ -37,6 +37,16 @@
       {{/* id + the pager's `anchor` below: paging returns the reader to the
            grid rather than to the top of the profile. */}}
       <h2 id="articles">{{ len $written }} article{{ if ne (len $written) 1 }}s{{ end }}</h2>
+      {{/* The reads across ALL of them, not this pager's slice -- same set the
+           count beside it comes from. Summed from data/views.json through
+           partials/views-total.html, so it agrees with the per-article numbers
+           on the cards below; renders nothing while the counter has no data,
+           the way views.html does. Deliberately next to the article total
+           rather than up in the profile head: that line is the profile page's
+           OWN count, and a second number there would read as the same thing. */}}
+      {{ with partial "views-total.html" $written }}
+      <span class="section-head__count views">{{ lang.FormatNumberCustom 0 . }} views</span>
+      {{ end }}
     </div>
     {{ if $written }}
     {{ partial "pagination.html" (dict "page" . "position" "top" "anchor" "articles") }}
