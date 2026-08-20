@@ -30,44 +30,61 @@
 
     {{/* World map of every JUG with coordinates (data/jugs.yaml's
          latitude/longitude, derived from GlobalWWJugs's `location` field by
-         scripts/fetch/Jugs.java). Leaflet + marker clustering, same approach
-         and library versions as Frank's map page for javachampions.org
-         (https://github.com/aalmiray/java-champions/pull/318) -- CDN-loaded
-         here rather than in baseof.html since no other page needs it. */}}
-    {{ $markers := slice }}
+         scripts/fetch/Jugs.java).
+
+         The map itself is static/js/cluster-map.js, shared with
+         /java-champions/ -- grouping by place, the counted badges and the
+         cluster totals live there so the two maps cannot disagree about what a
+         number means. All this template supplies is the points, the noun and
+         the element.
+
+         Grouping matters here for a smaller but real reason than on the
+         champions map: 87 of the 88 distinct points hold exactly one JUG, but
+         upstream gives Duesseldorf/Rhein, Freiburg and Hessen the SAME
+         coordinates (51.233334, 6.783333 -- Duesseldorf's; Freiburg is 400km
+         away and Hessen is another state entirely). As three separate markers
+         those stacked on one point and two of them were unreachable at any
+         zoom. They are now one marker reading 3, with all three in its popup.
+         The coordinates themselves are an upstream bug -- fix them in
+         GlobalWWJugs, never in the generated data/jugs.yaml. */}}
+    {{ $points := slice }}
     {{ range $jugs }}
       {{ if and .latitude .longitude }}
-        {{ $markers = $markers | append (dict "name" .name "lat" .latitude "lng" .longitude "url" (.website | default "")) }}
+        {{ $points = $points | append (dict
+             "name" .name
+             "lat" .latitude
+             "lng" .longitude
+             "place" (printf "%v" (.country | default ""))
+             "url" (.website | default "")) }}
       {{ end }}
     {{ end }}
-    {{ if $markers }}
+
+    {{ if $points }}
+    {{/* MarkerCluster.css only (positioning + the zoom animations). Its
+         companion MarkerCluster.Default.css is deliberately NOT loaded: it
+         styles `.marker-cluster*`, and cluster-map.js replaces every cluster
+         icon with our own `.cluster-map__marker`, so the default sheet would
+         be dead weight styling classes this map never emits. */}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
-    <div id="jugs-map" class="jugs-map"></div>
+    <div id="jugs-map" class="cluster-map"></div>
+    <p class="cluster-map__note">
+      {{ len $points }} of {{ len $jugs }} Java User Groups are on the map, and each marker shows
+      how many are there. A marker is the location the directory records for a group, so it shows
+      where JUGs are spread across the world rather than where any one of them meets.
+    </p>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    {{/* No `defer` here, unlike the sitemap's scripts: the inline call below
+         runs at parse time, so a deferred definition would not exist yet. */}}
+    <script src="{{ "js/cluster-map.js" | relURL }}"></script>
     <script>
-      (function () {
-        var data = {{ $markers | jsonify | safeJS }};
-        var map = L.map('jugs-map').setView([20, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-        var markers = L.markerClusterGroup({
-          maxClusterRadius: 50,
-          disableClusteringAtZoom: 10,
-          spiderfyOnMaxZoom: false
-        });
-        data.forEach(function (jug) {
-          var marker = L.marker([jug.lat, jug.lng], { title: jug.name, alt: jug.name });
-          marker.bindPopup(jug.url
-            ? '<a href="' + jug.url + '" target="_blank" rel="noopener">' + jug.name + '</a>'
-            : jug.name);
-          markers.addLayer(marker);
-        });
-        map.addLayer(markers);
-      })();
+      foojayClusterMap({
+        el: 'jugs-map',
+        points: {{ $points | jsonify | safeJS }},
+        singular: 'Java User Group',
+        plural: 'Java User Groups'
+      });
     </script>
     {{ end }}
 

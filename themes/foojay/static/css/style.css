@@ -1368,7 +1368,6 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 
 /* /jugs/ page: data/jugs.yaml source note + table (themes/foojay/layouts/jugs/single.html) */
 .jugs-source-note { font-size: .92rem; color: var(--ink-muted); }
-.jugs-map { height: 480px; margin: 1.5rem 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
 .jugs-table__links { font-size: .9rem; white-space: nowrap; }
 .jugs-table__edit { text-decoration: none; opacity: .55; }
 .jugs-table__edit:hover { opacity: 1; }
@@ -1390,22 +1389,57 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .champions-table__links { font-size: .9rem; line-height: 1.7; }
 .champions-table__links a { white-space: nowrap; }
 
-/* World map of the champions (same Leaflet setup as .jugs-map). The marker
-   popups list everyone in a city, so they need a height cap: 22 champions
-   share "USA" and 16 share "London, UK", which is a popup taller than the
+/* The clustered world map, shared by /java-champions/ and /jugs/ --
+   static/js/cluster-map.js draws both, so these styles are deliberately not
+   named after either page.
+
+   A marker carries its own count, so a point holding 16 people doesn't look
+   like one holding a single champion, which is the whole point of the map. A
+   cluster uses the identical badge (cluster-map.js's iconCreateFunction sums
+   what its children stand for, not how many there are), so a total splits into
+   smaller totals as you zoom in and the number never changes meaning.
+
+   Badges are sized by content rather than a fixed Leaflet iconSize -- "1" and
+   "422" are different widths, and a fixed box would either clip the wide one or
+   leave the narrow one off-centre. The translate is what re-centres one on its
+   coordinate, since Leaflet cannot offset an icon whose size it doesn't know.
+
+   Popups list everyone at a point, so they need a height cap: 22 champions
+   share the USA centroid and 16 share London, which is a popup taller than the
    map it opens in.
 
    Note the popup list rules are class-on-class-descendant on purpose. Both
    these and `.prose ul` (line ~1361) are 0-1-1, and a Leaflet popup is
-   appended INSIDE the map container, which is itself inside `.prose` -- so
-   the tie is broken by source order and these have to stay below the .prose
-   block, not be moved above it. */
-.champions-map { height: 480px; margin: 1.5rem 0 .75rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
-.champions-map__note { font-size: .88rem; color: var(--ink-muted); margin: 0 0 1.5rem; }
-.champions-map__popup { font-size: .9rem; max-height: 15rem; overflow-y: auto; }
-.champions-map__popup strong { display: block; margin-bottom: .35rem; }
-.champions-map__popup ul { margin: 0; padding-left: 1.1rem; }
-.champions-map__popup li + li { margin-top: .15rem; }
+   appended INSIDE the map container, which is itself inside `.prose` -- so the
+   tie is broken by source order and these have to stay below the .prose block,
+   not be moved above it. */
+.cluster-map { height: 480px; margin: 1.5rem 0 .75rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.cluster-map__note { font-size: .88rem; color: var(--ink-muted); margin: 0 0 1.5rem; }
+.cluster-map__popup { font-size: .9rem; max-height: 15rem; overflow-y: auto; }
+.cluster-map__popup strong { display: block; margin-bottom: .35rem; }
+.cluster-map__popup ul { margin: .35rem 0 0; padding-left: 1.1rem; }
+.cluster-map__popup li + li { margin-top: .15rem; }
+.cluster-map__place { color: var(--ink-muted); font-size: .85rem; }
+
+.cluster-map__marker {
+  background: none; border: 0;   /* Leaflet's .leaflet-div-icon default box */
+  width: auto !important; height: auto !important;
+}
+.cluster-map__marker span {
+  display: grid; place-items: center;
+  box-sizing: border-box; min-width: 2rem; height: 2rem;
+  padding: 0 .45rem; border-radius: 999px;
+  background: var(--brand-secondary); color: #fff;
+  font-size: .8rem; font-weight: 700; line-height: 1;
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgb(0 0 0 / .35);
+  transform: translate(-50%, -50%);
+}
+.cluster-map__marker--md span { min-width: 2.4rem; height: 2.4rem; font-size: .85rem; }
+.cluster-map__marker--lg span { min-width: 2.9rem; height: 2.9rem; font-size: .9rem; }
+/* A cluster is several places at once -- accent colour so it reads as
+   "zoom in for the breakdown" rather than as one more city. */
+.cluster-map__marker--cluster span { background: var(--brand-accent-strong); }
+.cluster-map__marker:hover span { background: var(--brand-accent); }
 
 /* Author box under an article */
 .author-callout {

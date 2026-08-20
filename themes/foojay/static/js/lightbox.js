@@ -11,6 +11,19 @@
   "use strict";
 
   var SELECTOR = ".prose img, img.post-hero";
+  /* Images that are part of a MAP, not part of the content. /jugs/ and
+     /java-champions/ render a Leaflet map inside `.prose`, and every map tile
+     is an <img> -- so without this the tiles were picked up as content images:
+     they took a zoom-in cursor, a click on the map opened the tile in the
+     lightbox instead of panning, and the tiles joined the < / > sequence a
+     real gallery steps through. Excluding the whole container rather than the
+     tile class also covers Leaflet's marker-icon and marker-shadow images, in
+     case a map ever uses the default pin instead of our own badge.
+
+     A container check, not a selector, because tiles do not exist yet when
+     this runs and are created and destroyed continuously as the reader pans:
+     there is no moment at which a query could see them all. */
+  var MAP_CONTAINER = ".leaflet-container";
   var IMG_HREF = /\.(jpe?g|png|gif|webp|svg|avif)(\?|#|$)/i;
   var SWIPE_MIN = 40; // px of horizontal travel before a touch counts as a swipe
 
@@ -33,6 +46,7 @@
     var indexOfSrc = Object.create(null);
     var openers = [];
     Array.prototype.forEach.call(document.querySelectorAll(SELECTOR), function (img) {
+      if (img.closest(MAP_CONTAINER)) return; // a map tile, not a content image
       var full = fullSrc(img);
       if (full === null) return; // linked to something that isn't an image
       var index = indexOfSrc[full];
