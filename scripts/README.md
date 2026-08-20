@@ -72,6 +72,7 @@ them take `--dry-run` (report, change nothing) and most take `--path <dir>`.
 | `CloudflareEmails.java` | email addresses Cloudflare had obfuscated away from the scrapers (re-fetches the live page) |
 | `HeadingAnchors.java` | WordPress's positional `{#h2-N-slug}` heading and link ids |
 | `NormalizeMarkdown.java` | setext headings → ATX, decorative `<br>` spacers dropped |
+| `images.py` | the WordPress-era media weight — animated GIF → animated WebP, large PNG → JPEG, oversized rasters resized, animated `image:` heroes given a still poster. Took the built site from 1.39 GB to 0.69 GB, under GitHub Pages' 1 GB artifact limit. **The one script here that outlives cutover** (content keeps arriving) and the one that isn't jbang Java — writing an *animated* WebP needs Pillow, which Java has no equivalent for |
 | `Descriptions.java` | two Yoast defects in `description:` — the spaces it dropped building one from the body (`…pattern.What you'll learn`, 22 posts), and the `" - by <Author>"` tail it stamps on an auto-generated one (290 posts, removed only when the name is one the post actually credits). Prints what it can't tell apart from a type name, or from prose |
 | `SanitizeSlugs.java` | slugs → lowercase `[a-z0-9_-]` |
 | `PostsToBundles.java` | flat post files → leaf bundles |

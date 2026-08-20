@@ -592,6 +592,64 @@ should catch a mistake at PR time rather than letting it fail silently.
 
 ## Conventions to keep following
 
+- **Images have a per-file budget, and the deploy is why.** The built site hit
+  **1.26 GB against GitHub Pages' hard 1 GB artifact limit** — and the warning for
+  that ("Deployment might fail") lands on a run that otherwise goes **green**, so
+  the site drifts past the limit invisibly until a deploy finally breaks, by which
+  point the cause is two thousand posts old. It was never the HTML: 4100 pages are
+  ~120 MB. It was 1229 MB of images, 78% of it in 1214 files over 200 KB, including
+  the *same* 52 MB animated GIF in three bundles — all three of them `image:` heroes.
+
+  `cleanup/images.py` brought the build to **0.69 GB** (307 MB of headroom), and
+  two checks in `validate/Frontmatter.java` keep it there:
+  `checkImageWeight` (no single bundle image over the budget) and
+  `checkHeroImageStill`.
+
+  **A hero must be a STILL image**, and that is not a format rule — 41 posts use
+  `.webp`, 5 `.avif`, one `.svg`, all fine. The constraint is animation, because a
+  hero is the card thumbnail, the `og:image` and the JSON-LD `image`, none of which
+  animate: a link preview shows frame one, a grid of animating cards is unreadable,
+  and the whole file downloads to draw a thumbnail. Detection is per container and
+  **fails open** — GIF frame count via ImageIO, an `ANIM` chunk in WebP (Java has no
+  WebP reader at all), an `avis` brand in AVIF; anything it cannot inspect passes
+  rather than being guessed at. 17 of the 20 posts it flagged already showed the
+  same file in their body, so the animation was not lost; the other 3 are reported
+  for a human rather than silently edited.
+
+  **JPEG, not WebP, for the large PNGs** — Frank's call, and the measured cost is
+  small: over a 40-file sample JPEG q85 saves 81% against WebP q82's 89% (297 MB vs
+  327 MB projected across 541 files). Either clears the limit, and JPEG is what the
+  other 1400 images already are. Checked at 100% zoom on flat line art, JPEG's worst
+  case, and it is indistinguishable. The hard limit is transparency: JPEG has no
+  alpha, so the **22 files that genuinely use it stay PNG** — and note that is not
+  the same as *having* an alpha channel, since many of these WordPress PNGs are RGBA
+  with every pixel opaque, which is why the check reads the channel's actual minimum.
+
+  Four things that script learned the hard way, all of which cost real damage:
+  1. **Finish each bundle before starting the next.** The first version converted
+     every GIF and rewrote references at the END; a commit landed mid-run and
+     captured converted files with references still pointing at deleted `.gif`s —
+     4 broken images on the live site.
+  2. **Never unlink a source unless the destination is verified on disk.** Two
+     thresholds disagreed (write at `< 90%` of the original, bail at `>= 100%`), so
+     a result in that gap was never written and the code still deleted the GIF.
+     `image3.gif` and `codeactions.gif` were lost and recovered from git.
+  3. **Encode to a temp path and rename.** Writing straight to the destination let
+     a killed run leave a **0-byte** `.webp`, which the "destination exists" guard
+     then treated as real — permanently blocking that GIF, and it got committed.
+     `.gitignore` now covers the staging files too.
+  4. **Do not verify an animation by exact frame count.** libwebp merges duplicate
+     consecutive frames, legitimately and heavily — 221→198 on one recording, and
+     far more when re-encoding an already-lossy one. An equality check rejected 23
+     of 65 GIFs; a 50% floor still rejected every rung of the two over-budget WebPs,
+     leaving them silently at 6.2 MB. The floor is 20%, which catches gross
+     truncation only.
+
+  Two things deliberately **not** done: the 40 MB in 95 unreferenced bundle images
+  is left alone, because `gallery.html` *derives* full-size originals from thumbnail
+  names and a file absent from the markdown can still be in use; and nothing
+  rewrites git history, so `.git` stays large — the 1 GB limit is on the artifact.
+
 - **Idempotency everywhere**: any script touching `content/` must be safe
   to re-run without duplicating or destroying hand edits (the `frozen: true`
   flag pattern). This matters because these scripts get re-run repeatedly
