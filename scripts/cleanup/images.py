@@ -368,14 +368,31 @@ def shrink_webp(webp, budget, cap, dry_run):
     if not frames:
         return None
 
+    # A DIFFERENT ladder from the GIF path, because the input is different: this
+    # file is ALREADY lossy WebP, so re-encoding at a lower quality barely helps
+    # and can make it bigger (decompile_debugging.webp went 3.35 -> 3.65 MB at
+    # q70). Measured, the only two levers that work are frame count and
+    # dimensions -- and for a screen recording, FRAMES go first: a choppier demo
+    # is readable, a shrunken one is not. Dropping every 2nd/3rd frame takes
+    # moveRefactoring.webp from 6.20 to 3.70 MB with its 1000px width intact.
+    #
+    # Frames are thinned with their durations carried over, so playback speed is
+    # unchanged -- the same rule encode_webp's own thinning follows.
+    steps = ((1, 78), (2, 72), (3, 72), (3, 65))
     tmp = webp.with_name(webp.name + ".tmp")
     keep = webp.with_name(webp.name + ".best")
     best = None
     try:
-        for cap_i, q in LADDER:
-            if cap_i > cap:
-                continue
-            written = encode_webp(frames, durations, loop, tmp, cap_i, q)
+        for step, q in steps:
+            fr, dd, carried = [], [], 0
+            for i, (frame, dur) in enumerate(zip(frames, durations)):
+                carried += dur
+                if i % step:
+                    continue
+                fr.append(frame)
+                dd.append(carried)
+                carried = 0
+            written = encode_webp(fr, dd, loop, tmp, cap, q)
             size = tmp.stat().st_size
             with Image.open(tmp) as check:
                 got = getattr(check, "n_frames", 1)

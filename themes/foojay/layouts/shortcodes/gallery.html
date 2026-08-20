@@ -70,10 +70,23 @@
     {{- if findRE `-\d+x\d+\.[a-zA-Z0-9]+$` $file -}}
       {{- $base := replaceRE `-\d+x\d+(\.[a-zA-Z0-9]+)$` "$1" $file -}}
       {{- $scaled := replaceRE `(\.[a-zA-Z0-9]+)$` "-scaled$1" $base -}}
+      {{/* ...and the same name under ANY extension. GetMatch takes a glob, and
+           `name.*` cannot match `name-scaled.jpg` or the thumbnail itself, so this
+           is a safe last resort. It exists because the original and its thumbnail
+           need not share a format: cleanup/images.py converts a large PNG to JPEG
+           but leaves a smaller thumbnail as PNG, which broke the derivation for 28
+           images -- the lightbox silently opened the 1024px thumbnail instead of
+           the full-size original. Tried LAST, so an exact-extension match always
+           wins. */}}
+      {{- $anyExt := replaceRE `-\d+x\d+\.[a-zA-Z0-9]+$` ".*" $file -}}
       {{- with $.Page.Resources.GetMatch $base -}}
         {{- $full = .RelPermalink -}}
       {{- else -}}
-        {{- with $.Page.Resources.GetMatch $scaled }}{{ $full = .RelPermalink }}{{ end -}}
+        {{- with $.Page.Resources.GetMatch $scaled -}}
+          {{- $full = .RelPermalink -}}
+        {{- else -}}
+          {{- with $.Page.Resources.GetMatch $anyExt }}{{ $full = .RelPermalink }}{{ end -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
     <figure class="gallery__item">

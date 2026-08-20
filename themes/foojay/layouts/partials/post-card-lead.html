@@ -1,15 +1,15 @@
 <article class="post-card post-card--lead">
-  {{ with .Params.image }}
-  <a href="{{ $.RelPermalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
-    {{/* fetchpriority="high", and deliberately no loading="lazy": this is the
-         LCP element of the home page. Without the hint the browser gives it
-         the same default priority as the ten card images below the fold and
-         schedules it behind the stylesheet and the fonts. Same reasoning as
-         the post hero in posts/single.html; post-card.html keeps lazy, because
-         those really are below the fold. */}}
-    <img src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="" fetchpriority="high" decoding="async">
-  </a>
-  {{ end }}
+  {{/* eager=true: this is the LCP element of the home page, so post-thumb.html
+       gives it fetchpriority="high" and no loading="lazy" -- without the hint
+       the browser gives it the same default priority as the ten card images
+       below the fold and schedules it behind the stylesheet and the fonts.
+       Same reasoning as the post hero in posts/single.html; the plain cards
+       stay lazy, because those really are below the fold.
+
+       Rendered unconditionally, which this card needs more than the others do:
+       it is a two-column grid, so a lead post with no image used to leave the
+       right-hand half of the home page's first screen simply empty. */}}
+  {{ partial "post-thumb.html" (dict "page" . "eager" true) }}
   <div class="post-card-body">
     <div class="post-card-meta">
       <span class="eyebrow">Most recent post</span>

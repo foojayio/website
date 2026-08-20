@@ -1,0 +1,42 @@
+{{- /* A post's card thumbnail -- and the single definition of what a card shows
+       when the post has no usable image, so a grid never has a hole in it.
+       Params:
+         page   the Page (required)
+         eager  true for an above-the-fold LCP image (the lead card)
+
+       Three cases, ONE box, which is the point: every card in a grid is the
+       same shape whatever the post has.
+         1. The post has an image that loads     -> the image.
+         2. The post has no `image:` at all      -> a derived placeholder tile.
+         3. The post has one that FAILS to load  -> the same tile, because the
+            <img> is painted on top of it and removes itself in onerror.
+
+       Case 3 is the common one and was the visible defect: 70 posts point their
+       hero at a third-party host (the author's own blog, imgur, an S3 bucket
+       since emptied) and 11 of those are already 404/403, so the card rendered a
+       grey box with a broken-image glyph. A hotlink can die at any time and no
+       build step can notice, so the fallback has to be in the browser -- hence
+       the inline onerror rather than a check here.
+
+       The tile is DERIVED, never authored: the label is the post's first
+       category and the hue is hashed from that label (`hash.FNV32a`, the same
+       trick /calendar/ uses for a JUG's dot). So every post in a category gets
+       one recognisable tint, a new category colours itself, and there is nothing
+       to pick, store or keep in step. search/single.html reproduces the same
+       tile from the same two inputs (see data-pagefind-meta="category" in
+       posts/single.html), so one post looks the same in a grid and in a result
+       list. */ -}}
+{{- $p := .page -}}
+{{- $eager := .eager | default false -}}
+{{- $label := "" -}}
+{{- with $p.Params.categories }}{{ $label = index . 0 }}{{ end -}}
+{{- if not $label }}{{ $label = site.Title }}{{ end -}}
+{{- $hue := mod (hash.FNV32a (lower $label)) 360 -}}
+<a href="{{ $p.RelPermalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
+  <span class="thumb-ph" style="--ph-hue: {{ $hue }}"><span class="thumb-ph__label">{{ $label }}</span></span>
+  {{- with $p.Params.image }}
+  <img src="{{ partial "resource-url.html" (dict "page" $p "src" .) }}" alt=""
+       {{ if $eager }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async"
+       onerror="this.remove()">
+  {{- end }}
+</a>

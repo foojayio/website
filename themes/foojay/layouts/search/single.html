@@ -63,7 +63,40 @@
     });
   }
 
-  function renderResult(d) {
+  // FNV-1a, 32-bit -- the same hash Hugo's `hash.FNV32a` computes, so the
+  // placeholder tile below gets the SAME hue for a given label as
+  // partials/post-thumb.html does when it renders that post as a card.
+  // Math.imul because a plain `*` on 32-bit values loses precision past 2^53.
+  function hueFrom(str) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < str.length; i++) {
+      h = Math.imul(h ^ str.charCodeAt(i), 0x01000193) >>> 0;
+    }
+    return h % 360;
+  }
+
+  // Every result gets a thumbnail box, and the box always has something in it:
+  // the page's image if it has one, otherwise a tile whose label and hue are
+  // derived (the post's first category, via data-pagefind-meta="category" in
+  // posts/single.html, else the section name). Two reasons this is not just
+  // cosmetic. A result with no image used to render no box at all, so the whole
+  // row shifted left and a list of results was ragged; and an <img> whose src
+  // has gone 404 -- 11 posts hotlink a hero that is already dead, and Pagefind
+  // faithfully recorded the dead URL -- drew a broken-image glyph, which
+  // onerror now replaces with the tile underneath. Same markup, same classes
+  // and the same onerror as partials/post-thumb.html; keep the two in step.
+  function thumb(d, sectionLabel) {
+    var label = (d.meta && d.meta.category) || sectionLabel;
+    var img = d.meta && d.meta.image
+      ? '<img src="' + escapeHtml(d.meta.image) + '" alt="" loading="lazy" onerror="this.remove()">'
+      : '';
+    return '<a class="search-result__image" href="' + d.url + '" tabindex="-1" aria-hidden="true">' +
+      '<span class="thumb-ph" style="--ph-hue: ' + hueFrom(label.toLowerCase()) + '">' +
+      '<span class="thumb-ph__label">' + escapeHtml(label) + '</span></span>' +
+      img + '</a>';
+  }
+
+  function renderResult(d, sectionLabel) {
     var dateLabel = '';
     if (d.meta && d.meta.date) {
       var parsed = new Date(d.meta.date);
@@ -72,7 +105,7 @@
     }
     return '' +
       '<article class="search-result">' +
-      (d.meta && d.meta.image ? '<a class="search-result__image" href="' + d.url + '"><img src="' + d.meta.image + '" alt="" loading="lazy"></a>' : '') +
+      thumb(d, sectionLabel) +
       '<div class="search-result__body">' +
       '<h3><a href="' + d.url + '">' + (d.meta && d.meta.title ? d.meta.title : d.url) + '</a></h3>' +
       (dateLabel ? '<time class="search-result__date">' + dateLabel + '</time>' : '') +
@@ -134,7 +167,9 @@
                 return '' +
                   '<section class="search-page__section">' +
                   '<h2>' + label + ' <span class="search-page__count">' + groups[key].length + '</span></h2>' +
-                  '<div class="search-page__group">' + groups[key].map(renderResult).join('') + '</div>' +
+                  '<div class="search-page__group">' + groups[key].map(function (d) {
+                    return renderResult(d, label);
+                  }).join('') + '</div>' +
                   '</section>';
               }).join(''));
             });

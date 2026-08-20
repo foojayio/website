@@ -5,9 +5,18 @@
          2. Root-relative static path (/images/... from pages/pedia)
             -> relURL/absURL with the leading slash stripped so the subpath applies.
          3. External / data URL -> unchanged. */ -}}
+{{- /* The external test matches "http://" / "https://" and NOT a bare "http",
+       because four post bundles hold a file whose NAME starts with the scheme:
+       the WordPress export saved a hotlinked hero as
+       `https___res.cloudinary.com_..._blog-snakeyaml-pr-upgrade.jpg`. A bare
+       hasPrefix "http" passed those through untouched, so the browser resolved
+       the filename against the current directory and every one of them rendered
+       a broken image -- in the card grid, in search results and as the post's
+       own hero. Nothing reported it; the file is present and Hugo publishes it. */ -}}
 {{- $src := .src -}}
 {{- $out := $src -}}
-{{- if not (or (hasPrefix $src "http") (hasPrefix $src "//") (hasPrefix $src "data:")) -}}
+{{- $external := or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//") (hasPrefix $src "data:") -}}
+{{- if not $external -}}
   {{- $res := false -}}
   {{- with .page }}{{ $res = .Resources.GetMatch $src }}{{ end -}}
   {{- if $res -}}

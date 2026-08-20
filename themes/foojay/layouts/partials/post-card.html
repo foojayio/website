@@ -15,11 +15,10 @@
 {{- end -}}
 {{- with $p -}}
 <article class="post-card">
-  {{ with .Params.image }}
-  <a href="{{ $p.RelPermalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
-    <img src="{{ partial "resource-url.html" (dict "page" $p "src" .) }}" alt="" loading="lazy" decoding="async">
-  </a>
-  {{ end }}
+  {{/* Always rendered -- post-thumb.html falls back to a derived tile when the
+       post has no image or its image fails to load, so every card in a grid is
+       the same shape. */}}
+  {{ partial "post-thumb.html" (dict "page" $p) }}
 
   <div class="post-card-meta">
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
