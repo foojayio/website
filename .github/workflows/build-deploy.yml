@@ -20,7 +20,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
           # hugo.toml sets enableGitInfo, which dates every page from the last
@@ -31,7 +31,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set up JBang
-        uses: jbangdev/setup-jbang@main
+        # Pinned to a TAG, not @main: tracking a moving branch means an upstream
+        # commit can break this workflow with no change on our side.
+        uses: jbangdev/setup-jbang@v0.1.1
 
       # Refreshes data/jugs.yaml from the World Wide JUGs directory
       # (https://github.com/World-Wide-JUGs/GlobalWWJugs) so the /jugs/ page
@@ -82,7 +84,7 @@ jobs:
 
       - name: Configure GitHub Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       # The `id: pages` above is required for steps.pages.outputs.base_url to
       # resolve. Without it the expression is empty and Hugo builds with
@@ -100,7 +102,7 @@ jobs:
         run: npx -y pagefind --site public
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 
@@ -113,4 +115,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

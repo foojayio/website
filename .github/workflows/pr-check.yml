@@ -8,7 +8,7 @@ jobs:
   build-and-validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
 
@@ -19,7 +19,9 @@ jobs:
           extended: true
 
       - name: Set up JBang
-        uses: jbangdev/setup-jbang@main
+        # Pinned to a TAG, not @main: tracking a moving branch means an upstream
+        # commit can break this workflow with no change on our side.
+        uses: jbangdev/setup-jbang@v0.1.1
 
       - name: Validate post/author/page frontmatter
         run: jbang scripts/validate/Frontmatter.java

@@ -31,10 +31,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up JBang
-        uses: jbangdev/setup-jbang@main
+        # Pinned to a TAG, not @main: tracking a moving branch means an upstream
+        # commit can break this workflow with no change on our side.
+        uses: jbangdev/setup-jbang@v0.1.1
 
       # BRIDGE, DELETE WITH THE REST OF transfer/ AT CUTOVER.
       #
