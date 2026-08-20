@@ -41,7 +41,14 @@ jobs:
 
       # Independent of the JUG list above -- just piggybacking on the same
       # schedule rather than adding a whole workflow for one script.
+      #
+      # GEOCODE_API_KEY resolves coordinates for the world map on
+      # /java-champions/, and only for places not already in
+      # data/geocode-cache.yaml -- normally none, so a normal run makes no
+      # geocoding requests. Never fails over it; see the script.
       - name: Refresh Java Champions list
+        env:
+          GEOCODE_API_KEY: ${{ secrets.GEOCODE_API_KEY }}
         run: jbang scripts/fetch/JavaChampions.java
 
       # ~150 requests across meetup.com, Google Calendar and the JUGs' own
@@ -54,7 +61,10 @@ jobs:
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
-          git add data/jugs.yaml data/java-champions.yaml data/jug-events.json
+          # data/geocode-cache.yaml is committed for the same reason the data
+          # files are: it is the only copy, and it is what keeps the champions
+          # geocoding down to zero requests on a normal run.
+          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/jug-events.json
           if git diff --cached --quiet; then
             echo "No JUG list, Java Champions or event changes."
           else

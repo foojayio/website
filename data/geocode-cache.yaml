@@ -1,0 +1,775 @@
+# Geocoding cache -- written by scripts/fetch/JavaChampions.java, which resolves
+# each Java Champion's "<city>, <country>" to coordinates for the world map on
+# /java-champions/.
+#
+# Keyed by the PLACE, not by the champion: 422 champions live in 252 distinct
+# places, so everyone in "London, UK" shares one entry, and renaming a champion
+# or editing their socials costs no lookup at all.
+#
+# COMMITTED ON PURPOSE, and not hand-edited. It is what keeps this script from
+# re-querying geocode.maps.co on every deploy -- with the cache warm a run makes
+# no requests, so only genuinely new or moved champions cost anything.
+#
+# `found: false` means the geocoder answered and knows nowhere by that name;
+# it is recorded so we stop asking daily. Delete an entry (or this whole file)
+# to force a fresh lookup -- a full rebuild is ~250 requests at 1/sec, inside
+# the free tier's 5000/day.
+#
+# A place is looked up ONLY on a cache miss, and only when GEOCODE_API_KEY is
+# set (a repository secret in CI, an env var locally). Without it the cached
+# places still work and nothing here changes.
+
+Aachen, North Rhine-Westphalia, Germany:
+  latitude: 50.776351
+  longitude: 6.083862
+Aarhus, Denmark:
+  latitude: 56.1496278
+  longitude: 10.2134046
+Accra, Ghana:
+  latitude: 5.5571096
+  longitude: -0.2012376
+Albuquerque, NM, USA:
+  latitude: 35.0841034
+  longitude: -106.650985
+Amstelveen, The Netherlands:
+  latitude: 52.2862177
+  longitude: 4.8526493
+Amsterdam, The Netherlands:
+  latitude: 52.3730796
+  longitude: 4.8924534
+Anahola, Hawaii, USA:
+  latitude: 22.1452778
+  longitude: -159.3155556
+Angelholm, Sweden:
+  latitude: 56.2429224
+  longitude: 12.8619375
+Ankara, Turkey:
+  latitude: 39.9207759
+  longitude: 32.8540497
+Apeldoorn, The Netherlands:
+  latitude: 52.1795738
+  longitude: 5.9300775
+Arnhem, Gelderland, The Netherlands:
+  latitude: 51.984257
+  longitude: 5.9108573
+Atlanta, Georgia, USA:
+  latitude: 33.7544657
+  longitude: -84.3898151
+Atlanta, USA:
+  latitude: 33.7544657
+  longitude: -84.3898151
+Austin, Texas, USA:
+  latitude: 30.2711286
+  longitude: -97.7436995
+Austria:
+  latitude: 47.59397
+  longitude: 14.12456
+Barcelona, Spain:
+  latitude: 41.3825802
+  longitude: 2.177073
+Basel, Switzerland:
+  latitude: 47.5581077
+  longitude: 7.5878261
+Basingstoke, Hampshire, UK:
+  latitude: 51.262826
+  longitude: -1.0861976
+Belgium:
+  latitude: 50.6402809
+  longitude: 4.6667145
+Belgrade, Serbia:
+  latitude: 44.8178131
+  longitude: 20.4568974
+Belmont, California, USA:
+  latitude: 37.5164926
+  longitude: -122.2941914
+Bilbao, Spain:
+  latitude: 43.2630018
+  longitude: -2.9350039
+Bogota, Colombia:
+  latitude: 4.6533817
+  longitude: -74.0836331
+Boston, Massachusetts, USA:
+  latitude: 42.3554334
+  longitude: -71.060511
+Boston, USA:
+  latitude: 42.3554334
+  longitude: -71.060511
+Brazil:
+  latitude: -10.3333333
+  longitude: -53.2
+Breda, The Netherlands:
+  latitude: 51.5887845
+  longitude: 4.7760237
+Bremen, Germany:
+  latitude: 53.0758196
+  longitude: 8.8071646
+Broomfield, Colorado, USA:
+  latitude: 39.9403995
+  longitude: -105.05208
+Bruges, Belgium:
+  latitude: 51.2085526
+  longitude: 3.226772
+Brussels, Belgium:
+  latitude: 50.8465573
+  longitude: 4.351697
+Bucharest, Romania:
+  latitude: 44.4361414
+  longitude: 26.1027202
+Burkina Faso:
+  latitude: 12.0753083
+  longitude: -1.6880314
+Burlington, Vermont, USA:
+  latitude: 44.4761601
+  longitude: -73.212906
+Cagliari, Sardinia, Italy:
+  latitude: 39.2171994
+  longitude: 9.113311
+Cairo, Egypt:
+  latitude: 30.0443879
+  longitude: 31.2357257
+Cali, Valle del Cauca, Colombia:
+  latitude: 3.4519988
+  longitude: -76.5325259
+California, USA:
+  latitude: 36.7014631
+  longitude: -118.755997
+Cambridge, UK:
+  latitude: 52.2055314
+  longitude: 0.1186637
+Canada:
+  latitude: 61.0666922
+  longitude: -107.991707
+Cape Town, South Africa:
+  latitude: -33.9288301
+  longitude: 18.4172197
+Cary, NC, USA:
+  latitude: 35.7882893
+  longitude: -78.7812081
+Casablanca, Morocco:
+  latitude: 33.5945144
+  longitude: -7.6200284
+Castle Rock, Colorado, USA:
+  latitude: 39.3722552
+  longitude: -104.858682
+Chattanooga, Tennessee, USA:
+  latitude: 35.0457219
+  longitude: -85.3094883
+Chicago, Illinois, USA:
+  latitude: 41.8755616
+  longitude: -87.6244212
+Chicago, USA:
+  latitude: 41.8755616
+  longitude: -87.6244212
+China:
+  latitude: 35.000074
+  longitude: 104.999927
+Chorafakia, Chania, Crete, Greece:
+  latitude: 35.5618774
+  longitude: 24.0919486
+Cluj County, Romania:
+  latitude: 46.7708527
+  longitude: 23.5980505
+Coimbra, Portugal:
+  latitude: 40.2111931
+  longitude: -8.4294632
+Cologne, Germany:
+  latitude: 50.938361
+  longitude: 6.959974
+Colombia:
+  latitude: 4.099917
+  longitude: -72.9088133
+Colorado, USA:
+  latitude: 38.7251776
+  longitude: -105.607716
+Columbus, Ohio, USA:
+  latitude: 39.9622601
+  longitude: -83.0007065
+Copenhagen, Denmark:
+  latitude: 55.6867243
+  longitude: 12.5700724
+Cote Saint-Luc, Quebec, Canada:
+  latitude: 45.4772716
+  longitude: -73.6637524
+Crested Butte, Colorado, USA:
+  latitude: 38.8698201
+  longitude: -106.984043
+Darmstadt, Germany:
+  latitude: 49.872775
+  longitude: 8.651177
+Denmark:
+  latitude: 55.670249
+  longitude: 10.3333283
+Denver, Colorado, USA:
+  latitude: 39.7392364
+  longitude: -104.984862
+Dortmund, Germany:
+  latitude: 51.5142273
+  longitude: 7.4652789
+Dresden, Germany:
+  latitude: 51.0493286
+  longitude: 13.7381437
+Dublin, California, USA:
+  latitude: 37.7021521
+  longitude: -121.9357918
+Dublin, Leinster, Ireland:
+  latitude: 53.3493795
+  longitude: -6.2605593
+Düsseldorf, Germany:
+  latitude: 51.2254018
+  longitude: 6.7763137
+Ecuador:
+  latitude: -1.3397668
+  longitude: -79.3666965
+Edinburgh, Scotland:
+  latitude: 55.9533456
+  longitude: -3.1883749
+Erlach, Switzerland:
+  latitude: 47.0433028
+  longitude: 7.0975115
+Esbjerg, Denmark:
+  latitude: 55.4664892
+  longitude: 8.4520751
+Estonia:
+  latitude: 58.7523778
+  longitude: 25.3319078
+Etobicoke, Ontario, Canada:
+  latitude: 43.6435559
+  longitude: -79.5656326
+Eugene, Oregon, USA:
+  latitude: 44.0505054
+  longitude: -123.0950506
+Flemington, New Jersey, USA:
+  latitude: 40.5130953
+  longitude: -74.8591333
+Florianópolis, Santa Catarina, Brazil:
+  latitude: -27.5973002
+  longitude: -48.5496098
+Florida, USA:
+  latitude: 27.7567667
+  longitude: -81.4639835
+Forest Lake, MN, USA:
+  latitude: 45.279106
+  longitude: -92.9851629
+France:
+  latitude: 46.603354
+  longitude: 1.8883335
+Frankfurt, Germany:
+  latitude: 50.1106444
+  longitude: 8.6820917
+Freiburg, Germany:
+  latitude: 47.9960901
+  longitude: 7.8494005
+Galicia, Spain:
+  latitude: 42.61946
+  longitude: -7.863112
+Geneva, Switzerland:
+  latitude: 46.2017559
+  longitude: 6.1466014
+Germany:
+  latitude: 51.1638175
+  longitude: 10.4478313
+Glen Allen, Virginia, USA:
+  latitude: 37.664879
+  longitude: -77.4871236
+Godfrey, Illinois, USA:
+  latitude: 38.9556031
+  longitude: -90.1867765
+Greece:
+  latitude: 38.9953683
+  longitude: 21.9877132
+Groningen, The Netherlands:
+  latitude: 53.2190652
+  longitude: 6.5680077
+Guatemala:
+  latitude: 15.5855545
+  longitude: -90.345759
+Haan, North Rhine-Westphalia, Germany:
+  latitude: 51.1954956
+  longitude: 7.0085328
+Haleiwa, Hawaii, USA:
+  latitude: 21.5935975
+  longitude: -158.1044697
+Hamburg, Germany:
+  latitude: 53.550341
+  longitude: 10.000654
+Hampshire, UK:
+  latitude: 51.0449814
+  longitude: -1.2433133
+Holualoa, Hawaii, USA:
+  latitude: 19.6294697
+  longitude: -155.9168554
+Hook, UK:
+  latitude: 51.3678984
+  longitude: -0.3071453
+Hyderabad, Telangana, India:
+  latitude: 17.360589
+  longitude: 78.4740613
+Ile-de-France, France:
+  latitude: 48.6443057
+  longitude: 2.7537863
+Indianapolis, Indiana, USA:
+  latitude: 39.7683331
+  longitude: -86.1583502
+Israel:
+  latitude: 30.8124247
+  longitude: 34.8594762
+Istanbul, Türkiye:
+  latitude: 41.006381
+  longitude: 28.9758715
+Italy:
+  latitude: 42.6384261
+  longitude: 12.674297
+Jakarta, Indonesia:
+  latitude: -6.1754049
+  longitude: 106.827168
+Japan:
+  latitude: 36.5748441
+  longitude: 139.2394179
+Kaiserslautern, Germany:
+  latitude: 49.4432174
+  longitude: 7.7689951
+Karlsruhe, Germany:
+  latitude: 49.0068705
+  longitude: 8.4034195
+Kelowna, British Columbia, Canada:
+  latitude: 49.8879177
+  longitude: -119.495902
+Kitchener, Canada:
+  latitude: 43.451291
+  longitude: -80.4927815
+Konstanz, Germany:
+  latitude: 47.659216
+  longitude: 9.1750718
+Krakow, Poland:
+  latitude: 50.0619474
+  longitude: 19.9368564
+Küssnacht am Rigi, SZ, Switzerland:
+  latitude: 47.08385
+  longitude: 8.4386308
+Langerringen, Germany:
+  latitude: 48.1420572
+  longitude: 10.7595148
+Las Vegas, USA:
+  latitude: 36.1674263
+  longitude: -115.1484131
+Leicester, UK:
+  latitude: 52.6362
+  longitude: -1.1331969
+Leusden, The Netherlands:
+  latitude: 52.130355
+  longitude: 5.4286989
+Leuven, Flanders, Belgium:
+  latitude: 50.879202
+  longitude: 4.7011675
+Linz, Upper Austria, Austria:
+  latitude: 48.3059078
+  longitude: 14.286198
+London, UK:
+  latitude: 51.5074456
+  longitude: -0.1277653
+Los Altos, California, USA:
+  latitude: 37.3790629
+  longitude: -122.116578
+Louisville, Colorado, USA:
+  latitude: 39.977763
+  longitude: -105.1319296
+Loveland, Colorado, USA:
+  latitude: 40.3977612
+  longitude: -105.07498
+Ludwigsburg, Germany:
+  latitude: 48.8953937
+  longitude: 9.1895147
+Maassluis, South Holland Province, The Netherlands:
+  found: false
+Madrid, Spain:
+  latitude: 40.416782
+  longitude: -3.703507
+Malmo, Sweden:
+  latitude: 55.6052931
+  longitude: 13.0001566
+Manchester, New Hampshire, USA:
+  latitude: 42.9956397
+  longitude: -71.4547891
+Marietta, Georgia, USA:
+  latitude: 33.9528472
+  longitude: -84.5496148
+Marlborough, Connecticut, USA:
+  latitude: 41.631451
+  longitude: -72.4595549
+Marseille, France:
+  latitude: 43.2961743
+  longitude: 5.3699525
+Maryland, USA:
+  latitude: 39.5162401
+  longitude: -76.9382069
+Mells, Somerset, UK:
+  latitude: 51.2419857
+  longitude: -2.4021913
+Metuchen, New Jersey, USA:
+  latitude: 40.5431598
+  longitude: -74.3632049
+Metz, France:
+  latitude: 49.1196964
+  longitude: 6.1763552
+Mexico City, Mexico:
+  latitude: 19.4326296
+  longitude: -99.1331785
+Miami, USA:
+  latitude: 25.7741566
+  longitude: -80.1935973
+Milan, Italy:
+  latitude: 45.4641943
+  longitude: 9.1896346
+Milton Keynes, England, UK:
+  latitude: 52.0406502
+  longitude: -0.7594092
+Milton Keynes, UK:
+  latitude: 52.0406502
+  longitude: -0.7594092
+Minneapolis, Minnesota, USA:
+  latitude: 44.9772995
+  longitude: -93.2654692
+Minneapolis-St. Paul, Minnesota, USA:
+  latitude: 44.9227049
+  longitude: -93.0554922
+Moenchengladbach, Germany:
+  latitude: 51.1947131
+  longitude: 6.4353792
+Montreal, Canada:
+  latitude: 45.5031824
+  longitude: -73.5698065
+Montréal, Québec, Canada:
+  latitude: 45.5031824
+  longitude: -73.5698065
+Mountain View, California, USA:
+  latitude: 37.3893889
+  longitude: -122.0832101
+Munich, Bavaria, Germany:
+  latitude: 48.1371079
+  longitude: 11.5753822
+Munich, Germany:
+  latitude: 48.1371079
+  longitude: 11.5753822
+Málaga, Spain:
+  latitude: 36.7213028
+  longitude: -4.4216366
+Münster, North Rhine-Westphalia, Germany:
+  latitude: 51.9625101
+  longitude: 7.6251879
+Naperville, Illinois, USA:
+  latitude: 41.7728699
+  longitude: -88.1479278
+Neuss, Germany:
+  latitude: 51.1981778
+  longitude: 6.6916476
+New Delhi, Delhi, India:
+  latitude: 28.6138954
+  longitude: 77.2090057
+New Hampshire, USA:
+  latitude: 43.4849133
+  longitude: -71.6553992
+New Jersey, USA:
+  latitude: 40.0757384
+  longitude: -74.4041622
+New York City, New York, USA:
+  latitude: 40.7127281
+  longitude: -74.0060152
+New York, New York, USA:
+  latitude: 40.7127281
+  longitude: -74.0060152
+New Zealand:
+  latitude: -41.5000831
+  longitude: 172.8344077
+Nice, France:
+  latitude: 43.7009358
+  longitude: 7.2683912
+Nijmegen, The Netherlands:
+  latitude: 51.8474946
+  longitude: 5.8637771
+Nolensville, TN, USA:
+  latitude: 35.9522852
+  longitude: -86.6694413
+Norway:
+  latitude: 61.1529386
+  longitude: 8.7876653
+Nürnberg, Bavaria, Germany:
+  latitude: 49.453872
+  longitude: 11.077298
+Oklahoma City, Oklahoma, USA:
+  latitude: 35.4729886
+  longitude: -97.5170536
+Ontario, Canada:
+  latitude: 50.000678
+  longitude: -86.000977
+Orlando, Florida, USA:
+  latitude: 28.5421109
+  longitude: -81.3790304
+Osaka, Japan:
+  latitude: 34.6937569
+  longitude: 135.5014539
+Oslo, Norway:
+  latitude: 59.9133301
+  longitude: 10.7389701
+Ottawa, Ontario, Canada:
+  latitude: 45.4208777
+  longitude: -75.6901106
+Panama:
+  latitude: 8.559559
+  longitude: -81.1308434
+Paris, France:
+  latitude: 48.8588897
+  longitude: 2.320041
+Perú:
+  latitude: -6.8699697
+  longitude: -75.0458515
+Philippines:
+  latitude: 12.7503486
+  longitude: 122.7312101
+Poland:
+  latitude: 52.215933
+  longitude: 19.134422
+Portland, Oregon, USA:
+  latitude: 45.5202471
+  longitude: -122.674194
+Potsdam, Brandenburg, Germany:
+  latitude: 52.4009309
+  longitude: 13.0591397
+Poway, California, USA:
+  latitude: 32.9628234
+  longitude: -117.035864
+Prague, Czech Republic:
+  latitude: 50.0596288
+  longitude: 14.4464593
+Provo, Utah, USA:
+  latitude: 40.2337289
+  longitude: -111.6587085
+Pune, Maharashtra, India:
+  latitude: 18.5213738
+  longitude: 73.8545071
+Raleigh-Durham, North Carolina, USA:
+  latitude: 35.8803614
+  longitude: -78.7872382
+Rio de Janeiro, Brazil:
+  latitude: -22.9110137
+  longitude: -43.2093727
+Rocky River, OH, USA:
+  latitude: 41.4756031
+  longitude: -81.8393034
+Romania:
+  latitude: 45.9852129
+  longitude: 24.6859225
+Rouen, France:
+  latitude: 49.4404591
+  longitude: 1.0939658
+Russian Federation:
+  latitude: 64.6863136
+  longitude: 97.7453061
+Saint Petersburg, Russian Federation:
+  latitude: 59.9606739
+  longitude: 30.1586551
+San Diego, California, USA:
+  latitude: 32.7174202
+  longitude: -117.162772
+San Francisco, California, USA:
+  latitude: 37.7792588
+  longitude: -122.4193286
+San Jose, CA, USA:
+  latitude: 37.3361663
+  longitude: -121.890591
+San Jose, California, USA:
+  latitude: 37.3361663
+  longitude: -121.890591
+Santa Monica, California, USA:
+  latitude: 34.0194704
+  longitude: -118.491227
+Santiago, Dominican Republic:
+  latitude: 19.336389
+  longitude: -70.9521277
+Seattle, USA:
+  latitude: 47.6038321
+  longitude: -122.330062
+Seattle, Washington, USA:
+  latitude: 47.6038321
+  longitude: -122.330062
+Selangor, Malaysia:
+  latitude: 3.2083304
+  longitude: 101.304146
+Serbia:
+  latitude: 44.0243229
+  longitude: 21.0765743
+Seville, Andalusia, Spain:
+  latitude: 37.3886303
+  longitude: -5.9953403
+Seville, Spain:
+  latitude: 37.3886303
+  longitude: -5.9953403
+Silicon Valley, California, USA:
+  latitude: 37.4429964
+  longitude: -122.1545229
+Singapore:
+  latitude: 1.357107
+  longitude: 103.8194992
+Slovenia:
+  latitude: 46.1199444
+  longitude: 14.8153333
+Sofia, Bulgaria:
+  latitude: 42.6977028
+  longitude: 23.3217359
+South Korea:
+  latitude: 36.638392
+  longitude: 127.6961188
+Southampton, UK:
+  latitude: 50.9025349
+  longitude: -1.404189
+Spain:
+  latitude: 39.3260685
+  longitude: -4.8379791
+St. Gallen, Switzerland:
+  latitude: 47.425618
+  longitude: 9.3762397
+St. Louis, USA:
+  latitude: 38.6280278
+  longitude: -90.1910154
+Stockholm, Sweden:
+  latitude: 59.3251172
+  longitude: 18.0710935
+Sudbury, Massachusetts, USA:
+  latitude: 42.3834278
+  longitude: -71.4161725
+Sunnyvale, California, USA:
+  latitude: 37.3688301
+  longitude: -122.036349
+Surrey, UK:
+  latitude: 51.2715316
+  longitude: -0.3414524
+Sweden:
+  latitude: 59.6749712
+  longitude: 14.5208584
+Switzerland:
+  latitude: 46.7985624
+  longitude: 8.2319736
+Sydney, Australia:
+  latitude: -33.8698439
+  longitude: 151.2082848
+Sydney, USA:
+  latitude: 27.9633563
+  longitude: -82.2073118
+Syracuse, New York, USA:
+  latitude: 43.0481221
+  longitude: -76.1474244
+São Bernardo do Campo/SP, Brazil:
+  latitude: -23.6574983
+  longitude: -46.5754949
+São Paulo, Brazil:
+  latitude: -23.5506507
+  longitude: -46.6333824
+Tahoe, USA:
+  latitude: 46.0962876
+  longitude: -115.8070835
+Tartu, Estonia:
+  latitude: 58.3779528
+  longitude: 26.7290023
+Tassin-La-Demi-Lune, Lyon, France:
+  latitude: 45.7598386
+  longitude: 4.7657747
+Texas, USA:
+  latitude: 31.2638905
+  longitude: -98.5456116
+The Netherlands:
+  latitude: 52.2434979
+  longitude: 5.6343227
+Tilburg, The Netherlands:
+  latitude: 51.5856185
+  longitude: 5.0660616
+Tokyo, Japan:
+  latitude: 35.6768601
+  longitude: 139.7638947
+Toronto, Canada:
+  latitude: 43.6534817
+  longitude: -79.3839347
+Toronto, Ontario, Canada:
+  latitude: 43.6534817
+  longitude: -79.3839347
+Turin, Italy:
+  latitude: 45.0677551
+  longitude: 7.6824892
+Turkey:
+  latitude: 39.294076
+  longitude: 35.2316631
+Twickenham, UK:
+  latitude: 51.4467444
+  longitude: -0.3281887
+UK:
+  latitude: 54.7023545
+  longitude: -3.2765753
+USA:
+  latitude: 39.7837304
+  longitude: -100.445882
+Ukraine:
+  latitude: 49.4871968
+  longitude: 31.2718321
+Utrecht, The Netherlands:
+  latitude: 52.0907006
+  longitude: 5.1215634
+Val de Bagnes, Switzerland:
+  latitude: 46.009981
+  longitude: 7.3070055
+Valence, Rhône-Alpes, France:
+  latitude: 44.9332277
+  longitude: 4.8920811
+Valladolid, Spain:
+  latitude: 41.6521807
+  longitude: -4.728605
+Verona, Italy:
+  latitude: 45.4424977
+  longitude: 10.9857377
+Vienna, Austria:
+  latitude: 48.2083537
+  longitude: 16.3725042
+Virginia, USA:
+  latitude: 37.1232245
+  longitude: -78.4927721
+Wappingers Falls, New York, USA:
+  latitude: 41.597081
+  longitude: -73.9169663
+Warsaw, Poland:
+  latitude: 52.2319581
+  longitude: 21.0067249
+Washington DC, USA:
+  latitude: 38.8950368
+  longitude: -77.0365427
+Washington State, USA:
+  latitude: 47.2868352
+  longitude: -120.212613
+Weiden in der Oberpfalz, Germany:
+  latitude: 49.6752749
+  longitude: 12.1631636
+Westminster Abbey, Greater London, UK:
+  latitude: 51.499399
+  longitude: -0.127391
+Wilton, Connecticut, USA:
+  latitude: 41.1953739
+  longitude: -73.4378988
+Winchester, England:
+  latitude: 51.0612766
+  longitude: -1.3131692
+Wolfenbüttel, Germany:
+  latitude: 52.1625283
+  longitude: 10.5348215
+Wrocław, Poland:
+  latitude: 51.1263106
+  longitude: 16.9781963
+Würselen, Germany:
+  latitude: 50.8178682
+  longitude: 6.1341108
+Yokohama, Kanagawa, Japan:
+  latitude: 35.4503381
+  longitude: 139.6343802
+Zhytomyr/Limassol, Cyprus:
+  found: false
+Zug, Switzerland:
+  latitude: 47.1486137
+  longitude: 8.5539378
+Zürich, Switzerland:
+  latitude: 47.3744489
+  longitude: 8.5410422

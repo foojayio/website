@@ -29,6 +29,127 @@
     {{/* Dot notation can't reach a data key with a hyphen in it
          (data/java-champions.yaml -> key "java-champions"), hence index. */}}
     {{ $champions := index hugo.Data "java-champions" }}
+
+    {{/* World map of every champion we have coordinates for
+         (data/java-champions.yaml's latitude/longitude, resolved by
+         scripts/fetch/JavaChampions.java through data/geocode-cache.yaml, or
+         taken from an upstream `location:` once
+         aalmiray/java-champions#318 merges). Leaflet + marker clustering,
+         same libraries and versions as the /jugs/ map -- CDN-loaded here
+         rather than in baseof.html since no other page needs them.
+
+         ONE MARKER PER PLACE, not per champion, and the grouping happens in
+         the browser rather than here. Two reasons. The coordinate is a city
+         centre -- nobody's address -- so the 16 champions in "London, UK"
+         genuinely share one point: 16 markers there would stack into a single
+         unclickable pin and the 15 underneath would be unreachable at any
+         zoom. And Hugo has no map mutation, so grouping in the template means
+         ~420 `merge` calls to build a dict of lists, where the JS below does
+         it in one pass over the array it already has. */}}
+    {{ $points := slice }}
+    {{ range $champions }}
+      {{ if and .latitude .longitude }}
+        {{/* First profile the champion actually has, so a popup name is a link
+             wherever possible. Ordered most-canonical first, matching the
+             Connect column's own order. */}}
+        {{ $url := "" }}
+        {{ range (slice .website .linkedin .github .bluesky .mastodon .twitter) }}
+          {{ if and (not $url) . }}{{ $url = . }}{{ end }}
+        {{ end }}
+        {{ $points = $points | append (dict
+             "name" .name
+             "lat" .latitude
+             "lng" .longitude
+             "place" (cond (ne (printf "%v" (.city | default "")) "") (printf "%s, %s" .city .country) (printf "%v" .country))
+             "url" $url) }}
+      {{ end }}
+    {{ end }}
+
+    {{ if $points }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+    <div id="champions-map" class="champions-map"></div>
+    <p class="champions-map__note">
+      {{ len $points }} of {{ len $champions }} Java Champions are on the map, one marker per city.
+      A marker is the centre of the city (or country) a champion records in the directory &mdash;
+      not an address &mdash; so it shows where Java Champions are spread across the world, no more
+      precisely than that.
+    </p>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script>
+      (function () {
+        var data = {{ $points | jsonify | safeJS }};
+        var el = document.getElementById('champions-map');
+        if (!el || !window.L || !data.length) return;
+
+        /* Group by coordinate. Fixed 5 decimals rather than the raw number:
+           two champions in one city come from the same cache entry and so
+           carry byte-identical coordinates, but keying on a float's own string
+           form would split a group the day a geocoder returns 51.5072 for one
+           and 51.50720 for another. */
+        var places = {};
+        var order = [];
+        data.forEach(function (champion) {
+          var key = champion.lat.toFixed(5) + ',' + champion.lng.toFixed(5);
+          if (!places[key]) {
+            places[key] = { lat: champion.lat, lng: champion.lng, place: champion.place, champions: [] };
+            order.push(key);
+          }
+          places[key].champions.push(champion);
+        });
+
+        var map = L.map('champions-map').setView([20, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        var markers = L.markerClusterGroup({
+          maxClusterRadius: 50,
+          disableClusteringAtZoom: 10,
+          spiderfyOnMaxZoom: false
+        });
+
+        order.forEach(function (key) {
+          var place = places[key];
+          var count = place.champions.length;
+          var label = place.place + ' — ' + count + (count === 1 ? ' Java Champion' : ' Java Champions');
+          var marker = L.marker([place.lat, place.lng], { title: label, alt: label });
+
+          /* Built as DOM rather than an HTML string: a name is upstream data
+             (and some really do contain punctuation and markup-ish
+             characters), so it goes in as text and can never be markup. */
+          var popup = document.createElement('div');
+          popup.className = 'champions-map__popup';
+          var heading = document.createElement('strong');
+          heading.textContent = label;
+          popup.appendChild(heading);
+
+          var list = document.createElement('ul');
+          place.champions.forEach(function (champion) {
+            var item = document.createElement('li');
+            if (champion.url) {
+              var link = document.createElement('a');
+              link.href = champion.url;
+              link.target = '_blank';
+              link.rel = 'noopener';
+              link.textContent = champion.name;
+              item.appendChild(link);
+            } else {
+              item.textContent = champion.name;
+            }
+            list.appendChild(item);
+          });
+          popup.appendChild(list);
+
+          marker.bindPopup(popup);
+          markers.addLayer(marker);
+        });
+
+        map.addLayer(markers);
+      })();
+    </script>
+    {{ end }}
     {{ if $champions }}
     <div class="list-filter">
       <input type="search" id="champions-filter" class="list-filter__input" placeholder="Filter by name or country…" aria-label="Filter Java Champions by name or country" autocomplete="off">

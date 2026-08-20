@@ -10,8 +10,10 @@
 # To add, fix, or remove a Java Champion, edit java-champions.yml directly
 # upstream instead: https://github.com/aalmiray/java-champions/edit/main/java-champions.yml
 #
-# No coordinates yet -- aalmiray/java-champions#318 (pending) would add them
-# via a one-time geocoding script; nothing to read here until it merges.
+# latitude/longitude drive the world map on /java-champions/. They are the
+# champion's CITY (or country, for the ones recording no city) -- not an
+# address -- resolved through data/geocode-cache.yaml, and taken straight from
+# an upstream `location:` field the moment aalmiray/java-champions#318 adds one.
 
 - name: A N M *Bazlur* Rahman
   year: 2022
@@ -28,12 +30,16 @@
   website: https://bazlur.ca/
   sessionize: https://sessionize.com/bazlur/
   avatar: https://javachampions.org/img/avatars/bazlur_rahman.png
+  latitude: 43.6534817
+  longitude: -79.3839347
 - name: Adam Bien
   year: 2007
   country: Germany
   twitter: https://twitter.com/AdamBien
   bluesky: https://bsky.app/profile/adambien.blog
   avatar: https://javachampions.org/img/avatars/AdamBien.png
+  latitude: 51.1638175
+  longitude: 10.4478313
 - name: Adam Winer
   year: 2005
   country: USA
@@ -41,6 +47,8 @@
   avatar: https://javachampions.org/img/avatars/Adam_Winer.png
   status:
   - founding-member
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Agnes Crepet
   year: 2012
   country: The Netherlands
@@ -49,12 +57,16 @@
   twitter: https://twitter.com/agnes_crepet
   linkedin: https://www.linkedin.com/in/agnescrepet/
   avatar: https://javachampions.org/img/avatars/agnes_crepet.png
+  latitude: 52.3730796
+  longitude: 4.8924534
 - name: Ahmed Hashim
   year: 2007
   country: Egypt
   city: Cairo
   twitter: https://twitter.com/ahmed_hashim
   avatar: https://javachampions.org/img/avatars/ahmed_hashim.png
+  latitude: 30.0443879
+  longitude: 31.2357257
 - name: Alan Williamson
   year: 2005
   country: USA
@@ -63,6 +75,8 @@
   linkedin: https://www.linkedin.com/in/a1anw2/
   website: https://alan.is/about
   avatar: https://javachampions.org/img/avatars/a1anw2.png
+  latitude: 37.1232245
+  longitude: -78.4927721
 - name: Alberto Salazar
   year: 2018
   country: Ecuador
@@ -71,6 +85,8 @@
   github: https://github.com/lasalazarr
   sessionize: https://sessionize.com/alberto-salazar
   avatar: https://javachampions.org/img/avatars/betoSalazar.png
+  latitude: -1.3397668
+  longitude: -79.3666965
 - name: Aleksey Shipilev
   year: 2017
   country: Germany
@@ -79,6 +95,8 @@
   bluesky: https://bsky.app/profile/shipilev.bsky.social
   linkedin: https://www.linkedin.com/in/alekseyshipilev/
   avatar: https://javachampions.org/img/avatars/shipilev.png
+  latitude: 52.4009309
+  longitude: 13.0591397
 - name: Alex Soto
   year: 2017
   country: Spain
@@ -86,6 +104,8 @@
   twitter: https://twitter.com/alexsotob
   linkedin: https://www.linkedin.com/in/asotobu/
   avatar: https://javachampions.org/img/avatars/alexsotob.png
+  latitude: 41.3825802
+  longitude: 2.177073
 - name: Alex Theedom
   year: 2018
   country: UK
@@ -93,6 +113,8 @@
   twitter: https://twitter.com/alextheedom
   linkedin: https://www.linkedin.com/in/alextheedom/
   avatar: https://javachampions.org/img/avatars/alextheedom.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Alexis Lopez
   year: 2017
   country: Colombia
@@ -100,6 +122,8 @@
   twitter: https://twitter.com/acelopezco
   linkedin: https://www.linkedin.com/in/acelopezco
   avatar: https://javachampions.org/img/avatars/acelopezco.png
+  latitude: 3.4519988
+  longitude: -76.5325259
 - name: Altug Bilgin Altintas
   year: 2026
   country: Türkiye
@@ -110,12 +134,16 @@
   github: https://github.com/altuga
   sessionize: https://sessionize.com/Altuga/
   avatar: https://javachampions.org/img/avatars/altugaltintas.png
+  latitude: 41.006381
+  longitude: 28.9758715
 - name: Amira Lakhal
   year: 2016
   country: Switzerland
   twitter: https://twitter.com/MiraLak
   linkedin: https://www.linkedin.com/in/amiralakhal/
   avatar: https://javachampions.org/img/avatars/MiraLak.png
+  latitude: 46.7985624
+  longitude: 8.2319736
 - name: Ana-Maria Mihalceanu
   year: 2021
   country: Romania
@@ -126,12 +154,16 @@
   avatar: https://javachampions.org/img/avatars/ammbra1508.png
   status:
   - alumni
+  latitude: 45.9852129
+  longitude: 24.6859225
 - name: Andrei Pangin
   year: 2020
   country: Russian Federation
   twitter: https://twitter.com/AndreiPangin
   linkedin: https://www.linkedin.com/in/apangin/
   avatar: https://javachampions.org/img/avatars/AndreiPangin.png
+  latitude: 64.6863136
+  longitude: 97.7453061
 - name: Andres Almiray
   year: 2010
   country: Switzerland
@@ -148,6 +180,8 @@
   sessionize: https://sessionize.com/andres-almiray
   speakerdeck: https://speakerdeck.com/aalmiray
   avatar: https://javachampions.org/img/avatars/aalmiray.png
+  latitude: 47.5581077
+  longitude: 7.5878261
 - name: Andrzej Grzesik
   year: 2016
   country: UK
@@ -157,6 +191,8 @@
   linkedin: https://www.linkedin.com/in/andrzejgrzesik/
   sessionize: https://sessionize.com/ags
   avatar: https://javachampions.org/img/avatars/ags313.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Angelika Langer
   year: 2005
   country: Germany
@@ -164,6 +200,8 @@
   twitter: https://twitter.com/AngelikaLanger
   linkedin: https://www.linkedin.com/in/angelika-langer-0858501/
   avatar: https://javachampions.org/img/avatars/AngelikaLanger.png
+  latitude: 48.1371079
+  longitude: 11.5753822
 - name: Angie Jones
   year: 2020
   country: USA
@@ -172,6 +210,8 @@
   bluesky: https://bsky.app/profile/angiejones.tech
   linkedin: https://www.linkedin.com/in/angiejones/
   avatar: https://javachampions.org/img/avatars/techgirl1908.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Antoine Sabot-Durand
   year: 2017
   country: France
@@ -183,6 +223,8 @@
   sessionize: https://sessionize.com/antoine-sabot-durand
   speakerdeck: https://speakerdeck.com/antoine_sd
   avatar: https://javachampions.org/img/avatars/antoine_sd.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Anton (Toni) Epple
   year: 2013
   country: Germany
@@ -190,6 +232,8 @@
   twitter: https://twitter.com/monacotoni
   linkedin: https://www.linkedin.com/in/antonepple/
   avatar: https://javachampions.org/img/avatars/monacotoni.png
+  latitude: 48.1371079
+  longitude: 11.5753822
 - name: Anton Arhipov
   year: 2014
   country: Estonia
@@ -199,6 +243,8 @@
   sessionize: https://sessionize.com/antonarhipov
   speakerdeck: https://speakerdeck.com/antonarhipov
   avatar: https://javachampions.org/img/avatars/antonarhipov.png
+  latitude: 58.7523778
+  longitude: 25.3319078
 - name: Antonio Goncalves
   year: 2008
   country: France
@@ -208,6 +254,8 @@
   bluesky: https://bsky.app/profile/agoncal.bsky.social
   linkedin: https://www.linkedin.com/in/agoncal/
   avatar: https://javachampions.org/img/avatars/agoncal.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Antón María Rodríguez Yuste
   year: 2022
   country: Spain
@@ -216,12 +264,16 @@
   linkedin: https://www.linkedin.com/in/antonmry/
   sessionize: https://sessionize.com/antonmry
   avatar: https://javachampions.org/img/avatars/antonmry.png
+  latitude: 42.61946
+  longitude: -7.863112
 - name: Aristides Villareal
   year: 2021
   country: Panama
   twitter: https://twitter.com/aristidesvbravo
   linkedin: https://www.linkedin.com/in/aristides-villarreal-bravo-6258543/
   avatar: https://javachampions.org/img/avatars/aristidesvbravo.png
+  latitude: 8.559559
+  longitude: -81.1308434
 - name: Arjan Tijms
   year: 2020
   country: The Netherlands
@@ -229,6 +281,8 @@
   twitter: https://twitter.com/arjan_tijms
   linkedin: https://www.linkedin.com/in/arjan-tijms-1214aa1b1/
   avatar: https://javachampions.org/img/avatars/arjan_tijms.png
+  latitude: 51.984257
+  longitude: 5.9108573
 - name: Arun Gupta
   year: 2013
   country: USA
@@ -237,6 +291,8 @@
   bluesky: https://bsky.app/profile/arungupta.bsky.social
   linkedin: https://www.linkedin.com/in/arunpgupta/
   avatar: https://javachampions.org/img/avatars/arungupta.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Aslak Knutsen
   year: 2015
   country: Norway
@@ -244,6 +300,8 @@
   twitter: https://twitter.com/aslakknutsen
   linkedin: https://www.linkedin.com/in/aslakknutsen/
   avatar: https://javachampions.org/img/avatars/aslakknutsen.png
+  latitude: 59.9133301
+  longitude: 10.7389701
 - name: Attila Szegedi
   year: 2016
   country: Hungary
@@ -254,23 +312,31 @@
   linkedin: https://www.linkedin.com/in/atszegedi/
   github: https://github.com/szegedi
   avatar: https://javachampions.org/img/avatars/asz.png
+  latitude: 47.1486137
+  longitude: 8.5539378
 - name: Audrey Neveu
   year: 2020
   country: France
   city: Rouen
   linkedin: https://www.linkedin.com/in/audreyneveu/
   avatar: https://javachampions.org/img/avatars/Audrey_Neveu.png
+  latitude: 49.4404591
+  longitude: 1.0939658
 - name: Aurea Muñoz
   year: 2026
   country: Spain
   twitter: https://x.com/auritamh
   avatar: https://javachampions.org/img/avatars/auritamh.png
+  latitude: 39.3260685
+  longitude: -4.8379791
 - name: Axel Fontaine
   year: 2016
   country: Germany
   twitter: https://twitter.com/axelfontaine
   linkedin: https://www.linkedin.com/in/axel-fontaine-5a9a601/
   avatar: https://javachampions.org/img/avatars/axelfontaine.png
+  latitude: 51.1638175
+  longitude: 10.4478313
 - name: Badr El Houari
   year: 2016
   country: Morocco
@@ -278,12 +344,16 @@
   twitter: https://twitter.com/badrelhouari
   linkedin: https://www.linkedin.com/in/badrelhouari/
   avatar: https://javachampions.org/img/avatars/badrelhouari.png
+  latitude: 33.5945144
+  longitude: -7.6200284
 - name: Barry Burd
   year: 2020
   country: USA
   twitter: https://twitter.com/allmycode
   linkedin: https://www.linkedin.com/in/barry-burd/
   avatar: https://javachampions.org/img/avatars/barryburdtweets.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Baruch Sadogursky
   year: 2024
   country: USA
@@ -299,12 +369,16 @@
   website: https://speaking.jbaru.ch/
   sessionize: https://sessionize.com/jbaruch/
   avatar: https://javachampions.org/img/avatars/jbaruch.png
+  latitude: 35.9522852
+  longitude: -86.6694413
 - name: Bauke Scholtz
   year: 2017
   country: The Netherlands
   twitter: https://twitter.com/OmniFaces
   linkedin: https://www.linkedin.com/in/balusc/
   avatar: https://javachampions.org/img/avatars/OmniFaces.png
+  latitude: 52.2434979
+  longitude: 5.6343227
 - name: Ben Evans
   year: 2013
   country: UK
@@ -316,6 +390,8 @@
   github: https://github.com/kittylyst
   website: https://www.kittylyst.com/
   avatar: https://javachampions.org/img/avatars/kittylyst.png
+  latitude: 41.3825802
+  longitude: 2.177073
 - name: Benjamin Muskalla
   year: 2021
   country: Germany
@@ -323,6 +399,8 @@
   bluesky: https://bsky.app/profile/bmuskalla.dev
   linkedin: https://www.linkedin.com/in/benjaminmuskalla/
   avatar: https://javachampions.org/img/avatars/bmuskalla.png
+  latitude: 51.1638175
+  longitude: 10.4478313
 - name: Bernd Müller
   year: 2026
   country: Germany
@@ -330,6 +408,8 @@
   twitter: https://x.com/berndmuller
   bluesky: https://bsky.app/profile/berndmuller.bsky.social
   avatar: https://javachampions.org/img/avatars/berndmuller.png
+  latitude: 52.1625283
+  longitude: 10.5348215
 - name: Bert Bates
   year: 2005
   country: USA
@@ -338,6 +418,8 @@
   avatar: https://javachampions.org/img/avatars/BertBates.png
   status:
   - founding-member
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Bert Ertman
   year: 2008
   country: The Netherlands
@@ -345,6 +427,8 @@
   twitter: https://twitter.com/BertErtman
   linkedin: https://www.linkedin.com/in/bertertman/
   avatar: https://javachampions.org/img/avatars/BertErtman.png
+  latitude: 51.8474946
+  longitude: 5.8637771
 - name: Bert Jan Schrijver
   year: 2017
   country: The Netherlands
@@ -354,6 +438,8 @@
   bluesky: https://bsky.app/profile/bjschrijver.dev
   linkedin: https://www.linkedin.com/in/bjschrijver/
   avatar: https://javachampions.org/img/avatars/bjschrijver.png
+  latitude: 52.0907006
+  longitude: 5.1215634
 - name: Bethan Palmer
   year: 2018
   country: UK
@@ -361,6 +447,8 @@
   bluesky: https://bsky.app/profile/bet-han.bsky.social
   linkedin: https://www.linkedin.com/in/bethan-palmer/
   avatar: https://javachampions.org/img/avatars/BethanKP.png
+  latitude: 55.670249
+  longitude: 10.3333283
 - name: Bill Burke
   year: 2005
   country: USA
@@ -370,12 +458,16 @@
   avatar: https://javachampions.org/img/avatars/Bill_Burke.png
   status:
   - founding-member
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Bill Venners
   year: 2005
   country: USA
   twitter: https://twitter.com/bvenners
   linkedin: https://www.linkedin.com/in/bill-venners-27570a1/
   avatar: https://javachampions.org/img/avatars/bvenners.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Bob Lee
   year: 2007
   country: USA
@@ -384,6 +476,8 @@
   avatar: https://javachampions.org/img/avatars/crazybob.png
   status:
   - passed-away
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Bob Paulin
   year: 2017
   country: USA
@@ -392,6 +486,8 @@
   bluesky: https://bsky.app/profile/bobpaulin.com
   linkedin: https://www.linkedin.com/in/bobpaulin/
   avatar: https://javachampions.org/img/avatars/bobpaulin.png
+  latitude: 41.8755616
+  longitude: -87.6244212
 - name: Brian Benz
   year: 2020
   country: USA
@@ -401,6 +497,8 @@
   bluesky: https://bsky.app/profile/bbenz.bsky.social
   linkedin: https://www.linkedin.com/in/brianbenz/
   avatar: https://javachampions.org/img/avatars/bbenz.png
+  latitude: 36.1674263
+  longitude: -115.1484131
 - name: Brian Demers
   year: 2021
   country: USA
@@ -412,6 +510,8 @@
   github: https://github.com/bdemers
   sessionize: https://sessionize.com/bdemers/
   avatar: https://javachampions.org/img/avatars/briandemers.png
+  latitude: 43.4849133
+  longitude: -71.6553992
 - name: Brian Goetz
   year: 2006
   country: USA
@@ -421,6 +521,8 @@
   avatar: https://javachampions.org/img/avatars/BrianGoetz.png
   status:
   - alumni
+  latitude: 44.4761601
+  longitude: -73.212906
 - name: Brian Sam-Bodden
   year: 2023
   country: USA
@@ -431,6 +533,8 @@
   sessionize: https://sessionize.com/brian-sam-bodden
   speakerdeck: https://speakerdeck.com/bsbodden
   avatar: https://javachampions.org/img/avatars/bsbodden.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Brian Vermeer
   year: 2021
   country: The Netherlands
@@ -442,6 +546,8 @@
   website: https://brianvermeer.nl
   sessionize: https://sessionize.com/brian-vermeer
   avatar: https://javachampions.org/img/avatars/BrianVermeer.png
+  latitude: 51.5887845
+  longitude: 4.7760237
 - name: Bruce Eckel
   year: 2006
   country: USA
@@ -450,16 +556,22 @@
   bluesky: https://bsky.app/profile/bruceeckel.bsky.social
   linkedin: https://www.linkedin.com/in/bruceeckel/
   avatar: https://javachampions.org/img/avatars/BruceEckel.png
+  latitude: 38.7251776
+  longitude: -105.607716
 - name: Bruce Hopkins
   year: 2009
   country: USA
   avatar: https://javachampions.org/img/avatars/Bruce_Hopkins.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Bruce Snyder
   year: 2005
   country: USA
   city: Louisville, Colorado
   linkedin: https://www.linkedin.com/in/brucesnyder/
   avatar: https://javachampions.org/img/avatars/Bruce_Snyder.png
+  latitude: 39.977763
+  longitude: -105.1319296
 - name: Bruce Tate
   year: 2006
   country: USA
@@ -468,6 +580,8 @@
   bluesky: https://bsky.app/profile/redrapids.bsky.social
   linkedin: https://www.linkedin.com/in/bruce-tate/
   avatar: https://javachampions.org/img/avatars/redrapids.png
+  latitude: 35.0457219
+  longitude: -85.3094883
 - name: Bruno Borges
   year: 2019
   country: Canada
@@ -477,6 +591,8 @@
   bluesky: https://bsky.app/profile/brunoborges.bsky.social
   linkedin: https://www.linkedin.com/in/brunocborges/
   avatar: https://javachampions.org/img/avatars/brunoborges.png
+  latitude: 61.0666922
+  longitude: -107.991707
 - name: Bruno Bossola
   year: 2005
   country: UK
@@ -484,6 +600,8 @@
   twitter: https://twitter.com/bbossola
   linkedin: https://www.linkedin.com/in/bbossola
   avatar: https://javachampions.org/img/avatars/bbossola.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Bruno Ghisi
   year: 2007
   country: Brazil
@@ -491,6 +609,8 @@
   twitter: https://twitter.com/brunogh
   linkedin: https://www.linkedin.com/in/brunoghisi/
   avatar: https://javachampions.org/img/avatars/Bruno_Ghisi.png
+  latitude: -27.5973002
+  longitude: -48.5496098
 - name: Bruno Souza
   year: 2005
   country: Brazil
@@ -502,6 +622,8 @@
   avatar: https://javachampions.org/img/avatars/brjavaman.png
   status:
   - founding-member
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Burk Hufnagel
   year: 2020
   country: USA
@@ -511,6 +633,8 @@
   linkedin: https://www.linkedin.com/in/hufnagel/
   sessionize: https://sessionize.com/burk-hufnagel
   avatar: https://javachampions.org/img/avatars/BurkHufnagel.png
+  latitude: 33.7544657
+  longitude: -84.3898151
 - name: Burr Sutter
   year: 2005
   country: USA
@@ -518,18 +642,24 @@
   twitter: https://twitter.com/burrsutter
   linkedin: https://www.linkedin.com/in/burrsutter/
   avatar: https://javachampions.org/img/avatars/burrsutter.png
+  latitude: 35.8803614
+  longitude: -78.7872382
 - name: Cagatay Civici
   year: 2017
   country: Turkey
   twitter: https://twitter.com/cagataycivici
   linkedin: https://www.linkedin.com/in/%C3%A7a%C4%9Fatay-%C3%A7ivici-1579b0129/
   avatar: https://javachampions.org/img/avatars/cagataycivici.png
+  latitude: 39.294076
+  longitude: 35.2316631
 - name: Calvin Austin
   year: 2005
   country: USA
   city: San Francisco, California
   linkedin: https://www.linkedin.com/in/calvin-austin/
   avatar: https://javachampions.org/img/avatars/Calvin_Austin.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Carl Quinn
   year: 2020
   country: USA
@@ -538,6 +668,8 @@
   avatar: https://javachampions.org/img/avatars/cquinn.png
   status:
   - passed-away
+  latitude: 36.7014631
+  longitude: -118.755997
 - name: Carlos Obregon
   year: 2022
   country: Colombia
@@ -545,12 +677,16 @@
   twitter: https://twitter.com/gaijinco
   linkedin: https://www.linkedin.com/in/carlos-obregon-1565aab/
   avatar: https://javachampions.org/img/avatars/gaijinco.png
+  latitude: 4.6533817
+  longitude: -74.0836331
 - name: Carole McDonald
   year: 2021
   country: USA
   city: Florida
   twitter: https://twitter.com/caroljmcdonald
   avatar: https://javachampions.org/img/avatars/caroljmcdonald.png
+  latitude: 27.7567667
+  longitude: -81.4639835
 - name: Cassandra Chin
   year: 2025
   country: USA
@@ -558,6 +694,8 @@
   twitter: https://twitter.com/cassandraonjava
   linkedin: https://www.linkedin.com/in/cassandra-chin-developer
   avatar: https://javachampions.org/img/avatars/cassandraonjava.png
+  latitude: 37.5164926
+  longitude: -122.2941914
 - name: Chandra Guntur
   year: 2019
   country: USA
@@ -566,6 +704,8 @@
   bluesky: https://bsky.app/profile/cguntur.bsky.social
   linkedin: https://www.linkedin.com/in/cguntur/
   avatar: https://javachampions.org/img/avatars/CGuntur.png
+  latitude: 40.0757384
+  longitude: -74.4041622
 - name: Charles Oliver Nutter
   year: 2013
   country: USA
@@ -575,12 +715,16 @@
   bluesky: https://bsky.app/profile/headius.bsky.social
   linkedin: https://www.linkedin.com/in/headius/
   avatar: https://javachampions.org/img/avatars/headius.png
+  latitude: 44.9772995
+  longitude: -93.2654692
 - name: Charles Sabourdin
   year: 2024
   country: France
   city: Ile-de-France
   twitter: https://twitter.com/kanedafromparis
   avatar: https://javachampions.org/img/avatars/kanedafromparis.png
+  latitude: 48.6443057
+  longitude: 2.7537863
 - name: Chris Newland
   year: 2017
   country: UK
@@ -588,6 +732,8 @@
   mastodon: https://mastodon.social/@chriswhocodes
   linkedin: https://www.linkedin.com/in/chriswhocodes/
   avatar: https://javachampions.org/img/avatars/chriswhocodes.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Chris Richardson
   year: 2007
   country: USA
@@ -596,11 +742,15 @@
   bluesky: https://bsky.app/profile/crichardson.bsky.social
   linkedin: https://www.linkedin.com/in/pojos/
   avatar: https://javachampions.org/img/avatars/crichardson.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Chris Thalinger
   year: 2019
   country: USA
   city: Haleiwa, Hawaii
   avatar: https://javachampions.org/img/avatars/christhalinger.png
+  latitude: 21.5935975
+  longitude: -158.1044697
 - name: Christian Grobmeier
   year: 2025
   country: Germany
@@ -612,12 +762,16 @@
   github: https://github.com/grobmeier
   website: https://grobmeier.de
   avatar: https://javachampions.org/img/avatars/ChristianGrobmeier.png
+  latitude: 48.1420572
+  longitude: 10.7595148
 - name: Christian Ullenboom
   year: 2005
   country: Germany
   city: Nürnberg, Bavaria
   linkedin: https://www.linkedin.com/in/christian-ullenboom/
   avatar: https://javachampions.org/img/avatars/javabuch.png
+  latitude: 49.453872
+  longitude: 11.077298
 - name: Christoph Engelbert
   year: 2018
   country: Germany
@@ -629,6 +783,8 @@
   github: https://github.com/noctarius
   sessionize: https://sessionize.com/noctarius
   avatar: https://javachampions.org/img/avatars/noctarius2k.png
+  latitude: 51.1954956
+  longitude: 7.0085328
 - name: Christopher Judd
   year: 2017
   country: USA
@@ -639,6 +795,8 @@
   website: https://www.juddsolutions.com/
   sessionize: https://sessionize.com/christopher-judd/
   avatar: https://javachampions.org/img/avatars/javajudd.png
+  latitude: 39.9622601
+  longitude: -83.0007065
 - name: Clara Ko
   year: 2011
   country: USA
@@ -647,6 +805,8 @@
   twitter: https://twitter.com/clarako
   linkedin: https://www.linkedin.com/in/clarako/
   avatar: https://javachampions.org/img/avatars/clarako.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Clark D. Richey Jr.
   year: 2005
   country: USA
@@ -654,6 +814,8 @@
   avatar: https://javachampions.org/img/avatars/Clark_D_Richey_Jr.png
   status:
   - founding-member
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Claus Ibsen
   year: 2018
   country: Denmark
@@ -661,6 +823,8 @@
   twitter: https://twitter.com/davsclaus
   linkedin: https://www.linkedin.com/in/davsclaus/
   avatar: https://javachampions.org/img/avatars/davsclaus.png
+  latitude: 55.4664892
+  longitude: 8.4520751
 - name: Craig Walls
   year: 2021
   country: USA
@@ -672,12 +836,16 @@
   linkedin: https://www.linkedin.com/in/habuma/
   sessionize: https://sessionize.com/CraigWalls
   avatar: https://javachampions.org/img/avatars/habuma.png
+  latitude: 39.3722552
+  longitude: -104.858682
 - name: César Hernández
   year: 2016
   country: Guatemala
   twitter: https://twitter.com/CesarHgt
   linkedin: https://www.linkedin.com/in/cesarhernandezgt/
   avatar: https://javachampions.org/img/avatars/CesarHgt.png
+  latitude: 15.5855545
+  longitude: -90.345759
 - name: Dalibor Topic
   year: 2007
   country: Germany
@@ -688,6 +856,8 @@
   avatar: https://javachampions.org/img/avatars/robilad.png
   status:
   - alumni
+  latitude: 53.550341
+  longitude: 10.000654
 - name: Dan Allen
   year: 2013
   country: USA
@@ -696,6 +866,8 @@
   bluesky: https://bsky.app/profile/mojavelinux.com
   linkedin: https://www.linkedin.com/in/mojavelinux/
   avatar: https://javachampions.org/img/avatars/mojavelinux.png
+  latitude: 39.7392364
+  longitude: -104.984862
 - name: Dan Heidinga
   year: 2022
   country: Canada
@@ -705,11 +877,15 @@
   avatar: https://javachampions.org/img/avatars/DanHeidinga.png
   status:
   - alumni
+  latitude: 45.4208777
+  longitude: -75.6901106
 - name: Dan Malks
   year: 2007
   country: USA
   linkedin: https://www.linkedin.com/in/danmalks/
   avatar: https://javachampions.org/img/avatars/Dan_Malks.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Dan Vega
   year: 2024
   country: USA
@@ -718,6 +894,8 @@
   bluesky: https://bsky.app/profile/danvega.dev
   linkedin: https://www.linkedin.com/in/danvega/
   avatar: https://javachampions.org/img/avatars/therealdanvega.png
+  latitude: 41.4756031
+  longitude: -81.8393034
 - name: Daniel De Luca
   year: 2015
   country: Belgium
@@ -725,6 +903,8 @@
   twitter: https://twitter.com/danieldeluca
   linkedin: https://www.linkedin.com/in/danieldeluca/
   avatar: https://javachampions.org/img/avatars/danieldeluca.png
+  latitude: 50.8465573
+  longitude: 4.351697
 - name: Daniel deOliveira
   year: 2005
   country: Brazil
@@ -733,6 +913,8 @@
   status:
   - founding-member
   - passed-away
+  latitude: -10.3333333
+  longitude: -53.2
 - name: Daniel Hinojosa
   year: 2020
   country: USA
@@ -744,6 +926,8 @@
   website: https://evolutionnext.com
   sessionize: https://sessionize.com/daniel-hinojosa
   avatar: https://javachampions.org/img/avatars/dhinojosa.jpg
+  latitude: 35.0841034
+  longitude: -106.650985
 - name: Daniel Oh
   year: 2023
   country: USA
@@ -752,6 +936,8 @@
   bluesky: https://bsky.app/profile/danieloh30.bsky.social
   linkedin: https://www.linkedin.com/in/daniel-oh-083818112/
   avatar: https://javachampions.org/img/avatars/danieloh30.png
+  latitude: 42.3554334
+  longitude: -71.060511
 - name: David Blevins
   year: 2015
   country: USA
@@ -759,6 +945,8 @@
   twitter: https://twitter.com/dblevins
   linkedin: https://www.linkedin.com/in/dblevins/
   avatar: https://javachampions.org/img/avatars/dblevins.png
+  latitude: 34.0194704
+  longitude: -118.491227
 - name: David Bock
   year: 2006
   country: USA
@@ -768,6 +956,8 @@
   linkedin: https://www.linkedin.com/in/davidbock/
   github: https://github.com/bokmann
   avatar: https://javachampions.org/img/avatars/bokmann.png
+  latitude: 38.8950368
+  longitude: -77.0365427
 - name: David Flanagan
   year: 2005
   country: USA
@@ -775,6 +965,8 @@
   avatar: https://javachampions.org/img/avatars/__DavidFlanagan.png
   status:
   - founding-member
+  latitude: 47.2868352
+  longitude: -120.212613
 - name: David Gageot
   year: 2014
   country: France
@@ -782,12 +974,16 @@
   twitter: https://twitter.com/dgageot
   linkedin: https://www.linkedin.com/in/davidgageot/
   avatar: https://javachampions.org/img/avatars/dgageot.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: David Geary
   year: 2009
   country: USA
   city: Loveland, Colorado
   linkedin: https://www.linkedin.com/in/davidmgeary/
   avatar: https://javachampions.org/img/avatars/davidgeary.png
+  latitude: 40.3977612
+  longitude: -105.07498
 - name: David Gómez
   year: 2020
   country: Spain
@@ -798,6 +994,8 @@
   linkedin: https://www.linkedin.com/in/dgomezg/
   sessionize: https://sessionize.com/david-gomez-garcia/
   avatar: https://javachampions.org/img/avatars/dgomezg.png
+  latitude: 40.416782
+  longitude: -3.703507
 - name: David Heffelfinger
   year: 2017
   country: USA
@@ -806,12 +1004,16 @@
   bluesky: https://bsky.app/profile/ensode.bsky.social
   linkedin: https://www.linkedin.com/in/dheffelfinger
   avatar: https://javachampions.org/img/avatars/ensode.png
+  latitude: 38.8950368
+  longitude: -77.0365427
 - name: Deepak Alur
   year: 2006
   country: USA
   twitter: https://twitter.com/deepakalur
   linkedin: https://www.linkedin.com/in/deepakalur/
   avatar: https://javachampions.org/img/avatars/deepakalur.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Deepu K Sasidharan
   year: 2022
   country: The Netherlands
@@ -824,6 +1026,8 @@
   website: https://deepu.tech
   sessionize: https://sessionize.com/deepu-k-sasidharan
   avatar: https://javachampions.org/img/avatars/deepu105.png
+  latitude: 52.2434979
+  longitude: 5.6343227
 - name: Dervis Mansuroglu
   year: 2019
   country: Norway
@@ -834,6 +1038,8 @@
   website: https://dervis.no/
   sessionize: https://sessionize.com/dervis
   avatar: https://javachampions.org/img/avatars/dervismn.png
+  latitude: 59.9133301
+  longitude: 10.7389701
 - name: Dick Wall
   year: 2005
   country: UK
@@ -843,6 +1049,8 @@
   avatar: https://javachampions.org/img/avatars/dickwall.png
   status:
   - founding-member
+  latitude: 54.7023545
+  longitude: -3.2765753
 - name: Dion Almaer
   year: 2005
   country: USA
@@ -851,12 +1059,16 @@
   bluesky: https://bsky.app/profile/almaer.com
   linkedin: https://www.linkedin.com/in/dalmaer/
   avatar: https://javachampions.org/img/avatars/dalmaer.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Dirk Lemmermann
   year: 2019
   country: Switzerland
   bluesky: https://bsky.app/profile/dlemmermann.bsky.social
   linkedin: https://www.linkedin.com/in/dlemmermann/
   avatar: https://javachampions.org/img/avatars/dlemmermann.png
+  latitude: 46.7985624
+  longitude: 8.2319736
 - name: Dmitry Aleksandrov
   year: 2017
   country: Bulgaria
@@ -866,6 +1078,8 @@
   bluesky: https://bsky.app/profile/bercut2000.bsky.social
   linkedin: https://www.linkedin.com/in/dalexandrov/
   avatar: https://javachampions.org/img/avatars/bercut2000.png
+  latitude: 42.6977028
+  longitude: 23.3217359
 - name: Domingo Suarez
   year: 2019
   country: Mexico
@@ -878,6 +1092,8 @@
   github: https://github.com/domix
   website: https://domingosuarez.com
   avatar: https://javachampions.org/img/avatars/domix.png
+  latitude: 19.4326296
+  longitude: -99.1331785
 - name: Donald Raab
   year: 2018
   country: USA
@@ -887,6 +1103,8 @@
   bluesky: https://bsky.app/profile/thedonraab.bsky.social
   linkedin: https://www.linkedin.com/in/donald-raab-56016a121/
   avatar: https://javachampions.org/img/avatars/TheDonRaab.png
+  latitude: 40.5431598
+  longitude: -74.3632049
 - name: Dr. Alex Blewitt
   year: 2020
   country: UK
@@ -896,6 +1114,8 @@
   avatar: https://javachampions.org/img/avatars/alblue.png
   status:
   - passed-away
+  latitude: 52.0406502
+  longitude: -0.7594092
 - name: Dr. Alexey Fyodorov
   year: 2016
   country: Russian Federation
@@ -903,10 +1123,14 @@
   twitter: https://twitter.com/23derevo
   linkedin: https://www.linkedin.com/in/23derevo/
   avatar: https://javachampions.org/img/avatars/23derevo.png
+  latitude: 59.9606739
+  longitude: 30.1586551
 - name: Dr. Barry Levine
   year: 2005
   country: USA
   avatar: https://javachampions.org/img/avatars/Barry_Levine.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Dr. Cay Horstmann
   year: 2005
   country: USA
@@ -918,6 +1142,8 @@
   github: https://github.com/cayhorstmann
   website: https://horstmann.com
   avatar: https://javachampions.org/img/avatars/cayhorstmann.png
+  latitude: 51.2254018
+  longitude: 6.7763137
 - name: Dr. Clement Escoffier
   year: 2019
   country: France
@@ -927,6 +1153,8 @@
   bluesky: https://bsky.app/profile/cescoffier.bsky.social
   linkedin: https://www.linkedin.com/in/clementescoffier/
   avatar: https://javachampions.org/img/avatars/clementplop.png
+  latitude: 44.9332277
+  longitude: 4.8920811
 - name: Dr. Cliff Click
   year: 2019
   country: USA
@@ -934,6 +1162,8 @@
   twitter: https://twitter.com/cliff_click
   linkedin: https://www.linkedin.com/in/cliff-click-b252a070/
   avatar: https://javachampions.org/img/avatars/cliff_click.png
+  latitude: 37.3688301
+  longitude: -122.036349
 - name: Dr. Cǎtǎlin Tudose
   year: 2024
   country: Romania
@@ -941,6 +1171,8 @@
   twitter: https://twitter.com/CatalinTudose5
   linkedin: https://www.linkedin.com/in/catalin-tudose-847667a1/
   avatar: https://javachampions.org/img/avatars/CatalinTudose.jpg
+  latitude: 44.4361414
+  longitude: 26.1027202
 - name: Dr. Daniel Bryant
   year: 2018
   country: UK
@@ -949,10 +1181,14 @@
   bluesky: https://bsky.app/profile/danielbryantuk.com
   linkedin: https://www.linkedin.com/in/danielbryantuk/
   avatar: https://javachampions.org/img/avatars/danielbryantuk.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Dr. Daniel Liang
   year: 2005
   country: USA
   avatar: https://javachampions.org/img/daniel-liang-128x128.jpg
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Dr. Doug Lea
   year: 2005
   country: USA
@@ -960,11 +1196,15 @@
   twitter: https://twitter.com/douglea
   linkedin: https://www.linkedin.com/in/douglea/
   avatar: https://javachampions.org/img/avatars/douglea.png
+  latitude: 43.0481221
+  longitude: -76.1474244
 - name: Dr. Edward Lank
   year: 2005
   country: Canada
   city: Kitchener
   avatar: https://javachampions.org/img/avatars/Edward_Lank.png
+  latitude: 43.451291
+  longitude: -80.4927815
 - name: Dr. Fabiane Bizinella Nardon
   year: 2006
   country: Brazil
@@ -972,6 +1212,8 @@
   twitter: https://twitter.com/fabianenardon
   linkedin: https://www.linkedin.com/in/fabianenardon/
   avatar: https://javachampions.org/img/avatars/fabianenardon.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Dr. Heinz M. Kabutz
   year: 2005
   country: South Africa
@@ -984,6 +1226,8 @@
   github: https://github.com/kabutz
   website: https://www.javaspecialists.eu
   avatar: https://javachampions.org/img/avatars/heinzkabutz.png
+  latitude: 35.5618774
+  longitude: 24.0919486
 - name: Dr. Holly Cummins
   year: 2017
   country: UK
@@ -996,6 +1240,8 @@
   sessionize: https://sessionize.com/holly-cummins
   speakerdeck: https://speakerdeck.com/hollycummins
   avatar: https://javachampions.org/img/avatars/holly_cummins.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Dr. James Gosling
   year: 2005
   country: USA
@@ -1006,6 +1252,8 @@
   avatar: https://javachampions.org/img/avatars/errcraft.png
   status:
   - honorary-member
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Dr. Johan Vos
   year: 2012
   country: Belgium
@@ -1015,6 +1263,8 @@
   bluesky: https://bsky.app/profile/johanvos.bsky.social
   linkedin: https://www.linkedin.com/in/johanvos/
   avatar: https://javachampions.org/img/avatars/johanvos.png
+  latitude: 50.879202
+  longitude: 4.7011675
 - name: Dr. Jose Pereda
   year: 2017
   country: Spain
@@ -1022,6 +1272,8 @@
   twitter: https://twitter.com/JPeredaDnr
   linkedin: https://www.linkedin.com/in/jperedadnr/
   avatar: https://javachampions.org/img/avatars/JPeredaDnr.png
+  latitude: 41.6521807
+  longitude: -4.728605
 - name: Dr. Joshua Bloch
   year: 2005
   country: USA
@@ -1029,6 +1281,8 @@
   twitter: https://twitter.com/joshbloch
   linkedin: https://www.linkedin.com/in/joshua-bloch-37038/
   avatar: https://javachampions.org/img/avatars/joshbloch.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Dr. José Paumard
   year: 2015
   country: France
@@ -1039,6 +1293,8 @@
   avatar: https://javachampions.org/img/avatars/JosePaumard.png
   status:
   - alumni
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Dr. Julien Ponge
   year: 2024
   country: France
@@ -1049,6 +1305,8 @@
   github: https://github.com/jponge
   website: https://julien.ponge.org/
   avatar: https://javachampions.org/img/avatars/jponge.jpg
+  latitude: 45.7598386
+  longitude: 4.7657747
 - name: Dr. Kenneth Kousen
   year: 2017
   country: USA
@@ -1062,6 +1320,8 @@
   website: https://www.kousenit.com
   sessionize: https://sessionize.com/kenneth-kousen
   avatar: https://javachampions.org/img/avatars/kenkousen.png
+  latitude: 41.631451
+  longitude: -72.4595549
 - name: Dr. Kresten Krab Thorup
   year: 2005
   country: Denmark
@@ -1069,6 +1329,8 @@
   bluesky: https://bsky.app/profile/drkrab.bsky.social
   linkedin: https://www.linkedin.com/in/krestenkrabthorup/
   avatar: https://javachampions.org/img/avatars/drkrab.png
+  latitude: 55.670249
+  longitude: 10.3333283
 - name: Dr. Michael Huettermann
   year: 2006
   country: Germany
@@ -1078,12 +1340,16 @@
   linkedin: https://www.linkedin.com/in/huettermann/
   website: http://huettermann.net
   avatar: https://javachampions.org/img/avatars/huettermann.png
+  latitude: 50.938361
+  longitude: 6.959974
 - name: Dr. Michael Juntao Yuan
   year: 2005
   country: USA
   city: Austin, Texas
   twitter: https://twitter.com/juntao
   avatar: https://javachampions.org/img/avatars/juntao.png
+  latitude: 30.2711286
+  longitude: -97.7436995
 - name: Dr. Michael Kölling
   year: 2007
   country: UK
@@ -1091,6 +1357,8 @@
   bluesky: https://bsky.app/profile/kolling.uk
   linkedin: https://www.linkedin.com/in/kolling/
   avatar: https://javachampions.org/img/avatars/michaelkolling.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Dr. Neal Gafter
   year: 2007
   country: USA
@@ -1098,16 +1366,22 @@
   twitter: https://twitter.com/gafter
   linkedin: https://www.linkedin.com/in/neal-gafter-625393/
   avatar: https://javachampions.org/img/avatars/gafter.png
+  latitude: 47.6038321
+  longitude: -122.330062
 - name: Dr. Paul Perrone
   year: 2006
   country: USA
   linkedin: https://www.linkedin.com/in/paulperrone/
   avatar: https://javachampions.org/img/avatars/Paul_Perrone.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Dr. Qusay Mahmoud
   year: 2007
   country: Canada
   linkedin: https://www.linkedin.com/in/qmahmoud/
   avatar: https://javachampions.org/img/avatars/Qusay_Mahmoud.png
+  latitude: 61.0666922
+  longitude: -107.991707
 - name: Dr. Raoul-Gabriel Urma
   year: 2017
   country: UK
@@ -1115,10 +1389,14 @@
   twitter: https://twitter.com/raoulUK
   linkedin: https://www.linkedin.com/in/raoulurma/
   avatar: https://javachampions.org/img/avatars/raoulUK.png
+  latitude: 52.2055314
+  longitude: 0.1186637
 - name: Dr. Remi Forax
   year: 2016
   country: France
   avatar: https://javachampions.org/img/avatars/Remi_Forax.png
+  latitude: 46.603354
+  longitude: 1.8883335
 - name: Dr. Richard Warburton
   year: 2016
   country: UK
@@ -1126,6 +1404,8 @@
   twitter: https://twitter.com/RichardWarburto
   linkedin: https://www.linkedin.com/in/richard-warburton-5b03613/
   avatar: https://javachampions.org/img/avatars/RichardWarburto.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Dr. Rod Johnson
   year: 2006
   country: USA
@@ -1134,6 +1414,8 @@
   twitter: https://twitter.com/springrod
   linkedin: https://www.linkedin.com/in/johnsonroda/
   avatar: https://javachampions.org/img/avatars/springrod.png
+  latitude: 27.9633563
+  longitude: -82.2073118
 - name: Dr. Venkat Subramaniam
   year: 2013
   country: USA
@@ -1142,6 +1424,8 @@
   bluesky: https://bsky.app/profile/venkats.bsky.social
   linkedin: https://www.linkedin.com/in/vsubramaniam/
   avatar: https://javachampions.org/img/avatars/venkat_s.png
+  latitude: 39.9403995
+  longitude: -105.05208
 - name: Dr. Victor Rentea
   year: 2019
   country: Romania
@@ -1149,21 +1433,29 @@
   twitter: https://twitter.com/VictorRentea
   linkedin: https://www.linkedin.com/in/victor-rentea-trainer/
   avatar: https://javachampions.org/img/avatars/VictorRentea.png
+  latitude: 44.4361414
+  longitude: 26.1027202
 - name: Dr. Xu Bin
   year: 2005
   country: China
   avatar: https://javachampions.org/img/avatars/Xu_Bin.png
+  latitude: 35.000074
+  longitude: 104.999927
 - name: Dr. Zoran Sevarac
   year: 2013
   country: Serbia
   twitter: https://twitter.com/zsevarac
   linkedin: https://www.linkedin.com/in/zoran-sevarac-phd-49a9a411/
   avatar: https://javachampions.org/img/avatars/zsevarac.png
+  latitude: 44.0243229
+  longitude: 21.0765743
 - name: Drabo Constantin
   year: 2020
   country: Burkina Faso
   twitter: https://twitter.com/PandaConstantin
   avatar: https://javachampions.org/img/avatars/PandaConstantin.png
+  latitude: 12.0753083
+  longitude: -1.6880314
 - name: Eberhard Wolff
   year: 2005
   country: Germany
@@ -1176,6 +1468,8 @@
   status:
   - founding-member
   - retired
+  latitude: 49.4432174
+  longitude: 7.7689951
 - name: Ed Burns
   year: 2020
   country: USA
@@ -1183,6 +1477,8 @@
   twitter: https://twitter.com/edburns
   linkedin: https://www.linkedin.com/in/edburns/
   avatar: https://javachampions.org/img/avatars/edburns.png
+  latitude: 27.7567667
+  longitude: -81.4639835
 - name: Eddú Meléndez Gonzales
   year: 2022
   country: Perú
@@ -1192,6 +1488,8 @@
   github: https://github.com/eddumelendez
   sessionize: https://sessionize.com/eddumelendez
   avatar: https://javachampions.org/img/avatars/EdduMelendez.png
+  latitude: -6.8699697
+  longitude: -75.0458515
 - name: Eder Ignatowicz
   year: 2017
   country: USA
@@ -1200,6 +1498,8 @@
   twitter: https://twitter.com/ederign
   linkedin: https://www.linkedin.com/in/ederign/
   avatar: https://javachampions.org/img/avatars/ederign.png
+  latitude: 42.3554334
+  longitude: -71.060511
 - name: Edson Yanaga
   year: 2015
   country: Brazil
@@ -1215,6 +1515,8 @@
   sessionize: https://sessionize.com/yanaga
   speakerdeck: http://speakerdeck.com/yanaga
   avatar: https://javachampions.org/img/avatars/yanaga.png
+  latitude: 35.7882893
+  longitude: -78.7812081
 - name: Edwin Derks
   year: 2021
   country: The Netherlands
@@ -1225,6 +1527,8 @@
   linkedin: https://www.linkedin.com/in/edwin-derks/
   github: https://github.com/ederks85
   avatar: https://javachampions.org/img/avatars/edwinderks.png
+  latitude: 51.5856185
+  longitude: 5.0660616
 - name: Elder Moraes
   year: 2020
   country: Brazil
@@ -1236,6 +1540,8 @@
   website: https://eldermoraes.com
   sessionize: https://sessionize.com/eldermoraes
   avatar: https://javachampions.org/img/avatars/elderjava.png
+  latitude: -23.6574983
+  longitude: -46.5754949
 - name: Elias Nogueira
   year: 2023
   country: The Netherlands
@@ -1251,6 +1557,8 @@
   sessionize: https://sessionize.com/elias-nogueira
   speakerdeck: https://speakerdeck.com/eliasnogueira
   avatar: https://javachampions.org/img/avatars/eliasnogueira.png
+  latitude: 52.0907006
+  longitude: 5.1215634
 - name: Emily Jiang
   year: 2019
   country: UK
@@ -1261,6 +1569,8 @@
   linkedin: https://www.linkedin.com/in/emilyfhjiang
   sessionize: https://sessionize.com/emilyfhjiang
   avatar: https://javachampions.org/img/avatars/emilyfhjiang.png
+  latitude: 50.9025349
+  longitude: -1.404189
 - name: Emmanuel Bernard
   year: 2017
   country: France
@@ -1271,11 +1581,15 @@
   github: https://github.com/emmanuelbernard/
   website: https://emmanuelbernard.com/
   avatar: https://javachampions.org/img/avatars/emmanuelbernard.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Enrique Lasterra
   year: 2005
   country: Spain
   city: Bilbao
   avatar: https://javachampions.org/img/avatars/Enriqu_Lasterra.png
+  latitude: 43.2630018
+  longitude: -2.9350039
 - name: Enrique Zamudio
   year: 2015
   country: Mexico
@@ -1286,6 +1600,8 @@
   bluesky: https://bsky.app/profile/chochosmx.bsky.social
   linkedin: https://www.linkedin.com/in/enriquezamudiolopez/
   avatar: https://javachampions.org/img/avatars/chochosmx.png
+  latitude: 19.4326296
+  longitude: -99.1331785
 - name: Eric Deandrea
   year: 2024
   country: USA
@@ -1298,6 +1614,8 @@
   sessionize: https://sessionize.com/edeandrea/
   speakerdeck: https://speakerdeck.com/edeandrea
   avatar: https://javachampions.org/img/avatars/edeandrea.jpg
+  latitude: 42.9956397
+  longitude: -71.4547891
 - name: Erin Schnabel
   year: 2019
   country: USA
@@ -1309,6 +1627,8 @@
   github: https://github.com/ebullient
   website: https://ebullient.dev
   avatar: https://javachampions.org/img/avatars/ebullientworks.png
+  latitude: 41.597081
+  longitude: -73.9169663
 - name: Eudris Cabrera
   year: 2024
   country: Dominican Republic
@@ -1316,12 +1636,16 @@
   twitter: https://twitter.com/eudriscabrera
   linkedin: https://www.linkedin.com/in/eudriscabrera/
   avatar: https://javachampions.org/img/avatars/eudriscabrera.jpg
+  latitude: 19.336389
+  longitude: -70.9521277
 - name: Eugene Paraschiv
   year: 2021
   country: Romania
   twitter: https://twitter.com/baeldung
   linkedin: https://www.linkedin.com/in/eugenparaschiv/
   avatar: https://javachampions.org/img/avatars/baeldung.png
+  latitude: 45.9852129
+  longitude: 24.6859225
 - name: Evgeny Mandrikov
   year: 2024
   country: Switzerland
@@ -1332,6 +1656,8 @@
   github: https://github.com/godin
   sessionize: https://sessionize.com/godin
   avatar: https://javachampions.org/img/avatars/godin.png
+  latitude: 46.7985624
+  longitude: 8.2319736
 - name: Fabrizio Gianneschi
   year: 2005
   country: Italy
@@ -1339,6 +1665,8 @@
   twitter: https://twitter.com/javabird
   linkedin: https://www.linkedin.com/in/gianneschi/
   avatar: https://javachampions.org/img/avatars/javabird.png
+  latitude: 39.2171994
+  longitude: 9.113311
 - name: Falk Sippach
   year: 2023
   country: Germany
@@ -1350,6 +1678,8 @@
   github: https://github.com/sippsack
   website: https://www.sippsack.de/
   avatar: https://javachampions.org/img/avatars/sippsack.png
+  latitude: 49.872775
+  longitude: 8.651177
 - name: Felipe Gaúcho
   year: 2010
   country: Brazil
@@ -1357,11 +1687,15 @@
   avatar: https://javachampions.org/img/avatars/Felipe_Gaucho.png
   status:
   - passed-away
+  latitude: -22.9110137
+  longitude: -43.2093727
 - name: Fernando Anselmo
   year: 2006
   country: Brazil
   linkedin: https://www.linkedin.com/in/fernando-anselmo-bb423623/
   avatar: https://javachampions.org/img/avatars/Fernando_Anselmo.png
+  latitude: -10.3333333
+  longitude: -53.2
 - name: Fernando Babadopulos
   year: 2017
   country: Brazil
@@ -1369,6 +1703,8 @@
   twitter: https://twitter.com/babadopulos
   linkedin: https://www.linkedin.com/in/babadopulos/
   avatar: https://javachampions.org/img/avatars/babadopulos.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Filippo Diotalevi
   year: 2005
   country: UK
@@ -1376,11 +1712,15 @@
   city: London
   linkedin: https://www.linkedin.com/in/fdiotalevi/
   avatar: https://javachampions.org/img/avatars/fdiotalevi.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Flavia Coelho
   year: 2006
   country: Brazil
   city: São Paulo
   avatar: https://javachampions.org/img/avatars/Flavia_Coelho.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Floyd Marinescu
   year: 2005
   country: Canada
@@ -1388,18 +1728,24 @@
   twitter: https://twitter.com/floydmarinescu
   linkedin: https://www.linkedin.com/in/floydm/
   avatar: https://javachampions.org/img/avatars/floydmarinescu.png
+  latitude: 43.6435559
+  longitude: -79.5656326
 - name: Francesco Nigro
   year: 2023
   country: Italy
   twitter: https://twitter.com/forked_franz
   linkedin: https://www.linkedin.com/in/francesco-nigro-69963597/
   avatar: https://javachampions.org/img/avatars/forked_franz.png
+  latitude: 42.6384261
+  longitude: 12.674297
 - name: Francisco Isidro
   year: 2023
   country: Brazil
   city: São Paulo
   twitter: https://twitter.com/prof_isidro
   avatar: https://javachampions.org/img/avatars/prof_isidro.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Frank Delporte
   year: 2023
   country: Belgium
@@ -1411,6 +1757,8 @@
   website: https://webtechie.be/
   sessionize: https://sessionize.com/frank-delporte/
   avatar: https://javachampions.org/img/avatars/FrankDelporte.png
+  latitude: 50.6402809
+  longitude: 4.6667145
 - name: Frank Greco
   year: 2007
   country: USA
@@ -1418,6 +1766,8 @@
   twitter: https://twitter.com/frankgreco
   linkedin: https://www.linkedin.com/in/frankdgreco/
   avatar: https://javachampions.org/img/avatars/frankgreco.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Frans Thamura
   year: 2005
   country: Indonesia
@@ -1426,6 +1776,8 @@
   avatar: https://javachampions.org/img/avatars/fthamura.png
   status:
   - passed-away
+  latitude: -6.1754049
+  longitude: 106.827168
 - name: Freddy Guime
   year: 2015
   country: USA
@@ -1433,6 +1785,8 @@
   bluesky: https://bsky.app/profile/fguime.bsky.social
   linkedin: https://www.linkedin.com/in/fguime/
   avatar: https://javachampions.org/img/avatars/fguime.png
+  latitude: 47.6038321
+  longitude: -122.330062
 - name: Gail C. Anderson
   year: 2016
   country: USA
@@ -1442,6 +1796,8 @@
   linkedin: https://www.linkedin.com/in/gail-asgteach/
   website: https://asgteach.com/
   avatar: https://javachampions.org/img/avatars/gail_asgteach.png
+  latitude: 32.7174202
+  longitude: -117.162772
 - name: Gavin King
   year: 2005
   country: Spain
@@ -1449,6 +1805,8 @@
   twitter: https://twitter.com/1ovthafew
   linkedin: https://www.linkedin.com/in/gavinking/
   avatar: https://javachampions.org/img/avatars/1ovthafew.png
+  latitude: 39.3260685
+  longitude: -4.8379791
 - name: Geert Bevin
   year: 2006
   country: Belgium
@@ -1457,6 +1815,8 @@
   bluesky: https://bsky.app/profile/gbevin.uwyn.com
   linkedin: https://www.linkedin.com/in/gbevin/
   avatar: https://javachampions.org/img/avatars/gbevin.png
+  latitude: 50.6402809
+  longitude: 4.6667145
 - name: Geertjan Wielenga
   year: 2020
   country: The Netherlands
@@ -1464,6 +1824,8 @@
   twitter: https://twitter.com/GeertjanW
   linkedin: https://www.linkedin.com/in/geertjanwielenga/
   avatar: https://javachampions.org/img/avatars/GeertjanW.png
+  latitude: 52.3730796
+  longitude: 4.8924534
 - name: Geir Magnusson
   year: 2006
   country: USA
@@ -1471,6 +1833,8 @@
   twitter: https://twitter.com/geirmagnusson
   linkedin: https://www.linkedin.com/in/geirmagnussonjr/
   avatar: https://javachampions.org/img/avatars/geirmagnusson.png
+  latitude: 41.1953739
+  longitude: -73.4378988
 - name: George Adams
   year: 2021
   country: England
@@ -1481,6 +1845,8 @@
   linkedin: https://www.linkedin.com/in/gdams
   github: https://github.com/gdams
   avatar: https://javachampions.org/img/avatars/gdams_.png
+  latitude: 51.0612766
+  longitude: -1.3131692
 - name: Gerardo Horvilleur
   year: 2005
   country: Mexico
@@ -1492,6 +1858,8 @@
   avatar: https://javachampions.org/img/avatars/magoghm.png
   status:
   - founding-member
+  latitude: 19.4326296
+  longitude: -99.1331785
 - name: Gerrit Grunwald
   year: 2013
   country: Germany
@@ -1505,6 +1873,8 @@
   website: https://harmoniccode.blogspot.com/
   sessionize: https://sessionize.com/gerrit-grunwald
   avatar: https://javachampions.org/img/avatars/hansolo_.png
+  latitude: 51.9625101
+  longitude: 7.6251879
 - name: Gil Tene
   year: 2017
   country: USA
@@ -1512,6 +1882,8 @@
   twitter: https://twitter.com/giltene
   linkedin: https://www.linkedin.com/in/giltene/
   avatar: https://javachampions.org/img/avatars/giltene.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Glenn Renfro
   year: 2023
   country: USA
@@ -1519,12 +1891,16 @@
   twitter: https://twitter.com/cppwfs
   linkedin: https://www.linkedin.com/in/cppwfs/
   avatar: https://javachampions.org/img/avatars/cppwfs.png
+  latitude: 33.7544657
+  longitude: -84.3898151
 - name: Grace Jansen
   year: 2022
   country: UK
   twitter: https://twitter.com/gracejansen27
   linkedin: https://www.linkedin.com/in/grace-jansen/
   avatar: https://javachampions.org/img/avatars/gracejansen27.png
+  latitude: 54.7023545
+  longitude: -3.2765753
 - name: Graeme Rocher
   year: 2019
   country: Spain
@@ -1536,6 +1912,8 @@
   avatar: https://javachampions.org/img/avatars/graemerocher.png
   status:
   - alumni
+  latitude: 43.2630018
+  longitude: -2.9350039
 - name: Grzegorz Piwowarek
   year: 2026
   country: Poland
@@ -1546,6 +1924,8 @@
   github: https://github.com/pivovarit
   website: https://4comprehension.com
   avatar: https://javachampions.org/img/avatars/pivovarit.png
+  latitude: 52.2319581
+  longitude: 21.0067249
 - name: Guillaume Laforge
   year: 2017
   country: France
@@ -1557,6 +1937,8 @@
   website: https://glaforge.dev/
   sessionize: https://sessionize.com/glaforge
   avatar: https://javachampions.org/img/avatars/glaforge.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Gunnar Hillert
   year: 2016
   country: USA
@@ -1568,6 +1950,8 @@
   github: https://github.com/ghillert
   website: https://hillert.com
   avatar: https://javachampions.org/img/avatars/ghillert.png
+  latitude: 19.6294697
+  longitude: -155.9168554
 - name: Gunnar Morling
   year: 2019
   country: Germany
@@ -1577,6 +1961,8 @@
   bluesky: https://bsky.app/profile/gunnar.bsky.social
   linkedin: https://www.linkedin.com/in/gunnar-morling-2b44b7229/
   avatar: https://javachampions.org/img/avatars/gunnarmorling.png
+  latitude: 53.550341
+  longitude: 10.000654
 - name: Haim Yadid
   year: 2022
   country: Israel
@@ -1586,6 +1972,8 @@
   github: https://github.com/lifey
   sessionize: https://sessionize.com/lifey
   avatar: https://javachampions.org/img/avatars/lifeyx.png
+  latitude: 30.8124247
+  longitude: 34.8594762
 - name: Hanno Embregts
   year: 2023
   country: The Netherlands
@@ -1598,12 +1986,16 @@
   website: https://hanno.codes
   sessionize: https://sessionize.com/hanno-embregts
   avatar: https://javachampions.org/img/avatars/hannotify.png
+  latitude: 52.130355
+  longitude: 5.4286989
 - name: Hans Dockter
   year: 2023
   country: USA
   twitter: https://twitter.com/hans_d
   linkedin: https://www.linkedin.com/in/hansdockter/
   avatar: https://javachampions.org/img/avatars/hans_d.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Harshad Oak
   year: 2007
   country: India
@@ -1612,6 +2004,8 @@
   bluesky: https://bsky.app/profile/harshadoak.bsky.social
   linkedin: https://www.linkedin.com/in/harshadoak/
   avatar: https://javachampions.org/img/avatars/HarshadOak.png
+  latitude: 18.5213738
+  longitude: 73.8545071
 - name: Hendrik Ebbers
   year: 2016
   country: Germany
@@ -1620,6 +2014,8 @@
   mastodon: https://mastodon.cloud/@hendrikEbbers
   linkedin: https://www.linkedin.com/in/hendrik-ebbers/
   avatar: https://javachampions.org/img/avatars/hendrikEbbers.png
+  latitude: 51.5142273
+  longitude: 7.4652789
 - name: Henri Tremblay
   year: 2016
   country: Canada
@@ -1631,6 +2027,8 @@
   github: https://github.com/henri-tremblay
   website: https://blog.tremblay.pro
   avatar: https://javachampions.org/img/avatars/henri_tremblay.png
+  latitude: 45.5031824
+  longitude: -73.5698065
 - name: Henry Coles
   year: 2020
   country: Scotland
@@ -1640,24 +2038,32 @@
   bluesky: https://bsky.app/profile/pitest.bsky.social
   linkedin: https://www.linkedin.com/in/henry-coles-474ab93/
   avatar: https://javachampions.org/img/avatars/_pitest.png
+  latitude: 55.9533456
+  longitude: -3.1883749
 - name: Hillmer Chona
   year: 2019
   country: Colombia
   twitter: https://twitter.com/HillmerCh
   linkedin: https://www.linkedin.com/in/hillmerch/
   avatar: https://javachampions.org/img/avatars/HillmerCh.png
+  latitude: 4.099917
+  longitude: -72.9088133
 - name: Hovhannes Avoyan
   year: 2005
   country: USA
   country_citizenship: Armenia
   city: San Francisco, California
   avatar: https://javachampions.org/img/avatars/Hovhannes_Avoyan.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Howard Lewis Ship
   year: 2010
   country: USA
   city: Portland, Oregon
   linkedin: https://www.linkedin.com/in/howard-lewis-ship-a86a0a21b/
   avatar: https://javachampions.org/img/avatars/hlship.png
+  latitude: 45.5202471
+  longitude: -122.674194
 - name: Ian F. Darwin
   year: 2005
   country: Canada
@@ -1671,6 +2077,8 @@
   avatar: https://javachampions.org/img/avatars/Ian_Darwin.png
   status:
   - founding-member
+  latitude: 50.000678
+  longitude: -86.000977
 - name: Ionut Balosin
   year: 2025
   country: Austria
@@ -1682,6 +2090,8 @@
   github: https://github.com/ionutbalosin
   website: https://ionutbalosin.com/
   avatar: https://javachampions.org/img/avatars/ionutbalosin.png
+  latitude: 48.2083537
+  longitude: 16.3725042
 - name: Ivan St. Ivanov
   year: 2018
   country: Bulgaria
@@ -1690,6 +2100,8 @@
   bluesky: https://bsky.app/profile/ivannov.bsky.social
   linkedin: https://www.linkedin.com/in/ivan-ivanov-25ab324/
   avatar: https://javachampions.org/img/avatars/ivan_stefanov.png
+  latitude: 42.6977028
+  longitude: 23.3217359
 - name: Ivar Grimstad
   year: 2016
   country: Sweden
@@ -1706,6 +2118,8 @@
   sessionize: https://sessionize.com/ivar-grimstad/
   speakerdeck: https://speakerdeck.com/ivargrimstad
   avatar: https://javachampions.org/img/avatars/ivar_grimstad.png
+  latitude: 55.6052931
+  longitude: 13.0001566
 - name: Iván López
   year: 2025
   country: Spain
@@ -1715,6 +2129,8 @@
   linkedin: https://www.linkedin.com/in/ivanlopezmartin
   github: https://github.com/ilopmar
   avatar: https://javachampions.org/img/avatars/ilopmar.png
+  latitude: 40.416782
+  longitude: -3.703507
 - name: Ix-chel Ruiz
   year: 2017
   country: Switzerland
@@ -1726,6 +2142,8 @@
   linkedin: https://www.linkedin.com/in/ixchelruiz/
   sessionize: https://sessionize.com/ixchelruiz
   avatar: https://javachampions.org/img/avatars/ixchelruiz.png
+  latitude: 47.5581077
+  longitude: 7.5878261
 - name: Jacek Laskowski
   year: 2015
   country: Poland
@@ -1734,12 +2152,16 @@
   bluesky: https://bsky.app/profile/books.japila.pl
   linkedin: https://www.linkedin.com/in/jaceklaskowski/
   avatar: https://javachampions.org/img/avatars/jaceklaskowski.png
+  latitude: 52.2319581
+  longitude: 21.0067249
 - name: Jack Shirazi
   year: 2005
   country: UK
   city: Westminster Abbey, Greater London
   linkedin: https://www.linkedin.com/in/jack-shirazi-a547831/
   avatar: https://javachampions.org/img/avatars/Jack_Shirazi.png
+  latitude: 51.499399
+  longitude: -0.127391
 - name: Jacob Hookom
   year: 2005
   country: USA
@@ -1749,6 +2171,8 @@
   avatar: https://javachampions.org/img/avatars/jacobhookom.png
   status:
   - founding-member
+  latitude: 44.9227049
+  longitude: -93.0554922
 - name: Jakob Jenkov
   year: 2022
   country: Denmark
@@ -1756,6 +2180,8 @@
   twitter: https://twitter.com/jjenkov
   linkedin: https://www.linkedin.com/in/jakob-jenkov-4a3a8/
   avatar: https://javachampions.org/img/avatars/jjenkov.png
+  latitude: 55.6867243
+  longitude: 12.5700724
 - name: James Strachan
   year: 2011
   country: UK
@@ -1764,6 +2190,8 @@
   bluesky: https://bsky.app/profile/jstrachan.bsky.social
   linkedin: https://www.linkedin.com/in/jstrachan/
   avatar: https://javachampions.org/img/avatars/jstrachan.png
+  latitude: 51.2419857
+  longitude: -2.4021913
 - name: James Ward
   year: 2021
   country: USA
@@ -1776,6 +2204,8 @@
   website: https://jamesward.com
   sessionize: https://sessionize.com/jamesward
   avatar: https://javachampions.org/img/avatars/_JamesWard.png
+  latitude: 38.8698201
+  longitude: -106.984043
 - name: Jason Hunter
   year: 2005
   country: Singapore
@@ -1783,6 +2213,8 @@
   twitter: https://twitter.com/hunterhacker
   linkedin: https://www.linkedin.com/in/jasonhunter3/
   avatar: https://javachampions.org/img/avatars/hunterhacker.png
+  latitude: 1.357107
+  longitude: 103.8194992
 - name: Jason Lee
   year: 2023
   country: USA
@@ -1795,10 +2227,14 @@
   website: https://jasondl.ee/
   sessionize: https://sessionize.com/jasondlee/
   avatar: https://javachampions.org/img/avatars/jasondlee.png
+  latitude: 35.4729886
+  longitude: -97.5170536
 - name: Jayson Raymond
   year: 2005
   country: USA
   avatar: https://javachampions.org/img/avatars/Jayson_Raymond.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Jean Bisutti
   year: 2021
   country: France
@@ -1809,6 +2245,8 @@
   linkedin: https://www.linkedin.com/in/jean-bisutti-33587090/
   sessionize: https://sessionize.com/jean-bisutti/
   avatar: https://javachampions.org/img/avatars/jean_bisutti.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Jean-François Arcand
   year: 2018
   country: Canada
@@ -1816,6 +2254,8 @@
   twitter: https://twitter.com/jfarcand
   linkedin: https://www.linkedin.com/in/jfarcand/
   avatar: https://javachampions.org/img/avatars/jfarcand.png
+  latitude: 45.5031824
+  longitude: -73.5698065
 - name: Jean-Michel Doudoux
   year: 2014
   country: France
@@ -1824,6 +2264,8 @@
   bluesky: https://bsky.app/profile/jmdoudoux.bsky.social
   linkedin: https://www.linkedin.com/in/jmdoudoux/
   avatar: https://javachampions.org/img/avatars/jmdoudoux.png
+  latitude: 49.1196964
+  longitude: 6.1763552
 - name: Jean-Philippe Bempel
   year: 2021
   country: France
@@ -1836,6 +2278,8 @@
   website: https://jpbempel.github.io/
   sessionize: https://sessionize.com/jean-philippe-bempel/
   avatar: https://javachampions.org/img/avatars/jpbempel.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Jeanne Boyarsky
   year: 2019
   country: USA
@@ -1846,11 +2290,15 @@
   linkedin: https://www.linkedin.com/in/jeanne-boyarsky/
   sessionize: https://sessionize.com/jeanneboyarsky
   avatar: https://javachampions.org/img/avatars/jeanneboyarsky.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Jeff Cobb
   year: 2005
   country: USA
   linkedin: https://www.linkedin.com/in/jeffcobbseattle/
   avatar: https://javachampions.org/img/avatars/Jeff_Cobb.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Jeff Genender
   year: 2009
   country: USA
@@ -1858,6 +2306,8 @@
   twitter: https://twitter.com/jgenender
   linkedin: https://www.linkedin.com/in/jgenender/
   avatar: https://javachampions.org/img/avatars/jgenender.png
+  latitude: 39.7392364
+  longitude: -104.984862
 - name: Jennifer Reif
   year: 2025
   country: USA
@@ -1865,6 +2315,8 @@
   twitter: https://twitter.com/JMHReif
   linkedin: https://www.linkedin.com/in/jmhreif
   avatar: https://javachampions.org/img/avatars/jmhreif.png
+  latitude: 38.6280278
+  longitude: -90.1910154
 - name: Jim Gough
   year: 2020
   country: UK
@@ -1872,6 +2324,8 @@
   twitter: https://twitter.com/Jim__Gough
   linkedin: https://www.linkedin.com/in/jpgough/
   avatar: https://javachampions.org/img/avatars/Jim__Gough.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Jim Manico
   year: 2018
   country: USA
@@ -1879,6 +2333,8 @@
   twitter: https://twitter.com/manicode
   linkedin: https://www.linkedin.com/in/jmanico/
   avatar: https://javachampions.org/img/avatars/manicode.png
+  latitude: 22.1452778
+  longitude: -159.3155556
 - name: Jim Weaver
   year: 2008
   country: USA
@@ -1886,12 +2342,16 @@
   twitter: https://twitter.com/JavaFXpert
   linkedin: https://www.linkedin.com/in/javafxpert/
   avatar: https://javachampions.org/img/avatars/JavaFXpert.png
+  latitude: 39.7683331
+  longitude: -86.1583502
 - name: Joe Walker
   year: 2006
   country: UK
   city: Leicester
   linkedin: https://www.linkedin.com/in/joewalkeruk/
   avatar: https://javachampions.org/img/avatars/Joe_Walker.png
+  latitude: 52.6362
+  longitude: -1.1331969
 - name: Joe Winchester
   year: 2006
   country: UK
@@ -1899,6 +2359,8 @@
   twitter: https://twitter.com/JoeWinchester
   linkedin: https://www.linkedin.com/in/joewinchester/
   avatar: https://javachampions.org/img/avatars/JoeWinchester.png
+  latitude: 50.9025349
+  longitude: -1.404189
 - name: Joel Costigliola
   year: 2021
   country: New Zealand
@@ -1908,12 +2370,16 @@
   bluesky: https://bsky.app/profile/jocosti.bsky.social
   linkedin: https://www.linkedin.com/in/joelcostigliola/
   avatar: https://javachampions.org/img/avatars/JoCosti.png
+  latitude: -41.5000831
+  longitude: 172.8344077
 - name: Johan Janssen
   year: 2024
   country: The Netherlands
   bluesky: https://bsky.app/profile/johanjanssen.bsky.social
   linkedin: https://www.linkedin.com/in/johanjanssen2001/
   avatar: https://javachampions.org/img/avatars/johanjanssen42.png
+  latitude: 52.2434979
+  longitude: 5.6343227
 - name: John Paul "JP" Petines
   year: 2005
   country: Canada
@@ -1923,11 +2389,15 @@
   avatar: https://javachampions.org/img/avatars/jppetines.png
   status:
   - founding-member
+  latitude: 43.6534817
+  longitude: -79.3839347
 - name: Jonas Bonér
   year: 2011
   country: Sweden
   linkedin: https://www.linkedin.com/in/jonasboner/
   avatar: https://javachampions.org/img/avatars/jboner.png
+  latitude: 59.6749712
+  longitude: 14.5208584
 - name: Jonatan Ivanov
   year: 2024
   country: USA
@@ -1941,6 +2411,8 @@
   website: https://develotters.com
   sessionize: https://sessionize.com/jonatan-ivanov
   avatar: https://javachampions.org/img/avatars/jonatan_ivanov.png
+  latitude: 47.6038321
+  longitude: -122.330062
 - name: Jonathan Giles
   year: 2018
   country: New Zealand
@@ -1949,6 +2421,8 @@
   bluesky: https://bsky.app/profile/jonathangiles.net
   linkedin: https://www.linkedin.com/in/jonathangiles/
   avatar: https://javachampions.org/img/avatars/JonathanGiles.png
+  latitude: -41.5000831
+  longitude: 172.8344077
 - name: Jonathan Schneider
   year: 2024
   country: USA
@@ -1956,6 +2430,8 @@
   twitter: https://twitter.com/jon_k_schneider
   linkedin: https://www.linkedin.com/in/jonkschneider
   avatar: https://javachampions.org/img/avatars/jon_k_schneider.png
+  latitude: 25.7741566
+  longitude: -80.1935973
 - name: Jonathan Vila
   year: 2020
   country: Spain
@@ -1966,6 +2442,8 @@
   website: https://aytartana.wordpress.com
   sessionize: https://sessionize.com/jonathan-vila/
   avatar: https://javachampions.org/img/avatars/vilojona.png
+  latitude: 41.3825802
+  longitude: 2.177073
 - name: Jorge Hidalgo
   year: 2023
   country: Spain
@@ -1974,6 +2452,8 @@
   bluesky: https://bsky.app/profile/deors.bsky.social
   linkedin: https://www.linkedin.com/in/deors/
   avatar: https://javachampions.org/img/avatars/deors314.png
+  latitude: 36.7213028
+  longitude: -4.4216366
 - name: Jorge Vargas
   year: 2007
   country: Mexico
@@ -1986,6 +2466,8 @@
   website: https://jorgevargas.mx
   sessionize: https://sessionize.com/edivargas
   avatar: https://javachampions.org/img/avatars/edivargas.png
+  latitude: 19.4326296
+  longitude: -99.1331785
 - name: Josh Juneau
   year: 2017
   country: USA
@@ -1994,6 +2476,8 @@
   mastodon: https://fosstodon.org/@javajuneau
   linkedin: https://www.linkedin.com/in/josh-juneau-84b4867/
   avatar: https://javachampions.org/img/avatars/javajuneau.png
+  latitude: 41.8755616
+  longitude: -87.6244212
 - name: Josh Long
   year: 2015
   country: USA
@@ -2003,6 +2487,8 @@
   bluesky: https://bsky.app/profile/starbuxman.joshlong.com
   linkedin: https://www.linkedin.com/in/joshlong/
   avatar: https://javachampions.org/img/avatars/starbuxman.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Joshua Marinacci
   year: 2010
   country: USA
@@ -2010,12 +2496,16 @@
   twitter: https://twitter.com/joshmarinacci
   linkedin: https://www.linkedin.com/in/joshmarinacci/
   avatar: https://javachampions.org/img/avatars/joshmarinacci.png
+  latitude: 44.0505054
+  longitude: -123.0950506
 - name: José Díaz
   year: 2018
   country: Perú
   twitter: https://twitter.com/jamdiazdiaz
   linkedin: https://www.linkedin.com/in/joedayz/
   avatar: https://javachampions.org/img/avatars/jamdiazdiaz.png
+  latitude: -6.8699697
+  longitude: -75.0458515
 - name: Juergen Hoeller
   year: 2009
   country: Austria
@@ -2023,6 +2513,8 @@
   twitter: https://twitter.com/springjuergen
   linkedin: https://www.linkedin.com/in/juergenhoeller/
   avatar: https://javachampions.org/img/avatars/springjuergen.png
+  latitude: 48.3059078
+  longitude: 14.286198
 - name: Julien Dubois
   year: 2018
   country: France
@@ -2031,6 +2523,8 @@
   bluesky: https://bsky.app/profile/jdubois.bsky.social
   linkedin: https://www.linkedin.com/in/juliendubois/
   avatar: https://javachampions.org/img/avatars/juliendubois.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Julien Viet
   year: 2025
   country: France
@@ -2038,6 +2532,8 @@
   twitter: https://twitter.com/julienviet
   linkedin: https://www.linkedin.com/in/julienviet/
   avatar: https://javachampions.org/img/avatars/julienviet.png
+  latitude: 43.2961743
+  longitude: 5.3699525
 - name: Justin Lee
   year: 2014
   country: USA
@@ -2050,6 +2546,8 @@
   website: http://antwerkz.com
   sessionize: https://sessionize.com/evanchooly
   avatar: https://javachampions.org/img/avatars/evanchooly.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Karl Heinz Marbaise
   year: 2024
   country: Germany
@@ -2065,6 +2563,8 @@
   website: https://soebes.io
   sessionize: https://sessionize.com/khmarbaise
   avatar: https://javachampions.org/img/avatars/khmarbaise.png
+  latitude: 50.8178682
+  longitude: 6.1341108
 - name: Kate Stanley
   year: 2021
   country: UK
@@ -2072,12 +2572,16 @@
   twitter: https://twitter.com/KateStanley91
   linkedin: https://www.linkedin.com/in/katherine-kate-stanley-3796b579/
   avatar: https://javachampions.org/img/avatars/KateStanley91.png
+  latitude: 51.0449814
+  longitude: -1.2433133
 - name: Kathy Sierra
   year: 2005
   country: USA
   avatar: https://javachampions.org/img/avatars/Kathy_Sierra.png
   status:
   - founding-member
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Katia Aresti
   year: 2019
   country: France
@@ -2085,6 +2589,8 @@
   twitter: https://twitter.com/karesti
   linkedin: https://www.linkedin.com/in/karesti/
   avatar: https://javachampions.org/img/avatars/karesti.png
+  latitude: 46.603354
+  longitude: 1.8883335
 - name: Kevin Dubois
   year: 2024
   country: Belgium
@@ -2099,6 +2605,8 @@
   website: https://www.kevindubois.com
   sessionize: https://sessionize.com/kevindubois
   avatar: https://javachampions.org/img/avatars/kevindubois.png
+  latitude: 46.009981
+  longitude: 7.3070055
 - name: Kevin Nilson
   year: 2009
   country: USA
@@ -2106,6 +2614,8 @@
   twitter: https://twitter.com/javaclimber
   linkedin: https://www.linkedin.com/in/kevinnilson/
   avatar: https://javachampions.org/img/avatars/javaclimber.png
+  latitude: 37.7792588
+  longitude: -122.4193286
 - name: Kirk Pepperdine
   year: 2005
   country: Canada
@@ -2114,6 +2624,8 @@
   bluesky: https://bsky.app/profile/kcpeppe.bsky.social
   linkedin: https://www.linkedin.com/in/kirk-pepperdine/
   avatar: https://javachampions.org/img/avatars/kcpeppe.png
+  latitude: 49.8879177
+  longitude: -119.495902
 - name: Kito Mann
   year: 2017
   country: USA
@@ -2124,6 +2636,8 @@
   linkedin: https://www.linkedin.com/in/kitomann/
   github: https://github.com/kito99
   avatar: https://javachampions.org/img/avatars/kito99.png
+  latitude: 37.664879
+  longitude: -77.4871236
 - name: Klaasjan Tukker
   year: 2005
   country: USA
@@ -2134,6 +2648,8 @@
   avatar: https://javachampions.org/img/avatars/ktukker.png
   status:
   - founding-member
+  latitude: 47.6038321
+  longitude: -122.330062
 - name: Kohsuke Kawaguchi
   year: 2020
   country: USA
@@ -2142,12 +2658,16 @@
   twitter: https://twitter.com/kohsukekawa
   linkedin: https://www.linkedin.com/in/kohsukekawaguchi/
   avatar: https://javachampions.org/img/avatars/kohsukekawa.png
+  latitude: 37.3361663
+  longitude: -121.890591
 - name: Koichi Sakata
   year: 2018
   country: Japan
   city: Osaka
   twitter: https://twitter.com/jyukutyo
   avatar: https://javachampions.org/img/avatars/jyukutyo.png
+  latitude: 34.6937569
+  longitude: 135.5014539
 - name: Konrad Malawski
   year: 2017
   country: Poland
@@ -2156,6 +2676,8 @@
   bluesky: https://bsky.app/profile/kto.so
   linkedin: https://www.linkedin.com/in/konrad-ktoso-malawski/
   avatar: https://javachampions.org/img/avatars/ktosopl.png
+  latitude: 36.5748441
+  longitude: 139.2394179
 - name: Lars Vogel
   year: 2012
   country: Germany
@@ -2163,6 +2685,8 @@
   twitter: https://twitter.com/vogella
   linkedin: https://www.linkedin.com/in/vogella/
   avatar: https://javachampions.org/img/avatars/vogella.png
+  latitude: 53.550341
+  longitude: 10.000654
 - name: Laurentiu Spilca
   year: 2024
   country: Romania
@@ -2170,12 +2694,16 @@
   twitter: https://twitter.com/laurspilca
   linkedin: https://www.linkedin.com/in/laurspilca/
   avatar: https://javachampions.org/img/avatars/laurspilca.png
+  latitude: 44.4361414
+  longitude: 26.1027202
 - name: Leonardo de Moura Rocha Lima
   year: 2017
   country: Brazil
   city: São Paulo
   linkedin: https://www.linkedin.com/in/leomrlima/
   avatar: https://javachampions.org/img/avatars/leomrlima.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Linda van der Pal
   year: 2013
   country: The Netherlands
@@ -2183,6 +2711,8 @@
   twitter: https://twitter.com/DuchessFounder
   linkedin: https://www.linkedin.com/in/lvdpal/
   avatar: https://javachampions.org/img/avatars/DuchessFounder.png
+  latitude: 52.3730796
+  longitude: 4.8924534
 - name: Loiane Groner
   year: 2020
   country: USA
@@ -2195,6 +2725,8 @@
   website: https://loiane.com
   sessionize: https://sessionize.com/loiane
   avatar: https://javachampions.org/img/avatars/loiane.png
+  latitude: 28.5421109
+  longitude: -81.3790304
 - name: Lucio Benfante
   year: 2006
   country: Italy
@@ -2205,6 +2737,8 @@
   linkedin: https://www.linkedin.com/in/benfante/
   github: https://github.com/benfante
   avatar: https://javachampions.org/img/avatars/luciobenfante.png
+  latitude: 45.4424977
+  longitude: 10.9857377
 - name: Ludovic Champenois
   year: 2022
   country: USA
@@ -2213,6 +2747,8 @@
   bluesky: https://bsky.app/profile/ludoch.bsky.social
   linkedin: https://www.linkedin.com/in/ludovicchampenois/
   avatar: https://javachampions.org/img/avatars/ludoch.png
+  latitude: 37.3893889
+  longitude: -122.0832101
 - name: Lukas Eder
   year: 2015
   country: Switzerland
@@ -2221,12 +2757,16 @@
   bluesky: https://bsky.app/profile/lukaseder.bsky.social
   linkedin: https://www.linkedin.com/in/lukaseder/
   avatar: https://javachampions.org/img/avatars/lukaseder.png
+  latitude: 47.425618
+  longitude: 9.3762397
 - name: Luqman Saeed
   year: 2026
   country: Ghana
   city: Accra
   bluesky: https://bsky.app/profile/luqmansaeed.com
   avatar: https://javachampions.org/img/avatars/luqmansaeed.png
+  latitude: 5.5571096
+  longitude: -0.2012376
 - name: Maarten Mulders
   year: 2022
   country: The Netherlands
@@ -2239,6 +2779,8 @@
   sessionize: https://sessionize.com/mthmulders/
   speakerdeck: https://speakerdeck.com/mthmulders/
   avatar: https://javachampions.org/img/avatars/mthmulders.png
+  latitude: 52.1795738
+  longitude: 5.9300775
 - name: Magno Cavalcante
   year: 2006
   country: Brazil
@@ -2246,6 +2788,8 @@
   twitter: https://twitter.com/magnocav
   linkedin: https://www.linkedin.com/in/magnocav/
   avatar: https://javachampions.org/img/avatars/magnocav.png
+  latitude: -22.9110137
+  longitude: -43.2093727
 - name: Mala Gupta
   year: 2018
   country: India
@@ -2254,6 +2798,8 @@
   bluesky: https://bsky.app/profile/malagupta.bsky.social
   linkedin: https://www.linkedin.com/in/malagupta/
   avatar: https://javachampions.org/img/avatars/eMalaGupta.png
+  latitude: 28.6138954
+  longitude: 77.2090057
 - name: Manfred Riem
   year: 2005
   country: USA
@@ -2263,6 +2809,8 @@
   avatar: https://javachampions.org/img/avatars/mnriem.png
   status:
   - founding-member
+  latitude: 40.2337289
+  longitude: -111.6587085
 - name: Mani Sarkar
   year: 2018
   country: UK
@@ -2270,12 +2818,16 @@
   mastodon: https://mastodon.online/@neomatrix369
   linkedin: https://www.linkedin.com/in/mani-sarkar/
   avatar: https://javachampions.org/img/avatars/theNeomatrix369.png
+  latitude: 54.7023545
+  longitude: -3.2765753
 - name: Marc Hoffmann
   year: 2014
   country: Germany
   twitter: https://twitter.com/marcandsweep
   mastodon: https://mastodon.social/@marcandsweep
   avatar: https://javachampions.org/img/avatars/marcandsweep.png
+  latitude: 51.1638175
+  longitude: 10.4478313
 - name: Marc Philipp
   year: 2025
   country: Germany
@@ -2286,6 +2838,8 @@
   website: https://marcphilipp.de
   speakerdeck: https://speakerdeck.com/marcphilipp
   avatar: https://javachampions.org/img/avatars/marcphilipp.png
+  latitude: 49.0068705
+  longitude: 8.4034195
 - name: Marcin Grzejszczak
   year: 2024
   country: Poland
@@ -2296,6 +2850,8 @@
   github: https://github.com/marcingrzejszczak/
   website: https://toomuchcoding.com
   avatar: https://javachampions.org/img/avatars/MGrzejszczak.png
+  latitude: 52.215933
+  longitude: 19.134422
 - name: Marcus Hellberg
   year: 2025
   country: USA
@@ -2306,6 +2862,8 @@
   github: https://github.com/marcushellberg
   sessionize: https://sessionize.com/marcushellberg
   avatar: https://javachampions.org/img/avatars/marcushellberg.png
+  latitude: 46.0962876
+  longitude: -115.8070835
 - name: Marcus Hirt
   year: 2019
   country: Sweden
@@ -2319,12 +2877,16 @@
   github: https://github.com/thegreystone
   website: https://hirt.se/blog/
   avatar: https://javachampions.org/img/avatars/hirt.png
+  latitude: 47.08385
+  longitude: 8.4386308
 - name: Marcus Lagergren
   year: 2016
   country: Sweden
   twitter: https://twitter.com/lagergren
   linkedin: https://www.linkedin.com/in/lagergren/
   avatar: https://javachampions.org/img/avatars/lagergren.png
+  latitude: 59.6749712
+  longitude: 14.5208584
 - name: Mario Fusco
   year: 2016
   country: Italy
@@ -2332,6 +2894,8 @@
   twitter: https://twitter.com/mariofusco
   linkedin: https://www.linkedin.com/in/mario-fusco-3467213/
   avatar: https://javachampions.org/img/avatars/mariofusco.png
+  latitude: 45.4641943
+  longitude: 9.1896346
 - name: Mario Torre
   year: 2014
   country: Germany
@@ -2342,6 +2906,8 @@
   bluesky: https://bsky.app/profile/mariotorre.bsky.social
   linkedin: https://www.linkedin.com/in/neugens/
   avatar: https://javachampions.org/img/avatars/neugens.png
+  latitude: 53.550341
+  longitude: 10.000654
 - name: Marit van Dijk
   year: 2023
   country: The Netherlands
@@ -2354,6 +2920,8 @@
   website: https://maritvandijk.com/
   sessionize: https://sessionize.com/maritvandijk/
   avatar: https://javachampions.org/img/avatars/maritvandijk.png
+  latitude: 52.2862177
+  longitude: 4.8526493
 - name: Mark Heckler
   year: 2016
   country: USA
@@ -2366,6 +2934,8 @@
   sessionize: https://sessionize.com/mkheck
   xing: https://www.xing.com/profile/Mark_Heckler
   avatar: https://javachampions.org/img/avatars/MkHeck.png
+  latitude: 38.9556031
+  longitude: -90.1867765
 - name: Mark Paluch
   year: 2024
   country: Germany
@@ -2376,6 +2946,8 @@
   github: https://github.com/mp911de
   website: https://paluch.biz
   avatar: https://javachampions.org/img/avatars/mp911de.png
+  latitude: 51.1638175
+  longitude: 10.4478313
 - name: Mark Struberg
   year: 2019
   country: Austria
@@ -2383,6 +2955,8 @@
   twitter: https://twitter.com/struberg
   bluesky: https://bsky.app/profile/struberg.bsky.social
   avatar: https://javachampions.org/img/avatars/struberg.png
+  latitude: 48.2083537
+  longitude: 16.3725042
 - name: Markus Eisele
   year: 2014
   country: Germany
@@ -2396,6 +2970,8 @@
   website: https://www.eisele.net
   sessionize: https://sessionize.com/markus-eisele
   avatar: https://javachampions.org/img/avatars/myfear.png
+  latitude: 48.1371079
+  longitude: 11.5753822
 - name: Martijn Verburg
   year: 2012
   country: UK
@@ -2408,12 +2984,16 @@
   github: https://github.com/karianna
   sessionize: https://sessionize.com/martijnverburg
   avatar: https://javachampions.org/img/avatars/karianna.png
+  latitude: -41.5000831
+  longitude: 172.8344077
 - name: Martin Thompson
   year: 2015
   country: UK
   twitter: https://twitter.com/mjpt777
   linkedin: https://www.linkedin.com/in/martinjthompson/
   avatar: https://javachampions.org/img/avatars/mjpt777.png
+  latitude: 54.7023545
+  longitude: -3.2765753
 - name: Mary Grygleski
   year: 2021
   country: USA
@@ -2428,6 +3008,8 @@
   website: https://discord.gg/RMU4Juw
   sessionize: https://sessionize.com/mary-grygleski
   avatar: https://javachampions.org/img/avatars/mgrygles.png
+  latitude: 41.8755616
+  longitude: -87.6244212
 - name: María Arias de Reyna
   year: 2020
   country: Spain
@@ -2441,6 +3023,8 @@
   website: https://delawen.com
   sessionize: https://sessionize.com/delawen/
   avatar: https://javachampions.org/img/avatars/delawen.png
+  latitude: 37.3886303
+  longitude: -5.9953403
 - name: Matt Raible
   year: 2016
   country: USA
@@ -2453,6 +3037,8 @@
   sessionize: https://sessionize.com/mraible
   speakerdeck: https://speakerdeck.com/mraible
   avatar: https://javachampions.org/img/avatars/mraible.png
+  latitude: 39.7392364
+  longitude: -104.984862
 - name: Mattias Karlsson
   year: 2009
   country: Sweden
@@ -2462,6 +3048,8 @@
   bluesky: https://bsky.app/profile/matkar.bsky.social
   linkedin: https://www.linkedin.com/in/mattiask/
   avatar: https://javachampions.org/img/avatars/matkar.png
+  latitude: 59.3251172
+  longitude: 18.0710935
 - name: Maurice Naftalin
   year: 2014
   country: Scotland
@@ -2471,6 +3059,8 @@
   linkedin: https://www.linkedin.com/in/maurice-naftalin/
   sessionize: https://sessionize.com/Maurice_Naftalin
   avatar: https://javachampions.org/img/avatars/mauricenaftalin.png
+  latitude: 55.9533456
+  longitude: -3.1883749
 - name: Mauricio Salatino
   year: 2025
   country: UK
@@ -2479,12 +3069,16 @@
   bluesky: https://bsky.app/profile/salaboy.com
   linkedin: https://www.linkedin.com/in/salaboy/
   avatar: https://javachampions.org/img/avatars/salaboy.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Max Rydahl Andersen
   year: 2026
   country: Denmark
   bluesky: https://bsky.app/profile/maxandersen.xam.dk
   linkedin: https://www.linkedin.com/in/maxrydahlandersen/
   avatar: https://javachampions.org/img/avatars/maxandersen.png
+  latitude: 55.670249
+  longitude: 10.3333283
 - name: Melissa McKay
   year: 2021
   country: USA
@@ -2493,6 +3087,8 @@
   linkedin: https://www.linkedin.com/in/melissajmckay
   sessionize: https://sessionize.com/melissa-mckay
   avatar: https://javachampions.org/img/avatars/melissajmckay.png
+  latitude: 38.7251776
+  longitude: -105.607716
 - name: Mert Caliskan
   year: 2014
   country: Turkey
@@ -2500,6 +3096,8 @@
   twitter: https://twitter.com/mertcal
   linkedin: https://www.linkedin.com/in/mertcaliskan
   avatar: https://javachampions.org/img/avatars/mertcal.png
+  latitude: 39.9207759
+  longitude: 32.8540497
 - name: Michael Heinrichs
   year: 2017
   country: Germany
@@ -2507,6 +3105,8 @@
   twitter: https://twitter.com/net0pyr
   linkedin: https://www.linkedin.com/in/heinrichs/
   avatar: https://javachampions.org/img/avatars/net0pyr.png
+  latitude: 47.9960901
+  longitude: 7.8494005
 - name: Michael Hunger
   year: 2018
   country: Germany
@@ -2516,17 +3116,23 @@
   bluesky: https://bsky.app/profile/mesirii.de
   linkedin: https://www.linkedin.com/in/jexpde/
   avatar: https://javachampions.org/img/avatars/mesirii.png
+  latitude: 51.0493286
+  longitude: 13.7381437
 - name: Michael Levin
   year: 2011
   country: USA
   linkedin: https://www.linkedin.com/in/zoobird/
   avatar: https://javachampions.org/img/avatars/mikelevin77.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Michael Nascimento Santos
   year: 2006
   country: Brazil
   twitter: https://twitter.com/mr__m
   linkedin: https://www.linkedin.com/in/michaelnascimento/
   avatar: https://javachampions.org/img/avatars/mr__m.png
+  latitude: -10.3333333
+  longitude: -53.2
 - name: Michael P. Redlich
   year: 2023
   country: USA
@@ -2538,6 +3144,8 @@
   website: https://redlich.net
   sessionize: https://sessionize.com/michael-redlich
   avatar: https://javachampions.org/img/avatars/mpredli.png
+  latitude: 40.5130953
+  longitude: -74.8591333
 - name: Michael Simons
   year: 2018
   country: Germany
@@ -2548,6 +3156,8 @@
   github: https://github.com/michael-simons
   website: https://info.michael-simons.eu
   avatar: https://javachampions.org/img/avatars/rotnroll666.png
+  latitude: 50.776351
+  longitude: 6.083862
 - name: Michael T. Minella
   year: 2018
   country: USA
@@ -2558,6 +3168,8 @@
   github: https://github.com/mminella
   website: https://michaelminella.com
   avatar: https://javachampions.org/img/avatars/michaelminella.png
+  latitude: 41.7728699
+  longitude: -88.1479278
 - name: Michael Van Riper
   year: 2008
   country: USA
@@ -2565,6 +3177,8 @@
   twitter: https://twitter.com/vanriper
   linkedin: https://www.linkedin.com/in/vanriper/
   avatar: https://javachampions.org/img/avatars/vanriper.png
+  latitude: 37.4429964
+  longitude: -122.1545229
 - name: Michael Vitz
   year: 2021
   country: Germany
@@ -2581,6 +3195,8 @@
   sessionize: https://sessionize.com/michaelvitz/
   xing: https://www.xing.com/profile/Michael_Vitz2
   avatar: https://javachampions.org/img/avatars/michaelvitz.png
+  latitude: 51.1947131
+  longitude: 6.4353792
 - name: Mike Cannon-Brookes
   year: 2006
   country: Australia
@@ -2588,6 +3204,8 @@
   twitter: https://twitter.com/mcannonbrookes
   linkedin: https://www.linkedin.com/in/mcannonbrookes/
   avatar: https://javachampions.org/img/avatars/mcannonbrookes.png
+  latitude: -33.8698439
+  longitude: 151.2082848
 - name: Miro Wengner
   year: 2018
   country: Germany
@@ -2599,10 +3217,14 @@
   website: https://www.wengnermiro.com
   sessionize: https://sessionize.com/miro-wengner
   avatar: https://javachampions.org/img/avatars/miragemiko.png
+  latitude: 48.1371079
+  longitude: 11.5753822
 - name: Mo Li
   year: 2005
   country: China
   avatar: https://javachampions.org/img/avatars/Mo_Li.png
+  latitude: 35.000074
+  longitude: 104.999927
 - name: Mohamed Taman
   year: 2015
   country: Serbia
@@ -2611,6 +3233,8 @@
   twitter: https://twitter.com/_tamanm
   linkedin: https://www.linkedin.com/in/mohamedtaman/
   avatar: https://javachampions.org/img/avatars/_tamanm.png
+  latitude: 44.8178131
+  longitude: 20.4568974
 - name: Mohammed Aboullaite
   year: 2024
   country: Sweden
@@ -2619,6 +3243,8 @@
   twitter: https://twitter.com/laytoun
   linkedin: https://www.linkedin.com/in/aboullaite
   avatar: https://javachampions.org/img/avatars/laytoun.png
+  latitude: 59.3251172
+  longitude: 18.0710935
 - name: Monica Beckwith
   year: 2017
   country: USA
@@ -2626,12 +3252,16 @@
   twitter: https://twitter.com/mon_beck
   linkedin: https://www.linkedin.com/in/monicabeckwith/
   avatar: https://javachampions.org/img/avatars/mon_beck.png
+  latitude: 31.2638905
+  longitude: -98.5456116
 - name: Murat Yener
   year: 2015
   country: Turkey
   twitter: https://twitter.com/yenerm
   linkedin: https://www.linkedin.com/in/muratyener/
   avatar: https://javachampions.org/img/avatars/yenerm.png
+  latitude: 39.294076
+  longitude: 35.2316631
 - name: Nacho Cougil
   year: 2022
   country: Spain
@@ -2644,6 +3274,8 @@
   website: https://nacho.cougil.com
   sessionize: https://sessionize.com/icougil
   avatar: https://javachampions.org/img/avatars/icougil.png
+  latitude: 41.3825802
+  longitude: 2.177073
 - name: Nate Schutta
   year: 2023
   country: USA
@@ -2656,6 +3288,8 @@
   website: https://ntschutta.io
   sessionize: https://sessionize.com/nathaniel-schutta/
   avatar: https://javachampions.org/img/avatars/ntschutta.png
+  latitude: 45.279106
+  longitude: -92.9851629
 - name: Neal Tisdale
   year: 2005
   country: USA
@@ -2663,6 +3297,8 @@
   avatar: https://javachampions.org/img/avatars/Neal_Tisdale.png
   status:
   - founding-member
+  latitude: 33.9528472
+  longitude: -84.5496148
 - name: Neil Griffin
   year: 2017
   country: USA
@@ -2670,6 +3306,8 @@
   twitter: https://twitter.com/NeilGriffin95
   linkedin: https://www.linkedin.com/in/neilgriffin95/
   avatar: https://javachampions.org/img/avatars/NeilGriffin95.png
+  latitude: 28.5421109
+  longitude: -81.3790304
 - name: Nicolai Parlog
   year: 2019
   country: Germany
@@ -2684,12 +3322,16 @@
   avatar: https://javachampions.org/img/avatars/nipafx.png
   status:
   - alumni
+  latitude: 49.0068705
+  longitude: 8.4034195
 - name: Nikhil Nanivadekar
   year: 2018
   country: USA
   twitter: https://twitter.com/NikhilNanivade
   linkedin: https://www.linkedin.com/in/nikhilnanivadekar/
   avatar: https://javachampions.org/img/avatars/NikhilNanivade.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Nitsan Wakart
   year: 2018
   country: South Africa
@@ -2697,6 +3339,8 @@
   twitter: https://twitter.com/nitsanw
   linkedin: https://www.linkedin.com/in/nitsanwakart/
   avatar: https://javachampions.org/img/avatars/nitsanw.png
+  latitude: -33.9288301
+  longitude: 18.4172197
 - name: Norman Maurer
   year: 2016
   country: Germany
@@ -2704,6 +3348,8 @@
   twitter: https://twitter.com/normanmaurer
   linkedin: https://www.linkedin.com/in/normanmaurer/
   avatar: https://javachampions.org/img/avatars/normanmaurer.png
+  latitude: 50.1106444
+  longitude: 8.6820917
 - name: Oezcan Acar
   year: 2009
   country: Turkey
@@ -2712,6 +3358,8 @@
   twitter: https://twitter.com/oezcanacar
   linkedin: https://www.linkedin.com/in/acar1/
   avatar: https://javachampions.org/img/avatars/oezcanacar.png
+  latitude: 50.1106444
+  longitude: 8.6820917
 - name: Oleg Šelajev
   year: 2017
   country: Estonia
@@ -2723,12 +3371,16 @@
   github: https://github.com/shelajev/
   sessionize: https://sessionize.com/oleg-selajev/
   avatar: https://javachampions.org/img/avatars/shelajev.png
+  latitude: 58.3779528
+  longitude: 26.7290023
 - name: Oleh Dokuka
   year: 2019
   country: Ukraine
   twitter: https://twitter.com/OlehDokuka
   linkedin: https://www.linkedin.com/in/olegdokuka/
   avatar: https://javachampions.org/img/avatars/OlehDokuka.png
+  latitude: 49.4871968
+  longitude: 31.2718321
 - name: Oliver Drotbohm
   year: 2017
   country: Germany
@@ -2741,6 +3393,8 @@
   sessionize: https://sessionize.com/odrotbohm
   speakerdeck: https://speakerdeck.com/olivergierke
   avatar: https://javachampions.org/img/avatars/odrotbohm.png
+  latitude: 51.0493286
+  longitude: 13.7381437
 - name: Oliver Ihns
   year: 2005
   country: Germany
@@ -2748,6 +3402,8 @@
   twitter: https://twitter.com/oliverihns
   linkedin: https://www.linkedin.com/in/oliver-ihns-4455609/
   avatar: https://javachampions.org/img/avatars/oliverihns.png
+  latitude: 53.550341
+  longitude: 10.000654
 - name: Olivier Schmitt
   year: 2005
   country: Switzerland
@@ -2757,6 +3413,8 @@
   avatar: https://javachampions.org/img/avatars/Olivier_Schmitt.png
   status:
   - founding-member
+  latitude: 46.2017559
+  longitude: 6.1466014
 - name: Ondro Mihályi
   year: 2019
   country: Czech Republic
@@ -2766,6 +3424,8 @@
   bluesky: https://bsky.app/profile/ondromih.bsky.social
   linkedin: https://www.linkedin.com/in/mihalyiondrej/
   avatar: https://javachampions.org/img/avatars/OndroMih.png
+  latitude: 50.0596288
+  longitude: 14.4464593
 - name: Otávio Gonçalves de Santana
   year: 2015
   country: Brazil
@@ -2773,11 +3433,15 @@
   twitter: https://twitter.com/otaviojava
   linkedin: https://www.linkedin.com/in/otaviojava/
   avatar: https://javachampions.org/img/avatars/otaviojava.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Panos Konstantinidis
   year: 2007
   country: Greece
   twitter: https://twitter.com/panoskonst
   avatar: https://javachampions.org/img/avatars/panoskonst.png
+  latitude: 38.9953683
+  longitude: 21.9877132
 - name: Paris Apostolopoulos
   year: 2007
   country: UK
@@ -2787,6 +3451,8 @@
   bluesky: https://bsky.app/profile/javapapo.bsky.social
   linkedin: https://www.linkedin.com/in/javapapo/
   avatar: https://javachampions.org/img/avatars/javapapo.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Patrick Baumgartner
   year: 2025
   country: Switzerland
@@ -2799,18 +3465,24 @@
   website: https://patbaumgartner.com/
   sessionize: https://sessionize.com/patbaumgartner/
   avatar: https://javachampions.org/img/avatars/patbaumgartner.png
+  latitude: 47.425618
+  longitude: 9.3762397
 - name: Patrick Linskey
   year: 2005
   country: USA
   twitter: https://twitter.com/plinskey
   linkedin: https://www.linkedin.com/in/plinskey/
   avatar: https://javachampions.org/img/avatars/plinskey.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Patrycja Wegrzynowicz
   year: 2024
   country: Poland
   twitter: https://twitter.com/yonlabs
   linkedin: https://www.linkedin.com/in/patrycjaw/
   avatar: https://javachampions.org/img/avatars/yonlabs.jpg
+  latitude: 52.215933
+  longitude: 19.134422
 - name: Paul Bakker
   year: 2017
   country: USA
@@ -2820,6 +3492,8 @@
   bluesky: https://bsky.app/profile/pbakker.bsky.social
   linkedin: https://www.linkedin.com/in/paulb01/
   avatar: https://javachampions.org/img/avatars/pbakker.png
+  latitude: 37.3361663
+  longitude: -121.890591
 - name: Paul J. Deitel
   year: 2005
   country: USA
@@ -2827,6 +3501,8 @@
   twitter: https://twitter.com/deitel
   linkedin: https://www.linkedin.com/in/pauldeitel/
   avatar: https://javachampions.org/http://i.picasion.com/resize89/e4a02b14694e419dbd39f90befecd1ee.jpg
+  latitude: 42.3834278
+  longitude: -71.4161725
 - name: Paul L. Anderson
   year: 2016
   country: USA
@@ -2834,10 +3510,14 @@
   twitter: https://twitter.com/Paul_ASGTeach
   linkedin: https://www.linkedin.com/in/paul-asgteach/
   avatar: https://javachampions.org/img/avatars/Paul_ASGTeach.png
+  latitude: 32.7174202
+  longitude: -117.162772
 - name: Paul Lipton
   year: 2005
   country: USA
   avatar: https://javachampions.org/img/avatars/Paul_Lipton.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Paul Webber
   year: 2005
   country: USA
@@ -2845,6 +3525,8 @@
   twitter: https://twitter.com/CaptainWebber
   linkedin: https://www.linkedin.com/in/captainwebber/
   avatar: https://javachampions.org/img/avatars/CaptainWebber.png
+  latitude: 32.9628234
+  longitude: -117.035864
 - name: Peter Lawrey
   year: 2015
   country: UK
@@ -2854,6 +3536,8 @@
   bluesky: https://bsky.app/profile/peterlawrey.bsky.social
   linkedin: https://www.linkedin.com/in/peterlawrey/
   avatar: https://javachampions.org/img/avatars/PeterLawrey.png
+  latitude: 51.2715316
+  longitude: -0.3414524
 - name: Peter Pilgrim
   year: 2007
   country: UK
@@ -2862,6 +3546,8 @@
   bluesky: https://bsky.app/profile/peterpilgrim.bsky.social
   linkedin: https://www.linkedin.com/in/peterpilgrim2000/
   avatar: https://javachampions.org/img/avatars/peter_pilgrim.png
+  latitude: 52.0406502
+  longitude: -0.7594092
 - name: Piotr Przybyl
   year: 2023
   country: Poland
@@ -2873,6 +3559,8 @@
   website: https://softwaregarden.dev/
   sessionize: https://sessionize.com/piotr-przybyl/
   avatar: https://javachampions.org/img/avatars/piotrprz.png
+  latitude: 51.1263106
+  longitude: 16.9781963
 - name: Pratik Patel
   year: 2016
   country: USA
@@ -2881,6 +3569,8 @@
   bluesky: https://bsky.app/profile/prpatel.bsky.social
   linkedin: https://www.linkedin.com/in/prpatel/
   avatar: https://javachampions.org/img/avatars/prpatel.png
+  latitude: 33.7544657
+  longitude: -84.3898151
 - name: Prof. Dierk König
   year: 2016
   country: Switzerland
@@ -2889,6 +3579,8 @@
   bluesky: https://bsky.app/profile/dierk-koenig.bsky.social
   linkedin: https://www.linkedin.com/in/mittie/
   avatar: https://javachampions.org/img/avatars/mittie.png
+  latitude: 47.3744489
+  longitude: 8.5410422
 - name: Prof. Ken Fogel
   year: 2018
   country: Canada
@@ -2898,12 +3590,16 @@
   bluesky: https://bsky.app/profile/omniprof.bsky.social
   linkedin: https://www.linkedin.com/in/kenfogel/
   avatar: https://javachampions.org/img/avatars/omniprof.png
+  latitude: 45.4772716
+  longitude: -73.6637524
 - name: Prof. Matjaz Juric
   year: 2010
   country: Slovenia
   twitter: https://twitter.com/matjazbj
   linkedin: https://www.linkedin.com/in/matjaz-b-juric-93b645/
   avatar: https://javachampions.org/img/avatars/matjazbj.png
+  latitude: 46.1199444
+  longitude: 14.8153333
 - name: Prof. William Pugh
   year: 2007
   country: USA
@@ -2911,6 +3607,8 @@
   twitter: https://twitter.com/wpugh
   linkedin: https://www.linkedin.com/in/billpugh/
   avatar: https://javachampions.org/img/avatars/wpugh.png
+  latitude: 39.5162401
+  longitude: -76.9382069
 - name: Rabea Gransberger
   year: 2017
   country: Germany
@@ -2919,6 +3617,8 @@
   bluesky: https://bsky.app/profile/rgransberger.bsky.social
   linkedin: https://www.linkedin.com/in/rgransberger/
   avatar: https://javachampions.org/img/avatars/rgransberger.png
+  latitude: 53.0758196
+  longitude: 8.8071646
 - name: Rafael Del Nero
   year: 2018
   country: Ireland
@@ -2926,6 +3626,8 @@
   twitter: https://twitter.com/RafaDelNero
   linkedin: https://www.linkedin.com/in/rafadelnero/
   avatar: https://javachampions.org/img/avatars/RafaDelNero.png
+  latitude: 53.3493795
+  longitude: -6.2605593
 - name: Rafael Winterhalter
   year: 2015
   country: Norway
@@ -2937,6 +3639,8 @@
   website: https://rafael.codes
   sessionize: https://sessionize.com/rafaelw
   avatar: https://javachampions.org/img/avatars/rafaelcodes.png
+  latitude: 59.9133301
+  longitude: 10.7389701
 - name: Rahman Usta
   year: 2018
   country: Turkey
@@ -2945,6 +3649,8 @@
   twitter: https://twitter.com/ustarahman
   linkedin: https://www.linkedin.com/in/rahmanusta/
   avatar: https://javachampions.org/img/avatars/ustarahman.png
+  latitude: 50.0619474
+  longitude: 19.9368564
 - name: Rajmahendra Hegde
   year: 2016
   country: India
@@ -2952,6 +3658,8 @@
   twitter: https://twitter.com/rajmahendrar
   linkedin: https://www.linkedin.com/in/rajmahendrar/
   avatar: https://javachampions.org/img/avatars/rajmahendrar.png
+  latitude: 17.360589
+  longitude: 78.4740613
 - name: Ray Tsang
   year: 2018
   country: USA
@@ -2963,12 +3671,16 @@
   github: https://github.com/saturnism
   website: https://saturnism.me
   avatar: https://javachampions.org/img/avatars/saturnism.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Raymond Augé
   year: 2021
   country: Canada
   twitter: https://twitter.com/rotty3000
   linkedin: https://www.linkedin.com/in/raymond-auge/
   avatar: https://javachampions.org/img/avatars/rotty3000.png
+  latitude: 61.0666922
+  longitude: -107.991707
 - name: Richard Fichtner
   year: 2024
   country: Germany
@@ -2980,6 +3692,8 @@
   github: https://github.com/rfichtner/
   sessionize: https://sessionize.com/richard-fichtner/
   avatar: https://javachampions.org/img/avatars/RichardFichtner.png
+  latitude: 49.6752749
+  longitude: 12.1631636
 - name: Rick Hightower
   year: 2017
   country: USA
@@ -2987,6 +3701,8 @@
   twitter: https://twitter.com/RickHigh
   linkedin: https://www.linkedin.com/in/rickhigh/
   avatar: https://javachampions.org/img/avatars/RickHigh.png
+  latitude: 37.7021521
+  longitude: -121.9357918
 - name: Rickard Oberg
   year: 2011
   country: Malaysia
@@ -2996,6 +3712,8 @@
   avatar: https://javachampions.org/img/avatars/rickardoberg.png
   status:
   - retired
+  latitude: 3.2083304
+  longitude: 101.304146
 - name: Robert Scholte
   year: 2019
   country: The Netherlands
@@ -3005,6 +3723,8 @@
   bluesky: https://bsky.app/profile/rfscholte.bsky.social
   linkedin: https://www.linkedin.com/in/rfscholte/
   avatar: https://javachampions.org/img/avatars/rfscholte.png
+  latitude: 53.2190652
+  longitude: 6.5680077
 - name: Roberto Cortez
   year: 2016
   country: Portugal
@@ -3012,6 +3732,8 @@
   twitter: https://twitter.com/radcortez
   linkedin: https://www.linkedin.com/in/radcortez/
   avatar: https://javachampions.org/img/avatars/radcortez.png
+  latitude: 40.2111931
+  longitude: -8.4294632
 - name: Rodrigo Graciano
   year: 2022
   country: USA
@@ -3023,6 +3745,8 @@
   linkedin: https://www.linkedin.com/in/rodrigograciano/
   sessionize: https://sessionize.com/graciano
   avatar: https://javachampions.org/img/avatars/rodrigograciano.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Romain Guy
   year: 2006
   country: USA
@@ -3031,12 +3755,16 @@
   bluesky: https://bsky.app/profile/romainguy.dev
   linkedin: https://www.linkedin.com/in/romainguy/
   avatar: https://javachampions.org/img/avatars/romainguy.png
+  latitude: 37.3790629
+  longitude: -122.116578
 - name: Roman Elizarov
   year: 2006
   country: Russian Federation
   twitter: https://twitter.com/relizarov
   linkedin: https://www.linkedin.com/in/relizarov/
   avatar: https://javachampions.org/img/avatars/relizarov.png
+  latitude: 64.6863136
+  longitude: 97.7453061
 - name: Roman Kennke
   year: 2017
   country: Germany
@@ -3044,6 +3772,8 @@
   twitter: https://twitter.com/rkennke
   linkedin: https://www.linkedin.com/in/romankennke/
   avatar: https://javachampions.org/img/avatars/rkennke.png
+  latitude: 47.9960901
+  longitude: 7.8494005
 - name: Rommel Feria
   year: 2005
   country: Philippines
@@ -3051,6 +3781,8 @@
   avatar: https://javachampions.org/img/avatars/rom.png
   status:
   - founding-member
+  latitude: 12.7503486
+  longitude: 122.7312101
 - name: Ron Hitchens
   year: 2008
   country: UK
@@ -3059,6 +3791,8 @@
   twitter: https://twitter.com/ronhitchens
   linkedin: https://www.linkedin.com/in/ronhitchens/
   avatar: https://javachampions.org/img/avatars/ronhitchens.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Roy van Rijn
   year: 2018
   country: The Netherlands
@@ -3085,6 +3819,8 @@
   avatar: https://javachampions.org/img/avatars/russel_winder.png
   status:
   - passed-away
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Rustam Mehmandarov
   year: 2017
   country: Norway
@@ -3095,6 +3831,8 @@
   website: https://rustam.no
   sessionize: https://sessionize.com/mehmandarov
   avatar: https://javachampions.org/img/avatars/rmehmandarov.png
+  latitude: 61.1529386
+  longitude: 8.7876653
 - name: Régina ten Bruggencate
   year: 2011
   country: The Netherlands
@@ -3102,12 +3840,16 @@
   twitter: https://twitter.com/reginatb38
   linkedin: https://www.linkedin.com/in/reginatb/
   avatar: https://javachampions.org/img/avatars/reginatb38.png
+  latitude: 52.1795738
+  longitude: 5.9300775
 - name: San-Hong Li
   year: 2020
   country: China
   twitter: https://twitter.com/sanhong_li
   linkedin: https://www.linkedin.com/in/san-hong-li-443732a/
   avatar: https://javachampions.org/img/avatars/sanhong_li.png
+  latitude: 35.000074
+  longitude: 104.999927
 - name: Sander Mak
   year: 2017
   country: The Netherlands
@@ -3116,6 +3858,8 @@
   mastodon: https://federate.social/@sander_mak
   linkedin: https://www.linkedin.com/in/sandermak/
   avatar: https://javachampions.org/img/avatars/Sander_Mak.png
+  latitude: 51.8474946
+  longitude: 5.8637771
 - name: Sandra Parsick
   year: 2020
   country: Germany
@@ -3123,6 +3867,8 @@
   mastodon: https://mastodon.social/@sparsick
   linkedin: https://www.linkedin.com/in/sandra-parsick/
   avatar: https://javachampions.org/img/avatars/SandraParsick.png
+  latitude: 51.1981778
+  longitude: 6.6916476
 - name: Sanne Grinovero
   year: 2020
   country: UK
@@ -3133,6 +3879,8 @@
   bluesky: https://bsky.app/profile/sannegrinovero.bsky.social
   linkedin: https://www.linkedin.com/in/sannegrinovero/
   avatar: https://javachampions.org/img/avatars/SanneGrinovero.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Sean M. Phillips
   year: 2017
   country: USA
@@ -3140,6 +3888,8 @@
   twitter: https://twitter.com/SeanMiPhillips
   linkedin: https://www.linkedin.com/in/seanmiphillips/
   avatar: https://javachampions.org/img/avatars/SeanMiPhillips.png
+  latitude: 38.8950368
+  longitude: -77.0365427
 - name: Sebastian Daschner
   year: 2016
   country: Germany
@@ -3153,6 +3903,8 @@
   website: https://www.sebastian-daschner.com
   sessionize: https://sessionize.com/sebastian-daschner
   avatar: https://javachampions.org/img/avatars/DaschnerS.png
+  latitude: 48.1371079
+  longitude: 11.5753822
 - name: Sergei Egorov
   year: 2020
   country: Russian Federation
@@ -3160,16 +3912,22 @@
   bluesky: https://bsky.app/profile/bsideup.github.io
   linkedin: https://www.linkedin.com/in/bsideup/
   avatar: https://javachampions.org/img/avatars/bsideup.png
+  latitude: 64.6863136
+  longitude: 97.7453061
 - name: Sergey Astakhov
   year: 2005
   country: Russian Federation
   avatar: https://javachampions.org/img/avatars/Sergey_Astakhov.png
+  latitude: 64.6863136
+  longitude: 97.7453061
 - name: Sharat Chander
   year: 2026
   country: USA
   bluesky: https://bsky.app/profile/sharatchander.bsky.social
   linkedin: https://www.linkedin.com/in/sharatchander/
   avatar: https://javachampions.org/img/avatars/sharatchander.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Shin Tanimoto
   year: 2018
   country: Japan
@@ -3177,6 +3935,8 @@
   twitter: https://twitter.com/cero_t
   linkedin: https://www.linkedin.com/in/shintanimoto/
   avatar: https://javachampions.org/img/avatars/cero_t.png
+  latitude: 35.4503381
+  longitude: 139.6343802
 - name: Simon Maple
   year: 2014
   country: UK
@@ -3185,6 +3945,8 @@
   bluesky: https://bsky.app/profile/sjmaple.bsky.social
   linkedin: https://www.linkedin.com/in/simonmaple/
   avatar: https://javachampions.org/img/avatars/sjmaple.png
+  latitude: 51.262826
+  longitude: -1.0861976
 - name: Simon Martinelli
   year: 2023
   country: Switzerland
@@ -3199,6 +3961,8 @@
   sessionize: https://sessionize.com/simon-martinelli
   speakerdeck: https://speakerdeck.com/simas
   avatar: https://javachampions.org/img/avatars/simas_ch.png
+  latitude: 47.0433028
+  longitude: 7.0975115
 - name: Simon Ritter
   year: 2016
   country: UK
@@ -3208,6 +3972,8 @@
   bluesky: https://bsky.app/profile/speakjava.bsky.social
   linkedin: https://www.linkedin.com/in/siritter/
   avatar: https://javachampions.org/img/avatars/speakjava.png
+  latitude: 51.4467444
+  longitude: -0.3281887
 - name: Simone Bordet
   year: 2016
   country: Italy
@@ -3219,16 +3985,22 @@
   github: https://github.com/sbordet
   sessionize: https://sessionize.com/simonebordet
   avatar: https://javachampions.org/img/avatars/simonebordet.png
+  latitude: 45.0677551
+  longitude: 7.6824892
 - name: Sooyeul Yang
   year: 2005
   country: South Korea
   linkedin: https://www.linkedin.com/in/javaoracle/
   avatar: https://javachampions.org/img/avatars/Sooyeul_Yang.png
+  latitude: 36.638392
+  longitude: 127.6961188
 - name: Srikanth Raju
   year: 2006
   country: USA
   linkedin: https://www.linkedin.com/in/srikanthraju/
   avatar: https://javachampions.org/img/avatars/Srikanth_Raju.png
+  latitude: 39.7837304
+  longitude: -100.445882
 - name: Stephan Janssen
   year: 2005
   country: Belgium
@@ -3238,6 +4010,8 @@
   bluesky: https://bsky.app/profile/stephanjanssen.be
   linkedin: https://www.linkedin.com/in/stephanjanssen/
   avatar: https://javachampions.org/img/avatars/Stephan007.png
+  latitude: 51.2085526
+  longitude: 3.226772
 - name: Stephane Maldini
   year: 2022
   country: USA
@@ -3247,6 +4021,8 @@
   avatar: https://javachampions.org/img/avatars/smaldini.png
   status:
   - passed-away
+  latitude: 36.7014631
+  longitude: -118.755997
 - name: Stephen Chin
   year: 2009
   country: USA
@@ -3255,6 +4031,8 @@
   bluesky: https://bsky.app/profile/steveonjava.bsky.social
   linkedin: https://www.linkedin.com/in/steveonjava/
   avatar: https://javachampions.org/img/avatars/steveonjava.png
+  latitude: 37.5164926
+  longitude: -122.2941914
 - name: Stephen Colebourne
   year: 2007
   country: UK
@@ -3264,12 +4042,16 @@
   linkedin: https://www.linkedin.com/in/stephencolebourne/
   github: https://github.com/jodastephen
   avatar: https://javachampions.org/img/avatars/jodastephen.png
+  latitude: 51.5074456
+  longitude: -0.1277653
 - name: Steve Poole
   year: 2025
   country: UK
   city: Hook
   twitter: https://twitter.com/spoole167
   avatar: https://javachampions.org/img/avatars/spoole167.png
+  latitude: 51.3678984
+  longitude: -0.3071453
 - name: Stéphane Épardaud
   year: 2025
   country: France
@@ -3278,6 +4060,8 @@
   bluesky: https://bsky.app/profile/unfromage.bsky.social
   linkedin: https://www.linkedin.com/in/stephaneepardaud/
   avatar: https://javachampions.org/img/avatars/UnFroMage.png
+  latitude: 43.7009358
+  longitude: 7.2683912
 - name: Sven Reimers
   year: 2015
   country: Germany
@@ -3287,6 +4071,8 @@
   bluesky: https://bsky.app/profile/sreimers.bsky.social
   linkedin: https://www.linkedin.com/in/svenreimers/
   avatar: https://javachampions.org/img/avatars/SvenNB.png
+  latitude: 47.659216
+  longitude: 9.1750718
 - name: Sébastien Blanc
   year: 2020
   country: France
@@ -3295,6 +4081,8 @@
   bluesky: https://bsky.app/profile/sebi2706.bsky.social
   linkedin: https://www.linkedin.com/in/s%C3%A9bastien-blanc-08a73b1/
   avatar: https://javachampions.org/img/avatars/sebi2706.png
+  latitude: 43.7009358
+  longitude: 7.2683912
 - name: Tagir Valeev
   year: 2020
   country: Russian Federation
@@ -3306,11 +4094,15 @@
   linkedin: https://www.linkedin.com/in/tagir-valeev/
   github: https://github.com/amaembo/
   avatar: https://javachampions.org/img/avatars/tagir_valeev.png
+  latitude: 48.1371079
+  longitude: 11.5753822
 - name: Tasha Carl
   year: 2013
   country: Belgium
   twitter: https://twitter.com/imifos
   avatar: https://javachampions.org/img/avatars/imifos.png
+  latitude: 50.6402809
+  longitude: 4.6667145
 - name: Tatu Saloranta
   year: 2021
   country: USA
@@ -3319,6 +4111,8 @@
   bluesky: https://bsky.app/profile/cowtowncoder.bsky.social
   linkedin: https://www.linkedin.com/in/tatu-saloranta-b2b36/
   avatar: https://javachampions.org/img/avatars/cowtowncoder.png
+  latitude: 47.6038321
+  longitude: -122.330062
 - name: Thomas Vitale
   year: 2025
   country: Denmark
@@ -3327,6 +4121,8 @@
   bluesky: https://bsky.app/profile/thomasvitale.com
   linkedin: https://www.linkedin.com/in/vitalethomas/
   avatar: https://javachampions.org/img/avatars/vitalethomas.png
+  latitude: 56.1496278
+  longitude: 10.2134046
 - name: Thor Henning Hetland
   year: 2005
   country: Norway
@@ -3335,6 +4131,8 @@
   bluesky: https://bsky.app/profile/javatotto.bsky.social
   linkedin: https://www.linkedin.com/in/thorhenninghetland
   avatar: https://javachampions.org/img/avatars/javatotto.png
+  latitude: 59.9133301
+  longitude: 10.7389701
 - name: Tobias Frech
   year: 2023
   country: Germany
@@ -3343,6 +4141,8 @@
   linkedin: https://www.linkedin.com/in/javaadministration/
   github: https://github.com/JOpsDev
   avatar: https://javachampions.org/img/avatars/TobiasFrech.png
+  latitude: 48.8953937
+  longitude: 9.1895147
 - name: Tom Cools
   year: 2023
   country: Belgium
@@ -3352,6 +4152,8 @@
   linkedin: https://www.linkedin.com/in/tom-cools-17547548/
   sessionize: https://sessionize.com/tom-cools/
   avatar: https://javachampions.org/img/avatars/TCoolsIT.png
+  latitude: 50.6402809
+  longitude: 4.6667145
 - name: Tom Schindl
   year: 2015
   country: Austria
@@ -3360,6 +4162,8 @@
   bluesky: https://bsky.app/profile/tomsontom.bsky.social
   linkedin: https://www.linkedin.com/in/tom-schindl-178ba63/
   avatar: https://javachampions.org/img/avatars/tomsontom.png
+  latitude: 47.59397
+  longitude: 14.12456
 - name: Tomasz Nurkiewicz
   year: 2018
   country: Poland
@@ -3369,6 +4173,8 @@
   github: https://github.com/nurkiewicz
   website: https://nurkiewicz.com
   avatar: https://javachampions.org/img/avatars/tnurkiewicz.png
+  latitude: 52.2319581
+  longitude: 21.0067249
 - name: Trisha Gee
   year: 2014
   country: Spain
@@ -3383,18 +4189,24 @@
   sessionize: https://sessionize.com/trisha-gee/
   speakerdeck: https://github.com/trishagee
   avatar: https://javachampions.org/img/avatars/trisha_gee.png
+  latitude: 37.3886303
+  longitude: -5.9953403
 - name: Trustin Lee
   year: 2020
   country: South Korea
   twitter: https://twitter.com/trustin
   linkedin: https://www.linkedin.com/in/trustin/
   avatar: https://javachampions.org/img/avatars/trustin.png
+  latitude: 36.638392
+  longitude: 127.6961188
 - name: Valere Dejardin
   year: 2005
   country: France
   avatar: https://javachampions.org/img/avatars/Valere_Dejardin.png
   status:
   - founding-member
+  latitude: 46.603354
+  longitude: 1.8883335
 - name: Victor Grazi
   year: 2012
   country: USA
@@ -3402,6 +4214,8 @@
   twitter: https://twitter.com/vgrazi
   linkedin: https://www.linkedin.com/in/victorgrazi/
   avatar: https://javachampions.org/img/avatars/vgrazi.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Viktor Gamov
   year: 2021
   country: USA
@@ -3415,6 +4229,8 @@
   website: http://gamov.io/
   sessionize: https://sessionize.com/vikgamov
   avatar: https://javachampions.org/img/avatars/gAmUssA.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Viktor Klang
   year: 2018
   country: Sweden
@@ -3425,6 +4241,8 @@
   avatar: https://javachampions.org/img/avatars/viktorklang.png
   status:
   - alumni
+  latitude: 56.2429224
+  longitude: 12.8619375
 - name: Vincent Brabant
   year: 2005
   country: Belgium
@@ -3432,6 +4250,8 @@
   avatar: https://javachampions.org/img/avatars/vbrabant.png
   status:
   - founding-member
+  latitude: 50.6402809
+  longitude: 4.6667145
 - name: Vincent Massol
   year: 2005
   country: France
@@ -3439,6 +4259,8 @@
   twitter: https://twitter.com/vmassol
   linkedin: https://www.linkedin.com/in/vmassol/
   avatar: https://javachampions.org/img/avatars/vmassol.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Vincent Mayers
   year: 2016
   country: USA
@@ -3447,12 +4269,16 @@
   bluesky: https://bsky.app/profile/mayers.io
   linkedin: https://www.linkedin.com/in/vincentmayers/
   avatar: https://javachampions.org/img/avatars/vincentmayers.png
+  latitude: 33.7544657
+  longitude: -84.3898151
 - name: Vinicius Senger
   year: 2016
   country: Brazil
   twitter: https://twitter.com/vsenger
   linkedin: https://www.linkedin.com/in/viniciussenger/
   avatar: https://javachampions.org/img/avatars/vsenger.png
+  latitude: -10.3333333
+  longitude: -53.2
 - name: Vlad Mihalcea
   year: 2017
   country: Romania
@@ -3461,6 +4287,8 @@
   bluesky: https://bsky.app/profile/vladmihalcea.bsky.social
   linkedin: https://www.linkedin.com/in/vladmihalcea/
   avatar: https://javachampions.org/img/avatars/vlad_mihalcea.png
+  latitude: 46.7708527
+  longitude: 23.5980505
 - name: Víctor Orozco
   year: 2018
   country: Guatemala
@@ -3471,6 +4299,8 @@
   bluesky: https://bsky.app/profile/tuxtor.bsky.social
   linkedin: https://www.linkedin.com/in/victororozco/
   avatar: https://javachampions.org/img/avatars/tuxtor.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Yakov Fain
   year: 2005
   country: USA
@@ -3479,6 +4309,8 @@
   linkedin: https://www.linkedin.com/in/yfain/
   website: https://yakovfain.com/
   avatar: https://javachampions.org/img/avatars/yfain.png
+  latitude: 40.7127281
+  longitude: -74.0060152
 - name: Yakov Sirotkin
   year: 2005
   country: Russian Federation
@@ -3486,6 +4318,8 @@
   twitter: https://twitter.com/yakov_sirotkin
   linkedin: https://www.linkedin.com/in/yakovsirotkin/
   avatar: https://javachampions.org/img/avatars/yakov_sirotkin.png
+  latitude: 59.9606739
+  longitude: 30.1586551
 - name: Yara Senger
   year: 2012
   country: Brazil
@@ -3493,6 +4327,8 @@
   twitter: https://twitter.com/yara_tdc
   linkedin: https://www.linkedin.com/in/yaramascarenhas/
   avatar: https://javachampions.org/img/avatars/yarasenger.png
+  latitude: -23.5506507
+  longitude: -46.6333824
 - name: Yoshio Terada
   year: 2016
   country: Japan
@@ -3500,6 +4336,8 @@
   twitter: https://twitter.com/yoshioterada
   linkedin: https://www.linkedin.com/in/yoshioterada/
   avatar: https://javachampions.org/img/avatars/yoshioterada.png
+  latitude: 35.4503381
+  longitude: 139.6343802
 - name: Yusuke Yamamoto
   year: 2019
   country: Japan
@@ -3507,6 +4345,8 @@
   twitter: https://twitter.com/yusuke
   linkedin: https://www.linkedin.com/in/yusuke/
   avatar: https://javachampions.org/img/avatars/yusuke.png
+  latitude: 35.6768601
+  longitude: 139.7638947
 - name: Yuuichi Sakuraba
   year: 2005
   country: Japan
@@ -3514,3 +4354,5 @@
   bluesky: https://bsky.app/profile/skrb95.bsky.social
   linkedin: https://www.linkedin.com/in/yuichi-sakuraba-4129699/
   avatar: https://javachampions.org/img/avatars/skrb.png
+  latitude: 36.5748441
+  longitude: 139.2394179

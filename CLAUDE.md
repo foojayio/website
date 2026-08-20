@@ -81,12 +81,76 @@ should catch a mistake at PR time rather than letting it fail silently.
   single `java-champions.yml` file — the data behind
   [javachampions.org](https://javachampions.org/). Run at every deploy and
   once a day, same as `fetch/Jugs.java` above. Champions add/update their own entry
-  by editing that file directly upstream, not this repo. No coordinates yet
-  (unlike JUGs) — a pending PR
-  ([aalmiray/java-champions#318](https://github.com/aalmiray/java-champions/pull/318))
-  adds `location: {lat, lng}` via a one-time geocoding script, but it hasn't
-  merged; pick that field up here once it does, same way `fetch/Jugs.java`
-  reads JUG coordinates.
+  by editing that file directly upstream, not this repo.
+
+  **It also resolves the coordinates behind the world map on
+  `/java-champions/`, from three sources in order**, the geocoding logic lifted
+  from Frank's own
+  [aalmiray/java-champions#318](https://github.com/aalmiray/java-champions/pull/318):
+
+  1. an upstream `location: {lat, lon}` on the member — what that PR adds, so
+     the moment it merges those champions cost no request at all. Same
+     self-retiring shape as the `transfer/LegacyViews.java` view-count bridge:
+     the better source wins on its own, with nothing here to switch off.
+  2. **`data/geocode-cache.yaml`, keyed by the PLACE STRING and not by
+     champion.** That key choice is what makes this affordable on a script that
+     runs on every push: 422 champions live in 252 distinct places, so the 22
+     in "USA" and the 16 in "London, UK" are one lookup each, and renaming a
+     champion or editing their socials costs nothing. Committed, like
+     `data/legacy-views.json`, because it is the only copy — and both workflows
+     `git add` it, without which every deploy would re-geocode from scratch.
+  3. [geocode.maps.co](https://geocode.maps.co) on a cache miss only — i.e.
+     genuinely new or moved champions, normally none. Free tier is 5000/day at
+     1/sec, so even a cold rebuild (252 lookups, ~5 min) fits in one day's
+     quota. Needs **`GEOCODE_API_KEY`**, a *repository* secret (not an
+     environment one: the jobs that run this declare no `environment:`).
+
+  The query is `"<city>, <country>"` with country = residence, falling back to
+  nomination — **byte-identical to what PR #318's `onetimeAddLocations.java`
+  builds**, on purpose, so our coordinates and the ones upstream will store for
+  the same champion agree and nobody visibly moves when source 1 takes over.
+
+  Four behaviours are load-bearing:
+  - **It never fails over geocoding.** No key, a dead geocoder, an exhausted
+    quota: the run still writes every champion, just without coordinates for
+    the ones not yet cached. Both workflows that call this commit their result,
+    so a hard failure here would block a deploy over a map. Same posture as
+    `fetch/ViewCounts.java`.
+  - **A definitive miss is cached; a transient failure is not.** An empty
+    result array means the geocoder answered and knows nowhere by that name, so
+    `found: false` is recorded and we stop asking daily — exactly the
+    distinction `fetch/JugEvents.java` draws between a 404 (a real "not found"
+    someone can fix) and a fetch error. An HTTP/timeout failure is retried next
+    run rather than being written down as "this place does not exist".
+  - **401/403/429 abort the whole geocoding pass**, rather than making 251 more
+    requests to discover the key is wrong or the quota is gone. A 5xx or a
+    timeout does not: one flaky response must not abandon a cold run that is
+    200 places in, so those count toward a *consecutive* failure limit (5) —
+    which is what a geocoder genuinely being down looks like.
+  - **`0,0` is rejected as invalid.** It is in the Atlantic and is what a
+    geocoder returns when it parsed something it did not understand.
+
+  `--no-geocode` skips the lookups entirely, `--geocode-limit N` caps how many
+  new places one run may resolve (default 500), `--geocode-key` passes the key
+  without an env var.
+
+  **The cache is already primed and committed — all 252 places, 420 of the 422
+  champions on the map — so the secret is not blocking anything.** It is only
+  consulted for champions added or moved *from now on*; until it is set, a newly
+  added champion is simply absent from the map and everyone else is unaffected.
+  A warm run with no key at all makes zero requests, keeps every coordinate, and
+  leaves the cache byte-identical (verified).
+
+  The 2 champions not on the map are **malformed source strings, reported on
+  every run** rather than silently dropped — a cached `found: false` is never
+  queried again, so without that report they would vanish for good. Both need
+  fixing upstream, not here: `Maassluis, South Holland Province, The Netherlands`
+  (a "Province" suffix Nominatim can't parse) and `Zhytomyr/Limassol, Cyprus`
+  (two cities joined by a slash). Same posture as
+  `fetch/DiscoverJugCalendars.java` printing its near-misses instead of guessing.
+  Note there is deliberately **no country-level fallback** for these: a champion
+  who did record a city would then be shown in the middle of the Netherlands with
+  nothing saying why, and the upstream typo would stop being visible.
 - **`scripts/fetch/JugEvents.java`** (was `FetchMeetupEvents.java`): pulls JUG
   events for `.github/workflows/sync-external-content.yml`, writing
   `data/jug-events.json`. **Needs no credential, and is not Meetup-specific.** It
@@ -487,8 +551,27 @@ should catch a mistake at PR time rather than letting it fail silently.
   `scripts/fetch/JavaChampions.java` — see above. Never hand-edit it; add/fix
   an entry upstream in aalmiray/java-champions instead. Rendered at
   `/java-champions/` (`content/pages/java-champions.md`, `type: "champions"`
-  → `themes/foojay/layouts/champions/single.html`) — no map there yet, see
-  gap #3 below.
+  → `themes/foojay/layouts/champions/single.html`), including a Leaflet +
+  marker-clustering world map built from its `latitude`/`longitude` fields,
+  same as `/jugs/`.
+
+  **That map is one marker per PLACE, not per champion, and the grouping
+  happens in the browser.** Both halves matter. The coordinate is a city
+  centre — nobody's address, which the page says out loud — so the 16 champions
+  in "London, UK" genuinely share one point, and 16 markers there would stack
+  into a single unclickable pin with the other 15 unreachable at any zoom; the
+  popup lists everyone in the city instead. And Hugo has no map mutation, so
+  grouping in the template would mean ~420 `merge` calls to build a dict of
+  lists, where the JS does it in one pass over the array it already has. The
+  popup is built as **DOM nodes, not an HTML string** — a champion's name is
+  upstream data, so it goes in as `textContent` and can never be markup. The
+  grouping key is `toFixed(5)` rather than the raw float's string form, so two
+  champions sharing a cache entry can't be split by `51.5072` vs `51.50720`.
+- **`data/geocode-cache.yaml`**: auto-generated by
+  `scripts/fetch/JavaChampions.java` — place string → coordinates (or
+  `found: false`). Never hand-edit it, but **do** feel free to delete an entry,
+  or the whole file, to force a fresh lookup: that is the documented way to
+  retry a miss, and a full rebuild is ~250 requests inside the free tier.
 
 ## Known gaps / things to verify before relying on this
 
@@ -502,21 +585,23 @@ should catch a mistake at PR time rather than letting it fail silently.
    emit). **First thing to do**: run each script with `--url <a real post/author/page>`
    and check the output; fix the `SELECTOR_*` constants at the top of the
    file if something's empty.
-2. **None of the jbang scripts have been executed**, including the newest,
-   `fetch/JavaChampions.java`. The sandbox they were written in blocks outbound
-   network access to arbitrary domains (only a markdown-fetch tool was
-   available — enough to confirm the GlobalWWJugs and java-champions.yml
-   frontmatter/schema by hand, not enough to run the actual GitHub API +
-   raw-file fetch loop), so nothing here has been run against the live site
-   or the GitHub API (`fetch/JugEvents.java` is now an exception -- it has
-   been run in full, see gap 3). Treat all of it as
-   reviewed-but-untested code, same as `fetch/Jugs.java` was before Frank ran
-   it locally. **First thing to do for `fetch/JavaChampions.java`**: run it
-   locally once (`jbang scripts/fetch/JavaChampions.java`) and check
-   `data/java-champions.yaml` — in particular that the `country`/`social`
-   nested objects in the source flattened correctly, and that the
-   `/java-champions/` table renders sensibly for the ~700 entries missing
-   most optional fields.
+2. **Most of the jbang scripts have never been executed.** The sandbox they
+   were written in blocks outbound network access to arbitrary domains (only a
+   markdown-fetch tool was available — enough to confirm the GlobalWWJugs and
+   java-champions.yml frontmatter/schema by hand, not enough to run the actual
+   GitHub API + raw-file fetch loop), so most of it has not been run against
+   the live site or the GitHub API. Treat all of it as reviewed-but-untested
+   code, same as `fetch/Jugs.java` was before Frank ran it locally.
+
+   Three are now exceptions, run in full for real: `fetch/JugEvents.java` (see
+   gap 3), `fetch/Jugs.java`, and **`fetch/JavaChampions.java`** — 422
+   champions parsed, `country`/`social` flattening confirmed, and all 252
+   distinct places geocoded and cached. What is still worth an eye there is the
+   **map's coverage rather than its plumbing**: 97 champions record no city, so
+   their marker is a whole country's centroid (a pin in the middle of the
+   Atlantic-facing bulge of the USA, say), which is honest but coarse. If that
+   reads badly, the fix is upstream — those champions adding a `city:` — not a
+   heuristic here.
 3. ~~**`FetchMeetupEvents.java`'s GraphQL query/endpoint need verification**~~
    — gone: `fetch/JugEvents.java` no longer uses the API, needs no Meetup Pro
    subscription and no `MEETUP_OAUTH_TOKEN`, and has been run for real against

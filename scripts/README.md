@@ -27,13 +27,23 @@ write are **generated — never hand-edit them**; fix the entry upstream.
 | script | writes | source |
 | --- | --- | --- |
 | `Jugs.java` | `data/jugs.yaml` | [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs) |
-| `JavaChampions.java` | `data/java-champions.yaml` | [aalmiray/java-champions](https://github.com/aalmiray/java-champions) |
+| `JavaChampions.java` | `data/java-champions.yaml`, `data/geocode-cache.yaml` | [aalmiray/java-champions](https://github.com/aalmiray/java-champions), plus [geocode.maps.co](https://geocode.maps.co) for the map coordinates |
 | `JugEvents.java` | `data/jug-events.json` | the iCal feed each JUG publishes (its own site, Google Calendar, Meetup) |
 | `ViewCounts.java` | `data/views.json` | our own read counter (`worker/views/`) |
 | `DiscoverJugCalendars.java` | nothing — it reports | JUG websites; finds calendars missing from GlobalWWJugs, to be fixed **upstream** |
 
 `DiscoverJugCalendars.java` is run **by hand, never in CI** — it exists to
 produce an upstream pull request, not to change anything here.
+
+`JavaChampions.java` is the only one here that needs a credential:
+**`GEOCODE_API_KEY`** (a free key from [geocode.maps.co](https://geocode.maps.co),
+a repository secret in CI, an env var locally) for the coordinates behind the
+world map on `/java-champions/`. It is only consulted for a place that isn't
+already in `data/geocode-cache.yaml` — that cache is keyed by
+`"<city>, <country>"` rather than by champion, so 422 champions are 252 places
+and a normal run looks up **none** of them. Missing key, dead geocoder or an
+exhausted quota never fails the run; the newest champions just aren't on the map
+yet. `--no-geocode` skips the lookups, `--geocode-limit N` caps them.
 
 ## `transfer/` — WordPress → Hugo (dies at cutover)
 

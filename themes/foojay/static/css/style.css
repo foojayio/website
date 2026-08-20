@@ -1390,6 +1390,23 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .champions-table__links { font-size: .9rem; line-height: 1.7; }
 .champions-table__links a { white-space: nowrap; }
 
+/* World map of the champions (same Leaflet setup as .jugs-map). The marker
+   popups list everyone in a city, so they need a height cap: 22 champions
+   share "USA" and 16 share "London, UK", which is a popup taller than the
+   map it opens in.
+
+   Note the popup list rules are class-on-class-descendant on purpose. Both
+   these and `.prose ul` (line ~1361) are 0-1-1, and a Leaflet popup is
+   appended INSIDE the map container, which is itself inside `.prose` -- so
+   the tie is broken by source order and these have to stay below the .prose
+   block, not be moved above it. */
+.champions-map { height: 480px; margin: 1.5rem 0 .75rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.champions-map__note { font-size: .88rem; color: var(--ink-muted); margin: 0 0 1.5rem; }
+.champions-map__popup { font-size: .9rem; max-height: 15rem; overflow-y: auto; }
+.champions-map__popup strong { display: block; margin-bottom: .35rem; }
+.champions-map__popup ul { margin: 0; padding-left: 1.1rem; }
+.champions-map__popup li + li { margin-top: .15rem; }
+
 /* Author box under an article */
 .author-callout {
   display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 1.25rem;
