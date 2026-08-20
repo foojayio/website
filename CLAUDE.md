@@ -5,6 +5,12 @@ scaffolded to run in parallel with the live WordPress site during a
 trial/transition period before cutover. If you're picking this up fresh in
 IntelliJ's terminal, read this before making changes.
 
+**`CUTOVER.md` in the root is the ordered runbook for going live** — DNS, the
+GitHub Pages custom domain, the Cloudflare proxy sequence, the final WordPress
+harvest, and what gets deleted afterwards. The obligations scattered through
+this file as "before cutover" / "at cutover" are collected there in the order
+they have to happen; add to it rather than only noting a new one here.
+
 ## The goal that outranks the others
 
 **Publishing a post has to stay effortless for the author.** Contributors send
