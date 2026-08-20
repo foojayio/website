@@ -1035,6 +1035,64 @@ should catch a mistake at PR time rather than letting it fail silently.
   below the fold. `post-card.html` keeps `loading="lazy"`, because those really
   are below the fold.
 
+- **`partials/post-thumb.html` is the single definition of a card's thumbnail,
+  and a card ALWAYS has one.** `post-card.html` and `post-card-lead.html` call
+  it unconditionally; it renders the post's image over a derived placeholder
+  tile, so the three states are one box:
+
+  1. the image loads -> the image;
+  2. the post has no `image:` -> the tile (3 posts);
+  3. the image FAILS to load -> the tile, because the `<img>` sits on top of it
+     and carries `onerror="this.remove()"`.
+
+  Case 3 is the one that made this worth building. **74 posts point their hero
+  at a third-party host** (the author's own blog, imgur, cloudinary, an S3
+  bucket since emptied) and **11 are already 404/403** -- checked, not assumed --
+  so those cards rendered a grey box with a broken-image glyph. A hotlink can
+  die at any time and no build step can see it, which is why the fallback is an
+  inline `onerror` in the browser rather than a check in the template. The post
+  hero in `posts/single.html` carries the same attribute for the same reason,
+  and `search/single.html` builds the same markup in JS.
+
+  The tile is **derived, never authored**: the label is the post's first
+  category and the hue is `mod (hash.FNV32a $label) 360`, the same trick a JUG's
+  dot on `/calendar/` uses -- so a category reads as one colour site-wide, a new
+  category colours itself, and there is nothing to pick or store. Saturation and
+  lightness are fixed in the CSS, which is what keeps 123 arbitrary hues looking
+  like one family instead of a paint chart.
+
+  Three things are load-bearing. `.post-card-image img` needs
+  `position: relative; z-index: 1` -- the tile is absolutely positioned and a
+  positioned element paints ABOVE a non-positioned sibling whatever the source
+  order, so without it the tile covers every image on the site. It also needs
+  its own opaque `background`, because a great many WordPress heroes are
+  transparent PNG logos and the tile's stripes showed straight through them (the
+  tile is the fallback for a missing image, not a mat to sit a present one on).
+  And the search page's `hueFrom()` must stay byte-compatible with Hugo's
+  `hash.FNV32a` -- FNV-1a with `Math.imul`, since a plain `*` on 32-bit values
+  loses precision -- or one post gets two different colours depending on where
+  you see it. Verified: "security" -> 123 and "java" -> 141 in both. The search
+  side gets the label from `data-pagefind-meta="category"` on the first category
+  chip, falling back to the section name ("Author", "Pedia") for the sections
+  that have no category.
+
+  **`resource-url.html`'s external test is `http://`/`https://`, NOT a bare
+  `http`.** Four post bundles hold a file whose *name* starts with the scheme --
+  WordPress saved a hotlinked hero as
+  `https___res.cloudinary.com_..._blog-snakeyaml-pr-upgrade.jpg` -- and a bare
+  `hasPrefix "http"` passed those through untouched. The trap is that the result
+  is a *relative* path (no colon, so no scheme), which resolved correctly on the
+  post's own page and 404'd from every listing URL one directory deeper. That is
+  what the broken thumbnails on `/today/author/bmvermeer/page/2/` were, and
+  nothing reported it: the file is present and Hugo publishes it.
+
+  The 11 dead hotlinks now degrade gracefully but are still dead, and
+  `transfer/Posts.java` copies the hero URL through from the live WP page -- so a
+  re-scrape puts a dead one back and localising them is the only durable fix.
+  The audit is `curl -o /dev/null -w '%{http_code}'` over every `image:` value
+  that starts with a scheme; re-run it before cutover, the way the cross-post
+  `canonical:` check is re-run.
+
 - **`render-image.html` emits `width`/`height`, and only for rasters.** Without
   them the browser reserves no space and every image in a 2000-word post shoves
   the text below it down as it decodes -- cumulative layout shift on all 2147
