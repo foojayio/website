@@ -1,0 +1,151 @@
+{{/*
+  The two third-party scripts foojay.io runs: Google Analytics 4 and Ketch,
+  the consent manager. Both are OFF unless configured, and both are off on the
+  trial deploy -- see the three rules below.
+
+  WHAT THE LIVE WORDPRESS SITE DOES, since this does not reproduce it verbatim.
+  foojay.io loads one thing, `GTM-M6ZT5NW`, and that container carries three
+  tags: two Universal Analytics pageviews on `UA-726113-5` and a Custom HTML
+  tag that injects the Ketch boot snippet for org `azul`, property `foojay_io`.
+
+  The GA4 measurement id is not in that list, and it is not in the page HTML
+  either -- grepping foojay.io for "G-" finds nothing. It is resolved SERVER
+  SIDE: the UA tag makes Google fetch
+  `googletagmanager.com/gtag/destination?id=UA-726113-5`, which returns a
+  `__zone` tag whose child container is `G-GS21L12HYK` with
+  `inheritParentConfig`. That is Google's UA-to-GA4 "connected site tag"
+  migration -- the retired UA id still works as an alias for the GA4 property,
+  which is why the stats are current even though the visible tag is a
+  2023-vintage Universal Analytics one. Don't conclude from a grep that the
+  site has no analytics; resolve the UA id against googletagmanager.com.
+
+  Loading `G-GS21L12HYK` directly, as this does, drops that indirection: one
+  fewer legacy shim Google can retire unilaterally, and the property is named
+  in the repo rather than hidden behind a dead id. The container also still
+  carries OneTrust trigger conditions from a consent manager the site no longer
+  uses.
+
+  One behaviour is deliberately not carried over: the container's second UA
+  tag sets UA custom dimension 1 from the `?internal=` query parameter, and a
+  UA custom dimension does not become a GA4 parameter through the connected
+  tag -- so it is already reaching nothing in GA4 today. Reproducing it means
+  an explicit event parameter here plus a registered custom dimension in GA4,
+  which is a decision about the property, not about this partial.
+
+  So GA and Ketch are loaded DIRECTLY here instead of through the container.
+  Three reasons: the container is 360 KB of JavaScript to deliver two tags that
+  are eleven lines between them; pointing at GTM-M6ZT5NW would load Ketch twice
+  (once from the container's Custom HTML tag, once from here) while also firing
+  the dead UA tags; and a tag manager puts half the site's third-party
+  behaviour in a web console where it is invisible to this repo, to code review
+  and to a PR. Everything a reader's browser is asked to run should be readable
+  here. If a tag manager is ever genuinely wanted, it replaces this partial
+  rather than joining it.
+
+  Three rules, all derived rather than configured:
+
+  1. NOTHING RENDERS UNLESS IT IS CONFIGURED. No `ga` -> no gtag.js; no Ketch
+     `org`/`property` -> no consent manager. Same posture as views-beacon.html:
+     a local build, a fork or a contributor's `hugo server` never reports a
+     pageview into foojay's property and never shows a consent banner.
+
+  2. NOTHING RENDERS ON THE TRIAL DEPLOY. `$isTrial` is the same derivation
+     baseof.html uses for `noindex` -- baseURL != params.productionBaseURL --
+     so this switches itself on at cutover with nothing to remember to set on
+     the day it matters most. It is a derivation and not a flag for exactly
+     that reason; don't turn it into one. The trial site is a byte-for-byte
+     copy of the live content, so counting its traffic would inflate every
+     number in the property with a second site's pageviews, and a consent
+     banner on a throwaway host asks a reader to make a choice that is then
+     stored against the wrong domain.
+
+     To see the markup before cutover, build for the real URL:
+       hugo server --baseURL https://foojay.io/ --appendPort=false
+     A configured-but-suppressed build leaves an HTML comment behind, so the
+     dark state is visible in view-source rather than looking like the wiring
+     was never added.
+
+  3. CONSENT MODE IS EMITTED ONLY WHEN KETCH IS. Google Consent Mode defaults
+     everything to `denied` and lets the consent manager grant what the reader
+     agrees to -- so GA sets no cookie until then, and in the meantime sends
+     only cookieless pings. That is correct exactly when something is going to
+     send the update: with a consent manager configured, default-deny is the
+     only defensible posture, and without one there is nothing that could ever
+     grant consent, so defaulting to denied would silently reduce GA to
+     permanent modelling. Hence it follows Ketch rather than being its own
+     knob. `wait_for_update` gives Ketch 500ms to answer before GA proceeds
+     with the defaults.
+
+     Ketch's own Google Consent Mode integration is configured on the Ketch
+     side, per property, not here. If GA reports every session as consent-
+     denied after cutover, that plugin is what to check first -- the defaults
+     below are doing their job and nothing is updating them.
+
+  Note both scripts load `async`/`defer`, so neither blocks first paint, and
+  the stub-then-boot shape of the Ketch snippet is Ketch's own: calls made
+  before boot.js arrives queue on `window.semaphore` instead of being lost.
+  The `?property=` query-parameter override Ketch's published snippet carries
+  is deliberately left out -- it is a QA hook for switching properties on a
+  live page, and this site has one property.
+*/}}
+
+{{- /* Hugo lowercases every config key, so these lookups are all lowercase --
+       an `[params.analytics.ketch] Org` would register as `org` and a lookup
+       for "Org" would find nothing, with no error. `index` rather than
+       `.analytics.ga` so an unconfigured site is an absent key and not a nil
+       dereference at build time. */ -}}
+{{- $cfg := index site.Params "analytics" | default dict -}}
+{{- $ga := index $cfg "ga" -}}
+{{- $ketch := index $cfg "ketch" | default dict -}}
+{{- $org := index $ketch "org" -}}
+{{- $property := index $ketch "property" -}}
+{{- $hasKetch := and $org $property -}}
+
+{{- $prod := strings.TrimSuffix "/" (site.Params.productionBaseURL | default site.BaseURL) -}}
+{{- $isTrial := ne (strings.TrimSuffix "/" site.BaseURL) $prod -}}
+
+{{- /* Emitted through printf|safeHTML, not written literally: Go's
+       html/template strips HTML comments out of a template, so a literal one
+       here would silently produce nothing -- which is indistinguishable from
+       the partial not being wired up at all, i.e. exactly the confusion this
+       comment exists to prevent. */ -}}
+{{- if and $isTrial (or $ga $hasKetch) }}
+  {{ printf "<!-- analytics: configured, suppressed because this is the trial deploy -->" | safeHTML }}
+{{- end }}
+
+{{- if not $isTrial }}
+  {{- with $ga }}
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    {{- if $hasKetch }}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+    {{- end }}
+  </script>
+  {{- end }}
+
+  {{- if $hasKetch }}
+  <script>
+    window.semaphore = window.semaphore || [];
+    window.ketch = function () { window.semaphore.push(arguments); };
+  </script>
+  <script src="https://global.ketchcdn.com/web/v2/config/{{ $org }}/{{ $property }}/boot.js" defer async></script>
+  {{- end }}
+
+  {{- with $ga }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', {{ . }});
+  </script>
+  {{- end }}
+{{- end }}

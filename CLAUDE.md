@@ -1961,6 +1961,75 @@ should catch a mistake at PR time rather than letting it fail silently.
   **Author pages are counted but have no WordPress baseline**, so they start at
   zero on the day the Worker goes live — the plugin's user-archive counting is
   off on foojay.io. Don't go looking for the import that "must have failed".
+
+- **Third-party analytics is GA4 + Ketch, loaded directly, and dark until
+  cutover.** `partials/analytics.html` is the only place the site asks a
+  reader's browser to run someone else's code, and it is called from
+  `baseof.html`'s `<head>`. Configured in `[params.analytics]`: `ga` (the GA4
+  measurement id) and `[params.analytics.ketch]` `org`/`property` for the
+  consent manager. Each half renders only when its own values are set, so a
+  local build, a fork or a contributor's `hugo server` never reports a pageview
+  into foojay's property and never shows a consent banner.
+
+  **The GA4 measurement id is invisible from the outside, and a grep will tell
+  you the site has no analytics.** It doesn't. foojay.io loads exactly one
+  thing — GTM container `GTM-M6ZT5NW` — carrying two Universal Analytics
+  pageview tags on `UA-726113-5` and a Custom HTML tag injecting the Ketch
+  snippet for org `azul`, property `foojay_io`. No `G-` id appears in the page
+  HTML or in the container. It is resolved **server side**: the UA tag makes
+  Google fetch `googletagmanager.com/gtag/destination?id=UA-726113-5`, which
+  returns a `__zone` tag whose child container is `G-GS21L12HYK` with
+  `inheritParentConfig` — Google's UA-to-GA4 *connected site tag* migration,
+  which keeps the retired UA id working as an alias for the GA4 property. So
+  the stats are current even though the only visible tag is a 2023-vintage
+  Universal Analytics one. **Resolve the UA id against googletagmanager.com
+  before concluding anything about what a Google tag reports into.**
+
+  `[params.analytics] ga` therefore names `G-GS21L12HYK` and loads it directly,
+  which drops that indirection: one fewer legacy shim Google can retire
+  unilaterally, and the property is named in the repo instead of hidden behind
+  a dead id. The container also still carries OneTrust trigger conditions from
+  a consent manager the site no longer uses, and its second UA tag sets UA
+  custom dimension 1 from the `?internal=` query parameter — which a connected
+  tag does not turn into a GA4 parameter, so it already reaches nothing today
+  and is deliberately not reproduced. Pointing at the container would load
+  Ketch **twice**,
+  once from its Custom HTML tag and once from here, while firing the dead UA
+  tags and shipping 360 KB of JavaScript to deliver eleven lines. The deeper
+  reason is reviewability: a tag manager moves half the site's third-party
+  behaviour into a web console where it is invisible to this repo and to a PR.
+  A tag manager, if ever genuinely wanted, replaces this partial rather than
+  joining it.
+
+  Three behaviours are load-bearing:
+  1. **Nothing renders on the trial deploy**, derived from the same
+     `baseURL != params.productionBaseURL` test `baseof.html` uses for
+     `noindex` — so it switches itself on at cutover with nothing to unset. The
+     trial is a byte-for-byte copy of the live content, so counting it would
+     inflate every number in the property with a second site's traffic, and a
+     consent banner on a throwaway host stores a reader's choice against the
+     wrong domain. **Don't turn this into a flag.** To see the markup before
+     cutover, build for the real URL:
+     `hugo server --baseURL https://foojay.io/ --appendPort=false`.
+  2. **Google Consent Mode defaults are emitted only when Ketch is**, because
+     they are correct exactly when something will send the update: with a
+     consent manager, default-deny is the only defensible posture; without one,
+     nothing could ever grant consent and GA would be reduced to permanent
+     modelling. So it follows Ketch rather than being a third knob. If GA
+     reports every session as consent-denied after cutover, check Ketch's own
+     Google Consent Mode plugin on the property — the defaults here are working
+     and nothing is updating them.
+  3. **The trial's suppression notice goes through `printf | safeHTML`.** Go's
+     `html/template` strips HTML comments out of a template, so a literal
+     `<!-- ... -->` renders nothing at all — indistinguishable from the partial
+     never having been wired up, i.e. exactly the confusion the notice exists
+     to prevent. Same trap applies anywhere else a comment is meant to reach
+     the reader's view-source.
+
+  Two things on the live site are **not** carried over and were not asked for:
+  Hotjar (`hjid` 2547610) and Reo.dev (`b38cec169d83063`), both loaded straight
+  from the WordPress `<head>` rather than through GTM. Decide on them
+  separately; neither is wired up here.
 - Posts are contributed via PR (see `CONTRIBUTING.md`); the repo is public.
 - **`data/jugs.yaml` is generated, not authored here** — it's overwritten by
   `scripts/fetch/Jugs.java` at every deploy and every external-content sync. Never add/edit a

@@ -150,6 +150,15 @@
     {{ $feedTitle := cond $.IsHome $.Site.Title (printf "%s | %s" $.Title $.Site.Title) }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $feedTitle | safeHTML }}
   {{ end }}
+
+  {{/* Google Analytics + Ketch (consent). Renders nothing unless configured in
+       [params.analytics], and nothing at all on the trial deploy -- the
+       partial derives that from baseURL the same way $isTrial above does, so
+       it is not passed in and cannot fall out of step with the noindex tag.
+       In <head> rather than at the end of <body> because the consent banner
+       should decide before the page is interactive; both scripts are
+       async/defer, so neither blocks first paint. */}}
+  {{ partial "analytics.html" . }}
 </head>
 <body>
   {{ partial "header.html" . }}
