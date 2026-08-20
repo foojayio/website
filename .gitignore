@@ -19,3 +19,17 @@ scripts/*.log
 # Wrangler (the view counter Worker -- worker/views/)
 node_modules/
 .wrangler/
+
+# Python (cleanup/images.py is the one Python script here -- see its header)
+__pycache__/
+
+# In-flight staging from cleanup/images.py. It encodes to a temp path and renames
+# only once the result is verified, so a killed run can leave these behind. They
+# must never be committed: an earlier run left a half-written 0-byte .webp, it got
+# committed, and the "destination already exists" guard then refused to ever
+# convert that GIF again.
+*.webp.tmp
+*.webp.best
+*.jpg.tmp
+*.png.tmp
+*.jpeg.tmp

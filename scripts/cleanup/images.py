@@ -224,7 +224,10 @@ def convert_gif(gif, budget, dry_run):
             # and not truncated to a fraction of its length.
             with Image.open(tmp) as check:
                 got = getattr(check, "n_frames", 1)
-            if written > 1 and (got < 2 or got < written * 0.5):
+            # Same loose floor as shrink_webp, and for the same reason: libwebp
+            # merges duplicate frames legitimately, so only gross truncation is a
+            # failure. A 50% floor here rejected 23 of 65 GIFs.
+            if written > 1 and (got < 2 or got < written * 0.2):
                 print(f"  SKIP {gif.name} -- animation truncated ({written} -> {got} frames)")
                 return None
             # Keep the SMALLEST result, and only stop early once it both fits the
