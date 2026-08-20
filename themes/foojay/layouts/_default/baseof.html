@@ -164,8 +164,19 @@
        section's own template. Uses .Type rather than .Section so a page
        that overrides `type:` in frontmatter (the /jugs/ page is Section
        "pages" but Type "jugs") gets its own group instead of being lumped
-       in with generic pages. */}}
-  <main class="site-main" id="main" data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}>
+       in with generic pages.
+
+       PAGERS ARE NOT INDEXED. Every pager of a paginated list renders the same
+       page -- same <h1>, same bio, same sidebar -- with a different slice of
+       cards below it, so tagging all of them as a body made ONE author or
+       category show up in search once per pager (searching "delporte" returned
+       frankdelporte 28 times, one per page of his archive). $pageNum is the
+       pager number worked out in <head> above, and is 0 on a page that either
+       doesn't paginate or is page 1 -- exactly the pages worth a result. Since
+       data-pagefind-body puts Pagefind in opt-in mode site-wide, leaving it off
+       drops the pager from the index entirely; the posts it lists are indexed
+       as their own pages anyway, so nothing becomes unreachable. */}}
+  <main class="site-main" id="main"{{ if not $pageNum }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
     {{ block "main" . }}{{ end }}
   </main>
 
