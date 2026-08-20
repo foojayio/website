@@ -57,6 +57,88 @@ still resolves, including the ones nobody would think to check — the old
 `/blog/` scheme, the retired slugs, and the URLs that changed when an article
 was renamed years ago.
 
+### Hugo? No Java?
+
+Yes, Java! Just not for the part you would expect.
+
+I did look at the Java generators. I had tried [JBake](https://jbake.org/)
+before, and at the time it looked like a project that had gone quiet — no
+release between early 2023 and late 2025 is a long gap to stake a site on.
+(Credit where it is due: it has since shipped 2.7.0.) And when I mentioned this
+project on the Foojay Slack, someone pointed me at
+[Roq](https://github.com/quarkiverse/quarkus-roq), the Quarkus-based static site
+generator — a thin layer over Quarkus that renders Markdown through Qute
+templates, with type-safe templating and code completion. It looks genuinely
+good, and if you want your generator in Java too, start there.
+
+I went with what I already know. I have built a lot of very different sites on
+Hugo — [webtechie.be](https://webtechie.be), [codewriter.be](https://codewriter.be),
+[pi4j.com](https://pi4j.com), [lottie4j.com](https://lottie4j.com),
+[melodymatrix.rocks](https://melodymatrix.rocks) — a personal blog, an
+open-source project's documentation, a product site. All of them work well, and
+Hugo has been stable, long-lived and very actively maintained the whole time.
+For a community project that has to still be standing in ten years, "I know this
+tool and it is not going anywhere" beat "this is the most interesting choice".
+It also builds all 2,147 articles in about eight seconds, which stops mattering
+right up until the moment it matters a lot.
+
+And the generator is the *smallest* part of this anyway. Everything around it —
+the migration, the daily data syncs, the checks on your pull request — is
+roughly **8,500 lines of Java**, and that is the part that actually made this
+possible.
+
+All of it runs on [JBang](https://www.jbang.dev/), so there is no `pom.xml`, no
+Gradle, no build step. Each script is a single file that declares its own
+dependencies at the top and runs directly:
+
+```java
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//DEPS org.jsoup:jsoup:1.17.2
+//DEPS com.vladsch.flexmark:flexmark-html2md-converter:0.64.8
+//JAVA 21+
+```
+
+`jbang scripts/transfer/Posts.java` and it goes. jsoup parses the HTML, flexmark
+turns it into Markdown, Jackson and SnakeYAML handle the JSON and YAML.
+
+**Getting the content out.** Nobody used a WordPress admin login or a database
+dump — everything was read off the public site, its HTML plus the REST routes
+WordPress already exposes to anyone. The scrapers are idempotent and skip any
+file marked `frozen: true`, which is what made the whole thing survivable: they
+ran over and over for weeks while the old site stayed live and kept publishing,
+instead of being one big risky switch-flip.
+
+**And then the unglamorous half.** A faithful scrape gives you WordPress's
+habits faithfully, so most of the work was repairing things nobody would think
+to look for:
+
+- **10,270 non-breaking spaces** used to indent code samples. They *look* like
+  indentation and break the moment you paste the snippet into an editor.
+- **14,344 heading anchors** of the form `#h2-3-some-title` — numbered by
+  position, so inserting one heading silently renumbered the rest.
+- **279 email addresses** that no script could see at all: Cloudflare replaces
+  them with a placeholder plus an encoded copy that only a browser puts back.
+- **259 gallery images** across 94 posts, stored as thirty lines of block markup
+  each, now one small shortcode.
+- **8,053 headings** restyled, and every code block turned from eight
+  attributes of WordPress plumbing into a plain Markdown fence.
+
+**The part that keeps running.** The `scripts/` folders are grouped by one
+question — *does this still exist after cutover?* — because two of them are
+meant to be deleted whole. The scrapers and the one-off repairs go in the bin
+the day WordPress is switched off. What stays is the Java that does the ongoing
+work:
+
+| Runs | What it does |
+|---|---|
+| every deploy + daily | pulls the JUG directory and the Java Champions list from the community-run repositories that own that data |
+| daily | reads the iCal feed each JUG publishes, so meetups appear on the calendar with nobody typing them in |
+| 4× a day | refreshes the read counts |
+| **every pull request** | validates frontmatter — the check that tells you about a mistyped author slug before a human looks at your article |
+
+So: a Go static site generator, and a pile of Java doing everything that
+actually needed writing.
+
 ## The part that matters to authors
 
 Your article is a folder. That is the entire model.
