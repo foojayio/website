@@ -209,6 +209,7 @@ def convert_gif(gif, budget, dry_run):
     # could never be converted again and the junk got committed. A partial temp file
     # is cleaned up in the finally below and blocks nothing.
     tmp = dst.with_name(dst.name + ".tmp")
+    keep = dst.with_name(dst.name + ".best")   # smallest result so far
     best = None
     try:
         for cap, q in LADDER:
@@ -226,14 +227,27 @@ def convert_gif(gif, budget, dry_run):
             if written > 1 and (got < 2 or got < written * 0.5):
                 print(f"  SKIP {gif.name} -- animation truncated ({written} -> {got} frames)")
                 return None
-            best = size
-            if size <= budget:
+            # Keep the SMALLEST result, and only stop early once it both fits the
+            # budget and is a real improvement. Stopping at "fits the budget" alone
+            # was wrong for the 45 GIFs already under 3 MB: rung 1 was accepted
+            # without ever trying a lower quality, came back BIGGER than the GIF
+            # (these are flat-colour UI recordings, where GIF's palette+LZW is
+            # genuinely efficient), and was then discarded silently.
+            if best is None or size < best:
+                best = size
+                if keep.exists():
+                    keep.unlink()
+                tmp.replace(keep)
+            else:
+                tmp.unlink()
+            if best <= budget and best <= before * 0.8:
                 break
-        if best is not None and best < before:
-            tmp.replace(dst)
+        if best is not None and best < before * 0.9:
+            keep.replace(dst)
     finally:
-        if tmp.exists():
-            tmp.unlink()
+        for leftover in (tmp, keep):
+            if leftover.exists():
+                leftover.unlink()
 
     if best is None or best >= before:  # pathological; leave the GIF alone
         return None
@@ -320,6 +334,124 @@ def fix_animated_heroes(root, cap, dry_run):
     return fixed, orphaned
 
 
+# ------------------------------------------------- over-budget WebP, in place
+
+def shrink_webp(webp, budget, cap, dry_run):
+    """Re-encode an over-budget WebP down the ladder, keeping its NAME.
+
+    Needed because the first version of this script had no budget ladder: it
+    converted the three 52 MB OpenRewrite.gif copies at a fixed quality and left
+    10.23 MB each, and shrink_raster skips .webp entirely, so nothing ever revisited
+    them. 30 MB in four files.
+
+    The extension does not change, so unlike every other conversion here this one
+    rewrites no references at all.
+    """
+    before = webp.stat().st_size
+    if before <= budget:
+        return None
+    if dry_run:
+        return (before, None)
+
+    try:
+        frames, durations, loop = decode_frames(webp)
+    except Exception:
+        return None
+    if not frames:
+        return None
+
+    tmp = webp.with_name(webp.name + ".tmp")
+    keep = webp.with_name(webp.name + ".best")
+    best = None
+    try:
+        for cap_i, q in LADDER:
+            if cap_i > cap:
+                continue
+            written = encode_webp(frames, durations, loop, tmp, cap_i, q)
+            size = tmp.stat().st_size
+            with Image.open(tmp) as check:
+                got = getattr(check, "n_frames", 1)
+            if written > 1 and (got < 2 or got < written * 0.5):
+                continue
+            if best is None or size < best:
+                best = size
+                if keep.exists():
+                    keep.unlink()
+                tmp.replace(keep)
+            else:
+                tmp.unlink()
+            if best <= budget:
+                break
+        if best is not None and best < before * 0.9:
+            keep.replace(webp)
+            return (before, best)
+        return None
+    finally:
+        for leftover in (tmp, keep):
+            if leftover.exists():
+                leftover.unlink()
+
+
+# ---------------------------------------------------------- large PNG -> JPEG
+
+def has_real_transparency(im):
+    """True when the image ACTUALLY uses its alpha channel.
+
+    Carrying an alpha channel is not the same as using it -- plenty of WordPress
+    PNGs are RGBA with every pixel opaque. Checking the channel's minimum tells
+    them apart, which keeps 500-odd fully opaque screenshots eligible for JPEG
+    while protecting the 22 that really are transparent.
+    """
+    if im.mode not in ("RGBA", "LA", "PA") and not (im.mode == "P" and "transparency" in im.info):
+        return False
+    return im.convert("RGBA").getchannel("A").getextrema()[0] < 255
+
+
+def png_to_jpeg(png, quality, cap, dry_run):
+    """A large opaque PNG -> JPEG, references rewritten. Returns (before, after).
+
+    JPEG rather than WebP by preference, and the cost of that choice is small:
+    measured over a 40-file sample, JPEG q85 saves 81% against WebP q82's 89% --
+    297 MB vs 327 MB projected across all 541 large PNGs. Either clears the 1 GB
+    artifact limit, and JPEG is what the other 1400 images on the site already are.
+
+    Transparency is the one hard limit: JPEG has no alpha, so a transparent PNG
+    would be silently flattened onto black. Those keep their PNG.
+    """
+    before = png.stat().st_size
+    with Image.open(png) as im:
+        if has_real_transparency(im):
+            return None
+        out = im.convert("RGB")
+        w, h = out.size
+        if max(w, h) > cap:
+            k = cap / max(w, h)
+            out = out.resize((max(1, round(w * k)), max(1, round(h * k))), Image.LANCZOS)
+
+    dst = png.with_suffix(".jpg")
+    if dst.exists():
+        print(f"  SKIP {png.name} -- {dst.name} already exists")
+        return None
+    if dry_run:
+        return (before, None)
+
+    tmp = dst.with_name(dst.name + ".tmp")
+    try:
+        out.save(tmp, "JPEG", quality=quality, optimize=True, progressive=True)
+        after = tmp.stat().st_size
+        if after >= before * 0.9:
+            return None
+        tmp.replace(dst)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
+
+    # References first, THEN delete -- same ordering rule as the GIFs.
+    rewrite_in_bundle(png.parent, png.name, dst.name)
+    png.unlink()
+    return (before, after)
+
+
 # ------------------------------------------------------------------ PNG / JPEG
 
 def shrink_raster(src, cap, jpeg_quality, dry_run):
@@ -377,7 +509,11 @@ def main():
     ap.add_argument("--gif-min", type=int, default=200_000)
     ap.add_argument("--budget", type=int, default=3_000_000,
                     help="per-file target; matches Frontmatter.MAX_IMAGE_BYTES")
-    ap.add_argument("--jpeg-quality", type=int, default=82)
+    ap.add_argument("--jpeg-quality", type=int, default=82,
+                    help="re-encode quality for images that are ALREADY jpeg")
+    ap.add_argument("--png-min", type=int, default=300_000,
+                    help="convert PNGs above this to JPEG")
+    ap.add_argument("--png-jpeg-quality", type=int, default=85)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -408,6 +544,34 @@ def main():
     fixed, orphaned = fix_animated_heroes(root, args.cap, args.dry_run)
     for md, hero, poster in fixed:
         print(f"  {hero} -> {poster}   {md.parent.name[:46]}")
+
+    print(f"\nover-budget WebP re-encoded in place")
+    for w in sorted((p for p in root.rglob("*.webp") if p.stat().st_size > args.budget),
+                    key=lambda p: -p.stat().st_size):
+        r = shrink_webp(w, args.budget, args.cap, args.dry_run)
+        if r is None:
+            continue
+        before, after = r
+        if after is not None:
+            saved += before - after
+            print(f"  {human(before):>9} -> {human(after):>9}  {w.name[:50]}")
+
+    print(f"\nlarge PNG -> JPEG (over {args.png_min // 1000} KB)")
+    pngs = sorted((p for p in root.rglob("*")
+                   if p.suffix.lower() == ".png" and p.stat().st_size > args.png_min),
+                  key=lambda p: -p.stat().st_size)
+    to_jpeg = 0
+    for png in pngs:
+        r = png_to_jpeg(png, args.png_jpeg_quality, args.cap, args.dry_run)
+        if r is None:
+            continue
+        to_jpeg += 1
+        before, after = r
+        if after is not None:
+            saved += before - after
+            if to_jpeg <= 10:
+                print(f"  {human(before):>9} -> {human(after):>9}  {png.name[:50]}")
+    print(f"  {'would convert' if args.dry_run else 'converted'} {to_jpeg} of {len(pngs)}")
 
     print(f"\nresizing PNG/JPEG over {args.cap}px")
     touched = 0
