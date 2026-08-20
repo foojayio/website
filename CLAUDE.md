@@ -1324,12 +1324,75 @@ should catch a mistake at PR time rather than letting it fail silently.
   `partials/footer.html` links to it from every page, but nothing here answered
   that URL -- the footer link was dead. `content/pages/sitemap.md` (`type:
   "sitemap"` -> `themes/foojay/layouts/sitemap/single.html`) holds only a
-  one-line intro; the page tree, pedia, sponsors, authors and every article by
-  year are all derived, so a new page or post appears at the next build and
+  one-line intro; the page tree, pedia, sponsors, authors and every article are
+  all derived, so a new page or post appears at the next build and
   there is no list to maintain. The page tree's nesting comes from sorting on
   `.File.Path`: a lexicographic path sort is already tree order
   (`pages/board.md` before `pages/board/azul.md`), so depth is a slash count
   rather than recursion.
+
+  **Articles and Authors are sortable, filterable TABLES; pages, pedia and
+  sponsors stay link lists.** The split is whether an entry has FIELDS worth
+  comparing. An article has a date, an author and a read count; an author has a
+  set of links, an article count and the reads across all of them -- and 2147
+  or 344 of those are worth sorting by any column. A pedia entry is a name, and
+  a table of one column is a list with extra rules. The Articles section's year
+  headings went with the grouping the table replaced: a table can only carry
+  one order, and sorting on the date column is that grouping's order anyway.
+
+  1. **The HTML is sorted, the JavaScript only adds the buttons.**
+     `static/js/sortable-table.js` enhances any `table[data-sortable]`: it reads
+     the server-rendered `aria-sort` to know where it starts, and it CREATES the
+     header buttons rather than the template rendering them, so without
+     JavaScript there is no dead control -- a `<th>` is plain text and the
+     default order (newest first, and A-Z for authors) is the useful one. Same
+     posture as `/calendar/`'s toolbar. A column opts in with
+     `data-sort-type`; the authors' Links column deliberately has none, since
+     there is no order to put eight links in that anyone would ask for.
+  2. **A cell sorts on `data-sort-value`, never on what it shows** -- a
+     timestamp behind "18 Aug 2026", the raw integer behind "68,330" (a
+     thousands separator otherwise parses as 68), and the FIRST credited
+     author's display name behind a byline that may list seven of them. Sorting
+     on the author slug would file `frankdelporte` and `frank-delporte` apart.
+  3. **Every cell reuses the site's own definition of what it shows**:
+     `partials/byline.html` for a post's authors (so this page cannot credit a
+     post differently from a post card), `partials/author-social.html` for an
+     author's links (same pills, same RSS entry as their profile),
+     `partials/author-posts.html` for the article count (so it cannot disagree
+     with the heading on their own profile) and `partials/views-total.html` for
+     both read counts -- over that same post set for an author, and over a
+     one-page slice for a single article. Numbers are bare because the column
+     heading says Views. An em dash means the counter has no number; a 0 is
+     printed as 0, because an author with nothing published yet is a real state.
+  4. **`static/js/table-filter.js` is the filter, and it is generic**: an
+     `input[data-filter-for="<table id>"]` narrows that table's rows, ANDing
+     the words typed ("frank javafx 2024"). Three things earn their keep.
+     `data-filter-cols` limits which columns are searched -- without it "42"
+     matches every article read 42 times, and "linkedin" matches half the
+     authors. Including the articles' DATE column is what gives back the year
+     lookup the old year headings did ("2021", "aug 2021"). And the haystack is
+     read from the cells and cached on first keystroke rather than rendered
+     into a `data-filter` attribute per row: on 2147 rows that attribute is
+     ~170KB of duplicated text, and a second copy of a title is a second thing
+     that can disagree with the first. The box is `hidden` in the markup and
+     revealed by the script, so it is never a search field that does nothing.
+
+  Both scripts are loaded by that one template, not from `baseof.html`: the
+  other 4000 pages have no such table. The four older inline filters
+  (champions, JUGs, the author grid, the category index) predate this one and
+  still carry their own copy -- champions and JUGs filter table rows and could
+  move onto it.
+
+  Three CSS traps live in the styling, all silent. `.sitemap-table td` is a
+  class PLUS a type selector, so it outranks a single class -- a numeric column
+  needs `td.sitemap-table__num` or its `text-align: right` loses (the same
+  specificity trap the `.prose` rules have). A filtered-out `<tr>` needs an
+  explicit `display: none !important`, because `display: table-row` beats
+  `[hidden]` from the UA stylesheet -- which is why the champions and JUGs
+  tables already carry that line. And the sticky header only sticks above
+  60rem: below that the table scrolls sideways, and an overflow container
+  becomes the sticky positioning context, so `top` would be measured against
+  the table itself and the header would never stick at all.
 
   Fixing it turned up that **`content/all-events.md` and the scraped
   `content/pages/all-events.md` both claimed `url: "/all-events/"`**, and the
@@ -1755,6 +1818,17 @@ should catch a mistake at PR time rather than letting it fail silently.
   else changes, because the Worker validates the key's *shape* rather than an
   allow-list of section names (an allow-list would mean a forgotten redeploy
   silently dropping a whole section).
+
+  **A combined total is `partials/views-total.html`**, which sums a slice of
+  pages through those same two sources -- so the "68,330 views" beside an author
+  profile's article count can't disagree with the numbers on the cards below it.
+  It is a sum at build time and not a stored field: it moves every time
+  `fetch/ViewCounts.java` runs and every time the author publishes. It sits next
+  to the article TOTAL rather than in the profile head, because the head's
+  `views.html` line is the profile PAGE's own count -- two numbers there would
+  read as the same thing. Returns 0 rather than nothing when no page in the set
+  is counted, so a caller can `with` it and render nothing, the way `views.html`
+  does on a brand new post.
 
   The slug half is `or .Params.slug .File.ContentBaseName`, which is what
   `:slugorcontentbasename` resolves to — derived from the bundle folder, nothing
