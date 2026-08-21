@@ -1,8 +1,8 @@
 ---
 title: "Azul August 2026 Release: Java's First Monthly CSPU"
 date: "2026-08-21T07:48:46+00:00"
-lastmod: "2026-08-21T07:50:13+00:00"
-description: "If someone discloses a critical Java vulnerability the day after a quarterly update, you could wait up to three months for a patched build. That gap is closed now."
+lastmod: "2026-08-21T13:04:50+00:00"
+description: "If someone discloses a 0-day CVE the day after a quarterly update, you could wait up to three months for a patched build. That gap is closed now."
 authors:
   - "frankdelporte"
 image: "Azul-Prime-Stable-2308.jpg"
@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-If someone discloses a critical Java vulnerability the day after a quarterly update, you could wait up to three months for a patched build. That gap is closed now. The August 2026 release is the first monthly **Critical Security Patch Update (CSPU)** in Java's history, and Azul shipped it on schedule across both its product lines.
+If someone discloses a 0-day CVE the day after a quarterly update, you could wait up to three months for a patched build. That gap is closed now. The August 2026 release is the first monthly **Critical Security Patch Update (CSPU)** in Java's history, and Azul shipped it on schedule across both its product lines.
 
 * **Core (Zulu Builds of OpenJDK):** CSPU builds for Java 26, 25, 21, 17, 11, and 8, with backports to Java 7 and 6. See the [Core release notes](https://docs.azul.com/core/release-notes).
 * **Prime (Zing Builds of OpenJDK):** Azul Zing JVM 26.02.310.0 for Java 25, 21, 17, 11, and 8. See the [Prime release notes](https://docs.azul.com/prime/release-notes#prime_stable_26_02_310_0).
@@ -26,11 +26,13 @@ This post explains what a CSPU is and what changes about how you plan patches.
 
 ## What is a CSPU?
 
-A Critical Security Patch Update is a targeted release that delivers security and stability fixes between the regular quarterly updates. They are published on the third Tuesday of a month that has no quarterly release.
+A Critical Security Patch Update is a targeted release that delivers security and other critical fixes between the regular quarterly updates. The third Tuesdays of the months, between quarterly update releases, are reserved for these releases, if the OpenJDK community decides to have them.
 
-Vulnerability discovery and exploitation keeps accelerating, thanks to AI assistance on both sides. Under the old cadence, a fix could sit for up to three months before reaching you in the next quarterly build. A CSPU can deliver such a fix in the next monthly window instead.
+The motivation for CSPUs (as [described by Oracle](https://blogs.oracle.com/security/accelerating-vulnerability-detection-and-response-at-oracle)) was the increased number of CVEs, driven by the widespread use of AI-driven analysis tools that help find new CVEs and exploits. And the need to address them faster. It doesn't mean these CVEs are publicly known. They are known to the [OpenJDK Vulnerability Group](https://openjdk.org/groups/vulnerability/), but not publicly. Under the old cadence, a fix could sit for up to three months before reaching you in the next quarterly build. A CSPU can deliver such a fix in the next monthly window instead.
 
-But the scope of a CSPU stays deliberately narrow, as it brings only security and stability fixes. No new features get added or APIs changed, and no behavior is modified beyond the fixes themselves. It also runs through the same build and stability testing Azul and other distributors apply to every quarterly release.
+But a CSPU's scope stays deliberately narrow, as it includes only security and other critical fixes. No new features get added or APIs changed, and no behavior is modified beyond the fixes themselves. It also runs through the same build and stability testing Azul and other distributors apply to every quarterly release.
+
+A CSPU focuses on security and is not related to "stability". In general, if there is a stability issue, OpenJDK respins the release and doesn't wait for the next release window.
 
 ## Two build lines: CPU and PSU
 
@@ -39,7 +41,7 @@ Azul splits each CSPU into two separate build lines, and picking the right one m
 * **CSPU for CPU builds** contain only critical and security fixes on top of the previous quarterly CPU (Critical Patch Update). They change as little as possible, so Azul recommends them for production as the fastest safe path to a patched runtime.
 * **CSPU for PSU builds** build on the previous quarterly PSU (Patch Set Update) and also carry accumulated non-security fixes. Azul recommends them for testing and to be deployed before moving to the next security update. They are also the only line available to free Zulu Community (CA) users.
 
-That split is the practical answer to garantuee stability. As security updates arrive as often as monthly, your window to test and roll out each one shrinks. Security-only CPU builds keep regression risk minimal, so you can move a patch to production quickly without waiting on a full validation cycle for unrelated bug fixes. And after validating the PSU, you can move to the version which also contains other fixes and improvements.
+That split is the practical answer to garantuee stability. As security updates may arrive as often as monthly, your window to test and roll out each one shrinks. Security-only CPU builds keep regression risk minimal, so you can move a patch to production quickly without waiting on a full validation cycle for unrelated bug fixes. And after validating the PSU, you can move to the version which also contains other fixes and improvements.
 
 ## Azul Zulu Build Numbers
 
