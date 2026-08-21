@@ -2,42 +2,102 @@
    foojay.io — Hugo theme stylesheet
    Replaces the v0 structural scaffolding with the site's visual design.
 
-   Brand tokens live in :root — the palette below is reconstructed from the
-   live foojay.io theme (warm amber accent, deep navy ink, Java blue as the
-   secondary). If you have the official hex values, change them ONLY here.
+   THE PALETTE IS THE LIVE SITE'S, READ OUT OF THE LIVE SITE'S OWN CSS
+   (wp-content/themes/foojay/css/main.css). The scaffold's original guess was a
+   warm amber accent over navy ink with "Java blue" as the secondary, described
+   here as "reconstructed from the live foojay.io theme". It was reconstructed
+   wrong: there is no amber token in that stylesheet at all. Its `:root` is
+   --text-main #37474f, --blue #3562e5, --green #5eb761, --section-bg #edf9fe,
+   and #4fc3f7 (the logo blue) appears 153 times. So every brand token below is
+   now either that file's value or derived from one of its hues.
+
+   Three things about that are deliberate rather than transcription:
+
+   1. THE ACCENT IS #50c2f7, THE LOGO'S OWN VALUE, not the #4fc3f7 the live CSS
+      uses -- one step apart and indistinguishable, but the logo PNG is the
+      artwork everything else has to sit beside, so it wins.
+   2. A BRIGHT BLUE CANNOT BE ACCENT AND ACCENT-TEXT AT ONCE. #50c2f7 measures
+      2.02:1 on white, so it is a fill, a border and a tint here and never text
+      -- --brand-accent-strong is the same hue walked down to 4.75:1. The live
+      site does not make this split and pays for it: #4fc3f7 is its body-link
+      colour, i.e. links at 2.02:1.
+   3. THE LIVE SITE'S MUTED INK IS NOT COPIED EITHER. rgba(55,71,79,.5) is
+      2.56:1 on white. --ink-muted is the same hue at 4.94:1.
+
+   Realigning hues to the live design is the point; importing its contrast
+   failures is not. Every pair below was measured, and the numbers in the
+   comments are WCAG ratios against the surface named. If you change a value,
+   re-measure it.
+
+   Dark mode has no upstream to copy -- the live site has none -- so it is the
+   same hues with the lightness inverted, and the same measurements.
    ========================================================================== */
 
 :root {
-  /* Brand */
-  --brand-accent:        #f2951b;
-  --brand-accent-strong: #d97a06;
-  --brand-accent-soft:   #fdf1e0;
-  --brand-secondary:     #37698c;
-  --brand-secondary-soft:#eaf1f6;
+  /* Brand -- the logo blue, its readable sibling, and its tint.
+     accent      #50c2f7  fills, borders, ticks, the featured panel's edge
+     accent-strong        accent AS TEXT: 4.75 on white, 4.59 on --page-bg
+     accent-soft          the featured panel's ground: --ink on it is 8.57 */
+  --brand-accent:        #50c2f7;
+  --brand-accent-strong: #087ab0;
+  --brand-accent-soft:   #e4f4fc;
+  /* The label on an accent FILL. Was #1c1204 in five places and #14100a in
+     three more -- a warm near-black chosen for amber, which reads as a brown
+     cast on blue. One token now, cool, 8.07 on --brand-accent. */
+  --on-accent:           #06232f;
+  /* Two more "label on a fill" tokens, and they exist because those fills
+     INVERT between the schemes while --brand-accent does not:
+     --brand-accent-strong is a dark blue on light and a pale one on dark, and
+     the ink ramp does the same. A literal #fff was right in exactly one scheme
+     each time -- .btn--accent:hover measured 1.60:1 in dark, .sponsor-badge
+     2.78. Both were wrong before this palette too; they are fixed here because
+     re-measuring every pair is what a palette change is. */
+  --on-accent-strong:    #ffffff;   /* 4.75 on --brand-accent-strong */
+  --on-ink:              #ffffff;   /* 9.65 on --ink, 4.94 on --ink-muted */
 
-  /* Ink & surfaces */
-  --ink:            #10233a;
-  --ink-soft:       #3c4b5d;
-  --ink-muted:      #6d7c8c;
+  /* Secondary = the live theme's --blue, and here as there it is the
+     INTERACTIVE colour: `a { color }` is this token. 5.21 on white. */
+  --brand-secondary:     #3562e5;
+  --brand-secondary-soft:#eff2fd;
+
+  /* Category chips are GREEN, which is what the live site does with a tag
+     (--home-tags-text #5eb761 on --home-tags-bg rgba(94,183,97,.1)). Its own
+     family rather than a third use of --brand-secondary, because the chips and
+     the links are different things and a blue accent has already claimed the
+     rest of the blue. #5eb761 is 2.49:1 as text, so the text is the same hue
+     walked down to 5.18 and #5eb761 stays as the tint it is upstream. */
+  --tag-soft:       #eff8ef;
+  --tag-text:       #377b39;
+
+  /* Ink & surfaces -- --text-main verbatim, then its own hue for the two
+     steps below it (the live site's rgba(.75)/(.5) are 4.74 and 2.56). */
+  --ink:            #37474f;   /* 9.65 on white */
+  --ink-soft:       #4d646f;   /* 6.24 */
+  --ink-muted:      #5a7481;   /* 4.94 -- the floor, meta lines live here */
   --surface:        #ffffff;
-  --surface-sunken: #f4f6f8;
-  --surface-navy:   #0d1d2f;
-  /* Page background: a touch off-white so the page isn't glaringly bright,
-     while cards/header stay pure --surface white for contrast. */
-  --page-bg:        #f5f7f9;
-  /* Page-head band: a step darker than the page so the title area reads. */
-  --page-head-bg:   #e7ecf1;
+  --surface-sunken: #edf9fe;   /* live --section-bg / --block-bg */
+  /* Was --surface-navy, and the name is kept because 30-odd rules use it: the
+     header and footer ground. The live site's is --nav-bg #37474f, a dark
+     blue-grey rather than a navy, i.e. the ink colour itself. */
+  --surface-navy:   #37474f;
+  /* Page background: the live --home-bg, a barely-there blue rather than the
+     grey off-white the scaffold guessed, so cards read as white against it. */
+  --page-bg:        #f7fcfe;
+  /* Page-head band: a step into the section blue so the title area reads. */
+  --page-head-bg:   #e2f3fb;
 
   /* Footer keeps its own tokens: it is dark in the light scheme, and needs a
-     different treatment once the whole page is dark. */
-  --footer-bg:     #0d1d2f;
-  --footer-fg:     #b9c6d4;
-  --footer-link:   #d7e1ea;
+     different treatment once the whole page is dark. Now the same blue-grey
+     the live nav uses, with its lighter steps taken from that hue. */
+  --footer-bg:     #37474f;
+  --footer-fg:     #c3cfd5;
+  --footer-link:   #dfe8ec;
   --footer-head:   #ffffff;
-  --footer-muted:  #93a5b6;
-  --footer-border: #2b425c;
-  --border:         #e2e7ec;
-  --border-strong:  #cfd7de;
+  --footer-muted:  #9fb0b8;
+  --footer-border: #4d646f;
+  /* live --border-color rgba(55,71,79,.1) and a stronger step of it */
+  --border:         #ebeded;
+  --border-strong:  #d6dcde;
 
   /* Type */
   --font-display: "Barlow", "Segoe UI", system-ui, sans-serif;
@@ -51,8 +111,11 @@
   --radius-sm: 6px;
   --header-h: 76px;
 
-  --shadow-sm: 0 1px 2px rgba(16, 35, 58, .06), 0 2px 8px rgba(16, 35, 58, .05);
-  --shadow-md: 0 4px 12px rgba(16, 35, 58, .08), 0 16px 40px rgba(16, 35, 58, .10);
+  /* Blue-tinted, which is the live theme's signature: every shadow token there
+     is rgba(79,195,247,.1-.3) rather than a neutral grey. Kept subtler than
+     upstream's, since this theme puts shadows on far more surfaces. */
+  --shadow-sm: 0 1px 2px rgba(55, 71, 79, .06), 0 2px 8px rgba(79, 195, 247, .10);
+  --shadow-md: 0 4px 12px rgba(55, 71, 79, .07), 0 16px 40px rgba(79, 195, 247, .16);
 
   --ease: cubic-bezier(.2, .7, .3, 1);
 }
@@ -119,10 +182,10 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
 .skip-link {
   position: absolute; left: 1rem; top: -3rem; z-index: 200;
-  background: var(--ink); color: #fff; padding: .6rem 1rem; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  background: var(--ink); color: var(--on-ink); padding: .6rem 1rem; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   transition: top .15s var(--ease);
 }
-.skip-link:focus { top: 0; color: #fff; text-decoration: none; }
+.skip-link:focus { top: 0; color: var(--on-ink); text-decoration: none; }
 
 /* --------------------------------------------------------------- shell --- */
 
@@ -357,12 +420,12 @@ a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); 
   border: 1px solid transparent; cursor: pointer; white-space: nowrap;
   transition: background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);
 }
-.btn--accent { background: var(--brand-accent); color: #1c1204; }
-.btn--accent:hover { background: var(--brand-accent-strong); color: #fff; text-decoration: none; }
+.btn--accent { background: var(--brand-accent); color: var(--on-accent); }
+.btn--accent:hover { background: var(--brand-accent-strong); color: var(--on-accent-strong); text-decoration: none; }
 .btn--ghost { border-color: var(--border-strong); color: var(--ink); }
 .btn--ghost:hover { border-color: var(--ink); color: var(--ink); text-decoration: none; }
-.btn--navy { background: var(--ink); color: #fff; }
-.btn--navy:hover { background: #1d3a5c; }
+.btn--navy { background: var(--ink); color: var(--on-ink); }
+.btn--navy:hover { background: #475c66; }
 
 /* Theme toggle ------------------------------------------------- */
 .theme-toggle {
@@ -599,7 +662,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   font-family: var(--font-display); font-size: .76rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .06em;
   padding: .22rem .6rem; border-radius: 999px;
-  background: var(--brand-secondary-soft); color: var(--brand-secondary);
+  /* Green, as a tag is on the live site (--home-tags-bg / --home-tags-text).
+     Not --brand-secondary: that token is the LINK colour, and a chip is not a
+     link into prose. */
+  background: var(--tag-soft); color: var(--tag-text);
 }
 .post-card-categories a:hover, .post-categories a:hover, .chip-row a:hover {
   background: var(--brand-accent-soft); color: var(--brand-accent-strong); text-decoration: none;
@@ -607,19 +673,64 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 .post-card-excerpt { margin: 0; font-size: .95rem; color: var(--ink-soft); }
 
-/* Lead / featured card */
+/* ---------------------------------------------------- highlight panel ---
+   THE SINGLE DEFINITION OF "THIS BLOCK IS THE ONE TO LOOK AT". Two users so
+   far: the most recent post on the home page (post-card-lead.html) and the
+   monthly featured authors at the top of /today/author/
+   (featured-authors-band.html). A third gets it by adding the class -- which
+   is the reason it is a class rather than a selector list, since the whole
+   point is that the site has ONE highlight treatment and not one per section.
+
+   The ground is --brand-accent-soft: the logo blue's own tint, already carrying
+   the eyebrow tick and the accent button, so this introduces no colour that
+   exists for one block only -- and it retunes itself for dark, where the token
+   is a translucent blue over the page rather than a pale solid.
+
+   --ink-muted IS REDEFINED INSIDE THE PANEL, and that is the interesting part:
+   the token measures 4.39:1 on this ground against 4.94 on white, and it is
+   used by a dozen descendants (card meta, an author's article count, a latest
+   article's date). Stepping the token up once here fixes all of them at 4.71
+   and keeps it lighter than --ink-soft, so the hierarchy inside the panel
+   survives; naming each descendant instead would be a dozen rules that a new
+   descendant silently misses. Dark needs no equivalent -- --ink-muted is 5.76
+   on the dark panel already. */
+.highlight-panel {
+  --ink-muted: #566f7b;
+  background: var(--brand-accent-soft);
+  border: 1px solid var(--brand-accent);
+  border-radius: var(--radius);
+}
+/* An eyebrow inside a highlight panel is a solid chip: --brand-accent-strong
+   on --brand-accent-soft is 4.22:1, i.e. accent-on-accent, and a chip reads as
+   the label it is anyway. --on-accent is 8.07 on it, in both schemes. */
+.highlight-panel .eyebrow {
+  background: var(--brand-accent); color: var(--on-accent);
+  padding: .2rem .65rem; border-radius: 999px;
+}
+/* The chip is its own marker -- the 22px accent tick would be accent-on-accent. */
+.highlight-panel .eyebrow::before { display: none; }
+
+/* Lead / featured card -- the most recent post.
+
+   It sits in the highlight panel above rather than behind the hairline rule it
+   used to carry, because the home page opens straight into this card: there is
+   no hero and the <h1> is visually hidden (see index.html), so the first thing
+   a reader sees is a card whose only distinction from the ten below it was
+   being wider. Every card on the page is unfilled, so one filled block is all
+   the focus this needs. Layout only here; the highlight is not this card's to
+   define. */
 .post-card--lead {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: clamp(1.25rem, 3vw, 2.25rem);
   align-items: center;
-  padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  padding: clamp(1.1rem, 2.5vw, 1.75rem);
   margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
-  border-bottom: 1px solid var(--border);
 }
 .post-card--lead .post-card-image { aspect-ratio: 16 / 9; }
 .post-card--lead .post-card-title { font-family: var(--font-display); font-size: clamp(1.5rem, 1.1rem + 1.3vw, 2.1rem); }
 .post-card--lead .post-card-excerpt { font-size: 1.05rem; }
+
 
 /* ------------------------------------------------------------- sidebar --- */
 
@@ -759,11 +870,14 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .featured-author-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;
 }
+/* Layout only: the ground, the border and the radius come from
+   .highlight-panel, which these cards carry in the markup. They used to be
+   --surface-sunken with a plain --border, i.e. indistinguishable from any other
+   sunken box on the page -- the editorial spotlight looked like furniture. */
 .featured-author {
   display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 1.25rem;
   align-items: start;
   padding: 1.4rem 1.5rem;
-  background: var(--surface-sunken); border: 1px solid var(--border); border-radius: var(--radius);
 }
 .featured-author__portrait { display: block; }
 /* Column + auto margin on the latest-article box so the two cards line their
@@ -938,7 +1052,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   padding: .35rem 1rem; font-family: var(--font-display); font-weight: 600;
   font-size: .88rem; color: var(--ink-soft);
 }
-.cal-switch__btn[aria-pressed="true"] { background: var(--brand-accent); color: #1c1204; }
+.cal-switch__btn[aria-pressed="true"] { background: var(--brand-accent); color: var(--on-accent); }
 
 /* Month grid ---------------------------------------------------- */
 
@@ -970,7 +1084,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   font-variant-numeric: tabular-nums;
 }
 .cal-cell.is-today .cal-cell__day {
-  background: var(--brand-accent); color: #1c1204; border-radius: 50%;
+  background: var(--brand-accent); color: var(--on-accent); border-radius: 50%;
 }
 .cal-cell__events { list-style: none; margin: .2rem 0 0; padding: 0; display: grid; gap: .2rem; }
 
@@ -1156,7 +1270,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .pagination__btn.is-current {
   background: var(--brand-accent); border-color: var(--brand-accent);
-  color: #1c1204; cursor: default;
+  color: var(--on-accent); cursor: default;
 }
 .pagination__btn.is-disabled { color: var(--ink-muted); opacity: .45; background: transparent; }
 .pagination__gap {
@@ -1464,9 +1578,24 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 .cluster-map__marker--md span { min-width: 2.4rem; height: 2.4rem; font-size: .85rem; }
 .cluster-map__marker--lg span { min-width: 2.9rem; height: 2.9rem; font-size: .9rem; }
-/* A cluster is several places at once -- accent colour so it reads as
-   "zoom in for the breakdown" rather than as one more city. */
-.cluster-map__marker--cluster span { background: var(--brand-accent-strong); }
+/* A cluster is several places at once, and it has to be obvious at a glance
+   which is which. Under the amber palette that was accent-vs-secondary, i.e.
+   orange vs blue. Now that the accent is blue too, the pair has to be the two
+   FAMILIES rather than two steps of one: --brand-secondary (indigo) for a
+   place, --brand-accent (the bright logo blue) for a cluster. Two steps of the
+   same family -- which #087ab0 next to #3562e5 was -- read as the same badge
+   twice at map size.
+
+   Its label is --on-accent and needs no dark override, because --brand-accent
+   is the one brand fill that does not change between schemes. */
+.cluster-map__marker--cluster span { background: var(--brand-accent); color: var(--on-accent); }
+/* The PLACE badge's fill inverts with the scheme (--brand-secondary is a dark
+   indigo on light and a pale one on dark), so its fixed white label was only
+   right in one of them -- it measured 2.4:1 in dark. The cluster above sets its
+   own label and is unaffected. The ring goes from white to the sunken surface
+   for the same reason: a white ring is a halo on a dark map. */
+:root[data-theme="dark"] .cluster-map__marker span { color: var(--on-accent); border-color: var(--surface-sunken); }
+:root[data-theme="dark"] .cluster-map__marker--cluster span { color: var(--on-accent); }
 .cluster-map__marker:hover span { background: var(--brand-accent); }
 
 /* Author box under an article */
@@ -1498,29 +1627,48 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --brand-accent:        #f9a83a;
-  --brand-accent-strong: #ffc46f;
-  --brand-accent-soft:   rgba(249, 168, 58, .14);
-  --brand-secondary:     #86b7d8;
-  --brand-secondary-soft:rgba(134, 183, 216, .14);
+  /* The accent needs NO lightening for dark, which the amber it replaces did
+     (#f2951b had to become #f9a83a): the logo blue is 8.57 on --surface as it
+     stands, so the mark, the buttons and the ticks are one colour in both
+     schemes. --brand-accent-strong is still the text variant, lightened rather
+     than darkened because the ground flipped. */
+  --brand-accent:        #50c2f7;   /* 8.57 on --surface */
+  --brand-accent-strong: #8ed6fa;   /* 10.83 */
+  --brand-accent-soft:   rgba(80, 194, 247, .14);
+  /* #3562e5 is 2.4:1 on a dark ground -- an indigo that dark cannot be a link
+     colour here, so it is the same hue lightened to 6.08. */
+  --brand-secondary:     #7796ee;
+  --brand-secondary-soft:rgba(119, 150, 238, .14);
 
-  --ink:            #eaf1f7;
-  --ink-soft:       #c0cedb;
-  --ink-muted:      #8a9aa8;
-  --surface:        #0e1a26;
-  --surface-sunken: #16232f;
-  --surface-navy:   #0a131c;
-  --page-bg:        #0a131c;
-  --page-head-bg:   #16232f;
-  --border:         #23323f;
-  --border-strong:  #364a5c;
+  --tag-soft:       rgba(114, 192, 117, .14);
+  --tag-text:       #72c075;   /* 7.84 */
 
-  --footer-bg:     #0a131c;
-  --footer-fg:     #a9b8c6;
-  --footer-link:   #cfdce6;
-  --footer-head:   #eaf1f7;
-  --footer-muted:  #7d8d9c;
-  --footer-border: #24343f;
+  /* --on-accent needs no dark value (the accent it sits on is unchanged), but
+     these two do: both their fills are pale here, so the label goes dark. */
+  --on-accent-strong: #06232f;   /* 10.20 on --brand-accent-strong */
+  --on-ink:           #0a1114;   /* 6.84 on --ink-muted, 16+ on --ink */
+
+  /* Same blue-grey hue as the light scheme, lightness inverted. Saturation is
+     held up deliberately at these depths: the hue washes out to charcoal below
+     about 20% saturation, and the point is that the dark scheme reads as the
+     same blue-grey family rather than as neutral grey. */
+  --ink:            #edf1f3;   /* 15.22 on --surface */
+  --ink-soft:       #c3cfd5;   /* 10.88 */
+  --ink-muted:      #8b9ea7;   /*  6.22 */
+  --surface:        #121c21;
+  --surface-sunken: #1d292f;
+  --surface-navy:   #0a1114;
+  --page-bg:        #0a1114;
+  --page-head-bg:   #1d292f;
+  --border:         #2e3f48;
+  --border-strong:  #435a65;
+
+  --footer-bg:     #0a1114;
+  --footer-fg:     #a9b9c1;
+  --footer-link:   #cfdbe0;
+  --footer-head:   #edf1f3;
+  --footer-muted:  #7d8e97;
+  --footer-border: #24333a;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .5), 0 2px 8px rgba(0, 0, 0, .35);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, .45), 0 16px 40px rgba(0, 0, 0, .5);
@@ -1528,7 +1676,9 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 
 /* Amber is bright enough on dark that the pill button keeps dark label text,
    but a few surfaces need retuning rather than a token swap. */
-:root[data-theme="dark"] .btn--accent { color: #14100a; }
+/* No dark override for the label on an accent fill any more: --brand-accent is
+   the same #50c2f7 in both schemes, so --on-accent is correct in both. The
+   three rules that used to re-darken it for amber are gone. */
 :root[data-theme="dark"] .btn--navy { background: var(--surface-sunken); color: var(--ink); border-color: var(--border-strong); }
 :root[data-theme="dark"] .btn--navy:hover { background: var(--border); }
 :root[data-theme="dark"] pre { border: 1px solid var(--border); }
@@ -1538,7 +1688,6 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 :root[data-theme="dark"] .author-avatar,
 :root[data-theme="dark"] .featured-side__head img,
 :root[data-theme="dark"] .post-single img { filter: brightness(.92); }
-:root[data-theme="dark"] .pagination__btn.is-current { color: #14100a; }
 /* The placeholder tile is generated colour, not artwork, so it is retuned for
    dark rather than filtered -- which is also why the brightness rule above
    targets .post-card-image img and not the container: dimming a colour that is
@@ -1853,12 +2002,12 @@ body.lightbox-open { overflow: hidden; }
   font-weight: 700;
   font-size: .95rem;
   text-decoration: none;
-  color: #fff;
+  color: var(--on-accent);
   background: var(--brand-accent);
   border: 1px solid var(--brand-accent);
   border-radius: 999px;
 }
-.sponsors-button:hover { background: var(--brand-accent-strong); border-color: var(--brand-accent-strong); color: #fff; }
+.sponsors-button:hover { background: var(--brand-accent-strong); border-color: var(--brand-accent-strong); color: var(--on-accent-strong); }
 .sponsors-button--outline {
   color: var(--brand-secondary);
   background: transparent;
@@ -1949,7 +2098,7 @@ body.lightbox-open { overflow: hidden; }
   padding: .2rem .65rem;
   font-family: var(--font-display);
   font-size: .78rem; font-weight: 700; letter-spacing: .02em;
-  color: #fff; background: var(--ink-muted);
+  color: var(--on-ink); background: var(--ink-muted);
   border-radius: 999px;
 }
 .sponsor-badge--gold   { background: var(--tier-gold); }
@@ -2131,7 +2280,7 @@ body.lightbox-open { overflow: hidden; }
   padding: .2rem .65rem;
   font-family: var(--font-display);
   font-size: .78rem; font-weight: 700; letter-spacing: .02em;
-  color: #fff; background: var(--ink-muted);
+  color: var(--on-ink); background: var(--ink-muted);
   border-radius: 999px;
 }
 

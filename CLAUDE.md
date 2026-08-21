@@ -1893,6 +1893,88 @@ should catch a mistake at PR time rather than letting it fail silently.
   its own. `imagebackground` is the same escape hatch board logos have, for
   artwork that needs its own ground in both themes.
 
+- **The palette is the LIVE SITE'S, read out of the live site's own CSS — and
+  the amber it replaced was never foojay's colour.** The scaffold's `:root` was
+  described as "reconstructed from the live foojay.io theme (warm amber accent,
+  deep navy ink, Java blue as the secondary)". Checked against
+  `foojay.io/wp-content/themes/foojay/css/main.css`: **there is no amber token
+  in that stylesheet at all.** Its `:root` is `--text-main: #37474f`,
+  `--blue: #3562e5`, `--green: #5eb761`, `--section-bg: #edf9fe`, `--nav-bg:
+  #37474f`, and `#4fc3f7` — the logo blue — appears **153 times**. So the
+  reconstruction was simply wrong, and every brand token here is now either that
+  file's value or derived from one of its hues.
+
+  **Sample the logo, don't trust a description of it**: `foojay-logo.png` is
+  97,620px of exactly `#50c2f7`. That is the accent, not the `#4fc3f7` the live
+  CSS uses — one step apart and indistinguishable, but the logo is the artwork
+  everything else sits beside, so it wins.
+
+  Three decisions inside this are load-bearing:
+
+  1. **A bright blue cannot be both the accent and accent-TEXT.** `#50c2f7` is
+     **2.02:1 on white**, so it is a fill, a border and a tint here and never
+     text; `--brand-accent-strong` is the same hue walked down to 4.75. The live
+     site does not make that split and pays for it — `#4fc3f7` is its body-link
+     colour, i.e. links at 2.02:1. **Realigning hues to the live design is the
+     point; importing its contrast failures is not.** Same reason
+     `--ink-muted` is not the live `rgba(55,71,79,.5)`, which is 2.56:1.
+  2. **The accent is the ONE brand fill that does not change between schemes**
+     (`#50c2f7` is 8.57 on the dark surface as it stands, where the old amber had
+     to be re-tuned to `#f9a83a`). That is what retired three
+     `:root[data-theme="dark"]` overrides: one `--on-accent` is correct in both.
+  3. **`--on-accent` / `--on-accent-strong` / `--on-ink` exist because a fill
+     that INVERTS between schemes cannot carry a literal label colour.**
+     `--brand-accent-strong` and the ink ramp are dark on light and pale on dark,
+     so a hardcoded `#fff` was right in exactly one scheme —
+     `.btn--accent:hover` measured **1.60:1** in dark and `.sponsor-badge`
+     **2.78**. Both were already broken under the amber palette; they are fixed
+     here because re-measuring every pair is what a palette change *is*. The
+     audit that found them is worth repeating after any token edit: collect every
+     rule setting both a `background: var(--…)` and a literal `color:`, and check
+     each against both schemes.
+
+  **Category chips are green, and that is not a third blue going spare** —
+  `--tag-soft`/`--tag-text` reproduce the live site's `--home-tags-bg` /
+  `--home-tags-text`, because a tag is green there. They are their own family
+  rather than a third use of `--brand-secondary`: **that token is the LINK
+  colour** (`a { color }` is literally it), and a chip is not a link into prose.
+  `#5eb761` is 2.49:1 as text, so the text is the same hue at 5.18 and `#5eb761`
+  stays the tint it is upstream.
+
+  **Sponsor tiers were untouched, and check that before assuming amber is gone.**
+  `--tier-gold`/`--tier-silver`/`--tier-bronze` are their own tokens, so amber
+  correctly survives exactly where it means "gold". A grep for warm hex values
+  will find them and they are not leftovers.
+
+  One knock-on worth knowing: the map badges on `/java-champions/` and `/jugs/`
+  used to be accent-vs-secondary, i.e. **orange vs blue**. With a blue accent
+  that pair collapsed — `#087ab0` next to `#3562e5` reads as the same badge twice
+  at map size — so a place is `--brand-secondary` (indigo) and a cluster is
+  `--brand-accent` (bright logo blue): the two FAMILIES, not two steps of one.
+
+- **`.highlight-panel` is the single definition of "this block is the one to
+  look at".** Two users: the most recent post on the home page
+  (`post-card-lead.html`) and the monthly featured authors at the top of
+  `/today/author/` (`featured-authors-band.html`). A third gets it by adding the
+  class — which is why it is a class and not a selector list: the site has ONE
+  highlight treatment, not one per section. Before it, the lead card was
+  distinguished from the ten cards below it only by being wider (the home page
+  opens straight into it — no hero, and the `<h1>` is visually hidden), and the
+  featured-author cards were `--surface-sunken` with a plain `--border`, i.e.
+  indistinguishable from any other sunken box on the page: the editorial
+  spotlight looked like furniture.
+
+  **`--ink-muted` is redefined INSIDE the panel, and that is the part to keep.**
+  The token is 4.39:1 on the tinted ground against 4.94 on white, and a dozen
+  descendants use it — card meta, an author's article count, a latest article's
+  date. Stepping the token up once on the panel fixes all of them at 4.71 and
+  keeps it lighter than `--ink-soft`, so the hierarchy inside the panel survives;
+  naming each descendant instead would be a dozen rules that a new descendant
+  silently misses. Dark needs no equivalent — `--ink-muted` is already 5.76
+  there. An `.eyebrow` inside the panel likewise becomes a solid chip, because
+  `--brand-accent-strong` on `--brand-accent-soft` is 4.22 (it was **2.80** under
+  amber) and a chip reads as the label it is anyway.
+
 - **The logo file is cropped to its artwork, and sized in CSS.**
   `themes/foojay/static/images/foojay-logo.png` was a 1500x500 export whose mark
   only occupied 1022x352 of it -- 32% of the width and 30% of the height was
