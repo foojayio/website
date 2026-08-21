@@ -1,6 +1,6 @@
 ---
 title: "Foojay Advisory Board"
-description: "The organizations that make up the Foojay Advisory Board, meeting periodically on Foojay's roadmap and direction."
+description: "The organizations that set the direction of Foojay."
 url: "/board/"
 aliases:
   - "/board/"
@@ -9,6 +9,6 @@ layout: "list"
 frozen: false
 ---
 
-Together, the organizations below make up the Foojay Advisory Board, holding periodic meetings on Foojay's roadmap and direction.
+The organizations below set up what Foojay should be. They met during the first years of the project, to agree on the scope and the direction. The board members keep supporting Foojay today, as contributors to the site and as part of the OpenJDK ecosystem around it.
 
 OpenJDK technology organizations actively contributing content to Foojay are welcome to join the Foojay Advisory Board.
