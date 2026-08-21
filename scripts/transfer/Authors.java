@@ -193,6 +193,7 @@ public class Authors {
         if (h.contains("bsky.app") || h.contains("bluesky")) { if (d.bluesky == null) d.bluesky = href; }
         else if (h.contains("linkedin.com")) { if (d.linkedin == null) d.linkedin = href; }
         else if (h.contains("github.com")) { if (d.github == null) d.github = href; }
+        else if (h.contains("gitlab.com")) { if (d.gitlab == null) d.gitlab = href; }
         else if (h.contains("youtube.com") || h.contains("youtu.be")) { if (d.youtube == null) d.youtube = href; }
         else if (isMastodon(h)) { if (d.mastodon == null) d.mastodon = href; }
         else if (d.website == null) d.website = href;
@@ -319,6 +320,28 @@ public class Authors {
         return ".jpg";
     }
 
+    /** A single quoted frontmatter value from an existing bundle, or null.
+     *  Deliberately a line match rather than a YAML parse: this reads back one
+     *  key the scrape cannot supply, not the whole file. */
+    static String existingParam(Path bundleDir, String key) {
+        Path file = bundleDir.resolve("_index.md");
+        if (!Files.isRegularFile(file)) return null;
+        try {
+            for (String line : Files.readAllLines(file)) {
+                if (line.startsWith(key + ":")) {
+                    String v = line.substring(key.length() + 1).trim();
+                    if (v.length() >= 2 && v.startsWith("\"") && v.endsWith("\"")) {
+                        v = v.substring(1, v.length() - 1);
+                    }
+                    return v.isBlank() ? null : v;
+                }
+            }
+        } catch (IOException e) {
+            return null;
+        }
+        return null;
+    }
+
     static boolean isFrozen(String slug) {
         Path bundle = findExistingAuthorBundle(slug);
         if (bundle == null) return false;
@@ -372,6 +395,13 @@ public class Authors {
         fm.append("mastodon: ").append(yamlString(d.mastodon)).append("\n");
         fm.append("linkedin: ").append(yamlString(d.linkedin)).append("\n");
         fm.append("github: ").append(yamlString(d.github)).append("\n");
+        // foojay's author card has no GitLab icon, so a gitlab: value can only
+        // ever have been written by hand -- and writeAuthor rebuilds the whole
+        // block, which would silently drop it on the next re-run. Carried over
+        // from the existing file when the scrape found none, the way
+        // Sponsors.java carries `authors:` through.
+        if (d.gitlab == null) d.gitlab = existingParam(bundleDir, "gitlab");
+        fm.append("gitlab: ").append(yamlString(d.gitlab)).append("\n");
         fm.append("youtube: ").append(yamlString(d.youtube)).append("\n");
         fm.append("website: ").append(yamlString(d.website)).append("\n");
         fm.append("frozen: false\n");
@@ -436,6 +466,7 @@ public class Authors {
         String mastodon;
         String linkedin;
         String github;
+        String gitlab;
         String youtube;
         String website;
     }

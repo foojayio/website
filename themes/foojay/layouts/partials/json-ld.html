@@ -37,6 +37,7 @@
       {{- $sameAs := slice -}}
       {{- with $author.Params.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with $author.Params.gitlab }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.mastodon }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.bluesky }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.youtube }}{{ $sameAs = $sameAs | append . }}{{ end -}}
@@ -129,6 +130,7 @@
   {{- $sameAs := slice -}}
   {{- with .Params.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
   {{- with .Params.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+  {{- with .Params.gitlab }}{{ $sameAs = $sameAs | append . }}{{ end -}}
   {{- with .Params.mastodon }}{{ $sameAs = $sameAs | append . }}{{ end -}}
   {{- with .Params.bluesky }}{{ $sameAs = $sameAs | append . }}{{ end -}}
   {{- with .Params.youtube }}{{ $sameAs = $sameAs | append . }}{{ end -}}

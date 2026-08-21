@@ -7,6 +7,7 @@ bluesky: "https://bsky.app/profile/frankdelporte.be"
 mastodon: "https://foojay.social/@FrankDelporte"
 linkedin: "https://www.linkedin.com/in/frankdelporte/"
 github: "https://github.com/FDelporte/"
+gitlab: "https://gitlab.com/fdelporte"
 youtube: "https://www.youtube.com/@FrankDelporte"
 website: "https://webtechie.be/"
 frozen: false
