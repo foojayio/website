@@ -38,20 +38,33 @@
   var results = document.getElementById('search-page-results');
   var pagefindUrl = {{ "pagefind/pagefind.js" | relURL }};
 
-  // Matches Hugo's page Type (content/authors, content/pedia, content/posts,
-  // content/pages, plus the "categories" taxonomy, and "jugs" for
-  // the /jugs/ page specifically -- see baseof.html), tagged onto every page
+  // Matches Hugo's page Type -- "author" (a profile, singular: see the aliases
+  // below), content/pedia, content/posts, content/pages, plus the "categories"
+  // taxonomy, and "jugs" for the /jugs/ page specifically -- see baseof.html,
+  // which tags every page
   // via data-pagefind-filter="section:..." on <main>. Order here is the
   // section-header order in results, and only sections that actually have a
   // result are ever shown (see the Object.keys(groups) below -- a key only
   // exists if something got pushed into it). Anything not listed here (a
   // future content section, or a new taxonomy) still gets shown, just after
   // these, alphabetically.
-  var SECTION_ORDER = ['authors', 'pedia', 'posts', 'pages', 'categories', 'jugs'];
+  var SECTION_ORDER = ['author', 'pedia', 'posts', 'pages', 'categories', 'jugs'];
   var SECTION_LABELS = {
-    authors: 'Author', pedia: 'Pedia', posts: 'Post', pages: 'Page',
+    author: 'Author', pedia: 'Pedia', posts: 'Post', pages: 'Page',
     categories: 'Category', jugs: 'JUGs'
   };
+
+  // A section's INDEX page is a listing page, not one of the things it lists,
+  // and it has its own Type: /today/author/ is "authors" while the 344 profiles
+  // it links are "author" (the singular comes from the cascade in
+  // content/authors/_index.md -- see the branch-bundle note in CLAUDE.md).
+  // Left apart, those two became separate groups that BOTH rendered as
+  // "Author": searching "austin" showed one heading holding the overview page
+  // and a second holding the people. Folding the plural onto `pages` files an
+  // index with the other listing pages (/calendar/, /sitemap/), which is what
+  // it is. Note this cannot be fixed with SECTION_LABELS alone -- two keys
+  // sharing a label are still two headings.
+  var SECTION_ALIASES = { authors: 'pages', sponsors: 'pages' };
 
   var pagefindPromise = import(pagefindUrl).catch(function () { return null; });
 
@@ -145,6 +158,7 @@
               var groups = {};
               datas.forEach(function (d) {
                 var section = (d.filters && d.filters.section && d.filters.section[0]) || 'other';
+                section = SECTION_ALIASES[section] || section;
                 (groups[section] = groups[section] || []).push(d);
               });
               if (groups.posts) {

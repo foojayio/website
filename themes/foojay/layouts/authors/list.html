@@ -7,7 +7,13 @@
   </div>
 </div>
 
-<div class="content-col full-width">
+{{/* data-pagefind-ignore: the A-Z grid is 344 author NAMES, i.e. navigation,
+     not this page's own content -- the same reason the sidebar carries it. Left
+     indexed, searching for any author matched this page too, so "austin"
+     returned the overview alongside Rob Austin and Austin Lehman. The page head
+     above stays indexed, so /today/author/ is still findable by "authors".
+     Same treatment as the tables on /sitemap/. */}}
+<div class="content-col full-width" data-pagefind-ignore>
   {{/* Editorial spotlight, ahead of the full A-Z grid -- see
        partials/featured-authors-band.html and params.featuredAuthors. */}}
   {{ partial "featured-authors-band.html" . }}

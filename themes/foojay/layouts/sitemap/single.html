@@ -62,7 +62,14 @@
   </div>
 </div>
 
-<div class="content-col full-width">
+{{/* data-pagefind-ignore: this page is a link to every page on the site, so
+     indexed it matched almost any query -- "austin" returned /sitemap/ next to
+     the authors it lists, and every article title in the table did the same for
+     its own words. Everything here is indexed as its own page anyway, so
+     nothing becomes unfindable. The page head above stays indexed, so
+     /sitemap/ is still findable by name. Same treatment as the A-Z grid on
+     /today/author/. */}}
+<div class="content-col full-width" data-pagefind-ignore>
   <div class="sitemap">
 
     {{ $s := index (where $sections "id" "pages") 0 }}
