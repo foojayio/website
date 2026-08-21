@@ -1412,8 +1412,17 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    these and `.prose ul` (line ~1361) are 0-1-1, and a Leaflet popup is
    appended INSIDE the map container, which is itself inside `.prose` -- so the
    tie is broken by source order and these have to stay below the .prose block,
-   not be moved above it. */
-.cluster-map { height: 480px; margin: 1.5rem 0 .75rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+   not be moved above it.
+
+   `position: relative; z-index: 0` is what keeps the map UNDER the header's
+   nav panels. Leaflet stacks its own panes and controls at z-index 200-1000,
+   and `.leaflet-container` is only `position: relative` (z-index auto), so
+   without a stacking context of its own those numbers compete in the ROOT
+   context against `.site-header`'s 100 -- and win. The header itself never
+   overlaps the map so it looked fine, but a dropdown panel hanging down over
+   the map was painted behind the tiles. Any z-index below 100 does it; 0
+   keeps the map where it sits in source order. */
+.cluster-map { height: 480px; margin: 1.5rem 0 .75rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); position: relative; z-index: 0; }
 .cluster-map__note { font-size: .88rem; color: var(--ink-muted); margin: 0 0 1.5rem; }
 .cluster-map__popup { font-size: .9rem; max-height: 15rem; overflow-y: auto; }
 .cluster-map__popup strong { display: block; margin-bottom: .35rem; }
