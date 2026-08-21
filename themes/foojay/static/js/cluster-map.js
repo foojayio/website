@@ -33,10 +33,13 @@
 
      foojayClusterMap({
        el: 'champions-map',
-       points: [{name, lat, lng, place, url}, ...],
+       points: [{name, lat, lng, place, url, avatar}, ...],
        singular: 'Java Champion',
        plural: 'Java Champions'
      });
+
+   `avatar` is optional and only /java-champions/ supplies one, so /jugs/
+   draws exactly the popup it always did.
 */
 (function () {
   'use strict';
@@ -69,6 +72,28 @@
     });
   }
 
+  /* A face for one item, or null when the caller's data has none -- /jugs/
+     passes no avatars, so this is what keeps one popup builder serving both
+     maps.
+
+     The src is a THIRD-PARTY hotlink (javachampions.org hosts the champion
+     avatars) and nothing at build time can see one go dead: 2 of the 422 were
+     already broken when this was written. So alt is empty and the circle is
+     sized and given its own background in CSS -- a failed load leaves the
+     empty circle rather than a broken-image glyph, and the row keeps its
+     alignment. Same posture as post-thumb.html's onerror, minus the JS: there
+     is nothing underneath here that needs uncovering. */
+  function avatarFor(item) {
+    if (!item.avatar) return null;
+    var img = document.createElement('img');
+    img.className = 'cluster-map__avatar';
+    img.src = item.avatar;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    return img;
+  }
+
   /* Built as DOM and never as an HTML string: every name here is upstream
      data (a champion's own spelling of their name, a JUG's own title), so it
      goes in as textContent and can never become markup. */
@@ -91,17 +116,28 @@
     }
 
     /* A single item needs no heading counting to one and no list of length
-       one -- the name IS the popup, with the place under it. */
+       one -- the name IS the popup, with the place under it. The row wrapper
+       is there whether or not an avatar turned up, so this stays one code
+       path; a flex row holding only the text block renders exactly as the
+       bare strong + div did, which is what /jugs/ still gets. */
     if (items.length === 1) {
+      var row = document.createElement('div');
+      row.className = 'cluster-map__who';
+      var face = avatarFor(items[0]);
+      if (face) row.appendChild(face);
+
+      var text = document.createElement('div');
       var only = document.createElement('strong');
       only.appendChild(link(items[0]));
-      box.appendChild(only);
+      text.appendChild(only);
       if (place) {
         var where = document.createElement('div');
         where.className = 'cluster-map__place';
         where.textContent = place;
-        box.appendChild(where);
+        text.appendChild(where);
       }
+      row.appendChild(text);
+      box.appendChild(row);
       return box;
     }
 
@@ -110,8 +146,18 @@
     box.appendChild(heading);
 
     var list = document.createElement('ul');
+    /* Bullets are dropped when the rows carry faces: a marker on the USA
+       centroid lists 22 champions, and a disc in front of every avatar is
+       noise in front of a picture that already marks the row. Keyed on the
+       data rather than on which page this is, so a JUG logo would get the
+       same treatment for free. */
+    if (items.some(function (item) { return !!item.avatar; })) {
+      list.className = 'cluster-map__faces';
+    }
     items.forEach(function (item) {
       var row = document.createElement('li');
+      var face = avatarFor(item);
+      if (face) row.appendChild(face);
       row.appendChild(link(item));
       list.appendChild(row);
     });
@@ -173,7 +219,16 @@
            without knowing anything about the page's data. */
         itemCount: count
       });
-      marker.bindPopup(popupFor(place.place, place.items, singular, plural));
+      /* bindPopup is handed a FUNCTION, not a node, so Leaflet builds the
+         content when the popup first opens. Passing the node built all 239
+         popups at page load -- which was merely wasteful until an avatar went
+         in one, because an <img> starts fetching the moment its src is set
+         whether or not it is in the document. The champions map would
+         otherwise fire 420 requests at javachampions.org before the reader
+         has clicked anything. */
+      marker.bindPopup(function () {
+        return popupFor(place.place, place.items, singular, plural);
+      });
       markers.addLayer(marker);
     });
 

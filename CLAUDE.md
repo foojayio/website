@@ -134,6 +134,17 @@ should catch a mistake at PR time rather than letting it fail silently.
   new places one run may resolve (default 500), `--geocode-key` passes the key
   without an env var.
 
+  **`avatarUrl` is why an upstream `avatar:` is not just prefixed with
+  `AVATAR_BASE`.** Almost every value is a path relative to the published site
+  root (`img/avatars/aalmiray.png`), but one champion records an absolute URL of
+  their own — and prefixing that blindly produced
+  `https://javachampions.org/http://i.picasion.com/...`, which 404s. An absolute
+  `http://` is upgraded to `https://`, because the page is served over https and
+  a browser blocks a mixed-content image outright, so passing it through
+  unchanged would only trade a 404 for a silently blocked request. All 422
+  avatars were checked against the live host: 420 resolve, and both failures
+  were this one bug plus a path that had simply changed upstream.
+
   **The cache is already primed and committed — all 252 places, 420 of the 422
   champions on the map — so the secret is not blocking anything.** It is only
   consulted for champions added or moved *from now on*; until it is set, a newly
@@ -881,9 +892,31 @@ should catch a mistake at PR time rather than letting it fail silently.
   place marker and a cluster share one `badge()` so they cannot drift apart;
   the cluster is only tinted with the accent colour, to read as "zoom in for the
   breakdown". Verified by running the built pages' own script against the real
-  data: champions 239 markers summing to exactly 420 (max 22), JUGs 88 markers
+  data: champions 240 markers summing to exactly 420 (max 22), JUGs 88 markers
   summing to 90 (max 3), and in both cases a cluster of every marker reporting
   the grand total.
+
+  **A popup is built on OPEN, not at page load, and that became mandatory the
+  day an avatar went in one.** `bindPopup` is handed a *function*, so Leaflet
+  calls it when the marker is first clicked. Passing the node instead built all
+  240 popup trees up front — merely wasteful until each row carried an
+  `<img>`, because an `<img>` starts fetching the moment its `src` is set
+  whether or not it is in the document, so `/java-champions/` would have fired
+  **420 requests at javachampions.org before the reader clicked anything.**
+  Verified against the real built data: 0 images created at init, 22 when the
+  busiest popup opens.
+
+  **The avatar is optional, and `/jugs/` supplies none.** `avatarFor()` returns
+  null without one, so the JUG popups are what they always were and one builder
+  still serves both maps. The `<img>` carries an **empty `alt`** and its size and
+  a background come from CSS: these are third-party hotlinks on
+  javachampions.org that no build step here can check, so a dead one leaves an
+  empty circle with the row still aligned rather than a broken-image glyph —
+  the same posture as `post-thumb.html`'s `onerror`, minus the JS, since there
+  is nothing underneath to uncover. Bullets are dropped from a popup list
+  **when its rows have faces** (keyed on the data, not on which page it is): a
+  disc in front of 22 avatars on the USA marker is noise in front of something
+  that already marks the row.
 
   Four smaller things are load-bearing:
   - **Popups are built as DOM nodes, never an HTML string** — every name is
@@ -916,6 +949,17 @@ should catch a mistake at PR time rather than letting it fail silently.
   created and destroyed continuously as the reader pans, so there is no moment
   at which a query could see them all. Verified against a Leaflet-shaped DOM —
   3 map images hijacked before the fix, 0 after, content images unaffected.
+
+  **`.champions-table img` is excluded for the same reason, and that one was
+  live.** The champions table also sits inside `.prose`, so all **422** avatars
+  were being treated as content images: each took the `zoom-in` cursor, a click
+  opened a 36px face full-screen, and the ‹ › sequence on that page was 422
+  faces long. An avatar in a data table is UI, not a picture in an article. This
+  one *is* a selector rather than a container check, because unlike map tiles
+  those images all exist by the time the script runs — add to `CHROME` if
+  another table of faces or logos ever lands inside `.prose`. Note the champions
+  page now builds no lightbox at all (`init` returns early on zero items),
+  which is the correct outcome and not a regression.
 
 - **`partials/paginator.html` is the single definition of how a page paginates.**
   Not a tidiness move: `<head>` renders before `{{ block "main" }}`, so the

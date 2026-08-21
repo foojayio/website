@@ -1376,7 +1376,9 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    (themes/foojay/layouts/champions/single.html) */
 .champions-source-note { font-size: .92rem; color: var(--ink-muted); }
 .champions-table__name { display: flex; align-items: center; gap: .6rem; }
-.champions-table__name img { width: 36px; height: 36px; border-radius: 50%; flex: 0 0 auto; object-fit: cover; }
+/* background + empty alt is the fallback for a dead hotlink, same as
+   .cluster-map__avatar above: these files live on javachampions.org. */
+.champions-table__name img { width: 36px; height: 36px; border-radius: 50%; flex: 0 0 auto; object-fit: cover; background: var(--surface-sunken); }
 .champions-table__status {
   font-size: .78rem; color: var(--ink-muted); background: var(--surface-sunken);
   border: 1px solid var(--border); border-radius: 999px; padding: .1rem .55rem;
@@ -1429,6 +1431,23 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .cluster-map__popup ul { margin: .35rem 0 0; padding-left: 1.1rem; }
 .cluster-map__popup li + li { margin-top: .15rem; }
 .cluster-map__place { color: var(--ink-muted); font-size: .85rem; }
+
+/* Avatars in a popup (the champions map supplies them, /jugs/ doesn't -- see
+   cluster-map.js). The circle carries its own background and a fixed size, so
+   an avatar that 404s upstream leaves an empty circle with the row still
+   aligned instead of a broken-image glyph; that is the whole fallback, and it
+   is why the img keeps an empty alt. */
+.cluster-map__avatar {
+  width: 24px; height: 24px; flex: 0 0 auto;
+  border-radius: 50%; object-fit: cover;
+  background: var(--surface-sunken);
+}
+.cluster-map__who { display: flex; align-items: center; gap: .5rem; }
+.cluster-map__who .cluster-map__avatar { width: 42px; height: 42px; }
+/* Declared after the `ul` rule above, which it ties on specificity with. */
+.cluster-map__popup .cluster-map__faces { list-style: none; padding-left: 0; }
+.cluster-map__popup .cluster-map__faces li { display: flex; align-items: center; gap: .45rem; }
+.cluster-map__popup .cluster-map__faces li + li { margin-top: .3rem; }
 
 .cluster-map__marker {
   background: none; border: 0;   /* Leaflet's .leaflet-div-icon default box */

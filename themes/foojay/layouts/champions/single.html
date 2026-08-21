@@ -39,7 +39,13 @@
          The map itself is static/js/cluster-map.js, shared with /jugs/ --
          grouping by place, the counted badges and the cluster totals live
          there so the two maps cannot disagree about what a number means. All
-         this template supplies is the points, the noun and the element. */}}
+         this template supplies is the points, the noun and the element.
+
+         `avatar` is the same upstream image the table below shows, and is
+         optional in cluster-map.js precisely so /jugs/ (which has none) keeps
+         the popup it always had. Note the popups are built lazily over
+         there -- 420 hotlinked avatars must not be requested until a marker
+         is actually clicked. */}}
     {{ $points := slice }}
     {{ range $champions }}
       {{ if and .latitude .longitude }}
@@ -55,7 +61,8 @@
              "lat" .latitude
              "lng" .longitude
              "place" (cond (ne (printf "%v" (.city | default "")) "") (printf "%s, %s" .city .country) (printf "%v" .country))
-             "url" $url) }}
+             "url" $url
+             "avatar" (.avatar | default "")) }}
       {{ end }}
     {{ end }}
 

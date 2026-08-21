@@ -24,6 +24,15 @@
      this runs and are created and destroyed continuously as the reader pans:
      there is no moment at which a query could see them all. */
   var MAP_CONTAINER = ".leaflet-container";
+  /* Avatars in a data table are UI, not pictures in an article -- same
+     distinction the map container above draws. /java-champions/ renders its
+     table inside `.prose`, so all 422 champion avatars were being picked up as
+     content images: each took a zoom-in cursor, a click opened a 36px face
+     full-screen, and the < / > sequence on that page was 422 of them. A
+     selector is enough here (unlike the map, whose tiles do not exist yet when
+     this runs); add to it if another table of faces or logos ever lands inside
+     `.prose`. */
+  var CHROME = ".champions-table img";
   var IMG_HREF = /\.(jpe?g|png|gif|webp|svg|avif)(\?|#|$)/i;
   var SWIPE_MIN = 40; // px of horizontal travel before a touch counts as a swipe
 
@@ -47,6 +56,7 @@
     var openers = [];
     Array.prototype.forEach.call(document.querySelectorAll(SELECTOR), function (img) {
       if (img.closest(MAP_CONTAINER)) return; // a map tile, not a content image
+      if (img.matches(CHROME)) return; // an avatar in a table, not a content image
       var full = fullSrc(img);
       if (full === null) return; // linked to something that isn't an image
       var index = indexOfSrc[full];

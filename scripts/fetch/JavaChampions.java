@@ -77,6 +77,7 @@ public class JavaChampions {
     // relative to the published site root, not the repo -- javachampions.org
     // is also the more stable long-term host (repo file layout is an
     // implementation detail of their JBake build, the published URL isn't).
+    // Not every entry is relative, though: see avatarUrl below.
     static final String AVATAR_BASE = "https://javachampions.org/";
 
     static final Path OUTPUT_FILE = Path.of("data/java-champions.yaml");
@@ -272,7 +273,7 @@ public class JavaChampions {
 
         String avatarPath = trimToNull(raw.get("avatar"));
         if (avatarPath != null) {
-            champion.put("avatar", AVATAR_BASE + avatarPath.replaceAll("^/+", ""));
+            champion.put("avatar", avatarUrl(avatarPath));
         }
 
         Object statusObj = raw.get("status");
@@ -281,6 +282,33 @@ public class JavaChampions {
         }
 
         return champion;
+    }
+
+    /**
+     * Resolves an upstream {@code avatar:} value to a URL that works on an
+     * https page.
+     *
+     * <p>Almost every entry is a path relative to the published site root
+     * ({@code img/avatars/aalmiray.png}), but one records an ABSOLUTE url of
+     * its own -- and prefixing {@link #AVATAR_BASE} blindly turned that into
+     * {@code https://javachampions.org/http://i.picasion.com/...}, which 404s.
+     * Of the 422 avatars that was the only one broken by anything on our side.
+     *
+     * <p>An absolute {@code http://} url is upgraded to {@code https://},
+     * because the page is served over https and a browser blocks a
+     * mixed-content image outright -- so passing it through unchanged would
+     * trade a 404 for a silently blocked request. If the host turns out to
+     * have no TLS the image fails either way, and the empty avatar circle in
+     * the CSS covers that the same way it covers an avatar deleted upstream.
+     */
+    static String avatarUrl(String value) {
+        if (value.startsWith("https://")) {
+            return value;
+        }
+        if (value.startsWith("http://")) {
+            return "https://" + value.substring("http://".length());
+        }
+        return AVATAR_BASE + value.replaceAll("^/+", "");
     }
 
     /**
