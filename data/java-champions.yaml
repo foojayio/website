@@ -1749,6 +1749,8 @@
 - name: Frank Delporte
   year: 2023
   country: Belgium
+  country_residence: Belgium
+  city: Passendale
   mastodon: https://foojay.social/@frankdelporte
   bluesky: https://bsky.app/profile/frankdelporte.be
   youtube: https://www.youtube.com/@FrankDelporte
@@ -1756,9 +1758,9 @@
   github: https://github.com/FDelporte
   website: https://webtechie.be/
   sessionize: https://sessionize.com/frank-delporte/
-  avatar: https://javachampions.org/img/avatars/FrankDelporte.png
-  latitude: 50.6402809
-  longitude: 4.6667145
+  avatar: https://javachampions.org/img/avatars/frank-delporte.jpg
+  latitude: 50.9003015
+  longitude: 3.0203891
 - name: Frank Greco
   year: 2007
   country: USA
