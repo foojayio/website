@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-08-20T02:33:40Z",
+  "generatedAt" : "2026-08-21T02:39:03Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -241,15 +241,7 @@
     "jug" : "HamburgJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-hamburg/",
-    "events" : [ {
-      "title" : "LLM Oberservability",
-      "url" : "https://www.meetup.com/jug-hamburg/events/316034004/",
-      "startTime" : "2026-08-20T19:00:00+02:00",
-      "endTime" : "2026-08-20T20:30:00+02:00",
-      "venue" : "HBT Hamburger Berater Team GmbH",
-      "city" : "Hamburg",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "Java-User-Group-Hannover",
     "name" : "Java User Group Hannover",
