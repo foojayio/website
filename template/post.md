@@ -168,3 +168,24 @@ Pass just the video id:
 |--------------|-----------|
 | Markdown     | Yes       |
 | Shortcodes   | Yes       |
+
+## Advanced Features
+
+### Diagrams
+
+Write a diagram as a `mermaid` code block and it is rendered as a real diagram
+in the article — no image to draw, export, or keep up to date, and the source
+stays reviewable in the pull request. This is the same syntax GitHub renders in
+issues and READMEs, so you can paste a diagram you already have.
+
+```mermaid
+graph LR
+    A[Source] --> B[javac]
+    B --> C[Bytecode]
+    C --> D{JIT?}
+    D -->|Hot| E[Native code]
+    D -->|Cold| F[Interpreter]
+```
+
+For more examples, see the blog post TODO. You can use the [Mermaid live editor](https://mermaid.live/) to create diagrams.
+

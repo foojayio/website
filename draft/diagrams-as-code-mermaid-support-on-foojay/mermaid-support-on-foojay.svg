@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img"
+     aria-label="A flowchart rendered from a Mermaid code block: Source to javac to Bytecode, branching on JIT to Native code or Interpreter.">
+  <title>Diagrams as code on foojay.io</title>
+  <!-- Hero for the Mermaid announcement post. Hand-authored SVG in the site's
+       own brand values (surface navy #0d1d2f ground, accent #50c2f7, amber
+       #f2951b for the decision node) rather than a screenshot, so it stays
+       sharp at any size and carries no theme-specific background of its own.
+       Replace it with a real screenshot of a rendered diagram if you prefer. -->
+  <defs>
+    <style>
+      .n  { fill: #14324e; stroke: #50c2f7; stroke-width: 2.5; }
+      .d  { fill: #14324e; stroke: #f2951b; stroke-width: 2.5; }
+      .t  { fill: #e9f6fe; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            font-size: 26px; font-weight: 600; text-anchor: middle; }
+      .lbl{ fill: #9fc4dc; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 19px; text-anchor: middle; }
+      .e  { stroke: #5c87a6; stroke-width: 2.5; fill: none; }
+      .code { fill: #7fd3fb; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 25px; }
+      .kicker { fill: #50c2f7; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+                font-size: 24px; font-weight: 700; letter-spacing: .14em; }
+      .head { fill: #ffffff; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+              font-size: 62px; font-weight: 800; }
+    </style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5c87a6"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0d1d2f"/>
+
+  <text class="kicker" x="80" y="96">DIAGRAMS AS CODE</text>
+  <text class="head" x="80" y="168">Mermaid on foojay.io</text>
+
+  <!-- the fence an author types -->
+  <rect x="80" y="212" width="470" height="196" rx="12" fill="#08161f" stroke="#1f4160" stroke-width="2"/>
+  <text class="code" x="108" y="252">```mermaid</text>
+  <text class="code" x="108" y="288">graph LR</text>
+  <text class="code" x="108" y="324">  A[Source] --&gt; B[javac]</text>
+  <text class="code" x="108" y="360">  B --&gt; C[Bytecode]</text>
+  <text class="code" x="108" y="396">```</text>
+
+  <!-- becomes -->
+  <path class="e" d="M 576 310 H 636" marker-end="url(#a)"/>
+
+  <!-- the rendered diagram -->
+  <g transform="translate(664 196)">
+    <rect class="n" x="0"   y="86" width="132" height="60" rx="10"/>
+    <text class="t"  x="66"  y="123">Source</text>
+    <path class="e"  d="M 132 116 H 186" marker-end="url(#a)"/>
+
+    <rect class="n" x="186" y="86" width="120" height="60" rx="10"/>
+    <text class="t"  x="246" y="123">javac</text>
+    <path class="e"  d="M 306 116 H 360" marker-end="url(#a)"/>
+
+    <rect class="n" x="360" y="86" width="150" height="60" rx="10"/>
+    <text class="t"  x="435" y="123">Bytecode</text>
+    <path class="e"  d="M 435 146 V 196" marker-end="url(#a)"/>
+
+    <path class="d" d="M 435 200 L 511 240 L 435 280 L 359 240 Z"/>
+    <text class="t"  x="435" y="249">JIT?</text>
+
+    <path class="e" d="M 359 240 H 262 V 190" marker-end="url(#a)"/>
+    <text class="lbl" x="300" y="228">hot</text>
+    <rect class="n" x="176" y="130" width="172" height="60" rx="10"/>
+    <text class="t"  x="262" y="167">Native</text>
+
+    <path class="e" d="M 435 280 V 330" marker-end="url(#a)"/>
+    <text class="lbl" x="474" y="312">cold</text>
+    <rect class="n" x="336" y="330" width="198" height="60" rx="10"/>
+    <text class="t"  x="435" y="367">Interpreter</text>
+  </g>
+</svg>

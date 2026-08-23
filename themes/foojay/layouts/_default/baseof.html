@@ -207,6 +207,11 @@
        can't ship a post where the code silently isn't highlighted because they
        forgot it. The flag is still honoured for any page that sets it. */}}
   {{ if strings.Contains .Content "EnlighterJSRAW" }}{{ partial "enlighterjs.html" . }}{{ end }}
+  {{/* Same rule for mermaid diagrams, and for the same reasons: derived from
+       the rendered page rather than a `mermaid:` frontmatter flag, so an author
+       writes a ```mermaid fence and gets a diagram, and the 4000 pages without
+       one never fetch the library. */}}
+  {{ if strings.Contains .Content "<pre class=\"mermaid\">" }}{{ partial "mermaid.html" . }}{{ end }}
   {{ if .Params.jdoodle }}{{ partial "jdoodle.html" . }}{{ end }}
 
   {{/* Counts this read. The partial decides for itself whether this page is

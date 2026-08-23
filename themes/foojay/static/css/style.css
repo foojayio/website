@@ -168,6 +168,24 @@ code, pre { font-family: var(--font-mono); font-size: .9em; }
 code { background: var(--surface-sunken); padding: .1em .35em; border-radius: 4px; }
 pre { background: var(--surface-navy); color: #e6edf3; padding: 1.1rem 1.25rem; border-radius: var(--radius); overflow-x: auto; }
 pre code { background: none; padding: 0; color: inherit; }
+
+/* A ```mermaid fence renders as <pre class="mermaid"> (see
+   _markup/render-codeblock.html), and mermaid replaces its text with an <svg>
+   IN PLACE -- the <pre> stays. So the dark code-block styling above has to come
+   off, or every diagram sits on a navy slab with code padding.
+
+   Keyed on mermaid's OWN `data-processed`, which it stamps on a block once
+   rendered, so the two states style themselves: before rendering (and with no
+   JavaScript at all) the block keeps the code-block look and shows the diagram
+   source, which is honest and readable; after rendering it is a centred,
+   responsive figure. Nothing has to be toggled from the script. */
+pre.mermaid[data-processed] {
+  background: none; color: inherit; padding: 0;
+  margin: 1.5rem 0; text-align: center; line-height: normal;
+}
+/* Mermaid sizes the SVG in the diagram's own units, which overflows a phone
+   without this. height:auto keeps the aspect ratio while width shrinks. */
+pre.mermaid[data-processed] svg { max-width: 100%; height: auto; }
 blockquote {
   margin: 1.5rem 0; padding: .25rem 0 .25rem 1.25rem;
   border-left: 3px solid var(--brand-accent);

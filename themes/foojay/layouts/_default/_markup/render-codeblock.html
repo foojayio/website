@@ -1,4 +1,4 @@
-{{- /* Fenced code block -> EnlighterJS markup.
+{{- /* Fenced code block -> EnlighterJS markup, EXCEPT ```mermaid.
 
        Content stores plain Markdown fences (```java) because that is what an
        author can reasonably be asked to type; this hook turns each one back
@@ -60,6 +60,28 @@
 -}}
 
 {{- $tag := lower (trim (.Type | default "") " ") -}}
+
+{{- /* MERMAID is a diagram, not code, so it leaves before the highlighter sees
+       it: ```mermaid becomes <pre class="mermaid">, which is the element
+       mermaid's own run() looks for (partials/mermaid.html). Same separation of
+       storage from presentation as the EnlighterJS path below -- an author types
+       the fence GitHub and GitLab already render, and nothing about the
+       renderer leaks into content/.
+
+       This must come FIRST. `mermaid` is not in $supported, so without the
+       branch a diagram falls through to `generic` and renders as a syntax
+       block of its own source -- which is what it did before, silently.
+
+       htmlEscape + safeHTML for exactly the reason the EnlighterJS block below
+       needs them, and it matters more here: diagram syntax is full of `-->`,
+       `<|--` and `<br/>`, so an unescaped body would be parsed as markup, and a
+       double-escaped one would reach mermaid as `--&gt;` and fail to parse.
+       The browser decodes the entities back into textContent, which is what
+       mermaid reads. */ -}}
+{{- if eq $tag "mermaid" -}}
+<pre class="mermaid">{{ htmlEscape .Inner | safeHTML }}</pre>
+{{- else -}}
+
 {{- $lang := index $alias $tag | default $tag -}}
 {{- if not (in $supported $lang) }}{{ $lang = "generic" }}{{ end -}}
 
@@ -78,3 +100,4 @@
        No newline between the tag and the code -- a leading blank line would
        show up as one inside the rendered block. */ -}}
 <pre class="EnlighterJSRAW" data-enlighter-language="{{ $lang }}"{{ with .Attributes.title }} data-enlighter-title="{{ . }}"{{ end }}{{ with .Attributes.highlight }} data-enlighter-highlight="{{ . }}"{{ end }}>{{ htmlEscape .Inner | safeHTML }}</pre>
+{{- end -}}

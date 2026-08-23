@@ -1347,6 +1347,64 @@ should catch a mistake at PR time rather than letting it fail silently.
   fences from the conversion scripts, so a re-scrape produces the same shape;
   `cleanup/EnlighterToFences.java` above cleans up anything that slips through.
   Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
+- **Mermaid diagrams are a ```mermaid fence, and the library is VENDORED and
+  lazy.** `_markup/render-codeblock.html` branches on the fence tag *before* the
+  EnlighterJS path and emits `<pre class="mermaid">`; `baseof.html` loads
+  `partials/mermaid.html` when the RENDERED page contains one. So there is no
+  `mermaid:` frontmatter flag, for exactly the reasons there is no
+  `enlighterjs:` one — an author writes the fence GitHub and GitLab already
+  render, and the 4000 pages without a diagram fetch nothing. The branch has to
+  come first: `mermaid` is not in `$supported`, so without it a diagram falls
+  through to `generic` and renders as a syntax-highlighted block of its own
+  source, which is what it did before and said nothing about it.
+
+  **The ESM build, not the 3.4 MB single-file UMD one.** `mermaid.esm.min.mjs`
+  is 30 KB and dynamically imports only the chunks the diagram types on the page
+  need, so a page with one flowchart fetches a fraction of the library. That is
+  why `static/vendor/mermaid/` is 104 files rather than one — the chunks are the
+  lazy loads, referenced relatively by the entry point, so the directory travels
+  together (all 923 relative imports were verified to resolve on disk). Update
+  it with `npm pack mermaid@<version>` and copy `dist/mermaid.esm.min.mjs` plus
+  `dist/chunks/mermaid.esm.min/*.mjs` — **no `.map` files**, which are 10× the
+  runtime and are what makes the full `dist/` 80 MB.
+
+  Vendored rather than CDN-loaded, unlike Leaflet on `/jugs/`, because this runs
+  on **article** pages: a third-party script over the content itself is the one
+  thing this repo keeps first-party (see the analytics conventions), it is
+  pinned and reviewable in a PR, and nobody else's URL change can break 2000
+  posts. Weight was the reason to care — this file already treats 144 KB of
+  EnlighterJS on a page with no code as a bug worth fixing, so 3.4 MB on every
+  diagram page was not an option.
+
+  Four things are load-bearing:
+  - **`htmlEscape` + `safeHTML`, same as the EnlighterJS branch**, and it
+    matters more here: diagram syntax is full of `-->`, `<|--` and `<br/>`, so
+    an unescaped body is parsed as markup and a double-escaped one reaches
+    mermaid as `--&gt;` and fails to parse. The browser decodes the entities
+    back into `textContent`, which is what mermaid reads.
+  - **The diagram SOURCE is stashed in `data-mermaid-source` before rendering.**
+    Mermaid replaces the block's text with an `<svg>`, so a re-render is
+    impossible from the element afterwards — and a re-render is needed because a
+    rendered diagram bakes its colours in, so a reader flipping to dark would
+    otherwise keep a white diagram on a dark page. A `MutationObserver` on
+    `<html data-theme>` drives it, so it needs no cooperation from
+    `theme-toggle.html`.
+  - **The CSS keys on mermaid's own `data-processed`.** A `<pre>` gets the dark
+    code-block styling, and the `<pre>` SURVIVES rendering — so without
+    `pre.mermaid[data-processed]` resetting it, every diagram sits on a navy slab
+    with code padding. Keying on the attribute mermaid stamps itself means the
+    pre-render state (and the no-JavaScript state) keeps the code-block look and
+    shows the diagram source, which is honest, and nothing has to be toggled
+    from the script.
+  - **`suppressErrors: true` with `securityLevel: "strict"`.** Errors are
+    per-diagram, so one unparseable diagram leaves its own message in place
+    instead of blanking the others; strict is what stops an HTML label in
+    contributor-supplied diagram text becoming markup in the page.
+
+  `template/post.md`'s "Advanced Features" section is where this is documented
+  for authors — it is the single definition of what a contributor can write, and
+  `CONTRIBUTING.md` deliberately points there rather than repeating it.
+
 - **Email addresses are decoded on the way in, never left obfuscated.**
   foojay.io is behind Cloudflare with Email Address Obfuscation on, so every
   address in the HTML it serves is a placeholder plus an XOR-encoded copy that

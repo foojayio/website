@@ -1,0 +1,84 @@
+{{/* Mermaid diagrams (https://mermaid.js.org) for ```mermaid fences.
+
+     VENDORED, like EnlighterJS, into themes/foojay/static/vendor/mermaid/
+     (v11.17.0, MIT). Not CDN-loaded, unlike Leaflet on /jugs/: this runs on
+     ARTICLE pages, and a third-party script on the content itself is the one
+     place this repo keeps first-party (see the analytics conventions in
+     CLAUDE.md -- reviewable in a PR, pinned to a version, and it cannot break
+     2000 posts because someone else changed a URL).
+
+     THE ESM BUILD, not the 3.4 MB single-file UMD one. mermaid.esm.min.mjs is
+     30 KB and dynamically imports only the chunks the diagram types on the page
+     actually need, so a page with one flowchart fetches a fraction of the
+     library instead of all of it. That is why vendor/mermaid/ is 104 files
+     rather than one -- the chunks are the lazy loads, referenced relatively by
+     the entry point, so the whole directory has to travel together. To update:
+     `npm pack mermaid@<version>`, then copy dist/mermaid.esm.min.mjs and
+     dist/chunks/mermaid.esm.min/*.mjs (no .map files) over this folder.
+
+     Loaded only on pages whose RENDERED output contains a mermaid block (see
+     baseof.html) -- there is no `mermaid:` frontmatter flag, the same way there
+     is no `enlighterjs:` one. An author writes a fence and gets a diagram.
+
+     type="module" is required (it is an ES module) and is deferred by
+     definition, so this runs after the document is parsed -- no DOMContentLoaded
+     dance needed. */}}
+<script type="module">
+  import mermaid from "{{ "vendor/mermaid/mermaid.esm.min.mjs" | relURL }}";
+
+  var root = document.documentElement;
+
+  /* The site always stamps an explicit data-theme (baseof.html's inline script
+     resolves the stored choice or the OS setting before first paint), so this
+     never has to read prefers-color-scheme itself -- and it cannot disagree
+     with the rest of the page about which theme is showing. */
+  function mermaidTheme() {
+    return root.getAttribute("data-theme") === "dark" ? "dark" : "default";
+  }
+
+  var blocks = Array.prototype.slice.call(document.querySelectorAll("pre.mermaid"));
+  if (blocks.length) {
+    /* Keep each diagram's SOURCE before mermaid replaces it with an <svg> and
+       stamps data-processed. Re-rendering for a theme change is only possible
+       from the source, and by then the element no longer holds it. */
+    blocks.forEach(function (block) {
+      block.dataset.mermaidSource = block.textContent;
+    });
+
+    function render() {
+      blocks.forEach(function (block) {
+        block.removeAttribute("data-processed");
+        block.textContent = block.dataset.mermaidSource;
+      });
+      /* Errors are per-diagram: mermaid leaves its own message in the block it
+         could not parse and carries on, so one bad diagram in a post cannot
+         blank the others. */
+      mermaid.run({ nodes: blocks, suppressErrors: true });
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      /* Explicit, though it is the default: diagram text arrives from a
+         contributor's pull request, and `strict` is what stops an HTML label in
+         one from becoming markup in the page. */
+      securityLevel: "strict",
+      theme: mermaidTheme(),
+      fontFamily: "inherit"
+    });
+    render();
+
+    /* Follow the theme toggle. A rendered diagram bakes its colours into the
+       SVG, so without this a reader switching to dark keeps a white diagram on
+       a dark page. nav.js flips data-theme on <html>; this watches for that
+       rather than listening for a custom event, so it needs no cooperation from
+       the toggle and works however the attribute comes to change. */
+    var showing = mermaidTheme();
+    new MutationObserver(function () {
+      var next = mermaidTheme();
+      if (next === showing) return;   // some other attribute changed
+      showing = next;
+      mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: next, fontFamily: "inherit" });
+      render();
+    }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  }
+</script>
