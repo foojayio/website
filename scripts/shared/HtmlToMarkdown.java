@@ -206,6 +206,7 @@ public final class HtmlToMarkdown {
      */
     public static Result convert(Element content, Options opts, String itemSubpath) {
         repairEscapedUrls(content);
+        normalizeLegacyUrls(content);
         localizeImages(content, opts, itemSubpath);
         boolean jdoodle = !content.select(SELECTOR_JDOODLE).isEmpty();
         String markdown = toMarkdown(content);
@@ -732,6 +733,74 @@ public final class HtmlToMarkdown {
                 if (!fixed.equals(el.attr(attr))) el.attr(attr, fixed);
             }
         }
+    }
+
+    /**
+     * Rewrites foojay's own LEGACY paths in body links to where they resolve today.
+     *
+     * WHY. `/today/` is not foojay's original URL scheme -- `/blog/` was, and post
+     * bodies written in 2020-2021 still link that way. WordPress covers it with a
+     * host-level redirect, so the live HTML we scrape hands those links back
+     * verbatim: 22 of them were fixed by hand in "Link fixes" (f0bd683), and the
+     * next re-scrape put every one back. Same shape as cleanup/images.py's renames
+     * -- a hand fix that a re-scrape silently reverts, in a diff too large to spot
+     * it in.
+     *
+     * It is also the durable fix rather than a tidy-up. These three are the rules
+     * that CANNOT become `aliases:` (see cutover/legacy-redirects.md: they are
+     * regexes, so they have to be configured on Cloudflare), which means a stored
+     * `/blog/` link is the one kind of internal link that depends on host config
+     * surviving cutover. The 89 concrete rules are deliberately NOT resolved here:
+     * those are `aliases:` in content/, Hugo emits a redirect page for each, and
+     * nothing outside the repo has to be right for them to work.
+     *
+     * The rules are lifted from that file, which is the Redirection plugin's own
+     * export and not a guess:
+     *   /blog/<rest>                 -> /today/<rest>     (209,365 hits)
+     *   /almanac/(jdk|java)-<n>...   -> javaalmanac.io    (102,636)  -- off-site
+     *   /docs/<rest>                 -> /today/           (530)
+     * plus http -> https on foojay's own host, because the page is served over
+     * https and a stored http link is one more redirect (same call as the avatar
+     * URLs in fetch/JavaChampions.java).
+     *
+     * Links to any OTHER host are untouched, and so are images: a `/blog/` image
+     * path never existed, and localizeImages resolves those against the live host.
+     */
+    static void normalizeLegacyUrls(Element content) {
+        for (Element a : content.select("a[href]")) {
+            String href = a.attr("href");
+            String fixed = normalizeFoojayUrl(href);
+            if (!fixed.equals(href)) a.attr("href", fixed);
+        }
+    }
+
+    // Either an absolute foojay.io URL or a root-relative path; group 1 is the
+    // scheme (null when relative), group 2 the path with its query/fragment.
+    private static final Pattern FOOJAY_URL =
+            Pattern.compile("(?i)^(?:(https?)://(?:www\\.)?foojay\\.io)?(/\\S*)$");
+    private static final Pattern LEGACY_ALMANAC =
+            Pattern.compile("(?i)^/almanac/(?:jdk|java)-(\\d+)");
+
+    /** One URL through the rules above; anything else is returned unchanged. */
+    public static String normalizeFoojayUrl(String url) {
+        if (url == null || url.isBlank()) return url;
+        Matcher m = FOOJAY_URL.matcher(url.trim());
+        if (!m.matches()) return url;
+        String scheme = m.group(1);      // null => root-relative, so already ours
+        String path = m.group(2);
+
+        Matcher almanac = LEGACY_ALMANAC.matcher(path);
+        if (almanac.find()) return "https://javaalmanac.io/jdk/" + almanac.group(1);
+
+        String moved = path;
+        if (path.equals("/blog")) moved = "/today/";
+        else if (path.startsWith("/blog/")) moved = "/today/" + path.substring("/blog/".length());
+        else if (path.equals("/docs") || path.startsWith("/docs/")) moved = "/today/";
+
+        // A relative link that did not move is left exactly as written -- there is
+        // no scheme on it to upgrade, and absolutising it is not this pass's job.
+        if (scheme == null) return moved;
+        return "https://foojay.io" + moved;
     }
 
     /**

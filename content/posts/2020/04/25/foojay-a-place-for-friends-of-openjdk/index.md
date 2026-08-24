@@ -49,7 +49,7 @@ At the same time, he's also been making his data available here as part of the i
 
 #### Foojay Today
 
-The Java community is rich with up to date and cutting edge insights and knowledge into everything related to Java and the OpenJDK. A [dedicated blogging area](http://foojay.io/today/) is available on foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem.
+The Java community is rich with up to date and cutting edge insights and knowledge into everything related to Java and the OpenJDK. A [dedicated blogging area](https://foojay.io/today/) is available on foojay to anyone who has thoughts or code to share on topics relevant to the Java ecosystem.
 
 Let's introduce some of the bloggers active on foojay.  
 
@@ -65,7 +65,7 @@ Marcus blogs on topics relating to Java Mission Control (JMC) and Java Flight Re
 
 Kevin blogs on general high level Java topics, focusing on how Java has evolved over the years and its place relative to other programming languages. [Check out his posts here.](https://foojay.io/today/author/kevinfarnham/)
 
-[Go here to see the full blog roll](https://foojay.io/blog), and watch that space, there's many more blog posts coming!
+[Go here to see the full blog roll](https://foojay.io/today/), and watch that space, there's many more blog posts coming!
 
 #### Comprehensive Search
 

@@ -17,7 +17,7 @@ frozen: false
 
 Looking back to my Java adventures in 2020, I can only conclude it has been a wonderful journey.
 
-By writing my book "Getting Started with Java on the Raspberry Pi" (<https://webtechie.be/books/>) and blogging for [foojay.io](http://foojay.io/), I discovered Java in the embedded world has a very bright future. With the 6-month release cycle of both Java and JavaFX, a lot of improvements and new features that impact the use of Java on Raspberry Pi, are introduced with every new version.
+By writing my book "Getting Started with Java on the Raspberry Pi" (<https://webtechie.be/books/>) and blogging for [foojay.io](https://foojay.io/), I discovered Java in the embedded world has a very bright future. With the 6-month release cycle of both Java and JavaFX, a lot of improvements and new features that impact the use of Java on Raspberry Pi, are introduced with every new version.
 
 The Gluon and GraalVM-teams are key players pushing Java(FX) to be the one and only "write once, run everywhere" platform, including all mobile and embedded platforms.
 

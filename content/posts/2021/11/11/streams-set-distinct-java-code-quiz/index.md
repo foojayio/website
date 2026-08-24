@@ -17,7 +17,7 @@ frozen: false
 
 Using Streams and Set Collection Factory methods with Java makes code easier to read and maintain.
 
-By using these features, we can also make it more difficult for bugs to remain hidden. If you can use the latest [LTS (Long-term support) Java version](https://foojay.io/almanac/java-17/ "LTS (Long-term support) Java version") in your project, it's the best scenario, so that you can use cool Java features such as Collection Factories from Java 9 onwards.
+By using these features, we can also make it more difficult for bugs to remain hidden. If you can use the latest [LTS (Long-term support) Java version](https://javaalmanac.io/jdk/17 "LTS (Long-term support) Java version") in your project, it's the best scenario, so that you can use cool Java features such as Collection Factories from Java 9 onwards.
 
 Now that we know why it's important to understand Java features well, it's time for the Java Challenge!
 

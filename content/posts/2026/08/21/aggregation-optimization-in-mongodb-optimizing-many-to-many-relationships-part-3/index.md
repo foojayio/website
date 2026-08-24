@@ -2,7 +2,7 @@
 title: "Aggregation Optimization in MongoDB: Optimizing Many-to-Many Relationships (Part 3)"
 date: "2026-08-21T16:00:40+00:00"
 lastmod: "2026-08-21T16:00:42+00:00"
-description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice - by Graeme Robinson"
+description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice…"
 authors:
   - "graeme-robinson"
 image: "fri1-1.png"

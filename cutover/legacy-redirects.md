@@ -37,6 +37,12 @@ foojay.io is already on Cloudflare DNS, so this is a Redirect Rule (Rules →
 Redirect Rules → Create), one per row, `301` / permanent:
 
 ```
+> **Body links no longer depend on rule 1 or 3.**
+> `HtmlToMarkdown.normalizeLegacyUrls` applies all three of these at scrape time, so
+> a post stored in `content/` links to `/today/…` directly. These rules are for
+> INBOUND traffic — the 209,365 hits arriving from other sites, search results and
+> bookmarks — which is what makes them worth configuring, not our own markup.
+
 # 1. the old blog scheme
 When:  (starts_with(http.request.uri.path, "/blog/"))
 Then:  concat("/today/", substring(http.request.uri.path, 6))     dynamic, 301

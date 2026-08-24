@@ -790,6 +790,35 @@ should catch a mistake at PR time rather than letting it fail silently.
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
   URLs without adding an alias.
 
+  **A re-scrape used to re-introduce the legacy `/blog/` links, and now resolves
+  them instead.** `/today/` is not foojay's original URL scheme — `/blog/` was, and
+  post bodies written in 2020–2021 still link that way. WordPress covers it with a
+  host-level redirect, so the live HTML hands those links back verbatim: the 22
+  fixed by hand in "Link fixes" (f0bd683) all came back on the next run.
+  `HtmlToMarkdown.normalizeLegacyUrls` applies the three rules at scrape time
+  (`/blog/<rest>` → `/today/<rest>`, `/docs/<rest>` → `/today/`,
+  `/almanac/(jdk|java)-<n>` → javaalmanac.io, plus `http` → `https` on foojay's own
+  host), taken from `cutover/legacy-redirects.md` rather than guessed.
+
+  **It resolves those three and deliberately not the other 89.** The three are the
+  regexes, which cannot be `aliases:` and have to be configured on Cloudflare — so a
+  stored `/blog/` link is the one kind of internal link whose survival depends on
+  host config being right after cutover. The 89 concrete rules are already
+  `aliases:` in `content/`, Hugo emits a redirect page for each, and nothing outside
+  the repo has to hold for them to work. The 12 such links still in `content/` were
+  normalised to match, so a re-scrape is a no-op.
+
+  **Yoast's `- by <Author>` description tail is stripped, and the name comes from
+  the author link's HEADING.** `stripBylineSuffix` is author-aware on purpose (the
+  same shape is how a human writes "…- by Emily Wilson"), so it needs the display
+  name exactly. WordPress wraps the author link around a label as well as the name —
+  `<a><h3>Name</h3><span>Author</span></a>` — so `linksToNames` returning `a.text()`
+  gave "Name Author", the tail never matched, and the byline stayed in the
+  description on every post scraped after the theme grew that label. It reads the
+  heading when there is one now. A tail that survives anyway is **reported**, never
+  force-stripped: that drift was silent for two posts, and the warning is the
+  tripwire for the next one.
+
   **WordPress runs a redirect layer on top of the slugs, and it is now carried
   over -- in two places, because Hugo can only express one of the two shapes.**
   Checked against the live site: 2143 of 2147 post slugs match exactly, and on

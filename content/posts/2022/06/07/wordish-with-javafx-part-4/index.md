@@ -25,13 +25,13 @@ Welcome to Part 4 of this five part series.
 
 In [Part 1](https://foojay.io/today/wordish-with-javafx-part-1/), we introduced the Wordish game with JavaFX and discussed the main UI layout.
 
-In [Part 2](http://foojay.io/today/wordish-with-javafx-part-2/), we discussed look and feel enhancements.
+In [Part 2](https://foojay.io/today/wordish-with-javafx-part-2/), we discussed look and feel enhancements.
 
 We introduced specialized Label and Button controls that use pseudo-classes for advanced CSS styling.
 
 We covered incorporating third-party font libraries and customizing Scene Builder to leverage these features.
 
-Next, in [Part 3](http://foojay.io/today/wordish-with-javafx-part-3/), we explored the controller code that maintains game state and responds to user input with appropriate updates to the UI.
+Next, in [Part 3](https://foojay.io/today/wordish-with-javafx-part-3/), we explored the controller code that maintains game state and responds to user input with appropriate updates to the UI.
 
 Now in Part 4, we'll look at how we get our words and how we determine if a submitted word is valid, in a part entitled "What's in a Word, Anyway?"
 

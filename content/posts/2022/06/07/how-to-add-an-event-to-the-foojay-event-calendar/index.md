@@ -18,7 +18,7 @@ frozen: false
 
 Foojay.io, the place for **f** riends of **O** pen**J**DK, is a friendly community of users of the OpenJDK, such as Java developers and Kotlin developers.
 
-It is a collaborative community with tips and insights being shared on a daily basis on [Foojay Today](http://foojay.io/today/).
+It is a collaborative community with tips and insights being shared on a daily basis on [Foojay Today](https://foojay.io/today/).
 
 At Foojay, we maintain a list of past and upcoming Java events. It helps the worldwide OpenJDK community find events and participate in them easily.
 

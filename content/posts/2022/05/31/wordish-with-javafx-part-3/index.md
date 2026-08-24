@@ -25,7 +25,7 @@ Welcome to Part 3 of this five part series.
 
 In [Part 1](https://foojay.io/today/wordish-with-javafx-part-1/), we introduced the Wordish game with JavaFX and discussed the main UI layout.
 
-In [Part 2](http://foojay.io/today/wordish-with-javafx-part-2/), we discussed look and feel enhancements.
+In [Part 2](https://foojay.io/today/wordish-with-javafx-part-2/), we discussed look and feel enhancements.
 
 We introduced specialized Label and Button controls that use pseudo-classes for advanced CSS styling.
 

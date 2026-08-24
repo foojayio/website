@@ -141,6 +141,9 @@ public class Posts {
     // more than one author, so this yields a list.
     static final String SELECTOR_AUTHOR_LINKS = ".article__author a[href*=/today/author/]";
     static final Pattern AUTHOR_SLUG_IN_HREF = Pattern.compile("/today/author/([^/]+)/");
+
+    // A Yoast byline tail that survived stripBylineSuffix -- see the call site.
+    static final Pattern BYLINE_TAIL = Pattern.compile("\\s-\\sby\\s\\S[^\"]*$");
     // Verified 2026-07: foojay renders "related" posts in a .related-articles
     // section (article-small cards linking to /today/<slug>/). The rest are
     // fallbacks for classic related-posts plugins.
@@ -403,9 +406,17 @@ public class Posts {
         // is the form the suffix uses. Keeps a re-scrape in step with what
         // cleanup/Descriptions.java already wrote into content/.
         d.description = HtmlToMarkdown.stripBylineSuffix(
-                d.description, linksToNames(doc, SELECTOR_AUTHOR_LINKS, "/today/author/"));
+                d.description, linksToNames(doc, SELECTOR_AUTHOR_LINKS));
+        // Reported rather than force-stripped: a name the page does not credit is
+        // how a HUMAN writes "...- by Emily Wilson", so removing it on the strength
+        // of the shape alone would edit someone's own description. This is the
+        // tripwire for the selector or the theme drifting again -- the last drift
+        // (a <span>Author</span> label inside the author link) was silent.
+        if (d.description != null && BYLINE_TAIL.matcher(d.description).find()) {
+            System.err.println("  WARNING: description still ends in a byline: " + d.slug);
+        }
 
-        d.categories = linksToNames(doc, SELECTOR_CATEGORY_LINKS, "/today/category/");
+        d.categories = linksToNames(doc, SELECTOR_CATEGORY_LINKS);
         normalizeCategories(d);
         d.relatedSlugs = relatedPostSlugs(doc);
 
@@ -480,10 +491,22 @@ public class Posts {
         return new ArrayList<>(slugs);
     }
 
-    static List<String> linksToNames(Document doc, String selector, String pathMarker) {
+    /**
+     * The display names behind a set of links.
+     *
+     * The NAME is the anchor's heading when it has one, not the whole anchor's
+     * text. WordPress wraps an author link around a label as well as the name --
+     * `<a><h3>Oleksandr Dendeberia</h3><span>Author</span></a>` -- so `a.text()`
+     * returns "Oleksandr Dendeberia Author", which is nobody's name. That silently
+     * broke stripBylineSuffix (the tail it looks for never matched, so " - by
+     * <Author>" stayed in the description on every post scraped since the theme
+     * grew that label). Category links carry no heading and are unaffected.
+     */
+    static List<String> linksToNames(Document doc, String selector) {
         LinkedHashSet<String> names = new LinkedHashSet<>();
         for (Element a : doc.select(selector)) {
-            String text = a.text().trim();
+            Element heading = a.selectFirst("h1, h2, h3, h4, h5, h6");
+            String text = (heading != null ? heading.text() : a.text()).trim();
             if (!text.isBlank()) names.add(text);
         }
         return new ArrayList<>(names);

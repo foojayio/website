@@ -24,9 +24,9 @@ frozen: false
 Welcome to Part 5 and the final installment of this series.
 
 * In [Part 1](https://foojay.io/today/wordish-with-javafx-part-1/), we introduced the Wordish game with JavaFX and discussed the main UI layout.
-* In [Part 2](http://foojay.io/today/wordish-with-javafx-part-2/), we discussed look and feel enhancements. We introduced specialized Label and Button controls that use pseudo-classes for advanced CSS styling. In addition, we covered incorporating third-party font libraries and customizing Scene Builder to leverage these features.
-* Next, in [Part 3](http://foojay.io/today/wordish-with-javafx-part-3/), we explored the controller code that maintains game state and responds to user input with appropriate updates to the UI.
-* [Part 4](http://foojay.io/today/wordish-with-javafx-part-4/), **What's in a Word, Anyway?**, examines how we get our words and how we determine if a submitted word is valid.
+* In [Part 2](https://foojay.io/today/wordish-with-javafx-part-2/), we discussed look and feel enhancements. We introduced specialized Label and Button controls that use pseudo-classes for advanced CSS styling. In addition, we covered incorporating third-party font libraries and customizing Scene Builder to leverage these features.
+* Next, in [Part 3](https://foojay.io/today/wordish-with-javafx-part-3/), we explored the controller code that maintains game state and responds to user input with appropriate updates to the UI.
+* [Part 4](https://foojay.io/today/wordish-with-javafx-part-4/), **What's in a Word, Anyway?**, examines how we get our words and how we determine if a submitted word is valid.
 
 And now in Part 5, we turn to JavaFX charts, showing how to customize charts with orientation and colors and how to add nodes to the chart scene graph.
 
