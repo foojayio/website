@@ -18,19 +18,17 @@ Legend: **[BLOCKER]** must be done or decided before cutover day.
 These are open items in the repo, not cutover mechanics. Each one is something
 that silently gets worse or gets lost if cutover happens without it.
 
-- [ ] **[BLOCKER] Deploy the view counter Worker**, and do it *weeks* early, not
-      on the day. Four steps in `worker/views/README.md`: create the D1
-      database, load `schema.sql`, set `SEED_TOKEN`, `wrangler deploy`. Nothing
-      in WordPress serves `/api/`, so the route can go up while WP is still
-      live — and a counter proven over weeks beats one switched on the day it
-      has to work.
+- [x] **[BLOCKER] Deploy the view counter Worker** — done 2026-08-24, weeks
+      early as intended, and seeded the same day (2230 rows, 13.89M views).
+      Every route verified against `foojay.io/api/views`; the WordPress bridge
+      and its extra cron entry are deleted from `sync-view-counts.yml`.
 
-      **[ORDER]** Immediately after deploying, run
-      `VIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed`. The
-      `legacy` column is a snapshot; if it is older than what the WordPress
-      bridge has already been publishing, the number on every page visibly
-      **drops** on the next build. Seeding *sets* rather than adds, so re-running
-      is safe.
+      Two leftovers, neither blocking: it was deployed by IT rather than from
+      this repo, so `worker/views/wrangler.toml`'s `database_id` is still the
+      placeholder, and the D1 table holds one row from the smoke test
+      (`posts/10-basic-questions-about-pdf-files-for-java-developers`, +1 view).
+
+      The re-seed below is still required — see "Final view-count import".
 
 - [ ] **Verify comments are switched on.** `hugo.toml`'s `[params.giscus]`
       already carries `repoId` and `categoryId`, so the ids are done. Confirm
