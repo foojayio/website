@@ -628,11 +628,27 @@ should catch a mistake at PR time rather than letting it fail silently.
    loads it client-side and calls `pagefind.search()`. `data-pagefind-body`
    on `<main>` (baseof.html) restricts indexing to page content; sidebar.html
    carries `data-pagefind-ignore` so the repeated widgets don't pollute
-   results. Gotcha: `hugo server` alone has no index (only the built
-   `public/pagefind/pagefind.js` does) — test with `hugo && npx pagefind
-   --site public && npx serve public` instead. Not yet run for real (this
-   sandbox has no network access to the npm registry to fetch Pagefind), so
-   treat it the same as the conversion scripts: reviewed, untested.
+   results.
+
+   **Run for real on 2026-08-24** (Pagefind 1.5.2, 2740 pages, 114,865 words
+   indexed) — no longer reviewed-but-untested. Two gotchas about testing it
+   locally, the second of which makes the recipe that used to be written here
+   fail:
+   - `hugo server` alone has no index. Only the built
+     `public/pagefind/pagefind.js` is one, so build first:
+     `hugo && npx -y pagefind --site public`.
+   - **Serving `public/` at the server root does not work while `baseURL`
+     carries the `/website` path.** Every asset resolves to `/website/...`, so
+     `pagefind.js` 404s and the page reports "Search isn't available on this
+     preview" — which looks exactly like a broken index. Serve a directory
+     holding a `website` symlink to `public/` instead (`ln -s .../public
+     serveroot/website && cd serveroot && python3 -m http.server`), and open
+     `/website/search/?q=…`.
+
+   To drive it headlessly: `--dump-dom` with `--virtual-time-budget` cuts the
+   page off before the searches resolve and reports an EMPTY results container,
+   which reads as a bug in the page. Talk to Chrome over CDP instead and wait in
+   real time; node 22+ has a global `WebSocket`, so that needs no dependencies.
 7. **Comments are wired but not switched on; the view counter needs deploying.**
    `comments.html` (giscus) is called from `posts/single.html` and
    `[params.giscus]` is in `hugo.toml` with `repoId`/`categoryId` left blank —
@@ -1760,6 +1776,43 @@ should catch a mistake at PR time rather than letting it fail silently.
   every category chip shows instead of the usual first two -- on a portal the
   chips are the navigation. That option is the only reason the partial accepts a
   dict; called with a Page it behaves exactly as before.
+- **`/search/` gives each SECTION its own quota, never a global top-N.**
+  Pagefind returns one list in relevance order, so a global `slice(0, 30)` is
+  spent on whichever section matches most. Measured on "pi4j": 328 matching
+  pages — 314 posts, 9 categories, 4 author profiles, the home page — and since
+  the best posts say the word 80 times, the 30 rows rendered were 29 posts and
+  one author profile. The other three authors, **including the two whose bio
+  says Pi4J**, were unreachable: the status line said 328 results, the page
+  showed 30, and there was nothing to click. A section now shows its first 10
+  with a **Show more** button, and its heading carries the section's OWN total
+  rather than however many survived a cut.
+
+  Four things are load-bearing:
+  - **`pagefind.filters()` has to be awaited once before the per-section counts
+    exist.** The filter index is loaded lazily, so `search.filters` comes back
+    EMPTY until something pulls that chunk in — and the whole design hangs off
+    those counts, because a result handle carries its `score` but not its
+    section. Learning a result's section means fetching its fragment, which is
+    exactly the thing this avoids doing 328 times.
+  - **The quota costs one filtered search per section that HAS a hit** (four,
+    for "pi4j"), never one per section that exists — the counts say which to
+    ask for, so nothing is queried on spec.
+  - **A folded group is re-merged on `.score`.** `authors`, `sponsors` and
+    `page` render under `pages`, and they arrive as separate relevance-ordered
+    lists; score is the only thing that makes them one list again.
+  - **Posts are re-sorted newest-first over the WHOLE group on every render**,
+    so a Show more batch (which arrives in relevance order) can't interleave a
+    2024 post between two 2019 ones. Hence re-rendering the group rather than
+    appending to it.
+
+  Two guards, both for silent-failure cases: a `runId` bumped per query, since a
+  query is several round trips now and a slow one must not render over a newer
+  one; and if the per-section counts don't add up to the result total, the
+  leftovers render as one ungrouped list instead of a page reading "328 results"
+  above nothing. `baseof.html` tags every indexed page with its `.Type`, so that
+  second branch is unreachable today — verified across all 2740 indexed pages —
+  which is precisely why it needs to exist rather than be assumed.
+
 - **`/sitemap/` is an HTML page for readers, derived from the content tree.**
   Not to be confused with Hugo's `/sitemap.xml`, which is for crawlers.
   WordPress serves an HTML sitemap at `/sitemap/` (34,244 views) and

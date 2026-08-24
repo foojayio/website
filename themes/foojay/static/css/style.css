@@ -1822,6 +1822,11 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 .search-result p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
 .search-result mark { background: var(--brand-accent-soft); color: var(--ink); border-radius: 2px; }
+/* A <button> needs the UA's grey ground cleared -- .btn--ghost sets only the
+   border and the text colour, which is enough for the <a>s it was written for.
+   justify-self keeps it at its own width instead of stretching across the
+   grid column the results sit in. */
+.search-page__more { margin-top: 1.25rem; justify-self: start; background: none; }
 
 @media (max-width: 560px) {
   .search-result { grid-template-columns: minmax(0, 1fr); }

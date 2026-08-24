@@ -51,7 +51,9 @@
   var SECTION_ORDER = ['author', 'pedia', 'posts', 'pages', 'categories', 'jugs'];
   var SECTION_LABELS = {
     author: 'Author', pedia: 'Pedia', posts: 'Post', pages: 'Page',
-    categories: 'Category', jugs: 'JUGs'
+    categories: 'Category', jugs: 'JUGs',
+    // Only ever used by the ungrouped fallback in runSearch().
+    all: 'Result'
   };
 
   // A section's INDEX page is a listing page, not one of the things it lists,
@@ -64,9 +66,54 @@
   // index with the other listing pages (/calendar/, /sitemap/), which is what
   // it is. Note this cannot be fixed with SECTION_LABELS alone -- two keys
   // sharing a label are still two headings.
-  var SECTION_ALIASES = { authors: 'pages', sponsors: 'pages' };
+  // `page` folds in for the same reason: Hugo gives the HOME page (and the 404)
+  // Type "page", singular, so it arrived as a second group whose label was also
+  // "Page" -- the same duplicate heading the authors case above describes.
+  var SECTION_ALIASES = { authors: 'pages', sponsors: 'pages', page: 'pages' };
+
+  // Results are fetched PER SECTION, and that is the whole point rather than a
+  // detail. Pagefind returns ONE list in relevance order, so a global top-N goes
+  // to whichever section has the most matches. Measured, on "pi4j": 328 matching
+  // pages, of which 314 posts, 9 categories, 4 author profiles and the home page
+  // -- and the best of those posts says "pi4j" 80 times, so the 30 rows this
+  // page used to render were 29 posts and one author profile (a short one, with
+  // 9 mentions). The three other authors, including the two whose BIO says Pi4J,
+  // were outside the 30 with nothing on the page able to reach them: the status
+  // line said 328 results, the page showed 30, and that reads as "my page is not
+  // indexed" when it is indexed and is second in its own section.
+  //
+  // A section gets its own quota instead, so volume in one can never crowd out
+  // another, and a heading carries that section's OWN total rather than however
+  // many of it survived the cut. The cost is one extra search per section that
+  // actually HAS a hit -- four, for "pi4j" -- because the unfiltered search
+  // already reports the per-section counts in `search.filters`, so nothing is
+  // queried on spec. It has to work that way round: a result handle carries its
+  // score but not its section, and learning the section means fetching that
+  // page's fragment, which is the thing we are avoiding doing 328 times.
+  var PER_SECTION = 10;
+  var MORE_STEP = 10;
 
   var pagefindPromise = import(pagefindUrl).catch(function () { return null; });
+
+  // Bumped on every query (and every keystroke that clears one), so a slower
+  // search that resolves after a newer one cannot render over it. There are now
+  // several round trips per query, which is what makes that reachable.
+  var runId = 0;
+  var groups = [];
+
+  // Pagefind loads its FILTER index lazily, and `search.filters` is empty until
+  // it has -- so asking for the per-section counts without this returned nothing
+  // and every result counted as "outside any section". filters() is what pulls
+  // that chunk in; memoised, because it is one fetch for the life of the page
+  // and not a per-query cost. Failure resolves null rather than rejecting, which
+  // drops the page onto the ungrouped path below instead of onto the error line.
+  var filtersLoaded = null;
+  function ensureFilters(pagefind) {
+    if (!filtersLoaded) {
+      filtersLoaded = pagefind.filters().catch(function () { return null; });
+    }
+    return filtersLoaded;
+  }
 
   function render(html) { results.innerHTML = html; }
 
@@ -127,66 +174,148 @@
       '</article>';
   }
 
+  function labelFor(key) {
+    return SECTION_LABELS[key] || (key.charAt(0).toUpperCase() + key.slice(1));
+  }
+
+  // Posts newest first, everything else in relevance order -- as before, and
+  // still client-side: Pagefind's own `sort` option drops every result missing
+  // the sort key, i.e. everything that is not a post.
+  function forDisplay(g) {
+    if (g.key !== 'posts') return g.datas;
+    return g.datas.slice().sort(function (a, b) {
+      var da = (a.meta && a.meta.date) || '';
+      var db = (b.meta && b.meta.date) || '';
+      return db.localeCompare(da);
+    });
+  }
+
+  function buildGroups(perSection) {
+    var byKey = {};
+    perSection.forEach(function (entry) {
+      var key = SECTION_ALIASES[entry.section] || entry.section;
+      var g = byKey[key] || (byKey[key] = { key: key, label: labelFor(key), handles: [], datas: [] });
+      g.handles = g.handles.concat(entry.handles);
+    });
+    return Object.keys(byKey).sort(function (a, b) {
+      var ia = SECTION_ORDER.indexOf(a), ib = SECTION_ORDER.indexOf(b);
+      if (ia === -1) ia = SECTION_ORDER.length;
+      if (ib === -1) ib = SECTION_ORDER.length;
+      return ia !== ib ? ia - ib : a.localeCompare(b);
+    }).map(function (key) {
+      var g = byKey[key];
+      // Two sections folded into one (authors and sponsors both file under
+      // `pages`) arrive as two separately-ordered lists; score is the only
+      // thing that makes them one list again.
+      g.handles.sort(function (a, b) { return b.score - a.score; });
+      return g;
+    });
+  }
+
+  function renderGroups() {
+    render(groups.map(function (g) {
+      var remaining = g.handles.length - g.datas.length;
+      return '' +
+        '<section class="search-page__section">' +
+        '<h2>' + g.label + ' <span class="search-page__count">' + g.handles.length + '</span></h2>' +
+        '<div class="search-page__group">' + forDisplay(g).map(function (d) {
+          return renderResult(d, g.label);
+        }).join('') + '</div>' +
+        (remaining > 0
+          ? '<button type="button" class="btn btn--ghost btn--sm search-page__more" data-section="' +
+            escapeHtml(g.key) + '">Show ' + Math.min(MORE_STEP, remaining) + ' more of ' + g.handles.length + '</button>'
+          : '') +
+        '</section>';
+    }).join(''));
+  }
+
+  // Builds the groups and hydrates each one's first page. The runId check is
+  // repeated after every await for the same reason it exists at all: a query is
+  // several round trips now, so a slow one must not render over a newer one.
+  function showGroups(id, perSection) {
+    if (id !== runId) return;
+    groups = buildGroups(perSection);
+    return Promise.all(groups.map(function (g) {
+      return Promise.all(g.handles.slice(0, PER_SECTION).map(function (r) { return r.data(); }))
+        .then(function (datas) { g.datas = datas; });
+    })).then(function () {
+      if (id !== runId) return;
+      renderGroups();
+    });
+  }
+
+  // Hydrates the next batch of one section. `data()` is a fetch of that page's
+  // fragment, so a batch is deliberately small and only ever fetched on a click.
+  function loadMore(key) {
+    var g = null;
+    groups.forEach(function (candidate) { if (candidate.key === key) g = candidate; });
+    if (!g) return;
+    var id = runId;
+    var next = g.handles.slice(g.datas.length, g.datas.length + MORE_STEP);
+    Promise.all(next.map(function (r) { return r.data(); })).then(function (datas) {
+      if (id !== runId) return;
+      g.datas = g.datas.concat(datas);
+      renderGroups();
+    });
+  }
+
+  results.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.search-page__more');
+    if (btn) loadMore(btn.getAttribute('data-section'));
+  });
+
   var debounceTimer;
   function runSearch(query) {
     clearTimeout(debounceTimer);
-    if (!query) { render(''); status.textContent = ''; return; }
+    runId++;
+    if (!query) { groups = []; render(''); status.textContent = ''; return; }
 
     debounceTimer = setTimeout(function () {
+      var id = ++runId;
       status.textContent = 'Searching…';
       pagefindPromise.then(function (pagefind) {
         if (!pagefind) {
           status.textContent = 'Search isn\'t available on this preview (the index is only built during deploy).';
           return;
         }
-        return pagefind.search(query).then(function (search) {
-          if (search.results.length === 0) {
+        return ensureFilters(pagefind).then(function () {
+          return pagefind.search(query);
+        }).then(function (search) {
+          if (id !== runId) return;
+          var total = search.results.length;
+          if (total === 0) {
             status.textContent = 'No results for "' + query + '".';
+            groups = [];
             render('');
             return;
           }
-          status.textContent = search.results.length + ' result' + (search.results.length === 1 ? '' : 's') + ' for "' + query + '"';
-          return Promise.all(search.results.slice(0, 30).map(function (r) { return r.data(); }))
-            .then(function (datas) {
-              // Group by section (posts/authors/pages/pedia), each group in
-              // its own relevance order, EXCEPT posts, which sort newest
-              // first via data-pagefind-meta="date[datetime]" on the <time>
-              // in posts/single.html. Sorted client-side rather than with
-              // Pagefind's own `sort` option, which would drop any result
-              // missing the sort key (i.e. everything but posts) instead of
-              // just leaving it unsorted.
-              var groups = {};
-              datas.forEach(function (d) {
-                var section = (d.filters && d.filters.section && d.filters.section[0]) || 'other';
-                section = SECTION_ALIASES[section] || section;
-                (groups[section] = groups[section] || []).push(d);
-              });
-              if (groups.posts) {
-                groups.posts.sort(function (a, b) {
-                  var da = (a.meta && a.meta.date) || '';
-                  var db = (b.meta && b.meta.date) || '';
-                  return db.localeCompare(da);
-                });
-              }
 
-              var sectionKeys = Object.keys(groups).sort(function (a, b) {
-                var ia = SECTION_ORDER.indexOf(a), ib = SECTION_ORDER.indexOf(b);
-                if (ia === -1) ia = SECTION_ORDER.length;
-                if (ib === -1) ib = SECTION_ORDER.length;
-                return ia !== ib ? ia - ib : a.localeCompare(b);
-              });
+          status.textContent = total + ' result' + (total === 1 ? '' : 's') + ' for "' + query + '"';
 
-              render(sectionKeys.map(function (key) {
-                var label = SECTION_LABELS[key] || (key.charAt(0).toUpperCase() + key.slice(1));
-                return '' +
-                  '<section class="search-page__section">' +
-                  '<h2>' + label + ' <span class="search-page__count">' + groups[key].length + '</span></h2>' +
-                  '<div class="search-page__group">' + groups[key].map(function (d) {
-                    return renderResult(d, label);
-                  }).join('') + '</div>' +
-                  '</section>';
-              }).join(''));
+          var counts = (search.filters && search.filters.section) || {};
+          var sections = Object.keys(counts).filter(function (v) { return counts[v] > 0; });
+          var filed = sections.reduce(function (n, v) { return n + counts[v]; }, 0);
+
+          // Sections are how this page reaches past the first ten matches, but
+          // they are not allowed to be the only way results appear: if the
+          // filter index did not load, or a template ever stops emitting
+          // data-pagefind-filter, the leftovers render as one ungrouped list
+          // with the same quota and the same Show-more button. baseof.html tags
+          // every indexed page with its Type, so today `filed` equals `total`
+          // and this branch is unreachable -- verified across all 2740 indexed
+          // pages. It exists because the alternative failure is a page that
+          // says "328 results" above nothing at all.
+          if (filed < total) {
+            return showGroups(id, [{ section: 'all', handles: search.results }]);
+          }
+
+          return Promise.all(sections.map(function (section) {
+            return pagefind.search(query, { filters: { section: section } }).then(function (r) {
+              return { section: section, handles: r.results };
             });
+          })).then(function (perSection) {
+            return showGroups(id, perSection);
+          });
         });
       }).catch(function () {
         status.textContent = 'Something went wrong running that search.';
