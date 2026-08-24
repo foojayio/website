@@ -1,0 +1,42 @@
+{{- /* "Edit this page on GitHub" -- the line at the foot of an article, and
+       the thing that makes the site's own claim about itself true: every page
+       here is a file in a public repository, and until this existed a reader
+       who spotted a typo had to go and find that file themselves.
+
+       The URL comes from partials/source-url.html, so this renders NOTHING on a
+       page with no source file of its own and nothing at all when
+       [params.source] is unset -- see there.
+
+       /edit/ rather than /blob/: GitHub's editor forks the repository for
+       anyone without write access and opens a pull request at the end, so a
+       typo fix is three clicks for a reader who has never cloned anything.
+       That is the audience for this link; anyone who wants the raw file can get
+       there from the editor in one more click.
+
+       data-pagefind-ignore, for the same reason the sidebar carries it: this
+       sentence is on ~2,600 pages, and without it every one of them is a search
+       result for "mistake", "edit" or "GitHub".
+
+       WHERE IT IS CALLED FROM is the deliberate part, and it is a rule about
+       the page rather than a list: a page gets the link when what you are
+       reading IS its file -- posts/single.html, _default/single.html (the pages
+       and the Quick Start steps), pedia/single.html, board/single.html and
+       tutorials/single.html, whose tile list lives in its own frontmatter.
+
+       It is NOT called from the layouts whose visible content is DERIVED --
+       /jugs/, /java-champions/, /calendar/, /ai/, /sitemap/, /search/, and the
+       author and sponsor profiles. The file behind those holds an intro
+       paragraph and nothing else, so a reader clicking "found a mistake?" over
+       a wrong JUG entry, or over an article credited to the wrong author, would
+       land in a file that does not contain it; every one of those pages names
+       its real source in its own text (GlobalWWJugs, aalmiray/java-champions,
+       the post itself), which is where such a fix has to go. Author and sponsor
+       bundles have a second reason on top: scripts/transfer/ rewrites them from
+       the live WordPress site on every run, so an edit there is undone until
+       cutover deletes those scripts. */ -}}
+{{- with partial "source-url.html" . -}}
+<p class="page-source" data-pagefind-ignore>
+  Found a mistake, or something to add?
+  <a href="{{ . }}" target="_blank" rel="nofollow noopener">Edit this page on GitHub</a>
+</p>
+{{- end -}}

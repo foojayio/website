@@ -3013,6 +3013,26 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   .ad--wide .ad__img { width: auto; max-width: 55%; align-self: center; }
 }
 
+/* --------------------------------------------------- edit this page ----
+   The "Found a mistake?" line at the foot of an article
+   (partials/page-source.html).
+
+   Muted and rule-separated: it is an offer, not part of what the author wrote,
+   and it sits between the article and whatever the template puts after it
+   (the author callout, the back link). The class-on-class selector for the
+   link is deliberate -- .prose a is 0-1-1 and outranks a bare .page-source a,
+   so on the templates whose article carries .prose the colour would otherwise
+   lose. The underline stays: it is a link in running text, which is exactly
+   what the .prose rule exists for. */
+.page-source {
+  margin-top: 2.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: .92rem;
+  color: var(--ink-muted);
+}
+.page-source a, .prose .page-source a { color: var(--brand-accent-strong); }
+
 /* ------------------------------------------------- episode transcript ----
    The machine transcript under a podcast episode (posts/single.html, written
    by scripts/fetch/PodcastTranscripts.java).

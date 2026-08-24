@@ -1276,6 +1276,40 @@ should catch a mistake at PR time rather than letting it fail silently.
   the children) versus `authors`/`sponsors` (explicit, on the index). That is also
   what routes them to `layouts/author/section.html` rather than a shared layout.
 
+- **"Edit this page on GitHub" is DERIVED from `.File.Path`, and a page that
+  Hugo generates correctly has none.** `partials/source-url.html` is the single
+  definition of that URL's shape (`<repo>/edit/<branch>/content/<path>`, from
+  `[params.source]`) and `partials/page-source.html` renders the line at the
+  foot of an article. It exists because the site's own pitch -- every page here
+  is a file in a public repository -- was not actually reachable from a page: a
+  reader who spotted a typo had to go and find the file themselves.
+
+  Four things are load-bearing:
+  - **`with .File` is the whole guard.** `.File` is nil on a page Hugo generates
+    rather than reads (a taxonomy term, a paginated list, the 404), so those get
+    no link instead of one pointing at a file that does not exist. Verified: the
+    link is on 2246 pages and on none of `/`, `/jugs/`, `/search/`, a category
+    term or an author profile.
+  - **It is a URL BUILDER plus a link partial, not one partial**, because the
+    two callers point at different files: the article footer at the page's own
+    source, and a podcast episode's transcript note at `transcript.md` beside it
+    -- a mangled guest name is in that file, and sending someone to `index.md`
+    to fix it sends them to the wrong file. Hence the `"file"` argument.
+  - **Which layouts call it is a rule, not a list**: a page gets the link when
+    what you are reading IS its file. The derived pages (`/jugs/`,
+    `/java-champions/`, `/calendar/`, `/ai/`, `/sitemap/`, author and sponsor
+    profiles) deliberately do not -- their file holds an intro paragraph and
+    nothing else, so "found a mistake?" over a wrong JUG entry would land
+    somewhere that does not contain it. See `page-source.html` for the rest.
+  - **`data-pagefind-ignore`**, same reason the sidebar carries it: without it
+    2246 pages are a search result for "mistake", "edit" or "GitHub".
+
+  One thing the link cannot know: **a post is still re-scraped from WordPress by
+  `transfer/Posts.java` until cutover**, which rebuilds the file and drops a hand
+  edit -- so a merged content fix wants `frozen: true` on the post until the
+  scrapers are deleted. Unset `[params.source]` removes the link everywhere,
+  which is what a fork should show until it points the setting at its own repo.
+
 - **Internal links are `.RelPermalink`; only absolute-by-contract URLs are
   `.Permalink`.** `.Permalink` is built from the CONFIGURED baseURL, which is not
   what `hugo server` serves -- so with the trial baseURL in `hugo.toml` every post

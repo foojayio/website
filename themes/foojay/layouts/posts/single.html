@@ -90,10 +90,16 @@
     {{ with .Resources.GetMatch "transcript.md" }}
     <section class="prose transcript" data-pagefind-ignore>
       <h2 id="transcript">Transcript</h2>
-      <p class="transcript__note">Automatically generated from the audio, so it can contain errors in names and technical terms.</p>
+      {{/* The correction link points at transcript.md, NOT at the post -- a
+           mangled name is in the transcript file, and sending someone to
+           index.md to fix it would be sending them to the wrong file. That is
+           what source-url.html's "file" argument is for. */}}
+      <p class="transcript__note">Automatically generated from the audio, so it can contain errors in names and technical terms.{{ with partial "source-url.html" (dict "page" $ "file" "transcript.md") }} <a href="{{ . }}" target="_blank" rel="nofollow noopener">Suggest a correction</a>.{{ end }}</p>
       {{ .Content }}
     </section>
     {{ end }}
+
+    {{ partial "page-source.html" . }}
 
     {{ $authors := .Params.authors }}
     {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}

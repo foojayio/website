@@ -97,6 +97,21 @@ enableGitInfo = true
   # Path to the JUG list consumed by the events sidebar/calendar page.
   jugsDataFile = "jugs"
   eventsDataFile = "events"
+
+  # "Edit this page on GitHub". partials/source-url.html builds the URL from the
+  # page's own .File.Path and partials/page-source.html renders the link, so
+  # there is nothing per page to write and a page Hugo generates (a taxonomy
+  # term, a paginated list) has no source file and correctly gets no link.
+  #
+  # This is deliberately its OWN repo setting rather than a reuse of
+  # params.giscus.repo below: that one names where the site's DISCUSSIONS live,
+  # which happens to be the same repository today and is not the same fact.
+  # Leaving it unset removes the link everywhere -- which is what a fork, or a
+  # local build of someone else's content, should show until it points this at
+  # its own repository.
+  [params.source]
+    repo = "https://github.com/foojayio/website"
+    branch = "main"
   # Array of tables (not a single table) so more than one header button can
   # be listed -- header.html ranges over these rather than using `with`.
   [[params.headerCta]]

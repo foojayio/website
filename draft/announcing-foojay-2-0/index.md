@@ -206,8 +206,9 @@ years of archive into a mention of this website.
 Guests' names are deliberately left uncorrected. Recognition mangles them worse
 than anything else, but there is no spelling a script can *know* is the intended
 one, and inventing one puts words in someone's mouth. So if you were on an
-episode and your name comes out wrong: that is a pull request, and a corrected
-transcript is never overwritten by the script again.
+episode and your name comes out wrong, there is a **Suggest a correction** link
+next to every transcript that opens that episode's transcript file in an editor
+— and a corrected transcript is never overwritten by the script again.
 
 One deliberate omission — **transcripts are not in the search index.** 800,000
 words against the article archive's 115,000 would make every episode a hit for
@@ -369,5 +370,8 @@ do not need to be a Java Champion, and it does not need to be 3,000 words.
 - **Questions, or not sure your idea fits?** Ask in the
   [Foojay Slack](https://bit.ly/join-foojay-slack). The answer is usually yes.
 
-And if you spot a typo in this very article: its source is a file in that
-repository, and the edit button is right there. That is rather the point.
+And if you spot a typo in this very article: scroll to the foot of it and there
+is an **Edit this page on GitHub** link. It opens the file this page was built
+from, in an editor, and turns your fix into a pull request — GitHub forks the
+repository for you, so it takes three clicks and no local setup. Every article,
+page and glossary entry on the site has one. That is rather the point.

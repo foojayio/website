@@ -17,6 +17,8 @@
       {{ .Content }}
     </div>
 
+    {{ partial "page-source.html" . }}
+
     <p class="pedia-back pedia-back--foot"><a href="{{ "pedia/" | relURL }}">&larr; Back to all terms</a></p>
   </article>
   {{ if $hasToc }}
