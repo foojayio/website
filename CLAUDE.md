@@ -648,10 +648,12 @@ should catch a mistake at PR time rather than letting it fail silently.
    `foojay.io/api/views` on the day. What remains is only what was always going
    to remain: **re-run `--seed` as late as possible before cutover**, because
    WordPress keeps counting until it dies and `data/legacy-views.json` is the
-   only copy of those numbers. Two loose ends from it being deployed by IT rather
-   than from here: `wrangler.toml`'s `database_id` is still a placeholder, and
-   whether `SEED_TOKEN` was set can only be told apart from a wrong token by a
-   real seed attempt (`/seed` 401s either way). The GoatCounter scaffold that
+   only copy of those numbers. One loose end from it being deployed by IT rather
+   than from here: `wrangler.toml`'s `database_id` is still a placeholder, so a
+   `wrangler deploy` from this repo would not work. (`SEED_TOKEN` is set — the
+   seed returned `{"seeded":2230,"rejected":[]}`, which is the only way to tell
+   a missing secret from a wrong token, since `/seed` 401s either way.) The
+   GoatCounter scaffold that
    used to live in `partials/stats.html` is gone — deleted, not migrated; it also
    carried an unwired share button, which nothing has replaced.
 8. ~~**17 `/pedia/` entries are missing**~~ — fixed. `content/pedia/` now holds
