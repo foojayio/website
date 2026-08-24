@@ -54,6 +54,22 @@
     });
   });
 
+  /* The drawer is a modal: it covers the page and the page behind it cannot be
+     used while it is open. So focus goes INTO it on open and comes back to the
+     button on close, and Tab is trapped in between -- without that, tabbing
+     past the last item walks into the article underneath, which is behind an
+     opaque panel and a backdrop, so the focus ring is somewhere the reader
+     cannot see (WCAG 2.4.3, 2.1.2). The closed drawer is `visibility: hidden`
+     in the CSS, which is what keeps its links out of the tab order the rest of
+     the time; this handles the open state. */
+  function drawerStops() {
+    if (!nav) return [];
+    return Array.prototype.filter.call(
+      nav.querySelectorAll('a[href], button:not([disabled]), input, select, textarea'),
+      function (el) { return el.offsetParent !== null || el === document.activeElement; }
+    );
+  }
+
   function setDrawer(open) {
     document.body.dataset.navOpen = open ? 'true' : 'false';
     if (toggle) {
@@ -63,6 +79,27 @@
     if (backdrop) { if (open) { backdrop.removeAttribute('hidden'); } else { backdrop.setAttribute('hidden', ''); } }
     document.documentElement.style.overflow = open ? 'hidden' : '';
     if (!open) closeAll();
+    if (open) {
+      /* After the visibility flips -- focus() on a visibility:hidden element
+         does nothing, the same trap the collapsible search field hits below. */
+      requestAnimationFrame(function () {
+        var stops = drawerStops();
+        if (stops.length) stops[0].focus();
+      });
+    } else if (toggle && nav && nav.contains(document.activeElement)) {
+      toggle.focus();
+    }
+  }
+
+  if (nav) {
+    nav.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || document.body.dataset.navOpen !== 'true') return;
+      var stops = drawerStops();
+      if (!stops.length) return;
+      var first = stops[0], last = stops[stops.length - 1];
+      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+    });
   }
 
   if (toggle) {

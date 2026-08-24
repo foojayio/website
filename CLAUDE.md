@@ -704,6 +704,68 @@ should catch a mistake at PR time rather than letting it fail silently.
 
 ## Conventions to keep following
 
+- **The site targets WCAG 2.2 AA, and `/accessibility/` is the public statement
+  of where it actually is.** foojay.io is very likely *outside* the European
+  Accessibility Act's scope -- that directive covers consumer services in listed
+  sectors (e-commerce, banking, e-books, transport), and the Web Accessibility
+  Directive is public-sector only -- so this is not a legal deadline. It is here
+  because the site is an Azul-branded property that procurement asks about, and
+  because a Java-developer audience is exactly the one that browses with a
+  keyboard. `content/pages/accessibility.md` names the gaps rather than claiming
+  a conformance nobody audited; **update it when one of them closes**, and keep
+  its "what is not there yet" list honest.
+
+  Seven things are load-bearing, each of which was a measured failure before it
+  was a rule:
+
+  - **`--focus-ring` is its own token, and in the light scheme it is NOT
+    `--brand-accent`.** The accent is 2.02:1 on white, so the one piece of UI a
+    keyboard user navigates by was invisible on it -- the same reason the palette
+    notes already rule the accent out as text, applied to the focus indicator.
+    Dark keeps the accent (8.57 there). And **never write `outline: none`**: the
+    author-list filter did, leaving a 1px border tint as the only cue.
+  - **A link in running text is UNDERLINED** (`.prose a`), because
+    `--brand-secondary` against `--ink-soft` is 1.2:1 and colour alone needs 3:1
+    (WCAG 1.4.1). No blue foojay owns can clear 3:1 against both the body text
+    and the page, so the underline is not a style preference. The exclusions for
+    the UI that lives inside `.prose` must OUTRANK the underline rule -- write it
+    as a bare `.prose a`, never as a chain of `:not()`s, each of which adds its
+    argument's specificity and beat every exclusion (measured: 422 champion
+    avatars kept their underline).
+  - **Anything hidden off-screen must be hidden from the TAB ORDER too.** The
+    mobile drawer was `transform: translateX(100%)` alone, so tabbing walked a
+    reader through a menu they could not see. `visibility` does it, and
+    descendants that need their own visibility use **`inherit`, not `visible`** --
+    the drawer's always-open search field hard-set `visible` and climbed straight
+    back out of the fix.
+  - **A thing that covers the page is a modal**: focus goes into it, is trapped,
+    and comes back to whatever opened it. `nav.js` (drawer) and `lightbox.js`
+    both do this by hand; `/calendar/`'s detail dialog gets it free from native
+    `<dialog>`, which is the better route when the markup allows it.
+  - **A click handler on a non-focusable element is a mouse-only feature.** The
+    lightbox bound `click` to `<img>`, so click-to-enlarge did not exist for a
+    keyboard. Where an image is already inside a link, bind the LINK -- Enter
+    fires its click on the `<a>` and never reaches the `<img>` inside.
+  - **Anything that moves on its own for more than five seconds needs a visible
+    pause** (2.2.2). The banner carousel's hover/focus pause is not one: a pause a
+    mouse movement undoes is not a pause, which is why `stopped` in
+    `ad-carousel.js` survives both handlers.
+  - **A sideways-scrolling box needs `tabindex="0"`**, or it scrolls for a mouse
+    and not for a keyboard -- and a table wide enough to need one must be in a
+    box at all, or the whole PAGE scrolls sideways (1.4.10). `/jugs/` and
+    `/java-champions/` were +243px and +151px over a 390px viewport; nothing else
+    on the site overflows, checked page by page.
+
+  **`Frontmatter.checkImageAltText` WARNS, it does not fail** -- the one check in
+  that script that doesn't. Whether `![](x.png)` is wrong depends on whether the
+  image carries meaning, which nothing there can see; failing on it would block a
+  first-time contributor over a judgement call and the predictable answer is
+  `alt="image"`, which is worse for a screen reader than empty. `pr-check.yml`
+  passes `--changed-since` so an author sees their own post and not the ~929
+  files of imported backlog. **That backlog is the site's biggest real gap** --
+  roughly 3,100 images across `content/` with no description, plus 287 podcast
+  posts with no transcript.
+
 - **Images have a per-file budget, and the deploy is why.** The built site hit
   **1.26 GB against GitHub Pages' hard 1 GB artifact limit** — and the warning for
   that ("Deployment might fail") lands on a run that otherwise goes **green**, so

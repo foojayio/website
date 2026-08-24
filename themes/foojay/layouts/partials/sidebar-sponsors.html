@@ -37,7 +37,7 @@
 {{- $known := slice -}}
 {{- range $section.Params.tiers }}{{ $known = $known | append .name }}{{ end -}}
 <section class="widget widget-sponsors">
-  <h4>Thanks to our sponsors</h4>
+  <h2>Thanks to our sponsors</h2>
   <div class="sponsor-tiers">
     {{- /* Named loop variable, not `.`: the `with` below rebinds the dot, and
            inside a partial `$` is the PAGE, not the tier -- so `$.name` there

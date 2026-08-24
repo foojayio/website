@@ -82,6 +82,16 @@ public class Frontmatter {
         problems.addAll(checkImageWeight(Path.of("content")));
         problems.addAll(checkHeroImageStill(Path.of("content")));
 
+        // WARNINGS, which never fail the check -- see reportWarnings below for
+        // why image descriptions are on this side of the line and everything
+        // above it is not.
+        List<String> warnings = new ArrayList<>();
+        Set<Path> touched = changedFiles(args);
+        warnings.addAll(checkImageAltText(Path.of("content"), touched));
+        warnings.addAll(checkImageAltText(Path.of("draft"), touched));
+
+        reportWarnings(warnings, touched);
+
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
             return;
@@ -90,6 +100,87 @@ public class Frontmatter {
         System.err.println(problems.size() + " problem(s) found:");
         for (String p : problems) System.err.println(" - " + p);
         System.exit(1);
+    }
+
+    /* ---------------------------------------------------------------------
+       Warnings
+       ---------------------------------------------------------------------
+
+       A WARNING IS A DIFFERENT CLAIM FROM A PROBLEM, and the difference is
+       whether a machine can be sure. Everything in `problems` above is
+       decidable: a required field is present or it is not, a related_posts slug
+       resolves or it does not, two pages claim the same weight or they do not.
+       A missing image description is not: `![](chart.png)` is WRONG for a chart
+       and RIGHT for a divider, and nothing here can tell those apart by looking
+       at the file.
+
+       Failing on it would therefore do the one thing this repo's contribution
+       goal cannot afford -- block a first-time author's pull request over a
+       judgement call the check cannot make -- and the predictable response is a
+       description typed to get the build green ("image", "screenshot"), which is
+       worse for a screen-reader user than nothing at all, because a bad alt
+       cannot be skipped the way an empty one can.
+
+       So it reports, and a human decides. */
+    static void reportWarnings(List<String> warnings, Set<Path> touched) {
+        if (warnings.isEmpty()) return;
+
+        // Unscoped runs see the whole archive (~3000 images imported from
+        // WordPress with no description), which is a backlog and not this PR's
+        // doing -- so it is summarised rather than printed. A scoped run prints
+        // everything it found, because all of it is the author's own work.
+        int shown = touched != null ? warnings.size() : Math.min(warnings.size(), 25);
+
+        System.out.println();
+        System.out.println(warnings.size() + " accessibility warning(s) -- these do NOT fail the check:");
+        for (int i = 0; i < shown; i++) System.out.println(" ~ " + warnings.get(i));
+        if (shown < warnings.size()) {
+            System.out.println(" ~ ... and " + (warnings.size() - shown) + " more across the archive."
+                    + " Run with --changed-since <ref> to see only what this branch touched.");
+        }
+        System.out.println("   An image with no description is skipped by a screen reader, so a reader"
+                + " who cannot see it is told nothing at all. Add one where the image carries meaning;"
+                + " leave it empty where the image is decoration and the text beside it already says"
+                + " everything. See /accessibility/ for the standard the site aims at.");
+        System.out.println();
+    }
+
+    /**
+     * The markdown files this branch actually touches, or null when the run is
+     * not scoped -- in which case every check below looks at everything.
+     *
+     * `--changed-since <ref>` is what .github/workflows/pr-check.yml passes, so
+     * a contributor's warnings are about their own post and not about 2000
+     * imported ones. Deliberately soft: a repo with no git, a ref that does not
+     * exist on a shallow clone, or git missing entirely all fall back to the
+     * unscoped run rather than failing -- a warning system that can break the
+     * check it is attached to has the priority backwards.
+     */
+    static Set<Path> changedFiles(String[] args) {
+        String ref = null;
+        for (int i = 0; i < args.length - 1; i++) {
+            if (args[i].equals("--changed-since")) ref = args[i + 1];
+        }
+        if (ref == null) return null;
+        try {
+            Process git = new ProcessBuilder("git", "diff", "--name-only", ref + "...HEAD")
+                    .redirectErrorStream(false).start();
+            Set<Path> out = new HashSet<>();
+            try (Scanner sc = new Scanner(git.getInputStream())) {
+                while (sc.hasNextLine()) {
+                    String line = sc.nextLine().trim();
+                    if (!line.isEmpty()) out.add(Path.of(line));
+                }
+            }
+            if (!git.waitFor(30, java.util.concurrent.TimeUnit.SECONDS) || git.exitValue() != 0) {
+                System.out.println("(could not diff against '" + ref + "'; checking the whole tree)");
+                return null;
+            }
+            return out;
+        } catch (Exception e) {
+            System.out.println("(git unavailable; checking the whole tree)");
+            return null;
+        }
     }
 
     static List<String> checkDir(Path dir, List<String> requiredFields) throws IOException {
@@ -992,6 +1083,103 @@ public class Frontmatter {
                     + " write YYYY-MM-DD, or YYYY-MM-DDTHH:MM:SS+HH:MM when the time matters");
             return null;
         }
+    }
+
+    /* ---------------------------------------------------------------- alt text --
+
+       An image with no description is invisible to a screen reader, and 1.1.1
+       is the most-reported failure in any accessibility audit -- but see
+       reportWarnings above for why this reports rather than fails.
+
+       Three shapes, because content/ writes images three ways and all three
+       default to an empty description when the author says nothing:
+
+         ![](chart.png)                     a plain Markdown image
+         {{< img src="chart.png" >}}        the formatted-image shortcode, whose
+                                            template emits alt="{{ .Get "alt" }}"
+         {{< gallery >}}chart.png{{< /gallery >}}
+                                            a gallery line, whose alt is its
+                                            caption (the text after the first |)
+
+       WHAT IS DELIBERATELY NOT FLAGGED: a hero `image:` in frontmatter. The
+       templates derive its alt from the post title, so there is nothing for an
+       author to write and nothing to warn about.
+
+       Fenced code is skipped. Several posts document Markdown itself, and one
+       of them has ![](...) inside a fence as its subject matter -- a warning
+       there is a warning about a code sample, which is noise of exactly the
+       kind that teaches people to ignore the report.
+    */
+    static final Pattern MD_IMAGE_NO_ALT = Pattern.compile("!\\[\\s*\\]\\(");
+    static final Pattern IMG_SHORTCODE = Pattern.compile("\\{\\{<\\s*img\\s[^>]*>\\s*\\}\\}");
+    static final Pattern IMG_SHORTCODE_ALT = Pattern.compile("\\balt\\s*=\\s*\"([^\"]*)\"");
+
+    static List<String> checkImageAltText(Path dir, Set<Path> touched) throws IOException {
+        List<String> warnings = new ArrayList<>();
+        if (!Files.isDirectory(dir)) return warnings;
+
+        try (Stream<Path> files = Files.walk(dir)) {
+            for (Path file : files.filter(p -> p.toString().endsWith(".md")).sorted().toList()) {
+                if (touched != null && !touched.contains(file.normalize())) continue;
+                List<Integer> lines = imagesWithoutAlt(Files.readString(file));
+                if (lines.isEmpty()) continue;
+                String where = lines.size() > 6
+                        ? lines.subList(0, 6) + " and " + (lines.size() - 6) + " more"
+                        : lines.toString();
+                warnings.add(file + ": " + lines.size() + " image"
+                        + (lines.size() == 1 ? "" : "s") + " with no description, on line"
+                        + (lines.size() == 1 ? " " : "s ") + where.replace("[", "").replace("]", ""));
+            }
+        }
+        return warnings;
+    }
+
+    /** Line numbers (1-based) of images carrying no description, body only. */
+    static List<Integer> imagesWithoutAlt(String content) {
+        List<Integer> lines = new ArrayList<>();
+        String[] all = content.split("\\n", -1);
+
+        boolean inFrontmatter = all.length > 0 && all[0].trim().equals("---");
+        boolean inFence = false;
+        boolean inGallery = false;
+
+        for (int i = 0; i < all.length; i++) {
+            String line = all[i];
+            String trimmed = line.trim();
+
+            if (inFrontmatter) {
+                if (i > 0 && trimmed.equals("---")) inFrontmatter = false;
+                continue;
+            }
+            if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) { inFence = !inFence; continue; }
+            if (inFence) continue;
+
+            // A gallery's items are one per line between the tags, and an item's
+            // alt text is the caption after the first `|` (or the third field
+            // when the two differ), so a bare filename means no description.
+            if (trimmed.matches("\\{\\{<\\s*gallery.*?/?>\\s*\\}\\}")) {
+                inGallery = !trimmed.endsWith("/>}}") && !trimmed.contains("{{< /gallery");
+                continue;
+            }
+            if (trimmed.startsWith("{{< /gallery") || trimmed.startsWith("{{</gallery")) { inGallery = false; continue; }
+            if (inGallery) {
+                if (trimmed.isEmpty()) continue;
+                String[] parts = trimmed.split("\\|", -1);
+                boolean described = (parts.length > 1 && !parts[1].isBlank())
+                        || (parts.length > 2 && !parts[2].isBlank());
+                if (!described) lines.add(i + 1);
+                continue;
+            }
+
+            if (MD_IMAGE_NO_ALT.matcher(line).find()) lines.add(i + 1);
+
+            Matcher shortcode = IMG_SHORTCODE.matcher(line);
+            while (shortcode.find()) {
+                Matcher alt = IMG_SHORTCODE_ALT.matcher(shortcode.group());
+                if (!alt.find() || alt.group(1).isBlank()) lines.add(i + 1);
+            }
+        }
+        return lines;
     }
 
     static Map<String, Object> readFrontmatter(Path file) throws IOException {

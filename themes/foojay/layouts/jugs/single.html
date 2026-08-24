@@ -92,46 +92,58 @@
     <div class="list-filter">
       <input type="search" id="jugs-filter" class="list-filter__input" placeholder="Filter by name or country…" aria-label="Filter JUGs by name or country" autocomplete="off">
     </div>
-    <table class="jugs-table">
-      <thead>
-        <tr>
-          <th>User Group</th>
-          <th>Country</th>
-          <th>Founded</th>
-          <th>Connect</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{ range sort $jugs "name" }}
-        {{ $jug := . }}
-        <tr data-filter="{{ lower (printf "%s %s" $jug.name (.country | default "")) }}">
-          <td>
-            {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $jug.name }}</a>{{ else }}{{ .name }}{{ end }}
-          </td>
-          <td>{{ .country }}</td>
-          {{/* founded_date in the source data is inconsistent precision --
-               "2013-01-01", but also just "2009-11" (year-month, no day) for
-               some JUGs, which Hugo's dateFormat/date parser rejects outright
-               (breaks the whole build). Every value seen starts with a
-               4-digit year, so slice that out directly rather than parsing
-               it as a date at all. */}}
-          <td>{{ with .founded_date }}{{ if ge (len .) 4 }}{{ slicestr . 0 4 }}{{ else }}{{ . }}{{ end }}{{ end }}</td>
-          <td class="jugs-table__links">
-            {{ $links := slice }}
-            {{ with .meetup_url }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Meetup</a>` .) }}{{ end }}
-            {{ with .twitter }}{{ $links = $links | append (printf `<a href="https://twitter.com/%s" target="_blank" rel="noopener">Twitter</a>` (. | strings.TrimPrefix "@")) }}{{ end }}
-            {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
-            {{ with .calendar }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Calendar</a>` .) }}{{ end }}
-            {{ with .email }}{{ $links = $links | append (printf `<a href="mailto:%s">Email</a>` .) }}{{ end }}
-            {{ if and .latitude .longitude }}{{ $links = $links | append (printf `<a href="https://www.google.com/maps?q=%v,%v" target="_blank" rel="noopener">Map</a>` .latitude .longitude) }}{{ end }}
-            {{ delimit $links " &middot; " | safeHTML }}
-          </td>
-          <td><a class="jugs-table__edit" href="{{ .source_url }}" target="_blank" rel="noopener" title="Suggest an edit on GitHub">✎</a></td>
-        </tr>
-        {{ end }}
-      </tbody>
-    </table>
+    {{/* The table is WIDER THAN A PHONE (617px of columns against a 390px
+         viewport on /jugs/, 525 on /java-champions/), and with nothing to
+         contain it the whole PAGE scrolled sideways -- WCAG 1.4.10, which asks
+         for no two-dimensional scrolling below 320px-equivalent. Squeezing the
+         columns instead is not an option: the Connect cell is a row of links
+         and the name column would become one word per line. So the table scrolls
+         inside its own box, and that box carries tabindex="0" -- a scroll
+         container that only a mouse or a touchscreen can move is unreachable for
+         a keyboard user (2.1.1), and it needs a name and a role to be worth
+         landing on. */}}
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Java User Groups table">
+      <table class="jugs-table">
+        <thead>
+          <tr>
+            <th>User Group</th>
+            <th>Country</th>
+            <th>Founded</th>
+            <th>Connect</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range sort $jugs "name" }}
+          {{ $jug := . }}
+          <tr data-filter="{{ lower (printf "%s %s" $jug.name (.country | default "")) }}">
+            <td>
+              {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $jug.name }}</a>{{ else }}{{ .name }}{{ end }}
+            </td>
+            <td>{{ .country }}</td>
+            {{/* founded_date in the source data is inconsistent precision --
+                 "2013-01-01", but also just "2009-11" (year-month, no day) for
+                 some JUGs, which Hugo's dateFormat/date parser rejects outright
+                 (breaks the whole build). Every value seen starts with a
+                 4-digit year, so slice that out directly rather than parsing
+                 it as a date at all. */}}
+            <td>{{ with .founded_date }}{{ if ge (len .) 4 }}{{ slicestr . 0 4 }}{{ else }}{{ . }}{{ end }}{{ end }}</td>
+            <td class="jugs-table__links">
+              {{ $links := slice }}
+              {{ with .meetup_url }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Meetup</a>` .) }}{{ end }}
+              {{ with .twitter }}{{ $links = $links | append (printf `<a href="https://twitter.com/%s" target="_blank" rel="noopener">Twitter</a>` (. | strings.TrimPrefix "@")) }}{{ end }}
+              {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
+              {{ with .calendar }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Calendar</a>` .) }}{{ end }}
+              {{ with .email }}{{ $links = $links | append (printf `<a href="mailto:%s">Email</a>` .) }}{{ end }}
+              {{ if and .latitude .longitude }}{{ $links = $links | append (printf `<a href="https://www.google.com/maps?q=%v,%v" target="_blank" rel="noopener">Map</a>` .latitude .longitude) }}{{ end }}
+              {{ delimit $links " &middot; " | safeHTML }}
+            </td>
+            <td><a class="jugs-table__edit" href="{{ .source_url }}" target="_blank" rel="noopener" title="Suggest an edit on GitHub">✎</a></td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
     <p class="list-filter__empty" id="jugs-filter-empty" hidden>No JUGs match your filter.</p>
     {{/* Small client-side filter -- narrows the visible table rows by name or
          country, same pattern as the authors page. */}}

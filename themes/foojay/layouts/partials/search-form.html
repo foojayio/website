@@ -8,7 +8,18 @@
      JavaScript the first click still lands the reader on the search page —
      never a dead icon. In the mobile drawer the field is always open (CSS),
      where there is room and no hover to discover the icon with. */}}
-<form class="site-search" role="search" action="{{ .Site.Params.searchAction | default (relURL "search/") }}" data-search>
+{{- /* Called with the Page, or with a dict {page, label} -- the header renders
+       this twice (the bar and the mobile drawer), and two search landmarks with
+       the same name are two things a screen-reader user cannot tell apart in a
+       landmark list. The label names the placement, not the site. */ -}}
+{{- $page := . -}}
+{{- $label := "Search" -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- with .label }}{{ $label = . }}{{ end -}}
+{{- end -}}
+{{- with $page -}}
+<form class="site-search" role="search" aria-label="{{ $label }}" action="{{ .Site.Params.searchAction | default (relURL "search/") }}" data-search>
   {{ with .Site.Params.searchExtraQuery }}<input type="hidden" name="{{ .name }}" value="{{ .value }}">{{ end }}
   <label>
     <span class="u-sr">Search foojay.io</span>
@@ -23,3 +34,4 @@
     </svg>
   </button>
 </form>
+{{- end -}}

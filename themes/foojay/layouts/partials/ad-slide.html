@@ -40,7 +40,15 @@
            with it on foojay's own promotions too -- neither is a link we are
            vouching for editorially. */}}
       {{- $sponsored := $ad.Params.sponsored | default true }}
+      {{/* The visible label is the editor's ("Read more", "Get the eBook") and
+           stays short, but on its own it says nothing about where it goes -- and
+           a screen reader can list a page's links out of context, where three
+           banners' worth of "Read more" are indistinguishable (WCAG 2.4.4). The
+           accessible name therefore carries the banner's headline, DERIVED from
+           the title already on the card rather than asked for as a second field
+           an editor would have to keep in step. */}}
       <a class="ad__btn" href="{{ $ad.Params.link }}" target="_blank"
+         aria-label="{{ $ad.Params.cta }}: {{ $ad.Title }}"
          rel="noopener{{ if $sponsored }} sponsored{{ else }} nofollow{{ end }}">
         {{ $ad.Params.cta }}
         <svg class="ad__btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -65,7 +73,7 @@
         {{- $ext := or (hasPrefix $sl "http://") (hasPrefix $sl "https://") -}}
         {{- $href := $sl -}}
         {{- if not $ext }}{{ $href = $sl | strings.TrimPrefix "/" | relURL }}{{ end }}
-      <a class="ad__btn ad__btn--ghost" href="{{ $href }}"
+      <a class="ad__btn ad__btn--ghost" href="{{ $href }}" aria-label="{{ . }}: {{ $ad.Title }}"
          {{- if $ext }} target="_blank" rel="noopener nofollow"{{ end }}>{{ . }}</a>
       {{- end }}
 

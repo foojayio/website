@@ -21,7 +21,7 @@
 
     {{ range site.Menus.footer }}
       <div class="footer-col">
-        <h4>{{ .Name }}</h4>
+        <h2>{{ .Name }}</h2>
         <ul{{ if eq .Identifier "footer-social" }} class="social-links"{{ end }}>
           {{- range .Children }}
           <li>{{ partial "footer-link.html" . }}</li>

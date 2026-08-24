@@ -11,6 +11,12 @@ jobs:
       - uses: actions/checkout@v7
         with:
           submodules: recursive
+          # Full history so the alt-text warnings below can be diffed against
+          # the base branch. On the default shallow clone the base sha is not
+          # present, the diff fails, and the check falls back to reporting the
+          # whole archive -- which is 900 files of imported backlog nobody in
+          # this PR can act on.
+          fetch-depth: 0
 
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
@@ -24,7 +30,10 @@ jobs:
         uses: jbangdev/setup-jbang@v0.1.1
 
       - name: Validate post/author/page frontmatter
-        run: jbang scripts/validate/Frontmatter.java
+        # --changed-since scopes the ACCESSIBILITY WARNINGS (missing image
+        # descriptions) to what this branch touches; every other check still
+        # looks at the whole tree, and only those can fail the run.
+        run: jbang scripts/validate/Frontmatter.java --changed-since ${{ github.event.pull_request.base.sha }}
 
       - name: Build site (catches template/content errors)
         run: hugo --gc --minify

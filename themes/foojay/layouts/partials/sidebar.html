@@ -16,7 +16,7 @@
   {{ partial "sidebar-sponsors.html" . }}
 
   <section class="widget widget-categories">
-    <h4>Categories</h4>
+    <h2>Categories</h2>
     <ul>
       {{ range first 12 .Site.Taxonomies.categories.ByCount }}
         <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="count">{{ .Count }}</span></a></li>
@@ -33,7 +33,7 @@
        Short posts with no TOC still get the full widget set as before. */}}
   {{ if not (partial "has-toc.html" .) }}
   <section class="widget widget-authors">
-    <h4>Authors</h4>
+    <h2>Authors</h2>
     <ul>
       {{/* Shuffled, not the first 5: unshuffled this is `where` order, i.e.
            whichever five authors happen to sort first -- the same five names on
@@ -50,7 +50,7 @@
   </section>
 
   <section class="widget widget-jugs">
-    <h4>Java User Groups</h4>
+    <h2>Java User Groups</h2>
     <ul>
       {{/* .website covers every JUG, Meetup-based or not (data/jugs.yaml,
            regenerated from GlobalWWJugs by scripts/fetch/Jugs.java) --

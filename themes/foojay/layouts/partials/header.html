@@ -70,7 +70,7 @@
 
       {{/* Drawer copy of the header actions — hidden on desktop by CSS. */}}
       <div class="header-actions header-actions--mobile">
-        {{ partial "search-form.html" . }}
+        {{ partial "search-form.html" (dict "page" . "label" "Search (menu)") }}
         {{ partial "theme-toggle.html" . }}
         {{ range .Site.Params.headerCta }}
           <a class="btn btn--accent" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>
@@ -79,7 +79,7 @@
     </nav>
 
     <div class="header-actions">
-      {{ partial "search-form.html" . }}
+      {{ partial "search-form.html" (dict "page" . "label" "Search") }}
       {{ partial "theme-toggle.html" . }}
       {{ range .Site.Params.headerCta }}
         <a class="btn btn--accent" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>

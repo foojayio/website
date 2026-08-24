@@ -29,9 +29,14 @@
     var slides = Array.prototype.slice.call(track.children);
     var prev = root.querySelector('[data-ad-prev]');
     var next = root.querySelector('[data-ad-next]');
+    var pause = root.querySelector('[data-ad-pause]');
     if (slides.length < 2 || !prev || !next) return;
 
     var timer = null;
+    /* The reader's own choice, as opposed to the temporary pause a hover or a
+       focus causes: once someone has pressed Pause, moving the mouse away must
+       not start the thing moving again. */
+    var stopped = reduced;
 
     /* Which slide is showing: whichever one's left edge is nearest the track's
        scroll position. Works mid-swipe and after a resize, where an index
@@ -88,13 +93,21 @@
       for (var k = 0; k < imgs.length; k++) imgs[k].addEventListener('load', queueFit);
     }
 
-    prev.addEventListener('click', function () { stop(); go(current() - 1); });
-    next.addEventListener('click', function () { stop(); go(current() + 1); });
+    /* Driving it by hand ends the autoplay: someone stepping through the
+       banners is reading them, and having the track move again on its own two
+       seconds later takes the one they chose off the screen. */
+    prev.addEventListener('click', function () { stopped = true; stop(); go(current() - 1); syncPause(); });
+    next.addEventListener('click', function () { stopped = true; stop(); go(current() + 1); syncPause(); });
+    function syncPause() {
+      if (!pause || pause.hidden) return;
+      pause.setAttribute('aria-label', stopped ? 'Resume banner rotation' : 'Pause banner rotation');
+      pause.dataset.paused = stopped ? 'true' : 'false';
+    }
 
     function start() {
       /* No autoplay when the reader has asked for less motion: a banner that
          moves on its own is exactly what that setting is about. */
-      if (reduced || timer) return;
+      if (stopped || timer) return;
       timer = setInterval(function () {
         if (document.hidden) return;          /* don't cycle a background tab */
         go(current() + 1);
@@ -111,6 +124,26 @@
     root.addEventListener('mouseleave', start);
     root.addEventListener('focusin', stop);
     root.addEventListener('focusout', start);
+
+    /* Pause/play. `stopped` is what start() honours, so this survives the
+       hover and focus handlers above -- which is the whole point: a pause a
+       mouse movement undoes is not a pause. */
+    if (pause) {
+      var setPaused = function (on) {
+        stopped = on;
+        pause.setAttribute('aria-label', on ? 'Resume banner rotation' : 'Pause banner rotation');
+        pause.dataset.paused = on ? 'true' : 'false';
+        if (on) stop(); else start();
+      };
+      pause.addEventListener('click', function () { setPaused(!stopped); });
+      /* Not shown when nothing is moving: with prefers-reduced-motion there is
+         no autoplay to stop, so the control would be a button that does
+         nothing. */
+      if (!reduced) {
+        setPaused(false);
+        pause.hidden = false;
+      }
+    }
 
     /* Revealed only now that they do something. */
     prev.hidden = false;

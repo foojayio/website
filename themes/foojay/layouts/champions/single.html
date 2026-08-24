@@ -99,44 +99,56 @@
     <div class="list-filter">
       <input type="search" id="champions-filter" class="list-filter__input" placeholder="Filter by name or country…" aria-label="Filter Java Champions by name or country" autocomplete="off">
     </div>
-    <table class="champions-table">
-      <thead>
-        <tr>
-          <th>Champion</th>
-          <th>Year</th>
-          <th>Country</th>
-          <th>Connect</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{ range sort $champions "name" }}
-        <tr data-filter="{{ lower (printf "%s %s %s" .name (.country | default "") (.city | default "")) }}">
-          <td class="champions-table__name">
-            {{ with .avatar }}<img src="{{ . }}" alt="" loading="lazy" width="36" height="36">{{ end }}
-            <span>{{ .name }}</span>
-            {{ with .status }}<span class="champions-table__status">{{ delimit . ", " }}</span>{{ end }}
-          </td>
-          <td>{{ .year }}</td>
-          <td>
-            {{ .country }}{{ with .city }}, {{ . }}{{ end }}
-          </td>
-          <td class="champions-table__links">
-            {{ $links := slice }}
-            {{ with .website }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Website</a>` .) }}{{ end }}
-            {{ with .twitter }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Twitter</a>` .) }}{{ end }}
-            {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
-            {{ with .bluesky }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Bluesky</a>` .) }}{{ end }}
-            {{ with .linkedin }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">LinkedIn</a>` .) }}{{ end }}
-            {{ with .github }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">GitHub</a>` .) }}{{ end }}
-            {{ with .youtube }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">YouTube</a>` .) }}{{ end }}
-            {{ with .sessionize }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Sessionize</a>` .) }}{{ end }}
-            {{ with .speakerdeck }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Speaker Deck</a>` .) }}{{ end }}
-            {{ delimit $links " &middot; " | safeHTML }}
-          </td>
-        </tr>
-        {{ end }}
-      </tbody>
-    </table>
+    {{/* The table is WIDER THAN A PHONE (617px of columns against a 390px
+         viewport on /jugs/, 525 on /java-champions/), and with nothing to
+         contain it the whole PAGE scrolled sideways -- WCAG 1.4.10, which asks
+         for no two-dimensional scrolling below 320px-equivalent. Squeezing the
+         columns instead is not an option: the Connect cell is a row of links
+         and the name column would become one word per line. So the table scrolls
+         inside its own box, and that box carries tabindex="0" -- a scroll
+         container that only a mouse or a touchscreen can move is unreachable for
+         a keyboard user (2.1.1), and it needs a name and a role to be worth
+         landing on. */}}
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Java Champions table">
+      <table class="champions-table">
+        <thead>
+          <tr>
+            <th>Champion</th>
+            <th>Year</th>
+            <th>Country</th>
+            <th>Connect</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range sort $champions "name" }}
+          <tr data-filter="{{ lower (printf "%s %s %s" .name (.country | default "") (.city | default "")) }}">
+            <td class="champions-table__name">
+              {{ with .avatar }}<img src="{{ . }}" alt="" loading="lazy" width="36" height="36">{{ end }}
+              <span>{{ .name }}</span>
+              {{ with .status }}<span class="champions-table__status">{{ delimit . ", " }}</span>{{ end }}
+            </td>
+            <td>{{ .year }}</td>
+            <td>
+              {{ .country }}{{ with .city }}, {{ . }}{{ end }}
+            </td>
+            <td class="champions-table__links">
+              {{ $links := slice }}
+              {{ with .website }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Website</a>` .) }}{{ end }}
+              {{ with .twitter }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Twitter</a>` .) }}{{ end }}
+              {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
+              {{ with .bluesky }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Bluesky</a>` .) }}{{ end }}
+              {{ with .linkedin }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">LinkedIn</a>` .) }}{{ end }}
+              {{ with .github }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">GitHub</a>` .) }}{{ end }}
+              {{ with .youtube }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">YouTube</a>` .) }}{{ end }}
+              {{ with .sessionize }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Sessionize</a>` .) }}{{ end }}
+              {{ with .speakerdeck }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Speaker Deck</a>` .) }}{{ end }}
+              {{ delimit $links " &middot; " | safeHTML }}
+            </td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
     <p class="list-filter__empty" id="champions-filter-empty" hidden>No Java Champions match your filter.</p>
     {{/* Small client-side filter -- narrows the visible table rows by name,
          country or city, same pattern as the authors and JUGs pages. */}}

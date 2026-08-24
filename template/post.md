@@ -126,18 +126,28 @@ Put the image file in THIS folder, then reference it by filename:
 
 ![Describe the image for accessibility](my-image.png)
 
-For a smaller, floated, or captioned image, use the `img` shortcode
-(class can be `alignleft`, `alignright` or `aligncenter`):
+The text in the square brackets is the DESCRIPTION, and it is the only part of
+an image a reader using a screen reader gets. Write what the image shows, the way
+you would say it out loud to someone on a call: "The Ports view in IntelliJ,
+showing the app on port 8080", not "screenshot". Leave it empty — `![](x.png)` —
+only when the image is decoration and the text around it already says everything;
+the PR check reports empty ones so you can confirm that was on purpose, and it
+never fails your pull request over it.
 
-{{< img src="my-image.png" class="alignright" width="320" caption="An optional caption" >}}
+For a smaller, floated, or captioned image, use the `img` shortcode
+(class can be `alignleft`, `alignright` or `aligncenter`). Give it an `alt`, for
+the same reason:
+
+{{< img src="my-image.png" alt="The Ports view in IntelliJ" class="alignright" width="320" caption="An optional caption" >}}
 
 Every image in an article is click-to-enlarge automatically — you don't need to
-do anything for that.
+do anything for that, and it works with the keyboard too.
 
 ### Image gallery
 
 Several images as a responsive grid — one filename per line. A `|` adds a
-caption to an image:
+caption to an image, and the caption doubles as its description (add a second
+`|` when the two should differ):
 
 {{< gallery >}}
 one.png
@@ -161,6 +171,12 @@ Clicking an image enlarges it, so no thumbnails or links are needed.
 Pass just the video id:
 
 {{< youtube dQw4w9WgXcQ >}}
+
+Add a `title` when the article embeds more than one video — it is what a screen
+reader announces, and without it every frame on the page is called "YouTube
+video":
+
+{{< youtube id="dQw4w9WgXcQ" title="Demo: building the app from scratch" >}}
 
 ### Tables
 

@@ -728,3 +728,8 @@ enableGitInfo = true
   name = "Privacy Policy"
   url = "/privacy-policy/"
   weight = 50
+
+[[menu.legal]]
+  name = "Accessibility"
+  url = "/accessibility/"
+  weight = 60

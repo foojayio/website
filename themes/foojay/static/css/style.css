@@ -41,6 +41,14 @@
   --brand-accent:        #50c2f7;
   --brand-accent-strong: #087ab0;
   --brand-accent-soft:   #e4f4fc;
+  /* THE FOCUS RING IS ITS OWN TOKEN, and in the light scheme it is NOT
+     --brand-accent. WCAG 1.4.11 asks a focus indicator for 3:1 against what it
+     sits on, and #50c2f7 measures 2.02 on --surface, 1.95 on --page-bg and 1.88
+     on --surface-sunken -- the same reason point 2 above rules the accent out as
+     text, applied to the one piece of UI a keyboard user navigates by. The
+     readable sibling is 4.40 on --surface and 4.25 on --surface-sunken.
+     Dark keeps #50c2f7, which is already 8.57 there. */
+  --focus-ring:          #087ab0;
   /* The label on an accent FILL. Was #1c1204 in five places and #14100a in
      three more -- a warm near-black chosen for amber, which reads as a brown
      cast on blue. One token now, cool, 8.07 on --brand-accent. */
@@ -140,11 +148,20 @@ img, svg { max-width: 100%; height: auto; display: block; }
 
 a { color: var(--brand-secondary); text-decoration: none; }
 a:hover { color: var(--brand-accent-strong); text-decoration: underline; text-underline-offset: 2px; }
+/* One focus indicator for everything focusable, including the two kinds that
+   are not natively focusable and are given a tabindex: a click-to-enlarge image
+   (js/lightbox.js) and a sideways-scrolling table region, which a keyboard user
+   can only scroll once it can hold focus. 3px rather than 2 so the ring clears
+   WCAG 1.4.11's area test against a light border as well as its contrast one. */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-summary:focus-visible {
-  outline: 2px solid var(--brand-accent);
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+dialog:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
   border-radius: 3px;
 }
@@ -769,7 +786,11 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   padding: 1.15rem 1.25rem;
   margin: 0;
 }
-.sidebar h4 {
+/* h2, not h4: these are the top-level headings of the complementary landmark
+   they sit in, and as h4s they skipped a level or two under the page's h1/h2s
+   on every page of the site (WCAG 1.3.1). The size is set here, so the tag was
+   never carrying the look. Same for the footer's column headings below. */
+.sidebar h2 {
   margin: 0 0 .8rem; padding: 0 0 .55rem;
   font-size: .82rem; text-transform: uppercase; letter-spacing: .11em;
   color: var(--ink);
@@ -1350,7 +1371,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .footer-brand .logo__tag { display: inline-block; color: var(--footer-muted); border-color: var(--footer-border); }
 .footer-brand p { font-size: .95rem; color: var(--footer-muted); max-width: 32ch; }
 
-.site-footer h4 {
+.site-footer h2 {
   color: var(--footer-head); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em;
   margin: 0 0 .9rem;
 }
@@ -1404,9 +1425,22 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
     padding: 1rem 1rem 3rem;
     overflow-y: auto; overscroll-behavior: contain;
     transform: translateX(100%);
-    transition: transform .25s var(--ease);
+    /* VISIBILITY, not just the transform. The drawer is off-screen when closed
+       but still rendered, so every link in it stayed in the tab order: on a
+       phone, tabbing off the menu button walked a keyboard user through a nav
+       they cannot see, with the focus ring nowhere on screen (WCAG 2.4.3, and
+       2.4.11 -- a focused element may not be hidden). visibility:hidden takes
+       the whole subtree out of the tab order and is still animatable, unlike
+       display:none. Delayed on the way out so the slide still plays, immediate
+       on the way in so a click can focus the first link. */
+    visibility: hidden;
+    transition: transform .25s var(--ease), visibility 0s linear .25s;
   }
-  body[data-nav-open="true"] .primary-nav { transform: translateX(0); }
+  body[data-nav-open="true"] .primary-nav {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform .25s var(--ease), visibility 0s;
+  }
 
   .primary-nav__list { flex-direction: column; align-items: stretch; gap: .1rem; }
 
@@ -1419,7 +1453,11 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   .nav-link--parent::after { margin: 0; }
 
   .nav-panel {
-    position: static; transform: none; opacity: 1; visibility: visible; pointer-events: auto;
+    /* `inherit`, not `visible`: the closed drawer hides itself with
+       visibility, and a descendant that hard-sets `visible` climbs back out of
+       that and into the tab order. Everything inside the drawer follows the
+       drawer -- see the input rule below, which is where this actually bit. */
+    position: static; transform: none; opacity: 1; visibility: inherit; pointer-events: auto;
     border: 0; box-shadow: none; border-radius: 0;
     padding: 0 0 .5rem .6rem;
     margin-left: .35rem;
@@ -1443,8 +1481,14 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   .primary-nav .header-actions--mobile .btn { display: inline-flex; justify-content: center; }
   .primary-nav .header-actions--mobile .site-search { display: flex; }
   .primary-nav .header-actions--mobile .site-search label { flex: 1 1 auto; min-width: 0; }
+  /* The drawer's search field is always open (there is room here, and no hover
+     to discover a magnifier with), so it has to undo the collapsed-header rule
+     -- but with `inherit` rather than `visible`, or it stays focusable while
+     the drawer is closed and off-screen, which is exactly the bug the drawer's
+     own visibility rule exists to fix. Measured: tabbing the header at 390px
+     landed here, in a menu the reader cannot see. */
   .primary-nav .header-actions--mobile .site-search input {
-    width: 100%; padding: .5rem .9rem; opacity: 1; visibility: visible;
+    width: 100%; padding: .5rem .9rem; opacity: 1; visibility: inherit;
   }
 }
 
@@ -1498,6 +1542,38 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 
 /* Long-form body copy */
 .prose { font-size: 1.09rem; }
+
+/* A LINK IN RUNNING TEXT IS UNDERLINED, and this is not a style preference.
+   `a { text-decoration: none }` up in the base leaves colour as the only thing
+   separating a link from the sentence around it, and --brand-secondary against
+   --ink-soft measures 1.2:1 (1.8 in the dark scheme) where WCAG 1.4.1 asks for
+   3:1 before colour may carry that distinction alone. It is not fixable by
+   picking a different blue either: a link colour that clears 3:1 against BOTH
+   the body text and the page would have to be a colour foojay does not own.
+   So the underline goes back on inside the article body only -- everywhere else
+   on the site a link sits in a card, a nav or a list, where position and
+   surrounding chrome already say it is one.
+
+   Scoped OUT of the UI that happens to live inside .prose: /jugs/ and
+   /java-champions/ render a filter, a map and a data table in there, the
+   galleries wrap their images in a link to the full-size original, and both
+   would otherwise sprout underlines under a face or a thumbnail. */
+.prose a { text-decoration: underline; text-underline-offset: 2px; }
+/* The exclusions have to OUTRANK the line above, which is why the underline is
+   a bare `.prose a` (0,1,1) and not `.prose a:not(.champions-table a)...`: every
+   :not() adds its argument's specificity, so the chained form measured 0,4,1 and
+   beat every exclusion here -- 422 champion avatars kept their underline and
+   nothing said why. Measured in the browser, not reasoned about. */
+.prose .champions-table a,
+.prose .jugs-table a,
+.prose .cluster-map a,
+.prose .leaflet-container a,
+.prose .gallery a,
+.prose .chip-row a,
+.prose .list-filter a,
+.prose a.btn,
+.prose a.chip,
+.prose a:has(> img) { text-decoration: none; }
 /* Contain floated images (alignleft/alignright) so a trailing float can't
    escape the article and overlap the footer. */
 .prose::after { content: ""; display: block; clear: both; }
@@ -1514,6 +1590,23 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose table { width: 100%; border-collapse: collapse; font-size: .96rem; }
 .prose th, .prose td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); }
 .prose th { font-family: var(--font-display); color: var(--ink); }
+
+/* A wide data table scrolls INSIDE ITS OWN BOX rather than taking the page
+   with it (see the templates for the measurements). Only below 60rem: on a
+   desktop both tables fit, and a scroll container there would needlessly clip
+   the sticky-header trick the sitemap tables use.
+
+   `overscroll-behavior-x: contain` stops a sideways flick at the end of the
+   table from turning into a browser back-gesture, which is what makes a
+   horizontally scrolling region tolerable on a touchpad at all. */
+@media (max-width: 60rem) {
+  .table-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+}
+/* The ring is drawn INSIDE the box: an outline-offset on a scroll container is
+   clipped on the axis it scrolls, so the right-hand edge of the indicator would
+   simply not be painted. */
+.table-scroll:focus-visible,
+.sitemap-table-wrap:focus-visible { outline-offset: -3px; }
 
 /* /jugs/ page: data/jugs.yaml source note + table (themes/foojay/layouts/jugs/single.html) */
 .jugs-source-note { font-size: .92rem; color: var(--ink-muted); }
@@ -1670,6 +1763,9 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   --brand-accent:        #50c2f7;   /* 8.57 on --surface */
   --brand-accent-strong: #8ed6fa;   /* 10.83 */
   --brand-accent-soft:   rgba(80, 194, 247, .14);
+  /* The one scheme where the accent IS a contrasting ring: 8.57 on --surface,
+     11.9 on --page-bg. The light scheme's readable sibling would be 2.3 here. */
+  --focus-ring:          #50c2f7;
   /* #3562e5 is 2.4:1 on a dark ground -- an indigo that dark cannot be a link
      colour here, so it is the same hue lightened to 6.08. */
   --brand-secondary:     #7796ee;
@@ -1881,7 +1977,11 @@ body.lightbox-open { overflow: hidden; }
   color: var(--ink); background: var(--surface);
   border: 1px solid var(--border-strong); border-radius: var(--radius);
 }
-.list-filter__input:focus { border-color: var(--brand-accent); outline: none; }
+/* The border tint is the resting-to-focused cue; the OUTLINE is the focus
+   indicator, and deleting it (which this rule used to do) leaves a keyboard
+   user with a 1px colour change worth 2:1 -- WCAG 2.4.7 wants an indicator,
+   1.4.11 wants it at 3:1. The global :focus-visible ring above supplies both. */
+.list-filter__input:focus { border-color: var(--brand-accent); }
 .author-grid .author-card[hidden] { display: none !important; }
 /* A filtered-out row needs this: [hidden] is display:none in the UA
    stylesheet, but `display: table-row` from the table's own layout wins over
@@ -2483,6 +2583,8 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
    two-word-per-line ribbon. Scroll sideways instead, which keeps every column
    readable -- see the sticky note above for why the header stops sticking. */
 @media (max-width: 60rem) {
+  /* tabindex="0" in the template, for the same reason .table-scroll carries it:
+     without it this box scrolls for a mouse and not for a keyboard. */
   .sitemap-table-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
   .sitemap-table { min-width: 44rem; }
   .sitemap-table thead th { position: static; }
@@ -2827,6 +2929,33 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 }
 .ad-carousel--side .ad-carousel__arrow--prev { left: var(--ad-arrow-inset, .25rem); }
 .ad-carousel--side .ad-carousel__arrow--next { right: var(--ad-arrow-inset, .25rem); }
+
+/* The pause control (WCAG 2.2.2 -- see partials/ad-track.html). Same pill as
+   the arrows and for the same reason: it overlays the advertiser's colour.
+   Bottom-left rather than centred, so it is clearly the whole band's control
+   and not a third way to step through the slides. 2rem square in both
+   placements, matching the arrows' 2rem, which is also the smallest a target
+   should be. */
+.ad-carousel__pause {
+  position: absolute; z-index: 2;
+  left: .5rem; bottom: .5rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; padding: 0;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(255, 255, 255, .82); color: #06232f;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  box-shadow: var(--shadow-sm);
+}
+.ad-carousel__pause:hover { background: #fff; }
+.ad-carousel--side .ad-carousel__pause {
+  left: var(--ad-arrow-inset, .25rem); bottom: var(--ad-arrow-inset, .25rem);
+  width: var(--ad-arrow-size, 1.6rem); height: var(--ad-arrow-size, 1.6rem);
+}
+/* Which glyph shows follows the state the script writes, so there is nothing
+   to toggle from JavaScript beyond the one attribute (and the label). */
+.ad-carousel__pause .ad-carousel__icon-play { display: none; }
+.ad-carousel__pause[data-paused="true"] .ad-carousel__icon-play { display: block; }
+.ad-carousel__pause[data-paused="true"] .ad-carousel__icon-pause { display: none; }
 
 
 /* --- Sidebar slot (partials/ads-widget.html) ----------------------------- */
