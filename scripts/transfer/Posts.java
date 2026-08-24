@@ -63,6 +63,11 @@ import java.util.stream.Stream;
  * (co-located per post under static/images/posts/<year>/<month>/<slug>/) and flags
  * the JDoodle / EnlighterJS widgets so the theme only loads their scripts where used.
  *
+ * A re-scrape does NOT undo cleanup/images.py: an image it re-encoded is recognised
+ * under its new extension (HtmlToMarkdown.convertedSibling) and an animated hero
+ * keeps its still poster (stillPoster below), so ~580 renamed files and 570 MB of
+ * savings survive. Add to both when that script gains a pass that renames a file.
+ *
  * AUTHORS:
  * A post can have several authors, so frontmatter carries an `authors:` list of
  * slugs (see authorSlugs()); the theme resolves each to its author page.
@@ -379,7 +384,7 @@ public class Posts {
         // Pull the hero (og:image) local too, so it isn't hotlinked from the
         // WordPress site that goes away at cutover. Non-foojay images are left as-is.
         String localHero = HtmlToMarkdown.localizeImage(d.image, opts, "");
-        if (localHero != null) d.image = localHero;
+        if (localHero != null) d.image = stillPoster(d.bundleDir, localHero);
 
         d.authors = authorSlugs(doc);
         if (d.authors.isEmpty()) {
@@ -594,6 +599,34 @@ public class Posts {
             System.err.println("WARN: could not parse date '" + d.date + "' for " + d.slug + ", filing under posts/undated/");
             return OUTPUT_DIR.resolve("undated");
         }
+    }
+
+    /**
+     * The still poster cleanup/images.py made for an ANIMATED hero, or the hero
+     * unchanged.
+     *
+     * A hero is the card thumbnail, the og:image and the JSON-LD image, none of
+     * which animate, so images.py writes a first-frame <stem>-poster.png/.jpg next
+     * to an animated hero and repoints `image:` at it -- and
+     * validate/Frontmatter.checkHeroImageStill fails the PR if that is undone. This
+     * script rebuilds frontmatter from the live WordPress page, where og:image is
+     * still the animation, so without this every re-scrape reverts all 20 of them
+     * and the next PR check goes red.
+     *
+     * Derived from the file on disk, like the converted-sibling rule in
+     * HtmlToMarkdown.localizeImage: the poster's existence IS the record that the
+     * hero was animated, so there is nothing stored and nothing to unset. The stem
+     * is unaffected by a .gif -> .webp re-encode, so either name finds it.
+     */
+    static String stillPoster(Path bundleDir, String hero) {
+        if (bundleDir == null || hero.contains("/") || hero.contains("://")) return hero;
+        int dot = hero.lastIndexOf('.');
+        String stem = dot > 0 ? hero.substring(0, dot) : hero;
+        for (String ext : new String[]{".png", ".jpg"}) {
+            String poster = stem + "-poster" + ext;
+            if (Files.isRegularFile(bundleDir.resolve(poster))) return poster;
+        }
+        return hero;
     }
 
     /** The post's leaf-bundle directory (content/posts/<y>/<m>/<d>/<slug>/), reused

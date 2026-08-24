@@ -16,8 +16,12 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -164,6 +168,11 @@ public final class HtmlToMarkdown {
         final String localHostSuffix; // only localize images on this host, e.g. foojay.io
         final String userAgent;
         final int timeoutMs;
+        // Names this Options actually downloaded, so the converted-sibling rule in
+        // localizeImage() can tell "cleanup/images.py re-encoded this one" from
+        // "WordPress genuinely serves both foo.png and foo.jpg". An Options is built
+        // per content item and never shared across threads, so no synchronization.
+        final Set<String> fetchedThisItem = new HashSet<>();
 
         public Options(Path imageBaseDir, String imageUrlPrefix, String localHostSuffix,
                        String userAgent, int timeoutMs) {
@@ -947,17 +956,23 @@ public final class HtmlToMarkdown {
      * Localizes one image URL into this item's image directory, returning its new
      * site-absolute path, or null to leave the reference unchanged (not a
      * foojay-hosted image, or the download failed). Idempotent: an already-
-     * downloaded file is not fetched again.
+     * downloaded file is not fetched again, and an already-RE-ENCODED one is
+     * recognised under its new extension rather than fetched back (see
+     * convertedSibling).
      */
     static String localizeImage(String absoluteUrl, Options opts, String itemSubpath) {
         String filename = localImageFilename(absoluteUrl, opts.localHostSuffix);
         if (filename == null) return null;
-        String rel = (itemSubpath == null || itemSubpath.isBlank())
-                ? filename
-                : itemSubpath + "/" + filename;
-        Path out = opts.imageBaseDir.resolve(rel);
+        String dirRel = (itemSubpath == null || itemSubpath.isBlank()) ? "" : itemSubpath + "/";
+        Path out = opts.imageBaseDir.resolve(dirRel + filename);
         try {
             if (!Files.exists(out)) {
+                String converted = convertedSibling(out.getParent(), filename, opts);
+                if (converted != null) {
+                    System.out.println("  keeping " + converted + " (cleanup/images.py re-encoded "
+                            + filename + "); not re-downloading");
+                    return opts.imageUrlPrefix + dirRel + converted;
+                }
                 Connection.Response res = Jsoup.connect(absoluteUrl)
                         .userAgent(opts.userAgent)
                         .timeout(opts.timeoutMs)
@@ -966,12 +981,61 @@ public final class HtmlToMarkdown {
                         .execute();
                 Files.createDirectories(out.getParent());
                 Files.write(out, res.bodyAsBytes());
+                opts.fetchedThisItem.add(filename);
             }
-            return opts.imageUrlPrefix + rel;
+            return opts.imageUrlPrefix + dirRel + filename;
         } catch (IOException e) {
             System.err.println("  image download failed: " + absoluteUrl + " -> " + e.getMessage());
             return null;
         }
+    }
+
+    /**
+     * cleanup/images.py's container conversions -- source extension -> the extension
+     * it writes. Each is a plain Path.with_suffix() there, so the stem never moves
+     * and the sibling is derivable from the name alone.
+     */
+    private static final Map<String, String> RE_ENCODED_AS = new LinkedHashMap<>();
+    static {
+        RE_ENCODED_AS.put(".gif", ".webp");  // convert_gif: animated GIF -> animated WebP
+        RE_ENCODED_AS.put(".png", ".jpg");   // png_to_jpeg: large PNG -> JPEG
+    }
+
+    /**
+     * The name a file has ALREADY been re-encoded to by cleanup/images.py, or null.
+     *
+     * WHY THIS EXISTS. That script shrank content/ from 1.26 GB to 0.69 GB to fit
+     * GitHub Pages' 1 GB artifact limit, and two of its passes change the FILENAME:
+     * 42 animated GIFs became WebP and 518 large PNGs became JPEG. Without this,
+     * every re-scrape looks for foo.gif, does not find it, downloads the 52 MB
+     * original back and rewrites the body reference to foo.gif -- so the whole
+     * saving is undone, the re-encoded file is orphaned, and the diff is hundreds
+     * of files of pure churn. (The resize pass keeps the filename, which is why it
+     * was always safe: Files.exists short-circuits and images.py re-shrinks the
+     * fresh original harmlessly.)
+     *
+     * Derived, not recorded: the evidence is the file images.py left on disk, so
+     * there is no manifest to keep in step and nothing to unset. It also dies with
+     * the scrapers at cutover. transfer/Authors.java has been immune all along for
+     * the same reason -- its localizeAvatar() matches on the basename and ignores
+     * the extension, which is why 203 converted -full.jpg avatars survive a
+     * re-scrape; this is that rule, narrowed to the two conversions that exist so a
+     * post referencing a genuinely different foo.png and foo.svg is never confused.
+     *
+     * The exact name is checked by the caller FIRST, so a bundle shipping both
+     * foo.gif and a hand-made foo.webp (the case images.py itself skips) keeps
+     * using the GIF. And a sibling this run downloaded is never treated as a
+     * conversion -- that is WordPress genuinely serving both, not our re-encode.
+     */
+    static String convertedSibling(Path dir, String filename, Options opts) {
+        int dot = filename.lastIndexOf('.');
+        if (dot <= 0) return null;
+        String ext = filename.substring(dot).toLowerCase(Locale.ROOT);
+        String target = RE_ENCODED_AS.get(ext);
+        if (target == null) return null;
+        String candidate = filename.substring(0, dot) + target;
+        if (opts.fetchedThisItem.contains(candidate)) return null;
+        return Files.isRegularFile(dir.resolve(candidate)) ? candidate : null;
     }
 
     /**

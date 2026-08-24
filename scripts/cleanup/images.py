@@ -20,7 +20,17 @@ WHAT IT DOES
      which animate: a link preview shows frame one, a grid of animating cards is
      unreadable, and the whole file downloads to draw a thumbnail.
      validate/Frontmatter.checkHeroImageStill enforces this at PR time.
-  3. PNG/JPEG resized when the long edge exceeds --cap. 833 files were wider,
+  3. An over-budget WebP re-encoded down the ladder, IN PLACE, keeping its name.
+     Needed because the first version of this script had no budget ladder and left
+     three 10.23 MB files behind that nothing revisited.
+
+  4. Large PNG -> JPEG, over --png-min. 518 files (504 in posts, 14 in author
+     bundles). JPEG has no alpha, so the files that genuinely use transparency stay
+     PNG -- which is not the same as HAVING an alpha channel, since many of these
+     WordPress PNGs are RGBA with every pixel opaque, hence the check on the
+     channel's actual minimum. The FILENAME changes, so references are rewritten.
+
+  5. PNG/JPEG resized when the long edge exceeds --cap. 833 files were wider,
      holding 545 MB, while the article column is ~880px -- so 1600 still covers a
      2x display. Format and filename are unchanged, so nothing references these
      by a name that moves.
@@ -31,13 +41,26 @@ enough: converting the 52 MB OpenRewrite.gif at q78 still left 10.2 MB, over the
 progressively harder settings until it fits, and the first result that does is
 kept (see LADDER).
 
-DELIBERATELY NOT DONE: converting the 4194 PNGs to WebP. It is the biggest single
-win (measured 6.4 MB -> 0.5 MB on the worst offender) and still the wrong trade
-here -- it renames ~4000 references across ~2000 posts, and transfer/Posts.java
-re-downloads the original PNG from WordPress, so the next re-scrape would undo all
-of it and restore the .png references. Resizing keeps the filename, which a
-re-scrape overwrites harmlessly with an original this pass then shrinks again.
-Revisit after cutover, when the scrapers are gone.
+A RE-SCRAPE NO LONGER UNDOES THIS. Passes 1 and 4 rename ~580 files, and
+transfer/Posts.java rebuilds a post from the live WordPress page -- so it used to
+look for foo.gif, not find it, download the 52 MB original back and repoint the
+body at foo.gif, orphaning the WebP and putting the whole 570 MB saving back.
+HtmlToMarkdown.localizeImage now recognises a file already re-encoded here
+(convertedSibling: .gif -> .webp, .png -> .jpg, both exactly the with_suffix()
+calls below) and Posts.stillPoster does the same for pass 2's posters, so the
+scraper keeps what this script produced and fetches nothing. Keep the two
+substitutions in step with the two with_suffix() calls -- adding a pass that
+renames a file means adding it there as well, or the next re-scrape silently
+reverts that pass and nothing reports it.
+
+Passes 3 and 5 keep the filename, so they were never at risk: the scraper skips a
+file that is already on disk, whatever its dimensions.
+
+DELIBERATELY NOT DONE: converting the remaining PNGs to WebP. It is the biggest
+single win left (measured 6.4 MB -> 0.5 MB on the worst offender) but the JPEG pass
+above already takes the large ones, at a measured 81% against WebP's 89% over a
+40-file sample, and JPEG is what the other 1400 images already are. Revisit after
+cutover if the artifact needs the headroom.
 
 TWO SAFETY RULES, both learned the hard way on the first run:
 
@@ -64,8 +87,10 @@ WordPress conversion artefact and are then dead. Contributors keep adding images
 forever, so this stays useful -- and the validator's message names it.
 
 IDEMPOTENT. A file already inside the caps is untouched, and a second run reports
-nothing to do. Re-run after any late re-scrape, which restores the originals --
-same standing instruction as cleanup/CloudflareEmails.java.
+nothing to do. Still re-run after any late re-scrape -- not to undo a reverted
+rename (see above, that is handled) but because a re-scrape can bring in images
+this has never seen, which is what validate/Frontmatter.checkImageWeight fails a
+PR on.
 
 NOTE ON THE GIT REPO. This shrinks the build output and the working tree, not
 .git, which keeps every old blob. A fresh clone stays large until history is

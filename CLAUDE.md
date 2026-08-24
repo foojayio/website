@@ -738,6 +738,50 @@ should catch a mistake at PR time rather than letting it fail silently.
   names and a file absent from the markdown can still be in use; and nothing
   rewrites git history, so `.git` stays large — the 1 GB limit is on the artifact.
 
+  **A re-scrape must not undo the shrink, and the rule for that is derived from
+  what is on disk.** Two of `images.py`'s passes change the FILENAME — 42 animated
+  GIFs became `.webp` and 518 large PNGs became `.jpg` — while
+  `transfer/Posts.java` rebuilds a post from the live WordPress page. So it looked
+  for `foo.gif`, did not find it, downloaded the 52 MB original back and repointed
+  the body at `foo.gif`: the WebP orphaned, 570 MB of savings gone, and hundreds of
+  files of churn in the diff.
+
+  `HtmlToMarkdown.convertedSibling` is the fix — **`.gif` → `.webp`, `.png` →
+  `.jpg`, which are exactly `images.py`'s two `with_suffix()` calls** — and
+  `Posts.stillPoster` is the same move for the 20 `-poster` heroes, which
+  `Posts.java` would otherwise repoint at the animation and fail
+  `checkHeroImageStill` on. Four things about it:
+
+  - **Derived, not recorded.** The evidence is the file `images.py` left behind, so
+    there is no manifest to keep in step, nothing to unset, and it dies with the
+    scrapers at cutover. The poster's *existence* is the record that the hero was
+    animated.
+  - **`transfer/Authors.java` has been immune all along**, which is where the shape
+    came from: its `localizeAvatar` matches on the basename and ignores the
+    extension, so 203 converted `-full.jpg` avatars already survive a re-scrape.
+    This is that rule narrowed to two conversions, because an avatar's basename is
+    minted by the script while a post's comes from WordPress — fully
+    extension-blind, a post referencing a genuinely different `logo.png` and
+    `logo.svg` would collapse into one.
+  - **The exact name is checked first, and a sibling fetched in the same run is
+    never treated as a conversion.** The first keeps a bundle that ships both
+    `projectexplorer.gif` and a hand-made `projectexplorer.webp` — the case
+    `images.py` itself skips — on the GIF. The second is what stops WordPress
+    genuinely serving `foo.png` *and* `foo.jpg` from collapsing. Measured: 0
+    bundles in `content/` hold either ambiguous pair today, so the guard is
+    belt-and-braces, but this is a store where a wrong substitution is silent.
+  - **The passes that keep the filename were never at risk** — `Files.exists`
+    short-circuits, so a resized image is not re-downloaded at all (`images.py`'s
+    header used to claim it was "overwritten harmlessly"; it isn't overwritten).
+
+  Verified by audit rather than by reading: of the 572 image files ever deleted from
+  `content/`, **558 are the `images.py` renames and every one now resolves to its
+  converted sibling**; the other 14 are unrelated deliberate deletions (10 of them
+  in a `frozen: true` post a re-scrape skips). All 20 poster heroes still have their
+  animated source in the bundle, so the hero resolves with no download either.
+  **Keep the substitution list in step with `images.py`** — a new renaming pass
+  there silently reverts on the next re-scrape otherwise, and nothing reports it.
+
 - **Idempotency everywhere**: any script touching `content/` must be safe
   to re-run without duplicating or destroying hand edits (the `frozen: true`
   flag pattern). This matters because these scripts get re-run repeatedly
