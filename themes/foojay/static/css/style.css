@@ -2716,6 +2716,13 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 
 /* --- Home page carousel (partials/ads-carousel.html) --------------------- */
 
+/* The band sits between the lead card and the post grid in .content-col, which
+   is a plain block with no gap of its own -- so without this the first row of
+   cards butted straight up against the banner. The lead card above supplies the
+   space on top with its own margin-bottom; this is the same clamp, so the gap
+   above and below the banner matches and the column keeps one rhythm. */
+.ad-band { margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
+
 /* One slide at a time, scroll-snapped. This IS the carousel: with JavaScript
    off it swipes and trackpad-scrolls, and ad-carousel.js only adds the arrows,
    the dots and the autoplay on top. */
@@ -2798,9 +2805,23 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .ad-carousel__arrow--next { right: .5rem; }
 
 /* Smaller arrows in the 300px column, and tucked tighter to the edge. */
-.ad-carousel--side .ad-carousel__arrow { width: 1.6rem; height: 1.6rem; }
-.ad-carousel--side .ad-carousel__arrow--prev { left: .25rem; }
-.ad-carousel--side .ad-carousel__arrow--next { right: .25rem; }
+/* Smaller arrows in the ~300px column, and the card's side padding is DERIVED
+   from them rather than typed as a number: the gutter the copy needs is exactly
+   "how far in the arrow reaches, plus breathing room", so the two must move
+   together. They had drifted apart -- a 1.6rem arrow inset .25rem reaches
+   1.85rem in, against 1.9rem of padding, leaving 0.05rem of clearance and copy
+   that looked pressed against the buttons. Resize an arrow here and the text
+   steps back on its own. */
+.ad-carousel--side {
+  --ad-arrow-size: 1.6rem;
+  --ad-arrow-inset: .25rem;
+  --ad-arrow-gap: .55rem;
+}
+.ad-carousel--side .ad-carousel__arrow {
+  width: var(--ad-arrow-size, 1.6rem); height: var(--ad-arrow-size, 1.6rem);
+}
+.ad-carousel--side .ad-carousel__arrow--prev { left: var(--ad-arrow-inset, .25rem); }
+.ad-carousel--side .ad-carousel__arrow--next { right: var(--ad-arrow-inset, .25rem); }
 
 
 /* --- Sidebar slot (partials/ads-widget.html) ----------------------------- */
@@ -2814,7 +2835,14 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
    that already is one. Third instance of the same collision in this block; see
    the note on .ad .ad__btn. */
 .sidebar .widget-ad { padding: 0; background: none; border: 0; }
-.ad--side { flex-direction: column; gap: .6rem; padding: 1rem; padding-inline: 1.9rem; }
+.ad--side {
+  flex-direction: column; gap: .6rem; padding: 1rem;
+  /* The custom properties are set on .ad-carousel--side above and inherit down
+     to here, so this stays correct if the arrows are ever resized. */
+  padding-inline: calc(var(--ad-arrow-inset, .25rem)
+                     + var(--ad-arrow-size, 1.6rem)
+                     + var(--ad-arrow-gap, .55rem));
+}
 .ad--side .ad__img { width: 100%; max-height: 140px; align-self: center; }
 .ad--side .ad__img img { max-height: 140px; width: auto; max-width: 100%; }
 .ad--side .ad__title { font-size: 1rem; line-height: 1.3; }
