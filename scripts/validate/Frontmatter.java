@@ -195,6 +195,7 @@ public class Frontmatter {
                 // so a blanket skip on the filename silently stopped checking all 344
                 // author profiles and all 7 sponsors for their required fields.
                 if (file.equals(dir.resolve("_index.md"))) continue;
+                if (isPageResource(file)) continue;
                 Map<String, Object> fm = readFrontmatter(file);
                 if (fm == null) {
                     problems.add(file + ": no frontmatter block found");
@@ -204,6 +205,25 @@ public class Frontmatter {
             }
         }
         return problems;
+    }
+
+    /**
+     * A .md file that is a page RESOURCE rather than a page: it sits in a leaf
+     * bundle next to that bundle's index.md. Hugo hands those to the layout
+     * through .Resources and never publishes a URL for them, so they carry no
+     * frontmatter and none of the rules below apply.
+     *
+     * Written as "is there an index.md beside it" rather than as a list of
+     * filenames, so the next one costs nothing. Today it is the podcast
+     * transcripts (scripts/fetch/PodcastTranscripts.java, 99 of them), which
+     * without this were 99 failures reading "no frontmatter block found" --
+     * a check failing on a file that is not the kind of thing it checks.
+     */
+    static boolean isPageResource(Path file) {
+        String name = file.getFileName().toString();
+        if (name.equals("index.md") || name.equals("_index.md")) return false;
+        Path parent = file.getParent();
+        return parent != null && Files.exists(parent.resolve("index.md"));
     }
 
     /**
@@ -1121,6 +1141,7 @@ public class Frontmatter {
         try (Stream<Path> files = Files.walk(dir)) {
             for (Path file : files.filter(p -> p.toString().endsWith(".md")).sorted().toList()) {
                 if (touched != null && !touched.contains(file.normalize())) continue;
+                if (isPageResource(file)) continue;
                 List<Integer> lines = imagesWithoutAlt(Files.readString(file));
                 if (lines.isEmpty()) continue;
                 String where = lines.size() > 6

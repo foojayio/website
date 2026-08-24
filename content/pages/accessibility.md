@@ -36,6 +36,8 @@ falls short today rather than claiming a conformance we have not audited.
   reduced motion — which the site also honours for every other animation.
 - **The dark colour scheme follows your system setting** and can be overridden
   per visit.
+- **Podcast episodes have a transcript on the page**, so an episode is readable
+  without listening to it — see the caveat below on where those come from.
 - **No time limits, no flashing content, no audio that plays by itself.**
 
 ## What is not there yet
@@ -45,8 +47,12 @@ falls short today rather than claiming a conformance we have not audited.
   description, and roughly 3,000 images across the archive are still in that
   state. New articles are checked for this when they are submitted, and the
   archive is being worked through. This is the site's biggest gap.
-- **Podcast episodes have no transcript.** Episodes are published as video with
-  the platform's own captions, which are automatic and not corrected by us.
+- **Podcast transcripts are machine-generated.** Every episode page carries a
+  transcript you can read, search and skip through, but it comes from automatic
+  speech recognition: it is tidied up, not checked against the audio, so names
+  and technical terms are sometimes wrong. Each one says so above the text. The
+  captions on the videos themselves are YouTube's automatic ones, which for the
+  same reason do not meet the standard for captions.
 - **Some articles have heading levels that skip** (an h2 followed by an h4),
   inherited from the same import.
 - **Embedded content is not ours.** Articles embed videos, code playgrounds and

@@ -31,9 +31,22 @@ write are **generated — never hand-edit them**; fix the entry upstream.
 | `JugEvents.java` | `data/jug-events.json` | the iCal feed each JUG publishes (its own site, Google Calendar, Meetup) |
 | `ViewCounts.java` | `data/views.json` | our own read counter (`worker/views/`) |
 | `DiscoverJugCalendars.java` | nothing — it reports | JUG websites; finds calendars missing from GlobalWWJugs, to be fixed **upstream** |
+| `PodcastTranscripts.java` | `transcript.md` in each podcast episode's bundle | the automatic captions on foojay's own YouTube channel, via `yt-dlp` |
 
 `DiscoverJugCalendars.java` is run **by hand, never in CI** — it exists to
 produce an upstream pull request, not to change anything here.
+
+`PodcastTranscripts.java` is run **by hand** too, and writes into `content/`
+rather than `data/`: it needs the `yt-dlp` binary (`brew install yt-dlp`), it
+talks to YouTube once per episode, and the natural moment to run it is the pull
+request that publishes a new episode — `--slug foojay-podcast-101`. It never
+replaces a transcript that is already there, so a corrected one survives every
+later run; `--force` is the way to overwrite deliberately. Raw caption files are
+cached in `.cache/podcast-captions/` (gitignored) so the conversion can be
+re-run over the whole archive without re-fetching. `--report-variants` prints
+what speech recognition actually made of the show's vocabulary, which is where
+the substitution list in the script came from — and where the next one should
+come from.
 
 `JavaChampions.java` is the only one here that needs a credential:
 **`GEOCODE_API_KEY`** (a free key from [geocode.maps.co](https://geocode.maps.co),

@@ -33,3 +33,8 @@ __pycache__/
 *.jpg.tmp
 *.png.tmp
 *.jpeg.tmp
+
+# Download cache for scripts/fetch/PodcastTranscripts.java -- the raw YouTube
+# caption files. Not committed: the transcript in the page bundle is the
+# artefact, and these are re-fetchable.
+.cache/

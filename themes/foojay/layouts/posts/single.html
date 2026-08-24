@@ -55,6 +55,41 @@
       {{ .Content }}
     </div>
 
+    {{/* THE EPISODE TRANSCRIPT, and it is here because the FILE is here: a
+         podcast episode has one when scripts/fetch/PodcastTranscripts.java has
+         written transcript.md into its bundle. No frontmatter flag, nothing to
+         set on a new episode and nothing to unset -- the same rule the code
+         highlighter and the mermaid loader follow.
+
+         Collapsed, because an hour of speech is ~50 KB of text and it is a
+         reference, not the article. <details> is the right control for that and
+         needs no JavaScript: it is keyboard-operable and announced as an
+         expandable group for free, which a div and a click handler would not be.
+
+         The "automatically generated" line is not a disclaimer for its own sake.
+         The text is YouTube's speech recognition, cleaned up but not corrected
+         against the audio, so it gets names and Java vocabulary wrong -- and an
+         uncorrected machine transcript presented as a faithful record is worse
+         than one that says what it is. /accessibility/ says the same thing.
+
+         data-pagefind-ignore: 99 transcripts is ~800k words against the site's
+         115k-word index, so indexing them would make every episode a result for
+         any word anyone happened to say out loud, and the archive of ARTICLES --
+         what people search this site for -- would be buried. Worth revisiting
+         deliberately, with the search page's per-section quotas in mind, rather
+         than by default. */}}
+    {{ with .Resources.GetMatch "transcript.md" }}
+    <details class="transcript" data-pagefind-ignore>
+      <summary class="transcript__summary">
+        <span class="transcript__title">Transcript</span>
+        <span class="transcript__note">Automatically generated from the audio, so can contain errors in names and technical terms</span>
+      </summary>
+      <div class="prose transcript__body">
+        {{ .Content }}
+      </div>
+    </details>
+    {{ end }}
+
     {{ $authors := .Params.authors }}
     {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
     {{ range $authors }}

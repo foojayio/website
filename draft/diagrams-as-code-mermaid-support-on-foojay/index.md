@@ -204,6 +204,7 @@ README can be pasted into an article unchanged.
 - **Diagrams follow the reader's theme**, light or dark, and re-draw when the
   reader flips it. Don't hard-code colours.
 - **If the syntax doesn't parse**, that one diagram shows an error message in
+
   place and the rest of the article is unaffected. Check your diagram in the
   [live editor](https://mermaid.live/) if you're unsure.
 

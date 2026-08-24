@@ -249,6 +249,69 @@ should catch a mistake at PR time rather than letting it fail silently.
   (`DubJUG` → "Dublin Java User Group", `WarsawJUG` → "Warszawa JUG"), 5 for a
   human. All 15 went upstream as
   [GlobalWWJugs#98](https://github.com/World-Wide-JUGs/GlobalWWJugs/pull/98).
+- **`scripts/fetch/PodcastTranscripts.java`**: writes a reading transcript into
+  each podcast episode's bundle as `transcript.md`. Run **by hand**, like
+  `transfer/Sponsors.java` and for the same kind of reason: it needs the
+  `yt-dlp` binary and talks to YouTube once per episode, and a new episode is a
+  pull request someone is already opening.
+
+  **The captions already exist, so nothing is transcribed here.** Every episode
+  is on foojay's own YouTube channel and YouTube has run speech recognition over
+  all of them, so the text is foojay's own content and a fetch takes seconds --
+  against hours of local compute to transcribe ~75 hours of audio for a result
+  of the same kind. (The YouTube Data API's `captions.download` is the other
+  sanctioned route and was rejected on arithmetic: 250 quota units per episode
+  against a 10,000/day default, plus an OAuth client. The public `timedtext`
+  endpoint no longer works at all -- it needs a signed player token and returns
+  0 bytes.)
+
+  **It is a MACHINE transcript and every page says so.** Automatic captions do
+  not satisfy WCAG 1.2.2, which asks for accurate captions; what a transcript
+  buys is a page that can be read, searched and skimmed instead of an audio-only
+  medium, which is a large practical gain over nothing. Correcting one is an
+  ordinary content edit afterwards, and **an existing `transcript.md` is never
+  overwritten** (`--force` to replace deliberately) precisely so a corrected one
+  survives the next run.
+
+  Four things are load-bearing:
+  - **The rendering is DERIVED from the file.** `transcript.md` inside a leaf
+    bundle is exposed to the layout as a resource of type `page` (verified --
+    `.Resources.GetMatch "transcript.md"`, `.Content` renders it, and Hugo
+    publishes no URL of its own for it), so `posts/single.html` renders a
+    `<details>` when the file is there. No frontmatter flag to set, forget or
+    unset -- same rule as the EnlighterJS and mermaid loaders.
+  - **YouTube's caption format repeats itself and has to be de-duplicated.**
+    Its rolling captions re-send the settled line in the following cue, so a
+    45-minute episode arrives as 2643 cues holding ~1300 distinct lines.
+    Dropping a line identical to the one before it is what collapses that; the
+    per-word `<00:00:03.439><c>` timing tags come off first.
+  - **The substitution list is EVIDENCE, not guesswork, and `--report-variants`
+    is how it was built.** It prints what recognition actually produced, and the
+    surprise is why it exists: `forj` is **`4j`**, not Foojay -- it appears only
+    next to Neo, Log, SLF and LangChain, so the spelling-based guess would have
+    rewritten every mention of Log4j in the archive into a mention of the site.
+    What is corrected: the show's own name (`fuj` 256, `fuji` 132, `fujay` 62 --
+    none of which is a word that can turn up in a Java conversation by
+    accident), the `4j` family, `open jdk` (which outnumbers `openjdk` ten to
+    one), `java fx`, and the acronyms recognition lower-cases about half the
+    time. **Names are deliberately not corrected**: recognition mangles them
+    worse than anything else, but there is no spelling a script can know is the
+    intended one, and inventing one puts words in a guest's mouth. They stay
+    wrong until a human fixes them, which is the honest failure mode.
+  - **The readability pass is deterministic and conservative.** `[music]` and
+    `[singing]` are dropped (the jingle, and it lands mid-sentence) while
+    `[laughter]` and `[applause]` stay, being part of a conversation; `uh`/`um`
+    go; a repeated function word or two-word false start collapses. `like`,
+    `you know` and `I mean` are deliberately left alone -- they carry meaning
+    often enough that stripping them rewrites what someone said. Every category
+    is counted and printed at the end of a run, so none of it has to be taken on
+    trust.
+
+  Transcripts carry **`data-pagefind-ignore`**: 99 of them is ~800k words
+  against the site's 115k-word index, so indexing them would make every episode
+  a hit for any word anyone said out loud and bury the article archive. Worth
+  revisiting deliberately -- the search page already gives each section its own
+  quota -- rather than by default.
 - **`scripts/transfer/Sponsors.java`**: converts the sponsor section from the live
   WP site into `content/sponsors/<wp-slug>/index.md` page bundles (logo pulled
   local as a bundle resource, About text through `HtmlToMarkdown`). Reads the

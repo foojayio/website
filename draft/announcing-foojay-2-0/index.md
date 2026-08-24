@@ -42,14 +42,15 @@ A [Hugo](https://gohugo.io/) site built from
 [a public repository](https://github.com/foojayio/website), deployed
 automatically whenever something lands on the main branch. Concretely:
 
-| | Before | Now                                                   |
-|---|---|-------------------------------------------------------|
-| Publishing | CMS account + web editor | a pull request                                        |
-| Search | server-side | a static index, in your browser                       |
-| Comments | a plugin | GitHub Discussions                                    |
+| | Before | Now |
+|---|---|---|
+| Publishing | CMS account + web editor | a pull request |
+| Search | server-side | a static index, in your browser |
+| Comments | a plugin | GitHub Discussions |
 | Read counts | a plugin | a counter we run, that stores a slug and a number |
 | Analytics | Google Analytics via 360 KB of Tag Manager | the same Google Analytics, loaded directly |
-| The archive | in a database | 2,147 Markdown files you can read on GitHub           |
+| Podcast episodes | press play and listen | a transcript on the page as well |
+| The archive | in a database | 2,147 Markdown files you can read on GitHub |
 
 Everything came across: 2,147 articles, 344 author profiles, 47 glossary
 entries, the JUG directory, the calendar, the sponsors,... Every legacy path
@@ -170,6 +171,88 @@ canonical: "https://your-blog.example/the-original/"
 
 — and search engines keep crediting your site while the article reaches Foojay's
 readers. Roughly 800 articles here are cross-posts, and this is how.
+
+## Every podcast episode is now readable
+
+The Foojay Podcast had exactly one way in: press play and listen for the next
+forty-five minutes. **99 episodes now carry a transcript on the page** — roughly
+800,000 words of conversation you can read, skim, `Ctrl-F` through, or quote
+from.
+
+Nothing was transcribed to make that happen. Every episode is on Foojay's own
+YouTube channel and YouTube has already run speech recognition over all of them,
+so the text was ours to fetch — seconds per episode, against hours of local
+compute for a result of the same quality. A JBang script pulls the captions,
+collapses YouTube's rolling repeats (its captions re-send each settled line in
+the following cue, so a 45-minute episode arrives as 2,643 cues holding about
+1,300 distinct lines), drops the jingle and the "uh"s, and writes a
+`transcript.md` next to the episode's `index.md`. The page renders it *because
+the file is there* — there is no flag on the episode to set, and none to
+remember to unset. It sits in a collapsed block, because an hour of speech is a
+reference, not the article.
+
+**And it is a machine transcript, which every episode says out loud above the
+text.** Automatic captions get names and Java vocabulary wrong, and an
+uncorrected machine transcript presented as a faithful record is worse than one
+that admits what it is. The corrections that *are* applied were derived from
+what recognition actually produced rather than guessed at, and the best argument
+for working that way is `forj`. It looks exactly like a mangled "Foojay". It is
+in fact **`4j`** — it only ever appears next to Neo, Log, SLF and LangChain. The
+spelling-based guess would have quietly rewritten every mention of Log4j in six
+years of archive into a mention of this website.
+
+Guests' names are deliberately left uncorrected. Recognition mangles them worse
+than anything else, but there is no spelling a script can *know* is the intended
+one, and inventing one puts words in someone's mouth. So if you were on an
+episode and your name comes out wrong: that is a pull request, and a corrected
+transcript is never overwritten by the script again.
+
+One deliberate omission — **transcripts are not in the search index.** 800,000
+words against the article archive's 115,000 would make every episode a hit for
+any word anyone happened to say out loud, and bury the thing you were actually
+searching for.
+
+## Accessibility
+
+Foojay is very likely not *legally* required to be accessible — the European
+Accessibility Act covers consumer services in listed sectors, not community
+blogs. That is a poor reason to skip it. This is an audience of Java developers,
+which is precisely the audience that browses with a keyboard, at 200% zoom, in a
+dark colour scheme, or with a screen reader.
+
+So the site targets **[WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/)**, and there
+is now an [accessibility statement](https://foojay.io/accessibility/) that says
+where it actually stands. What went in:
+
+- A skip link, one `<h1>` and real landmarks on every page.
+- **Everything works without a mouse**: the menu, the search field, the image
+  viewer, the event calendar, the sortable tables, the sponsor banners.
+- **Contrast is measured, and the numbers are recorded next to each colour in
+  the stylesheet.** That is how we found that Foojay's own logo blue is 2.02:1
+  on white — fine as a fill, unusable as text — so it is never text here, and
+  the focus indicator got a colour of its own. Links in running text are
+  underlined for the same reason: at 1.2:1 against the body text, colour alone
+  was telling you nothing.
+- **Nothing moves that you cannot stop**, and nothing moves at all if your
+  system asks for reduced motion.
+
+The failures that got fixed are more instructive than the list of things that
+pass. The mobile menu was moved off-screen but left in the tab order, so a
+keyboard walked you through a menu you could not see. The image viewer's click
+handler was on the `<img>`, so click-to-enlarge did not exist for a keyboard at
+all. Two pages overflowed a 390px phone screen by 243 and 151 pixels.
+
+**And the biggest gap is on the statement rather than glossed over: roughly
+3,000 images in the archive have no alt text.** They were imported that way, and
+no script can invent a description of a screenshot it cannot see. New articles
+are checked when you open the pull request — as a *warning*, not a failure,
+because whether an image carries meaning is a judgement call, and the
+predictable response to a hard failure is `alt="image"`, which is worse for a
+screen reader than nothing at all.
+
+Which makes it 3,000 tiny independent jobs in a public repository, and if you
+wrote one of those articles you are the best person alive to describe its
+screenshots.
 
 ## What we deliberately did not build
 
