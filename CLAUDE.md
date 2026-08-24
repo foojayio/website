@@ -369,7 +369,12 @@ should catch a mistake at PR time rather than letting it fail silently.
   `transfer/Sponsors.java` is run by hand: it writes outside the repo and needs a
   credential. See "read counter" under the conventions below for why this
   exists instead of a hosted analytics service, and `worker/views/README.md`
-  for the setup steps. **Not yet deployed.**
+  for the setup steps. **Deployed and seeded (2026-08-24)**, by IT rather than
+  from this repo -- so `worker/views/wrangler.toml`'s `database_id` is still the
+  `REPLACE_WITH_D1_DATABASE_ID` placeholder and a `wrangler deploy` from here
+  would not work until that id is filled in. Verified end to end on the day:
+  `/all` and `/<key>` answer, a hit counts, a hit from a foreign `Origin` does
+  not, `/seed` 401s without the token, and a malformed key 404s.
 - **`scripts/transfer/LegacyViews.java`**: captures the view counts WordPress holds for
   every post, page and pedia entry (the Post Views Counter plugin exposes them
   on an open REST route — no admin, DB or credential needed, same posture as
@@ -388,10 +393,12 @@ should catch a mistake at PR time rather than letting it fail silently.
   (the route sums when handed several ids, so there is no batching), eight at a
   time, ~3 minutes for the site; `--limit N` for a test run. Needs a browser
   `User-Agent` — WP Engine's WAF 403s a bare Java one. Every one of the 2145
-  posts and all 30 pedia entries match. The 7 items it reports as unmatched are
-  WordPress listing pages (`today`, `author`, `sitemap`, `home-page`, …) with no
-  single Hugo page behind them; `PAGE_ALIASES` covers the one page whose Hugo
-  file is named differently (`jugs` → `java-user-groups-jugs`), and
+  posts and all 30 pedia entries match. The items it reports as unmatched are
+  WordPress listing pages (`today`, `author`, `home-page`, `our-sponsors`, …) with
+  no single Hugo page behind them, plus anything genuinely absent here;
+  `PAGE_ALIASES` covers the pages whose Hugo file is named differently (`jugs` →
+  `java-user-groups-jugs`, `all-events` → `calendar`, `team` → `meet-the-team`,
+  `download` → `install-java`), and
   `SECTION_MOVES` the one that changed *section* (WP page `log4j-cve` → Hugo
   post `posts/log4j-cve`). Add to `SECTION_MOVES` whenever a WP page is
   republished here as a post: WordPress can't be edited to follow, so without
@@ -404,25 +411,26 @@ should catch a mistake at PR time rather than letting it fail silently.
   numbers are baked into the HTML. **Never fails the build**: if the counter is
   unreachable it keeps the committed file and exits 0.
 
-  That degradation is what is happening today, and it is why
-  `sync-view-counts.yml` also runs **`transfer/LegacyViews.java --write-views`**
-  once a day: with no Worker on the route, "keep the committed file" means the
-  counts are frozen at the last seed and drift further behind daily. WordPress is
-  still live and still counting, and that script already asks it for exactly these
-  numbers, so it writes `data/views.json` too. No Cloudflare, no credential.
+  **It also keeps the committed file when the counter answers with FEWER pages
+  than that file already carries**, which is the same failure wearing a 200, and
+  it is the state a freshly deployed Worker is in — it returns the handful of rows
+  real readers have created since it went up, which would replace 2230 numbers on
+  the site with one. This nearly happened on deploy day: the empty-counter check
+  that was there did not fire, because by then the table held exactly one row.
+  Nothing ever deletes a row (`/seed` sets `legacy`, a hit increments `live`), so
+  the key count only ever grows and a drop means unseeded, half-restored or
+  wrongly-bound — never news about the site. It does not block the numbers going
+  up, and it unblocks itself on the next seed.
 
-  The bridge **retires itself** — `fetch/ViewCounts.java` runs after it in the
-  same job, so the Worker's `legacy + live` wins the moment the route answers.
-  Two things follow: re-run `--seed` when the Worker goes up, or its `legacy`
-  snapshot will be older than what the bridge was already showing and the number
-  on the page will visibly DROP; and the bridge lives in `transfer/` because it
-  reads WordPress, so it dies at cutover together with the workflow step and the
-  second cron entry that exist only for it. Don't move it to `fetch/`.
-
-  The workflow has **two cron entries** for the same reason: reading the Worker is
-  one request and can be six-hourly, while the bridge is ~2200 requests against
-  foojay.io's live WordPress and runs once a day. The step keys off
-  `github.event.schedule` to tell them apart.
+  **The WordPress bridge that used to run before it is gone** (deploy day, 2026-08-24).
+  While no Worker answered the route, `sync-view-counts.yml` ran
+  `transfer/LegacyViews.java --write-views` once a day so the counts kept moving
+  instead of being frozen at the last seed, on a second cron entry of its own.
+  The Worker's `legacy + live` supersedes it, so the step and that entry were
+  deleted and the schedule is one six-hourly line again. WordPress does keep
+  counting until it is switched off; catching that up is the manual `--seed` on
+  the cutover list, and deliberately not a CI job — pushing a new baseline needs
+  `SEED_TOKEN`, which CI has no business holding.
 - **`scripts/cleanup/HeadingAnchors.java`**: one-off migration that removed the
   WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
   stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id
@@ -635,18 +643,16 @@ should catch a mistake at PR time rather than letting it fail silently.
    Then run the comment import (see the script's entry above and README
    "Comments"); nothing here has been run against GitHub yet, so treat both the
    import and the widget as reviewed-but-untested.
-   **Views** are built (see "read counter" below) but the Worker is **not
-   deployed** — the templates, both scripts and the Worker source are in the
-   repo and the WordPress numbers are captured in `data/legacy-views.json`, but
-   until someone runs `wrangler deploy` from `worker/views/` nothing is counted
-   and `data/views.json` stays `{}` (the partial then renders nothing, which is
-   the correct degradation, not a bug). Four steps, all in
-   `worker/views/README.md`: create the D1 database, load `schema.sql`, set
-   `SEED_TOKEN`, deploy. Then `jbang scripts/transfer/LegacyViews.java --seed`. Do it
-   early rather than at cutover: the route can go up while WordPress is still
-   live (nothing in WP serves `/api/`), and a counter proven over weeks beats
-   one switched on the day it has to work. The GoatCounter scaffold that used to
-   live in `partials/stats.html` is gone — deleted, not migrated; it also
+   **Views are live** — the Worker was deployed and seeded on 2026-08-24 (2230
+   rows, 13.89M views), and every route was verified against
+   `foojay.io/api/views` on the day. What remains is only what was always going
+   to remain: **re-run `--seed` as late as possible before cutover**, because
+   WordPress keeps counting until it dies and `data/legacy-views.json` is the
+   only copy of those numbers. Two loose ends from it being deployed by IT rather
+   than from here: `wrangler.toml`'s `database_id` is still a placeholder, and
+   whether `SEED_TOKEN` was set can only be told apart from a wrong token by a
+   real seed attempt (`/seed` 401s either way). The GoatCounter scaffold that
+   used to live in `partials/stats.html` is gone — deleted, not migrated; it also
    carried an unwired share button, which nothing has replaced.
 8. ~~**17 `/pedia/` entries are missing**~~ — fixed. `content/pedia/` now holds
    all 47 the live site publishes. The one-off scraper that ported them was
