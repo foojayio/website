@@ -78,6 +78,7 @@ public class Frontmatter {
         problems.addAll(checkSeriesWeights(Path.of("content/pages")));
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs));
         problems.addAll(checkEvents(Path.of("data/events")));
+        problems.addAll(checkAds(Path.of("content/ads")));
         problems.addAll(checkImageWeight(Path.of("content")));
         problems.addAll(checkHeroImageStill(Path.of("content")));
 
@@ -773,6 +774,134 @@ public class Frontmatter {
      */
     static final Set<String> EVENT_KEYS = Set.of(
             "name", "type", "url", "start", "end", "venue", "city", "country", "online");
+
+    static final Set<String> AD_KEYS = Set.of(
+            "title", "description", "link", "cta", "image", "background", "sponsored",
+            "secondaryCta", "secondaryLink", "publishDate", "expiryDate");
+
+    static final Pattern HEX_COLOUR = Pattern.compile("#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})");
+
+    /**
+     * The home page banners in content/ads/. These are the only pages on the site
+     * with money attached, and every way one goes wrong is silent: a banner is
+     * never rendered as a page of its own, so nothing 404s and nothing errors --
+     * the slide simply comes out missing its picture, its label or its link, on the
+     * most-visited page of the site, and the advertiser is the one who notices.
+     */
+    static List<String> checkAds(Path adsDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(adsDir)) return problems;
+
+        List<Path> dirs;
+        try (Stream<Path> s = Files.list(adsDir)) {
+            dirs = s.filter(Files::isDirectory).sorted().toList();
+        }
+
+        for (Path dir : dirs) {
+            String slug = dir.getFileName().toString();
+            Path index = dir.resolve("index.md");
+
+            // A banner is a LEAF bundle: the creative has to sit next to the copy,
+            // which is the whole reason these live in content/ instead of data/.
+            // An _index.md would make it a branch bundle -- a section, whose child
+            // pages would each claim a URL.
+            if (!Files.isRegularFile(index)) {
+                problems.add(dir + ": no index.md (a banner is a page bundle:"
+                        + " content/ads/<slug>/index.md -- start from template/ad.md)");
+                continue;
+            }
+            if (!SLUG_FMT.matcher(slug).matches()) {
+                problems.add(dir + ": folder name '" + slug + "' is not a clean slug"
+                        + " (lowercase letters, digits and dashes only,"
+                        + " e.g. coderabbit-ai-code-review)");
+            }
+
+            Map<String, Object> fm = readFrontmatter(index);
+            if (fm == null) {
+                problems.add(index + ": no frontmatter block found (start from template/ad.md)");
+                continue;
+            }
+
+            for (String key : fm.keySet()) {
+                if (AD_KEYS.contains(key)) continue;
+                // `url:` is the one worth naming, because it is what a data file
+                // would have called this and it does not merely go unread: `url` is
+                // Hugo's OWN frontmatter key, so it would set the banner's page URL
+                // -- publishing the ad as a page at whatever path it names -- while
+                // the button it was meant to point at silently loses its target.
+                if (key.equals("url")) {
+                    problems.add(index + ": 'url' is Hugo's own frontmatter key and would give"
+                            + " this banner a page URL of its own -- the click target is 'link'");
+                    continue;
+                }
+                problems.add(index + ": unknown field '" + key + "' -- nothing reads it."
+                        + " Known fields: " + new TreeSet<>(AD_KEYS));
+            }
+
+            problems.addAll(checkRequired(index, fm, List.of("title", "link", "cta", "image", "background")));
+
+            if (fm.get("link") instanceof String link && !link.isBlank() && !link.startsWith("http")) {
+                problems.add(index + ": link '" + link + "' should be the advertiser's"
+                        + " full https:// address");
+            }
+
+            // The optional second button needs both halves: the template keys off
+            // secondaryCta, so a link with no label renders NOTHING -- the button
+            // silently does not exist -- while a label with no link renders a
+            // button pointing at the page it is already on.
+            boolean hasCta = fm.get("secondaryCta") instanceof String c && !c.isBlank();
+            boolean hasLink = fm.get("secondaryLink") instanceof String l && !l.isBlank();
+            if (hasCta != hasLink) {
+                problems.add(index + ": secondaryCta and secondaryLink go together --"
+                        + " '" + (hasCta ? "secondaryLink" : "secondaryCta") + "' is missing,"
+                        + " so the second button would render "
+                        + (hasCta ? "with nowhere to go" : "not at all"));
+            }
+            // An internal destination must be root-relative so relURL can apply the
+            // baseURL subpath. A bare "sustainability/..." resolves against
+            // whatever directory the page happens to be served from.
+            if (hasLink && fm.get("secondaryLink") instanceof String sl
+                    && !sl.startsWith("http") && !sl.startsWith("/")) {
+                problems.add(index + ": secondaryLink '" + sl + "' must start with '/'"
+                        + " (an internal path) or 'https://' (an external URL)");
+            }
+
+            // The creative is a bundle resource, so a name that does not match a
+            // file in this folder resolves to nothing at all: .Resources.GetMatch
+            // returns no resource and resource-url.html falls through to treating
+            // it as a path under the site root, which 404s.
+            if (fm.get("image") instanceof String img && !img.isBlank()
+                    && !img.startsWith("http") && !Files.isRegularFile(dir.resolve(img))) {
+                problems.add(index + ": image '" + img + "' is not a file in " + dir
+                        + " -- the creative belongs in the bundle, not hotlinked from the"
+                        + " advertiser's own host");
+            }
+
+            // The text colour is derived from this, so an unparseable value does not
+            // just lose the background -- it takes the contrast decision with it.
+            if (fm.get("background") instanceof String bg && !bg.isBlank()
+                    && !HEX_COLOUR.matcher(bg.trim()).matches()) {
+                problems.add(index + ": background '" + bg + "' is not a hex colour"
+                        + " (#RGB or #RRGGBB)");
+            }
+
+            if (fm.get("sponsored") != null && !(fm.get("sponsored") instanceof Boolean)) {
+                problems.add(index + ": sponsored must be true or false, not '"
+                        + fm.get("sponsored") + "'");
+            }
+
+            // publishDate/expiryDate are Hugo's own scheduling: a banner outside its
+            // window is dropped from the build. Hugo fails the build outright on an
+            // unparseable one, so this is only here to say which file and why.
+            LocalDate from = eventDate(index, "publishDate", fm.get("publishDate"), problems);
+            LocalDate till = eventDate(index, "expiryDate", fm.get("expiryDate"), problems);
+            if (from != null && till != null && !till.isAfter(from)) {
+                problems.add(index + ": expiryDate (" + till + ") is not after publishDate ("
+                        + from + ") -- the banner would never run");
+            }
+        }
+        return problems;
+    }
 
     static List<String> checkEvents(Path eventsDir) throws IOException {
         List<String> problems = new ArrayList<>();

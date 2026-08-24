@@ -718,15 +718,24 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   border: 1px solid var(--brand-accent);
   border-radius: var(--radius);
 }
-/* An eyebrow inside a highlight panel is a solid chip: --brand-accent-strong
-   on --brand-accent-soft is 4.22:1, i.e. accent-on-accent, and a chip reads as
-   the label it is anyway. --on-accent is 8.07 on it, in both schemes. */
-.highlight-panel .eyebrow {
-  background: var(--brand-accent); color: var(--on-accent);
-  padding: .2rem .65rem; border-radius: 999px;
-}
-/* The chip is its own marker -- the 22px accent tick would be accent-on-accent. */
-.highlight-panel .eyebrow::before { display: none; }
+/* An eyebrow inside a highlight panel is a LABEL, not a chip.
+
+   It used to be a solid accent pill, which solved a contrast problem and
+   created a worse affordance one: a filled, rounded, uppercase pill is exactly
+   what every clickable thing on this site looks like -- .btn, .chip-row a, the
+   category chips on a card, the pagination cells -- so "Most recent post" read
+   as a button that does nothing when clicked. An affordance that lies is worse
+   than low contrast, because the reader acts on it.
+
+   So the pill is gone and the contrast problem is solved the other way: the
+   text takes the panel's own --ink (9.4:1 on --brand-accent-soft) instead of
+   --brand-accent-strong, which is the token that could only manage 4.22 here.
+   The 22px tick comes back as the marker and takes --brand-accent-strong,
+   where a 3px bar of the lighter accent would have vanished into the tint.
+   Nothing else on the site draws a label this way, so it cannot be mistaken
+   for a control. */
+.highlight-panel .eyebrow { color: var(--ink); }
+.highlight-panel .eyebrow::before { background: var(--brand-accent-strong); }
 
 /* Lead / featured card -- the most recent post.
 
@@ -776,27 +785,35 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   font-family: var(--font-display); font-weight: 700; font-size: .88rem;
   color: var(--brand-accent-strong);
 }
-/* Sidebar sponsor widget (partials/sidebar-sponsors.html). Tier drives the
-   logo size as well as the order, so gold reads first and largest -- the
-   sidebar counterpart to the tier grouping on /our-sponsors/. */
-.sponsor-side-list { display: grid; gap: .1rem; }
-.sponsor-side {
-  display: flex; align-items: center; gap: .7rem;
-  padding: .45rem 0;
-  color: var(--ink-soft);
+/* Sidebar sponsor widget (partials/sidebar-sponsors.html).
+
+   One ROW PER TIER, not one row per sponsor: seven logo+name rows ran ~420px in
+   a sticky column that also holds the TOC and a banner, so bronze fell below the
+   fold. Tier drives the logo size as well as the order, so gold still reads
+   first and largest -- the sidebar counterpart to the tier grouping on
+   /our-sponsors/. */
+.sponsor-tiers { display: grid; gap: .55rem; }
+.sponsor-tier__label {
+  margin: 0 0 .25rem;
+  font-family: var(--font-display); font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--ink-muted);
 }
+/* The tier's own colour on the caption, which is where the gold/silver/bronze
+   tokens now do the work the per-sponsor <em> used to. */
+.sponsor-tier--gold   .sponsor-tier__label { color: var(--tier-gold); }
+.sponsor-tier--silver .sponsor-tier__label { color: var(--tier-silver); }
+.sponsor-tier--bronze .sponsor-tier__label { color: var(--tier-bronze); }
+/* Wraps rather than scrolls: a tier gaining a sponsor should make the row two
+   lines, not hide one off the edge of a 300px column. */
+.sponsor-tier__row { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+.sponsor-side { display: block; color: var(--ink-soft); }
 .sponsor-side:hover { color: var(--brand-accent-strong); }
-.sponsor-side__text strong { display: block; font-size: .95rem; font-weight: 600; line-height: 1.25; }
-.sponsor-side__text em { font-style: normal; font-size: .78rem; color: var(--ink-muted); }
-/* Sized per tier. The tile itself is square-ish and the logo is object-fit:
-   contain (see .sponsor-logo), so wordmarks and icon marks stay comparable. */
+/* Sized per tier. The tile is square-ish and the logo is object-fit: contain
+   (see .sponsor-logo), so wordmarks and icon marks stay comparable. */
 .sponsor-logo--side { width: 44px; height: 44px; padding: .3rem; flex: 0 0 auto; border-radius: 8px; }
-.sponsor-side--gold   .sponsor-logo--side { width: 64px; height: 64px; }
-.sponsor-side--silver .sponsor-logo--side { width: 52px; height: 52px; }
+.sponsor-side--gold   .sponsor-logo--side { width: 62px; height: 62px; }
+.sponsor-side--silver .sponsor-logo--side { width: 50px; height: 50px; }
 .sponsor-side--bronze .sponsor-logo--side { width: 42px; height: 42px; }
-.sponsor-side--gold   .sponsor-side__text em { color: var(--tier-gold); font-weight: 600; }
-.sponsor-side--silver .sponsor-side__text em { color: var(--tier-silver); font-weight: 600; }
-.sponsor-side--bronze .sponsor-side__text em { color: var(--tier-bronze); font-weight: 600; }
 
 /* "On this page" table of contents + scroll-spy (partials/toc.html,
    static/js/toc.js). Nested for h2 > h3 (Hugo's default TOC levels). */
@@ -2611,4 +2628,225 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   .series-nav { grid-template-columns: 1fr; }
   .series-nav__card--next { grid-column: 1; text-align: left; }
   .series-nav__spacer { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Banner adverts (content/ads/, partials/ad-slide.html).
+
+   Two placements, one card: the home page carousel below the most recent post
+   (.ad--wide) and one banner in the sidebar above the sponsor tiers
+   (.ad--side). The ground colour and the text colour come in as --ad-bg and
+   --ad-ink from the template -- --ad-ink is DERIVED from --ad-bg by
+   partials/ad-ink.html, so the pair is always readable and there is no second
+   colour stored per banner.
+
+   Everything inside the card is `color: inherit` off --ad-ink rather than a
+   palette token: the ground is the ADVERTISER'S colour, not one of ours, so
+   --ink-soft or --brand-accent-strong on top of it is a contrast pair nothing
+   has checked. This is the one block on the site that deliberately opts out of
+   the theme's ink ramp, and it is also why it does not change between light and
+   dark: an advertiser's banner is the same artwork in both.
+   --------------------------------------------------------------------------- */
+.ad {
+  background: var(--ad-bg, var(--surface-sunken));
+  color: var(--ad-ink, var(--ink));
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  min-width: 0;
+}
+.ad__img { flex: none; display: flex; align-items: center; justify-content: center; }
+.ad__img img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.ad__body { display: flex; flex-direction: column; min-width: 0; }
+.ad__title {
+  font-family: var(--font-display); font-weight: 700; margin: 0;
+  color: inherit; text-wrap: balance;
+}
+.ad__desc { margin: 0; color: inherit; opacity: .85; }
+.ad__foot { margin-top: auto; display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .9rem; }
+
+/* The button is the site's accent, not the advertiser's ground: it has to read
+   as a button on any colour a sponsor sends, and --brand-accent is the one
+   brand fill that does not invert between the schemes (8.57 on the dark
+   surface, and --on-accent is correct on it in both). */
+/* EVERY BUTTON RULE IS SCOPED UNDER .ad, AND THAT IS SPECIFICITY, NOT TIDINESS.
+
+   A banner in the sidebar renders inside <ul class="ad-carousel__track"><li>,
+   so `.sidebar li a` (0,1,2) matches the buttons and outranks a lone `.ad__btn`
+   (0,1,0). Two visible faults came from that one collision, and both looked like
+   separate bugs:
+
+     display: block   killed the flex row, so the arrow dropped onto a second
+                      line under its own label.
+     color: --ink-soft  replaced the button's own label colour. In dark mode
+                      --ink-soft is #c3cfd5, a near-white, on the light blue
+                      --brand-accent fill: about 1.5:1, i.e. an invisible label.
+
+   `.ad .ad__btn` is (0,2,0) and wins on class count regardless of source order.
+   Same trap and same fix as `.featured-side__social` further up, and the same
+   one the `.prose` rules carry -- a single class does not beat a class plus two
+   type selectors. Scope any new banner rule the same way. */
+.ad .ad__btn {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--brand-accent); color: var(--on-accent);
+  font-family: var(--font-display); font-weight: 700; font-size: .9rem;
+  padding: .5rem .9rem; border-radius: 999px; text-decoration: none;
+  /* nowrap on both axes: the label must not break, and the arrow must not be
+     pushed onto a line of its own when the button is squeezed. */
+  white-space: nowrap; flex-wrap: nowrap;
+}
+.ad .ad__btn:hover { background: var(--brand-accent-strong); color: var(--on-accent-strong); text-decoration: none; }
+/* The optional second button. Outlined in the banner's OWN ink rather than a
+   palette token, for the same reason the copy is: the ground is the
+   advertiser's colour, so currentColor is the only border that is guaranteed to
+   read on it. Keeping the fill for the primary button is what stops two equal
+   buttons competing -- this one is the softer of the two by construction. */
+.ad .ad__btn--ghost {
+  background: none; color: inherit;
+  border: 1px solid currentColor;
+}
+.ad .ad__btn--ghost:hover { background: rgba(127, 127, 127, .16); color: inherit; }
+.ad .ad__btn-arrow { flex: none; }
+.ad__label {
+  display: inline-flex; align-items: center; gap: .3rem; margin: 0;
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .07em;
+  color: inherit; opacity: .75; white-space: nowrap;
+}
+.ad__label svg { flex: none; }
+
+/* --- Home page carousel (partials/ads-carousel.html) --------------------- */
+
+/* One slide at a time, scroll-snapped. This IS the carousel: with JavaScript
+   off it swipes and trackpad-scrolls, and ad-carousel.js only adds the arrows,
+   the dots and the autoplay on top. */
+.ad-carousel { position: relative; }
+/* .ad-carousel .ad-carousel__track, not the bare class: in the sidebar this <ul>
+   is matched by `.sidebar ul` (0,1,1), which sets gap: .1rem -- and a lone class
+   (0,1,0) loses to it, so the gap survived and left a sliver of the next banner
+   beside the snapped one. */
+.ad-carousel .ad-carousel__track {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 100%;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  /* Explicitly hidden: `overflow-x: auto` alone computes overflow-y to auto too,
+     which is what would add a vertical scrollbar once the height below starts
+     clipping a taller neighbouring slide. */
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  /* The row is one banner wide, so a horizontal scrollbar under it is chrome for
+     a control the arrows already provide. */
+  scrollbar-width: none;
+  /* Each slide keeps its NATURAL height instead of being stretched to the
+     tallest one. A grid row is as tall as its tallest item, so without this
+     every banner was drawn at the height of the longest copy in the set -- and
+     the arrows, centred on the container, floated over the empty space below a
+     short one. ad-carousel.js then sets an explicit height per slide (see
+     `fit()`), and this transition is what keeps that from being a jump.
+
+     With JavaScript off there is no explicit height and the container falls
+     back to the tallest slide, which is the correct degradation: every banner is
+     fully visible, just with more room under the short ones. */
+  align-items: start;
+  transition: height .28s ease;
+  /* Explicitly 0, because in the sidebar this <ul> is also matched by
+     `.sidebar ul` (0,1,1), which sets gap: .1rem -- enough to leave a sliver of
+     the next banner showing beside the snapped one. */
+  gap: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ad-carousel .ad-carousel__track { transition: none; }
+}
+.ad-carousel .ad-carousel__track::-webkit-scrollbar { display: none; }
+.ad-carousel__slide { scroll-snap-align: start; min-width: 0; }
+
+/* Extra inline padding leaves the overlaid arrows their own gutter, so a 2rem
+   button at the left edge never sits on top of the creative or the CTA. */
+.ad--wide {
+  align-items: center; gap: clamp(1rem, 2.5vw, 2rem);
+  padding: clamp(1.1rem, 2.2vw, 1.6rem);
+  padding-inline: clamp(2.9rem, 3.5vw, 3.4rem);
+}
+.ad--wide .ad__img { width: clamp(76px, 12vw, 132px); }
+.ad--wide .ad__body { gap: .5rem; }
+.ad--wide .ad__title { font-size: clamp(1.05rem, 1.9vw, 1.5rem); line-height: 1.25; }
+.ad--wide .ad__desc { font-size: .93rem; line-height: 1.5; }
+.ad--wide .ad__foot { padding-top: .3rem; }
+
+/* The arrows sit OVER the banner at its left and right edges, not in a row
+   below it. Below the card they read as navigation for the whole section rather
+   than for the banner, and they cost a strip of vertical space on both
+   placements -- which the sidebar column does not have to give. They are
+   `hidden` in the markup and revealed by the script.
+
+   A translucent white ground rather than a palette token: they overlay the
+   ADVERTISER'S colour, which can be anything, so a fixed --surface pill would
+   float on some banners and vanish into others. The dark glyph plus the light
+   ground survives both, and the backdrop-blur keeps the arrow legible over a
+   busy creative. */
+.ad-carousel { position: relative; }
+.ad-carousel__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; padding: 0;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(255, 255, 255, .82); color: #06232f;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  box-shadow: var(--shadow-sm);
+}
+.ad-carousel__arrow:hover { background: #fff; }
+.ad-carousel__arrow--prev { left: .5rem; }
+.ad-carousel__arrow--next { right: .5rem; }
+
+/* Smaller arrows in the 300px column, and tucked tighter to the edge. */
+.ad-carousel--side .ad-carousel__arrow { width: 1.6rem; height: 1.6rem; }
+.ad-carousel--side .ad-carousel__arrow--prev { left: .25rem; }
+.ad-carousel--side .ad-carousel__arrow--next { right: .25rem; }
+
+
+/* --- Sidebar slot (partials/ads-widget.html) ----------------------------- */
+
+/* No .widget chrome: the card supplies its own ground and padding, and a
+   heading over it would repeat what the "Sponsored Content" label already
+   says. */
+/* .sidebar .widget-ad, not .widget-ad: `.sidebar .widget` is (0,2,0) and a lone
+   class is (0,1,0), so the banner was being drawn inside the sunken, bordered,
+   1.15rem-padded widget box on top of its own ground -- a frame around a card
+   that already is one. Third instance of the same collision in this block; see
+   the note on .ad .ad__btn. */
+.sidebar .widget-ad { padding: 0; background: none; border: 0; }
+.ad--side { flex-direction: column; gap: .6rem; padding: 1rem; padding-inline: 1.9rem; }
+.ad--side .ad__img { width: 100%; max-height: 140px; align-self: center; }
+.ad--side .ad__img img { max-height: 140px; width: auto; max-width: 100%; }
+.ad--side .ad__title { font-size: 1rem; line-height: 1.3; }
+.ad--side .ad__desc {
+  font-size: .85rem; line-height: 1.45;
+  /* The sidebar is a narrow column that also carries the TOC and the sponsor
+     tiers; a 240-character pitch would push the sponsors off the screen. */
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* In a ~300px column the buttons and the label cannot share a row: the button
+   is a flex line of label + arrow, and once the row had to wrap the arrow
+   dropped onto a second line on its own, under its own label. Stacking the foot
+   makes each button a full-width block with the arrow inline beside its text,
+   which is also a bigger tap target than a shrink-wrapped pill. */
+/* margin-top overrides .ad__foot's `margin-top: auto`, which does nothing here
+   anyway: the side card's height follows its content, so there is no free space
+   for an auto margin to absorb and the buttons sat tight under the description.
+   The wide variant keeps `auto`, where it does push the foot to the bottom of a
+   two-column card. */
+.ad--side .ad__foot {
+  flex-direction: column; align-items: stretch; gap: .45rem;
+  margin-top: .55rem;
+}
+.ad--side .ad__btn {
+  font-size: .82rem; padding: .45rem .8rem;
+  justify-content: center;
+}
+.ad--side .ad__label { justify-content: center; margin-top: .1rem; }
+
+/* On a phone the wide banner stacks: the creative and two columns of text at
+   360px leaves the headline four words to a line. */
+@media (max-width: 34rem) {
+  .ad--wide { flex-direction: column; align-items: flex-start; }
+  .ad--wide .ad__img { width: auto; max-width: 55%; align-self: center; }
 }

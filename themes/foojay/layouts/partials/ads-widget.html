@@ -1,0 +1,52 @@
+{{- /* The banner carousel in the sidebar, above "Thanks to our sponsors".
+
+       NOT ON THE HOME PAGE. The band under the most recent post is already
+       showing the same campaigns a few hundred pixels to the left, and the same
+       three banners twice on one screen reads as a bug -- and halves what each
+       impression is worth. This is the mirror image of
+       featured-authors-widget.html, which renders ONLY on the home page for the
+       same non-duplication reason.
+
+       Sits above the sponsor tiers and, like them, is NOT subject to the
+       TOC-height cull further down partials/sidebar.html: a paid placement that
+       disappears on every post long enough to have headings is a placement
+       missing from most of the site.
+
+       data-pagefind-ignore="all" HERE rather than relying on the enclosing
+       <aside>, for two reasons. The asides carry the BARE attribute, i.e. the
+       default "index", which drops text but still lets Pagefind harvest metadata
+       -- and its automatic result thumbnail is the first <img> in the body, so
+       21 pages with no image of their own took a banner as their search-result
+       picture. And three of the columns this now renders in
+       (pedia/single.html, _default/single.html, sponsor/section.html) are not
+       built from partials/sidebar.html at all, so the guarantee has to travel
+       with the banner rather than with any one container.
+
+       A CAROUSEL, not a single banner, so every campaign is reachable from every
+       post rather than one advertiser owning a given URL outright.
+
+       THE STARTING SLIDE IS DERIVED FROM THE PAGE, and that is what makes the
+       rotation fair: the list is ROTATED so that
+       `mod (hash.FNV32a .RelPermalink) (len ads)` leads. It is stable for a
+       given URL -- a post always opens on the same banner, so a cached page and
+       a fresh one agree and nothing flickers -- while ACROSS the 2147 posts each
+       campaign leads an even share of them. Rotating server-side rather than
+       scrolling the track in JavaScript means the first banner is correct in the
+       HTML, with no jump after paint and no dependence on JavaScript at all.
+       Same derivation post-thumb.html uses to colour a category. */ -}}
+
+{{- if not .IsHome -}}
+{{- $ads := partialCached "ads-active.html" "ads" -}}
+{{- with $ads }}
+{{- $n := len . -}}
+{{- $start := mod (hash.FNV32a $.RelPermalink) $n -}}
+{{- $rotated := . -}}
+{{- if gt $start 0 -}}
+  {{- $rotated = (after $start .) | append (first $start .) -}}
+{{- end }}
+<section class="widget widget-ad" data-pagefind-ignore="all" aria-label="Sponsored content">
+  {{ partial "ad-track.html" (dict "ads" $rotated "variant" "side") }}
+</section>
+{{ partial "ad-carousel-js.html" . }}
+{{ end -}}
+{{- end -}}

@@ -1,0 +1,41 @@
+{{- /* The home page banner carousel, below the most recent post.
+
+       data-pagefind-ignore="all" is LOAD-BEARING, not tidiness. Rendering is off
+       for content/ads/, so a banner has no page of its own for the search index
+       -- but the moment this partial draws them, that copy is inside
+       <main data-pagefind-body> and becomes searchable text credited to the home
+       page. A reader searching "code review" would get the home page as a hit on
+       an advert.
+
+       AND IT MUST BE "all", NOT THE BARE ATTRIBUTE. The default value is
+       "index", which drops the text but still lets Pagefind harvest METADATA
+       from inside the block -- and Pagefind's automatic result thumbnail is the
+       first <img> in the body. Measured, not assumed: with the bare attribute,
+       21 pages whose own content has no image (the Quick Start steps, pedia
+       entries) took the Azul banner as their search-result picture, so a search
+       for "compact profiles" came back illustrated with an advert. Pages with a
+       hero of their own were unaffected, which is exactly what makes it the kind
+       of bug nobody notices.
+
+       Renders NOTHING when no campaign is running, the way the podcast and
+       events bands do. An empty carousel with arrows that do nothing is worse
+       than no band at all.
+
+       Not Splide, which is what the WordPress site loads: a one-at-a-time band
+       is scroll-snap plus a scrollTo, and a third-party carousel on the
+       most-visited page of the site is 40 KB and someone else's release cadence
+       for something CSS already does. */ -}}
+
+{{- $ads := partialCached "ads-active.html" "ads" -}}
+{{- with $ads }}
+{{/* Not a band/shell wrapper: this sits INSIDE .content-col next to the post
+     grid, where a full-width band would break out of the column. */}}
+<section class="ad-band" data-pagefind-ignore="all" aria-label="Sponsored content">
+  {{/* No "Do you want your ad here?" line. WordPress puts one under the
+       carousel behind a modal, but the reader it interrupts is here for the
+       articles, and /our-sponsors/ (linked from the footer, the nav and the
+       sidebar) is where the prospectus and the contact address already live. */}}
+  {{ partial "ad-track.html" (dict "ads" . "variant" "wide") }}
+</section>
+{{ partial "ad-carousel-js.html" . }}
+{{ end -}}

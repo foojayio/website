@@ -1,0 +1,76 @@
+{{- /* The text colour for a banner, DERIVED from its background.
+
+       Params: bg (a #RGB or #RRGGBB string). Returns "#000000" or "#ffffff".
+
+       A banner stores one colour -- the advertiser's own ground, which nothing
+       can work out -- and this picks the label colour that reads on it. The live
+       WordPress banners carry an inline `color:` on the title, the description
+       and the "Sponsored Content" label, i.e. three copies of a decision that
+       follows from the background: #EEEEE3 got black and #29184e got white. A
+       stored foreground is a second colour to pick, a third and fourth place to
+       keep it in step, and a way to ship an unreadable pair on the page foojay
+       is paid for.
+
+       It is real WCAG relative luminance, not a "is this hex big" guess:
+       channels are linearised before weighting, and the winner is whichever of
+       black or white has the higher contrast RATIO against the ground. A
+       mid-tone advertiser colour is exactly where the cheap version picks wrong,
+       and #808080 is a fair coin toss that has to land on the readable side.
+
+       An unparseable value falls back to white on the assumption of a dark
+       ground -- but it never gets here silently:
+       validate/Frontmatter.java's checkAds fails the PR on a background that is
+       not a hex colour. */ -}}
+
+{{- $bg := lower (strings.TrimPrefix "#" (.bg | default "")) -}}
+
+{{- /* #abc is shorthand for #aabbcc -- expand it so one code path reads the
+       channels. */ -}}
+{{- if eq (len $bg) 3 -}}
+  {{- $x := "" -}}
+  {{- range $i := seq 0 2 -}}
+    {{- $c := substr $bg $i 1 -}}
+    {{- $x = printf "%s%s%s" $x $c $c -}}
+  {{- end -}}
+  {{- $bg = $x -}}
+{{- end -}}
+
+{{- $ink := "#ffffff" -}}
+
+{{- /* Hex digit -> value. `strings.Index` is Go stdlib, not one of Hugo's
+       strings functions, so the lookup is a map: a digit that is not in it comes
+       back nil, which is the parse failure. */ -}}
+{{- $hexval := dict
+      "0" 0 "1" 1 "2" 2 "3" 3 "4" 4 "5" 5 "6" 6 "7" 7
+      "8" 8 "9" 9 "a" 10 "b" 11 "c" 12 "d" 13 "e" 14 "f" 15 -}}
+
+{{- if eq (len $bg) 6 -}}
+  {{- $lum := 0.0 -}}
+  {{- $ok := true -}}
+  {{- /* Channel weights in R,G,B order -- the eye is far more sensitive to
+         green, which is why a light green ground needs dark text where a dark
+         blue one of the same "size" does not. */ -}}
+  {{- $weights := slice 0.2126 0.7152 0.0722 -}}
+  {{- range $n, $w := $weights -}}
+    {{- $hi := index $hexval (substr $bg (mul $n 2) 1) -}}
+    {{- $lo := index $hexval (substr $bg (add (mul $n 2) 1) 1) -}}
+    {{- if or (eq $hi nil) (eq $lo nil) -}}
+      {{- $ok = false -}}
+    {{- else -}}
+      {{- $c := div (float (add (mul $hi 16) $lo)) 255.0 -}}
+      {{- /* sRGB -> linear light. */ -}}
+      {{- $lin := cond (le $c 0.04045) (div $c 12.92) (math.Pow (div (add $c 0.055) 1.055) 2.4) -}}
+      {{- $lum = add $lum (mul $w $lin) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $ok -}}
+    {{- /* Contrast ratio against each candidate; the brighter option for a dark
+           ground and vice versa, decided by the ratio rather than by a
+           threshold picked by eye. */ -}}
+    {{- $vsWhite := div 1.05 (add $lum 0.05) -}}
+    {{- $vsBlack := div (add $lum 0.05) 0.05 -}}
+    {{- $ink = cond (ge $vsBlack $vsWhite) "#000000" "#ffffff" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $ink -}}

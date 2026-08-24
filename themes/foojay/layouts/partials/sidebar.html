@@ -4,6 +4,13 @@
 
   {{ partial "toc.html" . }}
 
+  {{/* One paid banner, above the sponsor tiers. Like them it survives the
+       TOC-height cull below -- a placement that vanishes on every post long
+       enough to have headings is missing from most of the site. Which banner is
+       derived from this page's URL, so it is stable per page and evenly shared
+       across the archive; see the partial. */}}
+  {{ partial "ads-widget.html" . }}
+
   {{/* Built from content/sponsors/ -- see the partial for why it sits here and
        why it survives the TOC-height cull below. */}}
   {{ partial "sidebar-sponsors.html" . }}

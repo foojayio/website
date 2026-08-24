@@ -1,0 +1,59 @@
+{{- /* The carousel itself: the scroll-snap track, the slides and the controls.
+
+       Params: ads (slice of ad Pages), variant ("wide" for the home page band,
+       "side" for the sidebar column).
+
+       ONE definition, two placements. The home page band and the sidebar column
+       are the same mechanism at two widths -- same snap behaviour, same arrows,
+       same dots, same autoplay -- so a second copy would be two places to fix a
+       scroll bug and two chances for them to behave differently. Only the card's
+       proportions differ, and that is CSS (.ad--wide / .ad--side).
+
+       The track works with no JavaScript: it is a scroll-snap row, so it swipes
+       on a phone and trackpad-scrolls on a desktop. static/js/ad-carousel.js
+       adds the arrows and the autoplay, and they start `hidden` so nobody is
+       offered a button that does nothing. Same posture as /calendar/'s toolbar.
+
+       Arrows only, no dot row: with three banners the dots said little the
+       arrows did not, and they cost a strip of height under every banner on
+       both placements -- in the sidebar, height that the sponsor tiers below
+       need more. Position is read from the scroll, so nothing depended on
+       them. */ -}}
+
+{{- $ads := .ads -}}
+{{- $variant := .variant | default "wide" -}}
+{{- with $ads }}
+<div class="ad-carousel ad-carousel--{{ $variant }}" data-ad-carousel>
+  <ul class="ad-carousel__track" data-ad-track>
+    {{- range . }}
+    <li class="ad-carousel__slide">
+      {{ partial "ad-slide.html" (dict "page" . "class" (printf "ad--%s" $variant)) }}
+    </li>
+    {{- end }}
+  </ul>
+
+  {{- /* One banner needs no arrows. */}}
+  {{- if gt (len .) 1 }}
+  {{- /* The arrows sit OVER the banner, one at each edge, rather than in a row
+         underneath it: below the card they read as page navigation for the
+         section and cost a strip of vertical space on both placements -- which
+         the sidebar column in particular does not have. Overlaid, they are
+         unmistakably the banner's own control. They are outside the track, not
+         inside it, so they do not scroll away with the slides. */}}
+  <button class="ad-carousel__arrow ad-carousel__arrow--prev" data-ad-prev type="button"
+          aria-label="Previous banner" hidden>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M12.667 8H3.333M8 12.667 3.333 8 8 3.333" stroke="currentColor"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button class="ad-carousel__arrow ad-carousel__arrow--next" data-ad-next type="button"
+          aria-label="Next banner" hidden>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3.333 8h9.334M8 3.333 12.667 8 8 12.667" stroke="currentColor"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  {{- end }}
+</div>
+{{- end }}

@@ -18,16 +18,6 @@ Legend: **[BLOCKER]** must be done or decided before cutover day.
 These are open items in the repo, not cutover mechanics. Each one is something
 that silently gets worse or gets lost if cutover happens without it.
 
-- [ ] **[BLOCKER] Decide what happens to the paid homepage banner carousel.**
-      The live WP home page opens with a Splide carousel of "Sponsored Content"
-      slides (CodeRabbit, Azul, the Sustainability eBook). This is the homepage
-      banner benefit the sponsor tiers actually sell — 10/year gold, 6 silver, 3
-      bronze — and **nothing in this repo replaces it**. Cutting over without it
-      silently drops something sponsors have paid for. See gap #9 in `CLAUDE.md`
-      for the data model it wants (`data/sponsor-campaigns.yaml`, campaign-shaped
-      with date windows, not sponsor-shaped) and the open question of whether
-      impression/click tracking has to come with it.
-
 - [ ] **[BLOCKER] Deploy the view counter Worker**, and do it *weeks* early, not
       on the day. Four steps in `worker/views/README.md`: create the D1
       database, load `schema.sql`, set `SEED_TOKEN`, `wrangler deploy`. Nothing

@@ -6,32 +6,74 @@
        an older scaffold that read a `params.sponsors` list from hugo.toml which
        was never populated -- meaning the widget silently rendered nothing.
 
-       Tier does two things here: it sets the ORDER (via sponsors-ordered.html
-       -- gold, silver, bronze, alphabetical within each) and the SIZE (gold
-       logos largest, bronze smallest), so the placement visibly reflects what
-       each tier pays for -- the sidebar equivalent of the tier grouping on
-       /our-sponsors/.
+       ROWS PER TIER, not one row per sponsor. As a vertical list of seven
+       logo+name+tier rows this was ~420px of a sticky column that also carries
+       the table of contents and a banner, so the lower tiers sat below the fold
+       on most screens -- the opposite of what a sponsor pays for. Grouped, the
+       same seven sponsors are three rows of logos in about half the height, and
+       every tier is visible at once.
+
+       Tier still does both jobs it did before: it sets the ORDER (gold, silver,
+       bronze, alphabetical within each) and the SIZE (gold largest), so the
+       placement visibly reflects what each tier pays for -- the sidebar
+       equivalent of the tier grouping on /our-sponsors/. What went is the
+       per-sponsor NAME and tier caption: the row now says the tier once instead
+       of repeating it on every logo, and the logo's alt text still carries the
+       sponsor's name, so the link keeps its accessible name and its tooltip.
+
+       Order comes from sponsors-ordered.html rather than being re-derived here,
+       which is also what preserves its guarantee that a sponsor on a tier
+       missing from `tiers` is appended rather than silently dropped -- the
+       untiered row at the bottom.
 
        Unlike the authors/JUGs widgets, this is NOT dropped on pages with a
        table of contents: sponsor visibility is contractual, so it stays on
-       every page the sidebar appears on. It's placed directly under the TOC for
-       that reason. */ -}}
+       every page the sidebar appears on. It sits under the TOC and the banner
+       slot for that reason. */ -}}
 {{- $section := site.GetPage "/sponsors" -}}
 {{- with $section -}}
 {{- $ordered := partial "sponsors-ordered.html" . -}}
 {{- with $ordered }}
+{{- $known := slice -}}
+{{- range $section.Params.tiers }}{{ $known = $known | append .name }}{{ end -}}
 <section class="widget widget-sponsors">
   <h4>Thanks to our sponsors</h4>
-  <div class="sponsor-side-list">
-    {{ range . }}
-    <a class="sponsor-side sponsor-side--{{ .Params.tier | default "other" }}" href="{{ .RelPermalink }}">
-      {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--side") }}
-      <span class="sponsor-side__text">
-        <strong>{{ .Title }}</strong>
-        {{ with .Params.tier }}<em>{{ title . }}</em>{{ end }}
-      </span>
-    </a>
-    {{ end }}
+  <div class="sponsor-tiers">
+    {{- /* Named loop variable, not `.`: the `with` below rebinds the dot, and
+           inside a partial `$` is the PAGE, not the tier -- so `$.name` there
+           resolves against the page and fails the build. */}}
+    {{- range $tier := $section.Params.tiers }}
+    {{- $inTier := where $ordered "Params.tier" $tier.name }}
+    {{- with $inTier }}
+    <div class="sponsor-tier sponsor-tier--{{ $tier.name }}">
+      <p class="sponsor-tier__label">{{ $tier.label | default (title $tier.name) }}</p>
+      <div class="sponsor-tier__row">
+        {{- range . }}
+        <a class="sponsor-side sponsor-side--{{ .Params.tier | default "other" }}" href="{{ .RelPermalink }}" title="{{ .Title }}">
+          {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--side") }}
+        </a>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+    {{- end }}
+
+    {{- /* Anything on a tier that is not in the list. Rendered rather than
+           dropped, for the same reason sponsors-ordered.html appends them: a
+           tier renamed upstream must not make a paying sponsor disappear from
+           the sidebar with nothing to show that it happened. */}}
+    {{- $untiered := where $ordered "Params.tier" "not in" $known }}
+    {{- with $untiered }}
+    <div class="sponsor-tier sponsor-tier--other">
+      <div class="sponsor-tier__row">
+        {{- range . }}
+        <a class="sponsor-side sponsor-side--other" href="{{ .RelPermalink }}" title="{{ .Title }}">
+          {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--side") }}
+        </a>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
   </div>
   <a class="view-all" href="{{ $section.RelPermalink }}">View all sponsors</a>
 </section>

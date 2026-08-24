@@ -23,6 +23,11 @@
 
     {{ with $lead }}{{ partial "post-card-lead.html" . }}{{ end }}
 
+    {{/* Directly under the most recent post, above the grid -- the paid slot the
+         sponsor tiers actually sell (10 banners a year for gold, 6 silver, 3
+         bronze). Renders nothing when no campaign is running. */}}
+    {{ partial "ads-carousel.html" . }}
+
     <div class="post-grid">
       {{/* 10, not 9: with the lead card above taking the full width, the grid
            below is 2 columns in the sidebar layout at common window widths, and

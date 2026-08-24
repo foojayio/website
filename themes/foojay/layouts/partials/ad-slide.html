@@ -1,0 +1,83 @@
+{{- /* One banner, in the shape both placements share: ground colour, creative,
+       headline, description, button, "Sponsored Content" label.
+
+       Params: page (the ad Page), class (extra class on the root).
+
+       One partial rather than two copies, because a slide and a sidebar card are
+       the same six fields and the same three derivations -- the text colour, the
+       label, and the fact that a missing creative must not leave a hole. The
+       CSS is what makes one wide and one narrow. */ -}}
+
+{{- $ad := .page -}}
+{{- $ink := partial "ad-ink.html" (dict "bg" $ad.Params.background) -}}
+{{- $img := "" -}}
+{{- with $ad.Params.image -}}
+  {{- $img = partial "resource-url.html" (dict "page" $ad "src" .) -}}
+{{- end -}}
+
+<div class="ad{{ with .class }} {{ . }}{{ end }}" style="--ad-bg: {{ $ad.Params.background }}; --ad-ink: {{ $ink }}">
+  {{- with $img }}
+  <div class="ad__img">
+    {{/* The creative is decorative: the headline next to it says the same thing,
+         so an empty alt keeps a screen reader from hearing the pitch twice.
+         onerror mirrors post-thumb.html -- a banner is the one image on the site
+         with money attached, and a broken-image glyph on the home page is worse
+         than a slide that is simply text. */}}
+    <img src="{{ . }}" alt="" loading="lazy" decoding="async" onerror="this.closest('.ad__img').remove()">
+  </div>
+  {{- end }}
+
+  <div class="ad__body">
+    <p class="ad__title">{{ $ad.Title }}</p>
+    {{- with $ad.Params.description }}
+    <p class="ad__desc">{{ . }}</p>
+    {{- end }}
+
+    <div class="ad__foot">
+      {{/* rel="sponsored" is the point of the label being data: Google asks for
+           it on paid links, and it follows from the same field that draws the
+           "Sponsored Content" line, so the two can't disagree. nofollow goes
+           with it on foojay's own promotions too -- neither is a link we are
+           vouching for editorially. */}}
+      {{- $sponsored := $ad.Params.sponsored | default true }}
+      <a class="ad__btn" href="{{ $ad.Params.link }}" target="_blank"
+         rel="noopener{{ if $sponsored }} sponsored{{ else }} nofollow{{ end }}">
+        {{ $ad.Params.cta }}
+        <svg class="ad__btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3.333 8h9.334M8 3.333 12.667 8 8 12.667" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      {{- /* An optional SECOND button, for a banner that has somewhere on foojay
+             to send a reader as well as off it -- the eBook links to its own
+             page here and to Leanpub above.
+
+             Internal destinations go through relURL, with the leading slash
+             stripped so the baseURL subpath applies (the same rule
+             resource-url.html follows): a literal "/sustainability-..." would
+             404 on the trial deploy, which serves everything under /website/.
+             An absolute http(s) URL is used verbatim and, being off-site, is the
+             only one that opens in a new tab and carries rel -- an internal link
+             should behave like every other internal link on the page. */ -}}
+      {{- with $ad.Params.secondaryCta }}
+        {{- $sl := $ad.Params.secondaryLink -}}
+        {{- $ext := or (hasPrefix $sl "http://") (hasPrefix $sl "https://") -}}
+        {{- $href := $sl -}}
+        {{- if not $ext }}{{ $href = $sl | strings.TrimPrefix "/" | relURL }}{{ end }}
+      <a class="ad__btn ad__btn--ghost" href="{{ $href }}"
+         {{- if $ext }} target="_blank" rel="noopener nofollow"{{ end }}>{{ . }}</a>
+      {{- end }}
+
+      {{- if $sponsored }}
+      <p class="ad__label">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M6 1l1.545 3.13L11 4.635l-2.5 2.435.59 3.44L6 8.885 2.91 10.51l.59-3.44L1 4.635l3.455-.505L6 1z"
+                stroke="#5EB761" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Sponsored Content
+      </p>
+      {{- end }}
+    </div>
+  </div>
+</div>

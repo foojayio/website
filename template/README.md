@@ -11,6 +11,7 @@ file you need, fill it in, open a pull request.
 | `page.md` | `content/pages/...` | A static site page. **Maintainers only**, not article contributors. |
 | `board-member.md` | `content/pages/board/<slug>.md` | An **Advisory Board member**. **Maintainers only.** |
 | `event.yaml` | `data/events/<event-slug>.yaml` | A **conference, workshop or other one-off** for `/calendar/`. (A JUG's own meetups need nothing here — they sync from the group's calendar.) |
+| `ad.md` | `content/ads/<ad-slug>/index.md` | A **sponsored banner** on the home page, creative in the same folder. **Maintainers only** — one folder per campaign, not per sponsor. |
 
 Full walkthrough: [How To Submit Your Next Article On Foojay.io](https://foojay.io/today/how-to-submit-your-next-article-on-foojay-io/).
 

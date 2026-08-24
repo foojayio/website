@@ -1,0 +1,13 @@
+{{- /* The carousel script tag, in one place so both placements load the same
+       file and neither has to remember to.
+
+       Loaded here rather than from baseof.html: a page without a banner has no
+       carousel, and the script would otherwise be fetched on all ~4000 pages.
+       Same reasoning as /sitemap/'s two scripts, and deferred for the same
+       reason -- there is no inline call that has to run at parse time.
+
+       Only one placement renders per page (the widget stands down on the home
+       page, and the band exists only there), so this appears once. ad-carousel.js
+       guards against a double init anyway, because "only one" is a property of
+       the current templates rather than of the script. */ -}}
+<script src="{{ "js/ad-carousel.js" | relURL }}" defer></script>

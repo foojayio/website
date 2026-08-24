@@ -184,6 +184,14 @@
     </div>
     {{ end }}
 
+    {{/* Same paid banner carousel the post sidebar carries (partials/sidebar.html).
+         This column is not built from that partial -- it holds only a table of
+         contents -- so the placement has to be added here too, or a reader on a
+         pedia entry, a Quick Start step or a sponsor profile sees a right column
+         with a gap where every other page has a banner. Renders nothing when no
+         campaign is running, and nothing on the home page. */}}
+    {{ partial "ads-widget.html" . }}
+
     <div class="widget">
       <h4>More sponsors</h4>
       <div class="sponsor-mini-list">
