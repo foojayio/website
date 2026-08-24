@@ -26,6 +26,7 @@ authors:
   - "betsy"
   - "daniel-witkowski"
   - "dominika-tasarz"
+  - "luqman-saeed"
   - "frankdelporte"
   - slug: "geertjan-wielenga"
     till: "2026-04-01"
