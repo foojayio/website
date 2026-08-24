@@ -20,6 +20,8 @@ related_posts:
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
   - "foojay-podcast-83"
 frozen: false
+aliases:
+  - "/today/first-experiments-with-java-on-the-lattepanda-iota-an-alternative-to-raspberry-pi/"
 ---
 
 After years of experimenting with Raspberry Pi boards, Java, JavaFX, and [Pi4J](https://www.pi4j.com/) to control electronics, I wanted to explore whether my knowledge and experience could be applied to similar boards from other providers. There are many alternatives available these days, based on ARM, Intel processors, and RISC-V architectures.

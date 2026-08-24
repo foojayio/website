@@ -17,6 +17,8 @@ related_posts:
   - "visualizing-brain-computer-interface-data-using-javafx"
   - "foojay-podcast-25"
 frozen: false
+aliases:
+  - "/today/interview-with-paul-kocian-aka-orangomango/"
 ---
 
 ***Some time ago on Twitter, I discovered [@Orango_Mango](https://twitter.com/orango_mango), who shared his progress in creating a 3D engine with JavaFX. The shared videos started with a [Rubik's cube in January '23](https://twitter.com/orango_mango/status/1610894079654563843), over a [basic tumbling car in February](https://twitter.com/orango_mango/status/1620493609287172096), to a [full Minecraft-like world in April](https://twitter.com/orango_mango/status/1646218237535813639). Who is this @OrangoMango? And why did he take up the challenge to create a 3D engine with Java and JavaFX? Let's find out...***

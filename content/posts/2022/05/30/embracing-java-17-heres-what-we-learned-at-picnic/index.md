@@ -14,6 +14,8 @@ related_posts:
   - "are-java-security-updates-important"
   - "7-functional-programming-techniques-in-java-a-primer"
 frozen: false
+aliases:
+  - "/today/embracing-java-17-heres-what-we-learned-at-picnic￼/"
 ---
 
 Java 17? Count us in! At [Picnic](https://picnic.app/nl/), we're more than a grocery delivery company.{#eb88}

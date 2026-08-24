@@ -18,6 +18,8 @@ related_posts:
   - "foojay-podcast-73"
   - "foojay-podcast-72"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-76-devbcn-report-part-1-learn-from-the-community/"
 ---
 
 In early July, the DevBcn conference in Barcelona featured a diverse lineup of speakers, covering topics across multiple technology domains. Geertjan Wielenga took the camera and microphone with him to Spain. Together with Nacho Cougil and Jonathan Vila, two of the organizers, he spoke with many visitors about what they like most in Java, how AI influences their work, and what is important to them in the work they do.

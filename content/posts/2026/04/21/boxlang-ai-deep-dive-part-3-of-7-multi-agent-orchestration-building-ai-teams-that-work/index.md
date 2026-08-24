@@ -17,6 +17,8 @@ related_posts:
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 frozen: false
+aliases:
+  - "/today/boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work-🌲/"
 ---
 
 ![](bxai-series-cover-03-700x368.png)

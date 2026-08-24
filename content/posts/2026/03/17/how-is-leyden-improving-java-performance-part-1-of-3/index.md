@@ -17,6 +17,8 @@ related_posts:
   - "where-production-policy-belongs-building-eliya-in-public"
   - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
 frozen: false
+aliases:
+  - "/today/122962/"
 ---
 
 In this series of 3 blog posts we will explain how OpenJDK project Leyden is helping to improve a specific area of performance where Java has notably lagged behind other languages i.e. application 'startup', 'warmup', and 'initial footprint'.

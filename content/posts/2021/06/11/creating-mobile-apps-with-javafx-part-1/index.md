@@ -15,6 +15,8 @@ related_posts:
   - "virtual-foojay-openjdk-17-jug-tour"
   - "the-javafx-revival"
 frozen: false
+aliases:
+  - "/today/creating-mobile-apps-with-javafx---part-1/"
 ---
 
 Mobile application offerings for both IOS and Android [continue increasing each year](https://www.statista.com/statistics/271644/worldwide-free-and-paid-mobile-app-store-downloads/).

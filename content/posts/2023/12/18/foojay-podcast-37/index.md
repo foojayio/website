@@ -15,6 +15,8 @@ related_posts:
   - "foojay-podcast-33"
   - "foojay-podcast-88"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-37-j-fall-report-part-4-final/"
 ---
 
 Check the previous Foojay Podcasts for the first three parts of our J-Fall report ([part 1](https://foojay.io/today/foojay-podcast-36/), [part 2](https://foojay.io/today/foojay-podcast-34), and [part 3](https://foojay.io/today/foojay-podcast-33/)). That one-day conference in the Netherlands in November was packed with amazing sessions.

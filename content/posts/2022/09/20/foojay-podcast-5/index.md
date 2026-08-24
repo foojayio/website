@@ -21,6 +21,8 @@ related_posts:
   - "thinking-about-massive-throughput-meet-virtual-threads"
   - "foojay-podcast-92"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-5-openjdk-discussion-panel/"
 ---
 
 It's September 20th, OpenJDK 19 has been released. In this podcast, we discuss the new features and the changes that this release brings.

@@ -2,6 +2,16 @@
 title: "Authors"
 description: "Every developer, advocate and engineer who has written for foojay.io — browse the full A-Z or start with this month's featured authors."
 url: "/today/author/"
+# WordPress serves a separate /today/featured-authors/ page (a live 200, listing
+# the same people this page leads with), so without the alias that URL 404s at
+# cutover. It is an alias rather than a page of its own because there is nothing
+# on it this one does not already show: partials/featured-authors-band.html sits
+# at the top of this page, driven by the same `params.featuredAuthors` slugs.
+#
+# Nothing is lost on the view counter -- WordPress records no count for it, so
+# there is no key to carry over the way `team` -> `meet-the-team` had to.
+aliases:
+  - "/today/featured-authors/"
 # EXPLICIT, and load-bearing: Hugo applies a cascade to the page that declares it
 # as well as to its descendants, so without this the cascaded type below landed on
 # THIS page too and /today/author/ silently rendered with the author-profile

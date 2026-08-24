@@ -15,6 +15,8 @@ related_posts:
   - "the-debugger-checklist-part-ii"
   - "what-is-debugging-in-140-seconds"
 frozen: false
+aliases:
+  - "/today/introducing-koolkits - oss-debugging-toolkits-for-kubernetes/"
 ---
 
 KoolKits (**K** ubernetes t**oolkits**) are highly-opinionated, language-specific, batteries-included debug container images for Kubernetes. In practice, they're what you would've installed on your production pods if you were stuck during a tough debug session in an unfamiliar shell.

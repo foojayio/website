@@ -17,6 +17,8 @@ related_posts:
   - "atlas-online-archive-efficiently-manage-the-data-lifecycle"
   - "atlas-searching-with-the-java-driver"
 frozen: false
+aliases:
+  - "/today/discover-your-ideal-airbnb-implementing-a-spring-boot-mongodb-search-with-kotlin-sync-driver/"
 ---
 
 {{< youtube b0dkQYcvBkQ >}}

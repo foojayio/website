@@ -14,6 +14,8 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "java-bytecode-simplified-journey-to-the-wonderland-part-1"
 frozen: false
+aliases:
+  - "/today/__trashed-4/"
 ---
 
 Java is a popular programming language used for developing a wide range of applications, including web, mobile, and desktop applications.

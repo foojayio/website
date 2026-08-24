@@ -15,6 +15,8 @@ related_posts:
   - "your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij"
   - "ai-newsletter-1"
 frozen: false
+aliases:
+  - "/today/121637/"
 ---
 
 ## **Hey Java Devs, Let's Talk About AI MCP! 🤖**

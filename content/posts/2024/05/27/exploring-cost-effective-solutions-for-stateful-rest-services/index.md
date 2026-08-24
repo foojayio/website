@@ -21,6 +21,8 @@ related_posts:
   - "microstream-part-2-configure-the-storage-manager"
   - "announcing-cloud-native-boxlang-for-5-month"
 frozen: false
+aliases:
+  - "/today/exploring-cost-effective-solutions-for-stateful-rest-services-a-case-study-with-ibm-cloud-code-engine-eclipsestore-and-ibm-cloud-object-storage/"
 ---
 
 ## A Case Study with IBM Cloud Code Engine, EclipseStore, and IBM Cloud Object Storage

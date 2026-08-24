@@ -642,6 +642,47 @@ public class Posts {
         return new ArrayList<>(slugs);
     }
 
+    /**
+     * Reads the `aliases:` block out of an existing bundle AS RAW LINES, so
+     * writePost() can put it back byte for byte -- comments and all.
+     *
+     * Raw lines rather than a parsed list of URLs, for the reason spelled out on
+     * Sponsors.existingAuthors: this script has no reason to understand the shape
+     * of a list it does not own. An alias entry is a bare string today, and a
+     * future one carrying a comment or a nested key needs no change here.
+     *
+     * Returns the whole block INCLUDING its `aliases:` key line, so a post with
+     * none produces nothing at all rather than an empty `aliases:` key (which
+     * Hugo reads as an empty list and which would add a meaningless line to
+     * 2147 files).
+     */
+    static List<String> existingAliases(Path bundleDir) {
+        List<String> lines = new ArrayList<>();
+        if (bundleDir == null) return lines;
+        Path md = bundleDir.resolve("index.md");
+        if (!Files.isRegularFile(md)) return lines;
+        try {
+            boolean inBlock = false;
+            for (String line : Files.readAllLines(md)) {
+                if (line.startsWith("aliases:")) {
+                    inBlock = true;
+                    lines.add(line);
+                    continue;
+                }
+                if (inBlock) {
+                    // Indented lines belong to the block. Anything at column 0 is
+                    // the next key or the closing ---, and ends it. A blank line
+                    // ends it too: the body starts after the frontmatter.
+                    if (line.isBlank() || !Character.isWhitespace(line.charAt(0))) break;
+                    lines.add(line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("  could not read existing aliases from " + md + ": " + e.getMessage());
+        }
+        return lines;
+    }
+
     static boolean isFrozen(String slug) {
         Optional<Path> bundle = findExistingBundle(slug);
         if (bundle.isEmpty()) return false;
@@ -719,6 +760,10 @@ public class Posts {
     // ---- Writing markdown --------------------------------------------------
 
     static void writePost(PostData d, boolean verbose) throws IOException {
+        // Resolved up front: the frontmatter below reads the aliases out of the
+        // file already sitting in this directory.
+        Path bundleDir = d.bundleDir != null ? d.bundleDir : bundleDirFor(d);
+
         StringBuilder fm = new StringBuilder();
         fm.append("---\n");
         fm.append("title: ").append(yamlString(d.title)).append("\n");
@@ -740,13 +785,32 @@ public class Posts {
         fm.append("related_posts:\n");
         for (String r : d.relatedSlugs) fm.append("  - ").append(yamlString(r)).append("\n");
         if (d.jdoodle) fm.append("jdoodle: true\n");
-        // No aliases: `slug` above already makes the permalink the legacy
-        // /today/<slug>/ URL, so a self-referential alias would be redundant.
         fm.append("frozen: false\n");
+
+        // ALIASES ARE CARRIED THROUGH FROM THE EXISTING FILE, NEVER REBUILT.
+        //
+        // The comment that used to sit here said no alias was needed, because
+        // `slug` makes the permalink the legacy /today/<slug>/ URL. That is true
+        // of the post's CURRENT WordPress slug, and it is exactly why these
+        // cannot be derived: an alias here records a FORMER slug, from before the
+        // post was renamed in WordPress, and the live page carries no trace of
+        // it. Nothing this script can fetch will tell it that
+        // /today/skps-core-java-java-ee-roots-1-java-memory-architecture/ once
+        // served the post now at /today/java-roots-1-java-memory-architecture/.
+        //
+        // So a re-scrape silently deleted them: one full run dropped 58 aliases
+        // across 57 posts -- including the three emoji URLs and the
+        // triple-dash JavaFX slugs -- and because WordPress still serves those
+        // redirects today, nothing was observably broken. They would simply have
+        // started 404ing at cutover, months later, with no diff to point at.
+        // "URLs are load-bearing" is the rule this broke (see CLAUDE.md).
+        //
+        // Same posture, and same reason, as Sponsors.java's `authors:` block.
+        for (String line : existingAliases(bundleDir)) fm.append(line).append("\n");
+
         fm.append("---\n\n");
         fm.append(d.body).append("\n");
 
-        Path bundleDir = d.bundleDir != null ? d.bundleDir : bundleDirFor(d);
         Files.createDirectories(bundleDir);
         Files.writeString(bundleDir.resolve("index.md"), fm.toString());
 

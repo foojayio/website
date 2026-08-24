@@ -15,6 +15,8 @@ related_posts:
   - "creating-mobile-apps-with-javafx-part-3"
   - "virtual-foojay-openjdk-17-jug-tour"
 frozen: false
+aliases:
+  - "/today/creating-mobile-apps-with-javafx---part-2/"
 ---
 
 In [Part 1](https://foojay.io/today/creating-mobile-apps-with-javafx---part-1/), we introduced a mobile app game, TiltMaze, written completely in JavaFX, which you can download from either the [Apple App Store](https://apps.apple.com/app/id1566464439) or [Google Play](https://play.google.com/store/apps/details?id=com.asgteach.accelerometer.TiltMaze) and install it on your mobile device or tablet.

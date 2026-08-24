@@ -16,6 +16,8 @@ related_posts:
   - "lets-talk-about-mcp"
   - "ai-newsletter-1"
 frozen: false
+aliases:
+  - "/today/your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-🤖/"
 ---
 
 Hey Java devs! 👋 Ever feel like you're drowning in a sea of code, trying to keep it reliable,, efficient, and secure? We've all been there. Juggling new features, bug fixes, and pull requests is a daily grind. But what if you had an AI-powered assistant to help you out? That's where the [**SonarQube MCP Server**](https://github.com/SonarSource/sonarqube-mcp-server) comes in. Let's dive into how this cool new MCP can supercharge your daily coding routine. 🚀

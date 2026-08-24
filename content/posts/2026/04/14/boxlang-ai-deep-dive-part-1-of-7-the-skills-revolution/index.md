@@ -19,6 +19,8 @@ related_posts:
   - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 frozen: false
+aliases:
+  - "/today/boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution-🎓/"
 ---
 
 ![](bxai-series-cover-01-700x368.png)

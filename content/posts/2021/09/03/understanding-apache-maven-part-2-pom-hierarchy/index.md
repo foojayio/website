@@ -14,6 +14,8 @@ related_posts:
   - "a-simple-service-with-spring-boot"
   - "getting-started-with-jakarta-ee-9-hello-world"
 frozen: false
+aliases:
+  - "/today/understanding-apache-maven-part-2-pom-hierarchy-and-effective-pom/"
 ---
 
 Following on from [the first article on Maven basics](https://foojay.io/today/understanding-apache-maven-part-1-the-basics/), the Project Object Model (POM) is explored, below.

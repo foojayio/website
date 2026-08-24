@@ -14,6 +14,9 @@ related_posts:
   - "new-java-javafx-library-fxskins-released"
   - "javafx-links-of-july-2026"
 frozen: false
+aliases:
+  - "/today/javafx-links-of-the-month-september/"
+  - "/today/javafx-september-2022/"
 ---
 
 The JavaFX links of the week are back on [jfx-central.com](https://www.jfx-central.com/home), and here we collect the complete month for you in an excellent overview.

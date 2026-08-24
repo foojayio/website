@@ -19,6 +19,8 @@ related_posts:
   - "preparing-for-jdk-21-a-comprehensive-overview-of-key-features-and-enhancements"
   - "offline-crypto-address-validation-in-java"
 frozen: false
+aliases:
+  - "/java-21/"
 ---
 
 **Today's the first day of Java 21's availability! It's been six months since Java 20 was released, so it's time for another fresh wave of Java features. This post takes you on a tour of the JEPs that are associated with this release and it gives you a brief introduction to each of them, and [check out the Java 21 podcast here](https://foojay.io/today/foojay-podcast-28/). Where applicable the differences with Java 20 are highlighted and a few typical use cases are provided, so that you'll be more than ready to use these features after reading this!**

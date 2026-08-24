@@ -12,6 +12,8 @@ categories:
   - "Release Notes"
 related_posts:
 frozen: false
+aliases:
+  - "/today/the-jakarta-ee-working-group-releases-jakarta-ee-9-1-as-industry-continues-to-embrace-open-source-enterprise-java/"
 ---
 
 **Join us in celebrating a new release of Jakarta EE!**

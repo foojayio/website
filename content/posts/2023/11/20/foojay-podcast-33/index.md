@@ -14,6 +14,8 @@ related_posts:
   - "foojay-podcast-31"
   - "foojay-podcast-30"
 frozen: false
+aliases:
+  - "/today/foojay-podcast-33-j-fall-report-part-1/"
 ---
 
 A few months ago, we asked the J-Fall team if a Foojay Broadcast Room would be a good idea. And they said yes, so [suddenly we found ourselves in the middle of the entrance](https://foojay.io/today/digma-apache-apisix-and-openvalue-sponsor-foojay-io-at-jfall-2023/) of the Pathé cinema in Ede in the Netherlands, with a camera and microphones.
