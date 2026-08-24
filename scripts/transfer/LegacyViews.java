@@ -137,7 +137,12 @@ public class LegacyViews {
             // summing in /team/'s 3654. Both were real pages, so this does discard
             // that number -- leaving the mapping out would discard it too AND
             // print a line every run, so the mapping is the better of the two.
-            "team", "meet-the-team");
+            "team", "meet-the-team",
+            // content/pages/download.md was deleted (it was the same page as
+            // /java-quick-start/install-java/) and /download/ is an alias on
+            // install-java.md, so the URL resolves but the WP item had nothing to
+            // attach its count to. Same shape as `team` above, Math::max and all.
+            "download", "install-java");
 
     /**
      * WordPress objects that live in a different SECTION here, keyed
