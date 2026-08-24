@@ -97,6 +97,14 @@ public class Posts {
     static final Path OUTPUT_DIR = Path.of("content/posts");
     static final int REQUEST_TIMEOUT_MS = 20_000;
     static final int MAX_EMPTY_PAGES = 2;   // with --days/--since: stop after this many consecutive out-of-window pages
+    // A transient network failure is ordinary on a 150-page crawl, so every fetch
+    // gets FETCH_ATTEMPTS tries with a linear backoff between them. See fetch().
+    static final int FETCH_ATTEMPTS = 3;
+    static final long RETRY_BACKOFF_MS = 2_000;
+    // How many listing pages in a row may fail outright before the crawl gives up.
+    // One dead page must not end a run that is 130 pages in; a run of them means
+    // the site is down and there is nothing to be gained by walking to page 200.
+    static final int MAX_LISTING_FAILURES = 3;
     // Posts on a listing page are scraped + converted concurrently on virtual
     // threads. This bounds how many requests hit the site at once -- a courtesy
     // to your own server, and enough to hide network latency. Override with
@@ -224,9 +232,32 @@ public class Posts {
             int page = 1;
             int emptyPages = 0;
 
+            int listingFailures = 0;
+
             while (pageUrl != null) {
                 System.out.println("Listing page " + page + ": " + pageUrl);
-                Document doc = fetch(pageUrl);
+
+                // A listing page that fails after its retries must not end the run:
+                // the page NUMBER is predictable (/today/page/N/), so the crawl
+                // steps over the bad page rather than losing every page after it.
+                // The "next" link normally comes out of the fetched document, which
+                // is exactly what a failure denies us.
+                Document doc;
+                try {
+                    doc = fetch(pageUrl);
+                    listingFailures = 0;
+                } catch (IOException e) {
+                    System.err.println("LISTING FAILED: " + pageUrl + " -> " + e);
+                    if (++listingFailures >= MAX_LISTING_FAILURES) {
+                        System.err.println("Giving up after " + listingFailures
+                                + " consecutive listing failures; posts already written are kept.");
+                        break;
+                    }
+                    page++;
+                    pageUrl = BASE_URL + LISTING_PATH + "page/" + page + "/";
+                    if (maxPages != null && page > maxPages) break;
+                    continue;
+                }
 
                 List<String> pageUrls = new ArrayList<>();
                 for (Element a : doc.select(SELECTOR_LISTING_POST_LINKS)) {
@@ -289,10 +320,37 @@ public class Posts {
             return false;
         }
         try {
+            // FROZEN IS CHECKED BEFORE THE FETCH, and that is the whole point: the
+            // post page is never requested and -- what actually cost something --
+            // its images are never pulled. Localizing images happens inside
+            // scrapePost(), so checking afterwards meant a frozen post still
+            // downloaded every picture in its body plus its hero, wrote them into
+            // the bundle, and only then had its markdown discarded. On a post with
+            // a heavy hero that is megabytes of transfer and a modified bundle, for
+            // a file we had already decided not to touch.
+            //
+            // The slug is derived here exactly the way scrapePost() derives it
+            // (sanitizeSlug(lastPathSegment(url))), so this is the same answer the
+            // later check gave, just before the work instead of after it.
+            String slug = sanitizeSlug(lastPathSegment(stripTrailingSlash(url) + "/"));
+            if (isFrozen(slug)) {
+                skippedFrozen.incrementAndGet();
+                // true, not false: this is "handled", and the value drives the
+                // --days/--since bookkeeping. Reporting it as out-of-window would
+                // let a page of frozen posts count toward MAX_EMPTY_PAGES and stop
+                // the crawl early. Erring toward a page or two more is cheap; a
+                // truncated crawl is silent.
+                return true;
+            }
+
             PostData data = scrapePost(url);
             if (cutoff != null && isOlderThan(data.date, cutoff)) {
                 return false; // published before the window -- skip
             }
+            // Checked again on the SCRAPED slug. It is the same derivation, so this
+            // is belt-and-braces rather than a second rule -- but it is what keeps
+            // the guarantee if scrapePost ever learns to take the slug from the
+            // page instead of the URL.
             if (isFrozen(data.slug)) {
                 skippedFrozen.incrementAndGet();
             } else {
@@ -697,11 +755,46 @@ public class Posts {
 
     // ---- small utils --------------------------------------------------
 
+    /**
+     * Fetch a page, retrying a TRANSIENT failure.
+     *
+     * A single read timeout used to be fatal to a whole run: the listing crawl
+     * calls this straight from its loop, so `SocketTimeoutException: Read timed
+     * out` on listing page 131 propagated out of crawlAndConvert() and killed the
+     * process -- 130 pages of work already done, no summary line, and nothing
+     * written for the remaining pages. foojay.io is behind Cloudflare in front of
+     * WP Engine and a slow page under load is ordinary, not exceptional, so the
+     * fix is to expect it here rather than at every call site.
+     *
+     * Retried on IOException only, which is the transient family (timeout, reset,
+     * 5xx via HttpStatusException). A 404 is an IOException too and will burn its
+     * three attempts, which is a fair price for not having to enumerate status
+     * codes -- a genuinely missing post is rare and the run continues either way.
+     * The backoff is linear and short (2s, 4s): this is one client walking a site
+     * politely, not a thundering herd that needs jitter.
+     */
     static Document fetch(String url) throws IOException {
-        return Jsoup.connect(url)
-                .userAgent("foojay-hugo-migration-bot/1.0 (+https://github.com/foojayio/website)")
-                .timeout(REQUEST_TIMEOUT_MS)
-                .get();
+        IOException last = null;
+        for (int attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
+            try {
+                return Jsoup.connect(url)
+                        .userAgent("foojay-hugo-migration-bot/1.0 (+https://github.com/foojayio/website)")
+                        .timeout(REQUEST_TIMEOUT_MS)
+                        .get();
+            } catch (IOException e) {
+                last = e;
+                if (attempt == FETCH_ATTEMPTS) break;
+                System.err.println("  retrying (" + attempt + "/" + (FETCH_ATTEMPTS - 1) + ") after "
+                        + e.getClass().getSimpleName() + " on " + url);
+                try {
+                    Thread.sleep(RETRY_BACKOFF_MS * attempt);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    throw last;
+                }
+            }
+        }
+        throw last;
     }
 
     static java.net.URI URI(String s) {
