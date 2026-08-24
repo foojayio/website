@@ -273,13 +273,33 @@ should catch a mistake at PR time rather than letting it fail silently.
   overwritten** (`--force` to replace deliberately) precisely so a corrected one
   survives the next run.
 
-  Four things are load-bearing:
+  Five things are load-bearing:
   - **The rendering is DERIVED from the file.** `transcript.md` inside a leaf
     bundle is exposed to the layout as a resource of type `page` (verified --
     `.Resources.GetMatch "transcript.md"`, `.Content` renders it, and Hugo
-    publishes no URL of its own for it), so `posts/single.html` renders a
-    `<details>` when the file is there. No frontmatter flag to set, forget or
+    publishes no URL of its own for it), so `posts/single.html` renders the
+    section when the file is there. No frontmatter flag to set, forget or
     unset -- same rule as the EnlighterJS and mermaid loaders.
+  - **It is an ordinary `<h2>` section of the article, NOT a collapsed
+    `<details>`, and it is in the "On this page" panel.** It was a `<details>`
+    first, on the reasoning that an hour of speech is a reference rather than the
+    article -- but the browser's own find-in-page does not look inside a closed
+    `<details>`, so Ctrl-F for a guest's name found nothing on the one page that
+    actually says it, and a reader who came for the transcript had to know to
+    open it. The TOC entry has to be **appended by hand** in
+    `partials/toc.html`: the heading is rendered from a bundle RESOURCE, so it is
+    not in `.Content` and `.TableOfContents` cannot see it. It is inserted before
+    the last `</ul>` of Hugo's own markup (nested lists have closed by then, so
+    it lands as a top-level item, which is what an h2 is) rather than as a second
+    list beside the nav, which is what lets the existing `.toc #TableOfContents`
+    CSS and `toc.js`'s scroll-spy cover it with nothing added to either. An
+    episode with no headings of its own gets the `<nav>` written out here
+    instead, since Hugo emits an empty one with no list to append to.
+    `id="transcript"` is hand-written for the same reason, and Goldmark knows
+    nothing about it -- an episode whose own body carried a `## Transcript`
+    heading would claim the id first and the TOC link would land on that heading
+    (no post does today: the 8 carrying one are screencast write-ups with no
+    `transcript.md`).
   - **YouTube's caption format repeats itself and has to be de-duplicated.**
     Its rolling captions re-send the settled line in the following cue, so a
     45-minute episode arrives as 2643 cues holding ~1300 distinct lines.

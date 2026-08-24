@@ -3014,43 +3014,28 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 }
 
 /* ------------------------------------------------- episode transcript ----
-   The collapsed machine transcript under a podcast episode
-   (posts/single.html, written by scripts/fetch/PodcastTranscripts.java).
+   The machine transcript under a podcast episode (posts/single.html, written
+   by scripts/fetch/PodcastTranscripts.java).
 
-   Native <details>/<summary>: it opens with a keyboard, is announced as an
-   expandable group, and survives with JavaScript off -- none of which a div
-   plus a click handler gives for free. Only the marker is restyled. */
+   It is an ordinary section of the article -- .prose, an <h2> that the "On this
+   page" panel links to -- rather than a collapsed <details>, because a reader
+   comes to an episode page FOR the transcript and find-in-page does not look
+   inside a closed <details>. So there is little to style: a rule off the rest
+   of the article, the machine-generated note under the heading, and the
+   timestamps. */
 .transcript {
-  margin: 2.5rem 0 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface-sunken);
+  margin-top: 3rem;
+  padding-top: .5rem;
+  border-top: 1px solid var(--border);
 }
-.transcript__summary {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .7rem;
-  padding: .9rem 1.1rem;
-  cursor: pointer;
-  border-radius: var(--radius);
-  list-style-position: outside;
-}
-/* The row is the target, so the focus ring goes round the row rather than the
-   triangle -- and it needs an inset offset, because an outline on a summary is
-   clipped by the rounded corner of the box it opens. */
-.transcript__summary:focus-visible { outline-offset: -3px; }
-.transcript__summary::marker { color: var(--brand-accent-strong); }
-.transcript[open] .transcript__summary { border-bottom: 1px solid var(--border); border-radius: var(--radius) var(--radius) 0 0; }
-.transcript__title {
-  font-family: var(--font-display); font-weight: 700; color: var(--ink);
-  font-size: .95rem; text-transform: uppercase; letter-spacing: .08em;
-}
-.transcript__note { font-size: .85rem; color: var(--ink-muted); }
-.transcript__body { padding: 1.1rem 1.25rem 1.4rem; font-size: 1rem; }
-.transcript__body p { margin: 0 0 .9rem; }
-.transcript__body p:last-child { margin-bottom: 0; }
+/* The h2 already carries .prose h2's margin-top, which on top of the section's
+   own padding leaves the rule floating a long way above the heading. */
+.transcript > h2:first-child { margin-top: 1.5rem; }
+.transcript__note { font-size: .9rem; color: var(--ink-muted); margin-top: -.35rem; }
 /* The timestamp opening each paragraph. Tabular figures so a column of them
    does not wobble, and the accent's readable sibling because at .8rem this is
    text and not a fill. */
-.transcript__body strong:first-child {
+.transcript p > strong:first-child {
   font-family: var(--font-mono); font-size: .8rem; font-weight: 600;
   color: var(--brand-accent-strong); font-variant-numeric: tabular-nums;
   margin-right: .15rem;

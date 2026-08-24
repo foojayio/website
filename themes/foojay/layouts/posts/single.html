@@ -61,10 +61,19 @@
          set on a new episode and nothing to unset -- the same rule the code
          highlighter and the mermaid loader follow.
 
-         Collapsed, because an hour of speech is ~50 KB of text and it is a
-         reference, not the article. <details> is the right control for that and
-         needs no JavaScript: it is keyboard-operable and announced as an
-         expandable group for free, which a div and a click handler would not be.
+         An <h2> in the flow of the article, not a collapsed <details>: a
+         transcript is one of the things a reader comes to the page FOR, and the
+         browser's own find-in-page skips text inside a closed <details> -- so
+         Ctrl-F for a guest's name found nothing on the one page that says it.
+
+         id="transcript" is hand-written rather than minted by Goldmark, because
+         this heading is not in .Content -- and partials/toc.html appends a TOC
+         entry pointing at exactly that id. Goldmark dedupes ids within a
+         document body and knows nothing about this one, so an episode whose own
+         body carried a "## Transcript" heading would take the id first and the
+         TOC link would land on it instead. No post does today (the 8 with such a
+         heading are screencast write-ups with no transcript.md), and the failure
+         is a link scrolling to the wrong heading rather than anything breaking.
 
          The "automatically generated" line is not a disclaimer for its own sake.
          The text is YouTube's speech recognition, cleaned up but not corrected
@@ -79,15 +88,11 @@
          deliberately, with the search page's per-section quotas in mind, rather
          than by default. */}}
     {{ with .Resources.GetMatch "transcript.md" }}
-    <details class="transcript" data-pagefind-ignore>
-      <summary class="transcript__summary">
-        <span class="transcript__title">Transcript</span>
-        <span class="transcript__note">Automatically generated from the audio, so can contain errors in names and technical terms</span>
-      </summary>
-      <div class="prose transcript__body">
-        {{ .Content }}
-      </div>
-    </details>
+    <section class="prose transcript" data-pagefind-ignore>
+      <h2 id="transcript">Transcript</h2>
+      <p class="transcript__note">Automatically generated from the audio, so it can contain errors in names and technical terms.</p>
+      {{ .Content }}
+    </section>
     {{ end }}
 
     {{ $authors := .Params.authors }}

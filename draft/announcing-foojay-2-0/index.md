@@ -188,8 +188,10 @@ the following cue, so a 45-minute episode arrives as 2,643 cues holding about
 1,300 distinct lines), drops the jingle and the "uh"s, and writes a
 `transcript.md` next to the episode's `index.md`. The page renders it *because
 the file is there* — there is no flag on the episode to set, and none to
-remember to unset. It sits in a collapsed block, because an hour of speech is a
-reference, not the article.
+remember to unset. It is a plain section of the page with its own entry in "On
+this page", not a collapsed box you have to know to open: your browser's
+find-in-page does not look inside a closed one, so `Ctrl-F` for a guest's name
+would have found nothing on the very page that says it.
 
 **And it is a machine transcript, which every episode says out loud above the
 text.** Automatic captions get names and Java vocabulary wrong, and an

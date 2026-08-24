@@ -11,9 +11,38 @@
      empty <nav> wrapper even when there are no headings, so `with` was always
      true and this widget rendered as a bare "On this page" heading with
      nothing under it on the home and listing pages. */}}
-{{ if partial "has-toc.html" . }}
+{{/* THE TRANSCRIPT ENTRY HAS TO BE APPENDED BY HAND. A podcast episode's
+     "Transcript" <h2> is rendered by posts/single.html from a bundle RESOURCE
+     (transcript.md), so it is not part of .Content and .TableOfContents -- which
+     Hugo builds from the page's own markdown -- cannot see it. Without this the
+     one section a reader is most likely to want to jump to was the one section
+     missing from the panel.
+
+     Inserted before the LAST </ul> so it lands as a top-level item of Hugo's own
+     list, which is what an h2 is: nested lists have closed by then. Doing it
+     that way rather than rendering a second <ul> next to the nav means the
+     existing .toc #TableOfContents styling and toc.js's scroll-spy (it collects
+     every a[href^="#"] inside .toc) apply to it with nothing added to either.
+     The regex is anchored to the end of the string, so a </ul> inside a heading
+     title is not a target. */}}
+{{ $hasToc := partial "has-toc.html" . }}
+{{ $transcript := "" }}
+{{ if .Resources.GetMatch "transcript.md" }}
+  {{ $transcript = `<li><a href="#transcript">Transcript</a></li>` }}
+{{ end }}
+{{ if or $hasToc $transcript }}
+{{ $toc := printf "%s" .TableOfContents }}
+{{ with $transcript }}
+  {{ if $hasToc }}
+    {{ $toc = replaceRE `</ul>\s*</nav>\s*$` (printf "%s</ul></nav>" .) $toc }}
+  {{ else }}
+    {{/* An episode with no headings of its own: Hugo emits an empty <nav> with
+         no list to append to, so the whole thing is written out here. */}}
+    {{ $toc = printf `<nav id="TableOfContents"><ul>%s</ul></nav>` . }}
+  {{ end }}
+{{ end }}
 <div class="widget toc" data-pagefind-ignore>
   <h2>On this page</h2>
-  {{ .TableOfContents }}
+  {{ $toc | safeHTML }}
 </div>
 {{ end }}
