@@ -14,8 +14,6 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "java-bytecode-simplified-journey-to-the-wonderland-part-1"
 frozen: false
-aliases:
-  - "/today/__trashed-4/"
 ---
 
 Java is a popular programming language used for developing a wide range of applications, including web, mobile, and desktop applications.
@@ -171,7 +169,7 @@ The source code can be found here: <https://github.com/rokon12/java-map-jmh>
 
 In my opinion, the slight variations in performance may not hold much importance in most cases. It is essential to consider other aspects, such as the particular use case, how concise it is, well-organized code, and preferred features (for example, mutable or immutable nature), when deciding between HashMap and Map.of(). For straightforward scenarios, Map.of() might still have the upper hand regarding simplicity and brevity.  
 
-So let's see the benefit of using Map.of() --  
+So let's see the benefit of using Map.of() –  
 
 ## Benefits of using Map.of()
 

@@ -98,7 +98,7 @@ You will receive an email confirmation of environment creation with the credenti
 ![create wildfly environment](https://jelastic.com/blog/wp-content/uploads/2018/05/oib.png)  
 ![web ssh client](https://jelastic.com/blog/wp-content/uploads/2018/05/ssh1.png)
 
-In the Deployment manager, click **Deploy to...** button. Specify the **Context** as required or just leave default ROOT value. Make sure that your application is up and running, pressing **Open in browser** near the created environment. If you log in to your container via built-in [Web SSH client](https://docs.jelastic.com/web-ssh-client?utm_source=blog-wildfly-managed-domain), you'll see only one running process of **Standalone** server.
+In the Deployment manager, click **Deploy to…** button. Specify the **Context** as required or just leave default ROOT value. Make sure that your application is up and running, pressing **Open in browser** near the created environment. If you log in to your container via built-in [Web SSH client](https://docs.jelastic.com/web-ssh-client?utm_source=blog-wildfly-managed-domain), you'll see only one running process of **Standalone** server.
 
 ## Get Clustered WildFly with Managed Domain Mode
 

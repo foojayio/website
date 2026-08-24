@@ -3,6 +3,7 @@ title: "Debugging the Technical Interview: Methods and Cheating"
 date: "2021-12-07T09:00:30+00:00"
 lastmod: "2021-12-07T09:00:32+00:00"
 description: "Can you cheat in a technical interview? This approach for hiring tuned over decades is how you moneyball hiring and work with great people!"
+canonical: "https://talktotheduck.dev/debugging-the-technical-interview-methods-and-cheating"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt1.jpg"
@@ -18,7 +19,7 @@ frozen: false
 
 The headline caught my attention right away "[I was shocked to catch a candidate cheating in an online interview](https://levelup.gitconnected.com/i-was-shocked-to-catch-a-candidate-cheating-in-an-online-interview-2441fef0ab4)". How do you cheat in an interview? Does [Cyrano de Bergerac](https://en.wikipedia.org/wiki/Cyrano_de_Bergerac_(play)) whisper the answer from outside the camera?
 
-Well, close enough. The candidate was googling answers and copying them into a shared screen, pretending this was his code. Hiding this is lying. That's never OK. But this really reminded me of a tweet I read ages ago which unfortunately I can't find... It went something like this:
+Well, close enough. The candidate was googling answers and copying them into a shared screen, pretending this was his code. Hiding this is lying. That's never OK. But this really reminded me of a tweet I read ages ago which unfortunately I can't find… It went something like this:
 > My wife is learning to code and confided in me that she's "cheating". She Googles the stuff she doesn't know. Should I tell her?
 
 This is brilliant!
@@ -39,7 +40,7 @@ When I conduct a technical interview, I'm hiring a teammate. This teammate shoul
 * Have three people conduct one-on-one interviews (separately). Reach consensus
 * No "make you think" puzzle questions
 
-When I tell this to people I get the knee jerk reaction of "so what the hell do you ask" or "why not X?". I'll start with the positive first, the things I ask...
+When I tell this to people I get the knee jerk reaction of "so what the hell do you ask" or "why not X?". I'll start with the positive first, the things I ask…
 
 ## Debugging as a Technical Interview Technique
 
@@ -49,7 +50,7 @@ That's programming. If you don't know a programming language, you can pick it up
 
 ### The Hardest Technical Interview Question I Ever Got
 
-Sun Microsystems conducted interviews by using three separate engineers. The 3rd one, [Eran Davidov](https://medium.com/@erand) asked me a question that was one of the hardest questions I ever got in a technical interview. Years later, I asked him about it and he totally forgot that...
+Sun Microsystems conducted interviews by using three separate engineers. The 3rd one, [Eran Davidov](https://medium.com/@erand) asked me a question that was one of the hardest questions I ever got in a technical interview. Years later, I asked him about it and he totally forgot that…
 
 The question was: "Tell me about a bug you made, how you tracked it and fixed it?".  
 
@@ -57,9 +58,9 @@ I started telling him about a bug I tracked, and he stopped me. Was it a bug you
 
 Well, no. "I want to hear about something you made".
 
-I don't get stage fright. I'm never speechless. But I was drawing blanks. I was sitting there and the only bug that came to mind was two days I spent looking for a problem because of a `<` sign pointing in the wrong direction... I can't tell him THAT!
+I don't get stage fright. I'm never speechless. But I was drawing blanks. I was sitting there and the only bug that came to mind was two days I spent looking for a problem because of a `<` sign pointing in the wrong direction… I can't tell him THAT!
 
-Eventually I had to confess that I know I'm responsible for bugs... But my brain completely erased them from my mind. He still must have recommended me for the job despite my clear, over inflated ego. At least he knew about that in advance.
+Eventually I had to confess that I know I'm responsible for bugs… But my brain completely erased them from my mind. He still must have recommended me for the job despite my clear, over inflated ego. At least he knew about that in advance.
 
 ### Great Technical Job Interviews Questions
 
@@ -79,9 +80,9 @@ People need to describe the tools and techniques they used to track a bug. That'
 
 **How would you implement something like X?**
 
-When I was interviewing at Lightrun, they asked me how I would scale a specific system for production. I could use a whiteboard but honestly this works OK verbally, too. Making architectural decisions, explaining them and then adapting based on additional considerations... That's core to what we do.
+When I was interviewing at Lightrun, they asked me how I would scale a specific system for production. I could use a whiteboard but honestly this works OK verbally, too. Making architectural decisions, explaining them and then adapting based on additional considerations… That's core to what we do.
 
-You can ask dozens of questions like this... The nice thing about this is that you can even give them to candidates in advance and they can come prepared. You still wouldn't lose much of the value.
+You can ask dozens of questions like this… The nice thing about this is that you can even give them to candidates in advance and they can come prepared. You still wouldn't lose much of the value.
 
 ### What about Code?
 
@@ -122,7 +123,7 @@ These websites over value people like myself who have a larger social footprint.
 
 I have 50k on stackoverflow, it mostly says I answered over 3000 questions. It means I spent time on that, not that I'm exceptionally talented.
 
-I think it speaks to my work ethic and patience. Those make me a great developer advocate. But for a programming position, that doesn't really say anything about my skill as a developer. My hacker rank is also very high because I wrote a lot of code. But my experience is very domain specific and might not apply to a specific job. I'm also REALLY expensive...
+I think it speaks to my work ethic and patience. Those make me a great developer advocate. But for a programming position, that doesn't really say anything about my skill as a developer. My hacker rank is also very high because I wrote a lot of code. But my experience is very domain specific and might not apply to a specific job. I'm also REALLY expensive…
 
 Ultimately, I think those websites are a small data point you can consider. But for coding or team leading, they shouldn't be a major factor.
 

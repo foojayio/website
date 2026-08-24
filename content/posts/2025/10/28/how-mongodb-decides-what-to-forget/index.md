@@ -53,7 +53,7 @@ Eviction is deeply coupled to **checkpointing** . While checkpoints provide stab
 
 Flow control, implemented in the replication coordinator layer, slows down writers at the client operation level. It computes a delay token proportional to (dirty_bytes / cache_size) and (replication_lag / apply_rate). In effect, **the cache backpressure propagates up to the client layer** a closed feedback loop spanning the storage, replication, and client I/O pipelines.{#6146}
 
-A key subtlety lies in how WiredTiger separates **internal** and **leaf page eviction quotas** . Internal nodes are critical for cursor traversal; evicting too many increases read amplification. Thus, the system enforces ratios like **internal_pages_evicted / leaf_pages_evicted ≈ 0.05--0.1** to maintain navigational efficiency. This is continuously adjusted based on statistics in **WiredTigerStatType::cache_eviction_internal.**{#71d4}
+A key subtlety lies in how WiredTiger separates **internal** and **leaf page eviction quotas** . Internal nodes are critical for cursor traversal; evicting too many increases read amplification. Thus, the system enforces ratios like **internal_pages_evicted / leaf_pages_evicted ≈ 0.05–0.1** to maintain navigational efficiency. This is continuously adjusted based on statistics in **WiredTigerStatType::cache_eviction_internal.**{#71d4}
 
 Another often-missed detail: **dirty pages are written incrementally, not atomically**. WiredTiger splits them into smaller "update chains," writing partial updates if page size exceeds split_page_max. This design avoids long stalls under large document updates a crucial factor for workloads with oversized BSON documents or frequent $push operations.{#07a8}
 

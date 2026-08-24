@@ -52,7 +52,7 @@ The server is accessible via web console at:
 …
 ```
 
-The output above will include the `kubeadmin` password which is required in the following `oc login ...` command.
+The output above will include the `kubeadmin` password which is required in the following `oc login …` command.
 
 ```
 ❯ eval $(crc oc-env)
@@ -67,7 +67,7 @@ Kubernetes Version: v1.20.0+75370d3
 
 Open in a browser the URL [https://console-openshift-console.apps-crc.testing](https://console-openshift-console.apps-crc.testing/)
 
-Log in using the `kubeadmin` username and password, as used above with the `oc login ...` command. You might need to try a few times because of the self-signed certificate used.
+Log in using the `kubeadmin` username and password, as used above with the `oc login …` command. You might need to try a few times because of the self-signed certificate used.
 
 Once OpenShift has started and is running you should see the following webpage
 ![](https://dzone.com/storage/temp/14977909-65ps3ym4omipxy6bypbo.png)
@@ -156,7 +156,7 @@ More information on using the can be found in the RedHat documentation for [Open
 
 ## Deploy the Cass-Operator
 
-Now create the cass-operator. Here we can use the upstream 1.7.0 version of the cass-operator. After creating (applying) the cass-operator, it is important to quickly execute the `oc adm policy ...` commands in the following step so the pods have the privileges required and are successfully created.
+Now create the cass-operator. Here we can use the upstream 1.7.0 version of the cass-operator. After creating (applying) the cass-operator, it is important to quickly execute the `oc adm policy …` commands in the following step so the pods have the privileges required and are successfully created.
 
 ```
 ❯ oc apply -f https://raw.githubusercontent.com/k8ssandra/cass-operator/v1.7.0/docs/user/cass-operator-manifests.yaml
@@ -218,7 +218,7 @@ The next step is to create the cluster. The following deployment file creates a 
 cassandradatacenter.cassandra.datastax.com/dc1 created
 ```
 
-Let's watch the pods get created, initialise, and eventually becoming running, using the `kubectl get pods ...` watch command.
+Let's watch the pods get created, initialise, and eventually becoming running, using the `kubectl get pods …` watch command.
 
 ```
 ❯ kubectl get pods -w -n cass-operator

@@ -122,16 +122,16 @@ Using a generator to modify display names is a two step process.
 
 DisplayNameGenerator is an interface that has three methods with very sensible names that convey theor purpose:
 
-* `generateDisplayNameForClass(Class<?> testClass)` -- This method can be implemented to provide a meaningful display name to the test class.
-* `generateDisplayNameForNestedClass(Class<?> nestedClass)` -- This method can be implemented to provide a meaningful display name to a nested class in the test class.
-* `generateDisplayNameForMethod(Class<?> testClass, Method testMethod)` -- This method can be implemented to provide a meaningful display name to a test method of a given test class.
+* `generateDisplayNameForClass(Class<?> testClass)` – This method can be implemented to provide a meaningful display name to the test class.
+* `generateDisplayNameForNestedClass(Class<?> nestedClass)` – This method can be implemented to provide a meaningful display name to a nested class in the test class.
+* `generateDisplayNameForMethod(Class<?> testClass, Method testMethod)` – This method can be implemented to provide a meaningful display name to a test method of a given test class.
 
 #### Usage
 
 DisplayNameGenerator is an interface, but has two out-of-the-box implementations that can be extended/adapted as needed.
 
-1. **DisplayNameGenerator.Standard** -- converts camel case to spaced words.
-2. **DisplayNameGenerator.ReplaceUnderscores** -- converts underscores in names as space-separated words.
+1. **DisplayNameGenerator.Standard** – converts camel case to spaced words.
+2. **DisplayNameGenerator.ReplaceUnderscores** – converts underscores in names as space-separated words.
 
 The example extends the Standard implementation.
 

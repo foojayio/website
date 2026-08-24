@@ -78,7 +78,7 @@ The cost for using Oracle Java under these new terms increased. Organizations li
 
 Oracle announced a new No-Fee Terms and Conditions (NFTC) license that partially rolled back the changes announced in 2019. A new LTS release could now be free under NFTC until one year after the next LTS release, although Oracle's language is unclear.
 
-The license says, "...internally use the unmodified Programs for the purposes of developing, testing, prototyping and demonstrating your applications, and running the Program for Your own personal use or internal business operations." Nobody has qualified what "internal business operations" really means. Does a web server, accessible externally by customers, count?
+The license says, "…internally use the unmodified Programs for the purposes of developing, testing, prototyping and demonstrating your applications, and running the Program for Your own personal use or internal business operations." Nobody has qualified what "internal business operations" really means. Does a web server, accessible externally by customers, count?
 
 This gave users a chance to transition their applications to the next release. The NFTC license was available for developing, testing, prototyping, and demonstrating applications and personal use of the Oracle JDK or for use related to internal business operations.
 
@@ -88,6 +88,6 @@ Oracle also shortened the time between LTS releases from three years to two year
 
 Oracle's changes to its licensing terms and Java pricing models for Java have been a mixed bag. Oracle deserves props for continuing to develop Java as an open-source platform, but its pricing model and licensing continues to drive users away.
 
-If the hypothetical company had used Azul, it could have saved $2.8 million after its second acquisition -- without audits. If you have a high bill for Oracle Java SE at the end of Oracle's fiscal year (April 30), start planning to divest yourself completely of Oracle Java by end April 2025 so it doesn't happen again.
+If the hypothetical company had used Azul, it could have saved $2.8 million after its second acquisition – without audits. If you have a high bill for Oracle Java SE at the end of Oracle's fiscal year (April 30), start planning to divest yourself completely of Oracle Java by end April 2025 so it doesn't happen again.
 
 Oracle may want to convince people that moving from its Java SE runtime to an OpenJDK distribution is difficult, time-consuming, dangerous, and expensive. For most instances, a migration is straightforward. [Learn more in the book we wrote on migrating to OpenJDK.](https://www.azul.com/openjdk-migration-for-dummies/)

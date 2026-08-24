@@ -15,8 +15,6 @@ related_posts:
   - "the-debugger-checklist-part-ii"
   - "what-is-debugging-in-140-seconds"
 frozen: false
-aliases:
-  - "/today/introducing-koolkits - oss-debugging-toolkits-for-kubernetes/"
 ---
 
 KoolKits (**K** ubernetes t**oolkits**) are highly-opinionated, language-specific, batteries-included debug container images for Kubernetes. In practice, they're what you would've installed on your production pods if you were stuck during a tough debug session in an unfamiliar shell.
@@ -33,7 +31,7 @@ If you just want to take a look at the good stuff, feel free to check out the fu
 
 It's not trivial to understand what's going on inside a Kubernetes pod.
 
-First of all, your application is not a single entity anymore -- it is comprised of multiple pods, replicated for horizontal scaling, and sometimes even scattered across multiple clusters.
+First of all, your application is not a single entity anymore – it is comprised of multiple pods, replicated for horizontal scaling, and sometimes even scattered across multiple clusters.
 
 Furthermore, to access your application with local tools (like debuggers) you need to deal with pesky networking issues like discovery and port forwarding, which slows down the use of such tools.
 
@@ -41,7 +39,7 @@ And, the crown jewel of the distributed systems world-altering the state of or c
 
 ## The Motivation Behind KoolKits
 
-Lightrun was built with Kubernetes in mind -- we work across multiple pods, multiple clusters, and even multiple clouds. We understood early on that packing a punch by using the right tools is a great source of power for the troubleshooting developer -- and we figured we'd find a way to give back to the community somehow -- and that's how we came up with the idea for KoolKits.
+Lightrun was built with Kubernetes in mind – we work across multiple pods, multiple clusters, and even multiple clouds. We understood early on that packing a punch by using the right tools is a great source of power for the troubleshooting developer – and we figured we'd find a way to give back to the community somehow – and that's how we came up with the idea for KoolKits.
 
 Let's dive deep for a second to explain why KoolKits can be pretty useful:
 
@@ -59,13 +57,13 @@ There's also a lot of tooling in existence that helps you get there without doin
 
 The problem starts when you're trying to debug what's happening inside those containers. By using a small production image you're forsaking a large amount of tools that are **invaluable** when wrapping your head around a problem in your application.
 
-By using a KoolKit, you're allowing yourself the benefits of a small production image without compromising on quality tools -- each KoolKit contains hand-picked tools for the specific runtime it represents, in addition to a more generic set of tooling for Linux-based systems.
+By using a KoolKit, you're allowing yourself the benefits of a small production image without compromising on quality tools – each KoolKit contains hand-picked tools for the specific runtime it represents, in addition to a more generic set of tooling for Linux-based systems.
 
 P.S. KoolKits was inspired by [kubespy](https://github.com/huazhihao/kubespy) and [netshoot](https://github.com/nicolaka/netshoot).
 
 ## Considerations
 
-There's quite a few decisions we made during the construction of these images -- some things we took into consideration are listed below.
+There's quite a few decisions we made during the construction of these images – some things we took into consideration are listed below.
 
 ### Size of Images
 
@@ -89,19 +87,19 @@ Each of the folders in the repo contains the Dockerfile behind the KoolKit and a
 
 The list of available KoolKits:
 
-1. [koolkit-jvm](https://github.com/lightrun-platform/koolkits/blob/main/jvm/README.md) -- AdoptOpenJDK 17.0.2 \& related tooling (including jabba for easy version management and Maven 3.8.4)
-2. [koolkit-node](https://github.com/lightrun-platform/koolkits/blob/main/node/README.MD) -- Node 16.13.1 \& related tooling (including nvm for easy version management)
-3. [koolkit-python](https://github.com/lightrun-platform/koolkits/blob/main/python/README.md) -- Python 3.10.2 \& related tooling (including pyenv for easy version management)
+1. [koolkit-jvm](https://github.com/lightrun-platform/koolkits/blob/main/jvm/README.md) – AdoptOpenJDK 17.0.2 \& related tooling (including jabba for easy version management and Maven 3.8.4)
+2. [koolkit-node](https://github.com/lightrun-platform/koolkits/blob/main/node/README.MD) – Node 16.13.1 \& related tooling (including nvm for easy version management)
+3. [koolkit-python](https://github.com/lightrun-platform/koolkits/blob/main/python/README.md) – Python 3.10.2 \& related tooling (including pyenv for easy version management)
 
-Note that you don't actually have to build them yourselves -- all KoolKits are hosted publicly on Docker Hub and available free of charge.
+Note that you don't actually have to build them yourselves – all KoolKits are hosted publicly on Docker Hub and available free of charge.
 
 ## KoolKits Coming up
 
 * A whole new, Go 1.17.7 KoolKit
-* JVM KoolKit -- [jvm-profiler](https://github.com/uber-common/jvm-profiler), [jHiccup](https://github.com/giltene/jHiccup) support
-* Node.js KoolKit -- [llnode](https://github.com/nodejs/llnode), [thetool](https://github.com/sfninja/thetool) support
-* Python KoolKit -- [vardbg](https://github.com/CCExtractor/vardbg), [memprof](https://github.com/jmdana/memprof) support
+* JVM KoolKit – [jvm-profiler](https://github.com/uber-common/jvm-profiler), [jHiccup](https://github.com/giltene/jHiccup) support
+* Node.js KoolKit – [llnode](https://github.com/nodejs/llnode), [thetool](https://github.com/sfninja/thetool) support
+* Python KoolKit – [vardbg](https://github.com/CCExtractor/vardbg), [memprof](https://github.com/jmdana/memprof) support
 
 ## Contribution
 
-We'd be more than happy to add tools we missed to any image -- just [open a pull request](https://github.com/lightrun-platform/koolkits/pulls) or [an issue](https://github.com/lightrun-platform/koolkits/issues) to suggest one.
+We'd be more than happy to add tools we missed to any image – just [open a pull request](https://github.com/lightrun-platform/koolkits/pulls) or [an issue](https://github.com/lightrun-platform/koolkits/issues) to suggest one.

@@ -113,7 +113,7 @@ String world = args.length > 0 ? args[0] : "world";
 System.out.println("Hello $world! I can write \$world as the variable...");
 ```
 
-The backslash syntax implicitly disables the templating behavior, just like in other string elements in Java. This will print `"Hello world! I can write $world as the variable..."`.
+The backslash syntax implicitly disables the templating behavior, just like in other string elements in Java. This will print `"Hello world! I can write $world as the variable…"`.
 
 There's something that you can't really see in the code, you need to look at a screenshot of the same code:
 
@@ -170,7 +170,7 @@ The templating capabilities are powerful yet simple. Just like we could in JSP, 
 
 ### Why Not: JSP, Velocity, Thymeleaf or Freemarker?
 
-There are so many templating languages in Java already... Adding yet another one seems like a heavy burden of replication. I think all of those are great and this isn't meant to replace them, at least not yet.
+There are so many templating languages in Java already… Adding yet another one seems like a heavy burden of replication. I think all of those are great and this isn't meant to replace them, at least not yet.
 
 Their focus is very much on web generation, they might not be ideal for more fluid use cases like code generation or web frameworks like Spark.
 

@@ -25,7 +25,7 @@ Some teachers explain them, while others say you will understand each word later
 
 Is this a problem to attract more Java developers?
 
-And how can we make the Java language more attractive for newbies? Let's ask some experts...
+And how can we make the Java language more attractive for newbies? Let's ask some experts…
 
 ## Video
 

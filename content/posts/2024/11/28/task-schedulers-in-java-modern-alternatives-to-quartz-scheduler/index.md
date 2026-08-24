@@ -54,7 +54,7 @@ Quartz has the ability to handle the tasks in a distributed fashion, but this fe
 
 ### Sporadic maintenance
 
-The last non-beta release of Quartz dates back to October 23, 2019. While development was on hold, **the ecosystem around it didn't stop evolving** . This hiatus led to a pile of unresolved issues. The users of the library are still suffering from the `javax` to `jakarta` namespace change, along with many bugs and security issues. They also **cannot use newer Java features such as virtual threads**, that may benefit background job processing, for instance to increase throughput...
+The last non-beta release of Quartz dates back to October 23, 2019. While development was on hold, **the ecosystem around it didn't stop evolving** . This hiatus led to a pile of unresolved issues. The users of the library are still suffering from the `javax` to `jakarta` namespace change, along with many bugs and security issues. They also **cannot use newer Java features such as virtual threads**, that may benefit background job processing, for instance to increase throughput…
 > **Update:** there is good news for Quartz users! The recent acquisition by IBM led to a spark in activity, with the community helping to fix some of the major issues. It is still unclear what this acquisition means for the future of Quartz but a new version of Quartz Scheduler - version 2.5 - was released on November 13, 2024.
 
 If you're looking for a Quartz alternative for your Java application, there are **several modern open-source schedulers that offer similar features**, more developer-friendly APIs, and more robust support for distributed and cloud-based environments.

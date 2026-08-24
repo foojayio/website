@@ -12,7 +12,7 @@ related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "avoiding-nullpointerexception"
   - "introduction-to-jvm-unified-logging-jep-158-jep-271"
-  - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
+  - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
 frozen: false
 ---
 

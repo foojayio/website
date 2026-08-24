@@ -25,7 +25,7 @@ Other languages: [Español](https://flounder.dev/es/posts/profile-idea-with-idea
 
 This might be useful if you are writing an [IntelliJ IDEA plugin](https://plugins.jetbrains.com/docs/intellij/sdk.html) and need to address issues related to your plugin's performance.
 
-Also, regardless of whether you are a plugin author, the described case might be interesting to you because the profiling strategy that I'll cover is not exclusive to IntelliJ IDEA -- you can use it to troubleshoot similar bottlenecks in other types of projects and using other tools.
+Also, regardless of whether you are a plugin author, the described case might be interesting to you because the profiling strategy that I'll cover is not exclusive to IntelliJ IDEA – you can use it to troubleshoot similar bottlenecks in other types of projects and using other tools.
 
 {{< img src="https://flounder.dev/img/profile-idea-with-idea/banner.png" class="size-medium" alt="Self-profiling IntelliJ IDEA – post banner" width="2400" height="1260" >}}
 
@@ -35,7 +35,7 @@ In this post, we'll look at a rather interesting performance bottleneck I stumbl
 
 ![A dialog saying 'Searching for tests for class...'](https://flounder.dev/img/profile-idea-with-idea/go-to-test-dark.png)
 
-The presence of the bottleneck didn't seem to depend on the size of the project -- even in projects consisting of a single class named `A`, the navigation would still take very long. I have never experienced delays related to this feature even in the huge IntelliJ IDEA monorepo, so the slowdown in an almost empty project seemed especially curious.
+The presence of the bottleneck didn't seem to depend on the size of the project – even in projects consisting of a single class named `A`, the navigation would still take very long. I have never experienced delays related to this feature even in the huge IntelliJ IDEA monorepo, so the slowdown in an almost empty project seemed especially curious.
 
 Why was this happening? And, more importantly, how to approach similar issues, should you encounter them in your project?
 

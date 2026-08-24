@@ -10,10 +10,10 @@ image: "pexels-joshua-woroniecki-2607956.jpg"
 categories:
   - "Use Cases"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-rss-full-featured-rss-atom-feed-module-for-boxlang"
   - "get-started-with-allocation-profiling"
   - "beginners-guide-to-java-profiler"
-  - "debug-without-breakpoints"
 frozen: false
 ---
 

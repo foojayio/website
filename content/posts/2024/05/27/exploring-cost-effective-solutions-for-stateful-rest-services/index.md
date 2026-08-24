@@ -21,8 +21,6 @@ related_posts:
   - "microstream-part-2-configure-the-storage-manager"
   - "announcing-cloud-native-boxlang-for-5-month"
 frozen: false
-aliases:
-  - "/today/exploring-cost-effective-solutions-for-stateful-rest-services-a-case-study-with-ibm-cloud-code-engine-eclipsestore-and-ibm-cloud-object-storage/"
 ---
 
 ## A Case Study with IBM Cloud Code Engine, EclipseStore, and IBM Cloud Object Storage
@@ -141,7 +139,7 @@ public class DemoApplication {
 ```
 
 * `@Autowired` EmbeddedStorageManager provides an injected interface to read and write data into the datastore.
-* `@Qualifier(...)` is necessary to direct Spring to the correct Bean  
+* `@Qualifier(…)` is necessary to direct Spring to the correct Bean  
   Here we could also initialize some initial data like a few already existing products (see [demo repository](https://github.com/xdev-software/eclipse-store-code-engine-demo/blob/master/src/main/java/software/xdev/eclipse/store/ibm/code/engine/demo/EclipseStoreCodeEngineDemoApplication.java "demo repository")).
 
 ![](CodeEngineEclipseStore_Layors-279x510.png)
@@ -218,10 +216,10 @@ public Collection<Product> list() {
 
 And now we already have a fully working Spring Application with local EclipseStore data. Run `mvn spring-boot:run` your app. To test your endpoints you can execute these commands:
 
-|        Action         |                                                                                                                                                               Command                                                                                                                                                               |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Retrieve all products | `curl http://localhost:8080/products`                                                                                                                                                                                                                                                                                               |
-| Add a product         | Linux `curl --request POST --header 'Content-Type: application/json' --data '{"id":"vxr3i5","name":"Couch","price":199.99}' http://localhost:8080/products` Windows `curl --request POST --header 'Content-Type: application/json' --data "{\"id\":\"vxr3i5\",\"name\":\"Couch\",\"price\":199.99}" http://localhost:8080/products` |
+|        Action         |                                                                                                                                                              Command                                                                                                                                                               |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Retrieve all products | `curl http://localhost:8080/products`                                                                                                                                                                                                                                                                                              |
+| Add a product         | Linux `curl --request POST --header 'Content-Type: application/json' --data '{"id":"vxr3i5","name":"Couch","price":199.99}' http://localhost:8080/products` Windows `curl --request POST --header 'Content-Type: application/json' –data "{\"id\":\"vxr3i5\",\"name\":\"Couch\",\"price\":199.99}" http://localhost:8080/products` |
 
 ## IBM Cloud Object Storage
 

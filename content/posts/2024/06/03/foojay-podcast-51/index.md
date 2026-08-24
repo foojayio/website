@@ -21,8 +21,6 @@ related_posts:
   - "foojay-podcast-48"
   - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-51-persistence-evolving-your-career-jakarta-ee-glassfish-messaging-via-telegram/"
 ---
 
 This is part 3 of the JCON interviews.
@@ -51,11 +49,11 @@ You can listen and subscribe to the Foojay Podcast on:
 08:44 Arjan Tijms: Jakarta EE, Eclipse Foundation, Which version of Java to use   
 <https://www.linkedin.com/in/arjan-tijms-1214aa1b1>  
 
-17:08 Ondro Mihalyi -- Jakarta EE, Eclipse GlassFish, Creating small Java applications, Edge devices   
+17:08 Ondro Mihalyi – Jakarta EE, Eclipse GlassFish, Creating small Java applications, Edge devices   
 <https://www.linkedin.com/in/mihalyiondrej>  
 
-24:09 Buhake Sindi -- Talks about Jakarta EE in the cloud, Comparing Jakarta EE to other frameworks, Java community in South Africa   
+24:09 Buhake Sindi – Talks about Jakarta EE in the cloud, Comparing Jakarta EE to other frameworks, Java community in South Africa   
 <https://www.linkedin.com/in/buhake-sindi>  
 
-31:50 Patrick Baumgartner -- Swiss community, Talks about a PET project with messaging via Telegram   
+31:50 Patrick Baumgartner – Swiss community, Talks about a PET project with messaging via Telegram   
 <https://www.linkedin.com/in/patbaumgartner>

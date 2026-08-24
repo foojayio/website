@@ -48,7 +48,7 @@ We'll discuss stepping over and into code, I hope most of this list is familiar 
 
 Step over is the most basic form of control flow. We let the code in the line execute and then we can inspect the results in the variable pane. It's simple and easy.
 
-In this case I just pressed the button here a couple of times but I could also just press F8 to get the same effect...
+In this case I just pressed the button here a couple of times but I could also just press F8 to get the same effect…
 
 Next we'll discuss two distinct operations, step into and the related step out. Step into goes into the method we invoke. Notice that if there's no method to go into the step into will act like step over.
 
@@ -78,7 +78,7 @@ Once we press OK, we return with the different value. In this case I was at the 
 
 ### Drop Frame
 
-Drop frame is almost as revolutionary but it's also more of a "neat trick". Here I stepped into a method by mistake. Oops I didn't want to do that. I wanted to change something before stepping in... Luckily there's drop frame. We saw I can reach it in the right-click menu, you can also click here to trigger it.
+Drop frame is almost as revolutionary but it's also more of a "neat trick". Here I stepped into a method by mistake. Oops I didn't want to do that. I wanted to change something before stepping in… Luckily there's drop frame. We saw I can reach it in the right-click menu, you can also click here to trigger it.
 
 Drop frame effectively drops the stack frame. It's an undo operation. But it isn't exactly that. It can't undo the state changes that occurred within the method we stepped into. So if you stepped into the method and variables that aren't on the stack were changed, they would remain changed.
 
@@ -94,7 +94,7 @@ Jump to line is a secret feature in IntelliJ. It works but developers don't know
 
 With jump to line we can move the current instruction pointer to a different position in the method. We can drag the arrow on the left to bring execution to a new location. Notice that this works in both directions, I can move the current execution back and forth.
 
-This doesn't execute the code in between, it literally moves the current instruction to a new position. It's so cool, I have to show it again...
+This doesn't execute the code in between, it literally moves the current instruction to a new position. It's so cool, I have to show it again…
 
 If you see a bug, just drag the execution back and reproduce it. You can change variable values and reproduce the issue over and over until you fully understand it.
 

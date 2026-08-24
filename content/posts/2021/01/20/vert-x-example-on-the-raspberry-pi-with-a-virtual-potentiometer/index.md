@@ -80,7 +80,7 @@ I simply used the Vert.X web "hello world" example:
     }
 ```
 
-Disclaimer -- I got the CSS from [here](https://codepen.io/jean-emmanuel/pen/GpxYdg).
+Disclaimer – I got the CSS from [here](https://codepen.io/jean-emmanuel/pen/GpxYdg).
 
 You can get the full code on my [GitHub](https://github.com/igfasouza/Vert.x-Potentiometer-web-Starter-example).
 

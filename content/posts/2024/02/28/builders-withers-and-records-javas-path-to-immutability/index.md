@@ -13,7 +13,7 @@ related_posts:
   - "top-most-detected-issues-in-java-projects"
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

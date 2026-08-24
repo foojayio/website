@@ -14,14 +14,9 @@ categories:
 related_posts:
   - "boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
-  - "boxlang-1-14-0-introducing-inner-classes"
 frozen: false
-# The emoji variant of this slug still resolves on foojay.io (WordPress 301s
-# it to the clean one). stripEmoji dropped it here, so the legacy URL had
-# no page. The character below is what %F0%9F... decodes to.
-aliases:
-  - "/today/boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work-🌲/"
 ---
 
 ![](bxai-series-cover-03-700x368.png)
@@ -147,7 +142,7 @@ sharedAgent.run( "Hello",           {}, { userId: "bob",   conversationId: "sess
 
 ## 🧠 Per-Call Identity Routing on Memory
 
-All memory types follow the same pattern --- `add()`, `getAll()`, `clear()`, and `trim()` all accept optional `userId` and `conversationId`:
+All memory types follow the same pattern — `add()`, `getAll()`, `clear()`, and `trim()` all accept optional `userId` and `conversationId`:
 
 ```java
 // One memory instance, many tenants

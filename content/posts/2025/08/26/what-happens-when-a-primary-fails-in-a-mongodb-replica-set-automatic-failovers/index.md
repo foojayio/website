@@ -29,8 +29,8 @@ A replica set in MongoDB is a group of mongod instances that maintain the same d
 
 For example, in a five-node replica set:
 
-* One node is the primary--the only one accepting writes.
-* Four nodes are secondaries--they replicate the primary's oplog and stay in sync.
+* One node is the primary–the only one accepting writes.
+* Four nodes are secondaries–they replicate the primary's oplog and stay in sync.
 
 **The main picture -- primary fails 🚨**
 

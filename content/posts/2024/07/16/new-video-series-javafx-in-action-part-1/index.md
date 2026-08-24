@@ -55,7 +55,7 @@ Christopher is a software engineer with experience in the Java ecosystem and des
 Currently, he has two public JavaFX applications:
 
 * **Pdx-Unlimiter** : A tool for all major Paradox Grand Strategy games that provides a powerful and smart savegame manager to quickly organize and play all of your savegames with ease. Furthermore, it also comes with an Ironman converter, a powerful savegame editor, some savescumming tools, integrations for various other great community-made tools, and full support for multiple games. You can [find it on GitHub](https://github.com/crschnick/pdx_unlimiter).[](https://webtechie.be/images/2024/jfx-in-action/christopher/pdx-github.png)[](https://webtechie.be/images/2024/jfx-in-action/christopher/pdx-1.png)[](https://webtechie.be/images/2024/jfx-in-action/christopher/pdx-2.png)
-* **XPipe** : Brings your entire server infrastructure at your fingertips. It helps you to manage all your servers from your local desktop without any remote setup. It provides seamless SSH integration, detects all your containers, k8s clusters, and virtual machines, has an integrated VNC client,... Check out the [XPipe website](https://xpipe.io) for all features and a free download. The professional licensed edition even offers more features.
+* **XPipe** : Brings your entire server infrastructure at your fingertips. It helps you to manage all your servers from your local desktop without any remote setup. It provides seamless SSH integration, detects all your containers, k8s clusters, and virtual machines, has an integrated VNC client,… Check out the [XPipe website](https://xpipe.io) for all features and a free download. The professional licensed edition even offers more features.
 
 {{< youtube mZV1OJ23d2c >}}
 

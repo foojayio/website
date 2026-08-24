@@ -21,7 +21,7 @@ frozen: false
 
 In [the preceding article](https://foojay.io/today/java-functional-programming/), we explored the significance of **Functional Programming, Lambda Calculus**, and other related concepts.
 
-In this article, we delve deeper into the essential aspects of Functional Programming, such as...​
+In this article, we delve deeper into the essential aspects of Functional Programming, such as…​
 
 **1. Lambda Expressions
 2. Method References

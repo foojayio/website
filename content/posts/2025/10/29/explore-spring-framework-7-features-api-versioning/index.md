@@ -40,12 +40,12 @@ When introducing such new capabilities, maintaining **backward compatibility** i
 
 The **core strategies of API versioning** in Spring are as follows:
 
-1. **ApiVersionStrategy** ---This is the main strategy that manages all versioning configurations. It resolves versions from requests using the ApiVersionParser, parses raw version values through the `ApiVersionParser`, validates request versions, and triggers deprecation notifications in responses.
-2. **ApiVersionResolver**---This component extracts the API version from incoming requests. The Spring MVC configuration provides built-in options to resolve versions from headers, query parameters, media type parameters, or URL paths.
-3. **ApiVersionParser** ---This component parses version values. The built-in `SemanticApiVersionParser` interpreter versions in the `major.minor.patch` format.
-4. **Validation**---This process checks whether the requested version is supported by the application. If not, the system throws an InvalidApiVersionException.
-5. **ApiVersionDeprecationHandler**---This component manages deprecation notifications using the standard ApiVersionDeprecationHandler, informing clients when they are using deprecated API versions.
-6. **Request Mapping**---The ApiVersionStrategy integrates with Spring's request mapping mechanism to correctly map incoming requests to the corresponding versioned controller methods.
+1. **ApiVersionStrategy** —This is the main strategy that manages all versioning configurations. It resolves versions from requests using the ApiVersionParser, parses raw version values through the `ApiVersionParser`, validates request versions, and triggers deprecation notifications in responses.
+2. **ApiVersionResolver**—This component extracts the API version from incoming requests. The Spring MVC configuration provides built-in options to resolve versions from headers, query parameters, media type parameters, or URL paths.
+3. **ApiVersionParser** —This component parses version values. The built-in `SemanticApiVersionParser` interpreter versions in the `major.minor.patch` format.
+4. **Validation**—This process checks whether the requested version is supported by the application. If not, the system throws an InvalidApiVersionException.
+5. **ApiVersionDeprecationHandler**—This component manages deprecation notifications using the standard ApiVersionDeprecationHandler, informing clients when they are using deprecated API versions.
+6. **Request Mapping**—The ApiVersionStrategy integrates with Spring's request mapping mechanism to correctly map incoming requests to the corresponding versioned controller methods.
 
 ## API Versioning In Action
 
@@ -53,8 +53,8 @@ This guide explains how to set up, build, and run the API versioning and project
 
 To ensure compatibility between old and new changes, we can use the following approaches:
 
-* **Lightweight Change** ---Versioning by **header** or **query parameter**.
-* **Structural Change** ---Versioning by **URL** (new host or new path), as suggested by **Roy Fielding**.
+* **Lightweight Change** —Versioning by **header** or **query parameter**.
+* **Structural Change** —Versioning by **URL** (new host or new path), as suggested by **Roy Fielding**.
 
 In this guide, we will explore how to implement *API versioning using headers*
 
@@ -69,9 +69,9 @@ We will create the following folder structure under `com.bsmlabs.features` packa
 
 * **Folder** : `apiversioning`
 * Subfolders under `apiversioning`:
-  * `config`---to hold configuration classes
-  * `controller`---to define API controllers
-  * `model`---to store entity or data classes
+  * `config`—to hold configuration classes
+  * `controller`—to define API controllers
+  * `model`—to store entity or data classes
   * `repository`-to manage data access
 
 We can enable API versioning using the following options:

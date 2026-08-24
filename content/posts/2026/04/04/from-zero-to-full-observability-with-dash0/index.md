@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-This guide walks through the complete process of deploying a minimal Spring Boot service to Kubernetes and adding full observability using the [Dash0 Kubernetes Operator](https://www.dash0.com/docs/dash0/monitoring/kubernetes/about-kubernetes) --- without making any changes to the application code.
+This guide walks through the complete process of deploying a minimal Spring Boot service to Kubernetes and adding full observability using the [Dash0 Kubernetes Operator](https://www.dash0.com/docs/dash0/monitoring/kubernetes/about-kubernetes) — without making any changes to the application code.
 
 [Dash0](https://www.dash0.com/docs/dash0) is an OpenTelemetry-native observability platform that collects and correlates traces, metrics, and logs, and provides infrastructure monitoring across Kubernetes resources — pods, nodes, namespaces, deployments, daemonsets, statefulsets, jobs, and cronjobs — as well as cloud infrastructure such as AWS. Its Kubernetes operator can automatically instrument workloads at the pod level, with no changes required to application code or container images.
 ![](kubernetes-dash0-1024x581.png)
@@ -147,8 +147,8 @@ jobs:
 
 **3. Add Docker Hub secrets to GitHub.** Go to the GitHub repo Settings → Secrets and variables → Actions and add:
 
-* `DOCKER_USERNAME` --- your Docker Hub username
-* `DOCKER_PASSWORD` --- your Docker Hub password or access token
+* `DOCKER_USERNAME` — your Docker Hub username
+* `DOCKER_PASSWORD` — your Docker Hub password or access token
 
 Push the workflow file and GitHub Actions will build and push the image to Docker Hub automatically.
 
@@ -338,7 +338,7 @@ The curl loop in terminal 2 will resume automatically.
 
 Check the following:
 
-**Monitoring → Services** --- `order-service` with live request rate, error rate, and latency
+**Monitoring → Services** — `order-service` with live request rate, error rate, and latency
 ![](dash0-services-1024x298.png)
 
 **Telemetry → Tracing** — individual traces for each `/orders` request

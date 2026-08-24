@@ -27,7 +27,7 @@ Here we go with this small project to get you introduced to the world of electro
 
 *This post was originally published on "[JVM **Advent** - The JVM Programming **Advent** Calendar](https://www.javaadvent.com/)", a month-long reading list of diverse Java-related articles. A nice addition to your daily read of Foojay!*
 
-We are going the make the "Hello World"-equivalent of an electronics project: a blinking LED. And to make it a bit more challenging, not only blinking one LED but a "full" Christmas tree, well... at least 7 blinking Christmas lights.
+We are going the make the "Hello World"-equivalent of an electronics project: a blinking LED. And to make it a bit more challenging, not only blinking one LED but a "full" Christmas tree, well… at least 7 blinking Christmas lights.
 
 <figure class="wp-block-embed is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio">
  <div class="wp-block-embed__wrapper">

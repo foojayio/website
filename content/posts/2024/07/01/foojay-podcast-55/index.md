@@ -24,8 +24,6 @@ related_posts:
   - "java-on-raspberry-pi-5-with-pi4j"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-55-embedded-java-part-2/"
 ---
 
 As a backend developer, you may not realize that Java was initially born on embedded devices like set-top boxes and gateways. We discussed this topic for the first time almost three years ago in [Foojay Podcast #2 with James Gosling, Johan Vos, Erik Costlow, and Frank Delporte](https://foojay.io/today/foojay-podcast-2/).

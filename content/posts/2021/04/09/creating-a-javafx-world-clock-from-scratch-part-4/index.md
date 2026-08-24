@@ -101,7 +101,7 @@ You're probably wondering, "I don't remember installing Bach!", Where did it com
 
 What's really cool about Bach is that you don't need to use build tools like [Maven](https://maven.apache.org) or [Gradle](https://gradle.org)to handle dependencies and to generate artifacts such as jar, exe, dmg, etc.
 
-So, what's the catch? No catch, well except one thing...You gotta go modular! Bach is really designed for Java projects that are pure modular apps and libraries.
+So, what's the catch? No catch, well except one thing…You gotta go modular! Bach is really designed for Java projects that are pure modular apps and libraries.
 
 While there are ways to use non-modular libraries designed for the Java class path, it is NOT advisable (or not worth the time). What will happen is that you can get into weird mismatch problems within your IDE when building and running the application (inside the IDE) as opposed to being on the command line.
 

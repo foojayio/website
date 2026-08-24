@@ -20,13 +20,13 @@ frozen: false
 
 Breaking news: Java has been confirmed to consume all available RAM. Developers worldwide shocked.  
 
-... okay, not really. Happy April 1st.
+… okay, not really. Happy April 1st.
 
 It's only fair to bring in the biggest liar in history to help us talk about one of the oldest myths in the Java world.
 
 Meet **Pinocchio Duke**, the official Java mascot who swears up and down that "Java doesn't use that much memory anymore!"
 
-But every time he says it... his nose grows a little longer.
+But every time he says it… his nose grows a little longer.
 
 For years, "Java uses too much memory" has been one of the most repeated claims in software engineering. It's often said with confidence, rarely with evidence, and almost always based on outdated assumptions.
 
@@ -50,7 +50,7 @@ But that was then.
 *Disclaimer: No wooden noses were harmed in the writing of this article. (But Duke's might have grown a few centimeters while we were testing -Xmx flags.)*
 
 ![](duke_Pinocchio02-1024x640.jpg)  
-*Image 01: Pinocchio Duke on April 1st: "I swear... Java doesn't use that much memory anymore!*
+*Image 01: Pinocchio Duke on April 1st: "I swear… Java doesn't use that much memory anymore!*
 
 ## Modern Java: What Actually Changed?
 
@@ -103,7 +103,7 @@ Thousands of threads no longer mean gigabytes of memory.
 
 Yes, this is real.
 
-JEP 450 -- Compact Object Headers introduces:
+JEP 450 – Compact Object Headers introduces:
 
 * Reduced object header size
 * Lower per-object memory overhead
@@ -135,7 +135,7 @@ This is especially useful in:
 
 ### 5. Java Finally Understands Containers
 
-There was a time when Java inside a container behaved... badly.
+There was a time when Java inside a container behaved… badly.
 
 It assumed:
 
@@ -156,7 +156,7 @@ Today:
 
 Java used to think it owned the machine. Now it behaves like a good citizen.
 
-### 6. Project Valhalla (Value Classes \& Objects) -- Coming Soon
+### 6. Project Valhalla (Value Classes \& Objects) – Coming Soon
 
 Still in preview/early access, but progressing steadily. Value objects eliminate identity and can be stored flattened (no pointer overhead). This will be a game-changer for memory density — especially for collections, records, and data-oriented programming. Expect the first preview features to land in a future JDK (possibly 27 or 28).
 
@@ -310,18 +310,18 @@ With Compact Object Headers (JEP 450):
 
 Here are simplified, realistic comparisons based on common setups:
 
-|         Scenario         |      Memory Usage       |
-|--------------------------|-------------------------|
-| 10k platform threads     | \~10 GB ❌               |
-| 10k virtual threads      | \~50--100 MB ✅          |
-| Unbounded cache          | grows forever ❌         |
-| Bounded cache (Caffeine) | stable (\~50--200 MB) ✅ |
-| No CDS (multiple JVMs)   | high duplication ❌      |
-| With CDS                 | reduced footprint ✅     |
+|         Scenario         |      Memory Usage      |
+|--------------------------|------------------------|
+| 10k platform threads     | \~10 GB ❌              |
+| 10k virtual threads      | \~50–100 MB ✅          |
+| Unbounded cache          | grows forever ❌        |
+| Bounded cache (Caffeine) | stable (\~50–200 MB) ✅ |
+| No CDS (multiple JVMs)   | high duplication ❌     |
+| With CDS                 | reduced footprint ✅    |
 
 *Table 01: Benchmark*
 
-### So... Does Java Use Too Much Memory?
+### So… Does Java Use Too Much Memory?
 
 Sometimes — but not for the reason people think.
 
@@ -335,7 +335,7 @@ Real causes of high memory usage:
 
 In other words:
 
-* Most memory problems in Java are... Java developers.
+* Most memory problems in Java are… Java developers.
 
 ### Final Thoughts
 
@@ -355,6 +355,6 @@ Java isn't memory-hungry. It's memory-aware.
 
 If your app uses 2GB, start with your code — not the JVM.
 
-If after reading this your Java services are still using too much memory... blame the GC, not Duke. His nose is innocent this time.
+If after reading this your Java services are still using too much memory… blame the GC, not Duke. His nose is innocent this time.
 
 Happy April 1st — and happy profiling. 🚀

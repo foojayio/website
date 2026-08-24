@@ -126,7 +126,7 @@ Host: Frank Delporte
 
 32:14 How the company Vaadin is making money from opensource  
 
-34:31 The future of Wicket, htmx, Vaadin,...  
+34:31 The future of Wicket, htmx, Vaadin,…  
 
 39:55 Which kind of project to build with Wicket or Vaadin  
 

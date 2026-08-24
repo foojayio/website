@@ -15,9 +15,9 @@ categories:
   - "Tools"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 frozen: false
 ---
 
@@ -25,7 +25,7 @@ frozen: false
 
 JWT authentication is everywhere. But rolling it correctly — with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and zero security footguns — is anything but trivial. Today, we're shipping **bx-jwt**, a production-ready JWT/JWE module for BoxLang that handles all of it out of the box, so you can focus on building, not fighting cryptography.
 
-**bx-jwt** is part of the [BoxLang+ and BoxLang++ subscription tiers](https://www.boxlang.io/plans "BoxLang+ and BoxLang++ subscription tiers") --- our enterprise-grade module collection built for teams that take security seriously.
+**bx-jwt** is part of the [BoxLang+ and BoxLang++ subscription tiers](https://www.boxlang.io/plans "BoxLang+ and BoxLang++ subscription tiers") — our enterprise-grade module collection built for teams that take security seriously.
 
 **bx-jwt** is a full implementation of the JWT/JWE specification stack for BoxLang:
 
@@ -36,7 +36,7 @@ JWT authentication is everywhere. But rolling it correctly — with proper algor
 
 It ships with two APIs that serve different tastes: a **fluent builder** for expressive, chainable token construction, and a suite of **BIF functions** for direct, functional-style usage. Both share the same engine, key registry, and security model.
 
-### The Fluent Builder --- `jwtNew()`
+### The Fluent Builder — `jwtNew()`
 
 When readability matters, the fluent builder gives you a clean, chainable surface for token construction. Call `jwtNew()` and chain your claims. Terminate with `.sign()` or `.encrypt()`.
 
@@ -60,7 +60,7 @@ For teams that prefer a direct, functional style, all operations are available a
 |          BIF           |                             Purpose                              |
 |------------------------|------------------------------------------------------------------|
 | `jwtCreate()`          | Sign a payload struct into a compact JWS token                   |
-| `jwtVerify()`          | Verify signature and validate claims — throws on failure       |
+| `jwtVerify()`          | Verify signature and validate claims — throws on failure         |
 | `jwtValidate()`        | Like `jwtVerify()` but returns `true`/`false`                    |
 | `jwtDecode()`          | Inspect header/payload without signature verification            |
 | `jwtRefresh()`         | Re-issue a token with fresh `iat`, `jti`, and optional new `exp` |
@@ -252,11 +252,11 @@ function verifyWithKeyRotation( token ) {
 
 ### Signing (JWS)
 
-|      Algorithm      |      Type      |                     Notes                     |
-|---------------------|----------------|-----------------------------------------------|
-| HS256, HS384, HS512 | HMAC           | Symmetric                                     |
+|      Algorithm      |      Type      |                    Notes                    |
+|---------------------|----------------|---------------------------------------------|
+| HS256, HS384, HS512 | HMAC           | Symmetric                                   |
 | RS256, RS384, RS512 | RSA            | Asymmetric — private signs, public verifies |
-| ES256, ES384, ES512 | Elliptic Curve | Smaller keys than RSA, equivalent security    |
+| ES256, ES384, ES512 | Elliptic Curve | Smaller keys than RSA, equivalent security  |
 
 ### Encryption (JWE)
 

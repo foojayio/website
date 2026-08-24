@@ -30,7 +30,7 @@ A lot has changed since those old days.
 
 CI products are all over the place and as Java developers we enjoy a richness of capabilities like never before.
 
-But I'm getting ahead of myself...
+But I'm getting ahead of myself…
 
 Let's start with the basics!
 

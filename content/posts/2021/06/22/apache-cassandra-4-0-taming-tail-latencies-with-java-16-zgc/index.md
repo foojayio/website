@@ -33,7 +33,7 @@ On the one hand, garbage collection is a primary reason that Java is so much mor
 
 But performing garbage collection means having to briefly pause the JVM to determine which objects are no longer in use and can safely be disposed of. These GC pauses can cause delayed response times to client requests, i.e., increased latencies.
 
-Not all requests are affected by this--only the handful of requests that are in flight while Cassandra's request-handling threads are paused for the GC. The performance impact is thus only visible in tail latencies, that is, the 99th percentile or 99.9th percentile measurements, corresponding to the slowest 1% or 0.1% of requests.
+Not all requests are affected by this–only the handful of requests that are in flight while Cassandra's request-handling threads are paused for the GC. The performance impact is thus only visible in tail latencies, that is, the 99th percentile or 99.9th percentile measurements, corresponding to the slowest 1% or 0.1% of requests.
 
 As with so many things, optimizing GC involves tradeoffs, and the original Java GC designs focused more on improving throughput than on reducing pause times. Fast forward to 2021 and we have common server-class CPUs with 64 cores/128 threads—we have plenty of throughput on tap. It's time to spend some of those cycles on lower pause times.
 

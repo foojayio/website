@@ -164,7 +164,7 @@ class Hidden
 fun Hidden.foo() = 5
 ```
 
-This is an example of a classic language feature task. There are also other types of feature tasks, such as a task for a [change in the klib utility](https://youtrack.jetbrains.com/issue/KT-59486/klib-Serialize-mangled-names-along-with-signatures "change in the klib utility") --- it was necessary to verify the correctness of the utility output. A simplified example showing the essence of the task looks something like this:
+This is an example of a classic language feature task. There are also other types of feature tasks, such as a task for a [change in the klib utility](https://youtrack.jetbrains.com/issue/KT-59486/klib-Serialize-mangled-names-along-with-signatures "change in the klib utility") — it was necessary to verify the correctness of the utility output. A simplified example showing the essence of the task looks something like this:
 
 ```bash
 ➜ workdir cat kt-59486.sh

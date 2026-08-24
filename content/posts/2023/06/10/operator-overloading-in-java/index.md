@@ -151,7 +151,7 @@ Notice that the increment and decrement operators don't have a distinction betwe
 
 ## Index Operator
 
-The support for the index operator took me completely off guard when I looked at it. This is a complete game-changer... The index operator is the square brackets we use to get an array value by index.
+The support for the index operator took me completely off guard when I looked at it. This is a complete game-changer… The index operator is the square brackets we use to get an array value by index.
 
 To give you a sense of what I'm talking about, this is valid code in Manifold:
 
@@ -182,7 +182,7 @@ You're reading valid code in Manifold. An index operator is used to lookup in a 
 
 ## Relational and Equality Operators
 
-We still have a lot to cover... Can we write code like this (referring to the `Vec` object from before):
+We still have a lot to cover… Can we write code like this (referring to the `Vec` object from before):
 
 ```
 if(vec3 > vec2) {
@@ -309,7 +309,7 @@ One of my favorite things about Manifold is its support of strict typing and com
 
 If you're going to do something terrible (accessing private state), then at least have it checked by the compiler.
 
-In the following code, the value array is private to String yet we can manipulate it thanks to the `@JailBreak` annotation. This code will print `"Ex0osed..."`:
+In the following code, the value array is private to String yet we can manipulate it thanks to the `@JailBreak` annotation. This code will print `"Ex0osed…"`:
 
 ```
 @Jailbreak String exposedString = "Exposed...";
@@ -383,7 +383,7 @@ While Java doesn't natively support operator overloading, Manifold empowers deve
 
 By leveraging Manifold, we can write more fluid and expressive code, particularly in scientific, mathematical, and financial applications.
 
-The type safety enhancements in Manifold make Java more...
+The type safety enhancements in Manifold make Java more…
 
 Well, "Java like". It lets Java developers build upon the strong foundation of the language and embrace a more expressive type-safe programming paradigm.
 

@@ -32,7 +32,7 @@ Previously, users have reported that our extensions did not have good support of
 
 With this decompiler, our extension allows you to directly click into libraries and it will automatically decompile the bytecode into readable source code. Inside the decompiled code, you can debug like what you do normally. We hope this feature will greatly boost your productivity during development. Here's a simple demo.
 
-![Decompiler experience upgrade](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/07/decompile_debugging.webp)
+![Decompiler experience upgrade](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/07/decompile_debugging.gif)
 
 Decompiler experience upgrade, image
 

@@ -29,10 +29,10 @@ Jakarta EE 11 Web Profile delivers an updated and streamlined set of specificati
 * **CDI as a central integration model**: Even deeper CDI integration across multiple specs
 * **Jakarta Data 1.0**: A new spec in Jakarta EE; sets the stage for data access innovation
 * Several specifications updated:
-  * [Persistence 3.2](https://jakarta.ee/specifications/persistence/3.2/) -- Java SE Records as embeddable classes, more functions in queries, Instant and Year support for date/time fields, and many more
-  * [Concurrency 3.1](https://jakarta.ee/specifications/concurrency/3.1/) -- Support for Java Virtual Threads and Flow API
-  * [Jakarta Security 4.0](https://jakarta.ee/specifications/security/4.0/) -- Choosing from multiple authentication mechanisms, In-memory identity store (for testing)
-  * [Expression Language 6.0](https://jakarta.ee/specifications/expression-language/6.0/) -- Support Java Records and Optional, new `length` property for arrays
+  * [Persistence 3.2](https://jakarta.ee/specifications/persistence/3.2/) – Java SE Records as embeddable classes, more functions in queries, Instant and Year support for date/time fields, and many more
+  * [Concurrency 3.1](https://jakarta.ee/specifications/concurrency/3.1/) – Support for Java Virtual Threads and Flow API
+  * [Jakarta Security 4.0](https://jakarta.ee/specifications/security/4.0/) – Choosing from multiple authentication mechanisms, In-memory identity store (for testing)
+  * [Expression Language 6.0](https://jakarta.ee/specifications/expression-language/6.0/) – Support Java Records and Optional, new `length` property for arrays
   * And many others, with bigger or smaller changes (see the table below)
 * **Deprecation cleanup**: Removal of some EJB features, JAXB support, and Jakarta Faces Managed Beans
 

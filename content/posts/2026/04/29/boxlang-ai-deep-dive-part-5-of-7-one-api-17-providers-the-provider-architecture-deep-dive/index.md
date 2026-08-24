@@ -13,16 +13,11 @@ categories:
   - "Java"
   - "Tutorials"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
-  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 frozen: false
-# The emoji variant of this slug still resolves on foojay.io (WordPress 301s
-# it to the clean one). stripEmoji dropped it here, so the legacy URL had
-# no page. The character below is what %F0%9F... decodes to.
-aliases:
-  - "/today/boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive-🛡️/"
 ---
 
 ![](bxai-series-cover-05-700x368.png)
@@ -90,7 +85,7 @@ IAiService (interface — identity + capabilities)
 
 The split between `BaseService` and `OpenAIService` is one of the most important refactors in 3.0. Before, the "base" class was OpenAI-specific code that every other provider either inherited awkwardly or had to override entirely. Now `BaseService` is a true provider-agnostic foundation, and `OpenAIService` is where the OpenAI-format-specific logic lives.
 
-## 🎯 `IAiService` --- The Trimmed Interface
+## 🎯 `IAiService` — The Trimmed Interface
 
 The base interface now declares only what's universal across *all* providers:
 
@@ -201,15 +196,15 @@ aiEmbed( "some text", provider: "claude" )
 
 No more cryptic 404s or malformed response errors when you call the wrong operation on the wrong provider.
 
-## 🔧 `BaseService` --- The Transport Layer
+## 🔧 `BaseService` — The Transport Layer
 
 `BaseService` owns everything that's truly provider-agnostic:
 
-* **HTTP transport** --- `sendChatRequest()`, `sendStreamRequest()`, `sendEmbeddingRequest()`
+* **HTTP transport** — `sendChatRequest()`, `sendStreamRequest()`, `sendEmbeddingRequest()`
 * **Lifecycle events** — fires `onAIChatRequest`, `onAIChatResponse`, `onAIEmbedRequest`, `onAIEmbedResponse`, `onAIRateLimitHit`, `onAIError`
 * **Logging** — request/response logging with detailed, human-readable log messages
 * **Configuration** — merges module defaults, provider-specific config, and per-request options
-* **Pre/post hooks** --- `preRequest()` and `postResponse()` for provider-specific normalization  
+* **Pre/post hooks** — `preRequest()` and `postResponse()` for provider-specific normalization  
   The pre/post hook pattern is worth understanding. Instead of overriding the entire `sendChatRequest()` method to add a custom header or normalize a response, providers override two lightweight hooks:
 
 ```java
@@ -315,7 +310,7 @@ answer = aiChat( "What is BoxLang?" )
 
 The same code that runs against OpenAI runs against your local Ollama instance. Switch back by changing the provider in config. This is the zero-vendor-lock-in promise in practice.
 
-Docker Compose setup for development teams that want a shared Ollama instance is included in the repo --- `docker-compose-ollama.yml` sets up both the Ollama service and auto-pulls models on first run.
+Docker Compose setup for development teams that want a shared Ollama instance is included in the repo — `docker-compose-ollama.yml` sets up both the Ollama service and auto-pulls models on first run.
 
 ## 🤗 New in 3.0: HuggingFace Embeddings
 
@@ -432,7 +427,7 @@ Your `aiChat()`, `aiEmbed()`, `aiAgent()`, and `aiModel()` calls are all identic
 
 Over these five posts, we've covered the full depth of BoxLang AI 3.0:
 
-* **Part 1**--- AI Skills System: versioned, composable knowledge blocks that end prompt drift
+* **Part 1**— AI Skills System: versioned, composable knowledge blocks that end prompt drift
 * **Part 2** — Tool Ecosystem: `BaseTool`, `ClosureTool`, the Global Registry, and `now@bxai`
 * **Part 3** — Multi-Agent Orchestration: hierarchy trees, stateless agents, per-call identity routing
 * **Part 4** — Middleware: six built-in classes, the hook lifecycle, and FlightRecorderMiddleware for CI

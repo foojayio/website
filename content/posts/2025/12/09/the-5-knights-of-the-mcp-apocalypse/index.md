@@ -15,11 +15,9 @@ related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "sonarqube-part-4-ai-code-assurance"
 frozen: false
-aliases:
-  - "/today/the-5-knights-of-the-mcp-apocalypse-😱/"
 ---
 
-Let's talk about that new **MCP (Model Context Protocol) Server** your team is using to connect to your real data services. It's awesome, right? It's the "magic box" that gives your AI Agent access to the **real world**---live databases, internal APIs, and all your tools.
+Let's talk about that new **MCP (Model Context Protocol) Server** your team is using to connect to your real data services. It's awesome, right? It's the "magic box" that gives your AI Agent access to the **real world**—live databases, internal APIs, and all your tools.
 
 But here's the catch: **you don't own the code.** 🚫
 

@@ -91,7 +91,7 @@ Let's go back to databases.
 
 As said above, the PostgreSQL protocol, as most database protocols, is a request-response protocol similar to HTTP.
 
-When using an API such as JDBC, you are limited by the API. First, you need to acquire a database connection (from a connection pool). With this connection, you perform operations such as queries, insertions, and so on. These operations are blocking, and your code waits until you get the responses. Once done, you release the connection to the pool. So, the mechanism is similar to the HTTP/1.x: request, wait for the response, next request...​
+When using an API such as JDBC, you are limited by the API. First, you need to acquire a database connection (from a connection pool). With this connection, you perform operations such as queries, insertions, and so on. These operations are blocking, and your code waits until you get the responses. Once done, you release the connection to the pool. So, the mechanism is similar to the HTTP/1.x: request, wait for the response, next request…​
 
 [![Blocking database access](database-jdbc-700x432.png)](database-jdbc.png)
 

@@ -3,6 +3,7 @@ title: "Production Horrors - Handling Disasters: Public Debrief. Handling failur
 date: "2021-11-03T10:49:21+00:00"
 lastmod: "2021-11-03T10:49:23+00:00"
 description: "Just in time for Halloween failures in production are scarier than most movie monsters. Here's a personal scary story of a production fail..."
+canonical: "https://talktotheduck.dev/production-horrors-handling-disasters-public-debrief"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Production-Horrors_Halloween.jpg"
@@ -38,11 +39,11 @@ One final important thing to know is that Codename One is a bootstrapped company
 
 One fine day we got an email that billing is high. That seemed weird but we logged in to check it out. Our typical monthly bill was around 70$ + 400$ paid for gold support. The billing at this point was already in the 4 digits.
 
-This is where hysteria kicked in. We don't have that kind of money...
+This is where hysteria kicked in. We don't have that kind of money…
 
 So the first order of business was to reduce every resource we had such as number of instances etc. But those weren't the reason for the billing issue. We tried to get help from Google's gold support team, which was "unhelpful" (to put it mildly). Google's only suggestion was to define a spending limit and effectively bring our service down as a result.
 
-The billing was entirely attributed to one line in the statement: "App Engine Datastore Read Ops". Naturally we wanted to understand what that means and which part of the code is performing all those reads... Unfortunately, due to the way App Engine is built (or was built circa 2015) there was no way of knowing that.
+The billing was entirely attributed to one line in the statement: "App Engine Datastore Read Ops". Naturally we wanted to understand what that means and which part of the code is performing all those reads… Unfortunately, due to the way App Engine is built (or was built circa 2015) there was no way of knowing that.
 
 To make matters worse our only tool for debugging was logs, which cost money. So in order to debug this problem of higher spending I'd need to increase our spending.
 
@@ -56,7 +57,7 @@ Billing didn't list "live" numbers at the time (I'm unsure if it does so now). S
 
 Because of that each attempt at a fix, included many different improvements to the code. To this day we have no idea what the bug was and what fixed it eventually. It's entirely possible that this was a bug in App Engine that was resolved by Google. We have no way of knowing.
 
-## Debrief -- Lessons Learned
+## Debrief – Lessons Learned
 
 ### What we Should Have Done
 
@@ -82,7 +83,7 @@ Observability tools are crucial and they need the ability to dig into deep granu
 
 #### Instant Feedback
 
-This seems like a luxury in pretty much every other case but here we saw exactly how important this can be. The test/deploy/wait cycle literally cost us thousands of dollars, because of a problem that lasted a few days. Imagine if we were a bigger company with more traffic... We could have lost millions.
+This seems like a luxury in pretty much every other case but here we saw exactly how important this can be. The test/deploy/wait cycle literally cost us thousands of dollars, because of a problem that lasted a few days. Imagine if we were a bigger company with more traffic… We could have lost millions.
 
 When you have a production problem you need your tools to report instantly. You need to know the exact problem and you need to know if your fix worked. Due to the nature of App Engine we had no way of using some of the tools that were available at the time. In retrospect we need better tools.
 
@@ -102,7 +103,7 @@ I honestly don't know.
 
 You might be tempted to think that you aren't at risk. You don't use App Engine, probably don't use PaaS.
 
-However, Serverless and 3rd party APIs provide a similar risk. It's a very common problem e.g. someone even [hacked himself with a spreadsheet](https://www.behind-the-enemy-lines.com/2012/04/google-attack-how-i-self-attacked.html) accidentally. Another team got a [72k USD bill for a free account](https://blog.tomilkieway.com/72k-1/) ...
+However, Serverless and 3rd party APIs provide a similar risk. It's a very common problem e.g. someone even [hacked himself with a spreadsheet](https://www.behind-the-enemy-lines.com/2012/04/google-attack-how-i-self-attacked.html) accidentally. Another team got a [72k USD bill for a free account](https://blog.tomilkieway.com/72k-1/) …
 
 These stories are all over the place.
 
@@ -118,7 +119,7 @@ Ideas gain meaning when we feel the pain and I felt the pain deeply. This made t
 
 ## TL;DR
 
-Today's scary story is about a promising young bootstrapped company who ventured into an environment that seemed welcoming and wholesome... Only to discover that billing suddenly flipped overnight and it was running up huge charges.
+Today's scary story is about a promising young bootstrapped company who ventured into an environment that seemed welcoming and wholesome… Only to discover that billing suddenly flipped overnight and it was running up huge charges.
 
 You might be next, as many young companies have run into this nightmare.
 
@@ -126,6 +127,6 @@ You might be next, as many young companies have run into this nightmare.
 
 Do you have an interesting production disaster story to share?
 
-Write to me at shaia (at) lightrun (dot) com. If you want your name/company name off this I'd be happy to oblige... I can offer a super cool Lightrun swag box as a reward, our swag here is top notch!
+Write to me at shaia (at) lightrun (dot) com. If you want your name/company name off this I'd be happy to oblige… I can offer a super cool Lightrun swag box as a reward, our swag here is top notch!
 
 Looking forward to hearing from you.

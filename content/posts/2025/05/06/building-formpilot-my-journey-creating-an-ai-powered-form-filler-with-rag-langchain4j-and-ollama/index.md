@@ -6,14 +6,7 @@ description: "My Journey Creating an AI-Powered Form Filler with RAG, LangChain4
 canonical: "https://bazlur.ca/2025/04/06/building-formpilot-my-journey-creating-an-ai-powered-form-filler-with-rag-langchain4j-and-ollama/"
 authors:
   - "bazlur-rahman"
-# No `image:`. WordPress points this post at
-#   https://foojay.io/wp-content/uploads/2025/05/Screenshot-2025-04-06-at-6.50.38 PM.png
-# and that file 404s on the LIVE site too -- it is not in the media library
-# (checked via /wp-json/wp/v2/media), so there is nothing to pull local. The
-# hero rendered as a broken image and og:image pointed at a dead URL; without
-# the key the post simply has no hero and previews with the social card.
-# NOTE: transfer/Posts.java rebuilds frontmatter from scratch, so re-scraping
-# this post puts the dead URL back.
+image: "https://foojay.io/wp-content/uploads/2025/05/Screenshot-2025-04-06-at-6.50.38 PM.png"
 categories:
   - "LangChain4j"
   - "Machine Learning"
@@ -752,7 +745,7 @@ Chrome extensions have security restrictions. Content scripts cannot directly ma
 
 ### **Challenge 5: Prompt Engineering \& Model Compliance**
 
-Getting LLMs to follow detailed instructions exactly—especially when it comes to the output format and using logic like "try RAG first"---can be tricky.
+Getting LLMs to follow detailed instructions exactly—especially when it comes to the output format and using logic like "try RAG first"—can be tricky.
 
 Larger models like OpenAI's GPT-4o usually follow detailed system instructions well, including sticking to strict JSON formats and trying RAG before generating answers. However, smaller models running locally with Ollama (like `llama3` or `deepseek-llm:7b`) may not always do the same. They might add extra text outside the JSON, miss when they should use RAG, or create less accurate data for certain fields.
 

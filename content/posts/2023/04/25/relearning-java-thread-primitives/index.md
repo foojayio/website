@@ -21,7 +21,7 @@ I've coded in Java since the first beta, even back then threads were at the top 
 
 Java was the first language to introduce thread support in the language itself, it was a controversial decision back then.
 
-In the past decade, every language raced to include async/await and [even Java had some third-party support for that](https://github.com/awaitility/awaitility)...
+In the past decade, every language raced to include async/await and [even Java had some third-party support for that](https://github.com/awaitility/awaitility)…
 
 But Java zigged instead of zagging and introduced the far superior [virtual threads (project Loom)](https://www.youtube.com/watch?v=4mf24mzm0ks). This article isn't about that.
 
@@ -111,7 +111,7 @@ The biggest reason for using `ReentrantLock` is Loom support. The other advantag
 
 We can use it between methods instead of in a continuous block. This is probably a bad idea as you want to minimize the lock area and failure can be a problem. I don't consider that feature as an advantage.
 
-It has the option of fairness. This means that it will serve the first thread that stopped at a lock first. I tried to think of a realistic non-convoluted use case where this will matter and I'm drawing blanks. If you're writing a complex scheduler with many threads constantly queued on a resource, you might create a situation where a thread is "starved" since other threads keep coming in. But such situations are probably better served by other options in the concurrency package. Maybe I'm missing something here...
+It has the option of fairness. This means that it will serve the first thread that stopped at a lock first. I tried to think of a realistic non-convoluted use case where this will matter and I'm drawing blanks. If you're writing a complex scheduler with many threads constantly queued on a resource, you might create a situation where a thread is "starved" since other threads keep coming in. But such situations are probably better served by other options in the concurrency package. Maybe I'm missing something here…
 
 `lockInterruptibly()` lets us interrupt a thread while it's waiting for a lock. This is an interesting feature but again, hard to find a situation where it would realistically make a difference. If you write code that must be very responsive for interrupting you would need to use the `lockInterruptibly()` API to gain that capability. But how long do you spend within the `lock()` method on average?
 
@@ -180,9 +180,9 @@ This will work. Since synchronized is reentrant. We already hold the lock so goi
 
 `StampedLock` returns a stamp that we use to release the lock. Because of that, it has some limits. But it's still very fast and powerful. It too includes a read-and-write stamp we can use to guard a shared resource. But unlike the `ReadWriteReentrantLock,` it lets us upgrade the lock. Why would we need to do that?
 
-Look at the `addName()` method from before... What if I invoke it twice with "Shai"?
+Look at the `addName()` method from before… What if I invoke it twice with "Shai"?
 
-Yes, I could use a Set... But for the point of this exercise let's say that we need a list... I could write that logic with the `ReadWriteReentrantLock`:
+Yes, I could use a Set… But for the point of this exercise let's say that we need a list… I could write that logic with the `ReadWriteReentrantLock`:
 
 ```
 public void addName(String name) {
@@ -233,7 +233,7 @@ I cover many similar subjects in the video series above, check it out and let me
 
 I often reach for the synchronized collections without giving them a second thought. That can be reasonable sometimes but for most, it's probably suboptimal. By spending a bit of time with the thread-related primitives we can significantly improve our performance.
 
-This is especially true when dealing with Loom where the underlying contention is far more sensitive. Imagine scaling read operations on 1M concurrent threads... In those cases, the importance of reducing lock contention is far greater.
+This is especially true when dealing with Loom where the underlying contention is far more sensitive. Imagine scaling read operations on 1M concurrent threads… In those cases, the importance of reducing lock contention is far greater.
 
 You might think, why can't `synchronized` collections use `ReadWriteReentrantLock` or even `StampedLock`?
 

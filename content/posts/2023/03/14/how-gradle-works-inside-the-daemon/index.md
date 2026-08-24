@@ -17,8 +17,6 @@ related_posts:
   - "compilation-avoidance-with-gradle"
   - "foojay-podcast-81"
 frozen: false
-aliases:
-  - "/today/how-gradle-works-part-2/"
 ---
 
 Previously in the *How Gradle Works*series:

@@ -265,7 +265,7 @@ The following methods have been removed, they had been deprecated for deletion, 
 * `Thread.resume()` and `Thread.suspend()`.
 * `ThreadGroup.resume()`, `ThreadGroup.stop()` eand `ThreadGroup.suspend()`.
 
-All the new JDK 23 APIs can be found in [The Java Version Almanac -- New APIs in Java 23](https://javaalmanac.io/jdk/23/apidiff/22/ "The").
+All the new JDK 23 APIs can be found in [The Java Version Almanac – New APIs in Java 23](https://javaalmanac.io/jdk/23/apidiff/22/ "The").
 
 ## Internal changes, performance, and security
 

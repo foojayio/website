@@ -33,7 +33,7 @@ As a result, the ECG then shows all the countries selected. With the mouse, you 
 The number of positive tests correlates directly with the total number of tests. Dividing the number of positive tests by the total number gives the infection rate. In the Our World in Data Covid-19 data, this metric is called the "positive rate". In the ECG you can see it directly:{#ed55}
 [![](ekg-2-3.png)](ekg-2-3.png) "positive_rate" = number of positive tests / total number of tests   
 
-The data shows also here a flattening or breaking of the 2nd wave. Since at the present time, the data for the Netherlands (purple line) is available only up to 10/25/20, and the data for Germany (blue line) up to 11/15/20, one cannot make a clear statement here. (In next week's blog we will take another look at the curve and investigate whether the curve flattens or breaks.)
+The data shows also here a flattening or breaking of the 2nd wave. Since at the present time, the data for the Netherlands (purple line) is available only up to 10/25/20, and the data for Germany (blue line) up to 11/15/20, one cannot make a clear statement here. (In next week's blog we will take another look at the curve and investigate whether the curve flattens or breaks.){#281d}
 
 A very useful feature is the date selection. The date period can be set by zooming in or out or by using the Date Picker in the upper right corner.{#2b03}
 ![](ekg-2-4.png) Selection of the positive rate in the period 7./1/2020 until today   

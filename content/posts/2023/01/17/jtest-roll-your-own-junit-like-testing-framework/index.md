@@ -14,8 +14,6 @@ related_posts:
   - "7-ways-to-improve-your-code-reading-skills"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
 frozen: false
-aliases:
-  - "/today/61904/"
 ---
 
 In this interactive tutorial and educational project, you'll be helped in your understanding of the following.

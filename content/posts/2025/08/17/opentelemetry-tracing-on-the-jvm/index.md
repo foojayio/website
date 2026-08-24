@@ -107,8 +107,8 @@ Spring Boot provides dedicated OpenTelemetry support via [Micrometer Tracing](ht
 Besides the Micrometer Tracing dependency itself, you need additional ones:
 
 * The Spring Boot Actuator
-* A bridge--OpenTelemetry
-* An exporter--OpenTelemetry as well
+* A bridge–OpenTelemetry
+* An exporter–OpenTelemetry as well
 
 Configuration doesn't follow the OpenTelemetry standard:
 

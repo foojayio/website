@@ -32,7 +32,7 @@ What you see above is that **we have had as much traffic on Foojay.io in the fir
 
 ## Big Spikes and Popular Articles
 
-What do the big spikes mean? For the spikes of the previous half years, and related analysis, see [Foojay Status Report: July -- December 2021](https://foojay.io/today/foojay-status-report-july-december-2021/) and [Foojay Status Report: January -- June 2021](https://foojay.io/today/foojay-status-report-january-june-2021/).
+What do the big spikes mean? For the spikes of the previous half years, and related analysis, see [Foojay Status Report: July – December 2021](https://foojay.io/today/foojay-status-report-july-december-2021/) and [Foojay Status Report: January – June 2021](https://foojay.io/today/foojay-status-report-january-june-2021/).
 
 Over the past half year, the very biggest spikes were in April for [Bazlur Rahman](https://foojay.io/today/author/bazlur-rahman/) and his [Top 10 Java Language Features](https://foojay.io/today/top-10-java-language-features/) and in March for his [7 Reasons Why, After 26 Years, Java Still Makes Sense!](https://foojay.io/today/7-reasons-why-after-26-years-java-still-makes-sense/) Incredibly, the most popular two articles on Foojay.io over the past half year were by the same person, congratulations, Bazlur! Also check out [his incredible Java Thread Programming series here](https://foojay.io/today/java-thread-programming-part-1/). Aside from all that, Bazlur leads the Bangladesh JUG, has been extremely helpful and active on Foojay as one of its co-editors, and recently became one of the Java Champions. An excellent half year for Bazlur.
 

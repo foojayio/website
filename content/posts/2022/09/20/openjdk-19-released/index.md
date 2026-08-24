@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-OpenJDK 19 has been released today! Get it from your favorite vendor... whether it is BellSoft, Amazon, Red Hat, Azul, Oracle, Microsoft [or any other of a large number of Java providers](https://javaalmanac.io/jdk/19/).
+OpenJDK 19 has been released today! Get it from your favorite vendor... whether it is BellSoft, Amazon, Red Hat, Azul, Oracle, Microsoft [or any other of a large number of Java providers](https://javaalmanac.io/jdk/19).
 
 The Friends Of OpenJDK community has put together a number of resources, and more coming in the coming weeks, about the new features and all the enhancements and fixes that have gone into the release, accompanied by a brand new podcast released today, featuring key Java community leaders from around the world.
 

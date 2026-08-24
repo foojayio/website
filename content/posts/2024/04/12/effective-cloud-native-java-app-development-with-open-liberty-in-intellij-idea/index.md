@@ -36,7 +36,7 @@ In this article, we'll explore the Liberty Tools plugin for IntelliJ IDEA and ho
 
 The open source [Liberty Tools for IntelliJ IDEA](https://ibm.biz/LibertyToolsIntelliJIDEAMarketplace), is a useful plugin when developing your application with Open Liberty. The Liberty Tools are a set of intuitive developer tools that provide a simplified yet powerful development experience and support popular IDEs, including IntelliJ IDEA, [Eclipse IDE](https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-eclipse-ide/), and [Visual Studio Code](https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-vs-code/).
 
-The Liberty Tools for IntelliJ IDEA plugin can help with all stages of the extended development lifecycle now expected from cloud-native development teams, including helping you in developing, building, testing, deploying, and managing your applications -- all within your favorite IDE, IntelliJ!
+The Liberty Tools for IntelliJ IDEA plugin can help with all stages of the extended development lifecycle now expected from cloud-native development teams, including helping you in developing, building, testing, deploying, and managing your applications – all within your favorite IDE, IntelliJ!
 
 ![](Screenshot-2024-04-03-at-13.21.37-700x437.png)
 
@@ -94,7 +94,7 @@ You can also use Liberty Tools to get Liberty configuration editing assistance t
 
 To use Liberty-specific code completion, press `Ctrl + Space` or `Cmd + Space` and a drop-down list of completion suggestions will appear. In addition to this, by hovering over existing features defined within the server.xml, a description for each of these will also appear, helping developers to know exactly what they're using in their applications.
 
-This hover-over support is also enabled for other xml elements too. All of this saves developers time and additionally means that they don't have to go and find the correct documentation to find this information -- promoting further productivity gains. Follow the steps in the Liberty Tools user guide for [configuring a Liberty server with configuration assistance](https://github.com/OpenLiberty/liberty-tools-intellij/blob/main/docs/user-guide.md#configure-a-liberty-server) to try this for yourself.
+This hover-over support is also enabled for other xml elements too. All of this saves developers time and additionally means that they don't have to go and find the correct documentation to find this information – promoting further productivity gains. Follow the steps in the Liberty Tools user guide for [configuring a Liberty server with configuration assistance](https://github.com/OpenLiberty/liberty-tools-intellij/blob/main/docs/user-guide.md#configure-a-liberty-server) to try this for yourself.
 
 ## Coding assistance for Jakarta EE and MicroProfile APIs
 

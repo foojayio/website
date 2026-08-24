@@ -38,7 +38,7 @@ This is just the beginning but pretty much every chapter covered material that I
 
 As a side note, the whole TCK creation process is pretty insane. The engineers in my team would go over the JavaDoc like religious scholars and fill up Excel sheets with every statement made by the JavaDoc or implied by the Javadoc.
 
-Then devise tests to verify in isolation that every statement is indeed true. In that sense, TCK doesn't test quality. It tests compliance to a uniform, consistent standard. A JDK can fail after running for a week and we might not be able to tell from running the TCK alone, early releases of JDK 8 did exactly that at that time...
+Then devise tests to verify in isolation that every statement is indeed true. In that sense, TCK doesn't test quality. It tests compliance to a uniform, consistent standard. A JDK can fail after running for a week and we might not be able to tell from running the TCK alone, early releases of JDK 8 did exactly that at that time…
 
 ## Learning from a For Dummies Book
 

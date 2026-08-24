@@ -51,7 +51,7 @@ The OpenJDK CRaC Project defines public Java APIs that allow for coordinating ap
 
 **[For discussions and questions on this topic, see the CRaC Discussion Forum.](https://forums.foojay.io/forums/forum/coordinated-restore-at-checkpoint-crac/)**
 
-CRaC allows a running application to pause, snapshot its state, and store it for later use -- even on a different machine. It saves the full context of the application process as an image, including its state and memory.
+CRaC allows a running application to pause, snapshot its state, and store it for later use – even on a different machine. It saves the full context of the application process as an image, including its state and memory.
 [![](image-3-1024x268.png)](https://docs.azul.com/core/crac/crac-guideline)
 
 When the application restarts later, it skips startup and warmup and jumps right to that stored profile. It rapidly reloads the entire application and its state so it can continue from the point where the checkpoint was created. This approach reduces Java application startup and warmup times by several orders of magnitude, meaning milliseconds instead of seconds or minutes.

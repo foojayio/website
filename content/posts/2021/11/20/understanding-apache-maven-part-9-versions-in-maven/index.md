@@ -107,7 +107,7 @@ Similar to the pattern followed by `dependencyManagement`, plugins configured in
 
 Maven provides a very versatile tooling plugin to allow centralized control over the build environment from a single POM (inherited to child POMs) and allows for greater flexibility in version specifications by supporting version ranges.
 
-The actual name of the plugin: **Maven Enforcer Plugin -- The Loving Iron Fist of Maven ^TM^** . Link to the goals of the plugin: <http://maven.apache.org/enforcer/maven-enforcer-plugin/plugin-info.html>
+The actual name of the plugin: **Maven Enforcer Plugin – The Loving Iron Fist of Maven ^TM^** . Link to the goals of the plugin: <http://maven.apache.org/enforcer/maven-enforcer-plugin/plugin-info.html>
 
 The enforcer plugin deserves a blog unto itself, but as a preview, the enforcer provides built-in rules and a capability to extend the same with custom rules via a rich Maven Enforcer Rule API. Custom rules require creating a custom enforcer, by extending the `EnforcerRule`. The custom rule is packaged as a `jar` and included as a `dependency` to the plugin. The rule can be invoked by including the fully-qualified class name under the `configuration` for the plugin.
 

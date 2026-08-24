@@ -1286,12 +1286,12 @@ To reduce latency and avoid excessive document transfers between the application
   * Instead of listening for changes in the application, we can set up a trigger on the transactions collection.
   * When a new transaction is inserted, the trigger can run a vector search within MongoDB and flag the transaction as fraud if necessary.
 
-|                **Use Case**                 |                 **Best Approach**                  |
-|---------------------------------------------|----------------------------------------------------|
-| Low-latency fraud detection                 | MongoDB Trigger                                    |
-| Need for flexible fraud detection rules     | Application Logic                                  |
-| High transaction volume (thousands/sec)     | Triggers (30s limit)---consider batching in-memory |
-| Want to avoid excessive application queries | MongoDB Trigger                                    |
+|                **Use Case**                 |                **Best Approach**                 |
+|---------------------------------------------|--------------------------------------------------|
+| Low-latency fraud detection                 | MongoDB Trigger                                  |
+| Need for flexible fraud detection rules     | Application Logic                                |
+| High transaction volume (thousands/sec)     | Triggers (30s limit)—consider batching in-memory |
+| Want to avoid excessive application queries | MongoDB Trigger                                  |
 
 ### Other possible solutions
 

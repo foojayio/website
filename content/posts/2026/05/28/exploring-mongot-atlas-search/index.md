@@ -382,7 +382,7 @@ i.e., the query planner picks one index and uses that.
 
 Lucene, by contrast, can perform searches over multiple indexes efficiently and return the intersection of the results.
 
-Documents in Lucene are each assigned an ordinal id — a docid (0, 1, 2...).
+Documents in Lucene are each assigned an ordinal id — a docid (0, 1, 2…).
 
 In a typical text field index, Lucene analyzes text into terms. It stores those terms in a term dictionary, and each term points to a postings list: a compact, sorted list of Lucene internal document IDs for documents that contain that term.
 
@@ -462,7 +462,7 @@ And restart MongoT.
 
 You should see in the log:
 
-CommunityMongotBootstrapper...Initialized auto-embedding with 4 model(s)
+CommunityMongotBootstrapper…Initialized auto-embedding with 4 model(s)
 
 Once you have the Voyage API enabled, you can create a vector search index like this:
 

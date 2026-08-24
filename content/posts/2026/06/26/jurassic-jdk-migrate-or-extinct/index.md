@@ -253,11 +253,11 @@ Here's the structure that worked across 15+ projects.
 
 Run all the scanning tools. Document every dependency version, every deprecated API usage, every Hibernate mapping that might be affected. Don't fix anything yet. Just map the terrain.
 
-### **Phase 2: Dependency cleanup (1--2 weeks)**
+### **Phase 2: Dependency cleanup (1–2 weeks)**
 
 Update all dependencies to versions that support your target JDK. Do this before touching the JDK itself. Mixing a JDK upgrade with a dependency upgrade is how you lose a week of debugging.
 
-### **Phase 3: One hop (1--3 weeks depending on codebase size)**
+### **Phase 3: One hop (1–3 weeks depending on codebase size)**
 
 Change the JDK version. Run OpenRewrite. Update your build file `java.version` manually. Fix what OpenRewrite doesn't catch. Run the full test suite. Fix what that surfaces. Ship it. Don't move to the next hop until this one is stable in production.
 

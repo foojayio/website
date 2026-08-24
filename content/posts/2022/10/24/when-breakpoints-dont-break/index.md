@@ -33,7 +33,7 @@ With that out of the way, let's go back to the basics. What's a non-breaking bre
 
 I don't like the term non-breaking breakpoint. It's an oxymoron. At Lightrun we use the term Snapshot but it makes more sense for something that has the level of context information that we provide. Google uses the term Capture which in this specific case makes a lot more sense.
 
-In the image below we can see a breakpoint with the suspend option unchecked which turns it into a non-breaking breakpoint. Notice the breakpoint is in yellow instead of red to show the status. This breakpoint literally does nothing since there are no additional settings. I'll get back to that...
+In the image below we can see a breakpoint with the suspend option unchecked which turns it into a non-breaking breakpoint. Notice the breakpoint is in yellow instead of red to show the status. This breakpoint literally does nothing since there are no additional settings. I'll get back to that…
 
 ![](01-breakpoints-700x503.png)
 

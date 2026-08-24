@@ -3,6 +3,7 @@ title: "Exception Breakpoint that Doesn't Suck and Other Use Cases"
 date: "2022-04-22T07:37:25+00:00"
 lastmod: "2022-04-22T07:37:27+00:00"
 description: "Dial your debugging skills to 11 by leveraging some of the lesser known capabilities for debugging highly complex systems such as filters!"
+canonical: "https://talktotheduck.dev/exception-breakpoint-that-doesnt-suck"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
@@ -16,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Two weeks ago, [I left this series in a "cliffhanger"](https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know) of sorts. Well, as much as a programming blog can leave things in the air... The big one amongst them is the premise that exception breakpoints don't have to suck. If you used them in the past, you would know that grabbing all exceptions is ridiculous. You end up at a breakpoint every second and it doesn't help.
+Two weeks ago, [I left this series in a "cliffhanger"](https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know) of sorts. Well, as much as a programming blog can leave things in the air… The big one amongst them is the premise that exception breakpoints don't have to suck. If you used them in the past, you would know that grabbing all exceptions is ridiculous. You end up at a breakpoint every second and it doesn't help.
 
 There's a solution, and it's discussed in duckling 6 number 7 also covers a lot of interesting ground for us and another cliffhanger on method breakpoints:
 > 🦆 Duckling the 7th:  
@@ -37,9 +38,9 @@ Filters solve the problem of "noisy" breakpoints. They let us limit a breakpoint
 
 ### Catch Class
 
-This one feature makes exception breakpoints worth having. But let's back up a bit and discuss the problem... At least for JVM languages.
+This one feature makes exception breakpoints worth having. But let's back up a bit and discuss the problem… At least for JVM languages.
 
-For a typical web request, Java needs to perform many operations for which the only response is an exception. E.g. a URL request would require header parsing. If a number in the header differs from what you expected, a `NumberFormatException` will be thrown... It's caught inside the JVM implementation, since it's expected.
+For a typical web request, Java needs to perform many operations for which the only response is an exception. E.g. a URL request would require header parsing. If a number in the header differs from what you expected, a `NumberFormatException` will be thrown… It's caught inside the JVM implementation, since it's expected.
 
 But the exception breakpoint support will still break for this and many other exceptions in the JVM code. For any non-trivial applications this is a problem.
 

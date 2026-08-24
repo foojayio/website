@@ -32,7 +32,7 @@ Debugging is a labyrinthine journey, often reminiscent of Alice in Wonderland. I
 
 The reality is, most bugs are embarrassingly simple in retrospect. When we finally pinpoint the issue, the common response is a groan of disbelief — "How did I miss that?" While this reaction is natural, it breeds a sense of shame and inadequacy, often leading to impostor syndrome. Despite my 40 years of programming experience, I can confidently say that the bugs I encounter today are just as "stupid" as they were at the start. This constant humbling feeling, akin to a universal debugging facepalm, keeps me grounded.
 
-The emotions experienced during debugging -- surprise, frustration, and humility -- serve as a reminder of our fallibility. It's akin to a form of meditation, keeping egos in check. Perhaps some leaders could even benefit from debugging as a method of grounding, bringing them closer to the realities of their tasks and teams.
+The emotions experienced during debugging – surprise, frustration, and humility – serve as a reminder of our fallibility. It's akin to a form of meditation, keeping egos in check. Perhaps some leaders could even benefit from debugging as a method of grounding, bringing them closer to the realities of their tasks and teams.
 
 An important principle I have when debugging is to "start with stupid". I look for the dumbest mistake I can think of and in a surprising number of cases, it's indeed the bug. This isn't a part of the theory
 

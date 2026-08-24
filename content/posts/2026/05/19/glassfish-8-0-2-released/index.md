@@ -47,9 +47,9 @@ We originally tried to upgrade to Eclipse JAXB Impl 4.0.7, but we had to roll it
 Some notable third-party component upgrades include Jackson, Helidon Config, Nimbus JOSE JWT, JNoSQL, Commons IO and Commons Codec.
 > GlassFish 8.0.2 is a patch release of GlassFish 8, which brought Jakarta EE 11 and many other new features and enhancements. [Learn More About What's New In GlassFish 8](https://omnifish.ee/blog/glassfish-8-released-enterprise-grade-java-redefined/)
 
-## Conclusion -- GlassFish is a platform you can trust
+## Conclusion – GlassFish is a platform you can trust
 
-A patch release might not sound exciting, but 8.0.2 tells a clear story: GlassFish is a platform where security issues get fixed quickly, components are kept up to date, and the team is paying attention to what matters in production -- security, stability and performance.
+A patch release might not sound exciting, but 8.0.2 tells a clear story: GlassFish is a platform where security issues get fixed quickly, components are kept up to date, and the team is paying attention to what matters in production – security, stability and performance.
 
 Meanwhile, work is already in progress on GlassFish 8.0.3, which will bring additional security fixes. We're also working on startup enhancements of Embedded GlassFish, which will save about 10% of startup time and make microservices and Docker containers start even faster.
 

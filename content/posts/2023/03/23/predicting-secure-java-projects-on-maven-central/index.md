@@ -37,7 +37,7 @@ In fact, over the past three years, there has been a [742% average](https://www.
 
 The opportunity is so great that attackers are even creating new ways to attack software pipelines through strategies like typosquatting and dependency confusion.
 
-## Besides listening to soothing waterfall sounds... What can be done?
+## Besides listening to soothing waterfall sounds… What can be done?
 
 As it turns out, nearly all downloads of known vulnerable components hosted on Maven Central already have available fixes in newer versions ([95.5% to be exact](https://www.sonatype.com/state-of-the-software-supply-chain/open-source-dependency-management-trends-and-recommendations "95.5% to be exact")). That leaves much of the remaining responsibility on consuming projects to manage their own risk when using software libraries.
 

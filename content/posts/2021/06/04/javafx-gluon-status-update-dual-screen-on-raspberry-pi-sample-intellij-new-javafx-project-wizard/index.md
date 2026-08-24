@@ -1,5 +1,5 @@
 ---
-title: "Gluon Update, Dual Screen Raspberry Pi , IntelliJ JavaFX Project Wizard"
+title: "Gluon Update, Dual Screen Raspberry Pi, IntelliJ JavaFX Project Wizard"
 date: "2021-06-04T07:27:41+00:00"
 lastmod: "2021-12-10T13:00:24+00:00"
 description: "In this post we are going to take a deeper look into some of the recent JavaFX announcements, e.g., dual screen support on Raspberry Pi!"

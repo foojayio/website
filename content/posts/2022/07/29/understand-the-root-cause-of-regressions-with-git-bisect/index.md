@@ -3,6 +3,7 @@ title: "Understand the Root Cause of Regressions with Git Bisect"
 date: "2022-07-29T13:18:07+00:00"
 lastmod: "2022-08-26T14:48:58+00:00"
 description: "Your git fairy godmother will test and locate bugs for you with a swish of her magic wand. All you need are the magic words: \"git bisect\"."
+canonical: "https://talktotheduck.dev/understand-the-root-cause-of-regressions-with-git-bisect"
 authors:
   - "shai-almog"
 image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-01-1.jpg"
@@ -107,6 +108,6 @@ But it's also one of the most important tools.
 
 Learning to use it effectively can save you days of tedious work and hunting around for an issue.
 
-Despite these huge benefits, it's a relatively obscure feature. The reason for this is that for 98% of the time we don't need it. But in that 2%, we REALLY need it...
+Despite these huge benefits, it's a relatively obscure feature. The reason for this is that for 98% of the time we don't need it. But in that 2%, we REALLY need it…
 
 Hopefully, the next time you run into a regression you'll remember that it's there and use this post to hunt down the issue.

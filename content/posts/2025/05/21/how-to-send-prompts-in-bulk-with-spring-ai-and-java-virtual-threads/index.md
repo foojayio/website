@@ -35,9 +35,9 @@ This is particularly useful when you want the LLM to perform actions such as sum
 2. Filter the ones that need processing.
 3. Split them into batches.
 4. For each batch:  
-   --- Use Virtual Threads to make OpenAI calls in parallel  
-   --- Wait for all calls to finish (using CompletableFuture)  
-   --- Save the results
+   — Use Virtual Threads to make OpenAI calls in parallel  
+   — Wait for all calls to finish (using CompletableFuture)  
+   — Save the results
 
 ## Virtual Threads for Massive Parallelism
 
@@ -80,7 +80,7 @@ int totalBatches = (inputs.size() + batchSize — 1) / batchSize;
 For each batch:
 
 * Launch a CompletableFuture for every input
-* Wait for all with CompletableFuture.allOf(...).join()
+* Wait for all with CompletableFuture.allOf(…).join()
 * Collect the results
 
 ## Handling Errors Gracefully

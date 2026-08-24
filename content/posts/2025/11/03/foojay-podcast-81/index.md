@@ -17,8 +17,6 @@ related_posts:
   - "foojay-podcast-78"
   - "foojay-podcast-77"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-81-maven-4-the-future-of-java-build-automation/"
 ---
 
 **Maven 4 is approaching its release, bringing many improvements to the build tool powering millions of Java projects.**

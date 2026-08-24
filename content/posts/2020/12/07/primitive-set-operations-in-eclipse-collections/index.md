@@ -180,7 +180,7 @@ Set A — 1, 2, 3, 4.
 
 Set B — 3, 4, 5, 6.
 
-Difference--- 1, 2.
+Difference— 1, 2.
 
 #### Difference - Design considerations
 

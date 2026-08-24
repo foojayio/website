@@ -32,7 +32,7 @@ Semantically, an event is an indication that something has happened. This could 
 
 There are numerous advantages to following an Event-Driven Architecture:
 
-* The sender and receiver are decoupled in both time and space -- an event can be posted even if no listeners are currently active, and without any knowledge of the physical location of the receiver.
+* The sender and receiver are decoupled in both time and space – an event can be posted even if no listeners are currently active, and without any knowledge of the physical location of the receiver.
 * Minimal overhead in posting and receiving events support higher rates of throughput with better vertical scalability and responsiveness.
 * Persistent event stores support replaying scenarios to aid in debugging.
 * Diagnostics are easily available from the event stores.
@@ -97,7 +97,7 @@ At [Chronicle](https://chronicle.software/ "Chronicle"), we have many years of e
 
 A combination of externalised configuration, powerful APIs and flexible deployment options provides access to enterprise-class features such as high availability and fault tolerance, observability and scalability. Combined with a novel approach to testing based on BDD techniques, this allows developers to concentrate on implementing business logic. Development timelines are shortened without sacrificing quality and ROI is apparent much more quickly.
 
-With Chronicle Services, the primary unit of computation is the Service, which receives inputs in the form of events from zero or more sources, and posts output, again in the form of events, to a single sink. The default transport for events with Chronicle Services is [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") -- a persisted, shared memory channel for inter-process communication offering class-leading latency performance of under 10 microseconds from write to read at the 99.9 percentile.
+With Chronicle Services, the primary unit of computation is the Service, which receives inputs in the form of events from zero or more sources, and posts output, again in the form of events, to a single sink. The default transport for events with Chronicle Services is [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") – a persisted, shared memory channel for inter-process communication offering class-leading latency performance of under 10 microseconds from write to read at the 99.9 percentile.
 
 Events are represented as POJOs, and are persisted to a Queue using a highly efficient proprietary format, with marshalling and unmarshalling being completely transparent. Chronicle Services does not distinguish between different "types" of events, for example CQRS as described above, preferring instead to consider everything as an event. This simplifies the processing requirements of event management, with an associated reduction in overhead.
 

@@ -23,7 +23,7 @@ Between 31st May and 14th June, I was on tour, giving seven talks in 4 cities in
 * 10th and 11th of June: [Gulasch Programmier Nacht Karlsruhe](https://cfp.gulas.ch/gpn21/speaker/9ZMNT9/)
 * 14th of June: [Karlsruher Entwicklertag](https://www.entwicklertag.de/2023/conference_day.html)
 
-{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/image-7.jpg" class="size-full is-resized" width="372" height="507" caption="A visualization of all the cities I visited, but I took the train for all transits (except for the Arnhem to Nieuwegein route, where Ties van de Ven drove me in his Tesla)." >}}
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/image-7.png" class="size-full is-resized" width="372" height="507" caption="A visualization of all the cities I visited, but I took the train for all transits (except for the Arnhem to Nieuwegein route, where Ties van de Ven drove me in his Tesla)." >}}
 
 It was an exciting trip, and I had the pleasure of visiting friends in Zurich and Augsburg and a [grain mill shop](https://www.muehlen-kaiser.de/) in Munich.
 

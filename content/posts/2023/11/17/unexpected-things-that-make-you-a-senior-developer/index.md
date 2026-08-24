@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-***It's a Friday, late in the afternoon. To end your work week in a clean way, you decide to get rid of some test data and files from your PC. You hit the enter button to drop a table from your local test database. Within a split second, you realize your error. Your body turns hot and cold at the same time. You double-check, but you already know the truth. You were connected to the production database and just deleted the table with all the customers...***
+***It's a Friday, late in the afternoon. To end your work week in a clean way, you decide to get rid of some test data and files from your PC. You hit the enter button to drop a table from your local test database. Within a split second, you realize your error. Your body turns hot and cold at the same time. You double-check, but you already know the truth. You were connected to the production database and just deleted the table with all the customers…***
 
 Congratulations! You will never forget this day. It's the day you become a real developer, and all senior developers will welcome you into their world, as they all have made a similar mistake at least once.
 [![](fail-deleted-production.png)](https://twitter.com/IanColdwater/status/1706306286684454932)
@@ -25,7 +25,7 @@ Congratulations! You will never forget this day. It's the day you become a real 
 
 Dropping a table or a complete database is a mistake that can happen very quickly. Another one is forgetting the `WHERE` part of your SQL statement. There is a big difference between `DELETE FROM clients` and `DELETE FROM clients WHERE id = 1`...
 
-But the main mistake happens when you have multiple connections defined in your database UI and assume you are modifying the test database while having the production database open. And that's a problem that actually should not be possible to happen, or at least not easily. Do developers need access to the production database? While it can be helpful to be able to check data directly in the live system, read-only rights are probably sufficient for most cases...
+But the main mistake happens when you have multiple connections defined in your database UI and assume you are modifying the test database while having the production database open. And that's a problem that actually should not be possible to happen, or at least not easily. Do developers need access to the production database? While it can be helpful to be able to check data directly in the live system, read-only rights are probably sufficient for most cases…
 
 Another database disaster waiting to happen is when you forget to validate the input. SQL injection should be a well-known problem by now, but still, a lot of errors happen in this field, causing not only disasters but also security nightmares. Or, as XKCD nicely illustrates it:
 [![](xkcd_exploits_of_a_mom.png)](https://xkcd.com/327/)
@@ -51,7 +51,7 @@ Here are some interesting situations related to dates, times, and time zones.
 ## Computer System Breakdowns
 
 But be aware, we can not only make mistakes in our code and database! Our whole computer infrastructure is prone to errors!
-> Many years ago, I was working on my first big multimedia project for a light fixtures manufacturer to bring their expensive thick catalogs to CD-ROM (for young people, a blinking disk that could contain a whopping 640 MB of data...). We had a strict deadline and had a first working version after three weeks of hard work. But then disaster struck! The hard disk of my fancy blue iMac broke.
+> Many years ago, I was working on my first big multimedia project for a light fixtures manufacturer to bring their expensive thick catalogs to CD-ROM (for young people, a blinking disk that could contain a whopping 640 MB of data…). We had a strict deadline and had a first working version after three weeks of hard work. But then disaster struck! The hard disk of my fancy blue iMac broke.
 >
 > 
 
@@ -66,12 +66,12 @@ But be aware, we can not only make mistakes in our code and database! Our whole 
 >
 > \* Backups must be checked regularly and you must try from time to time if you can recover a deleted file to make sure both the backup and restore process work OK.  
 >
-> \* I had to start my work again from scratch...
+> \* I had to start my work again from scratch…
 >
 > Another lesson I learned from that disaster: weeks of work on a project that you have never done before can be repeated in a few days as you learned a lot during those weeks, and now know how to do things. And in the end, it even gets a cleaner and better result!
 > \~ Frank
 
-Another system disaster: never, never, NEVER, type the command `rm -rf /`. The remove command parameter `f` removes all prompts, so you let it go ahead without asking for any confirmations. The `r` lets the remove command work recursively, meaning it will go through all nested directories. Combine this with `/`, being the very root of your hard disk, and you are heading towards a total nightmare...
+Another system disaster: never, never, NEVER, type the command `rm -rf /`. The remove command parameter `f` removes all prompts, so you let it go ahead without asking for any confirmations. The `r` lets the remove command work recursively, meaning it will go through all nested directories. Combine this with `/`, being the very root of your hard disk, and you are heading towards a total nightmare…
 
 ## Testing Mistakes
 
@@ -95,4 +95,4 @@ While some of the mistakes mentioned here are honest mistakes made by developers
 In addition, tooling should be used in such a way as to make mistakes like these harder. For example, environments should be clearly marked so it's easy to see whether you are working on a test environment or the production environment. In some cases, additional steps have to be taken in order to get access to a production environment. Evaluate potential risks in your organization and act accordingly.
 [![](wisdom-experience.png)](https://www.goodreads.com/quotes/33157-wisdom-comes-from-experience-experience-is-often-a-result-of)
 
-But as much as you try to avoid them, mistakes do happen. In the end, it's essential to **keep in mind that people will mostly remember how you reacted to a disaster**. After the initial adrenaline spike has settled down, grab a cup of coffee, cancel your plans for the following days, and fix the problem. Everything will be OK soon. Afterward, you will wear the badge of "Senior Developer" with pride...
+But as much as you try to avoid them, mistakes do happen. In the end, it's essential to **keep in mind that people will mostly remember how you reacted to a disaster**. After the initial adrenaline spike has settled down, grab a cup of coffee, cancel your plans for the following days, and fix the problem. Everything will be OK soon. Afterward, you will wear the badge of "Senior Developer" with pride…

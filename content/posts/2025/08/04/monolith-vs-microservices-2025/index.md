@@ -50,7 +50,7 @@ Infrastructure as Code tools like Terraform make architecture changes easier. Ne
 🔗 Useful sources:
 
 * [ThoughtWorks Tech Radar](https://www.thoughtworks.com/en-us/radar)
-* [Martin Fowler -- Microservice Trade-Offs](https://martinfowler.com/articles/microservice-trade-offs.html)
+* [Martin Fowler – Microservice Trade-Offs](https://martinfowler.com/articles/microservice-trade-offs.html)
 
 🔵🔵⚪⚪⚪⚪
 
@@ -75,7 +75,7 @@ Vibecoding—the focus on great developer experience—often favors centralized 
 
 🔗 Useful sources:
 
-* [DHH -- The Majestic Monolith](https://world.hey.com/dhh/how-to-recover-from-microservices-ce3803cc)
+* [DHH – The Majestic Monolith](https://world.hey.com/dhh/how-to-recover-from-microservices-ce3803cc)
 * [YT: Mastering Developer Experience at Shopify with Eytan Seidman](https://youtu.be/pJyIuKPnLfQ)
 
 🔵🔵🔵⚪⚪⚪
@@ -96,7 +96,7 @@ Surprisingly, many large enterprises now return to modular monoliths or packaged
 
 🔗 Useful sources:
 
-* [INNOQ -- Self-Contained Systems](https://www.innoq.com/en/articles/2016/11/self-contained-systems-different-microservices/)
+* [INNOQ – Self-Contained Systems](https://www.innoq.com/en/articles/2016/11/self-contained-systems-different-microservices/)
 * [Amazon Prime Video's 90% Cost Reduction throuh moving to Monolithic](https://dev.to/indika_wimalasuriya/amazon-prime-videos-90-cost-reduction-throuh-moving-to-monolithic-k4a)
 
 🔵🔵🔵🔵⚪⚪
@@ -119,12 +119,12 @@ In 2025, sustainability and clarity matter more than theoretical elasticity.
 
 🔗 Further reading:
 
-* [Microservices to Monoliths -- Sysctl](https://sysctl.id/microservices-to-monoliths-pendulum-swing/)
-* [Post-Monolith Architectures -- DZone](https://dzone.com/articles/post-monolith-architecture-2025)
+* [Microservices to Monoliths – Sysctl](https://sysctl.id/microservices-to-monoliths-pendulum-swing/)
+* [Post-Monolith Architectures – DZone](https://dzone.com/articles/post-monolith-architecture-2025)
 
 🔵🔵🔵🔵🔵⚪
 
-## 🧭 Conclusion -- From Hype to Balance
+## 🧭 Conclusion – From Hype to Balance
 
 ### Why the debate is about context and balance, not choosing sides
 
@@ -147,6 +147,6 @@ Check out these top-rated Udemy courses:
 
 👉 [OCP Java Developer Certification Prep](https://www.udemy.com/course/ocp-oracle-certified-professional-java-developer-prep/?referralCode=54114F9AD41F127CB99A)  
 
-👉 [Spring Professional Certification -- 6 Full Practice Tests](https://www.udemy.com/course/spring-professional-certification-6-full-tests-2v0-7222-a/?referralCode=04B6ED315B27753236AC)
+👉 [Spring Professional Certification – 6 Full Practice Tests](https://www.udemy.com/course/spring-professional-certification-6-full-tests-2v0-7222-a/?referralCode=04B6ED315B27753236AC)
 
 Start mastering your future today! 🚀

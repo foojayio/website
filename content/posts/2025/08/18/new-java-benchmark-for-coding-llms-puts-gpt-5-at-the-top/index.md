@@ -44,13 +44,13 @@ And at the low end:
 
 ![](image-7-700x379.png)
 
-### ... but it's no speed demon
+### … but it's no speed demon
 
 The one chink in OpenAI's armor is that, at least as of release week, the entire GPT-5 family is slow. The only slower model in the A or B tiers is Gemini 2.5 Pro. By contrast, Sonnet 4 is screaming fast. Even Opus 4.1 is faster than GPT-5 Mini.
 
 ![](Screenshot-2025-08-12-at-20-04-51-Brokk---AI-for-Large-Codebases-700x427.png)  
 
-And if we drop down to the Open Round, GPT-5 nano is both slower and dumber than Flash 2.5 -- which, to be fair, is 5x more expensive. The big surprise is GPT OSS (as served by Fireworks) showing up as significantly faster than nano.
+And if we drop down to the Open Round, GPT-5 nano is both slower and dumber than Flash 2.5 – which, to be fair, is 5x more expensive. The big surprise is GPT OSS (as served by Fireworks) showing up as significantly faster than nano.
 
 ![](image-6-700x379.png)
 
@@ -67,7 +67,7 @@ This also means that context length isn't the primary reason that newer models a
 * [Unlike in SWEBench](https://x.com/chatgpt21/status/1954033383094296705 "Unlike in SWEBench"), enabling thinking makes a meaningful difference in Opus 4.1 performance in the Power Ranking. We speculate that this may be due to the larger, more complex tasks involved.
 * But almost no models benefited from `high` thinking over default or medium. o4 is the exception that does benefit; o3, Sonnet 4, Opus 4.1, Gemini Pro 2.5, and Gemini Flash 2.5 all saw negligible benefit, or even worse performance from overthinking. (We were unable to get reasoning=high working with GPT-5 through the litellm proxy that Brokk uses in this initial test. We will update the results when we have solved the problem.)
 * The Chinese models (DeepSeek-V3, Kimi K2, and Qwen3 Coder) all did much worse than they did on SWEBench and AiderBench. This difference is especially pronounced with K2, which was rewarded by a spot in the D tier. V3 is handicapped by a context window small enough that it can't handle some Power Ranking tasks at all, but the newer models don't have that excuse. Were they trained on the test?
-* Grok 3 mini is one of the top low-cost performers in AiderBench, but D-tier in the Power Ranking. Probably this is because Brokk uses only a diff-based format; full-file replacement, which grok 3 mini was configured to use in AiderBench, is too slow to be practical in the real world--or the Power Ranking, where files often contain 1000s of lines of code (vs the dozens in AiderBench tasks).
+* Grok 3 mini is one of the top low-cost performers in AiderBench, but D-tier in the Power Ranking. Probably this is because Brokk uses only a diff-based format; full-file replacement, which grok 3 mini was configured to use in AiderBench, is too slow to be practical in the real world–or the Power Ranking, where files often contain 1000s of lines of code (vs the dozens in AiderBench tasks).
 * We were unable to get a reasonable API quota from xAI to test Grok 4.
 * Quantization matters. Qwen3 Coder fp8 scores significantly worse on both average and best scores than the native fp16 version. By default, you could get either one from Openrouter, or even fp4, so be careful to configure this correctly!
 

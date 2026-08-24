@@ -58,14 +58,14 @@ The calculations for the energy rating can get really complex. They can depend o
 
 All the items mentioned are modeled and calculated in HERO.
 
-All the geometry, intersections, etc are also computed by the application. For instance, if you create a Zone in a level -- a Zone can be a living room, kitchen, bedroom, etc -- and then another smaller Zone in the level above, there will be an intersection. This intersection will produce a "hole" in the ceiling of the level below, like a donut. Hero will realize automatically that the 2 zones are connected and will create a new Ceiling in the zone below (in the place of the donut) adjacent to the zone above.
+All the geometry, intersections, etc are also computed by the application. For instance, if you create a Zone in a level – a Zone can be a living room, kitchen, bedroom, etc – and then another smaller Zone in the level above, there will be an intersection. This intersection will produce a "hole" in the ceiling of the level below, like a donut. Hero will realize automatically that the 2 zones are connected and will create a new Ceiling in the zone below (in the place of the donut) adjacent to the zone above.
 ![](donut-step1-1024x555.jpg) 1 - Create zone ![](donut-step2-1024x555.jpg) 2- Create another Zone on level above ![](donut-step3-1024x555.jpg) 3 - Geometry automatically split (new Ceiling created)
 
 Shading objects are also calculated automatically, one Zone can cast a shade on another Zone placed elsewhere.
-![](auto-wingwall-step-1-1024x555.png) 1 -- Create Zone ![](auto-wingwall-step-2-1024x555.png) 2 -- Create second Zone to the right ![](auto-wingwall-step-3-1024x555.png) 3- Shading object automatically calculated and created
+![](auto-wingwall-step-1-1024x555.png) 1 – Create Zone ![](auto-wingwall-step-2-1024x555.png) 2 – Create second Zone to the right ![](auto-wingwall-step-3-1024x555.png) 3- Shading object automatically calculated and created
 
 Another thing that HERO automatically computes are adjacencies between Walls and Zones. If you create a Zone right next to another, instead of creating 2 Walls between the Zones, the application will automatically figure out that the Zones are connected. It will connect the 2 zones by creating 1 internal Wall between them, which is different from an outside facing Wall.
-![](Internal-Wall-step-1-1024x555.png) 1 -- Create Zone ![](Internal-Wall-step-2-1024x555.png) 2- Create another overlapping Zone
+![](Internal-Wall-step-1-1024x555.png) 1 – Create Zone ![](Internal-Wall-step-2-1024x555.png) 2- Create another overlapping Zone
 
 For this post not to get too long, too tedious, and too technical I just pointed out some of the features of Hero, there are a lot more. I think you can get a general idea of Hero's features from what was mentioned above.
 
@@ -97,7 +97,7 @@ To be fair and to try to be impartial, I'll conclude this section with what, in 
 * Lack of support for some of the Web's CSS properties. Also one of my pet peeves is the fact that every property is prefixed with "-fx-" (I would prefer this would be dropped on properties that have the same behavior as the ones in Web CSS).
 * IDE support for JavaFX CSS, currently isn't great: error highlighting, etc (side note: I'm using Intellij).
 * JavaFX API is too closed and lacks better support for extension on some cases (classes that are final, classes with final methods, etc) regarding this issue I preferred Swing's more open API.
-* Some Font rendering issues (this might only happen with some fonts and only on some platforms -- Windows is worse than Mac).
+* Some Font rendering issues (this might only happen with some fonts and only on some platforms – Windows is worse than Mac).
 * Better separation of concerns in JavaFX Controls. There was a plan a few years ago to make Behavior classes public, which would probably provide a better separation between the View, Controller and Model aspects of a Control. Right now it's a bit difficult to create a new Skin for an existing JavaFX SDK Control if your only requirement is to tweak some of its View aspects and when that can't be done through CSS. This often results in developers preferring to create a new Control altogether than providing a new Skin for an existing one which will mean more work and a higher degree of coupling with those Controls (for instance, you won't be able to easily switch between Skins). The fact that the API is often too closed also means that, usually, extending an existing Control isn't an option.
 
 ### Conclusion

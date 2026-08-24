@@ -29,7 +29,7 @@ We announced the [start of our enterprise support services](https://omnifish.ee/
 
 **What's the Buzz?**
 
-First off, **GJULE** ---a completely rewritten logging engine—now makes logging faster and more reliable. If logging felt sluggish before, GJULE breathes new life into it. You can enable even the lowest log levels and catch every detail without bogging down your server and applications. To find out more about the new GlassFish logging, watch this video about Changes in [GlassFish 7 Logging System](https://www.youtube.com/watch?v=j2gACdwWyNk) on YouTube.
+First off, **GJULE** —a completely rewritten logging engine—now makes logging faster and more reliable. If logging felt sluggish before, GJULE breathes new life into it. You can enable even the lowest log levels and catch every detail without bogging down your server and applications. To find out more about the new GlassFish logging, watch this video about Changes in [GlassFish 7 Logging System](https://www.youtube.com/watch?v=j2gACdwWyNk) on YouTube.
 
 For those dabbling in microservices, GlassFish now natively supports **MicroProfile Config, REST Client,** and**JWT Authentication**. It means your applications can be more modular, easier to configure, and more secure without jumping through hoops. Of course, all these MicroProfile APIs are useful in traditional enterprise applications too, which allows you to modernize your existing apps, simplify or even remove some of the boilerplate code.  
 [Get started with GlassFish
@@ -43,7 +43,7 @@ Gone are the days of clunky setups. The **GlassFish Embedded** runtime now simpl
 
 There's an Arquillian container too, so you can easily run your tests without launching the whole GlassFish server. Since then, [GlassFish Embedded](https://glassfish.org/docs/SNAPSHOT/embedded-server-guide.html) received a few improvements. A simple API to run a plain JAR in the embedded server without a separate WAR file and easier-to-use Maven plugin are among them.
 
-And yes, GlassFish runs on the **latest Java versions**---even those still in pre-release—keeping you on the cutting edge without the usual headaches. Although GlassFish Embedded still requires a few --add-opens JVM arguments with recent Java versions to bypass the Java module system restrictions, the number of them has been reduced, with the aim to avoid any need for --add-opens arguments in the future.
+And yes, GlassFish runs on the **latest Java versions**—even those still in pre-release—keeping you on the cutting edge without the usual headaches. Although GlassFish Embedded still requires a few –add-opens JVM arguments with recent Java versions to bypass the Java module system restrictions, the number of them has been reduced, with the aim to avoid any need for –add-opens arguments in the future.
 
 {{< youtube mp0vROxSPmA >}}
 
@@ -76,7 +76,7 @@ Thanks to OmniFish, GlassFish isn't just an application server alone. Our contri
 Eclipse GlassFish is an open source server maintained by project members in the Eclipse Foundation. But it's not supported only by a community of volunteers. Several companies offer commercial services related to GlassFish. OmniFish provides full high-quality [support and consultancy services](https://omnifish.ee/solutions/#support) to cover your back in case you have troubles. Or if you need some new features in GlassFish to make your work more efficient.
 
 OmniFish actively contributes to the development of the GlassFish project, more than all other companies and individual contributors together. OmniFish engineers have years of experience with solving production issues, improving performance and usability of GlassFish, and adding new features in GlassFish and the ecosystem of GlassFish tooling. On top of that, we at OmniFish have a vision of turning GlassFish into a productive development platform and production runtime to write and run Java apps like a god!  
-[Need help with GlassFish? Ask OmniFish for help...](https://omnifish.ee/contact-us/)
+[Need help with GlassFish? Ask OmniFish for help…](https://omnifish.ee/contact-us/)
 
 **Final Thoughts**
 

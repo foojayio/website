@@ -40,7 +40,7 @@ As a side note, if you like the content of this and the other posts in this seri
 
 Front-end logging differs significantly from back-end logging, and understanding this distinction is crucial. Unlike back-end systems, where persistent logs are vital for monitoring and debugging, the fluid nature of front-end development introduces different challenges. When debugging backends I'd often go for tracepoints which are far superior in that setting. However the front-end with its constant need to refresh, reload, contexts switch etc. is a very different beast. In the front-end relying heavily on elaborate logging mechanisms can become cumbersome.
 
-While tracepoints remain superior to basic print statements, the continuous testing and browser reloading in front-end workflows lessen their advantage. Moreover, features like logging to a file or structured ingestion are rarely useful in the browser, diminishing the need for a comprehensive logging framework. However, using a logger is still considered best practice over the typical `Console.log` for long term logging... For short term logging `Console.log` has some tricks up its sleeve.
+While tracepoints remain superior to basic print statements, the continuous testing and browser reloading in front-end workflows lessen their advantage. Moreover, features like logging to a file or structured ingestion are rarely useful in the browser, diminishing the need for a comprehensive logging framework. However, using a logger is still considered best practice over the typical `Console.log` for long term logging… For short term logging `Console.log` has some tricks up its sleeve.
 
 ## **Leveraging Console Log Levels**
 

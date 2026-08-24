@@ -59,7 +59,7 @@ This is our first glimpse into the $search syntax. The handy "copy" (the top rig
 
 At this point, your environment is set up and your collection is Atlas search-able. Now it's time to do some coding!
 
-## Click, click, click, ... code!
+## Click, click, click, … code!
 
 Let's first take a moment to reflect on and appreciate what's happened behind the scenes of our wizard clicks up to this point:
 
@@ -199,7 +199,7 @@ Last but not least is the primary (scoring!) \`phrase\` search operator clause t
 |---------------------------------------------------------------------------------------------------------------|
 | Document searchQuery = new Document("phrase", new Document("query", "keanu reeves") .append("path", "cast")); |
 
-## And the results are...
+## And the results are…
 
 So now we've built the aggregation pipeline. To show the results, we simply iterate through \`aggregationResults\`:
 

@@ -3,6 +3,7 @@ title: "Debugging RAM: Java Garbage Collection - Java Heap Deep Dive (Part 1)"
 date: "2022-01-11T15:36:04+00:00"
 lastmod: "2022-02-10T08:48:27+00:00"
 description: "Memory usage is one of the most important aspects for devs in general and Java SE devs in particular. GC tips, tricks, internals, and more!"
+canonical: "https://talktotheduck.dev/debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
 authors:
   - "shai-almog"
 image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"

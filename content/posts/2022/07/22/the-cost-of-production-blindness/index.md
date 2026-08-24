@@ -3,6 +3,7 @@ title: "The Cost of Production Blindness"
 date: "2022-07-22T08:11:03+00:00"
 lastmod: "2022-07-22T08:11:04+00:00"
 description: "Cloud rose to fame on the banner of cutting costs but with its tremendous growth, spend is rocketing. Learn how you can cut down overspend!"
+canonical: "https://lightrun.com/best-practices/the-cost-of-production-blindness/"
 authors:
   - "shai-almog"
 image: "Cost-Saving-with-Lightrun.png"
@@ -35,7 +36,7 @@ Yes, and no. We gave up some insight and control and got a lot in return:
 * Simplicity
 * Security
 
-These are pretty incredible benefits. We don't want to give these benefits up. But we also lost some insight, debugging became harder and complexity rose. We discussed these problems before but today I want to talk about one impact only...
+These are pretty incredible benefits. We don't want to give these benefits up. But we also lost some insight, debugging became harder and complexity rose. We discussed these problems before but today I want to talk about one impact only…
 
 ## Cost
 
@@ -77,7 +78,7 @@ My top three tips for performance have always been:
 2. Caching
 3. Caching
 
-There's really nothing else. It all boils down to that. Unfortunately, cache misses are notoriously hard to tune and detect. This is an even bigger issue in production where we need to account for the changing landscape. E.g. we cache up to 10 friends of a user on a social network but in production the growth team encourages friendships and users have more friends...
+There's really nothing else. It all boils down to that. Unfortunately, cache misses are notoriously hard to tune and detect. This is an even bigger issue in production where we need to account for the changing landscape. E.g. we cache up to 10 friends of a user on a social network but in production the growth team encourages friendships and users have more friends…
 
 You'd have cache misses more often and you wouldn't even know.
 
@@ -107,7 +108,7 @@ But what if that block of code isn't used by anyone in production?
 
 What if it's used by very few people?
 
-That's exactly what the counter metric does. It counts the number of times a line was reached. It can tell us which methods are important to us and how frequently they're reached. You wouldn't be as concerned about a refactor if only three people reach that line of code...
+That's exactly what the counter metric does. It counts the number of times a line was reached. It can tell us which methods are important to us and how frequently they're reached. You wouldn't be as concerned about a refactor if only three people reach that line of code…
 
 ## Finally
 
@@ -125,4 +126,4 @@ We keep going, but carefully. We step lightly and don't take big risks. Is our c
 
 Maybe, but the risk of bringing down production is far scarier than the benefit of shaving some expenses to the company.
 
-Developer observability is the light within this darkness. When you shine a light in the dark, you take away some of the fear and make production more approachable. We can measure, test, and move fast. We also have a better sense of the risks we'll be facing with the upcoming changes. The tooling also gives us a sense of the upside. How much can we save? Imagine saving the cost of your entire department in cloud expenses. That's job security right there... The best to fight that fear of risky changes.
+Developer observability is the light within this darkness. When you shine a light in the dark, you take away some of the fear and make production more approachable. We can measure, test, and move fast. We also have a better sense of the risks we'll be facing with the upcoming changes. The tooling also gives us a sense of the upside. How much can we save? Imagine saving the cost of your entire department in cloud expenses. That's job security right there… The best to fight that fear of risky changes.

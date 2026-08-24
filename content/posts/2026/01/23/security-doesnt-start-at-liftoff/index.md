@@ -126,7 +126,7 @@ The posting to the NVD system (<https://nvd.nist.gov/vuln/detail/CVE-2025-24813>
 
 "This issue affects Apache Tomcat: from 11.0.0-M1 through 11.0.2, from 10.1.0-M1 through 10.1.34, from 9.0.0.M1 through 9.0.98."
 
-#### March 13--14, 2025: PoC Exploits \& Active Attacks Begin
+#### March 13–14, 2025: PoC Exploits \& Active Attacks Begin
 
 Within 30 hours of disclosure, proof-of-concept exploits appear publicly. Mass scanning and exploit attempts begin immediately. Attack method: upload JSP webshell via partial PUT, trigger via crafted JSESSIONID request.
 
@@ -142,7 +142,7 @@ The CPE <https://nvd.nist.gov/products/cpe> is the magic information that makes 
 
 At this point the CPE simply matches the original version range declaration we saw earlier.
 
-#### March 19--26, 2025: Security Vendor Analysis Published
+#### March 19–26, 2025: Security Vendor Analysis Published
 
 Rapid7, Akamai, Wiz, and Sonatype publish detailed analyses.
 

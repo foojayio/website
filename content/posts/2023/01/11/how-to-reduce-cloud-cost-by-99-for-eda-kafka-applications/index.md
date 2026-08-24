@@ -66,13 +66,13 @@ The Chronicle Queue instances are created using the default setup with no explic
 
 Apache [Kafka](https://kafka.apache.org/ "Kafka") is an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications used extensively in various EDA applications, especially when several information sources residing in different locations are to be aggregated and consumed.
 
-In this benchmark, each test instance will create six distinct Kafka topics, and they are named topicXXXX0, topicXXXX1, ... , topicXXXX5 where XXXXX is a random number.
+In this benchmark, each test instance will create six distinct Kafka topics, and they are named topicXXXX0, topicXXXX1, … , topicXXXX5 where XXXXX is a random number.
 
 ### Chronicle Queue
 
 Open-source [Chronicle Queue](https://chronicle.software/queue/ "Chronicle Queue ")is a persisted low-latency messaging framework for high-performance and critical applications. Interestingly, Chronicle Queue uses off-heap memory and memory-mapping to reduce memory pressure and garbage collection impacts, making the product popular within the fintech area where deterministic low latency messaging is crucial.
 
-In this other benchmark, each test instance will create six Chronicle Queue instances, named topicXXXX0, topicXXXX1, ... , topicXXXX5 where XXXXX is a random number.
+In this other benchmark, each test instance will create six Chronicle Queue instances, named topicXXXX0, topicXXXX1, … , topicXXXX5 where XXXXX is a random number.
 
 ### Code
 

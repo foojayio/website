@@ -32,7 +32,7 @@ frozen: false
 * to encourage the development and benefits of free software and open-source solutions.
 
 There were 35 devrooms, ranging from Java, Containers, Go, Rust, Network, Community, and other various topics. Although I am a huge fan of Java and OSS eco-system around it, but I went to FOSDEM this year specifically to understand and discuss about the state and direction of AI in Free and/or Open-Source world. And this article is about that.
-> "An AI system is a machine-based system that can, for a given set of human-defined objectives, make predictions, recommendations, or decisions influencing real or virtual environments. AI systems are designed to operate with varying levels of autonomy." -- [Open-Source Initiative, AI definition](https://opensource.org/deepdive/drafts/the-open-source-ai-definition-draft-v-0-0-3/ "Open-Source Initiative, AI definition")
+> "An AI system is a machine-based system that can, for a given set of human-defined objectives, make predictions, recommendations, or decisions influencing real or virtual environments. AI systems are designed to operate with varying levels of autonomy." – [Open-Source Initiative, AI definition](https://opensource.org/deepdive/drafts/the-open-source-ai-definition-draft-v-0-0-3/ "Open-Source Initiative, AI definition")
 
 ### What is Open (Source) AI?
 
@@ -113,7 +113,7 @@ Open-Source shows that when you eliminate the obstacles to learning, using, shar
 
 ![](ai-spec-700x492.png)
 
-The current draft version is here \> [The Open Source AI Definition -- draft v. 0.0.5 -- Open Source Initiative](https://opensource.org/deepdive/drafts/the-open-source-ai-definition-draft-v-0-0-5/ "The Open Source AI Definition – draft v. 0.0.5 – Open Source Initiative") and it follows the definition of AI system adopted by the Organization for Economic and Co-operation Development (OECD).  
+The current draft version is here \> [The Open Source AI Definition – draft v. 0.0.5 – Open Source Initiative](https://opensource.org/deepdive/drafts/the-open-source-ai-definition-draft-v-0-0-5/ "The Open Source AI Definition – draft v. 0.0.5 – Open Source Initiative") and it follows the definition of AI system adopted by the Organization for Economic and Co-operation Development (OECD).  
 
 For each AI systems (such as Pythia, Llama, BLOOM, Mistral, Phi2, Olmo etc.) the Specification target to define:
 
@@ -141,7 +141,7 @@ Ongoing and following tasks of this spec for Open-Source Initiative are:
 3. raise funds for 2024 meetings.
 4. setup the board for review and approval of v. 1.0.
 
-The drafts can be found at \> [Drafts of the Open Source AI Definition -- Open Source Initiative](https://opensource.org/deepdive/drafts/ "Drafts of the Open Source AI Definition – Open Source Initiative")
+The drafts can be found at \> [Drafts of the Open Source AI Definition – Open Source Initiative](https://opensource.org/deepdive/drafts/ "Drafts of the Open Source AI Definition – Open Source Initiative")
 
 ### TLDR;
 
@@ -157,7 +157,7 @@ The drafts can be found at \> [Drafts of the Open Source AI Definition -- Open S
 
 ### References
 
-1. [About -- Open Source Initiative](https://opensource.org/about/ "About – Open Source Initiative")
+1. [About – Open Source Initiative](https://opensource.org/about/ "About – Open Source Initiative")
 2. [Why Should You Use Open-Source Software?](https://www.howtogeek.com/94114/why-should-you-use-open-source-software/ "Why Should You Use Open-Source Software?")
 3. [What is open source, and why does it matter today?](https://www.openaccessgovernment.org/open-source-technology/129261/ "What is open source, and why does it matter today?")
 4. [FOSDEM 2024 - Open Source AI](https://fosdem.org/2024/events/attachments/fosdem-2024-2805-moving-a-step-closer-to-defining-open-source-ai/slides/22023/FOSDEM_2024_-_Open_Source_AI_SCXe000.pdf "FOSDEM 2024 - Open Source AI")

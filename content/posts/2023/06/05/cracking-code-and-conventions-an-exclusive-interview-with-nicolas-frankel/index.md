@@ -22,7 +22,7 @@ In this enlightening interview, we explore the unique journey of Nicolas Fränke
 
 Profile:
 
-* 🧑‍💼LinkedIn:[Nicolas Fränkel -- Head of Developer Experience -- API7.ai](https://www.linkedin.com/in/nicolasfrankel/)
+* 🧑‍💼LinkedIn:[Nicolas Fränkel – Head of Developer Experience – API7.ai](https://www.linkedin.com/in/nicolasfrankel/)
 * 🐦Twitter:[@nicolas_frankel](https://twitter.com/nicolas_frankel)
 * 👨‍💻GitHub:[nfrankel (Nicolas Fränkel)](https://github.com/nfrankel)
 * 📝Blog:[Nicolas Fränkel - A Java geek](https://blog.frankel.ch/)

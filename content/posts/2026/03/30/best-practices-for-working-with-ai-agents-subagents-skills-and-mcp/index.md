@@ -36,13 +36,13 @@ Most agent implementations start the same way. You have a model, you have a few 
 
 This works in the demo. Here's why it fails in production:
 
-|         Problem          |                                                                              What it looks like                                                                              |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **M×N integration mess** | Every new data source means more hardcoded logic. The agent becomes the integration layer for everything, maintainable by no one.                                            |
+|         Problem          |                                                                             What it looks like                                                                             |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **M×N integration mess** | Every new data source means more hardcoded logic. The agent becomes the integration layer for everything, maintainable by no one.                                          |
 | **Total blast radius**   | One agent has access to read, write, delete, email, and notify. A misconfigured prompt or a prompt injection doesn't just break one workflow — it can trigger all of them. |
-| **Context collapse**     | A system prompt that tries to cover every scenario grows until the model loses focus on all of them. More instructions ≠ better behaviour.                                   |
-| **No specialization**    | The same model and prompt handles order lookups, refund approvals, supplier payments, and compliance checks. Each task degrades the others.                                  |
-| **Impossible to test**   | One monolithic agent with a 4000-token system prompt has no meaningful unit surface. You can only test the whole thing, end to end, every time.                              |
+| **Context collapse**     | A system prompt that tries to cover every scenario grows until the model loses focus on all of them. More instructions ≠ better behaviour.                                 |
+| **No specialization**    | The same model and prompt handles order lookups, refund approvals, supplier payments, and compliance checks. Each task degrades the others.                                |
+| **Impossible to test**   | One monolithic agent with a 4000-token system prompt has no meaningful unit surface. You can only test the whole thing, end to end, every time.                            |
 
 ## §2 ✅ The Better Architecture — Multi-Agent with MCP
 
@@ -55,11 +55,11 @@ This is better for concrete reasons: a subagent that can only read orders cannot
 
 But this architecture introduces three categories of problems that the naive one hid. The rest of this article is about those problems and how to solve them.
 
-|  Problem category  |                                                                                      Why the multi-agent architecture creates it                                                                                       |   Covered in   |
-|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
-| 🔴 **Security**    | More components = more attack surface. MCP servers introduce tool poisoning, rug pull attacks, supply chain risks, and OAuth scope sprawl that a single hardcoded agent never had.                                     | §6, §11        |
+|  Problem category  |                                                                                     Why the multi-agent architecture creates it                                                                                      |   Covered in   |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| 🔴 **Security**    | More components = more attack surface. MCP servers introduce tool poisoning, rug pull attacks, supply chain risks, and OAuth scope sprawl that a single hardcoded agent never had.                                   | §6, §11        |
 | 🟡 **Accuracy**    | Subagents with focused prompts perform better — but only if those prompts are well-engineered. Context management, prompt discipline, and guardrails become critical when mistakes compound across agent boundaries. | §3, §4, §5, §9 |
-| 🟢 **Performance** | MCP servers inject tool definitions into the context window. Multiple servers = context pollution. Without deliberate architecture, the efficiency gains of specialization are eaten by token overhead.                | §3, §10        |
+| 🟢 **Performance** | MCP servers inject tool definitions into the context window. Multiple servers = context pollution. Without deliberate architecture, the efficiency gains of specialization are eaten by token overhead.              | §3, §10        |
 
 Each section below is labeled by the problem category it addresses, and by whether the pattern applies to you as a **user** of these systems (working with agents and MCP servers you didn't build) or as a **creator** (building the tools and architecture others depend on). Most of us are both — read straight through or jump to your current problem.
 
@@ -72,13 +72,13 @@ METR studied Cursor and Claude, not MCP agents — so the table below is our int
 >
 > The five factors below are accurately drawn from METR's factor analysis (Table 1, Appendix C). The "agent system equivalent" column is our interpretation of how those same dynamics surface in multi-agent MCP architectures — not findings from the paper.
 
-|                                                             METR factor (evidence found) \[1\]                                                              |                   How the same dynamic appears in agent systems *(our interpretation)*                    | Covered in |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|------------|
-| Low AI reliability — only \~44% of Cursor code suggestions accepted; time lost reviewing and rejecting [\[METR, 2025\]](https://arxiv.org/abs/2507.09089) | Vague tool descriptions cause the model to call the wrong tool; you iterate 3--4× to get the right result | §9         |
-| Missing implicit repository context — AI lacks the tacit knowledge experienced contributors carry                                                         | Bloated system prompts that dump entire schemas; model loses focus, gives scattered answers               | §5         |
-| Overoptimism about AI usefulness — developers used AI even on tasks where it demonstrably slowed them down                                                | No output validation; incorrect agent results pass undetected until they hit production                   | §7         |
-| Large and complex repositories — AI least effective on 1M+ line codebases with high quality standards                                                     | MCP tools with no input validation; model passes malformed parameters into mature, sensitive systems      | §10        |
-| High developer familiarity — experts know their codebase so well they write prompts that assume context the model doesn't have                            | Senior devs writing under-specified agent prompts; the model doesn't share their implicit knowledge       | §6         |
+|                                                            METR factor (evidence found) \[1\]                                                             |                   How the same dynamic appears in agent systems *(our interpretation)*                   | Covered in |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|------------|
+| Low AI reliability — only \~44% of Cursor code suggestions accepted; time lost reviewing and rejecting [\[METR, 2025\]](https://arxiv.org/abs/2507.09089) | Vague tool descriptions cause the model to call the wrong tool; you iterate 3–4× to get the right result | §9         |
+| Missing implicit repository context — AI lacks the tacit knowledge experienced contributors carry                                                         | Bloated system prompts that dump entire schemas; model loses focus, gives scattered answers              | §5         |
+| Overoptimism about AI usefulness — developers used AI even on tasks where it demonstrably slowed them down                                                | No output validation; incorrect agent results pass undetected until they hit production                  | §7         |
+| Large and complex repositories — AI least effective on 1M+ line codebases with high quality standards                                                     | MCP tools with no input validation; model passes malformed parameters into mature, sensitive systems     | §10        |
+| High developer familiarity — experts know their codebase so well they write prompts that assume context the model doesn't have                            | Senior devs writing under-specified agent prompts; the model doesn't share their implicit knowledge      | §6         |
 
 The point isn't that agents don't work. It's that the same failure modes that slowed developers down with Cursor are structurally worse in agent systems — because mistakes compound across tool calls and subagent boundaries rather than staying contained to one suggestion. **Better architecture doesn't eliminate these problems, but it makes them visible, testable, and fixable.**
 
@@ -95,18 +95,18 @@ Feed an agent a vague requirement and you get working code that does the wrong t
 ### The AI Unified Process
 
 [The AI Unified Process (AIUP)](https://aiup.dev), by Java Champion [Simon Martinelli](https://martinelli.ch), puts specifications — not code — at the centre. Its core artefact is the **System Use Case**: a precise, testable description of what the system does from the outside. Code, tests, and docs are all generated from the same spec. Requirement changes? Update the spec first. Code follows.
-> [AI Makes Coding Cheap. Requirements Are Now the Bottleneck](https://martinelli.ch/ai-makes-coding-cheap-requirements-are-now-the-bottleneck/) --- the core argument. [Stop Starting with Code](https://martinelli.ch/stop-starting-with-code-start-with-system-use-cases/) --- the methodology. Full process at [aiup.dev](https://aiup.dev).
+> [AI Makes Coding Cheap. Requirements Are Now the Bottleneck](https://martinelli.ch/ai-makes-coding-cheap-requirements-are-now-the-bottleneck/) — the core argument. [Stop Starting with Code](https://martinelli.ch/stop-starting-with-code-start-with-system-use-cases/) — the methodology. Full process at [aiup.dev](https://aiup.dev).
 
 ### IREB AI4RE — Requirements Engineering in the Age of AI
 
-The [International Requirements Engineering Board (IREB)](https://ireb.org/en) --- 73,000+ certified professionals worldwide — offers **AI4RE**: a micro-credential on using AI responsibly in Requirements Engineering. It covers elicitation, documentation, validation, LLMs, prompt engineering, and where AI falls short. No prerequisites; self-study available.
+The [International Requirements Engineering Board (IREB)](https://ireb.org/en) — 73,000+ certified professionals worldwide — offers **AI4RE**: a micro-credential on using AI responsibly in Requirements Engineering. It covers elicitation, documentation, validation, LLMs, prompt engineering, and where AI falls short. No prerequisites; self-study available.
 
 The two complement each other: AI4RE helps you write better specs; AIUP ensures those specs drive the system rather than getting forgotten once coding starts.
-> [IREB AI4RE micro-credential](https://cpre.ireb.org/en/concept/ai4re-micro-credential) --- LLMs, prompt engineering, RAG, and the risks of AI-generated requirements. No prerequisites. Self-study or via recognised training providers.
+> [IREB AI4RE micro-credential](https://cpre.ireb.org/en/concept/ai4re-micro-credential) — LLMs, prompt engineering, RAG, and the risks of AI-generated requirements. No prerequisites. Self-study or via recognised training providers.
 
 ### Agents that understand code: LSP in OpenCode
 
-[OpenCode](https://opencode.ai) --- an open-source AI coding agent — connects its subagents to **Language Server Protocol (LSP)** servers. When a subagent edits a file, OpenCode queries the LSP server and feeds the diagnostics straight back into the agent's context: type errors, undefined variables, missing methods — the same feedback your IDE gives you. It can also query symbols, navigate to definitions, and inspect call hierarchies and AST structure.
+[OpenCode](https://opencode.ai) — an open-source AI coding agent — connects its subagents to **Language Server Protocol (LSP)** servers. When a subagent edits a file, OpenCode queries the LSP server and feeds the diagnostics straight back into the agent's context: type errors, undefined variables, missing methods — the same feedback your IDE gives you. It can also query symbols, navigate to definitions, and inspect call hierarchies and AST structure.
 
 It ships with over 30 LSP servers — Java, TypeScript, Go, Rust, Python, and more. Two primary agents: **Plan** (analysis only) and **Build** (modifies files, uses Plan's output). Further subagents can be invoked by either or directly by the user. Docs at [opencode.ai/docs/lsp](https://opencode.ai/docs/lsp/).
 > **💡 LSP and requirements work the same way**   
@@ -173,8 +173,8 @@ public OrderSummaryDto getOrderById(
 
 Model size raises the ceiling. Prompt precision raises the floor. Pick the right model for the task — but never use model choice as a substitute for prompt discipline.
 
-|                    Setup                     | Output consistency | Follows negative constraints |   Handles ambiguity    |
-|----------------------------------------------|--------------------|------------------------------|------------------------|
+|                   Setup                    | Output consistency | Follows negative constraints |   Handles ambiguity    |
+|--------------------------------------------|--------------------|------------------------------|------------------------|
 | Large model — detailed, constrained prompt | High               | Reliable                     | Asks for clarification |
 | Large model — vague prompt                 | Medium             | Partial                      | Makes assumptions      |
 | Smaller OSS model — detailed prompt        | Medium             | Partial                      | Guesses, often wrong   |
@@ -343,7 +343,7 @@ One agent doing everything accumulates context noise, produces cascading errors,
 | **Defined in**    | `.claude/agents/.md` (project) or `~/.claude/agents/` (personal)                                                                           | `.claude/skills//SKILL.md` (project) or `~/.claude/skills/` (personal)                                                                     |
 | **Invoked by**    | Automatically when task matches `description`, or explicitly with `@agent-name`                                                            | Automatically when task matches `description`, or by name as a slash command                                                               |
 | **Key benefit**   | Isolation: output is summarised before returning to parent; parallel tasks run simultaneously; each subagent is isolated from its siblings | Reusability: one PR updates the skill; all agents using it get the new behaviour; supporting files load on demand (progressive disclosure) |
-| **Script access** | `Bash` in `allowed-tools` --- grants shell access to that agent                                                                            | Scripts bundled in `scripts/` subfolder; Claude receives the skill's base path and runs them without loading script source into context    |
+| **Script access** | `Bash` in `allowed-tools` — grants shell access to that agent                                                                              | Scripts bundled in `scripts/` subfolder; Claude receives the skill's base path and runs them without loading script source into context    |
 | **Official docs** | [code.claude.com/docs/en/sub-agents](https://code.claude.com/docs/en/sub-agents)                                                           | [code.claude.com/docs/en/skills](https://code.claude.com/docs/en/skills)                                                                   |
 
 #### Real example: QuestDB PR review skill
@@ -361,13 +361,13 @@ QuestDB's open-source repo ships a `review-pr` skill that shows what a productio
 
 Connecting an MCP server means trusting it with your credentials, file system, and external APIs. These are verified incidents from the first year of MCP that show what happens when that trust goes wrong:
 
-|                                                                         CVE / Incident                                                                         |                                                                                  What happened                                                                                  |                                                                                                        Impact                                                                                                        |     CVSS     |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+|                                                                         CVE / Incident                                                                         |                                                                                 What happened                                                                                 |                                                                                                        Impact                                                                                                        |     CVSS     |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 | `CVE-2025-6514`mcp-remote                                                                                                                                      | Command injection in OAuth proxy — malicious MCP server sends a crafted `authorization_endpoint` that gets passed straight to the system shell                                | RCE on client machine; theft of API keys, SSH keys, cloud creds                                                                                                                                                      | 9.6 Critical |
-| `CVE-2025-49596`MCP Inspector [\[Oligo Security, 2025\]](https://www.oligo.security/blog/critical-rce-vulnerability-in-anthropic-mcp-inspector-cve-2025-49596) | Anthropic's official debugging tool ran with no auth, bound to `0.0.0.0`. Any website you visited while it was open could send requests to it and execute arbitrary code.       | Full system access; affected 437,000+ total downloads [\[JFrog, 2025\]](https://jfrog.com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/)                                                                     | 9.4 Critical |
+| `CVE-2025-49596`MCP Inspector [\[Oligo Security, 2025\]](https://www.oligo.security/blog/critical-rce-vulnerability-in-anthropic-mcp-inspector-cve-2025-49596) | Anthropic's official debugging tool ran with no auth, bound to `0.0.0.0`. Any website you visited while it was open could send requests to it and execute arbitrary code.     | Full system access; affected 437,000+ total downloads [\[JFrog, 2025\]](https://jfrog.com/blog/2025-6514-critical-mcp-remote-rce-vulnerability/)                                                                     | 9.4 Critical |
 | `CVE-2025-53110`Filesystem MCP Server [\[The Hacker News, 2025\]](https://thehackernews.com/2025/07/critical-mcp-remote-vulnerability.html)                    | Directory containment bypass via prefix matching — permission for `/private/tmp/allowed_dir` inadvertently granted access to `/private/tmp/allowed_dir_sensitive_credentials` | Arbitrary file read outside intended sandbox                                                                                                                                                                         | 7.3 High     |
-| postmark-mcp supply chain(Sep 2025)                                                                                                                            | Malicious npm package masquerading as official Postmark library. Silently BCC'd all emails to an attacker-controlled address.                                                   | 1,643 downloads before detection; full email exfiltration [\[The Hacker News, 2025\]](https://thehackernews.com/2025/09/first-malicious-mcp-server-found.html)                                                       | ---          |
-| SQLite MCP Server SQL injection(Trend Micro)                                                                                                                   | Anthropic's own reference SQLite server passed user queries directly to DB execution without parameterisation. Classic injection, in an AI tool in 2025.                        | Arbitrary query execution; server archived after 5,000+ forks [\[Trend Micro, 2025\]](https://www.trendmicro.com/en_us/research/25/f/why-a-classic-mcp-server-vulnerability-can-undermine-your-entire-ai-agent.html) | High         |
+| postmark-mcp supply chain(Sep 2025)                                                                                                                            | Malicious npm package masquerading as official Postmark library. Silently BCC'd all emails to an attacker-controlled address.                                                 | 1,643 downloads before detection; full email exfiltration [\[The Hacker News, 2025\]](https://thehackernews.com/2025/09/first-malicious-mcp-server-found.html)                                                       | —            |
+| SQLite MCP Server SQL injection(Trend Micro)                                                                                                                   | Anthropic's own reference SQLite server passed user queries directly to DB execution without parameterisation. Classic injection, in an AI tool in 2025.                      | Arbitrary query execution; server archived after 5,000+ forks [\[Trend Micro, 2025\]](https://www.trendmicro.com/en_us/research/25/f/why-a-classic-mcp-server-vulnerability-can-undermine-your-entire-ai-agent.html) | High         |
 
 The pattern is consistent across all of them: classic vulnerabilities (injection, path traversal, missing auth) appearing in new AI tooling written quickly without security review. The vulnerabilities confirmed that the new AI-native world is governed by the same security principles as traditional software. The protocol is new; the mistakes are not.
 
@@ -375,7 +375,7 @@ The pattern is consistent across all of them: classic vulnerabilities (injection
 
 This one deserves its own section because it's subtle. A malicious MCP tool can embed instructions inside the tool's description field — visible to the LLM when it reads tool metadata, but not shown in any user-facing UI. The model follows the hidden instruction as if it were part of its system prompt.
 
-**`Tool poisoning --- real documented example (Invariant Labs, April 2025)`**
+**`Tool poisoning — real documented example (Invariant Labs, April 2025)`**
 
 ```
 // This is what a poisoned MCP tool looks like.
@@ -405,14 +405,14 @@ def add(a: int, b: int, sidenote: str) -> int:
 
 Mitigations that actually work — and don't require writing any code:
 
-|       What to check       |                                                                                                                                           Human review                                                                                                                                           |                                                                    SAST / automated                                                                    |
-|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Tool descriptions**     | Read every `description` field in the server's source before connecting. Look for `, XML-like tags, or instructions targeting other tools --- these are the poisoning vectors. | Grep or semgrep rule on description fields for hidden instruction patterns (``, ``SYSTEM``, ``ignore previous`) |
-| **Code**                  | Audit every outbound HTTP/socket call in the server code. Any call to an external domain that isn't the stated integration target is a red flag.                                                                                                                                                 | Static analysis (e.g. SpotBugs, Semgrep, Checkmarx) for unvalidated URL construction or hardcoded external endpoints                                   |
-| **Network calls**         | Sandbox your MCP inside a container with no or controlled access to the outside world with egress policies                                                                                                                                                                                       | Use Podman with iptables,sidecar container, network=none or Docker with its [Sandbox feature](https://docs.docker.com/ai/sandboxes/ "Sandbox feature") |
+|       What to check       |                                                                                                                                          Human review                                                                                                                                          |                                                                    SAST / automated                                                                    |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Tool descriptions**     | Read every `description` field in the server's source before connecting. Look for `, XML-like tags, or instructions targeting other tools — these are the poisoning vectors. | Grep or semgrep rule on description fields for hidden instruction patterns (``, ``SYSTEM``, ``ignore previous`) |
+| **Code**                  | Audit every outbound HTTP/socket call in the server code. Any call to an external domain that isn't the stated integration target is a red flag.                                                                                                                                               | Static analysis (e.g. SpotBugs, Semgrep, Checkmarx) for unvalidated URL construction or hardcoded external endpoints                                   |
+| **Network calls**         | Sandbox your MCP inside a container with no or controlled access to the outside world with egress policies                                                                                                                                                                                     | Use Podman with iptables,sidecar container, network=none or Docker with its [Sandbox feature](https://docs.docker.com/ai/sandboxes/ "Sandbox feature") |
 | **Input handling**        | Check that tool parameters are validated before use — especially any that get passed to SQL, shell commands, or file paths. The Trend Micro SQLite CVE was a direct string concatenation.                                                                                                      | SAST for injection sinks: SQL concatenation, `Runtime.exec()`, `ProcessBuilder`, path joins without canonicalisation                                   |
 | **Dependency provenance** | Check the npm/PyPI package name against the official repository. The postmark-mcp attack was a squatted package — one character away from the legitimate one.                                                                                                                                  | SCA tools (OWASP Dependency-Check, Snyk, Socket.dev) to flag typosquatting, known-malicious packages, and unexpected transitive deps                   |
-| **Version pinning**       | After reviewing a version you trust, pin to it explicitly. The rug pull attack works because unpinned servers can silently update.                                                                                                                                                               | Lockfile enforcement in CI (`package-lock.json`, `requirements.txt` with hashes) — fail the build on unexpected version changes                      |
+| **Version pinning**       | After reviewing a version you trust, pin to it explicitly. The rug pull attack works because unpinned servers can silently update.                                                                                                                                                             | Lockfile enforcement in CI (`package-lock.json`, `requirements.txt` with hashes) — fail the build on unexpected version changes                        |
 
 > **📌 Treat MCP servers like third-party libraries — because they are**   
 >
@@ -468,7 +468,7 @@ Think of `CLAUDE.md` as a version-controlled system prompt. Scope, output rules,
 
 **Hooks are different.** They are shell commands that run at specific lifecycle points — before a tool runs (`PreToolUse`), after it completes (`PostToolUse`), on session start. Exit code `2` blocks the operation. No model reasoning. No negotiation.
 
-**`.claude/settings.json --- hook blocking hardcoded secrets`**
+**`.claude/settings.json — hook blocking hardcoded secrets`**
 
 ```
 {
@@ -519,8 +519,8 @@ The `hookify` plugin removes the JSON editing. You describe the rule and it gene
 /hookify Warn when any command contains "prod" or "production"
 ```
 
-|     Guardrail type      |                 Mechanism                 |      Can be overridden by model?      |                    Best for                    |
-|-------------------------|-------------------------------------------|---------------------------------------|------------------------------------------------|
+|     Guardrail type      |                 Mechanism                 |     Can be overridden by model?     |                    Best for                    |
+|-------------------------|-------------------------------------------|-------------------------------------|------------------------------------------------|
 | `CLAUDE.md`             | Model reads instructions at session start | Yes — context pressure can override | Scope, tone, output format, escalation rules   |
 | Hooks (`action: warn`)  | Shell script runs before/after tool use   | No — executes regardless            | Flagging risky patterns for human review       |
 | Hooks (`action: block`) | Exit code 2 stops the operation entirely  | No — unconditional                  | Secrets, destructive commands, sensitive files |
@@ -539,25 +539,25 @@ Each best practice above addresses a specific failure mode. This is the consolid
 
 #### Agents
 
-|                 Practice                  |                                                                              Why it matters                                                                               |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                 Practice                  |                                                                            Why it matters                                                                             |
+|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Define scope before writing prompts**   | An agent without a written scope will expand its own. Use SDD (§7) — allowed topics, forbidden actions, escalation conditions — before generating any implementation. |
-| **Principle of least privilege on tools** | Give the agent only the tools its current task requires. If it only reads, it gets no write tools. Separate OAuth scopes for read vs write vs bulk operations.            |
-| **Treat prompts as versioned config**     | A prompt change is a behaviour change. Store in version control, review like code, test after every model update.                                                         |
-| **Guardrails at input and output**        | PII detection and prompt injection checks at input; hallucination and PII leak checks at output. Neither layer alone is sufficient.                                       |
-| **Explicit escalation conditions**        | Define when the agent must stop and ask — high-value transactions, ambiguous intent, frustration signals. Silent failure is worse than a false-positive escalation.     |
-| **Log every tool call**                   | Agent ID, tenant, tool name, sanitised parameters, result status. Distinguish REJECTED (guard working) from ERROR (incident). Immutable audit log.                        |
+| **Principle of least privilege on tools** | Give the agent only the tools its current task requires. If it only reads, it gets no write tools. Separate OAuth scopes for read vs write vs bulk operations.        |
+| **Treat prompts as versioned config**     | A prompt change is a behaviour change. Store in version control, review like code, test after every model update.                                                     |
+| **Guardrails at input and output**        | PII detection and prompt injection checks at input; hallucination and PII leak checks at output. Neither layer alone is sufficient.                                   |
+| **Explicit escalation conditions**        | Define when the agent must stop and ask — high-value transactions, ambiguous intent, frustration signals. Silent failure is worse than a false-positive escalation.   |
+| **Log every tool call**                   | Agent ID, tenant, tool name, sanitised parameters, result status. Distinguish REJECTED (guard working) from ERROR (incident). Immutable audit log.                    |
 
 #### Subagents
 
 |                   Practice                   |                                                                                               Why it matters                                                                                               |
 |----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **One subagent, one concern**                | A subagent that does more than one distinct job is a monolith again. If it needs a long system prompt covering multiple domains, split it.                                                                 |
-| **Constrain allowed-tools explicitly**       | Don't rely on the system prompt to prevent a subagent from using tools it shouldn't. Enforce scope at the `allowed-tools` level — the model can't be prompted out of a tool it was never given.          |
+| **Constrain allowed-tools explicitly**       | Don't rely on the system prompt to prevent a subagent from using tools it shouldn't. Enforce scope at the `allowed-tools` level — the model can't be prompted out of a tool it was never given.            |
 | **Isolation is a security boundary**         | Subagents don't share state with each other. Design for this: if a subagent is compromised or misbehaves, it cannot read siblings' context or inject into their results. Don't work around this isolation. |
 | **Only parallelize truly independent tasks** | Parallel subagents can't communicate. If task B needs task A's output, they must run sequentially. Forcing parallelism on dependent tasks produces silent coordination failures.                           |
 | **Scope file access per subagent**           | Tell each subagent exactly which paths it can read and write. Broad file access in a parallel subagent means a single prompt injection can affect the entire codebase.                                     |
-| **Summarise, don't dump**                    | A subagent that returns its full context to the parent defeats the purpose of isolation. Instruct subagents to return a structured summary — findings, status, next action — not raw output.           |
+| **Summarise, don't dump**                    | A subagent that returns its full context to the parent defeats the purpose of isolation. Instruct subagents to return a structured summary — findings, status, next action — not raw output.               |
 
 #### Skills
 
@@ -566,7 +566,7 @@ Each best practice above addresses a specific failure mode. This is the consolid
 | **Version-control skills alongside code** | A skill that exists only in someone's head or in an ad-hoc prompt is untraceable, unreviewable, and inconsistent across sessions. Commit it. Review it. Tag it.                                                |
 | **Write explicit NOT-DO sections**        | A skill that only says what to do leaves the model free to invent the rest. Explicit forbidden actions (don't propose architectural changes, don't flag style issues) prevent scope creep in every invocation. |
 | **Pin output format in the skill**        | Consistent output format means downstream tools and humans can parse results reliably. If the format changes, it changes in one place and goes through review.                                                 |
-| **Use scripts for deterministic steps**   | Data fetching, build execution, search — these belong to scripts bundled with the skill, not to AI inference. Scripts make skills reproducible; inference makes them variable.                               |
+| **Use scripts for deterministic steps**   | Data fetching, build execution, search — these belong to scripts bundled with the skill, not to AI inference. Scripts make skills reproducible; inference makes them variable.                                 |
 | **One skill, one procedure**              | A skill that covers too many cases becomes a prompt dump. Separate skills compose cleanly; a monolithic skill is hard to test and harder to update without regressions.                                        |
 
 #### MCP Servers
@@ -578,7 +578,7 @@ Each best practice above addresses a specific failure mode. This is the consolid
 | **Granular OAuth scopes**                   | `mcp:orders:read` not `mcp:orders:*`. A compromised read token should not be able to write. Design scopes at the operation level, not the resource level.                                                               |
 | **Mandatory authentication**                | The MCP spec makes auth optional. Production does not. CVE-2025-49596 was a debugger with no auth bound to all interfaces. Every MCP endpoint requires a valid token with explicit scopes.                              |
 | **Container isolation per server**          | One MCP server per container, read-only filesystem, `cap_drop: ALL`, non-root user, no internet access unless explicitly required. Blast radius of a compromise is one server, not your entire infrastructure.          |
-| **Hard limits on destructive operations**   | Max record count, max transaction value, human approval above threshold. These are deterministic rules enforced in code — not model judgement calls, not system prompt instructions.                                  |
+| **Hard limits on destructive operations**   | Max record count, max transaction value, human approval above threshold. These are deterministic rules enforced in code — not model judgement calls, not system prompt instructions.                                    |
 | **Immutable audit log**                     | Every write, delete, and bulk operation logged with agent ID, tenant, parameters, and outcome. The log cannot be modified by the agent. If something goes wrong, you need to know what the agent did and in what order. |
 
 **// tl;dr**

@@ -12,7 +12,7 @@ related_posts:
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
-  - "transitioning-to-java-my-first-book"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

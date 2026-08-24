@@ -48,9 +48,9 @@ This triggered the question to the audience: why does it matter if we use a logg
 
 Common answers in the chat included:
 
-* `System.out` is slow -- it has a performance overhead. But so does logging
-* `System.out` blocking -- so are most logging implementations but yes you could use an asynchronous logger
-* No persistence -- you can redirect the output of a process to a file
+* `System.out` is slow – it has a performance overhead. But so does logging
+* `System.out` blocking – so are most logging implementations but yes you could use an asynchronous logger
+* No persistence – you can redirect the output of a process to a file
 
 The reason is the fine grained control and metadata that loggers provide. Loggers let us filter logs based on log level, packages, etc.
 
@@ -80,7 +80,7 @@ Notice that we print both the statement and the arguments so the log output will
 
 ![](vlad4-print-and-quota-700x166.png)
 
-You can see the log was printed with the full content on top but then suspended to prevent CPU overhead. This means you won't have a performance problem when investigating performance issues...
+You can see the log was printed with the full content on top but then suspended to prevent CPU overhead. This means you won't have a performance problem when investigating performance issues…
 
 You still get to see the query, and values sent to the database server.
 
@@ -180,9 +180,9 @@ There were many brilliant questions as part of the session. Here are the answers
 
 Lightrun is a developer observability platform. As such, it lets you debug production safely and securely while keeping a tight lid on CPU usage. It includes the following pieces:
 
-* Client -- IDE Plugin/Command Line
+* Client – IDE Plugin/Command Line
 * Management Server
-* Agent -- running on your server to enable the capabilities
+* Agent – running on your server to enable the capabilities
 
 I wrote about it in depth [here](https://talktotheduck.dev/remote-debugging-and-developer-observability).
 
@@ -276,7 +276,7 @@ It also supports blocklists, which let you block a file/class/group from actions
 
 I made a tutorial on this [here](https://twitter.com/debugagent/status/1531653268639825923?s=20&t=_2mpt-LGGCr5WYvDc7POUw).
 
-### **When working air gapped on prem is required, how do you provide the Server, as a jar or docker...?**
+### **When working air gapped on prem is required, how do you provide the Server, as a jar or docker…?**
 
 This is something our team helps you set up.
 

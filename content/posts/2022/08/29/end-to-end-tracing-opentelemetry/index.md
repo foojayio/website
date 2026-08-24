@@ -350,7 +350,7 @@ Still, most systems rely on HTTP in one way or another.
 
 While not trivial to set up, it's not too hard either. Tracing HTTP requests across components is a good start in your journey toward observability of your system.
 
-The complete source code for this post can be found on [GitHub](https://github.com/nfrankel/opentelemetry-tracing).
+The complete source code for this post can be found on [GitHub](nfrankel/opentelemetry-tracing).
 
 **To go further:**
 

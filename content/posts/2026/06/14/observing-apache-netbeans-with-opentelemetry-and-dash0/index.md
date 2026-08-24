@@ -95,7 +95,7 @@ Within the first 90 seconds of startup, 42 log records arrived in Dash0 from `se
 
 **Network discovery** : the proxy detector logged `no http_proxy variable found → direct mode`. In a corporate environment where proxies are misconfigured, this log record would be the first thing to check when the update centre stops working.
 
-**Shutdown** : `Runtime.exit() called with status: 143` --- SIGTERM received, clean shutdown. The exit code is captured as part of the final log record, telling you whether the IDE exited cleanly or was killed hard.
+**Shutdown** : `Runtime.exit() called with status: 143` — SIGTERM received, clean shutdown. The exit code is captured as part of the final log record, telling you whether the IDE exited cleanly or was killed hard.
 
 ### Spans: every outbound HTTP call
 
@@ -121,7 +121,7 @@ The OTel agent automatically collects JVM metrics via the JVM runtime monitoring
 |               Pool               |   Type   | Value at \~90s |
 |----------------------------------|----------|----------------|
 | G1 Eden Space                    | heap     | 69 MB          |
-| G1 Old Gen                       | heap     | 16--18 MB      |
+| G1 Old Gen                       | heap     | 16–18 MB       |
 | G1 Survivor Space                | heap     | 3.5 MB         |
 | Metaspace                        | non-heap | 36 MB          |
 | CodeHeap (profiled nmethods)     | non-heap | 9 MB           |
@@ -133,15 +133,15 @@ Total heap at 90 seconds: \~197 MB. Total non-heap (JIT-compiled code + class me
 
 **Threads** — 45 threads at steady state after startup, split across three states:
 
-|     State     | Count  |
-|---------------|--------|
-| runnable      | 11     |
-| timed_waiting | 22--24 |
-| waiting       | 10     |
+|     State     | Count |
+|---------------|-------|
+| runnable      | 11    |
+| timed_waiting | 22–24 |
+| waiting       | 10    |
 
 For comparison, the stub test process (essentially an empty JVM) had 21 threads. The additional 24 are the NetBeans module system, file watchers, Swing Event Dispatch Thread, LSP background workers, update centre fetchers, and the OTel agent's own export threads. Each thread state is a separate time series in Dash0, so you can watch for thread leaks — a timed_waiting count that grows indefinitely is a classic sign of a thread pool that is not cleaning up.
 
-**CPU time**: \~24 seconds of CPU consumed during a 20-second wall-clock run. The ratio above 1× is entirely the OTel agent's startup cost — bytecode instrumentation of the JVM's loaded classes. After the first 10--15 seconds this overhead disappears and the agent's steady-state CPU footprint is negligible.
+**CPU time**: \~24 seconds of CPU consumed during a 20-second wall-clock run. The ratio above 1× is entirely the OTel agent's startup cost — bytecode instrumentation of the JVM's loaded classes. After the first 10–15 seconds this overhead disappears and the agent's steady-state CPU footprint is negligible.
 
 ## What this enables
 

@@ -139,7 +139,7 @@ Kotlin's pattern matching greatly resembles Java's, with slight syntax changes, 
 
 The comparative evolution of Kotlin vs. Java in pattern matching is quite enlightening. Java lagged behind the legacy C syntax, while Kotlin could already match on concrete types from the beginning. In 2020, Java 14 reduced the gap with the arrow operator; one year later, Java 16 closed the gap completely with the ability to match on concrete types. Finally, Java 23 added the `when` clause.
 
-The experimental nature of Kotlin's `if` means Java has overtaken Java--at least in this area! It's rare enough to be noted.
+The experimental nature of Kotlin's `if` means Java has overtaken Java–at least in this area! It's rare enough to be noted.
 
 ## Python's pattern matching
 

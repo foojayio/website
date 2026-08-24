@@ -3,6 +3,7 @@ title: "Announcing the Digma Beta: First Runtime Linter for Java Code"
 date: "2023-05-22T13:52:34+00:00"
 lastmod: "2023-07-18T07:06:00+00:00"
 description: "Looking for senior Java developers to participate in the beta program of a new free runtime linter that provides Continuous code Feedback."
+canonical: "https://digma.ai/blog/announcing-the-digma-beta-the-first-runtime-linter-for-java-code/"
 authors:
   - "roni-dover"
 image: "doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1.jpg"

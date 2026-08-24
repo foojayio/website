@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-> *"The only way to learn mathematics is to do mathematics."* -- Paul Halmos[\[1\]](https://en.wikipedia.org/wiki/Paul_Halmos "Mathematician Paul Halmos")
+> *"The only way to learn mathematics is to do mathematics."* – Paul Halmos[\[1\]](https://en.wikipedia.org/wiki/Paul_Halmos "Mathematician Paul Halmos")
 
 ## Introduction
 

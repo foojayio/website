@@ -47,7 +47,7 @@ The sections that follow work through it in order: **Step 1** downloads the sour
 
 The result is a single and very clear recommendation in the context of the Spring PetClinic: make **visit booking + reminder** durable first. It wins for three reasons.
 
-1. The seam already exists in the code --- `VisitController` persists a future-dated visit today, so there is a natural place to hook in with almost no scaffolding.
+1. The seam already exists in the code — `VisitController` persists a future-dated visit today, so there is a natural place to hook in with almost no scaffolding.
 
 2. A visit is inherently long-running: the reminder must fire the day before an appointment that may be weeks away, which is exactly the kind of durable wait that in-memory code cannot survive but Durable Execution handles trivially.
 
@@ -83,27 +83,27 @@ others are obvious extensions the domain implies.
 
 #### Candidates grounded in the current code
 
-1. **Book a visit** --- `owner/VisitController.java:97` (`processNewVisitForm`). Today this is just `owners.save(owner)`. But "booking a visit" is the app's most obvious real-world workflow: in production it would fan out to *send a confirmation, schedule a reminder for the day before the appointment, and notify the assigned vet* . That reminder is a **durable timer** — the process sleeps until `visit.getDate()` minus one day, then acts. This is the strongest candidate: it is long-running (days to weeks), spans side effects that can fail independently, and needs exactly-once semantics on notifications.
+1. **Book a visit** — `owner/VisitController.java:97` (`processNewVisitForm`). Today this is just `owners.save(owner)`. But "booking a visit" is the app's most obvious real-world workflow: in production it would fan out to *send a confirmation, schedule a reminder for the day before the appointment, and notify the assigned vet* . That reminder is a **durable timer** — the process sleeps until `visit.getDate()` minus one day, then acts. This is the strongest candidate: it is long-running (days to weeks), spans side effects that can fail independently, and needs exactly-once semantics on notifications.
 
-2. **Create / update a pet** --- `owner/PetController.java:107` (`processCreationForm`) and `owner/PetController.java:186` (`updatePetDetails`). Currently a single `saveAndFlush`. A realistic clinic extension registers the pet with external systems (microchip registry, insurance provider, vaccination-record service). The moment a second system is involved, this becomes a **distributed multi-step process** with partial-failure risk — a good fit for per-step retries and a saga / compensation path.
+2. **Create / update a pet** — `owner/PetController.java:107` (`processCreationForm`) and `owner/PetController.java:186` (`updatePetDetails`). Currently a single `saveAndFlush`. A realistic clinic extension registers the pet with external systems (microchip registry, insurance provider, vaccination-record service). The moment a second system is involved, this becomes a **distributed multi-step process** with partial-failure risk — a good fit for per-step retries and a saga / compensation path.
 
-3. **Register an owner** --- `owner/OwnerController.java:77` (`processCreationForm`). The same pattern at lower priority: a welcome message plus a CRM sync turns a local save into a process worth making durable.
+3. **Register an owner** — `owner/OwnerController.java:77` (`processCreationForm`). The same pattern at lower priority: a welcome message plus a CRM sync turns a local save into a process worth making durable.
 
 #### Candidates from natural domain extensions (not in code yet)
 
-4. **Vet reference-data sync / cache warming** --- `system/CacheConfiguration.java` with `vet/VetController.java`. The vets query is explicitly cached, which hints at expensive or refreshable data. A scheduled job to warm/refresh the cache, or to sync vet and specialty data from an external HR system, is a periodic durable process.
+4. **Vet reference-data sync / cache warming** — `system/CacheConfiguration.java` with `vet/VetController.java`. The vets query is explicitly cached, which hints at expensive or refreshable data. A scheduled job to warm/refresh the cache, or to sync vet and specialty data from an external HR system, is a periodic durable process.
 
 5. **Visit billing / payment** (new capability) — the domain's biggest *missing* durability candidate. Payment capture → invoice generation → receipt delivery is the canonical saga: an external payment gateway call (retryable, must be exactly-once) followed by dependent steps that need compensation if a later step fails.
 
 #### Priority ranking
 
-| Rank |                  Process                   |                              Why durable                              |                  Effort to demo                  |
-|------|--------------------------------------------|-----------------------------------------------------------------------|--------------------------------------------------|
+| Rank |                  Process                   |                              Why durable                              |                 Effort to demo                 |
+|------|--------------------------------------------|-----------------------------------------------------------------------|------------------------------------------------|
 | 1    | **Visit booking + reminder**               | Long-running timer, multiple side effects, exactly-once notifications | Low — hook exists at `VisitController.java:97` |
-| 2    | **Pet registration → external registries** | Distributed multi-step, partial failure, saga                         | Medium                                           |
-| 3    | **Visit billing / payment** (new)          | Payment saga, compensation                                            | Medium                                           |
-| 4    | **Owner onboarding**                       | Welcome message + CRM sync                                            | Low                                              |
-| 5    | **Vet / reference-data sync**              | Scheduled periodic job                                                | Low                                              |
+| 2    | **Pet registration → external registries** | Distributed multi-step, partial failure, saga                         | Medium                                         |
+| 3    | **Visit billing / payment** (new)          | Payment saga, compensation                                            | Medium                                         |
+| 4    | **Owner onboarding**                       | Welcome message + CRM sync                                            | Low                                            |
+| 5    | **Vet / reference-data sync**              | Scheduled periodic job                                                | Low                                            |
 
 #### Recommendation
 
@@ -127,16 +127,16 @@ Every state change is a single synchronous HTTP handler wrapping **one JPA trans
 
 There are no external calls, queues, timers, background jobs, or multi-step orchestration. Each commit is already atomic, so in Temporal terms nothing here needs durable execution yet. Two signals in the code show where the domain *wants* it:
 
-* **Future-dated work already exists.** `VisitController.minVisitDate()` (`VisitController.java:83`) forces every visit ≥1 day out, and `Visit` carries a `date` --- exactly what a Temporal **Timer** (`Workflow.sleep(...)`) serves.
-* **An explicit cache implies refreshable data.** `CacheConfiguration.java:37` creates a dedicated `vets` cache served by `VetController.java:70` --- a hint at data worth periodically syncing via a **Temporal Schedule**.
+* **Future-dated work already exists.** `VisitController.minVisitDate()` (`VisitController.java:83`) forces every visit ≥1 day out, and `Visit` carries a `date` — exactly what a Temporal **Timer** (`Workflow.sleep(...)`) serves.
+* **An explicit cache implies refreshable data.** `CacheConfiguration.java:37` creates a dedicated `vets` cache served by `VetController.java:70` — a hint at data worth periodically syncing via a **Temporal Schedule**.
 
 #### Candidates mapped to Temporal primitives
 
 | Rank |                  Process                   |                       Code seam                        |                                                                             Temporal fit                                                                              |
 |------|--------------------------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1    | **Visit booking + reminder**               | `VisitController.java:109`                             | **Workflow** with `Workflow.sleep()` until `visit.getDate()` − 1 day, then **Activities** for confirmation + vet notification. Exactly-once via Event History replay. |
-| 2    | **Pet registration → external registries** | `PetController.java:126`, `:199`                       | **Saga** — microchip / insurance / vaccination each an Activity with per-step retries and idempotent compensations.                                                 |
-| 3    | **Visit billing / payment** (new)          | ---                                                    | Canonical **Saga**: charge (retryable, exactly-once) → invoice → receipt, compensating on later failure.                                                              |
+| 2    | **Pet registration → external registries** | `PetController.java:126`, `:199`                       | **Saga** — microchip / insurance / vaccination each an Activity with per-step retries and idempotent compensations.                                                   |
+| 3    | **Visit billing / payment** (new)          | —                                                      | Canonical **Saga**: charge (retryable, exactly-once) → invoice → receipt, compensating on later failure.                                                              |
 | 4    | **Owner onboarding**                       | `OwnerController.java:84`                              | Short **Workflow**: welcome message + CRM sync as retriable Activities.                                                                                               |
 | 5    | **Vet / reference-data sync**              | `CacheConfiguration.java:37` + `VetController.java:70` | Periodic **Temporal Schedule** driving an Activity that refreshes the `vets` cache.                                                                                   |
 
@@ -144,7 +144,7 @@ There are no external calls, queues, timers, background jobs, or multi-step orch
 
 **Start with visit booking + reminder** at `VisitController.java:109` (right after validation). In Temporal terms it exercises the three things Durable Execution is *for* in one Workflow:
 
-* **Timer** --- `Workflow.sleep()` until the day before the appointment, surviving Worker restarts.
+* **Timer** — `Workflow.sleep()` until the day before the appointment, surviving Worker restarts.
 * **Retriable Activities** — confirmation email + vet notification, each with a Retry Policy.
 * **Exactly-once semantics** — Event History replay guarantees the reminder never double-sends across crashes.
 
@@ -156,11 +156,11 @@ Sections 2a and 2b reach the **same conclusions** — identical candidates, iden
 
 |              Aspect              |                                                          2a                                                          |                                                                         2b                                                                          |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Tooling**                      | Plain, standard Claude Code — no plugins or skills; treats "durability" as an abstract concept                     | Grounded in **Temporal** , using the installed `temporal-developer` skill                                                                           |
+| **Tooling**                      | Plain, standard Claude Code — no plugins or skills; treats "durability" as an abstract concept                       | Grounded in **Temporal** , using the installed `temporal-developer` skill                                                                           |
 | **Vocabulary**                   | Generic: "durable timer", "saga / compensation path", "scheduled job", "exactly-once"                                | Concrete Temporal primitives: **Workflow** , **Activities** with Retry Policies, **Saga** , **Temporal Schedule** , **Timer**, Event History replay |
 | **Line numbers**                 | Cites upstream PetClinic lines (e.g. `VisitController.java:97`, `PetController.java:107`, `OwnerController.java:77`) | Cites the actual checked-out source lines (e.g. `VisitController.java:109`, `PetController.java:126`, `OwnerController.java:84`)                    |
 | **"Why nothing needs it today"** | Prose paragraph                                                                                                      | Same point, but as a table listing each handler and its exact persist call                                                                          |
-| **Implementation guidance**      | None — stays at the analysis level                                                                                 | Adds concrete `temporal-spring-boot-starter` wiring                                                                                                 |
+| **Implementation guidance**      | None — stays at the analysis level                                                                                   | Adds concrete `temporal-spring-boot-starter` wiring                                                                                                 |
 
 Two takeaways:
 

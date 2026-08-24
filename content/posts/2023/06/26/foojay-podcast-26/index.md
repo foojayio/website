@@ -29,7 +29,7 @@ As developers, we like to automate the boring parts of our job. This automation 
 
 In recent decades, we have seen evolutions from CVS to Subversion to Git. Is this the endpoint? Did we find the holy grail in version control? Or what evolutions are waiting for us?
 
-Let's find out together with these fantastic guests...
+Let's find out together with these fantastic guests…
 > **This is the final episode of season 2 of the Foojay Podcast. See you in September for the start of our new season with more JUGs, the launch of Java 21, and much more!**
 >
 > 

@@ -20,17 +20,17 @@ frozen: false
 
 In the previous issues, I explained how to run a local [MongoDB](https://www.linkedin.com/company/mongodbinc/?lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3BnV1cKI74RDKmiAI4lr1TaA%3D%3D) Atlas cluster using [Atlas CLI](https://www.linkedin.com/pulse/run-local-atlas-cluster-minutes-locally-arek-borucki-mmiqf/?trackingId=M71jHZpGSQCdFygE5EgAOw%3D%3D), what [vector search](https://www.linkedin.com/pulse/power-your-ai-application-vector-search-arek-borucki-sjw0f/?trackingId=vjRobV3lSdy1nc4SIgjM%2Fg%3D%3D) is, and [how to use it](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=S%2FClUOdjSMGzvkR2ZLIS9Q%3D%3D). Now, let's take a closer look at hybrid search.
 
-Reading time: 4--5 min
+Reading time: 4–5 min
 
 ## What is hybrid search?
 
 Hybrid search in MongoDB brings together **two complementary search techniques**:
 
-* **Full text search** ([BM25](https://en.wikipedia.org/wiki/Okapi_BM25) via [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant))---optimized for exact keyword matches, powered by Lucene inside mongot. Perfect when users expect documents that literally contain their query terms.
+* **Full text search** ([BM25](https://en.wikipedia.org/wiki/Okapi_BM25) via [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant))—optimized for exact keyword matches, powered by Lucene inside mongot. Perfect when users expect documents that literally contain their query terms.
 
 <!-- -->
 
-* **Vector search** ([kNN](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) via [Atlas Vector Search](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant))---optimized for semantic similarity. It uses dense embeddings from ML models to find conceptually related content, even when no keywords match.
+* **Vector search** ([kNN](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) via [Atlas Vector Search](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant))—optimized for semantic similarity. It uses dense embeddings from ML models to find conceptually related content, even when no keywords match.
 
 On their own, each method has advantages and limitations. Text search misses context ("non-linear crime story" won't return Memento). Pure semantic search may return results that are semantically aligned but sometimes not practically useful. Hybrid search combines the strengths of both, ensuring results are contextually relevant and precise.
 
@@ -125,7 +125,7 @@ Here, **qv** becomes a 1,536-element JavaScript array representing the semantic 
 
 ### Step 2: Run semantic search
 
-With the query vector ready (**qv** ), you search for movies whose **plots are conceptually similar** to *Inception---*for example, titles involving dream manipulation, layered realities, high-stakes heists, or unreliable perception. This step ignores exact keywords and measures conceptual closeness.
+With the query vector ready (**qv** ), you search for movies whose **plots are conceptually similar** to *Inception—*for example, titles involving dream manipulation, layered realities, high-stakes heists, or unreliable perception. This step ignores exact keywords and measures conceptual closeness.
 
 ```
 db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
@@ -462,7 +462,7 @@ This yields **one ranked list** that balances **keyword intent** (textRank) and 
 
 <!-- -->
 
-* **Fuse text + vectors with RRF** . When knnBeta can't be combined with a compound in a single $search, run two legs---$search.text and $vectorSearch—rank each leg, then fuse with **RRF**. Items with non-zero textRank and vectorRank (1 = best per leg) are promoted, yielding one balanced list.
+* **Fuse text + vectors with RRF** . When knnBeta can't be combined with a compound in a single $search, run two legs—$search.text and $vectorSearch—rank each leg, then fuse with **RRF**. Items with non-zero textRank and vectorRank (1 = best per leg) are promoted, yielding one balanced list.
 
 <!-- -->
 

@@ -13,7 +13,7 @@ related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "effective-coding-with-java-observability"
   - "foojay-podcast-29"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -43,12 +43,12 @@ Continuous Feedback is a new development practice that lets you access informati
 
 Fortunately, OTEL makes it extremely easy to get that data out without making any code changes. This can be done in dev/staging and even production environments. CF Tools are what we use to process that data, in order to make developers aware of how the code (or queries it runs) works in the real world.
 
-In our case, we've been using our own CF tool, the [Digma Continuous Feedback plugin](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "Digma Continuous Feedback plugin") during the development process, which saved us the need to look for problematic queries -- Digma found them for us!
+In our case, we've been using our own CF tool, the [Digma Continuous Feedback plugin](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "Digma Continuous Feedback plugin") during the development process, which saved us the need to look for problematic queries – Digma found them for us!
 
 To make it more in-context with the work rather than a dashboard or external tool you need to consult, Digma's runtime analysis is embedded right into the IDE:  
 ![](https://lh7-us.googleusercontent.com/4c-RI1KV7cR1PCUPqbUILafSSpR97GJs-oMA_CTxFdNhGbnGq5XoN12USFrYs2mdv3kP8ayvqNIMEcC2R_UDT60iL3Tio5M9mQ0J8NuvBJ049sKl0Yw8LnaFiVK1UbNSRSs0om9e_u7KJcTEFrhwU84)  
 
-To follow along and [try for yourself](https://docs.digma.ai/digma-developer-guide "try for yourself") -- just install the Digma IDE plugin from the [marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "marketplace") and run your code as you usually do.
+To follow along and [try for yourself](https://docs.digma.ai/digma-developer-guide "try for yourself") – just install the Digma IDE plugin from the [marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "marketplace") and run your code as you usually do.
 
 ## What Digma had to say about our SQL queries
 
@@ -56,7 +56,7 @@ Upon inspecting our code with Digma, I discovered that one particular new query 
 
 ![](https://lh7-us.googleusercontent.com/yAv2fbCtwUZ0-zYgYmfvKEl3GOlLy6lD5HhO2fIeuJ9KPqJFd7mKU2i3M5ocb9WsZ76oLO0mURZjGGXtwmR2sZpd44c5uMkdK03G6X8cLYJYUD86TYCcMHtrt2DvCAXCK6Q3oZaOuvahSjqLpialeYk)  
 
-Continuous Feedback doesn't acquire any new data -- it just listens to the observability data stream to detect anything I should notice, this was definitely something you want to catch early on. The most important thing for me as a developer is finding out a not-optimized query before it goes to production.
+Continuous Feedback doesn't acquire any new data – it just listens to the observability data stream to detect anything I should notice, this was definitely something you want to catch early on. The most important thing for me as a developer is finding out a not-optimized query before it goes to production.
 
 ## Why SQL queries in databases can be slow
 

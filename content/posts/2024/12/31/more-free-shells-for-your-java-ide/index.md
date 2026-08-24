@@ -129,7 +129,7 @@ Here is what you get as extra for the terminal shells (Command line, Powershell,
 * Define the start-up directory
 * Start in the last directory used
 * Add more shells in tabs and splits, even with the free version of Applet Runner
-* Better navigation of directories: Breadcrumbs, Bookmarks, History menu, Alt + Up, Tree navigation (see screenshot), ...
+* Better navigation of directories: Breadcrumbs, Bookmarks, History menu, Alt + Up, Tree navigation (see screenshot), …
 * Store favorite commands in a re-usable list
 * Easily define the background and foreground colors in the settings
 * Shell in an external window always on top (<kbd>Shift + F12</kbd>) and translucent (<kbd>Shift + Ctrl + F12</kbd> and <kbd>Shift + Alt + Mouse wheel</kbd>)

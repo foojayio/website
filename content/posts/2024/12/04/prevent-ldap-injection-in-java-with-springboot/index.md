@@ -35,7 +35,7 @@ Following **OWASP Recommendations** , such as validating user inputs and using p
 
 ### ☝️ What is LDAP?
 
-**LDAP stands for Lightweight Directory Access Protocol.** It is used to access and manage directory information over a network. **Think of it like a digital phone book** ☎📙---but much more versatile and scalable.
+**LDAP stands for Lightweight Directory Access Protocol.** It is used to access and manage directory information over a network. **Think of it like a digital phone book** ☎📙—but much more versatile and scalable.
 
 ### 🔐 What is LDAP Used For?
 

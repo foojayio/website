@@ -75,7 +75,7 @@ Begin by logging into your Snyk account, [creating one for free](https://app.sny
 
 You can use the Snyk CLI to automatically run security scans inside your current build.
 
-Follow the steps described below — including the few extra steps after`Build with Maven` --- to get started.
+Follow the steps described below — including the few extra steps after`Build with Maven` — to get started.
 
 ```
  - name: Set up Node 14

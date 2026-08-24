@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Let's be real -- keeping up with the pace of software development today is intense. New frameworks pop up and the push for faster, better, *and* more secure code never stops.
+Let's be real – keeping up with the pace of software development today is intense. New frameworks pop up and the push for faster, better, *and* more secure code never stops.
 
 This article is all about cutting through the buzz and looking at how AI-powered tools can actually help you, the Java developer, day-to-day. We'll dive into specific ways AI can help you through the whole SDLC:
 
@@ -28,7 +28,7 @@ This article is all about cutting through the buzz and looking at how AI-powered
 * **Increasing Code Quality and Security**
 * **Improving Code Review**
 
-Okay, first up: wrapping your head around the job at hand. You know those moments where you need to implement a feature based on requirements that feel a bit... fuzzy. Traditionally, this means lots of reading, maybe drawing diagrams, and asking clarifying questions.
+Okay, first up: wrapping your head around the job at hand. You know those moments where you need to implement a feature based on requirements that feel a bit… fuzzy. Traditionally, this means lots of reading, maybe drawing diagrams, and asking clarifying questions.
 
 Here's where AI can lend a hand. Think of tools like `GitHub Copilot, Windsurf and Cursor ,`among others, as smart summarizers and brainstorming partners.
 
@@ -115,7 +115,7 @@ This is an example of installation of a Docker MCP server implementing the GitHu
 These MCP servers expose tools to be used by the agent. In this case the Github MCP Server share 36 tools :
 [![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fj1khjqdbiw4benug1ae0.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fj1khjqdbiw4benug1ae0.png)
 
-Okay, so your Java code is looking good. Now, how about actually shipping it? Getting applications deployed to the cloud involves writing a *lot* of configuration -- Dockerfiles to containerize your app, Kubernetes YAML for orchestration, and CI/CD pipeline definitions (`GitHub Actions`, `GitLab CI`, etc.).
+Okay, so your Java code is looking good. Now, how about actually shipping it? Getting applications deployed to the cloud involves writing a *lot* of configuration – Dockerfiles to containerize your app, Kubernetes YAML for orchestration, and CI/CD pipeline definitions (`GitHub Actions`, `GitLab CI`, etc.).
 
 This is another area where AI assistants can save you significant time and effort, acting as configuration generators.
 
@@ -138,7 +138,7 @@ VS Code with Github Copilot using Kubernetes MCP to interact with a local cluste
 
 Just like with generated code, **AI-generated configuration files are starting points, NOT final products.** You absolutely need to review them carefully:
 
-* **Security is Paramount:** This is critical. AI might generate insecure configurations -- hardcoded secrets, overly permissive IAM roles or network policies (like `0.0.0.0/0`). **Security configurations MUST be reviewed by someone knowledgeable.** Don't assume the AI got it right.
+* **Security is Paramount:** This is critical. AI might generate insecure configurations – hardcoded secrets, overly permissive IAM roles or network policies (like `0.0.0.0/0`). **Security configurations MUST be reviewed by someone knowledgeable.** Don't assume the AI got it right.
 * **Check for Best Practices:** Does the generated config follow current best practices for the specific cloud provider or tool? AI knowledge might be outdated or too generic.
 * **Understand, Don't Just Copy:** Make sure you understand what the configuration actually *does* before applying it. You're still responsible for the infrastructure and deployment.
 * **Test Thoroughly:** Deploy to a non-production environment first and test rigorously.
@@ -184,7 +184,7 @@ This is possibly even more critical than reviewing generated application code: *
 **How to Use AI for Testing Effectively:**
 
 * **Use it as a Starting Point:** Let AI generate the boilerplate structure, basic happy-path tests, and mock setups.
-* **Focus Your Effort:** Use the time saved to focus on writing tests for the complex logic, critical business rules and tricky edge cases -- the areas where human understanding is essential.
+* **Focus Your Effort:** Use the time saved to focus on writing tests for the complex logic, critical business rules and tricky edge cases – the areas where human understanding is essential.
 * **Critically Review \& Refine:** Read every generated test. Does it make sense? Is it testing something important? Is the assertion correct? Is it readable?
 * **Don't Chase Coverage Blindly:** AI can quickly increase test coverage numbers, but coverage isn't the same as quality. A few meaningful tests are better than hundreds of trivial ones.
 * **Provide the right context:** including functional testing information, or feature requirements will help AI assistants to tailor the test to what it's supposed to be tested and not what it is written in the code. In this case we are asking to create the tests but considering the requirements specified in a github issue.
@@ -230,7 +230,7 @@ This is crucial: **AI is a code review *assistant*, not a replacement for human 
 [![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F24d93kyk1yodjq1jyvie.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F24d93kyk1yodjq1jyvie.png)
 
 * **Design \& Logic Still Need Humans:** AI is generally poor at evaluating the *appropriateness* of a design choice or the correctness of complex business logic. That requires human critical thinking.
-* **Knowledge Sharing:** Code reviews are vital for team learning and knowledge sharing -- something AI assistance doesn't replace.
+* **Knowledge Sharing:** Code reviews are vital for team learning and knowledge sharing – something AI assistance doesn't replace.
 * **Evaluate AI Output:** Reviewers need to critically assess any summaries or issues flagged by AI.
 
 Think of AI in code review as handling the first-pass checks, summarizing changes, and assisting with implementation details. This frees up valuable human reviewer time to focus on the deeper aspects of code quality, design, and correctness.
@@ -283,7 +283,7 @@ Alongside reliable SAST, robust engineering practices remain critical:
 * **Human Code Reviews:** Critical examination by experienced peers is essential to catch logical flaws, architectural issues, and subtle security concerns that automated tools (whether AI-based or traditional) might miss.
 * **Pair Programming:** This practice inherently includes collaborative review and discussion, promoting higher quality code, especially when integrating any new tool or technique like AI assistance.
 
-**In Summary:** Leverage AI assistants carefully for tasks where they excel -- helping you understand, refactor, and learn. But for the critical task of identifying bugs and security vulnerabilities, **trust deterministic SAST tools.** Combine this with rigorous testing and thorough code reviews to build truly high-quality, secure Java applications.
+**In Summary:** Leverage AI assistants carefully for tasks where they excel – helping you understand, refactor, and learn. But for the critical task of identifying bugs and security vulnerabilities, **trust deterministic SAST tools.** Combine this with rigorous testing and thorough code reviews to build truly high-quality, secure Java applications.
 
 So, what's the bottom line here? Is AI going to take over Java development? Not anytime soon. But is it becoming a genuinely useful, practical tool that can make our lives as developers easier and more productive? Absolutely.
 

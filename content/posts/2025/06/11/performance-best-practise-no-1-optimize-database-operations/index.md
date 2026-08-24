@@ -37,7 +37,7 @@ You can address the above issues and boost Jakarta EE database performance by le
 * Implement statement caching to cut down on SQL parsing overhead. This is another way of reusing previous statements for the same query
 * Enable **JDBC batching** or **JPA batching** to handle multiple SQL operations efficiently
 
-> "Connection establishment is the most expensive database operation; the obvious optimization that Java developers have been using for ages is connection pooling which avoids creating connections at runtime (unless you exhaust the pool capacity)." -- Kuassi Mensah [^\[1\]^](https://medium.com/oracledevs/revisiting-java-applications-performance-scalability-with-rdbms-68d9f85466ca)
+> "Connection establishment is the most expensive database operation; the obvious optimization that Java developers have been using for ages is connection pooling which avoids creating connections at runtime (unless you exhaust the pool capacity)." – Kuassi Mensah [^\[1\]^](https://medium.com/oracledevs/revisiting-java-applications-performance-scalability-with-rdbms-68d9f85466ca)
 
 ## How GlassFish helps with improving database performance
 
@@ -136,4 +136,4 @@ Then prepare a tuned configuration, test how it works, and always monitor perfor
 
 In this case, it's worth monitoring the amount of database connections, how many of them are being actively used, average length of query execution, etc.
 
-In the next article, we'll go into more details about **implementing caching mechanisms** to avoid wasting time with repetitive tasks that provide the same output. [So stay tuned...](https://omnifish.ee/)
+In the next article, we'll go into more details about **implementing caching mechanisms** to avoid wasting time with repetitive tasks that provide the same output. [So stay tuned…](https://omnifish.ee/)

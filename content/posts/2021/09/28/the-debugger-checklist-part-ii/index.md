@@ -34,7 +34,7 @@ Now we need to actually track the issue and fix it. People think this is hard to
   * Narrow assumptions
   * Validate narrowed assumptions
 
-You're probably saying: "Well dah...". This is pretty obvious...
+You're probably saying: "Well dah...". This is pretty obvious…
 
 It totally is. The problem is we don't apply those properly and somehow skip a lot of the nuance in those steps.
 
@@ -83,19 +83,19 @@ While threads are a source of difficult bugs, most bugs are a result of bad appl
 
 Assuming you can, try overriding it within your breakpoint by setting a value of a variable during debugging. This is a great capability that most developers don't utilize often enough. If you're able to narrow down the value of a specific variable as the cause of the problem you're already well on your way to solving the problem.
 
-If this isn't helping, try identifying specific fields that might be problematic. Most debuggers will let you place a breakpoint on the field in order to watch modifications to said field... I used that feature a couple of times while consulting and people were always surprised you can do that...
+If this isn't helping, try identifying specific fields that might be problematic. Most debuggers will let you place a breakpoint on the field in order to watch modifications to said field… I used that feature a couple of times while consulting and people were always surprised you can do that...
 
 ![Field Breakpoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1632370150204/87OTJS1zH.png)
 
 In IntelliJ the icon looks different for a field breakpoint. But it's a breakpoint like any other, you can apply a condition to it and see the stack etc.
 
-Now if the problem persists and everything is failing... Try changing the code to return a hardcoded state or a state from a working case. I'm normally not a fan of techniques that require code change for debugging since I consider the two distinct tasks. However, if you're out of all options this might be your only recourse. Naturally you should use "Reload Changed Classes" (or Apply Code Changes, Edit and Continue etc.) if applicable.
+Now if the problem persists and everything is failing… Try changing the code to return a hardcoded state or a state from a working case. I'm normally not a fan of techniques that require code change for debugging since I consider the two distinct tasks. However, if you're out of all options this might be your only recourse. Naturally you should use "Reload Changed Classes" (or Apply Code Changes, Edit and Continue etc.) if applicable.
 
 Notice that there are also lower level memory breakpoints that are useful to debug memory access. We'll discuss these when we cover debugging native code which I plan to cover in the future.
 
 #### Threads/Synchronization
 
-Thread problems are hard to solve... That's not really something we'll get into. We'll only focus on finding and understanding the bug, and that's an easier (manageable) task.
+Thread problems are hard to solve… That's not really something we'll get into. We'll only focus on finding and understanding the bug, and that's an easier (manageable) task.
 
 The easiest way to check threading issues is as I mentioned before logging your current thread and/or stack. Do that in the block of code that's causing an issue. Then add a similar log breakpoint on fields used by the block of code. Thread violations should be pretty clear in the logs.
 
@@ -127,7 +127,7 @@ Notice you can use a profiler and it sometimes helps, but it might lead you on t
 
 Resource starvation is an offshoot of performance issues. Often you would see it as an extreme performance issue, that usually only happens when you try to scale. In this case a resource needed by a thread is always busy and we just can't get to it. E.g. We have too many threads and too few database connections. Or too few threads and too many incoming web requests. This problem often doesn't need a debugger at all. Your environment usually indicates immediately that it ran out of the given resource so the problem is almost always plain and obvious.
 
-The solution isn't always as clear, e.g. you don't want to add too many threads or DB connections to workaround the short term problem. You need to understand why the starvation occurred...
+The solution isn't always as clear, e.g. you don't want to add too many threads or DB connections to workaround the short term problem. You need to understand why the starvation occurred…
 
 This happens because of two different reasons:
 

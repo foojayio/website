@@ -15,15 +15,8 @@ related_posts:
   - "boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 frozen: false
-# The WordPress slug for this post ends in an emoji, which Posts.stripEmoji
-# removed from the title before the bundle folder was named from it -- so the
-# legacy URL (percent-encoded by WordPress) had no page here and 404'd, while
-# still returning 200 on the live site. Three posts are in this state; the
-# character below is the literal emoji, which is what %F0%9F... decodes to.
-aliases:
-  - "/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-🧵/"
 ---
 
 ![](bxai-series-cover-04-700x368.png)
@@ -54,7 +47,7 @@ There are two hook styles:
 | `afterLLMCall( context ) `  | After each LLM call         | Reverse   |
 | `beforeToolCall( context )` | Before each tool invocation | Forward   |
 | `afterToolCall( context )`  | After each tool returns     | Reverse   |
-| `onError( context )`        | When any hook throws        | ---       |
+| `onError( context )`        | When any hook throws        | —         |
 
 **Wrap hooks** — nested closures. Call `handler()` to proceed, intercept the result.
 
@@ -63,7 +56,7 @@ There are two hook styles:
 | ` wrapLLMCall( context, handler )` | Surround each LLM provider call |
 | `wrapToolCall( context, handler )` | Surround each tool invocation   |
 
-## 🎯 `AiMiddlewareResult` --- Typed Flow Control
+## 🎯 `AiMiddlewareResult` — Typed Flow Control
 
 Every sequential hook must return an `AiMiddlewareResult`. The static factory methods make this expressive:
 
@@ -147,7 +140,7 @@ Options:
 | `logLevel`     | `"info"`            | `info`, `debug`, `warning`, `error` |
 | `prefix`       | `"[AI Middleware]"` | Prepended to every message          |
 
-## 🔁 `RetryMiddleware` --- Resilience Without Boilerplate
+## 🔁 `RetryMiddleware` — Resilience Without Boilerplate
 
 LLM providers have rate limits. Networks have transient failures. `RetryMiddleware` wraps both LLM calls and tool calls with exponential backoff — transparently, without any code in your tools or agents:
 
@@ -173,7 +166,7 @@ It uses `wrapLLMCall` and `wrapToolCall` hooks — the outer wrap catches except
 | `maxDelay`          | `30000`                                  | Hard cap on delay              |
 | `nonRetryableTypes` | `"InvalidInput,MaxInteractionsExceeded"` | Exception types to skip        |
 
-## 🛡️ `GuardrailMiddleware` --- Defense in Depth
+## 🛡️ `GuardrailMiddleware` — Defense in Depth
 
 Block dangerous tools entirely, or reject tool calls whose arguments match regex patterns — before they ever reach the tool:
 
@@ -189,7 +182,7 @@ guardrail = new GuardrailMiddleware(
 agent = aiAgent( name: "db-assistant", middleware: guardrail )
 ```
 
-The hook fires in `beforeToolCall` --- it checks the tool name against `blockedTools` first, then validates each argument against the configured regex patterns:
+The hook fires in `beforeToolCall` — it checks the tool name against `blockedTools` first, then validates each argument against the configured regex patterns:
 
 ```java
 // From GuardrailMiddleware.bx
@@ -217,7 +210,7 @@ AiMiddlewareResult function beforeToolCall( required struct context ) {
 | `blockedTools` | `[]`    | Tool names always rejected (case-insensitive) |
 | `argPatterns`  | `{}`    | `{ toolName: [{ paramName: "regex" }] }`      |
 
-## 🙋` HumanInTheLoopMiddleware` --- Keeping Humans in Control
+## 🙋` HumanInTheLoopMiddleware` — Keeping Humans in Control
 
 This middleware intercepts specific tool calls and requires a human to approve, reject, or edit before execution proceeds. Two modes, two very different use cases.
 
@@ -282,9 +275,9 @@ The resume path in `HumanInTheLoopMiddleware` reads the `_resumeContext` injecte
 | `toolsRequiringApproval` | `[]`    | Tools needing sign-off   |
 | `mode`                   | `"cli"` | `"cli"` or `"web" `      |
 | `showArguments`          | `true ` | Show args in CLI prompt  |
-| `approvalCallback`       | ---     | Custom approval function |
+| `approvalCallback`       | —       | Custom approval function |
 
-## 🎙️ `FlightRecorderMiddleware` --- AI Testing Solved
+## 🎙️ `FlightRecorderMiddleware` — AI Testing Solved
 
 This is the one that changes how you think about testing AI agents.
 
@@ -386,7 +379,7 @@ new FlightRecorderMiddleware( mode: "replay", strict: false )
 | `recordTools` | `true`                  | Whether to capture tool interactions   |
 | `strict`      | `true`                  | Throw on type mismatch in replay       |
 
-## 🔢 `MaxToolCallsMiddleware` --- Runaway Agent Prevention
+## 🔢 `MaxToolCallsMiddleware` — Runaway Agent Prevention
 
 Simple but essential in production — caps the total number of tool invocations per agent run:
 
@@ -428,7 +421,7 @@ agent.withMiddleware( {
 } )
 ```
 
-Structs are automatically wrapped in `StructMiddlewareAdapter` --- you only define the hooks you need.
+Structs are automatically wrapped in `StructMiddlewareAdapter` — you only define the hooks you need.
 
 **Class-based** — reusable, configurable, independently testable:
 

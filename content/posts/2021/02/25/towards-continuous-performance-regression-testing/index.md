@@ -19,11 +19,11 @@ related_posts:
 frozen: false
 ---
 
-Functional unit and integration tests are a standard tool of any software development organization, helping not only to ensure correctness of newly implemented code, but also to identify regressions --- bugs in existing functionality introduced by a code change. The situation looks different though when it comes to regressions related to non-functional requirements, in particular performance-related ones: How to detect increased response times in a web application? How to identify decreased throughput?
+Functional unit and integration tests are a standard tool of any software development organization, helping not only to ensure correctness of newly implemented code, but also to identify regressions — bugs in existing functionality introduced by a code change. The situation looks different though when it comes to regressions related to non-functional requirements, in particular performance-related ones: How to detect increased response times in a web application? How to identify decreased throughput?
 
 These aspects are typically hard to test in an automated and reliable way in the development workflow, as they are dependent on the underlying hardware and the workload of an application. For instance assertions on the duration of specific requests of a web application typically cannot be run in a meaningful way on a developer laptop, which differs from the actual production hardware (ironically, nowadays both is an option, the developer laptop being less or more powerful than the actual production environment). When run in a virtualized or containerized CI environment, such tests are prone to severe measurement distortions due to concurrent load of other applications and jobs.
 
-This post introduces the [JfrUnit](https://github.com/gunnarmorling/jfrunit) open-source project, which offers a fresh angle to this topic by supporting assertions not on metrics like latency/throughput themselves, but on indirect metrics which may impact those. JfrUnit allows you define expected values for metrics such as memory allocation, database I/O, or number of executed SQL statements, for a given workload and asserts the actual metrics values --- which are obtained from [JDK Flight Recorder](https://openjdk.java.net/jeps/328) events --- against these expected values. Starting off from a defined base line, future failures of such assertions are an indicator for potential performance regressions in an application, as a code change may have introduced higher GC pressure, the retrieval of unneccessary data from the database, or SQL problems commonly induced by ORM tools, like N+1 SELECT statements.
+This post introduces the [JfrUnit](https://github.com/gunnarmorling/jfrunit) open-source project, which offers a fresh angle to this topic by supporting assertions not on metrics like latency/throughput themselves, but on indirect metrics which may impact those. JfrUnit allows you define expected values for metrics such as memory allocation, database I/O, or number of executed SQL statements, for a given workload and asserts the actual metrics values — which are obtained from [JDK Flight Recorder](https://openjdk.java.net/jeps/328) events — against these expected values. Starting off from a defined base line, future failures of such assertions are an indicator for potential performance regressions in an application, as a code change may have introduced higher GC pressure, the retrieval of unneccessary data from the database, or SQL problems commonly induced by ORM tools, like N+1 SELECT statements.
 
 JfrUnit provides means of identifying and analyzing such anomalies in a reliable, environment independent way in standard JUnit tests, before they manifest as actual performance regressions in production. Test results are independent from wall clock time and thus provide actionable information, also when not testing with production-like hardware and data volumes.
 
@@ -72,12 +72,12 @@ public class JfrUnitTest {
 }
 ```
 
-|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *1* | `@JfrEventTest` marks this as a JfrUnit test, activating its extension                                                                                                                                               |
-| *2* | All JFR event types to be recorded must be enabled via `@EnableEvent`                                                                                                                                                |
-| *3* | After running the test logic, `awaitEvents()` must be invoked as a synchronization barrier, making sure all previously produced events have been received                                                            |
-| *4* | Using the `JfrEventsAssert#event()` method, an `ExpectedEvent` instance can be created --- optionally specifying one or more expected attribute values --- which then is asserted via `JfrEventsAssert#assertThat()` |
-| *5* | `JfrEvents#ofType()` allows to filter on specific event types, enabling arbitrary assertions against the returned stream of `RecordedEvents`                                                                         |
+|-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *1* | `@JfrEventTest` marks this as a JfrUnit test, activating its extension                                                                                                                                           |
+| *2* | All JFR event types to be recorded must be enabled via `@EnableEvent`                                                                                                                                            |
+| *3* | After running the test logic, `awaitEvents()` must be invoked as a synchronization barrier, making sure all previously produced events have been received                                                        |
+| *4* | Using the `JfrEventsAssert#event()` method, an `ExpectedEvent` instance can be created — optionally specifying one or more expected attribute values — which then is asserted via `JfrEventsAssert#assertThat()` |
+| *5* | `JfrEvents#ofType()` allows to filter on specific event types, enabling arbitrary assertions against the returned stream of `RecordedEvents`                                                                     |
 
 By means of a custom `assertThat()` matcher method for [AssertJ](https://joel-costigliola.github.io/assertj/), JfrUnit allows to validate that specific JFR events are raised during at test. Events to be matched are described via their event type name, and optionally one more event attribute vaues. As we'll see in a bit, JfrUnit also integrates nicely with the Java Stream API, allowing you to filter and aggregate recorded event atribute values and match them against expected values.
 
@@ -89,7 +89,7 @@ Now that you've taken the JfrUnit quick tour, let's put that knowledge into prac
 
 At first, let's explore how to identify increased memory allocation rates. Typically, it's mostly library and middleware authors who are interested in this. For a library such as Hibernate ORM it can make a huge difference whether a method that is invoked many times on a hot code path allocates a few objects more or less. Less object allocations mean less work for the garbage collector, which in turn means those precious CPU cores of your machine can spend more cycles processing your actual business logic.
 
-But also for application developers it can be beneficial to keep an eye on --- and systematically track --- object allocations, as regressions there lead to increased GC pressure, and in turn eventually to higher latencies and reduced throughput.
+But also for application developers it can be beneficial to keep an eye on — and systematically track — object allocations, as regressions there lead to increased GC pressure, and in turn eventually to higher latencies and reduced throughput.
 
 The key for tracking object allocations with JFR are the `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB` events, which are emitted when
 
@@ -182,7 +182,7 @@ public void retrieveTodoBaseline() throws Exception {
 | *6* | Get the new TLAB size in case of an in TLAB allocation, otherwise the allocated object size out of TLAB                                   |
 | *7* | We're only interested in the web application's own threads, in particular ignoring the main thread which runs the HTTP client of the test |
 
-Note that unlike in the initial example showing the usage of JfrUnit, here we're not using the simple `contains()` AssertJ matcher, but rather calculate some custom value --- the overall object allocation in bytes --- by means of filtering and aggregating the relevant JFR events.
+Note that unlike in the initial example showing the usage of JfrUnit, here we're not using the simple `contains()` AssertJ matcher, but rather calculate some custom value — the overall object allocation in bytes — by means of filtering and aggregating the relevant JFR events.
 
 Here are the numbers I got from running 100,000 invocations:
 
@@ -463,7 +463,7 @@ JfrUnit is still in its infancy, and could evolve into a complete toolkit around
 * A more powerful "built-in" API which e.g. provides the functionality for calculating the total TLAB allocations of a given set of threads as a ready-to-use method
 * It could also be very interesting to run assertions against externally collected JFR recording files. This would allow to validate workloads which require more complex set-ups, e.g. running in a dedicated performance testing lab, or even from continuous recordings taken in production
 * The JFR event streaming API could be leveraged for streaming queries on live events streamed from a remote system
-* Another use case we haven't explored yet is the validation of resource consumption before and after a defined workload. E.g. after logging in and out a user 100 times, the system should roughly consume --- ignoring any initial growth after starting up --- the same amount of memory. A failure of such assertion would indicate a potential memory leak in the application
+* Another use case we haven't explored yet is the validation of resource consumption before and after a defined workload. E.g. after logging in and out a user 100 times, the system should roughly consume — ignoring any initial growth after starting up — the same amount of memory. A failure of such assertion would indicate a potential memory leak in the application
 * JfrUnit might automatically detect that certain metrics like object allocations are still undergoing some kind of warm-up phase and thus are not stable, and mark such tests as potentially incorrect or flaky
 * Keeping track of historical measurement data, e.g. allowing to identify regressions which got introduced step by step over a longer period of time, with one comparatively small change being the straw finally breaking the camel's back
 

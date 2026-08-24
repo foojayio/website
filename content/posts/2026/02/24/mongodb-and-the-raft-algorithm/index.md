@@ -49,7 +49,7 @@ MongoDB enhances this process with configurable write concerns. For instance, `w
 
 ### Failure Handling and Recovery
 
-Failures are inevitable in distributed systems, and Raft's design enables MongoDB to handle them with resilience. When a leader fails, followers detect the absence of heartbeats and initiate a new election. A new leader is typically elected within seconds, minimizing downtime for write operations.[](https://medium.com/plans?source=upgrade_membership---post_li_non_moc_upsell--6ff2c36ec29a---------------------------------------)
+Failures are inevitable in distributed systems, and Raft's design enables MongoDB to handle them with resilience. When a leader fails, followers detect the absence of heartbeats and initiate a new election. A new leader is typically elected within seconds, minimizing downtime for write operations.[](https://medium.com/plans?source=upgrade_membership---post_li_non_moc_upsell--6ff2c36ec29a---------------------------------------){#a825}
 
 MongoDB prevents **split-brain scenarios** by ensuring only partitions with a majority of voting members can elect a leader. Minority partitions remain read-only, preserving data consistency. Nodes that fall behind due to temporary failures recover by replaying oplog entries from the leader. If the oplog window is insufficient, a full resynchronization is required, but MongoDB optimizes this process to reduce downtime.{#4a72}
 

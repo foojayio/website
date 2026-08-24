@@ -17,15 +17,8 @@ related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 frozen: false
-# The WordPress slug for this post ends in an emoji, which Posts.stripEmoji
-# removed from the title before the bundle folder was named from it -- so the
-# legacy URL (percent-encoded by WordPress) had no page here and 404'd, while
-# still returning 200 on the live site. Three posts are in this state; the
-# character below is the literal emoji, which is what %F0%9F... decodes to.
-aliases:
-  - "/today/boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution-🎓/"
 ---
 
 ![](bxai-series-cover-01-700x368.png)
@@ -85,7 +78,7 @@ Alias all tables with a meaningful short name.
 Use parameterized queries for all user input.
 ```
 
-One important detail from the source code: if you omit the frontmatter `description`, BoxLang automatically uses the **first paragraph of the body** as the description. This matches the Claude Agent Skills standard, and it means even the simplest possible `SKILL.md` --- just a few lines of plain text — works without any configuration:
+One important detail from the source code: if you omit the frontmatter `description`, BoxLang automatically uses the **first paragraph of the body** as the description. This matches the Claude Agent Skills standard, and it means even the simplest possible `SKILL.md` — just a few lines of plain text — works without any configuration:
 
 ```java
 // From AiSkill.bx — fromPath() method
@@ -243,13 +236,13 @@ With `autoLoadSkills: true`, any `SKILL.md` file discovered in `skillsDirectory`
 
 `AiSkill` has two rendering methods that are used differently depending on whether the skill is always-on or lazy.
 
-`toIndexLine()` --- the compact one-liner for the Available Skills index:
+`toIndexLine()` — the compact one-liner for the Available Skills index:
 
 ```html
 - sql-optimizer: Enforces our SQL coding standards. Apply when writing or reviewing database queries.
 ```
 
-`toContentBlock()` --- the full markdown block injected for always-on skills:
+`toContentBlock()` — the full markdown block injected for always-on skills:
 
 ```java
 #### Skill: sql-optimizer
@@ -337,7 +330,7 @@ No hardcoded system prompts. No copy-paste. Skills live in files, travel with yo
 
 ## What's Next
 
-**In Part 2** , we'll go deep on the Tool System Overhaul --- `BaseTool`, `ClosureTool`, the Global Tool Registry, `@AITool` annotation scanning, and the built-in `now@bxai` tool that gives every agent temporal awareness for free.
+**In Part 2** , we'll go deep on the Tool System Overhaul — `BaseTool`, `ClosureTool`, the Global Tool Registry, `@AITool` annotation scanning, and the built-in `now@bxai` tool that gives every agent temporal awareness for free.
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ "Full Documentation") 📦Install Today: `install-bx-module bx-ai` 🫶[Professional Support](https://ai.ortussolutions.com/ "Professional Support")
 

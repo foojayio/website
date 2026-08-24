@@ -30,7 +30,7 @@ But sometimes it can also lead to a new job.
 
 Or even starting a business based on such a project.
 
-Today we are talking to people who achieved such a transition and became famous and rich, or at least some of each...
+Today we are talking to people who achieved such a transition and became famous and rich, or at least some of each…
 
 {{< youtube FDOFRTj1UVI >}}
 
@@ -88,7 +88,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * 27'47 What you can learn from an open-source project
   * <https://s.apache.org/for-the-grabs_maven>
 * 28'54 Does every developer have to do be an open-source contributor?
-* 32'13 Becoming rich thanks to open-source? Projects versus Products...
+* 32'13 Becoming rich thanks to open-source? Projects versus Products…
   * <https://s.apache.org/for-the-grabs_maven>
 * 48'33 About the Fosdem talk about OpenRewrite
   * <https://foojay.io/today/foojay-io-at-fosdem-2023-trip-report/>

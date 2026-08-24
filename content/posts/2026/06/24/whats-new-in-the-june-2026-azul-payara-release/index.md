@@ -14,10 +14,10 @@ categories:
   - "Payara"
   - "Release Notes"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
+  - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
-  - "idempotent-spring-boot-starter"
-  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
-  - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false
 ---
 
@@ -85,7 +85,7 @@ Community 7.2026.6 tracks the Payara 7 development line and carries the same sec
 
 ## Behaviour Change to Note: Server "Ready" Signal Timing
 
-Azul Payara 5.88.0 and 6.39.0 change the default value of the fish.payara.ready-after-applications system property. The undefined default moves from false to true, aligning Payara 5 and 6 with the behaviour already shipping in Payara 7. Users need do nothing; this is already their default -- both for Azul Payara and Azul Payara Community.
+Azul Payara 5.88.0 and 6.39.0 change the default value of the fish.payara.ready-after-applications system property. The undefined default moves from false to true, aligning Payara 5 and 6 with the behaviour already shipping in Payara 7. Users need do nothing; this is already their default – both for Azul Payara and Azul Payara Community.
 
 The property governs when the server marks itself as ready. Under the new default, the server signals ready once post-boot configuration has been applied and previously deployed applications have loaded. Under the previous default, the server signalled ready after the server_startup event, but before post-boot configuration and application loading.
 

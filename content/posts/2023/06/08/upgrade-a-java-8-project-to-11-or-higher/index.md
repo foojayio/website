@@ -22,10 +22,10 @@ frozen: false
 
 Keeping a project on Java 8 will eventually lead to running it on a non-maintained runtime.
 
-In an earlier article, [Unsupported Versions of Java Are Dangerous](https://www.azul.com/blog/unsupported-versions-of-java-are-dangerous/), Simon Ritter points out the problems if you are still running on an older version <kbd>–</kbd> Java 7 in this case -- that is no longer supported.
+In an earlier article, [Unsupported Versions of Java Are Dangerous](https://www.azul.com/blog/unsupported-versions-of-java-are-dangerous/), Simon Ritter points out the problems if you are still running on an older version <kbd>–</kbd> Java 7 in this case – that is no longer supported.
 
 Azul still supports Java 7 until 2027, but other distributions do not support it. You can find the complete [support lifecycle for existing and planned JDK releases](https://www.azul.com/products/azul-support-roadmap/) on the Azul website.
-> "***The adage 'if it ain't broke, don't fix it' is often applied to deployed applications. As a result, almost all production enterprise applications, including mission-critical ones, are still running on older versions of Java. Sometimes very old... and sometimes unsupported versions of Java*** ." — **Simon Ritter, Deputy CTO, Azul**
+> "***The adage 'if it ain't broke, don't fix it' is often applied to deployed applications. As a result, almost all production enterprise applications, including mission-critical ones, are still running on older versions of Java. Sometimes very old… and sometimes unsupported versions of Java*** ." — **Simon Ritter, Deputy CTO, Azul**
 ![](10-11-unsupported-java-1024x400-1.jpeg)
 
 ## What are you Missing in Java 8?
@@ -77,7 +77,7 @@ To be able to estimate the impact of these changes since Java 9, an extra tool w
 
 Deciding to migrate to Java 11 or Java 17
 
-> "***When you are upgrading your codebase and dependencies to a newer Java version, you also need to take into consideration that libraries might already have moved to JDK11 or even JDK17, and with this, they no longer support older JDKs. This means they won't provide security fixes either, which could be a security problem. In many cases, this would also be a reason to move to at least JDK11." ---*** **Gerrit Grunwald, Senior Developer Advocate, Azul**
+> "***When you are upgrading your codebase and dependencies to a newer Java version, you also need to take into consideration that libraries might already have moved to JDK11 or even JDK17, and with this, they no longer support older JDKs. This means they won't provide security fixes either, which could be a security problem. In many cases, this would also be a reason to move to at least JDK11." —*** **Gerrit Grunwald, Senior Developer Advocate, Azul**
 
 ## Migrating from Java 8 to a Newer LTS Version
 
@@ -103,8 +103,8 @@ Anyhow, the biggest challenge of migrating a project is... time! If the code its
 
 Regarding the actual migration, there are no specific patterns to follow. Updating the Java version, e.g., in the pom-file of a Maven project, will probably already show the most important code parts to be reviewed as they will break the build.
 
-From there it's an organizational problem, as the need must be well-defined to push the migration forward and make it happen. Further delays will bite you back hard later... Making it happen fast will also prevent extended simultaneous maintenance of the original project and the migrated project, which can prove difficult.
-> "***From my experience, while assisting customers during their upgrade, I've seen that it's worth trying to move immediately from Java 8 to 17. If it fails, it will be because some library is not yet supporting 17. At that time, falling back to Java 11 is always possible, as all cleanup done for the Java 17 move will be usable for the Java 11 move.*** ***But I would strongly recommend not using Java 17 coding features during the move. Limit those to what Java 11 provides. As soon as you complete the move to either Java 11 or 17 and the application is running as expected, the second round of migration can be started to simplify the code based on the new possibilities that were introduced in the more recent versions of Java.*** ***From a risk management and effort perspective, I think the migration from Java 8 to 17 needs an estimated 20% more effort than from Java 8 to 11.*** ***The biggest problems in a migration project I have seen at a customer were caused by an ad hoc and last-minute project where the impact of outdated third-party libraries was not correctly estimated.*** " ***---*** ****Michael Roeschter, Sales Engineer, Azul****
+From there it's an organizational problem, as the need must be well-defined to push the migration forward and make it happen. Further delays will bite you back hard later… Making it happen fast will also prevent extended simultaneous maintenance of the original project and the migrated project, which can prove difficult.
+> "***From my experience, while assisting customers during their upgrade, I've seen that it's worth trying to move immediately from Java 8 to 17. If it fails, it will be because some library is not yet supporting 17. At that time, falling back to Java 11 is always possible, as all cleanup done for the Java 17 move will be usable for the Java 11 move.*** ***But I would strongly recommend not using Java 17 coding features during the move. Limit those to what Java 11 provides. As soon as you complete the move to either Java 11 or 17 and the application is running as expected, the second round of migration can be started to simplify the code based on the new possibilities that were introduced in the more recent versions of Java.*** ***From a risk management and effort perspective, I think the migration from Java 8 to 17 needs an estimated 20% more effort than from Java 8 to 11.*** ***The biggest problems in a migration project I have seen at a customer were caused by an ad hoc and last-minute project where the impact of outdated third-party libraries was not correctly estimated.*** " ***—*** ****Michael Roeschter, Sales Engineer, Azul****
 
 ## Conclusion
 

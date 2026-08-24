@@ -22,9 +22,9 @@ Apache Maven executions are tied to **lifecycles**. A lifecycle groups a sequenc
 
 ## Standard lifecycles
 
-* **clean** -- Intended for clean-up of any prior build-managed outputs and artifacts.
-* **default (build)** -- Intended for project build, test and deployment of artifacts.
-* **site** -- Intended for project site documentation.
+* **clean** – Intended for clean-up of any prior build-managed outputs and artifacts.
+* **default (build)** – Intended for project build, test and deployment of artifacts.
+* **site** – Intended for project site documentation.
 
 ### What's in a lifecycle?
 
@@ -43,7 +43,7 @@ Phases are executable blocks. Phases follow an ordered sequence within a given l
 
 **Goals** are bound to phases.
 
-## Goals -- units of work
+## Goals – units of work
 
 Goals are units of work (tasks). Goals are attached to a phase and this is called a ***binding*** . A goal performs a task that is considered relevant for the given lifecycle and phase. Maven provides some built in goals. Goals are defined in **plugins**.
 
@@ -57,7 +57,7 @@ However, for some goals, there is a clear phase that fully corresponds to their 
 
 Some goals may not be bound to anything and can be invoked directly without a phase-binding.
 
-### Plugins -- definers of goals
+### Plugins – definers of goals
 
 **Plugins** are Maven's way of defining **goals** and providing connectors for the goals to **phases** . Plugins are developed as MOJOs (Maven's plain Old Java Objects). The plugins define goals and supply logic to deliver the goals. Goals are usually bound to phases in ***either*** the Maven built-in configurations ***or*** the project POM file.
 
@@ -111,7 +111,7 @@ A good listing for **site** and **clean** phases' bindings can be found at: <htt
 
 ### Binding Goals Using Packaging
 
-#### Packages -- descriptors of outputs
+#### Packages – descriptors of outputs
 
 **Packages** are a core element in the Maven POM and define the type of output produced by building the POM. It is possible to tie goals to the **package** element. Valid package names include: `jar`, `war`, `ear`, `pom` etc. Each package has some unique goals and thus goals are bound to these package names.
 
@@ -152,10 +152,10 @@ A deeper dive into plugin-prefixes can be found at: <https://maven.apache.org/gu
 
 Convention standards for plugin prefixes:
 
-* `maven-${prefix}-plugin` -- for official plugins maintained by the Apache Maven team itself (you **must not** use this naming pattern for your plugin, more on this in a future blog on plugin development)
-* `${prefix}-maven-plugin` -- for plugins from other sources
+* `maven-${prefix}-plugin` – for official plugins maintained by the Apache Maven team itself (you **must not** use this naming pattern for your plugin, more on this in a future blog on plugin development)
+* `${prefix}-maven-plugin` – for plugins from other sources
 
-## Something Something -- Personal Learning
+## Something Something – Personal Learning
 
 Here is a **very crude and unscientific pictorial** of the my understanding of lifecycles, phases, goals and plugins. This is not meant to be accurate in terms of either human lifecycles or in explaining maven's lifecycles. This picture is absolutely a personal means of illustrating how I went about learning these concepts.
 ![Possibly inaccurate analogy of a young human lifecycle with phases such as terrible twos and adoloscence, with goals associated with each and soe external influences as plugins.](https://cgunturme.files.wordpress.com/2020/05/mavenhumananalogy.png?w=1024) Highly unscientific, possibly inaccurate lifecycle of a young human from Age 0 to Age 18. Time ranges also not distributed proportionally.

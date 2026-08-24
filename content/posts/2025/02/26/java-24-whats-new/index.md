@@ -1,5 +1,5 @@
 ---
-title: "Java 24 : What's New?"
+title: "Java 24: What's New?"
 date: "2025-02-26T09:58:53+00:00"
 lastmod: "2026-07-03T12:15:12+00:00"
 description: "What's new in Java 24 for us, developers"
@@ -252,7 +252,7 @@ Various additions to the JDK:
 * `Reader.of(CharSequence)`: returns a reader that reads the characters of a `CharSequence`. The reader is initially open and reading begins at the first character of the sequence.
 * `Process.waitFor(Duration)`: makes the current thread wait, if necessary, until the process represented by this `Process` object ends, or the specified wait time elapses.
 
-All the new JDK 24 APIs can be found in [The Java Version Almanac -- New APIs in Java 24](https://javaalmanac.io/jdk/24/apidiff/23/ "The").
+All the new JDK 24 APIs can be found in [The Java Version Almanac – New APIs in Java 24](https://javaalmanac.io/jdk/24/apidiff/23/ "The").
 
 ## Internal changes, performance, and security
 

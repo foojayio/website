@@ -27,7 +27,7 @@ In a typical application stack multiple threads are used for servicing events, p
 
 An important design consideration is how threads become aware that there is work to do, with some general approaches including:
 
-* **Signal/Notification** : In this case the receiving thread yields (is added to a wait queue) until notified by another thread. This has the benefit of low resource consumption, however there is a relatively high latency of at least 20-50 microseconds (and likely much more -- see below) to reschedule the thread in response to a signal.  
+* **Signal/Notification** : In this case the receiving thread yields (is added to a wait queue) until notified by another thread. This has the benefit of low resource consumption, however there is a relatively high latency of at least 20-50 microseconds (and likely much more – see below) to reschedule the thread in response to a signal.  
   -**Busy Waiting**: In this case the receiving thread continually spins checking for some indication that there is work to do. This has the benefit of quick response (low latency) when there is work for the thread to do, however comes at the expense of high CPU usage, wasting cycles when there is nothing to do. In addition, the constant high CPU usage in turns leads to appreciably higher power demand, and associated cooling load.
 * **Fixed Sleep**: In this case, when there is no further work to be done the receiving thread sleeps for a fixed period of time before checking again for more work. This has the benefit of low resource usage, but the clear downside of this strategy is that worst case latency is at least as large as the sleep period.
 
@@ -42,7 +42,7 @@ By contrast, more recent versions of Linux have more sophisticated schedulers us
 The following rules of thumb generally apply across recent Linux versions for standard processes (ie those running with normal permissions under the standard scheduler):
 
 * `sleep` requests \~1us can in principle be serviced with reasonable accuracy
-* In general, even short `sleep` periods will not busy wait -- although extremely short periods almost certainly will
+* In general, even short `sleep` periods will not busy wait – although extremely short periods almost certainly will
 * `sleep` requests of \~1ms and \~1us reduce CPU usage to \~1% and \~10% respectively compared with busy waiting (100%)
 
 While the above suggests that even relatively short sleeps of \~1us could potentially provide a useful compromise between latency and resource use, the major issue is scheduling: as soon as the sleeping process is fully context switched off a core, the overhead to reschedule can be orders of magnitude higher than the intended `sleep` period.

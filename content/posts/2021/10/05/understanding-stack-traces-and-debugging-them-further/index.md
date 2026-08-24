@@ -3,6 +3,7 @@ title: "Understand Stack Traces and how you can Debug Better With them"
 date: "2021-10-05T10:57:28+00:00"
 lastmod: "2021-10-05T11:18:49+00:00"
 description: "When we get an exception stack, it can often contain the solution for our problem. But in more than one case, it's the edge of a thread..."
+canonical: "https://talktotheduck.dev/understanding-stack-traces-and-debugging-them-further"
 authors:
   - "shai-almog"
 image: "Understanding-Stack-Traces1.jpg"
@@ -15,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-Recently a junior developer sent me an obfuscated stack trace and was pretty surprised when I instantly knew the problem and pointed him at the necessary change. To be fair, I had the advantage of being the person who put that bug there in the first place... But still the ability to glean information from a stack trace, even an obfuscated one, is a serious skill.
+Recently a junior developer sent me an obfuscated stack trace and was pretty surprised when I instantly knew the problem and pointed him at the necessary change. To be fair, I had the advantage of being the person who put that bug there in the first place… But still the ability to glean information from a stack trace, even an obfuscated one, is a serious skill.
 
 The stack trace in question was a `ClassNotFoundException`, that's typically pretty easy and already tells you everything you need to know. The class isn't there. Why it isn't there is really a matter of what we did wrong. In this case, since the project was obfuscated, the bug was that this class wasn't excluded from obfuscation.
 
@@ -38,7 +39,7 @@ So without knowing anything about the code we can pretty much guess what failed 
 
 ## There Was a Null
 
-That `NullPointerException` probably happened due to a null in the list. Assuming you verified that you might still not know how that null got into the list in the first place...
+That `NullPointerException` probably happened due to a null in the list. Assuming you verified that you might still not know how that null got into the list in the first place…
 
 This isn't hard to find out, let's assume that the List is of the `ArrayList` type, in that case just open the `ArrayList` class (which you can do with Control-O in IntelliJ) and place a conditional breakpoint on the `add()` method. You can test if the value is null and that will stop at a breakpoint if someone tries to add null to the list.
 
@@ -52,9 +53,9 @@ Since `addAll()` accepts a `Collection` we can use the standard `contains()` met
 
 ## What if this is "sometimes" OK?
 
-So we run this code and bingo it stops at a breakpoint... But unfortunately this isn't the right case. That breakpoint is related to a different list which we aren't debugging right now. Apparently in that list a `null` value is OK and expected.
+So we run this code and bingo it stops at a breakpoint… But unfortunately this isn't the right case. That breakpoint is related to a different list which we aren't debugging right now. Apparently in that list a `null` value is OK and expected.
 
-So we press continue and the breakpoint hits again and again and again. Each time for the wrong list... This is often the point where developers start cursing loudly and swearing off debuggers for good old logs.
+So we press continue and the breakpoint hits again and again and again. Each time for the wrong list… This is often the point where developers start cursing loudly and swearing off debuggers for good old logs.
 
 So there are several ways around this problem. The most ideal one is to avoid that specific list. If you have a way of recognizing that list e.g. a global instance or the first element might be a specific value you can simply augment the original conditional breakpoint e.g. in this case we assume the first element in the `null` is OK list is 77 in which case this condition will workaround the problem:
 
@@ -162,7 +163,7 @@ Caused by: java.net.ConnectException: Connection refused (Connection refused)
     ... 74 common frames omitted
 ```
 
-Can someone tell me what I did wrong here when trying to run our server locally...
+Can someone tell me what I did wrong here when trying to run our server locally…
 
 Let's try to break it down starting from the lowest exception which is usually the root cause:
 

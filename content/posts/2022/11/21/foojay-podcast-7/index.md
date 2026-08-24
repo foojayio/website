@@ -42,12 +42,12 @@ You can listen and subscribe to the Foojay Podcast on:
 ## Guests
 
 * Steve Poole (Sonatype, [@spool167](https://twitter.com/spoole167))
-* Brian Vermeer (Snyk, [@BrianVerm](https://twitter.com/BrianVerm), [@\[email protected\]](https://mastodon.social/@brianverm))
-* Anastasiia Voitova (Cossack Labs, [@vixentael](https://twitter.com/vixentael), [@\[email protected\]](https://mastodon.social/@vixentael))
+* Brian Vermeer (Snyk, [@BrianVerm](https://twitter.com/BrianVerm), [@brianverm@mastodon.social](https://mastodon.social/@brianverm))
+* Anastasiia Voitova (Cossack Labs, [@vixentael](https://twitter.com/vixentael), [@vixentael@mastodon.social](https://mastodon.social/@vixentael))
 
 ## Host
 
-* Erik Costlow (Azul, [@costlow](https://twitter.com/costlow), [@\[email protected\]](https://mastodon.social/@costlow))
+* Erik Costlow (Azul, [@costlow](https://twitter.com/costlow), [@costlow@mastodon.social](https://mastodon.social/@costlow))
 
 ## Content
 

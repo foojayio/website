@@ -52,7 +52,7 @@ for (Element headline : newsHeadlines) {
 
 This code snippet fetches headlines from wikipedia. In the code above, you can see several interesting features:
 
-* Connection to URL is practically seamless -- just pass a string URL to the connect method
+* Connection to URL is practically seamless – just pass a string URL to the connect method
 * There are special cases for some element children. E.g. Title is exposed as a simple method that returns a string without selecting from the DOM tree
 * However, we can select the entry using pretty elaborate selector syntax
 
@@ -137,11 +137,11 @@ Typical string scraping issues occur when an element object changes. E.g. wikipe
 
 Unfortunately, this can be a subtle failure. Especially when dealing with nested node elements and inter-document dependencies. Most developers solve this by logging a huge amount of data. This can be a problem due to two big reasons:
 
-* Huge logs -- they are both hard to read and very expensive to ingest
-* Privacy/GDPR Violations -- a scraped site might include user specific private information. Worse!
+* Huge logs – they are both hard to read and very expensive to ingest
+* Privacy/GDPR Violations – a scraped site might include user specific private information. Worse!
 * The scraped site might change to include private information after scraping was initially implemented. Logging this private information might violate various laws.
 
-If we don't log enough and can't reproduce the issue locally, things can become difficult. We're stuck in the add logs, build, test, deploy, reproduce -- rinse repeat loop.
+If we don't log enough and can't reproduce the issue locally, things can become difficult. We're stuck in the add logs, build, test, deploy, reproduce – rinse repeat loop.
 
 Lightrun offers a better way. Just track the specific failure directly in production, verify the problem, and create a fix that will work with one deployment.
 

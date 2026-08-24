@@ -102,6 +102,6 @@ These examples showcase the benefits of microservices in different industries an
 * [History of Microservices](https://mezocode.com/the-history-of-microservices/)
 * **Building Microservices**: Designing Fine-Grained Systems. O'Reilly Media.
 * **Microservices Patterns**: With Examples in Java. Manning Publications.
-* [**Microservices.io**](https://microservices.io/) --- A comprehensive resource on microservices architecture by Chris Richardson.
+* [**Microservices.io**](https://microservices.io/) — A comprehensive resource on microservices architecture by Chris Richardson.
 
 In the next article (Part 2), to be published soon, we will explore the principles for designing and implementing microservices and the challenges and best practices for development, testing strategies, and security considerations. 🤓

@@ -16,13 +16,6 @@ related_posts:
   - "lets-talk-about-mcp"
   - "ai-newsletter-1"
 frozen: false
-# The WordPress slug for this post ends in an emoji, which Posts.stripEmoji
-# removed from the title before the bundle folder was named from it -- so the
-# legacy URL (percent-encoded by WordPress) had no page here and 404'd, while
-# still returning 200 on the live site. Three posts are in this state; the
-# character below is the literal emoji, which is what %F0%9F... decodes to.
-aliases:
-  - "/today/your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-🤖/"
 ---
 
 Hey Java devs! 👋 Ever feel like you're drowning in a sea of code, trying to keep it reliable,, efficient, and secure? We've all been there. Juggling new features, bug fixes, and pull requests is a daily grind. But what if you had an AI-powered assistant to help you out? That's where the [**SonarQube MCP Server**](https://github.com/SonarSource/sonarqube-mcp-server) comes in. Let's dive into how this cool new MCP can supercharge your daily coding routine. 🚀
@@ -75,7 +68,7 @@ Add the configuration of the MCP Server (remove the comments after setting your 
 
 Remember to use only `user` tokens not Project or Global Analysis ones in order to allow the MCP Server to properly work with all the endpoints.
 
-For other IDEs like VS Code, it's even easier ... just clicking 👇 a button and you are done 🎉  
+For other IDEs like VS Code, it's even easier … just clicking 👇 a button and you are done 🎉  
 ![](Screenshot-2025-11-07-at-16.53.02.png)
 
 ### **Supercharge Your Daily Tasks with SonarQube MCP Server ⚡**
@@ -97,7 +90,7 @@ The Agent will follow a series of steps in order to create the code but also to 
 At the end, the Agent will show (using the model GTP5-mini) a list of tasks done, and we see the result of the SonarQube analysis to specifically the snippet created :  
 ![](Screenshot-2025-11-07-at-16.53.24.png)
 
-Yes, I know, you are thinking 🤔 `Do I have to explicitly tell the agent to use SonarQube every time?` And I totally understand you.... Well, the answer is no 🥳
+Yes, I know, you are thinking 🤔 `Do I have to explicitly tell the agent to use SonarQube every time?` And I totally understand you…. Well, the answer is no 🥳
 
 We can add the guardrails for our Agent in a doc and it will be considered every time the AI interacts with us. For GitHub Copilot we will create a file called `"copilot-instructions.md"` in the `.github` folder in the root of the project with those instructions.
 
@@ -209,7 +202,7 @@ And the Assistant with the help of the MCP Server will bring a nice table to ref
 
 To harness the full power of AI for code analysis, it's crucial to provide detailed information and establish clear guardrails. As highlighted with the `copilot-instructions.md` file, defining specific instructions for the AI agent ensures it adheres to project standards and utilizes tools like the SonarQube MCP server effectively.
 
-Furthermore, a rich contextual understanding—derived from elements like the `pom.xml` file with Sonar project properties like `sonar.projectKey=Test`---allows the AI to make more accurate and relevant suggestions. Finally, pairing these detailed inputs with a detailed prompt (specifying the PR Id if needed) and mature AI model significantly enhances the quality of the returned results, making the AI a truly invaluable coding partner.
+Furthermore, a rich contextual understanding—derived from elements like the `pom.xml` file with Sonar project properties like `sonar.projectKey=Test`—allows the AI to make more accurate and relevant suggestions. Finally, pairing these detailed inputs with a detailed prompt (specifying the PR Id if needed) and mature AI model significantly enhances the quality of the returned results, making the AI a truly invaluable coding partner.
 
 ### **Conclusion: Your MCP for Supercharged Code ✅**
 

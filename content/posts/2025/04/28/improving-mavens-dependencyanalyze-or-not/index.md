@@ -157,7 +157,7 @@ I don't know if it's worth the time and effort. If you think it is, I hope this 
 
 * [dependency:analyze](https://maven.apache.org/plugins/maven-dependency-plugin/analyze-mojo.html)
 * [Maven Dependency Analyzer](https://maven.apache.org/shared/maven-dependency-analyzer/)
-* [Designing your own Spring Boot starter -- part 1](https://blog.frankel.ch/designing-your-own-spring-boot-starter/1/)
-* [Designing your own Spring Boot starter -- part 2](https://blog.frankel.ch/designing-your-own-spring-boot-starter/2/)
+* [Designing your own Spring Boot starter – part 1](https://blog.frankel.ch/designing-your-own-spring-boot-starter/1/)
+* [Designing your own Spring Boot starter – part 2](https://blog.frankel.ch/designing-your-own-spring-boot-starter/2/)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/maven-dependency-analyze/) on March 9^th^, 2025*

@@ -51,7 +51,7 @@ docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 
 The [Planning Pattern](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) enables an AI system to decompose high-level objectives into smaller, independent actions. Rather than relying solely on internal knowledge, the agent identifies required information and selects deterministic tools, such as databases or REST services. This approach improves reliability, observability, and accuracy by combining the reasoning capabilities of Large Language Models with the predictable behavior of traditional software components.
 
-Unlike architectures that employ a dedicated planner agent or workflow graph, this implementation uses the language model itself as the planner. During execution, the model repeatedly reasons over the user's objective, selects the most appropriate tool, observes the returned data, and decides whether additional actions are required before producing the final response. This Reason--Act--Observe loop provides a lightweight yet highly effective planning architecture that is widely used in modern agentic systems.
+Unlike architectures that employ a dedicated planner agent or workflow graph, this implementation uses the language model itself as the planner. During execution, the model repeatedly reasons over the user's objective, selects the most appropriate tool, observes the returned data, and decides whether additional actions are required before producing the final response. This Reason–Act–Observe loop provides a lightweight yet highly effective planning architecture that is widely used in modern agentic systems.
 
 {{< img src="foojay1.png" class="size-full is-resized" width="394" height="465" style="width:432px;height:auto" >}}
 

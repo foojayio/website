@@ -137,7 +137,7 @@ Some specifications will need to make API changes to support language features i
 
 The Theme for Jakarta EE 11 is **Performance and Developer Productivity.**​
 
-Another focus area is **platform unification** -- Jakarta EE, and Java EE before it, being around for some time, have contributed to the fact that things can be done differently across different specifications, which can be confusing and time consuming for developers. With API unification, we hope to bring enhanced usability. As part of this, Jakarta EE will continue becoming more CDI centric and more streamlined.
+Another focus area is **platform unification** – Jakarta EE, and Java EE before it, being around for some time, have contributed to the fact that things can be done differently across different specifications, which can be confusing and time consuming for developers. With API unification, we hope to bring enhanced usability. As part of this, Jakarta EE will continue becoming more CDI centric and more streamlined.
 
 The specifications that will all have updated versions for Jakarta EE 11 are listed below:​
 

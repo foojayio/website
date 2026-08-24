@@ -43,7 +43,7 @@ This format can store a wide variety of location like data, for our purposes we'
 }
 ```
 
-Note: the order matters, its \[longitude, latitude\] ... this may differ from how some map applications handle coordinate order.
+Note: the order matters, its \[longitude, latitude\] … this may differ from how some map applications handle coordinate order.
 
 In this example we named our point location and it has a type and an array of coordinates (the name and category are only used for our application, not the geo data).
 

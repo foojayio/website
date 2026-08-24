@@ -2,7 +2,7 @@
 title: "Faster Java Warmup: CRaC versus ReadyNow"
 date: "2025-06-06T17:23:00+00:00"
 lastmod: "2025-06-13T07:58:31+00:00"
-description: "This is the first blog post in a series on faster Java application warmup with ReadyNow. Azul has developed different solutions to help achieve faster Java…"
+description: "This is the first blog post in a series on faster Java application warmup with ReadyNow.Azul has developed different solutions to help achieve faster Java…"
 canonical: "https://www.azul.com/blog/faster-warmup-of-your-java-applications-crac-versus-readynow/"
 authors:
   - "frankdelporte"
@@ -91,7 +91,7 @@ To use the CRaC system, you will need to change your code to handle the closing 
 
 ReadyNow is a feature in Azul Zing Builds of OpenJDK (Zing), a modern, TCK-compliant Java platform based on OpenJDK with extended functionalities. ReadyNow helps the compiler to produce the best possible native code right from the start of the application. ReadyNow is available for customers of [Azul Platform Prime](https://www.azul.com/products/prime/), Azul's high-performance OpenJDK distribution.
 
-One of the significant advantages of Zing is that every compilation step can be saved in a log file, referred to as a profile. Engineers can use these profiles to research specific problems, analyze them with tools (e.g., [GC Log Analyzer](https://docs.azul.com/gc-log-analyzer/)), and -- most importantly -- reuse them in the next run of an application to compile the code immediately into its best-performing native version. At each start of the application, Zing can be configured with a profile as an input with a command line option and, optionally, a new output profile. ReadyNow instructs the JVM which code has to be compiled, with the info on how it was used in the previous run(s). This way, multiple generations of a profile can be created to get to a perfect "trained" profile. This will contain all the required information to generate the best possible native code from the start and avoid deoptimizations that can cause short performance drops.
+One of the significant advantages of Zing is that every compilation step can be saved in a log file, referred to as a profile. Engineers can use these profiles to research specific problems, analyze them with tools (e.g., [GC Log Analyzer](https://docs.azul.com/gc-log-analyzer/)), and – most importantly – reuse them in the next run of an application to compile the code immediately into its best-performing native version. At each start of the application, Zing can be configured with a profile as an input with a command line option and, optionally, a new output profile. ReadyNow instructs the JVM which code has to be compiled, with the info on how it was used in the previous run(s). This way, multiple generations of a profile can be created to get to a perfect "trained" profile. This will contain all the required information to generate the best possible native code from the start and avoid deoptimizations that can cause short performance drops.
 
 Because this feature is integrated into Zing, **no code changes are needed to use ReadyNow**! You only need to provide a few command-line options to access this functionality.
 
@@ -119,14 +119,14 @@ As such, it relates to the challenges mentioned in this article but complements 
 
 Let's summarize the differences between CRaC and ReadyNow:
 
-|                                       |                                                 CRaC                                                 |                                 ReadyNow                                 |
-|---------------------------------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| **Available in**                      | Zulu                                                                                                 | Zing                                                                     |
-| **Needs code changes**                | Yes, or must be based on a framework that supports CRaC (Spring, Micronaut, Quarkus,...) (\*) (\*\*) | No                                                                       |
-| **Required space**                    | Heap size of the application + additional storage                                                    | Text file with limited size                                              |
-| **Complexity**                        | Can be difficult to debug                                                                            | Extended debug options thanks to GC-log files and the profile text files |
-| **Can handle Java patterns (\*\*\*)** | Yes                                                                                                  | Yes                                                                      |
-| **Availability**                      | Basic functionality in free builds. Extended functionality is available to Azul customers.           | For customers of Azul                                                    |
+|                                       |                                                CRaC                                                |                                 ReadyNow                                 |
+|---------------------------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| **Available in**                      | Zulu                                                                                               | Zing                                                                     |
+| **Needs code changes**                | Yes, or must be based on a framework that supports CRaC (Spring, Micronaut, Quarkus,…) (\*) (\*\*) | No                                                                       |
+| **Required space**                    | Heap size of the application + additional storage                                                  | Text file with limited size                                              |
+| **Complexity**                        | Can be difficult to debug                                                                          | Extended debug options thanks to GC-log files and the profile text files |
+| **Can handle Java patterns (\*\*\*)** | Yes                                                                                                | Yes                                                                      |
+| **Availability**                      | Basic functionality in free builds. Extended functionality is available to Azul customers.         | For customers of Azul                                                    |
 
 (\*): Even when using a framework, you can still have dependencies that need code changes.
 

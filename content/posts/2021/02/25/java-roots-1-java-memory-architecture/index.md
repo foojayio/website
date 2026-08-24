@@ -14,8 +14,6 @@ related_posts:
   - "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"
   - "spring-boot-performance-workshop-with-vlad-mihalcea"
 frozen: false
-aliases:
-  - "/today/skps-core-java-java-ee-roots-1-java-memory-architecture/"
 ---
 
 **\[About SKP's Core Java/Java EE Roots\]**  

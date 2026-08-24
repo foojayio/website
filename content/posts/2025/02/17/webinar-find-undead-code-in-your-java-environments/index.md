@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-**10-30% of the custom code in applications is undead code and can just be deleted. Eliminating undead code can enhance the overall performance and maintainability of your applications. Time vampire (n) -- a service or application that is said to suck time from engineers by warming up and updating at preternaturally slow speeds.**
+**10-30% of the custom code in applications is undead code and can just be deleted. Eliminating undead code can enhance the overall performance and maintainability of your applications. Time vampire (n) – a service or application that is said to suck time from engineers by warming up and updating at preternaturally slow speeds.**
 
 You're on deadline to finish a project, and you open the application to do your work. The application informs you that it needs to update before it will open. Based on past experience, you have half an hour to burn before this time vampire is ready.
 
@@ -37,9 +37,9 @@ Besides, deleting unused code is incredibly satisfying.
 
 Java is a victim of its own success. It's backward compatible. It has a lot of large, old applications that have been used by enterprises for a long time. The longer an application has been running, even successfully, the more likely it is to have code you just don't need anymore.
 
-Old, unused code makes it harder to add new features because developers have to figure out what it does, manipulate it, check dependencies, and make changes. Unless... what if they didn't need that code at all? Or even if they could remove half the code, they would make maintenance so much easier going forward.
+Old, unused code makes it harder to add new features because developers have to figure out what it does, manipulate it, check dependencies, and make changes. Unless… what if they didn't need that code at all? Or even if they could remove half the code, they would make maintenance so much easier going forward.
 
-To learn more, check out the on-demand webinar, [Your Undead Code Is a Time Vampire](https://www.azul.com/webinar/your-undead-code-is-a-time-vampire/), featuring Erik Costlow, Azul senior director of Product Management -- Cloud Solutions and Trisha Gee, software engineer, Java Champion, and author.
+To learn more, check out the on-demand webinar, [Your Undead Code Is a Time Vampire](https://www.azul.com/webinar/your-undead-code-is-a-time-vampire/), featuring Erik Costlow, Azul senior director of Product Management – Cloud Solutions and Trisha Gee, software engineer, Java Champion, and author.
 
 In this webinar, you will learn how to:
 
@@ -53,7 +53,7 @@ In this webinar, you will learn how to:
 
 [Azul Code Inventory](https://www.azul.com/products/components/code-inventory/)®, a service of [Azul Intelligence Cloud](https://www.azul.com/products/intelligence-cloud), is the only solution that precisely catalogs what code runs in production across all of an enterprise's Java workloads. It slashes the time and burden of maintaining and testing unused code, significantly improving developer productivity and saving money. Code Inventory collects and aggregates detailed information from the Java Virtual Machine (JVM) of what code actually runs in production over time. It provides highly accurate, strong signals to confidently identify and prioritize unused code for removal. It helps reduce clutter so teams can work only on active code, lowering maintenance effort and increasing development velocity.
 
-In December, Azul Intelligence Cloud won InfoWorld's Technology of the Year Award for analytics solutions. InfoWorld judges said, in part, "Azul Intelligence Cloud is ... like a smart assistant that watches how your Java programs work and suggests ways to improve them. It's a new and exciting way to optimize Java programs, using real-time data to make smart decisions."
+In December, Azul Intelligence Cloud won InfoWorld's Technology of the Year Award for analytics solutions. InfoWorld judges said, in part, "Azul Intelligence Cloud is … like a smart assistant that watches how your Java programs work and suggests ways to improve them. It's a new and exciting way to optimize Java programs, using real-time data to make smart decisions."
 ![LOGO: InfoWorld Technology of the Year 2024 Award - Azul Intelligence Cloud](https://www.azul.com/wp-content/uploads/InfoWorld-TOTY-IC-2024.png)
 
 [Click here to watch the on-demand webinar!](https://www.azul.com/webinar/your-undead-code-is-a-time-vampire/)

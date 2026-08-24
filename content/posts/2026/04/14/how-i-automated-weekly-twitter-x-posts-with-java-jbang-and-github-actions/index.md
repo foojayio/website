@@ -179,7 +179,7 @@ A few details worth noting:
 
 * **`concurrency` group** prevents double-posts if a manual dispatch overlaps with the cron
 * **`[skip ci]`** in the commit message prevents the state update from triggering other workflows
-* **Social files live in `social/`** , not `content/` --- the deploy workflow watches `content/**`, so keeping state separate avoids unnecessary site rebuilds
+* **Social files live in `social/`** , not `content/` — the deploy workflow watches `content/**`, so keeping state separate avoids unnecessary site rebuilds
 * **`git pull --rebase`** before push handles the rare case where another commit lands between checkout and push
 
 ## The Economics

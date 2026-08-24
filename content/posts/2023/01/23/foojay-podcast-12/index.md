@@ -55,7 +55,7 @@ You can listen and subscribe to the Foojay Podcast on:
 
 ## **Host**
 
-* Frank Delporte ([@\[email protected\]](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
+* Frank Delporte ([@frankdelporte@foojay.social](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
 
 ## **Content**
 

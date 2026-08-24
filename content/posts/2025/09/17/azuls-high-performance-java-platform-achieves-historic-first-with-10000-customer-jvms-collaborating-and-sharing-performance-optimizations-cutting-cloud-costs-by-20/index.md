@@ -22,9 +22,9 @@ frozen: false
 
 ***Fleet-level advantages achieved for cloud-native Java applications with faster warm-up, smoother scaling and reduced cost***
 
-**SUNNYVALE, Calif. — September 17, 2025 ---** [Azul](https://www.azul.com/), the only company 100% focused on Java, today announced a breakthrough in cloud deployment at scale with [Azul Platform Prime](https://www.azul.com/products/prime/), its high-performance Java platform. A leading global enterprise has deployed hundreds of applications and micro-services across more than 10,000 Java Virtual Machines (JVMs) using Platform Prime's Optimizer Hub, a unique capability that allows JVMs to collaborate and share performance optimizations.
+**SUNNYVALE, Calif. — September 17, 2025 —** [Azul](https://www.azul.com/), the only company 100% focused on Java, today announced a breakthrough in cloud deployment at scale with [Azul Platform Prime](https://www.azul.com/products/prime/), its high-performance Java platform. A leading global enterprise has deployed hundreds of applications and micro-services across more than 10,000 Java Virtual Machines (JVMs) using Platform Prime's Optimizer Hub, a unique capability that allows JVMs to collaborate and share performance optimizations.
 
-By enabling this fleet-wide intelligence, the customer's applications -- spanning e-commerce to payments to inventory management -- start and warm up dramatically faster, scaling has become smoother and compute requirements have significantly reduced, delivering cloud cost savings of more than 20%.
+By enabling this fleet-wide intelligence, the customer's applications – spanning e-commerce to payments to inventory management – start and warm up dramatically faster, scaling has become smoother and compute requirements have significantly reduced, delivering cloud cost savings of more than 20%.
 
 Another well-known company in the entertainment industry recently deployed Optimizer Hub to reduce CPU core and pod counts for their Java-based critical services by 25%-30%. Optimizer Hub is included with Platform Prime as an optional, customer-managed service that requires no changes to existing Java applications or JVM-based workloads.
 

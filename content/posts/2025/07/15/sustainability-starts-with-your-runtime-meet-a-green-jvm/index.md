@@ -36,11 +36,11 @@ Every CPU cycle your application burns costs money — and energy. Traditional J
 
 Azul Platform Prime changes the game by making your Java apps more efficient at every level:
 
-* **Faster application startup** **--** thanks to warmup optimizations and offloaded JIT compilation, apps reach peak performance faster.
-* **Lower memory footprint** **--** Prime's smart memory management and aggressive optimization reduce overall RAM usage.
-* **Pauseless garbage collection** **--** The [C4 Collector](https://www.azul.com/products/components/pgc/) eliminates stop-the-world GC pauses, delivering smooth, consistent performance.
-* **Improved carrying capacity with fewer cores** **--** Better compiler optimizations and reduced runtime overhead let apps do more with less hardware.
-* **Cloud Native Compiler** **--** [CNC](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/) offloads JIT compilation to a remote service, freeing up local CPU cycles and improving resource efficiency, especially in containers.
+* **Faster application startup** **–** thanks to warmup optimizations and offloaded JIT compilation, apps reach peak performance faster.
+* **Lower memory footprint** **–** Prime's smart memory management and aggressive optimization reduce overall RAM usage.
+* **Pauseless garbage collection** **–** The [C4 Collector](https://www.azul.com/products/components/pgc/) eliminates stop-the-world GC pauses, delivering smooth, consistent performance.
+* **Improved carrying capacity with fewer cores** **–** Better compiler optimizations and reduced runtime overhead let apps do more with less hardware.
+* **Cloud Native Compiler** **–** [CNC](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/) offloads JIT compilation to a remote service, freeing up local CPU cycles and improving resource efficiency, especially in containers.
 
 This means your Java applications do more, with less. Less compute. Less memory. Less electricity.
 ![DIAGRAM: Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.](https://azul.imgix.net/wp-content/uploads/2025-07-01-green-diagram-1024x503.jpg?auto=format&crop=faces,entropy&fit=max&q=80&s=8b8f9c85ac4a7bf6cc6a795def64b890) Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.
@@ -90,4 +90,4 @@ Just swap the runtime, and you're already on a greener path.
 
 Whether you're a sustainability lead, a FinOps architect, or a Java developer who just cares about clean code *and* a cleaner planet, Azul Platform Prime deserves a look.
 
-[Get in touch](https://www.azul.com/contact/) to learn how Azul can help you cut costs and carbon at the JVM level -- no code changes required.
+[Get in touch](https://www.azul.com/contact/) to learn how Azul can help you cut costs and carbon at the JVM level – no code changes required.

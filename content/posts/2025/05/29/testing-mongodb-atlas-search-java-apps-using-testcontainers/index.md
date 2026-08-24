@@ -510,7 +510,7 @@ Why does that matter for us? Seed data loading!
 
 TestContainers has some awesome options which we can use here for loading seed data—mounting directories and executing commands within the container.
 
-In our previous example, we manually created 10 records for testing search... What if we wanted to test against 15,000 records?
+In our previous example, we manually created 10 records for testing search… What if we wanted to test against 15,000 records?
 
 #### Mounting directories
 

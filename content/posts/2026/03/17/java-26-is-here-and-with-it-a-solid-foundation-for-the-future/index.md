@@ -9,10 +9,10 @@ image: "foundation.jpg"
 categories:
   - "Java"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "idempotent-spring-boot-starter"
-  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 
@@ -136,7 +136,7 @@ String htmlText = response.body();
 assert htmlText.contains("Java");
 ```
 
-As you can see, we didn't specify any HTTP version in this code example--the API assumes HTTP/2 by default.
+As you can see, we didn't specify any HTTP version in this code example–the API assumes HTTP/2 by default.
 
 ##### HTTP/3: HTTP's Next Version
 
@@ -160,12 +160,12 @@ Once HTTP/3 has been chosen—either in the request itself or in the client—yo
 
 ##### Negotiating Protocol Versions
 
-The HTTP client API can't know for sure if a target server will support HTTP/3. Moreover, existing HTTP/1.1 and HTTP/2 connections cannot be upgraded to HTTP/3, since HTTP/1.1 and HTTP/2 are built on top of TCP, while HTTP/3's QUIC is based on UDP datagrams. So the API needs a way to negotiate protocol versions--in order to do that, it's been equipped with four separate approaches:
+The HTTP client API can't know for sure if a target server will support HTTP/3. Moreover, existing HTTP/1.1 and HTTP/2 connections cannot be upgraded to HTTP/3, since HTTP/1.1 and HTTP/2 are built on top of TCP, while HTTP/3's QUIC is based on UDP datagrams. So the API needs a way to negotiate protocol versions–in order to do that, it's been equipped with four separate approaches:
 
-1. **Try HTTP/3 first, fall back if it times‑out** -- Initiate the request with HTTP/3; if a connection cannot be established within a reasonable timeout, automatically downgrade to HTTP/2 or HTTP/1.1. *(matches a `HttpRequest` whose preferred version is set to `HTTP_3`)*
-2. **Race HTTP/3 against an older protocol** -- Open both an HTTP/3 connection and an HTTP/2 or HTTP/1.1 connection simultaneously and use whichever succeeds first. *(occurs when the `HttpClient` prefers `HTTP_3` but the `HttpRequest` does not specify a preferred version)*
-3. **Start with HTTP/2 or 1.1 and switch on discovery** -- Send the initial request over HTTP/2 or HTTP/1.1. If the server's response indicates that HTTP/3 is available, switch to HTTP/3 for all following requests. *(triggered by setting `Http3DiscoveryMode.ALT_SVC` for the `H3_DISCOVERY` option, with at least one of the clients or requests preferring `HTTP_3`)*
-4. **Force HTTP/3 only** -- Send every request exclusively over HTTP/3; if the server cannot reply with HTTP/3, treat it as a failure and do not fall back to earlier protocols. *(enabled by `Http3DiscoveryMode.HTTP_3_URI_ONLY` for the `H3_DISCOVERY` option, with at least one client or request preferring `HTTP_3`)*
+1. **Try HTTP/3 first, fall back if it times‑out** – Initiate the request with HTTP/3; if a connection cannot be established within a reasonable timeout, automatically downgrade to HTTP/2 or HTTP/1.1. *(matches a `HttpRequest` whose preferred version is set to `HTTP_3`)*
+2. **Race HTTP/3 against an older protocol** – Open both an HTTP/3 connection and an HTTP/2 or HTTP/1.1 connection simultaneously and use whichever succeeds first. *(occurs when the `HttpClient` prefers `HTTP_3` but the `HttpRequest` does not specify a preferred version)*
+3. **Start with HTTP/2 or 1.1 and switch on discovery** – Send the initial request over HTTP/2 or HTTP/1.1. If the server's response indicates that HTTP/3 is available, switch to HTTP/3 for all following requests. *(triggered by setting `Http3DiscoveryMode.ALT_SVC` for the `H3_DISCOVERY` option, with at least one of the clients or requests preferring `HTTP_3`)*
+4. **Force HTTP/3 only** – Send every request exclusively over HTTP/3; if the server cannot reply with HTTP/3, treat it as a failure and do not fall back to earlier protocols. *(enabled by `Http3DiscoveryMode.HTTP_3_URI_ONLY` for the `H3_DISCOVERY` option, with at least one client or request preferring `HTTP_3`)*
 
 The four methods each come with their own drawbacks:
 
@@ -540,7 +540,7 @@ If we look at the properties of lazy constants, we see that they fill a gap betw
 |    `LazyConstant` |         \[0, 1\] |                Computing function |     Yes, after update |          Yes, by winner |
 | non-`final` field |         \[0, ∞\] |                          Anywhere |                    No |                     Yes |
 
-Usage of lazy constants is certainly not limited to loggers--we can also use a lazy constant to store the `OrderController` component itself, and related components:
+Usage of lazy constants is certainly not limited to loggers–we can also use a lazy constant to store the `OrderController` component itself, and related components:
 
 ```java
 class GuitarStore {
@@ -614,7 +614,7 @@ In this example, `OrderController` instances are associated with thread names ("
 
 The feature that used to be known as 'stable values' was renamed to 'lazy constants' to better capture its intended high-level use case.
 
-Other changes have a similar purpose--they include:
+Other changes have a similar purpose–they include:
 
 * Removing the low-level methods `orElseSet`, `setOrThrow`, and `trySet`, leaving only factory methods that take value-computing functions;
 * Moving the factory methods for lazy lists (`StableValue.list`) and maps (`StableValue.map`) into the `List` and `Map` interfaces, respectively, to enhance discoverability;

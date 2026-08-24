@@ -3,6 +3,7 @@ title: "Debugging Tutorial 1 – Introduction: Conditional Breakpoints & Set Val
 date: "2021-10-27T08:03:53+00:00"
 lastmod: "2021-10-27T08:05:13+00:00"
 description: "Debug conditional breakpoints, setValue, and more, for VSCode, IntelliJ/IDEA, PyCharm, WebStorm, Java, JavaScript (NodeJS), Kotlin & Python."
+canonical: "https://talktotheduck.dev/debugging-tutorial-1-introduction-conditional-breakpoints"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-scaled.jpg"
@@ -21,10 +22,10 @@ frozen: false
 
 In this series, I'll walk you through the process of debugging applications and finding issues within them. As we debug, we'll cover the techniques important for most developers. I will cover the following debuggers:
 
-* IntelliJ/IDEA -- with Java/Kotlin
-* PyCharm -- Python
-* VSCode -- for JavaScript
-* WebStorm -- for JavaScript
+* IntelliJ/IDEA – with Java/Kotlin
+* PyCharm – Python
+* VSCode – for JavaScript
+* WebStorm – for JavaScript
 
 These should cover most use cases you'll run into and some things will seem duplicate/redundant so you can just skip to the applicable section if you feel you "got the gist".
 
@@ -42,9 +43,9 @@ The main goal in this series is to bring you up to speed so we can dig into the 
 
 But you might be asking yourself, why even go through this?
 
-Why do we need to go through a debugging tutorial? I already know programming and using a debugger isn't exactly rocket science...
+Why do we need to go through a debugging tutorial? I already know programming and using a debugger isn't exactly rocket science…
 
-Well... we spend 50% of our time chasing bugs according to this [study](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.370.9611&rep=rep1&type=pdf), although I saw numbers ranging from 25% to 75%. Unfortunately, this is a skill that universities don't really teach. Even at our jobs, people gloss over this essential skill. There are books that cover this subject but a lot are out of date and aim at more complex scenarios.
+Well… we spend 50% of our time chasing bugs according to this [study](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.370.9611&rep=rep1&type=pdf), although I saw numbers ranging from 25% to 75%. Unfortunately, this is a skill that universities don't really teach. Even at our jobs, people gloss over this essential skill. There are books that cover this subject but a lot are out of date and aim at more complex scenarios.
 
 Debugging isn't just about finding bugs. When I need to implement a new feature in an area of the code I'm unfamiliar with, I often pull up the debugger and start debugging those areas. Trying to look at the flow as if I'm debugging an issue, inspecting the stack, members etc., to gain a better understanding of the way the system works and validate my assumptions.
 
@@ -56,10 +57,10 @@ Notice that the apps are specifically unoptimized and verbose to give us more pl
 
 Here are versions of it for the various languages:
 
-* **Java** -- <https://gist.github.com/shai-almog/e400134f01decc9639230a6a99d51eab>
-* **Kotlin** -- <https://gist.github.com/shai-almog/c454d39464ca2893c014807838c5102f>
-* **Python** -- <https://gist.github.com/shai-almog/8c8bbbb4297f758f7ce1d5f7a4cc1c74>
-* **JavaScript** -- <https://gist.github.com/shai-almog/167a34571b0fae6eeed56742c44895cd>
+* **Java** – <https://gist.github.com/shai-almog/e400134f01decc9639230a6a99d51eab>
+* **Kotlin** – <https://gist.github.com/shai-almog/c454d39464ca2893c014807838c5102f>
+* **Python** – <https://gist.github.com/shai-almog/8c8bbbb4297f758f7ce1d5f7a4cc1c74>
+* **JavaScript** – <https://gist.github.com/shai-almog/167a34571b0fae6eeed56742c44895cd>
 
 Download the appropriate source file and add it as the main source file in a new project in your IDE. You can run the application but take in mind that it will run for a VERY long time searching for prime numbers.
 
@@ -129,7 +130,7 @@ In the other cases I used `num % 2 == 0` as a condition that will always be fals
 
 ## Taking this Further
 
-Conditional breakpoints are one of the most powerful yet sadly under utilized tools in the arsenal of a debugger. When you experience a failure in a loop we often walk over the loop again and again and again... Waiting for the right conditions to materialize.
+Conditional breakpoints are one of the most powerful yet sadly under utilized tools in the arsenal of a debugger. When you experience a failure in a loop we often walk over the loop again and again and again… Waiting for the right conditions to materialize.
 
 By using set value or a condition we can move much faster in our debugging process and possibly reproduce issues more accurately without the delays you'd normally see for stepping over.
 

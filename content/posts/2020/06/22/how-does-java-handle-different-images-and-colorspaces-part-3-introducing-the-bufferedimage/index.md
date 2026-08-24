@@ -22,7 +22,7 @@ BufferedImage is one of the most useful Java abstractions. It hides all the comp
 The differences between the types of BufferedImage are:-
 
 1. Range of Colours (Binary will give back and white only, RGB will provide 24-bit color)
-2. Opacity (only available in ARGB -- the A is an 8 bit Alpha channel).
+2. Opacity (only available in ARGB – the A is an 8 bit Alpha channel).
 3. Amount of memory used (ARGB uses the most as 4 bytes per pixel).
 4. Size of the saved file.
 

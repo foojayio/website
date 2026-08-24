@@ -21,7 +21,7 @@ frozen: false
 
 By design, most available APIs, such as ChatGPT and Gemini, operate in a **fire-and-forget** mode. They don't retain previous interactions, meaning every request is treated as a completely new one.
 
-However, for a smooth and engaging conversation, maintaining context is crucial—otherwise, the interaction becomes disjointed and frustrating. The common solution is to pass previous messages along with each new prompt, allowing the LLM to infer context. This is where the **chat memory** concept comes in.
+However, for a smooth and engaging conversation, maintaining context is crucial---otherwise, the interaction becomes disjointed and frustrating. The common solution is to pass previous messages along with each new prompt, allowing the LLM to infer context. This is where the **chat memory** concept comes in.
 
 That said, every conversation has a **context window** , which limits the maximum number of tokens that can be processed. We can't pass an unlimited number of tokens in a prompt. As conversations grow longer, they consume more resources, making it necessary to find efficient ways to manage and evict older messages.
 
@@ -348,7 +348,7 @@ This results in a more fluid and engaging user experience, where the chatbot can
 
 This makes it particularly valuable when maintaining conversational history, which is crucial for customer support, complex problem-solving, or multi-turn discussions.
 
-That said, this approach isn't without its challenges. The very nature of summarization means that some details—especially infrequent ones—might get lost in the process. This could occasionally impact the chatbot's ability to deliver the most precise or personalized responses.
+That said, this approach isn't without its challenges. The very nature of summarization means that some details---especially infrequent ones---might get lost in the process. This could occasionally impact the chatbot's ability to deliver the most precise or personalized responses.
 
 Moreover, the summarization step itself adds computational overhead, and its effectiveness heavily depends on the prompt design and the capabilities of the underlying LLM. Another potential issue is **contextual drift** ---over multiple rounds of summarization, the chatbot's understanding of the conversation could gradually shift away from its original meaning.
 

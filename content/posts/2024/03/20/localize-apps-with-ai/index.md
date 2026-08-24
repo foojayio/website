@@ -144,9 +144,9 @@ public class WebConfig implements WebMvcConfigurer {
 
 Now that we can test different locales, we run the server, and compare the home page for several locale parameters:
 
-* <http://localhost:8080> -- default locale
-* <http://localhost:8080/?lang=es> -- Spanish
-* <http://localhost:8080/?lang=ko> -- Korean
+* <http://localhost:8080> – default locale
+* <http://localhost:8080/?lang=es> – Spanish
+* <http://localhost:8080/?lang=ko> – Korean
 
 ![Spring Petclinic home page with welcome message in Spanish and the rest in English](https://flounder.dev/img/petclinic-localization-1.png)
 
@@ -268,7 +268,7 @@ You might notice that we have just modified the template of a reusable component
 
 In this particular case, the drop-down list component becomes tied to pet types, which is problematic for anyone who wants to use it for anything else.
 
-This flaw was there from the beginning -- see \`dog\` as the options' default text. We just propagated this flaw further. This should not be done in real projects and needs refactoring.
+This flaw was there from the beginning – see \`dog\` as the options' default text. We just propagated this flaw further. This should not be done in real projects and needs refactoring.
 
 Of course, there is more project code to internationalize; however, the rest of it  
 
@@ -463,7 +463,7 @@ Each of these topics warrants a writing of its own. If you would like to read mo
 
 All right, now that we've finished localizing our application, it's time to reflect on what we've learned:
 
-* Localization is not only about translating texts -- it also affects related assets, subsystems, and processes
+* Localization is not only about translating texts – it also affects related assets, subsystems, and processes
 * While AI is very efficient in some localization stages, human supervision and testing remain necessary to achieve the best results
 * The quality of automatic translations depends on a variety of factors, including the availability of context and, in the case of LLMs, a properly written prompt
 

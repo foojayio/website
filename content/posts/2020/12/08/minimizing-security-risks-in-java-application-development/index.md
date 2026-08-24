@@ -26,7 +26,7 @@ A few examples are:
 * Who cares about security?
 * What about your open-source dependencies
 * Security before functionality
-* And much more...
+* And much more…
 
 {{< youtube -WHhle4kTVA >}}
 

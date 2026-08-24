@@ -10,10 +10,10 @@ categories:
   - "Sealed Classes"
   - "Tutorials"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
   - "idempotent-spring-boot-starter"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "your-tls-stack-is-lying-about-zero-copy"
-  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 frozen: false
 ---
 
@@ -51,7 +51,7 @@ There are *structurally* immutable collections available in the Java Collection 
 
 #### Google Guava
 
-Guava has collection types that are *structurally* immutable, but not *contractually* immutable. The immutable collections in Guava implement the mutable JDK interfaces --- `List`, `Set`, `Map`. Guava restricts the implementations of the immutable collection types by using `abstract` classes with `package` private constructors, which require all implementations to be in the same package. This restriction is a novel design approach and a key component of *verifiable* immutability, but is still lacking *contractual* immutability.{#812f}
+Guava has collection types that are *structurally* immutable, but not *contractually* immutable. The immutable collections in Guava implement the mutable JDK interfaces — `List`, `Set`, `Map`. Guava restricts the implementations of the immutable collection types by using `abstract` classes with `package` private constructors, which require all implementations to be in the same package. This restriction is a novel design approach and a key component of *verifiable* immutability, but is still lacking *contractual* immutability.{#812f}
 
 #### Eclipse Collections
 

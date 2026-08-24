@@ -16,9 +16,9 @@ categories:
   - "Security"
 related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

@@ -53,4 +53,4 @@ While Java 21 is already bringing transformative features to the table, the upco
 
 Stay tuned for more Java 21 content and updates as we get closer to the release of Jakarta EE 11, and learn how you can make the most of these advancements in your cloud native Java projects!
 
-And remember, we have launched our own fully-managed cloud native application runtime, Payara Cloud. It offers a flexible and powerful way to easily run your Jakarta EE apps on the cloud. Simply select your WAR, click deploy, and watch your apps run on the cloud -- automatically, like magic. Find out more [here](https://www.payara.fish/products/payara-cloud/) and sign up for a 15 day free trial to experience it!
+And remember, we have launched our own fully-managed cloud native application runtime, Payara Cloud. It offers a flexible and powerful way to easily run your Jakarta EE apps on the cloud. Simply select your WAR, click deploy, and watch your apps run on the cloud – automatically, like magic. Find out more [here](https://www.payara.fish/products/payara-cloud/) and sign up for a 15 day free trial to experience it!

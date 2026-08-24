@@ -12,11 +12,11 @@ related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"
   - "grails-isnt-done-yet-part-1-inside-the-asf-reboot"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"
 frozen: false
 ---
 
-**Quick version check:** the affected range for all seven is broadly `>=2.10.0 =2.19.0 =3.0.0 <3.1.4` --- with some CVEs affecting narrower ranges. If you're on a supported release, upgrade to 2.18.8, 2.21.4, or 3.1.4. If you're on an EOL line — 2.13.x, 2.14.x, 2.15.x — jump to the bottom of the page for more specifics or visit [HeroDevs Jackson Support](https://docs.herodevs.com/jackson?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global)
+**Quick version check:** the affected range for all seven is broadly `>=2.10.0 =2.19.0 =3.0.0 <3.1.4` — with some CVEs affecting narrower ranges. If you're on a supported release, upgrade to 2.18.8, 2.21.4, or 3.1.4. If you're on an EOL line — 2.13.x, 2.14.x, 2.15.x — jump to the bottom of the page for more specifics or visit [HeroDevs Jackson Support](https://docs.herodevs.com/jackson?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global)
 
 ### Not a sales pitch
 
@@ -52,11 +52,11 @@ All seven are fixed in `jackson-databind` 2.18.8, 2.21.4, and 3.1.4. All seven w
 
 **[CVE-2026-54512](https://www.herodevs.com/vulnerability-directory/cve-2026-54512)** ([GHSA-j3rv-43j4-c7qm](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-j3rv-43j4-c7qm)) — CVSS v4 9.2 (Critical), EPSS 44%
 
-The `PolymorphicTypeValidator` allowlist checks the container class name but never validates generic type parameters inside it. Supply `java.util.ArrayList` --- `ArrayList` passes the check, the gadget class rides in unchallenged. With a reachable gadget on the classpath, that's unauthenticated RCE. Affects `>=2.10.0`. Requires polymorphic typing enabled with a PTV allowlist.
+The `PolymorphicTypeValidator` allowlist checks the container class name but never validates generic type parameters inside it. Supply `java.util.ArrayList` — `ArrayList` passes the check, the gadget class rides in unchallenged. With a reachable gadget on the classpath, that's unauthenticated RCE. Affects `>=2.10.0`. Requires polymorphic typing enabled with a PTV allowlist.
 
 **[CVE-2026-54513](https://www.herodevs.com/vulnerability-directory/cve-2026-54513)** ([GHSA-rmj7-2vxq-3g9f](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rmj7-2vxq-3g9f)) — CVSS v4 9.3 (Critical)
 
-`BasicPolymorphicTypeValidator.allowIfSubTypeIsArray()` approves any array based only on `clazz.isArray()` --- it never checks the element type against the allowlist. Supply `EvilType[]` and the validator waves it through. Same class of attack as CVE-2026-54512, different entry point. Affects `>=2.10.0`. Also requires polymorphic typing.
+`BasicPolymorphicTypeValidator.allowIfSubTypeIsArray()` approves any array based only on `clazz.isArray()` — it never checks the element type against the allowlist. Supply `EvilType[]` and the validator waves it through. Same class of attack as CVE-2026-54512, different entry point. Affects `>=2.10.0`. Also requires polymorphic typing.
 
 Both score Critical under CVSS v4. The CVSS v3.1 scores are 8.1 (High) due to Attack Complexity: High, reflecting the prerequisite that polymorphic deserialization must be enabled.
 
@@ -86,9 +86,9 @@ A property with `@JsonProperty("renamed")` on the getter and `@JsonIgnore` on th
 
 The two critical RCEs are the most serious findings, but all seven share a common thread: Jackson's own annotation-based security mechanisms are the attack surface.
 
-CVE-2026-54512 and CVE-2026-54513 bypass the `PolymorphicTypeValidator` --- introduced after a [well-documented series of high-severity deserialization CVEs](https://www.sonatype.com/blog/jackson-databind-the-end-of-the-blacklist) stretching from 2017 to 2019. The bug in CVE-2026-54512 dates to 2019 — introduced with the same release, 2.10, that brought the validator itself.
+CVE-2026-54512 and CVE-2026-54513 bypass the `PolymorphicTypeValidator` — introduced after a [well-documented series of high-severity deserialization CVEs](https://www.sonatype.com/blog/jackson-databind-the-end-of-the-blacklist) stretching from 2017 to 2019. The bug in CVE-2026-54512 dates to 2019 — introduced with the same release, 2.10, that brought the validator itself.
 
-CVE-2026-54515 through CVE-2026-54518 bypass `@JsonIgnoreProperties`, `@JsonIgnore`, and `@JsonView` --- the annotation-based access control mechanisms developers use to keep fields unwritable from untrusted input.
+CVE-2026-54515 through CVE-2026-54518 bypass `@JsonIgnoreProperties`, `@JsonIgnore`, and `@JsonView` — the annotation-based access control mechanisms developers use to keep fields unwritable from untrusted input.
 
 The pattern is the same across all seven: a security boundary that looks closed is open in edge cases the original implementation didn't anticipate. "I added the validator" and "I annotated the field" are the beginnings of a security posture, not the ends of one.
 
@@ -112,12 +112,12 @@ Don't assume your scanner's silence, or its alert, tells the whole story. Check 
 |--------------------------|---------------------------------|------------------------------|
 | CVE IDs                  | All seven                       | Same CVE IDs                 |
 | OSS fix                  | ✅ 2.18.8, 2.21.4, 3.1.4         | ❌ None                       |
-| NES fix (critical RCEs)  | ---                             | ✅ 2.13.6, 2.14.4, 2.15.5     |
-| NES fix (remaining five) | ---                             | In progress                  |
+| NES fix (critical RCEs)  | —                               | ✅ 2.13.6, 2.14.4, 2.15.5     |
+| NES fix (remaining five) | —                               | In progress                  |
 
 **If you're on a supported release** — upgrade to 2.18.8, 2.21.4, or 3.1.4. All seven resolved.
 
-**If you use polymorphic deserialization** --- `activateDefaultTyping()` or `@JsonTypeInfo` --- the two critical RCEs are directly relevant. Patch immediately.
+**If you use polymorphic deserialization** — `activateDefaultTyping()` or `@JsonTypeInfo` — the two critical RCEs are directly relevant. Patch immediately.
 
 **If you use `@JsonView`, `@JsonIgnore`, or `@JsonIgnoreProperties`** as security boundaries on writable fields, audit whether the five access control CVEs affect your configuration.
 

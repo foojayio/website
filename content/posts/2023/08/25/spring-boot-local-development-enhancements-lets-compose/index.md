@@ -83,7 +83,7 @@ There are a slew of configuration options, but some useful ones to know:
   * none: do not start nor stop
   * start-only
   * start-and-stop
-* making use of spring profile-specific docker compose files (`docker--compose-{profile}.yaml`) can be done using: `spring.docker.compose.profiles.active`
+* making use of spring profile-specific docker compose files (`docker–compose-{profile}.yaml`) can be done using: `spring.docker.compose.profiles.active`
 
 ## Testcontainers at development time
 
@@ -246,7 +246,7 @@ There are some quite useful features in there such as:
 * tracking of used images \& test parallelization
 * functionality to switch local runtime for (cloud based) testcontainers
 * tweak Testcontainer behaviour such as freezing containers on shutdown/enable reusable testcontainers
-* ...
+* …
 
 ## Wrap up
 

@@ -41,15 +41,15 @@ This abstraction has helped me handle the complexity. In the following years, I 
 
 This post is organized as follows:
 
-Firstly, the section [FEPCOS-J -- Description](#description) briefs you on the idea and concept of FEPCOS-J. In this context, I introduce its essential parts, especially two tools: *fjp* and *fjx*. Further, I explain the expressions and abbreviations I am using in this post.
+Firstly, the section [FEPCOS-J – Description](#description) briefs you on the idea and concept of FEPCOS-J. In this context, I introduce its essential parts, especially two tools: *fjp* and *fjx*. Further, I explain the expressions and abbreviations I am using in this post.
 
-Secondly, the section [FEPCOS-J -- Impressions of Usage](#impressions) gives you an impression of the use of FEPCOS-J based on the following example: A system shall provide the capability to add two numbers via an IPv4-network. In this context, I explain the complete code that is required to specify this system. Further, I describe how to make it accessible via the network. Finally, I present how to access the system via the network by means of *jshell*.
+Secondly, the section [FEPCOS-J – Impressions of Usage](#impressions) gives you an impression of the use of FEPCOS-J based on the following example: A system shall provide the capability to add two numbers via an IPv4-network. In this context, I explain the complete code that is required to specify this system. Further, I describe how to make it accessible via the network. Finally, I present how to access the system via the network by means of *jshell*.
 
-Thirdly, the section [FEPCOS-J -- Current State](#currentState) describes the actual test and development environment (Fig. 1 shows a part of it). In addition, the section lists restrictions and supported features of FEPCOS-J. Further, I provide numbers that give you an impression of the complexity of the software.
+Thirdly, the section [FEPCOS-J – Current State](#currentState) describes the actual test and development environment (Fig. 1 shows a part of it). In addition, the section lists restrictions and supported features of FEPCOS-J. Further, I provide numbers that give you an impression of the complexity of the software.
 
 Lastly, the section [Conclusion and Outlook](#conclusionOutlook) concludes this post and announces my next post. Further, I encourage you to contribute so that FEPCOS-J becomes *Free/Libre and Open-Source Software*.
 
-## FEPCOS-J -- Description
+## FEPCOS-J – Description
 
 FEPCOS-J implements a model-based Java-language extension for declarative programming of networked systems. It frees a developer from network programming and supports cross-system concurrency.
 
@@ -68,7 +68,7 @@ Further, *cross-system concurrency* means that the systems can operate independe
 
 A developer programs a *system specification* as a Java-module (Fig. 2). In detail, it specifies a system and its capabilities by means of the Java-annotations *FAM* provides.
 
-After that, the developer uses *fjp* to process the system specification. Thereupon, *fjp* generates two modular jar-files -- the *system export module* (*SXM* ) and the *system import module* (*SIM*).  
+After that, the developer uses *fjp* to process the system specification. Thereupon, *fjp* generates two modular jar-files – the *system export module* (*SXM* ) and the *system import module* (*SIM*).  
 ![A developer programs a system specification by using the FEPCOS-J Annotation Module FAM; the FEPCOS-J Processor fjp processes the specification and generates a system export module and a system import module.](fuchs2023fepcos-j-developing-by-using-annotation-module-fam-and-processor-fjp.png) **Fig. 2) Developing with FEPCOS-J:** The Java module *FAM* provides Java-annotations that allow model-based, declarative programming of composed networked systems as Java-modules. If the developer uses those annotations for the programming, then *fjp* can process the *system specification* and generate a *system export module* and a *system import module*.
 
 ### The *FEPCOS-J Exporter* provides access to the compiled system specification via an IPv4-network. Thereupon, a system user can access it by means of a generated system interface, the system import module contains.
@@ -82,13 +82,13 @@ The other environment contains *SIM* and runs the *system application* . In addi
 This access can be both blocking and concurrent. *fjp* generates a corresponding *system interface* and an *adapter*. They handle the required coordination and network communication together with additional modules FEPCOS-J provides.  
 ![FEPCOS-J protocol stack: a system import module (SIM) and a corresponding system export module (SXM) are deployed to different Java-Runtime Environments, which can communicate via an IPv4-network. One Java-environment runs fjx and contains SXM. The other runs the system application and contains the SIM and a system user.](fuchs2023fepcos-j-protocol-stack-system-user-accesses-system-specification-via-ip-network.png) **Fig. 3)** **Using FEPCOS-J to access a system specification via an IPv4-network:** A *system user* can access a *system specification* via an IPv4-network. In detail, the access is via a generated *system interface* that*SIM* contains, via modules FEPCOS-J provides, via an internet socket *fjx* listens to, via modules FEPCOS-J provides, and via a generated *adapter* that *SXM* contains.
 
-## FEPCOS-J -- Impressions of Usage
+## FEPCOS-J – Impressions of Usage
 
 This section describes a typical workflow for Java-programming with FEPCOS-J. In particular, it explains the complete Java-source code of a system specification by using the following example:
 
 A basic system *adder* shall provide the capability to add two numbers via an IPv4-network. A system user shall get both blocking and concurrent access to it via the internet socket *10.0.0.1:11111*.
 
-### Programming of the basic system -- *adder*
+### Programming of the basic system – *adder*
 
 The developer realizes the system specification as a Java-module *adder.spec* . For this purpose, it programs the module information *module-info.java* , the system declaration *Sy.java* , and the activity specification *Add.java* (Fig. 4a).
 
@@ -186,7 +186,7 @@ Finally, `sy.close()` closes the system interface (Fig. 5g).
 
 {{< img src="fuchs2023fepcos-j-screenshot-bash-using-jshell-to-access-system-via-ip-network-by-using-system-interface-fjp-has-generated.png" class="size-full is-resized" alt="screenshot, bash: Example of using jshell to access a system specification that fjx has exported via an IPv4-network by means of a system interface that fjp has generated." width="840" height="630" caption="Fig. 5) Accessing a system specification via the IPv4-network by means of jshell." >}}
 
-## FEPCOS-J -- Current State
+## FEPCOS-J – Current State
 
 ### Test and development environment
 
@@ -243,7 +243,7 @@ Thanks for reading!
 ## References
 
 1. Wikipedia, The Free Encyclopedia: "*Sun SPOT* "; <https://en.wikipedia.org/wiki/Sun_SPOT> (last accessed: 2023-04-20).
-2. Fuchs, G. and German, R.: "*UML2 activity diagram based programming of wireless sensor networks* "; 2010 ICSE Workshop on Software Engineering for Sensor Network Applications (SESENA); Cape Town, South Africa; 2010; pp. 8--13; <https://doi.org/10.1145/1809111.1809116>.
+2. Fuchs, G. and German, R.: "*UML2 activity diagram based programming of wireless sensor networks* "; 2010 ICSE Workshop on Software Engineering for Sensor Network Applications (SESENA); Cape Town, South Africa; 2010; pp. 8–13; <https://doi.org/10.1145/1809111.1809116>.
 3. Fuchs, G. et al.: "*Demo: The acoowee-framework* "; 2011 International Conference on Distributed Computing in Sensor Systems and Workshops (DCOSS); Barcelona, Spain; 2011; pp. 1-2; <https://doi.org/10.1109/DCOSS.2011.5982148>.
 4. Fuchs, G.; "Das FEPCOS-Projekt"; <http://fepcos.info> (german, last accessed 2023-04-20).
 5. Fuchs, G.; "*Vernetzte Systeme mit FEPCOS-J*"; In: JAVAPRO OKT/2020; pp. 98-105; Verlag JAVAPRO; Eschborn, Germany; 10/2020 (german).

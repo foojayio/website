@@ -1,7 +1,7 @@
 ---
 title: "Idempotent Write Paths: Keeping an Integration Pipeline Correct When Messages Repeat"
 date: "2026-08-17T06:46:00+00:00"
-lastmod: "2026-08-18T08:02:07+00:00"
+lastmod: "2026-08-18T20:04:38+00:00"
 description: "A reconciliation that didn't add up Let me start with a real one. After a big sales promo, during reconciliation, finance said a batch of orders had the…"
 authors:
   - "yuelin-ou"
@@ -197,3 +197,13 @@ Real-time reconciliation scans every five minutes for events that were "received
 Offline reconciliation runs a full comparison every night. It diffs the list of events the upstream says it sent against the list we actually finished processing, and finds "upstream sent it but we didn't finish" and "we processed it but upstream never sent it". The former means it was lost; the latter is a possible duplicate or ghost record. The two kinds complement each other: real-time is fast but has limited coverage, offline is slow but catches the edge cases.
 
 With this tracing system in place, the answer to the boss is no longer "it can't lose data". It's "if we lose one, we know in five minutes, locate it in ten, and recover it in half an hour".
+
+## Further reading
+
+* P. Helland, "Idempotence Is Not a Medical Condition," ACM Queue 10(4), 2012
+* P. Helland, "Life Beyond Distributed Transactions: An Apostate's Opinion," CIDR, 2007
+* M. Kleppmann, Designing Data-Intensive Applications, O'Reilly, 2017
+* J. Gray and A. Reuter, Transaction Processing: Concepts and Techniques, Morgan Kaufmann, 1992
+* S. Zhang, J. Soto and V. Markl, "A Survey on Transactional Stream Processing," The VLDB Journal 33(2), 2024
+* M. Fragkoulis, P. Carbone, V. Kalavri and A. Katsifodimos, "A Survey on the Evolution of Stream Processing Systems," The VLDB Journal 33(2), 2024
+* Apache Kafka documentation, "Exactly-Once Semantics"

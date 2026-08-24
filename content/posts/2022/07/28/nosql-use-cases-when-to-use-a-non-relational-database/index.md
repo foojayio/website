@@ -47,7 +47,7 @@ Since then, the cost of storage has plummeted, while the cost of developer time 
 
 NoSQL comes with many benefits, including:{#9536}
 
-* The choice of several database types — [**key-value, document, tabular (or wide column), graph, and multi-model**](https://www.datastax.com/nosql#types-of-nosql-databases) --- so you can find the best fit for your data.
+* The choice of several database types — [**key-value, document, tabular (or wide column), graph, and multi-model**](https://www.datastax.com/nosql#types-of-nosql-databases) — so you can find the best fit for your data.
 * The flexibility to easily store and access a wide variety of data types together, without upfront planning. The data types can include structured, semi-structured, unstructured, and polymorphic.
 * The ability to add new data types and fields to the database without having to redefine the data model.
 * Built-in, horizontal scalability that can handle rapid growth and is much less costly than attempting to scale-out a SQL database.

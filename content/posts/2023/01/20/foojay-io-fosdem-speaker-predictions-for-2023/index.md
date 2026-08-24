@@ -20,7 +20,7 @@ frozen: false
 
 Each comes from a different part of the OpenJDK ecosystem, with different perspectives, and therefore unique insights into what to expect for this year.
 
-**Tip**---in each expectation/prediction for 2023 below, click the author's name and you'll be brought to information about their session that you can attend, all for free, at FOSDEM on Sunday, 5 February, in the Foojay.io room.
+**Tip**—in each expectation/prediction for 2023 below, click the author's name and you'll be brought to information about their session that you can attend, all for free, at FOSDEM on Sunday, 5 February, in the Foojay.io room.
 > Use of older versions of Java, notably JDK 6 and 7, will continue and not see much reduction, while also an increasing number of users will make the switch to the latest LTS Java, OpenJDK 17, and there will be a significant increase in Java users looking for a supported alternative to the Oracle JDK.  
 >
 >

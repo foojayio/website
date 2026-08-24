@@ -54,8 +54,8 @@ Lightrun includes the ability to set several metric types:
 
 * A counter which counts the amount of times a specific line of code is reached
 * Time measure (tictoc) which measures the performance of a specific code block
-* Method duration -- same as tictoc for a full method
-* Custom metric -- measure based on a custom expression
+* Method duration – same as tictoc for a full method
+* Custom metric – measure based on a custom expression
 
 Notice that you can use conditions on all metrics. If performance overhead impacts a specific user, you can limit the measurement only to that specific user.
 

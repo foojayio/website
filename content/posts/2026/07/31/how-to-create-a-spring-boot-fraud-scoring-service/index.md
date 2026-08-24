@@ -63,12 +63,12 @@ mvn exec:java
 
 The project's `pom.xml` declares:
 
-|                    Dependency                     |                   Purpose                   |
-|---------------------------------------------------|---------------------------------------------|
-| `com.deepnetts:deepnetts-core-pro:3.2.0`          | the neural network engine                   |
+|                    Dependency                     |                  Purpose                  |
+|---------------------------------------------------|-------------------------------------------|
+| `com.deepnetts:deepnetts-core-pro:3.2.0`          | the neural network engine                 |
 | `com.deepnetts:deepnetts-license:1.0`             | license jar — **required at runtime too** |
-| `tech.tablesaw:tablesaw-core` / `tablesaw-jsplot` | dataframe + charts for exploration          |
-| `javax.visrec:visrec-ri:1.0.3`                    | JSR-381 reference implementation            |
+| `tech.tablesaw:tablesaw-core` / `tablesaw-jsplot` | dataframe + charts for exploration        |
+| `javax.visrec:visrec-ri:1.0.3`                    | JSR-381 reference implementation          |
 
 Get this running before you write a line of Spring code. If the license jar isn't resolving, nothing downstream will work and you'll waste an hour blaming Spring.
 
@@ -77,9 +77,9 @@ Get this running before you write a line of Spring code. If the license jar isn'
 Two files ship with the repo:
 
 * `creditcard.csv` (inside the zip) — \~284,807 transactions, of which roughly 492 are fraud. That's about **0.17%**.
-* `creditcard-balanced.csv` --- an undersampled version with a roughly even class split.
+* `creditcard-balanced.csv` — an undersampled version with a roughly even class split.
 
-Columns: `Time`, `V1`--`V28`, `Amount`, `Class` (0 = legitimate, 1 = fraud). That's 30 usable inputs and 1 binary output.
+Columns: `Time`, `V1`–`V28`, `Amount`, `Class` (0 = legitimate, 1 = fraud). That's 30 usable inputs and 1 binary output.
 
 The imbalance is the whole problem. A model that predicts "not fraud" for every transaction scores 99.83% accuracy and is worthless. **Never report accuracy on this problem.** You want precision, recall, and a confusion matrix — covered in step 3.
 
@@ -663,7 +663,7 @@ An internal fraud-scoring service inside a single production environment at a sm
 
 The service works now. These are the things that separate it from a demo:
 
-* **Retraining pipeline.** Fraud patterns change monthly. A model with no scheduled retrain is a depreciating asset. Automate steps 2--4 in CI and gate promotion on the threshold table, not on a single metric.
+* **Retraining pipeline.** Fraud patterns change monthly. A model with no scheduled retrain is a depreciating asset. Automate steps 2–4 in CI and gate promotion on the threshold table, not on a single metric.
 * **Drift monitoring.** Emit a histogram of scores. When the distribution shifts, the world changed before your metrics did. This is your earliest warning and it costs one Micrometer counter.
 * **Shadow mode first.** Deploy scoring alongside your existing rules engine, log both decisions, change nothing. Run for a few weeks, compare, then act on the model. Never let a fresh model decline transactions on day one.
 * **A kill switch.** A config flag that bypasses the model and falls back to rules, flippable without a deploy.

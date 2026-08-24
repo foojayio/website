@@ -84,7 +84,7 @@ In production environments, MongoDB automatically provisions and manages multipl
 Data distribution across shards is usually done by spreading the data of a collection across multiple shards. For example, in a cluster with two shards, a *books* collection with 10 million documents can be split between those two shards:  
 ![](Screenshot-2026-02-09-at-9.49.35-AM.png)
 
-Now, in this same scenario, imagine that a new collection is created and it is **not sharded**---for example, an articles collection:  
+Now, in this same scenario, imagine that a new collection is created and it is **not sharded**—for example, an articles collection:  
 ![](Screenshot-2026-02-09-at-9.49.42-AM.png)
 
 By default, this collection is assigned to the database's primary shard. You can verify which shard is acting as the primary for a database by running:
@@ -600,21 +600,21 @@ public interface BookRepository extends MongoRepository<Book, String> {
 }
 ```
 
-But notice: Title is **not** the shard key. So when the app sends a query like...
+But notice: Title is **not** the shard key. So when the app sends a query like…
 
 ```
 Enterprise [direct: mongos] bookstore> db.books.find({ title: "Learning MongoDB" })
 ```
 
-...mongos can't know which shard owns that document. It has no way to "target" a shard based on title. The result: The query becomes a **broadcast query**.
+…mongos can't know which shard owns that document. It has no way to "target" a shard based on title. The result: The query becomes a **broadcast query**.
 
-If you run...
+If you run…
 
 ```
 Enterprise [direct: mongos] bookstore> db.books.find({ title: "Learning MongoDB" }).explain("executionStats")
 ```
 
-...you'll typically see a winning plan with something like:
+…you'll typically see a winning plan with something like:
 
 * "stage": "SHARD_MERGE"
 
@@ -646,13 +646,13 @@ Given what we've just seen, the real issue isn't the lack of an index, but the l
 { publishedYear: 1}
 ```
 
-So a query like this...
+So a query like this…
 
 ```
 Enterprise [direct: mongos] bookstore> db.books.find({ publishedYear: 2020 })
 ```
 
-...can be routed directly to the shard that owns the range for 2020. This turns the operation into a **targeted query**, typically showing up in the execution plan as:
+…can be routed directly to the shard that owns the range for 2020. This turns the operation into a **targeted query**, typically showing up in the execution plan as:
 
 ```
 "winningPlan": {
@@ -711,13 +711,13 @@ Expected output:
 From the application side, the key takeaway is simple:  
 *Queries should try to include the shard key whenever possible.*
 
-That means repository methods should reflect that decision. For example, instead of...
+That means repository methods should reflect that decision. For example, instead of…
 
 ```
 List<Book> findByTitle(String title);
 ```
 
-...you might prefer something like:
+…you might prefer something like:
 
 ```
 List<Book> findByPublishedYearAndTitle(int publishedYear, String title);

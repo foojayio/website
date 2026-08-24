@@ -36,7 +36,7 @@ We all love to talk about cloud cost optimization — how to save 30%, 40%, mayb
 
 That's the real art of performance tuning — not chasing milliseconds, but seeing where we're blind to inefficiency.
 
-## A Quick Reality Check -- Programming Languages and Energy
+## A Quick Reality Check – Programming Languages and Energy
 
 A remarkable study comparing the [energy efficiency of 27 programming languages](https://appdevelopermagazine.com/how-27-programming-languages-differ-in-energy-consumption/ "energy efficiency of 27 programming languages") quantified what many of us intuitively know: language choice matters — not just for speed, but for environmental impact.
 
@@ -54,7 +54,7 @@ That's what this article is about — how thinking differently about code can do
 
 ## Let's see how good am I with performance analysis
 
-### Step One -- Exceptions as Logic
+### Step One – Exceptions as Logic
 
 The naive baseline looked like this:
 
@@ -85,7 +85,7 @@ A colleague once told me, "Our validation layer runs slower than our database qu
 This is where the journey begins — three datasets, each one messier than the last, with more incorrect or malformed entries.
 ![](fj_art1_results_1-700x247.png)
 
-### Step Two -- The RegExp Trap
+### Step Two – The RegExp Trap
 
 Determined to fix this, I thought: Let's just validate inputs before parsing them. Naturally, I reached for regular expressions:
 
@@ -116,7 +116,7 @@ In one of my own projects, a regex intended to filter invalid IDs became a CPU f
 
 *Regexes are like wildcards in SQL — fine for a few records, dangerous at scale. — showing orders-of-magnitude slowdowns in real production code.*
 
-### Step Three -- Let the CPU Breathe
+### Step Three – Let the CPU Breathe
 
 Next, I tried something simpler. What if we just used what Java already offers — without regex magic or exception traps?
 
@@ -151,7 +151,7 @@ While not perfect, they're good enough for most cases and let you create perform
 As a senior engineer once told me:
 > *"Good code isn't the shortest path to an answer — it's the path with the fewest surprises for the CPU, and for a developer."*
 
-### Step Four -- Handcrafted Precision
+### Step Four – Handcrafted Precision
 
 But I wanted to know how far I could go. So I stripped away even the built-ins and wrote my own version:
 
@@ -193,7 +193,7 @@ When Does This Level of Optimization Make Sense?
 
 *Still, such optimizations come with cost: more complexity, less universality. Use them deliberately, not habitually.*
 
-### Step Five -- Fail Faster, Think Smarter
+### Step Five – Fail Faster, Think Smarter
 
 Finally, I built a version that failed fast, checked the simplest conditions first, and skipped unnecessary work.
 
@@ -229,7 +229,7 @@ But inefficiency doesn't disappear in the cloud — it multiplies. Every extra C
 
 We scale out instead of optimizing. We "auto-heal" instead of understanding. We rely on bigger machines instead of better code.
 
-One of the simplest real-world ways to cut cloud costs isn't rewriting code — it's running it on a better runtime. Take large Kafka deployments as an example. In Azul's own benchmark, Apache Kafka on [Azul Platform Prime delivered around 45 % higher maximum throughput](https://www.azul.com/blog/apache-kafka-performance-on-azul-platform-prime-vs-vanilla-openjdk/ "Azul Platform Prime delivered around 45 % higher maximum throughput") and roughly 30 % higher usable capacity at the same P99 latency SLA compared with vanilla OpenJDK. If you keep the same workload and SLA, that performance headroom translates into about 30--40 % fewer brokers needed to do the same work — and therefore 30--40 % lower Kafka infrastructure cost (compute, storage, network, and operational overhead). In other words, just switching the JVM can yield the kind of savings that most teams chase for months with instance tuning and reserved-capacity negotiations.
+One of the simplest real-world ways to cut cloud costs isn't rewriting code — it's running it on a better runtime. Take large Kafka deployments as an example. In Azul's own benchmark, Apache Kafka on [Azul Platform Prime delivered around 45 % higher maximum throughput](https://www.azul.com/blog/apache-kafka-performance-on-azul-platform-prime-vs-vanilla-openjdk/ "Azul Platform Prime delivered around 45 % higher maximum throughput") and roughly 30 % higher usable capacity at the same P99 latency SLA compared with vanilla OpenJDK. If you keep the same workload and SLA, that performance headroom translates into about 30–40 % fewer brokers needed to do the same work — and therefore 30–40 % lower Kafka infrastructure cost (compute, storage, network, and operational overhead). In other words, just switching the JVM can yield the kind of savings that most teams chase for months with instance tuning and reserved-capacity negotiations.
 
 Or take WhatsApp: when acquired by Facebook, it served over 450 million users with just 35 engineers. That's not magic — that's engineering discipline, an obsession with efficiency, and a runtime optimized for concurrency.
 
@@ -253,7 +253,7 @@ Knuth wrote The Art of Computer Programming, not The Science, for a reason: scie
 
 Every optimization has a cost. The trick is knowing which costs are worth paying.
 
-## Closing Thoughts -- Code as Craft
+## Closing Thoughts – Code as Craft
 
 My final implementation wasn't perfect. Kirk's was still a little faster. But that's not the point. The point is that software waste is invisible until you measure it. We've normalized inefficiency because the cloud hides it behind elasticity. We call it resilience, but it's often just overprovisioning.
 

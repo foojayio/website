@@ -86,11 +86,11 @@ Master BoxLang-specific and power-user features:
 
 BoxLings teaches test-driven development alongside BoxLang in four progressive stages:
 
-**Step 1 — Reading Tests (Topics 1--10)**   
+**Step 1 — Reading Tests (Topics 1–10)**   
 
 Read TestBox specs to understand requirements. Tests are your documentation.
 
-**Step 2 — Understanding Patterns (Topics 11--14)**   
+**Step 2 — Understanding Patterns (Topics 11–14)**   
 
 Multiple assertions, setup/teardown with `beforeEach`/`afterEach`, edge cases, and error scenarios.
 
@@ -98,7 +98,7 @@ Multiple assertions, setup/teardown with `beforeEach`/`afterEach`, edge cases, a
 
 Now *you* write the specs. Practice `describe` / `it` / `expect` from scratch.
 
-**Step 4 — Full TDD Cycle (Topics 16--29)**   
+**Step 4 — Full TDD Cycle (Topics 16–29)**   
 
 Red → Green → Refactor. The real deal.
 
@@ -131,9 +131,9 @@ BoxLings is self-contained and runs completely offline after the initial clone. 
 
 **Estimated completion time:**
 
-* 🆕 Beginners: \~15--20 hours
-* 💻 Experienced developers new to BoxLang: \~6--10 hours
-* 🔥 Java developers: \~4--6 hours
+* 🆕 Beginners: \~15–20 hours
+* 💻 Experienced developers new to BoxLang: \~6–10 hours
+* 🔥 Java developers: \~4–6 hours
 
 ## Get Started
 

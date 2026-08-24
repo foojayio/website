@@ -110,7 +110,7 @@ Maybe the Java Security Manager was too cumbersome to use. But honestly, I think
 
 ### Trustworthy Java?
 
-So we have this company that tried to fix security holes in its software multiple times but ultimately failed. And the developers could have written more secure code but didn't. And it all came to a head after a series of successful attacks on their software. The company was "under fire from some of its larger customers--government agencies, financial companies and others--about the security problems". So the company changed its processes and culture and launched the "Trustworthy Computing" initiative.
+So we have this company that tried to fix security holes in its software multiple times but ultimately failed. And the developers could have written more secure code but didn't. And it all came to a head after a series of successful attacks on their software. The company was "under fire from some of its larger customers–government agencies, financial companies and others–about the security problems". So the company changed its processes and culture and launched the "Trustworthy Computing" initiative.
 
 Wait, what?
 

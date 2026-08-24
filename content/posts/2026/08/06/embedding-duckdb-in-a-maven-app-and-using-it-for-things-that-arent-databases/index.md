@@ -34,7 +34,7 @@ It exposes a standard JDBC interface, so from the point of view of anyone who's 
 
 ### Querying a file on the internet with SQL
 
-Here's a complete Java application. It runs an aggregation [over a CSV file hosted on GitHub](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins_raw.csv) --- no download step, no schema definition, no table creation:
+Here's a complete Java application. It runs an aggregation [over a CSV file hosted on GitHub](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins_raw.csv) — no download step, no schema definition, no table creation:
 
 ```
 import java.sql.*;
@@ -140,7 +140,7 @@ public class DuckDB {
 
 ### Querying a file on the internet with SQL
 
-The interesting part is the `FROM` clause. DuckDB treats the URL as a table: it fetches the file, sniffs the delimiter and column types, and runs the query against it. Swap in a local path and it works the same way. Globs work too --- `FROM 'logs/*.parquet'` queries a whole directory of Parquet files as one dataset.
+The interesting part is the `FROM` clause. DuckDB treats the URL as a table: it fetches the file, sniffs the delimiter and column types, and runs the query against it. Swap in a local path and it works the same way. Globs work too — `FROM 'logs/*.parquet'` queries a whole directory of Parquet files as one dataset.
 
 For anything beyond plain HTTPS (S3, for instance), you'll need the httpfs extension first:
 

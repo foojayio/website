@@ -39,7 +39,7 @@ More info in [this blog post](https://webtechie.be/post/2024-09-17-jfxinaction-m
 
 This tool is used internally at Televic Rail by the R\&D, Quality, and production teams to test devices, check installed hardware en software in a train system, perform multiple simultaneous updates, etc. Based on an XML configuration file, the available devices and software packages get visualized for each project so it becomes impossible to apply wrong updates to devices.
 
-The same tool and configuration files are used by the end-customer to update and maintain the Televic devices (speakers, amplifiers, passenger emergency panels, LED displays, TFT screens, servers,...) which are installed in a train.
+The same tool and configuration files are used by the end-customer to update and maintain the Televic devices (speakers, amplifiers, passenger emergency panels, LED displays, TFT screens, servers,…) which are installed in a train.
 
 Thanks to the thread handling in the Java backend of the application, it's possible to perform a lot of those updates at the same time and visualize the progress in the JavaFX UI. This way updating e.g. 30 TFT screens at the same time becomes a quick job that's fully managed by TGUT.
 

@@ -28,7 +28,7 @@ frozen: false
 ![DayDreams](daydreams-scaled.jpg)
 
 *This article is for technically savvy readers, especially developers, protocol designers, and product teams working with AI agents, APIs, or crypto rails, who want a clear view of how these areas connect.*   
-*It explains how x402, ERC-8004, and agent discovery layers turn APIs and agents into small usage-based businesses, and what that means for real systems over the next 1--3 years.*
+*It explains how x402, ERC-8004, and agent discovery layers turn APIs and agents into small usage-based businesses, and what that means for real systems over the next 1–3 years.*
 >
 > ### Vocabulary for this article
 >
@@ -112,7 +112,7 @@ From my point of view, and from how builders in the blockchain space talk about 
 
 Once you look at the user base numbers, the potential becomes clearer.  
 
-Today, there are about 40--50 million weekly active crypto users.  
+Today, there are about 40–50 million weekly active crypto users.  
 
 By comparison, roughly 900 million people already use ChatGPT-class applications.  
 
@@ -766,7 +766,7 @@ It aims to provide a place where agents can act as economic actors: they communi
 
 DayDreams.Systems currently present four core components.
 
-#### **1. DAYDREAMS Library -- Open-source agent framework**
+#### **1. DAYDREAMS Library – Open-source agent framework**
 
 * Build autonomous AI agents.
 * Use a modular architecture.
@@ -775,7 +775,7 @@ DayDreams.Systems currently present four core components.
 
 The library serves as the foundation for agent logic: tools, policies, and behaviors.
 
-#### **2. DREAMS Router -- x402-powered USDC router**
+#### **2. DREAMS Router – x402-powered USDC router**
 
 * Pay multiple providers with **USDC** from one interface.
 * Use a unified payment abstraction on top of x402.
@@ -784,7 +784,7 @@ The library serves as the foundation for agent logic: tools, policies, and behav
 
 One example is paying for Google's **VEO3** directly with USDC over x402, with more providers planned.
 
-#### **3. Lucid -- a platform for autonomous agent operation**
+#### **3. Lucid – a platform for autonomous agent operation**
 
 * Run agents in an autonomous mode.
 * Define custom workflows.
@@ -793,7 +793,7 @@ One example is paying for Google's **VEO3** directly with USDC over x402, with m
 
 Lucid is also where AP2, A2A, x402, and ERC-8004 are tied together into a single operational surface.
 
-#### **4. XGATE -- agent-native search engine**
+#### **4. XGATE – agent-native search engine**
 
 * Index x402 endpoints **by agents, for agents**.
 * Expose a live view of the x402 network.  
@@ -915,7 +915,7 @@ They also describe the complexity of networking in a fully agentic, multi-resour
 * Networking between facilitators and resources.
 * Internal networking within resources.
 * Client-side networking and streaming.
-* Client--server networking and streaming.
+* Client–server networking and streaming.
 
 Each layer can introduce timeouts and sync issues, especially in a decentralized setting.  
 

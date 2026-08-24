@@ -3,6 +3,7 @@ title: "Debugging the Java Message Service (JMS) API using Lightrun"
 date: "2022-06-03T09:26:12+00:00"
 lastmod: "2022-06-03T09:26:14+00:00"
 description: "Due to their asynchronous nature and production complexities debugging messaging systems is remarkably hard... WAS remarkably hard..."
+canonical: "https://lightrun.com/tutorials/debugging-the-java-message-service-jms-api-using-lightrun/"
 authors:
   - "shai-almog"
 image: "Debugging-JMS-messages-using-Lightrun.jpg"
@@ -22,7 +23,7 @@ The Java Message Service API (JMS) was developed by Sun Microsystems in the days
 
 The JMS API provides us with simple messaging abstractions including Message Producer, Message Consumer, etc. Messaging APIs let us place a message on a "queue" and consume messages placed into said queue.
 
-This is immensely useful for high throughput systems -- instead of wasting user time by performing a slow operation in real-time, an enterprise application can send a message. This non-blocking approach enables extremely high throughput, while maintaining reliability at scale.
+This is immensely useful for high throughput systems – instead of wasting user time by performing a slow operation in real-time, an enterprise application can send a message. This non-blocking approach enables extremely high throughput, while maintaining reliability at scale.
 
 The message carries a transactional context which provides some guarantees on deliverability and reliability. As a result, we can post a message in a method and then just return, which provides similar guarantees to the ones we have when writing to an ACID database.
 
@@ -36,7 +37,7 @@ Let's go over a quick demo.
 
 In order to debug the Java Message Service calls, I've created a simple demo application, whose source code can be [found here](https://github.com/lightrun-platform/lightrun/tree/main/examples).
 
-This JMS demo is a simple database log API -- it's a microservice which you can use to post a log entry, which is then written to the database asynchronously. RESTful applications can then use this database log API to add a database log entry and without the overhead of database access.
+This JMS demo is a simple database log API – it's a microservice which you can use to post a log entry, which is then written to the database asynchronously. RESTful applications can then use this database log API to add a database log entry and without the overhead of database access.
 
 This code implements the main web service:
 

@@ -29,13 +29,13 @@ In this post, I will try to address this far more interesting topic: *What does 
 
 \[Edit: I should caveat my statement regarding online content exclusively focusing on tutorials for observability. There is, in fact, some great [content](https://www.youtube.com/watch?v=fh3VbrPvAjg) by Marcin Grzejszczak, Tommy Ludwig, Jonatan Ivanov, and others that I highly recommend looking into, although it is more of the exception to the rule\]
 
-#### Beyond monitoring --- shorter feedback loops in dev
+#### Beyond monitoring — shorter feedback loops in dev
 
 The greatest promise of observability is in providing feedback. Real, objective feedback that is free from some of the skews and biases of unit testing. Imagine being alerted to any regressions or issues stemming from your code changes while you're still working on them. Alternatively, being always aware of which parts of your code are actually in use in production and easily identifying weak spots that need attending based on integration testing results.
 
 I consider this the true potential of observability for developers, far from its traditional role as a 'monitoring' solution. Monitors and alerts are critical but tragically their focus has always been reporting issues that have already happened. Perhaps because the technology was mostly in use by DevOps/SRE/IT teams who were predominantly concerned with production stability.
 
-At one time, in one of these crazy product launch stages when myself and the other developers in the team felt more like a fire brigade than a Development team, I jokingly referred to our mad bug-fixing scurries as BDD --- not Behavior Driven Design but Bug Driven Development. The sad truth of it was that this description was not entirely inaccurate. Instead of being proactive in improving our code, we were extremely **reactive** chasing one issue after another which soon became unsustainable.
+At one time, in one of these crazy product launch stages when myself and the other developers in the team felt more like a fire brigade than a Development team, I jokingly referred to our mad bug-fixing scurries as BDD — not Behavior Driven Design but Bug Driven Development. The sad truth of it was that this description was not entirely inaccurate. Instead of being proactive in improving our code, we were extremely **reactive** chasing one issue after another which soon became unsustainable.
 
 #### Let's take a more practical example
 
@@ -281,9 +281,9 @@ What we envisioned with Digma was pipeline automation that could spot all of the
 Having enabled observability collection, here is the IDE view of the code Bob would have seen had he been using the Digma plugin while debugging and running locally:{#1314}
 ![](image-31-1024x522.png)
 
-Everything from the Session in View anti-pattern, the N+1 Queries, detecting slowdowns, and the hidden errors become just a part of the developer's view --- living documentation. It is continually unlocked and deciphered from the huge amounts of data that are collected as Bob continues to code, run and debug.
+Everything from the Session in View anti-pattern, the N+1 Queries, detecting slowdowns, and the hidden errors become just a part of the developer's view — living documentation. It is continually unlocked and deciphered from the huge amounts of data that are collected as Bob continues to code, run and debug.
 
-In this manner, similar to testing, we can finally make observability transparent --- something that requires no conscious effort. Just like plumbing, the role of observability should be to blend into the background. It should not matter how the data is collected or whether it was OTEL or some other technology. More importantly, we've reversed the process. Instead of Bob searching in a haystack of metrics and traces for issues related to the code, he beings by viewing the code issues which themselves contain links to relevant metrics and traces for further investigation.
+In this manner, similar to testing, we can finally make observability transparent — something that requires no conscious effort. Just like plumbing, the role of observability should be to blend into the background. It should not matter how the data is collected or whether it was OTEL or some other technology. More importantly, we've reversed the process. Instead of Bob searching in a haystack of metrics and traces for issues related to the code, he beings by viewing the code issues which themselves contain links to relevant metrics and traces for further investigation.
 ![](image-34-1024x676.png)
 
 ## What do you know / or want to know about your code?

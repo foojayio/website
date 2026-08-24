@@ -59,6 +59,6 @@ Today, he found that the new Apple Pay feature doesn't have any big security pro
 
 **Scrum** helps Alex in many ways. It helps him break down big tasks into smaller ones. It also helps him stay focused and organized.
 
-### Is the End... Or is it just the beginning? 🌠🎢
+### Is the End… Or is it just the beginning? 🌠🎢
 
 Every day brings a new chance to make the software better. So, hats off to Alex and all the software engineers on the Payment Pioneers team. Together, they are making the tech world better, one sprint at a time! 🌐

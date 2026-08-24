@@ -3,6 +3,7 @@ title: "External Debugging Tools 3: JMXTerm"
 date: "2022-08-26T14:52:23+00:00"
 lastmod: "2022-08-26T15:09:32+00:00"
 description: "Monitor your application in production and locally. Understand what's going on under the hood while debugging & changing settings on the fly."
+canonical: "https://talktotheduck.dev/external-debugging-tools-3-jmxterm"
 authors:
   - "shai-almog"
 image: "Screen-Shot-2022-07-17-at-10.38.24-700x418-1.png"

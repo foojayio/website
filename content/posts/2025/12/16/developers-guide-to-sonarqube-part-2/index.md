@@ -1,5 +1,5 @@
 ---
-title: "Java developer's guide : Sync Rules & Stop CI Failures"
+title: "Java developer's guide: Sync Rules & Stop CI Failures"
 date: "2025-12-16T15:53:28+00:00"
 lastmod: "2025-12-16T15:53:30+00:00"
 description: "Eliminate \"works on my machine\" issues. Learn to sync SonarQube for IDE with the cloud, catch taint security flaws, and customize Quality Gates for your Java projects."
@@ -11,10 +11,10 @@ categories:
   - "Java"
   - "Tutorials"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "idempotent-spring-boot-starter"
-  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

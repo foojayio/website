@@ -51,13 +51,13 @@ To complicate matters, in some programming languages, injecting dependencies to 
 
 With that under consideration, it could be time to revisit our assumptions and the testing pyramid as a whole. The technology landscape, however, is different and we can reconsider the value and cost of each test kind. Tests that were previously extremely complex are being streamlined by frameworks and tools, and slow infrastructure was been replaced by fast containers. What was true in 2018 when the test pyramid diagram was posted on Martin Fowler's page is not so accurate anymore.
 
-In this post, we'll therefore explore how the landscape has changed in a way that allows us to 're-align- the testing pyramid. Instead of looking at***slow\<-\> fast*** vs.***less integration \<-\> more integration*** , we can focus on two different dimensionalities --- **overhead** and **value** . **Overhead** will include test time, as well as effort in setting up the test environment. **Value** encompasses coverage, types of problems revealed, and insights gleaned from the tests. In both cases, we'll focus on specific technologies that are changing the paradigm.
+In this post, we'll therefore explore how the landscape has changed in a way that allows us to 're-align- the testing pyramid. Instead of looking at***slow\<-\> fast*** vs.***less integration \<-\> more integration*** , we can focus on two different dimensionalities — **overhead** and **value** . **Overhead** will include test time, as well as effort in setting up the test environment. **Value** encompasses coverage, types of problems revealed, and insights gleaned from the tests. In both cases, we'll focus on specific technologies that are changing the paradigm.
 
 For our example, we'll use the following stack of tools, libraries, and frameworks:
 
-* [Spring Boot 3.1 ](https://spring.io/projects/spring-boot/)--- as our web framework, DI, data, etc.
-* [Testcontainers](https://testcontainers.com/) --- For running the test environment services
-* [Rest Assured](https://rest-assured.io/) --- a nice DSL for carrying out integration tests
+* [Spring Boot 3.1 ](https://spring.io/projects/spring-boot/)— as our web framework, DI, data, etc.
+* [Testcontainers](https://testcontainers.com/) — For running the test environment services
+* [Rest Assured](https://rest-assured.io/) — a nice DSL for carrying out integration tests
 * [Digma](https://digma.ai/) (with [OTEL](https://opentelemetry.io/docs/instrumentation/java/automatic/) behind the scenes) to get more feedback from the testing
 
 As our code for demonstrating testing practices, we'll use a forked version of the Petclinic Spring Boot sample project where I've added some more functionality.
@@ -171,7 +171,7 @@ One such project that I am personally involved in is [Digma](https://digma.ai/),
 
 #### Trace-based testing, continuously
 
-We complete the plugin setup and... well that's it really! 😁 We are now collecting information about our code locally which we'll be able to see in a second once we run our tests. This time, instead of looking at simply the functional aspects of the code, we can learn more about what it does. More bluntly put, the integration tests we wrote before are all passing --- but does that mean we can go ahead and check in our code? We can run our test again to find out.
+We complete the plugin setup and… well that's it really! 😁 We are now collecting information about our code locally which we'll be able to see in a second once we run our tests. This time, instead of looking at simply the functional aspects of the code, we can learn more about what it does. More bluntly put, the integration tests we wrote before are all passing — but does that mean we can go ahead and check in our code? We can run our test again to find out.
 ![](1_75g-ZTNsdEt6hjw-DOo3aw-1024x312.png)
 
 The test passed, but looking at the code we see the test result analysis already revealed some issues in the code. I've previously discussed this specific change and the type of issues it can cause in a [blog post](https://foojay.io/today/effective-coding-with-java-observability/) focusing on improving code using observability. This time, though, this feedback arrives automatically simply by merit of running our test. We can click the 'Live' button to actually see the graph, which in this example shows a very clear picture of the regression.
@@ -182,7 +182,7 @@ If I am interested in learning more about exactly what is going on, the tracing 
 
 #### Enter Continuous Feedback
 
-[Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/) is a new practice that embraces the concept of getting more out of your code runtime data. In essence, it is a complementary movement to CI and CD which facilitates the flow of information in the opposite direction --- not from your code into production, but instead continually taking code data from testing and production and back to the developer.
+[Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/) is a new practice that embraces the concept of getting more out of your code runtime data. In essence, it is a complementary movement to CI and CD which facilitates the flow of information in the opposite direction — not from your code into production, but instead continually taking code data from testing and production and back to the developer.
 
 Shorter feedback loops accelerate the release process because it reduces the need to troubleshoot, increases developer understanding of the code, and allows dealing with issues much earlier in the process.
 
@@ -194,7 +194,7 @@ We'll be looking for high-value tests with minimal cost. As such, single service
 
 {{< img src="1_IkVAlbazd7HA57YCpwVnVA-1024x768.png" class="aligncenter size-large is-resized" width="644" height="483" style="width:644px;height:483px" >}}
 
-This means that we can invest in more tests that will be both easier to code, relatively fast to run, and still provide great coverage and real-world scenario validation. In addition, the data produced by these tests can be leveraged for more than simple functional validation --- we can give our code some exercise and see the shape just by running our tests.
+This means that we can invest in more tests that will be both easier to code, relatively fast to run, and still provide great coverage and real-world scenario validation. In addition, the data produced by these tests can be leveraged for more than simple functional validation — we can give our code some exercise and see the shape just by running our tests.
 
 #### YMMV
 

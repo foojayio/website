@@ -3,6 +3,7 @@ title: "How to profile a performance issue using Spring Boot profiling tools"
 date: "2024-09-02T09:56:13+00:00"
 lastmod: "2024-09-02T10:03:50+00:00"
 description: "Profiling performance issues and establishing robust monitoring and observability are critical for maintaining the health and efficiency of your Spring Boot application."
+canonical: "https://digma.ai/how-to-use-spring-boot-profiling-tools/"
 authors:
   - "nasim-salmany"
 image: "1_YcY6m7k2T-2AD_ymmgYq1w.webp"

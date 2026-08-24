@@ -49,7 +49,7 @@ HA provides a rich add-on ecosystem: [one of them](https://github.com/home-assis
 
 Let's Encrypt takes an opinionated view on how long certificates are valid. The validity period is 90 days, and no exceptions are allowed. Additionally, the Let's Encrypt official site recommends rotating your certificate every 60 days.
 
-It's **very** inconvenient when an installed certificate expires--don't ask me how I know. Until this year, Let's Encrypt sent reminder emails sometime before the expiry date; they don't do it anymore. To avoid it from happening again, I created an HA automation to start the add-on for me. Fun fact, by implementing CloudFlare Tunnel, I noticed that I had misconfigured the automation!
+It's **very** inconvenient when an installed certificate expires–don't ask me how I know. Until this year, Let's Encrypt sent reminder emails sometime before the expiry date; they don't do it anymore. To avoid it from happening again, I created an HA automation to start the add-on for me. Fun fact, by implementing CloudFlare Tunnel, I noticed that I had misconfigured the automation!
 
 While this setup works in general, two things were nagging at me:
 
@@ -80,7 +80,7 @@ The community add-on to manage Cloudflare Tunnel integration in HA is [Cloudflar
 * The dead simple way: you set the sub-domain, and let the assistant take care of the rest. It creates a URL that brings you to Cloudflare, you authenticate, and the assistant works its magic, including downloading and running the agent.
 * The advanced way: you create the tunnel on Cloudflare, get the token, and configure the add-on manually.
 
-I chose the former, and it works as expected. However, I made a huge mistake: I set the same subdomain as the current one, and the add-on overwrote the existing configuration with no warning. Lesson learned--be careful to set a new subdomain!
+I chose the former, and it works as expected. However, I made a huge mistake: I set the same subdomain as the current one, and the add-on overwrote the existing configuration with no warning. Lesson learned–be careful to set a new subdomain!
 
 The next step is to configure proxying in HA if you didn't do it before. **By default, HA discards requests that come from proxies.** To let `cloudflared` (the process, not Cloudflare itself) proxy request, we need to explicitly allow it, and specify which IPs we allow.
 

@@ -23,8 +23,6 @@ related_posts:
   - "foojay-podcast-62"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-63-how-do-we-keep-our-java-applications-up-to-date-and-secure/"
 ---
 
 ## Last month, I published a Foojay article about [the risks in systems that are stuck on old or outdated Java versions](https://foojay.io/today/why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization/) and got [a lot of feedback from developers](https://foojay.io/today/how-organizations-became-stuck-on-outdated-java-versions/). Most of them want to move on but get stuck on management decisions, outdated production environments, or one of the many other reasons that keep systems stuck on old Java versions and dependencies.

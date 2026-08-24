@@ -68,7 +68,7 @@ You can listen and subscribe to the Foojay Podcast on:
 
 00:00 Intro and introduction of the guests  
 
-02:31 Difference between AI, ML, DL, CV,...  
+02:31 Difference between AI, ML, DL, CV,…  
 
 06:30 How ChatGPT and LLMs works  
 
@@ -111,6 +111,6 @@ You can listen and subscribe to the Foojay Podcast on:
 
 50:59 Involve other industries in the AI revolution  
 
-54:44 Machines don't have emotions...  
+54:44 Machines don't have emotions…  
 
 55:29 Conclusion

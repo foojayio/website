@@ -19,7 +19,7 @@ related_posts:
   - "debug-like-a-senior-developer"
   - "a-short-primer-on-java-debugging-internals"
   - "package-checker-find-fix-vulnerabilities-with-intellij-idea-ultimate"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

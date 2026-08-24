@@ -15,7 +15,7 @@ related_posts:
   - "creating-terabyte-sized-queues-with-low-latency"
   - "how-object-reuse-can-reduce-latency-and-improve-performance"
   - "demystifying-jvm-memory-management"
-  - "idempotent-spring-boot-starter"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

@@ -96,9 +96,9 @@ analogOutput(24).run {
 
 And of course we would take full advantage of the intuitive \& inlined lambdas of Kotlin to create APIs like these:
 
-* `listen { ... }`
-* `onLow { ... }`
-* `onHigh { ... }`
+* `listen { … }`
+* `onLow { … }`
+* `onHigh { … }`
 
 Be it Digital or Analog IO you'll find a little API that makes life even more convenient for you *(as if what you had wasn't already enough)* .  
 

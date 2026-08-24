@@ -40,9 +40,9 @@ Notice that here I'm talking about Java 8 and higher streams. These streams come
 
 When we have code that views an array or collection content, we can filter the content using an expression and reduce the noise significantly. I can right-click any such collection and select the filter operation.
 
-In this case I have four elements in the pet clinic demo but this is especially valuable for large collections. Try reviewing hundreds of results to find the entry you're looking for...
+In this case I have four elements in the pet clinic demo but this is especially valuable for large collections. Try reviewing hundreds of results to find the entry you're looking for…
 
-Here I reduce the content by testing against the pet id. Notice I use the keyword "this" to represent the current element in the list... I don't need to do that, I can just type the getter but using this and a dot opened up the code completion support.
+Here I reduce the content by testing against the pet id. Notice I use the keyword "this" to represent the current element in the list… I don't need to do that, I can just type the getter but using this and a dot opened up the code completion support.
 
 Once I apply this you will notice the numbers "skip" everything that doesn't match. That means elements one and two are hidden and we go from zero to three. That makes it pretty easy to instantly see where the filter took effect.  
 
@@ -82,7 +82,7 @@ This is inspired by time travel debuggers which is a unique branch of debugging 
 
 ### Final Word
 
-In the next video we'll discuss watch expressions which are far more elaborate than what you might expect...
+In the next video we'll discuss watch expressions which are far more elaborate than what you might expect…
 
 Specifically renderers which are some of the cooler features in JetBrains IDEs.  
 

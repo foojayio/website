@@ -49,7 +49,7 @@ Another feature is "Jump to Line" which lets us move the execution point dynamic
 
 They don't teach this stuff at school.
 
-But before we continue... Why am I the guy to teach this?
+But before we continue… Why am I the guy to teach this?
 
 I wrote a couple of books including one about debugging which covers a lot of the topics we'll discuss here. I worked in this industry for decades in many companies and worked as a consultant. That means I had to go into companies, figure out what's wrong and solve the problem, then overcharge a ridiculous fee. The debugger was my secret weapon!
 

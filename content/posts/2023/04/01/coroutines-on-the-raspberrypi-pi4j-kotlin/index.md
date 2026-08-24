@@ -26,7 +26,7 @@ And I'm here to announce the [latest release `v2.4.0`](https://github.com/Pi4J/p
 
 ## 1. Coroutines
 
-If the `pi4j { ... }` wasn't good enough for ya, and you want to use coroutines instead of weaving fat threads on your precious precious Pi, you can now use the new `pi4jAsync { ... }` block—It can do everything `pi4j { ... }` does + you can run `suspend`ed functions within.
+If the `pi4j { … }` wasn't good enough for ya, and you want to use coroutines instead of weaving fat threads on your precious precious Pi, you can now use the new `pi4jAsync { … }` block—It can do everything `pi4j { … }` does + you can run `suspend`ed functions within.
 
 I know you guys just want to use coroutines so that you can call `delay()` instead of `Thread::sleep`. And I won't disappoint you. Here's a blinking LED example with coroutines:
 
@@ -66,7 +66,7 @@ Feel free to visit the [docs](https://pi4j.com/kotlin/i2c/) on `I²C` support, a
 
 ## 3. Serial DSL
 
-I know I'm messing with "taboos" right now, but I've just made Serial look nice. You guessed it right, it's as simple as just a `serial { ... }` block
+I know I'm messing with "taboos" right now, but I've just made Serial look nice. You guessed it right, it's as simple as just a `serial { … }` block
 
 ```kotlin
 serial(“/dev/ttyS0”) {
@@ -88,6 +88,6 @@ You know the drill, feel free to visit the [docs](https://pi4j.com/kotlin/serial
 * Updated Pi4J to `v2.3.0`
 * Updated docs and examples
 
----  
+—  
 
 If you want to share feedback, or report a bug, feel free to discuss and open issues on the [Github Repo](https://github.com/Pi4J/pi4j-kotlin)!

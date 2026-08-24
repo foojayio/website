@@ -33,7 +33,7 @@ One of the most important issues when building distributed applications is that 
 
 Things are complicated further when we consider that different hardware/system architectures are likely to have different ways of representing the "same" values. Simply copying bytes from one component to another is not enough. Even in Java, where we may consider ourselves "protected" from this kind of situation, there is no requirement that two different JVM implementations or different versions from the same vendor use the same internal representation for objects.
 
-The most common solution to this problem is to define a "canonical" representation of data that is understood between processes -- even between programming languages -- and have data translated into this format before sending and then back into the receiver's own format once received. Several such "wire formats" exist, ranging from text-based standards such as YAML, JSON or XML, to binary options such as [Protobuf](https://www.infoq.com/protocolbuffers/ "Protobuf") that incorporate metadata or are completely raw.
+The most common solution to this problem is to define a "canonical" representation of data that is understood between processes – even between programming languages – and have data translated into this format before sending and then back into the receiver's own format once received. Several such "wire formats" exist, ranging from text-based standards such as YAML, JSON or XML, to binary options such as [Protobuf](https://www.infoq.com/protocolbuffers/ "Protobuf") that incorporate metadata or are completely raw.
 
 At [Chronicle Software](https://chronicle.software/?utm_source=foojay&utm_medium=article&utm_campaign=george-tcp "Chronicle Software") we have developed a number of libraries to support the building of applications that are optimised for low latency messaging, primarily in the financial services industry. We provide bespoke solution development and consultancy to clients, the majority of whom are in the financial area, from all over the world.
 
@@ -43,7 +43,7 @@ Chronicle Wire grew from the [Chronicle Queue](https://chronicle.software/queue/
 
 As software architectures increasingly follow a distributed, event-based approach, we are looking to expand the space in which Chronicle Wire can be used, to support TCP/IP interconnections between components. This article provides a basic overview of the features that will be available and some simple examples of how they can be used.
 
-We are already seeing some startling performance figures for this basic approach -- in a benchmark described in Peter Lawrey's article[Java is Very Fast, If You Don't Create Many Objects](https://chronicle.software/java-is-very-fast/?utm_source=foojay&utm_medium=article&utm_campaign=george-tcp " Java is Very Fast, If You Don’t Create Many Objects"), for example, which is built upon loopback TCP/IP networking on a single machine, we were able to pass over 4 billion events per minute.
+We are already seeing some startling performance figures for this basic approach – in a benchmark described in Peter Lawrey's article[Java is Very Fast, If You Don't Create Many Objects](https://chronicle.software/java-is-very-fast/?utm_source=foojay&utm_medium=article&utm_campaign=george-tcp " Java is Very Fast, If You Don’t Create Many Objects"), for example, which is built upon loopback TCP/IP networking on a single machine, we were able to pass over 4 billion events per minute.
 
 We benchmarked this against similar technologies used for data exchanges, specifically Jackson and BSON. In a test processing 100 byte messages, the 99.99 percentile processing per-message processing time was about 10.5 microseconds with Chronicle Wire compares to 1400 microseconds with Jaskcon/BSON. This is a significant difference.
 
@@ -68,7 +68,7 @@ public class Person extends SelfDescribingMarshallable {
 
 The full code for the class can be found in the [Chronicle Wire Github repo.](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/Person.java "Chronicle Wire Github repo.")
 
-The parent type `SelfDescribingMarshallable` contains the necessary functionality to interact with Wire -- it's loosely equivalent to the `java.io.Serializable` tagging interface used with Java serialisation, although it is much more powerful and does not contain security flaws. As the name suggests, a `SelfDescribingMarshallable` object requires no additional facilities to support marshalling and unmarshalling -- such as a schema for XML, or code generator for Protobuf or SBE. Additionally, the interface provides implementations of "core" Java data object methods `equals()`, `hashcode()` and `toString()`.
+The parent type `SelfDescribingMarshallable` contains the necessary functionality to interact with Wire – it's loosely equivalent to the `java.io.Serializable` tagging interface used with Java serialisation, although it is much more powerful and does not contain security flaws. As the name suggests, a `SelfDescribingMarshallable` object requires no additional facilities to support marshalling and unmarshalling – such as a schema for XML, or code generator for Protobuf or SBE. Additionally, the interface provides implementations of "core" Java data object methods `equals()`, `hashcode()` and `toString()`.
 
 The annotation `@NanoTime` is used by Chronicle Wire to encode the property value most efficiently as a timestamp, and `@Base85` is used to encode short strings in a space-efficient way. Both annotations also provide conversions form their compact internal representations to friendly String representations for their respective values.
 
@@ -88,7 +88,7 @@ Person p1 = new Person()
 System.out.println("p1: " + p1);
 ```
 
-We use overloaded methods and a flow style, rather than `get...()` and `set...()` methods, for accessing and mutating properties. Output from the code shows the initialised state of the `Person` object, demonstrating the `toString()` method from the `SelfDescribingMarshallable` parent type:
+We use overloaded methods and a flow style, rather than `get…()` and `set…()` methods, for accessing and mutating properties. Output from the code shows the initialised state of the `Person` object, demonstrating the `toString()` method from the `SelfDescribingMarshallable` parent type:
 
 ```
 p1: !Person {
@@ -249,7 +249,7 @@ added !Person {
 }
 ```
 
-This is potentially very powerful, as it gives us a highly flexible and efficient means of encoding events or messages, and associating them with handlers. All of the flexibility of Wire encoding is available -- text formats, or highly efficient binary formats -- as are the many different types of underlying transports with which Wire operates.
+This is potentially very powerful, as it gives us a highly flexible and efficient means of encoding events or messages, and associating them with handlers. All of the flexibility of Wire encoding is available – text formats, or highly efficient binary formats – as are the many different types of underlying transports with which Wire operates.
 
 We'll now look at how the addition of support for TCP/IP based networking communication as a Wire transport can extend the possibilities even further.
 
@@ -384,7 +384,7 @@ public class ChannelClient {
 1. The URL string contains a hostname and port number, which informs the channel creation logic that we are initiating the setup of the channel from the client side, providing the full address of the acceptor for the service.
 2. The Context is set up as an initiator/client, because of the URL string format. When creating a channel from an initiator/client context, we specify which handler to be used at the receiving end. This forms part of the requested channel specification, which is sent to the service during the setup of the channel.
 
-It is necessary for the service to have the necessary code for the handler -- for security reasons no code is sent across the network at any stage -- otherwise channel setup will fail.
+It is necessary for the service to have the necessary code for the handler – for security reasons no code is sent across the network at any stage – otherwise channel setup will fail.
 
 3. Once the channel is established, the code is the same as in the first example.
 
@@ -399,7 +399,7 @@ When both client and server applications are run the output is the same as above
 
 Earlier we saw how to use Wire's MethodReader and MethodWriter to implement a way of passing requests to request the invocation of methods outside of the current process. Now we can extend this example to demonstrate the ability, using Wire over a TCP/IP Channel, to implement basic Request/Response communication with a service, in a manner that is similar to Remote Procedure Call.
 
-The service itself is simple, providing just a single method -- the intention here is to demonstrate the steps needed to construct the service and access it.
+The service itself is simple, providing just a single method – the intention here is to demonstrate the steps needed to construct the service and access it.
 
 There are four parts to this example:
 

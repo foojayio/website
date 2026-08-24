@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-My native language is Spanish. I've been learning (and butchering) English my whole life. But at some point, I felt confident with English and wanted to learn Japanese. Big mistake. This is a totally different beast: three writing systems (Hiragana ひらがな, Katakana カタカナ and Kanji 漢字), a completely different grammar, no relation whatsoever with European languages... I needed help. And tools to learn. And one of them is Space Repetition System based apps.
+My native language is Spanish. I've been learning (and butchering) English my whole life. But at some point, I felt confident with English and wanted to learn Japanese. Big mistake. This is a totally different beast: three writing systems (Hiragana ひらがな, Katakana カタカナ and Kanji 漢字), a completely different grammar, no relation whatsoever with European languages… I needed help. And tools to learn. And one of them is Space Repetition System based apps.
 
 These apps are flashcard tools, where you have the front of a card with a question, and the answer is at the back. So you can write something like "Hola" in Spanish at the front and guess the meaning (Hello). And after flipping the card, you rate your answer: total failure, you need to study harder, it was OK, or it's too easy. Modern flashcard apps include a Spacial Repetition System, a way to retry the cards that you fail most often a, without completely leaving behind the ones you already know. It's a well-known system for language learning that helps with vocabulary memorization, although it's used for test preparation, study sessions, etc.
 
@@ -36,7 +36,7 @@ Let's start by creating our base, empty project in Spring Initializr. This is a 
 * Maven as project build system.
 * Java as programming language.
 * The latest version of Spring Boot from the 4.x.x available versions.
-* As group I'll use com.mongodb.nimongo (I'm learning Japanese, 日本語, in roman letters read as *nihongo* , so I mixed *MongoDB* and *Nihongo*. Yes, if you have to explain a joke...)
+* As group I'll use com.mongodb.nimongo (I'm learning Japanese, 日本語, in roman letters read as *nihongo* , so I mixed *MongoDB* and *Nihongo*. Yes, if you have to explain a joke…)
 * Artifact is srsapp. Name will also be srsapp.
 * So the package name will be com.mongodb.nimongo.srsapp.
 * We will use a YAML based configuration file.

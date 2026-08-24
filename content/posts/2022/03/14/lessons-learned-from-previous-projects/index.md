@@ -191,7 +191,7 @@ The more years you have behind you, the more mistakes you'll probably have made.
 * [Quality Tools: humble servants or tyrants?](https://blog.frankel.ch/quality-tools-humble-servants-or-tyrans/)
 * [Encapsulation: I don't think it means what you think it means](https://blog.frankel.ch/encapsulation-dont-think-means-think-means/)
 * [Are you guilty of overengineering?](https://blog.frankel.ch/are-you-guilty-of-overengineering/)
-* [Alternatives to DTOs](https://blog.frankel.ch/alternatives-dto/)
+* [Alternatives to DTOs](blog.frankel.ch/alternatives-dto/)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/lessons-learned-previous-projects/) on March 13^th^, 2022*
 

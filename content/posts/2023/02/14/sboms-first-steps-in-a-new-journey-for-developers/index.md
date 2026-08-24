@@ -15,7 +15,7 @@ categories:
 related_posts:
   - "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
   - "how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

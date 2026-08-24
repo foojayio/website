@@ -21,6 +21,6 @@ AI Assistant provides AI-powered features for software development based on the 
 In this session, Anton Arhipov will demonstrate the capabilities of AI Assistant in IntelliJ IDEA. You will learn how the tool helps you explore and improve existing code as well as write new code in different scenarios.
 [![Banner for IntelliJ IDEA Livestream with title "Harnassing the Power of AI Assistant in IntelliJ IDEA" featuring Anton Arhipov.](IntelliJ_IDEA_AI_Assistant_Webinar-1024x576.jpeg)](https://info.jetbrains.com/idea-webinar-december07-2023.html)
 
-**Please join us for the livestream December 7th, 3:00 pm -- 4:00 pm UTC.**
+**Please join us for the livestream December 7th, 3:00 pm – 4:00 pm UTC.**
 
 Register here: [https://jb.gg/wp3b82](https://t.co/ndb99UYkO7)

@@ -172,7 +172,7 @@ try (var scope = StructuredTaskScope.open(Joiner.<Result>allSuccessfulOrThrow())
 }
 ```
 
-These little helpers make common patterns---"race", "gather", "wait-for-all"---painless.
+These little helpers make common patterns—"race", "gather", "wait-for-all"—painless.
 
 ### **Rolling your own Joiner**
 
@@ -220,7 +220,7 @@ class MyCollectingJoiner<T> implements StructuredTaskScope.Joiner<T, Stream<T>> 
 }
 ```
 
-The interface is tiny---`onFork`, `onComplete`, and `result()`---yet powerful enough for most custom logic. To run this, we need JDK 25, and we can execute it from the CLI using the following command:
+The interface is tiny—`onFork`, `onComplete`, and `result()`—yet powerful enough for most custom logic. To run this, we need JDK 25, and we can execute it from the CLI using the following command:
 
 ```
 java --enable-preview CollectingJoiner.java
@@ -266,11 +266,11 @@ All subtasks inherit bindings for `ScopedValues` established in the parent threa
 
 ### **Observability improvements**
 
-Thread dumps now include the scope tree, so tools can show parent--child relationships directly. When I run `jcmd <pid> Thread.dump_to_file -format=json`, every scope appears with its forked threads nested below the owner. Finding the straggler that pins your virtual thread pool becomes a two-second grep instead of a half-hour investigation.
+Thread dumps now include the scope tree, so tools can show parent–child relationships directly. When I run `jcmd <pid> Thread.dump_to_file -format=json`, every scope appears with its forked threads nested below the owner. Finding the straggler that pins your virtual thread pool becomes a two-second grep instead of a half-hour investigation.
 
 ### **Some more examples to try out**
 
-#### **Example 1 -- 360° Product View (Gather--Then--Fail)**
+#### **Example 1 – 360° Product View (Gather–Then–Fail)**
 
 A classic e-commerce endpoint where a single HTTP request must aggregate product core data, real-time inventory, and a personalized price. Each sub-service is invoked in parallel inside a `StructuredTaskScope` that enforces an all-or-nothing policy: any failure or exceeding the one-second deadline cancels the whole group and surfaces an error to the caller. The scope's timeout, custom thread names, and `allSuccessfulOrThrow()` joiner encapsulate what is often a complex web of `CompletableFuture` wiring in three declarative lines.
 
@@ -325,7 +325,7 @@ public class ThreeSixtyProductView {
 }
 ```
 
-#### **Example 2 -- "Race the Mirrors" File Downloader**
+#### **Example 2 – "Race the Mirrors" File Downloader**
 
 Large binaries are hosted on several CDN mirrors. Latency varies, so we fire requests to every mirror simultaneously and use `Joiner.anySuccessfulResultOrThrow()` to stream the first successful `InputStream`, cancelling the rest. Bandwidth and connection slots are freed instantly, and users perceive the fastest possible download without manual cancellation plumbing.
 
@@ -369,7 +369,7 @@ public class MirrorDownloaderDemo {
 }
 ```
 
-#### **Example 3 -- Batched Thumbnail Generator with Nested Scopes**
+#### **Example 3 – Batched Thumbnail Generator with Nested Scopes**
 
 A media pipeline step receives a directory of images. An outer scope iterates through the files, while an inner scope, for each image, fans out three resize tasks (small, medium, and large). The inner scope fails fast; if any resize fails, that image is skipped, but the outer batch continues unaffected. Nested scopes separate per-item consistency from batch-level throughput with minimal code.
 
@@ -417,7 +417,7 @@ public class ThumbnailBatchDemo {
   }
 ```
 
-#### **Example 4 -- Real-Time Quote Service with Timed Fallback**
+#### **Example 4 – Real-Time Quote Service with Timed Fallback**
 
 A trading UI demands a quote within 30 ms. A custom joiner captures the first successful price from the primary market feed, with a scope-level timeout of 30 ms. If the feed stalls, `scope.join()` returns empty and the service instantly falls back to yesterday's cached closing price. Callers always receive a value on time, and timeout logic lives in one declarative line.
 

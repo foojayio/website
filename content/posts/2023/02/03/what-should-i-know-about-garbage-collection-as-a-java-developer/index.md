@@ -34,7 +34,7 @@ Thanks to the GC in the Java Virtual Machine, Java applications generally avoid 
 So it is clear the GC is at the center of memory management for Java applications, but other applications take different approaches:
 
 * All memory allocated at startup or start of a module: this is, for instance, used in Fortran (pre-Fortran90) and Cobol
-* Explicit allocation and freeing of memory in the heap are usually managed with a linked list: C, C++,...
+* Explicit allocation and freeing of memory in the heap are usually managed with a linked list: C, C++,…
 * Managed memory exists in various ways:
   * Compacting GC: this is the JAVA GC
   * Scoped: Rust, Erlang
@@ -47,11 +47,11 @@ So it is clear the GC is at the center of memory management for Java application
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-JohnCuthbertson-300x300.png)  
 **John Cuthbertson, Principal Engineer, C4 GC team**
 
-*I've been working on the Garbage Collectors in Java since version 1.1, initially on the G1 GC and later on the others. The most important message I want to share with developers is that the whole idea of a managed language -- like Java -- is that the complexity of such an essential and extensive implementation as a GC is actually "hidden" for you.*
+*I've been working on the Garbage Collectors in Java since version 1.1, initially on the G1 GC and later on the others. The most important message I want to share with developers is that the whole idea of a managed language – like Java – is that the complexity of such an essential and extensive implementation as a GC is actually "hidden" for you.*
 
 *Which means you don't need to care! Because a lot of developers are working hard on the runtime and the language itself, the vast user base of developers can benefit from all the work that is happening "under the hoods." The initial GC in the original JVM was very limited and not working seamlessly, but thanks to all the evolutions, the current overhead of the GC is way less noticeable.*
 
-*Please read on, but keep in mind that you can focus on your business logic, and the Java runtime will take care of the memory management -- even if you are unaware of how much the GC is working for you! On the other hand, if you want to understand better how the GC can impact your program, there is a lot to learn here.*
+*Please read on, but keep in mind that you can focus on your business logic, and the Java runtime will take care of the memory management – even if you are unaware of how much the GC is working for you! On the other hand, if you want to understand better how the GC can impact your program, there is a lot to learn here.*
 
 ### Different Stages in Garbage Collection
 
@@ -155,7 +155,7 @@ Do you just go for the default option, or do you want to use another one? The sp
 
 *On the other hand, the "worst" kind of memory for a GC is a rolling buffer (FIFO), where data lives for minutes or hours.*
 
-*This is not a programming issue but has a "business" reason -- for example, when a rolling transaction log, session buffer, or similar must be used. When an application is constantly modifying its "old" long-lived data at a high rate, then non-concurrent GCs sooner or later run into trouble and need a full GC.*
+*This is not a programming issue but has a "business" reason – for example, when a rolling transaction log, session buffer, or similar must be used. When an application is constantly modifying its "old" long-lived data at a high rate, then non-concurrent GCs sooner or later run into trouble and need a full GC.*
 
 ### Impact on the Runtime Environment
 
@@ -169,7 +169,7 @@ Azul also has other technologies on top of OpenJDK that improve the performance 
 
 *For example, projects where a 100Gb heap is used can expect pause times of over 10 seconds when the GC is cleaning up the memory. In other cases, for example, financial and gaming applications, a smaller heap of 10Gb size which stops for hundreds of milliseconds can already be a big problem. Anyhow, having a Garbage Collector that doesn't stop your application completely for an unpredictable time is essential for every project that expects consistent short response times; low latency in other words.*
 
-*Clusters are another example where we have seen problems caused by the GC. When one node with a big heap is considered dead because it is not responding during a GC cycle, a process is started to spin up a new node and redistribute the data... But suddenly, the node that is considered to be dead reappears after the GC cycle, causing a chain of undesired events in the cluster.*
+*Clusters are another example where we have seen problems caused by the GC. When one node with a big heap is considered dead because it is not responding during a GC cycle, a process is started to spin up a new node and redistribute the data… But suddenly, the node that is considered to be dead reappears after the GC cycle, causing a chain of undesired events in the cluster.*
 
 *We have seen in different projects that the introduction of Azul Zulu Prime solved many problems that low latency specialists tried to solve in the code but are now entirely handled by the C4 Azul Zulu Prime Garbage Collector, removing all the pauses their application was experiencing.*
 
@@ -193,11 +193,11 @@ On top of that, Prime has a combination of technologies and tuning options that 
 
 When the GC is concurrent, it shares the resources with application threads running concurrently. Thus the duration of the GC cycle can be impacted by the level of CPU load on the system or inside a container. A Stop-The-World GC does not face this issue since it stops all the Java threads when it runs.
 
-Thus if the system is highly saturated, a concurrent GC can take significant time and introduce allocation pauses. To reap full benefit from concurrent GC, it is advisable to keep the CPU load average below the number of cores available. Of course, the eventual GC behavior will depend on a combination of factors -- live set, allocation rate, and CPU load average.
+Thus if the system is highly saturated, a concurrent GC can take significant time and introduce allocation pauses. To reap full benefit from concurrent GC, it is advisable to keep the CPU load average below the number of cores available. Of course, the eventual GC behavior will depend on a combination of factors – live set, allocation rate, and CPU load average.
 
 ### Throughput Under Service Level Expectation
 
-[Azul Platform Prime](https://www.azul.com/products/prime) helps achieve high "useful capacity" -- the amount of load carried while maintaining reasonable service level expectations. As described before, the choice of garbage collector influences the responsiveness of the application.
+[Azul Platform Prime](https://www.azul.com/products/prime) helps achieve high "useful capacity" – the amount of load carried while maintaining reasonable service level expectations. As described before, the choice of garbage collector influences the responsiveness of the application.
 
 Stop-the-world and partially concurrent collectors break response time targets at a much smaller load than Platform Prime's garbage collector. The net result is that the cost of provisioning a cluster of nodes with response time expectations is often significantly lower on Prime.
 
@@ -218,7 +218,7 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 
 *We always need to consider the "Butterfly effect." A small change on one side can have a considerable effect somewhere else. Predicting what the effect will be of a change is always hard. That's why so many people are working on the tuning of implementations in the Java Virtual Machine and documenting all the possible changes and their impact.*
 
-## Learn More...
+## Learn More…
 
 If you were asking, "What should I know about garbage collection," this post gives an overview of the functionality of the Garbage Collector and the things a developer should know.
 

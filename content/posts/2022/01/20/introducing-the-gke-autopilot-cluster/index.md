@@ -37,7 +37,7 @@ So what's the difference between a GKE Standard cluster like the one we created 
 
 This raises a question: is it a good or a bad thing that I cannot control my nodes? Now, this is debatable, but most organizations today are not handling traffic or loads like amazon. com, google.com, or netflix.com. It may be an oversimplification, but to be honest, even if you think you have specific needs or you need a specialized cluster, more often than not, you end up wasting a lot of time and resources in securing and managing your cluster.
 
-If you have a team of SREs that can match the level of experience or knowledge of Google SRE, you can do whatever you like with your cluster. But most organizations today don't have such expertise and don't know what they are doing. That's why it is better to rely on fully managed Kubernetes services such as GKE Autopilot -- it is battle-tested and hardened based on the best practices learned from Google SRE.
+If you have a team of SREs that can match the level of experience or knowledge of Google SRE, you can do whatever you like with your cluster. But most organizations today don't have such expertise and don't know what they are doing. That's why it is better to rely on fully managed Kubernetes services such as GKE Autopilot – it is battle-tested and hardened based on the best practices learned from Google SRE.
 
 ### Conclusion
 

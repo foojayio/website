@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-> Good design's not about what medium you're working in. It's about thinking hard about what you want to do and what you have to work with before you start." -- Susan Kare [\[6\]](https://en.wikipedia.org/wiki/Susan_Kare "Susan Kare")
+> Good design's not about what medium you're working in. It's about thinking hard about what you want to do and what you have to work with before you start." – Susan Kare [\[6\]](https://en.wikipedia.org/wiki/Susan_Kare "Susan Kare")
 
 ### Introduction
 

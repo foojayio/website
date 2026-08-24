@@ -13,10 +13,10 @@ categories:
   - "LLM"
   - "Tutorials"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
-  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 frozen: false
 ---
 
@@ -91,7 +91,7 @@ The agent's system message is automatically updated with the MCP server list so 
 
 ### How `MCPTool` Works
 
-Each tool discovered from an `MCP` server becomes an `MCPTool` instance that extends BaseTool. This means it gets the full lifecycle --- `beforeAIToolExecute`/`afterAIToolExecute events`, result serialization, middleware interception — exactly like any native tool.
+Each tool discovered from an `MCP` server becomes an `MCPTool` instance that extends BaseTool. This means it gets the full lifecycle — `beforeAIToolExecute`/`afterAIToolExecute events`, result serialization, middleware interception — exactly like any native tool.
 
 The `doInvoke()` implementation strips internal keys and proxies the call to the MCP server:
 
@@ -116,7 +116,7 @@ public any function doInvoke( required struct args, AiChatRequest chatRequest ) 
 }
 ```
 
-The schema conversion is also automatic --- `generateSchema()` wraps the MCP `inputSchema` (already in OpenAI-compatible format) in the standard function wrapper. LLM providers see MCP tools identically to native tools.
+The schema conversion is also automatic — `generateSchema()` wraps the MCP `inputSchema` (already in OpenAI-compatible format) in the standard function wrapper. LLM providers see MCP tools identically to native tools.
 
 ## 🖥️ Building MCP Servers — The Server Side
 

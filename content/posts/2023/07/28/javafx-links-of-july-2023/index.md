@@ -59,7 +59,7 @@ Have fun reading and clicking, and see you end of August for one long #LinksOfTh
 
 ## Podcast, Video, Books
 
-* [Jetbrains Java Annotated Monthly -- July 2023](https://blog.jetbrains.com/idea/2023/07/java-annotated-monthly-july-2023/) lists the ["Foojay Podcast #25: Game Development with Java, JavaFX, and FXGL"](https://foojay.io/today/foojay-podcast-25/).
+* [Jetbrains Java Annotated Monthly – July 2023](https://blog.jetbrains.com/idea/2023/07/java-annotated-monthly-july-2023/) lists the ["Foojay Podcast #25: Game Development with Java, JavaFX, and FXGL"](https://foojay.io/today/foojay-podcast-25/).
 * [**Frank Delporte** discovered that an image he created for his book "Getting Started with Java on the Raspberry Pi" with a JavaFX application](https://foojay.social/@frankdelporte/110790391834861143) is used in the 2nd edition of "The Definitive Guide to Modern Java Clients with JavaFX 17" by **Stephen Chin** , **Johan Vos** , **Jeames Weaver**, and many others.
 
 ## Tutorials

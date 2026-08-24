@@ -163,7 +163,7 @@ ok       Unmutated baseline in 0.1s build + 0.2s test
 
 ## Conclusion
 
-Not many blog posts end with a Pull Request, but this one [does](https://github.com/sourcefrog/cargo-mutants/pull/501). Unfortunately, I couldn't manage to make the tests pass; fortunately, the repository maintainer helped me--a lot. The Pull Request is merged: enjoy this slight improvement.
+Not many blog posts end with a Pull Request, but this one [does](https://github.com/sourcefrog/cargo-mutants/pull/501). Unfortunately, I couldn't manage to make the tests pass; fortunately, the repository maintainer helped me–a lot. The Pull Request is merged: enjoy this slight improvement.
 
 I learned more about `cargo-mutants` and could improve the code in the process.
 

@@ -62,11 +62,11 @@ By default, the debugger fetches the first 100 items of Flux. You can configure 
 
 ## Noteworthy inspections for daily needs
 
-Our helpful inspections are always ready to highlight inconsistencies in your code -- everybody can use an extra set of eyes! We'll demonstrate two of the most helpful inspections that you can benefit from when using Reactive Streams.
+Our helpful inspections are always ready to highlight inconsistencies in your code – everybody can use an extra set of eyes! We'll demonstrate two of the most helpful inspections that you can benefit from when using Reactive Streams.
 
 ### Unused Publisher value
 
-To use an operator that produces a new Publisher instance, you must subscribe to the created Publisher via *subscribe()* or return a value from a method. If you don't do this, the created reactive stream is never used -- in reactive programming terminology, "The value is never used as the Publisher type". Here is where our first inspection comes in handy by reporting unused Publisher instances.
+To use an operator that produces a new Publisher instance, you must subscribe to the created Publisher via *subscribe()* or return a value from a method. If you don't do this, the created reactive stream is never used – in reactive programming terminology, "The value is never used as the Publisher type". Here is where our first inspection comes in handy by reporting unused Publisher instances.
 
 ![](image4.png)
 

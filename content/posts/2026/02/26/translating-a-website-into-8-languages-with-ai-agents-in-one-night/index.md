@@ -24,7 +24,7 @@ This is the story of that experiment.
 
 The first step wasn't writing code. It was writing a specification.
 
-I opened [issue #74](https://github.com/javaevolved/javaevolved.github.io/issues/74) --- "Plan architectural change for i18n" — and assigned it to a Copilot Coding Agent. The prompt was simple: propose an architectural plan for internationalizing the website, considering the existing static-site structure.
+I opened [issue #74](https://github.com/javaevolved/javaevolved.github.io/issues/74) — "Plan architectural change for i18n" — and assigned it to a Copilot Coding Agent. The prompt was simple: propose an architectural plan for internationalizing the website, considering the existing static-site structure.
 
 The agent ([PR #75](https://github.com/javaevolved/javaevolved.github.io/pull/75)) came back with a comprehensive i18n specification that addressed:
 
@@ -40,7 +40,7 @@ After iterating through review comments over 5 days (the original PR had 12 comm
 
 ## Phase 1: Building the Infrastructure
 
-With the spec in hand, I coordinated an agent locally with Coilot CLI to implement the core i18n infrastructure in [PR #83](https://github.com/javaevolved/javaevolved.github.io/pull/83) --- the generator changes that made everything locale-aware:
+With the spec in hand, I coordinated an agent locally with Coilot CLI to implement the core i18n infrastructure in [PR #83](https://github.com/javaevolved/javaevolved.github.io/pull/83) — the generator changes that made everything locale-aware:
 
 * The `generate.java` build script learned to iterate all locales from `locales.properties`
 * Template tokens like `{{sections.codeComparison}}` replaced hard-coded English strings
@@ -172,21 +172,21 @@ No code changes needed in the generator. No template modifications. The AI spec 
 
 ## The Timeline
 
-|      Time (UTC)      |                                          Event                                          |
-|----------------------|-----------------------------------------------------------------------------------------|
-| Feb 20, 20:33        | Issue #74 opened — "Plan architectural change for i18n"                               |
-| Feb 20, 20:33        | PR #75 opened — i18n specification (by Copilot Agent)                                 |
-| Feb 25, 20:56        | PR #75 merged (after 5 days of procrastination, and other projects at hand... finally!) |
-| Feb 25, 23:49        | PR #83 merged — core i18n infrastructure                                              |
-| Feb 26, 01:28        | PR #84 merged — Spanish translation + JSON→YAML migration                             |
-| Feb 26, 02:27        | PR #85 merged — Complete Brazilian Portuguese (112/112)                               |
-| Feb 26, 02:29        | PR #86 merged — CI path trigger fix                                                   |
-| Feb 26, 02:33--02:45 | PRs #87--#91 opened — fleet of 6 language agents launched                             |
-| Feb 26, 03:09--03:39 | All fleet PRs merged (Japanese, German, French, Chinese, Arabic)                        |
-| Feb 26, 03:51        | PR #94 opened — Korean (final language)                                               |
-| Feb 26, 03:59        | Issue #96 filed — Arabic RTL bug                                                      |
-| Feb 26, 04:12        | PR #97 merged — RTL fix                                                               |
-| Feb 26, 04:15        | PR #94 merged — Korean complete                                                       |
+|     Time (UTC)      |                                          Event                                          |
+|---------------------|-----------------------------------------------------------------------------------------|
+| Feb 20, 20:33       | Issue #74 opened — "Plan architectural change for i18n"                                 |
+| Feb 20, 20:33       | PR #75 opened — i18n specification (by Copilot Agent)                                   |
+| Feb 25, 20:56       | PR #75 merged (after 5 days of procrastination, and other projects at hand... finally!) |
+| Feb 25, 23:49       | PR #83 merged — core i18n infrastructure                                                |
+| Feb 26, 01:28       | PR #84 merged — Spanish translation + JSON→YAML migration                               |
+| Feb 26, 02:27       | PR #85 merged — Complete Brazilian Portuguese (112/112)                                 |
+| Feb 26, 02:29       | PR #86 merged — CI path trigger fix                                                     |
+| Feb 26, 02:33–02:45 | PRs #87–#91 opened — fleet of 6 language agents launched                                |
+| Feb 26, 03:09–03:39 | All fleet PRs merged (Japanese, German, French, Chinese, Arabic)                        |
+| Feb 26, 03:51       | PR #94 opened — Korean (final language)                                                 |
+| Feb 26, 03:59       | Issue #96 filed — Arabic RTL bug                                                        |
+| Feb 26, 04:12       | PR #97 merged — RTL fix                                                                 |
+| Feb 26, 04:15       | PR #94 merged — Korean complete                                                         |
 
 **From spec merge to 8-language site: \~7 hours.** From fleet launch to all 6 languages merged: **\~1 hour.**
 

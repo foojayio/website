@@ -34,12 +34,12 @@ You can listen and subscribe to the Foojay Podcast on:
 
 ## Guests
 
-* Jonathan Bullock ([@jonbullock](https://twitter.com/jonbullock), [@\[email protected\]](https://foojay.social/@jonbullock))
+* Jonathan Bullock ([@jonbullock](https://twitter.com/jonbullock), [@jonbullock@foojay.social](https://foojay.social/@jonbullock))
 * Nick Ebbitt ([@nickebbitt](https://twitter.com/nickebbitt))
 
 ## Podcast host
 
-* Frank Delporte ([@frankdelporte](https://twitter.com/frankdelporte), [@\[email protected\]](https://foojay.social/@frankdelporte))
+* Frank Delporte ([@frankdelporte](https://twitter.com/frankdelporte), [@frankdelporte@foojay.social](https://foojay.social/@frankdelporte))
 
 ## Content
 

@@ -64,7 +64,7 @@ To this:
 List<Integer> numbers = strings.map(Integer::parseInt).toList();
 ```
 
-That is a small change but it makes Java a bit less verbose. You might read that code and think this is a lot of code to write in order to save nine characters. You'd be right. We don't need to write that code at all...
+That is a small change but it makes Java a bit less verbose. You might read that code and think this is a lot of code to write in order to save nine characters. You'd be right. We don't need to write that code at all…
 
 ## Extension Libraries
 
@@ -206,6 +206,6 @@ However, since the JDK itself can't be changed, we won't see this impacting code
 
 ## Final Word
 
-Manifold makes it easy to change Java and experiment with new features. Developers can contribute to Project Manifold and help a broader audience see the value of their proposed change. If you ever felt like Java was missing something, Manifold is your way to add that to Java. It's much easier to change something there than in OpenJDK...
+Manifold makes it easy to change Java and experiment with new features. Developers can contribute to Project Manifold and help a broader audience see the value of their proposed change. If you ever felt like Java was missing something, Manifold is your way to add that to Java. It's much easier to change something there than in OpenJDK…
 
 I think this is one of the most important features in Manifold, not because it's my favorite. But because it democratizes Java. If you never had the chance to contribute to the Java API then now is a great opportunity. Find a pet peeve in the JDK and fix it!

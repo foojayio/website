@@ -25,7 +25,7 @@ In his book, "[Why Programs Fail — A Guide to Systemic Debugging](https://www.
 10 print “Hello World”
 ```
 
-And he got a syntax error. He was surprised since the program seemed correct and it isn't exactly complex. You can probably understand it without knowing any Basic...
+And he got a syntax error. He was surprised since the program seemed correct and it isn't exactly complex. You can probably understand it without knowing any Basic…
 
 In debugging and in programming in general, we need to break down a problem into smaller components. So he typed in:
 
@@ -73,7 +73,7 @@ Data pollution is insidious. It's remarkably hard to debug and incredibly hard t
 
 So what is a data pollution bug?
 
-This is a bug that results in bad data. That in itself isn't a big problem... The problem is that this data propagates possibly between microservices and into the database. At this point, it becomes a huge problem. The bad data is a problem, but the bug that caused it can be anywhere, even on a different server. It's like looking for a needle in a haystack. These bugs are particularly insidious since they often only occur in production and the cleanup after them could be worse than the problem itself.
+This is a bug that results in bad data. That in itself isn't a big problem… The problem is that this data propagates possibly between microservices and into the database. At this point, it becomes a huge problem. The bad data is a problem, but the bug that caused it can be anywhere, even on a different server. It's like looking for a needle in a haystack. These bugs are particularly insidious since they often only occur in production and the cleanup after them could be worse than the problem itself.
 
 A good example of this is "undefined," which pollutes databases everywhere as it propagates from bad JavaScript code and somehow wiggles its way into databases. The way these are usually debugged after the fact is by placing a stack log in the place that writes or sends the data. Use a condition there to verify that this is indeed invalid data and detect that violation.
 

@@ -108,7 +108,7 @@ More information:
 
 {{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
 
-## OmniFish - Jakarta EE experts
+## OmniFish - Jakarta EE experts {#more-61006}
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

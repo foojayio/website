@@ -32,7 +32,7 @@ Examples of Java library and application vulnerabilities in the last year includ
 
 After more than 26 years of Java, there are so many active Java applications that organizations have difficulty tracking them. With the rise of attacks against libraries, teams are being asked to track and inventory the libraries that each application uses.
 
-During the Log4Shell time of last year, many teams spent more than a month tracking down and fixing the flaw. Developers who are familiar see the solution as simple -- you upgrade a library. The problem is that it's complex to know where to look, who's responsible each time, and that you have an accurate inventory. There are some solutions that people are already using to try and address this problem:
+During the Log4Shell time of last year, many teams spent more than a month tracking down and fixing the flaw. Developers who are familiar see the solution as simple – you upgrade a library. The problem is that it's complex to know where to look, who's responsible each time, and that you have an accurate inventory. There are some solutions that people are already using to try and address this problem:
 
 * CI/CD scans often create an inventory when the application is built. This can be a basic tool like maven dependency:tree or a third-party tool.
 * Agents can be integrated to observe some behavior in JVMs that still contain the [jlinked](https://medium.com/azulsystems/using-jlink-to-build-java-runtimes-for-non-modular-applications-9568c5e70ef4) instrumentation package.
@@ -74,18 +74,18 @@ The ultimate goal is to answer three questions:
 
 1. **What do I have?** This addresses where Java is running and what code is part of that run.
 2. **Is it vulnerable?** Based on the knowledge of today (not the time of a scan), does this application contain known vulnerabilities in either the JVM or the application's libraries.
-3. **Do I actually use the vulnerable code?** Many Java applications contain unused libraries yet security scans report them at the same severity as code that loads -- they're important but focus on code that loads.
+3. **Do I actually use the vulnerable code?** Many Java applications contain unused libraries yet security scans report them at the same severity as code that loads – they're important but focus on code that loads.
 
 ## Enabling Azul Vulnerability Detection for security in the JVM
 
-Using Azul Vulnerability Detection is simple -- it's part of the JDK so there's nothing additional to install. You can turn it on locally via command flags or environment variables, or at scale through DNS.
+Using Azul Vulnerability Detection is simple – it's part of the JDK so there's nothing additional to install. You can turn it on locally via command flags or environment variables, or at scale through DNS.
 
 Flags offer direct control, DNS offers scale to engage JVMs that you cannot easily touch, such as vendor applications or existing containers.
 ![How Azul Vulnerability Detection works to provide security in the JVM.](https://www.azul.com/wp-content/uploads/avd-how-it-works-cropped-1024x706.png)
 
 Each Azul JVM contains a low-overhead worker that communicates JVM-level information to a local connection manager (the Forwarder). The Forwarder helps encrypt all information and offloads cloud-connection overhead and firewall tuning from the JVMs, allowing them to operate at peak speed.
 
-Insight from your JVMs is gathered in your dedicated cloud service for a small UI, steered toward a REST API -- teams do not need another dashboard so the focus is on integration.
+Insight from your JVMs is gathered in your dedicated cloud service for a small UI, steered toward a REST API – teams do not need another dashboard so the focus is on integration.
 
 This data flows in one direction to the Azul cloud service, and the performance impact is under 1% decreasing the longer the application runs. Performance is measured by the same [open community test suites](https://www.azul.com/blog/benchmarking-renaissance-on-openjdk-and-azul-platform-prime/) that measure JVM performance to unite speed and security.
 

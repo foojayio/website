@@ -26,7 +26,7 @@ I started using GlassFish while GlassFish was in Oracle's hands as a reference i
 
 {{< img src="https://omnifish.ee/wp-content/uploads/2023/09/GlassFish-embedded.png" class="aligncenter size-full is-resized" width="264" height="135" style="width:264px;height:135px" >}}
 
-## Overview of the APILoader Project
+## Overview of the APILoader Project {#more-102900}
 
 My project is APILoader. APILoader is, I believe (quite possibly wrongly) the seed for the next generation of software performance testing tools. I won't say a lot about APILoader since it hasn't been released yet and there is IP to protect. But I can say a bit about how it uses GlassFish Embedded.
 > For an individual, I intend that APILoader be deployed using GlassFish Embedded. This obviates the server administration, as the server is created and destroyed by the tool on each tool session.

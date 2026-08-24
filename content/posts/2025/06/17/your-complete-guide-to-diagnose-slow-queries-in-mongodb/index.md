@@ -367,10 +367,10 @@ And we'll see something like this output I abbreviated:
 
 We're looking for these fields:
 
-|     Field      |                                                                                                                                     What it tells you                                                                                                                                     |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `millis`       | The time the operation took to execute, in milliseconds. This is our go-to number for, "Was it fast or slow?" Keep in mind it includes everything: query parsing, planning, execution, and response serialization.                                                                        |
-| `docsExamined` | The number of documents MongoDB had to read from disk or memory to complete the operation. This is key for spotting collection scans or poor index use. The lower this is, the better it should match or be close to the number of results returned.                                      |
+|     Field      |                                                                                                                                    What it tells you                                                                                                                                    |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `millis`       | The time the operation took to execute, in milliseconds. This is our go-to number for, "Was it fast or slow?" Keep in mind it includes everything: query parsing, planning, execution, and response serialization.                                                                      |
+| `docsExamined` | The number of documents MongoDB had to read from disk or memory to complete the operation. This is key for spotting collection scans or poor index use. The lower this is, the better it should match or be close to the number of results returned.                                    |
 | `keysExamined` | The number of index keys MongoDB had to scan. This helps us understand how selective your query is. A high number here (with a low docsExamined) often means the query used an index efficiently. A value of 0 means no index was used—i.e., we're likely doing a full collection scan. |
 
 That's step one. You've got the x-ray. Next, let's grab the scalpel: We'll dissect how MongoDB is actually executing these queries using `explain()`.
@@ -483,10 +483,10 @@ Tip: When using `.explain().find()`, the result is a document (not a cursor), so
 
 The `explain()` method accepts a verbosity mode that controls how much detail you get:
 
-|            Mode            |                                   What it shows                                    |
-|----------------------------|------------------------------------------------------------------------------------|
+|            Mode            |                                  What it shows                                   |
+|----------------------------|----------------------------------------------------------------------------------|
 | `"queryPlanner"` (default) | The query shape and chosen plan—no execution                                     |
-| `"executionStats"`         | Runs the query and shows real metrics for the winning plan                         |
+| `"executionStats"`         | Runs the query and shows real metrics for the winning plan                       |
 | `"allPlansExecution"`      | Shows execution stats for all candidate plans—great for debugging plan selection |
 
 Important behavior notes:
@@ -601,8 +601,8 @@ Here are some common stage types you might see in an `explain()` plan:
 
 |    Stage     |                   What it does                    |
 |--------------|---------------------------------------------------|
-| `COLLSCAN`   | Scans all documents—slow, no index              |
-| `IXSCAN`     | Scans an index—fast                             |
+| `COLLSCAN`   | Scans all documents—slow, no index                |
+| `IXSCAN`     | Scans an index—fast                               |
 | `FETCH`      | Fetches full documents after matching keys        |
 | `SORT`       | Sorts results in-memory (unless covered by index) |
 | `PROJECTION` | Trims returned fields                             |
@@ -768,7 +768,7 @@ Now that we can observe slow queries as they happen, let's look at why they happ
 
 ## 4. Identifying inefficient query and write patterns in large data sets
 
-Some queries feel fast... until they don't. Performance issues in MongoDB often creep in as data grows, silently at first, until something starts to lag.
+Some queries feel fast… until they don't. Performance issues in MongoDB often creep in as data grows, silently at first, until something starts to lag.
 
 This section is our early-warning radar: We're not fixing slow queries yet. We're spotting them before they hurt us. We'll look at key patterns that don't scale, and how to recognize trouble using both the shell and the Atlas UI.
 
@@ -852,7 +852,7 @@ MongoDB Atlas tracks index usage in the Indexes tab for each collection.
 
 ### Watch for document growth and update pain
 
-MongoDB documents can be large, and that's often a good thing. But...
+MongoDB documents can be large, and that's often a good thing. But…
 
 * Updates to large or nested documents may rewrite the entire document.
 * Frequently growing arrays cause fragmentation.
@@ -921,12 +921,12 @@ We might not need sharding yet, but MongoDB will start telling us when vertical 
 
 Check for:
 
-|                   Symptom                   |                       What it suggests                       |
-|---------------------------------------------|--------------------------------------------------------------|
+|                   Symptom                   |                      What it suggests                      |
+|---------------------------------------------|------------------------------------------------------------|
 | Queries slow down as data grows             | Indexes can't keep up—look at `executionTimeMillis` trends |
-| Working set no longer fits in memory        | High disk I/O, cache evictions in Atlas                      |
-| Insert-heavy workloads bottlenecking writes | CPU/memory pressure on primaries                             |
-| Collection is approaching storage limits    | Time to scale out                                            |
+| Working set no longer fits in memory        | High disk I/O, cache evictions in Atlas                    |
+| Insert-heavy workloads bottlenecking writes | CPU/memory pressure on primaries                           |
+| Collection is approaching storage limits    | Time to scale out                                          |
 
 If we see regular performance degradation due to growth, especially on a single hot collection, it's time to evaluate sharding as a next step.
 

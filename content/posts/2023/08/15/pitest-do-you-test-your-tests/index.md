@@ -29,7 +29,7 @@ If the test fails, the mutation is killed, if it still passes it lives. So in su
 
 In other words, Pitest helps you assess the **quality** of your test suite.
 
-Mutations can take a lot of forms, relational operators (+, -, \*, /) being switched around, increments becoming decrements, calls to void methods being removed, ...​
+Mutations can take a lot of forms, relational operators (+, -, \*, /) being switched around, increments becoming decrements, calls to void methods being removed, …​
 
 A full list of possible mutators can be found on the [Pitest Mutator Overview Page](https://pitest.org/quickstart/mutators/)
 

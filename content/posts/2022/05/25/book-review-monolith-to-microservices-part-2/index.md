@@ -114,6 +114,6 @@ Don't go for a big bang rewrite, as Martin Fowler stated, if you do a bing-bang 
 >
 > #### *If you do a bing-bang rewrite, the only thing you're guaranteed of is a big bang.*
 >
-> #### *--- Martin Fowler*
+> #### *— Martin Fowler*
 >
 That's for today, I will write about the next chapter in the following article.

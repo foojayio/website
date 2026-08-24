@@ -14,7 +14,7 @@ related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "peter-lawrey-latency-performance"
   - "automatically-creating-microservices-architecture-diagrams"
-  - "idempotent-spring-boot-starter"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

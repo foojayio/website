@@ -28,7 +28,7 @@ FEPCOS-J arises in the frame of the FEPCOS-Project [\[1\]](#references), which a
 
 FEPCOS-J implements a domain-specific Java language extension whose semantic domain is based on the FEPCOS-Model [\[2\]](#references), which extends the composite design pattern [\[3\]](#references) to include networking aspects.
 
-According to the model, a composed networked system is a whole that communicates with its parts via a network. The parts are either basic systems -- the fundamental building blocks -- or other composed networked systems.
+According to the model, a composed networked system is a whole that communicates with its parts via a network. The parts are either basic systems – the fundamental building blocks – or other composed networked systems.
 
 My [last post](https://foojay.io/today/fuchs-2023-fepcos-j-01/) explains the exemplary realization of a basic system called *adder*. I have shown you how to:
 

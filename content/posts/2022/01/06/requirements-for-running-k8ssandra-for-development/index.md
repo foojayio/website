@@ -83,7 +83,7 @@ max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))
 
 The catch when you run several Cassandra nodes on the same machine is that they will all see the same total available RAM but won't be aware that other Cassandra nodes could be running as well. When allocating 8GB RAM to Docker, each Cassandra node will compute a 2GB heap. With a 3 nodes cluster, it's already 6GB of RAM used, not accounting for the additional off heap memory that can be used by each JVM. That doesn't leave much RAM for the other components K8ssandra includes, such as Grafana, Prometheus and Stargate.
 
-The takeaway here: **leaving heap settings blank is not a good idea for a dev environment** in particular, where several Cassandra instances will be collocated on the same host machine. (By default, K8ssandra does not allow multiple Cassandra nodes on the same Kubernetes worker node. For this post, we're using kind to have multiple worker nodes run on the same OS instance -- or virtual machine in the case of Docker Desktop).
+The takeaway here: **leaving heap settings blank is not a good idea for a dev environment** in particular, where several Cassandra instances will be collocated on the same host machine. (By default, K8ssandra does not allow multiple Cassandra nodes on the same Kubernetes worker node. For this post, we're using kind to have multiple worker nodes run on the same OS instance – or virtual machine in the case of Docker Desktop).
 
 The chosen heap size will directly impact the throughput you can expect to achieve (although it's not the only limiting factor). A small heap will involve more garbage collections, which will generate more stop the world pauses and directly impact throughput and latency. It also increases the odds of running out of memory if the workload is too heavy, as objects cannot end their lifecycle fast enough for the available heap space.
 
@@ -126,7 +126,7 @@ During our tests, we observed that 256MB was a good initial value to have stable
 
 Our setup for running benchmarks was the following:
 
-* Apple MacBook Pro 2019 -- i7 (6 cores) -- 32GB RAM -- 512GB SSD
+* Apple MacBook Pro 2019 – i7 (6 cores) – 32GB RAM – 512GB SSD
 * Docker desktop 3.1.0
 * [Kind](https://kind.sigs.k8s.io/) 0.7.0
 * Kubernetes 1.17.11
@@ -136,7 +136,7 @@ Note that we've used a fairly powerful environment as our tests ran on a 2019 Ap
 
 We used the [Kind deployment guidelines](https://docs.k8ssandra.io/tasks/connect/ingress/kind-deployment/) found in the [K8ssandra documentation](https://docs.k8ssandra.io/) to start a k8s cluster with 3 worker nodes.
 
-Docker Desktop allows to tune its allocated resources by clicking on its icon in the status bar, then going to "Preferences...":
+Docker Desktop allows to tune its allocated resources by clicking on its icon in the status bar, then going to "Preferences…":
 ![Docker Dekstop Mac Preferences](https://k8ssandra.io/wp-content/uploads/2021/04/docker-preferences.png)
 
 Then click on "Resources" in the left menu, which will allow you to set the number of cores and the amount of RAM Docker can use overall:

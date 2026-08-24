@@ -29,7 +29,7 @@ By leveraging the proven performance of [Azul Platform Prime](https://www.azul.c
 
 For more details on the benchmark methodology and results, visit the [JetBrains Blog](http://blog.jetbrains.com/kotlin/2025/05/kotlin-and-azul-collaboration-for-enhanced-runtime-performance/).
 
-**Azul Platform Prime -- Engineered for Speed, Scale and Stability**
+**Azul Platform Prime – Engineered for Speed, Scale and Stability**
 
 Azul Platform Prime is available for x86 and ARM64 processors running Linux and is rigorously tested for enterprise workloads and compliant with the Java SE version standards using the industry standard Java Compatibility Kit (the JCK or TCK) test suite. It is based on the same "HotSpot" JVM and JDK code base used by the OpenJDK project, with specific enhancements relating to JIT compilation, garbage collection and startup/warmup behavior.
 
@@ -45,8 +45,8 @@ For Kotlin development teams that are looking to enhance the performance of thei
 
 **Additional Resources:**
 
-* Azul Platform Prime -- [High-Performance Java Platform Comparison Matrix](https://www.azul.com/products/prime/high-performance-java-platform/)
-* Azul Platform Prime -- [Video Overview](https://youtu.be/fcLreZecSqE)
+* Azul Platform Prime – [High-Performance Java Platform Comparison Matrix](https://www.azul.com/products/prime/high-performance-java-platform/)
+* Azul Platform Prime – [Video Overview](https://youtu.be/fcLreZecSqE)
 
 **About JetBrains**
 

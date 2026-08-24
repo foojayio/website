@@ -28,7 +28,7 @@ This is a summary of the Links Of The Week as published on [jfx-central.com](htt
 * **Kevin Rushforth** of Oracle announced on the mailinglist "As a reminder, JavaFX 20 is now in Rampdown Phase Two (RDP2). Now that we are in RDP2, the goal is to stabilize what is there". So we will soon get a new version of JavaFX being released!
 * [**Chad Preisler** wants to thank all JavaFX maintainers](https://twitter.com/cpreisler/status/1620893592435978240): "The people that maintain and enhance #JavaFX are great. They fixed an issue with Mac back in December, and today when a dev got a M1 all we needed to do was update the JavaFX dependencies. Everything runs great now."
 * [**Gluon** announced public access to its JavaFX 17 builds](https://twitter.com/GluonHQ/status/1623680620315529216), including 17.0.6 and subsequent versions.
-  * With an important note regarding version compatibility: "**As the development of JavaFX 20 picks up momentum, it's important to note a key change -- JavaFX 20 will require Java 17 or later.**"
+  * With an important note regarding version compatibility: "**As the development of JavaFX 20 picks up momentum, it's important to note a key change – JavaFX 20 will require Java 17 or later.**"
   * [**Johan Vos** of Gluon also shared](https://twitter.com/johanvos/status/1623958106387410945): "Gluon leverages GraalVM in Gluon Substrate, allowing JavaFX apps to be converted into native client apps for desktop, mobile and embedded."
   * [They announced improved sound support](https://techhub.social/@gluonhq/109902223934756469) for iOS in Gluon Attach.
   * And thank [**Bruno Salmon**](https://twitter.com/salmon_bruno) for a great contribution by adding the iOSAudioService.

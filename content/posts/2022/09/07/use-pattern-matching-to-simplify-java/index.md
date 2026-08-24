@@ -48,7 +48,7 @@ Pattern matching allows us to test for a specific pattern on a character sequenc
 
 ## The instanceof Operator in JDK 18
 
-Let's look at how we use the *instanceof* operator. Because Java is object-oriented, we have polymorphism: we can view an object as any of the types that it is -- its exact type, any of the superclasses, and any of the interfaces it implements.
+Let's look at how we use the *instanceof* operator. Because Java is object-oriented, we have polymorphism: we can view an object as any of the types that it is – its exact type, any of the superclasses, and any of the interfaces it implements.
 
 Often, we are faced with a situation where we're provided with a reference, but we are unsure of its specific type. We can test the reference to see if it is a given type using the *instanceof*operator. Here's a simple example:
 
@@ -75,13 +75,13 @@ Pattern matching for *instanceof* uses what is called flow scoping. If you look 
 
 Taking the example above, the scope of *s* is only valid inside the true branch of this *if* statement because that's the only place it will have definite assignment. There are two things to bear in mind here.
 
-**1 --** If you invert the test like this, the variable *s* will have scope until the end of the block containing the if statement:
+**1 –** If you invert the test like this, the variable *s* will have scope until the end of the block containing the if statement:
 
 ```java
 if (!(o instanceof String s))  return;
 ```
 
-**2 --** This allows the reuse of the same variable name, like this:
+**2 –** This allows the reuse of the same variable name, like this:
 
 ```java
 if (o instanceof Float n) {

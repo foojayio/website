@@ -38,8 +38,8 @@ This means that there's no longer a requirement to install tools like Node.js, n
 We've added full support for ::part() selector for a simpler and more flexible approach to styling UI components. All of your CSS can be regular, non-Shadow-DOM CSS.
 
 * No more class vs. theme: use class names for everything.
-* Styling is now entirely based on regular, native CSS -- no Vaadin-specific things to learn.
-* You have the freedom to structure your stylesheets how you like -- while still a good practice, there is no need to split them per component.
+* Styling is now entirely based on regular, native CSS – no Vaadin-specific things to learn.
+* You have the freedom to structure your stylesheets how you like – while still a good practice, there is no need to split them per component.
 
 Check [this post by Rolf Smeds](https://vaadin.com/blog/simplified-theming-in-vaadin-24 "this post by Rolf Smeds") explaining the details.
 

@@ -15,7 +15,7 @@ related_posts:
   - "getting-started-with-rife2-java-web-framework-v1-0-0"
   - "web-app-startup-in-3ms-with-rife2-and-graalvm"
   - "introducing-bld-a-new-pure-java-build-system"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -31,13 +31,13 @@ The blog is more complicated than it looks; many behind-the-scenes features have
 
 ![](erik.thauvin.net_blog_admin_editor_typepostid9739-1-638x510.png)
 
-It supports numerous APIs, like [MetaWeblog](https://en.wikipedia.org/wiki/MetaWeblog), [WebSub](https://en.wikipedia.org/wiki/WebSub), and [Pushover](https://pushover.net/)... It can automatically cross-post to social networks like [Mastodon](https://mastodon.social/@ethauvin), [BlueSky](https://bsky.app/profile/erik.thauvin.net), [X](https://twitter.com/ethauvin), [Facebook](https://www.facebook.com/ethauvin), and [LinkedIn](https://www.linkedin.com/in/ethauvin/)...
+It supports numerous APIs, like [MetaWeblog](https://en.wikipedia.org/wiki/MetaWeblog), [WebSub](https://en.wikipedia.org/wiki/WebSub), and [Pushover](https://pushover.net/)… It can automatically cross-post to social networks like [Mastodon](https://mastodon.social/@ethauvin), [BlueSky](https://bsky.app/profile/erik.thauvin.net), [X](https://twitter.com/ethauvin), [Facebook](https://www.facebook.com/ethauvin), and [LinkedIn](https://www.linkedin.com/in/ethauvin/)…
 
 With one click, I can easily share a bookmark across various social networks of my choosing, pull and post my [Flickr](https://www.flickr.com/photos/kire/) photos, or grab metadata from YouTube.
 
 ![](Screenshot-from-2024-02-19-16-52-29-700x239.png)
 
-There are webhooks from [GitHub](https://github.com/ethauvin), [IFTTT](https://ifttt.com/), and [trakt](https://trakt.tv/users/ethauvin/)... For years, it also managed my popular [Linkblog](https://erik.thauvin.net/blog/posts/1267/rip-linkblog)... and so much more.
+There are webhooks from [GitHub](https://github.com/ethauvin), [IFTTT](https://ifttt.com/), and [trakt](https://trakt.tv/users/ethauvin/)… For years, it also managed my popular [Linkblog](https://erik.thauvin.net/blog/posts/1267/rip-linkblog)… and so much more.
 
 This was the first time in over 20 years I had the opportunity to remove deprecated APIs and seriously clean everything up. My OCD kicked in, and I really went to town. Suddenly, this mammoth of a codebase started to become lean and mean, as I had envisioned. In the process, as Geert had recommended, I created the [RIFE2 Template Renderers](https://github.com/rife2/rife2-template-renderers) library to meet some of my more generic needs.
 
@@ -47,7 +47,7 @@ Now, I'm not going to lie, I had to battle RIFE2 more than a few times. Geert wa
 
 It didn't take long to go live, and I was off to the races.
 
-There are a few things I learned along the way...
+There are a few things I learned along the way…
 
 * I had been using a lot of Kotlin for years and very little Java, yet I decided to rework the blog entirely in Java as it was originally written. I enjoyed it a lot, just like reconnecting with a friend I hadn't talked to in years. So familiar. I have a whole new appreciation for Java.
 * I didn't know as much as I thought about full-stack frameworks. In my long career, I've mostly been the guy who came in to fix things up, at least on the Java side.

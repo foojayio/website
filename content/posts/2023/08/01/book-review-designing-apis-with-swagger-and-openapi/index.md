@@ -45,7 +45,7 @@ Today is a book review.
 * Part 2: Design first
   9. Designing a web application
   10. Creating an API design using OpenAPI
-  11. Building a change workflow around API design--first
+  11. Building a change workflow around API design–first
   12. Implementing frontend code and reacting to changes
   13. Building a backend with Node.js and Swagger Codegen
   14. Integrating and releasing the web application

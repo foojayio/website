@@ -48,10 +48,10 @@ BinaryOperator<A> combiner();
 BiConsumer<A, Downstream<? super R>> finisher();
 ```
 
-`Initializer` -- A function that produces an instance of the internal intermediate state.  
-`Integrator` -- Integrates a new element into the stream produced by the Gatherer.  
-`Combiner` -- A function that accepts two intermediate states and merges them into one. Supporting parallel execution.  
-`Finisher` -- A function that allows performing a final action at the end of input elements.
+`Initializer` – A function that produces an instance of the internal intermediate state.  
+`Integrator` – Integrates a new element into the stream produced by the Gatherer.  
+`Combiner` – A function that accepts two intermediate states and merges them into one. Supporting parallel execution.  
+`Finisher` – A function that allows performing a final action at the end of input elements.
 
 Among these four elements, only the Integrator is mandatory because it has the role of integrating a new element into the stream produced by the Gatherer. The other elements may or may not be required, depending on the operation you intend to model, making them optional.
 

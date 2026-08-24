@@ -53,7 +53,7 @@ Following are the key components of the Chronicle FIX failover solution:
 
 **Chronicle Queue:** A persisted low-latency message queue that operates with microsecond latency. It is designed for writing and reading large amounts of data in real-time for latency-critical applications.As a result, it is suitable for rapid Interprocess Communication (IPC) without adversely affecting system performance. In addition, it can replicate messages from a source queue to multiple sink queues on remote hosts using TCP/IP.Its role in the failover is to log the state of a session between an initiator and a primary acceptor and replicate this state to the secondary acceptor's queue, enabling the secondary to take over the message exchange with the initiator if the primary fails.
 
-**Chronicle Network:**A Java library that -- similar to the java.net package -- supports the transport layer protocols TCP and UDP; however, it is over 60% faster than the standard Java library. It is designed to have the low latency and high throughput necessary for low latency trading systems.The library also provides mechanisms necessary for automatic failover, such as detecting connection failures and switching clients from a failed server to a backup server.The switchover offers several options as well as configurable parameters. In addition, the library's modular structure makes it possible to plug in customised switchover policies.
+**Chronicle Network:**A Java library that – similar to the java.net package – supports the transport layer protocols TCP and UDP; however, it is over 60% faster than the standard Java library. It is designed to have the low latency and high throughput necessary for low latency trading systems.The library also provides mechanisms necessary for automatic failover, such as detecting connection failures and switching clients from a failed server to a backup server.The switchover offers several options as well as configurable parameters. In addition, the library's modular structure makes it possible to plug in customised switchover policies.
 
 #### Mechanisms
 
@@ -90,4 +90,4 @@ Additionally, the modular design of the components allows for customising the co
 [Chronicle FIX](https://chronicle.software/fix-engine/)  
 [Chronicle Queue Enterprise](https://chronicle.software/queue-enterprise/ "Chronicle Queue Enterprise")  
 [Chronicle Network](https://github.com/OpenHFT/Chronicle-Network "Chronicle Network")  
-[Chronicle Network Layer -- Chronicle Software](https://chronicle.software/chronicle-network-layer/ "Chronicle Network Layer – Chronicle Software")
+[Chronicle Network Layer – Chronicle Software](https://chronicle.software/chronicle-network-layer/ "Chronicle Network Layer – Chronicle Software")

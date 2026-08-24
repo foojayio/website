@@ -1,5 +1,5 @@
 ---
-title: "Kover : Code Coverage plugin for Kotlin"
+title: "Kover: Code Coverage plugin for Kotlin"
 date: "2022-02-28T21:34:12+00:00"
 lastmod: "2023-04-13T07:15:14+00:00"
 description: "Kover is a code coverage tool for Kotlin. It's still in incubator phase but I took it for a spin and it is already very useful as part of local or CI workflows! In this article I go through the setup and some of my favourite goodies of the tool."

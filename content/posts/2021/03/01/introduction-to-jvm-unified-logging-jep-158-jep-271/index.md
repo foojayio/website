@@ -72,7 +72,7 @@ The JEP describes how the logging configuration works in the command line:
 
 This command-line option is the main entry point to unified logging. It allows configuring loggers that used to require multiple options into a single argument.
 
-Moreover, it's now possible to declare multiple log configurations simply by adding additional `-Xlog...​` options. Their output must however be unique in these logs, otherwise the last option declaration will override the previous log configuration.
+Moreover, it's now possible to declare multiple log configurations simply by adding additional `-Xlog…​` options. Their output must however be unique in these logs, otherwise the last option declaration will override the previous log configuration.
 
 Also, if you already heard of `jcmd`, unified logging JEP enabled log configurable at runtime. It's the second main entry point to unified logging. *If you didn't hear about `jcmd` you really should check it out. It's the future of the serviceability / diagnostic command on the JDK.*
 > **Controlling at runtime**
@@ -180,7 +180,7 @@ From the help and the JEP above here's what to retain:
 
 Tags
 :
-    When a log message is shown, it should be associated with a set of tags in the JVM which identify by names: `os`, `gc`, `modules`...​
+    When a log message is shown, it should be associated with a set of tags in the JVM which identify by names: `os`, `gc`, `modules`…​
 
     * We can apply different settings for individual tags.
     * The character `*` denotes *wildcard* tag match. Not using `*` tells the logger to log only messages that match exactly the specified tags.

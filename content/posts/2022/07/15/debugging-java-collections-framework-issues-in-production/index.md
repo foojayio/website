@@ -115,7 +115,7 @@ Debugging Java Collections is harder when we aren't prepared. The nice thing is 
 
 It applies to all kinds of collections, it also works well for collections and stream operations.
 
-The biggest fault by a far, is code that's overly concise. I'm at fault here too... E.g. this code returns directly from the method:
+The biggest fault by a far, is code that's overly concise. I'm at fault here too… E.g. this code returns directly from the method:
 
 ```java
 return vets.findAllByOrderById(Pageable.ofSize(5).withPage(page)).stream().map(vet -> {

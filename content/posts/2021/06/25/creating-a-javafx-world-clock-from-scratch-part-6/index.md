@@ -37,7 +37,7 @@ If you want to jump right into the code just head over to <https://github.com/ca
 * Java 16 - An OpenJDK with JavaFX (bundled with JavaFX modules)
   * [Azul Zulu](https://www.azul.com/downloads/?package=jdk-fx "Azul Zulu") with JavaFX
   * [Bellsoft Liberica](https://bell-sw.com/pages/downloads/#/java-16-current "Bellsoft Liberica") with JavaFX (full version)
-  * JavaFX 16 -- (optional) <https://openjfx.io/openjfx-docs/#install-javafx>
+  * JavaFX 16 – (optional) <https://openjfx.io/openjfx-docs/#install-javafx>
 * [Maven 3.6.3](http://maven.apache.org/ "Maven 3.6.3") or greater
 * (optional) [SDKMan](https://sdkman.io "SDKMan")
 * Register to [OpenWeatherMap.org](https://openweathermap.org/ "OpenWeatherMap.org") to get your free API key.
@@ -194,6 +194,6 @@ While I've only touched the surface (so to speak) on the daily forecast APIs fro
 
 ### Are we there yet?
 
-Well, it all depends... This is just a fun side project. There's always enhancements and bug fixes, but as a cool project and useful app, this serves my needs at the moment. At some point I would like to put it out on an App store or Market place.
+Well, it all depends… This is just a fun side project. There's always enhancements and bug fixes, but as a cool project and useful app, this serves my needs at the moment. At some point I would like to put it out on an App store or Market place.
 
 Happy coding and any comments are always welcome!

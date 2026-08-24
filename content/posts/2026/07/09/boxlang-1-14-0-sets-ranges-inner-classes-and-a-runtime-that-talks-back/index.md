@@ -1,5 +1,5 @@
 ---
-title: "BoxLang 1.14.0 : Sets, Ranges, Inner Classes, and a Runtime That Talks Back"
+title: "BoxLang 1.14.0: Sets, Ranges, Inner Classes, and a Runtime That Talks Back"
 date: "2026-07-09T18:02:59+00:00"
 lastmod: "2026-07-10T13:46:44+00:00"
 description: "BoxLang has never stood still, but 1.14.0 is something different. This is the release where the language stops filling gaps and starts defining what a…"

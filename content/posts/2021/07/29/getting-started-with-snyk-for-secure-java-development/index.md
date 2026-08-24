@@ -21,10 +21,10 @@ This article will explain how to begin with Snyk for [secure Java development](h
 
 If you're new to Snyk, it's important to know that we offer a variety of developer-focused products and tools. Some of these tools, like our CLI and some IDE integration, support multiple products. However, we can distinguish four different products within Snyk:
 
-1. [Snyk Open Source](https://snyk.io/product/open-source-security-management/) -- Securing your open source dependencies
-2. [Snyk Container](https://snyk.io/product/container-vulnerability-management/) -- Securing your container images
-3. [Snyk Infrastructure as Code (Snyk Iac)](https://snyk.io/product/infrastructure-as-code-security/) -- Securing your infrastructure as code
-4. [Snyk Code](https://snyk.io/product/snyk-code/) -- Securing your custom code. In this post, we'll focus only on Java.
+1. [Snyk Open Source](https://snyk.io/product/open-source-security-management/) – Securing your open source dependencies
+2. [Snyk Container](https://snyk.io/product/container-vulnerability-management/) – Securing your container images
+3. [Snyk Infrastructure as Code (Snyk Iac)](https://snyk.io/product/infrastructure-as-code-security/) – Securing your infrastructure as code
+4. [Snyk Code](https://snyk.io/product/snyk-code/) – Securing your custom code. In this post, we'll focus only on Java.
 
 To get started with these tools, you'll need to sign up for a free Snyk account. For solo developers, our [Free plan](https://www.snyk.io/plans) is usually more than enough for your needs, so keep your credit card in your wallet.
 

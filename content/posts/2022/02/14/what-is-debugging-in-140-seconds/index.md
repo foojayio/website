@@ -3,6 +3,7 @@ title: "What is Debugging in 140 Seconds"
 date: "2022-02-14T12:50:58+00:00"
 lastmod: "2022-02-14T12:50:59+00:00"
 description: "I’m launching a new Twitter video series that will focus on teaching the concepts of debugging (and other concepts) in small video bites"
+canonical: "https://talktotheduck.dev/introducing-140-second-ducklings-what-is-debugging"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
@@ -56,7 +57,7 @@ When we pick a debugging tool, it isn't that different from typical experimental
 
 The first challenge we deal with when pulling out a debugger is reproducing the issue. How do we repeat the experiment?
 
-I will go into more details in the next episode of 140 second ducklings...
+I will go into more details in the next episode of 140 second ducklings…
 
 ## Debugging vs. Unit Tests
 

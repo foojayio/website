@@ -36,7 +36,7 @@ Here, we can expand dependencies to show their transitive dependencies, or colla
 
 ## Open the Dependency Analyzer
 
-We can open the Dependency Analyzer from the Maven or Gradle tool window by clicking the **Analyze Dependencies...** button.
+We can open the Dependency Analyzer from the Maven or Gradle tool window by clicking the **Analyze Dependencies…** button.
 
 This will open the Dependency Analyzer showing the Resolved Dependencies on the left and their Usages on the right.
 
@@ -179,7 +179,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 
 * [(video) JetBrains - IntelliJ IDEA: Viewing Dependencies](https://www.youtube.com/watch?v=1wnsc8hYM4c)
 * [(video) JetBrains - IntelliJ IDEA: Managing Dependencies](https://www.youtube.com/watch?v=nqb9yAecM9Y)
-* [(video) JetBrains -- IntelliJ IDEA Ultimate: Package Checker](https://www.youtube.com/watch?v=RWtN4WNQsX4)
+* [(video) JetBrains – IntelliJ IDEA Ultimate: Package Checker](https://www.youtube.com/watch?v=RWtN4WNQsX4)
 * [(docs) JetBrains - Maven Dependency Analyzer](https://www.jetbrains.com/help/idea/work-with-maven-dependencies.html#dependency_analyzer)
 * [(docs) JetBrains - Gradle Dependency Analyzer](https://www.jetbrains.com/help/idea/work-with-gradle-dependency-diagram.html#dependency_analyzer)
 * [(docs) JetBrains - View Maven dependencies as a diagram](https://www.jetbrains.com/help/idea/work-with-maven-dependencies.html#maven_dependency_diagram)

@@ -60,7 +60,7 @@ You can listen and subscribe to the Foojay Podcast on:
 
 04:42 Motivation to organise the JUG  
 
-07:31 Playing trumpet as a side effect...  
+07:31 Playing trumpet as a side effect…  
 
 - Hornplayer: Maarten Mulders: <https://ti.to/dublin-java-user-group/feb-2023-java-champion-maarten-mulders>   
 
@@ -74,7 +74,7 @@ You can listen and subscribe to the Foojay Podcast on:
 
 16:06 Impact of Covid on the Dublin Java community  
 
-23:01 Getting back to normal gradually...  
+23:01 Getting back to normal gradually…  
 
 24:39 Plans for 2024  
 

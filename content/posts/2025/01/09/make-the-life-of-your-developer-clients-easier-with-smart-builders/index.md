@@ -13,7 +13,7 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-ways-to-contribute-to-openjdk"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -739,7 +739,7 @@ Our Builder implementation doesn't restrict the order of method calls. The devel
 
 First, let's break down the `NotificationBuilder` in multiple steps. Each step will be responsible for setting a specific group of attributes. Here is our plan:
 
-* Let's ensure that `title`, `message`, and `recipient` are set in this specific order; Sometimes it's important to follow a predefined order during an object instantiation. That's not our case by the way. However, for learning purposes, let's do it on this way. Once these mandatory attributes are set, let's allow developer be able to build the `Notification` object with the default values for the optional attributes, or...
+* Let's ensure that `title`, `message`, and `recipient` are set in this specific order; Sometimes it's important to follow a predefined order during an object instantiation. That's not our case by the way. However, for learning purposes, let's do it on this way. Once these mandatory attributes are set, let's allow developer be able to build the `Notification` object with the default values for the optional attributes, or…
 * Let's allow developers to set `highPriority`, `type` and `attachment` in any order. As these attributes are optional we must allow developers be able to build the `Notification` object any time at this point;
 
 Let's see them:

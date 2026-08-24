@@ -58,7 +58,7 @@ Here is the overview of the JavaFX LinksOfTheMonth of April 2025. You can find t
 
 * [Creating Modern Desktop Apps with JavaFX and Spring Boot](https://bell-sw.com/blog/creating-modern-desktop-apps-with-javafx-and-spring-boot/) by **Catherine Edelveis** : "*In this article, we will explore why JavaFX and Spring Boot combo is a perfect match for modern desktop development. Or, if you are eager to start coding, you can jump right to the practice section where I show how to integrate these two technologies!*"
 * From **Codez Up** : [Building Scalable Desktop Applications with JavaFX: A Step-by-Step Guide](https://codezup.com/building-scalable-desktop-applications-with-javafx-guide/).
-* [**Sahil A.** shared on LinkedIn](https://www.linkedin.com/pulse/how-i-built-javafx-tic-tac-toe-game-from-scratch-simple-sahil-ali-pbnsf/): "*How I Built a JavaFX Tic Tac Toe Game from Scratch -- A Simple Yet Powerful Learning Experience.*"
+* [**Sahil A.** shared on LinkedIn](https://www.linkedin.com/pulse/how-i-built-javafx-tic-tac-toe-game-from-scratch-simple-sahil-ali-pbnsf/): "*How I Built a JavaFX Tic Tac Toe Game from Scratch – A Simple Yet Powerful Learning Experience.*"
 
 ## Miscellaneous
 

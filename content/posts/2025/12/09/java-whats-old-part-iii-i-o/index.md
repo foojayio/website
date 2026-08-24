@@ -11,8 +11,8 @@ categories:
 related_posts:
   - "java-whats-old-part-ii-utils"
   - "java-whats-old-part-i-collections"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
-  - "idempotent-spring-boot-starter"
+  - "offline-crypto-address-validation-in-java"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 frozen: false
 ---
 

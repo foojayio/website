@@ -79,9 +79,9 @@ Having fast distributed joins is an important consideration when it comes to sel
 
 *Follow the* [*DataStax Tech Blog*](https://datastax.medium.com/)*for more developer stories. Check out our* [*YouTube channel*](https://www.youtube.com/channel/UCqA6zOSMpQ55vvguq4Y0jAg)*for tutorials and here for* [*DataStax Developers on Twitter*](https://twitter.com/DataStaxDevs)*for the latest news about our developer community.*{#00ed}
 
-1. [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome) --- a serverless, cloud-native NoSQL database
-2. [Apache Cassandra](https://cassandra.apache.org/) --- open source NoSQL database
+1. [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome) — a serverless, cloud-native NoSQL database
+2. [Apache Cassandra](https://cassandra.apache.org/) — open source NoSQL database
 3. [Astra DB / Cassandra Fundamentals](https://www.datastax.com/learn/cassandra-fundamentals)
 4. [Astra DB / Cassandra Data Modeling](https://www.datastax.com/learn/data-modeling-by-example)
-5. [Google Cloud Spanner](https://cloud.google.com/spanner) --- a fully managed, cloud-native relational database
+5. [Google Cloud Spanner](https://cloud.google.com/spanner) — a fully managed, cloud-native relational database
 6. [Optimizing Schema Design for Cloud Spanner](https://cloud.google.com/spanner/docs/whitepapers/optimizing-schema-design)

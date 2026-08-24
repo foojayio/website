@@ -1,5 +1,5 @@
 ---
-title: "Getting started with OpenAPI Generators : tips and tricks"
+title: "Getting started with OpenAPI Generators: tips and tricks"
 date: "2023-03-28T15:50:14+00:00"
 lastmod: "2023-04-13T07:13:46+00:00"
 description: "Tips and tricks on how to get productive with creating OpenAPI generators. How to run and debug, create your own easily and more!"

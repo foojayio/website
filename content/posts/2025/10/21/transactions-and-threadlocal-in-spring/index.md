@@ -75,7 +75,7 @@ Its Javadoc is pretty descriptive:
 >
 > Synchronization is for example used to always return the same resources within a JTA transaction, for example, a JDBC Connection or a Hibernate Session for any given DataSource or SessionFactory, respectively.
 >
---- [Class TransactionSynchronizationManager Javadoc](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/support/TransactionSynchronizationManager.html)  
+— [Class TransactionSynchronizationManager Javadoc](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/support/TransactionSynchronizationManager.html)  
 In this regard, `TransactionSynchronizationManager` acts as a global variable.
 
 Let's have a look at a simplified sequence diagram.  

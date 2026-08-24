@@ -34,7 +34,7 @@ There are several parts to Project Leyden, and JEP 483 is the first part to be d
 
 ### JEP 485: Stream gatherers
 
-[JEP 485, Stream Gatherers](https://openjdk.org/jeps/485), is a small but valuable change that will benefit developers. JDK 8 introduced the Streams API, which -- combined with Lambda expressions -- provided a more functional programming style in Java.
+[JEP 485, Stream Gatherers](https://openjdk.org/jeps/485), is a small but valuable change that will benefit developers. JDK 8 introduced the Streams API, which – combined with Lambda expressions – provided a more functional programming style in Java.
 
 A stream consists of three parts: a source, zero or more intermediate operations, and a terminal operation. Developers have complete flexibility over what the terminal operation does by specifying arbitrary functionality implementing the Collector interface.
 

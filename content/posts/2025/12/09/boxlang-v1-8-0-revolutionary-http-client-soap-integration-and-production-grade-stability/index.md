@@ -1,5 +1,5 @@
 ---
-title: "BoxLang v1.8.0 : Revolutionary HTTP Client, SOAP Integration, and Production-Grade Stability"
+title: "BoxLang v1.8.0: Revolutionary HTTP Client, SOAP Integration, and Production-Grade Stability"
 date: "2025-12-09T11:04:07+00:00"
 lastmod: "2025-12-10T10:24:43+00:00"
 description: "The BoxLang team is excited to announce BoxLang 1.8.0, a massive release that revolutionizes HTTP capabilities, introduces comprehensive SOAP/WSDL…"

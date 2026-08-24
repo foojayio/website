@@ -30,10 +30,10 @@ OpenRewrite allows us to do major refactorings on our source code using (prewrit
 
 ## Use cases
 
-* fixes: autoformatting, unused imports, applying new conventions using a recipe, ...
-* migrations: log4j ⇒ slf4j, java 8 ⇒ 11 ⇒ 17, JUnit 4 ⇒ 5, ...
-* static analysis fixes: resolve common issues reported by SAST tools, code cleanup, ...
-* utility: generate a CycloneDx bill of materials, update GitHub actions, ...
+* fixes: autoformatting, unused imports, applying new conventions using a recipe, …
+* migrations: log4j ⇒ slf4j, java 8 ⇒ 11 ⇒ 17, JUnit 4 ⇒ 5, …
+* static analysis fixes: resolve common issues reported by SAST tools, code cleanup, …
+* utility: generate a CycloneDx bill of materials, update GitHub actions, …
 
 ## How does OpenRewrite work?
 
@@ -191,7 +191,7 @@ And we would love to finally start using `spring-boot-starter-test`. Now we woul
   `org.openrewrite.java.test.junit5.UpdateTestAnnotation`
 * @Junit 4's  
   ` @Rule ExpectedException => JUnit 5's``Assertions.assertThrows()``:`org.openrewrite.java.testing.junit5.ExpectedExceptionToAssertThrows\`
-* ...
+* …
 
 And that is the premise behind OpenRewrite, large migrations in small steps.
 
@@ -220,7 +220,7 @@ When we execute this recipe we will get
 [WARNING]         org.openrewrite.java.testing.junit5.ExpectedExceptionToAssertThrows
 ```
 
-If we then run a `git diff` to see the changes that were made we will notice that our `pom.xml` has been upgraded, our imports are now from the `jupiter` hierarchy, `@Ignore` ⇒ `@Disabled`, `Assert.*` ⇒ `Assertions.*`, ...
+If we then run a `git diff` to see the changes that were made we will notice that our `pom.xml` has been upgraded, our imports are now from the `jupiter` hierarchy, `@Ignore` ⇒ `@Disabled`, `Assert.*` ⇒ `Assertions.*`, …
 
 *note:* there are multiple recipes that can be used from this. For example, there is also `org.openrewrite.java.spring.boot2.SpringBoot2JUnit4to5Migration` which is a superset of the JUnit 4 to 5 \& Mockito 1 to 3 recipes.
 
@@ -283,7 +283,7 @@ And we can see a lot of interesting changes:
   * concatenated text has been replaced with a text block
   * updated String formatting
 * JUnit 4 ⇒ JUnit 5
-* ...
+* …
 
 We got all this thanks to the recipe list of [UpgradeSpringBoot_3_1](https://docs.openrewrite.org/recipes/java/spring/boot3/upgradespringboot_3_1)
 
@@ -337,7 +337,7 @@ And we will notice that a lot of complaints such as:
 * Strings not using .equals
 * unnecessary String#toString()
 * no double variable declaration
-* ...
+* …
 
 are resolved for us
 
@@ -400,7 +400,7 @@ Which will scan for items that may potentially cause issues such as:
 * hardcoded IP addresses
 * remote method invocation
 * unhandled term signals
-* ...
+* …
 
 #### Secrets
 
@@ -432,7 +432,7 @@ Which makes it a lot easier for us to find these kind of issues.
 
 You might be asked to provide a list of your (transitive) project dependencies, this can easily be achieved using the `cyclonedx` goal.
 
-#### etc...
+#### etc…
 
 A last one I wanted to point out which showcases a way in which OpenRewrite can help with the readability of your codebase is the [formatsql](https://docs.openrewrite.org/recipes/sql/formatsql) one
 

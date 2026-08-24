@@ -27,7 +27,7 @@ The application itself doesn't even exist yet.
 
 So, here's the prompt that gets you from really zero to OpenTelemetry:
 
-**Create a minimal Spring Boot app from scratch in this directory with two endpoints: GET /hello returning a greeting, and GET /work that sleeps 50--200ms and returns a JSON payload. Use Maven and Java 21.**   
+**Create a minimal Spring Boot app from scratch in this directory with two endpoints: GET /hello returning a greeting, and GET /work that sleeps 50–200ms and returns a JSON payload. Use Maven and Java 21.**   
 **Then instrument it with OpenTelemetry to send traces, metrics, and logs to Dash0 using the otel-instrumentation skill.**   
 
 **Configuration:**   
@@ -48,7 +48,7 @@ A few things in there are deliberate:
 
 * **"using the otel-instrumentation skill"** — naming it explicitly nudges the agent to load it. Skills are supposed to auto-trigger on description match, but being explicit removes ambiguity, especially in tools where skill triggering is less aggressive than in Claude Code.
 * **Concrete config values** — agents do much better with copy-pasteable specifics than "set up Dash0." You'd otherwise spend two turns answering "what's your endpoint?"
-* **gRPC protocol callout**--- port 4317 needs OTEL_EXPORTER_OTLP_PROTOCOL=grpc; without it, the agent might wire up the default HTTP protocol and silently fail. Worth pinning.
+* **gRPC protocol callout**— port 4317 needs OTEL_EXPORTER_OTLP_PROTOCOL=grpc; without it, the agent might wire up the default HTTP protocol and silently fail. Worth pinning.
 * **run.sh + gitignore** — keeps your token out of source control. The agent will do this if asked; less reliably if not.
 * **"show me the commands to run"** — forces it to surface the verification path, not just dump files.
 
@@ -64,7 +64,7 @@ Then run it (also fine to do in your AI prompt):
 for i in {1..50}; do curl -s localhost:8080/hello; curl -s localhost:8080/work; done
 ```
 
-Then in Dash0 go to the **Trace Explorer** — filter by `service.name = dash0-java-demo`, you should see `GET /hello` and `GET /work` spans within 10--30 seconds.
+Then in Dash0 go to the **Trace Explorer** — filter by `service.name = dash0-java-demo`, you should see `GET /hello` and `GET /work` spans within 10–30 seconds.
 ![](dash0-foojay-2-1024x545.png)
 
 Next, go to **Integrations → Java → Install all dashboards** if you haven't yet, then open **JVM Metrics** for the heap/GC/thread charts.

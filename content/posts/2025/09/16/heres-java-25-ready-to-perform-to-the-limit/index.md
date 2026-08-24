@@ -184,7 +184,7 @@ If we look at the properties of stable values, we see that they fill a gap betwe
 | `StableValue`   | \[0, 1\]         | Constructor or static initializer | Yes, after update     | Yes, by winner          |
 | non-final field | \[0, ∞\]         | Anywhere                          | No                    | Yes                     |
 
-Usage of stable values is certainly not limited to loggers--we can also use a stable value to store the `OrderController` component itself, and related components:
+Usage of stable values is certainly not limited to loggers–we can also use a stable value to store the `OrderController` component itself, and related components:
 
 ```java
 class GuitarStore {
@@ -455,7 +455,7 @@ Java 25 introduces three new features that are part of the Java Flight Recorder:
 * JFR Cooperative Sampling
 * JFR Method Timing \& Tracing
 
-> The Java Flight Recorder is an event recorder built into the JVM. It captures information about the JVM itself -- and the applications running in it -- not unlike a data flight recorder (or 'black box') in a commercial aircraft.
+> The Java Flight Recorder is an event recorder built into the JVM. It captures information about the JVM itself – and the applications running in it – not unlike a data flight recorder (or 'black box') in a commercial aircraft.
 
 #### JEP 509: JFR CPU-Time Profiling (Experimental)
 

@@ -24,8 +24,6 @@ related_posts:
   - "trash-pandas-love-enterprise-java-garbage-code"
   - "foojay-podcast-95"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-58-how-java-developers-can-secure-their-code/"
 ---
 
 Three years after Log4Shell caused a significant security issue, we still struggle with insecure dependencies and injection problems.

@@ -163,7 +163,7 @@ As well as being handy syntactic sugar, being able to eliminate the first `$unwi
 
 This significant increase in the number of documents and the amount of memory required to process them had a performance impact on each subsequent stage in the pipeline. By eliminating the first `$unwind` stage, we were able to avoid incurring this cost.
 
-The second `$unwind` stage in the original pipeline was being used to filter out profiles who had no associated devices of the target type. Where this was the case, the second `$lookup`---from the mapping data to the devices collection—would have resulted in an empty deviceData array being created:
+The second `$unwind` stage in the original pipeline was being used to filter out profiles who had no associated devices of the target type. Where this was the case, the second `$lookup`—from the mapping data to the devices collection—would have resulted in an empty deviceData array being created:
 
 ```
 {

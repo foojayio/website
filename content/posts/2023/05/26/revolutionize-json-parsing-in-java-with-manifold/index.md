@@ -24,7 +24,7 @@ Although Java offers more robustness, it tends to involve more work and boilerpl
 
 Thanks to the Manifold project, Java now has the potential to outshine JavaScript in parsing and processing JSON files.
 
-Manifold is a revolutionary set of language extensions for Java that completely changes the way we handle JSON (and much more...).
+Manifold is a revolutionary set of language extensions for Java that completely changes the way we handle JSON (and much more…).
 
 {{< youtube AoBnGZ7q6rk >}}
 

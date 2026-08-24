@@ -39,17 +39,17 @@ Every request to a coding assistant is a stack of buckets. The shape varies by t
 
 |             Bucket             | Typical share |                        Notes                        |
 |--------------------------------|---------------|-----------------------------------------------------|
-| System prompt / instructions   | 5--15%        | Boilerplate that's been copy-pasted for months      |
-| Tool / function schemas        | 10--40%       | Re-sent on **every** turn                           |
-| Retrieved files \& code chunks | 20--60%       | The biggest lever, almost always                    |
-| Conversation history           | 10--30%       | Grows linearly until you compact it                 |
-| Model output                   | 5--20%        | Verbose prose is expensive to produce *and* to read |
+| System prompt / instructions   | 5–15%         | Boilerplate that's been copy-pasted for months      |
+| Tool / function schemas        | 10–40%        | Re-sent on **every** turn                           |
+| Retrieved files \& code chunks | 20–60%        | The biggest lever, almost always                    |
+| Conversation history           | 10–30%        | Grows linearly until you compact it                 |
+| Model output                   | 5–20%         | Verbose prose is expensive to produce *and* to read |
 
 A few things to notice:
 
-* **Tool schemas dominate more than people expect.** Five connected MCP servers can easily contribute 5,000--10,000 tokens to every request before you've typed a word. The model doesn't have to *use* the tool — the schema ships either way.
+* **Tool schemas dominate more than people expect.** Five connected MCP servers can easily contribute 5,000–10,000 tokens to every request before you've typed a word. The model doesn't have to *use* the tool — the schema ships either way.
 * **Conversation history grows without bound.** A 30-turn chat is paying for the first 29 turns on every new question, plus your fresh one.
-* **Output is small in volume but expensive per token.** On most direct APIs, output tokens cost three to five times input tokens. A reply that says "Sure! Let me explain what I'm about to do..." before doing it is pure tax.
+* **Output is small in volume but expensive per token.** On most direct APIs, output tokens cost three to five times input tokens. A reply that says "Sure! Let me explain what I'm about to do…" before doing it is pure tax.
 
 > **Rule of thumb:** profile your own traffic before optimizing. The bucket dominating *your* sessions is rarely the one your gut says.
 
@@ -100,12 +100,12 @@ The classic anti-pattern is innocent-looking and brutal is to have dynamic value
 
 ### C. Tool \& MCP hygiene — every schema is a tax
 
-Each connected tool ships its full JSON schema with every request. A typical MCP server with 8--15 tools costs **400--2,500 tokens per turn**. Five servers connected? You may be paying 5,000--10,000 tokens per turn for tool definitions the model never invokes.
+Each connected tool ships its full JSON schema with every request. A typical MCP server with 8–15 tools costs **400–2,500 tokens per turn**. Five servers connected? You may be paying 5,000–10,000 tokens per turn for tool definitions the model never invokes.
 
 Treat MCP servers like browser extensions: useful, but only the ones you actually need today.
 
 ```jsonc
-// .vscode/mcp.json --- keep this short
+// .vscode/mcp.json — keep this short
 {
   "servers": {
     "filesystem": { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem"] }
@@ -120,13 +120,13 @@ The same discipline applies to **the tools you build yourself** . A tool that re
 
 ### D. Custom instructions \& skills — codify it once
 
-Anything you find yourself re-typing in chats belongs in an instructions file. The exact filename varies --- `.github/copilot-instructions.md`, `CLAUDE.md`, `AGENTS.md`, Cursor Rules — but the principle is identical: write your team conventions once, commit them, and let every chat in the repo inherit them.
+Anything you find yourself re-typing in chats belongs in an instructions file. The exact filename varies — `.github/copilot-instructions.md`, `CLAUDE.md`, `AGENTS.md`, Cursor Rules — but the principle is identical: write your team conventions once, commit them, and let every chat in the repo inherit them.
 
 A small example is worth more than a long one:
 
 ![A 6-line copilot-instructions.md is enough to change every session in the repo](04-instructions-snippet-700x358.png)
 
-Six lines. Now no chat in this repo will propose Jest, no chat will dump a whole-file rewrite when a diff would do, and no chat will preface its answer with "Sure! Let me explain what I'm about to do..."
+Six lines. Now no chat in this repo will propose Jest, no chat will dump a whole-file rewrite when a diff would do, and no chat will preface its answer with "Sure! Let me explain what I'm about to do…"
 
 For stack-specific rules, use **path-scoped** instructions. In Copilot:
 
@@ -208,7 +208,7 @@ For secrets, fixtures, and vendored deps, use **content exclusions** at the org/
 The other half of repo hygiene is **summary comments at the top of each module**:
 
 ```java
-// TemplateEngine --- central renderer. Use render(id, data) for new emails.
+// TemplateEngine — central renderer. Use render(id, data) for new emails.
 // renderLegacy(id, data) is deprecated and only used by OrderConfirmationService.
 // Templates registered: welcome, order_confirmation_v2.
 ```
@@ -222,7 +222,7 @@ Three lines, \~50 tokens. Now "what does the template engine do?" can be answere
 You can't see Copilot's token counts. You don't need to. Use the proxy you already have:
 
 | Reply latency | ≈ Input tokens |
-|---------------|----------------|---------------------------------|
+|---------------|----------------|-------------------------------|
 | \< 5 s        | 20 s           | Near limit — start a new chat |
 
 When the same question takes three times longer in your fourth chat than in a fresh one, you've just watched your context bloat in real time. The fix is "new chat with a summary," not "wait it out."
@@ -279,11 +279,11 @@ After it runs, `git log --oneline` reads like a changelog: one commit per task, 
 
 Most assistants don't compact aggressively on their own. **You** have to drive it.
 
-When a chat hits 60--80% of the context window (you'll know — replies start to crawl), stop and ask:
+When a chat hits 60–80% of the context window (you'll know — replies start to crawl), stop and ask:
 > *Summarize what we've discussed: the goal, files we've touched, decisions made, open questions, and the next step. Keep it under 300 words and use bullet points.*
 
 Save the output to `plan.md`. Open a brand new chat. Attach it:
-> *Continue from `#file:plan.md`. The next step is...*
+> *Continue from `#file:plan.md`. The next step is…*
 
 The new chat's first request is dramatically smaller than the old chat's last one. The model picks up the thread without missing a beat. Roughly: **a 4 KB summary keeps 95% of the signal at 3% of the cost.**
 
@@ -303,7 +303,7 @@ This is the one that changes how features get built. Three short, focused chats 
 * **Implementer** — *cheap* model, agent mode, fresh chat. Sees only `plan.md`. Runs a Ralph loop on it: pick first unchecked task, implement, test, check the box, commit, repeat.
 * **Reviewer** — *expensive* model, fresh chat. Sees only `plan.md` and the diff. Marks each acceptance criterion PASS or FAIL, lists bugs, smells, out-of-scope edits. Ends with `VERDICT: APPROVE` or `VERDICT: REQUEST CHANGES`.
 
-Three chats, \~5--8 premium requests total for an end-to-end feature. Compare with one mega-chat using the most expensive model the whole way: easily 30+ requests at 10× the multiplier.
+Three chats, \~5–8 premium requests total for an end-to-end feature. Compare with one mega-chat using the most expensive model the whole way: easily 30+ requests at 10× the multiplier.
 
 The crucial discipline: the **handover artifact** (`plan.md`, the diff, the review notes) is the *only* thing that crosses the boundary. Never chat history. That's how you keep each agent's context small, focused, and cheap.
 

@@ -34,11 +34,11 @@ You can listen and subscribe to the Foojay Podcast on:
 
 ## Guests
 
-* Ted Neward ([@\[email protected\]](https://hachyderm.io/@tedneward), [@tedneward](https://twitter.com/tedneward))
+* Ted Neward ([@tedneward@hachyderm.io](https://hachyderm.io/@tedneward), [@tedneward](https://twitter.com/tedneward))
 
 ## Podcast host
 
-* Frank Delporte ([@\[email protected\]](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
+* Frank Delporte ([@frankdelporte@foojay.social](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
 
 ## Content
 

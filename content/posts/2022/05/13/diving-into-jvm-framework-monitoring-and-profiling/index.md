@@ -100,7 +100,7 @@ Http status code 200 in case the element was successfully stored and found insid
 
 {{< img src="Image_4-654x510.png" class="size-medium" alt="Image 4.: When element is not available response is 400, Bad request" width="654" height="510" caption="Figure 4.: When an element is not available, the https response code is 400, Bad request" >}}
 
-Everything is going according to the plan so far. But is that really enough to state the application has a good throughput and all is good? Of course not, even when tests have passed and the application is able to take some load, we still do not know enough.What about ....(explain what else)
+Everything is going according to the plan so far. But is that really enough to state the application has a good throughput and all is good? Of course not, even when tests have passed and the application is able to take some load, we still do not know enough.What about ….(explain what else)
 
 ## Dive into Monitoring and Profiling
 
@@ -153,7 +153,7 @@ Monitoring gives us a warning and profiling can lead us to the root cause, which
 
 We have also shown that some frameworks have initiated quite a big number of threads by the default configuration, which is the case for Quarkus.
 
-Spring Boot is taking a more conservative approach. This may actually have a strong impact on the throughput as long as the requests are not dealing with any IO operations. Otherwise ....
+Spring Boot is taking a more conservative approach. This may actually have a strong impact on the throughput as long as the requests are not dealing with any IO operations. Otherwise ….
 
 The article has also shown that neither Java nor Kotlin versions of the popular frameworks (Quarkus and Spring Boot) are resistant against improper memory management.
 

@@ -79,13 +79,13 @@ An Infrastructure as Code (IaC) solution like Terraform could still exist for a 
 
 {{< img src="monzo-microservices-529x510.jpg" class="size-medium" width="529" height="510" >}}
 
-That's why infrastructure costs are rising in our industry, where traditionally prices should trend downwards... When the DevOps team runs into a problem they throw resources at it. This isn't the right thing to do in all cases.
+That's why infrastructure costs are rising in our industry, where traditionally prices should trend downwards… When the DevOps team runs into a problem they throw resources at it. This isn't the right thing to do in all cases.
 
 ## Other Modules
 
 We can use Standard Java Platform Modules (Jigsaw) to build a Spring Boot application. This has the advantage of breaking down the application and a standard Java syntax. But it might be awkward sometimes. This would probably work best when working with external libraries or splitting some work into common tools.
 
-Another option is the [module system in maven](https://maven.apache.org/guides/mini/guide-multiple-modules.html). This system lets us break our build into multiple separate projects. This is a very convenient process that saves us from the hassle of enormous projects. Each project is self-contained and easy to work with. It can use its own build process. Then as we build the main project everything becomes a single monolith. In a way, this is what many of us really want...
+Another option is the [module system in maven](https://maven.apache.org/guides/mini/guide-multiple-modules.html). This system lets us break our build into multiple separate projects. This is a very convenient process that saves us from the hassle of enormous projects. Each project is self-contained and easy to work with. It can use its own build process. Then as we build the main project everything becomes a single monolith. In a way, this is what many of us really want…
 
 ## What about Scale?
 
@@ -125,6 +125,6 @@ One point of consensus in the panel was that we should always start with a monol
 
 The complexities related to individual pieces of software make more sense as individual modules. Not as individual applications. The difference in resource usage and financial waste is tremendous. In this time of cutting down costs, why would people still choose to build microservices instead of a dynamic, modular monolith?
 
-I think we have a lot to learn from both camps. Dogmatism is problematic as is a religious attachment to one approach. Microservices did wonders for Amazon. To be fair their cloud costs are covered...
+I think we have a lot to learn from both camps. Dogmatism is problematic as is a religious attachment to one approach. Microservices did wonders for Amazon. To be fair their cloud costs are covered…
 
 On the other hand, the internet was built on monoliths. Most of them aren't modular in any way. Both have techniques that apply universally. I think the right choice is to build a modular monolith with proper authentication infrastructure that we can leverage in the future if we want to switch to microservices.

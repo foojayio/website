@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-## 🌍 Celebrating 30 Years of Java \& 10 Years of JCON -- with the Global Java Community
+## 🌍 Celebrating 30 Years of Java \& 10 Years of JCON – with the Global Java Community
 
 Welcome to JCON EUROPE 2025, the international Java conference where the heart of the Java community beats loud and proud! Over 60 countries will be represented as Java developers from around the globe come together in Cologne to learn, connect, and celebrate three decades of Java innovation and a decade of JCON magic.
 
@@ -47,6 +47,6 @@ As proud members of the Java ecosystem, Foojay collaborators of all shapes and s
 
 ![](53726446409_97af25b8e2_k-700x385.jpg)
 
-🚀 JCON EUROPE 2025 -- Where Community and Code Converge  
+🚀 JCON EUROPE 2025 – Where Community and Code Converge  
 
 Join the celebration. Be part of the future. And bring your Java-loving self to the big screen.

@@ -32,7 +32,7 @@ In a movie streaming service, for example, if a movie's synopsis is stored in a 
 
 But a semantic a semantic search system can still connect the two ideas and bring up the right movie. It understands the *meaning* behind your query — not just the exact words.
 
-Behind the scenes, this works thanks to **vector similarity search**. It turns text (or images, or audio) into vectors — lists of numbers ---store them in a vector database and then finds the ones closest to your query.
+Behind the scenes, this works thanks to **vector similarity search**. It turns text (or images, or audio) into vectors — lists of numbers —store them in a vector database and then finds the ones closest to your query.
 
 Today, **we're gonna build a vector similarity search app that lets users find movies based on the *meaning*of their synopsis — not just exact keyword matches**. So that even if they don't know the title, they can still get the right movie based on a generic description of the synopsis.
 
@@ -89,7 +89,7 @@ Our application will be built using Spring Boot with Redis OM Spring. **It will 
 
 ### 0. GitHub Repository
 
-**The full application can be found on GitHub: [https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies)**
+**The full application can be found on GitHub: \[** [https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/\](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/src](https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/%5D(https://github.com/redis/redis-om-spring/tree/main/demos/roms-vss-movies/src))
 
 ### 1. Add the required dependencies
 

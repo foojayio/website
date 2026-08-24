@@ -89,7 +89,7 @@ Note that in the case of the continuous recording it's necessary to dump the rec
 
 The only thing to do is to set the recording parameter `dumponexit=true` (on each recording). The record will be stored in the configured `filename` otherwise JFR will create a file similar to this the working directory of the process `hotspot-pid-6-id-1-2020_05_03_12_54_14.jfr`
 
-The JVM source code suggests that JFR has the notion of [emergency JFR dump](https://github.com/openjdk/jdk11u/blob/e81745c5c5e8194791047728a73b74a5262f1634/src/hotspot/share/jfr/recorder/repository/jfrEmergencyDump.cpp#L250-L289), but the mechanism is different as it seems those are dumped in the working directory of the process, which may not be writable in a container. I don't think it's currently possible to change the location. But from what I've seen SOE or OOM are dumped fine via `dumponexit=true` and `filename=...​`.OutOfMemory ⇒ `hs_oom_pid<pid>.jfr`StackOverflowError ⇒ `hs_soe_pid<pid>.jfr`Other error ⇒ `hs_err_pid<pid>.jfr`
+The JVM source code suggests that JFR has the notion of [emergency JFR dump](https://github.com/openjdk/jdk11u/blob/e81745c5c5e8194791047728a73b74a5262f1634/src/hotspot/share/jfr/recorder/repository/jfrEmergencyDump.cpp#L250-L289), but the mechanism is different as it seems those are dumped in the working directory of the process, which may not be writable in a container. I don't think it's currently possible to change the location. But from what I've seen SOE or OOM are dumped fine via `dumponexit=true` and `filename=…​`.OutOfMemory ⇒ `hs_oom_pid<pid>.jfr`StackOverflowError ⇒ `hs_soe_pid<pid>.jfr`Other error ⇒ `hs_err_pid<pid>.jfr`
 
 ### Putting It All Together
 

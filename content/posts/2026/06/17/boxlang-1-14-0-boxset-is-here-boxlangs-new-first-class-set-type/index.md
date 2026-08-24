@@ -1,5 +1,5 @@
 ---
-title: "BoxLang 1.14.0 : BoxSet is Here, BoxLang's New First-Class Set Type"
+title: "BoxLang 1.14.0: BoxSet is Here, BoxLang's New First-Class Set Type"
 date: "2026-06-17T10:36:28+00:00"
 lastmod: "2026-06-17T13:09:37+00:00"
 description: "BoxLang 1.14.0 ships BoxSet: a native Set type with literal syntax, union/intersection operators, functional pipeline, and deep Java interop."

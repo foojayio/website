@@ -19,7 +19,7 @@ frozen: false
 
 Parameterized testing in JUnit 5 is a potent technique for executing the same test logic with various inputs. While you can use a variety of data structures, such as custom classes, arrays, or collections, Java records offer a compelling advantage in readability, type safety, and expressiveness.
 
-Let's examine how to leverage Java records for parameterized tests through a concrete example -- testing an expression evaluator.
+Let's examine how to leverage Java records for parameterized tests through a concrete example – testing an expression evaluator.
 
 ### The Expression Evaluator Scenario
 

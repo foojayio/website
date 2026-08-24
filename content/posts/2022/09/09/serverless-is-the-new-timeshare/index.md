@@ -37,13 +37,13 @@ Him:I'll tell you after you sign up to work for us.
 
 Me: I'll sign an NDA.
 
-Him: No. The idea is too good. Those NDAs aren't worth anything. You sign up and then...
+Him: No. The idea is too good. Those NDAs aren't worth anything. You sign up and then…
 
 Somehow I was able to resist the lure of working for that company. A year or so later they obviously didn't launch, but my consulting company was doing well. The friend called me again. This time they needed help with the product so I went there with my consulting hat on and helped them.
 
-Their idea was a chat app built into the website so visitors to the site can chat to one another. A competitor already launched, and I was consulting to a few other companies with the same idea. They pivoted to focus on e-commerce related chats. But I digress...
+Their idea was a chat app built into the website so visitors to the site can chat to one another. A competitor already launched, and I was consulting to a few other companies with the same idea. They pivoted to focus on e-commerce related chats. But I digress…
 
-Their system performed terribly. Slow as molasses with one user. Apparently the CEO insisted they need to support 1M users on the first day (as he told me). They conveyed that to Oracle who said they would need a cluster of three servers to support that volume. Then they talked to an Object Oriented DB vendor who promised they can handle 1M users with one machine. So they went all in on the object-oriented DB. When I expressed shock at this, they claimed their data is very "object-oriented" because each user can have multiple items... Ugh.
+Their system performed terribly. Slow as molasses with one user. Apparently the CEO insisted they need to support 1M users on the first day (as he told me). They conveyed that to Oracle who said they would need a cluster of three servers to support that volume. Then they talked to an Object Oriented DB vendor who promised they can handle 1M users with one machine. So they went all in on the object-oriented DB. When I expressed shock at this, they claimed their data is very "object-oriented" because each user can have multiple items… Ugh.
 
 They didn't understand transaction boundaries, the storage code was mixed with everything as it was all code, and it was slow. It was unreliable and impossible to understand. You might not remember the object-oriented database period but it was a precursor to the NoSQL fad that gripped our industry in the 2010s. During that time as a consultant, I got to watch a replay of this story all over again. This time most companies launched successfully.
 
@@ -56,7 +56,7 @@ To be clear: there are valid uses for NoSQL. But most common uses for these DBs 
 * Forget old technology existed
 * New stuff is overly simplistic and doesn't do a lot of basic stuff
 * Reinventing these complexities
-* New stuff becomes the old and clunky complexity that needs reinventing... Rinse/repeat
+* New stuff becomes the old and clunky complexity that needs reinventing… Rinse/repeat
 
 ## Serverless as the New Mainframes
 

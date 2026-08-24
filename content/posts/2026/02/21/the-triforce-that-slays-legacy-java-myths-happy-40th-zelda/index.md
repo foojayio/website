@@ -54,7 +54,7 @@ The payoff is especially clear in object-heavy workloads and memory-constrained 
 
 ![](zelda02.jpg)
 
-### From 8-Bit to Open World -- A Parallel Journey Java Has Leveled Up (Evolved)
+### From 8-Bit to Open World – A Parallel Journey Java Has Leveled Up (Evolved)
 
 Just as Zelda has evolved from 2D pixel hero to open-world legend over 40 years, Java has evolved from "enterprise slowpoke" to a lean, high-performance champion.
 

@@ -9,10 +9,10 @@ image: "liquid-glass-material-3-modern-native-themes-2.jpg"
 categories:
   - "Java"
 related_posts:
+  - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
-  - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 frozen: false
 ---
 
@@ -110,7 +110,7 @@ The "Auto" choice in the Native Theme menu defers to those build hints — set `
 
 ## On devices
 
-The opt-in is the same on iOS and Android. The platform knobs follow a single naming pattern --- `ios.themeMode` and `and.themeMode` --- and accept `modern` / `liquid` / `auto` / `ios7` / `flat` on iOS, `modern` / `material` / `auto` / `hololight` / `legacy` on Android. There is a single cross-platform shortcut, `nativeTheme=modern`, which the iOS builder consults when `ios.themeMode` is unset and which the Android port reads at runtime as a default for `and.themeMode`. The legacy aliases `cn1.androidTheme` and `cn1.nativeTheme` are still honored for back-compat, as is `and.hololight=true`.
+The opt-in is the same on iOS and Android. The platform knobs follow a single naming pattern — `ios.themeMode` and `and.themeMode` — and accept `modern` / `liquid` / `auto` / `ios7` / `flat` on iOS, `modern` / `material` / `auto` / `hololight` / `legacy` on Android. There is a single cross-platform shortcut, `nativeTheme=modern`, which the iOS builder consults when `ios.themeMode` is unset and which the Android port reads at runtime as a default for `and.themeMode`. The legacy aliases `cn1.androidTheme` and `cn1.nativeTheme` are still honored for back-compat, as is `and.hololight=true`.
 
 The default for an existing app stays on legacy on every platform. We do not flip a 15-year-old app's look without an opt-in. New apps generated from the initializr ship with `nativeTheme=modern`, `ios.themeMode=modern`, and `and.themeMode=modern` already set in `codenameone_settings.properties`, so a brand new project starts with the modern themes preselected. The Playground does the same, and Playground project downloads carry the same defaults into the generated `codenameone_settings.properties`.
 
@@ -149,7 +149,7 @@ Every screenshot in this post is captured by a test that runs the app on a real 
 For animations the test grabs a series of frames over a fixed-duration transition, then composites them into a single index image. That is how the dual-appearance shots end up as one side-by-side picture per test:
 ![Dialog over a textured backdrop — light and dark](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/dialog-translucent.png)
 
-...and how the sticky-header animation ends up as a six-frame strip stitched into a GIF:
+…and how the sticky-header animation ends up as a six-frame strip stitched into a GIF:
 ![Sticky header sectioned scroll](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/sticky-header-slide.gif)
 
 If you want to read the source, the suite lives at [scripts/hellocodenameone/common/src/main/java/com/codenameone/examples/hellocodenameone/tests/](https://github.com/codenameone/CodenameOne/tree/master/scripts/hellocodenameone/common/src/main/java/com/codenameone/examples/hellocodenameone/tests).

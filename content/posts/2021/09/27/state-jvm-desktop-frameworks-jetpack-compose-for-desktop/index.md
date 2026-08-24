@@ -164,7 +164,7 @@ Functions are invoked again, including the top `Window()` one.
 
 Compose achieves it via the added `Composer` parameter in `@Composable` functions. In the end, the `Window` function sets up this mechanism.
 
-Interestingly enough, Compose for Desktop relies on a GUI class that inherits from...​ Swing's `JFrame`! This is summarized in the following class diagram:
+Interestingly enough, Compose for Desktop relies on a GUI class that inherits from…​ Swing's `JFrame`! This is summarized in the following class diagram:
 
 ![compose window class diagram](compose-window-class-diagram.png)
 

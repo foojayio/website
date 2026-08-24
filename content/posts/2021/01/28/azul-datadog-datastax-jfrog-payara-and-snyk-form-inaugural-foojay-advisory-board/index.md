@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-**SUNNYVALE, Calif., January 28, 2021** -- Foojay.io, the community site for developers who use, target, and run their applications on top of Java and OpenJDK, today named the companies who will make up its advisory board—Azul, Datadog, DataStax, JFrog, Payara, and Snyk. The board will guide the direction, content and oversight of Foojay.io with the goal to grow the community and meet its mission to provide free information for everyday Java developers.
+**SUNNYVALE, Calif., January 28, 2021** – Foojay.io, the community site for developers who use, target, and run their applications on top of Java and OpenJDK, today named the companies who will make up its advisory board—Azul, Datadog, DataStax, JFrog, Payara, and Snyk. The board will guide the direction, content and oversight of Foojay.io with the goal to grow the community and meet its mission to provide free information for everyday Java developers.
 
 ***"It's not easy keeping up with the rapid OpenJDK development cadence,"*** said Geertjan Wielenga, Senior Director of Open Source Projects at **Azul** . ***"Foojay is here to be a Java dashboard, with all the latest curated information for developers using Java daily. It includes insights into the latest OpenJDK releases, describing where its distributions can be found, listing daily tips and tricks in every area of Java. It is a place of learning for newbies to the Java world and a place where experts share their knowledge with the Java community."***
 

@@ -24,7 +24,7 @@ Imagine we are responsible for managing the MongoDB cluster that supports our co
 
 With[Black Friday](https://en.wikipedia.org/wiki/Black_Friday_(shopping)) approaching, a critical period for our national financial payment system, we have been entrusted with the crucial task of creating a scaling plan for our cluster to handle the increased demand during this shopping spree. Given that our system is read-heavy, we are exploring ways to enhance the read performance and capacity of our cluster.
 
-We're in charge of the national financial payment system that powers a staggering 60% of all transactions across the nation. That's why **ensuring the highest availability** of this MongoDB cluster is **absolutely critical**---it's the backbone of our economy!
+We're in charge of the national financial payment system that powers a staggering 60% of all transactions across the nation. That's why **ensuring the highest availability** of this MongoDB cluster is **absolutely critical**—it's the backbone of our economy!
 
 ## A solution from AI Models
 

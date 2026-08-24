@@ -14,7 +14,7 @@ related_posts:
   - "spring-ai-how-to-write-genai-applications-with-java"
   - "quick-start-with-machine-learning-in-java"
   - "predicting-secure-java-projects-on-maven-central"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 frozen: false
 ---
 

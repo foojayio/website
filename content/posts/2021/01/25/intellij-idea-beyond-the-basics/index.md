@@ -31,7 +31,7 @@ Up till now, most developers I've met are using IntelliJ with UI enabled.
 
 However, it isn't recommended to do it that way! If you want to take your IDEA's skills to the next level, you have to get rid of those UIs. They represent distraction to the developer, preventing you from focusing on what matters: Your code!
 
-Now you can remove these distractions by going into your **Main Menu \| View \| Appearance** and uncheck toolbar, tool window bar, navigation bar. What's left are tabs. Please get rid of them by right-click into the tab and choose **Configure Editor Tabs...** and on the appearance section, set **tab placement** to **None**. The resulting IDEA's UI would be:
+Now you can remove these distractions by going into your **Main Menu \| View \| Appearance** and uncheck toolbar, tool window bar, navigation bar. What's left are tabs. Please get rid of them by right-click into the tab and choose **Configure Editor Tabs…** and on the appearance section, set **tab placement** to **None**. The resulting IDEA's UI would be:
 ![](https://i.imgur.com/kpltSyQ.png)
 
 Fantastic! I've been working with IDEA for almost two years in this mode. At first, it may sound overwhelming the number of shortcuts/actions you'll have to learn. Learning IDEA's shortcuts is like driving. When you know how to drive a car, you don't think about the process of driving. It comes naturally. But when driving for the first time, you do. So be patient with yourself.
@@ -64,7 +64,7 @@ What if you want to preview a file without opening it? **Quick Definition** acti
 * In the editor itself
 * In the project tool window
 * In **Go To Class** action popup
-* Etc...
+* Etc…
 
 This GIF showcase how I use **Quick Definition** action to preview a specific file:
 ![grab-landing-page](https://media.giphy.com/media/cNZ2UStMMqCOL9euJC/giphy.gif)

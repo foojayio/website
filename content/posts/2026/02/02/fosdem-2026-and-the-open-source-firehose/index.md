@@ -14,7 +14,7 @@ related_posts:
 frozen: false
 ---
 
-*(a.k.a. "So... what did you do this weekend?")*
+*(a.k.a. "So… what did you do this weekend?")*
 
 I'm back from four days in Brussels and the uniquely exhausting experience that is FOSDEM. Mentally fried. Physically wrecked. Entirely glad I went.
 
@@ -40,7 +40,7 @@ Because of who fills the rooms. When you strip away the PR layer, FOSDEM brings 
 
 No one pitches here. You get progress, blockers, failed experiments, and difficult questions. All aired publicly. Where else can you hear CycloneDX and SPDX contributors debating SBOM reality rather than policy theory? Where else can you ask a CRA-focused lawyer naïve but necessary questions without being sold a compliance product?
 
-FOSDEM is the heartbeat of open source. It is a reliable way to distinguish what's real from what's hype. Ideas that survive here tend to matter. Ideas that don't... don't.
+FOSDEM is the heartbeat of open source. It is a reliable way to distinguish what's real from what's hype. Ideas that survive here tend to matter. Ideas that don't… don't.
 
 ## Trends and Tensions in 2026
 

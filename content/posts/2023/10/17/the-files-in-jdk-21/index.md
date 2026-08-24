@@ -71,4 +71,4 @@ When comparing new files in the *java.base* module with JDK 20, you see that a l
 
 OpenJDK is an always evolving software mostly composed of a lot of small files. Most of them are not needed at runtime.
 
-Many [OpenJDK distributors](https://javaalmanac.io/jdk/21/) propose also a JRE (Java Runtime Environment) version of Java. For example, for Eclipse Temurin the Windows JDK installer file is 178 MB and the Windows JRE installer file is 34 MB.
+Many [OpenJDK distributors](https://javaalmanac.io/jdk/21) propose also a JRE (Java Runtime Environment) version of Java. For example, for Eclipse Temurin the Windows JDK installer file is 178 MB and the Windows JRE installer file is 34 MB.

@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-In a previous post ["Getting Started with FXGL Game Development"](https://foojay.io/today/category/javafx/) we already have taken a look at the [FXGL game development framework](https://github.com/AlmasB/FXGL) developed by [Almas Baimagambetov](https://twitter.com/AlmasBaim).
+In a previous post ["Getting Started with FXGL Game Development"](https://foojay.io/today/category/java/javafx/) we already have taken a look at the [FXGL game development framework](https://github.com/AlmasB/FXGL) developed by [Almas Baimagambetov](https://twitter.com/AlmasBaim).
 
 But, this game engine can also be used for other use cases. In this post, we will be building a system monitoring dashboard, which can run on a Raspberry Pi. The dashboard can be used to keep an eye on any device that can report its state to a queue. And, for me personally, it finally solves the problem of finding the IP addresses of all my Raspberry Pi's when my router decided to shuffle them... 😉
 

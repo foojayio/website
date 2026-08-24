@@ -32,7 +32,7 @@ Recently, we described [several criteria to look at to choose a cache](https://f
 
 > JCS is a distributed caching system written in Java. It is intended to speed up applications by providing a means to manage cached data of various dynamic natures. Like any caching system, JCS is most useful for high read, low put applications. Latency times drop sharply and bottlenecks move away from the database in an effectively cached system.
 >
-> ---- https://commons.apache.org/proper/commons-jcs/index.html
+> -— https://commons.apache.org/proper/commons-jcs/index.html
 
 |                                                                                                                             Name                                                                                                                              | [Java Caching System](https://commons.apache.org/proper/commons-jcs/) |
 |                                                                                                                           Provider                                                                                                                            |                         The Apache Foundation                         |
@@ -50,7 +50,7 @@ Recently, we described [several criteria to look at to choose a cache](https://f
 
 > Guava is a set of core Java libraries from Google that includes new collection types (such as multimap and multiset), immutable collections, a graph library, and utilities for concurrency, I/O, hashing, **caching**, primitives, strings, and more! It is widely used on most Java projects within Google, and widely used by many other companies as well.
 >
-> --- https://github.com/google/guava
+> — https://github.com/google/guava
 
 |                                                                    Name                                                                    | [Guava](https://github.com/google/guava/wiki/CachesExplained) |
 |                                                                  Provider                                                                  |                            Google                             |
@@ -72,7 +72,7 @@ Recently, we described [several criteria to look at to choose a cache](https://f
 
 > Caffeine is a [high performance](https://github.com/ben-manes/caffeine/wiki/Benchmarks), [near optimal](https://github.com/ben-manes/caffeine/wiki/Efficiency) caching library. For more details, see our [user's guide](https://github.com/ben-manes/caffeine/wiki) and browse the [API docs](http://www.javadoc.io/doc/com.github.ben-manes.caffeine/caffeine) for the latest release.
 >
-> --- https://github.com/ben-manes/caffeine
+> — https://github.com/ben-manes/caffeine
 
 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |     [Caffeine](https://github.com/ben-manes/caffeine/wiki)      |
 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Provider                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                            Ben Manes                            |
@@ -92,7 +92,7 @@ Recently, we described [several criteria to look at to choose a cache](https://f
 
 > Ehcache is an open source, standards-based cache that boosts performance, offloads your database, and simplifies scalability. It's the most widely-used Java-based cache because it's robust, proven, full-featured, and integrates with other popular libraries and frameworks. Ehcache scales from in-process caching, all the way to mixed in-process/out-of-process deployments with terabyte-sized caches.
 >
-> ---- https://www.ehcache.org/
+> -— https://www.ehcache.org/
 
 |                                                                                                                                                          Name                                                                                                                                                           |           [Ehcache](https://www.ehcache.org/)            |
 |                                                                                                                                                        Provider                                                                                                                                                         |                       Software AG                        |
@@ -110,7 +110,7 @@ Recently, we described [several criteria to look at to choose a cache](https://f
 ## Infinispan
 
 Infinispan is an open-source in-memory data grid that offers flexible deployment options and robust capabilities for storing, managing, and processing data. Infinispan provides a key/value data store that can hold all types of data, from Java objects to plain text. Infinispan distributes your data across elastically scalable clusters to guarantee high availability and fault tolerance, whether you use Infinispan as a volatile cache or a persistent data store.  
---- https://infinispan.org/
+— https://infinispan.org/
 
 |                                                                                                                                                                                                                   Name                                                                                                                                                                                                                   |          [Infinispan](https://infinispan.org/)           |
 |                                                                                                                                                                                                                 Provider                                                                                                                                                                                                                 |                          RedHat                          |
@@ -130,7 +130,7 @@ Infinispan is an open-source in-memory data grid that offers flexible deployment
 
 > Coherence is scalable, fault-tolerant, cloud-ready, distributed platform for building grid-based applications and reliably storing data. The product is used at scale, for both compute and raw storage, in a vast array of industries such as critical financial trading systems, high performance telecommunication products, and eCommerce applications.
 >
-> ---- https://coherence.community/latest/21.06/docs/
+> —- https://coherence.community/latest/21.06/docs/
 
 |                                                                                                                                                                        Name                                                                                                                                                                         |              [Coherence](https://coherence.community/)               |
 |                                                                                                                                                                      Provider                                                                                                                                                                       |                                Oracle                                |
@@ -195,7 +195,7 @@ Infinispan is an open-source in-memory data grid that offers flexible deployment
 I work for Hazelcast at the time of this writing.
 > Hazelcast is a streaming and memory-first application platform for fast, stateful, data-intensive workloads on-premises, at the edge or as a fully managed cloud service.
 >
-> ---- https://hazelcast.com/
+> —- https://hazelcast.com/
 
 |                                                                                                                                                                                                                                 Name                                                                                                                                                                                                                                 |               [Hazelcast](https://hazelcast.com/)                |
 |                                                                                                                                                                                                                               Provider                                                                                                                                                                                                                               |                            Hazelcast                             |

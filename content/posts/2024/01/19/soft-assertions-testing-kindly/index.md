@@ -126,7 +126,7 @@ org.opentest4j.MultipleFailuresError: Person 2 (3 failures)
 
 AssertJ has a couple different soft assertion methods as can be seen in [their documentation](https://assertj.github.io/doc/#assertj-core-soft-assertions).  
 
-We can write our own soft assertions, make use of an injected `SofAssertions` parameter, ...​ to tell AssertJ to aggregate the errors.  
+We can write our own soft assertions, make use of an injected `SofAssertions` parameter, …​ to tell AssertJ to aggregate the errors.  
 
 But let's keep it easy, and clear and make use of the static `assertSoftly` method.
 

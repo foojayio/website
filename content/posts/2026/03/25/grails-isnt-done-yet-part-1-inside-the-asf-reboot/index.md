@@ -13,9 +13,9 @@ categories:
   - "Tools"
 related_posts:
   - "7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like"
+  - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"
-  - "foojay-podcast-95"
 frozen: false
 ---
 
@@ -133,7 +133,7 @@ To make that work more visible, I spoke with **James Fredley, the Apache Grails 
 
 *What people also need to understand is that a Grails application is a Spring Boot application.*
 
-*With roughly 85--90% of Java applications running on Spring Boot,Grails is not some exotic outlier: it is extra developer-productivity layers on top of what everyone in the Java ecosystem already uses.*
+*With roughly 85–90% of Java applications running on Spring Boot,Grails is not some exotic outlier: it is extra developer-productivity layers on top of what everyone in the Java ecosystem already uses.*
 
 #### What do you hope the ASF transition unlocks?
 
@@ -163,7 +163,7 @@ For teams with established Grails estates, the question isn't *"does it work?"* 
 
 The ASF graduation, the release of Grails 7 (supporting Java 17 through 25), and the active development of Grails 8 tracking Spring Boot 4 are designed to lower the perceived risk of that decision. But that safety is contingent on moving forward.
 
-For teams evaluating new projects, the productivity argument deserves a fresh hearing. As Fredley puts it, Grails is extra developer-productivity layers on top of what 85--90% of the Java ecosystem already uses. That framing: not "legacy framework" but "productivity accelerator built on Spring Boot", is a different proposition than the one most people have filed away in their mental models.
+For teams evaluating new projects, the productivity argument deserves a fresh hearing. As Fredley puts it, Grails is extra developer-productivity layers on top of what 85–90% of the Java ecosystem already uses. That framing: not "legacy framework" but "productivity accelerator built on Spring Boot", is a different proposition than the one most people have filed away in their mental models.
 
 ### The hard work that keeps software alive
 

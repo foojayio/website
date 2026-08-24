@@ -27,6 +27,6 @@ In this webinar:
 * Watch a demo of a small start up/small footprint Jakarta EE runtime
 * See a Jakarta EE application server that is not fat or heavy with high resource usage
 
-If you've been hearing that Java EE application servers are all resource hogs and slow to start up -- watch this webinar to see why that's not true and how you can continue using your existing Java EE development skills to modernize your application development!
+If you've been hearing that Java EE application servers are all resource hogs and slow to start up – watch this webinar to see why that's not true and how you can continue using your existing Java EE development skills to modernize your application development!
 
 {{< youtube OHbRoaLgpw8 >}}

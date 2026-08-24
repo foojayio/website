@@ -79,7 +79,7 @@ Maybe if a node is down in one data center and we don't want to do a certain ope
 
 The conversation we started on [The New Stack blog](https://thenewstack.io/taking-your-database-beyond-a-single-kubernetes-cluster/) and have continued here has focused a lot on manually managing things versus having cloud-native technologies that can manage them for us, whether that be service discovery or routing tables, or even just adjusting the packet in flight to indicate what cluster they need to go to and eventually, what pod they need to reach.{#7738}
 
-When you think through the application of these technologies and how you might best use them to manage your distributed applications, the single most important takeaway we'd like to leave you with is...{#3283}
+When you think through the application of these technologies and how you might best use them to manage your distributed applications, the single most important takeaway we'd like to leave you with is…{#3283}
 > Y**ou need to plan your deployments before you start spinning up your K8s clusters.**
 
 Having the right people together to hash out your approach before you wade in will help you identify any limits in your system and other important factors that need to be considered. For example, maybe you have a scarcity of IP addresses. Maybe you're running one big cluster, and now you're talking about many small clusters. Or maybe you run clusters more along business lines or for certain Ops teams.{#b1be}

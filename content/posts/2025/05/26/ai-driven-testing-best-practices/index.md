@@ -19,13 +19,13 @@ frozen: false
 
 ## **So, AI Can Write Tests Now? Cool, But...**
 
-AI assisted coding tools are everywhere now, helping with autocomplete, suggesting fixes, and sometimes writing surprisingly large blocks of code. A hot topic is using generative AI to generate tests automatically -- unit, integration, e2e, etc.
+AI assisted coding tools are everywhere now, helping with autocomplete, suggesting fixes, and sometimes writing surprisingly large blocks of code. A hot topic is using generative AI to generate tests automatically – unit, integration, e2e, etc.
 
 The idea's definitely appealing. Who wouldn't want an AI to help crank out tests, bump up those coverage numbers, and maybe save us from some of the testing grind? It sounds like a fast track to better feedback and tackling that mountain of untested code.
 
 But, hang on a sec. Like any tool, especially one this complex, artificial intelligence is not a silver bullet. Just grabbing AI driven tests and calling it a day is risky. You might *think* your code's solid because the test count is high, but the tests themselves might be junk.
 
-These AI language models learn from tons of code online and in repos -- and let's face it, a lot of that code isn't exactly high quality nor correct code.
+These AI language models learn from tons of code online and in repos – and let's face it, a lot of that code isn't exactly high quality nor correct code.
 
 This article is for devs figuring out how to actually *use* these AI tools without creating a mess and produce high quality software. We'll touch on the good stuff but focus on the traps: the tests might be flat-out *wrong*, or they might just "prove" that your buggy code works exactly like the buggy mess it is, instead of checking if it meets user needs.
 
@@ -37,7 +37,7 @@ To understand why AI tests can be uncertain, it helps to know how these code-gen
 
 The AI digests all this and learns patterns: common code structures, how people usually use certain APIs, popular libraries, coding styles. It gets really good at predicting the next bit of code in a sequence, leading it to write stuff that often *looks* right.
 
-But that's the catch. The training data is just... code. All kinds of code. Including:
+But that's the catch. The training data is just… code. All kinds of code. Including:
 
 * Plain old **bugs**.
 * Nasty **security holes**.
@@ -50,10 +50,10 @@ The AI doesn't *understand* good code from bad code. It just mimics the patterns
 
 So when you ask this AI to write tests, problems pop up:
 
-1. **The Tests Have Bugs:** The generated test code itself might be flawed, misuse resources, have race conditions -- just like buggy tests humans write.
+1. **The Tests Have Bugs:** The generated test code itself might be flawed, misuse resources, have race conditions – just like buggy tests humans write.
 2. **The Tests Verify Bugs:** This is the really sneaky one. The AI looks at your *current* code, sees how it works (even the buggy parts), and writes a test to confirm *that* behavior. It doesn't know what the code *should* do from requirements; it just tests what the code *does*.
 
-Think of learning English only by reading internet comments. You'd get good at slang and common mistakes, but you wouldn't be able to write clean technical docs. An AI testing tool trained on a huge, messy pile of code is similar -- good at mimicry, not guaranteed to be correct or follow best practices in software development.
+Think of learning English only by reading internet comments. You'd get good at slang and common mistakes, but you wouldn't be able to write clean technical docs. An AI testing tool trained on a huge, messy pile of code is similar – good at mimicry, not guaranteed to be correct or follow best practices in software development.
 
 AI powered tests can be inaccurate and may only validate existing code, not the intended behavior. Let's see some of the main problems you can encounter by generating the tests with AI.
 
@@ -174,7 +174,7 @@ This test passes but locks in the bad behavior of allowing spaces. You, the dev,
 
 Given that AI tests can be wonky, using static analysis tools is pretty much essential. These tools automatically scan your code (including tests) against a huge rulebook, finding potential bugs, security issues, and just plain confusing code. When AI is potentially adding lots of code fast, you need this automated check.
 
-Some of these tools even promote AI Code assurance, to keep AI-generated code in check, sometimes with even stricter rules. Makes sense -- treat AI code with the same (or more) skepticism as human code.
+Some of these tools even promote AI Code assurance, to keep AI-generated code in check, sometimes with even stricter rules. Makes sense – treat AI code with the same (or more) skepticism as human code.
 
 One of these tools is SonarQube, which has 47 specific rules just for Java tests \[<https://rules.sonarsource.com/java/tag/tests/>\]. Let's break down the kinds of issues it catches, with quick examples showing how AI might mess up.
 

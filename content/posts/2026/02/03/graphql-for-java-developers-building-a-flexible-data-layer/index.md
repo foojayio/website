@@ -260,7 +260,7 @@ This approach is powerful, but it carries a significant downside.
 
 This is one of those cases where GraphQL seems simple in demos, but can cause significant problems in production environments.
 
-A query such as...
+A query such as…
 
 ```
 {
@@ -273,7 +273,7 @@ A query such as...
 }
 ```
 
-...can easily lead to:
+…can easily lead to:
 
 * A query for users.
 * A query for orders associated with users.

@@ -27,7 +27,7 @@ SnapStart is based on the CRaC (Coordinated Restore at Checkpoint) API developed
 
 The [CRaC API](https://openjdk.org/projects/crac/) provides a common way for Java applications to coordinate with underlying checkpoint/restore mechanisms, allowing Java code to work seamlessly and portably across various checkpoint/restore mechanisms as they become available.
 
-And Lambda, with its underlying use of the [Firecracker MicroVM](https://firecracker-microvm.github.io) and its new support for the CRaC API, has now become such a platform. When coordinating via the CRaC API, Lambda can now take a snapshot of your application -- when it's already warmed up and ready to accept traffic at speed -- and instantly relaunch any application instance from this snapshot.
+And Lambda, with its underlying use of the [Firecracker MicroVM](https://firecracker-microvm.github.io) and its new support for the CRaC API, has now become such a platform. When coordinating via the CRaC API, Lambda can now take a snapshot of your application – when it's already warmed up and ready to accept traffic at speed – and instantly relaunch any application instance from this snapshot.
 
 **"AWS Lambda SnapStart for Java delivers up to 10x faster function startup performance at no extra cost,"** [the AWS announcement states](https://aws.amazon.com/about-aws/whats-new/2022/11/aws-lambda-snapstart-java-functions/). **"Lambda SnapStart is a performance optimization that makes it easier for you to build highly responsive and scalable Java applications using AWS Lambda without having to provision resources or spend time and effort implementing complex performance optimizations."**
 

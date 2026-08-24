@@ -25,7 +25,7 @@ frozen: false
 
 Java was born in 1995, when the internet as we know it today didn't exist yet.
 
-Cloud servers, Docker, Kubernetes, distributed systems, scaling up and down... these things are now part of our daily job, but Java wasn't originally designed for it.
+Cloud servers, Docker, Kubernetes, distributed systems, scaling up and down… these things are now part of our daily job, but Java wasn't originally designed for it.
 
 In this episode, we want to learn if the recent evolutions in OpenJDK, and ongoing related projects, will make Java a full Cloud member.
 
@@ -127,7 +127,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.io/today/unified-event-driven-architecture-for-the-cloud-native-enterprise/>
 * <https://foojay.io/today/how-to-deploy-a-vaadin-application-to-google-cloud-app-engine/>
 * <https://foojay.io/today/why-a-cloud-native-database-must-run-on-k8s/>
-* And many more... <https://foojay.io/page/2/?s=cloud>[](https://foojay.io/page/2/?s=cloud)
+* And many more… <https://foojay.io/page/2/?s=cloud>[](https://foojay.io/page/2/?s=cloud)
 
 ## Music
 

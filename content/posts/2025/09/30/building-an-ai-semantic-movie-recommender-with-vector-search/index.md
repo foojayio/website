@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Last time, we created a [vector search index](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=xNlcCImhQCC0HsnlThlQFg%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3B1MUlV%2B0kQm%2BvelL3UScxcA%3D%3D) in a [local MongoDB Atlas cluster](https://www.linkedin.com/pulse/run-local-atlas-cluster-minutes-locally-arek-borucki-mmiqf/?trackingId=ntYzEbTVSuauLVmp2Zbt4w%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3B1MUlV%2B0kQm%2BvelL3UScxcA%3D%3D). Now, let's put it to work with a real case: building an AI-powered movie recommender that suggests films similar to *The Matrix*--without any shared keywords.
+Last time, we created a [vector search index](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=xNlcCImhQCC0HsnlThlQFg%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3B1MUlV%2B0kQm%2BvelL3UScxcA%3D%3D) in a [local MongoDB Atlas cluster](https://www.linkedin.com/pulse/run-local-atlas-cluster-minutes-locally-arek-borucki-mmiqf/?trackingId=ntYzEbTVSuauLVmp2Zbt4w%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3B1MUlV%2B0kQm%2BvelL3UScxcA%3D%3D). Now, let's put it to work with a real case: building an AI-powered movie recommender that suggests films similar to *The Matrix*–without any shared keywords.
 
 🕒 Reading time: 3-4 min
 
@@ -243,7 +243,7 @@ Here, *TRON* , *Swordfish* , and *The Net* rank high, thematically similar to *T
 
 ⚖ Running hybrid search (vector + IMDb rating)
 
-Instead of ranking results purely by semantic similarity, [you can combine meaning-based search with a quality signal](https://www.mongodb.com/resources/products/capabilities/hybrid-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant)---in this case, IMDb ratings. By weighting semantic similarity at 75% and IMDb rating at 25%, you still get matches that are close in meaning to *The Matrix*, but movies that are also popular and well-reviewed will rank higher.
+Instead of ranking results purely by semantic similarity, [you can combine meaning-based search with a quality signal](https://www.mongodb.com/resources/products/capabilities/hybrid-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant)—in this case, IMDb ratings. By weighting semantic similarity at 75% and IMDb rating at 25%, you still get matches that are close in meaning to *The Matrix*, but movies that are also popular and well-reviewed will rank higher.
 
 This hybrid approach is useful when you want search results that are both relevant in meaning and favored by audiences or critics.
 

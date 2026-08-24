@@ -189,9 +189,9 @@ As stated in the previous part of the blog series, I reserve my opinions of orde
 
 An annotation on the test class is needed to instruct JUnit5 to order tests. This annotation is called the **[@TestMethodOrder](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/TestMethodOrder.html)** . This annotation accepts an attribute of type [**MethodOrderer**](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/MethodOrderer.html). There are three default implementations that exist:
 
-1. [**Alphanumeric**](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/MethodOrderer.Alphanumeric.html) -- uses `String::compareTo` to order execution of test methods
-2. **[OrderAnnotation](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/MethodOrderer.OrderAnnotation.html)** -- uses the `@Order` annotation on each test method to determine order. The Order annotation accepts a int attribute that specifies the ranking.
-3. **[Random](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/MethodOrderer.Random.html)** -- uses a random order *either* simply from `System.nanoTime()` or in combination with a custom seed.
+1. [**Alphanumeric**](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/MethodOrderer.Alphanumeric.html) – uses `String::compareTo` to order execution of test methods
+2. **[OrderAnnotation](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/MethodOrderer.OrderAnnotation.html)** – uses the `@Order` annotation on each test method to determine order. The Order annotation accepts a int attribute that specifies the ranking.
+3. **[Random](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/MethodOrderer.Random.html)** – uses a random order *either* simply from `System.nanoTime()` or in combination with a custom seed.
 
 More custom orders can be created by implementing the `MethodOrderer` interface.
 

@@ -114,7 +114,7 @@ public UserDashboardDTO getDashboard(long userId) {
 
 This professional solution is vastly superior. It handles failures gracefully within each asynchronous call using `.exceptionally()`, allowing the dashboard to render with partial data. It enforces timeouts with `.orTimeout()` to protect system resources.
 
-By explaining these choices in the PR—discussing the principles of resilient design and fault tolerance---**YOU** demonstrate deep expertise that goes far beyond simply making the code "work." This is how you build a reputation for excellence and drive your career forward.
+By explaining these choices in the PR—discussing the principles of resilient design and fault tolerance—**YOU** demonstrate deep expertise that goes far beyond simply making the code "work." This is how you build a reputation for excellence and drive your career forward.
 
 ### **2. Feed the Beast: Your Project's Context is its Fuel ⛽**
 

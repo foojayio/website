@@ -44,7 +44,7 @@ After the feature had been merged, it was decided that it needed a [CSR](https:/
 >
 > {#block-4a3e6185-63b9-4b67-aede-2418431e078c}
 >
-> This bug needs to be addressed before JDK 13 ramdown 2.[JOE Darcy in His Comment to THE CSR](https://bugs.openjdk.org/browse/JDK-8223456?focusedId=14273234&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-14273234)
+> This bug needs to be addressed before JDK 13 ramdown 2.[JOE Darcy in His Comment to THE CSR](https://bugs.openjdk.org/browse/JDK-8223456?focusedId=14273234&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-14273234){#block-80bbb16b-d786-47e5-bb83-a61eb28fd256}
 
 So, it was decided to remove it with [JDK-8226608](https://bugs.openjdk.org/browse/JDK-8226608), as Joe Darcy mentions in his comment with the CSR [JDK-8227078](https://bugs.openjdk.org/browse/JDK-8227078):{#block-e017e73f-b8b5-4f07-ba97-b4f6d78d0076}
 >

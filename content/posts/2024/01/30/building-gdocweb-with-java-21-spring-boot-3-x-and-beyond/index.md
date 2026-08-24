@@ -84,7 +84,7 @@ Faster startup times also meant quicker recovery from failures, a crucial aspect
 
 Getting GraalVM to work was nontrivial but not too hard. After some trial and error, I managed to set up a Continuous Integration (CI) process that built the GraalVM project and uploaded it to Docker.
 
-This was particularly necessary because I'm using an M2 Mac, while my server runs on Intel architecture. This setup meant I had to deal with an 18-minute wait time for each update -- a significant delay for any development cycle.
+This was particularly necessary because I'm using an M2 Mac, while my server runs on Intel architecture. This setup meant I had to deal with an 18-minute wait time for each update – a significant delay for any development cycle.
 
 {#facing-the-production-challenges}
 
@@ -205,7 +205,7 @@ Their communication is contained within a closed network, adding an extra layer 
 
 This setup offered me the flexibility and ease of containerization without the overhead and complexity of more extensive container orchestration systems. It was the perfect middle ground, providing the necessary features without overcomplicating the deployment process.
 
-By using Docker Compose, I maintained control over the environment and kept the deployment process straightforward and manageable. This decision aligned perfectly with the overall ethos of [gdocweb](https://gdocweb.com/) -- simplicity, efficiency, and practicality.
+By using Docker Compose, I maintained control over the environment and kept the deployment process straightforward and manageable. This decision aligned perfectly with the overall ethos of [gdocweb](https://gdocweb.com/) – simplicity, efficiency, and practicality.
 
 {#front-end-thymeleaf-over-modern-alternatives}
 

@@ -32,21 +32,21 @@ We will be building this with Java 16 or later, so make sure this is installed a
 
 DataStax Astra is a Database as a Service offering that is powered by Apache Cassandra. **This gives us a fully hosted, fully managed Cassandra database that we can use to store our data, which includes all of the power that Cassandra offers for scalability, high availability and performance.**
 
-On top of this, Astra also incorporates the Stargate data platform that exposes the exact same underlying data via different APIs. This gives us access to traditional Cassandra tables using REST and GraphQL APIs -- both of which are 100% compatible with each other and the more traditional CQL APIs. These can make access to our data incredibly flexible with only a standard HTTP client -- such as the Spring *RestTemplate*.
+On top of this, Astra also incorporates the Stargate data platform that exposes the exact same underlying data via different APIs. This gives us access to traditional Cassandra tables using REST and GraphQL APIs – both of which are 100% compatible with each other and the more traditional CQL APIs. These can make access to our data incredibly flexible with only a standard HTTP client – such as the Spring *RestTemplate*.
 
 It also offers a JSON Document API that allows for much more flexible data access. With this API there is no need for a schema, and every record can be a different shape if needed. Additionally, records can be as complex as needed, supporting the full power of JSON for representing the data.
 
-This does come with a cost though -- the Document API is not interchangeable with the other APIs, so it is important to decide ahead of time how data needs to be modeled and which APIs are best used to access it.
+This does come with a cost though – the Document API is not interchangeable with the other APIs, so it is important to decide ahead of time how data needs to be modeled and which APIs are best used to access it.
 
 ## **Our Application Data Model**
 
 **We are building our system around the Astra system on top of Cassandra. This will have a direct reflection on the way that we model our data.**
 
-Cassandra is designed to allow massive amounts of data with very high throughput, and it stores records in tabular form. Astra adds to this some alternative APIs -- REST and GraphQL -- and the ability to represent documents as well as simple tabular data -- using the Document API.
+Cassandra is designed to allow massive amounts of data with very high throughput, and it stores records in tabular form. Astra adds to this some alternative APIs – REST and GraphQL – and the ability to represent documents as well as simple tabular data – using the Document API.
 
 This is still backed by Cassandra, which does schema design differently. In modern systems, space is no longer a constraint. Duplicating data becomes a non-issue, removing the need for joins across collections or partitions of data. This means that we can denormalize our data within our collections to suit our needs.
 
-**As such, our data model is going to be built around two collections -- *events* and *statuses*.** The *events* collection is a record of every status event that has ever happened -- this can potentially get very large, something for which Cassandra is ideal. This will be covered in more detail in the next article.
+**As such, our data model is going to be built around two collections – *events* and *statuses*.** The *events* collection is a record of every status event that has ever happened – this can potentially get very large, something for which Cassandra is ideal. This will be covered in more detail in the next article.
 
 Records in this collection will look as follows:
 
@@ -77,7 +77,7 @@ The *statuses* collection contains a single document that contains the dashboard
 }
 ```
 
-Here we have some general data that doesn't change -- the *name* and *realName* fields -- and we have some summary data that is generated from the most recent event for this Avenger -- *location* is derived from the *latitude* and *longitude* values, and *status* is a general summary of the *status* field from the event.
+Here we have some general data that doesn't change – the *name* and *realName* fields – and we have some summary data that is generated from the most recent event for this Avenger – *location* is derived from the *latitude* and *longitude* values, and *status* is a general summary of the *status* field from the event.
 
 This article is focused on the *statuses* collection, and accessing it using the Document API. Our next article will show how to work with the *events* collection which is row-based data instead.
 
@@ -86,7 +86,7 @@ This article is focused on the *statuses* collection, and accessing it using the
 Before we can start our application, we need a store for our data. We are going to use the Cassandra offering from DataStax Astra. **To get started, we need to [register a free account with Astra](https://astra.dev/3BJ1lmW) and create a new database.** This needs to be given a reasonable name for both the database and the keyspace within:
 ![](db-setup-1024x582.png)
 
-(Note -- screens are accurate at the time of publication but might have changed since)
+(Note – screens are accurate at the time of publication but might have changed since)
 
 **This will take a few minutes to set up. Once this is done, we will need to create an access token.**
 
@@ -105,7 +105,7 @@ Finally, we need some data. For the purposes of this article, we are using some 
 
 ## **How to Set Up Spring Boot**
 
-We are going to create our new application using [Spring Initializr](https://start.spring.io/); **we're also going to use Java 16 -- allowing us to use [Records](https://www.baeldung.com/java-record-keyword).** This in turn means we need Spring Boot 2.5 -- currently this means 2.5.0-M3.
+We are going to create our new application using [Spring Initializr](https://start.spring.io/); **we're also going to use Java 16 – allowing us to use [Records](https://www.baeldung.com/java-record-keyword).** This in turn means we need Spring Boot 2.5 – currently this means 2.5.0-M3.
 
 In addition, we need Spring Web and Thymeleaf as dependencies:
 ![](spring-initaliz-avengers.png)
@@ -358,7 +358,7 @@ This allows us to accept requests for a particular Avenger, containing the curre
 
 In a future article, this will be updated to also create a new events record with this data, so that we can track the entire history of events for every Avenger.
 
-Note that we are not correctly looking up the name of the location to use for the latitude and longitude -- it is just hard-coded. There are various options for implementing this but they are out of scope for this article.
+Note that we are not correctly looking up the name of the location to use for the latitude and longitude – it is just hard-coded. There are various options for implementing this but they are out of scope for this article.
 
 ## **Summary**
 

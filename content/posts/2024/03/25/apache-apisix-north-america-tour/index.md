@@ -3,7 +3,7 @@ title: "Apache APISIX North America Tour"
 date: "2024-03-25T15:31:08+00:00"
 lastmod: "2024-03-25T15:33:10+00:00"
 description: "Today, I'd like to write about my North America \"Tour\" across several conferences and user groups."
-canonical: "https://blog.frankel.ch/apisix-north-america-tour/"
+canonical: "https://blog.franke.ch/apisix-north-america-tour/"
 authors:
   - "nicolas-frankel"
 image: "globe-1311758_1280.jpg"
@@ -110,4 +110,4 @@ See you soon [somewhere](https://blog.frankel.ch/speaking/)!
 
 PS: I tried to document my journey via #APISIXNorthAmericaTour. Find more pictures on [Twitter](https://twitter.com/search?q=%23APISIXNorthAmericaTour&src=typed_query&f=live), [LinkedIn](https://www.linkedin.com/search/results/all/?keywords=%23APISIXNorthAmericaTour&origin=GLOBAL_SEARCH_HEADER), [Mastodon](https://mastodon.top/tags/APISIXNorthAmericaTour) and [BlueSky](https://bsky.app/search?q=%23APISIXNorthAmericaTour).
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/apisix-north-america-tour/) on March 24^th^, 2024*
+*Originally published at [A Java Geek](https://blog.franke.ch/apisix-north-america-tour/) on March 24^th^, 2024*

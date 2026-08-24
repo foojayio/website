@@ -35,7 +35,7 @@ In order to follow along with this article, it is assumed that you have already 
 This is available from the Astra dashboard, found under the "Connect" tab for our exact database, and then the "Java" option under "Connect using a driver":
 ![](astra-secure-connect-1024x560.png)
 
-For pragmatic reasons, we're going to put this file into *src/main/resources* so that we can access it from the classpath. In a normal deployment situation, you would need to be able to provide different files to connect to different databases -- for example, to have different databases for development and production environments.
+For pragmatic reasons, we're going to put this file into *src/main/resources* so that we can access it from the classpath. In a normal deployment situation, you would need to be able to provide different files to connect to different databases – for example, to have different databases for development and production environments.
 
 ### **2.2. Creating Client Credentials**
 
@@ -132,7 +132,7 @@ public class MapService {
 }
 ```
 
-Into this, we're going to write our functions to actually query the database -- using the *CqlClient* that we've just written -- and return the appropriate details.
+Into this, we're going to write our functions to actually query the database – using the *CqlClient* that we've just written – and return the appropriate details.
 
 ### **4.1. Generate a List of Avengers**
 

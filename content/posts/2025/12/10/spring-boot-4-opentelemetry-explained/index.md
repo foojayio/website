@@ -53,7 +53,7 @@ The **OpenTelemetry framework**guides us with two fundamental principles:
 
 Before the release of Spring Boot 4, we faced several challenges in integrating open telemetry, specifically:
 
-* **OpenTelemetry Java Agent**---Zero code changes but has version compatibility issues.
+* **OpenTelemetry Java Agent**—Zero code changes but has version compatibility issues.
 * **3rd-party OpenTelemetry Spring Boot Starter** - External dependency
 
 With **Spring Boot 4** , developers provide open telemetry with either native or in-house support as a starter dependency. This**`spring-boot-starter-opentelemetry`**is the recommended approach, as it

@@ -58,7 +58,7 @@ We generally conduct latency benchmarks for single-threaded services at one hund
 
 Moreover, each component will operate fastest when event processing is performed in a single thread since this eliminates the significant overhead of lock contention, as there will be no concurrent access to mutable state within the component.
 
-### 4 -- 6) Event Replication, Deterministic Services, and Live Upgrades
+### 4 – 6) Event Replication, Deterministic Services, and Live Upgrades
 
 We use Chronicle Queue as an event store, with total ordering and replication of this journal, from leader to followers, followers will see exactly the same data in the same order, with the same identifier for each message.
 

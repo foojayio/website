@@ -77,7 +77,7 @@ Some operations in the debugger require more than one step in terms of the proto
 
 JDWP effectively allows remote code execution. Lets you access all the bytecode of the app which is effectively the same as giving access to your full source code. It lets attackers do almost anything since it wasn't designed with security in mind.
 
-Imagine placing a breakpoint where the user password is passed to authentication... If JDWP is open for your server a member of your team might use that, and you will never know! There's no tracking at all!  
+Imagine placing a breakpoint where the user password is passed to authentication… If JDWP is open for your server a member of your team might use that, and you will never know! There's no tracking at all!  
 
 60% of security hacks happen from within the organization. If your company does remote debugging they have no way of knowing whether an employee used that to manipulate the application state or siphon user details. There's no tracking or anything. This can be in violation of various rules and regulations since it might expose personal user data. Remote debugging into production can trigger liability risks.
 
@@ -85,4 +85,4 @@ I discuss some of the solutions for those problems both in the low level tooling
 
 ## Final Word
 
-With this we finished the first part of the course. If you want to check out the full course go to debugagent.com to learn more... The next video covers the strategies for debugging and the science of debugging. If you have any questions please use the comments section. Thank you!
+With this we finished the first part of the course. If you want to check out the full course go to debugagent.com to learn more… The next video covers the strategies for debugging and the science of debugging. If you have any questions please use the comments section. Thank you!

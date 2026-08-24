@@ -25,9 +25,9 @@ In this blog post, we'll build an AI agent in Java using MongoDB as our database
 
 ## Why should you use MongoDB for building AI agents?
 
-1. **Vector store and voyage AI support** -- MongoDB Atlas infrastructure offers you a developer-friendly ecosystem. Giving you the ability to store vector embeddings, create vector embeddings, and finally perform the vector search directly from the platform. This reduces the need to have different systems to build an enterprise application.
-2. **Hybrid Search --** With MongoDB Atlas infrastructure, you can add filters with a vector search query and add additional conditions to the query results. Unlike specialized vector stores, MongoDB can do both semantic ([vector](https://www.mongodb.com/products/platform/atlas-vector-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=vector-mongodb-foojay&utm_term=hugh.murray)) and classically structured (keyword) queries together.
-3. **Developer Ecosystem --** MongoDB has been a developer-first database ever since, and as it continues to do so, it lets your application integrate efficiently.
+1. **Vector store and voyage AI support** – MongoDB Atlas infrastructure offers you a developer-friendly ecosystem. Giving you the ability to store vector embeddings, create vector embeddings, and finally perform the vector search directly from the platform. This reduces the need to have different systems to build an enterprise application.
+2. **Hybrid Search –** With MongoDB Atlas infrastructure, you can add filters with a vector search query and add additional conditions to the query results. Unlike specialized vector stores, MongoDB can do both semantic ([vector](https://www.mongodb.com/products/platform/atlas-vector-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=vector-mongodb-foojay&utm_term=hugh.murray)) and classically structured (keyword) queries together.
+3. **Developer Ecosystem –** MongoDB has been a developer-first database ever since, and as it continues to do so, it lets your application integrate efficiently.
 4. **Operational Efficiency** - If you already use MongoDB, adding vector search avoids the need to introduce new infrastructure. It simplifies schema, transactions, and ops.
 
 ## Understanding AI agents

@@ -24,7 +24,7 @@ So, this week is ideal for talking about one of the most misunderstood technolog
 
 While many developers view Java as the "Dark Side" of coding, complex, outdated, and intimidating, the reality is very different. Learning Java can be much easier, more logical, and far more rewarding than most people think. In this post, we'll show you why Java might actually be one of the best and most accessible languages to learn.
 
-### ("In a galaxy far, far away...")
+### ("In a galaxy far, far away…")
 
 A long time ago in a galaxy not so different from ours, aspiring developers looked at Java and felt a disturbance in the Force.
 
@@ -40,7 +40,7 @@ Fear of the mysterious "Object-Oriented Programming."
 
 Many believed Java belonged to the Dark Side of programming languages.
 
-But that belief... is as misleading as the Sith doctrine itself.  
+But that belief… is as misleading as the Sith doctrine itself.  
 
 Java is not the Dark Side.
 
@@ -99,7 +99,7 @@ class Jedi {
 
 This is your Jedi identity stored in code.  
 
-Like Anakin Skywalker before his fall... or redemption.
+Like Anakin Skywalker before his fall… or redemption.
 
 ![](duke_st_02-687x1024.jpg)
 
@@ -163,7 +163,7 @@ Obi-Wan Kenobi uses the Force like Master Yoda taught.
 
 ## The Real Dark Side: The Empire of Bad Learning
 
-Most Padawans fail not because Java is powerful...
+Most Padawans fail not because Java is powerful…
 
 But because they fall into the Dark Side of learning:
 
@@ -173,7 +173,7 @@ But because they fall into the Dark Side of learning:
 
 Even Darth Vader didn't start by building an Empire.
 
-He started as Anakin... a learner.
+He started as Anakin… a learner.
 
 ## Why Java Feels Like the Jedi Code (But Isn't Hard)
 

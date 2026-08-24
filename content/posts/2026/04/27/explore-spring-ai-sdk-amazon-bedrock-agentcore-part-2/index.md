@@ -107,7 +107,7 @@ public class MemoryConfig {
 
 Let's break down the structure of the beans defined in the above `configuration` class.
 
-#### 4.1. ChatMemory Bean -- The Core
+#### 4.1. ChatMemory Bean – The Core
 
 ```java
 @Bean
@@ -125,7 +125,7 @@ This creates a ***sliding window memory*** that retains only the last 20 message
 * Reduces token usage when calling LLMs, making it cost-effective
 * Maintains conversation relevance
 
-#### 4.2. MessageChatMemoryAdvisor -- The Wrapper
+#### 4.2. MessageChatMemoryAdvisor – The Wrapper
 
 ```java
 @Bean
@@ -140,7 +140,7 @@ This advisor acts as an intermediary that:
 * Automatically injects conversation history into chat requests
 * Manages when and how memory is applied to prompts
 
-#### 4.3. AgentCoreMemory -- The Orchestrator
+#### 4.3. AgentCoreMemory – The Orchestrator
 
 ```java
 @Bean
@@ -244,7 +244,7 @@ public class ShortTermMemoryController {
 * **ChatMemory:** Manages the conversation window/sliding window (20 messages)
 * **AgentCoreMemory:** Orchestrates memory across operations
 
-#### POST `/api/short` -- Chat Endpoint
+#### POST `/api/short` – Chat Endpoint
 
 ```java
 @PostMapping("/api/short")
@@ -272,7 +272,7 @@ public ChatResponse shortTermChat(@RequestBody ChatRequest chatRequest) {
    * Stores the user message + response in ChatMemory
 5. Returns just the LLM response to the client
 
-#### GET `/api/history` -- Retrieve Conversation History
+#### GET `/api/history` – Retrieve Conversation History
 
 ```java
 @GetMapping("/api/history")
@@ -287,7 +287,7 @@ This method returns all messages (up to 20) for the given conversation ID. It is
 * Debugging the conversation context
 * Auditing interactions
 
-#### DELETE `/api/history` -- Clear History
+#### DELETE `/api/history` – Clear History
 
 ```java
 @DeleteMapping("/api/history")

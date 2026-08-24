@@ -106,7 +106,7 @@ The test itself in this class is irrelevant and does not add to the runtime.
 
 Otherwise this test seems rather ok, as a `@BeforeEach` method makes sure the database is cleared before each test so that individual tests are not interdependent.
 
-On my rather fast machine this test takes about 10 seconds in total... Compared to the single test method taking under 1 sec. This not really fast and I can understand people who say this is not for every day work.
+On my rather fast machine this test takes about 10 seconds in total… Compared to the single test method taking under 1 sec. This not really fast and I can understand people who say this is not for every day work.
 
 But, fear not, there is...
 

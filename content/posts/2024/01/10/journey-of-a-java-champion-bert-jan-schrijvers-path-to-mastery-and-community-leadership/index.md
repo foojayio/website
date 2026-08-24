@@ -41,7 +41,7 @@ Because I had become an active contributor to the NLJUG by working on the magazi
 
 In the meantime, I started speaking internationally, meeting lots of amazing people from the international Java community. I travelled a lot in 2015 and 2016 and met a group of speakers I regularly saw at events that I still consider my "family away from home." 😉
 
-In 2017, I was awarded the title of Java Champion in recognition of my contributions to the Java community. Since then, I've continued my work for the NLJUG board, organizing events and speaking at conferences around the world. In 2017, I founded OpenValue, a Java and full-stack consulting company, together with Roy Wasse -- who I knew from the NLJUG community. So, I think it's safe to say that the Java community has had a major positive impact on my career.
+In 2017, I was awarded the title of Java Champion in recognition of my contributions to the Java community. Since then, I've continued my work for the NLJUG board, organizing events and speaking at conferences around the world. In 2017, I founded OpenValue, a Java and full-stack consulting company, together with Roy Wasse – who I knew from the NLJUG community. So, I think it's safe to say that the Java community has had a major positive impact on my career.
 
 **Bazlur: That's a fantastic journey. Given your extensive experience in the Java community, could you share some insights on how the Java landscape has evolved over the years? And what do you think are the key factors contributing to the continued success and growth of Java as a language and the Java community?**
 

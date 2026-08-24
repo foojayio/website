@@ -14,8 +14,8 @@ categories:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 frozen: false
 ---
 

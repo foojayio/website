@@ -5,14 +5,7 @@ lastmod: "2024-05-17T19:48:22+00:00"
 description: "This article explores various approaches to calling microservices in Java, from simple RESTful APIs to advanced. Learn more!"
 authors:
   - "abo-saad-muaath"
-# No `image:`. WordPress points this post at
-#   https://foojay.io/wp-content/uploads/2024/05/Screenshot-1445-10-05-at-7.23.37 AM.png
-# and that file 404s on the LIVE site too -- it is not in the media library
-# (checked via /wp-json/wp/v2/media), so there is nothing to pull local. The
-# hero rendered as a broken image and og:image pointed at a dead URL; without
-# the key the post simply has no hero and previews with the social card.
-# NOTE: transfer/Posts.java rebuilds frontmatter from scratch, so re-scraping
-# this post puts the dead URL back.
+image: "https://foojay.io/wp-content/uploads/2024/05/Screenshot-1445-10-05-at-7.23.37 AM.png"
 categories:
   - "Java"
   - "Microservices"

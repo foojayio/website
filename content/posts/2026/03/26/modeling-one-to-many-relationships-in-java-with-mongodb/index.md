@@ -686,7 +686,7 @@ This is the single most important rule in MongoDB schema design. Don't start by 
 
 ### **Avoid Unbounded Arrays**
 
-Embedding works well when the array has a predictable upper bound. A blog post with 5--50 comments? Embedding is fine. A social media post that could accumulate hundreds of thousands of reactions? That array will grow without limit, eventually hitting MongoDB's 16 MB document size limit. Use references when a list can grow indefinitely.
+Embedding works well when the array has a predictable upper bound. A blog post with 5–50 comments? Embedding is fine. A social media post that could accumulate hundreds of thousands of reactions? That array will grow without limit, eventually hitting MongoDB's 16 MB document size limit. Use references when a list can grow indefinitely.
 
 ### **Think About Atomicity**
 

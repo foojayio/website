@@ -144,7 +144,7 @@ Return a JSON array. Each element must have:
 
 - "content": a concise, self-contained statement of what to remember
 
-- "importanceScore": a float 0.0--1.0 (0 = trivial, 1 = critical)
+- "importanceScore": a float 0.0–1.0 (0 = trivial, 1 = critical)
 
 Only include genuinely reusable information. Skip conversational pleasantries.
 

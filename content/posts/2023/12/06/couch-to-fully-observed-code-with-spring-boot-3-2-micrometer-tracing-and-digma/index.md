@@ -34,7 +34,7 @@ The main reason most developers use debugging over tracing is that it is more av
 
 ## How to get to fully observed code with Spring Boot and Micrometer
 
-Thankfully, it's extremely easy to get started with Micrometer. These capabilities are even easier with Spring Boot 3.2 but are available in Spring 3.x releases. To make it even easier, we (Digma) invested in a free IDE plugin (IntelliJ only for now, though other IDEs coming soon!) that can reduce the amount of work required to start getting information about your code with tracing ---  to a few clicks. Digma also runs locally! So there is no issue about sending observability data to the cloud.
+Thankfully, it's extremely easy to get started with Micrometer. These capabilities are even easier with Spring Boot 3.2 but are available in Spring 3.x releases. To make it even easier, we (Digma) invested in a free IDE plugin (IntelliJ only for now, though other IDEs coming soon!) that can reduce the amount of work required to start getting information about your code with tracing —  to a few clicks. Digma also runs locally! So there is no issue about sending observability data to the cloud.
 
 I (Roni) have previously written on the benefits of using Micrometer Tracing in terms of its low-performance impact (definitely compared to the OTEL agent, which is much more suited for dev and test). But how easy it is to get started? Here is a quick guide to getting from no observability to fully observed in just a few steps.
 
@@ -74,7 +74,7 @@ It is tempting to look at the ability to quickly navigate from the code to the r
 
 Traces are a great way to understand code behavior and provide a good "request handling anatomy" as a reference or guide for any developer working on a piece of code. However, the granularity level of the individual trace runs a serious risk of spamming and cluttering our view with irrelevant data. More importantly, we may end up missing critical data such as errors, bad performance, or issues with the flow of control simply because that specific chosen trace does not contain them.
 
-Taking that a step further, one can find that the truly important things we need to learn are not even contained in any individual trace. The complete picture can only be understood by analyzing the totality of them --- understanding the trendlines, escalating issues, and anomalies. This is especially true for complex or distributed systems but manifests itself also in simple applications with enough traffic.
+Taking that a step further, one can find that the truly important things we need to learn are not even contained in any individual trace. The complete picture can only be understood by analyzing the totality of them — understanding the trendlines, escalating issues, and anomalies. This is especially true for complex or distributed systems but manifests itself also in simple applications with enough traffic.
 
 [Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/) is a new development practice that uses observability sources such as tracing to keep developers proactively aware of what their code is doing. The key premise is that all of the information is already there, it is the processing of it that requires too much effort to include in everyday coding.
 
@@ -82,7 +82,7 @@ What we're trying to do with [digma.ai](https://digma.ai/) is just that, create 
 
 ![](digma-latency-graph.png)
 
-In that vein, we've (Digma) reversed the pyramid so to speak --- instead of sifting through logs and traces to find issues --- Digma analyzes that data to find issues and then allows you to navigate to the relevant logs and traces that represent good examples.
+In that vein, we've (Digma) reversed the pyramid so to speak — instead of sifting through logs and traces to find issues — Digma analyzes that data to find issues and then allows you to navigate to the relevant logs and traces that represent good examples.
 
 In this sense, the first and most important priority is to actually find these important aspects related to our code we would like to know and understand, and only then to drill down into the lower-level graphs, traces, and metrics. We can ask questions such as "What does an average request look like" vs. "What does it look like when it's slow" and save a lot of time by letting the toolings discern the root causes for us.
 
@@ -98,7 +98,7 @@ Clicking the button will take care of adding the `@Observe` annotation to start 
 
 ### Things to consider when running in production
 
-At some point, it would make sense to start gathering observability data not just from your own machine, or the testing environments, but from the real source of truth --- production. Due to its minimal footprint and the fact that it avoids using reflection, Micrometer Tracing performs great in prod. However, there are still some things to consider when observing real-world, high-load environments.
+At some point, it would make sense to start gathering observability data not just from your own machine, or the testing environments, but from the real source of truth — production. Due to its minimal footprint and the fact that it avoids using reflection, Micrometer Tracing performs great in prod. However, there are still some things to consider when observing real-world, high-load environments.
 
 ### Sampling
 

@@ -21,7 +21,7 @@ frozen: false
 
 Building real-time data pipelines and streaming applications just got more cost-effective.
 
-Kafka is great because it's horizontally scalable, fault-tolerant, and runs in production for thousands of companies -- and we figured out how to help you get more mileage out of it.
+Kafka is great because it's horizontally scalable, fault-tolerant, and runs in production for thousands of companies – and we figured out how to help you get more mileage out of it.
 
 ## How We Did It
 
@@ -62,9 +62,9 @@ Reducing nodes need and improving TPS simplifies things a lot, especially for co
 We used the same Azul Kafka Benchmark <https://github.com/AzulSystems/kafka-benchmark> we used in the previous article. The AMI and instance sizes were as follows:
 
 * AMI: ami-0747bdcabd34c712a (UBUNTU18)
-* 1 node (c5.2xlarge) -- for Zookeeper and kafka-e2e-benchmark. Zookeeper Heap: 1GB
-* 3 nodes (i3en.2xlarge) -- for Kafka brokers. Kafka Broker Heap: 40GB
-* 1 node (m5n.8xlarge) -- for load generator. Note that the size of the node running the load generator has a big impact on the scores. When we ran the load generator on a smaller AWS instance type we saw, it became a bottleneck and, as a result, Azul Platform Prime scores were lower compared to OpenJDK.
+* 1 node (c5.2xlarge) – for Zookeeper and kafka-e2e-benchmark. Zookeeper Heap: 1GB
+* 3 nodes (i3en.2xlarge) – for Kafka brokers. Kafka Broker Heap: 40GB
+* 1 node (m5n.8xlarge) – for load generator. Note that the size of the node running the load generator has a big impact on the scores. When we ran the load generator on a smaller AWS instance type we saw, it became a bottleneck and, as a result, Azul Platform Prime scores were lower compared to OpenJDK.
 
 The only OSS configuration we performed on the instances was to configure Transparent Huge Pages:
 

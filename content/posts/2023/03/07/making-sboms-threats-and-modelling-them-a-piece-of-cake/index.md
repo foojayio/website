@@ -23,7 +23,7 @@ Yes, just like the previous articles, we have cake this time too - this one is a
 
 {{< img src="Unknown-300x260.jpg" class="aligncenter size-thumbnail" width="300" height="260" >}}
 
-So... still with us? Good!
+So… still with us? Good!
 
 Earlier, Steve Poole showed us his digital mixing bowl, [telling us how applications and their dependencies were like ingredients to a fancy cake](https://foojay.io/today/sboms-first-steps-in-a-new-journey-for-developers/).
 
@@ -31,7 +31,7 @@ Jamie Coleman then made sure there were no soggy bottoms (one for the Mary Berry
 
 So I guess now it's time for me to add the covering to the layers, some glacé cherries, and maybe some of those ornate flowers made of icing, who knows!
 
-## Tier 1.... The large base layer. Funfetti.
+## Tier 1…. The large base layer. Funfetti.
 
 Vulnerabilities! Nasty things aren't they?! As nasty as funfetti cake, [ranked one of the world's worst cake flavours](https://www.tastingtable.com/1155106/ranking-popular-cake-flavors-from-worst-to-best/), controversial, I know! They've been around for a long time, almost as long as computers. Steve also mentioned earlier that they are ever increasing and getting difficult to manage.  
 
@@ -47,7 +47,7 @@ That's a statistic that I read as saying, assuming you do everything right, it i
 
 OK, let's go to the next layer. As for this cake, it's OK, you can spit it out and put it in the bin.
 
-## Tier 2.... The middle layer.. Chocolate.
+## Tier 2…. The middle layer.. Chocolate.
 
 Now we get to a good one! Chocolate cake tastes great and is simple to make! Much like good security tools!   
 
@@ -61,9 +61,9 @@ Tools that visualise SBOMs and recommend upgrade paths, such as Sonatype's exper
 
 While tools that stop vulnerabilities getting into your local development repositories in the first place can make deployment safer before we've thought about using it!  
 
-Goodies make our lives easier and hopefully catch a lot of the bad things before we hit our staging servers, let alone production deployment! If only they actually tasted like chocolate cake...
+Goodies make our lives easier and hopefully catch a lot of the bad things before we hit our staging servers, let alone production deployment! If only they actually tasted like chocolate cake…
 
-## Tier 3.... The top layer.. Genoise Sponge.
+## Tier 3…. The top layer.. Genoise Sponge.
 
 Now we go for a showstopper! Sophisticated, rich and tasty! Mmmmmmm!
 
@@ -96,7 +96,7 @@ You can also get people involved that are not in development or security to help
 
 Over the past few weeks I have delivered talks on threat modelling from both a developer and application security perspective to [Open UK State of Open Con](https://www.youtube.com/watch?v=bqNSb32trEI), [OWASP London Chapter](https://www.youtube.com/watch?v=S1UXqPQs2Sw&t=2s)and a webinar to the [London Java Community JUG](https://www.youtube.com/@LondonJavaCommunity/videos). If you would like to know more then please follow the video links.   
 
-One thing to say is that threat modelling can be incredibly time consuming and sometimes building the diagrams can be a pain. How do we make our life easier here? Well.... The same as we do with the other layers! Tools!   
+One thing to say is that threat modelling can be incredibly time consuming and sometimes building the diagrams can be a pain. How do we make our life easier here? Well…. The same as we do with the other layers! Tools!   
 
 Personally I like to use the [Threagile](https://threagile.io), [OWASP Threat Dragon](https://owasp.org/www-project-threat-dragon/), and [OWASP PyTM](https://owasp.org/www-project-pytm/) tools to assist with building the diagrams and asset catalogues associated with threat models.. The card game [Elevation of Privilege](https://shostack.org/games/elevation-of-privilege) by Adam Shostack is incredibly helpful when using the STRIDE framework for threat modelling.   
 

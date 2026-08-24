@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-The software development world is buzzing about AI-assisted coding. Tools like Claude Code, Windsurf, and JetBrains Junie promise to make us more productive. But most approaches focus on generating code faster -- they're still **code-centric**.
+The software development world is buzzing about AI-assisted coding. Tools like Claude Code, Windsurf, and JetBrains Junie promise to make us more productive. But most approaches focus on generating code faster – they're still **code-centric**.
 
 What if we took a different approach? What if we made **requirements** the source of truth and let AI handle everything downstream?
 

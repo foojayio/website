@@ -91,7 +91,7 @@ $ source ~/.zshrc  	# or source ~/.bashrc
 
 #### ii) Add cmake and pyInstaller in your PATH (Windows)
 
-You can add the variables to your PATH by searching **Edit the system environment variables** , clicking **Environment Variables...** , and editing the **PATH** with your cmake directory. The commands should have been selected to be installed as native tools when you installed Microsoft VS 2022. An example of the directories where the commands have been installed is as follows:
+You can add the variables to your PATH by searching **Edit the system environment variables** , clicking **Environment Variables…** , and editing the **PATH** with your cmake directory. The commands should have been selected to be installed as native tools when you installed Microsoft VS 2022. An example of the directories where the commands have been installed is as follows:
 
 ```
 $ C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\

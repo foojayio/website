@@ -53,7 +53,7 @@ The central architectural move here is using Jakarta Data repositories as the pe
 
 The talk also makes excellent use of Jakarta Concurrency 3.1's virtual thread support. Embedding generation and model inference are I/O-bound operations and the result is a highly concurrent system without any manual thread pool management. MicroProfile Config handles runtime model switching, so you can move between model providers without redeployment.
 
-Luqman is being honest about when this approach reaches its limits. The in-memory vector search works... until it doesn't. The embedded model works... until your scale demands otherwise. Luqman is clear about what signals should prompt you to reach for a dedicated vector database or GPU-based inference. That kind of honest guidance - knowing not just how to do something but when to stop doing it that way - is what makes this talk relevant and practical!
+Luqman is being honest about when this approach reaches its limits. The in-memory vector search works… until it doesn't. The embedded model works… until your scale demands otherwise. Luqman is clear about what signals should prompt you to reach for a dedicated vector database or GPU-based inference. That kind of honest guidance - knowing not just how to do something but when to stop doing it that way - is what makes this talk relevant and practical!
 
 {{< youtube l2tbVnqw1kc >}}
 
@@ -79,7 +79,7 @@ This talk will be useful for anyone who has built an AI proof-of-concept and is 
 
 Every AI-enabled service in the previous three talks exposes APIs. Every agent that communicates with another service does so over an API. Every system Kenji secures with JWT and OpenID Connect is secured at its API boundary. The sophistication of your AI architecture means very little if the APIs it's built on are fragile, inconsistently versioned and poorly documented.
 
-Rustam is one of my favourite Java talks presenters -- his talks are energetic and funny but at the same time full of practical examples and experience-led lessons. This talk follows that approach, being a good reminder of how much often goes wrong with APIs in practice. He covers the gap between REST theory and REST reality, the widespread misuse of HTTP status codes, the underappreciated complexity of versioning strategies, and the operational challenges of deprecation and lifecycle management.
+Rustam is one of my favourite Java talks presenters – his talks are energetic and funny but at the same time full of practical examples and experience-led lessons. This talk follows that approach, being a good reminder of how much often goes wrong with APIs in practice. He covers the gap between REST theory and REST reality, the widespread misuse of HTTP status codes, the underappreciated complexity of versioning strategies, and the operational challenges of deprecation and lifecycle management.
 
 If the previously mentioned AI talks made you excited about what you're going to build, Rustam's talk is a good reminder to build it well.
 

@@ -26,7 +26,7 @@ Five years ago, [Hielke](https://medium.com/@Frevib) and I wrote one of the firs
 
 After a few years outside of the company, I joined back a few months ago to lead the Developer Relations program. Being just as big of a fan of Kotlin as I was five years ago, one of the first thing I did was help build the storyline when JetBrains contacted us to be one of the main case studies of [their KotlinConf 2025 Keynote](https://youtu.be/F5NaqGF9oT4?si=pn1e9dC0Vhb31W1-&t=3397) 🎉. Now, this seems like the perfect time to investigate what the internal picture looks like now! Let's dive into it together 😊.
 
-Before looking into the code, let's look at the Kotlin ecosystem of ING! There is quite a lot to say, which is why I start by this. For reference, there are about 20000 people working in the Tech structure of ING. This includes developers, but also many other technical roles (e.g DevOps, product, machine learning, ....).
+Before looking into the code, let's look at the Kotlin ecosystem of ING! There is quite a lot to say, which is why I start by this. For reference, there are about 20000 people working in the Tech structure of ING. This includes developers, but also many other technical roles (e.g DevOps, product, machine learning, ….).
 
 First, ING is one of the driving forces of the Kotlin community in a few places. For example, the [ING Kotlin Summit](https://www.meetup.com/tech-meetups-ing/events/306698283/?eventOrigin=group_upcoming_events) that is yearly organised in June (today, actually) with over 300 participants and an impressive lineup of speakers! You can find many of the talks on [our Youtube channel](https://www.youtube.com/@weareINGtech). The event is fully hosted by ING, but registration was open to the public too. This year is even co-sponsored by Google and Xebia.
 
@@ -112,7 +112,7 @@ Let's look into the share of a language on average in a repository, for reposito
 
 ![Just how much share of a language does a repo contain on average](9-700x467.webp)
 
-This is an interesting graph! Repositories containing Kotlin contain over 70% Kotlin code (including docs, config files, ...). This leads to believe that **Kotlin repositories contain mostly Kotlin code**.
+This is an interesting graph! Repositories containing Kotlin contain over 70% Kotlin code (including docs, config files, …). This leads to believe that **Kotlin repositories contain mostly Kotlin code**.
 
 Scala and Groovy repositories, however, seem to be used in hybrid repositories.
 

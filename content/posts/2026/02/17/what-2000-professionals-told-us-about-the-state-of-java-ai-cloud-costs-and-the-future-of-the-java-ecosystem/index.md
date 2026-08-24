@@ -78,7 +78,7 @@ Cost optimization in the cloud is no longer a "nice to have." It's a strategic i
 
 Why Java? Because faster runtimes, better start-up behavior, and lower warm‑up overhead translate directly to fewer cores, smaller instances, shorter execution times, and ultimately save cloud spend.
 
-And yet...most enterprises still leave a lot of money on the table.
+And yet…most enterprises still leave a lot of money on the table.
 > ***74% say more than 20% of their cloud compute is sitting unused.***
 
 Often this "waste" is simply overprovisioning to compensate for slow start-up times, long warm‑up cycles, and inconsistent runtime performance.

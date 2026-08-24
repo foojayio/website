@@ -30,8 +30,6 @@ related_posts:
   - "foojay-podcast-91"
   - "foojay-podcast-90"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-94-more-than-a-blog-how-foojay-connects-sustains-and-evolves-the-java-community/"
 ---
 
 Foojay.io, the website for the Friends Of OpenJDK, is turning six years old. To celebrate, Frank Delporte headed to JCON in Cologne, Germany, and sat down with twelve members of the Java community to talk about what Foojay means to them, what they learn from each other, and how the community is evolving.

@@ -24,7 +24,7 @@ Java is based on RGB and partially supports other ColorSpaces. The ColorSpace cl
 ColorSpaces can be defined using a CIE profile file and if you have one for a ColorSpace you can create an instance of the ColorSpace and convert color values between ColorSpaces). But BufferedImage itself only understands a more limited subset of formats.  
 ![BufferedImage colorspaces](https://blog.idrsolutions.com/wp-content/uploads/2019/11/Screenshot-2019-11-19-at-10.41.31-300x126.png)
 
-Java can generally load lots of image types and allow access to the raw Image data, but it does not fully understand the data -- so you will get oddly coloured images like the one [in this post](https://blog.idrsolutions.com/2011/10/ycck-color-conversion-in-pdf-files/).
+Java can generally load lots of image types and allow access to the raw Image data, but it does not fully understand the data – so you will get oddly coloured images like the one [in this post](https://blog.idrsolutions.com/2011/10/ycck-color-conversion-in-pdf-files/).
 
 If you wanted to view a CMYK image as a BufferedImage in Java directly, you would need to convert the Image data into RGB before you could display it properly. You would need an ICC CMYK profile to create a CMYK ColorSpace and then I should you how to transform the data [in this blog post.](https://blog.idrsolutions.com/2012/02/java-cmyk-to-rgb-conversion-speed-comparison-of-diy-versus-letting-java-do-it/)
 

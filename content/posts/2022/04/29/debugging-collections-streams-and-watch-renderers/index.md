@@ -3,6 +3,7 @@ title: "Debugging Collections, Streams, and Watch Renderers"
 date: "2022-04-29T07:54:01+00:00"
 lastmod: "2022-04-29T07:56:16+00:00"
 description: "Inspecting the data in the watch quickly is key to a fast and effective debugging session. Here's how you can see the data that's important!"
+canonical: "https://talktotheduck.dev/debugging-collections-streams-and-watch-renderers"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
@@ -32,13 +33,13 @@ This is very important for collections and arrays. We can have thousands or mill
 
 ## Collections, Arrays and Streams
 
-Debugging collections (lists, maps etc.) and arrays is painful. You need to dig through results or place conditional breakpoints in for loops. That's all painful. There are better solutions...
+Debugging collections (lists, maps etc.) and arrays is painful. You need to dig through results or place conditional breakpoints in for loops. That's all painful. There are better solutions…
 
 ### Filtering Collections
 
 I talked about a [different type of filters](https://talktotheduck.dev/exception-breakpoint-that-doesnt-suck#heading-filters) a couple of weeks ago, so please don't confuse the two. There are many filter types. Here, they apply to the collections and arrays.
 
-This is a minor feature that's actually on by default. Yet most developers don't even notice it. When you expand an array of objects, you might have noticed that the IDE hides null values. This is a filter that's on by default, you can also add your own...
+This is a minor feature that's actually on by default. Yet most developers don't even notice it. When you expand an array of objects, you might have noticed that the IDE hides null values. This is a filter that's on by default, you can also add your own…
 
 ![filter-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148290119/n2LvCUt8c.png)
 
@@ -60,7 +61,7 @@ JetBrains understood that problem and introduced the stream debugger, initially 
 
 ![stream-debugger-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148355554/95PP378tf.png)
 
-When you press this button, the stream debugger is launched. It's one tool where watching the video will probably explain it better, but I'll try...
+When you press this button, the stream debugger is launched. It's one tool where watching the video will probably explain it better, but I'll try…
 
 ![stream-debugger-2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148370843/CaCvAtL5U.png)
 
@@ -70,9 +71,9 @@ Notice that all the elements are "live" and you can inspect everything as you ca
 
 ## Renderers
 
-We normally look at elements in the watch area without giving it too much thought. That's the "object" or the data...
+We normally look at elements in the watch area without giving it too much thought. That's the "object" or the data…
 
-But what we see is the way a renderer interprets the data. The default behavior for renders in Java is to invoke the `toString()` method. So while customizing this helps, there's a lot more that a good renderer can accomplish...
+But what we see is the way a renderer interprets the data. The default behavior for renders in Java is to invoke the `toString()` method. So while customizing this helps, there's a lot more that a good renderer can accomplish…
 
 In fact, next week's duckling will dig even deeper into this subject.
 
@@ -102,7 +103,7 @@ Once clicked, we can see the correct value in the renderer and we can inspect th
 
 ![custom-rendering-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148478174/n5cS0GFMU.png)
 
-The "Customize Data Views..." menu item launches the renderer customization menu. This is a pretty powerful feature that lets us control many nuanced capabilities in the default renderer.
+The "Customize Data Views…" menu item launches the renderer customization menu. This is a pretty powerful feature that lets us control many nuanced capabilities in the default renderer.
 
 ![custom-rendering-2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148493174/rYtalVVGH.png)
 
@@ -144,4 +145,4 @@ Debugging can fail over stupid things:
 
 We can resolve these things with the techniques I discuss above. If you get your watch section in order, your debugging sessions will become far more fluent.
 
-In the next installment, I will teach you how to make the debugging sessions of your entire team more fluent...
+In the next installment, I will teach you how to make the debugging sessions of your entire team more fluent…

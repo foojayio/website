@@ -24,7 +24,7 @@ In October 2023, [Raspberry Pi announced version 5](https://www.raspberrypi.com/
 
 Soon after the first boards were delivered, it turned out the Pi4J library wasn't compatible with this new board. Pi4J is a library to create Java applications for the Raspberry Pi that can interact with electronic components through the GPIO pins.
 
-But because the Raspberry Pi 5 uses a new approach, with the [new RP1 chip](https://www.raspberrypi.com/documentation/microcontrollers/rp1.html), to connect the SoC with these pins. Thanks to the RP1, it was possible to seperate GPIO, SPI, I2C, USB, ethernet,... from the SoC to make it easier to develop newer boards. However, this new approach wasn't supported by the PiGpio library used in Pi4J V2.
+But because the Raspberry Pi 5 uses a new approach, with the [new RP1 chip](https://www.raspberrypi.com/documentation/microcontrollers/rp1.html), to connect the SoC with these pins. Thanks to the RP1, it was possible to seperate GPIO, SPI, I2C, USB, ethernet,… from the SoC to make it easier to develop newer boards. However, this new approach wasn't supported by the PiGpio library used in Pi4J V2.
 
 Luckily Alexander Liggesmeyer, a Pi4J user, took up the challenge to find a solution!
 
@@ -37,7 +37,7 @@ rp1.jpg
 
 ## What is Pi4J?
 
-Here on Foojay.io, you can already find [many different articles and examples](https://foojay.io/?s=pi4j) of what can be done with Java on the Raspberry Pi. As it is a full Linux computer -- with a small size -- it can run any Java application. But this board has the additional benefit of the GPIO pins which allow you to connect sensors, buttons, displays, servos, LEDs, and any kind of electronic component.
+Here on Foojay.io, you can already find [many different articles and examples](https://foojay.io/?s=pi4j) of what can be done with Java on the Raspberry Pi. As it is a full Linux computer – with a small size – it can run any Java application. But this board has the additional benefit of the GPIO pins which allow you to connect sensors, buttons, displays, servos, LEDs, and any kind of electronic component.
 
 The [Pi4J project](https://pi4j.com/) aims to make the interaction with such components as easy as possible for a Java developer, as described on the website: "This project is intended to provide **a friendly object-oriented I/O API and implementation libraries for Java Programmers** to access the **full I/O capabilities of the Raspberry Pi platform**.
 

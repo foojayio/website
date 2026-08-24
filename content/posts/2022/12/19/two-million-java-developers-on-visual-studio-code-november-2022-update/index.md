@@ -46,7 +46,7 @@ The postfix shortcuts we currently support are the following:
 
 Here's a demo for this feature:
 
-[![Postfix Completion](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/postfix.webp)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/postfix.webp)
+[![Postfix Completion](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/postfix.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/postfix.gif)
 
 We plan to continue adding more postfix shortcuts so stay tuned.
 

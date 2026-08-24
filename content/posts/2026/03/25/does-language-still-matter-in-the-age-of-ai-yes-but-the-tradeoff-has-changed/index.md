@@ -15,7 +15,7 @@ related_posts:
   - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
   - "jc-ai-newsletter-4"
   - "ai4devs-schedule-published"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -77,10 +77,10 @@ Data from [programming-language-benchmarks.vercel.app](https://programming-langu
 |     Benchmark      |  Java   | Python (PyPy) | Rust  | Java vs Python  | Rust vs Java |
 |--------------------|---------|---------------|-------|-----------------|--------------|
 | nbody (5M)         | 446ms   | 2,650ms       | 163ms | **5.9x faster** | 2.7x faster  |
-| nsieve (12)        | 387ms   | 2,403ms       | ---   | **6.2x faster** | ---          |
+| nsieve (12)        | 387ms   | 2,403ms       | —     | **6.2x faster** | —            |
 | fasta (2.5M)       | 449ms   | 2,215ms       | 88ms  | **4.9x faster** | 5.1x faster  |
-| knucleotide (2.5M) | 1,059ms | ---           | 219ms | ---             | 4.8x faster  |
-| mandelbrot (5K)    | 1,153ms | ---           | 292ms | ---             | 3.9x faster  |
+| knucleotide (2.5M) | 1,059ms | —             | 219ms | —               | 4.8x faster  |
+| mandelbrot (5K)    | 1,153ms | —             | 292ms | —               | 3.9x faster  |
 
 Java runs 5-6x faster than Python on compute-intensive work. Rust beats Java by 2-5x. Not synthetic micro-benchmarks either — these are algorithmic workloads that show up in real backend systems.
 
@@ -125,7 +125,7 @@ def total_completed_orders(orders):
     return sum(order["total"] for order in orders if order["status"] == "COMPLETED")
 ```
 
-Concise. But what's in `orders`? What type is `"total"` --- float, int, Decimal? What if the key is missing? A reviewer has to hold all of that in their head.
+Concise. But what's in `orders`? What type is `"total"` — float, int, Decimal? What if the key is missing? A reviewer has to hold all of that in their head.
 
 ### Java: verbose but verifiable
 
@@ -190,6 +190,6 @@ That is where language still matters.
 
 Sources:
 
-* [Programming Language Benchmarks](https://programming-language-benchmarks.vercel.app/) --- Java vs Python and Java vs Rust performance data
-* [Atlassian Research: Code Readability in the Age of LLMs](https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm) --- ICSME'25 study on developer attitudes and AI-generated code quality
-* [Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/index.html) --- canonical cross-language performance comparison
+* [Programming Language Benchmarks](https://programming-language-benchmarks.vercel.app/) — Java vs Python and Java vs Rust performance data
+* [Atlassian Research: Code Readability in the Age of LLMs](https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm) — ICSME'25 study on developer attitudes and AI-generated code quality
+* [Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/index.html) — canonical cross-language performance comparison

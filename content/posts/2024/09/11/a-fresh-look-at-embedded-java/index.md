@@ -44,7 +44,7 @@ The many evolutions in the Java language and runtimes from the last years, thank
 
 Because the runtime manages the memory use and handles the threads, developers can focus on the business logic with improved productivity. Java shines where solutions are needed to handle large amounts of data, create summaries, interact with other services, etc. As such, edge devices that collect data from various sensors and need to transform it before sending it to a backend system are just one of the many examples where Java is the most logical choice to develop that edge application.
 
-But thanks to JavaFX -- to build appealing user interfaces -- there is also a big opportunity for embedded devices with a screen.
+But thanks to JavaFX – to build appealing user interfaces – there is also a big opportunity for embedded devices with a screen.
 
 *"The biggest car brands rely on Java to handle screens and sensor data in their cars," says Azul Consultant Marc Maathuis. "But Azul runtimes are also used in medical devices, Point-of-Sale (POS) systems, ticket vending machines, home-automation edge devices, and many more. For example, you can remotely check the temperature in your house or open the door, thanks to Java!"*
 ![](embedded-Maathuis-quote.jpg)

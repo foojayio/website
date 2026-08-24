@@ -16,7 +16,7 @@ related_posts:
   - "foojay-podcast-57"
   - "java-23-whats-new"
   - "exploring-new-features-in-jdk-23-simplifying-java-with-module-import-declarations-with-jep-476"
-  - "exploring-new-features-in-jdk-23-module-design-pattern-with-jep-476"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

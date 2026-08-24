@@ -41,7 +41,7 @@ Although Apache Hadoop and Apache Spark are in the core of our services, we use 
 
 **Q: You talk about "disruptive Data Science technologies" - what does this mean?**
 
-**Fabiane:** We started working with Data Science about 8 years ago, when this field was very new and many of the tools we have now, especially in cloud offerings, were not available yet. This made us to learn a lot and build several tools from scratch. We have now a good understanding of what the pain points are when creating Data Science projects, and we created our own suite of tools to address the main problems in the field. There is a long discussion and explanation of how we solved these problems in our blog. See [Tail Refinaria -- Solving Data Engineering problems](https://blog.tail.digital/en/tail-refinaria-solving-data-engineering-problems/ "Tail Refinaria – Solving Data Engineering problems").
+**Fabiane:** We started working with Data Science about 8 years ago, when this field was very new and many of the tools we have now, especially in cloud offerings, were not available yet. This made us to learn a lot and build several tools from scratch. We have now a good understanding of what the pain points are when creating Data Science projects, and we created our own suite of tools to address the main problems in the field. There is a long discussion and explanation of how we solved these problems in our blog. See [Tail Refinaria – Solving Data Engineering problems](https://blog.tail.digital/en/tail-refinaria-solving-data-engineering-problems/ "Tail Refinaria – Solving Data Engineering problems").
 
 **Q: Can you describe the type of Java/JVM programming that's involved in Tail Target's "machine learning engineering"?**
 

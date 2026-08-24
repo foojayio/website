@@ -22,7 +22,7 @@ In my recent conversation with William Fellows, Research Director at S\&P Global
 
 {{< youtube nAP3bYxdsZw >}}
 
-A large delta is growing between budgeted and actual spending. Top areas for spending are cloud integration and modernization services, security and compliance monitoring, and application modernization -- specifically applications written in Java.
+A large delta is growing between budgeted and actual spending. Top areas for spending are cloud integration and modernization services, security and compliance monitoring, and application modernization – specifically applications written in Java.
 
 Let's explore some background on the cloud in general.
 
@@ -35,7 +35,7 @@ Users see the potential benefits immediately. There is no capital expenditure to
 Unfortunately, many users never realize those cost savings, and cloud costs often prove even more expensive.
 ![Cloud Cost Optimization is hard for Java Workloads: reasons for overspending](https://www.azul.com/wp-content/uploads/Screenshot-2023-12-13-at-9.49.27%E2%80%AFAM-1024x592.png) Source: S\&P Global
 
-In fact, in a [recent survey by S\&P Global Market Research](https://www.youtube.com/watch?v=nAP3bYxdsZw&t=1s), 27% of respondents said scaling up resources to address unanticipated demand and spend was the biggest reason for overspending on IaaS/PaaS/[public cloud](https://www.azul.com/glossary/public-cloud/) in 2022. Another 15% cited over-provisioning -- or committing more resources than needed.
+In fact, in a [recent survey by S\&P Global Market Research](https://www.youtube.com/watch?v=nAP3bYxdsZw&t=1s), 27% of respondents said scaling up resources to address unanticipated demand and spend was the biggest reason for overspending on IaaS/PaaS/[public cloud](https://www.azul.com/glossary/public-cloud/) in 2022. Another 15% cited over-provisioning – or committing more resources than needed.
 
 Why is this, and why is this more frequently the case when running JVM-based workloads?
 
@@ -72,8 +72,8 @@ Azul Platform Prime includes three areas of change:
 
 There's a lot of great information about key cloud cost trends that you need to know [from our conversation](https://www.youtube.com/watch?v=nAP3bYxdsZw&t=1s).
 
-* **Cloud pricing changes may be in your favor**: The volume of price, product and service changes in AWS, Azure, and Google Cloud Platform catalogs have changed significantly -- buckle-up, it's getting more complex.
-* **Benchmark your organization unit costs**: General-purpose, compute and memory virtual machine benchmarks reveal some price-relief -- but that may not be enough.
+* **Cloud pricing changes may be in your favor**: The volume of price, product and service changes in AWS, Azure, and Google Cloud Platform catalogs have changed significantly – buckle-up, it's getting more complex.
+* **Benchmark your organization unit costs**: General-purpose, compute and memory virtual machine benchmarks reveal some price-relief – but that may not be enough.
 * **How do your cloud spending shifts compare:** the top cloud-attached services trends in the market may surprise you.
 
 You are going to want to hear the full conversation between William and myself. A Java runtime that delivers more performance can make a big difference.

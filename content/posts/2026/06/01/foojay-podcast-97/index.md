@@ -60,7 +60,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * On Foojay:
   * [Overview of all recent BoxLang AI articles: Complete Guide to Building AI Agents](https://foojay.io/today/boxlang-ai-series-complete-guide-to-building-ai-agents/)
   * [BoxLang AI v3 Has Landed](https://foojay.io/today/boxlang-ai-v3-has-landed-multi-agent-orchestration-tooling-skills-and-so-much-more/)
-  * [BoxLang AI Deep Dive series, Parts 1--7](https://foojay.io/today/author/cristobal-escobar/)
+  * [BoxLang AI Deep Dive series, Parts 1–7](https://foojay.io/today/author/cristobal-escobar/)
   * [How to Develop AI Agents Using BoxLang AI: A Practical Guide](https://foojay.io/today/how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide/)
   * [Introducing the BoxLang Spring Boot Starter](https://foojay.io/today/introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring/)
   * [Introducing BoxLings!](https://foojay.io/today/introducing-boxlings-an-interactive-teacher-for-boxlang-and-tdd-bdd/)

@@ -25,7 +25,7 @@ This is the second in a series of posts examining patterns for using K8ssandra t
 
 In the [first article](https://k8ssandra.io/blog/tutorials/deploy-a-multi-datacenter-apache-cassandra-cluster-in-kubernetes/) in this series, we looked at how you could create a Cassandra cluster with two datacenters in a single cloud region, using separate Kubernetes namespaces in order to isolate workloads. For example, you might want to create a secondary Cassandra datacenter to isolate a read-heavy analytics workload from the datacenter supporting your main application.
 
-In the rest of this series, we'll explore additional configurations that promote high availability and accessibility of your data across various different network topologies, including hybrid and multi-cloud deployments. Our focus for this post will be on creating a Cassandra cluster running on Kubernetes clusters in multiple regions within a single cloud provider -- in this case Google Cloud. If you worked through the first blog, many of the steps will be familiar.
+In the rest of this series, we'll explore additional configurations that promote high availability and accessibility of your data across various different network topologies, including hybrid and multi-cloud deployments. Our focus for this post will be on creating a Cassandra cluster running on Kubernetes clusters in multiple regions within a single cloud provider – in this case Google Cloud. If you worked through the first blog, many of the steps will be familiar.
 
 Note: for the purpose of this exercise, you'll create GKE clusters in two separate regions, under the same Google Cloud project. This will make it possible to use the same network.
 

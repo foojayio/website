@@ -13,13 +13,13 @@ categories:
   - "Profiler"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 frozen: false
 ---
 
-In the era of **vibe coding**---where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs—you need immediate feedback on how new logic actually executes. Not comprehensive analysis. Not nanosecond-precise timing. Just a quick confirmation that your loops aren't spinning 10,000x more than they should.
+In the era of **vibe coding**—where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs—you need immediate feedback on how new logic actually executes. Not comprehensive analysis. Not nanosecond-precise timing. Just a quick confirmation that your loops aren't spinning 10,000x more than they should.
 
 However, traditional profilers can feel like overkill for quick validation. In addition, they present results at method/stack granularity and require context-switching to interpret. They also introduce overhead, ranging from negligible (e.g., JFR/sampling) to noticeable (call tracing/instrumentation). As a result, they are less convenient as always-on feedback during rapid iteration.
 

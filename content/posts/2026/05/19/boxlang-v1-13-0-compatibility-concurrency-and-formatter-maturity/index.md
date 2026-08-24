@@ -32,7 +32,7 @@ While this release is bug-fix heavy, it still introduces several meaningful feat
 
 Three additions that materially expand what the runtime can do.
 
-### Character-Aware Trimming --- `trim()`, `ltrim()`, `rtrim()`
+### Character-Aware Trimming — `trim()`, `ltrim()`, `rtrim()`
 
 The string trimming BIFs now accept an optional chars argument. Strip arbitrary character sets without reaching for `rereplace()`.
 
@@ -90,15 +90,15 @@ This is a flagship moment. The formatter graduates from experimental to producti
 
 #### Capabilities:
 
-* **In-place formatting** --- `boxlang format --input ./` formats an entire project tree
-* **CI check mode** --- `boxlang format --check --input ./` exits non-zero on any unformatted file (drop straight into GitHub Actions, GitLab CI, or Jenkins)
-* **Stdout mode** --- `boxlang format --overwrite false --input ./models/User.cfc` for diff-friendly previews
-* **Multi-extension** --- `.bx`, `.bxs`, `.bxm`, `.cfm`, `.cfc`, `.cfs` in a single pass
+* **In-place formatting** — `boxlang format --input ./` formats an entire project tree
+* **CI check mode** — `boxlang format --check --input ./` exits non-zero on any unformatted file (drop straight into GitHub Actions, GitLab CI, or Jenkins)
+* **Stdout mode** — `boxlang format --overwrite false --input ./models/User.cfc` for diff-friendly previews
+* **Multi-extension** — `.bx`, `.bxs`, `.bxm`, `.cfm`, `.cfc`, `.cfs` in a single pass
 
 #### Config discovery fallback chain:
 
-* `.bxformat.json` --- BoxLang-native config (Ortus gold-standard defaults)
-* `.cfformat.json` --- legacy CFFormat config, auto-converted with migration-safe defaults
+* `.bxformat.json` — BoxLang-native config (Ortus gold-standard defaults)
+* `.cfformat.json` — legacy CFFormat config, auto-converted with migration-safe defaults
 * Built-in defaults — sensible behavior with zero config
 
 #### Migration tooling built in:

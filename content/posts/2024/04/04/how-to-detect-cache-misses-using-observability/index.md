@@ -3,6 +3,7 @@ title: "How to Detect Cache Misses Using Observability"
 date: "2024-04-04T07:44:31+00:00"
 lastmod: "2024-04-04T07:49:33+00:00"
 description: "In this article, we'll examine cache misses and, in general, learn about the caching concept and how to implement it in Spring Boot."
+canonical: "https://digma.ai/how-to-detect-cache-misses-using-observability/"
 authors:
   - "saeed-zarinfam"
 image: "Spring-Digma.png"
@@ -80,7 +81,7 @@ Spring Boot supplies caching support to make your application fast. Spring Boot 
 The first two things we need to do after adding the library dependency are:
 
 1. Enable caching by adding the @EnableCaching annotation to a configuration class.
-2. Add your preferred caching library (e.g., Caffeine, Redis, Hazelcast, or ...). If you don't provide any cache library, Spring Boot will automatically autoconfigure the default in-memory cache based on the ConcurrentHashMap.  
+2. Add your preferred caching library (e.g., Caffeine, Redis, Hazelcast, or …). If you don't provide any cache library, Spring Boot will automatically autoconfigure the default in-memory cache based on the ConcurrentHashMap.  
 
    ### Implementing the Phonebook example using Spring Boot
 
@@ -266,7 +267,7 @@ Also, in the Observability view, you can see the insight column and click on the
 
 ![](https://digma.ai/wp-content/uploads/2024/03/image-5.png)
 
-Digma detects that this new endpoint, on average, is slower than other endpoints. In real scenarios, it can be because of a slow database query or forgetting to use cache, cache misses, or ... In this case, we need to use the @Cacheable annotation on the method to fix this issue:
+Digma detects that this new endpoint, on average, is slower than other endpoints. In real scenarios, it can be because of a slow database query or forgetting to use cache, cache misses, or … In this case, we need to use the @Cacheable annotation on the method to fix this issue:
 
 ```
 @Cacheable(value = "phonebook.number")

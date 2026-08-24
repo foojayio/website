@@ -25,11 +25,11 @@ frozen: false
 
 ## **How do you see cloud cost optimization challenges emerging and how are companies struggling with cost overruns?**
 
-*Cloud cost optimization is a challenge -- or will be soon -- for every company. As companies leverage the cloud, they benefit from engineering speed and innovation at the expense of financial control. Many companies that use AWS experience friction between finance and engineering. For example, finance questions why the AWS and Google costs are so high. [Just ask the folks at Snap](https://apple.news/A13Qnow9iO0GKrbDViK7ePA).*
+*Cloud cost optimization is a challenge – or will be soon – for every company. As companies leverage the cloud, they benefit from engineering speed and innovation at the expense of financial control. Many companies that use AWS experience friction between finance and engineering. For example, finance questions why the AWS and Google costs are so high. [Just ask the folks at Snap](https://apple.news/A13Qnow9iO0GKrbDViK7ePA).*
 
 *Engineering delivers the products and services customers are looking for; that is their role. Finance's role is to manage spend and ensure profitability, so naturally they question engineering when cloud spend increases.*
 
-*Engineering then must defend itself or explain how a product matches to that spend. What's missing here is teams working together with a common understanding of cloud spending so engineering has visibility into the costs, and agreed upon goals. There's a statement I heard that rings true when addressing cloud spend -- finance looks for adjustments in months while engineering plans in quarters. This is the disconnect.*
+*Engineering then must defend itself or explain how a product matches to that spend. What's missing here is teams working together with a common understanding of cloud spending so engineering has visibility into the costs, and agreed upon goals. There's a statement I heard that rings true when addressing cloud spend – finance looks for adjustments in months while engineering plans in quarters. This is the disconnect.*
 > "The FinOps Foundation is a terrific group of individuals collaborating to share best practices for managing cloud spend. We helped develop a standard FinOps framework and maturity model."
 > — John Stuart, Azul
 

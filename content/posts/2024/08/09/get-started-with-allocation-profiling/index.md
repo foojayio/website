@@ -231,8 +231,8 @@ More importantly, we made sure that the parrot party will go on no matter what!
 
 If you're interested in more articles on profiling and debugging, check out my other posts:
 
-* [What's Wrong With createDirectories() -- Guide to CPU Profiling](https://flounder.dev/posts/get-started-with-profiling/)
-* [Debugger.godMode() -- Hacking JVM Applications With the Debugger](https://flounder.dev/posts/debugger-god-mode/)
+* [What's Wrong With createDirectories() – Guide to CPU Profiling](https://flounder.dev/posts/get-started-with-profiling/)
+* [Debugger.godMode() – Hacking JVM Applications With the Debugger](https://flounder.dev/posts/debugger-god-mode/)
 * [Profile IntelliJ IDEA With Its Own Profiler](https://flounder.dev/posts/profile-idea-with-idea/)
 * [Debug Unresponsive Apps](https://flounder.dev/posts/debug-unresponsive-apps/)
 

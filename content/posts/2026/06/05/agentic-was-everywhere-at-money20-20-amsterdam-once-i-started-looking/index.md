@@ -25,17 +25,17 @@ Here's what I found, grouped by what these organizations are actually trying to 
 
 The platforms that run the actual ledgers are rebranding speed and adaptability as AI:
 
-* [CoreFi](https://corefi.co/) --- "Agentic AI Cloud Core Banking"
-* [Mambu](https://www.mambu.com/) --- "Banking at the speed of AI"
-* [SaaScada](https://saascada.com/) --- "AIdaptive Core Banking"
+* [CoreFi](https://corefi.co/) — "Agentic AI Cloud Core Banking"
+* [Mambu](https://www.mambu.com/) — "Banking at the speed of AI"
+* [SaaScada](https://saascada.com/) — "AIdaptive Core Banking"
 
 ## Payments and money movement
 
 Unsurprisingly for Money20/20, payments showed up — now with agents that initiate and settle:
 
-* [BridgerPay](https://www.bridgerpay.com/) --- "AI powered payment orchestration"
-* [SolvaPay](https://solvapay.com/) --- "Agents need to pay. Agentic payments"
-* [Stripe](https://stripe.com/) --- "Moving money at agentic speed"
+* [BridgerPay](https://www.bridgerpay.com/) — "AI powered payment orchestration"
+* [SolvaPay](https://solvapay.com/) — "Agents need to pay. Agentic payments"
+* [Stripe](https://stripe.com/) — "Moving money at agentic speed"
 
 A recurring idea here — *agents that pay* — is interesting. It implies AI agents *initiating* transactions, which is a new design problem for anyone building payment rails.
 
@@ -43,51 +43,51 @@ A recurring idea here — *agents that pay* — is interesting. It implies AI ag
 
 The decisioning side of finance in the context of agents:
 
-* [Experian](https://www.experian.com/) --- "Your high trust partner in the agentic lending era"
-* [Purple Fabric](https://purplefabric.ai/) --- "AI-First Lending"
-* [Taktile](https://taktile.com/) --- "Powering critical decisions with AI agents"
-* [Acclaim AI](https://www.acclaim.ai/) --- "AI Agents for 10x More Efficient Collections"
+* [Experian](https://www.experian.com/) — "Your high trust partner in the agentic lending era"
+* [Purple Fabric](https://purplefabric.ai/) — "AI-First Lending"
+* [Taktile](https://taktile.com/) — "Powering critical decisions with AI agents"
+* [Acclaim AI](https://www.acclaim.ai/) — "AI Agents for 10x More Efficient Collections"
 
 ## Risk, fraud, and compliance
 
 There's a lot going on here: the part of fintech where "auditable" and "agentic" have to coexist:
 
-* [Oscilar](https://oscilar.com/) --- "The Agentic Risk Platform"
-* [Graphdo SIA](https://graphdo.net/) --- "AI-powered toolkit for AML"
-* [Kalipso](https://kalipso.ai/) --- "Regulatory compliance, powered by AI"
-* [JupiterOne](https://www.jupiterone.com/) --- "AI Risk Management Platform"
-* [DataWhisper](https://datawhisper.co.uk/) --- "Agentic AI for Regulated Industries"
-* [Trustpilot](https://www.trustpilot.com/) --- "The future of commerce runs on AI — and trust"
+* [Oscilar](https://oscilar.com/) — "The Agentic Risk Platform"
+* [Graphdo SIA](https://graphdo.net/) — "AI-powered toolkit for AML"
+* [Kalipso](https://kalipso.ai/) — "Regulatory compliance, powered by AI"
+* [JupiterOne](https://www.jupiterone.com/) — "AI Risk Management Platform"
+* [DataWhisper](https://datawhisper.co.uk/) — "Agentic AI for Regulated Industries"
+* [Trustpilot](https://www.trustpilot.com/) — "The future of commerce runs on AI — and trust"
 
 ## Build-your-own-agent platforms and tooling
 
 Another relevant area — the tools you'd actually use to create the AI agents themselves:
 
-* [Sierra](https://sierra.ai/) --- "There's an AI agent for that. It's built on Sierra."
-* [orq.ai](https://orq.ai/) --- "Build \& operate quality AI products"
-* [Camunda](https://camunda.com/) --- "Build AI agents trusted for high-stakes work."
-* [SoundHound AI](https://www.soundhound.com/) --- "AI Agents Built for Trust, Reliability and Security First"
+* [Sierra](https://sierra.ai/) — "There's an AI agent for that. It's built on Sierra."
+* [orq.ai](https://orq.ai/) — "Build \& operate quality AI products"
+* [Camunda](https://camunda.com/) — "Build AI agents trusted for high-stakes work."
+* [SoundHound AI](https://www.soundhound.com/) — "AI Agents Built for Trust, Reliability and Security First"
 
 ## Data and infrastructure underneath it all
 
 Agents are only as good as what they read and how fast:
 
-* [ClickHouse](https://clickhouse.com/) --- "The Leading Database for AI"
-* [acaisoft](https://www.acaisoft.com/) --- "Sovereign AI for European finance"
+* [ClickHouse](https://clickhouse.com/) — "The Leading Database for AI"
+* [acaisoft](https://www.acaisoft.com/) — "Sovereign AI for European finance"
 
 ## Content, language, and trust
 
 The parts that make agent output usable, legible, and credible:
 
-* [AD VERBUM](https://www.adverbum.com/) --- "AI Translations. Auditable. Every Word."
-* [CKEditor](https://ckeditor.com/) --- "Bring AI where content happens"
+* [AD VERBUM](https://www.adverbum.com/) — "AI Translations. Auditable. Every Word."
+* [CKEditor](https://ckeditor.com/) — "Bring AI where content happens"
 
 ## Services and talent
 
 And the people-and-delivery layer:
 
-* [HCLTech](https://www.hcltech.com/) --- "Move fast. Govern smart. Deliver with AI."
-* [Karat](https://karat.com/) --- "Unlock Talent for the Human + AI Era"
+* [HCLTech](https://www.hcltech.com/) — "Move fast. Govern smart. Deliver with AI."
+* [Karat](https://karat.com/) — "Unlock Talent for the Human + AI Era"
 
 ## Conclusions
 

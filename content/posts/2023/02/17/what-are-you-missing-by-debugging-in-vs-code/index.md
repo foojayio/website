@@ -23,7 +23,7 @@ In the first chapter of my debugging book, I discuss IDE debugging.
 
 In that chapter, I mostly talk about IntelliJ/IDEA.
 
-People often ask me why I didn't write as much about VS Code...
+People often ask me why I didn't write as much about VS Code…
 
 The reason is that there isn't much to write about. Its debugger is simpler for better and for worse. It isn't as powerful as other IDEs. I created the following video that covers the content of this post:
 

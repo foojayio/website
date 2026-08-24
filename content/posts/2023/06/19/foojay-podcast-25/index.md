@@ -70,13 +70,13 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/AlmasBaim/status/1649882265986424832>
   * <https://twitter.com/AlmasBaim/status/1642277058033139712>
   * <https://twitter.com/AlmasBaim/status/1640102122350944257>
-* 19'09 Creating games while waiting in airports...
+* 19'09 Creating games while waiting in airports…
 * 22'19 Convert to mobile and Steam apps
 * 23'22 Question of Chengen if FXGL can extend view components
 * 24'58 How students are involved in the FXGL project
   * <https://foojay.io/today/java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library/>
 * 29'53 Why FXGL has a mix of Java and Kotlin
-* 32'22 Building for mobile and the hassle with the app stores...
+* 32'22 Building for mobile and the hassle with the app stores…
   * <https://foojay.io/today/cross-platform-development-in-java-with-gluon-and-graalvm-part-2/>
   * <https://foojay.io/today/porting-an-existing-javafx-app-to-ios/>
   * <https://foojay.io/today/creating-mobile-apps-with-javafx-part-3/>

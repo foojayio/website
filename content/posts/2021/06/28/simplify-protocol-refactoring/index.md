@@ -13,7 +13,7 @@ related_posts:
   - "git-archeology"
   - "java-syntax-puzzlers"
   - "3-ways-to-refactor-your-code-in-intellij-idea"
-  - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
+  - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
 frozen: false
 ---
 

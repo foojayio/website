@@ -36,7 +36,7 @@ That information he's also made available here on foojay, where it is known as t
 Take special note at the lower end of each page of the almanac, where you'll find details on the differences between the APIs of the currently selected Java version compared to all previous Java versions:
 ![](Screenshot-2020-08-21-at-09.19.51-1024x525.png)
 
-[Go here to explore the Java Version Almanac on foojay](https://javaalmanac.io/jdk/8/), with thanks to Marc.  
+[Go here to explore the Java Version Almanac on foojay](https://javaalmanac.io/jdk/8), with thanks to Marc.  
 
 {{< img src="0-2.jpeg" class="alignleft size-large is-resized" width="92" height="92" caption="Chris Newland" >}}
 

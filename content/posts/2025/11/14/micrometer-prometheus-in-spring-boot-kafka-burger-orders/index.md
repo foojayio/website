@@ -372,7 +372,7 @@ You just wired **Micrometer and Prometheus in Spring Boot** around a Kafka flow 
 
 * **Java OCP prep (Udemy):**   
   <https://www.udemy.com/course/ocp-oracle-certified-professional-java-developer-prep/?referralCode=54114F9AD41F127CB99A>
-* **Spring Professional -- 6 full tests (Udemy):**   
+* **Spring Professional – 6 full tests (Udemy):**   
   <https://www.udemy.com/course/spring-professional-certification-6-full-tests-2v0-7222-a/?referralCode=04B6ED315B27753236AC>
 * **Spring Certification Book (Leanpub/ Kindle/ Paperback):**   
   <https://spring-book.mystrikingly.com/>

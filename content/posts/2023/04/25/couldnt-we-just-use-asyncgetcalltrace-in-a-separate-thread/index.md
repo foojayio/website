@@ -254,7 +254,7 @@ The implemented approach works fine with async-profiler, but it has a minor flaw
 > JDK-8132510: it's not safe to call GetEnv() inside a signal handler since JDK 9, so we do it only for threads already registered in ThreadLocalStorage
 > [async-profiler source code](https://github.com/async-profiler/async-profiler/blob/39b0bdb5e446b1b88acdf37fd18a4560f5176a2e/src/profiler.cpp#L352)
 
-This issue was first discovered when Krzysztof Ślusarski (of ["Async-Profiler -- manual by use cases"](https://krzysztofslusarski.github.io/2022/12/12/async-manual.html) fame) [reported a related issue](https://github.com/async-profiler/async-profiler/issues/335) in the async-profiler bug tracker.
+This issue was first discovered when Krzysztof Ślusarski (of ["Async-Profiler – manual by use cases"](https://krzysztofslusarski.github.io/2022/12/12/async-manual.html) fame) [reported a related issue](https://github.com/async-profiler/async-profiler/issues/335) in the async-profiler bug tracker.
 
 For a deeper dive, consider reading the comment of David Holmes to the references JDK issue:
 > The code underpinning __thread use is not async-signal-safe, which is not really a surprise as pthread_get/setspecific are not designated async-signal-safe either.

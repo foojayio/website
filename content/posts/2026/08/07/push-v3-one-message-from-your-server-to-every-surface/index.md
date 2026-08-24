@@ -9,10 +9,10 @@ image: "push-v3-new-cloud.jpg"
 categories:
   - "Java"
 related_posts:
+  - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
 frozen: false
 ---
 

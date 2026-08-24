@@ -13,7 +13,7 @@ related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "foojay-podcast-95"
   - "why-java-developers-over-trust-ai-dependency-suggestions"
-  - "this-dependency-update-looked-exactly-like-an-account-takeover"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

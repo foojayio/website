@@ -14,8 +14,6 @@ related_posts:
   - "are-java-security-updates-important"
   - "7-functional-programming-techniques-in-java-a-primer"
 frozen: false
-aliases:
-  - "/today/embracing-java-17-heres-what-we-learned-at-picnic￼/"
 ---
 
 Java 17? Count us in! At [Picnic](https://picnic.app/nl/), we're more than a grocery delivery company.{#eb88}
@@ -56,7 +54,7 @@ Our approach to upgrading was to ensure that PSM, our shared build system, and s
 
 It all sounds easy enough so far, but what if one of the dependencies or tools doesn't work with Java 17? One case where we ran into this was with the [New Relic Java agent](https://github.com/newrelic/newrelic-java-agent). Running without observability is not an option, so we did what every true developer would do: fork the agent's code and [make it run on Java 17 ourselves](https://github.com/PicnicSupermarket/newrelic-java-agent/compare/v7.3.0...v7.3.0-picnic-1).{#c44f}
 
-This is not ideal, and we generally like to avoid this situation through lesson 1. But sometimes, you gotta do what you gotta do. (Since then, New Relic has released Java agent version [7.4.0](https://github.com/newrelic/newrelic-java-agent/releases/tag/v7.4.0), which officially supports JDK 17.)
+This is not ideal, and we generally like to avoid this situation through lesson 1. But sometimes, you gotta do what you gotta do. (Since then, New Relic has released Java agent version [7.4.0](https://github.com/newrelic/newrelic-java-agent/releases/tag/v7.4.0), which officially supports JDK 17.){#c44f}
 
 Another example is the Maven Dependency Plugin, which at the time of writing isn't fully Java 17 compatible without explicitly [overriding](https://issues.apache.org/jira/browse/MDEP-753?focusedCommentId=17413177#comment-17413177) its ASM dependency. Slightly inconvenient, but fortunately no forking is involved here.{#62d2}
 

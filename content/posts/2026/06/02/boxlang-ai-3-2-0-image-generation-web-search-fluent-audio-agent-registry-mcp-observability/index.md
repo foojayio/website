@@ -16,10 +16,10 @@ categories:
   - "Observability"
   - "Tools"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
-  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 frozen: false
 ---
 
@@ -81,13 +81,13 @@ results = future.get()
 
 Supported providers:
 
-| Provider |                      Notes                      |
-|----------|-------------------------------------------------|
+| Provider |                     Notes                     |
+|----------|-----------------------------------------------|
 | http     | URL fetching \& parsing — no API key required |
-| brave    | Privacy-focused; country/language filters       |
-| google   | Google Custom Search                            |
-| tavily   | Retrieval-focused, great for AI agents          |
-| exa      | Semantic and neural search modes                |
+| brave    | Privacy-focused; country/language filters     |
+| google   | Google Custom Search                          |
+| tavily   | Retrieval-focused, great for AI agents        |
+| exa      | Semantic and neural search modes              |
 
 The webSearch@bxai tool is auto-registered globally, so any agent can search the web immediately:
 

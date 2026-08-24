@@ -84,7 +84,7 @@ Runtime.getRuntime().availableProcessors()
 
 Then we created a **Callable** with a lambda expression and passed it to the thread pool. The lambda expression calls the fib() method.
 
-As we know, fibonacci series is - 0, 1,1, 2,3,5,8....
+As we know, fibonacci series is - 0, 1,1, 2,3,5,8….
 
 Which is mathmatically-
 
@@ -138,7 +138,7 @@ Because CachedThreadPool creates a thread on the fly whenever it requires one. T
 
 So it's a genuine problem. And we concluded that a thread while performing a task in the executors cannot create a child task and wait for the child task to finish.
 
-However, when there is a problem, there is a solution. Precisely for this sort of problem, we have a unique factory method in Executors---
+However, when there is a problem, there is a solution. Precisely for this sort of problem, we have a unique factory method in Executors—
 
 ```java
 var threadPool = Executors.newWorkStealingPool();

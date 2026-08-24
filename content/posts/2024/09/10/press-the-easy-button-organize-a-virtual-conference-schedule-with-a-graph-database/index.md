@@ -39,7 +39,7 @@ Sessionize houses data for sessions (topics to present), speakers (bio, social l
 
 ## The Problem
 
-*Right??* Not quite...​
+*Right??* Not quite…​
 
 Sessionize has each of those data views and also includes several data export options and a nice drag-and-drop scheduler tool. While we can see each of the views outlined above with its related data, it doesn't seem like we can put all the data together in a single view.
 
@@ -59,7 +59,7 @@ While many databases could probably solve this problem, there are a couple of re
 
 ## How-To
 
-Here's what we did...​
+Here's what we did…​
 
 First, I mentioned that Sessionize had some really nice data views and export features. The first step for me was to export the data as spreadsheets from Sessionize.
 

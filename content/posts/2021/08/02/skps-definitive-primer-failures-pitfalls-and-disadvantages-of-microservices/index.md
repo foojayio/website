@@ -27,9 +27,9 @@ Microservices Adoption is almost becoming the normal in almost all software prod
 
 It is mandatory that all of you skim through the below articles (hyperlinks) and then read a few articles that you find are closest to your job function. In this article, i am providing only the brief explanation of the main challenges of adopting Microservices. Also, you may use this as a ready reference index for articles published on the Internet to further your knowledge fo the pitfalls of Adopting Microservices.
 
-Adopting Microservices has Been a Great Challenge for All -- Netflix, Amazon, Uber and even IT Service Companies have had their share of Challenges in Microservices Migration/Adoption -- Thoughtworks, Cognizant, IBM, Infosys, Xebia. Few Companies have Reverted Back to Monolith after their Microservices Strategy / Implementation Failed or Did Not Yield the Desired Gains.
+Adopting Microservices has Been a Great Challenge for All – Netflix, Amazon, Uber and even IT Service Companies have had their share of Challenges in Microservices Migration/Adoption – Thoughtworks, Cognizant, IBM, Infosys, Xebia. Few Companies have Reverted Back to Monolith after their Microservices Strategy / Implementation Failed or Did Not Yield the Desired Gains.
 
-\[So, The Idea is that You Do Not Make the Same Mistakes, Learn from the Below and Try to Get it Right the First Time -- Hence, We Need to Invest Time in Quality Research and Development to build the Initial and Robust Architectural Pieces. Also, To Create a Meaningful and a More Realistic Plan for Organization-Wide Microservices Adoption in a Software Product Company. These are also valid for Adoption / Evangelizing to your Customers in an IT Services Organization.\]
+\[So, The Idea is that You Do Not Make the Same Mistakes, Learn from the Below and Try to Get it Right the First Time – Hence, We Need to Invest Time in Quality Research and Development to build the Initial and Robust Architectural Pieces. Also, To Create a Meaningful and a More Realistic Plan for Organization-Wide Microservices Adoption in a Software Product Company. These are also valid for Adoption / Evangelizing to your Customers in an IT Services Organization.\]
 
 ## Practical Challenges in Adoption of Microservices
 
@@ -75,7 +75,7 @@ So, Once the Initial Part is Over - Even If the Microservices Strategy and Imple
 
 [Advantages and Disadvantages of Microservices Architecture](https://cloudacademy.com/blog/microservices-architecture-challenge-advantage-drawback/ "Advantages and Disadvantages of Microservices Architecture")
 
-[Fearless Monolith to Microservices Migration -- A Guided Journey](https://www.dynatrace.com/news/blog/fearless-monolith-to-microservices-migration-a-guided-journey/ "Fearless Monolith to Microservices Migration – A Guided Journey")
+[Fearless Monolith to Microservices Migration – A Guided Journey](https://www.dynatrace.com/news/blog/fearless-monolith-to-microservices-migration-a-guided-journey/ "Fearless Monolith to Microservices Migration – A Guided Journey")
 
 ### Failure and Pitfalls of the Microservices Strategy
 
@@ -107,7 +107,7 @@ So, Once the Initial Part is Over - Even If the Microservices Strategy and Imple
 
 [How to Plan a Microservices Migration](https://medium.com/@philsarin/how-to-plan-a-microservices-migration-9b4ac50dfa95 "How to Plan a Microservices Migration")
 
-[Fearless Monolith to Microservices Migration -- A Guided Journey](https://www.dynatrace.com/news/blog/fearless-monolith-to-microservices-migration-a-guided-journey/ "Fearless Monolith to Microservices Migration – A Guided Journey")
+[Fearless Monolith to Microservices Migration – A Guided Journey](https://www.dynatrace.com/news/blog/fearless-monolith-to-microservices-migration-a-guided-journey/ "Fearless Monolith to Microservices Migration – A Guided Journey")
 
 ### Real-World Case Studies of Microservices Adoption
 
@@ -135,9 +135,9 @@ Let us take a look a Uber's Microservices Dependency Graph (Source : Online Pres
 
 **FIG. 2** : REAL-WORLD MICROSERVICES DEPENDENCY GRAPH FROM UBER ENGINEERING
 
-Idea is not to cause Paranoia or Pessimism -- But to Better Estimate and Plan for Success. The Microservices Animal isn't like our Regular Monolithic Technology Evaluations -- Only working together in a focussed way, We can tame it Decisively. Else, We may end up in Being Unable to Achieve Desired Functionality, Cycles of Rework, Poor Architecture, High Data Redundancy, Questionable Data Integrity, Performance Worser than Monolith among Other Issues -- We may even have to Revert Back / Miserably Fail.
+Idea is not to cause Paranoia or Pessimism – But to Better Estimate and Plan for Success. The Microservices Animal isn't like our Regular Monolithic Technology Evaluations – Only working together in a focussed way, We can tame it Decisively. Else, We may end up in Being Unable to Achieve Desired Functionality, Cycles of Rework, Poor Architecture, High Data Redundancy, Questionable Data Integrity, Performance Worser than Monolith among Other Issues – We may even have to Revert Back / Miserably Fail.
 
-Individually, I have worked in 3 Organizations where Microservices Adoption or Migration was going on -- As far as i know, the first project was shelved after about 4-6 Months -- In the second one, 'Real Microservices' did not go ahead even after about 1.5 Years (Including the time of 6 months after my Joining) -- It was far from a Microservices Readiness or Certification. In the 3rd Organization, where the majority or meat of my experience for this article comes from - I was in charge of Technically Leading the Microservices Strategy, in the role of a Principal Architect. Until my Tenure in the Organization, We had Upfront Identified Major Issues in Architecture by Group Review Processes. We had also Improved Upon Existing Implementation by Iterating through Cycles of Refinement for Infrastructure Architecture, DevOps Decisions, Technology Evaluations, Creating Reference Implementations and Deciding Release Branches. All this was possible via Regular Architecture Demos and Planning for Architecture Validation and deciding to roll out the Reference Architecture Implementation for General Developer Usage in Product Development.
+Individually, I have worked in 3 Organizations where Microservices Adoption or Migration was going on – As far as i know, the first project was shelved after about 4-6 Months – In the second one, 'Real Microservices' did not go ahead even after about 1.5 Years (Including the time of 6 months after my Joining) – It was far from a Microservices Readiness or Certification. In the 3rd Organization, where the majority or meat of my experience for this article comes from - I was in charge of Technically Leading the Microservices Strategy, in the role of a Principal Architect. Until my Tenure in the Organization, We had Upfront Identified Major Issues in Architecture by Group Review Processes. We had also Improved Upon Existing Implementation by Iterating through Cycles of Refinement for Infrastructure Architecture, DevOps Decisions, Technology Evaluations, Creating Reference Implementations and Deciding Release Branches. All this was possible via Regular Architecture Demos and Planning for Architecture Validation and deciding to roll out the Reference Architecture Implementation for General Developer Usage in Product Development.
 
 Kindly take time to Internalize these thoughts as Microservices Architecture is the Current Big Bet for Software Product Organizations and IT Services Organizations in 2021. It will continue to be the same for a few years from now! Organizations are going to spend a maximum part of their IT/R\&D Budget in Adopting Microservices - So, Upfront Identification by Stakeholders will give the Bang for the Buck!
 

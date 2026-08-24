@@ -373,7 +373,7 @@ Calculating the \`event stats\` for \`appV4\` and also presenting the values fro
 | appV3      | 61.6B            | 35.2B             | 96.8B             |
 | appV4      | 42.2B            | 20.4              | 62.6B             |
 
-Analyzing the tables above, we can see that from \`appV3\` to \`appV4\`, we reduced data size by 32% and index size by 42%---big numbers—and we also have one less index to maintain now.
+Analyzing the tables above, we can see that from \`appV3\` to \`appV4\`, we reduced data size by 32% and index size by 42%—big numbers—and we also have one less index to maintain now.
 
 Looking at the \`event stats\`, the total size per event value decreased by 35%, from 96.8B to 62.6B. We'll probably see some improvements in this implementation.
 

@@ -42,8 +42,8 @@ You can listen and subscribe to the Foojay Podcast on:
 ### Atsushi Eno
 
 * <https://atsushieno.github.io/>
-* [@\[email protected\]](https://g0v.social/@atsushieno)
-* [@\[email protected\]](https://fedibird.com/@atsushieno)
+* [@atsushieno@g0v.social](https://g0v.social/@atsushieno)
+* [@atsushieno@fedibird.com](https://fedibird.com/@atsushieno)
 
 ### Geert Bevin
 

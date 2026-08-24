@@ -9,10 +9,10 @@ image: "funding-open-source-without-the-bait-and-switch.jpg"
 categories:
   - "Java"
 related_posts:
+  - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
-  - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 frozen: false
 ---
 

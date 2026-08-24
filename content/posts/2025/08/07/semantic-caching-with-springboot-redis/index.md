@@ -111,12 +111,12 @@ class SemanticCacheConfig {
 
 Let's break this down:
 
-* **Index Name** : `semanticCachingIdx` --- Redis will create an index with this name for searching cached responses
-* **Content Field** : `content` --- The raw prompt that will be embedded
-* **Embedding Field** : `embedding` --- The field that will store the resulting vector embedding
+* **Index Name** : `semanticCachingIdx` — Redis will create an index with this name for searching cached responses
+* **Content Field** : `content` — The raw prompt that will be embedded
+* **Embedding Field** : `embedding` — The field that will store the resulting vector embedding
 * **Metadata Fields**:
 * `answer`: TEXT field for storing the LLM's response
-* **Prefix** : `semantic-caching:` --- All keys in Redis will be prefixed with this to organize the data
+* **Prefix** : `semantic-caching:` — All keys in Redis will be prefixed with this to organize the data
 * **Vector Algorithm**: HSNW — Hierarchical Navigable Small World algorithm for efficient approximate nearest neighbor search
 
 ## 3. Implement the Semantic Caching Service

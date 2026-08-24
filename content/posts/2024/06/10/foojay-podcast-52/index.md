@@ -19,7 +19,7 @@ related_posts:
   - "what-should-i-know-about-garbage-collection-as-a-java-developer"
   - "foojay-podcast-51"
   - "foojay-podcast-50"
-  - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
+  - "azul-august-2026-release-javas-first-monthly-cspu"
 frozen: false
 ---
 

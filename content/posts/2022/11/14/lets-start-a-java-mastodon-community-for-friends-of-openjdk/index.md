@@ -49,7 +49,7 @@ Want to learn more? [Jeroen Baert has written this very nice overview](https://w
 
 ## Recent growth of Mastodon
 
-Since the last weeks, Mastodon has seen an enormous growth as you can see in the hourly generated graph on [@\[email protected\]](https://mastodon.social/@mastodonusercount@bitcoinhackers.org).
+Since the last weeks, Mastodon has seen an enormous growth as you can see in the hourly generated graph on [@mastodonusercount@bitcoinhackers.org](https://mastodon.social/@mastodonusercount@bitcoinhackers.org).
 
 {{< img src="Screenshot-2022-11-14-at-13.47.07-700x490.png" class="size-medium is-resized" width="600" caption="Mastodon user count at 20221114 13:00CET" >}}
 

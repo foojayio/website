@@ -14,8 +14,6 @@ related_posts:
   - "great-time-at-javazone-2022"
   - "open-source-bait-and-switch"
 frozen: false
-aliases:
-  - "/today/internal-security-hardening-internal-ystems/"
 ---
 
 60% of security breaches are internal to the organization and yet when we think about security we usually think about vulnerabilities, exploits, etc. All the while, 60% of hacks are just from a person just logging into the system and taking whatever the hell they want.
@@ -24,9 +22,9 @@ I've been thinking about this quite a bit recently. I spent a great deal of time
 
 Yes, there's material about that too. But it seems that the vast majority is geared towards external threats rather than internal threats. I get that. Securing internally is hard, but it's probably the most important thing we can do and it's probably not as hard as many of us think. I'd like to preface this by stating that I'm not a security expert. The reason I'm writing this post is because most of us aren't. So what can we "typical programmers" do to mitigate security risks?
 
-There's a lot we can do but most of that stuff is covered by the DevOps or security teams. There's also the points about writing secure code, there's a lot about that too. I want to talk about some things that are unique to our field that isn't covered as much. A couple of decades ago a local woman stole a ¼ of a billion NIS from a local bank (roughly 70M USD at the time). This took a while to steal, more than a decade... No one noticed!
+There's a lot we can do but most of that stuff is covered by the DevOps or security teams. There's also the points about writing secure code, there's a lot about that too. I want to talk about some things that are unique to our field that isn't covered as much. A couple of decades ago a local woman stole a ¼ of a billion NIS from a local bank (roughly 70M USD at the time). This took a while to steal, more than a decade… No one noticed!
 
-How could a bank misplace 70M USD? Don't they have checks and balances? Sure they do. The systems altered that woman. She was the person responding to the system alerts. She didn't take a day off or vacation time, if she had her replacement would have noticed all the irregularities. This wasn't a technical hack. Not in the way we think of hacks. But the concept is the same, we lock the doors and windows but inside... It's free for all.
+How could a bank misplace 70M USD? Don't they have checks and balances? Sure they do. The systems altered that woman. She was the person responding to the system alerts. She didn't take a day off or vacation time, if she had her replacement would have noticed all the irregularities. This wasn't a technical hack. Not in the way we think of hacks. But the concept is the same, we lock the doors and windows but inside… It's free for all.
 
 This story is important because that woman wasn't a bad person. We shouldn't look at our colleagues with suspicion. She was being blackmailed by local organized crime which instigated the whole thing. Because of that, we need to limit our exposure as much as possible and avoid reliance on a single point of failure.
 

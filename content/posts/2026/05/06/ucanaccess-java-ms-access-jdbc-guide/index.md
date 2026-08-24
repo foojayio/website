@@ -128,7 +128,7 @@ try (Connection conn = DriverManager.getConnection(url);
 
 ### Access-Specific Functions
 
-One common pain point when working with Access queries is the use of Access-specific SQL functions that standard JDBC drivers simply do not understand. UCanAccess ships with built-in emulations of the most common ones --- `IIf()`, `Nz()`, `Format()`, and financial functions like `PMT()` and `PV()`. Queries originally written for Access often run without any modification at all.
+One common pain point when working with Access queries is the use of Access-specific SQL functions that standard JDBC drivers simply do not understand. UCanAccess ships with built-in emulations of the most common ones — `IIf()`, `Nz()`, `Format()`, and financial functions like `PMT()` and `PV()`. Queries originally written for Access often run without any modification at all.
 
 ### Uber JAR for Non-Maven Projects
 

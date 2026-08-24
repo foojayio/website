@@ -45,7 +45,7 @@ The results showed that AI assistance was associated with a statistically signif
 **category**: research
 
 **article** : [Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation](https://arxiv.org/abs/2603.05494 "Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation")  
-**authors** : Helena Casademunt, Bartosz Cywiński, Khoi Tran, Arya Jakkli, Samuel Marks, Neel Nanda (Harvard University, Antropic ...)  
+**authors** : Helena Casademunt, Bartosz Cywiński, Khoi Tran, Arya Jakkli, Samuel Marks, Neel Nanda (Harvard University, Antropic …)  
 **date** : 2026-03-05  
 **desc.** : Large language models (LLMs) sometimes produce false or misleading responses. Two primary approaches address this problem: honesty elicitation (modifying prompts or model weights so that the model responds truthfully) and lie detection, which involves classifying false responses.  
 
@@ -55,7 +55,7 @@ Prior work evaluates such methods on models specifically trained to lie or conce
 **article** : [Probing Materials Knowledge in LLMs: From Latent Embeddings to Reliable Predictions](https://arxiv.org/abs/2603.01834 "Probing Materials Knowledge in LLMs: From Latent Embeddings to Reliable Predictions")  
 **authors** : Vineeth Venugopal, Soroush Mahjoubi, Elsa Olivetti (MIT)  
 **date** : 2026-03-02  
-**desc.** : Large language models are increasingly applied to materials science, yet fundamental questions remain about their reliability and knowledge encoding. This study evaluates 25 LLMs across four materials science tasks, encompassing over 200 base and fine-tuned configurations. The findings reveal that output modality fundamentally determines model behavior. For symbolic tasks, fine-tuning converges to consistent, verifiable answers with reduced response entropy, while for numerical tasks, fine-tuning improves prediction accuracy but models remain inconsistent across repeated inference runs, limiting their reliability as quantitative predictors. Models were tracked over 18 months, with observations revealing a 9--43% performance variation that poses reproducibility challenges for scientific and industrial applications.  
+**desc.** : Large language models are increasingly applied to materials science, yet fundamental questions remain about their reliability and knowledge encoding. This study evaluates 25 LLMs across four materials science tasks, encompassing over 200 base and fine-tuned configurations. The findings reveal that output modality fundamentally determines model behavior. For symbolic tasks, fine-tuning converges to consistent, verifiable answers with reduced response entropy, while for numerical tasks, fine-tuning improves prediction accuracy but models remain inconsistent across repeated inference runs, limiting their reliability as quantitative predictors. Models were tracked over 18 months, with observations revealing a 9–43% performance variation that poses reproducibility challenges for scientific and industrial applications.  
 **category**: research
 
 **article** : [Is AI Hiding Its Full Power? With Geoffrey Hinton](https://www.youtube.com/watch?v=l6ZcFa8pybE&t=4616s "Is AI Hiding Its Full Power? With Geoffrey Hinton")  

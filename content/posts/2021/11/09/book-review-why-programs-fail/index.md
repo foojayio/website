@@ -3,6 +3,7 @@ title: "Book Review: Why Programs Fail by Andreas Zeller"
 date: "2021-11-09T10:18:25+00:00"
 lastmod: "2021-11-09T10:29:36+00:00"
 description: "The book provides the theoretical infrastructure needed for the quality process. Viewed as a tutorial it’s pretty good for students!"
+canonical: "https://talktotheduck.dev/why-programs-fail-a-book-review"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
@@ -21,7 +22,7 @@ frozen: false
 
 When I got my new job as developer advocate at Lightrun, one of the first things I asked for was books. Lots of books. Some of them cover my new job and others talk about debugging. I've been debugging for decades, but I feel like the theory around debugging is a bit vague. My goal was to bolster my terminology used by academics and peers. A secondary goal is to see how others teach ideas related to debugging.
 
-The first book I received was ["Why Programs Fail -- a guide to systematic debugging" (second edition) by Andreas Zeller](https://www.whyprogramsfail.com/). I think this book is only half of the equation, the other half is Andreas's wonderful website <https://www.debuggingbook.org/>. I liked both even though I'm not exactly in the target demographic for either one.
+The first book I received was ["Why Programs Fail – a guide to systematic debugging" (second edition) by Andreas Zeller](https://www.whyprogramsfail.com/). I think this book is only half of the equation, the other half is Andreas's wonderful website <https://www.debuggingbook.org/>. I liked both even though I'm not exactly in the target demographic for either one.
 
 Andreas is a professor at Saarland University and as such has written a book and website both of which are designed as course material. They are still enjoyable without taking a course. I will qualify that both are (for the most part) mostly aimed at beginners.
 
@@ -33,13 +34,13 @@ I was mostly looking for a debugging book. This isn't a debugging book. At least
 
 The book is about preventing failures, by preventing/lowering bugs. It classifies and organizes the terms we use to define a bug e.g.:
 
-* Defect -- that's a bug in the code
-* Infection -- incorrect program state
-* Failure -- observable incorrect behavior
+* Defect – that's a bug in the code
+* Infection – incorrect program state
+* Failure – observable incorrect behavior
 
 These definitions might seem semantic and related. After all a defect will usually be the cause of an infection/failure or both. But I see his point. I see developers often fix the infection instead of the defect or fix the defect without dealing with the infection.
 
-I'll give an example, say we have a defect in the code that causes "undefined" values to pass into the application. That's an infection. It went into the database which now has many cells with "undefined" as a value... That's a failure a user might see in the UI.
+I'll give an example, say we have a defect in the code that causes "undefined" values to pass into the application. That's an infection. It went into the database which now has many cells with "undefined" as a value… That's a failure a user might see in the UI.
 
 A bad fix will be to have a special case for the "undefined" string that would just hide the problem. Or stopping the undefined value before it enters the database.
 
@@ -67,7 +68,7 @@ I'd like to qualify this by saying that I like the book. I think most of the pro
 
 Whenever the book talks about tools (bugzilla anyone?) It feels a bit like a blast from the past.
 
-While the core concepts in terms of developers are surprisingly similar to the ones in the book... The industry has shifted a lot. SRE, devops and QA industries completely changed the way we handle regressions and track issues. Modern APMs, log processing tools, continuous observation tools etc. are a seismic shift in our industry.
+While the core concepts in terms of developers are surprisingly similar to the ones in the book… The industry has shifted a lot. SRE, devops and QA industries completely changed the way we handle regressions and track issues. Modern APMs, log processing tools, continuous observation tools etc. are a seismic shift in our industry.
 
 ## TL;DR
 

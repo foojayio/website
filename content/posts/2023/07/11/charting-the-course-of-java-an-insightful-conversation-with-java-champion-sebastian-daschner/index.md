@@ -98,8 +98,8 @@ For example, I'm doing a lot of live coding, and a lot of developers would be af
 
 Our phones, email clients, Slack, and social media are often just a hand movement away, and it's too tempting to get distracted by all these dopamine-inducing activities. The best knowledge workers know how to focus, how to manage distractions, and how to create an environment in which they can fully be "in the zone".
 
-This is something that seems to get harder and harder. So put your phone on flight mode, close all communication channels, and allow yourself to get into the zone -- at least for some time every day.
-> *The biggest challenge for any knowledge worker in these times is distractions. Our phones, email clients, Slack ....The best knowledge workers know how to focus, how to manage distractions, and how to create an environment in which they can fully be "in the zone"*
+This is something that seems to get harder and harder. So put your phone on flight mode, close all communication channels, and allow yourself to get into the zone – at least for some time every day.
+> *The biggest challenge for any knowledge worker in these times is distractions. Our phones, email clients, Slack ….The best knowledge workers know how to focus, how to manage distractions, and how to create an environment in which they can fully be "in the zone"*
 
 **Bazlur: What advice would you give someone new to the software industry who is unsure about which career path to take? Could you also provide insights into the various roles within the industry, such as developer, quality assurance, manager, and developer advocacy, and the specific skills and interests needed for each of these roles?**
 

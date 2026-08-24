@@ -1,5 +1,5 @@
 ---
-title: "Do we understand the value of AI knowledge ?"
+title: "Do we understand the value of AI knowledge?"
 date: "2025-08-12T11:26:49+00:00"
 lastmod: "2025-08-12T11:26:51+00:00"
 description: "The future is not yet written and every moment is important."
@@ -136,4 +136,4 @@ Willingness to contribute to the development, among other things, I helped creat
 
 \[9\] <https://foojay.io/today/jc-ai-newsletter-2>
 
-\[10\] Value of AI knowledge: Does evolution call for deterministic or LLM biased results?
+\[10\] [Value of AI knowledge: Does evolution call for deterministic or LLM biased results?](_wp_link_placeholder)

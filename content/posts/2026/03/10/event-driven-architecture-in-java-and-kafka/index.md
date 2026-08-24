@@ -82,7 +82,7 @@ This code uses a non-blocking version of the WebClient class and wraps its call 
 
 |-----------|----------------------------------------------------|-----------------------|-----------------------|--------------------------------------------------------------------------------|
 | **Stage** | **Method**                                         | **Input Types(s)**    | **Output Type**       | **Purpose**                                                                    |
-| 1         | webClient.get()                                    | ---                   | RequestHeadersUriSpec | defines a GET request                                                          |
+| 1         | webClient.get()                                    | —                     | RequestHeadersUriSpec | defines a GET request                                                          |
 | 2         | .uri("/sleep/{seconds}", sleepSeconds)             | RequestHeadersUriSpec | RequestBodySpec       | sets the URL path and fills in the {seconds} parameter to the web service call |
 | 3         | .accept(MediaType.APPLICATION_JSON)                | RequestBodySpec       | RequestBodySpec       | sets the accept: application/json header                                       |
 | 4         | .retrieve()                                        | RequestBodySpec       | ResponseSpec          | performs the request                                                           |
@@ -103,13 +103,13 @@ The third mono definition (**Mono.zip**) is used to subscribe to and execute the
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Mono.zip(sleepMono, piMono) .doOnSuccess(tuple -\> { String status = tuple.getT1(); BigDecimal pi = tuple.getT2(); Duration elapsed = Duration.between(start, Instant.now()); System.out.println("Sleep service response: " + status); System.out.println("Pi calculated to " + piDecimalPlaces + " decimal places"); System.out.printf("Total time: %.3f seconds%n", elapsed.toMillis() / 1000.0); }) .block(); |
 
-* **Mono.zip(sleepMono, piMono)** -- Subscribes to both Monos and runs them concurrently. When both are complete, it emits a **Tuple2\<String, BigDecimal\>**.
-* **.doOnSuccess(tuple -\> { ... })** -- executes when the combined result is ready:
-  * **tuple.getT1()**-- gets the status returned by the sleep web service.
-  * **tuple.getT2()** -- gets the number of decimal places to which pi was computed.
-  * **Duration.between(start, Instant.now())** -- calculates the total elapsed time.
+* **Mono.zip(sleepMono, piMono)** – Subscribes to both Monos and runs them concurrently. When both are complete, it emits a **Tuple2\<String, BigDecimal\>**.
+* **.doOnSuccess(tuple -\> { ... })** – executes when the combined result is ready:
+  * **tuple.getT1()**– gets the status returned by the sleep web service.
+  * **tuple.getT2()** – gets the number of decimal places to which pi was computed.
+  * **Duration.between(start, Instant.now())** – calculates the total elapsed time.
   * Finally, the web service call status, the number of decimal places to which pi was computed, and total execution time are output.
-* **.block()**-- Subscribes to the pipeline and blocks the current thread until completion. This is what actually triggers both the HTTP call and the pi calculation.
+* **.block()**– Subscribes to the pipeline and blocks the current thread until completion. This is what actually triggers both the HTTP call and the pi calculation.
 
 The key thing with this version of the code is that both the call to the sleep web service and the calculation of pi are executed concurrently.
 
@@ -179,7 +179,7 @@ The interesting thing with Reactive pipelines like this is that the output of ea
 
 |------------------|------------------------------------------|------------------------------------------|
 | **Stage**        | **Input type**                           | **Output type**                          |
-| receive()        | ---                                      | Flux\<ReceiverRecord\<String, String\>\> |
+| receive()        | —                                        | Flux\<ReceiverRecord\<String, String\>\> |
 | mapNotNull()     | Flux\<ReceiverRecord\<String, String\>\> | Flux\<AdsbMessage\>                      |
 | flatMap (enrich) | Flux\<AdsbMessage\>                      | Flux\<AdsbMessage\>                      |
 | flatMap (write)  | Flux\<AdsbMessage\>                      | Flux\<AdsbMessage\>                      |

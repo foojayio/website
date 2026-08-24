@@ -36,7 +36,7 @@ Headquartered in Worcestershire, with a secondary EU office in Funchal, Portugal
 
 {{< img src="2.-Payara-Services-Group-Photo-2-1024x683.jpg" class="alignright size-large is-resized" width="466" height="310" >}}
 
-The firm's leading team of tech experts -- or 'Payarans' -- have worked incredibly hard to increase annual revenue by 107% over the last three years, with export sales more than doubling from 33% to 75%. The Payara Server has now become one of the fastest-growing open source platforms globally, with a community of over 320,000 users.
+The firm's leading team of tech experts – or 'Payarans' – have worked incredibly hard to increase annual revenue by 107% over the last three years, with export sales more than doubling from 33% to 75%. The Payara Server has now become one of the fastest-growing open source platforms globally, with a community of over 320,000 users.
 
 Payara continues to expand its global customer base to reach new markets and has several innovative projects in the pipeline, including the Payara Cloud. September of 2021, Payara Cloud is the next generation of cloud-native application server and all-in-one PaaS provides a more efficient way to run Jakarta EE apps on the cloud with no Kubernetes knowledge required.
 

@@ -571,8 +571,8 @@ Thanks for reading!
 ## References:
 
 1. fepcos.info: "*FEPCOS-J* "; <http://fepcos.info/en/fepcos-j.html> (last accessed: 2023-12-13).
-2. Gerhard Fuchs: "*FEPCOS-J (2) -- Declaratively compose networked systems in Java* "; <https://foojay.io/today/fuchs-2023-fepcos-j-02/> (last accessed: 2023-12-13).
-3. Gerhard Fuchs: "*FEPCOS-J (1) -- Description, Impressions of Usage, Current State* "; <https://foojay.io/today/fuchs-2023-fepcos-j-01/> (last accessed: 2023-12-13).
+2. Gerhard Fuchs: "*FEPCOS-J (2) – Declaratively compose networked systems in Java* "; <https://foojay.io/today/fuchs-2023-fepcos-j-02/> (last accessed: 2023-12-13).
+3. Gerhard Fuchs: "*FEPCOS-J (1) – Description, Impressions of Usage, Current State* "; <https://foojay.io/today/fuchs-2023-fepcos-j-01/> (last accessed: 2023-12-13).
 4. Oracle and/or its affiliates: "*GraalVM Overview* "; [h](https://www.graalvm.org/latest/docs/introduction/)[ttps://www.graalvm.org/latest/docs/introduction/](https://www.graalvm.org/latest/docs/introduction/) (last accessed: 2023-12-13).
 5. Oracle and/or its affiliates: "*Native Image* "; <https://www.graalvm.org/latest/reference-manual/native-image/> (last accessed: 2023-12-13).
 6. Mohamed Ez-zarghili: "*GraalVM for JDK 17 Community 17.0.8* "; <https://github.com/graalvm/graalvm-ce-builds/releases/tag/jdk-17.0.8> (last accessed: 2023-12-13).

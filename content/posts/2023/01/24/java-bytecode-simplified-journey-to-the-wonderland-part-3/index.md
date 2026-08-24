@@ -12,7 +12,7 @@ related_posts:
   - "java-bytecode-simplified-journey-to-the-wonderland-part-2"
   - "java-bytecode-simplified-journey-to-the-wonderland-part-1"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-  - "virtual-thread-pinning-field-guide"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

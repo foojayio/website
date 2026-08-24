@@ -22,7 +22,7 @@ The benefits and drawbacks of the architectures should be pretty clear. I want t
 
 We build monoliths since they are easier to get started with. Microservices usually rise out of necessity when our system is already in production.
 
-However, there are a lot of questions that arise when deciding when to do the migration or not -- how do you decide the boundaries of a service? How do you verify the self-healing properties of your microsevice architecture?
+However, there are a lot of questions that arise when deciding when to do the migration or not – how do you decide the boundaries of a service? How do you verify the self-healing properties of your microsevice architecture?
 
 This is especially challenging with the distributed aspect of the service mesh. We need a view of the entire application as parts of it break off.
 
@@ -42,9 +42,9 @@ The most important pre-requisite for a microservice architecture migration is se
 
 The nice thing about this is that you can take this step while keeping the monolith architecture. If you can't perform that migration there's no point in moving forward. Once this is done, there are several other\` factors involved:
 
-* **Team size** -- as your team grows, keeping cohesion is a challenge. This is something we can easily benchmark by reviewing the growth of the team. Keep an eye on the speed of onboarding and other metrics such as time to issue resolution. These are probably the best metrics for project complexity.
-* **Inter-dependence** -- the benefit of microservices might be a hindrance if the project is deeply inter-dependent and doesn't have clear separation lines. Some projects are inherently deeply intermingled and don't have a clean separation of the parts. Pay attention to transactional integrity between different modules. Features such as transaction management can't carry between microservices. If you have a system that must be reliably consistent such as a banking system that needs to be consistent at all times, the boundaries of the transaction must reside within a single service. These are the types of things that can make the migration process especially difficult.
-* **Testing** -- you can't undergo such an effort without a significant amount of module-specific tests and a big suite of integration tests. Reviewing the test code will tell you more about your readiness than any alternative means. Can you logically test a module in isolation?
+* **Team size** – as your team grows, keeping cohesion is a challenge. This is something we can easily benchmark by reviewing the growth of the team. Keep an eye on the speed of onboarding and other metrics such as time to issue resolution. These are probably the best metrics for project complexity.
+* **Inter-dependence** – the benefit of microservices might be a hindrance if the project is deeply inter-dependent and doesn't have clear separation lines. Some projects are inherently deeply intermingled and don't have a clean separation of the parts. Pay attention to transactional integrity between different modules. Features such as transaction management can't carry between microservices. If you have a system that must be reliably consistent such as a banking system that needs to be consistent at all times, the boundaries of the transaction must reside within a single service. These are the types of things that can make the migration process especially difficult.
+* **Testing** – you can't undergo such an effort without a significant amount of module-specific tests and a big suite of integration tests. Reviewing the test code will tell you more about your readiness than any alternative means. Can you logically test a module in isolation?
 
 Once you have a sense of those, you can start estimating the benefit you might get from the monolith to microservices migration.
 
@@ -54,9 +54,9 @@ Assuming the monolithic code is already relatively modular and supports SSO (Sin
 
 Ideally we want to target the parts that will give us the most benefit and would be easiest to migrate:
 
-* **Look at the issue tracker/version control** -- which module is the one most prone to failure?
-* **Check modularity** -- which module is smallest and least interdependent? Can the data be cleanly separated? -- it's best to start with lower hanging fruit
-* **Profile your application** -- which module is most expensive and can benefit from scaling?
+* **Look at the issue tracker/version control** – which module is the one most prone to failure?
+* **Check modularity** – which module is smallest and least interdependent? Can the data be cleanly separated? – it's best to start with lower hanging fruit
+* **Profile your application** – which module is most expensive and can benefit from scaling?
 
 These things are simple enough when running locally but often the behavior of the application in production is vastly different to its local or staging environment.
 
@@ -88,7 +88,7 @@ But maybe some user code invoked the webservice directly and effectively circumv
 
 This is where logs and snapshots come in. We can add them in the backend API and also in the broken off service to verify that the results that we got are indeed the results from the gateway cache.
 
-## Rinse -- Repeat
+## Rinse – Repeat
 
 This process is most challenging when we break off the first microservice out of monolithic applications. As we break additional pieces, it typically becomes easier until the entire monolith is gone. But there are challenges along the way. Initially, we pick an achievable goal which is easier. As we move forward, we run into harder challenges and need to decide on boundaries for a service that might be less than ideal.
 

@@ -3,6 +3,7 @@ title: "Book Review: “Effortless Cloud-Native App Development Using Skaffold�
 date: "2021-11-25T12:52:08+00:00"
 lastmod: "2021-11-25T12:53:06+00:00"
 description: "Skaffold is a cloud native open source framework from Google that lets SpringBoot devs build Kubernetes apps easily and deploy effortlessly!"
+canonical: "https://talktotheduck.dev/cloud-native-skaffold-book-review"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
@@ -18,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-I'm a developer who cares deeply about production. But I'm not a devops and unfortunately I'm pretty bad at that. That's why when I heard about Skaffold it instantly piqued my interest. Write Kubernetes cloud native apps without well... Writing Kubernetes native apps... Sign me up!
+I'm a developer who cares deeply about production. But I'm not a devops and unfortunately I'm pretty bad at that. That's why when I heard about Skaffold it instantly piqued my interest. Write Kubernetes cloud native apps without well… Writing Kubernetes native apps… Sign me up!
 
 Unfortunately, as we all know. The time to pick up a new technology is when we actually need it and then it's a rush to get something out. Few of us have time to take off from our busy day to study something and learn something new. That's why when [Ashish Choudhary](https://twitter.com/iASHeeesh), the author of the book "**Effortless Cloud Native App Development Using Skaffold** " asked for reviewers in the [foojay.io](https://foojay.io/) slack group, I jumped on the opportunity. I can learn something interesting and be productive (this book review).
 
@@ -91,7 +92,7 @@ There's an entire chapter on GKE which I skipped entirely for that reason. It ju
 While I like Packt books, I have two grievances. I hope they improve on these:
 
 * I don't like filler in books. The book could be 100 pages shorter, this is due to blank pages, large margins, over spacing, etc. Think of the tree's Packt (this goes to other publishers too!).
-* I wish other publishers would pick up the source annotation style of manning. This is hard to do as [I discovered](https://medium.com/sketch-app-sources/using-sketch-and-asciidoc-to-generate-a-professional-tech-book-ef5b5d8dd410) , but the readability is so much better...
+* I wish other publishers would pick up the source annotation style of manning. This is hard to do as [I discovered](https://medium.com/sketch-app-sources/using-sketch-and-asciidoc-to-generate-a-professional-tech-book-ef5b5d8dd410) , but the readability is so much better…
 
 Notice that both comments aren't unique to Packt and apply to most publishers.
 

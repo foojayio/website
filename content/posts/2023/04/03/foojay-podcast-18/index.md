@@ -20,7 +20,7 @@ The Foojay Podcast Java User Group World Tour has already brought us to the UK, 
 
 Today we travel back to the US to learn more about the Atlanta JUG, mainly because this week, they are organizing the DevNexus conference!
 
-Let's learn about the challenges of organizing both a Java User Group and an entire conference...
+Let's learn about the challenges of organizing both a Java User Group and an entire conference…
 
 {{< youtube fVq5YHjzmVk >}}
 
@@ -76,7 +76,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * 14'04 Most remarkable sessions
 * 16'35 Starting a JUG is "just do it", a formal structure is not a requirement, and how to find speakers
   * <https://jugs.groups.io/g/jug-leaders>
-* 20'53 About DevNexus, how it started, the many tracks,...
+* 20'53 About DevNexus, how it started, the many tracks,…
   * <https://devnexus.com/presentations/beyond-rest-and-crud-integration-patterns-in-microservices>
   * [https://devnexus.com/presentations/patterns-predictions-and-prescriptions](https://devnexus.com/presentations/patterns-predictions-and-prescriptions%20)
   * [https://foojay.io/today/visualizing-brain-computer-interface-data-using-javafx/](https://foojay.io/today/visualizing-brain-computer-interface-data-using-javafx/%20)

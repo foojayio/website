@@ -34,7 +34,7 @@ Development teams often assume they know where bottlenecks are, but intuition is
 
 Programmers waste enormous amounts of time thinking about the speed of noncritical parts of their programs, and these attempts to improve efficiency have a strong negative impact on debugging and maintenance. We should forget about small efficiencies, say about 97% of the time: *premature optimization is the root of all evil*. Yet we should not pass up our opportunities in that critical 3%.
 
-To avoid 'premature optimization'---that is, improving code that appears slow but isn't on the critical path—we follow a strict rule: ***never guess, always measure***.
+To avoid 'premature optimization'—that is, improving code that appears slow but isn't on the critical path—we follow a strict rule: ***never guess, always measure***.
 
 We applied the [Pareto principle](https://en.wikipedia.org/wiki/Pareto_principle) (also known as the 80/20 rule) to target the specific code paths responsible for the majority of execution time. For this analysis, we used [**async-profiler**](https://github.com/async-profiler/async-profiler). Its low-overhead, sampling-based approach allowed us to capture actionable CPU and memory profiles with negligible performance impact.
 
@@ -151,7 +151,7 @@ This minor change led to a **16% increase in throughput** for bulk inserts. This
 
 ## 4. BSON null terminator detection with SWAR
 
-Every BSON document is structured as a list of triplets: *a type byte, a field name, and a value* . Crucially, each field name is a null-terminated string---[CString](https://stackoverflow.com/questions/14473526/what-is-cstring)---not a length-prefixed string. While this design saves four bytes per field, it introduces a performance trade-off: extracting a CString now requires a linear scan rather than a constant-time lookup.
+Every BSON document is structured as a list of triplets: *a type byte, a field name, and a value* . Crucially, each field name is a null-terminated string—[CString](https://stackoverflow.com/questions/14473526/what-is-cstring)—not a length-prefixed string. While this design saves four bytes per field, it introduces a performance trade-off: extracting a CString now requires a linear scan rather than a constant-time lookup.
 
 Our original implementation processed the buffer byte-by-byte, searching for the terminating zero:
 
@@ -264,7 +264,7 @@ For direct buffers (which are not backed by a Java heap array), we cannot hand a
 To achieve this, the decoder maintains a reusable byte\[\] buffer. The first call allocates it (or grows it if a larger string is encountered), and subsequent calls reuse the same memory region. That has two benefits:
 
 * **Fewer allocations, less GC pressure, and memory zeroing:** We no longer create a fresh temporary byte\[\] for every CString, which reduces the amount of work the allocator and garbage collector must do per document.
-* **Better cache behavior:** The JVM repeatedly reads and writes the same small piece of memory, which tends to remain hot in the CPU cache. We examined CPU cache behavior on our "FindMany and empty cursor" workload using async-profiler's cache-misses event. Async-profiler samples hardware performance counters exposed by the CPU's [Performance Monitoring Unit](https://en.wikipedia.org/wiki/Hardware_performance_counter) (PMU), the hardware block that tracks events such as cache misses, branch misses, and cycles. For readString(), cache-miss samples dropped by roughly 13--28% between the old and new implementation, as we touch fewer cache lines per CString. We still treat the PMU data as directional rather than definitive — counters and sampling semantics vary by CPU and kernel — so the primary signal remains the end-to-end throughput gains (MB/s) that users actually observe.
+* **Better cache behavior:** The JVM repeatedly reads and writes the same small piece of memory, which tends to remain hot in the CPU cache. We examined CPU cache behavior on our "FindMany and empty cursor" workload using async-profiler's cache-misses event. Async-profiler samples hardware performance counters exposed by the CPU's [Performance Monitoring Unit](https://en.wikipedia.org/wiki/Hardware_performance_counter) (PMU), the hardware block that tracks events such as cache misses, branch misses, and cycles. For readString(), cache-miss samples dropped by roughly 13–28% between the old and new implementation, as we touch fewer cache lines per CString. We still treat the PMU data as directional rather than definitive — counters and sampling semantics vary by CPU and kernel — so the primary signal remains the end-to-end throughput gains (MB/s) that users actually observe.
 
 On our "FindMany and empty cursor" workload, eliminating the redundant intermediate copy in readString **improved throughput by approximately 22.5%** **.** Introducing the reusable buffer contributed a **\~5%** improvement in cases where the internal array is not available.
 

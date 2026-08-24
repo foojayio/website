@@ -48,7 +48,7 @@ Another nice feature is that the agent allows you to inspect almost all classes,
 
 Now I'm handing it over to Mikaël, who actually fixed bugs using my tool:
 
-## Spring and Mockito
+## Spring and Mockito {#more-111153}
 
 Two of the tools I work the most with are Spring and Mockito, and both make liberal use of bytecode generation and modification.
 

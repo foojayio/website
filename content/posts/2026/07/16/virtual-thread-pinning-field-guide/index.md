@@ -1,7 +1,7 @@
 ---
 title: "Your Loom App Quietly Became a Thread Pool Again: A Field Guide to Virtual Thread Pinning"
 date: "2026-07-16T07:43:16+00:00"
-description: "Virtual thread pinning quietly turns your Loom app back into a bounded thread pool. The two causes, what JEP 491 changed in JDK 24, how to detect it with JFR, and how to fix it."
+description: "The incident that taught me to respect pinning looked like nothing. A service freshly migrated to virtual threads, a load test that plateaued at about 420 - by Felipe Maschio Virtual thread pinning quietly turns your Loom app back into a bounded thread pool. The two causes, what JEP 491 changed in JDK 24, how to detect it with JFR, and how to fix it."
 canonical: "https://dev.to/maschiojv/your-loom-app-quietly-became-a-thread-pool-again-a-field-guide-to-virtual-thread-pinning-2a3f"
 authors:
   - "felipe-maschio"
@@ -31,11 +31,11 @@ A virtual thread doesn't own an OS thread. It runs on a small pool of platform t
 
 There are exactly two situations where the JVM cannot unmount a blocked virtual thread:
 
-**1. Blocking inside `synchronized` (JDK 21 through 23).** Up to and including JDK 23, an object monitor is tied to the carrier thread that entered it. If a virtual thread blocks — or calls `Object.wait()` --- while holding a monitor, the JVM can't move it off the carrier without breaking monitor ownership, so it pins. This is by far the most common cause in real code, because a blocking call buried inside a `synchronized` method is trivial to write and invisible at the call site. And the monitor doesn't have to be *yours* : `synchronized` inside a library, or inside the JDK itself, pins exactly the same way. `ConcurrentHashMap.computeIfAbsent` runs your mapping function under an internal bin lock — put a blocking call inside it and you've pinned a carrier without a single `synchronized` keyword in your own code.
+**1. Blocking inside `synchronized` (JDK 21 through 23).** Up to and including JDK 23, an object monitor is tied to the carrier thread that entered it. If a virtual thread blocks — or calls `Object.wait()` — while holding a monitor, the JVM can't move it off the carrier without breaking monitor ownership, so it pins. This is by far the most common cause in real code, because a blocking call buried inside a `synchronized` method is trivial to write and invisible at the call site. And the monitor doesn't have to be *yours* : `synchronized` inside a library, or inside the JDK itself, pins exactly the same way. `ConcurrentHashMap.computeIfAbsent` runs your mapping function under an internal bin lock — put a blocking call inside it and you've pinned a carrier without a single `synchronized` keyword in your own code.
 
 **2. Native frames.** When a virtual thread has a native method (JNI) or a foreign downcall (the Foreign Function \& Memory API) on its stack and it blocks, the JVM can't capture and restore the native frame, so it pins. This one has no `synchronized` to blame — and it is *not* fixed by JDK 24. It also hides in a place nobody expects: class initialization runs through native frames, so a blocking call inside a static initializer pins even on the newest JDKs.
 
-Just as important is what's **not** on the list: ordinary blocking I/O through the JDK (`Socket`, `InputStream`, `Files`), `BlockingQueue`, `ReentrantLock`, `CompletableFuture`, `Thread.sleep()` --- all of it was re-plumbed for Loom and unmounts cleanly. Pinning is a short, specific list, which is exactly why it's detectable.
+Just as important is what's **not** on the list: ordinary blocking I/O through the JDK (`Socket`, `InputStream`, `Files`), `BlockingQueue`, `ReentrantLock`, `CompletableFuture`, `Thread.sleep()` — all of it was re-plumbed for Loom and unmounts cleanly. Pinning is a short, specific list, which is exactly why it's detectable.
 
 ## The canonical bug
 
@@ -53,7 +53,7 @@ public class PriceService {
 }
 ```
 
-Every cache miss blocks on the network *while holding the monitor*. On JDK 21--23 that virtual thread pins its carrier for the entire round trip. Run a few hundred concurrent requests and you've pinned every carrier; the rest of the workload queues behind a monitor that never unmounts. That's my 420-requests-per-second incident in five lines.
+Every cache miss blocks on the network *while holding the monitor*. On JDK 21–23 that virtual thread pins its carrier for the entire round trip. Run a few hundred concurrent requests and you've pinned every carrier; the rest of the workload queues behind a monitor that never unmounts. That's my 420-requests-per-second incident in five lines.
 
 ## What JDK 24 changed (JEP 491)
 
@@ -64,11 +64,11 @@ Two practical consequences:
 * On JDK 24+, the only remaining pins come from native frames — JNI, FFM downcalls, and class initialization.
 * The old detection flag `-Djdk.tracePinnedThreads` was **removed** in JDK 24. Don't ship runbooks that depend on it.
 
-If you're on JDK 21--23, though, `synchronized` pinning is very much alive, and upgrading is often the single cleanest fix you can make.
+If you're on JDK 21–23, though, `synchronized` pinning is very much alive, and upgrading is often the single cleanest fix you can make.
 
 ## How to catch it
 
-**On JDK 21--23 — the legacy flag.** Run with:
+**On JDK 21–23 — the legacy flag.** Run with:
 
 ```
 java -Djdk.tracePinnedThreads=full -jar app.jar
@@ -98,7 +98,7 @@ It lists the carrier threads and the virtual thread mounted on each. A carrier i
 3. **Don't hold a lock across an external call.** Often the honest fix is structural: compute the value outside the critical section and only lock the map update.
 4. **For native/FFM pins, isolate the path.** Run unavoidable blocking native calls on a dedicated platform-thread executor, or size the carrier pool so a few concurrent pins can't starve everything.
 
-Here's the rewrite of the example. One trap to avoid: don't just move the blocking call into `ConcurrentHashMap.computeIfAbsent` --- as noted above, its mapping function runs under an internal bin lock, and on JDK 21--23 you'd have rebuilt the same pin one layer down.
+Here's the rewrite of the example. One trap to avoid: don't just move the blocking call into `ConcurrentHashMap.computeIfAbsent` — as noted above, its mapping function runs under an internal bin lock, and on JDK 21–23 you'd have rebuilt the same pin one layer down.
 
 ```
 public class PriceService {
@@ -130,6 +130,6 @@ Doing this analysis by hand — turn on a flag, reproduce, dump, find the carrie
 
 If you want the deeper reference — carriers, JEP 491, the full detection matrix — I keep it updated here: [virtual thread pinning](https://threadmine.dev/en/resources/virtual-thread-pinning).
 
-Pinning is the one Loom failure mode that cancels your scalability story without a single error in the logs. The rules are short: only `synchronized` (pre-JDK 24) and native frames pin; detect with `jdk.tracePinnedThreads` on 21--23 and the `jdk.VirtualThreadPinned` JFR event everywhere; fix with `ReentrantLock`, an upgrade, or by not holding locks across slow calls. Know the shape, and it stops being invisible.
+Pinning is the one Loom failure mode that cancels your scalability story without a single error in the logs. The rules are short: only `synchronized` (pre-JDK 24) and native frames pin; detect with `jdk.tracePinnedThreads` on 21–23 and the `jdk.VirtualThreadPinned` JFR event everywhere; fix with `ReentrantLock`, an upgrade, or by not holding locks across slow calls. Know the shape, and it stops being invisible.
 
 *Felipe Maschio is the founder of [ThreadMine](https://threadmine.dev/en), a free JVM thread dump analyzer that detects deadlocks, thread leaks, pool exhaustion, CPU spikes and virtual thread pinning.*

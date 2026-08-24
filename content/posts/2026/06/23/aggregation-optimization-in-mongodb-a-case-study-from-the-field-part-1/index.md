@@ -40,9 +40,9 @@ For our example scenario, we created a database for a fictional video streaming 
 
 User "profiles" represented individual users accessing the streaming service. Each profile document contained a profile ID, the user's name, date of birth and SSN, a contact address and telephone number, and the account number to which the profile belonged. (Each account could have multiple profiles. For example, a family might have one account with a separate profile for each family member.)
 
-"Devices" were the devices used by profiles to access the streaming service. Each device document contained a serial number uniquely identifying the device, a device model name—for example, "iPhone 12" or "Amazon Fire Tablet"---the IP address from which the device last connected, and a date after which the device's authorization to connect to the service would need to be renewed.
+"Devices" were the devices used by profiles to access the streaming service. Each device document contained a serial number uniquely identifying the device, a device model name—for example, "iPhone 12" or "Amazon Fire Tablet"—the IP address from which the device last connected, and a date after which the device's authorization to connect to the service would need to be renewed.
 
-A many-to-many relationship existed between devices and profiles --- some devices, like smart TVs, tended to be used by all profiles associated with an account, while others, like smartphones, tended to be used by a single profile. Typically, each profile would access the service through more than one device.
+A many-to-many relationship existed between devices and profiles — some devices, like smart TVs, tended to be used by all profiles associated with an account, while others, like smartphones, tended to be used by a single profile. Typically, each profile would access the service through more than one device.
 
 To map profiles to devices, an intermediate (or "associative") "mappings" collection was used. Documents in this collection contained the profile ID of a profile at one side of the relationship and the device serial number of a device at the other side of the relationship, effectively turning the many-to-many relationship between profiles and devices into a one-to-many relationship between profiles and mappings, and a many-to-one relationship between mappings and devices.
 ![](tue12-1024x269.png)
@@ -281,9 +281,9 @@ If the two member documents from the prior $unwind stage both mapped to a device
   }
 ```
 
-$lookup (join) stages anticipate that multiple child documents might have to be added to the parent document and so add the matched child documents to an array in the parent document ---deviceData in our pipeline.  
+$lookup (join) stages anticipate that multiple child documents might have to be added to the parent document and so add the matched child documents to an array in the parent document —deviceData in our pipeline.  
 
-However, as the prior $lookup stage was joining on a specific device serial number for each of the input documents and would therefore find—at most --- a single device document, using an array to store the matched device document was unnecessary. A second $unwind stage was therefore used to flatten the single-element deviceData array down to a sub-document.
+However, as the prior $lookup stage was joining on a specific device serial number for each of the input documents and would therefore find—at most — a single device document, using an array to store the matched device document was unnecessary. A second $unwind stage was therefore used to flatten the single-element deviceData array down to a sub-document.
 
 This also had the effect of removing any input documents with an empty deviceData array from our data set. This would happen where the mapped device was not an iPhone 12.
 

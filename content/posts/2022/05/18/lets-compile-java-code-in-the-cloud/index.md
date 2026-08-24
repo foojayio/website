@@ -57,7 +57,7 @@ When the JVM is shut down, all the profile information and optimized methods are
 
 When Java was created in the 90s, there was no such thing as a "magic cloud" of connected, elastic resources that we could spin up and down at will. It was therefore a logical choice to make JVMs, including the JIT compiler, completely encapsulated and self-reliant.
 
-So what are the drawbacks of this approach? Well...
+So what are the drawbacks of this approach? Well…
 
 * The JIT compiler must share resources with the threads executing application logic. This means there is a limit on how many resources can be devoted to optimization, limiting the speed and effectiveness of those optimizations. For example, Azul Platform Prime's Falcon JIT compiler's highest optimization levels produce code that can be 50%-200% faster on individual methods and workloads. On resource constrained machines, however, such high optimization levels may not be practical due to resource limitations.
 * You only need resources for JIT compilation for a tiny fraction of the life of your program. However, with on-JVM JIT compilation, you must reserve capacity forever.
@@ -99,7 +99,7 @@ Here are some numbers on Falcon vs Hotspot on popular Java performance benchmark
 
 We've already shown above how Cloud Native Compiler reduces warm-up time and CPU spend when running the finagle-http workload on a resource-starved machine. But it's not just extremely resource constrained machines that benefit from Cloud Native Compiler.
 
-Let's look at a more realistic workload -- running a three-node Cassandra cluster on an 8 vCore r5.2xlarge AWS instance. With optimization set to the highest level, resulting in high and consistent throughput, warm-up time goes from 20 minutes with local JIT to less than two minutes with Cloud Native Compiler.
+Let's look at a more realistic workload – running a three-node Cassandra cluster on an 8 vCore r5.2xlarge AWS instance. With optimization set to the highest level, resulting in high and consistent throughput, warm-up time goes from 20 minutes with local JIT to less than two minutes with Cloud Native Compiler.
 ![](https://www.azul.com/wp-content/uploads/cassandra-throughput-1024x405.png)
 
 ## Conclusion

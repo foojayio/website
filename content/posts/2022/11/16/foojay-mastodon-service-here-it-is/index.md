@@ -46,7 +46,7 @@ You can sign up via <https://foojay.social/auth/sign_up>, but please read the ru
 5. No incitement of violence or advocacy of violent acts/ideologies.
 6. No sexually explicit or violent media.
 7. No intentionally false or misleading information.
-8. Please do not upload (long) videos, but use a dedicated service for this goal (Vimeo, PeerTube **(\*)**,...) and post a link in your message.
+8. Please do not upload (long) videos, but use a dedicated service for this goal (Vimeo, PeerTube **(\*)**,…) and post a link in your message.
 9. No advertising, spam or excessive promotion.
 
 Please provide a reason why you want to join the Foojay server as we want to allow everyone from the Java community.

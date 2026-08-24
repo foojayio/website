@@ -12,9 +12,9 @@ categories:
   - "Webinar"
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
-  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 frozen: false
 ---
 

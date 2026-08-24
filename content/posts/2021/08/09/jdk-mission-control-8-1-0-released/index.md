@@ -20,18 +20,18 @@ Since this is the source release, it may still take a bit of time until the down
 
 I will try to remember to [tweet](https://twitter.com/hirt) or say something on the [JMC Facebook page](https://www.facebook.com/javamissionctrl) once the binaries start showing up.
 
-## Mission Control 8.1 -- New and Noteworthy
+## Mission Control 8.1 – New and Noteworthy
 
 ### General
 
-**JMC 8.1 -- New Release!**   
+**JMC 8.1 – New Release!**   
 
 This is a new minor release of Java Mission Control. The JMC application will now require JDK 11+ to run, but can still be used with OpenJDK 8u272+ and Oracle JDK 7u40+. It can also still open and visualize flight recordings from JDK 7 and 8.
 ![](image-1.png)
 
 **Eclipse 4.19 support**   
 
-The Mission Control client is now built to run optimally on Eclipse 2021-03 and later. To install Java Mission Control into Eclipse, go to the update site (Help \| Install New Software...). The URL to the update site will be vendor specific, and some vendors will instead provide an archive with the update site.
+The Mission Control client is now built to run optimally on Eclipse 2021-03 and later. To install Java Mission Control into Eclipse, go to the update site (Help \| Install New Software…). The URL to the update site will be vendor specific, and some vendors will instead provide an archive with the update site.
 ![](image-2.png)
 
 **Minor bugfixes and improvements**   

@@ -142,7 +142,7 @@ public interface UserRepository {
 }
 ```
 
-The repository is the **data access layer**. It sits at the bottom of our architecture and is the only layer that knows how to talk to the database. Notice how these methods are very mechanical---"find this," "save that," "does this exist?" There's no business logic like "createUser" or "deactivateUser"---those belong in the service.
+The repository is the **data access layer**. It sits at the bottom of our architecture and is the only layer that knows how to talk to the database. Notice how these methods are very mechanical—"find this," "save that," "does this exist?" There's no business logic like "createUser" or "deactivateUser"—those belong in the service.
 
 The repository doesn't enforce business rules. It will happily save a user with a duplicate email if you tell it to. That's not its job.
 
@@ -166,7 +166,7 @@ This allows for multiple implementations (useful for testing with mocks) and mak
 
 ### Step 4: The service implementation
 
-This is where the real work happens---**the business logic layer**. The service orchestrates operations across multiple components and enforces business rules. This uses a fictitious EmailService to help create users and verify unique user creation.
+This is where the real work happens—**the business logic layer**. The service orchestrates operations across multiple components and enforces business rules. This uses a fictitious EmailService to help create users and verify unique user creation.
 
 ```
 @Service  

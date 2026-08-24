@@ -25,7 +25,7 @@ However, choosing an effective cloud-native Java runtime for your application do
 
 As cloud-native developers, you have to care not only about developing your application, but also the building, deployment, and management of it in production. These added tasks create a complex and often challenging environment, which causes you to be constantly switching between different platforms, tools, and frameworks.
 
-What you need is a way in which you could complete this diverse set of tasks, with language and framework support, all within one IDE. The open source [Liberty Tools for Visual Studio Code](https://ibm.biz/LibertyToolsVSCodeMarketplace), offers just this option, helping you in developing, building, testing, deploying, and managing your applications -- all within your favorite IDE, Visual Studio Code!
+What you need is a way in which you could complete this diverse set of tasks, with language and framework support, all within one IDE. The open source [Liberty Tools for Visual Studio Code](https://ibm.biz/LibertyToolsVSCodeMarketplace), offers just this option, helping you in developing, building, testing, deploying, and managing your applications – all within your favorite IDE, Visual Studio Code!
 
 ![A screenshot of the Liberty Tools for Visual Studio Code extension in the VS Code marketplace.](LibertyToolsVSCodeMarketplace-700x418.png)
 
@@ -108,6 +108,6 @@ We'd also love to get your feedback on our tools. So, if you do have a go with t
 
 You can also check out at this related VS Code content on Foojay.io:
 
-* [Java on Visual Studio Code -- May 2023](https://foojay.io/today/java-on-visual-studio-code-may-2023/)
+* [Java on Visual Studio Code – May 2023](https://foojay.io/today/java-on-visual-studio-code-may-2023/)
 * <https://foojay.io/java-quick-start/quick-start-tutorial/choosing-an-editor/>
 * [Foojay Podcast #12: State and Future of the IDEs](https://foojay.io/today/foojay-podcast-12/)

@@ -20,7 +20,7 @@ frozen: false
 
 **Java is the engine behind mission-critical applications and end user experiences. From faster response times to consistent performance, Java can have a significant impact on business results and cloud costs.**
 
-Join Azul and leading voices from the Java community for Prime Time, a dynamic virtual event dedicated to innovations, strategies, and real-world insights that power high-performance Java estates. No matter where you're running your apps -- on-prem or in the cloud, or if you're looking to modernize legacy Java workloads -- when performance, elasticity, scale and cloud cost matter, **Make It Prime**.
+Join Azul and leading voices from the Java community for Prime Time, a dynamic virtual event dedicated to innovations, strategies, and real-world insights that power high-performance Java estates. No matter where you're running your apps – on-prem or in the cloud, or if you're looking to modernize legacy Java workloads – when performance, elasticity, scale and cloud cost matter, **Make It Prime**.
 
 **What to Expect:**
 

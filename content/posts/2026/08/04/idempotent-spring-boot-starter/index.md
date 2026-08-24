@@ -15,10 +15,10 @@ categories:
   - "Redis"
   - "Tutorials"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "spring-ai-agents-no-second-runtime"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-  - "intro-to-the-boxlang-formatter"
 frozen: false
 ---
 

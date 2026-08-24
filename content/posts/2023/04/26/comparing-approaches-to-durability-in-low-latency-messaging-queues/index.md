@@ -55,9 +55,9 @@ Chronicle Queue has multiple ways of triggering a sync, however the simplest is 
 
 ### Low Latency vs Durability Requirements
 
-Low latency systems 'need for speed' usually trumps the need for reliability, so the fastest option available is usually chosen. Messages are usually kept as small as is reasonably possible. E.g. 40 -- 256 bytes.
+Low latency systems 'need for speed' usually trumps the need for reliability, so the fastest option available is usually chosen. Messages are usually kept as small as is reasonably possible. E.g. 40 – 256 bytes.
 
-However, many financial systems have higher durability but lower latency speed requirements. The message sizes are also typically larger e.g. 1 -- 8 KB.
+However, many financial systems have higher durability but lower latency speed requirements. The message sizes are also typically larger e.g. 1 – 8 KB.
 
 ![](Screenshot-2023-04-17-at-9.20.15-AM-1024x590.png)
 

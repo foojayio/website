@@ -28,7 +28,7 @@ In a typical debugging scenario, you would set breakpoints to tell the debugger 
 However, in some situations you aren't certain about where to set a breakpoint. Other times, you might prefer to suspend the program at a particular *time* rather than aiming at a specific *line*.
 ![post banner](debug-without-breakpoints-banner-1024x538.png)
 
-In this article, we'll look at IntelliJ IDEA's **Pause** -- a lesser known debugging technique,  
+In this article, we'll look at IntelliJ IDEA's **Pause** – a lesser known debugging technique,  
 
 which can be extremely powerful in some scenarios, including the ones described above.
 

@@ -30,7 +30,7 @@ JEP 431, in particular, introduces necessary enhancements to the Java Collection
 
 Historically, Java's collections framework, while comprehensive, lacked a specific collection type that could represent a sequence of elements with a defined order. This gap was more than a minor inconvenience for some larger projects.
 
-Take, for instance, the List and Deque interfaces -- both define an encounter order, but their common supertype, Collection, does not. Similarly, while Set does not define an encounter order, some subtypes like SortedSet and LinkedHashSet do.
+Take, for instance, the List and Deque interfaces – both define an encounter order, but their common supertype, Collection, does not. Similarly, while Set does not define an encounter order, some subtypes like SortedSet and LinkedHashSet do.
 
 This inconsistent support across the hierarchy made it difficult to express and handle ordered collections uniformly. You'd often face challenges in iterating collections in reverse order or implementing specific operations for ordered collections, leading to inefficient and cumbersome solutions.
 
@@ -42,7 +42,7 @@ These interfaces have been integrated into the existing collections framework, b
 
 ### Sequenced Collections
 
-A sequenced collection is essentially a Collection with a defined encounter order. Each element in this collection has a well-defined position -- first, second, and so on, up to the last element.
+A sequenced collection is essentially a Collection with a defined encounter order. Each element in this collection has a well-defined position – first, second, and so on, up to the last element.
 
 The key features include:
 

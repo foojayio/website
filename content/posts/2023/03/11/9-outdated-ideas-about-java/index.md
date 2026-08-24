@@ -47,20 +47,20 @@ Here's a very brief overview of some of the changes in OpenJDK versions, but be 
 
 Some features got first introduced as a preview and only got finalized in a later version.
 
-|  Version   |                                                                                          Changes                                                                                          |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| OpenJDK 19 | New preview features: -- Virtual threads -- Pattern matching for switch                                                                                                                   |
-| OpenJDK 18 | Switch expressions further extended                                                                                                                                                       |
-| OpenJDK 17 | Sealed Types                                                                                                                                                                              |
-| OpenJDK 16 | Record classes Pattern matching for instanceof                                                                                                                                            |
-| OpenJDK 15 | Text blocks                                                                                                                                                                               |
-| OpenJDK 14 | Helpful nullpointerexceptions Streaming from running application to Flight Recorder Java Packager (jpackage) Pattern matching, see "Use Pattern Matching to Simplify Java                 |
-| OpenJDK 13 | Improved versions of preview features                                                                                                                                                     |
-| OpenJDK 12 | First preview feature of Text blocks                                                                                                                                                      |
-| OpenJDK 11 | Run single file source code Flight recorder                                                                                                                                               |
-| OpenJDK 10 | Local-Variable Type Inference (introduction of var)                                                                                                                                       |
-| OpenJDK 9  | Modularity: how applications work and can be distributed Java Dependency Analyser (jdeps) Java Shell (jshell)                                                                             |
-| OpenJDK 8  | Lambdas and streams introduced a completely new style of programming -- It's a different thought process -- Works functional instead of procedurally -- Default methods on Java Interface |
+|  Version   |                                                                                        Changes                                                                                         |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| OpenJDK 19 | New preview features: – Virtual threads – Pattern matching for switch                                                                                                                  |
+| OpenJDK 18 | Switch expressions further extended                                                                                                                                                    |
+| OpenJDK 17 | Sealed Types                                                                                                                                                                           |
+| OpenJDK 16 | Record classes Pattern matching for instanceof                                                                                                                                         |
+| OpenJDK 15 | Text blocks                                                                                                                                                                            |
+| OpenJDK 14 | Helpful nullpointerexceptions Streaming from running application to Flight Recorder Java Packager (jpackage) Pattern matching, see "Use Pattern Matching to Simplify Java              |
+| OpenJDK 13 | Improved versions of preview features                                                                                                                                                  |
+| OpenJDK 12 | First preview feature of Text blocks                                                                                                                                                   |
+| OpenJDK 11 | Run single file source code Flight recorder                                                                                                                                            |
+| OpenJDK 10 | Local-Variable Type Inference (introduction of var)                                                                                                                                    |
+| OpenJDK 9  | Modularity: how applications work and can be distributed Java Dependency Analyser (jdeps) Java Shell (jshell)                                                                          |
+| OpenJDK 8  | Lambdas and streams introduced a completely new style of programming – It's a different thought process – Works functional instead of procedurally – Default methods on Java Interface |
 
 **Fact: the 6-months release cycle brought a lot of evolution to OpenJDK.**
 
@@ -143,7 +143,7 @@ Luckily many non-profit and commercial organizations have taken on this role.
 
 This has led to a long list of distributions you can use on all kinds of devices, ranging from high-end servers to even inexpensive boards like the Raspberry Pi. But how do you select such a version?
 
-Take whichever you want that will work on your device, as they are all based on the same OpenJDK branches and (should be) tested to comply with the specifications! Some companies -- like Azul -- can provide extra tools, support, and licenses used on top of that, so check the websites of those providers to discover what they offer.
+Take whichever you want that will work on your device, as they are all based on the same OpenJDK branches and (should be) tested to comply with the specifications! Some companies – like Azul – can provide extra tools, support, and licenses used on top of that, so check the websites of those providers to discover what they offer.
 
 [Foojay.io offers a search tool](https://foojay.io/download) to find all available OpenJDK distributions for all platforms.
 

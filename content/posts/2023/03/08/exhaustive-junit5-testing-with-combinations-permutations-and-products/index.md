@@ -46,7 +46,7 @@ In this article we will be talking about Chronicle Test Framework.
 
 Suppose we have written a custom implementation of java.util.List called MyList and that we want to test the implementation against a reference implementation such as ArrayList.
 
-Further, assume that we have a number of operations O1, O2, ..., On. that we can apply to these objects.
+Further, assume that we have a number of operations O1, O2, …, On. that we can apply to these objects.
 
 The question now is: how can we write tests assuring that the two objects provide the same result regardless of how the operations are applied?
 
@@ -318,7 +318,7 @@ For example, here is a list of the number of permutations of all combinations fo
 ![](Screen-Shot-2023-02-27-at-9.54.03-AM-1024x884.png)  
 *Table 1, shows the number of permutations of combinations for some set sizes 's'.*
 
-More generally, it can be shown that: poc(s) = poc(s -- 1) \* s + 1.
+More generally, it can be shown that: poc(s) = poc(s – 1) \* s + 1.
 
 If in doubt, the number of combinations can be checked using the .count() stream operation which will return the number of sequences returned as shown below:
 

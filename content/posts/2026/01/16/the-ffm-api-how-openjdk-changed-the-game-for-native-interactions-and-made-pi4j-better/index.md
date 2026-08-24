@@ -283,7 +283,7 @@ I'm looking forward to experimenting with these different hardware platforms! Ma
 
 ### Pi4J Examples Using the FFM API
 
-I often demo with a CrowPi -- a neat kit with a Raspberry Pi and pre-wired components in a single box. It's great for learning because you can't wire things incorrectly!
+I often demo with a CrowPi – a neat kit with a Raspberry Pi and pre-wired components in a single box. It's great for learning because you can't wire things incorrectly!
 
 Here's a simplified example using JBang to blink an RGB LED, using a snapshot build of Pi4J V4. Once this version is released you can remove the line with `//REPOS` and update the version.
 

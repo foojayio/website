@@ -14,8 +14,6 @@ related_posts:
   - "a-simple-service-with-spring-boot"
   - "getting-started-with-jakarta-ee-9-hello-world"
 frozen: false
-aliases:
-  - "/today/understanding-apache-maven-part-2-pom-hierarchy-and-effective-pom/"
 ---
 
 Following on from [the first article on Maven basics](https://foojay.io/today/understanding-apache-maven-part-1-the-basics/), the Project Object Model (POM) is explored, below.
@@ -26,12 +24,12 @@ First, a maven POM is not a [popular pomegranate juice](https://www.pomwonderful
 
 A POM describes build management needs of a project:
 
-* **project coordinates** -- uniquely identifiable set of properties by which the project artifacts can be consumed elsewhere.
-* **dependencies** -- libraries and code needed to execute the project build management
-* **plugins** -- helper tools that execute build and build management aspects
-* **properties** -- common and extracted values used in the project
-* **inheritance details** -- the ability to create a hierarchy of re-usable POM components
-* **profiles** -- alternate execution pathways that can be activated on a per-execution basis
+* **project coordinates** – uniquely identifiable set of properties by which the project artifacts can be consumed elsewhere.
+* **dependencies** – libraries and code needed to execute the project build management
+* **plugins** – helper tools that execute build and build management aspects
+* **properties** – common and extracted values used in the project
+* **inheritance details** – the ability to create a hierarchy of re-usable POM components
+* **profiles** – alternate execution pathways that can be activated on a per-execution basis
 * . . .
 
 ## How does Maven interact with a POM?

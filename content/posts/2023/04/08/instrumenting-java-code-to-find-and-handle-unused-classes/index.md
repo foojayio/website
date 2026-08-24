@@ -67,7 +67,7 @@ Static initializers are called whenever a class is initialized, which happens in
 > * A `static` field declared by T is used and the field is not a constant variable ([§4.12.4](https://docs.oracle.com/javase/specs/jls/se17/html/jls-4.html#jls-4.12.4)).
 >
 > When a class is initialized, its superclasses are initialized (if they have not been previously initialized), as well as any superinterfaces ([§8.1.5](https://docs.oracle.com/javase/specs/jls/se17/html/jls-8.html#jls-8.1.5)) that declare any default methods ([§9.4.3](https://docs.oracle.com/javase/specs/jls/se17/html/jls-9.html#jls-9.4.3)) (if they have not been previously initialized). Initialization of an interface does not, of itself, cause initialization of any of its superinterfaces.
-> [When Initialization Occurs -- Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/jls-12.html#jls-12.4.2)
+> [When Initialization Occurs – Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/jls-12.html#jls-12.4.2)
 
 Adding code at the beginning of every class's static initializers lets us obtain knowledge on all used classes and interfaces. Interfaces don't have static initializers in Java source code, but the bytecode supports this nonetheless,*and we're only working with bytecode here.*
 
@@ -538,7 +538,7 @@ The last thing that I want to cover is the handling of nested JARs in the `proce
 > Java does not provide any standard way to load nested jar files (that is, jar files that are themselves contained within a jar). This can be problematic if you need to distribute a self-contained application that can be run from the command line without unpacking.
 >
 > To solve this problem, many developers use "shaded" jars. A shaded jar packages all classes, from all jars, into a single "uber jar". The problem with shaded jars is that it becomes hard to see which libraries are actually in your application. It can also be problematic if the same filename is used (but with different content) in multiple jars. Spring Boot takes a different approach and lets you actually nest jars directly.
-> [The Executable JAR Format -- Spring Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html)
+> [The Executable JAR Format – Spring Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html)
 
 Our method first checks that we should include the nested JAR and, if so, extract it into a temporary file. We extract the JAR because the JarFile API can only work with files. We then use the ClassAndLibraryTransformer recursively:
 
@@ -585,7 +585,7 @@ Our method first checks that we should include the nested JAR and, if so, extrac
 
 Nesting JAR files come with a few restrictions, but most notable is the limitation of ZIP compression:
 > The `ZipEntry` for a nested jar must be saved by using the `ZipEntry.STORED` method. This is required so that we can seek directly to individual content within the nested jar. The content of the nested jar file itself can still be compressed, as can any other entries in the outer jar.
-> [The Executable JAR Format -- Spring Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html)
+> [The Executable JAR Format – Spring Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html)
 
 Therefore, the code creates a JarEntry that is just stored and not compressed. But this requires us to compute and set the CRC and file size ourselves; this is done automatically for compressed entries.
 

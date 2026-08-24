@@ -3,6 +3,7 @@ title: "How to improve your spring boot skills"
 date: "2024-03-20T15:10:29+00:00"
 lastmod: "2024-08-14T13:05:42+00:00"
 description: "How to make sure you're unlocking the full potential of Spring Boot. 9 ways to improve your Spring Boot Skills."
+canonical: "https://digma.ai/the-spring-way-of-doing-things-9-ways-to-improve-your-spring-boot-skills/"
 authors:
   - "lee-sheinberg"
 image: "digmalovejava-spring.png"
@@ -36,7 +37,7 @@ Here is how you can externalize your configuration
 
 To externalize your configuration, you need to make use of the application.properties or application.yml
 
--- Configure Your Properties:
+– Configure Your Properties:
 
 In your application.properties or application.yml file, specify the properties with the configured prefix:
 
@@ -57,7 +58,7 @@ app:
   group-id: dgma-group
 ```
 
--- Create a Configuration Properties Class:
+– Create a Configuration Properties Class:
 
 Create a class to hold your configuration properties. Annotate it with @ConfigurationProperties to specify the prefix for your properties:
 
@@ -75,7 +76,7 @@ public class AppProperties {
 }
 ```
 
--- Inject the Configuration:
+– Inject the Configuration:
 
 Inject the configuration properties into your components or services:
 
@@ -311,7 +312,7 @@ OpenTelemetry provides end-to-end tracing and observability in microservice-base
 
 **Use Ecosystem tools to bootstrap your observability and make observability Data meaningful**   
 
-Continuous Feedback tools such as digma.ai can make the journey from no observability to full observability much easier, but more importantly, make sure that observability data becomes impactful -- instead of just pretty dashboards. Digma and similar tools can analyze what the observability data means about your code to detect common anti-patterns and issues and provide you with feedback as-you-code.
+Continuous Feedback tools such as digma.ai can make the journey from no observability to full observability much easier, but more importantly, make sure that observability data becomes impactful – instead of just pretty dashboards. Digma and similar tools can analyze what the observability data means about your code to detect common anti-patterns and issues and provide you with feedback as-you-code.
 
 ## 9. Test, Test, Test
 

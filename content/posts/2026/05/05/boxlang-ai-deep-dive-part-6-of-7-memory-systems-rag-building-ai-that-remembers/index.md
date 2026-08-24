@@ -15,9 +15,9 @@ categories:
   - "Tutorials"
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
-  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 frozen: false
 ---
 
@@ -196,7 +196,7 @@ For most production support-bot or assistant scenarios, `hybrid` is the sweet sp
 
 ## 🏢 Per-Call Multi-Tenant Identity Routing
 
-This is the architectural feature that makes BoxLang AI memory extensible. Memory instances are stateless and safe to use as singletons --- `userId` and `conversationId` route each operation to the correct isolated conversation. Or you can create memories with seeded identities if you want a specific agent with specific memory; your choice.
+This is the architectural feature that makes BoxLang AI memory extensible. Memory instances are stateless and safe to use as singletons — `userId` and `conversationId` route each operation to the correct isolated conversation. Or you can create memories with seeded identities if you want a specific agent with specific memory; your choice.
 
 Every memory operation accepts optional identity arguments:
 

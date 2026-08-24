@@ -233,7 +233,7 @@ Various additions to the JDK: - `ForkJoinPool` now implements `ScheduledExecutor
 * `Reader.readAllAsString()`: reads all remaining characters as String.
 * code\>Reader.readAllLines(): reads all remaining characters as a text line list.
 
-All the new JDK 25 APIs can be found in [The Java Version Almanac -- New APIs in Java 25](https://javaalmanac.io/jdk/25/apidiff/24/ "The").
+All the new JDK 25 APIs can be found in [The Java Version Almanac – New APIs in Java 25](https://javaalmanac.io/jdk/25/apidiff/24/ "The").
 
 ## Internal changes, performance, and security
 

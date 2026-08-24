@@ -28,7 +28,7 @@ The database generates new versions of a record for every update, and the dead v
 
 It's a common behavior among all databases implementing [MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control "MVCC") (Multiversion concurrency control).
 
-But, suppose our Java app uses a distributed database for the user data. Will that database also generate litter in response to application requests? Let's find out....
+But, suppose our Java app uses a distributed database for the user data. Will that database also generate litter in response to application requests? Let's find out….
 
 ## LSM Tree-Based Databases
 

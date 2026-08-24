@@ -26,7 +26,7 @@ That's why we're excited to announce our upcoming webinar:
 
 **Unlock Enterprise AI on the JVM: Build Agents, RAG Pipelines \& Multi-Model Workflows with BoxLang AI One API, Zero Lock-In Led by Luis Majano**
 
-In this session, you'll discover **BoxLang AI** , an open-source library that brings unified, fluent AI orchestration to the JVM ecosystem. With a single, intuitive API, BoxLang AI lets you integrate 12+ **leading AI providers** (including OpenAI, Claude, Gemini, Grok, Ollama, Groq, and more), switch models, or combine them into advanced workflows---**without rewriting your code.**
+In this session, you'll discover **BoxLang AI** , an open-source library that brings unified, fluent AI orchestration to the JVM ecosystem. With a single, intuitive API, BoxLang AI lets you integrate 12+ **leading AI providers** (including OpenAI, Claude, Gemini, Grok, Ollama, Groq, and more), switch models, or combine them into advanced workflows—**without rewriting your code.**
 
 ## What You'll Learn
 

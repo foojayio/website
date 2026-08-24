@@ -195,7 +195,7 @@ Various additions to the JDK:
 * `InetAddress.ofLiteral(String)`: creates an `InetAddress` from the textual representation of the IP address. This static method also exists for the `Inet4Address` and `Inet6Address` classes.
 * `RandomGenerator.equiDoubles(double left, double right, boolean isLeftIncluded, boolean isRightIncluded)`.
 
-All the new JDK 21 APIs can be found in [The Java Version Almanac -- New APIs in Java 22](https://javaalmanac.io/jdk/22/apidiff/21/ "The").
+All the new JDK 21 APIs can be found in [The Java Version Almanac – New APIs in Java 22](https://javaalmanac.io/jdk/22/apidiff/21/ "The").
 
 ## Internal changes, performance, and security
 

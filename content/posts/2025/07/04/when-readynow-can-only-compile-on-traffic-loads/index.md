@@ -63,7 +63,7 @@ A fully optimized system can be achieved before traffic starts through an iterat
 
 ### Calling the identified code
 
-Once you have identified the methods that get called once the traffic starts, you can create a script or automation to trigger the compilation of all the required code. Depending on your use case, this could be a script in Java, Bash, Python,... with simulated requests, an integration test, or any other solution that triggers your application to call those methods.
+Once you have identified the methods that get called once the traffic starts, you can create a script or automation to trigger the compilation of all the required code. Depending on your use case, this could be a script in Java, Bash, Python,… with simulated requests, an integration test, or any other solution that triggers your application to call those methods.
 
 ### Readiness check
 

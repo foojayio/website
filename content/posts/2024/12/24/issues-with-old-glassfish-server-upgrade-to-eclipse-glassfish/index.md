@@ -31,7 +31,7 @@ Since version 7, Eclipse GlassFish provides a lot of benefits not available with
 > * Official **Docker images** tuned for cloud deployments and Kubernetes
 > * Updated **developers tools** (IDE plugins, Maven plugins, etc.)
 > * **Regular monthly releases** with fixes, improvements and new features
-> * **Commercial support** provided by OmniFish -- experts behind GlassFish
+> * **Commercial support** provided by OmniFish – experts behind GlassFish
 
 [Need help with GlassFish? Ask us!](https://omnifish.ee/contact-us)
 

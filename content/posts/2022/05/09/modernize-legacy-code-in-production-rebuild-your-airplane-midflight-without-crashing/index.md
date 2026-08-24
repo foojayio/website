@@ -22,13 +22,13 @@ I spent over a decade as a consultant working for dozens of companies in many fi
 
 When writing this, my primary focus is on updating an old Java 6 era style J2EE code to the more modern Spring Boot/Jakarta EE code. However, I don't want to go into the code and try to keep this generic. I discuss COBOL and similar legacy systems too. Most of the overarching guidelines should work for migrating any other type of codebase too.
 
-Rewriting a project isn't an immense challenge, mostly -- however, doing it while users are actively banging against the existing system without service disruption?
+Rewriting a project isn't an immense challenge, mostly – however, doing it while users are actively banging against the existing system without service disruption?
 
 That requires a lot of planning and coordination.
 
 ## Why Modernize?
 
-I don't think we should update projects for the sake of the "latest and greatest". There's a reason common legacy systems like COBOL are still used. Valuable code doesn't lose its shine just because of age. There's a lot to be said for "code that works". Especially if it was built by hundreds of developers decades ago. There's a lot of hidden business logic model knowledge in there...
+I don't think we should update projects for the sake of the "latest and greatest". There's a reason common legacy systems like COBOL are still used. Valuable code doesn't lose its shine just because of age. There's a lot to be said for "code that works". Especially if it was built by hundreds of developers decades ago. There's a lot of hidden business logic model knowledge in there…
 
 However, maintenance can often become the bottleneck. You might need to add features making the process untenable. It's hard to find something in millions of lines of code. The ability to leverage newer capabilities might be the final deciding factor. It might be possible to create a similar project without the same complexities, thanks to newer frameworks and tools.
 
@@ -144,14 +144,14 @@ However, the benefit of separating authentication and authorization will help in
 
 When dealing with the legacy system, we can implement the new version on top of the existing database. This is a common approach and has some advantages:
 
-* Instant migration -- this is probably the biggest advantage. All the data is already in the new system with zero downtime
-* Simple -- this is probably one of the easiest approaches to migration and you can use existing "real world" data to test the new system before going live
+* Instant migration – this is probably the biggest advantage. All the data is already in the new system with zero downtime
+* Simple – this is probably one of the easiest approaches to migration and you can use existing "real world" data to test the new system before going live
 
 There are also a few serious disadvantages:
 
-* Data pollution -- the new system might insert problematic data and break the legacy system, making reverting impossible. If you intend to provide a staged migration where both the old and new systems are running in parallel, this might be an issue
-* Cache issues -- if both systems run in parallel, caching might cause them to behave inconsistently
-* Persisting limits -- this carries over limitations of the old system into the new system
+* Data pollution – the new system might insert problematic data and break the legacy system, making reverting impossible. If you intend to provide a staged migration where both the old and new systems are running in parallel, this might be an issue
+* Cache issues – if both systems run in parallel, caching might cause them to behave inconsistently
+* Persisting limits – this carries over limitations of the old system into the new system
 
 If the storage system is modern enough and powerful enough, the approach of migrating the data in this way makes sense. It removes, or at least postpones, a problematic part of the migration process.
 
@@ -197,7 +197,7 @@ A major downside is that this might perpetuate the legacy code's existence. It m
 
 ## Implementation
 
-You finished writing the code. We're ready to pull the trigger and do the migration... Now we need to update the users that the migration is going to take place. You don't want an angry customer complaining that something suddenly stopped working.
+You finished writing the code. We're ready to pull the trigger and do the migration… Now we need to update the users that the migration is going to take place. You don't want an angry customer complaining that something suddenly stopped working.
 
 ### 1. Rehearsal
 
@@ -209,10 +209,10 @@ We need to verify that everything works as the migration completes. If something
 
 In my opinion you should use a smaller team for the actual deployment of the migrated software. Too many people can create confusion. You need the following personnel on board:
 
-* IT/OPS -- to handle the deployment and reverting if necessary
-* Support -- to field user questions and issues. Raise flags in case a user reports a critical error
-* Developers -- to figure out if there are deployment issues related to the code
-* Manager -- we need someone with instant decision-making authority. No one wants to pull a deployment. We need someone who understands what's at stake for the company
+* IT/OPS – to handle the deployment and reverting if necessary
+* Support – to field user questions and issues. Raise flags in case a user reports a critical error
+* Developers – to figure out if there are deployment issues related to the code
+* Manager – we need someone with instant decision-making authority. No one wants to pull a deployment. We need someone who understands what's at stake for the company
 
 There's a tendency to make a code fix to get the migration through. This works OK for smaller startups and I'm pretty guilty of that myself. But if you're working at scale, there's no way to do it. A code change done "on the spot" can't pass the tests and might introduce terrible problems. It's probably a bad idea.
 

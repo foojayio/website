@@ -19,9 +19,9 @@ related_posts:
 frozen: false
 ---
 
-Let me share a personal story. I started experimenting with Java on a Raspberry Pi about five years ago and blogged a few articles about it. But the more I experimented, the more I wrote down, and eventually, I had written a book... I worked on it for six months in a row, every evening and a lot of weekends. But the moment I received the box with my author copies was an incredible feeling. Holding a paper book with your name is a special moment.
+Let me share a personal story. I started experimenting with Java on a Raspberry Pi about five years ago and blogged a few articles about it. But the more I experimented, the more I wrote down, and eventually, I had written a book… I worked on it for six months in a row, every evening and a lot of weekends. But the moment I received the box with my author copies was an incredible feeling. Holding a paper book with your name is a special moment.
 
-Fast forward to now. The 1000 paper copies are sold out. I have the last 10 copies in case you still want one 😉 But as I self-published the ebook, it's still for sale on Leanpub, and I keep updating it. That's one of the first significant differences between publishing a paper book and an ebook.... As an author, I got about 2 euros per paper book from the publisher, and LeanPub pays 80% royalties. Don't forget that I have to pay taxes on what I earn. So, if you do the math, you'll understand that the book didn't make me rich. But yes, it helped me in my career and was one of the reasons I became a Java Champion. So, we can argue about the "becoming famous".
+Fast forward to now. The 1000 paper copies are sold out. I have the last 10 copies in case you still want one 😉 But as I self-published the ebook, it's still for sale on Leanpub, and I keep updating it. That's one of the first significant differences between publishing a paper book and an ebook…. As an author, I got about 2 euros per paper book from the publisher, and LeanPub pays 80% royalties. Don't forget that I have to pay taxes on what I earn. So, if you do the math, you'll understand that the book didn't make me rich. But yes, it helped me in my career and was one of the reasons I became a Java Champion. So, we can argue about the "becoming famous".
 
 But that's only my story. I invited several guests to share their knowledge about book writing:
 

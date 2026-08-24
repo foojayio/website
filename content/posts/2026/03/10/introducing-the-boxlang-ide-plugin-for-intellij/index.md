@@ -11,10 +11,10 @@ categories:
   - "Java"
   - "Tools"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 

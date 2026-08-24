@@ -16,8 +16,6 @@ related_posts:
   - "starting-docker-desktop-with-spring-boot"
   - "idempotent-spring-boot-starter"
 frozen: false
-aliases:
-  - "/today/spring-boot-annotation-reference-01-b-foojay-io-today/"
 ---
 
 **In the second part of my article series on Spring Boot Annotations, we focus on REST and Spring Stereotype Annotations.**

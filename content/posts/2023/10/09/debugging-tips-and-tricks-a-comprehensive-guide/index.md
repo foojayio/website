@@ -49,14 +49,14 @@ The term "Rubber Ducking" traces back to a developer who carried a rubber duck t
 
 Articulating the problem often highlights nuances we might overlook. This method remains effective even when conversing with an inanimate object or merely running the exercise mentally. It's a simple process:
 
-* Begin by stating, "Here's the problem..."
+* Begin by stating, "Here's the problem…"
 * Share your theory about the potential source of the issue.
 * Discuss why other parts of the code aren't causing the problem.
 * Detail your verification process for each statement.
 
 The duck is optional, but surprisingly helpful when practicing this approach. This is a helpful technique for developers who are often embarrassed by teammates. Some of us feel inadequate in such scenarios, speaking to a duck is freeing as there's no judgment.
 
-As a very experienced developer, I gained the insight of no shame. I make fun of my bugs and have a great laugh when the junior developer finds my bug. Experienced developers make stupid bugs all the time, we just don't care because experience teaches us that everyone makes stupid mistakes...
+As a very experienced developer, I gained the insight of no shame. I make fun of my bugs and have a great laugh when the junior developer finds my bug. Experienced developers make stupid bugs all the time, we just don't care because experience teaches us that everyone makes stupid mistakes…
 
 {#moving-the-goalposts-redefining-the-bug}
 
@@ -182,7 +182,7 @@ Every debugging session is a learning opportunity. It allows developers to deepe
 
 ### Strategies to Embrace the Debugging Challenge
 
-You either love something or you don't and a lot of developers feel that they don't love debugging. I get that. It's frustrating. In fact, I often start my talks with the universal debugging gesture...
+You either love something or you don't and a lot of developers feel that they don't love debugging. I get that. It's frustrating. In fact, I often start my talks with the universal debugging gesture…
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dmnmcjp5t4050yfqrxgj.jpg)
 

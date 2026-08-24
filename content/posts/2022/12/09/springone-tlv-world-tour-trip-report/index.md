@@ -20,7 +20,7 @@ frozen: false
 
 My talk was accepted by SpringOne in San Francisco. I never went to that conference and was really looking forward to it. This year would probably be amazing with the Spring 6.0 and Spring Boot 3.0 releases. So many groundbreaking changes. Unfortunately, my travel budget at Lightrun was cut, and I eventually left. This meant I had to cancel the trip, I would have paid for travel, but San Francisco is both far and prohibitively expensive. I'll have to take a raincheck.
 
-This isn't exactly a substitute, but a skeleton Spring Team is on a "world tour" which reached Tel Aviv last week and I attended. The venue is one I've never attended, the Peres center for innovation. It's on the Jaffa beach and you can literally see the waves hitting the beach from the main stage. Check out the photos below, you can literally see people on the beach in some of them. That's a fantastic venue. The only downside is the distance from the center of Tel Aviv where I live. But that's nothing compared to distances in the states...
+This isn't exactly a substitute, but a skeleton Spring Team is on a "world tour" which reached Tel Aviv last week and I attended. The venue is one I've never attended, the Peres center for innovation. It's on the Jaffa beach and you can literally see the waves hitting the beach from the main stage. Check out the photos below, you can literally see people on the beach in some of them. That's a fantastic venue. The only downside is the distance from the center of Tel Aviv where I live. But that's nothing compared to distances in the states…
 
 The event had 600+ registrations from over 80 organizations. This is the first Spring Tour outside of North America which is cool. The talks were in English which I like, but the Israeli accent is sometimes difficult to understand (yes I know). Unfortunately, I had to leave early because I had to pick up the kids.
 
@@ -28,7 +28,7 @@ Before we proceed I want to say a couple of things about Twitter. Over the past 
 
 I see no reason to stay on Twitter. It's toxic and getting more-so by the second. I still have my account and I have [a bridge that tweets my Mastodon posts](https://moa.party/). So if you follow me there you won't miss anything. But I won't go there as often and will try not to post there. All the links in this post and future posts will refer to other networks whether LinkedIn or Mastodon.
 
-## Juergen Hoeller -- Introducing Spring Framework 6
+## Juergen Hoeller – Introducing Spring Framework 6
 
 ![Juergen Hoeller](1-jurgen-700x320.jpg)
 
@@ -59,7 +59,7 @@ Other features include fast bean property determination. Complete CGLIB fork wit
 
 During the break I had time to talk to Oleg Šelajev and Juergen. The talk initially covered the future of CRaC. Jurgen was very optimistic about its chances as a future capability in the JVM and the chance of integrating it into a reasonable workflow. I asked him about the uptake of GraalVM and as of now the interest around the new versions focuses on other features. There's excitement for GraalVM but it isn't a killer feature. Yet. I have some thoughts on it which I will share at the end of the post.
 
-## DaShaun Carter -- Introducing Spring Boot 3.0
+## DaShaun Carter – Introducing Spring Boot 3.0
 
 ![DaShaun Carter](3-DaShaun-700x343.jpg)
 
@@ -69,7 +69,7 @@ The audience asked to see the size of the image which was half the size of the o
 
 After that he pointed at <https://calendar.spring.io/> which I wasn't aware of (or forgot). The scale of releases for November is amazing.
 
-## Cora Iberkleid -- Protect Your Microservices with Spring Cloud Gateway
+## Cora Iberkleid – Protect Your Microservices with Spring Cloud Gateway
 
 ![Cora Iberkleid](4-Cora-700x271.jpg)
 
@@ -85,7 +85,7 @@ Until now everything was done with pure YAML configurations. The demo concluded 
 
 ![Gateway Flow](6-Api-Gateway-700x329.jpg)
 
-## Dr. David Syer -- Running Untrusted Code in Spring Using WebAssembly
+## Dr. David Syer – Running Untrusted Code in Spring Using WebAssembly
 
 ![Dr. David Syer](7-Dr-Syer-700x331.jpg)
 

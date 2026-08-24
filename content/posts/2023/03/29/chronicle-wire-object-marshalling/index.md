@@ -254,11 +254,11 @@ As we are using toHexString( ), this example prints out our data as seen in figu
 
 The section in green represents the 'offset'; the number of bytes from the beginning of the string, to the current position.
 
-The section in red highlights the 'hex value' of the stored data. In order to read this, we can take the hex number 48 (in the top row) and firstly convert this to a decimal -- HEX 48 as a decimal is 72.
+The section in red highlights the 'hex value' of the stored data. In order to read this, we can take the hex number 48 (in the top row) and firstly convert this to a decimal – HEX 48 as a decimal is 72.
 
 We then take this decimal 72 and use an [ASCII character chart](https://ascii.cl/ "ASCII character chart"), which tells us that this is the character 'H'.
 
-If we see look in the blue section, which is the 'ASCI IOS-8859', we see that this corresponds to the 3rd character in -- 'H'.
+If we see look in the blue section, which is the 'ASCI IOS-8859', we see that this corresponds to the 3rd character in – 'H'.
 
 ![](Screen-Shot-2023-03-20-at-11.22.58-AM-1024x273.png)  
 *Figure 1. toHexString( ) output*
@@ -361,7 +361,7 @@ Overall, [Chronicle Wire's](https://github.com/OpenHFT/Chronicle-Wire "Chronicle
 
 Even if we take into account that Strings can initially be compared using their hashcode().
 
-Moreover, primitive longs are stored directly within the Object (this example used the 'House' object), so when accessing them, you do not have to undergo the level of indirection that you get when accessing an object -- such as a String -- through its reference.
+Moreover, primitive longs are stored directly within the Object (this example used the 'House' object), so when accessing them, you do not have to undergo the level of indirection that you get when accessing an object – such as a String – through its reference.
 
 Storing the data into primitives allows [TriviallyCopyable](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/TriviallyCopyableJLBH.java "TriviallyCopyable") objects to be serialised by simply copying the memory of the java object as serialised bytes.
 

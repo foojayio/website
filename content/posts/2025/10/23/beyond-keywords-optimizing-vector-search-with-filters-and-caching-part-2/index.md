@@ -33,7 +33,7 @@ The full source code for this part is available on [GitHub](https://github.com/m
 
 ## Adding filters: From story to code
 
-Imagine this: You've just finished building your shiny new semantic movie search. You type "a science fiction movie about rebels fighting an empire in space" and—boom---*Star Wars* pops up. Success!
+Imagine this: You've just finished building your shiny new semantic movie search. You type "a science fiction movie about rebels fighting an empire in space" and—boom—*Star Wars* pops up. Success!
 
 But then your friend says:
 
@@ -344,7 +344,7 @@ You should see a similar result:
 
 ## Reducing embedding costs with caching
 
-When testing the search endpoint, you might notice that embeddings are generated every single time, even if the query text doesn't change. For example, if you keep searching for...
+When testing the search endpoint, you might notice that embeddings are generated every single time, even if the query text doesn't change. For example, if you keep searching for…
 
 ```
 {
@@ -359,7 +359,7 @@ When testing the search endpoint, you might notice that embeddings are generated
 }
 ```
 
-...and then repeat the same query but change only the filters (genres, year, minIMDbRating), the log still shows embeddings being generated:
+…and then repeat the same query but change only the filters (genres, year, minIMDbRating), the log still shows embeddings being generated:
 
 ```
 2025-09-04T11:48:47.298-03:00  INFO 27180 --- [nio-8080-exec-1] com.mongodb.EmbeddingService             : Generating embeddings ..
@@ -444,7 +444,7 @@ mvn spring-boot:run
 With the backend already running, simply open http://localhost:8080 in your browser and search for:
 
 * **Search term** = *a ship that sinks at night after hitting an iceberg*
-* **Released year** = 1980--2003
+* **Released year** = 1980–2003
 * **Minimum IMDb rating** = 5
 * **Genres** = (Drama, Action)
 

@@ -23,7 +23,7 @@ This post is about the development of the duplicate finder tool. For downloads a
 [Download](https://flounder.dev/duplicate-finder/)  
 
 Anyone who worked on technical documentation in a big team is certainly aware of the content duplication issue. Even with the best tools and practices at hand, duplication is fundamentally difficult to overcome.
-![Duplicate Finder for Documentation - Post banner](https://flounder.dev/img/duplicate-finder-banner.jpg "Duplicate Finder for Documentation - Post banner")
+![Duplicate Finder for Documentation - Post banner](https://flounder.dev/img/duplicate-finder-banner.png "Duplicate Finder for Documentation - Post banner")
 
 As the project grows in size, duplicated content will start to occur. This is especially true for big projects including many similar products or features.
 

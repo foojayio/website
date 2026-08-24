@@ -644,9 +644,9 @@ The complete series showcases a remarkable transformation across three distinct 
 
 The progression reveals exponential improvements across all metrics:
 
-* **Get Reports latency**: From 6.5 seconds (appV1) to 200-800ms (appV6R4)---a 92% improvement
-* **Bulk Upsert latency**: From 62 seconds (appV1) to 250-800ms (appV6R4)---a 99% improvement
-* **Storage efficiency**: From 128.1B per event (appV1) to 6.0B per event (appV6R4)---a 95% reduction
+* **Get Reports latency**: From 6.5 seconds (appV1) to 200-800ms (appV6R4)—a 92% improvement
+* **Bulk Upsert latency**: From 62 seconds (appV1) to 250-800ms (appV6R4)—a 99% improvement
+* **Storage efficiency**: From 128.1B per event (appV1) to 6.0B per event (appV6R4)—a 95% reduction
 * **Target rate achievement**: From consistent failures to sustained success across all operational phases
 
 ### Architectural paradigm shifts

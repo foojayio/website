@@ -21,7 +21,7 @@ We are back and excited to invite you to [IntelliJ IDEA Conf 2024](http:https://
 
 IntelliJ IDEA Conf celebrates the developer community and its desire to learn and improve every day.
 
-Join us for this free, live online conference and learn from industry leaders and experts on March 6--7, 2024.
+Join us for this free, live online conference and learn from industry leaders and experts on March 6–7, 2024.
 
 You'll be able to learn about a variety of topics, like Core Java, Kotlin, Java and AI, Apache Maven 4, Spring Boot, Micronaut, Testcontainers, Secure Coding, and testing frameworks like JUnit, Mockito, and AssertJ.
 
@@ -33,29 +33,29 @@ You'll also learn more about IntelliJ IDEA performance enhancements, JetBrains A
 
 ## Agenda
 
-IntelliJ IDEA Conf 2024 will be held across two days, March 6--7, with 14 sessions in total. The conference has a single track on both days. Each day, we'll host seven one-hour sessions, including the Q\&A.
+IntelliJ IDEA Conf 2024 will be held across two days, March 6–7, with 14 sessions in total. The conference has a single track on both days. Each day, we'll host seven one-hour sessions, including the Q\&A.
 
 Please use [this link](https://lp.jetbrains.com/intellij-idea-conf-2024/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#agenda "this link") to find the detailed conference schedule, session descriptions, and speaker bios.  
 
 Here's a brief overview of the sessions which will be live streamed on the first day of IntelliJ IDEA Conf 2024, March 6:
 
-* 11:00--12:00 UTC, [Dr. Venkat Subramaniam](https://twitter.com/venkat_s "Dr. Venkat Subramaniam"), Keynote: Let's Set the Records Straight
-* 12:00--13:00 UTC, Andrey Sokolov, AI Assistant: Don't Code Alone
-* 13:00--14:00 UTC, [Trisha Gee](https://twitter.com/trisha_gee "Trisha Gee"), Developer Productivity With IntelliJ IDEA
-* 14:00--15:00 UTC, [Maxim Sobolevskiy](https://twitter.com/moscasposcas "Maxim Sobolevskiy"), Working With Databases in IntelliJ IDEA
-* 15:00--16:00 UTC, [Karl Heinz Marbaise](https://twitter.com/khmarbaise "Karl Heinz Marbaise"), The Current State of Apache Maven 4
-* 16:00--17:00 UTC, [Frank Greco](https://twitter.com/frankgreco "Frank Greco"), Building Your Own Private GenAI Chatbot With Java Tools -- A Step-by-Step Adventure
-* 17:00--18:00 UTC, [Josh Long](https://twitter.com/starbuxman "Josh Long"), Bootiful Spring Boot 3.x
+* 11:00–12:00 UTC, [Dr. Venkat Subramaniam](https://twitter.com/venkat_s "Dr. Venkat Subramaniam"), Keynote: Let's Set the Records Straight
+* 12:00–13:00 UTC, Andrey Sokolov, AI Assistant: Don't Code Alone
+* 13:00–14:00 UTC, [Trisha Gee](https://twitter.com/trisha_gee "Trisha Gee"), Developer Productivity With IntelliJ IDEA
+* 14:00–15:00 UTC, [Maxim Sobolevskiy](https://twitter.com/moscasposcas "Maxim Sobolevskiy"), Working With Databases in IntelliJ IDEA
+* 15:00–16:00 UTC, [Karl Heinz Marbaise](https://twitter.com/khmarbaise "Karl Heinz Marbaise"), The Current State of Apache Maven 4
+* 16:00–17:00 UTC, [Frank Greco](https://twitter.com/frankgreco "Frank Greco"), Building Your Own Private GenAI Chatbot With Java Tools – A Step-by-Step Adventure
+* 17:00–18:00 UTC, [Josh Long](https://twitter.com/starbuxman "Josh Long"), Bootiful Spring Boot 3.x
 
 Here's a brief overview of the sessions which will be live streamed on the second day of IntelliJ IDEA Conf 2024, March 7:
 
-* 11:00--12:00 UTC, [Yuriy Artamonov](https://twitter.com/Yuriy_Artamonov "Yuriy Artamonov"), Keynote: How IntelliJ IDEA Performance Improved: Past, Present, and Future
-* 12:00--13:00 UTC, [Graeme Rocher](https://twitter.com/graemerocher "Graeme Rocher"), Building and Testing Applications With Micronaut and Testcontainers in IntelliJ IDEA
-* 13:00--14:00 UTC, [Sebastian Aigner](https://twitter.com/sebi_io "Sebastian Aigner"), Back to the Stdlib: Making the Most of Kotlin's Standard Library
-* 14:00--15:00 UTC, [Brian Vermeer](https://twitter.com/BrianVerm "Brian Vermeer"), Don't Get Burned! Secure Coding Essentials to Protect Your Application
-* 15:00--16:00 UTC, [Billy Korando](https://twitter.com/BillyKorando "Billy Korando"), To Java 22 and Beyond!
-* 16:00--17:00 UTC, [Kesha Williams](https://twitter.com/keshawillz "Kesha Williams"), Building Intelligent Applications With the ChatGPT API
-* 17:00--18:00 UTC, [Kenneth Kousen](https://twitter.com/kenkousen "Kenneth Kousen"), Mastering Java Testing With JUnit, Mockito, and AssertJ in IntelliJ IDEA
+* 11:00–12:00 UTC, [Yuriy Artamonov](https://twitter.com/Yuriy_Artamonov "Yuriy Artamonov"), Keynote: How IntelliJ IDEA Performance Improved: Past, Present, and Future
+* 12:00–13:00 UTC, [Graeme Rocher](https://twitter.com/graemerocher "Graeme Rocher"), Building and Testing Applications With Micronaut and Testcontainers in IntelliJ IDEA
+* 13:00–14:00 UTC, [Sebastian Aigner](https://twitter.com/sebi_io "Sebastian Aigner"), Back to the Stdlib: Making the Most of Kotlin's Standard Library
+* 14:00–15:00 UTC, [Brian Vermeer](https://twitter.com/BrianVerm "Brian Vermeer"), Don't Get Burned! Secure Coding Essentials to Protect Your Application
+* 15:00–16:00 UTC, [Billy Korando](https://twitter.com/BillyKorando "Billy Korando"), To Java 22 and Beyond!
+* 16:00–17:00 UTC, [Kesha Williams](https://twitter.com/keshawillz "Kesha Williams"), Building Intelligent Applications With the ChatGPT API
+* 17:00–18:00 UTC, [Kenneth Kousen](https://twitter.com/kenkousen "Kenneth Kousen"), Mastering Java Testing With JUnit, Mockito, and AssertJ in IntelliJ IDEA
 
 Please check out the [detailed agenda](https://lp.jetbrains.com/intellij-idea-conf-2024/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#agenda "detailed agenda") for speaker and session details.
 
@@ -69,9 +69,9 @@ After your registration form is processed, you will be listed as one of our comm
 
 ## Why should you care about yet another virtual (live) conference?
 
-Given that in-person conferences have come back in force, this question is inevitable. In this case, there is no "best format" -- it depends entirely on your situation.
+Given that in-person conferences have come back in force, this question is inevitable. In this case, there is no "best format" – it depends entirely on your situation.
 
-Accessibility and convenience are some of the most significant benefits of a virtual conference like IntelliJ IDEA Conf. You can join in and from anywhere in the world and learn live from industry experts and leaders by asking questions and sharing your opinions. This conference is also free to attend -- all you need is your device, an internet connection, and the desire to learn.
+Accessibility and convenience are some of the most significant benefits of a virtual conference like IntelliJ IDEA Conf. You can join in and from anywhere in the world and learn live from industry experts and leaders by asking questions and sharing your opinions. This conference is also free to attend – all you need is your device, an internet connection, and the desire to learn.
 
 This convenience comes at the cost of being unable to interact with other attendees, speakers, or others as you would at an in-person conference. However, attending an in-person conference requires you to travel to the venue and perhaps take time off work. This might not be feasible for many developers around the world, irrespective of how compelling the conference agenda is.
 
@@ -81,7 +81,7 @@ This is a developer-focused event.
 
 IntelliJ IDEA Conf 2024 includes sessions on languages and frameworks like Java, Kotlin, AI, Apache Maven 4, Spring Boot, Micronaut, Testcontainers, Secure Coding, and testing frameworks like JUnit, Mockito, and AssertJ. You'll also learn more about IntelliJ IDEA performance improvements, JetBrains AI Assistant, IntelliJ IDEA's database support, and tips and tricks to make you more productive.
 
-## Attending sessions -- logistics
+## Attending sessions – logistics
 
 The first step is to register for the event!
 

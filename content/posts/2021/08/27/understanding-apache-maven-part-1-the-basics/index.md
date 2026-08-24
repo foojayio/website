@@ -43,7 +43,7 @@ In addition, maven provides capabilities for a project to :
 
 [Convention-over-configuration](https://en.wikipedia.org/wiki/Convention_over_configuration) is a software paradigm. The main intent of such a paradigm is to reduce the number of superfluous decisions required by a developer to build her/his project. The paradigm aims to meet and satisfy the "*[principle of least astonishment](https://en.wikipedia.org/wiki/Principle_of_least_astonishment)*".
 
-#### Apache Maven -- convention over configuration
+#### Apache Maven – convention over configuration
 
 Apache Maven provides sensible defaults for a project's build management. A developer can then choose to override any preset defaults.
 
@@ -85,6 +85,6 @@ Maven commands execute parts of its Project Object Model.
 A Project Object Model is *usually* described as an XML document. A POM description is NOT limited to XML. Other formats can be used to describe the Project Object Model, however, XML was the first format used.
 
 A picture to illustrate a typical maven execution:
-![A pictorial overview of how maven interacts with a project's Project Object Model. Includes assembling, download of dependencies and plugins, execution of build lifecycles and an upload of build artifacts to either a local repository or to a maven repository on a network](https://cgunturme.files.wordpress.com/2020/05/maven.png?w=840) Maven -- A pictorial overview
+![A pictorial overview of how maven interacts with a project's Project Object Model. Includes assembling, download of dependencies and plugins, execution of build lifecycles and an upload of build artifacts to either a local repository or to a maven repository on a network](https://cgunturme.files.wordpress.com/2020/05/maven.png?w=840) Maven – A pictorial overview
 
 The next article in this series will dig into details of a Project Object Model (POM). [Have fun with Apache Maven!](https://maven.apache.org/)

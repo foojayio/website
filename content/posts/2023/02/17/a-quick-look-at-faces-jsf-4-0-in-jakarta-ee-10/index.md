@@ -28,10 +28,10 @@ Among the major changes in this version are the following.
 * [Issue #1581](https://github.com/eclipse-ee4j/faces-api/issues/1581): New API to programmatically create Facelets
 * [Issue #1508](https://github.com/eclipse-ee4j/faces-api/issues/1508): New automatic extensionless mapping
 * [Issue #1509](https://github.com/eclipse-ee4j/faces-api/issues/1509): New annotation @ClientWindowScoped
-* [Issue #1555](https://github.com/eclipse-ee4j/faces-api/issues/1555): New attribute \<h:inputFile multiple="..."\>
-* [Issue #1556](https://github.com/eclipse-ee4j/faces-api/issues/1556): New attribute \<h:inputFile accept="..."\>
+* [Issue #1555](https://github.com/eclipse-ee4j/faces-api/issues/1555): New attribute \<h:inputFile multiple="…"\>
+* [Issue #1556](https://github.com/eclipse-ee4j/faces-api/issues/1556): New attribute \<h:inputFile accept="…"\>
 * [Issue #1559](https://github.com/eclipse-ee4j/faces-api/issues/1559): New tag \<f:selectItemGroups\>
-* [Issue #1560](https://github.com/eclipse-ee4j/faces-api/issues/1560): New attribute \<h:inputText type="..."\>
+* [Issue #1560](https://github.com/eclipse-ee4j/faces-api/issues/1560): New attribute \<h:inputText type="…"\>
 * [Issue #1563](https://github.com/eclipse-ee4j/faces-api/issues/1563): New tag \<f:selectItemGroup\>
 * [Issue #1565](https://github.com/eclipse-ee4j/faces-api/issues/1565): Skip type attribute from \<link\> and \<script\> when doctype is HTML5
 

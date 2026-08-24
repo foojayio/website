@@ -32,7 +32,7 @@ The idea is to construct the equation with the hidden variables in the middle. T
 
 ## The Bad
 
-> "Test Driven Development *IS* Double Entry Bookkeeping. Same discipline. Same reasoning. Same result." -- Uncle Bob Martin
+> "Test Driven Development *IS* Double Entry Bookkeeping. Same discipline. Same reasoning. Same result." – Uncle Bob Martin
 
 I would argue that Testing is a bit like double entry bookkeeping. Yes. We should have testing. The question is should we build our code based on our tests or vice versa? Here the answer isn't so simple.
 

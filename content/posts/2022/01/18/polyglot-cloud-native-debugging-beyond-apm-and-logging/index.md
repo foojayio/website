@@ -3,6 +3,7 @@ title: "Polyglot Cloud Native Debugging: Beyond Logs/APM"
 date: "2022-01-18T07:55:51+00:00"
 lastmod: "2022-01-18T08:02:40+00:00"
 description: "Continuous observability can facilitate a new generation of applications that will change the customer experience and yours."
+canonical: "https://talktotheduck.dev/polyglot-cloud-native-debugging-beyond-apm-and-logging"
 authors:
   - "shai-almog"
 image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-03.jpg"
@@ -26,7 +27,7 @@ frozen: false
 
 There's practically an alphabet soup of terms covering public cloud, hybrid cloud, etc. There's also a lot of overlap between the various terms. The nice thing about this topic is that it applies, regardless. You will run into problems with microservices, architecture and monolithic applications or serverless.
 
-Debugging is universal and nowadays so is polyglot. With the recent log4j shell bug, a lot of companies discovered they use Java. Python is everywhere and Node is also deeply entrenched by now. It's rare to find a cloud platform that doesn't have all three of them somewhere...​ A polyglot approach improves time to market by leveraging best of breed to deliver a product faster.
+Debugging is universal and nowadays so is polyglot. With the recent log4j shell bug, a lot of companies discovered they use Java. Python is everywhere and Node is also deeply entrenched by now. It's rare to find a cloud platform that doesn't have all three of them somewhere…​ A polyglot approach improves time to market by leveraging best of breed to deliver a product faster.
 
 But I'm getting ahead of myself. Let's take a step back and discuss the problem.
 
@@ -34,7 +35,7 @@ But I'm getting ahead of myself. Let's take a step back and discuss the problem.
 
 Without those two, we're blind. Regardless of the architecture you choose. If you don't have observability, you have a cat in a box (I'll get back to it).
 
-We need to provision cloud resources, need to know if things work...​ Actually DevOps teams need to know those things. R\&D should know it too, but they aren't immediately connected to that. Back in the days before cloud-native applications and the advent of DevOps, we would often deploy things ourselves.
+We need to provision cloud resources, need to know if things work…​ Actually DevOps teams need to know those things. R\&D should know it too, but they aren't immediately connected to that. Back in the days before cloud-native applications and the advent of DevOps, we would often deploy things ourselves.
 
 This often ended badly.
 
@@ -50,7 +51,7 @@ Troubleshooting cloud-native applications is harder. We have amazing observabili
 
 In recent years, cloud-native apps rely more and more on modern logging infrastructure. These aren't our old log files. Cloud provider logging solutions handle ingestion, search, meta-data, PII reduction, etc. at scale. I can't imagine running a major deployment without one of those solutions.
 
-Logs are wonderful, but they have two major drawbacks...​
+Logs are wonderful, but they have two major drawbacks…​
 
 ### 1. Add Log, Test, Deploy, Rinse, Repeat
 
@@ -72,11 +73,11 @@ When we observe, we affect the observer. It's as true for Schrödinger's cat as 
 
 Modern observability tools are a marvel. I feel there should be a German word to describe the satisfaction one gets from a detailed APM dashboard. These tools enable the production of complex applications like nothing we've seen before.
 
-These tools are wonderful. I don't want to qualify that with a "but they are...​". They're perfect. For the operations team, who are the target market of these tools. They're nice for R\&D teams too, but we aren't the target market.
+These tools are wonderful. I don't want to qualify that with a "but they are…​". They're perfect. For the operations team, who are the target market of these tools. They're nice for R\&D teams too, but we aren't the target market.
 
 ### 1. Check Engine
 
-I usually compare these tools to the check engine light or even the bat signal. They tell us there's a problem with cloud-native services, but they aren't exact. E.g. if your car shows the check engine light, you take it to the mechanic. She then connects his computer directly to the engine in order to debug the problem...​
+I usually compare these tools to the check engine light or even the bat signal. They tell us there's a problem with cloud-native services, but they aren't exact. E.g. if your car shows the check engine light, you take it to the mechanic. She then connects his computer directly to the engine in order to debug the problem…​
 
 The job of these tools is to detect a problem and alert us. As a bonus, they often give us the initial direction of the problem, but if the solution isn't immediately obvious, developers are left with limited options.
 
@@ -100,7 +101,7 @@ If we work around those issues, debuggers are the perfect tool. R\&D knows how t
 
 This is where continuous observability steps in. Observability tools work by monitoring the entire system and exposing relevant information.
 
-Continuous observability flips the switch, we ask the system about specific information we would like to know. It's the natural progression of problem solving...​ An observability platform points to a problem in our native software, and we use continuous observability to investigate the problem.
+Continuous observability flips the switch, we ask the system about specific information we would like to know. It's the natural progression of problem solving…​ An observability platform points to a problem in our native software, and we use continuous observability to investigate the problem.
 
 ### As a Debugger
 
@@ -126,7 +127,7 @@ Furthermore, injected logs are interlaced and ingested with the native logs. Thi
 
 Debugging is first and foremost the practice of verifying assumptions. But some assumptions are harder to verify with snapshots or logs, e.g. "this is the method that slows my docker containers".
 
-This is something for which we would normally use a profiler, but it's problematic to do in a production setting. Alternatively, we use a timer where we take the current time on method entry and log it on exit...​  
+This is something for which we would normally use a profiler, but it's problematic to do in a production setting. Alternatively, we use a timer where we take the current time on method entry and log it on exit…​  
 
 That's great for a development machine, but deploying something like this to production is "noisy" and problematic. We usually want to keep narrowing the scope of measurements to find the true culprit.
 
@@ -138,7 +139,7 @@ I somewhat side-stepped one of the biggest features in continuous observability 
 
 Let's say I want to place a snapshot, log or metric on critical code. It will get hit instantly.  
 
-That can be exactly what I want, but what if I want to debug a problem that happens only under specific conditions, e.g. to a specific user...​  
+That can be exactly what I want, but what if I want to debug a problem that happens only under specific conditions, e.g. to a specific user…​  
 
 Debuggers solved this problem before by coming up with conditional breakpoints. This applies to every action on a continuous observability platform. You can place a condition on any action within the platform, e.g. I can set a snapshot that would only be triggered by a user with the given ID.
 

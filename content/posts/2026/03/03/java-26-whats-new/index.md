@@ -140,7 +140,7 @@ Various additions to the JDK:
 * `Comparator.min(Object, Object)` and `Comparator.max(Object, Object)`: Returns the smallest or largest object between the two objects passed as parameters.
 * `HttpRequest.BodyHandlers.ofFileChannel()`: Returns a `BodyHandler` from a `FileChannel`.
 
-All of the new APIs in JDK 26 can be found in [The Java Version Almanac -- New APIs in Java 26](https://javaalmanac.io/jdk/26/apidiff/25/).
+All of the new APIs in JDK 26 can be found in [The Java Version Almanac – New APIs in Java 26](https://javaalmanac.io/jdk/26/apidiff/25/).
 
 ## Internal changes, performance, and security
 

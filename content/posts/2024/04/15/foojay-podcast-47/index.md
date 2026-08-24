@@ -23,7 +23,7 @@ About one and a half years ago, ChatGPT was launched.
 
 The way we search for information and develop software has changed a lot since then as the use of Artificial Intelligence suddenly became a lot easier.
 
-What can we expect in the near future, and how can we program AI ourselves with Java? Let's find out...
+What can we expect in the near future, and how can we program AI ourselves with Java? Let's find out…
 
 ## Video
 

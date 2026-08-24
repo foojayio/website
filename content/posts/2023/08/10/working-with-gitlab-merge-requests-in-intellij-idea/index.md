@@ -82,7 +82,7 @@ We can see the details of a specific Merge Request by double-clicking on it.
 
 We can go back to the list of search results by clicking the project name in the top left of the Merge Requests tool window. We can see that the Merge Request we just looked at still has a tab open here, in case we want to go back.
 
-:back:
+![Click project name to go back to the list of Merge Requests](back.jpg)
 
 Usually, you'll want to look for open Merge Requests, since these are the ones that need attention. Let's double-click, or press **Enter**, on one of these Merge Requests.
 
@@ -228,7 +228,7 @@ Here are the IntelliJ IDEA shortcuts that we used.
 ### Related Links
 
 * [(video) JetBrains - IntelliJ IDEA: GitLab Merge Request](https://youtu.be/I_k9v9bBaCA)
-* [(documentation) JetBrains IntelliJ IDEA -- GitLab](https://www.jetbrains.com/help/idea/gitlab.html)
+* [(documentation) JetBrains IntelliJ IDEA – GitLab](https://www.jetbrains.com/help/idea/gitlab.html)
 * [(blog) JetBrains Company blog - GitLab Support in JetBrains IDEs](https://blog.jetbrains.com/blog/2023/07/26/gitlab-support-in-jetbrains-ide/)
 
 {{< youtube I_k9v9bBaCA >}}

@@ -18,7 +18,7 @@ frozen: false
 
 As you might have read in this [blogpost](https://spring.io/blog/2023/07/13/new-in-spring-6-1-restclient), Spring is introducing a `RestClient` in Spring 6.1 to interact with HTTP backends.
 
-Now some of you might be wondering as to the why, given we already have a plethora of other options such as `RestTemplate`, `WebClient`, `HttpUrlConnection`, ...​
+Now some of you might be wondering as to the why, given we already have a plethora of other options such as `RestTemplate`, `WebClient`, `HttpUrlConnection`, …​
 
 As we can see on the [javadoc](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html) page `RestTemplate` got quite massive over time.
 

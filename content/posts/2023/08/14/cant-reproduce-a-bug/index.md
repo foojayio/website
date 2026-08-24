@@ -52,7 +52,7 @@ Yes, logging requires forethought much like observability. We can't debug an exi
 
 If a bug is elusive the odds of a concurrency-related issue are very high. If the issue is inconsistent then this is the place to start, verifying the threads involved and making sure the right threads are doing what you expect.
 
-Use single thread breakpoints to pause only one specific thread and check if there's a race condition in a specific method. Use tracepoints where possible instead of breakpoints while debugging -- blocking hides or changes concurrency-related bugs, which are often the reason for the inconsistency.
+Use single thread breakpoints to pause only one specific thread and check if there's a race condition in a specific method. Use tracepoints where possible instead of breakpoints while debugging – blocking hides or changes concurrency-related bugs, which are often the reason for the inconsistency.
 
 Review all threads and try to give each one an "edge" by making the other threads sleep. A concurrency issue might only occur if some conditions are met. We can stumble onto a unique condition using such a technique.
 

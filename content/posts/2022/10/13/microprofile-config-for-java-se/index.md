@@ -66,7 +66,7 @@ What features are supported when using the pure Java SE version?
 * Converter, the implicitly defined one as specified in the specification, and the possibility to define custom converters using the ServiceLoader mechanism.
 * Support for optional values
 * Support for expressions where a value is a result of combining other configuration values and constant expressions.
-* Support for Config Profile defining the application phase (dev, test, ...) on the property and ConfigSource level.
+* Support for Config Profile defining the application phase (dev, test, …) on the property and ConfigSource level.
 * Support for ConfigBuilder and creating custom Config instances.
 
 Other like the `@ConfigProperty` and `@ConfigProperties` which clearly required the CDI engine to function, are not included in those artifacts.

@@ -333,7 +333,7 @@ Then, in your browser, open <http://localhost:8080/>.
 
 ### Go further
 
-Congratulations! You have created a web UI that performs full CRUD (create, read, update, and delete) operations on a Spring Data JPA backend. And you did it in pure Java -- without the need for any HTML or JavaScript, and without having to expose REST services or think about HTTP requests, responses, and filter chains.
+Congratulations! You have created a web UI that performs full CRUD (create, read, update, and delete) operations on a Spring Data JPA backend. And you did it in pure Java – without the need for any HTML or JavaScript, and without having to expose REST services or think about HTTP requests, responses, and filter chains.
 
 You can explore the full source code on [GitHub](https://github.com/tarekoraby/crud-ui-tutorial "GitHub").
 

@@ -76,7 +76,7 @@ Part 4 - Promotion, adaptation, and expansion
 
   I do love typologies, and I found this breakdown very useful.
 * I found part four less relevant, especially since cross-posting has been part of my workflow for ages, and I reuse writing content for conference talks. If you never considered these options, you'll benefit from these chapters.
-* The only con I found is that the authors remind us that you should ask your company before you reveal trade secrets. I understand that you would like to warn people, but when it's repeated several times throughout the book, I got the feeling they're writing to dummies--not something I'm fond of.
+* The only con I found is that the authors remind us that you should ask your company before you reveal trade secrets. I understand that you would like to warn people, but when it's repeated several times throughout the book, I got the feeling they're writing to dummies–not something I'm fond of.
 
 ## Summary
 

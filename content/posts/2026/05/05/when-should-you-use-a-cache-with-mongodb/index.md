@@ -23,7 +23,7 @@ I like to keep the architecture as simple as possible—after all, each layer br
 
 I've yet to finish a design review without recommending that the cache tier be removed.
 
-So to answer the question in the title of this article—when should you use a cache with MongoDB?---the answer is probably never. This article attempts to explain why, but if you get to the end and still think your application needs it, then I'd love to discuss your app with you.
+So to answer the question in the title of this article—when should you use a cache with MongoDB?—the answer is probably never. This article attempts to explain why, but if you get to the end and still think your application needs it, then I'd love to discuss your app with you.
 
 ## Why were caches like Memcached \& Redis invented, and why do they thrive?
 

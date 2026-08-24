@@ -112,7 +112,7 @@ I've run the benchmark using 16 connections with the MySQL connector too, for th
 
 ![](https://github.com/mariadb-developers/blog-images/blob/main/ops-sec3.png?raw=true)
 
-Virtual threads are incredible but still have some limitations. For example there's a limitation named 'pinning'---making a virtual thread blocking like a platform thread (tip: pinning can be logged using the Java option -Djdk.tracePinnedThreads=full). At the time of writing, the MySQL connector still makes intensive use of synchronized methods, making it susceptible to issues related to pinning. This explains the difference between the performance of the MariaDB connector and MySQL's connector.
+Virtual threads are incredible but still have some limitations. For example there's a limitation named 'pinning'—making a virtual thread blocking like a platform thread (tip: pinning can be logged using the Java option -Djdk.tracePinnedThreads=full). At the time of writing, the MySQL connector still makes intensive use of synchronized methods, making it susceptible to issues related to pinning. This explains the difference between the performance of the MariaDB connector and MySQL's connector.
 
 ## R2DBC comparison
 

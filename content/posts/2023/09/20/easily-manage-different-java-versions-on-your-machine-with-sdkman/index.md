@@ -17,7 +17,7 @@ related_posts:
   - "installing-java-with-sdkman-on-raspberry-pi"
   - "video-sdkman-explained"
   - "disco-api-helping-you-to-find-any-openjdk-distribution"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

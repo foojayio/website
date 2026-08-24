@@ -49,7 +49,7 @@ Those three moments greatly influenced my entire career and, I would say, life, 
 
 ***Bazlur: What were some of the most memorable projects or challenges you faced, and how did they help shape your professional growth?***
 
-**Miro**: It's a great question; I'd say all of them, one way or another. One of my first tasks was to help improve the validation and efficiency of automatic translations in 2001--2002. The team I was part of built a distributed system with many interconnected nodes across the globe. It was a great time because I gained extensive knowledge in various areas such as hardware, operating systems, scripting, the Java platform, and application development.
+**Miro**: It's a great question; I'd say all of them, one way or another. One of my first tasks was to help improve the validation and efficiency of automatic translations in 2001–2002. The team I was part of built a distributed system with many interconnected nodes across the globe. It was a great time because I gained extensive knowledge in various areas such as hardware, operating systems, scripting, the Java platform, and application development.
 
 I remember that solving concurrency problems was very challenging. As a young engineer, I think it quickly advanced my skills. The critical point was that I was working with people at a different level of knowledge, just better than me, and I was looking to work with such people to improve my skills. Brainstorming with them was like a leap forward, and it's necessary if one wants to be good at something. Just get out of your comfort zone and move.
 

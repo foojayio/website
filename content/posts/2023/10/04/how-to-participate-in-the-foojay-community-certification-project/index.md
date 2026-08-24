@@ -14,7 +14,7 @@ related_posts:
   - "foojay-developer-certification-measure-skills"
   - "42-practical-java-design-patterns-builder-and-more"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -55,8 +55,8 @@ In this post, I will provide an overview of the components inside a task-project
 * `src_solution/` - A reference solution for the task which also has access to the files in the `src_common` folder. The sources in this folder combined with the common sources are used during development to ensure the unit tests are working properly and they are available when reviewing a candidate's work.
 * `test/` - Test code for automated tests that will initially be executed towards the reference solution.
 * `test_extra/` - Additional code that will allow tests in the `test/` folder to be compiled against the initial code of the project (i.e. files that a candidate is expected to create).
-* Score definition -- A file containing the description of the scoring of a task. This is defined using a DSL that allows for the use of different "graders", able to assign a partial score through analysis of the solution (e.g. number of correct tests, specific test outcomes, etc).
-* Workflow definition -- A file containing the flow of the entire task. A DSL allows you to define the number of sub-tasks, which instruction file to show, which files to copy into the candidate's workspace, how much time they have etc.
+* Score definition – A file containing the description of the scoring of a task. This is defined using a DSL that allows for the use of different "graders", able to assign a partial score through analysis of the solution (e.g. number of correct tests, specific test outcomes, etc).
+* Workflow definition – A file containing the flow of the entire task. A DSL allows you to define the number of sub-tasks, which instruction file to show, which files to copy into the candidate's workspace, how much time they have etc.
 
 ## Your Contributions
 

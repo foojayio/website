@@ -25,7 +25,7 @@ frozen: false
 
 {{< youtube Qw6coM798AE >}}
 
-Before I proceed with this week's post if you have friends who are learning to code... I [published a new book for Java beginners](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) with no prior knowledge (for learning programming from scratch). Each chapter also has an accompanying video and I think there's no book quite like it for beginners. I would appreciate spreading the word on this.
+Before I proceed with this week's post if you have friends who are learning to code… I [published a new book for Java beginners](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) with no prior knowledge (for learning programming from scratch). Each chapter also has an accompanying video and I think there's no book quite like it for beginners. I would appreciate spreading the word on this.
 
 ## The Role of Assumptions in Debugging
 

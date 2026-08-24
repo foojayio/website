@@ -287,7 +287,7 @@ class ExposedConfig {
 
 ### Step 6: Create Course Table Entity
 
-We can create different datatypes with primary keys; we will use [LongIdTable](https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html). For more details, <https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html>{#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html}
+We can create different datatypes with primary keys; we will use [LongIdTable](https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html). For more details, <https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html>
 
 ```java
 package com.courses.explore_exposed.model
@@ -348,7 +348,7 @@ Each of these reads almost like plain SQL but with full Kotlin type-checking—s
 
 * **Type-safe** — the compiler catches query mistakes before you even run the app.
 * **Feels native to Kotlin** — no clunky annotations or XML mapping files.
-* **Less boilerplate** — CRUD logic stays short and readable. <https://www.jetbrains.com/help/exposed/dsl-crud-operations.html>{#https://www.jetbrains.com/help/exposed/dsl-crud-operations.html}
+* **Less boilerplate** — CRUD logic stays short and readable. <https://www.jetbrains.com/help/exposed/dsl-crud-operations.html>
 * **Plays well with Spring** — transactions are handled declaratively, no manual wiring.
 * **Easy to read** — the DSL mirrors SQL closely enough that anyone familiar with SQL can follow along.
 
@@ -370,7 +370,7 @@ Serving Pages (View-Based Endpoints)
 | **Route**                     | **Purpose**                                               |
 | **GET /courses/new**          | Shows a blank "add course" form                           |
 | **POST /courses**             | Saves the submitted form, then redirects back to the list |
-| **GET /courses**              | Shows the course list—optionally filtered by ?title=    |
+| **GET /courses**              | Shows the course list—optionally filtered by ?title=      |
 | **GET /courses/edit/{id}**    | Loads a course into an "edit" form                        |
 | **POST /courses/update/{id}** | Saves edits, then redirects back to the list              |
 | **GET /courses/delete/{id}**  | Deletes a course via a plain link click, then redirects   |

@@ -10,10 +10,10 @@ categories:
   - "Java"
   - "Security"
 related_posts:
+  - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "spring-ai-agents-no-second-runtime"
   - "jc-ai-newsletter-16"
-  - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
 frozen: false
 ---
 
@@ -97,10 +97,10 @@ The tools are useful. The confidence they project is not earned. Build the habit
 
 ## Sources
 
-1. Sonatype, [2026 State of the Software Supply Chain](https://www.sonatype.com/state-of-the-software-supply-chain/introduction) --- 28% hallucination rate and 345 cases of worsened security from LLM dependency recommendations.
+1. Sonatype, [2026 State of the Software Supply Chain](https://www.sonatype.com/state-of-the-software-supply-chain/introduction) — 28% hallucination rate and 345 cases of worsened security from LLM dependency recommendations.
 
-2. Chamorro-Premuzic, T., [Why Do So Many Incompetent Men Become Leaders?](https://ideas.ted.com/why-do-so-many-incompetent-men-become-leaders-and-what-can-we-do-about-it/) --- the confidence-competence gap in leadership selection.
+2. Chamorro-Premuzic, T., [Why Do So Many Incompetent Men Become Leaders?](https://ideas.ted.com/why-do-so-many-incompetent-men-become-leaders-and-what-can-we-do-about-it/) — the confidence-competence gap in leadership selection.
 
-3. Carnegie Mellon University, [AI Chatbots Remain Confident — Even When They're Wrong](https://www.cmu.edu/news/stories/archives/2025/july/ai-chatbots-remain-confident-even-when-theyre-wrong) --- 69--88% hallucination rate in legal queries with misleading authoritative tone.
+3. Carnegie Mellon University, [AI Chatbots Remain Confident — Even When They're Wrong](https://www.cmu.edu/news/stories/archives/2025/july/ai-chatbots-remain-confident-even-when-theyre-wrong) — 69–88% hallucination rate in legal queries with misleading authoritative tone.
 
-4. Microsoft Research, [The Impact of Generative AI on Critical Thinking](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) --- documented reductions in independent problem-solving among AI tool users.
+4. Microsoft Research, [The Impact of Generative AI on Critical Thinking](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) — documented reductions in independent problem-solving among AI tool users.

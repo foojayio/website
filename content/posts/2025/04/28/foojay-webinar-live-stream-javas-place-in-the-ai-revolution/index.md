@@ -52,4 +52,4 @@ VP Developer Advocacy at Azul, Java Champion
 
 ## Slides
 
-[Foojay_Webinar_Java_s_Place_in_the_AI_Revolution_Azul_DeepNetts_April_2025](foojay-webinar-javas-place-in-the-ai-revolution.pdf)[Download](foojay-webinar-javas-place-in-the-ai-revolution.pdf)
+[Foojay_Webinar_Java_s_Place_in_the_AI_Revolution_Azul_DeepNetts_April_2025](https://foojay.io/wp-content/uploads/2025/04/Foojay_Webinar_Java_s_Place_in_the_AI_Revolution_Azul_DeepNetts_April_2025.pdf)[Download](https://foojay.io/wp-content/uploads/2025/04/Foojay_Webinar_Java_s_Place_in_the_AI_Revolution_Azul_DeepNetts_April_2025.pdf)

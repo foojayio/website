@@ -24,7 +24,7 @@ frozen: false
 
 ![](0_ntxtNVffHhl99weW-1-1024x535.jpg)
 
-By [Christopher Bradford](https://www.linkedin.com/in/bradfordcp/) and [Ty Morton](https://www.linkedin.com/in/ty-morton-2b55b82/)
+By [Christopher Bradford](https://www.linkedin.com/in/bradfordcp/) and [Ty Morton](https://www.linkedin.com/in/ty-morton-2b55b82/){#31db}
 
 Global applications need a data layer that is as distributed as the users they serve. [Apache Cassandra](https://cassandra.apache.org/_/index.html) has risen to this challenge, handling data needs for the likes of Apple, Netflix and Sony. Traditionally, managing data layers for a distributed application was handled with dedicated teams to manage the deployment and operations of thousands of nodes — both on-premises and in the cloud.
 
@@ -103,8 +103,8 @@ Another solution similar to DNS stubs is to use a managed DNS product. In the ca
 
 * Removing the overhead of managing the cluster-hosted DNS server — Cloud DNS requires no scaling, monitoring, or managing of DNS instances, because it is a hosted Google service.
 * Local resolution of DNS queries on each Google K8s Engine (GKE) node — Similar to NodeLocal DNSCache, Cloud DNS caches DNS responses locally, providing low latency and high scalability DNS resolution.
-* Integration with [Google Cloud's operations suite](https://cloud.google.com/stackdriver/docs) --- This provides for DNS monitoring and logging.
-* [VPC scope DNS](https://cloud.google.com/kubernetes-engine/docs/how-to/cloud-dns#vpc_scope_dns) --- Provides for multi-cluster, multi-environment, and VPC-wide K8s service resolution.
+* Integration with [Google Cloud's operations suite](https://cloud.google.com/stackdriver/docs) — This provides for DNS monitoring and logging.
+* [VPC scope DNS](https://cloud.google.com/kubernetes-engine/docs/how-to/cloud-dns#vpc_scope_dns) — Provides for multi-cluster, multi-environment, and VPC-wide K8s service resolution.
 
 ![](0_roZU8X7vzs1YqDEE.png) *Replicated managed DNS for multi-cluster service discovery.*
 

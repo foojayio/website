@@ -50,7 +50,7 @@ A tool designed for the DevOps crowd - like an APM - will present you with perfo
 
 This is fine for operators, but not so great for a developer.
 
-The obvious comment when I mention this to people is that when you have a failure you might have logs, but in my experience might is key; you usually either have no logs or way too many logs that raise your ingestion bill. And even then, combing through logs to find the right container in the right pod in the right node in a large k8s cluster... that isn't fun!
+The obvious comment when I mention this to people is that when you have a failure you might have logs, but in my experience might is key; you usually either have no logs or way too many logs that raise your ingestion bill. And even then, combing through logs to find the right container in the right pod in the right node in a large k8s cluster… that isn't fun!
 
 Developer observability tools work at the source code level: too fine-grained for OPS, but just right for R\&D.
 

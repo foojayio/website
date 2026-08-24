@@ -12,7 +12,7 @@ related_posts:
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "heres-java-25-ready-to-perform-to-the-limit"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -140,15 +140,15 @@ Generational ZGC (JDK 21+) resolves these issues. It frequently collects the you
 
 Use this data to guide your architectural decisions.
 
-### Collector Comparison (JDK 8--25)
+### Collector Comparison (JDK 8–25)
 
 | **Collector**  | **Supported JDK** | **Ideal Heap Size** | **Pause Time Target** | **CPU Overhead** |   **Key Technology**    |
 |----------------|-------------------|---------------------|-----------------------|------------------|-------------------------|
-| **Serial**     | 8--25             | \< 100 MB           | N/A (Long STW)        | Lowest           | Single-threaded STW     |
-| **Parallel**   | 8--25             | Any                 | Acceptable STW        | Low              | Multi-threaded STW      |
-| **G1**         | 9--25 (Default)   | 6 GB -- 128 GB      | \< 200ms              | Medium           | Region-based evacuation |
-| **ZGC**        | 11--25            | 8 GB -- 16 TB       | \< 1ms                | High (8-20%)     | Colored pointers        |
-| **Shenandoah** | 12--25            | 2 GB -- 10 TB       | \< 10ms               | High             | Concurrent compaction   |
+| **Serial**     | 8–25              | \< 100 MB           | N/A (Long STW)        | Lowest           | Single-threaded STW     |
+| **Parallel**   | 8–25              | Any                 | Acceptable STW        | Low              | Multi-threaded STW      |
+| **G1**         | 9–25 (Default)    | 6 GB – 128 GB       | \< 200ms              | Medium           | Region-based evacuation |
+| **ZGC**        | 11–25             | 8 GB – 16 TB        | \< 1ms                | High (8-20%)     | Colored pointers        |
+| **Shenandoah** | 12–25             | 2 GB – 10 TB        | \< 10ms               | High             | Concurrent compaction   |
 
 ### The Decision Tree
 
@@ -162,7 +162,7 @@ Is the environment a tiny container (\< 2 cores/2GB RAM) or is the heap \< 100 M
 
 #### **Scenario B: The Batch Processor**
 
-Is the priority 4--8 hour batch processing windows where total throughput is the only metric?
+Is the priority 4–8 hour batch processing windows where total throughput is the only metric?
 
 * **Selection:** Use Parallel GC (`-XX:+UseParallelGC`).
 

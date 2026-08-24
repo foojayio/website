@@ -69,7 +69,7 @@ When a gap exists between the business and presentation models, it's easy to get
 **To go further:**
 
 * [The best way to map a projection query to a DTO](https://vladmihalcea.com/the-best-way-to-map-a-projection-query-to-a-dto-with-jpa-and-hibernate/)
-* [Entities or DTOs -- When should you use which projection?](https://www.thoughts-on-java.org/entities-dtos-use-projection/)
+* [Entities or DTOs – When should you use which projection?](https://www.thoughts-on-java.org/entities-dtos-use-projection/)
 * [GraphQL](http://graphql.github.io/)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/alternatives-dto/) on March 6^th^, 2022*

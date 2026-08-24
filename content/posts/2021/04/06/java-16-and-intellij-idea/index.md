@@ -43,7 +43,7 @@ Let's quickly check the configuration of IntelliJ IDEA on your system to ensure 
 
 ## IntelliJ IDEA Configuration
 
-Java 16 features are supported in IntelliJ IDEA 2021.1, which is scheduled to be released this March. The early access versions of 2021.1 are already available. You can configure it to use Java 16 by selecting 16 as the Project SDK and choosing *16 (Preview) -- Sealed types* in the Project language level for your Project and Modules settings.
+Java 16 features are supported in IntelliJ IDEA 2021.1, which is scheduled to be released this March. The early access versions of 2021.1 are already available. You can configure it to use Java 16 by selecting 16 as the Project SDK and choosing *16 (Preview) – Sealed types* in the Project language level for your Project and Modules settings.
 
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-config.png)
 
@@ -55,7 +55,7 @@ All sample code used in this blog post is hosted at [Github](https://github.com/
 
 ## Implicit members added to a record
 
-The compilation process creates a full-blown class -- a record is defined as a final class, extending the `java.lang.Record` class from the core Java API. For each of the components of the record Person, the compiler defines a final instance variable (`name` and `age`). Interestingly, the name of the getter method is the same as that of the data variable (it doesn't start with `get` or `is`). Since a record is supposed to be immutable, no setter methods are defined.
+The compilation process creates a full-blown class – a record is defined as a final class, extending the `java.lang.Record` class from the core Java API. For each of the components of the record Person, the compiler defines a final instance variable (`name` and `age`). Interestingly, the name of the getter method is the same as that of the data variable (it doesn't start with `get` or `is`). Since a record is supposed to be immutable, no setter methods are defined.
 
 The methods `toString()`, `hashCode()`, and `equals()` are also generated automatically for records.
 
@@ -99,7 +99,7 @@ Let's see how you can insert a compact constructor using the Alt+Insert shortcut
 
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-8-cover.png)
 
-You can also add a canonical constructor to a record. This defines a parameter list -- which must have the same names and order as those of the components of a record. A mismatch would result in a compilation error.
+You can also add a canonical constructor to a record. This defines a parameter list – which must have the same names and order as those of the components of a record. A mismatch would result in a compilation error.
 
 By invoking context actions in IntelliJ IDEA (with Alt+Enter), you can easily convert a canonical constructor to a compact constructor:
 
@@ -107,7 +107,7 @@ By invoking context actions in IntelliJ IDEA (with Alt+Enter), you can easily co
 
 ## Truly immutable data
 
-Records are truly immutable -- you can't change their field values using reflection ( if you haven't tried it out yet, you can change the value of immutable strings using reflection).
+Records are truly immutable – you can't change their field values using reflection ( if you haven't tried it out yet, you can change the value of immutable strings using reflection).
 
 Here is example code for a regular class, `Notebook`, which defines a private final field `pageCount`:
 

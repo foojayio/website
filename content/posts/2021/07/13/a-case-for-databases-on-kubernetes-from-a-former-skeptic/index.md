@@ -19,7 +19,7 @@ frozen: false
 
 Kubernetes is everywhere. Transactional apps, video streaming services and machine learning workloads are finding a home on this ever-growing platform. But what about databases?
 
-If you had asked me this question five years ago, the answer would have been a resounding "**No!** " — based on my experience in development and operations. In the following years, as more resources emerged for stateful applications, my answer would have changed to "***Maybe**,"* but always with a qualifier: "It's fine for development or test environments..." or "If the rest of your tooling is Kubernetes-based, and you have extensive experience..."
+If you had asked me this question five years ago, the answer would have been a resounding "**No!** " — based on my experience in development and operations. In the following years, as more resources emerged for stateful applications, my answer would have changed to "***Maybe**,"* but always with a qualifier: "It's fine for development or test environments…" or "If the rest of your tooling is Kubernetes-based, and you have extensive experience…"
 
 But how about today? Should you run a database on Kubernetes? With complex operations and the requirements of persistent, consistent data, lets retrace the stages in the journey to my current answer: "In a cloud native environment? **Yes!**"
 

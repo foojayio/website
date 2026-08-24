@@ -142,15 +142,15 @@ Artificial Intelligence was, is and will be a relevant topic of digitalization. 
 
 ## Sources
 
-\[1\] Demary, Vera und Goecke, Henry (2019): Künstliche Intelligenz: Deutsche Unternehmen zwischen Risiko und Chance. In: IW-Trends -- Vierteljahresschrift zur empirischen Wirtschaftsforschung. 46. Jg. Nr.4. S.3-18. Cologne
+\[1\] Demary, Vera und Goecke, Henry (2019): Künstliche Intelligenz: Deutsche Unternehmen zwischen Risiko und Chance. In: IW-Trends – Vierteljahresschrift zur empirischen Wirtschaftsforschung. 46. Jg. Nr.4. S.3-18. Cologne
 
 \[2\] Statistisches Bundesamt (2020): Kleine und mittlere Unternehmen. 57% in kleinen und mittleren Unternehmen tätig. URL: https://www.destatis. de/DE/Themen/Branchen-Unternehmen/Unternehmen/ Kleine-Unternehmen-Mittlere-Unternehmen/aktuell-beschaeftigte.html (accessed on 19.11.2020)
 
 \[3\] IfM Bonn (2020): KMU-Definition der Europäischen Kommission. URL: https://www.ifm-bonn.org/definitionen/kmu-definition-der-eu-kommission#:\~:text=Kleinstunternehmen%2C%20kleine%20und%20mittlere%20Unternehmen,maximal%2043%20Millionen%20%E2%82%AC%20aufweist. (accessed on 24.11.2020).
 
-\[4\] Sames, Gerrit und Diener, Arthur (2018): Stand der Digitalisierung von Geschäftsprozessen zu Industrie 4.0 im Mittelstand -- Ergebnisse einer Umfrage bei Unternehmen. THM-Hochschulschriften Band 9. Gießen.
+\[4\] Sames, Gerrit und Diener, Arthur (2018): Stand der Digitalisierung von Geschäftsprozessen zu Industrie 4.0 im Mittelstand – Ergebnisse einer Umfrage bei Unternehmen. THM-Hochschulschriften Band 9. Gießen.
 
-\[5\] Bitkom (2019): Industrie 4.0 -- jetzt mit KI. URL: https://www.bitkom.org/sites/default/files/2019-04/bitkom-pressekonferenz_ industrie_ 4.0_01_04_2019_prasentation_0.pdf (accessed on 19.11.2020)
+\[5\] Bitkom (2019): Industrie 4.0 – jetzt mit KI. URL: https://www.bitkom.org/sites/default/files/2019-04/bitkom-pressekonferenz_ industrie_ 4.0_01_04_2019_prasentation_0.pdf (accessed on 19.11.2020)
 
 \[6\] Tractica (2016): Prognose zum Umsatz mit Unternehmensanwendungen im Bereich künstliche Intelligenz weltweit von 2016 bis 2025. URL: https://de.statista.com/statistik/daten/studie/620443/umfrage/umsatz-mit-unternehmensanwendungen-im-bereich-kuenstliche-intelligenz-weltweit/ (accessed on 19.11.2020)
 
@@ -230,4 +230,4 @@ Artificial Intelligence was, is and will be a relevant topic of digitalization. 
 
 \[44\] Bundesministerium des Innern (2007): Plattformunabhängigkeit von Fachanwendungen. Leitfaden für Beschaffung, Entwicklung und Betrieb von plattformunabhängigen Fachanwendungen in der öffentlichen Verwaltung. Version 1.0. Berlin.
 
-\[45\] GitHub (2021): Open Source Deep Learning in Java -- Deep Netts Community Edition. URL: https://www.deepnetts.com/blog/deep-netts-community-edition (accessed on 09.12.2021)
+\[45\] GitHub (2021): Open Source Deep Learning in Java – Deep Netts Community Edition. URL: https://www.deepnetts.com/blog/deep-netts-community-edition (accessed on 09.12.2021)

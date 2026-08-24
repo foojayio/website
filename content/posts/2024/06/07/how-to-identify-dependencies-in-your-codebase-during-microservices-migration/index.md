@@ -78,7 +78,7 @@ Top Usage Insight
 
 ## Discovering Dead Code
 
-The above insights allow us to reveal important information pieces about how the code is being used -- but what if we're interested in finding code that isn't used at all?
+The above insights allow us to reveal important information pieces about how the code is being used – but what if we're interested in finding code that isn't used at all?
 
 Digma provides annotations over such areas in the IDE editor to draw your attention to the fact that they are not reached by any flow in the application:
 

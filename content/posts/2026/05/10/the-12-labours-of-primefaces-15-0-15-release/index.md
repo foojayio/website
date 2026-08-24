@@ -232,7 +232,7 @@ PrimeFaces 15.0.15 updates/fixes behavior around AutoNumeric, the JavaScript lib
 ▪️ decimal separators are tricky  
 
 ▪️ undo/redo, backspace, formatting and parsing must stay consistent
-> This is the kind of fix users may never notice...because the component simply behaves correctly. ✅
+> This is the kind of fix users may never notice…because the component simply behaves correctly. ✅
 
 ### 🔵 7. TEXTEDITOR PASTE CLEANUP
 

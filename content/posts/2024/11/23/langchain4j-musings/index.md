@@ -45,14 +45,14 @@ Here's how LangChain4J introduces itself in its own words:
 > 2. **Comprehensive Toolbox**: Since early 2023, the community has been building numerous LLM-powered applications, identifying common abstractions, patterns, and techniques. LangChain4j has refined these into a ready to use package. Our toolbox includes tools ranging from low-level prompt templating, chat memory management, and function calling to high-level patterns like AI Services and RAG. For each abstraction, we provide an interface along with multiple ready-to-use implementations based on common techniques. Whether you're building a chatbot or developing a RAG with a complete pipeline from data ingestion to retrieval, LangChain4j offers a wide variety of options.
 > 3. **Numerous Examples**: These examples showcase how to begin creating various LLM-powered applications, providing inspiration and enabling you to start building quickly.
 >
-> ---- <https://docs.langchain4j.dev/intro>
+> -— <https://docs.langchain4j.dev/intro>
 
 Ollama's introduction is even shorter:
 > Get up and running with large language models.
 >
 > Run Llama 3.2, Phi 3, Mistral, Gemma 2, and other models. Customize and create your own
 >
-> ---- <https://ollama.com/>
+> —- <https://ollama.com/>
 
 One runtime, multiple models.
 
@@ -329,7 +329,7 @@ curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1
 ```
 
 The answer is much better:
-> The provided information doesn't mention specific books written by Nicolas Fränkel. It only provides metadata for his blog, which has a section dedicated to his "Books". ...​
+> The provided information doesn't mention specific books written by Nicolas Fränkel. It only provides metadata for his blog, which has a section dedicated to his "Books". …​
 
 It's not really correct—I actually mentioned that I wrote the books mentioned, but it's at least not hallucinating.
 

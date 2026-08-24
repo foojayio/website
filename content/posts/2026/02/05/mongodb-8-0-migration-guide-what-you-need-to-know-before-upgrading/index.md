@@ -42,13 +42,13 @@ If you want to learn more, the article [Java Meets Queryable Encryption: Develop
 
 ### Express query stages
 
-Express was introduced as a new execution stage that optimizes the query path for simple use cases. If you are running a simple query that uses a single _id index, for example...
+Express was introduced as a new execution stage that optimizes the query path for simple use cases. If you are running a simple query that uses a single _id index, for example…
 
 ```
 db.customer.find({_id: ObjectId('670ec6b005b98857588f5b6a')}).explain()
 ```
 
-...you will see that this new EXPRESS_IXSCAN stage has been included.  
+…you will see that this new EXPRESS_IXSCAN stage has been included.  
 ![](Screenshot-2025-12-30-at-10.17.14-PM.png)
 
 *MongoDB Compass Explain plan view*
@@ -102,13 +102,13 @@ db.adminCommand( {
 } )
 ```
 
-This command sets a query shape where any query looking for price in the pizzaOrders collection will be rejected, regardless of the actual price value provided in the query. (The focus is entirely on the query's structure.) Therefore, if we execute a query that matches this structure...
+This command sets a query shape where any query looking for price in the pizzaOrders collection will be rejected, regardless of the actual price value provided in the query. (The focus is entirely on the query's structure.) Therefore, if we execute a query that matches this structure…
 
 ```
 db.pizzaOrders.find({price: 10})
 ```
 
-...the query will be automatically rejected by MongoDB:  
+…the query will be automatically rejected by MongoDB:  
 ![](Screenshot-2025-12-30-at-10.18.43-PM.png)
 
 *Query rejected by admin query settings*   

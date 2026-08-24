@@ -24,7 +24,7 @@ Luckily the JDK contains multiple methods to assist you.
 
 Related to this topic, it is essential to understand that each new JDK release includes a new version of the time zone and currency database.
 
-As we will discover, you can get correct output by just switching to the most up-to-date version of Java -- without changing code!
+As we will discover, you can get correct output by just switching to the most up-to-date version of Java – without changing code!
 
 For instance, the January 2023 release notes for Azul Zulu Builds of OpenJDK contain this note:
 
@@ -34,7 +34,7 @@ This release of Azul Zulu comes with IANA Time Zone Database version 2022g.
 
 Why do we need a new version of the time zone and currency database every few months?
 
-Let's find out...
+Let's find out…
 ![](timezone-currency-1024x400.jpg)
 
 ## Time Zone Database
@@ -64,7 +64,7 @@ In Java, the ZoneRulesProvider provides access to this information. The JavaDoc 
 
 That history is actually essential if you want to find out the correct daylight savings timestamps from earlier years!
 
-***IANA is an external third party with its own community that maintains the Time Zone Database. Based on this database, many other projects -- like OpenJDK -- keep their own database up-to-date by following the changes in IANA. Anyone can contribute or monitor changes via the [OpenJDK GitHub project](https://github.com/openjdk/jdk), so it's easy to check if all changes are applied. Within the OpenJDK project, these changes are backported to all active versions. Azul even goes a step further and goes back to version 6.***
+***IANA is an external third party with its own community that maintains the Time Zone Database. Based on this database, many other projects – like OpenJDK – keep their own database up-to-date by following the changes in IANA. Anyone can contribute or monitor changes via the [OpenJDK GitHub project](https://github.com/openjdk/jdk), so it's easy to check if all changes are applied. Within the OpenJDK project, these changes are backported to all active versions. Azul even goes a step further and goes back to version 6.***
 
 **Dmitry Cherepanov and Andrew Brygin, Staff Software Engineers, Azul**
 
@@ -177,7 +177,7 @@ $14 ==> Transition[Overlap at 2023-10-29T03:00+02:00 to +01:00]
 
 ***These changes may seem to be trivial, but they sometimes have a very big impact on the OpenJDK project. An excellent example is [JDK-8284840](https://bugs.openjdk.org/browse/JDK-8284840), to upgrade the Unicode Common Locale Data Repository (CLDR) data in the JDK to version 42. This CLDR provides critical building blocks for software to support the world's languages. The pull request to achieve this Unicode compatibility includes changes in 377 files, as seen [in this commit](https://github.com/openjdk/jdk/commit/5b3de6e143e370272c36383adac3e31f359bc686). Luckily these kinds of significant changes usually happen only once in a feature release and are never backported as a whole to earlier versions. This differs from time zone updates, which may occur rather often and always get integrated into update releases.***
 
-***Sometimes small changes have a huge impact...***
+***Sometimes small changes have a huge impact…***
 
 **Yuri Nesterenko, Senior Software Engineer, Azul**
 
@@ -225,7 +225,7 @@ jshell> currency.getSymbol()
 $4 ==> "HRK"
 ```
 
-When I wrote this post in January 2023, this didn't seem to align with the changes we saw in the screenshot above, as Croatia changed from HRK to EUR! Let's check the Java version...
+When I wrote this post in January 2023, this didn't seem to align with the changes we saw in the screenshot above, as Croatia changed from HRK to EUR! Let's check the Java version…
 
 ```
 $ java -version
@@ -234,7 +234,7 @@ OpenJDK Runtime Environment Zulu19.30+11-CA (build 19.0.1+10)
 OpenJDK 64-Bit Server VM Zulu19.30+11-CA (build 19.0.1+10, mixed mode, sharing)
 ```
 
-Let's change to the latest Java 19 version, released later in January, and check the same code...
+Let's change to the latest Java 19 version, released later in January, and check the same code…
 
 ```
 $ sdk install java 19.0.2-zulu
@@ -271,9 +271,9 @@ As with every daylight saving change, a new discussion pops up to end them once 
 
 But by keeping your Java runtime up-to-date, you are assured that your program will use the correct date, times, and other settings, as you will always use the correct time zone and currency database included in the Java runtime!
 
-**Sidenote**: if currencies and daylight savings are part of your unit tests, test results can differ depending on the Java version you are using! Something to keep in mind when writing such tests...
+**Sidenote**: if currencies and daylight savings are part of your unit tests, test results can differ depending on the Java version you are using! Something to keep in mind when writing such tests…
 
-And ... in case you still have `jshell` open in your terminal and want to get out of it, `/exit` is the command you are looking for!
+And … in case you still have `jshell` open in your terminal and want to get out of it, `/exit` is the command you are looking for!
 
 ```
 jshell> /exit

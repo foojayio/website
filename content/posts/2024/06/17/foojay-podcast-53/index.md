@@ -27,8 +27,6 @@ related_posts:
   - "foojay-podcast-50"
   - "foojay-podcast-19"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-53-jcon-report-part-5-cqrs-jooq-graphql-api-vaadin-openrewrite-errorprone-gateways-proxies/"
 ---
 
 This is the final part of the JCON interviews. Did I save the best for last? It's up to you to decide...
@@ -51,22 +49,22 @@ You can listen and subscribe to the Foojay Podcast on:
 
 ## Content
 
-00:45 Simon Martinelli -- Talks about CQRS, REST, APIs, JOOQ, Vaadin
+00:45 Simon Martinelli – Talks about CQRS, REST, APIs, JOOQ, Vaadin
 
 <https://www.linkedin.com/in/simonmartinelli>
 
-09:08 Nicolas Fränkel - Talks about evolving your APIs, versioning an API, GraphQL, CQRS, REST, ProtoBuffers, Java versus Kotlin versus Rust versus ...
+09:08 Nicolas Fränkel - Talks about evolving your APIs, versioning an API, GraphQL, CQRS, REST, ProtoBuffers, Java versus Kotlin versus Rust versus …
 
 <https://www.linkedin.com/in/nicolasfrankel>
 
-19:11 Marcus Hellberg -- Talks about Vaadin, Web development with 100% Java, AI and ChatGPT
+19:11 Marcus Hellberg – Talks about Vaadin, Web development with 100% Java, AI and ChatGPT
 
 <https://www.linkedin.com/in/marcushellberg>
 
-31:27 Rick Ossendrijver -- Workshop and Talk about OpenRewrite and ErrorProne, Code analysis
+31:27 Rick Ossendrijver – Workshop and Talk about OpenRewrite and ErrorProne, Code analysis
 
 <https://www.linkedin.com/in/rick-ossendrijver>
 
-35:48 Abdel Sghiouar -- Talks about Infrastructure, Gateways, and Proxies, Java Community in Morocco, Devoxx Morocco
+35:48 Abdel Sghiouar – Talks about Infrastructure, Gateways, and Proxies, Java Community in Morocco, Devoxx Morocco
 
 42:15 Conclusion

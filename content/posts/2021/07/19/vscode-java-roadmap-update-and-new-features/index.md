@@ -16,7 +16,7 @@ Welcome to the special mid-year edition for Visual Studio Code Java updates.
 
 As the highlight of this post, we are going to take a look at our product roadmap for the next few months.
 
-We will also showcase some important new features.
+We will also showcase some important new features \& improvements as we did [in previous blog posts](https://foojay.io/today/category/tools/vscode/).
 
 So let's get right into it!
 

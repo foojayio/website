@@ -158,7 +158,7 @@ The community was also great to either help Gunnar in organizing it or each othe
 #### 1BRC Links:
 
 * [1BRC](https://github.com/gunnarmorling/1brc) Project
-* 1BRC---[The Results Are In](https://www.morling.dev/blog/1brc-results-are-in/)!
+* 1BRC—[The Results Are In](https://www.morling.dev/blog/1brc-results-are-in/)!
 * [InfoQ interview](https://www.infoq.com/news/2024/01/1brc-fast-java-processing/)
 * [Gunnar Morling on the 1BRC](https://www.youtube.com/watch?v=m0dZ_f48fzA) (live from Voxxed Days CERN) - YouTube
 * [1 Billion Row Challenge Top Contenders](https://www.twitch.tv/videos/2050175537) - Twitch

@@ -20,37 +20,37 @@ frozen: false
 
 ## We are excited to invite you to IntelliJ IDEA Conf 2025, a free virtual event.
 
-IntelliJ IDEA Conf is a celebration of the developer community, bringing together professionals who strive for excellence in software development. Join us for this free, live online conference and learn from industry leaders and experts on June 3--4, 2025.
+IntelliJ IDEA Conf is a celebration of the developer community, bringing together professionals who strive for excellence in software development. Join us for this free, live online conference and learn from industry leaders and experts on June 3–4, 2025.
 
 You'll be able to learn about a variety of topics, including Core Java, Kotlin, Java and AI, Spring Boot, GraalVM, Gradle, Junit and Kafka. For more details, see the agenda below.
 ![](IntelliJ-IDEA-Conf-2025.jpg)
 
 [Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf)
 
-IntelliJ IDEA Conf 2025 will be held on two days, June 3--4, with 15 sessions in total. The conference has a single track on both days.
+IntelliJ IDEA Conf 2025 will be held on two days, June 3–4, with 15 sessions in total. The conference has a single track on both days.
 
 Find the detailed conference schedule, session descriptions, and speaker bios on the [conference website](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#agenda "conference website").  
 
 Here's a brief overview of the sessions which will be live streamed on the first day of IntelliJ IDEA Conf 2025, June 3:
 
-* 9:00--10:00 UTC, [Sharat Chander](https://www.linkedin.com/in/sharatchander/), Keynote: 30 Years of Java... The Journey Continues
-* 10:00--11:00 UTC, [Ignat Beresnev](https://x.com/ignatberesnev), Kotlin Notebooks for Spring Developers
-* 11:00--12:00 UTC, [Fabio Niephaus](https://x.com/fniephaus/), Tips and Tricks for GraalVM and Graal Languages in IntelliJ IDEA
-* 12:00--13:00 UTC, Rémi Forax, Valhalla Nullness Emotion
-* 13:00--14:00 UTC, [Lize Raes](https://x.com/lizeraes), Next-Level Features of LangChain4j for Production-Ready AI Applications
-* 14:00--15:00 UTC, [Sandra Ahlgrimm](https://x.com/sKriemhild), From Zero to Hero: Java on Azure Integration With IntelliJ IDEA
-* 15:00--16:00 UTC, [Josh Long](https://x.com/starbuxman), Bootiful IntelliJ IDEA
+* 9:00–10:00 UTC, [Sharat Chander](https://www.linkedin.com/in/sharatchander/), Keynote: 30 Years of Java... The Journey Continues
+* 10:00–11:00 UTC, [Ignat Beresnev](https://x.com/ignatberesnev), Kotlin Notebooks for Spring Developers
+* 11:00–12:00 UTC, [Fabio Niephaus](https://x.com/fniephaus/), Tips and Tricks for GraalVM and Graal Languages in IntelliJ IDEA
+* 12:00–13:00 UTC, Rémi Forax, Valhalla Nullness Emotion
+* 13:00–14:00 UTC, [Lize Raes](https://x.com/lizeraes), Next-Level Features of LangChain4j for Production-Ready AI Applications
+* 14:00–15:00 UTC, [Sandra Ahlgrimm](https://x.com/sKriemhild), From Zero to Hero: Java on Azure Integration With IntelliJ IDEA
+* 15:00–16:00 UTC, [Josh Long](https://x.com/starbuxman), Bootiful IntelliJ IDEA
 
 Here's a brief overview of the sessions which will be live streamed on the second day of IntelliJ IDEA Conf 2025, June 4:
 
-* 9:00--10:00 UTC, [Anton Arhipov](https://x.com/antonarhipov), Keynote: "Sudo, Make Me a Sandwich!" -- Live Coding With Agentic AI in IntelliJ IDEA
-* 10:00--11:00 UTC, [Paul Merlin](https://www.linkedin.com/in/paulmerlin/) \& [Dmitrii Smirnov](https://x.com/dvsmir), IntelliJ IDEA -- The IDE That Speaks Gradle
-* 11:00--12:00 UTC, [Viktor Gamov](https://x.com/gamussa), From Tower of Babel to Babel Fish: Evolving Your Kafka Architecture With Schema Registry
-* 12:00--13:00 UTC, [Marc Philipp](https://www.linkedin.com/in/marcphilipp/), Catching Up With JUnit
-* 13:00--14:00 UTC, [Franck Pachot](https://x.com/FranckPachot), The Modern Database Debate: Documents, Tables, or Documents in Tables?
-* 14:00--15:00 UTC, [Sébastien Deleuze](https://www.linkedin.com/in/deleuze/), Null Safety in Spring Applications With JSpecify and NullAway
-* 15:00--16:00 UTC, [Bar-El Tayouri](https://x.com/BarelTayouri), Hacking and Securing AI Systems: Playing With Fire and Controlling the Flare of AI
-* 16:00--17:00 UTC, [Dr. Venkat Subramaniam](https://x.com/venkat_s), Keynote: OOP vs. DOP: Which One to Choose?
+* 9:00–10:00 UTC, [Anton Arhipov](https://x.com/antonarhipov), Keynote: "Sudo, Make Me a Sandwich!" – Live Coding With Agentic AI in IntelliJ IDEA
+* 10:00–11:00 UTC, [Paul Merlin](https://www.linkedin.com/in/paulmerlin/) \& [Dmitrii Smirnov](https://x.com/dvsmir), IntelliJ IDEA – The IDE That Speaks Gradle
+* 11:00–12:00 UTC, [Viktor Gamov](https://x.com/gamussa), From Tower of Babel to Babel Fish: Evolving Your Kafka Architecture With Schema Registry
+* 12:00–13:00 UTC, [Marc Philipp](https://www.linkedin.com/in/marcphilipp/), Catching Up With JUnit
+* 13:00–14:00 UTC, [Franck Pachot](https://x.com/FranckPachot), The Modern Database Debate: Documents, Tables, or Documents in Tables?
+* 14:00–15:00 UTC, [Sébastien Deleuze](https://www.linkedin.com/in/deleuze/), Null Safety in Spring Applications With JSpecify and NullAway
+* 15:00–16:00 UTC, [Bar-El Tayouri](https://x.com/BarelTayouri), Hacking and Securing AI Systems: Playing With Fire and Controlling the Flare of AI
+* 16:00–17:00 UTC, [Dr. Venkat Subramaniam](https://x.com/venkat_s), Keynote: OOP vs. DOP: Which One to Choose?
 
 Please check out the detailed agenda for speaker and session details.
 

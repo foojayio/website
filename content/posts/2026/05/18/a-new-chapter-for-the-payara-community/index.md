@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Something has been in the works since [Azul completed its acquisition of Payara in December 2025](https://www.azul.com/company/payara-acquisition/ "Azul completed its acquisition of Payara in December 2025"), and today we're ready to share it: the community edition of Payara has a new name and logo -- but not so very different from the one you already know!
+Something has been in the works since [Azul completed its acquisition of Payara in December 2025](https://www.azul.com/company/payara-acquisition/ "Azul completed its acquisition of Payara in December 2025"), and today we're ready to share it: the community edition of Payara has a new name and logo – but not so very different from the one you already know!
 
 Payara Platform Community is now **Azul Payara Community** , made up of two distributions you already know and love - **Azul Payara Server Community** and **Azul Payara Micro Community** - plus the tooling and connectors that go with them.
 

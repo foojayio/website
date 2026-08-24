@@ -339,7 +339,7 @@ Clone the project ([vinny59200 / kstream-lille-city-tour](https://github.com/vin
 
 ## 🔟 Conclusion
 
-### SpringBoot and Kafka Streams -- Event Routing \& Testing
+### SpringBoot and Kafka Streams – Event Routing \& Testing
 
 Kafka Streams is an incredibly powerful tool for building real-time event processing pipelines.  
 

@@ -62,4 +62,4 @@ This is very powerful. You can slowly narrow the gap between two points as you d
 
 ## Final Word
 
-In the next video we'll discuss remote debugging and its risks. I know what you might be thinking. I already know how to use remote debugging... This is a different video, we'll discuss tunneling, port-forwarding and the risks involved in doing all of that. If you have any questions please use the comments section. Thank you!
+In the next video we'll discuss remote debugging and its risks. I know what you might be thinking. I already know how to use remote debugging… This is a different video, we'll discuss tunneling, port-forwarding and the risks involved in doing all of that. If you have any questions please use the comments section. Thank you!

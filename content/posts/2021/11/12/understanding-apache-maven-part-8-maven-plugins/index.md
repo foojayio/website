@@ -38,22 +38,22 @@ A plugin is typically a `.jar` file which contains the MOJO classes and a `META-
 Broadly, plugins are of two types:
 > <br />
 >
-> **build** plugins -- configured in a project POM under the `<build>` element. Such plugins are executed as a part of the **default** (**build** ) lifecycle.  
+> **build** plugins – configured in a project POM under the `<build>` element. Such plugins are executed as a part of the **default** (**build** ) lifecycle.  
 >
-> **reporting** plugins -- configured in a project POM under the `<reporting>` element. Such plugins are executed as a part of **site** lifecycle.
+> **reporting** plugins – configured in a project POM under the `<reporting>` element. Such plugins are executed as a part of **site** lifecycle.
 
 Furthermore, plugins can be classified as:
 > <br />
 >
-> **core plugins** -- Plugins where goals are bound to core phases (clean, compile, install, resources etc.)  
+> **core plugins** – Plugins where goals are bound to core phases (clean, compile, install, resources etc.)  
 >
-> **packaging plugins** -- Plugins related to output artifact packaging. Examples include plugins for `ear`, `jar`, `war` etc.  
+> **packaging plugins** – Plugins related to output artifact packaging. Examples include plugins for `ear`, `jar`, `war` etc.  
 >
-> **reporting plugins** -- Plugins related to the **site** lifecycle and used to generate reports. Examples include `checkstyle`, `javadoc`, `project-info-reports` etc.  
+> **reporting plugins** – Plugins related to the **site** lifecycle and used to generate reports. Examples include `checkstyle`, `javadoc`, `project-info-reports` etc.  
 >
-> **tooling plugins** -- Plugins related to general tooling during the maven execution. Examples include `assembly`, `help`, `enforcer` `toolchains` etc.
+> **tooling plugins** – Plugins related to general tooling during the maven execution. Examples include `assembly`, `help`, `enforcer` `toolchains` etc.
 
-### Plugins from Maven -- versus -- custom plugins
+### Plugins from Maven – versus – custom plugins
 
 Official Maven plugins developed as a part of Apache Maven have a standard naming convention: `maven-`**<plugin shortName>**`-plugin`. This naming convention is reserved and **SHOULD NOT** be used by plugins which do not have a **groupId** of `org.apache.maven.plugins` and are not found on a maven repository under `ord/apache/maven/plugins` directory.
 

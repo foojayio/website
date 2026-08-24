@@ -26,14 +26,14 @@ Let's take a look at some of them.
 
 You're working on a new feature, but an urgent bug came in.
 
-You fixed the bug and committed the fix, but oops... you forgot to create a new branch for the bugfix!
+You fixed the bug and committed the fix, but oops… you forgot to create a new branch for the bugfix!
 
 Now this bugfix is on the wrong branch. How do we fix this?
 ![IntelliJ IDEA Git log window showing a bugfix commit on a new-feature branch](CommitOnWrongBranch-1024x575.png) Bugfix commit is on the wrong branch
 
 ## Use cherry-pick to move the commit
 
-I could redo the work, especially if it's a small change, but ... I don't want to! Luckily, there is a better way.
+I could redo the work, especially if it's a small change, but … I don't want to! Luckily, there is a better way.
 
 We only want to move this one commit from the feature branch to a separate bugfix branch. We can do this using Git's "cherry pick" option from [IntelliJ IDEA](https://www.jetbrains.com/idea/).
 
@@ -123,7 +123,7 @@ Moving a commit to a different branch. Not nearly as scary as it sounds! Let the
 ### Links
 
 * (code) <https://github.com/mlvandijk/git_tips>
-* (JetBrains -- IntelliJ IDEA) [Cherry-pick separate commits](https://www.jetbrains.com/help/idea/apply-changes-from-one-branch-to-another.html#cherry-pick)
+* (JetBrains – IntelliJ IDEA) [Cherry-pick separate commits](https://www.jetbrains.com/help/idea/apply-changes-from-one-branch-to-another.html#cherry-pick)
 * (Git documentation) [Git cherry-pick](https://git-scm.com/docs/git-cherry-pick)
 * (blog) [Marco Behler](https://www.marcobehler.com/): [Git: Merge, Cherry-Pick \& Rebase](https://www.marcobehler.com/guides/git-merge-rebase)
 * (blog) [IntelliJ IDEA: Resolving Merge Conflicts in Git](https://maritvandijk.com/intellij-idea-resolving-merge-conflicts-in-git/)

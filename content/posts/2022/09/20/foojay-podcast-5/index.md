@@ -21,11 +21,6 @@ related_posts:
   - "thinking-about-massive-throughput-meet-virtual-threads"
   - "foojay-podcast-92"
 frozen: false
-# WordPress keeps every slug a post has ever had and 301s the old one; the
-# migration only carried the CURRENT slug, so this URL -- still live on
-# foojay.io today -- had nothing behind it here.
-aliases:
-  - "/today/foojay-podcast-5-openjdk-discussion-panel/"
 ---
 
 It's September 20th, OpenJDK 19 has been released. In this podcast, we discuss the new features and the changes that this release brings.

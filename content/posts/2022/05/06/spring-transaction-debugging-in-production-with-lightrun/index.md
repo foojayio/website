@@ -31,10 +31,10 @@ But I'm getting ahead of myself!
 
 When writing a spring method or class, we can use annotations to declare that a method or a bean (class) is transactional. This annotation lets us tune transactional semantics using attributes. This lets us define behavior such as:
 
-* Transaction isolation levels -- lets us address issues such as dirty reads, non-repeatable reads, phantom reads, etc.
+* Transaction isolation levels – lets us address issues such as dirty reads, non-repeatable reads, phantom reads, etc.
 * Transaction Manager
-* Propagation behavior -- we can define whether the transaction is mandatory, required, etc. This shows whether the method expects to receive a transaction and how it behaves
-* readOnly attribute -- the DB does not always support a read-only transaction. But when it is supported, it's an excellent performance/reliability tuning feature
+* Propagation behavior – we can define whether the transaction is mandatory, required, etc. This shows whether the method expects to receive a transaction and how it behaves
+* readOnly attribute – the DB does not always support a read-only transaction. But when it is supported, it's an excellent performance/reliability tuning feature
 
 And much more.
 

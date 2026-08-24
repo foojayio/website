@@ -317,7 +317,7 @@ This post's extended `pom.xml` configuration includes various ways to enable rem
 
 You should never use all of them simultaneously, and definitely not in production! But the goal of this article is to determine if the default Java distribution in the Spring Boot Docker can be replaced and extended with additional settings.
 
-And... mission accomplished!
+And… mission accomplished!
 
 ## Read more
 

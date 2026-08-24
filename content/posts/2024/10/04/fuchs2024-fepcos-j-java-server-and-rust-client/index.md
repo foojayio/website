@@ -439,9 +439,9 @@ The FEPCOS-J and FEPCOS-R development tools automated the network programming re
 1. G. Fuchs: *FEPCOS-J (4) Easy programming of a multithreaded TCP/IP server in Java* ; At: Foojay Today; 2024-03-21; <https://foojay.io/today/fuchs-2024-fepcos-j-multithreaded-server/>.
 2. G. Fuchs: Video: *Easy Implementation of a Client-Server Application in Java with FEPCOS-J* ; On: YouTube, FEPCOS-Project (@FepcosInfo); 2024-07-29; <https://youtu.be/qtPP7kZbriQ>.
 3. Fepcos-Project: *FEPCOS-J* ; <http://fepcos.info/en/fepcos-j.html>.
-4. G. Fuchs: "*FEPCOS-J (1) -- Description, Impressions of Usage, Current State* "; <https://foojay.io/today/fuchs-2023-fepcos-j-01/>.
-5. G. Fuchs: "*FEPCOS-J (2) -- Declaratively compose networked systems in Java* "; <https://foojay.io/today/fuchs-2023-fepcos-j-02/>.
-6. G. Fuchs: "*FEPCOS-J (3) -- Build native executables of Java-coded networked systems* "; <https://foojay.io/today/fuchs-2023-fepcos-j-03-native-executables/>.
+4. G. Fuchs: "*FEPCOS-J (1) – Description, Impressions of Usage, Current State* "; <https://foojay.io/today/fuchs-2023-fepcos-j-01/>.
+5. G. Fuchs: "*FEPCOS-J (2) – Declaratively compose networked systems in Java* "; <https://foojay.io/today/fuchs-2023-fepcos-j-02/>.
+6. G. Fuchs: "*FEPCOS-J (3) – Build native executables of Java-coded networked systems* "; <https://foojay.io/today/fuchs-2023-fepcos-j-03-native-executables/>.
 7. Fepcos-Project: *FEPCOS-Model* ; <http://fepcos.info/en/fepcos-model.html>.
 8. S. Truchat, G. Fuchs, S. Meyer, and F. Dressler: *An Adaptive Model for Reconfigurable Autonomous Services using Profiling* ; In: International Journal of Pervasive Computing and Communications (JPCC), Special Issue on Pervasive Management, 2.3 (2006), pp. 247-260; [doi: 10.1108/17427370780000154](https://doi.org/10.1108/17427370780000154).
 9. G. Fuchs: *Profiling von Mobilen Autonomen Diensten - Theorie und Konzepte am Beispiel eines Prototyps*; VDM Verlag Dr. Müller, Saarbrücken, DE-SL; 2008; ISBN:978-3-639-06501-5 (in German).

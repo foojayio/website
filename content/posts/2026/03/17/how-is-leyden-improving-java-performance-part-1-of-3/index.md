@@ -3,6 +3,7 @@ title: "How is Leyden improving Java Performance? Part 1 of 3"
 date: "2026-03-17T12:00:45+00:00"
 lastmod: "2026-03-17T13:09:16+00:00"
 description: "In this series of 3 blog posts we will explain how OpenJDK project Leyden is helping to improve a specific area of performance where Java has notably lagged behind other languages i.e. application ‘startup’, ‘warmup’, and ‘initial footprint’."
+canonical: "https://delawen.com/2025/03/17/How-is-Leyden-improving-Java-Performance/"
 authors:
   - "maria-arias"
 image: "aot-cache.webp"
@@ -16,8 +17,6 @@ related_posts:
   - "where-production-policy-belongs-building-eliya-in-public"
   - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
 frozen: false
-aliases:
-  - "/today/122962/"
 ---
 
 In this series of 3 blog posts we will explain how OpenJDK project Leyden is helping to improve a specific area of performance where Java has notably lagged behind other languages i.e. application 'startup', 'warmup', and 'initial footprint'.
@@ -74,7 +73,7 @@ With application classes there is no strong guarantee that the same classes will
 
 More recent versions of CDS have supported save and restore metadata for application classes via a dynamic CDS archive, allowing the JVM to bypass loading and bytecode parsing costs for those classes on subsequent runs, improving both application startup and warmup.
 
-Leyden's premain branch builds on this success but it is addressing a bigger prize than just archived metadata. The broader internal JVM state — not just metadata but static field data, linkage data, method profiles, compiled code — which is slowly constructed during warmup, may vary depending on precisely what happens on each run. However, most of what is created on one run, if it could be saved in an archive -- as CDS currently does with metadata, ought to be reusable on a subsequent run, short circuiting the housekeeping overheads normally incurred to create it.
+Leyden's premain branch builds on this success but it is addressing a bigger prize than just archived metadata. The broader internal JVM state — not just metadata but static field data, linkage data, method profiles, compiled code — which is slowly constructed during warmup, may vary depending on precisely what happens on each run. However, most of what is created on one run, if it could be saved in an archive – as CDS currently does with metadata, ought to be reusable on a subsequent run, short circuiting the housekeeping overheads normally incurred to create it.
 
 Even if some saved state might turn out not to be useful, because, say, a class was not referenced or a method not called in the subsequent run, the ability to reuse some of the state should still pay off. The cost of reloading the required state can be made much lower than the cost of recreating, meaning the application can reach peak performance earlier, with less impedance from the JVM. The more reusable state that can be saved the greater the reduction in impedance.
 

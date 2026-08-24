@@ -37,8 +37,8 @@ What's great about the two build distributions is that they are Java TCK (Test C
 
 To clarify naming conventions the current names of the Azul build distributions are as follows:
 
-* **Azul Platform Prime builds of OpenJDK** -- Builds of the OpenJDK including Azul's advanced features such as [Falcon](https://www.azul.com/products/components/falcon-jit-compiler/), [C4 Garbage Collector](https://www.azul.com/products/components/pgc/), [CNC](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler-faq/), and [ReadyNow!](https://www.azul.com/products/components/readynow/)
-* **Azul Zulu builds of OpenJDK** -- Based on the standard builds of the OpenJDK and featured in Platform Core
+* **Azul Platform Prime builds of OpenJDK** – Builds of the OpenJDK including Azul's advanced features such as [Falcon](https://www.azul.com/products/components/falcon-jit-compiler/), [C4 Garbage Collector](https://www.azul.com/products/components/pgc/), [CNC](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler-faq/), and [ReadyNow!](https://www.azul.com/products/components/readynow/)
+* **Azul Zulu builds of OpenJDK** – Based on the standard builds of the OpenJDK and featured in Platform Core
 
 Overall, Platform Prime ultimately will reduce your infrastructure costs by increasing performance across JVMs with less resources.
 
@@ -325,7 +325,7 @@ $ bin/kafka-topics.sh --create \
 
 Since we are creating a simple Kafka instance, we will just create one topic with one partition and a replication factor of one. The single instance will be listening on localhost and port 9092.
 
-To display the newly created topic specify the *--describe* switch.
+To display the newly created topic specify the *–describe* switch.
 
 ```
 $ bin/kafka-topics.sh --describe \

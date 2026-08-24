@@ -35,7 +35,7 @@ My real introduction to Java came in the mid-2000s when I joined a consultancy f
 
 People told me that Java 1.6 had improved dramatically since the version 1.0 I'd dismissed years earlier. Curious and honestly eager to try something new after years of manual memory management, I decided to take the SCJP 6 certification.
 
-It felt like discovering a completely new language. Yes, some concepts were familiar, but Java had matured in ways I hadn't expected. It was more polished, more thoughtful, and surprisingly... trustworthy.
+It felt like discovering a completely new language. Yes, some concepts were familiar, but Java had matured in ways I hadn't expected. It was more polished, more thoughtful, and surprisingly… trustworthy.
 
 ## The Power of Continuous Evolution
 

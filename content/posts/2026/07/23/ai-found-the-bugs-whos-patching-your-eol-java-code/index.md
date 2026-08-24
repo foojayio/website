@@ -11,10 +11,10 @@ categories:
   - "Java"
   - "Security"
 related_posts:
+  - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"
   - "did-ai-just-break-software-security-for-ever"
   - "foojay-podcast-95"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
-  - "7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like"
 frozen: false
 ---
 

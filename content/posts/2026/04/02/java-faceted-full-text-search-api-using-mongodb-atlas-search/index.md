@@ -59,7 +59,7 @@ You'll need the following on your machine:
 
 ## 1. Project setup
 
-Let's create a new Java project! Open your Java IDE and create a new Maven-based project, for Java 21. In IntelliJ select File -\> New Project...  
+Let's create a new Java project! Open your Java IDE and create a new Maven-based project, for Java 21. In IntelliJ select File -\> New Project…  
 ![](Screenshot-2026-03-24-at-12.51.17-PM.png)
 
 ## 2. COCO data
@@ -830,7 +830,7 @@ We use a little helper method, addConditional, which checks if the parameter was
 The first clause uses the text search operator. There is a huge depth to this operator, which we won't cover in full here, but you can customize this to support:
 
 * Simple text search (like we're using here).
-* Configurable fuzzy text searching to handle typos---"ridung" -\> riding.
+* Configurable fuzzy text searching to handle typos—"ridung" -\> riding.
 * Wildcards like "rid\*".
 * Complex query strings like "riding AND NOT (bicycle OR horse)".
 * Phrases to find multi-word sequences.

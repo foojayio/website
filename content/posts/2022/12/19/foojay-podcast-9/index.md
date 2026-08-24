@@ -42,13 +42,13 @@ You can listen and subscribe to the Foojay Podcast on:
 
 * Pedro Duque Vieira ([@p_duke](https://twitter.com/P_Duke))
 * Sean Phillips ([@seanmiphillips](https://twitter.com/SeanMiPhillips))
-* Johan Vos ([@\[email protected\]](https://mastodon.social/@johanvos), [@johanvos](https://twitter.com/johanvos))
+* Johan Vos ([@johanvos@mastodon.social](https://mastodon.social/@johanvos), [@johanvos](https://twitter.com/johanvos))
 * Gail Anderson ([@gail_asgteach](https://twitter.com/gail_asgteach))
 * Dirk Lemmermann ([@dlemmermann](https://twitter.com/dlemmermann))
 
 ## Podcast host
 
-* Frank Delporte ([@\[email protected\]](https://foojay.social/@frankdelporte) - [@frankdelporte](https://twitter.com/frankdelporte))
+* Frank Delporte ([@frankdelporte@foojay.social](https://foojay.social/@frankdelporte) - [@frankdelporte](https://twitter.com/frankdelporte))
 
 ## Content
 

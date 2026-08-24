@@ -13,7 +13,7 @@ related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"
   - "foojay-podcast-60"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

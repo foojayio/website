@@ -371,8 +371,8 @@ public class ProductService {
 
 This ProductService class orchestrates the domain logic using the ProductPort. It provides two methods:
 
-* create -- to save a new product and return a structured response.
-* find -- to retrieve a paginated list of products, converting domain models into response objects.
+* create – to save a new product and return a structured response.
+* find – to retrieve a paginated list of products, converting domain models into response objects.
 
 *One thing to notice: I'm not using the @Service annotation from Spring here, which is commonly found in service classes. While it's perfectly okay to use @Service in many Spring-based applications, in this project we're deliberately keeping the application layer isolated and not introducing any external dependencies (like Spring) in this layer.*
 

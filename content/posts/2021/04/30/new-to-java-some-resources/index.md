@@ -11,9 +11,9 @@ categories:
   - "Java"
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
+  - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
   - "whats-new-in-the-june-2026-azul-payara-release"
-  - "introduction-to-cqrs-using-mongodb"
 frozen: false
 ---
 

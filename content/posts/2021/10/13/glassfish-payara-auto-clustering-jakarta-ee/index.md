@@ -23,7 +23,7 @@ frozen: false
 
 Ensuring trouble-proof 24/7 service delivery is among one of the most discussed areas in cloud hosting for the last few years. And the very obvious and commonly used solution here is building a clustered infrastructure for your project.
 
-Intending to help our customers to deal with such a non-trivial task and save time for other project-related activities, we created a special high-availability solution, designed to facilitate the Jakarta EE application hosting -- embedded **Auto-Clustering for GlassFish and Payara** application servers.
+Intending to help our customers to deal with such a non-trivial task and save time for other project-related activities, we created a special high-availability solution, designed to facilitate the Jakarta EE application hosting – embedded **Auto-Clustering for GlassFish and Payara** application servers.
 
 The main advantage of this solution is in automatic interconnection of multiple application server instances upon the application topology change, which implements the commonly used clustering configuration.
 
@@ -61,7 +61,7 @@ Together with automatically configured sticky sessions mechanism on the [load ba
 
 ### GlassFish Session Replication with GMS
 
-Within the GlassFish cluster, session replication is powered by the Group Management Service ([**GMS**](https://docs.oracle.com/cd/E19879-01/821-0182/gjfnl/index.html)) -- a built-in application server component that ensures failover protection, in-memory replication, transaction and timer services for cluster instances.
+Within the GlassFish cluster, session replication is powered by the Group Management Service ([**GMS**](https://docs.oracle.com/cd/E19879-01/821-0182/gjfnl/index.html)) – a built-in application server component that ensures failover protection, in-memory replication, transaction and timer services for cluster instances.
 ![glassfish session replication](https://jelastic.com/blog/wp-content/uploads/2021/09/glassfish-admin-gms1.png)
 
 GMS uses [**TCP** without multicast](https://docs.oracle.com/cd/E26576_01/doc.312/e24934/clusters.htm#GSHAG485) to detect cluster instances. When a new node is joining a GlassFish cluster, the system re-detects all running workers and DAS node - such [auto discovery](https://docs.oracle.com/cd/E26576_01/doc.312/e24934/clusters.htm#CHDIGFCG) mechanism is applied by means of the **GMS_DISCOVERY_URI_LIST** property being set to the ***generate***value.

@@ -9,10 +9,10 @@ image: "beating-hotspot-performance.jpg"
 categories:
   - "Java"
 related_posts:
+  - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
 frozen: false
 ---
 

@@ -37,7 +37,7 @@ Concurrency and parallelism are some of the hardest problems in computer science
 
 Let's start by discussing some of the elements we can enable in terms of the thread view. In the stack frame we can look at all the current threads in the combo box above the stack frame. We can toggle the currently selected thread and see the stack for that thread and the thread status. Notice that here we chose to suspend all threads on this breakpoint. If the threads were running we wouldn't be able to see their stack as it's constantly changing.
 
-In the stack frame we can look at all the current threads in the combo box above the stack frame. We can toggle the currently selected thread and see the stack for that thread and the thread status. Notice that here we chose to suspend all threads on this breakpoint. If the threads were running we wouldn't be able to see their stack as it's constantly changing. We can enable the threads view on the right hand side pull down menu to see more...
+In the stack frame we can look at all the current threads in the combo box above the stack frame. We can toggle the currently selected thread and see the stack for that thread and the thread status. Notice that here we chose to suspend all threads on this breakpoint. If the threads were running we wouldn't be able to see their stack as it's constantly changing. We can enable the threads view on the right hand side pull down menu to see more…
 
 As you can see viewing the stack is more convenient in this state when we're working with many threads. Furthermore, we can customize this view even more by going into the customize thread view and enabling additional options.  
 
@@ -51,7 +51,7 @@ Next we'll discuss debugging race conditions. The first step of debugging a race
 
 So let's open the breakpoint dialog and expand it to the fully customizable dialog. Now we need to define the method breakpoint. I type the message and then get the thread name. I only use the method breakpoint for the exit portion because if I used it for both I'd have no way to distinguish between exit and enter events. I make this a tracepoint by unchecking the suspend option. So now we have a tracepoint that prints the name of the thread that just exited the method.
 
-I now do the exact same thing for a line breakpoint on the first line in the method. A line breakpoint is fine since entry to the method makes sense here. I change the label and make it also into a tracepoint instead of a breakpoint. Now we look at the console. I copy the name of the thread from the first printout in the console and add a condition to reduce the noise. If there's a race condition there must be at least one other thread right? So let's remove one thread to be sure...
+I now do the exact same thing for a line breakpoint on the first line in the method. A line breakpoint is fine since entry to the method makes sense here. I change the label and make it also into a tracepoint instead of a breakpoint. Now we look at the console. I copy the name of the thread from the first printout in the console and add a condition to reduce the noise. If there's a race condition there must be at least one other thread right? So let's remove one thread to be sure…
 
 Going down the list it's obvious that multiple threads enter the code. That means there's a risk of a race condition. Now it means I need to read the logs and see if an enter for one thread happened before the exit of another thread. This is a bit of work but is doable.
 

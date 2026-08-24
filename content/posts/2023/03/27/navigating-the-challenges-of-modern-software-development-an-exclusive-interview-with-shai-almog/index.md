@@ -105,7 +105,7 @@ Yes, we tend to be more introverted than the median. I'm very awkward in social 
 
 The trick is to understand that everyone is an impostor, not just you. At least initially, we need to fake confidence. Unfortunately, this becomes harder as we gain real-world experience. Had I not started my career very early, I wouldn't have had the unwarranted overconfidence that let me gain real experience. Friends of mine who spent too much time building up to this ended up missing the mark. Wisdom understands the depth of one's ignorance. As an experienced developer, I feel more like an idiot when I speak today than I did 25 years ago.
 
-The one difference is that I'm not embarrassed to admit that today...  
+The one difference is that I'm not embarrassed to admit that today…  
 
 **Editor's Note:**
 
@@ -119,7 +119,7 @@ They were both billed as simplifying tools and as cost-saving tools. However, th
 
 The challenge is in finding the right balance between scalability, reliability, and ease of development that produces maintainable, affordable systems. This means better observability tools and a return to systems that provide high performance in resource-constrained environments.
 
-Another challenge is noise. When I started programming, there were no IDEs, code completion, internet, Google, or StackOverflow. Until now, the improvement has been tremendous and made it much easier to pick up programming. Unfortunately, two trends are making it much harder than it was 5--10 years ago.  
+Another challenge is noise. When I started programming, there were no IDEs, code completion, internet, Google, or StackOverflow. Until now, the improvement has been tremendous and made it much easier to pick up programming. Unfortunately, two trends are making it much harder than it was 5–10 years ago.  
 
 The first is SEO. Modern SEO has destroyed search engines. They have become useless, so getting decent, authoritative answers to trivial questions is impossible. The second trend makes it worse. AI generates code instantly; it looks authoritative but has no idea what it is doing. It provides answers that are flawed and wrong, especially for the more intricate problems. This can harm developers both directly and indirectly.
 
@@ -158,7 +158,7 @@ I'm a person who is comfortable with uncertainty and independence. This is hard 
 
 I don't advise people to take this path, as it's harder to walk through, but you should try various things and pivot throughout your career, even if it means going back a bit. Career satisfaction is one of the essential things not only for well-being but also for earnings.
 
-About the financial freedom for our younger readers...
+About the financial freedom for our younger readers…
 
 Save as much as you can and put it all into index funds. But unfortunately, I made a lot of money in the early years of my business and didn't save nearly as much as I could.
 
@@ -168,7 +168,7 @@ Save as much as you can and put it all into index funds. But unfortunately, I ma
 
 ### Bazlur: Thank you, Shai Almog, for sharing your insights. I'm sure our readers will find them immensely beneficial. On a different note, do you have any enjoyable or memorable stories from your time in the software industry that you would be willing to share with us?
 
-**Shai Almog:** So many...
+**Shai Almog:** So many…
 
 * I was in a burning building and kept coding, oblivious.
 * Working in accelerators to create Codename One was a unique experience.

@@ -21,7 +21,7 @@ related_posts:
 frozen: false
 ---
 
-**You might associate Arm primarily with smartphones and the Java-based Android runtime. However, OpenJDK has supported AArch64 on Linux since 2014--- before Arm-based cloud instances were widely available.** **Fast forward a decade and major cloud providers have their own Arm-based instances like AWS Graviton, Microsoft Azure Cobalt, and others, prompting many organizations to migrate Java workloads from x86 to multi-architecture environments.**
+**You might associate Arm primarily with smartphones and the Java-based Android runtime. However, OpenJDK has supported AArch64 on Linux since 2014— before Arm-based cloud instances were widely available.** **Fast forward a decade and major cloud providers have their own Arm-based instances like AWS Graviton, Microsoft Azure Cobalt, and others, prompting many organizations to migrate Java workloads from x86 to multi-architecture environments.**
 
 A multi-architecture deployment shift allows an organization to be adaptable and choose the architecture with the ideal price to performance ratio. Large independent software vendors, such as Uber, are [already making this transition](https://www.uber.com/en-GB/blog/adopting-arm-at-scale-bootstrapping-infrastructure/).
 

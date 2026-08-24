@@ -210,7 +210,7 @@ This post described the default Python's dependency management system and how it
 
 We continued to describe the `pip-compile` alternative, which solves the problem.
 
-Note that a dependency management specification exists for Python, [PEP 621 -- Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/).
+Note that a dependency management specification exists for Python, [PEP 621 – Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/).
 
 It's similar to a Maven's POM, with a different format.
 
@@ -223,7 +223,7 @@ But should you do, know that `pip-compile` is compatible with it.
 * [Virtual Environments and Packages](https://docs.python.org/3/tutorial/venv.html)
 * [Managing Packages with pip](https://docs.python.org/3/tutorial/venv.html#managing-packages-with-pip)
 * [pip tools](https://github.com/jazzband/pip-tools)
-* [PEP 621 -- Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
+* [PEP 621 – Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/maze-python-dependency-management/) on September, 11^th^, 2022*
 

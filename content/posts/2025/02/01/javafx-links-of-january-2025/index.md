@@ -69,7 +69,7 @@ Let us know via [links@jfx-central.com](mailto:links@jfx-central.com).
 
 ## Conferences
 
-* The schedule has been published of JavaOne 2025 "*Where Java developers come to skill up* ", March 18--20, 2025, USA. It contains three JavaFX sessions:
+* The schedule has been published of JavaOne 2025 "*Where Java developers come to skill up* ", March 18–20, 2025, USA. It contains three JavaFX sessions:
   * [JavaFX 24 and Beyond](https://reg.rf.oracle.com/flow/oracle/javaone25/catalog/page/catalog/session/1734125339212001XwBE) by **Kevin Rushfort**
   * [JavaFX in the web](https://reg.rf.oracle.com/flow/oracle/javaone25/catalog/page/catalog/session/1728506254826001MEHs) by **Karl Berger** and **Florian Kirmaier**
   * [Building a Multiplatform SDKMAN in JavaFX](https://reg.rf.oracle.com/flow/oracle/javaone25/catalog/page/catalog/session/1728227349663001Wod9) by **Jago de Vreede**

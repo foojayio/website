@@ -50,7 +50,7 @@ You can listen and subscribe to the Foojay Podcast on:
 00:28 Karl Heinz Marbaise: Apache Maven version 4, Sonatype, Maven Repository  
 <https://www.linkedin.com/in/khmarbaise/>  
 
-09:59 Steve Poole: Sonatype, The many languages running on the JVM, The possible impact on a company of getting hacked, Talks about software supply chain security, Maven, SBOMs,...   
+09:59 Steve Poole: Sonatype, The many languages running on the JVM, The possible impact on a company of getting hacked, Talks about software supply chain security, Maven, SBOMs,…   
 <https://www.linkedin.com/in/noregressions>/  
 
 27:44 Miro Wengner: Talks about Disciplined Engineering   

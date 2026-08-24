@@ -42,7 +42,7 @@ ITool (interface)
 
 Every tool in the system extends `BaseTool`. That means every tool gets the same lifecycle, the same event firing, and the same result serialization — for free, without touching provider code.
 
-## 🧱 `BaseTool` --- The Abstract Foundation
+## 🧱 `BaseTool` — The Abstract Foundation
 
 `BaseTool` is an abstract class that owns the shared infrastructure all tools need. The key design decision is that `invoke()` is declared `final`:
 
@@ -107,7 +107,7 @@ tool = new MySearchTool( client )
 
 Any call to `describe[ArgName]( "..." )` routes through `onMissingMethod` and sets the argument description used during schema generation.
 
-## ⚡ `ClosureTool` --- Zero-Boilerplate Tool Creation
+## ⚡ `ClosureTool` — Zero-Boilerplate Tool Creation
 
 `ClosureTool` is the tool you'll use most of the time. It wraps any closure or lambda and auto-introspects the callable's parameter metadata using BoxLang's `.$bx.meta.parameters` to generate a full OpenAI-compatible function schema.
 
@@ -177,7 +177,7 @@ searchTool = aiTool(
 
 ### Tools Get the Full Chat Request
 
-One powerful feature: `ClosureTool` injects `_chatRequest` into the args struct before invocation. This gives your closure access to the full originating `AiChatRequest` --- the entire conversation context, parameters, options, and more:
+One powerful feature: `ClosureTool` injects `_chatRequest` into the args struct before invocation. This gives your closure access to the full originating `AiChatRequest` — the entire conversation context, parameters, options, and more:
 
 ```java
 contextAwareTool = aiTool(
@@ -267,7 +267,7 @@ Scan all keys for any that match the name portion before `@`: `"lookup"` → fin
 
 This means you can use bare names in development and fully-qualified keys in production without changing your call sites.
 
-## 🔧 Built-In Core Tools --- `now@bxai`
+## 🔧 Built-In Core Tools — `now@bxai`
 
 Two tools ship built-in, defined in `CoreTools.bx` using the same `@AITool` annotation pattern:
 
@@ -298,7 +298,7 @@ import bxModules.bxai.models.tools.core.CoreTools;
 aiToolRegistry().scan( new CoreTools(), "bxai" )
 ```
 
-## 🔌 `MCPTool` --- MCP Server Proxy
+## 🔌 `MCPTool` — MCP Server Proxy
 
 `MCPTool` is the third `BaseTool` subclass. When you call `withMCPServer()` on an agent or model, each tool returned by `MCPClient.listTools()` becomes an `MCPTool` instance automatically:
 

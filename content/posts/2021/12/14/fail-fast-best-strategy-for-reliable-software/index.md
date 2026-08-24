@@ -3,6 +3,7 @@ title: "Fail-Fast Reliable Software Strategy. Debug Failures Effectively"
 date: "2021-12-14T15:30:46+00:00"
 lastmod: "2021-12-14T15:30:47+00:00"
 description: "A broken kitchen appliance leads me down the path of intelligent failure, downside risk, exponential growth and Cloud computing!"
+canonical: "https://talktotheduck.dev/fail-fast-reliable-software-strategy-debug-failures-effectively"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
@@ -16,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-**I love cooking and use my [Thermomix](https://www.thermomix.com/) a lot. If you hadn't heard about that amazing innovation, it's a kitchen robot... Well, it's a magical super cooking machine. When designing the Thermomix, its designers took the approach of [fail-safe](https://en.wikipedia.org/wiki/Fail-safe) instead of [fail-fast](https://en.wikipedia.org/wiki/Fail-fast). This is a smart choice in this case, but it has its drawbacks.**
+**I love cooking and use my [Thermomix](https://www.thermomix.com/) a lot. If you hadn't heard about that amazing innovation, it's a kitchen robot… Well, it's a magical super cooking machine. When designing the Thermomix, its designers took the approach of [fail-safe](https://en.wikipedia.org/wiki/Fail-safe) instead of [fail-fast](https://en.wikipedia.org/wiki/Fail-fast). This is a smart choice in this case, but it has its drawbacks.**
 
 E.g., my machine tried to recover from a failure which sent it into an infinite recovery loop. I literally couldn't pull out the food from the lid that was sealed shut. But normally, it's one of the most reliable devices I own.
 

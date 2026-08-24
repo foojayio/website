@@ -29,7 +29,7 @@ In this article, I will walk you through how to get started for Java on VS Code.
 On VS Code, although you can read and write your code without installing extension, to take advantage of Java specific features, you need install some extensions. There are three options for installation:
 
 * If you are new to VS Code on either Windows or macOS, we recommend installing the **Coding Pack for Java** , which is the bundle of VS Code, the Java Development Kit (JDK), and a collection of suggested extensions by Microsoft. The pack takes care of JDK configuration for you. After installing it, editing with IntelliSense, run, debugging, testing, Maven, and project management are supported out of box.
-  * [Installing the Coding Pack for Java -- Windows](https://aka.ms/vscode-java-installer-win "Installing the Coding Pack for Java – Windows")
+  * [Installing the Coding Pack for Java – Windows](https://aka.ms/vscode-java-installer-win "Installing the Coding Pack for Java – Windows")
   * [Installing the Coding Pack for Java - macOS](https://aka.ms/vscode-java-installer-mac "Installing the Coding Pack for Java - macOS")
 
   **Note:** for Linux users, we recommend installing VS Code firstly and then following the 2nd option.

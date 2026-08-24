@@ -26,11 +26,11 @@ Read in other languages: [中文](https://flounder.dev/zh/posts/debugger-god-mod
 
 **Back in the day, computer games were different. Not only have graphics and mechanics evolved since, but there's also one characteristic that doesn't seem very common in games today: nearly all of them had cheat codes.**
 
-Cheat codes were sequences of keys that would give you something extraordinary, such as infinite ammo or the ability to walk through walls. The most common and powerful of them was 'god mode' -- it made you invincible.
+Cheat codes were sequences of keys that would give you something extraordinary, such as infinite ammo or the ability to walk through walls. The most common and powerful of them was 'god mode' – it made you invincible.
 
 ![Screenshot of the marine from Doom with 'god mode' enabled](https://flounder.dev/img/debugger-god-mode/iddqd.png)
 
-This is what your character would look like when you entered 'IDDQD' -- the key combination for 'god mode' in [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game)). In fact, this particular key sequence was so popular that it became a [meme](https://www.urbandictionary.com/define.php?term=iddqd) and gained popularity beyond the game itself.
+This is what your character would look like when you entered 'IDDQD' – the key combination for 'god mode' in [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game)). In fact, this particular key sequence was so popular that it became a [meme](https://www.urbandictionary.com/define.php?term=iddqd) and gained popularity beyond the game itself.
 
 While 'god mode' is not as prevalent in games as it once was, and the era of the IDDQD meme seems to be fading, one might wonder if a contemporary equivalent exists. Personally, I have my own modern take on IDDQD. Though it's not necessarily related to games, it does evoke the same sense of having superpowers.
 
@@ -38,7 +38,7 @@ While 'god mode' is not as prevalent in games as it once was, and the era of the
 
 To illustrate my point, I'd like to bring in a fun scenario right here. Even if you aren't familiar with Doom, you've most probably seen this even older game called [Space Invaders](https://en.wikipedia.org/wiki/Space_Invaders). Like Doom, its plot centers around the theme of fighting invaders in space.
 
-My friend and colleague, [Eugene](https://www.linkedin.com/in/eugene-nizienko-016a153a/), has written an [IntelliJ IDEA plugin](https://plugins.jetbrains.com/plugin/19383-space-invaders), which lets you play this game right in the editor -- a great way to spend some time while waiting for indexing to complete.
+My friend and colleague, [Eugene](https://www.linkedin.com/in/eugene-nizienko-016a153a/), has written an [IntelliJ IDEA plugin](https://plugins.jetbrains.com/plugin/19383-space-invaders), which lets you play this game right in the editor – a great way to spend some time while waiting for indexing to complete.
 
 ![Space Invaders in IntelliJ IDEA's editor](https://flounder.dev/img/debugger-god-mode/space-invaders-dark.png)
 
@@ -50,7 +50,7 @@ Be responsible! I got Eugene's consent before tampering with his program. If you
 
 ## Get the tools ready
 
-Prepare for a meta experience -- we're going to debug IntelliJ IDEA using its own debugger.
+Prepare for a meta experience – we're going to debug IntelliJ IDEA using its own debugger.
 
 Here's a little problem that we need to solve: for debugging IntelliJ IDEA, we need to suspend it. This will consequently render the IDE unresponsive. Therefore, we need an extra IDE instance that will remain functional and serve as our debugging tool.
 
@@ -125,7 +125,7 @@ Double-clicking `GameState` shows all the instances of this class:
 
 ![A dialog opens showing live GameState instances](https://flounder.dev/img/debugger-god-mode/instances-of-enum-dark.png)
 
-As it turns out, it's an enum -- which isn't exactly what we were looking for. Continuing our search, we stumble upon a single instance of `Game`.
+As it turns out, it's an enum – which isn't exactly what we were looking for. Continuing our search, we stumble upon a single instance of `Game`.
 
 Expanding the node lets us inspect the instance's fields:
 

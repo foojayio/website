@@ -354,6 +354,6 @@ Happy Python!
 **To go further:**
 
 * [Special method names](https://docs.python.org/3/reference/datamodel.html#special-method-names)
-* [PEP 560 -- Core support for typing module and generic types](https://peps.python.org/pep-0560/)
+* [PEP 560 – Core support for typing module and generic types](https://peps.python.org/pep-0560/)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/python-magic-methods/2/) on October 22^nd^, 2023*

@@ -17,7 +17,7 @@ related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "new-book-fxgl-17-learn-javafx-game-and-app-development"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

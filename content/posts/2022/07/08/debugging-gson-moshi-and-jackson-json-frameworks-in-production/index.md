@@ -33,9 +33,9 @@ This is a common problem in production since a webservice might change and trigg
 
 For JSON processing, Java has three common libraries:
 
-* Jackson -- oldest and most stable parser API of the three
-* Gson -- a more lightweight API from Google
-* Moshi -- not as well known in the server (more popular on Android). Written by the author of Gson and should be considered its successor since Gson is no longer actively maintained
+* Jackson – oldest and most stable parser API of the three
+* Gson – a more lightweight API from Google
+* Moshi – not as well known in the server (more popular on Android). Written by the author of Gson and should be considered its successor since Gson is no longer actively maintained
 
 ## Basics of JSON Parsing in Java
 
@@ -137,7 +137,7 @@ curl -H "Content-Type: application/json" -H "Authorization: 45971c45-4049-48f8-9
 
 Notice that the response from the authentication call we sent above is used in the authorization header.
 
-There are several other features in the database but I'll skip them for now...
+There are several other features in the database but I'll skip them for now…
 
 ### Reading an Entry
 
@@ -157,7 +157,7 @@ A class might have different field names or might be missing an extra field and 
 
 Before we proceed, you need to make sure you installed Lightrun and have a [basic sense of its usage](https://docs.lightrun.com/). There's a free version you can install from [here](https://lightrun.com/free).
 
-Once we have that, we can start debugging...
+Once we have that, we can start debugging…
 
 ### Debugging Serialization in Action
 

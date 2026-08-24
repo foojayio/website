@@ -14,7 +14,7 @@ related_posts:
   - "a-flavour-of-tornadovm-on-apple-m1-pro"
   - "code-interoperability-mode-for-opencl-portability-across-various-programming-languages-with-tornadovm"
   - "defining-patterns-of-data-transfers-for-java-applications-with-tornadovm"
-  - "idempotent-spring-boot-starter"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

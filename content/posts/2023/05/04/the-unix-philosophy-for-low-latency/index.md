@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Unix has been around for more than 50 years, and the original design principles must be good enough for it (and its derivative, Linux) to be the most widely used Operating System on the planet -- [80% of servers](https://en.wikipedia.org/wiki/Usage_share_of_operating_systems), [most supercomputers](https://en.wikipedia.org/wiki/Usage_share_of_operating_systems#Supercomputers), and the most [deployed OS (Android](https://en.wikipedia.org/wiki/Usage_share_of_operating_systems)). It is also the most popular OS on Mars!
+Unix has been around for more than 50 years, and the original design principles must be good enough for it (and its derivative, Linux) to be the most widely used Operating System on the planet – [80% of servers](https://en.wikipedia.org/wiki/Usage_share_of_operating_systems), [most supercomputers](https://en.wikipedia.org/wiki/Usage_share_of_operating_systems#Supercomputers), and the most [deployed OS (Android](https://en.wikipedia.org/wiki/Usage_share_of_operating_systems)). It is also the most popular OS on Mars!
 
 Much of Unix's success can be attributed to the "[Unix Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)" which can be very briefly summarised as:
 
@@ -25,7 +25,7 @@ Much of Unix's success can be attributed to the "[Unix Philosophy](https://en.wi
 * Write programs to work together
 * Write programs to handle text streams, because that is a universal interface
 
-Programs that do one thing are easy to understand, and simple to test. Key to the Unix philosophy is *how* modules can be composed -- the Unix way is generally that all modules communicate with each other using a protocol that they can all understand -- text, and various meta-protocols can be layered over the top of text e.g. columns and fields (separated by space, comma etc.), and connected together using [pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)).
+Programs that do one thing are easy to understand, and simple to test. Key to the Unix philosophy is *how* modules can be composed – the Unix way is generally that all modules communicate with each other using a protocol that they can all understand – text, and various meta-protocols can be layered over the top of text e.g. columns and fields (separated by space, comma etc.), and connected together using [pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)).
 
 The above simple rules allow a system to be composed of simple components, connected together, and for significantly complex application behaviour to emerge as a result.
 
@@ -33,14 +33,14 @@ The canonical example of the power of the Unix Philosophy is the famous [Knuth v
 
 ## The Unix philosophy in Enterprise IT
 
-The above has arguably never really translated to Enterprise IT -- an Enterprise application tends to deal with relatively complex problems, be made up of modules with a greater scope and business functionality, and despite numerous attempts over the years to try and come up with a *high performance* standard for connection of modules together (COM, CORBA, SOAP, JSON/REST/HTTP anyone?), an effective standardised connection mechanism has never "stuck".
+The above has arguably never really translated to Enterprise IT – an Enterprise application tends to deal with relatively complex problems, be made up of modules with a greater scope and business functionality, and despite numerous attempts over the years to try and come up with a *high performance* standard for connection of modules together (COM, CORBA, SOAP, JSON/REST/HTTP anyone?), an effective standardised connection mechanism has never "stuck".
 
 ## The Chronicle solution
 
 [Chronicle's](https://chronicle.software/) solution for the Unix Philosophy in Enterprise IT involves composing systems from
 
-* Programs that do one thing and do it well -- single-threaded Java¹ microservices
-* Connected together with a mechanism to transport structured and self-describing data -- [Chronicle Queue](https://chronicle.software/open-hft/queue/) plus [Chronicle Wire](https://chronicle.software/open-hft/wire/) Method Readers and Writers
+* Programs that do one thing and do it well – single-threaded Java¹ microservices
+* Connected together with a mechanism to transport structured and self-describing data – [Chronicle Queue](https://chronicle.software/open-hft/queue/) plus [Chronicle Wire](https://chronicle.software/open-hft/wire/) Method Readers and Writers
 
 These open source technologies not only provide the benefits of Unix tools plus pipes, but also
 
@@ -55,12 +55,12 @@ Below is some example code that is a super-simplified version of a workflow that
 
 In this example
 
-1. an exchange emits a lot of fast-moving price data which are sent to...
+1. an exchange emits a lot of fast-moving price data which are sent to…
 2. an aggregator which assembles price deltas into a "book" of prices which are sent to..
-3. a strategy which decides whether an order should be sent to...
+3. a strategy which decides whether an order should be sent to…
 4. the market
 
-The exchange simulator, aggregator and strategy are implemented as single-threaded microservices -- these are extremely simple and do not depend on Chronicle Queue or Chronicle Wire. The inputs and outputs of each microservice are defined as Java interfaces -- each microservice *implements* its input interface and *composes* its output interface, and these interfaces in turn refer to Java DTOs which are sent between the microservices.
+The exchange simulator, aggregator and strategy are implemented as single-threaded microservices – these are extremely simple and do not depend on Chronicle Queue or Chronicle Wire. The inputs and outputs of each microservice are defined as Java interfaces – each microservice *implements* its input interface and *composes* its output interface, and these interfaces in turn refer to Java DTOs which are sent between the microservices.
 
 For the aggregator service the interfaces look like this:
 
@@ -120,11 +120,11 @@ public class AggregatorImpl implements AggregatorIn {
 }
 ```
 
-You can see that there is no dependence on any Chronicle code, with the exception of the DTO, and the microservice respects the Unix philosophy -- it is simple and easy to understand, and does Just One Thing.
+You can see that there is no dependence on any Chronicle code, with the exception of the DTO, and the microservice respects the Unix philosophy – it is simple and easy to understand, and does Just One Thing.
 
 Chronicle Wire Method Readers take care of reading incoming events from the "in" queue and dispatching these to the "in" interface methods, and Chronicle Wire Method Writers ensure that when the service calls a method on the "out" interface, the method call is serialised and written to the out queue.
 
-All input and output to/from the service is serialised to/from Chronicle Queues using BinaryWire which is compact, efficient, fast and zero-garbage and yet still self-describing, so its data can be read by any other microservice or tool -- you can see this by trying to run the examples and the "tailf" command below.
+All input and output to/from the service is serialised to/from Chronicle Queues using BinaryWire which is compact, efficient, fast and zero-garbage and yet still self-describing, so its data can be read by any other microservice or tool – you can see this by trying to run the examples and the "tailf" command below.
 
 All this code can be found [here](https://github.com/OpenHFT/Chronicle-Queue-Demo/tree/feature/md-pipeline/md-pipeline).
 
@@ -132,13 +132,13 @@ The DTO extends a Chronicle Wire class SelfDescribingMarshallable, which provide
 
 * Automatic serialisation using Chronicle's Wire and Bytes Marshallable strategies
 * Automatic conversion to/from friendly YAML format using Chronicle Wire
-* Transparent support for versioning -- new fields can be added to a DTO and old fields removed without causing breakages, and code can be plugged in to convert from an older version to a new version
+* Transparent support for versioning – new fields can be added to a DTO and old fields removed without causing breakages, and code can be plugged in to convert from an older version to a new version
 * Support for renderers e.g. transactTime is a microsecond timestamp stored efficiently as a long but rendered to the user by the MicroTimestampLongConverter to a friendly date/time string
-* A path from greatest convenience (Chronicle Wire) to lowest possible latency (Bytes Marshallable) -- our recommendation is to start with the SelfDescribingMarshallable's implementation of Wire serialisation and you can incrementally convert DTOs in the fast path to use Bytes Marshallable
+* A path from greatest convenience (Chronicle Wire) to lowest possible latency (Bytes Marshallable) – our recommendation is to start with the SelfDescribingMarshallable's implementation of Wire serialisation and you can incrementally convert DTOs in the fast path to use Bytes Marshallable
 
 ### Testing
 
-The microservice leverages the above functionality, and Chronicle Wire's YamlTester to allow very simple behaviour-driven YAML testing -- the test class looks like this:
+The microservice leverages the above functionality, and Chronicle Wire's YamlTester to allow very simple behaviour-driven YAML testing – the test class looks like this:
 
 ```java
 public class AggregatorTest {
@@ -214,7 +214,7 @@ mvn exec:java@tailf -Dqueue=strat-out
 
 We can see that it is possible to realise the Unix Philosophy in Enterprise IT using a strongly-typed Enterprise language (Java), a suitable component technology (microservices) and an appropriate mechanism to glue them together (Chronicle Queue \& Wire).
 
-Note that if you want more features you can talk to [info@chronicle.software](mailto:info@chronicle.software) about commercial extensions -- [Chronicle Services](https://chronicle.software/services-2/) -- which provide the following features:
+Note that if you want more features you can talk to [info@chronicle.software](mailto:info@chronicle.software) about commercial extensions – [Chronicle Services](https://chronicle.software/services-2/) – which provide the following features:
 
 * HA \& DR
 * Sophisticated restart and replay strategies
@@ -224,6 +224,6 @@ Note that if you want more features you can talk to [info@chronicle.software](ma
 * Configuration
 * Timers
 
----
+—
 
 ##### ¹ Actually any language that runs on the JVM. There is also a C++ version of Chronicle Queue that also supports Python, nodeJS etc.

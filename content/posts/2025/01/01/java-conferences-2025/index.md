@@ -10,8 +10,6 @@ categories:
   - "Events"
 related_posts:
 frozen: false
-aliases:
-  - "/today/java-conferences-in-2025/"
 ---
 
 Also see [javaconferences.org](https://javaconferences.org/), a subset of which is below.

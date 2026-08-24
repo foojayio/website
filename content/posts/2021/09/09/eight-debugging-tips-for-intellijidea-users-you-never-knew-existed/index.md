@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-As developers, we're all familiar with debuggers. We use debugging tools on a daily basis -- they're an essential part of programming. But let's be honest. Usually, we only use the breakpoint option. If we're feeling frisky, we might use a conditional breakpoint.
+As developers, we're all familiar with debuggers. We use debugging tools on a daily basis – they're an essential part of programming. But let's be honest. Usually, we only use the breakpoint option. If we're feeling frisky, we might use a conditional breakpoint.
 
 But guess what, the [IntelliJ IDEA](https://www.jetbrains.com/idea/ "IntelliJ IDEA") debugger has many powerful and cutting-edge features that are useful for debugging more easily and efficiently. To help, we've compiled a list of tips and tricks from our very own developers here at [Lightrun](https://go.lightrun.com/request-a-demo?utm_source=blog&utm_medium=LR_blog&utm_campaign=eight-debugging-tips-for-intellijidea "Lightrun"). We hope these tips will help you find and resolve bugs faster.
 
@@ -35,7 +35,7 @@ So you can define a breakpoint that will stop on a line that throws NullPointerE
 
 ![](Use-an-Exception-Breakpoint-700x439.png)
 
-Lightrun offers snapshots -- breakpoints that do not stop the program from running. [Learn more here](https://lightrun.com/product/?utm_source=blog&utm_medium=LR_blog&utm_campaign=eight-debugging-tips-for-intellijidea "Learn more here").
+Lightrun offers snapshots – breakpoints that do not stop the program from running. [Learn more here](https://lightrun.com/product/?utm_source=blog&utm_medium=LR_blog&utm_campaign=eight-debugging-tips-for-intellijidea "Learn more here").
 
 ### 2. Use Conditions in Your Breakpoints
 
@@ -95,7 +95,7 @@ The Lightrun plugin is useful for saving time, so instead of going through multi
 
 Want to learn more? [Request a demo.](https://go.lightrun.com/request-a-demo?utm_source=blog&utm_medium=LR_blog&utm_campaign=eight-debugging-tips-for-intellijidea "Request a demo.")
 
-### 8. Use a Friend -- Real or Imaginary
+### 8. Use a Friend – Real or Imaginary
 
 When it comes to brainstorming, 1+1=3. And when it comes to dealing with complex debugging issues, you are going to need all the brainpower you can get. Working with someone provides a fresh set of eyes that views the problem in a different manner and might identify details you missed.
 

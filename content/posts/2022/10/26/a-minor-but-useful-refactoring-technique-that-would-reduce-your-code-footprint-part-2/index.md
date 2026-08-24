@@ -11,7 +11,7 @@ categories:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "comparison-fault-tolerance-libraries"
-  - "virtual-thread-pinning-field-guide"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

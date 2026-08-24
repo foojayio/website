@@ -23,7 +23,7 @@ As we move to the cloud, how do we evolve our data storage approach? Do we need 
 
 ## What is Cloud-Native?
 
-It's helpful to start by defining terms. In unpacking "cloud-native", let's start with the word "native". For individuals, the word may evoke thoughts of your first language, or your country or origin -- things that feel natural to you. Or in nature itself, we might consider the native habitats inhabited by wildlife, and how each species is adapted to its environment. We can use this as a basis to understand the meaning of cloud-native.
+It's helpful to start by defining terms. In unpacking "cloud-native", let's start with the word "native". For individuals, the word may evoke thoughts of your first language, or your country or origin – things that feel natural to you. Or in nature itself, we might consider the native habitats inhabited by wildlife, and how each species is adapted to its environment. We can use this as a basis to understand the meaning of cloud-native.
 
 Here's how the Cloud Native Computing Foundation (CNCF) [defines the term](https://github.com/cncf/toc/blob/main/DEFINITION.md):
 > "Cloud native technologies empower organizations to build and run scalable applications in modern, dynamic environments such as public, private, and hybrid clouds: Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach.
@@ -40,14 +40,14 @@ Look closely, and you'll notice a wide range of offerings: both traditional rela
 Which of these databases are cloud-native? Only those that are designed for the cloud, should we include those that can be adapted to work in the cloud? Bill Wilder provides an interesting perspective in his 2012 book, "Cloud Architecture Patterns", defining "cloud-native" as:
 > "Any application that was architected to take full advantage of cloud platforms"
 
-By this definition, cloud-native databases are those that have been architected to take full advantage of underlying cloud infrastructure. Obvious? Maybe. Contentious? Probably...
+By this definition, cloud-native databases are those that have been architected to take full advantage of underlying cloud infrastructure. Obvious? Maybe. Contentious? Probably…
 
 ## Why should I care if my database is cloud-native?
 
 Or to ask a different way, what are the advantages of a cloud-native database? Consider the two main factors driving the popularity of the cloud: cost and time-to-market.
 
-* **Cost** -- the ability to pay-as-you-go has been vital in increasing cloud adoption. (But that doesn't mean that cloud is cheap or that cost management is always straightforward.)
-* **Time-to-market** -- the ability to quickly spin up infrastructure to prototype, develop, test, and deliver new applications and features. (But that doesn't mean that cloud development and operations are easy.)
+* **Cost** – the ability to pay-as-you-go has been vital in increasing cloud adoption. (But that doesn't mean that cloud is cheap or that cost management is always straightforward.)
+* **Time-to-market** – the ability to quickly spin up infrastructure to prototype, develop, test, and deliver new applications and features. (But that doesn't mean that cloud development and operations are easy.)
 
 These goals apply to your database selection, just as they do to any other part of your stack.
 
@@ -55,11 +55,11 @@ These goals apply to your database selection, just as they do to any other part 
 
 Now we can revisit the CNCF definition and extract characteristics of a cloud-native database that will help achieve our cost and time-to-market goals:
 
-* **Scalability** -- the system must be able to add capacity dynamically to absorb additional workload
-* **Elasticity** -- it must also be able to scale back down, so that you only pay for the resources you need
-* **Resiliency** -- the system must survive failures without losing your data
-* **Observability** -- tracking your activity, but also health checking and handling failovers
-* **Automation** -- implementing operations tasks as repeatable logic to reduce the possibility of error. This characteristic is the most difficult to achieve, but is essential to achieve a high delivery tempo at scale
+* **Scalability** – the system must be able to add capacity dynamically to absorb additional workload
+* **Elasticity** – it must also be able to scale back down, so that you only pay for the resources you need
+* **Resiliency** – the system must survive failures without losing your data
+* **Observability** – tracking your activity, but also health checking and handling failovers
+* **Automation** – implementing operations tasks as repeatable logic to reduce the possibility of error. This characteristic is the most difficult to achieve, but is essential to achieve a high delivery tempo at scale
 
 Cloud-native databases are designed to embody these characteristics, which distinguish them from "cloud-ready" databases, that is, those that can be deployed to the cloud with some adaptation.
 
@@ -76,7 +76,7 @@ While automating the initial deployment of a Cassandra cluster is a relatively s
 
 ## Does a cloud-native database have to run on Kubernetes?
 
-Speaking of Kubernetes... When we talk about databases in the cloud, we're really talking about stateful workloads requiring some kind of storage. But in the cloud world, stateful is painful. Data gravity is a real challenge -- data may be hard to move due to regulations and laws, and the cost can get quite expensive. This results in a premium on keeping applications close to their data.
+Speaking of Kubernetes… When we talk about databases in the cloud, we're really talking about stateful workloads requiring some kind of storage. But in the cloud world, stateful is painful. Data gravity is a real challenge – data may be hard to move due to regulations and laws, and the cost can get quite expensive. This results in a premium on keeping applications close to their data.
 
 The challenges only increase when we begin deploying containerized applications using Kubernetes, since it was not originally designed for stateful workloads. There's an emerging push toward deploying databases to run on Kubernetes as well, in order to maximize development and operational efficiencies by running the entire stack on a single platform. What additional requirements does Kubernetes put on a cloud-native database?
 

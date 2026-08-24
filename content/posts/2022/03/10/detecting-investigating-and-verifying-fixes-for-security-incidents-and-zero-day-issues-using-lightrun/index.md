@@ -37,7 +37,7 @@ There are several reasons I would reach for Lightrun as a security tool. Here I'
 
 There's a lot more that needs to be done in order to secure your application. Lightrun is a generic tool, it isn't a replacement for existing security tools like Snyk, etc. It's complimentary, filling in the gaps at the code level.
 
-Finally, I will discuss how Lightrun secures itself. We can't have a vulnerable security tool... We can't consider Lightrun as a security tool if it isn't inherently secure...
+Finally, I will discuss how Lightrun secures itself. We can't have a vulnerable security tool… We can't consider Lightrun as a security tool if it isn't inherently secure…
 
 Enough with the high level theory. Let's show the code!
 

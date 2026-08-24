@@ -31,8 +31,8 @@ That's exactly what you'll get in this hands-on 2-hour workshop at [JCON EUROPE 
 
 ### Meet Your Guides:
 
-* **Marc Philipp** -- Longtime JUnit core committer, team lead, and key figure for JUnit 5 existence.
-* **Christian Stein** -- JDK Tooling developer at Oracle, active JUnit and Maven contributor.
+* **Marc Philipp** – Longtime JUnit core committer, team lead, and key figure for JUnit 5 existence.
+* **Christian Stein** – JDK Tooling developer at Oracle, active JUnit and Maven contributor.
 
 They're not just here to demo features—you'll sit down and write real code with them. You'll learn:
 

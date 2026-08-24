@@ -15,7 +15,7 @@ related_posts:
   - "foojay-podcast-45"
   - "java-22-whats-new"
   - "java-21-is-available-today-and-its-quite-the-update"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

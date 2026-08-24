@@ -46,7 +46,7 @@ Yet we don't give it nearly as much attention as we should. In this segment we'l
 
 Let's start with mute renderers which lets us improve the performance of the watch area. Before we discuss that I'd like to talk about the watch area itself. This is the watch area. In it, we can see most of the visible variables for the current stack frame and their values. We can expand entries within the watch area. Every variable value or expression we have in the watch is an entry. We can add arbitrary elements to the watch and even embed watch expressions directly into the IDE user interface.
 
-Notice the values on the right hand side these are typically the results of the toString() method. In IntelliJ, we can customize these via renderers which we will discuss further. But there's more to it as we'll see later on. For now just consider this. Every time I step over a line of code the IDE needs to collect all the variables in scope and invoke `toString()` on every one of them. In some case even more elaborate code. This is expensive and slow...
+Notice the values on the right hand side these are typically the results of the toString() method. In IntelliJ, we can customize these via renderers which we will discuss further. But there's more to it as we'll see later on. For now just consider this. Every time I step over a line of code the IDE needs to collect all the variables in scope and invoke `toString()` on every one of them. In some case even more elaborate code. This is expensive and slow…
 
 In the right click menu we have the mute renderers option. By checking this option we can disable that behavior and potentially speed up the step-over speed significantly. Once we select that you will notice that all the values turn to three dots followed by the word toString. This means the renderers don't fetch the value anymore. They instead show this placeholder. This removes the overhead of the renderers completely and can speed up your step-over performance.
 
@@ -88,7 +88,7 @@ The "When expanding node" option lets us define the behavior when a user expands
 
 We can optionally check if there's a reason to show the expand widget. In this case I use the `count()` method which would be faster than repeatedly calling `findAll()`. Once we apply the changes we can see the elements from the repository listed. You'll notice all 4 elements are here and since they are objects we can see all the attributes like any object we see in the watch.
 
-This is truly spectacular, and you can't fake it with a `toString()` call...
+This is truly spectacular, and you can't fake it with a `toString()` call…
 
 ### Doing it for Everyone
 

@@ -29,31 +29,31 @@ Find the detailed conference schedule, session descriptions, and speaker bios on
 
 ## Day 1: September 8
 
-09:00 -- 10:00 UTC -- Bootiful IntelliJ IDEA by Josh Long  
+09:00 – 10:00 UTC – Bootiful IntelliJ IDEA by Josh Long  
 
-10:00 -- 11:00 UTC -- Now and Next Java for AI by Ana-Maria Mihalceanu  
+10:00 – 11:00 UTC – Now and Next Java for AI by Ana-Maria Mihalceanu  
 
-11:00 -- 12:00 UTC -- The Past, Present, and Future of Enterprise Java by Ivar Grimstad  
+11:00 – 12:00 UTC – The Past, Present, and Future of Enterprise Java by Ivar Grimstad  
 
-12:00 -- 13:00 UTC -- Safeguarding YOLO Developer Workflows With Docker by Oleg Šelajev  
+12:00 – 13:00 UTC – Safeguarding YOLO Developer Workflows With Docker by Oleg Šelajev  
 
-13:00 -- 14:00 UTC -- Codepocalypse Now: LangChain4j vs JetBrains Koog by Baruch Sadogursky, Viktor Gamov  
+13:00 – 14:00 UTC – Codepocalypse Now: LangChain4j vs JetBrains Koog by Baruch Sadogursky, Viktor Gamov  
 
-14:00 -- 15:00 UTC -- Agent Skills for Code Assistants and Custom Agents by James Ward
+14:00 – 15:00 UTC – Agent Skills for Code Assistants and Custom Agents by James Ward
 
 ## Day 2: September 9
 
-09:00 -- 10:00 UTC -- From Chat to Goals: Practical Autonomous Agents for Java Development by Mark Pollack  
+09:00 – 10:00 UTC – From Chat to Goals: Practical Autonomous Agents for Java Development by Mark Pollack  
 
-10:00 -- 11:00 UTC -- Six and a Half Ridiculous Things to Do With Quarkus by Holly Cummins  
+10:00 – 11:00 UTC – Six and a Half Ridiculous Things to Do With Quarkus by Holly Cummins  
 
-11:00 -- 12:00 UTC -- Sandboxing AI Agents With GraalVM by Thomas Wuerthinger  
+11:00 – 12:00 UTC – Sandboxing AI Agents With GraalVM by Thomas Wuerthinger  
 
-12:00 -- 13:00 UTC -- Accelerating Maven Builds: From a Snail's Pace 🐌 to Rocket Speed 🚀 by Maarten Mulders  
+12:00 – 13:00 UTC – Accelerating Maven Builds: From a Snail's Pace 🐌 to Rocket Speed 🚀 by Maarten Mulders  
 
-13:00 -- 14:00 UTC -- RoboCoders: Judgment Day: AI Agents Face Off by Baruch Sadogursky, Viktor Gamov  
+13:00 – 14:00 UTC – RoboCoders: Judgment Day: AI Agents Face Off by Baruch Sadogursky, Viktor Gamov  
 
-14:00 -- 15:00 UTC -- Spec-Driven Development With AI Agents: From High-Level Requirements to Working Software by Anton Arhipov
+14:00 – 15:00 UTC – Spec-Driven Development With AI Agents: From High-Level Requirements to Working Software by Anton Arhipov
 
 Find the details on how to join sessions below.
 

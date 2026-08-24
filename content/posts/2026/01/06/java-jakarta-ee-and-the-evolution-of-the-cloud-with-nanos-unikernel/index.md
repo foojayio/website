@@ -210,15 +210,15 @@ Nanos shows that cloud-native can exist **without adding complexity** , and can 
 
 *
 
-  ###### [Deep dive into Jakarta EE and Nanos Unikernel -- The Future of Cloud Computing](https://83ik77b8jj36297derqdh7.codia.website/)
+  ###### [Deep dive into Jakarta EE and Nanos Unikernel – The Future of Cloud Computing](https://83ik77b8jj36297derqdh7.codia.website/)
 
 *
 
-  ###### [NanoVMs -- Official Nanos Unikernel website](https://nanovms.com/)
+  ###### [NanoVMs – Official Nanos Unikernel website](https://nanovms.com/)
 
 *
 
-  ###### [OPS -- Official tool for building and managing Unikernel images](https://ops.city/)
+  ###### [OPS – Official tool for building and managing Unikernel images](https://ops.city/)
 
 *
 

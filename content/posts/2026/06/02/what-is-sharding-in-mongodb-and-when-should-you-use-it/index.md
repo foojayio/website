@@ -109,11 +109,11 @@ For example, imagine an application storing millions of users.
 
 Instead of keeping all users on one server:
 
-|-----------|-----------------------|
-| **Shard** | **Data**              |
-| Shard 1   | Users with IDs 1--1M  |
-| Shard 2   | Users with IDs 1M--2M |
-| Shard 3   | Users with IDs 2M--3M |
+|-----------|----------------------|
+| **Shard** | **Data**             |
+| Shard 1   | Users with IDs 1–1M  |
+| Shard 2   | Users with IDs 1M–2M |
+| Shard 3   | Users with IDs 2M–3M |
 
 Each shard contains only **a subset of the collection**.
 

@@ -191,11 +191,11 @@ Other alternative media types specifications are available.
 
 What Fowler's post doesn't mention is the HTTP response status. Most readers are familiar with the status ranges:
 
-* Informational responses: 100 -- 199
-* Successful responses: 200 -- 299
-* Redirection messages: 300 -- 399
-* Client error responses: 400 -- 499
-* Server error responses: 500 -- 599
+* Informational responses: 100 – 199
+* Successful responses: 200 – 299
+* Redirection messages: 300 – 399
+* Client error responses: 400 – 499
+* Server error responses: 500 – 599
 
 Likewise, most are also with regularly-found HTTP status:
 

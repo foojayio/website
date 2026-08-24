@@ -50,29 +50,29 @@ public class NeoSearch {
 }
 ```
 
-A) Agent Smith is looking for Neo...​  
+A) Agent Smith is looking for Neo…​  
 
 false
 
-B) Agent Smith is looking for Neo...​  
+B) Agent Smith is looking for Neo…​  
 
-Agent Smith is looking for Neo...​  
+Agent Smith is looking for Neo…​  
 
 false
 
-C) Agent Smith is looking for Neo...​  
+C) Agent Smith is looking for Neo…​  
 
 true
 
-D) Agent Smith is looking for Neo...​  
+D) Agent Smith is looking for Neo…​  
 
-Agent Smith is looking for Neo...​  
+Agent Smith is looking for Neo…​  
 
-Agent Smith is looking for Neo...​  
+Agent Smith is looking for Neo…​  
 
-Agent Smith is looking for Neo...​  
+Agent Smith is looking for Neo…​  
 
-Agent Smith is looking for Neo...​  
+Agent Smith is looking for Neo…​  
 
 true
 
@@ -95,7 +95,7 @@ Integer binarySum = binaryNumbers.reduce(Integer::sum)
 .orElseThrow(StackOverflowError::new);
 ```
 
-Then here we filter all elements that have the size greater or equals to binarySum and then we use the allMatch function. Note that this function has to have all elements matching to return true. Since the first element is true, the allMatch method from the Stream will go to the next element printing again "Agent Smith is looking for Neo...​", as this method requires all elements to be true, there is no point in continuing the looping so the looping will break.
+Then here we filter all elements that have the size greater or equals to binarySum and then we use the allMatch function. Note that this function has to have all elements matching to return true. Since the first element is true, the allMatch method from the Stream will go to the next element printing again "Agent Smith is looking for Neo…​", as this method requires all elements to be true, there is no point in continuing the looping so the looping will break.
 
 ```java
 boolean neoFound = ls.stream().filter(str -> str.length() >= binarySum).allMatch(neoSearch);

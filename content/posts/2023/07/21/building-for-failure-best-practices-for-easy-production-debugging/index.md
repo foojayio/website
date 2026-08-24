@@ -153,7 +153,7 @@ There are a few important points we need to learn here:
 * Immediate - we need this information fresh in our minds. If we wait some things get lost and our recollection changes significantly.
 * On Success and Failure - Every mission gets things right and wrong. We need to understand what went wrong and what went right. Especially in successful cases.
 
-When we fix a bug we just want to go home, we often don't want to discuss it anymore. Even if we do want to "show off" it's often our broken recollection of the tracking process. By conducting an open discussion of what we did right and wrong... with no judgment. We can create an understanding of our current status. This information can then be used to improve our results when tracking issues.
+When we fix a bug we just want to go home, we often don't want to discuss it anymore. Even if we do want to "show off" it's often our broken recollection of the tracking process. By conducting an open discussion of what we did right and wrong… with no judgment. We can create an understanding of our current status. This information can then be used to improve our results when tracking issues.
 
 Such debriefs can point at gaps in our observability data, inconsistencies and problematic processes. A common problem in many teams is indeed in the process. When an issue is raised it is often:
 
@@ -168,7 +168,7 @@ When a customer reports an issue there's a good possibility they will include th
 
 ## Review Successful Logs and Dashboards
 
-Waiting for failure is a problematic concept. We need to review logs, dashboards, etc. regularly both to track potential bugs that aren't manifesting, but also to get a sense of a "baseline". What does a healthy dashboard or log look like...
+Waiting for failure is a problematic concept. We need to review logs, dashboards, etc. regularly both to track potential bugs that aren't manifesting, but also to get a sense of a "baseline". What does a healthy dashboard or log look like…
 
 We have errors in a normal log, if during a bug hunt we spend time looking at a benign error, then we're wasting our time. Ideally, we want to minimize the amount of these errors as they make the logs harder to read. The reality of server development is that we can't always do that. But we can minimize the time spent on this through familiarity and proper source code comments.
 
@@ -178,7 +178,7 @@ I went into more detail in the logging best practices post and [talk](https://ww
 
 A couple of years after founding Codename One our Google App Engine bill suddenly jumped to a level that would trigger bankruptcy within days. This was a sudden regression due to a change on their backend.
 
-This was caused because of uncached data but due to the way App Engine worked at the time there was no way to know the specific area of the code triggering the problem. There was no ability to debug the problem and the only way to check if the issue was resolved was to deploy a server update and wait a lot...
+This was caused because of uncached data but due to the way App Engine worked at the time there was no way to know the specific area of the code triggering the problem. There was no ability to debug the problem and the only way to check if the issue was resolved was to deploy a server update and wait a lot…
 
 We solved this through dumb luck. Caching everything we could think of in every single place. To this day I don't know what triggered the problem and what solved it.
 

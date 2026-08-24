@@ -33,7 +33,7 @@ Jakarta Agentic AI is an exploratory project looking at how AI agents could be b
 
 ## What we discussed in the session
 
-During the conversation, panel members actively involved in the project -- Reza Rahman (Jakarta EE Ambassadors, Payara), Tanja Obradovic (Eclipse Foundation), Mike Redlich (Garden State JUG, InfoQ), Luis Neto (Payara) \& Dominika Tasarz (Payara) -- covered topics including:
+During the conversation, panel members actively involved in the project – Reza Rahman (Jakarta EE Ambassadors, Payara), Tanja Obradovic (Eclipse Foundation), Mike Redlich (Garden State JUG, InfoQ), Luis Neto (Payara) \& Dominika Tasarz (Payara) – covered topics including:
 
 * What agentic AI means in the context of enterprise Java
 * Why Jakarta EE is a strong foundation for experimenting with agent-based systems

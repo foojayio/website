@@ -35,7 +35,7 @@ This theme follows some of the design principles and has some of the key strengt
 * Easily override and customize colors by overriding JavaFX CSS variables;
 * Only relies on JavaFX CSS, JavaFX API and Java code (no other "foreign technologies");
 * Samples and theme tester app on [samples sub-project](https://github.com/dukke/Transit/tree/main/transit-samples);
-* Lots of real world, recognized Java apps already using it (NASA's applications, applications used in the White House, etc, etc) (JMetro and Transit) -- check the documentation page for more real world examples;
+* Lots of real world, recognized Java apps already using it (NASA's applications, applications used in the White House, etc, etc) (JMetro and Transit) – check the documentation page for more real world examples;
 * Leverages lessons learned developing JMetro theme;
 
 I like to use the term Michael Paus ([@MichaelPaus](https://twitter.com/MichaelPaus)) coined when he was referring to JMetro: this is a "pluggable" JavaFX theme (like JMetro).

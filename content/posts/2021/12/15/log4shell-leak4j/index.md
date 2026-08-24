@@ -43,7 +43,7 @@ Risks of this vulnerability are:
 * Backdoors
 * Botnet
 * Loss of AWS/Kubernetes keys/secrets
-* And the list goes on, and on, and on...
+* And the list goes on, and on, and on…
 
 ## The fix
 

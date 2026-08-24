@@ -66,11 +66,11 @@ With the basic requirements sorted out, it's time to get code definitions in pla
 * [the basic unit of text that will represent potential duplicates](#chunk)
 * [the interface for the duplicate finder](#interface)
 
-The code in this chapter doesn't need to be exhaustive and provide for every future use-case -- we can always come back for adjustments.
+The code in this chapter doesn't need to be exhaustive and provide for every future use-case – we can always come back for adjustments.
 
 ### Chunk
 
-When it comes to a unit of text, which details are important for us? For our purposes, I'd stick with the text that a fragment contains, the path to its containing file, its line number, and the type of the element -- in case the source is not just plain text:
+When it comes to a unit of text, which details are important for us? For our purposes, I'd stick with the text that a fragment contains, the path to its containing file, its line number, and the type of the element – in case the source is not just plain text:
 
 ```kotlin
 class Chunk(
@@ -101,11 +101,11 @@ interface DuplicateFinder {
 
 Here's the meaning of the parameters that the interface accepts:
 
-* `root` -- the folder with the content to analyze
-* `minSimilarity` -- the minimum percentage of similarity for two `Chunk` objects to be considered duplicates
-* `minLength` -- minimum `content` length for a `Chunk` to be analyzed
-* `minDuplicates` -- minimum number of duplicates for a cluster of duplicates to be reported
-* `fileExtensions` -- file extension mask for filtering out irrelevant files
+* `root` – the folder with the content to analyze
+* `minSimilarity` – the minimum percentage of similarity for two `Chunk` objects to be considered duplicates
+* `minLength` – minimum `content` length for a `Chunk` to be analyzed
+* `minDuplicates` – minimum number of duplicates for a cluster of duplicates to be reported
+* `fileExtensions` – file extension mask for filtering out irrelevant files
 
 When the function completes, it will return a [map](https://en.wikipedia.org/wiki/Associative_array), where the keys are `Chunk` objects, and the associated values are lists of their duplicates.
 ![Diagram illustrating the structure of the duplicate finder's output in the program](https://flounder.dev/img/duplicate-finder-tests/duplicates-map-diagram-dark.png)

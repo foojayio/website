@@ -32,7 +32,7 @@ Specifically: What can or should be considered the right size of a unit with reg
 ## What is a Unit?
 
 A Unit could be a method, a class or even a cohesive group of classes, that together compose a feature, as a unit.
-> \[...\] Object-oriented design tends to treat a class as the unit, procedural or functional approaches might consider a single function as a unit. But really it's a situational thing - the team decides what makes sense to be a unit for the purposes of their understanding of the system and its testing. Although I start with the notion of the unit being a class, I often take a bunch of closely related classes and treat them as a single unit. Rarely I might take a subset of methods in a class as a unit. However you define it doesn't really matter.
+> \[…\] Object-oriented design tends to treat a class as the unit, procedural or functional approaches might consider a single function as a unit. But really it's a situational thing - the team decides what makes sense to be a unit for the purposes of their understanding of the system and its testing. Although I start with the notion of the unit being a class, I often take a bunch of closely related classes and treat them as a single unit. Rarely I might take a subset of methods in a class as a unit. However you define it doesn't really matter.
 > <https://martinfowler.com/bliki/UnitTest.html>  
 
 Another question is, if there is a distinction to be made between collaborators that are external to a given unit and internal dependencies between classes.
@@ -603,6 +603,6 @@ Pick whichever approach suits you best for your current problem! After all this 
 
 In particular testing as part of the design process is a helpful practice to create testable and maintainable software.  
 
-We hope the discussion and examples in this article were interesting to read and ... let us know ...
+We hope the discussion and examples in this article were interesting to read and … let us know …
 
 **Acknowledgements:** we would like to thank [Jens Knipper](https://jensknipper.de/), [Jorge Acetozi](https://www.jorgeacetozi.com/) and Roy Wasse for their valuable feedback while writing this article.

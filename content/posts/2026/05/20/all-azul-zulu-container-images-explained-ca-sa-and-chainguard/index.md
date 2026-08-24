@@ -13,7 +13,7 @@ related_posts:
   - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
   - "the-road-to-docker-official-images-for-java-the-azul-zulu-story"
   - "using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container"
-  - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
+  - "azul-august-2026-release-javas-first-monthly-cspu"
 frozen: false
 ---
 
@@ -180,7 +180,7 @@ You can find more resources at [Chainguard Academy](https://edu.chainguard.dev/)
 
 Here's a quick decision guide:
 
-|                                       If you are...                                       |                       Use...                       |
+|                                        If you are…                                        |                        Use…                        |
 |-------------------------------------------------------------------------------------------|----------------------------------------------------|
 | Evaluating Azul, building open-source projects, or developing locally                     | Docker Official Image (`azul-zulu`)                |
 | Running in production, need commercial support or extended patches                        | SA Private Registry (`sa.registry.azul.com`)       |

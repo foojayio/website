@@ -41,7 +41,7 @@ You can listen and subscribe to the Foojay Podcast on:
 
 00:00 Introduction
 
-00:19 Steve Poole -- Java APIs in a modern way, History of Java  
+00:19 Steve Poole – Java APIs in a modern way, History of Java  
 <https://www.linkedin.com/in/noregressions>
 
 06:42 Hanno Embregts - Java 24, Java in education  
@@ -56,7 +56,7 @@ You can listen and subscribe to the Foojay Podcast on:
 34:20 Miro Wengner - Java modules, Robo4J  
 <https://www.linkedin.com/in/mwengner/>
 
-37:52 Dmitry Chuyko -- Improve startup and performance of Java applications in containers  
+37:52 Dmitry Chuyko – Improve startup and performance of Java applications in containers  
 <https://www.linkedin.com/in/dchuyko/>
 
 42:26 Jens Knipper - Receiving emails with Java, Java improvements over time, writing on Foojay  

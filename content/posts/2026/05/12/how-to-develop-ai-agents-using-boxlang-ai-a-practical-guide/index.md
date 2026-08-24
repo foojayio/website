@@ -16,9 +16,9 @@ categories:
   - "Tutorials"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
-  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 frozen: false
 ---
 
@@ -26,7 +26,7 @@ frozen: false
 
 AI agents are transforming how we build software. Unlike traditional chatbots that just answer questions, agents can reason about what tools they need, decide when to use them, chain multiple actions together, and remember what happened earlier in a conversation.
 
-In this tutorial, I'll show you how to build a real-world AI agent using [BoxLang AI](https://ai.boxlang.io/ "BoxLang AI") --- the official AI framework for the BoxLang JVM language. We'll build **SupportBot**, an e-commerce customer support agent that can look up orders, check inventory, issue refunds, and answer questions grounded in your knowledge base.
+In this tutorial, I'll show you how to build a real-world AI agent using [BoxLang AI](https://ai.boxlang.io/ "BoxLang AI") — the official AI framework for the BoxLang JVM language. We'll build **SupportBot**, an e-commerce customer support agent that can look up orders, check inventory, issue refunds, and answer questions grounded in your knowledge base.
 
 By the end you'll understand how AI agents work under the hood, and you'll have a fully working agent you can adapt for your own domain.
 
@@ -95,7 +95,7 @@ my-project/
 
 Copy `.env.example` to `.env` and fill in at least one provider API key. Never commit `.env` to source control.
 
-`.env.example` --- commit this template so your team knows what keys are needed:
+`.env.example` — commit this template so your team knows what keys are needed:
 
 ```java
 # BoxLang Custom Configuration — points BoxLang at your config file
@@ -119,7 +119,7 @@ AWS_SECRET_ACCESS_KEY=your-secret
 AWS_REGION=us-east-1
 ```
 
-`.env` --- your actual keys, never committed:
+`.env` — your actual keys, never committed:
 
 ```java
 BOXLANG_CONFIG=./config/boxlang.json
@@ -133,7 +133,7 @@ Add `.env` to your `.gitignore`:
 boxlang_modules/
 ```
 
-### Step 4 --- `Configure config/boxlang.json`
+### Step 4 — `Configure config/boxlang.json`
 
 BoxLang reads its configuration from the file pointed to by `BOXLANG_CONFIG`. The `${Setting: VAR_NAME not found}` syntax reads directly from your `.env` file — your keys never live in the config file itself.
 
@@ -1215,7 +1215,7 @@ The full SupportBot example shows how these pieces combine in a real application
 
 🐙 [BoxLang AI GitHub](https://github.com/ortus-boxlang/bx-ai "BoxLang AI GitHub")  
 
-🎓 [AI BootCamp](https://github.com/ortus-boxlang/bx-ai-bootcamp "AI BootCamp") --- hands-on course covering all concepts in this guide  
+🎓 [AI BootCamp](https://github.com/ortus-boxlang/bx-ai-bootcamp "AI BootCamp") — hands-on course covering all concepts in this guide  
 
 💬 [BoxLang Community Slack](https://boxteam.ortussolutions.com/ "BoxLang Community Slack")  
 

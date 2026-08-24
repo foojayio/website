@@ -47,7 +47,7 @@ Put your connection string in and you'll see the sea surface temperatures displa
 I remember when I first tried MongoDB out as a potential new database for a project. We had been using Microsoft SQL Server until that point, and dealing with the headaches of:
 
 * Infrastructure downtime—while servers were upgraded and patched.
-* Object to relational schema mapping (ORM)---awkwardly trying to manage the Java class hierarchy representation of the data translating to and from normalised data tables in SQL Server.
+* Object to relational schema mapping (ORM)—awkwardly trying to manage the Java class hierarchy representation of the data translating to and from normalised data tables in SQL Server.
 * Schema changes—DBAs co-ordinating with developers' simultaneous releases of Java services and database for ongoing changes in schema.
 
 I used to dread making a change to the database schema, because of the long timeframes it would take to co-ordinate all the activities needed. Sometimes, you would make do with an imperfect schema and muddle along as you accumulated technical debt. Changes were worked around rather than cleanly dealt with. When you did need to change an SQL database, you knew you had challenges ahead.
@@ -418,7 +418,7 @@ We're using abbreviations for the field names—latitude = lat, longitude = lon,
 A couple more things might catch you out when implementing these record types:
 
 1. Record types must be public scope to be available to the POJO codec (use the public keyword before defining the record).
-2. Don't use the primitive type of numeric values field int/double in general \*(unless you are certain all values will be present)---use the object type Integer/Double. Why? Because if a field has a null or is missing in the document, you will get serialization errors.
+2. Don't use the primitive type of numeric values field int/double in general \*(unless you are certain all values will be present)—use the object type Integer/Double. Why? Because if a field has a null or is missing in the document, you will get serialization errors.
 3. Use List\<\> instead of \[\] arrays to represent a MongoDB array of values or subdocuments. Why? The POJO codec will throw an error because it can't locate the type if you try it :).
 
 ### Data access
@@ -622,7 +622,7 @@ In our case, since we allow only 10 results per page, and each document has just
 
 There are two other ways we could have done this pagination:
 
-1. Atlas Search ([my favourite!](https://www.mongodb.com/developer/products/atlas/java-faceted-full-text-search-api/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant#search))---in this case, we would have something very similar, except we would be relying on Lucene's much faster counting approach.
+1. Atlas Search ([my favourite!](https://www.mongodb.com/developer/products/atlas/java-faceted-full-text-search-api/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant#search))—in this case, we would have something very similar, except we would be relying on Lucene's much faster counting approach.
 
 ```
 facet(

@@ -21,7 +21,7 @@ frozen: false
 I've been eying OpenRewrite for some time, but I haven't had time to play with it yet. In case you never heard about OpenRewrite, OpenRewrite takes care of refactoring your codebase to newer language, framework, and paradigm versions.
 > OpenRewrite is an open-source automated refactoring ecosystem for source code, enabling developers to effectively eliminate technical debt within their repositories.
 >
-> It consists of an auto-refactoring engine that runs prepackaged, open-source refactoring recipes for common framework migrations, security fixes, and stylistic consistency tasks -- reducing your coding effort from hours or days to minutes. Build tool plugins like the OpenRewrite Gradle plugin and the OpenRewrite Maven plugin help you run these recipes on one repository at a time.
+> It consists of an auto-refactoring engine that runs prepackaged, open-source refactoring recipes for common framework migrations, security fixes, and stylistic consistency tasks – reducing your coding effort from hours or days to minutes. Build tool plugins like the OpenRewrite Gradle plugin and the OpenRewrite Maven plugin help you run these recipes on one repository at a time.
 >
 > While the original focus was on the Java language, the OpenRewrite community is continuously expanding language and framework coverage. Thousands of great individuals and teams are working together to make software seamless to update and continuously secure.
 >
@@ -156,7 +156,7 @@ class FlattenStructureTest {
 3. Since we don't use the context to pass messages across recipes, we can create an in-memory instance for each test
 4. `parse` returns a stream of `SourceFile`. Even though we know it contains a single one, we need to handle the stream and the possible exception.
 5. Because of the lack of generics, we need to cast the returned `SourceFile` to `K.CompilationUnit`
-6. Visit the source code manually--as opposed to the engine doing it for us
+6. Visit the source code manually–as opposed to the engine doing it for us
 7. Expect that the file has been moved (virtually)
 
 We can now use the recipe:

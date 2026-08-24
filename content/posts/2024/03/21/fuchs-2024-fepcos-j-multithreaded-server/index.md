@@ -69,7 +69,7 @@ The generic part is the programming of the main-class and multithreading TCP/IP 
 main()
 ```
 
-  -- method with the main thread;
+  – method with the main thread;
 * determining of an IP-address, and port [\[9\]](#references);
 * creating a ServerSocket [\[10\]](#references) which is bound to the IP-address and the port;
 * a 
@@ -497,10 +497,10 @@ Thanks for reading!
 
 ## References
 
-1. FEPCOS-Project: "*FEPCOS-J -- FEPCOS-J implements a Java language extension that enables developers to declaratively compose networked systems like building blocks* "; <http://fepcos.info/en/fepcos-j.html>.
-2. Fuchs, G.: "*FEPCOS-J (1) -- Description, Impressions of Usage, Current State* "; <https://foojay.io/today/fuchs-2023-fepcos-j-01/>.
-3. Fuchs, G.: "*FEPCOS-J (2) -- Declaratively compose networked systems in Java* "; <https://foojay.io/today/fuchs-2023-fepcos-j-02/>.
-4. Fuchs, G.: "*FEPCOS-J (3) -- Build native executables of Java-coded networked systems* "; <https://foojay.io/today/fuchs-2023-fepcos-j-03-native-executables/>.
+1. FEPCOS-Project: "*FEPCOS-J – FEPCOS-J implements a Java language extension that enables developers to declaratively compose networked systems like building blocks* "; <http://fepcos.info/en/fepcos-j.html>.
+2. Fuchs, G.: "*FEPCOS-J (1) – Description, Impressions of Usage, Current State* "; <https://foojay.io/today/fuchs-2023-fepcos-j-01/>.
+3. Fuchs, G.: "*FEPCOS-J (2) – Declaratively compose networked systems in Java* "; <https://foojay.io/today/fuchs-2023-fepcos-j-02/>.
+4. Fuchs, G.: "*FEPCOS-J (3) – Build native executables of Java-coded networked systems* "; <https://foojay.io/today/fuchs-2023-fepcos-j-03-native-executables/>.
 5. Internet Engineering Task Force (IETF): "*RFC 9293 - Transmission Control Protocol (TCP)* "; <https://datatracker.ietf.org/doc/html/rfc9293>.
 6. Internet Engineering Task Force (IETF): "*RFC 9113 - HTTP/2* "; <https://datatracker.ietf.org/doc/html/rfc9113>.
 7. Network Working Group: "*RFC 959 - FILE TRANSFER PROTOCOL (FTP)* "; <https://datatracker.ietf.org/doc/html/rfc959>.
@@ -514,6 +514,6 @@ Thanks for reading!
 15. Oracle and/or its affiliates: "*7 Record Classes* "; <https://docs.oracle.com/en/java/javase/21/language/records.html>.
 16. Oracle and/or its affiliates: "*Interface Future\<V\>* "; <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/Future.html>.
 17. Oracle and/or its affiliates: "The try-with-resources Statement"; <https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html>
-18. FEPCOS-Project: "*Gerhard Fuchs -- The computer scientist who founded the FEPCOS-Project to simplify the programming of composed networked systems.* "; <http://fepcos.info/en/fuchs.html>.
+18. FEPCOS-Project: "*Gerhard Fuchs – The computer scientist who founded the FEPCOS-Project to simplify the programming of composed networked systems.* "; <http://fepcos.info/en/fuchs.html>.
 
 All references were last accessed on March 15, 2023.

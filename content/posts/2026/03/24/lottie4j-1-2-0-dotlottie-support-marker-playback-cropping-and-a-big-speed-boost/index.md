@@ -55,7 +55,7 @@ The new `play(startMarker, endMarker)` method makes the player start at frame 1,
 
 Rendering speed has improved significantly in this release. The main gains come from reducing the number of rendering passes per frame and adding a caching layer for layer and precomp render metadata, which avoids redundant recalculation on heavy animations.
 
-The difference is measurable: one test animation that previously played back at around 20--30 FPS now runs at \~50 FPS. A heavier animation that struggled at 11 FPS now reaches \~31 FPS at full size, and scales higher as the player is resized smaller.
+The difference is measurable: one test animation that previously played back at around 20–30 FPS now runs at \~50 FPS. A heavier animation that struggled at 11 FPS now reaches \~31 FPS at full size, and scales higher as the player is resized smaller.
 
 ### Adaptive Rendering Mode
 

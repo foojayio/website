@@ -58,7 +58,7 @@ Here are some of the features:
 
 • Localization support  
 
-• and much more ...
+• and much more …
 
 ## Quickstart
 

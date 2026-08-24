@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-**Houston, Texas -- January 2025** -- Ortus Solutions, a leading innovator in professional open-source development, today announced the release of BoxLang 1.9.0, a major stability and compatibility release focused on production-readiness. This release resolves over 50 critical bugs and introduces significant enhancements to datasource management, context lifecycle handling, and web form processing for mission-critical enterprise applications.
+**Houston, Texas – January 2025** – Ortus Solutions, a leading innovator in professional open-source development, today announced the release of BoxLang 1.9.0, a major stability and compatibility release focused on production-readiness. This release resolves over 50 critical bugs and introduces significant enhancements to datasource management, context lifecycle handling, and web form processing for mission-critical enterprise applications.
 
 ## Production-Ready Enhancements
 

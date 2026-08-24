@@ -15,8 +15,6 @@ related_posts:
   - "java-22-to-24-level-up-your-java-code-by-embracing-new-features-in-a-safe-way"
   - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
 frozen: false
-aliases:
-  - "/today/🚀-a-java-developers-guide-to-sonarqube-for-ide-stop-fixing-bugs-on-fridays-part-1/"
 ---
 
 Hola Java developers! 👋
@@ -31,7 +29,7 @@ The problem isn't your skill; it's the **feedback loop**. Waiting for a Code Rev
 
 This is where **SonarQube for IDE** (formerly known as SonarLint) changes the game. It's the first line of defense.
 
-This is **Part 1** of our series. Today, we focus on the **Standalone Mode** ---how to install the SonarQube IDE extension and use it to solve your daily coding headaches right inside [IntelliJ](https://www.jetbrains.com/idea/).
+This is **Part 1** of our series. Today, we focus on the **Standalone Mode** —how to install the SonarQube IDE extension and use it to solve your daily coding headaches right inside [IntelliJ](https://www.jetbrains.com/idea/).
 
 ## **Problem #1: "I don't have time for complex tool setups"**
 

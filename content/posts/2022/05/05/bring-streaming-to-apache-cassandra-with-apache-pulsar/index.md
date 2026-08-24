@@ -27,7 +27,7 @@ Twitch, YouTube, Instagram, Facebook — virtually every major brand nowadays us
 
 For enterprises and developers [building cloud-native applications](https://datastax.medium.com/build-your-first-app-with-javascript-node-js-and-datastax-astra-db-573abc238583), this growing trend creates a need for streaming technologies that can reliably handle the rush of massive amounts of data, while also being flexible and easy to manage for developers.{#2544}
 
-One such technology is [Apache Pulsar](https://pulsar.apache.org/)[®](https://cassandra.apache.org/_/index.html) --- an open-source, distributed messaging and streaming platform that's easy to deploy, simple to scale, and packed with developer-friendly APIs.{#8b5a}
+One such technology is [Apache Pulsar](https://pulsar.apache.org/)[®](https://cassandra.apache.org/_/index.html) — an open-source, distributed messaging and streaming platform that's easy to deploy, simple to scale, and packed with developer-friendly APIs.{#8b5a}
 
 So the next question is: how can you stream from Pulsar to [Apache Cassandra®](https://cassandra.apache.org/_/index.html), the powerful NoSQL database designed to support data-heavy applications in the cloud?{#8b5a}
 

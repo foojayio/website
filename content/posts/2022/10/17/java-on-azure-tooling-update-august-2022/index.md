@@ -55,7 +55,7 @@ We know that running or debugging applications in another environment such as Az
 It will be complex for developers to launch and connect with an Azure Virtual Machine in IntelliJ IDEA with lots of steps. To improve this experience, we have provided the entry of 'Azure Virtual Machine' under 'Run On' targets list of run/debug configurations of IntelliJ IDEA. To create and configure it,
 
 1. From the main menu, select Run \| Edit Configurations. Alternatively, press Alt+Shift+F10, then 0.
-2. Select the "Azure Virtual Machine" from the **Run on** menu or click **Manage targets**... to add a new target with "Azure Virtual Machine"
+2. Select the "Azure Virtual Machine" from the **Run on** menu or click **Manage targets**… to add a new target with "Azure Virtual Machine"
 
 With this new Virtual Machine support, you can directly run or debug applications on Azure Virtual Machine in IntelliJ IDEA. Here is a short demonstration for it.
 

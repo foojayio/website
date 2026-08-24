@@ -40,18 +40,18 @@ The 12-factor app is a methodology defined by the developers at Heroku for build
 
 The original 12 factors from this methodology are:
 
-1. **[Codebase](#Codebase)** -- One codebase tracked in revision control, many deploys
-2. **[Dependencies](#Dependencies)** -- Explicitly declare and isolate dependencies
-3. **[Configuration](#Configuration)** -- Store configuration in the environment
-4. **[Backing services](#BackingServices)** -- Treat backing services as attached resources
-5. **[Build, release, run](#BuildReleaseRun)** -- Strictly separate build and run stages
-6. **[Processes](#Processes)** -- Execute the app as one or more stateless processes
-7. **[Port binding](#PortBinding)** -- Export services via port binding
-8. **[Concurrency](#Concurrency)** -- Scale-out via the process model
-9. **[Disposability](#Disposability)** -- Maximize robustness with fast start-up and graceful shutdown
-10. **[Dev/prod parity](#DevProdParity)** -- Keep development, staging, and production as similar as possible
-11. **[Logs](#Logs)** -- Treat logs as event streams
-12. **[Admin processes](#Admin)** -- Run admin/management tasks as one-off processes
+1. **[Codebase](#Codebase)** – One codebase tracked in revision control, many deploys
+2. **[Dependencies](#Dependencies)** – Explicitly declare and isolate dependencies
+3. **[Configuration](#Configuration)** – Store configuration in the environment
+4. **[Backing services](#BackingServices)** – Treat backing services as attached resources
+5. **[Build, release, run](#BuildReleaseRun)** – Strictly separate build and run stages
+6. **[Processes](#Processes)** – Execute the app as one or more stateless processes
+7. **[Port binding](#PortBinding)** – Export services via port binding
+8. **[Concurrency](#Concurrency)** – Scale-out via the process model
+9. **[Disposability](#Disposability)** – Maximize robustness with fast start-up and graceful shutdown
+10. **[Dev/prod parity](#DevProdParity)** – Keep development, staging, and production as similar as possible
+11. **[Logs](#Logs)** – Treat logs as event streams
+12. **[Admin processes](#Admin)** – Run admin/management tasks as one-off processes
 
 ## A practical application of these 12 factors
 
@@ -65,7 +65,7 @@ Alternatively, throughout this article there are links to many of the Open Liber
 
 {#Codebase}
 
-## Factor 1 -- Codebase
+## Factor 1 – Codebase
 
 ![Diagram representing one codebase for one application with many deployments](image01-700x450.png)
 
@@ -75,11 +75,11 @@ This codebase could be a Git repository (including GitHub, GitHub Enterprise, Gi
 
 {#Dependencies}
 
-## Factor 2 -- Dependencies
+## Factor 2 – Dependencies
 
 ![Diagram representing dependencies of application being used by app source code](images02-700x320.png)
 
-Most applications require the use of external *dependencies* -- for example, in our sample application, we have dependencies on certain Liberty features, more specifically servlet-3.1, jsonp-1.0, and jaxrs-2.0. These dependencies must be pulled down during the build process, as it cannot be guaranteed that the specific dependencies your application relies on already exist in the system/runtime. A cloud-native application can never rely on the implicit existence of system-wide packages. This is what this factor focuses on -- encouraging the explicit declaration and isolation of application dependencies. This helps to provide consistency between development and production environments, simplifies the setup for developers new to the application, and supports portability between cloud platforms.
+Most applications require the use of external *dependencies* -- for example, in our sample application, we have dependencies on certain Liberty features, more specifically servlet-3.1, jsonp-1.0, and jaxrs-2.0. These dependencies must be pulled down during the build process, as it cannot be guaranteed that the specific dependencies your application relies on already exist in the system/runtime. A cloud-native application can never rely on the implicit existence of system-wide packages. This is what this factor focuses on – encouraging the explicit declaration and isolation of application dependencies. This helps to provide consistency between development and production environments, simplifies the setup for developers new to the application, and supports portability between cloud platforms.
 
 The first step to achieving this factor is to identify, declare, and isolate any external dependencies within your application. Most contemporary programming languages have tools or facilities for managing these dependencies. In Java, two of the most popular tools for dependency management are Maven and Gradle. These tools help simplify the complexity that is inherent to dependency management, thereby enabling developers to declare their dependencies and then let the tool be responsible for actually ensuring that those dependencies are satisfied. So, instead of packaging the third-party libraries inside your microservice, you can specify all dependencies in a Maven `pom.xml` file or a Gradle `settings.gradle` file. This enables you to freely move up to newer versions and allows responsibility for ensuring the dependencies are satisfied to be given to the build tool rather than the developer.
 
@@ -93,7 +93,7 @@ In our demo application, we utilize Maven, but you can use either Maven or Gradl
 
 {#Configuration}
 
-## Factor 3 -- Configuration
+## Factor 3 – Configuration
 
 ![Diagram representing configuration being used by app](image03-700x237.png)
 
@@ -116,7 +116,7 @@ Utilizing tools like MicroProfile Config can help you to externalize your conf
 
 {#BackingServices}
 
-## Factor 4 -- Backing services
+## Factor 4 – Backing services
 
 ![Diagram representing backing services app could make use of](image04-700x284.png)
 
@@ -134,7 +134,7 @@ Embracing backing services as bound resources enables cloud-native applications 
 
 {#BuildReleaseRun}
 
-## Factor 5 -- Build, release, and run
+## Factor 5 – Build, release, and run
 
 ![Diagram representing build, release, run and design phases of lifecycle](image5-700x279.png)
 
@@ -148,7 +148,7 @@ The *run* stage, which occurs on the cloud provider, usually uses tooling like c
 
 {#Processes}
 
-## Factor 6 -- Processes
+## Factor 6 – Processes
 
 ![Diagram representing processes of application](image06-700x343.png)
 
@@ -163,7 +163,7 @@ REST is a widely adopted transport protocol, and JAX-RS can be used to achieve a
 
 {#PortBinding}
 
-## Factor 7 -- Port binding
+## Factor 7 – Port binding
 
 ![Diagram representing port binding](image07-700x210.png)
 
@@ -179,7 +179,7 @@ The [Open Liberty Operator](https://openliberty.io/docs/latest/open-liberty-oper
 
 {#Concurrency}
 
-## Factor 8 -- Concurrency
+## Factor 8 – Concurrency
 
 ![Diagram representing concurrency](image08-700x391.png)
 
@@ -196,7 +196,7 @@ Another useful tool, especially when deploying to OpenShift is the Open Liberty 
 
 {#Disposability}
 
-## Factor 9 -- Disposability
+## Factor 9 – Disposability
 
 ![Diagram representing concept of disposablity](image09-700x267.png)
 
@@ -219,7 +219,7 @@ Additionally, implementing fault-tolerant behaviors can enable this disposable b
 
 {#DevProdParity}
 
-## Factor 10 -- Dev/Prod parity
+## Factor 10 – Dev/Prod parity
 
 ![Diagram representing dev/prod parity](image10-700x233.png)
 
@@ -238,7 +238,7 @@ In our demo application, we are making use of container technologies like Docker
 
 {#Logs}
 
-## Factor 11 -- Logs
+## Factor 11 – Logs
 
 ![Diagram representing logging in an application](image11-700x248.png)
 
@@ -255,7 +255,7 @@ Open Liberty has a unified logging component that handles messages that are writ
 
 {#Admin}
 
-## Factor 12 -- Administrative processes
+## Factor 12 – Administrative processes
 
 This factor discourages putting one-off admin or management tasks inside your microservices. Examples given on [12factor.net](https://12factor.net/ "12factor.net") include migrating databases and running one-time scripts to do clean-up. Instead, these should be run as one-off process and they can be run as Kubernetes tasks. In this way, your microservices can focus on business logic. It also enables safe debugging and admin of production applications and enables greater resiliency for cloud-native applications.
 

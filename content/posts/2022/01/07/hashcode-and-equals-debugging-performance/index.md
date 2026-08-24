@@ -3,6 +3,7 @@ title: "Hashcode and Equals: Debugging and Performance"
 date: "2022-01-07T13:31:35+00:00"
 lastmod: "2022-01-07T13:31:36+00:00"
 description: "Standard Java methods hashcode & equals are crucial to performance but this is very hard to detect as they're often too small for profilers."
+canonical: "https://talktotheduck.dev/hashcode-and-equals-debugging-performance"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Time-Travel-Debuggers-01.jpg"
@@ -93,7 +94,7 @@ This is fast, 100% unique and correct. There's literally no reason to do anythin
 
 ### Hashcode isn't Equals
 
-Well, obviously... This is one of the most important things you need to keep in mind when writing a hashcode implementation. This method must perform fast and must be consistent with equals for the false case. It will not be correct for the case of true.
+Well, obviously… This is one of the most important things you need to keep in mind when writing a hashcode implementation. This method must perform fast and must be consistent with equals for the false case. It will not be correct for the case of true.
 
 To clarify, hashcode must always obey this law:
 
@@ -117,7 +118,7 @@ The value here is in performance. A hashcode method should perform much faster t
 
 JPA developers often just use a hardcoded value for hashcode or use the Class object to generate the hashCode(). This seems weird until you think about this.
 
-If you let the database generate the ID for you, you would save an object and it would no longer be equal to the source object... One solution is to use the `@NaturalId` annotation and data types. But that would require changing the data model. Unfortunately, there's no decent workaround for the entity classes.
+If you let the database generate the ID for you, you would save an object and it would no longer be equal to the source object… One solution is to use the `@NaturalId` annotation and data types. But that would require changing the data model. Unfortunately, there's no decent workaround for the entity classes.
 
 In fact, I would theorize that a lot of the problems JPA developers experienced with Lombok are because it generates hashcode and equals methods for you. Those could be problematic.
 
@@ -133,7 +134,7 @@ This is valuable for some cases and might even solve problems like the one menti
 
 How do we know if a hashcode method is good?
 
-Well... We can use the debugger to figure it out. Just inspect your map and look at the distribution of the objects between the various buckets to get a sense of the real world value of the hashcode method.
+Well… We can use the debugger to figure it out. Just inspect your map and look at the distribution of the objects between the various buckets to get a sense of the real world value of the hashcode method.
 
 If you have code verification process on commit I would strongly recommend defining a rule on the complexity level of a hashcode method. This should be set very low to prevent slow code from seeping in.
 

@@ -3,6 +3,7 @@ title: "PSA: The Risks of Remote JDWP Debugging: It's Like a Wide Open Door"
 date: "2021-10-20T08:13:29+00:00"
 lastmod: "2021-10-20T08:15:28+00:00"
 description: "Java Debug Wire Protocol (a.k.a. JDWP) was designed for testing internally. Opening it to production is a HUGE security and stability risk..."
+canonical: "https://talktotheduck.dev/psa-the-risks-of-remote-jdwp-debugging"
 authors:
   - "shai-almog"
 image: "jdwp-is-a-security-risk.jpg"
@@ -29,7 +30,7 @@ Even internally it's a HUGE risk with [60% of breaches originating from inside t
 
 ![drew-scream.jpg](https://cdn.hashnode.com/res/hashnode/image/upload/v1634113444886/ChPfwGtMr.jpeg)
 
-This isn't just a security risk, that could essentially give every hacker the "keys" to your server and full access to your server code... It's also a serious stability hazard that could easily crash your production servers.
+This isn't just a security risk, that could essentially give every hacker the "keys" to your server and full access to your server code… It's also a serious stability hazard that could easily crash your production servers.
 
 Even for staging this is a problematic case. Staging servers are sometimes exposed to the internet but might serve as a stepping stone to the internal servers (e.g. same host so they slide under the firewall rule). Hackers can easily "hop" into the "real" servers once they are able to hack (or enter an open door really) the remote debug protocol.
 
@@ -75,7 +76,7 @@ The problem is that even unintentional actions can demolish a server. A simple c
 
 In the cult classic office space the heroes sift pennies from transactions. Big organizations block a lot of this access and rightly so.
 
-Imagine if all your colleagues had debug access to your server... All you need is one conditional breakpoint on the user login code and you have the password of a person you can hack. If you're smart you'll try that password on a different site without anyone knowing so it can't even be traced to you.
+Imagine if all your colleagues had debug access to your server… All you need is one conditional breakpoint on the user login code and you have the password of a person you can hack. If you're smart you'll try that password on a different site without anyone knowing so it can't even be traced to you.
 
 Seriously don't do that!
 
@@ -83,7 +84,7 @@ This is a very real risk of placing JDWP on servers and something you need to ke
 
 ## How we Solved these Issues at Lightrun
 
-Pretty much all of those problems don't exist in Lightrun. Before I go into that, Lightrun doesn't just let you start debugging... You need to authenticate. There's an access system with corporate compliance, user roles that provide specific permissions etc.
+Pretty much all of those problems don't exist in Lightrun. Before I go into that, Lightrun doesn't just let you start debugging… You need to authenticate. There's an access system with corporate compliance, user roles that provide specific permissions etc.
 
 ### Insecure By Design
 
@@ -111,7 +112,7 @@ Finally everything in Lightrun is audited. That means that even if you forgot to
 
 ## TL;DR
 
-Don't use remote debugging unless you REALLY have to and then make sure no one can access your system... Even under those circumstances be vigilant and tunnel your connections via SSH.
+Don't use remote debugging unless you REALLY have to and then make sure no one can access your system… Even under those circumstances be vigilant and tunnel your connections via SSH.
 
 Be careful with conditional breakpoints and other similarly elaborate debugger features. They are a recipe for disaster in such situations.
 

@@ -150,13 +150,13 @@ Add a `copy-resources` execution to your `maven-resources-plugin` configuration 
 </plugin>
 ```
 
-See this in context: [`pom.xml` (lines 371--387)](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/main/pom.xml#L371-L387).
+See this in context: [`pom.xml` (lines 371–387)](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/main/pom.xml#L371-L387).
 
 Now when you run `mvn site`, the custom CSS replaces JaCoCo's default immediately after report generation.
 
 ### Step 3: Handle CI Deployment (Optional)
 
-If you deploy versioned documentation (like we do --- `snapshot/`, `latest/`, `1.0.8/`, etc.), you need to overlay the CSS for **all** version directories, not just the one Maven just built.
+If you deploy versioned documentation (like we do — `snapshot/`, `latest/`, `1.0.8/`, etc.), you need to overlay the CSS for **all** version directories, not just the one Maven just built.
 
 In our GitHub Actions deploy workflow, we add a step after all version builds complete:
 
@@ -206,9 +206,9 @@ You can see the live result on our documentation site: [Copilot SDK for Java —
 
 The complete implementation is in the [Copilot SDK for Java](https://github.com/copilot-community-sdk/copilot-sdk-java) repository:
 
-* [Custom `report.css`](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/src/site/jacoco-resources/report.css) --- the full themed stylesheet
-* [`pom.xml` overlay config](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/pom.xml#L371-L387) --- the Maven copy-resources execution
-* [Deploy workflow](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/.github/workflows/deploy-site.yml) --- CI overlay step for versioned docs
-* [Live report](https://copilot-community-sdk.github.io/copilot-sdk-java/snapshot/jacoco/) --- the themed output on GitHub Pages
+* [Custom `report.css`](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/src/site/jacoco-resources/report.css) — the full themed stylesheet
+* [`pom.xml` overlay config](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/pom.xml#L371-L387) — the Maven copy-resources execution
+* [Deploy workflow](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/.github/workflows/deploy-site.yml) — CI overlay step for versioned docs
+* [Live report](https://copilot-community-sdk.github.io/copilot-sdk-java/snapshot/jacoco/) — the themed output on GitHub Pages
 
 *Built with ❤️ by [Bruno Borges](https://github.com/brunoborges) and [GitHub Copilot](https://github.com/features/copilot).*

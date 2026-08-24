@@ -31,7 +31,7 @@ As these are our first implementations using the Bucket Pattern, let's make it a
 
 For appV5R0, each document groups the events by month and user. Every document will have a field of type array called items to which each event document will be pushed. The event document pushed to the array will have its status field names shorthanded to its first letter, the same way we did in appV3 and appV4, and the date to which the event is referent.
 
-The _id field will have a logic similar to the one used in appV4, with the values of key and date concatenated and stored as hexadecimal/binary information. The difference is the date value—instead of being composed by year, month, and day (YYYYMMDD)---will only have year and month (YYYYMM), as we are bucketing the data by month.
+The _id field will have a logic similar to the one used in appV4, with the values of key and date concatenated and stored as hexadecimal/binary information. The difference is the date value—instead of being composed by year, month, and day (YYYYMMDD)—will only have year and month (YYYYMM), as we are bucketing the data by month.
 
 For appV5R1, we have almost the same implementation as appV5R0, with the difference being that we'll bucket the events by quarter, and the date value used to generate the _id field will be composed by year and quarter (YYYYQQ) instead of year and month (YYYYMM).
 

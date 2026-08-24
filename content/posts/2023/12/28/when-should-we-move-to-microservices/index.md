@@ -39,14 +39,14 @@ If we break this service down into smaller pieces, we essentially create distrib
 
 A good Microservice needs to follow these principles for robustness and scale:
 
-* Divided by business function -- this is a logical division. A Microservice is a standalone "product" that provides a complete package. This means that the team responsible for the Microservice can make all the changes required for the business without dependencies.
-* Automation through CI/CD -- without continuous delivery the cost of updating would eliminate every benefit of Microservices.
-* Independent deployment -- is implied, since a commit on one Microservice will only trigger the CD of that specific service. We can accomplish this through Kubernetes and Infrastructure as Code (IaC) solutions.
-* Encapsulation -- it should hide the underlying implementation details. A service acts as a standalone product that publishes an API for other products.  
+* Divided by business function – this is a logical division. A Microservice is a standalone "product" that provides a complete package. This means that the team responsible for the Microservice can make all the changes required for the business without dependencies.
+* Automation through CI/CD – without continuous delivery the cost of updating would eliminate every benefit of Microservices.
+* Independent deployment – is implied, since a commit on one Microservice will only trigger the CD of that specific service. We can accomplish this through Kubernetes and Infrastructure as Code (IaC) solutions.
+* Encapsulation – it should hide the underlying implementation details. A service acts as a standalone product that publishes an API for other products.  
   We commonly accomplished this via REST interfaces but also messaging middleware. This is further enhanced with API Gateways.
-* Decentralized with no single point of failure -- otherwise, we would distribute failure.
-* Failures should be isolated -- without this, a single service going down could create a domino effect. Circuit breakers are probably the most important tools for isolating failures. To satisfy this dependency every microservice handles its own data. This means many databases which can be challenging at times.
-* Observable -- this is required to deal with failures on a scale. Without proper observability, we are effectively blind as the various teams can deploy automatically.
+* Decentralized with no single point of failure – otherwise, we would distribute failure.
+* Failures should be isolated – without this, a single service going down could create a domino effect. Circuit breakers are probably the most important tools for isolating failures. To satisfy this dependency every microservice handles its own data. This means many databases which can be challenging at times.
+* Observable – this is required to deal with failures on a scale. Without proper observability, we are effectively blind as the various teams can deploy automatically.
 
 This is all good and well, but what does that mean in practical terms?
 
@@ -78,14 +78,14 @@ Stateless services would be ideal, carrying a state makes everything far more co
 
 A typical Microservice will store in its own database and work with local data. A service that needs remote information will typically cache some data to avoid round-trips to the other service. This is one of the biggest reasons Microservices can scale. In a Monolith the database should become the bottleneck of the application, which means the Monolith is efficient and limited by the speed we can store and retrieve the data. This has two major drawbacks:
 
-* Size -- the more data we have the larger the database and performance impacts all users at once. Imagine querying an SQL table of every purchase ever made on Amazon just to find your specific purchase.
-* Domain -- databases have different use cases. Some databases are optimized for consistency, write speed, read speed, time data, spatial data and more. A microservice that tracks user information would probably use a time series database which is optimized for time-related information, whereas a purchase service will focus on a traditional conservative ACID database.
+* Size – the more data we have the larger the database and performance impacts all users at once. Imagine querying an SQL table of every purchase ever made on Amazon just to find your specific purchase.
+* Domain – databases have different use cases. Some databases are optimized for consistency, write speed, read speed, time data, spatial data and more. A microservice that tracks user information would probably use a time series database which is optimized for time-related information, whereas a purchase service will focus on a traditional conservative ACID database.
 
 Note that a Monolith can use more than one database. That can work perfectly well and can be very useful. But it's the exception. Not the rule.
 
 The Saga pattern works by using compensating transactions to undo the effects of a saga if it fails. When a saga fails, the compensating transaction is executed to undo the changes made by the previous transaction. This allows the system to recover from failures and maintain a consistent state. We can accomplish this with tools such as Apache Camel but this is non-trivial and requires far more involvement than a typical transaction in a modern system. That means that for every major cross-service operation you would need to do the equivalent undo operation that will restore the state back. That is non-trivial. There are several tools for saga orchestration but this is a big subject that is beyond the scope of this post, still I will explain it in broad terms.
 
-What's important to understand about Saga is that it avoids the classic ACID database principles and focuses on "eventual consistency". That means operations would bring the database to a consistent state at some point. That is a very difficult process. Imagine debugging a problem that only occurs when the system is in an inconsistent state...
+What's important to understand about Saga is that it avoids the classic ACID database principles and focuses on "eventual consistency". That means operations would bring the database to a consistent state at some point. That is a very difficult process. Imagine debugging a problem that only occurs when the system is in an inconsistent state…
 
 The following image demonstrated the idea in broad terms. Let's say we have a money transfer process.
 
@@ -103,7 +103,7 @@ That is a successful transaction. With a regular database, this would be one tra
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qi9pxeg2pamioeymurcs.png)
 
-Another problem in Saga is illustrated in the CAP theorem. CAP stands for Consistency, Availability and Partition Tolerance. The problem is we need to pick any two... Don't get me wrong, you might have all three. But in a case of a failure you can only guarantee two.
+Another problem in Saga is illustrated in the CAP theorem. CAP stands for Consistency, Availability and Partition Tolerance. The problem is we need to pick any two… Don't get me wrong, you might have all three. But in a case of a failure you can only guarantee two.
 
 Availability means that requests receive responses. But there's no guarantee that they contain the most recent writes.
 
@@ -121,13 +121,13 @@ Hopefully, you now understand how hard it is to deploy Microservices properly. W
 
 We mentioned the first requirement upfront: DevOps. Having a good DevOps team is a prerequisite to considering Microservices. I saw teams trying to hack their way through this without an OPS team and they ended up spending more time on operational complexity than writing code. It wasn't worth the effort.
 
-The biggest benefit of Microservice is to the team. That is why having a stable team and scope is crucial. Splitting teams into vertical teams that work independently is a tremendous benefit. The most modular monolith in the world can't compete with that. When we have hundreds of developers following the git commits alone and tracking the code changes in scale becomes untenable. The value of Microservices is only realized in a large team. This sounds reasonable enough, but in a startup environment, things shift suddenly. A colleague of mine works for a startup that employed dozens of developers. They decided to follow a Microservice architecture and built a lot of them... Then came the downsizing and maintaining dozens of services in multiple languages became a problem.
+The biggest benefit of Microservice is to the team. That is why having a stable team and scope is crucial. Splitting teams into vertical teams that work independently is a tremendous benefit. The most modular monolith in the world can't compete with that. When we have hundreds of developers following the git commits alone and tracking the code changes in scale becomes untenable. The value of Microservices is only realized in a large team. This sounds reasonable enough, but in a startup environment, things shift suddenly. A colleague of mine works for a startup that employed dozens of developers. They decided to follow a Microservice architecture and built a lot of them… Then came the downsizing and maintaining dozens of services in multiple languages became a problem.
 
 Splitting a Monolith is hard but doable. Unifying Microservices to a Monolith is probably harder, I'm unaware of anyone who seriously tried to do that but would be curious to hear stories.
 
 ### Not One Size
 
-In order to move to a Microservice architecture we need a bit of a mind shift. A good example is in the databases. A good example would be a user tracking Microservice. In a Monolith, we would write the data to a table and move on with our work. But this is problematic...
+In order to move to a Microservice architecture we need a bit of a mind shift. A good example is in the databases. A good example would be a user tracking Microservice. In a Monolith, we would write the data to a table and move on with our work. But this is problematic…
 
 As data scales, this user tracking table can end up containing a great deal of data that is hard to analyze in real-time without impacting the rest of the operating system. With a Microservice we can offer several advantages:
 

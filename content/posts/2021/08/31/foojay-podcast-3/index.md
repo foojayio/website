@@ -17,8 +17,6 @@ related_posts:
   - "foojay-podcast-1"
   - "schedule-for-foojay-virtual-openjdk-17-jug-tour"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-3-journey-to-jakarta-ee/"
 ---
 
 Foojay community members discuss the modernization of Jakarta EE applications from the older Java EE form, including backwards-compatibility, as well as forwards-excitement about cool new developments like Microprofile.

@@ -46,7 +46,7 @@ The flush() and sync() calls are often mixed up, but both are required to safely
 
 1. FileOutputStream out = new FileOutputStream(filename); //Open a file
 2. BufferedOutputStream bout = new BufferedOutputStream(out);
-3. bout.write(....) //repeat in loop - writes optimized through buffering
+3. bout.write(….) //repeat in loop - writes optimized through buffering
 4. bout.flush(); //pushes our Java side buffers to the OS
 5. out.getFD().sync(); //Makes sure all OS and disk buffer out done. Worst case this can take from 100s of ms on a servers to seconds on an embedded device.
 
@@ -70,7 +70,7 @@ The shutdown hook is triggered by:
 A Hard shutdown, skipping the shutdown hook, is triggered by:
 
 1. System.halt()
-2. "kill -9" or "kill -- SIGKILL"
+2. "kill -9" or "kill – SIGKILL"
 
 #### Atomic Renaming of Files
 

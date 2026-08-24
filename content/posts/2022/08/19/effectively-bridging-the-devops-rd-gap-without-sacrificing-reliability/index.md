@@ -23,15 +23,15 @@ DevOps culture revolutionized our industry. Continuous Delivery and Continuous I
 >
 > — William Shakespeare
 
-Before DevOps practices were commonplace, production used to fail. A lot. We don't want to go back to the time before DevOps tools were commonplace...
+Before DevOps practices were commonplace, production used to fail. A lot. We don't want to go back to the time before DevOps tools were commonplace…
 
 ![The Twitter Fail Whale Demonstrated the need for DevOps](https://cdn.hashnode.com/res/hashnode/image/upload/v1646648317259/r4Exr4vOY.png)
 
 ## Everything's Perfect in our Development Process, Right?
 
-Well... No. Software is hard, especially at the fast pace of continuous delivery cycles. We will always make some bugs and unfortunately some will make it into production. That's unavoidable.
+Well… No. Software is hard, especially at the fast pace of continuous delivery cycles. We will always make some bugs and unfortunately some will make it into production. That's unavoidable.
 
-The problem is that these bugs that made it into production made it past our continuous integration pipeline. They made it past the testing environment. They are typically tough to detect/reproduce bugs -- Uber Bugs... The DevOps practices we worked so hard to establish suddenly turned against us.
+The problem is that these bugs that made it into production made it past our continuous integration pipeline. They made it past the testing environment. They are typically tough to detect/reproduce bugs – Uber Bugs… The DevOps practices we worked so hard to establish suddenly turned against us.
 
 ## That Thin (possibly blue) Line
 
@@ -49,7 +49,7 @@ The second reason is more about the siloed teams, one of the core DevOps practic
 
 That line that separates DevOps engineers from R\&D is a good line. It's an important line. It's a line that enables high-quality software by vetting everything that goes into production through an organized process.
 
-Developers just want to connect a "debugger" and step over the code. This obviously doesn't scale and would crash production systems. Then there are the obvious security issues involved... That's why we have DevOps workflow and the silos are important.
+Developers just want to connect a "debugger" and step over the code. This obviously doesn't scale and would crash production systems. Then there are the obvious security issues involved… That's why we have DevOps workflow and the silos are important.
 
 ## Collaboration Between Development and Operations Teams
 
@@ -61,8 +61,8 @@ Today's logs are not the logs of our predecessors. DevOps pipe, filter and index
 
 Working with logs has some limits:
 
-* Cost -- over-logging is a major problem. It degrades application performance and can be quite expensive
-* It's Static -- developers aren't clairvoyant. They don't know what to log, that's why they over-log. Still, some information is often missing, and it sends us back to the continuous deployment cycle mentioned above
+* Cost – over-logging is a major problem. It degrades application performance and can be quite expensive
+* It's Static – developers aren't clairvoyant. They don't know what to log, that's why they over-log. Still, some information is often missing, and it sends us back to the continuous deployment cycle mentioned above
 
 ### Observability Tools
 
@@ -80,8 +80,8 @@ Continuous Observability tools are the new generation of Cloud-Native developmen
 
 Let's go over the issues above:
 
-* Log cost -- Continuous Observability tools let us inject logs dynamically. That means developers can reduce the amount of logs (developers can inject more as needed)
-* CI/CD cycle for updates -- Since logs can be injected, developers don't need to go through the continuous deployment pipeline
+* Log cost – Continuous Observability tools let us inject logs dynamically. That means developers can reduce the amount of logs (developers can inject more as needed)
+* CI/CD cycle for updates – Since logs can be injected, developers don't need to go through the continuous deployment pipeline
 * These tools were designed for developers and integrate with development tools such as IDEs. They provide the type of information developers need directly in the source code
 * Performance overhead is low. Since these tools query a specific area of the code and not the full application, the impact is low. The best tools throttle features to keep the application performant
 
@@ -91,7 +91,7 @@ Continuous Observability tools are deployed through the DevOps environment. That
 
 This is great news if you're as passionate about reliability engineering and cloud-native development as I am. The capability and reliability of the tool lets us keep the pace of releases and literally debug production at scale without compromising security.
 
-### In Practical Terms -- How does it Work?
+### In Practical Terms – How does it Work?
 
 Common tool usage in this field follows a use case similar to a debugger in normal application development. A problem is reported in production and the application development team makes assumptions about the application. These assumptions can be verified using Snapshots, Logs or Metrics (AKA actions).
 
@@ -109,6 +109,6 @@ Modern cloud environments are remarkably complex. As we're all adopting cloud-na
 
 This leaves us with a system that's robust for most cases but much harder to debug and troubleshoot. Organizational culture helps, but it isn't enough. Bugs that quality assurance didn't grab are the hardest bugs and analyzing them in production based on customer feedback is hard. It's time consuming, expensive, affects release frequency and code quality.
 
-Existing tools are great, but they were designed for DevOps teams, not for developers. Bugs should be the responsibilities of the development team, but we can't expect developers to address bugs without tools that provide insight...
+Existing tools are great, but they were designed for DevOps teams, not for developers. Bugs should be the responsibilities of the development team, but we can't expect developers to address bugs without tools that provide insight…
 
-This is the idea behind continuous observability tools. These tools are not a part of a DevOps platform but they're deployed by DevOps. In that sense, they maintain the separation. Developers don't have access to production. They can debug it though... Securely and at scale.
+This is the idea behind continuous observability tools. These tools are not a part of a DevOps platform but they're deployed by DevOps. In that sense, they maintain the separation. Developers don't have access to production. They can debug it though… Securely and at scale.

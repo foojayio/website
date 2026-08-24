@@ -28,7 +28,7 @@ The feature allows you to view type hierarchy in class, supertype, or subtype vi
 
 Automatically generating testing method templates and importing testing packages is a handy feature to improve coding efficiency.
 
-Starting from April, you can generate the method templates directly from a test file. In May, we will also add support for generating from a source file.To generate testing method templates, open or create a test file under project's test folder, right-click on file editor to invoke context menu, select "**Source Action...** " and then "**Generate Test...**", and finally select methods to generate:
+Starting from April, you can generate the method templates directly from a test file. In May, we will also add support for generating from a source file.To generate testing method templates, open or create a test file under project's test folder, right-click on file editor to invoke context menu, select "**Source Action…** " and then "**Generate Test…**", and finally select methods to generate:
 
 ![](generate-test.gif)  
 **Note:** for generating from a test file, testing dependency need be added into your project.

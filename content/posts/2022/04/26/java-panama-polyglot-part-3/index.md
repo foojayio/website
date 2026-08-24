@@ -90,8 +90,8 @@ To get started download and install the required software as follows.
 * Project Panama EA release - Build 19-panama+1-13 (2022/1/18) - <https://jdk.java.net/panama/>
 * On MacOS (Monterey) - Apple's tools (Clang)
   * MacOS - <https://developer.apple.com/technology/xcode.html>
-* Python3 -- Python interpreter ([Download](https://www.python.org/downloads/))
-* Pip3 -- Python 3 package **manager for Python**. If you've installed Python 3, pip3 is installed.
+* Python3 – Python interpreter ([Download](https://www.python.org/downloads/))
+* Pip3 – Python 3 package **manager for Python**. If you've installed Python 3, pip3 is installed.
 * Tensorflow - ML library for Python
 
 Before getting started let's find out what version of the Python interpreter that is installed locally. Go to your command line terminal and type the following:

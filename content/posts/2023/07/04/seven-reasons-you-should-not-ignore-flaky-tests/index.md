@@ -21,7 +21,7 @@ Imagine the scenario: you have good automated test coverage of your application 
 
 You're doing everything right, right?
 
-Except... sometimes tests fail, and you're not sure why. When you run the test locally, or a second time in the same environment, they pass. Whether they pass or fail doesn't seem to be related to any code changes.
+Except… sometimes tests fail, and you're not sure why. When you run the test locally, or a second time in the same environment, they pass. Whether they pass or fail doesn't seem to be related to any code changes.
 
 Over time, your team learns these are the "flaky tests", and begins to ignore them when they fail.
 
@@ -29,7 +29,7 @@ Maybe you even automate re-running them when they fail to check that they do act
 
 ## Why should we care about flaky tests?
 
-Flaky tests may seem like a minor inconvenience; we learn to identify which tests occasionally (or frequently!) fail for no good reason and pay them less attention...
+Flaky tests may seem like a minor inconvenience; we learn to identify which tests occasionally (or frequently!) fail for no good reason and pay them less attention…
 
 Ideally, tests should offer a reliable safety net, giving you the confidence to make changes to the code. However, when tests flicker between pass and fail states, they become more of a mystery than a tool, diluting their utility and weakening their credibility. They become noise, getting in the way of the useful signal that our tests should be providing us.
 

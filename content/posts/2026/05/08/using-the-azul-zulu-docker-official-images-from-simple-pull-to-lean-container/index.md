@@ -68,7 +68,7 @@ $ ls -lh target
 -rw-r--r--@ 1 frank  staff   2.2K Mar 23 15:41 azul-docker-demo-1.0-SNAPSHOT.jar
 ```
 
-So our application, compiled with Java 25, produces a JAR file that is only 2.2KB. Let's keep this in mind when comparing it to the Docker container size in the following steps...
+So our application, compiled with Java 25, produces a JAR file that is only 2.2KB. Let's keep this in mind when comparing it to the Docker container size in the following steps…
 
 ### Everything in One Container (Don't Do This)
 

@@ -213,7 +213,7 @@ public abstract class TypeProcessingSample extends BPFProgram {
 
 The annotation processor currently supports the following members in records:
 
-* integer types (int, long, ...), optionally annotated with `@Unsigned` if unsigned
+* integer types (int, long, …), optionally annotated with `@Unsigned` if unsigned
 * String types, annotated with `@Size` to specify the size
 * Other `@Type` annotated types in the same scope
 * `@Type.Member` annotated member to specify the BPFType directly

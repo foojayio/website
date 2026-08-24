@@ -14,7 +14,7 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "effective-coding-with-java-observability"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

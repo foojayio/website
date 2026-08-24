@@ -14,8 +14,8 @@ categories:
 related_posts:
   - "pointer-arithmetic-in-modern-java"
   - "async-file-io-with-java-and-io_uring"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
-  - "idempotent-spring-boot-starter"
+  - "offline-crypto-address-validation-in-java"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 frozen: false
 ---
 

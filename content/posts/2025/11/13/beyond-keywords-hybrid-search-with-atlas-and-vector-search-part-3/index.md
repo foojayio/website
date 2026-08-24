@@ -2,7 +2,7 @@
 title: "Beyond Keywords: Hybrid Search With Atlas and Vector Search (Part 3)"
 date: "2025-11-13T13:56:23+00:00"
 lastmod: "2025-12-12T21:19:43+00:00"
-description: "Bringing together semantic vectors and exact keyword matching with $rankFusionIf you’ve been following along this series, you already know we started by giving our movie search app the ability to understand meaning—not just keywords—using semantic search, as discussed in Part 1: Implementing Semantic Search in Java With Spring Data. Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in Part 2: Optimizing Vector Search With Filters and Caching. Now, in this final installment, we’re taking our search capability to its ultimate form: combining the precision of full-text search with the semantic understanding of vector search. Welcome to hybrid search."
+description: "Bringing together semantic vectors and exact keyword matching with $rankFusionIf you’ve been following along this series, you already know we started by giving our movie search app the ability to understand meaning—not just keywords—using semantic search, as discussed in Part 1: Implementing Semantic Search in Java With Spring Data. Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in Part 2: Optimizing Vector Search With Filters and Caching.Now, in this final installment, we’re taking our search capability to its ultimate form: combining the precision of full-text search with the semantic understanding of vector search. Welcome to hybrid search."
 authors:
   - "ricardo-mello"
 image: "Screenshot-2025-11-11-at-1.58.35-PM.png"
@@ -29,7 +29,7 @@ Welcome to hybrid search.
 
 ## One search might not be enough
 
-Think about how people actually search for movies. Sometimes, they only remember fragments—such as, "a ship that sinks at night after hitting an iceberg"---and hope the app can figure it out. Other times, they know exactly what they want—like "Titanic"---and expect to see it right away.
+Think about how people actually search for movies. Sometimes, they only remember fragments—such as, "a ship that sinks at night after hitting an iceberg"—and hope the app can figure it out. Other times, they know exactly what they want—like "Titanic"—and expect to see it right away.
 
 These two very different situations expose a critical gap: **No single search technique works perfectly for every type of query**.
 
@@ -536,14 +536,14 @@ So far, we've been testing step by step by running the aggregation pipeline dire
 Open your browser at[**http://localhost:8080**](http://localhost:8080), and apply the same filters we used in the previous curl request:
 
 * **Search term** = *a ship that sinks at night after hitting an iceberg*
-* **Released year**= 1980--2003
+* **Released year**= 1980–2003
 * **Minimum IMDb rating** = 5
 * **Genres** = (Drama, Action)
 
 Just like in the screenshot below:  
 ![](Screenshot-2025-11-11-at-1.58.35-PM.png)
 
-If we look closely at the results, we notice that some movies don't satisfy the pre-filters—for example, ***Night at the Museum*** is being returned even though it's from 2006, outside the requested year range of 1980--2003.
+If we look closely at the results, we notice that some movies don't satisfy the pre-filters—for example, ***Night at the Museum*** is being returned even though it's from 2006, outside the requested year range of 1980–2003.
 
 This happens because the filters were applied only inside the **vector search pipeline** . The **full-text pipeline** doesn't have those restrictions, so when $rankFusion merges the results, movies that score highly in full-text (like *Night at the Museum*) can still appear, even if they don't match the vector filters.
 
@@ -764,7 +764,7 @@ private List<SearchOperator> buildMustNot(MovieSearchRequest req) {
 }
 ```
 
-Next, update the buildFilters() method so it only adds genres when the **exclude selected genres** option is **not** selected. Open the method and replace the current block...
+Next, update the buildFilters() method so it only adds genres when the **exclude selected genres** option is **not** selected. Open the method and replace the current block…
 
 ```
 if (req.genres() != null && !req.genres().isEmpty()) {
@@ -772,7 +772,7 @@ if (req.genres() != null && !req.genres().isEmpty()) {
 }
 ```
 
-...with this version:
+…with this version:
 
 ```
 if (req.genres() != null && !req.genres().isEmpty() && !req.excludeGenres()) {

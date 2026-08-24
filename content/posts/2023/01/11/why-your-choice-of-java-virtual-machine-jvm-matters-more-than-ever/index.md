@@ -17,17 +17,17 @@ related_posts:
 frozen: false
 ---
 
-In [my recent interview with Software Daily](https://softwareengineeringdaily.com/2022/10/14/azul-with-john-ceccarelli/), I discussed that there are many companies looking for better customer experience, faster execution, and lower infrastructure costs... and that they have discovered a better use of Java to help them with just that.
+In [my recent interview with Software Daily](https://softwareengineeringdaily.com/2022/10/14/azul-with-john-ceccarelli/), I discussed that there are many companies looking for better customer experience, faster execution, and lower infrastructure costs… and that they have discovered a better use of Java to help them with just that.
 
-The interview describes that **when you use hyper-optimized Java runtimes instead of vanilla OpenJDK** -- you do less tuning and debugging. This means you can build applications, data architectures or anything that needs better performance using an optimized JVM -- with little or no code changes.
+The interview describes that **when you use hyper-optimized Java runtimes instead of vanilla OpenJDK** – you do less tuning and debugging. This means you can build applications, data architectures or anything that needs better performance using an optimized JVM – with little or no code changes.
 
 How does that work? Here are some questions and answers around this theme.
-> **Q1. John -- in this interview you help us understand why running on optimized builds of OpenJDK can help make a big difference in business applications, data storage, streaming, and search, while getting more out of cloud-native workloads. How does that work?**
+> **Q1. John – in this interview you help us understand why running on optimized builds of OpenJDK can help make a big difference in business applications, data storage, streaming, and search, while getting more out of cloud-native workloads. How does that work?**
 
-**John:** People are used to thinking that Java is just Java. Paradoxically, the more different Java runtimes become available, the less people think there is any difference between what flavor of Java VM you're running on. This is because most of the new distributions of Java -- think AWS Corretto or Temurin (AdoptOpenJDK) or Azul Zulu Builds of OpenJDK -- are just vanilla redistributions of OpenJDK and have no differences in how they run your code.
+**John:** People are used to thinking that Java is just Java. Paradoxically, the more different Java runtimes become available, the less people think there is any difference between what flavor of Java VM you're running on. This is because most of the new distributions of Java – think AWS Corretto or Temurin (AdoptOpenJDK) or Azul Zulu Builds of OpenJDK – are just vanilla redistributions of OpenJDK and have no differences in how they run your code.
 
 But... there are other JVMs, like Azul Platform Prime and GraalVM, that actually do run your code differently and get better performance, carrying capacity, etc. Azul Platform Prime achieves this by taking OpenJDK, replacing key components like the JIT Compiler and the Garbage Collector, and replacing them with more optimized versions.
-> **Q2. In your role at Azul, you must be thinking about customer experience and performance every day -- how does [Azul Platform Prime](https://www.azul.com/products/prime/) deliver on that promise?**
+> **Q2. In your role at Azul, you must be thinking about customer experience and performance every day – how does [Azul Platform Prime](https://www.azul.com/products/prime/) deliver on that promise?**
 
 **John:** One thing we do is look at customer experience and total cost of ownership holistically. Many companies, when they want to look at how fast their app runs, will just do a pedal-to-the-metal throughput test that totally saturates their environment, post the top number achieved, and call it a day.
 
@@ -44,7 +44,7 @@ But then you can start looking at things like:
 * Since Prime doesn't suffer from these pauses, should you replace your fleet of low-heap instances with one instance with a 10TB heap? (Ok, it's an extreme example, but we have people running 10TB heaps in production!)
 
 When you're benchmarking, you want to not look at max throughput, but max throughput you can achieve while still keeping your SLA.
-> **Q3. You gave real-world before and after examples of how an optimized JVM will give you better performance that lets you run on multiple machines in more efficient ways -- can you break this down for us?**
+> **Q3. You gave real-world before and after examples of how an optimized JVM will give you better performance that lets you run on multiple machines in more efficient ways – can you break this down for us?**
 
 **John:** One of the places we work heavily on is optimizing your code to run as fast as possible. The component in the JVM that handles this task is the JIT compiler. Azul Platform Prime swaps out the OpenJDK HotSpot compiler for our hyper optimized Falcon compiler, which just gives you faster code. When each operation takes less time to complete, you can run more operations through the same size container.
 
@@ -72,4 +72,4 @@ Interested in learning more? Check out John's [interview with Software Engineeri
 
 Did you know? Azul offers an [optimized JVM](https://www.azul.com/products/prime/stream-download) to improve performance for your business-critical applications.
 
-We'll even help you get started -- [here are some best practices](https://docs.azul.com/prime/#getting-started).
+We'll even help you get started – [here are some best practices](https://docs.azul.com/prime/#getting-started).

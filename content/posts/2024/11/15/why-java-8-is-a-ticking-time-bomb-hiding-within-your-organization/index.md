@@ -75,7 +75,7 @@ Following the three monthly updates significantly reduces the risk of a potentia
 
 ### Ready for Cloud Native
 
-Java wasn't initially created to run in containers. Of course not; they didn't exist in 1995! Docker, microservices, observability,... are standard nowadays but were invented after Java was born.
+Java wasn't initially created to run in containers. Of course not; they didn't exist in 1995! Docker, microservices, observability,… are standard nowadays but were invented after Java was born.
 
 Thanks to the six-monthly release of new OpenJDK versions, the architects and the community can continue adapting and evolving it. Maybe not as fast as some want, but OpenJDK has always focused on stability. Still, each new version brings new features that enable Java to be used in all modern use cases.
 

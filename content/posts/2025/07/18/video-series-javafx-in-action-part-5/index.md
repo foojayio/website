@@ -53,13 +53,13 @@ More info in this [blog post](https://webtechie.be/post/2025-03-20-jfxinaction-b
 
 [Gerrit Grunwald](https://www.linkedin.com/in/gerritgrunwald/) loves coding for around 40 years already. He is interested in desktop, mobile and IoT projects based on all possible technologies. But above all, he loves all-things-Java. He is the founder and leader of the Java User Group Münster (Germany), JavaOne rockstar and Java Champion. As Developer Advocate at Azul, he speaks a lot at conferences and user groups all around the world.
 
-In the video, we discuss some of the libraries Gerrit has created, but there are a lot more! Check his GitHub repositories and blog...
+In the video, we discuss some of the libraries Gerrit has created, but there are a lot more! Check his GitHub repositories and blog…
 
 * [GitHub repositories](https://github.com/HanSolo?tab=repositories)
   * [TilesFX](https://github.com/HanSolo/tilesfx): A JavaFX library containing tiles for Dashboards.
   * [Medusa](https://github.com/HanSolo/medusa): A JavaFX library for Gauges.
   * [Charts](https://github.com/HanSolo/charts): A library for scientific charts in JavaFX.
-  * and much more...
+  * and much more…
 * [Personal blog Harmonic Code](https://harmoniccode.blogspot.com/)
 * [Blog posts on Foojay.io](https://foojay.io/today/author/gerrit-grunwald/)
 

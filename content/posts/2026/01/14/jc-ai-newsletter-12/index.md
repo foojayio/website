@@ -17,10 +17,10 @@ categories:
   - "Performance"
   - "Research"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers"
   - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
-  - "jc-ai-newsletter-11"
 frozen: false
 ---
 
@@ -50,7 +50,7 @@ Let's jump in and **happy reading**!
 **desc.** : Applications developed for enterprise environments need to be rigorous, testable, and robust. The same is true for AI-powered applications, but LLMs can make this challenging. In other words, users need to be able to program with LLMs, not just tweak prompts. This talk covers why DSPy may be all users need when building applications with LLMs. Although the talk dives into some real-world examples, the audience is encouraged to explore the DSPy tool themselves to determine whether it fits their particular needs.  
 **category**: youtube
 
-**article** : [From Vibe Coding To Vibe Engineering -- Kitze, Sizzy](https://www.youtube.com/watch?v=JV-wY5pxXLo "From Vibe Coding To Vibe Engineering – Kitze, Sizzy")  
+**article** : [From Vibe Coding To Vibe Engineering – Kitze, Sizzy](https://www.youtube.com/watch?v=JV-wY5pxXLo "From Vibe Coding To Vibe Engineering – Kitze, Sizzy")  
 **authors** : AI Engineer, Ryan Florence  
 **date** : 2025-12-14  
 **desc.** : Web development has always moved in cycles of hype, from frameworks to tooling. With the rise of large language models, we're entering a new era of "vibe coding," where developers shape software through collaboration with Al rather than syntax. This talk explores what that means for the future of coding, especially in frontend development, and how it echoes the past while redefining what comes next.  

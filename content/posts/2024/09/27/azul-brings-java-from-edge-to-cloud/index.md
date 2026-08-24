@@ -59,7 +59,7 @@ Where Zulu shines on edge, desktop, and multiple platforms, Azul Zing Builds of 
 * **Smoother DevOps deployability at scale:** Solving the Java warmup problem on all Java versions with no code changes allows you to fully embrace reactive autoscaling and make more frequent CI/CD deployments of new features.
 * **Lower cloud cost**: Prime's higher carrying capacity, lower outliers, more efficient use of resources, and better scalability deliver the world's lowest cost for cloud services built on top of embedded device data.
 
-Quote **Jiří Holuša,**Sr. Product Manager -- Platform Prime
+Quote **Jiří Holuša,**Sr. Product Manager – Platform Prime
 
 *"Zing JVM has gone a long way from the original sweet spot of low-latency use cases where every millisecond matters," says Azul Senior Product Manager Jiří Holuša. "In the modern world of high cloud bills due to the waste of resources, Zing JVM also helps bring back efficiency and save tons of money as it allows you to compute more with the same resources. Success stories of customers getting 200%+ ROI on their investment into Azul Platform Prime and saving hundreds of thousands of dollars prove that improving resource utilization through the right JVM choice makes a lot of sense."*
 ![](azul-edge-quote.jpg)

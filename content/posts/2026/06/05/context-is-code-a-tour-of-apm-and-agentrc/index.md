@@ -214,7 +214,7 @@ require:
 
 Drop the file at `/.github/apm-policy.yml` and every repo in the org picks it up, no per-repo wiring. The CI gate is `apm audit --ci --policy org`, which runs all checks and renders findings on the PR.
 
-For incident response there are two documented bypass surfaces --- `apm install --no-policy` and `APM_POLICY_DISABLE=1` --- and they're loudly logged. Use them sparingly.
+For incident response there are two documented bypass surfaces — `apm install --no-policy` and `APM_POLICY_DISABLE=1` — and they're loudly logged. Use them sparingly.
 
 The architects' takeaway: **you can roll APM out org-wide without losing control over what agents load.**
 
@@ -268,7 +268,7 @@ Three personas, three flows:
 
 ## 12. How to start on Monday
 
-Six steps. Most teams should do steps 1--3 this week, 4--6 over the next quarter.
+Six steps. Most teams should do steps 1–3 this week, 4–6 over the next quarter.
 
 1. **Try it.** `curl -sSL https://aka.ms/apm-unix | sh`, then `apm install microsoft/apm-sample-package` on a throwaway repo.
 2. **Measure your repo.** `npx github:microsoft/agentrc readiness` gives you a maturity score and a list of missing context to add first.

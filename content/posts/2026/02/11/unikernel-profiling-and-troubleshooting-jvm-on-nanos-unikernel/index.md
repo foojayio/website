@@ -264,7 +264,7 @@ By:
 * Exposing the profiler port
 * Using a standard JVM (IBM Semeru OpenJ9)
 
-You can use JProfiler — or any JVMTI-based tool — without  
+You can use JProfiler --- or any JVMTI-based tool --- without  
 
 limitations.
 

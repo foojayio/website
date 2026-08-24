@@ -269,7 +269,7 @@ Next, if you take a look into MaterialDesign, you will also find a so-called [Sw
 
 So, the main idea is to copy all the .check-box related CSS entries and modify them in the way it's needed to create the Switch control.
 
-If you're wondering about the units in the CSS file (sometimes it's px, sometimes em, and you also find no units at all)---if you don't put units after a numeric value, px will be taken. If you define the unit using em, you are more resolution independent and you will find good explanations about these units when searching the web.
+If you're wondering about the units in the CSS file (sometimes it's px, sometimes em, and you also find no units at all)—if you don't put units after a numeric value, px will be taken. If you define the unit using em, you are more resolution independent and you will find good explanations about these units when searching the web.
 
 ***TIP:*** *If you write a cross platform JavaFX application (esp. when it should work on Windows and Mac) you should always use em as the unit for the fonts. The reason for that is that in JavaFX on Windows the default font-size is 12px (can change to 15px or 18px dependent on the screen DPI) and on MacOS the default is 13px. By using em as the unit for the font size you can work around the problem of having different font sizes on different platforms.*
 

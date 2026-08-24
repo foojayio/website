@@ -15,10 +15,10 @@ categories:
   - "Microservices"
   - "Spring"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 frozen: false
 ---
 
@@ -198,7 +198,7 @@ boxlang.view-resolver-order=1
 
 For the curious Java developer:
 
-* **Auto-configuration** registers via `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` --- the standard Spring Boot SPI.
+* **Auto-configuration** registers via `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` — the standard Spring Boot SPI.
 * **`BoxRuntime`** starts as a `SmartLifecycle` at phase `Integer.MIN_VALUE + 100`, ensuring it's ready before the first HTTP request hits.
 * **`BoxLangViewResolver`** resolves logical view names using `prefix + viewName + suffix`.
 * **`BoxLangView`** wraps `HttpServletRequest`/`HttpServletResponse` in a `SpringBoxHTTPExchange`, builds a `WebRequestBoxContext` (exposing all web scopes), injects the Spring `Model` into the `variables` scope, executes the template, and flushes to the response.

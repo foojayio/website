@@ -246,7 +246,7 @@ LangChain4J provides the interfaces `ContentRetriever` that you can implement. I
 * **WebSearchEngineContentRetriever**: the LLM turns the original prompt into a web search query and a number of search results are used as context
 * **SqlContentRetriever**: the LLM is given the database schema and turns the original prompt into SQL to retrieve information that will be used as context
 * **Neo4jContentRetriever**: the LLM is given the schema and turns the original prompt into Cypher (neo4j query) to retrieve information that will be used as context
-* **EmbeddingStoreContentRetriever**: to retrieve relevant fragments from all documents that we provide (text, excel, images, audio, ...).
+* **EmbeddingStoreContentRetriever**: to retrieve relevant fragments from all documents that we provide (text, excel, images, audio, …).
 
 The scope for building easy RAG and advance RAG using LangChain4J is beyond the scope of this article, but for this example we'll include a simple easy RAG using the configurable approach:
 

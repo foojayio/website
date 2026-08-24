@@ -59,7 +59,7 @@ class ContactsEndpoint {
 
 Hilla generates corresponding TypeScript types and accessor methods automatically.
 
-Any time somebody on your project changes the backend, they'll **catch breaking changes to frontend code at build time -- not in production**.
+Any time somebody on your project changes the backend, they'll **catch breaking changes to frontend code at build time – not in production**.
 
 **`ContactsList.tsx`**
 
@@ -94,7 +94,7 @@ export default function ContactsList() {
 
 **There are no REST endpoint URLs, no Swagger docs you need to read.** Your IDE helps you explore APIs through auto-complete, and ensure correct use with type checking.
 
-## One project, one build -- optimized for productivity
+## One project, one build – optimized for productivity
 
 Hilla speeds up development by having the frontend and backend code in the same project. There is only one build tool to run. The Maven build runs both the Spring Boot backend and a Vite dev server for the frontend.
 

@@ -107,7 +107,7 @@ It is important to establish a testing approach by asking the following question
   * Long runs with real (production) workloads are more likely to capture the pain you are trying to address.
 * Can the raw latency information be extracted from the individual transactions for the entire duration or specific duration (eg: for 3 hours after 45 min post-start-up)?
 * Are clear and measurable success criteria defined?
-  * Focus on what matters to your business, be it response times, SLAs, timeouts,... This is where you want improvements.
+  * Focus on what matters to your business, be it response times, SLAs, timeouts,… This is where you want improvements.
   * Enumerate the metrics (measurable properties) used to evaluate test outcomes.
 * Can the logs (GC, profile, etc.) be extracted post-run?
 * When evaluating ReadyNow: Can the application be restarted at certain intervals without losing the profile file from the previous run?

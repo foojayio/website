@@ -14,7 +14,7 @@ related_posts:
 frozen: false
 ---
 
-Every Java developer has been there. Something breaks, and the first instinct is to litter the code with `System.out.println(">>> HERE 1")`. Then `HERE 2`. Then `HERE 3 --- value is: " + x`. Rebuild. Rerun. Stare at the console. Repeat.
+Every Java developer has been there. Something breaks, and the first instinct is to litter the code with `System.out.println(">>> HERE 1")`. Then `HERE 2`. Then `HERE 3 — value is: " + x`. Rebuild. Rerun. Stare at the console. Repeat.
 
 We've been doing this for decades. And now, so have our AI agents.
 
@@ -24,7 +24,7 @@ What if the agent could just... use a real debugger?
 
 ## The JDK ships a perfectly good debugger. Nobody uses it.
 
-Every JDK installation since the beginning of time includes `jdb` --- the Java Debugger. It's a command-line tool that lets you set breakpoints, step through code, inspect variables, catch exceptions, and examine threads. It speaks the same JDWP protocol that IntelliJ and Eclipse use under the hood.
+Every JDK installation since the beginning of time includes `jdb` — the Java Debugger. It's a command-line tool that lets you set breakpoints, step through code, inspect variables, catch exceptions, and examine threads. It speaks the same JDWP protocol that IntelliJ and Eclipse use under the hood.
 
 And it's **purely text-based**, which makes it a perfect tool for AI agents that operate through terminal commands.
 
@@ -82,10 +82,10 @@ Then it provides concrete debugging workflow patterns — how to investigate a `
 
 To prove this wasn't just theoretical, we built a sample Swing application with four intentional bugs:
 
-1. **NullPointerException** --- `processMessage()` returns `null` for empty input
+1. **NullPointerException** — `processMessage()` returns `null` for empty input
 2. **Off-by-one error** — the warning counter always shows one less than actual
-3. **NullPointerException after clear** --- `warningHistory` is set to `null` instead of `.clear()`
-4. **StringIndexOutOfBoundsException** --- `text.substring(0, 3)` on input shorter than 3 characters
+3. **NullPointerException after clear** — `warningHistory` is set to `null` instead of `.clear()`
+4. **StringIndexOutOfBoundsException** — `text.substring(0, 3)` on input shorter than 3 characters
 
 Then we debugged it. In the same conversation session. With the agent driving JDB.
 

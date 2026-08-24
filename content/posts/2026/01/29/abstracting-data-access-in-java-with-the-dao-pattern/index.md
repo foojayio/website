@@ -552,7 +552,7 @@ Deleted product: Wireless Mouse
 
 One of the most important benefits of the DAO pattern is keeping business logic out of your data access code. Here's what you should avoid:
 
-**Bad practice**---business logic in the DAO:
+**Bad practice**—business logic in the DAO:
 
 ```
 // DON'T DO THIS
@@ -578,7 +578,7 @@ public void save(Product product) {
 }
 ```
 
-**Good practice**---clean separation:
+**Good practice**—clean separation:
 
 ```
 // In your service layer

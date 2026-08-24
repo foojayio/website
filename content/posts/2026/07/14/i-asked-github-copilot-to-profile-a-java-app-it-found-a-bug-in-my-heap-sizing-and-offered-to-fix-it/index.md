@@ -65,7 +65,7 @@ And crucially, it separated **config fixes** from the **durable code fix** : Buf
 ### Step 6 — It offered to run the experiment
 
 Instead of leaving me with a to-do list, Copilot proposed the next step:
-> "Rerun the identical 25s workload with -Xmx1g -XX:G1HeapRegionSize=4m... Want me to run experiment #1 now, or implement the buffer-reuse change first?"
+> "Rerun the identical 25s workload with -Xmx1g -XX:G1HeapRegionSize=4m… Want me to run experiment #1 now, or implement the buffer-reuse change first?"
 
 Analysis → hypothesis → experiment, all in one place.
 ![Article content](https://media.licdn.com/dms/image/v2/D5612AQEMVDQ0o1yl5A/article-inline_image-shrink_1500_2232/B56Z9dUycHHIAg-/0/1783977158867?e=1785369600&v=beta&t=uOsIwag965Lns2EU11goVOcYUFWQUm1Ds3Lfzbijydo) *Conclusion and follow up experiment*

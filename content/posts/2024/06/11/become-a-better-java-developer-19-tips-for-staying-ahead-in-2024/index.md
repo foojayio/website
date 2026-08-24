@@ -13,7 +13,7 @@ related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
   - "effective-coding-with-java-observability"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -57,7 +57,7 @@ Sorce; Reddit
     * The dependency tree is about 1/3rd the size for the same functionality, and Startup time is basically instantaneous
 12. Build a side project: If you're looking for projects to build, try <https://codingchallenges.fyi/> it's really good.
 13. Take observability seriously, and get familiarized with observability tools and techniques. Understand profiling, monitoring, tracing, and debugging. Explore tools like JVisualVM, JProfiler, and Continuous Feedback.
-14. Stay in touch with the community -- Java is a mature community with many Java champions who are very helpful. Solidarity and shared knowledge can boost your confidence.
+14. Stay in touch with the community – Java is a mature community with many Java champions who are very helpful. Solidarity and shared knowledge can boost your confidence.
 15. Find a JUG around your location and attend the meetups so you can get updates and also mingle with some awesome talented people.
 16. Read professional developer blogs and also follow these devs on social for updates. Here is a good list of 10 developer blogs related to Java and related topics: This article also contains some websites like Foojay and Digma which deliver high-quality content for developers.
 17. Follow influencers on social media like Piotr Mińkowski, a Solution Architect at Red Hat. He writes about Java, Spring, Kotlin, microservices, \& K8s. Also, Josh Long, a Spring Developer Advocate (@Java_Champions \& @Kotlin @GoogleDevExpert) @VMwareTanzu <https://YouTube.com/@coffeesoftware> for updates about Spring Boot.

@@ -31,7 +31,7 @@ It's all about collaboration, flexibility, and delivering value in small, tasty 
 
 ### Understanding Scrum
 
-Scrum is like a game with its own rules and players. It's anchored on principles like transparency, inspection, and adaptation. Imagine a GPS that reroutes you when you take a wrong turn -- that's Scrum! 🗺️
+Scrum is like a game with its own rules and players. It's anchored on principles like transparency, inspection, and adaptation. Imagine a GPS that reroutes you when you take a wrong turn – that's Scrum! 🗺️
 
 In Scrum, we have three main roles:
 
@@ -59,7 +59,7 @@ Remember, a bug today could become a monster tomorrow! 🐜👾
 
 ### Collaboration and Communication in Scrum
 
-In Scrum, communication and collaboration are your best friends. It's like being part of a band -- you need to listen to each other, play in harmony, and make beautiful music together (or in this case, software!).
+In Scrum, communication and collaboration are your best friends. It's like being part of a band – you need to listen to each other, play in harmony, and make beautiful music together (or in this case, software!).
 
 ### Estimation Techniques in Scrum
 
@@ -73,13 +73,13 @@ Change is the only constant in life, and Scrum takes this to heart. As a softwar
 
 ### Continuous Learning and Improvement in Scrum
 
-Scrum is all about learning and improving. It's like playing a video game -- with each level, you get better and stronger.
+Scrum is all about learning and improving. It's like playing a video game – with each level, you get better and stronger.
 
 Sprint Retrospectives are your opportunity to level up, identifying what worked, what didn't, and how you can improve. 🎮🆙
 
 ### References
 
-Start by familiarizing yourself with the \[[Scrum Guide](https://www.scrumguides.org/scrum-guide.html)\] -- it's your roadmap to everything Scrum.
+Start by familiarizing yourself with the \[[Scrum Guide](https://www.scrumguides.org/scrum-guide.html)\] – it's your roadmap to everything Scrum.
 
 Then, dive deeper with some great books like "Scrum: The Art of Doing Twice the Work in Half the Time" by Jeff Sutherland or "Essential Scrum: A Practical Guide to the Most Popular Agile Process" by Kenneth Rubin.
 
@@ -87,6 +87,6 @@ Join Scrum communities online, like the \[[Scrum Alliance](https://www.scrumalli
 
 ### Conclusion
 
-So, there you have it -- your guide to Scrum as a software engineer! Embrace Scrum, make it your own, and watch as your projects transform from to-do lists to done-and-dusted! 🎉🚀
+So, there you have it – your guide to Scrum as a software engineer! Embrace Scrum, make it your own, and watch as your projects transform from to-do lists to done-and-dusted! 🎉🚀
 
-Remember, Scrum is more than just a framework -- it's a mindset. So, get your Scrum cap on, and happy coding! 💡🧢
+Remember, Scrum is more than just a framework – it's a mindset. So, get your Scrum cap on, and happy coding! 💡🧢

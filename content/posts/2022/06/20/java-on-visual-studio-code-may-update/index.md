@@ -61,7 +61,7 @@ In May, we have a few things to highlight:
 
 When working with Gradle projects, it is quite common for a developer to repeatedly run some [tasks](https://docs.gradle.org/current/dsl/org.gradle.api.Task.html). To save developers time, we have now provided a feature that allows you to "pin" a task at the top of the project view so that it's easy to find the task and run it again. You can even pass it with an argument. Here is a demo of this feature.
 
-##### **Bug fixes -- Support Multi-level Projects and Chinese Encoding Issue**
+##### **Bug fixes – Support Multi-level Projects and Chinese Encoding Issue**
 
 An [issue](https://github.com/microsoft/vscode-gradle/issues/1194) was reported from the community that when our extension searches for a task in a multi-level project, it will duplicate the task indefinitely. This is because of the incorrect usage of a Gradle API call. We have [fixed](https://github.com/microsoft/vscode-gradle/pull/1224) this issue in our latest release.
 

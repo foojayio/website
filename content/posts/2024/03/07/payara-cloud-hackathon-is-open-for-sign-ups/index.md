@@ -41,18 +41,18 @@ Winners will be spotlighted across our platforms, earn money prizes, and present
 
 ## Awards
 
-* First Place -- £3,000
-* Second Place -- £2,000
-* Third Place -- £1,000
+* First Place – £3,000
+* Second Place – £2,000
+* Third Place – £1,000
 * Payara \& Eclipse Foundation Swag Bag for the **Top 10** contestants
 
 ## How to Enter?
 
 1. Fill in[the signup form on this page.](https://www.payara.fish/page/payara-hackathon-2024/) Make sure you enter all the data!
-2. You may want to join our informative webinar on the 8th of March -- [register here](https://us02web.zoom.us/webinar/register/WN_EWfDdM0jQeOIcqYOuXNbRA#/registration).
+2. You may want to join our informative webinar on the 8th of March – [register here](https://us02web.zoom.us/webinar/register/WN_EWfDdM0jQeOIcqYOuXNbRA#/registration).
 3. Make sure you familiarise yourself with Payara Cloud and Jakarta EE using some useful resources linked on this page.
-4. Create your free Payara Cloud account -- you will receive an email with the access link on Day 1 of the Hackathon, so look out for it on the 11th of March!
-5. You have up to 31 March midnight GMT to deploy your app to Payara Cloud and submit your entry details -- all final submission info will be emailed to you on Day 1 of the Hackathon.
+4. Create your free Payara Cloud account – you will receive an email with the access link on Day 1 of the Hackathon, so look out for it on the 11th of March!
+5. You have up to 31 March midnight GMT to deploy your app to Payara Cloud and submit your entry details – all final submission info will be emailed to you on Day 1 of the Hackathon.
 6. Winners will be notified via email and publically announced by the end of April 2024.
 
 [![](image-1024x576.png)](https://www.payara.fish/page/payara-hackathon-2024/)

@@ -1,5 +1,5 @@
 ---
-title: "BoxLang RSS : Full-Featured RSS/Atom Feed Module for BoxLang"
+title: "BoxLang RSS: Full-Featured RSS/Atom Feed Module for BoxLang"
 date: "2025-12-02T11:19:11+00:00"
 lastmod: "2025-12-02T11:44:24+00:00"
 description: "We're thrilled to announce the release of bx-rss, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to BoxLang!"
@@ -15,10 +15,10 @@ categories:
   - "Tutorials"
   - "Use Cases"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "idempotent-spring-boot-starter"
-  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
-  - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false
 ---
 

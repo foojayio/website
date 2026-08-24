@@ -60,7 +60,7 @@ To eliminate the context switching, we can pin our thread with a [thread affinit
 
 If you are using an event loop as part of an event driven architecture, the [event loops](https://en.wikipedia.org/wiki/Event_loop "event loops") can be used to read messages and dispatch messages to event handlers.
 
-"Building systems around an event-driven architecture (EDA) simplifies horizontal scalability in distributed computing models and makes them more resilient to failure." -- [Wikipedia](https://en.wikipedia.org/wiki/Event-driven_architecture "Wikipedia")
+"Building systems around an event-driven architecture (EDA) simplifies horizontal scalability in distributed computing models and makes them more resilient to failure." – [Wikipedia](https://en.wikipedia.org/wiki/Event-driven_architecture "Wikipedia")
 
 **6. Resource Utilization**
 
@@ -68,7 +68,7 @@ Resource utilisation is likely to be higher when using a single-threaded event l
 
 In summary, single-threaded event loops can still be scaled by striping the event handlers in their own event loop, which in turn is bound to its own core, each stripe runs independently.
 
-This approach can be applied to a wide range of use cases -- for example, the [Chronicle Matching Engine](https://chronicle.software/matching-engine/ "Chronicle Matching Engine") which has excellent performance and implementation simplicity, and we are able to scale by running any number of independent engines as needed to meet demand.
+This approach can be applied to a wide range of use cases – for example, the [Chronicle Matching Engine](https://chronicle.software/matching-engine/ "Chronicle Matching Engine") which has excellent performance and implementation simplicity, and we are able to scale by running any number of independent engines as needed to meet demand.
 
 ### Code Example
 

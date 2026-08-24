@@ -131,6 +131,6 @@ Here are the IntelliJ IDEA shortcuts that we used.
 * (blog) [Collaborating on open source](https://maritvandijk.com/collaborating-on-open-source/)
 * (video) [IntelliJ IDEA. Cloning a Project from GitHub](https://www.youtube.com/watch?v=aBVOAnygcZw)
 * (video) [IntelliJ IDEA. GitHub Pull Requests](https://www.youtube.com/watch?v=MoXxF3aWW8k)
-* (documentation) [JetBrains IntelliJ IDEA -- Fork GitHub projects](https://www.jetbrains.com/help/idea/fork-github-projects.html)
+* (documentation) [JetBrains IntelliJ IDEA – Fork GitHub projects](https://www.jetbrains.com/help/idea/fork-github-projects.html)
 
 {{< youtube xPOPjGbv_TY >}}

@@ -25,7 +25,7 @@ A JAR is just a collection of class files. To be executable, its `META-INF/MANIF
 Main-Class: path.to.MainClass
 ```
 
-In the above, `MainClass` has a `static main(String...​ args)` method.
+In the above, `MainClass` has a `static main(String…​ args)` method.
 
 ### Handling the Classpath
 
@@ -51,7 +51,7 @@ One way to solve those issues is to create a unique deployment unit that contain
 
 #### The Apache Assembly Plugin
 
-The Assembly Plugin for Maven enables developers to combine project output into a single distributable archive that also contains dependencies, modules, site documentation, and other files.--- [Apache Maven Assembly Plugin](https://maven.apache.org/plugins/maven-assembly-plugin/index.html)
+The Assembly Plugin for Maven enables developers to combine project output into a single distributable archive that also contains dependencies, modules, site documentation, and other files.— [Apache Maven Assembly Plugin](https://maven.apache.org/plugins/maven-assembly-plugin/index.html)
 
 One Maven design rule is to create one artifact per project. There are exceptions *e.g.*Javadocs artifacts and source artifacts, but in general, if you want multiple artifacts, you need to create one project per artifact. The idea behind the Assembly plugin is to work around this rule.
 
@@ -99,7 +99,7 @@ The first JAR has the same content as the one that would have been created witho
 java -jar target/executable-jar-0.0.1-SNAPSHOT.jar
 ```
 
-Depending on the project, it may execute successfully...​ or not. For example, it fails in the sample Spring Boot project with the following message:
+Depending on the project, it may execute successfully…​ or not. For example, it fails in the sample Spring Boot project with the following message:
 
 ```
 %d [%thread] %-5level %logger - %msg%n java.lang.IllegalArgumentException:
@@ -115,7 +115,7 @@ With Assembly, you can **exclude resources but not merge them**. When you need t
 
 The Assembly plugin is generic; the Shade plugin solely focuses on the task of creating self-contained JARs.
 
-This plugin provides the capability to package the artifact in an uber-jar, including its dependencies and to shade - i.e. rename - the packages of some of the dependencies.--- [Apache Maven Shade Plugin](https://maven.apache.org/plugins/maven-shade-plugin/index.html)
+This plugin provides the capability to package the artifact in an uber-jar, including its dependencies and to shade - i.e. rename - the packages of some of the dependencies.— [Apache Maven Shade Plugin](https://maven.apache.org/plugins/maven-shade-plugin/index.html)
 
 The plugin is based on the concept of *transformers*: each transformer is responsible to handle one single type of resource. A transformer can copy a resource as-is, append static content, merge it with others, etc.
 

@@ -37,7 +37,7 @@ See below sections for more detail.
 
 ### Upgrading
 
-Chronicle provides tools to assist in the upgrade from QuickFIX/J e.g. to automatically convert configuration from quickfix.ini to Chronicle's YAML format, and upgrades to Chronicle FIX are typically very smooth -- with one customer we helped them convert one of their applications in an afternoon.
+Chronicle provides tools to assist in the upgrade from QuickFIX/J e.g. to automatically convert configuration from quickfix.ini to Chronicle's YAML format, and upgrades to Chronicle FIX are typically very smooth – with one customer we helped them convert one of their applications in an afternoon.
 
 Chronicle FIX's code generator uses standard FIX XML files and generates clean, performance-optimised POJOs and byte-backed flyweights, for each message type.
 
@@ -51,7 +51,7 @@ Below see more details on Chronicle FIX features and attributes.
 
 Chronicle FIX has been built from the ground up by low latency experts to be as fast as possible and leverages many ingenious techniques and patterns, some of which we believe are unique in the industry.
 
-Chronicle FIX is trusted by some of the world's largest financial institutions, is deployed in all the major financial centres, and has proven to be efficient and scalable -- handling billions of FIX messages per week for some customers, and scaling out to 1000s of FIX sessions at others.
+Chronicle FIX is trusted by some of the world's largest financial institutions, is deployed in all the major financial centres, and has proven to be efficient and scalable – handling billions of FIX messages per week for some customers, and scaling out to 1000s of FIX sessions at others.
 
 The below diagram speaks for itself and shows Chronicle FIX multiple times faster than QuickFIX/J, with the ratio particularly noticeable at higher percentiles.
 
@@ -65,9 +65,9 @@ Once this has been parsed and delivered to the application, the time taken is sa
 
 ### HA/DR
 
-Chronicle FIX has support for transparent session failover for initiators and acceptors, with flexible configuration to allow the business to determine the level of risk -- the engine, for example, can be configured to only process messages that have been replicated to another host, another rack, or another data centre, depending on message type.
+Chronicle FIX has support for transparent session failover for initiators and acceptors, with flexible configuration to allow the business to determine the level of risk – the engine, for example, can be configured to only process messages that have been replicated to another host, another rack, or another data centre, depending on message type.
 
-We have customers who -- as part of their standard deployment process, failover between FIX engines in milliseconds with no message loss.
+We have customers who – as part of their standard deployment process, failover between FIX engines in milliseconds with no message loss.
 
 ![](Screen-Shot-2023-04-03-at-2.04.38-PM-1024x706.png)
 

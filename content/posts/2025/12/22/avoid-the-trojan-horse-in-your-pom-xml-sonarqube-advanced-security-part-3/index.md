@@ -1,5 +1,5 @@
 ---
-title: "Stop the trojan horse in your pom : SonarQube Advace Security"
+title: "Stop the trojan horse in your pom: SonarQube Advace Security"
 date: "2025-12-22T10:42:41+00:00"
 lastmod: "2025-12-22T10:42:43+00:00"
 description: "Your code is safe, but are your dependencies? Part 3 reveals how SonarQube Advanced Security detects hidden CVEs, manages licenses, and generates SBOMs to secure your Java supply chain."
@@ -79,7 +79,7 @@ You found the perfect library to resize images. You import it. It works. Six mon
 
 **The Solution:** **License Policy Management.**
 
-Not all open source is free to use however you want. Some licenses (like MIT or Apache) are permissive. Others (like GPL or AGPL) are "viral"---they can force you to share your source code.
+Not all open source is free to use however you want. Some licenses (like MIT or Apache) are permissive. Others (like GPL or AGPL) are "viral"—they can force you to share your source code.
 
 SonarQube Advanced Security scans your dependencies and allows you to define license policies to detect **License Risks**.
 
@@ -267,6 +267,6 @@ But... finding bugs is only half the battle. You still have to fix them. And let
 
 What if the tool could fix the code for you? What if your AI assistant actually knew your company's rules?
 
-That is the finale. Part 4: The AI Revolution -- AI CodeFix, MCP, and Remediation Agents.
+That is the finale. Part 4: The AI Revolution – AI CodeFix, MCP, and Remediation Agents.
 
 Stay tuned! 😉

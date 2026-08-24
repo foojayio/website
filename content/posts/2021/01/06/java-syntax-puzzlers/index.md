@@ -79,7 +79,7 @@ BlockStatement:
   Statement
 ```
 
-Taking a closer look at the definition of `Block`, we learn that they can contain statements (so far so good) but also...`ClassDeclaration`s. Now it gets interesting. Let's see how deep the rabbit hole goes.
+Taking a closer look at the definition of `Block`, we learn that they can contain statements (so far so good) but also…`ClassDeclaration`s. Now it gets interesting. Let's see how deep the rabbit hole goes.
 
 ```java
 public void howDeepCanWeGo() {

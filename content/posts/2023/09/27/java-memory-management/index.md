@@ -20,7 +20,7 @@ frozen: false
 
 In Java, memory management is an automatic process that is managed by the Java Virtual Machine (JVM), and one that does not need explicit intervention. Java, being a block-structured language, uses a model where its memory is divided into two main types: stack and heap.
 
-Local variables and method parameters use memory based on a 'stack'. This area of memory grows and shrinks automatically when a code block or method is entered or exited, respectively. In situations where a request is made to the system for an amount of memory, whose size is only known at runtime, or when creating an object, these requests are usually satisfied by an area of the process' memory known as 'dynamic memory' or the 'heap'. Strictly speaking -- there is an occasion when an object that may be destined for the heap is instead written to the stack, however we will leave this discussion for a later document.
+Local variables and method parameters use memory based on a 'stack'. This area of memory grows and shrinks automatically when a code block or method is entered or exited, respectively. In situations where a request is made to the system for an amount of memory, whose size is only known at runtime, or when creating an object, these requests are usually satisfied by an area of the process' memory known as 'dynamic memory' or the 'heap'. Strictly speaking – there is an occasion when an object that may be destined for the heap is instead written to the stack, however we will leave this discussion for a later document.
 
 These two memory areas are depicted below:
 

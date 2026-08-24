@@ -30,7 +30,7 @@ The RiskReducer insurance company provides insurance for commercial structures. 
 5. The policy is sent to underwriting to determine insurability and proposed rate.
 6. A final review by finance is done to ensure that the premiums are appropriate.
 
-Note that not all of these enrichment steps are occurring in the sequence shown above. Some may be happening in parallel and others may depend on prior steps. This gets even more complicated when we consider concurrency, workflow dependencies, etc...
+Note that not all of these enrichment steps are occurring in the sequence shown above. Some may be happening in parallel and others may depend on prior steps. This gets even more complicated when we consider concurrency, workflow dependencies, etc…
 
 ## Concurrency in data enrichment
 
@@ -62,8 +62,8 @@ If the updateOne did not update any documents, then we know that this policy has
 
 If different parts of the data can be enriched concurrently, then document structure can be used to determine if work is being done. Let's assume that both the Claims and Assets steps can be done concurrently. In this case, we can use the existence of sub-documents to determine if these steps have begun. When a document is created, neither the claims nor asset sub documents exist. They would be created upon the start of each of those tasks, resulting in the following document if both jobs start at roughly the same time:
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| { _id : '1234-5436-7896-5478', policyNum : 'C456789', year : 2025, claims : \[{...}, {...}\], -- Added at start of claims process assets : \[{...}, {...}\], - Added at start of asset process ...} |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| { _id : '1234-5436-7896-5478', policyNum : 'C456789', year : 2025, claims : \[{...}, {...}\], – Added at start of claims process assets : \[{...}, {...}\], - Added at start of asset process …} |
 
 Note that we'll still need the same optimistic locking construct here. It just looks a little different:
 
@@ -72,8 +72,8 @@ Note that we'll still need the same optimistic locking construct here. It just l
 
 It's entirely possible that a mix of both concurrent and sequential processing is needed. Typically, we can enforce this using an array or process indicators in the document:
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| { _id : '1234-5436-7896-5478', policyNum : 'C456789', year : 2025, enrichStatus: \[{step: 'claims', status: 'Complete'}, {step: 'assets', status: 'InProcess'}\] ...} |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| { _id : '1234-5436-7896-5478', policyNum : 'C456789', year : 2025, enrichStatus: \[{step: 'claims', status: 'Complete'}, {step: 'assets', status: 'InProcess'}\] …} |
 
 The status array above indicates that the Claims step is complete and the Assets step has been started but is still in process. The lack of any other status section in the array indicates that those steps have not been started yet. Each step of the enrichment process can use this array to track what's going on.
 
@@ -117,20 +117,20 @@ When data varies widely like this, we can store small data sets in-document and 
 
 Policy:
 
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| { _id : '1234-5436-7896-5478', policyNum : 'C456789', year : 2025, hasExtras: false, assets : \[ {id : 1, name : 'Carls Car wash location 1', ...}, {id : 2, name : 'Carls Car wash location 2', ...\], {id : 3, name : 'Carls Car wash location 3', ...}} |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| { _id : '1234-5436-7896-5478', policyNum : 'C456789', year : 2025, hasExtras: false, assets : \[ {id : 1, name : 'Carls Car wash location 1', …}, {id : 2, name : 'Carls Car wash location 2', …\], {id : 3, name : 'Carls Car wash location 3', …}} |
 
 However, if we're insuring a large number of assets, we'll need to reference these in a separate collection as they won't fit inside a single collection. We'll use the same flag to let the app know:
 
 Policy:
 
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| { _id : '1234-5436-7896-7123', policyNum : "C745603", year : 2025, hasExtras: true,assets : \[ {id : 1, name : 'Starbucks HQ', ...}, {id : 2, name : 'Safeway store 3456', ...\], {id : 3, name : 'Target 543', ...}}} |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| { _id : '1234-5436-7896-7123', policyNum : "C745603", year : 2025, hasExtras: true,assets : \[ {id : 1, name : 'Starbucks HQ', …}, {id : 2, name : 'Safeway store 3456', …\], {id : 3, name : 'Target 543', …}}} |
 
 Assets:
 
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| { _id : 'sbx0000000001, policyID : '1234-5436-7896-7123', name : 'Starbucks store 1', ...}...{ _id : 'sbx1000000000, policyID : '1234-5436-7896-7123', name : 'Starbucks store 1000000', ... } |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| { _id : 'sbx0000000001, policyID : '1234-5436-7896-7123', name : 'Starbucks store 1', …}…{ _id : 'sbx1000000000, policyID : '1234-5436-7896-7123', name : 'Starbucks store 1000000', … } |
 
 Be sure to keep the following in mind:
 

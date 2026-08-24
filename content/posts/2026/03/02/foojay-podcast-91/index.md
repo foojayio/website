@@ -57,7 +57,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * [LinkedIn](http://www.linkedin.com/showcase/intellijidea)
   * [Bluesky](https://bsky.app/profile/intellijidea.com)
   * [Twitter](https://twitter.com/intellijidea)
-* [Foojay Podcast #81: Maven 4 -- The Future of Java Build Automation](https://foojay.io/today/foojay-podcast-81/)
+* [Foojay Podcast #81: Maven 4 – The Future of Java Build Automation](https://foojay.io/today/foojay-podcast-81/)
 * [Command completion: IntelliJ IDEA with less shortcuts](https://foojay.io/today/command-completion-intellij-idea/)
 * [Video: IntelliJ IDEA: The Documentary \| \[OFFICIAL TRAILER\] \| Coming March 5th](https://www.youtube.com/watch?v=TwMXi6tDzLE)
 * [Introducing Mellum: JetBrains' New LLM Built for Developers](https://blog.jetbrains.com/blog/2024/10/22/introducing-mellum-jetbrains-new-llm-built-for-developers/)

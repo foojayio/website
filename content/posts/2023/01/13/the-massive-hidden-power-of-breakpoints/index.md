@@ -47,7 +47,7 @@ We can toggle the standard line breakpoint with control-F8 or alternatively on a
 
 Method breakpoints stop when we enter a method. You might think this is useless. Why not use a line breakpoint?
 
-You'd be right. Method breakpoints are much slower and you shouldn't use them: for this...  There is a use case for method breakpoints though.  
+You'd be right. Method breakpoints are much slower and you shouldn't use them: for this…  There is a use case for method breakpoints though.  
 
 Notice that because method breakpoints are so slow they are usually emulated by the IDE. It just uses line breakpoints to simulate method breakpoints. This is mostly seamless to us as users of the IDE but we need to know about it because in the past this wasn't the case. You can still find messages from users on StackOverflow complaining about the slowness of method breakpoints.
 
@@ -75,7 +75,7 @@ We can set a breakpoint to stop when an exception is thrown. But it's a bit of a
 
 The more valuable use case is catching all exceptions. The reason this is useful is that I sometimes might not look at the console while debugging. Exceptions might be logged there and I might miss them entirely. I might restart the debug session and might miss these exceptions. But if a breakpoint suddenly stops on an exception, that's hard to miss. The problem is that catching all exceptions is broken by default!  
 
-Unfortunately this is hard to show in a simple prime main application so I switched the demo to a simple spring boot application. The content of the application isn't important for this case. Let's enable catching any exception and see what happens...
+Unfortunately this is hard to show in a simple prime main application so I switched the demo to a simple spring boot application. The content of the application isn't important for this case. Let's enable catching any exception and see what happens…
 
 After enabling the the catch I try to continue but it instantly hits the breakpoint again and again and again. The code polls a WebService in a the background. That WebService is missing an HTTP header so the code that parses that header fails on a NumberFormatException. We're stuck on the code that throws that exception which is valid as Java didn't provide another way to parse numeric headers when that code was written.
 
@@ -95,7 +95,7 @@ Tracepoints or LogPoints are some of the most important types of breakpoints we 
 
 The suspend option is unchecked, notice that we can convert any breakpoint to a tracepoint by unchecking the suspend checkbox. By default a breakpoint breaks. It stops the current thread and suspends it so we can leisurely inspect the application stack and see what's going on. A tracepoint doesn't suspend the current thread. The application hits the breakpoint and then keeps on running without stopping. This is pretty groundbreaking, how do you step over?
 
-Well, you don't. Instead we can do several other things...
+Well, you don't. Instead we can do several other things…
 
 We can log the words "breakpoint hit" whenever we hit the breakpoint but this isn't that helpful unless we have only one tracepoint and only want to know if we reached that point. We can print a stack trace every time we reach the tracepoint which is more useful indeed. But not by much. It's hard to read a lot of traces in a list and follow through. What I want to focus on is something else.
 
@@ -137,7 +137,7 @@ Say this line breakpoint gets hit a lot by multiple instances but I only care ab
 
 I need to check the instance filter option then type in the object ID of the instance I want to filter. This will mean the breakpoint won't stop for other instance types. To apply this change I press done.
 
-At this point we can see the instance filter is still stopping at the breakpoint which is expected...
+At this point we can see the instance filter is still stopping at the breakpoint which is expected…
 
 So the next step is to change the instance filter to a different object instance. I'm making up a number since this is just for a test. Notice that when I right click the breakpoint I get a customized version of this dialog because we have an instance filter in place. This is a really neat feature of that makes the UI so much easier to work with.
 

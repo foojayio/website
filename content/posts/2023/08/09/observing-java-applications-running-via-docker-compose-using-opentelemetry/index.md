@@ -3,6 +3,7 @@ title: "Observing Java on Docker Compose Using OpenTelemetry"
 date: "2023-08-09T21:51:43+00:00"
 lastmod: "2023-08-09T21:55:39+00:00"
 description: "An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files."
+canonical: "https://digma.ai/blog/observing-java-application-running-via-docker-compose-using-opentelemetry/"
 authors:
   - "roni-dover"
 image: "doppleware_someone_watching_a_shipping_container_using_a_telesc_96929aa6-ccc4-478c-bffe-df76d290173e-1-1024x512-1.jpg"
@@ -126,7 +127,7 @@ The idea of Digma is to get [Continuous Feedback](https://digma.ai/blog/ci-cd-cf
 
 ### Now what?
 
-That's a great question. Getting data about your code is just the prerequisite, the important part is what to do with it --- how to transform it into something more meaningful than a science project. In a [previous](https://digma.ai/blog/coding-with-java-observability/) blog post, I wrote about this very question --- how to actually use observability data effectively to write better code. I also looked at a few code examples.
+That's a great question. Getting data about your code is just the prerequisite, the important part is what to do with it — how to transform it into something more meaningful than a science project. In a [previous](https://digma.ai/blog/coding-with-java-observability/) blog post, I wrote about this very question — how to actually use observability data effectively to write better code. I also looked at a few code examples.
 
 Let me know if you're using observability in your code, using these tools or different ones, and more importantly if you managed to effectively use it in dev!
 

@@ -89,7 +89,7 @@ Think of Payara Starter as a mirror image of the experience you've enjoyed in Sp
    * **Payara Micro** (lightweight, perfect for microservices)
 5. Pick the Java version you need
 6. Pick the **MicroProfile** specification you need, which will help you build cloud-native, resilient microservices with Jakarta EE
-7. Choose you deployment option -- if you want an intuitive, fully managed PaaS, opt for Payara Cloud
+7. Choose you deployment option – if you want an intuitive, fully managed PaaS, opt for Payara Cloud
 8. Search for an Entity Relationship Diagram (ERD) as the backbone of your application  
    (Optional) Open the AI-enriched Diagram Builder \& Live Preview to adjust the structure based on your needs
 9. Download your generated project as .war file

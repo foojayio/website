@@ -26,7 +26,7 @@ So, this is a bit of a special edition of the Foojay Podcast as it's also availa
 
 An experiment that brought me great pleasure. I hope you like it too!
 
-So... let's time travel and get back to Utrecht when I got the organizers before the camera just minutes before the first guests arrived!
+So… let's time travel and get back to Utrecht when I got the organizers before the camera just minutes before the first guests arrived!
 
 ### Video
 

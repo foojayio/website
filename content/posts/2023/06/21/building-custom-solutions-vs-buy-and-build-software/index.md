@@ -52,9 +52,9 @@ When it comes to the FIX protocol, you have to be careful, as it turns out to be
 
 Back again to the coding. The first challenge was to get past the login phase; it looked like this login message was mandatory! Over time, I managed to put together enough of a login message that the other end came back with a login reply, but it was not long before my colleagues started taunting me, "Why don't you just use [Quick/FIX4J?](https://www.quickfixj.org/ "Quick/FIX4J?")"
 
-Saving face and trying not to show that I knew nothing about QuickFIX, I quietly down my I.D.E. and jumped back onto the web browser. While doing a bit of research about QuickFIX; I was thinking -- "perhaps using this open-source library could be simpler than implementing it all myself", or "maybe it's going to take me longer to understand how to use this library."
+Saving face and trying not to show that I knew nothing about QuickFIX, I quietly down my I.D.E. and jumped back onto the web browser. While doing a bit of research about QuickFIX; I was thinking – "perhaps using this open-source library could be simpler than implementing it all myself", or "maybe it's going to take me longer to understand how to use this library."
 
-The library was extensive, and they clearly put a lot of work into it, but I was overwhelmed by how complicated it all looked -- does it really need to be like this?
+The library was extensive, and they clearly put a lot of work into it, but I was overwhelmed by how complicated it all looked – does it really need to be like this?
 
 At the time, I was working alongside a team of developers that I looked up to; these guys stood by the "No code is the fastest code" mantra; everything they wrote was super optimal; they would work with raw byte buffers rather than create unwanted objects, and their java code looked more like 'C' code than any java I had ever seen before.
 

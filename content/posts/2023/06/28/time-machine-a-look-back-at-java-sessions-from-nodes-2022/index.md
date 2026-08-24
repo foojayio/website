@@ -92,7 +92,7 @@ Dmitriy wraps up with some resources and ways to stay up-to-date on the driver r
 
 [Gerrit Meier's presentation](https://www.youtube.com/watch?v=r8rvWrTfmE4&list=PL9Hl4pk2FsvWPcphew_GbLjCWvMpmh4mV&index=101) dove into testing Java applications with Testcontainers.
 
-We started with a definition of integration testing, then took a look at the typical methods of testing --- using an embedded instance, a local instance, a remote instance, or a docker container. Gerrit covered some pros and cons of each, but they still lacked some level of resiliency, flexibility, or consistency. Enter Testcontainers, which utilize tools and processes we are already familiar with and remove some of the hassles of other solutions.
+We started with a definition of integration testing, then took a look at the typical methods of testing — using an embedded instance, a local instance, a remote instance, or a docker container. Gerrit covered some pros and cons of each, but they still lacked some level of resiliency, flexibility, or consistency. Enter Testcontainers, which utilize tools and processes we are already familiar with and remove some of the hassles of other solutions.
 
 ![Creating a Neo4j Testcontainer](nodes2022-testcontainers.png)
 

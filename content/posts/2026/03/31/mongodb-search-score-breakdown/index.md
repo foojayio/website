@@ -16,8 +16,6 @@ related_posts:
   - "mongodb-sharding-what-to-know-before-you-shard"
   - "power-your-ai-application-with-vector-search"
 frozen: false
-aliases:
-  - "/today/atlas-search-score-breakdown/"
 ---
 
 Full-text search powers all of our digital lives — googling for this and that; asking Siri where to find a tasty, nearby dinner; shopping at Amazon; and so on. We receive relevant results, often even in spite of our typos, voice transcription mistakes, or vaguely formed queries. We have grown accustomed to expecting the best results for our searching intentions, right there, at the top.
@@ -118,7 +116,7 @@ These stats lurk in the depths of the Lucene index structure and surface visibly
 
 ## Lucene scoring
 
-The statistics captured during indexing factor into how documents are scored at query time. [Lucene scoring](https://lucene.apache.org/core/9_5_0/core/org/apache/lucene/search/package-summary.html#scoring), at its core, is built upon [TF/IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) --- term frequency/inverse document frequency. Generally speaking, TF/IDF scores documents with higher term frequencies greater than ones with lower term frequencies, and scores documents with more common terms lower than ones with rarer terms — the idea being that a rare term in the collection conveys more information than a frequently occurring one and that a term's weight is proportional to its frequency.
+The statistics captured during indexing factor into how documents are scored at query time. [Lucene scoring](https://lucene.apache.org/core/9_5_0/core/org/apache/lucene/search/package-summary.html#scoring), at its core, is built upon [TF/IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) — term frequency/inverse document frequency. Generally speaking, TF/IDF scores documents with higher term frequencies greater than ones with lower term frequencies, and scores documents with more common terms lower than ones with rarer terms — the idea being that a rare term in the collection conveys more information than a frequently occurring one and that a term's weight is proportional to its frequency.
 
 There's a bit more math behind the scenes of Lucene's implementation of TF/IDF, to dampen the effect (e.g., take the square root) of TF and to scale IDF (using a logarithm function).
 

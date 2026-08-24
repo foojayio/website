@@ -120,7 +120,7 @@ Once you have a few commits under your belt, and become an OpenJDK author, you h
 
 If you end up having an issue, the details of the test run in the PR will hopefully be enough to sort it out. If not, you can run `mvn verify` locally and look at the test logs. If it is formatting, then check if the formatting problem was in core or not, and either run `mvn spotless:apply` in core or in the root of the project.
 
-## Skara -- the OpenJDK Git Tooling
+## Skara – the OpenJDK Git Tooling
 
 Skara is the project name for the tooling around developing OpenJDK on Git(Hub). It actually insulates a lot of the GitHub specifics, making it possible, should the need ever arise, to move the development and development process somewhere else. The project also contains the aforementioned bot that helps, for example, to verify that there is a related JBS issue, and that there is a signed OCA. Skara also contains some useful git extensions which make working with OpenJDK on GitHub smoother.
 
@@ -159,7 +159,7 @@ To sync your fork with upstream and pull the changes:
 git sync –pull
 ```
 
-> **Note:** if the sync fails with the error message "No remote provided to fetch from, please set the --from flag", remember to set the remote for your repo, e.g.
+> **Note:** if the sync fails with the error message "No remote provided to fetch from, please set the –from flag", remember to set the remote for your repo, e.g.
 >
 > `git remote add upstream https://github.com/openjdk/jmc`
 
@@ -186,17 +186,17 @@ So, the normal workflow when working with OpenJDK JMC using the Skara tooling be
 
 1. (Optional) Sync up your fork with upstream:  
 
-   `git sync --pull`  
+   `git sync –pull`  
 2. Create a branch to work on, with a name you pick, typically related to the work you plan on doing:  
 
-   `git checkout --b <branchname>`  
+   `git checkout –b <branchname>`  
 3. Make your changes / fix your bug / add amazing stuff  
 4. (Optional) Run jcheck locally:  
 
    `git jcheck local`  
 5. Push your changes to the new branch on your fork:  
 
-   `git publish` (which is pretty much `git push --set-upstream origin <branchname>`)  
+   `git publish` (which is pretty much `git push –set-upstream origin <branchname>`)  
 6. Create the PR, either on GitHub, or from the command line:  
 
    `git pr create`
@@ -227,7 +227,7 @@ The [jmc-tutorial](https://github.com/thegreystone/jmc-tutorial) is a good resou
 
 * Contributing to OpenJDK is easier than ever before now that it's on GitHub.
 * [Skara](https://wiki.openjdk.java.net/display/SKARA) makes it even easier.
-* It's [Hacktoberfest](https://hacktoberfest.digitalocean.com/) -- commits to the JMC project (and related repos) count!
+* It's [Hacktoberfest](https://hacktoberfest.digitalocean.com/) – commits to the JMC project (and related repos) count!
 * JBS is a good source for [JMC starter bugs](https://bugs.openjdk.java.net/secure/Dashboard.jspa?selectPageId=19538).
 * If you need any help, the JDK Mission Control slack is a good place for asking questions! Ping [me](https://twitter.com/hirt) or any of the [JMC folks](https://openjdk.java.net/census#jmc) for an invite.
 * Finally, here's a practical guide to OpenJDK projects and the roles:  

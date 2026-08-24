@@ -14,10 +14,8 @@ related_posts:
   - "effective-coding-with-java-observability"
   - "journeys-in-java-level-10-service-discovery-with-eureka"
   - "observability-is-cultural"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
-aliases:
-  - "/today/writting-a-data-orchestrator-in-java/"
 ---
 
 **A data orchestrator is a platform to schedule, organize, and monitor data-oriented workflows. A workflow is a set of tasks, most data orchestrators come with built-in tasks for a wide range of technologies and provide support for custom processing via a scripting language. A data orchestrator can have multiple types of triggers to start a workflow.**
@@ -80,7 +78,7 @@ Plugins can be used to extend Kestra's:
 * Internal storage
 * Flow tasks
 * Flow triggers
-* Trigger conditions (used to restrict triggering a flow on some conditions like a specific day in a week, state of a flow execution, ...)
+* Trigger conditions (used to restrict triggering a flow on some conditions like a specific day in a week, state of a flow execution, …)
 * Secrets manager
 * Task runner (used to run an embedded script in Docker, Kubernetes or Cloud platform runner)
 * Even the API can be extended by providing additional Micronaut controllers!
@@ -108,8 +106,8 @@ Kestra takes advantage of the Java ecosystem:
 * Huge ecosystem of libraries that support almost everything related to data.
 * Java libraries and drivers are often the reference implementation, so the first to be updated with the best functionality coverage.
 * JDBC (Java Database Connectivity) makes it easy to support tens of databases.
-* Docker support, Kubernetes support, popular Cloud services support, ...
-* Multiple data formats are supported: JSON, AVRO, Parquet, CSV, XML, ...
+* Docker support, Kubernetes support, popular Cloud services support, …
+* Multiple data formats are supported: JSON, AVRO, Parquet, CSV, XML, …
 
 Kestra takes advantage of the JVM:
 
@@ -120,7 +118,7 @@ Kestra takes advantage of the JVM:
 
 The JVM is a robust platform widely known by operational teams. It is present already in a lot of IT departments so running Kestra is usually not a big deal for enterprises already running JVMs in their infrastructure.
 
-We provide everything that operation teams are used to: logs, metrics, liveness and readiness check, Helm charts, ...
+We provide everything that operation teams are used to: logs, metrics, liveness and readiness check, Helm charts, …
 
 Moreover, thanks to its build once, run everywhere principle, Kestra can run in a lot of different environments without needing any complex compilation or installation steps.
 

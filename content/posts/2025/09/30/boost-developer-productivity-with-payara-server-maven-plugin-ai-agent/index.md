@@ -52,7 +52,7 @@ The AI Agent listens to natural language queries typed in your terminal. Instead
 
 It interprets your questions, queries internal APIs (JMX, domain.xml, logs, etc.), and responds intelligently. Perfect for speeding up diagnostics and reducing context switching.
 
-## Demo #1 -- Memory \& Threads, in Plain English
+## Demo #1 – Memory \& Threads, in Plain English
 
 In the first clip below, I ran the mvn payara-server:dev goal and started typing natural queries into the CLI:
 
@@ -69,7 +69,7 @@ No need to dig through JMX or logs manually. The AI Agent fetches and summarizes
 
 {{< img src="https://blog.payara.fish/hs-fs/hubfs/AIAgent2.gif?width=2067&height=1119&name=AIAgent2.gif" class="size-medium" width="1378" height="746" >}}
 
-## Demo #2 -- JDBC, JMX, and JMS Made Easy
+## Demo #2 – JDBC, JMX, and JMS Made Easy
 
 In the second demo, I explored resource management features:
 

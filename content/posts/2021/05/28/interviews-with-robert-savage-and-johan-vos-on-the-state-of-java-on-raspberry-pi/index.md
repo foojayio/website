@@ -23,7 +23,7 @@ frozen: false
 > This post is part of an [article published (in German) in Java Magazine](https://kiosk.entwickler.de/java-magazin/java-magazin-6-2021/status-quo-und-expertenstimmen/).
 > You can get a 25% discount for a new kiosk subscription with the following code: delporte_kiosk25
 
-Here on Foojay.io, you can find already [a long list of articles about Java on the Raspberry Pi](https://foojay.io/today/category/raspberry-pi/). As you may know, already I'm a big fan of this combination. The Raspberry Pi on one side is a very cheap computer that allows you to experiment with electronic components thanks to the Pi4J library. And on the other hand, JavaFX is the ideal framework to build user interfaces that can directly control these components, all in one application!
+Here on Foojay.io, you can find already [a long list of articles about Java on the Raspberry Pi](https://foojay.io/today/category/java/embedded/raspberry-pi/). As you may know, already I'm a big fan of this combination. The Raspberry Pi on one side is a very cheap computer that allows you to experiment with electronic components thanks to the Pi4J library. And on the other hand, JavaFX is the ideal framework to build user interfaces that can directly control these components, all in one application!
 
 But maybe you don't have / want to believe me? So let's ask two experts what they think is the future of [#JavaOnRaspberryPi](https://twitter.com/search?q=%23JavaOnRaspberryPi&src=typed_query).
 
@@ -58,7 +58,7 @@ Java is a very capable and widely adopted language in the commercial world and h
 
 **The Pi4J project is fully open-source and totally free. How do you manage to combine this with your professional and personal life?**
 
-When I started the Pi4J project, there were a lot of synergies with my professional life and was at a time in my life prior to having children where I could burn the midnight oil without too many consequences/repercussions. In the past couple of years committing the time needed to the project has become more difficult due to kids and trying to find a better work-life balance. I still very much enjoy working on the project and enjoy getting my hands dirty — but time is a bit more difficult to find. That is why I'm thankful that others have stepped in with a renewed interest in helping to move the project forward. We are trying to position the next version of Pi4J so that it's a more community-led and driven effort and I'm not an obstacle or gatekeeper to forward progress.
+When I started the Pi4J project, there were a lot of synergies with my professional life and was at a time in my life prior to having children where I could burn the midnight oil without too many consequences/repercussions. In the past couple of years committing the time needed to the project has become more difficult due to kids and trying to find a better work-life balance. I still very much enjoy working on the project and enjoy getting my hands dirty --- but time is a bit more difficult to find. That is why I'm thankful that others have stepped in with a renewed interest in helping to move the project forward. We are trying to position the next version of Pi4J so that it's a more community-led and driven effort and I'm not an obstacle or gatekeeper to forward progress.
 
 **The Java world is now quickly evolving thanks to the 6-month release cycle and the new features that are being added. Do you see a match here with embedded programming?**
 

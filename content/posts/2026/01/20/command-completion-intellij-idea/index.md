@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-How many shortcuts can you remember? Three? Five? More? I try to learn as many as I can and still forget some of them...
+How many shortcuts can you remember? Three? Five? More? I try to learn as many as I can and still forget some of them…
 
 What if you could unlock IntelliJ IDEA features, without having to remember shortcuts? You can still use shortcuts if you want. But you don't ***have***to.
 

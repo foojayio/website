@@ -35,7 +35,7 @@ But there are other ways. Tools like Lightrun are active in their observability,
 
 ## Observability isn't Pillars
 
-I've been guilty of listing the pillars of observability just as much as the next guy. They're even in my book (sorry). To be fair, I also discussed what observability **really** means...
+I've been guilty of listing the pillars of observability just as much as the next guy. They're even in my book (sorry). To be fair, I also discussed what observability **really** means…
 
 Observability means we can ask questions about our system and get answers or at least have a clearly defined path to get those answers. Sounds simple when running locally, but when you have a sophisticated production environment and someone asks you: is anyone even using that block of code?
 
@@ -79,7 +79,7 @@ If you use Digma you can see that right away. OpenTelelbery already collected th
 
 ## Enough Exposition
 
-I know, I go on... Let's get to the meat and potatoes of why this rocks. Notice that this is a demo, when running locally the benefits are limited. The true value of these tools is in understanding production, still they can provide a lot of insight even when running locally and even when running tests.
+I know, I go on… Let's get to the meat and potatoes of why this rocks. Notice that this is a demo, when running locally the benefits are limited. The true value of these tools is in understanding production, still they can provide a lot of insight even when running locally and even when running tests.
 
 Digma has a simple and well-integrated setup wizard for IntelliJ/IDEA. You need to have Docker Desktop running for setup to succeed. Note that you don't need to run your application using Docker, this is simply for the Digma server process where they collect the execution details.
 

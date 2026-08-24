@@ -3,6 +3,7 @@ title: "Understand Source Code – Deep into the Codebase, Locally & Production"
 date: "2022-07-01T07:17:53+00:00"
 lastmod: "2022-07-22T14:24:50+00:00"
 description: "Learn a new codebase by diving into it with debuggers to understand the full extent of internal semantics and interactions in the project."
+canonical: "https://lightrun.com/tutorials/understand-source-code-deep-into-the-codebase-locally-and-in-production/"
 authors:
   - "shai-almog"
 image: "Code-exploration.png"
@@ -20,11 +21,11 @@ Say you have a new code base to study or picked up an open source project. You m
 
 It doesn't matter!
 
-With completely new source code repositories, we still know nothing...
+With completely new source code repositories, we still know nothing…
 
 The seasoned senior might have a leg up in finding some things and recognizing patterns. But none of us can read and truly follow a project with 1M+ lines of code. We look over the docs, which in my experience usually have only passing resemblance to the actual codebase. We segregate and assume about the various modules, but picking them up is hard.
 
-We use IDE tools to search for connections, but this is really hard. It's like following a yarn thread after an army of cats had its way with it...
+We use IDE tools to search for connections, but this is really hard. It's like following a yarn thread after an army of cats had its way with it…
 
 As a consultant for over a decade, I picked up new client projects on a weekly basis. In this post, I'll describe the approach I used to do that and how I adapted this approach further at Lightrun.
 
@@ -117,13 +118,13 @@ Thankfully, we have [tracepoints](https://talktotheduck.dev/basics-of-breakpoint
 
 ![](image-5-680x510.png)
 
-## What's Going on in Production -- AKA "Reality Coverage"
+## What's Going on in Production – AKA "Reality Coverage"
 
 This works great for "simple" systems. But there are platforms and settings in our industry that are remarkably hard to reproduce in a debugger. Knowledge about the way our code works locally is one thing. The way it works in production is something completely different.
 
 Production is the one thing that really matters and in multi-developer projects, it's really hard to evaluate the gap between production and assumption.
 
-We call this reality coverage. E.g. you can get 80% coverage in your tests. But if your coverage is low on classes that are heavily accessed in your source code repository... Then the QA might be less effective. We can study the repo over and over. We can use every code analysis tool and setting. But they won't show us the two things that really matter:
+We call this reality coverage. E.g. you can get 80% coverage in your tests. But if your coverage is low on classes that are heavily accessed in your source code repository… Then the QA might be less effective. We can study the repo over and over. We can use every code analysis tool and setting. But they won't show us the two things that really matter:
 
 Is this actually used in production?
 
@@ -149,7 +150,7 @@ If you want to understand where to focus your energies first, the counter is pro
 
 We often look at a statement and make various assumptions. When the code is new to us, these assumptions might be pivotal to our understanding of the code. A good example is something like most of the users who use this feature have been with the system for a while and should be familiar with it.
 
-You can test that with conditional statements that you can attach to any action (logs, counters, snapshots, etc.). As a result, we can use a condition like `user.signupDate.getMillis() < ...`.
+You can test that with conditional statements that you can attach to any action (logs, counters, snapshots, etc.). As a result, we can use a condition like `user.signupDate.getMillis() < …`.
 
 You can add this to a counter and literally count the users that don't match your expectations.
 
@@ -157,7 +158,7 @@ You can add this to a counter and literally count the users that don't match you
 
 I think it's obvious how injecting a log in runtime can make a vast difference to understanding our system. But in production, this comes at a price. I'm studying the system while looking at the logs and all my "methodX reached with value Y" logs add noise to our poor DevOps/SRE teams.
 
-We can't have that. Studying something should be solitary, but by definition, production is the exact opposite of that...
+We can't have that. Studying something should be solitary, but by definition, production is the exact opposite of that…
 
 With [piping](https://docs.lightrun.com/logs/#configure-piping) we can log everything locally to the IDE and spare everyone else the noise. Since the logic is sandboxed, there will be no overhead if you log too much. So go wild!
 

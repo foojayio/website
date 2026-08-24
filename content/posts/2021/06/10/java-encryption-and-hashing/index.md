@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-If you need to store sensitive data in your system, you have to be sure that you have proper encryption in place. First of all, you need to decide what kind of encryption you need ---for instance, symmetric or asymmetric. Also, you need to choose how secure it needs to be. Stronger encryption takes more time and consumes more CPU. The most important part is that you don't need to implement the encryption algorithms yourself. Encryption is hard and a trusted library solves encryption for you.
+If you need to store sensitive data in your system, you have to be sure that you have proper encryption in place. First of all, you need to decide what kind of encryption you need —for instance, symmetric or asymmetric. Also, you need to choose how secure it needs to be. Stronger encryption takes more time and consumes more CPU. The most important part is that you don't need to implement the encryption algorithms yourself. Encryption is hard and a trusted library solves encryption for you.
 
 If, for instance, we want to encrypt something like credit card details, we probably need a two-way encryption algorithm, because we need to be able to retrieve the original number. Say we use the Advanced Encryption Standard (AES), which is currently the standard symmetric encryption algorithm for US federal organizations. To encrypt and decrypt, there is no reason to deep-dive into low-level Java crypto. We recommend that you use a library that does the heavy lifting for you. For example, [Google Tink](https://github.com/google/tink).
 

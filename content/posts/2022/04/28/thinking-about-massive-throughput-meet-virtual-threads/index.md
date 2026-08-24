@@ -157,7 +157,7 @@ An additional extension that is related to the upcoming Virtual Thread are Java 
 
 There may be some potential drawbacks. One is related to the fact that VirtualThread is planned to use a common thread pool, the thread pool also used by other processes running in the JVM, such as the ForkJoin framework (Image 1.). This may hypothetically cause an out of memory exception in an attempt to allocate a thread stack or turn the application into thread starving.
 
-Another challenge is a potential incompatibility with existing concurrency code as for example the ThreadGroup always returns the value "*VirtualThreads*" but the fact is that it can not be destroyed, resumed or stopped. Those methods aways cause an exception. ThreadMXBean is intended to be used only for platform threads and some other...
+Another challenge is a potential incompatibility with existing concurrency code as for example the ThreadGroup always returns the value "*VirtualThreads*" but the fact is that it can not be destroyed, resumed or stopped. Those methods aways cause an exception. ThreadMXBean is intended to be used only for platform threads and some other…
 
 ## Conclusion
 

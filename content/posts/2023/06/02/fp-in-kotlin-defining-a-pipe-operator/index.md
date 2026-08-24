@@ -76,7 +76,7 @@ Where:
   **operator argument** . So, we have:
   * The constant (LHS) is given by `X`.
   * The function (RHS) to be applied is given by `f:X \to Y`.
-* `---` **returns** `Y` ---result of applying
+* `---` **returns** `Y` —result of applying
 
 ```
 f

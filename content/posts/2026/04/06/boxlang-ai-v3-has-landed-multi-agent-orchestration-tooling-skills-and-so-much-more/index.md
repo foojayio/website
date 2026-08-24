@@ -72,7 +72,7 @@ agent.activateSkill( "sql-style" )
 And if you want certain skills available to *every* agent in your application without explicitly passing them:
 
 ```js
-// In Application.bx --- every agent inherits these automatically
+// In Application.bx — every agent inherits these automatically
 aiGlobalSkills().add( aiSkill( ".ai/skills/company-tone/SKILL.md" ) )
 aiGlobalSkills().add( aiSkill( ".ai/skills/security-policy/SKILL.md" ) )
 ```
@@ -109,21 +109,21 @@ The agent's system prompt is automatically updated so the LLM knows which tools 
 
 ## 🗄️ Global AI Tool Registry
 
-New in 3.0: a module-scoped **Global Tool Registry** accessible via the `aiToolRegistry()` BIF. Register tools by name once — in `Application.bx` or `ModuleConfig.bx` --- and reference them as plain strings anywhere in your codebase.
+New in 3.0: a module-scoped **Global Tool Registry** accessible via the `aiToolRegistry()` BIF. Register tools by name once — in `Application.bx` or `ModuleConfig.bx` — and reference them as plain strings anywhere in your codebase.
 
 ```js
 // Register once
 aiToolRegistry().register( "searchProducts", productSearchTool )
 aiToolRegistry().register( "getWeather@myapp", weatherTool )
 
-// Reference by name anywhere --- no live object references needed
+// Reference by name anywhere — no live object references needed
 result = aiChat(
     "Find wireless headphones under $50",
     { tools: [ "searchProducts", "getWeather@myapp" ] }
 )
 ```
 
-Module namespacing (e.g. `now@bxai`) keeps registrations collision-free across modules. Two new interception points --- `onAIToolRegistryRegister` and `onAIToolRegistryUnregister` --- give you hooks for auditing and lifecycle management.
+Module namespacing (e.g. `now@bxai`) keeps registrations collision-free across modules. Two new interception points — `onAIToolRegistryRegister` and `onAIToolRegistryUnregister` — give you hooks for auditing and lifecycle management.
 
 ## 🔧 Tool System Overhaul
 
@@ -143,8 +143,8 @@ searchTool = aiTool(
 
 Two **built-in core tools** ship with the module:
 
-* `now@bxai` --- **auto-registered on module load**, returns the current date/time in ISO 8601. Every agent gets temporal awareness for free, with no configuration.
-* `httpGet` --- opt-in only (not auto-registered for security), fetches any URL via HTTP GET.
+* `now@bxai` — **auto-registered on module load**, returns the current date/time in ISO 8601. Every agent gets temporal awareness for free, with no configuration.
+* `httpGet` — opt-in only (not auto-registered for security), fetches any URL via HTTP GET.
 
 `now@bxai` being auto-registered is worth calling out. No major AI framework ships built-in tools out of the box. This is a genuine differentiator — your agents just *know what time it is* without any wiring on your part.
 
@@ -200,7 +200,7 @@ agent = aiAgent( "weather-bot", middleware: new FlightRecorderMiddleware( mode: 
 agent.run( "What is the weather in London?" )
 // → Writes: .ai/flight-recorder/weather-bot-<timestamp>.json
 
-// Replay in CI --- no live calls, fully deterministic
+// Replay in CI — no live calls, fully deterministic
 agent = aiAgent(
     "weather-bot",
     middleware: new FlightRecorderMiddleware(
@@ -228,8 +228,8 @@ sharedMemory.getAll( userId: "alice", conversationId: "conv-1" )
 
 * 🤗 **HuggingFace Embeddings** — new `huggingface` provider for the HuggingFace Inference API
 * 🔀 **Custom Service URLs** — all senders now accept a `baseUrl` override for proxies, self-hosted endpoints, and OpenAI-compatible APIs
-* 🏗️ **`BaseService` → `OpenAIService` split** --- `BaseService` is now truly provider-agnostic, making custom provider implementations much cleaner
-* 🐛 **Streaming event fixes** --- `beforeAIModelInvoke`/`afterAIModelInvoke` events were not firing for streaming; fixed
+* 🏗️ **`BaseService` → `OpenAIService` split** — `BaseService` is now truly provider-agnostic, making custom provider implementations much cleaner
+* 🐛 **Streaming event fixes** — `beforeAIModelInvoke`/`afterAIModelInvoke` events were not firing for streaming; fixed
 * 🐛 **MCP `requestId` null crash** — fixed a crash on JSON-RPC notifications that intentionally omit `id`
 
 ## No Breaking Changes

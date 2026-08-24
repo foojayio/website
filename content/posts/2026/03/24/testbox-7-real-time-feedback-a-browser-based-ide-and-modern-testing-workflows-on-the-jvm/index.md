@@ -213,7 +213,7 @@ The BoxLang runner now automatically loads `Application.bx` mappings from your p
 
 ### Other Notable Improvements
 
-#### `ConsoleReporter` --- Hide Skipped Tests (TESTBOX-433)
+#### `ConsoleReporter` — Hide Skipped Tests (TESTBOX-433)
 
 Stop noisy skipped-spec output when you have many pending specs:
 

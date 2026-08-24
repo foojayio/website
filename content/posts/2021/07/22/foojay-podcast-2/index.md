@@ -17,8 +17,6 @@ related_posts:
   - "foojay-podcast-3"
   - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
 frozen: false
-aliases:
-  - "/today/foojay-podcast-2-embedded-java/"
 ---
 
 Foojay community members and beyond discuss embedded Java:

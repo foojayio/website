@@ -14,7 +14,7 @@ related_posts:
   - "exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461"
   - "exploring-new-features-in-jdk-23-just-write-and-run-prototyping-with-jep-477-not-only-for-beginners"
   - "exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-**It's interesting to know how the JVM runs bytecode instructions... But do you know what is going on when an exception is thrown? How does the JVM handle the delegation of control? What does it look like in the bytecode?**
+**It's interesting to know how the JVM runs bytecode instructions… But do you know what is going on when an exception is thrown? How does the JVM handle the delegation of control? What does it look like in the bytecode?**
 
 Let me quickly show you!
 

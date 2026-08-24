@@ -47,7 +47,7 @@ Jakarta Data introduces standardized repository patterns. These minimize boilerp
 
 Key features of Jakarta Data include:
 
-* **Repository Interfaces** : Allows defining database queries via method definitions on Java interfaces. Provides three main repository interfaces---**DataRepository** , **BasicRepository** , and **CrudRepository**---designed for various common scenarios.
+* **Repository Interfaces** : Allows defining database queries via method definitions on Java interfaces. Provides three main repository interfaces—**DataRepository** , **BasicRepository** , and **CrudRepository**—designed for various common scenarios.
 * **Compile-Time Generation**: Allows using Java Annotation Processing to generate implementations during compilation. This catches errors early, improves development speed, as well as application startup speed.
 * **Pagination Support** : Offers both offset-based and cursor-based pagination through **Page** and **CursoredPage** interfaces. This caters to different performance and consistency needs.
 
@@ -226,13 +226,13 @@ We'll quickly go through some of the most interesting enhancements.
 
 Key new features:
 
-* Programmatic configuration -- configure persistence units in code, without persistence.xml
-* Schema Manager API -- manage schema programmatically, without scripts referenced in persistence.xml
-* Safe run-in-transaction API -- run a Java lambda in a transaction, without automatic commit or rollback on exception
-* Streamlined JPQL -- implicit entity references, `this` variable, simplifies the query syntax for simpler usecases
-* New functions in queries -- more powerful way to express queries, without deferring to native SQL
-* Type-safe options instead of "Stringly" typed hints -- adds type safety to the API when providing optional hints to the entity manager
-* Support for new Java types and features -- mapping of `Instant` and `Year` types supported out of the box, Java records can be embedded or used as an `@IdClass`
+* Programmatic configuration – configure persistence units in code, without persistence.xml
+* Schema Manager API – manage schema programmatically, without scripts referenced in persistence.xml
+* Safe run-in-transaction API – run a Java lambda in a transaction, without automatic commit or rollback on exception
+* Streamlined JPQL – implicit entity references, `this` variable, simplifies the query syntax for simpler usecases
+* New functions in queries – more powerful way to express queries, without deferring to native SQL
+* Type-safe options instead of "Stringly" typed hints – adds type safety to the API when providing optional hints to the entity manager
+* Support for new Java types and features – mapping of `Instant` and `Year` types supported out of the box, Java records can be embedded or used as an `@IdClass`
 
 **Some examples:**
 
@@ -268,8 +268,8 @@ For more examples and details, refer to [this article](https://in.relation.to/20
 
 ### **Context and Dependency Injection (CDI)**
 
-* Method Invokers -- CDI extensions can define an invoker that can be used by the application or a framework to execute methods and automatically resolve bean instance and arguments for the method. Allows frameworks to invoke methods on CDI beans as action handlers.
-* @Priority can be specified on producer methods -- to add priority to produced beans in the same way as to beans defined by a class
+* Method Invokers – CDI extensions can define an invoker that can be used by the application or a framework to execute methods and automatically resolve bean instance and arguments for the method. Allows frameworks to invoke methods on CDI beans as action handlers.
+* @Priority can be specified on producer methods – to add priority to produced beans in the same way as to beans defined by a class
 
 **Some examples:**
 
@@ -294,9 +294,9 @@ invoker.invoke(null, null)
 
 ### **Security**
 
-* Qualifiers for built-in authenticatoin mechanisms -- allows injecting them and call them programmatically
-* new `HttpAuthenticationMechanismHandler` -- to replace the default handler for complete customization
-* In-memory identity store -- for early development stages and tests
+* Qualifiers for built-in authenticatoin mechanisms – allows injecting them and call them programmatically
+* new `HttpAuthenticationMechanismHandler` – to replace the default handler for complete customization
+* In-memory identity store – for early development stages and tests
 
 **Some examples:**
 
@@ -338,8 +338,8 @@ public class SelectableAuthenticationMechanismHandler implements HttpAuthenticat
 
 Besides support for virtual threads in concurrency resources, the Concurrency API brings some more enhancements:
 
-* `@Inject` can now be used in place of `@Resource` -- unifies injecting concurrency resources under the CDI programming model
-* Schedule repeated executions of a method -- using the `runAt` attribute of the `@Scheduled` annotation on a method
+* `@Inject` can now be used in place of `@Resource` – unifies injecting concurrency resources under the CDI programming model
+* Schedule repeated executions of a method – using the `runAt` attribute of the `@Scheduled` annotation on a method
 * Integration with Java 9 Flow reactive streams
 
 **Some examples:**
@@ -380,9 +380,9 @@ Check out the following video presentation with more details and demos of new fe
 
 ### **Faces (JSF)**
 
-* Add `rowStatePreserved` attribute to `<ui:repeat>` -- to align it with `<h:dataTable>`, which already supports it
-* The current Faces Flow can be injected as a CDI bean -- inject the current flow instead of calling a several methods on the current FacesContext instance
-* Default converter for `java.util.UUID` type -- to support bean properties of type UUID out of the box and align with Jakarta Persistence, which introduced support for UUID as entity keys
+* Add `rowStatePreserved` attribute to `<ui:repeat>` – to align it with `<h:dataTable>`, which already supports it
+* The current Faces Flow can be injected as a CDI bean – inject the current flow instead of calling a several methods on the current FacesContext instance
+* Default converter for `java.util.UUID` type – to support bean properties of type UUID out of the box and align with Jakarta Persistence, which introduced support for UUID as entity keys
 
 More info about the changes in Jakarta Faces 4.1 in [this article](https://balusc.omnifaces.org/2024/06/whats-new-in-faces-41.html#uiRepeatRowStatePreserved) by one of the most active members of the Jakarta Faces specification team, Bauke Scholtz.
 

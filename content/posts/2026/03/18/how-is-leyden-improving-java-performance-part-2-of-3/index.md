@@ -3,6 +3,7 @@ title: "How is Leyden improving Java Performance? Part 2 of"
 date: "2026-03-18T12:05:34+00:00"
 lastmod: "2026-03-20T06:54:34+00:00"
 description: "How to use the AOT capabilities by Leyden and show test results which show that very significant progress has already been made."
+canonical: "https://delawen.com/2025/03/17/How-is-Leyden-improving-Java-Performance-2"
 authors:
   - "maria-arias"
 image: "training-maria-training.jpg"
@@ -115,7 +116,7 @@ Anyway, we should notice an improvement on startup time compared to the regular 
 
 ![Graph showing startup times](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qygejm886j7mbi7hmyeq.png)
 
-The other interesting measurement is how much and for how long response times are disrupted during the early stages of application execution. There is always some small variation in response times even when an app is fully warmed up -- often referred to as *jitter*.
+The other interesting measurement is how much and for how long response times are disrupted during the early stages of application execution. There is always some small variation in response times even when an app is fully warmed up – often referred to as *jitter*.
 
 However, during warmup the housekeeping work that the JVM has to do can significantly increase jitter. Individual responses may be delayed because they require the thread to execute one-off events like load or initialize a class, link a call site or field access site, or update profile data. Background JIT compilation will also steal CPU cycles, potentially pre-empting request handling in Java threads. Finally, early requests will mostly execute relatively slowly in the interpreter, while later requests will gradually respond more quickly as the JIT compiler delivers compiled code.
 

@@ -40,10 +40,10 @@ Reactive Streams is at the heart of the Reactor Project. Reactor is not just ano
 
 The specification defines four main interfaces:
 
-* Publisher\<T\> -- produces data
-* Subscriber\<T\> -- consumes data
-* Subscription -- mediates demand and cancellation
-* Processor\<T, R\> -- acts as both subscriber and publisher
+* Publisher\<T\> – produces data
+* Subscriber\<T\> – consumes data
+* Subscription – mediates demand and cancellation
+* Processor\<T, R\> – acts as both subscriber and publisher
 
 Although Reactive Streams defines the Processor\<T,R\> interface as a combination of Publisher and Subscriber, in the latest versions of Project Reactor (since version 3.5.0) all Processors are deprecated and scheduled for removal. The Reactor team recommends using the new Sinks API, which offers safer and clearer ways to produce signals in reactive streams.
 
@@ -89,9 +89,9 @@ Reactor does not introduce its own thread-per-task model. By default, execution 
 
 The most commonly used schedulers are:
 
-* parallel() -- CPU-bound work
-* boundedElastic() -- blocking or I/O-bound tasks
-* single() -- serialized execution
+* parallel() – CPU-bound work
+* boundedElastic() – blocking or I/O-bound tasks
+* single() – serialized execution
 
 From an architectural point of view, the golden rule is as follows: schedulers are an escape route, not a default setting. Excessive use of publishOn and subscribeOn often indicates that blocking code has become part of a non-blocking reactive pipeline.
 
@@ -109,9 +109,9 @@ In Reactive Streams, backpressure is not optional. Each subscriber controls how 
 
 Reactor provides several operators to deal with situations where upstream cannot honor downstream demand:
 
-* onBackpressureBuffer() -- trades memory for throughput
-* onBackpressureDrop() -- drops excess elements
-* onBackpressureLatest() -- keeps only the most recent element
+* onBackpressureBuffer() – trades memory for throughput
+* onBackpressureDrop() – drops excess elements
+* onBackpressureLatest() – keeps only the most recent element
 
 Every strategy is an architectural choice. For example, buffering may be fine for telemetry data, but it is risky or counterproductive for APIs that interact with users. Losing data may be an acceptable option for systems that capture metrics, but it is not acceptable for systems that handle financial transactions.
 

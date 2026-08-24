@@ -77,7 +77,7 @@ But none of these are based on Java...
 The [Open Fixture Library (OFL)](https://open-fixture-library.org/) is a collaborative, open-source platform that addresses a persistent issue in lighting control: fixture definitions that are tied to specific software platforms.
 ![](https://webtechie.be/images/2025/dmx/ofl-picospot.png)
 
-The project emerged when lighting professionals wanted to switch between different software controllers, but discovered their fixture definitions couldn't be easily transferred. This meant recreating all their work from scratch -- a time-consuming process the entire lighting community had been dealing with for years.
+The project emerged when lighting professionals wanted to switch between different software controllers, but discovered their fixture definitions couldn't be easily transferred. This meant recreating all their work from scratch – a time-consuming process the entire lighting community had been dealing with for years.
 
 #### The OFL Solution
 

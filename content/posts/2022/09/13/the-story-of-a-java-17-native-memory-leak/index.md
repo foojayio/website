@@ -3,6 +3,7 @@ title: "The Story of a Java 17 Native Memory Leak"
 date: "2022-09-13T08:15:53+00:00"
 lastmod: "2022-09-13T08:15:55+00:00"
 description: "How a native memory leak in Java 17 got fixed, improving the future operability of the JVM platform for millions!"
+canonical: "https://www.nickebbitt.com/blog/2022/01/26/the-story-of-a-java17-memory-leak"
 authors:
   - "nick-ebbitt"
 image: "twitter-java-17.png"
@@ -76,7 +77,7 @@ Having originally made little progress using Native Memory Tracking, one of our 
 
 To work around the challenge of the leak being so slow to manifest and the awkwardness of using `jcmd` on a live deployment they decided to externalise the Native Memory Tracking data via a set custom Prometheus metrics. This was achieved by executing JVM diagnostic commands (the equivalent of those used with `jcmd` from the command line) via Java code using the [ManagementFactory](https://docs.oracle.com/en/java/javase/17/docs/api/java.management/java/lang/management/ManagementFactory.html) capability.
 
-Here's a snippet of the kind of thing they got working...
+Here's a snippet of the kind of thing they got working…
 
 ```java
 ManagementFactory.getPlatformMBeanServer().invoke(
@@ -197,7 +198,7 @@ To validate whether this was the cause they explicitly disabled String Deduplica
 
 No leak!
 
-This gave us some additional information so I jumped back on Twitter to call for help again...
+This gave us some additional information so I jumped back on Twitter to call for help again…
 
 > One of our devs worked out that the memory issue with Java 17 goes away when you disable String Deduplication.   
 >
@@ -244,7 +245,7 @@ Once available our process for producing the Java 17 base Docker image will pick
 
 We'll also then consider re-enabling `String Deduplication` with renewed confidence in Java 17.
 
-## Final thoughts...
+## Final thoughts…
 
 I hope you enjoyed this little story.
 

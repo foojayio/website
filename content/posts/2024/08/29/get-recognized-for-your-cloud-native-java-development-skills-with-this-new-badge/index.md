@@ -83,7 +83,7 @@ At the end of the course, you'll be presented with an exam to complete. To pass 
 
 Once you successfully pass this final exam, you'll receive the Liberty Developer Essentials badge from Credly. You can then share this badge through social media sites like LinkedIn, or add it to things like your CV or email footer.
 
-## The first of many...
+## The first of many…
 
 This badge is what we hope will be the first of many Liberty badges, enabling developers to learn and be recognised for various skills that are required for effective cloud-native Java app development. In the future, we aim to create badges that go beyond the beginner level into deeper, more challenging topics. Keep your eyes peeled for updates. If you have suggestions for badges you'd like to see, share them with us by creating an issue on the [Open Liberty GitHub repository](https://github.com/OpenLiberty/open-liberty/issues "Open Liberty GitHub repository").
 

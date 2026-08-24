@@ -22,7 +22,7 @@ For decades DevOps teams have been under pressure to do four things: make softwa
 
 But with fewer engineering resources, enterprises that use Java must find a way to speed up application innovation and fortify application security across their entire Java estate more efficiently.
 
-The rewards (and costs of not doing so) are high -- companies in the top quartile of [McKinsey's Developer Velocity Index (DVI)](https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/developer-velocity-how-software-excellence-fuels-business-performance) perform significantly higher than bottom-quartile companies:
+The rewards (and costs of not doing so) are high – companies in the top quartile of [McKinsey's Developer Velocity Index (DVI)](https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/developer-velocity-how-software-excellence-fuels-business-performance) perform significantly higher than bottom-quartile companies:
 
 * Grow 4-5x times faster
 * Score 55% higher on innovation
@@ -49,7 +49,7 @@ And unlike security scanners that report vulnerabilities on all code, including 
 
 {{< youtube W9kRf3-_wEg >}}
 
-Vulnerability Detection helps teams prioritize and de-prioritize CVEs based on whether the component loaded in production. Intelligence Cloud now goes beyond this to address the question of unused code -- do I need this code at all?
+Vulnerability Detection helps teams prioritize and de-prioritize CVEs based on whether the component loaded in production. Intelligence Cloud now goes beyond this to address the question of unused code – do I need this code at all?
 
 ## Find unused code with Code Inventory
 
@@ -59,7 +59,7 @@ Vulnerability Detection helps teams prioritize and de-prioritize CVEs based on w
 
 Inefficient prioritization of unused code for removal wastes effort, hampers agility, and reduces developer productivity due to unproductive code maintenance tasks.
 > *With Code Inventory, we identified large portions of unused code, archived it, and now spend our time working on the important parts. This has significantly sped up our development cycles.*
-> ---Azul Intelligence Cloud user from a leading fintech trading firm
+> —Azul Intelligence Cloud user from a leading fintech trading firm
 
 A [recent study from Goldman Sachs' DevOps organization](https://developer.gs.com/blog/posts/importance-of-deleting-unused-code) underscores the importance of deleting unused and dead code by revealing that they:
 
@@ -71,7 +71,7 @@ For many software engineers, the last decade of rapid feature design has amassed
 
 The pace of feature delivery has slowed for some applications and creates a stressful workplace for software engineers. Sometimes small changes that feel like they could be done quickly take entire sprints, leading to dissatisfaction from both the engineers and the stakeholders, both of whom want a faster pace.
 
-An Azul Intelligence Cloud user from a leading fintech trading firm recently told us, **"We acquired another firm recently and aren't familiar with their codebase. It contains millions of lines of code -- reading and understanding that code would take months. With Code Inventory, we identified large portions of unused code, archived it, and now spend our time working on the important parts. This has significantly sped up our development cycles."**
+An Azul Intelligence Cloud user from a leading fintech trading firm recently told us, **"We acquired another firm recently and aren't familiar with their codebase. It contains millions of lines of code – reading and understanding that code would take months. With Code Inventory, we identified large portions of unused code, archived it, and now spend our time working on the important parts. This has significantly sped up our development cycles."**
 
 Code Inventory helps by passively building up an inventory of what code runs within the application. This inventory is built up based on the first-execution of each method. As an application runs over time, methods are invoked and recorded.
 

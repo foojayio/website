@@ -174,7 +174,7 @@ public TrackRecord getTrackRecord(Integer trackId) {
 }
 ```
 
-The solution looks simple and compact, but it's very inefficient because Hibernate needs to instantiate two entities first---`Track` and `Album` (see the `track.getAlbum().getTitle()`).
+The solution looks simple and compact, but it's very inefficient because Hibernate needs to instantiate two entities first—`Track` and `Album` (see the `track.getAlbum().getTitle()`).
 
 To do this, it generates two SQL queries that request all the columns of the corresponding database tables:
 
@@ -263,7 +263,7 @@ Hibernate:
         t1_0.track_id=?
 ```
 
-However, there is one, very visible downside to this approach ---the implementation of the `public TrackRecord getTrackRecordV2(Integer trackId)` became longer and wordier.
+However, there is one, very visible downside to this approach —the implementation of the `public TrackRecord getTrackRecordV2(Integer trackId)` became longer and wordier.
 
 ## Java Record Within JPA Query
 

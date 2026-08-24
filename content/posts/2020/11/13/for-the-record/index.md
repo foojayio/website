@@ -90,7 +90,7 @@ Here is how my setup looks in IntelliJ.{#d3c1}
 
 Examples mentioned above are all available in this GitHub [project](https://github.com/BNYMellon/CodeKatas/tree/master/donut-kata).{#1c96}
 
-Some other resources to help solidify the concepts ---{#938c}
+Some other resources to help solidify the concepts —{#938c}
 
 * [Java 14 Feature Spotlight: Records](https://www.infoq.com/articles/java-14-feature-spotlight)
 * [JEP 359: Records (Preview)](https://openjdk.java.net/jeps/359)

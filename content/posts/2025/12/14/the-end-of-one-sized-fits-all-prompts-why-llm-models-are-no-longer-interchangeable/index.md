@@ -23,7 +23,7 @@ frozen: false
 
 For developers and product builders, one assumption has guided the last few years of LLM application development. To improve your product, just swap in the latest frontier large language model. Flip a single switch and your tool's capabilities level up.
 
-But that era is over. We're now seeing that new models like Anthropic's Claude Sonnet 4.5 and OpenAI's GPT-5-Codex have diverged in fundamental ways. The choice of which model to use is no longer a simple engineering decision but a critical product decision. Flip that switch today... and the very texture of your product changes.
+But that era is over. We're now seeing that new models like Anthropic's Claude Sonnet 4.5 and OpenAI's GPT-5-Codex have diverged in fundamental ways. The choice of which model to use is no longer a simple engineering decision but a critical product decision. Flip that switch today… and the very texture of your product changes.
 
 The one-size-fits-all model era is over; the model you choose now expresses something integral about what your product is and does, as well as, how it works. Whether you want it to or not.
 
@@ -73,7 +73,7 @@ So, what does that mean for engineering teams who want to switch between models 
 
 ### The rise of prompt subunits
 
-The first practical solution we've found at CodeRabbit is to introduce "**prompt subunits.**" This architecture consists of a model-agnostic core prompt that defines the core tasks and general instructions. This is then layered on top of smaller, model-specific prompt subunits that handle style, formatting, and examples -- and which can be customized to individual models.
+The first practical solution we've found at CodeRabbit is to introduce "**prompt subunits.**" This architecture consists of a model-agnostic core prompt that defines the core tasks and general instructions. This is then layered on top of smaller, model-specific prompt subunits that handle style, formatting, and examples – and which can be customized to individual models.
 
 When it comes to Codex and Sonnet 4.5, the implementation details for these subunits are likely to be starkly different. We've found a few tricks from our prompt testing with both models that we would like to share:
 

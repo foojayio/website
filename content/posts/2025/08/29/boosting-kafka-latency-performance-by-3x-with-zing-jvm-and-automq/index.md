@@ -15,8 +15,8 @@ categories:
 related_posts:
   - "how-to-train-readynow-to-achieve-optimal-java-performance"
   - "changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk"
+  - "azul-august-2026-release-javas-first-monthly-cspu"
   - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
-  - "azul-zulu-july-2026-quarterly-update-released"
 frozen: false
 ---
 

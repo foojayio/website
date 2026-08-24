@@ -66,7 +66,7 @@ If you have been depending on the venerable `FingerprintScanner` cn1lib, it cont
 
 ### Cryptography — [PR #4994](https://github.com/codenameone/CodenameOne/pull/4994)
 
-Routine cryptography (hashing, MAC, symmetric and asymmetric encryption, signing, JWT, OTP) is now in `com.codename1.security` and ships with the framework. The pure-Java algorithms (Hash, Hmac, Base32, the JWT and OTP machinery) produce identical output on every supported platform. The bits that need real keys — AES, RSA, ECDSA, `SecureRandom` --- route through each port's native crypto provider so you get hardware-backed primitives where the device offers them.
+Routine cryptography (hashing, MAC, symmetric and asymmetric encryption, signing, JWT, OTP) is now in `com.codename1.security` and ships with the framework. The pure-Java algorithms (Hash, Hmac, Base32, the JWT and OTP machinery) produce identical output on every supported platform. The bits that need real keys — AES, RSA, ECDSA, `SecureRandom` — route through each port's native crypto provider so you get hardware-backed primitives where the device offers them.
 
 A typical AES-GCM round-trip:
 
@@ -106,7 +106,7 @@ String code = Otp.totp(sharedSecret); // current 30s window
 boolean ok = Otp.verifyTotp(code, sharedSecret, /* drift */ 1);
 ```
 
-The PR also ships a matching UI widget --- `com.codename1.components.OtpField` --- a segmented, auto-advancing OTP input with paste distribution and a completion listener, so the "enter your 6-digit code" screen is now half a dozen lines of glue:
+The PR also ships a matching UI widget — `com.codename1.components.OtpField` — a segmented, auto-advancing OTP input with paste distribution and a completion listener, so the "enter your 6-digit code" screen is now half a dozen lines of glue:
 
 ```
 OtpField otp = new OtpField(6);
@@ -259,13 +259,13 @@ If your app parses a lot of UTF-8 — and most apps do, because most network API
 
 ## Two long-standing JVM fixes
 
-### [PR #4980](https://github.com/codenameone/CodenameOne/pull/4980) --- Iterative GC mark to fix iOS stack overflow on deep graphs
+### [PR #4980](https://github.com/codenameone/CodenameOne/pull/4980) — Iterative GC mark to fix iOS stack overflow on deep graphs
 
 [Issue #3136](https://github.com/codenameone/CodenameOne/issues/3136) has been around for a long time. The ParparVM garbage collector's mark phase was recursive: for every reachable reference it followed, it pushed a stack frame, so a long linked-list chain or any deep object graph could blow the GC's own stack and crash the app. The reproducer was simple — build a `LinkedList` with 50000 nodes, force a GC — but the symptom on real apps was opaque: an unexplained iOS-only crash on the largest customer datasets, often weeks after the data structure was introduced.
 
 The fix replaces the recursive mark with an iterative one over an explicit work stack. The stack lives on the heap and grows as needed, so the only ceiling now is real memory. Long linked-lists, deep trees, deeply nested JSON parsed into POJOs — all of these used to be a latent crash on iOS and now they are not.
 
-### [PR #4985](https://github.com/codenameone/CodenameOne/pull/4985) --- Don't rely on C arg eval order in `PUTFIELD` / `MULTIANEWARRAY`
+### [PR #4985](https://github.com/codenameone/CodenameOne/pull/4985) — Don't rely on C arg eval order in `PUTFIELD` / `MULTIANEWARRAY`
 
 [Issue #3108](https://github.com/codenameone/CodenameOne/issues/3108) is the other one. Several `PUTFIELD` and `MULTIANEWARRAY` translation paths emitted C code that depended on argument evaluation order. C does not specify an evaluation order for function arguments. Different compilers, different optimisation levels, sometimes the same compiler at different `-O` levels produced different orderings, and the visible result was occasional, "miscompiled", "field was assigned the wrong value", "array dimension came out negative" bugs that nobody could reproduce reliably.
 

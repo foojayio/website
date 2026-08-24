@@ -1,5 +1,5 @@
 ---
-title: "BoxLang 1.14.0 : Query Transformers - Take Full Control of Your Query Results"
+title: "BoxLang 1.14.0: Query Transformers - Take Full Control of Your Query Results"
 date: "2026-06-24T10:46:13+00:00"
 lastmod: "2026-06-24T10:46:18+00:00"
 description: "BoxLang 1.14.0 ships a lot of exciting features - Dynamic Sets, Ranges, Inner Classes, JSONPath navigation - but one quietly powerful addition will…"

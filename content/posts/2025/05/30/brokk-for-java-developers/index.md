@@ -166,7 +166,7 @@ By default, Brokk runs only the tests in the Workspace after each set of changes
 ![Build Settings](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdFz3jXmgLdtmqrghO4R5PU2e9utpTP82p2SvCmwO4Ee84cGIKkAJozfBAWLeHA_OCF4MUkE2hkoocLbzbA9dzsC16pq4kIAg7aP8k4s4Y-zzGkMH19HfZoq6CEixt0oNNVmJrDnw?key=uP1lqs1lPqiVB7uD01Ypkg)  
 *Build settings dialog showing options for test execution, including running only workspace tests vs all tests, and custom shell command configuration*
 
-You can also (ab)use the Run All Tests option to specify an arbitrary shell command; any non-zero exit code will be treated as a failure and sent to the coding LLM for revision. For example, when I was debugging tree-sitter parsing I changed it to `tree-sitter query ... && sbt "testOnly ..."`
+You can also (ab)use the Run All Tests option to specify an arbitrary shell command; any non-zero exit code will be treated as a failure and sent to the coding LLM for revision. For example, when I was debugging tree-sitter parsing I changed it to `tree-sitter query … && sbt "testOnly …"`
 
 The Activity panel is designed to allow you to solve side quests, like a quick refactor or a bug fix, and come back to where you were without losing your flow or confusing the AI with irrelevant context. There are three options when you right-click on an earlier state:
 

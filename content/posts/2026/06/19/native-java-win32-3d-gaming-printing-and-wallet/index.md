@@ -10,16 +10,16 @@ image: "weekly-1.jpg"
 categories:
   - "Java"
 related_posts:
+  - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
-  - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 frozen: false
 ---
 
 ![Native Java Win32, 3D Gaming, Printing and Wallet](https://www.codenameone.com/blog/weekly.jpg)
 
-This week we're introducing native Windows support (no JVM!), a 3D graphics API, a gaming API, support for Apple Wallet, printing and more in what is probably our biggest update ever... But that's not the thing that excites me the most.
+This week we're introducing native Windows support (no JVM!), a 3D graphics API, a gaming API, support for Apple Wallet, printing and more in what is probably our biggest update ever… But that's not the thing that excites me the most.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
 ## The thing that excites me the most

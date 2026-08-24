@@ -26,9 +26,9 @@ NODES is back for its fifth year on October 26, 2023!
 
 It's the biggest graph community gathering dedicated to learning how to integrate graph technologies into ML and dev projects.
 
-For 24 hours nonstop, speakers from around the world will showcase their implementations, tools, models, and more -- sharing everything they've learned over this past year.
+For 24 hours nonstop, speakers from around the world will showcase their implementations, tools, models, and more – sharing everything they've learned over this past year.
 
-Join thousands of fellow developers, data scientists, and data engineers to get firsthand knowledge from peers who will show you the ropes -- for free! So be sure to [save your seat](https://neo4j.registration.goldcast.io/events/6fb85147-ca27-4310-9dec-cb345c53bd6f "save your seat")!
+Join thousands of fellow developers, data scientists, and data engineers to get firsthand knowledge from peers who will show you the ropes – for free! So be sure to [save your seat](https://neo4j.registration.goldcast.io/events/6fb85147-ca27-4310-9dec-cb345c53bd6f "save your seat")!
 
 Last year, NODES featured an impressive lineup of 110+ sessions from more than 100 speakers from over 30 countries. This year, we expect it to be even better.
 

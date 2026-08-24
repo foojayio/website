@@ -22,15 +22,15 @@ Chronicle's open source [Chronicle Threads](https://github.com/OpenHFT/Chronicle
 
 The usual way that a developer will measure their system for latency hotspots is to use a profiler, and modern profilers are amazing; there are numerous commercially available, but I generally find myself using Java Flight Recorder, async-profiler, or honest-profiler. These three are engineered to avoid the [safepoint bias](https://stackoverflow.com/questions/17839933/what-are-safe-points-and-safe-point-polling-in-context-of-profiling "safepoint bias"), and thus give very accurate results.
 
-The problem with profilers however is that they present aggregate information -- a profiler will tell you that function x is using 40% of your program's CPU -- thus allowing you to prioritise your engineering efforts on optimising function x, but what they won't do is tell you that function y (which only takes 5% of your program's CPU) normally takes 1 microsecond to run, but occasionally takes 10,000, thus causing rare but important latency outliers.
+The problem with profilers however is that they present aggregate information – a profiler will tell you that function x is using 40% of your program's CPU – thus allowing you to prioritise your engineering efforts on optimising function x, but what they won't do is tell you that function y (which only takes 5% of your program's CPU) normally takes 1 microsecond to run, but occasionally takes 10,000, thus causing rare but important latency outliers.
 
-Another problem with profilers is that it is very difficult to convince management that it is safe to run a profiler -- even a low overhead profiler -- in production, and some performance outliers only happen in production and can't be reproduced in test systems.
+Another problem with profilers is that it is very difficult to convince management that it is safe to run a profiler – even a low overhead profiler – in production, and some performance outliers only happen in production and can't be reproduced in test systems.
 
 ### Event Loop Monitoring
 
 [Chronicle Threads](https://github.com/OpenHFT/Chronicle-Threads "Chronicle Threads") provides high performance event loop implementations and utility functions to help with threading and concurrency. Event loops are a very useful abstraction when building a low latency system, and event handlers are a simple mechanism to write safe code in a concurrent world. If you use Chronicle's [EventGroup](https://github.com/OpenHFT/Chronicle-Threads#event-loops "EventGroup") as your event loop then you get automatically enabled Event Loop Monitoring (this has historically also been known as Loop Block Monitoring).
 
-Event Loop Monitoring monitors fast event loop threads and only looks for outliers -- it does not measure and record all execution times, like a profiler. This solution works in dev, test and production environments, and adds essentially zero overhead (other than when a slow event handler is detected).
+Event Loop Monitoring monitors fast event loop threads and only looks for outliers – it does not measure and record all execution times, like a profiler. This solution works in dev, test and production environments, and adds essentially zero overhead (other than when a slow event handler is detected).
 
 It works by checking to see if event handler latency remains within acceptable bounds. Latency is determined by measuring the time the action() method of the event loop's event handlers takes to run and whenever the action() method runs beyond an acceptable latency limit, the event loop monitor asks the JVM for a stack trace for the event loop thread, and outputs this to the log.
 

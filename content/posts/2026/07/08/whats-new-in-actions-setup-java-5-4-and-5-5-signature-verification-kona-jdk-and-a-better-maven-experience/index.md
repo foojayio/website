@@ -110,7 +110,7 @@ This makes it possible for a single job to juggle multiple JDKs cleanly, without
 
 ### From `.sdkmanrc`
 
-SDKMAN identifiers carry a vendor suffix --- `-tem` for Temurin, `-zulu` for Zulu, and so on. The action now maps that suffix to a distribution automatically:
+SDKMAN identifiers carry a vendor suffix — `-tem` for Temurin, `-zulu` for Zulu, and so on. The action now maps that suffix to a distribution automatically:
 
 ```
 - uses: actions/setup-java@v5.5.0
@@ -161,7 +161,7 @@ The generated `settings.xml` now disables Maven's interactive mode. Translation:
 
 ### Toolchains that stop growing out of control
 
-This one is a genuine bug fix that'll make some people very happy. If you called `setup-java` multiple times in a job, each call *appended* to `toolchains.xml` --- including duplicate entries. Over a few installs you'd end up with a toolchains file full of repeats.
+This one is a genuine bug fix that'll make some people very happy. If you called `setup-java` multiple times in a job, each call *appended* to `toolchains.xml` — including duplicate entries. Over a few installs you'd end up with a toolchains file full of repeats.
 
 The generated `toolchains.xml` is now **deduplicated by toolchain type and id** . And crucially, it **preserves** your existing root attributes and any non-JDK toolchains you had in there. So you can install as many JDKs as you like across multiple steps and get a clean, correct toolchains file at the end.
 

@@ -37,7 +37,7 @@ Due to the JIT compilation, Java Virtual Machines, and thus Java applications, d
 
 ![](https://azul.imgix.net/wp-content/uploads/Image-2-1-scaled.png?auto=format&crop=faces,entropy&fit=max&q=80&w=739&s=3894c42765e21a1cc44c4d8df8c979a5)
 
-Warm-up happens every time the application is newly started. In the modern Kubernetes world, this is more than common -- horizontal autoscaling, spawning new instances and stopping the unnecessary ones dynamically based on load, has become the new standard of running things cost efficiently.
+Warm-up happens every time the application is newly started. In the modern Kubernetes world, this is more than common – horizontal autoscaling, spawning new instances and stopping the unnecessary ones dynamically based on load, has become the new standard of running things cost efficiently.
 
 If you size a Kubernetes [pod](https://kubernetes.io/docs/concepts/workloads/pods/) only for steady state usage, warm-up takes longer. The service may begin receiving traffic while still cold (code is not fully optimized yet) and, even worse, the service is competing for CPU with the JIT compiler. Together, this often leads to unstable latency and poor early performance.
 
@@ -77,7 +77,7 @@ Kedify [PodResourceProfiles](https://docs.kedify.io/features/pod-resource-profil
 > * **Advanced workload support**, including HTTP scale-to-zero and GPU/LLM inference scaling
 > * **Enterprise-ready control and visibility**, including multi-tenant KEDA management, FinOps insights, and seamless integration with existing observability stacks
 >
-> Built by the creators of KEDA, Kedify helps teams improve performance and reliability while reducing infrastructure costs by **30--40%** through smarter scaling.
+> Built by the creators of KEDA, Kedify helps teams improve performance and reliability while reducing infrastructure costs by **30–40%** through smarter scaling.
 
 A PodResourceProfile lets you define a future resource adjustment triggered by workload lifecycle events, such as when a container becomes ready.
 
@@ -126,7 +126,7 @@ TotalOutstandingCompiles still above threshold: 786 >= 500
 
 Only when the queue depth falls (and stays) below the threshold Kubernetes considers the pod ready. This avoids routing traffic to a JVM that is technically running but not yet optimized.
 
-You can notice an additional small but important detail -- calling a method "finishWarm-up" through JMX. This is another part of the unique tight integration specific to Azul Zing JVM.
+You can notice an additional small but important detail – calling a method "finishWarm-up" through JMX. This is another part of the unique tight integration specific to Azul Zing JVM.
 
 When a JVM is started (HotSpot included), it sizes its internal thread pools (e.g. for JIT compiler, garbage collector etc.) according to the available CPU and this sizing is done at startup of the JVM. But that's no longer suitable for this case of vertical (down)scaling. If we reduced the available CPU post warm-up, but kept the original amount of e.g. compiler threads, a sudden spike in JIT activity (commonly caused by e.g. workload type shift) could cause the JVM to consume an inadequate amount of CPU, again affecting the application latency.
 

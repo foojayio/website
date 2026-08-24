@@ -48,7 +48,7 @@ As a side note, if you like the content of this and the other posts in this seri
 
 DTrace was first introduced by Sun Microsystems in 2004, DTrace quickly garnered attention for its groundbreaking approach to dynamic system tracing. Originally developed for Solaris, it has since been ported to various platforms, including MacOS, Windows, and Linux.
 
-DTrace stands out as a dynamic tracing framework that enables deep inspection of live systems -- from operating systems to running applications. Its capacity to provide real-time insights into system and application behavior without significant performance degradation marks it as a revolutionary tool in the domain of system diagnostics and debugging.
+DTrace stands out as a dynamic tracing framework that enables deep inspection of live systems – from operating systems to running applications. Its capacity to provide real-time insights into system and application behavior without significant performance degradation marks it as a revolutionary tool in the domain of system diagnostics and debugging.
 
 {#understanding-dtraces-capabilities}
 

@@ -134,7 +134,7 @@ aws-warm-up-compiler-threads-2.jpg
 
 With the CPU Use percent chart, we get insights into how the available vCPUs are used. The important change here is that in our Optimizer Hub run, the team reduced the vCore requests from 8 to 5. So, in the CPU percentage charts here, the Optimizer Hub run is already running at 37.5% less CPU.
 
-The first chart shows consistent high CPU -- over 50% of the 8 vCores allotted -- lasting all the way until the compilation queue is cleared. The CPU utilization then settles at around 30%, meaning 70% of the capacity is wasted once JIT compilation finishes.
+The first chart shows consistent high CPU – over 50% of the 8 vCores allotted – lasting all the way until the compilation queue is cleared. The CPU utilization then settles at around 30%, meaning 70% of the capacity is wasted once JIT compilation finishes.
 
 The second chart shows what happens when the compilation activity is removed from the client. There are still short bumps in CPU utilization in periods when the JVM has no optimized code at all, but the CPU then settles immediately at around 55% of the 5 vCores allotted. The machine is able to handle all of the requests, staying within its response time SLAs and within its CPU utilization autoscaling limits, with 3 fewer vCores.
 

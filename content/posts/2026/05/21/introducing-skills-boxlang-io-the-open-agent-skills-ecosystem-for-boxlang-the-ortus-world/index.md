@@ -14,16 +14,16 @@ categories:
   - "LLM"
   - "Tools"
 related_posts:
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
-  - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 frozen: false
 ---
 
 ![](skills-boxlang-io-700x394.jpg)
 
-Today we're launching something we've been quietly building for months: [**skills.boxlang.io**](https://skills.boxlang.io/ "**skills.boxlang.io**") --- a public, agent-agnostic directory for AI skills covering BoxLang, ColdBox, TestBox, CommandBox, and the entire Ortus ecosystem.
+Today we're launching something we've been quietly building for months: [**skills.boxlang.io**](https://skills.boxlang.io/ "**skills.boxlang.io**") — a public, agent-agnostic directory for AI skills covering BoxLang, ColdBox, TestBox, CommandBox, and the entire Ortus ecosystem.
 
 If you've ever pasted a 400-line system prompt into yet another AI agent, watched two of your bots drift onto subtly different versions of the same coding standard, or spent half a Friday afternoon trying to convince an LLM that BoxLang is **not** Java and is **not** CFML, or how to code for Modern CFML; this launch is for you. 🎯
 
@@ -43,7 +43,7 @@ You write a great system prompt that teaches an agent your SQL conventions. Then
 
 This isn't a discipline problem — it's an architecture problem. **System prompts are plain strings, and plain strings don't have a source of truth**. They aren't versioned, aren't audited, aren't shared, and aren't discoverable.
 
-Anthropic's Agent Skills open standard — Markdown files with frontmatter metadata, distributed as `SKILL.md` --- gave the industry a real answer. [**BoxLang AI 3.0**](https://ai.boxlang.io/ "**BoxLang AI 3.0**") implemented it natively. And now [**skills.boxlang.io**](https://skills.boxlang.io/ "**skills.boxlang.io**") brings the missing piece: a public, curated, security-audited registry where these skills live, are versioned, and can be installed into any AI agent in seconds. 💚
+Anthropic's Agent Skills open standard — Markdown files with frontmatter metadata, distributed as `SKILL.md` — gave the industry a real answer. [**BoxLang AI 3.0**](https://ai.boxlang.io/ "**BoxLang AI 3.0**") implemented it natively. And now [**skills.boxlang.io**](https://skills.boxlang.io/ "**skills.boxlang.io**") brings the missing piece: a public, curated, security-audited registry where these skills live, are versioned, and can be installed into any AI agent in seconds. 💚
 
 ## 🎓 What Is a Skill?
 
@@ -56,6 +56,7 @@ Each skill is a Markdown file (`SKILL.md`) with optional YAML frontmatter:
 description: Use this skill when writing, reviewing, or formatting any
   Ortus Solutions code (BoxLang, CFML, or Java) to ensure it follows
   the official Ortus coding standards.
+tags: [boxlang, cfml, java, coding-standards, ortus]
 ---
 
 # Ortus Coding Standards
@@ -72,7 +73,7 @@ Define it once. Inject it everywhere. Let your **codebase** — not your clipboa
 
 We built [**skills.boxlang.io**](https://www.ortussolutions.com/skills.boxlang.io "**skills.boxlang.io**") to be agent-agnostic. Whatever AI tool your team prefers, the skills work the same way. You have two install paths.
 
-### ⚡ Option 1 --- `npx skills` (works everywhere)
+### ⚡ Option 1 — `npx skills` (works everywhere)
 
 Powered by [skills.sh](https://skills.sh/ "skills.sh"), an open-source, agent-agnostic CLI for discovering, installing, and managing `SKILL.md` files across Claude Code, GitHub Copilot, Cursor, Codex, and more. It reads the BoxLang Skills Hub catalog, security-audits community content, and drops files into the correct agent directory in one command.
 
@@ -123,15 +124,15 @@ Want a skill added to a core repo? **Open a pull request** . Add your `SKILL.md`
 
 A small sample of skills you'll find in the directory at launch:
 
-* `code-documenter` --- Producing or improving developer-facing documentation for codebases, APIs, modules, and architecture decisions
-* `ortus-java-coding-standards` --- Official Ortus formatting and structural conventions for BoxLang, CFML, and Java
-* `javascript-expert` --- Modern JavaScript correctness, async flows, module design, and architectural refactors
-* `alpinejs-expert` --- Alpine.js component state, directives, transitions, and reusable stores
-* `vite-expert` --- Vite-based frontend builds, HMR diagnostics, plugin customization, and Vitest integration
-* `vuejs-expert` --- Composition API patterns, routing, forms, testing, and SSR-aware component design
-* `async-programming` --- BoxLang futures, parallel execution, and concurrency primitives
-* `coldbox-basics` --- ColdBox MVC conventions, handlers, models, interceptors, and module architecture  
-  ...and 195+ more. Browse the full directory at [**skills.boxlang.io/skills**](https://skills.boxlang.io/skills "**skills.boxlang.io/skills**"). 🎯
+* `code-documenter` — Producing or improving developer-facing documentation for codebases, APIs, modules, and architecture decisions
+* `ortus-java-coding-standards` — Official Ortus formatting and structural conventions for BoxLang, CFML, and Java
+* `javascript-expert` — Modern JavaScript correctness, async flows, module design, and architectural refactors
+* `alpinejs-expert` — Alpine.js component state, directives, transitions, and reusable stores
+* `vite-expert` — Vite-based frontend builds, HMR diagnostics, plugin customization, and Vitest integration
+* `vuejs-expert` — Composition API patterns, routing, forms, testing, and SSR-aware component design
+* `async-programming` — BoxLang futures, parallel execution, and concurrency primitives
+* `coldbox-basics` — ColdBox MVC conventions, handlers, models, interceptors, and module architecture  
+  …and 195+ more. Browse the full directory at [**skills.boxlang.io/skills**](https://skills.boxlang.io/skills "**skills.boxlang.io/skills**"). 🎯
 
 ## 🌐 Submit Your Own — Community Skills, Security First
 
@@ -156,7 +157,7 @@ The change in agent behavior is immediate. Ask things like:
 * "Show me how to use TestBox to write integration tests"
 * "Help me configure bx-migrations for my BoxLang app"
 
-...and the agent answers using **patterns and idioms from the installed skills**, not scattered (and often outdated) snippets pulled from random internet training data. The hallucinations go down. The accuracy goes up. The output starts to feel like it was written by someone who actually knows the framework — because, in a sense, it now was. 🎓
+…and the agent answers using **patterns and idioms from the installed skills**, not scattered (and often outdated) snippets pulled from random internet training data. The hallucinations go down. The accuracy goes up. The output starts to feel like it was written by someone who actually knows the framework — because, in a sense, it now was. 🎓
 
 ## 🔮 Why This Matters Beyond BoxLang
 

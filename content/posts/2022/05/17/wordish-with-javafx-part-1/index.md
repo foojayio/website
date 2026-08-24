@@ -26,7 +26,7 @@ Wordish is a JavaFX implementation of the game Wordle. It's like Wordle. It is W
 
 Wordle is a daily online word game. You can play the official Wordle game here:<https://www.nytimes.com/games/wordle/index.html>. If you haven't played yet, go check it out.
 
-As I played Wordle, I realized how much fun it would be to create a JavaFX implementation. When you submit a word, each tile rotates to reveal how the individual letter matches -- or doesn't match -- the target word. *(Ooh, animation!)*
+As I played Wordle, I realized how much fun it would be to create a JavaFX implementation. When you submit a word, each tile rotates to reveal how the individual letter matches – or doesn't match – the target word. *(Ooh, animation!)*
 
 As you work through successive guesses, the virtual keyboard letters reflect the same color-coded feedback to help with your next submission. *(Cool CSS customizations!)* And, when you figure out the correct word, a cute little word happy dance rewards your efforts. *(Yet more animation!)* I couldn't resist!
 

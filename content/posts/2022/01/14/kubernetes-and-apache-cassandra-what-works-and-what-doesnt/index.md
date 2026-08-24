@@ -22,7 +22,7 @@ frozen: false
 ---
 
 ![](K15a-AdobeStock_459893049-1536x922-1-1024x615.jpeg) "I need it now and I need it reliable"
-> -- ANYONE WHO HASN'T DEPLOYED APPLICATION INFRASTRUCTURE
+> – ANYONE WHO HASN'T DEPLOYED APPLICATION INFRASTRUCTURE
 
 If you're on the receiving end of this statement, we understand you here in the [K8ssandra community](https://dtsx.io/3uZHFqS). Although we do have reason for hope. Recent [surveys](https://dok.community/dokc-2021-report/) have shown that [Kubernetes](https://kubernetes.io/) (K8s) is growing in popularity, not only because it's powerful technology, but because it actually delivers on reducing the toil of deployment.
 
@@ -69,8 +69,8 @@ In the next post, we'll take a closer look at how Cassandra pushes the boundarie
 
 Curious to learn more about (or play with) Cassandra itself? We recommend trying it on the [Astra DB](https://astra.dev/3uYxgxN) free plan for the fastest setup.
 
-1. [K8ssandra -- Apache Cassandra® on Kubernetes](https://dtsx.io/3v2PSKZ)
+1. [K8ssandra – Apache Cassandra® on Kubernetes](https://dtsx.io/3v2PSKZ)
 2. [GitHub: K8ssandra](https://dtsx.io/3DzVKi1)
 3. [Kubernetes Architecture](https://avinetworks.com/glossary/kubernetes-architecture/)
-4. [The Dynamo Paper -- David Furnes](https://www.dfurnes.com/notes/dynamo)
+4. [The Dynamo Paper – David Furnes](https://www.dfurnes.com/notes/dynamo)
 5. [cass-operator: The DataStax Kubernetes Operator for Apache Cassandra](https://dtsx.io/3ByF2yK)

@@ -305,14 +305,14 @@ Collection scan example
 db.orders.find({ status: 'completed' }).explain('executionStats')
 ```
 
-If the explain output shows...
+If the explain output shows…
 
 ```
 "stage": "COLLSCAN",
 "docsExamined": 150000
 ```
 
-...it means MongoDB scanned the entire collection. This is slow and grows linearly.
+…it means MongoDB scanned the entire collection. This is slow and grows linearly.
 
 **Indexed query example**
 

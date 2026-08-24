@@ -28,7 +28,7 @@ But Java 25 (released September 2025) is like a Pokémon finally hitting level 1
 
 Here's how Java 25 turns the "verbose" criticism into a thing of the past, just like how Pokémon keeps reinventing itself every generation.
 
-### Java 25 -- Compact Source Files and Instance Main Methods (JEP 512)
+### Java 25 – Compact Source Files and Instance Main Methods (JEP 512)
 
 <https://openjdk.org/jeps/512>
 
@@ -38,7 +38,7 @@ These functions now rely on System.out and System.in instead of the Console API.
 
 Compact source files gain automatic entry to every public class and interface in the java.base module (essentially performing an import module java.base;).
 
-### Java 25 -- Flexible Constructor Bodies (JEP 513)
+### Java 25 – Flexible Constructor Bodies (JEP 513)
 
 <https://openjdk.org/jeps/513>
 

@@ -42,7 +42,7 @@ Gatling has a couple of core concepts we should know:
 * Virtual user: a dummy user implemented by Gatling as a message
 * Session: each virtual user has a Session that acts as a placeholder that can be used to inject, or capture \& store data.
 * Scenario: the steps our virtual user has to perform
-* Simulation: the definition of the test such as the number of users, HTTP protocol, acceptance criteria, hooks, and throughput sharing, ...
+* Simulation: the definition of the test such as the number of users, HTTP protocol, acceptance criteria, hooks, and throughput sharing, …
 * Recorder: the UI we can use to record a Scenario and output a Simulation
 * Feeders: the API we use to inject data from external sources into the virtual user's session
 * Checks: a response processor so that we can verify certain conditions, and optionally capture some information to store in the Session for later reuse
@@ -155,7 +155,7 @@ After the run, it will show us where we can find the simulation results
 
 #### General configuration
 
-We can set up a `gatling.conf` file in `src\test\resources` to define global parameters such as the used encoding, SSL setup, shutdownTimeout, ...​  
+We can set up a `gatling.conf` file in `src\test\resources` to define global parameters such as the used encoding, SSL setup, shutdownTimeout, …​  
 
 To view a list of possible parameters, and their defaults you can visit [their github repository](https://github.com/gatling/gatling/blob/main/gatling-core/src/main/resources/gatling-defaults.conf).
 
@@ -286,10 +286,10 @@ The beforehand shown protocol configuration is quite basic, but a lot more can b
 * customizing the URL used to warm up the Java/NIO engine (or disable this warm-up) using `warmUp(url)` and `disableWarmup()` respectively
 * configure the maximum number of connections per host `maxConnectionsPerHost(N)`
 * switch the behaviour from client =\> browser to behave more like server =\> server by using `shareConnections()`
-* configure hostname aliasing `hostNameAliases(...​)`
+* configure hostname aliasing `hostNameAliases(…​)`
 * configure the virtual host `virtualHost(N)`
 * disable caching `disableCaching()`
-* ...
+* …
 
 For example:
 
@@ -322,7 +322,7 @@ this API allows us to define things such as:
 * ramp-up period
 * stress peak
 * constant number of users per second during a certain time
-* ...
+* …
 
 For example, we could have this setup:
 
@@ -334,7 +334,7 @@ sampleScenario.injectOpen(
 )
 ```
 
-This allows us to mimic behaviours like call centers/morning rush/...​
+This allows us to mimic behaviours like call centers/morning rush/…​
 
 A full list of details can be found on the [injection](https://gatling.io/docs/gatling/reference/current/core/injection/) page.
 
@@ -376,7 +376,7 @@ Gatling offers us quite a lot of feeders such as:
 * JSON
 * JDBC
 * Redis
-* ...
+* …
 
 With multiple `Strategies` (`queue`, \| `random` \| `shuffle` \| `circular`) on how to treat these.
 
@@ -412,7 +412,7 @@ Now generally one is also interested in the state of the `Session`, and in some 
 
 We can determine whether it has failed using: `session.isFailed()`.
 
-Now in case we're making use of interrupt mechanisms offered by Gatling such as `exitHereIf(...​)` or `exitHereIfFailed(...​)` it might be useful to alter the state so they (do not) trigger.
+Now in case we're making use of interrupt mechanisms offered by Gatling such as `exitHereIf(…​)` or `exitHereIfFailed(…​)` it might be useful to alter the state so they (do not) trigger.
 
 This can be achieved using `session.markAsSucceeded()` or `session.markAsFailed()`.
 
@@ -459,11 +459,11 @@ We can use `check(status().is(200))`, or in a conditional manner using `checkIf(
 
 The API provides us a DSL to:
 
-* define the **check type** (response type, body length, body bytes, ...)
+* define the **check type** (response type, body length, body bytes, …)
 * **extract** data, if not explicitly defined Gatling will perform an implicit `find`
-* optionally **transform** the data (default if blank, append a (session) value, ...)
-* **validate** the check (is X, isNull, in, ...), if none is defined Gatling checks for `exists` by default
-  * you can always use `.validate(...​)` to provide your own validation logic
+* optionally **transform** the data (default if blank, append a (session) value, …)
+* **validate** the check (is X, isNull, in, …), if none is defined Gatling checks for `exists` by default
+  * you can always use `.validate(…​)` to provide your own validation logic
 * optionally **name** the check, to make it clearer in case the check fails
 * optionally **save** the result of the check on the Virtual User's `Session` for later reuse
 

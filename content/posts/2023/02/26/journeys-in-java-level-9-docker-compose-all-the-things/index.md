@@ -415,6 +415,6 @@ We have grown this system, and we hope to continue adding functionality and lear
 ## Resources
 
 * Github: [microservices-level9](https://github.com/JMHReif/microservices-level9) repository
-* Blog post: [Simple Fix If Your Dockerized App Crashes...​](https://vsupalov.com/simple-fix-db-not-ready/)
+* Blog post: [Simple Fix If Your Dockerized App Crashes…​](https://vsupalov.com/simple-fix-db-not-ready/)
 * Documentation: [Docker Compose - restart](https://docs.docker.com/compose/compose-file/#restart)
 * Neo4j AuraDB: [Create a FREE database](https://dev.neo4j.com/aura-java)

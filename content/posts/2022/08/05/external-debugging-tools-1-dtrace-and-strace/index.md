@@ -3,6 +3,7 @@ title: "External Debugging Tools 1: dtrace and strace"
 date: "2022-08-05T13:13:43+00:00"
 lastmod: "2022-08-05T13:14:10+00:00"
 description: "With these tools, track bugs within an application and its external dependencies without the source or deep knowledge of the environment!"
+canonical: "https://talktotheduck.dev/external-debugging-tools-dtrace-strace"
 authors:
   - "shai-almog"
 image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-01.jpg"

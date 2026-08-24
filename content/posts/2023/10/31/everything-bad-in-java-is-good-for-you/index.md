@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-Everything Bad is Good for You is a [pop culture book](https://en.wikipedia.org/wiki/Everything_Bad_Is_Good_for_You) that points out that some things we assume are bad (like TV) have tremendous benefits to our well-being. I love the premise of disrupting the conventional narrative and was reminded of that constantly when debating some of the more controversial features and problems in Java. It's a feature, not a bug...
+Everything Bad is Good for You is a [pop culture book](https://en.wikipedia.org/wiki/Everything_Bad_Is_Good_for_You) that points out that some things we assume are bad (like TV) have tremendous benefits to our well-being. I love the premise of disrupting the conventional narrative and was reminded of that constantly when debating some of the more controversial features and problems in Java. It's a feature, not a bug…
 
 One of my favorite things about Java is its tendency to move slowly and deliberately. It doesn't give us what we want right away. The Java team understands the requirements and looks at the other implementations, then learns from them.
 
@@ -41,9 +41,9 @@ The compiler could force us to write the `errorHandler` callback if it was missi
 
 Why wasn't something like this added?
 
-This is probably because of the general dislike of checked exceptions. No one attempted to come up with an alternative. No one likes them because no one likes the annoying feature that forces you to tidy up after yourself. We just want to code, checked exceptions force us to be responsible even when we just want to write a simple hello world...
+This is probably because of the general dislike of checked exceptions. No one attempted to come up with an alternative. No one likes them because no one likes the annoying feature that forces you to tidy up after yourself. We just want to code, checked exceptions force us to be responsible even when we just want to write a simple hello world…
 
-This is, to a great extent, a mistake... We can declare that main throws an exception and create a simple hello world without handling checked exceptions. In large application frameworks like Spring, checked `SQLException` is wrapped with a `RuntimeException` version of the same class. You might think I'm against that but I'm not. It's a perfect example of how we can use checked exceptions to clean up after the fact. Cleanup is performed internally by Spring, at this point the exception-handling logic is no longer crucial and can be converted to a runtime exception.
+This is, to a great extent, a mistake… We can declare that main throws an exception and create a simple hello world without handling checked exceptions. In large application frameworks like Spring, checked `SQLException` is wrapped with a `RuntimeException` version of the same class. You might think I'm against that but I'm not. It's a perfect example of how we can use checked exceptions to clean up after the fact. Cleanup is performed internally by Spring, at this point the exception-handling logic is no longer crucial and can be converted to a runtime exception.
 
 I think a lot of the hate towards the API comes from bad versions of this exception such as `MalformedURLException` or encoding exceptions. These exceptions are often thrown for constant input that should never fail. That's just redundant and a bad use of language capabilities. Checked exceptions should only be thrown when there's cleanup we can do. That's an API problem, not a problem with the language feature.
 
@@ -79,7 +79,7 @@ People hate NullPointerException. This baffles me.
 
 NullPointerException is one of the best errors to get. It's the [fail-fast principle](https://dev.to/codenameone/fail-fast-reliable-software-strategy-debug-failures-effectively-3162). The error is usually simple to understand and even when it isn't; it isn't far off. It's an easy bug to fix. The alternative might include initializing an empty object which we need to verify or setting a dummy object to represent null.
 
-Open a database that has been around long enough and search for "undefined". I bet it has quite a few entries... That's the problem with non-null values. You might not get a failure immediately. You will get something far worse. A stealth bug that crawls through the system and pollutes your data.
+Open a database that has been around long enough and search for "undefined". I bet it has quite a few entries… That's the problem with non-null values. You might not get a failure immediately. You will get something far worse. A stealth bug that crawls through the system and pollutes your data.
 
 Since null is so simple and easy to detect there's a vast number of tools that can deal with it both in runtime and during development. When people mention getting a null pointer exception in production I usually ask: what would have been the alternative?
 
@@ -89,7 +89,7 @@ Java has the final keyword, you can use that to keep non-null stateful values. M
 
 In my experience, corrupt data in storage is far worse. The problem is insidious and hides under the surface. There's no clue as to the origin of the problem and we need to set "traps" to track it down. Give me a fail-fast any day.
 
-In my opinion, null has this one hands down...
+In my opinion, null has this one hands down…
 
 ### Ease of Programming
 

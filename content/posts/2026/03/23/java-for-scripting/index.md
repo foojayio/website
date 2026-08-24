@@ -14,10 +14,10 @@ categories:
   - "JDK21"
   - "JEPs"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
+  - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
-  - "idempotent-spring-boot-starter"
-  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 

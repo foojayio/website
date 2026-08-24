@@ -50,7 +50,7 @@ With an environment file that looks like this:
 
 Now, that is very nice, but it requires a lot of manual work. **Wouldn't it be nice to be able to automate this?** Fortunately, most of us developing APIs also generate [OpenAPI](https://www.openapis.org/?ref=lengrand.fr) Specifications for them. When I looked however, there was no OpenAPI generator yet available for the Jetbrains HTTP Client. This is the story of how I've implemented it from scratch, and how you could too if you find yourself in the same situation! We'll use the JetBrains HTTP Client as a practical example, but the knowledge is transferable 🙂.
 
-The OpenAPI generator project contains a core engine, as well as many packages with each a specific generator (Java, Ada, ...). The Jetbrains HTTP Client generator is actually published, and you can find [the merge request](https://github.com/OpenAPITools/openapi-generator/pull/14477/files?ref=lengrand.fr) as well as [the documentation](https://openapi-generator.tech/docs/generators/jetbrains-http-client?ref=lengrand.fr) on GitHub. If you have installed the last available OpenAPI generator release, you can actually try it out in a terminal as such :
+The OpenAPI generator project contains a core engine, as well as many packages with each a specific generator (Java, Ada, …). The Jetbrains HTTP Client generator is actually published, and you can find [the merge request](https://github.com/OpenAPITools/openapi-generator/pull/14477/files?ref=lengrand.fr) as well as [the documentation](https://openapi-generator.tech/docs/generators/jetbrains-http-client?ref=lengrand.fr) on GitHub. If you have installed the last available OpenAPI generator release, you can actually try it out in a terminal as such :
 
     $ openapi-generator generate -i https://api.opendota.com/api -g jetbrains-http-client -o dotaClient
 
@@ -60,7 +60,7 @@ You can actually find most of that logic in the `DefaultGenerator` source file o
 
 * models (basically data types)
 * operations (actual operations)
-* supporting files (environments, READMEs, ...).
+* supporting files (environments, READMEs, …).
 
 Each of those is illustrated by a method, and takes separate objects as inputs:
 
@@ -169,7 +169,7 @@ public class JavaMagazineClientClientCodegen extends DefaultCodegen implements C
 
 Now that we have our baseline, what we want to do is work on our mustache files. Those files are basically templates that will be fed into the processing pipeline to generate our `.http` files.
 
-We know we want one file per main API endpoint, with some documentation. We also want the `@name` unique identifier from the Jetbrains HTTP Client to be able [to reference our code](https://www.jetbrains.com/help/idea/exploring-http-syntax.html?ref=lengrand.fr#http_request_names). Finally, we want to add the supported content type for the calls.
+We know we want one file per main API endpoint, with some documentation. We also want the code\>@name\</code unique identifier from the Jetbrains HTTP Client to be able [to reference our code](https://www.jetbrains.com/help/idea/exploring-http-syntax.html?ref=lengrand.fr#http_request_names). Finally, we want to add the supported content type for the calls.
 
 If we look at the data object available for operations, we end up with this, where each `{{item}}` notation is the value of the item key inside the object.
 
@@ -288,7 +288,7 @@ In the sample below, I'm using the following local environment file:
 }
 ```
 
-There is still a lot more to do with this generator. READMEs, payload, auth, headers, ... But now it's a matter of updating the mustache files as we want.
+There is still a lot more to do with this generator. READMEs, payload, auth, headers, … But now it's a matter of updating the mustache files as we want.
 
 I'd love to have a more fleshed out generator, because it'd be an amazing and cheap way together with [the client CLI](https://www.jetbrains.com/help/idea/http-client-cli.html?ref=lengrand.fr) to have a great automated integration tests pipeline and get people running in second with your API.
 

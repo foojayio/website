@@ -140,4 +140,4 @@ When no other logger is present, System Logger is essentially JDK Logger with a 
 
 The logging frameworks enable application owners to see log messages, timestamps, thread names, and other data in a common format.
 
-Additionally, teams can redirect different output to different locations or to not appear at all -- for example, you can send access logs to one file, system reports to another, and select whether to show all Levels or to dynamically [see select DEBUG levels for one library but not others](https://logging.apache.org/log4j/2.x/faq.html#reconfig_level_from_code).
+Additionally, teams can redirect different output to different locations or to not appear at all – for example, you can send access logs to one file, system reports to another, and select whether to show all Levels or to dynamically [see select DEBUG levels for one library but not others](https://logging.apache.org/log4j/2.x/faq.html#reconfig_level_from_code).

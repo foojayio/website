@@ -18,7 +18,7 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-Multi-threading represents a very intriguing topic, even after years of research and development for high quality, robust, and efficient software. With equal emphasis on hardware improvements and the software that runs on it -- we have newer paradigms for parallelism. The most important yet basic concepts are the ones which I present here. I then explain the intricacies of multi-threading in the Java programming language. Some of these are newer features and supported only from the Java Platform Standard Edition 5.0. Let us start with a quick overview and understanding of the core concepts.
+Multi-threading represents a very intriguing topic, even after years of research and development for high quality, robust, and efficient software. With equal emphasis on hardware improvements and the software that runs on it – we have newer paradigms for parallelism. The most important yet basic concepts are the ones which I present here. I then explain the intricacies of multi-threading in the Java programming language. Some of these are newer features and supported only from the Java Platform Standard Edition 5.0. Let us start with a quick overview and understanding of the core concepts.
 
 ### Thread Concepts in Operating Systems
 
@@ -62,7 +62,7 @@ Multi-threading represents a very intriguing topic, even after years of research
 
 *resume(),* Lock Status: Locks Held, Deprecated; These thread methods are deprecated as it could lead to deadlocks and frozen processes. This is especially when the thread that has to resume a suspended thread requires access to the shared resource or lock held by the suspended thread before invoking resume().
 
-*stop(),* Lock Status: Locks Released, Deprecated; This thread method is deprecated as it produced inconsistent states due to damaged objects. I am not providing the code sample as it is pretty straight forward usage -- but I will not recommend the use of these methods, even if using a very old compiler version.
+*stop(),* Lock Status: Locks Released, Deprecated; This thread method is deprecated as it produced inconsistent states due to damaged objects. I am not providing the code sample as it is pretty straight forward usage – but I will not recommend the use of these methods, even if using a very old compiler version.
 
 ### Object in Java
 
@@ -74,7 +74,7 @@ The Object class in Java inherently contains the methods that can control access
 
 *notifyAll(),* Lock Status: Acquisition of Lock by an Arbitrary Waiting Thread; The notifyAll() counterpart of this method notifies all threads that are waiting to acquire a lock on the shared object.
 
-**Note on Locks:** You may use this thought process whenever you think of Locks or Monitors in Java -- Any concurrent modification by Threads should not lead to a damaged object. The only exception being the wait() and notify() mechanisms which may cause changes to a shared resource or object before swapping or switching control. A damaged object is one in which undesirable or corruptible changes have occurred to the state.
+**Note on Locks:** You may use this thought process whenever you think of Locks or Monitors in Java – Any concurrent modification by Threads should not lead to a damaged object. The only exception being the wait() and notify() mechanisms which may cause changes to a shared resource or object before swapping or switching control. A damaged object is one in which undesirable or corruptible changes have occurred to the state.
 
 **synchronized:** In Java, the synchronized keyword is used to control access to the critical section of the code. Alternatively, it is the implementation of Thread Monitors in Java. The synchronized keyword can be applied to both static methods or to instance level methods or blocks. When a thread enters a synchronized block or method, it obtains the lock on that class or object. In the case of static synchronized methods, a single lock is held at the class level and is different from an instance level lock that is held per instance of the class. The synchronized keyword provides the necessary mutual exclusion on a shared resource. wait(), notify(), and notifyAll() can only be called in synchronized blocks or methods. Mutexes are not inherently supported in Java.
 

@@ -38,7 +38,7 @@ The OS keeps these pages in the page cache in case they will need to be accessed
 
 Here we are running a benchmark with 4 runs, each of 3M messages of size 140 bytes at a rate of 100K/sec.
 
-The below graph shows latencies at various percentiles in microseconds and we can see that latencies -- while impressive -- climb at the higher percentiles to around 50μs.
+The below graph shows latencies at various percentiles in microseconds and we can see that latencies – while impressive – climb at the higher percentiles to around 50μs.
 
 ![](Screen-Shot-2022-10-31-at-11.05.35-AM-1024x432.png)
 
@@ -54,7 +54,7 @@ The short answer is that the OS and hardware are introducing the delays because 
 * Mapping the queue to /tmpfs removes delays caused by disk I/O, but only if the queue is small enough and you have a suitable replication strategy.
 * Tuning of the BIOS and OS is effective, but requires patience and expertise: power states, BIOS, kernel, RAID, and changing to an alternative file system all help.
 
-But, a straightforward way to mitigate this -- if you have [Chronicle Queue Enterprise](https://chronicle.software/services/ "Chronicle Queue Enterprise") -- is to set a few parameters when creating your queue:
+But, a straightforward way to mitigate this – if you have [Chronicle Queue Enterprise](https://chronicle.software/services/ "Chronicle Queue Enterprise") – is to set a few parameters when creating your queue:
 
 ```java
 builder.readBufferMode(BufferMode.Asynchronous); 
@@ -63,7 +63,7 @@ builder.writeBufferMode(BufferMode.Asynchronous);
 
 which configures Chronicle Queue Enterprise in asynchronous mode to absorb any latencies from the OS/hardware.
 
-Below we see results with the same workload and asynchronous mode configured (qe1 -- 4) overlaid on the same graph. We can see that latencies are slightly worse at low percentiles but are very well contained at the higher percentiles -- even at 99.99 all latencies are less than 4μs.
+Below we see results with the same workload and asynchronous mode configured (qe1 – 4) overlaid on the same graph. We can see that latencies are slightly worse at low percentiles but are very well contained at the higher percentiles – even at 99.99 all latencies are less than 4μs.
 
 ![](Screen-Shot-2022-10-31-at-11.20.54-AM-1024x478.png)
 

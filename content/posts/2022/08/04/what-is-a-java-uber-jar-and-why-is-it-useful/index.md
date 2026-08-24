@@ -14,7 +14,7 @@ related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-  - "idempotent-spring-boot-starter"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

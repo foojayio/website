@@ -1,5 +1,5 @@
 ---
-title: "Book Review : The Software Engineer's Guidebook"
+title: "Book Review: The Software Engineer's Guidebook"
 date: "2023-12-15T14:12:12+00:00"
 lastmod: "2023-12-15T14:12:14+00:00"
 description: "Discover the ultimate guidebook for software engineers, packed with essential tips and strategies for success in the industry."

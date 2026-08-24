@@ -63,7 +63,7 @@ While significant activity characterizes the AI field, many unresolved research,
 **desc.** : For more information about Stanford's Artificial Intelligence professional and graduate programs  
 **category**: youtube, tutorial
 
-**article** : [Developer Experience in the Age of AI Coding Agents -- Max Kanat-Alexander, Capital One](https://www.youtube.com/watch?v=rT2Del5pwg4&pp=ugUEEgJlbg%3D%3D "Developer Experience in the Age of AI Coding Agents – Max Kanat-Alexander, Capital One")  
+**article** : [Developer Experience in the Age of AI Coding Agents – Max Kanat-Alexander, Capital One](https://www.youtube.com/watch?v=rT2Del5pwg4&pp=ugUEEgJlbg%3D%3D "Developer Experience in the Age of AI Coding Agents – Max Kanat-Alexander, Capital One")  
 **authors** : AiEngineer, Max Kanat-Alexander  
 **date** : 2025-12-23  
 **desc.** : It feels like every two weeks, the world of software engineering is being turned on its head. Are there any principles we can rely on that will continue to hold true, and that can help us prepare for the future, no matter what happens? Max uses research, data, and his 20+ years working in enterprise Developer Experience teams to talk through what we can do now that will prepare us for an agentic future, no matter what that future holds.  

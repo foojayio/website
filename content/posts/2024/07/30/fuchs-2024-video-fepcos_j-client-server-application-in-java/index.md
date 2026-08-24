@@ -45,6 +45,6 @@ Thanks for reading!
 ## See also:
 
 * G. Fuchs: FEPCOS-J (4) Easy programming of a multithreaded TCP/IP server in Java; At: Foojay Today; 2024-03-21; [blog post](https://foojay.io/today/fuchs-2024-fepcos-j-multithreaded-server/).
-* G. Fuchs: FEPCOS-J (3) -- Build native executables of Java-coded networked systems; At: Foojay Today; 2023-12-13; [blog post](https://foojay.io/today/fuchs-2023-fepcos-j-03-native-executables/).
-* G. Fuchs: FEPCOS-J (2) -- Declaratively compose networked systems in Java; At: Foojay Today; 2023-10-13; [blog post](https://foojay.io/today/fuchs-2023-fepcos-j-02/).
-* G. Fuchs: FEPCOS-J (1) -- Description, Impressions of Usage, Current State; At: Foojay Today; 2023-04-26; [blog post](https://foojay.io/today/fuchs-2023-fepcos-j-01/).
+* G. Fuchs: FEPCOS-J (3) – Build native executables of Java-coded networked systems; At: Foojay Today; 2023-12-13; [blog post](https://foojay.io/today/fuchs-2023-fepcos-j-03-native-executables/).
+* G. Fuchs: FEPCOS-J (2) – Declaratively compose networked systems in Java; At: Foojay Today; 2023-10-13; [blog post](https://foojay.io/today/fuchs-2023-fepcos-j-02/).
+* G. Fuchs: FEPCOS-J (1) – Description, Impressions of Usage, Current State; At: Foojay Today; 2023-04-26; [blog post](https://foojay.io/today/fuchs-2023-fepcos-j-01/).

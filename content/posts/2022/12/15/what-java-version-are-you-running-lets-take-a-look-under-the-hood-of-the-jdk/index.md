@@ -12,7 +12,7 @@ categories:
 related_posts:
   - "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
   - "jdb"
-  - "idempotent-spring-boot-starter"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

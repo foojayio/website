@@ -93,9 +93,9 @@ Once AP has been enabled, the peaks go down a lot while keeping lower percentile
 |                **No AP** | 437 | 547 | 771 | 51,967 | 137,215 | 157,695 |
 |              **With AP** | 435 | 555 | 795 |  2,703 |   9,663 |  30,079 |
 
-The following chart shows the difference in the number of allocation delays happening per GC cycle. Without AP, the threads, once they run into a delay, have to wait till the GC releases some memory (**red line** -- "Allocation Failed Delays Count").
+The following chart shows the difference in the number of allocation delays happening per GC cycle. Without AP, the threads, once they run into a delay, have to wait till the GC releases some memory (**red line** – "Allocation Failed Delays Count").
 
-Oppositely, with AP enabled, there are thousands of small delays (**violet line** -- "Allocation Paced Delays Count"). GC Log Analyzer provides distinct legends depending on the allocation delay origin to make them easy to differentiate. This chart is the best option to answer whether AP gets engaged.
+Oppositely, with AP enabled, there are thousands of small delays (**violet line** – "Allocation Paced Delays Count"). GC Log Analyzer provides distinct legends depending on the allocation delay origin to make them easy to differentiate. This chart is the best option to answer whether AP gets engaged.
 ![](ap-delays-compared-1024x295.png) Comparison of "Allocation Failed Delays Count" versus "Allocation Paced Delays Count"
 
 ## Troubleshooting

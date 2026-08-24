@@ -88,7 +88,7 @@ There is one crucial point: this is a community effort. Gluon can't do the mobil
 
 The [openjdk-mobile project on GitHub](https://github.com/openjdk-mobile/) is open to contributions from anyone interested in helping to bring "full Java" to mobile. Whether you're interested in performance optimization, JavaFX integration, or just want to test and report issues, there's room for everyone to contribute.
 
-As [Johan Vos wrote](https://gluonhq.com/bringing-openjdk-to-mobile-a-community-effort/): "We believe that no miracle is needed -- Java was designed to be portable, and it should run on mobile as a first-class citizen. It's just a matter of making it happen, together."
+As [Johan Vos wrote](https://gluonhq.com/bringing-openjdk-to-mobile-a-community-effort/): "We believe that no miracle is needed – Java was designed to be portable, and it should run on mobile as a first-class citizen. It's just a matter of making it happen, together."
 
 ## What's Next?
 

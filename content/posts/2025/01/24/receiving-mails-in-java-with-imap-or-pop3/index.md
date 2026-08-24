@@ -13,7 +13,7 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-ways-to-contribute-to-openjdk"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 

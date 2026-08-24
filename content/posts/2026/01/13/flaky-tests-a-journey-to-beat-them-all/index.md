@@ -9,10 +9,10 @@ categories:
   - "Java"
   - "Testing"
 related_posts:
+  - "offline-crypto-address-validation-in-java"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "idempotent-spring-boot-starter"
-  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
 frozen: false
 ---
 
@@ -40,7 +40,7 @@ Our first try to bite them all was to retry the flaky tests.
 
 Kestra is built in Java, and tests are written with the JUnit framework. The JUnit Pioneer extension contains an annotation that allows for retrying a test if it fails: `@RetryingTest(5)`. We added this annotation to every test that often fails in our CI.
 
-This helped... a bit. But it also **inflated test times** and **masked real issues** . Worse, some failures are **structural** (leaked resources, race conditions): once they fail, they keep failing, no matter how often you retry.  
+This helped… a bit. But it also **inflated test times** and **masked real issues** . Worse, some failures are **structural** (leaked resources, race conditions): once they fail, they keep failing, no matter how often you retry.  
 
 Verdict: good band‑aid, bad cure.
 

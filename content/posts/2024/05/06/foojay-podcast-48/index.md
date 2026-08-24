@@ -88,7 +88,7 @@ You can listen and subscribe to the Foojay Podcast on:
 09:17 Why JCON in Cologne?  
 
 12:54 Free tickets for JCON for JUG members  
-<https://foojay.io/today/foojay-podcast-19/>: How Working For Free For Fun Brought Me Fame and Fortune -- Or At Least Some Of Each -- In The End  
+<https://foojay.io/today/foojay-podcast-19/>: How Working For Free For Fun Brought Me Fame and Fortune – Or At Least Some Of Each – In The End  
 
 19:05 About the JAVAPRO magazine  
 

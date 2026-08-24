@@ -31,7 +31,7 @@ In order to allow building new features faster, while providing a consistent exp
 
 [Apache Cassandra](https://cassandra.apache.org/_/index.html) and the managed [DataStax Astra DB](https://astra.dev/3xWMrbx) are now the only production storage backends for Reaper. The free tier of Astra DB will be more than sufficient for most deployments.
 
-Reaper does not generally require high availability -- even complete data loss has mild consequences. Where Astra is not an option, a single Cassandra server can be started on the instance that hosts Reaper, or an existing cluster can be used as a backend data store.
+Reaper does not generally require high availability – even complete data loss has mild consequences. Where Astra is not an option, a single Cassandra server can be started on the instance that hosts Reaper, or an existing cluster can be used as a backend data store.
 
 One of the pain points we observed when people start using Reaper is understanding the segment orchestration and knowing how the default timeout impacts the execution of repairs.
 

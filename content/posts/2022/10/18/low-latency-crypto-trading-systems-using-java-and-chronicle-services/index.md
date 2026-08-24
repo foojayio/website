@@ -14,7 +14,7 @@ related_posts:
   - "peter-lawrey-latency-performance"
   - "a-closer-look-at-jfr-streaming"
   - "billion-events-per-second-with-millisecond-latency"
-  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "offline-crypto-address-validation-in-java"
 frozen: false
 ---
 
@@ -185,6 +185,6 @@ Access to this project is available upon request to [info@chronicle.software](ma
 
 #### References:
 
-\[1\] products: [Enterprise -- Chronicle Software](https://chronicle.software/ "Enterprise – Chronicle Software")
+\[1\] products: [Enterprise – Chronicle Software](https://chronicle.software/ "Enterprise – Chronicle Software")
 
 \[2\] [Leading North American Stock Exchange Adopts Chronicle's FIX Engine](https://chronicle.software/leading-north-american-stock-exchange-adopts-chronicles-fix-engine/ "Leading North American Stock Exchange Adopts Chronicle’s FIX Engine ")

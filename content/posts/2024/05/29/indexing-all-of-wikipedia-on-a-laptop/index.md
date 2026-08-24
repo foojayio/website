@@ -93,7 +93,7 @@ We use Java's parallel Streams to process the shards in parallel. For each row i
 
 1. Add it to *pqVectorsList*
 2. Call *writer.writeInline* to add the LVQ-compressed vector to disk
-3. Call *builder.addGraphNode*-- order is important because both (1) and (2) are used when we call addGraphNode
+3. Call *builder.addGraphNode*– order is important because both (1) and (2) are used when we call addGraphNode
 4. Call *contentMap.put* with the article chunk data.
 
 ![](https://lh7-us.googleusercontent.com/5souUR9e_gbEEdcUwWvq8_cjleyFGglaQaCSV-XFkv-3Ij7cGYgd13UcyGdwIYE6Xw5zD4WiFSxGO1phrEK8w6UWx6BanZVWXQ4oBnkHdh6aEFB4DIllhK15HjZJ9iJyQKV5ts9QTLQqF3uufChXdPE) ![](https://lh7-us.googleusercontent.com/_Z7fqvsbvQ2kXJY286iM-ysvQJCHwlaWgmBACBFZfSOscrSbGtYMkGOlKbA5cWuaB4-M_aN1Y6idM1pWEEvUvQJh-22d71eAxAR5hxZNwBy1dedc1DIApiKTfSpLQMsIIzN3yozbSPProh5TJT_TkvU)

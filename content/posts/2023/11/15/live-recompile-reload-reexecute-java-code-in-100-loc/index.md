@@ -179,7 +179,7 @@ In this example, we created a minimal version (100 lines of code) that could eas
 * Provide a directory instead of a Java file
 * Detect if there is a *pom.xml* , *gradle.properties* or *build.xml* and build with Apache Maven, Gradle or Apache Ant instead of javac
 * Provide external libraries to the `URLClassLoader`
-* Detect the return type of the `Supplier` (`String`, `List`, `Array`, `JComponent`, ...) and show the result accordingly
+* Detect the return type of the `Supplier` (`String`, `List`, `Array`, `JComponent`, …) and show the result accordingly
 * Open a JShell file (*.jsh*), create a Java file from it and execute it
 * Use [JBang](https://www.jbang.dev/) so that installing and running Java get even easier
 

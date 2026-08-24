@@ -23,7 +23,7 @@ frozen: false
 
 **One Year. 100+ Features. Unlimited Possibilities.**
 
-Just one year ago, in March 2024, we launched BoxLang AI 1.0. Today, we're thrilled to announce **BoxLang AI v2**---a massive leap forward that positions BoxLang as one of the most powerful and versatile AI framework on the JVM. This release is 9-months in the making, with over 100 new features! This would have not been possible without all the new features that the BoxLang JVM language exposes to developers like: Server Side Events, HTTP Streaming, HTTP pooling, Caching, and so much more.
+Just one year ago, in March 2024, we launched BoxLang AI 1.0. Today, we're thrilled to announce **BoxLang AI v2**—a massive leap forward that positions BoxLang as one of the most powerful and versatile AI framework on the JVM. This release is 9-months in the making, with over 100 new features! This would have not been possible without all the new features that the BoxLang JVM language exposes to developers like: Server Side Events, HTTP Streaming, HTTP pooling, Caching, and so much more.
 
 ## What Makes This Release Groundbreaking?
 

@@ -3,6 +3,7 @@ title: "Debugging Deadlocks and Race Conditions"
 date: "2022-05-20T08:08:00+00:00"
 lastmod: "2022-05-20T08:10:33+00:00"
 description: "Threading issues are a piece of cake with these simple debugger techniques. Yes, you CAN debug threads with breakpoints!"
+canonical: "https://talktotheduck.dev/debugging-deadlocks-and-race-conditions"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
@@ -18,7 +19,7 @@ frozen: false
 
 Thread debugging has the reputation of being one of the most arduous tasks for developers. I beg to differ.
 
-Asynchronous debugging is so much worse. It's supposed to solve the problems of threading and to some degree async helps...
+Asynchronous debugging is so much worse. It's supposed to solve the problems of threading and to some degree async helps…
 
 But it doesn't make debugging simpler. I will get into that in the next post.
 

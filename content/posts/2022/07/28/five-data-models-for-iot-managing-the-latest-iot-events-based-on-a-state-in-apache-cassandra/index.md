@@ -626,9 +626,9 @@ It is worth mentioning that this blog post was motivated by questions from Apach
 
 Learn more about Cassandra, data modeling and IoT:
 
-* **Cassandra-as-a-Service** [DataStax Astra](https://astra.dev/3OIIXir) -- experience serverless Cassandra for free
-* **Short course** [Cassandra Fundamentals](https://www.datastax.com/learn/cassandra-fundamentals) -- learn Cassandra Query Language (CQL)
-* **Learning series** [Data Modeling by Example](https://www.datastax.com/learn/data-modeling-by-example) -- study Cassandra data modeling in depth
-* **Workshops** [Developer Workshops](https://www.datastax.com/workshops) -- attend free data modeling workshops and more
-* **Whitepaper** [Data Modeling in Apache Cassandra](https://www.datastax.com/resources/whitepaper/data-modeling-apache-cassandra) -- get an overview of the best data modeling practices
+* **Cassandra-as-a-Service** [DataStax Astra](https://astra.dev/3OIIXir) – experience serverless Cassandra for free
+* **Short course** [Cassandra Fundamentals](https://www.datastax.com/learn/cassandra-fundamentals) – learn Cassandra Query Language (CQL)
+* **Learning series** [Data Modeling by Example](https://www.datastax.com/learn/data-modeling-by-example) – study Cassandra data modeling in depth
+* **Workshops** [Developer Workshops](https://www.datastax.com/workshops) – attend free data modeling workshops and more
+* **Whitepaper** [Data Modeling in Apache Cassandra](https://www.datastax.com/resources/whitepaper/data-modeling-apache-cassandra) – get an overview of the best data modeling practices
 * **More on IoT and time series** [Fundamentals](https://www.datastax.com/resources/video/datastax-accelerate-2019-designing-time-series-applications-scale-datastax) \|[IoT data model](https://www.datastax.com/learn/data-modeling-by-example/sensor-data-model) \| [Time series data model](https://www.datastax.com/learn/data-modeling-by-example/time-series-model) \| [Streaming](https://www.youtube.com/watch?v=nF502PmFi_w)
