@@ -133,18 +133,36 @@
            same lookup posts' bylines and the JSON-LD use -- so this works whatever
            shape content/authors/ has, and there is one definition of author
            identity rather than a `where` over pages repeated per template. */}}
+      {{/* Resolved FIRST, then sorted, because the sort key is the author's
+           display name and only the author page knows it. Sorting the raw
+           `authors:` entries instead would sort by SLUG, which files
+           "frankdelporte" and "frank-delporte" apart and puts "gerrit-grunwald"
+           under G while the reader is looking for "Gerrit" -- the same trap
+           /sitemap/'s author column documents.
+
+           Keyed on the lowercased name so "de Vries" and "Delporte" sort
+           together rather than by byte value, which would put every capital
+           ahead of every lowercase letter. A slug with no author page keeps its
+           slug as the key, so it sorts where its text says it does instead of
+           being silently grouped at one end. */}}
+      {{- $named := slice -}}
+      {{- range $authorEntries -}}
+        {{- $page := partial "author-page.html" .slug -}}
+        {{- $name := .slug -}}
+        {{- with $page }}{{ $name = .Title }}{{ end -}}
+        {{- $named = $named | append (dict "slug" .slug "page" $page "name" $name "key" (lower $name)) -}}
+      {{- end -}}
       <p class="sponsor-authors-note">
         All articles by
-        {{ range $i, $e := $authorEntries }}
+        {{ range $i, $e := sort $named "key" }}
           {{- if $i }}, {{ end -}}
-          {{- $slug := $e.slug -}}
-          {{- with partial "author-page.html" $slug -}}
+          {{- with $e.page -}}
             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           {{- else -}}
             {{/* No author page for this slug: a typo in the sponsor's
                  `authors:` list, or an author who hasn't been converted yet.
                  Shown plainly rather than silently dropped so it's noticeable. */}}
-            <span class="sponsor-authors-note__missing" title="No author page found for &quot;{{ $slug }}&quot;">{{ $slug }}</span>
+            <span class="sponsor-authors-note__missing" title="No author page found for &quot;{{ $e.slug }}&quot;">{{ $e.slug }}</span>
           {{- end -}}
         {{ end }}.
       </p>
