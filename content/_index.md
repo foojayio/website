@@ -6,7 +6,7 @@
 # home page changes by this file appearing (baseof.html and index.html both
 # read site.Title, but an empty .Title here would be a trap for the next
 # template that does not).
-title: "foojay.io - Friends Of OpenJDK"
+title: "Foojay.io - The website for Friends Of OpenJDK"
 aliases:
   - "/today/works-with-openjdk/"
   - "/works-with-openjdk/"
