@@ -93,6 +93,24 @@ public class ViewCounts {
                 return;
             }
 
+            // A counter that knows about FEWER pages than the file we already
+            // have is the same failure as an empty one, and it is the state a
+            // freshly deployed Worker is in: it answers 200 with the handful of
+            // rows real readers have created since it went up, which would
+            // replace 2200 numbers on the site with one. Nothing ever deletes a
+            // row (see worker/views/schema.sql -- /seed sets `legacy`, a hit
+            // increments `live`), so the key count only ever grows, and a drop
+            // means an unseeded, half-restored or wrongly-bound database rather
+            // than news about the site. Blocks a deploy from blanking the
+            // counts; does not block the numbers going UP.
+            int existing = existingKeyCount();
+            if (counts.size() < existing) {
+                keepExisting("counter returned " + counts.size() + " rows, fewer than the "
+                        + existing + " already in " + OUTPUT_FILE
+                        + " -- seed it first: jbang scripts/transfer/LegacyViews.java --seed");
+                return;
+            }
+
             ObjectNode root = JSON.createObjectNode();
             counts.forEach(root::put);
             Files.createDirectories(OUTPUT_FILE.getParent());
@@ -102,6 +120,17 @@ public class ViewCounts {
             System.out.printf("Wrote %s: %d entries, %,d views total%n", OUTPUT_FILE, counts.size(), total);
         } catch (Exception e) {
             keepExisting(e.toString());
+        }
+    }
+
+    /** How many pages the committed file already carries; 0 if there is none. */
+    static int existingKeyCount() {
+        try {
+            if (!Files.exists(OUTPUT_FILE)) return 0;
+            JsonNode existing = JSON.readTree(Files.readString(OUTPUT_FILE));
+            return existing.isObject() ? existing.size() : 0;
+        } catch (Exception e) {
+            return 0;
         }
     }
 
