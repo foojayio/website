@@ -1,0 +1,155 @@
+{{- /*
+  /llms.txt -- the llmstxt.org convention: a short, markdown-formatted map of
+  the site, written for a model that has a context window rather than a crawl
+  budget. Wired up as the LLMS output format on the home page (see hugo.toml);
+  the sibling to robots.txt, which says what a machine MAY fetch while this says
+  what is WORTH fetching.
+
+  It is a CURATED index, not a dump. The convention is that the file fits in a
+  context window, so listing all 2153 posts would defeat it -- and would only
+  restate sitemap.xml, which already carries every URL with a lastmod. Hence the
+  "Complete indexes" block first: anything not named below is one link away, and
+  a model that needs everything is told exactly where everything is.
+
+  EVERYTHING HERE IS DERIVED, so there is no second list to keep in step with
+  the site:
+
+    - the navigation sections are the [[menu.footer]] columns, which CLAUDE.md
+      already makes the single definition of the site's own navigation. Adding a
+      page to the footer adds it here, with nothing to remember.
+    - the Quick Start steps come from partials/series-steps.html, so they cannot
+      fall out of order with the progress bar on the pages themselves.
+    - the glossary is content/pedia/, the topics are the categories taxonomy,
+      and the recent articles are the posts section by date.
+    - every description is partials/meta-description.html, the same string the
+      page's own <meta name="description"> carries -- so this file cannot
+      describe a page differently from the page.
+
+  Two things are deliberate:
+
+  URLs are ABSOLUTE (.Permalink / absURL). This is the "absolute by contract"
+  exception in CLAUDE.md's relative-links rule and the clearest case of it: the
+  file is read off-site by something that has no notion of our origin, so a
+  root-relative path here resolves against whatever host is asking.
+
+  It self-flips at cutover like robots.txt and baseof.html's noindex, off the
+  same baseURL != productionBaseURL test. The trial deploy is a byte-for-byte
+  copy of the live WordPress site, so publishing a curated index of it would be
+  inviting a model to ingest the duplicate rather than foojay.io -- the exact
+  thing the trial's `Disallow: /` exists to prevent. Nothing to unset on the day.
+*/ -}}
+{{- $prod := strings.TrimSuffix "/" (site.Params.productionBaseURL | default site.BaseURL) -}}
+{{- $isTrial := ne (strings.TrimSuffix "/" site.BaseURL) $prod -}}
+{{- if $isTrial -}}
+# Trial deploy of the foojay.io Hugo rebuild
+
+> Not the live site. The content here duplicates https://foojay.io/ and is
+> excluded from crawling by robots.txt and by a noindex on every page.
+
+Read <https://foojay.io/llms.txt> instead.
+{{- else -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $pedia := where site.RegularPages "Section" "pedia" -}}
+{{- $authors := partial "authors-all.html" -}}
+{{- /* meta-description.html falls back to the site boilerplate for pages with
+       nothing of their own; here that is noise on every line rather than a
+       useful snippet, so a description that IS the fallback is dropped. */ -}}
+{{- $boiler := site.Params.description -}}
+{{- /* A menu entry carries a URL, not a page reference, and site.GetPage takes
+       a CONTENT path -- so it resolves /pedia/ (a real section) and misses every
+       one of the 15 pages that override their path with `url:` frontmatter, i.e.
+       almost the whole footer. Indexing the site by RelPermalink once is what
+       lets a menu entry find its page, and therefore its real description. */ -}}
+{{- $byURL := dict -}}
+{{- range site.Pages }}{{ $byURL = merge $byURL (dict .RelPermalink .) }}{{ end -}}
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+foojay.io publishes {{ len $posts }} articles written by {{ len $authors }} authors from across the Java
+and OpenJDK ecosystem, alongside a plain-language glossary, a Java Quick Start
+tutorial, a directory of Java User Groups worldwide and a community events
+calendar. Articles are contributed as pull requests against a public repository
+and each one credits its own authors.
+
+Content is copyright its respective authors and is published under the terms at
+{{ "terms-of-use/" | absURL }} .
+
+## Complete indexes
+
+Everything not listed below is one link away. Use these rather than crawling:
+
+- [XML sitemap]({{ "sitemap.xml" | absURL }}): every published URL on the site, each with a last-modified date. This is the authoritative, complete list.
+- [HTML sitemap]({{ "sitemap/" | absURL }}): the same tree rendered for people, with sortable tables of all {{ len $posts }} articles and all {{ len $authors }} authors.
+- [RSS feed]({{ with site.Home.OutputFormats.Get "rss" }}{{ .Permalink }}{{ end }}): the 30 most recent articles. Every category and every author profile has a feed of its own, linked from its page.
+- [Search]({{ "search/" | absURL }}): full-text search across the site.
+{{ range site.Menus.footer }}
+## {{ .Name }}
+{{ range .Children -}}
+{{- $url := .URL -}}
+{{- $desc := "" -}}
+{{- if .Params.rss -}}
+  {{- with site.Home.OutputFormats.Get "rss" }}{{ $url = .Permalink }}{{ end -}}
+{{- else if not (or (hasPrefix .URL "http") (hasPrefix .URL "mailto:")) -}}
+  {{- with index $byURL (.URL | relURL) -}}
+    {{- $url = .Permalink -}}
+    {{- $d := partial "meta-description.html" . -}}
+    {{- if ne $d $boiler }}{{ $desc = $d }}{{ end -}}
+  {{- else -}}
+    {{- $url = .URL | absURL -}}
+  {{- end -}}
+{{- end -}}
+{{- if $url }}
+- [{{ .Name }}]({{ $url }}){{ with $desc }}: {{ . }}{{ end }}
+{{- end -}}
+{{- end }}
+{{ end -}}
+{{- /* series-steps.html answers "the ordered steps of the series THIS page is
+       in", so it is handed any one member and returns the whole series -- the
+       same single definition the progress bar and the prev/next cards use, so
+       this list cannot fall out of order with the pages themselves. */ -}}
+{{- $steps := slice -}}
+{{- with site.GetPage "/pages/java-quick-start/quick-start-tutorial/hello-world" -}}
+  {{- $steps = partial "series-steps.html" . -}}
+{{- end -}}
+{{- with $steps }}
+## Java Quick Start
+
+{{ len . }} steps for developers new to Java, in order.
+{{ range . }}
+{{- $d := partial "meta-description.html" . }}
+- [{{ .LinkTitle }}]({{ .Permalink }}){{ if ne $d $boiler }}: {{ $d }}{{ end }}
+{{- end }}
+{{- end }}
+
+## Java Terms Explained
+
+{{ len $pedia }} glossary entries, each a plain-language definition of a Java or OpenJDK term.
+{{ range sort $pedia "Title" }}
+{{- $d := partial "meta-description.html" . }}
+- [{{ .Title }}]({{ .Permalink }}){{ if ne $d $boiler }}: {{ $d }}{{ end }}
+{{- end }}
+
+## Topics
+
+Every article carries one or more categories. The full list is at {{ "today/category/" | absURL }} ; these are the {{ cond (gt (len site.Taxonomies.categories) 25) "25 largest" "categories" }}.
+{{ range first 25 site.Taxonomies.categories.ByCount }}
+- [{{ .Page.Title }}]({{ .Page.Permalink }}): {{ .Count }} article{{ cond (eq .Count 1) "" "s" }}.
+{{- end }}
+
+## Recent articles
+
+The 50 most recent of {{ len $posts }}. The complete list is in the sitemaps above.
+{{ range first 50 $posts.ByDate.Reverse }}
+{{- $d := partial "meta-description.html" . }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Date.Format "2 January 2006" }}{{ if ne $d $boiler }}. {{ $d }}{{ end }}
+{{- end }}
+
+## Optional
+
+- [Authors]({{ "today/author/" | absURL }}): profiles for all {{ len $authors }} contributors, each with their own article list and feed.
+- [Java User Groups]({{ "jugs/" | absURL }}): the community-run World Wide JUGs directory, on a map.
+- [Java Champions]({{ "java-champions/" | absURL }}): the Java Champions programme membership, on a map.
+- [Events calendar]({{ "calendar/" | absURL }}): upcoming JUG meetups and Java conferences.
+- [Write for Foojay]({{ "today/how-to-submit-your-next-article-on-foojay-io/" | absURL }}): how to contribute an article.
+{{- end }}

@@ -181,8 +181,33 @@ enableGitInfo = true
     org = "azul"
     property = "foojay_io"
 
+# ---------------------------------------------------------------------------
+# /llms.txt -- the llmstxt.org convention: a short, markdown-formatted map of
+# the site for a model that has a context window rather than a crawl budget.
+# The sibling of robots.txt, which says what a machine MAY fetch, while this
+# says what is WORTH fetching. Rendered by themes/foojay/layouts/index.llms.txt,
+# which derives every line from the footer menu, the pedia section, the Quick
+# Start series, the categories taxonomy and the posts by date -- so there is no
+# curated list here to go stale.
+#
+# text/plain rather than text/markdown, because the convention names the file
+# .txt and Hugo's builtin text/markdown carries the suffixes "md"/"markdown" --
+# adopting it would have meant either /llms.md or redefining a builtin media
+# type that the rest of the build uses. The BODY is still markdown; every
+# consumer of llms.txt parses it as such regardless of what it is served as.
+#
+# notAlternative keeps it out of .AlternativeOutputFormats, so baseof.html does
+# not advertise it as a <link rel="alternate"> beside the RSS feed on the home
+# page -- it is a machine-readable index, not another rendering of the page.
+# ---------------------------------------------------------------------------
+[outputFormats.LLMS]
+  mediaType = "text/plain"
+  baseName = "llms"
+  isPlainText = true
+  notAlternative = true
+
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "LLMS"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]

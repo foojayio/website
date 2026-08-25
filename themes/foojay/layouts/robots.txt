@@ -20,5 +20,38 @@ Disallow: /
 User-agent: *
 Disallow:
 
+# AI crawlers are welcome, and this says so EXPLICITLY rather than leaving it to
+# the wildcard above. Foojay exists to spread Java and OpenJDK knowledge, and
+# being reachable as a source in an AI assistant is reach for the {{ len (partial "authors-all.html") }} authors
+# who contribute here -- the same argument as being indexed by a search engine.
+#
+# Naming each agent is the point. A bare permissive robots.txt is indistinguishable
+# from one nobody has thought about, so an operator adding a new agent, or anyone
+# auditing this site, gets a decision they can read instead of an omission they
+# have to interpret. It also means REMOVING an agent from this list is a
+# deliberate, reviewable edit rather than a policy that drifts by accident.
+#
+# See /llms.txt for what is worth fetching: robots.txt grants access, llms.txt
+# is the curated map. Content remains copyright its respective authors --
+# {{ "terms-of-use/" | absURL }}
+{{ range $agent := slice
+    "GPTBot" "ChatGPT-User" "OAI-SearchBot"
+    "ClaudeBot" "Claude-User" "Claude-SearchBot" "anthropic-ai"
+    "Google-Extended" "GoogleOther"
+    "Applebot-Extended"
+    "PerplexityBot" "Perplexity-User"
+    "CCBot"
+    "meta-externalagent" "FacebookBot"
+    "Bytespider"
+    "Amazonbot"
+    "cohere-ai"
+    "DuckAssistBot"
+    "MistralAI-User"
+    "Timpibot"
+    "YouBot" -}}
+User-agent: {{ $agent }}
+Allow: /
+
+{{ end -}}
 Sitemap: {{ "sitemap.xml" | absURL }}
 {{- end }}
