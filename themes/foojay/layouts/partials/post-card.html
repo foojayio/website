@@ -3,15 +3,34 @@
          page            the Page (required)
          maxCategories   how many category chips to show; 0 = all
                          (default 2, so a card stays a card)
-       The AI portal passes 0: there the category chips ARE the navigation, so a
-       post's full topic list is the point rather than clutter. */ -}}
+         compact         the card is NARROW; drop what does not survive it
+                         (default false)
+       The AI portal passes maxCategories 0: there the category chips ARE the
+       navigation, so a post's full topic list is the point rather than clutter.
+
+       `compact` is one flag rather than several because it states one fact --
+       this card is about 178px wide, not the usual 255+ -- and everything it
+       switches off follows from that fact alone, so the caller never has to
+       keep two knobs in agreement. The related-posts strip at the foot of an
+       article is the only caller today; it lays three or four cards across the
+       article column. It drops:
+
+         - the description. 140 characters under a two-line title is ten lines
+           of text, taller than the thumbnail above it. Omitted rather than
+           hidden in CSS, or the markup would still be built and shipped on all
+           2147 post pages for the browser to throw away.
+         - the author NAMES, above one. foojay-podcast-94 credits twelve
+           people; see byline.html for why that becomes "12 authors" rather
+           than a truncated list. */ -}}
 {{- $p := . -}}
 {{- $maxCategories := 2 -}}
+{{- $compact := false -}}
 {{- if reflect.IsMap . -}}
   {{- $p = .page -}}
   {{/* isset, not `default`: 0 is a meaningful value here and `default` would
        read it as "unset" and fall back to 2. */}}
   {{- if isset . "maxCategories" -}}{{- $maxCategories = .maxCategories -}}{{- end -}}
+  {{- if isset . "compact" -}}{{- $compact = .compact -}}{{- end -}}
 {{- end -}}
 {{- with $p -}}
 <article class="post-card">
@@ -22,13 +41,13 @@
 
   <div class="post-card-meta">
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-    {{ partial "byline.html" . }}
+    {{ partial "byline.html" (dict "page" . "maxNames" (cond $compact 1 0)) }}
     {{ partial "views.html" . }}
   </div>
 
   <h3 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
 
-  {{ with .Params.description }}<p class="post-card-excerpt">{{ . | truncate 140 }}</p>{{ end }}
+  {{ if not $compact }}{{ with .Params.description }}<p class="post-card-excerpt">{{ . | truncate 140 }}</p>{{ end }}{{ end }}
 
   {{ with .Params.categories }}
   {{ $cats := . }}

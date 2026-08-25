@@ -1,0 +1,16 @@
+{{- /* A post's `related_posts` slugs as resolved Pages, in the author's order,
+       skipping any slug that matches no post. Takes the post; returns a slice.
+
+       Matched through the cached slug->page index, so a related link resolves
+       whatever <year>/<month> folder the post sits in and without scanning
+       every post per slug.
+
+       One definition for the same reason as post-authors.html: the section at
+       the foot of the article and the jump link in partials/toc.html must agree
+       on whether there is a section at all. validate/Frontmatter.java fails a
+       PR on a dangling reference, so the skip is a guard against a post deleted
+       after that check ran rather than the normal case. */ -}}
+{{- $index := partialCached "post-index.html" "posts" -}}
+{{- $pages := slice -}}
+{{- range .Params.related_posts }}{{ with index $index . }}{{ $pages = $pages | append . }}{{ end }}{{ end -}}
+{{- return $pages -}}

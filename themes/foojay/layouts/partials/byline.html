@@ -1,14 +1,57 @@
 {{/* Renders a post's author byline. Posts can have multiple authors
      (`authors:` list); falls back to the legacy single `author:` slug so
-     not-yet-reconverted posts still show a byline. */}}
+     not-yet-reconverted posts still show a byline.
+
+     Called either with the Page -- the normal case -- or with a dict:
+       page      the Page (required)
+       maxNames  above this many authors, render "N authors" instead of the
+                 names (0, the default, always names everyone)
+
+     `maxNames 1` is what the related-posts cards pass. A podcast episode can
+     credit a dozen people -- foojay-podcast-94 credits twelve -- and in a
+     ~178px card that byline is taller than the thumbnail above it and buries
+     the title and date, which are what a reader actually picks the next
+     article on. It is a count rather than a truncated list ("Frank Delporte
+     and 11 others") because at this size the first name is not more meaningful
+     than the rest, it is just the one that sorted first.
+
+     The collapsed form is a <span>, not a link: there is no single author page
+     to send twelve people to, and the card's title link already goes to the
+     post that names them.
+
+     THE .byline-group WRAPPER IS LOAD-BEARING, and it belongs here rather than
+     in each caller. Every place a byline appears is a flex row with a `gap`
+     (.post-meta, .post-card-meta), and a flex container makes EVERY child its
+     own item -- so without the wrapper the names and the ", " between them were
+     separate items and the gap was applied around the comma too, rendering
+     "Dominika Tasarz , Luqman Saeed". Wrapped, the flex row sees one item and
+     the names and commas inside it flow as ordinary inline text. posts/single.html
+     used to add this wrapper itself, which is exactly why the post header looked
+     right and the cards did not. */}}
+{{ $p := . }}
+{{ $maxNames := 0 }}
+{{ if reflect.IsMap . }}
+  {{ $p = .page }}
+  {{ if isset . "maxNames" }}{{ $maxNames = .maxNames }}{{ end }}
+{{ end }}
+{{ with $p }}
 {{ $authors := .Params.authors }}
 {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
-{{ range $i, $slug := $authors }}
-  {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
-  {{- $author := partial "author-page.html" $slug -}}
-  {{- if $author -}}
-    <a class="byline" href="{{ $author.RelPermalink }}">{{ $author.Title }}</a>
-  {{- else -}}
-    <span class="byline">{{ $slug }}</span>
-  {{- end -}}
+<span class="byline-group">
+{{- if and (gt $maxNames 0) (gt (len $authors) $maxNames) }}
+  {{- /* "N authors", never "N author": the branch only runs above maxNames,
+         which is at least 1, so the plural always holds. */ -}}
+  <span class="byline">{{ len $authors }} authors</span>
+{{- else -}}
+  {{ range $i, $slug := $authors }}
+    {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
+    {{- $author := partial "author-page.html" $slug -}}
+    {{- if $author -}}
+      <a class="byline" href="{{ $author.RelPermalink }}">{{ $author.Title }}</a>
+    {{- else -}}
+      <span class="byline">{{ $slug }}</span>
+    {{- end -}}
+  {{ end }}
+{{- end -}}
+</span>
 {{ end }}

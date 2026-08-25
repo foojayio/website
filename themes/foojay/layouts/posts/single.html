@@ -45,7 +45,7 @@
         {{/* Wrapped so the "·" separator (.post-meta > * + *::before) attaches to
              this span, not to the author <a> inside -- otherwise the dot becomes
              part of the clickable, underlined link. */}}
-        <span class="byline-group">{{ partial "byline.html" . }}</span>
+        {{ partial "byline.html" . }}
         <span class="reading-time">{{ .ReadingTime }} min read</span>
         {{ partial "views.html" . }}
       </div>
@@ -101,12 +101,19 @@
 
     {{ partial "page-source.html" . }}
 
-    {{ $authors := .Params.authors }}
-    {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
-    {{ range $authors }}
-      {{ $author := partial "author-page.html" . }}
+    {{/* The resolved author pages come from partials/post-authors.html, which
+         partials/toc.html reads too -- so the "About the author" jump link and
+         these callouts cannot disagree about whether there are any. */}}
+    {{ range $i, $author := partial "post-authors.html" . }}
       {{ with $author }}
-      <section class="author-callout">
+      {{/* id on the FIRST callout only: a post can credit twelve people
+           (foojay-podcast-94), and the TOC offers one entry that lands at the
+           top of the run. Hand-written rather than minted by Goldmark, and
+           namespaced `post-` for the reason the #transcript comment above
+           gives: Goldmark dedupes ids inside .Content and knows nothing about
+           this one, so a post whose own body has an "## About the author"
+           heading would take that id first and the link would land on it. */}}
+      <section class="author-callout"{{ if eq $i 0 }} id="post-authors"{{ end }}>
         {{/* data-pagefind-ignore="all": a post with no hero and no images of
              its own would otherwise hand this photo to Pagefind as the post's
              search thumbnail. "all" rather than the bare attribute, whose
@@ -124,20 +131,39 @@
       {{ end }}
     {{ end }}
 
-    {{ with .Params.related_posts }}
-    {{ $posts := partialCached "post-index.html" "posts" }}
-    <section class="related-posts">
+    {{/* partials/related-pages.html resolves the slugs, and partials/toc.html
+         calls the same partial -- so the jump link and the section agree. */}}
+    {{ with partial "related-pages.html" . }}
+    {{/* data-pagefind-ignore: these are other posts' titles, dates and authors,
+         and without it every article's search entry absorbs the metadata of the
+         three or four it links to -- so a query would match a post because of
+         what it recommends rather than what it says. The bulleted version had
+         the same problem on a smaller scale (titles only). Nothing becomes
+         unfindable: each related post is indexed as its own page. */}}
+    <section class="related-posts" id="post-related" data-pagefind-ignore>
       <h3>Related posts</h3>
-      <ul>
-        {{/* Match related slugs to posts via the cached slug->page index, so a
-             related link resolves regardless of the post's <year>/<month> bucket
-             and without scanning every post per slug. */}}
+      {{/* THREE across, fixed, and the count is not consulted. Four fitted the
+           article column but squeezed a card to ~178px, where the meta line
+           ("1 Jun 2026 - 3 authors - 898 views") wraps onto a second row and
+           the card stops being scannable. Three gives ~248px, which holds it on
+           one line and makes every related card the same size on every post
+           whether the author listed one or five.
+
+           So four related posts -- the commonest case -- wrap as 3 + 1, and
+           five as 3 + 2. That is a grid wrapping, which is what it looks like;
+           balancing the rows instead would mean 2 x 2 cards of ~381px, wider
+           than a card anywhere else on the site for the section that matters
+           least on the page. The column count lives in the CSS, not here,
+           because nothing about it depends on the page. */}}
+      <div class="related-posts__grid post-grid">
         {{ range . }}
-          {{ with index $posts . }}
-            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-          {{ end }}
+          {{/* compact: three across the article column puts a card at ~248px,
+               and narrower still once the grid reflows. See post-card.html for
+               what that drops and why. maxCategories 1 for the same reason --
+               a post carries up to eight and two chips already wrap here. */}}
+          {{ partial "post-card.html" (dict "page" . "maxCategories" 1 "compact" true) }}
         {{ end }}
-      </ul>
+      </div>
     </section>
     {{ end }}
 

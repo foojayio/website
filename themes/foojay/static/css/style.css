@@ -698,7 +698,14 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 }
 .post-card-meta a { color: var(--ink-muted); font-weight: 600; }
 .post-card-meta a:hover { color: var(--brand-accent-strong); }
-.post-card-meta time + a::before,
+/* `time + .byline-group`, not `time + a`: byline.html wraps its output in that
+   span so the flex row treats a multi-author byline as ONE item (see the
+   partial), and the old selector additionally only matched when the byline
+   happened to be an <a> -- which it is not for a legacy slug with no author
+   bundle, nor for the collapsed "12 authors" a compact card renders. Both of
+   those silently lost their separator, leaving the date run together with the
+   name while the view count kept its own dot. */
+.post-card-meta time + .byline-group::before,
 .post-card-meta .views::before { content: "·"; margin-right: .5rem; color: var(--border-strong); }
 
 .post-card-categories, .post-categories, .chip-row {
@@ -858,6 +865,29 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .toc #TableOfContents a:hover { color: var(--brand-accent-strong); }
 .toc #TableOfContents a.is-active { color: var(--brand-accent-strong); border-left-color: var(--brand-accent-strong); font-weight: 600; }
 
+/* End matter -- "About the author", "Related posts", "Join the discussion" --
+   appended to the panel by partials/toc.html. Ruled off from the article's own
+   headings above it, because those three are on nearly every post and without a
+   break a five-heading article reads as an eight-heading one.
+
+   The divider goes on the FIRST tail item via the adjacent-sibling selector
+   rather than on a fixed child position: which entries exist varies per post
+   (a post with no related posts has two, a fork with giscus unconfigured has
+   one), so :nth-child would put the line in the wrong place. `li:not(.toc__tail)
+   + li.toc__tail` is "the first tail item that follows a real heading" -- and
+   it correctly draws nothing on a podcast episode whose panel is tail-only,
+   where there is no article section to separate it from.
+
+   Nested headings are in a child <ul>, so a top-level li is never a .toc__tail's
+   previous sibling by accident. */
+.toc #TableOfContents li:not(.toc__tail) + li.toc__tail {
+  margin-top: .55rem; padding-top: .55rem; border-top: 1px solid var(--border);
+}
+/* A shade quieter than a heading link: it is a destination on the page, not
+   something the article says. is-active still wins -- it is set on the <a>, and
+   the scroll-spy highlights these like any other entry. */
+.toc #TableOfContents .toc__tail > a { color: var(--ink-muted); }
+
 /* ------------------------------------------------------------- article --- */
 
 .post-single, .page-single { max-width: 88ch; }
@@ -880,12 +910,42 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .related-posts {
   margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
 }
-.related-posts h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; }
-/* A real bulleted list -- markers need display: list-item, so no grid here. */
-.related-posts ul { list-style: disc; margin: 0; padding-left: 1.25rem; }
-.related-posts li { margin: .4rem 0; }
-.related-posts a { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
-.related-posts a:hover { color: var(--brand-accent-strong); }
+.related-posts h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
+
+/* Cards rather than a bulleted list, because what makes a reader take the next
+   article is the picture and the date as much as the title -- the same reason
+   every listing on the site is a grid of partials/post-card.html and not a
+   list of links. It IS that partial: the strip only supplies the grid and a
+   smaller type scale, so a related card cannot drift from a card anywhere else.
+
+   THREE across the article column (~778px inside the sidebar layout), which
+   puts a card at ~248px. Four fitted, but at ~178px the card's meta line wraps
+   onto a second row -- see posts/single.html for why three is fixed rather than
+   derived from how many related posts there are.
+
+   The formula is the gallery shortcode's: each cell is at least its exact
+   third, so the grid never opens a fourth column, while the 165px floor drops
+   it to two and then one on a narrow screen instead of squashing them.
+
+   auto-FILL, not the gallery's auto-fit, and that is the whole reason a lone
+   related post is not a hero. auto-fit COLLAPSES a track with nothing in it, so
+   the single card on the 7 posts that list one related article would stretch to
+   the full 778px with a 519px-tall thumbnail. The gallery can use auto-fit
+   safely because it sets its column count to the image count and so never has
+   an empty track; here the columns are fixed and the cards are not. */
+.related-posts__grid {
+  --related-gap: 1rem;
+  gap: var(--related-gap);
+  grid-template-columns: repeat(auto-fill, minmax(max(165px,
+      calc((100% - 2 * var(--related-gap)) / 3)), 1fr));
+}
+/* The card, one step down. Class-on-class so each rule outranks the base
+   .post-card-* single-class rules above rather than tying with them and
+   depending on source order for something this visible. */
+.related-posts__grid .post-card { gap: .45rem; }
+.related-posts__grid .post-card-title { font-size: .95rem; }
+.related-posts__grid .post-card-meta { font-size: .75rem; gap: .35rem; }
+.related-posts__grid .post-card-categories a { font-size: .66rem; padding: .18rem .5rem; }
 
 /* giscus comments. The widget is an iframe that giscus sizes itself, so there is
    nothing to style inside it -- only the section that holds it, matching
@@ -1593,7 +1653,23 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose h3 { margin-top: 1.75rem; }
 /* So a TOC-link jump (or any #heading link) doesn't leave the heading
    tucked under the sticky header. */
-.prose h2, .prose h3 { scroll-margin-top: calc(var(--header-h) + 1rem); }
+/* Anything the reader can JUMP to has to clear the sticky header, or the
+   heading it lands on is drawn underneath it and the section looks like it
+   starts at its second paragraph.
+
+   The article's own headings are the common case. The three below are the end
+   matter partials/toc.html links to from the "On this page" panel; they are
+   <section>s outside .prose, so the rule above does not reach them and they
+   each scrolled their own title out of sight. [id] rather than the bare class
+   because only a section that is a target needs it -- an author callout gets
+   its id only when it is the FIRST of a post's authors, which is the one the
+   panel points at. A new end-matter section needs a selector here at the same
+   moment it gets its id; there is nowhere else to notice. (#transcript needs
+   nothing: it is an <h2> inside .prose.) */
+.prose h2, .prose h3,
+.author-callout[id], .related-posts[id], .giscus-section[id] {
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
 .prose ul, .prose ol { padding-left: 1.4rem; }
 .prose li + li { margin-top: .35rem; }
 .prose figure { margin: 1.75rem 0; }

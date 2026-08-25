@@ -1,0 +1,19 @@
+{{- /* A post's authors as resolved author PAGES, in the order the post lists
+       them, skipping any slug with no bundle. Takes the post; returns a slice.
+
+       One definition because two templates have to agree about it, and the
+       failure if they drift is silent: posts/single.html renders an author
+       callout per resolved author, and partials/toc.html offers a jump link to
+       the first one -- so a slug that resolves in one and not the other is a
+       TOC entry pointing at an anchor that is not on the page.
+
+       Note this is NOT what byline.html uses. A byline falls back to printing
+       an unresolvable slug as plain text, because a byline with a name missing
+       from it is worse than one naming someone with no profile; a callout has
+       nothing to show without the bundle, so it is dropped. Same list, two
+       legitimately different answers about what to do with a miss. */ -}}
+{{- $slugs := .Params.authors -}}
+{{- if and (not $slugs) .Params.author }}{{ $slugs = slice .Params.author }}{{ end -}}
+{{- $pages := slice -}}
+{{- range $slugs }}{{ with partial "author-page.html" . }}{{ $pages = $pages | append . }}{{ end }}{{ end -}}
+{{- return $pages -}}

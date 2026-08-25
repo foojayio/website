@@ -11,28 +11,70 @@
      empty <nav> wrapper even when there are no headings, so `with` was always
      true and this widget rendered as a bare "On this page" heading with
      nothing under it on the home and listing pages. */}}
-{{/* THE TRANSCRIPT ENTRY HAS TO BE APPENDED BY HAND. A podcast episode's
-     "Transcript" <h2> is rendered by posts/single.html from a bundle RESOURCE
-     (transcript.md), so it is not part of .Content and .TableOfContents -- which
-     Hugo builds from the page's own markdown -- cannot see it. Without this the
-     one section a reader is most likely to want to jump to was the one section
-     missing from the panel.
+{{/* ENTRIES FOR TEMPLATE-RENDERED SECTIONS HAVE TO BE APPENDED BY HAND.
+     .TableOfContents is built from the page's own markdown, so it cannot see a
+     heading that posts/single.html renders itself -- the transcript (which
+     comes from a bundle RESOURCE, transcript.md), the author callouts, the
+     related-posts strip or the comment section. Those are the four things at
+     the foot of a long article that a reader most often wants to jump to, and
+     without this they were the sections missing from the panel.
 
-     Inserted before the LAST </ul> so it lands as a top-level item of Hugo's own
-     list, which is what an h2 is: nested lists have closed by then. Doing it
-     that way rather than rendering a second <ul> next to the nav means the
+     Each entry is conditional on the SAME partial the article uses to decide
+     whether to render the section at all -- post-authors.html,
+     related-pages.html, has-comments.html -- so the panel can never offer a
+     link to an anchor that is not on the page. The ids are hand-written in
+     posts/single.html and namespaced `post-` so Goldmark, which mints ids for
+     .Content and knows nothing about these, cannot take one first.
+
+     Inserted before the LAST </ul> so they land as top-level items of Hugo's
+     own list, which is what an h2 is: nested lists have closed by then. Doing
+     it that way rather than rendering a second <ul> beside the nav means the
      existing .toc #TableOfContents styling and toc.js's scroll-spy (it collects
-     every a[href^="#"] inside .toc) apply to it with nothing added to either.
+     every a[href^="#"] inside .toc) cover them with nothing added to either.
      The regex is anchored to the end of the string, so a </ul> inside a heading
      title is not a target. */}}
 {{ $hasToc := partial "has-toc.html" . }}
-{{ $transcript := "" }}
+
+{{/* The transcript is CONTENT -- the bulk of what the page says -- so it joins
+     the article's own headings, unmarked. */}}
+{{ $items := slice }}
 {{ if .Resources.GetMatch "transcript.md" }}
-  {{ $transcript = `<li><a href="#transcript">Transcript</a></li>` }}
+  {{ $items = $items | append `<li><a href="#transcript">Transcript</a></li>` }}
 {{ end }}
-{{ if or $hasToc $transcript }}
+
+{{/* The end matter is marked with a class so the CSS can rule it off from the
+     article's own sections: it is the same page, but it is not what the article
+     SAYS, and three near-constant entries reading like chapters would make a
+     five-heading post look like an eight-heading one. */}}
+{{ $tail := slice }}
+{{ with partial "post-authors.html" . }}
+  {{/* Plural derived from the count, not written twice: foojay-podcast-94
+       credits twelve people and most posts credit one. */}}
+  {{ $label := cond (gt (len .) 1) "About the authors" "About the author" }}
+  {{ $tail = $tail | append (printf `<li class="toc__tail"><a href="#post-authors">%s</a></li>` $label) }}
+{{ end }}
+{{ with partial "related-pages.html" . }}
+  {{ $tail = $tail | append `<li class="toc__tail"><a href="#post-related">Related posts</a></li>` }}
+{{ end }}
+{{ if partial "has-comments.html" . }}
+  {{/* Wording matches the heading the section actually shows, the same rule the
+       Transcript entry follows -- a link labelled one thing that lands on a
+       heading labelled another reads as the wrong link. */}}
+  {{ $tail = $tail | append `<li class="toc__tail"><a href="#giscus-comments">Join the discussion</a></li>` }}
+{{ end }}
+
+{{/* End matter NEVER brings the panel into existence on its own. "About the
+     author / Related posts / Join the discussion" is not a table of contents --
+     it is the same three lines on every post, and on a short post with no
+     headings it would map nothing about the article. So it is appended to a
+     panel that already has a reason to exist, and a post with no headings and
+     no transcript still gets no panel at all. */}}
+{{ $extras := $items }}
+{{ if or $hasToc $items }}{{ $extras = $items | append $tail }}{{ end }}
+
+{{ if or $hasToc $items }}
 {{ $toc := printf "%s" .TableOfContents }}
-{{ with $transcript }}
+{{ with delimit $extras "" }}
   {{ if $hasToc }}
     {{ $toc = replaceRE `</ul>\s*</nav>\s*$` (printf "%s</ul></nav>" .) $toc }}
   {{ else }}
