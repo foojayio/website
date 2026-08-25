@@ -38,10 +38,7 @@
       live page's, so the n-th placeholder provably pairs with the n-th address.
       148 files, 279 addresses, including `links@jfx-central.com` on every JFX
       Links post.
-  * Two things left deliberately:
-    * `content/pages/terms-of-use.md` has `[info@azul.com](mailto:info@azul.io)`
-      -- that mismatch is in the WordPress source, faithfully reproduced. Fix it
-      there (or here) if `azul.io` is a typo.
+  * One thing left deliberately:
     * `.../best-practices-for-working-with-ai-agents-...` really does contain the
       words "[email protected]" in two prompt examples; the live page has the
       same literal, so it is the author's own text, not damage.

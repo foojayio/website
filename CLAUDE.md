@@ -419,9 +419,8 @@ should catch a mistake at PR time rather than letting it fail silently.
   is only written when its placeholder count matches the number of obfuscated
   elements in the live page body, so the n-th placeholder provably pairs with
   the n-th address; a file that doesn't match is left alone and reported, never
-  guessed at. `--dry-run` / `--path` as usual. 148 files, 279 addresses. Two
-  known leftovers, both correct: `content/pages/terms-of-use.md` reproduces
-  WordPress's own `[info@azul.com](mailto:info@azul.io)` mismatch, and one post
+  guessed at. `--dry-run` / `--path` as usual. 148 files, 279 addresses. One
+  known leftover: one post
   really does contain the words "[email protected]" in a prompt example (the
   live page has the same literal). Run it again after any late re-scrape, before
   cutover kills the only source of these addresses.
