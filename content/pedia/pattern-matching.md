@@ -16,3 +16,4 @@ The more powerful form is pattern matching in `switch` expressions and statement
 * [Switch Expressions](/pedia/switch-expressions/)
 * [Records](/pedia/records/)
 * [Sealed Classes](/pedia/sealed-classes/)
+* [Project Amber](/pedia/project-amber/)

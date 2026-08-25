@@ -29,3 +29,4 @@ Structured Concurrency prevents several concurrency hazards that are difficult t
 * [Virtual Threads](/pedia/virtual-threads/)
 * [Scoped Values](/pedia/scoped-values/)
 * [Records](/pedia/records/)
+* [Project Loom](/pedia/project-loom/)

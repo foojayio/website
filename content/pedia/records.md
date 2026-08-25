@@ -16,3 +16,4 @@ Records pair naturally with sealed classes and pattern matching. Together, these
 * [Text Blocks](/pedia/text-blocks/)
 * [Value Objects (Project Valhalla)](/pedia/value-objects-project-valhalla/)
 * [Sealed Classes](/pedia/sealed-classes/)
+* [Project Amber](/pedia/project-amber/)

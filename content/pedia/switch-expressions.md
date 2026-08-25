@@ -39,3 +39,4 @@ Switch expressions laid the groundwork for [pattern matching in switch](https://
 * [Pattern Matching](/pedia/pattern-matching/)
 * [Sealed Classes](/pedia/sealed-classes/)
 * [Records](/pedia/records/)
+* [Project Amber](/pedia/project-amber/)

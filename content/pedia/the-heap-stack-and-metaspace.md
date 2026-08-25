@@ -20,3 +20,4 @@ More reading on Foojay: [Debugging RAM: Java Garbage Collection – Java Heap De
 * [Garbage Collection](/pedia/garbage-collection/)
 * [GC Algorithms: G1, ZGC, and Shenandoah](/pedia/gc-algorithms-g1-zgc-and-shenandoah/)
 * [Epsilon GC](/pedia/epsilon-gc/)
+* [Project Lilliput](/pedia/project-lilliput/)

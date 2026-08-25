@@ -32,3 +32,4 @@ Scoped Values are designed to work in conjunction with [Structured Concurrency](
 * [Structured Concurrency](/pedia/structured-concurrency/)
 * [Virtual Threads](/pedia/virtual-threads/)
 * [Records](/pedia/records/)
+* [Project Loom](/pedia/project-loom/)

@@ -50,3 +50,4 @@ More reading on Foojay:
 * [Heap Dump](/pedia/heap-dump/)
 * [JFR (Java Flight Recorder)](/pedia/jfr-java-flight-recorder/)
 * [OpenJDK Projects](/pedia/openjdk-projects/)
+* [Project Loom](/pedia/project-loom/)

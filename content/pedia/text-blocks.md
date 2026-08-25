@@ -29,3 +29,4 @@ Text blocks are plain `String` objects at runtime — there is no new type, no r
 * [Basic Java Concepts](/pedia/basic-java-concepts/)
 * [Records](/pedia/records/)
 * [Sealed Classes](/pedia/sealed-classes/)
+* [Project Amber](/pedia/project-amber/)

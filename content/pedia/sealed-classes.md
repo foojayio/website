@@ -22,3 +22,4 @@ Sealed classes work best in combination with records (for the leaf types) and pa
 * [Switch Expressions](/pedia/switch-expressions/)
 * [Records](/pedia/records/)
 * [Pattern Matching](/pedia/pattern-matching/)
+* [Project Amber](/pedia/project-amber/)

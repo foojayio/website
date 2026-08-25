@@ -30,3 +30,4 @@ The FFM API supersedes both JNI (for calling native functions) and the older `su
 * [Java Module System (JPMS)](/pedia/java-module-system-jpms/)
 * [Java Native Interface (JNI)](/pedia/java-native-interface-jni/)
 * [OpenJDK Projects](/pedia/openjdk-projects/)
+* [Project Panama](/pedia/project-panama/)
