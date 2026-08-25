@@ -68,11 +68,12 @@ went wrong is enough, and you do not need to know the technical name for it.
 - Or open an issue on the site's repository at
   [github.com/foojayio/website](https://github.com/foojayio/website/issues)
 
-We aim to reply within five working days. If a fix will take longer than that,
-we will say so and tell you what the workaround is in the meantime.
+We aim to reply asap. If a fix will take longer than that,
+we will say so. We'll try to do our best to make the site usable for you, but please remember that the site is built from contributions by volunteers, and we cannot promise a fix for every problem.
 
 ## Writing for foojay?
 
 If you contribute articles, the two things that matter most are **a description
 for every image** and **link text that says where the link goes**. Both are
-covered in the [contributor guide](https://github.com/foojayio/website/blob/main/CONTRIBUTING.md).
+covered in the [article template](https://github.com/foojayio/website/blob/main/template/post.md),
+the file you copy to start a new post.

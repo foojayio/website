@@ -77,6 +77,12 @@ Write normal paragraphs. Inline formatting: **bold**, *italic*, `inline code`,
 and [a link](https://foojay.io/). Links to other sites automatically open in a
 new tab; links to other foojay pages stay in the same tab.
 
+Make the link TEXT say where the link goes: "see the [Hugo documentation](https://gohugo.io/documentation/)",
+not "see the documentation [here](https://gohugo.io/documentation/)". A screen
+reader can list every link on a page on its own, out of the sentences around
+them, so a page of "here", "this" and "read more" is a list of destinations
+nobody can tell apart — and it reads better for anyone skimming, too.
+
 ## Extra Formatting Options
 
 ### Lists

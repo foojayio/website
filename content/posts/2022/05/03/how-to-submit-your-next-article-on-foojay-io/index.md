@@ -35,7 +35,7 @@ Each article lives in its own folder that holds an `index.md` file (your article
 2. **Copy `template/post.md`** (from the repository's `template/` folder) into your new folder and rename it to `index.md`. It contains every frontmatter field with comments explaining how to fill it in.
 3. **Fill in the frontmatter** at the top of `index.md`: `title`, `date`, `description`, your `authors` slug(s), and `categories`. The `template/categories.md` file lists the categories already in use — please reuse an existing one where it fits.
 4. **Write your article** below the frontmatter in [Markdown](https://www.markdownguide.org/basic-syntax/). Start your section headings at `##` — do **not** add a top-level `#` heading, because the `title` is already shown as the page heading. The template includes examples of headings, code blocks, images, tables, and shortcodes (for example `{{</* youtube VIDEO_ID */>}}` to embed a video).
-5. **Add your images** into the same folder and reference them by filename, e.g. `![A caption](diagram.png)`. Set the `image:` field in the frontmatter section to your preferred preview image.
+5. **Add your images** into the same folder and reference them by filename, e.g. `![The Ports view in IntelliJ, showing the app on port 8080](diagram.png)`. The text in the square brackets is the image's *description*, not a caption: it is the only part of the image a reader using a screen reader gets, so write what the image shows. Set the `image:` field in the frontmatter section to your preferred preview image.
 
 ## 3. Submit your article
 
