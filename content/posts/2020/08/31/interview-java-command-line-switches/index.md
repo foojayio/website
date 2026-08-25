@@ -9,7 +9,7 @@ image: "Screenshot-2020-08-29-at-23.09.05-1024x514.png"
 categories:
   - "Interviews"
 related_posts:
-frozen: false
+frozen: true
 ---
 
 We're happy to announce that we're hosting Chris Newland's [VMOptionsExplorer](http://javaalmanac.io) [right here on foojay](https://javaalmanac.io/jdk/8/), providing all details per release on Java command line switches.
@@ -18,7 +18,7 @@ We're happy to announce that we're hosting Chris Newland's [VMOptionsExplorer](h
 It also shows a diff between the currently selected release and the previous release, showing a tab for the switches that have been added and those that have been removed.
 ![](Screenshot-2020-08-29-at-23.09.57-1024x485.png)
 
-Go here to take a look, yourself: <https://foojay.io/command-line-arguments/openjdk-11>.
+Go here to take a look, yourself: <https://chriswhocodes.com/hotspot_options_openjdk11.html>.
 
 Let's meet Chris, here's a quick interview with him about his Java command line switches integrated into foojay!  
 

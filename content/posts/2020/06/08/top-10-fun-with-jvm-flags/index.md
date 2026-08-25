@@ -13,14 +13,14 @@ related_posts:
   - "how-is-leyden-improving-java-performance-part-3-of-3"
   - "how-is-leyden-improving-java-performance-part-2-of-3"
   - "indexing-all-of-wikipedia-on-a-laptop"
-frozen: false
+frozen: true
 ---
 
 When I first started programming in Java and configuring my local environment, I came across mentions of JVM flags. I wanted to find out more about what options are available, what they do, and how to make use of them. Delving into the internet to discover what other more seasoned developers had to say on the topic, I was surprised at how hard it was to get definitive answers, and ultimately this research left me with more questions than answers. Since resources on this topic are scattered and hard to find, I put together this consolidated list in the hopes that others don't have to scour the internet as I did to find these useful morsels.
 
 Below are the best 10 I have found, listed chronologically, although all are really awesome and worth exploring!
 
-1. [JVM Options Explorer](https://foojay.io/command-line-arguments/openjdk-11/?tab=alloptions), by Chris Newland. An incredible list of Java command line options that is actively maintained and updated. The flags are organized by Java version and vendor showing information about each flag including the file it is defined in. The website offers search and sort features to help navigate the large number of flags. The website also has a separate page that shows which flags were added and removed for each HotSpot version. Java versions in the main list vary by vendor but include options for JDK6 through JDK15. Vendors include HotSpot, Graal, OpenJ9 and Azul. These lists are compiled from vendor sources. **As of June 2020, this tool is actively maintained.**
+1. [JVM Options Explorer](https://chriswhocodes.com/hotspot_options_openjdk11.html), by Chris Newland. An incredible list of Java command line options that is actively maintained and updated. The flags are organized by Java version and vendor showing information about each flag including the file it is defined in. The website offers search and sort features to help navigate the large number of flags. The website also has a separate page that shows which flags were added and removed for each HotSpot version. Java versions in the main list vary by vendor but include options for JDK6 through JDK15. Vendors include HotSpot, Graal, OpenJ9 and Azul. These lists are compiled from vendor sources. **As of June 2020, this tool is actively maintained.**
 2. [JaCoLine - Java Command Line Inspector](https://jacoline.dev/inspect), by Chris Newland. A very useful tool for developers and devops to understand and validate their Java command line options. **As of June 2020, this tool is actively maintained.**
 3. [10 Important JVM Options for Production Java Application Systems](https://geekflare.com/important-jvm-options/), by Geekflare, **published on October 26, 2019**. Article highlighting a handful of command line options, with explanations on what they do and how to use them.
 4. [JVM Options Cheat Sheet](https://www.jrebel.com/blog/jvm-options-cheat-sheet), by Simon Maple, JRebel, **published on December 14, 2016**. Good overview of the types of command line options available, along with a one page cheat sheet detailing some useful options of each type.

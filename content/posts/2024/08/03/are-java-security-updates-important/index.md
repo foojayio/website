@@ -13,7 +13,7 @@ related_posts:
   - "java-where-the-wild-code-isnt"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
-frozen: false
+frozen: true
 ---
 
 **Recently, I was in discussion with a Java user at a bank about the possibilities of using [Azul Platform Core](https://www.azul.com/products/core/) (formerly known as Zulu) to run a range of applications. One of the most significant advantages for mission-critical enterprise applications is knowing that you have access to the latest security patches and bug fixes. With Platform Core, these are provided within a defined SLA after the embargo for updates is lifted (this is essentially the point in time when Oracle releases the update to their JDK).**
@@ -59,8 +59,8 @@ Firstly, here is a list of the highest-scoring CVSS in updates since April 2019.
 | July 2019     | 6.8             | 7, 8, 11, 12          |
 | April 2019    | 9.0             | 8                     |
 
-For a full view on CVEs per update of the JDK, see [Foojay.io](https://foojay.io/java-16/?tab=cve&quarter=042021&version=16.0.1):
-[![](image-1024x679.png)](https://foojay.io/java-16/?tab=cve&quarter=042021&version=16.0.1)
+For a full view on CVEs per update of the JDK, see [Foojay.io](https://javaalmanac.io/jdk/16/):
+[![](image-1024x679.png)](https://javaalmanac.io/jdk/16/)
 
 As you can see, recently, things have been relatively quiet with only medium-level vulnerabilities being addressed, but there have been some high and one critical.
 

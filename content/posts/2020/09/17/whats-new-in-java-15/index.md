@@ -13,13 +13,13 @@ related_posts:
   - "java-24-whats-new"
   - "whats-new-in-the-july-2026-azul-payara-release"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-frozen: false
+frozen: true
 ---
 
 Now that Java 15 has been released, let's take a look at what's new!
 
-[Here on foojay](https://foojay.io/java-15/?quarter=072020), the fixes that went into the release are listed, giving you a unique and readable changelog in helpful categories, with the invitation for you to vote on those that are most relevant to you:
-[![](new-java-15-foojay-1024x617.png)](https://foojay.io/java-15/?quarter=072020)
+[Here on foojay](https://javaalmanac.io/jdk/15/), the fixes that went into the release are listed, giving you a unique and readable changelog in helpful categories, with the invitation for you to vote on those that are most relevant to you:
+[![](new-java-15-foojay-1024x617.png)](https://javaalmanac.io/jdk/15/)
 
 ### New Features
 

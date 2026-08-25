@@ -14,7 +14,7 @@ related_posts:
   - "foojay-status-report-january-june-2022"
   - "foojay-status-report-july-december-2021"
   - "foojay-status-report-january-june-2021"
-frozen: false
+frozen: true
 ---
 
 Since the start of the Friends Of OpenJDK community in April 2020, we've had half yearly status reports, providing the highlights of the past half year, together with some stats and analysis, ending with roadmaps for the next upcoming periods.
@@ -116,8 +116,8 @@ Join in with the above [at the OpenValue meetup here](https://www.meetup.com/ope
 
 ## OpenJDK Information
 
-The first impulse for the creation of Foojay.io back in April 2020 was the absence of a clear place listing all the issues making it into a quarterly update or LTS release. That content continues to be added to the site each quarter, [as shown below](https://foojay.io/java-17/?tab=component&version=17.0.1&quarter=102021), with the option for anyone to vote on their favorite fixes for addition to the Highlights tab.
-[![](image-12-1024x601.png)](https://foojay.io/java-17/?tab=component&version=17.0.1&quarter=102021)
+The first impulse for the creation of Foojay.io back in April 2020 was the absence of a clear place listing all the issues making it into a quarterly update or LTS release. That content continues to be added to the site each quarter, [as shown below](https://javaalmanac.io/jdk/17/), with the option for anyone to vote on their favorite fixes for addition to the Highlights tab.
+[![](image-12-1024x601.png)](https://javaalmanac.io/jdk/17/)
 
 A key collaborator with Foojay.io is Chris Newland, whose range of tools on [chriswhocodes.com](https://chriswhocodes.com/) are gradually being transitioned to Foojay.io, most recently his collection of command line arguments reference materials, though the display and user interface continue to be enhanced and expanded.
 ![](image-13-1024x612.png)

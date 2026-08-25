@@ -13,7 +13,7 @@ related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
   - "friends-of-openjdk-at-fosdem-2022"
   - "getting-started-with-java-17-and-intellij-idea"
-frozen: false
+frozen: true
 ---
 
 Foojay.io, the place for **f** riends of **O** pen**J**DK, is a friendly community of users of the OpenJDK, such as Java developers and Kotlin developers.
@@ -26,38 +26,57 @@ You will find all the events in the following link:
 
 <https://foojay.io/calendar/>
 
-If you want to add an event to our calendar or advertize your event on Foojay.io, you can follow the following steps:   
+*Updated: foojay.io no longer runs on WordPress, so events are no longer added
+through a login. The steps below are the current ones.*
 
-1. **Join the Community.** Get started by joining the [Foojay community on Slack](https://join.slack.com/t/foojay/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ) and ask for your login credentials.
+If you want to add an event to our calendar or advertise your event on
+Foojay.io, there are two routes, and which one you need depends on whether your
+event already publishes a calendar feed.
 
-2. **Log in to Foojay.io.** Log in to the WordPress: [foojay.io/wp-admin](https://foojay.io/wp-admin).
+## A JUG meetup — nothing to do
 
-3. **Create a New Event.** From the left-right column, find the menu "Events." And then Click on Add New.
+If you run a Java User Group, foojay picks your meetups up **automatically** from
+the calendar your group already publishes: your own site's iCal feed, a Google
+Calendar, or Meetup's own export. Nothing has to be sent to us, and nothing has
+to be kept in step.
 
-![](Screen-Shot-2022-05-30-at-12.40.45-AM-1024x714.png)
+All that is needed is that your JUG is listed in the community-run
+[World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs),
+with a `calendar:` or `meetup_slug:` entry. That list is maintained by the JUG
+leads themselves, and foojay reads it once a day.
 
-4. **Enter the Event Details.** It will open a window where you can put all the details of your event.
+## A conference, workshop or one-off — one small file
 
-![](Screen-Shot-2022-05-30-at-12.45.47-AM-1024x871.png)
+A conference publishes no feed anyone can subscribe to, so those are added by
+hand — as a pull request against the site, which is also how articles are
+submitted:
 
-5. **Add the Title.** Put the title of your event and the necessary details in the text area.
+1. Copy [`template/event.yaml`](https://github.com/foojayio/website/blob/main/template/event.yaml)
+   to `data/events/<event-slug>.yaml`.
+2. Name the file after the event **including its year** —
+   `devoxx-belgium-2026.yaml`, `jfokus-2027.yaml`. Next year's edition is a new
+   file, not an edit of this one.
+3. Fill it in and open a pull request.
 
-6. **Set the Start and End Date.** Select the event start date and end date from the bottom of the text area in the content section. The event end date has to be future compared to the start date. (I hope that's a given!)
+```yaml
+name: "Devoxx Belgium 2026"
+type: "Conference"
+url: "https://devoxx.be/"
+start: "2026-10-05"
+end: "2026-10-09"
+venue: "Kinepolis Antwerpen"
+city: "Antwerp"
+country: "Belgium"
+```
 
-7. **Include a Link to the Call for Papers.** If there is a Call for Paper (CFP) end date, please specify that. This is not a mandatory field since all events don't have a CFP. Also, put the link to the CFP.
+Only `name`, `url`, `start`, `city` and `country` are required, and `city`/`country`
+can be left out for an online event. Everything else the calendar shows is worked
+out for you: the colour, the band across the days a multi-day conference runs,
+and the counts in the page header. You never have to come back to remove the
+file either — an event drops off the calendar by itself the day after it ends.
 
-8. **Add the Location and Type.** Put the location of the event and the type of events, e.g., Conference, Java User Group, etc.
-
-9. **Add a Link to the Event Page.** Put in the link for the event and if there is a Google calendar link of the events.
-
-10. **Publish!** Now click on the Publish button from the top right corner. (Yes, publish your event yourself as soon as you're ready to do so.)
-
-That's it. Your event is published!
-
-![](Screen-Shot-2022-05-30-at-12.46.32-AM-1024x807.png)
-
-Now you can find your event on the landing page in the calendar section.
-
-As a bonus, you can set a reminder for the event from the Foojay calendar. Click on the event, and a modal window will appear, and that's where you'd be able to set a calendar reminder.
-
-![](Screen-Shot-2022-05-30-at-1.01.58-AM-1024x760.png)
+The full field reference is in
+[CONTRIBUTING.md](https://github.com/foojayio/website/blob/main/CONTRIBUTING.md),
+and if you would rather not open a pull request yourself, ask in the
+[Foojay community on Slack](https://join.slack.com/t/foojay/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ)
+and someone will do it for you.

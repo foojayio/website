@@ -13,7 +13,7 @@ related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "electronics-quarkus-qute-on-raspberry-pi"
   - "bringing-raspberry-pi-development-to-quarkus-with-the-quarkus-pi4j-extension"
-frozen: false
+frozen: true
 ---
 
 For this post I did some experiments with Java 15, reusing the Ubuntu 64bit SD card which was also used for my earlier post ["](http://localhost:1313/post/2020-07-28-spring-versus-quarkus-rest-h2-db-on-raspberry-pi/)[Startup Speed of Spring and Quarkus JARs on the Raspberry Pi](https://foojay.io/?p=35345)".
@@ -139,4 +139,4 @@ Do you need to switch from OpenJDK 11 to 15? No, not really, based on these resu
 But each new version has bug and security fixes, new features, and generic improvements:
 ![](Screenshot-2020-09-21-at-09.32.17-1024x557.png)
 
-[Click here](https://foojay.io/java-15/?quarter=072020&tab=highlights) to see all the details and vote on your favorite new features and fixes!
+[Click here](https://javaalmanac.io/jdk/15/) to see all the details and vote on your favorite new features and fixes!

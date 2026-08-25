@@ -14,12 +14,12 @@ related_posts:
   - "foojay-podcast-24"
   - "foojay-podcast-23"
   - "api-versioning"
-frozen: false
+frozen: true
 ---
 
 We are excited to share that Foojay is growing and offering additional resources to bring the Java and OpenJDK community together on a global scale.
 
-Several months ago, we launched the [Foojay Calendar](https://foojay.io/calendar), an interactive platform that allows individuals to propose Java-related and Kotlin-related and any other OpenJDK-related events and add them to the calendar.
+Several months ago, we launched the [Foojay Calendar](https://foojay.io/calendar/), an interactive platform that allows individuals to propose Java-related and Kotlin-related and any other OpenJDK-related events and add them to the calendar.
 
 All Foojay members are welcome to submit their events. Once reviewed, the event will be included in the calendar.
 ![](calendar_preview-1024x535.jpeg)
@@ -32,65 +32,55 @@ We have expanded our API capabilities and now **allow anyone to send their own e
 
 Our hope is that this change will keep the OpenJDK community engaged and informed about relevant events happening worldwide.
 
-## How to add your events
+*Updated: foojay.io no longer runs on WordPress, and the `POST` API described
+below has been retired with it. Events now reach the calendar by the two routes
+described here. The history above is unchanged.*
 
-We welcome inquiries from organizations interested in connecting with us.
+## How events reach the calendar now
 
-You can reach us at [hello@foojay.io](mailto:hello@foojay.io) or via [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email).
+There is no API key to request any more, and nothing to authenticate against.
+Both routes are public.
 
-If you have events to share but lack development capabilities, our team is happy to assist with integration setup.  
+### 1. A calendar feed — automatic
 
-### 1. Registering as an External Source and Getting an API Key
+If your organization or user group already publishes a calendar, foojay reads it
+directly, once a day. Any iCal feed works: your own site's, a Google Calendar,
+Meetup's export, or what Luma, Eventbrite, Tito, Bevy and Mobilizon export.
+Nothing has to be pushed to us, and nothing goes stale.
 
-Other organizations that want to use our API directly and send events via an endpoint can follow the instructions below.
+For a Java User Group, the feed is picked up from the community-run
+[World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs) —
+add a `calendar:` or `meetup_slug:` entry for your group there, which the JUG
+leads maintain themselves.
 
-{{< img src="image-1.png" class="size-full is-resized" width="414" height="360" >}}
+### 2. A conference or one-off — a small file, by pull request
 
-1. To get started, you'll need to retrieve your source and generate a unique API key. Please note that only **Contributors** and **Admins** currently have permission to complete this step. If you don't fall into either of these categories, please reach out to us so we can grant you the necessary permissions.
-2. To obtain an **API key** and register your source, kindly send a request to [hello@foojay.io](mailto:hello@foojay.io) or via [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email) with the subject line "API key". Our Foojay calendar administrator will then generate your API key and add you to our system as a trusted vendor.
-3. Provide additional information about your organization, including its name, description, and details about the types of events it will host.
-4. Once the Foojay Calendar admin generates your API key, you can use it to access the Foojay Calendar API.
+A conference publishes no subscribable feed, so those are added as one file per
+event in the site's repository:
 
-### 2. Working with an API endpoint
+```yaml
+# data/events/devoxx-belgium-2026.yaml
+name: "Devoxx Belgium 2026"
+type: "Conference"
+url: "https://devoxx.be/"
+start: "2026-10-05"
+end: "2026-10-09"
+venue: "Kinepolis Antwerpen"
+city: "Antwerp"
+country: "Belgium"
+```
 
-Now you can work with our endpoint.
+Copy [`template/event.yaml`](https://github.com/foojayio/website/blob/main/template/event.yaml),
+fill it in, open a pull request. `name`, `url`, `start`, `city` and `country` are
+required — `city` and `country` only when the event is not online. The colour on
+the calendar, the band across a multi-day conference and the counts in the page
+header are all derived, and the event drops off by itself the day after it ends.
 
-**Endpoint:** [`https://foojay.io/wp-json/foojay/v2/calendar/`](https://foojay.io/wp-json/foojay/v2/calendar/)
+The full field reference is in
+[CONTRIBUTING.md](https://github.com/foojayio/website/blob/main/CONTRIBUTING.md),
+and [How to Add an Event to the Foojay Event Calendar](/today/how-to-add-an-event-to-the-foojay-event-calendar/)
+walks through it.
 
-**Method:** `POST`
-
-The endpoint is used to create new events on the Foojay Calendar. Any newly added events will be saved as drafts and will be published only after approval by the website administrator.
-
-To send data to the endpoint, use the **FormData** format.
-
-Below is an example of adding a new event in Postman:
-![](image6-1024x470.png)
-
-* Mandatory fields are marked with an asterisk (\*).
-* The 'source' field is used along with a custom HTTP header to restrict the external sources from which events can be added.
-
-To add your API key, use the "calendar-key" HTTP header. Make sure you have already generated an API key and source name, which should have been provided by the Foojay admin.
-![](image4-1024x289.png)  
-
-### 3. Responses
-
-Once the event has been successfully added, you'll receive a **201 code and event ID**:
-![](image3-1024x479.png)
-
-If there is an issue, you will receive a response with a **4xx code**:
-![](image2-1024x480.png)
-
-## Example on the Frontend
-
-Below is a description of the API fields and their corresponding elements on the front-end.
-![](image7-1024x353.png)
-
-## Example Based on an Existing Event
-
-The following is a real imported event provided by <https://adoptium.net/:>  
-
-{{< img src="image1-341x510.png" class="size-medium" width="341" height="510" >}}
-
-![](image6-1-1024x470.png)
-
-*If you encounter any problems or have any questions, please reach out to us at [hello@foojay.io](mailto:hello@foojay.io) or on the [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email).*
+*If you encounter any problems or have any questions, please reach out to us at
+[hello@foojay.io](mailto:hello@foojay.io) or on the
+[Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email).*

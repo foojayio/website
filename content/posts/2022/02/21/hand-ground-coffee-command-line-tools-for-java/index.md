@@ -14,7 +14,7 @@ related_posts:
   - "building-command-line-interfaces-with-kotlin-using-picocli"
   - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
   - "jdb"
-frozen: false
+frozen: true
 ---
 
 ![kaffeemuehle](https://www.dieckmann-aroma-kaffee.de/images/blog/kaffeemuehle.jpg)
@@ -207,7 +207,7 @@ chmod +x hello
 ./hello JEP 330
 ```
 
-The JVM can be controlled with [hundreds of flags](https://foojay.io/command-line-arguments/), from memory allocation with `-Xmx` and `-Xms` to garbage collector selection with `-XG1GC` and log settings.  
+The JVM can be controlled with [hundreds of flags](https://chriswhocodes.com/vm-options-explorer.html), from memory allocation with `-Xmx` and `-Xms` to garbage collector selection with `-XG1GC` and log settings.  
 
 A collection of resources on JVM flags was published by [\[Betsy Rhodes on Foojay](https://foojay.io/today/top-10-fun-with-jvm-flags/)
 

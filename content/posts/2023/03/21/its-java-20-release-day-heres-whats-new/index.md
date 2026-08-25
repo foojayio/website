@@ -17,7 +17,7 @@ related_posts:
   - "what-the-heck-is-project-loom-for-java"
   - "an-introduction-to-scoped-values-in-java"
   - "virtual-thread-pinning-field-guide"
-frozen: false
+frozen: true
 ---
 
 This will be a good day, because it's Java 20 release day!
@@ -28,7 +28,7 @@ In this article, we will take you on a tour through all JEPs that come with this
 
 Where applicable the differences with Java 19 are highlighted and a few typical use cases are provided, so that you'll be more than ready to use these features after you've finished reading!
 
-**Note:** See [the whole list of everything included in Java 20 here on Foojay.io](https://foojay.io/java-20/?quarter=032023&version=20&tab=component) and you can vote on those that you find most useful or interesting and also check out the [Java 20 Foojay Podcast](https://foojay.io/today/foojay-podcast-16/)!
+**Note:** See [the whole list of everything included in Java 20 here on Foojay.io](https://javaalmanac.io/jdk/20/) and you can vote on those that you find most useful or interesting and also check out the [Java 20 Foojay Podcast](https://foojay.io/today/foojay-podcast-16/)!
 
 ## From Project Amber
 

@@ -13,7 +13,7 @@ related_posts:
   - "foojay-podcast-5"
   - "what-the-heck-is-project-loom-for-java"
   - "what-can-we-expect-in-openjdk-19"
-frozen: false
+frozen: true
 ---
 
 OpenJDK 19 has been released today! Get it from your favorite vendor... whether it is BellSoft, Amazon, Red Hat, Azul, Oracle, Microsoft [or any other of a large number of Java providers](https://javaalmanac.io/jdk/19).
@@ -29,8 +29,8 @@ The Friends Of OpenJDK community has put together a number of resources, and mor
 
 ### OpenJDK 19 Fixes
 
-As always Foojay.io provides you with [a complete list of fixes, here](https://foojay.io/java-19/?version=19&quarter=092022&tab=component):
-[![](image-1024x631.png)](https://foojay.io/java-19/?version=19&quarter=092022&tab=component)
+As always Foojay.io provides you with [a complete list of fixes, here](https://javaalmanac.io/jdk/19/):
+[![](image-1024x631.png)](https://javaalmanac.io/jdk/19/)
 
 ### New Foojay.io Podcast
 

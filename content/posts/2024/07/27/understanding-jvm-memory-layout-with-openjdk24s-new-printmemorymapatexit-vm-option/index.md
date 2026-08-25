@@ -12,7 +12,7 @@ related_posts:
   - "foojay-podcast-23"
   - "breaking-the-code-how-chris-newland-is-changing-the-game-in-jvm-performance"
   - "java-profiling-overview"
-frozen: false
+frozen: true
 ---
 
 **OpenJDK24 recently added a new HotSpot JVM option called `PrintMemoryMapAtExit`.**
@@ -23,7 +23,7 @@ VMOptionsExplorer presents this information as a searchable online dictionary of
 
 ![A screenshot of the VMOptionsExplorer website](vmoe-700x329.png)
 
-and also on Foojay at <https://foojay.io/command-line-arguments/> (although the Foojay copy doesn't always cover the latest JDKs).
+The per-JDK option lists are at <https://chriswhocodes.com/vm-options-explorer.html>.
 
 When a new VM option becomes available it is often added to the latest development JDK (in this case JDK 24) and documentation for it is sometimes sparse.
 

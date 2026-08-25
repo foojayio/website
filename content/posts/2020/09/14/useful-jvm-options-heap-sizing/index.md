@@ -10,12 +10,12 @@ image: "Favicon-3-2.png"
 categories:
   - "Performance"
 related_posts:
-frozen: false
+frozen: true
 ---
 
 The HotSpot JVM has a lot of options available. Maybe too many. Sometimes we are looking for a specific option or the "magic" one that can give a serious boost in an application. Unfortunately, I think that magic option may not exist! However, some can help you for optimizing your application or for tuning some of its parts.
 
-To find the complete list of options you will find in the [globals.hpp](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/globals.hpp) file from OpenJDK sources. However, the [VM Options Explorer](https://chriswhocodes.com/vm-options-explorer.html), also [integrated neatly here into foojay](https://foojay.io/command-line-arguments/openjdk-11/?tab=alloptions), can help you to navigate through the list.
+To find the complete list of options you will find in the [globals.hpp](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/globals.hpp) file from OpenJDK sources. However, the [VM Options Explorer](https://chriswhocodes.com/vm-options-explorer.html) can help you to navigate through the list.
 
 I have summed up here, in my humble opinion, some of the most useful JVM options in the context of heap sizing.
 

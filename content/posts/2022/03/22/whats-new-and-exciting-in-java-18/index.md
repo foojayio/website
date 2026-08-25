@@ -13,14 +13,14 @@ related_posts:
   - "java-where-the-wild-code-isnt"
   - "are-java-security-updates-important"
   - "whats-new-in-the-july-2026-azul-payara-release"
-frozen: false
+frozen: true
 ---
 
 Time runs forward without compromise! The six month release period is over and, similar to people expecting spring and nice weather, the Java community is excited about the next OpenJDK release, this time holding the number 18.
 
 Yes, Java 18 is here and in this article we explore the most important changes and, in my humble opinion, this release is an important one!
 
-**Note:** For a full listing of the 2,045 fixes in Java 18, [go here on Foojay.io](https://foojay.io/java-18/?tab=highlights&quarter=032022&version=18.0.0). And vote on your favorites to show the Java community's favorite fixes in Java 18.
+**Note:** For a full listing of the 2,045 fixes in Java 18, [go here on Foojay.io](https://javaalmanac.io/jdk/18/). And vote on your favorites to show the Java community's favorite fixes in Java 18.
 
 ## Exploring Changes
 
@@ -106,4 +106,4 @@ Java 18 is another of the six month iterations, bringing with it the stability t
 
 In this article, the broad impact of this change impacting Java's stability has been shown, meaning that it will be easier to observe similar behavior across the system platform without facing unexpected encoding challenges.   
 
-**Note:** For a full listing of the 2,045 fixes in Java 18, [go here on Foojay.io](https://foojay.io/java-18/?tab=highlights&quarter=032022&version=18.0.0). And vote on your favorites to show the Java community's favorite fixes in Java 18.
+**Note:** For a full listing of the 2,045 fixes in Java 18, [go here on Foojay.io](https://javaalmanac.io/jdk/18/). And vote on your favorites to show the Java community's favorite fixes in Java 18.

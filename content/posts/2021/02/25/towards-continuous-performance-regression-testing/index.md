@@ -32,8 +32,8 @@ This post is a bit longer than usual (I didn't have the time to write shorter ;)
 1. [Getting Started With JfrUnit](#getting-started-with-jfrunit)
 2. [Case Study 1: Spotting Increased Memory Allocation](#case-study-1-spotting-increased-memory-allocation)
 3. [Case Study 2: Identifying Increased I/O With the Database](http://%20Identifying%20Increased)
-4. [Discussion](#Discussion)
-5. [Summary and Outlook](#Summary%20and%20Outlook)
+4. [Discussion](#discussion)
+5. [Summary and Outlook](#summary-and-outlook)
 
 ### Getting Started With JfrUnit
 

@@ -31,7 +31,7 @@ BoxLang documentation is now accessible via the Model Context Protocol (MCP)! Co
 ### Connect to the MCP Server:
 
 * **Direct MCP URL:** [https://boxlang.ortusbooks.com/\~gitbook/mcp](https://boxlang.ortusbooks.com/~gitbook/mcp "https://boxlang.ortusbooks.com/~gitbook/mcp")
-* **One-Click VSCode Installation:** [Install BoxLang MCP Server](vscode:mcp/install?%7B%22name%22%3A%22BoxLang%20%3A%20A%20Modern%20Dynamic%20JVM%20Language%22%2C%22url%22%3A%22https%3A%2F%2Fboxlang.ortusbooks.com%2F~gitbook%2Fmcp%22%7D "Install BoxLang MCP Server")
+* **One-Click VSCode Installation:** <a href="vscode:mcp/install?%7B%22name%22%3A%22BoxLang%20%3A%20A%20Modern%20Dynamic%20JVM%20Language%22%2C%22url%22%3A%22https%3A%2F%2Fboxlang.ortusbooks.com%2F~gitbook%2Fmcp%22%7D" title="Install BoxLang MCP Server">Install BoxLang MCP Server</a>
 
 This integration enables developers to:
 

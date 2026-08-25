@@ -13,7 +13,7 @@ related_posts:
   - "javafinder-keeping-track-of-java-inventories"
   - "time-zone-and-currency-database-in-jdk"
   - "java-on-azure-tooling-update-july-2022"
-frozen: false
+frozen: true
 ---
 
 Java is a well-maintained development and deployment platform. Through the [OpenJDK project](https://openjdk.java.net/), regular updates to production releases follow a traditionally established schedule. On a specific Tuesday in January, April, July and October, a set of updates are published covering security-related issues as well as bug fixes and even minor enhancements. Regular updates have been a long-standing tradition for Java. The update cadence has been a long-standing tradition for Java and is relied on by those responsible for ensuring Java-based systems are kept up to date and secure.
@@ -26,7 +26,7 @@ Much detail is involved in these updates. Their contents are publicly visible an
 
 For Java users and developers who depend on OpenJDK builds, finding the relevant highlights of a given update and how they may improve or otherwise impact deployments is no small task. Separating issues that have significance to a user from others would involve going through hundreds of individual issues. Following each into the Java Bug System to review details, and deducing relevance for one's environment can be quite a challenge. In practice, few Java users or organizations will go through this level of effort.
 
-This is where [foojay's user-focused Java and OpenJDK update descriptions come in](https://foojay.io/java-8/?tab=highlights).
+More info [on Java Almanac](https://javaalmanac.io/jdk/8/).
 
 #### The User's Perspective Matters
 
@@ -50,4 +50,4 @@ There are several performance enhancements besides these that would be of great 
 
 #### **Conclusion**
 
-And, so, join us [on the foojay pages dedicated to listing and giving focus to the highlights of each OpenJDK update release](https://foojay.io/java-8/?tab=highlights). Share your opinion by voting for the fixes that are most relevant to you and use the Highlights tab to see the most relevant fixes from the perspective of the Java community!
+[Check the Java Almanac for more details](/java-almanac/). 

@@ -14,7 +14,7 @@ related_posts:
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-frozen: false
+frozen: true
 ---
 
 Welcome to foojay, a place for **f** riends **o** f **O** pen**J** DK, sponsored by [Azul](http://azul.com). Foojay's user-focused Java and OpenJDK technical dashboards provide free data for everyday Java developers. Right away you have access to updated analysis, selected highlights, and categorized lists arranged for easy consumption.
@@ -24,7 +24,7 @@ Welcome to foojay, a place for **f** riends **o** f **O** pen**J** DK, sponsored
 Together with Java enthusiasts around the world, the foojay team works to identify critical aspects of each new OpenJDK release and update -- with related information such as OpenJDK distributions, download locations, and JVM command line arguments -- and brings to the fore precisely the content and services that have value and relevance to those that use Java on a daily basis throughout the industry.
 ![](Screenshot-2020-08-20-at-17.19.43-1024x647.png) OpenJDK Update Release Details
 
-[Go here to see all the fixes and CVEs of the recent OpenJDK update releases](https://foojay.io/java-8/?tab=highlights), while indicating their relevance to you by voting on them. Use the Highlights tab to see what the community as a whole thinks about them. More details on the motivations for the OpenJDK update release details dashboard [are described here on foojay](https://foojay.io/today/dashboard-for-openjdk-update-release-details/).  
+[Go here to see all the fixes and CVEs of the recent OpenJDK update releases](https://javaalmanac.io/jdk/8/), while indicating their relevance to you by voting on them. Use the Highlights tab to see what the community as a whole thinks about them. More details on the motivations for the OpenJDK update release details dashboard [are described here on foojay](https://foojay.io/today/dashboard-for-openjdk-update-release-details/).  
 
 {{< img src="Screenshot-2020-08-21-at-09.20.34.png" class="alignleft size-large is-resized" width="88" height="100" caption="Marc Hoffmann" >}}
 
@@ -45,7 +45,7 @@ Another key contributor to foojay is [Chris Newland](https://twitter.com/chriswh
 At the same time, he's also been making his data available here as part of the integrated Java dashboard environment that is foojay:
 ![](Screenshot-2020-08-20-at-17.23.09-1024x639.png) OpenJDK Command Line Arguments
 
-[Go here to explore the wealth of JVM command line arguments on foojay](https://foojay.io/command-line-arguments/openjdk-11/), with thanks to Chris.
+[Go here to explore the wealth of JVM command line arguments](https://chriswhocodes.com/hotspot_options_openjdk11.html), with thanks to Chris.
 
 #### Foojay Today
 

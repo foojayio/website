@@ -10,7 +10,7 @@ categories:
   - "Records"
   - "Sealed Classes"
 related_posts:
-frozen: false
+frozen: true
 ---
 
 The JDK Enhancement Proposal (or JEP) is a community process for collecting proposals for enhancements to the OpenJDK.
@@ -37,4 +37,4 @@ Java 16, released today, incorporates the JEPs below:
 | 396     | [**Strongly Encapsulate JDK Internals by Default**](https://openjdk.java.net/jeps/396) | Strongly encapsulate all internal elements of the JDK by default, except for [critical internal APIs](https://openjdk.java.net/jeps/260#Description) such as `sun.misc.Unsafe`. Allow end users to choose the relaxed strong encapsulation that has been the default since JDK 9.                                                                                                                                                                                                                                                                                                            |
 | 397     | [**Sealed Classes (Second Preview)**](https://openjdk.java.net/jeps/397)               | Enhance the Java programming language with [sealed classes and interfaces](https://cr.openjdk.java.net/~briangoetz/amber/datum.html). Sealed classes and interfaces restrict which other classes or interfaces may extend or implement them.                                                                                                                                                                                                                                                                                                                                                 |
 
-**Tip:** For a full list of fixes in Java 16, [go here on Foojay.io](https://foojay.io/java-16/?quarter=032021&tab=highlights).
+**Tip:** For a full list of fixes in Java 16, [go here on Foojay.io](https://javaalmanac.io/jdk/16/).

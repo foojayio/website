@@ -18,7 +18,7 @@ related_posts:
   - "continuous-production-profiling-and-diagnostics"
   - "contributing-to-openjdk-mission-control"
   - "virtual-thread-pinning-field-guide"
-frozen: false
+frozen: true
 ---
 
 How do you get the maximum performance out of your Java application?
@@ -72,7 +72,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * 00'00 Introduction of the host and guests
   * [jitwatch](https://chrisnewland.com/jitwatch)
   * [jacoline](https://jacoline.dev/inspect)
-  * [foojay.io/command-line-arguments](https://foojay.io/command-line-arguments/openjdk-11/?tab=alloptions)
+  * [VM Options Explorer](https://chriswhocodes.com/vm-options-explorer.html)
   * [Book: Optimizing Java](https://optimizingjava.com/)
   * [JCrete](https://www.jcrete.org/)
 * 10'42 History of Java and how performance was a challenge in the beginning
