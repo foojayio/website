@@ -14,7 +14,7 @@ related_posts:
   - "authenticate-with-openid-connect-and-apache-apisix"
   - "canary-releases-with-apache-apisix"
   - "renovate-alternative-dependabot"
-frozen: false
+frozen: true
 ---
 
 In my earlier post about moving from [Kotlin Scripting to Python](https://blog.frankel.ch/kotlin-scripting-to-python/), I mentioned several reasons:
@@ -29,7 +29,7 @@ First things first, Renovate does indeed [manages Kotlin Scripting](https://docs
 
 Even better, Renovate can manage *any* type of file. Thanks to Max Andersen for the tip:
 
-[![](Screenshot-2024-06-22-at-19.10.07.png)](_wp_link_placeholder)
+[![](Screenshot-2024-06-22-at-19.10.07.png)](https://x.com/maxandersen/status/1764379149177630827)
 
 You can create your configuration for package managers, which must still be added to Renovate's scope!
 > With `customManagers` using `regex` you can configure Renovate so it finds dependencies that are not detected by its other built-in package managers.
