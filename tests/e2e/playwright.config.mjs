@@ -46,7 +46,14 @@ export default defineConfig({
     cwd: ROOT,
     command: `node ${JSON.stringify(SERVER)} ${PORT}`,
     url: `http://127.0.0.1:${PORT}${basePath()}`,
-    reuseExistingServer: !process.env.CI,
+    // ALWAYS launch it, locally too. `reuseExistingServer: !process.env.CI` is
+    // the default advice and it hid a CI-only failure completely: a server left
+    // running from an earlier session was silently reused on every local run,
+    // so the launch path -- the thing CI actually does -- was never exercised
+    // once, and the first real run of it failed on a doubled path. The cost of
+    // not reusing is a fraction of a second; the cost of reusing was a red
+    // deploy that looked green in every rehearsal.
+    reuseExistingServer: false,
     timeout: 30_000,
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
