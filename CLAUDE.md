@@ -757,8 +757,8 @@ should catch a mistake at PR time rather than letting it fail silently.
   to remember to enable.
 
   **Third parties are stubbed, never fetched.** 438 posts embed a YouTube
-  player, 19 Vimeo, and the fonts come from Google. Loading them would make the
-  suite slow, make it fail when someone else's CDN has a bad afternoon, and fire
+  player, 19 Vimeo, and both maps draw OpenStreetMap tiles. Loading them would
+  make the suite slow, make it fail when someone else's CDN has a bad afternoon, and fire
   a request at YouTube on every build. They are answered locally with an empty
   body of the right type, so the page still lays out and the `<iframe>` is still
   there to assert on. That is also why **there are no retries**: nothing depends
@@ -809,7 +809,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   exists because the first is a Playwright-level promise and `sendBeacon` is
   exactly the request shape not to be wrong about.
 
-  **36 pass, 1 skip, and the skip is a finding rather than a disabled test** —
+  **37 pass, 1 skip, and the skip is a finding rather than a disabled test** —
   mermaid (above). **The three that were skipped are the record of what a CDN
   dependency costs a test suite.** The two world maps and the lightbox's
   map-tile exclusion were all blocked on the same thing: Leaflet and
@@ -1733,6 +1733,53 @@ should catch a mistake at PR time rather than letting it fail silently.
   in, and adding a visible title would push the lead article down the fold to
   satisfy a crawler. The text is `site.Title` -- what the page IS, not a keyword
   line written for a robot, which is the thing Google actually penalises.
+
+- **The webfonts are SELF-HOSTED, and `vendor/fonts/fonts.css` is generated.**
+  Barlow and Source Sans 3 came from `fonts.googleapis.com` on **every page** --
+  a render-blocking stylesheet on someone else's server in front of the first
+  paint of the whole site, plus two `<link rel=preconnect>` hints needed to make
+  that tolerable, plus a second host (`fonts.gstatic.com`) for the files. Both
+  are SIL Open Font License 1.1, so hosting them is what the licence is for. The
+  40 woff2 files (760 KB in the repo) and the `@font-face` rules are **generated
+  from what Google served**, keeping the same `font-display: swap` and the same
+  per-subset `unicode-range`, so a browser still fetches only the cuts a page's
+  text needs and the switch moved the requests without adding any -- measured on
+  the home page: 7 files, 240 KB, the same 7 `fonts.gstatic.com` served.
+
+  Five things are load-bearing:
+  - **The `url()`s in `fonts.css` are RELATIVE**, so nothing about the fonts
+    depends on the base path: they resolve identically under `/website/` and
+    under `/`, with no Hugo function involved and nothing to change at cutover.
+    That is the one class of bug `validate/BuiltSite.java` cannot see, because it
+    reads HTML attributes and not CSS.
+  - **Exactly two faces are preloaded** -- Source Sans 3 400 and Barlow 700,
+    latin -- because a font inside a stylesheet is only discovered after that
+    stylesheet is fetched and parsed, so the two files every first paint waits on
+    would otherwise start a round trip late. Not more: preloading a face a page
+    does not use spends bandwidth to render nothing.
+  - **Those preloads are also the test.** A wrong path would otherwise fail
+    *silently* into Segoe UI, but a preload is requested on every page whether
+    the text needs it or not, so `tests/e2e`'s "no failed same-origin request"
+    assertion catches it on all 20 pages the suite walks.
+  - **Regenerate with a MODERN browser User-Agent.** `fonts.googleapis.com`
+    serves TrueType to an old one and woff2 to a current one, so a naive `curl`
+    gets the wrong format and four times the bytes. Keep the requested weights in
+    step with `style.css` (Barlow 500/600/700/800 for `--font-display`, Source
+    Sans 3 400/600/700 plus 400 italic for `--font-body`, the italic being `<em>`
+    in prose); a bold italic stays browser-synthesised, as it was before.
+  - **`document.fonts.check()` cannot verify this** -- measured, not assumed: it
+    returns **true** for a family with no `@font-face` at all, since nothing
+    matches and therefore nothing needs loading, which is exactly the failure
+    mode being tested for. `tests/e2e` reads each `FontFace`'s own `status`
+    instead.
+
+  The wider lesson is in the test suite. Stubbing every third party (see
+  `tests/e2e`) meant the fonts were answered with an empty body, so **no test on
+  this site had ever loaded the typeface it renders in** -- the same shape as the
+  three map tests that could only skip. An empty body is a plausible-looking
+  response, which is what makes it dangerous. After this, the only third-party
+  code any page loads is GA4 and Ketch in `partials/analytics.html`, and only
+  once past cutover.
 
 - **The LCP image is eager and `fetchpriority="high"`; everything else is
   lazy.** The post hero (`posts/single.html`) and the home page's lead card are

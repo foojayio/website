@@ -75,11 +75,19 @@ day one does, that test starts running on its own.
 
 ## Third parties are stubbed, never fetched
 
-438 posts embed a YouTube player, 19 embed Vimeo, and the fonts come from
-Google. Letting the suite load them would make it slow, make it fail when
-someone else's CDN has a bad afternoon, and fire a request at YouTube for every
-build. They are answered locally with an empty body of the right type, so the
-page still lays out and the `<iframe>` is still there to assert on.
+438 posts embed a YouTube player, 19 embed Vimeo, and both world maps draw
+OpenStreetMap tiles. Letting the suite load them would make it slow, make it
+fail when someone else's CDN has a bad afternoon, and fire a request at YouTube
+for every build. They are answered locally with an empty body of the right type,
+so the page still lays out and the `<iframe>` is still there to assert on.
+
+**Watch what stubbing hides.** The webfonts and the map library were on this list
+too, and an empty body is a *plausible* response for both — so the suite was
+quietly asserting nothing about the typeface the site renders in, and skipping
+the map tests entirely. Both are served from the repo now and exercised for
+real, which is what "the webfonts are served by us, and actually load" and the
+two map tests are. When something moves onto this list, ask what assertion it
+takes with it.
 
 This is why **there are no retries**. Nothing here depends on the network, so a
 failure that comes and goes is a real bug in the page, not weather — and a retry
@@ -102,7 +110,7 @@ Two different questions, and only one belongs in a gate:
 ## What skips, and why
 
 A skip here is a statement about the build, not a disabled test. One today, out
-of 37:
+of 38:
 
 | skipped | why | what would un-skip it |
 | --- | --- | --- |
