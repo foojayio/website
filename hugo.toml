@@ -286,10 +286,18 @@ enableGitInfo = true
     desc = "Every Java version, its docs and API diffs, in one place"
 
 [[menu.main]]
+  name = "JVM Options"
+  parent = "Resources"
+  url = "/jvm-options/"
+  weight = 23
+  [menu.main.params]
+    desc = "Every JVM flag, per JDK version and per vendor, searchable"
+
+[[menu.main]]
   name = "Java User Groups"
   parent = "Resources"
   url = "/jugs/"
-  weight = 23
+  weight = 24
   [menu.main.params]
     desc = "Find a JUG near you on the world map"
 
@@ -297,7 +305,7 @@ enableGitInfo = true
   name = "Java Champions"
   parent = "Resources"
   url = "/java-champions/"
-  weight = 24
+  weight = 25
   [menu.main.params]
     desc = "The community members recognized by the Java Champions program"
 
@@ -555,16 +563,22 @@ enableGitInfo = true
   weight = 13
 
 [[menu.footer]]
+  name = "JVM Options"
+  parent = "footer-resources"
+  url = "/jvm-options/"
+  weight = 14
+
+[[menu.footer]]
   name = "Java Champions"
   parent = "footer-resources"
   url = "/java-champions/"
-  weight = 14
+  weight = 15
 
 [[menu.footer]]
   name = "Sustainability eBook"
   parent = "footer-resources"
   url = "/sustainability-for-java-developers/"
-  weight = 15
+  weight = 16
 
 # ---------------------------------------------------------------------------
 
