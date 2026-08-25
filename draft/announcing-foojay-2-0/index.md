@@ -211,6 +211,36 @@ simply stops doing the thing. So the built site is served on a throwaway local
 server and about forty checks click through it: search for a word and get
 grouped results, open a gallery, page a table, flip to dark mode.
 
+**One of those checks is about security rather than mistakes.** Foojay's
+markdown allows raw HTML — it has to, because two thousand imported WordPress
+articles carry tables, collapsible blocks and embeds with no Markdown
+equivalent. The consequence is that a merged pull request could, in principle,
+carry a `<script>`, and a static site has no server-side layer left to catch it.
+So the check refuses seven kinds of executable markup in article text:
+`<script>`, inline event handlers like `onerror=`, `javascript:` links,
+`<form>`, `<base>`, meta-refresh redirects, and `<object>`/`<embed>`. Before
+turning it on I counted every one of them across all 2,153 published articles.
+Every count was zero — so nothing in the archive had to be fixed first, and
+anything new is by construction something nobody has written here in five years
+of publishing.
+
+Code samples are excluded, and that is not a loophole: a fenced block is escaped
+before it reaches the page, so a `<script>` inside one renders as visible text
+and cannot run. An article *about* XSS is still publishable — it just has to
+fence its examples, which is what we ask for anyway. `<iframe>` is the one shape
+that warns instead of failing, because 33 articles legitimately use one for
+Vimeo, Speaker Deck or Apple Podcasts; the warning just names the host so a
+reviewer can glance at it. Findings land as annotations on the diff itself, on
+the file and the line, rather than in a log four clicks away — and because they
+come from the log stream rather than the API, they work identically on a pull
+request from a fork, which is how most first-time authors arrive.
+
+This is the honest shape of security after leaving WordPress. There is no CMS to
+log into, no database, and no PHP running on a server, so there is nothing to
+exploit remotely. What is left is that the site changes when a maintainer merges
+something. That makes review the security control — and this is what gives it
+teeth.
+
 Two decisions in there were deliberate. **Only breakage we caused blocks a
 deploy.** A dead link an author typed in 2021 is reported and counted, not
 treated as an emergency — there were 53 of those in the archive when the check

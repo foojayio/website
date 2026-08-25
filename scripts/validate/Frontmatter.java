@@ -81,16 +81,30 @@ public class Frontmatter {
         problems.addAll(checkAds(Path.of("content/ads")));
         problems.addAll(checkImageWeight(Path.of("content")));
         problems.addAll(checkHeroImageStill(Path.of("content")));
+        problems.addAll(checkRawHtml(Path.of("content")));
+        problems.addAll(checkRawHtml(Path.of("draft")));
 
         // WARNINGS, which never fail the check -- see reportWarnings below for
         // why image descriptions are on this side of the line and everything
         // above it is not.
-        List<String> warnings = new ArrayList<>();
         Set<Path> touched = changedFiles(args);
+
+        List<String> embeds = new ArrayList<>();
+        embeds.addAll(checkEmbeds(Path.of("content"), touched));
+        embeds.addAll(checkEmbeds(Path.of("draft"), touched));
+        reportWarnings(embeds, touched, "embed warning(s)",
+                "An <iframe> gives another site a frame of foojay.io, so it is worth a glance at the"
+                        + " host even when it is routine. Video and slide embeds from a host we already"
+                        + " use are normal; anything else deserves a question in review.");
+
+        List<String> warnings = new ArrayList<>();
         warnings.addAll(checkImageAltText(Path.of("content"), touched));
         warnings.addAll(checkImageAltText(Path.of("draft"), touched));
-
-        reportWarnings(warnings, touched);
+        reportWarnings(warnings, touched, "accessibility warning(s)",
+                "An image with no description is skipped by a screen reader, so a reader"
+                        + " who cannot see it is told nothing at all. Add one where the image carries"
+                        + " meaning; leave it empty where the image is decoration and the text beside it"
+                        + " already says everything. See /accessibility/ for the standard the site aims at.");
 
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
@@ -99,6 +113,7 @@ public class Frontmatter {
 
         System.err.println(problems.size() + " problem(s) found:");
         for (String p : problems) System.err.println(" - " + p);
+        for (String p : problems) annotate("error", p);
         System.exit(1);
     }
 
@@ -122,7 +137,13 @@ public class Frontmatter {
        cannot be skipped the way an empty one can.
 
        So it reports, and a human decides. */
-    static void reportWarnings(List<String> warnings, Set<Path> touched) {
+    /* Each KIND of warning is reported separately, with its own cap and its own
+       explanation. They shared one list at first, and the embed warnings were
+       invisible: an unscoped run prints 25 lines, ~951 image warnings sort
+       ahead of them, and a security-relevant line that never reaches the
+       terminal is not a warning. Whichever list is longer must not be able to
+       bury the other. */
+    static void reportWarnings(List<String> warnings, Set<Path> touched, String label, String footer) {
         if (warnings.isEmpty()) return;
 
         // Unscoped runs see the whole archive (~3000 images imported from
@@ -132,16 +153,14 @@ public class Frontmatter {
         int shown = touched != null ? warnings.size() : Math.min(warnings.size(), 25);
 
         System.out.println();
-        System.out.println(warnings.size() + " accessibility warning(s) -- these do NOT fail the check:");
+        System.out.println(warnings.size() + " " + label + " -- these do NOT fail the check:");
         for (int i = 0; i < shown; i++) System.out.println(" ~ " + warnings.get(i));
+        for (String w : warnings) annotate("warning", w);
         if (shown < warnings.size()) {
             System.out.println(" ~ ... and " + (warnings.size() - shown) + " more across the archive."
                     + " Run with --changed-since <ref> to see only what this branch touched.");
         }
-        System.out.println("   An image with no description is skipped by a screen reader, so a reader"
-                + " who cannot see it is told nothing at all. Add one where the image carries meaning;"
-                + " leave it empty where the image is decoration and the text beside it already says"
-                + " everything. See /accessibility/ for the standard the site aims at.");
+        System.out.println("   " + footer);
         System.out.println();
     }
 
@@ -1218,4 +1237,256 @@ public class Frontmatter {
         int dot = filename.lastIndexOf('.');
         return dot > 0 ? filename.substring(0, dot) : filename;
     }
+
+    /* ---------------------------------------------------------------------
+       Raw HTML that can execute
+       ---------------------------------------------------------------------
+
+       hugo.toml sets `[markup.goldmark.renderer] unsafe = true`, which is what
+       lets 2000 imported WordPress posts keep their tables, their <details>
+       blocks and their video embeds. It also means raw HTML in a markdown body
+       reaches the page as MARKUP -- so a merged pull request could carry a
+       <script>, and the site has no server-side layer left to catch it.
+
+       That is the honest shape of the security model after the WordPress
+       migration: nothing can be exploited remotely, and the remaining path onto
+       the live site is a maintainer merging something. This check makes PR
+       review a control with teeth rather than a matter of someone noticing.
+
+       THE LIST IS EVIDENCE, NOT IMAGINATION. Every pattern below was counted
+       across all 2153 published posts, outside code blocks, before being made a
+       failure -- the same standard checkRequired's fields were held to. All of
+       them are zero:
+
+         <script>          0   (the single textual hit is an escaped \<script\>
+                                in prose about a JSF issue -- literal text)
+         on*= handlers     0
+         <form>            0
+         <base>            0
+         <meta refresh>    0
+         <object>/<embed>  0   (5 hits, all inside a ```xml fence in a post
+                                about migrating Java applets)
+         javascript: url   0   (1 hit, inside a ```java fence in a post about
+                                CVE-2022-33980 -- a string in a code sample)
+
+       So this fails the check rather than warning. Nothing in the archive has to
+       be fixed to turn it on, and a new occurrence is by construction something
+       nobody has written here in five years of publishing.
+
+       <iframe> is deliberately NOT here: there are 32 across 24 posts (Vimeo,
+       Speaker Deck, Apple Podcasts, a Kindle preview), so it is a normal thing
+       for an author to write and failing on it would block ordinary work. It is
+       a warning instead -- see checkEmbeds.
+
+       CODE IS EXCLUDED, AND THAT IS NOT A LOOPHOLE. A fenced block reaches the
+       reader through render-codeblock.html's `htmlEscape .Inner | safeHTML`, and
+       an inline span is escaped by Goldmark, so <script> inside either renders
+       as visible text and cannot execute. Excluding them is therefore exactly
+       correct rather than a gap: the check asks "does this become markup?", and
+       in a code block the answer is no. This is also why a post whose SUBJECT is
+       XSS can still be published -- it just has to fence its samples, which is
+       what CONTRIBUTING.md already asks for.
+
+       Indented code blocks are deliberately NOT excluded. Every legitimate hit
+       in the archive is in a fence, so excluding them buys nothing -- and it
+       would cost something real, because four spaces inside a list item is a
+       paragraph continuation rather than a code block, so treating any indented
+       line as inert would hand back the exact hole this closes.
+
+       It runs over content/ AND draft/, unscoped by --changed-since. A security
+       check that only looks at a diff is one a re-scrape can walk around:
+       transfer/Posts.java rebuilds post bodies from the live WordPress site, so
+       the archive is not a fixed quantity until the scrapers are deleted at
+       cutover. It costs ~2 seconds over 2200 files. */
+    record HtmlRule(String label, Pattern pattern, String why) {}
+
+    static final List<HtmlRule> EXECUTABLE_HTML = List.of(
+            new HtmlRule("<script>", Pattern.compile("<script\\b", Pattern.CASE_INSENSITIVE),
+                    "runs arbitrary JavaScript on foojay.io"),
+            new HtmlRule("inline event handler",
+                    Pattern.compile("<[a-z][^>]{0,300}?\\son(?:click|error|load|mouseover|mouseenter|focus|blur|submit|change|toggle|animationend)\\s*=",
+                            Pattern.CASE_INSENSITIVE),
+                    "runs arbitrary JavaScript on foojay.io"),
+            new HtmlRule("javascript: URL",
+                    Pattern.compile("(?:\\]\\(|(?:href|src|action)\\s*=\\s*[\"']?)\\s*javascript:", Pattern.CASE_INSENSITIVE),
+                    "runs arbitrary JavaScript when the reader clicks"),
+            new HtmlRule("<form>", Pattern.compile("<form\\b", Pattern.CASE_INSENSITIVE),
+                    "collects reader input under foojay.io's name"),
+            new HtmlRule("<base>", Pattern.compile("<base\\b", Pattern.CASE_INSENSITIVE),
+                    "silently repoints every relative link and image on the page"),
+            new HtmlRule("<meta http-equiv=refresh>",
+                    Pattern.compile("<meta[^>]{0,200}?http-equiv\\s*=\\s*[\"']?\\s*refresh", Pattern.CASE_INSENSITIVE),
+                    "redirects the reader off the page"),
+            new HtmlRule("<object>/<embed>", Pattern.compile("<(?:object|embed)\\b", Pattern.CASE_INSENSITIVE),
+                    "loads and runs a third-party plugin object"));
+
+    static List<String> checkRawHtml(Path dir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(dir)) return problems;
+        try (Stream<Path> files = Files.walk(dir)) {
+            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                String[] lines = inertStripped(Files.readString(file)).split("\n", -1);
+                for (int i = 0; i < lines.length; i++) {
+                    for (HtmlRule rule : EXECUTABLE_HTML) {
+                        if (rule.pattern().matcher(lines[i]).find()) {
+                            problems.add(file + ":" + (i + 1) + ": raw " + rule.label()
+                                    + " in article text -- " + rule.why()
+                                    + ". If this is a code SAMPLE, put it in a ``` fenced block"
+                                    + " (it will render as text and this check will pass).");
+                        }
+                    }
+                }
+            }
+        }
+        return problems;
+    }
+
+    /* <iframe> is real and ordinary here -- 32 of them across 24 posts. But it
+       is also the one embed shape that can host a full page from somewhere else,
+       so a reviewer should look at the host rather than scroll past it. Reported
+       with that host extracted, so the whole judgement is on one line.
+
+       Scoped to --changed-since like the alt-text warnings: the 24 existing ones
+       are a fact about the archive, not about anyone's pull request. */
+    static final Pattern IFRAME = Pattern.compile("<iframe\\b[^>]{0,600}?src\\s*=\\s*[\"']([^\"']+)[\"']",
+            Pattern.CASE_INSENSITIVE);
+
+    static List<String> checkEmbeds(Path dir, Set<Path> touched) throws IOException {
+        List<String> warnings = new ArrayList<>();
+        if (!Files.isDirectory(dir)) return warnings;
+        try (Stream<Path> files = Files.walk(dir)) {
+            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                if (touched != null && !touched.contains(file.normalize())) continue;
+                String[] lines = inertStripped(Files.readString(file)).split("\n", -1);
+                for (int i = 0; i < lines.length; i++) {
+                    Matcher m = IFRAME.matcher(lines[i]);
+                    while (m.find()) {
+                        String src = m.group(1);
+                        String host = src.replaceFirst("^https?://", "").replaceFirst("^//", "")
+                                .replaceFirst("[/?#].*$", "");
+                        warnings.add(file + ":" + (i + 1) + ": <iframe> embedding "
+                                + (host.isBlank() ? src : host)
+                                + " -- confirm the host is one we mean to give a frame of foojay.io.");
+                    }
+                }
+            }
+        }
+        return warnings;
+    }
+
+    /* Everything that CANNOT become markup, blanked so the scanners above see
+       only what actually reaches the page as HTML. Lines are preserved (blanked
+       rather than removed) so a reported line number still points at the file.
+
+       Four things, each for its own reason:
+         - FRONTMATTER, because Go's html/template escapes every value it renders
+           into a tag -- a `description:` holding a <script> becomes text in the
+           meta tag, not a script. It is not a vector, and scanning it would fail
+           a post for quoting one.
+         - FENCED CODE, which render-codeblock.html escapes (see above).
+         - INLINE CODE SPANS, which Goldmark escapes.
+         - BACKSLASH ESCAPES, because \<script\> is markdown for the literal
+           characters. This is not hypothetical -- it is the only <script> string
+           in the whole archive. */
+    static String inertStripped(String markdown) {
+        String[] lines = markdown.split("\n", -1);
+        StringBuilder out = new StringBuilder();
+        boolean inFrontmatter = lines.length > 0 && lines[0].trim().equals("---");
+        String fence = null;          // the open fence's run of ` or ~, if any
+        int fenceIndent = 0;
+
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i];
+            String trimmed = line.stripLeading();
+            int indent = line.length() - trimmed.length();
+
+            if (inFrontmatter) {
+                if (i > 0 && trimmed.equals("---")) inFrontmatter = false;
+                out.append('\n');
+                continue;
+            }
+            Matcher f = Pattern.compile("^(`{3,}|~{3,})").matcher(trimmed);
+            if (f.find() && indent <= 3 + fenceIndent) {
+                String run = f.group(1);
+                if (fence == null) {
+                    // An opening fence may carry an info string; a closing one may not.
+                    fence = run.substring(0, 1).repeat(run.length());
+                    fenceIndent = indent;
+                    out.append('\n');
+                    continue;
+                }
+                if (run.charAt(0) == fence.charAt(0) && run.length() >= fence.length()
+                        && trimmed.substring(run.length()).isBlank()) {
+                    fence = null;
+                    fenceIndent = 0;
+                    out.append('\n');
+                    continue;
+                }
+            }
+            if (fence != null) {            // inside a fenced block
+                out.append('\n');
+                continue;
+            }
+            // Backslash-escaped punctuation is literal text, then inline spans.
+            String cleaned = line.replaceAll("\\\\[<>&\"'\\\\]", " ")
+                                 .replaceAll("`[^`]*`", " ");
+            out.append(cleaned).append('\n');
+        }
+        return out.toString();
+    }
+
+
+    /* ---------------------------------------------------------------------
+       GitHub annotations
+       ---------------------------------------------------------------------
+
+       Printing to stdout puts every finding inside a collapsed step of a
+       workflow log, which is three clicks from the pull request and scrolls
+       past. That is the same failure the embed warnings had when they shared a
+       truncated list -- a finding nobody reaches is not a finding -- one level
+       further out.
+
+       A `::warning file=,line=::` workflow command instead renders as an
+       ANNOTATION: GitHub attaches it to that file and line and shows it inline
+       in the Files changed tab, exactly where a reviewer is already looking,
+       and again on the run summary.
+
+       IT IS NOT A PULL REQUEST COMMENT, AND DELIBERATELY SO. Posting a comment
+       needs `pull-requests: write`, and pr-check.yml runs on `pull_request` with
+       no permissions block -- so a pull request from a FORK carries a read-only
+       token and the comment call would fail. Forks are how first-time authors
+       submit (CONTRIBUTING.md tells them to), so comments would break for
+       exactly the contributors this is meant to help. Annotations come from the
+       log stream, need no token and no permission, and work identically for a
+       fork. Nothing has to be granted for this to work.
+
+       Derived, not configured: GITHUB_ACTIONS is set by the runner, so a local
+       run prints the human-readable lines it always did and CI additionally
+       emits the commands. There is no flag to pass and none to forget.
+
+       Note GitHub displays a limited number of annotations per type per step
+       (10 at the time of writing), which is another reason --changed-since
+       scoping matters: a scoped run has a handful, an unscoped one has 951.
+       The plain-text list above stays complete either way. */
+    static final boolean ON_GITHUB = System.getenv("GITHUB_ACTIONS") != null;
+    static final Pattern FILE_LINE = Pattern.compile("^([^\\s:][^:]*\\.(?:md|toml|yaml|yml|json))(?::(\\d+))?:\\s*(.*)$",
+            Pattern.DOTALL);
+
+    /** Emits one `::kind file=,line=::` command, deriving the file and line from
+     *  the message's own `path:line:` prefix -- which every check already writes,
+     *  so no check had to change to gain an annotation. A message that does not
+     *  start with one is still emitted, just without a file attached. */
+    static void annotate(String kind, String message) {
+        if (!ON_GITHUB) return;
+        Matcher m = FILE_LINE.matcher(message);
+        // A newline would terminate the workflow command early; %0A is its escape.
+        if (m.matches()) {
+            System.out.println("::" + kind + " file=" + m.group(1)
+                    + (m.group(2) != null ? ",line=" + m.group(2) : "")
+                    + "::" + m.group(3).replace("\n", "%0A"));
+        } else {
+            System.out.println("::" + kind + "::" + message.replace("\n", "%0A"));
+        }
+    }
+
 }
