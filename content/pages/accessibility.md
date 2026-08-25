@@ -28,6 +28,29 @@ falls short today rather than claiming a conformance we have not audited.
   viewer, the event calendar, the sortable tables and the sponsor banners all
   work without a mouse, and the focus indicator is drawn at a contrast that is
   visible in both the light and the dark colour scheme.
+
+  Try it, here or on any other page — nothing to install, just the keyboard:
+
+  1. Press <kbd>Tab</kbd> once. A **Skip to content** button drops down at the
+     top left; press <kbd>Enter</kbd> and you land past the menu, at the start of
+     the article.
+  2. Carry on pressing <kbd>Tab</kbd>. Everything you can use is outlined as you
+     reach it, in the order you read it — and nothing you cannot see takes a
+     turn. On a narrow screen, open the menu and <kbd>Tab</kbd> keeps you inside
+     it until <kbd>Esc</kbd> closes it and hands focus back to the button you
+     opened it with.
+  3. In an article, <kbd>Tab</kbd> to an image and press <kbd>Enter</kbd>. The
+     image viewer opens; <kbd>←</kbd> and <kbd>→</kbd> move through the other
+     images in that article, and <kbd>Esc</kbd> closes it and puts you back on
+     the image you opened it from.
+  4. On the [calendar](/calendar/), switch to the month view, <kbd>Tab</kbd> to
+     an event and press <kbd>Enter</kbd> for its details, then <kbd>Esc</kbd> to
+     close it again.
+  5. On the [sitemap](/sitemap/), <kbd>Tab</kbd> to a column heading of the
+     articles table and press <kbd>Enter</kbd> to sort by it.
+
+  If any of that does not do what it says here, that is a bug — please
+  [tell us](#telling-us-about-a-problem).
 - **Colours are measured, not guessed.** Body text, muted text, links and labels
   on coloured fills all meet at least 4.5:1 in both schemes; the values are
   recorded next to each colour in the stylesheet.

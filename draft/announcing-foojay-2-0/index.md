@@ -234,7 +234,7 @@ where it actually stands. What went in:
 
 - A skip link, one `<h1>` and real landmarks on every page.
 - **Everything works without a mouse**: the menu, the search field, the image
-  viewer, the event calendar, the sortable tables, the sponsor banners.
+  viewer, the event calendar, the sortable tables, the sponsor banners. Read [the accessibility page](https://foojay.io/accessibility/) for more information about navigating with the keyboard through the site.
 - **Contrast is measured, and the numbers are recorded next to each colour in
   the stylesheet.** That is how we found that Foojay's own logo blue is 2.02:1
   on white — fine as a fill, unusable as text — so it is never text here, and

@@ -186,6 +186,17 @@ code { background: var(--surface-sunken); padding: .1em .35em; border-radius: 4p
 pre { background: var(--surface-navy); color: #e6edf3; padding: 1.1rem 1.25rem; border-radius: var(--radius); overflow-x: auto; }
 pre code { background: none; padding: 0; color: inherit; }
 
+/* <kbd> is a KEY, not a snippet of code -- same mono face and tint as `code`,
+   plus a border and a thicker bottom edge so a run of them reads as something
+   you press. The keyboard walkthrough on /accessibility/ is the main user;
+   four articles carry one too, and were rendering at the browser default. */
+kbd {
+  font-family: var(--font-mono); font-size: .85em; white-space: nowrap;
+  background: var(--surface-sunken); color: var(--ink);
+  padding: .1em .4em; border-radius: 4px;
+  border: 1px solid var(--border); border-bottom-width: 2px;
+}
+
 /* A ```mermaid fence renders as <pre class="mermaid"> (see
    _markup/render-codeblock.html), and mermaid replaces its text with an <svg>
    IN PLACE -- the <pre> stays. So the dark code-block styling above has to come
