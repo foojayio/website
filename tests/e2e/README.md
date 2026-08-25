@@ -38,6 +38,17 @@ The base path is read from the home page's own `canonical`, the same way
 `BuiltSite.java` derives it, so `/website/` and `/` both work with nothing to
 change at cutover.
 
+**Nothing here is resolved against the working directory.** `site.mjs` derives
+the repo root from its own file location, because Playwright runs
+`webServer.command` with the cwd *it* chooses — the config's directory, not the
+repo root — so a relative `node tests/e2e/server.mjs` became
+`tests/e2e/tests/e2e/server.mjs` and the server never started. It failed only in
+CI, for a reason worth knowing: `reuseExistingServer: !process.env.CI` is the
+default advice, and a server left running from an earlier local session was
+silently reused on every run, so the launch path CI actually takes was never
+exercised once. It is `reuseExistingServer: false` now — a fraction of a second
+per run to make the local path and the CI path the same path.
+
 ## Which pages get tested is derived, not listed
 
 `discover.mjs` scans the build for what it actually contains: the first post

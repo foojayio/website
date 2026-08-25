@@ -786,6 +786,20 @@ should catch a mistake at PR time rather than letting it fail silently.
   tell the bug from the content. `render-codeblock.html`'s `htmlEscape | safeHTML`
   is the guard, and the comment there is the record.
 
+  **Nothing in the suite is resolved against the working directory, and
+  `reuseExistingServer` is `false` even locally.** Both come from the same bug.
+  Playwright runs `webServer.command` with the cwd *it* chooses -- the config's
+  own directory, not the repo root -- so a relative `node tests/e2e/server.mjs`
+  resolved to `tests/e2e/tests/e2e/server.mjs` and the server never started;
+  `site.mjs` derives the repo root from its own file location for that reason.
+  It failed only in CI, and it failed there because the default
+  `reuseExistingServer: !process.env.CI` had silently reused a server left
+  running from an earlier local session on every single local run -- so the
+  launch path CI takes had never been exercised once, and every rehearsal was
+  green. Reusing costs a fraction of a second and buys nothing; not reusing
+  makes the local path and the CI path the same path. **Don't put the
+  `!process.env.CI` default back.**
+
   **The gate must not count itself.** `[params.views] endpoint` is set, so
   `views-beacon.html` fires a real beacon at `foojay.io/api/views` on every page
   — and a browser walking 20 pages on every deploy would add 20 reads to the
