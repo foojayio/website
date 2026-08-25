@@ -113,6 +113,41 @@ the PR check can see. Add a rule here whenever a mistake would otherwise fail
 *silently* — an author slug with no bundle, two series pages claiming one
 `weight`, an unknown key in a `data/events/` file.
 
+`BuiltSite.java` checks the site Hugo actually **produced**, so it runs after a
+build — in `pr-check.yml` and again in `build-deploy.yml`, there between the
+build and the deploy, so a broken build stops before it replaces the live site.
+Locally:
+
+```bash
+hugo --gc --minify && jbang scripts/validate/BuiltSite.java
+```
+
+Two checks, both derived — there is no list of URLs to keep in step with the
+content:
+
+1. **every source page produced a built page.** `content/` is the expectation
+   and `public/` is the answer, via the permalinks in `hugo.toml`. This is what
+   catches a whole *section* going missing, the failure mode of the branch-bundle
+   conversion where the templates rendered fine and simply matched nothing.
+2. **every internal link resolves** — `href`, `src`, `srcset`, `poster`, and the
+   meta-refresh in all 596 alias pages, so every legacy URL is verified to still
+   land somewhere real. It reads files rather than making HTTP requests, so it
+   needs no server, takes ~5s over half a million links, and cannot be flaky.
+   External links are not checked at all: a third-party host being down is not a
+   reason to block a deploy of our own site.
+
+**Only one kind of dead link blocks.** A link the *templates* emit — nav,
+pagination, stylesheet, thumbnail, alias target — is broken on every page for
+every reader and is a bug in this repo, so it fails the run. A link an author
+typed inside their own article is a fact about 2000 imported WordPress posts:
+there are 53 today (`_wp_link_placeholder`, `/wp-admin/post.php`, bare domains
+written without `https://`), none introduced by the build, and blocking every
+future deploy on a 2021 typo is how a gate gets switched off within the week.
+Those are reported with their count instead, the way `fetch/DiscoverJugCalendars.java`
+reports its near-misses. The boundary is `.prose`, which is exactly where
+`.Content` is rendered and nowhere else. `--strict` fails on those too, which is
+the way to drive a cleanup pass to zero.
+
 ## `shared/` — common code
 
 `HtmlToMarkdown.java` is pulled in with `//SOURCES ../shared/HtmlToMarkdown.java`

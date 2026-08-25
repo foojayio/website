@@ -37,3 +37,12 @@ jobs:
 
       - name: Build site (catches template/content errors)
         run: hugo --gc --minify
+
+      # The same gate build-deploy.yml runs, here so a PR that breaks a link the
+      # templates emit -- or drops a whole section out of the build -- is caught
+      # at review time instead of at deploy time. Needs the built site, so it has
+      # to follow the step above. Pagefind is not run on a PR and nothing here
+      # depends on it: the search page imports pagefind.js from a JS variable,
+      # not from a src attribute, so it is not one of the links checked.
+      - name: Validate the built site
+        run: jbang scripts/validate/BuiltSite.java

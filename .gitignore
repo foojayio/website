@@ -38,3 +38,10 @@ __pycache__/
 # caption files. Not committed: the transcript in the page bundle is the
 # artefact, and these are re-fetchable.
 .cache/
+
+# Playwright (tests/e2e/) -- the browser checks that run against the BUILT site.
+# .pages.json is regenerated from public/ at the start of every run (see
+# tests/e2e/discover.mjs), so committing it would only freeze a stale answer.
+/test-results/
+/playwright-report/
+tests/e2e/.pages.json

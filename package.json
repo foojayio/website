@@ -1,0 +1,11 @@
+{
+  "name": "foojay-website",
+  "private": true,
+  "description": "Browser checks for the built Hugo site (tests/e2e/). The site itself has no Node build step; Pagefind is still invoked with npx in the workflow.",
+  "scripts": {
+    "test:e2e": "playwright test --config tests/e2e/playwright.config.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

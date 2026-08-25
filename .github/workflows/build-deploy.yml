@@ -112,6 +112,79 @@ jobs:
       - name: Build search index (Pagefind)
         run: npx -y pagefind --site public
 
+      # The gate. Runs against the public/ directory that is about to BECOME the
+      # deploy, so a broken build stops here rather than after it has replaced
+      # the live site. Two checks, both derived from content/ and hugo.toml, so
+      # there is no list of URLs to keep in step: every source page produced a
+      # built page, and every link the site itself emits resolves to a file that
+      # exists. Dead links inside article text are reported but do not block --
+      # see the script's header for why those two are not the same problem.
+      #
+      # Deliberately NOT a separate job: the Pages artifact is ~700 MB, so a
+      # validate job would upload and re-download all of it to check bytes that
+      # are already sitting right here. It reads files rather than making HTTP
+      # requests, so it needs no server and cannot be flaky.
+      - name: Validate the built site
+        run: jbang scripts/validate/BuiltSite.java
+
+      # The browser half of the gate. Everything above is static analysis; this
+      # is the only thing that can tell whether the site WORKS -- search is
+      # filled in client-side by Pagefind, the maps and the lightbox exist only
+      # after JavaScript runs, and all of those fail silently, with a 200 and a
+      # full-looking page.
+      #
+      # The "staging environment" is tests/e2e/server.mjs: the built public/
+      # directory served on localhost, reachable only from this run. It mimics
+      # GitHub Pages specifically (pretty URLs, a 301 on a missing trailing
+      # slash, 404.html with a 404 status, everything under the base path), so a
+      # link that escapes /website/ fails here exactly as it would in
+      # production. No staging deploy, nothing public, nothing to clean up.
+      #
+      # Third-party requests are stubbed inside the tests, so this makes no
+      # network calls to YouTube, Vimeo or Google Fonts and cannot go red
+      # because someone else's CDN is having an afternoon.
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install test dependencies
+        run: npm ci
+
+      # The browser binary is ~170 MB and does not change between runs; the key
+      # is the lockfile, so it re-downloads exactly when the pinned Playwright
+      # version moves and never otherwise.
+      - name: Cache Playwright browser
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: Install Playwright system dependencies
+        run: npx playwright install-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+
+      - name: Check the site in a browser
+        run: npm run test:e2e
+
+      # Only on failure, and only for a fortnight: the trace and screenshots are
+      # how you find out WHY a deploy was blocked without reproducing it
+      # locally, and they are worthless once the run is old.
+      - name: Upload the failing traces
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

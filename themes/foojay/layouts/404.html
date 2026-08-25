@@ -13,6 +13,10 @@
       <input type="search" name="q" placeholder="Search foojay.io" autocomplete="off">
     </label>
   </form>
-  <p><a href="{{ "/" | relURL }}">&larr; Back to the homepage</a></p>
+  {{/* site.Home.RelPermalink, not `"/" | relURL`: relURL adds the baseURL
+     subpath only to a path with NO leading slash (the search action above is
+     the correct form), so "/" came out as a bare "/" and left the /website/
+     trial deploy for the GitHub Pages root. */}}
+  <p><a href="{{ site.Home.RelPermalink }}">&larr; Back to the homepage</a></p>
 </div>
 {{ end }}

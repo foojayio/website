@@ -653,6 +653,175 @@ should catch a mistake at PR time rather than letting it fail silently.
   publishing goal, and four-fifths of it was wrong. Derive it, don't ask: the
   checks moved into the script above, and the template is now the one question
   a machine can't answer — what's in this PR.
+- **`scripts/validate/BuiltSite.java`**: the check on the site Hugo actually
+  *produced*, run by `pr-check.yml` and again by `build-deploy.yml` **between the
+  build and the deploy** — so a broken build stops before it replaces the live
+  site rather than after. GitHub Pages has no staging slot and needs none here:
+  the check reads `public/` off disk instead of making HTTP requests, so it needs
+  no server, takes ~5 seconds over half a million links, and cannot be flaky.
+  External links are not checked at all — a third-party host being down is not a
+  reason to block a deploy of our own site.
+
+  Two checks, both **derived**, so there is no list of URLs to keep in step with
+  2147 posts:
+
+  1. **Every source page produced a built page.** `content/` is the expectation
+     and `public/` is the answer, through the permalinks in `hugo.toml`. This is
+     the one that catches a whole *section* vanishing — the branch-bundle
+     conversion's failure mode, where `where site.RegularPages "Section"
+     "authors"` still parsed, still ran, and matched nothing. A `bundles` flag per
+     section is what keeps the 98 podcast `transcript.md` files out of it: inside
+     a leaf bundle only `index.md` is a page, everything beside it is a resource.
+  2. **Every internal link resolves** — `href`, `src`, `srcset`, `poster`, and the
+     meta-refresh in all 596 alias pages, so every legacy URL is verified to still
+     land somewhere real. It subsumes a "the nav works" check, since the menus
+     render on all 4200 pages and a dead menu entry is therefore a dead link 4200
+     times over.
+
+  **The two kinds of dead link are not the same problem, and only one may stop a
+  deploy.** A link the TEMPLATES emit is broken for every reader on every page and
+  is a bug in this repo, so it fails the run. A link an author typed inside their
+  own article is a fact about 2000 imported WordPress posts — there are 53 today
+  and none was introduced by the build — and blocking every future deploy on a
+  2021 typo is how a gate gets switched off within the week. Those are reported
+  with their count, the way `fetch/DiscoverJugCalendars.java` reports its
+  near-misses. The boundary is **`.prose`**, which is exactly where `.Content` is
+  rendered and nowhere else; `--strict` fails on them too, for a cleanup pass.
+
+  Four things are load-bearing:
+  - **The base path is read from the home page's own `canonical`**, not
+    configured — so it is `/website/` on a trial build and `/` on a production
+    one, with nothing to remember to change at cutover. Same self-flipping shape
+    as `baseof.html`'s `$isTrial`.
+  - **A root-relative link that does NOT start with the base path is its own
+    kind of failure**, reported as "escapes the base path". It resolves on a
+    laptop and 404s once deployed under `/website/`, which is invisible locally —
+    and the first run found exactly that: `themes/foojay/layouts/404.html` had
+    `{{ "/" | relURL }}`, which Hugo renders as a bare `/` (relURL only adds the
+    subpath to a path with **no** leading slash), so the 404 page's "back to the
+    homepage" link left the site entirely. It is `site.Home.RelPermalink` now.
+  - **Existence is tested against a `Set` of the build's filenames, not against
+    the filesystem** — which makes the check case-SENSITIVE on every platform.
+    macOS is not and GitHub Pages is, so a case-wrong link would otherwise
+    resolve on a laptop and only 404 in production.
+  - **Percent-escapes are decoded by hand, not with `URLDecoder`**, which turns
+    `+` into a space; a `+` in a path is a literal `+`. The emoji `aliases:` are
+    why this matters — those filenames are literal characters on disk and
+    percent-encoded in the HTML.
+
+  It has been seen to FAIL, which is the only way a green check means anything:
+  removing one built post reported both the missing page and the 21 pages linking
+  to it, and a dead `href` injected outside `.prose` blocked the run.
+
+  The 53 author-written dead links are worth a pass of their own before cutover.
+  Three clusters: **bare domains written without a scheme** (`www.jpro.one`,
+  `join.slack.com/t/foojay/signup`, `blog.frankel.ch/...`), which Markdown resolves
+  against foojay.io; **WordPress artifacts** (`_wp_link_placeholder`,
+  `/wp-admin/post.php`, `/wp-json/foojay/v2/calendar/`); and **`/wp-content/uploads/`
+  paths that were never localised**, including two `.mp4` videos and a webinar PDF
+  that are simply absent from the build.
+
+
+- **`tests/e2e/` — the browser half of the deploy gate**, run by
+  `build-deploy.yml` after `validate/BuiltSite.java` and before the upload.
+  Everything else that checks this site is static; these are the only checks that
+  can see the parts of foojay that **exist only once JavaScript runs** — search
+  results, both world maps, the lightbox, the sortable sitemap tables, syntax
+  highlighting, mermaid. Every one of those fails *silently*: the page still
+  returns 200, still has its content, and simply stops doing the thing.
+  `tests/e2e/README.md` is the full guide; the reasoning worth keeping here:
+
+  **The "staging environment" is localhost, and GitHub Pages needs no other
+  one.** `server.mjs` serves the built `public/` on 127.0.0.1, reachable only
+  from the workflow run — nothing to provision, nothing public, nothing to clean
+  up. It is written by hand rather than reaching for `npx serve` because the
+  point is to behave like **GitHub Pages specifically**: pretty URLs resolve to
+  `index.html`, a directory without a trailing slash 301s to one, a miss serves
+  `404.html` with a 404 status, media answers a `Range` request, and everything
+  lives under the base path — so a link that escapes `/website/` fails here
+  exactly as it would in production. A generic static server has its own
+  opinions about all five. The base path comes from the home page's own
+  `canonical`, the same derivation `BuiltSite.java` uses, so it needs nothing
+  changed at cutover.
+
+  **Which pages get tested is DERIVED from the build, not listed.**
+  `discover.mjs` finds the first post with a code block, the first with a
+  gallery, the first with an embed, the first author profile, the self-hosted
+  media files. A hardcoded "the post with the diagram is `/today/foo/`" rots the
+  moment that post is renamed — and it rots into a test that still *passes*,
+  because the page still loads and simply has no diagram on it. First match in
+  sorted order, so two runs of one build test the same pages. A feature the
+  build contains none of resolves to `null` and its test skips with a reason:
+  **`mermaid` is `null` today** — the library is vendored and the render hook is
+  wired, but no published post uses a ```mermaid fence yet (the one in `draft/`
+  is what will). That test turns itself on the day the draft lands, with nothing
+  to remember to enable.
+
+  **Third parties are stubbed, never fetched.** 438 posts embed a YouTube
+  player, 19 Vimeo, and the fonts come from Google. Loading them would make the
+  suite slow, make it fail when someone else's CDN has a bad afternoon, and fire
+  a request at YouTube on every build. They are answered locally with an empty
+  body of the right type, so the page still lays out and the `<iframe>` is still
+  there to assert on. That is also why **there are no retries**: nothing depends
+  on the network, so a failure that comes and goes is a real bug in the page,
+  and a retry would hide the one flake worth knowing about.
+
+  **"Does the video play" is two questions and only one belongs in a gate.** A
+  third-party embed is not ours to test — asserting a YouTube player reaches
+  `playing` is asserting YouTube is up, on a check that blocks our deploy — so
+  an embed is checked structurally (it survived the pipeline, it is in the
+  article, its `src` is absolute https). A file we serve **is** ours to test all
+  the way to decoding: the one self-hosted `.mp4` is fetched, range-requested,
+  handed to a real `<video>` and waited on until `canplay` with a duration.
+  Existence is not playability — `cleanup/images.py` learned that when a killed
+  encode left a 0-byte file every "does it exist" check called fine.
+
+  Two things NOT asserted, deliberately. **Console errors are not collected** —
+  a stubbed third party makes Chrome log errors that say nothing about this
+  site; what is collected is `pageerror` (an uncaught exception, unambiguous)
+  and same-origin 4xx/5xx. And **there is no check that a code fence is not
+  double-escaped**, tempting as it is after that bug hit ~950 posts: `content/`
+  contains a post whose subject matter is a *table of entity names* and code
+  samples that legitimately contain `&gt;`, so no assertion on rendered text can
+  tell the bug from the content. `render-codeblock.html`'s `htmlEscape | safeHTML`
+  is the guard, and the comment there is the record.
+
+  **The gate must not count itself.** `[params.views] endpoint` is set, so
+  `views-beacon.html` fires a real beacon at `foojay.io/api/views` on every page
+  — and a browser walking 20 pages on every deploy would add 20 reads to the
+  numbers *printed on the site*, the one measurement here that is published. Two
+  layers stop it: the routes are stubbed, and Chromium is launched with
+  `--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1`, so DNS fails for
+  anything but localhost below the level any page script can reach. The second
+  exists because the first is a Playwright-level promise and `sendBeacon` is
+  exactly the request shape not to be wrong about.
+
+  **33 pass, 4 skip, and the skips are findings rather than disabled tests.**
+  One is mermaid (above). The other three are the two world maps and the
+  lightbox's map-tile exclusion, all blocked on the same thing: **Leaflet and
+  markercluster are loaded from unpkg.com at read time**, so they cannot be
+  exercised without a network call. `cluster-map.js` guards on `!window.L` and
+  returns, which means that when unpkg is unreachable **the map silently
+  disappears and the page still renders clean** — no error, no message, a gap
+  where the map was. Vendoring Leaflet the way mermaid is vendored would remove
+  the dependency and make those three run for real; it is the same argument
+  that vendored mermaid, one page-count smaller.
+
+  Two measured facts worth not rediscovering. **Pagefind's matching is fuzzy
+  enough that nonsense still matches** — `qqzzxxjjvvww` returns 1 result and a
+  random `xqjvbzkwqpfmdlrn` returns **214** — so only several nonsense tokens
+  ANDed together are a genuinely empty query. And **a `loading="lazy"` image
+  below the fold has no box, so it never becomes clickable**: the gallery test
+  scrolls and waits for the decode first, and the broken-image sweep walks the
+  page before looking, or it passes by never looking.
+
+  `@playwright/test` is pinned in `package.json` — **at 1.56.1 or later, not
+  lower**: `npm audit` flags every version below 1.55.1 for downloading browser
+  binaries without verifying the TLS certificate, which is a supply-chain
+  problem on the one step that fetches an executable. The browser is cached in
+  CI on the lockfile hash, so it re-downloads exactly when that pin moves.
+
+
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
   GitHub Pages on push to `main`. Also refreshes and commits `data/jugs.yaml`,
   `data/java-champions.yaml` and `data/views.json` before building
