@@ -5,11 +5,11 @@ lastmod: "2020-12-04T17:12:51+00:00"
 description: "Last week, we took a look at the current situation in Europe. We saw that the second wave is already breaking in Europe. This trend continues."
 authors:
   - "johannes-weigend"
-image: "https://foojay.io/1-europe-2/"
+image: "1-europe-1.png"
 categories:
   - "JavaFX"
 related_posts:
-frozen: false
+frozen: true
 ---
 
 In this series of blog posts ([see part 1 here](https://foojay.io/today/covid-19-time-series-analysis-with-software-ekg/)), we're taking look at the current figures of the Covid-19 pandemic with Software-ECG. Software-ECG is a free time series analysis tool originally developed for system analysis of computer problems in distributed systems.
@@ -23,7 +23,7 @@ Software-ECG is built on OpenJDK and JavaFX, leveraging the power of a compiled 
 In [last week's blog post](https://foojay.io/today/the-second-wave-breaks-in-europe/), we took a look at the current situation in Europe and we saw that the second wave was already breaking. Over the past week, this trend has continued.
 
 The number of people testing positive is decreasing significantly in France (black line), Italy (top green line), and Great Britain (top purple line).  
-[![The 2nd Wave in Europe](https://foojay.io/1-europe-2/)](https://foojay.io/1-europe-2/)
+[![The 2nd Wave in Europe](1-europe-1.png)](1-europe-1.png)
 
 *The 2nd Wave in Europe*
 
@@ -34,7 +34,7 @@ But there are some countries where the graphs are different. These are Russia, S
 To analyze these countries exclusively, use the filter query "Russia\|Serbia\|Ukraine" and zoom into the period of time for the second wave only.
 
 In these countries, the positive test numbers are growing linearly. Neither can we see the typical increase at the beginning nor any flattening at a later point in time. We might assume that the data is gathered in a different way than other EU countries do.  
-[![Russia, Serbia and Ukraine show a almost linear growth](https://foojay.io/2-russia-2/)](https://foojay.io/2-russia-2/)
+[![Russia, Serbia and Ukraine show a almost linear growth](2-russia-1.png)](2-russia-1.png)
 
 *Russia, Serbia and Ukraine show an almost linear growth*
 
@@ -45,14 +45,14 @@ If we had the same metrics as in the EU, we could easily demonstrate this by ana
 ### Where is the 2nd Wave in China?
 
 Now, let's take a look at countries outside of Europe and analyze China. This country also has a very interesting chart because the second wave in China looks like this:  
-[![2nd Wave in China](3-china-2nd-wave-2)](https://foojay.io/3-china-2nd-wave-2)
+[![2nd Wave in China](3-china-2nd-wave-2.png)](3-china-2nd-wave-2.png)
 
 *2nd Wave in China*
 
 The chart shows the number of new cases since September 2020. Make sure to look at the scale. Starting from 20 cases per day, it has now reached 100 cases per day.
 
 People could get nervous when they see the number of people tested positive is rising again. Do not get nervous, though! If you take a closer look at the same chart and change the start date to 1/1/2020, you can display both waves in a single chart. Now you will not see any second wave at all.  
-[![1st and 2nd Wave in China](https://foojay.io/4-china-both-waves-3/)](https://foojay.io/4-china-both-waves-3/)
+[![1st and 2nd Wave in China](4-china-both-waves-2.png)](4-china-both-waves-2.png)
 
 *1st and 2nd Wave in China*
 

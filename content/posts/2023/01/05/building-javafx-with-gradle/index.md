@@ -15,7 +15,7 @@ related_posts:
   - "compilation-avoidance-with-gradle"
   - "introducing-gradle-test-suites"
   - "javafx-templates-for-desktop-applications"
-frozen: false
+frozen: true
 ---
 
 Usually Maven is my build tool of choice and for Java front-ends I sometimes still build a front-end application using ANT, Swing with Oracle's JDK 8u202 and JDK 8's Java Packager, but don't tell anyone....
@@ -31,7 +31,7 @@ Of course, I don't want to lock customers into JDK maintenance contracts; for ba
 
 Besides all these good reasons, I also want to be faster at creating front-ends and creating nice user interfaces is easier than with Java Swing, I think:
 
-<https://foojay.io/wp-content/uploads/2022/12/FinalLoginFromSpace.mp4>
+[FinalLoginFromSpace.mp4](FinalLoginFromSpace.mp4)
 
 *A good reason to use JavaFX: FX and nice GUIs can be created fast!*   
 

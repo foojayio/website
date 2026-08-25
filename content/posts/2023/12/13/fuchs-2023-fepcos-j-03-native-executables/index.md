@@ -15,7 +15,7 @@ related_posts:
   - "native-spring-boot"
   - "fuchs-2023-fepcos-j-02"
   - "fuchs-2024-fepcos-j-multithreaded-server"
-frozen: false
+frozen: true
 ---
 
 **FEPCOS-J prototypically enables Java developers to realize networked systems without low-level network programming and to automatically build native executables by means of GraalVM. **This post introduces the concept and gives you an example by rebuilding the source code explained in my previous posts.****
@@ -36,7 +36,7 @@ For this purpose, GraalVM provides the ***native-image*** tool [\[5\]](#referenc
 
 This post explains the **prototypical interaction of FEPCOS-J and GraalVM**, which enables Java developers to automatically build native executables of declaratively programmed networked systems.
 
-It introduces how [FEPCOS-J uses GraalVM to build native executables](#concept) and provides an [example](#example) afterwards. Finally, the post [evaluates the build process](https://foojay.io/wp-admin/post.php?post=102871&action=edit#evaluation) and draws a [conclusion](https://foojay.io/wp-admin/post.php?post=102871&action=edit#conclusion).
+It introduces how [FEPCOS-J uses GraalVM to build native executables](#concept) and provides an [example](#example) afterwards. Finally, the post [evaluates the build process](#evaluation) and draws a [conclusion](#conclusion).
 
 I would also like to ask you to [help me to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS)](#help).
 

@@ -14,7 +14,7 @@ related_posts:
   - "building-command-line-interfaces-with-kotlin-using-picocli"
   - "build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines"
   - "debug-unresponsive-apps"
-frozen: false
+frozen: true
 ---
 
 ***TL;DR : The `Duration`API is coming out of its experimental stage and offers a nice DSL to easily work with time durations. If offers the obvious but also nice extra goodies, such as coercions and ISO/String conversions and is notably used to [calculate processing time](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/durations-and-time-measurement.md#measuretime-and-measuretimedvalue).*** ***You can directly run the code I present below [in the Kotlin playground](https://pl.kotl.in/QwksQa5h1)!***
@@ -160,4 +160,4 @@ fun experimentalPrintDuration(){
 
 I really like that the Duration API focuses on a human readability as well as easy conversion and usage. It's also a very nice entry point into the `stdlib` if you're searching for simple contained to start with. I rarely dive into the standard library and the implementation is concise and easy to read. I'll surely be trying to find some uses for it in the short future :).
 
-**Hope you like what you read, I do write quite a bit about Kotlin so [have a look at my other articles](__GHOST_URL__/tag/kotlin/), or ping me [on Twitter](https://twitter.com/jlengrand) if you want to react to the article!**
+**Hope you like what you read, I do write quite a bit about Kotlin so [have a look at my other articles](https://lengrand.fr/tag/kotlin/), or ping me [on Twitter](https://twitter.com/jlengrand) if you want to react to the article!**

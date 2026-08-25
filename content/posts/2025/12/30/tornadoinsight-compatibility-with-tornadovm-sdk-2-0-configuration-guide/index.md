@@ -15,7 +15,7 @@ related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "introducing-the-boxlang-ide-plugin-for-intellij"
   - "foojay-podcast-91"
-frozen: false
+frozen: true
 ---
 
 {{< img src="tornado-insight.webp" class="size-full is-resized" width="298" height="298" style="width:138px;height:auto" >}}
@@ -145,4 +145,4 @@ JetBrains Marketplace: [++https://plugins.jetbrains.com/plugin/23309-tornadoinsi
 
 GitHub Repository: [++https://github.com/beehive-lab/tornado-insight++](https://github.com/beehive-lab/tornado-insight)
 
-This work has been supported by research funding from the European Union ([++P2Code++](https://p2code-project.eu/), [++AERO++](aero-project.eu)).
+This work has been supported by research funding from the European Union ([++P2Code++](https://p2code-project.eu/), [++AERO++](https://aero-project.eu/)).

@@ -15,7 +15,7 @@ related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
-frozen: false
+frozen: true
 ---
 
 In this post, we're going to migrate some sample code from the `javax` namespace to `jakarta`. If you want the history on this change, check out [this helpful blog post](https://blogs.oracle.com/javamagazine/post/transition-from-java-ee-to-jakarta-ee) from Java Magazine. Fundamentally the *Java Persistence API* was renamed to *Jakarta Persistence API* meaning that the `javax` namespace changed to `jakarta` for frameworks whose APIs have moved to Jakarta EE (which is not all of them).
@@ -28,7 +28,7 @@ If you are following along, I recommend that you use IntelliJ IDEA Ultimate, how
 
 ![Gutter icon to run](docker-compose-up.png)
 
-Now you should be able to navigate to [localhost:8080/MyWebApp](8080/MyWebApp) and see the application. If you enter a name and fruit, they should successfully be persisted in the database. This application is currently running Apache Tomcat 9.0 which uses the `javax` namespace.
+Now you should be able to navigate to [localhost:8080/MyWebApp](http://localhost:8080/MyWebApp) and see the application. If you enter a name and fruit, they should successfully be persisted in the database. This application is currently running Apache Tomcat 9.0 which uses the `javax` namespace.
 
 ## Updating your Apache Tomcat version
 
@@ -61,7 +61,7 @@ You can check the logs for your container to ensure you're running Tomcat 10.0 i
 [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name: Apache Tomcat/10.0.17
 ```
 
-Now we're confident that we're using Apache Tomcat 10.0, let's go to the webserver front end and see what happens. In your browser, go to [localhost:8080/MyWebApp](8080/MyWebApp) and try to enter a name and fruit - you will get a 404 error. We're getting this error because Tomcat 9 used Java Servlet 4.0 which uses `javax.*` and Apache Tomcat 10 uses Jakarta Servlet 5.0 which uses `jakarta.*`. Let's fix the problem now!
+Now we're confident that we're using Apache Tomcat 10.0, let's go to the webserver front end and see what happens. In your browser, go to [localhost:8080/MyWebApp](http://localhost:8080/MyWebApp) and try to enter a name and fruit - you will get a 404 error. We're getting this error because Tomcat 9 used Java Servlet 4.0 which uses `javax.*` and Apache Tomcat 10 uses Jakarta Servlet 5.0 which uses `jakarta.*`. Let's fix the problem now!
 
 ## Updating your dependencies
 
@@ -138,7 +138,7 @@ You can select the scope here, for example *MyWebApp*. This also allows you to g
 
 Press **Do Refactor** . Your Java classes should no longer be in a state of error. Now let's rebuild our application with **⌘F9** (macOS), or **Ctrl+F9** (Windows/Linux) and then run it with **Shift** +**F10** \|**⌃R**.
 
-Now you should be able to navigate to [localhost:8080/MyWebApp](8080/MyWebApp) again and see the application. Your error should be gone and your migration is nearly complete.
+Now you should be able to navigate to [localhost:8080/MyWebApp](http://localhost:8080/MyWebApp) again and see the application. Your error should be gone and your migration is nearly complete.
 
 ## Updating your persistence file
 
@@ -185,7 +185,7 @@ to:
 
 Now let's rebuild our application again with **⌘F9** (macOS), or **Ctrl+F9** (Windows/Linux) and then run it with **Shift** +**F10** \|**⌃R**.
 
-Your application should still be available at [localhost:8080/MyWebApp](8080/MyWebApp).
+Your application should still be available at [localhost:8080/MyWebApp](http://localhost:8080/MyWebApp).
 
 Your code should now be the same as the `jakarta` branch in the project. You can verify this by navigating to the *src* directory in IntelliJ IDEA then right-click and select Git \> Compare with Branch... and select the `jakarta` branch.
 

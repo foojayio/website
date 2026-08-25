@@ -13,7 +13,7 @@ related_posts:
   - "foojay-podcast-15"
   - "foojay-podcast-13"
   - "foojay-podcast-10"
-frozen: false
+frozen: true
 ---
 
 The Foojay Podcast Java User Group World Tour has already brought us to the UK, US, Dubai, and Japan.
@@ -78,8 +78,8 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://jugs.groups.io/g/jug-leaders>
 * 20'53 About DevNexus, how it started, the many tracks,…
   * <https://devnexus.com/presentations/beyond-rest-and-crud-integration-patterns-in-microservices>
-  * [https://devnexus.com/presentations/patterns-predictions-and-prescriptions](https://devnexus.com/presentations/patterns-predictions-and-prescriptions%20)
-  * [https://foojay.io/today/visualizing-brain-computer-interface-data-using-javafx/](https://foojay.io/today/visualizing-brain-computer-interface-data-using-javafx/%20)
+  * [https://devnexus.com/presentations/patterns-predictions-and-prescriptions](https://devnexus.com/presentations/patterns-predictions-and-prescriptions)
+  * [https://foojay.io/today/visualizing-brain-computer-interface-data-using-javafx/](https://foojay.io/today/visualizing-brain-computer-interface-data-using-javafx/)
   * [https://devnexus.org/presentations/observing-minecraft](https://devnexus.org/presentations/observing-minecraft%20)
 * 42'17 Who is visiting DevNexus and Atlanta JUG
 * 52'16 Outro

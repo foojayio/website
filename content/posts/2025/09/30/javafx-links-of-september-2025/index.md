@@ -13,7 +13,7 @@ related_posts:
   - "javafx-links-of-july-2025"
   - "javafx-links-of-june-2025"
   - "javafx-links-of-may-2025"
-frozen: false
+frozen: true
 ---
 
 Here is the overview of the JavaFX LinksOfTheMonth of September 2025. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [links@jfx-central.com](mailto:links@jfx-central.com).
@@ -72,7 +72,7 @@ Here is the overview of the JavaFX LinksOfTheMonth of September 2025. You can fi
 * Last week we had a Mandelbrot example by **A N M "Bazlur" Rahman** . This week, thanks to a [tip by **Max Rydahl Andersen**](https://bsky.app/profile/maxandersen.xam.dk/post/3lxzl67e3222v), we have another one. MandelbrotFx, a fractal (Mandelbrot, Julia, ...) explorer written with JavaFX, is a [project shared by **Clément de Tastes**](https://github.com/CodeSimcoe/MandelbrotFx).
 * [**Johan Vos** on Bluesky](https://bsky.app/profile/johanvos.bsky.social/post/3lxzbhapzn22w): "*There are so many cool performance tricks for JavaFX that I sometimes think I should write a book about it. But that takes a huge amount of time. I'll think a bit more about how to deal with this.*"
 * [**Dirk Lemmermann** uses JavaFX styling in the best possible way](https://bsky.app/profile/dlemmermann.bsky.social/post/3lyiiqznzls25): "*'Empathy driven development'"' means to consider that there are users out there with disabilities. One of them is 'color vision deficiency' (CVD), and today I added a preferences pane that allows our users to pick their status colours based on their CVD.*"
-* And [another message with screenshot by **Dirk**](https://bsky.app/profile/dlemmermann.bsky.social/post/3lyl3wr3w4s2a): "*Once again amazed how well JavaFX runs inside browsers via [JPRO](www.jpro.one).*"
+* And [another message with screenshot by **Dirk**](https://bsky.app/profile/dlemmermann.bsky.social/post/3lyl3wr3w4s2a): "*Once again amazed how well JavaFX runs inside browsers via [JPRO](https://www.jpro.one).*"
 * [**Frank Delporte** bumped his Raspberry Pi's to version 25](https://bsky.app/profile/frankdelporte.be/post/3lz4fnslmus2c): "*Welcome to Java 25 on the Raspberry Pi! The install script in the [Pi4J OS repository](https://github.com/Pi4J/pi4j-os) to configure a new Raspberry Pi has been updated to install Azul Zulu 25 with JavaFX. Or you can [follow the updated instructions on the Pi4J website](https://www.pi4j.com/prepare/install-java/).*"
 * [**Clément de Tastes** published "Valhalla \& Value Types au pays des fractales"](https://blog.sciam.fr/2025/09/22/value-types-et-fractales.html) in French. Translated intro: "*We invite you to make a leap in the future of Java, especially through improvements that the Valhalla project prepares for us. We will take the opportunity to put them into practice on a talking example: the calculation and visualization of the whole of Mandelbrot.*" In the article, JavaFX is used to generate beautiful fractals.
 

@@ -13,7 +13,7 @@ related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "book-review-practical-design-patterns-for-java-developers"
   - "class-loader-hierarchies"
-frozen: false
+frozen: true
 ---
 
 Smartphones are more powerful then ever, with processors rivaling old laptops. So let's try to use them like a laptop to develop web-applications on the go.
@@ -75,7 +75,7 @@ nohup code-server --auth none &
 
 This launches a local version and ignores the shell output. Code-server is by default password-protected, which is great. But we don't need authentication as the device is in home WIFI where nobody from the outside can access it anyway. If for what-ever reason, you want to password protect it, then remove `--auth none` and you'll find the auto-generated password in `$PREFIX/.config/code-server/config.yaml`.
 
-Go to [localhost:8080](8080) to access it. Now we have a IDE, running locally directly on our device:  
+Go to [localhost:8080](http://localhost:8080) to access it. Now we have a IDE, running locally directly on our device:  
 
 {{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-1_11_41-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
@@ -152,7 +152,7 @@ Starting the VSCode backend is as easy as before with code-server:
 nohup code serve-web --port 8080 --without-connection-token &
 ```
 
-Now we have a proper official VSCode and can view it in the browser at [localhost:8080](8080):  
+Now we have a proper official VSCode and can view it in the browser at [localhost:8080](http://localhost:8080):  
 
 {{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_14_40-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
@@ -249,7 +249,7 @@ You might want to add this to your `.zshrc` to make it permament.
 
 *Do this*
 
-To access the most basic page of the app, visit [localhost:4004](4004)  
+To access the most basic page of the app, visit [localhost:4004](http://localhost:4004)  
 
 {{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-5_03_35-PM1-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 

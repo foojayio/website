@@ -15,7 +15,7 @@ related_posts:
   - "java-on-azure-tooling-update-september-2022"
   - "java-on-azure-tooling-update-august-2022"
   - "java-on-azure-tooling-update-july-2022"
-frozen: false
+frozen: true
 ---
 
 Hi everyone, welcome back to the October update of Java on Azure Tooling.
@@ -91,7 +91,7 @@ In addition to the areas above, we are aiming to improve the stability of our to
 In [June's update](https://devblogs.microsoft.com/java/java-on-azure-tooling-update-june-2022/ "June’s update"), we have added the Deployment Slots Support for Azure Functions on Gradle Plugin. Azure Functions deployment slots allow your function app to run different instances called "slots". For more details, please see [Azure Functions deployment slots](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots "Azure Functions deployment slots").
 
 We have been hearing feedback from Java developers that they want this support in Azure Toolkit for IntelliJ as well. In October, we have further enhanced this experience for Azure Functions on IntelliJ IDEA with our latest release. You can create, select, and swap among slots directly in IDEs. Here is also a short demo of it.  
-1. [DeploymentSlot-n2](https://foojay.io/wp-content/uploads/2022/11/DeploymentSlot-n2.mp4)
+1. [DeploymentSlot-n2](DeploymentSlot-n2.mp4)
 
 ## Feedback and Suggestions
 

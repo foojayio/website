@@ -17,13 +17,13 @@ related_posts:
   - "the-javafx-revival"
   - "pi4j-welcomes-java-21-on-the-raspberry-pi"
   - "a-fresh-look-at-embedded-java"
-frozen: false
+frozen: true
 ---
 
 > This post is part of an [article published (in German) in Java Magazine](https://kiosk.entwickler.de/java-magazin/java-magazin-6-2021/status-quo-und-expertenstimmen/).
 > You can get a 25% discount for a new kiosk subscription with the following code: delporte_kiosk25
 
-Here on Foojay.io, you can find already [a long list of articles about Java on the Raspberry Pi](https://foojay.io/today/category/java/embedded/raspberry-pi/). As you may know, already I'm a big fan of this combination. The Raspberry Pi on one side is a very cheap computer that allows you to experiment with electronic components thanks to the Pi4J library. And on the other hand, JavaFX is the ideal framework to build user interfaces that can directly control these components, all in one application!
+Here on Foojay.io, you can find already [a long list of articles about Java on the Raspberry Pi](/today/category/raspberry-pi/). As you may know, already I'm a big fan of this combination. The Raspberry Pi on one side is a very cheap computer that allows you to experiment with electronic components thanks to the Pi4J library. And on the other hand, JavaFX is the ideal framework to build user interfaces that can directly control these components, all in one application!
 
 But maybe you don't have / want to believe me? So let's ask two experts what they think is the future of [#JavaOnRaspberryPi](https://twitter.com/search?q=%23JavaOnRaspberryPi&src=typed_query).
 

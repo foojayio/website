@@ -14,10 +14,10 @@ related_posts:
   - "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
   - "jreleaser-looking-for-translation-contributions"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-frozen: false
+frozen: true
 ---
 
-> **This guide is outdated since 2024. There is a new version here: [https://foojay.io/today/how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide/](_wp_link_placeholder)**
+> **This guide is outdated since 2024. There is a new version here: [https://foojay.io/today/how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide/](https://foojay.io/today/how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide/)**
 
 This article is a tutorial that guides you through the process of releasing a Java module with [JReleaser](https://jreleaser.org/) to Maven Central with Github Actions.
 

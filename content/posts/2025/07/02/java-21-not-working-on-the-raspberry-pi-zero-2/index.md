@@ -16,7 +16,7 @@ related_posts:
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
   - "evolutions-in-the-pi4j-library-by-tom-aarts-and-robert-von-burg"
   - "foojay-podcast-55"
-frozen: false
+frozen: true
 ---
 
 This story is about how "Write Once, Run Anywhere" got broken in a specific use case. It reveals the complexity of maintaining this "Run Anywhere" principle. At the same time, it shows how the OpenJDK community already detected this issue and has a fix available for the next update.
@@ -89,7 +89,7 @@ If you want to explore the details of the JIT, you can read this [technical over
 
 ## Workaround
 
-As described in [Running Java 21+ on Raspberry Pi Zero 2](/documentation/java-for-arm/#running-java-21-on-raspberry-pi-zero-2), a workaround is available to execute Java code until the fix is included in the next release:
+As described in [Running Java 21+ on Raspberry Pi Zero 2](https://www.pi4j.com/documentation/java-for-arm/#running-java-21-on-raspberry-pi-zero-2), a workaround is available to execute Java code until the fix is included in the next release:
 
 ```
 $ java -XX:+UnlockDiagnosticVMOptions -XX:-UseVectorizedHashCodeIntrinsic HelloWorld.java

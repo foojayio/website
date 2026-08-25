@@ -14,7 +14,7 @@ related_posts:
   - "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"
   - "java-17-on-the-raspberry-pi"
   - "java-on-single-board-computers-x86-vs-arm-vs-risc-v"
-frozen: false
+frozen: true
 ---
 
 As part of my 2026 learning goals around Java on RISC-V (see [this post about x86 versus ARM versus RISC-V](https://webtechie.be/post/2026-01-07-x86-arm-riscv/)), I've asked various suppliers to send me evaluation boards. I already published these:
@@ -105,7 +105,7 @@ java HelloWorld.java
 jbang JsonParsing.java
 ```
 
-I also executed my [SBC Java benchmark test](/sbc/) so we can compare the performance of this board with other single-board-computers. Results below...
+I also executed my [SBC Java benchmark test](https://webtechie.be/sbc/) so we can compare the performance of this board with other single-board-computers. Results below...
 
 ### Pi4j on the Banana Pi Zero
 
@@ -252,7 +252,7 @@ The Banana Pi BPI-F3 boots in desktop mode! So that's a lot nicer for a first te
 
 ## Benchmark Results
 
-To have a fair comparison in the benchmarks, I also ran one on a Raspberry Pi Zero 2 as this is the closest competitor to the Banana Pi BPI-M4 Zero. The full results are available on the [SBC Java benchmark page](/sbc/), where you can compare them with the other boards I tested before.
+To have a fair comparison in the benchmarks, I also ran one on a Raspberry Pi Zero 2 as this is the closest competitor to the Banana Pi BPI-M4 Zero. The full results are available on the [SBC Java benchmark page](https://webtechie.be/sbc/), where you can compare them with the other boards I tested before.
 ![](sbc-benchmarks-bananapi-1024x526.png)
 
 Some highlights:

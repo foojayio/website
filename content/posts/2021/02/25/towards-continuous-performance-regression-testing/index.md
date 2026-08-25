@@ -16,7 +16,7 @@ related_posts:
   - "soft-assertions-testing-kindly"
   - "custom-events-in-the-blocky-world-using-jfr-in-minecraft"
   - "custom-jfr-events-a-short-introduction"
-frozen: false
+frozen: true
 ---
 
 Functional unit and integration tests are a standard tool of any software development organization, helping not only to ensure correctness of newly implemented code, but also to identify regressions — bugs in existing functionality introduced by a code change. The situation looks different though when it comes to regressions related to non-functional requirements, in particular performance-related ones: How to detect increased response times in a web application? How to identify decreased throughput?
@@ -29,8 +29,8 @@ JfrUnit provides means of identifying and analyzing such anomalies in a reliable
 
 This post is a bit longer than usual (I didn't have the time to write shorter ;), but it's broken down into several sections, so you can pause and continue later on with fresh energy:
 
-1. [Getting Started With JfrUnit](#Getting%20Started%20With%20JfrUnit)
-2. [Case Study 1: Spotting Increased Memory Allocation](%20Spotting%20Increased%20Memory%20Allocation)
+1. [Getting Started With JfrUnit](#getting-started-with-jfrunit)
+2. [Case Study 1: Spotting Increased Memory Allocation](#case-study-1-spotting-increased-memory-allocation)
 3. [Case Study 2: Identifying Increased I/O With the Database](http://%20Identifying%20Increased)
 4. [Discussion](#Discussion)
 5. [Summary and Outlook](#Summary%20and%20Outlook)

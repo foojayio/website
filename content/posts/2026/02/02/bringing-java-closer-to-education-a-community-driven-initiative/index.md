@@ -16,7 +16,7 @@ related_posts:
   - "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"
   - "ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails"
   - "foojay-developer-certification-measure-skills"
-frozen: false
+frozen: true
 ---
 
 Over the past decades, Java has proven itself to be one of the most reliable, versatile, and widely used programming languages in the world. From enterprise systems to mobile applications and embedded devices, Java continues to evolve and adapt. Yet, one important area still holds enormous untapped potential: education.
@@ -51,7 +51,7 @@ Having Java strongly represented within CoderDojo would be a game changer:
 
 * It would position Java alongside other core technologies commonly used in educational contexts
 
-It is important to clarify that CoderDojo and Code Club are community-led programmes and do not operate with a centrally mandated or officially prescribed curriculum for specific programming languages. There is no formal mechanism through which a language is "officially represented." Instead, learning materials, project ideas, and educational pathways are created by the community and shared organically. A good example is the [CoderDojo Belgium Google Drive](drive.coderdojobelgium.be) which has a big collection of learning materials for different languages, electronics, robots, etc.
+It is important to clarify that CoderDojo and Code Club are community-led programmes and do not operate with a centrally mandated or officially prescribed curriculum for specific programming languages. There is no formal mechanism through which a language is "officially represented." Instead, learning materials, project ideas, and educational pathways are created by the community and shared organically. A good example is the [CoderDojo Belgium Google Drive](https://drive.coderdojobelgium.be) which has a big collection of learning materials for different languages, electronics, robots, etc.
 
 This model creates a valuable opportunity. If Java educational content is well designed, accessible, and appropriate for young learners and mentors, it can naturally gain traction within the CoderDojo ecosystem through real usage and community adoption.
 

@@ -18,12 +18,12 @@ related_posts:
   - "token-bucket-rate-limiter-redis-java"
   - "rate-limiting-with-redis-an-essential-guide"
   - "sliding-window-counter-rate-limiter-redis-java"
-frozen: false
+frozen: true
 ---
 
 > [This article is also available on YouTube. Check it out!](https://youtu.be/bCYzRg0oQjY)
 
-**The Sliding Window Log is a *more precise* way to handle rate limiting. Instead of splitting time into fixed intervals like the [Fixed Window Counter](https://foojay.io/wp-admin/post.php?post=115337) , it keeps a log of timestamps for each request. This allows it to track requests over a rolling time period, like the last second or minute, without abrupt resets at the end of an interval.**
+**The Sliding Window Log is a *more precise* way to handle rate limiting. Instead of splitting time into fixed intervals like the [Fixed Window Counter](/today/fixed-window-counter-rate-limiter-redis-java/) , it keeps a log of timestamps for each request. This allows it to track requests over a rolling time period, like the last second or minute, without abrupt resets at the end of an interval.**
 
 By checking how many requests were made within that time frame, it ensures limits are enforced more smoothly. If the log shows too many requests, new ones are denied.
 

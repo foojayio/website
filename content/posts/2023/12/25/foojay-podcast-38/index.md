@@ -20,7 +20,7 @@ related_posts:
   - "foojay-podcast-36"
   - "foojay-podcast-35"
   - "jc-ai-newsletter-16"
-frozen: false
+frozen: true
 ---
 
 Java was born in 1995, when the internet as we know it today didn't exist yet.
@@ -127,7 +127,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.io/today/unified-event-driven-architecture-for-the-cloud-native-enterprise/>
 * <https://foojay.io/today/how-to-deploy-a-vaadin-application-to-google-cloud-app-engine/>
 * <https://foojay.io/today/why-a-cloud-native-database-must-run-on-k8s/>
-* And many more… <https://foojay.io/page/2/?s=cloud>[](https://foojay.io/page/2/?s=cloud)
+* And many more… <https://foojay.io/search/?q=cloud>
 
 ## Music
 

@@ -12,10 +12,10 @@ related_posts:
   - "create-music-bingo-cards-with-itext"
   - "melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update"
   - "foojay-podcast-54"
-frozen: false
+frozen: true
 ---
 
-Last week I [introduced Sheetmusic4J](/posts/2026/2026-07-24-introducing-sheetmusic4j/), a Java(FX) library to render and interact with sheet music. That first **0.0.1** release was really a question more than a product: is there any interest in a native Java(FX) sheet music library before I invest more time in it? So I shared it on social media and waited to see what would come back.
+Last week I [introduced Sheetmusic4J](/today/introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music/), a Java(FX) library to render and interact with sheet music. That first **0.0.1** release was really a question more than a product: is there any interest in a native Java(FX) sheet music library before I invest more time in it? So I shared it on social media and waited to see what would come back.
 
 The answers arrived faster than I expected. And they gave me more homework...
 

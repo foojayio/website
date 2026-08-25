@@ -15,10 +15,10 @@ related_posts:
   - "the-story-of-a-java-17-native-memory-leak"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
-frozen: false
+frozen: true
 ---
 
-[![JManc Unconferece](https://jmanc.org/assets/images/jmanc-logo.png "JManc Unconferece")](www.jmanc.org "JManc Unconferece")
+[![JManc Unconferece](https://jmanc.org/assets/images/jmanc-logo.png "JManc Unconferece")](https://www.jmanc.org "JManc Unconferece")
 
 **The Manchester Java Community are delighted to announce the return of JManc Unconference on Friday 28th June 2024!**
 

@@ -12,7 +12,7 @@ related_posts:
   - "10-basic-questions-about-pdf-files-for-java-developers"
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-functional-programming-techniques-in-java-a-primer"
-frozen: false
+frozen: true
 ---
 
 An exciting part of software development is what was unanimously considered good practice at one point in time can be more ambiguous years later. Or even plain wrong. However, you generally need to do it multiple times over time to realize it. Here are my top learnings from my experience in Java projects.
@@ -191,7 +191,7 @@ The more years you have behind you, the more mistakes you'll probably have made.
 * [Quality Tools: humble servants or tyrants?](https://blog.frankel.ch/quality-tools-humble-servants-or-tyrans/)
 * [Encapsulation: I don't think it means what you think it means](https://blog.frankel.ch/encapsulation-dont-think-means-think-means/)
 * [Are you guilty of overengineering?](https://blog.frankel.ch/are-you-guilty-of-overengineering/)
-* [Alternatives to DTOs](blog.frankel.ch/alternatives-dto/)
+* [Alternatives to DTOs](https://blog.frankel.ch/alternatives-dto/)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/lessons-learned-previous-projects/) on March 13^th^, 2022*
 

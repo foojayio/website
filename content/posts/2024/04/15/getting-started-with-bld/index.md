@@ -16,7 +16,7 @@ related_posts:
   - "introducing-bld-a-new-pure-java-build-system"
   - "spring-boot-local-development-enhancements-lets-compose"
   - "why-i-moved-my-blog-to-rife2-after-23-years"
-frozen: false
+frozen: true
 ---
 
 **bld is an up-and-coming build tool for the Java ecosystem. This article guides you through getting set up to use it in your own projects.**
@@ -45,7 +45,7 @@ The easiest way to install `bld` is to use [`SDKMAN!`](https://sdkman.io/).
 sdk install bld
 ```
 
-Other installation methods including `brew`, `jbang` are [documented in the bld repo](Installation).
+Other installation methods including `brew`, `jbang` are [documented in the bld repo](https://github.com/rife2/bld/wiki/Installation).
 
 If you have an aversion to package management tools, you can also download the JAR [directly from the releases page](https://github.com/rife2/bld/releases/latest).
 

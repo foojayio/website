@@ -15,7 +15,7 @@ related_posts:
   - "pitest-do-you-test-your-tests"
   - "spring-6-1-restclient"
   - "foojay-podcast-99"
-frozen: false
+frozen: true
 ---
 
 [ArchUnit](https://www.archunit.org/) is a library that allows us to test our architecture (layering/slicing/(naming) conventions, and more).
@@ -292,7 +292,7 @@ final var diagram = getClass().getClassLoader().getResource("diagram.puml");
 classes().should(adhereToPlantUmlDiagram(diagram, consideringOnlyDependenciesInAnyPackage("..plantmodule.."))).check(importedClasses);
 ```
 
-An example implementation can be found in the [PlantUMLTest](src%5Ctest%5Cjava%5Cdev%5Csimonverhoeven%5Carchunitdemo%5CPlantUMLTest.java)
+An example implementation can be found in the [PlantUMLTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/PlantUMLTest.java)
 
 **note** : There are certain rules to keep in mind for your diagram which you can find in the [ArchUnit configuration documentation](https://www.archunit.org/userguide/html/000_Index.html#_configurations_2)
 

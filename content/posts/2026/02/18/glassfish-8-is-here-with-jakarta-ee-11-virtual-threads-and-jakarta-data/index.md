@@ -15,7 +15,7 @@ related_posts:
   - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
   - "glassfish-is-rolling-forward-whats-new"
   - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
-frozen: false
+frozen: true
 ---
 
 The final version of Eclipse GlassFish 8 is here, released on 5 February 2026. As a GlassFish committer, I'd like to share what it brings for the Java community and some behind-the-scenes stories from the development process
@@ -90,7 +90,7 @@ If you remember GlassFish from a few years ago, you might have heard it wasn't s
 
 Thank you for reading this far. I hope you enjoyed reading about my personal experience as a GlassFish developer and you now get my excitement from the new GlassFish release. I also highly recommend reading the GlassFish 8 announcement from OmniFish, and check out the [GlassFish website](https://glassfish.org) for more info:
 
-[Read the OmniFish announcement about the GlassFish 8.0 release](link%20to%20the%20original%20blog%20post)
+[Read the OmniFish announcement about the GlassFish 8.0 release](https://omnifish.ee/glassfish-8-released-enterprise-grade-java-redefined/)
 
 If you want to get started with GlassFish 8 right away, here are some useful links:
 

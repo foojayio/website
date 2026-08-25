@@ -18,7 +18,7 @@ related_posts:
   - "installing-java-with-sdkman-on-raspberry-pi"
   - "foojay-podcast-2"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
-frozen: false
+frozen: true
 ---
 
 Want to get started with Java programming on the Raspberry Pi?
@@ -99,7 +99,7 @@ Hello World!
 If your project needs dependencies - which is the case for a Pi4J project - you can [define them in the java-file with the following gradle-style locators format](https://www.jbang.dev/documentation/guide/latest/dependencies.html), for example:  
 `//DEPS com.pi4j:pi4j-core:2.1.1`.
 
-The following example is based on the ["Minimal example application"](/getting-started/minimal-example-application/), and uses the same wiring with a button and LED. By using JBang we can run this project with a single file without the need of a full Maven or Gradle project, or compiling the Java code.
+The following example is based on the ["Minimal example application"](https://pi4j.com/getting-started/minimal-example-application/), and uses the same wiring with a button and LED. By using JBang we can run this project with a single file without the need of a full Maven or Gradle project, or compiling the Java code.
 
 Create a new file `JBangPi4JExample.java` with the following content:
 

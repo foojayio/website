@@ -16,7 +16,7 @@ related_posts:
   - "book-review-why-programs-fail"
   - "interview-with-tom-granot-developer-observability-koolkits-and-reliability"
   - "improving-upon-my-opentelemetry-tracing-demo"
-frozen: false
+frozen: true
 ---
 
 Whether you implement microservices or not (and you probably shouldn't), your system is most probably composed of multiple components.
@@ -350,7 +350,7 @@ Still, most systems rely on HTTP in one way or another.
 
 While not trivial to set up, it's not too hard either. Tracing HTTP requests across components is a good start in your journey toward observability of your system.
 
-The complete source code for this post can be found on [GitHub](nfrankel/opentelemetry-tracing).
+The complete source code for this post can be found on [GitHub](https://github.com/nfrankel/opentelemetry-tracing).
 
 **To go further:**
 

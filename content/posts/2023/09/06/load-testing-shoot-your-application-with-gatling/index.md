@@ -16,7 +16,7 @@ related_posts:
   - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
   - "spring-6-1-restclient"
   - "tornadovm-for-risc-v-accelerators"
-frozen: false
+frozen: true
 ---
 
 ## What is load testing?
@@ -136,7 +136,7 @@ For example, let us:
 
 And then hit `Save` in the recorder
 
-And we'd end up with a recording akin to this [Sample recording](raw/RecordedComputerSimulation.java).
+And we'd end up with a recording akin to this [Sample recording](https://github.com/SimonVerhoeven/gatling-demo/raw/main/raw/RecordedComputerSimulation.java).
 
 ### Running the recording
 
