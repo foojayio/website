@@ -20,7 +20,7 @@ import { PUBLIC_DIR, PORT, basePath } from './site.mjs';
 
 const port = Number(process.argv[2] || PORT);
 const base = basePath();
-const root = normalize(PUBLIC_DIR);
+const root = normalize(PUBLIC_DIR);   // absolute, see site.mjs
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',

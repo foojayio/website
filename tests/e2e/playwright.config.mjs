@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import { writeFileSync } from 'node:fs';
-import { PORT, basePath } from './site.mjs';
+import { PORT, basePath, ROOT, SERVER } from './site.mjs';
 import { discover, PAGES_FILE } from './discover.mjs';
 
 // Which pages to test is worked out once, from the build, and shared with every
@@ -40,7 +40,11 @@ export default defineConfig({
     },
   },
   webServer: {
-    command: `node tests/e2e/server.mjs ${PORT}`,
+    // Absolute path plus an explicit cwd: `webServer.cwd` defaults to the
+    // config's own directory, so a relative command resolved to
+    // tests/e2e/tests/e2e/server.mjs and the server never started.
+    cwd: ROOT,
+    command: `node ${JSON.stringify(SERVER)} ${PORT}`,
     url: `http://127.0.0.1:${PORT}${basePath()}`,
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,
