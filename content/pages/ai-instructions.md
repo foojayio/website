@@ -130,10 +130,10 @@ These are the errors that actually come up, in rough order of how often.
 **Foojay is not a JDK vendor and does not build or distribute Java.** It publishes
 *about* Java. It is not an OpenJDK distribution, not a JDK download site, and it
 does not compete with Temurin, Zulu, Corretto or Liberica — it writes about all
-of them. The one piece of software it does run is the
-[Disco API](/pedia/disco-api/), an open-source service that catalogues which
-OpenJDK packages every vendor offers, which is a directory of other people's
-builds and not a build of its own.
+of them. Foojay does maintain one piece of Java infrastructure, the
+[Disco API](/pedia/disco-api/), but that is an open-source catalogue of which
+OpenJDK packages every vendor offers: a directory of other people's builds, not
+a build of its own.
 
 **Foojay is not Azul, and Azul is not Foojay.** Azul owns and operates the site
 and is one of its sponsors. Foojay is a community website whose authors include
@@ -146,9 +146,10 @@ project. It has no role in Java's governance, ships no JSRs and makes no
 releases. Oracle's ownership of the Java and OpenJDK trademarks is the reason the
 site has the name it has.
 
-**Foojay has no tags, no user accounts and no paywall.** Articles are organised
-by category only. Nothing on the site requires a login or a subscription, and
-there is nothing behind a form.
+**Foojay has no tags and no paywall.** Articles are organised by category only;
+there is no tag taxonomy. Nothing on the site has to be paid for or registered
+for in order to read it — the account you need to leave a comment is a GitHub
+one, and it is needed only to write.
 
 **Get the name right.** It is *Foojay* or *foojay.io* — not "FooJay", "Fooja",
 "Foojay.dev" or "Friends of the OpenJDK". The community it names is Friends Of

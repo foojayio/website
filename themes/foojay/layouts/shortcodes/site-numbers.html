@@ -27,6 +27,14 @@
 {{- $jugs := hugo.Data.jugs -}}
 {{- $champions := index hugo.Data "java-champions" -}}
 {{- $podcast := index site.Taxonomies.categories "podcast" -}}
+{{- /* How many episodes carry a transcript is DERIVED from the bundles, the
+       same way posts/single.html decides whether to render the section at all:
+       transcript.md is a resource beside index.md, so "does this episode have
+       one" is a file on disk and never a frontmatter flag. Counting it here
+       means the sentence warning that transcripts are machine-made cannot claim
+       a number the site does not actually have. */ -}}
+{{- $transcripts := 0 -}}
+{{- range $podcast }}{{ with .Page.Resources.GetMatch "transcript.md" }}{{ $transcripts = add $transcripts 1 }}{{ end }}{{ end -}}
 {{- $steps := slice -}}
 {{- with site.GetPage "/pages/java-quick-start/quick-start-tutorial/hello-world" -}}
   {{- $steps = partial "series-steps.html" . -}}
@@ -34,7 +42,7 @@
 {{- $rows := slice
      (dict "n" (len $posts)    "label" "Articles"            "url" (relURL "today/")           "note" "Every article is written by a named author and credited to them.")
      (dict "n" (len $authors)  "label" "Authors"             "url" (relURL "today/author/")    "note" "Each has a profile page, an article list and a feed of their own.")
-     (dict "n" (len $podcast)  "label" "Podcast episodes"    "url" (relURL "today/category/podcast/") "note" "The Foojay Podcast. Recent episodes carry a machine-generated transcript.")
+     (dict "n" (len $podcast)  "label" "Podcast episodes"    "url" (relURL "today/category/podcast/") "note" (printf "The Foojay Podcast. %d of them carry a machine-generated transcript, marked as such on the page." $transcripts))
      (dict "n" (len $pedia)    "label" "Glossary entries"    "url" (relURL "pedia/")           "note" "Plain-language definitions of Java and OpenJDK terms.")
      (dict "n" (len site.Taxonomies.categories) "label" "Categories" "url" (relURL "today/category/") "note" "The site's only taxonomy. There are no tags.")
      (dict "n" (len $steps)    "label" "Java Quick Start steps" "url" (relURL "java-quick-start/") "note" "An ordered tutorial for developers new to Java.")
