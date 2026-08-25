@@ -20,6 +20,14 @@ npm run test:e2e
 `npm run test:e2e -- --ui` for the interactive runner, `--grep search` for one
 file, `--headed` to watch it.
 
+If `npx playwright install chromium` cannot finish on your machine (a truncated
+download leaves a `chromium_headless_shell-*` folder missing or a few hundred KB
+short, and every test then fails with "Executable doesn't exist"), the suite
+runs unchanged against a locally installed Chrome — add
+`use: { channel: 'chrome' }` on top of this config in a throwaway config file
+and point `--config` at it. Same 37 tests, same result; CI always uses the
+pinned browser.
+
 ## The "staging environment" is localhost
 
 GitHub Pages has no staging slot, and this needs none. `server.mjs` serves the

@@ -809,16 +809,16 @@ should catch a mistake at PR time rather than letting it fail silently.
   exists because the first is a Playwright-level promise and `sendBeacon` is
   exactly the request shape not to be wrong about.
 
-  **33 pass, 4 skip, and the skips are findings rather than disabled tests.**
-  One is mermaid (above). The other three are the two world maps and the
-  lightbox's map-tile exclusion, all blocked on the same thing: **Leaflet and
-  markercluster are loaded from unpkg.com at read time**, so they cannot be
-  exercised without a network call. `cluster-map.js` guards on `!window.L` and
-  returns, which means that when unpkg is unreachable **the map silently
-  disappears and the page still renders clean** — no error, no message, a gap
-  where the map was. Vendoring Leaflet the way mermaid is vendored would remove
-  the dependency and make those three run for real; it is the same argument
-  that vendored mermaid, one page-count smaller.
+  **36 pass, 1 skip, and the skip is a finding rather than a disabled test** —
+  mermaid (above). **The three that were skipped are the record of what a CDN
+  dependency costs a test suite.** The two world maps and the lightbox's
+  map-tile exclusion were all blocked on the same thing: Leaflet and
+  markercluster came from unpkg.com at read time and nothing here reaches the
+  network, so the assertion that mattered — that grouping 90 JUGs or 422
+  champions actually produces markers — had never once run. Vendoring both
+  libraries (see the cluster-map conventions below) turned all three into real
+  tests, and `typeof window.L` is now **asserted** rather than skipped on: a
+  same-origin library that did not load is a broken path in this repo.
 
   Two measured facts worth not rediscovering. **Pagefind's matching is fuzzy
   enough that nonsense still matches** — `qqzzxxjjvvww` returns 1 result and a
@@ -1375,6 +1375,7 @@ should catch a mistake at PR time rather than letting it fail silently.
     `51.50720`.
   - **`MarkerCluster.Default.css` is deliberately not loaded** — it styles
     `.marker-cluster*`, which neither map emits now that every icon is ours.
+    It is not vendored either, for the same reason.
   - **The badge is sized by content** (`iconSize: null`, re-centred with
     `translate(-50%, -50%)` rather than an `iconAnchor`): "1" and "422" are
     different widths, so a fixed icon box would either clip the wide one or
@@ -1383,6 +1384,43 @@ should catch a mistake at PR time rather than letting it fail silently.
   The `<script>` tag for it carries **no `defer`**, unlike `/sitemap/`'s two
   scripts: the inline `foojayClusterMap({...})` call runs at parse time, so a
   deferred definition would not exist yet.
+
+  **Leaflet and markercluster are VENDORED, and `partials/cluster-map.html` is
+  the single definition of what a map page loads.** They came from unpkg.com at
+  read time, and that cost three separate things:
+
+  - **The map disappeared silently when unpkg was slow or unreachable.**
+    `cluster-map.js` guards on `!window.L` and returns, so the page rendered
+    clean with a gap where the map had been — no error, no message, nothing in
+    any check to say so.
+  - **The deploy gate could not test it.** `tests/e2e` makes no network calls,
+    so both map tests and the lightbox's tile exclusion could only skip, and the
+    assertion that grouping 90 JUGs or 422 champions produces markers had never
+    run once. Vendoring turned three skips into three real tests — which is the
+    concrete payoff, not a side effect.
+  - **Every reader of those two pages sent a third party a request** it could
+    change the answer to at any time. Same argument that vendored mermaid and
+    EnlighterJS; see the analytics conventions for where that line is drawn.
+
+  The two folders hold `leaflet.js`/`leaflet.css`/`images/*.png` (v1.9.4,
+  BSD-2-Clause) and `leaflet.markercluster.js`/`MarkerCluster.css` (v1.4.1,
+  MIT), from `npm pack`, **no `.map` files** (1.1 MB for Leaflet alone) — the
+  same rule as mermaid. All four were verified **byte-identical to what unpkg
+  served for those versions**, so the switch was provably a move and not a
+  re-render. `images/` travels with `leaflet.css`, which references
+  `images/layers.png` and `images/marker-icon.png` relatively; neither map uses
+  a layers control or a default pin, so nothing requests them today and they are
+  there so the stylesheet is not quietly incomplete for a map that does.
+
+  **The map TILES are still third-party and cannot be anything else** —
+  OpenStreetMap's tiles are the map. The difference that matters: a tile that
+  fails to load leaves the markers, clusters and popups working over an empty
+  ground, where the library failing to load left nothing at all. The same split
+  applies to the remaining third parties in `partials/analytics.html`: GA4 and
+  Ketch's `boot.js` are **services, not libraries** — a pinned copy of a consent
+  manager would serve last month's consent configuration, and a pinned copy of
+  gtag.js still has to talk to Google — so they stay CDN-loaded, and they stay
+  confined to that one partial, which renders nothing on the trial deploy.
 
 - **`lightbox.js` skips anything inside `.leaflet-container`, and that is not a
   nicety.** It binds `.prose img`, and a Leaflet map lives inside `.prose` with
@@ -1885,11 +1923,12 @@ should catch a mistake at PR time rather than letting it fail silently.
   `dist/chunks/mermaid.esm.min/*.mjs` — **no `.map` files**, which are 10× the
   runtime and are what makes the full `dist/` 80 MB.
 
-  Vendored rather than CDN-loaded, unlike Leaflet on `/jugs/`, because this runs
-  on **article** pages: a third-party script over the content itself is the one
-  thing this repo keeps first-party (see the analytics conventions), it is
-  pinned and reviewable in a PR, and nobody else's URL change can break 2000
-  posts. Weight was the reason to care — this file already treats 144 KB of
+  Vendored rather than CDN-loaded, because this runs on **article** pages: a
+  third-party script over the content itself is the one thing this repo keeps
+  first-party (see the analytics conventions), it is pinned and reviewable in a
+  PR, and nobody else's URL change can break 2000 posts. Leaflet on `/jugs/`
+  and `/java-champions/` used to be the exception and is now vendored too, on
+  the same argument. Weight was the reason to care — this file already treats 144 KB of
   EnlighterJS on a page with no code as a bug worth fixing, so 3.4 MB on every
   diagram page was not an option.
 
