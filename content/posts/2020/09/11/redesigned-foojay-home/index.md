@@ -14,6 +14,8 @@ frozen: true
 
 The site you're on, foojay.io, has had a bit of a facelift over the past week.
 
+{{< legacy-notice >}}
+
 Now you can see directly on the homepage all the key pieces that make up foojay, a place for Friends Of OpenJDK... especially its focus on the integrated services provided by [Marc Hoffmann's Java Version Almanac](https://javaalmanac.io/jdk/8/) and[Chris Newland's JVM Options Explorer](https://chriswhocodes.com/hotspot_options_openjdk11.html), supported by the [OpenJDK Update Release Details](https://javaalmanac.io/jdk/8/), together with [Foojay Today](https://foojay.io/today/) and the start of [Foojay Pedia](https://foojay.io/pedia/).
 
 There's a lot more to be done, though this is a big step forward!

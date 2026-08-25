@@ -15,6 +15,8 @@ frozen: true
 
 The 1/2 year mark of 2021 is a good moment to reflect on the current status of Foojay.io (a central resource for the Java community's daily ​information needs, a place for Friends Of OpenJDK, ​and a community platform for the Java ecosystem​ — bringing together and helping Java professionals everywhere), and to look at where we are and where to go next!
 
+{{< legacy-notice >}}
+
 First, some data! Here's the Google Analytics graph showing total unique visitors to Foojay.io over the past half year, with several interesting spikes, explained in detail below.
 
 {{< img src="first-6-months-2021-1024x844.png" class="size-large is-resized" width="522" height="430" >}}

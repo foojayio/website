@@ -19,6 +19,8 @@ frozen: true
 
 Welcome to foojay, a place for **f** riends **o** f **O** pen**J** DK, sponsored by [Azul](http://azul.com). Foojay's user-focused Java and OpenJDK technical dashboards provide free data for everyday Java developers. Right away you have access to updated analysis, selected highlights, and categorized lists arranged for easy consumption.
 
+{{< legacy-notice >}}
+
 #### Java Technologist Dashboards
 
 Together with Java enthusiasts around the world, the foojay team works to identify critical aspects of each new OpenJDK release and update -- with related information such as OpenJDK distributions, download locations, and JVM command line arguments -- and brings to the fore precisely the content and services that have value and relevance to those that use Java on a daily basis throughout the industry.

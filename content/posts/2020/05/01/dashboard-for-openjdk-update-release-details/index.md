@@ -18,6 +18,8 @@ frozen: true
 
 Java is a well-maintained development and deployment platform. Through the [OpenJDK project](https://openjdk.java.net/), regular updates to production releases follow a traditionally established schedule. On a specific Tuesday in January, April, July and October, a set of updates are published covering security-related issues as well as bug fixes and even minor enhancements. Regular updates have been a long-standing tradition for Java. The update cadence has been a long-standing tradition for Java and is relied on by those responsible for ensuring Java-based systems are kept up to date and secure.
 
+{{< legacy-notice >}}
+
 Changes and bug fixes are most often initiated in the upstream, still-in-development or major OpenJDK versions, and then backported through a community effort to the already released OpenJDK versions which most of the world uses in production. In addition, security updates are confidentially coordinated through the [OpenJDK Vulnerability Group](https://openjdk.java.net/groups/vulnerability/), such that vulnerabilities, [CVEs](https://cve.mitre.org/), and source code for sensitive fixes can all be revealed simultaneously on the coordinated update date across all maintained versions. The specific update projects, for example, OpenJDK 7u, 8u, 11u and 13u, regularly update in this manner.
 
 #### Over 560 Fixes in April 2020 Update

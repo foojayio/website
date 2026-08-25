@@ -9,11 +9,13 @@ image: "Screenshot-2020-08-25-at-08.35.09-1024x559.png"
 categories:
   - "Interviews"
 related_posts:
-frozen: false
+frozen: true
 ---
 
 From this week, we're happy to announce that we're hosting Marc Hoffmann's [Java Version Almanac](http://javaalmanac.io) [right here on foojay](https://javaalmanac.io/jdk/8/), providing details per release on OpenJDK distributions, new features, and differences between APIs across releases.
 ![](Screenshot-2020-08-25-at-08.35.09-1024x559.png)
+
+{{< legacy-notice >}}
 
 It also shows differences between the APIs of the currently selected Java release and all previous releases, handy when you're upgrading!
 ![](Screenshot-2020-08-25-at-08.55.35-1024x435.png)

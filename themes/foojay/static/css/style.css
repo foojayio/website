@@ -3071,3 +3071,28 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   color: var(--brand-accent-strong); font-variant-numeric: tabular-nums;
   margin-right: .15rem;
 }
+
+/* A notice on a migrated article whose subject was the old WordPress site --
+   see themes/foojay/layouts/shortcodes/legacy-notice.html for which posts get
+   one and why it is a shortcode.
+
+   It borrows .highlight-panel's ground rather than introducing a colour that
+   exists for one block only: --brand-accent-soft is the logo blue's own tint,
+   and it retunes itself for dark, where the token is a translucent blue over
+   the page instead of a pale solid. --ink on it measures 9.4:1.
+
+   The left border rather than a full one, and no icon: this is an editorial
+   aside, not a warning the reader has to act on. A red or amber box would read
+   as "this article is wrong", which is not the claim -- the claim is that it
+   was written about a website that has since changed. */
+.prose .legacy-notice {
+  margin: 1.5rem 0;
+  padding: .85rem 1.1rem;
+  background: var(--brand-accent-soft);
+  border-left: 3px solid var(--brand-accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--ink);
+}
+/* Class-on-class: `.prose p` is 0-1-1 and would otherwise win on the margin,
+   leaving the single paragraph pushed away from its own box. */
+.prose .legacy-notice p { margin: 0; font-size: .95rem; }

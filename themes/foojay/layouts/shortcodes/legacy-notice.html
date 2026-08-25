@@ -1,0 +1,21 @@
+{{- /* Marks an article whose SUBJECT was the old WordPress foojay.io -- the
+       retired OpenJDK release-details dashboard, the almanac and VM-options
+       integrations, the homepage tour, the half-yearly status reports. Those
+       posts describe features that no longer exist, and a reader following them
+       today is misled about how the site works.
+
+       A SHORTCODE and not a `legacy: true` frontmatter flag, for two reasons.
+       The wording lives in exactly one place, so changing it (or the date in it)
+       is one edit rather than one per post. And the notice goes *after the first
+       paragraph*, which a layout cannot express: it would have to split
+       .Content on the first </p>, and the first block of a post is as often a
+       figure, a list or a blockquote as it is a paragraph.
+
+       Not documented in template/post.md, deliberately. That file is the single
+       definition of what a CONTRIBUTOR can write, and nobody writing a new
+       article in 2026 needs to warn a reader about 2020's website. This is a
+       maintainer's tool for migrated content. */ -}}
+<aside class="legacy-notice">
+  <p>This content was written on the original Foojay website, and some of it may
+  no longer be valid since the new version, published in September 2026.</p>
+</aside>

@@ -19,6 +19,8 @@ frozen: true
 
 Since the start of the Friends Of OpenJDK community in April 2020, we've had half yearly status reports, providing the highlights of the past half year, together with some stats and analysis, ending with roadmaps for the next upcoming periods.
 
+{{< legacy-notice >}}
+
 **Note:** Here are the earlier reports, from [January - June 2021](https://foojay.io/today/foojay-status-report-january-june-2021/), [July - December 2021](https://foojay.io/today/foojay-status-report-july-december-2021/), and [January - June 2022](https://foojay.io/today/foojay-status-report-january-june-2022/). At that stage, a much stricter cookie policy was implemented, for reasons of the EU's GDPR and similar, so that the Google Analytics trends which had been very nice until that stage (we had as much traffic in the first half of 2022 as we had for the whole of 2021) were destroyed. Attempts were made to recover or reinstate similar methods for analyzing usage, hence the delay in reports coming out since midway through last year, though these attempts have failed. And if the method for counting usage changes as dramatically as it now has, then it becomes impossible to discuss trend comparisons from before that change and after it. In terms of trends, we now need to start from scratch. Since that is not something that can be repaired, making comparisons between different periods in the past and the current period, as in previous reports, doesn't make sense anymore.
 
 What's good about all this is that we can now look at more meaningful measures of the impact of the Friends Of OpenJDK community such as...
