@@ -1,0 +1,43 @@
+{{- /*
+  {{< site-endpoints >}} -- the machine-readable routes into foojay.io, for
+  /ai-instructions/. The point of the section is "fetch these instead of
+  crawling us", so the URLs are printed in full as well as linked.
+
+  URLs here are ABSOLUTE, which is the "absolute by contract" exception to
+  CLAUDE.md's .RelPermalink rule and the same reasoning llms.txt uses: these
+  are values meant to be copied out of the page and fetched by something that
+  has no idea what our origin is. Everywhere else on this page, an internal
+  link is relative.
+
+  Derived, so a route cannot be described here as something Hugo does not
+  actually emit: llms.txt and the feed come from the home page's own output
+  formats (never a literal "/index.xml" -- Hugo decides that path), and the
+  repository from [params.source].
+*/ -}}
+{{- $rss := site.Home.OutputFormats.Get "rss" -}}
+{{- $llms := site.Home.OutputFormats.Get "llms" -}}
+{{- $rows := slice -}}
+{{- with $llms -}}
+  {{- $rows = $rows | append (dict "url" .Permalink "what" "A short, curated map of the site in Markdown, following the llmstxt.org convention. Start here: it lists the sections, the glossary, the largest topics and the most recent articles, with a one-line description of each.") -}}
+{{- end -}}
+{{- $rows = $rows | append (dict "url" ("sitemap.xml" | absURL) "what" "Every published URL, each with a last-modified date. This is the complete and authoritative list; nothing on the site is missing from it.") -}}
+{{- with $rss -}}
+  {{- $rows = $rows | append (dict "url" .Permalink "what" "The 30 most recent articles. Every category page and every author profile carries a feed of its own, linked from that page.") -}}
+{{- end -}}
+{{- $rows = $rows | append (dict "url" (printf "%s?q=" (absURL "search/")) "what" "Full-text search across the site. It runs in the browser against a static index, so a query string alone returns a page that has to execute JavaScript.") -}}
+{{- $rows = $rows | append (dict "url" ("robots.txt" | absURL) "what" "What may be fetched. Please respect it, and identify your client honestly.") -}}
+{{- with site.Params.source }}{{ with .repo -}}
+  {{- $rows = $rows | append (dict "url" . "what" "The site's source: every article as the Markdown file it is published from, plus the build that renders it.") -}}
+{{- end }}{{ end -}}
+<div class="table-scroll" tabindex="0">
+<table class="site-table">
+  <tbody>
+    {{- range $rows }}
+    <tr>
+      <th scope="row"><a href="{{ .url }}"><code>{{ .url }}</code></a></th>
+      <td>{{ .what }}</td>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
+</div>

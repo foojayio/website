@@ -787,3 +787,14 @@ enableGitInfo = true
   name = "Accessibility"
   url = "/accessibility/"
   weight = 60
+
+# /ai-instructions/ sits in the utility row next to the terms and the privacy
+# policy rather than in a footer COLUMN, because it is the same kind of thing
+# they are: a statement about the site itself, addressed to someone who came
+# looking for it, not a section a reader browses. It is also where an assistant
+# asked "how should I describe this site?" will look, and the row renders on
+# every page, so the page is one link from anywhere.
+[[menu.legal]]
+  name = "AI Instructions"
+  url = "/ai-instructions/"
+  weight = 70

@@ -17,6 +17,11 @@
     - the navigation sections are the [[menu.footer]] columns, which CLAUDE.md
       already makes the single definition of the site's own navigation. Adding a
       page to the footer adds it here, with nothing to remember.
+    - the one page named explicitly is /ai-instructions/, and it is named
+      because it lives in [[menu.legal]] (the utility row) rather than in a
+      footer COLUMN, so the range below cannot reach it -- and it is the one
+      page a model fetching this file should read before quoting anything.
+      Its title and description still come from the page itself.
     - the Quick Start steps come from partials/series-steps.html, so they cannot
       fall out of order with the progress bar on the pages themselves.
     - the glossary is content/pedia/, the topics are the categories taxonomy,
@@ -74,7 +79,12 @@ and each one credits its own authors.
 
 Content is copyright its respective authors and is published under the terms at
 {{ "terms-of-use/" | absURL }} .
+{{ with site.GetPage "/pages/ai-instructions" }}
+## Read this first
 
+- [{{ .Title }}]({{ .Permalink }}): {{ partial "meta-description.html" . }}
+
+{{ end -}}
 ## Complete indexes
 
 Everything not listed below is one link away. Use these rather than crawling:

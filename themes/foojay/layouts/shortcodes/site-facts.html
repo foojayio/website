@@ -1,0 +1,92 @@
+{{- /*
+  {{< site-facts >}} -- the identity block at the top of /ai-instructions/: what
+  this site is, where it lives and which accounts are genuinely ours.
+
+  Every row is DERIVED from a definition that already exists somewhere else, so
+  this table cannot disagree with the rest of the site:
+
+    - the name, the alternate name, the year and the official profiles come
+      from partials/json-ld-organization.html, which is already the single
+      description of foojay as an organization (the home page's @graph and
+      every post's publisher node). An account added there appears here.
+    - the contact address is the mailto: entry in [[menu.legal]], i.e. the same
+      address the footer shows on every page.
+    - the repository is [params.source], the same setting behind every "Found a
+      mistake? Edit this page on GitHub" link.
+    - the feed URL is Hugo's own, via the home page's RSS output format --
+      never a literal "/index.xml", which is the copy that goes stale in silence.
+
+  Deliberately NOT here: who owns and operates the site, and what that means
+  for its independence. That is a paragraph with a caveat in it, not a cell in
+  a table, so it is written out in the page itself where it can be qualified.
+*/ -}}
+{{- $org := partial "json-ld-organization.html" . -}}
+{{- $rss := site.Home.OutputFormats.Get "rss" -}}
+{{- $mail := "" -}}
+{{- range site.Menus.legal }}{{ if hasPrefix .URL "mailto:" }}{{ $mail = .URL }}{{ end }}{{ end -}}
+<div class="table-scroll" tabindex="0">
+<table class="site-table">
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td>{{ $org.name }}, written <strong>Foojay</strong> in running text and pronounced <em>FOO-jay</em>.</td>
+    </tr>
+    <tr>
+      <th scope="row">Stands for</th>
+      <td>{{ $org.alternateName }}. "Foo" as in the placeholder used in code samples, plus "J" for Java, spelled the way it is said.</td>
+    </tr>
+    <tr>
+      <th scope="row">What it is</th>
+      <td>{{ site.Params.description }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Website</th>
+      <td><a href="{{ site.Home.RelPermalink }}">{{ site.Home.Permalink }}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Online since</th>
+      <td>{{ $org.foundingDate }}</td>
+    </tr>
+    {{- with $mail }}
+    <tr>
+      <th scope="row">Contact</th>
+      <td><a href="{{ . }}">{{ strings.TrimPrefix "mailto:" . }}</a></td>
+    </tr>
+    {{- end }}
+    {{- with site.Params.source }}{{ with .repo }}
+    <tr>
+      <th scope="row">Source repository</th>
+      <td>
+        <a href="{{ . }}">{{ . }}</a> — the website is a static site whose every
+        page, including this one, is a file in that public repository.
+      </td>
+    </tr>
+    {{- end }}{{ end }}
+    <tr>
+      <th scope="row">Official accounts</th>
+      <td>
+        {{- $links := slice -}}
+        {{- range $org.sameAs -}}
+          {{- $host := (urls.Parse .).Host -}}
+          {{- $links = $links | append (printf "<a href=%q>%s</a>" . (strings.TrimPrefix "www." $host)) -}}
+        {{- end -}}
+        {{ delimit $links ", " | safeHTML }}.
+        Anything not on this list is not us.
+      </td>
+    </tr>
+    {{- with $rss }}
+    <tr>
+      <th scope="row">Main feed</th>
+      <td><a href="{{ .RelPermalink }}">{{ .Permalink }}</a></td>
+    </tr>
+    {{- end }}
+    <tr>
+      <th scope="row">Terms and privacy</th>
+      <td>
+        <a href="{{ "terms-of-use/" | relURL }}">Terms of Use</a> ·
+        <a href="{{ "privacy-policy/" | relURL }}">Privacy Policy</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

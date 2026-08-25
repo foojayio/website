@@ -1619,6 +1619,35 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .table-scroll:focus-visible,
 .sitemap-table-wrap:focus-visible { outline-offset: -3px; }
 
+/* /ai-instructions/: the three derived tables (shortcodes site-facts,
+   site-numbers, site-endpoints). They render INSIDE .prose, so every rule here
+   has to outrank `.prose th, .prose td`, which is 0-1-1 -- a bare
+   `.site-table__num` would lose its alignment to it without a word. Hence
+   class-on-class throughout, the same specificity trap the .sitemap-table and
+   series rules document.
+
+   Row headers rather than a first column of plain cells: each row is a
+   field/value pair, so `th[scope="row"]` is what it actually is, and it gives a
+   screen reader the label when it reads the value. The width is capped so the
+   value column does not collapse on a long label, and released below 48rem
+   where a two-column split of the shell leaves too little for either. */
+.prose .site-table th[scope="row"] {
+  width: 30%; vertical-align: top; font-weight: 600; color: var(--ink);
+}
+.prose .site-table td { vertical-align: top; }
+.prose .site-table th[scope="row"] code { font-size: .85em; overflow-wrap: anywhere; }
+/* tabular-nums so a column of counts lines up digit under digit -- the numbers
+   are there to be compared, and proportional figures make 2,153 and 344 look
+   like arbitrary widths. */
+.prose .site-table th.site-table__num,
+.prose .site-table td.site-table__num {
+  text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.site-table__asof { font-size: .9rem; color: var(--ink-muted); margin-top: .6rem; }
+@media (max-width: 48rem) {
+  .prose .site-table th[scope="row"] { width: auto; }
+}
+
 /* /jugs/ page: data/jugs.yaml source note + table (themes/foojay/layouts/jugs/single.html) */
 .jugs-source-note { font-size: .92rem; color: var(--ink-muted); }
 .jugs-table__links { font-size: .9rem; white-space: nowrap; }

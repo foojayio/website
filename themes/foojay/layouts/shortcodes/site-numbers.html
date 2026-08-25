@@ -1,0 +1,71 @@
+{{- /*
+  {{< site-numbers >}} -- what foojay.io actually publishes, counted at build
+  time. Used by /ai-instructions/, where an assistant reading the page needs a
+  number it can quote and a URL it can go and check.
+
+  NOTHING here is a stored figure. Every count is the length of the same
+  collection the corresponding page renders, so the row cannot drift from the
+  section it describes -- and a number quoted from this page is the number the
+  site had on the day it was built, not the day someone last edited a sentence.
+
+  Each list comes from the existing single definition rather than a fresh
+  filter: partials/authors-all.html and partials/sponsors-ordered.html, because
+  author and sponsor profiles are BRANCH bundles and `where site.RegularPages
+  "Section" "authors"` silently matches nothing; partials/board-members.html
+  for the board; partials/series-steps.html for the Quick Start, so the count
+  cannot fall out of step with the progress bar on the steps themselves.
+
+  A row whose collection is empty is dropped rather than printed as 0 -- on a
+  page whose whole purpose is to be quoted, "0 Java User Groups" is a worse
+  answer than saying nothing.
+*/ -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $pedia := where site.RegularPages "Section" "pedia" -}}
+{{- $authors := partialCached "authors-all.html" "authors" -}}
+{{- $sponsors := partial "sponsors-ordered.html" . -}}
+{{- $board := partial "board-members.html" . -}}
+{{- $jugs := hugo.Data.jugs -}}
+{{- $champions := index hugo.Data "java-champions" -}}
+{{- $podcast := index site.Taxonomies.categories "podcast" -}}
+{{- $steps := slice -}}
+{{- with site.GetPage "/pages/java-quick-start/quick-start-tutorial/hello-world" -}}
+  {{- $steps = partial "series-steps.html" . -}}
+{{- end -}}
+{{- $rows := slice
+     (dict "n" (len $posts)    "label" "Articles"            "url" (relURL "today/")           "note" "Every article is written by a named author and credited to them.")
+     (dict "n" (len $authors)  "label" "Authors"             "url" (relURL "today/author/")    "note" "Each has a profile page, an article list and a feed of their own.")
+     (dict "n" (len $podcast)  "label" "Podcast episodes"    "url" (relURL "today/category/podcast/") "note" "The Foojay Podcast. Recent episodes carry a machine-generated transcript.")
+     (dict "n" (len $pedia)    "label" "Glossary entries"    "url" (relURL "pedia/")           "note" "Plain-language definitions of Java and OpenJDK terms.")
+     (dict "n" (len site.Taxonomies.categories) "label" "Categories" "url" (relURL "today/category/") "note" "The site's only taxonomy. There are no tags.")
+     (dict "n" (len $steps)    "label" "Java Quick Start steps" "url" (relURL "java-quick-start/") "note" "An ordered tutorial for developers new to Java.")
+     (dict "n" (len $jugs)     "label" "Java User Groups"    "url" (relURL "jugs/")            "note" "Mirrored from the community-run World Wide JUGs directory, not maintained here.")
+     (dict "n" (len $champions) "label" "Java Champions"     "url" (relURL "java-champions/")  "note" "Mirrored from the Java Champions programme's own list, not maintained here.")
+     (dict "n" (len $sponsors) "label" "Sponsors"            "url" (relURL "our-sponsors/")    "note" "Sponsors fund the site. They do not commission or approve articles.")
+     (dict "n" (len $board)    "label" "Advisory board members" "url" (relURL "board/")        "note" "Representatives of organizations across the Java ecosystem.")
+-}}
+<div class="table-scroll" tabindex="0">
+<table class="site-table">
+  <thead>
+    <tr>
+      <th scope="col" class="site-table__num">Count</th>
+      <th scope="col">Section</th>
+      <th scope="col">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $rows }}
+    {{- if gt .n 0 }}
+    <tr>
+      <td class="site-table__num">{{ lang.FormatNumberCustom 0 .n }}</td>
+      <td><a href="{{ .url }}">{{ .label }}</a></td>
+      <td>{{ .note }}</td>
+    </tr>
+    {{- end }}
+    {{- end }}
+  </tbody>
+</table>
+</div>
+<p class="site-table__asof">
+  Counted when this page was built, on
+  {{ now.Format "2 January 2006" }}.
+</p>
