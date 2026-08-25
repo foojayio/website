@@ -24,9 +24,14 @@
 {{- $authors := partialCached "authors-all.html" "authors" -}}
 {{- $sponsors := partial "sponsors-ordered.html" . -}}
 {{- $board := partial "board-members.html" . -}}
-{{- $jugs := hugo.Data.jugs -}}
-{{- $champions := index hugo.Data "java-champions" -}}
-{{- $podcast := index site.Taxonomies.categories "podcast" -}}
+{{- /* `default slice` on all three: a missing data file or a renamed category
+       returns nil, and `len nil` is a BUILD ERROR rather than a zero -- so
+       without it, renaming the Podcast category would take the whole site down
+       from a shortcode on one page. Empty is handled below (the row is
+       dropped); nil is not survivable, so it never gets that far. */ -}}
+{{- $jugs := default slice hugo.Data.jugs -}}
+{{- $champions := default slice (index hugo.Data "java-champions") -}}
+{{- $podcast := default slice (index site.Taxonomies.categories "podcast") -}}
 {{- /* How many episodes carry a transcript is DERIVED from the bundles, the
        same way posts/single.html decides whether to render the section at all:
        transcript.md is a resource beside index.md, so "does this episode have
