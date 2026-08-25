@@ -177,6 +177,54 @@ canonical: "https://your-blog.example/the-original/"
 — and search engines keep crediting your site while the article reaches Foojay's
 readers. Roughly 800 articles here are cross-posts, and this is how.
 
+## Nothing goes live unchecked
+
+The flip side of "publishing is a pull request" is that a robot can read every
+pull request, and every deploy, before a reader does. Three things run
+automatically, and they are worth describing because they catch different
+classes of mistake.
+
+**On a pull request: your frontmatter and a full site build.** The check reads
+the article you added — including one still in `draft/`, which nothing else
+would look at — and fails on the things that otherwise fail *silently*: an
+author slug with no matching profile (the article renders, but never appears on
+your author page), a hero image naming a file you forgot to commit, two articles
+claiming the same URL, leftover text from the template. Then it builds all 4,200
+pages, so a broken shortcode is a red cross on your PR rather than a broken page
+on the site.
+
+**Before every deploy: the site that was just built.** Two questions, both
+answered from the content rather than from a list somebody has to maintain. Did
+every source file produce a page — because the way a section really breaks is
+not an error, it is a template that runs fine and quietly matches nothing. And
+does every internal link resolve: half a million of them across those 4,200
+pages, checked against the files actually on disk, in about five seconds. That
+one earns its keep. It found that the 404 page's own "back to the homepage" link
+was broken — a single character in a template, on the one page a lost reader
+sees.
+
+**Then a real browser, on the built site.** Some of Foojay only exists once
+JavaScript has run: the search index, the two world maps, the image lightbox,
+the sortable tables in the [sitemap](/sitemap/), syntax highlighting. Every one
+of those fails the same way — the page still returns 200, still looks full, and
+simply stops doing the thing. So the built site is served on a throwaway local
+server and about forty checks click through it: search for a word and get
+grouped results, open a gallery, page a table, flip to dark mode.
+
+Two decisions in there were deliberate. **Only breakage we caused blocks a
+deploy.** A dead link an author typed in 2021 is reported and counted, not
+treated as an emergency — there were 53 of those in the archive when the check
+first ran, and a gate that blocks every future deploy on a five-year-old typo is
+a gate somebody switches off within the week. (They are down to one, for the
+record, and it needs a URL only its author knows.) And **the checks never call
+anyone else's server.** Roughly 440 articles embed a YouTube player; asserting
+that one reaches "playing" would be asserting that YouTube is up, on a check
+that can stop our own deploy. Third-party requests are answered locally instead,
+so nothing here goes red because someone else's CDN is having an afternoon.
+
+None of this is unusual for a software project. It is unusual for a website, and
+it is the part I would most want back if we ever moved again.
+
 ## Every podcast episode is now readable
 
 The Foojay Podcast had exactly one way in: press play and listen for the next
