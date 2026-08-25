@@ -46,16 +46,19 @@ test('the gallery lightbox opens, steps and closes', async ({ page }) => {
 });
 
 /**
- * The maps are the one feature here that CANNOT be fully checked offline:
- * /jugs/ and /java-champions/ load Leaflet and markercluster from unpkg.com at
- * read time, and nothing here may reach the network (see fixtures.mjs). So this
- * asserts everything that is ours -- the host element, our own script, and the
- * points it was handed -- and says out loud why it stops there.
+ * The maps run for real here, and they only can because Leaflet and
+ * markercluster are VENDORED (themes/foojay/static/vendor/, see
+ * partials/cluster-map.html). While they came from unpkg.com these two tests
+ * and the tile exclusion below could do nothing but skip -- nothing in this
+ * suite may reach the network (see fixtures.mjs) -- so the assertion that
+ * mattered, that grouping 90 JUGs or 422 champions actually produces markers,
+ * had never once run.
  *
- * Note what the skip is evidence OF: cluster-map.js guards on `!window.L` and
- * returns, so when unpkg is unreachable the map silently disappears and the
- * page still renders clean. Vendoring Leaflet the way mermaid is vendored would
- * remove that dependency AND make the marker assertion below run for real.
+ * That skip was evidence of a live fault, not a gap in the tests:
+ * cluster-map.js guards on `!window.L` and returns, so with the library
+ * unreachable the map silently disappeared and the page still rendered clean --
+ * no error, no message, a gap where the map was. Only the tiles are third-party
+ * now, and a tile that does not load leaves a working map over an empty ground.
  */
 for (const kind of ['jugs', 'champions']) {
   test(`the ${kind} map is wired to real points`, async ({ page }) => {
@@ -69,9 +72,9 @@ for (const kind of ['jugs', 'champions']) {
     }));
     expect(wiring.builder, 'static/js/cluster-map.js should have loaded').toBe('function');
     expect(wiring.host, 'the map needs an element to render into').toBe(true);
-
-    test.skip(wiring.leaflet === 'undefined',
-      'Leaflet comes from unpkg.com and the tests make no network calls');
+    // Same-origin now, so its absence is a broken path in this repo rather
+    // than someone else's CDN having a bad afternoon -- fail, never skip.
+    expect(wiring.leaflet, 'vendored Leaflet should have loaded').toBe('object');
 
     // One marker per PLACE, with the item count baked into the badge. Zero
     // markers is what a bad coordinate field or a failed grouping looks like.
@@ -98,8 +101,6 @@ test('the champions table is not treated as a gallery', async ({ page }) => {
 test('map tiles are not treated as content images', async ({ page }) => {
   test.skip(!PAGES.jugs, 'no jugs page');
   await page.goto(PAGES.jugs);
-  test.skip(await page.evaluate(() => typeof window.L === 'undefined'),
-    'Leaflet comes from unpkg.com and the tests make no network calls');
   await expect(page.locator('.leaflet-container')).toBeVisible({ timeout: 15_000 });
 
   const hijacked = await page.evaluate(() => Array.from(document.querySelectorAll('.leaflet-container img'))

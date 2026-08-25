@@ -1,0 +1,56 @@
+{{/* Everything the clustered world map needs, loaded from this repo.
+
+     THE SINGLE DEFINITION OF WHAT A MAP PAGE LOADS. /jugs/ and
+     /java-champions/ draw the same map (static/js/cluster-map.js is one
+     definition of the badges, the grouping and the cluster totals), so the
+     asset list is one definition too -- otherwise a version bump or a path fix
+     is two edits, and the second one is the one that gets forgotten. A page
+     calls this, then renders its own container and the inline
+     foojayClusterMap({...}) call.
+
+     VENDORED, like mermaid and EnlighterJS, into
+     themes/foojay/static/vendor/leaflet/ (v1.9.4, BSD-2-Clause) and
+     vendor/leaflet-markercluster/ (v1.4.1, MIT). Both used to come from
+     unpkg.com at read time, which cost three things:
+
+       - the map SILENTLY DISAPPEARED when unpkg was unreachable or slow.
+         cluster-map.js guards on `!window.L` and returns, so the page still
+         rendered clean, with a gap where the map had been and nothing said why.
+       - the deploy gate could not test it. tests/e2e makes no network calls, so
+         the two map tests and the lightbox's tile exclusion could only skip.
+       - a third party got a request from every reader of those two pages, and
+         could change what that request returns at any time.
+
+     To update: `npm pack leaflet@<version> leaflet.markercluster@<version>`,
+     then copy each package's dist/ files over these folders -- leaflet.js,
+     leaflet.css and images/*.png, and leaflet.markercluster.js plus
+     MarkerCluster.css. No .map files (1.1 MB for Leaflet alone, and nothing
+     but a browser with devtools open ever asks for one). The files here are
+     byte-identical to what unpkg served for the same versions, so the change
+     was verifiable rather than a re-render.
+
+     images/ travels with leaflet.css, which references images/layers.png and
+     images/marker-icon.png relatively. Neither map uses a layers control or a
+     default marker pin -- every icon is ours -- so nothing requests them
+     today; they are here so the stylesheet is not quietly incomplete for the
+     one that does.
+
+     MarkerCluster.css only (positioning + the zoom animations). Its companion
+     MarkerCluster.Default.css is deliberately NOT vendored or loaded: it styles
+     `.marker-cluster*`, and cluster-map.js replaces every cluster icon with our
+     own `.cluster-map__marker`, so it would be dead weight styling classes this
+     map never emits.
+
+     TILES ARE STILL THIRD-PARTY, and unavoidably so: cluster-map.js draws
+     OpenStreetMap's tiles, which is the map itself and cannot be a file in this
+     repo. A tile that fails to load leaves the markers, the clusters and the
+     popups working over an empty ground, which is the important difference from
+     the library failing to load. */}}
+<link rel="stylesheet" href="{{ "vendor/leaflet/leaflet.css" | relURL }}">
+<link rel="stylesheet" href="{{ "vendor/leaflet-markercluster/MarkerCluster.css" | relURL }}">
+<script src="{{ "vendor/leaflet/leaflet.js" | relURL }}"></script>
+<script src="{{ "vendor/leaflet-markercluster/leaflet.markercluster.js" | relURL }}"></script>
+{{/* No `defer` on any of these, unlike the sitemap's scripts: the caller's
+     inline foojayClusterMap({...}) call runs at parse time, so a deferred
+     definition would not exist yet. */}}
+<script src="{{ "js/cluster-map.js" | relURL }}"></script>

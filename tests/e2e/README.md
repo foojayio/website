@@ -93,21 +93,30 @@ Two different questions, and only one belongs in a gate:
 
 ## What skips, and why
 
-A skip here is a statement about the build, not a disabled test. Four today, out
+A skip here is a statement about the build, not a disabled test. One today, out
 of 37:
 
 | skipped | why | what would un-skip it |
 | --- | --- | --- |
 | mermaid renders to SVG | no published post uses a ```` ```mermaid ```` fence yet | the `draft/` post about mermaid landing |
-| both world maps draw markers | Leaflet and markercluster come from **unpkg.com**, and these tests make no network calls | vendoring Leaflet the way mermaid is vendored |
-| map tiles are not lightboxed | same | same |
 
-The Leaflet one is worth reading twice. `cluster-map.js` guards on
-`!window.L` and returns, so when unpkg is unreachable **the map silently
-disappears and the page still renders clean** — no error, no message, just a
-gap where the map was. The skip is the test telling you about a real runtime
-dependency on someone else's CDN, on two pages, in the one part of the site
-that is a third-party script over our own content.
+**The three map skips are gone, and how they went is the lesson.** Both world
+maps and the lightbox's tile exclusion used to skip for one reason: Leaflet and
+markercluster came from unpkg.com, and nothing here reaches the network. So the
+assertion that mattered — that grouping 90 JUGs or 422 champions actually
+produces markers — had never once run. The skips were not a gap in the tests but
+a report on a live fault: `cluster-map.js` guards on `!window.L` and returns, so
+whenever unpkg was unreachable **the map silently disappeared and the page still
+rendered clean** — no error, no message, a gap where the map was. Vendoring both
+libraries (`themes/foojay/static/vendor/`, see `partials/cluster-map.html`)
+removed the dependency and turned three skips into three real tests, and
+`typeof window.L` is now asserted rather than skipped on, because a same-origin
+library that is missing is a broken path in this repo.
+
+Only the map **tiles** are third-party now, and they cannot be anything else —
+OpenStreetMap's tiles *are* the map. They are stubbed like every other third
+party, so the tests exercise markers, clusters and popups over an empty ground,
+which is also exactly what a reader gets when a tile fails to load.
 
 The video test also *annotates* rather than fails when the browser cannot decode
 a codec: Playwright ships the open-source Chromium build, which carries no

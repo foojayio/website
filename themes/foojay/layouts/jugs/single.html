@@ -60,24 +60,15 @@
     {{ end }}
 
     {{ if $points }}
-    {{/* MarkerCluster.css only (positioning + the zoom animations). Its
-         companion MarkerCluster.Default.css is deliberately NOT loaded: it
-         styles `.marker-cluster*`, and cluster-map.js replaces every cluster
-         icon with our own `.cluster-map__marker`, so the default sheet would
-         be dead weight styling classes this map never emits. */}}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    {{/* Leaflet, markercluster and cluster-map.js, all served from this repo
+         -- see partials/cluster-map.html for what is loaded and why. */}}
+    {{ partial "cluster-map.html" . }}
     <div id="jugs-map" class="cluster-map"></div>
     <p class="cluster-map__note">
       {{ len $points }} of {{ len $jugs }} Java User Groups are on the map, and each marker shows
       how many are there. A marker is the location the directory records for a group, so it shows
       where JUGs are spread across the world rather than where any one of them meets.
     </p>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    {{/* No `defer` here, unlike the sitemap's scripts: the inline call below
-         runs at parse time, so a deferred definition would not exist yet. */}}
-    <script src="{{ "js/cluster-map.js" | relURL }}"></script>
     <script>
       foojayClusterMap({
         el: 'jugs-map',
