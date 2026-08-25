@@ -9,6 +9,9 @@ image: "aussom-logo-atom.png"
 categories:
   - "Java"
 related_posts:
+  - "java-for-scripting"
+  - "six-jdk-24-features-you-should-know-about"
+  - "foojay-podcast-97"
 frozen: false
 ---
 
