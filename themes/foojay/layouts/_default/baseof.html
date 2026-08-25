@@ -121,9 +121,28 @@
 
   {{ partial "json-ld.html" . }}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+  {{/* The webfonts are SELF-HOSTED -- see vendor/fonts/fonts.css for the 40
+       faces and why they are not two <link>s at fonts.googleapis.com. Nothing
+       is preconnected because there is nowhere to preconnect to.
+
+       The two faces below are PRELOADED because they are on every page and
+       nothing else: --font-body at 400 is the article text and --font-display
+       at 700 is the headings, in the latin cut a browser would pick for
+       English. A font inside a stylesheet is only discovered once that
+       stylesheet has been fetched and parsed, so without this the two files the
+       first paint waits on start a round trip late. The rest are left to be
+       discovered normally -- preloading a face a page does not use spends
+       bandwidth to render nothing.
+
+       This also makes a wrong path FAIL LOUDLY rather than silently falling
+       back to Segoe UI: a preload is requested on every page whether or not the
+       text needs it, so tests/e2e's "no failed same-origin request" assertion
+       covers it on all 20 pages it walks. */}}
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{{ "vendor/fonts/source-sans-3-400-latin.woff2" | relURL }}">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{{ "vendor/fonts/barlow-700-latin.woff2" | relURL }}">
+  <link rel="stylesheet" href="{{ "vendor/fonts/fonts.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 
   {{/* Resolve the colour scheme before first paint so the page never flashes

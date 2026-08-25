@@ -7,9 +7,12 @@ export const PAGES = loadPages();
  * Every page under test gets two things.
  *
  * THIRD PARTIES ARE STUBBED, NEVER FETCHED. 438 posts embed a YouTube player
- * and the fonts come from Google; letting a test suite load them would make it
- * slow, make it fail when someone else's CDN has a bad afternoon, and send a
- * request to YouTube for every build. They are answered locally with an empty
+ * and both world maps draw OpenStreetMap tiles; letting a test suite load them
+ * would make it slow, make it fail when someone else's CDN has a bad afternoon,
+ * and send a request to YouTube for every build. (The webfonts and the map
+ * LIBRARY used to be in this list too, and were stubbed to an empty body -- so
+ * nothing here had ever loaded the typeface the site renders in, or the Leaflet
+ * it draws with. Both are served from the repo now and are exercised for real.) They are answered locally with an empty
  * body of the right type instead -- so the page still lays out, the iframe is
  * still there to assert on, and nothing leaves the runner. Checking that a
  * YouTube embed actually PLAYS is not something a deploy gate can honestly do:
