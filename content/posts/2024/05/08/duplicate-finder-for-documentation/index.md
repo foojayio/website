@@ -27,7 +27,7 @@ Anyone who worked on technical documentation in a big team is certainly aware of
 
 As the project grows in size, duplicated content will start to occur. This is especially true for big projects including many similar products or features.
 
-**Good:**{#duplication-good-bad}
+**Good:**
 
 define once:
 

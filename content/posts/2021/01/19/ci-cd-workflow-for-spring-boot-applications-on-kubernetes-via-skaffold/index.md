@@ -25,7 +25,7 @@ It is a known fact that developing applications with Kubernetes is cumbersome. T
 
 #### What problem it is trying to solve?
 
-As I said earlier developing applications with Kubernetes is not so easy task and that's where Skaffold comes into play as it eases the development and deployment of your applications running on Kubernetes. It manages the entire workflow and you get instant feedback while developing and deploying your application locally or on a remote Kubernetes cluster.{#rmm}
+As I said earlier developing applications with Kubernetes is not so easy task and that's where Skaffold comes into play as it eases the development and deployment of your applications running on Kubernetes. It manages the entire workflow and you get instant feedback while developing and deploying your application locally or on a remote Kubernetes cluster.
 
 ![Image for post](https://miro.medium.com/max/1288/1*EaQd3mLLRO9rjuUuW4v8mw.png)
 

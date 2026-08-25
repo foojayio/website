@@ -57,7 +57,7 @@ The rating ranges from 1 to 10, where 1 means a project is very likely to have f
 
 {{< img src="foojay-safetyrating-700x265.png" class="size-medium" width="700" height="265" >}}
 
-***Screenshot from central.sonatype.com***{#caption-attachment-62930}
+***Screenshot from central.sonatype.com***
 
 ## What goes into this rating?
 

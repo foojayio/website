@@ -31,7 +31,7 @@ In Part 2, I will show you how I animate the clock face's hands using basic trig
 
 {{< img src="Screen-Shot-2020-12-19-at-9.35.09-PM-280x510.png" class="size-medium" alt="Creating a JavaFX World Clock from Scratch (Part 2)" width="280" height="510" >}}
 
-*Creating a JavaFX World Clock from Scratch (Part 2)*{#caption-attachment-36624}
+*Creating a JavaFX World Clock from Scratch (Part 2)*
 
 ## Scene Builder
 
@@ -41,14 +41,14 @@ I want to give a shout out to the folks from GluonHQ[\[3\]](https://gluonhq.com 
 
 {{< img src="Screen-Shot-2020-12-20-at-6.38.48-PM-484x510.png" class="size-medium" alt="Gluon Scene Builder" width="484" height="510" >}}
 
-*Gluon Scene Builder*{#caption-attachment-36633}
+*Gluon Scene Builder*
 
 Finally, If you remember in part 1 I pointed out the hour hand shapes (arc \& circle) having hard coded values for their angles and position attributes purely for prototyping purposes. In order to animate the arms around the clock face we will begin to make these values dynamic.
 
 Before I show you the code, I want to show you the world clock face and its hour hand parts again. Just focus on the hour hand arc and hour hand tip which is a JavaFX Arc [\[3\]](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/shape/Arc.html "Arc API") and Circle [\[4\]](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/shape/Circle.html "Circle API") shape node respectively.  
 ![Clock parts](Screen-Shot-2020-12-08-at-12.29.31-AM.png)
 
-*Parts of the hour hand of the world clock*{#caption-attachment-36529}
+*Parts of the hour hand of the world clock*
 
 ## Hour Hand Arc
 
@@ -63,12 +63,12 @@ To change the length of the arc position around the clock face you will need to 
 
 {{< img src="Screen-Shot-2020-12-19-at-10.23.06-PM-626x510.png" class="size-medium" alt="Drawing the Hour Hand Arc" width="626" height="510" >}}
 
-*Drawing the Hour Hand*{#caption-attachment-36628}
+*Drawing the Hour Hand*
 
 Since the Arc shape is drawn in a counter clockwise rotation we have to do some math to make the arc appear in a clockwise direction. For example if it were moving from the 12:00 postion to the 3:00 position the start angle is 0° and the length (extent angle) would be 90° as shown below.  
 ![0 to 90 degrees in a Counter Clockwise direction](Screen-Shot-2020-12-20-at-8.32.50-PM-1.png)
 
-*0 to 90 degrees in a Counter Clockwise direction*{#caption-attachment-36635}
+*0 to 90 degrees in a Counter Clockwise direction*
 
 The hour hand has 12 positions and given a circle is 360° degrees (or 2π radians) each hour would be 360÷12 equalling 30° degrees. To represent 1:00 the hour hand arc should appear as a 30° (length) arc looking like its a moving in a clockwise direction from 12:00 to 1:00 when really its startAngle is 60° and length (extent angle) is 30°.
 
@@ -138,7 +138,7 @@ int extentAngle = extentAngleHour.apply(1); // 30 degrees
 The following is an example of step-by-step calculations using the above equations to determine the **startAngle** and **extentAngle** at 1:00, 2:00, and 3:00 o'clock.  
 ![Calculating Start and Length angles for Hour Hand Arc](Screen-Shot-2020-12-21-at-12.18.03-AM.png)
 
-*Calculating Start and Length angles for Hour Hand Arc*{#caption-attachment-36636}
+*Calculating Start and Length angles for Hour Hand Arc*
 
 Now that you know how to calculate and draw the arc now we need to get a reference to the JavaFX Arc and Circle nodes in order to update values dynamically.
 
@@ -166,7 +166,7 @@ hourHandArc.setLength(hourExtentAngle);
 Similar to a time lapse an animation of the hour hand is shown below. It doesn't show the hour hand tip, more on that next.  
 ![Hour Hand Animation without the tip](hourhand-animation-without-tip.webp)
 
-*Hour Hand Animation without the tip*{#caption-attachment-36631}
+*Hour Hand Animation without the tip*
 
 Now that you know how to position and draw arcs to appear to move, let's look at basic trigonometry to move the hour hand tip around the clock face.
 
@@ -214,7 +214,7 @@ You should notice the method call to `setTranslateY(hourTipPoint[1] * -1)` where
 Shown below is the hour hand **arc** and **tip** moving around the clock face.  
 ![Hour Hand Animation with tip](hourhand-animation.webp)
 
-*Hour Hand Animation with tip*{#caption-attachment-36630}
+*Hour Hand Animation with tip*
 
 To see the full listing of the code to move the clock arms see WorldClockController.java[\[6\]](https://github.com/carldea/worldclock/blob/main/src/main/java/com/carlfx/worldclock/WorldClockController.java "WorldClockController.java") on GitHub.
 

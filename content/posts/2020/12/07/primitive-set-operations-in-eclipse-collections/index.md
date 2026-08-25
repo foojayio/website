@@ -50,8 +50,6 @@ Union — 1, 2, 3, 4, 5.
 Eclipse Collections has an existing API `withAll` which allows you to add elements from one set to the other.
 
 ```java
-
-```java
 default MutableIntSet union(IntSet set)
 {
     if (this.size() > set.size())
@@ -65,11 +63,7 @@ default MutableIntSet union(IntSet set)
 }
 ```
 
-```
-
 Unit tests for union covering scenarios for equal-sized, unequal-sized, and empty sets.
-
-```java
 
 ```java
 private void assertUnion(MutableIntSet set1, MutableIntSet set2, MutableIntSet expected)
@@ -113,8 +107,6 @@ public void union()
 }
 ```
 
-```
-
 ### Intersect: What Does This Operation Do?
 
 Method signature:
@@ -143,8 +135,6 @@ Intersect — 3, 4.
 Eclipse Collections has an existing API that allows us to select all elements that evaluate true for the given Predicate.
 
 ```java
-
-```java
 default MutableIntSet intersect(IntSet set)
 {
     if (this.size() < set.size())
@@ -156,8 +146,6 @@ default MutableIntSet intersect(IntSet set)
         return set.select(this::contains, this.newEmpty());
     }
 }
-```
-
 ```
 
 Unit tests for intersect covering [scenarios](https://github.com/eclipse/eclipse-collections/blob/00557933f648e2c3a2112bcfc7cfb349a7609844/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L502) for equal-sized, unequal-sized, and empty sets.
@@ -191,14 +179,10 @@ As you may have guessed, the size of these two sets doesn't matter, as our start
 Eclipse Collections has an existing API that allows us to reject which returns all elements that evaluate false for the Predicate. In other words, it is the opposite of select.
 
 ```java
-
-```java
 default MutableIntSet difference(IntSet set)
 {
     return this.reject(set::contains);
 }
-```
-
 ```
 
 Unit tests for difference covering scenarios for equal-sized, unequal-sized, and empty sets.

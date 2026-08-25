@@ -31,8 +31,6 @@ Back when I wrote that chapter I dedicated most of it to active developer observ
 
 But there are other ways. Tools like Lightrun are active in their observability, we add a snapshot similarly to a breakpoint and get the type of data we expect. I recently started playing with [Digma](https://digma.ai/) which takes a radically different approach to developer observability. To understand that we might need to revisit some concepts of observability first.
 
-{#observability-isnt-pillars}
-
 ## Observability isn't Pillars
 
 I've been guilty of listing the pillars of observability just as much as the next guy. They're even in my book (sorry). To be fair, I also discussed what observability **really** means…
@@ -47,8 +45,6 @@ Both can bring down your performance and significantly impact the bank account, 
 
 Existing developer observability tools work actively. To answer the question if someone is using the code I can place a counter on the line and wait for results. I can give it a week's timeout and find out in a week. Not a terrible situation but not ideal either, I don't have that much patience.
 
-{#tracing-and-opentelemetry}
-
 ## Tracing and OpenTelemetry
 
 It's a sad state of affairs that most developers don't use tracing in their day-to-day job. For those of you who don't know it, it is like a call stack for the cloud. It lets us see the stack across servers and through processes. No, not method calls. More at the entry point level, but this often contains details like the database queries that were made and similarly deep insights.
@@ -61,8 +57,6 @@ It also doesn't have a standard server which makes it very confusing. That means
 * A vendor focused on troubleshooting can detect potential bugs and issues.
 * A vendor focused on security can detect potential risky access.
 
-{#background-developer-observability}
-
 ## Background Developer Observability
 
 I'm going to coin a term here since there isn't one: Background Developer Observability. What if the data you need was already here and a system already collected it for you in the background?
@@ -74,8 +68,6 @@ The cool thing is that you probably already use OpenTelemetry without even knowi
 Going back to my question, is anyone using this API?
 
 If you use Digma you can see that right away. OpenTelelbery already collected the information in the background and the DevOps team already paid the price of collection. We can benefit from that too.
-
-{#enough-exposition}
 
 ## Enough Exposition
 
@@ -97,8 +89,6 @@ But the real value and where Digma becomes a "Developer Observability" tool inst
 
 There is a strong connection to the code directly from the observability data and deeper analysis which doesn't show in my particular overly simplistic hello world. This Toolwindow highlights problematic traces, errors and helps understand [real-world issues](https://digma.ai/blog/coding-with-java-observability/).
 
-{#how-does-this-help-at-2am}
-
 ## How Does This Help at 2AM?
 
 Disasters happen because we aren't looking. I'd like to say I open my observability dashboard regularly but I don't. Then when there's a failure I take a while to get my bearings within it. The locality of the applicable data is important, it helps us notice issues when they happen. Detect regressions before they turn to failures and understand the impact of the code we just merged.
@@ -106,8 +96,6 @@ Disasters happen because we aren't looking. I'd like to say I open my observabil
 Prevention starts with awareness and as developers, we handed our situational awareness to the DevOps team.
 
 When the failure actually happens, the locality and accessibility of the data makes a big difference. Since we use tools that integrate in the IDE daily this reduces the meantime to a fix. No, a background developer observability tool might not include the information we need to fix a problem. But if it does, then the information is already there and we need nothing else. That is fantastic.
-
-{#final-word}
 
 ## Final Word
 

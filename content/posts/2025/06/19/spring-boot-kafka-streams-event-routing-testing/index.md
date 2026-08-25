@@ -189,7 +189,7 @@ Each branch of the stream is defined clearly, allowing easy debugging and mainta
 
 {{< img src="topics-700x208.png" class="size-medium" alt="Topics involved: visit-events, trip-steps, trip-dlq" width="700" height="208" >}}
 
-Topics involved: ***visit-events, trip-steps, trip-dlq***{#caption-attachment-116470}
+Topics involved: ***visit-events, trip-steps, trip-dlq***
 
 #### 🧰 Kafbat UI: Used to inspect Kafka topics and payloads during development.
 

@@ -63,7 +63,7 @@ Install Visual Studio (for C++ tools), as GraalVM uses native compilers.
 
 {{< img src="desktop_development_with_C-700x394.png" class="size-medium" alt="Speed up your Spring Batch with Native Image and GraalVM" width="700" height="394" >}}
 
-Speed up your Spring Batch with Native Image and GraalVM{#caption-attachment-114938}
+Speed up your Spring Batch with Native Image and GraalVM
 
 ### PostgreSQL:
 
@@ -78,7 +78,7 @@ Go to Spring Initializr: <https://start.spring.io>
 
 {{< img src="spring-init-native-image-700x348.png" class="size-medium" alt="Speed up your Spring Batch with Native Image and GraalVM" width="700" height="348" >}}
 
-Speed up your Spring Batch with Native Image and GraalVM{#caption-attachment-114939}
+Speed up your Spring Batch with Native Image and GraalVM
 
 Add the following dependencies:
 

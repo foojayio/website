@@ -29,7 +29,7 @@ This week, we are going to compare Europe with South America.
 During the summer months of 2020, the pandemic paused throughout Europe. This applies to all countries, except for Russia. Russia had 100+ Covid-19 related deaths/day during the summer months July and August.  
 [![Daily deaths in Europe (excluding Russia) related to Covid-19](https://foojay.io/?attachment_id=36582)](https://foojay.io/?attachment_id=36582)
 
-*Daily deaths in Europe (excluding Russia) related to Covid-19*{#caption-attachment-36578}
+*Daily deaths in Europe (excluding Russia) related to Covid-19*
 
 The graph displays the daily number of deaths in European countries excluding Russia.
 
@@ -42,7 +42,7 @@ Except for Russia, the number of deaths decreased and almost reached zero during
 In Software-ECG COVID-19 Edition, you can create an aggregated view of all these values. The result will look as shown in the following graph:  
 [![Total deaths (sum) in Europe related to Covid-19](https://foojay.io/?attachment_id=36583)](https://foojay.io/?attachment_id=36583)
 
-*Total deaths (sum) in Europe related to Covid-19*{#caption-attachment-36581}
+*Total deaths (sum) in Europe related to Covid-19*
 
 The seasonal component cannot be ignored as it is not surprising for a disease that has the same transmission as the seasonal flu.
 
@@ -53,7 +53,7 @@ Now, we would like to ask the following question—can the same behavior also be
 Let us surprise you with the following graph:  
 [![Total deaths in South America related to Covid-19](https://foojay.io/?attachment_id=36584)](https://foojay.io/?attachment_id=36584)
 
-*Total deaths in South America related to Covid-19*{#caption-attachment-36580}
+*Total deaths in South America related to Covid-19*
 
 A wave is most likely to be seen in Brazil (brown line) during the winter months of the year. However, the number of cases and the number of deaths is rising there again although summer is just around the corner.
 
@@ -62,7 +62,7 @@ In some countries, there are significant outliers in the curves. Such data anoma
 In sum, it looks less like a wave than a continuous event. For this purpose, you can add up all curves with the Combine Metrics -\> Add up (exact) function of the ECG:  
 [![Total deaths (sum) in Europe related to Covid-19](https://foojay.io/?attachment_id=36585)](https://foojay.io/?attachment_id=36585)
 
-*Total deaths (sum) in Europe related to Covid-19*{#caption-attachment-36579}
+*Total deaths (sum) in Europe related to Covid-19*
 
 It would certainly be nice if the summer pause of the northern and southern hemisphere were the same. Then you would be able to flee from the virus by travelling to a different hemisphere.
 

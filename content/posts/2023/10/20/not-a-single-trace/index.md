@@ -29,8 +29,6 @@ While the initial trace provided valuable insights into the authentication servi
 
 This scenario underscores a crucial point: while individual traces are invaluable, their true potential is unlocked only when they are viewed collectively and in context. Let's delve deeper into why a single trace might not be the silver bullet we often hope for and how a more holistic approach to trace analysis can paint a clearer picture of our system's health and the way to combat problems.
 
-{#the-limiting-factor}
-
 ## The Limiting Factor
 
 The first problem is the narrow perspective. Imagine debugging a multi-threaded Java application. If you were to only focus on the behavior of one thread, you might miss how it interacts with others, potentially overlooking deadlocks or race conditions.
@@ -45,8 +43,6 @@ The last problem is related to that and is the context. Imagine analyzing the pe
 
 A single trace might show that a Java method, `processOrders()`, took 5 seconds to execute. However, without context, you wouldn't know if it was processing 50 orders or 5,000 orders in that time frame. Another trace might reveal that a related method, `fetchOrdersFromDatabase()`, is retrieving an unusually large batch of orders due to a backlog, thus providing context to the initial trace.
 
-{#strength-in-numbers}
-
 ## Strength in Numbers
 
 Think of traces as chapters in a book and metrics as the book's summary. While each chapter (trace) provides detailed insights, the summary (metrics) gives an overarching view. Reading chapters in isolation might lead to missing the plot, but when read in sequence and in tandem with the summary, the story becomes clear.
@@ -58,8 +54,6 @@ This helps us distinguish between correlation and causation. Grouped traces migh
 This is especially important in performance tuning. Grouped traces might show that the `handleRequest()` method's performance has been improving over several releases. Metrics can complement this by showing a decreasing trend in response times and error rates, confirming that recent code optimizations are having a positive impact.
 
 I wrote about this extensively in a previous post about the [Tong motion needed to isolate an issue](https://debugagent.com/eliminating-bugs-using-the-tong-motion-approach). This motion can be accomplished purely through the use of observability tools such as traces, metrics, and logs.
-
-{#example}
 
 ## Example
 
@@ -77,8 +71,6 @@ How impactful is the performance on the rest of the application?
 
 These become questions with easy answers at this point. When we see all the different aspects laid together.
 
-{#magical-apis}
-
 ## Magical APIs
 
 The N+1 problem I mentioned before is a common bug in Java Persistence API (JPA). The great Vlad Mihalcea has [an excellent explanation](https://vladmihalcea.com/n-plus-1-query-problem/). The TL;DR is rather simple. We write a simple database query using ORM. But we accidentally split the transaction causing the data to be fetched N+1 times where N is the number of records we fetch.
@@ -86,8 +78,6 @@ The N+1 problem I mentioned before is a common bug in Java Persistence API (JPA)
 This is painfully easy to do since transactions are so seamless in JPA. This is the biggest problem in "magical" APIs like JPA. These are APIs that do so much that they feel like magic, but under the hood they still run regular old code, when that code fails it's very hard to see what goes on. Observability is one of the best ways to understand why these things fail.
 
 In the past, I used to reach to the profiler for such things, which would often entail a lot of work. Getting the right synthetic environment for running a profiling session is often very challenging. Observability lets us do that without the hassle.
-
-{#final-word}
 
 ## Final Word
 

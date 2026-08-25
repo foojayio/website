@@ -25,8 +25,6 @@ With trunk-based development, all developers work on a single branch (e.g. 'main
 
 In contrast, the branching model encourages developers to create separate branches for every feature, bug fix, or enhancement. Although branching may seem like a logical approach to isolate changes and reduce risk, several factors make me more comfortable with trunk-based development.
 
-{#more-98737}
-
 **1. Speed and Efficiency**
 
 In trunk-based development, the entire team works on a single branch. This model allows for quicker integrations and fewer merge conflicts. This is literally "[Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI)", as originally suggested by the practices of Extreme Programming. While these days we tend to mean "run your build and tests on a team server every time you commit" when we say CI, what CI really meant was actually *integrate* your code regularly. Code living on separate branches is, by definition, not integrated. And the longer these branches live for, the more challenging it is to merge them back into the main codebase. It might seem fast to develop your fixes and improvements on a separate branch that isn't impacted by other developers' changes, but you still have to pay that cost at some point. Integrating small changes regularly into your code is usually less painful than a big merge at the end of a longer period of time.

@@ -381,7 +381,7 @@ Now... the good thing is that your IDE probably supports reading out this JSON f
 
 ![Intellij support for spring configuration metadata](intellij-autocomplete.png)
 
-Descriptions and autocompletion in IntelliJ.{#caption-attachment-115257}
+Descriptions and autocompletion in IntelliJ.
 
 To start using configuration processing, it's as simple as adding:
 

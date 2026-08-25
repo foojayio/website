@@ -766,8 +766,6 @@ private void collectInterestingInfo(ChildrensTaleBook childrensTaleBook) {
 
 While technically still a preview feature in java 24, we can use the support for primitives in the switch statement to make handling children's tales books more easy.
 
-{#more-116139}
-
 ## Recommended further reading and watching
 
 * [An excellent Devoxx talk by Nicolai Parlog which inspired me to learn more about this subject](https://www.youtube.com/watch?v=8FRU_aGY4mY)

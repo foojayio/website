@@ -33,7 +33,7 @@ frozen: false
 
 {{< img src="3-Quarkus-Unpacked-2-2.jpeg" class="alignleft is-resized" alt="Quarkus: A Runtime and Framework for Cloud-Native Java" style="width:300px" >}}
 
-I recently had the pleasure of joining the [Foojay podcast](https://www.youtube.com/watch?v=_nJCTTrnZkE) to talk about Quarkus in depth. The conversation covered a lot of ground, from what makes Quarkus different to the practical trade-offs between JVM and native mode. This post captures the key questions and answers from that discussion, lightly edited for readability.{#_quarkus_unpacked_insights_from_the_foojay_podcast}
+I recently had the pleasure of joining the [Foojay podcast](https://www.youtube.com/watch?v=_nJCTTrnZkE) to talk about Quarkus in depth. The conversation covered a lot of ground, from what makes Quarkus different to the practical trade-offs between JVM and native mode. This post captures the key questions and answers from that discussion, lightly edited for readability.
 
 If you have been following this blog series, note that the third installment on building your own stack with Quarkus is coming next. Consider this a bonus entry that distills the podcast conversation into a format you can read, reference, and share.
 

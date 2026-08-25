@@ -223,7 +223,7 @@ OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>
 
 {{< img src="2ldap-search-700x407.png" class="size-medium" alt="Prevent LDAP injection in Java with SpringBoot" width="700" height="407" >}}
 
-Entries in LDAP{#caption-attachment-114911}
+Entries in LDAP
 
 ### 🍃 Spring Boot part
 

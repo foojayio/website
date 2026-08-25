@@ -19,8 +19,6 @@ frozen: false
 
 Java 24 rolls out today! It's been six months since Java 23 was released, so it's time for another helping of new features. And this particular release of Java is aptly named, because it contains exactly 24 JEPs. Coincidence? I think not. 🙂
 
-{#more-115735}
-
 Java 24 brings a diverse set of features, delivering performance improvements like compact object headers, garbage collection optimizations and the first JEP to come out of Project Leyden. On top of that, various security features related to the quantum computing field were added, and a solution to virtual thread pinning is now available!
 
 Apart from these, a few new features from older releases have been repreviewed.

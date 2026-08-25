@@ -27,7 +27,6 @@ Fun fact - Records was voted the most popular Java 16 language feature by 1158 d
 In this blog post, I will limit coverage of Java 16 to its language features, why you need them, and how you can start using them in [IntelliJ IDEA](https://www.jetbrains.com/idea/nextversion/). You can use [this link](https://openjdk.java.net/projects/jdk/16/) for a comprehensive list of the new Java 16 features. Let's get started.
 
 ![Java 16 and IntelliJ IDEA](https://blog.jetbrains.com/wp-content/uploads/2021/03/Java16_blog.png)  
-{#more-43657}
 
 Records introduce a new type declaration that simplifies the task of modeling your immutable data. Though it helps cut down on boilerplate code significantly, that isn't the primary reason for its introduction. Here's an example:
 

@@ -20,7 +20,7 @@ frozen: false
 
 ![Spiderman chooses GitHub Action's Disco API](Spidey_GitHub_Action_disco_latest.jpg)
 
-The Java GitHub Action that Rules them all - Disco API{#caption-attachment-51347}
+The Java GitHub Action that Rules them all - Disco API
 
 When we ended Part 2 of this blog series Lights, Camera, Action: GitHub Actions with Java [Part 2](https://foojay.io/today/github-actions-with-java-part-2 "Part 2"), I talked about the near future of GitHub Actions. Well, today the future is now, so let's get into this!
 
@@ -149,7 +149,7 @@ To see the example workflow head over to github to:
 When the GitHub action workflows are run successfully the summary should look like the following:  
 ![GitHub Actions workflows run successfully](GitHubActionJobsRunSuccessfully.png)
 
-GitHub Actions workflows run successfully{#caption-attachment-51349}
+GitHub Actions workflows run successfully
 
 You got a chance to see the new distributions added to `actions/setup-java@v2` for you to choose from. Also, you were shown the **New** `foojayio/setup-java@disco` GitHub Actions that enables you to specify **ANY** build distribution! When using this action you can remove the `distribution` attribute it will default to using `zulu` as a distribution. And lastly you saw the GitHub Actions CI/CD job run successfully.
 

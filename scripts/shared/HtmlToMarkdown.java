@@ -234,23 +234,6 @@ public final class HtmlToMarkdown {
         // preserved HTML blocks by the passes below. See decodeCloudflareEmails.
         decodeCloudflareEmails(content);
 
-        // WordPress stamps every heading with a positional anchor
-        // (<h2 id="h2-2-where-the-dedup-check-actually-lives">), which Flexmark
-        // faithfully carries over as Markdown attribute syntax -- `## Title
-        // {#h2-2-...}`. Dropped here so Hugo generates its own readable id from
-        // the heading text instead. See cleanup/HeadingAnchors.java for the
-        // reasoning and for the one-off cleanup of already-converted content.
-        content.select("h1, h2, h3, h4, h5, h6").removeAttr("id");
-
-        // The same id, stamped on a LINK instead of a heading -- Medium-imported
-        // posts carry `<a id="31db">` on every paragraph's first link. Flexmark
-        // carries it over identically (`[Ty Morton](https://.../){#31db}`), but
-        // this one does not round trip: Goldmark's attribute syntax applies to a
-        // whole block, so an id sitting mid-paragraph is rendered as the literal
-        // text "{#31db}" in the middle of a sentence. 39 of them were live
-        // across 28 posts; cleanup/HeadingAnchors.java cleaned those up.
-        content.select("a[id]").removeAttr("id");
-
         // YouTube embeds -> Hugo shortcode. Done first so the wrapping
         // figure.wp-block-embed isn't grabbed by SELECTOR_PRESERVE below.
         for (Element el : outermostMatches(content, SELECTOR_YOUTUBE)) {
@@ -271,10 +254,58 @@ public final class HtmlToMarkdown {
         // Emitted through the preserve/restore token like everything else, so the
         // fence body never passes through the Markdown converter (which would
         // escape its punctuation).
+        //
+        // WHAT GETS REPLACED IS THE <pre>, NOT ALWAYS THE MATCHED ELEMENT. Most
+        // blocks are a <pre class="EnlighterJSRAW">, but some are the nested
+        // shape -- <pre><code class="EnlighterJSRAW" data-enlighter-language=
+        // "kotlin">. Replacing the <code> there leaves the <pre> standing with
+        // the placeholder inside it, so Flexmark renders that <pre> as a code
+        // block of its own and the restored fence comes back wrapped in a SECOND,
+        // empty one:
+        //
+        //     ```
+        //
+        //     ```kotlin
+        //     measureTimeMillis {
+        //     ```
+        //
+        //     ```
+        //
+        // Which is not cosmetic. Only the FIRST bare ``` of that pair is read as
+        // a closing fence, so the last one on the page opens a block that never
+        // closes and the whole tail of the post renders as source code -- 7 posts
+        // were live in that state, each with everything after its final code
+        // sample shown as one grey slab.
         for (Element el : outermostMatches(content, SELECTOR_ENLIGHTERJS)) {
             String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
-            preserved.add(codeFence(el.wholeText(), el.attr("data-enlighter-language")));
-            el.replaceWith(new Element("p").text(token));
+            // Climbing rather than checking the immediate parent, because the
+            // nesting goes two deep on some posts:
+            // <pre><code class="language-xml"><code class="EnlighterJSRAW">. Each
+            // wrapper that holds nothing but this block would otherwise become an
+            // empty code block of its own.
+            Element target = el;
+            String wrapperLang = "";
+            while (target.parent() != null
+                    && ("pre".equals(target.parent().tagName()) || "code".equals(target.parent().tagName()))
+                    && target.parent().children().size() == 1
+                    && target.parent().ownText().isBlank()) {
+                target = target.parent();
+                if (wrapperLang.isEmpty()) wrapperLang = languageClass(target);
+            }
+            // A WRAPPER'S `language-*` CLASS BEATS THE ENLIGHTER ATTRIBUTE. Both
+            // of the posts with a wrapper that named a language disagreed with the
+            // plugin -- `<code class="language-xml">` around a Maven
+            // `<dependency>` block and `<code class="language-ts">` around a React
+            // component, both stamped data-enlighter-language="java", i.e. the
+            // site-wide default on a site about Java. The class is what the
+            // author's own markup said; the attribute is what the plugin was set
+            // to. This does mean the fence can name a different language from the
+            // one foojay.io highlights that block with today -- deliberately: it
+            // is XML, and reproducing the plugin's default faithfully would be
+            // reproducing a mistake.
+            preserved.add(codeFence(el.wholeText(),
+                    wrapperLang.isEmpty() ? el.attr("data-enlighter-language") : wrapperLang));
+            target.replaceWith(new Element("p").text(token));
         }
 
         // Inline <code> spans left over (the EnlighterJS ones are gone by now).
@@ -315,6 +346,30 @@ public final class HtmlToMarkdown {
             preserved.add(shortcode);
             el.replaceWith(new Element("p").text(token));
         }
+
+        // EVERY id goes, on every element, and this is deliberately not a list of
+        // the ones we have seen. Flexmark carries an id over as Markdown attribute
+        // syntax (`{#id}`), and WordPress stamps ids on anything: headings
+        // (`<h2 id="h2-2-where-the-dedup-check-actually-lives">`, positional, and
+        // corrupt at the source often enough -- "Podcast Apps" becomes
+        // `h2-1--odcast-pps`), links (`<a id="31db">` on every paragraph of a
+        // Medium import), captions (`<p id="caption-attachment-36528">`), the
+        // editor's read-more break (`<span id="more-36262">`) and whole paragraphs
+        // (`<p class="sect0" id="_quarkus_unpacked_...">` on an Asciidoc import).
+        //
+        // Only the heading case round trips: Goldmark applies an attribute block
+        // to a heading, so everything else is rendered to the reader as the
+        // literal text "{#caption-attachment-36528}" at the end of a paragraph.
+        // 1268 of those were live across 91 posts, which is what taking the
+        // elements one at a time cost -- headings and links were each fixed here
+        // when they were noticed, and the next kind of element simply started the
+        // bug again. Nothing downstream reads an id, so there is nothing to keep
+        // a list for. See cleanup/HeadingAnchors.java, which repairs content/.
+        //
+        // AFTER the preserve passes above, so a raw-HTML block keeps its own ids:
+        // those are rendered verbatim rather than converted, and an author's
+        // hand-written footnote or in-page anchor inside one still has to resolve.
+        content.select("[id]").removeAttr("id");
 
         // Brand capitalization, applied LAST -- after every preserve pass above, so
         // a code fence, a widget, a gallery and a shortcode are all placeholder
@@ -817,6 +872,22 @@ public final class HtmlToMarkdown {
      *
      * "generic"/"raw"/"text" mean "no highlighting" and become a bare fence.
      */
+    /**
+     * The language named by an element's `language-x` / `lang-x` class, or "".
+     * The convention every Markdown-to-HTML converter emits for a fence, so it
+     * is what an author's own ```xml survived as through the import into
+     * WordPress -- see the EnlighterJS pass in toMarkdown for why it wins over
+     * the plugin's attribute when the two disagree.
+     */
+    static String languageClass(Element el) {
+        for (String cls : el.classNames()) {
+            String c = cls.toLowerCase(Locale.ROOT);
+            if (c.startsWith("language-")) return c.substring("language-".length());
+            if (c.startsWith("lang-")) return c.substring("lang-".length());
+        }
+        return "";
+    }
+
     public static String fenceLanguage(String enlighterLanguage) {
         String l = enlighterLanguage == null ? "" : enlighterLanguage.trim().toLowerCase(Locale.ROOT);
         return switch (l) {

@@ -28,19 +28,19 @@ There are a couple reasons why a CLI can be a good use case for you and your use
 
 {{< img src="image1-700x135.png" class="size-medium" alt="2 commands, one usiong the java -jar expression and the other using a native tool" width="700" height="135" >}}
 
-  Using a native application from the CLI is cleaner than using java -jar{#caption-attachment-46678}
+  Using a native application from the CLI is cleaner than using java -jar
 
 * Compared to running in an IDE, or via a GUI, CLIs make it very easy to interface (pipe) with other terminal tools, or scripts. <br />
 
 {{< img src="image2-700x168.png" class="size-medium" alt="2 bash commands, piped into each other" width="700" height="168" >}}
 
-  Usage of piping in Bash{#caption-attachment-46679}
+  Usage of piping in Bash
 
 * CLIs usually also have a very clear and embedded man / help page. This helps your user use the tool in the right way and avoids having to look at documentation or ask for help. <br />
 
 {{< img src="image3-700x335.png" class="size-medium" alt="The help commands from swacli" width="700" height="335" >}}
 
-  Help is a very expressive way to have information about the tool{#caption-attachment-46680}
+  Help is a very expressive way to have information about the tool
 
 * Finally, we can perpetuate stereotypes. Everybody knows that real developers only use the command line *DUH*. (Please don't listen to people, and use whatever you prefer / are most productive with)
 
@@ -60,7 +60,7 @@ At its core, picoCli is nothing more than a Java library. To add it to your proj
 
 {{< img src="image4-662x510.png" class="size-medium" alt="A snippet of the kapt related part of my gradle file" width="662" height="510" >}}
 
-how the gradle configuration looks like in Gradle for a Kotlin project.{#caption-attachment-46681}
+how the gradle configuration looks like in Gradle for a Kotlin project.
 
 *Note: Even though I love the annotation processor, I tend to disable it because it has a tendency to slow down my IDE a lot.*
 
@@ -70,7 +70,7 @@ As usual, the first thing we want to do with a new tool is to run Hello World.
 
 {{< img src="image5-700x312.png" class="size-medium" alt="Hello World using picoCLI" width="700" height="312" >}}
 
-Hello World using picoCLI{#caption-attachment-46682}
+Hello World using picoCLI
 
 From this example, we discover a few things :
 
@@ -80,7 +80,7 @@ From this example, we discover a few things :
 
 {{< img src="image6-700x126.png" class="size-medium" alt="Result of the help command of sw" width="700" height="126" >}}
 
-Result of the help command of sw{#caption-attachment-46683}
+Result of the help command of sw
 > "A user interface is like a joke, if you have to explain it it's not that great" - Martin LeBlanc.
 
 *Tip :Make sure to describe all you can when defining your CLI, picoCLI will make sure to generate great help for you and make sure your users are not confused.*
@@ -97,7 +97,7 @@ Without being able to provide any inputs to it, a CLI usage would be very limite
 
 {{< img src="image7-700x349.png" class="size-medium" alt="Using argument groups with pico CLI. Snippet of code" width="700" height="349" >}}
 
-  Our arguments and commands for to search for StarWars information{#caption-attachment-46684}
+  Our arguments and commands for to search for StarWars information
 
 * We define our search query using the Parameter annotation. Because there is only one parameter, we place it at index 0. And because we allow the search query to be empty, we define an [arity](https://en.wikipedia.org/wiki/Arity) of 0 to 1. Just like for databases, an arity defines the number of arguments the parameter can take (bounded by 0, 1 or n).
 * We define two *options*, which define the search mode (planet, or character). We define short, and long names for them
@@ -107,7 +107,7 @@ Here is what happens when trying to run the code without specifying one option :
 
 {{< img src="image8-700x197.png" class="size-medium" alt="The error message when using the tool without argument" width="700" height="197" >}}
 
-Missing required argument when running the example. Good!{#caption-attachment-46685}
+Missing required argument when running the example. Good!
 > Tip : Don't break conventions that have been there for decades. -i (input) , -o (output), -r (recursive) have typical meanings when using command lines. Make sure to apply those unwritten conventions
 
 ## SubCommands for a better user experience
@@ -116,7 +116,7 @@ You may already have heard or seen subcommands in CLIs. Subcommands are basicall
 
 {{< img src="image9-700x435.png" class="size-medium" alt="Snippet of code using Subcommands" width="700" height="435" >}}
 
-Same example, using subcommands this time{#caption-attachment-46686}
+Same example, using subcommands this time
 
 I omitted all the non-crucial information here. What is important to note is that at their core, **subcommands are literally nothing else than commands themselves** . In this snippet, I created a *PlanetsCommand* as well as a *PeopleCommand* , and defined them as subcommands using the subcommand argument of the annotation. Note the use of *HelpCommand* , which is provided by picoCLI to allow for `sw help` usage.
 
@@ -130,7 +130,7 @@ Picturing a *Response* object that contains a number of results, together with d
 
 {{< img src="image10-700x250.png" class="size-medium" alt="An example of formatted text using the picoCLI format" width="700" height="250" >}}
 
-An example of formatted text using the picoCLI format{#caption-attachment-46687}
+An example of formatted text using the picoCLI format
 
 ## Native compilation for a blazing fast experience
 
@@ -140,7 +140,7 @@ picoCLI supports GraalVM native compilation by default (unless you added some un
 
 {{< img src="image11-700x166.png" class="size-medium" alt="Compiling a native image for our swacli application" width="700" height="166" >}}
 
-Compiling a native image for our swacli application{#caption-attachment-46688}
+Compiling a native image for our swacli application
 
 **On my machine, the execution time for `sw planets tatooine` goes from around 1.6 seconds to a whooping 0.03 seconds** . A must have, clearly (if you can offer the increased compilation time and the added complexity for multiplatforms usage)! [You can read more about GraalVM's native-compilation here](https://www.graalvm.org/reference-manual/native-image/).
 

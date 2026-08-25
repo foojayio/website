@@ -22,7 +22,7 @@ In the [previous article](https://foojay.io/today/openrewrite-automatic-code-ref
 This article explains how to improve, refactor, and move a Spring Boot application with OpenRewrite.  
 ![Open Rewrite](OpenRewrite.webp)
 
-Source: OpenReWrite{#caption-attachment-102151}
+Source: OpenReWrite
 
 Before proceeding, we shall understand the various goals in the **Maven or Gradle plugin** **configuration**.
 

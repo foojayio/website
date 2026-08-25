@@ -16,13 +16,13 @@ related_posts:
 frozen: false
 ---
 
-**The TornadoVM API is designed to aid Java programmers in adapting their code bases for hardware acceleration. As explained in a previous [++article++](https://foojay.io/today/migrating-applications-to-tornadovm-v0-15-part-1/), the TornadoVM API exposes two key Java objects for programmers, the [++TaskGraph++](https://github.com/beehive-lab/TornadoVM/blob/master/tornado-api/src/main/java/uk/ac/manchester/tornado/api/TaskGraph.java) and the [++TornadoExecutionPlan++](https://github.com/beehive-lab/TornadoVM/blob/master/tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoExecutionPlan.java). The former is used to define which methods should be offloaded on an accelerator as well as how often the data will flow. The latter is used to configure how the execution will take place (e.g., with a warmup, with a specific grid, with a profiler, etc.) and contains a method that actually invokes the execution. More information about how to use those objects are provided [++here++](https://tornadovm.readthedocs.io/en/latest/programming.html#selecting-the-methods-to-be-accelerated-using-a-task-graph-api).**{#viewer-foo}
+**The TornadoVM API is designed to aid Java programmers in adapting their code bases for hardware acceleration. As explained in a previous [++article++](https://foojay.io/today/migrating-applications-to-tornadovm-v0-15-part-1/), the TornadoVM API exposes two key Java objects for programmers, the [++TaskGraph++](https://github.com/beehive-lab/TornadoVM/blob/master/tornado-api/src/main/java/uk/ac/manchester/tornado/api/TaskGraph.java) and the [++TornadoExecutionPlan++](https://github.com/beehive-lab/TornadoVM/blob/master/tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoExecutionPlan.java). The former is used to define which methods should be offloaded on an accelerator as well as how often the data will flow. The latter is used to configure how the execution will take place (e.g., with a warmup, with a specific grid, with a profiler, etc.) and contains a method that actually invokes the execution. More information about how to use those objects are provided [++here++](https://tornadovm.readthedocs.io/en/latest/programming.html#selecting-the-methods-to-be-accelerated-using-a-task-graph-api).**
 
 This article aims to present various patterns of defining the data transfers based on the diverse requirements of Java applications. For instance, some applications may need to transfer data to the accelerator every time that a computation is performed, while others may need to transfer them on demand. Additionally, some applications may need to process more data than the actual memory capacity of the accelerator.
 
 ## Pattern 1. Data that fit into the GPU memory
 
-The TornadoVM API exposes two methods to configure which data correspond to the input and the output of a TaskGraph. This is happening via the **transferToDevice** for the inputs and **transferToHost** for the outputs. Those methods accept an additional configuration which is the **DataTransferMode**.{#viewer-r55ph1440}
+The TornadoVM API exposes two methods to configure which data correspond to the input and the output of a TaskGraph. This is happening via the **transferToDevice** for the inputs and **transferToHost** for the outputs. Those methods accept an additional configuration which is the **DataTransferMode**.
 
 ### a) Transferring input data in every execution
 
@@ -96,9 +96,9 @@ An example of this API call is shown in one of the TornadoVM unit-tests, [here](
 
 ## Summary
 
-This article aims to show how TornadoVM programmers can utilize the API functions for transferring data to the accelerator's (e.g., GPU) memory, and backwards, in the frequency of every execution, first execution or under demand.{#viewer-8gzhf10345}
+This article aims to show how TornadoVM programmers can utilize the API functions for transferring data to the accelerator's (e.g., GPU) memory, and backwards, in the frequency of every execution, first execution or under demand.
 
-Note that this blog shows the API functions as exist in the current version TornadoVM v1.0.7 (commit point: [++f1e670d++](https://github.com/beehive-lab/TornadoVM/commit/f1e670d58625f10ed0b18ad2e1b530c55aa1f2e9)).{#viewer-o3lz428286}
+Note that this blog shows the API functions as exist in the current version TornadoVM v1.0.7 (commit point: [++f1e670d++](https://github.com/beehive-lab/TornadoVM/commit/f1e670d58625f10ed0b18ad2e1b530c55aa1f2e9)).
 
 ### Useful links
 

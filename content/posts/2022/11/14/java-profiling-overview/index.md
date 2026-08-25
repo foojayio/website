@@ -43,8 +43,6 @@ While working on this talk, I collected a list of interesting conference talks o
 
 This list includes talks on a variety of profilers, ranging from deep dives to overviews. Many of these talks and people were recommended elsewhere on the internet, on blogs, on Twitter, or in private conversations. Which I present in the following.
 
-{#more-61012}
-
 I start with a collection of notable blogs which you definitely read if you're interested to go deeper into profiling:
 
 * Aleksey Shipilev: <https://shipilev.net/>

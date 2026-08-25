@@ -49,11 +49,11 @@ TornadoInsight simplifies the testing process for individual TornadoVM tasks. Af
 
 {{< img src="Vector_Addition_Fig3-1024x648.webp" class="aligncenter size-large is-resized" width="1024" height="648" style="width:605px;height:auto" >}}
 
-**With its dynamic testing framework, developers can seamlessly conduct tests on specific tasks within their codebase.** TornadoInsight dynamically generates a test file, guides the automatic generation of the Main method and TaskGraph objects needed by TornadoVM, and automatically creates and initializes variables based on parameter types.{#9f10k76530}
+**With its dynamic testing framework, developers can seamlessly conduct tests on specific tasks within their codebase.** TornadoInsight dynamically generates a test file, guides the automatic generation of the Main method and TaskGraph objects needed by TornadoVM, and automatically creates and initializes variables based on parameter types.
 
-Then, it invokes the TornadoVM runtime on the developer's machine to run the generated code. This functionality streamlines the debugging process, making it convenient for developers to identify and resolve issues in their TornadoVM applications.{#9f10k76530}
+Then, it invokes the TornadoVM runtime on the developer's machine to run the generated code. This functionality streamlines the debugging process, making it convenient for developers to identify and resolve issues in their TornadoVM applications.
 
-**If a TornadoVM task is compatible with TornadoVM, the test outputs the generated OpenCL kernel code for it.**{#y51fr5434}
+**If a TornadoVM task is compatible with TornadoVM, the test outputs the generated OpenCL kernel code for it.**
 
 {{< img src="TornadoInsight_successful_compilation-1024x653.webp" class="size-large is-resized" width="1024" height="653" style="width:840px;height:auto" >}}
 
@@ -64,40 +64,34 @@ If it is not compatible, it will output an exception stack trace. In addition, t
 
 ## 1. Installation
 
-Getting started with TornadoInsight is a straightforward process:{#4uasp10988}
+Getting started with TornadoInsight is a straightforward process:
 
 * Open IntelliJ IDEA.
 * Navigate to "Preferences" or "Settings" depending on your operating system.
 * Select "Plugins" from the menu.
 * Search for "TornadoInsight" and click "Install."
 
-{#sp8hymit0mn90779}
-
 ### 2. Pre-requisites
 
-TornadoInsight invokes Java and TornadoVM on the developers' local machine. Hence, developers must ensure that the following are already installed:{#3hnp311003}
+TornadoInsight invokes Java and TornadoVM on the developers' local machine. Hence, developers must ensure that the following are already installed:
 
 * TornadoVM \>= 1.0
 * JDK \>= 21
 
-{#60i46mit0mn90786}
-
 ### 3. Configuration of TornadoInsight
 
-In order to enable the dynamic inspection feature of TornadoInsight, developers need to configure the feature after installation, by performing the following steps: {#ud3fs11016}
+In order to enable the dynamic inspection feature of TornadoInsight, developers need to configure the feature after installation, by performing the following steps:
 
 * Navigate to "Preferences" or "Settings" depending on your operating system.
 * Select "TornadoInsight" from the menu.
 
-{#x22x9mit0mn90793}
+Developers should configure the TornadoVM root directory (i.e. the path to the TornadoVM cloned repository) and select a JDK which should be \>= JDK 21.
 
-Developers should configure the TornadoVM root directory (i.e. the path to the TornadoVM cloned repository) and select a JDK which should be \>= JDK 21.{#ie6hn11024}
-
-Additionally, developers should indicate a tentative "Max array size" that can be used by TornadoInsight to set the size of the input and output arrays of a TornadoVM task.{#ie6hn11024}  
+Additionally, developers should indicate a tentative "Max array size" that can be used by TornadoInsight to set the size of the input and output arrays of a TornadoVM task.
 
 {{< img src="TornadoInsight_Configuration_Plugin-1024x653.webp" class="aligncenter size-large is-resized" width="1024" height="653" style="width:643px;height:auto" >}}
 
-In **macOS Catalina** and **later,** there may be the need to remove the quarantine attribute before selecting the JDK. To do this, run the following:{#vcaap82116}
+In **macOS Catalina** and **later,** there may be the need to remove the quarantine attribute before selecting the JDK. To do this, run the following:
 
 ```
 $ sudo xattr -r -d com.apple.quarantine path/to/jdk
@@ -105,16 +99,16 @@ $ sudo xattr -r -d com.apple.quarantine path/to/jdk
 
 ### 4. Utilization of the TornadoInsight On-the-Fly Static Checker
 
-During development, TornadoInsight will actively scan "on-the-fly" for unsupported Java features of TornadoVM in the project. The static checker will pop notifications and detailed explanations that can help developers to address compatibility issues promptly.{#td9py25077}
+During development, TornadoInsight will actively scan "on-the-fly" for unsupported Java features of TornadoVM in the project. The static checker will pop notifications and detailed explanations that can help developers to address compatibility issues promptly.
 
 ### 5. Dynamic Testing Framework for TornadoVM Tasks
 
-TornadoInsight provides a tool window to display TornadoVM tasks in the current editor at real time.{#zyrso25083}
+TornadoInsight provides a tool window to display TornadoVM tasks in the current editor at real time.
 
-The tool window can be found in the sidebar on the right-hand side of IDEA.{#zyrso25083}
+The tool window can be found in the sidebar on the right-hand side of IDEA.
 
-Then developers can select one or more tasks, click the Run button in the Toolbar to run the test, and TornadoInsight will show a console to print the test results.{#zyrso25083}
+Then developers can select one or more tasks, click the Run button in the Toolbar to run the test, and TornadoInsight will show a console to print the test results.
 
-The plugin is available in the JetBrains [++Marketplace++](https://plugins.jetbrains.com/plugin/23309-tornadoinsight)!{#lsmga25087}
+The plugin is available in the JetBrains [++Marketplace++](https://plugins.jetbrains.com/plugin/23309-tornadoinsight)!
 
 Blog reposted from [tornadovm.org](https://www.tornadovm.org/post/introducing-tornadoinsight-unleashing-the-power-of-tornadovm-in-intellij-idea)

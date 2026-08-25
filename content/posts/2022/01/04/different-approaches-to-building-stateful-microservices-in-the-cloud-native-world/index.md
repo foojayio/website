@@ -32,7 +32,6 @@ We will first iron out a few terminologies that some folks appear to be using al
 First of all, let's take a look at the[definition](https://github.com/cncf/toc/blob/main/DEFINITION.md " definition ")as published by the Cloud Native Computing Foundation:
 > Cloud native technologies empower organizations to build and run scalable applications in modern, dynamic environments such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach.
 
-{#more-51105}
 > These techniques enable loosely coupled systems that are resilient, manageable, and observable. Combined with robust automation, they allow engineers to make high-impact changes frequently and predictably with minimal toil.These techniques enable loosely coupled systems that are resilient, manageable, and observable. Combined with robust automation, they allow engineers to make high-impact changes frequently and predictably with minimal toil.
 
 I'd like to think of cloud native as an "extension" to the fundamental building blocks of the cloud infrastructure. It is what gives "life" to an otherwise rather purely mechanical set of structures.

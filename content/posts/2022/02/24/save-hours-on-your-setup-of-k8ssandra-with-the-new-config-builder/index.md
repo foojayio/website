@@ -77,4 +77,3 @@ Curious to learn more about (or play with) Cassandra itself? We recommend trying
 7. [Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS)
 8. [Digital Ocean](https://www.digitalocean.com/) cloud infrastructure
 9. [Amazon Elastic Kubernetes Service](https://aws.amazon.com/eks/) (EKS)
-{#block-d107d208-ee3b-455b-bea8-28a7f20a6cea}

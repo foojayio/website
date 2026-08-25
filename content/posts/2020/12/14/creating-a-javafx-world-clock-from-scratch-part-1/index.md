@@ -74,7 +74,7 @@ As with any tool, practice makes perfect. You will be surprised how easy it is t
 
 {{< img src="Screen-Shot-2020-12-07-at-11.48.17-PM-700x488.png" class="size-medium" alt="Scene Builder" width="700" height="488" >}}
 
-JavaFX Scene Builder{#caption-attachment-36528}
+JavaFX Scene Builder
 
 **Basic Layout of the Clock Widget**   
 
@@ -101,13 +101,11 @@ Below is a the node hierarchy in more details:
 Other than the nodes representing the clock face, I feel most of the other nodes in the hierarchy shown above are pretty self explanatory. For brevity, I will only describe how the clock face was assembled, specifically the hour hand (node) parts. Shown below are the parts that make up the hour hand nodes (shapes).  
 ![Clock parts](Screen-Shot-2020-12-08-at-12.29.31-AM.png)
 
-Parts of the hour hand on the clock face{#caption-attachment-36529}
+Parts of the hour hand on the clock face
 
 After showing you the hierarchy and what shapes consist of the clock face lets look at how they are styled. Instead of showing the styling properties in the Scene Builder UI, I will show you an excerpt of the code listing of its FXML file representing the Group node. We'll only focus on the containing hour hand nodes as children of the Group node.
 
 An excerpt of the JavaFX Scene Builder's **FXML** representing the hour hand shape nodes:
-
-```xml
 
 ```xml
 <Group>
@@ -149,8 +147,6 @@ An excerpt of the JavaFX Scene Builder's **FXML** representing the hour hand sha
       </Circle>
    </children>
 </Group>
-```
-
 ```
 
 Looking at the XML above you'll notice the three children nodes Circle, Arc, and Circle representing the hour hand track, hour hand arc, and hour hand tip respectively. Each shape element will have its own styling attributes that I will describe in more details below.
@@ -205,7 +201,7 @@ When experimenting with Scene Builder, you get to play with changing a shapes fi
 
 {{< img src="Screen-Shot-2020-12-08-at-12.48.07-PM-499x510.png" class="size-medium" alt="Scene Builder Altering fill color" width="499" height="510" >}}
 
-Scene Builder's fill color process{#caption-attachment-36540}
+Scene Builder's fill color process
 
 I want to draw your attention to two things you may not have noticed:
 
@@ -215,7 +211,7 @@ I want to draw your attention to two things you may not have noticed:
 Relating to fx:id attributes you'll notice the hour hand tip (circle node) has the value `fx:id="hourHandTip"`. These allow Java code (Controllers) to interact with JavaFX Node object during runtime (use of dependency injection). Of course this will be discussed further in [Part 2](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-2/ "Part 2") of this blog series.  
 ![World Clock Widget](Screen-Shot-2020-12-08-at-1.50.24-PM.png)
 
-World Clock Widget{#caption-attachment-36542}
+World Clock Widget
 
 So there you have it a slick looking world clock!
 

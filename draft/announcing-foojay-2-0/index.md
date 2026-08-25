@@ -116,7 +116,12 @@ to look for:
 - **10,270 non-breaking spaces** used to indent code samples. They *look* like
   indentation and break the moment you paste the snippet into an editor.
 - **14,344 heading anchors** of the form `#h2-3-some-title` — numbered by
-  position, so inserting one heading silently renumbered the rest.
+  position, so inserting one heading silently renumbered the rest. Another
+  1,268 of the same ids, stamped on captions and paragraphs instead of
+  headings, were being *printed to the reader* mid-article on 91 posts.
+- **7 posts whose entire tail rendered as a block of source code**, because one
+  code sample had been wrapped in an extra, empty code fence and the last one
+  on the page never closed.
 - **279 email addresses** that no script could see at all: Cloudflare replaces
   them with a placeholder plus an encoded copy that only a browser puts back.
 - **259 gallery images** across 94 posts, stored as thirty lines of block markup

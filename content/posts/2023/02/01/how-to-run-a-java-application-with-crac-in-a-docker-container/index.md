@@ -43,7 +43,7 @@ If you want to learn more about the project, here are some blogposts with more e
 
 [Introducing the OpenJDK "Coordinated Restore at Checkpoint" Project](https://foojay.io/today/introducing-the-openjdk-coordinated-restore-at-checkpoint-project/)
 
-[Azul Docs: Running CRaC in a Virtualized Environment (Docker)](https://docs.azul.com/core/crac/crac-guideline#running-crac-in-a-virtualized-environment-docker){#running-crac-in-a-virtualized-environment-docker}
+[Azul Docs: Running CRaC in a Virtualized Environment (Docker)](https://docs.azul.com/core/crac/crac-guideline#running-crac-in-a-virtualized-environment-docker)
 
 #### Videos on CRaC
 

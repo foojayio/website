@@ -260,12 +260,12 @@ $ jpackage --verbose \
 After, it is completed the output of the distro would be in the `.bach/workspace/package` directory as shown below:  
 ![JFX World Clock dmg](Screen-Shot-2021-03-28-at-4.02.54-PM.png)
 
-JFX World Clock dmg{#caption-attachment-43833}
+JFX World Clock dmg
 
 On MacOS, it created a dmg, and the user would double click on the file and popup the install dialog as shown below:  
 ![JFX World Clock & JPackager](Screen-Shot-2021-03-28-at-4.05.45-PM.png)
 
-JFX World Clock \& JPackage{#caption-attachment-43829}
+JFX World Clock \& JPackage
 
 Well, there you have it, a nice distributable application you can give to friends and relatives. There's a lot more that I haven't discussed, but this should be enough to get you started.
 

@@ -42,15 +42,11 @@ This article delves into the intricacies of DTrace, an innovative tool that has 
 
 As a side note, if you like the content of this and the other posts in this series check out my [**Debugging book**](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [**Java Basics book**](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/). If you want to get back to Java after a while check out my [**Java 8 to 21 book**.](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)
 
-{#dtrace-overview}
-
 ## DTrace Overview
 
 DTrace was first introduced by Sun Microsystems in 2004, DTrace quickly garnered attention for its groundbreaking approach to dynamic system tracing. Originally developed for Solaris, it has since been ported to various platforms, including MacOS, Windows, and Linux.
 
 DTrace stands out as a dynamic tracing framework that enables deep inspection of live systems – from operating systems to running applications. Its capacity to provide real-time insights into system and application behavior without significant performance degradation marks it as a revolutionary tool in the domain of system diagnostics and debugging.
-
-{#understanding-dtraces-capabilities}
 
 ## Understanding DTrace's Capabilities
 
@@ -58,15 +54,11 @@ DTrace, short for Dynamic Tracing, is a comprehensive toolkit for real-time syst
 
 Its versatility lies in its ability to provide insights into both high-level system performance and detailed process-level activities.
 
-{#system-monitoring-and-analysis}
-
 ### System Monitoring and Analysis
 
 At its core, DTrace excels in monitoring various system-level operations. It can trace system calls, file system activities, and network operations. This enables developers and system administrators to observe the interactions between the operating system and the applications running on it.
 
 For instance, DTrace can identify which files a process accesses, monitor network requests, and even trace system calls to provide a detailed view of what's happening within the system.
-
-{#process-and-performance-analysis}
 
 ### Process and Performance Analysis
 
@@ -74,15 +66,11 @@ Beyond system-level monitoring, DTrace is particularly adept at dissecting indiv
 
 This granular level of detail is invaluable for performance tuning and debugging complex software issues.
 
-{#customizability-and-flexibility}
-
 ### Customizability and Flexibility
 
 One of the most powerful aspects of DTrace is its customizability. With a scripting language based on C syntax, DTrace allows the creation of customized scripts to probe specific aspects of system behavior.
 
 This flexibility means that it can be adapted to a wide range of debugging scenarios, making it a versatile tool in a developer's arsenal.
-
-{#real-world-applications}
 
 ### Real-World Applications
 
@@ -90,21 +78,15 @@ In practical terms, DTrace can be used to diagnose elusive performance issues, t
 
 For example, it can be used to determine the cause of a slow file operation, analyze the reasons behind a process crash, or understand the system impact of a new software deployment.
 
-{#performance-and-compatibility-of-dtrace}
-
 ## Performance and Compatibility of DTrace
 
 A standout feature of DTrace is its ability to operate with remarkable efficiency. Despite its deep system integration, DTrace is designed to have minimal impact on overall system performance.
 
 This efficiency makes it a feasible tool for use in live production environments, where maintaining system stability and performance is crucial. Its non-intrusive nature allows developers and system administrators to conduct thorough debugging and performance analysis without the worry of significantly slowing down or disrupting the normal operation of the system.
 
-{#cross-platform-compatibility}
-
 ### **Cross-Platform Compatibility**
 
 Originally developed for Solaris, DTrace has evolved into a cross-platform tool, with adaptations available for MacOS, Windows, and various Linux distributions. Each platform presents its own set of features and limitations. For instance, while DTrace is a native component in Solaris and MacOS, its implementation in Linux often requires a specialized build due to kernel support and licensing considerations.
-
-{#compatibility-challenges-on-macos}
 
 ### **Compatibility Challenges on MacOS**
 
@@ -124,23 +106,17 @@ csrutil enable --without dtrace
 
 Be extra careful when issuing these commands and when working on machines where dtrace is enabled. Back up your data properly!
 
-{#customizability-and-flexibility-of-dtrace}
-
 ## Customizability and Flexibility of DTrace
 
 A key feature that sets DTrace apart in the realm of system monitoring tools is its highly customizable nature. DTrace employs a scripting language that bears similarity to C syntax, offering users the ability to craft detailed and specific diagnostic scripts.
 
 This scripting capability allows for the creation of custom probes that can be fine-tuned to target particular aspects of system behavior, providing precise and relevant data.
 
-{#adaptability-to-various-scenarios}
-
 ### **Adaptability to Various Scenarios**
 
 The flexibility of DTrace's scripting language means it can adapt to a multitude of debugging scenarios. Whether it's tracking down memory leaks, analyzing CPU usage, or monitoring I/O operations, DTrace can be configured to provide insights tailored to the specific needs of the task.
 
 This adaptability makes it an invaluable tool for both developers and system administrators who require a dynamic approach to problem-solving.
-
-{#examples-of-customizable-probes}
 
 ### **Examples of Customizable Probes**
 
@@ -153,8 +129,6 @@ sudo dtrace -qn 'syscall::write:entry, syscall::sendto:entry /pid == $target/ { 
 The kernel is instrumented with hooks that match various callbacks. dtrace connects to these hooks and can perform interesting tasks when these hooks are triggered. They have a naming convention, specially: `provider:module:function:name`. In this case the provider is a system call in both cases. We have no module so we can leave that part blank between the colon (`:`) symbols. We grab a write operation and `sendto` entries. When an application will write or tries to send a packet, the following code event will trigger.
 
 These things happen frequently which is why we restrict the process ID to the specific target with `pid == $target`. This means the code will only trigger for the PID passed to us in the command line. The rest of the code should be simple for anyone with basic C experience, it's a printf that would list the processes and the data passed.
-
-{#real-world-applications-of-dtrace}
 
 ## Real-World Applications of DTrace
 
@@ -267,8 +241,6 @@ We can use this information to better understand IO issues in our code or even i
 In diagnosing elusive system issues, DTrace shines by enabling detailed observation of system calls, file operations, and network activities. For instance, it can be used to uncover the root cause of unexpected system behaviors or to trace the origin of security breaches, offering a level of detail that is often unattainable with other debugging tools.
 
 Performance optimization is main area where DTrace demonstrates its strengths. It allows administrators and developers to pinpoint performance bottlenecks, whether they lie in application code, system calls, or hardware interactions. By providing real-time data on resource usage, DTrace helps in fine-tuning systems for optimal performance.
-
-{#final-words}
 
 ### Final Words
 

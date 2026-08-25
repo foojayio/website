@@ -19,8 +19,6 @@ frozen: false
 
 > **This guide is outdated since 2024. There is a new version here: [https://foojay.io/today/how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide/](_wp_link_placeholder)**
 
-{#more-61688}
-
 This article is a tutorial that guides you through the process of releasing a Java module with [JReleaser](https://jreleaser.org/) to Maven Central with Github Actions.
 
 JReleaser is a tool that streamlines the release process for Java projects, allowing developers to quickly and efficiently publish their modules to Maven Central.

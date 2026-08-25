@@ -22,8 +22,6 @@ frozen: false
 
 **Collecting important data about your code in dev and test has become trivial, it's now also getting easier to put that data to use.**
 
-{#more-103351}
-
 ## Tracing \> Debugging
 
 There are many benefits to being able to follow what your Spring Boot code is doing using tracing. When used effectively, traces can reveal a lot about the inner workings of complex systems, or provide early feedback when you make mistakes in introducing new code changes.

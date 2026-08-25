@@ -70,7 +70,7 @@ From a bird's eye view, integrating Java and Rust requires the following steps:
 
 Old-timers will have realized those are the same steps as when you need to integrate with C or C++. It's because they also can generate a system library. Let's have a look at each step in detail.
 
-### Java skeleton methods {#java-skeleton-methods}
+### Java skeleton methods
 
 We first need to create the Java skeleton methods. In Java, we learn that methods need to have a body unless they are `abstract`. Alternatively, they can be `native`: a native method delegates its implementation to a library.
 

@@ -24,24 +24,18 @@ This blog aims to explain how Java programmers can build TornadoVM with IntelliJ
 
 ## *Prerequisites*
 
-This blog uses IntelliJ IDEA 2024.2.4 version and the list of required plugins are as follows:{#r55ph1440}
+This blog uses IntelliJ IDEA 2024.2.4 version and the list of required plugins are as follows:
 
 * Python [++plugin++](https://plugins.jetbrains.com/plugin/631-python) to be installed in IntelliJ. This plugin allows python scripting from the IDE.
 
-{#x95ro33520}
-
-Additionally, the following commands must be installed in your system and should be added in your PATH in order to enable IDE to use them:{#3r714132566}
+Additionally, the following commands must be installed in your system and should be added in your PATH in order to enable IDE to use them:
 
 * **cmake** is used to build TornadoVM.
 * **pyInstaller** is used in Windows OS to build the TornadoVM executables.
 
-{#sdjl5131471}
-
 ### a) Ensure that the commands are installed in the PATH
 
 * In macOS/Linux OS, you can open a command shell and you can verify if your system recognizes cmake, by running:
-
-{#aolr5166025}
 
 ```
 $ which make
@@ -49,14 +43,12 @@ $ which make
 
 * In Windows OS, open your shell configuration (e.g. x64 Native Tools Command Prompt for VS 2022) and initialize the environment:
 
-{#7mg78166105}
-
 ```
 $ cd <path-to-TornadoVM-directory>
 $ .\bin\windowsMicrosoftStudioTools2022.cmd
 ```
 
-You can verify that your system recognizes cmake, by running:{#oe9dj102289}
+You can verify that your system recognizes cmake, by running:
 
 ```
 $ where cmake
@@ -69,7 +61,7 @@ If the commands are recognized, skip the next step (Step b).
 
 #### i) Add cmake in macOS/Linux OS
 
-Assuming that you have downloaded and installed cmake in a custom directory, you can add the directory in your PATH by updating your shell configuration file.{#bbnap124702}
+Assuming that you have downloaded and installed cmake in a custom directory, you can add the directory in your PATH by updating your shell configuration file.
 
 ##### Open your shell configuration file (e.g. .bashrc, .zshrc)
 
@@ -102,19 +94,17 @@ $ <path-to-TornadoVM-directory>\.venv\Scripts
 
 ## 1. Clone \& Install TornadoVM from Shell
 
-To initialize IDE project files for building and running TornadoVM from IntelliJ, you must have first built TornadoVM and loaded the file with the environment variables (setvars.sh, setvars.cmd), as explained in the [++Installation page++](https://tornadovm.readthedocs.io/en/latest/installation.html#installation).{#pwbqo232319}
+To initialize IDE project files for building and running TornadoVM from IntelliJ, you must have first built TornadoVM and loaded the file with the environment variables (setvars.sh, setvars.cmd), as explained in the [++Installation page++](https://tornadovm.readthedocs.io/en/latest/installation.html#installation).
 
-First you need to clone the source code from GitHub:{#srq4j260067}
+First you need to clone the source code from GitHub:
 
 ```
 $ git clone https://github.com/beehive-lab/TornadoVM.git
 ```
 
-Then, you can invoke the tornadovm-installer script which will download the dependencies and will install TornadoVM with the defined JDK and backends (e.g., opencl, ptx, spirv):{#bnas8236281}
+Then, you can invoke the tornadovm-installer script which will download the dependencies and will install TornadoVM with the defined JDK and backends (e.g., opencl, ptx, spirv):
 
 * In macOS/Linux OS:
-
-{#sziwp3780}
 
 ```
 $ cd TornadoVM
@@ -123,8 +113,6 @@ $ source setvars.sh
 ```
 
 * In Windows OS:
-
-{#amxxo4451}
 
 ```
 $ cd TornadoVM
@@ -137,7 +125,7 @@ $ setvars.cmd
 
 ## 2. Generate the IntelliJ Project Files
 
-Then you can generate the IDE project files based on your built TornadoVM instance (i.e., with the JAVA_HOME and the backends), by running:{#y050h259785}
+Then you can generate the IDE project files based on your built TornadoVM instance (i.e., with the JAVA_HOME and the backends), by running:
 
 ```
 $ tornado --intellijinit
@@ -151,7 +139,7 @@ This command will generate three files. The first two files are used to build To
 
 ## 3. Configure the generated IDE project files
 
-At first, you need to launch the IntelliJ application and open TornadoVM as a project. Then you can go in the menu (top bar) and navigate through Run and the Edit Configurations, to configure the build configuration file, as follows:{#7r0go280974}
+At first, you need to launch the IntelliJ application and open TornadoVM as a project. Then you can go in the menu (top bar) and navigate through Run and the Edit Configurations, to configure the build configuration file, as follows:
 
 **Run \> Edit Configurations \> Python \> TornadoVM-Build**  
 
@@ -161,9 +149,9 @@ At this point all fields must have been automatically populated with the correct
 
 {{< img src="Configure-Build-1024x782.png" class="aligncenter size-large is-resized" width="1024" height="782" style="width:560px;height:auto" >}}
 
-Similarly you can update the selected interpreter for the Python configuration file that is used to run the TornadoVM unit-tests:{#hx4l2378675}
+Similarly you can update the selected interpreter for the Python configuration file that is used to run the TornadoVM unit-tests:
 
-**Run \> Edit Configurations \> Python \> TornadoVM-Tests**{#27v2k387006}  
+**Run \> Edit Configurations \> Python \> TornadoVM-Tests**
 
 {{< img src="Configure-Tests-1024x784.png" class="aligncenter size-large is-resized" width="1024" height="784" style="width:566px;height:auto" >}}
 
@@ -173,7 +161,7 @@ You can select the TornadoVM-Build configuration file and run. This should build
 
 ## 5. Run TornadoVM Unit-tests from IntelliJ
 
-You can select the TornadoVM-Tests configuration file and run. This should run a subgroup of the TornadoVM unit-tests suite on the first device that is recognized in your system. If you open to edit the configurations of this file, you will see that the default arguments contain the quickPass argument which will skip the unit-tests that perform exhaustive testing and require long time to run (\~30 minutes).{#1gxfu440346}
+You can select the TornadoVM-Tests configuration file and run. This should run a subgroup of the TornadoVM unit-tests suite on the first device that is recognized in your system. If you open to edit the configurations of this file, you will see that the default arguments contain the quickPass argument which will skip the unit-tests that perform exhaustive testing and require long time to run (\~30 minutes).
 
 The outcome of running the unit-tests should be similar to this image:  
 
@@ -181,23 +169,21 @@ The outcome of running the unit-tests should be similar to this image:
 
 ## 6. Run TornadoVM Examples/Applications from IntelliJ
 
-To add a new Application you can go in the menu (top bar) and navigate through Run and the Edit Configurations, to create a new application:{#7d56w493465}
+To add a new Application you can go in the menu (top bar) and navigate through Run and the Edit Configurations, to create a new application:
 
-**Run \> Edit Configurations \> Application \> Add new run configuration...**{#mw7wg495052}
+**Run \> Edit Configurations \> Application \> Add new run configuration...**
 
 ### a) Add a name for your application
 
-For instance, you can add TornadoVM-MatrixMultiplication.{#buhog571958}
+For instance, you can add TornadoVM-MatrixMultiplication.
 
 ### b) In the "Build and run" area apply the following configurations:
 
 #### i) Add VM options
 
-You need to click Modify options and Add VM options. Once you have enabled the VM options you can obtain thee TornadoVM Java flags which enable the execution with TornadoVM, by running in the terminal:{#jm3jm584482}
+You need to click Modify options and Add VM options. Once you have enabled the VM options you can obtain thee TornadoVM Java flags which enable the execution with TornadoVM, by running in the terminal:
 
 * In macOS/Linux OS:
-
-{#lmy7i618609}
 
 ```
 $ cd <path-to-TornadoVM-directory>
@@ -207,8 +193,6 @@ $ tornado --printJavaFlags
 
 * In Windows OS:
 
-{#per2e618615}
-
 ```
 $ cd <path-to-TornadoVM-directory>
 $ .\bin\windowsMicrosoftStudioTools2022.cmd
@@ -216,7 +200,7 @@ $ setvars.cmd
 $ tornado --printJavaFlags
 ```
 
-The output of the command depends on the TornadoVM backends you've built. For example, if you build with all backends, it should be similar to this:{#mjihz571845}
+The output of the command depends on the TornadoVM backends you've built. For example, if you build with all backends, it should be similar to this:
 
 ```
 <path-to-TornadoVM-directory>/etc/dependencies/TornadoVM-graal-jdk-21/graalvm-community-openjdk-21.0.1+12.1/bin/java
@@ -229,31 +213,31 @@ The output of the command depends on the TornadoVM backends you've built. For ex
 @<path-to-TornadoVM-directory>/bin/sdk/etc/exportLists/ptx-exports --add-modules ALL-SYSTEM,tornado.runtime,tornado.annotation,tornado.drivers.common,tornado.drivers.opencl,tornado.drivers.opencl,tornado.drivers.ptx
 ```
 
-Copy the flags starting from -server to the end, and add them in the VM options field.{#t8glk631723}
+Copy the flags starting from -server to the end, and add them in the VM options field.
 
 #### ii) Configure the JDK for running your applications
 
-Configure the module not specified field to point to the JDK distribution that was used to build TornadoVM. The JDK distribution is defined in Step 1 with the --jdk option. In our example, we used GraalVM JDK 21.{#s01cj648839}
+Configure the module not specified field to point to the JDK distribution that was used to build TornadoVM. The JDK distribution is defined in Step 1 with the --jdk option. In our example, we used GraalVM JDK 21.
 
 #### iii) Configure the classpath module
 
-Configure the correct module where your application belongs to. For instance to run the Matrix Multiplication class which belongs to the TornadoVM examples module, we select:{#tq1c3684901}
+Configure the correct module where your application belongs to. For instance to run the Matrix Multiplication class which belongs to the TornadoVM examples module, we select:
 
--cp tornado-examples{#20myn940063}
+-cp tornado-examples
 
 #### iv) Configure the main class
 
-You can start typing the name of your class in the field and select it. In our example, the Main class is:{#7nayz729952}
+You can start typing the name of your class in the field and select it. In our example, the Main class is:
 
-uk.ac.manchester.tornado.examples.compute.MatrixMultiplication2D{#86juf940709}
+uk.ac.manchester.tornado.examples.compute.MatrixMultiplication2D
 
 #### v) Configure the arguments of the class
 
-You can add any values that will be selected as arguments for your class. In our example, we can define the length of the matrices to be 256.{#u8e4y774352}
+You can add any values that will be selected as arguments for your class. In our example, we can define the length of the matrices to be 256.
 
 #### vi) Save and run
 
-You can click Apply and Run your application.{#yne6f805976}  
+You can click Apply and Run your application.
 
 {{< img src="Configure-Application-1024x787.png" class="aligncenter size-large is-resized" width="1024" height="787" style="width:624px;height:auto" >}}
 

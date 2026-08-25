@@ -192,13 +192,13 @@ When [opening a Pull Request on GitHub](https://github.com/jlengrand/spring-petc
 
 {{< img src="kover2-700x336.png" class="size-medium" alt="Build and KoverVerify checks in a Github Pull request, failing here" width="700" height="336" >}}
 
-Build and KoverVerify checks in a Github Pull request, failing here{#caption-attachment-52438}
+Build and KoverVerify checks in a Github Pull request, failing here
 
 But because I am running 2 different action files, I also get extra (clickable) information from CodeCov directly as to where I should be doing better:  
 
 {{< img src="kover3-598x510.png" class="size-medium" alt="CodeCov report in my Pull Request with diff coverage" width="598" height="510" >}}
 
-CodeCov report in my Pull Request with diff coverage{#caption-attachment-52439}
+CodeCov report in my Pull Request with diff coverage
 
 ### About the IntelliJ "Run with code coverage"
 
@@ -208,7 +208,7 @@ In your run configuration, you can select "More Options" and decide to use the I
 
 {{< img src="kover4-621x510.png" class="size-medium" alt="Specify alternative coverage runner in IntelliJ" width="621" height="510" >}}
 
-Specify alternative coverage runner in IntelliJ{#caption-attachment-52437}
+Specify alternative coverage runner in IntelliJ
 
 Then, you can tell IntelliJ to run your tests with coverage like this
 

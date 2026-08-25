@@ -86,6 +86,37 @@ public class HeadingAnchors {
      */
     static final Pattern LINK_ANCHOR = Pattern.compile("\\)\\{#[^}\\n]*\\}");
 
+    /**
+     * The same id again, this time stamped on anything else WordPress felt like
+     * -- `<p class="sect0" id="_quarkus_unpacked_insights_from_the_foojay_podcast">`
+     * on an Asciidoc-imported post, `<p id="caption-attachment-36528">` under
+     * every captioned image, `<span id="more-36262">` where the editor's "read
+     * more" break was. Flexmark carries all of them over the same way, and like
+     * the link case they do NOT round trip: Goldmark applies an attribute block
+     * only to a HEADING here, so on any other line it is rendered as the literal
+     * text "{#caption-attachment-36528}" at the end of a paragraph.
+     *
+     * That this can be stripped by position alone is a measurement, not an
+     * assumption. Across content/, every one of the 1293 `{#...}` occurrences
+     * outside a code fence sits at the END of its line, and 1293 minus the 13 on
+     * a heading line is exactly the 1280 that the built HTML renders as visible
+     * text. So "at the end of a line that is not a heading" is precisely the set
+     * that is broken, with nothing else caught in it.
+     *
+     * The no-whitespace rule inside the braces is what keeps Qute and Handlebars
+     * out of it: a template tag written in prose is `{#if item.price > 100}` or
+     * `{#each rows}`, which never matches. A single-word tag (`{#insert}`) would
+     * -- but only if it were at the end of a line and outside backticks, and
+     * MID-LINE occurrences, the shape a real template tag in a sentence has, are
+     * counted and reported rather than touched. There are none today.
+     */
+    static final Pattern BODY_ANCHOR = ANCHOR;
+    /** A `{#id}` that is NOT at the end of its line: reported, never stripped. */
+    static final Pattern MIDLINE_ANCHOR = Pattern.compile("\\{#[^}\\s]*\\}(?=.*\\S)");
+    /** Inline code spans, masked before the mid-line search so `{#if}` in
+     *  backticks is not reported as a near-miss on every Qute post. */
+    static final Pattern CODE_SPAN = Pattern.compile("`[^`\\n]*`");
+
     static final Pattern ATX = Pattern.compile("^[ \\t]{0,3}#{1,6}[ \\t]");
     /** Setext underline: a run of `=` or `-` and nothing else. */
     static final Pattern SETEXT_RULE = Pattern.compile("^([ \\t]*)([=-])\\2*[ \\t]*$");
@@ -113,8 +144,9 @@ public class HeadingAnchors {
             files = s.filter(p -> p.toString().endsWith(".md")).sorted().toList();
         }
 
-        int changedFiles = 0, anchors = 0, linkAnchors = 0;
+        int changedFiles = 0, anchors = 0, linkAnchors = 0, bodyAnchors = 0;
         List<String> skipped = new ArrayList<>();
+        List<String> reported = new ArrayList<>();
 
         for (Path file : files) {
             String original = Files.readString(file);
@@ -125,22 +157,34 @@ public class HeadingAnchors {
 
             int[] count = new int[1];
             int[] linkCount = new int[1];
+            int[] bodyCount = new int[1];
             int[] inCode = new int[1];
-            String newBody = strip(body, count, linkCount, inCode);
+            List<String> midline = new ArrayList<>();
+            String newBody = strip(body, count, linkCount, bodyCount, inCode, midline);
             if (inCode[0] > 0) skipped.add(file + " (" + inCode[0] + " inside code)");
+            midline.forEach(l -> reported.add(file + ": " + l));
             if (newBody.equals(body)) continue;
 
             changedFiles++;
             anchors += count[0];
             linkAnchors += linkCount[0];
+            bodyAnchors += bodyCount[0];
             if (!dryRun) Files.writeString(file, head + newBody);
         }
 
-        System.out.printf("%s %d file(s), %d heading anchor(s), %d link anchor(s)%n",
-                dryRun ? "[dry-run] would change" : "Changed", changedFiles, anchors, linkAnchors);
+        System.out.printf("%s %d file(s), %d heading anchor(s), %d link anchor(s), %d body anchor(s)%n",
+                dryRun ? "[dry-run] would change" : "Changed", changedFiles, anchors, linkAnchors, bodyAnchors);
         if (!skipped.isEmpty()) {
             System.out.println("Left alone (inside a fenced code block):");
             skipped.forEach(s -> System.out.println("  " + s));
+        }
+        if (!reported.isEmpty()) {
+            // A `{#...}` sitting mid-line is the shape a real Qute/Handlebars tag
+            // written in a sentence has, and nothing here can tell the two apart --
+            // so it is named for a human rather than guessed at. Same posture as
+            // fetch/DiscoverJugCalendars.java printing its near-misses.
+            System.out.println("Left alone (not at the end of its line -- check by hand):");
+            reported.forEach(s2 -> System.out.println("  " + s2));
         }
         if (dryRun) System.out.println("\nNothing written. Re-run without --dry-run to apply.");
     }
@@ -157,8 +201,10 @@ public class HeadingAnchors {
      * meaning in Markdown, but leaving a 79-character rule under a 36-character
      * heading looks like damage to the next person reading the file.
      */
-    static String strip(String body, int[] count, int[] linkCount, int[] inCode) {
+    static String strip(String body, int[] count, int[] linkCount, int[] bodyCount,
+                        int[] inCode, List<String> midline) {
         String[] lines = body.split("\n", -1);
+        boolean[] drop = new boolean[lines.length];
         String openMarker = null; // non-null while inside a fence
         for (int i = 0; i < lines.length; i++) {
             Matcher fence = FENCE_LINE.matcher(lines[i]);
@@ -192,6 +238,11 @@ public class HeadingAnchors {
                 linkCount[0] += n;
             }
 
+            // Anything left mid-line is NOT ours to touch -- see MIDLINE_ANCHOR.
+            String masked = CODE_SPAN.matcher(lines[i]).replaceAll(m2 -> " ".repeat(m2.group().length()));
+            Matcher mid = MIDLINE_ANCHOR.matcher(masked);
+            while (mid.find()) midline.add("line " + (i + 1) + ": " + lines[i].strip());
+
             if (!ANCHOR.matcher(lines[i]).find()) continue;
 
             String quote = quotePrefix(lines[i]);
@@ -208,7 +259,17 @@ public class HeadingAnchors {
                 if (!rule.matches()) rule = null;
             }
             boolean setext = rule != null;
-            if (!atx && !setext) continue;
+            // Not a heading, so Goldmark never consumes this and the reader sees
+            // it. Strip it; if the anchor WAS the line -- a `<span id="more-N">`
+            // on its own, a `> {#block-...}` inside a quote -- the line goes with
+            // it, or an empty paragraph is left where the anchor used to be.
+            if (!atx && !setext) {
+                String rest = m.replaceFirst("");
+                bodyCount[0]++;
+                if (rest.isBlank()) drop[i] = true;
+                else lines[i] = quote + rest;
+                continue;
+            }
 
             String title = m.replaceFirst("");
             // An anchor-only heading line would leave an empty title; leave it be
@@ -223,7 +284,22 @@ public class HeadingAnchors {
                         + String.valueOf(c).repeat(Math.max(3, title.trim().length()));
             }
         }
-        return String.join("\n", lines);
+
+        List<String> out = new ArrayList<>();
+        for (int i = 0; i < lines.length; i++) {
+            if (!drop[i]) { out.add(lines[i]); continue; }
+            // The dropped line usually sat alone between two blank lines, so one
+            // of those blanks goes too -- otherwise every removal leaves a double
+            // blank line behind and the diff is full of whitespace churn.
+            boolean prevBlank = !out.isEmpty() && isBlankLine(out.get(out.size() - 1));
+            if (prevBlank && i + 1 < lines.length && isBlankLine(lines[i + 1])) i++;
+        }
+        return String.join("\n", out);
+    }
+
+    /** Blank, or blank apart from blockquote markers (`>` on its own). */
+    static boolean isBlankLine(String line) {
+        return line.substring(quotePrefix(line).length()).isBlank();
     }
 
     /** The blockquote markers a line opens with, or "" if it isn't quoted. */

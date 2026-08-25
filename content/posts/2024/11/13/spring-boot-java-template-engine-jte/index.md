@@ -35,8 +35,6 @@ I am pleased to present the following features that I offer:
 * Automatic reloading functionality occurs during the development process.
 * I ensure enhanced execution speed. For more details please refer this [link](https://jte.gg/#performance)
 
-{#more-114515}
-
 **Java Template Engine (JTE) is capable of integrating with various frameworks.**
 
 1. Spring MVC

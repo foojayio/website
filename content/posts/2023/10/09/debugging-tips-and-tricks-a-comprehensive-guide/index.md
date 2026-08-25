@@ -41,8 +41,6 @@ Here's a comprehensive guide to some core debugging tips and tricks.
 
 As a side note, if you like the content of this and the other posts in this series check out my [**Debugging book**](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [**Java Basics book**](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/). If you want to get back to Java after a while check out my [**Java 8 to 21 book**](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/).
 
-{#rubber-ducking-the-art-of-talking-it-out}
-
 ## **Rubber Ducking: The Art of Talking it Out**
 
 The term "Rubber Ducking" traces back to a developer who carried a rubber duck to converse with when confronted with a problem.
@@ -58,21 +56,15 @@ The duck is optional, but surprisingly helpful when practicing this approach. Th
 
 As a very experienced developer, I gained the insight of no shame. I make fun of my bugs and have a great laugh when the junior developer finds my bug. Experienced developers make stupid bugs all the time, we just don't care because experience teaches us that everyone makes stupid mistakes…
 
-{#moving-the-goalposts-redefining-the-bug}
-
 ## **Moving the Goalposts: Redefining the Bug**
 
 Bugs often start with a user-level description. As we delve deeper, we might discover the root cause lies elsewhere. Redefining the bug narrows our focus, making it easier to pinpoint the issue. This iterative process is not only a mental exercise but also aids team communication.
 
 The phrase "Moving the Goalposts" might initially sound like a negative term, suggesting inconsistency or a lack of clarity. However, when applied to debugging, it becomes a powerful technique that can streamline the problem-solving process. Let's delve deeper into this concept.
 
-{#the-evolution-of-a-bug}
-
 ### The Evolution of a Bug
 
 When users or testers report a bug, they often describe it in terms of its symptoms. For instance, a user might say, "The application crashes when I click this button." This is a user-level description, which, while accurate, is symptomatic of a deeper issue. As developers, our task is to trace the symptom back to its root cause.
-
-{#the-process-of-redefinition}
 
 ### The Process of Redefinition
 
@@ -81,15 +73,11 @@ When users or testers report a bug, they often describe it in terms of its sympt
 * **Narrowing Down**: Further investigation might reveal that the function fails because of incorrect data being fed into it. Now, the bug has been redefined again. The goalpost has moved from a UI element (the button) to a backend function, and then to data input.
 * **Update Documentation**: It's crucial to update the bug's description in the issue tracker to reflect our current understanding. This ensures that the team is aligned and that if someone else picks up the task, they have the most recent information.
 
-{#flipping-the-direction-multiple-angles-of-attack}
-
 ## **Flipping the Direction: Multiple Angles of Attack**
 
 Every system has multiple angles of approach. If one direction doesn't yield results, try another. Engage in "pair debugging" with a teammate to gain fresh perspectives on the problem.
 
 Just as a detective might approach a case from various angles to uncover the truth, developers can employ multiple strategies to identify and resolve bugs. The concept of "Flipping the Direction" emphasizes the importance of versatility and adaptability in the debugging process. Let's explore this idea further.
-
-{#the-linear-approach-to-debugging}
 
 ### The Linear Approach to Debugging
 
@@ -110,8 +98,6 @@ While this approach is systematic and often effective, it might not always lead 
 * **Challenge Assumptions**: If you're convinced that a particular module or function is the source of the bug, deliberately look elsewhere. Sometimes, the real issue lies in the least expected places.
 
 "Flipping the Direction" is more than just a debugging technique; it's a mindset. It encourages developers to be adaptable, to challenge their assumptions, and to recognize that there's always more than one way to solve a problem.
-
-{#disruptive-environments-exposing-hidden-bugs}
 
 ## **Disruptive Environments: Exposing Hidden Bugs**
 
@@ -135,8 +121,6 @@ Here are some tricks I used in the past to disrupt an environment I was debuggin
 5. **Simulating Failures**: Intentionally causing certain components or services to fail can help identify weaknesses in error handling or recovery mechanisms.
 6. **Time Manipulation**: Altering system time or simulating different time zones can expose bugs related to scheduling, time calculations, or event triggering.
 
-{#leveraging-debugging-extensions-and-tools}
-
 ## **Leveraging Debugging Extensions and Tools**
 
 Familiarize yourself with the debugging tools specific to your development environment. These tools can provide deeper insights and even disrupt the application in ways that expose hidden issues.
@@ -156,8 +140,6 @@ Tools are very domain-specific, in my current project I had to build custom tool
 7. **Simulators and Emulators**: For mobile app development, simulators (like iOS Simulator) or emulators (like Android Emulator) replicate how apps run on devices, revealing device-specific issues.
 8. **Extensions for Specific Tasks**: Many tools offer extensions or plugins that provide additional functionality. For instance, browser extensions can simulate different visual impairments, helping developers ensure accessibility.
 
-{#disconnect-and-reconnect-the-power-of-a-fresh-mindset}
-
 ## **Disconnect and Reconnect: The Power of a Fresh Mindset**
 
 Sometimes, stepping away from the problem and returning with a fresh perspective can be the key to finding a solution. When you come back, approach the problem anew, without relying on previous assumptions.
@@ -168,8 +150,6 @@ The increase in frustration is disheartening. Repeatedly hitting a wall with the
 
 Going to sleep, lunch or just taking a walk can make a tremendous difference in your problem-solving process.
 
-{#embrace-the-challenge-finding-joy-in-debugging}
-
 ## **Embrace the Challenge: Finding Joy in Debugging**
 
 Debugging should be a stimulating puzzle. If you're not enjoying it, try debugging unfamiliar code or tasks outside your job scope. Remember, even the best developers face challenges, and it's okay to seek help or share your experiences. The developers who are best at debugging treat it like a challenge and enjoy the bugs more than coding.
@@ -177,8 +157,6 @@ Debugging should be a stimulating puzzle. If you're not enjoying it, try debuggi
 At its core, debugging is a problem-solving exercise. It's about tracing anomalies, understanding intricate systems, and restoring harmony to a codebase. Like any challenge, it comes with its hurdles, but also with the potential for immense satisfaction upon resolution. It requires thinking outside of the box and holistic understanding.
 
 Every debugging session is a learning opportunity. It allows developers to deepen their understanding of the system, discover new tools, or refine their problem-solving skills.
-
-{#strategies-to-embrace-the-debugging-challenge}
 
 ### Strategies to Embrace the Debugging Challenge
 
@@ -199,15 +177,11 @@ Here are some of the common things we can do to make it more pleasant:
 
 Most importantly, distinguish between job-related stress and personal embarrassment. Everyone makes mistakes, even seasoned developers. Sharing your experiences can be cathartic and offer perspective. If work stress is the culprit, consider discussing it with your manager or seeking mentorship.
 
-{#use-a-process}
-
 ## **Use a Process**
 
 I discussed the process of debugging and the underlying theory quite a bit in previous posts. Specifically the [high-level process](https://debugagent.com/the-systemic-process-of-debugging) and the more hands-on [tongs approach](https://debugagent.com/eliminating-bugs-using-the-tong-motion-approach).
 
 Both will make the process more rigid and less likely to drag you down a road chasing your own tail.
-
-{#conclusion}
 
 ## **Conclusion**
 

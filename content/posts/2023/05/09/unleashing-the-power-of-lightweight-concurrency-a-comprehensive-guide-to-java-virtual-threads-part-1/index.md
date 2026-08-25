@@ -46,8 +46,6 @@ With this virtual thread, we get all the benefits traditional threads have, plus
 
 Consider the following example:
 
-```
-
 ```java
 try (var executor = Executors.newVirtualThreadPerTaskExecutor()) 
     IntStream.range(0, 10_000).forEach(i -> {
@@ -57,8 +55,6 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor())
         });
     });
 }
-```
-
 ```
 
 The JDK can now run up to 10,000 concurrent virtual threads on a small number of operating system (OS) threads, as little as one, to execute the simple code above that involves sleeping for one second.
@@ -77,13 +73,9 @@ To manage your JDK installations, we recommend using SDKMAN, a versatile tool th
 
 Once you have SDKMAN installed, you can list available JDK versions, including early access builds, and install the desired version:
 
-```
-
 ```java
 sdk list java
 sdk install java <version>
-```
-
 ```
 
 Replace \<version\> with the specific version you'd like to install, such as the early access build of JDK 21 that includes virtual thread support.
@@ -110,8 +102,6 @@ You don't need to start the thread; it automatically starts and executes.
 
 Note that virtual threads are always daemon threads. So make sure you wait on the main thread. Otherwise, you may not see the output.
 
-```
-
 ```java
 var thread = Thread.startVirtualThread(() -> 
    System.out.println("Hello world!");
@@ -120,13 +110,9 @@ var thread = Thread.startVirtualThread(() ->
 thread.join();
 ```
 
-```
-
 ### Using the builder method
 
 Like the factory method, you can use the builder method, which is much more convenient as you can create **started** or **unstarted** threads.
-
-```
 
 ```java
 var started =Thread.ofVirtual().start(() -> 
@@ -134,11 +120,7 @@ var started =Thread.ofVirtual().start(() ->
 });
 ```
 
-```
-
 To create an **unstarted** thread, you can use the following:
-
-```
 
 ```java
 var unstarted = Thread.ofVirtual().unstarted(() -> 
@@ -146,13 +128,9 @@ var unstarted = Thread.ofVirtual().unstarted(() ->
 });
 ```
 
-```
-
 ### Using the Executors
 
 If we want to move away from our existing code, which is heavily dependent on executors, one new method that is just one line long and uses virtual threads has been added.
-
-```
 
 ```java
 var executorService = Executors.newVirtualThreadPerTaskExecutor()
@@ -161,8 +139,6 @@ executorService.submit(() -> {
    System.out.println("Hello world!");
 
 });
-```
-
 ```
 
 ## Conclusion

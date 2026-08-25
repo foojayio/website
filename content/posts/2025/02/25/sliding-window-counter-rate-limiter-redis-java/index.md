@@ -172,7 +172,7 @@ long totalCount = subWindowCounts.values().stream()
 boolean isAllowed = totalCount < limit;
 ```
 
-**Step 3: Track Requests by Sub-Window**If the request is allowed to be processed, we'll determine the actual current sub window in which the request falls into and that will be used to separate counters within our hash.{#a404}
+**Step 3: Track Requests by Sub-Window**If the request is allowed to be processed, we'll determine the actual current sub window in which the request falls into and that will be used to separate counters within our hash.
 
 ```
 if (isAllowed) {
@@ -195,25 +195,25 @@ if (isAllowed) {
 return isAllowed;
 ```
 
-Here, we'll start a transaction to ensure that our operation is going to be atomic and that all of our commands are going to be sent at once to the database. This will allow us to achieve even a better performance by avoiding unnecessary network trips.{#f308}
+Here, we'll start a transaction to ensure that our operation is going to be atomic and that all of our commands are going to be sent at once to the database. This will allow us to achieve even a better performance by avoiding unnecessary network trips.
 
-Then, we will call the `hincrBy` function to increment the current counter, the current sub window we calculated before. The key is the key to the hash. The currentSubWindow is the field key within this hash and 1 is the value by which this field will be increment by.{#0a34}
+Then, we will call the `hincrBy` function to increment the current counter, the current sub window we calculated before. The key is the key to the hash. The currentSubWindow is the field key within this hash and 1 is the value by which this field will be increment by.
 
-If the actual hash doesn't exist yet, don't worry, Redis will create it for us.{#026e}
+If the actual hash doesn't exist yet, don't worry, Redis will create it for us.
 
-After that, we'll set an expiration for this field using the new Redis `HEXPIRE` command.{#c2b3}
+After that, we'll set an expiration for this field using the new Redis `HEXPIRE` command.
 
-This function receives the key to the hash, the expiration time, which is our `subWindowSize`, the expiration option, and the fields which we want the expiration to be set for.{#0e3f}
+This function receives the key to the hash, the expiration time, which is our `subWindowSize`, the expiration option, and the fields which we want the expiration to be set for.
 
-The `NX` expiration option is important here because it tells Redis to only set the expiration to our field if it hadn't been set before. If we don't do this, we'll reset the expiration everytime a new request comes in and end up extending the sub window for longer than it should exist.{#1673}
+The `NX` expiration option is important here because it tells Redis to only set the expiration to our field if it hadn't been set before. If we don't do this, we'll reset the expiration everytime a new request comes in and end up extending the sub window for longer than it should exist.
 
-After we run the transaction, Redis will return the response of all commands we sent. To make sure our operation succeeded, we need to make sure the response isn't empty.{#e812}
+After we run the transaction, Redis will return the response of all commands we sent. To make sure our operation succeeded, we need to make sure the response isn't empty.
 
-And finally, we return if the request is able to proceed{#957d}
+And finally, we return if the request is able to proceed
 
 ## Full Implementation
 
-Here's the full code for the SlidingWindowCounterRateLimiter class:{#f613}
+Here's the full code for the SlidingWindowCounterRateLimiter class:
 
 ```
 package io.redis;
@@ -269,21 +269,21 @@ public class SlidingWindowCounterRateLimiter {
 }
 ```
 
-And we're ready to start testing its behavior!{#cb8b}
+And we're ready to start testing its behavior!
 
-To ensure our Sliding Window Counter Rate Limiter behaves as expected, we'll write tests for various scenarios. For this, we'll use three tools:{#86a3}
+To ensure our Sliding Window Counter Rate Limiter behaves as expected, we'll write tests for various scenarios. For this, we'll use three tools:
 
-1. **Redis TestContainers**: This library spins up an isolated Redis container for testing. This means we don't need to rely on an external Redis server during our tests. Once the tests are done, the container is stopped, leaving no leftover data.{#a6f6}
+1. **Redis TestContainers**: This library spins up an isolated Redis container for testing. This means we don't need to rely on an external Redis server during our tests. Once the tests are done, the container is stopped, leaving no leftover data.
 
-2. **JUnit 5** : Our main testing framework, which helps us define and structure tests with lifecycle methods like `@BeforeEach` and `@AfterEach`.{#039b}
+2. **JUnit 5** : Our main testing framework, which helps us define and structure tests with lifecycle methods like `@BeforeEach` and `@AfterEach`.
 
-3. **AssertJ** : A library that makes assertions readable and expressive, like `assertThat(result).isTrue()`.{#0048}
+3. **AssertJ** : A library that makes assertions readable and expressive, like `assertThat(result).isTrue()`.
 
-Let's begin by adding the necessary dependencies to our `pom.xml`.{#ff9f}
+Let's begin by adding the necessary dependencies to our `pom.xml`.
 
 ## Adding Dependencies
 
-Here's what you'll need in your Maven `pom.xml` file:{#2c47}
+Here's what you'll need in your Maven `pom.xml` file:
 
 ```
 <dependency>
@@ -306,19 +306,19 @@ Here's what you'll need in your Maven `pom.xml` file:{#2c47}
 </dependency>
 ```
 
-Once you've added these dependencies, you're ready to start writing your test class.{#3463}
+Once you've added these dependencies, you're ready to start writing your test class.
 
 ## Setting Up the Test Class
 
-The first step is to create a test class named `SlidingWindowCounterRateLimiterTest`. Inside, we'll define three main components:{#8b46}
+The first step is to create a test class named `SlidingWindowCounterRateLimiterTest`. Inside, we'll define three main components:
 
-1. **Redis Test Container**: This launches a Redis instance in a Docker container.{#f33a}
+1. **Redis Test Container**: This launches a Redis instance in a Docker container.
 
-2. **Jedis Instance**: This connects to the Redis container for sending commands.{#e4f1}
+2. **Jedis Instance**: This connects to the Redis container for sending commands.
 
-3. **Rate Limiter** : The actual `SlidingWindowCounterRateLimiterTest` instance we're testing.{#2f7a}
+3. **Rate Limiter** : The actual `SlidingWindowCounterRateLimiterTest` instance we're testing.
 
-Here's how the skeleton of our test class looks:{#81e3}
+Here's how the skeleton of our test class looks:
 
 ```
 public class SlidingWindowCounterRateLimiterTest {
@@ -335,13 +335,13 @@ public class SlidingWindowCounterRateLimiterTest {
 
 ## Preparing the Environment Before Each Test
 
-Before running any test, we need to ensure a clean Redis environment. Here's what we'll do:{#4e4b}
+Before running any test, we need to ensure a clean Redis environment. Here's what we'll do:
 
-1. **Connect to Redis**: Use a Jedis instance to connect to the Redis container.{#2371}
+1. **Connect to Redis**: Use a Jedis instance to connect to the Redis container.
 
-2. **Flush Data**: Clear any leftover data in Redis to ensure consistent results for each test.{#5851}
+2. **Flush Data**: Clear any leftover data in Redis to ensure consistent results for each test.
 
-We'll set this up in a method annotated with `@BeforeEach`, which runs before every test case.{#dd12}
+We'll set this up in a method annotated with `@BeforeEach`, which runs before every test case.
 
 ```
 @BeforeEach
@@ -351,11 +351,11 @@ public void setup() {
 }
 ```
 
-> FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).{#db9d}
+> FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
 ## Cleaning Up After Each Test
 
-After each test, we need to close the Jedis connection to free up resources. This ensures no lingering connections interfere with subsequent tests.{#836b}
+After each test, we need to close the Jedis connection to free up resources. This ensures no lingering connections interfere with subsequent tests.
 
 ```
 @AfterEach
@@ -366,7 +366,7 @@ public void tearDown() {
 
 ## Full Setup
 
-Here's how the complete test class looks with everything in place:{#f4e0}
+Here's how the complete test class looks with everything in place:
 
 ```
 public class SlidingWindowCounterRateLimiterTest {
@@ -397,9 +397,9 @@ public class SlidingWindowCounterRateLimiterTest {
 
 ## Verifying Requests Within the Limit
 
-This test ensures the Sliding Window Counter rate limiter allows requests within the defined limit.{#cc7e}
+This test ensures the Sliding Window Counter rate limiter allows requests within the defined limit.
 
-We configure it with a limit of 5 requests, a 10-second window, and 1-second sub-windows. We then call isAllowed("client-1") 5 times. Each call should return true, confirming the rate limiter correctly tracks and permits requests under the limit.{#d62b}
+We configure it with a limit of 5 requests, a 10-second window, and 1-second sub-windows. We then call isAllowed("client-1") 5 times. Each call should return true, confirming the rate limiter correctly tracks and permits requests under the limit.
 
 ```
 @Test
@@ -415,9 +415,9 @@ public void shouldAllowRequestsWithinLimit() {
 
 ## Verifying Requests Beyond the Limit
 
-This test ensures the Sliding Window Counter rate limiter correctly denies requests once the defined limit is exceeded.{#eed5}
+This test ensures the Sliding Window Counter rate limiter correctly denies requests once the defined limit is exceeded.
 
-We configure it with a limit of 5 requests, a 60-second window, and 1-second sub-windows. We then call isAllowed("client-1") 5 times and expect all to return true. On the 6th call, it should return false, verifying the rate limiter blocks requests beyond the allowed limit.{#5529}
+We configure it with a limit of 5 requests, a 60-second window, and 1-second sub-windows. We then call isAllowed("client-1") 5 times and expect all to return true. On the 6th call, it should return false, verifying the rate limiter blocks requests beyond the allowed limit.
 
 ```
 @Test
@@ -437,11 +437,11 @@ public void shouldDenyRequestsOnceLimitIsExceeded() {
 
 ## Verifying Requests After Sliding Window Resets
 
-This test ensures that the Sliding Window Counter rate limiter correctly resets the sliding window and allows requests after the window duration has passed.{#872b}
+This test ensures that the Sliding Window Counter rate limiter correctly resets the sliding window and allows requests after the window duration has passed.
 
-We configure it with a limit of 5 requests, a 2-second window, and 1-second sub-windows. We first call isAllowed("client-1") 5 times and expect all to return true. On the 6th call, the rate limiter should return false, indicating that the limit has been reached.{#22e5}
+We configure it with a limit of 5 requests, a 2-second window, and 1-second sub-windows. We first call isAllowed("client-1") 5 times and expect all to return true. On the 6th call, the rate limiter should return false, indicating that the limit has been reached.
 
-After waiting for the sliding window to reset (2 seconds + a buffer), the next request is allowed. This verifies that the sliding window correctly clears expired entries and permits new requests.{#6a0e}
+After waiting for the sliding window to reset (2 seconds + a buffer), the next request is allowed. This verifies that the sliding window correctly clears expired entries and permits new requests.
 
 ```
 @Test
@@ -473,9 +473,9 @@ public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws Interrupte
 
 ## Verifying Independent Handling of Multiple Clients
 
-This test ensures that the Sliding Window Counter rate limiter handles multiple clients independently.{#f0b7}
+This test ensures that the Sliding Window Counter rate limiter handles multiple clients independently.
 
-We configure it with a limit of 5 requests, a 10-second window, and 1-second sub-windows. The first 5 requests from client-1 are allowed (true), while the 6th request is denied (false). Simultaneously, all 5 requests from client-2 are allowed (true), confirming that the rate limiter maintains separate counters for each client.{#001e}
+We configure it with a limit of 5 requests, a 10-second window, and 1-second sub-windows. The first 5 requests from client-1 are allowed (true), while the 6th request is denied (false). Simultaneously, all 5 requests from client-2 are allowed (true), confirming that the rate limiter maintains separate counters for each client.
 
 ```
 @Test
@@ -508,11 +508,11 @@ public void shouldHandleMultipleClientsIndependently() {
 
 ## Verifying Gradual Request Allowance in Sliding Window
 
-This test ensures that the Sliding Window Counter rate limiter gradually allows requests as older requests expire from the window.{#4cc1}
+This test ensures that the Sliding Window Counter rate limiter gradually allows requests as older requests expire from the window.
 
-We configure it with a limit of 3 requests, a 4-second window, and 1-second sub-windows. Initially, we call isAllowed("client-1") 3 times, each 1 second apart, and expect all to return true. On the 4th call, the request is denied (false), confirming the limit has been reached.{#adcd}
+We configure it with a limit of 3 requests, a 4-second window, and 1-second sub-windows. Initially, we call isAllowed("client-1") 3 times, each 1 second apart, and expect all to return true. On the 4th call, the request is denied (false), confirming the limit has been reached.
 
-After waiting 2 seconds, enough older requests have expired to allow one new request. This verifies that the sliding window dynamically adjusts and permits requests as the window progresses.{#32d3}
+After waiting 2 seconds, enough older requests have expired to allow one new request. This verifies that the sliding window dynamically adjusts and permits requests as the window progresses.
 
 ```
 @Test
@@ -543,21 +543,19 @@ public void shouldAllowRequestsAgainGraduallyInSlidingWindow() throws Interrupte
 }
 ```
 
-Is there any other behavior we should verify? Let me know in the comments!{#f498}  
+Is there any other behavior we should verify? Let me know in the comments!
 
 ## Conclusion
 
-The Sliding Window Counter Rate Limiter is a great way to manage request rates with a balance of precision and efficiency. Unlike simpler methods, it ensures rate limits are applied smoothly as the window progresses, without abrupt resets.{#a3d5}
+The Sliding Window Counter Rate Limiter is a great way to manage request rates with a balance of precision and efficiency. Unlike simpler methods, it ensures rate limits are applied smoothly as the window progresses, without abrupt resets.
 
-Thanks to Redis's speed and reliability, and using straightforward commands like `HINCRBY` and `HEXPIRE`, we built a dynamic solution that tracks requests within a rolling time window. The implementation in Java with Jedis made the process intuitive, and testing it with Redis TestContainers, JUnit 5, and AssertJ helped ensure it works as expected in real-world scenarios.{#d0d2}
+Thanks to Redis's speed and reliability, and using straightforward commands like `HINCRBY` and `HEXPIRE`, we built a dynamic solution that tracks requests within a rolling time window. The implementation in Java with Jedis made the process intuitive, and testing it with Redis TestContainers, JUnit 5, and AssertJ helped ensure it works as expected in real-world scenarios.
 
-This setup is not only easy to implement but also flexible enough to grow with your needs. Whether you're just managing basic request limits or scaling up for more complex requirements, this is a solid foundation to start from.{#3760}
+This setup is not only easy to implement but also flexible enough to grow with your needs. Whether you're just managing basic request limits or scaling up for more complex requirements, this is a solid foundation to start from.
 
 ## GitHub Repo
 
-You can find this implementation in **Java** and **Kotlin**:{#4fa7}
+You can find this implementation in **Java** and **Kotlin**:
 
-* Java ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/main/java/io/redis/SlidingWindowCounterRateLimiter.java), [Test](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/test/java/io/redis/SlidingWindowCounterRateLimiterTest.java)){#8b02}
-{#8b02}
-* Kotlin ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/main/kotlin/org/example/SlidingWindowCounterRateLimiter.kt), [Test](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/test/kotlin/org/example/SlidingWindowCounterRateLimiterTest.kt)){#88f0}
-{#88f0}
+* Java ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/main/java/io/redis/SlidingWindowCounterRateLimiter.java), [Test](https://github.com/raphaeldelio/redis-rate-limiter-java-example/blob/main/src/test/java/io/redis/SlidingWindowCounterRateLimiterTest.java))
+* Kotlin ([Implementation](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/main/kotlin/org/example/SlidingWindowCounterRateLimiter.kt), [Test](https://github.com/raphaeldelio/redis-rate-limiter-kotlin-example/blob/main/src/test/kotlin/org/example/SlidingWindowCounterRateLimiterTest.kt))

@@ -541,6 +541,30 @@ should catch a mistake at PR time rather than letting it fail silently.
   `HtmlToMarkdown` drops `a[id]` alongside the heading ids now. Anchored to the
   link's closing paren, so a `{#id}` in a CSS example is never touched, and
   fenced code is skipped as before.
+
+  **And a third pass, because fixing the elements one at a time was the actual
+  bug.** Headings were dealt with, then links -- and WordPress goes on stamping
+  ids on everything else: `<p id="caption-attachment-36528">` under a captioned
+  image, `<span id="more-36262">` at the editor's read-more break, and
+  `<p class="sect0" id="_quarkus_unpacked_...">` on every paragraph of an
+  Asciidoc import. All of them render as literal text, and **1268 of them were
+  live across 91 posts** -- visible on the page, in the search index and in the
+  meta description. Which is why the source fix is now
+  `content.select("[id]").removeAttr("id")` over the whole body rather than a
+  third selector: nothing downstream reads an id, so there is no list to keep.
+  Raw-HTML blocks are exempt -- they are preserved before that pass runs, so an
+  author's own in-page anchor inside one still resolves.
+
+  **Position is what makes it safe to strip, and that was measured rather than
+  assumed.** Every one of the 1293 `{#...}` occurrences outside a code fence
+  sits at the END of its line, and 1293 minus the 13 on a heading line is
+  exactly the 1280 the built HTML rendered as visible text -- so "at the end of
+  a line that is not a heading" is precisely the broken set. A `{#...}`
+  **mid-line** is reported and never touched: that is the shape a real Qute or
+  Handlebars tag written in a sentence has (`{#insert}`), and there is nothing
+  in the spelling to tell them apart. There are none today. A line that held
+  nothing but the anchor is removed entirely, along with one of the blank lines
+  around it, or every removal would leave a double blank line behind.
 - **`scripts/cleanup/NormalizeMarkdown.java`**: one-off migration that brought
   `content/` in line with the storage format the converter now emits. Two
   things, both Flexmark defaults that were never a deliberate choice:
@@ -1623,6 +1647,41 @@ should catch a mistake at PR time rather than letting it fail silently.
   fences from the conversion scripts, so a re-scrape produces the same shape;
   `cleanup/EnlighterToFences.java` above cleans up anything that slips through.
   Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
+
+  **The scraper replaces the WRAPPER, not just the element that matched, and
+  that is not tidiness.** Most blocks are a `<pre class="EnlighterJSRAW">`, but
+  some are nested -- `<pre><code class="EnlighterJSRAW">`, and on two posts
+  `<pre><code class="language-xml"><code class="EnlighterJSRAW">`. Replacing only
+  the matched `<code>` leaves the `<pre>` standing with the placeholder inside
+  it, so Flexmark renders that `<pre>` as a code block of its own and the
+  restored fence comes back wrapped in a second, EMPTY one. Only the first bare
+  ` ``` ` of that pair reads as a closing fence, so the last one on the page
+  opens a block that never closes: **7 posts were live with everything after
+  their final code sample rendered as one grey slab of source code**, and
+  nothing reported it. The fix climbs through wrappers that hold nothing but the
+  block; `--url` re-scraping those 7 repaired them with no other change to the
+  files (verified: zero frontmatter lines touched).
+
+  A **`language-*` class on a wrapper beats `data-enlighter-language`** when the
+  two disagree. Both posts that had one disagreed with the plugin -- a Maven
+  `<dependency>` block and a React component, both stamped
+  `data-enlighter-language="java"`, i.e. the site-wide default on a site about
+  Java. The class is the author's own markup; the attribute is a plugin setting.
+  So a fence here can name a different language from the one foojay.io
+  highlights that block with today, deliberately: it is XML.
+
+  **Check the fence balance after any bulk re-scrape.** A file that ends inside
+  an unclosed fence is the signature of this whole class of bug, it is invisible
+  in the source, and Hugo builds it without a word.
+
+  **And diff the FRONTMATTER after a re-scrape, list items included.** Repairing
+  those 7 was clean, but re-scraping a post as a control caught the scraper
+  dropping a hand-added `related_posts` entry (`foojay-podcast-89` on the Quarkus
+  Unpacked post) -- that list is editorial and the live WordPress page is not its
+  source of truth, so a re-scrape silently narrows it to whatever WP relates
+  today. Restored by hand. Note a grep for changed frontmatter KEYS misses this
+  entirely: the line that vanished is a list item, `  - "slug"`. Diff the whole
+  block between `---` markers instead.
 - **Mermaid diagrams are a ```mermaid fence, and the library is VENDORED and
   lazy.** `_markup/render-codeblock.html` branches on the fence tag *before* the
   EnlighterJS path and emits `<pre class="mermaid">`; `baseof.html` loads

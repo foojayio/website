@@ -35,8 +35,6 @@ That being said, if you're building a small-scale application or have specific r
 
 To begin, we create an Entity class. This class represents the data that we will store in the database. An example Document entity with fields name, type, and data might look like this:
 
-```
-
 ```java
 public class Document {
     @Id
@@ -62,13 +60,9 @@ public class Document {
 }
 ```
 
-```
-
 In this class, **@Lob** denotes that the data attribute should be stored as a **BLOB** in the database.  
 
 The equivalent MySQL table for the Document entity class would look something like this:
-
-```
 
 ```sql
 create table files.document
@@ -79,8 +73,6 @@ create table files.document
     type varchar(255) null,
     data longblob     null
 );
-```
-
 ```
 
 **data LONGBLOB:**This creates a data column using the LONGBLOB datatype, which can hold a BLOB (Binary Large Object) of data of up to 4GB.
@@ -97,18 +89,12 @@ Please ensure that your MySQL database can indeed support that maximum size. If 
 
 Next, we create a Repository interface extending JpaRepository. This gives us a variety of standard methods for CRUD operations that we can use with our Document entities.
 
-```
-
 ```java
 public interface DocumentRepository extends JpaRepository<Document, Long> {
 }
 ```
 
-```
-
 ### Step 3: Service Class
-
-```
 
 ```java
 @Slf4j
@@ -126,11 +112,7 @@ public class FileUploadService {
 }
 ```
 
-```
-
 ### Step 4: Controller Class
-
-```
 
 ```java
 @Slf4j
@@ -151,8 +133,6 @@ public class FileUploadController {
 }
 ```
 
-```
-
 When the user sends an HTTP POST request to upload a file, the uploadFile method will be triggered, which creates a new Document object with the file's details and data.
 
 It then uses the fileUploadService.saveFileInDatabase(file) **;** to persist this object in the database.
@@ -166,8 +146,6 @@ While storing files in a database can work for some cases, it's not suitable for
 You can write your files to your server's local file system. While this can be viable for smaller applications, it does not scale well as your application grows.
 
 Here's what saving a file to the local file system might look like
-
-```
 
 ```java
 public void saveFileInFileSystem(MultipartFile file) throws IOException {
@@ -185,16 +163,10 @@ public void saveFileInFileSystem(MultipartFile file) throws IOException {
 }
 ```
 
-```
-
 Now run the application and do curl:
-
-```
 
 ```bash
 curl -X POST -H 'Content-Type: multipart/form-data' -F 'file=@/home/uses/uploads/_cd03deb1-489d-4867-9b5b-2ffde99a3e20.jpeg http://localhost:8080/files/upload
-```
-
 ```
 
 ### **Cloud Storage Services**
@@ -202,8 +174,6 @@ curl -X POST -H 'Content-Type: multipart/form-data' -F 'file=@/home/uses/uploads
 Services like Amazon S3, Google Cloud Storage, and Azure Blob Storage are built for storing and retrieving any amount of data from anywhere.
 
 These services provide durability, security, and performance for your applications. Here's an example of how you might upload a file to Amazon S3 using the AWS SDK for Java:
-
-```
 
 ```java
 public void uploadFileToS3(MultipartFile multipartFile) throws IOException {
@@ -221,8 +191,6 @@ public void uploadFileToS3(MultipartFile multipartFile) throws IOException {
         throw new RuntimeException("Failed to upload file to s3");
     }
 }
-```
-
 ```
 
 ### **Content Delivery Network (CDN) Storage**

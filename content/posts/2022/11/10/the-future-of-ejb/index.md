@@ -23,7 +23,7 @@ frozen: false
 
 Once upon a time EJB was almost synonymous with what was called Java EE or J2EE back then (Jakarta EE now). It suffered from many issues though, although it did incrementally got better. We'll explore some of those issues next.
 
-## The past {#more-60964}
+## The past
 
 The very first version of EJB was released before XML even existed and featured a rather awkward "programmatic" configuration, where a java class had to be compiled and its binary and serialised version used as configuration file.
 

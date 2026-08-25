@@ -48,7 +48,7 @@ Another nice feature is that the agent allows you to inspect almost all classes,
 
 Now I'm handing it over to Mikaël, who actually fixed bugs using my tool:
 
-## Spring and Mockito {#more-111153}
+## Spring and Mockito
 
 Two of the tools I work the most with are Spring and Mockito, and both make liberal use of bytecode generation and modification.
 
@@ -242,16 +242,16 @@ Or do you have other instrumenters that you want to explore with us?
 
 This project shows how a question during a conference, "How can I inspect code at run-time?", turned into an interesting and eventually helpful project.
 
-(1) CGLIB is now unmaintained, but Spring repackages a patched and updated version of CGLIB. The examples in this text are from that version.{#ref1}
+(1) CGLIB is now unmaintained, but Spring repackages a patched and updated version of CGLIB. The examples in this text are from that version.
 
-(2) Undeclared checked exceptions can be thrown using Lombok's `@SneakyThrows`, or from a language without checked exceptions, such as Kotlin.{#ref2}
+(2) Undeclared checked exceptions can be thrown using Lombok's `@SneakyThrows`, or from a language without checked exceptions, such as Kotlin.
 
-(3) CGLIB does have a `DebuggingClassWriter` that can be used to output generated classes before they are loaded, and to get the same behaviour for `Proxy` you can set the `jdk.proxy.ProxyGenerator.saveGeneratedFiles` system property to `true`, but it is nowhere near as convenient as using meta-agent.{#ref3}
+(3) CGLIB does have a `DebuggingClassWriter` that can be used to output generated classes before they are loaded, and to get the same behaviour for `Proxy` you can set the `jdk.proxy.ProxyGenerator.saveGeneratedFiles` system property to `true`, but it is nowhere near as convenient as using meta-agent.
 
-(4) What Mockito calls "mocks" are called "test doubles" in the literature. See the related [discussion](https://github.com/mockito/mockito/issues/2438).{#ref4}
+(4) What Mockito calls "mocks" are called "test doubles" in the literature. See the related [discussion](https://github.com/mockito/mockito/issues/2438).
 
-(5) This is actually the behaviour of the "inline mock maker", the default mock maker as of version 5. Mockito also supports generating mocks with subclasses, similar to how the `Proxy` and `Enhancer` classes work.{#ref5}
+(5) This is actually the behaviour of the "inline mock maker", the default mock maker as of version 5. Mockito also supports generating mocks with subclasses, similar to how the `Proxy` and `Enhancer` classes work.
 
-(6) Rafael Winterhalter's answer to "How to add a field to an existing instance with ByteBuddy?" <https://stackoverflow.com/a/58529716/7096763>.{#ref6}
+(6) Rafael Winterhalter's answer to "How to add a field to an existing instance with ByteBuddy?" <https://stackoverflow.com/a/58529716/7096763>.
 
 *This article is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com/), making profiling and debugging easier for everyone. This article first appeared on my personal blog [mostlynerdless.de](https://mostlynerdless.de/blog/2024/05/10/who-instruments-the-instrumenters/).*

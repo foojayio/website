@@ -29,8 +29,6 @@ The HTTP protocol and database protocols are both request-response protocols. St
 
 This article is also going to talk about performances. There are several ways to measure performances, and in this article, we will focus on concurrency: the number of operations performed by the client at the same time. Concurrency is an essential characteristic of modern software. Your concurrency level defines how many users, requests, or messages you can handle simultaneously.
 
-{#more-45289}
-
 ### HTTP performance evolution
 
 The HTTP protocol was created between 1989 and 1991. Yes, 30 years ago! Performance was not a primary focus.  

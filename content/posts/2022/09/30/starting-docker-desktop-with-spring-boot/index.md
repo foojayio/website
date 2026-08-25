@@ -127,7 +127,7 @@ mvn clean install dockerfile:build
 
 {{< img src="skp_docker_desktop_images-700x258.png" class="size-medium" alt="Create/Push Image to Docker Desktop" width="700" height="258" >}}
 
-Fig. 1 Create/Push Image to Docker Desktop{#caption-attachment-57685}
+Fig. 1 Create/Push Image to Docker Desktop
 
 ## 7. Create/Start the Docker Container
 
@@ -141,14 +141,14 @@ docker run -p 9090:8080 -t spring-boot-docker/skp-spring-boot-docker
 
 {{< img src="skp_docker_desktop_containers-700x200.png" class="size-medium" alt="Create/Start the Docker Container" width="700" height="200" >}}
 
-Fig. 2 Create/Start the Docker Container{#caption-attachment-57686}
+Fig. 2 Create/Start the Docker Container
 
 ## 8. Test the Spring Boot Application
 
 <http://localhost:9090/springbootdocker/quote>  
 ![Test the Spring Boot Application](skp_docker_desktop_output.png)
 
-Fig. 3 Test the Spring Boot Application{#caption-attachment-57684}
+Fig. 3 Test the Spring Boot Application
 
 For this sample application, you will see that the spring boot applications gives the following output on the browser!
 

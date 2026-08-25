@@ -82,8 +82,6 @@ There are many different logging frameworks in Java. This article will focus on 
 To implement Logback, you only need the `logback-classic` dependency, as shown below. This will pull in both `logback-core` and the `slf4j-api` packages.
 
 ```xml
-
-```java
 <dependency>
    <groupId>ch.qos.logback</groupId>
    <artifactId>logback-classic</artifactId>
@@ -91,11 +89,7 @@ To implement Logback, you only need the `logback-classic` dependency, as shown b
 </dependency>
 ```
 
-```
-
 * Markers. Markers can be set with any given String and added to your logger regardless of the log level, as you see below.
-
-```java
 
 ```java
 private static final Logger logger = LoggerFactory.getLogger(LogbackExample.class);
@@ -107,11 +101,7 @@ public boolean  login(String userName, String encryptedPassword) {
 }
 ```
 
-```
-
 * Configuration. In the following example of Logback configuration, I have created two appenders to my `logback.xml` file. The first appender will show all the log lines in the console, including the marker I might have added. The second appender only filters out the security-specific logs based on the maker SECURITY and put these in a separate security log file per day.
-
-```xml
 
 ```xml
 <configuration>
@@ -142,13 +132,9 @@ public boolean  login(String userName, String encryptedPassword) {
 </configuration>
 ```
 
-```
-
 #### Log4j2
 
 To use, you have to include the `log4j-api` and the `log4j-core` package, as seen below.
-
-```xml
 
 ```xml
 <dependency>
@@ -164,11 +150,7 @@ To use, you have to include the `log4j-api` and the `log4j-core` package, as see
 </dependency>
 ```
 
-```
-
 * Markers. Creating and adding the markers is similar to the Logback example; only this time, we use the specific Log4j manager to create the logger and the marker.
-
-```java
 
 ```java
 private static final Logger logger = LogManager.getLogger(Log4j2Example.class);
@@ -180,11 +162,7 @@ public boolean login(String userName, String encryptedPassword) {
 }
 ```
 
-```
-
 * Configuration. Similar to the Logback configuration, I created a configuration for Log4j2 with two appenders where the security log will get stored in a separate file based on the markers. This configuration needs to be in the `log4j2.xml` on the classpath.
-
-```xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -207,8 +185,6 @@ public boolean login(String userName, String encryptedPassword) {
        </Root>
    </Loggers>
 </Configuration>
-```
-
 ```
 
 #### Logging for Distributed Systems

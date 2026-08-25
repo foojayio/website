@@ -62,7 +62,7 @@ Let us examine the most common situations where EDA may actually be the wrong ar
 
 {{< img src="2noeda-700x467.jpg" class="size-medium" alt="Don't use EDA for everything" width="700" height="467" >}}
 
-Don't use EDA for everything{#caption-attachment-124878}
+Don't use EDA for everything
 
 ## 1. Avoid EDA for Simple CRUD Applications
 

@@ -63,8 +63,6 @@ If you want to see this application being created, check out the live demo Emily
 
 Alternatively, throughout this article there are links to many of the Open Liberty interactive guides you can try yourself to help you learn (in a practical way), how to use the tools and technologies detailed below that enable each factor within this methodology. If you are unfamiliar with Open Liberty and it's many benefits, check out our articles detailing [why cloud-native Java developers love Liberty](https://developer.ibm.com/articles/why-cloud-native-java-developers-love-liberty/ "why cloud-native Java developers love Liberty") and [why WebSphere and Open Liberty are ideal for cloud-native Java applications](https://developer.ibm.com/articles/6-reasons-why-open-liberty-is-an-ideal-choice-for-developing-and-deploying-microservices/ "why WebSphere and Open Liberty are ideal for cloud-native Java applications").
 
-{#Codebase}
-
 ## Factor 1 – Codebase
 
 ![Diagram representing one codebase for one application with many deployments](image01-700x450.png)
@@ -72,8 +70,6 @@ Alternatively, throughout this article there are links to many of the Open Liber
 Cloud-native applications must always consist of a single codebase that is tracked in a version-control system. A *codebase* is a source-code repository or a set of repositories that share a common root and is used to produce any number of immutable releases. There should be a 1:1 relationship between an application and a codebase, but a one-to-many relationship between the codebase and deployments of an application. This single codebase helps to support collaboration between development teams and helps to enable proper versioning of applications.
 
 This codebase could be a Git repository (including GitHub, GitHub Enterprise, GitLab, etc). Our demo application is stored in a Git repository hosted on GitHub. Git is a revision control tool to allow more than one person to develop a project at once and ensure that all the code is safe. Alternatively, you could make use of other tools like BitBucket, SourceForge, cloud specific source repositories, etc.
-
-{#Dependencies}
 
 ## Factor 2 – Dependencies
 
@@ -90,8 +86,6 @@ In our demo application, we utilize Maven, but you can use either Maven or Gradl
 * [Building a web application with Maven](https://openliberty.io/guides/maven-intro.html "Building a web application with Maven")
 * [Building a web application with Gradle](https://openliberty.io/guides/gradle-intro.html "Building a web application with Gradle")
 * [Injecting dependencies into microservices](https://openliberty.io/guides/cdi-intro.html "Injecting dependencies into microservices")
-
-{#Configuration}
 
 ## Factor 3 – Configuration
 
@@ -114,8 +108,6 @@ Utilizing tools like MicroProfile Config can help you to externalize your conf
 * [Separating configuration from code in microservices](https://openliberty.io/guides/microprofile-config-intro.html "Separating configuration from code in microservices")
 * [Configuring microservices running in Kubernetes](https://openliberty.io/guides/kubernetes-microprofile-config.html "Configuring microservices running in Kubernetes")
 
-{#BackingServices}
-
 ## Factor 4 – Backing services
 
 ![Diagram representing backing services app could make use of](image04-700x284.png)
@@ -132,8 +124,6 @@ Embracing backing services as bound resources enables cloud-native applications 
 * [Persisting data with MongoDB](https://openliberty.io/guides/mongodb-intro.html "Persisting data with MongoDB")
 * [Accessing and persisting data in microservices using Java Persistence API (JPA)](https://openliberty.io/guides/jpa-intro.html "Accessing and persisting data in microservices using Java Persistence API (JPA)")
 
-{#BuildReleaseRun}
-
 ## Factor 5 – Build, release, and run
 
 ![Diagram representing build, release, run and design phases of lifecycle](image5-700x279.png)
@@ -145,8 +135,6 @@ The *build* stage focuses on building everything needed for our application; the
 The *release* stage focuses on combining the output of the build stage with configuration values (both environmental and app-specific) to produce another a release. By labeling these releases with unique IDs, it enables greater capacity for rolling back to previous versions if anything goes from and historical auditing.
 
 The *run* stage, which occurs on the cloud provider, usually uses tooling like containers and processes to launch the application. Once that operation is running, the cloud runtime is responsible for its maintenance, health, and dynamic scaling.
-
-{#Processes}
 
 ## Factor 6 – Processes
 
@@ -160,8 +148,6 @@ REST is a widely adopted transport protocol, and JAX-RS can be used to achieve a
 
 * [Creating a RESTful web service](https://openliberty.io/guides/rest-intro.html "Creating a RESTful web service")
 * [Consuming RESTful services with template interfaces](https://openliberty.io/guides/microprofile-rest-client.html "Consuming RESTful services with template interfaces")
-
-{#PortBinding}
 
 ## Factor 7 – Port binding
 
@@ -177,8 +163,6 @@ The [Open Liberty Operator](https://openliberty.io/docs/latest/open-liberty-oper
 
 * [Deploying a microservice to Kubernetes using Open Liberty Operator](https://openliberty.io/guides/openliberty-operator-intro.html "Deploying a microservice to Kubernetes using Open Liberty Operator")
 
-{#Concurrency}
-
 ## Factor 8 – Concurrency
 
 ![Diagram representing concurrency](image08-700x391.png)
@@ -193,8 +177,6 @@ Another useful tool, especially when deploying to OpenShift is the Open Liberty 
 
 * [Deploying microservices to Kubernetes](https://openliberty.io/guides/kubernetes-intro.html "Deploying microservices to Kubernetes")
 * [Deploying microservices to OpenShift by using Kubernetes Operators](https://openliberty.io/guides/cloud-openshift-operator.html "Deploying microservices to OpenShift by using Kubernetes Operators")
-
-{#Disposability}
 
 ## Factor 9 – Disposability
 
@@ -217,8 +199,6 @@ Additionally, implementing fault-tolerant behaviors can enable this disposable b
 * [Building fault-tolerant microservices with the @Fallback annotation](https://openliberty.io/guides/microprofile-fallback.html "Building fault-tolerant microservices with the @Fallback annotation")
 * [Failing fast and recovering from errors](https://openliberty.io/guides/retry-timeout.html "Failing fast and recovering from errors")
 
-{#DevProdParity}
-
 ## Factor 10 – Dev/Prod parity
 
 ![Diagram representing dev/prod parity](image10-700x233.png)
@@ -236,8 +216,6 @@ In our demo application, we are making use of container technologies like Docker
 * [Building true-to-production integration tests with Testcontainers](https://openliberty.io/guides/testcontainers.html "Building true-to-production integration tests with Testcontainers")
 * [Using Docker containers to develop microservices](https://openliberty.io/guides/docker.html "Using Docker containers to develop microservices")
 
-{#Logs}
-
 ## Factor 11 – Logs
 
 ![Diagram representing logging in an application](image11-700x248.png)
@@ -252,8 +230,6 @@ Open Liberty has a unified logging component that handles messages that are writ
 
 * [Providing metrics from a microservice](https://openliberty.io/guides/microprofile-metrics.html "Providing metrics from a microservice")
 * [Enabling distributed tracing in microservices with OpenTelemetry and Jaeger](https://openliberty.io/guides/microprofile-telemetry-jaeger.html "Enabling distributed tracing in microservices with OpenTelemetry and Jaeger")
-
-{#Admin}
 
 ## Factor 12 – Administrative processes
 

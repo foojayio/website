@@ -17,8 +17,6 @@ frozen: false
 
 The following four short videos will take you step-by-step through installing, writing, and deploying an application to [Payara Server](https://www.payara.fish/ "Payara Server"), even if you've never used the application server before:
 
-{#more-36262}
-
 ## Introduction to Payara Server
 
 Learn how to write a simple Hello World application and deploy it to Payara Server.

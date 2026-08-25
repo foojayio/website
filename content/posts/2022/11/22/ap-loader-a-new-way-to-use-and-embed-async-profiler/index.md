@@ -28,8 +28,6 @@ It gets worse if you want to embed it into your library, agent, or application. 
 
 I started the [AP-Loader](https://github.com/jvm-profiling-tools/ap-loader) project to fix all this!
 
-{#more-61074}
-
 * Want to run async-profiler? Just grab the latest loader JAR from [GitHub](https://github.com/jvm-profiling-tools/ap-loader/releases/latest/download/ap-loader-all.jar), and run `java -jar ap-loader-all.jar profiler` regardless of your OS or architecture
 * Want to use the async-profiler as a Java Agent? You can use the loader JAR as javaagent and it behaves like the native async-profiler agent
 * Want to use jattach? `java -jar ap-loader-all.jar jattach` is your friend

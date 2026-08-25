@@ -34,8 +34,6 @@ In this post, we'll explore what LLMs are and how to use them in Java applicatio
 * [Try out the jakartaee-microprofile-example application](#tryout)
 * [Learn how this sample application works](#how_app_work)
 
-{#WhatAreLLMs?}
-
 ## What are LLMs?
 
 A language model is a model of natural language based on probabilities. They are able to generate probabilities of a series of words together. [Large language models (LLMs)](https://www.ibm.com/topics/large-language-models) are simply language models that are categorized by their large size.
@@ -47,8 +45,6 @@ See the following introductory video for more information on LLMs, including wha
 {{< youtube 5sLYAQS9sWQ >}}
 
 You can find LLMs in the service offerings of almost all of the major cloud service providers. For example, IBM offers models through its [WatsonX](https://www.ibm.com/watsonx) services, [Microsoft Azure](https://azure.microsoft.com/en-us/solutions/ai) offers LLMs like Llama 2 and OpenAI GPT-4, and [Amazon Bedrock](https://aws.amazon.com/bedrock/) offers models from a range of AI companies.
-
-{#Java_LLMs?}
 
 ## How can we take advantage of LLMs in Java applications?
 
@@ -62,15 +58,11 @@ Although LangChain is primarily available in Python and JavaScript/TypeScript ve
 
 ![LangChain4J GitHub repository README image](langchain4j-700x350.png)
 
-{#using_Langchain4j}
-
 ## How to use LangChain4j in a Jakarta EE and MicroProfile application
 
 Langchain4j has a useful open source [langchain4j-examples](https://github.com/langchain4j/langchain4j-examples) GitHub repository where it stores example applications. However, we could not find any examples showcasing how you could experience these AI technologies in a Jakarta EE or MicroProfile based application.
 
 So, we decided to build one ourselves called `jakartaee-microprofile-example`, which can now be found in this [langchain4j-examples](https://github.com/langchain4j/langchain4j-examples/tree/main/jakartaee-microprofile-example) GitHub repository. This demo application highlights how to use LangChain4j APIs in an application by using Jakarta EE and MicroProfile on Open Liberty.
-
-{#tryout}
 
 ## Try out the jakartaee-microprofile-example application
 
@@ -161,8 +153,6 @@ You can type in any text that you want to chat with the AI agent. Here are some 
 * `What is MicroProfile?`
 * `Which top 10 companies contribute MicroProfile?`
 * `Any documentation?`
-
-{#how_app_work}
 
 ## How does the application work?
 

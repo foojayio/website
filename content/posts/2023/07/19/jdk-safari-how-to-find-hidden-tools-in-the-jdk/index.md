@@ -667,7 +667,7 @@ You can also start the hsdb ui via: `java -m jdk.hotspot.agent/sun.jvm.hotspot.H
 
 {{< img src="java-hsdb-700x445.png" class="size-medium" alt="Hot Spot Debugger UI" width="700" height="445" >}}
 
-HotSpot Debugger UI{#caption-attachment-101022}
+HotSpot Debugger UI
 
 Tip: If we want to analyze an older JDK, e.g., JDK8 we can do it like this:
 

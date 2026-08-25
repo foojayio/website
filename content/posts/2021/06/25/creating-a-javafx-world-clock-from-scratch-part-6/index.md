@@ -26,7 +26,7 @@ In this part, I will show you how to make WebService calls (RESTful) to retrieve
 If you remember, [in Part 5](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-5/) you learned how to use the JavaFX WebView and the popular mapping library Leaflet JS enabling the user to discover geographic locations. In Part 6, I will show you how I used Java 11's Http Client to retrieve and display weather content. If you are new to this series, you can visit Part [1](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-1/ "1")-[5](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-5/ "5").  
 ![JFX World Clock Part 6](JFX-World-Clock-Part-6.png)
 
-JFX World Clock Part 6{#caption-attachment-45129}
+JFX World Clock Part 6
 
 ## Getting started
 
@@ -61,7 +61,7 @@ $ mvn javafx:run
 Assuming you have valid locations having geo coordinates (lat/lon) for a given clock face row you should see a weather icon and it's associated temperature displayed as shown below.  
 ![OpenWeatherMap Icons](OpenWeatherMap-Icons.png)
 
-OpenWeatherMap Icons{#caption-attachment-45130}
+OpenWeatherMap Icons
 
 ## OpenWeatherMap's API for the Daily Weather forecast
 

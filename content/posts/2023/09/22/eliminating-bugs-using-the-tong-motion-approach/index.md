@@ -33,29 +33,19 @@ frozen: false
 
 As a sidenote, if you like the content of this and the other posts in this series check out my [**Debugging book**](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [**Java Basics book**](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/). If you want to get back to Java after a while check out my [**Java 8 to 21 book**](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/).
 
-{#understanding-the-process-of-elimination-in-debugging}
-
 ## Understanding the Process of Elimination in Debugging
-
-{#the-basics}
 
 ### The Basics
 
 The process of elimination in debugging is straightforward in principle: continuously rule out non-problematic components until the root cause reveals itself. This can be achieved either by commenting out lines of code or using debugging techniques, such as the 'force return', which bypasses specific code paths.
 
-{#using-external-tools}
-
 ### Using External Tools
 
 For front-end issues, replicating the problem using tools like curl or postman is valuable. It helps us determine if the bug is within the front-end code or elsewhere. This way, we can quickly narrow our focus, not merely addressing the symptoms but locating the actual bug.
 
-{#the-power-of-unit-tests-in-debugging}
-
 ## The Power of Unit Tests in Debugging
 
 Unit tests are our best allies when it comes to debugging. By focusing on isolated units, they hone in on potential problem areas.
-
-{#benefits-of-mocking-frameworks}
 
 ### Benefits of Mocking Frameworks
 
@@ -63,13 +53,9 @@ Mocking frameworks like Mockito come in handy as they can simulate large parts o
 
 However, while there are best practices regarding the extent of mocking, when debugging a specific problem, it's more pragmatic to mock as much as necessary to distill the problem to its essence.
 
-{#the-challenges-with-flaky-issues}
-
 ## The Challenges with Flaky Issues
 
 The elimination technique is less straightforward with flaky issues - those bugs that appear irregularly or whose behavior changes as code is eliminated. The key strategy here is to **focus on negatives**. In simpler terms, if removing a certain block doesn't cause the problem to appear, it doesn't automatically indict that block. The absence could be due to the bug's unpredictable nature. Hence, it's crucial only to trust instances where the problem consistently reproduces.
-
-{#the-concept-of-the-tong-motion}
 
 ## The Concept of the 'Tong Motion'
 
@@ -78,8 +64,6 @@ Think of tongs. They grasp from both sides. Similarly, almost all software has a
 * **Enterprise Web Apps**: Web UI on one side and the database on the other.
 * **Operating System Kernel**: User space app on one end and computer hardware on the other.
 * **Video Games**: The joystick and screen API on one side and the game database on the other.
-
-{#applying-the-tong-motion-to-debugging}
 
 ### Applying the Tong Motion to Debugging
 
@@ -91,8 +75,6 @@ Using the example of an enterprise web app:
 4. **Digging Deeper**: Invoke the business method directly and mock its dependencies. This way, you are narrowing down on the actual method causing the issue while excluding the rest of the application.
 
 One common pitfall is neglecting one prong of the tongs or misplacing the other. It's crucial to ensure both sides are appropriately positioned; otherwise, it might skew the results. If stuck, consider investigating from the opposite side, and then revert when needed.
-
-{#an-illustrative-case-debugging-a-server-performance-issue}
 
 ## An Illustrative Case: Debugging a Server Performance Issue
 
@@ -107,8 +89,6 @@ This concrete example comprises of the following stages:
    We can then eliminate the database entirely from the equation by mocking it in a test case.
 3. Finally, we can invoke the business method directly eliminating the presentation tier aspect.  
    We can mock its dependencies which means we narrow down on a specific method that's at fault while eliminating the rest of the application.
-
-{#wrapping-up}
 
 ## Wrapping Up
 

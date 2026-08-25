@@ -27,7 +27,7 @@ However, the numbers in Germany and Russia have not dropped yet. Here, both the 
 The number of deaths are significantly higher in Germany (green line) and Russia (purple line) than in spring 2020.  
 [![Daily Covid-19 related deaths in Europe](CW51-software-ecg-number-deaths-europe-17-12.jpg)](CW51-software-ecg-number-deaths-europe-17-12.jpg)
 
-*Daily Covid-19 related deaths in Europe*{#caption-attachment-36609}
+*Daily Covid-19 related deaths in Europe*
 
 Don't get too depressed by looking at Europe. Let's take a look at the summer in the southern hemisphere.
 
@@ -75,7 +75,7 @@ As Europeans, you might become envious, but let us not forget we also had a nice
 However, those having relatives in Oceania should really consider moving their home offices into this region (at least until April):  
 [![Interleaving waves in Europe and Oceania](CW51-6-europe-oceania.png)](CW51-6-europe-oceania.png)
 
-*Interleaving waves in Europe and Oceania*{#caption-attachment-36616}
+*Interleaving waves in Europe and Oceania*
 
 ### Working with the Software-ECG
 

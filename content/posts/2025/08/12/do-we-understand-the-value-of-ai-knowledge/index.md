@@ -23,7 +23,7 @@ frozen: false
 
 {{< img src="20250810_Neuron_wiki-700x451.png" class="size-medium" width="700" height="451" >}}
 
-*Img.1.: Anatomy of multipolar neuron*{#caption-attachment-117093}
+*Img.1.: Anatomy of multipolar neuron*
 
 ## Simplification of neuron, perceptron
 
@@ -31,7 +31,7 @@ frozen: false
 
 {{< img src="20250810_Perceptron-700x309.png" class="size-medium" alt="Img.2: Schematic of a perceptron where weights are applied to the inputs, resulting in a weighted sum. The sum is passed to a step function that provides the output." width="700" height="309" >}}
 
-*Img.2.: Schematic of a perceptron where weights are applied to the inputs, resulting in a weighted sum. The sum is passed to a step function that provides the output.*{#caption-attachment-117095}
+*Img.2.: Schematic of a perceptron where weights are applied to the inputs, resulting in a weighted sum. The sum is passed to a step function that provides the output.*
 
 Using multilayer perceptrons with feedforward learning or back-propagation algorithms, we were able to detect specific patterns that signaled the point of interest. With increasing complexity we faced difficulties in interpreting the results in the deterministic way. Nevertheless, the general result was astonishing.
 
@@ -53,7 +53,7 @@ The material implication applies on two following conditional states x and y tha
 
 {{< img src="20250810_BooleanAlgebraMaterialImplication-700x425.png" class="size-medium" alt="Img.3.: Material implication table of 2 conditional states x and y" width="700" height="425" >}}
 
-*Img.3.: Material implication table of 2 conditional states x and y*{#caption-attachment-117096}
+*Img.3.: Material implication table of 2 conditional states x and y*
 
 Perhaps such a state, where everything is correct because the assumption of determinism is false, could be a high-level explanation for the commonly observed LLM state called hallucinations. And as some scientists have already pointed out, Hallucination as the property of the system is difficult to correct.
 
@@ -69,7 +69,7 @@ Perhaps such a state, where everything is correct because the assumption of dete
 
 {{< img src="20250810_PyramidsNueralNetwork-700x289.png" class="size-medium" alt="Img.4.: Simplified information storage in architecture pattern, each stone inside the pyramid have deterministically defined structure and position, although fluctuation of material particles may be considered non-deterministic.This is in contrast to a neural network and its storage/extraction of information on the right side of the image. Read color indicates the element to be corrected." width="700" height="289" >}}
 
-*Img.4.: Simplified information storage in architecture pattern, each stone inside the pyramid have deterministically defined structure and position, although fluctuation of material particles may be considered non-deterministic.This is in contrast to a neural network and its storage/extraction of information on the right side of the image. Read color indicates the element to be corrected.*{#caption-attachment-117097}
+*Img.4.: Simplified information storage in architecture pattern, each stone inside the pyramid have deterministically defined structure and position, although fluctuation of material particles may be considered non-deterministic.This is in contrast to a neural network and its storage/extraction of information on the right side of the image. Read color indicates the element to be corrected.*
 
 ## What is the knowledge self repair factor ?
 
@@ -84,13 +84,13 @@ An example is the SAGA pattern (long-running transaction \[6\]), where the syste
 **T**he intensive development in the field of large language models reveals new insights every day and offers possible directions for improving or mitigating current challenges observed or identified in current implementations. It is possible that as humanity works with increasingly large models, deterministic information sinks deeper into the value of the probability weight. This means that we lose connected points in favor of computed weights. The side effect may occur in disability of effectively promting the question to the system (Img.5.)  
 ![Img.5.: A possible consequence of the intense experience of promting with an LLM agents may be damage to cognitive connectivity within the brain due to the removal of connections between stored information.](20250810_LLMTrainedEngineers.png)
 
-*Img.5.: A possible consequence of the intense experience of promting with an LLM agents may be damage to cognitive connectivity within the brain due to the removal of connections between stored information.*{#caption-attachment-117098}
+*Img.5.: A possible consequence of the intense experience of promting with an LLM agents may be damage to cognitive connectivity within the brain due to the removal of connections between stored information.*
 
 The trigonometric functions sine and cosine are well known \[7\] (*Img.6.*) LLM transformers make extensive use of them to identify the correct word position. It is worth remembering that the entire LLM model still only predicts the next word.  
 
 {{< img src="20250810_Sine_cosine_one_period.svg-700x280.png" class="size-medium" alt="Img.6. Sine and cosine functions plotted from 0 to 2π." width="700" height="280" >}}
 
-*Img.6. Sine and cosine functions plotted from 0 to 2π.*{#caption-attachment-117099}
+*Img.6. Sine and cosine functions plotted from 0 to 2π.*
 
 The use of trigonometric functions has an amazing effect on word order correction. Based on the calculated LLM weights, the correction of dramatically misspelled text is astounding. However, the entire outcome of the agent system may lead to random results because the response is biased by the training data. During current development they may be observed willing to address such questions as biased data may have broader impact.
 
@@ -99,12 +99,12 @@ The use of trigonometric functions has an amazing effect on word order correctio
 **H** istory has shown the power of deterministically stored information in many different areas. Humanity has trained the brains to increase neuronal connectivity and improve cognitive and other functions through evolution (*Img.7.*)  
 ![Img.7. Random three people who are dedicated to gathering knowledge and understanding through the process of learning, like Mr. Leonardo DaVinci, Tesla and many others](20250810_Engineers.png)
 
-*Img.7. Random three people who are dedicated to gathering knowledge and understanding through the process of learning, like Mr. Leonardo DaVinci, Tesla and many others*{#caption-attachment-117100}
+*Img.7. Random three people who are dedicated to gathering knowledge and understanding through the process of learning, like Mr. Leonardo DaVinci, Tesla and many others*
 
 It is very exciting to watch and contribute to the entire process of evolution in the field of artificial intelligence, whether as an individual or a group. We are constantly discovering many directions from very different perspectives, knowing that our known world must follow a number of fundamental rules, such as gravity, which exist between all entities with mass or energy (*Img. 8*).  
 ![Img.8.: Combining knowledge influenced by the fundamental concept of the gravity projected into the of the pyramid repair process](20250810_LawOfGravity.png)
 
-*Img.8.: Combining knowledge influenced by the fundamental concept of the gravity projected into the of the pyramid repair process*{#caption-attachment-117101}
+*Img.8.: Combining knowledge influenced by the fundamental concept of the gravity projected into the of the pyramid repair process*
 
 The changes in the field of agentic AI systems are very intense and rapid, but the process itself is very narrow and centered around small groups of authors. The scope of impact is very wide. The ability to understand, design or cope with the current state has already predetermined requirements defined by the level of applied mathematics.
 
@@ -114,7 +114,7 @@ The heavy use of agentic AI system for engineering, doctor or other duties may b
 
 {{< img src="20250810_PersonalLLMDevelopment-700x398.png" class="size-medium" alt="Img.9.: Possible knowledge development of regular agentic AI system user may result in information lost through missing relations" width="700" height="398" >}}
 
-*Img.9.: Possible knowledge development of regular agentic AI system user may result in information lost through missing relations*{#caption-attachment-117102}
+*Img.9.: Possible knowledge development of regular agentic AI system user may result in information lost through missing relations*
 
 Willingness to contribute to the development, among other things, I helped create the JC-AI newsletter \[8\]\[9\] as part of our Java Champion initiative. Do not hesitate to contact me for future collaboration!
 

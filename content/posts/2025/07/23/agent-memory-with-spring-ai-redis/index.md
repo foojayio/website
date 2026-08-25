@@ -274,15 +274,15 @@ Key features of the memory service:
 
 ### 5. Implement Spring AI Advisors
 
-We're going to rely on the Spring AI Advisors API. Advisors are a way to intercept, modify, and enhance AI-driven interactions.{#6ffe}
+We're going to rely on the Spring AI Advisors API. Advisors are a way to intercept, modify, and enhance AI-driven interactions.
 
-We will implement two advisors: one for retrieval and another for recorder. These advisors will be plugged in our `ChatClient` and intercept every interaction with the LLM.{#32fd}
+We will implement two advisors: one for retrieval and another for recorder. These advisors will be plugged in our `ChatClient` and intercept every interaction with the LLM.
 
-The retrieval advisor runs before your LLM call. It takes the user's current message, performs a vector similarity search over Redis, and injects the most relevant memories into the system portion of the prompt so the model can ground its answer.{#4cc5}
+The retrieval advisor runs before your LLM call. It takes the user's current message, performs a vector similarity search over Redis, and injects the most relevant memories into the system portion of the prompt so the model can ground its answer.
 
 ### 5.1 Advisor for Long-term memory retrieval
 
-The retrieval advisor runs before LLM calls. It takes the user's current message, performs a vector similarity search over Redis, and injects the most relevant memories into the system portion of the prompt so the model can ground its answer.{#ee9b}
+The retrieval advisor runs before LLM calls. It takes the user's current message, performs a vector similarity search over Redis, and injects the most relevant memories into the system portion of the prompt so the model can ground its answer.
 
 ```kotlin
 @Component
@@ -338,7 +338,7 @@ class LongTermMemoryRetrievalAdvisor(
 
 ### 5.2 Advisor for Long-term memory recording
 
-The recorder advisor runs after the assistant responds. It looks at the last user message and the assistant's reply, asks the model to extract atomic, useful facts (episodic or semantic), deduplicates them, and stores them in Redis.{#8206}
+The recorder advisor runs after the assistant responds. It looks at the last user message and the assistant's reply, asks the model to extract atomic, useful facts (episodic or semantic), deduplicates them, and stores them in Redis.
 
 ```kotlin
 @Component
@@ -430,7 +430,7 @@ class LongTermMemoryRecorderAdvisor(
 
 ### 6. Plugging the advisors in our ChatClient
 
-In our `ChatConfig` class, we will configure our `ChatClient` as:{#0f6b}
+In our `ChatConfig` class, we will configure our `ChatClient` as:
 
 ```kotlin
 @Bean

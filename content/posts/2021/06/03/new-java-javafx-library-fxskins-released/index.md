@@ -19,7 +19,7 @@ FXSkins is a collection of new Skins for existing JavaFX controls. These Skins w
 
 This library is targeted for the most recent Java versions.
 
-## FXSkins Details {#more-45085}
+## FXSkins Details
 
 ![FXSkins ScrollPane Skin](ScrollPane4.webp)
 

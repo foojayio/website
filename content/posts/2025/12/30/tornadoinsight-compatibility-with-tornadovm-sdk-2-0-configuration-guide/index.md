@@ -24,15 +24,15 @@ This blog updates the previously published **TornadoInsight** configuration [**+
 
 ## **Overview**
 
-TornadoInsight requires access to a compatible Java Development Kit (JDK) and the TornadoVM SDK.{#o7o5c20810}
+TornadoInsight requires access to a compatible Java Development Kit (JDK) and the TornadoVM SDK.
 
-**Important update:**{#mvwo920904}
+**Important update:**
 
-Since version [++v1.4.0++](https://github.com/beehive-lab/tornado-insight/releases/tag/v1.4.0), TornadoInsight can also use the **JDK configured directly in IntelliJ IDEA** via **Project Structure**. This means that, in many cases, users no longer need to configure the Java SDK in the plugins settings.{#welj420814}
+Since version [++v1.4.0++](https://github.com/beehive-lab/tornado-insight/releases/tag/v1.4.0), TornadoInsight can also use the **JDK configured directly in IntelliJ IDEA** via **Project Structure**. This means that, in many cases, users no longer need to configure the Java SDK in the plugins settings.
 
 ## JDK Configuration (Recommended)
 
-TornadoInsight supports using the JDK defined in the IntelliJ project settings.{#w8y9b29714}
+TornadoInsight supports using the JDK defined in the IntelliJ project settings.
 
 ### Configure the JDK in IntelliJ IDEA
 
@@ -42,26 +42,22 @@ TornadoInsight supports using the JDK defined in the IntelliJ project settings.{
 4. Set **Project SDK** to **JDK 21** (or another supported JDK version)
 5. Apply and close the dialog
 
-{#o658529718}
-
-When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will automatically use it.{#fibw029743}  
+When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will automatically use it.
 
 {{< img src="https://plugins.jetbrains.com/files/23309/screenshot_bd38c017-be77-49d6-a5b0-f9ca54069cd9" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
 
 ## TornadoVM SDK Configuration (Recommended)
 
-Since version [++v1.4.2++](https://github.com/beehive-lab/tornado-insight/releases/tag/v1.4.2), TornadoInsight requires the environment variable **TORNADOVM_HOME** to be defined and visible to the IntelliJ IDEA process.{#b74ch20726}
+Since version [++v1.4.2++](https://github.com/beehive-lab/tornado-insight/releases/tag/v1.4.2), TornadoInsight requires the environment variable **TORNADOVM_HOME** to be defined and visible to the IntelliJ IDEA process.
 
-On modern operating systems, GUI applications (such as IntelliJ started from JetBrains Toolbox, the Dock, or an application launcher) **do not always inherit shell variables** defined in files like:{#goqx633285}
+On modern operating systems, GUI applications (such as IntelliJ started from JetBrains Toolbox, the Dock, or an application launcher) **do not always inherit shell variables** defined in files like:
 
 * \~/.bashrc
 * \~/.zshrc
 
-{#8ku9a4982}
+For this reason, **TORNADOVM_HOME** must be configured using OS-appropriate mechanisms that apply to the **graphical session**, not only to terminal shells.
 
-For this reason, **TORNADOVM_HOME** must be configured using OS-appropriate mechanisms that apply to the **graphical session**, not only to terminal shells.{#auwk84989}
-
-To define the TornadoVM SDK path across different Operating Systems, you can use the following guidelines which will enable your IntelliJ session to recognize the **TORNADOVM_HOME** environment variable as described below.{#iju4t56513}
+To define the TornadoVM SDK path across different Operating Systems, you can use the following guidelines which will enable your IntelliJ session to recognize the **TORNADOVM_HOME** environment variable as described below.
 
 ```
 TORNADOVM_HOME=/absolute/path/to/tornado-sdk
@@ -69,11 +65,11 @@ TORNADOVM_HOME=/absolute/path/to/tornado-sdk
 
 ### **macOS**
 
-On macOS, GUI applications do **not** read \~/.zshrc or \~/.zprofile.{#g8z335290}
+On macOS, GUI applications do **not** read \~/.zshrc or \~/.zprofile.
 
 #### **Recommended:**
 
-Run the following command in a terminal:{#ip1ei5300}
+Run the following command in a terminal:
 
 ```bash
 launchctl setenv TORNADOVM_HOME /absolute/path/to/tornado-sdk
@@ -83,18 +79,16 @@ Then **quit IntelliJ IDEA** (Cmd + Q) and relaunch it.
 
 ### Linux
 
-If IntelliJ IDEA is launched from **JetBrains Toolbox** or a desktop launcher, variables set in \~/.bashrc will **not** be visible.{#xmt6z5640}
+If IntelliJ IDEA is launched from **JetBrains Toolbox** or a desktop launcher, variables set in \~/.bashrc will **not** be visible.
 
 #### **Recommended: systemd** **environment.d**
 
-This method works reliably on modern Linux distributions using systemd.{#b9wg15651}
+This method works reliably on modern Linux distributions using systemd.
 
 * Create the directory
 * Create a configuration file (tornado.conf)
 * Add the variable (no export)
 * Log out and log back in, then start IntelliJ IDEA
-
-{#ds8xx5653}
 
 ```bash
 mkdir -p ~/.config/environment.d
@@ -111,11 +105,9 @@ TORNADOVM_HOME=/absolute/path/to/tornado-sdk
    * Value: C:\\path\\to\\tornado-sdk
 4. Restart IntelliJ IDEA
 
-{#d8w276933}
-
 ## **Verification**
 
-Before starting IntelliJ IDEA, verify that the variable is set:{#hgeqi7255}
+Before starting IntelliJ IDEA, verify that the variable is set:
 
 ### **macOS / Linux**
 
@@ -133,26 +125,24 @@ If the variable is present, TornadoInsight will automatically detect the Tornado
 
 ## **Summary**
 
-If **TORNADOVM_HOME** is not recognized by the IntelliJ process, a warning is shown in the settings of the plugin, as shown in the picture below.{#wo6nn88008}  
+If **TORNADOVM_HOME** is not recognized by the IntelliJ process, a warning is shown in the settings of the plugin, as shown in the picture below.
 ![](https://plugins.jetbrains.com/files/23309/screenshot_aa1940fc-c2d6-4120-95fc-2df46fc3d67f)
 
-Some common issues are listed here:{#1pehk136703}
+Some common issues are listed here:
 
 * Setting **TORNADOVM_HOME** only in \~/.bashrc or \~/.zshrc
 * Forgetting to log out or restart IntelliJ IDEA
 * Using relative paths instead of absolute paths
 * Expecting GUI-launched applications to inherit terminal environments
 
-{#vuasm55650}
-
-This blog presents some guideline to address these issues across different operating systems.{#yvef2138600}
+This blog presents some guideline to address these issues across different operating systems.
 
 Useful Links:  
 
-TornadoVM: <https://www.tornadovm.org/>{#7s1my157954}
+TornadoVM: <https://www.tornadovm.org/>
 
-JetBrains Marketplace: [++https://plugins.jetbrains.com/plugin/23309-tornadoinsight++](https://plugins.jetbrains.com/plugin/23309-tornadoinsight){#7s1my157954}
+JetBrains Marketplace: [++https://plugins.jetbrains.com/plugin/23309-tornadoinsight++](https://plugins.jetbrains.com/plugin/23309-tornadoinsight)
 
-GitHub Repository: [++https://github.com/beehive-lab/tornado-insight++](https://github.com/beehive-lab/tornado-insight){#7s1my157954}
+GitHub Repository: [++https://github.com/beehive-lab/tornado-insight++](https://github.com/beehive-lab/tornado-insight)
 
 This work has been supported by research funding from the European Union ([++P2Code++](https://p2code-project.eu/), [++AERO++](aero-project.eu)).

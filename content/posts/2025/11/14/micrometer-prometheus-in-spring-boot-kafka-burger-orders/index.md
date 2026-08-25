@@ -73,7 +73,7 @@ This pattern is common: REST → Kafka → Consumer → Metric. Spring Kafka mak
 
 {{< img src="spring-init-1-700x404.png" class="size-medium" alt="Spring initializer for Micrometer & Prometheus in Spring Boot: Kafka Burger Orders" width="700" height="404" >}}
 
-Spring initializer for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-attachment-121484}
+Spring initializer for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders
 
 ## 1) Expose a Counter with Tags (Micrometer)
 
@@ -351,7 +351,7 @@ burger.orders
 
 {{< img src="jmc-1-700x350.png" class="size-medium" alt="JMC for Micrometer & Prometheus in Spring Boot: Kafka Burger Orders" width="700" height="350" >}}
 
-JMC for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-attachment-121487}
+JMC for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪
 

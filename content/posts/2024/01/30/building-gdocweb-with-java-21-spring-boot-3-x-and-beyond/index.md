@@ -42,8 +42,6 @@ This is the story of building [*gdocweb*](https://gdocweb.com/), a tool that I h
 
 It's a no-frills, honest recount of the choices, changes, and the occasional 'aha' moments of an engineer trying to make something useful and efficient.
 
-{#introducing-gdocweb}
-
 ## Introducing gdocweb
 
 Before we dive into the technical intricacies and the decision-making labyrinth of building [gdocweb](https://gdocweb.com/), let's set the stage by understanding what [gdocweb](https://gdocweb.com/) is and the problem it solves. In simple terms, [gdocweb](https://gdocweb.com/) connects Google Docs to GitHub Pages. It's a simple web builder that generates free sites with all the raw power of GitHub behind it and all the usability of Google Docs.
@@ -53,8 +51,6 @@ I decided to build [gdocweb](https://gdocweb.com/) to eliminate the complexities
 Here's a short video explaining [gdocweb](https://gdocweb.com/) for the general public:
 
 {{< youtube aaDBFVx6qC8 >}}
-
-{#java-21-and-spring-boot-3x-innovation-and-maturity}
 
 ### Java 21 and Spring Boot 3.x: Innovation and Maturity
 
@@ -68,8 +64,6 @@ However, this decision wasn't without its hiccups. During the process of integra
 
 The transition to Spring Boot 3.x had its own set of challenges, particularly with the changes in security configurations. These modifications rendered most online samples and guides obsolete, breaking a lot of what I had initially set up. It was a learning curve, adjusting to these changes and figuring out the new way of doing things. However, most other aspects were relatively simple and the best compliment I can give to Spring Boot 3.x is that it's very similar to Spring Boot 2.x.
 
-{#graalvm-native-image-for-efficiency}
-
 ## GraalVM Native Image for Efficiency
 
 My interest in GraalVM native image for [gdocweb](https://gdocweb.com/) was primarily driven by its promise of reduced memory usage and faster startup times.
@@ -78,15 +72,11 @@ The idea was that with lower memory requirements, I could run more server instan
 
 Faster startup times also meant quicker recovery from failures, a crucial aspect for maintaining a reliable service.
 
-{#implementing-graalvm}
-
 ### Implementing GraalVM
 
 Getting GraalVM to work was nontrivial but not too hard. After some trial and error, I managed to set up a Continuous Integration (CI) process that built the GraalVM project and uploaded it to Docker.
 
 This was particularly necessary because I'm using an M2 Mac, while my server runs on Intel architecture. This setup meant I had to deal with an 18-minute wait time for each update – a significant delay for any development cycle.
-
-{#facing-the-production-challenges}
 
 ### Facing the Production Challenges
 
@@ -97,8 +87,6 @@ Each issue fixed seemed to only lead to another, and the 18-minute cycle for eac
 The final straw was realizing the incompatibility issues with Google API libraries. Solving these issues would require extensive testing on a GraalVM build, which was already burdened by slow build times.
 
 For a small project like mine, this became a bottleneck too cumbersome to justify the benefits.
-
-{#the-decision-to-move-on}
 
 ### The Decision to Move On
 
@@ -169,23 +157,17 @@ jobs:
 
 This configuration was a crucial part of my attempt to leverage GraalVM's benefits, but as the project evolved, so did my understanding of the trade-offs between idealism in technology choice and practicality in deployment and maintenance.
 
-{#deployment-vps-and-docker-compose}
-
 ## Deployment: VPS and Docker Compose
 
 When it came to deploying [gdocweb](https://gdocweb.com/), I had a few paths to consider. Each option came with its pros and cons, but after careful evaluation, I settled on using a Virtual Private Server (VPS) with Docker Compose.
 
 Here's a breakdown of my thought process and why this choice made the most sense for my needs.
 
-{#avoiding-raw-vps-deployment}
-
 ### Avoiding Raw VPS Deployment
 
 I immediately ruled out the straightforward approach of installing the application directly on a VPS. This method fell short in terms of migration ease, testing, and flexibility.
 
 Containers offer a more streamlined and efficient approach. They provide a level of abstraction and consistency across different environments, which is invaluable.
-
-{#steering-clear-of-managed-containers-orchestration}
 
 ### Steering Clear of Managed Containers \& Orchestration
 
@@ -194,8 +176,6 @@ Managed containers and orchestration (e.g k8s) were another option, and while th
 If we don't optimize and stabilize when we're small, the problems will only get worse as we grow. Scaling should ideally start with vertical scaling before moving to horizontal, vertical scaling means more CPU/RAM while horizontal adds additional machines. Vertical scaling is not only more cost-effective but also crucial from a technical standpoint. It makes it easier to identify performance bottlenecks using simple profiling tools.
 
 In contrast, horizontal scaling can often mask these issues by adding more instances, which could lead to higher costs and hidden performance problems.
-
-{#the-choice-of-docker-compose}
 
 ### The Choice of Docker Compose
 
@@ -207,15 +187,11 @@ This setup offered me the flexibility and ease of containerization without the o
 
 By using Docker Compose, I maintained control over the environment and kept the deployment process straightforward and manageable. This decision aligned perfectly with the overall ethos of [gdocweb](https://gdocweb.com/) – simplicity, efficiency, and practicality.
 
-{#front-end-thymeleaf-over-modern-alternatives}
-
 ## Front-End: Thymeleaf Over Modern Alternatives
 
 The front-end development of [gdocweb](https://gdocweb.com/) presented a bit of a challenge for me. In an era where React and similar frameworks are dominating the scene, opting for Thymeleaf might seem like a step back.
 
 However, this decision was based on practical considerations and a clear understanding of the project's requirements and my strengths as a developer.
-
-{#react-modern-but-not-a-one-size-fits-all-solution}
 
 ### React: Modern but Not a One-Size-Fits-All Solution
 
@@ -224,8 +200,6 @@ React is undeniably modern and powerful, but it comes with its own set of comple
 I've seen the kind of perplexed expressions from seasoned React developers when they look at my code, much like the ones I have when I'm reading complex Java code written by others.
 
 React's learning curve, coupled with its slower performance in certain scenarios and the risk of not achieving an aesthetically pleasing result without deep expertise, made me reconsider its suitability for [gdocweb](https://gdocweb.com/).
-
-{#the-appeal-of-thymeleaf}
 
 ### The Appeal of Thymeleaf
 
@@ -236,8 +210,6 @@ Thymeleaf, on the other hand, offered a more straightforward approach, aligning 
 3. **No Need for NPM**: Thymeleaf eliminates the need for additional package management, reducing complexity and potential vulnerabilities.
 4. **Lower Risk of Client-Side Vulnerabilities**: The server-side nature of Thymeleaf inherently reduces the risk of client-side issues.
 
-{#considering-htmx-for-dynamic-functionality}
-
 ### Considering HTMX for Dynamic Functionality
 
 The idea of incorporating HTMX for some dynamic behavior in the front-end did cross my mind. HTMX has been on my radar for a while, promising to add dynamic functionalities easily. However, I had to ask myself if it was truly necessary for a tool like [gdocweb](https://gdocweb.com/), which is essentially a straightforward wizard.
@@ -245,8 +217,6 @@ The idea of incorporating HTMX for some dynamic behavior in the front-end did cr
 My conclusion was that opting for HTMX might be more of Resume Driven Design (RDD) on my part, rather than a technical necessity.
 
 In summary, the choice of Thymeleaf was a blend of practicality, familiarity, and efficiency. It allowed me to build a fast, simple, and effective front-end without the overhead and complexity of more modern frameworks, which, while powerful, weren't necessary for the scope of this project.
-
-{#final-word}
 
 ## Final Word
 

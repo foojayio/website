@@ -20,7 +20,7 @@ frozen: false
 
 ![](hero-techcrunch.png)
 
-The O'Reilly book, *Cassandra: The Definitive Guide,* features a quote from Ray Kurzweil, the noted inventor and futurist: {#speakable-summary}
+The O'Reilly book, *Cassandra: The Definitive Guide,* features a quote from Ray Kurzweil, the noted inventor and futurist:
 
 "An invention has to make sense in the world in which it is finished, not the world in which it is started."
 
