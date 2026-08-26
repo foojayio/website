@@ -223,7 +223,9 @@ should catch a mistake at PR time rather than letting it fail silently.
   everything external here (JUG list, Champions, events) changes slowly, and
   the view count is the one thing that moves continuously. Both workflows
   commit to `main`, so they share a `concurrency: data-sync` group and rebase
-  before pushing rather than racing. And it **only rewrites `data/jug-events.json` when the events themselves
+  before pushing rather than racing -- and both then have to ASK for the deploy,
+  because a workflow's own push does not cause one (see
+  `build-deploy.yml` below). And it **only rewrites `data/jug-events.json` when the events themselves
   changed**: `generatedAt` moves on every run, so writing unconditionally would
   commit, and therefore deploy, on a timestamp. `--dry-run` / `--limit N` /
   `--jug <slug>` print the JSON instead of writing a file that would be missing
@@ -836,11 +838,86 @@ should catch a mistake at PR time rather than letting it fail silently.
 
 
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
-  GitHub Pages on push to `main`. Also refreshes and commits `data/jugs.yaml`,
-  `data/java-champions.yaml` and `data/views.json` before building
-  (see `fetch/Jugs.java` above) — needs `permissions.contents:
-  write` and a `[skip ci]` commit message for exactly this reason (otherwise
-  that commit would re-trigger the same workflow).
+  GitHub Pages on push to `main`, and on `workflow_dispatch` — which is how the
+  two scheduled syncs get their data onto the site (see the next entry). Also
+  refreshes and commits `data/jugs.yaml`, `data/java-champions.yaml`,
+  `data/geocode-cache.yaml` and `data/views.json` before building (see
+  `fetch/Jugs.java` above), so it needs `permissions.contents: write` and
+  `[skip ci]` on that commit — it pushes to the very branch and event it
+  triggers on. Note the data commit runs **before** the Hugo step, so anything
+  that makes that push fail takes the deploy down with it.
+
+- **A PUSH BY A WORKFLOW DOES NOT BUILD THE SITE, so the deploy is
+  DISPATCHED.** GitHub's rule: *"events triggered by the `GITHUB_TOKEN` will not
+  create a new workflow run"*, and `workflow_dispatch`/`repository_dispatch` are
+  the documented exceptions. Both scheduled syncs push data to `main` with that
+  token, so for as long as they have existed their commits landed and **nothing
+  rebuilt the site** — `sync-external-content.yml` even carried a comment saying
+  its push "SHOULD trigger a deploy, that being the whole point". It did not.
+  Confirmed against the run history rather than the docs: commit `be7257d8`
+  ("sync JUG list + Java Champions + JUG events") and the view-count commits
+  `505d5922`/`b1bd8f7d` appear in **no** `build-deploy` run; each time the next
+  deploy was a human push hours later. Cost: a new meetup sat in
+  `data/jug-events.json` and a refreshed count in `data/views.json` until
+  somebody happened to push, so on a quiet week `/calendar/` was days stale
+  while the file behind it was current.
+
+  Both syncs now end their commit step with `gh workflow run
+  build-deploy.yml --ref main` (hence `permissions.actions: write`), and only on
+  the runs where a file actually changed. **Their commits also carry
+  `[skip ci]`, which does nothing today and is not decoration**: the moment
+  those pushes are authenticated with a GitHub App token (see "Protecting
+  `main`" below) the push itself starts triggering builds, and without it every
+  sync would build twice — once from the push, once from the dispatch. One
+  trigger, chosen deliberately, in both worlds.
+
+  So don't "simplify" this by deleting the dispatch and relying on the push, and
+  don't add a `workflow_run` trigger next to it: that fires on every completed
+  sync run, including the ~majority where nothing changed, and would deploy on a
+  timestamp — the same thing `fetch/JugEvents.java` avoids by not rewriting its
+  file when only `generatedAt` moved.
+
+- **Protecting `main`.** Nothing is protected today (verified: no rulesets, no
+  classic branch protection). The blocker is not the rules, it is the token:
+  **`GITHUB_TOKEN` cannot be granted a bypass.** Classic protection's push
+  allowlist has no entry for it, and a ruleset bypass list takes roles, teams,
+  GitHub Apps and deploy keys. So a rule requiring a pull request, requiring a
+  status check, restricting who may push, or requiring signed commits rejects all
+  three bot pushes — and in `build-deploy.yml` that means **no deploy at all**,
+  not merely a stale data file. What breaks nothing: *block force pushes*,
+  *restrict deletions*, *require linear history* (the syncs rebase before
+  pushing).
+
+  The way through is a **GitHub App on the bypass list**. All three workflows
+  already open with a `Mint a push token` step
+  (`actions/create-github-app-token@v2`) whose token goes to `actions/checkout`,
+  so `git push` uses it. It is guarded by `if: vars.DATA_SYNC_APP_ID != ''` and
+  falls back to `github.token`, so **it is inert until the app exists** and a
+  fork is unaffected. To switch it on: create an app under the `foojayio` org
+  with *Contents: read and write* (no webhook), install it on this repo only, put
+  the app id in a repository **variable** `DATA_SYNC_APP_ID` and the private key
+  in a **secret** `DATA_SYNC_APP_PRIVATE_KEY`, then add the app to the ruleset's
+  bypass list. The required status check to name in the ruleset is
+  **`build-and-validate`**, the job in `pr-check.yml`.
+
+  Two things to know before trusting it: a bypass by ROLE (Repository admin /
+  Maintain / Write) may or may not cover `github-actions[bot]` — test it with one
+  manual run rather than assuming, since the failure mode is a broken deploy; and
+  `Require signed commits` stays off, because the bots do not sign.
+
+  **It wants to be TWO rulesets, because a bypass exempts an actor from every
+  rule in the ruleset it sits on.** Frank keeps pushing small fixes straight to
+  `main`, which needs `Repository admin` on a bypass list — and on a single
+  ruleset that would also exempt him from the force-push and deletion
+  protection, i.e. from the one pair of rules that should hold for everybody.
+  So: **`main integrity`** targets the default branch, carries *Restrict
+  deletions* + *Block force pushes*, and has an **empty bypass list** — neither
+  a human nor the app needs one, since those rules do not block an ordinary
+  fast-forward push. **`main review`** carries *Require a pull request*
+  (0 approvals) + *Require status checks* (`build-and-validate`), and bypasses
+  **Repository admin** and the **app**. A repo ruleset's bypass list takes roles,
+  teams, apps and deploy keys — not individual usernames — and the mode has to be
+  **Always**: `For pull requests only` still rejects a direct push.
 - **`data/jugs.yaml`**: auto-generated by `scripts/fetch/Jugs.java` — see
   above. Never hand-edit it; add/fix a JUG upstream in GlobalWWJugs instead.
   Rendered at `/jugs/` (`content/pages/java-user-groups-jugs.md`, `type:
