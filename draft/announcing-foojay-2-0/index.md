@@ -36,6 +36,12 @@ and a Git client all day.
 
 **AI happened.** WordPress was one of the few options to build something like Foojay for a long time. But with Hugo and AI assisted coding, replacing what we had into something faster and more user-friendly for visitors, authors, and maintainers, it became possible to build what you see now in a matter of days with a very small budget.
 
+To put real numbers on "a matter of days with a very small budget" for the version of Foojay you are now looking at: 
+* **About 70 hours of work across 17 days** of which a lot outside official working hours as I got dragged into a mission ;-)
+* **Roughly $1000 of AI model usage** at published token prices. 
+Both are measured rather than remembered — the hours by
+clustering four weeks of commit history into working sessions, the cost by adding up the token counts in the assistant's own logs.
+
 ## What Foojay 2.0 actually is
 
 A [Hugo](https://gohugo.io/) site built from
@@ -144,6 +150,16 @@ work:
 
 So: a Go static site generator, and a pile of Java doing everything that
 actually needed writing.
+
+**And what the AI half cost, since the logs are sitting right there.** 2,244
+requests, 713 million tokens, about $500 at list prices. The interesting part is
+the shape of that: **98% of those tokens are cached context being re-read** —
+the conversation so far, handed back on every turn at a tenth of the normal
+input price — and the tokens that were actually *written*, the code and the
+prose, are 2 million of the 713 and only 10% of the bill. Thinking about a large
+codebase costs more than writing to it. (One honest caveat: those logs cover 9
+of the 17 working days, because some of this was built on a second machine, so
+the real figure is nearer $550.)
 
 ## The part that matters to authors
 
