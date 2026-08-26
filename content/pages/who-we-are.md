@@ -1,6 +1,6 @@
 ---
 title: "About Foojay | The Place for Friends Of OpenJDK"
-description: "Foojay is the vendor-neutral home for the Java community - daily news, OpenJDK data, podcasts and guides, made by the developers who use it."
+description: "Foojay is the vendor-neutral home for the Java community with daily news, OpenJDK data, podcasts and guides, made by the developers who use it."
 url: "/who-we-are/"
 aliases:
   - "/who-we-are/"
