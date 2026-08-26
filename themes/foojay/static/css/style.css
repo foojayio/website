@@ -1127,14 +1127,70 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    calendar and a busy month puts dozens of them here -- and an aside that runs
    longer than the calendar it explains pushes the sponsor widgets and the
    source note off the bottom of the page. The cap is generous enough that a
-   quiet month never scrolls at all. */
-.cal-legend__list {
-  list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem;
+   quiet month never scrolls at all.
+
+   THE CUT EDGE HAS TO LOOK CUT. macOS (and mobile) hide the scrollbar until
+   something scrolls, so a list capped mid-row looked like a list that simply
+   ended, and the only way to discover the other thirty groups was to happen to
+   hover over them. `scrollbar-width: thin` does not fix that -- it styles a
+   scrollbar that is not being painted yet.
+
+   The fix is a pair of scroll shadows, and they are worth the four gradients
+   because they are SELF-CANCELLING: each edge is a shadow painted on the box
+   (`scroll`) with an opaque cover painted on the content (`local`) directly
+   over it. At the top of the list the cover sits on the shadow and hides it;
+   scroll down and the cover travels away with the content, uncovering it. So
+   the shadow appears exactly when there is more in that direction and vanishes
+   at the end of the list -- no JavaScript, no scroll listener, and no false
+   "there is more" at the bottom of a short list.
+
+   The covers must be OPAQUE and must match what is behind the list, which is
+   the page itself (.cal-legend sets no background of its own) -- hence
+   --page-bg rather than --surface. Both are tokens, so this follows the theme.
+   The shadows are neutral black/white at low alpha rather than an ink token
+   for the same reason: they read as depth in both schemes. */
+.cal-legend__scroll {
   max-height: 27rem; overflow-y: auto; overscroll-behavior: contain;
   scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
   /* Standing room for the scrollbar, so it never sits on the event count and
      the rows don't shift sideways the moment the list gets long enough. */
   padding-right: .25rem;
+
+  background:
+    linear-gradient(var(--page-bg) 30%, transparent) top / 100% 2.5rem no-repeat,
+    linear-gradient(transparent, var(--page-bg) 70%) bottom / 100% 2.5rem no-repeat,
+    radial-gradient(farthest-side at 50% 0, rgb(0 0 0 / .17), transparent) top / 100% .9rem no-repeat,
+    radial-gradient(farthest-side at 50% 100%, rgb(0 0 0 / .17), transparent) bottom / 100% .9rem no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
+/* A black shadow is invisible on a near-black ground; invert it rather than
+   dropping the affordance in the scheme where the cut edge is hardest to see. */
+:root[data-theme="dark"] .cal-legend__scroll,
+:root:not([data-theme="light"]) .cal-legend__scroll {
+  background:
+    linear-gradient(var(--page-bg) 30%, transparent) top / 100% 2.5rem no-repeat,
+    linear-gradient(transparent, var(--page-bg) 70%) bottom / 100% 2.5rem no-repeat,
+    radial-gradient(farthest-side at 50% 0, rgb(255 255 255 / .16), transparent) top / 100% .9rem no-repeat,
+    radial-gradient(farthest-side at 50% 100%, rgb(255 255 255 / .16), transparent) bottom / 100% .9rem no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
+/* Drawn INSIDE the box: an outline-offset on a scroll container is clipped on
+   the axis it scrolls, so the ring's bottom edge would not be painted. Same
+   rule as .table-scroll. */
+.cal-legend__scroll:focus-visible { outline-offset: -3px; }
+
+.cal-legend__list {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem;
+}
+/* The list's own length, beside its heading. The page intro already counts
+   groups, but a reader looking at a list that stops mid-row is not looking at
+   the intro -- this is what tells them eight of forty-three. */
+.cal-legend__total {
+  display: inline-block; margin-left: .35rem; padding: .05rem .4rem;
+  border-radius: 999px; background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  color: var(--ink-muted); font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
 }
 .cal-legend__item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .55rem; align-items: baseline; font-size: .92rem; }
 .cal-legend__name a { color: var(--ink); font-weight: 600; }

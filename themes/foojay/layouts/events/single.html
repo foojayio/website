@@ -112,7 +112,17 @@
 
       {{ with $conferences }}
       <section class="cal-legend">
-        <h2 class="cal-legend__head">Conferences &amp; community events</h2>
+        {{/* The count is not decoration: the list below is capped and scrolls,
+             so without it a reader seeing eight rows has no way to know whether
+             that is all of them. It also means the scroll cap can change without
+             anyone having to restate a number here. */}}
+        <h2 class="cal-legend__head" id="cal-legend-conferences">Conferences &amp; community events <span class="cal-legend__total">{{ len . }}</span></h2>
+        {{/* The SCROLLER is this wrapper, not the <ul>, so the list keeps its
+             list semantics (a screen reader still announces "list, N items") --
+             putting role="group" on the <ul> itself would strip them. tabindex
+             makes it scrollable from the keyboard: both lists hold links, so tab
+             reaches the rows, but only by walking through every one of them. */}}
+        <div class="cal-legend__scroll" tabindex="0" role="group" aria-labelledby="cal-legend-conferences">
         <ul class="cal-legend__list">
           {{ range . }}
             <li class="cal-legend__item">
@@ -124,11 +134,13 @@
             </li>
           {{ end }}
         </ul>
+        </div>
       </section>
       {{ end }}
 
       <section class="cal-legend">
-        <h2 class="cal-legend__head">Groups on the calendar</h2>
+        <h2 class="cal-legend__head" id="cal-legend-groups">Groups on the calendar <span class="cal-legend__total">{{ len $groupNames }}</span></h2>
+        <div class="cal-legend__scroll" tabindex="0" role="group" aria-labelledby="cal-legend-groups">
         <ul class="cal-legend__list">
           {{ range $g := $groupNames }}
             {{ $first := index (where $events "group" $g) 0 }}
@@ -143,6 +155,7 @@
             </li>
           {{ end }}
         </ul>
+        </div>
       </section>
     </aside>
 
