@@ -1,0 +1,12 @@
+{{- /* {{< author-count >}} -- how many people have written for Foojay, as a
+       formatted number, inline.
+
+       Derived at build time from partials/authors-all.html, the single
+       definition of "every author profile", so the number on /meet-the-team/
+       cannot disagree with the A-Z grid at /today/author/ or the count on
+       /sitemap/ -- and nobody has to remember to edit a sentence when the 348th
+       author's first article is merged. Writing the figure into the prose was
+       the alternative, and it would have been wrong within the week.
+
+       Whitespace is trimmed on both sides because this is used mid-sentence. */ -}}
+{{- lang.FormatNumberCustom 0 (len (partialCached "authors-all.html" "authors")) -}}

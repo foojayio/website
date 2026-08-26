@@ -2146,6 +2146,29 @@ body.lightbox-open { overflow: hidden; }
 .prose .team-member h2 { margin: 0 0 .2rem; }
 .team-member > :last-child { margin-bottom: 0; }
 .team-member__role { color: var(--brand-secondary); font-weight: 600; margin: 0 0 .75rem; }
+
+/* The "All the Authors!" panel closing /meet-the-team/. Layout ONLY -- the
+   tinted ground, border and radius come from .highlight-panel, which CLAUDE.md
+   makes the single definition of "this block is the one to look at", so this
+   class must not restate any of them. Same split .post-card--lead uses.
+
+   It needs padding because .highlight-panel deliberately has none: it is a
+   treatment applied to blocks that already own their spacing, and inside .prose
+   there is nothing else to supply it. The clamp matches the lead card's.
+
+   No top border, unlike .team-member: the panel's own border already separates
+   it, and a rule immediately above a bordered box reads as a mistake. */
+.prose .team-authors {
+  padding: clamp(1.1rem, 2.5vw, 1.75rem);
+  margin-top: 2rem;
+}
+.prose .team-authors > :first-child { margin-top: 0; }
+.prose .team-authors > :last-child { margin-bottom: 0; }
+/* h2 inside .prose gets margin-top: 2rem from .post-single h2; the rule above
+   only clears it for the FIRST child, so the heading needs it in its own right
+   when the panel opens with it. Class-on-class to outrank `.post-single h2`,
+   which is 0-1-1. */
+.prose .team-authors h2 { margin-top: 0; }
 @media (max-width: 560px) {
   .prose .team-member__photo { width: 96px; height: 96px; margin-right: 1rem; }
 }

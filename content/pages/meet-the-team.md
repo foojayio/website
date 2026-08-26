@@ -53,3 +53,20 @@ In 2026, Frank led the AI-assisted migration of Foojay from WordPress to a stati
 Dominika is the newest addition to the Foojay team, looking after community, editing, platform maintenance, and sponsorships, alongside contributing her own community content. She's a community builder focused on growing the global Java and Jakarta EE ecosystems, specializing in community strategy, open source engagement, and developer-focused technical marketing. She currently works as a Senior Developer Advocate at Azul, supporting community growth around Azul Payara Community and Jakarta EE.
 
 </div>
+
+<div class="team-authors highlight-panel">
+
+## All the Authors!
+
+**Without them there is no Foojay.** The three of us above keep the lights on,
+but every article, tutorial and podcast episode on this site was written or
+recorded by someone in the Java community who chose to share what they know —
+{{< author-count >}} of them so far, from JDK engineers and framework
+maintainers to JUG leaders and developers writing up something they solved "last
+Tuesday".
+
+They are not guests here. Foojay *is* them. Can you [meet all of them here &rarr;](/today/author/)
+
+Want your name on that page? [Write for Foojay](/today/how-to-submit-your-next-article-on-foojay-io/) — send an article as a pull request and we will help you get it published.
+
+</div>
