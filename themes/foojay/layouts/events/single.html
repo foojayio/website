@@ -88,8 +88,16 @@
         <strong>{{ len $countries }}</strong> countries
       </p>
       {{ end }}
-      {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
     </div>
+    {{/* OUTSIDE .page-head__meta, like every other page head that has one.
+         It used to sit inside it, and .page-head__meta is a flex row while
+         .page-head__views carries a `margin-top` meant for sitting BELOW that
+         row -- so the read count rendered on the stats line but half a line
+         lower than everything on it. The count is also a different kind of
+         number from the ones beside it: those describe the calendar, this
+         describes the page, and running them together invited reading it as a
+         fifth calendar statistic. */}}
+    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
   </div>
 </div>
 

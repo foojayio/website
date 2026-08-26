@@ -1126,8 +1126,18 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 /* Capped and scrollable: both lists grow with the data -- 90 JUGs publish a
    calendar and a busy month puts dozens of them here -- and an aside that runs
    longer than the calendar it explains pushes the sponsor widgets and the
-   source note off the bottom of the page. The cap is generous enough that a
-   quiet month never scrolls at all.
+   source note off the bottom of the page.
+
+   THE CAP IS FIVE ROWS, and 17rem is that arithmetic rather than a round
+   number: a row is a .92rem name line plus a .85em country/date line at the
+   body's 1.65 line-height (24.3px + 20.6px = 44.9px), and four .55rem gaps
+   between five of them comes to 260px / 16.24rem. The extra ~0.8rem is
+   deliberate -- it leaves a sliver of the sixth row showing under the fade, and
+   a row visibly cut in half says "there is more" far better than a clean edge
+   does. Rows without a country line are shorter, so a list of those shows more
+   than five; the cap is a maximum, not a count.
+
+   It used to be 27rem, which was most of the calendar's height beside it.
 
    THE CUT EDGE HAS TO LOOK CUT. macOS (and mobile) hide the scrollbar until
    something scrolls, so a list capped mid-row looked like a list that simply
@@ -1150,17 +1160,17 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    The shadows are neutral black/white at low alpha rather than an ink token
    for the same reason: they read as depth in both schemes. */
 .cal-legend__scroll {
-  max-height: 27rem; overflow-y: auto; overscroll-behavior: contain;
+  max-height: 17rem; overflow-y: auto; overscroll-behavior: contain;
   scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
   /* Standing room for the scrollbar, so it never sits on the event count and
      the rows don't shift sideways the moment the list gets long enough. */
   padding-right: .25rem;
 
   background:
-    linear-gradient(var(--page-bg) 30%, transparent) top / 100% 2.5rem no-repeat,
-    linear-gradient(transparent, var(--page-bg) 70%) bottom / 100% 2.5rem no-repeat,
-    radial-gradient(farthest-side at 50% 0, rgb(0 0 0 / .17), transparent) top / 100% .9rem no-repeat,
-    radial-gradient(farthest-side at 50% 100%, rgb(0 0 0 / .17), transparent) bottom / 100% .9rem no-repeat;
+    linear-gradient(var(--page-bg) 30%, transparent) top / 100% 1.75rem no-repeat,
+    linear-gradient(transparent, var(--page-bg) 70%) bottom / 100% 1.75rem no-repeat,
+    radial-gradient(farthest-side at 50% 0, rgb(0 0 0 / .17), transparent) top / 100% .8rem no-repeat,
+    radial-gradient(farthest-side at 50% 100%, rgb(0 0 0 / .17), transparent) bottom / 100% .8rem no-repeat;
   background-attachment: local, local, scroll, scroll;
 }
 /* A black shadow is invisible on a near-black ground; invert it rather than
@@ -1168,10 +1178,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 :root[data-theme="dark"] .cal-legend__scroll,
 :root:not([data-theme="light"]) .cal-legend__scroll {
   background:
-    linear-gradient(var(--page-bg) 30%, transparent) top / 100% 2.5rem no-repeat,
-    linear-gradient(transparent, var(--page-bg) 70%) bottom / 100% 2.5rem no-repeat,
-    radial-gradient(farthest-side at 50% 0, rgb(255 255 255 / .16), transparent) top / 100% .9rem no-repeat,
-    radial-gradient(farthest-side at 50% 100%, rgb(255 255 255 / .16), transparent) bottom / 100% .9rem no-repeat;
+    linear-gradient(var(--page-bg) 30%, transparent) top / 100% 1.75rem no-repeat,
+    linear-gradient(transparent, var(--page-bg) 70%) bottom / 100% 1.75rem no-repeat,
+    radial-gradient(farthest-side at 50% 0, rgb(255 255 255 / .16), transparent) top / 100% .8rem no-repeat,
+    radial-gradient(farthest-side at 50% 100%, rgb(255 255 255 / .16), transparent) bottom / 100% .8rem no-repeat;
   background-attachment: local, local, scroll, scroll;
 }
 /* Drawn INSIDE the box: an outline-offset on a scroll container is clipped on
@@ -1674,6 +1684,11 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    card and the featured-author card. Posts and post cards get their spacing
    and separator dots from .post-meta / .post-card-meta instead. */
 .page-head__views { margin-top: .6rem; font-size: .9rem; }
+/* That margin assumes the count sits BELOW .page-head__meta, which is a flex
+   row -- nested inside one it just pushes the count half a line down off the
+   baseline, which is what /calendar/ shipped. Cheap guard, because the symptom
+   is a small vertical offset that is easy to miss in review. */
+.page-head__meta .page-head__views { margin-top: 0; }
 .author-profile .author-meta { grid-column: 2; margin: 0 0 .8rem; font-size: .9rem; }
 .pedia-card .views { display: block; margin-top: .55rem; font-size: .82rem; }
 .featured-author__count .views::before {
