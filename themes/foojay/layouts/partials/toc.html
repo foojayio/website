@@ -21,7 +21,7 @@
 
      Each entry is conditional on the SAME partial the article uses to decide
      whether to render the section at all -- post-authors.html,
-     related-pages.html, has-comments.html -- so the panel can never offer a
+     related-pages.html, comments-term.html -- so the panel can never offer a
      link to an anchor that is not on the page. The ids are hand-written in
      posts/single.html and namespaced `post-` so Goldmark, which mints ids for
      .Content and knows nothing about these, cannot take one first.
@@ -56,7 +56,7 @@
 {{ with partial "related-pages.html" . }}
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#post-related">Related posts</a></li>` }}
 {{ end }}
-{{ if partial "has-comments.html" . }}
+{{ if partial "comments-term.html" . }}
   {{/* Wording matches the heading the section actually shows, the same rule the
        Transcript entry follows -- a link labelled one thing that lands on a
        heading labelled another reads as the wrong link. */}}

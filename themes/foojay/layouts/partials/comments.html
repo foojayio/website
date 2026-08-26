@@ -14,6 +14,13 @@
   Until all four values are set this partial renders nothing, so an
   unconfigured build simply has no comment section.
 
+  WHICH PAGES GET A SECTION, AND THE TERM THEY USE, ARE partials/comments-term.html.
+  That partial is the single definition -- partials/toc.html asks it the same
+  question to decide whether to offer a "Join the discussion" jump link, and
+  when the condition lived here and a paraphrase of it lived there, the panel
+  advertised a comment section that pages like /jvm-options/ did not have.
+  It also qualifies the term by section for everything except posts; see there.
+
   THE TERM IS THE POST SLUG, NOT THE PATHNAME.
   giscus finds a page's discussion by searching for its "term". The obvious
   choice, mapping="pathname", is wrong here: this site runs at
@@ -35,16 +42,20 @@
   comment opens with an "Originally posted by ... in Foojay.io Discussions" line,
   because the commenters' GitHub identities are unknown.
 -->
-{{ with .Site.Params.giscus }}
-{{ if and .repo .repoId .category .categoryId }}
-{{ $term := or $.Params.slug $.File.ContentBaseName }}
+{{ $term := partial "comments-term.html" . }}
+{{ with $term }}
+{{/* comments-term.html has already established that all four giscus settings
+     are present -- it returns "" otherwise -- so this reads them directly
+     rather than re-testing them and nesting a second `with` (inside which `.`
+     would be the term string, not the settings). */}}
+{{ $g := site.Params.giscus }}
 <section id="giscus-comments" class="giscus-section">
   <h2 class="giscus-section__title">Join the discussion</h2>
   <script src="https://giscus.app/client.js"
-          data-repo="{{ .repo }}"
-          data-repo-id="{{ .repoId }}"
-          data-category="{{ .category }}"
-          data-category-id="{{ .categoryId }}"
+          data-repo="{{ $g.repo }}"
+          data-repo-id="{{ $g.repoId }}"
+          data-category="{{ $g.category }}"
+          data-category-id="{{ $g.categoryId }}"
           data-mapping="specific"
           data-term="{{ $term }}"
           data-strict="1"
@@ -58,5 +69,4 @@
           async>
   </script>
 </section>
-{{ end }}
 {{ end }}

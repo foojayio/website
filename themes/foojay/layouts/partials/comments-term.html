@@ -1,0 +1,72 @@
+{{- /* The giscus discussion term for a page, or "" if the page has no comment
+       section. Takes the page.
+
+       ONE definition, because two templates have to agree and the failure is
+       silent either way round: partials/comments.html renders the section, and
+       partials/toc.html offers the "Join the discussion" jump link. This partial
+       replaced a has-comments.html that only checked the giscus CONFIG -- true
+       for every page on the site -- so the panel offered that link on pages with
+       no comment section at all (/jvm-options/ was the one spotted). A condition
+       and the thing it guards belong in the same place.
+
+       WHICH SECTIONS. Same shape and same reasoning as views-key.html's
+       $counted: a list here, and nothing else to change. Comments used to be
+       posts-only because posts/single.html was the only caller.
+
+       `.Type eq .Section` is what keeps this partial honest about the `pages`
+       section, and it is derived rather than a blocklist. content/pages/ holds
+       two different kinds of thing: pages whose FILE is the page (the Quick
+       Start steps, the install guides, /jvm-options/, /who-we-are/), rendered by
+       _default/single.html, which calls comments.html; and pages that only carry
+       an intro while the layout derives the rest -- /calendar/, /jugs/,
+       /java-champions/, /ai/, /sitemap/, /board/ and the 19 board profiles --
+       which route to a layout of their own via `type:` and do not. Without this
+       test the second kind would be handed a term, and partials/toc.html would
+       once again offer a jump link to a section that is not on the page: the
+       exact bug this partial was written to fix, reintroduced one layout over.
+       Testing the `type:` that already does the routing means a new derived page
+       excludes itself, with no list here to remember.
+
+       The named exclusions on top of that are editorial, not structural: legal
+       text is not a conversation, and /sitemap/, /search/ and /ai-instructions/
+       are machinery -- the first two are generated from the content tree and the
+       third is addressed to machines. Everything else _default/single.html
+       renders gets a comment box, which is where "this didn't work on Ubuntu"
+       belongs.
+
+       THE TERM SHAPE DIFFERS BY SECTION, AND THAT IS DELIBERATE.
+
+       A post keeps the BARE slug it has always had. hugo.toml's giscus mapping,
+       scripts/transfer/Comments.java (which writes giscus's own `<!-- sha1: -->`
+       marker over the term) and every thread already created agree on it, and
+       changing it would orphan all of them -- see comments.html.
+
+       Every other section is `<section>/<slug>`, because a bare slug is not
+       unique across sections and this is the exact failure data-strict="1"
+       exists to prevent: content/pedia/records.md and content/posts/.../records/
+       both slug to "records", so on a bare term the glossary entry and the
+       article would share one discussion. That is not hypothetical, it is in
+       the repo today. views-key.html qualifies its key for the same reason and
+       records the same near-miss. */ -}}
+{{- $discussable := slice "posts" "pedia" "pages" -}}
+{{- $never := slice "privacy-policy" "terms-of-use" "accessibility" "sitemap" "search" "ai-instructions" -}}
+{{- $term := "" -}}
+{{- /* Config first: on a fork or an unconfigured build giscus renders nothing,
+       so there is no anchor and there must be no link to one either. */ -}}
+{{- with site.Params.giscus -}}
+  {{- if and .repo .repoId .category .categoryId -}}
+    {{- with $ -}}
+      {{- /* `.File` for the same reason views-key.html needs it: the slug is
+             derived from the file name, so a page Hugo generates (a taxonomy
+             term, a pager) has nothing to key on. `.IsPage` keeps a section
+             LISTING out -- /pedia/ itself is not a glossary entry. */ -}}
+      {{- if and .File .IsPage (in $discussable .Section) (eq .Type .Section) -}}
+        {{- $slug := or .Params.slug .File.ContentBaseName -}}
+        {{- if not (in $never $slug) -}}
+          {{- $term = cond (eq .Section "posts") $slug (printf "%s/%s" .Section $slug) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $term -}}

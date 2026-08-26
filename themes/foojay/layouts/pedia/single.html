@@ -19,6 +19,13 @@
 
     {{ partial "page-source.html" . }}
 
+    {{/* Renders nothing unless partials/comments-term.html gives this page a
+         term. A glossary entry is exactly the kind of page a reader corrects or
+         asks a follow-up on, and the term is qualified `pedia/<slug>` there --
+         content/pedia/records.md and the post "records" would otherwise share
+         one thread. */}}
+    {{ partial "comments.html" . }}
+
     <p class="pedia-back pedia-back--foot"><a href="{{ "pedia/" | relURL }}">&larr; Back to all terms</a></p>
   </article>
   {{ if $hasToc }}
