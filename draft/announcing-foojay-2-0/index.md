@@ -151,15 +151,14 @@ work:
 So: a Go static site generator, and a pile of Java doing everything that
 actually needed writing.
 
-**And what the AI half cost, since the logs are sitting right there.** 2,244
+I worked on this on two different computers, and Claude gave me a nice insight about the "real" cost of using it. **About the AI half cost, since the logs are sitting right there.** 2,244
 requests, 713 million tokens, about $500 at list prices. The interesting part is
 the shape of that: **98% of those tokens are cached context being re-read** —
 the conversation so far, handed back on every turn at a tenth of the normal
 input price — and the tokens that were actually *written*, the code and the
 prose, are 2 million of the 713 and only 10% of the bill. Thinking about a large
 codebase costs more than writing to it. (One honest caveat: those logs cover 9
-of the 17 working days, because some of this was built on a second machine, so
-the real figure is nearer $550.)
+of the 17 working days, because some of this was built on a second machine.)
 
 ## The part that matters to authors
 
