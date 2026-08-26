@@ -1,4 +1,5 @@
 {
+  "authors/chriswhocodes" : 1,
   "pages/ai" : 3126,
   "pages/board" : 58882,
   "pages/calendar" : 52390,
@@ -2029,7 +2030,7 @@
   "posts/understanding-apache-maven-part-8-maven-plugins" : 9659,
   "posts/understanding-apache-maven-part-9-versions-in-maven" : 3645,
   "posts/understanding-bson-a-beginners-guide-to-mongodbs-data-format" : 21189,
-  "posts/understanding-jvm-memory-layout-with-openjdk24s-new-printmemorymapatexit-vm-option" : 11189,
+  "posts/understanding-jvm-memory-layout-with-openjdk24s-new-printmemorymapatexit-vm-option" : 11190,
   "posts/understanding-mcp-through-raw-stdio-communication" : 36419,
   "posts/understanding-security-vulnerabilities-a-first-step-in-preventing-attacks" : 5206,
   "posts/understanding-stack-traces-and-debugging-them-further" : 3461,
