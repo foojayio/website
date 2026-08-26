@@ -18,6 +18,39 @@
      visible <h1>. */}}
 <h1 class="visually-hidden">{{ site.Title }}</h1>
 
+{{/* The one-line masthead strapline, and the only prose on the home page.
+
+     It is here, above the fold, rather than in a band at the foot, because the
+     reader it exists for is the one who has never been here before -- and they
+     decide what this site is within a screen, long before they would reach a
+     closing section. It was tried at the foot first; that placement serves
+     everyone except the person it is for.
+
+     Two things already in the chrome are why this is ONE LINE and not a hero:
+     the header carries "Friends Of OpenJDK" beside the wordmark, and it carries
+     the "Write for Foojay" CTA. So the strapline owes the reader only the bit
+     neither of those gives -- what the site is FOR -- and it must not spend the
+     lead article's fold space saying anything else. Note the header tag is
+     `display: none` below 1120px, so on a phone or tablet this line is the only
+     thing on the page that expands "foojay.io" at all.
+
+     The <h1> above stays hidden. This is orientation, not document structure,
+     and a visible heading here would just repeat the wordmark two rows up.
+
+     THE SENTENCE IS DERIVED: it is /who-we-are/'s own description, through
+     partials/meta-description.html -- the same string that page gives a search
+     engine and a link preview -- so the home page cannot describe Foojay
+     differently from the page it sends you to for the long version, and there is
+     no second pitch to keep in step with the footer blurb. `with` on the lookup,
+     so a fork that removes that page gets no strip rather than an empty bar. */}}
+{{ with site.GetPage "/pages/who-we-are" }}
+<div class="home-intro">
+  <div class="shell">
+    <p>{{ partial "meta-description.html" . }} <a href="{{ .RelPermalink }}">What is Foojay? &rarr;</a></p>
+  </div>
+</div>
+{{ end }}
+
 <div class="layout-with-sidebar">
   <div class="content-col">
 
@@ -100,38 +133,5 @@ expires. */}}
   </div>
 </section>
 
-{{/* "What is Foojay?" -- the last band, and the only prose on the home page.
-
-     It exists because the page opens straight into the lead card and its <h1>
-     is visually hidden (see the note at the top), so a first-time visitor had
-     nothing anywhere on the most-linked page of the site telling them what the
-     site IS. The WordPress home page answers that with an accordion of links --
-     What is Foojay / Meet The Team / Authors / Where to Find / Advisory Board --
-     which is deliberately NOT reproduced: every one of those already sits in
-     the footer's "About Foojay" column and in the header nav, and a third copy
-     of the site's own navigation is the drift the footer menu was rebuilt to
-     get rid of. A newcomer needs a sentence, not a link list.
-
-     THE SENTENCE IS DERIVED, not written here. It is /who-we-are/'s own
-     description, through partials/meta-description.html -- the same string that
-     page gives a search engine and a link preview -- so the home page cannot
-     describe Foojay differently from the page it sends you to for the long
-     version, and there is no second pitch to keep in step with the footer
-     blurb. `with` on the lookup, so a fork that removes that page gets no band
-     rather than an empty heading.
-
-     A plain band, because "More blog categories" above it is sunken. */}}
-{{ with site.GetPage "/pages/who-we-are" }}
-<section class="band home-about">
-  <div class="shell">
-    <h2>What is Foojay?</h2>
-    <p>{{ partial "meta-description.html" . }}</p>
-    <div class="home-about__actions">
-      <a class="btn btn--accent" href="{{ .RelPermalink }}">More about Foojay</a>
-      <a class="btn btn--ghost" href="{{ "today/how-to-submit-your-next-article-on-foojay-io/" | relURL }}">Write for Foojay</a>
-    </div>
-  </div>
-</section>
-{{ end }}
 
 {{ end }}

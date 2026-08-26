@@ -572,24 +572,25 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .band { padding: clamp(2.25rem, 4vw, 3.5rem) 0; }
 .band--sunken { background: var(--surface-sunken); border-block: 1px solid var(--border); }
 
-/* The "What is Foojay?" band closing the home page (layouts/index.html). The
-   only prose on that page, so it is centred and width-capped for reading rather
-   than laid out like the grids above it -- 62ch is the measure the rest of the
-   site's body copy uses.
+/* The home page's one-line strapline, directly under the sticky header
+   (layouts/index.html). Sunken with a bottom rule so it reads as the foot of
+   the site chrome rather than as the first item of content -- it belongs to the
+   masthead, and must not compete with the lead card immediately below it.
 
-   Not .section-head: that shape is a heading plus one "more" link pushed to the
-   right edge, and this is a heading, a sentence, and two equal-weight actions
-   under them. */
-.home-about { text-align: center; }
-.home-about h2 { margin: 0 0 .6rem; }
-.home-about p {
-  max-width: 62ch; margin: 0 auto; color: var(--ink-soft); font-size: 1.05rem;
+   Sized to cost ~44px of the fold. If this ever grows past one line on a
+   desktop width, shorten /who-we-are/'s description rather than restyling
+   here: the length of that string is the real constraint, and it is also what
+   search results and link previews show. */
+.home-intro {
+  background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border);
 }
-.home-about__actions {
-  display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center;
-  margin-top: 1.4rem;
+.home-intro p {
+  margin: 0; padding: .72rem 0;
+  font-size: .95rem; color: var(--ink-soft);
 }
-
+/* nowrap so the link never breaks across lines away from its arrow. */
+.home-intro a { font-weight: 600; white-space: nowrap; }
 /* --------------------------------------------------- home: events strip -- */
 /* The "next two weeks" band (partials/upcoming-events.html). One row that
    scrolls sideways, not a grid that wraps: the band is a glance at what is
