@@ -8,7 +8,6 @@ authors:
 image: "ai-insider-1.jpg"
 categories:
   - "Data Engineering"
-  - "Interviews"
   - "Java"
   - "JC-AI Newsletter"
   - "Machine Learning"
@@ -21,7 +20,7 @@ related_posts:
   - "jc-ai-newsletter-15"
   - "jc-ai-newsletter-14"
   - "jc-ai-newsletter-7"
-frozen: false
+frozen: true
 ---
 
 Over the past two weeks, the field of artificial intelligence has continued its remarkable pace of advancement. As AI becomes increasingly woven into the fabric of daily life, shaping how we work, communicate, and make decisions, it is both timely and valuable to step back and understand the broader trajectory of this technology. Whether the developments around us feel promising or challenging, one truth remains clear: AI is not simply going away. It is here to stay, and understanding its evolution is essential from many perspectives. Have you ever wondered what harness engineering is, how evals attempt to move traditional unit tests onto a probabilistic plane, or how AI is reshaping entire industries across various branches? Let's start.
