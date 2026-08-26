@@ -157,6 +157,12 @@
         </ul>
         </div>
       </section>
+    
+      {{/* This page builds its own rail (the two legends), so it never went
+           through partials/sidebar.html and never showed the sponsors. Last,
+           under the legends, because those are the key to the calendar beside
+           them and have to stay next to it. */}}
+      {{ partial "sidebar-sponsors.html" . }}
     </aside>
 
     <div class="calendar__main">

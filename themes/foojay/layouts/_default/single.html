@@ -6,12 +6,30 @@
     {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
   </div>
 </div>
-{{/* Short pages (a couple of paragraphs, no h2/h3s) have no
-     .TableOfContents and stay full-width; longer ones -- the Java Quick
-     Start steps, install guides, etc. -- get the "On this page" sidebar. */}}
-{{ $hasToc := partial "has-toc.html" . }}
-<div class="{{ if $hasToc }}layout-with-sidebar{{ else }}content-col full-width{{ end }}">
-  <article class="{{ if $hasToc }}content-col {{ end }}page-single prose">
+{{/* THE RAIL ALWAYS RENDERS, and it did not used to.
+
+     It was conditional on the page having h2/h3s, on the reasoning that a short
+     page has no "On this page" panel to show. But the panel is not the only
+     thing in that column -- the paid banner and the sponsor logos are too, and
+     both are there on every post and every listing. So 13 Quick Start pages plus
+     the two legal pages fell to a full-width branch that showed neither.
+
+     Full width did not even buy them anything: every page using this template is
+     PROSE, capped at the 88ch reading measure by .page-single, so the branch
+     produced a column of text left-aligned in a 1240px shell with the remaining
+     ~450px thrown away as empty gutter. Two columns is strictly better -- the
+     text measure is identical and the gutter now holds something.
+
+     partials/toc.html renders nothing when there are no headings (it is guarded
+     by has-toc.html), so a short page simply gets a rail of banner + sponsors
+     rather than an empty panel. Nothing here needs a condition.
+
+     This is NOT the rule for the genuinely wide layouts -- /jugs/,
+     /java-champions/, /sitemap/, /board/ -- whose content is a map or a
+     thousand-row table. Those keep their full width and take no rail; see
+     page-single--wide in style.css. */}}
+<div class="layout-with-sidebar">
+  <article class="content-col page-single prose">
     {{/* Both render nothing unless the page carries a `weight`, i.e. is a step
          in a multi-page series (the Java Quick Start tutorial today). Kept here
          rather than in a series-specific layout so any folder of ordered pages
@@ -28,7 +46,6 @@
          their own via `type:` never reach this template at all. */}}
     {{ partial "comments.html" . }}
   </article>
-  {{ if $hasToc }}
   <aside class="sidebar" data-pagefind-ignore>
     {{ partial "toc.html" . }}
 
@@ -39,7 +56,15 @@
          with a gap where every other page has a banner. Renders nothing when no
          campaign is running, and nothing on the home page. */}}
     {{ partial "ads-widget.html" . }}
+
+    {{/* And the sponsor list, for the same reason the banner above it is here.
+         partials/sidebar.html carries both on posts and listings; this column is
+         hand-built, so it got the banner when that was added and was silently
+         left without the logos -- so the paid carousel ran on these pages while
+         the sponsors who fund the site did not appear. CLAUDE.md treats sponsor
+         visibility as contractual and exempts this widget from the TOC-height
+         cull; a rail that renders at all should render it. */}}
+    {{ partial "sidebar-sponsors.html" . }}
   </aside>
-  {{ end }}
 </div>
 {{ end }}

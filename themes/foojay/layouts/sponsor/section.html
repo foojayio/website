@@ -230,6 +230,11 @@
            categories/authors/JUGs widgets in partials/sidebar.html. */}}
       <a class="view-all" href="{{ $section.RelPermalink }}">View all sponsors</a>
     </div>
+  
+    {{/* See _default/single.html: a hand-built rail must still carry the
+         sponsor list. On a sponsor's own profile it doubles as the way across
+         to the others. */}}
+    {{ partial "sidebar-sponsors.html" . }}
   </aside>
 </div>
 {{ end }}

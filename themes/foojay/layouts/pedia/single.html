@@ -39,6 +39,15 @@
          with a gap where every other page has a banner. Renders nothing when no
          campaign is running, and nothing on the home page. */}}
     {{ partial "ads-widget.html" . }}
+
+    {{/* And the sponsor list, for the same reason the banner above it is here.
+         partials/sidebar.html carries both on posts and listings; this column is
+         hand-built, so it got the banner when that was added and was silently
+         left without the logos -- so the paid carousel ran on these pages while
+         the sponsors who fund the site did not appear. CLAUDE.md treats sponsor
+         visibility as contractual and exempts this widget from the TOC-height
+         cull; a rail that renders at all should render it. */}}
+    {{ partial "sidebar-sponsors.html" . }}
   </aside>
   {{ end }}
 </div>

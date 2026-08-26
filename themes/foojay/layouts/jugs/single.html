@@ -8,7 +8,14 @@
 </div>
 
 <div class="content-col full-width">
-  <article class="page-single prose">
+  {{/* page-single--wide: the wrapper above is already full-width, but
+       .page-single caps its child at the 88ch READING measure -- right for
+       prose, wrong here, where the content is a world map and a table of
+       hundreds of rows. Without it the page left-aligned at ~800px inside the
+       1240px shell and threw the rest away as empty gutter. Same opt-out
+       sponsors/list.html uses; these two were missed. There is almost no prose
+       on either page to widen badly -- the body is a source note. */}}
+  <article class="page-single page-single--wide prose">
     {{ .Content }}
 
     {{/* data/jugs.yaml is regenerated at every build and daily
