@@ -65,8 +65,8 @@ recorded by someone in the Java community who chose to share what they know —
 maintainers to JUG leaders and developers writing up something they solved "last
 Tuesday".
 
-They are not guests here. Foojay *is* them. Can you [meet all of them here &rarr;](/today/author/)
+They are not guests here. Foojay *is* them. You can [meet all of them here &rarr;](/today/author/)
 
-Want your name on that page? [Write for Foojay](/today/how-to-submit-your-next-article-on-foojay-io/) — send an article as a pull request and we will help you get it published.
+Want your name on that page? Check how to  [write for Foojay](/today/how-to-submit-your-next-article-on-foojay-io/), send an article as a pull request, and we will help you get it published.
 
 </div>
