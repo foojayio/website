@@ -572,6 +572,24 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .band { padding: clamp(2.25rem, 4vw, 3.5rem) 0; }
 .band--sunken { background: var(--surface-sunken); border-block: 1px solid var(--border); }
 
+/* The "What is Foojay?" band closing the home page (layouts/index.html). The
+   only prose on that page, so it is centred and width-capped for reading rather
+   than laid out like the grids above it -- 62ch is the measure the rest of the
+   site's body copy uses.
+
+   Not .section-head: that shape is a heading plus one "more" link pushed to the
+   right edge, and this is a heading, a sentence, and two equal-weight actions
+   under them. */
+.home-about { text-align: center; }
+.home-about h2 { margin: 0 0 .6rem; }
+.home-about p {
+  max-width: 62ch; margin: 0 auto; color: var(--ink-soft); font-size: 1.05rem;
+}
+.home-about__actions {
+  display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center;
+  margin-top: 1.4rem;
+}
+
 /* --------------------------------------------------- home: events strip -- */
 /* The "next two weeks" band (partials/upcoming-events.html). One row that
    scrolls sideways, not a grid that wraps: the band is a glance at what is
