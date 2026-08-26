@@ -1,7 +1,7 @@
 ---
 title: "Azul August 2026 Release: Java's First Monthly CSPU"
 date: "2026-08-21T07:48:46+00:00"
-lastmod: "2026-08-21T13:04:50+00:00"
+lastmod: "2026-08-26T06:11:28+00:00"
 description: "If someone discloses a 0-day CVE the day after a quarterly update, you could wait up to three months for a patched build. That gap is closed now."
 authors:
   - "frankdelporte"
@@ -41,7 +41,7 @@ Azul splits each CSPU into two separate build lines, and picking the right one m
 * **CSPU for CPU builds** contain only critical and security fixes on top of the previous quarterly CPU (Critical Patch Update). They change as little as possible, so Azul recommends them for production as the fastest safe path to a patched runtime.
 * **CSPU for PSU builds** build on the previous quarterly PSU (Patch Set Update) and also carry accumulated non-security fixes. Azul recommends them for testing and to be deployed before moving to the next security update. They are also the only line available to free Zulu Community (CA) users.
 
-That split is the practical answer to garantuee stability. As security updates may arrive as often as monthly, your window to test and roll out each one shrinks. Security-only CPU builds keep regression risk minimal, so you can move a patch to production quickly without waiting on a full validation cycle for unrelated bug fixes. And after validating the PSU, you can move to the version which also contains other fixes and improvements.
+That split is the practical answer to guarantee stability. As security updates may arrive as often as monthly, your window to test and roll out each one shrinks. Security-only CPU builds keep regression risk minimal, so you can move a patch to production quickly without waiting on a full validation cycle for unrelated bug fixes. And after validating the PSU, you can move to the version which also contains other fixes and improvements.
 
 ## Azul Zulu Build Numbers
 
@@ -68,7 +68,9 @@ This CSPU fixes five CVEs of which [four apply to Azul Zulu builds](https://docs
 | [CVE-2026-61308](https://www.cve.org/CVERecord?id=CVE-2026-61308)                                     | Networking / HTTP | 6.8        | Medium   |
 | [CVE-2026-70907](https://www.cve.org/CVERecord?id=CVE-2026-70907)                                     | JSSE / TLS        | 5.3        | Medium   |
 | [CVE-2026-60589](https://www.cve.org/CVERecord?id=CVE-2026-60589)                                     | Security          | 3.7        | Low      |
-| [CVE-2026-62574](https://www.cve.org/CVERecord?id=CVE-2026-62574)                                     | Install           | 7.8        | High     |
+| [CVE-2026-62574](https://www.cve.org/CVERecord?id=CVE-2026-62574)                                     | Install (\*)      | 7.8        | High     |
+
+(\*): Not applicable for Azul Zulu.
 
 ## What this changes for you
 
