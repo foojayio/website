@@ -167,5 +167,4 @@ The domain move is not just a DNS change. In rough order:
 5. **Security headers** on Cloudflare — `X-Content-Type-Options`,
    `Referrer-Policy`, `Permissions-Policy`, CSP. GitHub Pages cannot set them.
 
-`TODO.md` tracks what is still open, and `CLAUDE.md`'s "Known gaps" section
-carries the detail on each.
+`CLAUDE.md`'s "Known gaps" section carries the detail on each.
