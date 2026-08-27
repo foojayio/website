@@ -52,7 +52,7 @@ automatically whenever something lands on the main branch. Concretely:
 |---|---|---|
 | Publishing | CMS account + web editor | a pull request |
 | Search | server-side | a static index, in your browser |
-| Comments | a plugin | GitHub Discussions |
+| Comments | a plugin | GitHub Discussions, with the old ones kept as an archive |
 | Read counts | a plugin | a counter we run, that stores a slug and a number |
 | Analytics | Google Analytics via 360 KB of Tag Manager | the same Google Analytics, loaded directly |
 | Podcast episodes | press play and listen | a transcript on the page as well |
@@ -134,6 +134,33 @@ to look for:
   each, now one small shortcode.
 - **8,053 headings** restyled, and every code block turned from eight
   attributes of WordPress plumbing into a plain Markdown fence.
+
+**Links were the other half of the job, and the broken ones do not announce
+themselves.** A dead link inside an article renders perfectly.
+
+- **596 redirect pages**, so every URL the old site ever answered still lands
+  somewhere real. 89 of those come from WordPress's own redirect table, and the
+  entries in it point at other entries, so we followed every chain to its final
+  destination. A redirect aimed at another redirect is one search engines throw
+  away. Another 17 rules went in the bin, because their targets 404 on the
+  live WordPress site too, and recreating a redirect to a missing page helps
+  nobody.
+- **143 internal links that were already dead**, and had been for years. A link
+  to a file sitting in the article's own folder resolved against the site root
+  instead, so `![](shot.png)` worked and `[handout](handout.pdf)` quietly did
+  not. Nothing in the Markdown shows that asymmetry, which is why it survived so
+  long.
+- **We checked all 837 cross-post canonicals against the live web**, one request
+  each. 48 pointed at an article that no longer exists, which is worse than
+  having no canonical at all: it tells Google the real version of the text sits
+  at a URL that 404s, so Google suppresses Foojay's copy in favour of nothing.
+  Those 48 now point at Foojay. That check needed two different HTTP clients,
+  because Medium answers a script with 403 and sometimes 410, and a bot wall
+  looks exactly like a deleted page.
+- **1.26 GB of images, down to 0.69 GB.** GitHub Pages refuses to deploy a site
+  over 1 GB, and the warning for crossing that line lands on a build that
+  otherwise goes green. The same 52 MB animated GIF was the header image of
+  three different articles.
 
 **The part that keeps running.** The `scripts/` folders are grouped by one
 question — *does this still exist after cutover?* — because two of them are
@@ -312,6 +339,49 @@ One deliberate omission — **transcripts are not in the search index.** 800,000
 words against the article archive's 115,000 would make every episode a hit for
 any word anyone happened to say out loud, and bury the thing you were actually
 searching for.
+
+## Your old comments are still there
+
+Foojay collected 580 comments across 270 articles over six years, and a lot of
+them earn their place. Someone corrected the author, someone posted the command
+that actually worked, someone asked the question everybody else also had.
+
+New comments go to [giscus](https://giscus.app/), which keeps each thread as a
+GitHub Discussion on the same public repository as the articles. You sign in with
+GitHub, the thread has a URL you can link to, and the team moderates it with the
+tools it already uses every day. A thread keys on the article slug and not on its
+path, so moving the site to its new home orphaned none of them.
+
+The 580 old comments needed a different answer, and the first attempt failed in a
+way worth writing down. The plan was to post them into those same Discussions
+from the Foojay account, so that an old conversation and a new one looked
+identical. GitHub blocked the account a few articles in. Several hundred comments
+created through an API by a brand new account looks exactly like spam from their
+side, and it is hard to argue they read it wrong.
+
+So the old comments live in the repository instead. Each article carries a small
+JSON file next to its text, and the page renders it under the live discussion as
+**Discussions on the previous Foojay site**. Two of the 580 did not survive,
+because they belong to an article WordPress itself has deleted, which leaves 578
+across 269 articles.
+
+Losing that import turned out to improve the result. Nobody knows the GitHub
+identity of a reader who commented in 2021, so not one of those people could ever
+have edited or replied to their own comment inside a Discussion. An archive says
+what it honestly is. It also forgives a mistake: a bad conversion costs a re-run,
+where a bad import cost an apology to 580 people. And it is now the only copy of
+those 580 comments, which matters more every day, because they disappear with the
+WordPress site.
+
+One detail here is not cosmetic. Foojay's Markdown allows raw HTML, for the same
+reason the security check above has to allow it. Printing 578 bodies written by
+strangers straight onto the page would therefore hand any one of them a
+`<script>` tag, on 269 article pages, with no server left to catch it. So the
+conversion runs every comment through jsoup's own sanitizer and stores the
+result, and the page prints only what the sanitizer approved. The tags those
+comments actually use come to eight: paragraphs, line breaks, links, `code`,
+`pre`, `strong`, `em` and one blockquote. Not a single image, iframe or script
+among them.
 
 ## Accessibility
 
