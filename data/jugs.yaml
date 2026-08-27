@@ -42,15 +42,6 @@
   latitude: 33.9325621
   longitude: -84.3517143
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/AtlantaJUG.md
-- slug: BangaloreJUG
-  name: BangaloreJUG
-  country: India
-  website: https://bangalorejug.org
-  twitter: bangalorejug
-  founded_date: '2012-08-15'
-  latitude: 12.971599
-  longitude: 77.594566
-  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/BangaloreJUG.md
 - slug: BarcelonaJUG
   name: Barcelona Java Users Group
   country: Spain
