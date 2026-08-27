@@ -1,0 +1,16 @@
+[
+  {
+    "id": 2305,
+    "depth": 0,
+    "author": "Anonymous",
+    "date": "2022-01-25T14:34:31",
+    "html": "<p>The problem I see with toolchains is that you need to manually configure the JDKs in ~/.m2/toolchains.xml, which creates a small portability issue.</p>\n<p>Think of CI where you use a container image (GitLab CI), that image only has a single JDK, to make it work correctly the image needs to have all the JDKs needed installed and also have the configuration of the toolchains.xml.</p>\n<p>So while it might be practical on a developer machine, it loses that benefit on CI, and just to enforce the JDK version, better use enforcer-plugin, and now with a recent JDK you can compile your code up to Java 7 with the –release (maven.compiler.release), the toolchains is just an old mechanism for pre-Java-8 code.</p>\n<p>The only advantage would be that Maven wasn’t compatible with recent JDK versions and your code needs to compile on a recent JDK, eg. Maven is compatible with Java 11 but not with Java 17, and you need to compile with Java 17, but actually, this is not the case (I know that Gradle suffers when a new JDK is released and toolchains is the only way to do this).</p>"
+  },
+  {
+    "id": 2310,
+    "depth": 1,
+    "author": "Maarten Mulders",
+    "date": "2022-01-26T07:25:31",
+    "html": "<p>To a certain extent, that is right, having to configure the Toolchains upfront means a bit of work configuring the CI server. In case of a containerised build, it may be more convenient to split the build, one for each JDK. But not everyone is using containerised builds, and sometimes all you have is a big Jenkins box with 4 different JDK’s installed. Which JDK to use? The Toolchain specifies that.</p>\n<p>In a containerised build, you could even generate the toolchains.xml as an early stage in the build. No benefits lost. Usually, a project specifies only one JDK to be used in the build, so no need to install multiple JDK’s in one container image.</p>\n<p>But make no mistake, the primary goal of Toolchains is not to enforce a particular JDK version. Indeed, there’s the Enforcer Plugin for that. Toolchains help you decouple the JDK that compiles your code from the JVM that Maven uses. In that sense, it _increases_ portability: no matter what JVM a developer uses on their machine, their team members might have a different one, and the build server yet another one. And that’s fine because Toolchains ensure that the build always uses the same, predictable JDK, no matter your local setup.</p>"
+  }
+]

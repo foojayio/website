@@ -1,0 +1,16 @@
+[
+  {
+    "id": 8441,
+    "depth": 0,
+    "author": "Andriy Plokhotnyuk",
+    "date": "2023-02-03T16:30:58",
+    "html": "<p>The latest version of JMH tool allows to measure core to core latency using the following command:</p>\n<p>`java -jar jmh-core-benchmarks-latest.jar -t roundtrip_latency -m quick`</p>"
+  },
+  {
+    "id": 8444,
+    "depth": 0,
+    "author": "Touisteur",
+    "date": "2023-02-03T19:58:59",
+    "html": "<p>Hi, thanks for the article. Can you cite which tool you use to compute/draw these heatmaps (I may have missed the link, sorry).</p>\n<p>Do you have similar heatmaps about succesful/contented atomic read/writes across cores? Easy to obtain?</p>\n<p>Cheers</p>"
+  }
+]

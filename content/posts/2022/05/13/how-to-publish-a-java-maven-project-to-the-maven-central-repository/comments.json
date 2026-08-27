@@ -1,0 +1,16 @@
+[
+  {
+    "id": 3532,
+    "depth": 0,
+    "author": "Simon Martinelli",
+    "date": "2022-05-13T15:13:12",
+    "html": "<p>The 4 waiting hours are only for the search!<br>\n  The artifact will be available in the Maven repo after a few minutes.</p>"
+  },
+  {
+    "id": 3533,
+    "depth": 0,
+    "author": "Karl Heinz Marbaise",
+    "date": "2022-05-13T16:17:17",
+    "html": "<p>Small hint: The usage of `M2_HOME` is not needed.</p>"
+  }
+]

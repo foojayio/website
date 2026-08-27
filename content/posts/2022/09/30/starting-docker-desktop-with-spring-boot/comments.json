@@ -1,0 +1,17 @@
+[
+  {
+    "id": 6112,
+    "depth": 0,
+    "author": "Simon Martinelli",
+    "date": "2022-09-30T09:25:20",
+    "html": "<p>Spring Boot can create images without a Dockerfile:</p>\n<pre>mvn spring-boot:build-image</pre>"
+  },
+  {
+    "id": 6157,
+    "depth": 0,
+    "author": "Sumith Puri",
+    "authorUrl": "http://www.sumithpuri.xyz",
+    "date": "2022-10-03T07:19:34",
+    "html": "<p>Thanks to Simon Martinelli for pointing this out! This one mentioned here by Simon still requires a Docker Daemon to be available. Please read further about this over here: <a href=\"https://www.baeldung.com/spring-boot-docker-images\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.baeldung.com/spring-boot-docker-images</a></p>\n<p>Also, Jib by (Google Container Tools) is the one that doesn’t need a Docker Daemon. [Read Here] : <a href=\"https://medium.com/swlh/build-a-docker-image-using-maven-and-spring-boot-58147045a400\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://medium.com/swlh/build-a-docker-image-using-maven-and-spring-boot-58147045a400</a></p>"
+  }
+]

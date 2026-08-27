@@ -1,0 +1,9 @@
+[
+  {
+    "id": 7261,
+    "depth": 0,
+    "author": "Roman",
+    "date": "2022-12-05T14:48:07",
+    "html": "<p>In latest JDK you can use StackWalker instead of throwing exception.</p>"
+  }
+]

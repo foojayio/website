@@ -1,0 +1,46 @@
+[
+  {
+    "id": 5104,
+    "depth": 0,
+    "author": "NoName",
+    "date": "2022-07-28T20:07:45",
+    "html": "<p>Great article! I got how to call the C function from java</p>\n<p>void my_callback_function2(void (*ptrToFunction)(int)); //works!</p>\n<p>However, I cannot figure out how to pass a C struct as an input parameter or return a struct for a C function</p>\n<p>Let’s assume a have the C struct<br>\n  struct item {<br>\n  int id;<br>\n  int code;<br>\n  };</p>\n<p>I need to initialize in Java and pass it to a C as the input parameter of the callback function smth like:</p>\n<p>struct item my_test(int (*ptrToFunction)(struct item));</p>\n<p>how to do that?</p>"
+  },
+  {
+    "id": 5108,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-07-29T01:35:57",
+    "html": "<p>NoName,</p>\n<p>Hopefully, the following is what you are looking for. For starters you’ll create a C function <em>my_callback_function3()</em> that will receive a function pointer (pointer to a Java static method) and returns an int.<br>\n  As a test create struct Point with x, y, and have jextract generate binding code.</p>\n<p>In C library mylib.h and mylib.c will have the following</p>\n<p>[C Land]<br><strong>mylib.h</strong></p>\n<p><code><br>\n   struct Point {<br>\n   int x;<br>\n   int y;<br>\n   };</code></p><code>\n <p>void my_callback_function3(int (*ptrToFunction)(struct Point));</p></code>\n<p><code></code></p>\n<p><strong>mylib.c</strong><br><code><br>\n   void my_callback_function3(int (*ptrToFunction)(struct Point)) {<br>\n   struct Point pt;<br>\n   pt.x = 5;<br>\n   pt.y = 4;</code></p><code></code>\n<p><code>int z = (*ptrToFunction)(pt);<br>\n   printf(\"z = %d\\n\", z);<br>\n   }<br></code></p>\n<p>[JAVA Land]<br>\n  In Java Panama Code do the following Steps:</p>\n<p><strong>Step 1:</strong> Create a static method to receive a struct (MemorySegment) and returns an int.<br><code></code></p><code></code>\n<p><code>public static int addCoordinates(MemorySegment ptStruct) {<br>\n   try (var memorySession= MemorySession.openConfined()) {<br>\n   int x = Point.x$get(ptStruct);<br>\n   int y = Point.y$get(ptStruct);<br>\n   printf(memorySession.allocateUtf8String(\"&gt;&gt;&gt; pt.x + pt.y = %d \\n\"), (x+y));<br>\n   return (x+y);<br>\n   }<br>\n   }<br></code></p>\n<p><strong>Step 2:</strong> Create a MethodHandle mapped to the static method.<br><code><br>\n   MethodHandle addCoordinatesMH = MethodHandles.lookup()<br>\n   .findStatic(PanamaCallback.class,<br>\n   \"addCoordinates\",<br>\n   MethodType.methodType(int.class, MemorySegment.class));<br></code></p>\n<p><strong>Step 3:</strong> Create or convert to a C function pointer using the linker’s upcallstub().<br><code><br>\n   MemorySegment addCoordinatesNativeSymbol = Linker.nativeLinker().upcallStub(<br>\n   addCoordinatesMH,<br>\n   FunctionDescriptor.of(C_INT, Point.$LAYOUT()),<br>\n   memorySession);</code></p><code></code>\n<p><code></code></p>\n<p><strong>Step 4:</strong> Invoke the native callback function passing in the converted function pointer.<br><code><br>\n   my_callback_function3(addCoordinatesNativeSymbol);<br></code></p>\n<p>Hope that makes sense,</p>\n<p>Carl</p>"
+  },
+  {
+    "id": 5128,
+    "depth": 0,
+    "author": "NoName",
+    "date": "2022-07-30T06:33:08",
+    "html": "<p>Thanks for the answer Carl. It helps a lot. However, I have another question.</p>\n<p>Sometimes C header file can contain only struct declaration while its implementation is in c file. For example,</p>\n<pre>struct mg_connection; /* 3rd party lib, not in my control */</pre>\n<p>I can perfectly well use it in my c file to define a handler function (as it is required by 3rd party API) as</p>\n<pre>static int\r\nAHandler(struct mg_connection *conn, void *cbdata)\r\n{\r\n\tmg_printf(conn,\r\n\t          \"HTTP/1.1 200 OK\\r\\nContent-Type: text/html\\r\\nConnection: \"\r\n\t          \"close\\r\\n\\r\\n\"); //some implementation\r\n\treturn 1;\r\n}</pre>\n<p>However, when I try to load mg_connection via Linker</p>\n<pre>MemorySegment mg_connection = SymbolLookup.loaderLookup().lookup(\"mg_connection\")\r\n                    .or(() -&gt; Linker.nativeLinker().defaultLookup().lookup(\"mg_connection\"))\r\n                    .orElseThrow(() -&gt; new RuntimeException(\"cant find symbol\"));</pre>\n<p>I got exception – “cant find symbol”, jextract aslo does generate hepler classes for it (if I am not mistaken).</p>\n<p>Is there a way to pass from Java to C a callback function, so that C can “see” at it as to a function with this signature</p>\n<pre>int AHandler(struct mg_connection *conn, void *cbdata)</pre>\n<p>.</p>\n<p>and the next question (too many questions, right?) – How to deal with “void *cbdata”, if i know that it actually String type of data?</p>"
+  },
+  {
+    "id": 5143,
+    "depth": 0,
+    "author": "NoName",
+    "date": "2022-07-31T12:21:41",
+    "html": "<p>if I try to write a java callback that uses simple/small structs (like 2 member variables) – all is good. However, I did a test and created a struct with almost 200 ints parameters – java process crush on a start with memory dump written to a file.</p>\n<p>Another interesting (I guess) behavior if I call my function with a 3rd party quite complex struct – I got this exception:</p>\n<p>Exception in thread \"main\" java.lang.IllegalArgumentException: bad parameter count 298<br>\n  at java.base/java.lang.invoke.MethodHandleStatics.newIllegalArgumentException(MethodHandleStatics.java:169)<br>\n  at java.base/java.lang.invoke.MethodType.checkSlotCount(MethodType.java:224)<br>\n  at java.base/java.lang.invoke.MethodType.checkPtypes(MethodType.java:214)<br>\n  at java.base/java.lang.invoke.MethodType.makeImpl(MethodType.java:405)<br>\n  at java.base/java.lang.invoke.MethodType.methodType(MethodType.java:374)<br>\n  at java.base/java.lang.invoke.MethodType.methodType(MethodType.java:244)<br>\n  at java.base/jdk.internal.foreign.abi.CallingSequenceBuilder.computeTypeHelper(CallingSequenceBuilder.java:148)<br>\n  at java.base/jdk.internal.foreign.abi.CallingSequenceBuilder.computeCallerTypeForUpcall(CallingSequenceBuilder.java:126)<br>\n  at java.base/jdk.internal.foreign.abi.CallingSequenceBuilder.build(CallingSequenceBuilder.java:118)<br>\n  at java.base/jdk.internal.foreign.abi.x64.sysv.CallArranger.getBindings(CallArranger.java:118)<br>\n  at java.base/jdk.internal.foreign.abi.x64.sysv.CallArranger.arrangeUpcall(CallArranger.java:135)<br>\n  at java.base/jdk.internal.foreign.abi.x64.sysv.SysVx64Linker.arrangeUpcall(SysVx64Linker.java:59)<br>\n  at java.base/jdk.internal.foreign.abi.AbstractLinker.upcallStub(AbstractLinker.java:70)<br>\n  at test.Application.myMgRequestInfo(Application.java:62)</p>\n<p>Maybe those 2 exceptions are related or maybe I am doing smth wrong… but “bad parameter count 298” means that there are too many lambdas or a generated method with more than 255 parameters (JMM limit?)</p>"
+  },
+  {
+    "id": 7604,
+    "depth": 0,
+    "author": "Bill Chatfield",
+    "date": "2022-12-25T17:04:53",
+    "html": "<p>How does it know which native library to call when you run it on different platforms like Linux, Mac, and Windows? Java is multi-platform.</p>"
+  },
+  {
+    "id": 7648,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-12-27T15:51:44",
+    "html": "<p>Just like using JNI, the native library is installed or placed in default areas(lib directories) on the PATH.<br>\n  Each operating system will have its respective library with a naming convention to be loaded using<br>\n  System.load(). It will use the simple name. E.g.</p>\n<p>libmylib.so,<br>\n  libmylib.dylib,<br>\n  mylib.dll</p>\n<p>“mylib” would be the library name when loaded.</p>\n<p>I hope that answers your question.</p>\n<p>Carl</p>"
+  }
+]

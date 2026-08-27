@@ -1,0 +1,46 @@
+[
+  {
+    "id": 2842,
+    "depth": 0,
+    "author": "Alex",
+    "date": "2022-03-22T14:40:11",
+    "html": "<p>Great! Look forward the remaining part.</p>"
+  },
+  {
+    "id": 5424,
+    "depth": 0,
+    "author": "Vincz",
+    "date": "2022-08-19T11:15:47",
+    "html": "<p>It’s seems iload and iconst are mixed in the body of the article and the illustrating images.</p>\n<p>Also if somebody’s interested in the full specification of the the opcodes, here is the link from Oracle (Java 17): <a href=\"https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-6.html#jvms-6.5\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://docs.oracle.com/javase/specs/jvms/se17/html/jvms-6.html#jvms-6.5</a></p>"
+  },
+  {
+    "id": 5443,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2022-08-20T06:59:48",
+    "html": "<p>That’s correct; I made the change; please let me know what you think now.</p>"
+  },
+  {
+    "id": 5433,
+    "depth": 0,
+    "author": "Mehdi Raza",
+    "date": "2022-08-19T18:34:03",
+    "html": "<p>Isn’t there a mistake in java code when you mentioned the optimisation. The jvm can only directly add 3 in the stack if the code is ‘return 1+2’ instead of ‘return a+b’</p>"
+  },
+  {
+    "id": 5442,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2022-08-20T06:59:14",
+    "html": "<p>Yes, I updated the article; please let me know what you think now. Thank you for pointing out the mistake.</p>"
+  },
+  {
+    "id": 45516,
+    "depth": 0,
+    "author": "Abhishek",
+    "date": "2025-04-06T15:03:46",
+    "html": "<p>Could you please share next part link?</p>"
+  }
+]

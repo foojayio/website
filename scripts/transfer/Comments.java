@@ -5,8 +5,14 @@
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.util.DefaultIndenter;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.core.util.Separators;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.safety.Safelist;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,7 +23,6 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.MessageDigest;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,113 +32,108 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
- * One-off migration: moves the legacy WordPress comments on foojay.io into
- * GitHub Discussions, so the giscus widget on the Hugo site
- * (themes/foojay/layouts/partials/comments.html) shows the existing
- * conversation instead of starting every post at zero.
+ * Captures the legacy WordPress comments on foojay.io into the repo, one
+ * comments.json per post bundle, so cutover doesn't throw away the conversation
+ * under 270 articles. themes/foojay/layouts/partials/legacy-comments.html
+ * renders them under the giscus widget as "Discussions on the previous Foojay
+ * site".
  *
  * Usage:
- *   jbang scripts/transfer/Comments.java --dry-run          (report only, writes nothing)
- *   jbang scripts/transfer/Comments.java --print-config      (resolve + print the [params.giscus] block)
- *   jbang scripts/transfer/Comments.java                     (do the import)
- *   jbang scripts/transfer/Comments.java --slug some-post    (one post, for a first live test)
- *   jbang scripts/transfer/Comments.java --limit 300         (stop after 300 creations, then re-run)
+ *   jbang scripts/transfer/Comments.java --dry-run        (report only, writes nothing)
+ *   jbang scripts/transfer/Comments.java                  (write/refresh every comments.json)
+ *   jbang scripts/transfer/Comments.java --slug some-post (one post; with --dry-run, prints its bodies)
  *
- * Needs GITHUB_TOKEN (or GH_TOKEN) in the environment, holding a token of the
- * account the comments should be posted as -- the foojay.io account, since the
- * GitHub identity of the original commenters is unknown. Scope: `public_repo`
- * for a classic token, or a fine-grained token with "Discussions: Read and
- * write" on the repo. Every imported comment therefore opens with
+ * Needs NO credential of any kind, and writes nothing outside this repository.
  *
- *     _Originally posted by **Jan** on October 3, 2020 in Foojay.io Discussions._
+ * WHY THIS IS AN ARCHIVE IN THE REPO AND NOT AN IMPORT INTO GITHUB DISCUSSIONS
+ * It used to be the latter: it posted all 580 comments into the Discussions
+ * giscus reads, as the foojay.io account, so an imported thread and one giscus
+ * creates for a new post were indistinguishable. That is dead, and not for a
+ * design reason -- GITHUB BANNED THE ACCOUNT after it had handled only a few
+ * posts. Several hundred API-driven comment creations from a fresh account is
+ * indistinguishable from spam at GitHub's end, and there is no version of that
+ * approach that does not look exactly like the thing that got blocked. So the
+ * comments do not go to a third party at all now.
  *
- * which is the only honest way to attribute it, and the original comment's WP
- * id is left in an HTML comment underneath for idempotency (see below).
+ * That turns out to be the better shape regardless, for three reasons:
+ *   - THESE COMMENTS ARE A CLOSED RECORD, not a live thread. Their authors are
+ *     strangers whose GitHub identities are unknown; nobody can edit, delete or
+ *     reply to their own 2020 comment whatever we do. Writing them into a
+ *     mutable discussion pretended otherwise. A dated archive says what it is.
+ *   - IT IS REVERSIBLE AND REVIEWABLE. The old version made irreversible public
+ *     writes to somebody else's API; this one makes a diff. Getting the
+ *     conversion wrong now costs a re-run, not an apology to 580 people.
+ *   - THE ONLY COPY IS COMMITTED. Same reason data/legacy-views.json is: these
+ *     bodies vanish with the WordPress site, and after that no source exists.
  *
- * WHY THIS IS NOT PART OF transfer/Posts.java
- * The TODO asked whether the post converter could take this over. It shouldn't:
- * Posts writes files into content/ and is re-run against the live WP site
- * throughout the trial period, while this posts irreversible public content into
- * a third-party API, needs a write token, and needs to run exactly once (plus
- * top-ups for comments posted on WP before cutover). Mixing the two would mean
- * every routine content re-scrape carries a credential and a side effect on
- * GitHub. Same reason transfer/Sponsors.java is run by hand and fetch/Jugs.java
- * isn't.
+ * Nothing about giscus changes. It still owns NEW comments on every post, keyed
+ * on the same term (see partials/comments-term.html); this only fills in the
+ * history above it. The two live in separate sections that say which is which.
  *
  * WHERE THE COMMENTS COME FROM
- * WordPress's own REST API, which is open on foojay.io and needs no
- * credentials: /wp-json/wp/v2/comments (580 approved comments across 270 posts
- * at the time of writing; unauthenticated reads only ever return approved
- * ones, so spam and pending moderation are excluded by construction). Each
- * comment carries its post's public URL in `link`, which is how a comment is
- * matched to a local post bundle -- no WP post-id bookkeeping needed in
- * frontmatter.
+ * WordPress's own REST API, open on foojay.io and needing no credentials:
+ * /wp-json/wp/v2/comments. Unauthenticated reads return approved comments of
+ * type "comment" only, so spam, pending moderation and pingbacks are excluded
+ * by construction. Each comment carries its post's public URL in `link`, which
+ * is how it is matched to a local bundle -- no WP post-id bookkeeping in
+ * frontmatter. Measured: 580 comments across 270 posts, every one of them under
+ * /today/, so posts are the only section that can have any (pedia entries and
+ * pages take giscus comments but have no WordPress history to import).
  *
- * HOW A POST MAPS TO A DISCUSSION
- * giscus finds the discussion belonging to a page by searching the repo for the
- * page's "term". comments.html configures mapping="specific" with the post's
- * slug as the term (NOT pathname, which would break at cutover: the trial
- * deploy serves /website/today/<slug>/ and production serves /today/<slug>/, so
- * pathname-keyed threads would all be orphaned the day the domain moves).
+ * THE STORED HTML IS SANITIZED HERE, AND THAT IS A SECURITY BOUNDARY
+ * hugo.toml sets `unsafe = true` for Goldmark, because post bodies contain
+ * deliberate raw HTML. So rendering 580 bodies written by anonymous strangers
+ * through `markdownify` would be a stored-XSS hole, and storing Markdown at all
+ * would leave the template no way to tell an author's intentional HTML from a
+ * commenter's. Instead every body is run through jsoup's Safelist -- the
+ * library's own tested sanitizer, not a regex written here -- and the RESULT is
+ * stored, so `legacy-comments.html` renders it with `safeHTML` and the template
+ * never sees unsanitized input. Anything not on the list is dropped, including
+ * every attribute that can execute.
  *
- * It also configures strict="1", and this script therefore writes the discussion
- * exactly the way giscus itself would: title = the term, and
- * `<!-- sha1: <sha1-of-term> -->` appended to the body, which is what strict
- * mode searches for. Strict matters here: non-strict mode does a fuzzy
- * `in:title` search and takes the first hit, and 30 of foojay's slugs are
- * substrings of another slug ("a-dissection-of-java-jdbc-to-postgresql-connections"
- * inside "...-part-2-batching"), so a fuzzy match would attach a post's comments
- * to the wrong thread. Keeping both the title and the sha1 marker means a
- * discussion created here is indistinguishable from one giscus creates when the
- * first visitor comments on a new post.
+ * The list is `Safelist.basic()`, which is measured against the data rather than
+ * guessed: across all 580 comments the only tags used are p (969), br (470),
+ * a (110), code (15), pre (12), strong (9), em (2) and blockquote (1). No image,
+ * no iframe, no script, no style, no embed. basic() covers all eight and permits
+ * none of the rest. If a re-run ever reports a dropped tag, look at it before
+ * widening the list.
  *
- * IDEMPOTENCY
- * Re-running never duplicates anything, and the derived state lives on GitHub
- * rather than in a state file in this repo:
- *   - a discussion is reused when one already exists for the term (matched on
- *     the sha1 marker, or on an exact title),
- *   - a comment is skipped when the discussion already holds a comment with its
- *     `<!-- wp-comment-id: N -->` marker.
- * So an interrupted run, a rate-limit stop or a `--limit` batch is simply
- * resumed by running the script again.
+ * IDEMPOTENCY, AND WHY THERE IS NO TIMESTAMP IN THE FILE
+ * Safe to re-run as often as you like, which it needs to be: WordPress keeps
+ * accepting comments until it is switched off, so this runs again as late as
+ * possible before cutover (see CUTOVER.md), exactly like
+ * transfer/LegacyViews.java --seed. A file is REWRITTEN ONLY WHEN ITS CONTENT
+ * CHANGED, and it carries no "generated at" field -- the same lesson
+ * fetch/JugEvents.java records: a timestamp that moves on every run means every
+ * run commits, and therefore deploys, on nothing. Git already records when the
+ * file changed. So a re-run with no new comments is a genuine no-op with an
+ * empty diff.
+ *
+ * `frozen: true` is deliberately NOT honoured, unlike the other transfer/
+ * scrapers. Those rebuild a post's frontmatter and body, where a hand edit is
+ * precious; this writes one generated file beside it and touches nothing a
+ * human wrote. A corrected comment body is not a thing that exists -- these are
+ * quotes from other people.
  *
  * THREADING
- * GitHub Discussions allow one level of replies; WordPress allows more. A
- * top-level WP comment becomes a discussion comment, and everything below it
- * becomes a reply to that same comment (foojay has 118 comments one level deep
- * and 4 two levels deep, so this flattens 4 comments' nesting). A comment whose
- * parent is itself not published -- 3 of them -- is imported top-level.
- *
- * RATE LIMITS
- * GitHub throttles content creation far more aggressively than reads (a few
- * hundred per hour), and this import is ~850 creations. Mutations are therefore
- * spaced by --delay (default 1200ms) and back off on a secondary-rate-limit
- * error, up to a point; when GitHub keeps refusing, the run stops with a resume
- * hint rather than hammering it. Because the whole thing is idempotent, running
- * it again an hour later picks up where it left off.
+ * WordPress's real nesting is kept: 461 comments are top-level, 115 are one deep
+ * and 4 are two deep. The array is written in threaded display order (a comment
+ * followed by its own replies, oldest first) with a `depth` on each, so the
+ * template renders it with a `range` and no recursion, and the CSS clamps the
+ * indent. 3 comments whose parent is not published are written at depth 0 --
+ * their parent is gone, so there is nothing to nest them under.
  */
 public class Comments {
 
     // ---- CONFIG -------------------------------------------------------
     static final String WP_BASE = "https://foojay.io";
-    /** Production URLs, deliberately: they're what the discussion body should point at after cutover. */
-    static final String SITE_BASE = "https://foojay.io";
-    static final String GITHUB_GRAPHQL = "https://api.github.com/graphql";
     static final Path POSTS_DIR = Path.of("content/posts");
-
-    static final String DEFAULT_REPO = "foojayio/website";
-    /** A dedicated category keeps 2000+ comment threads out of "General". Must match hugo.toml's params.giscus.category. */
-    static final String DEFAULT_CATEGORY = "Blog Comments";
+    /** The generated file, beside index.md in the post's bundle. */
+    static final String COMMENTS_FILE = "comments.json";
 
     static final int WP_PAGE_SIZE = 100;
     static final int REQUEST_TIMEOUT_MS = 30_000;
-    static final long DEFAULT_MUTATION_DELAY_MS = 1200;
-    static final int MAX_RETRIES = 4;
 
-    /** Marker carrying the WordPress comment id, so a re-run knows what it already posted. */
-    static final Pattern WP_COMMENT_MARKER = Pattern.compile("<!--\\s*wp-comment-id:\\s*(\\d+)\\s*-->");
-    /** giscus's own strict-mode marker: <!-- sha1: <hex> -->. */
-    static final String SHA1_MARKER_PREFIX = "<!-- sha1: ";
     /** WP comment links look like https://foojay.io/today/<slug>/#comment-123 */
     static final Pattern WP_COMMENT_LINK = Pattern.compile("^https?://[^/]+/today/([^/]+)/?(?:#.*)?$");
     /** An `aliases:` entry pointing at a legacy /today/<slug>/ path. */
@@ -141,27 +141,41 @@ public class Comments {
     static final Pattern SLUG_FRONTMATTER = Pattern.compile("^slug:\\s*\"?([^\"\\s]+)\"?\\s*$");
 
     static final DateTimeFormatter WP_DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-    static final DateTimeFormatter HUMAN_DATE = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
+    static final DateTimeFormatter HUMAN_DATE = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+
+    /**
+     * What a comment body may contain after sanitization. See the class comment:
+     * this is jsoup's own tested safelist, and every tag the 580 real comments
+     * use is on it. Links additionally get rel/target below.
+     */
+    static final Safelist COMMENT_HTML = Safelist.basic();
 
     static final ObjectMapper JSON = new ObjectMapper();
+    /**
+     * Pinned to "\n" rather than using the default pretty printer, which indents
+     * with System.lineSeparator(): on Windows that alone would rewrite all 269
+     * files with CRLF and produce a diff of pure line endings, which is exactly
+     * the churn the write-only-when-changed rule exists to prevent.
+     */
+    static final DefaultPrettyPrinter PRETTY = new DefaultPrettyPrinter()
+            .withObjectIndenter(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE.withLinefeed("\n"))
+            .withArrayIndenter(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE.withLinefeed("\n"))
+            // `"id": 4`, not Jackson's default `"id" : 4` -- these files are read
+            // in diffs by people, and the stray space before the colon is not what
+            // JSON looks like anywhere else in the repo.
+            .withSeparators(Separators.createDefaultInstance()
+                    .withObjectFieldValueSpacing(Separators.Spacing.AFTER));
     static final HttpClient HTTP = HttpClient.newBuilder()
             .connectTimeout(Duration.ofMillis(REQUEST_TIMEOUT_MS))
             .followRedirects(HttpClient.Redirect.NORMAL)
             .build();
 
     // ---- STATE --------------------------------------------------------
-    static String repo = DEFAULT_REPO;
-    static String category = DEFAULT_CATEGORY;
     static boolean dryRun = false;
     static String onlySlug = null;
-    static int limit = Integer.MAX_VALUE;
-    static long mutationDelayMs = DEFAULT_MUTATION_DELAY_MS;
-    static String token = null;
-    static int creations = 0;
-    static long lastMutationAt = 0;
 
-    /** What the local content tree knows: every URL slug a post answered to, and its title. */
-    record PostIndex(Map<String, String> slugToTerm, Map<String, String> titles) {
+    /** What the local content tree knows: every URL slug a post answered to, and where its bundle is. */
+    record PostIndex(Map<String, String> slugToTerm, Map<String, Path> bundles) {
     }
 
     /** One WordPress comment, as the REST API hands it over. */
@@ -173,25 +187,19 @@ public class Comments {
         try {
             run(args);
         } catch (IOException e) {
-            // A wrong repo/category, a missing token scope or being run from the
-            // wrong directory are for the person at the terminal to fix -- the
-            // message says what's wrong, a stack trace only buries it.
+            // Being run from the wrong directory, or WordPress being down, is for
+            // the person at the terminal to fix -- the message says what is wrong,
+            // a stack trace only buries it.
             System.err.println("ERROR: " + e.getMessage());
             System.exit(1);
         }
     }
 
     static void run(String[] args) throws Exception {
-        boolean printConfig = false;
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "--dry-run" -> dryRun = true;
-                case "--print-config" -> printConfig = true;
-                case "--repo" -> repo = args[++i];
-                case "--category" -> category = args[++i];
                 case "--slug" -> onlySlug = args[++i];
-                case "--limit" -> limit = Integer.parseInt(args[++i]);
-                case "--delay" -> mutationDelayMs = Long.parseLong(args[++i]);
                 case "--help", "-h" -> {
                     usage();
                     return;
@@ -204,29 +212,24 @@ public class Comments {
             }
         }
 
-        token = firstNonBlank(System.getenv("GITHUB_TOKEN"), System.getenv("GH_TOKEN"));
-        if (token == null && !dryRun) {
-            System.err.println("""
-                    No GITHUB_TOKEN (or GH_TOKEN) in the environment.
-
-                    This script posts as whoever owns the token, so it must be the foojay.io
-                    account's -- see the class comment. Use --dry-run to check the mapping
-                    without a token.""");
-            System.exit(2);
-        }
-
-        if (printConfig) {
-            printGiscusConfig();
-            return;
-        }
-
         // ---- 1. what does WordPress have --------------------------------
-        List<WpComment> comments = fetchWpComments();
+        Fetched fetched = fetchWpComments();
+        List<WpComment> comments = fetched.comments();
         System.out.printf("WordPress: %d approved comments%n", comments.size());
+        // WP's own header count against what the listing actually handed over. A
+        // gap is not an error (a comment on an unpublished post is counted and not
+        // listed), but it is the one number that would show a page of the listing
+        // having silently failed, so it is printed rather than assumed away.
+        if (fetched.reportedTotal() > 0 && fetched.reportedTotal() != comments.size() + fetched.skipped()) {
+            System.out.printf("NOTE: WordPress reports %d comments in total; %d were listed%s. "
+                            + "The remainder are normally comments whose post is not published.%n",
+                    fetched.reportedTotal(), comments.size(),
+                    fetched.skipped() > 0 ? " and " + fetched.skipped() + " skipped as unusable" : "");
+        }
 
         // ---- 2. which local post does each belong to --------------------
         PostIndex posts = indexLocalPosts();
-        System.out.printf("Local content: %d post bundles%n", posts.titles().size());
+        System.out.printf("Local content: %d post bundles%n", posts.bundles().size());
 
         Map<String, List<WpComment>> byTerm = new TreeMap<>();
         List<WpComment> unmatched = new ArrayList<>();
@@ -247,151 +250,109 @@ public class Comments {
             System.out.printf("No WordPress comments found for post '%s'.%n", onlySlug);
             return;
         }
-        System.out.printf("To import: %d comments across %d posts%n",
+        System.out.printf("To archive: %d comments across %d posts%n",
                 byTerm.values().stream().mapToInt(List::size).sum(), byTerm.size());
-
-        if (dryRun && token == null) {
-            System.out.println();
-            byTerm.forEach((term, list) ->
-                    System.out.printf("  %-70s %2d comment(s)%n", term, list.size()));
-            if (onlySlug != null) {
-                System.out.println();
-                for (WpComment c : importOrder(byTerm.get(onlySlug))) {
-                    System.out.printf("--- comment %d, %s a reply%n", c.id(), c.parent() == 0 ? "not" : "as");
-                    System.out.println(commentBody(c));
-                    System.out.println();
-                }
-            }
-            System.out.println("""
-                    Dry run without a token: stopped after the mapping check. Nothing was read
-                    from or written to GitHub. Re-run with GITHUB_TOKEN set (still --dry-run) to
-                    also see which discussions and comments already exist there.""");
-            return;
-        }
-
-        // ---- 3. what does GitHub already have ---------------------------
-        String[] ownerName = splitRepo(repo);
-        JsonNode repoInfo = resolveRepoAndCategory(ownerName[0], ownerName[1]);
-        String repoId = repoInfo.get("repoId").asText();
-        String categoryId = repoInfo.get("categoryId").asText();
-        DiscussionIndex existing = fetchDiscussions(ownerName[0], ownerName[1], categoryId);
-        System.out.printf("GitHub: %d existing discussion(s) in category \"%s\"%n", existing.size(), category);
         System.out.println();
 
-        // ---- 4. import ---------------------------------------------------
-        int createdDiscussions = 0, createdComments = 0, skipped = 0;
-        boolean stoppedEarly = false;
-
-        outer:
+        // ---- 3. write one comments.json per post ------------------------
+        int written = 0, unchanged = 0;
+        Set<String> droppedTags = new TreeSet<>();
         for (Map.Entry<String, List<WpComment>> entry : byTerm.entrySet()) {
             String term = entry.getKey();
-            List<WpComment> postComments = importOrder(entry.getValue());
-            Map<Integer, WpComment> byId = byId(postComments);
-
-            Discussion discussion = existing.find(term);
-            boolean freshDiscussion = discussion == null;
-            if (discussion == null && !dryRun) {
-                if (creations >= limit) {
-                    stoppedEarly = true;
-                    break;
-                }
-                discussion = createDiscussion(repoId, categoryId, term,
-                        posts.titles().getOrDefault(term, term));
-                existing.add(term, discussion);
-                createdDiscussions++;
-                System.out.printf("+ discussion #%d  %s%n", discussion.number, term);
-            } else if (discussion == null) {
-                System.out.printf("+ discussion (would create)  %s%n", term);
-                createdDiscussions++;
-            } else {
-                System.out.printf("= discussion #%d  %s%n", discussion.number, term);
+            Path bundle = posts.bundles().get(term);
+            if (bundle == null) {
+                System.out.printf("WARNING: no bundle directory for '%s' -- skipping %d comment(s)%n",
+                        term, entry.getValue().size());
+                continue;
             }
+            List<WpComment> threaded = threadedOrder(entry.getValue());
+            String json = renderJson(threaded, droppedTags);
+            Path target = bundle.resolve(COMMENTS_FILE);
 
-            // Which WP comments are already in there? A discussion we just created (or
-            // would create) holds none, so don't spend a query asking.
-            Map<Integer, String> importedIds = freshDiscussion
-                    ? new HashMap<>()
-                    : fetchImportedComments(discussion);
+            String existing = Files.exists(target) ? Files.readString(target) : null;
+            if (json.equals(existing)) {
+                unchanged++;
+                continue;
+            }
+            String verb = existing == null ? "+" : "~";
+            if (dryRun) {
+                System.out.printf("%s %s  %d comment(s) (would %s)%n",
+                        verb, target, threaded.size(), existing == null ? "create" : "update");
+            } else {
+                Files.writeString(target, json);
+                System.out.printf("%s %s  %d comment(s)%n", verb, target, threaded.size());
+            }
+            written++;
 
-            // postComments is in import order: top-level first, so a reply always
-            // finds its parent's GitHub node id already recorded.
-            for (WpComment c : postComments) {
-                if (importedIds.containsKey(c.id())) {
-                    skipped++;
-                    continue;
+            // With --slug there is one post in play, so showing the bodies is cheap
+            // and is the way to eyeball the sanitizer's output before a bulk run.
+            if (onlySlug != null && dryRun) {
+                System.out.println();
+                for (WpComment c : threaded) {
+                    System.out.printf("--- comment %d, depth %d, %s on %s%n",
+                            c.id(), depthOf(c, byId(entry.getValue())), c.author(),
+                            HUMAN_DATE.format(c.date()));
+                    System.out.println(sanitizeHtml(c.html(), droppedTags).replaceAll("(?m)^", "      | "));
                 }
-                if (creations >= limit) {
-                    stoppedEarly = true;
-                    break outer;
-                }
-                String replyTo = c.parent() == 0 ? null : importedIds.get(rootAncestor(c, byId));
-                if (dryRun) {
-                    // Reply-ness from the WP parent, not from replyTo: nothing was
-                    // posted, so no parent node id exists to resolve against.
-                    System.out.printf("    + comment %d by %s%s (would post)%n",
-                            c.id(), c.author(), c.parent() == 0 ? "" : " (reply)");
-                    // With --slug there's only one post in play, so showing the exact
-                    // body that would be posted is cheap and worth a look before a
-                    // one-way write to a public discussion.
-                    if (onlySlug != null) {
-                        System.out.println(commentBody(c).replaceAll("(?m)^", "      | "));
-                    }
-                    createdComments++;
-                    continue;
-                }
-                String nodeId = addComment(discussion.id, replyTo, commentBody(c));
-                importedIds.put(c.id(), nodeId);
-                createdComments++;
-                System.out.printf("    + comment %d by %s%s%n",
-                        c.id(), c.author(), replyTo == null ? "" : " (reply)");
+                System.out.println();
+            }
+        }
+
+        // ---- 4. what is here that WordPress no longer has ---------------
+        // Only a FULL run knows the complete set, so a --slug run cannot judge
+        // this. Reported, never deleted: an orphan means WP dropped a comment (or
+        // a post was renamed), and which of those it is needs a human.
+        if (onlySlug == null) {
+            for (Path orphan : orphanedFiles(byTerm.keySet(), posts)) {
+                System.out.printf("NOTE: %s exists but WordPress now reports no comments for that post%n", orphan);
             }
         }
 
         System.out.println();
-        System.out.printf("%s discussions %s: %d, comments %s: %d, comments already present: %d%n",
+        System.out.printf("%s %d file(s) %s, %d already up to date%n",
                 dryRun ? "Dry run --" : "Done.",
-                dryRun ? "to create" : "created", createdDiscussions,
-                dryRun ? "to post" : "posted", createdComments,
-                skipped);
-        if (stoppedEarly) {
-            System.out.println("""
-                    Stopped at --limit. Re-run the same command to continue -- already-imported
-                    comments are detected and skipped.""");
+                written, dryRun ? "to write" : "written", unchanged);
+        if (!droppedTags.isEmpty()) {
+            System.out.printf("NOTE: tags dropped by the sanitizer: %s. See the class comment "
+                    + "before widening COMMENT_HTML.%n", String.join(", ", droppedTags));
         }
         if (dryRun) {
-            System.out.println("Nothing was written. Drop --dry-run to perform the import.");
+            System.out.println("Nothing was written. Drop --dry-run to write the files.");
         }
     }
 
     static void usage() {
         System.out.println("""
-                Imports the legacy WordPress comments on foojay.io into GitHub Discussions,
-                in the shape giscus expects (see comments.html).
+                Captures the legacy WordPress comments on foojay.io into the repo, as one
+                comments.json per post bundle. Rendered by partials/legacy-comments.html
+                under the giscus widget. Needs no credential and writes nothing outside
+                this repository.
 
                   jbang scripts/transfer/Comments.java [options]
 
-                  --dry-run            report what would happen, write nothing
-                  --print-config       resolve repoId/categoryId and print the hugo.toml block
-                  --repo <owner/name>  default: %s
-                  --category <name>    discussion category, default: "%s"
-                  --slug <post-slug>   import only this post's comments
-                  --limit <n>          stop after n creations (re-run to continue)
-                  --delay <ms>         pause between writes, default %d
+                  --dry-run           report what would change, write nothing
+                  --slug <post-slug>  only this post (with --dry-run, prints its comment bodies)
 
-                GITHUB_TOKEN (or GH_TOKEN) must hold the foojay.io account's token with
-                Discussions write access.""".formatted(DEFAULT_REPO, DEFAULT_CATEGORY, DEFAULT_MUTATION_DELAY_MS));
+                Safe to re-run: a file is rewritten only when its content changed, so a run
+                with no new comments leaves an empty diff. Run it again as late as possible
+                before cutover -- WordPress keeps accepting comments until it is switched
+                off, and after that these bodies have no other source.""");
     }
 
     // ---- WordPress ----------------------------------------------------
+
+    /** The listing, plus the two counts needed to notice a page having gone missing. */
+    record Fetched(List<WpComment> comments, int reportedTotal, int skipped) {
+    }
 
     /**
      * Pulls every approved comment through WP's open REST API. Unauthenticated
      * reads return approved comments of type "comment" only, so spam, pending
      * moderation and pingbacks never reach us.
      */
-    static List<WpComment> fetchWpComments() throws IOException, InterruptedException {
+    static Fetched fetchWpComments() throws IOException, InterruptedException {
         List<WpComment> out = new ArrayList<>();
-        int page = 1, totalPages = 1;
+        int page = 1, totalPages = 1, reportedTotal = 0, skipped = 0;
         do {
             String url = WP_BASE + "/wp-json/wp/v2/comments"
                     + "?per_page=" + WP_PAGE_SIZE + "&page=" + page
@@ -401,7 +362,7 @@ public class Comments {
                     HttpRequest.newBuilder(URI.create(url))
                             .timeout(Duration.ofMillis(REQUEST_TIMEOUT_MS))
                             .header("Accept", "application/json")
-                            .header("User-Agent", "foojay-hugo-migration-bot/1.0")
+                            .header("User-Agent", "foojay-hugo-migration/1.0 (+https://foojay.io)")
                             .GET().build(),
                     HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
@@ -410,14 +371,17 @@ public class Comments {
             if (page == 1) {
                 totalPages = response.headers().firstValue("x-wp-totalpages")
                         .map(Integer::parseInt).orElse(1);
+                reportedTotal = response.headers().firstValue("x-wp-total")
+                        .map(Integer::parseInt).orElse(0);
             }
             for (JsonNode node : JSON.readTree(response.body())) {
                 WpComment c = toComment(node);
-                if (c != null) out.add(c);
+                if (c == null) skipped++;
+                else out.add(c);
             }
             page++;
         } while (page <= totalPages);
-        return out;
+        return new Fetched(out, reportedTotal, skipped);
     }
 
     static WpComment toComment(JsonNode node) {
@@ -443,15 +407,15 @@ public class Comments {
     // ---- local content ------------------------------------------------
 
     /**
-     * Maps every URL slug a post has ever been served under to its giscus term
-     * (the value hugo.toml's `:slugorcontentbasename` resolves to, i.e. the
-     * `slug` frontmatter if set and otherwise the bundle folder name). Legacy
-     * `aliases:` paths map to the same term, so a post whose folder was renamed
-     * (cleanup/SanitizeSlugs.java) is still found from its WordPress URL.
+     * Maps every URL slug a post has ever been served under to its term (the
+     * value hugo.toml's `:slugorcontentbasename` resolves to, i.e. the `slug`
+     * frontmatter if set and otherwise the bundle folder name), and each term to
+     * its bundle directory. Legacy `aliases:` paths map to the same term, so a
+     * post whose folder was renamed is still found from its WordPress URL.
      */
     static PostIndex indexLocalPosts() throws IOException {
         Map<String, String> slugToTerm = new HashMap<>();
-        Map<String, String> titles = new HashMap<>();
+        Map<String, Path> bundles = new HashMap<>();
         if (!Files.isDirectory(POSTS_DIR)) {
             throw new IOException("Run this from the repository root: " + POSTS_DIR + " not found");
         }
@@ -462,17 +426,12 @@ public class Comments {
         for (Path index : indexes) {
             String folder = index.getParent().getFileName().toString();
             String term = folder;
-            String title = folder;
             List<String> aliases = new ArrayList<>();
             boolean inAliases = false;
             for (String line : frontmatterLines(index)) {
                 Matcher slug = SLUG_FRONTMATTER.matcher(line);
                 if (slug.matches()) {
                     term = slug.group(1);
-                    continue;
-                }
-                if (line.startsWith("title:")) {
-                    title = line.substring("title:".length()).trim().replaceAll("^\"|\"$", "");
                     continue;
                 }
                 if (line.startsWith("aliases:")) {
@@ -488,9 +447,9 @@ public class Comments {
             slugToTerm.put(folder, term);
             slugToTerm.put(term, term);
             for (String alias : aliases) slugToTerm.put(alias, term);
-            titles.put(term, title);
+            bundles.put(term, index.getParent());
         }
-        return new PostIndex(slugToTerm, titles);
+        return new PostIndex(slugToTerm, bundles);
     }
 
     static List<String> frontmatterLines(Path file) throws IOException {
@@ -507,7 +466,7 @@ public class Comments {
     /**
      * The WP slug is usually the local one. When it isn't, it's because the
      * folder was sanitized (an emoji or a capital in the WP slug), so try the
-     * same sanitization cleanup/SanitizeSlugs.java applies.
+     * same sanitization the slug cleanup applied.
      */
     static String resolveTerm(String wpSlug, Map<String, String> index) {
         String direct = index.get(wpSlug);
@@ -515,7 +474,6 @@ public class Comments {
         return index.get(sanitize(wpSlug));
     }
 
-    /** Kept in step with SanitizeSlugs.sanitize(). */
     static String sanitize(String s) {
         return s.toLowerCase(Locale.ROOT)
                 .replaceAll("[^a-z0-9_-]+", "-")
@@ -523,51 +481,91 @@ public class Comments {
                 .replaceAll("^[-_]+|[-_]+$", "");
     }
 
+    /** comments.json files whose post WordPress no longer reports any comment for. */
+    static List<Path> orphanedFiles(Set<String> haveComments, PostIndex posts) {
+        List<Path> out = new ArrayList<>();
+        posts.bundles().forEach((term, dir) -> {
+            if (haveComments.contains(term)) return;
+            Path f = dir.resolve(COMMENTS_FILE);
+            if (Files.exists(f)) out.add(f);
+        });
+        Collections.sort(out);
+        return out;
+    }
+
     // ---- comment bodies -----------------------------------------------
 
     /**
-     * The attribution line the TODO asked for, then the comment itself as
-     * Markdown, then the id marker that makes a re-run idempotent. The name is
-     * linked when the commenter left a URL.
+     * The security boundary -- see the class comment. jsoup's own sanitizer
+     * decides what survives; anything it drops is collected so a run REPORTS a
+     * tag it threw away rather than losing it silently.
+     *
+     * Links then get `target`/`rel`: these are 110 URLs typed by strangers years
+     * ago, so `nofollow ugc` is what they are, and `noopener` because a new tab
+     * without it hands the opened page a handle on ours.
+     *
+     * Note there is deliberately no Cloudflare email decoding here, unlike the
+     * HTML scrapers: Cloudflare's obfuscator rewrites HTML responses, not JSON
+     * ones, so the REST API hands over the real address. Measured -- 0 of 580
+     * bodies carry a placeholder.
      */
-    static String commentBody(WpComment c) {
-        String author = c.author().isBlank() ? "an anonymous reader" : c.author();
-        String name = c.authorUrl().isBlank()
-                ? "**" + author + "**"
-                : "[**" + author + "**](" + c.authorUrl() + ")";
-        String attribution = "_Originally posted by " + name + " on "
-                + HUMAN_DATE.format(c.date()) + " in Foojay.io Discussions._";
-        return attribution + "\n\n" + toMarkdown(c.html()) + "\n\n"
-                + "<!-- wp-comment-id: " + c.id() + " -->";
+    static String sanitizeHtml(String html, Set<String> droppedTags) {
+        Element before = Jsoup.parseBodyFragment(html).body();
+        String cleaned = Jsoup.clean(html, "", COMMENT_HTML);
+        Element after = Jsoup.parseBodyFragment(cleaned).body();
+
+        Set<String> had = new TreeSet<>();
+        before.getAllElements().forEach(e -> had.add(e.tagName()));
+        Set<String> kept = new TreeSet<>();
+        after.getAllElements().forEach(e -> kept.add(e.tagName()));
+        had.removeAll(kept);
+        droppedTags.addAll(had);
+
+        for (Element a : after.select("a[href]")) {
+            a.attr("target", "_blank");
+            a.attr("rel", "nofollow ugc noopener");
+        }
+        // A U+00A0 inside code looks like an indent and is not one -- copy the
+        // sample out and the compiler chokes. Same rule as HtmlToMarkdown's
+        // normalizeCodeSpaces; 2 of the 580 bodies are affected. Prose is left
+        // alone, where a non-breaking space can be deliberate.
+        for (Element code : after.select("code, pre")) {
+            code.html(code.html().replace('\u00a0', ' '));
+        }
+        return after.html().trim();
     }
 
     /**
-     * Shares the converter the post bodies went through (HtmlToMarkdown), so a
-     * code sample or an over-escaped entity in a comment gets the same repairs.
-     * Comment HTML is simple -- p/br/a/strong/em/code/pre/blockquote and, across
-     * all 580, not a single image or embed -- so none of the converter's
-     * shortcode paths can fire here.
+     * Threaded display order: each comment followed by its own replies, oldest
+     * first at every level. A comment whose parent is not published is treated as
+     * top-level -- there is nothing to nest it under.
      */
-    static String toMarkdown(String html) {
-        return HtmlToMarkdown.toMarkdown(Jsoup.parseBodyFragment(html).body()).trim();
-    }
-
-    /**
-     * Import order: oldest first, and every top-level comment before any reply,
-     * so a reply always finds its parent's GitHub node id already recorded.
-     */
-    static List<WpComment> importOrder(List<WpComment> postComments) {
+    static List<WpComment> threadedOrder(List<WpComment> postComments) {
         List<WpComment> sorted = new ArrayList<>(postComments);
         sorted.sort(Comparator.comparing(WpComment::date).thenComparingInt(WpComment::id));
         Map<Integer, WpComment> byId = byId(sorted);
-        List<WpComment> topLevel = new ArrayList<>();
-        List<WpComment> replies = new ArrayList<>();
+        Map<Integer, List<WpComment>> children = new LinkedHashMap<>();
+        List<WpComment> roots = new ArrayList<>();
         for (WpComment c : sorted) {
-            // An unpublished parent leaves its child dangling; import it top-level.
-            if (c.parent() != 0 && byId.containsKey(c.parent())) replies.add(c);
-            else topLevel.add(c);
+            if (c.parent() != 0 && byId.containsKey(c.parent())) {
+                children.computeIfAbsent(c.parent(), k -> new ArrayList<>()).add(c);
+            } else {
+                roots.add(c);
+            }
         }
-        return concat(topLevel, replies);
+        List<WpComment> out = new ArrayList<>();
+        for (WpComment root : roots) appendThread(root, children, out, 0);
+        return out;
+    }
+
+    /** Depth-first, with a guard: a cycle in WP's parent ids must not hang the run. */
+    static void appendThread(WpComment c, Map<Integer, List<WpComment>> children,
+                             List<WpComment> out, int depth) {
+        if (depth > 20 || out.contains(c)) return;
+        out.add(c);
+        for (WpComment child : children.getOrDefault(c.id(), List.of())) {
+            appendThread(child, children, out, depth + 1);
+        }
     }
 
     static Map<Integer, WpComment> byId(List<WpComment> comments) {
@@ -576,313 +574,40 @@ public class Comments {
         return byId;
     }
 
-    /** The top-level ancestor's WP id: GitHub Discussions nest one level, WordPress nests deeper. */
-    static int rootAncestor(WpComment c, Map<Integer, WpComment> byId) {
+    /** How deep a comment sits, counting only ancestors that are actually published. */
+    static int depthOf(WpComment c, Map<Integer, WpComment> byId) {
+        int depth = 0;
         WpComment current = c;
         for (int guard = 0; guard < 20; guard++) {
             WpComment parent = byId.get(current.parent());
-            if (parent == null) return current.id();
-            if (parent.parent() == 0) return parent.id();
+            if (parent == null) return depth;
+            depth++;
             current = parent;
         }
-        return current.id();
+        return depth;
     }
 
-    // ---- GitHub -------------------------------------------------------
-
-    record Discussion(String id, int number, String title) {
-    }
-
-    static void printGiscusConfig() throws Exception {
-        if (token == null) {
-            System.err.println("--print-config needs GITHUB_TOKEN (or GH_TOKEN) to read the repository ids.");
-            System.exit(2);
-        }
-        String[] ownerName = splitRepo(repo);
-        JsonNode info = resolveRepoAndCategory(ownerName[0], ownerName[1]);
-        System.out.printf("""
-                Paste into hugo.toml:
-
-                [params.giscus]
-                  repo = "%s"
-                  repoId = "%s"
-                  category = "%s"
-                  categoryId = "%s"
-                %n""", repo, info.get("repoId").asText(), category, info.get("categoryId").asText());
-    }
-
-    static JsonNode resolveRepoAndCategory(String owner, String name) throws Exception {
-        String query = """
-                query($owner:String!, $name:String!) {
-                  repository(owner:$owner, name:$name) {
-                    id
-                    hasDiscussionsEnabled
-                    discussionCategories(first:50) { nodes { id name } }
-                  }
-                }""";
-        JsonNode data = graphql(query, Map.of("owner", owner, "name", name), false);
-        JsonNode repository = data.path("repository");
-        if (repository.isMissingNode() || repository.isNull()) {
-            throw new IOException("Repository " + repo + " not found, or the token can't see it");
-        }
-        if (!repository.path("hasDiscussionsEnabled").asBoolean(true)) {
-            throw new IOException("Discussions are not enabled on " + repo
-                    + " -- Settings -> General -> Features -> Discussions");
-        }
-        String categoryId = null;
-        List<String> available = new ArrayList<>();
-        for (JsonNode node : repository.path("discussionCategories").path("nodes")) {
-            available.add(node.path("name").asText());
-            if (category.equalsIgnoreCase(node.path("name").asText())) {
-                categoryId = node.path("id").asText();
-            }
-        }
-        if (categoryId == null) {
-            throw new IOException("No discussion category named \"" + category + "\" on " + repo
-                    + ". Available: " + String.join(", ", available));
-        }
-        ObjectNode out = JSON.createObjectNode();
-        out.put("repoId", repository.path("id").asText());
-        out.put("categoryId", categoryId);
-        return out;
-    }
+    // ---- output -------------------------------------------------------
 
     /**
-     * The discussions already in the category, looked up the way giscus looks
-     * them up: by the sha1 of the term (strict mode's marker) first, falling
-     * back to an exact title match for a thread created without one.
+     * A bare JSON array, because there is nothing true about the set that isn't
+     * derivable from it: a count would be `len`, and a "generated at" is what git
+     * already records (and would make every run a commit -- see the class
+     * comment). A blank authorUrl is omitted rather than written as "", so the
+     * template's `with` is the only test it needs.
      */
-    static final class DiscussionIndex {
-        final Map<String, Discussion> byHash = new HashMap<>();
-        final Map<String, Discussion> byTitle = new HashMap<>();
-
-        Discussion find(String term) {
-            Discussion d = byHash.get(sha1(term));
-            return d != null ? d : byTitle.get(term);
+    static String renderJson(List<WpComment> threaded, Set<String> droppedTags) throws IOException {
+        Map<Integer, WpComment> byId = byId(threaded);
+        ArrayNode array = JSON.createArrayNode();
+        for (WpComment c : threaded) {
+            ObjectNode node = array.addObject();
+            node.put("id", c.id());
+            node.put("depth", depthOf(c, byId));
+            node.put("author", c.author().isBlank() ? "Anonymous" : c.author());
+            if (!c.authorUrl().isBlank()) node.put("authorUrl", c.authorUrl());
+            node.put("date", c.date().format(WP_DATE));
+            node.put("html", sanitizeHtml(c.html(), droppedTags));
         }
-
-        void add(String term, Discussion d) {
-            byHash.put(sha1(term), d);
-            byTitle.putIfAbsent(term, d);
-        }
-
-        int size() {
-            Set<String> ids = new HashSet<>();
-            byHash.values().forEach(d -> ids.add(d.id()));
-            byTitle.values().forEach(d -> ids.add(d.id()));
-            return ids.size();
-        }
-    }
-
-    static DiscussionIndex fetchDiscussions(String owner, String name, String categoryId) throws Exception {
-        String query = """
-                query($owner:String!, $name:String!, $categoryId:ID!, $after:String) {
-                  repository(owner:$owner, name:$name) {
-                    discussions(first:100, categoryId:$categoryId, after:$after) {
-                      pageInfo { hasNextPage endCursor }
-                      nodes { id number title body }
-                    }
-                  }
-                }""";
-        DiscussionIndex index = new DiscussionIndex();
-        String after = null;
-        do {
-            Map<String, Object> vars = new HashMap<>();
-            vars.put("owner", owner);
-            vars.put("name", name);
-            vars.put("categoryId", categoryId);
-            vars.put("after", after);
-            JsonNode discussions = graphql(query, vars, false).path("repository").path("discussions");
-            for (JsonNode node : discussions.path("nodes")) {
-                Discussion d = new Discussion(node.path("id").asText(),
-                        node.path("number").asInt(), node.path("title").asText());
-                index.byTitle.putIfAbsent(d.title(), d);
-                String body = node.path("body").asText("");
-                int at = body.indexOf(SHA1_MARKER_PREFIX);
-                if (at >= 0) {
-                    String hash = body.substring(at + SHA1_MARKER_PREFIX.length()).split("\\s")[0];
-                    index.byHash.putIfAbsent(hash, d);
-                }
-            }
-            after = discussions.path("pageInfo").path("hasNextPage").asBoolean()
-                    ? discussions.path("pageInfo").path("endCursor").asText() : null;
-        } while (after != null);
-        return index;
-    }
-
-    /** WP comment id -> GitHub comment node id, for everything already imported into this discussion. */
-    static Map<Integer, String> fetchImportedComments(Discussion discussion) throws Exception {
-        String query = """
-                query($id:ID!, $after:String) {
-                  node(id:$id) {
-                    ... on Discussion {
-                      comments(first:50, after:$after) {
-                        pageInfo { hasNextPage endCursor }
-                        nodes {
-                          id body
-                          replies(first:100) { nodes { id body } }
-                        }
-                      }
-                    }
-                  }
-                }""";
-        Map<Integer, String> imported = new HashMap<>();
-        String after = null;
-        do {
-            Map<String, Object> vars = new HashMap<>();
-            vars.put("id", discussion.id());
-            vars.put("after", after);
-            JsonNode comments = graphql(query, vars, false).path("node").path("comments");
-            for (JsonNode node : comments.path("nodes")) {
-                recordMarker(imported, node);
-                for (JsonNode reply : node.path("replies").path("nodes")) recordMarker(imported, reply);
-            }
-            after = comments.path("pageInfo").path("hasNextPage").asBoolean()
-                    ? comments.path("pageInfo").path("endCursor").asText() : null;
-        } while (after != null);
-        return imported;
-    }
-
-    static void recordMarker(Map<Integer, String> imported, JsonNode comment) {
-        Matcher m = WP_COMMENT_MARKER.matcher(comment.path("body").asText(""));
-        if (m.find()) imported.put(Integer.parseInt(m.group(1)), comment.path("id").asText());
-    }
-
-    /**
-     * Creates the thread exactly as giscus's own Widget would: title = term,
-     * body = "# term", the post link, and the strict-mode sha1 marker. The extra
-     * line about the import is only visible on GitHub -- giscus renders a
-     * discussion's comments, never its body.
-     */
-    static Discussion createDiscussion(String repoId, String categoryId, String term, String title) throws Exception {
-        String body = "# " + term + "\n\n"
-                + title + "\n\n"
-                + SITE_BASE + "/today/" + term + "/\n\n"
-                + "_Comments below were imported from the foojay.io WordPress site "
-                + "(scripts/transfer/Comments.java)._\n\n"
-                + SHA1_MARKER_PREFIX + sha1(term) + " -->";
-        String mutation = """
-                mutation($repoId:ID!, $categoryId:ID!, $title:String!, $body:String!) {
-                  createDiscussion(input:{repositoryId:$repoId, categoryId:$categoryId, title:$title, body:$body}) {
-                    discussion { id number title }
-                  }
-                }""";
-        JsonNode discussion = graphql(mutation,
-                Map.of("repoId", repoId, "categoryId", categoryId, "title", term, "body", body),
-                true).path("createDiscussion").path("discussion");
-        return new Discussion(discussion.path("id").asText(),
-                discussion.path("number").asInt(), discussion.path("title").asText());
-    }
-
-    /** Posts a comment, or a reply to one when replyTo is given. Returns its node id. */
-    static String addComment(String discussionId, String replyTo, String body) throws Exception {
-        String mutation = """
-                mutation($discussionId:ID!, $replyTo:ID, $body:String!) {
-                  addDiscussionComment(input:{discussionId:$discussionId, replyToId:$replyTo, body:$body}) {
-                    comment { id }
-                  }
-                }""";
-        Map<String, Object> vars = new HashMap<>();
-        vars.put("discussionId", discussionId);
-        vars.put("replyTo", replyTo);
-        vars.put("body", body);
-        return graphql(mutation, vars, true).path("addDiscussionComment").path("comment").path("id").asText();
-    }
-
-    /**
-     * One GraphQL call, with the throttling and back-off the content-creation
-     * limits require. Reads are cheap and go straight through; mutations are
-     * spaced by --delay and retried with a growing pause when GitHub answers
-     * with a secondary-rate-limit error.
-     */
-    static JsonNode graphql(String query, Map<String, Object> variables, boolean mutation) throws Exception {
-        ObjectNode payload = JSON.createObjectNode();
-        payload.put("query", query);
-        payload.set("variables", JSON.valueToTree(variables));
-        String body = JSON.writeValueAsString(payload);
-
-        long backoffMs = 30_000;
-        for (int attempt = 1; ; attempt++) {
-            if (mutation) {
-                long wait = mutationDelayMs - (System.currentTimeMillis() - lastMutationAt);
-                if (wait > 0) Thread.sleep(wait);
-                lastMutationAt = System.currentTimeMillis();
-            }
-            HttpResponse<String> response = HTTP.send(
-                    HttpRequest.newBuilder(URI.create(GITHUB_GRAPHQL))
-                            .timeout(Duration.ofMillis(REQUEST_TIMEOUT_MS))
-                            .header("Authorization", "Bearer " + token)
-                            .header("Accept", "application/json")
-                            .header("User-Agent", "foojay-hugo-migration-bot/1.0")
-                            .POST(HttpRequest.BodyPublishers.ofString(body))
-                            .build(),
-                    HttpResponse.BodyHandlers.ofString());
-
-            boolean throttled = response.statusCode() == 403 || response.statusCode() == 429;
-            JsonNode json = response.body().isBlank() ? JSON.createObjectNode() : JSON.readTree(response.body());
-            String errors = errorMessages(json);
-            if (!throttled && errors == null && response.statusCode() == 200) {
-                if (mutation) creations++;
-                return json.path("data");
-            }
-            if (errors != null && isRateLimit(errors)) throttled = true;
-
-            if (!throttled || attempt > MAX_RETRIES) {
-                throw new IOException("GitHub GraphQL HTTP " + response.statusCode()
-                        + (errors == null ? ": " + response.body() : ": " + errors));
-            }
-            long retryAfter = response.headers().firstValue("retry-after")
-                    .map(v -> Long.parseLong(v) * 1000).orElse(backoffMs);
-            System.out.printf("Rate limited by GitHub, waiting %ds (attempt %d/%d)%n",
-                    retryAfter / 1000, attempt, MAX_RETRIES);
-            Thread.sleep(retryAfter);
-            backoffMs *= 2;
-        }
-    }
-
-    static String errorMessages(JsonNode json) {
-        List<String> messages = new ArrayList<>();
-        if (json.has("message")) messages.add(json.path("message").asText());
-        for (JsonNode error : json.path("errors")) messages.add(error.path("message").asText());
-        return messages.isEmpty() ? null : String.join(". ", messages);
-    }
-
-    static boolean isRateLimit(String message) {
-        String m = message.toLowerCase(Locale.ROOT);
-        return m.contains("rate limit") || m.contains("too quickly") || m.contains("abuse")
-                || m.contains("was submitted too") || m.contains("try again later");
-    }
-
-    // ---- misc ---------------------------------------------------------
-
-    /** giscus's strict-mode term digest (lib/utils.ts digestMessage: SHA-1, lowercase hex). */
-    static String sha1(String value) {
-        try {
-            byte[] digest = MessageDigest.getInstance("SHA-1").digest(value.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hex = new StringBuilder(digest.length * 2);
-            for (byte b : digest) hex.append(String.format("%02x", b));
-            return hex.toString();
-        } catch (Exception e) {
-            throw new IllegalStateException("SHA-1 unavailable", e);
-        }
-    }
-
-    static String[] splitRepo(String repoWithOwner) throws IOException {
-        String[] parts = repoWithOwner.split("/");
-        if (parts.length != 2 || parts[0].isBlank() || parts[1].isBlank()) {
-            throw new IOException("--repo must be owner/name, got: " + repoWithOwner);
-        }
-        return parts;
-    }
-
-    static <T> List<T> concat(List<T> a, List<T> b) {
-        List<T> out = new ArrayList<>(a);
-        out.addAll(b);
-        return out;
-    }
-
-    static String firstNonBlank(String... values) {
-        for (String v : values) if (v != null && !v.isBlank()) return v;
-        return null;
+        return JSON.writer(PRETTY).writeValueAsString(array) + "\n";
     }
 }

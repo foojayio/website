@@ -1,0 +1,16 @@
+[
+  {
+    "id": 11455,
+    "depth": 0,
+    "author": "Tamás Balog",
+    "date": "2023-07-21T11:28:42",
+    "html": "<p>Regarding the ‘Promote Knowledge and Training’ section, I would add that commenting build configuration files can also be very useful, as they may get somewhat cryptic over time.</p>\n<p>Add comment about why a certain thing is configured in a certain way, what performance benefits a given configuration is aimed to achieve, why certain dependencies are excluded, etc.</p>\n<p>It can help with better understanding the config, and promote further optimization because people would know why things are done the way they are.</p>"
+  },
+  {
+    "id": 11465,
+    "depth": 1,
+    "author": "Brian Demers",
+    "date": "2023-07-21T17:39:22",
+    "html": "<p>Absolutely Tamás!</p>\n<p>Those comments help me future self (and co-workers) troubleshoot and deal with any potential dependency hell!😈</p>\n<p>I’ve had cases were I’ve temporary added an extra dependency, and stuck a big “TODO: This dependency will not be needed in the future when the version of XYZ is updated to 1.2.3.”<br>\n  That way a quick fix doesn’t stay around for ever!</p>"
+  }
+]

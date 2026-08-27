@@ -1,0 +1,17 @@
+[
+  {
+    "id": 8953,
+    "depth": 0,
+    "author": "Uwe",
+    "date": "2023-03-08T16:13:49",
+    "html": "<p>There is a small error in the shortcut table. You have to switch anonymous (F11) and mnemonic (ctrl + F11) shortcut. 🙂</p>"
+  },
+  {
+    "id": 8990,
+    "depth": 0,
+    "author": "Marit van Dijk",
+    "authorUrl": "https://maritvandijk.com/",
+    "date": "2023-03-10T07:29:42",
+    "html": "<p>Thanks for pointing that out, Uwe! Fixed now 😉</p>"
+  }
+]

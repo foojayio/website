@@ -1,0 +1,46 @@
+[
+  {
+    "id": 21916,
+    "depth": 0,
+    "author": "Mahendra Rao B",
+    "authorUrl": "https://bs-mahi.medium.com/",
+    "date": "2024-05-10T03:19:41",
+    "html": "<p>Very Nice Article, thanks for writing Jennifer Reif</p>"
+  },
+  {
+    "id": 27612,
+    "depth": 0,
+    "author": "Andre",
+    "date": "2024-07-03T06:51:07",
+    "html": "<p>Great article. Pity that from 0.8 to 1.x they changes are dramatic, so you most probably will have to re-write most of the code.</p>"
+  },
+  {
+    "id": 29197,
+    "depth": 0,
+    "author": "Jennifer Reif",
+    "date": "2024-07-17T16:26:38",
+    "html": "<p>Andre, there were only a few minor things that had to change between 0.8 and 1.0 (milestone), which have now been updated in the Github repository. I hope to update my blog posts soon!</p>"
+  },
+  {
+    "id": 36992,
+    "depth": 0,
+    "author": "Sandhya",
+    "date": "2024-12-02T10:34:28",
+    "html": "<p>Fantastic breakdown of integrating Generative AI with Java using Spring AI! The practical examples and clear steps make it much easier to understand.</p>\n<p>To know more: <a href=\"https://www.taffinc.com/ai-machine-learning.html\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.taffinc.com/ai-machine-learning.html</a></p>"
+  },
+  {
+    "id": 46615,
+    "depth": 0,
+    "author": "WebPanda",
+    "authorUrl": "https://webpanda.pl/",
+    "date": "2025-04-18T15:26:05",
+    "html": "<p>Thanks for the helpful tips. I’m excited to implement them!</p>"
+  },
+  {
+    "id": 69043,
+    "depth": 0,
+    "author": "Alexis R. Ware",
+    "date": "2025-10-14T10:46:08",
+    "html": "<p>“””Excellent read! This blog serves as a complete guide on how to develop GenAI applications with Java based in Spring AI framework. It covers how to integrate LLMs (like OpenAI) with a Neo4j vector database to enable Retrieval-Augmented Generation (RAG). If you’re a Java developer who is interested in working with generative AI, its step-by-step instructions, project set-up outlines, code snippets and example ran outputs will be of great help.<br>\n  If you want to explore more about Big Spring AI: <a href=\"https://mobisoftinfotech.com/resources/blog/ai-development/spring-ai-llm-integration-spring-boot\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://mobisoftinfotech.com/resources/blog/ai-development/spring-ai-llm-integration-spring-boot</a>“””</p>"
+  }
+]

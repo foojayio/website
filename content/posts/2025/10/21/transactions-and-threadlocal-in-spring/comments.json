@@ -1,0 +1,9 @@
+[
+  {
+    "id": 69788,
+    "depth": 0,
+    "author": "Peter Halicky",
+    "date": "2025-10-21T15:09:42",
+    "html": "<p>ThreadLocal works just fine with virtual threads.</p>"
+  }
+]

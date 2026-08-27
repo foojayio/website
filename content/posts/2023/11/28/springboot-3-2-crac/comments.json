@@ -1,0 +1,89 @@
+[
+  {
+    "id": 14512,
+    "depth": 0,
+    "author": "Teja",
+    "date": "2023-11-30T02:56:31",
+    "html": "<p>Were you able to verify how was it performing with the DB connections using manual checkpoint.</p>"
+  },
+  {
+    "id": 14535,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2023-11-30T07:44:55",
+    "html": "<p>Nope, but feel free to test that and share the results.</p>"
+  },
+  {
+    "id": 14545,
+    "depth": 0,
+    "author": "Grégoire",
+    "date": "2023-11-30T14:01:41",
+    "html": "<p>I try on a demo app using a simple controller calling a JPA object in database.</p>\n<p>org.springframework.context.ApplicationContextException: Failed to take CRaC checkpoint on refresh<br>\n  at org.springframework.context.support.DefaultLifecycleProcessor$CracDelegate.checkpointRestore(DefaultLifecycleProcessor.java:534) ~[spring-context-6.1.1.jar!/:6.1.1]<br>\n  ...<br>\n  ...<br>\n  Suppressed: jdk.internal.crac.mirror.impl.CheckpointOpenSocketException: Socket[addr=localhost/127.0.0.1,port=5432,localport=34374]<br>\n  at java.base/jdk.internal.crac.JDKSocketResourceBase.lambda$beforeCheckpoint$0(JDKSocketResourceBase.java:68) ~[na:na]<br>\n  ...<br>\n  ...<br>\n  Caused by: java.lang.Exception: This file descriptor was created by HikariPool-1 connection adder at epoch:1701351807255 here<br>\n  at java.base/jdk.internal.crac.JDKFdResource.(JDKFdResource.java:60)</p>"
+  },
+  {
+    "id": 14983,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2023-12-13T13:10:34",
+    "html": "<p>Hi there, sorry to hear you ran into trouble, because you said it is a demo app, would it be possible to share the code so that we could reproduce the problem and take a look at it?</p>"
+  },
+  {
+    "id": 14650,
+    "depth": 0,
+    "author": "Ciro",
+    "date": "2023-12-03T15:10:18",
+    "html": "<p>I have the same issue of Grégoire.</p>\n<p>Suppressed: jdk.internal.crac.impl.CheckpointOpenSocketException: tcp localAddr 172.18.0.6 localPort 46868 remoteAddr 172.18.0.3 remotePort 6379<br>\n  at java.base/jdk.internal.crac.Core.translateJVMExceptions(Core.java:91)<br>\n  at java.base/jdk.internal.crac.Core.checkpointRestore1(Core.java:145)<br>\n  at java.base/jdk.internal.crac.Core.checkpointRestore(Core.java:246)<br>\n  at java.base/jdk.internal.crac.Core.checkpointRestore(Core.java:231)<br>\n  at jdk.crac/jdk.crac.Core.checkpointRestore(Core.java:70)<br>\n  at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>\n  at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)<br>\n  at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>\n  at java.base/java.lang.reflect.Method.invoke(Method.java:568)<br>\n  at org.crac.Core$Compat.checkpointRestore(Core.java:141)<br>\n  … 18 common frames omitted<br>\n  Suppressed: jdk.internal.crac.impl.CheckpointOpenSocketException: socket:[272072]</p>"
+  },
+  {
+    "id": 14984,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2023-12-13T13:11:31",
+    "html": "<p>If somehow possible, could you maybe share the code that produces the problem? In this case we could try to reproduce it to get a better undestanding what went wrong.</p>"
+  },
+  {
+    "id": 16688,
+    "depth": 0,
+    "author": "ron",
+    "date": "2024-01-28T07:16:10",
+    "html": "<p>Hello Gerrit, what tool did you use to determine the exact startup time in ms. and generate a graph/plot for visual</p>"
+  },
+  {
+    "id": 17122,
+    "depth": 0,
+    "author": "Magnus Larsson",
+    "date": "2024-02-07T09:54:52",
+    "html": "<p>If you forgot to run the commands:</p>\n<p>sudo chown root:root $JAVA_HOME/lib/criu<br>\n  sudo chmod u+s $JAVA_HOME/lib/criu</p>\n<p>You will get an NPE.</p>\n<p>Look into the file tmp_checkpoint/dump4.log, if it ends with:</p>\n<p>(00.032388) Warn (compel/src/lib/infect.c:129): Unable to interrupt task: 11368 (Operation not permitted)<br>\n  (00.032398) Unlock network<br>\n  (00.032408) Unfreezing tasks into 1<br>\n  (00.032409) Unseizing 11368 into 1<br>\n  (00.032410) Error (compel/src/lib/infect.c:358): Unable to detach from 11368: No such process<br>\n  (00.032417) Error (criu/cr-dump.c:2063): Dumping FAILED.</p>\n<p>Then you know 🙂</p>"
+  },
+  {
+    "id": 17529,
+    "depth": 0,
+    "author": "Paul Pham",
+    "date": "2024-02-15T12:04:36",
+    "html": "<p>Hello,<br>\n  I try on a demo app using a simple controller calling a JPA object in the database Postgres. I get errors:</p>\n<p>org.springframework.context.ApplicationContextException: Failed to take CRaC checkpoint on refresh<br>\n  …<br>\n  Caused by: org.crac.CheckpointException: null<br>\n  …<br>\n  Suppressed: jdk.internal.crac.impl.CheckpointOpenSocketException: tcp localAddr 192.168.107.3 localPort 56378 remoteAddr 192.168.107.2 remotePort 5432<br>\n  Can you help me</p>"
+  },
+  {
+    "id": 17532,
+    "depth": 0,
+    "author": "Paul Pham",
+    "date": "2024-02-15T12:15:25",
+    "html": "<p>My code:<br><a href=\"https://github.com/hoangphuc2k/graalvm-demo\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/hoangphuc2k/graalvm-demo</a></p>"
+  },
+  {
+    "id": 35504,
+    "depth": 0,
+    "author": "João Esperancinha",
+    "date": "2024-10-23T08:46:29",
+    "html": "<p>Hi there Gerrit!<br>\n  Thanks for this great read! I am struggling with on particular issue with the latest Spring version and the latest JDK 21 on Linux. I can’t seem to get a second checkpoint to work. I’m using java 21.0.4.crac-zulu and spring boot 3.3.4. The error I’m getting on a second restore is: Using java version 21.0.4.crac-zulu in this shell.<br>\n  23620: Error (criu/files-reg.c:2097): File home/**/crac-service-java/tmp_checkpoint/pages-1.img has bad size 864256 (expect 101888000)<br>\n  23620: Error (criu/mem.c:1359): `- Can’t open vma<br>\n  Error (criu/cr-restore.c:2605): Restoring FAILED.<br>\n  make: *** [Makefile:32: start-checkpoint] Error 1</p>\n<p>I’m sure this has to work in some way, but I came across this problem in the versions I pointed out.</p>"
+  },
+  {
+    "id": 35865,
+    "depth": 0,
+    "author": "Gerrit Grunwald",
+    "date": "2024-10-30T12:36:35",
+    "html": "<p>One thing you should keep in mind when creating checkpoints is, that you should always save the checkpoint files to a clean folder. Meaning to say, you need to either wipe out the existing checkpoint or store it in a new folder. Otherwise you might get a mix of different checkpoints in one folder which will lead to problems.</p>"
+  }
+]

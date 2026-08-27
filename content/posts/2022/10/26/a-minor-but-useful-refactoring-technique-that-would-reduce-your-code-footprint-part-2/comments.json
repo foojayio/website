@@ -1,0 +1,16 @@
+[
+  {
+    "id": 6748,
+    "depth": 0,
+    "author": "juwil",
+    "date": "2022-11-07T08:39:46",
+    "html": "<p>talking about readability – ubiquitious null checks should be avoided.</p>\n<pre>.noneMatch(testKey -&gt; (testKey != null) &amp;&amp; (testKey.equals(authority.getAuthority())));</pre>\n<p>would be way better readable as</p>\n<pre>.noneMatch(authority.getAuthority().equals(testkey));</pre>"
+  },
+  {
+    "id": 6856,
+    "depth": 0,
+    "author": "Jamie",
+    "date": "2022-11-11T00:42:04",
+    "html": "<p>I think you forgot to rename the variable in the addIfNotExistDeclarative() function:</p>\n<p>Shouldn’t the following:</p>\n<p>final var exist = reachableRoles.stream()</p>\n<p>be changed instead to something like:</p>\n<p>final var noneMatched = reachableRoles.stream()</p>\n<p>As it’s supposed to only add to the reachableRoles if it doesn’t already exist?</p>\n<p>The imperative version has a guard clause to return; if it is found.</p>\n<p>So in that version it only adds the item if it isn’t found.</p>"
+  }
+]

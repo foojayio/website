@@ -977,6 +977,70 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .giscus-section__title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; }
 .giscus-section .giscus, .giscus-section .giscus-frame { width: 100%; }
 
+/* The WordPress comment archive, under the giscus widget (partials/legacy-comments.html).
+   Rule off and heading match .giscus-section above, because they are two
+   sections of one conversation and a second visual language would read as a
+   second kind of thing.
+
+   THE BODY IS NOT INSIDE .prose, so the rules that make running text readable
+   there do not reach it. Only two are actually missing: the paragraph rhythm,
+   and the LINK UNDERLINE -- which is not a style preference. --brand-secondary
+   on --ink-soft is 1.2:1 and colour alone needs 3:1 (WCAG 1.4.1), exactly the
+   measurement that put `.prose a { text-decoration: underline }` in this file.
+   A comment is running text written by a stranger, full of links to their repo.
+   Everything else (code, pre, blockquote) comes from the base rules near the
+   top, so nothing is restated here. */
+.legacy-comments {
+  margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+  scroll-margin-top: 1.5rem;
+}
+.legacy-comments__title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; }
+.legacy-comments__note {
+  font-size: .9rem; color: var(--ink-muted); max-width: 62ch; margin-top: .35rem;
+}
+.legacy-comments__list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+
+/* Indent by nesting depth, as a custom property so one rule covers every level
+   and the fallback is depth 0. data-depth is clamped in the template (see there
+   for why not math.Min). The step is small on purpose: at 3 levels a 2rem step
+   would leave the deepest reply in a column half the width of the first. */
+.legacy-comment { --legacy-indent: 0rem; margin-top: 1.25rem; }
+.legacy-comment[data-depth="1"] { --legacy-indent: 1.25rem; }
+.legacy-comment[data-depth="2"] { --legacy-indent: 2.5rem; }
+.legacy-comment[data-depth="3"] { --legacy-indent: 3.75rem; }
+.legacy-comment > article {
+  margin-left: var(--legacy-indent);
+  padding: .9rem 1.1rem;
+  background: var(--surface-sunken);
+  border-radius: var(--radius);
+  /* The one cue that a reply is a reply and not just an indented card -- the
+     indent alone is ambiguous once a body wraps. */
+  border-left: 3px solid transparent;
+}
+.legacy-comment:not([data-depth="0"]) > article { border-left-color: var(--brand-accent); }
+
+.legacy-comment__meta {
+  display: flex; flex-wrap: wrap; gap: .25rem .6rem; align-items: baseline;
+  margin-bottom: .4rem;
+}
+.legacy-comment__author { font-family: var(--font-display); font-weight: 600; }
+.legacy-comment__date { font-size: .85rem; color: var(--ink-muted); }
+
+.legacy-comment__body > *:first-child { margin-top: 0; }
+.legacy-comment__body > *:last-child { margin-bottom: 0; }
+.legacy-comment__body p { margin: .6rem 0; }
+.legacy-comment__body a { text-decoration: underline; text-underline-offset: 2px; }
+/* A commenter pasting a 90-character stack trace line must not widen the page
+   (1.4.10); a bare URL as link text is the common case here. */
+.legacy-comment__body { overflow-wrap: break-word; }
+
+/* On a phone the indent competes with the text for a 390px viewport, so the
+   nesting collapses to the border alone -- which is the cue that carries the
+   meaning anyway. */
+@media (max-width: 34rem) {
+  .legacy-comment[data-depth] { --legacy-indent: 0rem; }
+}
+
 /* -------------------------------------------------------------- authors -- */
 
 .author-profile {
@@ -1757,7 +1821,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    moment it gets its id; there is nowhere else to notice. (#transcript needs
    nothing: it is an <h2> inside .prose.) */
 .prose h2, .prose h3,
-.author-callout[id], .related-posts[id], .giscus-section[id] {
+.author-callout[id], .related-posts[id], .giscus-section[id], .legacy-comments[id] {
   scroll-margin-top: calc(var(--header-h) + 1rem);
 }
 .prose ul, .prose ol { padding-left: 1.4rem; }

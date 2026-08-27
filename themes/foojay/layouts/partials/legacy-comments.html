@@ -1,0 +1,110 @@
+{{- /* The WordPress comments a post carried on the old foojay.io, rendered under
+       the giscus widget. Takes the page.
+
+       DERIVED FROM THE FILE, like the transcript. scripts/transfer/Comments.java
+       writes a comments.json into the bundle of each of the 269 posts that has
+       any, and this renders a section when that file is there. No frontmatter
+       flag to set, forget or unset -- the same rule as the EnlighterJS, mermaid
+       and transcript loaders, and the 1885 posts with no comment history render
+       nothing at all.
+
+       WHY THE ARCHIVE IS HTML AND IS PRINTED WITH safeHTML.
+       hugo.toml sets goldmark `unsafe = true`, because post bodies contain
+       deliberate raw HTML. Running 578 bodies written by anonymous strangers
+       through `markdownify` under that setting would therefore be a stored-XSS
+       hole on 269 article pages. So the sanitizing happens ONCE, in the script,
+       with jsoup's own Safelist, and what is stored is already safe -- see the
+       class comment in Comments.java. Two consequences worth keeping:
+         - `safeHTML` here is only correct because of that guarantee. NEVER point
+           this partial at unsanitized comment HTML, and never hand-edit a
+           comments.json to add markup the safelist would have dropped.
+         - Nothing else is escaped by hand: author and date go through Hugo's
+           normal escaping, so a name containing `<` is text, not markup.
+
+       IT IS AN ORDINARY SECTION, NOT A COLLAPSED <details>.
+       Same finding as the transcript: the browser's own find-in-page does not
+       look inside a closed <details>, so Ctrl-F for a commenter's name would
+       find nothing on the one page that says it.
+
+       data-pagefind-ignore, same reasoning as the transcript's, with the
+       numbers checked: 25,000 words of comments against a 113,000-word index
+       would make a post a hit for any aside anyone ever left under it, and bury
+       the article archive that people actually search for. Worth revisiting
+       deliberately -- the search page already gives each section its own quota
+       -- rather than by default.
+
+       EVERY COMMENT IS BOUND TO A VARIABLE ($c) rather than read off the dot.
+       Inside a partial `$` is the PAGE that was passed in, not the item being
+       ranged over, so a `{{ with .authorUrl }}` block that then reaches for
+       `$.author` silently resolves against the page's params and prints nothing.
+       That is not a hypothetical -- it was the first version of this file. */ -}}
+{{- $comments := "" -}}
+{{- with .Resources.GetMatch "comments.json" -}}
+  {{- $comments = . | transform.Unmarshal -}}
+{{- end -}}
+{{- with $comments -}}
+<section id="legacy-comments" class="legacy-comments" data-pagefind-ignore>
+  <h2 class="legacy-comments__title">Discussions on the previous Foojay site</h2>
+  {{- /* Says what this is before the reader wonders why they cannot reply. The
+         count and the year range are DERIVED, so nothing here goes stale as the
+         script picks up comments left on WordPress before cutover.
+
+         Sorted by date for the range, because the array itself is in THREADED
+         order -- a 2025 reply can sit at index 1 under a 2021 comment, so the
+         last element is not the newest and `index` alone would print a range
+         that runs backwards. The range also collapses to a single year when
+         both ends fall in one: "between 2021 and 2021" reads as a bug. */ -}}
+  {{- $byDate := sort $comments "date" -}}
+  {{- $from := time.Format "2006" (index $byDate 0).date -}}
+  {{- $to := time.Format "2006" (index $byDate (sub (len $byDate) 1)).date -}}
+  <p class="legacy-comments__note">
+    {{ len $comments }} comment{{ if ne (len $comments) 1 }}s{{ end }} left on this article
+    {{ if eq $from $to }}in {{ $from }}{{ else }}between {{ $from }} and {{ $to }}{{ end }},
+    kept from the previous WordPress version of foojay.io. They are an archive and
+    are closed for replies &mdash; use the discussion above to add to the conversation.
+  </p>
+  {{- /* role="list" because the CSS sets `list-style: none`, and Safari/VoiceOver
+         drops list semantics from a list styled that way -- so without it a
+         screen reader stops announcing "list, 12 items", which is the one cue
+         that says how much conversation is below. */ -}}
+  <ol class="legacy-comments__list" role="list">
+    {{- range $c := $comments -}}
+      {{- /* Integer arithmetic, never math.Min: Hugo's math.* helpers return
+             float64, so a clamp through them renders 3 or 3.0 depending on the
+             value and the CSS attribute selector silently stops matching. The
+             real data reaches depth 2; the clamp is for a feed that ever nests
+             deeper, so the indent cannot walk off the page. */ -}}
+      {{- $depth := $c.depth -}}
+      {{- if gt $depth 3 }}{{ $depth = 3 }}{{ end -}}
+      <li class="legacy-comment" data-depth="{{ $depth }}">
+        <article>
+          <header class="legacy-comment__meta">
+            <span class="legacy-comment__author">
+              {{- with $c.authorUrl -}}
+                {{- /* The commenter's own homepage field. The links INSIDE a body
+                       already carry these attributes -- the script sets them --
+                       and this one needs the same: 99 URLs typed by strangers
+                       years ago are exactly what `nofollow ugc` describes, and
+                       `noopener` because a new tab without it hands the opened
+                       page a handle on ours. */ -}}
+                <a href="{{ . }}" rel="nofollow ugc noopener" target="_blank">{{ $c.author }}</a>
+              {{- else -}}
+                {{ $c.author }}
+              {{- end -}}
+            </span>
+            {{- /* The stored date is WordPress's own wall-clock string with no offset
+                   (`2020-10-03T18:49:04`), and hugo.toml sets no `timeZone`, so Hugo
+                   parses AND formats it as UTC and the day shown is the day stored.
+                   Setting a site `timeZone` later would shift these by an hour or two
+                   and flip the DATE on a late-evening comment -- day granularity hides
+                   it everywhere except across midnight. If that setting ever arrives,
+                   store an offset here instead of trusting the round trip. */ -}}
+            <time class="legacy-comment__date" datetime="{{ $c.date }}">{{ time.Format "2 January 2006" $c.date }}</time>
+          </header>
+          <div class="legacy-comment__body">{{ $c.html | safeHTML }}</div>
+        </article>
+      </li>
+    {{- end -}}
+  </ol>
+</section>
+{{- end -}}

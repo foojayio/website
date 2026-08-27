@@ -1,0 +1,9 @@
+[
+  {
+    "id": 42122,
+    "depth": 0,
+    "author": "Nithin S",
+    "date": "2025-02-27T05:22:01",
+    "html": "<p><a href=\"https://community.neo4j.com/t/issue-with-node-persistence-actor-node-updated-when-movie-node-is-updated/72776/4\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://community.neo4j.com/t/issue-with-node-persistence-actor-node-updated-when-movie-node-is-updated/72776/4</a></p>\n<p>can u check this issue<br>\n  Expected Flow<br>\n  1. On Update Movie only movie should get updated. (Actor and Not AdditionalDetails Shouldn’t get updated)<br>\n  2. On Update Actor both Actor and AdditionalDetails Should get updated nbn</p>"
+  }
+]

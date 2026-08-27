@@ -1,0 +1,17 @@
+[
+  {
+    "id": 3395,
+    "depth": 0,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2022-05-09T15:48:33",
+    "html": "<p>“The virtual thread scheduler is a work-stealing ForkJoinPool, which is distinct from the common pool.” That’s what it is mentioned in the JEP: 425, though.</p>"
+  },
+  {
+    "id": 3423,
+    "depth": 1,
+    "author": "Miro Wengner",
+    "date": "2022-05-10T19:39:31",
+    "html": "<p>Good point! dev state seems to consider common thread pool for executing the real work as VirtualThreads are not bind to real worker Thread (see. Image 1) I’m adding a following current implementation code <code>private static final Executor ASYNC_POOL = USE_COMMON_POOL ? ForkJoinPool.commonPool() : new ThreadPerTaskExecutor();</code><br>\n  where USE_COMMON_POOL=TRUE. FALSE case could be “challenging” as it’d start a new not daemon Threads. Let’s wait till the upcoming JDK19 release as VirtualThreads are scheduled there as a 1st Preview.</p>"
+  }
+]

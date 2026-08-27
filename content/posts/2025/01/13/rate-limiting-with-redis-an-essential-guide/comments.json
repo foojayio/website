@@ -1,0 +1,30 @@
+[
+  {
+    "id": 39056,
+    "depth": 0,
+    "author": "Vovkin",
+    "date": "2025-01-14T08:35:44",
+    "html": "<p>Nice article with summary of the most popular rate limiting algorithms.</p>\n<p>Looks like you used same image for sliding window counter as for sliding window log.</p>"
+  },
+  {
+    "id": 39080,
+    "depth": 1,
+    "author": "Raphael De Lio",
+    "date": "2025-01-14T17:24:03",
+    "html": "<p>Thank you for letting me know and thank you for reading! I’ve replaced the correct animation 🙂</p>"
+  },
+  {
+    "id": 39286,
+    "depth": 0,
+    "author": "Anas",
+    "date": "2025-01-19T07:33:30",
+    "html": "<p>Nice article.<br>\n  I have a very little note. The article title says “With Redis” although the article is focusing more on the different rate limiting patterns. I have no idea whether you are planning to post a second part that talk about implementation with Redis or not. If you are planning to do that, I suggest to add a statement at the end of the article to inform the reader to wait for the second part for specific implementation with Redis.</p>"
+  },
+  {
+    "id": 39343,
+    "depth": 1,
+    "author": "Raphael De Lio",
+    "date": "2025-01-20T09:39:42",
+    "html": "<p>Hey, Anas! Thanks for the suggestion, that’s indeed the case. I’ll add a note informing that the following parts will be coming out weekly.</p>"
+  }
+]

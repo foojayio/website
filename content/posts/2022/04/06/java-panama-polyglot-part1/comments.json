@@ -1,0 +1,31 @@
+[
+  {
+    "id": 3272,
+    "depth": 0,
+    "author": "Criss",
+    "date": "2022-05-01T11:13:53",
+    "html": "<p>What directory should be included in that command:</p>\n<p>g++ -dynamiclib -current_version 1.0 -I -o libmyrectangle.dylib MyRectangle.cpp</p>"
+  },
+  {
+    "id": 3359,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-05-06T19:42:52",
+    "html": "<p>Criss,<br>\n  I’m assuming you’ve installed Xcode <code>xcode-select —install</code>. Also check out: <a href=\"https://github.com/carldea/java-panama-workshop/tree/main/installs\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/carldea/java-panama-workshop/tree/main/installs</a></p>\n<p>If you installed the above the directory should be the following:<br><code>/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/</code></p>\n<p>Carl</p>"
+  },
+  {
+    "id": 3273,
+    "depth": 0,
+    "author": "Criss",
+    "date": "2022-05-01T11:14:35",
+    "html": "<p>On mac I got error that my library is not found, I indicated java.libary.path but still Java not recognized my library.</p>"
+  },
+  {
+    "id": 8209,
+    "depth": 0,
+    "author": "Eduardo MErgulhao",
+    "date": "2023-01-24T19:23:16",
+    "html": "<p>How I can fix this :<br>\n  : expected (Addressable,Addressable,int)int but found (MemoryAddress,MemoryAddress,int)int</p>"
+  }
+]

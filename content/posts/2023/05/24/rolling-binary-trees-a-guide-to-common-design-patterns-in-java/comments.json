@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10398,
+    "depth": 0,
+    "author": "Lorenzo",
+    "date": "2023-05-26T15:20:09",
+    "html": "<p>A visitor with a single visit method is not the pattern Visitor..</p>"
+  },
+  {
+    "id": 10437,
+    "depth": 1,
+    "author": "George Tanev",
+    "authorUrl": "https://www.georgetconsulting.com/",
+    "date": "2023-05-28T09:42:00",
+    "html": "<p>So long as there is (1) a visitor, (2) an object structure being visited, and (3) code that orchestrates the visits decoupled from the object structure, it is a Visitor pattern.<br>\n  &nbsp;<br>\n  Here is an example of a visitor with a single visit method, from the Chromium source code: <a href=\"https://chromium.googlesource.com/chromium/chromium/+/trunk/content/public/renderer/render_view_visitor.h\" rel=\"nofollow ugc noopener\" target=\"_blank\">RenderViewVisitor</a> → <a href=\"https://chromium.googlesource.com/chromium/chromium/+/trunk/content/renderer/render_thread_impl.cc#186\" rel=\"nofollow ugc noopener\" target=\"_blank\">RenderViewZoomer</a> → <a href=\"https://chromium.googlesource.com/chromium/chromium/+/trunk/content/renderer/render_view_impl.cc#962\" rel=\"nofollow ugc noopener\" target=\"_blank\">RenderView::ForEach</a> → <a href=\"https://chromium.googlesource.com/chromium/chromium/+/trunk/content/renderer/render_thread_impl.cc#1291\" rel=\"nofollow ugc noopener\" target=\"_blank\">RenderThreadImpl::OnSetZoomLevelForCurrentURL</a>.<br>\n  &nbsp;<br>\n  And another one, from Rust’s ignore library: <a href=\"https://docs.rs/ignore/latest/src/ignore/walk.rs.html#1149\" rel=\"nofollow ugc noopener\" target=\"_blank\">ParallelVisitor</a> → <a href=\"https://docs.rs/ignore/latest/src/ignore/walk.rs.html#1130\" rel=\"nofollow ugc noopener\" target=\"_blank\">ParallelVisitorBuilder</a> → <a href=\"https://docs.rs/ignore/latest/src/ignore/walk.rs.html#1201\" rel=\"nofollow ugc noopener\" target=\"_blank\">WalkParallel</a>.</p>"
+  }
+]

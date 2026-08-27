@@ -1,0 +1,17 @@
+[
+  {
+    "id": 13424,
+    "depth": 0,
+    "author": "david",
+    "date": "2023-10-27T11:53:47",
+    "html": "<p>Hi, is there a git repository to try to use your code and implement a linux version?</p>"
+  },
+  {
+    "id": 13525,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2023-10-30T14:31:25",
+    "html": "<p>Hi there, I did not publish the code of JDKMonitor because it is written in Swift, not Java. But I wrote a similar tool in Java which is already available for Mac, Linux and Windows, you can find it here <a href=\"https://github.com/HanSolo/JDKMon\" rel=\"nofollow ugc noopener\" target=\"_blank\">JDKMon</a>. It is similar but comes with different features.</p>"
+  }
+]

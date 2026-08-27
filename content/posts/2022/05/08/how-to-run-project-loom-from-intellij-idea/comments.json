@@ -1,0 +1,24 @@
+[
+  {
+    "id": 3451,
+    "depth": 0,
+    "author": "Suresh",
+    "date": "2022-05-11T17:44:06",
+    "html": "<p>&gt;I manage multiple JDKs using SDKMAN; it doesn’t have it since it’s still in early access release.</p>\n<p>SDKMan has been providing loom EA releases for s very long time.<br>\n  All you have to do is `sdk i java 19.ea.5.lm-open`</p>"
+  },
+  {
+    "id": 3452,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2022-05-11T18:39:39",
+    "html": "<p>So this has happened with SDKMAN in mac with me, when I tried loom EA. I don’t know if this is because of my machine or something with SDKMAN</p>\n<p><code></code></p><code>\n <p>W $sdk d java 19.ea.21-open<br>\n   We periodically need to update the local cache. Please run:</p>\n <p>$ sdk update</p>\n <p>Default java version set to 19.ea.21-open<br>\n   \\W $java --version<br>\n   The operation couldn’t be completed. Unable to locate a Java Runtime.<br>\n   Please visit http://www.java.com for information on installing Java.</p></code>\n<p><code>\\W $</code></p>"
+  },
+  {
+    "id": 5513,
+    "depth": 0,
+    "author": "Deepu K Sasidharan",
+    "date": "2022-08-24T12:20:11",
+    "html": "<p>With the latest build (19.ea.36-open) you also need to set `–source 19` in the Java compiler parameters for this to work. Setting `–release 19` doesn’t work</p>"
+  }
+]

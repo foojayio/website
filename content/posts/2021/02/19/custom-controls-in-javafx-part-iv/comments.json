@@ -1,0 +1,24 @@
+[
+  {
+    "id": 242,
+    "depth": 0,
+    "author": "Tom",
+    "date": "2021-02-19T15:00:16",
+    "html": "<p>I think splitting a custom control into a control and a skin class is always a wise choice, even if you do not expect multiple skins. Because it enforces separation of concerns; the control only holds logic and the skinnable only rendering. The skinnable’s properties aren’t accessible from the control’s API, so all UI settings are done through CSS.</p>"
+  },
+  {
+    "id": 243,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2021-02-23T08:15:21",
+    "html": "<p>Hey Tom,<br>\n  I agree that from a clean code perspective splitting logic and UI absolutely makes. In my opinion it’s always a question about time and discipline. So if time is limited and you are disciplined you could also go with the all-in-one approach but this should be an exception. Another advantage of using the control + skin approach is definitely that you can extend the control easily with another skin and re-use a lot of the code (which means saving time). Long story short…your are right 🙂</p>"
+  },
+  {
+    "id": 10234,
+    "depth": 0,
+    "author": "Tony",
+    "date": "2023-05-17T12:58:32",
+    "html": "<p>Is there anyway to specify the region of a control that reacts to events for that control?</p>"
+  }
+]

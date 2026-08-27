@@ -1,0 +1,87 @@
+[
+  {
+    "id": 10890,
+    "depth": 0,
+    "author": "Martin Filteau",
+    "date": "2023-06-24T16:16:53",
+    "html": "<p>How would you reconcile code reviews (which usually happen on a pull request) with trunk based développement?</p>"
+  },
+  {
+    "id": 10895,
+    "depth": 0,
+    "author": "Brian",
+    "date": "2023-06-24T21:24:16",
+    "html": "<p>Most of the issues come from long lived isolated branches, so prefer a middle ground in micro branches. Branches are only allowed the live for days before they must be merged and a new branch started. This ensures frequent merged and development with the latest changes for others, while also allowing all the structured goodness of fully integrated test before merging to main for a stable main branch.</p>"
+  },
+  {
+    "id": 10897,
+    "depth": 0,
+    "author": "Ed Kolis",
+    "date": "2023-06-25T00:15:48",
+    "html": "<p>The problem I see with this is, how do you avoid accidently breaking the code for *everyone* with one erroneous commit? With a branching model (and appropriate division of labor) you won’t risk stomping on the whole team’s toes every time you commit code.</p>"
+  },
+  {
+    "id": 10898,
+    "depth": 0,
+    "author": "Martin Ledoux",
+    "date": "2023-06-25T04:20:06",
+    "html": "<p>You made a lot of good points.<br>\n  However, I do believe this is a bit of a straw-man of branching models:<br>\n  “And the longer these branches live for, the more challenging it is to merge them back into the main codebase. It might seem fast to develop your fixes and improvements on a separate branch that isn’t impacted by other developers’ changes, but you still have to pay that cost at some point. Integrating small changes regularly into your code is usually less painful…”<br>\n  Or maybe it’s more is a false dichotomy.</p>\n<p>Good habits with branching can lead to the same results. GitHub PRs even encourage updating your branch from the trunk regularly, and lets you know when there are conflicts so that you can resolve them immediately.<br>\n  This comes down to good practice and habits.</p>\n<p>Even with trunk based development, you’ve still got to pull regularly, and sometimes stash and resolve conflict. This is one area that isn’t a real difference.</p>\n<p>Anyone coding for a week without pulling, merging or updating has a teamwork problem, and that’s a team or management issue.</p>\n<p>I don’t know, I feel that these tools and practices can lead to similar results, and this argument feels outdated – like it was written before GitHub, GitLab, etc…<br>\n  Pipelines or commit hooks can test builds on feature branches too – so I can know that it all works as I commit to my branch, and before I merge to the trunk.<br>\n  I’ll also echo the other Martin’s comment – how does one do code review?</p>\n<p>Good point about competing and racing to commit first.</p>"
+  },
+  {
+    "id": 10899,
+    "depth": 0,
+    "author": "Karl",
+    "date": "2023-06-25T04:20:09",
+    "html": "<p>I develop for fun by myself, but I’m not quite sure how I would handle breaking changes that require less of changes to not break.</p>"
+  },
+  {
+    "id": 10900,
+    "depth": 0,
+    "author": "James Grayson",
+    "date": "2023-06-25T04:43:49",
+    "html": "<p>Trunk based works well for small teams that all work together on one feature. But it does not scale. The biggest problem I’ve found with it is the heroics required when a breaking cheng went in and now the whole team can’t work. There are a number of reasons git has been winning out, mainly the derisking and code isolation as you mentioned, if used properly it can encourage better review practices and team collaboration. Enevitably you will need a longer branch to do experiments, as your team grows I would encourage you to reevaluate your position.</p>"
+  },
+  {
+    "id": 10905,
+    "depth": 0,
+    "author": "Phil Day",
+    "date": "2023-06-25T09:10:05",
+    "html": "<p>I’ve used both, and in my experience branch based givrs much better stability of trunk. Divergance of branches can be avoided by developers taking responsibility to rebate often.</p>\n<p>Everything else, small commutes, etc, good collaboration, can be done in a branch model</p>"
+  },
+  {
+    "id": 10906,
+    "depth": 0,
+    "author": "Stephen Brown",
+    "date": "2023-06-25T09:13:42",
+    "html": "<p>Pair programming and reviews and no PR?</p>"
+  },
+  {
+    "id": 10914,
+    "depth": 0,
+    "author": "Rob",
+    "date": "2023-06-25T20:00:10",
+    "html": "<p>No.</p>\n<p>You negate so many other issues and things that must be accounted for. Migrations, infrastructure Improvements, a change in feature priorities. This does not encourage smaller code commits. Why do you think that? Because the developers we’ll be scared to push code? This doesn’t work in the real world with teams greater than 2 people.</p>"
+  },
+  {
+    "id": 10916,
+    "depth": 0,
+    "author": "Tamás Balog",
+    "date": "2023-06-25T20:40:37",
+    "html": "<p>I’m curious how would you handle code reverting due to changing customer/business priorities.</p>\n<p>Let’s say the majority of a larger feature is already integrated into trunk, then the customer decides that that feature is needed in a very different way, or not at all. It seems to me that in these particular cases it can create tech debt overhead (or even unused code) and a challenge to revert many already integrated commits, instead of simply not merging a feature branch to trunk/master.</p>"
+  },
+  {
+    "id": 10933,
+    "depth": 0,
+    "author": "Trisha Gee",
+    "authorUrl": "https://trishagee.com/",
+    "date": "2023-06-26T10:27:30",
+    "html": "<p>Code reviews are often misunderstood. We think they’re there to improve the quality of the code, and yet so few developers actually know what they’re supposed to be looking for in a code review that I would argue they often just get in the way of deploying working features. I have written about anti-patterns in code reviews (and what to do about them) <a href=\"https://blogs.oracle.com/javamagazine/post/five-code-review-antipatterns\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://blogs.oracle.com/javamagazine/post/five-code-review-antipatterns</a> and I have also written about how to use different styles of code reviews depending on your goals, which includes some that work for trunk-based development: <a href=\"https://www.jetbrains.com/help/upsource/code-review-practices.html#process\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.jetbrains.com/help/upsource/code-review-practices.html#process</a></p>\n<p>In terms of the practices that need to be applied to make trunk based development work, feature toggles are an important thing, as is the ability for ANYONE to revert a commit that breaks the build, regardless of whether they worked on that code, in order for the team to continue working. The team cannot down tools and stop working because someone broke the build. The commit needs to be rolled back/reverted and then the developer(s) needs to fix it before recommitting.</p>"
+  },
+  {
+    "id": 10942,
+    "depth": 0,
+    "author": "Jack German",
+    "date": "2023-06-26T17:54:13",
+    "html": "<p>Git allows for a trunk-like development (Gerrit is a great example).</p>\n<p>Trunk based tools do not allow easy branching.</p>\n<p>It’s not about trunk or distributed. It’s about Git being a much more comfortable tool to work with.</p>"
+  }
+]

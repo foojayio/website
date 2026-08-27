@@ -1,0 +1,30 @@
+[
+  {
+    "id": 2300,
+    "depth": 0,
+    "author": "Jan Thewes",
+    "date": "2022-01-24T11:47:30",
+    "html": "<p>Well in this case returning an ObjectFactory or a javax.inject.Provider would be easier and be more expressive, or am I wrong?</p>"
+  },
+  {
+    "id": 2422,
+    "depth": 0,
+    "author": "Magnus",
+    "date": "2022-02-06T10:31:18",
+    "html": "<p>How about wrapping in a completablefuture that completes only when the bean is available</p>"
+  },
+  {
+    "id": 5130,
+    "depth": 0,
+    "author": "Rumen",
+    "date": "2022-07-30T10:49:56",
+    "html": "<p>I fully agree that returning a Promise (<a href=\"https://java-design-patterns.com/patterns/promise/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://java-design-patterns.com/patterns/promise/</a>) is the right way to close this case.</p>"
+  },
+  {
+    "id": 5281,
+    "depth": 0,
+    "author": "Dmitrii",
+    "date": "2022-08-09T14:45:14",
+    "html": "<p>It’s not thread safe though. If you try to access your invocation handler from another thread than context is set then you may get visibility problem. It will cause RuntimeException even after context is fully loaded.<br>\n  More over, it also affects the HashMap which is not thread safe.</p>"
+  }
+]

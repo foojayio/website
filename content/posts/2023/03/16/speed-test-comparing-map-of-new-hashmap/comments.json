@@ -1,0 +1,24 @@
+[
+  {
+    "id": 9077,
+    "depth": 0,
+    "author": "Jean-Philippe Bempel",
+    "date": "2023-03-17T08:31:33",
+    "html": "<p>testHahMap has a latency of 84.920ns/op +/- 1.737 which means the error bar range from 83.183 to 86.657.<br>\n  testMapOf has a latency of 83.290ns/op +/- 0.471 which means the error bar range from 82,819 to 83,761.<br>\n  How could you conclude that “Map.of() is significantly faster than new HashMap() for small maps.” while the 2 error bar range overlapped in term of latency?</p>\n<p>The updated results may have change from the first ones, but would be great to acknowledge it and change also the conclusion.<br>\n  Thanks</p>"
+  },
+  {
+    "id": 9078,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2023-03-17T09:50:02",
+    "html": "<p>You are correct in pointing out that the error bar ranges for testHashMap and testMapOf overlap. Thus it may be inappropriate to conclude that Map.of() is significantly faster than new HashMap() based solely on this data. The latencies of the two methods are close, and the overlapping error bars indicate that the differences in their latencies may not be statistically significant.</p>\n<p>I have updated the conclusion.</p>"
+  },
+  {
+    "id": 17980,
+    "depth": 0,
+    "author": "Rui",
+    "date": "2024-02-29T18:35:41",
+    "html": "<p>you could as well do for new HashMap(Map.of())</p>"
+  }
+]

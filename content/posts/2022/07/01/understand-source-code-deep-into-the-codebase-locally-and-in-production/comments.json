@@ -1,0 +1,16 @@
+[
+  {
+    "id": 5000,
+    "depth": 0,
+    "author": "TJB",
+    "date": "2022-07-22T11:37:03",
+    "html": "<p>I really liked the article and the idea is fantastic. Also, quite a lot of good pointers and this serves as a debugging refresher while allowing to pick up new things (I picked several).</p>\n<p>This part has been repeated 5 times:</p>\n<p>Does this value make sense at this point in time?</p>\n<p>If it doesn’t, then I have something to look at and figure out. With this tool, I can quickly understand the semantics of the codebase. In the following sections, I’ll cover techniques for code learning both in the debugger and in production.</p>"
+  },
+  {
+    "id": 5002,
+    "depth": 1,
+    "author": "Shai Almog",
+    "date": "2022-07-22T14:26:14",
+    "html": "<p>Thanks! Fixed.</p>"
+  }
+]

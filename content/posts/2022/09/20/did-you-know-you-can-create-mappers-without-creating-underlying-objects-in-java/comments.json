@@ -1,0 +1,9 @@
+[
+  {
+    "id": 6334,
+    "depth": 0,
+    "author": "david",
+    "date": "2022-10-12T10:38:24",
+    "html": "<p>thx very much for your code.</p>\n<p>“(***): The figures above are excluding the Security objects themselves and excluding any backing array”</p>\n<p>how to create a simple map/list/array of Security objects which are directly allocated off heap?</p>\n<p>each time we do:</p>\n<p>final Security s0 = new Security(100, 45, 2);<br>\n  final List securities = new ArrayList();<br>\n  securities.add(s0);</p>\n<p>we create s0 on the heap !?</p>"
+  }
+]

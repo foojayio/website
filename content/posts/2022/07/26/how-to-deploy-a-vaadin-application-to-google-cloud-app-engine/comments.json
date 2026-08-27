@@ -1,0 +1,30 @@
+[
+  {
+    "id": 5066,
+    "depth": 0,
+    "author": "Ludo",
+    "date": "2022-07-26T16:32:09",
+    "html": "<p>Hi, Thanks for the post.<br>\n  We will change the Cloud SDK CLI to use the java17 by default, now that it is GA.<br>\n  For memory usage on F1 instance class, we are investigating some options…<br>\n  Thanks for the nice blog!</p>"
+  },
+  {
+    "id": 5068,
+    "depth": 1,
+    "author": "Simon Martinelli",
+    "date": "2022-07-26T18:26:27",
+    "html": "<p>Thank you for the information. I’m happy you liked it.</p>"
+  },
+  {
+    "id": 5655,
+    "depth": 0,
+    "author": "Ludo",
+    "date": "2022-09-01T19:04:26",
+    "html": "<p>Hi Simon, If you retry with the last Cloud SDK release, you will see that you we now default to<br>\n  java17 and<br>\n  F2 instance class,<br>\n  so this blog can be updated by removing all the unnecessary steps, simplifying a lot this getting started work when targeting App Engine Java 17 Standard!</p>\n<p>Thanks,</p>"
+  },
+  {
+    "id": 5665,
+    "depth": 1,
+    "author": "Simon Martinelli",
+    "date": "2022-09-02T14:12:09",
+    "html": "<p>Hi Ludo,<br>\n  Great news!<br>\n  I’ll update the post as soon as possible.</p>\n<p>Thank you<br>\n  Simon</p>"
+  }
+]

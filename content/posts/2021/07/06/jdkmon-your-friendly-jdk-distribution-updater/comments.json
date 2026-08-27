@@ -1,0 +1,40 @@
+[
+  {
+    "id": 698,
+    "depth": 0,
+    "author": "Max Rydahl Andersen",
+    "date": "2021-07-06T10:40:21",
+    "html": "<p>nice.~</p>\n<p>you can run it directly using the osx specific jar:</p>\n<p>JAVA_TOOL_OPTIONS=--enable-preview jbang --java 16 <a href=\"https://github.com/HanSolo/JDKMon/releases/download/3.6/JDKMon-macos-16.0.jar\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/HanSolo/JDKMon/releases/download/3.6/JDKMon-macos-16.0.jar</a></p>\n<p>p.s.for some reason it does not detect adoptopenjdk installations in .jbang nor any sdk I have in .sdkman.</p>"
+  },
+  {
+    "id": 699,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2021-07-06T10:44:12",
+    "html": "<p>I assume you set the search path to either .jbang or .sdkman folder? At the moment it only checks one folder (the search path that you have to define) but I think it would make sense to have the ability to select multiple folders to search for jdk’s</p>"
+  },
+  {
+    "id": 700,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2021-07-06T14:05:52",
+    "html": "<p>With <a href=\"https://github.com/HanSolo/JDKMon/releases/tag/3.7\" rel=\"nofollow ugc noopener\" target=\"_blank\">release v3.7</a> of JDKMon now supports multiple folders to search for installed JDK distributions.</p>"
+  },
+  {
+    "id": 1339,
+    "depth": 0,
+    "author": "King Jeffrey",
+    "date": "2021-10-26T09:58:01",
+    "html": "<p>Hi there. Can a single instance of JDKMon running on a server be used on an industrial scale – e.g. for a corporate wanting to know which distributions are running on all the machines on the network?</p>"
+  },
+  {
+    "id": 1340,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2021-10-26T10:24:27",
+    "html": "<p>Not in it’s current state. It’s made to run in the background on one machine and check given locations for installed JDK’s and if there are updates available for them. To run it as a network wide scanner it would need a couple of modifications, so in principle parts of it could be used to realize the thing you asked for but like mentioned before not in it’s current state.</p>"
+  }
+]

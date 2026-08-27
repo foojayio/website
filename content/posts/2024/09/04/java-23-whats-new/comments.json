@@ -1,0 +1,37 @@
+[
+  {
+    "id": 33671,
+    "depth": 0,
+    "author": "Squiz",
+    "date": "2024-09-13T12:26:34",
+    "html": "<p>Little typo I think in the NumberFormat section.<br>\n  setScrict(boolean) and isScript ???? should be isStrict no?</p>"
+  },
+  {
+    "id": 33912,
+    "depth": 1,
+    "author": "Loic Mathieu",
+    "date": "2024-09-16T07:24:17",
+    "html": "<p>Hi, thanks, updated</p>"
+  },
+  {
+    "id": 33701,
+    "depth": 0,
+    "author": "Pablo Mora",
+    "date": "2024-09-13T21:59:50",
+    "html": "<p>Hi. Thank you for sharing.</p>\n<p>I have one observation.</p>\n<p>The type of below comment is wrong. It should be double.</p>\n<p>// Previously we can only deconstruct this record via a it’s exact component type: long,</p>\n<p>Thank you.</p>"
+  },
+  {
+    "id": 33911,
+    "depth": 1,
+    "author": "Loic Mathieu",
+    "date": "2024-09-16T07:23:49",
+    "html": "<p>Hi, thanks, updated.</p>"
+  },
+  {
+    "id": 33873,
+    "depth": 0,
+    "author": "Ed in Oregon",
+    "date": "2024-09-15T16:47:46",
+    "html": "<p>Why did you change the sample code in JEP 455 from `long v` to `long l`? Lowercase ell is a terrible choice for a variable name, especially in the font above</p>"
+  }
+]

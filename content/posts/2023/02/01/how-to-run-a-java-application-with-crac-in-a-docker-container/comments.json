@@ -1,0 +1,17 @@
+[
+  {
+    "id": 8732,
+    "depth": 0,
+    "author": "Matteo",
+    "date": "2023-02-21T21:03:35",
+    "html": "<p>When restoring, I believe the command ought to be:</p>\n<p>docker run -it --privileged --rm --name my_app_on_crac my_app_on_crac:checkpoint<br>\n  java -XX:CRaCRestoreFrom=/opt/crac-files</p>\n<p>with a new line, otherwise you’d get the error from the docker daemon “open cppath: No such file or directory” as it’s parsing java… as part of the docker run command 🙂</p>\n<p>This was a great tutorial, thank you!</p>"
+  },
+  {
+    "id": 8741,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2023-02-22T08:13:10",
+    "html": "<p>I usually run it from a shell script without the need for a new line but if it works for you with the new line…great 🙂 Thank’s for the heads up, appreciated.</p>"
+  }
+]

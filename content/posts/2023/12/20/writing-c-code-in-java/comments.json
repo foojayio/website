@@ -1,0 +1,17 @@
+[
+  {
+    "id": 15205,
+    "depth": 0,
+    "author": "Scarminio",
+    "date": "2023-12-20T11:03:57",
+    "html": "<p>Using this new approach, can we call a 32bit DLL using a 64bit JVM?</p>"
+  },
+  {
+    "id": 15206,
+    "depth": 1,
+    "author": "Johannes Bechberger",
+    "authorUrl": "https://mostlynerdless.de",
+    "date": "2023-12-20T11:09:03",
+    "html": "<p>I don’t know for sure, but I would assume that this is not possible, as the implemented ABI is highly platform (and bit number) specific.</p>"
+  }
+]

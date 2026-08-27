@@ -1,0 +1,24 @@
+[
+  {
+    "id": 5733,
+    "depth": 0,
+    "author": "Joao",
+    "date": "2022-09-06T09:23:45",
+    "html": "<p>In the ‘C Pointers Panama-fied’ section in the second code snipped. I think you wanted to write:</p>\n<p>MemoryAdress ptr = address;</p>\n<p>instead of:</p>\n<p>Memorysegment ptr = address</p>\n<p>?</p>"
+  },
+  {
+    "id": 5740,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-09-06T16:36:24",
+    "html": "<p>Good catch. Thank you!<br>\n  Will fix.</p>"
+  },
+  {
+    "id": 90072,
+    "depth": 0,
+    "author": "Marvin",
+    "date": "2026-06-07T02:39:00",
+    "html": "<p>Me gustaria hecharas un vistazo a mi proyecto personal. Usando java 25 + proyect panamá</p>"
+  }
+]

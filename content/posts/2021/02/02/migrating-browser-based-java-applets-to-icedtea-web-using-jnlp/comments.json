@@ -1,0 +1,9 @@
+[
+  {
+    "id": 9999,
+    "depth": 0,
+    "author": "Holger",
+    "date": "2023-05-05T00:44:23",
+    "html": "<p>When trying this on some old applets where the .jar file signature uses the now deprecated SHA1 or MD5: On those when running on current Java 8 or 11 versions since October 2022 you will most likely see the following error message:</p>\n<p>Cannot grant permissions to unsigned jars. Application requested security permissions, but jars are not signed.</p>\n<p>Verifying the JAR signature will provide more details about the root cause, i.e. which algorithm or method exactly is now disabled:</p>\n<p>$ jarsigner -verify -verbose myapplet.jar</p>\n<p>In most cases it is SHA-1 which then needs to be re-enabled for JAR signature verification by modifying file $JAVA_HOME/jre/lib/security/java.security and changing the line starting with jdk.jar.disabledAlgorithms by removing the entry about SHA1 (or MD5 in some cases).</p>\n<p>But be aware that your JRE is now potentially exposed to security issues due to the re-enabled weak hash algorithms for verifying JARs. That JRE should now only be used to run trusted JARs.</p>\n<p>More details about the change and the workaround: <a href=\"https://bugs.openjdk.org/browse/JDK-8274081\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://bugs.openjdk.org/browse/JDK-8274081</a></p>"
+  }
+]

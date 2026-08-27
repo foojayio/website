@@ -1,0 +1,9 @@
+[
+  {
+    "id": 90466,
+    "depth": 0,
+    "author": "Gabriel",
+    "date": "2026-06-12T19:40:41",
+    "html": "<p>Hi! My name is Gabriel. I have a question: why use an interface to define methods in a service class? Is it becuase of the SOLID principles?</p>"
+  }
+]

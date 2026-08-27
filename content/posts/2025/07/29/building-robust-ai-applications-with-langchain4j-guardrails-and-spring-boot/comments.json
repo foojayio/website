@@ -1,0 +1,24 @@
+[
+  {
+    "id": 59412,
+    "depth": 0,
+    "author": "DM",
+    "date": "2025-08-02T03:17:26",
+    "html": "<p>The “Professional Tone Output Guardrail” code section is duplicated</p>"
+  },
+  {
+    "id": 60528,
+    "depth": 0,
+    "author": "fantaman",
+    "date": "2025-08-10T20:26:38",
+    "html": "<p>Actually the “Professional Tone Output Guardrail” code snippet is duplicated even twice: it appears also below “Hallucination Detection Guardrail” (where I’d really curious to see the actual Hallucination Detection algorithm) and “Now let’s combine our guardrails into comprehensive AI services.”</p>"
+  },
+  {
+    "id": 60583,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2025-08-11T07:12:28",
+    "html": "<p>Sorry, it was indeed a copy-paste error; I have updated the code.</p>"
+  }
+]

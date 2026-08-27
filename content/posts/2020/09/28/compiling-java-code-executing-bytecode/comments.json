@@ -1,0 +1,9 @@
+[
+  {
+    "id": 293,
+    "depth": 0,
+    "author": "Johannes Boneschanscher",
+    "date": "2021-03-20T08:43:33",
+    "html": "<p>Thank you for your article, please note however that your interpretation of the cryptic output of <a href=\"https://linux.die.net/man/1/time\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://linux.die.net/man/1/time</a> is incorrect, please refer to <a href=\"https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1</a> which explains it in all its glory.</p>\n<p>Basically it boils down to real time being the time between start and finish (wall clock time) including off-cpu time like waiting for things like user input, disk or network, in contrast to the second and third lines:</p>\n<p>User and System time are the sum of each child proces or thread being active on the CPU, so thanks to hyperthreading or multicore systems (which is quite common given that even many smartphones have been for years), can be higher than realtime. This might even happen to Java applications that are not multithreaded, but Java itself might do multithreaded Garbage Collection and other background tasks.</p>"
+  }
+]

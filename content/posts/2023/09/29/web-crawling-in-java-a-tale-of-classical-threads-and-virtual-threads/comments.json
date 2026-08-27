@@ -1,0 +1,17 @@
+[
+  {
+    "id": 12905,
+    "depth": 0,
+    "author": "Torsten",
+    "date": "2023-10-07T19:23:25",
+    "html": "<p>How come that both variants crawled a different number of pages? In particular the virtual threads variant didn’t seem to honor the MAX_PAGES_TO_SEARCH=100 limit. What’s wrong here?</p>"
+  },
+  {
+    "id": 12916,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2023-10-08T02:44:20",
+    "html": "<p>This has a potential data race, and I will fix it soon.</p>"
+  }
+]

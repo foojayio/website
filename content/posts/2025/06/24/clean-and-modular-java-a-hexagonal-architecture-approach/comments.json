@@ -1,0 +1,58 @@
+[
+  {
+    "id": 52887,
+    "depth": 0,
+    "author": "Andriy",
+    "date": "2025-06-25T13:27:54",
+    "html": "<p>Maven projects are mostly about independent deployment units. But following hexagonal architecture is better to follow with Java Modules or even simple package naming: com.company.domain.*, com.company.infra.*, com.company.application.* etc.</p>"
+  },
+  {
+    "id": 52889,
+    "depth": 1,
+    "author": "ricardo.mello@mongodb.com",
+    "date": "2025-06-25T13:42:45",
+    "html": "<p>Thanks for the insight! I agree — package-level separation works great too. In this case, I used Maven modules to highlight deployment boundaries, but both approaches are valid.</p>"
+  },
+  {
+    "id": 53112,
+    "depth": 0,
+    "author": "Daniel Mesa",
+    "date": "2025-06-27T07:11:21",
+    "html": "<p>If the “modules” are independent, put them each in a separate project. Hexagonal is a good idea, but it’s just that, a good idea. The cost and effort needed to keep it working in the face of 500 developers against the same codebase is not worth it. The cognitive load and not being able to find things quickly make it unviable. God article, but check this approach: <a href=\"https://m.youtube.com/watch?v=hfY5HzC-A98\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://m.youtube.com/watch?v=hfY5HzC-A98</a></p>"
+  },
+  {
+    "id": 53144,
+    "depth": 0,
+    "author": "Fabricio",
+    "date": "2025-06-27T12:30:27",
+    "html": "<p>Very good.</p>"
+  },
+  {
+    "id": 53837,
+    "depth": 0,
+    "author": "Benjamin Asbach",
+    "date": "2025-07-02T19:29:06",
+    "html": "<p>I think `*Impl` classes are some kind of bad practice. If you cannot find a appropriate name for a class it’s a first indicator that you don’t need the interface.<br>\n  In this case rather than naming it `ProductPortImpl` I’d add some kind of the implementation base to it. Like Spring or MongoDB or a combination of both.</p>"
+  },
+  {
+    "id": 54714,
+    "depth": 1,
+    "author": "Anton",
+    "date": "2025-07-07T13:48:52",
+    "html": "<p>+1, MongoProductPort will be much more informative</p>"
+  },
+  {
+    "id": 66219,
+    "depth": 2,
+    "author": "Nicolas",
+    "date": "2025-09-16T11:24:35",
+    "html": "<p>@Benjamin: The interface (called Port) is part of the Ports and Adapters architecture and exists to enforce the DIP, so that the user of the Port is unaware of the implementation behind the port. That way, you can switch or use multiple adapters for the same port. The adapter here could have been called MongoDbProductAdapter. It’d have been better if the port had been named ProductRepositoryPort, to make the intention behind that port clear. The adapter would’ve been called MongoProductRepository (-Adapter, but can be omitted).<br>\n  @Anton: Wrong. The port should be technologically independent.</p>"
+  },
+  {
+    "id": 54709,
+    "depth": 0,
+    "author": "Anton",
+    "date": "2025-07-07T13:17:53",
+    "html": "<p>I like the idea with separating domain/infra/app, however in this example I see several drawbacks. Maybe you know the answers for it, or it could be the next post 😉</p>\n<p>1. Separation starts to leak if used with reactive nature<br>\n  Lets assume, at some point we measured and understood, MongoDB is better to use with reactive driver. To change this, we will need to rewrite all parts, starting from ProductPort -&gt; ProductPortImpl -&gt; ProductService. In FP this is solved by some monad-like return type, in Java the solution probably will be virtual threads and no reactiveness. What’s your opinion on this case?</p>\n<p>2. `Product` copy-paste could be an issue<br>\n  In domain we have a Product record. In infra ProductStructure. In app Product response. Lets imagine, we need to add gRPC service beside REST. In this case we will get 4 places, which should to be changed simultaniously, if we will add a new field (f.e. `image`). I assume it was implemented in such way just for educational reason, and in real example it will be easier.</p>\n<p>3. Should the domain object have special metadata? Like create\\update date and version\\revision for concurrency control? Is it a leaking abstraction?</p>\n<p>4. I cannot agree, that domain contain only Java core types is good.<br>\n  In this example, Page is also a good candidate for separate domain lib, which could be then used across domain layer. And at some point it should be implemented and migrated to cursor-based paging. Import of internal domain lib for paging is better then pass 4 params between layers</p>\n<p>What do you think about this?</p>"
+  }
+]

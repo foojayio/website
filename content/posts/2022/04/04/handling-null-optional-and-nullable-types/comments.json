@@ -1,0 +1,17 @@
+[
+  {
+    "id": 2941,
+    "depth": 0,
+    "author": "Kenneth Kousen",
+    "date": "2022-04-04T14:34:07",
+    "html": "<p>I know you were just doing an illustration, but you would never really write .or else(null) on am Optional, right? That’s just evil. If I saw that during a code review a shudder would run down my spine. Oof course, as you point out, Java has no way to prevent that.</p>\n<p>Great article, btw. 🙂</p>"
+  },
+  {
+    "id": 2942,
+    "depth": 1,
+    "author": "Nicolas Frankel",
+    "authorUrl": "https://blog.frankel.ch/",
+    "date": "2022-04-04T14:43:58",
+    "html": "<p>No, I wouldn’t, but I wanted to have the equivalent code.</p>\n<p>Thanks for your comment and kind words!</p>"
+  }
+]

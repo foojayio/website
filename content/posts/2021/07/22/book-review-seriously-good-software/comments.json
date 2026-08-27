@@ -1,0 +1,9 @@
+[
+  {
+    "id": 912,
+    "depth": 0,
+    "author": "Marco Faella",
+    "date": "2021-08-19T16:23:39",
+    "html": "<p>Hi Cay, thanks for this kind review. Admittedly, the concurrency chapter takes a turn into pretty advanced stuff, compared to more practical techniques. That’s because it was important for me to stay faithful to the water vessel example (too faithful, perhaps!). In favor of my choice, the reader gets an important lesson: even such a simple example can spawn intricate concurrency issues. Against, more typical scenarios and higher-level concurrency techniques are pushed to the side and only mentioned briefly in the chapter.<br>\n  I should have added a disclaimer: “Now that you’ve visited the low-level synchronization hell, try and stay as far away as possible from it”.</p>"
+  }
+]

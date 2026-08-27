@@ -119,3 +119,59 @@ test('the webfonts are served by us, and actually load', async ({ page }) => {
   expect(fonts.files.filter((u) => !u.startsWith(origin)), 'every font file must be ours').toEqual([]);
   expectClean(page);
 });
+
+/**
+ * The WordPress comment archive renders, under the live discussion.
+ *
+ * WHY THIS IS A BROWSER TEST WHEN THE SECTION IS SERVER-RENDERED HTML. The
+ * failure mode is not a crash -- Hugo halts on malformed JSON, so a broken file
+ * cannot reach the build. It is the section rendering EMPTY: `transform.Unmarshal`
+ * returning nothing, or a `with`/scoping mistake resolving against the page
+ * instead of the comment, both of which produce a heading with no comments under
+ * it and no error anywhere. That is exactly the shape of the bug the first draft
+ * of legacy-comments.html had ($.author inside a `with`), and nothing else in the
+ * pipeline would have said a word about it.
+ *
+ * ORDER IS ASSERTED, because "below the giscus integration" is the requirement,
+ * not a detail: the archive sitting above the box a reader can actually type in
+ * would read as the site being dead.
+ */
+test('the legacy comment archive renders below the live discussion', async ({ page }) => {
+  const path = PAGES.legacyComments;
+  test.skip(!path, 'the build contains no post with archived WordPress comments');
+
+  await page.goto(path);
+
+  const archive = page.locator('#legacy-comments');
+  await expect(archive).toBeVisible();
+  await expect(archive.locator('h2')).toHaveText('Discussions on the previous Foojay site');
+
+  // The whole point: at least one comment, with an author, a date and a body.
+  // A heading with an empty list under it is the silent failure this guards.
+  const comments = archive.locator('.legacy-comment');
+  expect(await comments.count(), 'archived comments rendered').toBeGreaterThan(0);
+  const first = comments.first();
+  await expect(first.locator('.legacy-comment__author')).not.toBeEmpty();
+  await expect(first.locator('.legacy-comment__date')).not.toBeEmpty();
+  expect((await first.locator('.legacy-comment__body').innerText()).trim().length,
+    'the first comment has a body').toBeGreaterThan(0);
+
+  // Below giscus, in document order.
+  const order = await page.evaluate(() => {
+    const giscus = document.querySelector('#giscus-comments');
+    const legacy = document.querySelector('#legacy-comments');
+    if (!giscus || !legacy) return null;
+    // Node.DOCUMENT_POSITION_FOLLOWING: legacy comes after giscus.
+    return !!(giscus.compareDocumentPosition(legacy) & Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+  expect(order, 'the archive follows the giscus section in the document').toBe(true);
+
+  // Nothing executable survived the sanitizer. The stored HTML is printed with
+  // safeHTML, so this is the assertion that the boundary in Comments.java is
+  // actually where it is claimed to be -- checked in the DOM the browser built,
+  // not against the file.
+  const unsafe = await archive.locator('script, iframe, object, embed, [onerror], [onclick]').count();
+  expect(unsafe, 'no executable markup inside an archived comment').toBe(0);
+
+  expectClean(page);
+});

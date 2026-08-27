@@ -1,0 +1,9 @@
+[
+  {
+    "id": 11805,
+    "depth": 0,
+    "author": "Erwin Vervaet",
+    "date": "2023-08-10T09:37:32",
+    "html": "<p>I feel the real-life use-cases for Sealed Classes will be few an far between.<br>\n  Furthermore, the combination with pattern matching in switch promotes dubious coding practices imho: a properly designed OO system shouldn’t need to do switching like that.</p>"
+  }
+]

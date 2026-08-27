@@ -1,0 +1,9 @@
+[
+  {
+    "id": 13326,
+    "depth": 0,
+    "author": "Erwin Vervaet",
+    "date": "2023-10-24T09:35:19",
+    "html": "<p>Certainly an interesting read! A few remarks/questions:</p>\n<p>I must admit I find the value vs. cost evaluation a bit abstract: how can you even assess the value a suite of unit tests might bring over the course of a project? I do fully agree that packaging integration tests as simple unit tests that run with a “mvn verify” brings a lot of value!</p>\n<p>What would the performance difference have been if your controller test used H2 with a Postgres dialect rather than a real Postgres in a container? This is a bit of a general gripe I have with Testcontainers: The typical example given is always that of a SQL database, which is a case that has been covered for the most part for more than a decade now with tools like H2. Also, Testcontainers are often problematic in cloud-based CI/CD setups, where you end in a Docker-in-Docker situation.</p>"
+  }
+]

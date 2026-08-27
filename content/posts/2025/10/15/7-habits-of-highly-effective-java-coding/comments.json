@@ -1,0 +1,16 @@
+[
+  {
+    "id": 70968,
+    "depth": 0,
+    "author": "Tan",
+    "date": "2025-10-30T04:51:22",
+    "html": "<p>Really enjoyed this article — thanks for sharing your insights! One part that gave me pause was Java Stream Debugging. In my experience, IntelliJ already supported stream debugging, so, I think Stream API is still better traditional for loop. I’d love to hear your thoughts!</p>"
+  },
+  {
+    "id": 71010,
+    "depth": 1,
+    "author": "Jonathan Vila",
+    "date": "2025-10-30T08:51:46",
+    "html": "<p>Thanks for your comment Tan 🙂<br>\n  I totally agree with you that Streams can be a better solution compared to loops. But as everything is not a silver bullet in my opinion. In some cases it’s easier (and more performant) a simple loop, and in others like this one where we have logic inside a stream (peek), could make more sense to use loops. That’s true that IntelliJ supports debugging inside Streams, but this example is a general and broader one.<br>\n  Thanks for your thoughts on this 🙂</p>"
+  }
+]

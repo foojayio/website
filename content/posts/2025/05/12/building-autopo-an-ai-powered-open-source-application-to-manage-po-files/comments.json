@@ -1,0 +1,24 @@
+[
+  {
+    "id": 84237,
+    "depth": 0,
+    "author": "Andres",
+    "date": "2026-03-25T21:21:21",
+    "html": "<p>Would you tell us how to install Autopo? I went to your website, then to Github, downloaded the Win 64 zip file and there’s no executable inside 🙁</p>"
+  },
+  {
+    "id": 84257,
+    "depth": 1,
+    "author": "Andrea Vacondio",
+    "authorUrl": "https://soberlemur.com",
+    "date": "2026-03-26T07:41:28",
+    "html": "<p>There is a <code>.bat</code> script in the bin sub-directory, dosen’t it work?</p>"
+  },
+  {
+    "id": 88388,
+    "depth": 0,
+    "author": "Maurizio",
+    "date": "2026-05-16T15:29:25",
+    "html": "<p>Hi Andrea, your Autopo started like a charme on my MX-Linux. I had to figure out how to use it as i am not an i18n geek and there is no howto. But i discovered, you need to have a folder with a new .pot and all the empty .po files of the languages you want to translate. The AI striked but I will find out how to handle it. Mille grazie!</p>"
+  }
+]

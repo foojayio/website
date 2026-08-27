@@ -1,0 +1,16 @@
+[
+  {
+    "id": 16190,
+    "depth": 0,
+    "author": "Anas",
+    "date": "2024-01-16T22:23:54",
+    "html": "<p>Thanks Jago for the plugin and the post.<br>\n  Excuse me for my ignorance, I assume that the plugin should compare the current state of the project/library with the previous version to determine whether the changes are major, minor, or patch.<br>\n  Am I correct?<br>\n  if yes, how could the plugin know the previous state? does it depends on the code version control system (i.e git)?</p>"
+  },
+  {
+    "id": 17038,
+    "depth": 0,
+    "author": "Jago de Vreede",
+    "date": "2024-02-05T19:00:24",
+    "html": "<p>@anas You are correct the project to the previous version to determine whether the changes are major, minor, or patch.<br>\n  The plugin downloads the precious state from the last version released to the maven repo. So no dependencies on version control.</p>"
+  }
+]

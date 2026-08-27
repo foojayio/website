@@ -1,0 +1,38 @@
+[
+  {
+    "id": 35942,
+    "depth": 0,
+    "author": "Erik Weibust",
+    "date": "2024-11-01T20:47:10",
+    "html": "<p>Howdy Bazlur,</p>\n<p>I appreciated you blog post. I have not attempted any scripting with Java. When I run the example you shared above I get some errors related to the shebang. I’ve also shared that the path should work for me.</p>\n<p>Any idea?</p>\n<pre></pre>\n<p>~/bin via ☕ v21.0.4<br>\n  ❯ ./hello.java<br>\n  ./hello.java:1: error: illegal character: '#'<br>\n  #!/usr/bin/java --source 21<br>\n  ^<br>\n  ./hello.java:1: error: class, interface, enum, or record expected<br>\n  #!/usr/bin/java --source 21<br>\n  ^<br>\n  ./hello.java:4: error: class, interface, enum, or record expected<br>\n  import java.util.Random;<br>\n  ^<br>\n  ./hello.java:5: error: class, interface, enum, or record expected<br>\n  import java.util.Scanner;<br>\n  ^<br>\n  4 errors<br>\n  error: compilation failed</p>\n<p>~/bin via ☕ v21.0.4<br>\n  ❯ which -a java<br>\n  /Users/erikweibust/.sdkman/candidates/java/current/bin/java<br>\n  /usr/bin/java</p>"
+  },
+  {
+    "id": 35943,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2024-11-01T23:05:25",
+    "html": "<p>This worked on my machine without any issues. Could it be possible that there’s a copy-paste error? Where did you try it on?</p>\n<p>I’ve pasted this on GitHub Gist. Please try copying it from here and let me know what you see:</p>\n<p><a href=\"https://gist.github.com/rokon12/16eb3d96b3afc4a23d4aeb1299318f48\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://gist.github.com/rokon12/16eb3d96b3afc4a23d4aeb1299318f48</a></p>"
+  },
+  {
+    "id": 36062,
+    "depth": 0,
+    "author": "Erik Weibust",
+    "date": "2024-11-05T10:51:34",
+    "html": "<p>The only way I could get this to work was removing the .java extension for the file. I thought it was ok with or without the .java but that is not the case for me.</p>"
+  },
+  {
+    "id": 36652,
+    "depth": 0,
+    "author": "bit-man",
+    "date": "2024-11-21T23:55:23",
+    "html": "<p>In case java located in other location than /use/bin or use sdkman for version management just use the next shebang</p>\n<p>#!/usr/bin/env -S java –source 21</p>\n<p>Enjoy!</p>"
+  },
+  {
+    "id": 38318,
+    "depth": 0,
+    "author": "Someone",
+    "date": "2024-12-28T23:35:24",
+    "html": "<p>When editing the file in your favorite IDE it will complain about the bad syntax of line one, as this is not valid java code.</p>\n<p>Therefore you can replace line one with “///usr/bin/env java $0 $@ –source 21; exit $?;” to achieve the same.</p>\n<p>This trick is used by JBang and similar projects</p>"
+  }
+]

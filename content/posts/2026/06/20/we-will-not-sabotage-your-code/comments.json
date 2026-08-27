@@ -1,0 +1,24 @@
+[
+  {
+    "id": 91264,
+    "depth": 0,
+    "author": "Nadiyar",
+    "date": "2026-06-22T14:29:43",
+    "html": "<p>It matters to also read Johannes Link’s opinions on this matter.</p>\n<p><a href=\"https://blog.johanneslink.net/2026/06/09/the-jqwik-anti-ai-affair/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://blog.johanneslink.net/2026/06/09/the-jqwik-anti-ai-affair/</a></p>"
+  },
+  {
+    "id": 91265,
+    "depth": 1,
+    "author": "Shai Almog",
+    "authorUrl": "https://debugagent.com/",
+    "date": "2026-06-22T14:51:00",
+    "html": "<p>I specifically didn’t link to his blog (although I approved your comment). No, I don’t think his opinion matters.</p>\n<p>LLMs are here, it’s a fact and they aren’t going to go away no matter how many people complain or try to stop them. The only thing they will succeed in is making things more painful for everyone. E.g. in his particular case it significantly eroded the trust we all have in our OSS projects and OSS maintainers. Perhaps it’s for the best, but the irony is that we have so many dependencies now that the only way to truly verify them is with an agent…</p>"
+  },
+  {
+    "id": 91282,
+    "depth": 2,
+    "author": "Nadiyar",
+    "date": "2026-06-22T19:53:18",
+    "html": "<p>Thanks for the reply Shai</p>\n<p>&gt; LLMs are here, it’s a fact and they aren’t going to go</p>\n<p>yes, and? Atomic bombs exists as well. and it’s interesting how similar they are, they both randomly generate. one heat, the other words. Simply because something exists it doesn’t mean we must use them before pondering for a moment.</p>\n<p>&gt; in his particular case it significantly eroded the trust we all have in our OSS projects and OSS maintainers</p>\n<p>I 100% disagree with that, that’s a personal view. I didn’t know about jqwik or Link up to a few weeks ago. but now? he’s a model engineer I want to learn from and hear from. For me he proved that OSS is standing strong for what is right.</p>\n<p>At any case, I thought opposite view must be mentioned as well. I’d love to see your response, though I wouldn’t continue the discussion. Good luck</p>"
+  }
+]

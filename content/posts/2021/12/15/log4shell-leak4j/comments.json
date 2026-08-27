@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1876,
+    "depth": 0,
+    "author": "Andre Onuki",
+    "date": "2021-12-17T19:38:57",
+    "html": "<p>Log4J also released 2.12.2, which fixes both CVEs, for those stuck with Java 7.</p>"
+  }
+]

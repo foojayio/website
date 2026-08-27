@@ -1,0 +1,9 @@
+[
+  {
+    "id": 79473,
+    "depth": 0,
+    "author": "Suresh Rathore",
+    "date": "2026-01-25T16:06:16",
+    "html": "<p>Stop killing your Spring Boot apps mid-transaction! 🛑 I just published a guide on achieving Zero-Downtime Graceful Shutdowns. Covering everything from application.yml tweaks to Kubernetes sync. Check it out! 🚀 #SpringBoot #Java #Microservices</p>\n<p><a href=\"https://medium.com/@sureshrathore0721/beyond-the-kill-signal-the-architects-guide-to-zero-downtime-graceful-shutdown-in-spring-boot-5d0d6dcc89e7\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://medium.com/@sureshrathore0721/beyond-the-kill-signal-the-architects-guide-to-zero-downtime-graceful-shutdown-in-spring-boot-5d0d6dcc89e7</a></p>"
+  }
+]

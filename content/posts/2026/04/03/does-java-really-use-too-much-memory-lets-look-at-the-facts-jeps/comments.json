@@ -1,0 +1,23 @@
+[
+  {
+    "id": 85226,
+    "depth": 0,
+    "author": "JJ",
+    "date": "2026-04-07T05:20:29",
+    "html": "<p>✅ Virtual Threads (JEP 444)<br>\n  doesnt this need start?</p>"
+  },
+  {
+    "id": 85381,
+    "depth": 0,
+    "author": "Rudy",
+    "date": "2026-04-08T19:34:19",
+    "html": "<p>Java is not such memory consuming but spring definitely is 🫤</p>"
+  },
+  {
+    "id": 85592,
+    "depth": 0,
+    "author": "Fantaman",
+    "date": "2026-04-10T19:19:14",
+    "html": "<p>The code regarding Threads is wrong/incomplete: the for loop header is incomplete (</p>\n<pre>for (int i = 0; i  {</pre>\n<p>), and it’s not visible how virtual threads are supposed to get used in the 2nd example.</p>"
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "id": 11179,
+    "depth": 0,
+    "author": "Hari",
+    "date": "2023-07-09T02:30:03",
+    "html": "<p>Certainly, the language has evolved. However, this article should have emphasized more on exclusively performance aspects and benchmarks since the beginning of the article mentioned about perception of Java being a slow language</p>"
+  },
+  {
+    "id": 11181,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2023-07-09T04:27:42",
+    "html": "<p>Good point! I will perhaps write another article exclusively on performance aspects and benchmarks.</p>"
+  },
+  {
+    "id": 11190,
+    "depth": 0,
+    "author": "Harald",
+    "date": "2023-07-09T17:12:10",
+    "html": "<p>Nice new features and all very welcome. I wish there was an activity to fix the billon dollar mistake. @NotNull in a handful of tools are just 2nd choice to not-null built right into the type system.</p>"
+  }
+]

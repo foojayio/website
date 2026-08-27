@@ -1,0 +1,17 @@
+[
+  {
+    "id": 762,
+    "depth": 0,
+    "author": "Mariano",
+    "date": "2021-07-20T13:08:56",
+    "html": "<p>Nice to see a tutorial that highlight the power of the Java REPL, many platforms have one and developers use them a lot, but in Java we didn’t have that option for a long time.</p>\n<p>One thing that in other REPLs is not a problem an is a problem in Java because the way we import our dependencies is have the ability to import them, e.g. in Node you have all the dependencies you need in the node_modules/ folder, so there is no need to explicitly load them when invoking the CLI `node`. But in Java we use to have the dependencies in cache folders, and we use tools like Gradle or Maven to call Java with all the dependencies loaded.</p>\n<p>In case you want to play a bit with the JShell using your dependencies and also the classes from your project, try the jshell-plugin with Gradle: <a href=\"https://github.com/mrsarm/jshell-plugin\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/mrsarm/jshell-plugin</a></p>\n<p>In the website you will find also a special section for spring boot projects, that explain how with a few simple steps play with your “business” objects: DAOs, Services, ..</p>"
+  },
+  {
+    "id": 763,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2021-07-20T17:05:34",
+    "html": "<p>Mariano,</p>\n<p>Thank you! Yep, it’s about time Java had a Repl 😉</p>\n<p>Very nice to know about jshell-plugin. Having this plugin will definitely improve productivity and a way to prove out a concept rapidly, without having to setup a full development environment.</p>\n<p>-Carl</p>"
+  }
+]

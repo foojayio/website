@@ -1,0 +1,32 @@
+[
+  {
+    "id": 14188,
+    "depth": 0,
+    "author": "Andrew Schetinin",
+    "date": "2023-11-19T08:58:26",
+    "html": "<p>I have a feeling that these two things complement each other and not contradict. IMO they exist on different architectural levels.<br>\n  Virtual threads in Java (together with structured concurrency – JEP 437) greatly simplify writing non-blocking multithreaded code.<br>\n  Technically, at the bottom, hyperthreaded hardware runs it all the same – it does not care what it executes.<br>\n  With Java virtual threads and structured concurrency developing scalable applications becomes much easier.</p>"
+  },
+  {
+    "id": 14193,
+    "depth": 1,
+    "author": "Johannes Bechberger",
+    "authorUrl": "https://mostlynerdless.de",
+    "date": "2023-11-19T11:14:35",
+    "html": "<p>I agree, structured concurrency will make Project Loom far more useful. Currently it is just useful for a small portion of all use cases of multi-threading.</p>"
+  },
+  {
+    "id": 14237,
+    "depth": 0,
+    "author": "Alex",
+    "date": "2023-11-20T15:31:35",
+    "html": "<p>i’m honestly confuse, while i know it’s really great improvement java will have virtual threads.<br>\n  But isn’t kotlin already achieve virtual threads, just by using normal thread on java?</p>"
+  },
+  {
+    "id": 14238,
+    "depth": 1,
+    "author": "Johannes Bechberger",
+    "authorUrl": "https://mostlynerdless.de",
+    "date": "2023-11-20T15:35:06",
+    "html": "<p>Kotlin’s virtual threads are implemented differently and offer different pro’s and con’s. There are many great resources out there covering the differences, for example <a href=\"https://www.baeldung.com/kotlin/java-kotlin-lightweight-concurrency\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.baeldung.com/kotlin/java-kotlin-lightweight-concurrency</a>.</p>"
+  }
+]

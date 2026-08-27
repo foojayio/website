@@ -1,0 +1,47 @@
+[
+  {
+    "id": 506,
+    "depth": 0,
+    "author": "Almas Baimagambetov",
+    "authorUrl": "https://github.com/AlmasB",
+    "date": "2021-06-11T09:53:20",
+    "html": "<p>Awesome stuff! Great use of `AccelerometerService` API to showcase what JavaFX can do on mobile.</p>"
+  },
+  {
+    "id": 507,
+    "depth": 0,
+    "author": "Hallvard Trætteberg",
+    "date": "2021-06-11T10:31:06",
+    "html": "<p>Great to show students, who use JavaFX and FXML to make apps of similar complexity in two university courses I run! I have demonstrated this for them with an app of my own (simple todo-list), but the “last mile” i.e. deploying it to an actual device is in general too tricky for them. E.g. installing the Android dev. kit, connecting a device and running it isn’t trivial, and the setup for iOS seems more complex.</p>\n<p>A more specific comment on part 1: I wonder why you use translateX/Y and not layoutX/Y for the ball’s position? My impression is that translateX/Y in general should be used for temporarily rendering a node with an offset e.g. during drag’n drop, not its “stable” location? I guess it doesn’t really matter if the ball isn’t managed by a pane’s layout logic, but still I’d use layoutX/Y for this.</p>"
+  },
+  {
+    "id": 514,
+    "depth": 0,
+    "author": "Carl Dea",
+    "date": "2021-06-11T23:48:09",
+    "html": "<p>Gail,<br>\n  Nice work!<br>\n  I look forward to the second part. For the assets and icons for iOS how did you create all icon the sizes?</p>"
+  },
+  {
+    "id": 515,
+    "depth": 1,
+    "author": "Gail Anderson",
+    "authorUrl": "http://asgteach.com",
+    "date": "2021-06-12T14:13:42",
+    "html": "<p>Hi Carl,<br>\n  I used: <a href=\"https://appicon.co/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://appicon.co/</a> — generates a set of icons from a single 1024 x 1024 PNG file. I created the icon image using Inkscape. (From Part 2 🙂</p>"
+  },
+  {
+    "id": 1143,
+    "depth": 0,
+    "author": "Nikolay Artamonov",
+    "date": "2021-09-28T22:05:42",
+    "html": "<p>Thank you, great article. Are demonstrated Gluon technologies free to use or need to buy licence?</p>"
+  },
+  {
+    "id": 1144,
+    "depth": 0,
+    "author": "Gail Anderson",
+    "authorUrl": "http://asgteach.com",
+    "date": "2021-09-28T22:49:24",
+    "html": "<p>Hi Nikolay,<br>\n  Everything is free to test out. Gluon Mobile (nicely skinned mobile controls) will require a license to get rid of nag screen. Gluon Mobile is not required for a mobile app and the plugins plus GraalVM can be freely used. But, for serious developers, you should consider a license. Gluon Mobile is priced per developer with no royalties or hidden fees. Gluon also has really nice Cloud and Enterprise products as well as JavaFX long term support. <a href=\"https://gluonhq.com/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://gluonhq.com/</a></p>"
+  }
+]

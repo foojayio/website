@@ -1,0 +1,16 @@
+[
+  {
+    "id": 7337,
+    "depth": 0,
+    "author": "Octavian",
+    "date": "2022-12-09T22:27:36",
+    "html": "<p>Super clear and interesting, thank you for this piece.</p>\n<p>I must say though, that the title seems misleading to me — what does Java (or the JVM, for that matter) have to do with the way PostgreSQL manages storage? It’s not ‘Java’ that generates litter, is it? It’s anything that writes in PostgreSQL…</p>"
+  },
+  {
+    "id": 7343,
+    "depth": 1,
+    "author": "Denis Magda",
+    "date": "2022-12-10T07:31:08",
+    "html": "<p>Hi Octavian, glad you found the article useful!</p>\n<p>Sure, you’re right. Any application written in any programming language would have PostgreSQL behaving this way.<br>\n  Why Java than in the title? I just wanted to show that while our Java apps execute in runtime the garbage gets generated and collected not only at the Java level but down the stack. And that garbage collection is successfully implemented and used by both JVM and some software/hardware components the Java apps run on.</p>"
+  }
+]

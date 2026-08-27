@@ -1,0 +1,16 @@
+[
+  {
+    "id": 90781,
+    "depth": 0,
+    "author": "Maurizio",
+    "date": "2026-06-16T07:39:39",
+    "html": "<p>This article is very interesting, especially because it made me meet Jooby, which I didn’t know. I often avoid ORM frameworks as I usually deal with enterprise applications that need carefully hand-crafted SQL, and at first sight Jooby gives me the right level of control.</p>"
+  },
+  {
+    "id": 90887,
+    "depth": 0,
+    "author": "felipe",
+    "date": "2026-06-17T21:51:22",
+    "html": "<p>It would be interesting to add spring with webflux, it has the similar complexity to vert.x with the same advantages adding that it lives with the rich ecosystem of spring</p>"
+  }
+]

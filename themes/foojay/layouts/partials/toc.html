@@ -62,6 +62,13 @@
        heading labelled another reads as the wrong link. */}}
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#giscus-comments">Join the discussion</a></li>` }}
 {{ end }}
+{{/* After the giscus entry, matching the order the page renders them in -- a
+     panel that lists the archive above the live thread would be describing a
+     different page. Keyed on the same bundle resource the section is derived
+     from, so the link cannot advertise a section that is not there. */}}
+{{ if .Resources.GetMatch "comments.json" }}
+  {{ $tail = $tail | append `<li class="toc__tail"><a href="#legacy-comments">Discussions on the previous Foojay site</a></li>` }}
+{{ end }}
 
 {{/* End matter NEVER brings the panel into existence on its own. "About the
      author / Related posts / Join the discussion" is not a table of contents --

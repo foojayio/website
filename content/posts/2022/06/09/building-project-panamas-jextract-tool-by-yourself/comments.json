@@ -1,0 +1,38 @@
+[
+  {
+    "id": 5497,
+    "depth": 0,
+    "author": "Joao",
+    "date": "2022-08-23T22:26:13",
+    "html": "<p>You say that if one has installed the JDK via sdkman, you don’t need to do jextract at github.<br>\n  But then you don’t have the folder and you can’t run gradle commands like clean and verify.</p>"
+  },
+  {
+    "id": 5600,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-08-29T00:57:34",
+    "html": "<p>Joao,<br>\n  When I say ‘skip to the jextract at GitHub section’ it means to go (jump) to the jextract at GitHub section. Setting up the JAVA_HOME instructions are not needed if you use SDKMan.</p>\n<p>I hope that makes sense. American English can be confusing.</p>\n<p>-Carl</p>"
+  },
+  {
+    "id": 7332,
+    "depth": 0,
+    "author": "Paulo Cabrita",
+    "date": "2022-12-09T16:31:08",
+    "html": "<p>Very nice article!</p>\n<p>Just my 2 cents. You can’t execute the “sh ./gradlew…” having the JAVA 19 being the main JAVA of your machine. I will not work. I think you should have 2 JDK, one for executing the Gradle (with for instance the 18 version) and 19 JDK that we want to configure.</p>\n<p>I saw this issue here: <a href=\"https://github.com/openjdk/jextract#building--testing\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/openjdk/jextract#building–testing</a></p>"
+  },
+  {
+    "id": 12178,
+    "depth": 0,
+    "author": "David",
+    "date": "2023-08-28T14:24:40",
+    "html": "<p>Hi Carl, great series of articles, thank you! I tried following your instructions on Apple Silicon, but get the following error when running gradle: “No signature of method: static java.nio.file.Path.of() is applicable for argument types: (String) values: [/Library/Developer/CommandLineTools/usr]<br>\n  Possible solutions: is(java.lang.Object), join(java.lang.String), min(), max(), sort(), any()”</p>\n<p>Do you have any idea what could be the cause (/Library/Developer/CommandLineTools/usr is the path to the default LLVM installation under Ventura; I also tried …/usr/lib and …/usr/lib/libclang.dylib).</p>\n<p>If you have time. Thanks in advance.</p>"
+  },
+  {
+    "id": 36288,
+    "depth": 0,
+    "author": "Oliver Weiler",
+    "date": "2024-11-12T10:26:57",
+    "html": "<p>Hi!</p>\n<p>Just wanted to mention that SDKMAN! now publishes jextract EA versions.</p>\n<p>$ sdk install jextract</p>"
+  }
+]

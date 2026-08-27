@@ -1,0 +1,23 @@
+[
+  {
+    "id": 7721,
+    "depth": 0,
+    "author": "Anthony",
+    "date": "2022-12-31T15:21:20",
+    "html": "<p>It is a pity you didn’t look outside of Java for alternatives. With our time over, we would not have used Java. The costs are too high; in resource use, security risks, maintenance cycles and patching, tooling needs, etc. Other languages from JavaScript to C# to Go and Python, all carry less baggage, and even seem to promote happier teams of developers (for some reason).</p>"
+  },
+  {
+    "id": 7811,
+    "depth": 0,
+    "author": "Brian Vermeer",
+    "date": "2023-01-04T13:54:13",
+    "html": "<p>@Anthony<br>\n  On what do you base all these claims? This sounds like a bunch of claims from over a decade ago that people are repeating without any consideration on what Java (the language, the ecosystem and the community) is today.</p>"
+  },
+  {
+    "id": 7867,
+    "depth": 0,
+    "author": "Octavian",
+    "date": "2023-01-06T21:29:31",
+    "html": "<p>“Unguided adoption of a new language may result in non-idiomatic code. Ironically, introducing a new language then causes technical debt from the start. This effect compounds if your team is growing fast.” — I really enjoyed this formulation. Very pragmatic and spot-on, indeed!</p>"
+  }
+]

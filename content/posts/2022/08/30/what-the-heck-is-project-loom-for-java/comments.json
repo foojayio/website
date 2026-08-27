@@ -1,0 +1,23 @@
+[
+  {
+    "id": 5762,
+    "depth": 0,
+    "author": "Mihai",
+    "date": "2022-09-08T10:36:51",
+    "html": "<p>I disagree with:<br>\n  “it should not affect regular Java developers much, as these developers may be using libraries for concurrency use cases.”</p>\n<p>Currently many developers choose Spring WebFlux with complicated callbacks in Project Reactor. Almost impossible to debug.<br>\n  Also not only for web application. I needed to implement a very fast server that consume from a queue and send messages to customers. The same, using Project Reactor and Netty connections and AWS async connections.</p>\n<p>Project Loom will bring back the synchronous simple model of programming for most web applications.</p>"
+  },
+  {
+    "id": 5763,
+    "depth": 0,
+    "author": "Deepu K Sasidharan",
+    "date": "2022-09-08T10:49:36",
+    "html": "<p>@Mihai you are absolutely right. Synchronous code is the most intuitive and if the throughput is same or more its absolutely worth switching to virtual threads. I guess my statement was an oversimplification. I did add the disclaimer regarding my statement as I still believe for most regular developers the framework they use will make the decision for them. Ofcourse most regular developers is not a quantified number I believe</p>"
+  },
+  {
+    "id": 5783,
+    "depth": 0,
+    "author": "Daniel",
+    "date": "2022-09-09T17:08:25",
+    "html": "<p>@Mihai, what about Kotlin coroutines?</p>"
+  }
+]

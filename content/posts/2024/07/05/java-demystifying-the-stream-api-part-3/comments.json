@@ -1,0 +1,9 @@
+[
+  {
+    "id": 28701,
+    "depth": 0,
+    "author": "Fantaman",
+    "date": "2024-07-13T19:00:54",
+    "html": "<p>The example for calculating the minimum using reduce() is wrong: it will output “0”, which is not an element of the “reduceNumbers” list. To fix this, one should to use Integer.MAX_VALUE as initial value (“identity” parameter) of the reduce function (and likewise Integer.MIN_VALUE for the maximum calculation).</p>"
+  }
+]

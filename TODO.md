@@ -144,37 +144,38 @@
   * The old GoatCounter scaffold (`partials/stats.html`) is deleted. It also held
     an unwired share button — nothing replaces that; ask if it's wanted.
 * [X] Discussions -> giscus on this repo's GitHub Discussions
-  * `partials/comments.html` is now called from `posts/single.html`, and
-    `[params.giscus]` is in `hugo.toml`. **It renders nothing until you finish
-    three manual steps** (see README "Comments"): enable Discussions with a
-    comment-accepting "Blog Comments" category, install the giscus app, and paste
-    `repoId`/`categoryId` — `jbang scripts/transfer/Comments.java --print-config`
-    prints the block ready to paste.
+  * `partials/comments.html` is called from `posts/single.html` and
+    `[params.giscus]` is filled in. All three manual steps are **done**:
+    Discussions enabled with a comment-accepting "Blog Comments" category, the
+    giscus app installed, and both ids pasted. Confirmed live — giscus has
+    created threads there on its own.
   * A thread is keyed on the post **slug**, not the pathname: the trial deploy
     serves `/website/today/<slug>/` and production `/today/<slug>/`, so
     pathname-keyed threads would all be orphaned at cutover. `data-strict="1"`
     with it, because 30 slugs are substrings of another slug and fuzzy matching
     would show one post's comments on another.
-  * Existing comments: **not** transfer/Posts.java — a new one-off,
-    `scripts/transfer/Comments.java`. Posts writes files and gets re-run
-    constantly; this writes irreversible public content to GitHub and needs a
-    token, so mixing them would put a credential and a GitHub side effect in
-    every routine re-scrape.
+  * Existing comments: `scripts/transfer/Comments.java`, and they are **an
+    archive in the repo, not an import into Discussions**. The import was built,
+    run, and **got the posting account banned by GitHub** after a few posts —
+    several hundred API-driven comment creations from a fresh account reads as
+    spam, and no variant of it avoids that. Don't rebuild it.
     * Source is WP's own open REST API (`/wp-json/wp/v2/comments`): 580 approved
-      comments on 270 posts, all 270 matched to a local bundle, verified by
-      `--dry-run`.
-    * Posts as the Foojay account (`GITHUB_TOKEN`), each comment opening with
-      `_Originally posted by **<author>** on <date> in Foojay.io Discussions._`
-      (the name links to the commenter's URL when WP has one).
-    * Idempotent and resumable — a discussion is reused when the term already has
-      one, a comment is skipped when its `<!-- wp-comment-id: N -->` marker is
-      already there. Needed, because ~850 writes run into GitHub's
-      content-creation rate limit; `--limit N` batches and it backs off.
-    * WP threads deeper than one level are flattened onto the top-level comment
-      (GitHub Discussions only nest one level) — affects 4 comments.
-    * **Not run yet**: needs the Foojay account's token. Run `--dry-run --slug
-      <post>` first to see exact bodies, then one post for real, then the lot.
-      Run it again just before cutover to pick up late WP comments.
+      comments, of which 578 across 269 posts match a local bundle. The other 2
+      belong to a post foojay.io has deleted (its URL 301s to the homepage) and
+      are reported rather than guessed at.
+    * Writes one `comments.json` into each post's bundle;
+      `partials/legacy-comments.html` renders it under the giscus widget as
+      "Discussions on the previous Foojay site", derived from the file's presence
+      the way the transcript section is. Needs **no credential**.
+    * Bodies are sanitized in the script with jsoup's `Safelist`, because
+      goldmark runs with `unsafe = true` and these are 578 bodies written by
+      strangers. That is the security boundary — see CLAUDE.md.
+    * WordPress's real nesting is kept (461 top-level, 115 one deep, 4 two
+      deep), which the GitHub version had to flatten.
+    * Idempotent: a file is rewritten only when its content changed and carries
+      no timestamp, so a re-run with nothing new leaves an empty diff. **Run
+      again as late as possible before cutover** — after that these bodies have
+      no source.
 * [X] Featured authors
   * See for background info: https://foojay.io/today/featured-authors-july-and-august-2026/
   * Specified in `hugo.toml`: `params.featuredAuthors = ["cristobal-escobar", "shai-almog"]`

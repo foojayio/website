@@ -1,0 +1,39 @@
+[
+  {
+    "id": 12167,
+    "depth": 0,
+    "author": "Jack",
+    "date": "2023-08-27T16:02:09",
+    "html": "<p>No, just no! You did not explain anything!<br>\n  “While synchronization is simple and effective, it doesn’t provide flexibility in handling lock acquisition and release. Java’s ReentrantLock gives us more control and can lead to more efficient concurrent code. ” Why is that? And what is ReentrantLock? “Unsafe and VarHandle are two such tools that provide low-level operations for concurrency control and memory management. However, they should be used with caution as they can lead to complex and error-prone code.” Why is that? And what are these classes? This article transfers almost no knowledge. I came here from baeldung which used to collect really good articles but these times are over, I think.</p>"
+  },
+  {
+    "id": 12278,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2023-09-02T00:55:35",
+    "html": "<p>Thank you for your feedback, and I apologize for not meeting your expectations with the article. Your comments are taken seriously, and they provide valuable insights for improvement.</p>\n<p>To address your concerns:</p>\n<p><strong>ReentrantLock Over Synchronization:</strong> In Java, ReentrantLock provides more functionalities than traditional synchronized blocks. For instance, it allows you to back out of an attempt to acquire a lock, interrupt thread waiting for a lock, or try to acquire a lock for a specific amount of time. This gives you greater control over lock acquisition and release, potentially leading to more efficient concurrent code.</p>\n<p><strong>Unsafe and VarHandle:</strong> These are low-level classes that offer fine-grained control over memory operations and concurrency control. Unsafe allows you to perform operations like direct memory access, which bypasses the JVM’s safety checks. VarHandle provides similar capabilities but in a safer manner. However, these should be used with caution because the absence of safety checks can lead to complex and error-prone code.</p>\n<p>I hope this clears up some of your questions. Once again, I appreciate your feedback and will strive to improve the quality of future articles. If you have more questions or need further clarification, feel free to ask.</p>"
+  },
+  {
+    "id": 12183,
+    "depth": 0,
+    "author": "D",
+    "date": "2023-08-28T19:55:00",
+    "html": "<p>The second example with lock looks like not correct. It reads count without using lock. If a reading thread is running on a different CPU from updating thread it is possible that getCount returns stale value from local CPU cache. This example may work in most cases but fail on some CPU, OS. The first example correctly use synchronized to ensure that the latest counter value is returned.</p>"
+  },
+  {
+    "id": 12279,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2023-09-02T00:56:58",
+    "html": "<p>Thank you for pointing out the oversight in the ReentrantLock example. You’re absolutely correct; I’ve updated the example to reflect the correction.</p>"
+  },
+  {
+    "id": 60411,
+    "depth": 0,
+    "author": "Piotr",
+    "date": "2025-08-09T20:40:36",
+    "html": "<p>Why did you choose to implement the counter providing two methods—one for incrementing and the second for reading? In most cases I would like to use the value of the counter just after the increment operation. I can i.e., assign it as a unique ID. If I use the get operation it will return only the recent value without any assurance of its uniqueness.</p>"
+  }
+]

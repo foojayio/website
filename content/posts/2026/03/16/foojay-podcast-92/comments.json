@@ -1,0 +1,17 @@
+[
+  {
+    "id": 83432,
+    "depth": 0,
+    "author": "ReinoutS",
+    "date": "2026-03-16T09:41:03",
+    "html": "<p>Is it possible to provide a link to the RSS feed of this podcast? Thanks!</p>"
+  },
+  {
+    "id": 83433,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2026-03-16T09:45:30",
+    "html": "<p>Hi, you can find the podcast RSS here: <a href=\"https://anchor.fm/s/10b9c3cfc/podcast/rss\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://anchor.fm/s/10b9c3cfc/podcast/rss</a></p>"
+  }
+]

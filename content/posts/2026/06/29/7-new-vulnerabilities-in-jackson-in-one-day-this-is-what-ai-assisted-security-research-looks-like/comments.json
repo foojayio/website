@@ -1,0 +1,9 @@
+[
+  {
+    "id": 92010,
+    "depth": 0,
+    "author": "Bernd",
+    "date": "2026-07-02T08:47:57",
+    "html": "<p>It needs to be mentioned that this particular case of bugs is much less a poster child for AI findings and much more a year long battle and problem of Jackson with deserialisation, safe defaults and feature creep.</p>"
+  }
+]

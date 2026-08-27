@@ -1,0 +1,39 @@
+[
+  {
+    "id": 9088,
+    "depth": 0,
+    "author": "Valery Tamashevich",
+    "date": "2023-03-18T00:26:09",
+    "html": "<p>Thank you, Frank.<br>\n  It’s Very Fundamental to explain those new to Java or Java “oppositioners” that they sometimes justify their ignorance using simply outdated information.</p>"
+  },
+  {
+    "id": 9134,
+    "depth": 0,
+    "author": "Andrew Binstock",
+    "date": "2023-03-19T22:57:59",
+    "html": "<p>In your second point, “You need to compile your code before you can run it”, you imply that jshell gets around the need for compilation. But in fact, behind the scenes, jshell is compiling the code you enter. jshell simply automates the compilation step for you.</p>"
+  },
+  {
+    "id": 9143,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2023-03-20T06:44:16",
+    "html": "<p>Hi Andrew, thanks for your feedback! Actually I’m a bit confused here. Is jshell compiling the code or running it inside a Java program with “Read-Evaluate-Print-Loop”, as described here?<br><a href=\"https://developers.redhat.com/blog/2017/10/03/use-jshell-command-line-tool-introduced-jdk-9#what_is_jshell_\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://developers.redhat.com/blog/2017/10/03/use-jshell-command-line-tool-introduced-jdk-9#what_is_jshell_</a></p>"
+  },
+  {
+    "id": 9160,
+    "depth": 0,
+    "author": "Andrew Binstock",
+    "date": "2023-03-21T01:01:49",
+    "html": "<p>Frank, thanks for your thoughtful reply. Unfortunately, the site does not allow me to reply directly to your note, so it appears in this separate comment.</p>\n<p>How JShell works is explained in detail in JEP 222 (<a href=\"https://openjdk.org/jeps/222\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://openjdk.org/jeps/222</a>), especially in the final section entitled “Dependences” (sic).</p>\n<p>Essentially, the code snippets that are entered into JShell are transformed into a compilable class, after which JShell calls the Java compiler API to compile the class, at which point the class is run, and the results are displayed.</p>"
+  },
+  {
+    "id": 9176,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2023-03-21T13:21:54",
+    "html": "<p>Thanks a lot Andrew for the link and extra info. I included it in the article!</p>"
+  }
+]

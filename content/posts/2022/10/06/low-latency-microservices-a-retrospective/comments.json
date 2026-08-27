@@ -1,0 +1,9 @@
+[
+  {
+    "id": 85931,
+    "depth": 0,
+    "author": "boteh35959",
+    "date": "2026-04-14T14:42:16",
+    "html": "<p>Great insights! It’s fascinating to see how the shift from millisecond to nanosecond resolution has changed the game for tracing events. I remember back in the day, milliseconds felt like plenty, but as systems got more complex, that just wasn’t enough to identify race conditions or bottlenecks in high-frequency environments.<br>\n  In my own work, I’ve been maintaining some older enterprise gear, specifically ProLiant BL460C blades with Octa Core 2.6GHz Xeon chips <a href=\"https://serverorbit.com/pc-and-servers/proliant-bl460c/octa-core-2-6ghz-xeon\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://serverorbit.com/pc-and-servers/proliant-bl460c/octa-core-2-6ghz-xeon</a>. Even though they aren’t the newest tech, seeing your point about “Trivially Copyable” objects really resonates. When you’re working with older architectures, avoiding the massive overhead of standard Java serialization is one of the only ways to keep latencies in check and actually utilize the CPU cores effectively. It’s amazing how much performance is often left on the table simply because of how objects are handled in memory.<br>\n  One thing that caught my eye was your note on performance testing when the “CPU is running cold.” On those older Xeon blades, I’ve definitely noticed power-saving states causing unexpected jitter.<br>\n  Do you find that modern virtualization layers (like ESXi or KVM) complicate these nanosecond-level measurements more than they did five years ago, or has the orchestration software finally caught up to the hardware?</p>"
+  }
+]

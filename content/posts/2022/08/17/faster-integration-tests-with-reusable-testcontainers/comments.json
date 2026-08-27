@@ -1,0 +1,9 @@
+[
+  {
+    "id": 5523,
+    "depth": 0,
+    "author": "Luca",
+    "date": "2022-08-25T06:16:51",
+    "html": "<p>Is that @BeforeEach really necessary? If we add more tests to the class, shouldn’t tests be isolated from each other, that is should tests use independent data? Otherwise, we add a behaviour (the delete-all) that does not reflect the implementation.</p>"
+  }
+]

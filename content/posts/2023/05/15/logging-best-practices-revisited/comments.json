@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10204,
+    "depth": 0,
+    "author": "Cpt",
+    "date": "2023-05-16T07:05:31",
+    "html": "<p>I would agree with you if people are using the log as a ‘poor man’s debug tool””. Indeed deciding which parameters to log upfront is hard (to avoid the word impossible) if you don’t know what you are debugging. However Focussing only on debugging whilst logging is a mistake. Logging should be done for other purposes such as auditing, logging of errors and warning (and/or info). And one should strive to separate these information streams as they may have different retention requirements. Auditing can be implemented with AOP focussing on a few specific methods (or using filters et. al.) but logging should never be done with AOP (for the reasons you highlighted).</p>"
+  },
+  {
+    "id": 10206,
+    "depth": 1,
+    "author": "Shai Almog",
+    "authorUrl": "https://debugagent.com/",
+    "date": "2023-05-16T07:49:48",
+    "html": "<p>Yes. AOP logging is useful to debug cases such as intermittent failure in CI (flaky tests), etc. In those cases we don’t want to sprinkle logs all over the code just to understand the CI. AOP logging can provide global logging with a flip of a switch that is easy to remove once the problem is solved.</p>\n<p>It should never be used in production and should also be off by default when testing/debugging. I discussed this more extensively <a href=\"https://debugagent.com/spring-boot-debugging-with-aspect-oriented-programming-aop\" rel=\"nofollow ugc noopener\" target=\"_blank\">here</a>.</p>"
+  }
+]

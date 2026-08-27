@@ -1,0 +1,17 @@
+[
+  {
+    "id": 30973,
+    "depth": 0,
+    "author": "Nitin Karve",
+    "date": "2024-08-03T09:56:09",
+    "html": "<p>Hey Shai, its really a good article. Thanks for sharing. One thing that you mentioned about in case of retry by our own servers could be assumed to be a DDoS attack but this can be sorted using the whitlisting approach and this will happen only if the requests are coming from systems/servers/ip outside of our deployment, if requests are coming from within our servers then it should not be problem right or i have misunderstood something.</p>"
+  },
+  {
+    "id": 31156,
+    "depth": 0,
+    "author": "Shai Almog",
+    "authorUrl": "https://debugagent.com/",
+    "date": "2024-08-06T01:43:25",
+    "html": "<p>@Nitin White listing isn’t the problem. Notice I said a “denial of service attack” (DoS) not “Distributed Denial of Service attack” (DDoS). The latter uses an “army” of computers to overload servers. The former just means multiple servers making requests to the main server.</p>\n<p>A DoS attack can be something you do to yourself by accident like shooting yourself in the foot. E.g. in this case a bug or unexpected condition can cause some servers to fail, not crash… Just misbehave. A good example would be a very long DB query that times out. As a result they time out on web services requested from them and the callers invoking them also fail. Since all of these operations take a lot of time the retries can overload the system. They can also overload the database and cause legitimate query failures.</p>\n<p>Since retries are the responsibility of an individual component you would have no place to tune this or even see this happening other than logs which would be messy. Fixing this could require wide microservice redeploys and it might make it hard to find the initial slow query that triggered the cascade failure.</p>"
+  }
+]

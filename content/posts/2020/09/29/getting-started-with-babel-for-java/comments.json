@@ -1,0 +1,16 @@
+[
+  {
+    "id": 4,
+    "depth": 0,
+    "author": "Jan",
+    "date": "2020-10-03T18:49:04",
+    "html": "<p>Repository uner link: <a href=\"https://github.com/eppleton/frgaal-demo.git\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/eppleton/frgaal-demo.git</a> is empty</p>\n<p>When using the maven plugin the application does not compile.<br>\n  Only works if and only if source == target (14).<br>\n  If source is 14 and target is 11, it will not work.</p>\n<p>Used version :<br>\n  openjdk version “14.0.1” 2020-04-14<br>\n  OpenJDK Runtime Environment (build 14.0.1+7-Ubuntu-1ubuntu1)<br>\n  OpenJDK 64-Bit Server VM (build 14.0.1+7-Ubuntu-1ubuntu1, mixed mode, sharing)</p>\n<p>openjdk version “11.0.8” 2020-07-14<br>\n  OpenJDK Runtime Environment (build 11.0.8+10-post-Ubuntu-0ubuntu120.04)<br>\n  OpenJDK 64-Bit Server VM (build 11.0.8+10-post-Ubuntu-0ubuntu120.04, mixed mode, sharing)</p>"
+  },
+  {
+    "id": 6,
+    "depth": 0,
+    "author": "Anton Epple",
+    "date": "2020-10-08T11:28:43",
+    "html": "<p>Hi Jan,</p>\n<p>thanks for reporting this. I’ll upload the missing sources. Regarding your compilation problem: Could you create an issue in the frgaal project with exact steps how to reproduce the issue? This would help us tremendously in fighting bugs or making sure our documentation is clear and comprehensive.</p>\n<p>Thanks</p>\n<p>Toni</p>"
+  }
+]

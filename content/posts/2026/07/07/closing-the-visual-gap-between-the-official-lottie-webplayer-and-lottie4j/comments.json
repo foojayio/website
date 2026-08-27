@@ -1,0 +1,17 @@
+[
+  {
+    "id": 92546,
+    "depth": 0,
+    "author": "Cecily Harcourt",
+    "date": "2026-07-08T13:11:44",
+    "html": "<p>Nice write-up — clear and practical. Quick question: when you run the reference renderer in headless Chrome, do you version-lock the dotlottie-wc/thorvg engine used to generate the committed reference frames so CI stays stable over time? If not, could drifting reference builds cause false failures?</p>"
+  },
+  {
+    "id": 92580,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2026-07-09T05:43:45",
+    "html": "<p>Good remark! Indeed the web-renderer has a locked version, see <a href=\"https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/main/java/com/lottie4j/fxfileviewer/render/DotLottieFrameRenderer.java#L52\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/main/java/com/lottie4j/fxfileviewer/render/DotLottieFrameRenderer.java#L52</a>.</p>\n<p>Evolutions in the format and the rendered can indeed cause drifting differences. Definitely something to keep an eye on for me… 😉</p>"
+  }
+]

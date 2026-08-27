@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1958,
+    "depth": 0,
+    "author": "NoName",
+    "date": "2021-12-24T19:00:40",
+    "html": "<p>Thanks, I couldn’t get it installed. Sdk makes it so much easier!</p>"
+  },
+  {
+    "id": 2014,
+    "depth": 0,
+    "author": "Richard Hassinger",
+    "date": "2021-12-28T05:30:09",
+    "html": "<p>Got SDKMAN installed, but no Java is available for my Pi 4B 4GB. “sdk list java” shows no result. I can say “sdk list” and I see java, but if I say “sdk install java” it reports:<br>\n  Stop! java 17.0.1-tem is not available. Possible causes:<br>\n  * 17.0.1-tem is an invalid version<br>\n  * java binaries are incompatible with your platform<br>\n  * java has not been released yet<br>\n  …strange…</p>"
+  },
+  {
+    "id": 2021,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2021-12-28T12:56:57",
+    "html": "<p>You probably used the “default” Raspberry Pi OS which is 32-bit. Correct? Unfortunately, SDKMAN indeed doesn’t have a list of 32-bit ARM JDK versions, but working on it… see <a href=\"https://github.com/sdkman/sdkman-cli/issues/836\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/sdkman/sdkman-cli/issues/836</a></p>"
+  },
+  {
+    "id": 2022,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2021-12-28T13:03:06",
+    "html": "<p>Alternative approach via terminal:</p>\n<p><code><br>\n   $ java -version<br>\n   bash: java: command not found<br>\n   $ sudo apt update<br>\n   $ apt search openjdk<br>\n   $ sudo apt install openjdk-11-jdk<br>\n   $ java -version<br>\n   openjdk version \"11.0.13\" 2021-10-19<br>\n   OpenJDK Runtime Environment (build 11.0.13+8-post-Raspbian-1deb11u1)<br>\n   OpenJDK Server VM (build 11.0.13+8-post-Raspbian-1deb11u1, mixed mode)<br></code></p>"
+  },
+  {
+    "id": 3322,
+    "depth": 0,
+    "author": "Alexander Gulyas",
+    "date": "2022-05-04T08:15:05",
+    "html": "<p>Thanks so much for this! I noted that I need to copy the installed instance to a second location on my Pi for MultiMC to “see” the install, but these instruction were instrumental to getting Minecraft 1.18 on my Pi. I posted instructions at <a href=\"https://www.hackster.io/gulyasal/minecraft-1-18-2-java-edition-client-on-rpi-4-model-b-14ceca\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.hackster.io/gulyasal/minecraft-1-18-2-java-edition-client-on-rpi-4-model-b-14ceca</a> and of course gave you credit for these instructions. Thank you again!</p>"
+  },
+  {
+    "id": 3325,
+    "depth": 0,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2022-05-04T09:30:38",
+    "html": "<p>SDKMAN can now be fully used on both 32- and 64-bit OS systems! See <a href=\"https://foojay.io/today/installing-java-with-sdkman-on-raspberry-pi/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://foojay.io/today/installing-java-with-sdkman-on-raspberry-pi/</a> for more info.</p>"
+  }
+]

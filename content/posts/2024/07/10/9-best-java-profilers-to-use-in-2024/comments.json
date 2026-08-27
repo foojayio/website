@@ -1,0 +1,23 @@
+[
+  {
+    "id": 29822,
+    "depth": 0,
+    "author": "Martijn",
+    "date": "2024-07-20T21:21:08",
+    "html": "<p>You can use jps instead of ps aux</p>"
+  },
+  {
+    "id": 30380,
+    "depth": 0,
+    "author": "magicwerk",
+    "date": "2024-07-24T05:27:04",
+    "html": "<p>The wording “comes with the standard JDK” for jhat and hprof is quite misleading as they were removed with Java 9…</p>"
+  },
+  {
+    "id": 31057,
+    "depth": 0,
+    "author": "Lee Sheinberg",
+    "date": "2024-08-04T08:13:43",
+    "html": "<p>Thanks for including this post:)</p>"
+  }
+]

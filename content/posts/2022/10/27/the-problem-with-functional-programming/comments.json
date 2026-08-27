@@ -1,0 +1,9 @@
+[
+  {
+    "id": 6857,
+    "depth": 0,
+    "author": "Simon",
+    "date": "2022-11-11T03:51:33",
+    "html": "<p>Absolutely. I don’t care much about the theoretical side — what matters is that FP offers some fantastically useful tools… immutable records, stream transformations, the idea of passing blocks of code around.</p>\n<p>But so does OO. Objects and class hierarchies are often done badly, but the paradigm is ideal for some problems, just as old-school procedural programming has its uses. There’s a reason why most of the popular modern languages are multi-paradigm, allowing developers to avoid purism and take advantage of whatever works.</p>"
+  }
+]

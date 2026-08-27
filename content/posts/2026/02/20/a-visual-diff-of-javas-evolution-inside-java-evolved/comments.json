@@ -1,0 +1,9 @@
+[
+  {
+    "id": 81971,
+    "depth": 0,
+    "author": "Hayden Jones",
+    "date": "2026-02-26T15:02:18",
+    "html": "<p>Could we revise the code example for ‘Safer Type Handling and Control Flow’, so the behaviour of the two are more consistent?</p>\n<p>For example if we passed in WEDNESDAY one would return 9, the other 0.<br>\n  And for one we could pass in JAVA_ROCKS but the other would not take it.</p>"
+  }
+]

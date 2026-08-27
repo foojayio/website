@@ -1,0 +1,23 @@
+[
+  {
+    "id": 21945,
+    "depth": 0,
+    "author": "Valery Tamashevich",
+    "date": "2024-05-10T13:48:05",
+    "html": "<p>Thank you, Anthony. Very well explained. It also convincing to finally move to JDK 21 and apply all yo presented here. Appreciate you.</p>"
+  },
+  {
+    "id": 22503,
+    "depth": 0,
+    "author": "Philipe Louchtch",
+    "date": "2024-05-16T09:20:31",
+    "html": "<p>Great list! I’m missing the Lombok’s @Locked alternative though, which is looking pretty good.</p>\n<p><a href=\"https://projectlombok.org/features/Locked\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://projectlombok.org/features/Locked</a></p>"
+  },
+  {
+    "id": 46924,
+    "depth": 0,
+    "author": "Bernd",
+    "date": "2025-04-22T19:48:43",
+    "html": "<p>Nice article, thanks for sharing. I just wanted to give everybody a heads up on the latest development on the virtual thread “sychronized” pinning issue. The problem has been resolved, hence synchronized is not to be blamed for all your performance issues anymore 😉 – Dan Vega created a good video about it, see <a href=\"https://youtu.be/V4gsffMge7E?si=a_3jr7UItQrRAWIJ\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://youtu.be/V4gsffMge7E?si=a_3jr7UItQrRAWIJ</a></p>"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 2771,
+    "depth": 0,
+    "author": "Hawk",
+    "date": "2022-03-17T02:45:22",
+    "html": "<p>Why are the generated queries not perfomant?</p>"
+  },
+  {
+    "id": 2772,
+    "depth": 1,
+    "author": "Simon Martinelli",
+    "date": "2022-03-17T07:34:14",
+    "html": "<p>The generated queries are performant but there are too many queries.<br>\n  The data to fill the graph could be fetched in one query using Cypher.</p>"
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 45947,
+    "depth": 0,
+    "author": "Sugumar",
+    "date": "2025-04-11T09:33:36",
+    "html": "<p>Great article. Thanks for sharing.<br>\n  One small observation, looks like the parameter order mentioned in the constructor<br>\n  public SlidingWindowLogRateLimiter(Jedis jedis, long windowSize, int limit) {<br>\n  this.jedis = jedis;<br>\n  this.limit = limit;<br>\n  this.windowSize = windowSize;<br>\n  }<br>\n  }<br>\n  wrongly passed from test cases. Window and limit should be interchanged right?</p>"
+  }
+]

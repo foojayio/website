@@ -1,0 +1,38 @@
+[
+  {
+    "id": 918,
+    "depth": 0,
+    "author": "Subramanya G",
+    "date": "2021-08-21T11:01:29",
+    "html": "<p>Hi, nice explanation and design. Can u please show how to import these to scene builder?</p>"
+  },
+  {
+    "id": 924,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2021-08-23T06:53:33",
+    "html": "<p>Aloha, to import custom controls into Scene Builder you need to create a jar from the controls and add this jar to the Library folder. In Scene Builder there is a little gear icon that you can click. It’s popup menu has an entry named “Custom Library Folder” which has an entry that will let you open the library folder in either the explorer or finder (depending on your operating system). If you copy the created jar into this folder the components should appear in the “Custom” tab in Scene Builder.</p>"
+  },
+  {
+    "id": 2406,
+    "depth": 0,
+    "author": "halim halim",
+    "date": "2022-02-04T20:53:48",
+    "html": "<p>Please can you and custom control for pane</p>"
+  },
+  {
+    "id": 31185,
+    "depth": 0,
+    "author": "Sourabh Bhat",
+    "date": "2024-08-06T15:58:28",
+    "html": "<p>This was a well-written and very useful article.<br>\n  When I add custom component to Scene Builder, the order of properties in the right panel is decided by the variable names (alphabetical order). Is it possible to change the order in which the input fields are arranged in Scene Builder?</p>"
+  },
+  {
+    "id": 38072,
+    "depth": 0,
+    "author": "Ibrahim Rashwan",
+    "date": "2024-12-23T07:02:40",
+    "html": "<p>Hi, just wanted to say this was really nice explanation and I did learn new things, thanks and keep it up.</p>"
+  }
+]

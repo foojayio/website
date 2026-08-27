@@ -69,7 +69,7 @@ the WordPress site is switched off.
 | `Posts.java` | `/today/` posts → `content/posts/` | repeatedly, until cutover |
 | `Authors.java` | `/today/author/` → `content/authors/` | repeatedly, until cutover |
 | `Sponsors.java` | `/our-sponsors/` → `content/sponsors/` | by hand |
-| `Comments.java` | legacy WP comments → GitHub Discussions (giscus) | by hand, needs `GITHUB_TOKEN` — **not yet run** |
+| `Comments.java` | legacy WP comments → a `comments.json` per post bundle | repeatedly, until cutover — no credential |
 | `LegacyViews.java` | WP view counts → `data/legacy-views.json`, `--seed` loads the counter | by hand, repeatedly, until cutover |
 
 The scrapers are **idempotent**: they update a bundle rather than duplicating
@@ -77,9 +77,19 @@ it, look it up by slug so it stays put across re-runs, and skip any file whose
 frontmatter is hand-marked `frozen: true`. `--url <page>` converts a single page,
 for tuning selectors against real markup.
 
-`Comments.java` and `Sponsors.java` are deliberately run by hand rather than in
-CI: one writes irreversible public content to a third-party API, the other
-scrapes a site that goes away — neither belongs next to the `fetch/` scripts.
+`Sponsors.java` is deliberately run by hand rather than in CI: it scrapes a site
+that goes away at cutover, so it does not belong next to the `fetch/` scripts.
+
+`Comments.java` **used to post the 580 legacy comments into the GitHub
+Discussions giscus reads, and no longer does — GitHub banned the account it
+posted as** after only a few posts had been handled. Several hundred API-driven
+comment creations from a fresh account is indistinguishable from spam at
+GitHub's end, and no variant of that approach avoids looking like the thing that
+got blocked. It now writes an archive into the repo instead: one `comments.json`
+per post bundle, rendered under the giscus widget by
+`partials/legacy-comments.html` as "Discussions on the previous Foojay site".
+That needs no token, touches nothing outside this repository, and is a diff
+rather than an irreversible public write. giscus still owns all *new* comments.
 
 ## `cleanup/` — one-off content migrations (already run)
 

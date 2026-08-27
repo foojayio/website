@@ -1,0 +1,17 @@
+[
+  {
+    "id": 36906,
+    "depth": 0,
+    "author": "Thomas Kerkmann",
+    "date": "2024-11-29T13:29:59",
+    "html": "<p>I’m wondering if this is a concurrent product to Spring AI? Have looked at differences and similarities already?</p>"
+  },
+  {
+    "id": 36907,
+    "depth": 1,
+    "author": "Nicolas Frankel",
+    "authorUrl": "https://blog.frankel.ch/",
+    "date": "2024-11-29T13:33:05",
+    "html": "<p>Yes, they both provide “services” on top of the LLM API.</p>\n<p>No, I didn’t compare them (yet).</p>"
+  }
+]

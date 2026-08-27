@@ -1,0 +1,9 @@
+[
+  {
+    "id": 62177,
+    "depth": 0,
+    "author": "Bryan Duane Basham",
+    "date": "2025-08-22T14:00:40",
+    "html": "<p>Good article, my only suggestion is to use a Java record (instead of a class with getters/setters) for your DTOs; no muss no fuss.</p>"
+  }
+]

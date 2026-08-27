@@ -1,0 +1,9 @@
+[
+  {
+    "id": 371,
+    "depth": 0,
+    "author": "making",
+    "date": "2021-04-22T06:51:33",
+    "html": "<p>You can use DataClassRowMapper instead<br><a href=\"https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/DataClassRowMapper.html\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/DataClassRowMapper.html</a></p>"
+  }
+]

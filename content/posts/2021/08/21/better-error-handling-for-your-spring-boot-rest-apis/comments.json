@@ -1,0 +1,16 @@
+[
+  {
+    "id": 459,
+    "depth": 0,
+    "author": "sureshbabu",
+    "date": "2021-05-22T11:42:04",
+    "html": "<p>Excellent!<br>\n  This feature really useful and helps us to avoid low level coding as author mentioned here.<br>\n  Thank you!.</p>"
+  },
+  {
+    "id": 462,
+    "depth": 0,
+    "author": "AndreyP",
+    "date": "2021-05-23T20:21:21",
+    "html": "<p>Looks like a good balance between, meaningful default behavior, which simplifies integration, and flexible customization.<br>\n  I think the best parts are:<br>\n  – well thought validation error handling<br>\n  – focus on telling the user what to do with the error. A simple idea of using exception class name converted via simple, consistent rules is the most valuable IMHO.</p>\n<p>Thanks!</p>"
+  }
+]

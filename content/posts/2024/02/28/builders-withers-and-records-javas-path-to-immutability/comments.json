@@ -1,0 +1,23 @@
+[
+  {
+    "id": 17964,
+    "depth": 0,
+    "author": "Nat Mishkin",
+    "date": "2024-02-29T00:48:06",
+    "html": "<p>Coincidentally and apropos of this post, just yesterday I read and noticed a relevant JEP: <a href=\"https://openjdk.org/jeps/468\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://openjdk.org/jeps/468</a> (“Derived Record Creation”). That (or something like it) would be a great addition to Java.</p>"
+  },
+  {
+    "id": 18267,
+    "depth": 0,
+    "author": "Ruslan",
+    "date": "2024-03-09T14:58:29",
+    "html": "<p>Thank you for the article!</p>\n<p>You described the real problems with immutable java classes. We need builders and withers to made their usage convenient, and we do not have anything out of the box in Java language to do this. I fully agree.</p>\n<p>Then you described Lombok as one of the solutions to greatly reduce the boilerplate. I agree with this part too.</p>\n<p>But then you put Records to the table. But you literally showed that they do not solve any of these problems. You still need an annotation processor to add Builders and Withers. You still have a problem with creating too many objects in memory (and relying on the GC to collect them) if withers will be used generously.</p>\n<p>The only problem records solve is: they reduce the boilerplate of fields/getters/equals/hashCode definition, and also they are immutable by default (but I don’t think this could be considered as a big advantage, as it’s not that hard to just use `final` in normal classes).</p>\n<p>But, if we need to use an annotation processor anyway (to add builders/withers), then we could just use the same annotation processor to add getters/equal/hashCode, so this devalues the advantage of using records.</p>\n<p>Moreover, records force us to use a naming pattern that violates JavaBeans standard. While I personally like the pattern, it directly conflicts with many libraries that was written during last 20 years and expect objects to follow JavaBeans standard. This makes records hard to use in some cases. This also diversifies standards and adds cognitive problems of usage of classes/records. Each time you need to check what method you should call on e.g. `author` object: is this `getName()` or `name()`? Before records it was `getName()` in 99% of the cases.</p>\n<p>So, cosidering how little advantages records give (+ disadvantages they bring), I’m not sure they should be considered as a default solution for your immutable classes even if you use Java 16+.</p>\n<p>I remember even Brian Goetz (the main author of Java records) said somewhere that they are not intended to be used instead of immutable classes ubiquitously. E.g. if you see a necessity to add some logic to the record, then it probably a signal that you should use a class instead.</p>\n<p>Overall, good article that shows problems of creating immutable objects with Java language, but I disagree with the conclusion, especially this part: “the use of Records is recommended over ordinary classes as they are immutable per definition”. Especially when we are talking not only about dumb data-classes (data containers without any logic).</p>"
+  },
+  {
+    "id": 18311,
+    "depth": 0,
+    "author": "Jonathan Vila",
+    "date": "2024-03-11T08:58:08",
+    "html": "<p>Thank you a lot @Ruslan for your comment.</p>\n<p>With Records what we have is a consistent way to define an immutable (shallow) object.</p>\n<p>In order to create Builders or Withers for Records you can add them manually. But if you decide to use processors, I don’t see what would be the value to add getters/equal/hashCode as they already exist in the Record.</p>\n<p>Regarding using final in regular classes, sure, but from the reader’s perspective it’s way clearer to know that the class is immutable if they know it’s a Record.</p>\n<p>Regarding the naming pattern violation, you are right that this can impact the usage of third party libraries. I’m sure they will evolve and adopt Records, but in the meantime you definitely have to consider this and not use Records if that’s the case.<br>\n  Regarding the usage of Records, I totally agree with you. They are not intended to be used everywhere, especially if you need logic for those classes.</p>\n<p>With the conclusion, Records by themselves are not the ones bringing disavantadges, but the other libraries design. So, when having data objects I think the Record pattern is the one to go. Although, as you also pointed very well, we need to consider the reality of our system and decide the impact and benefits.</p>"
+  }
+]

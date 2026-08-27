@@ -1,0 +1,16 @@
+[
+  {
+    "id": 66408,
+    "depth": 0,
+    "author": "A.Kutlu",
+    "date": "2025-09-18T11:22:19",
+    "html": "<p>Is it possible to use AOT Cache features within an IDE for increasing developer experience, or is it just for servers to boot fast? I tried to use it couple of IDEs with no luck.</p>"
+  },
+  {
+    "id": 66877,
+    "depth": 1,
+    "author": "Hanno Embregts",
+    "date": "2025-09-23T12:15:28",
+    "html": "<p>Hi, thanks for asking! That is certainly possible, though perhaps not very idiomatic with small code units like unit tests for example. But you could certainly configure your IDE (or Maven) to gather cache data during e.g. a Spring Boot run or an integration test run:</p>\n<p>“`</p>\n<p>maven-failsafe-plugin<br>\n  ${maven-failsafe-plugin-version}</p>\n<p>-XX:AOTCacheOutput=failsafe.aot</p>\n<p>“`<br>\n  …and use the `-XX:AOTCache=integrationtests.aot` option at startup to speed up the startup process.</p>"
+  }
+]

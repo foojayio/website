@@ -1,0 +1,9 @@
+[
+  {
+    "id": 236,
+    "depth": 0,
+    "author": "Tom",
+    "date": "2021-02-12T09:29:10",
+    "html": "<p>Great article again! How the code is distributed over methods is educational. Personally I would have put comments in (at least) the handleTextAndFocus method, because that is a daunting set of lines to work through, if you were to maintain that. When doing animations that quickly is the case.</p>"
+  }
+]

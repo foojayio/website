@@ -1,0 +1,16 @@
+[
+  {
+    "id": 10960,
+    "depth": 0,
+    "author": "Armel Hyacinthe",
+    "date": "2023-06-27T07:04:36",
+    "html": "<p>Thank you for this article.</p>\n<p>I would like to know if this is more efficient than the TSID. Here is the repo.: <a href=\"https://github.com/vladmihalcea/hypersistence-tsid\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/vladmihalcea/hypersistence-tsid</a>.</p>\n<p>I expect you to comment.</p>"
+  },
+  {
+    "id": 10967,
+    "depth": 0,
+    "author": "Peter Lawrey",
+    "date": "2023-06-27T12:08:22",
+    "html": "<p>Hi Armel Hyacinthe,<br>\n  One of the key differences is that the timestamp has a milli-second resolution and isn’t human readable by default. It’s highly likely to be unique with a random element, but not guaranteed.<br>\n  I will try a benchmark of it for comparison. Thank you for the suggestion.</p>"
+  }
+]

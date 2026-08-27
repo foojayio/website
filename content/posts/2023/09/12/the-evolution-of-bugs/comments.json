@@ -1,0 +1,17 @@
+[
+  {
+    "id": 12465,
+    "depth": 0,
+    "author": "Harald",
+    "date": "2023-09-13T10:11:39",
+    "html": "<p>I wish some new tech would do to threading in Java what garbage collection did to malloc/free. I should not even need to know keywords like volatile or synchronized in the same way as malloc/free are now merely faint memories of a distant past.</p>"
+  },
+  {
+    "id": 12466,
+    "depth": 1,
+    "author": "Shai Almog",
+    "authorUrl": "https://debugagent.com/",
+    "date": "2023-09-13T10:33:16",
+    "html": "<p>There are threadalizers which detect a lot. Also tools like Sonar Qube are pretty fantastic at pointing you towards the problems in threading code.</p>\n<p>Any shared state is always a problem. From my experience, most of these approaches just punt and move the can to the next stage which might not be an improvement. E.g. NodeJS just uses messages and no threads. That means huge amount of duplicate state fragmentation and no real way to have “one source of truth” without a tremendous performance problem.</p>\n<p>The nice thing is that we don’t need to worry about this much. In a typical server application the shared state usually just goes to the database or to a caching service. So for most cases we just write “stateless” code. That makes threading seamless.</p>"
+  }
+]

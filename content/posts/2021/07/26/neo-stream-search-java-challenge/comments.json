@@ -1,0 +1,23 @@
+[
+  {
+    "id": 867,
+    "depth": 0,
+    "author": "AR",
+    "date": "2021-08-07T11:14:59",
+    "html": "<p>The stream does an optimization and drops when it hits false the first time</p>"
+  },
+  {
+    "id": 880,
+    "depth": 0,
+    "author": "David",
+    "date": "2021-08-13T11:51:11",
+    "html": "<p>Hello Rafael<br>\n  For information, the list in the blog post (List.of(“Neo”, “Neo”, “Morpheus”, “Neo”, “Neo”)) is not the same as the one in the video (List.of(“Neo”, “Morpheus”, “Oracle”, “Trinity”, “Neo”)). So the output is not the same too.<br>\n  Regards.</p>"
+  },
+  {
+    "id": 882,
+    "depth": 0,
+    "author": "Rafael del Nero",
+    "date": "2021-08-14T11:10:23",
+    "html": "<p>Hello David, thanks for your comment. I just fixed this Java Challenge to the right values in the List.of method. It should be fine now! I also added the written explanation.</p>"
+  }
+]

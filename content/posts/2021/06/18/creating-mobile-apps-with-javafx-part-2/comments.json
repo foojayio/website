@@ -1,0 +1,52 @@
+[
+  {
+    "id": 646,
+    "depth": 0,
+    "author": "Javier Faus Llopis",
+    "date": "2021-07-02T11:18:07",
+    "html": "<p>Just to let you know that you can add the link to the Part 3 as it has already been published. Thanks a lot for sharing.</p>"
+  },
+  {
+    "id": 827,
+    "depth": 0,
+    "author": "Buddu Edgar",
+    "date": "2021-08-01T18:02:39",
+    "html": "<p>Dear Paul &amp; Gail,</p>\n<p>I am using the gluonfx gradle build task with graalvm native-image … how do I enable android apk to be generated with MultiDexEnabled=True ??..<br>\n  When I run the apk to start some services, the JVM complains that: Didn’t find class on the DexPathList … The solution provided by google is to enable multiDex …</p>\n<p>Edgar</p>"
+  },
+  {
+    "id": 992,
+    "depth": 0,
+    "author": "Anonymous",
+    "date": "2021-09-05T20:50:24",
+    "html": "<p>Hi, I was able to build and package my application into an apk. However, the apk only runs on a select few android devices. It doesn’t run on my 32 bit cpu Samsung for instance. What can I do to fix this?</p>"
+  },
+  {
+    "id": 1001,
+    "depth": 0,
+    "author": "Gail",
+    "date": "2021-09-06T21:08:54",
+    "html": "<p>As per the Gluon documentation: “Native image is only supported on 64-bit platforms.”</p>"
+  },
+  {
+    "id": 2370,
+    "depth": 0,
+    "author": "Siegfried",
+    "date": "2022-01-31T14:22:21",
+    "html": "<p>Lately as of your inspiring article I have been playing around with the example and some small proof-of-concept project for android. I am a newbie to android development but with the approach described by your article I got a simple demo up and running on my phone 🙂</p>\n<p>Now I have two questions regarding the screen orientation and the navigation bar (the bottom bar) on the screen of the phone:</p>\n<p>1) Manipulating the AndroidManifest.xml I was able to get a landscape orientation changing the com.gluonhq.helloandroid.MainActivity activity though in the code I did not find any com.gluonhq.helloandroid.MainActivity class. Is the name irrelevant or is there some such default activity?</p>\n<p>2) Do you know how I can hide the navigation bar (the bottom bar)?</p>\n<p>Thanks beforehand! 🙂</p>"
+  },
+  {
+    "id": 2452,
+    "depth": 0,
+    "author": "Gail Anderson",
+    "authorUrl": "http://asgteach.com",
+    "date": "2022-02-10T19:40:07",
+    "html": "<p>Hi Siegfried,<br>\n  Thanks for the comment and questions. Your questions sent me checking with those more involved in the Android-specific Gluon Substrate details than I am. Here is a response from @JPeredaDnr, engineer extraordinaire at Gluon:</p>\n<p>Android runs its own 1.7 JVM, and we [Gluon substrate] add ours (via GraalVM, 17), and both need to communicate.<br>\n  If you check your project, under target/gluonfx/aarch64-android/gvm/android_project, there is a full Android project (you can open it with Android Studio). This is created by Substrate.<br>\n  It has the main activity set as com.gluonhq.helloandroid.MainActivity, which is just the bootstrap activity to launch the “real” app, that runs under libsubstrate.so, by starting the graal thread: <a href=\"https://github.com/gluonhq/substrate/blob/master/src/main/resources/native/android/android_project/app/src/main/java/com/gluonhq/helloandroid/MainActivity.java#L130\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/gluonhq/substrate/blob/master/src/main/resources/native/android/android_project/app/src/main/java/com/gluonhq/helloandroid/MainActivity.java#L130</a><br>\n  In any case, from the Android point of view, this is the entry point, and therefore it has to be present in the AndroidManifest.</p>\n<p>In theory you could rename this main activity to your liking, but you will most likely get tons of issues…</p>\n<p>For the second question on running an android app in full immersive mode, you can’t specify immersive mode in the AndroidManifest file. So you have to use Attach [the Gluon way to access system or device-specific features]. Attach doesn’t have that service yet, but it should be fairly easy to do. You need to modify some of the Intents with those flags.</p>\n<p>You can create a service with AttachExtended, and give it a try, or if you need to modify the MainActivity you can manually build the apk:</p>\n<p>mvn -Pandroid gluonfx:package<br>\n  cd target/gluonfx/aarch64-android/gvm/android_project/<br>\n  export ANDROID_SDK_ROOT=~/.gluon/substrate/Android<br>\n  ./gradlew app:assembleDebug</p>\n<p>and then resume</p>\n<p>mvn -Pandroid gluonfx:install…</p>"
+  },
+  {
+    "id": 2650,
+    "depth": 0,
+    "author": "Siegfried",
+    "date": "2022-03-03T08:14:03",
+    "html": "<p>Hello @Gail, @JPeredaDnr, thank you very much for the support and your detailed information! Now I understand more and more about JavaFX development for Android and this information will help me very much! And thanks for adapting JavaFX to Android, great work!</p>"
+  }
+]

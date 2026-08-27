@@ -1,0 +1,23 @@
+[
+  {
+    "id": 12602,
+    "depth": 0,
+    "author": "Amadou Sonko",
+    "date": "2023-09-22T07:49:07",
+    "html": "<p>Hello,</p>\n<p>Interesting facts, but I think the study would be more reliable if it was also conducted on different operating systems and/or machines with different capacities.</p>"
+  },
+  {
+    "id": 12736,
+    "depth": 0,
+    "author": "Volker Simonis",
+    "date": "2023-09-29T11:40:27",
+    "html": "<p>The stack size you set is a “virtual” size which gets committed (i.e. backed by physical memory) pagewise if you use it. In your toy example your thread stacks barely use more than a single page (plus the internal shadow pages – see <a href=\"https://pangin.pro/posts/stack-overflow-handling\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://pangin.pro/posts/stack-overflow-handling</a> for the details).</p>\n<p>You can use tools Like pmap to see the exact reserved (i.e. virtual) and committed (i.e. physical or RSS) memory consumption of each thread.</p>"
+  },
+  {
+    "id": 39144,
+    "depth": 0,
+    "author": "Giampiero",
+    "date": "2025-01-16T10:52:35",
+    "html": "<p>I had similar results with swap disabled.<br>\n  The fact that JVM can create new threads, seems not related to virtual memory presence</p>"
+  }
+]

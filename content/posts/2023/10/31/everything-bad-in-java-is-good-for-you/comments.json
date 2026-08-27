@@ -1,0 +1,37 @@
+[
+  {
+    "id": 13635,
+    "depth": 0,
+    "author": "Erwin Vervaet",
+    "date": "2023-11-03T09:56:51",
+    "html": "<p>It’s interesting to see this articulated clearly and I 100% agree with your sentiments.<br>\n  Well written!</p>"
+  },
+  {
+    "id": 13639,
+    "depth": 0,
+    "author": "Bernd",
+    "date": "2023-11-03T18:00:53",
+    "html": "<p>I want to support Erwin, a well written article, many thanks for sharing! That leaves me now with the decision to opt out of Kotlin, as we have been adopting it in a couple of components already… sigh, it’s so hard to say no 🙂</p>"
+  },
+  {
+    "id": 13642,
+    "depth": 0,
+    "author": "Clement Cherlin",
+    "date": "2023-11-03T19:10:54",
+    "html": "<p>I find your arguments about null unconvincing. They seem to boil down to Java has null, and Java is good, so null is good, and NullPointerException is good.</p>\n<p>“If you could have initialized the value to begin with then why didn’t you do it?”<br>\n  Because Java doesn’t make you, because Java has null (bad design), and fields default to mutable (bad design) and mutable reference fields default to null if not explicitly assigned (more bad design). The ubiquity of static analysis tools for nullness is a cost, not a benefit. <a href=\"https://en.wikipedia.org/wiki/Parable_of_the_broken_window\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://en.wikipedia.org/wiki/Parable_of_the_broken_window</a></p>"
+  },
+  {
+    "id": 13699,
+    "depth": 0,
+    "author": "Aviad Cohen",
+    "date": "2023-11-05T07:39:55",
+    "html": "<p>Expressing my thoughts in clarity!</p>"
+  },
+  {
+    "id": 14736,
+    "depth": 0,
+    "author": "Cedric Dandoy",
+    "date": "2023-12-05T23:47:04",
+    "html": "<p>Excellent article.<br>\n  I think the reason many people hate checked exceptions is because they add noise without value. FP made it even worse.<br>\n  It does not matter if your persistence layer throws a SQLException, MongoException, IOException, SocketException or NullPointerException.<br>\n  In the end, the user must be informed that something didn’t work, the code needs to cleanup, and the developer needs the stack trace.</p>"
+  }
+]

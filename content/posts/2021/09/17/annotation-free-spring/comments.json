@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1137,
+    "depth": 0,
+    "author": "Gregory",
+    "date": "2021-09-27T16:59:11",
+    "html": "<p>The example for manually caching using Optional.orElse(/* Get thing */) to operate on the cache miss. Unfortunately, the orElse() method is evaluated every time the expression is called. If you change it to Optional.ofNullable(cache.get(key, Thing.class)).orElseGet(() -&gt; /* Get thing */);, then the “Get thing” code will only be evaluated when actually needed.</p>"
+  },
+  {
+    "id": 60282,
+    "depth": 0,
+    "author": "Ariya",
+    "date": "2025-08-08T13:04:11",
+    "html": "<p>I don’t like annotations either, but after seeing the alternative code samples, I still prefer to you annotations!</p>"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 10217,
+    "depth": 0,
+    "author": "Aqua man",
+    "date": "2023-05-16T21:35:19",
+    "html": "<p>Hey there, will you be releasing these builds for non lts also? Eg 19/20/21 ea?</p>"
+  },
+  {
+    "id": 10239,
+    "depth": 0,
+    "author": "Pavel Petroshenko",
+    "date": "2023-05-17T18:22:55",
+    "html": "<p>The next OpenJDK distribution with CRaC support will be for Java 21 GA. And we will consider other platforms/java versions. What would you use the EA versions for?</p>"
+  },
+  {
+    "id": 12261,
+    "depth": 0,
+    "author": "duckydude20",
+    "date": "2023-09-01T13:02:01",
+    "html": "<p>this is very absurd question but why does spring boot performs better than others with crac despite being the worst without?</p>"
+  }
+]

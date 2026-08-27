@@ -1,0 +1,16 @@
+[
+  {
+    "id": 16269,
+    "depth": 0,
+    "author": "CA",
+    "date": "2024-01-19T02:39:04",
+    "html": "<p>Wow, “that’s one heck of a curveball ya’ got there, Rich”: the article comes straight down the pike for the first half (with helpful history and perspective on Java and jvm’s in general), and then tails away subtly midway with a hat-tip to Semeru, only to turn clearly to all-Semeru before it crosses the plate. Wrong? Some might grumble, sure. Or “well-played”, a tech evangelist might say. 🙂</p>"
+  },
+  {
+    "id": 16511,
+    "depth": 0,
+    "author": "Dirk",
+    "date": "2024-01-24T14:16:01",
+    "html": "<p>The statement “OpenJ9 technologies can provide up to 50% smaller containers.” is not 100% correct. The Eclipse Temurin JDK and the Azul Zulu Builds provide musl variants. This way it is possible to create even smaller containers, as the base container size is already small. OpenJ9 does not support musl and as far as I was able to see, the musl/alpine support was always declined by the project.</p>"
+  }
+]

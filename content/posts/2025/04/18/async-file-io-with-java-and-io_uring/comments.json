@@ -1,0 +1,9 @@
+[
+  {
+    "id": 48630,
+    "depth": 0,
+    "author": "Mike",
+    "date": "2025-05-13T21:10:19",
+    "html": "<p>Hi. I’m not sure if I understand correctly the purpose. Can you elaborate if using Java NIO2 still pins the threads since it is a non-blocking IO approach. Thanks. Very interesting read.</p>"
+  }
+]

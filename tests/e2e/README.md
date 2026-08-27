@@ -176,7 +176,7 @@ answers yes: `canPlayType` returns `""` for avc1 and `"probably"` for vp9.
 | `discover.mjs` | picks representative pages out of the build |
 | `global-setup.mjs` | runs that pick ONCE, and writes `.pages.json` atomically |
 | `fixtures.mjs` | stubs third parties, collects uncaught errors and failed same-origin requests |
-| `pages.spec.mjs` | one page of every kind renders cleanly; nav, 404, theme toggle |
+| `pages.spec.mjs` | one page of every kind renders cleanly; nav, 404, theme toggle, the legacy comment archive |
 | `search.spec.mjs` | Pagefind: grouping, per-section counts, Show more, empty state, the header box |
 | `media.spec.mjs` | self-hosted video decodes; embeds survive; no broken same-origin images |
 | `interactive.spec.mjs` | highlighting, lightbox, both maps, sitemap tables, mermaid, the view beacon |

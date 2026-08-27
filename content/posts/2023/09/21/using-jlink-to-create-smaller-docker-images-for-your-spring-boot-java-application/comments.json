@@ -1,0 +1,9 @@
+[
+  {
+    "id": 12737,
+    "depth": 0,
+    "author": "Pierre-Marin Leclercq",
+    "date": "2023-09-29T12:28:32",
+    "html": "<p>In the past we tried using this solution but we had a lot of issues with module dependency hell with code like that :</p>\n<p>FROM scp-dtr-01.sma.lan/base/openjdk:17-2-ci as builder<br>\n  WORKDIR app<br>\n  ARG JAR_FILE=build/libs/ri-svc.jar<br>\n  COPY ${JAR_FILE} application.jar<br>\n  RUN java -Djarmode=layertools -jar application.jar extract<br>\n  RUN jdeps \\<br>\n  –class-path ‘dependencies/BOOT-INF/lib/*:application/*’ \\<br>\n  –print-module-deps \\<br>\n  –ignore-missing-deps \\<br>\n  –module-path ‘dependencies/BOOT-INF/lib/jakarta.annotation-api-1.3.5.jar:dependencies/BOOT-INF/lib/slf4j-api-1.7.31.jar’ \\<br>\n  –recursive \\<br>\n  –multi-release 9 \\<br>\n  -quiet \\<br>\n  application dependencies/BOOT-INF/lib/* &gt; deps.lst<br>\n  RUN cat deps.lst<br>\n  RUN jlink –add-modules $(cat deps.lst) –add-modules jdk.crypto.ec –add-modules jdk.crypto.cryptoki –compress 2 –strip-debug –no-header-files –no-man-pages –output app-jre</p>\n<p>We had to specify specifics modules dependency (here crypto or annotation or slf4j)</p>\n<p>So we stopped using this “optimisation” because it was not robust, is this more efficient now ?</p>"
+  }
+]

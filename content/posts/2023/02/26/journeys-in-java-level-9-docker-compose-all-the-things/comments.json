@@ -1,0 +1,16 @@
+[
+  {
+    "id": 10538,
+    "depth": 0,
+    "author": "mayank",
+    "date": "2023-06-03T17:26:35",
+    "html": "<p>can you extend this tutorial and explain adding debugger to docker container for java code</p>"
+  },
+  {
+    "id": 10564,
+    "depth": 0,
+    "author": "Jennifer",
+    "date": "2023-06-05T15:35:31",
+    "html": "<p>Most of my debugging has been ad hoc and not using specific tools, but that sounds like a great idea. Definitely something I would like to look into in the future!</p>"
+  }
+]

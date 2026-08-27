@@ -1,0 +1,23 @@
+[
+  {
+    "id": 7504,
+    "depth": 0,
+    "author": "Volker Simonis",
+    "date": "2022-12-21T07:54:39",
+    "html": "<p>Lambda is build on Firecracker (<a href=\"https://firecracker-microvm.github.io/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://firecracker-microvm.github.io/</a>) so the first sentence in the second paragraph of the “What is the CRaC API?” section should read “And Lambda, with its underlying use of the Firecracker MicroVM..”.</p>\n<p>Thanks,<br>\n  Volker</p>"
+  },
+  {
+    "id": 7505,
+    "depth": 0,
+    "author": "Geertjan Wielenga",
+    "date": "2022-12-21T07:58:01",
+    "html": "<p>Fixed!</p>"
+  },
+  {
+    "id": 7525,
+    "depth": 0,
+    "author": "Volker Simonis",
+    "date": "2022-12-22T08:34:50",
+    "html": "<p>Thanks. Can you please fix <a href=\"https://www.azul.com/blog/aws-snapstart-builds-momentum-for-the-crac-api/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.azul.com/blog/aws-snapstart-builds-momentum-for-the-crac-api/</a> as well? It has the same problem.</p>"
+  }
+]

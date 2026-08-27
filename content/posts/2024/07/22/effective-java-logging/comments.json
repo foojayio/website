@@ -1,0 +1,16 @@
+[
+  {
+    "id": 31511,
+    "depth": 0,
+    "author": "Will S.",
+    "date": "2024-08-12T14:28:34",
+    "html": "<p>I have to strongly disagree with you on logging of the exception stack trace. I have been working in Java since 1.0.7 back in 1996. One of the worst habits in a production application, especially at scale, is logging the full stack dump. Writing good messages to the log that are unique and provide non-private, contextual information is what you need without all the stack dump noise. If you are implementing better practices and logging the exception as close to the point of occurrence as possible and you have a unique message for every exception you won’t need the stack.</p>\n<p>To number 4 I would add the word “unique” to have it be “Log Unique Meaningful Messages”. Troubleshooting applications where every message is “Exception happened” makes it harder to track down the location of the failure. If this is the habit then the only way is to have the exception stack trace but if you have unique messages you can go straight to the code location.</p>\n<p>As you state, ensuring the proper level of severity is used when writing a log message and using good tooling to pick up on true errors that indicate broken function is essential. Then notifying the support team when an error message is written gets to problem resolution rapidly.</p>\n<p>I have worked on many systems running at 10’s of thousands of simultaneous users/operations without ever having to dump a stack frame to debug an issue.</p>"
+  },
+  {
+    "id": 39136,
+    "depth": 1,
+    "author": "Muaath Bin Ali",
+    "date": "2025-01-16T07:06:32",
+    "html": "<p>Thank you so much, Mr. Will. I truly appreciate your insight and completely agree with your comment. I’ll make sure to revise the article accordingly. Your feedback means a lot!</p>"
+  }
+]

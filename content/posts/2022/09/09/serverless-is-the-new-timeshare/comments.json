@@ -1,0 +1,17 @@
+[
+  {
+    "id": 5828,
+    "depth": 0,
+    "author": "Jadon Ortlepp",
+    "authorUrl": "http://payara.fish/",
+    "date": "2022-09-12T15:02:00",
+    "html": "<p>Great blog! Found this really interesting as Ive noticed “serverless” as a buzzword to be growing for some time now.</p>"
+  },
+  {
+    "id": 5829,
+    "depth": 1,
+    "author": "Shai Almog",
+    "date": "2022-09-12T16:24:20",
+    "html": "<p>Thanks!</p>\n<p>History repeats itself with minor variations…</p>"
+  }
+]

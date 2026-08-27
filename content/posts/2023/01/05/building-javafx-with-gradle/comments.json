@@ -1,0 +1,32 @@
+[
+  {
+    "id": 7925,
+    "depth": 0,
+    "author": "Roman",
+    "date": "2023-01-09T13:55:45",
+    "html": "<p>Awesome!<br>\n  Still I don’t quite understand why to use javafx plugin along with Liberica full jdk</p>"
+  },
+  {
+    "id": 7969,
+    "depth": 1,
+    "author": "Michael Gasche",
+    "authorUrl": "https://www.autumo.ch",
+    "date": "2023-01-11T15:09:03",
+    "html": "<p>When I am not mistaken, the JavaFX plugin is used during development in the Gradle-project, but Liberica’s Java FX is bundled within the jpackage.</p>"
+  },
+  {
+    "id": 8116,
+    "depth": 0,
+    "author": "Mike",
+    "date": "2023-01-20T16:23:40",
+    "html": "<p>The badass jlink plugin (<a href=\"https://badass-jlink-plugin.beryx.org/releases/latest/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://badass-jlink-plugin.beryx.org/releases/latest/</a>) makes this super easy. An entire build.gradle for a JavaFX app is ~25 lines long (not including dependencies) when using this plugin, that includes packaging a slimmed down runtime with jlink/jpackage.</p>"
+  },
+  {
+    "id": 8117,
+    "depth": 1,
+    "author": "Michael Gasche",
+    "authorUrl": "https://www.autumo.ch",
+    "date": "2023-01-20T16:25:38",
+    "html": "<p>That’s exactly why is used it 👀</p>"
+  }
+]

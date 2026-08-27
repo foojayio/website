@@ -424,27 +424,60 @@ should catch a mistake at PR time rather than letting it fail silently.
   really does contain the words "[email protected]" in a prompt example (the
   live page has the same literal). Run it again after any late re-scrape, before
   cutover kills the only source of these addresses.
-- **`scripts/transfer/Comments.java`**: one-off migration that moves the legacy
-  WordPress comments (580 approved, across 270 posts, read from foojay.io's open
-  `/wp-json/wp/v2/comments` — no admin access needed) into the GitHub Discussions
-  that giscus reads, so cutover doesn't reset every post to zero comments. Posts
-  as the foojay.io account (`GITHUB_TOKEN`), because the commenters' GitHub
-  identities are unknown, and opens each comment with `Originally posted by
-  <author> on <date> in Foojay.io Discussions.` — the attribution the TODO asked
-  for. Bodies go through `HtmlToMarkdown.toMarkdown` (made public for this), so a
-  comment gets the same entity/fence/nbsp repairs the post bodies got.
-  Deliberately **not** part of `transfer/Posts.java`, which the TODO wondered about:
-  that script writes files and is re-run against the live WP site constantly,
-  while this writes irreversible public content to a third-party API and needs a
-  credential — the same reason `transfer/Sponsors.java` is run by hand. Idempotent
-  with the state derived from GitHub rather than a file here (a discussion is
-  reused when its term already has one; a comment is skipped when its
-  `<!-- wp-comment-id: N -->` marker is already in the thread), which is what
-  makes it resumable across GitHub's content-creation rate limit — ~850 writes,
-  `--limit N` batches, automatic back-off. `--dry-run` reports without writing
-  (and with `--slug` prints the exact bodies); `--print-config` resolves the
-  repo/category node ids for `hugo.toml`. Run it again just before cutover to
-  pick up comments posted on WordPress in the meantime. **Not yet run.**
+- **`scripts/transfer/Comments.java`**: captures the legacy WordPress comments
+  (580 approved across 270 posts, read from foojay.io's open
+  `/wp-json/wp/v2/comments` — no admin access needed) into the repo as **one
+  `comments.json` per post bundle**, so cutover doesn't reset every post to zero
+  comments. `partials/legacy-comments.html` renders them under the giscus widget
+  as "Discussions on the previous Foojay site". Needs **no credential** and
+  writes nothing outside this repository. Run repeatedly until cutover; 269 files
+  written, 578 comments (2 belong to a post foojay.io has deleted — its URL 301s
+  to the homepage — and are reported, not guessed at).
+
+  **It used to post them into the GitHub Discussions giscus reads, and that is
+  dead because GITHUB BANNED THE ACCOUNT** after only a few posts had been
+  handled. Several hundred API-driven comment creations from a fresh account is
+  indistinguishable from spam at GitHub's end, and no variant of that approach
+  avoids looking like the thing that got blocked. **Don't rebuild it**, and note
+  the archive is the better shape regardless: these comments are a **closed
+  record** whose authors' GitHub identities are unknown, so nobody could ever
+  have edited or replied to their own 2020 comment there either — a mutable
+  discussion pretended otherwise. It is also reversible (a diff, not an
+  irreversible public write), and it is the **only copy**, committed for the same
+  reason `data/legacy-views.json` is. giscus still owns every *new* comment, on
+  the same term; the two are separate sections that say which is which.
+
+  Four things are load-bearing:
+  - **The stored HTML is sanitized in the SCRIPT, and that is a security
+    boundary.** `hugo.toml` sets goldmark `unsafe = true` for the raw HTML in
+    post bodies, so putting 578 stranger-authored bodies through `markdownify`
+    would be stored XSS on 269 article pages. Every body goes through **jsoup's
+    own `Safelist.basic()`** — a tested sanitizer, not a regex written here — and
+    the result is what is stored, so the template renders it with `safeHTML` and
+    never sees unsanitized input. The safelist is measured, not guessed: across
+    all 580 comments the only tags used are `p` (969), `br` (470), `a` (110),
+    `code` (15), `pre` (12), `strong` (9), `em` (2) and `blockquote` (1) — no
+    image, iframe, script or style. A run **reports any tag it dropped** rather
+    than losing it silently; today it drops none.
+  - **No timestamp in the file, and a file is rewritten only when its content
+    changed** — the `fetch/JugEvents.java` lesson: a "generated at" field moves
+    every run, so every run would commit and therefore deploy on nothing. Git
+    already records when it changed. Verified: the second run reports
+    `0 file(s) written, 269 already up to date`.
+  - **WordPress's real nesting is kept** (461 top-level, 115 one deep, 4 two
+    deep), written as a flat array in **threaded display order** with a `depth`
+    on each — so the template is a `range` with no recursion and the CSS clamps
+    the indent. The 3 comments whose parent is unpublished sit at depth 0.
+  - **`frozen: true` is deliberately NOT honoured**, unlike the other `transfer/`
+    scrapers. Those rebuild a post's frontmatter and body, where a hand edit is
+    precious; this writes one generated file beside it and touches nothing a
+    human wrote. A "corrected" comment body is not a thing that exists — these
+    are quotes from other people.
+
+  `--dry-run` reports without writing (with `--slug`, prints the sanitized
+  bodies). It also reports an **orphan** — a `comments.json` whose post
+  WordPress no longer has any comment for — rather than deleting it, and only on
+  a full run, since a `--slug` run cannot know the complete set.
 - **`worker/views/`**: the read counter — a Cloudflare Worker over a D1 table
   of `<section>/<slug> -> (legacy, live)`, routed at `foojay.io/api/views/*`. Deployed by
   hand (`wrangler deploy`), never by CI, for the same reason
@@ -964,16 +997,19 @@ should catch a mistake at PR time rather than letting it fail silently.
    page off before the searches resolve and reports an EMPTY results container,
    which reads as a bug in the page. Talk to Chrome over CDP instead and wait in
    real time; node 22+ has a global `WebSocket`, so that needs no dependencies.
-7. **Comments are wired but not switched on; the view counter needs deploying.**
-   `comments.html` (giscus) is called from `posts/single.html` and
-   `[params.giscus]` is in `hugo.toml` with `repoId`/`categoryId` left blank —
-   the partial renders nothing until those are filled in, so **three manual
-   steps remain**: enable Discussions on the repo with a comment-accepting
-   "Blog Comments" category, install the giscus app, paste the two ids
-   (`jbang scripts/transfer/Comments.java --print-config` prints the block).
-   Then run the comment import (see the script's entry above and README
-   "Comments"); nothing here has been run against GitHub yet, so treat both the
-   import and the widget as reviewed-but-untested.
+7. **Comments are live; the legacy ones are an archive in the repo, not in
+   Discussions.** All three giscus setup steps are **done**: Discussions are
+   enabled on `foojayio/website` with a comment-accepting "Blog Comments"
+   category, the app is installed, and `[params.giscus]` carries real
+   `repoId`/`categoryId` — confirmed by giscus having created threads there on
+   its own (slug-titled, which is the `data-mapping="specific"` wiring working).
+
+   **The legacy WordPress comments are NOT in those Discussions and must not be
+   put there.** Importing them got the posting account **banned by GitHub** a
+   few posts in. They are `content/posts/**/comments.json` now, rendered under
+   the widget by `partials/legacy-comments.html` — see
+   `scripts/transfer/Comments.java`'s entry above. Only 3 discussions exist in
+   the repo today and that is the correct, expected number.
    **Views are live** — the Worker was deployed and seeded on 2026-08-24 (2230
    rows, 13.89M views), and every route was verified against
    `foojay.io/api/views` on the day. What remains is only what was always going

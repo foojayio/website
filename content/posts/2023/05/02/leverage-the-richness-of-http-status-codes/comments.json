@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10456,
+    "depth": 0,
+    "author": "Kenneth Kousen",
+    "date": "2023-05-29T11:12:05",
+    "html": "<p>So the 201 code means you should either set the location header or return the newly saved object, but not both? I’ve been doing both for years. Thanks for this. :⁠-⁠)</p>"
+  },
+  {
+    "id": 10457,
+    "depth": 1,
+    "author": "Nicolas Frankel",
+    "authorUrl": "https://blog.frankel.ch/",
+    "date": "2023-05-29T11:25:10",
+    "html": "<p>That’s not what I understand. The specification is even more evasive on the subject:</p>\n<blockquote>\n <p>The request has been fulfilled and resulted in a new resource being<br>\n   created. The newly created resource can be referenced by the URI(s)<br>\n   returned in the entity of the response, with the most specific URI<br>\n   for the resource given by a Location header field. The response<br>\n   SHOULD include an entity containing a list of resource<br>\n   characteristics and location(s) from which the user or user agent can<br>\n   choose the one most appropriate. The entity format is specified by<br>\n   the media type given in the Content-Type header field. The origin<br>\n   server MUST create the resource before returning the 201 status code.<br>\n   If the action cannot be carried out immediately, the server SHOULD<br>\n   respond with 202 (Accepted) response instead.</p>\n <p>A 201 response MAY contain an ETag response header field indicating<br>\n   the current value of the entity tag for the requested variant just<br>\n   created, see section 14.19.</p>\n <p><em>— <a href=\"https://datatracker.ietf.org/doc/html/rfc2616#page-59\" rel=\"nofollow ugc noopener\" target=\"_blank\">RFC 2616 – 201 Created</a></em></p>\n</blockquote>"
+  }
+]

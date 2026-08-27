@@ -1,0 +1,40 @@
+[
+  {
+    "id": 12695,
+    "depth": 0,
+    "author": "Marit van Dijk",
+    "authorUrl": "http://maritvandijk.com",
+    "date": "2023-09-27T08:41:55",
+    "html": "<p>Hey Jamie, did you know that JetBrains also offer licenses for open source projects (<a href=\"https://www.jetbrains.com/community/opensource/#support\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.jetbrains.com/community/opensource/#support</a>) and educational licenses (<a href=\"https://www.jetbrains.com/community/education/#students\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.jetbrains.com/community/education/#students</a>), as well as developer recognition licenses (<a href=\"https://www.jetbrains.com/community/dev-recognition/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.jetbrains.com/community/dev-recognition/</a>) and licenses for user groups to raffle off (<a href=\"https://www.jetbrains.com/community/user-groups/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.jetbrains.com/community/user-groups/</a>)?</p>"
+  },
+  {
+    "id": 12697,
+    "depth": 0,
+    "author": "Jamie Coleman",
+    "date": "2023-09-27T09:15:14",
+    "html": "<p>Hey Marit</p>\n<p>Thanks for highlighting these additional licences. I had to stick to the “main” licence types otherwise the article would have gone on forever but hopefully people will see your comment and get the additional information they might need!</p>"
+  },
+  {
+    "id": 12701,
+    "depth": 0,
+    "author": "Johannes Bechberger",
+    "authorUrl": "https://mostlynerdless.de",
+    "date": "2023-09-27T13:37:03",
+    "html": "<p>Isn’t IntellJ also an example of the open-core model? IntelliJ Community is Apache 2.0 licensed.</p>"
+  },
+  {
+    "id": 12702,
+    "depth": 1,
+    "author": "Jamie Coleman",
+    "date": "2023-09-27T13:43:03",
+    "html": "<p>I think are right. Many companies use a combination of models to suit their audience and financial needs. Marit will be able to tell you for sure 🙂</p>"
+  },
+  {
+    "id": 12705,
+    "depth": 2,
+    "author": "Marit van Dijk",
+    "authorUrl": "https://maritvandijk.com/",
+    "date": "2023-09-27T15:27:20",
+    "html": "<p>Yes, Johannes is right. IntelliJ IDEA Community is open sourced under the Apache license.</p>"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 3383,
+    "depth": 0,
+    "author": "Theodore",
+    "date": "2022-05-08T10:26:47",
+    "html": "<p>In my opinion, that is an excellent article. Spring boot+Kotlin+coroutines FTW !!!</p>"
+  },
+  {
+    "id": 3384,
+    "depth": 1,
+    "author": "Bjorn van der Laan",
+    "date": "2022-05-08T11:12:12",
+    "html": "<p>Thank you and glad you enjoyed it!</p>"
+  },
+  {
+    "id": 6281,
+    "depth": 0,
+    "author": "Krisztian",
+    "date": "2022-10-08T22:41:31",
+    "html": "<p>Hi!</p>\n<p>This is an amazing article. Just the one what I was looking for to give me a quick start on my project. Just learning Kotlin after countless years of Java development. This article really helped to understand how the the usual reactive way writing Java database services are implemented with Kotlin coroutines style.</p>\n<p>Thanks you very much for it!</p>"
+  }
+]

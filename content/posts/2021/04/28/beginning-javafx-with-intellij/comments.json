@@ -1,0 +1,23 @@
+[
+  {
+    "id": 43,
+    "depth": 0,
+    "author": "Kiandra",
+    "date": "2020-11-11T06:07:09",
+    "html": "<p>Tried doing this as a plain JavaFX project but it didn’t work. module-info.java can’t find javafx.controls, and HelloWorld.java can’t use any JavaFX elements. Using version 15 of ZuluFX and IntelliJ IDEA Community 2020.2.</p>"
+  },
+  {
+    "id": 45,
+    "depth": 1,
+    "author": "Carl Dea",
+    "date": "2020-11-11T14:26:45",
+    "html": "<p>Kiandra,<br>\n  You maybe having the same issue with your module path or downloading an incorrect JDK for your operating system (contain jfx modules).</p>\n<p>Let’s take some baby steps and focus on the simpler plain project (“A JavaFX App on ZuluFX in 60 Seconds”) without an IDE.</p>\n<p>Sometimes You’ll find it easier to specify command line commands to see what’s going on.</p>\n<p>Carl</p>"
+  },
+  {
+    "id": 48,
+    "depth": 0,
+    "author": "Kiandra",
+    "date": "2020-11-12T05:12:43",
+    "html": "<p>Found the problem. I downloaded Zulu JDK instead of Zulu JDK FX. Make sure you download the right one! Thank you Carl for all the help.</p>"
+  }
+]

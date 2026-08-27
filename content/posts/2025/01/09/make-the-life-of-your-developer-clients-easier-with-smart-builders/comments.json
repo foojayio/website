@@ -1,0 +1,47 @@
+[
+  {
+    "id": 39191,
+    "depth": 0,
+    "author": "Scotty Boutin",
+    "date": "2025-01-17T14:26:38",
+    "html": "<p>This is a great article! I love how you highlighted multiple styles, and the pros/cons of each. I would supplement this with the use of the Immutables library, which lets you define these patterns without having to write as much code, instead relying on generated code. They allow you to customize – use builders by default, but they even support the “staged builder” where you cannot call “build” until all mandatory fields are set: immutables.github.io/immutable.html#staged-builder</p>"
+  },
+  {
+    "id": 39208,
+    "depth": 1,
+    "author": "Maximillian Arruda",
+    "authorUrl": "https://linktr.ee/maxdearruda",
+    "date": "2025-01-17T18:19:14",
+    "html": "<p>Thanks, Scotty! I’m delighted to knno that you liked this content!</p>\n<p>It’s amazing to know that there are libraries like immutables, lombok and many other were created to help developers in their development process day-by-day, but IMHO, I think get a good understand about your challenges and the pros/cons comes first than just get out and use libraries.</p>\n<p>Thanks again for your comment!</p>\n<p>See ya!</p>"
+  },
+  {
+    "id": 39211,
+    "depth": 0,
+    "author": "Fantaman",
+    "date": "2025-01-17T19:46:08",
+    "html": "<p>Pretty compresehensive article… still I’d have a few things that might be improved:<br>\n  * the requirements “highPriority: it’s optional and cannot be null” and “type: it’s optional and cannot be null” don’t make a lot of sense: how can it these attributes be optional if they can’t be null. Well, one could wrap them in an Optional, but that seems weird. Together with the earlier requirements it becomes clear that what’s actually meant is that those attributes don’t need to be specified by the client since they have specific default values (that are not null).<br>\n  * the argument “…but such exceptions will be thrown in runtime only. It’s not a good for anyone!” is a weak one, since also in the final solution you can get exceptions thrown at runtime if you passed null as arguments for title/message/recipient. In Kotlin you could enforce at compile time that a non-null String must be passed, but not in Java.</p>"
+  },
+  {
+    "id": 39219,
+    "depth": 1,
+    "author": "Maximillian Arruda",
+    "authorUrl": "https://linktr.ee/maxdearruda",
+    "date": "2025-01-18T01:07:54",
+    "html": "<p>Hi, Fantaman!</p>\n<p>Thank you so much for your comment! I really appreciate your feedback.</p>\n<p>I appreciate you pointing out these aspects! Regarding the term “optional,” in this context, it means that the developer building the `Notification` object is not required to provide this information, as a default value will be used. On the other hand, “cannot be null” means that the `Notification` object itself cannot store a null reference for this attribute—that was a design decision I made for the example. If the `Notification` object were to store an `Optional`, it would be shifting the responsibility to another part of the system to decide how to handle it. However, in this example, the goal is to create a builder process for a `Notification` object that ensures default values for non-required attributes that were not explicitly provided during creation.</p>\n<p>I’ll make sure to refine these explanations to avoid any misunderstandings.</p>\n<p>Regarding the phrase: _”but such exceptions will be thrown at runtime only. It’s not good for anyone!”_, what I meant was that, from a developer’s perspective, encountering a runtime exception—even if wrapped in an exception handler—requires additional analysis to understand what went wrong, right? And if a runtime error reaches the user, I’m sure you’ll agree that it would negatively impact the user experience. The same applies to developers using an API—if an unexpected exception occurs at runtime, it disrupts the workflow. That’s why, in some cases, using checked exceptions is a good practice, as it signals to developers that a particular operation might result in an expected but undesirable exception.</p>\n<p>Again, I truly appreciate your comments and insights! Thanks for taking the time to share your thoughts.</p>\n<p>See ya! 😊</p>"
+  },
+  {
+    "id": 40392,
+    "depth": 0,
+    "author": "Lrkwz",
+    "date": "2025-02-04T10:33:31",
+    "html": "<p>Very stimulating content, thank you. I have a couple of doubts:</p>\n<p>* the code you propose is a quite verbose,: it would be useful finding a way to reduce the boilerplate code (maybe some specifically crafted annotations)<br>\n  * how does this approach integrate with JPA requirements? no args constructor and similar requirements</p>"
+  },
+  {
+    "id": 40681,
+    "depth": 1,
+    "author": "Maximillian Arruda",
+    "authorUrl": "https://linktr.ee/maxdearruda",
+    "date": "2025-02-07T13:56:27",
+    "html": "<p>Hi, Lrkwz!</p>\n<p>Thanks for your comment! It’s nice to know that this content is a stimulating one! That’s one of the goal of this content: bring insights how could we be improving our design code skills, but, however, there is another goal that it’s so important as well: by example, implementing a code like that, by practice, will bring the opportunity to anyone is reading it to learn how these concepts works behind of scenes.</p>\n<p>Of course, it’s amazing to got these amazing capability by using an single annotation only, but it doesn’t bring the opportunity to learn how such capability works and how it was implemented. Libraries like Lombok, or Immutables help us to achive this goal, but these libs uses annotation processors behind of scenes, which requires, at least, some addicional step during the building process of the project. Also, to make these librares works with any kind of IDE it’s required some configuration on IDE side by adding plugins or something like that. So, once you assume a library you will assume all their drawbacks too.</p>\n<p>Regarding the code verbosity, such assumption it relative, IMHO. If these verbosity helps to keep the code undestandable to who will maintain or use these code, so, why not to use it in our favor?</p>\n<p>I’m not saying the sample code in the content is the best code to solve any similar problem as the proposed one, but it should and can be improved to fit better to target context: that’s the beauty of software development! We can be working and improving ever our code desing according the business requirements. The code is here to solve a business problem, not the inverse.</p>\n<p>Regarding JPA, I would say that we need to accept the fact that we need to keep a no args constructor in our entities, once it’s part of the requirements of using the Jakarta Persistence Specification to model entities in our applications. Looks like it’s possible to use Java Records as Embeddedle objects in a entity class – it should be an opportunity to learn more about this approach. But, you can make the mencioned approaches (no args constructors, telescoping constructors, static factory methods and builders) coexist together. Maybe you need to put some documentation on the classes, like javadoc, to help who will use your class how to construct instances of the classes that you’re providing.</p>\n<p>Again, thanks for your comment, Lrkwz!!! See ya!!!</p>"
+  }
+]

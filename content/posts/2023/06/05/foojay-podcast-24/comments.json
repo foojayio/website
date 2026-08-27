@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10567,
+    "depth": 0,
+    "author": "Maarten V",
+    "date": "2023-06-05T20:41:59",
+    "html": "<p>Hi guys, thanks for the podcast. I really enjoyed the discussion on forming communities (both for current and next generation developers). Short question, Stephan referenced a twitter wall but I wasn’t able to find any info on that. Do you happen to have a link?</p>\n<p>Keep up the good work!</p>"
+  },
+  {
+    "id": 10575,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2023-06-06T06:41:35",
+    "html": "<p>Hi Maarten, this is the Twitter wall project: <a href=\"https://github.com/TweetWallFX/TweetwallFX\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/TweetWallFX/TweetwallFX</a><br>\n  I also added the link to the shownotes.<br>\n  Thanks for listening!<br>\n  Frank</p>"
+  }
+]

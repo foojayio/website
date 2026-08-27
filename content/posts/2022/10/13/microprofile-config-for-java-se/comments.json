@@ -1,0 +1,16 @@
+[
+  {
+    "id": 9977,
+    "depth": 0,
+    "author": "quaddan",
+    "date": "2023-05-03T19:56:14",
+    "html": "<p>You can use CDI with SmallRye Config with Java SE 20.<br>\n  You only need Weld SE Core.</p>"
+  },
+  {
+    "id": 9978,
+    "depth": 1,
+    "author": "Rudy De Busscher",
+    "date": "2023-05-03T21:25:19",
+    "html": "<p>But it is not really Java SE in that case since you are using MP-Config as part of the CDI container.</p>"
+  }
+]

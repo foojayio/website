@@ -9,10 +9,13 @@
        post threads don't drown the real discussions in "General".
     2. Install the giscus app on the repo: https://github.com/apps/giscus
     3. Fill in [params.giscus] in hugo.toml. The two ids come from
-       https://giscus.app, or straight out of
-       `jbang scripts/transfer/Comments.java --print-config`.
+       https://giscus.app.
   Until all four values are set this partial renders nothing, so an
-  unconfigured build simply has no comment section.
+  unconfigured build simply has no comment section. All four ARE set and all
+  three steps are done -- the repo has Discussions enabled with a "Blog
+  Comments" category, and giscus has created threads there on its own. (The
+  `--print-config` flag that used to print the block is gone with the import;
+  see below.)
 
   WHICH PAGES GET A SECTION, AND THE TERM THEY USE, ARE partials/comments-term.html.
   That partial is the single definition -- partials/toc.html asks it the same
@@ -35,12 +38,17 @@
   inside "...-postgresql-connections-part-2-batching"). Strict matches on a hash
   of the term instead, which is exact.
 
-  Legacy comments: the WordPress comments (580 of them, on 270 posts) are moved
-  into these discussions by scripts/transfer/Comments.java, which writes each
-  thread exactly the way giscus itself would, so an imported thread and one
-  giscus creates for a brand-new post are indistinguishable. Each imported
-  comment opens with an "Originally posted by ... in Foojay.io Discussions" line,
-  because the commenters' GitHub identities are unknown.
+  LEGACY COMMENTS ARE NOT IN HERE, and that is not the original plan.
+  scripts/transfer/Comments.java used to post the 580 WordPress comments into
+  these discussions, written exactly the way giscus itself would so an imported
+  thread was indistinguishable from a real one. GitHub BANNED THE ACCOUNT it
+  posted as, a few posts in -- several hundred API-driven comment creations from
+  a fresh account looks exactly like spam from their side. So the archive lives
+  in the repo now: one comments.json per post bundle, rendered as its own section
+  under this one by partials/legacy-comments.html. This partial owns NEW comments
+  only; see Comments.java's class comment for why that split is the better shape
+  anyway (those commenters' GitHub identities are unknown, so nobody could ever
+  have edited or replied to their own 2020 comment here regardless).
 -->
 {{ $term := partial "comments-term.html" . }}
 {{ with $term }}

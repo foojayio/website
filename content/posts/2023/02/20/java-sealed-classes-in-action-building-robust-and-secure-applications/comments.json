@@ -1,0 +1,17 @@
+[
+  {
+    "id": 8863,
+    "depth": 0,
+    "author": "Anas",
+    "date": "2023-03-02T22:20:34",
+    "html": "<p>In the example of “Preventing Unwanted Subtype Extensions”, the class PaymentMethod does not permit any other type. On the other hand, the only difference between the StolenCard and the other two classes is that the StolenCard class is not declared as final.</p>\n<p>This is ambiguous for me.</p>\n<p>First, if the class/interface is declared as sealed but does not permit any other type, how can another class/interface extend it?</p>\n<p>Second, what prevents me of declaring the StolenCard as final? will it work this way? if yes, then I did not gain any benefit. If No, why?</p>"
+  },
+  {
+    "id": 8864,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2023-03-02T23:33:32",
+    "html": "<p>Hi Anas, excellent catch; I made an error during copying/pasting. I have fixed it now.</p>\n<p>The idea is,</p>\n<p>The PaymentMethod class is defined as sealed, which means that it cannot be extended beyond the classes defined within the file.</p>\n<p>Two final classes, CreditCard and DebitCard, are defined as subtypes of PaymentMethod, indicating that they are the only allowed extensions of the PaymentMethod class.</p>\n<p>However, a third class, StolenCard, is defined as a subtype&nbsp; PaymentMethod outside the file. Since the PaymentMethod class is sealed, it cannot be extended by this unauthorized subtype, and a compiler error will be generated.</p>"
+  }
+]

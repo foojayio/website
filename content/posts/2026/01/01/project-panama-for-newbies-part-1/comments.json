@@ -1,0 +1,114 @@
+[
+  {
+    "id": 2950,
+    "depth": 0,
+    "author": "Updated! (Feb 15, 2002)",
+    "date": "2022-04-05T07:50:37",
+    "html": "<p>I assume this “Updated! (Feb 15, 2002)” meant the “Updated! (Feb 15, 2022)” ?</p>"
+  },
+  {
+    "id": 3248,
+    "depth": 0,
+    "author": "Ken",
+    "date": "2022-04-29T23:53:58",
+    "html": "<p>jextract generate java code but not class file. Something seems to be missing in this tutorial.</p>"
+  },
+  {
+    "id": 3367,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-05-06T20:23:51",
+    "html": "<p>Did you resolve your issue? Let me know what else I can do to fix any issues in the code or article.</p>"
+  },
+  {
+    "id": 3249,
+    "depth": 0,
+    "author": "Ken",
+    "date": "2022-04-29T23:58:16",
+    "html": "<p>Nevermind… jextract shouldn’t be run with –source for this tutorial. But after that I get cannot find symbol error for MemorySegment</p>"
+  },
+  {
+    "id": 3366,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-05-06T20:23:04",
+    "html": "<p>Not a big deal. Hopefully, it’s clear.</p>"
+  },
+  {
+    "id": 3250,
+    "depth": 0,
+    "author": "Ken",
+    "date": "2022-04-30T00:27:58",
+    "html": "<p>Oh and the output surely should be “Hello World! Panama style” instead of just “Hello World”. And instead of printf(str), it probably should be printf(cString)?</p>"
+  },
+  {
+    "id": 3363,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-05-06T20:21:23",
+    "html": "<p>fixed. Thanks!</p>"
+  },
+  {
+    "id": 3251,
+    "depth": 0,
+    "author": "Ken",
+    "date": "2022-04-30T00:34:43",
+    "html": "<p>The first example is also missing “import jdk.incubator.foreign.MemorySegment;”</p>"
+  },
+  {
+    "id": 3365,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-05-06T20:21:57",
+    "html": "<p>Fixed. Thanks!</p>"
+  },
+  {
+    "id": 3252,
+    "depth": 0,
+    "author": "Ken",
+    "date": "2022-04-30T00:59:50",
+    "html": "<p>Second example should be ‘cString2.getUtf8String(0);’ instead of just cString</p>"
+  },
+  {
+    "id": 3364,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-05-06T20:21:45",
+    "html": "<p>Fixed. Thanks!</p>"
+  },
+  {
+    "id": 3253,
+    "depth": 0,
+    "author": "Ken",
+    "date": "2022-04-30T01:15:18",
+    "html": "<p>For the double example, I can’t find C_DOUBLE in my build. Has to “import jdk.incubator.foreign.ValueLayout;” and use ValueLayout.JAVA_DOUBLE instead.</p>"
+  },
+  {
+    "id": 3362,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-05-06T20:19:35",
+    "html": "<p>Ken,<br>\n  I’ve updated the article regarding the <code>jextract</code> generated <code>C_DOUBLE</code>. Thank you for pointing that out.</p>"
+  },
+  {
+    "id": 5009,
+    "depth": 0,
+    "author": "Kazu",
+    "date": "2022-07-22T22:01:46",
+    "html": "<p>Thank you for the helpful article.<br>\n  I found an error in the example.<br>\n  “MemorySession.newConfine” is error.<br>\n  “MemorySession.openConfined” is correct.</p>"
+  },
+  {
+    "id": 5011,
+    "depth": 1,
+    "author": "Carl Dea",
+    "authorUrl": "http://carlfx.wordpress.com",
+    "date": "2022-07-22T22:10:01",
+    "html": "<p>Kazu,</p>\n<p>Good catch! I made the change.</p>\n<p>Glad you like these articles!</p>\n<p>Carl</p>"
+  }
+]

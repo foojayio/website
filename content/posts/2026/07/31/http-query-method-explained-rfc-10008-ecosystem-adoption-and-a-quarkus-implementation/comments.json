@@ -1,0 +1,16 @@
+[
+  {
+    "id": 94820,
+    "depth": 0,
+    "author": "Mario Daniel Ruiz Saavedra",
+    "date": "2026-08-01T22:04:56",
+    "html": "<p>I’ve worked on some of those PRs, and yes, Quarkus makes it very easy to just add the annotation yourself, and the Jakarta REST project already has a discussion about this RFC: <a href=\"https://github.com/jakartaee/rest/issues/1345\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/jakartaee/rest/issues/1345</a> (some members are very against any addition outside of Roy Fielding’s dissertation, to Jakarta REST). That’s why I didn’t think of adding anything to Quarkus proper, it is way leaner than other frameworks. I have a tracker for QUERY method adoption that I update regularly, I’ll leave the URL here: <a href=\"https://gist.github.com/desiderantes/2c7e657649cb92672d68e580fb69aa1d\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://gist.github.com/desiderantes/2c7e657649cb92672d68e580fb69aa1d</a></p>"
+  },
+  {
+    "id": 94900,
+    "depth": 1,
+    "author": "Hüseyin Akdoğan",
+    "date": "2026-08-02T13:47:15",
+    "html": "<p>Thanks for the context and for the tracker. Your Gist maps QUERY adoption across a far wider set of implementations than I covered in the post; had I known about it, I would have linked to it there.</p>"
+  }
+]

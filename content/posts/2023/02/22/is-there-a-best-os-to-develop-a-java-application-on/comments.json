@@ -1,0 +1,23 @@
+[
+  {
+    "id": 8743,
+    "depth": 0,
+    "author": "Björn",
+    "date": "2023-02-22T13:47:58",
+    "html": "<p>Sorry, I think this article is a bit odd.</p>\n<p>[..]the most important choice is which Integrated Development Environment (IDE) you select; not the choice of the OS. [..]</p>\n<p>Why write another hundreds words of strange arguments if you already came to a conclusion? Even worse it ends with:</p>\n<p>[..]The critical point is that choosing Mac, Windows, or Linux is a bit like politics or religion; people have strong views that their choice is correct and often shut their ears to a different viewpoint (which I feel is interesting).[..]</p>\n<p>So what is the best OS to Develop a Java Application on? It doesn’t matter. Do we Java developers hook into syscalls? No. Do we need anything from the OS? No. OS is personal matter or forced onto you because other tools depend on the OS. Have fun with Microsoft Office on Linux.</p>"
+  },
+  {
+    "id": 8876,
+    "depth": 0,
+    "author": "Bruce Phillips",
+    "date": "2023-03-03T13:23:25",
+    "html": "<p>I also like to use Intellij for writing code, but the version JetBrains provides for Linux is terrible – slow/freezes up/etc. It actually forced me to switch to Windows for writing code even though all our Java apps run in Linux servers in production.</p>"
+  },
+  {
+    "id": 9195,
+    "depth": 0,
+    "author": "Wolf",
+    "date": "2023-03-22T14:03:09",
+    "html": "<p>Interesting article. However, as you say. You are developing for Linux? If your customer set is using Linux, there is a vast delta to other systems. Windows is very different. Apple’s OS is far more refined for GUI type apps. If your a CLI app, the delta is smaller. But for GUI based apps, develop on one of the systems that your users use or on all of them. Your user experiance and your software reliablity will change from system to system. If you are not developing for and on the system(s) of your target audience. Your app may work perfectly on your system, but your users on other systems will see something different. Java is great. But there are subtle differences between how it handles windows vs macOS vs Linux.</p>"
+  }
+]

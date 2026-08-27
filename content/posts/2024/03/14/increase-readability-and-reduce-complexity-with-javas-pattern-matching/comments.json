@@ -1,0 +1,23 @@
+[
+  {
+    "id": 18490,
+    "depth": 0,
+    "author": "Harald",
+    "date": "2024-03-15T08:28:10",
+    "html": "<p>I am looking forward to using such patterns, but it is blatantly obvious from the example how sorely Java is missing the possibility to create arbitrary union types. The method signature should be</p>\n<pre>public String processElement(String | Person element) {</pre>\n<p>for best readability. Seeing Object as the parameter type in production code would make me extremely nervous.</p>"
+  },
+  {
+    "id": 18493,
+    "depth": 0,
+    "author": "Jonathan Vila",
+    "date": "2024-03-15T09:20:01",
+    "html": "<p>@Harald Thanks a lot for your comment.<br>\n  I agree that having union types would have made the method signature clearer. The example is an oversimplification, but in real life, you could use a common parent in the signature, or use sealed classes (<a href=\"https://spin.atomicobject.com/java-sealed-interface/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://spin.atomicobject.com/java-sealed-interface/</a>)<br>\n  In any case that would not change the use of the pattern matching.<br>\n  But I totally support the union types as a way to define the list of possible types.</p>"
+  },
+  {
+    "id": 18694,
+    "depth": 0,
+    "author": "Raghav",
+    "date": "2024-03-22T17:22:52",
+    "html": "<p>Really a great article the way it explained about pattern matching and switch expressions. Really Helpful and informative</p>"
+  }
+]

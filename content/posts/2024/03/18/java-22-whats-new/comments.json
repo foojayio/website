@@ -1,0 +1,16 @@
+[
+  {
+    "id": 18873,
+    "depth": 0,
+    "author": "Lin",
+    "date": "2024-03-28T01:13:57",
+    "html": "<p>In the Class-File API section, the last link to JEP 457 is jump to JEP 447 actually but not JEP 457</p>"
+  },
+  {
+    "id": 18878,
+    "depth": 1,
+    "author": "Loic Mathieu",
+    "date": "2024-03-28T08:17:51",
+    "html": "<p>Thanks for reporting, I updated the link.</p>"
+  }
+]

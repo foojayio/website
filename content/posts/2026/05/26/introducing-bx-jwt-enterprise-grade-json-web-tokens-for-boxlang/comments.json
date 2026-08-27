@@ -1,0 +1,9 @@
+[
+  {
+    "id": 89287,
+    "depth": 0,
+    "author": "sam diago",
+    "date": "2026-05-27T04:37:31",
+    "html": "<p>Interesting introduction to bx-jwt and its enterprise-focused approach to JSON Web Token management in BoxLang. I like how the article highlights secure authentication, scalability, and developer-friendly integration for modern enterprise applications. JWT-based authentication has become essential for APIs, cloud-native apps, and distributed systems, so having a dedicated enterprise-grade solution inside the BoxLang ecosystem is a valuable addition for developers and organizations alike. Great technical overview and practical direction for secure application development.</p>\n<p><a href=\"https://atechreview.com/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://atechreview.com/</a></p>"
+  }
+]

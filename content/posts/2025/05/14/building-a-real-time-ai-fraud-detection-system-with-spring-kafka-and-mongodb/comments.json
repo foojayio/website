@@ -1,0 +1,9 @@
+[
+  {
+    "id": 59594,
+    "depth": 0,
+    "author": "jmzc",
+    "date": "2025-08-03T11:37:59",
+    "html": "<p>Thanks.<br>\n  I’ve used MongoDbEmbeddingStore (from dev.langchain4j.langchain4j-mongodb-atlas) to store and search embeddings. I recommend it. I’ve used a different collection for embeddings (I don’t use transactions collection for storing embeddings). Indeed, I preload only embeddings of suspicious transactions for every user, so every new transaction is checked against this collection</p>"
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 31292,
+    "depth": 0,
+    "author": "ctipper",
+    "date": "2024-08-08T09:51:45",
+    "html": "<p>With scene graph you only need to add nodes once, this code repeatedly redraws the scene graph, no wonder it slows down</p>"
+  }
+]

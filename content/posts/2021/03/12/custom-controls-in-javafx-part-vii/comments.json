@@ -1,0 +1,17 @@
+[
+  {
+    "id": 295,
+    "depth": 0,
+    "author": "Jan Schenkel",
+    "date": "2021-03-23T14:41:53",
+    "html": "<p>Truly inspiring article, Gerrit – rounding off an excellent series on how to go beyond the standard JavaFX controls.<br>\n  Perusing the source on github, there’s just one thing about ResizeHelper that left me pondering: it currently adds the ResizeListener instance ‘deeply’ by iterating over the child nodes, to prevent that nodes near the edge of the scene interfere with the resize magic.<br>\n  Could the same effect not be accomplished by means of a single EventFilter at the scene level instead ? That approach would be a little more ‘lightweight’ in terms of the number of event handlers called. This seemed to work fine in a test app, buut maybe I’m overlooking something – and in that case I would love to know what 😉<br>\n  Cheers, Jan.</p>"
+  },
+  {
+    "id": 296,
+    "depth": 1,
+    "author": "Gerrit Grunwald",
+    "authorUrl": "https://harmoniccode.blogspot.com/",
+    "date": "2021-03-23T14:47:01",
+    "html": "<p>Hi Jan,<br>\n  Well to be honest that might be true, I just found that solution in my collection of useful methods and used it without further thinking about it. So my suggestion would be, just create a branch from JdkButler and replace my solution with yours…then we both will know if it works as expected 🙂<br>\n  What do you think…?</p>"
+  }
+]

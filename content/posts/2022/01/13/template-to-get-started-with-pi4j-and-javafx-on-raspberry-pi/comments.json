@@ -1,0 +1,17 @@
+[
+  {
+    "id": 11642,
+    "depth": 0,
+    "author": "jb83",
+    "date": "2023-07-31T20:39:22",
+    "html": "<p>Hello, three pictures are not showing (they point to bad urls). The three pictures are named: Wiring, Model-View-Controller concept, and MVC concept.</p>"
+  },
+  {
+    "id": 11654,
+    "depth": 1,
+    "author": "Frank Delporte",
+    "authorUrl": "https://webtechie.be/",
+    "date": "2023-08-01T06:37:39",
+    "html": "<p>Hi, thanks for pointing out! Seems the original images moved in the repo. They are now copied here into Foojay so this shouldn’t happen again…</p>"
+  }
+]

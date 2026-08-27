@@ -1,0 +1,31 @@
+[
+  {
+    "id": 2748,
+    "depth": 0,
+    "author": "Niclas Hedhman",
+    "date": "2022-03-15T15:00:37",
+    "html": "<p>I dived into the deep end (bet a new company on it) of Java in late 1996, and did the first prototype on JDK 1.0.3. “Less is More” was the slogan at the time, and I ran two JVMs plus Apache+ajp plus mail server on 32MB RAM. In 1.0.3 the java.net classes were so unreliable that I needed to write my own C/C++ for networking.</p>\n<p>In essence; good article.</p>\n<p>Correction in “Stability”; JDK 1.0.x didn’t have the `jar` tool, so no jar files exists from JDK 1.0 era. IIRC, it came with JDK 1.1, which was a massive update, in early 1997. And the `javac` 1.0.x (neither did 1.1.0) didn’t always generate code that was according to JVM spec, so .class files from back then MAY work (my oldest Java code stopped working in 1.4 or 1.5) and it didn’t find all syntax errors either, so code from back then doesn’t necessarily compile with modern compilers.</p>"
+  },
+  {
+    "id": 2753,
+    "depth": 1,
+    "author": "A N M Bazlur Rahman",
+    "authorUrl": "https://bazlur.com/",
+    "date": "2022-03-15T16:26:29",
+    "html": "<p>Thank you for your feedback; I meant to say here that a pretty old jar can be run with modern java. I wanted to stress backward compatibility, which was true for all the distribution in the last decade, right? I’ll fix the article. Thanks again.</p>"
+  },
+  {
+    "id": 2775,
+    "depth": 0,
+    "author": "Prof Anand Achyutrao Barbind",
+    "date": "2022-03-17T15:02:33",
+    "html": "<p>Thanks for the article. I love working in Java.<br>\n  I was looking for an extensive review on Java to be discussed with my students.</p>"
+  },
+  {
+    "id": 2794,
+    "depth": 0,
+    "author": "Kedarnath Tripathy",
+    "date": "2022-03-19T20:14:15",
+    "html": "<p>Really Excellent, Readable drafting for those who they confused of about the strength and versatility of this language. Because in my good sense this language brought such a revolutionary paradigm to the mankind!</p>"
+  }
+]

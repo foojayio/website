@@ -1,0 +1,9 @@
+[
+  {
+    "id": 24850,
+    "depth": 0,
+    "author": "Pierre-Yves",
+    "date": "2024-06-14T12:12:09",
+    "html": "<p>Thanks for this post !</p>\n<p>Line 3 and line 12 could be simplify if the startProcessing was taking a User as the second parameter and be responsible of retrieving it.</p>\n<p>This would avoid to retrieve to inline a switch twice in the startProcessing method parameter passing 🙂</p>"
+  }
+]

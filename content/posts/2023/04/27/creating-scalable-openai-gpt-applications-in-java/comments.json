@@ -1,0 +1,16 @@
+[
+  {
+    "id": 9838,
+    "depth": 0,
+    "author": "Tobiloba",
+    "date": "2023-04-28T08:59:33",
+    "html": "<p>I see that you save the point of interest as text in the DB but the response gotten from ChatGPT is JSON. Does this mean you convert the response into string using libraries like gson before saving it in the database?</p>"
+  },
+  {
+    "id": 9841,
+    "depth": 1,
+    "author": "Denis Magda",
+    "date": "2023-04-28T14:03:43",
+    "html": "<p>Hey,</p>\n<p>The response is a String object in the JSON format [1]. The repository takes this JSON string as is and stores to the database [2].</p>\n<p>Presently, Spring Data auto-generates the CREATE TABLE statement on the startup and sets the “point of interest” column’s type to “text” (or “varchar”, don’t remember).<br>\n  However, it’s always possible to ask Spring Data to use the “json” or “jsonb” type for the column if you wish to query the JSON at the database level.</p>\n<p>Finally, Vaadin displays a list of PointsOfInterests. Those are generated using the org.json library [3].</p>\n<p>Let me know if you have other questions. Hope this helps.</p>\n<p>[1] <a href=\"https://github.com/YugabyteDB-Samples/budget-journey-gpt/blob/main/src/main/java/com/yugabyte/com/TripsAdvisorService.java#L103\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/YugabyteDB-Samples/budget-journey-gpt/blob/main/src/main/java/com/yugabyte/com/TripsAdvisorService.java#L103</a><br>\n  [2] <a href=\"https://github.com/YugabyteDB-Samples/budget-journey-gpt/blob/main/src/main/java/com/yugabyte/com/TripsAdvisorService.java#L74\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/YugabyteDB-Samples/budget-journey-gpt/blob/main/src/main/java/com/yugabyte/com/TripsAdvisorService.java#L74</a><br>\n  [3] <a href=\"https://github.com/YugabyteDB-Samples/budget-journey-gpt/blob/main/src/main/java/com/yugabyte/com/TripsAdvisorService.java#L114\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/YugabyteDB-Samples/budget-journey-gpt/blob/main/src/main/java/com/yugabyte/com/TripsAdvisorService.java#L114</a></p>"
+  }
+]

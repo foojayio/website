@@ -1,0 +1,37 @@
+[
+  {
+    "id": 42,
+    "depth": 0,
+    "author": "Kiandra",
+    "date": "2020-11-11T05:52:51",
+    "html": "<p>I followed this tutorial exactly, but got an error when I tried to compile the code:<br>\n  src/com.mycompany.helloworld/module-info.java:2: error: module not found: javafx.controls</p>\n<p>My Java version:<br>\n  openjdk version “15.0.1” 2020-10-20<br>\n  OpenJDK Runtime Environment Zulu15.28+13-CA (build 15.0.1+8)<br>\n  OpenJDK 64-Bit Server VM Zulu15.28+13-CA (build 15.0.1+8, mixed mode, sharing)</p>"
+  },
+  {
+    "id": 44,
+    "depth": 1,
+    "author": "Carl Dea",
+    "date": "2020-11-11T14:08:07",
+    "html": "<p>(Updated comment)<br>\n  Kiandra,<br>\n  Would you mind zipping up your project and sending it to me?<br>\n  carldea at gmail dot com<br>\n  I’d be glad to look at what you have.</p>\n<p>In the meantime let’s see.<br>\n  Things to look for:<br>\n  In module-info.java has requires javafx.controls module.</p>\n<p>To compile make sure your environment variables are set properly. When using ZuluFX the module would be available.<br>\n  When compiling make sure to have the following:<br>\n  –add-modules javafx.controls</p>\n<p>While somewhat a subtle difference, I believe the article is using JavaFX 14.0.2 instead of 15.0.1. I don’t believe it matters, but better to compare apples to apples👍🏻.</p>\n<p>Assuming you’ve used Azul’s JDK w/JFX download chooser at: <a href=\"https://www.azul.com/downloads/zulu-community\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://www.azul.com/downloads/zulu-community</a></p>\n<p>In the article I don’t mention how to persist environment variables which can be added to your system depending on your os.<br>\n  But in your current session (terminal/console) the article sets and exports the JAVA_HOME and PATH environment variables respectively.</p>\n<p><code><br>\n   $ java --list-modules<br>\n   .<br>\n   .<br>\n   .<br>\n   javafx.base@15.0.1<br>\n   javafx.controls@15.0.1<br>\n   javafx.fxml@15.0.1<br>\n   javafx.graphics@15.0.1<br>\n   javafx.media@15.0.1<br>\n   javafx.swing@15.0.1<br>\n   javafx.web@15.0.1<br>\n   .<br>\n   .<br></code><br>\n  You should see the JavaFX related modules from the ZuluFX.</p>\n<p>Thank you,<br>\n  Carl</p>"
+  },
+  {
+    "id": 46,
+    "depth": 1,
+    "author": "Carl Dea",
+    "date": "2020-11-11T18:24:26",
+    "html": "<p>Kiandra,<br>\n  I emailed you with additional notes. I recently from scratch downloaded the latest ZuluFX 15 release and went through the tutorial and it works for me.<br>\n  I believe it’s possible the file/project structure is incorrect.<br>\n  In a nutshell after creating the directory <strong>helloworld/src</strong> you’ll want to reside in the directory `helloworld` (cd helloworld) before compiling and running the example.</p>\n<p>If this isn’t the issue, you may want to echo out your JAVA_HOME and PATH env variables.</p>\n<p>We’ll get you up in running in no time. Thanks for sharing!<br>\n  -Carl</p>"
+  },
+  {
+    "id": 47,
+    "depth": 0,
+    "author": "Kiandra",
+    "date": "2020-11-12T05:08:17",
+    "html": "<p>Found the problem. I downloaded the Zulu JDK instead of the Zulu JDK FX package. Make sure you get the right one! Thank you Carl for all the help.</p>"
+  },
+  {
+    "id": 10650,
+    "depth": 0,
+    "author": "Sedrick",
+    "date": "2023-06-12T15:20:53",
+    "html": "<p>I was testing Zulufx and used your tutorial as a guide. Everything works fine. Thank you! I do have one question, though. I see you added `requires javafx.controls;` to your module-info file. I was thinking that since `JavaFX` is bundled with the JDK, this does not seem right. I have never had to use `requires` for anything else that is bundled in the JDK, so I took that out of the module-info file to see what would happen. The app ran without it. Does `requires javafx.controls;` have to be in the module-info file? If so, what are the drawbacks of not having it there since the program ran without it?</p>"
+  }
+]

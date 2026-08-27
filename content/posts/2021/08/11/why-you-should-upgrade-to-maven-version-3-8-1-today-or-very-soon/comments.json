@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1552,
+    "depth": 0,
+    "author": "guai",
+    "date": "2021-11-17T07:43:06",
+    "html": "<p>Enforcing https was really stupid idea. Because of that I bet people would use 3.6.3 for ages. We would. We use VPN and we don’t give a fuck about MITM</p>"
+  },
+  {
+    "id": 1636,
+    "depth": 0,
+    "author": "Brian Vermeer",
+    "date": "2021-11-23T08:29:12",
+    "html": "<p>That last sentence seems quite unnecessary. Nevertheless, a VPN will not fully help you in this case.<br>\n  Other than that you can still use HTTP repo’s only the default settings are now HTTPS and for a good reason!</p>"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 10069,
+    "depth": 0,
+    "author": "tpkloop",
+    "date": "2023-05-08T11:19:59",
+    "html": "<p>Thx for the article. Just wondering for a second what:<br>\n  this.runContinuation = this::runContinuation</p>\n<p>does *exactly*. I’m somewhat confused.</p>"
+  },
+  {
+    "id": 10073,
+    "depth": 1,
+    "author": "Hüseyin Akdoğan",
+    "date": "2023-05-08T14:31:19",
+    "html": "<p>I shared the VirtualThread class in the article. <a href=\"https://github.com/openjdk/loom/blob/75a5161d853893dee740bdf458f4461fc449aea1/src/java.base/share/classes/java/lang/VirtualThread.java\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/openjdk/loom/blob/75a5161d853893dee740bdf458f4461fc449aea1/src/java.base/share/classes/java/lang/VirtualThread.java</a> You can see the runContinuation variable with type Runnable declared as private final, on the other hand, the class has a private void runContinuation method. So the business logic of the method is associated with Runnable in the line you quoted.</p>"
+  }
+]

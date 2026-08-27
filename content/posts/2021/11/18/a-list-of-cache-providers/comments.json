@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1630,
+    "depth": 0,
+    "author": "zoho",
+    "date": "2021-11-22T15:40:42",
+    "html": "<p>Thanks for your great summarization of caching tools.<br>\n  I need a caching mechanism to skip inserting repeated rows in multiple isolated ETL systems, if i had a cache capable of keeping 100s millions of rows(string of 50 chars) in it, it would give me great hit percent and so much less pressure on database.<br>\n  It needs to be distributed(having multiple ETL machines), each ETL could update it async, and have a local instance of cache to query it as fast as possible.<br>\n  What would you recommend?</p>"
+  },
+  {
+    "id": 1641,
+    "depth": 1,
+    "author": "Nicolas Frankel",
+    "date": "2021-11-23T19:49:34",
+    "html": "<p>Hazelcast.</p>\n<p>Disclaimer: I work for Hazelcast</p>"
+  }
+]

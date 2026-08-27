@@ -1,0 +1,40 @@
+[
+  {
+    "id": 32389,
+    "depth": 0,
+    "author": "Samot",
+    "date": "2024-08-20T16:15:19",
+    "html": "<p>Clickbait. This has nothing to do with the “internals”. There are few things that could be less “internal” than the PUBLIC API of the ComponenScan annotation.</p>"
+  },
+  {
+    "id": 33129,
+    "depth": 1,
+    "author": "Mahendra Rao B",
+    "authorUrl": "https://bs-mahi.medium.com/",
+    "date": "2024-08-31T09:29:32",
+    "html": "<p>Thanks for your feedback.</p>"
+  },
+  {
+    "id": 33125,
+    "depth": 0,
+    "author": "Fantaman",
+    "date": "2024-08-31T09:02:50",
+    "html": "<p>The code snippet given as example for basePackageClasses() is actually just another example for basePackages. It should be corrected to e.g.</p>\n<p>@ComponentScan(basePackageClasses = {\"com.bsmlabs.microservices.movie\", \"com.bsmlabs.microservices.payment\"})<br>\n  public class MovieApplication {<br>\n  }</p>\n<p>And the explanation for “scopedProxy” says that “developers should create proxies” – it should probably be “the framework” or “ApplicationContext” instead of developers.</p>"
+  },
+  {
+    "id": 33127,
+    "depth": 1,
+    "author": "Mahendra Rao B",
+    "authorUrl": "https://bs-mahi.medium.com/",
+    "date": "2024-08-31T09:28:46",
+    "html": "<p>I sincerely appreciate your time in reviewing my article and offering your feedback, Fantaman. I acknowledge that I initially overlooked certain aspects, but I have now made the necessary corrections as requested.</p>\n<p>Thanks,<br>\n  Mahendra</p>"
+  },
+  {
+    "id": 33126,
+    "depth": 0,
+    "author": "Mahendra Rao B",
+    "authorUrl": "https://bs-mahi.medium.com/",
+    "date": "2024-08-31T09:17:47",
+    "html": "<p>Thanks Baeldung team for featuring my article in your newsletter.</p>"
+  }
+]

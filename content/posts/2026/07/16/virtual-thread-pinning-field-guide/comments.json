@@ -1,0 +1,24 @@
+[
+  {
+    "id": 93213,
+    "depth": 0,
+    "author": "Wojtek",
+    "date": "2026-07-16T12:33:40",
+    "html": "<p>Java 24 was released over a year ago. Even LTS version (25) was already released… beating about pinning nowadays is basically irrelevant…</p>"
+  },
+  {
+    "id": 93229,
+    "depth": 1,
+    "author": "Felipe Maschio",
+    "authorUrl": "https://threadmine.dev/en",
+    "date": "2026-07-16T16:12:37",
+    "html": "<p>Fair challenge — JEP 491 was a big deal, and the article’s own advice is that upgrading is the single best fix available. Two reasons I’d push back on “basically irrelevant”, though:</p>\n<p>1. What 491 removed is the monitor case. Blocking inside a native call (JNI/FFM) still pins today, on 24 and 25 alike. And that’s not theoretical: Pi4J merged a fix for exactly this a few months ago — virtual threads doing a blocking native poll() pinned all four carriers on a Raspberry Pi 4, so digital inputs 5+ simply never fired (Pi4J/pi4j#623). The fix was moving that path back to platform threads.</p>\n<p>2. Adoption reality: most production JVMs I get to see are still on 21, and plenty on 17. For every team already on 25, several more will be reading 21-era thread dumps well into 2027. “Upgrade” is the right advice — “irrelevant” assumes everyone already took it.</p>\n<p>So: less relevant than in 2024? Absolutely, and the article says so. Basically irrelevant? Tell that to the 5th button on that Raspberry Pi.</p>"
+  },
+  {
+    "id": 93428,
+    "depth": 2,
+    "author": "w",
+    "date": "2026-07-19T14:21:03",
+    "html": "<p>IF they are carillon older versions then probabibiltu that they adopted virtual threads is even lower – they move slow to avoid “novelty”…</p>"
+  }
+]

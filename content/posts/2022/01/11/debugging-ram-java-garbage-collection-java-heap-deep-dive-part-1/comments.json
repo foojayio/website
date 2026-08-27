@@ -1,0 +1,16 @@
+[
+  {
+    "id": 2649,
+    "depth": 0,
+    "author": "Gururaj Kulkarni",
+    "date": "2022-03-03T06:12:55",
+    "html": "<p>Does Java 8 and 11 ParallelGC honors MinHeapFreeRatio and MaxHeapFreeRatio JVM settings?</p>\n<p>We have a Java application where we have applied the MinHeapFreeRatio=20 and MaxHeapFreeRatio=40, and using ParallelGC. However some of articles says that, these JVM settings (Min and Max free heap ratio) is not applicable for ParallelGC. However, with JDK8 and with ParallelGC we noticed that free heap ratio were within the limit we had set. However with JDK 11 and with ParallelGC, we are noticing that free heap ratio is not getting honored. <a href=\"https://stackoverflow.com/questions/5355933/encourage-the-jvm-to-gc-rather-than-grow-the-heap\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://stackoverflow.com/questions/5355933/encourage-the-jvm-to-gc-rather-than-grow-the-heap</a></p>\n<p>We have some confusions around whether ParallelGC with irrespective of JDK version honors these settings or not? are these settings applicable for G1GC and CMS GC? Can you please share your experts views around this query?</p>"
+  },
+  {
+    "id": 2659,
+    "depth": 1,
+    "author": "Shai Almog",
+    "date": "2022-03-03T14:53:14",
+    "html": "<p>These things are very flaky and change all the time. The docs are literally non-existant on the nuances. The nice thing is that a lot of this can be tuned directly from JMX where you can observe the impact of these changes relatively easily. This is pretty much a black art.</p>"
+  }
+]

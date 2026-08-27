@@ -168,6 +168,11 @@
     {{ end }}
 
     {{ partial "comments.html" . }}
+
+    {{/* Under giscus, deliberately: the live conversation is the one a reader can
+         join, and the WordPress archive is history below it. Renders nothing on
+         the 1885 posts with no comments.json -- see the partial. */}}
+    {{ partial "legacy-comments.html" . }}
   </article>
 
   {{ partial "sidebar.html" . }}

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 10156,
+    "depth": 0,
+    "author": "Yeroc",
+    "date": "2023-05-12T18:35:32",
+    "html": "<p>Great article! I wasn’t aware of the prepareThreshold setting before. Nice to see a deep dive on the Postgres protocol.</p>\n<p>One nit, you mention the need to properly close Connection, Statement, ResultSet objects. It would be great if your sample code used try-with-resources to clean those up. It’s the best practice. The explicit .close() calls made in the sample code won’t get called if any statement prior triggers an exception.</p>\n<p>Sample:</p>\n<pre>// ...\r\n        try(Connection connection = DriverManager.getConnection(url, properties);\r\n            Statement statement = connection.createStatement();\r\n            ResultSet result = statement.executeQuery(\"select now()\");)\r\n        {\r\n            result.next();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace();\r\n        }\r\n//...</pre>"
+  },
+  {
+    "id": 10721,
+    "depth": 0,
+    "author": "Peter",
+    "date": "2023-06-16T09:29:36",
+    "html": "<p>Thank you for this great article</p>"
+  },
+  {
+    "id": 11338,
+    "depth": 0,
+    "author": "Alex B.",
+    "date": "2023-07-15T10:07:05",
+    "html": "<p>Thank you for an interesting insight on Postgres query modes.</p>"
+  },
+  {
+    "id": 12306,
+    "depth": 0,
+    "author": "mine",
+    "date": "2023-09-04T06:13:33",
+    "html": "<p>Thank you for this great article, I solved a wired problem. the time type with 6 precision,the sixth queried value is different from pre queried with extended query mode,<br>\n  “` java<br>\n  // create table t_user(time_type time(6));<br>\n  // insert into t_user (time_type) values (12:12:12.123456);<br>\n  for (int i = 0; i &lt; 11; i++) {<br>\n  Thread.sleep(100);<br>\n  PreparedStatement preparedStatement = c.prepareStatement(\"SELECT * FROM t_user\");<br>\n  ((PgStatement) preparedStatement).setPrepareThreshold(10);<br>\n  ResultSet resultSet = preparedStatement.executeQuery();<br>\n  while (resultSet.next()) {</p>\n<p>System.out.printf(\"%s —– %s%n\", i,resultSet.getString(2));<br>\n  }<br>\n  preparedStatement.close();<br>\n  resultSet.close();<br>\n  }<br>\n  “`<br>\n  first way using simple mode<br>\n  “`java<br>\n  Class.forName(dbClassName);<br>\n  // Properties for user and password. Here the user and password are both 'paulr'<br>\n  Properties p = new Properties();<br>\n  p.put(\"user\",\"postgres\");<br>\n  p.setProperty(\"preferQueryMode\", \"simple\");</p>\n<p>// Now try to connect<br>\n  Connection c = getConnection(CONNECTION,p);<br>\n  for (int i = 0; i &lt; 11; i++) {<br>\n  Thread.sleep(100);<br>\n  PreparedStatement preparedStatement = c.prepareStatement(\"SELECT * FROM t_user\");<br>\n  ((PgStatement) preparedStatement).setPrepareThreshold(10);<br>\n  ResultSet resultSet = preparedStatement.executeQuery();<br>\n  while (resultSet.next()) {<br>\n  System.out.printf(\"%s —– %s%n\", i,resultSet.getString(2));<br>\n  }<br>\n  preparedStatement.close();<br>\n  resultSet.close();<br>\n  }<br>\n  “`<br>\n  second way setPrepareThreshold</p>\n<p>“`java<br>\n  connection.setPrepareThreshold(10);<br>\n  // but 11 value will be 12:12:12.123,<br>\n  for (int i = 0; i &lt; 11; i++) {<br>\n  Thread.sleep(100);<br>\n  PreparedStatement preparedStatement = c.prepareStatement(\"SELECT * FROM t_user\");<br>\n  ResultSet resultSet = preparedStatement.executeQuery();<br>\n  while (resultSet.next()) {</p>\n<p>System.out.printf(\"%s —– %s%n\", i,resultSet.getString(2));<br>\n  }<br>\n  preparedStatement.close();<br>\n  resultSet.close();<br>\n  }<br>\n  “`<br>\n  but I don't unstand how different query mode or threashold effect the query values</p>"
+  },
+  {
+    "id": 12314,
+    "depth": 1,
+    "author": "Frits Hoogland",
+    "date": "2023-09-04T12:52:35",
+    "html": "<p>&gt; Thank you for this great article, I solved a wired problem.<br>\n  I think there is a slight typo here, and assume ‘wired’ is ‘weird’?<br>\n  Did you solve the problem, or did you find a problem? What you are saying is that you solved it. In such case, it would be nice to tell the solution. Or did you mean you found a problem that you would like to get solved?</p>\n<p>&gt; the time type with 6 precision,the sixth queried value is different from pre queried with extended query mode,<br>\n  This is really hard to understand.<br>\n  If I would guess, the basic message is meant to mean: that the query execution latency of the sixth execution is different from the previous five execution latencies? The response value of the query itself should not change based on settings like setPepareThreshold, and I think you do not mean that, but I can’t be sure.</p>\n<p>If the above assumptions are correct, then probably, but that is once again a guess, your issue is that simple query executions cannot take advantage of the prepared statement property of being able to skip the parse (parse and rewrite) steps , because the simply query protocol performs parse and rewrite as hard coded steps, whilst extended query executions can skip these once a server side named prepared statement is created, so the named prepared statement can be called, which has the result of the parse and rewrite steps stored, so it can perform the plan and execute steps using the stored result of the parse and rewrite steps.</p>"
+  },
+  {
+    "id": 33384,
+    "depth": 0,
+    "author": "Muthu",
+    "date": "2024-09-06T02:43:58",
+    "html": "<p>Thank you for this wonderful article!</p>"
+  }
+]

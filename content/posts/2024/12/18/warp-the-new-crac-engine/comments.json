@@ -1,0 +1,30 @@
+[
+  {
+    "id": 38380,
+    "depth": 0,
+    "author": "William",
+    "date": "2024-12-30T20:08:43",
+    "html": "<p>Will Google Cloud Storage (bucket) also be considered?</p>"
+  },
+  {
+    "id": 38674,
+    "depth": 1,
+    "author": "Radim Vansa",
+    "date": "2025-01-06T11:08:50",
+    "html": "<p>Hi, Google Cloud Storage is a good candidate and I don’t see why we couldn’t interface with that, too, though I think that we’ll gather some operational experience with S3 before jumping on the implementation of native Google Cloud Storage integration.</p>"
+  },
+  {
+    "id": 38504,
+    "depth": 0,
+    "author": "Yury",
+    "date": "2025-01-02T21:36:25",
+    "html": "<p>Is there a way to debug failures? Something similar to criu tooling (crit). Or a way to turn on debug logging?</p>"
+  },
+  {
+    "id": 38675,
+    "depth": 1,
+    "author": "Radim Vansa",
+    "date": "2025-01-06T11:09:10",
+    "html": "<p>Right now debug logging is a compile-time-only option; have you experienced any errors that wouldn’t have sufficient information printed out?<br>\n  One advantage over working with CRIU I regularly use during development is that strace works (CRIU uses ptrace and therefore you can’t strace the same process).<br>\n  Speaking about crit, I guess that you want to look into the image itself. Since Warp uses the ELF format, you could explore it using readelf, eu-readelf or objdump. Even better, you could open it as coredump using GDB (it might just need a little hinting on debug symbols to resolve stacks properly).</p>"
+  }
+]

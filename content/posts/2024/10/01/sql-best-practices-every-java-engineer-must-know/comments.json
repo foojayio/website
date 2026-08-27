@@ -1,0 +1,30 @@
+[
+  {
+    "id": 35022,
+    "depth": 0,
+    "author": "alex",
+    "date": "2024-10-11T22:12:00",
+    "html": "<p>DImension tables are much better for date filtering (especially years).</p>\n<p>That is, have a table that has every date in it + columns that have the “calendar year” “calendar month” “calendar quarter” etc.</p>\n<p>So if you’re filtering on a year, you don’t do &gt; or &lt;</p>\n<p>you do an<br>\n  Inner Join on the lu.DimDate table on [created_at] = [dimDate.date] and calendarYear = '2023'</p>\n<p>Inner Join filtering is significantly faster than \"where\" (order of operations for the query engine, you're significantly reducing the dataset earlier in the process)</p>\n<p>And, the = on the \"calendarYear\" is significantly faster than ranges</p>"
+  },
+  {
+    "id": 35062,
+    "depth": 0,
+    "author": "Bartek",
+    "date": "2024-10-13T12:47:13",
+    "html": "<p>In my opinion, the advice to use joins instead of subqueries whenever possible is not good. I had many cases where a query with many joins was much worse than a query with subqueries.</p>\n<p>A good piece of advice would be: always check your query with explain, because sometimes a query with subqueries can be much more efficient than a query with joins.</p>"
+  },
+  {
+    "id": 35124,
+    "depth": 0,
+    "author": "Juan Farizo",
+    "date": "2024-10-14T14:21:59",
+    "html": "<p>I agree with @Bartek, not always is the best to avoid subqueries instead of joins. If we are talking about performance, the premise has to be measuring the throughput and the resources used on the sql server side.</p>"
+  },
+  {
+    "id": 36545,
+    "depth": 0,
+    "author": "Cristian",
+    "date": "2024-11-19T09:34:09",
+    "html": "<p>The advice about using VARCHAR 100 instead of TEXT is bad. You should reverse the advice to recommend using TEXT instead of VARCHAR, always, at least for Postgres:<br>\n  * VARCHAR and TEXT have the same exact performance in Postgres<br>\n  * VARCHAR 100 will be slightly **less** performant than TEXT, since it needs to enforce the maximum length<br>\n  * adding artificial maximum lengths is very likely to cause application bugs. Your example has 2 bugs: (1) you don’t allow people with full names more than 100 characters, but there are such persons in the world – are they not allowed to use your application? (2) according to RFC3696, emails are allowed to be have up to 320 characters, but you’re limiting it to 100.</p>"
+  }
+]

@@ -92,10 +92,11 @@ the team already has. `partials/comments.html` renders nothing until
 `[params.giscus]` in `hugo.toml` has `repoId`/`categoryId`, so an unconfigured
 build simply has no comment section.
 
-One-time setup: enable Discussions, add a **Blog Comments** category that
-accepts comments (not announcement-style), install the
-[giscus app](https://github.com/apps/giscus), then paste the two ids —
-`jbang scripts/transfer/Comments.java --print-config` prints the block.
+One-time setup — **already done**: Discussions are enabled, the **Blog
+Comments** category exists and accepts comments (not announcement-style), the
+[giscus app](https://github.com/apps/giscus) is installed, and both ids are in
+`hugo.toml`. Get the ids from [giscus.app](https://giscus.app) if they ever need
+re-reading.
 
 A thread is keyed on the **post slug**, never the pathname, because the site
 serves `/website/today/<slug>/` today and `/today/<slug>/` after cutover — every
@@ -104,8 +105,14 @@ shape as the read counter. Change the mapping and you must change
 `transfer/Comments.java` with it; they agree by construction, and a mismatch
 shows up as an empty comment section rather than an error.
 
-Importing the 580 legacy WordPress comments is `transfer/Comments.java` — see
-[`scripts/README.md`](scripts/README.md). **Not yet run.**
+The 580 legacy WordPress comments are **not** in these Discussions, and must not
+be put there: importing them got the posting account **banned by GitHub** a few
+posts in. `transfer/Comments.java` archives them into the repo instead — one
+`content/posts/**/comments.json` per post, rendered under the giscus widget by
+`partials/legacy-comments.html` as "Discussions on the previous Foojay site".
+It needs no credential, and it is safe (and worth) re-running until cutover to
+pick up comments left on WordPress in the meantime. See
+[`scripts/README.md`](scripts/README.md).
 
 ## Read counter
 

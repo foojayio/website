@@ -1,0 +1,30 @@
+[
+  {
+    "id": 8594,
+    "depth": 0,
+    "author": "Shadab",
+    "date": "2023-02-12T18:07:37",
+    "html": "<p>How u locked down the java process to 2 and 4th core ? Did u reniced the process ?</p>\n<p>Kindly throw some insights on this ?</p>"
+  },
+  {
+    "id": 11208,
+    "depth": 0,
+    "author": "Benjamin S",
+    "date": "2023-07-10T12:02:05",
+    "html": "<p>Hi I’m curious.<br>\n  How come you end up recommending the JDK 17 when the latency figure is slightly worse than JDK 8 ?</p>"
+  },
+  {
+    "id": 13111,
+    "depth": 0,
+    "author": "MXB",
+    "date": "2023-10-16T17:57:24",
+    "html": "<p>Does this study is based on the GraalVM JIT or AOT (Native Images)?</p>"
+  },
+  {
+    "id": 13229,
+    "depth": 0,
+    "author": "Paul Allen",
+    "date": "2023-10-20T20:13:55",
+    "html": "<p>I have to disagree somewhat with the statement that the performance improvement is “marginal”. First, it depends on the project, second it depends on the underlying Java host, third it depends on the optimizations. I preformed a performance analysis for my employer last year (<a href=\"https://github.com/Rohan427/GraalVM/tree/main\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://github.com/Rohan427/GraalVM/tree/main</a>) and went further to convert Qpid Broker-J (also available in my Github repository) to a GraalVM native image. My tests in both cases showed a 30%+ performance increase without using the commercial Oracle compiler. In fact, the tests I ran on Qpid showed the bottleneck with the native image to be my underlying system and not the application, whereas the bottleneck with the normal Qpid image was the application.</p>\n<p>For performance, size, and security improvements, I would recommend converting to a GraalVM 17 native image in almost all cases.</p>"
+  }
+]

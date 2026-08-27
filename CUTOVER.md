@@ -30,11 +30,13 @@ that silently gets worse or gets lost if cutover happens without it.
 
       The re-seed below is still required — see "Final view-count import".
 
-- [ ] **Verify comments are switched on.** `hugo.toml`'s `[params.giscus]`
-      already carries `repoId` and `categoryId`, so the ids are done. Confirm
-      Discussions are enabled on `foojayio/website` with the comment-accepting
-      **Blog Comments** category, and that the giscus app is installed. Then run
-      the import — see the next phase for why it happens twice.
+- [x] **Comments are switched on.** `hugo.toml`'s `[params.giscus]` carries
+      `repoId` and `categoryId`, Discussions are enabled on `foojayio/website`
+      with the comment-accepting **Blog Comments** category, and the giscus app
+      is installed — confirmed by giscus having created threads there on its own.
+      Nothing left to do here. The legacy WordPress comments are a separate
+      thing and are **not** imported into Discussions; see "Final comment
+      archive" in the next phase.
 
 - [ ] **Resolve the Ketch / Consent Mode question.** `partials/analytics.html`
       emits Google Consent Mode defaults of `denied` and depends on Ketch
@@ -83,11 +85,18 @@ rather than failing loudly. Finish this phase before touching DNS.
       This is the last chance — the WordPress counts vanish with the site and
       `data/legacy-views.json` is the only copy.
 
-- [ ] **Final comment import:** `jbang scripts/transfer/Comments.java`. Run it
-      again here even if it ran earlier, to pick up comments posted on
-      WordPress in the meantime. It is idempotent (state derived from GitHub,
-      `<!-- wp-comment-id: N -->` markers) and resumable across GitHub's rate
-      limit with `--limit N`.
+- [ ] **Final comment archive:** `jbang scripts/transfer/Comments.java`, then
+      commit whatever it changed. Run it again here even if it ran earlier, to
+      pick up comments posted on WordPress in the meantime — **this is the last
+      chance**, since the bodies have no other source once the site is off.
+      Needs no credential. It rewrites a file only when that file's content
+      changed, so a run with nothing new leaves an empty diff; check `git status`
+      to see whether there was anything.
+
+      It does **not** post to GitHub Discussions any more. It used to, and
+      GitHub banned the account it posted as a few posts in — see the script's
+      class comment. It writes `content/posts/**/comments.json` instead, which
+      `partials/legacy-comments.html` renders under the giscus widget.
 
 - [ ] **[ORDER] Delete the WordPress bridge from
       `.github/workflows/sync-view-counts.yml` — before or with the DNS switch,
@@ -208,9 +217,12 @@ Fastest checks first, so a failure is caught before you have gone further.
       the three emoji-suffixed post URLs.
 - [ ] **The view counter is counting.** `curl https://foojay.io/api/views/all`
       returns data, and a page view increments its key.
-- [ ] **Comments load** on a post with imported comments, and the thread is the
-      imported one rather than a fresh empty thread (slug-keyed, so it should
-      be).
+- [ ] **Comments load.** Two separate things on a post that has both (e.g.
+      `/today/why-i-prefer-trunk-based-development/`, 12 archived comments):
+      the giscus widget appears and can take a new comment, and the
+      "Discussions on the previous Foojay site" section below it lists the
+      archived ones. The archive is baked into the HTML, so if it is missing the
+      build is at fault, not the network.
 - [ ] **Search works** — `/search/?q=java`. Pagefind's index is built by the
       workflow (`npx -y pagefind --site public`), so this is the first time it
       is exercised against the real domain.
@@ -275,7 +287,8 @@ recovery is a DNS change:
 
 With the TTL lowered in Phase 2 this takes about a minute to propagate.
 
-Two things do **not** roll back, which is why they are ordered the way they are:
-comments already imported into GitHub Discussions stay imported (harmless —
-re-running the import skips them), and any view counts accumulated in the
-Worker's `live` column stay there (also harmless — `--seed` only sets `legacy`).
+One thing does **not** roll back, which is why it is ordered the way it is: any
+view counts accumulated in the Worker's `live` column stay there (harmless —
+`--seed` only sets `legacy`). The comment archive is just files in the repo, so
+it rolls back with everything else — which is the point of it being an archive
+here rather than 580 irreversible writes into somebody else's API.

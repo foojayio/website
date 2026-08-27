@@ -1,0 +1,16 @@
+[
+  {
+    "id": 24160,
+    "depth": 0,
+    "author": "chuss",
+    "date": "2024-06-05T15:54:34",
+    "html": "<p>Why not have an example with Springs new RestClient?</p>"
+  },
+  {
+    "id": 24179,
+    "depth": 0,
+    "author": "Erwan",
+    "date": "2024-06-05T20:47:42",
+    "html": "<p>What about using the http client introduce in java 11 ?</p>"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "id": 18764,
+    "depth": 0,
+    "author": "Anbu",
+    "date": "2024-03-25T12:07:21",
+    "html": "<p>RestClient built on same infrastructure as RestTemplate, not on top of WebClient. t. Please check.</p>"
+  },
+  {
+    "id": 18944,
+    "depth": 1,
+    "author": "Mahendra Rao B",
+    "authorUrl": "https://bs-mahi.medium.com/",
+    "date": "2024-03-31T01:38:50",
+    "html": "<p>Thanks for reporting, I have updated it.</p>"
+  },
+  {
+    "id": 18938,
+    "depth": 0,
+    "author": "Fantaman",
+    "date": "2024-03-30T21:36:39",
+    "html": "<p>The article states that “we had several options available for creating REST endpoints”, but the listed options are used for consuming REST endpoints, not creating them.<br>\n  One of them is “HTTP interface” – what is meant by that? I’m not aware of such Spring feature.</p>"
+  },
+  {
+    "id": 18943,
+    "depth": 1,
+    "author": "Mahendra Rao B",
+    "authorUrl": "https://bs-mahi.medium.com/",
+    "date": "2024-03-31T01:32:20",
+    "html": "<p>Hi Fantaman,</p>\n<p>The annotated methods in the declarative HTTP interface facilitate HTTP exchanges. By utilizing an annotated Java interface to specify remote API details, Spring can automatically create a proxy that implements the interface and handles the exchanges. This approach effectively minimizes the amount of boilerplate code required.</p>\n<p>For more details, please refer to the following</p>\n<p><a href=\"https://docs.spring.io/spring-framework/reference/web/webflux-http-interface-client.html\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://docs.spring.io/spring-framework/reference/web/webflux-http-interface-client.html</a></p>\n<p><a href=\"https://docs.spring.io/spring-framework/reference/integration/rest-clients.html#rest-http-interface\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://docs.spring.io/spring-framework/reference/integration/rest-clients.html#rest-http-interface</a></p>\n<p>I hope that helps, am happy to assist you further.<br>\n  Thanks,<br>\n  Mahi</p>"
+  },
+  {
+    "id": 18972,
+    "depth": 0,
+    "author": "Gary",
+    "date": "2024-04-01T07:24:33",
+    "html": "<p>So waht is it used for ?Is it just to simplify the RestTemplate</p>"
+  }
+]

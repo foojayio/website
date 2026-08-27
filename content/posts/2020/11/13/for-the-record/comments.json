@@ -1,0 +1,9 @@
+[
+  {
+    "id": 54,
+    "depth": 0,
+    "author": "Carl Dea",
+    "date": "2020-11-13T21:45:56",
+    "html": "<p>Sirisha,<br>\n  Excellent blog post on the new Java records!</p>\n<p>Just for fun and not to be nit-picky (I was in a code review mood) 🙂<br>\n  With the new String facility (Java 13) the code’s overridden toString() method could look like the following:<br>\n  public String toString() {<br>\n  return “””<br>\n  Delivery(order=%s, donuts=%d)<br>\n  “””.formated(order.toString(), donuts.toBag().toStringOfItemToCount() );<br>\n  }</p>\n<p>Assuming order is not null. or use String.valueOf(order). Really wish there was a null safe operator.</p>\n<p>Carl</p>"
+  }
+]

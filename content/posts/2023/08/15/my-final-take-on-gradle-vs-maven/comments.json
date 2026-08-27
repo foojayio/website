@@ -1,0 +1,45 @@
+[
+  {
+    "id": 11953,
+    "depth": 0,
+    "author": "Asaf",
+    "date": "2023-08-16T20:14:00",
+    "html": "<p>I agree and like Maven due to your reasons. Gradle is many times selected due to its caching. Unfortunately it’s much better than Maven. In large mono repos. You don’t have any other way.</p>"
+  },
+  {
+    "id": 11954,
+    "depth": 1,
+    "author": "Nicolas Frankel",
+    "authorUrl": "https://blog.frankel.ch/",
+    "date": "2023-08-16T20:53:00",
+    "html": "<p>If that’s the only reason, then somebody should immediately start working on a Maven cache and save developers lots of maintenance costs.</p>\n<p>Bonus points for designing security into the cache from the beginning</p>"
+  },
+  {
+    "id": 11958,
+    "depth": 0,
+    "author": "Erwin Vervaet",
+    "date": "2023-08-17T05:15:44",
+    "html": "<p>+1 on what you’re saying here</p>"
+  },
+  {
+    "id": 12345,
+    "depth": 0,
+    "author": "J",
+    "date": "2023-09-05T20:16:15",
+    "html": "<p>The test criticism for Gradle is understandable. However we should also note, Gradle with the old groovy syntax is no longer considered the primary way, so that’s relevant.</p>\n<p>Gradle is MUCH better when using Kotlin (KTS) scripting. You get a lot of the great benefits of it being statically typed</p>\n<p>About Maven plugins, yeah those are not a joy to write. Gradle plugins, aren’t too bad though, and you can use the same language (Kotlin) to write either a script or a plugin. And plugins syntactically very similar</p>\n<p>You claim that Maven prevents customization, I wonder what size projects you’ve worked with it though. In my experience, there tends to be a common parent project and a whole lot can and does happen in there. Lifecycle repurposing and inline ant scripts… Because there’s no other way to do it in Maven</p>\n<p>There’s also the fact that somehow, despite it being XML for decades, even Intellij poorly completes and understands it. To the point where I couldn’t say it’s an advantage, it’s clearly worse. Writing configuration in Gradle and discovering your options is much easier in Gradle kts</p>\n<p>One big down side I ran into was trying to connect to Nexus behind a corporate proxy, that required some trickery to get a custom convention plugin working there.</p>\n<p>Regarding the other concepts about caching, Maven suffers from many of the same issues that anything long lived gets. The design wasn’t perfect in the beginning, and now probably the only way to change it is to completely change it. Maven’s lifecycle handling is one of the big reasons, as I understand, that caching and speed sucks so much on Maven. In cases it will even run your tests twice, because it cannot be sure of state</p>"
+  },
+  {
+    "id": 12354,
+    "depth": 0,
+    "author": "Manuel K",
+    "date": "2023-09-06T07:51:49",
+    "html": "<p>The maven-build-cache-extension has already been released and it’s a step in the right direction: <a href=\"https://maven.apache.org/extensions/maven-build-cache-extension/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://maven.apache.org/extensions/maven-build-cache-extension/</a></p>"
+  },
+  {
+    "id": 12359,
+    "depth": 0,
+    "author": "Michael / bughunter",
+    "date": "2023-09-06T20:02:29",
+    "html": "<p>Interesting article, but I can’t agree completely.<br>\n  First, I don’t think it’s particularly fair to compare Ant with Maven and Gradle. If you do, you should compare the companions Ant and Ivy with the newer build tools.<br>\n  Second, it is not always an advantage to have a strong constraint on predefined structures. I still see ant scripts in companies today, they make me cringe. If I had to port them to Maven, it would have been extremely time-consuming and sometimes even impossible. In any case, the XML trees quickly started to get large and confusing.<br>\n  Gradle scripts, on the other hand, have always been the happy medium in my view. I can define them in a JVM language and thus build clear and lean scripts faster. And Gradle also knows configuration by convention, but only if I see it correctly, rather on the plugin level and not on the framework level. For example, the Java plugin knows the familiar directory hierarchies from Maven scr/main/java and src/test/java. I see Gradle more as a kind of meta-build tool, with which you can build quite strict project structures, but not get so strong problems if you have to deviate from it for whatever reason. In the end, it’s more a matter of taste and environment, the right tool for the right purpose.<br>\n  What bothers me about Gradle are completely different things. A lot of things change so quickly and you always have to follow deprecations hints, at least if you don’t want to stay with a certain version and risk catching a security problem at some point. A higher degree of backward compatibility would not hurt Gradle.</p>"
+  }
+]

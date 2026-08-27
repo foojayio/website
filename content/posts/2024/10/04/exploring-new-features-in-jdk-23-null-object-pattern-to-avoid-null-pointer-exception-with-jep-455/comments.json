@@ -1,0 +1,9 @@
+[
+  {
+    "id": 35018,
+    "depth": 0,
+    "author": "A.Arizón",
+    "date": "2024-10-11T16:43:56",
+    "html": "<p>The null can never be justified in any circumstance. It either represents a future value or an non-existent one, and so it must be marked by compiler as either a “future” or a constant “not apply”. It was a programming mistake inherited from the first compilers in 1950’s.<br>\n  Tomy Hoare, null’s invertor, has explained it a million times and he warns (nearly pledges) not to use it, neither to justify it in any circumstance or scenario.</p>\n<p>A programmer can decide at random what a nulls means inside his brain and convince itself about its proper use.<br>\n  Unfortunately, neither the compiler, not any consumer of the nullable code will agree with that “mental meaning” is because nulls bears no information at all.</p>\n<p>Its use is neither appropriate in functional programming, not in imperative one or in any future programming paradigm.</p>\n<p>The keyword null got its place by a chain of errors. Just let kill it and forget about that nightmare.</p>"
+  }
+]

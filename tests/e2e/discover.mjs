@@ -24,6 +24,9 @@ const FEATURES = {
   gallery: /<figure class=["']?gallery["' ]/i,
   // An embedded video. 438 posts carry one; none of them is self-hosted.
   video: /<iframe[^>]+src=["']?https:\/\/www\.youtube\.com\/embed\//i,
+  // The WordPress comment archive (partials/legacy-comments.html), on the 269
+  // posts whose bundle carries a comments.json.
+  legacyComments: /<section id=["']?legacy-comments/i,
 };
 
 /** Fixed pages -- these have a URL because of what they ARE, not what is on them. */
