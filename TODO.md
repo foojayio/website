@@ -2,7 +2,6 @@
 
 ## Still TODO
 
-* [ ] Do we still want/need the banners on homepage?
 * [ ] **Before cutover:** configure the 3 regex redirects on Cloudflare --
   `/blog/*`, `/almanac/jdk-N`, `/docs/*`. 312,531 recorded hits, and they are
   the only part of WordPress's redirect table that Hugo `aliases:` cannot
@@ -12,6 +11,8 @@
 ## Finished
 
 * [X] Visualization of events/calendar
+* [X] Do we still want/need the banners on homepage?
+* [X] Transfer comments
 
 ### ConverPosts
 
