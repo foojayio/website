@@ -45,6 +45,8 @@ authors:
   - "rvansa"
   - "scott-sellers"
   - "simonritter"
+  - slug: "erikcostlow"
+    from: "2022-03-01"
 topics:
   - "JavaFX"
   - "Java"
