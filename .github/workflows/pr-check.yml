@@ -18,10 +18,17 @@ jobs:
           # this PR can act on.
           fetch-depth: 0
 
+      # PINNED, not "latest". `latest` makes the action resolve the version
+      # through formulae.brew.sh, so a read ECONNRESET from Homebrew's API --
+      # a third party with no stake in this site -- fails the whole run before
+      # Hugo is even downloaded. It did, on 33050054411. A pin also means the
+      # site is built by the version it was developed against rather than by
+      # whatever shipped this morning: a Hugo release that changes a template
+      # function is not something to discover from a red deploy.
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "latest"
+          hugo-version: "0.165.0"
           extended: true
 
       - name: Set up JBang

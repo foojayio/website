@@ -68,6 +68,20 @@ loads and simply has no diagram on it.
 
 First match in sorted order, so two runs of one build test the same pages.
 
+**That pick is made once, in `global-setup.mjs`, and never in the config's
+module body.** Playwright loads `playwright.config.mjs` in the main process
+*and* again in every worker process — measured at **39 evaluations in 39
+processes** on one CI-shaped run, since a worker is respawned per failing test.
+A top-level `writeFileSync` therefore truncated `.pages.json` 39 times while
+`fixtures.mjs` was reading it in another process, and the worker that lost that
+race died on `SyntaxError: Unexpected end of JSON input at discover.mjs:122`.
+That is the worst possible failure on this suite: a red deploy caused by nothing
+on the site, on the one gate whose whole promise is that a failure means a real
+bug (which is also why there are no retries — a retry would have papered over
+this for months). `globalSetup` runs once, before any worker exists, and the
+write is staged to a temp file and renamed so no reader can ever see a partial
+one.
+
 A feature the build contains **none** of resolves to `null` and its test skips
 with a reason. `mermaid` is `null` today: the library is vendored and the render
 hook is wired, but no published post uses a ```` ```mermaid ```` fence yet. The
@@ -160,6 +174,7 @@ answers yes: `canPlayType` returns `""` for avc1 and `"probably"` for vp9.
 | `site.mjs` | where `public/` is and what base path it is served at |
 | `server.mjs` | the GitHub-Pages-shaped static server |
 | `discover.mjs` | picks representative pages out of the build |
+| `global-setup.mjs` | runs that pick ONCE, and writes `.pages.json` atomically |
 | `fixtures.mjs` | stubs third parties, collects uncaught errors and failed same-origin requests |
 | `pages.spec.mjs` | one page of every kind renders cleanly; nav, 404, theme toggle |
 | `search.spec.mjs` | Pagefind: grouping, per-section counts, Show more, empty state, the header box |

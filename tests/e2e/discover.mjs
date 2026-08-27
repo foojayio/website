@@ -10,7 +10,7 @@
  *
  * Run by globalSetup, written to .pages.json, read by the specs.
  */
-import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, sep } from 'node:path';
 import { PUBLIC_DIR } from './site.mjs';
 
@@ -122,8 +122,9 @@ export function loadPages() {
   return JSON.parse(readFileSync(PAGES_FILE, 'utf8'));
 }
 
+// `node tests/e2e/discover.mjs` prints what a run would pick, without touching
+// .pages.json -- writing it is global-setup.mjs's job and only its job, so this
+// cannot be the thing that leaves a stale or half-written file behind.
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const pages = discover();
-  writeFileSync(PAGES_FILE, JSON.stringify(pages, null, 2));
-  console.log(pages);
+  console.log(discover());
 }

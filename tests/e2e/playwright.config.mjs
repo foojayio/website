@@ -1,15 +1,15 @@
 import { defineConfig, devices } from '@playwright/test';
-import { writeFileSync } from 'node:fs';
 import { PORT, basePath, ROOT, SERVER } from './site.mjs';
-import { discover, PAGES_FILE } from './discover.mjs';
-
-// Which pages to test is worked out once, from the build, and shared with every
-// worker -- see discover.mjs for why they are not a hardcoded list.
-writeFileSync(PAGES_FILE, JSON.stringify(discover(), null, 2));
 
 export default defineConfig({
   testDir: '.',
   testMatch: '*.spec.mjs',
+  // Which pages to test is worked out once, from the build, and shared with
+  // every worker -- see global-setup.mjs for why the write cannot live in this
+  // file's module body, and discover.mjs for why they are not a hardcoded list.
+  // Absolute, for the same reason `command` below is: nothing in this suite is
+  // resolved against a working directory Playwright chose.
+  globalSetup: new URL('./global-setup.mjs', import.meta.url).pathname,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   // No retries, deliberately. Every third-party request is stubbed out (see

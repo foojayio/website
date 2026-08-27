@@ -45,3 +45,6 @@ __pycache__/
 /test-results/
 /playwright-report/
 tests/e2e/.pages.json
+# The staging half of that write -- present only mid-rename, but a killed run
+# leaves one behind and a 0-byte file committed here is the images.py lesson.
+tests/e2e/.pages.json.tmp
