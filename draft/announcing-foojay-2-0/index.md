@@ -13,10 +13,10 @@ related_posts:
   - "a-week-of-housekeeping-what-changed-on-foojay-io"
 ---
 
-Foojay has moved house. Not the address — every URL you have bookmarked, linked
-or cited still works — but everything behind it. Foojay is now a static site,
-its entire content lives in a public Git repository, and publishing an article
-is a pull request.
+Foojay has moved house. The address stays exactly where it was, so every URL you
+have bookmarked, linked or cited still works. Everything behind that address is
+new. Foojay is now a static site, its entire content lives in a public Git
+repository, and publishing an article is a pull request.
 
 If you only read one paragraph: **nothing you have written has moved, and
 nothing you need to do has changed.** The rest of this post is what is different
@@ -39,8 +39,9 @@ and a Git client all day.
 To put real numbers on "a matter of days with a very small budget" for the version of Foojay you are now looking at: 
 * **About 70 hours of work across 17 days** of which a lot outside official working hours as I got dragged into a mission ;-)
 * **Roughly $1000 of AI model usage** at published token prices. 
-Both are measured rather than remembered — the hours by
-clustering four weeks of commit history into working sessions, the cost by adding up the token counts in the assistant's own logs.
+We measured both rather than remembering them. The hours come from clustering
+four weeks of commit history into working sessions, the cost from adding up the
+token counts in the assistant's own logs.
 
 ## What Foojay 2.0 actually is
 
@@ -60,28 +61,28 @@ automatically whenever something lands on the main branch. Concretely:
 
 Everything came across: 2,147 articles, 344 author profiles, 47 glossary
 entries, the JUG directory, the calendar, the sponsors,... Every legacy path
-still resolves, including the ones nobody would think to check — the old
-`/blog/` scheme, the retired slugs, and the URLs that changed when an article
-was renamed years ago.
+still resolves, including the ones nobody would think to check: the old `/blog/`
+scheme, the retired slugs, and the URLs that changed when an article got a new
+name years ago.
 
 ### Hugo? No Java?
 
 Yes, Java! Just not for the part you would expect.
 
 I did look at the Java generators. I had tried [JBake](https://jbake.org/)
-before, and at the time it looked like a project that had gone quiet — no
-release between early 2023 and late 2025 is a long gap to stake a site on.
+before, and at the time it looked like a project that had gone quiet. No release
+between early 2023 and late 2025 is a long gap to stake a site on.
 (Credit where it is due: it has since shipped 2.7.0.) And when I mentioned this
 project on the Foojay Slack, someone pointed me at
 [Roq](https://github.com/quarkiverse/quarkus-roq), the Quarkus-based static site
-generator — a thin layer over Quarkus that renders Markdown through Qute
+generator. It is a thin layer over Quarkus that renders Markdown through Qute
 templates, with type-safe templating and code completion. It looks genuinely
 good, and if you want your generator in Java too, start there.
 
 I went with what I already know. I have built a lot of very different sites on
-Hugo — [webtechie.be](https://webtechie.be), [codewriter.be](https://codewriter.be),
-[pi4j.com](https://pi4j.com), [lottie4j.com](https://lottie4j.com),
-[melodymatrix.rocks](https://melodymatrix.rocks) — a personal blog, an
+Hugo: [webtechie.be](https://webtechie.be), [codewriter.be](https://codewriter.be),
+[pi4j.com](https://pi4j.com), [lottie4j.com](https://lottie4j.com) and
+[melodymatrix.rocks](https://melodymatrix.rocks). A personal blog, an
 open-source project's documentation, a product site. All of them work well, and
 Hugo has been stable, long-lived and very actively maintained the whole time.
 For a community project that has to still be standing in ten years, "I know this
@@ -89,9 +90,9 @@ tool and it is not going anywhere" beat "this is the most interesting choice".
 It also builds all 2,147 articles in about eight seconds, which stops mattering
 right up until the moment it matters a lot.
 
-And the generator is the *smallest* part of this anyway. Everything around it —
-the migration, the daily data syncs, the checks on your pull request — is
-roughly **8,500 lines of Java**, and that is the part that actually made this
+And the generator is the *smallest* part of this anyway. Everything around it
+comes to roughly **8,500 lines of Java**: the migration, the daily data syncs,
+the checks on your pull request. That is the part that actually made this
 possible.
 
 All of it runs on [JBang](https://www.jbang.dev/), so there is no `pom.xml`, no
@@ -109,7 +110,7 @@ dependencies at the top and runs directly:
 turns it into Markdown, Jackson and SnakeYAML handle the JSON and YAML.
 
 **Getting the content out.** Nobody used a WordPress admin login or a database
-dump — everything was read off the public site, its HTML plus the REST routes
+dump. Every scraper read the public site instead, its HTML plus the REST routes
 WordPress already exposes to anyone. The scrapers are idempotent and skip any
 file marked `frozen: true`, which is what made the whole thing survivable: they
 ran over and over for weeks while the old site stayed live and kept publishing,
@@ -121,7 +122,7 @@ to look for:
 
 - **10,270 non-breaking spaces** used to indent code samples. They *look* like
   indentation and break the moment you paste the snippet into an editor.
-- **14,344 heading anchors** of the form `#h2-3-some-title` — numbered by
+- **14,344 heading anchors** of the form `#h2-3-some-title`, numbered by
   position, so inserting one heading silently renumbered the rest. Another
   1,268 of the same ids, stamped on captions and paragraphs instead of
   headings, were being *printed to the reader* mid-article on 91 posts.
@@ -163,9 +164,9 @@ themselves.** A dead link inside an article renders perfectly.
   three different articles.
 
 **The part that keeps running.** The `scripts/` folders are grouped by one
-question — *does this still exist after cutover?* — because two of them are
-meant to be deleted whole. The scrapers and the one-off repairs go in the bin
-the day WordPress is switched off. What stays is the Java that does the ongoing
+question, *does this still exist after cutover?*, because two of them are meant
+to be deleted whole. The scrapers and the one-off repairs go in the bin the day
+WordPress is switched off. What stays is the Java that does the ongoing
 work:
 
 | Runs | What it does |
@@ -173,19 +174,21 @@ work:
 | every deploy + daily | pulls the JUG directory and the Java Champions list from the community-run repositories that own that data |
 | daily | reads the iCal feed each JUG publishes, so meetups appear on the calendar with nobody typing them in |
 | 4× a day | refreshes the read counts |
-| **every pull request** | validates frontmatter — the check that tells you about a mistyped author slug before a human looks at your article |
+| **every pull request** | validates frontmatter, the check that tells you about a mistyped author slug before a human looks at your article |
 
 So: a Go static site generator, and a pile of Java doing everything that
 actually needed writing.
 
-I worked on this on two different computers, and Claude gave me a nice insight about the "real" cost of using it. **About the AI half cost, since the logs are sitting right there.** 2,244
-requests, 713 million tokens, about $500 at list prices. The interesting part is
-the shape of that: **98% of those tokens are cached context being re-read** —
-the conversation so far, handed back on every turn at a tenth of the normal
-input price — and the tokens that were actually *written*, the code and the
-prose, are 2 million of the 713 and only 10% of the bill. Thinking about a large
-codebase costs more than writing to it. (One honest caveat: those logs cover 9
-of the 17 working days, because some of this was built on a second machine.)
+I worked on this on two different computers, and Claude gave me a nice insight
+about the "real" cost of using it. **The logs sit right there, so here is the AI
+half.** 2,244 requests, 713 million tokens, about $500 at list prices. The shape
+of that number is the interesting part. **98% of those tokens are cached context
+that the model re-reads**, meaning the conversation so far, handed back on every
+turn at a tenth of the normal input price. The tokens it actually *wrote*, the
+code and the prose, come to 2 million of the 713 and only 10% of the bill.
+Thinking about a large codebase costs more than writing to it. (One honest
+caveat: those logs cover 9 of the 17 working days, because I built some of this
+on a second machine.)
 
 ## The part that matters to authors
 
@@ -200,8 +203,8 @@ draft/
 
 The folder name becomes the URL. The images sit beside the text, so they never
 get lost or hotlinked. The frontmatter at the top of `index.md` asks for six
-things — title, date, description, author, hero image, categories — and derives
-everything else. There is no "SEO section" to fill in, no excerpt to write
+things, title, date, description, author, hero image and categories, then
+derives everything else. There is no "SEO section" to fill in, no excerpt to write
 twice, no tag taxonomy to guess at.
 
 Open a pull request and an automated check reads your frontmatter and builds the
@@ -210,14 +213,14 @@ find out in about a minute, from a robot, before a human has spent any time on
 it.
 
 **Already published the article on your own blog?** Post it here too. Add one
-line —
+line:
 
 ```yaml
 canonical: "https://your-blog.example/the-original/"
 ```
 
-— and search engines keep crediting your site while the article reaches Foojay's
-readers. Roughly 800 articles here are cross-posts, and this is how.
+Search engines keep crediting your site while the article reaches Foojay's
+readers. Roughly 800 articles here are cross-posts, and that line is how.
 
 ## Nothing goes live unchecked
 
@@ -227,72 +230,72 @@ automatically, and they are worth describing because they catch different
 classes of mistake.
 
 **On a pull request: your frontmatter and a full site build.** The check reads
-the article you added — including one still in `draft/`, which nothing else
-would look at — and fails on the things that otherwise fail *silently*: an
+the article you added, including one still sitting in `draft/`, which nothing
+else would look at. It fails on the things that otherwise fail *silently*: an
 author slug with no matching profile (the article renders, but never appears on
 your author page), a hero image naming a file you forgot to commit, two articles
 claiming the same URL, leftover text from the template. Then it builds all 4,200
 pages, so a broken shortcode is a red cross on your PR rather than a broken page
 on the site.
 
-**Before every deploy: the site that was just built.** Two questions, both
-answered from the content rather than from a list somebody has to maintain. Did
-every source file produce a page — because the way a section really breaks is
-not an error, it is a template that runs fine and quietly matches nothing. And
-does every internal link resolve: half a million of them across those 4,200
-pages, checked against the files actually on disk, in about five seconds. That
-one earns its keep. It found that the 404 page's own "back to the homepage" link
-was broken — a single character in a template, on the one page a lost reader
-sees.
+**Before every deploy: the site Hugo just built.** Two questions, and the content
+answers both rather than a list somebody has to maintain. Did every source file
+produce a page? That one matters because a section never breaks with an error.
+It breaks as a template that runs fine and quietly matches nothing. And does
+every internal link resolve? Half a million of them across those 4,200 pages,
+checked against the files actually on disk, in about five seconds. That one earns
+its keep. It caught a broken "back to the homepage" link on the 404 page itself,
+one wrong character in a template, on the one page a lost reader ever sees.
 
 **Then a real browser, on the built site.** Some of Foojay only exists once
 JavaScript has run: the search index, the two world maps, the image lightbox,
 the sortable tables in the [sitemap](/sitemap/), syntax highlighting. Every one
-of those fails the same way — the page still returns 200, still looks full, and
-simply stops doing the thing. So the built site is served on a throwaway local
-server and about forty checks click through it: search for a word and get
-grouped results, open a gallery, page a table, flip to dark mode.
+of those fails the same way. The page still returns 200, still looks full, and
+simply stops doing the thing. So a throwaway local server hosts the built site
+and about forty checks click through it: search for a word and get grouped
+results, open a gallery, page a table, flip to dark mode.
 
 **One of those checks is about security rather than mistakes.** Foojay's
-markdown allows raw HTML — it has to, because two thousand imported WordPress
+markdown allows raw HTML, and it has to, because two thousand imported WordPress
 articles carry tables, collapsible blocks and embeds with no Markdown
-equivalent. The consequence is that a merged pull request could, in principle,
-carry a `<script>`, and a static site has no server-side layer left to catch it.
-So the check refuses seven kinds of executable markup in article text:
+equivalent. A merged pull request could therefore carry a `<script>`, and a
+static site keeps no server-side layer to catch it. So the check refuses seven
+kinds of executable markup in article text:
 `<script>`, inline event handlers like `onerror=`, `javascript:` links,
 `<form>`, `<base>`, meta-refresh redirects, and `<object>`/`<embed>`. Before
 turning it on I counted every one of them across all 2,153 published articles.
-Every count was zero — so nothing in the archive had to be fixed first, and
+Every count came back zero, so nothing in the archive needed fixing first, and
 anything new is by construction something nobody has written here in five years
 of publishing.
 
-Code samples are excluded, and that is not a loophole: a fenced block is escaped
-before it reaches the page, so a `<script>` inside one renders as visible text
-and cannot run. An article *about* XSS is still publishable — it just has to
+The check skips code samples, and that is not a loophole. Hugo escapes a fenced
+block before it reaches the page, so a `<script>` inside one renders as visible
+text and cannot run. You can still publish an article *about* XSS. It just has to
 fence its examples, which is what we ask for anyway. `<iframe>` is the one shape
 that warns instead of failing, because 33 articles legitimately use one for
-Vimeo, Speaker Deck or Apple Podcasts; the warning just names the host so a
-reviewer can glance at it. Findings land as annotations on the diff itself, on
-the file and the line, rather than in a log four clicks away — and because they
-come from the log stream rather than the API, they work identically on a pull
-request from a fork, which is how most first-time authors arrive.
+Vimeo, Speaker Deck or Apple Podcasts. The warning names the host so a reviewer
+can glance at it. Findings land as annotations on the diff itself, on the file
+and the line, rather than in a log four clicks away. They come from the log
+stream rather than the API, so they work identically on a pull request from a
+fork, which is how most first-time authors arrive.
 
 This is the honest shape of security after leaving WordPress. There is no CMS to
 log into, no database, and no PHP running on a server, so there is nothing to
 exploit remotely. What is left is that the site changes when a maintainer merges
-something. That makes review the security control — and this is what gives it
-teeth.
+something. Review is therefore the security control, and these checks are what
+give it teeth.
 
 Two decisions in there were deliberate. **Only breakage we caused blocks a
-deploy.** A dead link an author typed in 2021 is reported and counted, not
-treated as an emergency — there were 53 of those in the archive when the check
-first ran, and a gate that blocks every future deploy on a five-year-old typo is
-a gate somebody switches off within the week. (They are down to one, for the
-record, and it needs a URL only its author knows.) And **the checks never call
-anyone else's server.** Roughly 440 articles embed a YouTube player; asserting
-that one reaches "playing" would be asserting that YouTube is up, on a check
-that can stop our own deploy. Third-party requests are answered locally instead,
-so nothing here goes red because someone else's CDN is having an afternoon.
+deploy.** The check reports and counts a dead link an author typed in 2021
+rather than treating it as an emergency. The archive held 53 of those when the
+check first ran, and a gate that blocks every future deploy on a five-year-old
+typo is a gate somebody switches off within the week. (They are down to one, for
+the record, and it needs a URL only its author knows.) And **the checks never
+call anyone else's server.** Roughly 440 articles embed a YouTube player.
+Asserting that one reaches "playing" would assert that YouTube is up, on a check
+that can stop our own deploy. The checks answer third-party requests locally
+instead, so nothing here goes red because someone else's CDN is having an
+afternoon.
 
 None of this is unusual for a software project. It is unusual for a website, and
 it is the part I would most want back if we ever moved again.
