@@ -207,7 +207,7 @@ Then go to <http://localhost:8080/todo>, where you should see the Todo web appli
 Now fire up Mission Control. The example service run via Docker Compose is configured so you can connect to it on localhost. In the JVM Browser, create a new connection with host "localhost" and port "1898". Hit "Test connection", which should yield "OK", then click "Finish".
 ![jfr new connection](https://www.morling.dev/images/jfr_new_connection.png)
 
-Create a new recording by expanding the localhost:1898 node in the JVM Explorer, right-clicking on "Flight Recorder" and choosing "Start Flight Recording...​". Confirm the default settings, which will create a recording with a duration of one minute. Go back to the Todo web application and perform a few tasks like creating some new todos, editing and deleting them, or filtering the todo list.
+Create a new recording by expanding the localhost:1898 node in the JVM Explorer, right-clicking on "Flight Recorder" and choosing "Start Flight Recording…​". Confirm the default settings, which will create a recording with a duration of one minute. Go back to the Todo web application and perform a few tasks like creating some new todos, editing and deleting them, or filtering the todo list.
 
 Either wait for the recording to complete or stop it by right-clicking on the recording name and selecting "Stop". Once the recording is done, it will be opened automatically. Now you could dive into all the logged events for the OS, the JVM etc, but as we're interested in our custom JAX-RS events, Choose "Event Browser" in the outline view and expand the "JAX-RS" category. You will see the events for all your REST API invocations, including information such as duration of the request, the HTTP method, the resource path and much more:
 ![jfr jax rs events](https://www.morling.dev/images/jfr_jax_rs_events.png)
@@ -306,7 +306,7 @@ Click "Advanced":
 Expand "JAX-RS" → "JAX-RS Invocation" and put `.*(new|edit).*` into the Path Filter control:
 ![jfr filtering 4](https://www.morling.dev/images/jfr_filtering_4.png)
 
-Now close the last two dialogues. In the "Start Flight Recording" dialogue make sure to select your new template under "Event Settings"; although you've edited it before, it won't be selected automatically. I lost an hour or so wondering why my settings were not applied...​ .
+Now close the last two dialogues. In the "Start Flight Recording" dialogue make sure to select your new template under "Event Settings"; although you've edited it before, it won't be selected automatically. I lost an hour or so wondering why my settings were not applied…​ .
 
 Lastly, click "Finish" to begin the recording:
 ![jfr filtering 5](https://www.morling.dev/images/jfr_filtering_5.png)

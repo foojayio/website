@@ -28,7 +28,7 @@ related_posts:
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
   - "quarkus-a-runtime-and-framework-for-cloud-native-java"
   - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
-frozen: false
+frozen: true
 ---
 
 {{< img src="3-Quarkus-Unpacked-2-2.jpeg" class="alignleft is-resized" alt="Quarkus: A Runtime and Framework for Cloud-Native Java" style="width:300px" >}}

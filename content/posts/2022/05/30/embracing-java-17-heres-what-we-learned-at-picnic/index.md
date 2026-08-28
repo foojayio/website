@@ -3,7 +3,6 @@ title: "Embracing Java 17: Here’s What We Learned at Picnic"
 date: "2022-05-30T08:10:20+00:00"
 lastmod: "2022-05-31T13:45:14+00:00"
 description: "Most Java 17 blog posts focus on shiny new features. We’d like to share what it takes to adopt Java 17 in a large tech team."
-canonical: "https://blog.picnic.nl/embracing-java-17-heres-what-we-learned-69779d95fdf2"
 authors:
   - "jakob-loehnertz"
 image: "1_JQzYk7gPC63LmZnhBCMb8g.png"
@@ -13,7 +12,7 @@ related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "are-java-security-updates-important"
   - "7-functional-programming-techniques-in-java-a-primer"
-frozen: false
+frozen: true
 aliases:
   - "/today/embracing-java-17-heres-what-we-learned-at-picnic￼/"
 ---

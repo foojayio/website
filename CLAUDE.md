@@ -1355,36 +1355,63 @@ should catch a mistake at PR time rather than letting it fail silently.
 
   **A cross-post canonical rots, and a dead one is worse than none** -- it tells
   Google the real version of the article is at a URL that 404s, so foojay's copy
-  is suppressed in favour of nothing. All 838 were checked against the live web
-  (2026-08-19): 790 resolve, **48 were removed** and one was a typo
-  (`blog.franke.ch` -> `blog.frankel.ch`, which resolves). Those posts now
+  is suppressed in favour of nothing. All 837 were re-checked against the live
+  web (**2026-08-28**): 790 resolve, **47 were removed** and one was a typo
+  (`blog.franke.ch` -> `blog.frankel.ch`, which resolves -- corrected in the
+  body's own link as well, where it was equally dead). Those posts now
   self-canonicalise, which is the honest answer once the original is gone.
+
+  **The 48 posts are `frozen: true`, and THAT is the fix -- removing the line is
+  not.** The identical audit ran on 2026-08-19, removed the identical 48, and a
+  later re-scrape put every one of them back into `main`; nobody noticed, because
+  the diff is one frontmatter line on a post nothing else changed. So the second
+  time round the removal is paired with the flag that makes it survive, at the
+  cost of those 48 posts no longer tracking WordPress edits until cutover -- a
+  trade worth taking on articles from 2021-2024 whose originals are gone.
 
   Two things make this check harder than it looks, and both cost a false
   positive if ignored:
 
   1. **A 4xx from a bot wall is indistinguishable from a deleted page.** Medium
-     (24 URLs) and blogs.oracle.com answer a script with 403 -- and Medium
+     (20 URLs) and blogs.oracle.com answer a script with 403 -- and Medium
      flip-flops between 403 and **410 Gone** on the SAME url between requests,
      so its 410 is bot mitigation, not a claim about the post. Those were kept.
-     DZone's 410 WAS reproducible three times running, so that one went.
+     This is why the probe makes FOUR attempts and records all four rather than
+     reporting the last: every one of the 20 Medium URLs came back `403 410 410
+     403` or similar, which is the signature, whereas DZone's 410 was 410 on all
+     four -- so that one went. A single request cannot tell the two apart.
   2. **Check with two clients before believing a failure.** Python's urllib
      reported 5 `hirt.se` URLs as SSL failures and 6 `ashishtechmill.com` as
      timeouts; curl got 200 for hirt.se. `talktotheduck.dev` looked like a dead
      domain (connection refused) but actually resolves, serves a redirect stub
      over plain http, and 404s every article -- so those 26 are genuinely gone,
-     which only the second client could establish.
+     which only the second client could establish. Confirmed again on 2026-08-28:
+     its root answers 200 over plain `http` while https is dead, and all 26
+     articles 404 over http.
+  3. **A failure to REACH a page is not a failure of the page.** `ashishtechmill.com`
+     301s the bare domain to `www.`, and curl following that chain ends on a 301
+     rather than the article -- so all 4 of its URLs looked dead two audits
+     running (a 502 in August, a redirect loop now). Requested directly,
+     `https://www.ashishtechmill.com/<slug>` returns **200 for all four**: the
+     articles are alive and the canonicals are fine, since a search engine
+     follows the 301 the same way a browser does. Probe the redirect TARGET
+     before believing a redirect chain, and don't rewrite a third party's URL to
+     its www form -- their redirect is theirs to serve.
 
-  What was deliberately NOT removed: 35 URLs behind bot protection or a 502
-  (`ashishtechmill.com` serves its root but 502s every article -- a server
-  error is not "gone"). Dropping a canonical there would wrongly assert the
-  article is original to foojay.
+  What was deliberately NOT removed: **25** URLs -- 20 behind Medium's bot wall,
+  1 behind Oracle's, and the 4 `ashishtechmill.com` ones that are simply alive.
+  Dropping a canonical there would wrongly assert the article is original to
+  foojay.
 
-  **`transfer/Posts.java` reverts this.** It rebuilds frontmatter from the live
-  WordPress page and copies `link[rel=canonical]` through without knowing
-  whether the target still exists, so re-scraping any of those 48 posts puts the
-  dead canonical back. Re-run the check before cutover, and after any bulk
-  re-scrape.
+  **`transfer/Posts.java` reverts this, which is exactly what happened.** It
+  rebuilds frontmatter from the live WordPress page and copies
+  `link[rel=canonical]` through without knowing whether the target still exists,
+  so re-scraping any of those 48 posts puts the dead canonical back -- and did,
+  for all 48. `frozen: true` is what stops it now, so a post that has to be
+  unfrozen for a content update needs its canonical re-checked by hand on the way
+  back. Re-run the audit before cutover anyway, and after any bulk re-scrape:
+  freezing protects the 48 known-dead ones, not the 790 that are alive today and
+  can die tomorrow.
   `transfer/Sponsors.java` no longer writes the field (and its dead
   `canonical:`-based bundle lookup went with it), so a re-scrape can't put it
   back.

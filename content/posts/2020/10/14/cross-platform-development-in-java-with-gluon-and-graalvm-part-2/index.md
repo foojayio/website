@@ -27,7 +27,7 @@ Before we look at the different products mentioned in this overview, let's find 
 
 Software code can be written in different languages and the choice of language often defines how the code is executed.
 
-* In the old days, a language such as BASIC was "interpreted". An interpreter looked at every line of code and executed the code step by step. The advantage of such an approach was that a developer can run his code as soon as it was written. The execution of such code is usually slow, which is a disadvantage ---and the reason why they aren't many interpreted languages anymore today.  
+* In the old days, a language such as BASIC was "interpreted". An interpreter looked at every line of code and executed the code step by step. The advantage of such an approach was that a developer can run his code as soon as it was written. The execution of such code is usually slow, which is a disadvantage —and the reason why they aren't many interpreted languages anymore today.  
 * Java code is compiled to bytecode that will be loaded into and executed by a virtual machine (VM). Compiled code is faster than interpreted code, but compiling introduces an extra step into the development process.  
 * You'll get the best performance from code that is compiled and linked into a standalone executable that doesn't require a VM, a *native image*. In this case, the application runs directly on the operating system of the device you are using.
 
@@ -65,7 +65,7 @@ Gluon and the upcoming Gluon Cloud Build use GraalVM Native Image to create nati
 * [Gluon Substrate](https://github.com/gluonhq/substrate) is used on the local development environment.
 * With [Gluon Cloud Build](https://gluonhq.com/) (under development), this time-consuming process can be offloaded to the cloud.
 
-Most of the Gluon products ---but not all of them--- are offered as open source software:
+Most of the Gluon products —but not all of them— are offered as open source software:
 
 * [Gluon Scene Builder](https://github.com/gluonhq/scenebuilder) is offered for free under a permissive open source license.
 * [Gluon Mobile](https://gluonhq.com/products/mobile/) is a closed source, proprietary SDK that can be extended with open and closes source components.
@@ -99,7 +99,7 @@ Java is a clear leader in the enterprise market. Java is cross-platform, secure,
 
 That's also what Java developers need and want, but:
 
-* Either they are served a disappointing experience on Android with its disregard for compatibility with the real Java—supporting only earlier features of Java֫---and its attempts to force developers towards other technologies, such as Flutter (and Dart).
+* Either they are served a disappointing experience on Android with its disregard for compatibility with the real Java—supporting only earlier features of Java֫—and its attempts to force developers towards other technologies, such as Flutter (and Dart).
 * Or they are forced into Objective-C or Swift, or a different cross-platform offering such as Xamarin (C#), Cordova or React Native (JS).
 
 Moreover, enterprises dislike rapid breaking changes, such as those between Objective-C and Swift, or between the various releases of Swift, or even the evolution of the Android APIs. They require stability and a long-term perspective of backwards compatibility.

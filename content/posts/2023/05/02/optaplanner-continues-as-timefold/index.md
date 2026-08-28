@@ -3,7 +3,6 @@ title: "Timefold is the fork of OptaPlanner"
 date: "2023-05-02T15:12:53+00:00"
 lastmod: "2023-05-02T15:24:37+00:00"
 description: "Timefold continues OptaPlanner, open source project optimizing operational planning, saving thousands of organizations time, money, resources."
-canonical: "https://timefold.ai/blog/2023/optaplanner-fork/"
 authors:
   - "geoffrey-de-smet"
 image: "timefold.png"
@@ -15,7 +14,7 @@ related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "9-outdated-ideas-about-java"
   - "jc-ai-newsletter-16"
-frozen: false
+frozen: true
 ---
 
 **OptaPlanner is an Open Source project used globally to optimize operational planning. Every day, it saves thousands of organizations time, money and resources.**

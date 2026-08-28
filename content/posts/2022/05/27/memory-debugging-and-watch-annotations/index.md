@@ -3,7 +3,6 @@ title: "Memory Debugging and Watch Annotations"
 date: "2022-05-27T08:04:34+00:00"
 lastmod: "2022-05-27T08:04:35+00:00"
 description: "RAM profiling has its strengths and weaknesses. The Debugger is a complementary tool to translate obtuse statistics to actionable changes!"
-canonical: "https://talktotheduck.dev/memory-debugging-and-watch-annotations"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
@@ -14,7 +13,7 @@ related_posts:
   - "what-is-debugging-in-140-seconds"
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "get-started-with-allocation-profiling"
-frozen: false
+frozen: true
 ---
 
 Before diving into debugging memory issues and the other amazing running process, memory debugging capabilities (which are amazing)... I want to discuss a point I left open in the [last duckling post](https://talktotheduck.dev/debugging-collections-streams-and-watch-renderers). Back there we discussed customizing the watch renderer. This is super cool!

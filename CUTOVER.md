@@ -73,9 +73,13 @@ rather than failing loudly. Finish this phase before touching DNS.
         the stored files kept only Cloudflare's placeholder and the encoded copy
         was dropped at conversion. Once WordPress is gone the addresses are
         unrecoverable.
-      - Re-check the 838 cross-post `canonical:` URLs. `transfer/Posts.java`
-        copies `link[rel=canonical]` through blindly, so a re-scrape puts back
-        any of the 48 dead ones that were removed.
+      - Re-check the 790 remaining cross-post `canonical:` URLs.
+        `transfer/Posts.java` copies `link[rel=canonical]` through blindly, so a
+        re-scrape puts back any dead one it finds — which is why the 48 already
+        known dead are `frozen: true` (see CLAUDE.md). Freezing covers those 48;
+        it does nothing for the 790 that are alive today and can die before
+        cutover. Probe each URL four times across two HTTP clients and treat a
+        403/410 flip-flop as a bot wall, not a deleted page.
       - Re-run the hero-image audit: `curl -o /dev/null -w '%{http_code}'` over
         every `image:` value starting with a scheme. 76 posts hotlink a hero and
         11 were already dead.

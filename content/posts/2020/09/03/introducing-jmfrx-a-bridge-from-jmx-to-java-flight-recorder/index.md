@@ -85,7 +85,7 @@ public class EventRegisterer {
 
 Now start your application and create a JFR configuration file which enables the JmFrX event type. To do so, open JDK Mission Control, and choose your running application in the JVM Browser. Then perform these steps:
 
-* Right-click the target JVM → Select *Start Flight Recording...​*
+* Right-click the target JVM → Select *Start Flight Recording…​*
 * Click on *Template Manager*
 * Copy the *Continuous* setting and click *Edit* for modifying this copy
 * Expand the *JMX* and *JMX Dump* nodes

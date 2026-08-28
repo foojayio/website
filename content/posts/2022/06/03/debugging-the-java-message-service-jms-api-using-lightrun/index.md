@@ -3,7 +3,6 @@ title: "Debugging the Java Message Service (JMS) API using Lightrun"
 date: "2022-06-03T09:26:12+00:00"
 lastmod: "2022-06-03T09:26:14+00:00"
 description: "Due to their asynchronous nature and production complexities debugging messaging systems is remarkably hard... WAS remarkably hard..."
-canonical: "https://lightrun.com/tutorials/debugging-the-java-message-service-jms-api-using-lightrun/"
 authors:
   - "shai-almog"
 image: "Debugging-JMS-messages-using-Lightrun.jpg"
@@ -16,7 +15,7 @@ related_posts:
   - "debugging-jaxb-production-issues"
   - "debugging-jsoup-java-code-in-production-using-lightrun"
   - "get-started-with-allocation-profiling"
-frozen: false
+frozen: true
 ---
 
 The Java Message Service API (JMS) was developed by Sun Microsystems in the days of [Java EE](https://en.wikipedia.org/wiki/Jakarta_EE).

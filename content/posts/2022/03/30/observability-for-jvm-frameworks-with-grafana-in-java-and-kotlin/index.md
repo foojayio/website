@@ -378,5 +378,5 @@ We have also shown the importance of observability in the Cloud age as it may pl
 Happy observing and enjoy the [GitHub project](https://github.com/mirage22/fw-monitoring-examples).
 
 ```
- 
+ 
 ```

@@ -3,7 +3,6 @@ title: "The Story of a Java 17 Native Memory Leak"
 date: "2022-09-13T08:15:53+00:00"
 lastmod: "2022-09-13T08:15:55+00:00"
 description: "How a native memory leak in Java 17 got fixed, improving the future operability of the JVM platform for millions!"
-canonical: "https://www.nickebbitt.com/blog/2022/01/26/the-story-of-a-java17-memory-leak"
 authors:
   - "nick-ebbitt"
 image: "twitter-java-17.png"
@@ -14,7 +13,7 @@ related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "7-functional-programming-techniques-in-java-a-primer"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-frozen: false
+frozen: true
 ---
 
 ## Context

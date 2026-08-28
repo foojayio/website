@@ -151,7 +151,7 @@ At this point all fields must have been automatically populated with the correct
 
 Similarly you can update the selected interpreter for the Python configuration file that is used to run the TornadoVM unit-tests:
 
-**Run \> Edit Configurations \> Python \> TornadoVM-Tests**
+**Run \> Edit Configurations \> Python \> TornadoVM-Tests**  
 
 {{< img src="Configure-Tests-1024x784.png" class="aligncenter size-large is-resized" width="1024" height="784" style="width:566px;height:auto" >}}
 
@@ -237,7 +237,7 @@ You can add any values that will be selected as arguments for your class. In our
 
 #### vi) Save and run
 
-You can click Apply and Run your application.
+You can click Apply and Run your application.  
 
 {{< img src="Configure-Application-1024x787.png" class="aligncenter size-large is-resized" width="1024" height="787" style="width:624px;height:auto" >}}
 

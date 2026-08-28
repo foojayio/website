@@ -3,7 +3,6 @@ title: "Developer vs. ChatGPT Part I: Writing a Spring Boot Microservice"
 date: "2023-04-27T15:25:12+00:00"
 lastmod: "2023-05-03T07:43:19+00:00"
 description: "Pitting a seasoned Java developer against the all-knowing generative AI to find out... can AI generate a Java microservice end-to-end?"
-canonical: "https://digma.ai/blog/java-developer-vs-chatgpt-part-i-writing-a-spring-boot-microservice/"
 authors:
   - "roni-dover"
 image: "grid_0-700x350-1.png"
@@ -15,7 +14,7 @@ related_posts:
   - "creating-scalable-openai-gpt-applications-in-java"
   - "getting-started-with-deep-learning-in-java-using-deep-netts"
   - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"
-frozen: false
+frozen: true
 ---
 
 ### We pit a seasoned Java developer against the all-knowing generative AI to find out once and for all: Can an AI generate a Java microservice end-to-end?

@@ -13,7 +13,7 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
 related_posts:
-frozen: false
+frozen: true
 ---
 
 *Today we'd like to introduce a new community manager for all things Raspberry Pi on foojay: Frank Delporte!*

@@ -126,12 +126,8 @@ We could have solved this problem if we had more thread in the pool.
 
 Interestingly if we use CachedThreadPool, the problem goes away,
 
-```
-
 ```java
 var threadPool = Executors.newCachedThreadPool();
-```
-
 ```
 
 Because CachedThreadPool creates a thread on the fly whenever it requires one. The only caveat is that we cannot create unlimited threads. If we want to calculate the Fibonacci number of a large number, we will have more tasks, and more threads will be waiting.

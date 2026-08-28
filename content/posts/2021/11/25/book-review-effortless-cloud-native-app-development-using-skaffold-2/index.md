@@ -3,7 +3,6 @@ title: "Book Review: “Effortless Cloud-Native App Development Using Skaffold�
 date: "2021-11-25T12:52:08+00:00"
 lastmod: "2021-11-25T12:53:06+00:00"
 description: "Skaffold is a cloud native open source framework from Google that lets SpringBoot devs build Kubernetes apps easily and deploy effortlessly!"
-canonical: "https://talktotheduck.dev/cloud-native-skaffold-book-review"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
@@ -16,7 +15,7 @@ related_posts:
   - "book-review-why-programs-fail"
   - "the-debugger-checklist-part-ii"
   - "modernize-legacy-code-in-production-rebuild-your-airplane-midflight-without-crashing"
-frozen: false
+frozen: true
 ---
 
 I'm a developer who cares deeply about production. But I'm not a devops and unfortunately I'm pretty bad at that. That's why when I heard about Skaffold it instantly piqued my interest. Write Kubernetes cloud native apps without well… Writing Kubernetes native apps… Sign me up!

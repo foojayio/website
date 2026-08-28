@@ -87,7 +87,7 @@ In order to enable the dynamic inspection feature of TornadoInsight, developers 
 
 Developers should configure the TornadoVM root directory (i.e. the path to the TornadoVM cloned repository) and select a JDK which should be \>= JDK 21.
 
-Additionally, developers should indicate a tentative "Max array size" that can be used by TornadoInsight to set the size of the input and output arrays of a TornadoVM task.
+Additionally, developers should indicate a tentative "Max array size" that can be used by TornadoInsight to set the size of the input and output arrays of a TornadoVM task.  
 
 {{< img src="TornadoInsight_Configuration_Plugin-1024x653.webp" class="aligncenter size-large is-resized" width="1024" height="653" style="width:643px;height:auto" >}}
 

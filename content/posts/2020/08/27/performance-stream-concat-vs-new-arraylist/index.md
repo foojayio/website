@@ -13,7 +13,7 @@ related_posts:
   - "how-is-leyden-improving-java-performance-part-2-of-3"
   - "indexing-all-of-wikipedia-on-a-laptop"
   - "billion-events-per-second-with-millisecond-latency"
-frozen: false
+frozen: true
 ---
 
 During a code review, I suggested some code improvements related to JDK8+ streams. The original code looked very similar to the following:

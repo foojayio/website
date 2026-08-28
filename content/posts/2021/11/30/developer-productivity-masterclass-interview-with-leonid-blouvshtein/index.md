@@ -3,7 +3,6 @@ title: "Developer Productivity Masterclass: Interview With Leonid Blouvshtein"
 date: "2021-11-30T09:09:01+00:00"
 lastmod: "2021-11-30T09:15:37+00:00"
 description: "Are the problems startups run into different from the ones experienced by Netflix, Hashicorp and Meta? Learn about increased productivity!"
-canonical: "https://dzone.com/articles/developer-productivity-masterclass-interview"
 authors:
   - "shai-almog"
 image: "1638188701445.jpg"
@@ -15,7 +14,7 @@ related_posts:
   - "book-review-why-programs-fail"
   - "java-logging-what-to-log-what-not-to-log"
   - "jc-ai-newsletter-16"
-frozen: false
+frozen: true
 ---
 
 **On December 7th, Lightrun will [host a free master class](https://www.linkedin.com/events/developerproductivitymasterclas6870717107772907520/ "host a free master class") with Mykyta Protsenko, Senior Software Engineer at Netflix; Michael Wood, Field CTO, HashiCorp; Ryan Menezez, Software Engineering Manager, Meta; and Leonid Blouvshtein, CTO of Lightrun.**

@@ -21,18 +21,18 @@ We have a packed agenda centered on the Jakarta EE, MicroProfile and Cloud Nativ
 
 Myself, Werner Keil and Thodoris Bais are organizing on behalf of the community. We are grateful to have a very strong line-up both in terms of speakers and content. Below is a very good snapshot. Please note that all times are Central European Time (CET).
 
-|----------------------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Session**                                  | **Time**                  | **Speakers**                                                                                                                                          |
-| Jakarta EE Community State of the Union      | 10/19/2020 14:30 -- 15:15 | Steve Millidge                                                                                                                                        |
-| MicroProfile Community Current and Future    | 10/19/2020 15:15 -- 16:00 | Emily Jiang                                                                                                                                           |
-| Jakarta EE/MicroProfile -- Key Features Demo | 10/19/2020 16:30 -- 17:15 | Josh Juneau, Edwin Derks                                                                                                                              |
-| Jakarta EE 10 Round Table                    | 10/19/2020 17:15 -- 18:00 | Otavio Santana (Moderator) Steve Millidge (Payara), Kevin Sutter (IBM), Dmitry Kornilov (Oracle), David Blevins (Tomitribe), Werner Keil, Ryan Cuprak |
+|---------------------------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Session**                                 | **Time**                 | **Speakers**                                                                                                                                          |
+| Jakarta EE Community State of the Union     | 10/19/2020 14:30 – 15:15 | Steve Millidge                                                                                                                                        |
+| MicroProfile Community Current and Future   | 10/19/2020 15:15 – 16:00 | Emily Jiang                                                                                                                                           |
+| Jakarta EE/MicroProfile – Key Features Demo | 10/19/2020 16:30 – 17:15 | Josh Juneau, Edwin Derks                                                                                                                              |
+| Jakarta EE 10 Round Table                   | 10/19/2020 17:15 – 18:00 | Otavio Santana (Moderator) Steve Millidge (Payara), Kevin Sutter (IBM), Dmitry Kornilov (Oracle), David Blevins (Tomitribe), Werner Keil, Ryan Cuprak |
 
 Steve Millidge will be providing a good overview of the current status of Jakarta EE in ***Jakarta EE Community State of the Union***. This will include Jakarta EE 8, Jakarta EE 9 as well as Jakarta EE 10. If there is one session to learn about Jakarta EE status, get involved and ask questions, this session is it.
 
 Emily Jiang will be doing the same thing for MicroProfile in ***MicroProfile Community Current and Future***. So if you want to know about MicroProfile, this is the session you should make a point to attend. Emily will cover both MicroProfile 3.3 and MicroProfile 4.0.
 
-If you have not seen Jakarta EE and MicroProfile in action, ***Jakarta EE/MicroProfile -- Key Features Demo*** is for you. Josh Juneau and Edwin Derks will be joining forces in this very code/demo heavy session to show you the key features of this technology stack, where to use it in the real world and how.
+If you have not seen Jakarta EE and MicroProfile in action, ***Jakarta EE/MicroProfile – Key Features Demo*** is for you. Josh Juneau and Edwin Derks will be joining forces in this very code/demo heavy session to show you the key features of this technology stack, where to use it in the real world and how.
 
 Finally, we will be bringing together some key leaders in the community to talk about the future of Jakarta EE in ***Jakarta EE 10 Round Table*** . You should show up not just to hear what this panel of experts thinks is most important for the success of the technology, but also to ask them questions. Anyone can pose their questions to the panel by just adding them [here](https://docs.google.com/document/d/1M2qu3NW2D0RJ8Q-1aA1LJhha6oc0Ci4ifveRZey3Ce8/edit?usp=sharing).
 

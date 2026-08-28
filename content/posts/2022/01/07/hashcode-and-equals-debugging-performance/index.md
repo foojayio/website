@@ -3,7 +3,6 @@ title: "Hashcode and Equals: Debugging and Performance"
 date: "2022-01-07T13:31:35+00:00"
 lastmod: "2022-01-07T13:31:36+00:00"
 description: "Standard Java methods hashcode & equals are crucial to performance but this is very hard to detect as they're often too small for profilers."
-canonical: "https://talktotheduck.dev/hashcode-and-equals-debugging-performance"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Time-Travel-Debuggers-01.jpg"
@@ -14,7 +13,7 @@ related_posts:
   - "book-review-why-programs-fail"
   - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-frozen: false
+frozen: true
 ---
 
 A few weeks ago I ran into [this story on reddit](https://www.reddit.com/r/java/comments/qi8yu8/hint_to_myself_and_other_poor_souls_dont_use/) that discusses the problem with using the URL class as a key in a Map. This boils down to a remarkably slow implementation of the hashcode() method in java.net.URL which makes this class unusable in such situations.

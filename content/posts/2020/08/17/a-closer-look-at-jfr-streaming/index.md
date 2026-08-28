@@ -20,11 +20,11 @@ frozen: false
 
 *By* [*Marcus Hirt*](https://twitter.com/hirt)*and* [*JP Bempel*](https://twitter.com/jpbempel)
 
-Since JDK 14, there is a new Java Flight Recorder (JFR) kid on the block -- JFR streaming. 🙂 This blog post, written together with JP Bempel, will discuss some of the things that you can do with JFR streaming, as well as some of the things you may want to avoid.
+Since JDK 14, there is a new Java Flight Recorder (JFR) kid on the block – JFR streaming. 🙂 This blog post, written together with JP Bempel, will discuss some of the things that you can do with JFR streaming, as well as some of the things you may want to avoid.
 
 ## An Introduction to JFR Streaming
 
-In the most recent version of the JDK, a new JFR-related feature was introduced -- JFR streaming. It is a feature allowing a developer to subscribe to select JFR data and to decide what to do with that data in the host process. JFR events can also be consumed from a separate process by pointing to the file repo of a separate JVM process -- the mechanism is the same.
+In the most recent version of the JDK, a new JFR-related feature was introduced – JFR streaming. It is a feature allowing a developer to subscribe to select JFR data and to decide what to do with that data in the host process. JFR events can also be consumed from a separate process by pointing to the file repo of a separate JVM process – the mechanism is the same.
 
 The JFR streaming works by allowing the reading from the JFR file whilst it is being written, the emissions to disk happening more frequently (usually every seconds, or when the in memory buffers are full) than during your normal flight recordings, where the data is emitted when the in-memory buffers are full. It does not support streaming directly from in-memory buffers, and the events are not delivered synchronously when they are occurring in the JVM.
 
@@ -118,7 +118,7 @@ There are several advantages to JFR event streaming. It is a great way to access
 Here are some examples:
 
 * Directly send monitoring data to your favourite monitoring service  
-  For example streaming select metrics over to Datadog. 😉 Not that you would need to -- we already derive interesting performance metrics from the (full) flight recordings we capture. We even track complex metrics like top hottest methods, or top allocations sites, over time, using what we internally call high cardinality metrics.
+  For example streaming select metrics over to Datadog. 😉 Not that you would need to – we already derive interesting performance metrics from the (full) flight recordings we capture. We even track complex metrics like top hottest methods, or top allocations sites, over time, using what we internally call high cardinality metrics.
 * Pre-aggregating data before sending it off  
   For example, you could get the CPU load every second, and then every five minutes roll it up to an average, median, min, max and a standard deviation, not having to send every single entry.
 * Act on profiling data in-process  
@@ -149,7 +149,7 @@ This is from [JEP-349\[2\]](https://openjdk.java.net/jeps/349), the JEP where JF
 
 Let's explore why the JEP differentiates between monitoring and profiling. Some events in JFR are simple data points in time. Some are more complex, containing plenty of constants. For example stack traces. JFR takes great care to record these complex data structures in a binary format that doesn't take a lot of processing time to produce, and which is still compact.
 
-Some of the JFR events occur quite frequently -- for example, a typical one minute recording of data can contain hundreds of thousands of events. The file size for such a recording is typically only a couple of MB large. There is a mix of techniques used to keep the size down, such as using constant pools to ensure that information like method names are not repeated, LEB128 encoding of integers etc.
+Some of the JFR events occur quite frequently – for example, a typical one minute recording of data can contain hundreds of thousands of events. The file size for such a recording is typically only a couple of MB large. There is a mix of techniques used to keep the size down, such as using constant pools to ensure that information like method names are not repeated, LEB128 encoding of integers etc.
 
 For profiling you typically want quite a few of these events enabled. JFR was built to emit this data at a very low overhead, and the data is eminently useful to get detailed information about things like why your thread is halting. For example, the stack trace to a place where your code had to wait to enter a monitor, complete with the class of the monitor waited on, the exact duration of the wait, which thread was holding on to the monitor (making you not able to enter), the monitor address and more. Not only that, there may have been other events providing context about what was going on in that thread at the time of the monitor enter, shining further light on what was going on. Events that you may not even know about.
 
@@ -163,7 +163,7 @@ You can externalize some of that cost, i.e. how the process you are monitoring i
 
 For laughs and giggles, here are some benchmarks using just standard JFR to get all the data in the profiling template, compared to getting the equivalent information and serializing it to a JSon-like format using JFR Streaming. In other words, abusing JFR Streaming as a streaming replacement for getting the full JFR dataset. This is of course not what you should be using JFR Streaming for, but exemplifies how wrong you can land if you use the technology in a way it was never intended. We'll look at the latency of http requests, the CPU time spent and the allocation pressure. We'll also look at the size of the payload of information extracted. The benchmark is admittedly being a bit extra mean as well, to explore edge cases.
 
-Note that this is a simplified example -- we're not even bothering with extracting the full stacktrace information and re-encoding it for streaming, whilst the JFRs in comparison already contain the full stack traces for all events efficiently encoded in constant pools. We could trade (even more) CPU for trying to bring the streamed data back to a JFR style format with constant pools again before storing/sending it. For serialization we're simply doing toString() on the event objects, which gives us the events in a JSon-like format with only the top five frames of the stack trace. Including the full stack traces would add quite a bit more overhead to the streaming example.
+Note that this is a simplified example – we're not even bothering with extracting the full stacktrace information and re-encoding it for streaming, whilst the JFRs in comparison already contain the full stack traces for all events efficiently encoded in constant pools. We could trade (even more) CPU for trying to bring the streamed data back to a JFR style format with constant pools again before storing/sending it. For serialization we're simply doing toString() on the event objects, which gives us the events in a JSon-like format with only the top five frames of the stack trace. Including the full stack traces would add quite a bit more overhead to the streaming example.
 
 The benchmark is available in this [GitHub repository](https://github.com/jpbempel/JFR-streaming-benchmark). It is based on the standard PetClinic application with some modifications to make it relevant to measure overhead in general.
 

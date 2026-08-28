@@ -1,7 +1,7 @@
 ---
 title: "What's New in the August 2026 Azul Payara Release?"
 date: "2026-08-24T15:36:28+00:00"
-lastmod: "2026-08-24T15:39:42+00:00"
+lastmod: "2026-08-25T19:27:35+00:00"
 description: "The August 2026 Payara release previews Jakarta Agentic AI, adds MicroProfile 7.1 and gRPC and patches a security advisory."
 authors:
   - "dominika-tasarz"
@@ -32,7 +32,7 @@ The headline is in the Community edition. Azul Payara Community 7.2026.8 ships s
 
 ## The Spotlight: A First Preview of Jakarta Agentic AI
 
-Azul Payara Community 7.2026.8 integrates [the Jakarta Agentic AI 1.0 API](https://foojay.io/today/jakarta-agentic-ai-hits-its-first-milestone/)into the Payara 7 runtime. This is a first preview. The specification is a standalone release, published under the Jakarta EE process; the current draft is Milestone 1 (1.0.0-M1), out for early feedback, so treat this as your chance to build against the API inside a Jakarta EE 11 runtime and shape it before it is finalized.
+Azul Payara Community 7.2026.8 integrates [the Jakarta Agentic AI 1.0 API](https://foojay.io/today/jakarta-agentic-ai-hits-its-first-milestone/) into the Payara 7 runtime. This is a first preview. The specification is a standalone release, published under the Jakarta EE process; the current draft is Milestone 1 (1.0.0-M1), out for early feedback, so treat this as your chance to build against the API inside a Jakarta EE 11 runtime and shape it before it is finalized.
 
 What does the specification define? A vendor-neutral API to build, deploy, and run AI agents on Jakarta EE runtimes. The programming model will feel natural to any Jakarta EE developer, because an agent is just a CDI bean:
 
@@ -80,7 +80,7 @@ Because agents live in the CDI container, the rest of your application works wit
 
 The preview ships in Community first. The specification is still iterating, the API may change, and your feedback on the [Payara GitHub repository](https://github.com/payara/Payara) and the specification's own channels will decide how quickly this matures into the Enterprise line. Start experimenting now and tell us what breaks.
 
-## Azul Payara Community 7.2026.8 : MicroProfile 7.1
+## Azul Payara Community 7.2026.8 - MicroProfile 7.1
 
 Alongside the Agentic AI preview, Community 7.2026.8 upgrades MicroProfile support from 6.1 to 7.1, with the MicroProfile OpenAPI API moving to 4.1.1.
 
@@ -160,7 +160,7 @@ For teams on the 5 or 6 line evaluating the move to [Payara 7](https://www.azul.
 
 **Upgrading and Feedback**
 
-We recommend upgrading to the latest release for your line. A security patch for [GHSA-r7wm-3cxj-wff9](https://github.com/advisories/GHSA-r7wm-3cxj-wff9) is available across the 6, 5, and 4 lines, and the 5 and 4 lines additionally close two Jackson CVEs.
+We recommend upgrading to the latest release for your line. A security patch for [GHSA-r7wm-3cxj-wff9](https://www.kodemsecurity.com/cve-archive/ghsa-r7wm-3cxj-wff9) is available across the 6, 5, and 4 lines, and the 5 and 4 lines additionally close two Jackson CVEs.
 
 For detailed upgrade instructions, see the [Azul Payara documentation](https://docs.azul.com/payara-community/general-info/getting-started) and the [Payara Server upgrade guide](https://docs.payara.fish/community/docs/Technical%20Documentation/Payara%20Server%20Documentation/Upgrade%20Guide/Overview.html). To report issues, contribute fixes, or follow the Payara 7 roadmap, visit the [Payara GitHub repository](https://github.com/payara/Payara). For commercial support, [contact the team](https://payara.fish/about/contact-us/) or your Azul account team.
 

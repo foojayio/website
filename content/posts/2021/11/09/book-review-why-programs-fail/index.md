@@ -3,7 +3,6 @@ title: "Book Review: Why Programs Fail by Andreas Zeller"
 date: "2021-11-09T10:18:25+00:00"
 lastmod: "2021-11-09T10:29:36+00:00"
 description: "The book provides the theoretical infrastructure needed for the quality process. Viewed as a tutorial it’s pretty good for students!"
-canonical: "https://talktotheduck.dev/why-programs-fail-a-book-review"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
@@ -15,7 +14,7 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "production-horrors-handling-disasters-public-debrief"
   - "foojay-podcast-67"
-frozen: false
+frozen: true
 ---
 
 ![](wpf3-415x510.jpeg)

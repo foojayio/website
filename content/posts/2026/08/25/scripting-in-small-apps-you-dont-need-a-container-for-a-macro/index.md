@@ -12,7 +12,7 @@ related_posts:
   - "java-for-scripting"
   - "six-jdk-24-features-you-should-know-about"
   - "foojay-podcast-97"
-frozen: false
+frozen: true
 ---
 
 *Disclosure: I maintain Aussom, an Apache 2.0 interpreted language for the JVM. It's the approach I argue for here, and I have tried to be clear about where it is the wrong choice.*

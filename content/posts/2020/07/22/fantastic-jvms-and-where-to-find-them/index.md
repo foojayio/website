@@ -28,11 +28,11 @@ Let's take the Oracle JDK as an example. JDK 7 was GA in July 2011. Publicly ava
 
 Let's say you're running on JDK 7. If you got your JDKs from Oracle, without a support contract chances are that the latest version of JDK 7 you got was built in 2015. You are now five (5!) years behind on critical security patches.
 
-In other words, if you're still running your software on JDK 7, you may want to at least begin upgrading to 8. JDK 7 is dying and support is being dropped left and right. If you aren't buying support and have someone provide you with (security) patches, you might want to accelerate the effort. Also, this particular upgrade (7-\>8) should be relatively painless -- in most cases it will be a drop in replacement. Now, if you're not running a JDK 7 with the latest patches (sanity check -- was the JDK at least built this year?), you may not only be missing out on bug fixes, but you may also be missing out on [security patches](https://www.cvedetails.com/version-list/93/19116/1/Oracle-JDK.html?sha=b856721542b66953c859bd95be067255dd4c6098&order=1&trc=188)\[2\]!
+In other words, if you're still running your software on JDK 7, you may want to at least begin upgrading to 8. JDK 7 is dying and support is being dropped left and right. If you aren't buying support and have someone provide you with (security) patches, you might want to accelerate the effort. Also, this particular upgrade (7-\>8) should be relatively painless – in most cases it will be a drop in replacement. Now, if you're not running a JDK 7 with the latest patches (sanity check – was the JDK at least built this year?), you may not only be missing out on bug fixes, but you may also be missing out on [security patches](https://www.cvedetails.com/version-list/93/19116/1/Oracle-JDK.html?sha=b856721542b66953c859bd95be067255dd4c6098&order=1&trc=188)\[2\]!
 
 The same arguments could be made for JDK 8 as well, on a slightly pushed out time-line. The good news is that there are still public (and free) updates coming from the OpenJDK 8 maintenance project. That said, there are plenty of advantages for upgrading to JDK 11+, better performance being one of them.
 
-Now, when the new, faster, release schedule was announced, Oracle announced that every 3 years, there would be an LTS (Long Term Support) version of Java. The releases in between the LTS releases would only be supported until the next release came out. Most vendors have adopted the same support scheme, which means that, at the time of writing, you should not be running ANYTHING on JDK 9,10,12 and 13 (unless you're using Azul distributions, see \[3\]). They are not supported. Running them will only mean that you are lacking bug- and security fixes. To take a somewhat arbitrary example -- if you stopped upgrading JDK 8 after 8u74, you are literally lacking [thousands of fixes](https://bugs.openjdk.java.net/secure/Dashboard.jspa?selectPageId=19531).
+Now, when the new, faster, release schedule was announced, Oracle announced that every 3 years, there would be an LTS (Long Term Support) version of Java. The releases in between the LTS releases would only be supported until the next release came out. Most vendors have adopted the same support scheme, which means that, at the time of writing, you should not be running ANYTHING on JDK 9,10,12 and 13 (unless you're using Azul distributions, see \[3\]). They are not supported. Running them will only mean that you are lacking bug- and security fixes. To take a somewhat arbitrary example – if you stopped upgrading JDK 8 after 8u74, you are literally lacking [thousands of fixes](https://bugs.openjdk.java.net/secure/Dashboard.jspa?selectPageId=19531).
 
 At the time of writing this blog, the new CPU (Critical Patch Update) releases have just been published, and these are the releases you should be running in July 2020 (sooner rather than later):
 
@@ -56,11 +56,11 @@ OpenJDK, being open sourced, has builds provided by plenty of vendors. Here is a
 * [Oracle](http://java.oracle.com/) (Oracle JDK, Oracle OpenJDK)
 * [SAP](https://sap.github.io/SapMachine/) (SapMachine)
 
-These providers usually ship distributions with pretty much the same bits from the OpenJDK repository, sometimes differing by what features are enabled, for example like a GC (Shenandoah / Red Hat), or by adding proprietary features like a new compiler (Falcon / Azul (Zing)). Some vendors have a free distribution (e.g. Oracle OpenJDK, Azul Zulu) and one that requires a commercial license (Oracle JDK, Azul Zing). Which vendor and distribution you should select depends on your demands -- e.g. which vendor can provide reliable support to you (Oracle is one of the biggest contributors to OpenJDK), or which one provides the feature you need at a price point you can afford (e.g. JDK Flight Recorder on JDK 8 without the need for a commercial license, or support for a specific GC or compiler).
+These providers usually ship distributions with pretty much the same bits from the OpenJDK repository, sometimes differing by what features are enabled, for example like a GC (Shenandoah / Red Hat), or by adding proprietary features like a new compiler (Falcon / Azul (Zing)). Some vendors have a free distribution (e.g. Oracle OpenJDK, Azul Zulu) and one that requires a commercial license (Oracle JDK, Azul Zing). Which vendor and distribution you should select depends on your demands – e.g. which vendor can provide reliable support to you (Oracle is one of the biggest contributors to OpenJDK), or which one provides the feature you need at a price point you can afford (e.g. JDK Flight Recorder on JDK 8 without the need for a commercial license, or support for a specific GC or compiler).
 
 There are also upstream builds, not supported by anyone, built on Red Hat infrastructure and hosted by AdoptOpenJDK. For example, if you get a JDK 8 from Docker Hub (openjdk/jdk8u252, openjdk/jdk8), that is what you would [get](https://github.com/docker-library/openjdk/blob/master/8/jdk/Dockerfile).
 
-## Where to get JFR -- Public Service Announcement
+## Where to get JFR – Public Service Announcement
 
 As you probably know, JDK Flight Recorder, a technology close to my heart, has been backported to JDK 8. Since we're talking about where to get your JVMs and versions, I thought I'd include a small table for which provider will be including JFR in what version of their JDK 8 builds.
 
@@ -86,7 +86,7 @@ Thanks to Mario Torre, JP Bempel and Gil Tene for feedback!
 
 \[2\]: To check the vulnerabilities you may be exposed to, see e.g. [https://www.cvedetails.com/version-list/93/19116/1/Oracle-JDK.html?sha=b856721542b66953c859bd95be067255dd4c6098\&order=1\&trc=188](https://www.cvedetails.com/version-list/93/19116/1/Oracle-JDK.html?sha=b856721542b66953c859bd95be067255dd4c6098&order=1&trc=188)
 
-\[3\]: Upstream JDK 13u is being supported, and Azul has announced 13 to be "Medium Term" supported -- you can keep getting updates for JDK 13 for Azul distributions.
+\[3\]: Upstream JDK 13u is being supported, and Azul has announced 13 to be "Medium Term" supported – you can keep getting updates for JDK 13 for Azul distributions.
 
 \[4\]: These are built by Red Hat and hosted by AdoptOpenJDK, and are different from Red Hat's and AdoptOpenJDK's supported builds.
 

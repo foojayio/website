@@ -3,7 +3,6 @@ title: "Debugging Collections, Streams, and Watch Renderers"
 date: "2022-04-29T07:54:01+00:00"
 lastmod: "2022-04-29T07:56:16+00:00"
 description: "Inspecting the data in the watch quickly is key to a fast and effective debugging session. Here's how you can see the data that's important!"
-canonical: "https://talktotheduck.dev/debugging-collections-streams-and-watch-renderers"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
@@ -15,7 +14,7 @@ related_posts:
   - "what-is-debugging-in-140-seconds"
   - "the-basics-of-breakpoints-you-might-not-know"
   - "exception-breakpoint-that-doesnt-suck-and-a-real-use-case-for-method-breakpoints"
-frozen: false
+frozen: true
 ---
 
 In the last two ducklings, I finished the extensive discussion on breakpoints and switched my focus to the watch area. In it, we have several amazing and lesser known tools that let us build insight into our running application. Being able to tell at a glance if something works correctly is crucial for many applications.

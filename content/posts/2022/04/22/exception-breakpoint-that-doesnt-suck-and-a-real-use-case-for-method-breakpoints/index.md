@@ -3,7 +3,6 @@ title: "Exception Breakpoint that Doesn't Suck and Other Use Cases"
 date: "2022-04-22T07:37:25+00:00"
 lastmod: "2022-04-22T07:37:27+00:00"
 description: "Dial your debugging skills to 11 by leveraging some of the lesser known capabilities for debugging highly complex systems such as filters!"
-canonical: "https://talktotheduck.dev/exception-breakpoint-that-doesnt-suck"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
@@ -14,7 +13,7 @@ related_posts:
   - "what-is-debugging-in-140-seconds"
   - "the-basics-of-breakpoints-you-might-not-know"
   - "debugging-collections-streams-and-watch-renderers"
-frozen: false
+frozen: true
 ---
 
 Two weeks ago, [I left this series in a "cliffhanger"](https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know) of sorts. Well, as much as a programming blog can leave things in the air… The big one amongst them is the premise that exception breakpoints don't have to suck. If you used them in the past, you would know that grabbing all exceptions is ridiculous. You end up at a breakpoint every second and it doesn't help.

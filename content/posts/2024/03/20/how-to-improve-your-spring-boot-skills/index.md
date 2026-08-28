@@ -3,7 +3,6 @@ title: "How to improve your spring boot skills"
 date: "2024-03-20T15:10:29+00:00"
 lastmod: "2024-08-14T13:05:42+00:00"
 description: "How to make sure you're unlocking the full potential of Spring Boot. 9 ways to improve your Spring Boot Skills."
-canonical: "https://digma.ai/the-spring-way-of-doing-things-9-ways-to-improve-your-spring-boot-skills/"
 authors:
   - "lee-sheinberg"
 image: "digmalovejava-spring.png"
@@ -16,7 +15,7 @@ related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"
   - "clean-shutdown-of-spring-boot-applications"
   - "how-to-detect-cache-misses-using-observability"
-frozen: false
+frozen: true
 ---
 
 **Does anyone else ever feel overwhelmed by Spring Boot? With a rich set of options and eco-system libraries on the one hand, and a very opinionated framework on the other, I often spend considerable time deciphering the "Spring Way" of doing things. I've been working with [Spring Boot](https://digma.ai/10-spring-boot-performance-best-practices/) for over three years, yet there are moments when I sense I'm not fully harnessing the capabilities of this remarkable framework and that I need to improve my Spring Boot skills.**

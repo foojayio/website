@@ -14,10 +14,10 @@ categories:
   - "Payara"
   - "Videos"
 related_posts:
+  - "whats-new-in-the-august-2026-azul-payara-release"
   - "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
   - "boost-developer-productivity-with-payara-server-maven-plugin-ai-agent"
   - "jakarta-agentic-ai-hits-its-first-milestone"
-  - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false
 ---
 

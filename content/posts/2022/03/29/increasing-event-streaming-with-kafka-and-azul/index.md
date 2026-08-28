@@ -235,7 +235,7 @@ $ ln -sfn $AZUL_CORE ~/sdks/current_jdk
 
 ```
 # Verify Platform Core is set as the current JDK
-$ java –version
+$ java --version
 openjdk version "17.0.2" 2022-01-18 LTS
 OpenJDK Runtime Environment Zulu17.32+13-CA (build 17.0.2+8-LTS)
 OpenJDK 64-Bit Server VM Zulu17.32+13-CA (build 17.0.2+8-LTS, mixed mode,

@@ -19,7 +19,7 @@ related_posts:
   - "5-great-reasons-to-use-jooq"
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
-  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "whats-new-in-the-august-2026-azul-payara-release"
 frozen: false
 ---
 

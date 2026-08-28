@@ -25,7 +25,7 @@ Continuing [from Part 1](https://foojay.io/today/primitive-set-operations-in-ecl
 
 {{< img src="Set_Operations-4-700x444.png" class="size-medium" alt="Set Operations that will be available on primitive sets in Eclipse Collections 11.0." width="700" height="444" >}}
 
-Set Operations that will be available on primitive sets in Eclipse Collections 11.0.
+Set Operations that will be available on primitive sets in Eclipse Collections 11.0.  
 
 These APIs are already available on Sets on the object side, but my goal was to implement these methods for Sets supporting primitive types namely `IntSet`, `LongSet`, `ShortSet`, `DoubleSet`, `FloatSet`, `CharSet`, `BooleanSet`, `ByteSet`. Additionally, the above operations will be available in both mutable and immutable interfaces.
 

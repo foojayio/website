@@ -93,13 +93,9 @@ The following are 4 steps for creating and using hidden classes.
 
 1. **Create Lookup object.** Get a lookup object, which will be used to create hidden class in the next steps.
 
-   ```
-
 ```java
 MethodHandles.Lookup lookup = MethodHandles.lookup();
 ```
-
-   ```
 
 2. **Create class bytes using ASM.** We are using the byte code manipulation library [ASM](https://asm.ow2.io/). We create ClassWriter object using helper class [GenerateClass](https://github.com/Vipin-Sharma/JDK15Examples/blob/ec60c39c786ac93a77185f99dbcaf3f96e56bd7c/src/main/java/com/vip/jfeatures/jdk15/hiddenclass/GenerateClass.java#L16). If you look at the details in
 
@@ -115,14 +111,10 @@ Test
 
    , which we will use in further steps.
 
-   ```java
-
 ```java
 ClassWriter cw = GenerateClass.getClassWriter(HiddenClassDemo.class);
 byte[] bytes = cw.toByteArray();
 ```
-
-   ```
 
 3. **Define hidden class.** In this step, we are creating a hidden class. It is important to note the invoking program should store the lookup object carefully since it is the only way to obtain the
 
@@ -132,13 +124,9 @@ Class
 
    object of the hidden class.
 
-   ```java
-
 ```java
 Class<?> c = lookup.defineHiddenClass(bytes, true, NESTMATE).lookupClass();
 ```
-
-   ```
 
 4. **Use hidden class.** In this step, we are using reflection to access the hidden class. First, create the constructor, then create an object using this, typecast this object to interface
 
@@ -154,16 +142,12 @@ test
 
    . This method ignores the argument passed and prints "Hello test" to the console.
 
-   ```java
-
 ```java
 Constructor<?> constructor = c.getConstructor(null);
 Object object = constructor.newInstance(null);
 Test test = (Test) object;
 test.test(new String[]{""});
 ```
-
-   ```
 
 Below is the overall structure of the code we discussed above.
 

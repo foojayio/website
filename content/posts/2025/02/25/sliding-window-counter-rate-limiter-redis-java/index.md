@@ -543,7 +543,7 @@ public void shouldAllowRequestsAgainGraduallyInSlidingWindow() throws Interrupte
 }
 ```
 
-Is there any other behavior we should verify? Let me know in the comments!
+Is there any other behavior we should verify? Let me know in the comments!  
 
 ## Conclusion
 

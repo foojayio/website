@@ -243,7 +243,7 @@ public record Page(String title, String description) {
 The next step involves creating a template **index.jte** within the **/src/main/jte** folder, a directory that is established during the generation process at start.spring.io.  
 
 ```
- 
+ 
 ```
 
 ```

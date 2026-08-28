@@ -9,10 +9,10 @@ image: "tiobe_20200820.png"
 categories:
   - "Java"
 related_posts:
+  - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
   - "whats-new-in-the-june-2026-azul-payara-release"
   - "introduction-to-cqrs-using-mongodb"
-  - "mongodb-as-a-vector-database-for-ai-agents-mongodb"
 frozen: false
 ---
 

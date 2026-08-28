@@ -3,7 +3,6 @@ title: "Payara Launches Payara Cloud – Serverless for Jakarta EE"
 date: "2022-11-15T16:31:30+00:00"
 lastmod: "2022-11-15T16:33:26+00:00"
 description: "Payara has launched a new product Payara Cloud, designed to run Jakarta EE apps easily and quickly on the cloud."
-canonical: "https://www.payara.fish/teamblog/2022/11/07/payara-launches-payara-cloud-serverless-approach-for-jakarta-ee/"
 authors:
   - "jadon-ortlepp"
 image: "2.-Payara-Services-Group-Photo-2.jpg"
@@ -17,7 +16,7 @@ related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "are-java-jakarta-ee-application-servers-heavy"
   - "do-java-jakarta-ee-standards-matter"
-frozen: false
+frozen: true
 ---
 
 ## The cloud native application runtime automates tasks like Kubernetes deployment, ingress and YAML.

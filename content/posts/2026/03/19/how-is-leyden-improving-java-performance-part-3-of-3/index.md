@@ -3,7 +3,6 @@ title: "How is Leyden improving Java Performance? Part 3 of 3"
 date: "2026-03-19T12:10:22+00:00"
 lastmod: "2026-03-20T06:52:40+00:00"
 description: "provides a more detailed account of how Leyden’s proposed solution operates"
-canonical: "https://delawen.com/2025/03/17/How-is-Leyden-improving-Java-Performance-3/"
 authors:
   - "maria-arias"
 image: "9d94n4orpjxb2gyr6tgy.png"
@@ -15,7 +14,7 @@ related_posts:
   - "virtual-thread-pinning-field-guide"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
-frozen: false
+frozen: true
 ---
 
 In part 1 of this series of 3 blog posts we introduced the specific performance challenges OpenJDK faces lowering application 'startup', 'warmup' and 'initial footprint' costs and provided an overview of what Leyden is doing to address those challenges.

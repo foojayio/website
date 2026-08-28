@@ -3,7 +3,6 @@ title: "9 Best Java Profilers to Use in 2024"
 date: "2024-07-10T13:46:51+00:00"
 lastmod: "2024-07-10T14:37:48+00:00"
 description: "In this article, I will share why my team decided to start a Java profiler, the list of profilers we found that are suited for profiling Java apps, and how to analyze the data from the profiler to draw conclusions faster."
-canonical: "https://digma.ai/9-best-java-profilers-to-use-in-2024/"
 authors:
   - "lee-sheinberg"
 image: "WhatsApp-Image-2024-03-18-at-11.42.39-AM.jpeg"
@@ -13,7 +12,7 @@ related_posts:
   - "a-short-primer-on-java-debugging-internals"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
-frozen: false
+frozen: true
 ---
 
 **In this article, I will share why my team decided to start a Java profiler, the list of profilers we found that are suited for profiling Java apps, and how to analyze the data from the profiler to draw conclusions faster.**
@@ -147,13 +146,13 @@ This built-in command-line tool comes with the standard JDK. It examines perform
 You can use hprof to profile a class using the command below.
 
 ```java
-java –agentlib:hprof HelloWorld
+java --agentlib:hprof HelloWorld
 ```
 
 Using the command below, you can use hprof to obtain the heap allocation profile.
 
 ```java
-javac –J-agentlib:hprof=heap=dump HelloWorld.java
+javac --J-agentlib:hprof=heap=dump HelloWorld.java
 
 ```
 

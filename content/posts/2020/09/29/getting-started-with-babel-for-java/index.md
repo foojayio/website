@@ -140,7 +140,7 @@ That's it, three lines of code to try out new and experimental Java features wit
 
 The project patches javac 14 to allow it to generate bytecode for JDK8 and compiles the compiler itself for JDK 8. As a result, the frgaal compiler has all the features of JDK14, but can run on JDK 8 and emit JDK 8 compatible bytecode.
 
-It seems really surprising that frgaal can produce bytecode from Java 14 syntax that is compatible with JDK 8, but it actually isn't, as JDK 9--14 contains no features that would require bytecode changes except modules and records. The `var` keyword is purely syntactic, so the compiled code remains the same. The same applies to """textblocks"""" as well. Switch expressions and "instanceof" do not require any special bytecode either. Most of these features just alter the AST of Java, so it's easy to emit JDK 8 compatible bytecode for the generator.
+It seems really surprising that frgaal can produce bytecode from Java 14 syntax that is compatible with JDK 8, but it actually isn't, as JDK 9–14 contains no features that would require bytecode changes except modules and records. The `var` keyword is purely syntactic, so the compiled code remains the same. The same applies to """textblocks"""" as well. Switch expressions and "instanceof" do not require any special bytecode either. Most of these features just alter the AST of Java, so it's easy to emit JDK 8 compatible bytecode for the generator.
 
 ## Summary
 

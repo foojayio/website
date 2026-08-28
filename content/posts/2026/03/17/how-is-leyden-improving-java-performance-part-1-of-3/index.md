@@ -3,7 +3,6 @@ title: "How is Leyden improving Java Performance? Part 1 of 3"
 date: "2026-03-17T12:00:45+00:00"
 lastmod: "2026-03-17T13:09:16+00:00"
 description: "In this series of 3 blog posts we will explain how OpenJDK project Leyden is helping to improve a specific area of performance where Java has notably lagged behind other languages i.e. application ‘startup’, ‘warmup’, and ‘initial footprint’."
-canonical: "https://delawen.com/2025/03/17/How-is-Leyden-improving-Java-Performance/"
 authors:
   - "maria-arias"
 image: "aot-cache.webp"
@@ -16,7 +15,7 @@ related_posts:
   - "how-is-leyden-improving-java-performance-part-2-of-3"
   - "where-production-policy-belongs-building-eliya-in-public"
   - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
-frozen: false
+frozen: true
 aliases:
   - "/today/122962/"
 ---

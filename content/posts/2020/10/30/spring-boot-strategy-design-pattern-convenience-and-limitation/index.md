@@ -9,7 +9,7 @@ image: "Favicon-3-2.png"
 categories:
   - "Spring"
 related_posts:
-frozen: false
+frozen: true
 ---
 
 You might have already used the [strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern) in relationship with Spring Boot where it is very convenient to use.

@@ -56,7 +56,7 @@ As described in the "README.txt" file:
 
 ### Raspbian OS 64-bit
 
-Raspbian OS (which recently was ["re-branded" to "Raspberry Pi OS"](https://unix.stackexchange.com/questions/602587/why-has-raspbian-apparently-been-renamed-into-raspberry-pi-os)) is the operating system provided by Raspberry Pi and is based on Debian. As only the latest Raspberry Pi-boards have a 64-bit chip, the official release of Raspbian OS is 32-bit only. But there is a work-in-progress-version of an OS-version which is fully 64-bit! Let's use that one...
+Raspbian OS (which recently was ["re-branded" to "Raspberry Pi OS"](https://unix.stackexchange.com/questions/602587/why-has-raspbian-apparently-been-renamed-into-raspberry-pi-os)) is the operating system provided by Raspberry Pi and is based on Debian. As only the latest Raspberry Pi-boards have a 64-bit chip, the official release of Raspbian OS is 32-bit only. But there is a work-in-progress-version of an OS-version which is fully 64-bit! Let's use that one…
 
 For this post, I wrote this 64-bit beta-version to three different discs to compare the results.
 ![](discs.jpg)
@@ -74,16 +74,16 @@ The first test with the ["Transcend 64GB microSD"](https://www.kiwi-electronics.
 
 ### Flash Drive
 
-For the second test, the SD card is removed, and the ["32GB Transcend JetFlash 780 USB 3.0 Flash Drive"](https://www.kiwi-electronics.nl/32gb-transcend-jetflash-780-usb-30-flash-drive-mlc-210mbs) is used... and **we have a winner! No configuration or other changes needed! Just plugin the Flash Drive in a USB 3 (blue) port and the Raspberry Pi starts similar to the SD card**.
+For the second test, the SD card is removed, and the ["32GB Transcend JetFlash 780 USB 3.0 Flash Drive"](https://www.kiwi-electronics.nl/32gb-transcend-jetflash-780-usb-30-flash-drive-mlc-210mbs) is used… and **we have a winner! No configuration or other changes needed! Just plugin the Flash Drive in a USB 3 (blue) port and the Raspberry Pi starts similar to the SD card**.
 
 ### SSD Drive
 
-Pushing the limits now... How cool would it be to have a 500Gb drive which is about the same size as the Raspberry Pi itself? Let's try out with a ["WD BLACK P50 Game Drive SSD 500GB"](https://www.coolblue.be/nl/product/853658/wd-black-p50-game-drive-ssd-500gb.html).
+Pushing the limits now… How cool would it be to have a 500Gb drive which is about the same size as the Raspberry Pi itself? Let's try out with a ["WD BLACK P50 Game Drive SSD 500GB"](https://www.coolblue.be/nl/product/853658/wd-black-p50-game-drive-ssd-500gb.html).
 
-But no luck... Connected to USB 3 the Pi can't boot. It works when connected to USB 2 but the speed is a lot lower than expected. And after a few reboots, I seem to have messed up the disc, as I end up with the same error screen again...
+But no luck… Connected to USB 3 the Pi can't boot. It works when connected to USB 2 but the speed is a lot lower than expected. And after a few reboots, I seem to have messed up the disc, as I end up with the same error screen again…
 ![](usb-boot-error.jpg)
 
-Apparently, **not all SSD drives are supported (yet) with USB Boot on the Raspberry Pi** , so I need to investigate this further...**If you have an idea on how to fix this issue, please let me know!**
+Apparently, **not all SSD drives are supported (yet) with USB Boot on the Raspberry Pi** , so I need to investigate this further…**If you have an idea on how to fix this issue, please let me know!**
 
 This is the "dmesg" info which is logged when this drive is connected while the board is booted with another disc:
 
@@ -141,6 +141,6 @@ $ sudo hdparm -Tt /dev/mmcblk0       # For the SD card
 
 ## Conclusion
 
-Switching from SD to USB Boot is **very easy if you have a Flash Drive which is supported** and the **read speed is a lot higher** ! Combined with the **higher reliability**, this makes the switch a go go go... 😉
+Switching from SD to USB Boot is **very easy if you have a Flash Drive which is supported** and the **read speed is a lot higher** ! Combined with the **higher reliability**, this makes the switch a go go go… 😉
 
 **Note:** Used with permission and thanks — originally written and published on [Frank Delporte](https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/)'s blog.

@@ -44,7 +44,7 @@ java -version
 There are multiple ways to build JMC. The easiest way is to simply use the build script (don't do this just yet):  
 
 ```
-./build.sh –packageJmc
+./build.sh --packageJmc
 ```
 
 There is also a way to build JMC using Docker (don't do this just yet either):  
@@ -80,7 +80,7 @@ mvn package
 After this, you can use the build script to run the built JMC product:  
 
 ```
-./build.sh –run
+./build.sh --run
 ```
 
 For alternative ways of launching JMC, see the platform specific documentation in the [README.md](https://github.com/openjdk/jmc/blob/master/README.md#running-the-locally-built-jmc).
@@ -141,14 +141,14 @@ gradlew (win) or sh gradlew (mac/linux)
 Install it:
 
 ```
-git config –global include.path “%CD%/skara.gitconfig” (win), or 
-git config –global include.path “$PWD/skara.gitconfig” (mac/linux)
+git config --global include.path “%CD%/skara.gitconfig” (win), or 
+git config --global include.path “$PWD/skara.gitconfig” (mac/linux)
 ```
 
 Set where to sync your forks from:  
 
 ```
-git config –global sync.from upstream
+git config --global sync.from upstream
 ```
 
 Here are some examples:
@@ -156,7 +156,7 @@ Here are some examples:
 To sync your fork with upstream and pull the changes:  
 
 ```
-git sync –pull
+git sync --pull
 ```
 
 > **Note:** if the sync fails with the error message "No remote provided to fetch from, please set the –from flag", remember to set the remote for your repo, e.g.
@@ -186,17 +186,17 @@ So, the normal workflow when working with OpenJDK JMC using the Skara tooling be
 
 1. (Optional) Sync up your fork with upstream:  
 
-   `git sync –pull`  
+   `git sync --pull`  
 2. Create a branch to work on, with a name you pick, typically related to the work you plan on doing:  
 
-   `git checkout –b <branchname>`  
+   `git checkout --b <branchname>`  
 3. Make your changes / fix your bug / add amazing stuff  
 4. (Optional) Run jcheck locally:  
 
    `git jcheck local`  
 5. Push your changes to the new branch on your fork:  
 
-   `git publish` (which is pretty much `git push –set-upstream origin <branchname>`)  
+   `git publish` (which is pretty much `git push --set-upstream origin <branchname>`)  
 6. Create the PR, either on GitHub, or from the command line:  
 
    `git pr create`

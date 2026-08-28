@@ -3,7 +3,6 @@ title: "When Disaster Strikes: Production Troubleshooting"
 date: "2022-08-12T11:03:08+00:00"
 lastmod: "2022-08-12T11:06:37+00:00"
 description: "Production is failing and everything is lost? That used to be the case. Fail whale, hysteria and panic. Developer observability fixes this!"
-canonical: "https://lightrun.com/inside-lightrun/when-disaster-strikes-production-troubleshooting/"
 authors:
   - "shai-almog"
 image: "Lightrun-developer-productivity-dark-29.png"
@@ -15,7 +14,7 @@ related_posts:
   - "debugging-jaxb-production-issues"
   - "debugging-jsoup-java-code-in-production-using-lightrun"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-frozen: false
+frozen: true
 ---
 
 [Tom Granot](https://twitter.com/TomGranot/) and [myself](https://twitter.com/debugagent/) have had the privilege of [Vlad Mihalcea's](https://twitter.com/vlad_mihalcea) online company for a while now. As a result we decided to [do a workshop together](https://go.lightrun.com/production-troubelshooting-masterclass) talking about a lot of the things we learned in the process. This workshop would be pretty informal ad-hoc, just a bunch of guys chatting and showing off what we can do with tooling.

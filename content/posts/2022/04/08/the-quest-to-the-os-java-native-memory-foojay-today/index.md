@@ -3,7 +3,6 @@ title: "Quest to the OS: Java Native Memory"
 date: "2022-04-08T04:19:05+00:00"
 lastmod: "2022-04-15T11:36:07+00:00"
 description: "Let’s embark on an epic journey to the wonderland of java native memory to the level of OS while investing in a non-trivial memory issue."
-canonical: "https://blog.picnic.nl/quest-to-the-os-java-native-memory-5d3ef68ffc0a"
 authors:
   - "jakob-loehnertz"
 image: "https://miro.medium.com/max/1400/0*QMIuX6OHkdzv3HGM"
@@ -14,7 +13,7 @@ related_posts:
   - "real-world-stream-collector"
   - "book-review-seriously-good-software"
   - "clean-memory-from-finalize-to-cleaner"
-frozen: false
+frozen: true
 ---
 
 ![](https://miro.medium.com/max/1400/0*QMIuX6OHkdzv3HGM)
@@ -23,7 +22,7 @@ As developers we want to spend most time on new features and improvements, provi
 
 One such case happened when Picnic's Distribution Systems team started to get notified that one of its deployments, the Fulfillment Service, was regularly killed and restarted by our Kubernetes cluster. This particular deployment houses many of the planning algorithms employed by Picnic, such as its [truck scheduling algorithm](https://blog.picnic.nl/its-in-our-dna-solving-logistics-problems-using-genetic-algorithms-a3d59e31558c).
 
-Luckily we have [a broad range of monitoring and observability tools](https://blog.picnic.nl/monitoring-and-observability-at-picnic-684cefd845c4) set up across Picnic. After a quick peek at our dashboards we noticed the offending deployment showed continuously growing memory usage, eventually hitting its 6GB limit causing it to be killed.
+Luckily we have [a broad range of monitoring and observability tools](https://blog.picnic.nl/monitoring-and-observability-at-picnic-684cefd845c4) set up across Picnic. After a quick peek at our dashboards we noticed the offending deployment showed continuously growing memory usage, eventually hitting its 6GB limit causing it to be killed.  
 ![](https://miro.medium.com/max/1352/0*shJJ5LNp9eDcky6E) *Memory consumption over time of a Fulfillment Service instance, until it gets killed at 6GB.*
 
 This scenario is indicative of a memory leak, when resources consuming system memory are allocated but never released. Developers dread such problems, because they're often tricky to reproduce and resolve. Not easily scared, we launched an investigation into what we assumed to be a memory leak. But after digging into the source of the problem, it turns out this behavior was not a memory leak, or at least not in the conventional sense.
@@ -32,15 +31,15 @@ To understand this, we need to embark on a quest into the concept of Java native
 
 The heap is a JVM construct for memory management. Because of the heap and garbage collection developers don't have to perform memory allocations themselves. It is backed by physical memory requested from the OS by the JVM. The heap expands automatically based on the application's needs. However, it is bounded by a minimum and maximum size, specified through the JVM's `-Xms` and `-Xmx` options respectively.
 
-In the case of the Fulfillment Service, `-Xmx` is set to 4GB, so the heap alone should never exceed our 6GB container limit. This already rules out that the heap is solely responsible. But more interestingly, our dashboard reports only about 2.5GB of heap usage while the Fulfillment Service's container is already consuming 6GB.
+In the case of the Fulfillment Service, `-Xmx` is set to 4GB, so the heap alone should never exceed our 6GB container limit. This already rules out that the heap is solely responsible. But more interestingly, our dashboard reports only about 2.5GB of heap usage while the Fulfillment Service's container is already consuming 6GB.  
 ![](https://miro.medium.com/max/858/0*f115pL_RsWcmbd76) *The Fulfillment Service's 2.5GB heap size is not even close to the 6GB used*
 
 Having determined that Java is the only process running in our container we concluded there must be more to this problem and continued our quest.
 
-Any memory the JVM uses besides the heap is considered off-heap. There are a few categories of native memory that the JVM can track by default, such as memory used by the garbage collector, thread stacks, loaded classes, and more. To enable JVM native memory tracking we simply pass it the `-XX:NativeMemoryTracking=detail` flag, after which running `jcmd 1 VM.native_memory` (where 1 is our Java process ID) reports all native memory allocations known by the JVM.
+Any memory the JVM uses besides the heap is considered off-heap. There are a few categories of native memory that the JVM can track by default, such as memory used by the garbage collector, thread stacks, loaded classes, and more. To enable JVM native memory tracking we simply pass it the `-XX:NativeMemoryTracking=detail` flag, after which running `jcmd 1 VM.native_memory` (where 1 is our Java process ID) reports all native memory allocations known by the JVM.  
 ![](https://miro.medium.com/max/1366/0*rfUnK-b-XmqXUKeo) *A (truncated) jcmd native memory report.*
 
-Conveniently, our monitoring also tracks all off-heap memory known to the JVM.
+Conveniently, our monitoring also tracks all off-heap memory known to the JVM.  
 ![](https://miro.medium.com/max/826/0*zLji7chRUuWSHxY4) *The Fulfillment Service's off-heap memory adds less than 500MB; still doesn't add up to 6GB.*
 
 However, combining the heap and off-heap memory usage is still far from the 6GB limit. It turns out that there are various cases in which the JVM can allocate native memory without tracking it, taking us to the next level of this quest.
@@ -51,7 +50,7 @@ Even though the JVM does not track its direct byte buffer memory usage by defaul
 
 Luckily, there are some tools around to deal with these problems. For instance, IBM's *Eclipse Memory Analyzer* extensions have a feature to [calculate the size of non-viewed non-phantomed direct byte buffers](https://www.ibm.com/docs/en/support-assistant/5.0.0?topic=se-directbytebuffers).
 
-But for us, the Picnic monitoring setup makes it easy to get this data from our production system without resorting to analyzing memory dumps.
+But for us, the Picnic monitoring setup makes it easy to get this data from our production system without resorting to analyzing memory dumps.  
 ![](https://miro.medium.com/max/826/0*ZlGt5IypIrbQjidT) *The Fulfillment Service is using around 600MB memory for direct buffers*
 
 Unfortunately, adding this to all the previous sources of native memory usage we still end up with under 4GB of memory out of the 6GB we need to account for. However, we haven't yet exhausted the possible ways native memory can be allocated by the JVM. So again our quest carries on and we're now tasked with tracking all native memory allocations.
@@ -65,7 +64,7 @@ On Linux, jemalloc can be enabled by bundling its shared library with an applica
 
 `Jemalloc` only samples memory allocations instead of measuring every single `malloc` call to prevent excessive resource consumption. Therefore, the output of `jeprof` cannot be directly interpreted as the number of bytes currently in use. However, it does allow us to spot any suspicious functions allocating native memory. Additionally, we could also spot functions that are holding on to significantly more memory relative to others (potentially indicating a memory leak).
 
-In our case, we spotted neither. The only functions directly calling `malloc` were `Unsafe_allocateMemory0` and `AllocateHeap`, both of which are implemented in OpenJDK and were investigated through the other methods explained above. However, after we enabled `jemalloc` in the Fulfillment Service we observed something interesting: the memory had stopped growing and stabilized around 4GB.
+In our case, we spotted neither. The only functions directly calling `malloc` were `Unsafe_allocateMemory0` and `AllocateHeap`, both of which are implemented in OpenJDK and were investigated through the other methods explained above. However, after we enabled `jemalloc` in the Fulfillment Service we observed something interesting: the memory had stopped growing and stabilized around 4GB.  
 ![](https://miro.medium.com/max/1148/0*djc1iQKK1zR5CA_H) *The Fulfillment Service's Kubernetes memory usage shows very different behavior when jemalloc is enabled.*
 
 Even though on the surface we had solved our problem, there must be a full explanation for this dramatic change. And our quest ensues, striving to unearth what was going on in the dangerous depths of our JVM's native memory.

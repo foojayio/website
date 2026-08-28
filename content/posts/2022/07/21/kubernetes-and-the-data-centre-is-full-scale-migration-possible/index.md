@@ -3,7 +3,6 @@ title: "Kubernetes and the Data Centre: Is Full Scale Migration Possible?"
 date: "2022-07-21T13:48:13+00:00"
 lastmod: "2022-07-21T13:48:15+00:00"
 description: "Using Kubernetes as a standard layer will help everyone to control how and where applications run and data gets created."
-canonical: "https://www.capacitymedia.com/articles/3828659/kubernetes-and-the-data-centre-is-a-full-scale-migration-possible-"
 authors:
   - "patrick-mcfadin"
 image: "kubernetes-genric-169jpeg_51633.jpg"
@@ -18,7 +17,7 @@ related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "book-review-effortless-cloud-native-app-development-using-skaffold"
   - "building-reactive-java-applications-with-spring-framework"
-frozen: false
+frozen: true
 ---
 
 ![](kubernetes-genric-169jpeg_51633.jpg)

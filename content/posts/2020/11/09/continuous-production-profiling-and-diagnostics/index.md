@@ -21,7 +21,7 @@ Trigger warning: this blog will not contain code samples.
 
 ## Profiling?
 
-So what is software profiling then? It's the ancient black magic art of trying to figure out how something is performing, for some aspect of performing. In American TV-series, the profiler is usually some federal agent who is adept at understanding the psychology of the criminal mind. The profiler attempts to understand key aspects of the criminal to make it easier for the law enforcement agents to catch him. In software profiling we're kind of doing the same thing, but for software -- your code as well as all the third party code you might be depending on.
+So what is software profiling then? It's the ancient black magic art of trying to figure out how something is performing, for some aspect of performing. In American TV-series, the profiler is usually some federal agent who is adept at understanding the psychology of the criminal mind. The profiler attempts to understand key aspects of the criminal to make it easier for the law enforcement agents to catch him. In software profiling we're kind of doing the same thing, but for software – your code as well as all the third party code you might be depending on.
 
 We're trying to build an accurate profile of what is going on in the software when it is being run, but in this case to find ways to improve a program. And to understand what is going on in your program, the profiler has to collect call traces and usually some additional context to make sense of it all.
 
@@ -33,7 +33,7 @@ It used to take painting a red pentagram on the floor, and a healthy stock of bl
 
 Profiling means different things to different people. There are various types of resources that you may be interested in knowing more about, such as CPU or locks, and there are different ways of profiling them.
 
-Most people will implicitly assume that when talking about profiling, one means CPU-profiling -- the ancient art of collecting data about where in the code the most CPU-time is spent. It's a great place to start when you're trying to figure out how to make your application consume less CPU. If you can optimize your application to do the same work with less resources, this of course directly translates into lowering the bill to your cloud provider, or being able to put off buying those extra servers for a while.
+Most people will implicitly assume that when talking about profiling, one means CPU-profiling – the ancient art of collecting data about where in the code the most CPU-time is spent. It's a great place to start when you're trying to figure out how to make your application consume less CPU. If you can optimize your application to do the same work with less resources, this of course directly translates into lowering the bill to your cloud provider, or being able to put off buying those extra servers for a while.
 
 Any self-respecting modern profiling tool will be able to show more than just the CPU aspect of your application, for example allocation profiling or profiling thread halts. Profiling no longer implies just grabbing stack-traces, and assigning meaning to the stack trace depending on how it was sampled; some profilers collaborate closely with the runtime to provide more information than that. Some profilers even provide execution tracing capabilities.
 
@@ -47,7 +47,7 @@ Here are a few of my favourite kinds of profiling information:
 * Lock / Thread halt / Stop-the-World profiling
 * Heap profiling
 
-Let's go through a few of them...
+Let's go through a few of them…
 
 ### CPU Profiling
 
@@ -158,7 +158,7 @@ You would be excused for believing that Errors would happen very rarely, and tha
 
 ### Some Assembly Required
 
-These techniques, and more, can be used together to provide a best-of-all-worlds profiling environment. Just be careful, as with most things in life a balance must be found. Just like there is (trigger warning) no single energy source that will solve our energy problems in a carbon neutral way (we should use all at our disposal -- including nuclear power -- to have a chance to go carbon neutral in a reasonable time \[2\]\[3\]), a balance must be struck between sampling and execution tracing, and a balance for how much data to capture for the various types of profiling you're doing.
+These techniques, and more, can be used together to provide a best-of-all-worlds profiling environment. Just be careful, as with most things in life a balance must be found. Just like there is (trigger warning) no single energy source that will solve our energy problems in a carbon neutral way (we should use all at our disposal – including nuclear power – to have a chance to go carbon neutral in a reasonable time \[2\]\[3\]), a balance must be struck between sampling and execution tracing, and a balance for how much data to capture for the various types of profiling you're doing.
 
 ## Continuous Profiling in Large Deployments
 Or, Finding What You're Looking For
@@ -194,10 +194,10 @@ High Cardinality Metrics are metrics that can have an enormous amount of differe
 We use these kinds of metrics to support many different use cases, such as allowing you to see the hottest methods in your entire datacenter. The picture below shows the hottest allocation sites across a bunch of processes.
 [![](hcm2-1.png)](hcm2-1.png)
 
-Here are some contended methods. Yep, one is a demo...
+Here are some contended methods. Yep, one is a demo…
 [![](locks-1.png)](locks-1.png)
 
-Metrics also allow you to monitor for certain conditions, like having alerts / watchdogs when certain conditions or changes in conditions occur. That said, they aren't worth that much unless you can, if you find something funny, go see what was going on -- for example see how that contended method was reached when under contention.
+Metrics also allow you to monitor for certain conditions, like having alerts / watchdogs when certain conditions or changes in conditions occur. That said, they aren't worth that much unless you can, if you find something funny, go see what was going on – for example see how that contended method was reached when under contention.
 
 ### Aggregation
 
@@ -245,13 +245,13 @@ Today, having a continuous production profiler enabled in production will offer 
 
 Many thanks to Alex Ciminian, Matt Perpick and Dan Benamy for feedback on this blog.
 
----  
+—  
 
 \[1\]: Deep Distributed Tracing blog: <http://hirt.se/blog/?p=1081>
 
 Unrelated links regarding the very interesting and important de-carbonization debate:
 
-\[2\]: <https://theness.com/.../there-is-no-one-energy-solution/>
+\[2\]: [https://theness.com/…/there-is-no-one-energy-solution/](https://theness.com/.../there-is-no-one-energy-solution/)
 
 \[3\]: <https://mediasite.engr.wisc.edu/Mediasite/Play/f77cfe80cdea45079cee72ac7e04469f1d>
 

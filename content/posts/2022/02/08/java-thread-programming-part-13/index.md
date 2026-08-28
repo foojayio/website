@@ -93,9 +93,9 @@ Number of threads = Number of Available Cores * (1 + Wait time / Service time)
 
 **Waiting time**- could IO, e.g., waiting for an HTTP response, acquiring Lock, etc.
 
-**Service Time**-- is the time of computation, e.g. processing the HTTP response, marshalling/unmarshalling etc.
+**Service Time**– is the time of computation, e.g. processing the HTTP response, marshalling/unmarshalling etc.
 
-For example- an application calls an API and then processes it. If we have 8 processors in the application server, and then on average, the response time of the API is 100ms and the processing time of the response is 20ms, then the ideal size of thread would be --
+For example- an application calls an API and then processes it. If we have 8 processors in the application server, and then on average, the response time of the API is 100ms and the processing time of the response is 20ms, then the ideal size of thread would be –
 
 ```
 N = 8 * ( 1 + 100/20)

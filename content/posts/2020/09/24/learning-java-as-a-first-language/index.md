@@ -37,7 +37,7 @@ If you don't know what the error message you're seeing means, Google it. If ther
 
 Clarity often arises when you're not working on the problem itself.
 
-I said this was a post on learning Java as your first programming language, but I haven't provided any Java resources...​ yet.
+I said this was a post on learning Java as your first programming language, but I haven't provided any Java resources…​ yet.
 
 Rather than listing off my preferred methods, sites, and techniques for learning Java, I turned to my esteemed friends, the [Java Champions](https://twitter.com/java_champions). I'm lucky to be a member of this group with my heavy affection of JavaScript and TypeScript, but alas, they accept all kinds of folks that talk about and promote Java as a platform.
 
@@ -57,7 +57,7 @@ I gave a talk at QCon NY along with a developer I work with who hadn't presented
 
 If you don't have time to watch the video and just want to see the code for the katas, they're [available on GitHub](https://github.com/BNYMellon/CodeKatas).
 
-### 2. Read, code, read, code...​ rinse and repeat
+### 2. Read, code, read, code…​ rinse and repeat
 
 *Credit: [Henri Tremblay](https://twitter.com/henri_tremblay)*
 
@@ -77,7 +77,7 @@ If you don't have time to watch the video and just want to see the code for the 
 
 There is also extensive teaching material for how to use this for teaching and learning, based on actual pedagogical research. You can combine things. No need for one or the other.
 
-Yes, JShell is cool. Java 11 is pretty cool too --- did you know you can run `.java` files [using the `java` command](https://dzone.com/articles/launch-single-file-source-code-programs-in-jdk-11)?
+Yes, JShell is cool. Java 11 is pretty cool too — did you know you can run `.java` files [using the `java` command](https://dzone.com/articles/launch-single-file-source-code-programs-in-jdk-11)?
 
 ### 4. Use the power of networking
 

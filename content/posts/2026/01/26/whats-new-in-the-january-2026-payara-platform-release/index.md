@@ -42,7 +42,7 @@ If you've experienced HTTP 500 errors when sorting columns by keystore or trusts
 
 ## The Payara Upgrade Tool
 
-Cluster operators will welcome a new addition to the Payara Upgrade Tool: the `–nodes` flag. This option enables selective node upgrades when you need finer control over rolling upgrades. Instead of upgrading every node in your cluster simultaneously, you can now specify a comma-separated list of node names to upgrade incrementally. The same capability extends to rollbacks, letting you revert individual nodes if an upgrade encounters issues. This supports safer, more controlled upgrade patterns for production clusters where you want to validate each node before proceeding to the next.
+Cluster operators will welcome a new addition to the Payara Upgrade Tool: the `--nodes` flag. This option enables selective node upgrades when you need finer control over rolling upgrades. Instead of upgrading every node in your cluster simultaneously, you can now specify a comma-separated list of node names to upgrade incrementally. The same capability extends to rollbacks, letting you revert individual nodes if an upgrade encounters issues. This supports safer, more controlled upgrade patterns for production clusters where you want to validate each node before proceeding to the next.
 
 ## Payara Platform Enterprise Edition 5.83.0
 

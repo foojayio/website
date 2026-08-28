@@ -191,7 +191,7 @@ Our goal is to get good throughput performance improvement for Semeru on multipl
 
 ![](image12-700x337.png)
 
-We achieved these improvements through a variety of different techniques, including platform tuning on the latest hardware (for example, Java intrinsics, array copying, and object allocation), general performance enhancements (for example, `java.lang.invoke.*` class, final static field folding, and change trade-offs with other performance metrics), and analyzing and tuning apps. Since the default policy in the Semeru JDK is to balance for all performance metrics out of the box, we also have an option `–Xtune:throughput` which skews the trade-off toward improved throughput performance at the cost of other metrics.
+We achieved these improvements through a variety of different techniques, including platform tuning on the latest hardware (for example, Java intrinsics, array copying, and object allocation), general performance enhancements (for example, `java.lang.invoke.*` class, final static field folding, and change trade-offs with other performance metrics), and analyzing and tuning apps. Since the default policy in the Semeru JDK is to balance for all performance metrics out of the box, we also have an option `--Xtune:throughput` which skews the trade-off toward improved throughput performance at the cost of other metrics.
 
 Security is another important consideration for most enterprise applications. The Semeru JDK also optimizes Java cryptographic operations using native acceleration, thus achieving the best of both worlds: security and throughput performance. The following figure shows our hypothetical Java application's throughput performance with Semeru.
 

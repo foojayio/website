@@ -252,5 +252,5 @@ It is a hot candidate for cases where only simple content or responses are requi
 2. [JEP 408: Simple Web Server](https://openjdk.java.net/jeps/408): https://openjdk.java.net/jeps/408
 
 ```
- 
+ 
 ```

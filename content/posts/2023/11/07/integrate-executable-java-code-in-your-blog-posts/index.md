@@ -66,7 +66,7 @@ Will produce the following output. Hit the "Execute" button to run the code.
  <figure class="wp-block-image size-medium">
   <img fetchpriority="high" decoding="async" width="629" height="510" src="jdoodle-example-629x510.png" alt="" class="wp-image-102637">
  </figure>
- <h3 class="wp-block-heading">Code with external data files</h3>
+ <h3 class="wp-block-heading" id="h3-2-code-with-external-data-files">Code with external data files</h3>
  <p class="wp-block-paragraph">In one of the more advanced tutorial steps, I wanted to read data from a text file. This can also be done with JDoodle, but needs a slightly different "Custom HTML" block that looks like this:</p>
  <p>PRESERVEDHTMLBLOCKZZ2ZZEND</p>
  <p class="wp-block-paragraph">The <code>data-client-id</code> is important here to allow the use of external files, but is only valid when used on the Foojay website! Create your own <a target="_blank" href="https://www.jdoodle.com">account on the JDoodle site</a> if you want to use this functionality on another website.</p>
@@ -74,7 +74,7 @@ Will produce the following output. Hit the "Execute" button to run the code.
  <p>PRESERVEDHTMLBLOCKZZ3ZZEND</p>
  <p class="wp-block-paragraph"></p>
  <p class="wp-block-paragraph">A full example with this approach can be found in the tutorial: <a href="https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/">"Reading a Text File"</a>.</p>
- <h2 class="wp-block-heading">Conclusion</h2>
+ <h2 class="wp-block-heading" id="h2-3-conclusion">Conclusion</h2>
  <p class="wp-block-paragraph">JDoodle allows to experiment with code in the browser and provides many other easy tools. Thanks to JDoodle you can now also add executable code to your Foojay content!</p>
  <p class="wp-block-paragraph">In a next post that will be published soon, we'll talk with the creator of JDoodle, <a target="_blank" href="https://www.linkedin.com/in/gokulchandrasekaran-jdoodle?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAANJfEYBcRBniUXnKroUIsiftQzJwkwXl4I">Gokul Chandrasekaran</a>.</p>
 </div>

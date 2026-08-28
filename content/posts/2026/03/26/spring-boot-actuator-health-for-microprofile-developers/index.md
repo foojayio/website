@@ -13,10 +13,10 @@ categories:
   - "Payara"
   - "Spring"
 related_posts:
+  - "whats-new-in-the-august-2026-azul-payara-release"
   - "idempotent-spring-boot-starter"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"
-  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 

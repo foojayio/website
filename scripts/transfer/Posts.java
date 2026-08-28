@@ -915,6 +915,9 @@ public class Posts {
         return out.replaceAll("(?i)\\s*[|\\-–]\\s*foojay(\\.io)?(\\s+today)?\\s*$", "").strip();
     }
 
+    private static final String EMOJI_CHARS =
+            "[\\p{IsExtended_Pictographic}\\x{1F3FB}-\\x{1F3FF}\\x{FE0F}\\x{20E3}\\x{200D}]+";
+
     /**
      * Drops emoji from a title.
      *
@@ -939,13 +942,27 @@ public class Posts {
      *
      * The whitespace tidy-up afterwards matters: removing a leading emoji would
      * otherwise leave the title starting with a space, and "#java [boom][syringe]with
-     * #springboot" would collapse to "#java  with".
+     * #springboot" would collapse to "#java  with". It is keyed on the emoji and
+     * NOT applied to the title as a whole -- see the comments in the body.
      */
     static String stripEmoji(String title) {
         if (title == null) return "";
-        String out = title.replaceAll(
-                "[\\p{IsExtended_Pictographic}\\x{1F3FB}-\\x{1F3FF}\\x{FE0F}\\x{20E3}\\x{200D}]+", " ");
-        return out.replaceAll("\\s{2,}", " ").replaceAll("\\s+([,.;:!?])", "$1").strip();
+        // An emoji sitting directly before punctuation takes the space in FRONT
+        // of it with it, so "Records, Sealed Classes and More 🎉!" doesn't land as
+        // "Records, Sealed Classes and More !". Done as its own pass, keyed on the
+        // emoji, rather than as a general tidy-up of whitespace-before-punctuation
+        // afterwards: that ran on every title whether or not anything had been
+        // removed, and a title is not a sentence -- it can legitimately have a
+        // space before a dot. "Timing Compiling .java Code Files and Executing
+        // .class Bytecode" was stored as "Timing Compiling.java Code Files and
+        // Executing.class Bytecode" for exactly that reason, on a post with no
+        // emoji anywhere near it.
+        String out = title.replaceAll("[ \\t]*" + EMOJI_CHARS + "[ \\t]*(?=[,.;:!?])", "");
+        // Everything else becomes a space, so "#java 💥💉with #springboot" keeps the
+        // word boundary rather than collapsing to "#java with#springboot"; the run
+        // that leaves behind is collapsed next.
+        out = out.replaceAll(EMOJI_CHARS, " ");
+        return out.replaceAll("\\s{2,}", " ").strip();
     }
 
     static String lastPathSegment(String urlWithTrailingSlash) {

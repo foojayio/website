@@ -10,6 +10,7 @@ categories:
   - "AI"
   - "Jakarta EE"
 related_posts:
+  - "whats-new-in-the-august-2026-azul-payara-release"
   - "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"
 frozen: false
 ---

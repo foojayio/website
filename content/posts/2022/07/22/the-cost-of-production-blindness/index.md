@@ -3,7 +3,6 @@ title: "The Cost of Production Blindness"
 date: "2022-07-22T08:11:03+00:00"
 lastmod: "2022-07-22T08:11:04+00:00"
 description: "Cloud rose to fame on the banner of cutting costs but with its tremendous growth, spend is rocketing. Learn how you can cut down overspend!"
-canonical: "https://lightrun.com/best-practices/the-cost-of-production-blindness/"
 authors:
   - "shai-almog"
 image: "Cost-Saving-with-Lightrun.png"
@@ -15,7 +14,7 @@ related_posts:
   - "what-is-debugging-in-140-seconds"
   - "exception-breakpoint-that-doesnt-suck-and-a-real-use-case-for-method-breakpoints"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-frozen: false
+frozen: true
 ---
 
 When I speak at conferences, I often fall back to the fact that just a couple of decades ago we'd observe production by kicking the server.

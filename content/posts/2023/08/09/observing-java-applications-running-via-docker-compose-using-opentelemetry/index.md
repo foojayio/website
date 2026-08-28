@@ -3,7 +3,6 @@ title: "Observing Java on Docker Compose Using OpenTelemetry"
 date: "2023-08-09T21:51:43+00:00"
 lastmod: "2023-08-09T21:55:39+00:00"
 description: "An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files."
-canonical: "https://digma.ai/blog/observing-java-application-running-via-docker-compose-using-opentelemetry/"
 authors:
   - "roni-dover"
 image: "doppleware_someone_watching_a_shipping_container_using_a_telesc_96929aa6-ccc4-478c-bffe-df76d290173e-1-1024x512-1.jpg"
@@ -13,7 +12,7 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
-frozen: false
+frozen: true
 ---
 
 ## An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files!

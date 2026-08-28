@@ -45,7 +45,7 @@ More info on: <http://velocity.apache.org/>
 
 {{< img src="sensehat-300x218-1.jpg" class="alignleft size-large" width="300" height="218" >}}
 
-The Sense HAT is an add-on board for Raspberry Pi, made especially for the Astro Pi mission -- which launched to the International Space Station in December 2015 -- and is now [available to buy.](https://shop.pimoroni.com/products/raspberry-pi-sense-hat) The Sense HAT has an 8×8 RGB LED matrix, a five-button joystick, and includes the following sensors: Gyroscope, Accelerometer, Magnetometer, Barometer, Temperature sensor, and Relative Humidity sensor.
+The Sense HAT is an add-on board for Raspberry Pi, made especially for the Astro Pi mission – which launched to the International Space Station in December 2015 – and is now [available to buy.](https://shop.pimoroni.com/products/raspberry-pi-sense-hat) The Sense HAT has an 8×8 RGB LED matrix, a five-button joystick, and includes the following sensors: Gyroscope, Accelerometer, Magnetometer, Barometer, Temperature sensor, and Relative Humidity sensor.
 
 HAT stands for "Hardware Attached on Top" which is a new hardware specification for add-one modules for the Raspberry Pi.
 

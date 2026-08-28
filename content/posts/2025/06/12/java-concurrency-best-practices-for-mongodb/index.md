@@ -261,8 +261,6 @@ The `rs.status().optimes.lastCommittedOpTime` command returns the timestamp of t
 Below, I've provided an [example](https://gist.github.com/couragecowardlydog/e0d417c37e7780b591fefa39d9281f26%20file=ReadConcernMajority.java) of `ReadConcern.MAJORITY` being used with MongoDB, which prevents rollback-prone reads.
 
 ```java
-
-```bash
 package io.gitrebase;
 
 import com.mongodb.ReadConcern;
@@ -304,8 +302,6 @@ public class ReadConcernMajority {
         }
     }
 }
-```
-
 ```
 
 #### Snapshot

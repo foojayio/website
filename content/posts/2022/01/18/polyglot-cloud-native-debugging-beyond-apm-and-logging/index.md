@@ -3,7 +3,6 @@ title: "Polyglot Cloud Native Debugging: Beyond Logs/APM"
 date: "2022-01-18T07:55:51+00:00"
 lastmod: "2022-01-18T08:02:40+00:00"
 description: "Continuous observability can facilitate a new generation of applications that will change the customer experience and yours."
-canonical: "https://talktotheduck.dev/polyglot-cloud-native-debugging-beyond-apm-and-logging"
 authors:
   - "shai-almog"
 image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-03.jpg"
@@ -16,7 +15,7 @@ related_posts:
   - "the-debugger-checklist-part-ii"
   - "debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
-frozen: false
+frozen: true
 ---
 
 **I've done quite a few conference talks since I became a developer advocate for [Lightrun](https://lightrun.com/). One of my most popular talks has a title similar to the title of this article. In this article I'll try to cover the gist of the talk.**

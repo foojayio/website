@@ -13,7 +13,7 @@ related_posts:
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
   - "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"
-frozen: false
+frozen: true
 ---
 
 ![](boxlang-v1.16.0-700x467.jpg)
@@ -62,9 +62,7 @@ Running BoxLang MiniServer behind nginx, Traefik, an ALB, or any other proxy lay
 
 ```java
 {
-
     "useProxyHeaders": true
-
 }
 ```
 

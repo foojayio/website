@@ -3,7 +3,6 @@ title: "Understand Source Code – Deep into the Codebase, Locally & Production"
 date: "2022-07-01T07:17:53+00:00"
 lastmod: "2022-07-22T14:24:50+00:00"
 description: "Learn a new codebase by diving into it with debuggers to understand the full extent of internal semantics and interactions in the project."
-canonical: "https://lightrun.com/tutorials/understand-source-code-deep-into-the-codebase-locally-and-in-production/"
 authors:
   - "shai-almog"
 image: "Code-exploration.png"
@@ -14,7 +13,7 @@ related_posts:
   - "the-debugger-checklist-part-ii"
   - "spring-boot-performance-workshop-with-vlad-mihalcea"
   - "get-started-with-allocation-profiling"
-frozen: false
+frozen: true
 ---
 
 Say you have a new code base to study or picked up an open source project. You might be a seasoned developer for whom this is another project in a packed resume. Alternatively, you might be a junior engineer for whom this is the first "real" project.

@@ -317,7 +317,7 @@ public final class HtmlToMarkdown {
         for (Element code : content.select("code")) {
             if (code.parent() != null && "pre".equals(code.parent().tagName())) continue;
             String text = code.wholeText();
-            String fixed = resolveDoubleEscaped(normalizeCodeSpaces(text));
+            String fixed = resolveDoubleEscaped(normalizeCodeDashes(normalizeCodeSpaces(text)));
             if (!fixed.equals(text)) code.text(fixed);
         }
 
@@ -371,6 +371,40 @@ public final class HtmlToMarkdown {
         // hand-written footnote or in-page anchor inside one still has to resolve.
         content.select("[id]").removeAttr("id");
 
+        // The PRE-HTML5 spelling of the same thing: an anchor target written as
+        // an empty `<a name="...">` rather than an id. WordPress emits one just
+        // above a heading -- `<p><a name="the-limiting-factor"></a></p>` -- and
+        // sometimes inside it, carrying an href back to itself:
+        //
+        //     <h3 id="h3-2-java-skeleton-methods">
+        //       <a href="#java-skeleton-methods" name="java-skeleton-methods"> </a>
+        //       Java skeleton methods</h3>
+        //
+        // Flexmark turns `name` into exactly the same Markdown attribute block
+        // `id` produces, so the pass above cannot see it and the anchor comes
+        // back as a literal `{#the-limiting-factor}` line above the heading --
+        // which is what the reader sees, and 141 of them across 12 posts is what
+        // a re-scrape put back after cleanup/HeadingAnchors.java had removed
+        // them. Every argument in the comment above applies unchanged; `name` on
+        // an `<a>` is obsolete HTML and nothing downstream reads it either.
+        //
+        // The whole ELEMENT goes when it holds no text and no image, not just the
+        // attribute: these anchors are empty by construction, and stripping only
+        // `name` leaves the self-href behind as an empty link in the middle of
+        // the heading (`### [ ](#java-skeleton-methods) Java skeleton methods`).
+        // An `<a name>` that does carry content is a real link, so that one keeps
+        // its text and loses only the attribute. Restricted to `a[name]`: `name`
+        // is load-bearing on a form control, and one of those can sit inside a
+        // preserved raw-HTML block.
+        for (Element a : content.select("a[name]")) {
+            if (a.selectFirst("img, picture, video, svg") == null
+                    && a.text().replace('\u00a0', ' ').isBlank()) {
+                a.remove();
+            } else {
+                a.removeAttr("name");
+            }
+        }
+
         // Brand capitalization, applied LAST -- after every preserve pass above, so
         // a code fence, a widget, a gallery and a shortcode are all placeholder
         // tokens by now and none of them can be rewritten. What is left in the DOM
@@ -409,8 +443,8 @@ public final class HtmlToMarkdown {
      * untouched -- it's significant in Python, YAML and anything wrapped.
      */
     public static String codeFence(String code, String enlighterLanguage) {
-        String body = code == null ? "" : resolveDoubleEscaped(
-                normalizeCodeSpaces(code.replace("\r\n", "\n")).replaceAll("\\s+$", ""));
+        String body = code == null ? "" : resolveDoubleEscaped(normalizeCodeDashes(
+                normalizeCodeSpaces(code.replace("\r\n", "\n")).replaceAll("\\s+$", "")));
         int longestRun = 0, run = 0;
         for (char c : body.toCharArray()) {
             run = (c == '`') ? run + 1 : 0;
@@ -651,6 +685,40 @@ public final class HtmlToMarkdown {
      */
     public static String normalizeCodeSpaces(String code) {
         return code == null ? null : code.replace('\u00a0', ' ');
+    }
+
+    /**
+     * Puts back the double hyphen of a command-line flag that arrived as an en
+     * dash.
+     *
+     * Companion to normalizeCodeSpaces, for the other way WordPress damage lands
+     * inside code. WP's wptexturize maps `--` to an en dash, and an editor's own
+     * autocorrect does the same, so a sample reading `git checkout --b` is stored
+     * and served as `git checkout –b`. It looks almost right and is not: copy it
+     * out and the shell rejects a character it has never heard of, which is
+     * exactly the failure normalizeCodeSpaces exists to prevent for U+00A0.
+     * foojay.io serves all of these wrong today -- this is old content damage,
+     * not a conversion artefact.
+     *
+     * The rule is narrow, because an en dash inside code is not automatically
+     * wrong -- a range or a string literal can hold one. It fires only where the
+     * dash BEGINS a token and is followed by a letter, i.e. the shape of a flag:
+     *
+     *     `--nodes`   `./build.sh --run`   `java --version`   `--Xtune:throughput`
+     *
+     * and never mid-token (`docker–compose`, where the author meant one hyphen,
+     * not two) or before whitespace (`HERE 3 — value`, prose inside a code span).
+     * Measured over all of content/: 17 occurrences in 8 posts, every one of them
+     * a mangled flag, no other match. `curl --request POST ... –data` is the tell
+     * -- one flag survived in the same line the other did not.
+     *
+     * Em dash is deliberately not included: wptexturize produces it from `---`,
+     * which is not a flag, and content/ holds no case of one beginning a token.
+     * Fence bodies and inline code spans only; an en dash in prose is the
+     * author's own punctuation. Idempotent.
+     */
+    public static String normalizeCodeDashes(String code) {
+        return code == null ? null : code.replaceAll("(?<![\\w-])\u2013(?=[A-Za-z])", "--");
     }
 
     /**

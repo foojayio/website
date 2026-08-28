@@ -44,7 +44,7 @@ Printing Durations also returns very human readable results (which is the point,
 ```
 
 ```
- 
+ 
 ```
 
 ## Negative Durations \& Infinite Durations: Completely OK!
@@ -110,7 +110,7 @@ println(parseIsoStringOrNull("PT283H18M")) // 11d 19h 18m
 ```
 
 ```
- 
+ 
 ```
 
 ## Comparing Durations and Enforcing Duration Intervals \& Bounds

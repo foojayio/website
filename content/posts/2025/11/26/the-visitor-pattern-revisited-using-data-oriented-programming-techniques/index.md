@@ -348,12 +348,8 @@ public interface Visitable {
 
 a contract to which all Books adhere
 
-```
-
 ```java
 public abstract class Book implements Visitable { //... }
-```
-
 ```
 
 and which is implemented by each *leaf node*
@@ -741,12 +737,8 @@ case Ratings(
 
 The last *fall through case* can be even more brief: 'if any of the ratings were not handled by the previous cases, it must be uninteresting':
 
-```
-
 ```java
             case Ratings(_, _) -> notifyUninteresting();
-```
-
 ```
 
 ##### Bonus: primitives in a switch case (a java 24 preview feature)

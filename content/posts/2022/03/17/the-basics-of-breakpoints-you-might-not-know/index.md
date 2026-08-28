@@ -3,7 +3,6 @@ title: "The Basics of Breakpoints you Might not Know"
 date: "2022-03-17T10:41:08+00:00"
 lastmod: "2022-03-17T10:41:10+00:00"
 description: "We work with debuggers practically every day & yet so much remains unknown. We’re operating this complex tool while using 4 basic features"
-canonical: "https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know"
 authors:
   - "shai-almog"
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
@@ -15,7 +14,7 @@ related_posts:
   - "what-is-debugging-in-140-seconds"
   - "the-debugger-checklist-part-ii"
   - "debugging-race-conditions-in-production"
-frozen: false
+frozen: true
 ---
 
 In episodes 4 and 5 of "140 Second Ducklings", I got deeper into the more advanced underpinnings of breakpoints. There's still a lot more to learn to move forward, but even at this stage it's surprising how many things are relatively unknown in the developer community. And I'm just getting started…
