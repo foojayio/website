@@ -303,42 +303,42 @@ it is the part I would most want back if we ever moved again.
 ## Every podcast episode is now readable
 
 The Foojay Podcast had exactly one way in: press play and listen for the next
-forty-five minutes. **99 episodes now carry a transcript on the page** — roughly
+forty-five minutes. **99 episodes now carry a transcript on the page**, roughly
 800,000 words of conversation you can read, skim, `Ctrl-F` through, or quote
 from.
 
-Nothing was transcribed to make that happen. Every episode is on Foojay's own
-YouTube channel and YouTube has already run speech recognition over all of them,
-so the text was ours to fetch — seconds per episode, against hours of local
+Nobody transcribed anything to make that happen. Every episode sits on Foojay's
+own YouTube channel and YouTube has already run speech recognition over all of
+them, so the text was ours to fetch. Seconds per episode, against hours of local
 compute for a result of the same quality. A JBang script pulls the captions,
 collapses YouTube's rolling repeats (its captions re-send each settled line in
 the following cue, so a 45-minute episode arrives as 2,643 cues holding about
 1,300 distinct lines), drops the jingle and the "uh"s, and writes a
 `transcript.md` next to the episode's `index.md`. The page renders it *because
-the file is there* — there is no flag on the episode to set, and none to
+the file is there*, so there is no flag on the episode to set and none to
 remember to unset. It is a plain section of the page with its own entry in "On
-this page", not a collapsed box you have to know to open: your browser's
+this page", not a collapsed box you have to know to open. Your browser's
 find-in-page does not look inside a closed one, so `Ctrl-F` for a guest's name
 would have found nothing on the very page that says it.
 
 **And it is a machine transcript, which every episode says out loud above the
 text.** Automatic captions get names and Java vocabulary wrong, and an
-uncorrected machine transcript presented as a faithful record is worse than one
-that admits what it is. The corrections that *are* applied were derived from
-what recognition actually produced rather than guessed at, and the best argument
-for working that way is `forj`. It looks exactly like a mangled "Foojay". It is
-in fact **`4j`** — it only ever appears next to Neo, Log, SLF and LangChain. The
+uncorrected machine transcript that claims to be a faithful record is worse than
+one that admits what it is. Every correction the script applies comes from what
+recognition actually produced rather than from a guess, and the best argument for
+working that way is `forj`. It looks exactly like a mangled "Foojay". It is in
+fact **`4j`**, and it only ever appears next to Neo, Log, SLF and LangChain. The
 spelling-based guess would have quietly rewritten every mention of Log4j in six
 years of archive into a mention of this website.
 
-Guests' names are deliberately left uncorrected. Recognition mangles them worse
-than anything else, but there is no spelling a script can *know* is the intended
-one, and inventing one puts words in someone's mouth. So if you were on an
-episode and your name comes out wrong, there is a **Suggest a correction** link
-next to every transcript that opens that episode's transcript file in an editor
-— and a corrected transcript is never overwritten by the script again.
+The script deliberately leaves guests' names alone. Recognition mangles them
+worse than anything else, but no script can *know* which spelling someone
+intended, and inventing one puts words in their mouth. So if you were on an
+episode and your name comes out wrong, every transcript carries a **Suggest a
+correction** link that opens that episode's transcript file in an editor. The
+script never overwrites a corrected transcript again.
 
-One deliberate omission — **transcripts are not in the search index.** 800,000
+One deliberate omission: **transcripts stay out of the search index.** 800,000
 words against the article archive's 115,000 would make every episode a hit for
 any word anyone happened to say out loud, and bury the thing you were actually
 searching for.
@@ -388,11 +388,11 @@ among them.
 
 ## Accessibility
 
-Foojay is very likely not *legally* required to be accessible — the European
-Accessibility Act covers consumer services in listed sectors, not community
-blogs. That is a poor reason to skip it. This is an audience of Java developers,
-which is precisely the audience that browses with a keyboard, at 200% zoom, in a
-dark colour scheme, or with a screen reader.
+No law very likely obliges Foojay to be accessible. The European Accessibility
+Act covers consumer services in listed sectors, not community blogs. That is a
+poor reason to skip it. Java developers are precisely the audience that browses
+with a keyboard, at 200% zoom, in a dark colour scheme, or with a screen
+reader.
 
 So the site targets **[WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/)**, and there
 is now an [accessibility statement](https://foojay.io/accessibility/) that says
@@ -401,28 +401,28 @@ where it actually stands. What went in:
 - A skip link, one `<h1>` and real landmarks on every page.
 - **Everything works without a mouse**: the menu, the search field, the image
   viewer, the event calendar, the sortable tables, the sponsor banners. Read [the accessibility page](https://foojay.io/accessibility/) for more information about navigating with the keyboard through the site.
-- **Contrast is measured, and the numbers are recorded next to each colour in
-  the stylesheet.** That is how we found that Foojay's own logo blue is 2.02:1
-  on white — fine as a fill, unusable as text — so it is never text here, and
-  the focus indicator got a colour of its own. Links in running text are
-  underlined for the same reason: at 1.2:1 against the body text, colour alone
-  was telling you nothing.
+- **We measure contrast, and the stylesheet records the number next to each
+  colour.** That is how we found that Foojay's own logo blue is 2.02:1 on white.
+  Fine as a fill, unusable as text. So it is never text here, and the focus
+  indicator got a colour of its own. Links in running text carry an underline for
+  the same reason: at 1.2:1 against the body text, colour alone told you
+  nothing.
 - **Nothing moves that you cannot stop**, and nothing moves at all if your
   system asks for reduced motion.
 
-The failures that got fixed are more instructive than the list of things that
-pass. The mobile menu was moved off-screen but left in the tab order, so a
-keyboard walked you through a menu you could not see. The image viewer's click
-handler was on the `<img>`, so click-to-enlarge did not exist for a keyboard at
-all. Two pages overflowed a 390px phone screen by 243 and 151 pixels.
+The failures we fixed teach more than the list of things that pass. The mobile
+menu moved off-screen but stayed in the tab order, so a keyboard walked you
+through a menu you could not see. The image viewer bound its click handler to
+the `<img>`, so click-to-enlarge did not exist for a keyboard at all. Two pages
+overflowed a 390px phone screen by 243 and 151 pixels.
 
-**And the biggest gap is on the statement rather than glossed over: roughly
-3,000 images in the archive have no alt text.** They were imported that way, and
-no script can invent a description of a screenshot it cannot see. New articles
-are checked when you open the pull request — as a *warning*, not a failure,
-because whether an image carries meaning is a judgement call, and the
-predictable response to a hard failure is `alt="image"`, which is worse for a
-screen reader than nothing at all.
+**And the biggest gap sits on the statement rather than glossed over: roughly
+3,000 images in the archive have no alt text.** They arrived that way, and no
+script can invent a description of a screenshot it cannot see. The check reads
+new articles when you open the pull request and raises a *warning* rather than a
+failure, because whether an image carries meaning is a judgement call. The
+predictable response to a hard failure is `alt="image"`, which serves a screen
+reader worse than nothing at all.
 
 Which makes it 3,000 tiny independent jobs in a public repository, and if you
 wrote one of those articles you are the best person alive to describe its
