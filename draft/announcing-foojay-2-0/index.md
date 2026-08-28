@@ -126,9 +126,9 @@ to look for:
   position, so inserting one heading silently renumbered the rest. Another
   1,268 of the same ids, stamped on captions and paragraphs instead of
   headings, were being *printed to the reader* mid-article on 91 posts.
-- **7 posts whose entire tail rendered as a block of source code**, because one
-  code sample had been wrapped in an extra, empty code fence and the last one
-  on the page never closed.
+- **7 posts whose entire tail rendered as a block of source code**, because
+  WordPress had wrapped one code sample in an extra, empty code fence and the
+  last one on the page never closed.
 - **279 email addresses** that no script could see at all: Cloudflare replaces
   them with a placeholder plus an encoded copy that only a browser puts back.
 - **259 gallery images** across 94 posts, stored as thirty lines of block markup
@@ -163,11 +163,10 @@ themselves.** A dead link inside an article renders perfectly.
   otherwise goes green. The same 52 MB animated GIF was the header image of
   three different articles.
 
-**The part that keeps running.** The `scripts/` folders are grouped by one
-question, *does this still exist after cutover?*, because two of them are meant
-to be deleted whole. The scrapers and the one-off repairs go in the bin the day
-WordPress is switched off. What stays is the Java that does the ongoing
-work:
+**The part that keeps running.** One question groups the `scripts/` folders,
+*does this still exist after cutover?*, because two of them disappear whole. The
+scrapers and the one-off repairs go in the bin the day we switch WordPress off.
+What stays behind is the Java that does the ongoing work:
 
 | Runs | What it does |
 |---|---|
@@ -279,9 +278,9 @@ and the line, rather than in a log four clicks away. They come from the log
 stream rather than the API, so they work identically on a pull request from a
 fork, which is how most first-time authors arrive.
 
-This is the honest shape of security after leaving WordPress. There is no CMS to
+Security takes an honest new shape after leaving WordPress. There is no CMS to
 log into, no database, and no PHP running on a server, so there is nothing to
-exploit remotely. What is left is that the site changes when a maintainer merges
+exploit remotely. What remains is that the site changes when a maintainer merges
 something. Review is therefore the security control, and these checks are what
 give it teeth.
 
@@ -445,20 +444,20 @@ Let's be straight about this, because it is the one place where "static site"
 does not automatically mean "nothing is watching". There are **two** counters,
 they do different jobs, and only one of them is ours.
 
-### 1. Google Analytics — because the marketing team loves it
+### 1. Google Analytics, because the marketing team loves it
 
 Foojay reports into the same Google Analytics property it always has. That has
 not changed and we are not going to pretend otherwise.
 
-What *has* changed is how it gets there. The old site loaded Google Tag Manager
-— 360 KB of JavaScript — to deliver a grand total of eleven lines of tags,
-including a Universal Analytics tag from 2023 that only still worked because
-Google quietly aliases the retired id to the current property behind the scenes.
-Foojay 2.0 loads the GA4 tag directly instead. Same numbers, one fewer legacy
-shim that Google can retire without telling anyone, and — this is the part we
-care about — **everything your browser is asked to run is now readable in the
-repository**, in a file you can review in a pull request, rather than living in
-a web console nobody outside the team can see.
+How it gets there *has* changed. The old site loaded Google Tag Manager, 360 KB
+of JavaScript, to deliver a grand total of eleven lines of tags. One of those was
+a Universal Analytics tag from 2023 that only still worked because Google quietly
+aliases the retired id to the current property behind the scenes. Foojay 2.0
+loads the GA4 tag directly instead. Same numbers, one fewer legacy shim that
+Google can retire without telling anyone, and here is the part we care about:
+**you can read everything your browser runs, in this repository**, in a file
+anyone can review in a pull request, rather than in a web console nobody outside
+the team can see.
 
 [Ketch](https://www.ketch.com/) is still the consent manager, and Google
 [Consent Mode](https://support.google.com/analytics/answer/9976101) now defaults
@@ -466,40 +465,40 @@ every category to *denied* before it loads. So until you actually agree to
 something, GA sets no cookie and sends cookieless pings. If you decline, it
 stays that way.
 
-**You use an ad blocker and refuse cookies? No problem — so do I.** Which is
-exactly why there is a second counter.
+**You use an ad blocker and refuse cookies? No problem, so do I.** That is
+exactly why a second counter exists.
 
-### 2. Our own read counter — because we want to know what is actually read
+### 2. Our own read counter, because we want to know what people actually read
 
-If Google Analytics were the only source, every number we published would be
-wrong, and wrong in a predictable direction: this is an audience of Java
-developers, a large share of whom block third-party analytics domains outright.
-A page-view count that silently misses a third of its readers is not a
-statistic, it is a guess. And the read count on a Foojay article is a *published*
-number — it is on the page, next to the byline — so it had better be true.
+With Google Analytics as the only source, every number we publish comes out
+wrong, and wrong in a predictable direction. A large share of Java developers
+block third-party analytics domains outright. A page-view count that silently
+misses a third of its readers is not a statistic, it is a guess. And the read
+count on a Foojay article is a *published* number, sitting on the page next to
+the byline, so it had better be true.
 
 So the `12,345 views` you see comes from something we run ourselves: a small
 [Cloudflare Worker](https://developers.cloudflare.com/workers/) on
-`foojay.io/api/views`, in front of a table with exactly two columns — a page key
+`foojay.io/api/views`, in front of a table with exactly two columns. A page key
 like `posts/announcing-foojay-2-0`, and an integer.
 
-**Nobody's article went back to zero.** Six years of reading history was sitting
-in WordPress, and throwing it away to start from a clean slate would have been
-the easy option and a rotten one — a 2021 article that has been read 40,000
-times should say so. So we carried the numbers across: **13.8 million reads**
-over 2,147 articles, 47 glossary entries and 32 pages. They are loaded as the
-starting value of each page's count and live reads are added on top, so what you
-see is one number rather than an old total sitting next to a new one.
+**Nobody's article went back to zero.** Six years of reading history sat in
+WordPress, and throwing it away for a clean slate would have been the easy option
+and a rotten one. A 2021 article that 40,000 people have read should say so. So
+we carried the numbers across: **13.8 million reads** over 2,147 articles, 47
+glossary entries and 32 pages. Each one becomes the starting value of that page's
+count and live reads accumulate on top, so you see one number rather than an old
+total sitting next to a new one.
 
-That transfer moved exactly what the counter itself holds, and nothing else: **a
+That transfer moved exactly what the counter itself holds and nothing else: **a
 single number per post or page.** No visitor records, no IP addresses, no
-sessions, no personal data of any kind — there was nothing of that sort to carry
-over, because a total is all we asked WordPress for and all the new table can
+sessions, no personal data of any kind. None of that existed to carry over,
+because a total is all we asked WordPress for and all the new table can
 store. (Author pages are the one exception, and they genuinely do start at zero:
 WordPress was never counting them.)
 
 That is the whole design, and the privacy properties fall out of it rather than
-being promised on top of it:
+sitting on top of it as a promise:
 
 - **No cookie, no identifier, no IP address, no user agent, no fingerprint.**
   The request carries a page key and nothing else. There is nothing to anonymise
@@ -508,11 +507,10 @@ being promised on top of it:
   visitor. Two reads of two articles are two numbers going up, with nothing
   linking them.
 - **An ad blocker does not need to block it,** because there is nothing to
-  block: it is first-party, on the same domain as the article you are reading.
-  That is not a loophole — it is why the number is accurate.
-- **The count is baked into the page at build time**, so displaying it costs no
-  request at all. No JavaScript, no dash that turns into a number a second
-  later.
+  block. It is first-party, on the same domain as the article you are reading.
+  That is not a loophole. It is why the number is accurate.
+- **The build bakes the count into the page**, so displaying it costs no request
+  at all. No JavaScript, no dash that turns into a number a second later.
 
 The single piece of state on your machine is a `sessionStorage` flag that stops
 a page refresh counting twice, and it dies when you close the tab.
@@ -525,24 +523,25 @@ For the formal version, see the [privacy policy](https://foojay.io/privacy-polic
 
 ## Come and write something
 
-This is the part that has not changed and never will: Foojay is worth reading
-because people in this community take the time to write things down.
+One thing about Foojay never changes, whatever the site runs on. Foojay is worth
+reading because people in this community take the time to write things down.
 
-If you have ever thought *someone should write that up* — a JVM flag that saved
-you a week, a migration that went sideways, a library nobody knows about, a
-conference report, a thing you finally understood — that someone can be you. You
-do not need to be a Java Champion, and it does not need to be 3,000 words.
+If you have ever thought *someone should write that up*, that someone can be you.
+A JVM flag that saved you a week, a migration that went sideways, a library
+nobody knows about, a conference report, a thing you finally understood. You do
+not need to be a Java Champion, and it does not need to be 3,000 words.
 
 - **Start here:**
   [How To Submit Your Next Article On Foojay.io](https://foojay.io/today/how-to-submit-your-next-article-on-foojay-io/)
-- **Or just read the templates:** everything you need is in the
-  [`template/` folder](https://github.com/foojayio/website/tree/main/template) —
-  copy a file, fill it in, open a pull request.
+- **Or just read the templates:** the
+  [`template/` folder](https://github.com/foojayio/website/tree/main/template)
+  holds everything you need. Copy a file, fill it in, open a pull request.
 - **Questions, or not sure your idea fits?** Ask in the
   [Foojay Slack](https://bit.ly/join-foojay-slack). The answer is usually yes.
 
-And if you spot a typo in this very article: scroll to the foot of it and there
-is an **Edit this page on GitHub** link. It opens the file this page was built
-from, in an editor, and turns your fix into a pull request — GitHub forks the
+And if you spot a typo in this very article, scroll to the foot of it and look
+for the **Edit this page on GitHub** link. It opens the exact file this page came
+from, in an editor, and turns your fix into a pull request. GitHub forks the
 repository for you, so it takes three clicks and no local setup. Every article,
-page and glossary entry on the site has one. That is rather the point.
+page and glossary entry on the site carries that link. That is rather the
+point.
