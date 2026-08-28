@@ -1,6 +1,7 @@
 {
   "authors/chriswhocodes" : 1,
   "pages/ai" : 3126,
+  "pages/ai-instructions" : 1,
   "pages/board" : 58882,
   "pages/calendar" : 52390,
   "pages/check-your-java-installation" : 4181,
@@ -14,8 +15,9 @@
   "pages/install-java-on-macos" : 6010,
   "pages/install-java-on-windows" : 4539,
   "pages/java-almanac" : 666,
+  "pages/java-champions" : 1,
   "pages/java-quick-start" : 58031,
-  "pages/java-user-groups-jugs" : 5318,
+  "pages/java-user-groups-jugs" : 5319,
   "pages/jvm-options" : 1,
   "pages/meet-the-team" : 31261,
   "pages/other-tutorials" : 3985,

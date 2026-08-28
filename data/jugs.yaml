@@ -24,6 +24,16 @@
   latitude: 43.237098365933285
   longitude: 76.9154652818447
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/AlmatyJUG.md
+- slug: AmsterdamJUG
+  name: Amsterdam Java User Group
+  country: The Netherlands
+  website: https://www.meetup.com/amsterdam-java-user-group/
+  meetup_slug: amsterdam-java-user-group
+  meetup_url: https://www.meetup.com/amsterdam-java-user-group/
+  twitter: AmsterdamJUG
+  latitude: 52.370216
+  longitude: 4.895168
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/AmsterdamJUG.md
 - slug: AntwerpJUG
   name: Antwerp Java User Group
   country: Belgium
@@ -33,6 +43,16 @@
   latitude: 51.221384
   longitude: 4.401627
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/AntwerpJUG.md
+- slug: ApeldoornJUG
+  name: Apeldoorn Java User Group
+  country: The Netherlands
+  website: https://www.meetup.com/apeldoornjug/
+  meetup_slug: apeldoornjug
+  meetup_url: https://www.meetup.com/apeldoornjug/
+  twitter: ApeldoornJUG
+  latitude: 52.211157
+  longitude: 5.969923
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/ApeldoornJUG.md
 - slug: AtlantaJUG
   name: Atlanta JUG
   country: USA
@@ -91,6 +111,16 @@
   latitude: 44.84044
   longitude: -0.5805
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/BordeauxJUG.md
+- slug: BrabantJUG
+  name: Brabant Java User Group
+  country: The Netherlands
+  website: https://www.meetup.com/brabant-jug/
+  meetup_slug: brabant-jug
+  meetup_url: https://www.meetup.com/brabant-jug/
+  twitter: BrabantJug
+  latitude: 51.555366
+  longitude: 5.0913
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/BrabantJUG.md
 - slug: BrusselsJUG
   name: Brussels Java User Group
   country: Belgium
@@ -625,6 +655,16 @@
   latitude: 12.137038
   longitude: -86.31601
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/NicaraguaJUG.md
+- slug: JUGNoord
+  name: JUG Noord
+  country: The Netherlands
+  website: https://www.meetup.com/jug-noord/
+  meetup_slug: jug-noord
+  meetup_url: https://www.meetup.com/jug-noord/
+  twitter: JUGNoord
+  latitude: 53.219383
+  longitude: 6.566502
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/JUGNoord.md
 - slug: JUGVale
   name: JUG Vale
   country: Brazil
@@ -793,6 +833,15 @@
   latitude: -9.189967
   longitude: -75.015152
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/PeruJUG.md
+- slug: RotterdamJUG
+  name: Rotterdam Java User Group
+  country: The Netherlands
+  website: https://www.meetup.com/rotterdamjug/
+  meetup_slug: rotterdamjug
+  meetup_url: https://www.meetup.com/rotterdamjug/
+  latitude: 51.92442
+  longitude: 4.477733
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/RotterdamJUG.md
 - slug: SeattleJUG
   name: Seattle JUG
   country: USA
@@ -857,6 +906,15 @@
   latitude: 43.657764
   longitude: -79.402487
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/TorontoJUG.md
+- slug: UtrechtJUG
+  name: Utrecht Java User Group
+  country: The Netherlands
+  website: https://www.meetup.com/utrecht-java-user-group/
+  meetup_slug: utrecht-java-user-group
+  meetup_url: https://www.meetup.com/utrecht-java-user-group/
+  latitude: 52.090737
+  longitude: 5.12142
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/UtrechtJUG.md
 - slug: ValenciaJUG
   name: Valencia Java User Group
   country: Spain
