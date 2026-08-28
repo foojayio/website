@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/iryna-dohndorf"
 github: "https://github.com/tiberius-security/tiberius"
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/iryna-dohndorf/"
 frozen: false
 ---
-

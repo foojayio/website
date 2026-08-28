@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/ismaila-abdoulahi-adamou-035928166/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/ismaila-adamou/"
 frozen: false
 ---
-

@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/irakov/"
 github: ""
 youtube: ""
 website: "https://x.com/ivanglukos"
-aliases:
-  - "/today/author/ivan-rakov/"
 frozen: false
 ---
-

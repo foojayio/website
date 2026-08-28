@@ -9,8 +9,5 @@ linkedin: "https://www.linkedin.com/in/jagod/"
 github: ""
 youtube: ""
 website: ""
-aliases:
-  - "/today/author/jago-de-vreede/"
 frozen: false
 ---
-
