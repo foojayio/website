@@ -400,8 +400,19 @@ public class Authors {
         // block, which would silently drop it on the next re-run. Carried over
         // from the existing file when the scrape found none, the way
         // Sponsors.java carries `authors:` through.
+        //
+        // WRITTEN ONLY WHEN THERE IS A VALUE, unlike every other key here, and
+        // the asymmetry is the point. The other fields are ones the scrape can
+        // genuinely report on, so `bluesky: ""` is a real answer: we read the
+        // card and there was no Bluesky icon on it. gitlab is the one field the
+        // card cannot supply, so an empty gitlab: states nothing at all -- and
+        // 345 of the 348 author bundles have no such line today, so writing one
+        // unconditionally rewrites 345 files to add no information. A diff that
+        // size is not free: it is what the real change in the next re-scrape
+        // hides behind. `existingParam` already returns null for a blank value,
+        // so a hand-written one still survives and an empty one is cleaned up.
         if (d.gitlab == null) d.gitlab = existingParam(bundleDir, "gitlab");
-        fm.append("gitlab: ").append(yamlString(d.gitlab)).append("\n");
+        if (d.gitlab != null) fm.append("gitlab: ").append(yamlString(d.gitlab)).append("\n");
         fm.append("youtube: ").append(yamlString(d.youtube)).append("\n");
         fm.append("website: ").append(yamlString(d.website)).append("\n");
         fm.append("frozen: false\n");

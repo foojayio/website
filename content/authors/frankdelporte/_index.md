@@ -10,5 +10,5 @@ github: "https://github.com/FDelporte/"
 gitlab: "https://gitlab.com/fdelporte"
 youtube: "https://www.youtube.com/@FrankDelporte"
 website: "https://webtechie.be/"
-frozen: false
+frozen: true
 ---

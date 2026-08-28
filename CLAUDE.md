@@ -1223,6 +1223,23 @@ should catch a mistake at PR time rather than letting it fail silently.
   to re-run without duplicating or destroying hand edits (the `frozen: true`
   flag pattern). This matters because these scripts get re-run repeatedly
   during the trial period against the still-live WP site.
+
+  **And a re-run must not produce a diff that carries no information.** Being
+  idempotent in *content* is not enough if the bytes still move: a large diff is
+  what the next real change hides behind, and a reviewer who has learned to
+  scroll past 300 files will scroll past the one that mattered. Three instances,
+  all the same bug wearing different clothes: `fetch/JugEvents.java` writes
+  `data/jug-events.json` only when the events changed, because its `generatedAt`
+  moved on every run and would have committed (and deployed) on a timestamp;
+  `transfer/Comments.java` carries no timestamp at all and rewrites a
+  `comments.json` only when its content changed; and `transfer/Authors.java`
+  emits `gitlab:` **only when it has a value**, because 345 of the 348 author
+  bundles have no such line and writing an empty one rewrites 345 files to say
+  nothing. Note the last is deliberately NOT a general "skip empty keys" rule --
+  the other social fields ARE ones the scrape can report on, so `bluesky: ""`
+  genuinely means "we read the card and there was no icon", and dropping those
+  would itself be a 348-file diff carrying no news. The test is whether the
+  script could ever have filled the field, not whether the field is empty.
 - **URLs are load-bearing**: every converted post/author/page keeps its
   legacy path (`aliases:` + explicit `url:` for pages) — don't restructure
   URLs without adding an alias.
