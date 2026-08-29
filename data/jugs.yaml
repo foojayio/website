@@ -800,6 +800,16 @@
   latitude: 40.71090488913511
   longitude: -73.99273785399684
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/NYJavaSIG.md
+- slug: OklahomaCityJUG
+  name: Oklahoma City JUG (Java User Group)
+  country: USA
+  website: https://okcjug.org/
+  meetup_slug: oklahoma-city-java-user-group
+  meetup_url: https://www.meetup.com/oklahoma-city-java-user-group/
+  founded_date: '2006-01-01'
+  latitude: 35.46756
+  longitude: -97.516426
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/OklahomaCityJUG.md
 - slug: OrlandoJUG
   name: Orlando JUG (Java User Group)
   country: USA

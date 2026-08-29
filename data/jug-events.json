@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-08-28T12:58:45Z",
+  "generatedAt" : "2026-08-29T07:55:42Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -194,14 +194,6 @@
     "source" : "calendar",
     "url" : "http://www.jug-da.de/",
     "events" : [ {
-      "title" : "JUG DA: Interaktive Coding-Kata: Elephant Carpaccio",
-      "url" : "https://www.jug-da.de/2026/08/softwerkskammer/",
-      "startTime" : "2026-08-27T17:00:00+02:00",
-      "endTime" : "2026-08-27T20:00:00+02:00",
-      "venue" : "Accso - Accelerated Solutions GmbH",
-      "city" : "Frankfurt am Main",
-      "online" : null
-    }, {
       "title" : "JUG DA: Supercharging Java with Quarkus: Building Intelligent Backends with Quarkus LangChain4j (Marco Klaassen)",
       "url" : "https://www.jug-da.de/2026/09/Quarkus-LLMs/",
       "startTime" : "2026-09-17T18:30:00+02:00",
@@ -452,11 +444,11 @@
     "source" : "calendar",
     "url" : "http://www.jug-ostfalen.de/",
     "events" : [ {
-      "title" : "Java, Spring Boot, GitOps & Kubernetes: Dein Weg in die Cloud (Thomas Michael)",
+      "title" : "Vom Monolithen zum Modulithen: Spring Modulith in der Praxis (Nils Hartmann)",
       "url" : "",
-      "startTime" : "2026-08-27T19:00:00Z",
-      "endTime" : "2026-08-27T21:00:00Z",
-      "venue" : "Öffentliche Versicherung Braunschweig",
+      "startTime" : "2026-09-24T19:00:00Z",
+      "endTime" : "2026-09-24T21:00:00Z",
+      "venue" : "Cloudogu GmbH",
       "city" : "Braunschweig",
       "online" : null
     } ]
@@ -581,6 +573,13 @@
     "jug" : "NashvilleJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/nashvillejug/",
+    "events" : [ ]
+  }, {
+    "slug" : "oklahoma-city-java-user-group",
+    "name" : "Oklahoma City Java User Group",
+    "jug" : "OklahomaCityJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/oklahoma-city-java-user-group/",
     "events" : [ ]
   }, {
     "slug" : "orlando-jug-java-user-group",
