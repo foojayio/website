@@ -53,11 +53,24 @@
   latitude: 52.211157
   longitude: 5.969923
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/ApeldoornJUG.md
+- slug: ArnhemJUG
+  name: Arnhem Java User Group
+  country: The Netherlands
+  website: https://www.meetup.com/arnhemjug/
+  meetup_slug: arnhemjug
+  meetup_url: https://www.meetup.com/arnhemjug/
+  calendar: https://www.meetup.com/arnhemjug/events/ical/
+  latitude: 51.9911696
+  longitude: 5.8931666
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/ArnhemJUG.md
 - slug: AtlantaJUG
   name: Atlanta JUG
   country: USA
   website: https://ajug.org
+  meetup_slug: atlantajug
+  meetup_url: https://www.meetup.com/atlantajug/
   twitter: atlantajug
+  calendar: https://www.meetup.com/atlantajug/events/ical/
   founded_date: '2000-01-01'
   latitude: 33.9325621
   longitude: -84.3517143
@@ -106,7 +119,10 @@
   name: Bordeaux JUG
   country: France
   website: http://www.bordeauxjug.org
+  meetup_slug: BordeauxJUG
+  meetup_url: https://www.meetup.com/BordeauxJUG/
   twitter: BordeauxJUG
+  calendar: https://www.meetup.com/BordeauxJUG/events/ical/
   founded_date: 2009-11
   latitude: 44.84044
   longitude: -0.5805
@@ -125,8 +141,11 @@
   name: Brussels Java User Group
   country: Belgium
   website: http://www.brujug.be/
+  meetup_slug: brujug
+  meetup_url: https://www.meetup.com/brujug/
   twitter: BruJUG
   mastodon: https://foojay.social/@brujug
+  calendar: https://www.meetup.com/brujug/events/ical/
   founded_date: '2010-03-01'
   latitude: 50.849594
   longitude: 4.364084
@@ -202,7 +221,10 @@
   name: DubJUG
   country: Ireland
   website: https://dubjug.org/
+  meetup_slug: dublinjavausergroup
+  meetup_url: https://www.meetup.com/dublinjavausergroup/
   twitter: DubJug
+  calendar: https://www.meetup.com/dublinjavausergroup/events/ical/
   founded_date: '2006-01-01'
   latitude: 53.345893
   longitude: -6.259479
@@ -211,7 +233,10 @@
   name: Guadalajara Java Users Group
   country: Mexico
   website: http://juggdl.org/
+  meetup_slug: gdljug
+  meetup_url: https://www.meetup.com/gdljug/
   twitter: java_gdl
+  calendar: https://www.meetup.com/gdljug/events/ical/
   founded_date: '2011-04-08'
   latitude: 20.676876
   longitude: -103.344987
@@ -520,6 +545,9 @@
   name: Java User Group Oberpfalz
   country: Germany
   website: https://jug-oberpfalz.de
+  meetup_slug: jug-oberpfalz
+  meetup_url: https://www.meetup.com/jug-oberpfalz/
+  calendar: https://www.meetup.com/jug-oberpfalz/events/ical/
   founded_date: '2019-01-01'
   latitude: 49.675341
   longitude: 12.16326
@@ -690,7 +718,10 @@
   name: KnoxJava
   country: USA
   website: https://knoxjava.org
+  meetup_slug: KnoxJava
+  meetup_url: https://www.meetup.com/KnoxJava/
   twitter: KnoxJava
+  calendar: https://www.meetup.com/KnoxJava/events/ical/
   founded_date: '2018-01-01'
   latitude: 35.964668
   longitude: -83.926453
@@ -699,7 +730,10 @@
   name: London Java Community
   country: UK
   website: https://londonjavacommunity.co.uk/
+  meetup_slug: londonjavacommunity
+  meetup_url: https://www.meetup.com/londonjavacommunity/
   twitter: ljcjug
+  calendar: https://www.meetup.com/londonjavacommunity/events/ical/
   founded_date: '2007-01-01'
   latitude: 51.5074
   longitude: 0.1278
@@ -717,7 +751,10 @@
   name: Madrid Java User Group
   country: Spain
   website: https://madridjug.es
+  meetup_slug: madridjug
+  meetup_url: https://www.meetup.com/madridjug/
   twitter: madridjug
+  calendar: https://www.meetup.com/madridjug/events/ical/
   founded_date: '2011-07-07'
   latitude: 40.41672987608521
   longitude: -3.703673891146652
@@ -737,7 +774,10 @@
   name: Miami JUG
   country: USA
   website: https://www.mjug.org/
+  meetup_slug: miami-java-user-group
+  meetup_url: https://www.meetup.com/miami-java-user-group/
   twitter: miamijug
+  calendar: https://www.meetup.com/miami-java-user-group/events/ical/
   founded_date: '2011-07-11'
   latitude: 25.75296
   longitude: -80.27106
@@ -746,7 +786,10 @@
   name: Montréal Java User Group
   country: Canada
   website: https://www.montreal-jug.org/
+  meetup_slug: montreal-jug
+  meetup_url: https://www.meetup.com/montreal-jug/
   twitter: montrealjug
+  calendar: https://www.meetup.com/montreal-jug/events/ical/
   founded_date: '2010-01-01'
   latitude: 45.508888
   longitude: -73.561668
@@ -773,11 +816,24 @@
   latitude: 36.033076
   longitude: -86.8148354
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/NashvilleJUG.md
+- slug: NijmegenJUG
+  name: Nijmegen Java User Group
+  country: The Netherlands
+  website: https://www.meetup.com/nijmegen-java-user-group/
+  meetup_slug: nijmegen-java-user-group
+  meetup_url: https://www.meetup.com/nijmegen-java-user-group/
+  calendar: https://www.meetup.com/nijmegen-java-user-group/events/ical/
+  latitude: 51.8429393
+  longitude: 5.7507568
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/NijmegenJUG.md
 - slug: NisJUG
   name: Niš Java User Group
   country: Serbia
   website: https://nisjug.org
+  meetup_slug: NisJUG
+  meetup_url: https://www.meetup.com/NisJUG/
   twitter: nisjug
+  calendar: https://www.meetup.com/NisJUG/events/ical/
   founded_date: '2018-11-01'
   latitude: 43.32472
   longitude: 21.90333
@@ -841,7 +897,10 @@
   name: PeruJUG
   country: Peru
   website: https://perujug.org/
+  meetup_slug: Peru-Java-User-Group
+  meetup_url: https://www.meetup.com/Peru-Java-User-Group/
   twitter: perujug
+  calendar: https://www.meetup.com/Peru-Java-User-Group/events/ical/
   founded_date: '2006-03-07'
   latitude: -9.189967
   longitude: -75.015152
@@ -879,6 +938,9 @@
   name: St. Louis Java Users Group
   country: USA
   website: https://stljug.github.io
+  meetup_slug: GatewayJUG
+  meetup_url: https://www.meetup.com/GatewayJUG/
+  calendar: https://www.meetup.com/GatewayJUG/events/ical/
   founded_date: '1997-05-08'
   latitude: 38.674085
   longitude: -90.452912
@@ -961,7 +1023,10 @@
   name: Warsaw Java Users Group
   country: Poland
   website: https://warszawa.jug.pl
+  meetup_slug: Warszawa-JUG
+  meetup_url: https://www.meetup.com/Warszawa-JUG/
   twitter: WarszawaJUG
+  calendar: https://www.meetup.com/Warszawa-JUG/events/ical/
   founded_date: '2006-11-07'
   latitude: 52.229825
   longitude: 21.011735
