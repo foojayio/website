@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-08-29T07:55:42Z",
+  "generatedAt" : "2026-08-30T06:47:58Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -39,11 +39,56 @@
     "url" : "https://www.meetup.com/apeldoornjug/",
     "events" : [ ]
   }, {
+    "slug" : "arnhemjug",
+    "name" : "ArnhemJUG",
+    "jug" : "ArnhemJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/arnhemjug/",
+    "events" : [ {
+      "title" : "ArnhemJUG - October meetup",
+      "url" : "https://www.meetup.com/arnhemjug/events/314385055/",
+      "startTime" : "2026-10-29T17:00:00+01:00",
+      "endTime" : "2026-10-29T19:00:00+01:00",
+      "venue" : "OpenValue Arnhem",
+      "city" : "Arnhem",
+      "online" : false
+    } ]
+  }, {
+    "slug" : "atlantajug",
+    "name" : "Atlanta Java Users Group",
+    "jug" : "AtlantaJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/atlantajug/",
+    "events" : [ {
+      "title" : "Near Real-Time Retrieval-Augmented Generation (RAG) pipelines at Scale in Java",
+      "url" : "https://www.meetup.com/atlantajug/events/316037094/",
+      "startTime" : "2026-09-15T18:30:00-04:00",
+      "endTime" : "2026-09-15T20:30:00-04:00",
+      "venue" : "Roam",
+      "city" : "Atlanta",
+      "online" : false
+    }, {
+      "title" : "Building a 4,000-Component Monorepo: How Spotify Uses AI to Scale Backend Dev",
+      "url" : "https://www.meetup.com/atlantajug/events/316037276/",
+      "startTime" : "2026-10-20T18:30:00-04:00",
+      "endTime" : "2026-10-20T20:30:00-04:00",
+      "venue" : "Roam",
+      "city" : "Atlanta",
+      "online" : false
+    } ]
+  }, {
     "slug" : "belgian-java-user-group",
     "name" : "Belgian Java User Group",
     "jug" : "BelgianJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/belgian-java-user-group/",
+    "events" : [ ]
+  }, {
+    "slug" : "BordeauxJUG",
+    "name" : "BordeauxJUG",
+    "jug" : "BordeauxJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/BordeauxJUG/",
     "events" : [ ]
   }, {
     "slug" : "brabant-jug",
@@ -61,6 +106,13 @@
       "online" : false
     } ]
   }, {
+    "slug" : "brujug",
+    "name" : "BruJUG - The Brussels Java User Group",
+    "jug" : "BrusselsJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/brujug/",
+    "events" : [ ]
+  }, {
     "slug" : "bpjavabar",
     "name" : "Budapest JavaBár",
     "jug" : "BpJavaBar",
@@ -72,6 +124,20 @@
     "jug" : "ChicagoJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/ChicagoJUG/",
+    "events" : [ ]
+  }, {
+    "slug" : "dublinjavausergroup",
+    "name" : "Dublin Java User Group",
+    "jug" : "DubJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/dublinjavausergroup/",
+    "events" : [ ]
+  }, {
+    "slug" : "gdljug",
+    "name" : "Guadalajara Java User Group",
+    "jug" : "GuadalajaraJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/gdljug/",
     "events" : [ ]
   }, {
     "slug" : "Java-User-Group-Augsburg",
@@ -273,14 +339,6 @@
     "url" : "https://www.meetup.com/Java-User-Group-Hannover/",
     "events" : [ {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/315401023/",
-      "startTime" : "2026-08-28T19:00:00+02:00",
-      "endTime" : "2026-09-04T22:00:00+02:00",
-      "venue" : "Pizza Unica",
-      "city" : "Hannover",
-      "online" : false
-    }, {
-      "title" : "Java Stammtisch",
       "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcmbhc/",
       "startTime" : "2026-09-25T19:00:00+02:00",
       "endTime" : "2026-10-02T22:00:00+02:00",
@@ -438,6 +496,37 @@
       "online" : false
     } ]
   }, {
+    "slug" : "jug-oberpfalz",
+    "name" : "JUG Oberpfalz",
+    "jug" : "OberpfalzJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/jug-oberpfalz/",
+    "events" : [ {
+      "title" : "JUGO - TBD - save the date",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/313226991/",
+      "startTime" : "2026-10-07T18:00:00+02:00",
+      "endTime" : "2026-10-07T21:00:00+02:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
+    }, {
+      "title" : "JUGO - TBD - save the date",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",
+      "startTime" : "2026-11-11T18:00:00+01:00",
+      "endTime" : "2026-11-11T21:00:00+01:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
+    }, {
+      "title" : "JCON EUROPE 2027",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/315679270/",
+      "startTime" : "2027-04-26T12:00:00+02:00",
+      "endTime" : "2027-04-29T18:00:00+02:00",
+      "venue" : "Cinedom",
+      "city" : "Köln",
+      "online" : false
+    } ]
+  }, {
     "slug" : "OstfalenJUG",
     "name" : "Java User Group Ostfalen",
     "jug" : "OstfalenJUG",
@@ -555,11 +644,70 @@
     "url" : "https://www.meetup.com/jug-noord/",
     "events" : [ ]
   }, {
+    "slug" : "KnoxJava",
+    "name" : "KnoxJava",
+    "jug" : "KnoxvilleJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/KnoxJava/",
+    "events" : [ ]
+  }, {
+    "slug" : "londonjavacommunity",
+    "name" : "LJC - London Java Community",
+    "jug" : "LondonJavaCommunity",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/londonjavacommunity/",
+    "events" : [ {
+      "title" : "From Search to AI: How Retrieval Evolved",
+      "url" : "https://www.meetup.com/londonjavacommunity/events/316194795/",
+      "startTime" : "2026-09-24T11:00:00+01:00",
+      "endTime" : "2026-09-24T11:45:00+01:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
+    }, {
+      "title" : "LJC Meetup at Engine by Starling",
+      "url" : "https://www.meetup.com/londonjavacommunity/events/315903371/",
+      "startTime" : "2026-10-01T18:00:00+01:00",
+      "endTime" : "2026-10-01T21:00:00+01:00",
+      "venue" : "Engine by Starling",
+      "city" : "London",
+      "online" : false
+    }, {
+      "title" : "LJC Winter Unconference 2026",
+      "url" : "https://www.meetup.com/londonjavacommunity/events/315973600/",
+      "startTime" : "2026-12-04T09:00:00Z",
+      "endTime" : "2026-12-04T17:00:00Z",
+      "venue" : "IBM Innovation Studio Floor 5",
+      "city" : "London",
+      "online" : false
+    } ]
+  }, {
+    "slug" : "madridjug",
+    "name" : "MadridJUG",
+    "jug" : "MadridJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/madridjug/",
+    "events" : [ ]
+  }, {
     "slug" : "ManchesterUK-Java-Community",
     "name" : "Manchester Java Community",
     "jug" : "ManchesterJavaCommunity",
     "source" : "meetup",
     "url" : "https://www.meetup.com/ManchesterUK-Java-Community/",
+    "events" : [ ]
+  }, {
+    "slug" : "miami-java-user-group",
+    "name" : "Miami JVM Group (MJUG)",
+    "jug" : "MiamiJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/miami-java-user-group/",
+    "events" : [ ]
+  }, {
+    "slug" : "montreal-jug",
+    "name" : "Montréal JUG - La communauté Java de Montréal",
+    "jug" : "MontrealJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/montreal-jug/",
     "events" : [ ]
   }, {
     "slug" : "nairobi-jvm",
@@ -573,6 +721,20 @@
     "jug" : "NashvilleJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/nashvillejug/",
+    "events" : [ ]
+  }, {
+    "slug" : "nijmegen-java-user-group",
+    "name" : "Nijmegen Java User Group",
+    "jug" : "NijmegenJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/nijmegen-java-user-group/",
+    "events" : [ ]
+  }, {
+    "slug" : "NisJUG",
+    "name" : "NisJUG - Niš Java User Group (Niš, Serbia)",
+    "jug" : "NisJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/NisJUG/",
     "events" : [ ]
   }, {
     "slug" : "oklahoma-city-java-user-group",
@@ -596,6 +758,21 @@
     "url" : "https://www.meetup.com/ottawa-java-user-group/",
     "events" : [ ]
   }, {
+    "slug" : "Peru-Java-User-Group",
+    "name" : "Perú Java User Group",
+    "jug" : "PeruJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/Peru-Java-User-Group/",
+    "events" : [ {
+      "title" : "Workshop Hands-On: Kiro Express — Desarrollo de Software Impulsado por IA",
+      "url" : "https://www.meetup.com/peru-java-user-group/events/316327933/",
+      "startTime" : "2026-09-09T19:00:00-05:00",
+      "endTime" : "2026-09-09T21:00:00-05:00",
+      "venue" : "Edificio Soho Plus",
+      "city" : "Lima",
+      "online" : false
+    } ]
+  }, {
     "slug" : "rotterdamjug",
     "name" : "RotterdamJUG (Java User Group)",
     "jug" : "RotterdamJUG",
@@ -609,6 +786,37 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/SVQJUG/",
     "events" : [ ]
+  }, {
+    "slug" : "GatewayJUG",
+    "name" : "St. Louis Java User's Group",
+    "jug" : "StLouisJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/GatewayJUG/",
+    "events" : [ {
+      "title" : "An Engineer's Guide to the Semantic Layer (Critical Infrastructure)",
+      "url" : "https://www.meetup.com/gatewayjug/events/316071736/",
+      "startTime" : "2026-09-10T18:30:00-05:00",
+      "endTime" : "2026-09-10T20:00:00-05:00",
+      "venue" : null,
+      "city" : null,
+      "online" : false
+    }, {
+      "title" : "Agentic AI Workflows with Embabel",
+      "url" : "https://www.meetup.com/gatewayjug/events/315894186/",
+      "startTime" : "2026-10-08T18:30:00-05:00",
+      "endTime" : "2026-10-08T20:00:00-05:00",
+      "venue" : null,
+      "city" : null,
+      "online" : false
+    }, {
+      "title" : "Testing the Untestable: Reliably testing AI-Infused Applications",
+      "url" : "https://www.meetup.com/gatewayjug/events/315805152/",
+      "startTime" : "2026-11-12T18:30:00-06:00",
+      "endTime" : "2026-11-12T20:00:00-06:00",
+      "venue" : null,
+      "city" : null,
+      "online" : false
+    } ]
   }, {
     "slug" : "toronto-java-users-group",
     "name" : "Toronto Java Users Group",
@@ -637,6 +845,13 @@
     "jug" : "ValenciaJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/ValenciaJUG/",
+    "events" : [ ]
+  }, {
+    "slug" : "Warszawa-JUG",
+    "name" : "Warszawa Java User Group (Warszawa JUG)",
+    "jug" : "WarsawJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/Warszawa-JUG/",
     "events" : [ ]
   } ]
 }
